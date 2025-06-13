@@ -15,3 +15,12 @@
     conda activate erdos-dl
     ```
 7. The environment is now set up. When you open Jupyter notebooks, make sure to select the `erdos-dl` kernel.
+
+#### Instructions for getting and securely using the OpenAI API key
+
+1. Get the OpenAI API key from the [OpenAI website](https://platform.openai.com/signup).
+2. Create a `.env` file in the same directory as this readme and add your API key to it by writing the following line:
+   ```
+   OPENAI_API_KEY=your_openai_api_key
+   ```
+3. Make sure to add `.env` to your `.gitignore` file to prevent it from being committed to version control.
