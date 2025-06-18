@@ -1,0 +1,54 @@
+*Index*: 
+7371
+
+*Question*: 
+Karen's students are about to take a standardized test. Karen gets a $500 bonus if their average score is above 75, plus an extra $10 bonus for every additional point the average score increases above 75. So far, Karen has graded 8 tests, and the average is 70. Given that each student can have a maximum score of 150, what combined score do the last two tests need to have for Karen to earn a $600 bonus?
+
+*Solution*: 
+First subtract $500 from Karen's goal bonus amount to find how much she makes from the extra $10/point bonus: $600 - $500 = $<<600-500=100>>100
+Then divide the extra bonus by the extra rate: $100 / $10/point = <<100/10=10>>10 points
+Then add the 10 extra points to the baseline 75 point goal to find the students' average test score: 10 points + 75 points = <<10+75=85>>85 points
+Then added the 8 graded tests to the 2 ungraded tests to find the total number of tests: 2 tests + 8 tests = <<2+8=10>>10 tests
+Then multiply the 85 point average by the number of tests to find the total number of points the students need to earn: 85 points/test * 10 tests = 850 points
+Then multiply the current average by the current number of graded tests to find how many points have been earned so far: 70 points/test * 8 tests = <<70*8=560>>560 points
+Then subtract the number of points earned from the number of points needed to find the combine score the last two tests need: 850 points - 560 points = <<850-560=290>>290 points
+#### 290
+
+*Code*:
+
+```python
+def Q_7371(
+    baseline_avg_score: int = 75, # Karen wants an average score of 75
+    bonus_if_avg_above_baseline = 500, # Karen gets a $500 bonus if their average score is above 75
+    extra_bonus_per_point = 10, # Karen gets an extra $10 for every point above 75
+    tests_graded_so_far = 8, # So far, Karen has graded 8 tests
+    avg_so_far = 70, # The average score so far is 70
+    max_score_per_student = 150, # each student can have a maximum score of 150
+    desired_bonus = 600 # Karen wants to earn a $600 bonus
+):
+    """Returns the combined score needed in the last two tests to ensure that Karen earns a $600 bonus."""
+    # First subtract $500 from Karen's goal bonus amount to find how much she makes from the extra $10/point bonus: $600 - $500 = $<<600-500=100>>100
+    extra_bonus_needed = desired_bonus - bonus_if_avg_above_baseline
+
+    # Then divide the extra bonus by the extra rate: $100 / $10/point = <<100/10=10>>10 points
+    extra_points_needed = extra_bonus_needed / extra_bonus_per_point
+
+    # Then add the 10 extra points to the baseline 75 point goal to find the students' average test score: 10 points + 75 points = <<10+75=85>>85 points
+    target_avg_score = baseline_avg_score + extra_points_needed
+
+    # Then added the 8 graded tests to the 2 ungraded tests to find the total number of tests: 2 tests + 8 tests = <<2+8=10>>10 tests
+    total_tests = tests_graded_so_far + 2
+
+    # Then multiply the 85 point average by the number of tests to find the total number of points the students need to earn: 85 points/test * 10 tests = 850 points
+    total_points_needed = target_avg_score * total_tests
+
+    # Then multiply the current average by the current number of graded tests to find how many points have been earned so far: 70 points/test * 8 tests = <<70*8=560>>560 points
+    points_earned_so_far = avg_so_far * tests_graded_so_far
+
+    # Then subtract the number of points earned from the number of points needed to find the combine score the last two tests need: 850 points - 560 points = <<850-560=290>>290 points
+    points_needed_last_two_tests = total_points_needed - points_earned_so_far
+
+    # The final answer is the combined score needed in the last two tests
+    return points_needed_last_two_tests
+
+```
