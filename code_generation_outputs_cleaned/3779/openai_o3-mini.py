@@ -1,0 +1,35 @@
+def solve(
+    green_beads: int = 3,  # Susan's pattern includes 3 green beads
+    purple_beads: int = 5,  # Susan's pattern includes 5 purple beads
+    red_multiplier: int = 2,  # There are twice as many red beads as green beads
+    repeats_per_bracelet: int = 3,  # The pattern repeats 3 times per bracelet
+    repeats_per_necklace: int = 5,  # The pattern repeats 5 times per necklace
+    num_bracelets: int = 1,  # Susan needs to make 1 bracelet
+    num_necklaces: int = 10  # Susan needs to make 10 necklaces
+):
+    """Code for Q 3779 from the GSM8K dataset (train).
+    Returns the total number of beads needed to make the bracelets and necklaces.
+    """
+    # First find the number of red beads per repeat: 3 green * 2 red/green = <<3*2=6>>6 red
+    red_beads = green_beads * red_multiplier
+
+    # Then add the number of beads of each color to find the total number of beads per repeat: 6 red + 3 green + 5 purple = <<6+3+5=14>>14 beads
+    beads_per_repeat = red_beads + green_beads + purple_beads
+
+    # Then multiply the number of beads per repeat by the number of repeats per bracelet to find the number of beads per bracelet: 14 beads/repeat * 3 repeats/bracelet = <<14*3=42>>42 beads/bracelet
+    beads_per_bracelet = beads_per_repeat * repeats_per_bracelet
+
+    # Then multiply the number of beads per repeat by the number of repeats per necklace to find the number of beads per necklace: 14 beads/repeat * 5 repeats/necklace = <<14*5=70>>70 beads/necklace
+    beads_per_necklace = beads_per_repeat * repeats_per_necklace
+
+    # Then multiply the number of beads per necklace by the number of necklaces: 70 beads/necklace * 10 necklaces = <<70*10=700>>700 beads
+    total_necklace_beads = beads_per_necklace * num_necklaces
+
+    # Then multiply the number of beads per bracelet by the number of bracelets: 42 beads/bracelet * 1 bracelet = <<42*1=42>>42 beads
+    total_bracelet_beads = beads_per_bracelet * num_bracelets
+
+    # Add the beads used for necklaces and bracelets: 700 + 42 = <<700+42=742>>742 beads
+    total_beads = total_necklace_beads + total_bracelet_beads
+
+    # The final answer is the total number of beads needed
+    return total_beads
