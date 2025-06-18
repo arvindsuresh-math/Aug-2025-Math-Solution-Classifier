@@ -34,13 +34,13 @@ UNANSWERABILITY_TAXONOMY = {
             }
         }
     },
-    "contradictory_information": {
-        "instruction": "Make the problem unanswerable by introducing a new piece of numerical information that directly and subtly contradicts an existing numerical fact or core condition within the problem. The contradiction should not be immediately obvious but discoverable upon careful reading.",
+    "unrealistic_conditions": {
+        "instruction": "Make the problem unanswerable by introducing a new piece of information that subtly contradicts an existing numerical fact or core condition within the problem. The contradiction should not be immediately obvious but discoverable upon careful reading.",
         "example": {
-            "original": "Alice has 5 apples more than Bob, and 5 apples fewer than Charlie. If Bob has 5 apples, how many apples does Charlie have?",
+            "original": "Bob has 5 apples more than Alice, and 5 apples fewer than Charlie. If Charlie has 12 apples, then how many apples does Alice have?",
             "output": {
-                "unanswerable_problem": "Alice has 5 apples more than Bob, and 5 apples fewer than Charlie. If Charlie has 2 apples, how many apples does Charlie have?",
-                "change_summary": "I added information stating Bob has 5 apples, which contradicts the earlier statement.",
+                "unanswerable_problem": "Bob has 5 apples more than Alice, and 5 apples fewer than Charlie. If Charlie has 8 apples, then how many apples does Alice have?",
+                "change_summary": "I modified the number of apples Charlie has from 12 to 8.",
                 "reasoning": "The problem states Bob has 5 apples, but if Alice has 5 more and Charlie has 5 fewer, the numbers don't add up."
             }
         }
