@@ -1,0 +1,35 @@
+def solve(
+        fraction_needed_to_win: float = 3/4,  # Alec needs three-quarters of the class to vote for him
+        fraction_voting_for_him: float = 1/2,  # Half of the class has already said they will vote for him
+        students_thinking_about_it: int = 5,  # Number of students thinking about voting for him
+        total_students: int = 60  # Total number of students in Alec's class
+):    
+    """Code for Q 3822 from the GSM8K dataset (train).
+    Returns the number of votes by which Alec is short of his goal.
+    """
+    # To calculate Alec's goal number of votes, we need to know that 60 students / 4 = <<60/4=15>>15 students is equal to one-quarter of the class students.
+    students_per_quarter = total_students / 4
+
+    # Alec's goal is therefore 15 students * 3 quarters = <<15*3=45>>45 votes.
+    votes_needed = students_per_quarter * 3
+
+    # Half of the class said they will vote for him, so there are already 60 students / 2 = <<60/2=30>>30 votes.
+    votes_for_him = total_students * fraction_voting_for_him
+
+    # Another 5 students are thinking about voting for him which leaves a total so far of 30 + 5 = <<30+5=35>>35 votes.
+    votes_so_far = votes_for_him + students_thinking_about_it
+
+    # This means there are 60 students - 35 voting for Alec = <<60-35=25>>25 students not voting for Alec.
+    students_not_voting_for_him = total_students - votes_so_far
+    
+    # A fifth of these say they will vote for him, so this is a further 25 students / 5 = <<25/5=5>>5 votes.
+    new_votes = students_not_voting_for_him / 5
+
+    # Alec is therefore receiving a total of 35 + 5 = <<35+5=40>>40 votes.
+    total_votes_for_him = votes_so_far + new_votes
+
+    # So he has missed his goal by 45 goal votes - 40 actual votes = <<45-40=5>>5 votes.
+    votes_short_of_goal = votes_needed - total_votes_for_him
+
+    # The final answer is the number of students Alec is short of his goal
+    return votes_short_of_goal
