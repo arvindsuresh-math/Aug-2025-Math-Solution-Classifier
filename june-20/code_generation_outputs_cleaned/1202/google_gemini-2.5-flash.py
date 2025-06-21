@@ -1,0 +1,32 @@
+def solve(
+        rent_apt1: int = 800, # The first apartment costs $800 per month in rent
+        utilities_apt1: int = 260, # an additional $260 per month in utilities
+        rent_apt2: int = 900, # The second apartment costs $900 per month
+        utilities_apt2: int = 200, # an additional $200 per month in utilities
+        miles_per_day_apt1: int = 31, # drive 31 miles per day to get to work
+        miles_per_day_apt2: int = 21, # drive 21 miles to get to work
+        cost_per_mile_cents: int = 58, # average cost of 58 cents
+        days_driven_per_month: int = 20 # drive to work 20 days each month
+    ):
+    """Index: 1202.
+    Returns: the difference between the total monthly costs of the two apartments.
+    """
+    cost_per_mile_dollars = cost_per_mile_cents / 100.0
+
+    #: L1
+    mileage_cost_apt1 = miles_per_day_apt1 * days_driven_per_month * cost_per_mile_dollars
+
+    #: L2
+    total_cost_apt1 = mileage_cost_apt1 + rent_apt1 + utilities_apt1
+
+    #: L3
+    mileage_cost_apt2 = miles_per_day_apt2 * days_driven_per_month * cost_per_mile_dollars
+
+    #: L4
+    total_cost_apt2 = mileage_cost_apt2 + rent_apt2 + utilities_apt2
+
+    #: L5
+    difference = total_cost_apt1 - total_cost_apt2
+
+    answer = round(difference) # FINAL ANSWER
+    return answer

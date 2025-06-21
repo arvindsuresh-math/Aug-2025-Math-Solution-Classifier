@@ -1,0 +1,32 @@
+def solve(
+    sarah_tall_reflections: int = 10, # Sarah saw her reflection 10 times in tall mirrors
+    sarah_wide_reflections: int = 5, # Sarah saw her reflection 5 times in wide mirrors
+    ellie_tall_reflections: int = 6, # Ellie saw her reflection 6 times in tall mirrors
+    ellie_wide_reflections: int = 3, # Ellie saw her reflection 3 times in wide mirrors
+    tall_mirror_passes: int = 3, # both passed through the room with tall mirrors 3 times
+    wide_mirror_passes: int = 5 # both passed through the room with wide mirrors 5 times
+):
+    """Index: 1647.
+    Returns: the total number of times Sarah and Ellie saw their reflections combined.
+    """
+    #: L1
+    sarah_tall_total = sarah_tall_reflections * tall_mirror_passes
+
+    #: L2
+    sarah_wide_total = sarah_wide_reflections * wide_mirror_passes
+
+    #: L3
+    sarah_total = sarah_tall_total + sarah_wide_total
+
+    #: L4
+    ellie_tall_total = ellie_tall_reflections * tall_mirror_passes
+
+    #: L5
+    ellie_wide_total = ellie_wide_reflections * wide_mirror_passes
+
+    #: L6
+    ellie_total = ellie_tall_total + ellie_wide_total
+
+    #: L7
+    answer = sarah_total + ellie_total # FINAL ANSWER
+    return answer

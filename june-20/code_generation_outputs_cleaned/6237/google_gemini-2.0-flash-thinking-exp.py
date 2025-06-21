@@ -1,0 +1,36 @@
+def solve(
+    wage_per_hour: int = 6, # Brendan makes $6/hour as a waiter
+    num_8_hour_shifts: int = 2, # He's scheduled for 2 8-hour shifts
+    hours_per_8_hour_shift: int = 8, # 8-hour shifts
+    num_12_hour_shifts: int = 1, # and 1 12-hour shift
+    hours_per_12_hour_shift: int = 12, # 12-hour shift
+    tips_per_hour: int = 12, # He also makes an average of $12 in tips each hour
+    tax_rate: float = 0.20, # Brendan is supposed to pay 20% of his income in taxes
+    fraction_tips_reported: float = 1/3 # he only reports 1/3rd of his tips to the IRS
+):
+    """Index: 6237.
+    Returns: the amount of money Brendan pays in taxes each week.
+    """
+    #: L1
+    hours_from_8_hour_shifts = num_8_hour_shifts * hours_per_8_hour_shift
+
+    #: L2
+    total_hours_worked = hours_from_8_hour_shifts + hours_per_12_hour_shift
+
+    #: L3
+    total_wage_earnings = wage_per_hour * total_hours_worked
+
+    #: L4
+    total_tips_earned = tips_per_hour * total_hours_worked
+
+    #: L5
+    reported_tips = total_tips_earned * fraction_tips_reported
+
+    #: L6
+    reported_income = total_wage_earnings + reported_tips
+
+    #: L7
+    taxes_paid = reported_income * tax_rate
+
+    answer = taxes_paid # FINAL ANSWER
+    return answer

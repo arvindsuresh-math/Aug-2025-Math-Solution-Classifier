@@ -1,0 +1,36 @@
+def solve(
+    total_skeletons: int = 20,  # there are 20 skeletons
+    bones_per_adult_woman: int = 20,  # an adult woman has 20 bones
+    extra_bones_male: int = 5  # a male has 5 more bones than an adult woman
+):
+    """Index: 1205.
+    Returns: the total number of bones in the graveyard.
+    """
+    #: L1
+    num_adult_women = total_skeletons / 2
+
+    #: L2
+    remaining_skeletons = total_skeletons / 2
+    num_adult_men = remaining_skeletons / 2
+    num_children = remaining_skeletons / 2
+
+    #: L3
+    total_bones_women = bones_per_adult_woman * num_adult_women
+
+    #: L4
+    bones_per_adult_man = bones_per_adult_woman + extra_bones_male
+
+    #: L5
+    total_bones_men = bones_per_adult_man * num_adult_men
+
+    #: L6
+    bones_per_child = bones_per_adult_woman / 2
+
+    #: L7
+    total_bones_children = bones_per_child * num_children
+
+    #: L8
+    total_bones = total_bones_children + total_bones_men + total_bones_women
+
+    answer = total_bones  # FINAL ANSWER
+    return answer

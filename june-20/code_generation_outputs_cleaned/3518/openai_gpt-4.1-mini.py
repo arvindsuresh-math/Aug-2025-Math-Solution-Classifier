@@ -1,0 +1,34 @@
+def solve(
+    length1: int = 12,  # kitchen length of first pair of walls (12 foot)
+    length2: int = 16,  # kitchen length of second pair of walls (16 foot)
+    height: int = 10,  # ceiling height (10 foot)
+    num_walls_each_length: int = 2,  # two walls of each length
+    coats: int = 3,  # one coat of primer + two coats of paint = 3 coats
+    painting_rate: int = 40  # Martha can paint 40 square feet per hour
+):
+    """Index: 3518.
+    Returns: the total number of hours Martha needs to paint the kitchen.
+    """
+    #: L1
+    wall_area_12x10 = length1 * height
+
+    #: L2
+    total_area_12x10 = wall_area_12x10 * num_walls_each_length
+
+    #: L3
+    wall_area_16x10 = length2 * height
+
+    #: L4
+    total_area_16x10 = wall_area_16x10 * num_walls_each_length
+
+    #: L5
+    total_area = total_area_12x10 + total_area_16x10
+
+    #: L6
+    total_area_with_coats = total_area * coats
+
+    #: L7
+    hours_needed = total_area_with_coats / painting_rate
+
+    answer = hours_needed  # FINAL ANSWER
+    return answer

@@ -1,0 +1,44 @@
+import math
+
+def solve(
+    num_chapters: int = 2,  # "2 chapters of their textbook to study"
+    num_worksheets: int = 4,  # "4 worksheets to memorize"
+    hours_per_chapter: float = 3,  # "dedicate 3 hours to each chapter of their textbook"
+    hours_per_worksheet: float = 1.5,  # "1.5 hours for each worksheet"
+    daily_study_limit: float = 4,  # "study no more than 4 hours each day"
+    break_per_hour: int = 10,  # "take a 10-minute break every hour"
+    num_snack_breaks: int = 3,  # "include 3 10-minute snack breaks each day"
+    lunch_duration: int = 30  # "30 minutes for lunch each day"
+):
+    """Index: 7364.
+    Returns: the total number of days they need to study to meet all requirements.
+    """
+    #: L1
+    study_hours_chapters = hours_per_chapter * num_chapters  # 3 hours x 2 chapters = 6 hours
+    
+    #: L2
+    study_hours_worksheets = hours_per_worksheet * num_worksheets  # 1.5 hours x 4 worksheets = 6 hours
+    
+    #: L3
+    base_study_hours = study_hours_chapters + study_hours_worksheets  # total study hours = 6 + 6 = 12 hours
+    
+    #: L4
+    total_break_minutes = base_study_hours * break_per_hour  # 12 hours x 10 minutes = 120 minutes extra for breaks
+    
+    #: L5
+    snack_break_minutes = num_snack_breaks * 10  # 3 snack breaks of 10 minutes each = 30 minutes
+    
+    #: L6
+    lunch_minutes = lunch_duration  # 30 minutes for lunch
+    
+    #: L7
+    extra_hours = (total_break_minutes + snack_break_minutes + lunch_minutes) / 60  # 120+30+30 = 180 minutes = 3 hours
+    
+    #: L8
+    total_hours_needed = base_study_hours + extra_hours  # 12 + 3 = 15 hours total
+    
+    #: L9
+    days_needed = math.ceil(total_hours_needed / daily_study_limit)  # 15/4 = 3.75, round up to 4 days
+    
+    answer = days_needed  # FINAL ANSWER
+    return answer
