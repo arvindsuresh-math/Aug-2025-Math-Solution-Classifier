@@ -1,15 +1,28 @@
-Of course. This is a great time to consolidate the entire process into a clear, comprehensive summary. Here is a single block of raw markdown text suitable for a `README.md` file that details the full project pipeline.
-
----
-
 # Project Pipeline: Generating Classified Math Problems
 
-This document outlines the end-to-end pipeline for generating a dataset of classified mathematical word problems. The primary goal is to produce a high-quality dataset for fine-tuning a Large Language Model (LLM) to classify problems into one of three categories:
+This document outlines a suggested pipeline for generating a dataset of classified mathematical word problems adapted from the GSM8K dataset. The primary goal is to produce a high-quality dataset for fine-tuning a Large Language Model (LLM) to classify problems into one of three categories:
 *   **Class 1 (Solvable):** The original, well-posed problem with a unique solution.
 *   **Class 0 (Contradictory):** A modified problem containing conflicting information that makes a solution impossible.
 *   **Class 2 (Underspecified):** A modified problem with insufficient information, leading to multiple or infinite solutions.
 
-The pipeline is designed to be rigorous and automated, ensuring the quality and validity of the generated data through a series of structured steps.
+The basic strategy is to prompt an LLM to inject errors into problems so as to generate labelled samples in classes 0 and 2. The difficulty lies in ensuring the correctness of the generated samples. Preliminary experiments in directly prompting an LLM to generate such problems had mixed success. Some outputs being correct (i.e. they correctly injected an error to place the problem in the desired class), but many were not. More importantly, it was not at clear how to ensure that the generated problems were correct, or at least that they were correct with high confidence. One idea (already present in the literature) is to use an ensemble of LLMs to generate the same problem, and then use a voting strategy to select the most likely correct output. However, this approach is expensive in terms of API calls and latency, and it still does not guarantee correctness. 
+
+The main aim of the pipeline below is to modify the naive prompting strategy to (try to) ensure that the generated problems are correct with high confidence. The main idea is to use LLMs to first convert the GSM8K problems and solutions (both natural language) into structured Python functions that encapsulate the problem's logic and numerical quantities. The reason for doing this is as follows:
+    1. Preliminary experiments show that LLMs are really good at converting natural language problems into structured Python functions, when provided with strict guidelines and a few examples. Several LLMs with low API cost and latency (e.g. `4.1-mini`, `claude_3-5-haiku`, `gemini-flash-2.5`) were able to generate correct functions for some of the longest GSM8K questions. 
+    2. Unlike in the natural language case, it turns out that it is easier to try to convince ourselves that the generated 
+    
+    I feel somewhat confident saying "correct functions" because of the following checks conducted on the generated functions:
+        *   **Parse & Pre-filter:** A robust, regex-based parser is used to check the syntax of the generated code and execute it with default arguments to ensure it produces the correct answer for the original problem.
+        *   **Pairwise Alignment:** A semantic comparison is performed on the function parameters to ensure they are aligned in meaning, even if their names or order differ.
+        *   **Pairwise Fuzzing:** A property-based fuzz test is conducted to ensure that pairs of functions are functionally equivalent under known constraints.
+
+
+*   **Formalization:** Convert GSM8K problems into structured Python functions that encapsulate the problem's logic and numerical quantities. This will be done by 3 low cost LLMs (e.g. `4.1-mini`, `claude_3-5-haiku`, `gemini-flash-2.5`) that are prompted to generate a single Python function named `solve()`. The function will take the problem's numerical quantities as typed arguments with default values and descriptive comments, and implement the solution logic in the function body.
+*   **Validation:** Use a multi-unit test approach to verify the correctness and consistency of the generated functions. This involves parsing, pairwise alignment, and fuzz testing to ensure functional equivalence.
+*   **Consensus Finding:** Identify a consensus group of validated functions and select a single "canonical" function to represent the problem.
+
+
+*   **Error Injection:** Programmatically modify the canonical function to create flawed problem variants, generating labeled training examples for fine-tuning.
 
 ---
 
