@@ -1,0 +1,13 @@
+# Calculate the time taken to download the first 60 megabytes
+time_first_part = 60 / 5
+
+# Calculate the remaining size of the file
+remaining_size = 90 - 60
+
+# Calculate the time taken to download the remaining part
+time_second_part = remaining_size / 10
+
+# Calculate the total download time
+total_time = time_first_part + time_second_part
+
+print(total_time)

@@ -1,0 +1,23 @@
+# Leah earned $28.
+# She spent 1/7 of it on a milkshake.
+# She put 1/2 of the rest in her savings account.
+# The remaining money was in her wallet.
+# Her dog shredded all the money in her wallet but $1.
+# How many dollars did Leah lose?
+
+# Calculate the amount spent on the milkshake
+milkshake_cost = 28 / 7
+
+# Calculate the remaining money after buying the milkshake
+remaining_money = 28 - milkshake_cost
+
+# Calculate the amount put in savings and wallet (half of the remaining)
+money_in_wallet = remaining_money / 2
+
+# Calculate the amount lost from the wallet
+amount_lost = money_in_wallet - 1
+
+print(f"Leah spent ${milkshake_cost} on a milkshake.")
+print(f"She had ${remaining_money} left.")
+print(f"She had ${money_in_wallet} in her wallet.")
+print(f"Leah lost ${amount_lost}.")

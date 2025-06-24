@@ -1,0 +1,40 @@
+def solve():
+    # Price of a large painting
+    price_large_painting = 60
+    # Number of large paintings sold last month
+    num_large_paintings_last_month = 8
+
+    # Price of a small painting
+    price_small_painting = 30
+    # Number of small paintings sold last month
+    num_small_paintings_last_month = 4
+
+    # Calculate earnings from large paintings last month
+    earnings_large_paintings_last_month = price_large_painting * num_large_paintings_last_month
+    # Calculate earnings from small paintings last month
+    earnings_small_paintings_last_month = price_small_painting * num_small_paintings_last_month
+
+    # Calculate total sales last month
+    total_sales_last_month = earnings_large_paintings_last_month + earnings_small_paintings_last_month
+
+    # Calculate sales for this month (twice last month's sales)
+    sales_this_month = total_sales_last_month * 2
+
+    return {
+        "L1": f"Noah earned ${price_large_painting}/large painting x {num_large_paintings_last_month} large paintings = ${earnings_large_paintings_last_month}",
+        "L2": f"He also earned ${price_small_painting}/small painting x {num_small_paintings_last_month} small paintings = ${earnings_small_paintings_last_month}",
+        "L3": f"His total sales last month were ${earnings_large_paintings_last_month} + ${earnings_small_paintings_last_month} = ${total_sales_last_month}",
+        "L4": f"So, his sales this month are ${total_sales_last_month} x 2 = ${sales_this_month}"
+    }, sales_this_month
+
+solution_steps, final_answer = solve()
+
+# Format the solution for JSON output
+json_solution = {
+    "L1": solution_steps["L1"].replace(f"={solution_steps['L1'].split('=')[-1]}", f"=[[{60*8}]]480"),
+    "L2": solution_steps["L2"].replace(f"={solution_steps['L2'].split('=')[-1]}", f"=[[{30*4}]]120"),
+    "L3": solution_steps["L3"].replace(f"={solution_steps['L3'].split('=')[-1]}", f"=[[{480+120}]]600"),
+    "L4": solution_steps["L4"].replace(f"={solution_steps['L4'].split('=')[-1]}", f"=[[{600*2}]]1200")
+}
+
+print(json_solution)

@@ -1,0 +1,12 @@
+# Calculate pages read per hour
+pages_per_20_minutes = 8
+minutes_in_hour = 60
+pages_per_hour = pages_per_20_minutes * (minutes_in_hour / 20)
+
+# Calculate total hours needed
+total_pages = 120
+hours_needed = total_pages / pages_per_hour
+
+# Print the result
+print(f"Joy can read {int(pages_per_hour)} pages in an hour.")
+print(f"It will take her {int(hours_needed)} hours to read 120 pages.")

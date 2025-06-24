@@ -1,0 +1,19 @@
+# Calculate the total number of pizza pieces
+total_people = 4
+pieces_per_pizza = 4
+total_pieces = total_people * pieces_per_pizza
+
+# Calculate pieces eaten by Bill and Dale
+bill_dale_eaten = 2 * pieces_per_pizza * 0.50
+
+# Calculate pieces eaten by Ann and Cate
+ann_cate_eaten = 2 * pieces_per_pizza * 0.75
+
+# Calculate total pieces eaten
+total_eaten = bill_dale_eaten + ann_cate_eaten
+
+# Calculate uneaten pieces
+uneaten_pieces = total_pieces - total_eaten
+
+# Print the result
+print(uneaten_pieces)

@@ -1,0 +1,29 @@
+# Calculate the number of bananas from the first 6 piles
+piles1 = 6
+hands_per_pile1 = 9
+bananas_per_hand1 = 14
+bananas_piles1 = piles1 * hands_per_pile1 * bananas_per_hand1
+
+# Calculate the number of remaining piles
+remaining_piles = 10 - piles1
+
+# Calculate the number of bananas from the remaining piles
+hands_per_pile2 = 12
+bananas_per_hand2 = 9
+bananas_piles2 = remaining_piles * hands_per_pile2 * bananas_per_hand2
+
+# Calculate the total number of bananas
+total_bananas = bananas_piles1 + bananas_piles2
+
+# Calculate the number of monkeys
+num_monkeys = 12
+
+# Calculate the number of bananas each monkey gets
+bananas_per_monkey = total_bananas / num_monkeys
+
+# Print the result
+print(f"The first 6 piles had {bananas_piles1} bananas.")
+print(f"There were {remaining_piles} remaining piles.")
+print(f"The remaining piles had {bananas_piles2} bananas.")
+print(f"All together, there were {total_bananas} bananas.")
+print(f"Each monkey would get {bananas_per_monkey} bananas.")

@@ -1,0 +1,15 @@
+# Calculate the weight lost by the second person
+weight_lost_person1 = 27
+weight_lost_person2 = weight_lost_person1 - 7
+
+# Calculate the total weight lost by the first two people
+total_weight_lost_first_two = weight_lost_person1 + weight_lost_person2
+
+# Calculate the remaining weight lost by the last two people
+remaining_weight_lost = 103 - total_weight_lost_first_two
+
+# Calculate the weight lost by each of the last two people
+weight_lost_last_two_each = remaining_weight_lost / 2
+
+# Print the result
+print(f"The last two people each lost {weight_lost_last_two_each} kilograms of weight.")

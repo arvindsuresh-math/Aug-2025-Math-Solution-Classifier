@@ -1,0 +1,26 @@
+def solve():
+    # Cost of the unicorn piñata
+    pinata_cost = 13
+
+    # Cost of Reese's
+    num_reese_bags = 4
+    cost_per_reese_bag = 9
+    reese_total_cost = num_reese_bags * cost_per_reese_bag
+
+    # Cost of Snickers
+    num_snickers_bags = 3
+    cost_per_snickers_bag = 5
+    snickers_total_cost = num_snickers_bags * cost_per_snickers_bag
+
+    # Cost of Skittles
+    num_skittles_bags = 5
+    cost_per_skittles_bag = 7
+    skittles_total_cost = num_skittles_bags * cost_per_skittles_bag
+
+    # Calculate the total cost
+    total_cost = pinata_cost + reese_total_cost + snickers_total_cost + skittles_total_cost
+
+    return total_cost
+
+# Execute the function to get the answer
+answer = solve()
