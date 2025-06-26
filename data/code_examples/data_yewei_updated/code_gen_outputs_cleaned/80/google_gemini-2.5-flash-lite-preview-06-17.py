@@ -1,0 +1,20 @@
+def solve(
+    initial_jennifer_cans: int = 40, # Jennifer purchased 40 cans of milk
+    cans_per_mark_increment: int = 6, # Jennifer bought 6 additional cans
+    mark_increment: int = 5, # for every 5 cans Mark bought
+    mark_cans_purchased: int = 50 # If Mark purchased 50 cans
+):
+    """Index: 80.
+    Returns: the total number of cans of milk Jennifer brought home.
+    """
+    #: L1
+    times_jennifer_added_cans = mark_cans_purchased / mark_increment
+
+    #: L2
+    additional_cans_bought = times_jennifer_added_cans * cans_per_mark_increment
+
+    #: L3
+    total_cans_jennifer_brought_home = initial_jennifer_cans + additional_cans_bought
+
+    answer = total_cans_jennifer_brought_home # FINAL ANSWER
+    return answer

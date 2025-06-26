@@ -1,0 +1,30 @@
+def solve(
+    num_friends: int = 5,  # Five friends
+    num_hamburgers: int = 5,  # 5 pieces of hamburger
+    cost_per_hamburger: float = 3.0,  # $3 each hamburger
+    num_fries: int = 4,  # 4 sets of French fries
+    cost_per_fries: float = 1.20,  # $1.20 per fries
+    num_sodas: int = 5,  # 5 cups of soda
+    cost_per_soda: float = 0.5,  # $0.5 each soda
+    cost_spaghetti: float = 2.7  # 1 platter of spaghetti costs $2.7
+):
+    """Index: 37.
+    Returns: the amount each friend pays when splitting the bill equally.
+    """
+    #: L1
+    total_hamburger_cost = cost_per_hamburger * num_hamburgers
+
+    #: L2
+    total_fries_cost = cost_per_fries * num_fries
+
+    #: L3
+    total_soda_cost = cost_per_soda * num_sodas
+
+    #: L4
+    total_bill = total_hamburger_cost + total_fries_cost + total_soda_cost + cost_spaghetti
+
+    #: L5
+    cost_per_person = total_bill / num_friends
+
+    answer = cost_per_person  # FINAL ANSWER
+    return answer
