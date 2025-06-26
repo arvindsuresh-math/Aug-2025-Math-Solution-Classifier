@@ -116,7 +116,7 @@ Best practices for working with the `Erdős-DL` repo:
     * *Pull latest changes*: `git pull origin main` (to get any updates from `main`).
 3. **Do whatever work you want**: make your changes in the code or notebooks.
 4. **Commit your changes**: as you complete a block of work with similar tasks, you should periodically "commit" your changes. This basically amounts to making them public with a note about what you did. The easiest way to do this is to add the github extension to VS Code, which will allow you to commit changes directly from the editor.
-5. **Push your changes**: after committing, push your changes to your branch on GitHub. This makes them available for others to see and review. You can do this by using the github extension in VS Code. Alternatively, you can open a terminal in VS Code and run `git push my_name`.
+5. **Push your changes**: after committing, push your changes to your branch on GitHub. This makes them available for others to see and review. You can do this by using the github extension in VS Code. Alternatively, you can open a terminal in VS Code and run `git push origin my_name`.
 
 ---
 
