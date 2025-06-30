@@ -25,5 +25,5 @@ def solve(
     balance_after_payments = remaining_balance - total_payments # eval: 520.0 = 780.0 - 260
 
     #: FA
-    answer = balance_after_payments # eval: 520.0 = 520.0
+    answer = balance_after_payments
     return answer # eval: return 520.0

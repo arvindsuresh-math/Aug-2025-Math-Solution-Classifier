@@ -24,5 +24,5 @@ def solve(
     weight_from_small_animals = remaining_weight_after_berries_acorns - weight_from_salmon # eval: 200.0 = 400.0 - 200.0
 
     #: FA
-    answer = weight_from_small_animals # eval: 200.0 = 200.0
+    answer = weight_from_small_animals
     return answer # eval: return 200.0

@@ -14,5 +14,5 @@ def solve(
     jolyn_older_than_leon = jolyn_older_than_aivo - leon_older_than_aivo # eval: 5 = 7 - 2
 
     #: FA
-    answer = jolyn_older_than_leon # eval: 5 = 5
+    answer = jolyn_older_than_leon
     return answer # eval: return 5

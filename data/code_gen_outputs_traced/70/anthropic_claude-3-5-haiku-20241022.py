@@ -12,5 +12,5 @@ def solve(
     harry_apples = tim_apples / 2 # eval: 19.0 = 38 / 2
 
     #: FA
-    answer = harry_apples # eval: 19.0 = 19.0
+    answer = harry_apples
     return answer # eval: return 19.0

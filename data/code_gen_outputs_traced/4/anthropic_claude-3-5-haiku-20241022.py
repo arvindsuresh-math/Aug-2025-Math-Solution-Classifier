@@ -17,5 +17,5 @@ def solve(
     total_pages_per_year = total_pages_per_week * weeks_per_year # eval: 624 = 12 * 52
 
     #: FA
-    answer = total_pages_per_year # eval: 624 = 624
+    answer = total_pages_per_year
     return answer # eval: return 624

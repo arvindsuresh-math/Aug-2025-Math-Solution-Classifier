@@ -18,5 +18,5 @@ def solve(
     difference_candy = total_candy_anna - total_candy_billy # eval: 15 = 840 - 825
 
     #: FA
-    answer = difference_candy # eval: 15 = 15
+    answer = difference_candy
     return answer # eval: return 15

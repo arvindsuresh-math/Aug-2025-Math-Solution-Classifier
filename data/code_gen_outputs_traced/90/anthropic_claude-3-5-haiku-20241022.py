@@ -19,5 +19,5 @@ def solve(
     total_bird_food = daily_feed * total_days # eval: 90.0 = 1.0 * 90
 
     #: FA
-    answer = total_bird_food # eval: 90.0 = 90.0
+    answer = total_bird_food
     return answer # eval: return 90.0

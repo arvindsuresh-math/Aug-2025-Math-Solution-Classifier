@@ -34,5 +34,5 @@ def solve(
     total_earnings = total_base_pay_5_days + total_overtime_pay_5_days # eval: 990.0 = 720.0 + 270.0
 
     #: FA
-    answer = total_earnings # eval: 990.0 = 990.0
+    answer = total_earnings
     return answer # eval: return 990.0

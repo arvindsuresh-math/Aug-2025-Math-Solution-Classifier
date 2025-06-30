@@ -13,5 +13,5 @@ def solve(
     ounces_of_soda = money_spent / soda_price_per_ounce # eval: 6.0 = 1.5 / 0.25
 
     #: FA
-    answer = ounces_of_soda # eval: 6.0 = 6.0
+    answer = ounces_of_soda
     return answer # eval: return 6.0

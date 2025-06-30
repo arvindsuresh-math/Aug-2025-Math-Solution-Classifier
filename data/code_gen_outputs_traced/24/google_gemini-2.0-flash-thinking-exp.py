@@ -14,5 +14,5 @@ def solve(
     remaining_credit = credit_limit - total_paid # eval: 62 = 100 - 38
 
     #: FA
-    answer = remaining_credit # eval: 62 = 62
+    answer = remaining_credit
     return answer # eval: return 62

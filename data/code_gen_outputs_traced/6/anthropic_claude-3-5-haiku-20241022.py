@@ -15,5 +15,5 @@ def solve(
     small_pizza_slices = num_small_pizzas * slices_small_pizza # eval: 16 = 2 * 8
 
     #: FA
-    answer = large_pizza_slices + small_pizza_slices # eval: 48 = 32 + 16
+    answer = large_pizza_slices + small_pizza_slices
     return answer # eval: return 48

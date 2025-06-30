@@ -7,5 +7,5 @@ def solve(
     Returns: Mrs. Snyder's previous monthly income."""
 
     #: FA
-    answer = 1000 # eval: 1000 = 1000
+    answer = 1000
     return answer # eval: return 1000

@@ -29,5 +29,5 @@ def solve(
     total_profit_after_movie_cost = total_profit_before_movie_cost - movie_creation_cost # eval: 448000.0 = 450000.0 - 2000
 
     #: FA
-    answer = total_profit_after_movie_cost # eval: 448000.0 = 448000.0
+    answer = total_profit_after_movie_cost
     return answer # eval: return 448000.0

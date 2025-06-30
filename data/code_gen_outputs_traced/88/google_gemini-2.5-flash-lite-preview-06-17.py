@@ -13,5 +13,5 @@ def solve(
     total_sales = last_year_sales + previous_year_sales # eval: 258 = 86 + 172
 
     #: FA
-    answer = total_sales # eval: 258 = 258
+    answer = total_sales
     return answer # eval: return 258

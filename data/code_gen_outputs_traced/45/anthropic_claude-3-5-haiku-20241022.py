@@ -20,5 +20,5 @@ def solve(
     skittles_total_cost = skittles_bags * skittles_bag_cost # eval: 35 = 5 * 7
 
     #: FA
-    answer = pinata_cost + reeses_total_cost + snickers_total_cost + skittles_total_cost # eval: 99 = 13 + 36 + 15 + 35
+    answer = pinata_cost + reeses_total_cost + snickers_total_cost + skittles_total_cost
     return answer # eval: return 99

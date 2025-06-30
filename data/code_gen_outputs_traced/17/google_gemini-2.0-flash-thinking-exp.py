@@ -29,5 +29,5 @@ def solve(
     total_remaining_hard_hats = total_pink_green_remaining + initial_yellow_hard_hats # eval: 43 = 19 + 24
 
     #: FA
-    answer = total_remaining_hard_hats # eval: 43 = 43
+    answer = total_remaining_hard_hats
     return answer # eval: return 43

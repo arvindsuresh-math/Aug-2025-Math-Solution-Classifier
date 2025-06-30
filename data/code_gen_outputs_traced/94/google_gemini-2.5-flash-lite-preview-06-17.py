@@ -14,5 +14,5 @@ def solve(
     days_to_write = total_pages_to_write / pages_per_day # eval: 60.0 = 1200 / 20
 
     #: FA
-    answer = days_to_write # eval: 60.0 = 60.0
+    answer = days_to_write
     return answer # eval: return 60.0

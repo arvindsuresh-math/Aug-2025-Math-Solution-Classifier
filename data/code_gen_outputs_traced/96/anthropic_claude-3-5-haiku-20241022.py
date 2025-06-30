@@ -17,5 +17,5 @@ def solve(
     money_from_water_sales = total_gallons_collected * price_per_gallon # eval: 126.0 = 105 * 1.2
 
     #: FA
-    answer = money_from_water_sales # eval: 126.0 = 126.0
+    answer = money_from_water_sales
     return answer # eval: return 126.0

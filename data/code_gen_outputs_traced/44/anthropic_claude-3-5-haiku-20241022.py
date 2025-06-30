@@ -20,5 +20,5 @@ def solve(
     coursework_materials_cost = budget - (accommodation_cost + food_cost + entertainment_cost) # eval: 300.0 = 1000 - (150.0 + 300.0 + 250.0)
 
     #: FA
-    answer = coursework_materials_cost # eval: 300.0 = 300.0
+    answer = coursework_materials_cost
     return answer # eval: return 300.0

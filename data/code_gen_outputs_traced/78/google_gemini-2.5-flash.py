@@ -21,5 +21,5 @@ def solve(
     slices_left = total_cookie_slices - total_people_who_ate # eval: 4 = 30 - 26
 
     #: FA
-    answer = slices_left # eval: 4 = 4
+    answer = slices_left
     return answer # eval: return 4

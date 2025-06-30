@@ -17,5 +17,5 @@ def solve(
     total_ingredients = total_flour_salt + cups_water # eval: 34.0 = 24.0 + 10
 
     #: FA
-    answer = total_ingredients # eval: 34.0 = 34.0
+    answer = total_ingredients
     return answer # eval: return 34.0

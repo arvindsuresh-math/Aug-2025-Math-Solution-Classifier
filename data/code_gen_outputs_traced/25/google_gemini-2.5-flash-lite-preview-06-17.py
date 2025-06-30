@@ -21,5 +21,5 @@ def solve(
     total_not_hit = first_batch_not_hit_count + second_batch_not_hit_count # eval: 110.0 = 60.0 + 50.00000000000001
 
     #: FA
-    answer = total_not_hit # eval: 110.0 = 110.0
+    answer = total_not_hit
     return answer # eval: return 110.0

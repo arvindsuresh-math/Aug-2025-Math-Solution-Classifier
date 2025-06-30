@@ -16,5 +16,5 @@ def solve(
     total_stamps = snowflake_stamps + truck_stamps + rose_stamps # eval: 38 = 11 + 20 + 7
 
     #: FA
-    answer = total_stamps # eval: 38 = 38
+    answer = total_stamps
     return answer # eval: return 38

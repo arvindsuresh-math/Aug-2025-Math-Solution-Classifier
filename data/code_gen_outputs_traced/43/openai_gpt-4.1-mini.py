@@ -19,5 +19,5 @@ def solve(
     total_collapsed = initial_collapsed + second_earthquake_collapsed + third_earthquake_collapsed + fourth_earthquake_collapsed # eval: 60 = 4 + 8 + 16 + 32
 
     #: FA
-    answer = total_collapsed # eval: 60 = 60
+    answer = total_collapsed
     return answer # eval: return 60

@@ -12,5 +12,5 @@ def solve(
     total_amount = ken_amount + tony_amount # eval: 5250 = 1750 + 3500
 
     #: FA
-    answer = total_amount # eval: 5250 = 5250
+    answer = total_amount
     return answer # eval: return 5250

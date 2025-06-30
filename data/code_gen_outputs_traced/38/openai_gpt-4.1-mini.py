@@ -15,5 +15,5 @@ def solve(
     ounces_tea_needed = total_ounces_water / cup_size_mom * tea_ounces_mom # eval: 9.0 = 72 / 8 * 1
 
     #: FA
-    answer = ounces_tea_needed # eval: 9.0 = 9.0
+    answer = ounces_tea_needed
     return answer # eval: return 9.0

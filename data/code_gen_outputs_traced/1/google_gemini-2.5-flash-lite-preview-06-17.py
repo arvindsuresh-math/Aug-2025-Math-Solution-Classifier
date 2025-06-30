@@ -13,5 +13,5 @@ def solve(
     total_earned = wage_per_minute * minutes_worked # eval: 10.0 = 0.2 * 50
 
     #: FA
-    answer = total_earned # eval: 10.0 = 10.0
+    answer = total_earned
     return answer # eval: return 10.0

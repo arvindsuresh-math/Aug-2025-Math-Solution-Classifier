@@ -17,5 +17,5 @@ def solve(
     total_books_borrowed = books_borrowed_normal_days + avg_books_per_day + friday_increase # eval: 216.0 = 160 + 40 + 16.0
 
     #: FA
-    answer = total_books_borrowed # eval: 216.0 = 216.0
+    answer = total_books_borrowed
     return answer # eval: return 216.0

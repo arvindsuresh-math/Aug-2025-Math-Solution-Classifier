@@ -13,5 +13,5 @@ def solve(
     samantha_last_name_length = bobbie_last_name_length - letters_difference # eval: 7 = 10 - 3
 
     #: FA
-    answer = samantha_last_name_length # eval: 7 = 7
+    answer = samantha_last_name_length
     return answer # eval: return 7

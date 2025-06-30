@@ -24,5 +24,5 @@ def solve(
     total_valuable_files = valuable_first_round + valuable_second_round # eval: 400.0 = 240.0 + 160.0
 
     #: FA
-    answer = total_valuable_files # eval: 400.0 = 400.0
+    answer = total_valuable_files
     return answer # eval: return 400.0

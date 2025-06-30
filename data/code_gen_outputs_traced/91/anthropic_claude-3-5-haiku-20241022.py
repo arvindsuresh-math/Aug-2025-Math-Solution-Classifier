@@ -18,5 +18,5 @@ def solve(
     hourly_rate_with_bonus = total_daily_wage_with_bonus / total_hours_with_bonus # eval: 10.0 = 100 / 10
 
     #: FA
-    answer = hourly_rate_with_bonus # eval: 10.0 = 10.0
+    answer = hourly_rate_with_bonus
     return answer # eval: return 10.0

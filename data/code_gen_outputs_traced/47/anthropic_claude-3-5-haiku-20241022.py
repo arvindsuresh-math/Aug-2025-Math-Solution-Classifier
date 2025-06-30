@@ -20,5 +20,5 @@ def solve(
     total_download_time = initial_download_time + subsequent_download_time # eval: 15.0 = 12.0 + 3.0
 
     #: FA
-    answer = total_download_time # eval: 15.0 = 15.0
+    answer = total_download_time
     return answer # eval: return 15.0

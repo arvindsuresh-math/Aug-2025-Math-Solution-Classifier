@@ -18,5 +18,5 @@ def solve(
     weight_per_last_person = remaining_weight_lost / 2 # eval: 28.0 = 56 / 2
 
     #: FA
-    answer = weight_per_last_person # eval: 28.0 = 28.0
+    answer = weight_per_last_person
     return answer # eval: return 28.0

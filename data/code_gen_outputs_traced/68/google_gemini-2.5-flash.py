@@ -21,5 +21,5 @@ def solve(
     remaining_coins_amalie = amalie_coins - coins_spent_amalie # eval: 90.0 = 360.0 - 270.0
 
     #: FA
-    answer = remaining_coins_amalie # eval: 90.0 = 90.0
+    answer = remaining_coins_amalie
     return answer # eval: return 90.0

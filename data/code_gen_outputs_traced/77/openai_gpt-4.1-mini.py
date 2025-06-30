@@ -14,5 +14,5 @@ def solve(
     weight_on_fight_day = current_weight - total_weight_loss # eval: 85 = 97 - 12
 
     #: FA
-    answer = weight_on_fight_day # eval: 85 = 85
+    answer = weight_on_fight_day
     return answer # eval: return 85

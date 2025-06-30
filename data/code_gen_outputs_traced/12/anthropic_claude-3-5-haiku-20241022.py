@@ -15,5 +15,5 @@ def solve(
     total_trees = mango_trees + coconut_trees # eval: 85.0 = 60 + 25.0
 
     #: FA
-    answer = total_trees # eval: 85.0 = 85.0
+    answer = total_trees
     return answer # eval: return 85.0

@@ -25,5 +25,5 @@ def solve(
     average_jeff_skips = total_jeff_skips / rounds # eval: 14.0 = 56.0 / 4
 
     #: FA
-    answer = average_jeff_skips # eval: 14.0 = 14.0
+    answer = average_jeff_skips
     return answer # eval: return 14.0

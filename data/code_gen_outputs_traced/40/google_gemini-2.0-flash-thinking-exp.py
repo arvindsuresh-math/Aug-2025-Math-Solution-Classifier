@@ -28,5 +28,5 @@ def solve(
     total_paid = total_cost_full_price_tickets + total_cost_discounted_tickets # eval: 476.0 = 400 + 76.0
 
     #: FA
-    answer = total_paid # eval: 476.0 = 476.0
+    answer = total_paid
     return answer # eval: return 476.0

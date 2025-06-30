@@ -18,5 +18,5 @@ def solve(
     total_cans = initial_cans + additional_cans # eval: 100.0 = 40 + 60.0
 
     #: FA
-    answer = total_cans # eval: 100.0 = 100.0
+    answer = total_cans
     return answer # eval: return 100.0

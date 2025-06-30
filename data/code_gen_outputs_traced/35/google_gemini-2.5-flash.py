@@ -13,5 +13,5 @@ def solve(
     students_b_and_above = total_students * percentage_b_and_above # eval: 36.0 = 60 * 0.6
 
     #: FA
-    answer = students_b_and_above # eval: 36.0 = 36.0
+    answer = students_b_and_above
     return answer # eval: return 36.0

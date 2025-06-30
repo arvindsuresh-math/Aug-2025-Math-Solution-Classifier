@@ -17,5 +17,5 @@ def solve(
     previous_monthly_income = right_side_constant_term / coefficient_of_p # eval: 1000.0 = 3000 / 3
 
     #: FA
-    answer = previous_monthly_income # eval: 1000.0 = 1000.0
+    answer = previous_monthly_income
     return answer # eval: return 1000.0

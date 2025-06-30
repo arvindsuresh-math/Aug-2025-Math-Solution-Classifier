@@ -23,5 +23,5 @@ def solve(
     total_hours = hours_watching_both_daughters_games + hours_watching_both_daughters_practice # eval: 96 = 32 + 64
 
     #: FA
-    answer = total_hours # eval: 96 = 96
+    answer = total_hours
     return answer # eval: return 96

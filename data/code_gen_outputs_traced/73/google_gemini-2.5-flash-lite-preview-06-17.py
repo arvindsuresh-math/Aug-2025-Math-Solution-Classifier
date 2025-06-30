@@ -15,5 +15,5 @@ def solve(
     packs_needed = total_people / pouches_per_pack # eval: 3.0 = 18 / 6
 
     #: FA
-    answer = packs_needed # eval: 3.0 = 3.0
+    answer = packs_needed
     return answer # eval: return 3.0

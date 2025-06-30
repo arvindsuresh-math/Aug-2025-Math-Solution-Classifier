@@ -12,5 +12,5 @@ def solve(
     total_geckos_sold = geckos_last_year + geckos_year_before # eval: 258 = 86 + 172
 
     #: FA
-    answer = total_geckos_sold # eval: 258 = 258
+    answer = total_geckos_sold
     return answer # eval: return 258

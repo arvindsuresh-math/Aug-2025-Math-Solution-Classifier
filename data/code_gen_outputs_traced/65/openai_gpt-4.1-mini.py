@@ -18,5 +18,5 @@ def solve(
     total_earnings = earnings_from_lawns + total_tips # eval: 558 = 528 + 30
 
     #: FA
-    answer = total_earnings # eval: 558 = 558
+    answer = total_earnings
     return answer # eval: return 558

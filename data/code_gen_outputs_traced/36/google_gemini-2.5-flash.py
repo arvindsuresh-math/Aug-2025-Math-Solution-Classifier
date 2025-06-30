@@ -17,5 +17,5 @@ def solve(
     difference_lisa_tommy = lisa_earnings - tommy_earnings # eval: 15.0 = 30.0 - 15.0
 
     #: FA
-    answer = difference_lisa_tommy # eval: 15.0 = 15.0
+    answer = difference_lisa_tommy
     return answer # eval: return 15.0

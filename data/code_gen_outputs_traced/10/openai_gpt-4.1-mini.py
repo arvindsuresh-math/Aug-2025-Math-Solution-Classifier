@@ -12,5 +12,5 @@ def solve(
     first_ship_people = total_people / total_ships_factor # eval: 121.0 = 847 / 7
 
     #: FA
-    answer = first_ship_people # eval: 121.0 = 121.0
+    answer = first_ship_people
     return answer # eval: return 121.0

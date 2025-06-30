@@ -27,5 +27,5 @@ def solve(
     total_coins_after_giving = total_coins_before_giving - coins_given_to_coworker # eval: 120 = 135 - 15
 
     #: FA
-    answer = total_coins_after_giving # eval: 120 = 120
+    answer = total_coins_after_giving
     return answer # eval: return 120

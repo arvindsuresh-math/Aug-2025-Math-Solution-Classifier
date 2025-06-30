@@ -33,5 +33,5 @@ def solve(
     average_miles_per_day = total_miles_per_day / 2 # eval: 6.0 = 12.0 / 2
 
     #: FA
-    answer = average_miles_per_day # eval: 6.0 = 6.0
+    answer = average_miles_per_day
     return answer # eval: return 6.0

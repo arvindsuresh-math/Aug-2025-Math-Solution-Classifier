@@ -20,5 +20,5 @@ def solve(
     people_on_first_ship = total_people_consumed / total_coefficient_s # eval: 121.0 = 847 / 7
 
     #: FA
-    answer = people_on_first_ship # eval: 121.0 = 121.0
+    answer = people_on_first_ship
     return answer # eval: return 121.0

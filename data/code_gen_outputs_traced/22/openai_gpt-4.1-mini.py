@@ -14,5 +14,5 @@ def solve(
     samanthas_last_name_length = bobbies_last_name_length - difference_samantha_bobbie # eval: 7 = 10 - 3
 
     #: FA
-    answer = samanthas_last_name_length # eval: 7 = 7
+    answer = samanthas_last_name_length
     return answer # eval: return 7

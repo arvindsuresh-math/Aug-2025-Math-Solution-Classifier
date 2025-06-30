@@ -20,5 +20,5 @@ def solve(
     time_third_part = total_time_minutes - time_first_and_second # eval: 45 = 120 - 75
 
     #: FA
-    answer = time_third_part # eval: 45 = 45
+    answer = time_third_part
     return answer # eval: return 45

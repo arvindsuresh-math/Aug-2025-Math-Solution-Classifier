@@ -12,5 +12,5 @@ def solve(
     mystery_books = western_novels + biography_books # eval: 11 = 5 + 6
 
     #: FA
-    answer = history_books + romance_books + poetry_books + mystery_books + western_novels + biography_books # eval: 46 = 12 + 8 + 4 + 11 + 5 + 6
+    answer = history_books + romance_books + poetry_books + mystery_books + western_novels + biography_books
     return answer # eval: return 46

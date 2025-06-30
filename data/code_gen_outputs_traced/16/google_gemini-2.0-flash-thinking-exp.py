@@ -19,5 +19,5 @@ def solve(
     mike_remaining = mike_share - shirt_cost # eval: 800.0 = 1000.0 - 200
 
     #: FA
-    answer = mike_remaining # eval: 800.0 = 800.0
+    answer = mike_remaining
     return answer # eval: return 800.0

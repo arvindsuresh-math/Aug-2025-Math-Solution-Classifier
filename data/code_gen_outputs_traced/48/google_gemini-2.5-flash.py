@@ -14,5 +14,5 @@ def solve(
     sam_memorized = carlos_memorized + sam_more_than_carlos # eval: 10.0 = 4.0 + 6
 
     #: FA
-    answer = sam_memorized # eval: 10.0 = 10.0
+    answer = sam_memorized
     return answer # eval: return 10.0

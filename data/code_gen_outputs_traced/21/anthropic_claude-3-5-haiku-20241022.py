@@ -17,5 +17,5 @@ def solve(
     total_beetles_eaten = total_birds_eaten * beetles_per_bird # eval: 1080 = 90 * 12
 
     #: FA
-    answer = total_beetles_eaten # eval: 1080 = 1080
+    answer = total_beetles_eaten
     return answer # eval: return 1080

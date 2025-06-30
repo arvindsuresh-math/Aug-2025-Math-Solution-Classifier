@@ -17,5 +17,5 @@ def solve(
     total_books_weekly = average_weekly_books + extra_books_friday # eval: 216.0 = 200 + 16.0
 
     #: FA
-    answer = total_books_weekly # eval: 216.0 = 216.0
+    answer = total_books_weekly
     return answer # eval: return 216.0

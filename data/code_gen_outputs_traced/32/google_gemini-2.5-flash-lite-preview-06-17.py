@@ -15,5 +15,5 @@ def solve(
     meters_after_3rd_turn = total_meters_driven - meters_before_3rd_turn # eval: 10 = 23 - 13
 
     #: FA
-    answer = meters_after_3rd_turn # eval: 10 = 10
+    answer = meters_after_3rd_turn
     return answer # eval: return 10

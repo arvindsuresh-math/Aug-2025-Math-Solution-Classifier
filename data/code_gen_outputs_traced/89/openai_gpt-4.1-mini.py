@@ -17,5 +17,5 @@ def solve(
     total_books_week = total_books_mon_to_fri + friday_increase_books # eval: 216.0 = 200 + 16.0
 
     #: FA
-    answer = total_books_week # eval: 216.0 = 216.0
+    answer = total_books_week
     return answer # eval: return 216.0

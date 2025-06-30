@@ -25,5 +25,5 @@ def solve(
     balance_after_installments = remaining_balance_after_down_payment - total_paid_in_installments # eval: 520.0 = 780.0 - 260
 
     #: FA
-    answer = balance_after_installments # eval: 520.0 = 520.0
+    answer = balance_after_installments
     return answer # eval: return 520.0

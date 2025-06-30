@@ -12,5 +12,5 @@ def solve(
     alan_shells = ben_shells * 4 # eval: 48.0 = 12.0 * 4
 
     #: FA
-    answer = alan_shells # eval: 48.0 = 48.0
+    answer = alan_shells
     return answer # eval: return 48.0

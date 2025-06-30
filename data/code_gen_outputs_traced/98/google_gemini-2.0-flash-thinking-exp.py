@@ -16,5 +16,5 @@ def solve(
     total_purchased = gumballs_to_todd + gumballs_to_alisha + gumballs_to_bobby + gumballs_remaining # eval: 45 = 4 + 8 + 27 + 6
 
     #: FA
-    answer = total_purchased # eval: 45 = 45
+    answer = total_purchased
     return answer # eval: return 45

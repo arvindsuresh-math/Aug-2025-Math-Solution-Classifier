@@ -10,5 +10,5 @@ def solve(
     total_weight_loss = weight_loss_per_month * months_until_fight # eval: 12 = 3 * 4
 
     #: FA
-    answer = initial_weight - total_weight_loss # eval: 85 = 97 - 12
+    answer = initial_weight - total_weight_loss
     return answer # eval: return 85

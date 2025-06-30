@@ -21,5 +21,5 @@ def solve(
     total_time = time_first_part + time_second_part # eval: 15.0 = 12.0 + 3.0
 
     #: FA
-    answer = total_time # eval: 15.0 = 15.0
+    answer = total_time
     return answer # eval: return 15.0

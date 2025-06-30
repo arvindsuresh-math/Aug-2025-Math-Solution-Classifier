@@ -19,5 +19,5 @@ def solve(
     previous_income = rhs_constant_step_6 / lhs_step_7 # eval: 1000.0 = 3000.0 / 3.0
 
     #: FA
-    answer = previous_income # eval: 1000.0 = 1000.0
+    answer = previous_income
     return answer # eval: return 1000.0

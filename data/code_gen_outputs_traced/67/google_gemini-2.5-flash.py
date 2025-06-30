@@ -36,5 +36,5 @@ def solve(
     average_of_their_averages = total_avg_both / 2 # eval: 6.0 = 12.0 / 2
 
     #: FA
-    answer = average_of_their_averages # eval: 6.0 = 6.0
+    answer = average_of_their_averages
     return answer # eval: return 6.0

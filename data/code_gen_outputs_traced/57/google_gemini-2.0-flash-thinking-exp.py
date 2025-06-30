@@ -27,5 +27,5 @@ def solve(
     butter_left = remaining_butter_after_chocolate_peanut_butter - butter_sugar # eval: 2.0 = 3.0 - 1.0
 
     #: FA
-    answer = butter_left # eval: 2.0 = 2.0
+    answer = butter_left
     return answer # eval: return 2.0

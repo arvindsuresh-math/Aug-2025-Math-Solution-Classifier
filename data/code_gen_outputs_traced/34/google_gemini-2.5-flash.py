@@ -13,5 +13,5 @@ def solve(
     total_shared_money = ken_amount + tony_amount # eval: 5250 = 1750 + 3500
 
     #: FA
-    answer = total_shared_money # eval: 5250 = 5250
+    answer = total_shared_money
     return answer # eval: return 5250

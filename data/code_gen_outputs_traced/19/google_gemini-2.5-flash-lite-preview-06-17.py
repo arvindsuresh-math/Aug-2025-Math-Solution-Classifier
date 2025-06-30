@@ -21,5 +21,5 @@ def solve(
     total_time_biking = total_weekly_distance / biking_speed # eval: 16.0 = 400 / 25
 
     #: FA
-    answer = total_time_biking # eval: 16.0 = 16.0
+    answer = total_time_biking
     return answer # eval: return 16.0

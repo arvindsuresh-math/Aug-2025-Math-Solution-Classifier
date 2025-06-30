@@ -22,5 +22,5 @@ def solve(
     total_flowers = yellow_and_purple_flowers + green_flowers # eval: 35.0 = 28.0 + 7.0
 
     #: FA
-    answer = total_flowers # eval: 35.0 = 35.0
+    answer = total_flowers
     return answer # eval: return 35.0

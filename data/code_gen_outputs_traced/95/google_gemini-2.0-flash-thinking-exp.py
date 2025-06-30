@@ -31,5 +31,5 @@ def solve(
     total_value = value_of_iron_nickels + value_of_regular_nickels # eval: 64.0 = 60.0 + 4.0
 
     #: FA
-    answer = total_value # eval: 64.0 = 64.0
+    answer = total_value
     return answer # eval: return 64.0

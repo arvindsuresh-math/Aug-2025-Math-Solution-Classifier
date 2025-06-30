@@ -20,5 +20,5 @@ def solve(
     total_cost = cost_beef + cost_chicken # eval: 14000 = 8000 + 6000
 
     #: FA
-    answer = total_cost # eval: 14000 = 14000
+    answer = total_cost
     return answer # eval: return 14000

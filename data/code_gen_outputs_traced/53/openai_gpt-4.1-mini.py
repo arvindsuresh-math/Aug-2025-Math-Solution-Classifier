@@ -18,5 +18,5 @@ def solve(
     difference = total_cost_ice_cream - total_cost_frozen_yoghurt # eval: 36 = 40 - 4
 
     #: FA
-    answer = difference # eval: 36 = 36
+    answer = difference
     return answer # eval: return 36

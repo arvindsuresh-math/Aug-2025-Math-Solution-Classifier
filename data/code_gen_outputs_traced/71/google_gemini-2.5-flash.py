@@ -18,5 +18,5 @@ def solve(
     money_left_after_deposit = total_money_before_deposit - deposit_amount # eval: 25 = 43 - 18
 
     #: FA
-    answer = money_left_after_deposit # eval: 25 = 25
+    answer = money_left_after_deposit
     return answer # eval: return 25

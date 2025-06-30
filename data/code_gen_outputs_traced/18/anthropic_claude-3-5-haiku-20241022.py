@@ -24,5 +24,5 @@ def solve(
     total_commute_time = walking_time_round_trip + biking_time_round_trip # eval: 16 = 12 + 4
 
     #: FA
-    answer = total_commute_time # eval: 16 = 16
+    answer = total_commute_time
     return answer # eval: return 16

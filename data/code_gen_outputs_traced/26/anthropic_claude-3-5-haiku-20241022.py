@@ -13,5 +13,5 @@ def solve(
     salt_volume_ml = salt_volume_liters * ml_per_liter # eval: 400.0 = 0.4 * 1000
 
     #: FA
-    answer = salt_volume_ml # eval: 400.0 = 400.0
+    answer = salt_volume_ml
     return answer # eval: return 400.0

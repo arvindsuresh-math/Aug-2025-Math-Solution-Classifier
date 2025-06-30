@@ -19,5 +19,5 @@ def solve(
     total_not_hit = not_hit_first + not_hit_second # eval: 110.0 = 60.0 + 50.00000000000001
 
     #: FA
-    answer = total_not_hit # eval: 110.0 = 110.0
+    answer = total_not_hit
     return answer # eval: return 110.0

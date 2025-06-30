@@ -12,5 +12,5 @@ def solve(
     sam_digits = carlos_digits + difference_from_carlos # eval: 10.0 = 4.0 + 6
 
     #: FA
-    answer = sam_digits # eval: 10.0 = 10.0
+    answer = sam_digits
     return answer # eval: return 10.0

@@ -13,5 +13,5 @@ def solve(
     available_rooms = total_rooms - (unavailable_floors * rooms_per_floor) # eval: 90 = 100 - (1 * 10)
 
     #: FA
-    answer = available_rooms # eval: 90 = 90
+    answer = available_rooms
     return answer # eval: return 90

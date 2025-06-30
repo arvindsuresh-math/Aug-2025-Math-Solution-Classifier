@@ -29,5 +29,5 @@ def solve(
     cost_per_friend = total_bill / num_friends # eval: 5.0 = 25.0 / 5
 
     #: FA
-    answer = cost_per_friend # eval: 5.0 = 5.0
+    answer = cost_per_friend
     return answer # eval: return 5.0

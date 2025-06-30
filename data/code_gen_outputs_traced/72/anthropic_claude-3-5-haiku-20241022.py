@@ -17,5 +17,5 @@ def solve(
     volume_after_nancy_refills = volume_after_cat_spill * 3 # eval: 54.0 = 18.0 * 3
 
     #: FA
-    answer = volume_after_nancy_refills # eval: 54.0 = 54.0
+    answer = volume_after_nancy_refills
     return answer # eval: return 54.0

@@ -21,5 +21,5 @@ def solve(
     total_monthly_practice = total_weekly_practice * weeks_in_month # eval: 1920 = 480 * 4
 
     #: FA
-    answer = total_monthly_practice # eval: 1920 = 1920
+    answer = total_monthly_practice
     return answer # eval: return 1920

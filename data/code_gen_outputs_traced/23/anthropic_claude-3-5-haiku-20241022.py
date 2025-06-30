@@ -25,5 +25,5 @@ def solve(
     cost_per_top = remaining_money / num_tops # eval: 5.0 = 20 / 4
 
     #: FA
-    answer = cost_per_top # eval: 5.0 = 5.0
+    answer = cost_per_top
     return answer # eval: return 5.0

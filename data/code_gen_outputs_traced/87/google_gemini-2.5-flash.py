@@ -17,5 +17,5 @@ def solve(
     increased_value = weight_gained * price_per_pound # eval: 600.0 = 200.0 * 3
 
     #: FA
-    answer = increased_value # eval: 600.0 = 600.0
+    answer = increased_value
     return answer # eval: return 600.0

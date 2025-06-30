@@ -15,5 +15,5 @@ def solve(
     distance_after_3rd_turn = total_distance - distance_known # eval: 10 = 23 - 13
 
     #: FA
-    answer = distance_after_3rd_turn # eval: 10 = 10
+    answer = distance_after_3rd_turn
     return answer # eval: return 10

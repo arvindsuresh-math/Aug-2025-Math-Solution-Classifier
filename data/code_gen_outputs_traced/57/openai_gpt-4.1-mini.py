@@ -24,5 +24,5 @@ def solve(
     butter_left_final = butter_left_after_two - butter_sugar_cookies # eval: 2.0 = 3.0 - 1.0
 
     #: FA
-    answer = butter_left_final # eval: 2.0 = 2.0
+    answer = butter_left_final
     return answer # eval: return 2.0

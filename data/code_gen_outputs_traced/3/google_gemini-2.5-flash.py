@@ -21,5 +21,5 @@ def solve(
     pages_to_read_tomorrow = remaining_pages * fraction_remaining_to_read_tomorrow # eval: 42.0 = 84 * 0.5
 
     #: FA
-    answer = pages_to_read_tomorrow # eval: 42.0 = 42.0
+    answer = pages_to_read_tomorrow
     return answer # eval: return 42.0

@@ -18,5 +18,5 @@ def solve(
     total_missed_balls = first_batch_missed_balls + next_batch_missed_balls # eval: 110.0 = 60.0 + 50.00000000000001
 
     #: FA
-    answer = total_missed_balls # eval: 110.0 = 110.0
+    answer = total_missed_balls
     return answer # eval: return 110.0

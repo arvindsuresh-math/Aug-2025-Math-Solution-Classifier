@@ -28,5 +28,5 @@ def solve(
     balance_after_4_months = remaining_balance - total_paid_4_months # eval: 520.0 = 780.0 - 260.0
 
     #: FA
-    answer = balance_after_4_months # eval: 520.0 = 520.0
+    answer = balance_after_4_months
     return answer # eval: return 520.0

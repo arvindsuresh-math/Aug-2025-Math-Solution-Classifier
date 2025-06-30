@@ -17,5 +17,5 @@ def solve(
     situps_wednesday_needed = workout_goal + shortfall_monday + shortfall_tuesday # eval: 59 = 30 + 18 + 11
 
     #: FA
-    answer = situps_wednesday_needed # eval: 59 = 59
+    answer = situps_wednesday_needed
     return answer # eval: return 59

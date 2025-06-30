@@ -16,5 +16,5 @@ def solve(
     hours_to_read = total_pages / pages_read_per_hour # eval: 5.0 = 120 / 24
 
     #: FA
-    answer = hours_to_read # eval: 5.0 = 5.0
+    answer = hours_to_read
     return answer # eval: return 5.0

@@ -21,5 +21,5 @@ def solve(
     liters_per_remaining_can = remaining_oil / remaining_cans # eval: 15.0 = 210 / 14
 
     #: FA
-    answer = liters_per_remaining_can # eval: 15.0 = 15.0
+    answer = liters_per_remaining_can
     return answer # eval: return 15.0

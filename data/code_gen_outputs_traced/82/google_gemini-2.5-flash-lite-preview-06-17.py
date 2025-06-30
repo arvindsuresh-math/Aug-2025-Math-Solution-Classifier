@@ -18,5 +18,5 @@ def solve(
     total_income = base_income + overtime_income # eval: 700 = 500 + 200
 
     #: FA
-    answer = total_income # eval: 700 = 700
+    answer = total_income
     return answer # eval: return 700

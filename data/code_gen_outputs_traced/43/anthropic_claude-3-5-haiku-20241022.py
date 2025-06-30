@@ -22,5 +22,5 @@ def solve(
     )
 
     #: FA
-    answer = total_buildings_collapsed # eval: 60 = 60
+    answer = total_buildings_collapsed
     return answer # eval: return 60

@@ -17,5 +17,5 @@ def solve(
     percentage_non_roses = (non_rose_flowers / total_flowers) * 100 # eval: 75.0 = (75 / 100) * 100
 
     #: FA
-    answer = percentage_non_roses # eval: 75.0 = 75.0
+    answer = percentage_non_roses
     return answer # eval: return 75.0

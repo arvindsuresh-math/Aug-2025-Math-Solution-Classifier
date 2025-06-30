@@ -26,5 +26,5 @@ def solve(
     total_earnings = earnings_main + earnings_second # eval: 840.0 = 600 + 240.0
 
     #: FA
-    answer = total_earnings # eval: 840.0 = 840.0
+    answer = total_earnings
     return answer # eval: return 840.0

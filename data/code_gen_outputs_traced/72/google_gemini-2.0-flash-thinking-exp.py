@@ -23,5 +23,5 @@ def solve(
     water_volume = aquarium_volume * final_proportion # eval: 54.0 = 72 * 0.75
 
     #: FA
-    answer = water_volume # eval: 54.0 = 54.0
+    answer = water_volume
     return answer # eval: return 54.0

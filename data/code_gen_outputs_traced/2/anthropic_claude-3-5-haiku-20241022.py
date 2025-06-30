@@ -18,5 +18,5 @@ def solve(
     money_still_needed = wallet_cost - betty_savings - grandparents_contribution - parents_contribution # eval: 5.0 = 100 - 50.0 - 30 - 15
 
     #: FA
-    answer = money_still_needed # eval: 5.0 = 5.0
+    answer = money_still_needed
     return answer # eval: return 5.0

@@ -24,5 +24,5 @@ def solve(
     total_time_week = walk_time_total_week + bike_time_total_week # eval: 16 = 12 + 4
 
     #: FA
-    answer = total_time_week # eval: 16 = 16
+    answer = total_time_week
     return answer # eval: return 16

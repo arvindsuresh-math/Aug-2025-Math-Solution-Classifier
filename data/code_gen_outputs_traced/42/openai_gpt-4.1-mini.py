@@ -26,5 +26,5 @@ def solve(
     bananas_per_monkey = total_bananas / num_monkeys # eval: 99.0 = 1188 / 12
 
     #: FA
-    answer = bananas_per_monkey # eval: 99.0 = 99.0
+    answer = bananas_per_monkey
     return answer # eval: return 99.0

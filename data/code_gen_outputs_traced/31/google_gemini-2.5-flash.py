@@ -22,5 +22,5 @@ def solve(
     sales_this_month = total_sales_last_month * sales_multiplier_this_month # eval: 1200 = 600 * 2
 
     #: FA
-    answer = sales_this_month # eval: 1200 = 1200
+    answer = sales_this_month
     return answer # eval: return 1200

@@ -18,5 +18,5 @@ def solve(
     remaining_cash = total_earnings - deposit_amount # eval: 25 = 43 - 18
 
     #: FA
-    answer = remaining_cash # eval: 25 = 25
+    answer = remaining_cash
     return answer # eval: return 25

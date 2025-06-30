@@ -16,5 +16,5 @@ def solve(
     hours_needed = total_pages / pages_per_hour # eval: 5.0 = 120 / 24.0
 
     #: FA
-    answer = hours_needed # eval: 5.0 = 5.0
+    answer = hours_needed
     return answer # eval: return 5.0

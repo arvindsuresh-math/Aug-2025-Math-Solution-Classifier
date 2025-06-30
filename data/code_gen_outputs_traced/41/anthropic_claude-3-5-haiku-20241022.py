@@ -17,5 +17,5 @@ def solve(
     rachel_total_budget = rachel_shoe_cost + rachel_dress_cost # eval: 500 = 100 + 400
 
     #: FA
-    answer = rachel_total_budget # eval: 500 = 500
+    answer = rachel_total_budget
     return answer # eval: return 500

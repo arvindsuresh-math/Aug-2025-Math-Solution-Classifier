@@ -24,5 +24,5 @@ def solve(
     total_daily_allowance = total_high_allowance + total_low_allowance # eval: 320.0 = 240.0 + 80.0
 
     #: FA
-    answer = total_daily_allowance # eval: 320.0 = 320.0
+    answer = total_daily_allowance
     return answer # eval: return 320.0

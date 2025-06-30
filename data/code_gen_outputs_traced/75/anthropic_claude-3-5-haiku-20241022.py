@@ -25,5 +25,5 @@ def solve(
     total_breakfast_cost = dale_toast_cost + andrew_toast_cost + dale_eggs_cost + andrew_eggs_cost # eval: 15 = 2 + 1 + 6 + 6
 
     #: FA
-    answer = total_breakfast_cost # eval: 15 = 15
+    answer = total_breakfast_cost
     return answer # eval: return 15

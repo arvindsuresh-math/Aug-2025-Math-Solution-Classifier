@@ -18,5 +18,5 @@ def solve(
     money_needed = wallet_cost - initial_money - parents_gift - grandparents_gift # eval: 5.0 = 100 - 50.0 - 15 - 30
 
     #: FA
-    answer = money_needed # eval: 5.0 = 5.0
+    answer = money_needed
     return answer # eval: return 5.0

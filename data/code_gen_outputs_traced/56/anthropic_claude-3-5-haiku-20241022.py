@@ -20,5 +20,5 @@ def solve(
     third_part_time = total_assignment_time - first_and_second_part_time # eval: 45 = 120 - 75
 
     #: FA
-    answer = third_part_time # eval: 45 = 45
+    answer = third_part_time
     return answer # eval: return 45

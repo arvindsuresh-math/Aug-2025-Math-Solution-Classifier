@@ -18,5 +18,5 @@ def solve(
     hourly_rate = total_pay / total_hours # eval: 10.0 = 100 / 10
 
     #: FA
-    answer = hourly_rate # eval: 10.0 = 10.0
+    answer = hourly_rate
     return answer # eval: return 10.0

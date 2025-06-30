@@ -21,5 +21,5 @@ def solve(
     shoes_cost = total_spent - spent_on_known_items # eval: 41 = 184 - 143
 
     #: FA
-    answer = shoes_cost # eval: 41 = 41
+    answer = shoes_cost
     return answer # eval: return 41

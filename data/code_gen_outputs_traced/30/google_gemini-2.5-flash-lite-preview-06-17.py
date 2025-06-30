@@ -26,5 +26,5 @@ def solve(
     uneaten_pieces = total_pieces - total_pieces_eaten # eval: 6.0 = 16 - 10.0
 
     #: FA
-    answer = uneaten_pieces # eval: 6.0 = 6.0
+    answer = uneaten_pieces
     return answer # eval: return 6.0

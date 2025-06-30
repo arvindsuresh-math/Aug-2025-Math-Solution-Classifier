@@ -24,5 +24,5 @@ def solve(
     total_cost = cost_pinata + cost_reeses + cost_snickers + cost_skittles # eval: 99 = 13 + 36 + 15 + 35
 
     #: FA
-    answer = total_cost # eval: 99 = 99
+    answer = total_cost
     return answer # eval: return 99

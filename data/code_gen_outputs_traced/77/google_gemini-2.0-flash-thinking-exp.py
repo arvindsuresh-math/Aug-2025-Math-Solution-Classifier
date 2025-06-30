@@ -14,5 +14,5 @@ def solve(
     final_weight = initial_weight - total_weight_loss # eval: 85 = 97 - 12
 
     #: FA
-    answer = final_weight # eval: 85 = 85
+    answer = final_weight
     return answer # eval: return 85

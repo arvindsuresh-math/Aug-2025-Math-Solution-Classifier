@@ -16,5 +16,5 @@ def solve(
     total_books = num_history_books + num_romance_books + num_poetry_books + num_mystery_books + num_western_novels + num_biographies # eval: 46 = 12 + 8 + 4 + 11 + 5 + 6
 
     #: FA
-    answer = total_books # eval: 46 = 46
+    answer = total_books
     return answer # eval: return 46

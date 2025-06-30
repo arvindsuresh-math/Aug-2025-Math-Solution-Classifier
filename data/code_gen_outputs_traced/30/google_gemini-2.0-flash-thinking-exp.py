@@ -26,5 +26,5 @@ def solve(
     pieces_left_uneaten = total_pizza_pieces - total_pieces_eaten # eval: 6.0 = 16 - 10.0
 
     #: FA
-    answer = pieces_left_uneaten # eval: 6.0 = 6.0
+    answer = pieces_left_uneaten
     return answer # eval: return 6.0

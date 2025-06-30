@@ -18,5 +18,5 @@ def solve(
     pencils_in_each_box = total_pencils / num_boxes # eval: 5.0 = 50 / 10
 
     #: FA
-    answer = pencils_in_each_box # eval: 5.0 = 5.0
+    answer = pencils_in_each_box
     return answer # eval: return 5.0

@@ -17,5 +17,5 @@ def solve(
     total_spent = cheddar_cheese_price + cream_cheese_price + cold_cuts_price # eval: 35.0 = 10 + 5.0 + 20
 
     #: FA
-    answer = total_spent # eval: 35.0 = 35.0
+    answer = total_spent
     return answer # eval: return 35.0

@@ -14,5 +14,5 @@ def solve(
     total_arms = total_starfish_arms + arms_seastar # eval: 49 = 35 + 14
 
     #: FA
-    answer = total_arms # eval: 49 = 49
+    answer = total_arms
     return answer # eval: return 49

@@ -15,5 +15,5 @@ def solve(
     distance_after_3rd_turn = total_dist_around_ring - known_distances_sum # eval: 10 = 23 - 13
 
     #: FA
-    answer = distance_after_3rd_turn # eval: 10 = 10
+    answer = distance_after_3rd_turn
     return answer # eval: return 10

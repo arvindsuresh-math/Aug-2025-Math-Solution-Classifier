@@ -21,5 +21,5 @@ def solve(
     chores_per_month = monthly_savings_goal / chore_charge # eval: 5.0 = 50.0 / 10
 
     #: FA
-    answer = chores_per_month # eval: 5.0 = 5.0
+    answer = chores_per_month
     return answer # eval: return 5.0

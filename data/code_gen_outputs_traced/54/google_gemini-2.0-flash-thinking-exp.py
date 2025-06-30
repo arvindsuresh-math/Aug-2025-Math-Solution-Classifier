@@ -21,5 +21,5 @@ def solve(
     money_lost = money_in_wallet - money_left_after_dog # eval: 11.0 = 12.0 - 1
 
     #: FA
-    answer = money_lost # eval: 11.0 = 11.0
+    answer = money_lost
     return answer # eval: return 11.0

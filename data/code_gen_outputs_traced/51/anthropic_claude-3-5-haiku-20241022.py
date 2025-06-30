@@ -22,5 +22,5 @@ def solve(
     fabric_left = total_fabric_area - living_room_curtain_area - bedroom_curtain_area # eval: 160 = 192 - 24 - 8
 
     #: FA
-    answer = fabric_left # eval: 160 = 160
+    answer = fabric_left
     return answer # eval: return 160

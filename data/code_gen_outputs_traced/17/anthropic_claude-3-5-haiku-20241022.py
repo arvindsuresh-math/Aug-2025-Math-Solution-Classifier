@@ -25,5 +25,5 @@ def solve(
     pink_and_green_hats_remaining = pink_hats_after_john + green_hats_remaining # eval: 19 = 16 + 3
 
     #: FA
-    answer = pink_and_green_hats_remaining + initial_yellow_hats # eval: 43 = 19 + 24
+    answer = pink_and_green_hats_remaining + initial_yellow_hats
     return answer # eval: return 43

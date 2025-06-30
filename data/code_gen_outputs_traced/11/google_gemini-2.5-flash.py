@@ -27,5 +27,5 @@ def solve(
     num_driveways_shoveled = money_from_shoveling_driveways / driveway_shoveling_charge # eval: 5.0 = 35 / 7
 
     #: FA
-    answer = num_driveways_shoveled # eval: 5.0 = 5.0
+    answer = num_driveways_shoveled
     return answer # eval: return 5.0

@@ -26,5 +26,5 @@ def solve(
     more_fish_in_first_tank = final_fish_in_first_tank - fish_in_second_tank # eval: 3.0 = 15.0 - 12.0
 
     #: FA
-    answer = more_fish_in_first_tank # eval: 3.0 = 3.0
+    answer = more_fish_in_first_tank
     return answer # eval: return 3.0

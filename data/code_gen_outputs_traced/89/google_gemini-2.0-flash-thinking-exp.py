@@ -17,5 +17,5 @@ def solve(
     total_borrowed_week = total_borrowed_avg + friday_increase_books # eval: 216.0 = 200 + 16.0
 
     #: FA
-    answer = total_borrowed_week # eval: 216.0 = 216.0
+    answer = total_borrowed_week
     return answer # eval: return 216.0

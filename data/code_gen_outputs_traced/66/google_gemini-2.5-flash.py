@@ -28,5 +28,5 @@ def solve(
     final_balance = remaining_balance_initial - total_paid_4_months # eval: 520.0 = 780.0 - 260.0
 
     #: FA
-    answer = final_balance # eval: 520.0 = 520.0
+    answer = final_balance
     return answer # eval: return 520.0

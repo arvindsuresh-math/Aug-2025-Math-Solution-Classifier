@@ -17,5 +17,5 @@ def solve(
     total_vegetables = potatoes_produced + cucumbers_produced + peppers_produced # eval: 768 = 237 + 177 + 354
 
     #: FA
-    answer = total_vegetables # eval: 768 = 768
+    answer = total_vegetables
     return answer # eval: return 768

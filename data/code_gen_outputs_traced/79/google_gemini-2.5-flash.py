@@ -13,5 +13,5 @@ def solve(
     combined_experience = james_years_teaching + partner_years_teaching # eval: 70 = 40 + 30
 
     #: FA
-    answer = combined_experience # eval: 70 = 70
+    answer = combined_experience
     return answer # eval: return 70

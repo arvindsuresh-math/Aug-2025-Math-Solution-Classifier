@@ -24,5 +24,5 @@ def solve(
     total_saved = bob_yearly_savings + sally_yearly_savings # eval: 1825.0 = 730.0 + 1095.0
 
     #: FA
-    answer = total_saved # eval: 1825.0 = 1825.0
+    answer = total_saved
     return answer # eval: return 1825.0

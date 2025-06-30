@@ -19,5 +19,5 @@ def solve(
     total_cups_needed = cups_per_day * total_days # eval: 90.0 = 1.0 * 90
 
     #: FA
-    answer = total_cups_needed # eval: 90.0 = 90.0
+    answer = total_cups_needed
     return answer # eval: return 90.0

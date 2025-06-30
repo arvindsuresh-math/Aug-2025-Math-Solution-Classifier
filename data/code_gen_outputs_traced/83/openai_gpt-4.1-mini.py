@@ -27,5 +27,5 @@ def solve(
     hats_per_person = combined_hats / 2 # eval: 54.0 = 108.0 / 2
 
     #: FA
-    answer = hats_per_person # eval: 54.0 = 54.0
+    answer = hats_per_person
     return answer # eval: return 54.0

@@ -21,5 +21,5 @@ def solve(
     total_balls_not_hit = balls_not_hit_first_set + balls_not_hit_second_set # eval: 110.0 = 60.0 + 50.00000000000001
 
     #: FA
-    answer = total_balls_not_hit # eval: 110.0 = 110.0
+    answer = total_balls_not_hit
     return answer # eval: return 110.0

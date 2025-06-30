@@ -24,5 +24,5 @@ def solve(
     total_hours = walk_hours_round_trip + bike_hours_round_trip # eval: 16 = 12 + 4
 
     #: FA
-    answer = total_hours # eval: 16 = 16
+    answer = total_hours
     return answer # eval: return 16

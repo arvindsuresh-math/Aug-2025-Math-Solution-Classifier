@@ -14,5 +14,5 @@ def solve(
     gnomes_in_fifth_house = total_gnomes - gnomes_in_first_four_houses # eval: 8 = 20 - 12
 
     #: FA
-    answer = gnomes_in_fifth_house # eval: 8 = 8
+    answer = gnomes_in_fifth_house
     return answer # eval: return 8

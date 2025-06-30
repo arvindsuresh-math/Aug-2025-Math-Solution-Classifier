@@ -18,5 +18,5 @@ def solve(
     final_weight = weight_after_additional_jelly_beans * gummy_worm_multiplier # eval: 16 = 8 * 2
 
     #: FA
-    answer = final_weight # eval: 16 = 16
+    answer = final_weight
     return answer # eval: return 16

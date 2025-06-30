@@ -29,5 +29,5 @@ def solve(
     net_profit = total_profit_from_sales - movie_creation_cost # eval: 448000.0 = 450000.0 - 2000
 
     #: FA
-    answer = net_profit # eval: 448000.0 = 448000.0
+    answer = net_profit
     return answer # eval: return 448000.0

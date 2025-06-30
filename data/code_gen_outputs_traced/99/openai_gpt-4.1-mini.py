@@ -23,5 +23,5 @@ def solve(
     fish_difference = first_tank_fish_after_eating - second_tank_fish_count # eval: 3.0 = 15.0 - 12.0
 
     #: FA
-    answer = fish_difference # eval: 3.0 = 3.0
+    answer = fish_difference
     return answer # eval: return 3.0

@@ -18,5 +18,5 @@ def solve(
     total_slices_eaten = slices_from_large_pizzas + slices_from_small_pizzas # eval: 48 = 32 + 16
 
     #: FA
-    answer = total_slices_eaten # eval: 48 = 48
+    answer = total_slices_eaten
     return answer # eval: return 48

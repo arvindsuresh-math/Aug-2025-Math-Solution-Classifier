@@ -14,5 +14,5 @@ def solve(
     j_l_diff = j_a_diff - l_a_diff # eval: 5 = 7 - 2
 
     #: FA
-    answer = j_l_diff # eval: 5 = 5
+    answer = j_l_diff
     return answer # eval: return 5

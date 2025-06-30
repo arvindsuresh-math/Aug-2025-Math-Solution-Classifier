@@ -12,5 +12,5 @@ def solve(
     total_clips_sold = clips_sold_in_april + clips_sold_in_may # eval: 72.0 = 48 + 24.0
 
     #: FA
-    answer = total_clips_sold # eval: 72.0 = 72.0
+    answer = total_clips_sold
     return answer # eval: return 72.0
