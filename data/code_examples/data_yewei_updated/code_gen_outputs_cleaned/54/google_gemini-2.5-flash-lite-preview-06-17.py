@@ -1,0 +1,23 @@
+def solve(
+    total_earned: int = 28, # Leah earned $28 working odd jobs
+    milkshake_cost_fraction: float = 1/7, # She spent a seventh of it on a milkshake
+    savings_fraction: float = 1/2, # put half of the rest in her savings account
+    money_left_in_wallet: int = 1 # Her dog got ahold of her wallet and shredded all the money inside but $1
+):
+    """Index: 54.
+    Returns: the amount of money Leah lost.
+    """
+    #: L1
+    milkshake_cost = total_earned * milkshake_cost_fraction
+
+    #: L2
+    money_left_after_milkshake = total_earned - milkshake_cost
+
+    #: L3
+    money_in_wallet = money_left_after_milkshake * savings_fraction
+
+    #: L4
+    money_lost = money_in_wallet - money_left_in_wallet
+
+    answer = money_lost # FINAL ANSWER
+    return answer

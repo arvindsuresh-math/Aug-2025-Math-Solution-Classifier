@@ -3,40 +3,37 @@ channels:
   - pytorch
   - conda-forge
   - defaults
+
 dependencies:
   # --- Core Environment ---
   - python=3.12.*
 
-  # --- Core Data Science & ML Libraries (Conda) ---
+  # --- Data Science stack ---
   - numpy=1.26.*
   - pandas=2.2.*
-  - scikit-learn=1.5.*
-  - matplotlib=3.9.*
-  - seaborn=0.13.*
-  - tqdm=4.66.*
-  - jupyterlab=4.2.*
-  - ipywidgets=8.1.*
+  # … (unchanged) …
 
-  # --- PyTorch (Conda) ---
+  # --- PyTorch CPU build ---
   - pytorch=2.3.*
   - torchvision=0.18.*
   - torchaudio=2.3.*
-  - cpuonly # Keep this if you are not using an NVIDIA GPU
+  - cpuonly
 
-  # --- Additional packages for validation ---
+  # --- Validation / utilities ---
   - black
   - libcst
   - sympy
   - hypothesis
   - sentence-transformers
 
-  # --- Pip for packages not prioritized on Conda ---
-  - pip
+  # --- NEW: LLM provider SDKs installed with Conda, if available ---
+  - anthropic>=0.21
 
-  # --- Python packages to be installed with Pip ---
+  - pip                      # keep pip meta-package
+
   - pip:
-      - google-generativeai
-      - anthropic
+      - vertexai[preview]          # <-- only pip-exclusive item
+      - google-generativeai        # already present; keep pinned version
       - openai==1.35.*
       - httpx==0.27.2
       - datasets==2.20.*

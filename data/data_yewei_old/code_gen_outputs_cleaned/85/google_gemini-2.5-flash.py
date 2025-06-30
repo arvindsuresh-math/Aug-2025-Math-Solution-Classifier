@@ -1,0 +1,18 @@
+def solve_85():
+    # Given age differences
+    jolyn_older_than_therese = 2
+    therese_older_than_aivo = 5
+    leon_older_than_aivo = 2
+
+    # Calculate how much older Jolyn is than Aivo
+    # Jolyn is (Jolyn_vs_Therese) + (Therese_vs_Aivo) older than Aivo
+    jolyn_older_than_aivo = jolyn_older_than_therese + therese_older_than_aivo
+
+    # Calculate how much older Jolyn is than Leon
+    # Jolyn is (Jolyn_vs_Aivo) - (Leon_vs_Aivo) older than Leon
+    jolyn_older_than_leon = jolyn_older_than_aivo - leon_older_than_aivo
+
+    return jolyn_older_than_leon
+
+# The final answer is the result of the function call.
+# solve_85()

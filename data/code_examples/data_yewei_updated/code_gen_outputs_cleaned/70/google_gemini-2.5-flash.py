@@ -1,0 +1,16 @@
+def solve(
+        tim_less_than_martha: int = 30, # 30 less apples
+        martha_apples: int = 68, # Martha has 68 apples
+        harry_divisor_of_tim: int = 2 # Harry has half as many apples as Tim
+    ):
+    """Index: 70.
+    Returns: the number of apples Harry has.
+    """
+    #: L1
+    tim_apples = martha_apples - tim_less_than_martha
+
+    #: L2
+    harry_apples = tim_apples / harry_divisor_of_tim
+
+    answer = harry_apples # FINAL ANSWER
+    return answer

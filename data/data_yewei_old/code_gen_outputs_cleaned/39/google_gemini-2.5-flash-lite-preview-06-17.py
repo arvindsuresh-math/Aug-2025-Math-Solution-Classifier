@@ -1,0 +1,29 @@
+# Calculate the total candy Anna gets
+anna_candy_per_house = 14
+anna_houses = 60
+total_anna_candy = anna_candy_per_house * anna_houses
+
+# Calculate the total candy Billy gets
+billy_candy_per_house = 11
+billy_houses = 75
+total_billy_candy = billy_candy_per_house * billy_houses
+
+# Calculate the difference in candy pieces
+candy_difference = total_anna_candy - total_billy_candy
+
+# Print the result
+print(f"Anna gets {total_anna_candy} pieces of candy.")
+print(f"Billy gets {total_billy_candy} pieces of candy.")
+print(f"Anna gets {candy_difference} more pieces of candy than Billy.")
+
+def solve_39():
+    anna_candy_per_house = 14
+    anna_houses = 60
+    total_anna_candy = anna_candy_per_house * anna_houses
+
+    billy_candy_per_house = 11
+    billy_houses = 75
+    total_billy_candy = billy_candy_per_house * billy_houses
+
+    candy_difference = total_anna_candy - total_billy_candy
+    return candy_difference

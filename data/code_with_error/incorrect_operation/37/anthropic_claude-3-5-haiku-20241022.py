@@ -1,0 +1,31 @@
+def solve(
+    hamburger_price: float = 3.0,  # cost of each hamburger
+    num_hamburgers: int = 5,  # number of hamburgers ordered
+    fries_price: float = 1.20,  # cost of each set of fries
+    num_fries: int = 4,  # number of fries sets ordered
+    soda_price: float = 0.50,  # cost of each soda
+    num_sodas: int = 5,  # number of sodas ordered
+    spaghetti_price: float = 2.70,  # cost of spaghetti platter
+    num_friends: int = 5  # number of friends splitting the bill
+):
+    """Index: 37.
+    Returns: the amount each friend will pay when splitting the bill equally."""
+
+    #: L1
+    hamburger_total = hamburger_price * num_hamburgers
+
+    #: L2
+    fries_total = fries_price + num_fries
+
+    #: L3
+    soda_total = soda_price * num_sodas
+
+    #: L4
+    total_bill = hamburger_total + fries_total + soda_total + spaghetti_price
+
+    #: L5
+    individual_share = total_bill / num_friends
+
+    #: FA
+    answer = individual_share
+    return answer

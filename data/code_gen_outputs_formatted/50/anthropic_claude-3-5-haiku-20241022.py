@@ -1,0 +1,24 @@
+def solve(
+    monthly_baseball_supplies: int = 100,  # Gerald spends $100 a month on baseball supplies
+    baseball_season_months: int = 4,  # His season is 4 months long
+    chore_price: int = 10,  # He charges $10 for each chore
+    total_months_in_year: int = 12  # Total months in a year
+):
+    """Index: 50.
+    Returns: the number of chores Gerald needs to do per month to save up for baseball supplies."""
+
+    #: L1
+    total_baseball_supplies_cost = monthly_baseball_supplies * baseball_season_months
+
+    #: L2
+    months_to_save = total_months_in_year - baseball_season_months
+
+    #: L3
+    monthly_savings_needed = total_baseball_supplies_cost / months_to_save
+
+    #: L4
+    chores_per_month = monthly_savings_needed / chore_price
+
+    #: FA
+    answer = chores_per_month
+    return answer

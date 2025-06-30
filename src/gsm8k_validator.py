@@ -23,13 +23,14 @@ Core Logic:
 
 2.  **Pairwise Alignment (UT-2):** For every pair of surviving models, the script
     finds the best possible argument alignment. It uses an efficient "bucket and
-    match" strategy, first grouping arguments by type and default value, then
+    match" strategy, first grouping arguments by type and default value (these groups are the "buckets"), then
     performing a semantic comparison on the combined text of the argument name
     and its comment.
 
 3.  **Pairwise Fuzzing (UT-3):** Each successfully aligned pair is fuzz-tested
     for functional equivalence using the "Fuzz Aligned, Freeze Unaligned"
-    strategy. This robustly verifies that the underlying mathematical logic is
+    strategy. That is, the aligned args are fuzzed (with 50 different values) and the unaligned args are frozen. 
+    This robustly verifies that the underlying mathematical logic is
     identical, even when function signatures do not perfectly match.
 
 4.  **Scoring & Consensus:**
@@ -73,11 +74,24 @@ import pprint
 
 from collections import defaultdict
 
+
 # ---------------------------------------------------------------------- #
 #  Global constants & Configuration
 # ---------------------------------------------------------------------- #
 
-BASE_DIR = Path("code_generation_outputs_cleaned")
+def find_project_root():
+    """Traverse upwards to find the project root, marked by the .git folder."""
+    current_path = Path.cwd()
+    while current_path != current_path.parent:
+        if (current_path / ".git").is_dir():
+            return current_path
+        current_path = current_path.parent
+    raise FileNotFoundError("Could not find project root. Is this a git repository?")
+
+
+PROJECT_ROOT = find_project_root()
+print(f"Project root identified: {PROJECT_ROOT}")
+BASE_OUTPUT_DIR = PROJECT_ROOT / 'data' / 'code_gen_outputs_cleaned'
 
 _MODEL = SentenceTransformer("all-mpnet-base-v2")
 _COS_THRESHOLD = 0.70  # SBERT cosine ≥ 0.7 ⇒ semantic match
@@ -421,3 +435,46 @@ def analyze_problem_outputs(problem_dir: Path, gold_answer: float):
     print(f"Consensus Bonus Multiplier: x{bonus}")
     print(f"FINAL CONFIDENCE SCORE: {final_score:.4f}")
     print("-"*50)
+
+
+###########################
+
+from datasets import load_dataset
+
+# Load the GSM8K dataset (train split)
+gsm8k_train = load_dataset("gsm8k", "main", split="train")
+
+def extract_gsm8k_answer(gsm8k_data, index):
+    """
+    Extracts the final numerical answer from a GSM8K sample.
+    Args:
+        gsm8k_data: The loaded GSM8K dataset (e.g., gsm8k_train).
+        index: The integer index of the sample.
+    Returns:
+        The answer as a float if possible, else as a string.
+    """
+    answer_text = gsm8k_data[index]['answer']
+    # The answer is after the last '####'
+    if '####' in answer_text:
+        answer = answer_text.split('####')[-1].strip()
+    else:
+        answer = answer_text.strip()
+    # Try to convert to float or int
+    try:
+        return float(answer.replace(',', ''))
+    except ValueError:
+        return answer
+    
+
+# --- Execute the Full Pipeline for samples 0-99 ---
+
+for PROBLEM_INDEX in range(100):
+    GOLD_ANSWER = extract_gsm8k_answer(gsm8k_train, PROBLEM_INDEX)
+    print(f"\nProcessing Problem Index: {PROBLEM_INDEX}, Gold Answer: {GOLD_ANSWER}")
+
+    problem_dir = BASE_OUTPUT_DIR / str(PROBLEM_INDEX)
+    if not problem_dir.is_dir():
+        print(f"Error: Directory not found at {problem_dir}")
+    else:
+        # This single function call runs the entire validation and scoring process
+        analyze_problem_outputs(problem_dir, GOLD_ANSWER)

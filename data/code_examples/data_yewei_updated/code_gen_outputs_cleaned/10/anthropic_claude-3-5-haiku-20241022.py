@@ -1,0 +1,23 @@
+def solve(
+    total_people_consumed: int = 847,  # Over three hundred years, it has consumed 847 people
+    num_periods: int = 3  # Monster rises once every hundred years over three hundred years
+):
+    """Index: 10.
+    Returns: the number of people on the first ship the monster consumed."""
+    #: L1
+    # Let S be the number of people on the first hundred years' ship
+
+    #: L2
+    # Second ship has 2S people
+
+    #: L3
+    # Third ship has 4S people
+
+    #: L4
+    total_people = (1 + 2 + 4) * 'S'  # S + 2S + 4S = 7S
+    
+    #: L5
+    first_ship_people = total_people_consumed / (1 + 2 + 4)
+
+    answer = first_ship_people  # FINAL ANSWER
+    return answer

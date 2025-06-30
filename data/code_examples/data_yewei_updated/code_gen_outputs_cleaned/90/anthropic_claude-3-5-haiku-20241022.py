@@ -1,0 +1,21 @@
+def solve(
+    december_days: int = 31,  # December has 31 days
+    january_days: int = 31,   # January has 31 days
+    february_days: int = 28,  # February has 28 days
+    morning_feed: float = 0.5,  # 1/2 cup in the morning
+    afternoon_feed: float = 0.5  # 1/2 cup in the afternoon
+):
+    """Index: 90.
+    Returns: the total number of cups of bird food needed for three months.
+    """
+    #: L1
+    total_days = december_days + january_days + february_days
+
+    #: L2
+    daily_feed = morning_feed + afternoon_feed
+
+    #: L3
+    total_feed = daily_feed * total_days
+
+    answer = total_feed  # FINAL ANSWER
+    return answer

@@ -1,0 +1,18 @@
+def solve(
+    last_year_sales: int = 86, # Brandon sold 86 geckos last year.
+    previous_year_multiplier: int = 2 # He sold twice that many the year before.
+):
+    """Index: 88.
+    Returns: the total number of geckos Brandon sold in the last two years.
+    """
+    #: L1
+    # last_year_sales is already provided as an argument
+
+    #: L2
+    previous_year_sales = last_year_sales * previous_year_multiplier
+
+    #: L3
+    total_geckos_sold = last_year_sales + previous_year_sales
+
+    answer = total_geckos_sold # FINAL ANSWER
+    return answer

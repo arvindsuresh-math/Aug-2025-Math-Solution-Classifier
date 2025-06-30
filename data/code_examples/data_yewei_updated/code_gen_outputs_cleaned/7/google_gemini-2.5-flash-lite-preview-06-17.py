@@ -1,0 +1,18 @@
+def solve(
+    initial_jelly_beans_weight: int = 2, # Ken placed a box on a scale, and then he poured into the box enough jelly beans to bring the weight to 2 pounds.
+    jelly_beans_added_later: int = 2, # Next, he added another 2 pounds of jelly beans.
+):
+    """Index: 7.
+    Returns: the final weight of the box of goodies, in pounds.
+    """
+    #: L1
+    weight_after_brownies = initial_jelly_beans_weight * 3
+
+    #: L2
+    weight_after_more_jelly_beans = weight_after_brownies + jelly_beans_added_later
+
+    #: L3
+    final_weight = weight_after_more_jelly_beans * 2
+
+    answer = final_weight # FINAL ANSWER
+    return answer

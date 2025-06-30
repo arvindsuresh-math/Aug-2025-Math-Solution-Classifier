@@ -1,101 +1,88 @@
-# Erdos-DL-June25-Math
+# Solution Verifier LLM - Project Strategy
 
-## Project Guide: Generating Datasets for Mathematical Reasoning Analysis
+## **Project Strategy: A High-Rigor Pipeline for a 'Solution Verifier' LLM**
 
-This document outlines two potential research projects focused on enhancing the logical reasoning capabilities of Large Language Models (LLMs). Both projects attempt to use a novel, high-rigor data generation pipeline to create specialized datasets for Supervised Fine-Tuning (SFT).
+This document outlines the end-to-end strategy for fine-tuning a Large Language Model (LLM) to detect, classify, and correct errors in natural language mathematical solutions. The strategy is presented in reverse, starting from the final project goal and working backward to justify each component of the data generation and evaluation pipeline.
 
-### 1. Project Ideas
+### 1. Project Goal
 
-The team will choose between two primary research directions:
+The primary objective is to fine-tune a small (<20B parameter) LLM to function as a **Solution Verifier**. At inference time, this model must accept a standalone natural language problem and a corresponding natural language solution as its only inputs. Without any other context or "cheats," it must produce a structured, machine-readable analysis of the solution's validity. This ensures the final model is applicable to the challenging real-world use case of verifying reasoning from raw text.
 
-#### Project Idea 1: The "Problem Validator" Model
+### 2. Evaluation Framework
 
-* **Summary:** Fine-tune an LLM to classify mathematical word problems as **(1) Solvable**, **(0) Contradictory**, or **(2) Underspecified**.
-* **Justification & Relevance:** This project tackles the critical AI safety issue of "hallucination" and "confabulation." By teaching a model to first validate the premises of a problem, we train it to recognize when a question *cannot* or *should not* be answered as posed. This is a form of AI metacognition—the ability to reason about the validity of its inputs—which is essential for creating reliable and trustworthy AI systems that can safely handle flawed or ambiguous user queries.
-* **Dataset Requirement:** The training data will consist of `(problem_text, class_label, reasoning_trace)` tuples. The `reasoning_trace` is a natural language chain-of-thought explaining *why* a problem is contradictory or underspecified (e.g., "The calculated total of 10 cows contradicts the stated total of 12 cows.").
+To verifiably measure the model's success against this goal, a multi-tiered evaluation framework is required.
 
-#### Project Idea 2: The "Solution Verifier" Model
+* **Tier 1: Classification Performance.** These are fundamental metrics to establish a baseline and measure overall improvement.
+  * **Verdict Accuracy:** The model's ability to correctly classify a solution as "Correct" or "Flawed".
+  * **Error Type Accuracy:** Conditional on a "Flawed" verdict, the model's ability to correctly select the error category from our predefined taxonomy (e.g., `computational_error`, `incorrect_operation`).
+    While necessary, these metrics are insufficient as they do not guarantee genuine understanding; a model could achieve high accuracy by learning superficial patterns.
 
-* **Summary:** Fine-tune an LLM to analyze a mathematical solution trace and classify it as **Correct** or **Flawed**. For flawed solutions, it should further classify the error into a pre-determined category (e.g., `computational_error`, `incorrect_operand`).
-* **Justification & Relevance:** This project targets the powerful "AI as a Reviewer" use case. In many real-world applications, the primary task is not to solve from scratch, but to review, debug, or validate an existing line of reasoning. This is a more common and practical scenario. Success in this area would lead to tools that can help students learn, debug scientific models, or audit financial calculations.
-* **Dataset Requirement:** The training data will consist of `(correct_problem_text, flawed_solution_trace, error_label_json)` tuples. The `error_label_json` would be a structured object providing details about the flaw, such as `{ "error_type": "incorrect_operation", "line_number": 2, "correction": "Multiplication should be used here, not addition." }`.
+* **Tier 2: Functional Correctness.** To address the limitations of simple accuracy, we will evaluate the model's reasoning capability via a rigorous proxy: testing if its proposed correction is functionally correct. The resulting metric, the **Correction Success Rate**, is the primary measure of the model's performance. It is calculated via a multi-step pipeline:
+    1. **Variable Mapping:** The model will generate a `correction_in_code` string with its own invented variable names. Our evaluation script will programmatically map these names to the ground-truth variables in our `f_flawed` function by using semantic similarity (SBERT embeddings) on the variables from the relevant line of code.
+    2. **Correction Normalization:** Using this mapping, the script will generate a **normalized correction** string that uses the canonical variable names from `f_flawed`.
+    3. **Consensus-Based Repair:** We will prompt three powerful, independent LLMs with `f_flawed` and the normalized correction, instructing them to produce a repaired function. This consensus approach mitigates the risk of any single judge model failing to interpret the instruction.
+    4. **Programmatic Fuzzing:** Each of the three resulting `f_repaired` functions will be programmatically fuzz-tested for functional equivalence against the original `f_oracle`.
+    5. **Metric Calculation:** The model's correction is deemed "successful" if at least two of the three repair attempts result in a functionally correct function.
 
----
+### 3. Required Model Output Structure
 
-### 2. Dataset Generation Strategy
+The Tier 2 evaluation framework dictates that the model must produce a highly structured JSON object, not just natural language. The fine-tuning target is therefore a JSON containing specific, machine-parsable fields that enable the programmatic checks.
 
-For both project ideas, a "perfectly labeled" dataset cannot be generated directly by an LLM without significant risk of annotation errors. Therefore, our strategy is to **first create a ground-truth "oracle" and then programmatically inject errors** to ensure the final labels are 100% accurate.
+```json
+{
+  "verdict": "Flawed",
+  "error_details": {
+    "error_type": "incorrect_operation",
+    "erroneous_line_number": "L1",
+    "explanation": "A natural language explanation of the error.",
+    "error_in_code": "cost_of_supplies = number_of_boxes + price_per_box",
+    "correction_in_code": "cost_of_supplies = number_of_boxes * price_per_box"
+  }
+}
+```
 
-* **For Idea 1:** We will inject errors into the parameters of the problem statement itself, creating guaranteed contradictions or underspecified scenarios.
-* **For Idea 2:** We will inject errors into the steps of the solution trace, creating guaranteed and precisely classifiable flaws in the reasoning process.
+The fields `erroneous_line_number`, `error_in_code`, and `correction_in_code` are essential. They provide the necessary hooks for the evaluation script to locate the error, map the model's invented symbols, and generate the normalized correction for the consensus-based repair step.
 
----
+### 4. Fine-Tuning Strategy and Dataset
 
-### 3. Intermediate Step: The "Oracle Factory"
+To train the model to produce this specific JSON output, we will use Supervised Fine-Tuning (SFT).
 
-The common link for both project ideas is the creation of a high-confidence, computable representation of the original problem. This is a three-stage validation pipeline that produces a verified Python function—our oracle.
+* **Dataset Structure:** The training data will consist of `(input, target)` pairs.
+  * **Input:** A string containing only the `problem_text` and the `flawed_nl_solution`. No symbolic context is provided, forcing the model to learn to generate its own symbols from the raw problem text.
+  * **Target:** The complete JSON object described in Section 3.
 
-1. **Code Generation:** Multiple independent LLMs are prompted to formalize a GSM8K problem and its solution into a structured Python function.
-2. **Validation Pipeline:** These generated functions are subjected to a series of unit tests to find a robust consensus:
-    * **UT-1 (Parse & Pre-filter):** All files are parsed, and any that fail to produce the correct final answer on their default arguments are discarded.
-    * **UT-2 (Pairwise Alignment):** The script compares every pair of surviving functions. It uses a "bucket and match" strategy, first grouping arguments by `(type, default_value)` and then performing a semantic comparison (using SBERT on argument names and comments) to find the best alignment. This is flexible to naming and ordering differences.
-    * **UT-3 (Pairwise Fuzzing):** Each aligned pair is rigorously tested for functional equivalence using the "Fuzz Aligned, Freeze Unaligned" strategy. This proves that their underlying mathematical logic is identical under known constraints.
-3. **Confidence Score:** The results are synthesized into a final **Confidence Score**. This score is based on the completeness of the alignment, the semantic clarity of the arguments, and a bonus for the size of the consensus "clique" (the largest group of models that all mutually validate each other). This gives us a quantifiable measure of confidence in our oracle.
+* **The SFT Mechanism:** The fine-tuning process relies on a standard **next-token prediction** task with a **cross-entropy loss**.
+    1. The target JSON object is serialized into a single string and then tokenized.
+    2. For each token in this target sequence, the model predicts a probability distribution over the vocabulary. The loss is calculated between this prediction and the ground-truth token.
+    3. This loss is backpropagated to update the model weights. This happens for *every single token*, forcing the model to learn not only the semantic content but also the rigid syntax of the JSON structure.
+    4. To consistently minimize this loss across a large and diverse dataset, simple memorization is an inefficient strategy. The model is incentivized to generalize by building an internal, abstract representation of the reasoning process required to get from the input text to the target JSON.
 
----
+### 5. Data Generation Strategy via Error Injection
 
-### 4. Error-Injection Strategy
+The creation of the high-quality SFT dataset from Section 4 is the central data engineering challenge. To ensure perfect labels, we will synthesize the data rather than relying on LLM annotation.
 
-Once a high-confidence "canonical" function is selected from the validated clique, we inject errors.
+* **Core Strategy:** The process begins with a validated `f_oracle`. An error is programmatically injected into its Abstract Syntax Tree (AST) to create `f_flawed`. This programmatic action provides all the metadata required to instantly and perfectly generate the `target_json` label. The tentative error categories and injection methods are as follows:
+  * **`computational_error`:** The result of a numeric calculation is altered. In the AST, this involves finding an assignment node and replacing the right-hand side with a new constant value (e.g., `total = 5 * 10` becomes `total = 51`).
+  * **`incorrect_operation`:** A mathematical operator is swapped. In the AST, this means replacing an operator node (e.g., `ast.Mult` becomes `ast.Add`).
+  * **`incorrect_operand`:** A variable in a calculation is replaced with another variable from the same scope. This involves finding and replacing an `ast.Name` node with a different valid variable name.
+  * **`skipped_step`:** A necessary line of code is removed. This involves deleting an entire assignment node from the AST and handling any subsequent `NameError` by replacing later references to the deleted variable with a plausible (but incorrect) value.
 
-### For Idea 1 (Problem Validator)
+* **Anticipated Difficulties:** After creating `f_flawed` and its corresponding `target_json`, the most difficult step is generating the `flawed_nl_solution`. This will require prompting a powerful LLM to write a plausible, human-like solution that adheres to the flawed logic of `f_flawed`, constrained by its incorrect intermediate values. The primary challenges will be ensuring the generated text accurately reflects the intended logical flaw without introducing other unintended errors, and maintaining a natural tone. This generation-and-validation loop for the natural language component is the most significant remaining challenge in the data pipeline.
 
-1. **Action:** Programmatically modify one or more default argument values in the canonical function to create a logical flaw (e.g., `total_fruit = 8` becomes inconsistent with `apples = 6, oranges = 3`).
-2. **Propagation:** The modified numerical value is then found and replaced in the original natural language problem text.
-3. **Final Dataset:** The output is a `(modified_problem_text, class_label=0, reasoning_trace)` tuple, where the reasoning trace is generated from a template based on the injected flaw.
+### 6. Foundational Prerequisite: The "Oracle Factory"
 
-### For Idea 2 (Solution Verifier)
+The entire strategy above—from evaluation to data generation—is predicated on the existence of a high-confidence, ground-truth `f_oracle` for each problem. This is why the first and most complex part of our project is the "Oracle Factory" pipeline. It is an automated workflow that creates and validates the necessary ground-truth functions.
 
-1. **Action:** Take the original, correct solution trace from the GSM8K dataset.
-2. **Injection:** Programmatically introduce a specific, classifiable error into one of the steps. The error types include:
-    * **Computational Error:** `2*5 = 10` is changed to `2*5 = 11`.
-    * **Incorrect Operand:** `price * quantity` is changed to `price * tax`.
-    * **Incorrect Operation:** `price * quantity` is changed to `price + quantity`.
-    * **Skipped Step:** A necessary step (e.g., adding tax) is removed from the trace.
-3. **Final Dataset:** The output is a `(problem_text, flawed_solution_trace, error_label_json)` tuple.
+* **1. Code Generation:** For each GSM8K problem, asynchronous API calls are made to multiple, independent LLMs (e.g., from OpenAI, Anthropic, Google). Each model is prompted to convert the natural language problem and solution into a single, well-structured Python function named `solve`.
 
----
+* **2. Validation and Consensus Pipeline:** The generated Python files for a given problem are then subjected to a rigorous, multi-stage validation process to find a robust consensus.
+  * **UT-1 (Parse & Pre-filter):** All files are parsed to extract the function signature, including argument names, types, default values, and comments. Any function that fails to produce the correct final answer from the GSM8K dataset using its default arguments is immediately discarded.
+  * **UT-2 (Pairwise Alignment):** For every surviving pair of functions, the script finds the best possible argument alignment using an efficient "bucket and match" strategy. Arguments are first grouped into "buckets" by their `(type, default_value)`. A semantic comparison using SBERT cosine similarity is then performed only on arguments within matching buckets, robustly handling differences in naming and ordering.
+  * **UT-3 (Pairwise Fuzzing):** Each successfully aligned pair is then tested for functional equivalence using the `hypothesis` library. This employs a "Fuzz Aligned, Freeze Unaligned" strategy, where aligned arguments are fuzzed with a wide range of values while unaligned arguments are held constant at their defaults. A pair passes if their outputs remain identical across all fuzzed inputs, proving their underlying mathematical logic is identical.
 
-## 5. Supervised Fine-Tuning (SFT)
+* **3. Final Confidence Score:** The results of the validation pipeline are synthesized into a final `ConfidenceScore` for the problem. This score provides a single, quantifiable measure of our confidence in the generated oracles. It is computed as follows:
+    1. A graph is constructed where functions are nodes and an edge exists between any pair that passed the fuzzing test. The script identifies the largest fully connected subgraph (the **consensus clique**).
+    2. For each validated pair in the clique, a `PairwiseQualityScore` is calculated as a weighted average of its **Alignment Ratio** (proportion of aligned arguments) and its **Semantic Strength** (average SBERT similarity of aligned argument names/comments).
+    3. The final `ConfidenceScore` is the average `PairwiseQualityScore` of all pairs within the best clique, amplified by a **Consensus Bonus** multiplier that increases with the size of the clique (e.g., x1.1 for 3 models, x1.2 for 4 models).
 
-The fine-tuning process involves training a base LLM on our generated dataset to perform the desired classification task.
-
-* **Process:** We will use a standard Supervised Fine-Tuning (SFT) workflow, likely using the Hugging Face `transformers` and `peft` libraries for efficiency (e.g., using LoRA). The model will be trained to generate a structured JSON output that includes the classification and reasoning.
-* **Baselines:** To measure the effectiveness of our fine-tuned model, we will first establish a zero-shot baseline. For either project idea, we will prompt a powerful base model (e.g., GPT-4, Llama 3 70B) with the classification task without any examples and measure its performance. Our goal is for our smaller, fine-tuned model to significantly outperform this baseline.
-* **Model Recommendations:** For fine-tuning, we should start with powerful open-source models under 20 billion parameters for faster iteration and lower computational cost. Good candidates include:
-  * **Llama 3 8B:** A state-of-the-art, powerful base model with strong reasoning skills.
-  * **Mistral 7B Instruct:** Another excellent choice known for its efficiency and strong performance.
-  * **Gemma 7B:** Google's open model, also a very capable starting point.
-
----
-
-## 6. Difficulties and Bottlenecks
-
-A realistic assessment of the challenges is crucial for project planning.
-
-### Shared Difficulties
-
-* **Code Generation & Validation (Primary Bottleneck):** This initial stage is the most complex and costly part of the entire pipeline.
-  * **API Costs:** Generating code from multiple LLMs for every problem in the dataset will be the main financial cost.
-  * **Rigor vs. Yield:** Our validation pipeline is strict. For many problems, the LLMs may not produce enough high-quality, consistent outputs to form a consensus. This means our final usable dataset might be significantly smaller than the original GSM8K dataset. The `ConfidenceScore` is our main tool for managing this trade-off.
-
-### Difficulties Specific to Idea 1 (Problem Validator)
-
-* **Subtlety of Contradictions:** As discovered with the "cows vs. barn capacity" example, creating a *true, unambiguous* contradiction is harder than it looks. It requires a deep semantic understanding of the problem's structure, which can be difficult to automate. Many naively injected "errors" may not be logical contradictions at all.
-* **Reasoning Trace Generation:** Creating the high-quality, natural language chain-of-thought for *why* a problem is flawed is a secondary generation task. This may require its own set of prompts, templates, and quality checks.
-
-### Difficulties Specific to Idea 2 (Solution Verifier)
-
-* **More Controlled, Less Ambiguous:** This path is generally more straightforward. The types of errors are well-defined, and their injection is a more direct, programmatic task.
-* **Dependence on Original Trace:** The quality of the final training example depends on the quality of the original solution trace from the GSM8K dataset. If the original trace is convoluted or unclear, injecting a clean error may be difficult.
-* **Error Taxonomy:** The team must agree on a finite and comprehensive set of error classifications. This taxonomy must be robust enough to cover most logical failures but simple enough for the model to learn effectively. Deciding on the right level of granularity is a key challenge.
+Only a problem that achieves a high `ConfidenceScore` will yield a canonical `f_oracle` trustworthy enough to serve as the foundation for the entire downstream error injection and model training workflow.

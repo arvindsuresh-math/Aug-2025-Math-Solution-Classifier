@@ -1,0 +1,30 @@
+def solve(
+    initial_pink_hard_hats: int = 26, # there are 26 pink hard hats
+    initial_green_hard_hats: int = 15, # 15 green hard hats
+    initial_yellow_hard_hats: int = 24, # and 24 yellow hard hats
+    carl_takes_pink: int = 4, # Carl takes away 4 pink hard hats
+    john_takes_pink: int = 6, # John takes away 6 pink hard hats
+):
+    """Index: 17.
+    Returns: the total number of hard hats that remained in the truck.
+    """
+    #: L1
+    remaining_pink_after_carl = initial_pink_hard_hats - carl_takes_pink
+
+    #: L2
+    remaining_pink_after_john = remaining_pink_after_carl - john_takes_pink
+
+    #: L3
+    john_takes_green = john_takes_pink * 2
+
+    #: L4
+    remaining_green = initial_green_hard_hats - john_takes_green
+
+    #: L5
+    remaining_pink_and_green = remaining_pink_after_john + remaining_green
+
+    #: L6
+    total_remaining_hard_hats = remaining_pink_and_green + initial_yellow_hard_hats
+
+    answer = total_remaining_hard_hats # FINAL ANSWER
+    return answer

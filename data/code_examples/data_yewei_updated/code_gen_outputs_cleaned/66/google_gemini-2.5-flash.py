@@ -1,0 +1,32 @@
+def solve(
+        laptop_cost: int = 1000, # a laptop which costs $1000
+        monthly_installment: int = 65, # installments of $65 per month
+        down_payment_percentage: float = 0.20, # a 20% down payment is made
+        additional_down_payment: int = 20, # an additional $20 for the down payment
+        months_paid: int = 4 # after paying for 4 months
+    ):
+    """Index: 66.
+    Returns: Tara's remaining balance after paying for 4 months.
+    """
+    #: L1
+    initial_down_payment = laptop_cost * down_payment_percentage
+
+    #: L2
+    total_down_payment = initial_down_payment + additional_down_payment
+
+    #: L3
+    remaining_balance_after_down_payment = laptop_cost - total_down_payment
+
+    #: L4
+    # The solution calculates the monthly payment based on the remaining balance being paid over a year (12 months).
+    # The 'monthly_installment' argument is provided in the question but is effectively re-derived here by the solution.
+    monthly_payment_calculated = remaining_balance_after_down_payment / 12
+
+    #: L5
+    total_payments_for_months = monthly_payment_calculated * months_paid
+
+    #: L6
+    balance_after_4_months = remaining_balance_after_down_payment - total_payments_for_months
+
+    answer = balance_after_4_months # FINAL ANSWER
+    return answer

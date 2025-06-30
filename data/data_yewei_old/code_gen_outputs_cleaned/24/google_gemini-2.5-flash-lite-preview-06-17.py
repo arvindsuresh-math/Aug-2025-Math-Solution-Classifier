@@ -1,0 +1,8 @@
+# Calculate the total amount paid by Mary
+amount_paid = 15 + 23
+
+# Calculate the remaining credit Mary needs to pay
+remaining_credit = 100 - amount_paid
+
+# Print the result
+print(remaining_credit)

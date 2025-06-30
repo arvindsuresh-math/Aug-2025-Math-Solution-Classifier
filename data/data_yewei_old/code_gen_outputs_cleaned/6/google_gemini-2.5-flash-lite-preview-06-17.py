@@ -1,0 +1,11 @@
+# Calculate the number of slices from large pizzas
+large_pizza_slices = 2 * 16
+
+# Calculate the number of slices from small pizzas
+small_pizza_slices = 2 * 8
+
+# Calculate the total number of slices eaten
+total_slices = large_pizza_slices + small_pizza_slices
+
+# Print the result
+print(f"Albert eats {total_slices} pieces that day.")

@@ -1,0 +1,47 @@
+def solve(
+    increase_amount: int = 600,  # salary was recently increased by $600
+    old_rent_fraction: float = 0.40,  # used to spend 40% of income on rent and utilities
+    new_rent_fraction: float = 0.25  # now rent and utilities amount to 25% of income
+):
+    """Index: 29.
+    Returns: the previous monthly income before the salary increase.
+    """
+    #: L1
+    # Let previous monthly income be p (unknown)
+
+    #: L2
+    # Cost of rent and utilities before increase = 40% of p = 2p/5
+    # Represented as old_rent_fraction * p
+
+    #: L3
+    # New income = p + 600
+
+    #: L4
+    # Cost of rent and utilities now = 25% of (p + 600) = (p + 600)/4
+    # Represented as new_rent_fraction * (p + increase_amount)
+
+    #: L5
+    # Equate old and new rent costs: 2p/5 = (p + 600)/4
+    # Using variables: old_rent_fraction * p = new_rent_fraction * (p + increase_amount)
+
+    #: L6
+    # Multiply both sides by 20 to clear denominators: 8p = 5p + 3000
+    # 20 * old_rent_fraction * p = 20 * new_rent_fraction * (p + increase_amount)
+
+    #: L7
+    # Subtract 5p from both sides: 3p = 3000
+
+    #: L8
+    # Divide both sides by 3: p = 1000
+
+    # Implementing the algebraic solution:
+    # old_rent_fraction * p = new_rent_fraction * (p + increase_amount)
+    # old_rent_fraction * p = new_rent_fraction * p + new_rent_fraction * increase_amount
+    # old_rent_fraction * p - new_rent_fraction * p = new_rent_fraction * increase_amount
+    # p * (old_rent_fraction - new_rent_fraction) = new_rent_fraction * increase_amount
+    # p = (new_rent_fraction * increase_amount) / (old_rent_fraction - new_rent_fraction)
+
+    previous_income = (new_rent_fraction * increase_amount) / (old_rent_fraction - new_rent_fraction)
+
+    answer = previous_income  # FINAL ANSWER
+    return answer

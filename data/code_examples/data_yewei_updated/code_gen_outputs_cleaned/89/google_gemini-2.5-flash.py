@@ -1,0 +1,19 @@
+def solve(
+        average_daily_books: int = 40, # an average of 40 books every day
+        friday_increase_percentage: int = 40, # his number of borrowed books is about 40% higher
+        days_open_per_week: int = 5 # the library is open from Monday to Friday
+    ):
+    """Index: 89.
+    Returns: the total number of books Krystian borrows in a week.
+    """
+    #: L1
+    extra_books_friday = average_daily_books * (friday_increase_percentage / 100)
+
+    #: L2
+    average_books_during_week = days_open_per_week * average_daily_books
+
+    #: L3
+    total_books_weekly = average_books_during_week + extra_books_friday
+
+    answer = total_books_weekly # FINAL ANSWER
+    return answer

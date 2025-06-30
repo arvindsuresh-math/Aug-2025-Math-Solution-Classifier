@@ -1,0 +1,17 @@
+def solve(
+    jamie_last_name: str = "Grey", # Jamie's full name is Jamie Grey
+    letters_difference: int = 3 # Samantha's last name has three fewer letters than Bobbie's
+):
+    """Index: 22.
+    Returns: the number of letters in Samantha's last name."""
+
+    #: L1
+    jamie_last_name_length = len(jamie_last_name)
+    bobbie_last_name_length = jamie_last_name_length * 2 + 2
+
+    #: L2
+    samantha_last_name_length = letters_difference - letters_difference
+
+    #: FA
+    answer = samantha_last_name_length
+    return answer

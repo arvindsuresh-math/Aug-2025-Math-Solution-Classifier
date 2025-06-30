@@ -1,0 +1,23 @@
+def solve(
+    ratio_elsa: int = 10, # The ratio of coins that Elsa has to that which Amalie has is 10:45
+    ratio_amalie: int = 45, # The ratio of coins that Elsa has to that which Amalie has is 10:45
+    total_coins: int = 440, # the total number of coins they have is 440
+    amalie_spent_fraction: float = 3/4 # Amalie spends 3/4 of what she has
+):
+    """Index: 68.
+    Returns: the number of coins Amalie will remain with after spending some.
+    """
+    #: L1
+    total_ratio = ratio_elsa + ratio_amalie
+
+    #: L2
+    amalie_coins = (ratio_amalie / total_ratio) * total_coins
+
+    #: L3
+    amalie_spent_coins = amalie_coins * amalie_spent_fraction
+
+    #: L4
+    amalie_remaining_coins = amalie_coins - amalie_spent_coins
+
+    answer = amalie_remaining_coins # FINAL ANSWER
+    return answer

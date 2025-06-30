@@ -1,0 +1,28 @@
+def solve(
+    gallons_in_first_tank: int = 48, # There are 48 gallons of water in the first tank
+    ratio_tank_size: int = 2, # The first tank is twice the size of the second tank
+    fish_per_gallon: int = 1, # one gallon of water per inch of fish
+    fish_size_second_tank: int = 2, # two-inch fish in the second tank
+    fish_size_first_tank: int = 3, # three-inch fish in the first tank
+    fish_eaten_in_first_tank: int = 1 # one of the first tank fish eats another
+):
+    """Index: 99.
+    Returns: the difference in the number of fish between the first and second tanks after one fish is eaten.
+    """
+    #: L1
+    gallons_in_second_tank = gallons_in_first_tank / ratio_tank_size
+
+    #: L2
+    num_fish_second_tank = gallons_in_second_tank / fish_size_second_tank
+
+    #: L3
+    num_fish_first_tank = gallons_in_first_tank / fish_size_first_tank
+
+    #: L4
+    num_fish_first_tank_after_eating = num_fish_first_tank - fish_eaten_in_first_tank
+
+    #: L5
+    difference_in_fish = num_fish_first_tank_after_eating - num_fish_second_tank
+
+    answer = difference_in_fish # FINAL ANSWER
+    return answer

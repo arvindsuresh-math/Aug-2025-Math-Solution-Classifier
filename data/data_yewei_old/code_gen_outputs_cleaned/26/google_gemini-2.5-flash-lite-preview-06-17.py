@@ -1,0 +1,8 @@
+# Calculate the amount of salt in liters
+salt_liters = 2 * 0.20
+
+# Convert liters to milliliters
+salt_ml = salt_liters * 1000
+
+# Print the result
+print(f"Jack will get {salt_ml} ml of salt.")

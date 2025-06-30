@@ -1,0 +1,15 @@
+# Calculate the total number of coins collected
+coins_hour_1 = 15
+coins_hour_2 = 35
+coins_hour_3 = 35
+coins_hour_4 = 50
+
+# Calculate the total coins collected before giving any away
+total_coins_before_giving = coins_hour_1 + coins_hour_2 + coins_hour_3 + coins_hour_4
+
+# Calculate the number of coins after giving some to the coworker
+coins_given_away = 15
+total_coins_after_giving = total_coins_before_giving - coins_given_away
+
+# Print the final answer
+print(total_coins_after_giving)

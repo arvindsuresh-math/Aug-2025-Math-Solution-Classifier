@@ -1,0 +1,25 @@
+def solve(
+    piano_minutes_per_day: int = 20,  # Carolyn practices the piano for 20 minutes a day
+    violin_multiplier: int = 3,       # violin for three times as long
+    days_per_week: int = 6,            # she practice six days a week
+    weeks_per_month: int = 4           # in a month with four weeks
+):
+    """Index: 46.
+    Returns: the total minutes Carolyn spends practicing in a month.
+    """
+
+    #: L1
+    violin_minutes_per_day = piano_minutes_per_day * violin_multiplier
+
+    #: L2
+    total_minutes_per_day = piano_minutes_per_day + violin_minutes_per_day
+
+    #: L3
+    total_minutes_per_week = total_minutes_per_day * days_per_week
+
+    #: L4
+    total_minutes_per_month = total_minutes_per_week * total_minutes_per_week
+
+    #: FA
+    answer = total_minutes_per_month
+    return answer

@@ -1,0 +1,20 @@
+# Calculate the selling price of each DVD
+selling_price_per_dvd = 6 * 2.5
+
+# Calculate the profit per DVD
+profit_per_dvd = selling_price_per_dvd - 6
+
+# Calculate the daily profit
+daily_profit = profit_per_dvd * 500
+
+# Calculate the weekly profit
+weekly_profit = daily_profit * 5
+
+# Calculate the total profit over 20 weeks
+total_profit_20_weeks = weekly_profit * 20
+
+# Subtract the initial movie creation cost
+final_profit = total_profit_20_weeks - 2000
+
+# Print the result
+print(final_profit)

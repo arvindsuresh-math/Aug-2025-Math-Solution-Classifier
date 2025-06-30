@@ -1,0 +1,30 @@
+# Calculate the value of Alice's quarters in dollars
+quarters_value_dollars = 20 * 0.25
+
+# Calculate the number of nickels Alice receives
+# A quarter is worth 25 cents, and a nickel is worth 5 cents.
+# So, 1 quarter = 25 / 5 = 5 nickels.
+number_of_nickels = 20 * 5
+
+# Calculate the number of iron nickels
+iron_nickels_count = int(number_of_nickels * 0.20)
+
+# Calculate the number of regular nickels
+regular_nickels_count = number_of_nickels - iron_nickels_count
+
+# Calculate the value of the iron nickels
+iron_nickels_value = iron_nickels_count * 3
+
+# Calculate the value of the regular nickels
+regular_nickels_value = regular_nickels_count * 0.05
+
+# Calculate the total value of her money
+total_value = iron_nickels_value + regular_nickels_value
+
+print(f"Alice has {quarters_value_dollars} dollars in quarters.")
+print(f"She receives {number_of_nickels} nickels from the bank.")
+print(f"Number of iron nickels: {iron_nickels_count}")
+print(f"Number of regular nickels: {regular_nickels_count}")
+print(f"Value of iron nickels: ${iron_nickels_value}")
+print(f"Value of regular nickels: ${regular_nickels_value}")
+print(f"Total value of her money: ${total_value}")

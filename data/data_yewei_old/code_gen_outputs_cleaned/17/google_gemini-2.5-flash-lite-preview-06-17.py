@@ -1,0 +1,20 @@
+# Calculate the number of pink hard hats remaining after Carl took some.
+pink_hats_after_carl = 26 - 4
+
+# Calculate the number of pink hard hats remaining after John took some.
+pink_hats_remaining = pink_hats_after_carl - 6
+
+# Calculate the number of green hard hats John took.
+green_hats_john_took = 6 * 2
+
+# Calculate the number of green hard hats remaining.
+green_hats_remaining = 15 - green_hats_john_took
+
+# Calculate the total number of pink and green hard hats remaining.
+total_pink_green_remaining = pink_hats_remaining + green_hats_remaining
+
+# Calculate the total number of hard hats remaining in the truck.
+total_hard_hats_remaining = total_pink_green_remaining + 24
+
+# Print the result
+print(total_hard_hats_remaining)
