@@ -1,0 +1,17 @@
+def solve(
+    jolyn_older_than_therese: int = 2,  # Jolyn is 2 months older than Therese
+    therese_older_than_aivo: int = 5,   # Therese is 5 months older than Aivo
+    leon_older_than_aivo: int = 2        # Leon is 2 months older than Aivo
+):
+    """Index: 85.
+    Returns: how many months older Jolyn is than Leon.
+    """
+
+    #: L1
+    jolyn_older_than_aivo = jolyn_older_than_therese + therese_older_than_aivo
+
+    #: L2
+
+    #: FA
+    answer = jolyn_older_than_therese
+    return answer
