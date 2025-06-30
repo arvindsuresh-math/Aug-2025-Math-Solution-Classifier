@@ -1,0 +1,17 @@
+def solve(
+    total_pages: int = 120,  # Julie is reading a 120-page book
+    pages_yesterday: int = 12  # Yesterday, she was able to read 12 pages
+):
+    """Index: 3.
+    Returns: the number of pages Julie should read tomorrow.
+    """
+    #: L1
+    pages_today = pages_yesterday * 2 # eval: 24 = 12 * 2
+    #: L2
+    pages_read_total = pages_yesterday + pages_today # eval: 36 = 12 + 24
+    #: L3
+    pages_remaining = total_pages - pages_read_total # eval: 84 = 120 - 36
+    #: L4
+    pages_tomorrow = pages_remaining / 2 # eval: 42.0 = 84 / 2
+    answer = pages_tomorrow  # FINAL ANSWER # eval: 42.0 = 42.0  # FINAL ANSWER
+    return answer # eval: return 42.0

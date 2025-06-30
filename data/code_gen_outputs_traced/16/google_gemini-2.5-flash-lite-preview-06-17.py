@@ -1,0 +1,17 @@
+def solve(
+    johnson_share: int = 2500, # If Johnson got $2500
+    ratio_mike: int = 2, # Mike and Johnson in the ratio 2:5 respectively
+    ratio_johnson: int = 5, # Mike and Johnson in the ratio 2:5 respectively
+    shirt_cost: int = 200 # a shirt that costs $200
+):
+    """Index: 16.
+    Returns: the amount of money Mike will have left after buying a shirt.
+    """
+    #: L2
+    value_per_part = johnson_share / ratio_johnson # eval: 500.0 = 2500 / 5
+    #: L3
+    mike_share = ratio_mike * value_per_part # eval: 1000.0 = 2 * 500.0
+    #: L4
+    mike_remaining_share = mike_share - shirt_cost # eval: 800.0 = 1000.0 - 200
+    answer = mike_remaining_share # FINAL ANSWER # eval: 800.0 = 800.0 # FINAL ANSWER
+    return answer # eval: return 800.0
