@@ -17,5 +17,6 @@ def solve(
     #: L3
     money_made = total_gallons_collected * price_per_gallon
 
-    answer = money_made # FINAL ANSWER
+    #: FA
+    answer = money_made
     return answer

@@ -20,5 +20,6 @@ def solve(
     #: L4
     chores_per_month = monthly_savings_goal / chore_charge
 
-    answer = chores_per_month  # FINAL ANSWER
+    #: FA
+    answer = chores_per_month
     return answer

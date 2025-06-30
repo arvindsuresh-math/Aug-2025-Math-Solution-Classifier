@@ -8,13 +8,18 @@ def solve(
     """Index: 25.
     Returns: the total number of tennis balls Ralph did not hit.
     """
+
     #: L1
     first_batch_not_hit_fraction = 1 - first_batch_hit_fraction # eval: 0.6 = 1 - 0.4
     first_batch_not_hit_count = first_batch_not_hit_fraction * first_batch_count # eval: 60.0 = 0.6 * 100
+
     #: L2
     second_batch_not_hit_fraction = 1 - second_batch_hit_fraction # eval: 0.6666666666666667 = 1 - 0.3333333333333333
     second_batch_not_hit_count = second_batch_not_hit_fraction * second_batch_count # eval: 50.00000000000001 = 0.6666666666666667 * 75
+
     #: L3
     total_not_hit = first_batch_not_hit_count + second_batch_not_hit_count # eval: 110.0 = 60.0 + 50.00000000000001
-    answer = total_not_hit # FINAL ANSWER # eval: 110.0 = 110.0 # FINAL ANSWER
+
+    #: FA
+    answer = total_not_hit # eval: 110.0 = 110.0
     return answer # eval: return 110.0

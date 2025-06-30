@@ -7,7 +7,10 @@ def solve(
 ):
     """Index: 97.
     Returns: the total number of books on the cart when Nancy started shelving."""
+
     #: L1
     mystery_books = western_novels + biography_books # eval: 11 = 5 + 6
-    answer = history_books + romance_books + poetry_books + mystery_books + western_novels + biography_books  # FINAL ANSWER # eval: 46 = 12 + 8 + 4 + 11 + 5 + 6  # FINAL ANSWER
+
+    #: FA
+    answer = history_books + romance_books + poetry_books + mystery_books + western_novels + biography_books # eval: 46 = 12 + 8 + 4 + 11 + 5 + 6
     return answer # eval: return 46

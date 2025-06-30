@@ -32,5 +32,6 @@ def solve(
     #: L8
     average_miles_per_day = total_miles_per_day / 2
 
-    answer = average_miles_per_day  # FINAL ANSWER
+    #: FA
+    answer = average_miles_per_day
     return answer

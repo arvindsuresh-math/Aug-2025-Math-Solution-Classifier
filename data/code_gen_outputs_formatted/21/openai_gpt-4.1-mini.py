@@ -17,5 +17,6 @@ def solve(
     #: L3
     total_beetles_eaten = total_birds_eaten * beetles_per_bird
 
-    answer = total_beetles_eaten  # FINAL ANSWER
+    #: FA
+    answer = total_beetles_eaten
     return answer

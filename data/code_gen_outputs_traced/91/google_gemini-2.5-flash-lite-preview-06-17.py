@@ -7,11 +7,16 @@ def solve(
     """Index: 91.
     Returns: John's hourly rate if he decides to earn the bonus.
     """
+
     #: L1
     total_hours_with_bonus = base_hours_per_day + extra_hours_for_bonus # eval: 10 = 8 + 2
+
     #: L2
     total_daily_pay_with_bonus = base_daily_pay + bonus_pay_per_day # eval: 100 = 80 + 20
+
     #: L3
     hourly_rate_with_bonus = total_daily_pay_with_bonus / total_hours_with_bonus # eval: 10.0 = 100 / 10
-    answer = hourly_rate_with_bonus # FINAL ANSWER # eval: 10.0 = 10.0 # FINAL ANSWER
+
+    #: FA
+    answer = hourly_rate_with_bonus # eval: 10.0 = 10.0
     return answer # eval: return 10.0

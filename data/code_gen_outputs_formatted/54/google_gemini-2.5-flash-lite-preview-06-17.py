@@ -20,5 +20,6 @@ def solve(
     #: L4
     money_lost = money_in_wallet - money_left_after_shredding
 
-    answer = money_lost # FINAL ANSWER
+    #: FA
+    answer = money_lost
     return answer

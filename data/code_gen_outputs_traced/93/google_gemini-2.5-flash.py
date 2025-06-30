@@ -7,13 +7,19 @@ def solve(
     """Index: 93.
     Returns: the total cost of all food ordered.
     """
+
     #: L1
     cost_beef = beef_price_per_pound * beef_pounds # eval: 8000 = 8 * 1000
+
     #: L2
     chicken_pounds = beef_pounds * chicken_quantity_multiplier # eval: 2000 = 1000 * 2
+
     #: L3
     cost_chicken = chicken_pounds * chicken_price_per_pound # eval: 6000 = 2000 * 3
+
     #: L4
     total_cost = cost_beef + cost_chicken # eval: 14000 = 8000 + 6000
-    answer = total_cost # FINAL ANSWER # eval: 14000 = 14000 # FINAL ANSWER
+
+    #: FA
+    answer = total_cost # eval: 14000 = 14000
     return answer # eval: return 14000

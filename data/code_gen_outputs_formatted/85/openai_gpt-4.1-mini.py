@@ -13,5 +13,6 @@ def solve(
     #: L2
     jolyn_older_than_leon = jolyn_older_than_aivo - leon_older_than_aivo
 
-    answer = jolyn_older_than_leon  # FINAL ANSWER
+    #: FA
+    answer = jolyn_older_than_leon
     return answer

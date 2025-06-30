@@ -7,15 +7,22 @@ def solve(
     """Index: 92.
     Returns: the total amount of money Sally and Bob will have saved for their trip after a year.
     """
+
     #: L1
     sally_saved_per_day = sally_daily_wage * fraction_saved # eval: 3.0 = 6 * 0.5
+
     #: L2
     sally_total_saved = sally_saved_per_day * days_in_year # eval: 1095.0 = 3.0 * 365
+
     #: L3
     bob_saved_per_day = bob_daily_wage * fraction_saved # eval: 2.0 = 4 * 0.5
+
     #: L4
     bob_total_saved = bob_saved_per_day * days_in_year # eval: 730.0 = 2.0 * 365
+
     #: L5
     total_saved = sally_total_saved + bob_total_saved # eval: 1825.0 = 1095.0 + 730.0
-    answer = total_saved # FINAL ANSWER # eval: 1825.0 = 1825.0 # FINAL ANSWER
+
+    #: FA
+    answer = total_saved # eval: 1825.0 = 1825.0
     return answer # eval: return 1825.0

@@ -12,5 +12,6 @@ def solve(
     #: L3
     total_sales = last_year_sales + previous_year_sales
 
-    answer = total_sales # FINAL ANSWER
+    #: FA
+    answer = total_sales
     return answer

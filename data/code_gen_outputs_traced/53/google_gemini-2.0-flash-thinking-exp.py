@@ -7,11 +7,16 @@ def solve(
     """Index: 53.
     Returns: the difference in cost between ice cream and frozen yoghurt.
     """
+
     #: L1
     cost_ice_cream = num_ice_cream_cartons * cost_per_ice_cream_carton # eval: 40 = 10 * 4
+
     #: L2
     cost_frozen_yoghurt = num_frozen_yoghurt_cartons * cost_per_frozen_yoghurt_carton # eval: 4 = 4 * 1
+
     #: L3
     difference_in_cost = cost_ice_cream - cost_frozen_yoghurt # eval: 36 = 40 - 4
-    answer = difference_in_cost # FINAL ANSWER # eval: 36 = 36 # FINAL ANSWER
+
+    #: FA
+    answer = difference_in_cost # eval: 36 = 36
     return answer # eval: return 36

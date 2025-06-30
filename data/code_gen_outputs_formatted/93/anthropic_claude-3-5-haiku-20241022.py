@@ -20,5 +20,6 @@ def solve(
     #: L4
     total_cost = beef_cost + chicken_cost
 
-    answer = total_cost  # FINAL ANSWER
+    #: FA
+    answer = total_cost
     return answer

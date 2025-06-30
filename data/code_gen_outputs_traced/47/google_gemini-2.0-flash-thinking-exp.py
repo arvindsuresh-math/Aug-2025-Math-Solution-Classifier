@@ -7,13 +7,19 @@ def solve(
     """Index: 47.
     Returns: the total time in seconds to download the file.
     """
+
     #: L1
     time_first_part = size_first_part_mb / rate_first_part_mbps # eval: 12.0 = 60 / 5
+
     #: L2
     remaining_size_mb = total_size_mb - size_first_part_mb # eval: 30 = 90 - 60
+
     #: L3
     time_second_part = remaining_size_mb / rate_second_part_mbps # eval: 3.0 = 30 / 10
+
     #: L4
     total_time = time_first_part + time_second_part # eval: 15.0 = 12.0 + 3.0
-    answer = total_time # FINAL ANSWER # eval: 15.0 = 15.0 # FINAL ANSWER
+
+    #: FA
+    answer = total_time # eval: 15.0 = 15.0
     return answer # eval: return 15.0

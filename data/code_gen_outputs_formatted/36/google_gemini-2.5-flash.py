@@ -16,5 +16,6 @@ def solve(
     #: L3
     difference_lisa_tommy = lisa_earnings - tommy_earnings
 
-    answer = difference_lisa_tommy # FINAL ANSWER
+    #: FA
+    answer = difference_lisa_tommy
     return answer

@@ -23,5 +23,6 @@ def solve(
     #: L5
     total_daily_allowance = total_allowance_high + total_allowance_low
 
-    answer = total_daily_allowance # FINAL ANSWER
+    #: FA
+    answer = total_daily_allowance
     return answer

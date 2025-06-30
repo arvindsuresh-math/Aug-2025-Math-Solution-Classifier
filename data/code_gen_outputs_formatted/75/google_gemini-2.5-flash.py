@@ -25,5 +25,6 @@ def solve(
     #: L5
     total_breakfast_cost = cost_dale_toast + cost_andrew_toast + cost_dale_eggs + cost_andrew_eggs
 
-    answer = total_breakfast_cost # FINAL ANSWER
+    #: FA
+    answer = total_breakfast_cost
     return answer

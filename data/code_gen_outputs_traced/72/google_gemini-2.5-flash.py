@@ -9,13 +9,19 @@ def solve(
     """Index: 72.
     Returns: the final volume of water in the aquarium in cubic feet.
     """
+
     #: L1
     volume_aquarium = length_ft * width_ft * height_ft # eval: 72 = 4 * 6 * 3
+
     #: L2
     proportion_after_spill = initial_fill_fraction * (1 - fraction_spilled) # eval: 0.25 = 0.5 * (1 - 0.5)
+
     #: L3
     proportion_after_triple = proportion_after_spill * tripling_factor # eval: 0.75 = 0.25 * 3
+
     #: L4
     final_water_volume = volume_aquarium * proportion_after_triple # eval: 54.0 = 72 * 0.75
-    answer = final_water_volume  # FINAL ANSWER # eval: 54.0 = 54.0  # FINAL ANSWER
+
+    #: FA
+    answer = final_water_volume # eval: 54.0 = 54.0
     return answer # eval: return 54.0

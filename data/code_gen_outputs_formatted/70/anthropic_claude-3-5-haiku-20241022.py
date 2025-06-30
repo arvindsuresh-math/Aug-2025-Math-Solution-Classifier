@@ -11,5 +11,6 @@ def solve(
     #: L2
     harry_apples = tim_apples / 2
 
-    answer = harry_apples  # FINAL ANSWER
+    #: FA
+    answer = harry_apples
     return answer

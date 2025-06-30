@@ -13,5 +13,6 @@ def solve(
     #: L2
     final_weight_kg = initial_weight_kg - total_weight_loss_kg
 
-    answer = final_weight_kg # FINAL ANSWER
+    #: FA
+    answer = final_weight_kg
     return answer

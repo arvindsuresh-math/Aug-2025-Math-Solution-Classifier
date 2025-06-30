@@ -12,5 +12,6 @@ def solve(
     #: L2
     students_b_and_above = total_students * percentage_b_and_above
 
-    answer = students_b_and_above # FINAL ANSWER
+    #: FA
+    answer = students_b_and_above
     return answer

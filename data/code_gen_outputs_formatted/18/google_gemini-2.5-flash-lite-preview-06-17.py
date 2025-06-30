@@ -23,5 +23,6 @@ def solve(
     #: L5
     total_hours = walk_hours_round_trip + bike_hours_round_trip
 
-    answer = total_hours # FINAL ANSWER
+    #: FA
+    answer = total_hours
     return answer

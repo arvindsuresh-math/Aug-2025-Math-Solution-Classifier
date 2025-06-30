@@ -14,5 +14,6 @@ def solve(
     #: L2
     small_pizza_slices = num_small_pizzas * slices_small_pizza
 
-    answer = large_pizza_slices + small_pizza_slices  # FINAL ANSWER
+    #: FA
+    answer = large_pizza_slices + small_pizza_slices
     return answer

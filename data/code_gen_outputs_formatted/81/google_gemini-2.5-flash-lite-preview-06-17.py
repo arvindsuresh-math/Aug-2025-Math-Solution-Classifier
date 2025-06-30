@@ -27,5 +27,6 @@ def solve(
     #: L6
     jeff_avg_skips = jeff_total_skips / 4
 
-    answer = jeff_avg_skips # FINAL ANSWER
+    #: FA
+    answer = jeff_avg_skips
     return answer

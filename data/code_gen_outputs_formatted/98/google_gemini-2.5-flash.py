@@ -15,5 +15,6 @@ def solve(
     #: L3
     total_gumballs_purchased = gumballs_given_to_todd + gumballs_given_to_alisha + gumballs_given_to_bobby + gumballs_remaining
 
-    answer = total_gumballs_purchased # FINAL ANSWER
+    #: FA
+    answer = total_gumballs_purchased
     return answer

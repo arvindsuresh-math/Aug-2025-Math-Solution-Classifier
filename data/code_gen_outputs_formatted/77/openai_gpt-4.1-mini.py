@@ -13,5 +13,6 @@ def solve(
     #: L2
     weight_on_fight_day = current_weight - total_weight_loss
 
-    answer = weight_on_fight_day  # FINAL ANSWER
+    #: FA
+    answer = weight_on_fight_day
     return answer

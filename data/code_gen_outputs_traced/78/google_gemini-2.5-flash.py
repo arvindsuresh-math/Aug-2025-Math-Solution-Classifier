@@ -10,11 +10,16 @@ def solve(
     """Index: 78.
     Returns: the number of cookie slices left after everyone has had one piece.
     """
+
     #: L1
     total_cookie_slices = num_cookie_pies * num_slices_per_pie # eval: 30 = 3 * 10
+
     #: L2
     total_people_who_ate = num_classmates + num_teacher + manny_pieces # eval: 26 = 24 + 1 + 1
+
     #: L3
     slices_left = total_cookie_slices - total_people_who_ate # eval: 4 = 30 - 26
-    answer = slices_left # FINAL ANSWER # eval: 4 = 4 # FINAL ANSWER
+
+    #: FA
+    answer = slices_left # eval: 4 = 4
     return answer # eval: return 4

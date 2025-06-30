@@ -18,5 +18,6 @@ def solve(
     #: L3
     total_not_hit = not_hit_first + not_hit_second
 
-    answer = total_not_hit  # FINAL ANSWER
+    #: FA
+    answer = total_not_hit
     return answer

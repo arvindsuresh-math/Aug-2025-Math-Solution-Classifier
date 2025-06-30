@@ -17,5 +17,6 @@ def solve(
     #: L3
     difference_in_candy = anna_total_candy - billy_total_candy
 
-    answer = difference_in_candy # FINAL ANSWER
+    #: FA
+    answer = difference_in_candy
     return answer

@@ -11,5 +11,6 @@ def solve(
     #: L5
     first_ship_people = total_people / total_ships_factor
 
-    answer = first_ship_people  # FINAL ANSWER
+    #: FA
+    answer = first_ship_people
     return answer

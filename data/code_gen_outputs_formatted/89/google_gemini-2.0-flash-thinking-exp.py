@@ -16,5 +16,6 @@ def solve(
     #: L3
     total_borrowed_week = total_borrowed_avg + friday_increase_books
 
-    answer = total_borrowed_week # FINAL ANSWER
+    #: FA
+    answer = total_borrowed_week
     return answer

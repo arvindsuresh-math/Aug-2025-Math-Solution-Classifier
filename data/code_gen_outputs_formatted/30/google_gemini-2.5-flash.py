@@ -23,5 +23,6 @@ def solve(
     #: L5
     uneaten_pizza_pieces = total_pizza_pieces - total_pieces_eaten
 
-    answer = uneaten_pizza_pieces # FINAL ANSWER
+    #: FA
+    answer = uneaten_pizza_pieces
     return answer

@@ -18,5 +18,6 @@ def solve(
     #: L4
     pages_tomorrow = pages_remaining / 2
 
-    answer = pages_tomorrow  # FINAL ANSWER
+    #: FA
+    answer = pages_tomorrow
     return answer

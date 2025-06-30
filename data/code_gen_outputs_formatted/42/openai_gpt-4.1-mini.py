@@ -25,5 +25,6 @@ def solve(
     #: L5
     bananas_per_monkey = total_bananas / num_monkeys
 
-    answer = bananas_per_monkey  # FINAL ANSWER
+    #: FA
+    answer = bananas_per_monkey
     return answer

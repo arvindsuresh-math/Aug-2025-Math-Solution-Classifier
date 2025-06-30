@@ -17,5 +17,6 @@ def solve(
     #: L3
     hourly_rate_with_bonus = total_daily_pay_with_bonus / total_work_hours_with_bonus
 
-    answer = hourly_rate_with_bonus # FINAL ANSWER
+    #: FA
+    answer = hourly_rate_with_bonus
     return answer

@@ -9,13 +9,19 @@ def solve(
     """Index: 51.
     Returns: the amount of fabric left in square feet.
     """
+
     #: L1
     original_bolt_area = bolt_length * bolt_width # eval: 192 = 16 * 12
+
     #: L2
     living_room_area = living_room_length * living_room_width # eval: 24 = 4 * 6
+
     #: L3
     bedroom_area = bedroom_length * bedroom_width # eval: 8 = 2 * 4
+
     #: L4
     fabric_left = original_bolt_area - living_room_area - bedroom_area # eval: 160 = 192 - 24 - 8
-    answer = fabric_left # FINAL ANSWER # eval: 160 = 160 # FINAL ANSWER
+
+    #: FA
+    answer = fabric_left # eval: 160 = 160
     return answer # eval: return 160

@@ -22,5 +22,6 @@ def solve(
     #: L5
     small_animals_weight = remaining_weight - salmon_weight
 
-    answer = small_animals_weight  # FINAL ANSWER
+    #: FA
+    answer = small_animals_weight
     return answer

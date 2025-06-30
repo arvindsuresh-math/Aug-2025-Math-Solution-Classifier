@@ -7,15 +7,22 @@ def solve(
     """Index: 27.
     Returns: the number of valuable files Brennan was left with after deleting unrelated files from the second round.
     """
+
     #: L1
     non_valuable_first_round = (percent_deleted_first_round / 100) * initial_files # eval: 560.0 = (70 / 100) * 800
+
     #: L2
     valuable_first_round = initial_files - non_valuable_first_round # eval: 240.0 = 800 - 560.0
+
     #: L3
     non_valuable_second_round = fraction_irrelevant_second_round * second_round_files # eval: 240.0 = 0.6 * 400
+
     #: L4
     valuable_second_round = second_round_files - non_valuable_second_round # eval: 160.0 = 400 - 240.0
+
     #: L5
     total_valuable_files = valuable_first_round + valuable_second_round # eval: 400.0 = 240.0 + 160.0
-    answer = total_valuable_files  # FINAL ANSWER # eval: 400.0 = 400.0  # FINAL ANSWER
+
+    #: FA
+    answer = total_valuable_files # eval: 400.0 = 400.0
     return answer # eval: return 400.0

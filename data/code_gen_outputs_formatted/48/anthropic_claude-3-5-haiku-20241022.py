@@ -11,5 +11,6 @@ def solve(
     #: L2
     sam_digits = carlos_digits + difference_from_carlos
 
-    answer = sam_digits  # FINAL ANSWER
+    #: FA
+    answer = sam_digits
     return answer

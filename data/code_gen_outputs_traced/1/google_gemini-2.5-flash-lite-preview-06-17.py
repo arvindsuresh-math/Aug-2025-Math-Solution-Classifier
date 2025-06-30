@@ -5,9 +5,13 @@ def solve(
     """Index: 1.
     Returns: the amount Weng earned.
     """
+
     #: L1
     wage_per_minute = hourly_wage / 60 # eval: 0.2 = 12 / 60
+
     #: L2
     total_earned = wage_per_minute * minutes_worked # eval: 10.0 = 0.2 * 50
-    answer = total_earned # FINAL ANSWER # eval: 10.0 = 10.0 # FINAL ANSWER
+
+    #: FA
+    answer = total_earned # eval: 10.0 = 10.0
     return answer # eval: return 10.0

@@ -8,19 +8,28 @@ def solve(
     """
     quarter_value = 0.25 # eval: 0.25 = 0.25
     nickel_value = 0.05 # eval: 0.05 = 0.05
+
     #: L1
     nickels_per_quarter = quarter_value / nickel_value # eval: 5.0 = 0.25 / 0.05
+
     #: L2
     total_nickels = num_quarters * nickels_per_quarter # eval: 100.0 = 20 * 5.0
+
     #: L3
     num_iron_nickels = total_nickels * iron_nickel_percentage # eval: 20.0 = 100.0 * 0.2
+
     #: L4
     num_regular_nickels = total_nickels - num_iron_nickels # eval: 80.0 = 100.0 - 20.0
+
     #: L5
     value_iron_nickels = num_iron_nickels * iron_nickel_value # eval: 60.0 = 20.0 * 3
+
     #: L6
     value_regular_nickels = num_regular_nickels * nickel_value # eval: 4.0 = 80.0 * 0.05
+
     #: L7
     total_value = value_iron_nickels + value_regular_nickels # eval: 64.0 = 60.0 + 4.0
-    answer = total_value # FINAL ANSWER # eval: 64.0 = 64.0 # FINAL ANSWER
+
+    #: FA
+    answer = total_value # eval: 64.0 = 64.0
     return answer # eval: return 64.0

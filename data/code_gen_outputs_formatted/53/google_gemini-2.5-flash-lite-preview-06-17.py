@@ -17,5 +17,6 @@ def solve(
     #: L3
     difference_in_cost = cost_ice_cream - cost_yogurt
 
-    answer = difference_in_cost # FINAL ANSWER
+    #: FA
+    answer = difference_in_cost
     return answer

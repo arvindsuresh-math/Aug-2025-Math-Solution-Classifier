@@ -17,5 +17,6 @@ def solve(
     #: L3
     money_needed = wallet_cost - initial_money - parents_gift - grandparents_gift
 
-    answer = money_needed # FINAL ANSWER
+    #: FA
+    answer = money_needed
     return answer

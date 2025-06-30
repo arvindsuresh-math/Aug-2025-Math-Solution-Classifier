@@ -11,5 +11,6 @@ def solve(
     #: L2
     total_amount = ken_amount + tony_amount
 
-    answer = total_amount  # FINAL ANSWER
+    #: FA
+    answer = total_amount
     return answer

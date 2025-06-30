@@ -19,5 +19,6 @@ def solve(
     #: L4
     money_lost = money_in_wallet - money_left_unshredded
 
-    answer = money_lost  # FINAL ANSWER
+    #: FA
+    answer = money_lost
     return answer

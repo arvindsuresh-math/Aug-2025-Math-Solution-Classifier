@@ -6,9 +6,13 @@ def solve(
     """Index: 26.
     Returns: the amount of salt in ml.
     """
+
     #: L1
     liters_of_salt = seawater_liters * (salt_percentage * 0.01) # eval: 0.4 = 2 * (20 * 0.01)
+
     #: L2
     ml_of_salt = liters_of_salt * ml_per_liter # eval: 400.0 = 0.4 * 1000
-    answer = ml_of_salt # FINAL ANSWER # eval: 400.0 = 400.0 # FINAL ANSWER
+
+    #: FA
+    answer = ml_of_salt # eval: 400.0 = 400.0
     return answer # eval: return 400.0

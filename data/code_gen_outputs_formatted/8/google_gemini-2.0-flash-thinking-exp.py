@@ -20,5 +20,6 @@ def solve(
     #: L4
     shoes_cost = total_spent - known_expenses
 
-    answer = shoes_cost # FINAL ANSWER
+    #: FA
+    answer = shoes_cost
     return answer

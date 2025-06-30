@@ -18,5 +18,6 @@ def solve(
     #: L8
     previous_income = rhs_constant_step_6 / lhs_step_7
 
-    answer = previous_income # FINAL ANSWER
+    #: FA
+    answer = previous_income
     return answer

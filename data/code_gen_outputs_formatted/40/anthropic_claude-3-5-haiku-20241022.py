@@ -26,5 +26,6 @@ def solve(
     #: L6
     total_cost = total_regular_tickets_cost + total_discounted_tickets_cost
 
-    answer = total_cost  # FINAL ANSWER
+    #: FA
+    answer = total_cost
     return answer

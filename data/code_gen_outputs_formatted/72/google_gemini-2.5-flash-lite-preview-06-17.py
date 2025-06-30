@@ -22,5 +22,6 @@ def solve(
     #: L4
     water_volume = aquarium_volume * final_proportion
 
-    answer = water_volume # FINAL ANSWER
+    #: FA
+    answer = water_volume
     return answer

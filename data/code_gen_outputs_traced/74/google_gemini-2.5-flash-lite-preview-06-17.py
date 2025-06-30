@@ -7,11 +7,16 @@ def solve(
     """Index: 74.
     Returns: the amount of weight lost by each of the last two people.
     """
+
     #: L1
     person2_lost = person1_lost - person2_weight_difference # eval: 20 = 27 - 7
+
     #: L2
     weight_lost_by_last_two = total_weight_lost - person1_lost - person2_lost # eval: 56 = 103 - 27 - 20
+
     #: L3
     weight_lost_per_person_last_two = weight_lost_by_last_two / (num_people - 2) # eval: 28.0 = 56 / (4 - 2)
-    answer = weight_lost_per_person_last_two # FINAL ANSWER # eval: 28.0 = 28.0 # FINAL ANSWER
+
+    #: FA
+    answer = weight_lost_per_person_last_two # eval: 28.0 = 28.0
     return answer # eval: return 28.0

@@ -7,11 +7,16 @@ def solve(
     """Index: 13.
     Returns: the total amount spent on ingredients.
     """
+
     #: L1
     cost_cream_cheese = cost_cheddar_total / cream_cheese_price_divisor # eval: 5.0 = 10 / 2
+
     #: L2
     cost_cold_cuts = cost_cheddar_total * cold_cuts_price_multiplier # eval: 20 = 10 * 2
+
     #: L3
     total_spent = cost_cheddar_total + cost_cream_cheese + cost_cold_cuts # eval: 35.0 = 10 + 5.0 + 20
-    answer = total_spent # FINAL ANSWER # eval: 35.0 = 35.0 # FINAL ANSWER
+
+    #: FA
+    answer = total_spent # eval: 35.0 = 35.0
     return answer # eval: return 35.0

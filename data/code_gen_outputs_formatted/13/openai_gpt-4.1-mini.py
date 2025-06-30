@@ -17,5 +17,6 @@ def solve(
     #: L3
     total_spent = cheddar_cost + cream_cheese_cost + cold_cuts_cost
 
-    answer = total_spent  # FINAL ANSWER
+    #: FA
+    answer = total_spent
     return answer

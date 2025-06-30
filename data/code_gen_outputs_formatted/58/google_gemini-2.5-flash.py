@@ -23,5 +23,6 @@ def solve(
     #: L5
     total_daily_amount = sum_allowance_group1 + sum_allowance_group2
 
-    answer = total_daily_amount # FINAL ANSWER
+    #: FA
+    answer = total_daily_amount
     return answer

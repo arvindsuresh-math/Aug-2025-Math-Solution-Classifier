@@ -4,9 +4,13 @@ def solve(
 ):
     """Index: 34.
     Returns: the total amount of money shared between Ken and Tony."""
+
     #: L1
     tony_amount = ken_amount * tony_multiplier # eval: 3500 = 1750 * 2
+
     #: L2
     total_amount = ken_amount + tony_amount # eval: 5250 = 1750 + 3500
-    answer = total_amount  # FINAL ANSWER # eval: 5250 = 5250  # FINAL ANSWER
+
+    #: FA
+    answer = total_amount # eval: 5250 = 5250
     return answer # eval: return 5250

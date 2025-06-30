@@ -11,5 +11,6 @@ def solve(
     #: L2
     total_clips_sold = clips_sold_april + clips_sold_may
 
-    answer = total_clips_sold # FINAL ANSWER
+    #: FA
+    answer = total_clips_sold
     return answer

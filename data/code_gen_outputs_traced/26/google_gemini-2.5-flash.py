@@ -5,9 +5,13 @@ def solve(
     """Index: 26.
     Returns: the amount of salt in milliliters Jack will get when all the water evaporates.
     """
+
     #: L1
     liters_of_salt = seawater_liters * salt_percentage # eval: 0.4 = 2 * 0.2
+
     #: L2
     ml_of_salt = liters_of_salt * 1000 # eval: 400.0 = 0.4 * 1000
-    answer = ml_of_salt # FINAL ANSWER # eval: 400.0 = 400.0 # FINAL ANSWER
+
+    #: FA
+    answer = ml_of_salt # eval: 400.0 = 400.0
     return answer # eval: return 400.0

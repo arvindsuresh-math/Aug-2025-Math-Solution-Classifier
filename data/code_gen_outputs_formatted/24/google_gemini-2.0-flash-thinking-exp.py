@@ -13,5 +13,6 @@ def solve(
     #: L2
     remaining_credit = credit_limit - total_paid
 
-    answer = remaining_credit # FINAL ANSWER
+    #: FA
+    answer = remaining_credit
     return answer

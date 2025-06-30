@@ -15,5 +15,6 @@ def solve(
     #: L3
     hours_needed = total_pages / pages_per_hour
 
-    answer = hours_needed  # FINAL ANSWER
+    #: FA
+    answer = hours_needed
     return answer

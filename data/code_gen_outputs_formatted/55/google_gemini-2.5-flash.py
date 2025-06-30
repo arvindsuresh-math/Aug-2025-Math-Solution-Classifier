@@ -16,5 +16,6 @@ def solve(
     #: L3
     percentage_not_roses = (flowers_not_roses / total_flowers) * 100
 
-    answer = percentage_not_roses # FINAL ANSWER
+    #: FA
+    answer = percentage_not_roses
     return answer

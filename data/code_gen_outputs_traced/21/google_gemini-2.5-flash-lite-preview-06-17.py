@@ -7,11 +7,16 @@ def solve(
     """Index: 21.
     Returns: the total number of beetles eaten each day.
     """
+
     #: L1
     total_snakes_eaten = snakes_per_jaguar * num_jaguars # eval: 30 = 5 * 6
+
     #: L2
     total_birds_eaten = birds_per_snake * total_snakes_eaten # eval: 90 = 3 * 30
+
     #: L3
     total_beetles_eaten = beetles_per_bird * total_birds_eaten # eval: 1080 = 12 * 90
-    answer = total_beetles_eaten # FINAL ANSWER # eval: 1080 = 1080 # FINAL ANSWER
+
+    #: FA
+    answer = total_beetles_eaten # eval: 1080 = 1080
     return answer # eval: return 1080

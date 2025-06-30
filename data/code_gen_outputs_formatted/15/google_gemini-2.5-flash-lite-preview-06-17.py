@@ -28,5 +28,6 @@ def solve(
     #: L6
     total_profit = total_profit_from_dvds - movie_creation_cost
 
-    answer = total_profit # FINAL ANSWER
+    #: FA
+    answer = total_profit
     return answer

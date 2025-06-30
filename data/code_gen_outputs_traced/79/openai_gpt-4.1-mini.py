@@ -5,9 +5,13 @@ def solve(
     """Index: 79.
     Returns: the combined years of teaching experience of James and his partner.
     """
+
     #: L1
     partner_years = james_years - years_less_partner # eval: 30 = 40 - 10
+
     #: L2
     combined_experience = james_years + partner_years # eval: 70 = 40 + 30
-    answer = combined_experience  # FINAL ANSWER # eval: 70 = 70  # FINAL ANSWER
+
+    #: FA
+    answer = combined_experience # eval: 70 = 70
     return answer # eval: return 70

@@ -9,17 +9,25 @@ def solve(
     """Index: 15.
     Returns: the total profit made over the specified number of weeks.
     """
+
     #: L1
     dvd_selling_price = dvd_production_cost * selling_price_multiplier # eval: 15.0 = 6 * 2.5
+
     #: L2
     profit_per_dvd = dvd_selling_price - dvd_production_cost # eval: 9.0 = 15.0 - 6
+
     #: L3
     daily_profit = profit_per_dvd * movies_sold_per_day # eval: 4500.0 = 9.0 * 500
+
     #: L4
     weekly_profit = daily_profit * days_sold_per_week # eval: 22500.0 = 4500.0 * 5
+
     #: L5
     total_profit_before_cost = weekly_profit * number_of_weeks # eval: 450000.0 = 22500.0 * 20
+
     #: L6
     total_profit_after_cost = total_profit_before_cost - movie_creation_cost # eval: 448000.0 = 450000.0 - 2000
-    answer = total_profit_after_cost # FINAL ANSWER # eval: 448000.0 = 448000.0 # FINAL ANSWER
+
+    #: FA
+    answer = total_profit_after_cost # eval: 448000.0 = 448000.0
     return answer # eval: return 448000.0

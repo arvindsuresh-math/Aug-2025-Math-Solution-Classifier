@@ -12,5 +12,6 @@ def solve(
     #: L2
     days_to_complete = total_pages / pages_per_day
 
-    answer = days_to_complete  # FINAL ANSWER
+    #: FA
+    answer = days_to_complete
     return answer

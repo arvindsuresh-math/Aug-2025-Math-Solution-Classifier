@@ -9,17 +9,25 @@ def solve(
     """Index: 15.
     Returns: the total profit James makes from selling DVDs over 20 weeks.
     """
+
     #: L1
     selling_price = dvd_production_cost * markup_multiplier # eval: 15.0 = 6 * 2.5
+
     #: L2
     profit_per_dvd = selling_price - dvd_production_cost # eval: 9.0 = 15.0 - 6
+
     #: L3
     daily_profit = profit_per_dvd * daily_sales # eval: 4500.0 = 9.0 * 500
+
     #: L4
     weekly_profit = daily_profit * days_per_week # eval: 22500.0 = 4500.0 * 5
+
     #: L5
     total_revenue = weekly_profit * total_weeks # eval: 450000.0 = 22500.0 * 20
+
     #: L6
     final_profit = total_revenue - movie_creation_cost # eval: 448000.0 = 450000.0 - 2000
-    answer = final_profit  # FINAL ANSWER # eval: 448000.0 = 448000.0  # FINAL ANSWER
+
+    #: FA
+    answer = final_profit # eval: 448000.0 = 448000.0
     return answer # eval: return 448000.0

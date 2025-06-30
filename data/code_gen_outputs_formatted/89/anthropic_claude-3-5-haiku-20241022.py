@@ -15,5 +15,6 @@ def solve(
     #: L3
     total_books_in_week = total_books_regular_days + friday_extra_books
 
-    answer = total_books_in_week  # FINAL ANSWER
+    #: FA
+    answer = total_books_in_week
     return answer

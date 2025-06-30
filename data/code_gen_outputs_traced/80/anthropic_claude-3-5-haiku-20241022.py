@@ -7,11 +7,16 @@ def solve(
     """Index: 80.
     Returns: the total number of milk cans Jennifer brought home from the store.
     """
+
     #: L1
     times_jennifer_added_cans = mark_cans / mark_cans_ratio # eval: 10.0 = 50 / 5
+
     #: L2
     additional_cans = times_jennifer_added_cans * jennifer_additional_cans_per_mark_cans # eval: 60.0 = 10.0 * 6
+
     #: L3
     total_cans = initial_cans + additional_cans # eval: 100.0 = 40 + 60.0
-    answer = total_cans  # FINAL ANSWER # eval: 100.0 = 100.0  # FINAL ANSWER
+
+    #: FA
+    answer = total_cans # eval: 100.0 = 100.0
     return answer # eval: return 100.0

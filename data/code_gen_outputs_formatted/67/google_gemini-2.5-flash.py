@@ -35,5 +35,6 @@ def solve(
     #: L8
     average_of_their_averages = total_avg_both / 2
 
-    answer = average_of_their_averages # FINAL ANSWER
+    #: FA
+    answer = average_of_their_averages
     return answer

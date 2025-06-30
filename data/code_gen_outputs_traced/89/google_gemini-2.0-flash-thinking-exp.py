@@ -6,11 +6,16 @@ def solve(
     """Index: 89.
     Returns: the total number of books Krystian borrows in a week.
     """
+
     #: L1
     friday_increase_books = avg_daily_borrowed * friday_increase_percent / 100 # eval: 16.0 = 40 * 40 / 100
+
     #: L2
     total_borrowed_avg = days_in_week * avg_daily_borrowed # eval: 200 = 5 * 40
+
     #: L3
     total_borrowed_week = total_borrowed_avg + friday_increase_books # eval: 216.0 = 200 + 16.0
-    answer = total_borrowed_week # FINAL ANSWER # eval: 216.0 = 216.0 # FINAL ANSWER
+
+    #: FA
+    answer = total_borrowed_week # eval: 216.0 = 216.0
     return answer # eval: return 216.0

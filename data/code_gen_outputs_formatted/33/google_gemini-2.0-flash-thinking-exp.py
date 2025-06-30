@@ -16,5 +16,6 @@ def solve(
     #: L3
     total_ingredients = flour_and_salt + water_cups
 
-    answer = total_ingredients # FINAL ANSWER
+    #: FA
+    answer = total_ingredients
     return answer

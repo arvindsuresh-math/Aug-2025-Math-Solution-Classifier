@@ -9,15 +9,22 @@ def solve(
     """Index: 75.
     Returns: the total cost of their breakfast.
     """
+
     #: L1
     cost_dale_toast = dale_toast_slices * cost_toast_slice # eval: 2 = 2 * 1
+
     #: L2
     cost_andrew_toast = andrew_toast_slices * cost_toast_slice # eval: 1 = 1 * 1
+
     #: L3
     cost_dale_eggs = dale_eggs * cost_egg # eval: 6 = 2 * 3
+
     #: L4
     cost_andrew_eggs = andrew_eggs * cost_egg # eval: 6 = 2 * 3
+
     #: L5
     total_cost = cost_dale_toast + cost_andrew_toast + cost_dale_eggs + cost_andrew_eggs # eval: 15 = 2 + 1 + 6 + 6
-    answer = total_cost # FINAL ANSWER # eval: 15 = 15 # FINAL ANSWER
+
+    #: FA
+    answer = total_cost # eval: 15 = 15
     return answer # eval: return 15

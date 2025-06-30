@@ -17,5 +17,6 @@ def solve(
     #: L3
     total_slices_eaten = slices_from_large_pizzas + slices_from_small_pizzas
 
-    answer = total_slices_eaten # FINAL ANSWER
+    #: FA
+    answer = total_slices_eaten
     return answer

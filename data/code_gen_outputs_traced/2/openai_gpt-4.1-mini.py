@@ -5,11 +5,16 @@ def solve(
     """Index: 2.
     Returns: the additional amount of money Betty needs to buy the wallet.
     """
+
     #: L1
     betty_initial = wallet_cost / 2 # eval: 50.0 = 100 / 2
+
     #: L2
     grandparents_gift = parents_gift * 2 # eval: 30 = 15 * 2
+
     #: L3
     money_needed = wallet_cost - betty_initial - grandparents_gift - parents_gift # eval: 5.0 = 100 - 50.0 - 30 - 15
-    answer = money_needed  # FINAL ANSWER # eval: 5.0 = 5.0  # FINAL ANSWER
+
+    #: FA
+    answer = money_needed # eval: 5.0 = 5.0
     return answer # eval: return 5.0

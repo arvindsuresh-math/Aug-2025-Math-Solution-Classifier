@@ -18,5 +18,6 @@ def solve(
     #: L3
     total_food_needed = food_per_day * total_days
 
-    answer = total_food_needed # FINAL ANSWER
+    #: FA
+    answer = total_food_needed
     return answer

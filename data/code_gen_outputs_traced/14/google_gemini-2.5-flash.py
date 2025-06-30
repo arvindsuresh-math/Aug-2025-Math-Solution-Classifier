@@ -6,11 +6,16 @@ def solve(
     """Index: 14.
     Returns: the number of hours it will take to read the target number of pages.
     """
+
     #: L1
     sets_of_minutes_in_hour = 60 / minutes_per_segment # eval: 3.0 = 60 / 20
+
     #: L2
     pages_per_hour = pages_per_segment * sets_of_minutes_in_hour # eval: 24.0 = 8 * 3.0
+
     #: L3
     hours_to_read_target_pages = target_pages / pages_per_hour # eval: 5.0 = 120 / 24.0
-    answer = hours_to_read_target_pages # FINAL ANSWER # eval: 5.0 = 5.0 # FINAL ANSWER
+
+    #: FA
+    answer = hours_to_read_target_pages # eval: 5.0 = 5.0
     return answer # eval: return 5.0

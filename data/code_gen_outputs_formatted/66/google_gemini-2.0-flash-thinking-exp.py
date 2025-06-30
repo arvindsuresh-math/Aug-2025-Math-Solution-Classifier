@@ -24,5 +24,6 @@ def solve(
     #: L6
     balance_after_installments = remaining_balance_after_down_payment - total_paid_in_installments
 
-    answer = balance_after_installments # FINAL ANSWER
+    #: FA
+    answer = balance_after_installments
     return answer

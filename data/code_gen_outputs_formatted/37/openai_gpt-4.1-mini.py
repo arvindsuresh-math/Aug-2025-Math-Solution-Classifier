@@ -28,5 +28,6 @@ def solve(
     #: L5
     amount_per_friend = total_bill / num_friends
 
-    answer = amount_per_friend  # FINAL ANSWER
+    #: FA
+    answer = amount_per_friend
     return answer

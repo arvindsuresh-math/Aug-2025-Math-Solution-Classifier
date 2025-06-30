@@ -15,5 +15,6 @@ def solve(
     #: L3
     final_weight = weight_after_second_jelly_beans * 2
 
-    answer = final_weight # FINAL ANSWER
+    #: FA
+    answer = final_weight
     return answer

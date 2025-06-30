@@ -7,9 +7,13 @@ def solve(
     """Index: 32.
     Returns: the distance traveled after the 3rd turn.
     """
+
     #: L1
     distance_known = distance_after_1st_turn + distance_after_2nd_turn + distance_after_4th_turn # eval: 13 = 5 + 8 + 0
+
     #: L2
     distance_after_3rd_turn = total_distance - distance_known # eval: 10 = 23 - 13
-    answer = distance_after_3rd_turn  # FINAL ANSWER # eval: 10 = 10  # FINAL ANSWER
+
+    #: FA
+    answer = distance_after_3rd_turn # eval: 10 = 10
     return answer # eval: return 10

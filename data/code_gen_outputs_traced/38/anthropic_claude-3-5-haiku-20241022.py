@@ -6,9 +6,13 @@ def solve(
 ):
     """Index: 38.
     Returns: the total number of ounces of tea needed for the party."""
+
     #: L1
     total_water_volume = party_guests * guest_cup_size # eval: 72 = 12 * 6
+
     #: L2
     total_tea_needed = total_water_volume / mom_cup_size # eval: 9.0 = 72 / 8
-    answer = total_tea_needed  # FINAL ANSWER # eval: 9.0 = 9.0  # FINAL ANSWER
+
+    #: FA
+    answer = total_tea_needed # eval: 9.0 = 9.0
     return answer # eval: return 9.0

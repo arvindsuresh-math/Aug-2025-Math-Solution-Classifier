@@ -16,5 +16,6 @@ def solve(
     #: L3
     total_stamps = num_snowflake_stamps + num_truck_stamps + num_rose_stamps
 
-    answer = total_stamps # FINAL ANSWER
+    #: FA
+    answer = total_stamps
     return answer

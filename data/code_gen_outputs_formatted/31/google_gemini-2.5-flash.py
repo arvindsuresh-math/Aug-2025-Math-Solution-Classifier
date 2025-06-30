@@ -21,5 +21,6 @@ def solve(
     #: L4
     sales_this_month = total_sales_last_month * sales_multiplier_this_month
 
-    answer = sales_this_month # FINAL ANSWER
+    #: FA
+    answer = sales_this_month
     return answer

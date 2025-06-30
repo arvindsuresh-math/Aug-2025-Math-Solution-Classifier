@@ -17,5 +17,6 @@ def solve(
     #: L3
     remaining_cash = total_earnings - deposit_amount
 
-    answer = remaining_cash # FINAL ANSWER
+    #: FA
+    answer = remaining_cash
     return answer

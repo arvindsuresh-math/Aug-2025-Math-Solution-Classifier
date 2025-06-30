@@ -8,15 +8,22 @@ def solve(
     """Index: 66.
     Returns: Tara's remaining balance after 4 months of payments.
     """
+
     #: L1
     standard_down_payment = laptop_price * down_payment_percentage # eval: 200.0 = 1000 * 0.2
+
     #: L2
     total_down_payment = standard_down_payment + additional_down_payment # eval: 220.0 = 200.0 + 20
+
     #: L3
     remaining_balance = laptop_price - total_down_payment # eval: 780.0 = 1000 - 220.0
+
     #: L5
     total_payments = monthly_installment * months_paid # eval: 260 = 65 * 4
+
     #: L6
     balance_after_payments = remaining_balance - total_payments # eval: 520.0 = 780.0 - 260
-    answer = balance_after_payments  # FINAL ANSWER # eval: 520.0 = 520.0  # FINAL ANSWER
+
+    #: FA
+    answer = balance_after_payments # eval: 520.0 = 520.0
     return answer # eval: return 520.0

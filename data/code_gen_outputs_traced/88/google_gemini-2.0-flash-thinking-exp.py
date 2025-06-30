@@ -4,9 +4,13 @@ def solve(
     """Index: 88.
     Returns: the total number of geckos sold in the last two years.
     """
+
     #: L2
     geckos_year_before = geckos_last_year * 2 # eval: 172 = 86 * 2
+
     #: L3
     total_geckos_sold = geckos_last_year + geckos_year_before # eval: 258 = 86 + 172
-    answer = total_geckos_sold # FINAL ANSWER # eval: 258 = 258 # FINAL ANSWER
+
+    #: FA
+    answer = total_geckos_sold # eval: 258 = 258
     return answer # eval: return 258

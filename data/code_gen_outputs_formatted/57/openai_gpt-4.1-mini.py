@@ -23,5 +23,6 @@ def solve(
     #: L6
     butter_left_final = butter_left_after_two - butter_sugar_cookies
 
-    answer = butter_left_final  # FINAL ANSWER
+    #: FA
+    answer = butter_left_final
     return answer

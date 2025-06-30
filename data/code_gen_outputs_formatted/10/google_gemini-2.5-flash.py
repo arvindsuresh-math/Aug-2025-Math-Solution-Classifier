@@ -19,5 +19,6 @@ def solve(
     #: L5
     people_on_first_ship = total_people_consumed / total_coefficient_s
 
-    answer = people_on_first_ship # FINAL ANSWER
+    #: FA
+    answer = people_on_first_ship
     return answer

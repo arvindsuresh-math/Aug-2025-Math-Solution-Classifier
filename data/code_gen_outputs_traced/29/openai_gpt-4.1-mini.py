@@ -6,11 +6,16 @@ def solve(
     """Index: 29.
     Returns: the previous monthly income before the salary increase.
     """
+
     #: L2
     old_rent_cost_expr = (2/5) # eval: 0.4 = (2/5)
+
     #: L4
     new_rent_cost_expr = (1/4) # eval: 0.25 = (1/4)
+
     #: L8
     previous_income = 3000 / 3 # eval: 1000.0 = 3000 / 3
-    answer = previous_income  # FINAL ANSWER # eval: 1000.0 = 1000.0  # FINAL ANSWER
+
+    #: FA
+    answer = previous_income # eval: 1000.0 = 1000.0
     return answer # eval: return 1000.0

@@ -6,9 +6,13 @@ def solve(
     """Index: 77.
     Returns: the boxer's weight on the day of the fight.
     """
+
     #: L1
     total_weight_loss = weight_loss_per_month * months_until_fight # eval: 12 = 3 * 4
+
     #: L2
     weight_on_fight_day = current_weight - total_weight_loss # eval: 85 = 97 - 12
-    answer = weight_on_fight_day  # FINAL ANSWER # eval: 85 = 85  # FINAL ANSWER
+
+    #: FA
+    answer = weight_on_fight_day # eval: 85 = 85
     return answer # eval: return 85

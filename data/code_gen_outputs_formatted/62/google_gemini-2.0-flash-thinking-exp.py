@@ -20,5 +20,6 @@ def solve(
     #: L4
     liters_per_remaining_can = remaining_oil / remaining_cans
 
-    answer = liters_per_remaining_can # FINAL ANSWER
+    #: FA
+    answer = liters_per_remaining_can
     return answer

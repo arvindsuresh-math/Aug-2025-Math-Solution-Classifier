@@ -6,9 +6,13 @@ def solve(
     """Index: 28.
     Returns: the number of gnomes in the fifth house.
     """
+
     #: L1
     gnomes_first_four_houses = 4 * gnomes_per_first_four_houses # eval: 12 = 4 * 3
+
     #: L2
     gnomes_fifth_house = total_gnomes - gnomes_first_four_houses # eval: 8 = 20 - 12
-    answer = gnomes_fifth_house  # FINAL ANSWER # eval: 8 = 8  # FINAL ANSWER
+
+    #: FA
+    answer = gnomes_fifth_house # eval: 8 = 8
     return answer # eval: return 8

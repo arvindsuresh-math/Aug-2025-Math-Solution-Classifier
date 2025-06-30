@@ -8,11 +8,16 @@ def solve(
     """Index: 90.
     Returns: the total number of cups of food needed for all three months.
     """
+
     #: L1
     total_days = december_days + january_days + february_days # eval: 90 = 31 + 31 + 28
+
     #: L2
     cups_per_day = morning_feeding_cups + afternoon_feeding_cups # eval: 1.0 = 0.5 + 0.5
+
     #: L3
     total_cups_needed = cups_per_day * total_days # eval: 90.0 = 1.0 * 90
-    answer = total_cups_needed # FINAL ANSWER # eval: 90.0 = 90.0 # FINAL ANSWER
+
+    #: FA
+    answer = total_cups_needed # eval: 90.0 = 90.0
     return answer # eval: return 90.0

@@ -13,5 +13,6 @@ def solve(
     #: L5
     people_on_first_ship = total_people_eaten / total_proportions
 
-    answer = people_on_first_ship # FINAL ANSWER
+    #: FA
+    answer = people_on_first_ship
     return answer

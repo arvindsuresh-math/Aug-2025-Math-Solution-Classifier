@@ -14,5 +14,6 @@ def solve(
     #: L2
     third_turn_distance = total_distance - known_distances
 
-    answer = third_turn_distance  # FINAL ANSWER
+    #: FA
+    answer = third_turn_distance
     return answer

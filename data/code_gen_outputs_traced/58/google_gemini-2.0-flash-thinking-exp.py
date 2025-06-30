@@ -7,15 +7,22 @@ def solve(
     """Index: 58.
     Returns: the total amount of money those 60 students get in a day.
     """
+
     #: L1
     students_group1 = total_students * fraction_group1 # eval: 40.0 = 60 * 0.6666666666666666
+
     #: L2
     students_group2 = total_students - students_group1 # eval: 20.0 = 60 - 40.0
+
     #: L3
     total_allowance_group1 = students_group1 * avg_allowance_group1 # eval: 240.0 = 40.0 * 6
+
     #: L4
     total_allowance_group2 = students_group2 * avg_allowance_group2 # eval: 80.0 = 20.0 * 4
+
     #: L5
     total_daily_allowance = total_allowance_group1 + total_allowance_group2 # eval: 320.0 = 240.0 + 80.0
-    answer = total_daily_allowance # FINAL ANSWER # eval: 320.0 = 320.0 # FINAL ANSWER
+
+    #: FA
+    answer = total_daily_allowance # eval: 320.0 = 320.0
     return answer # eval: return 320.0

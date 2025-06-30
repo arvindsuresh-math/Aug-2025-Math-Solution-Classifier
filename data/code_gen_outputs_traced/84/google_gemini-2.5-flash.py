@@ -6,9 +6,13 @@ def solve(
     """Index: 84.
     Returns: the number of different rooms Hans could be checked into.
     """
+
     #: L1
     total_rooms = num_floors * rooms_per_floor # eval: 100 = 10 * 10
+
     #: L2
     available_rooms = total_rooms - (unavailable_floors * rooms_per_floor) # eval: 90 = 100 - (1 * 10)
-    answer = available_rooms # FINAL ANSWER # eval: 90 = 90 # FINAL ANSWER
+
+    #: FA
+    answer = available_rooms # eval: 90 = 90
     return answer # eval: return 90

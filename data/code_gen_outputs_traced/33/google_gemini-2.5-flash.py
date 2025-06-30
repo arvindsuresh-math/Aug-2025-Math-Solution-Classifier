@@ -6,11 +6,16 @@ def solve(
     """Index: 33.
     Returns: the combined total number of cups of water, flour, and teaspoons of salt needed to make the pizza.
     """
+
     #: L1
     teaspoons_salt = salt_flour_ratio * cups_flour # eval: 8.0 = 0.5 * 16
+
     #: L2
     total_flour_and_salt = teaspoons_salt + cups_flour # eval: 24.0 = 8.0 + 16
+
     #: L3
     combined_total = total_flour_and_salt + cups_water # eval: 34.0 = 24.0 + 10
-    answer = combined_total # FINAL ANSWER # eval: 34.0 = 34.0 # FINAL ANSWER
+
+    #: FA
+    answer = combined_total # eval: 34.0 = 34.0
     return answer # eval: return 34.0

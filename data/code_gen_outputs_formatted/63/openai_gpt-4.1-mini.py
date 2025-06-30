@@ -16,5 +16,6 @@ def solve(
     #: L3
     wednesday_situps_needed = goal_situps + monday_shortfall + tuesday_shortfall
 
-    answer = wednesday_situps_needed  # FINAL ANSWER
+    #: FA
+    answer = wednesday_situps_needed
     return answer

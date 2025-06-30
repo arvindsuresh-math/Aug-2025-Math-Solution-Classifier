@@ -25,5 +25,6 @@ def solve(
     #: L5
     driveways_shoveled = driveway_shoveling_earnings // driveway_shoveling_rate
 
-    answer = driveways_shoveled  # FINAL ANSWER
+    #: FA
+    answer = driveways_shoveled
     return answer

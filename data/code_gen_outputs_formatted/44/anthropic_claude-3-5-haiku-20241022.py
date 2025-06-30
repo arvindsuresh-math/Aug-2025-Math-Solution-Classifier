@@ -19,5 +19,6 @@ def solve(
     #: L4
     coursework_materials_cost = budget - (accommodation_cost + food_cost + entertainment_cost)
 
-    answer = coursework_materials_cost  # FINAL ANSWER
+    #: FA
+    answer = coursework_materials_cost
     return answer

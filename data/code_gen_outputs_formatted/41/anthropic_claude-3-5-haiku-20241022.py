@@ -16,5 +16,6 @@ def solve(
     #: L3
     rachel_total_budget = rachel_shoe_cost + rachel_dress_cost
 
-    answer = rachel_total_budget  # FINAL ANSWER
+    #: FA
+    answer = rachel_total_budget
     return answer

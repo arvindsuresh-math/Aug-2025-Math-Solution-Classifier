@@ -7,13 +7,19 @@ def solve(
     """Index: 44.
     Returns: the amount of money James spends on coursework materials.
     """
+
     #: L1
     accommodation_cost = accommodation_percent * 0.01 * budget # eval: 150.0 = 15 * 0.01 * 1000
+
     #: L2
     food_cost = food_percent * 0.01 * budget # eval: 300.0 = 30 * 0.01 * 1000
+
     #: L3
     entertainment_cost = entertainment_percent * 0.01 * budget # eval: 250.0 = 25 * 0.01 * 1000
+
     #: L4
     coursework_materials_cost = budget - (accommodation_cost + food_cost + entertainment_cost) # eval: 300.0 = 1000 - (150.0 + 300.0 + 250.0)
-    answer = coursework_materials_cost  # FINAL ANSWER # eval: 300.0 = 300.0  # FINAL ANSWER
+
+    #: FA
+    answer = coursework_materials_cost # eval: 300.0 = 300.0
     return answer # eval: return 300.0

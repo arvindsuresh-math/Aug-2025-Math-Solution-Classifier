@@ -5,9 +5,13 @@ def solve(
     """Index: 35.
     Returns: the number of students who got a final grade of B and above.
     """
+
     #: L1
     percentage_b_and_above = 1 - percentage_below_b # eval: 0.6 = 1 - 0.4
+
     #: L2
     students_b_and_above = total_students * percentage_b_and_above # eval: 36.0 = 60 * 0.6
-    answer = students_b_and_above # FINAL ANSWER # eval: 36.0 = 36.0 # FINAL ANSWER
+
+    #: FA
+    answer = students_b_and_above # eval: 36.0 = 36.0
     return answer # eval: return 36.0

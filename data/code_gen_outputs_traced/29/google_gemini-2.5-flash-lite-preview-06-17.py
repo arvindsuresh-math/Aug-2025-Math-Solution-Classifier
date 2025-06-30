@@ -6,7 +6,10 @@ def solve(
     """Index: 29.
     Returns: Mrs. Snyder's previous monthly income.
     """
+
     #: L8
     previous_monthly_income = (new_rent_utility_percentage * income_increase) / (previous_rent_utility_percentage - new_rent_utility_percentage) # eval: 999.9999999999999 = (0.25 * 600) / (0.4 - 0.25)
-    answer = previous_monthly_income # FINAL ANSWER # eval: 999.9999999999999 = 999.9999999999999 # FINAL ANSWER
+
+    #: FA
+    answer = previous_monthly_income # eval: 999.9999999999999 = 999.9999999999999
     return answer # eval: return 999.9999999999999

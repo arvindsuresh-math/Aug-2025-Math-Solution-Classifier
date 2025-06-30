@@ -16,5 +16,6 @@ def solve(
     #: L8
     previous_income = 3000 / 3
 
-    answer = previous_income  # FINAL ANSWER
+    #: FA
+    answer = previous_income
     return answer

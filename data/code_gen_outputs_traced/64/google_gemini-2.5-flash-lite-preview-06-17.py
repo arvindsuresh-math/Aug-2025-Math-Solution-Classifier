@@ -7,17 +7,25 @@ def solve(
     """Index: 64.
     Returns: the total amount James earns per week.
     """
+
     #: L1
     wage_reduction_amount = hourly_wage_main_job * second_job_wage_reduction_rate # eval: 4.0 = 20 * 0.2
+
     #: L2
     hourly_wage_second_job = hourly_wage_main_job - wage_reduction_amount # eval: 16.0 = 20 - 4.0
+
     #: L3
     earnings_main_job = hourly_wage_main_job * hours_main_job # eval: 600 = 20 * 30
+
     #: L4
     hours_second_job = hours_main_job * hours_second_job_factor # eval: 15.0 = 30 * 0.5
+
     #: L5
     earnings_second_job = hours_second_job * hourly_wage_second_job # eval: 240.0 = 15.0 * 16.0
+
     #: L6
     total_weekly_earnings = earnings_main_job + earnings_second_job # eval: 840.0 = 600 + 240.0
-    answer = total_weekly_earnings # FINAL ANSWER # eval: 840.0 = 840.0 # FINAL ANSWER
+
+    #: FA
+    answer = total_weekly_earnings # eval: 840.0 = 840.0
     return answer # eval: return 840.0

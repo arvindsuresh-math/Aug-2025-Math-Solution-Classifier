@@ -20,5 +20,6 @@ def solve(
     #: L4
     total_time = time_first_part + time_remaining
 
-    answer = total_time  # FINAL ANSWER
+    #: FA
+    answer = total_time
     return answer

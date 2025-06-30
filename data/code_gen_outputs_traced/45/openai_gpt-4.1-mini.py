@@ -10,13 +10,19 @@ def solve(
     """Index: 45.
     Returns: the total cost of the unicorn piñata and all the treats.
     """
+
     #: L1
     total_cost_reeses = cost_per_bag_reeses * num_bags_reeses # eval: 36 = 9 * 4
+
     #: L2
     total_cost_snickers = cost_per_bag_snickers * num_bags_snickers # eval: 15 = 5 * 3
+
     #: L3
     total_cost_skittles = cost_per_bag_skittles * num_bags_skittles # eval: 35 = 7 * 5
+
     #: L4
     total_cost = pinata_cost + total_cost_reeses + total_cost_snickers + total_cost_skittles # eval: 99 = 13 + 36 + 15 + 35
-    answer = total_cost  # FINAL ANSWER # eval: 99 = 99  # FINAL ANSWER
+
+    #: FA
+    answer = total_cost # eval: 99 = 99
     return answer # eval: return 99

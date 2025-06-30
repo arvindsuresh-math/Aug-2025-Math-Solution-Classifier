@@ -19,5 +19,6 @@ def solve(
     #: L4
     total_biking_hours = total_miles / bike_speed
 
-    answer = total_biking_hours  # FINAL ANSWER
+    #: FA
+    answer = total_biking_hours
     return answer

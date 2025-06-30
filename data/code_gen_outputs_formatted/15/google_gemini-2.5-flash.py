@@ -28,5 +28,6 @@ def solve(
     #: L6
     net_profit = total_profit_from_sales - movie_creation_cost
 
-    answer = net_profit # FINAL ANSWER
+    #: FA
+    answer = net_profit
     return answer

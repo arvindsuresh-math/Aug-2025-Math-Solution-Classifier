@@ -6,9 +6,13 @@ def solve(
     """Index: 22.
     Returns: the number of letters in Samantha’s last name.
     """
+
     #: L1
     bobbies_last_name_length = jamies_last_name_length * 2 + letters_removed_from_bobbie # eval: 10 = 4 * 2 + 2
+
     #: L2
     samanthas_last_name_length = bobbies_last_name_length - difference_samantha_bobbie # eval: 7 = 10 - 3
-    answer = samanthas_last_name_length  # FINAL ANSWER # eval: 7 = 7  # FINAL ANSWER
+
+    #: FA
+    answer = samanthas_last_name_length # eval: 7 = 7
     return answer # eval: return 7

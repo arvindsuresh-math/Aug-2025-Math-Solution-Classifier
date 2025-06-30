@@ -7,9 +7,13 @@ def solve(
     """Index: 32.
     Returns: the distance the car traveled after the 3rd turn.
     """
+
     #: L1
     meters_before_3rd_turn = meters_after_1st_turn + meters_after_2nd_turn + meters_after_4th_turn # eval: 13 = 5 + 8 + 0
+
     #: L2
     meters_after_3rd_turn = total_meters_driven - meters_before_3rd_turn # eval: 10 = 23 - 13
-    answer = meters_after_3rd_turn # FINAL ANSWER # eval: 10 = 10 # FINAL ANSWER
+
+    #: FA
+    answer = meters_after_3rd_turn # eval: 10 = 10
     return answer # eval: return 10

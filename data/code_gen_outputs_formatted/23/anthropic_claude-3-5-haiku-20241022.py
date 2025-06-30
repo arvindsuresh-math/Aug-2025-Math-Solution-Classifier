@@ -24,5 +24,6 @@ def solve(
     #: L5
     cost_per_top = remaining_money / num_tops
 
-    answer = cost_per_top  # FINAL ANSWER
+    #: FA
+    answer = cost_per_top
     return answer

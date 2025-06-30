@@ -13,5 +13,6 @@ def solve(
     #: L2
     total_arms = total_starfish_arms + arms_seastar
 
-    answer = total_arms # FINAL ANSWER
+    #: FA
+    answer = total_arms
     return answer

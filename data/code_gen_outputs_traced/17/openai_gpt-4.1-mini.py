@@ -8,17 +8,25 @@ def solve(
     """Index: 17.
     Returns: the total number of hard hats that remained in the truck.
     """
+
     #: L1
     pink_after_carl = pink_hard_hats - carl_pink_taken # eval: 22 = 26 - 4
+
     #: L2
     pink_after_john = pink_after_carl - john_pink_taken # eval: 16 = 22 - 6
+
     #: L3
     john_green_taken = john_pink_taken * 2 # eval: 12 = 6 * 2
+
     #: L4
     green_after_john = green_hard_hats - john_green_taken # eval: 3 = 15 - 12
+
     #: L5
     pink_green_total = green_after_john + pink_after_john # eval: 19 = 3 + 16
+
     #: L6
     total_remaining = pink_green_total + yellow_hard_hats # eval: 43 = 19 + 24
-    answer = total_remaining  # FINAL ANSWER # eval: 43 = 43  # FINAL ANSWER
+
+    #: FA
+    answer = total_remaining # eval: 43 = 43
     return answer # eval: return 43

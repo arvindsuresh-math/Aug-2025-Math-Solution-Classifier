@@ -21,5 +21,6 @@ def solve(
     fourth_earthquake_buildings
     )
 
-    answer = total_buildings_collapsed  # FINAL ANSWER
+    #: FA
+    answer = total_buildings_collapsed
     return answer

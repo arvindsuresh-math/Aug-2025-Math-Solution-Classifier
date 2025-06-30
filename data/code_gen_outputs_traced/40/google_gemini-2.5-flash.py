@@ -7,17 +7,25 @@ def solve(
     """Index: 40.
     Returns: the total amount Mr. Benson paid for the concert tickets.
     """
+
     #: L1
     num_discounted_tickets = tickets_bought - discount_threshold # eval: 2 = 12 - 10
+
     #: L2
     discount_per_ticket = ticket_cost * discount_rate # eval: 2.0 = 40 * 0.05
+
     #: L3
     cost_per_discounted_ticket = ticket_cost - discount_per_ticket # eval: 38.0 = 40 - 2.0
+
     #: L4
     total_cost_discounted_tickets = cost_per_discounted_ticket * num_discounted_tickets # eval: 76.0 = 38.0 * 2
+
     #: L5
     total_cost_full_price_tickets = ticket_cost * discount_threshold # eval: 400 = 40 * 10
+
     #: L6
     total_paid = total_cost_full_price_tickets + total_cost_discounted_tickets # eval: 476.0 = 400 + 76.0
-    answer = total_paid # FINAL ANSWER # eval: 476.0 = 476.0 # FINAL ANSWER
+
+    #: FA
+    answer = total_paid # eval: 476.0 = 476.0
     return answer # eval: return 476.0

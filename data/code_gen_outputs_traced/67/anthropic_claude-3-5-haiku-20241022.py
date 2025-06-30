@@ -7,21 +7,31 @@ def solve(
 ):
     """Index: 67.
     Returns: the average miles per day they both need to run in the final three days."""
+
     #: L1
     jesse_first_three_days_miles = jesse_first_three_days_avg * 3 # eval: 2.0 = 0.6666666666666666 * 3
+
     #: L2
     jesse_miles_left = total_race_miles - jesse_day_four_miles - jesse_first_three_days_miles # eval: 18.0 = 30 - 10 - 2.0
+
     #: L3
     jesse_avg_last_three_days = jesse_miles_left / remaining_days # eval: 6.0 = 18.0 / 3
+
     #: L4
     mia_first_four_days_miles = mia_first_four_days_avg * 4 # eval: 12 = 3 * 4
+
     #: L5
     mia_miles_left = total_race_miles - mia_first_four_days_miles # eval: 18 = 30 - 12
+
     #: L6
     mia_avg_last_three_days = mia_miles_left / remaining_days # eval: 6.0 = 18 / 3
+
     #: L7
     total_miles_per_day = jesse_avg_last_three_days + mia_avg_last_three_days # eval: 12.0 = 6.0 + 6.0
+
     #: L8
     average_miles_per_day = total_miles_per_day / 2 # eval: 6.0 = 12.0 / 2
-    answer = average_miles_per_day  # FINAL ANSWER # eval: 6.0 = 6.0  # FINAL ANSWER
+
+    #: FA
+    answer = average_miles_per_day # eval: 6.0 = 6.0
     return answer # eval: return 6.0

@@ -7,15 +7,22 @@ def solve(
     """Index: 18.
     Returns: the total hours Roque spends walking and biking to and from work in a week.
     """
+
     #: L1
     walk_time_to_work_week = walk_time_one_way * walk_trips_per_week # eval: 6 = 2 * 3
+
     #: L2
     walk_time_total_week = walk_time_to_work_week * 2 # eval: 12 = 6 * 2
+
     #: L3
     bike_time_to_work_week = bike_time_one_way * bike_trips_per_week # eval: 2 = 1 * 2
+
     #: L4
     bike_time_total_week = bike_time_to_work_week * 2 # eval: 4 = 2 * 2
+
     #: L5
     total_time_week = walk_time_total_week + bike_time_total_week # eval: 16 = 12 + 4
-    answer = total_time_week  # FINAL ANSWER # eval: 16 = 16  # FINAL ANSWER
+
+    #: FA
+    answer = total_time_week # eval: 16 = 16
     return answer # eval: return 16

@@ -9,5 +9,6 @@ def solve(
     #: L1
     total_weight_loss = weight_loss_per_month * months_until_fight
 
-    answer = initial_weight - total_weight_loss  # FINAL ANSWER
+    #: FA
+    answer = initial_weight - total_weight_loss
     return answer

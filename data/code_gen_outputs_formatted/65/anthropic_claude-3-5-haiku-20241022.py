@@ -16,5 +16,6 @@ def solve(
     #: L3
     total_earnings = total_base_earnings + total_tips
 
-    answer = total_earnings  # FINAL ANSWER
+    #: FA
+    answer = total_earnings
     return answer

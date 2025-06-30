@@ -4,10 +4,14 @@ def solve(
 ):
     """Index: 22.
     Returns: the number of letters in Samantha's last name."""
+
     #: L1
     jamie_last_name_length = len(jamie_last_name) # eval: 4 = len(Grey)
     bobbie_last_name_length = jamie_last_name_length * 2 + 2 # eval: 10 = 4 * 2 + 2
+
     #: L2
     samantha_last_name_length = bobbie_last_name_length - letters_difference # eval: 7 = 10 - 3
-    answer = samantha_last_name_length  # FINAL ANSWER # eval: 7 = 7  # FINAL ANSWER
+
+    #: FA
+    answer = samantha_last_name_length # eval: 7 = 7
     return answer # eval: return 7

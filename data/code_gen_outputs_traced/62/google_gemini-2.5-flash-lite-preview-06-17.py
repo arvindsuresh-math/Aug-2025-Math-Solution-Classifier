@@ -7,13 +7,19 @@ def solve(
     """Index: 62.
     Returns: the amount of oil each of the remaining cans is holding.
     """
+
     #: L1
     liters_in_8_liter_cans = num_cans_with_8_liters * liters_per_can_8 # eval: 80 = 10 * 8
+
     #: L2
     remaining_liters = total_liters - liters_in_8_liter_cans # eval: 210 = 290 - 80
+
     #: L3
     remaining_cans = total_cans - num_cans_with_8_liters # eval: 14 = 24 - 10
+
     #: L4
     liters_per_remaining_can = remaining_liters / remaining_cans # eval: 15.0 = 210 / 14
-    answer = liters_per_remaining_can # FINAL ANSWER # eval: 15.0 = 15.0 # FINAL ANSWER
+
+    #: FA
+    answer = liters_per_remaining_can # eval: 15.0 = 15.0
     return answer # eval: return 15.0

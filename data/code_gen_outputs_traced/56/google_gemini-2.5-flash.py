@@ -6,13 +6,19 @@ def solve(
     """Index: 56.
     Returns: the number of minutes Leo finished the third part of the assignment.
     """
+
     #: L1
     time_part2_minutes = time_part1_minutes * time_multiplier_part2 # eval: 50 = 25 * 2
+
     #: L2
     time_parts1_and_2_minutes = time_part1_minutes + time_part2_minutes # eval: 75 = 25 + 50
+
     #: L3
     total_assignment_minutes = total_time_hours * 60 # eval: 120 = 2 * 60
+
     #: L4
     time_part3_minutes = total_assignment_minutes - time_parts1_and_2_minutes # eval: 45 = 120 - 75
-    answer = time_part3_minutes # FINAL ANSWER # eval: 45 = 45 # FINAL ANSWER
+
+    #: FA
+    answer = time_part3_minutes # eval: 45 = 45
     return answer # eval: return 45

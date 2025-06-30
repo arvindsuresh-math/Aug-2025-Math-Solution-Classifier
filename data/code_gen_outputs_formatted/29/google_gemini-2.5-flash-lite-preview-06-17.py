@@ -10,5 +10,6 @@ def solve(
     #: L8
     previous_monthly_income = (new_rent_utility_percentage * income_increase) / (previous_rent_utility_percentage - new_rent_utility_percentage)
 
-    answer = previous_monthly_income # FINAL ANSWER
+    #: FA
+    answer = previous_monthly_income
     return answer

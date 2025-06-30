@@ -15,5 +15,6 @@ def solve(
     #: L2
     total_books = num_history_books + num_romance_books + num_poetry_books + num_mystery_books + num_western_novels + num_biographies
 
-    answer = total_books # FINAL ANSWER
+    #: FA
+    answer = total_books
     return answer

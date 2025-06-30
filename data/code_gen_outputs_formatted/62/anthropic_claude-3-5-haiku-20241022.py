@@ -19,5 +19,6 @@ def solve(
     #: L4
     remaining_can_volume = remaining_liters / remaining_cans
 
-    answer = remaining_can_volume  # FINAL ANSWER
+    #: FA
+    answer = remaining_can_volume
     return answer

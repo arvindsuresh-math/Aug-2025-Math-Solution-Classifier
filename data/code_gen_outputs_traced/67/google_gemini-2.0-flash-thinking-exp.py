@@ -10,21 +10,31 @@ def solve(
     """Index: 67.
     Returns: the average of their required average distances over the final three days.
     """
+
     #: L1
     jesse_distance_initial = jesse_initial_days * jesse_initial_avg_distance # eval: 2.0 = 3 * 0.6666666666666666
+
     #: L2
     jesse_remaining_distance = total_distance - jesse_day_four_distance - jesse_distance_initial # eval: 18.0 = 30 - 10 - 2.0
+
     #: L3
     jesse_avg_final_days = jesse_remaining_distance / final_days # eval: 6.0 = 18.0 / 3
+
     #: L4
     mia_distance_initial = mia_initial_days * mia_initial_avg_distance # eval: 12 = 4 * 3
+
     #: L5
     mia_remaining_distance = total_distance - mia_distance_initial # eval: 18 = 30 - 12
+
     #: L6
     mia_avg_final_days = mia_remaining_distance / final_days # eval: 6.0 = 18 / 3
+
     #: L7
     total_avg_final_days = jesse_avg_final_days + mia_avg_final_days # eval: 12.0 = 6.0 + 6.0
+
     #: L8
     average_of_their_averages = total_avg_final_days / 2 # eval: 6.0 = 12.0 / 2
-    answer = average_of_their_averages # FINAL ANSWER # eval: 6.0 = 6.0 # FINAL ANSWER
+
+    #: FA
+    answer = average_of_their_averages # eval: 6.0 = 6.0
     return answer # eval: return 6.0

@@ -5,11 +5,16 @@ def solve(
 ):
     """Index: 63.
     Returns: the number of situps Shawna needs to do on Wednesday."""
+
     #: L1
     deficit_monday = goal_situps - situps_monday # eval: 18 = 30 - 12
+
     #: L2
     deficit_tuesday = goal_situps - situps_tuesday # eval: 11 = 30 - 19
+
     #: L3
     situps_wednesday = goal_situps + deficit_monday + deficit_tuesday # eval: 59 = 30 + 18 + 11
-    answer = situps_wednesday # FINAL ANSWER # eval: 59 = 59 # FINAL ANSWER
+
+    #: FA
+    answer = situps_wednesday # eval: 59 = 59
     return answer # eval: return 59

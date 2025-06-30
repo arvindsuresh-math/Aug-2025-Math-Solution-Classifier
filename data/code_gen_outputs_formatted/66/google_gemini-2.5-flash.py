@@ -27,5 +27,6 @@ def solve(
     #: L6
     final_balance = remaining_balance_initial - total_paid_4_months
 
-    answer = final_balance # FINAL ANSWER
+    #: FA
+    answer = final_balance
     return answer

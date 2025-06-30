@@ -14,5 +14,6 @@ def solve(
     #: L2
     packs_to_buy = total_pouches_needed / pouches_per_pack
 
-    answer = packs_to_buy # FINAL ANSWER
+    #: FA
+    answer = packs_to_buy
     return answer

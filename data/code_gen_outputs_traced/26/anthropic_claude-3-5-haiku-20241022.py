@@ -5,9 +5,13 @@ def solve(
 ):
     """Index: 26.
     Returns: the amount of salt in milliliters after water evaporates."""
+
     #: L1
     salt_volume_liters = seawater_volume * salt_percentage # eval: 0.4 = 2 * 0.2
+
     #: L2
     salt_volume_ml = salt_volume_liters * ml_per_liter # eval: 400.0 = 0.4 * 1000
-    answer = salt_volume_ml  # FINAL ANSWER # eval: 400.0 = 400.0  # FINAL ANSWER
+
+    #: FA
+    answer = salt_volume_ml # eval: 400.0 = 400.0
     return answer # eval: return 400.0

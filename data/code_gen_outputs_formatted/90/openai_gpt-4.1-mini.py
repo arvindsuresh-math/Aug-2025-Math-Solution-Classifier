@@ -18,5 +18,6 @@ def solve(
     #: L3
     total_cups = cups_per_day * total_days
 
-    answer = total_cups  # FINAL ANSWER
+    #: FA
+    answer = total_cups
     return answer

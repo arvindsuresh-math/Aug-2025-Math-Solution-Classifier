@@ -17,5 +17,6 @@ def solve(
     #: L3
     weight_per_last_person = remaining_weight_lost / 2
 
-    answer = weight_per_last_person # FINAL ANSWER
+    #: FA
+    answer = weight_per_last_person
     return answer

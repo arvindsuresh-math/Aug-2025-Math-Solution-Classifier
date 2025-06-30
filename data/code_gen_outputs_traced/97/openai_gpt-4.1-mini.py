@@ -8,9 +8,13 @@ def solve(
     """Index: 97.
     Returns: the total number of books Nancy had on the book cart when she started.
     """
+
     #: L1
     mystery_books = western_novels + biographies # eval: 11 = 5 + 6
+
     #: L2
     total_books = history_books + romance_books + poetry_books + mystery_books + western_novels + biographies # eval: 46 = 12 + 8 + 4 + 11 + 5 + 6
-    answer = total_books  # FINAL ANSWER # eval: 46 = 46  # FINAL ANSWER
+
+    #: FA
+    answer = total_books # eval: 46 = 46
     return answer # eval: return 46

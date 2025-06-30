@@ -8,9 +8,13 @@ def solve(
     """Index: 97.
     Returns: the total number of books on the cart at the start.
     """
+
     #: L1
     num_mystery_books = num_western_novels + num_biographies # eval: 11 = 5 + 6
+
     #: L2
     total_books = num_history_books + num_romance_books + num_poetry_books + num_mystery_books + num_western_novels + num_biographies # eval: 46 = 12 + 8 + 4 + 11 + 5 + 6
-    answer = total_books # FINAL ANSWER # eval: 46 = 46 # FINAL ANSWER
+
+    #: FA
+    answer = total_books # eval: 46 = 46
     return answer # eval: return 46

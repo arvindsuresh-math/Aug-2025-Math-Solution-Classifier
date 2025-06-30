@@ -4,9 +4,13 @@ def solve(
     """Index: 49.
     Returns: the number of shells Alan collected.
     """
+
     #: L1
     shells_ben = shells_laurie / 3 # eval: 12.0 = 36 / 3
+
     #: L2
     shells_alan = shells_ben * 4 # eval: 48.0 = 12.0 * 4
-    answer = shells_alan  # FINAL ANSWER # eval: 48.0 = 48.0  # FINAL ANSWER
+
+    #: FA
+    answer = shells_alan # eval: 48.0 = 48.0
     return answer # eval: return 48.0

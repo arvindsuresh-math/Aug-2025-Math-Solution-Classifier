@@ -23,5 +23,6 @@ def solve(
     #: L5
     total_valuable_files = valuable_files_first_round + valuable_files_second_round
 
-    answer = total_valuable_files # FINAL ANSWER
+    #: FA
+    answer = total_valuable_files
     return answer

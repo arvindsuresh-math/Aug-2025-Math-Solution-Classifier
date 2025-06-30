@@ -25,5 +25,6 @@ def solve(
     #: L6
     total_weekly_earnings = main_job_earnings + second_job_earnings
 
-    answer = total_weekly_earnings # FINAL ANSWER
+    #: FA
+    answer = total_weekly_earnings
     return answer

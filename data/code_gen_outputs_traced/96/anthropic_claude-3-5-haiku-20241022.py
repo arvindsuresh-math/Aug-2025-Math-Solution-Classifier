@@ -6,11 +6,16 @@ def solve(
 ):
     """Index: 96.
     Returns: the total money James made from selling collected rainwater."""
+
     #: L1
     total_rain_inches = rain_monday + rain_tuesday # eval: 7 = 4 + 3
+
     #: L2
     total_gallons_collected = total_rain_inches * gallons_per_inch # eval: 105 = 7 * 15
+
     #: L3
     money_from_water_sales = total_gallons_collected * price_per_gallon # eval: 126.0 = 105 * 1.2
-    answer = money_from_water_sales  # FINAL ANSWER # eval: 126.0 = 126.0  # FINAL ANSWER
+
+    #: FA
+    answer = money_from_water_sales # eval: 126.0 = 126.0
     return answer # eval: return 126.0

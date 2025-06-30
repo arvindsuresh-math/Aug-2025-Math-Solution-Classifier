@@ -13,5 +13,6 @@ def solve(
     #: L2
     j_l_diff = j_a_diff - l_a_diff
 
-    answer = j_l_diff # FINAL ANSWER
+    #: FA
+    answer = j_l_diff
     return answer

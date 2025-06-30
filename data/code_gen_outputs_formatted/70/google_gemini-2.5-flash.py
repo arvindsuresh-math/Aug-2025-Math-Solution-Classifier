@@ -13,5 +13,6 @@ def solve(
     #: L2
     harry_apples = tim_apples * harry_fraction_of_tim
 
-    answer = harry_apples # FINAL ANSWER
+    #: FA
+    answer = harry_apples
     return answer

@@ -5,13 +5,19 @@ def solve(
     """Index: 43.
     Returns: the total number of buildings collapsed after the first and three more earthquakes.
     """
+
     #: L1
     second_earthquake_collapsed = 2 * initial_collapsed # eval: 8 = 2 * 4
+
     #: L2
     third_earthquake_collapsed = 2 * second_earthquake_collapsed # eval: 16 = 2 * 8
+
     #: L3
     fourth_earthquake_collapsed = 2 * third_earthquake_collapsed # eval: 32 = 2 * 16
+
     #: L4
     total_collapsed = initial_collapsed + second_earthquake_collapsed + third_earthquake_collapsed + fourth_earthquake_collapsed # eval: 60 = 4 + 8 + 16 + 32
-    answer = total_collapsed  # FINAL ANSWER # eval: 60 = 60  # FINAL ANSWER
+
+    #: FA
+    answer = total_collapsed # eval: 60 = 60
     return answer # eval: return 60

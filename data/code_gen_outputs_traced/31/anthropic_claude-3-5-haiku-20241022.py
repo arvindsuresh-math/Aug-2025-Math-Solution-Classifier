@@ -7,13 +7,19 @@ def solve(
     """Index: 31.
     Returns: Noah's total sales for this month.
     """
+
     #: L1
     large_painting_revenue = large_painting_price * large_paintings_last_month # eval: 480 = 60 * 8
+
     #: L2
     small_painting_revenue = small_painting_price * small_paintings_last_month # eval: 120 = 30 * 4
+
     #: L3
     total_sales_last_month = large_painting_revenue + small_painting_revenue # eval: 600 = 480 + 120
+
     #: L4
     total_sales_this_month = total_sales_last_month * 2 # eval: 1200 = 600 * 2
-    answer = total_sales_this_month  # FINAL ANSWER # eval: 1200 = 1200  # FINAL ANSWER
+
+    #: FA
+    answer = total_sales_this_month # eval: 1200 = 1200
     return answer # eval: return 1200

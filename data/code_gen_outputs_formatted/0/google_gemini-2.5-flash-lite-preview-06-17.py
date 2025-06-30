@@ -12,5 +12,6 @@ def solve(
     #: L2
     total_clips = clips_april + clips_may
 
-    answer = total_clips # FINAL ANSWER
+    #: FA
+    answer = total_clips
     return answer

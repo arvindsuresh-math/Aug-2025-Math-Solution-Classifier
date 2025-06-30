@@ -23,5 +23,6 @@ def solve(
     #: L5
     total_hours_at_field = hours_watching_both_daughters_play + hours_watching_both_daughters_practice
 
-    answer = total_hours_at_field # FINAL ANSWER
+    #: FA
+    answer = total_hours_at_field
     return answer

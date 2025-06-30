@@ -7,9 +7,13 @@ def solve(
     """Index: 6.
     Returns: the total number of pizza slices Albert eats in one day.
     """
+
     #: L1
     large_pizza_slices = num_large_pizzas * slices_large_pizza # eval: 32 = 2 * 16
+
     #: L2
     small_pizza_slices = num_small_pizzas * slices_small_pizza # eval: 16 = 2 * 8
-    answer = large_pizza_slices + small_pizza_slices  # FINAL ANSWER # eval: 48 = 32 + 16  # FINAL ANSWER
+
+    #: FA
+    answer = large_pizza_slices + small_pizza_slices # eval: 48 = 32 + 16
     return answer # eval: return 48

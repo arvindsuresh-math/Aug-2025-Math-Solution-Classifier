@@ -22,5 +22,6 @@ def solve(
     #: L4
     final_water_volume = volume_aquarium * proportion_after_triple
 
-    answer = final_water_volume  # FINAL ANSWER
+    #: FA
+    answer = final_water_volume
     return answer

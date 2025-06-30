@@ -11,5 +11,6 @@ def solve(
     #: L2
     alan_shells = ben_shells * 4
 
-    answer = alan_shells # FINAL ANSWER
+    #: FA
+    answer = alan_shells
     return answer

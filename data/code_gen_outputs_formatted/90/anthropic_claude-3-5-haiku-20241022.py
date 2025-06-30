@@ -18,5 +18,6 @@ def solve(
     #: L3
     total_bird_food = daily_feed * total_days
 
-    answer = total_bird_food  # FINAL ANSWER
+    #: FA
+    answer = total_bird_food
     return answer

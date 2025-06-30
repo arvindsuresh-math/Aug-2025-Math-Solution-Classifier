@@ -17,5 +17,6 @@ def solve(
     #: L3
     total_missed_balls = first_batch_missed_balls + next_batch_missed_balls
 
-    answer = total_missed_balls  # FINAL ANSWER
+    #: FA
+    answer = total_missed_balls
     return answer

@@ -17,5 +17,6 @@ def solve(
     #: L3
     total_income = base_income + overtime_earnings
 
-    answer = total_income # FINAL ANSWER
+    #: FA
+    answer = total_income
     return answer

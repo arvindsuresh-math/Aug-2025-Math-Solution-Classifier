@@ -23,5 +23,6 @@ def solve(
     #: L4
     total_cost = pinata_cost + total_cost_reeses + total_cost_snickers + total_cost_skittles
 
-    answer = total_cost  # FINAL ANSWER
+    #: FA
+    answer = total_cost
     return answer

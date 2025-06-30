@@ -6,13 +6,19 @@ def solve(
     """Index: 72.
     Returns: the volume of water in the aquarium after the described events.
     """
+
     #: L1
     aquarium_volume = length * width * height # eval: 72 = 4 * 6 * 3
+
     #: L2
     proportion_after_cat_spill = 0.5 * 0.5 # eval: 0.25 = 0.5 * 0.5
+
     #: L3
     proportion_after_nancy_refill = 3 * proportion_after_cat_spill # eval: 0.75 = 3 * 0.25
+
     #: L4
     water_volume = aquarium_volume * proportion_after_nancy_refill # eval: 54.0 = 72 * 0.75
-    answer = water_volume  # FINAL ANSWER # eval: 54.0 = 54.0  # FINAL ANSWER
+
+    #: FA
+    answer = water_volume # eval: 54.0 = 54.0
     return answer # eval: return 54.0

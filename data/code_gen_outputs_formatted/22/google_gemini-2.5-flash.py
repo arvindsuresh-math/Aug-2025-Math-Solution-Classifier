@@ -14,5 +14,6 @@ def solve(
     #: L2
     samantha_last_name_length = bobbie_last_name_length - samantha_fewer_letters
 
-    answer = samantha_last_name_length # FINAL ANSWER
+    #: FA
+    answer = samantha_last_name_length
     return answer

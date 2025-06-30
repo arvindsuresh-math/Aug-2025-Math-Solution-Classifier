@@ -16,5 +16,6 @@ def solve(
     #: L8
     previous_monthly_income = right_side_constant_term / coefficient_of_p
 
-    answer = previous_monthly_income # FINAL ANSWER
+    #: FA
+    answer = previous_monthly_income
     return answer

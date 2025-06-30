@@ -17,5 +17,6 @@ def solve(
     #: L3
     total_slices = total_slices_large + total_slices_small
 
-    answer = total_slices  # FINAL ANSWER
+    #: FA
+    answer = total_slices
     return answer

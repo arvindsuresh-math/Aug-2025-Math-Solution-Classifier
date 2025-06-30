@@ -23,5 +23,6 @@ def solve(
     #: L5
     total_saved = bob_yearly_savings + sally_yearly_savings
 
-    answer = total_saved # FINAL ANSWER
+    #: FA
+    answer = total_saved
     return answer

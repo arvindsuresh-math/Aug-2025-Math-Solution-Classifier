@@ -13,5 +13,6 @@ def solve(
     #: L2
     gnomes_in_fifth_house = total_gnomes - gnomes_in_first_four_houses
 
-    answer = gnomes_in_fifth_house  # FINAL ANSWER
+    #: FA
+    answer = gnomes_in_fifth_house
     return answer

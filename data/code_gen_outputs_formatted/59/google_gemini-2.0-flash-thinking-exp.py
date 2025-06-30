@@ -16,5 +16,6 @@ def solve(
     #: L6
     coins_after_giving = total_collected_before_giving - coins_given_to_coworker
 
-    answer = coins_after_giving # FINAL ANSWER
+    #: FA
+    answer = coins_after_giving
     return answer

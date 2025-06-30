@@ -33,5 +33,6 @@ def solve(
     #: L8
     total_earnings = total_base_pay_5_days + total_overtime_pay_5_days
 
-    answer = total_earnings # FINAL ANSWER
+    #: FA
+    answer = total_earnings
     return answer

@@ -17,5 +17,6 @@ def solve(
     #: L3
     total_cans = initial_cans + additional_cans
 
-    answer = total_cans  # FINAL ANSWER
+    #: FA
+    answer = total_cans
     return answer

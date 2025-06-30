@@ -6,15 +6,22 @@ def solve(
 ):
     """Index: 61.
     Returns: the number of pounds the bear gained from eating small animals."""
+
     #: L1
     berry_weight = berry_fraction * total_weight_needed # eval: 200.0 = 0.2 * 1000
+
     #: L2
     acorn_weight = acorn_multiplier * berry_weight # eval: 400.0 = 2 * 200.0
+
     #: L3
     remaining_weight = total_weight_needed - berry_weight - acorn_weight # eval: 400.0 = 1000 - 200.0 - 400.0
+
     #: L4
     salmon_weight = remaining_weight * salmon_fraction # eval: 200.0 = 400.0 * 0.5
+
     #: L5
     small_animals_weight = remaining_weight - salmon_weight # eval: 200.0 = 400.0 - 200.0
-    answer = small_animals_weight  # FINAL ANSWER # eval: 200.0 = 200.0  # FINAL ANSWER
+
+    #: FA
+    answer = small_animals_weight # eval: 200.0 = 200.0
     return answer # eval: return 200.0

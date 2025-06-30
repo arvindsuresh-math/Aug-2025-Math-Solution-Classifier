@@ -7,11 +7,16 @@ def solve(
     """Index: 53.
     Returns: how much more Caleb spent on ice cream than on frozen yoghurt.
     """
+
     #: L1
     total_cost_ice_cream = cartons_ice_cream * cost_per_ice_cream # eval: 40 = 10 * 4
+
     #: L2
     total_cost_frozen_yoghurt = cartons_frozen_yoghurt * cost_per_frozen_yoghurt # eval: 4 = 4 * 1
+
     #: L3
     difference = total_cost_ice_cream - total_cost_frozen_yoghurt # eval: 36 = 40 - 4
-    answer = difference  # FINAL ANSWER # eval: 36 = 36  # FINAL ANSWER
+
+    #: FA
+    answer = difference # eval: 36 = 36
     return answer # eval: return 36

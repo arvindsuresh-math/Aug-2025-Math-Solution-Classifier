@@ -7,11 +7,16 @@ def solve(
     """Index: 65.
     Returns: the total amount Lee earned mowing lawns last week.
     """
+
     #: L1
     earnings_from_mowing = charge_per_lawn * lawns_mowed # eval: 528 = 33 * 16
+
     #: L2
     earnings_from_tips = customers_tipped * tip_amount # eval: 30 = 3 * 10
+
     #: L3
     total_earnings = earnings_from_mowing + earnings_from_tips # eval: 558 = 528 + 30
-    answer = total_earnings # FINAL ANSWER # eval: 558 = 558 # FINAL ANSWER
+
+    #: FA
+    answer = total_earnings # eval: 558 = 558
     return answer # eval: return 558

@@ -20,5 +20,6 @@ def solve(
     #: L4
     total_practice_per_month = total_practice_per_week * weeks_per_month
 
-    answer = total_practice_per_month # FINAL ANSWER
+    #: FA
+    answer = total_practice_per_month
     return answer

@@ -20,5 +20,6 @@ def solve(
     #: L4
     total_time_hours = total_miles / speed_mph
 
-    answer = total_time_hours  # FINAL ANSWER
+    #: FA
+    answer = total_time_hours
     return answer

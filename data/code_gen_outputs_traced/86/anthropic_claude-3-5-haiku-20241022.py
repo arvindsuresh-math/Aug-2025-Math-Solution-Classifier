@@ -5,9 +5,13 @@ def solve(
 ):
     """Index: 86.
     Returns: the number of ounces of soda Peter bought."""
+
     #: L1
     money_spent = money_brought - money_left # eval: 1.5 = 2.0 - 0.5
+
     #: L2
     ounces_of_soda = money_spent / soda_price_per_ounce # eval: 6.0 = 1.5 / 0.25
-    answer = ounces_of_soda  # FINAL ANSWER # eval: 6.0 = 6.0  # FINAL ANSWER
+
+    #: FA
+    answer = ounces_of_soda # eval: 6.0 = 6.0
     return answer # eval: return 6.0

@@ -15,5 +15,6 @@ def solve(
     #: L2
     distance_after_3rd_turn = total_distance_around_ring - distance_after_turns_1_2_4
 
-    answer = distance_after_3rd_turn # FINAL ANSWER
+    #: FA
+    answer = distance_after_3rd_turn
     return answer

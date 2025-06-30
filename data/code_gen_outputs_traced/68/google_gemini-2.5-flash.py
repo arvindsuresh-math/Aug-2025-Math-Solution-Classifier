@@ -7,13 +7,19 @@ def solve(
     """Index: 68.
     Returns: the number of coins Amalie has remaining after spending a fraction of them.
     """
+
     #: L1
     total_ratio = ratio_elsa + ratio_amalie # eval: 55 = 10 + 45
+
     #: L2
     amalie_coins = (ratio_amalie / total_ratio) * total_coins # eval: 360.0 = (45 / 55) * 440
+
     #: L3
     coins_spent_amalie = fraction_spent_amalie * amalie_coins # eval: 270.0 = 0.75 * 360.0
+
     #: L4
     remaining_coins_amalie = amalie_coins - coins_spent_amalie # eval: 90.0 = 360.0 - 270.0
-    answer = remaining_coins_amalie # FINAL ANSWER # eval: 90.0 = 90.0 # FINAL ANSWER
+
+    #: FA
+    answer = remaining_coins_amalie # eval: 90.0 = 90.0
     return answer # eval: return 90.0

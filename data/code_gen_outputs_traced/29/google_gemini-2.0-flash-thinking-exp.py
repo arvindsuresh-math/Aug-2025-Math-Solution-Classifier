@@ -6,13 +6,18 @@ def solve(
     """Index: 29.
     Returns: the previous monthly income.
     """
+
     #: L6
     lhs_step_6 = 20 * rent_utilities_percent_before # eval: 8.0 = 20 * 0.4
     rhs_multiplier_step_6 = 20 * rent_utilities_percent_after # eval: 5.0 = 20 * 0.25
     rhs_constant_step_6 = rhs_multiplier_step_6 * salary_increase # eval: 3000.0 = 5.0 * 600
+
     #: L7
     lhs_step_7 = lhs_step_6 - rhs_multiplier_step_6 # eval: 3.0 = 8.0 - 5.0
+
     #: L8
     previous_income = rhs_constant_step_6 / lhs_step_7 # eval: 1000.0 = 3000.0 / 3.0
-    answer = previous_income # FINAL ANSWER # eval: 1000.0 = 1000.0 # FINAL ANSWER
+
+    #: FA
+    answer = previous_income # eval: 1000.0 = 1000.0
     return answer # eval: return 1000.0

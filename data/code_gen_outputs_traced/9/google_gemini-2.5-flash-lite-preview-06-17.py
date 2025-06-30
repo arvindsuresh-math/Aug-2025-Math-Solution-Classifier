@@ -8,21 +8,31 @@ def solve(
     """Index: 9.
     Returns: the total amount of money Tina makes.
     """
+
     #: L1
     regular_pay_per_shift = regular_hours_per_shift * hourly_wage # eval: 144.0 = 8 * 18.0
+
     #: L2
     overtime_hours_per_day = hours_per_day - regular_hours_per_shift # eval: 2 = 10 - 8
+
     #: L3
     overtime_rate_increase = hourly_wage * overtime_multiplier # eval: 9.0 = 18.0 * 0.5
+
     #: L4
     overtime_hourly_rate = hourly_wage + overtime_rate_increase # eval: 27.0 = 18.0 + 9.0
+
     #: L5
     regular_pay_total = regular_pay_per_shift * days_worked # eval: 720.0 = 144.0 * 5
+
     #: L6
     overtime_pay_per_day = overtime_hourly_rate * overtime_hours_per_day # eval: 54.0 = 27.0 * 2
+
     #: L7
     overtime_pay_total = overtime_pay_per_day * days_worked # eval: 270.0 = 54.0 * 5
+
     #: L8
     total_earnings = regular_pay_total + overtime_pay_total # eval: 990.0 = 720.0 + 270.0
-    answer = total_earnings # FINAL ANSWER # eval: 990.0 = 990.0 # FINAL ANSWER
+
+    #: FA
+    answer = total_earnings # eval: 990.0 = 990.0
     return answer # eval: return 990.0

@@ -7,11 +7,16 @@ def solve(
     """Index: 13.
     Returns: the total amount Jasper spends on the ingredients.
     """
+
     #: L1
     cream_cheese_cost = cheddar_cost / 2 # eval: 5.0 = 10 / 2
+
     #: L2
     cold_cuts_cost = cheddar_cost * 2 # eval: 20 = 10 * 2
+
     #: L3
     total_spent = cheddar_cost + cream_cheese_cost + cold_cuts_cost # eval: 35.0 = 10 + 5.0 + 20
-    answer = total_spent  # FINAL ANSWER # eval: 35.0 = 35.0  # FINAL ANSWER
+
+    #: FA
+    answer = total_spent # eval: 35.0 = 35.0
     return answer # eval: return 35.0

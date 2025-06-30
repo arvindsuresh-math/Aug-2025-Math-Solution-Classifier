@@ -12,5 +12,6 @@ def solve(
     #: L2
     earnings = rate_per_minute * minutes_worked
 
-    answer = earnings  # FINAL ANSWER
+    #: FA
+    answer = earnings
     return answer

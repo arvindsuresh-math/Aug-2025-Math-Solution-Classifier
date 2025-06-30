@@ -8,9 +8,13 @@ def solve(
     """Index: 59.
     Returns: the total number of coins Joanne has after the fourth hour.
     """
+
     #: L5
     total_coins_before_giving = coins_hour_one + coins_hour_two + coins_hour_three + coins_hour_four # eval: 135 = 15 + 35 + 35 + 50
+
     #: L6
     total_coins_after_giving = total_coins_before_giving - coins_given_to_coworker # eval: 120 = 135 - 15
-    answer = total_coins_after_giving  # FINAL ANSWER # eval: 120 = 120  # FINAL ANSWER
+
+    #: FA
+    answer = total_coins_after_giving # eval: 120 = 120
     return answer # eval: return 120

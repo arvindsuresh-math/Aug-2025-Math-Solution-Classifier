@@ -16,5 +16,6 @@ def solve(
     #: L3
     total_vegetables = potatoes_produced + cucumbers_produced + peppers_produced
 
-    answer = total_vegetables # FINAL ANSWER
+    #: FA
+    answer = total_vegetables
     return answer

@@ -6,9 +6,13 @@ def solve(
     """Index: 48.
     Returns: the number of digits Sam memorized.
     """
+
     #: L1
     carlos_memorized = mina_memorized / mina_times_carlos # eval: 4.0 = 24 / 6
+
     #: L2
     sam_memorized = carlos_memorized + sam_more_than_carlos # eval: 10.0 = 4.0 + 6
-    answer = sam_memorized # FINAL ANSWER # eval: 10.0 = 10.0 # FINAL ANSWER
+
+    #: FA
+    answer = sam_memorized # eval: 10.0 = 10.0
     return answer # eval: return 10.0

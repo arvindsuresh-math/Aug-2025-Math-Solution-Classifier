@@ -7,17 +7,25 @@ def solve(
     """Index: 59.
     Returns: the total number of coins Joanne had after the fourth hour.
     """
+
     #: L1
     coins_hour_1_total = coins_hour_1 # eval: 15 = 15
+
     #: L2
     coins_hour_2_total = coins_hour_2_3 # eval: 35 = 35
+
     #: L3
     coins_hour_3_total = coins_hour_2_3 # eval: 35 = 35
+
     #: L4
     coins_hour_4_total = coins_hour_4 # eval: 50 = 50
+
     #: L5
     total_coins_before_giving = coins_hour_1_total + coins_hour_2_total + coins_hour_3_total + coins_hour_4_total # eval: 135 = 15 + 35 + 35 + 50
+
     #: L6
     total_coins_after_giving = total_coins_before_giving - coins_given_to_coworker # eval: 120 = 135 - 15
-    answer = total_coins_after_giving # FINAL ANSWER # eval: 120 = 120 # FINAL ANSWER
+
+    #: FA
+    answer = total_coins_after_giving # eval: 120 = 120
     return answer # eval: return 120

@@ -6,13 +6,19 @@ def solve(
 ):
     """Index: 50.
     Returns: the number of chores Gerald needs to do per month to save up for baseball supplies."""
+
     #: L1
     total_baseball_supplies_cost = monthly_baseball_supplies * baseball_season_months # eval: 400 = 100 * 4
+
     #: L2
     months_to_save = total_months_in_year - baseball_season_months # eval: 8 = 12 - 4
+
     #: L3
     monthly_savings_needed = total_baseball_supplies_cost / months_to_save # eval: 50.0 = 400 / 8
+
     #: L4
     chores_per_month = monthly_savings_needed / chore_price # eval: 5.0 = 50.0 / 10
-    answer = chores_per_month  # FINAL ANSWER # eval: 5.0 = 5.0  # FINAL ANSWER
+
+    #: FA
+    answer = chores_per_month # eval: 5.0 = 5.0
     return answer # eval: return 5.0

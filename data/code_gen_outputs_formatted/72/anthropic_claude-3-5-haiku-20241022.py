@@ -16,5 +16,6 @@ def solve(
     #: L3
     volume_after_nancy_refills = volume_after_cat_spill * 3
 
-    answer = volume_after_nancy_refills  # FINAL ANSWER
+    #: FA
+    answer = volume_after_nancy_refills
     return answer

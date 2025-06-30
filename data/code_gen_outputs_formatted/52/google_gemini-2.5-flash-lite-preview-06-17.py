@@ -17,5 +17,6 @@ def solve(
     #: L3
     pencils_per_box = total_pencils_all / num_boxes
 
-    answer = pencils_per_box # FINAL ANSWER
+    #: FA
+    answer = pencils_per_box
     return answer

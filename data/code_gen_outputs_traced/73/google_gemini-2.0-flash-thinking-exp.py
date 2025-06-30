@@ -7,9 +7,13 @@ def solve(
     """Index: 73.
     Returns: the number of packs of trail mix Roger needs to buy.
     """
+
     #: L1
     total_people = team_members + coaches + helpers # eval: 18 = 13 + 3 + 2
+
     #: L2
     packs_needed = total_people / pouches_per_pack # eval: 3.0 = 18 / 6
-    answer = packs_needed # FINAL ANSWER # eval: 3.0 = 3.0 # FINAL ANSWER
+
+    #: FA
+    answer = packs_needed # eval: 3.0 = 3.0
     return answer # eval: return 3.0

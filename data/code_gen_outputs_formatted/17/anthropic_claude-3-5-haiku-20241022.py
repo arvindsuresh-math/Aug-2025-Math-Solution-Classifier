@@ -24,5 +24,6 @@ def solve(
     #: L5
     pink_and_green_hats_remaining = pink_hats_after_john + green_hats_remaining
 
-    answer = pink_and_green_hats_remaining + initial_yellow_hats  # FINAL ANSWER
+    #: FA
+    answer = pink_and_green_hats_remaining + initial_yellow_hats
     return answer

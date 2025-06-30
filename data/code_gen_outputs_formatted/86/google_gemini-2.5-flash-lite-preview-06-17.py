@@ -13,5 +13,6 @@ def solve(
     #: L2
     ounces_bought = money_spent / cost_per_ounce
 
-    answer = ounces_bought # FINAL ANSWER
+    #: FA
+    answer = ounces_bought
     return answer

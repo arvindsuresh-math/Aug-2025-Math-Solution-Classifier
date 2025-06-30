@@ -10,15 +10,22 @@ def solve(
 ):
     """Index: 37.
     Returns: the amount each friend will pay when splitting the bill equally."""
+
     #: L1
     hamburger_total = hamburger_price * num_hamburgers # eval: 15.0 = 3.0 * 5
+
     #: L2
     fries_total = fries_price * num_fries # eval: 4.8 = 1.2 * 4
+
     #: L3
     soda_total = soda_price * num_sodas # eval: 2.5 = 0.5 * 5
+
     #: L4
     total_bill = hamburger_total + fries_total + soda_total + spaghetti_price # eval: 25.0 = 15.0 + 4.8 + 2.5 + 2.7
+
     #: L5
     individual_share = total_bill / num_friends # eval: 5.0 = 25.0 / 5
-    answer = individual_share  # FINAL ANSWER # eval: 5.0 = 5.0  # FINAL ANSWER
+
+    #: FA
+    answer = individual_share # eval: 5.0 = 5.0
     return answer # eval: return 5.0

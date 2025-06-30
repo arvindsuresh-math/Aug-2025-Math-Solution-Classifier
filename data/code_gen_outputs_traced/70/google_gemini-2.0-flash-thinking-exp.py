@@ -5,9 +5,13 @@ def solve(
     """Index: 70.
     Returns: the number of apples Harry has.
     """
+
     #: L1
     tim_apples = martha_apples - tim_less_than_martha # eval: 38 = 68 - 30
+
     #: L2
     harry_apples = tim_apples / 2 # eval: 19.0 = 38 / 2
-    answer = harry_apples # FINAL ANSWER # eval: 19.0 = 19.0 # FINAL ANSWER
+
+    #: FA
+    answer = harry_apples # eval: 19.0 = 19.0
     return answer # eval: return 19.0

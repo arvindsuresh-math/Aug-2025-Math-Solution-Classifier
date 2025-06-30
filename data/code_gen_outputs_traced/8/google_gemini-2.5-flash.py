@@ -10,11 +10,16 @@ def solve(
     """Index: 8.
     Returns: the amount Alexis paid for the shoes.
     """
+
     #: L2
     spent_on_known_items = shirt_cost + suit_pants_cost + suit_coat_cost + socks_cost + belt_cost # eval: 143 = 30 + 46 + 38 + 11 + 18
+
     #: L3
     total_spent = budget - remaining_budget # eval: 184 = 200 - 16
+
     #: L4
     shoes_cost = total_spent - spent_on_known_items # eval: 41 = 184 - 143
-    answer = shoes_cost # FINAL ANSWER # eval: 41 = 41 # FINAL ANSWER
+
+    #: FA
+    answer = shoes_cost # eval: 41 = 41
     return answer # eval: return 41

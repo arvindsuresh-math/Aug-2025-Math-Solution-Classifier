@@ -12,5 +12,6 @@ def solve(
     #: L2
     ml_salt = liters_salt * 1000
 
-    answer = ml_salt  # FINAL ANSWER
+    #: FA
+    answer = ml_salt
     return answer

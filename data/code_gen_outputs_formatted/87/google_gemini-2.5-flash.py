@@ -16,5 +16,6 @@ def solve(
     #: L3
     increased_value = weight_gained * price_per_pound
 
-    answer = increased_value # FINAL ANSWER
+    #: FA
+    answer = increased_value
     return answer

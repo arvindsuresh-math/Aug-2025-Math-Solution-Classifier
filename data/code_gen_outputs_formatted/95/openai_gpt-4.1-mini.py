@@ -29,5 +29,6 @@ def solve(
     #: L7
     total_value = iron_nickels_value + regular_nickels_value
 
-    answer = total_value  # FINAL ANSWER
+    #: FA
+    answer = total_value
     return answer

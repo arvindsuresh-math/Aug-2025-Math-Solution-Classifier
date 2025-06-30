@@ -20,5 +20,6 @@ def solve(
     #: L3
     total_balls_not_hit = balls_not_hit_first_set + balls_not_hit_second_set
 
-    answer = total_balls_not_hit # FINAL ANSWER
+    #: FA
+    answer = total_balls_not_hit
     return answer

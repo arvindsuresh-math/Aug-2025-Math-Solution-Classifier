@@ -6,11 +6,16 @@ def solve(
     """Index: 20.
     Returns: the total number of stamps Bella bought.
     """
+
     #: L1
     num_truck_stamps = num_snowflake_stamps + more_truck_than_snowflake # eval: 20 = 11 + 9
+
     #: L2
     num_rose_stamps = num_truck_stamps - fewer_rose_than_truck # eval: 7 = 20 - 13
+
     #: L3
     total_stamps = num_snowflake_stamps + num_truck_stamps + num_rose_stamps # eval: 38 = 11 + 20 + 7
-    answer = total_stamps # FINAL ANSWER # eval: 38 = 38 # FINAL ANSWER
+
+    #: FA
+    answer = total_stamps # eval: 38 = 38
     return answer # eval: return 38

@@ -7,11 +7,16 @@ def solve(
     """Index: 82.
     Returns: Irene's total income for the week.
     """
+
     #: L1
     overtime_hours = hours_worked - base_hours # eval: 10 = 50 - 40
+
     #: L2
     overtime_pay = overtime_hours * overtime_rate # eval: 200 = 10 * 20
+
     #: L3
     total_income = base_income + overtime_pay # eval: 700 = 500 + 200
-    answer = total_income # FINAL ANSWER # eval: 700 = 700 # FINAL ANSWER
+
+    #: FA
+    answer = total_income # eval: 700 = 700
     return answer # eval: return 700

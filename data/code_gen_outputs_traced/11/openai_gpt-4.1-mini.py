@@ -10,15 +10,22 @@ def solve(
     """Index: 11.
     Returns: the number of driveways shoveled.
     """
+
     #: L1
     total_saved = shoe_cost + change_after_purchase # eval: 110 = 95 + 15
+
     #: L2
     total_allowance = months_saving * monthly_allowance # eval: 15 = 3 * 5
+
     #: L3
     total_mowing_earnings = lawns_mowed * mow_lawn_charge # eval: 60 = 4 * 15
+
     #: L4
     total_shoveling_earnings = total_saved - total_mowing_earnings - total_allowance # eval: 35 = 110 - 60 - 15
+
     #: L5
     driveways_shoveled = total_shoveling_earnings / shovel_driveway_charge # eval: 5.0 = 35 / 7
-    answer = driveways_shoveled  # FINAL ANSWER # eval: 5.0 = 5.0  # FINAL ANSWER
+
+    #: FA
+    answer = driveways_shoveled # eval: 5.0 = 5.0
     return answer # eval: return 5.0

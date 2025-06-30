@@ -6,11 +6,16 @@ def solve(
     """Index: 29.
     Returns: her previous monthly income.
     """
+
     #: L6
     right_side_constant_term = 5 * salary_increase # eval: 3000 = 5 * 600
+
     #: L7
     coefficient_of_p = 3 # eval: 3 = 3
+
     #: L8
     previous_monthly_income = right_side_constant_term / coefficient_of_p # eval: 1000.0 = 3000 / 3
-    answer = previous_monthly_income # FINAL ANSWER # eval: 1000.0 = 1000.0 # FINAL ANSWER
+
+    #: FA
+    answer = previous_monthly_income # eval: 1000.0 = 1000.0
     return answer # eval: return 1000.0

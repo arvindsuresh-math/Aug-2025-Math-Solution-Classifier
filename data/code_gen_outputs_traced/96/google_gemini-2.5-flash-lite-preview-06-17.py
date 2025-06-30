@@ -7,11 +7,16 @@ def solve(
     """Index: 96.
     Returns: the total amount of money James made from selling all the water.
     """
+
     #: L1
     total_inches_rain = inches_monday + inches_tuesday # eval: 7 = 4 + 3
+
     #: L2
     total_gallons_collected = total_inches_rain * gallons_per_inch # eval: 105 = 7 * 15
+
     #: L3
     total_money_made = total_gallons_collected * price_per_gallon # eval: 126.0 = 105 * 1.2
-    answer = total_money_made # FINAL ANSWER # eval: 126.0 = 126.0 # FINAL ANSWER
+
+    #: FA
+    answer = total_money_made # eval: 126.0 = 126.0
     return answer # eval: return 126.0

@@ -15,5 +15,6 @@ def solve(
     #: L3
     total_trees = num_mango_trees + num_coconut_trees
 
-    answer = total_trees # FINAL ANSWER
+    #: FA
+    answer = total_trees
     return answer

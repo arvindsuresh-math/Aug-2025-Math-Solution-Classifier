@@ -25,5 +25,6 @@ def solve(
     #: L5
     uneaten_pieces = total_pieces - total_pieces_eaten
 
-    answer = uneaten_pieces # FINAL ANSWER
+    #: FA
+    answer = uneaten_pieces
     return answer

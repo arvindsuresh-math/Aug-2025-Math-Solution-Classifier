@@ -4,9 +4,13 @@ def solve(
 ):
     """Index: 48.
     Returns: the number of digits Sam memorized."""
+
     #: L1
     carlos_digits = mina_digits / 6 # eval: 4.0 = 24 / 6
+
     #: L2
     sam_digits = carlos_digits + difference_from_carlos # eval: 10.0 = 4.0 + 6
-    answer = sam_digits  # FINAL ANSWER # eval: 10.0 = 10.0  # FINAL ANSWER
+
+    #: FA
+    answer = sam_digits # eval: 10.0 = 10.0
     return answer # eval: return 10.0

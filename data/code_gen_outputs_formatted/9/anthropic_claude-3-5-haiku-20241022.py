@@ -32,5 +32,6 @@ def solve(
     #: L8
     total_pay = base_pay_total + overtime_pay_total
 
-    answer = total_pay  # FINAL ANSWER
+    #: FA
+    answer = total_pay
     return answer

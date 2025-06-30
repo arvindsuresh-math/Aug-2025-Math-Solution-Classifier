@@ -11,5 +11,6 @@ def solve(
     #: L3
     total_geckos_sold = geckos_last_year + geckos_two_years_ago
 
-    answer = total_geckos_sold  # FINAL ANSWER
+    #: FA
+    answer = total_geckos_sold
     return answer

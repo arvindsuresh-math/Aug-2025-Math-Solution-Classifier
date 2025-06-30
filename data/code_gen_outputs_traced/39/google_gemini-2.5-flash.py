@@ -7,11 +7,16 @@ def solve(
     """Index: 39.
     Returns: the number of additional pieces of candy Anna gets compared to Billy.
     """
+
     #: L1
     total_candy_anna = candy_per_house_anna * houses_subdivision_anna # eval: 840 = 14 * 60
+
     #: L2
     total_candy_billy = candy_per_house_billy * houses_subdivision_billy # eval: 825 = 11 * 75
+
     #: L3
     difference_in_candy = total_candy_anna - total_candy_billy # eval: 15 = 840 - 825
-    answer = difference_in_candy # FINAL ANSWER # eval: 15 = 15 # FINAL ANSWER
+
+    #: FA
+    answer = difference_in_candy # eval: 15 = 15
     return answer # eval: return 15

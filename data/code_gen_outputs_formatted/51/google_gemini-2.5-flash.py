@@ -22,5 +22,6 @@ def solve(
     #: L4
     fabric_left = original_bolt_area - living_room_fabric_area - bedroom_fabric_area
 
-    answer = fabric_left # FINAL ANSWER
+    #: FA
+    answer = fabric_left
     return answer

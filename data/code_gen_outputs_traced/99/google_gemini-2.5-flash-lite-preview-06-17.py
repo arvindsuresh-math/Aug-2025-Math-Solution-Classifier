@@ -8,15 +8,22 @@ def solve(
     """Index: 99.
     Returns: how many more fish would Gail have in the first tank than the second tank.
     """
+
     #: L1
     gallons_in_second_tank = gallons_in_first_tank / ratio_first_to_second_tank # eval: 24.0 = 48 / 2
+
     #: L2
     num_fish_second_tank = gallons_in_second_tank / fish_size_second_tank # eval: 12.0 = 24.0 / 2
+
     #: L3
     num_fish_first_tank = gallons_in_first_tank / fish_size_first_tank # eval: 16.0 = 48 / 3
+
     #: L4
     num_fish_first_tank_after_eating = num_fish_first_tank - fish_eaten_in_first_tank # eval: 15.0 = 16.0 - 1
+
     #: L5
     difference_in_fish = num_fish_first_tank_after_eating - num_fish_second_tank # eval: 3.0 = 15.0 - 12.0
-    answer = difference_in_fish # FINAL ANSWER # eval: 3.0 = 3.0 # FINAL ANSWER
+
+    #: FA
+    answer = difference_in_fish # eval: 3.0 = 3.0
     return answer # eval: return 3.0

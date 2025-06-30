@@ -5,9 +5,13 @@ def solve(
     """Index: 0.
     Returns: the total number of clips Natalia sold in April and May.
     """
+
     #: L1
     clips_may = clips_april * fraction_may_sales # eval: 24.0 = 48 * 0.5
+
     #: L2
     total_clips = clips_april + clips_may # eval: 72.0 = 48 + 24.0
-    answer = total_clips # FINAL ANSWER # eval: 72.0 = 72.0 # FINAL ANSWER
+
+    #: FA
+    answer = total_clips # eval: 72.0 = 72.0
     return answer # eval: return 72.0

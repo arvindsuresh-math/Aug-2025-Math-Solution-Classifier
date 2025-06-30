@@ -20,5 +20,6 @@ def solve(
     #: L4
     amalie_remaining_coins = amalie_coins - coins_spent_by_amalie
 
-    answer = amalie_remaining_coins # FINAL ANSWER
+    #: FA
+    answer = amalie_remaining_coins
     return answer

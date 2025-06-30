@@ -7,11 +7,16 @@ def solve(
     """Index: 7.
     Returns: the final weight of the box of goodies in pounds.
     """
+
     #: L1
     weight_after_brownies = initial_jelly_beans_weight * brownie_multiplier # eval: 6 = 2 * 3
+
     #: L2
     weight_after_additional_jelly_beans = weight_after_brownies + additional_jelly_beans_weight # eval: 8 = 6 + 2
+
     #: L3
     final_weight = weight_after_additional_jelly_beans * gummy_worm_multiplier # eval: 16 = 8 * 2
-    answer = final_weight # FINAL ANSWER # eval: 16 = 16 # FINAL ANSWER
+
+    #: FA
+    answer = final_weight # eval: 16 = 16
     return answer # eval: return 16

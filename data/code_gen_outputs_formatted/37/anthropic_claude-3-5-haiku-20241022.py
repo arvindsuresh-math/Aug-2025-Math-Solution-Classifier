@@ -26,5 +26,6 @@ def solve(
     #: L5
     individual_share = total_bill / num_friends
 
-    answer = individual_share  # FINAL ANSWER
+    #: FA
+    answer = individual_share
     return answer

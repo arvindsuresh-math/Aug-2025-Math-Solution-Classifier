@@ -33,5 +33,6 @@ def solve(
     #: L8
     average_of_averages = total_avg_last_three_days / 2
 
-    answer = average_of_averages  # FINAL ANSWER
+    #: FA
+    answer = average_of_averages
     return answer

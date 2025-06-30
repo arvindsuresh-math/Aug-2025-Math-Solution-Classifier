@@ -21,5 +21,6 @@ def solve(
     #: L5
     total_flowers = yellow_and_purple_flowers + green_flowers
 
-    answer = total_flowers  # FINAL ANSWER
+    #: FA
+    answer = total_flowers
     return answer

@@ -7,11 +7,16 @@ def solve(
     """Index: 71.
     Returns: the amount of money Hillary is left with after making the deposit.
     """
+
     #: L1
     initial_earnings = crafts_sold * price_per_craft # eval: 36 = 3 * 12
+
     #: L2
     total_earnings = initial_earnings + extra_tip # eval: 43 = 36 + 7
+
     #: L3
     remaining_cash = total_earnings - deposit_amount # eval: 25 = 43 - 18
-    answer = remaining_cash # FINAL ANSWER # eval: 25 = 25 # FINAL ANSWER
+
+    #: FA
+    answer = remaining_cash # eval: 25 = 25
     return answer # eval: return 25

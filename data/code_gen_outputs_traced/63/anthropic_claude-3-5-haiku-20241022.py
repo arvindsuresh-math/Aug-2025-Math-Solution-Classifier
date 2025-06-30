@@ -6,11 +6,16 @@ def solve(
     """Index: 63.
     Returns: the number of situps Shawna needs to do on Wednesday to meet her goal.
     """
+
     #: L1
     monday_shortfall = daily_goal - monday_situps # eval: 18 = 30 - 12
+
     #: L2
     tuesday_shortfall = daily_goal - tuesday_situps # eval: 11 = 30 - 19
+
     #: L3
     wednesday_situps = daily_goal + monday_shortfall + tuesday_shortfall # eval: 59 = 30 + 18 + 11
-    answer = wednesday_situps  # FINAL ANSWER # eval: 59 = 59  # FINAL ANSWER
+
+    #: FA
+    answer = wednesday_situps # eval: 59 = 59
     return answer # eval: return 59

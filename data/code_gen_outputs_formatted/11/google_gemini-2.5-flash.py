@@ -26,5 +26,6 @@ def solve(
     #: L5
     num_driveways_shoveled = money_from_shoveling_driveways / driveway_shoveling_charge
 
-    answer = num_driveways_shoveled # FINAL ANSWER
+    #: FA
+    answer = num_driveways_shoveled
     return answer

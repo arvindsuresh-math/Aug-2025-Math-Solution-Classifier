@@ -16,5 +16,6 @@ def solve(
     #: L3
     slices_left = total_slices - total_people_eating
 
-    answer = slices_left  # FINAL ANSWER
+    #: FA
+    answer = slices_left
     return answer

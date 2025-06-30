@@ -20,5 +20,6 @@ def solve(
     #: L3
     total_not_hit = first_batch_not_hit_count + second_batch_not_hit_count
 
-    answer = total_not_hit # FINAL ANSWER
+    #: FA
+    answer = total_not_hit
     return answer

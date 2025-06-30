@@ -17,5 +17,6 @@ def solve(
     #: L3
     money_left = total_before_deposit - money_deposited
 
-    answer = money_left # FINAL ANSWER
+    #: FA
+    answer = money_left
     return answer

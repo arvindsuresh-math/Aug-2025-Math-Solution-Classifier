@@ -6,11 +6,16 @@ def solve(
     """Index: 55.
     Returns: the percentage of flowers that are not roses.
     """
+
     #: L1
     total_flowers = num_roses + num_tulips + num_daisies # eval: 100 = 25 + 40 + 35
+
     #: L2
     flowers_not_roses = num_tulips + num_daisies # eval: 75 = 40 + 35
+
     #: L3
     percentage_not_roses = (flowers_not_roses / total_flowers) * 100 # eval: 75.0 = (75 / 100) * 100
-    answer = percentage_not_roses # FINAL ANSWER # eval: 75.0 = 75.0 # FINAL ANSWER
+
+    #: FA
+    answer = percentage_not_roses # eval: 75.0 = 75.0
     return answer # eval: return 75.0

@@ -19,5 +19,6 @@ def solve(
     #: L4
     third_part_time = total_assignment_time - first_and_second_part_time
 
-    answer = third_part_time  # FINAL ANSWER
+    #: FA
+    answer = third_part_time
     return answer

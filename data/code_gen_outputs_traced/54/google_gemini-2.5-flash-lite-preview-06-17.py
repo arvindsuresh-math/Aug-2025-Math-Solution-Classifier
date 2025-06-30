@@ -7,13 +7,19 @@ def solve(
     """Index: 54.
     Returns: the amount of money Leah lost.
     """
+
     #: L1
     milkshake_cost = initial_earnings * milkshake_cost_fraction # eval: 4.0 = 28 * 0.14285714285714285
+
     #: L2
     money_left_after_milkshake = initial_earnings - milkshake_cost # eval: 24.0 = 28 - 4.0
+
     #: L3
     money_in_wallet = money_left_after_milkshake * savings_fraction # eval: 12.0 = 24.0 * 0.5
+
     #: L4
     money_lost = money_in_wallet - money_left_after_shredding # eval: 11.0 = 12.0 - 1
-    answer = money_lost # FINAL ANSWER # eval: 11.0 = 11.0 # FINAL ANSWER
+
+    #: FA
+    answer = money_lost # eval: 11.0 = 11.0
     return answer # eval: return 11.0

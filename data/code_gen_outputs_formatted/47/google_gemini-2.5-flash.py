@@ -20,5 +20,6 @@ def solve(
     #: L4
     total_download_time = time_first_part + time_second_part
 
-    answer = total_download_time # FINAL ANSWER
+    #: FA
+    answer = total_download_time
     return answer

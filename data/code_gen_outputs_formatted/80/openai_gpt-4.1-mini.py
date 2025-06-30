@@ -16,5 +16,6 @@ def solve(
     #: L3
     total_cans_jennifer = initial_cans_jennifer + total_additional_cans
 
-    answer = total_cans_jennifer  # FINAL ANSWER
+    #: FA
+    answer = total_cans_jennifer
     return answer

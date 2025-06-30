@@ -18,5 +18,6 @@ def solve(
     #: L4
     mike_remaining = mike_share - shirt_cost
 
-    answer = mike_remaining # FINAL ANSWER
+    #: FA
+    answer = mike_remaining
     return answer

@@ -9,15 +9,22 @@ def solve(
     """Index: 23.
     Returns: the cost of each top.
     """
+
     #: L1
     cost_of_shorts = num_shorts * price_per_short # eval: 35 = 5 * 7
+
     #: L2
     cost_of_shoes = num_shoes * price_per_shoe # eval: 20 = 2 * 10
+
     #: L3
     cost_shorts_and_shoes = cost_of_shorts + cost_of_shoes # eval: 55 = 35 + 20
+
     #: L4
     cost_of_tops = total_spent - cost_shorts_and_shoes # eval: 20 = 75 - 55
+
     #: L5
     price_per_top = cost_of_tops / num_tops # eval: 5.0 = 20 / 4
-    answer = price_per_top # FINAL ANSWER # eval: 5.0 = 5.0 # FINAL ANSWER
+
+    #: FA
+    answer = price_per_top # eval: 5.0 = 5.0
     return answer # eval: return 5.0

@@ -15,5 +15,6 @@ def solve(
     #: L3
     hours_to_read = total_pages / pages_read_per_hour
 
-    answer = hours_to_read  # FINAL ANSWER
+    #: FA
+    answer = hours_to_read
     return answer

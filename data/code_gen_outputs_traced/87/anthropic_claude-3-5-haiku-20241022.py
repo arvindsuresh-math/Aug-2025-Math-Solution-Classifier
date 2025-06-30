@@ -6,11 +6,16 @@ def solve(
     """Index: 87.
     Returns: the additional value of the cow after weight gain.
     """
+
     #: L1
     final_weight = initial_weight * weight_increase_factor # eval: 600.0 = 400 * 1.5
+
     #: L2
     weight_gained = final_weight - initial_weight # eval: 200.0 = 600.0 - 400
+
     #: L3
     value_increase = weight_gained * price_per_pound # eval: 600.0 = 200.0 * 3
-    answer = value_increase  # FINAL ANSWER # eval: 600.0 = 600.0  # FINAL ANSWER
+
+    #: FA
+    answer = value_increase # eval: 600.0 = 600.0
     return answer # eval: return 600.0

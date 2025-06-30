@@ -20,5 +20,6 @@ def solve(
     #: L4
     pages_to_read_tomorrow = remaining_pages * fraction_tomorrow
 
-    answer = pages_to_read_tomorrow # FINAL ANSWER
+    #: FA
+    answer = pages_to_read_tomorrow
     return answer

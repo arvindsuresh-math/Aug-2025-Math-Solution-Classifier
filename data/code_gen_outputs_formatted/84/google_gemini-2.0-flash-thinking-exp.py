@@ -14,5 +14,6 @@ def solve(
     unavailable_room_count = unavailable_floors * rooms_per_floor
     available_rooms = total_rooms - unavailable_room_count
 
-    answer = available_rooms # FINAL ANSWER
+    #: FA
+    answer = available_rooms
     return answer

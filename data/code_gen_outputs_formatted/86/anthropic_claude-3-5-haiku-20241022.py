@@ -12,5 +12,6 @@ def solve(
     #: L2
     ounces_of_soda = money_spent / soda_price_per_ounce
 
-    answer = ounces_of_soda  # FINAL ANSWER
+    #: FA
+    answer = ounces_of_soda
     return answer

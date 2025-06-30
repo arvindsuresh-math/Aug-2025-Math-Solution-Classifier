@@ -7,15 +7,22 @@ def solve(
     """Index: 30.
     Returns: the number of pizza pieces left uneaten.
     """
+
     #: L1
     total_pizza_pieces = num_people * pieces_per_pizza # eval: 16 = 4 * 4
+
     #: L2
     pieces_eaten_bill_dale = 2 * pieces_per_pizza * bill_dale_eat_percent # eval: 4.0 = 2 * 4 * 0.5
+
     #: L3
     pieces_eaten_ann_cate = 2 * pieces_per_pizza * ann_cate_eat_percent # eval: 6.0 = 2 * 4 * 0.75
+
     #: L4
     total_pieces_eaten = pieces_eaten_bill_dale + pieces_eaten_ann_cate # eval: 10.0 = 4.0 + 6.0
+
     #: L5
     uneaten_pizza_pieces = total_pizza_pieces - total_pieces_eaten # eval: 6.0 = 16 - 10.0
-    answer = uneaten_pizza_pieces # FINAL ANSWER # eval: 6.0 = 6.0 # FINAL ANSWER
+
+    #: FA
+    answer = uneaten_pizza_pieces # eval: 6.0 = 6.0
     return answer # eval: return 6.0

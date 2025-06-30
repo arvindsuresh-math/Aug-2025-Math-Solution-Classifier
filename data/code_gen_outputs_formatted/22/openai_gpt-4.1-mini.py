@@ -13,5 +13,6 @@ def solve(
     #: L2
     samanthas_last_name_length = bobbies_last_name_length - difference_samantha_bobbie
 
-    answer = samanthas_last_name_length  # FINAL ANSWER
+    #: FA
+    answer = samanthas_last_name_length
     return answer

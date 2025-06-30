@@ -11,5 +11,6 @@ def solve(
     #: L1
     mystery_books = western_novels + biography_books
 
-    answer = history_books + romance_books + poetry_books + mystery_books + western_novels + biography_books  # FINAL ANSWER
+    #: FA
+    answer = history_books + romance_books + poetry_books + mystery_books + western_novels + biography_books
     return answer

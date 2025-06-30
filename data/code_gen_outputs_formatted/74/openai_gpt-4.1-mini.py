@@ -16,5 +16,6 @@ def solve(
     #: L3
     last_two_each_loss = remaining_weight_loss / 2
 
-    answer = last_two_each_loss  # FINAL ANSWER
+    #: FA
+    answer = last_two_each_loss
     return answer

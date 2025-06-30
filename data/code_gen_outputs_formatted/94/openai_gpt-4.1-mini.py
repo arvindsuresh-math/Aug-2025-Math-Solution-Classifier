@@ -13,5 +13,6 @@ def solve(
     #: L2
     days_needed = total_pages / pages_per_day
 
-    answer = days_needed  # FINAL ANSWER
+    #: FA
+    answer = days_needed
     return answer

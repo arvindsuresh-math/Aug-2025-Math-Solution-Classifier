@@ -16,5 +16,6 @@ def solve(
     #: L3
     value_increase = weight_gain * price_per_pound
 
-    answer = value_increase  # FINAL ANSWER
+    #: FA
+    answer = value_increase
     return answer

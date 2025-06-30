@@ -17,5 +17,6 @@ def solve(
     #: L3
     hourly_rate = total_pay / total_hours
 
-    answer = hourly_rate  # FINAL ANSWER
+    #: FA
+    answer = hourly_rate
     return answer

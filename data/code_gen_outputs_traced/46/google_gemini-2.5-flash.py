@@ -7,13 +7,19 @@ def solve(
     """Index: 46.
     Returns: the total number of minutes Carolyn spends practicing in a month.
     """
+
     #: L1
     violin_practice_minutes_per_day = piano_practice_minutes_per_day * violin_practice_multiplier # eval: 60 = 20 * 3
+
     #: L2
     total_practice_minutes_per_day = violin_practice_minutes_per_day + piano_practice_minutes_per_day # eval: 80 = 60 + 20
+
     #: L3
     total_practice_minutes_per_week = total_practice_minutes_per_day * practice_days_per_week # eval: 480 = 80 * 6
+
     #: L4
     total_practice_minutes_per_month = total_practice_minutes_per_week * weeks_per_month # eval: 1920 = 480 * 4
-    answer = total_practice_minutes_per_month # FINAL ANSWER # eval: 1920 = 1920 # FINAL ANSWER
+
+    #: FA
+    answer = total_practice_minutes_per_month # eval: 1920 = 1920
     return answer # eval: return 1920

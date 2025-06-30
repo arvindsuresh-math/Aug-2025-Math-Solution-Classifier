@@ -5,9 +5,13 @@ def solve(
     """Index: 88.
     Returns: the total number of geckos Brandon sold in the last two years.
     """
+
     #: L2
     previous_year_sales = last_year_sales * multiplier_previous_year # eval: 172 = 86 * 2
+
     #: L3
     total_sales = last_year_sales + previous_year_sales # eval: 258 = 86 + 172
-    answer = total_sales # FINAL ANSWER # eval: 258 = 258 # FINAL ANSWER
+
+    #: FA
+    answer = total_sales # eval: 258 = 258
     return answer # eval: return 258

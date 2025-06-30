@@ -19,5 +19,6 @@ def solve(
     #: L3
     skittles_total_cost = skittles_bags * skittles_bag_cost
 
-    answer = pinata_cost + reeses_total_cost + snickers_total_cost + skittles_total_cost  # FINAL ANSWER
+    #: FA
+    answer = pinata_cost + reeses_total_cost + snickers_total_cost + skittles_total_cost
     return answer

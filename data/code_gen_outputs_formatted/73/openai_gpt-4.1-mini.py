@@ -16,5 +16,6 @@ def solve(
     import math
     packs_needed_rounded = math.ceil(packs_needed)
 
-    answer = packs_needed_rounded  # FINAL ANSWER
+    #: FA
+    answer = packs_needed_rounded
     return answer

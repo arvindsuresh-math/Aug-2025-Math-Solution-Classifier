@@ -7,11 +7,16 @@ def solve(
     """Index: 16.
     Returns: the amount of money Mike will have left after buying a shirt.
     """
+
     #: L2
     value_per_part = johnson_share / ratio_johnson # eval: 500.0 = 2500 / 5
+
     #: L3
     mike_share = ratio_mike * value_per_part # eval: 1000.0 = 2 * 500.0
+
     #: L4
     mike_remaining_share = mike_share - shirt_cost # eval: 800.0 = 1000.0 - 200
-    answer = mike_remaining_share # FINAL ANSWER # eval: 800.0 = 800.0 # FINAL ANSWER
+
+    #: FA
+    answer = mike_remaining_share # eval: 800.0 = 800.0
     return answer # eval: return 800.0

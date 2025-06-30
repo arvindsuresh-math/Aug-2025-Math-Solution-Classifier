@@ -13,5 +13,6 @@ def solve(
     #: L2
     available_rooms = total_rooms - (rooms_per_floor * unavailable_floors)
 
-    answer = available_rooms # FINAL ANSWER
+    #: FA
+    answer = available_rooms
     return answer

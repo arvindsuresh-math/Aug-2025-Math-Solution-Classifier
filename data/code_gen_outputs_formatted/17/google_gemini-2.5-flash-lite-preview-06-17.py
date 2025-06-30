@@ -27,5 +27,6 @@ def solve(
     #: L6
     total_remaining_hats = remaining_pink_and_green + initial_yellow_hats
 
-    answer = total_remaining_hats # FINAL ANSWER
+    #: FA
+    answer = total_remaining_hats
     return answer

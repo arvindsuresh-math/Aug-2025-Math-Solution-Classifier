@@ -13,5 +13,6 @@ def solve(
     #: L2
     sam_memorized = carlos_memorized + sam_more_than_carlos
 
-    answer = sam_memorized # FINAL ANSWER
+    #: FA
+    answer = sam_memorized
     return answer

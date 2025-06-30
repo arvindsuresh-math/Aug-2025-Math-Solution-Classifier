@@ -14,5 +14,6 @@ def solve(
     #: L2
     meters_after_3rd_turn = total_meters_driven - meters_before_3rd_turn
 
-    answer = meters_after_3rd_turn # FINAL ANSWER
+    #: FA
+    answer = meters_after_3rd_turn
     return answer

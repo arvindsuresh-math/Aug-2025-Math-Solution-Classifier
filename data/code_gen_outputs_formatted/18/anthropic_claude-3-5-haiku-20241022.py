@@ -23,5 +23,6 @@ def solve(
     #: L5
     total_commute_time = walking_time_round_trip + biking_time_round_trip
 
-    answer = total_commute_time  # FINAL ANSWER
+    #: FA
+    answer = total_commute_time
     return answer

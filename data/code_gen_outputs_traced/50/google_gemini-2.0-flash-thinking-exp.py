@@ -7,13 +7,19 @@ def solve(
     """Index: 50.
     Returns: the average number of chores Gerald needs to do per month to save for his supplies.
     """
+
     #: L1
     total_cost_for_season = season_length_months * monthly_cost_supplies # eval: 400 = 4 * 100
+
     #: L2
     saving_months = total_months_in_year - season_length_months # eval: 8 = 12 - 4
+
     #: L3
     monthly_saving_goal = total_cost_for_season / saving_months # eval: 50.0 = 400 / 8
+
     #: L4
     chores_per_month = monthly_saving_goal / charge_per_chore # eval: 5.0 = 50.0 / 10
-    answer = chores_per_month # FINAL ANSWER # eval: 5.0 = 5.0 # FINAL ANSWER
+
+    #: FA
+    answer = chores_per_month # eval: 5.0 = 5.0
     return answer # eval: return 5.0

@@ -24,5 +24,6 @@ def solve(
     #: L5
     difference_in_fish = num_fish_first_tank_after_eating - num_fish_second_tank
 
-    answer = difference_in_fish # FINAL ANSWER
+    #: FA
+    answer = difference_in_fish
     return answer

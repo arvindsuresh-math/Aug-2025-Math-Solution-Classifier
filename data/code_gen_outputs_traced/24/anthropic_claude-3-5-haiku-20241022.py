@@ -5,9 +5,13 @@ def solve(
 ):
     """Index: 24.
     Returns: the remaining credit Mary needs to pay before her next shopping trip."""
+
     #: L1
     total_payments_so_far = tuesday_payment + thursday_payment # eval: 38 = 15 + 23
+
     #: L2
     remaining_credit = credit_limit - total_payments_so_far # eval: 62 = 100 - 38
-    answer = remaining_credit  # FINAL ANSWER # eval: 62 = 62  # FINAL ANSWER
+
+    #: FA
+    answer = remaining_credit # eval: 62 = 62
     return answer # eval: return 62

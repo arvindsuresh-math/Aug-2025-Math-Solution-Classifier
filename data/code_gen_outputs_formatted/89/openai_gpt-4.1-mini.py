@@ -16,5 +16,6 @@ def solve(
     #: L3
     total_books_week = total_books_mon_to_fri + friday_increase_books
 
-    answer = total_books_week  # FINAL ANSWER
+    #: FA
+    answer = total_books_week
     return answer

@@ -6,11 +6,16 @@ def solve(
     """Index: 76.
     Returns: the total number of vegetables the garden produced.
     """
+
     #: L1
     cucumbers_produced = potatoes_produced - fewer_cucumbers # eval: 177 = 237 - 60
+
     #: L2
     peppers_produced = cucumbers_produced * peppers_multiplier # eval: 354 = 177 * 2
+
     #: L3
     total_vegetables = potatoes_produced + cucumbers_produced + peppers_produced # eval: 768 = 237 + 177 + 354
-    answer = total_vegetables # FINAL ANSWER # eval: 768 = 768 # FINAL ANSWER
+
+    #: FA
+    answer = total_vegetables # eval: 768 = 768
     return answer # eval: return 768

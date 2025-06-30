@@ -19,5 +19,6 @@ def solve(
     #: L4
     time_part_3 = total_time_minutes - time_part_1_and_2
 
-    answer = time_part_3 # FINAL ANSWER
+    #: FA
+    answer = time_part_3
     return answer

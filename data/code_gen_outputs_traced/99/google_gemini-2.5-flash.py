@@ -9,15 +9,22 @@ def solve(
     """Index: 99.
     Returns: the number of more fish in the first tank than the second tank after one fish is eaten.
     """
+
     #: L1
     second_tank_gallons = first_tank_water_gallons / first_tank_size_multiplier # eval: 24.0 = 48 / 2
+
     #: L2
     fish_in_second_tank = second_tank_gallons / second_tank_fish_size # eval: 12.0 = 24.0 / 2
+
     #: L3
     initial_fish_in_first_tank = first_tank_water_gallons / first_tank_fish_size # eval: 16.0 = 48 / 3
+
     #: L4
     final_fish_in_first_tank = initial_fish_in_first_tank - fish_eaten_in_first_tank # eval: 15.0 = 16.0 - 1
+
     #: L5
     more_fish_in_first_tank = final_fish_in_first_tank - fish_in_second_tank # eval: 3.0 = 15.0 - 12.0
-    answer = more_fish_in_first_tank # FINAL ANSWER # eval: 3.0 = 3.0 # FINAL ANSWER
+
+    #: FA
+    answer = more_fish_in_first_tank # eval: 3.0 = 3.0
     return answer # eval: return 3.0

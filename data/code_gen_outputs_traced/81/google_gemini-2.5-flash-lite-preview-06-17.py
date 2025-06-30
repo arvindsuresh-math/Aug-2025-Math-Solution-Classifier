@@ -8,17 +8,25 @@ def solve(
     """Index: 81.
     Returns: the average number of skips per round completed by Jeff.
     """
+
     #: L1
     jeff_round1 = sam_skips_per_round - round1_diff # eval: 15 = 16 - 1
+
     #: L2
     jeff_round2 = sam_skips_per_round - round2_diff # eval: 13 = 16 - 3
+
     #: L3
     jeff_round3 = sam_skips_per_round + round3_diff # eval: 20 = 16 + 4
+
     #: L4
     jeff_round4 = sam_skips_per_round * round4_ratio # eval: 8.0 = 16 * 0.5
+
     #: L5
     jeff_total_skips = jeff_round1 + jeff_round2 + jeff_round3 + jeff_round4 # eval: 56.0 = 15 + 13 + 20 + 8.0
+
     #: L6
     jeff_avg_skips = jeff_total_skips / 4 # eval: 14.0 = 56.0 / 4
-    answer = jeff_avg_skips # FINAL ANSWER # eval: 14.0 = 14.0 # FINAL ANSWER
+
+    #: FA
+    answer = jeff_avg_skips # eval: 14.0 = 14.0
     return answer # eval: return 14.0

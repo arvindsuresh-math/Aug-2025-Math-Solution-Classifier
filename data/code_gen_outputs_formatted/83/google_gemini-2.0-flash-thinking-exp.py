@@ -27,5 +27,6 @@ def solve(
     #: L6
     hats_per_person = combined_hats / num_people_sharing
 
-    answer = hats_per_person # FINAL ANSWER
+    #: FA
+    answer = hats_per_person
     return answer

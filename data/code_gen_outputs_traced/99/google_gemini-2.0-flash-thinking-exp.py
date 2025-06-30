@@ -8,15 +8,22 @@ def solve(
     """Index: 99.
     Returns: the difference in the number of fish between the first and second tanks after one fish is eaten in the first tank.
     """
+
     #: L1
     gallons_tank2 = gallons_tank1 / size_factor # eval: 24.0 = 48 / 2
+
     #: L2
     fish_tank2 = gallons_tank2 / fish_length_tank2 # eval: 12.0 = 24.0 / 2
+
     #: L3
     initial_fish_tank1 = gallons_tank1 / fish_length_tank1 # eval: 16.0 = 48 / 3
+
     #: L4
     fish_tank1_after_eating = initial_fish_tank1 - 1 # eval: 15.0 = 16.0 - 1
+
     #: L5
     difference_in_fish = fish_tank1_after_eating - fish_tank2 # eval: 3.0 = 15.0 - 12.0
-    answer = difference_in_fish # FINAL ANSWER # eval: 3.0 = 3.0 # FINAL ANSWER
+
+    #: FA
+    answer = difference_in_fish # eval: 3.0 = 3.0
     return answer # eval: return 3.0

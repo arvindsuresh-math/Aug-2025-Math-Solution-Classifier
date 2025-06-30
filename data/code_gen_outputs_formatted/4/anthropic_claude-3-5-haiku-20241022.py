@@ -16,5 +16,6 @@ def solve(
     #: L3
     total_pages_per_year = total_pages_per_week * weeks_per_year
 
-    answer = total_pages_per_year  # FINAL ANSWER
+    #: FA
+    answer = total_pages_per_year
     return answer

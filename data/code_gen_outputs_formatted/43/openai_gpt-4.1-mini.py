@@ -18,5 +18,6 @@ def solve(
     #: L4
     total_collapsed = initial_collapsed + second_earthquake_collapsed + third_earthquake_collapsed + fourth_earthquake_collapsed
 
-    answer = total_collapsed  # FINAL ANSWER
+    #: FA
+    answer = total_collapsed
     return answer

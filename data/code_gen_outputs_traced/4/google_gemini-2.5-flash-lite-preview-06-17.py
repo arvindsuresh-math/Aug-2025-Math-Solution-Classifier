@@ -6,11 +6,16 @@ def solve(
     """Index: 4.
     Returns: the total number of pages James writes in a year.
     """
+
     #: L1
     pages_per_friend_per_week = pages_per_letter * letters_per_week # eval: 6 = 3 * 2
+
     #: L2
     total_pages_per_week = pages_per_friend_per_week * num_friends # eval: 12 = 6 * 2
+
     #: L3
     total_pages_per_year = total_pages_per_week * 52 # eval: 624 = 12 * 52
-    answer = total_pages_per_year # FINAL ANSWER # eval: 624 = 624 # FINAL ANSWER
+
+    #: FA
+    answer = total_pages_per_year # eval: 624 = 624
     return answer # eval: return 624
