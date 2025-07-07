@@ -1,0 +1,114 @@
+### **JSON Schema Definition**
+
+Your output must adhere to the following JSON structure:
+
+```json
+{
+  "function_code": "A single string containing a complete, self-contained Python function that constitutes an end-to-end formalization of the solution.",
+  "logical_steps": [
+    {
+      "line_number": "The line number from the original solution (e.g., 'L1', 'L2').",
+      "question_inputs": "A (possibly empty) list of variable names extracted from the question text, used for the first time in this step.",
+      "WK_inputs": "A (possibly empty) list of variable names from 'world knowledge' (e.g., minutes_per_hour), used for the first time in this step.",
+      "output_variable": "The name of the variable being assigned as the result of the main computation in this step.",
+      "solution_line_template": "The complete original line from the solution, including the calculator annotation, with all computational numbers replaced by `{variable_name}` placeholders."
+    }
+  ]
+}
+```
+
+---
+
+### **Guidelines (Adapted for Integer-Dominant Problems)**
+
+#### **1. Detailed Field Instructions: `function_code`**
+
+This string must contain a Python function with the following characteristics:
+
+*   **1.A. Conditional Imports:** The function_code string should contain no imports, with one exception: if the function body uses the `Fraction` class (e.g., `rate = Fraction(1, 10)`), then the very first line of the function_code string MUST be `from fractions import Fraction`. If not, then the very first line MUST be the function definition (i.e. `def solve():`).
+*   **1.B. Function Naming & Docstring:** The function must be named `solve`, and it should not have any args. It must begin with a docstring that has exactly two lines:
+    *   **1.B.i.** The first line must be: "Index: [Index]." using the index from the task header.
+    *   **1.B.ii.** The second line must be a succinct, one-sentence description of what the function returns (e.g., "Returns: the total cost of wages and taxes.").
+*   **1.C. Line comments:** For each solution line that is used to compute the final answer, include a comment of the form `# L1`, `# L2` and so on, which references the line number.
+    *   **1.C.i.** Such a comment must immediately be followed by a code block that precisely formalizes the corresponding solution line.
+    *   **1.C.ii.** If a solution line does not contain any computation relevant to the final answer, then omit it completely from the function code and do NOT add a corresponding line comment.
+*   **1.D. Code blocks:** Each code block must consist of the following:
+    *   **1.D.i.** First, define any new input variables needed for the computation. These fall into two categories:
+        *   **Question Inputs:** These are variables whose values are stated in or can be extracted from the `question` text. Each `question_input` variable definition MUST be followed on the same line by a comment (`#`) that quotes or refers to the phrase in the `question` from which it is extracted.
+        *   **World Knowledge Inputs:** These are variables drawn from common-sense "world knowledge" (e.g. `minutes_per_hour = 60`). The comment for these variables MUST simply say `# WK`.
+    *   **1.D.ii.** Second, there should be EXACTLY ONE line of code which formalizes the computation in the solution line and assigns the resulting value to a new variable (this is the `output_variable`).
+*   **1.E. The Direct Substitution Rule:** This is the most important rule, which ensures that the `nl_template` is purely identical to the original solution line except that numerical values in computations have been replaced with variable placeholders: You MUST define variables in such a way that they can be DIRECTLY SUBSTITUTED into the solution text without changing any operators. For example:
+    *   If the solution line has a computation like `... / 5`, you MUST define a variable like `var = 5`.
+*   **1.F. Final Answer:** The line that assigns the final result to the `answer` variable must be immediately preceded by a line containing only the comment `# FA`. The last line of the function must always return the `answer` variable.
+
+#### **2. Detailed Field Instructions: `solution_line_template`**
+
+*   **2.A.** The template should be EXACTLY identical to the original solution line, with the ONLY CHANGES being that every numerical value used in a computation is replaced by its corresponding `{variable_name}` placeholder. This applies to the entire content of the solution line, including the inside and outside of the calculator annotations.
+*   **2.B.** In particular, EVERY SINGLE numerical value appearing inside the calculator annotation MUST be replaced with a `{variable_name}` placeholder.
+*   **2.C.** Note: The Direct Substitution Rule will ensure that for correctly defined variables, it will be possible to replace the numerical values with variable name placeholders while leaving all surrounding text, symbols, and operators unchanged.
+*   **2.D.** Thus, in a correct `nl_template`, the calculator annotation will not contain any numerical values, and moreover, replacing each `{variable_name}` by its value should exactly recover the original solution line, including the original calculator annotation.
+*   **2.E.** Note: If a number appears in different forms (e.g., as "10%" in the narrative and as ".1" in the calculation), only the form that appears in the calculation should be replaced with a placeholder.
+
+---
+
+### **Guidelines (Adapted for Float-Dominant Problems)**
+
+#### **1. Detailed Field Instructions: `function_code`**
+
+This string must contain a Python function with the following characteristics:
+
+*   **1.A. Conditional Imports:** (Standard rule 1.A applies).
+*   **1.B. Function Naming & Docstring:** (Standard rules 1.B.i and 1.B.ii apply).
+*   **1.C. Line comments:** (Standard rules 1.C.i and 1.C.ii apply).
+*   **1.D. Code blocks:** (Standard rules 1.D.i and 1.D.ii apply).
+*   **1.E. The Direct Substitution Rule:** This is the most important rule. You MUST define variables in such a way that they can be DIRECTLY SUBSTITUTED into the solution text without changing any operators. For example:
+    *   If the solution line has a computation like `... / 5`, you MUST define a variable like `var = 5`.
+    *   If the solution line has a computation like `... * 0.2`, you MUST define a variable like `var = 0.2`.
+*   **1.F. Final Answer:** (Standard rule 1.F applies).
+
+#### **2. Detailed Field Instructions: `solution_line_template`**
+
+*   **2.A-E.** (Standard rules 2.A through 2.E apply).
+
+---
+
+### **Guidelines (Adapted for Fraction/Division-Dominant Problems)**
+
+#### **1. Detailed Field Instructions: `function_code`**
+
+This string must contain a Python function with the following characteristics:
+
+*   **1.A. Conditional Imports:** (Standard rule 1.A applies).
+*   **1.B. Function Naming & Docstring:** (Standard rules 1.B.i and 1.B.ii apply).
+*   **1.C. Line comments:** (Standard rules 1.C.i and 1.C.ii apply).
+*   **1.D. Code blocks:** (Standard rules 1.D.i and 1.D.ii apply).
+*   **1.E. The Direct Substitution Rule:** This is the most important rule. You MUST define variables in such a way that they can be DIRECTLY SUBSTITUTED into the solution text without changing any operators. For example:
+    *   If the solution line has a computation like `... / 5`, you MUST define a variable like `var = 5`.
+    *   If the solution line has a computation like `... * 1/5`, you MUST define a variable like `var = Fraction(1, 5)`.
+*   **1.F. Final Answer:** (Standard rule 1.F applies).
+
+#### **2. Detailed Field Instructions: `solution_line_template`**
+
+*   **2.A-E.** (Standard rules 2.A through 2.E apply).
+
+---
+
+### **Guidelines (Complete)**
+
+#### **1. Detailed Field Instructions: `function_code`**
+
+This string must contain a Python function with the following characteristics:
+
+*   **1.A. Conditional Imports:** (Standard rule 1.A applies).
+*   **1.B. Function Naming & Docstring:** (Standard rules 1.B.i and 1.B.ii apply).
+*   **1.C. Line comments:** (Standard rules 1.C.i and 1.C.ii apply).
+*   **1.D. Code blocks:** (Standard rules 1.D.i and 1.D.ii apply).
+*   **1.E. The Direct Substitution Rule:** This is the most important rule, which ensures that the `nl_template` is purely identical to the original solution line except that numerical values in computations have been replaced with variable placeholders: You MUST define variables in such a way that they can be DIRECTLY SUBSTITUTED into the solution text without changing any operators. For example:
+    *   If the solution line has a computation like `... / 5`, you MUST define a variable like `var = 5`.
+    *   If the solution line has a computation like `... * 1/5`, you MUST define a variable like `var = Fraction(1, 5)`.
+    *   If the solution line has a computation like `... * 0.2`, you MUST define a variable like `var = 0.2`.
+*   **1.F. Final Answer:** (Standard rule 1.F applies).
+
+#### **2. Detailed Field Instructions: `solution_line_template`**
+
+*   **2.A-E.** (Standard rules 2.A through 2.E apply).
