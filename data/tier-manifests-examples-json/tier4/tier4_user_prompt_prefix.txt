@@ -1,3 +1,6 @@
+Of course. Here is the complete user prompt prefix for Tier 4, which handles decimals, fractions, and division. It uses the four specified examples and leaves a placeholder for the notes section.
+
+---
 In the TASK below, you will be given a math problem and its corresponding step-by-step solution. Each step in the solution is numbered (e.g. "L1", "L2" and so on), and many of the steps include calculator annotations (e.g. "<<20*0.1=2>>"). Your goal is to convert this information into a structured JSON object according to the following schema and detailed instructions.
 
 # JSON Schema Definition
@@ -25,7 +28,9 @@ Your output must adhere to the following JSON structure:
 
 This string must contain a Python function with the following characteristics:
 
-*   **1.A. No Imports:** You should not have ANY imports. The very first line MUST be the function definition (i.e. `def solve():`).
+*   **1.A. Handling Imports:** The `function_code` should have no imports **unless** your formalization requires the `Fraction` object.
+    *   If your code uses the `Fraction()` constructor, the very first line of the string MUST be `from fractions import Fraction`.
+    *   If your code does **not** use the `Fraction()` constructor (e.g., it only uses integers, floats, or standard division `/`), the function definition `def solve():` MUST be the very first line.
 *   **1.B. Function Naming & Docstring:** The function must be named `solve`, and it should not have any args. It must begin with a docstring that has exactly two lines:
     *   **1.B.i.** The first line must be: "Index: [Index]." using the index from the task header.
     *   **1.B.ii.** The second line must be a succinct, one-sentence description of what the function returns (e.g., "Returns: the total cost of wages and taxes.").
@@ -34,10 +39,10 @@ This string must contain a Python function with the following characteristics:
     *   **1.C.ii.** If a solution line does not contain any computation relevant to the final answer, then omit it completely from the function code and do NOT add a corresponding line comment.
 *   **1.D. Code blocks:** Each code block constitutes a complete formalization of its corresponding solution line. It must consist of the following:
     *   **1.D.i. Input Variables** First, define any NEW variables needed for the computation, i.e. that will be used for the first time in the solution. Each input variable MUST be followed by a comment (`#`) in the same line. These variables fall into two categories:
-        *   "question_inputs": These are variables whose values are stated in or can be extracted from the question text. The comment for these variables should quote or refer to the phrase in the question text from which it is extracted.
+        *   "question_inputs": These are variables whose values are stated in or can be extracted from the question text (only the question text, NOT the answer text). The comment for these variables should quote or refer to the phrase in the question text from which it is extracted.
         *   "WK_inputs": These are variables drawn from common-sense "World Knowledge" (e.g. `minutes_per_hour = 60`, `dozen = 12`). The comment for these variables MUST simply say `# WK`.
     *   **1.D.ii. Output Variables** Second, there should be EXACTLY ONE line of code which formalizes the computation in the solution line and assigns the resulting value to a new variable (this is the "output_variable" field).
-*   **1.E. The Direct Substitution Rule:** This is the MOST IMPORTANT RULE, which ensures that the "solution_line_template" is purely identical to the original solution line except that numerical values in computations have been replaced with variable placeholders: You MUST define variables in such a way that they can be DIRECTLY SUBSTITUTED into the solution line without changing any operators or surrounding text in the line. 
+*   **1.E. The Direct Substitution Rule:** This is the MOST IMPORTANT RULE, which ensures that the "solution_line_template" is purely identical to the original solution line except that numerical values in computations have been replaced with variable placeholders: You MUST define variables in such a way that they can be DIRECTLY SUBSTITUTED into the solution line without changing any operators or surrounding text in the line.
 *   **1.F. Final Answer:** The line that assigns the final result to the `answer` variable must be immediately preceded by a line containing only the comment `# FA`. The last line of the function must always return the `answer` variable.
 
 ## 2. "solution_line_template"
@@ -51,69 +56,85 @@ This string must contain a Python function with the following characteristics:
 
 Given below are three examples that illustrate what a perfect formalization will look like. For each example, you are given the following:
 
-*   Input: consisting of an index, question, and solution mapping. 
-*   Output: complete output, wrapper inside ```json .. ```
+*   Input: consisting of an index, question, and solution mapping.
+*   Output: complete output, wrapped inside ```json .. ```
 
 In all examples, you will observe the following:
-*   A rigid adherence to the Direct Substitution Rule (1.E), resulting in a "solution_line_template" perfectly satisfies properties 2.A - 2.D.
-*   Code blocks that are precisely formatted as in 1.D, consisting of line comments, then input variable declarations, then a single output variable assignment (i.e. the single computation for that solution line).
-*   A careful distinction between numerical values and word-based quantities in the solution_line_template. Per rule 2.C, only numerical values like 2 are replaced with placeholders. Words like "twice" are never replaced, even though they are formalized as variables in the function_code.
-*   Precise categorization of input variables as described in rule 1.D.i. Note how dozen = 12 is a WK_input (common knowledge), while father_ate = 8 is a question_input (explicitly stated in the problem text).
-*   Strict adherence to defining only NEW variables in each step's question_inputs and WK_inputs lists. Observe that once a variable like days_in_week is defined in one step, it is simply re-used in later calculations without being listed as an input again.
+
+*   **A rigid adherence to the Direct Substitution Rule (1.E)**. This is the most important principle. The `solution_line_template` must be an exact copy of the original solution line, with only computational numbers replaced by `{variable}` placeholders. Every other point follows from this rule.
+
+*   **How to formalize a rational number depends entirely on how it appears in the solution text.** It is crucial to distinguish between `floats`, `Fractions`, and the division operation (`/`).
+    *   **Use `float` for decimals:** In **Example 1**, "half" is used in the calculation as `0.5`, so it is formalized as `kevin_nice_fraction = 0.5`. In **Example 3**, "30 percent" is used as `.30`, formalized as `third_night_stolen_percent = 0.30`.
+    *   **Use `fractions.Fraction` for fractional quantities:** If "/" acts as a separator within a single fractional quantity, use `Fraction`. In **Example 1**, "three-fourths" appears as `(3/4)`, so it is formalized as `Fraction(3, 4)`. This requires the `from fractions import Fraction` import.
+    *   **Use the `/` operator for division operations:** If "/" represents the operation of dividing two values, use the standard operator. In **Example 2**, the solution `300/100` is a division operation, formalized using `/`: `total_dollars = total_cents / cents_per_dollar`. This does **not** require an import.
+
+*   **A single manifest can require multiple formalizations.** **Example 1** shows a problem using both `float` (`0.5`) and `Fraction` (`3/4`). **Example 4** shows a mix of percentages (decomposed into floats) and division (`/`). The model must adapt to each line.
+
+*   **Decomposition is sometimes needed to follow the rules.** This is a critical and advanced point. In **Example 4**, the solution for L1 is `80% * 20 votes = <<80*0.01*20=16>>16 votes`. To satisfy the Direct Substitution Rule for the calculator annotation, this must be decomposed into two variables: `taotd_discard_percent_num = 80` and `percent_factor = 0.01`.
+
+*   **Strict adherence to defining only NEW variables** in each step's `question_inputs` and `WK_inputs` lists. For instance, in **Example 3**, `initial_ducks` is defined in L1 and then simply re-used in the computation for L2 without being listed as an input again.
+
+*   Comments for `question_inputs` must cite the question text only, **NEVER** the solution text. Note how `cents_per_dollar = 100` in **Example 2** is correctly labeled `# WK` because that fact constitutes common-sense World Knowledge and is not present in the question text.
 
 ## Example 1
 
 ### Input
 
 **Index:**
-3946
+3847
 
 **Question:**
-Mother made 2 dozen brownies and placed them on the kitchen counter to cool.  Father smelled the brownies, came into the kitchen and ate 8 of them. Then, their daughter, Mooney, wandered into the kitchen and ate 4 of the brownies. The next morning, Mother made another two dozen brownies and added them to those remaining from the day before.  After that, how many brownies were on the counter?
+All people named Barry are nice, while only half of the people named Kevin are nice.  Three-fourths of people named Julie are nice, while 10% of people named Joe are nice.  If a crowd contains 24 people named Barry, 20 people named Kevin, 80 people named Julie, and 50 people named Joe, how many nice people are in the crowd?
 
 **Solution mapping:**
-{'L1': 'Two dozen brownies is 2 * 12 = <<2*12=24>>24 brownies.', 'L2': 'After Father ate his 8, there were 24 - 8 = <<24-8=16>>16 brownies remaining on the counter.', 'L3': 'After Mooney ate her 4, there were 16 - 4 = <<16-4=12>>12 brownies remaining on the counter.', 'L4': 'Mother made a second batch of two-dozen brownies, or 2 * 12 = <<2*12=24>>24 brownies.', 'L5': 'After Mother added the second two-dozen, there were 12 + 24 = <<12+24=36>>36 brownies on the kitchen counter.'}
+{
+  "L1": "If all people named Barry are nice, and the crowd contains 24 people named Barry, then 1*24=<<24*1=24>>24 of these people are nice.",
+  "L2": "If only half of people named Kevin are nice, and the crowd contains 20 people named Kevin, then 0.5*20=<<0.5*20=10>>10 of these people are nice.",
+  "L3": "If three-fourths of people named Julie are nice, and the crowd contains 80 people named Julie, then (3/4)*80=<<3/4*80=60>>60 of these people are nice.",
+  "L4": "If 10% of people named Joe are nice, and the crowd contains 50 people named Joe, then 0.1*50=<<0.1*50=5>>5 of these people are nice.",
+  "L5": "In total, the crowd contains 24+10+60+5=<<24+10+60+5=99>>99 people who are nice."
+}
 
 ### Output
 
 ```json
 {
-  "function_code": "def solve():\n    \"\"\"Index: 3946.\n    Returns: the number of brownies on the counter at the end.\n    \"\"\"\n    # L1\n    num_dozen_initial = 2 # 2 dozen brownies\n    dozen = 12 # WK\n    initial_brownies = num_dozen_initial * dozen\n\n    # L2\n    father_ate = 8 # ate 8 of them\n    after_father = initial_brownies - father_ate\n\n    # L3\n    mooney_ate = 4 # ate 4 of the brownies\n    after_mooney = after_father - mooney_ate\n\n    # L4\n    num_dozen_second_batch = 2 # another two dozen brownies\n    second_batch = num_dozen_second_batch * dozen\n\n    # L5\n    total_brownies = after_mooney + second_batch\n\n    # FA\n    answer = total_brownies\n    return answer",
+  "function_code": "from fractions import Fraction\n\ndef solve():\n    \"\"\"Index: 3847.\n    Returns: the number of nice people in the crowd.\n    \"\"\"\n    # L1\n    num_barry = 24 # 24 people named Barry\n    barry_nice_fraction = 1 # All people named Barry are nice\n    nice_barry = barry_nice_fraction * num_barry\n\n    # L2\n    num_kevin = 20 # 20 people named Kevin\n    kevin_nice_fraction = 0.5 # half of the people named Kevin are nice\n    nice_kevin = kevin_nice_fraction * num_kevin\n\n    # L3\n    num_julie = 80 # 80 people named Julie\n    julie_nice_fraction = Fraction(3, 4) # Three-fourths of people named Julie are nice\n    nice_julie = julie_nice_fraction * num_julie\n\n    # L4\n    num_joe = 50 # 50 people named Joe\n    joe_nice_fraction = 0.1 # 10% of people named Joe are nice\n    nice_joe = joe_nice_fraction * num_joe\n\n    # L5\n    total_nice_people = nice_barry + nice_kevin + nice_julie + nice_joe\n\n    # FA\n    answer = total_nice_people\n    return answer",
   "logical_steps": [
     {
       "line_number": "L1",
-      "question_inputs": ["num_dozen_initial"],
-      "WK_inputs": ["dozen"],
-      "output_variable": "initial_brownies",
-      "solution_line_template": "Two dozen brownies is {num_dozen_initial} * {dozen} = <<{num_dozen_initial}*{dozen}={initial_brownies}>>{initial_brownies} brownies."
+      "question_inputs": ["num_barry", "barry_nice_fraction"],
+      "WK_inputs": [],
+      "output_variable": "nice_barry",
+      "solution_line_template": "If all people named Barry are nice, and the crowd contains {num_barry} people named Barry, then {barry_nice_fraction}*{num_barry}=<<{num_barry}*{barry_nice_fraction}={nice_barry}>>{nice_barry} of these people are nice."
     },
     {
       "line_number": "L2",
-      "question_inputs": ["father_ate"],
+      "question_inputs": ["num_kevin", "kevin_nice_fraction"],
       "WK_inputs": [],
-      "output_variable": "after_father",
-      "solution_line_template": "After Father ate his {father_ate}, there were {initial_brownies} - {father_ate} = <<{initial_brownies}-{father_ate}={after_father}>>{after_father} brownies remaining on the counter."
+      "output_variable": "nice_kevin",
+      "solution_line_template": "If only half of people named Kevin are nice, and the crowd contains {num_kevin} people named Kevin, then {kevin_nice_fraction}*{num_kevin}=<<{kevin_nice_fraction}*{num_kevin}={nice_kevin}>>{nice_kevin} of these people are nice."
     },
     {
       "line_number": "L3",
-      "question_inputs": ["mooney_ate"],
+      "question_inputs": ["num_julie", "julie_nice_fraction"],
       "WK_inputs": [],
-      "output_variable": "after_mooney",
-      "solution_line_template": "After Mooney ate her {mooney_ate}, there were {after_father} - {mooney_ate} = <<{after_father}-{mooney_ate}={after_mooney}>>{after_mooney} brownies remaining on the counter."
+      "output_variable": "nice_julie",
+      "solution_line_template": "If three-fourths of people named Julie are nice, and the crowd contains {num_julie} people named Julie, then ({julie_nice_fraction})*{num_julie}=<<{julie_nice_fraction}*{num_julie}={nice_julie}>>{nice_julie} of these people are nice."
     },
     {
       "line_number": "L4",
-      "question_inputs": ["num_dozen_second_batch"],
+      "question_inputs": ["num_joe", "joe_nice_fraction"],
       "WK_inputs": [],
-      "output_variable": "second_batch",
-      "solution_line_template": "Mother made a second batch of two-dozen brownies, or {num_dozen_second_batch} * {dozen} = <<{num_dozen_second_batch}*{dozen}={second_batch}>>{second_batch} brownies."
+      "output_variable": "nice_joe",
+      "solution_line_template": "If 10% of people named Joe are nice, and the crowd contains {num_joe} people named Joe, then {joe_nice_fraction}*{num_joe}=<<{joe_nice_fraction}*{num_joe}={nice_joe}>>{nice_joe} of these people are nice."
     },
     {
       "line_number": "L5",
       "question_inputs": [],
       "WK_inputs": [],
-      "output_variable": "total_brownies",
-      "solution_line_template": "After Mother added the second two-dozen, there were {after_mooney} + {second_batch} = <<{after_mooney}+{second_batch}={total_brownies}>>{total_brownies} brownies on the kitchen counter."
+      "output_variable": "total_nice_people",
+      "solution_line_template": "In total, the crowd contains {nice_barry}+{nice_kevin}+{nice_julie}+{nice_joe}=<<{nice_barry}+{nice_kevin}+{nice_julie}+{nice_joe}={total_nice_people}>>{total_nice_people} people who are nice."
     }
   ]
 }
@@ -123,48 +144,45 @@ Mother made 2 dozen brownies and placed them on the kitchen counter to cool.  Fa
 
 ### Input
 
-**Index**:
-4258
+**Index:**
+4847
 
-**Question**:
-Cowboy Mickey and cowgirl Minnie train horses for a living.  On average, Mickey mounts six less than twice as many horses per day as does Minnie,  while Minnie mounts three more horses per day than there are days in a week.  How many horses does Mickey Mount per week?
+**Question:**
+Lucy plans to purchase potato chips for a party. Ten people will be at the party, including Lucy. The potato chips cost 25 cents per pound. How much will Lucy pay (in dollars) for the potato chips if she wants each person to get 1.2 pounds?
 
-**Solution mapping**:
-{'L1': 'If Minnie mounts three more horses per day than there are days in a week, then Minnie mounts 7+3=<<3+7=10>>10 horses per day.', 'L2': 'Twice as many horses per day as Minnie mounts is 10*2=<<10*2=20>>20 horses per day.', 'L3': 'If Mickey mounts six less than twice as many horses per day as does Minnie, then Mickey mounts 20-6=<<20-6=14>>14 horses per day.', 'L4': 'Since there are 7 days in a week, then Mickey mounts 7*14=<<7*14=98>>98 horses per week.'}
+**Solution mapping:**
+{
+  "L1": "Lucy needs to purchase 10 x 1.2 = <<10*1.2=12>>12 pounds of potato chips.",
+  "L2": "So, Lucy will pay 12 x 25 = <<12*25=300>>300 cents for it.",
+  "L3": "Since there are 100 cents in $1, thus, Lucy will pay 300/100 = <<300/100=3>>3 dollars."
+}
 
 ### Output
 
 ```json
 {
-  "function_code": "def solve():\n    \"\"\"Index: 4258.\n    Returns: the number of horses Mickey mounts per week.\n    \"\"\"\n    # L1\n    days_in_week = 7 # WK\n    minnie_more_than_week = 3 # three more horses per day than there are days in a week\n    minnie_per_day = days_in_week + minnie_more_than_week\n\n    # L2\n    multiplier_for_twice = 2 # twice as many horses\n    twice_minnie = minnie_per_day * multiplier_for_twice\n\n    # L3\n    mickey_less_than_twice_minnie = 6 # six less than twice as many horses\n    mickey_per_day = twice_minnie - mickey_less_than_twice_minnie\n\n    # L4\n    mickey_per_week = mickey_per_day * days_in_week\n\n    # FA\n    answer = mickey_per_week\n    return answer",
+  "function_code": "def solve():\n    \"\"\"Index: 4847.\n    Returns: the amount Lucy will pay in dollars.\n    \"\"\"\n    # L1\n    num_people = 10 # Ten people will be at the party\n    chips_per_person = 1.2 # each person to get 1.2 pounds\n    total_pounds = num_people * chips_per_person\n\n    # L2\n    cents_per_pound = 25 # 25 cents per pound\n    total_cents = total_pounds * cents_per_pound\n\n    # L3\n    cents_per_dollar = 100 # WK\n    total_dollars = total_cents / cents_per_dollar\n\n    # FA\n    answer = total_dollars\n    return answer",
   "logical_steps": [
     {
       "line_number": "L1",
-      "question_inputs": ["minnie_more_than_week"],
-      "WK_inputs": ["days_in_week"],
-      "output_variable": "minnie_per_day",
-      "solution_line_template": "If Minnie mounts three more horses per day than there are days in a week, then Minnie mounts {days_in_week}+{minnie_more_than_week}=<<{days_in_week}+{minnie_more_than_week}={minnie_per_day}>>{minnie_per_day} horses per day."
+      "question_inputs": ["num_people", "chips_per_person"],
+      "WK_inputs": [],
+      "output_variable": "total_pounds",
+      "solution_line_template": "Lucy needs to purchase {num_people} x {chips_per_person} = <<{num_people}*{chips_per_person}={total_pounds}>>{total_pounds} pounds of potato chips."
     },
     {
       "line_number": "L2",
-      "question_inputs": ["multiplier_for_twice"],
+      "question_inputs": ["cents_per_pound"],
       "WK_inputs": [],
-      "output_variable": "twice_minnie",
-      "solution_line_template": "Twice as many horses per day as Minnie mounts is {minnie_per_day}*{multiplier_for_twice}=<<{minnie_per_day}*{multiplier_for_twice}={twice_minnie}>>{twice_minnie} horses per day."
+      "output_variable": "total_cents",
+      "solution_line_template": "So, Lucy will pay {total_pounds} x {cents_per_pound} = <<{total_pounds}*{cents_per_pound}={total_cents}>>{total_cents} cents for it."
     },
     {
       "line_number": "L3",
-      "question_inputs": ["mickey_less_than_twice_minnie"],
-      "WK_inputs": [],
-      "output_variable": "mickey_per_day",
-      "solution_line_template": "If Mickey mounts six less than twice as many horses per day as does Minnie, then Mickey mounts {twice_minnie}-{mickey_less_than_twice_minnie}=<<{twice_minnie}-{mickey_less_than_twice_minnie}={mickey_per_day}>>{mickey_per_day} horses per day."
-    },
-    {
-      "line_number": "L4",
       "question_inputs": [],
-      "WK_inputs": [],
-      "output_variable": "mickey_per_week",
-      "solution_line_template": "Since there are 7 days in a week, then Mickey mounts {days_in_week}*{mickey_per_day}=<<{days_in_week}*{mickey_per_day}={mickey_per_week}>>{mickey_per_week} horses per week."
+      "WK_inputs": ["cents_per_dollar"],
+      "output_variable": "total_dollars",
+      "solution_line_template": "Since there are 100 cents in $1, thus, Lucy will pay {total_cents}/{cents_per_dollar} = <<{total_cents}/{cents_per_dollar}={total_dollars}>>{total_dollars} dollars."
     }
   ]
 }
@@ -174,48 +192,134 @@ Cowboy Mickey and cowgirl Minnie train horses for a living.  On average, Mickey 
 
 ### Input
 
-**Index**:
-6126
+**Index:**
+5040
 
-**Question**:
-Paul makes pencils, making 100 pencils a day five days a week. He started the week with 80 pencils in his stock, and during the week he sold 350 pencils. How many pencils did he have in his stock at the end of the week?
+**Question:**
+There are 320 ducks in a pond.  On the first night 1/4 of them get eaten by a fox.  On the second night 1/6 of the remaining ducks fly away, and on the third night 30 percent are stolen.  How many ducks remain after the three nights?
 
-**Solution mapping**:
-{'L1': 'Making 100 pencils a day, he made 100 pencils/day * 5 days/week = <<100*5=500>>500 pencils during the week.', 'L2': 'With the pencils from the stock, he got 500 pencils + 80 pencils = <<500+80=580>>580 pencils.', 'L3': 'Subtracting the ones he sold, he has 580 pencils - 350 pencils = <<580-350=230>>230 pencils.'}
+**Solution mapping:**
+{
+  "L1": "First night:320(1/4)=80",
+  "L2": "320-80=<<320-80=240>>240",
+  "L3": "Second night:240(1/6)=40",
+  "L4": "240-40=<<240-40=200>>200",
+  "L5": "Third night:200(.30)=60",
+  "L6": "200-60=<<200-60=140>>140 ducks remain"
+}
 
 ### Output
 
 ```json
 {
-  "function_code": "def solve():\n    \"\"\"Index: 6126.\n    Returns: the number of pencils in stock at the end of the week.\n    \"\"\"\n    # L1\n    pencils_per_day = 100 # 100 pencils a day\n    days_per_week = 5 # five days a week\n    pencils_made = pencils_per_day * days_per_week\n\n    # L2\n    initial_stock = 80 # started the week with 80 pencils\n    total_available = pencils_made + initial_stock\n\n    # L3\n    pencils_sold = 350 # sold 350 pencils\n    final_stock = total_available - pencils_sold\n\n    # FA\n    answer = final_stock\n    return answer",
+  "function_code": "from fractions import Fraction\n\ndef solve():\n    \"\"\"Index: 5040.\n    Returns: the number of ducks remaining after three nights.\n    \"\"\"\n    # L1\n    initial_ducks = 320 # 320 ducks in a pond\n    first_night_eaten_fraction = Fraction(1, 4) # 1/4 of them get eaten\n    first_night_eaten = initial_ducks * first_night_eaten_fraction\n\n    # L2\n    ducks_after_night1 = initial_ducks - first_night_eaten\n\n    # L3\n    second_night_flew_fraction = Fraction(1, 6) # 1/6 of the remaining ducks fly away\n    second_night_flew = ducks_after_night1 * second_night_flew_fraction\n\n    # L4\n    ducks_after_night2 = ducks_after_night1 - second_night_flew\n\n    # L5\n    third_night_stolen_percent = 0.30 # 30 percent are stolen\n    third_night_stolen = ducks_after_night2 * third_night_stolen_percent\n\n    # L6\n    ducks_after_night3 = ducks_after_night2 - third_night_stolen\n\n    # FA\n    answer = ducks_after_night3\n    return answer",
   "logical_steps": [
     {
       "line_number": "L1",
-      "question_inputs": [
-        "pencils_per_day",
-        "days_per_week"
-      ],
+      "question_inputs": ["initial_ducks", "first_night_eaten_fraction"],
       "WK_inputs": [],
-      "output_variable": "pencils_made",
-      "solution_line_template": "Making {pencils_per_day} pencils a day, he made {pencils_per_day} pencils/day * {days_per_week} days/week = <<{pencils_per_day}*{days_per_week}={pencils_made}>>{pencils_made} pencils during the week."
+      "output_variable": "first_night_eaten",
+      "solution_line_template": "First night:{initial_ducks}({first_night_eaten_fraction})={first_night_eaten}"
     },
     {
       "line_number": "L2",
-      "question_inputs": ["initial_stock"],
+      "question_inputs": [],
       "WK_inputs": [],
-      "output_variable": "total_available",
-      "solution_line_template": "With the pencils from the stock, he got {pencils_made} pencils + {initial_stock} pencils = <<{pencils_made}+{initial_stock}={total_available}>>{total_available} pencils."
+      "output_variable": "ducks_after_night1",
+      "solution_line_template": "{initial_ducks}-{first_night_eaten}=<<{initial_ducks}-{first_night_eaten}={ducks_after_night1}>>{ducks_after_night1}"
     },
     {
       "line_number": "L3",
-      "question_inputs": ["pencils_sold"],
+      "question_inputs": ["second_night_flew_fraction"],
       "WK_inputs": [],
-      "output_variable": "final_stock",
-      "solution_line_template": "Subtracting the ones he sold, he has {total_available} pencils - {pencils_sold} pencils = <<{total_available}-{pencils_sold}={final_stock}>>{final_stock} pencils."
+      "output_variable": "second_night_flew",
+      "solution_line_template": "Second night:{ducks_after_night1}({second_night_flew_fraction})={second_night_flew}"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "ducks_after_night2",
+      "solution_line_template": "{ducks_after_night1}-{second_night_flew}=<<{ducks_after_night1}-{second_night_flew}={ducks_after_night2}>>{ducks_after_night2}"
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": ["third_night_stolen_percent"],
+      "WK_inputs": [],
+      "output_variable": "third_night_stolen",
+      "solution_line_template": "Third night:{ducks_after_night2}({third_night_stolen_percent})={third_night_stolen}"
+    },
+    {
+      "line_number": "L6",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "ducks_after_night3",
+      "solution_line_template": "{ducks_after_night2}-{third_night_stolen}=<<{ducks_after_night2}-{third_night_stolen}={ducks_after_night3}>>{ducks_after_night3} ducks remain"
     }
   ]
 }
 ```
 
-# TASK
+## Example 4
 
+### Input
+
+**Index:**
+7037
+
+**Question:**
+At a book burning, Fran counts 20 votes for The Art of the Deal, 12 votes for Twilight, and 10 votes for Game of Thrones.  She decides to alter the results by throwing away 80% of the votes for The Art of the Deal and half the votes for Twilight. What percentage of the altered votes are for Game of Thrones?
+
+**Solution mapping:**
+{
+  "L1": "First find the total number of The Art of the Deal votes Fran throws away: 80% * 20 votes = <<80*0.01*20=16>>16 votes",
+  "L2": "Then subtract these votes from the total number of The Art of the Deal votes to find the altered number: 20 votes - 16 votes = <<20-16=4>>4 votes",
+  "L3": "Then divide the total number Twilight votes by 2 to find the altered number of votes: 12 votes / 2 = <<12/2=6>>6 votes",
+  "L4": "Then add the altered number of votes for each book to find the total altered number of votes: 6 votes + 4 votes + 10 votes = <<6+4+10=20>>20 votes",
+  "L5": "Then divide the number of votes for Game of Thrones by the total altered number of votes and multiply by 100% to express the answer as a percentage: 10 votes / 20 votes * 100% = 50%"
+}
+
+### Output
+
+```json
+{
+  "function_code": "def solve():\n    \"\"\"Index: 7037.\n    Returns: the percentage of altered votes for Game of Thrones.\n    \"\"\"\n    # L1\n    taotd_initial_votes = 20 # 20 votes for The Art of the Deal\n    taotd_discard_percent_num = 80 # throws away 80% of the votes\n    percent_factor = 0.01 # WK\n    taotd_discarded_votes = taotd_discard_percent_num * percent_factor * taotd_initial_votes\n\n    # L2\n    taotd_altered_votes = taotd_initial_votes - taotd_discarded_votes\n\n    # L3\n    twilight_initial_votes = 12 # 12 votes for Twilight\n    twilight_discard_divisor = 2 # half the votes for Twilight\n    twilight_altered_votes = twilight_initial_votes / twilight_discard_divisor\n\n    # L4\n    got_initial_votes = 10 # 10 votes for Game of Thrones\n    total_altered_votes = twilight_altered_votes + taotd_altered_votes + got_initial_votes\n\n    # L5\n    percent_multiplier = 100 # WK\n    got_percentage = got_initial_votes / total_altered_votes * percent_multiplier\n\n    # FA\n    answer = got_percentage\n    return answer",
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": ["taotd_discard_percent_num", "taotd_initial_votes"],
+      "WK_inputs": ["percent_factor"],
+      "output_variable": "taotd_discarded_votes",
+      "solution_line_template": "First find the total number of The Art of the Deal votes Fran throws away: 80% * {taotd_initial_votes} votes = <<{taotd_discard_percent_num}*{percent_factor}*{taotd_initial_votes}={taotd_discarded_votes}>>{taotd_discarded_votes} votes"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "taotd_altered_votes",
+      "solution_line_template": "Then subtract these votes from the total number of The Art of the Deal votes to find the altered number: {taotd_initial_votes} - {taotd_discarded_votes} votes = <<{taotd_initial_votes}-{taotd_discarded_votes}={taotd_altered_votes}>>{taotd_altered_votes} votes"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": ["twilight_initial_votes", "twilight_discard_divisor"],
+      "WK_inputs": [],
+      "output_variable": "twilight_altered_votes",
+      "solution_line_template": "Then divide the total number Twilight votes by {twilight_discard_divisor} to find the altered number of votes: {twilight_initial_votes} votes / {twilight_discard_divisor} = <<{twilight_initial_votes}/{twilight_discard_divisor}={twilight_altered_votes}>>{twilight_altered_votes} votes"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": ["got_initial_votes"],
+      "WK_inputs": [],
+      "output_variable": "total_altered_votes",
+      "solution_line_template": "Then add the altered number of votes for each book to find the total altered number of votes: {twilight_altered_votes} votes + {taotd_altered_votes} votes + {got_initial_votes} votes = <<{twilight_altered_votes}+{taotd_altered_votes}+{got_initial_votes}={total_altered_votes}>>{total_altered_votes} votes"
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": ["percent_multiplier"],
+      "output_variable": "got_percentage",
+      "solution_line_template": "Then divide the number of votes for Game of Thrones by the total altered number of votes and multiply by {percent_multiplier}% to express the answer as a percentage: {got_initial_votes} votes / {total_altered_votes} votes * {percent_multiplier}% = {got_percentage}%"
+    }
+  ]
+}
+```
