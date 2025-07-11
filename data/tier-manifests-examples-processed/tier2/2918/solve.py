@@ -8,6 +8,7 @@ def solve():
     base_cost = num_guests * cost_per_person
 
     # L2
+    discount_percent_decimal = 0.10 # from solution text: .10*500
     discount_percent_num = 10 # 10% discount
     percent_factor = 0.01 # WK
     discount_amount = discount_percent_num * percent_factor * base_cost
