@@ -106,3 +106,54 @@ tier1_final = [3946, 4258, 6126]
 tier2_final = [2401, 2918, 4822]
 tier3_final = [5, 964, 2422, 3822]
 tier4_final = [3847, 4847, 5040, 7037]
+
+
+###$ Error generation directories:
+
+1. Arvind - 'data/computational-errors-generated'
+      (currently done: 0-2999 except for symbolic problems)
+
+2. Ling - 'data/gsm8k_1500_1999_conceptual'
+      (currently done: 'gsm8k_1500_1599_conceptual_errors.json')
+
+3. Mauro - '/data/manually_gen_incorrect_answers_gsm8k'
+      (currently done: 500-999)
+
+4. Yewei - 'yewei/gsm8k_data'
+      (currently done: 1000-1499)
+
+5. Ali - 'GSM8_Edited'
+      (currently done: 0-500)
+
+
+#### Fine-tuning levels
+
+**Level 1**
+
+Features: Question, correct answer
+Label: 0 or 1 (correct or incorrect)
+
+**Level 2**
+
+Features: Question, correct answer, wrong answer
+Label: 0 or 1 (conceptual or computational)
+
+**Level 3**
+
+Features: Question, answer (correct or flawed)
+Label: 0 or 1 or 2 (correct, conceptual, computational)
+
+**Level 4**
+
+Features: Question, answer (correct or flawed)
+Label: 0,1,2,3 (correct, conceptual, computational, skipped step)
+
+**Level 5**
+
+Features: Question, answer (correct or flawed)
+Label: Json object with verdict, error type, erroneous_line_number
+
+**Level max**
+
+Features: Question, answer (correct or flawed)
+Label: Full json object with verdict, error type, erroneous_line_number, explanation.
