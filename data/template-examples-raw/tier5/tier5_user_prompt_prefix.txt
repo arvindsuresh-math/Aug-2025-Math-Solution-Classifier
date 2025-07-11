@@ -1,0 +1,221 @@
+In the TASK below, you will be given a math problem and its corresponding step-by-step solution. Each step in the solution is numbered (e.g. "L1", "L2" and so on), and many of the steps include calculator annotations (e.g. "<<20*0.1=2>>"). Your goal is to convert this information into a structured JSON object according to the following schema and detailed instructions.
+
+# JSON Schema Definition
+
+Your output must adhere to the following JSON structure:
+
+```json
+{
+  "function_code": "A single string containing a complete, self-contained Python function that constitutes an end-to-end formalization of the solution.",
+  "logical_steps": [
+    {
+      "line_number": "The line number from the original solution (e.g., 'L1', 'L2').",
+      "question_inputs": "A (possibly empty) list of variable names with values extracted from the question text, used for the first time in this step.",
+      "WK_inputs": "A (possibly empty) list of variable names with values coming from 'world knowledge' (e.g., minutes_per_hour), used for the first time in this step.",
+      "output_variable": "The name of the variable being assigned as the result of the main computation in this step.",
+      "solution_line_template": "The complete original line from the solution, including the calculator annotation, with all computational numbers replaced by `{variable_name}` placeholders."
+    }
+  ]
+}
+```
+
+# Detailed Field Instructions
+
+## 1. "function_code"
+
+This string must contain a Python function with the following characteristics:
+
+*   **1.A. No Imports:** You should not have ANY imports. The very first line MUST be the function definition (i.e. `def solve():`).
+*   **1.B. Function Naming & Docstring:** The function must be named `solve`, and it should not have any args. It must begin with a docstring that has exactly two lines:
+    *   **1.B.i.** The first line must be: "Index: [Index]." using the index from the task header.
+    *   **1.B.ii.** The second line must be a succinct, one-sentence description of what the function returns (e.g., "Returns: the total cost of wages and taxes.").
+*   **1.C. Line comments:** For each solution line that is used to compute the final answer, include a comment of the form `# L1`, `# L2` and so on, which references the line number.
+    *   **1.C.i.** Such a comment must immediately be followed by a code block that precisely formalizes the corresponding solution line. More details about code blocks are provided in 1.D below.
+    *   **1.C.ii.** If a solution line does not contain any computation relevant to the final answer, then omit it completely from the function code and do NOT add a corresponding line comment.
+*   **1.D. Code blocks:** Each code block constitutes a complete formalization of its corresponding solution line. It must consist of the following:
+    *   **1.D.i. Input Variables** First, define any NEW variables needed for the computation, i.e. that will be used for the first time in the solution. Each input variable MUST be followed by a comment (`#`) in the same line. These variables fall into two categories:
+        *   "question_inputs": These are variables whose values are stated in or can be extracted from the question text. The comment for these variables should quote or refer to the phrase in the question text from which it is extracted.
+        *   "WK_inputs": These are variables drawn from common-sense "World Knowledge" (e.g. `minutes_per_hour = 60`, `dozen = 12`). The comment for these variables MUST simply say `# WK`.
+    *   **1.D.ii. Output Variables** Second, there should be EXACTLY ONE line of code which formalizes the computation in the solution line and assigns the resulting value to a new variable (this is the "output_variable" field).
+*   **1.E. The Direct Substitution Rule:** This is the MOST IMPORTANT RULE, which ensures that the "solution_line_template" is purely identical to the original solution line except that numerical values in computations have been replaced with variable placeholders: You MUST define variables in such a way that they can be DIRECTLY SUBSTITUTED into the solution line without changing any operators or surrounding text in the line. 
+*   **1.F. Final Answer:** The line that assigns the final result to the `answer` variable must be immediately preceded by a line containing only the comment `# FA`. The last line of the function must always return the `answer` variable.
+
+## 2. "solution_line_template"
+
+*   **2.A.** The template should be EXACTLY identical to the original solution line, with the ONLY CHANGES being that every NUMERICAL value used in a computation is replaced by its corresponding `{variable_name}` placeholder. This applies to the entire content of the solution line, including the inside and outside of the calculator annotations.
+*   **2.B.** In particular, EVERY SINGLE numerical value appearing inside the calculator annotation (`<<..>>`) MUST be replaced with a `{variable_name}` placeholder.
+*   **2.C.** Note: some quantities may appear as words in the solution line (e.g. "twice as many"). Do NOT attempt to replace these with variable name placeholders.
+*   **2.D.** The Direct Substitution Rule will ensure that for correctly defined variables, it will be possible to replace the numerical values with variable name placeholders while leaving all surrounding text, symbols, and operators unchanged. Thus, in a correct "solution_line_template", the calculator annotation will not contain any numerical values, and moreover, replacing each `{variable_name}` by its value should exactly recover the original solution line, including the original calculator annotation.
+
+# Examples
+
+Given below are three examples that illustrate what a perfect formalization will look like. For each example, you are given the following:
+
+*   Input: consisting of an index, question, and solution mapping. 
+*   Output: complete output, wrapper inside ```json .. ```
+
+In all examples, you will observe the following:
+*   A rigid adherence to the Direct Substitution Rule (1.E), resulting in a "solution_line_template" perfectly satisfies properties 2.A - 2.D.
+*   Code blocks that are precisely formatted as in 1.D, consisting of line comments, then input variable declarations, then a single output variable assignment (i.e. the single computation for that solution line).
+*   A careful distinction between numerical values and word-based quantities in the solution_line_template. Per rule 2.C, only numerical values like 2 are replaced with placeholders. Words like "twice" are never replaced, even though they are formalized as variables in the function_code.
+*   Precise categorization of input variables as described in rule 1.D.i. Note how dozen = 12 is a WK_input (common knowledge), while father_ate = 8 is a question_input (explicitly stated in the problem text).
+*   Strict adherence to defining only NEW variables in each step's question_inputs and WK_inputs lists. Observe that once a variable like days_in_week is defined in one step, it is simply re-used in later calculations without being listed as an input again.
+
+## Example 1
+
+### Input
+
+**Index:**
+3946
+
+**Question:**
+Mother made 2 dozen brownies and placed them on the kitchen counter to cool.  Father smelled the brownies, came into the kitchen and ate 8 of them. Then, their daughter, Mooney, wandered into the kitchen and ate 4 of the brownies. The next morning, Mother made another two dozen brownies and added them to those remaining from the day before.  After that, how many brownies were on the counter?
+
+**Solution mapping:**
+{'L1': 'Two dozen brownies is 2 * 12 = <<2*12=24>>24 brownies.', 'L2': 'After Father ate his 8, there were 24 - 8 = <<24-8=16>>16 brownies remaining on the counter.', 'L3': 'After Mooney ate her 4, there were 16 - 4 = <<16-4=12>>12 brownies remaining on the counter.', 'L4': 'Mother made a second batch of two-dozen brownies, or 2 * 12 = <<2*12=24>>24 brownies.', 'L5': 'After Mother added the second two-dozen, there were 12 + 24 = <<12+24=36>>36 brownies on the kitchen counter.'}
+
+### Output
+
+```json
+{
+  "function_code": "def solve():\n    \"\"\"Index: 3946.\n    Returns: the number of brownies on the counter at the end.\n    \"\"\"\n    # L1\n    num_dozen_initial = 2 # 2 dozen brownies\n    dozen = 12 # WK\n    initial_brownies = num_dozen_initial * dozen\n\n    # L2\n    father_ate = 8 # ate 8 of them\n    after_father = initial_brownies - father_ate\n\n    # L3\n    mooney_ate = 4 # ate 4 of the brownies\n    after_mooney = after_father - mooney_ate\n\n    # L4\n    num_dozen_second_batch = 2 # another two dozen brownies\n    second_batch = num_dozen_second_batch * dozen\n\n    # L5\n    total_brownies = after_mooney + second_batch\n\n    # FA\n    answer = total_brownies\n    return answer",
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": ["num_dozen_initial"],
+      "WK_inputs": ["dozen"],
+      "output_variable": "initial_brownies",
+      "solution_line_template": "Two dozen brownies is {num_dozen_initial} * {dozen} = <<{num_dozen_initial}*{dozen}={initial_brownies}>>{initial_brownies} brownies."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": ["father_ate"],
+      "WK_inputs": [],
+      "output_variable": "after_father",
+      "solution_line_template": "After Father ate his {father_ate}, there were {initial_brownies} - {father_ate} = <<{initial_brownies}-{father_ate}={after_father}>>{after_father} brownies remaining on the counter."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": ["mooney_ate"],
+      "WK_inputs": [],
+      "output_variable": "after_mooney",
+      "solution_line_template": "After Mooney ate her {mooney_ate}, there were {after_father} - {mooney_ate} = <<{after_father}-{mooney_ate}={after_mooney}>>{after_mooney} brownies remaining on the counter."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": ["num_dozen_second_batch"],
+      "WK_inputs": [],
+      "output_variable": "second_batch",
+      "solution_line_template": "Mother made a second batch of two-dozen brownies, or {num_dozen_second_batch} * {dozen} = <<{num_dozen_second_batch}*{dozen}={second_batch}>>{second_batch} brownies."
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_brownies",
+      "solution_line_template": "After Mother added the second two-dozen, there were {after_mooney} + {second_batch} = <<{after_mooney}+{second_batch}={total_brownies}>>{total_brownies} brownies on the kitchen counter."
+    }
+  ]
+}
+```
+
+## Example 2
+
+### Input
+
+**Index**:
+4258
+
+**Question**:
+Cowboy Mickey and cowgirl Minnie train horses for a living.  On average, Mickey mounts six less than twice as many horses per day as does Minnie,  while Minnie mounts three more horses per day than there are days in a week.  How many horses does Mickey Mount per week?
+
+**Solution mapping**:
+{'L1': 'If Minnie mounts three more horses per day than there are days in a week, then Minnie mounts 7+3=<<3+7=10>>10 horses per day.', 'L2': 'Twice as many horses per day as Minnie mounts is 10*2=<<10*2=20>>20 horses per day.', 'L3': 'If Mickey mounts six less than twice as many horses per day as does Minnie, then Mickey mounts 20-6=<<20-6=14>>14 horses per day.', 'L4': 'Since there are 7 days in a week, then Mickey mounts 7*14=<<7*14=98>>98 horses per week.'}
+
+### Output
+
+```json
+{
+  "function_code": "def solve():\n    \"\"\"Index: 4258.\n    Returns: the number of horses Mickey mounts per week.\n    \"\"\"\n    # L1\n    days_in_week = 7 # WK\n    minnie_more_than_week = 3 # three more horses per day than there are days in a week\n    minnie_per_day = days_in_week + minnie_more_than_week\n\n    # L2\n    multiplier_for_twice = 2 # twice as many horses\n    twice_minnie = minnie_per_day * multiplier_for_twice\n\n    # L3\n    mickey_less_than_twice_minnie = 6 # six less than twice as many horses\n    mickey_per_day = twice_minnie - mickey_less_than_twice_minnie\n\n    # L4\n    mickey_per_week = mickey_per_day * days_in_week\n\n    # FA\n    answer = mickey_per_week\n    return answer",
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": ["minnie_more_than_week"],
+      "WK_inputs": ["days_in_week"],
+      "output_variable": "minnie_per_day",
+      "solution_line_template": "If Minnie mounts three more horses per day than there are days in a week, then Minnie mounts {days_in_week}+{minnie_more_than_week}=<<{days_in_week}+{minnie_more_than_week}={minnie_per_day}>>{minnie_per_day} horses per day."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": ["multiplier_for_twice"],
+      "WK_inputs": [],
+      "output_variable": "twice_minnie",
+      "solution_line_template": "Twice as many horses per day as Minnie mounts is {minnie_per_day}*{multiplier_for_twice}=<<{minnie_per_day}*{multiplier_for_twice}={twice_minnie}>>{twice_minnie} horses per day."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": ["mickey_less_than_twice_minnie"],
+      "WK_inputs": [],
+      "output_variable": "mickey_per_day",
+      "solution_line_template": "If Mickey mounts six less than twice as many horses per day as does Minnie, then Mickey mounts {twice_minnie}-{mickey_less_than_twice_minnie}=<<{twice_minnie}-{mickey_less_than_twice_minnie}={mickey_per_day}>>{mickey_per_day} horses per day."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "mickey_per_week",
+      "solution_line_template": "Since there are 7 days in a week, then Mickey mounts {days_in_week}*{mickey_per_day}=<<{days_in_week}*{mickey_per_day}={mickey_per_week}>>{mickey_per_week} horses per week."
+    }
+  ]
+}
+```
+
+## Example 3
+
+### Input
+
+**Index**:
+6126
+
+**Question**:
+Paul makes pencils, making 100 pencils a day five days a week. He started the week with 80 pencils in his stock, and during the week he sold 350 pencils. How many pencils did he have in his stock at the end of the week?
+
+**Solution mapping**:
+{'L1': 'Making 100 pencils a day, he made 100 pencils/day * 5 days/week = <<100*5=500>>500 pencils during the week.', 'L2': 'With the pencils from the stock, he got 500 pencils + 80 pencils = <<500+80=580>>580 pencils.', 'L3': 'Subtracting the ones he sold, he has 580 pencils - 350 pencils = <<580-350=230>>230 pencils.'}
+
+### Output
+
+```json
+{
+  "function_code": "def solve():\n    \"\"\"Index: 6126.\n    Returns: the number of pencils in stock at the end of the week.\n    \"\"\"\n    # L1\n    pencils_per_day = 100 # 100 pencils a day\n    days_per_week = 5 # five days a week\n    pencils_made = pencils_per_day * days_per_week\n\n    # L2\n    initial_stock = 80 # started the week with 80 pencils\n    total_available = pencils_made + initial_stock\n\n    # L3\n    pencils_sold = 350 # sold 350 pencils\n    final_stock = total_available - pencils_sold\n\n    # FA\n    answer = final_stock\n    return answer",
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "pencils_per_day",
+        "days_per_week"
+      ],
+      "WK_inputs": [],
+      "output_variable": "pencils_made",
+      "solution_line_template": "Making {pencils_per_day} pencils a day, he made {pencils_per_day} pencils/day * {days_per_week} days/week = <<{pencils_per_day}*{days_per_week}={pencils_made}>>{pencils_made} pencils during the week."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": ["initial_stock"],
+      "WK_inputs": [],
+      "output_variable": "total_available",
+      "solution_line_template": "With the pencils from the stock, he got {pencils_made} pencils + {initial_stock} pencils = <<{pencils_made}+{initial_stock}={total_available}>>{total_available} pencils."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": ["pencils_sold"],
+      "WK_inputs": [],
+      "output_variable": "final_stock",
+      "solution_line_template": "Subtracting the ones he sold, he has {total_available} pencils - {pencils_sold} pencils = <<{total_available}-{pencils_sold}={final_stock}>>{final_stock} pencils."
+    }
+  ]
+}
+```
+
+# TASK
+

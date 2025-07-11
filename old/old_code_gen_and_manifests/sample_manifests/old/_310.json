@@ -1,0 +1,55 @@
+{
+  "problem_index": 310,
+  "question": "Janet hires six employees. Four of them are warehouse workers who make $15/hour, and the other two are managers who make $20/hour. Janet has to pay 10% of her workers' salaries in FICA taxes. If everyone works 25 days a month and 8 hours a day, how much does Janet owe total for their wages and taxes for one month?",
+  "function_code": "def solve(\n    num_warehouse_workers: int = 4,    # Four of them are warehouse workers\n    warehouse_worker_wage: int = 15,   # who make $15/hour\n    num_managers: int = 2,             # the other two are managers\n    manager_wage: int = 20,            # who make $20/hour\n    fica_tax_rate: float = 0.10,       # pay 10% of her workers' salaries in FICA taxes\n    days_per_month: int = 25,          # works 25 days a month\n    hours_per_day: int = 8             # and 8 hours a day\n):\n    \"\"\"Index: 310.\n    Returns: the total amount Janet owes for wages and taxes for one month.\n    \"\"\"\n    # L1: Calculate hours worked per employee per month\n    hours_per_worker_per_month = days_per_month * hours_per_day\n\n    # L2: Calculate monthly wage for one warehouse worker\n    wage_per_warehouse_worker = hours_per_worker_per_month * warehouse_worker_wage\n\n    # L3: Calculate total wages for all warehouse workers\n    total_warehouse_wages = wage_per_warehouse_worker * num_warehouse_workers\n\n    # L4: Calculate monthly wage for one manager\n    wage_per_manager = hours_per_worker_per_month * manager_wage\n\n    # L5: Calculate total wages for all managers\n    total_manager_wages = wage_per_manager * num_managers\n\n    # L6: Calculate total pre-tax wages for all employees\n    total_wages = total_manager_wages + total_warehouse_wages\n\n    # L7: Calculate the FICA tax amount\n    fica_taxes = total_wages * fica_tax_rate\n\n    # L8: Calculate the grand total owed\n    grand_total = total_wages + fica_taxes\n\n    answer = grand_total\n    return answer",
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "output_variable": "hours_per_worker_per_month",
+      "nl_template": "First figure out how many hours each worker works per month by multiplying the number of days they work by the number of hours a day they work: {days_per_month} days * {hours_per_day} hours/day = {hours_per_worker_per_month} hours",
+      "calculator_annotation_template": "<<{days_per_month}*{hours_per_day}={hours_per_worker_per_month}>>"
+    },
+    {
+      "line_number": "L2",
+      "output_variable": "wage_per_warehouse_worker",
+      "nl_template": "Then calculate how much one warehouse worker makes per month by multiplying their hourly rate by the number of hours they work: {hours_per_worker_per_month} hours * ${warehouse_worker_wage}/hour = ${wage_per_warehouse_worker}",
+      "calculator_annotation_template": "<<{hours_per_worker_per_month}*{warehouse_worker_wage}={wage_per_warehouse_worker}>>"
+    },
+    {
+      "line_number": "L3",
+      "output_variable": "total_warehouse_wages",
+      "nl_template": "Then multiply that number by {num_warehouse_workers} to find out how much all the warehouse workers make: ${wage_per_warehouse_worker}/worker * {num_warehouse_workers} workers = ${total_warehouse_wages}",
+      "calculator_annotation_template": "<<{wage_per_warehouse_worker}*{num_warehouse_workers}={total_warehouse_wages}>>"
+    },
+    {
+      "line_number": "L4",
+      "output_variable": "wage_per_manager",
+      "nl_template": "Now multiply the hours each manager works (also {hours_per_worker_per_month}) by their hourly wage to find out how much one manager makes per month: {hours_per_worker_per_month} hours * ${manager_wage}/hour = ${wage_per_manager}",
+      "calculator_annotation_template": "<<{hours_per_worker_per_month}*{manager_wage}={wage_per_manager}>>"
+    },
+    {
+      "line_number": "L5",
+      "output_variable": "total_manager_wages",
+      "nl_template": "Now multiply one manager's wages by the number of managers ({num_managers}) to find their total wage amount: ${wage_per_manager}/manager * {num_managers} managers = ${total_manager_wages}",
+      "calculator_annotation_template": "<<{wage_per_manager}*{num_managers}={total_manager_wages}>>"
+    },
+    {
+      "line_number": "L6",
+      "output_variable": "total_wages",
+      "nl_template": "Now add the wages for the managers and the workers to find the total cost of the wages: ${total_manager_wages} + ${total_warehouse_wages} = ${total_wages}",
+      "calculator_annotation_template": "<<{total_manager_wages}+{total_warehouse_wages}={total_wages}>>"
+    },
+    {
+      "line_number": "L7",
+      "output_variable": "fica_taxes",
+      "nl_template": "Now multiply the total wage bill by {fica_tax_rate:0.0%} to find how much the FICA taxes are: ${total_wages} * {fica_tax_rate} = ${fica_taxes}",
+      "calculator_annotation_template": "<<{total_wages}*{fica_tax_rate}={fica_taxes}>>"
+    },
+    {
+      "line_number": "L8",
+      "output_variable": "grand_total",
+      "nl_template": "Now add the total wage bill to the total tax amount to find the grand total: ${fica_taxes} + ${total_wages} = ${grand_total}",
+      "calculator_annotation_template": "<<{fica_taxes}+{total_wages}={grand_total}>>"
+    }
+  ]
+}

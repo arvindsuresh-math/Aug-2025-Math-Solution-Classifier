@@ -1,0 +1,18 @@
+def solve(
+    credit_limit: int = 100, # Mary is allowed a credit of $100
+    payment_tuesday: int = 15, # paid $15 of it on Tuesday
+    payment_thursday: int = 23 # and $23 of it on Thursday
+):
+    """Index: 24.
+    Returns: the amount of credit Mary still needs to pay before her next shopping trip.
+    """
+
+    #: L1
+    total_paid = payment_tuesday + payment_thursday # eval: 38 = 15 + 23
+
+    #: L2
+    remaining_credit = 61 # eval: 61 = 61
+
+    #: FA
+    answer = remaining_credit
+    return answer # eval: return 61

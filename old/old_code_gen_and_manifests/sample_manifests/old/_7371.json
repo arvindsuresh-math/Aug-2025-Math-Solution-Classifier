@@ -1,0 +1,49 @@
+{
+  "problem_index": 7371,
+  "question": "Karen's students are about to take a standardized test. Karen gets a $500 bonus if their average score is above 75, plus an extra $10 bonus for every additional point the average score increases above 75. So far, Karen has graded 8 tests, and the average is 70. Given that each student can have a maximum score of 150, what combined score do the last two tests need to have for Karen to earn a $600 bonus?",
+  "function_code": "def solve(\n    base_bonus: int = 500,              # gets a $500 bonus\n    target_average_baseline: int = 75,   # if their average score is above 75\n    per_point_bonus: int = 10,           # an extra $10 bonus for every additional point\n    graded_tests: int = 8,               # has graded 8 tests\n    current_average: int = 70,           # the average is 70\n    num_remaining_tests: int = 2,        # the last two tests\n    target_total_bonus: int = 600        # to earn a $600 bonus\n):\n    \"\"\"Index: 7371.\n    Returns: the required combined score for the last two tests.\n    \"\"\"\n    # L1: Find the bonus amount earned above the baseline\n    extra_bonus_earned = target_total_bonus - base_bonus\n\n    # L2: Convert extra bonus into required points above baseline average\n    points_above_baseline = extra_bonus_earned / per_point_bonus\n\n    # L3: Calculate the required final average score\n    required_final_average = target_average_baseline + points_above_baseline\n\n    # L4: Calculate total number of tests\n    total_tests = graded_tests + num_remaining_tests\n\n    # L5: Calculate the total cumulative score required across all tests\n    required_total_score = required_final_average * total_tests\n\n    # L6: Calculate the total score from tests already graded\n    current_total_score = current_average * graded_tests\n\n    # L7: Find the required score for the remaining tests\n    required_score_for_last_two = required_total_score - current_total_score\n\n    answer = required_score_for_last_two\n    return answer",
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "output_variable": "extra_bonus_earned",
+      "nl_template": "First subtract ${base_bonus} from Karen's goal bonus amount to find how much she makes from the extra ${per_point_bonus}/point bonus: ${target_total_bonus} - ${base_bonus} = ${extra_bonus_earned}",
+      "calculator_annotation_template": "<<{target_total_bonus}-{base_bonus}={extra_bonus_earned}>>"
+    },
+    {
+      "line_number": "L2",
+      "output_variable": "points_above_baseline",
+      "nl_template": "Then divide the extra bonus by the extra rate: ${extra_bonus_earned} / ${per_point_bonus}/point = {points_above_baseline} points",
+      "calculator_annotation_template": "<<{extra_bonus_earned}/{per_point_bonus}={points_above_baseline}>>"
+    },
+    {
+      "line_number": "L3",
+      "output_variable": "required_final_average",
+      "nl_template": "Then add the {points_above_baseline} extra points to the baseline {target_average_baseline} point goal to find the students' average test score: {points_above_baseline} points + {target_average_baseline} points = {required_final_average} points",
+      "calculator_annotation_template": "<<{points_above_baseline}+{target_average_baseline}={required_final_average}>>"
+    },
+    {
+      "line_number": "L4",
+      "output_variable": "total_tests",
+      "nl_template": "Then add the {graded_tests} graded tests to the {num_remaining_tests} ungraded tests to find the total number of tests: {graded_tests} tests + {num_remaining_tests} tests = {total_tests} tests",
+      "calculator_annotation_template": "<<{graded_tests}+{num_remaining_tests}={total_tests}>>"
+    },
+    {
+      "line_number": "L5",
+      "output_variable": "required_total_score",
+      "nl_template": "Then multiply the {required_final_average} point average by the number of tests to find the total number of points the students need to earn: {required_final_average} points/test * {total_tests} tests = {required_total_score} points",
+      "calculator_annotation_template": "<<{required_final_average}*{total_tests}={required_total_score}>>"
+    },
+    {
+      "line_number": "L6",
+      "output_variable": "current_total_score",
+      "nl_template": "Then multiply the current average by the current number of graded tests to find how many points have been earned so far: {current_average} points/test * {graded_tests} tests = {current_total_score} points",
+      "calculator_annotation_template": "<<{current_average}*{graded_tests}={current_total_score}>>"
+    },
+    {
+      "line_number": "L7",
+      "output_variable": "required_score_for_last_two",
+      "nl_template": "Then subtract the number of points earned from the number of points needed to find the combined score the last two tests need: {required_total_score} points - {current_total_score} points = {required_score_for_last_two} points",
+      "calculator_annotation_template": "<<{required_total_score}-{current_total_score}={required_score_for_last_two}>>"
+    }
+  ]
+}
