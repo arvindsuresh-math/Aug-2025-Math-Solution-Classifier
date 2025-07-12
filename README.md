@@ -214,4 +214,149 @@ The GUI for each candidate would present:
 * **Maximizes Human Efficiency:** The human is not calculating anything. They are performing a constrained editing task: making the text match the numbers. The GUI provides all necessary context to do this quickly.
 * **Control:** You have full control over the final quality of every single data point.
 
-This workflow directly addresses your concerns. It removes the unreliable LLM from the loop and instead provides a powerful tool to help a human do the one thing a machine cannot reliably do: write plausible, context-aware natural language.
+---
+
+## **Synopsis: Programmatic Generation of Conceptual Errors**
+
+### **Objective**
+
+Below, we outline a taxonomy of conceptual error types that can be programmatically generated to create a high-quality SFT dataset. The goal is to simulate plausible student mistakes by manipulating the logic of validated "Formalization Templates."
+
+### **Guiding Principle: "Single Point of Failure"**
+
+Our core strategy is to introduce **one single logical error** on a specific line (`N`) of the solution's code representation. All subsequent steps (`N+1`, `N+2`, etc.) are then executed with perfect logic, using the flawed output from line `N` as their input. This isolates the error and simplifies the validation process.
+
+---
+
+### **Error Type 1: Operator Swap**
+
+1. **What it Emulates:** A fundamental misunderstanding of the required mathematical operation.
+    * **Examples:** Using `+` instead of `-` to calculate profit (Index `1547`); using `*` instead of `+` to combine totals (Index `1542`); using `*` instead of `/` for unit conversion (Index `1509`).
+
+2. **AST Manipulation Strategy:**
+    * Target an `ast.BinOp` node (binary operation).
+    * Swap its `op` attribute, e.g., `ast.Mult()` becomes `ast.Div()`, or `ast.Add()` becomes `ast.Sub()`.
+
+3. **Human Validation Task:**
+    * The validator sees a reconstructed line where the text implies one operation but the numbers show another.
+    * **Example (Index 1547):** The validator might see the text `Each bag makes a profit of 8+4=$12`.
+    * **Validator's Edit:** The goal is to make the prose justify the flawed operation. A plausible student might incorrectly believe profit is the sum of costs. The validator edits the text to reflect this flawed reasoning: `"The total money involved per bag is {sale_price}+{cost_price}=${flawed_profit}"`. The new text now matches the flawed calculation.
+
+4. **Challenges & Difficulties:**
+    * A simple programmatic string replacement of `+` with `-` in the text is too brittle. The validator must handle the surrounding prose.
+    * Must avoid swapping operators for non-numeric types (e.g., string concatenation).
+
+---
+
+### **Error Type 2: Wrong Reference Group**
+
+1. **What it Emulates:** Applying a correct calculation to the wrong set of items.
+    * **Examples:** Calculating a percentage of the total population instead of a specific sub-population (Index `1510`: "half the girls" is applied to the whole team); calculating tip on `(price + tax)` instead of just `price` (Index `1500`).
+
+2. **AST Manipulation Strategy:**
+    * In an `ast.BinOp` node, identify an `ast.Name` operand that represents a specific group (e.g., `num_girls`).
+    * Find another variable in scope representing a different, plausible group (e.g., `total_players`).
+    * Swap the `id` of the `ast.Name` node to use the incorrect variable.
+
+3. **Human Validation Task:**
+    * The validator sees text that refers to one group but numbers that reflect another.
+    * **Example (Index 1510):** A reconstructed line might read `"The team has 10 junior girls because 50 / 2 = 25"`.
+    * **Validator's Edit:** The validator adjusts the text to justify the flawed reference. `"Half the team are junior girls, so there are {total_players} / 2 = {flawed_junior_girls} junior girls"`. This is factually incorrect according to the problem, but it is an internally consistent, plausible student error.
+
+4. **Challenges & Difficulties:**
+    * Programmatically identifying which variables represent "groups" can be difficult. It will likely rely on heuristics based on variable names.
+
+---
+
+### **Error Type 3: Failure to Update State**
+
+1. **What it Emulates:** A specific "Wrong Reference" error where a student uses a stale initial value instead of a more recent intermediate value in a sequential problem.
+    * **Examples:** Using the original weight for a second-stage percentage calculation instead of the remaining weight (Index `1501`); using a starting value for a cumulative increase instead of the previous step's total (Index `1511`).
+
+2. **AST Manipulation Strategy:**
+    * This is a targeted application of "Wrong Reference Group."
+    * Identify a sequence where `var_C` depends on `var_B`, which depends on `var_A`.
+    * In the calculation for `var_C`, replace the operand `var_B` with `var_A`.
+
+3. **Human Validation Task:**
+    * The validator sees text implying a sequential update, but numbers reflecting a calculation from the original state.
+    * **Example (Index 1501):** The validator sees `"Second Store:45000(.20)=10000"`.
+    * **Validator's Edit:** The text is changed to match the flawed logic. `"Second Store: 20% of the original 50000 pounds is removed, so 50000(.20)={flawed_unloaded_amount}"`. This becomes `"{initial_weight}(.20)={flawed_unloaded_amount}"` in the template.
+
+4. **Challenges & Difficulties:**
+    * Reliably identifying these state-change chains requires careful dependency analysis of the `function_code`.
+
+---
+
+### **Error Type 4: Operand Swap**
+
+1. **What it Emulates:** Confusion about which number should be the dividend vs. the divisor, or the minuend vs. the subtrahend.
+    * **Example (Hypothetical):** For `_672.json`, a student might divide `carrots_per_bag` by `carrots_per_year` instead of the other way around.
+
+2. **AST Manipulation Strategy:**
+    * Find an `ast.BinOp` node with `op` as `ast.Div()` or `ast.Sub()`.
+    * Swap the `left` and `right` child nodes.
+
+3. **Human Validation Task:**
+    * The validator sees a sentence where the text and numbers are completely reversed.
+    * **Validator's Edit:** The validator must rewrite the sentence to create a plausible (though incorrect) justification for the swapped logic. For the example above, they might change the text to: `"To find the portion of a bag used per day, we divide the carrots per bag by the total carrots needed: {carrots_per_bag}/{carrots_per_year} = {bags_needed}"`.
+
+4. **Challenges & Difficulties:**
+    * This error type places a high editing burden on the human validator, as the entire sentence context usually needs to be rewritten.
+
+---
+
+### **Error Type 5: Input Misrepresentation**
+
+1. **What it Emulates:** Misreading a number from the problem text or using incorrect "world knowledge."
+    * **Examples:** Using `17` cans instead of `24` (Index `62`); using `$5` to shovel instead of `$7` (Index `11`).
+
+2. **AST Manipulation Strategy:**
+    * Identify an `ast.Assign` node for a variable taken from `question_inputs` or `WK_inputs`.
+    * Modify the `value` of its `ast.Constant` node (e.g., perturb `n` to `n+1` or swap with another number from the problem).
+
+3. **Human Validation Task:**
+    * **Often requires no edit.** A reconstructed line like `"There are 17 - 10 = 7 cans left"` is already a self-consistent, plausible error.
+    * The validator's main job is to confirm that the flawed input is still plausible within the problem's context and accept the change. This is the lowest-effort validation task.
+
+4. **Challenges & Difficulties:**
+    * Selecting the flawed value requires care. Random mutation can be nonsensical. A curated list of common WK mistakes (e.g., `dozen=10`, `pi=3`) or swapping with other explicit numbers from the question text is a good strategy.
+
+---
+
+### **Error Type 6: Skipped Step**
+
+1. **What it Emulates:** Completely omitting a necessary calculation, leading to a wrong answer.
+    * **Examples:** Forgetting to subtract an expense (Index `16`: the shirt); ignoring a category of items (Index `51`: the bedroom curtains); stopping one step short and reporting an intermediate value as the final answer (Index `724`).
+
+2. **AST Manipulation Strategy (Complex):**
+    1. **Deletion:** Delete an `ast.Assign` node (e.g., the line calculating `bedroom_curtain_area`).
+    2. **Rewiring:** Find the subsequent `ast.Assign` node that uses the now-deleted variable. Modify its expression to remove that variable (e.g., `total - living_room_area - bedroom_curtain_area` becomes `total - living_room_area`).
+
+3. **Human Validation Task:**
+    * The validator sees an abridged solution with a logical leap.
+    * **Example (Index 51):** The final line would be reconstructed as `"Finally, subtract the square footage of the living room curtains from the total: 192 - 24 = 168 square feet"`.
+    * **Validator's Edit:** The validator confirms this abridged text is plausible. They might simplify it to `"The remaining fabric is 192 - 24 = 168 square feet"`. They would also need to remove the corresponding original line from the full solution text block in the GUI.
+
+4. **Challenges & Difficulties:**
+    * The "rewiring" step is the most technically difficult part of this entire plan and is prone to causing `NameError` if not handled perfectly.
+    * The "Omitted Final Step" sub-type is much easier: simply change the `return` statement to an intermediate variable. This should be implemented first.
+
+---
+
+### **Error Type 7: Unit Handling / Conversion Error**
+
+1. **What it Emulates:** A failure to correctly manage units. This is a "meta-category" that uses our other generators.
+    * **Examples:** Using the wrong operator for a conversion (`*` instead of `/`) is an **Operator Swap**. Forgetting a conversion factor (`dozen` = 12) is a **Skipped Step**. Adding incompatible units (months + years) is **Incorrect Variable Usage**.
+
+2. **AST Manipulation Strategy:**
+    * We don't need a new manipulation type. Instead, we programmatically **identify unit conversion steps** and apply one of our existing generators (`Operator Swap`, `Skipped Step`, etc.) to that specific step.
+    * We can identify these steps by looking for known conversion constants (`12`, `60`) or variable names containing unit words (`inches`, `feet`).
+
+3. **Human Validation Task:**
+    * The task is identical to that of the underlying error type being used.
+    * **Example (Index 1531, Incorrect Variable Usage):** A student adds months to years. The validator sees `So in total it all took 2+4+48+2=56 years`.
+    * **Validator's Edit:** They might simplify the text to remove unit confusion, making the flawed summation plausible: `"The total time is 2+4+48+2 = {flawed_total_years}"`.
+
+4. **Challenges & Difficulties:**
+    * The main challenge is the heuristic-based identification of "unit conversion" steps. A misclassification is not critical, as it will still produce a valid conceptual error, just perhaps not a "unit" one.
