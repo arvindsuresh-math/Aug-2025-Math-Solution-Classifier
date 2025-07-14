@@ -458,12 +458,19 @@ To accurately classify all samples, I propose adding the following two error typ
 
 ---
 
-Great:
+### Running the conceptual error validation app
 
-I've attached a csv with ~100 samples of conceptually generated errors.
+Run this in the terminal from the project root:
 
-I'd like you to carefully and meticulously analyze each row (i.e sample) and classify them into one of the pre-existing error types.
-If any sample fits naturally into multiple error types, then that is totally fine.
-If any sample does not fit into any of the existing error types, then please add a new, appropriate error type to the pre-existing list in the markdown, and give me the text describing the error type so I can add it to the markdown.
+```bash
+streamlit run validate_candidates.py --theme.base "light" -- --candidates-dir data/conceptual-error-candidates
+```
 
-After your classification is complete, please give me python lists for each error type containing the corresponding indices. 
+It will open the validation app in the browser. The erroneous line number will tell you which line the error was injected; you can ignore all previous lines.
+
+Some pointers:
+
+1. Most of the time, at most a mild text edit will be needed in the erroneous line, and no change will be needed for subsequent lines. Note that, typically, values will not have to be changed (in particular, you need not verify any of the computations, that is all handled programmatically). The main thing to watch out for is when numbers appear in word-form in the text, and for operators that should have been changed but did not get changed.
+2. If you find that many changes are needed, or that it's getting to be a pain, simply skip and move onto the next problem until you find one that's sufficiently simple.
+3. If you find the induced change is absurd or unrealistic, then simply reject the sample.
+4. Note: there are TONS of samples, so for a first pass it should be totally fine to simply skip over samples that appear too complicated. In all likelihood, we might already get enough samples with minor/no modification needed at all!
