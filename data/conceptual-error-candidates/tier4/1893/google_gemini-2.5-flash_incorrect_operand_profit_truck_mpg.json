@@ -1,0 +1,89 @@
+{
+  "index": 1893,
+  "original_solution_mapping": {
+    "FA": "#### 180",
+    "L1": "First find the total payment James receives: $0.50/mile * 600 miles = $<<0.50*600=300>>300",
+    "L2": "Then find how many gallons of gas he needs to buy: 600 miles / 20 miles/gallon = <<600/20=30>>30 gallons",
+    "L3": "Then multiply that number by the price of gas per gallon to find the total cost of the gas: $4.00/gallon * 30 gallons = $<<4*30=120>>120",
+    "L4": "Then subtract that amount from James' earnings to find his profit: $300 - $120 = $<<300-120=180>>180"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1893.\n    Returns: the profit James makes from the trip.\n    \"\"\"\n    # L1\n    payment_per_mile = 0.50 # $0.50/mile\n    trip_distance = 600 # 600 mile trip\n    total_payment = payment_per_mile * trip_distance\n\n    # L2\n    truck_mpg = 20 # truck gets 20 miles per gallon\n    gallons_needed = trip_distance / truck_mpg\n\n    # L3\n    gas_price_per_gallon = 4.00 # $4.00/gallon for gas\n    total_gas_cost = gas_price_per_gallon * gallons_needed\n\n    # L4\n    profit = total_payment - total_gas_cost\n\n    # FA\n    answer = profit\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "profit",
+    "operand_to_replace": "total_gas_cost",
+    "replacement_variable": "truck_mpg"
+  },
+  "correct_trace": {
+    "payment_per_mile": 0.5,
+    "trip_distance": 600,
+    "total_payment": 300.0,
+    "truck_mpg": 20,
+    "gallons_needed": 30.0,
+    "gas_price_per_gallon": 4.0,
+    "total_gas_cost": 120.0,
+    "profit": 180.0,
+    "answer": 180.0
+  },
+  "flawed_trace": {
+    "payment_per_mile": 0.5,
+    "trip_distance": 600,
+    "total_payment": 300.0,
+    "truck_mpg": 20,
+    "gallons_needed": 30.0,
+    "gas_price_per_gallon": 4.0,
+    "total_gas_cost": 120.0,
+    "profit": 280.0,
+    "answer": 280.0
+  },
+  "correct_value": 180.0,
+  "flawed_value": 280.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_payment",
+      "question_inputs": [
+        "payment_per_mile",
+        "trip_distance"
+      ],
+      "solution_line_template": "First find the total payment James receives: ${payment_per_mile}/mile * {trip_distance} miles = $<<{payment_per_mile}*{trip_distance}={total_payment}>>{total_payment}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "gallons_needed",
+      "question_inputs": [
+        "truck_mpg"
+      ],
+      "solution_line_template": "Then find how many gallons of gas he needs to buy: {trip_distance} miles / {truck_mpg} miles/gallon = <<{trip_distance}/{truck_mpg}={gallons_needed}>>{gallons_needed} gallons"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_gas_cost",
+      "question_inputs": [
+        "gas_price_per_gallon"
+      ],
+      "solution_line_template": "Then multiply that number by the price of gas per gallon to find the total cost of the gas: ${gas_price_per_gallon}/gallon * {gallons_needed} gallons = $<<{gas_price_per_gallon}*{gallons_needed}={total_gas_cost}>>{total_gas_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "profit",
+      "question_inputs": [],
+      "solution_line_template": "Then subtract that amount from James' earnings to find his profit: ${total_payment} - ${total_gas_cost} = $<<{total_payment}-{total_gas_cost}={profit}>>{profit}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total payment James receives: $0.5/mile * 600 miles = $<<0.5*600=300>>300",
+    "L2": "Then find how many gallons of gas he needs to buy: 600 miles / 20 miles/gallon = <<600/20=30>>30 gallons",
+    "L3": "Then multiply that number by the price of gas per gallon to find the total cost of the gas: $4/gallon * 30 gallons = $<<4*30=120>>120",
+    "L4": "Then subtract that amount from James' earnings to find his profit: $300 - $20 = $<<300-20=280>>280",
+    "FA": "#### 280"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'truck_mpg' (value: 20) was used instead of 'total_gas_cost' (value: 120.0).",
+  "repro_seed": -4773043256785783366,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,85 @@
+{
+  "index": 813,
+  "original_solution_mapping": {
+    "FA": "#### 80",
+    "L1": "Each of Tom's visits was 200*.7=$<<200*.7=140>>140 cheaper",
+    "L2": "So he paid $200 - $140 = $<<200-140=60>>60 per visit",
+    "L3": "That means he paid $60 * 2 = $<<60*2=120>>120",
+    "L4": "So he saved $200 - $120 = $<<200-120=80>>80"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 813.\n    Returns: the amount of money Tom saved.\n    \"\"\"\n    # L1\n    normal_visit_cost = 200 # A normal doctor charges $200 for a visit\n    discount_percent = 0.7 # 70% cheaper\n    cheaper_amount_per_visit = normal_visit_cost * discount_percent\n\n    # L2\n    discount_visit_cost = normal_visit_cost - cheaper_amount_per_visit\n\n    # L3\n    num_discount_visits = 2 # It takes two visits\n    total_discount_cost = discount_visit_cost * num_discount_visits\n\n    # L4\n    money_saved = normal_visit_cost - total_discount_cost\n\n    # FA\n    answer = money_saved\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "money_saved",
+    "operand_to_replace": "total_discount_cost",
+    "replacement_variable": "discount_visit_cost"
+  },
+  "correct_trace": {
+    "normal_visit_cost": 200,
+    "discount_percent": 0.7,
+    "cheaper_amount_per_visit": 140.0,
+    "discount_visit_cost": 60.0,
+    "num_discount_visits": 2,
+    "total_discount_cost": 120.0,
+    "money_saved": 80.0,
+    "answer": 80.0
+  },
+  "flawed_trace": {
+    "normal_visit_cost": 200,
+    "discount_percent": 0.7,
+    "cheaper_amount_per_visit": 140.0,
+    "discount_visit_cost": 60.0,
+    "num_discount_visits": 2,
+    "total_discount_cost": 120.0,
+    "money_saved": 140.0,
+    "answer": 140.0
+  },
+  "correct_value": 80.0,
+  "flawed_value": 140.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cheaper_amount_per_visit",
+      "question_inputs": [
+        "normal_visit_cost",
+        "discount_percent"
+      ],
+      "solution_line_template": "Each of Tom's visits was {normal_visit_cost}*{discount_percent}=$<<{normal_visit_cost}*{discount_percent}={cheaper_amount_per_visit}>>{cheaper_amount_per_visit} cheaper"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "discount_visit_cost",
+      "question_inputs": [],
+      "solution_line_template": "So he paid ${normal_visit_cost} - ${cheaper_amount_per_visit} = $<<{normal_visit_cost}-{cheaper_amount_per_visit}={discount_visit_cost}>>{discount_visit_cost} per visit"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_discount_cost",
+      "question_inputs": [
+        "num_discount_visits"
+      ],
+      "solution_line_template": "That means he paid ${discount_visit_cost} * {num_discount_visits} = $<<{discount_visit_cost}*{num_discount_visits}={total_discount_cost}>>{total_discount_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "money_saved",
+      "question_inputs": [],
+      "solution_line_template": "So he saved ${normal_visit_cost} - ${total_discount_cost} = $<<{normal_visit_cost}-{total_discount_cost}={money_saved}>>{money_saved}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each of Tom's visits was 200*0.7=$<<200*0.7=140>>140 cheaper",
+    "L2": "So he paid $200 - $140 = $<<200-140=60>>60 per visit",
+    "L3": "That means he paid $60 * 2 = $<<60*2=120>>120",
+    "L4": "So he saved $200 - $60 = $<<200-60=140>>140",
+    "FA": "#### 140"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'discount_visit_cost' (value: 60.0) was used instead of 'total_discount_cost' (value: 120.0).",
+  "repro_seed": 3674734098157466309,
+  "model_name": "google_gemini-2.5-flash"
+}

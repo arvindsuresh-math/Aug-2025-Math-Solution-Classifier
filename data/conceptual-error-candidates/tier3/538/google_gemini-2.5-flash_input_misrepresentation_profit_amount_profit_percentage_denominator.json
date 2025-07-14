@@ -1,0 +1,62 @@
+{
+  "index": 538,
+  "original_solution_mapping": {
+    "FA": "#### 3450",
+    "L1": "The reseller wants to get $3000 x 15/100 = $<<3000*15/100=450>>450 profit.",
+    "L2": "Thus, she needs to sell it for $3000 + $450 = $<<3000+450=3450>>3450."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 538.\n    Returns: the selling price of the bag.\n    \"\"\"\n    # L1\n    bag_cost = 3000 # A luxury bag costs $3000\n    profit_percentage_numerator = 15 # 15% profit\n    profit_percentage_denominator = 100 # 15% profit\n    profit_amount = bag_cost * profit_percentage_numerator / profit_percentage_denominator\n\n    # L2\n    selling_price = bag_cost + profit_amount\n\n    # FA\n    answer = selling_price\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "profit_amount",
+    "operand_to_replace": "profit_percentage_numerator",
+    "replacement_variable": "profit_percentage_denominator"
+  },
+  "correct_trace": {
+    "bag_cost": 3000,
+    "profit_percentage_numerator": 15,
+    "profit_percentage_denominator": 100,
+    "profit_amount": 450.0,
+    "selling_price": 3450.0,
+    "answer": 3450.0
+  },
+  "flawed_trace": {
+    "bag_cost": 3000,
+    "profit_percentage_numerator": 15,
+    "profit_percentage_denominator": 100,
+    "profit_amount": 3000.0,
+    "selling_price": 6000.0,
+    "answer": 6000.0
+  },
+  "correct_value": 450.0,
+  "flawed_value": 3000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "profit_amount",
+      "question_inputs": [
+        "bag_cost",
+        "profit_percentage_numerator",
+        "profit_percentage_denominator"
+      ],
+      "solution_line_template": "The reseller wants to get ${bag_cost} x {profit_percentage_numerator}/{profit_percentage_denominator} = $<<{bag_cost}*{profit_percentage_numerator}/{profit_percentage_denominator}={profit_amount}>>{profit_amount} profit."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "selling_price",
+      "question_inputs": [],
+      "solution_line_template": "Thus, she needs to sell it for ${bag_cost} + ${profit_amount} = $<<{bag_cost}+{profit_amount}={selling_price}>>{selling_price}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The reseller wants to get $3000 x 100/100 = $<<3000*100/100=3000>>3000 profit.",
+    "L2": "Thus, she needs to sell it for $3000 + $3000 = $<<3000+3000=6000>>6000.",
+    "FA": "#### 6000"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'profit_percentage_denominator' (100) was used instead of 'profit_percentage_numerator' (15).",
+  "repro_seed": -8315077678201339576,
+  "model_name": "google_gemini-2.5-flash"
+}

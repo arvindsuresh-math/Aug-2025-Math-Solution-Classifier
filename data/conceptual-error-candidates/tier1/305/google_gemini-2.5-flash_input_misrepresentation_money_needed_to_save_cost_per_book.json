@@ -1,0 +1,63 @@
+{
+  "index": 305,
+  "original_solution_mapping": {
+    "FA": "#### 27",
+    "L1": "The books will cost $40 because 8 x 5 = <<8*5=40>>40",
+    "L2": "He needs to save up $27 because 40 - 13 = <<40-13=27>>27"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 305.\n    Returns: the amount of money Tommy needs to save up.\n    \"\"\"\n    # L1\n    num_books = 8 # 8 new books\n    cost_per_book = 5 # Each book costs $5\n    total_cost_books = num_books * cost_per_book\n\n    # L2\n    money_already_has = 13 # already has $13\n    money_needed_to_save = total_cost_books - money_already_has\n\n    # FA\n    answer = money_needed_to_save\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "money_needed_to_save",
+    "operand_to_replace": "money_already_has",
+    "replacement_variable": "cost_per_book"
+  },
+  "correct_trace": {
+    "num_books": 8,
+    "cost_per_book": 5,
+    "total_cost_books": 40,
+    "money_already_has": 13,
+    "money_needed_to_save": 27,
+    "answer": 27
+  },
+  "flawed_trace": {
+    "num_books": 8,
+    "cost_per_book": 5,
+    "total_cost_books": 40,
+    "money_already_has": 13,
+    "money_needed_to_save": 35,
+    "answer": 35
+  },
+  "correct_value": 27,
+  "flawed_value": 35,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "num_books",
+        "cost_per_book"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_cost_books",
+      "solution_line_template": "The books will cost ${total_cost_books} because {num_books} x {cost_per_book} = <<{num_books}*{cost_per_book}={total_cost_books}>>{total_cost_books}"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "money_already_has"
+      ],
+      "WK_inputs": [],
+      "output_variable": "money_needed_to_save",
+      "solution_line_template": "He needs to save up ${money_needed_to_save} because {total_cost_books} - {money_already_has} = <<{total_cost_books}-{money_already_has}={money_needed_to_save}>>{money_needed_to_save}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The books will cost $40 because 8 x 5 = <<8*5=40>>40",
+    "L2": "He needs to save up $35 because 40 - 5 = <<40-5=35>>35",
+    "FA": "#### 35"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'cost_per_book' (5) was used instead of 'money_already_has' (13).",
+  "repro_seed": -571514992232823344,
+  "model_name": "google_gemini-2.5-flash"
+}

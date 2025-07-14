@@ -1,0 +1,89 @@
+{
+  "index": 93,
+  "original_solution_mapping": {
+    "FA": "#### 14000",
+    "L1": "The beef cost $8 * 1000 = $<<8*1000=8000>>8000",
+    "L2": "He buys 1000 * 2 = <<1000*2=2000>>2000 pounds of chicken",
+    "L3": "So the chicken cost 2000 * $3 = $<<2000*3=6000>>6000",
+    "L4": "So the total cost is $8000 + $6000 = $<<8000+6000=14000>>14,000"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 93.\n    Returns: the total cost of the food order.\n    \"\"\"\n    # L1\n    beef_price_per_pound = 8 # $8 per pound\n    beef_pounds = 1000 # 1000 pounds of beef\n    beef_cost = beef_price_per_pound * beef_pounds\n\n    # L2\n    chicken_multiplier = 2 # twice that much chicken\n    chicken_pounds = beef_pounds * chicken_multiplier\n\n    # L3\n    chicken_price_per_pound = 3 # $3 per pound\n    chicken_cost = chicken_pounds * chicken_price_per_pound\n\n    # L4\n    total_cost = beef_cost + chicken_cost\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "beef_cost",
+    "operand_to_replace": "beef_price_per_pound",
+    "replacement_variable": "beef_pounds"
+  },
+  "correct_trace": {
+    "beef_price_per_pound": 8,
+    "beef_pounds": 1000,
+    "beef_cost": 8000,
+    "chicken_multiplier": 2,
+    "chicken_pounds": 2000,
+    "chicken_price_per_pound": 3,
+    "chicken_cost": 6000,
+    "total_cost": 14000,
+    "answer": 14000
+  },
+  "flawed_trace": {
+    "beef_price_per_pound": 8,
+    "beef_pounds": 1000,
+    "beef_cost": 1000000,
+    "chicken_multiplier": 2,
+    "chicken_pounds": 2000,
+    "chicken_price_per_pound": 3,
+    "chicken_cost": 6000,
+    "total_cost": 1006000,
+    "answer": 1006000
+  },
+  "correct_value": 8000,
+  "flawed_value": 1000000,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "beef_price_per_pound",
+        "beef_pounds"
+      ],
+      "WK_inputs": [],
+      "output_variable": "beef_cost",
+      "solution_line_template": "The beef cost ${beef_price_per_pound} * {beef_pounds} = $<<{beef_price_per_pound}*{beef_pounds}={beef_cost}>>{beef_cost}"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "chicken_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "chicken_pounds",
+      "solution_line_template": "He buys {beef_pounds} * {chicken_multiplier} = <<{beef_pounds}*{chicken_multiplier}={chicken_pounds}>>{chicken_pounds} pounds of chicken"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "chicken_price_per_pound"
+      ],
+      "WK_inputs": [],
+      "output_variable": "chicken_cost",
+      "solution_line_template": "So the chicken cost {chicken_pounds} * ${chicken_price_per_pound} = $<<{chicken_pounds}*{chicken_price_per_pound}={chicken_cost}>>{chicken_cost}"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_cost",
+      "solution_line_template": "So the total cost is ${beef_cost} + ${chicken_cost} = $<<{beef_cost}+{chicken_cost}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The beef cost $1000 * 1000 = $<<1000*1000=1000000>>1000000",
+    "L2": "He buys 1000 * 2 = <<1000*2=2000>>2000 pounds of chicken",
+    "L3": "So the chicken cost 2000 * $3 = $<<2000*3=6000>>6000",
+    "L4": "So the total cost is $1000000 + $6000 = $<<1000000+6000=1006000>>1006000",
+    "FA": "#### 1006000"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'beef_pounds' (1000) was used instead of 'beef_price_per_pound' (8).",
+  "repro_seed": -2129509089656789927,
+  "model_name": "google_gemini-2.5-flash"
+}

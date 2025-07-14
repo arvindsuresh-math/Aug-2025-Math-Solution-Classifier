@@ -1,0 +1,81 @@
+{
+  "index": 2918,
+  "original_solution_mapping": {
+    "FA": "#### 450",
+    "L1": "Phoebe is having 20 guests and Monica charges $25.00 per person so that's 20*25 = $<<20*25=500.00>>500.00",
+    "L2": "Phoebe is a repeat customer so she gets 10% off of $500.00 so that's .10*500 = $<<10*.01*500=50.00>>50.00 discount",
+    "L3": "Monica is charging $500.00 minus the repeat customer discount of $50.00 so she will make 500-50 = $<<500-50=450.00>>450.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2918.\n    Returns: the amount Monica will make from the party.\n    \"\"\"\n    # L1\n    num_guests = 20 # 20 guests\n    cost_per_person = 25.00 # $25.00 per person\n    base_cost = num_guests * cost_per_person\n\n    # L2\n    discount_percent_num = 10 # 10% discount\n    discount_percent_decimal = 0.10 # from solution text: .10*500\n    percent_factor = 0.01 # WK\n    discount_amount = discount_percent_num * percent_factor * base_cost\n\n    # L3\n    final_cost = base_cost - discount_amount\n\n    # FA\n    answer = final_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "discount_amount",
+    "operand_to_replace": "discount_percent_num",
+    "replacement_variable": "cost_per_person"
+  },
+  "correct_trace": {
+    "num_guests": 20,
+    "cost_per_person": 25.0,
+    "base_cost": 500.0,
+    "discount_percent_num": 10,
+    "discount_percent_decimal": 0.1,
+    "percent_factor": 0.01,
+    "discount_amount": 50.0,
+    "final_cost": 450.0,
+    "answer": 450.0
+  },
+  "flawed_trace": {
+    "num_guests": 20,
+    "cost_per_person": 25.0,
+    "base_cost": 500.0,
+    "discount_percent_num": 10,
+    "discount_percent_decimal": 0.1,
+    "percent_factor": 0.01,
+    "discount_amount": 125.0,
+    "final_cost": 375.0,
+    "answer": 375.0
+  },
+  "correct_value": 50.0,
+  "flawed_value": 125.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "base_cost",
+      "question_inputs": [
+        "num_guests",
+        "cost_per_person"
+      ],
+      "solution_line_template": "Phoebe is having {num_guests} guests and Monica charges ${cost_per_person} per person so that\u2019s {num_guests}*{cost_per_person} = $<<{num_guests}*{cost_per_person}={base_cost}>>{base_cost}"
+    },
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L2",
+      "output_variable": "discount_amount",
+      "question_inputs": [
+        "discount_percent_num",
+        "discount_percent_decimal"
+      ],
+      "solution_line_template": "Phoebe is a repeat customer so she gets {discount_percent_num}% off of ${base_cost} so that\u2019s {discount_percent_decimal}*{base_cost} = $<<{discount_percent_num}*{percent_factor}*{base_cost}={discount_amount}>>{discount_amount} discount"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_cost",
+      "question_inputs": [],
+      "solution_line_template": "Monica is charging ${base_cost} minus the repeat customer discount of ${discount_amount} so she will make {base_cost}-{discount_amount} = $<<{base_cost}-{discount_amount}={final_cost}>>{final_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Phoebe is having 20 guests and Monica charges $25 per person so that\u2019s 20*25 = $<<20*25=500>>500",
+    "L2": "Phoebe is a repeat customer so she gets 25% off of $500 so that\u2019s 0.1*500 = $<<25*0.01*500=125>>125 discount",
+    "L3": "Monica is charging $500 minus the repeat customer discount of $125 so she will make 500-125 = $<<500-125=375>>375",
+    "FA": "#### 375"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'cost_per_person' (25.0) was used instead of 'discount_percent_num' (10).",
+  "repro_seed": 2241482409078479315,
+  "model_name": "google_gemini-2.5-flash"
+}

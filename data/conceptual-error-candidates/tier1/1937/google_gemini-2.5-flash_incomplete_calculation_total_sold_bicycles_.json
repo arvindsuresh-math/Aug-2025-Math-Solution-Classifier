@@ -1,0 +1,87 @@
+{
+  "index": 1937,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "He sold 10+12+9=<<10+12+9=31>>31 bicycles.",
+    "L2": "He bought 15+8+11=<<15+8+11=34>>34 bicycles.",
+    "L3": "He now has 34-31=<<34-31=3>>3 more than at Friday's opening."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1937.\n    Returns: the net increase in the number of bicycles in stock.\n    \"\"\"\n    # L1\n    sold_friday = 10 # sold 10 bicycles\n    sold_saturday = 12 # sold 12 bicycles\n    sold_sunday = 9 # sold 9 bicycles\n    total_sold_bicycles = sold_friday + sold_saturday + sold_sunday\n\n    # L2\n    bought_friday = 15 # bought an additional 15\n    bought_saturday = 8 # bought 8 more\n    bought_sunday = 11 # bought 11 more\n    total_bought_bicycles = bought_friday + bought_saturday + bought_sunday\n\n    # L3\n    net_increase = total_bought_bicycles - total_sold_bicycles\n\n    # FA\n    answer = net_increase\n    return answer\n",
+  "mutation_details": {
+    "type": "incomplete_calculation",
+    "target_variable": "total_sold_bicycles",
+    "operand_to_remove": "sold_saturday",
+    "original_operands": [
+      "sold_friday",
+      "sold_saturday",
+      "sold_sunday"
+    ]
+  },
+  "correct_trace": {
+    "sold_friday": 10,
+    "sold_saturday": 12,
+    "sold_sunday": 9,
+    "total_sold_bicycles": 31,
+    "bought_friday": 15,
+    "bought_saturday": 8,
+    "bought_sunday": 11,
+    "total_bought_bicycles": 34,
+    "net_increase": 3,
+    "answer": 3
+  },
+  "flawed_trace": {
+    "sold_friday": 10,
+    "sold_saturday": 12,
+    "sold_sunday": 9,
+    "total_sold_bicycles": 19,
+    "bought_friday": 15,
+    "bought_saturday": 8,
+    "bought_sunday": 11,
+    "total_bought_bicycles": 34,
+    "net_increase": 15,
+    "answer": 15
+  },
+  "correct_value": 31,
+  "flawed_value": 19,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "sold_friday",
+        "sold_saturday",
+        "sold_sunday"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_sold_bicycles",
+      "solution_line_template": "He sold {sold_friday}+{sold_saturday}+{sold_sunday}=<<{sold_friday}+{sold_saturday}+{sold_sunday}={total_sold_bicycles}>>{total_sold_bicycles} bicycles."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "bought_friday",
+        "bought_saturday",
+        "bought_sunday"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_bought_bicycles",
+      "solution_line_template": "He bought {bought_friday}+{bought_saturday}+{bought_sunday}=<<{bought_friday}+{bought_saturday}+{bought_sunday}={total_bought_bicycles}>>{total_bought_bicycles} bicycles."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "net_increase",
+      "solution_line_template": "He now has {total_bought_bicycles}-{total_sold_bicycles}=<<{total_bought_bicycles}-{total_sold_bicycles}={net_increase}>>{net_increase} more than at Friday's opening."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He sold 10+9=<<10+9=19>>19 bicycles.",
+    "L2": "He bought 15+8+11=<<15+8+11=34>>34 bicycles.",
+    "L3": "He now has 34-19=<<34-19=15>>15 more than at Friday's opening.",
+    "FA": "#### 15"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incomplete calculation. The term 'sold_saturday' (value: 12) was omitted from the operation.",
+  "repro_seed": -1060142133404773734,
+  "model_name": "google_gemini-2.5-flash"
+}

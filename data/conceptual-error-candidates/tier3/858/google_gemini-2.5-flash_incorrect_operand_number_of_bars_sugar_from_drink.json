@@ -1,0 +1,96 @@
+{
+  "index": 858,
+  "original_solution_mapping": {
+    "FA": "#### 7",
+    "L1": "He consumed 2500 calories, 5% of which is added sugar to give 2500*(5/100) = <<2500*(5/100)=125>>125 calories of added sugar.",
+    "L2": "He exceeded the recommended intake of 150 calories by 100% for a total consumption of 150+(150(100/100)) = $<<150+(150*100/100)=300>>300",
+    "L3": "This means he took in 300-125 = <<300-125=175>>175 calories from candy alone",
+    "L4": "Each candy had 25 calories so 175 calories which means he consumed 175/25 = <<175/25=7>>7 bars?"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 858.\n    Returns: the number of candy bars Mark took.\n    \"\"\"\n    # L1\n    total_drink_calories = 2500 # contained 2500 calories\n    sugar_percentage_drink_numerator = 5 # 5% of which was from added sugar\n    percentage_denominator = 100 # WK\n    sugar_from_drink = total_drink_calories * (sugar_percentage_drink_numerator / percentage_denominator)\n\n    # L2\n    recommended_intake = 150 # 150 calories of added sugar per day\n    exceed_percentage_numerator = 100 # exceeded the recommended intake of added sugar by 100%\n    total_sugar_consumed = recommended_intake + (recommended_intake * (exceed_percentage_numerator / percentage_denominator))\n\n    # L3\n    sugar_from_candy = total_sugar_consumed - sugar_from_drink\n\n    # L4\n    calories_per_bar = 25 # had 25 calories of added sugar each\n    number_of_bars = sugar_from_candy / calories_per_bar\n\n    # FA\n    answer = number_of_bars\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "number_of_bars",
+    "operand_to_replace": "sugar_from_candy",
+    "replacement_variable": "sugar_from_drink"
+  },
+  "correct_trace": {
+    "total_drink_calories": 2500,
+    "sugar_percentage_drink_numerator": 5,
+    "percentage_denominator": 100,
+    "sugar_from_drink": 125.0,
+    "recommended_intake": 150,
+    "exceed_percentage_numerator": 100,
+    "total_sugar_consumed": 300.0,
+    "sugar_from_candy": 175.0,
+    "calories_per_bar": 25,
+    "number_of_bars": 7.0,
+    "answer": 7.0
+  },
+  "flawed_trace": {
+    "total_drink_calories": 2500,
+    "sugar_percentage_drink_numerator": 5,
+    "percentage_denominator": 100,
+    "sugar_from_drink": 125.0,
+    "recommended_intake": 150,
+    "exceed_percentage_numerator": 100,
+    "total_sugar_consumed": 300.0,
+    "sugar_from_candy": 175.0,
+    "calories_per_bar": 25,
+    "number_of_bars": 5.0,
+    "answer": 5.0
+  },
+  "correct_value": 7.0,
+  "flawed_value": 5.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percentage_denominator"
+      ],
+      "line_number": "L1",
+      "output_variable": "sugar_from_drink",
+      "question_inputs": [
+        "total_drink_calories",
+        "sugar_percentage_drink_numerator"
+      ],
+      "solution_line_template": "He consumed {total_drink_calories} calories, {sugar_percentage_drink_numerator}% of which is added sugar to give {total_drink_calories}*({sugar_percentage_drink_numerator}/{percentage_denominator}) = <<{total_drink_calories}*({sugar_percentage_drink_numerator}/{percentage_denominator})={sugar_from_drink}>>{sugar_from_drink} calories of added sugar."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_sugar_consumed",
+      "question_inputs": [
+        "recommended_intake",
+        "exceed_percentage_numerator"
+      ],
+      "solution_line_template": "He exceeded the recommended intake of {recommended_intake} calories by {exceed_percentage_numerator}% for a total consumption of {recommended_intake}+({recommended_intake}({exceed_percentage_numerator}/{percentage_denominator})) = $<<{recommended_intake}+({recommended_intake}*{exceed_percentage_numerator}/{percentage_denominator})={total_sugar_consumed}>>{total_sugar_consumed}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "sugar_from_candy",
+      "question_inputs": [],
+      "solution_line_template": "This means he took in {total_sugar_consumed}-{sugar_from_drink} = <<{total_sugar_consumed}-{sugar_from_drink}={sugar_from_candy}>>{sugar_from_candy} calories from candy alone"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "number_of_bars",
+      "question_inputs": [
+        "calories_per_bar"
+      ],
+      "solution_line_template": "Each candy had {calories_per_bar} calories so {sugar_from_candy} calories which means he consumed {sugar_from_candy}/{calories_per_bar} = <<{sugar_from_candy}/{calories_per_bar}={number_of_bars}>>{number_of_bars} bars?"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He consumed 2500 calories, 5% of which is added sugar to give 2500*(5/100) = <<2500*(5/100)=125>>125 calories of added sugar.",
+    "L2": "He exceeded the recommended intake of 150 calories by 100% for a total consumption of 150+(150(100/100)) = $<<150+(150*100/100)=300>>300",
+    "L3": "This means he took in 300-125 = <<300-125=175>>175 calories from candy alone",
+    "L4": "Each candy had 25 calories so 125 calories which means he consumed 125/25 = <<125/25=5>>5 bars?",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'sugar_from_drink' (value: 125.0) was used instead of 'sugar_from_candy' (value: 175.0).",
+  "repro_seed": 8256171746492866729,
+  "model_name": "google_gemini-2.5-flash"
+}

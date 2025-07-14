@@ -1,0 +1,74 @@
+{
+  "index": 2285,
+  "original_solution_mapping": {
+    "FA": "#### 190",
+    "L1": "Kendy transferred $60 x 1/2 = $<<60*1/2=30>>30 to her sister.",
+    "L2": "So, She transferred a total of $60 + $30 = $<<60+30=90>>90.",
+    "L3": "Therefore, Kendy has $100 + $90 = $<<100+90=190>>190 in the account before the transfer."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2285.\n    Returns: the amount of money in the account before the transfer.\n    \"\"\"\n    # L1\n    transfer_to_mom = 60 # transferred $60 to her mom\n    sister_fraction = Fraction(1, 2) # half that amount to her sister\n    transfer_to_sister = transfer_to_mom * sister_fraction\n\n    # L2\n    total_transferred = transfer_to_mom + transfer_to_sister\n\n    # L3\n    remaining_money = 100 # her account now has $100 left in it\n    initial_money = remaining_money + total_transferred\n\n    # FA\n    answer = initial_money\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "transfer_to_sister",
+    "operand_to_replace": "sister_fraction",
+    "replacement_variable": "transfer_to_mom"
+  },
+  "correct_trace": {
+    "transfer_to_mom": 60,
+    "sister_fraction": "1/2",
+    "transfer_to_sister": "30",
+    "total_transferred": "90",
+    "remaining_money": 100,
+    "initial_money": "190",
+    "answer": "190"
+  },
+  "flawed_trace": {
+    "transfer_to_mom": 60,
+    "sister_fraction": "1/2",
+    "transfer_to_sister": 3600,
+    "total_transferred": 3660,
+    "remaining_money": 100,
+    "initial_money": 3760,
+    "answer": 3760
+  },
+  "correct_value": "30",
+  "flawed_value": 3600,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "transfer_to_sister",
+      "question_inputs": [
+        "transfer_to_mom",
+        "sister_fraction"
+      ],
+      "solution_line_template": "Kendy transferred ${transfer_to_mom} x {sister_fraction} = $<<{transfer_to_mom}*{sister_fraction}={transfer_to_sister}>>{transfer_to_sister} to her sister."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_transferred",
+      "question_inputs": [],
+      "solution_line_template": "So, She transferred a total of ${transfer_to_mom} + ${transfer_to_sister} = $<<{transfer_to_mom}+{transfer_to_sister}={total_transferred}>>{total_transferred}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "initial_money",
+      "question_inputs": [
+        "remaining_money"
+      ],
+      "solution_line_template": "Therefore, Kendy has ${remaining_money} + ${total_transferred} = $<<{remaining_money}+{total_transferred}={initial_money}>>{initial_money} in the account before the transfer."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Kendy transferred $60 x 60 = $<<60*60=3600>>3600 to her sister.",
+    "L2": "So, She transferred a total of $60 + $3600 = $<<60+3600=3660>>3660.",
+    "L3": "Therefore, Kendy has $100 + $3660 = $<<100+3660=3760>>3760 in the account before the transfer.",
+    "FA": "#### 3760"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'transfer_to_mom' (60) was used instead of 'sister_fraction' (1/2).",
+  "repro_seed": -7767080657983152290,
+  "model_name": "google_gemini-2.5-flash"
+}

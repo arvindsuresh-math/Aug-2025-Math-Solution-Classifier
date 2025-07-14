@@ -1,0 +1,67 @@
+{
+  "index": 765,
+  "original_solution_mapping": {
+    "FA": "#### 135",
+    "L1": "First find how many of the peaches are fresh, which is 250 peaches * 60% = <<250*60*.01=150>>150 peaches.",
+    "L2": "Then, subtract the number Brenda throws away after the fresh count, which is 150 peaches - 15 peaches = <<150-15=135>>135 peaches."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 765.\n    Returns: the number of peaches Brenda has left.\n    \"\"\"\n    # L1\n    total_peaches = 250 # Brenda picks 250 peaches\n    fresh_percentage_num = 60 # only 60% are fresh\n    percent_factor = 0.01 # WK\n    fresh_peaches = total_peaches * fresh_percentage_num * percent_factor\n\n    # L2\n    thrown_away_peaches = 15 # throw 15 away\n    peaches_left = fresh_peaches - thrown_away_peaches\n\n    # FA\n    answer = peaches_left\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "fresh_peaches",
+    "operand_to_replace": "percent_factor",
+    "replacement_variable": "fresh_percentage_num"
+  },
+  "correct_trace": {
+    "total_peaches": 250,
+    "fresh_percentage_num": 60,
+    "percent_factor": 0.01,
+    "fresh_peaches": 150.0,
+    "thrown_away_peaches": 15,
+    "peaches_left": 135.0,
+    "answer": 135.0
+  },
+  "flawed_trace": {
+    "total_peaches": 250,
+    "fresh_percentage_num": 60,
+    "percent_factor": 0.01,
+    "fresh_peaches": 900000,
+    "thrown_away_peaches": 15,
+    "peaches_left": 899985,
+    "answer": 899985
+  },
+  "correct_value": 150.0,
+  "flawed_value": 900000,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "fresh_peaches",
+      "question_inputs": [
+        "total_peaches",
+        "fresh_percentage_num"
+      ],
+      "solution_line_template": "First find how many of the peaches are fresh, which is {total_peaches} peaches * {fresh_percentage_num}% = <<{total_peaches}*{fresh_percentage_num}*{percent_factor}={fresh_peaches}>>{fresh_peaches} peaches."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "peaches_left",
+      "question_inputs": [
+        "thrown_away_peaches"
+      ],
+      "solution_line_template": "Then, subtract the number Brenda throws away after the fresh count, which is {fresh_peaches} peaches - {thrown_away_peaches} peaches = <<{fresh_peaches}-{thrown_away_peaches}={peaches_left}>>{peaches_left} peaches."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how many of the peaches are fresh, which is 250 peaches * 60% = <<250*60*60=900000>>900000 peaches.",
+    "L2": "Then, subtract the number Brenda throws away after the fresh count, which is 900000 peaches - 15 peaches = <<900000-15=899985>>899985 peaches.",
+    "FA": "#### 899985"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'fresh_percentage_num' (60) was used instead of 'percent_factor' (0.01).",
+  "repro_seed": -8218730341338273301,
+  "model_name": "google_gemini-2.5-flash"
+}

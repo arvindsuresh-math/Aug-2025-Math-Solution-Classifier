@@ -1,0 +1,102 @@
+{
+  "index": 1903,
+  "original_solution_mapping": {
+    "FA": "#### 450",
+    "L1": "Since June has 30 days, halfway is 1/2*30 = <<1/2*30=15>>15",
+    "L2": "The total number of video hours halfway through June is 10*15 = <<10*15=150>>150",
+    "L3": "When she doubled the number of video hours, the total per day became 10*2 = <<10*2=20>>20",
+    "L4": "The total number of video hours for the remaining days is 15*20 = <<15*20=300>>300",
+    "L5": "The total number of video hours for the whole month is 300+150 = <<300+150=450>>450"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1903.\n    Returns: the total number of video hours uploaded at the end of the month.\n    \"\"\"\n    # L1\n    days_in_june = 30 # June has 30 days\n    halfway_fraction = Fraction(1, 2) # halfway\n    days_halfway_through_june = halfway_fraction * days_in_june\n\n    # L2\n    videos_per_day_initial = 10 # uploads 10 one-hour videos\n    total_video_hours_halfway = videos_per_day_initial * days_halfway_through_june\n\n    # L3\n    doubling_factor = 2 # doubled the number of video hours\n    videos_per_day_doubled = videos_per_day_initial * doubling_factor\n\n    # L4\n    remaining_days = days_in_june - days_halfway_through_june\n    total_video_hours_remaining = remaining_days * videos_per_day_doubled\n\n    # L5\n    total_video_hours_month = total_video_hours_remaining + total_video_hours_halfway\n\n    # FA\n    answer = total_video_hours_month\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_video_hours_halfway",
+    "operand_to_replace": "videos_per_day_initial",
+    "replacement_variable": "halfway_fraction"
+  },
+  "correct_trace": {
+    "days_in_june": 30,
+    "halfway_fraction": "1/2",
+    "days_halfway_through_june": "15",
+    "videos_per_day_initial": 10,
+    "total_video_hours_halfway": "150",
+    "doubling_factor": 2,
+    "videos_per_day_doubled": 20,
+    "remaining_days": "15",
+    "total_video_hours_remaining": "300",
+    "total_video_hours_month": "450",
+    "answer": "450"
+  },
+  "flawed_trace": {
+    "days_in_june": 30,
+    "halfway_fraction": "1/2",
+    "days_halfway_through_june": "15",
+    "videos_per_day_initial": 10,
+    "total_video_hours_halfway": "15/2",
+    "doubling_factor": 2,
+    "videos_per_day_doubled": 20,
+    "remaining_days": "15",
+    "total_video_hours_remaining": "300",
+    "total_video_hours_month": "615/2",
+    "answer": "615/2"
+  },
+  "correct_value": "150",
+  "flawed_value": "15/2",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "days_halfway_through_june",
+      "question_inputs": [
+        "days_in_june",
+        "halfway_fraction"
+      ],
+      "solution_line_template": "Since June has {days_in_june} days, halfway is {halfway_fraction}*{days_in_june} = <<{halfway_fraction}*{days_in_june}={days_halfway_through_june}>>{days_halfway_through_june}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_video_hours_halfway",
+      "question_inputs": [
+        "videos_per_day_initial"
+      ],
+      "solution_line_template": "The total number of video hours halfway through June is {videos_per_day_initial}*{days_halfway_through_june} = <<{videos_per_day_initial}*{days_halfway_through_june}={total_video_hours_halfway}>>{total_video_hours_halfway}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "videos_per_day_doubled",
+      "question_inputs": [
+        "doubling_factor"
+      ],
+      "solution_line_template": "When she doubled the number of video hours, the total per day became {videos_per_day_initial}*{doubling_factor} = <<{videos_per_day_initial}*{doubling_factor}={videos_per_day_doubled}>>{videos_per_day_doubled}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_video_hours_remaining",
+      "question_inputs": [],
+      "solution_line_template": "The total number of video hours for the remaining days is {remaining_days}*{videos_per_day_doubled} = <<{remaining_days}*{videos_per_day_doubled}={total_video_hours_remaining}>>{total_video_hours_remaining}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_video_hours_month",
+      "question_inputs": [],
+      "solution_line_template": "The total number of video hours for the whole month is {total_video_hours_remaining}+{total_video_hours_halfway} = <<{total_video_hours_remaining}+{total_video_hours_halfway}={total_video_hours_month}>>{total_video_hours_month}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since June has 30 days, halfway is 1/2*30 = <<1/2*30=15>>15",
+    "L2": "The total number of video hours halfway through June is 1/2*15 = <<1/2*15=15/2>>15/2",
+    "L3": "When she doubled the number of video hours, the total per day became 10*2 = <<10*2=20>>20",
+    "L4": "The total number of video hours for the remaining days is 15*20 = <<15*20=300>>300",
+    "L5": "The total number of video hours for the whole month is 300+15/2 = <<300+15/2=615/2>>615/2",
+    "FA": "#### 615/2"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'halfway_fraction' (1/2) was used instead of 'videos_per_day_initial' (10).",
+  "repro_seed": 3696467765726195326,
+  "model_name": "google_gemini-2.5-flash"
+}

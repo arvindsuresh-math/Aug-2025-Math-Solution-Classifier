@@ -1,0 +1,78 @@
+{
+  "index": 2017,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "Jed paid $15 x 6 = $<<15*6=90>>90 for the 6 board games.",
+    "L2": "He has $100 - $90 = $<<100-90=10>>10 change.",
+    "L3": "Therefore, Jed received$ 10/$5 = <<10/5=2>>2 $5 bills."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2017.\n    Returns: the number of $5 bills Jed received as change.\n    \"\"\"\n    # L1\n    cost_per_game = 15 # Each board game costs $15\n    num_games = 6 # buy 6 different board games\n    total_cost = cost_per_game * num_games\n\n    # L2\n    bill_paid = 100 # paid using a $100 bill\n    change_amount = bill_paid - total_cost\n\n    # L3\n    bill_denomination = 5 # only $5 bills for his change\n    num_bills_received = change_amount / bill_denomination\n\n    # FA\n    answer = num_bills_received\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "change_amount",
+    "operand_to_replace": "total_cost",
+    "replacement_variable": "cost_per_game"
+  },
+  "correct_trace": {
+    "cost_per_game": 15,
+    "num_games": 6,
+    "total_cost": 90,
+    "bill_paid": 100,
+    "change_amount": 10,
+    "bill_denomination": 5,
+    "num_bills_received": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "cost_per_game": 15,
+    "num_games": 6,
+    "total_cost": 90,
+    "bill_paid": 100,
+    "change_amount": 85,
+    "bill_denomination": 5,
+    "num_bills_received": 17.0,
+    "answer": 17.0
+  },
+  "correct_value": 10,
+  "flawed_value": 85,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "cost_per_game",
+        "num_games"
+      ],
+      "solution_line_template": "Jed paid ${cost_per_game} x {num_games} = $<<{cost_per_game}*{num_games}={total_cost}>>{total_cost} for the {num_games} board games."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "change_amount",
+      "question_inputs": [
+        "bill_paid"
+      ],
+      "solution_line_template": "He has ${bill_paid} - ${total_cost} = $<<{bill_paid}-{total_cost}={change_amount}>>{change_amount} change."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_bills_received",
+      "question_inputs": [
+        "bill_denomination"
+      ],
+      "solution_line_template": "Therefore, Jed received$ {change_amount}/${bill_denomination} = <<{change_amount}/{bill_denomination}={num_bills_received}>>{num_bills_received} $5 bills."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jed paid $15 x 6 = $<<15*6=90>>90 for the 6 board games.",
+    "L2": "He has $100 - $15 = $<<100-15=85>>85 change.",
+    "L3": "Therefore, Jed received$ 85/$5 = <<85/5=17>>17 $5 bills.",
+    "FA": "#### 17"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'cost_per_game' (value: 15) was used instead of 'total_cost' (value: 90).",
+  "repro_seed": 996625572956002077,
+  "model_name": "google_gemini-2.5-flash"
+}

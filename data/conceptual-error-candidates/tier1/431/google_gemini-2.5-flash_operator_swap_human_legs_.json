@@ -1,0 +1,102 @@
+{
+  "index": 431,
+  "original_solution_mapping": {
+    "FA": "#### 22",
+    "L1": "For the humans in the house, there are 5 * 2 = <<5*2=10>>10 legs",
+    "L2": "Javier has a total of 2 + 1 = <<2+1=3>>3 four-legged pets",
+    "L3": "For the pets in the house, there are 3 * 4 = <<3*4=12>>12 legs",
+    "L4": "There are a total of 10 + 12 = <<10+12=22>>22 legs"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 431.\n    Returns: the total number of legs in Javier's household.\n    \"\"\"\n    # L1\n    javier = 1 # Including Javier\n    wife = 1 # a wife\n    children = 3 # 3 children\n    num_humans = javier + wife + children # Javier has a wife and 3 children. Including Javier\n    legs_per_human = 2 # WK\n    human_legs = num_humans * legs_per_human\n\n    # L2\n    num_dogs = 2 # 2 dogs\n    num_cats = 1 # 1 cat\n    num_four_legged_pets = num_dogs + num_cats\n\n    # L3\n    legs_per_four_legged_pet = 4 # WK\n    pet_legs = num_four_legged_pets * legs_per_four_legged_pet\n\n    # L4\n    total_legs = human_legs + pet_legs\n\n    # FA\n    answer = total_legs\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "human_legs",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x144cfa2d0>"
+  },
+  "correct_trace": {
+    "javier": 1,
+    "wife": 1,
+    "children": 3,
+    "num_humans": 5,
+    "legs_per_human": 2,
+    "human_legs": 10,
+    "num_dogs": 2,
+    "num_cats": 1,
+    "num_four_legged_pets": 3,
+    "legs_per_four_legged_pet": 4,
+    "pet_legs": 12,
+    "total_legs": 22,
+    "answer": 22
+  },
+  "flawed_trace": {
+    "javier": 1,
+    "wife": 1,
+    "children": 3,
+    "num_humans": 5,
+    "legs_per_human": 2,
+    "human_legs": 7,
+    "num_dogs": 2,
+    "num_cats": 1,
+    "num_four_legged_pets": 3,
+    "legs_per_four_legged_pet": 4,
+    "pet_legs": 12,
+    "total_legs": 19,
+    "answer": 19
+  },
+  "correct_value": 10,
+  "flawed_value": 7,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "javier",
+        "wife",
+        "children",
+        "num_humans"
+      ],
+      "WK_inputs": [
+        "legs_per_human"
+      ],
+      "output_variable": "human_legs",
+      "solution_line_template": "For the humans in the house, there are {num_humans} * {legs_per_human} = <<{num_humans}*{legs_per_human}={human_legs}>>{human_legs} legs"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "num_dogs",
+        "num_cats"
+      ],
+      "WK_inputs": [],
+      "output_variable": "num_four_legged_pets",
+      "solution_line_template": "Javier has a total of {num_dogs} + {num_cats} = <<{num_dogs}+{num_cats}={num_four_legged_pets}>>{num_four_legged_pets} four-legged pets"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [
+        "legs_per_four_legged_pet"
+      ],
+      "output_variable": "pet_legs",
+      "solution_line_template": "For the pets in the house, there are {num_four_legged_pets} * {legs_per_four_legged_pet} = <<{num_four_legged_pets}*{legs_per_four_legged_pet}={pet_legs}>>{pet_legs} legs"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_legs",
+      "solution_line_template": "There are a total of {human_legs} + {pet_legs} = <<{human_legs}+{pet_legs}={total_legs}>>{total_legs} legs"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "For the humans in the house, there are 5 * 2 = <<5*2=7>>7 legs",
+    "L2": "Javier has a total of 2 + 1 = <<2+1=3>>3 four-legged pets",
+    "L3": "For the pets in the house, there are 3 * 4 = <<3*4=12>>12 legs",
+    "L4": "There are a total of 7 + 12 = <<7+12=19>>19 legs",
+    "FA": "#### 19"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -2090302013164519197,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,93 @@
+{
+  "index": 333,
+  "original_solution_mapping": {
+    "FA": "#### 22",
+    "L1": "There is 1 Saturday in a week and there are 4 weeks in a month so there are 1 * 4= <<1*4=4>>4 Saturdays in a month (on average)",
+    "L2": "If Kantana buys herself 2 chocolates every Saturday then this means she buys 2 * 4=<<2*4=8>>8 chocolates for herself for the month.",
+    "L3": "Kantana also buys her sister 1 chocolate on these trips so she is picking up an additional 1* 4=<<1*4=4>>4 additional chocolates for her sister for the month.",
+    "L4": "Kantana decided to also purchase some chocolates for her friend Charlie for his birthday. She bought Charlie 10 chocolates. This means that for the month she bought 10 chocolates for Charlie, 4 chocolates for her sister, and 8 chocolates for herself, 10+4+8= <<10+4+8=22>>22 chocolates bought in total for the month."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 333.\n    Returns: the total number of chocolates Kantana bought for the month.\n    \"\"\"\n    # L1\n    saturdays_per_week = 1 # WK\n    weeks_per_month = 4 # WK\n    saturdays_in_month = saturdays_per_week * weeks_per_month\n\n    # L2\n    chocolates_for_self_per_saturday = 2 # buys 2 chocolates for herself\n    chocolates_for_self_per_month = chocolates_for_self_per_saturday * saturdays_in_month\n\n    # L3\n    chocolates_for_sister_per_saturday = 1 # and 1 for her sister\n    chocolates_for_sister_per_month = chocolates_for_sister_per_saturday * saturdays_in_month\n\n    # L4\n    chocolates_for_charlie = 10 # picked up an additional 10 chocolates as a birthday gift for her friend Charlie\n    total_chocolates_bought = chocolates_for_charlie + chocolates_for_sister_per_month + chocolates_for_self_per_month\n\n    # FA\n    answer = total_chocolates_bought\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "chocolates_for_self_per_month",
+    "operand_to_replace": "chocolates_for_self_per_saturday",
+    "replacement_variable": "saturdays_in_month"
+  },
+  "correct_trace": {
+    "saturdays_per_week": 1,
+    "weeks_per_month": 4,
+    "saturdays_in_month": 4,
+    "chocolates_for_self_per_saturday": 2,
+    "chocolates_for_self_per_month": 8,
+    "chocolates_for_sister_per_saturday": 1,
+    "chocolates_for_sister_per_month": 4,
+    "chocolates_for_charlie": 10,
+    "total_chocolates_bought": 22,
+    "answer": 22
+  },
+  "flawed_trace": {
+    "saturdays_per_week": 1,
+    "weeks_per_month": 4,
+    "saturdays_in_month": 4,
+    "chocolates_for_self_per_saturday": 2,
+    "chocolates_for_self_per_month": 16,
+    "chocolates_for_sister_per_saturday": 1,
+    "chocolates_for_sister_per_month": 4,
+    "chocolates_for_charlie": 10,
+    "total_chocolates_bought": 30,
+    "answer": 30
+  },
+  "correct_value": 8,
+  "flawed_value": 16,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [],
+      "WK_inputs": [
+        "saturdays_per_week",
+        "weeks_per_month"
+      ],
+      "output_variable": "saturdays_in_month",
+      "solution_line_template": "There is {saturdays_per_week} Saturday in a week and there are {weeks_per_month} weeks in a month so there are {saturdays_per_week} * {weeks_per_month}= <<{saturdays_per_week}*{weeks_per_month}={saturdays_in_month}>>{saturdays_in_month} Saturdays in a month (on average)"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "chocolates_for_self_per_saturday"
+      ],
+      "WK_inputs": [],
+      "output_variable": "chocolates_for_self_per_month",
+      "solution_line_template": "If Kantana buys herself {chocolates_for_self_per_saturday} chocolates every Saturday then this means she buys {chocolates_for_self_per_saturday} * {saturdays_in_month}=<<{chocolates_for_self_per_saturday}*{saturdays_in_month}={chocolates_for_self_per_month}>>{chocolates_for_self_per_month} chocolates for herself for the month."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "chocolates_for_sister_per_saturday"
+      ],
+      "WK_inputs": [],
+      "output_variable": "chocolates_for_sister_per_month",
+      "solution_line_template": "Kantana also buys her sister {chocolates_for_sister_per_saturday} chocolate on these trips so she is picking up an additional {chocolates_for_sister_per_saturday}* {saturdays_in_month}=<<{chocolates_for_sister_per_saturday}*{saturdays_in_month}={chocolates_for_sister_per_month}>>{chocolates_for_sister_per_month} additional chocolates for her sister for the month."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "chocolates_for_charlie"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_chocolates_bought",
+      "solution_line_template": "Kantana decided to also purchase some chocolates for her friend Charlie for his birthday. She bought Charlie {chocolates_for_charlie} chocolates. This means that for the month she bought {chocolates_for_charlie} chocolates for Charlie, {chocolates_for_sister_per_month} chocolates for her sister, and {chocolates_for_self_per_month} chocolates for herself, {chocolates_for_charlie}+{chocolates_for_sister_per_month}+{chocolates_for_self_per_month}= <<{chocolates_for_charlie}+{chocolates_for_sister_per_month}+{chocolates_for_self_per_month}={total_chocolates_bought}>>{total_chocolates_bought} chocolates bought in total for the month."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There is 1 Saturday in a week and there are 4 weeks in a month so there are 1 * 4= <<1*4=4>>4 Saturdays in a month (on average)",
+    "L2": "If Kantana buys herself 4 chocolates every Saturday then this means she buys 4 * 4=<<4*4=16>>16 chocolates for herself for the month.",
+    "L3": "Kantana also buys her sister 1 chocolate on these trips so she is picking up an additional 1* 4=<<1*4=4>>4 additional chocolates for her sister for the month.",
+    "L4": "Kantana decided to also purchase some chocolates for her friend Charlie for his birthday. She bought Charlie 10 chocolates. This means that for the month she bought 10 chocolates for Charlie, 4 chocolates for her sister, and 16 chocolates for herself, 10+4+16= <<10+4+16=30>>30 chocolates bought in total for the month.",
+    "FA": "#### 30"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'saturdays_in_month' (4) was used instead of 'chocolates_for_self_per_saturday' (2).",
+  "repro_seed": 4060216484834553983,
+  "model_name": "google_gemini-2.5-flash"
+}

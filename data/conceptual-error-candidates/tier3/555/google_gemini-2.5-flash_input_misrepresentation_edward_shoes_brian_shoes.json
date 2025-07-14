@@ -1,0 +1,74 @@
+{
+  "index": 555,
+  "original_solution_mapping": {
+    "FA": "#### 121",
+    "L1": "Edward has 3 * 22 = <<3*22=66>>66 pairs of shoes.",
+    "L2": "Jacob has 66 / 2 = <<66/2=33>>33 pairs of shoes.",
+    "L3": "All of them have 22 + 66 + 33 = <<22+66+33=121>>121 pairs of shoes in total."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 555.\n    Returns: the total number of pairs of shoes they have.\n    \"\"\"\n    # L1\n    edward_multiplier = 3 # Edward has 3 times the number of shoes Brian has\n    brian_shoes = 22 # Brian has 22 pairs of shoes\n    edward_shoes = edward_multiplier * brian_shoes\n\n    # L2\n    jacob_divisor = 2 # Jacob has half the number of shoes Edward has\n    jacob_shoes = edward_shoes / jacob_divisor\n\n    # L3\n    total_shoes = brian_shoes + edward_shoes + jacob_shoes\n\n    # FA\n    answer = total_shoes\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "edward_shoes",
+    "operand_to_replace": "edward_multiplier",
+    "replacement_variable": "brian_shoes"
+  },
+  "correct_trace": {
+    "edward_multiplier": 3,
+    "brian_shoes": 22,
+    "edward_shoes": 66,
+    "jacob_divisor": 2,
+    "jacob_shoes": 33.0,
+    "total_shoes": 121.0,
+    "answer": 121.0
+  },
+  "flawed_trace": {
+    "edward_multiplier": 3,
+    "brian_shoes": 22,
+    "edward_shoes": 484,
+    "jacob_divisor": 2,
+    "jacob_shoes": 242.0,
+    "total_shoes": 748.0,
+    "answer": 748.0
+  },
+  "correct_value": 66,
+  "flawed_value": 484,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "edward_shoes",
+      "question_inputs": [
+        "edward_multiplier",
+        "brian_shoes"
+      ],
+      "solution_line_template": "Edward has {edward_multiplier} * {brian_shoes} = <<{edward_multiplier}*{brian_shoes}={edward_shoes}>>{edward_shoes} pairs of shoes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "jacob_shoes",
+      "question_inputs": [
+        "jacob_divisor"
+      ],
+      "solution_line_template": "Jacob has {edward_shoes} / {jacob_divisor} = <<{edward_shoes}/{jacob_divisor}={jacob_shoes}>>{jacob_shoes} pairs of shoes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_shoes",
+      "question_inputs": [],
+      "solution_line_template": "All of them have {brian_shoes} + {edward_shoes} + {jacob_shoes} = <<{brian_shoes}+{edward_shoes}+{jacob_shoes}={total_shoes}>>{total_shoes} pairs of shoes in total."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Edward has 22 * 22 = <<22*22=484>>484 pairs of shoes.",
+    "L2": "Jacob has 484 / 2 = <<484/2=242>>242 pairs of shoes.",
+    "L3": "All of them have 22 + 484 + 242 = <<22+484+242=748>>748 pairs of shoes in total.",
+    "FA": "#### 748"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'brian_shoes' (22) was used instead of 'edward_multiplier' (3).",
+  "repro_seed": 9025956103959593688,
+  "model_name": "google_gemini-2.5-flash"
+}

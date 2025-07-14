@@ -1,0 +1,79 @@
+{
+  "index": 2225,
+  "original_solution_mapping": {
+    "FA": "#### 14400",
+    "L1": "Last year, Bob's salary was equal to three times Mario's salary this year, meaning Bob was earning 3*$4000 = $<<3*4000=12000>>12000",
+    "L2": "If Bob's salary increased by 20% this year, he is earning 20/100*$12000= $<<20/100*12000=2400>>2400 more",
+    "L3": "Bob's total salary this year is $12000+$2400= $<<12000+2400=14400>>14400"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2225.\n    Returns: Bob's current salary.\n    \"\"\"\n    # L1\n    marios_salary_this_year = 4000 # Mario's salary increased by 40% to $4000 this year\n    multiplier_for_bobs_last_year_salary = 3 # three times Mario's salary this year\n    bobs_salary_last_year = multiplier_for_bobs_last_year_salary * marios_salary_this_year\n\n    # L2\n    increase_numerator = 20 # 20% more than his salary last year\n    increase_denominator = 100 # 20% more than his salary last year\n    salary_increase_percentage = Fraction(increase_numerator, increase_denominator)\n    bobs_salary_increase = salary_increase_percentage * bobs_salary_last_year\n\n    # L3\n    bobs_current_salary = bobs_salary_last_year + bobs_salary_increase\n\n    # FA\n    answer = bobs_current_salary\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "bobs_current_salary",
+    "operand_to_replace": "bobs_salary_increase",
+    "replacement_variable": "increase_numerator"
+  },
+  "correct_trace": {
+    "marios_salary_this_year": 4000,
+    "multiplier_for_bobs_last_year_salary": 3,
+    "bobs_salary_last_year": 12000,
+    "increase_numerator": 20,
+    "increase_denominator": 100,
+    "salary_increase_percentage": "1/5",
+    "bobs_salary_increase": "2400",
+    "bobs_current_salary": "14400",
+    "answer": "14400"
+  },
+  "flawed_trace": {
+    "marios_salary_this_year": 4000,
+    "multiplier_for_bobs_last_year_salary": 3,
+    "bobs_salary_last_year": 12000,
+    "increase_numerator": 20,
+    "increase_denominator": 100,
+    "salary_increase_percentage": "1/5",
+    "bobs_salary_increase": "2400",
+    "bobs_current_salary": 12020,
+    "answer": 12020
+  },
+  "correct_value": "14400",
+  "flawed_value": 12020,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "bobs_salary_last_year",
+      "question_inputs": [
+        "marios_salary_this_year",
+        "multiplier_for_bobs_last_year_salary"
+      ],
+      "solution_line_template": "Last year, Bob's salary was equal to three times Mario's salary this year, meaning Bob was earning {multiplier_for_bobs_last_year_salary}*${marios_salary_this_year} = $<<{multiplier_for_bobs_last_year_salary}*{marios_salary_this_year}={bobs_salary_last_year}>>{bobs_salary_last_year}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "bobs_salary_increase",
+      "question_inputs": [
+        "increase_numerator",
+        "increase_denominator"
+      ],
+      "solution_line_template": "If Bob's salary increased by {increase_numerator}/{increase_denominator}% this year, he is earning {increase_numerator}/{increase_denominator}*${bobs_salary_last_year}= $<<{increase_numerator}/{increase_denominator}*{bobs_salary_last_year}={bobs_salary_increase}>>{bobs_salary_increase} more"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "bobs_current_salary",
+      "question_inputs": [],
+      "solution_line_template": "Bob's total salary this year is ${bobs_salary_last_year}+${bobs_salary_increase}= $<<{bobs_salary_last_year}+{bobs_salary_increase}={bobs_current_salary}>>{bobs_current_salary}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Last year, Bob's salary was equal to three times Mario's salary this year, meaning Bob was earning 3*$4000 = $<<3*4000=12000>>12000",
+    "L2": "If Bob's salary increased by 20/100% this year, he is earning 20/100*$12000= $<<20/100*12000=2400>>2400 more",
+    "L3": "Bob's total salary this year is $12000+$20= $<<12000+20=12020>>12020",
+    "FA": "#### 12020"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'increase_numerator' (value: 20) was used instead of 'bobs_salary_increase' (value: 2400).",
+  "repro_seed": -4120745487934784541,
+  "model_name": "google_gemini-2.5-flash"
+}

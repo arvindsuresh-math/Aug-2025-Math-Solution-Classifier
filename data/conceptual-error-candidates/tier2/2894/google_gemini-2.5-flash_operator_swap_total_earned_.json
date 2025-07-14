@@ -1,0 +1,78 @@
+{
+  "index": 2894,
+  "original_solution_mapping": {
+    "FA": "#### 72",
+    "L1": "Ian is able to earn $18 per hour doing surveys. If he worked 8 hours doing surveys, then he earned $18*8 = $<<18*8=144>>144",
+    "L2": "If he spent half of what he earned, then he spent $144 * 50% = $<<144*50*.01=72>>72",
+    "L3": "If Ian spent $72 of his earnings, then he has $144 - $72 = $<<72=72>>72 left"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2894.\n    Returns: the money Ian has left.\n    \"\"\"\n    # L1\n    hourly_rate = 18 # earn $18 per hour\n    hours_worked = 8 # worked 8 hours\n    total_earned = hourly_rate * hours_worked\n\n    # L2\n    spent_percentage_value = 50 # spent half the money / 50%\n    percent_conversion_factor = 0.01 # WK\n    money_spent = total_earned * spent_percentage_value * percent_conversion_factor\n\n    # L3\n    money_left = total_earned - money_spent\n\n    # FA\n    answer = money_left\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_earned",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x146b2e650>"
+  },
+  "correct_trace": {
+    "hourly_rate": 18,
+    "hours_worked": 8,
+    "total_earned": 144,
+    "spent_percentage_value": 50,
+    "percent_conversion_factor": 0.01,
+    "money_spent": 72.0,
+    "money_left": 72.0,
+    "answer": 72.0
+  },
+  "flawed_trace": {
+    "hourly_rate": 18,
+    "hours_worked": 8,
+    "total_earned": 26,
+    "spent_percentage_value": 50,
+    "percent_conversion_factor": 0.01,
+    "money_spent": 13.0,
+    "money_left": 13.0,
+    "answer": 13.0
+  },
+  "correct_value": 144,
+  "flawed_value": 26,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_earned",
+      "question_inputs": [
+        "hourly_rate",
+        "hours_worked"
+      ],
+      "solution_line_template": "Ian is able to earn ${hourly_rate} per hour doing surveys. If he worked {hours_worked} hours doing surveys, then he earned ${hourly_rate}*{hours_worked} = $<<{hourly_rate}*{hours_worked}={total_earned}>>{total_earned}"
+    },
+    {
+      "WK_inputs": [
+        "percent_conversion_factor"
+      ],
+      "line_number": "L2",
+      "output_variable": "money_spent",
+      "question_inputs": [
+        "spent_percentage_value"
+      ],
+      "solution_line_template": "If he spent half of what he earned, then he spent ${total_earned} * {spent_percentage_value}% = $<<{total_earned}*{spent_percentage_value}*{percent_conversion_factor}={money_spent}>>{money_spent}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "money_left",
+      "question_inputs": [],
+      "solution_line_template": "If Ian spent ${money_spent} of his earnings, then he has ${total_earned} - ${money_spent} = $<<{money_left}={money_left}>>{money_left} left"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Ian is able to earn $18 per hour doing surveys. If he worked 8 hours doing surveys, then he earned $18*8 = $<<18*8=26>>26",
+    "L2": "If he spent half of what he earned, then he spent $26 * 50% = $<<26*50*0.01=13>>13",
+    "L3": "If Ian spent $13 of his earnings, then he has $26 - $13 = $<<13=13>>13 left",
+    "FA": "#### 13"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 6568641766904818171,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,92 @@
+{
+  "index": 2085,
+  "original_solution_mapping": {
+    "FA": "#### 160",
+    "L1": "He traded in the SNES for 150*.8=$<<150*.8=120>>120",
+    "L2": "Including the money he gave, he spent 120+80=$<<120+80=200>>200",
+    "L3": "He got 10+30=$<<10+30=40>>40 in change",
+    "L4": "So the NES cost 200-40=$<<200-40=160>>160"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2085.\n    Returns: the sale price of the NES.\n    \"\"\"\n    # L1\n    snes_value = 150 # SNES is worth $150\n    trade_in_percent = 0.8 # store gives him 80% of that value\n    trade_in_value = snes_value * trade_in_percent\n\n    # L2\n    money_given = 80 # He gives $80\n    total_spent_initial = trade_in_value + money_given\n\n    # L3\n    change_received = 10 # gets back $10 change\n    game_value = 30 # a game worth $30\n    total_change_value = change_received + game_value\n\n    # L4\n    nes_cost = total_spent_initial - total_change_value\n\n    # FA\n    answer = nes_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_spent_initial",
+    "operand_to_replace": "money_given",
+    "replacement_variable": "snes_value"
+  },
+  "correct_trace": {
+    "snes_value": 150,
+    "trade_in_percent": 0.8,
+    "trade_in_value": 120.0,
+    "money_given": 80,
+    "total_spent_initial": 200.0,
+    "change_received": 10,
+    "game_value": 30,
+    "total_change_value": 40,
+    "nes_cost": 160.0,
+    "answer": 160.0
+  },
+  "flawed_trace": {
+    "snes_value": 150,
+    "trade_in_percent": 0.8,
+    "trade_in_value": 120.0,
+    "money_given": 80,
+    "total_spent_initial": 270.0,
+    "change_received": 10,
+    "game_value": 30,
+    "total_change_value": 40,
+    "nes_cost": 230.0,
+    "answer": 230.0
+  },
+  "correct_value": 200.0,
+  "flawed_value": 270.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "trade_in_value",
+      "question_inputs": [
+        "snes_value",
+        "trade_in_percent"
+      ],
+      "solution_line_template": "He traded in the SNES for {snes_value}*{trade_in_percent}=$<<{snes_value}*{trade_in_percent}={trade_in_value}>>{trade_in_value}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_spent_initial",
+      "question_inputs": [
+        "money_given"
+      ],
+      "solution_line_template": "Including the money he gave, he spent {trade_in_value}+{money_given}=$<<{trade_in_value}+{money_given}={total_spent_initial}>>{total_spent_initial}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_change_value",
+      "question_inputs": [
+        "change_received",
+        "game_value"
+      ],
+      "solution_line_template": "He got {change_received}+{game_value}=$<<{change_received}+{game_value}={total_change_value}>>{total_change_value} in change"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "nes_cost",
+      "question_inputs": [],
+      "solution_line_template": "So the NES cost {total_spent_initial}-{total_change_value}=$<<{total_spent_initial}-{total_change_value}={nes_cost}>>{nes_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He traded in the SNES for 150*0.8=$<<150*0.8=120>>120",
+    "L2": "Including the money he gave, he spent 120+150=$<<120+150=270>>270",
+    "L3": "He got 10+30=$<<10+30=40>>40 in change",
+    "L4": "So the NES cost 270-40=$<<270-40=230>>230",
+    "FA": "#### 230"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'snes_value' (150) was used instead of 'money_given' (80).",
+  "repro_seed": -4598119175377062952,
+  "model_name": "google_gemini-2.5-flash"
+}

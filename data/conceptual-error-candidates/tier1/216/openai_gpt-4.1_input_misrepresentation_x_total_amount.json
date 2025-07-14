@@ -1,0 +1,71 @@
+{
+  "index": 216,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "We let x be the amount of money she put in the bank the first year,",
+    "L2": "Then the second year was 2*x,",
+    "L3": "and the third year was 2*2*x=4*x,",
+    "L4": "and the fourth year was 2*2*2*x=8*x.",
+    "L5": "And the total amount she put in the bank, $450, is the sum of all four years, or $450 = x+(2*x)+(4*x)+(8*x).",
+    "L6": "This simplifies to $450=15*x.",
+    "L7": "And therefore, the amount of money she put in the bank the first year was x=$<<30=30>>30."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 216.\n    Returns: the amount of money Missy put in the bank the first year, in dollars.\n    \"\"\"\n    # L5\n    total_amount = 450 # it contained $450 in change\n    # x is the amount in the first year (unknown)\n    # L6\n    sum_coeff = 15 # 1 + 2 + 4 + 8 = 15\n    # L7\n    x = total_amount // sum_coeff\n    # FA\n    answer = x\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "x",
+    "operand_to_replace": "sum_coeff",
+    "replacement_variable": "total_amount"
+  },
+  "correct_trace": {
+    "total_amount": 450,
+    "sum_coeff": 15,
+    "x": 30,
+    "answer": 30
+  },
+  "flawed_trace": {
+    "total_amount": 450,
+    "sum_coeff": 15,
+    "x": 1,
+    "answer": 1
+  },
+  "correct_value": 30,
+  "flawed_value": 1,
+  "logical_steps": [
+    {
+      "line_number": "L5",
+      "question_inputs": [
+        "total_amount"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_amount",
+      "solution_line_template": "And the total amount she put in the bank, ${total_amount}, is the sum of all four years, or ${total_amount} = x+(2*x)+(4*x)+(8*x)."
+    },
+    {
+      "line_number": "L6",
+      "question_inputs": [
+        "sum_coeff"
+      ],
+      "WK_inputs": [],
+      "output_variable": "sum_coeff",
+      "solution_line_template": "This simplifies to ${total_amount}={sum_coeff}*x."
+    },
+    {
+      "line_number": "L7",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "x",
+      "solution_line_template": "And therefore, the amount of money she put in the bank the first year was x=$<<{total_amount}//{sum_coeff}={x}>>{x}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L5": "And the total amount she put in the bank, $450, is the sum of all four years, or $450 = x+(2*x)+(4*x)+(8*x).",
+    "L6": "This simplifies to $450=15*x.",
+    "L7": "And therefore, the amount of money she put in the bank the first year was x=$<<450//450=1>>1.",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L7",
+  "explanation": "Input misrepresentation. The value for 'total_amount' (450) was used instead of 'sum_coeff' (15).",
+  "repro_seed": 2013110518645610121,
+  "model_name": "openai_gpt-4.1"
+}

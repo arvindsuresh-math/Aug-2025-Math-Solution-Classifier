@@ -1,0 +1,129 @@
+{
+  "index": 2735,
+  "original_solution_mapping": {
+    "FA": "#### 472",
+    "L1": "Bob has worked 40 hours/week x 2 weeks = <<40*2=80>>80 regular hours",
+    "L2": "Bob got paid 80 hours x $5/hour = $<<80*5=400>>400 for his regular hours",
+    "L3": "Bob worked 44 hours - 40 hours = <<44-40=4>>4 hours of overtime in the first week",
+    "L4": "Bob worked 48 hours - 40 hours = <<48-40=8>>8 hours of overtime in the second week",
+    "L5": "In total Bob worker 8 hours + 4 hours =<<8+4=12>>12 hours of overtime.",
+    "L6": "Bob got paid $6/hour x 12 hours = $<<6*12=72>>72 for overtime",
+    "L7": "In 2 weeks Bob earned $400 + $72 = $<<400+72=472>>472"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2735.\n    Returns: the total amount Bob made in two weeks including regular and overtime pay.\n    \"\"\"\n    # L1\n    regular_hours_per_week = 40 # All hours over 40 in a week are considered overtime\n    num_weeks = 2 # first week and second week\n    total_regular_hours = regular_hours_per_week * num_weeks\n\n    # L2\n    regular_hourly_rate = 5 # $5 an hour for the regular hours\n    regular_pay = total_regular_hours * regular_hourly_rate\n\n    # L3\n    week1_hours = 44 # Bob works 44  hours in the first week\n    overtime_week1 = week1_hours - regular_hours_per_week\n\n    # L4\n    week2_hours = 48 # 48 hours in the second week\n    overtime_week2 = week2_hours - regular_hours_per_week\n\n    # L5\n    total_overtime_hours = overtime_week2 + overtime_week1\n\n    # L6\n    overtime_hourly_rate = 6 # $6 an hour for any overtime hours\n    overtime_pay = overtime_hourly_rate * total_overtime_hours\n\n    # L7\n    total_pay = regular_pay + overtime_pay\n\n    # FA\n    answer = total_pay\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_pay",
+    "replacement_variable": "overtime_pay"
+  },
+  "correct_trace": {
+    "regular_hours_per_week": 40,
+    "num_weeks": 2,
+    "total_regular_hours": 80,
+    "regular_hourly_rate": 5,
+    "regular_pay": 400,
+    "week1_hours": 44,
+    "overtime_week1": 4,
+    "week2_hours": 48,
+    "overtime_week2": 8,
+    "total_overtime_hours": 12,
+    "overtime_hourly_rate": 6,
+    "overtime_pay": 72,
+    "total_pay": 472,
+    "answer": 472
+  },
+  "flawed_trace": {
+    "regular_hours_per_week": 40,
+    "num_weeks": 2,
+    "total_regular_hours": 80,
+    "regular_hourly_rate": 5,
+    "regular_pay": 400,
+    "week1_hours": 44,
+    "overtime_week1": 4,
+    "week2_hours": 48,
+    "overtime_week2": 8,
+    "total_overtime_hours": 12,
+    "overtime_hourly_rate": 6,
+    "overtime_pay": 72,
+    "total_pay": 472,
+    "answer": 72
+  },
+  "correct_value": 472,
+  "flawed_value": 72,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "regular_hours_per_week",
+        "num_weeks"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_regular_hours",
+      "solution_line_template": "Bob has worked {regular_hours_per_week} hours/week x {num_weeks} weeks = <<{regular_hours_per_week}*{num_weeks}={total_regular_hours}>>{total_regular_hours} regular hours"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "regular_hourly_rate"
+      ],
+      "WK_inputs": [],
+      "output_variable": "regular_pay",
+      "solution_line_template": "Bob got paid {total_regular_hours} hours x ${regular_hourly_rate}/hour = $<<{total_regular_hours}*{regular_hourly_rate}={regular_pay}>>{regular_pay} for his regular hours"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "week1_hours"
+      ],
+      "WK_inputs": [],
+      "output_variable": "overtime_week1",
+      "solution_line_template": "Bob worked {week1_hours} hours - {regular_hours_per_week} hours = <<{week1_hours}-{regular_hours_per_week}={overtime_week1}>>{overtime_week1} hours of overtime in the first week"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "week2_hours"
+      ],
+      "WK_inputs": [],
+      "output_variable": "overtime_week2",
+      "solution_line_template": "Bob worked {week2_hours} hours - {regular_hours_per_week} hours = <<{week2_hours}-{regular_hours_per_week}={overtime_week2}>>{overtime_week2} hours of overtime in the second week"
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_overtime_hours",
+      "solution_line_template": "In total Bob worker {overtime_week2} hours + {overtime_week1} hours =<<{overtime_week2}+{overtime_week1}={total_overtime_hours}>>{total_overtime_hours} hours of overtime."
+    },
+    {
+      "line_number": "L6",
+      "question_inputs": [
+        "overtime_hourly_rate"
+      ],
+      "WK_inputs": [],
+      "output_variable": "overtime_pay",
+      "solution_line_template": "Bob got paid ${overtime_hourly_rate}/hour x {total_overtime_hours} hours = $<<{overtime_hourly_rate}*{total_overtime_hours}={overtime_pay}>>{overtime_pay} for overtime"
+    },
+    {
+      "line_number": "L7",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_pay",
+      "solution_line_template": "In 2 weeks Bob earned ${regular_pay} + ${overtime_pay} = $<<{regular_pay}+{overtime_pay}={total_pay}>>{total_pay}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Bob has worked 40 hours/week x 2 weeks = <<40*2=80>>80 regular hours",
+    "L2": "Bob got paid 80 hours x $5/hour = $<<80*5=400>>400 for his regular hours",
+    "L3": "Bob worked 44 hours - 40 hours = <<44-40=4>>4 hours of overtime in the first week",
+    "L4": "Bob worked 48 hours - 40 hours = <<48-40=8>>8 hours of overtime in the second week",
+    "L5": "In total Bob worker 8 hours + 4 hours =<<8+4=12>>12 hours of overtime.",
+    "L6": "Bob got paid $6/hour x 12 hours = $<<6*12=72>>72 for overtime",
+    "FA": "#### 72"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'overtime_pay' (value: 72) was reported instead of 'total_pay' (value: 472).",
+  "repro_seed": -1762094908943662777,
+  "model_name": "openai_gpt-4.1"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 1798,
+  "original_solution_mapping": {
+    "FA": "#### 300",
+    "L1": "He lost 500*.8=<<500*.8=400>>400 pounds from his bench",
+    "L2": "So his bench went to 500-400=<<500-400=100>>100 pounds",
+    "L3": "After training it increased to 100*3=<<100*3=300>>300 pounds"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1798.\n    Returns: John's current bench press weight.\n    \"\"\"\n    # L1\n    initial_bench_press = 500 # started with a 500-pound bench press\n    loss_percent = 0.8 # goes down 80%\n    weight_lost = initial_bench_press * loss_percent\n\n    # L2\n    bench_after_injury = initial_bench_press - weight_lost\n\n    # L3\n    training_multiplier = 3 # triple the weight\n    final_bench_press = bench_after_injury * training_multiplier\n\n    # FA\n    answer = final_bench_press\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "final_bench_press",
+    "operand_to_replace": "bench_after_injury",
+    "replacement_variable": "initial_bench_press"
+  },
+  "correct_trace": {
+    "initial_bench_press": 500,
+    "loss_percent": 0.8,
+    "weight_lost": 400.0,
+    "bench_after_injury": 100.0,
+    "training_multiplier": 3,
+    "final_bench_press": 300.0,
+    "answer": 300.0
+  },
+  "flawed_trace": {
+    "initial_bench_press": 500,
+    "loss_percent": 0.8,
+    "weight_lost": 400.0,
+    "bench_after_injury": 100.0,
+    "training_multiplier": 3,
+    "final_bench_press": 1500,
+    "answer": 1500
+  },
+  "correct_value": 300.0,
+  "flawed_value": 1500,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "weight_lost",
+      "question_inputs": [
+        "initial_bench_press",
+        "loss_percent"
+      ],
+      "solution_line_template": "He lost {initial_bench_press}*{loss_percent}=<<{initial_bench_press}*{loss_percent}={weight_lost}>>{weight_lost} pounds from his bench"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "bench_after_injury",
+      "question_inputs": [],
+      "solution_line_template": "So his bench went to {initial_bench_press}-{weight_lost}=<<{initial_bench_press}-{weight_lost}={bench_after_injury}>>{bench_after_injury} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_bench_press",
+      "question_inputs": [
+        "training_multiplier"
+      ],
+      "solution_line_template": "After training it increased to {bench_after_injury}*{training_multiplier}=<<{bench_after_injury}*{training_multiplier}={final_bench_press}>>{final_bench_press} pounds"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He lost 500*0.8=<<500*0.8=400>>400 pounds from his bench",
+    "L2": "So his bench went to 500-400=<<500-400=100>>100 pounds",
+    "L3": "After training it increased to 500*3=<<500*3=1500>>1500 pounds",
+    "FA": "#### 1500"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'initial_bench_press' (value: 500) was used instead of 'bench_after_injury' (value: 100.0).",
+  "repro_seed": 8978218975484042135,
+  "model_name": "google_gemini-2.5-flash"
+}

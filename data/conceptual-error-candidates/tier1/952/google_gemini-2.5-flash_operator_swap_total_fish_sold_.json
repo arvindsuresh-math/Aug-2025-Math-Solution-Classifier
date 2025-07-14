@@ -1,0 +1,59 @@
+{
+  "index": 952,
+  "original_solution_mapping": {
+    "FA": "#### 200",
+    "L1": "The following week, he sold 50 x 3 = <<50*3=150>>150 kg of salmon.",
+    "L2": "So he sold 50 + 150 = <<50+150=200>>200 kg of fish."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 952.\n    Returns: the total amount of fish sold in two weeks.\n    \"\"\"\n    # L1\n    salmon_sold_this_week = 50 # sold 50 kg of salmon\n    multiplier_next_week = 3 # three times more\n    salmon_sold_next_week = salmon_sold_this_week * multiplier_next_week\n\n    # L2\n    total_fish_sold = salmon_sold_this_week + salmon_sold_next_week\n\n    # FA\n    answer = total_fish_sold\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_fish_sold",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x14523bb90>"
+  },
+  "correct_trace": {
+    "salmon_sold_this_week": 50,
+    "multiplier_next_week": 3,
+    "salmon_sold_next_week": 150,
+    "total_fish_sold": 200,
+    "answer": 200
+  },
+  "flawed_trace": {
+    "salmon_sold_this_week": 50,
+    "multiplier_next_week": 3,
+    "salmon_sold_next_week": 150,
+    "total_fish_sold": 7500,
+    "answer": 7500
+  },
+  "correct_value": 200,
+  "flawed_value": 7500,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "salmon_sold_this_week",
+        "multiplier_next_week"
+      ],
+      "WK_inputs": [],
+      "output_variable": "salmon_sold_next_week",
+      "solution_line_template": "The following week, he sold {salmon_sold_this_week} x {multiplier_next_week} = <<{salmon_sold_this_week}*{multiplier_next_week}={salmon_sold_next_week}>>{salmon_sold_next_week} kg of salmon."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_fish_sold",
+      "solution_line_template": "So he sold {salmon_sold_this_week} + {salmon_sold_next_week} = <<{salmon_sold_this_week}+{salmon_sold_next_week}={total_fish_sold}>>{total_fish_sold} kg of fish."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The following week, he sold 50 x 3 = <<50*3=150>>150 kg of salmon.",
+    "L2": "So he sold 50 + 150 = <<50+150=7500>>7500 kg of fish.",
+    "FA": "#### 7500"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 7724184310893620599,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,63 @@
+{
+  "index": 2499,
+  "original_solution_mapping": {
+    "FA": "#### 2215",
+    "L1": "In the afternoon there are 2355 - 629 = <<2355-629=1726>>1726 loaves of bread left.",
+    "L2": "By the evening there is a delivery and there are now 1726 + 489 = <<1726+489=2215>>2215 loaves of bread."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2499.\n    Returns: the number of loaves of bread at the end of the day.\n    \"\"\"\n    # L1\n    initial_loaves = 2355 # 2355 loaves of bread at the start of the day\n    loaves_sold = 629 # 629 loaves are sold\n    loaves_after_sale = initial_loaves - loaves_sold\n\n    # L2\n    loaves_delivered = 489 # 489 loaves are delivered\n    final_loaves = loaves_after_sale + loaves_delivered\n\n    # FA\n    answer = final_loaves\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "final_loaves",
+    "operand_to_replace": "loaves_delivered",
+    "replacement_variable": "loaves_after_sale"
+  },
+  "correct_trace": {
+    "initial_loaves": 2355,
+    "loaves_sold": 629,
+    "loaves_after_sale": 1726,
+    "loaves_delivered": 489,
+    "final_loaves": 2215,
+    "answer": 2215
+  },
+  "flawed_trace": {
+    "initial_loaves": 2355,
+    "loaves_sold": 629,
+    "loaves_after_sale": 1726,
+    "loaves_delivered": 489,
+    "final_loaves": 3452,
+    "answer": 3452
+  },
+  "correct_value": 2215,
+  "flawed_value": 3452,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "initial_loaves",
+        "loaves_sold"
+      ],
+      "WK_inputs": [],
+      "output_variable": "loaves_after_sale",
+      "solution_line_template": "In the afternoon there are {initial_loaves} - {loaves_sold} = <<{initial_loaves}-{loaves_sold}={loaves_after_sale}>>{loaves_after_sale} loaves of bread left."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "loaves_delivered"
+      ],
+      "WK_inputs": [],
+      "output_variable": "final_loaves",
+      "solution_line_template": "By the evening there is a delivery and there are now {loaves_after_sale} + {loaves_delivered} = <<{loaves_after_sale}+{loaves_delivered}={final_loaves}>>{final_loaves} loaves of bread."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In the afternoon there are 2355 - 629 = <<2355-629=1726>>1726 loaves of bread left.",
+    "L2": "By the evening there is a delivery and there are now 1726 + 1726 = <<1726+1726=3452>>3452 loaves of bread.",
+    "FA": "#### 3452"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'loaves_after_sale' (1726) was used instead of 'loaves_delivered' (489).",
+  "repro_seed": 2387737154504402914,
+  "model_name": "google_gemini-2.5-flash"
+}

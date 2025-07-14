@@ -1,0 +1,63 @@
+{
+  "index": 2238,
+  "original_solution_mapping": {
+    "FA": "#### 43",
+    "L1": "Before the market opened, Paul sold 12 + 25 = <<12+25=37>>37 chickens",
+    "L2": "So he had 80 - 37 = <<80-37=43>>43 chickens left to sell at the market."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2238.\n    Returns: the number of chickens Paul was left with to sell at the market.\n    \"\"\"\n    # L1\n    sold_to_neighbor = 12 # sold his neighbor 12 chickens\n    sold_to_customer = 25 # sold another 25 chickens\n    total_sold_before_market = sold_to_neighbor + sold_to_customer\n\n    # L2\n    initial_chickens = 80 # 80 chickens in total\n    chickens_left = initial_chickens - total_sold_before_market\n\n    # FA\n    answer = chickens_left\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "chickens_left",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x1458a4110>"
+  },
+  "correct_trace": {
+    "sold_to_neighbor": 12,
+    "sold_to_customer": 25,
+    "total_sold_before_market": 37,
+    "initial_chickens": 80,
+    "chickens_left": 43,
+    "answer": 43
+  },
+  "flawed_trace": {
+    "sold_to_neighbor": 12,
+    "sold_to_customer": 25,
+    "total_sold_before_market": 37,
+    "initial_chickens": 80,
+    "chickens_left": 117,
+    "answer": 117
+  },
+  "correct_value": 43,
+  "flawed_value": 117,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "sold_to_neighbor",
+        "sold_to_customer"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_sold_before_market",
+      "solution_line_template": "Before the market opened, Paul sold {sold_to_neighbor} + {sold_to_customer} = <<{sold_to_neighbor}+{sold_to_customer}={total_sold_before_market}>>{total_sold_before_market} chickens"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "initial_chickens"
+      ],
+      "WK_inputs": [],
+      "output_variable": "chickens_left",
+      "solution_line_template": "So he had {initial_chickens} - {total_sold_before_market} = <<{initial_chickens}-{total_sold_before_market}={chickens_left}>>{chickens_left} chickens left to sell at the market."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Before the market opened, Paul sold 12 + 25 = <<12+25=37>>37 chickens",
+    "L2": "So he had 80 - 37 = <<80-37=117>>117 chickens left to sell at the market.",
+    "FA": "#### 117"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -6504344762437329903,
+  "model_name": "google_gemini-2.5-flash"
+}

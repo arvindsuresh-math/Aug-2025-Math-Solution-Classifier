@@ -1,0 +1,84 @@
+{
+  "index": 1371,
+  "original_solution_mapping": {
+    "FA": "#### 2000",
+    "L1": "Natalie: 10000/2=<<10000/2=5000>>5000$",
+    "L2": "10000-5000=<<10000-5000=5000>>5000",
+    "L3": "Rick:5000(.60)=3000$",
+    "L4": "5000-3000=<<5000-3000=2000>>2000$ left for Lucy."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1371.\n    Returns: the amount of money Lucy gets.\n    \"\"\"\n    # L1\n    total_saved_money = 10000 # $10,000 to split up\n    natalie_share_divisor = 2 # Natalie will get half\n    natalie_money = total_saved_money / natalie_share_divisor\n\n    # L2\n    remaining_after_natalie = total_saved_money - natalie_money\n\n    # L3\n    rick_share_percent = 0.60 # 60 percent of the remaining money\n    rick_money = remaining_after_natalie * rick_share_percent\n\n    # L4\n    lucy_money = remaining_after_natalie - rick_money\n\n    # FA\n    answer = lucy_money\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "lucy_money",
+    "replacement_variable": "rick_money"
+  },
+  "correct_trace": {
+    "total_saved_money": 10000,
+    "natalie_share_divisor": 2,
+    "natalie_money": 5000.0,
+    "remaining_after_natalie": 5000.0,
+    "rick_share_percent": 0.6,
+    "rick_money": 3000.0,
+    "lucy_money": 2000.0,
+    "answer": 2000.0
+  },
+  "flawed_trace": {
+    "total_saved_money": 10000,
+    "natalie_share_divisor": 2,
+    "natalie_money": 5000.0,
+    "remaining_after_natalie": 5000.0,
+    "rick_share_percent": 0.6,
+    "rick_money": 3000.0,
+    "lucy_money": 2000.0,
+    "answer": 3000.0
+  },
+  "correct_value": 2000.0,
+  "flawed_value": 3000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "natalie_money",
+      "question_inputs": [
+        "total_saved_money",
+        "natalie_share_divisor"
+      ],
+      "solution_line_template": "Natalie: {total_saved_money}/{natalie_share_divisor}=<<{total_saved_money}/{natalie_share_divisor}={natalie_money}>>{natalie_money}$"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_after_natalie",
+      "question_inputs": [],
+      "solution_line_template": "{total_saved_money}-{natalie_money}=<<{total_saved_money}-{natalie_money}={remaining_after_natalie}>>{remaining_after_natalie}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "rick_money",
+      "question_inputs": [
+        "rick_share_percent"
+      ],
+      "solution_line_template": "Rick:{remaining_after_natalie}({rick_share_percent})={rick_money}$"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "lucy_money",
+      "question_inputs": [],
+      "solution_line_template": "{remaining_after_natalie}-{rick_money}=<<{remaining_after_natalie}-{rick_money}={lucy_money}>>{lucy_money}$ left for Lucy."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Natalie: 10000/2=<<10000/2=5000>>5000$",
+    "L2": "10000-5000=<<10000-5000=5000>>5000",
+    "L3": "Rick:5000(0.6)=3000$",
+    "FA": "#### 3000"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'rick_money' (value: 3000.0) was reported instead of 'lucy_money' (value: 2000.0).",
+  "repro_seed": 3992811319847473914,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,103 @@
+{
+  "index": 1224,
+  "original_solution_mapping": {
+    "FA": "#### 132",
+    "L1": "After 1 year Jim has gained $80 * 0.15 = $<<80*0.15=12>>12",
+    "L2": "Therefore, after 1 year his portfolio has grown to $80 + $12 = $<<80+12=92>>92",
+    "L3": "He then adds $28 to this total, so his new portfolio total is $92 + $28 = $<<92+28=120>>120 at the beginning of year 2",
+    "L4": "Next, this total grows by 10%, so he gains $120 * 0.10 = $<<120*0.10=12>>12 across year 2",
+    "L5": "Thus, after year 2, his portfolio is worth $120 + $12 = $<<120+12=132>>132"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1224.\n    Returns: Jim's final portfolio worth after 2 years.\n    \"\"\"\n    # L1\n    initial_portfolio_amount = 80 # starts with $80 in his investment portfolio\n    growth_rate_year1 = 0.15 # grows by 15%\n    gain_year1 = initial_portfolio_amount * growth_rate_year1\n\n    # L2\n    portfolio_after_year1 = initial_portfolio_amount + gain_year1\n\n    # L3\n    added_amount = 28 # adds another $28 to his portfolio\n    portfolio_before_year2_growth = portfolio_after_year1 + added_amount\n\n    # L4\n    growth_rate_year2_percent = 10 # grows by 10%\n    growth_rate_year2_decimal = 0.10 # grows by 10%\n    gain_year2 = portfolio_before_year2_growth * growth_rate_year2_decimal\n\n    # L5\n    final_portfolio_worth = portfolio_before_year2_growth + gain_year2\n\n    # FA\n    answer = final_portfolio_worth\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "gain_year2",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x146955c10>"
+  },
+  "correct_trace": {
+    "initial_portfolio_amount": 80,
+    "growth_rate_year1": 0.15,
+    "gain_year1": 12.0,
+    "portfolio_after_year1": 92.0,
+    "added_amount": 28,
+    "portfolio_before_year2_growth": 120.0,
+    "growth_rate_year2_percent": 10,
+    "growth_rate_year2_decimal": 0.1,
+    "gain_year2": 12.0,
+    "final_portfolio_worth": 132.0,
+    "answer": 132.0
+  },
+  "flawed_trace": {
+    "initial_portfolio_amount": 80,
+    "growth_rate_year1": 0.15,
+    "gain_year1": 12.0,
+    "portfolio_after_year1": 92.0,
+    "added_amount": 28,
+    "portfolio_before_year2_growth": 120.0,
+    "growth_rate_year2_percent": 10,
+    "growth_rate_year2_decimal": 0.1,
+    "gain_year2": 1200.0,
+    "final_portfolio_worth": 1320.0,
+    "answer": 1320.0
+  },
+  "correct_value": 12.0,
+  "flawed_value": 1200.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "gain_year1",
+      "question_inputs": [
+        "initial_portfolio_amount",
+        "growth_rate_year1"
+      ],
+      "solution_line_template": "After 1 year Jim has gained ${initial_portfolio_amount} * {growth_rate_year1} = $<<{initial_portfolio_amount}*{growth_rate_year1}={gain_year1}>>{gain_year1}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "portfolio_after_year1",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, after 1 year his portfolio has grown to ${initial_portfolio_amount} + ${gain_year1} = $<<{initial_portfolio_amount}+{gain_year1}={portfolio_after_year1}>>{portfolio_after_year1}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "portfolio_before_year2_growth",
+      "question_inputs": [
+        "added_amount"
+      ],
+      "solution_line_template": "He then adds ${added_amount} to this total, so his new portfolio total is ${portfolio_after_year1} + ${added_amount} = $<<{portfolio_after_year1}+{added_amount}={portfolio_before_year2_growth}>>{portfolio_before_year2_growth} at the beginning of year 2"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "gain_year2",
+      "question_inputs": [
+        "growth_rate_year2_percent",
+        "growth_rate_year2_decimal"
+      ],
+      "solution_line_template": "Next, this total grows by {growth_rate_year2_percent}%, so he gains ${portfolio_before_year2_growth} * {growth_rate_year2_decimal} = $<<{portfolio_before_year2_growth}*{growth_rate_year2_decimal}={gain_year2}>>{gain_year2} across year 2"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "final_portfolio_worth",
+      "question_inputs": [],
+      "solution_line_template": "Thus, after year 2, his portfolio is worth ${portfolio_before_year2_growth} + ${gain_year2} = $<<{portfolio_before_year2_growth}+{gain_year2}={final_portfolio_worth}>>{final_portfolio_worth}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After 1 year Jim has gained $80 * 0.15 = $<<80*0.15=12>>12",
+    "L2": "Therefore, after 1 year his portfolio has grown to $80 + $12 = $<<80+12=92>>92",
+    "L3": "He then adds $28 to this total, so his new portfolio total is $92 + $28 = $<<92+28=120>>120 at the beginning of year 2",
+    "L4": "Next, this total grows by 10%, so he gains $120 * 0.1 = $<<120*0.1=1200>>1200 across year 2",
+    "L5": "Thus, after year 2, his portfolio is worth $120 + $1200 = $<<120+1200=1320>>1320",
+    "FA": "#### 1320"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 3430060564423870271,
+  "model_name": "google_gemini-2.5-flash"
+}

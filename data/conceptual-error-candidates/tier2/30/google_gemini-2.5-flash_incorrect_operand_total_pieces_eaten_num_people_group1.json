@@ -1,0 +1,110 @@
+{
+  "index": 30,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "In total, there are 4 x 4 = <<4*4=16>>16 pizza pieces.",
+    "L2": "Bill and Dale eat 2 x 4 x 50% = <<2*4*50*.01=4>>4 pieces.",
+    "L3": "Ann and Cate eat 2 x 4 x 75% = <<2*4*75*.01=6>>6 pieces.",
+    "L4": "The four of them eat 4 + 6 = <<4+6=10>>10 pieces.",
+    "L5": "There are 16 - 10 = <<16-10=6>>6 pizza pieces uneaten."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 30.\n    Returns: the number of pizza pieces left uneaten.\n    \"\"\"\n    # L1\n    num_people = 4 # Ann, Bill, Cate, and Dale each buy\n    pieces_per_pizza = 4 # cut into 4 pieces\n    total_pizza_pieces = num_people * pieces_per_pizza\n\n    # L2\n    num_people_group1 = 2 # Bill and Dale\n    percent_eaten_group1_num = 50 # 50%\n    percent_factor = 0.01 # WK\n    pieces_eaten_group1 = num_people_group1 * pieces_per_pizza * percent_eaten_group1_num * percent_factor\n\n    # L3\n    num_people_group2 = 2 # Ann and Cate\n    percent_eaten_group2_num = 75 # 75%\n    pieces_eaten_group2 = num_people_group2 * pieces_per_pizza * percent_eaten_group2_num * percent_factor\n\n    # L4\n    total_pieces_eaten = pieces_eaten_group1 + pieces_eaten_group2\n\n    # L5\n    uneaten_pizza_pieces = total_pizza_pieces - total_pieces_eaten\n\n    # FA\n    answer = uneaten_pizza_pieces\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_pieces_eaten",
+    "operand_to_replace": "pieces_eaten_group2",
+    "replacement_variable": "num_people_group1"
+  },
+  "correct_trace": {
+    "num_people": 4,
+    "pieces_per_pizza": 4,
+    "total_pizza_pieces": 16,
+    "num_people_group1": 2,
+    "percent_eaten_group1_num": 50,
+    "percent_factor": 0.01,
+    "pieces_eaten_group1": 4.0,
+    "num_people_group2": 2,
+    "percent_eaten_group2_num": 75,
+    "pieces_eaten_group2": 6.0,
+    "total_pieces_eaten": 10.0,
+    "uneaten_pizza_pieces": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "num_people": 4,
+    "pieces_per_pizza": 4,
+    "total_pizza_pieces": 16,
+    "num_people_group1": 2,
+    "percent_eaten_group1_num": 50,
+    "percent_factor": 0.01,
+    "pieces_eaten_group1": 4.0,
+    "num_people_group2": 2,
+    "percent_eaten_group2_num": 75,
+    "pieces_eaten_group2": 6.0,
+    "total_pieces_eaten": 6.0,
+    "uneaten_pizza_pieces": 10.0,
+    "answer": 10.0
+  },
+  "correct_value": 10.0,
+  "flawed_value": 6.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_pizza_pieces",
+      "question_inputs": [
+        "num_people",
+        "pieces_per_pizza"
+      ],
+      "solution_line_template": "In total, there are {num_people} x {pieces_per_pizza} = <<{num_people}*{pieces_per_pizza}={total_pizza_pieces}>>{total_pizza_pieces} pizza pieces."
+    },
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L2",
+      "output_variable": "pieces_eaten_group1",
+      "question_inputs": [
+        "num_people_group1",
+        "percent_eaten_group1_num"
+      ],
+      "solution_line_template": "Bill and Dale eat {num_people_group1} x {pieces_per_pizza} x {percent_eaten_group1_num}% = <<{num_people_group1}*{pieces_per_pizza}*{percent_eaten_group1_num}*{percent_factor}={pieces_eaten_group1}>>{pieces_eaten_group1} pieces."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "pieces_eaten_group2",
+      "question_inputs": [
+        "num_people_group2",
+        "percent_eaten_group2_num"
+      ],
+      "solution_line_template": "Ann and Cate eat {num_people_group2} x {pieces_per_pizza} x {percent_eaten_group2_num}% = <<{num_people_group2}*{pieces_per_pizza}*{percent_eaten_group2_num}*{percent_factor}={pieces_eaten_group2}>>{pieces_eaten_group2} pieces."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_pieces_eaten",
+      "question_inputs": [],
+      "solution_line_template": "The four of them eat {pieces_eaten_group1} + {pieces_eaten_group2} = <<{pieces_eaten_group1}+{pieces_eaten_group2}={total_pieces_eaten}>>{total_pieces_eaten} pieces."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "uneaten_pizza_pieces",
+      "question_inputs": [],
+      "solution_line_template": "There are {total_pizza_pieces} - {total_pieces_eaten} = <<{total_pizza_pieces}-{total_pieces_eaten}={uneaten_pizza_pieces}>>{uneaten_pizza_pieces} pizza pieces uneaten."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In total, there are 4 x 4 = <<4*4=16>>16 pizza pieces.",
+    "L2": "Bill and Dale eat 2 x 4 x 50% = <<2*4*50*0.01=4>>4 pieces.",
+    "L3": "Ann and Cate eat 2 x 4 x 75% = <<2*4*75*0.01=6>>6 pieces.",
+    "L4": "The four of them eat 4 + 2 = <<4+2=6>>6 pieces.",
+    "L5": "There are 16 - 6 = <<16-6=10>>10 pizza pieces uneaten.",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'num_people_group1' (value: 2) was used instead of 'pieces_eaten_group2' (value: 6.0).",
+  "repro_seed": -828436798496520877,
+  "model_name": "google_gemini-2.5-flash"
+}

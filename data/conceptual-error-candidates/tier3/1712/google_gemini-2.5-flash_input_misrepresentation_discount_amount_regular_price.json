@@ -1,0 +1,93 @@
+{
+  "index": 1712,
+  "original_solution_mapping": {
+    "FA": "#### 240",
+    "L1": "Marlene wants to buy 12/2 = <<12/2=6>>6 shirts.",
+    "L2": "The discount price of the shirt is $50 x 20/100 = $<<50*20/100=10>>10.",
+    "L3": "So, the shirt will only costs $50 - $10 = $<<50-10=40>>40 each.",
+    "L4": "Thus, Marlene will pay $40 x 6 = $<<40*6=240>>240 for the 6 shirts."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1712.\n    Returns: the total amount Marlene will pay for the shirts.\n    \"\"\"\n    # L1\n    dozen = 12 # WK\n    half_divisor = 2 # half a dozen of shirts\n    num_shirts = dozen / half_divisor\n\n    # L2\n    regular_price = 50 # The regular price of a shirt is $50\n    discount_percentage_numerator = 20 # 20% discount\n    percentage_denominator = 100 # WK\n    discount_amount = regular_price * discount_percentage_numerator / percentage_denominator\n\n    # L3\n    price_per_shirt = regular_price - discount_amount\n\n    # L4\n    total_cost = price_per_shirt * num_shirts\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "discount_amount",
+    "operand_to_replace": "percentage_denominator",
+    "replacement_variable": "regular_price"
+  },
+  "correct_trace": {
+    "dozen": 12,
+    "half_divisor": 2,
+    "num_shirts": 6.0,
+    "regular_price": 50,
+    "discount_percentage_numerator": 20,
+    "percentage_denominator": 100,
+    "discount_amount": 10.0,
+    "price_per_shirt": 40.0,
+    "total_cost": 240.0,
+    "answer": 240.0
+  },
+  "flawed_trace": {
+    "dozen": 12,
+    "half_divisor": 2,
+    "num_shirts": 6.0,
+    "regular_price": 50,
+    "discount_percentage_numerator": 20,
+    "percentage_denominator": 100,
+    "discount_amount": 20.0,
+    "price_per_shirt": 30.0,
+    "total_cost": 180.0,
+    "answer": 180.0
+  },
+  "correct_value": 10.0,
+  "flawed_value": 20.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "dozen"
+      ],
+      "line_number": "L1",
+      "output_variable": "num_shirts",
+      "question_inputs": [
+        "half_divisor"
+      ],
+      "solution_line_template": "Marlene wants to buy {dozen}/{half_divisor} = <<{dozen}/{half_divisor}={num_shirts}>>{num_shirts} shirts."
+    },
+    {
+      "WK_inputs": [
+        "percentage_denominator"
+      ],
+      "line_number": "L2",
+      "output_variable": "discount_amount",
+      "question_inputs": [
+        "regular_price",
+        "discount_percentage_numerator"
+      ],
+      "solution_line_template": "The discount price of the shirt is ${regular_price} x {discount_percentage_numerator}/{percentage_denominator} = $<<{regular_price}*{discount_percentage_numerator}/{percentage_denominator}={discount_amount}>>{discount_amount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "price_per_shirt",
+      "question_inputs": [],
+      "solution_line_template": "So, the shirt will only costs ${regular_price} - ${discount_amount} = $<<{regular_price}-{discount_amount}={price_per_shirt}>>{price_per_shirt} each."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cost",
+      "question_inputs": [],
+      "solution_line_template": "Thus, Marlene will pay ${price_per_shirt} x {num_shirts} = $<<{price_per_shirt}*{num_shirts}={total_cost}>>{total_cost} for the {num_shirts} shirts."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Marlene wants to buy 12/2 = <<12/2=6>>6 shirts.",
+    "L2": "The discount price of the shirt is $50 x 20/50 = $<<50*20/50=20>>20.",
+    "L3": "So, the shirt will only costs $50 - $20 = $<<50-20=30>>30 each.",
+    "L4": "Thus, Marlene will pay $30 x 6 = $<<30*6=180>>180 for the 6 shirts.",
+    "FA": "#### 180"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'regular_price' (50) was used instead of 'percentage_denominator' (100).",
+  "repro_seed": -347277949752545822,
+  "model_name": "google_gemini-2.5-flash"
+}

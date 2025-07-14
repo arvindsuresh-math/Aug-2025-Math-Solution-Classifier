@@ -1,0 +1,89 @@
+{
+  "index": 1820,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "There are 50 - 5 = <<50-5=45>>45 chocolates in three boxes.",
+    "L2": "So, each box is filled with 45/3 = <<45/3=15>>15 chocolates.",
+    "L3": "5 + 25 = <<5+25=30>>30 chocolates are needed to be placed in boxes.",
+    "L4": "Hence, they needed 30/15 = <<30/15=2>>2 boxes for the 30 chocolates."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1820.\n    Returns: the number of additional boxes needed.\n    \"\"\"\n    # L1\n    total_chocolates = 50 # Nida has 50 chocolates\n    chocolates_not_in_box = 5 # 5 pieces are not in a box\n    chocolates_in_boxes = total_chocolates - chocolates_not_in_box\n\n    # L2\n    initial_filled_boxes = 3 # 3 filled boxes\n    chocolates_per_box = chocolates_in_boxes / initial_filled_boxes\n\n    # L3\n    chocolates_from_friend = 25 # Her friend brought 25 pieces of chocolates\n    chocolates_to_box = chocolates_not_in_box + chocolates_from_friend\n\n    # L4\n    boxes_needed = chocolates_to_box / chocolates_per_box\n\n    # FA\n    answer = boxes_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "chocolates_per_box",
+    "operand_to_replace": "initial_filled_boxes",
+    "replacement_variable": "chocolates_in_boxes"
+  },
+  "correct_trace": {
+    "total_chocolates": 50,
+    "chocolates_not_in_box": 5,
+    "chocolates_in_boxes": 45,
+    "initial_filled_boxes": 3,
+    "chocolates_per_box": 15.0,
+    "chocolates_from_friend": 25,
+    "chocolates_to_box": 30,
+    "boxes_needed": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "total_chocolates": 50,
+    "chocolates_not_in_box": 5,
+    "chocolates_in_boxes": 45,
+    "initial_filled_boxes": 3,
+    "chocolates_per_box": 1.0,
+    "chocolates_from_friend": 25,
+    "chocolates_to_box": 30,
+    "boxes_needed": 30.0,
+    "answer": 30.0
+  },
+  "correct_value": 15.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "chocolates_in_boxes",
+      "question_inputs": [
+        "total_chocolates",
+        "chocolates_not_in_box"
+      ],
+      "solution_line_template": "There are {total_chocolates} - {chocolates_not_in_box} = <<{total_chocolates}-{chocolates_not_in_box}={chocolates_in_boxes}>>{chocolates_in_boxes} chocolates in three boxes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "chocolates_per_box",
+      "question_inputs": [
+        "initial_filled_boxes"
+      ],
+      "solution_line_template": "So, each box is filled with {chocolates_in_boxes}/{initial_filled_boxes} = <<{chocolates_in_boxes}/{initial_filled_boxes}={chocolates_per_box}>>{chocolates_per_box} chocolates."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "chocolates_to_box",
+      "question_inputs": [
+        "chocolates_from_friend"
+      ],
+      "solution_line_template": "{chocolates_not_in_box} + {chocolates_from_friend} = <<{chocolates_not_in_box}+{chocolates_from_friend}={chocolates_to_box}>>{chocolates_to_box} chocolates are needed to be placed in boxes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "boxes_needed",
+      "question_inputs": [],
+      "solution_line_template": "Hence, they needed {chocolates_to_box}/{chocolates_per_box} = <<{chocolates_to_box}/{chocolates_per_box}={boxes_needed}>>{boxes_needed} boxes for the {chocolates_to_box} chocolates."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 50 - 5 = <<50-5=45>>45 chocolates in three boxes.",
+    "L2": "So, each box is filled with 45/45 = <<45/45=1>>1 chocolates.",
+    "L3": "5 + 25 = <<5+25=30>>30 chocolates are needed to be placed in boxes.",
+    "L4": "Hence, they needed 30/1 = <<30/1=30>>30 boxes for the 30 chocolates.",
+    "FA": "#### 30"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'chocolates_in_boxes' (45) was used instead of 'initial_filled_boxes' (3).",
+  "repro_seed": 7094152619153323787,
+  "model_name": "google_gemini-2.5-flash"
+}

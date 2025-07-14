@@ -1,0 +1,86 @@
+{
+  "index": 1600,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "First find the total number of minnows by dividing the number of red minnows by the percentage of minnows that are red: 20 minnows / 40% = 50 minnows",
+    "L2": "Then subtract the percentages of red- and green-bellied minnows to find the percentage of white-bellied minnows: 100% - 40% - 30% = 30%",
+    "L3": "Then multiply the total number of minnows by the percentage that have white bellies: 30% * 50 minnows = <<30*.01*50=15>>15 minnows"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1600.\n    Returns: the number of minnows with white bellies.\n    \"\"\"\n    # L1\n    red_minnows_count = 20 # 20 minnows have red bellies\n    red_belly_percentage_value = 40 # 40% of the minnows have red bellies\n    percent_divisor = 100 # WK\n    total_minnows = red_minnows_count / (red_belly_percentage_value / percent_divisor)\n\n    # L2\n    total_percentage = 100 # WK\n    green_belly_percentage_value = 30 # 30% have green bellies\n    white_belly_percentage_value = total_percentage - red_belly_percentage_value - green_belly_percentage_value\n\n    # L3\n    percent_factor = 0.01 # WK\n    white_belly_minnows_count = white_belly_percentage_value * percent_factor * total_minnows\n\n    # FA\n    answer = white_belly_minnows_count\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "white_belly_percentage_value",
+    "operand_to_replace": "red_belly_percentage_value",
+    "replacement_variable": "red_minnows_count"
+  },
+  "correct_trace": {
+    "red_minnows_count": 20,
+    "red_belly_percentage_value": 40,
+    "percent_divisor": 100,
+    "total_minnows": 50.0,
+    "total_percentage": 100,
+    "green_belly_percentage_value": 30,
+    "white_belly_percentage_value": 30,
+    "percent_factor": 0.01,
+    "white_belly_minnows_count": 15.0,
+    "answer": 15.0
+  },
+  "flawed_trace": {
+    "red_minnows_count": 20,
+    "red_belly_percentage_value": 40,
+    "percent_divisor": 100,
+    "total_minnows": 50.0,
+    "total_percentage": 100,
+    "green_belly_percentage_value": 30,
+    "white_belly_percentage_value": 50,
+    "percent_factor": 0.01,
+    "white_belly_minnows_count": 25.0,
+    "answer": 25.0
+  },
+  "correct_value": 30,
+  "flawed_value": 50,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_divisor"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_minnows",
+      "question_inputs": [
+        "red_minnows_count",
+        "red_belly_percentage_value"
+      ],
+      "solution_line_template": "First find the total number of minnows by dividing the number of red minnows by the percentage of minnows that are red: {red_minnows_count} minnows / {red_belly_percentage_value}% = {total_minnows} minnows"
+    },
+    {
+      "WK_inputs": [
+        "total_percentage"
+      ],
+      "line_number": "L2",
+      "output_variable": "white_belly_percentage_value",
+      "question_inputs": [
+        "green_belly_percentage_value"
+      ],
+      "solution_line_template": "Then subtract the percentages of red- and green-bellied minnows to find the percentage of white-bellied minnows: {total_percentage}% - {red_belly_percentage_value}% - {green_belly_percentage_value}% = {white_belly_percentage_value}%"
+    },
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L3",
+      "output_variable": "white_belly_minnows_count",
+      "question_inputs": [],
+      "solution_line_template": "Then multiply the total number of minnows by the percentage that have white bellies: {white_belly_percentage_value}% * {total_minnows} minnows = <<{white_belly_percentage_value}*{percent_factor}*{total_minnows}={white_belly_minnows_count}>>{white_belly_minnows_count} minnows"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total number of minnows by dividing the number of red minnows by the percentage of minnows that are red: 20 minnows / 40% = 50 minnows",
+    "L2": "Then subtract the percentages of red- and green-bellied minnows to find the percentage of white-bellied minnows: 100% - 20% - 30% = 50%",
+    "L3": "Then multiply the total number of minnows by the percentage that have white bellies: 50% * 50 minnows = <<50*0.01*50=25>>25 minnows",
+    "FA": "#### 25"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'red_minnows_count' (20) was used instead of 'red_belly_percentage_value' (40).",
+  "repro_seed": 118487021318852322,
+  "model_name": "google_gemini-2.5-flash"
+}

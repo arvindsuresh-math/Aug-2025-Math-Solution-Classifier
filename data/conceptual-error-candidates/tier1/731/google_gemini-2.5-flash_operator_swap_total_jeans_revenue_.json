@@ -1,0 +1,89 @@
+{
+  "index": 731,
+  "original_solution_mapping": {
+    "FA": "#### 400",
+    "L1": "Twenty shirts amount to $10 x 20 = $<<10*20=200>>200.",
+    "L2": "The cost of each pair of jeans is $10 x 2 = $<<10*2=20>>20.",
+    "L3": "So 10 pairs of jeans amount to $20 x 10 = $<<20*10=200>>200.",
+    "L4": "Therefore, the store will earn $200 + $200 = $<<200+200=400>>400 if all shirts and jeans are sold."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 731.\n    Returns: the total earnings of the clothing store if all shirts and jeans are sold.\n    \"\"\"\n    # L1\n    shirt_cost = 10 # A shirt costs $10 each\n    num_shirts = 20 # sells 20 shirts\n    total_shirt_revenue = shirt_cost * num_shirts\n\n    # L2\n    jeans_cost_multiplier = 2 # a pair of jeans costs twice as much\n    jeans_cost_per_pair = shirt_cost * jeans_cost_multiplier\n\n    # L3\n    num_jeans_pairs = 10 # 10 pairs of jeans\n    total_jeans_revenue = jeans_cost_per_pair * num_jeans_pairs\n\n    # L4\n    total_revenue = total_shirt_revenue + total_jeans_revenue\n\n    # FA\n    answer = total_revenue\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_jeans_revenue",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x1451a9dd0>"
+  },
+  "correct_trace": {
+    "shirt_cost": 10,
+    "num_shirts": 20,
+    "total_shirt_revenue": 200,
+    "jeans_cost_multiplier": 2,
+    "jeans_cost_per_pair": 20,
+    "num_jeans_pairs": 10,
+    "total_jeans_revenue": 200,
+    "total_revenue": 400,
+    "answer": 400
+  },
+  "flawed_trace": {
+    "shirt_cost": 10,
+    "num_shirts": 20,
+    "total_shirt_revenue": 200,
+    "jeans_cost_multiplier": 2,
+    "jeans_cost_per_pair": 20,
+    "num_jeans_pairs": 10,
+    "total_jeans_revenue": 2.0,
+    "total_revenue": 202.0,
+    "answer": 202.0
+  },
+  "correct_value": 200,
+  "flawed_value": 2.0,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "shirt_cost",
+        "num_shirts"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_shirt_revenue",
+      "solution_line_template": "Twenty shirts amount to ${shirt_cost} x {num_shirts} = $<<{shirt_cost}*{num_shirts}={total_shirt_revenue}>>{total_shirt_revenue}."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "jeans_cost_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "jeans_cost_per_pair",
+      "solution_line_template": "The cost of each pair of jeans is ${shirt_cost} x {jeans_cost_multiplier} = $<<{shirt_cost}*{jeans_cost_multiplier}={jeans_cost_per_pair}>>{jeans_cost_per_pair}."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "num_jeans_pairs"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_jeans_revenue",
+      "solution_line_template": "So {num_jeans_pairs} pairs of jeans amount to ${jeans_cost_per_pair} x {num_jeans_pairs} = $<<{jeans_cost_per_pair}*{num_jeans_pairs}={total_jeans_revenue}>>{total_jeans_revenue}."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_revenue",
+      "solution_line_template": "Therefore, the store will earn ${total_shirt_revenue} + ${total_jeans_revenue} = $<<{total_shirt_revenue}+{total_jeans_revenue}={total_revenue}>>{total_revenue} if all shirts and jeans are sold."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Twenty shirts amount to $10 x 20 = $<<10*20=200>>200.",
+    "L2": "The cost of each pair of jeans is $10 x 2 = $<<10*2=20>>20.",
+    "L3": "So 10 pairs of jeans amount to $20 x 10 = $<<20*10=2>>2.",
+    "L4": "Therefore, the store will earn $200 + $2 = $<<200+2=202>>202 if all shirts and jeans are sold.",
+    "FA": "#### 202"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 9081756104021253738,
+  "model_name": "google_gemini-2.5-flash"
+}

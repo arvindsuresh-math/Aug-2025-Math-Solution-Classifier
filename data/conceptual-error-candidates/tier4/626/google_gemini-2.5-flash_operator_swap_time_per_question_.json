@@ -1,0 +1,78 @@
+{
+  "index": 626,
+  "original_solution_mapping": {
+    "FA": "#### 0",
+    "L1": "She takes .75 minutes to answer a question because 12 / 16 = <<12/16=.75>>.75",
+    "L2": "It will take her 60 minutes to take the entire exam because 80 x .75 = <<80*.75=60>>60",
+    "L3": "She has 0 minutes left when she is done because 60 - 60 = <<60-60=0>>0"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 626.\n    Returns: the number of minutes left when she finishes the exam.\n    \"\"\"\n    # L1\n    minutes_used = 12 # She has used 12 minutes of her time\n    questions_answered = 16 # She has answered 16 out of 80 questions\n    time_per_question = minutes_used / questions_answered\n\n    # L2\n    total_questions = 80 # 80 questions\n    total_time_needed = total_questions * time_per_question\n\n    # L3\n    allotted_time_in_minutes = 60 # Jessica has one hour to take an exam\n    minutes_left = allotted_time_in_minutes - total_time_needed\n\n    # FA\n    answer = minutes_left\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "time_per_question",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x150748950>"
+  },
+  "correct_trace": {
+    "minutes_used": 12,
+    "questions_answered": 16,
+    "time_per_question": 0.75,
+    "total_questions": 80,
+    "total_time_needed": 60.0,
+    "allotted_time_in_minutes": 60,
+    "minutes_left": 0.0,
+    "answer": 0.0
+  },
+  "flawed_trace": {
+    "minutes_used": 12,
+    "questions_answered": 16,
+    "time_per_question": 192,
+    "total_questions": 80,
+    "total_time_needed": 15360,
+    "allotted_time_in_minutes": 60,
+    "minutes_left": -15300,
+    "answer": -15300
+  },
+  "correct_value": 0.75,
+  "flawed_value": 192,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "time_per_question",
+      "question_inputs": [
+        "minutes_used",
+        "questions_answered"
+      ],
+      "solution_line_template": "She takes {time_per_question} minutes to answer a question because {minutes_used} / {questions_answered} = <<{minutes_used}/{questions_answered}={time_per_question}>>{time_per_question}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_time_needed",
+      "question_inputs": [
+        "total_questions"
+      ],
+      "solution_line_template": "It will take her {total_time_needed} minutes to take the entire exam because {total_questions} x {time_per_question} = <<{total_questions}*{time_per_question}={total_time_needed}>>{total_time_needed}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "minutes_left",
+      "question_inputs": [
+        "allotted_time_in_minutes"
+      ],
+      "solution_line_template": "She has {minutes_left} minutes left when she is done because {allotted_time_in_minutes} - {total_time_needed} = <<{allotted_time_in_minutes}-{total_time_needed}={minutes_left}>>{minutes_left}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She takes 192 minutes to answer a question because 12 / 16 = <<12/16=192>>192",
+    "L2": "It will take her 15360 minutes to take the entire exam because 80 x 192 = <<80*192=15360>>15360",
+    "L3": "She has -15300 minutes left when she is done because 60 - 15360 = <<60-15360=-15300>>-15300",
+    "FA": "#### -15300"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 5821338474285249965,
+  "model_name": "google_gemini-2.5-flash"
+}

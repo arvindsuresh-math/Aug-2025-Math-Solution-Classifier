@@ -1,0 +1,72 @@
+{
+  "index": 1848,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "On Tuesday they sold 12*3=<<12*3=36>>36 bouquets",
+    "L2": "On Wednesday they only sold 36/3=<<36/3=12>>12 bouquets",
+    "L3": "In total they sold 12+36+12=<<12+36+12=60>>60 bouquets"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1848.\n    Returns: the total number of bouquets sold during the three day sale.\n    \"\"\"\n    # L1\n    monday_sales = 12 # On Monday, they sold 12 bouquets\n    tuesday_multiplier = 3 # three times that many bouquets\n    tuesday_sales = monday_sales * tuesday_multiplier\n\n    # L2\n    wednesday_divisor = 3 # a third of what they did the day before\n    wednesday_sales = tuesday_sales / wednesday_divisor\n\n    # L3\n    total_sales = monday_sales + tuesday_sales + wednesday_sales\n\n    # FA\n    answer = total_sales\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_sales",
+    "replacement_variable": "tuesday_sales"
+  },
+  "correct_trace": {
+    "monday_sales": 12,
+    "tuesday_multiplier": 3,
+    "tuesday_sales": 36,
+    "wednesday_divisor": 3,
+    "wednesday_sales": 12.0,
+    "total_sales": 60.0,
+    "answer": 60.0
+  },
+  "flawed_trace": {
+    "monday_sales": 12,
+    "tuesday_multiplier": 3,
+    "tuesday_sales": 36,
+    "wednesday_divisor": 3,
+    "wednesday_sales": 12.0,
+    "total_sales": 60.0,
+    "answer": 36
+  },
+  "correct_value": 60.0,
+  "flawed_value": 36,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "tuesday_sales",
+      "question_inputs": [
+        "monday_sales",
+        "tuesday_multiplier"
+      ],
+      "solution_line_template": "On Tuesday they sold {monday_sales}*{tuesday_multiplier}=<<{monday_sales}*{tuesday_multiplier}={tuesday_sales}>>{tuesday_sales} bouquets"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "wednesday_sales",
+      "question_inputs": [
+        "wednesday_divisor"
+      ],
+      "solution_line_template": "On Wednesday they only sold {tuesday_sales}/{wednesday_divisor}=<<{tuesday_sales}/{wednesday_divisor}={wednesday_sales}>>{wednesday_sales} bouquets"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_sales",
+      "question_inputs": [],
+      "solution_line_template": "In total they sold {monday_sales}+{tuesday_sales}+{wednesday_sales}=<<{monday_sales}+{tuesday_sales}+{wednesday_sales}={total_sales}>>{total_sales} bouquets"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Tuesday they sold 12*3=<<12*3=36>>36 bouquets",
+    "FA": "#### 36"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'tuesday_sales' (value: 36) was reported instead of 'total_sales' (value: 60.0).",
+  "repro_seed": -6328329764327111942,
+  "model_name": "google_gemini-2.5-flash"
+}

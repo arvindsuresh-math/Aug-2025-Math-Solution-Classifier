@@ -1,0 +1,93 @@
+{
+  "index": 2874,
+  "original_solution_mapping": {
+    "FA": "#### 96",
+    "L1": "First find how many text messages he sent on Tuesday: 220 messages / 2 = <<220/2=110>>110 messages",
+    "L2": "Then find how many text messages he sent Wednesday-Friday: 50 messages/day * 3 days = <<50*3=150>>150 messages",
+    "L3": "Then add up all the messages he sent to find the total: 110 messages + 150 messages + 220 messages = <<110+150+220=480>>480 messages",
+    "L4": "Then divide that number by the number of days to find the average number of messages he sent per day: 480 messages / 5 days = <<480/5=96>>96 messages/day"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2874.\n    Returns: the average number of text messages sent per day.\n    \"\"\"\n    # L1\n    messages_monday = 220 # 220 text messages on Monday\n    tuesday_divisor = 2 # half as many text messages on Tuesday\n    messages_tuesday = messages_monday / tuesday_divisor\n\n    # L2\n    messages_wed_fri_per_day = 50 # 50 text messages each day Wednesday through Friday\n    num_days_wed_fri = 3 # WK\n    messages_wed_fri_total = messages_wed_fri_per_day * num_days_wed_fri\n\n    # L3\n    total_messages = messages_tuesday + messages_wed_fri_total + messages_monday\n\n    # L4\n    total_days = 5 # WK\n    average_messages_per_day = total_messages / total_days\n\n    # FA\n    answer = average_messages_per_day\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_messages",
+    "operand_to_replace": "messages_tuesday",
+    "replacement_variable": "messages_wed_fri_per_day"
+  },
+  "correct_trace": {
+    "messages_monday": 220,
+    "tuesday_divisor": 2,
+    "messages_tuesday": 110.0,
+    "messages_wed_fri_per_day": 50,
+    "num_days_wed_fri": 3,
+    "messages_wed_fri_total": 150,
+    "total_messages": 480.0,
+    "total_days": 5,
+    "average_messages_per_day": 96.0,
+    "answer": 96.0
+  },
+  "flawed_trace": {
+    "messages_monday": 220,
+    "tuesday_divisor": 2,
+    "messages_tuesday": 110.0,
+    "messages_wed_fri_per_day": 50,
+    "num_days_wed_fri": 3,
+    "messages_wed_fri_total": 150,
+    "total_messages": 420,
+    "total_days": 5,
+    "average_messages_per_day": 84.0,
+    "answer": 84.0
+  },
+  "correct_value": 480.0,
+  "flawed_value": 420,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "messages_tuesday",
+      "question_inputs": [
+        "messages_monday",
+        "tuesday_divisor"
+      ],
+      "solution_line_template": "First find how many text messages he sent on Tuesday: {messages_monday} messages / {tuesday_divisor} = <<{messages_monday}/{tuesday_divisor}={messages_tuesday}>>{messages_tuesday} messages"
+    },
+    {
+      "WK_inputs": [
+        "num_days_wed_fri"
+      ],
+      "line_number": "L2",
+      "output_variable": "messages_wed_fri_total",
+      "question_inputs": [
+        "messages_wed_fri_per_day"
+      ],
+      "solution_line_template": "Then find how many text messages he sent Wednesday-Friday: {messages_wed_fri_per_day} messages/day * {num_days_wed_fri} days = <<{messages_wed_fri_per_day}*{num_days_wed_fri}={messages_wed_fri_total}>>{messages_wed_fri_total} messages"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_messages",
+      "question_inputs": [],
+      "solution_line_template": "Then add up all the messages he sent to find the total: {messages_tuesday} messages + {messages_wed_fri_total} messages + {messages_monday} messages = <<{messages_tuesday}+{messages_wed_fri_total}+{messages_monday}={total_messages}>>{total_messages} messages"
+    },
+    {
+      "WK_inputs": [
+        "total_days"
+      ],
+      "line_number": "L4",
+      "output_variable": "average_messages_per_day",
+      "question_inputs": [],
+      "solution_line_template": "Then divide that number by the number of days to find the average number of messages he sent per day: {total_messages} messages / {total_days} days = <<{total_messages}/{total_days}={average_messages_per_day}>>{average_messages_per_day} messages/day"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how many text messages he sent on Tuesday: 220 messages / 2 = <<220/2=110>>110 messages",
+    "L2": "Then find how many text messages he sent Wednesday-Friday: 50 messages/day * 3 days = <<50*3=150>>150 messages",
+    "L3": "Then add up all the messages he sent to find the total: 50 messages + 150 messages + 220 messages = <<50+150+220=420>>420 messages",
+    "L4": "Then divide that number by the number of days to find the average number of messages he sent per day: 420 messages / 5 days = <<420/5=84>>84 messages/day",
+    "FA": "#### 84"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'messages_wed_fri_per_day' (value: 50) was used instead of 'messages_tuesday' (value: 110.0).",
+  "repro_seed": -1367845767640133279,
+  "model_name": "google_gemini-2.5-flash"
+}

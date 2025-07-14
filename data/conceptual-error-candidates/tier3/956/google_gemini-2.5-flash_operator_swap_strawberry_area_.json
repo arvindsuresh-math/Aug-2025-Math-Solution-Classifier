@@ -1,0 +1,63 @@
+{
+  "index": 956,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "The number of square feet used for fruit is 64 / 2 = <<64/2=32>>32 square feet",
+    "L2": "The number of square feet used for strawberries is 32 / 4 = <<32/4=8>>8 square feet"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 956.\n    Returns: the number of square feet of the garden used for strawberries.\n    \"\"\"\n    # L1\n    garden_size = 64 # Joel\u2019s garden is 64 square feet large\n    fruit_division_factor = 2 # half of the garden for fruits\n    fruit_section_size = garden_size / fruit_division_factor\n\n    # L2\n    strawberry_division_factor = 4 # a quarter of the fruit section\n    strawberry_area = fruit_section_size / strawberry_division_factor\n\n    # FA\n    answer = strawberry_area\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "strawberry_area",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x1478f3650>"
+  },
+  "correct_trace": {
+    "garden_size": 64,
+    "fruit_division_factor": 2,
+    "fruit_section_size": 32.0,
+    "strawberry_division_factor": 4,
+    "strawberry_area": 8.0,
+    "answer": 8.0
+  },
+  "flawed_trace": {
+    "garden_size": 64,
+    "fruit_division_factor": 2,
+    "fruit_section_size": 32.0,
+    "strawberry_division_factor": 4,
+    "strawberry_area": 128.0,
+    "answer": 128.0
+  },
+  "correct_value": 8.0,
+  "flawed_value": 128.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "fruit_section_size",
+      "question_inputs": [
+        "garden_size",
+        "fruit_division_factor"
+      ],
+      "solution_line_template": "The number of square feet used for fruit is {garden_size} / {fruit_division_factor} = <<{garden_size}/{fruit_division_factor}={fruit_section_size}>>{fruit_section_size} square feet"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "strawberry_area",
+      "question_inputs": [
+        "strawberry_division_factor"
+      ],
+      "solution_line_template": "The number of square feet used for strawberries is {fruit_section_size} / {strawberry_division_factor} = <<{fruit_section_size}/{strawberry_division_factor}={strawberry_area}>>{strawberry_area} square feet"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The number of square feet used for fruit is 64 / 2 = <<64/2=32>>32 square feet",
+    "L2": "The number of square feet used for strawberries is 32 / 4 = <<32/4=128>>128 square feet",
+    "FA": "#### 128"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 2181558170253048786,
+  "model_name": "google_gemini-2.5-flash"
+}

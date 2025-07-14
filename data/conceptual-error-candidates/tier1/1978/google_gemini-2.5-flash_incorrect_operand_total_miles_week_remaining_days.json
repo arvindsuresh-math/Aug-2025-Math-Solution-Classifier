@@ -1,0 +1,74 @@
+{
+  "index": 1978,
+  "original_solution_mapping": {
+    "FA": "#### 110",
+    "L1": "On Monday the total number of miles Alice walks to and from school is 10 + 12 = <<10+12=22>>22 miles.",
+    "L2": "For the other 4 days, from Tuesday to Friday, she walks an additional 4 * 22 = <<4*22=88>>88 miles",
+    "L3": "The total number of miles she will have walked by Friday 22 + 88 = <<22+88=110>>110 miles"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1978.\n    Returns: the total number of miles Alice will have walked that week by Friday.\n    \"\"\"\n    # L1\n    miles_to_school = 10 # walks 10 miles\n    miles_from_school = 12 # walks 12 miles through a forest\n    daily_miles_monday = miles_to_school + miles_from_school\n\n    # L2\n    remaining_days = 4 # other 4 days, from Tuesday to Friday\n    miles_other_days = remaining_days * daily_miles_monday\n\n    # L3\n    total_miles_week = daily_miles_monday + miles_other_days\n\n    # FA\n    answer = total_miles_week\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_miles_week",
+    "operand_to_replace": "daily_miles_monday",
+    "replacement_variable": "remaining_days"
+  },
+  "correct_trace": {
+    "miles_to_school": 10,
+    "miles_from_school": 12,
+    "daily_miles_monday": 22,
+    "remaining_days": 4,
+    "miles_other_days": 88,
+    "total_miles_week": 110,
+    "answer": 110
+  },
+  "flawed_trace": {
+    "miles_to_school": 10,
+    "miles_from_school": 12,
+    "daily_miles_monday": 22,
+    "remaining_days": 4,
+    "miles_other_days": 88,
+    "total_miles_week": 92,
+    "answer": 92
+  },
+  "correct_value": 110,
+  "flawed_value": 92,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "miles_to_school",
+        "miles_from_school"
+      ],
+      "WK_inputs": [],
+      "output_variable": "daily_miles_monday",
+      "solution_line_template": "On Monday the total number of miles Alice walks to and from school is {miles_to_school} + {miles_from_school} = <<{miles_to_school}+{miles_from_school}={daily_miles_monday}>>{daily_miles_monday} miles."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "remaining_days"
+      ],
+      "WK_inputs": [],
+      "output_variable": "miles_other_days",
+      "solution_line_template": "For the other {remaining_days} days, from Tuesday to Friday, she walks an additional {remaining_days} * {daily_miles_monday} = <<{remaining_days}*{daily_miles_monday}={miles_other_days}>>{miles_other_days} miles"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_miles_week",
+      "solution_line_template": "The total number of miles she will have walked by Friday {daily_miles_monday} + {miles_other_days} = <<{daily_miles_monday}+{miles_other_days}={total_miles_week}>>{total_miles_week} miles"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Monday the total number of miles Alice walks to and from school is 10 + 12 = <<10+12=22>>22 miles.",
+    "L2": "For the other 4 days, from Tuesday to Friday, she walks an additional 4 * 22 = <<4*22=88>>88 miles",
+    "L3": "The total number of miles she will have walked by Friday 4 + 88 = <<4+88=92>>92 miles",
+    "FA": "#### 92"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'remaining_days' (value: 4) was used instead of 'daily_miles_monday' (value: 22).",
+  "repro_seed": -4756549018538175073,
+  "model_name": "google_gemini-2.5-flash"
+}

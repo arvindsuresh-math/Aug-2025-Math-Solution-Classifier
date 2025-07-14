@@ -1,0 +1,93 @@
+{
+  "index": 1181,
+  "original_solution_mapping": {
+    "FA": "#### 660",
+    "L1": "The total number of hours each worker works in the first 2 days is 10+8 = <<10+8=18>>18 hours.",
+    "L2": "Since they completed the job in three days, each was compensated for 18+15 = <<18+15=33>>33 hours of work.",
+    "L3": "Mr Fletcher paid each of the workers $10 per hour of work, meaning for 33 hours, each of the workers received 33*$10 = $<<10*33=330>>330",
+    "L4": "Since they were two workers, the total amount they received all together after each was paid $330 is $330*2 = $<<330*2=660>>660"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1181.\n    Returns: the total amount of money the workers received altogether.\n    \"\"\"\n    # L1\n    hours_day1 = 10 # 10 hours on the first day\n    hours_day2 = 8 # 8 hours on the second day\n    hours_first_two_days = hours_day1 + hours_day2\n\n    # L2\n    hours_day3 = 15 # 15 hours\n    total_hours_per_worker = hours_first_two_days + hours_day3\n\n    # L3\n    pay_per_hour = 10 # $10 per hour of work\n    pay_per_worker = total_hours_per_worker * pay_per_hour\n\n    # L4\n    num_workers = 2 # 2 men\n    total_amount_received = pay_per_worker * num_workers\n\n    # FA\n    answer = total_amount_received\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "hours_first_two_days",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x14542a450>"
+  },
+  "correct_trace": {
+    "hours_day1": 10,
+    "hours_day2": 8,
+    "hours_first_two_days": 18,
+    "hours_day3": 15,
+    "total_hours_per_worker": 33,
+    "pay_per_hour": 10,
+    "pay_per_worker": 330,
+    "num_workers": 2,
+    "total_amount_received": 660,
+    "answer": 660
+  },
+  "flawed_trace": {
+    "hours_day1": 10,
+    "hours_day2": 8,
+    "hours_first_two_days": 80,
+    "hours_day3": 15,
+    "total_hours_per_worker": 95,
+    "pay_per_hour": 10,
+    "pay_per_worker": 950,
+    "num_workers": 2,
+    "total_amount_received": 1900,
+    "answer": 1900
+  },
+  "correct_value": 18,
+  "flawed_value": 80,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "hours_day1",
+        "hours_day2"
+      ],
+      "WK_inputs": [],
+      "output_variable": "hours_first_two_days",
+      "solution_line_template": "The total number of hours each worker works in the first 2 days is {hours_day1}+{hours_day2} = <<{hours_day1}+{hours_day2}={hours_first_two_days}>>{hours_first_two_days} hours."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "hours_day3"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_hours_per_worker",
+      "solution_line_template": "Since they completed the job in three days, each was compensated for {hours_first_two_days}+{hours_day3} = <<{hours_first_two_days}+{hours_day3}={total_hours_per_worker}>>{total_hours_per_worker} hours of work."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "pay_per_hour"
+      ],
+      "WK_inputs": [],
+      "output_variable": "pay_per_worker",
+      "solution_line_template": "Mr Fletcher paid each of the workers ${pay_per_hour} per hour of work, meaning for {total_hours_per_worker} hours, each of the workers received {total_hours_per_worker}*${pay_per_hour} = $<<{pay_per_hour}*{total_hours_per_worker}={pay_per_worker}>>{pay_per_worker}"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "num_workers"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_amount_received",
+      "solution_line_template": "Since they were {num_workers} workers, the total amount they received all together after each was paid ${pay_per_worker} is ${pay_per_worker}*{num_workers} = $<<{pay_per_worker}*{num_workers}={total_amount_received}>>{total_amount_received}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total number of hours each worker works in the first 2 days is 10+8 = <<10+8=80>>80 hours.",
+    "L2": "Since they completed the job in three days, each was compensated for 80+15 = <<80+15=95>>95 hours of work.",
+    "L3": "Mr Fletcher paid each of the workers $10 per hour of work, meaning for 95 hours, each of the workers received 95*$10 = $<<10*95=950>>950",
+    "L4": "Since they were 2 workers, the total amount they received all together after each was paid $950 is $950*2 = $<<950*2=1900>>1900",
+    "FA": "#### 1900"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 1257332489828259434,
+  "model_name": "google_gemini-2.5-flash"
+}

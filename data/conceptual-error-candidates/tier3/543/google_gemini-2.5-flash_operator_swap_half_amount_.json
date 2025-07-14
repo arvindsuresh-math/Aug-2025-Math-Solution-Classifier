@@ -1,0 +1,100 @@
+{
+  "index": 543,
+  "original_solution_mapping": {
+    "FA": "#### 1150",
+    "L1": "The original amount is $50 so half is $50/2 = $<<50/2=25>>25",
+    "L2": "4 students paid half ($25) for a total of 4*$25 = $<<4*25=100>>100",
+    "L3": "There are 25-4 = <<25-4=21>>21 students left",
+    "L4": "21 students paid the full amount ($50) for a total of 21*$50 = $<<21*50=1050>>1050",
+    "L5": "They were able to gather a total of $100+$1050 = $<<100+1050=1150>>1150"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 543.\n    Returns: the total amount of money the class was able to gather.\n    \"\"\"\n    # L1\n    full_amount = 50 # pay $50 each\n    half_divisor = 2 # paid half\n    half_amount = full_amount / half_divisor\n\n    # L2\n    students_paid_half = 4 # 4 students, who paid half\n    total_from_half_payers = students_paid_half * half_amount\n\n    # L3\n    total_students = 25 # 25 students\n    students_paid_full = total_students - students_paid_half\n\n    # L4\n    total_from_full_payers = students_paid_full * full_amount\n\n    # L5\n    total_gathered = total_from_half_payers + total_from_full_payers\n\n    # FA\n    answer = total_gathered\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "half_amount",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x146fd3450>"
+  },
+  "correct_trace": {
+    "full_amount": 50,
+    "half_divisor": 2,
+    "half_amount": 25.0,
+    "students_paid_half": 4,
+    "total_from_half_payers": 100.0,
+    "total_students": 25,
+    "students_paid_full": 21,
+    "total_from_full_payers": 1050,
+    "total_gathered": 1150.0,
+    "answer": 1150.0
+  },
+  "flawed_trace": {
+    "full_amount": 50,
+    "half_divisor": 2,
+    "half_amount": 48,
+    "students_paid_half": 4,
+    "total_from_half_payers": 192,
+    "total_students": 25,
+    "students_paid_full": 21,
+    "total_from_full_payers": 1050,
+    "total_gathered": 1242,
+    "answer": 1242
+  },
+  "correct_value": 25.0,
+  "flawed_value": 48,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "half_amount",
+      "question_inputs": [
+        "full_amount",
+        "half_divisor"
+      ],
+      "solution_line_template": "The original amount is ${full_amount} so half is ${full_amount}/{half_divisor} = $<<{full_amount}/{half_divisor}={half_amount}>>{half_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_from_half_payers",
+      "question_inputs": [
+        "students_paid_half"
+      ],
+      "solution_line_template": "{students_paid_half} students paid half (${half_amount}) for a total of {students_paid_half}*${half_amount} = $<<{students_paid_half}*{half_amount}={total_from_half_payers}>>{total_from_half_payers}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "students_paid_full",
+      "question_inputs": [
+        "total_students"
+      ],
+      "solution_line_template": "There are {total_students}-{students_paid_half} = <<{total_students}-{students_paid_half}={students_paid_full}>>{students_paid_full} students left"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_from_full_payers",
+      "question_inputs": [],
+      "solution_line_template": "{students_paid_full} students paid the full amount (${full_amount}) for a total of {students_paid_full}*${full_amount} = $<<{students_paid_full}*{full_amount}={total_from_full_payers}>>{total_from_full_payers}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_gathered",
+      "question_inputs": [],
+      "solution_line_template": "They were able to gather a total of ${total_from_half_payers}+${total_from_full_payers} = $<<{total_from_half_payers}+{total_from_full_payers}={total_gathered}>>{total_gathered}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The original amount is $50 so half is $50/2 = $<<50/2=48>>48",
+    "L2": "4 students paid half ($48) for a total of 4*$48 = $<<4*48=192>>192",
+    "L3": "There are 25-4 = <<25-4=21>>21 students left",
+    "L4": "21 students paid the full amount ($50) for a total of 21*$50 = $<<21*50=1050>>1050",
+    "L5": "They were able to gather a total of $192+$1050 = $<<192+1050=1242>>1242",
+    "FA": "#### 1242"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": -3905488896426883014,
+  "model_name": "google_gemini-2.5-flash"
+}

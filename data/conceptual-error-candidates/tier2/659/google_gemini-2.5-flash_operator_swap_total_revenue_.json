@@ -1,0 +1,106 @@
+{
+  "index": 659,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "She uses $3.00 of ingredients per 1 bag of granola and she makes 20 bags so she spends 3*20 = $<<3*20=60.00>>60.00 on ingredients",
+    "L2": "She sells 15 bags for $6.00 so she makes 15*6 = $<<15*6=90.00>>90.00",
+    "L3": "She sells her last 5 bags for $4.00 so she makes 5*4 = $<<5*4=20.00>>20.00",
+    "L4": "She made $90.00 and $20.00 for a total of 90+20 = $<<90+20=110.00>>110.00",
+    "L5": "She made $110.00 but spent $60.00 on ingredients so her net profit is 110-60 = $<<110-60=50.00>>50.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 659.\n    Returns: Elizabeth's net profit.\n    \"\"\"\n    # L1\n    cost_per_bag_ingredients = 3.00 # $3.00 worth of ingredients\n    bags_made = 20 # makes 20 bags\n    total_ingredient_cost = cost_per_bag_ingredients * bags_made\n\n    # L2\n    bags_sold_initial = 15 # sold 15 bags\n    price_initial = 6.00 # sells them for $6.00 a bag\n    revenue_initial_sales = bags_sold_initial * price_initial\n\n    # L3\n    bags_sold_discounted = 5 # remaining 5 bags\n    price_discounted = 4.00 # marks the remaining 5 bags down to $4.00\n    revenue_discounted_sales = bags_sold_discounted * price_discounted\n\n    # L4\n    total_revenue = revenue_initial_sales + revenue_discounted_sales\n\n    # L5\n    net_profit = total_revenue - total_ingredient_cost\n\n    # FA\n    answer = net_profit\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_revenue",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x145ddcc90>"
+  },
+  "correct_trace": {
+    "cost_per_bag_ingredients": 3.0,
+    "bags_made": 20,
+    "total_ingredient_cost": 60.0,
+    "bags_sold_initial": 15,
+    "price_initial": 6.0,
+    "revenue_initial_sales": 90.0,
+    "bags_sold_discounted": 5,
+    "price_discounted": 4.0,
+    "revenue_discounted_sales": 20.0,
+    "total_revenue": 110.0,
+    "net_profit": 50.0,
+    "answer": 50.0
+  },
+  "flawed_trace": {
+    "cost_per_bag_ingredients": 3.0,
+    "bags_made": 20,
+    "total_ingredient_cost": 60.0,
+    "bags_sold_initial": 15,
+    "price_initial": 6.0,
+    "revenue_initial_sales": 90.0,
+    "bags_sold_discounted": 5,
+    "price_discounted": 4.0,
+    "revenue_discounted_sales": 20.0,
+    "total_revenue": 1800.0,
+    "net_profit": 1740.0,
+    "answer": 1740.0
+  },
+  "correct_value": 110.0,
+  "flawed_value": 1800.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_ingredient_cost",
+      "question_inputs": [
+        "cost_per_bag_ingredients",
+        "bags_made"
+      ],
+      "solution_line_template": "She uses ${cost_per_bag_ingredients} of ingredients per 1 bag of granola and she makes {bags_made} bags so she spends {cost_per_bag_ingredients}*{bags_made} = $<<{cost_per_bag_ingredients}*{bags_made}={total_ingredient_cost}>>{total_ingredient_cost} on ingredients"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "revenue_initial_sales",
+      "question_inputs": [
+        "bags_sold_initial",
+        "price_initial"
+      ],
+      "solution_line_template": "She sells {bags_sold_initial} bags for ${price_initial} so she makes {bags_sold_initial}*{price_initial} = $<<{bags_sold_initial}*{price_initial}={revenue_initial_sales}>>{revenue_initial_sales}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "revenue_discounted_sales",
+      "question_inputs": [
+        "bags_sold_discounted",
+        "price_discounted"
+      ],
+      "solution_line_template": "She sells her last {bags_sold_discounted} bags for ${price_discounted} so she makes {bags_sold_discounted}*{price_discounted} = $<<{bags_sold_discounted}*{price_discounted}={revenue_discounted_sales}>>{revenue_discounted_sales}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_revenue",
+      "question_inputs": [],
+      "solution_line_template": "She made ${revenue_initial_sales} and ${revenue_discounted_sales} for a total of {revenue_initial_sales}+{revenue_discounted_sales} = $<<{revenue_initial_sales}+{revenue_discounted_sales}={total_revenue}>>{total_revenue}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "net_profit",
+      "question_inputs": [],
+      "solution_line_template": "She made ${total_revenue} but spent ${total_ingredient_cost} on ingredients so her net profit is {total_revenue}-{total_ingredient_cost} = $<<{total_revenue}-{total_ingredient_cost}={net_profit}>>{net_profit}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She uses $3 of ingredients per 1 bag of granola and she makes 20 bags so she spends 3*20 = $<<3*20=60>>60 on ingredients",
+    "L2": "She sells 15 bags for $6 so she makes 15*6 = $<<15*6=90>>90",
+    "L3": "She sells her last 5 bags for $4 so she makes 5*4 = $<<5*4=20>>20",
+    "L4": "She made $90 and $20 for a total of 90+20 = $<<90+20=1800>>1800",
+    "L5": "She made $1800 but spent $60 on ingredients so her net profit is 1800-60 = $<<1800-60=1740>>1740",
+    "FA": "#### 1740"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 931385242857822135,
+  "model_name": "google_gemini-2.5-flash"
+}

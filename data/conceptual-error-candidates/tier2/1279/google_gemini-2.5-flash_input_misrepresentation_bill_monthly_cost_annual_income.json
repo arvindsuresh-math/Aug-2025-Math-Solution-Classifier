@@ -1,0 +1,107 @@
+{
+  "index": 1279,
+  "original_solution_mapping": {
+    "FA": "#### 3000",
+    "L1": "First find how much money Bill makes every week by multiplying his hourly rate by the number of hours he works each week: $25/hour * 30 hours/week = $<<25*30=750>>750/week",
+    "L2": "Then multiply that number by the number of weeks per month to find his monthly earnings: $750/week * 4 weeks/month = $<<750*4=3000>>3,000/month",
+    "L3": "Then multiply his monthly earnings by the number of months in a year to find his annual income: $3,000/month * 12 months/year = $<<3000*12=36000>>36,000/year.",
+    "L4": "This income means Bill gets a 50% monthly healthcare subsidy from the government. Multiply the cost of the premium by 50% to find the monthly cost Bill pays: $500/month * .5 = $<<500*.5=250>>250/month",
+    "L5": "Finally, multiply Bill's monthly cost by the number of months in a year to find his annual cost: $250/month * 12 months/year = $<<250*12=3000>>3,000/year"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1279.\n    Returns: the annual cost Bill will spend for health insurance.\n    \"\"\"\n    # L1\n    hourly_rate = 25 # Bill earns $25/hour\n    hours_per_week = 30 # works 30 hours per week\n    weekly_earnings = hourly_rate * hours_per_week\n\n    # L2\n    weeks_per_month = 4 # four weeks per month\n    monthly_earnings = weekly_earnings * weeks_per_month\n\n    # L3\n    months_per_year = 12 # WK\n    annual_income = monthly_earnings * months_per_year\n\n    # L4\n    normal_monthly_price = 500 # normal monthly price of the plan he wants is $500\n    subsidy_percent_decimal = 0.5 # 50% if he makes between $10,001 and $40,000\n    bill_monthly_cost = normal_monthly_price * subsidy_percent_decimal\n\n    # L5\n    bill_annual_cost = bill_monthly_cost * months_per_year\n\n    # FA\n    answer = bill_annual_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "bill_monthly_cost",
+    "operand_to_replace": "subsidy_percent_decimal",
+    "replacement_variable": "annual_income"
+  },
+  "correct_trace": {
+    "hourly_rate": 25,
+    "hours_per_week": 30,
+    "weekly_earnings": 750,
+    "weeks_per_month": 4,
+    "monthly_earnings": 3000,
+    "months_per_year": 12,
+    "annual_income": 36000,
+    "normal_monthly_price": 500,
+    "subsidy_percent_decimal": 0.5,
+    "bill_monthly_cost": 250.0,
+    "bill_annual_cost": 3000.0,
+    "answer": 3000.0
+  },
+  "flawed_trace": {
+    "hourly_rate": 25,
+    "hours_per_week": 30,
+    "weekly_earnings": 750,
+    "weeks_per_month": 4,
+    "monthly_earnings": 3000,
+    "months_per_year": 12,
+    "annual_income": 36000,
+    "normal_monthly_price": 500,
+    "subsidy_percent_decimal": 0.5,
+    "bill_monthly_cost": 18000000,
+    "bill_annual_cost": 216000000,
+    "answer": 216000000
+  },
+  "correct_value": 250.0,
+  "flawed_value": 18000000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "weekly_earnings",
+      "question_inputs": [
+        "hourly_rate",
+        "hours_per_week"
+      ],
+      "solution_line_template": "First find how much money Bill makes every week by multiplying his hourly rate by the number of hours he works each week: ${hourly_rate}/hour * {hours_per_week} hours/week = $<<{hourly_rate}*{hours_per_week}={weekly_earnings}>>{weekly_earnings}/week"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "monthly_earnings",
+      "question_inputs": [
+        "weeks_per_month"
+      ],
+      "solution_line_template": "Then multiply that number by the number of weeks per month to find his monthly earnings: ${weekly_earnings}/week * {weeks_per_month} weeks/month = $<<{weekly_earnings}*{weeks_per_month}={monthly_earnings}>>{monthly_earnings}/month"
+    },
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L3",
+      "output_variable": "annual_income",
+      "question_inputs": [],
+      "solution_line_template": "Then multiply his monthly earnings by the number of months in a year to find his annual income: ${monthly_earnings}/month * {months_per_year} months/year = $<<{monthly_earnings}*{months_per_year}={annual_income}>>{annual_income}/year."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "bill_monthly_cost",
+      "question_inputs": [
+        "normal_monthly_price",
+        "subsidy_percent_decimal"
+      ],
+      "solution_line_template": "This income means Bill gets a 50% monthly healthcare subsidy from the government. Multiply the cost of the premium by 50% to find the monthly cost Bill pays: ${normal_monthly_price}/month * {subsidy_percent_decimal} = $<<{normal_monthly_price}*{subsidy_percent_decimal}={bill_monthly_cost}>>{bill_monthly_cost}/month"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "bill_annual_cost",
+      "question_inputs": [],
+      "solution_line_template": "Finally, multiply Bill's monthly cost by the number of months in a year to find his annual cost: ${bill_monthly_cost}/month * {months_per_year} months/year = $<<{bill_monthly_cost}*{months_per_year}={bill_annual_cost}>>{bill_annual_cost}/year"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how much money Bill makes every week by multiplying his hourly rate by the number of hours he works each week: $25/hour * 30 hours/week = $<<25*30=750>>750/week",
+    "L2": "Then multiply that number by the number of weeks per month to find his monthly earnings: $750/week * 4 weeks/month = $<<750*4=3000>>3000/month",
+    "L3": "Then multiply his monthly earnings by the number of months in a year to find his annual income: $3000/month * 12 months/year = $<<3000*12=36000>>36000/year.",
+    "L4": "This income means Bill gets a 50% monthly healthcare subsidy from the government. Multiply the cost of the premium by 50% to find the monthly cost Bill pays: $500/month * 36000 = $<<500*36000=18000000>>18000000/month",
+    "L5": "Finally, multiply Bill's monthly cost by the number of months in a year to find his annual cost: $18000000/month * 12 months/year = $<<18000000*12=216000000>>216000000/year",
+    "FA": "#### 216000000"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'annual_income' (36000) was used instead of 'subsidy_percent_decimal' (0.5).",
+  "repro_seed": 1176810583093941836,
+  "model_name": "google_gemini-2.5-flash"
+}

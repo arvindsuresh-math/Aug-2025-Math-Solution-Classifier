@@ -1,0 +1,104 @@
+{
+  "index": 134,
+  "original_solution_mapping": {
+    "FA": "#### 74",
+    "L1": "The ticket costs 109 - 5 = $<<109-5=104>>104 for each child.",
+    "L2": "So the ticket cost of the two children is 104 x 2 = $<<104*2=208>>208.",
+    "L3": "The couple needs to pay the regular price, so it's 109 x 2 = $<<109*2=218>>218.",
+    "L4": "Thus, the family needs to pay a total of 208 + 218 = $<<208+218=426>>426.",
+    "L5": "Therefore, their change is 500 - 426 = $<<500-426=74>>74."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 134.\n    Returns: the amount of change the family will receive.\n    \"\"\"\n    # L1\n    regular_ticket_cost = 109 # The regular ticket costs $109\n    child_discount = 5 # children below 12 years old have a $5 discount\n    child_ticket_cost = regular_ticket_cost - child_discount\n\n    # L2\n    num_children = 2 # two children\n    total_child_cost = child_ticket_cost * num_children\n\n    # L3\n    num_adults = 2 # A couple\n    total_adult_cost = regular_ticket_cost * num_adults\n\n    # L4\n    total_family_cost = total_child_cost + total_adult_cost\n\n    # L5\n    amount_given_cashier = 500 # If they gave the cashier $500\n    change_received = amount_given_cashier - total_family_cost\n\n    # FA\n    answer = change_received\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "child_ticket_cost",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x144e00610>"
+  },
+  "correct_trace": {
+    "regular_ticket_cost": 109,
+    "child_discount": 5,
+    "child_ticket_cost": 104,
+    "num_children": 2,
+    "total_child_cost": 208,
+    "num_adults": 2,
+    "total_adult_cost": 218,
+    "total_family_cost": 426,
+    "amount_given_cashier": 500,
+    "change_received": 74,
+    "answer": 74
+  },
+  "flawed_trace": {
+    "regular_ticket_cost": 109,
+    "child_discount": 5,
+    "child_ticket_cost": 114,
+    "num_children": 2,
+    "total_child_cost": 228,
+    "num_adults": 2,
+    "total_adult_cost": 218,
+    "total_family_cost": 446,
+    "amount_given_cashier": 500,
+    "change_received": 54,
+    "answer": 54
+  },
+  "correct_value": 104,
+  "flawed_value": 114,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "regular_ticket_cost",
+        "child_discount"
+      ],
+      "WK_inputs": [],
+      "output_variable": "child_ticket_cost",
+      "solution_line_template": "The ticket costs {regular_ticket_cost} - {child_discount} = $<<{regular_ticket_cost}-{child_discount}={child_ticket_cost}>>{child_ticket_cost} for each child."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "num_children"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_child_cost",
+      "solution_line_template": "So the ticket cost of the two children is {child_ticket_cost} x {num_children} = $<<{child_ticket_cost}*{num_children}={total_child_cost}>>{total_child_cost}."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "num_adults"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_adult_cost",
+      "solution_line_template": "The couple needs to pay the regular price, so it's {regular_ticket_cost} x {num_adults} = $<<{regular_ticket_cost}*{num_adults}={total_adult_cost}>>{total_adult_cost}."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_family_cost",
+      "solution_line_template": "Thus, the family needs to pay a total of {total_child_cost} + {total_adult_cost} = $<<{total_child_cost}+{total_adult_cost}={total_family_cost}>>{total_family_cost}."
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [
+        "amount_given_cashier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "change_received",
+      "solution_line_template": "Therefore, their change is {amount_given_cashier} - {total_family_cost} = $<<{amount_given_cashier}-{total_family_cost}={change_received}>>{change_received}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The ticket costs 109 - 5 = $<<109-5=114>>114 for each child.",
+    "L2": "So the ticket cost of the two children is 114 x 2 = $<<114*2=228>>228.",
+    "L3": "The couple needs to pay the regular price, so it's 109 x 2 = $<<109*2=218>>218.",
+    "L4": "Thus, the family needs to pay a total of 228 + 218 = $<<228+218=446>>446.",
+    "L5": "Therefore, their change is 500 - 446 = $<<500-446=54>>54.",
+    "FA": "#### 54"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 1402563768276628518,
+  "model_name": "google_gemini-2.5-flash"
+}

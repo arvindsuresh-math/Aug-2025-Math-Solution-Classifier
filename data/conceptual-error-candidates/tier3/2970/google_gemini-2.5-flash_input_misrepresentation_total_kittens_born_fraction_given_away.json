@@ -1,0 +1,85 @@
+{
+  "index": 2970,
+  "original_solution_mapping": {
+    "FA": "#### 54",
+    "L1": "When he gave Rodney 2/5 of the bunnies, he gave away 2/5*30 = <<2/5*30=12>>12 bunnies.",
+    "L2": "He remained with 30-12 = <<30-12=18>>18 bunnies.",
+    "L3": "When the bunnies gave birth to two kittens each, the total number of kittens born is 18*2 = <<18*2=36>>36.",
+    "L4": "In total, Marlon now has 36+18 = <<36+18=54>>54 bunnies"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2970.\n    Returns: the total number of bunnies Marlon has now.\n    \"\"\"\n    # L1\n    initial_bunnies = 30 # 30 female baby bunnies\n    fraction_given_away = Fraction(2, 5) # 2/5 of them to his friend Rodney\n    bunnies_given_away = fraction_given_away * initial_bunnies\n\n    # L2\n    remaining_bunnies = initial_bunnies - bunnies_given_away\n\n    # L3\n    kittens_per_bunny = 2 # gave birth to 2 kittens each\n    total_kittens_born = remaining_bunnies * kittens_per_bunny\n\n    # L4\n    total_bunnies = total_kittens_born + remaining_bunnies\n\n    # FA\n    answer = total_bunnies\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_kittens_born",
+    "operand_to_replace": "kittens_per_bunny",
+    "replacement_variable": "fraction_given_away"
+  },
+  "correct_trace": {
+    "initial_bunnies": 30,
+    "fraction_given_away": "2/5",
+    "bunnies_given_away": "12",
+    "remaining_bunnies": "18",
+    "kittens_per_bunny": 2,
+    "total_kittens_born": "36",
+    "total_bunnies": "54",
+    "answer": "54"
+  },
+  "flawed_trace": {
+    "initial_bunnies": 30,
+    "fraction_given_away": "2/5",
+    "bunnies_given_away": "12",
+    "remaining_bunnies": "18",
+    "kittens_per_bunny": 2,
+    "total_kittens_born": "36/5",
+    "total_bunnies": "126/5",
+    "answer": "126/5"
+  },
+  "correct_value": "36",
+  "flawed_value": "36/5",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "bunnies_given_away",
+      "question_inputs": [
+        "initial_bunnies",
+        "fraction_given_away"
+      ],
+      "solution_line_template": "When he gave Rodney {fraction_given_away} of the bunnies, he gave away {fraction_given_away}*{initial_bunnies} = <<{fraction_given_away}*{initial_bunnies}={bunnies_given_away}>>{bunnies_given_away} bunnies."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_bunnies",
+      "question_inputs": [],
+      "solution_line_template": "He remained with {initial_bunnies}-{bunnies_given_away} = <<{initial_bunnies}-{bunnies_given_away}={remaining_bunnies}>>{remaining_bunnies} bunnies."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_kittens_born",
+      "question_inputs": [
+        "kittens_per_bunny"
+      ],
+      "solution_line_template": "When the bunnies gave birth to {kittens_per_bunny} kittens each, the total number of kittens born is {remaining_bunnies}*{kittens_per_bunny} = <<{remaining_bunnies}*{kittens_per_bunny}={total_kittens_born}>>{total_kittens_born}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_bunnies",
+      "question_inputs": [],
+      "solution_line_template": "In total, Marlon now has {total_kittens_born}+{remaining_bunnies} = <<{total_kittens_born}+{remaining_bunnies}={total_bunnies}>>{total_bunnies} bunnies"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "When he gave Rodney 2/5 of the bunnies, he gave away 2/5*30 = <<2/5*30=12>>12 bunnies.",
+    "L2": "He remained with 30-12 = <<30-12=18>>18 bunnies.",
+    "L3": "When the bunnies gave birth to 2/5 kittens each, the total number of kittens born is 18*2/5 = <<18*2/5=36/5>>36/5.",
+    "L4": "In total, Marlon now has 36/5+18 = <<36/5+18=126/5>>126/5 bunnies",
+    "FA": "#### 126/5"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'fraction_given_away' (2/5) was used instead of 'kittens_per_bunny' (2).",
+  "repro_seed": -5307217399019097633,
+  "model_name": "google_gemini-2.5-flash"
+}

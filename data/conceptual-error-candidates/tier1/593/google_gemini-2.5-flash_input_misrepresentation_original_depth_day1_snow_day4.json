@@ -1,0 +1,78 @@
+{
+  "index": 593,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "The third and fourth day contributed 6+18=<<6+18=24>>24 inches to the depth of the snowdrift.",
+    "L2": "Therefore, the size of the snowdrift after half was melted on the second day, but before the snowfall on the third and fourth day, was 34-24=<<34-24=10>>10 inches.",
+    "L3": "If the size of the drift on the second day, after half of the snow had melted, was 10 inches, then the depth of the original drift created on day 1 was 2*10=20 inches deep."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 593.\n    Returns: the depth of the drift at the end of the first day.\n    \"\"\"\n    # L1\n    snow_day3 = 6 # adding another 6 inches of snow\n    snow_day4 = 18 # another 18 inches of snow fell\n    total_snow_day3_4 = snow_day3 + snow_day4\n\n    # L2\n    final_depth_day4 = 34 # was 34 inches deep at the end of the fourth day\n    depth_after_melt_before_snow = final_depth_day4 - total_snow_day3_4\n\n    # L3\n    multiplier_for_original_depth = 2 # half of the snowdrift melted\n    original_depth_day1 = multiplier_for_original_depth * depth_after_melt_before_snow\n\n    # FA\n    answer = original_depth_day1\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "original_depth_day1",
+    "operand_to_replace": "multiplier_for_original_depth",
+    "replacement_variable": "snow_day4"
+  },
+  "correct_trace": {
+    "snow_day3": 6,
+    "snow_day4": 18,
+    "total_snow_day3_4": 24,
+    "final_depth_day4": 34,
+    "depth_after_melt_before_snow": 10,
+    "multiplier_for_original_depth": 2,
+    "original_depth_day1": 20,
+    "answer": 20
+  },
+  "flawed_trace": {
+    "snow_day3": 6,
+    "snow_day4": 18,
+    "total_snow_day3_4": 24,
+    "final_depth_day4": 34,
+    "depth_after_melt_before_snow": 10,
+    "multiplier_for_original_depth": 2,
+    "original_depth_day1": 180,
+    "answer": 180
+  },
+  "correct_value": 20,
+  "flawed_value": 180,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "snow_day3",
+        "snow_day4"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_snow_day3_4",
+      "solution_line_template": "The third and fourth day contributed {snow_day3}+{snow_day4}=<<{snow_day3}+{snow_day4}={total_snow_day3_4}>>{total_snow_day3_4} inches to the depth of the snowdrift."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "final_depth_day4"
+      ],
+      "WK_inputs": [],
+      "output_variable": "depth_after_melt_before_snow",
+      "solution_line_template": "Therefore, the size of the snowdrift after half was melted on the second day, but before the snowfall on the third and fourth day, was {final_depth_day4}-{total_snow_day3_4}=<<{final_depth_day4}-{total_snow_day3_4}={depth_after_melt_before_snow}>>{depth_after_melt_before_snow} inches."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "multiplier_for_original_depth"
+      ],
+      "WK_inputs": [],
+      "output_variable": "original_depth_day1",
+      "solution_line_template": "If the size of the drift on the second day, after half of the snow had melted, was {depth_after_melt_before_snow} inches, then the depth of the original drift created on day 1 was {multiplier_for_original_depth}*{depth_after_melt_before_snow}={original_depth_day1} inches deep."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The third and fourth day contributed 6+18=<<6+18=24>>24 inches to the depth of the snowdrift.",
+    "L2": "Therefore, the size of the snowdrift after half was melted on the second day, but before the snowfall on the third and fourth day, was 34-24=<<34-24=10>>10 inches.",
+    "L3": "If the size of the drift on the second day, after half of the snow had melted, was 10 inches, then the depth of the original drift created on day 1 was 18*10=180 inches deep.",
+    "FA": "#### 180"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'snow_day4' (18) was used instead of 'multiplier_for_original_depth' (2).",
+  "repro_seed": 7168915703663517771,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,126 @@
+{
+  "index": 572,
+  "original_solution_mapping": {
+    "FA": "#### 18",
+    "L1": "On Monday, Steve was paid 8 * 2 = <<8*2=16>>16 dollars",
+    "L2": "Tuesday's harvest was 3 * 8 = <<3*8=24>>24 pounds",
+    "L3": "The 24 pounds Steve picked on Tuesday gave him 24 * 2 = <<24*2=48>>48 dollars",
+    "L4": "So, the amount Steve earned from the first two days on the job is 16 +48 = <<16+48=64>>64 dollars",
+    "L5": "Since Steve rested on Wednesday, he made 0 dollars, meaning his earnings were 64 + 0 = <<64+0=64>>64 dollars",
+    "L6": "The difference between Steve's earnings and his target is 100 - 64 = <<100-64=36>>36 dollars",
+    "L7": "Since he was paid 2 dollars for each pound of lingonberries, Steve needed to pick 36/2 = <<36/2=18>>18 pounds"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 572.\n    Returns: the number of pounds of lingonberries Steve had to pick on Thursday.\n    \"\"\"\n    # L1\n    pounds_monday = 8 # On Monday he picked 8 pounds\n    pay_per_pound = 2 # The job paid $2 for every pound of lingonberries picked\n    earnings_monday = pounds_monday * pay_per_pound\n\n    # L2\n    tuesday_multiplier = 3 # Tuesday\u2019s harvest was triple what he had picked the previous day\n    pounds_tuesday = tuesday_multiplier * pounds_monday\n\n    # L3\n    earnings_tuesday = pounds_tuesday * pay_per_pound\n\n    # L4\n    earnings_first_two_days = earnings_monday + earnings_tuesday\n\n    # L5\n    earnings_wednesday = 0 # rested on Wednesday\n    total_earnings_before_thursday = earnings_first_two_days + earnings_wednesday\n\n    # L6\n    target_earnings = 100 # make a total of $100\n    remaining_needed_earnings = target_earnings - total_earnings_before_thursday\n\n    # L7\n    pounds_thursday = remaining_needed_earnings / pay_per_pound\n\n    # FA\n    answer = pounds_thursday\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_earnings_before_thursday",
+    "operand_to_replace": "earnings_first_two_days",
+    "replacement_variable": "pay_per_pound"
+  },
+  "correct_trace": {
+    "pounds_monday": 8,
+    "pay_per_pound": 2,
+    "earnings_monday": 16,
+    "tuesday_multiplier": 3,
+    "pounds_tuesday": 24,
+    "earnings_tuesday": 48,
+    "earnings_first_two_days": 64,
+    "earnings_wednesday": 0,
+    "total_earnings_before_thursday": 64,
+    "target_earnings": 100,
+    "remaining_needed_earnings": 36,
+    "pounds_thursday": 18.0,
+    "answer": 18.0
+  },
+  "flawed_trace": {
+    "pounds_monday": 8,
+    "pay_per_pound": 2,
+    "earnings_monday": 16,
+    "tuesday_multiplier": 3,
+    "pounds_tuesday": 24,
+    "earnings_tuesday": 48,
+    "earnings_first_two_days": 64,
+    "earnings_wednesday": 0,
+    "total_earnings_before_thursday": 2,
+    "target_earnings": 100,
+    "remaining_needed_earnings": 98,
+    "pounds_thursday": 49.0,
+    "answer": 49.0
+  },
+  "correct_value": 64,
+  "flawed_value": 2,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "earnings_monday",
+      "question_inputs": [
+        "pounds_monday",
+        "pay_per_pound"
+      ],
+      "solution_line_template": "On Monday, Steve was paid {pounds_monday} * {pay_per_pound} = <<{pounds_monday}*{pay_per_pound}={earnings_monday}>>{earnings_monday} dollars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "pounds_tuesday",
+      "question_inputs": [
+        "tuesday_multiplier"
+      ],
+      "solution_line_template": "Tuesday's harvest was {tuesday_multiplier} * {pounds_monday} = <<{tuesday_multiplier}*{pounds_monday}={pounds_tuesday}>>{pounds_tuesday} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "earnings_tuesday",
+      "question_inputs": [],
+      "solution_line_template": "The {pounds_tuesday} pounds Steve picked on Tuesday gave him {pounds_tuesday} * {pay_per_pound} = <<{pounds_tuesday}*{pay_per_pound}={earnings_tuesday}>>{earnings_tuesday} dollars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "earnings_first_two_days",
+      "question_inputs": [],
+      "solution_line_template": "So, the amount Steve earned from the first two days on the job is {earnings_monday} +{earnings_tuesday} = <<{earnings_monday}+{earnings_tuesday}={earnings_first_two_days}>>{earnings_first_two_days} dollars"
+    },
+    {
+      "WK_inputs": [
+        "earnings_wednesday"
+      ],
+      "line_number": "L5",
+      "output_variable": "total_earnings_before_thursday",
+      "question_inputs": [],
+      "solution_line_template": "Since Steve rested on Wednesday, he made {earnings_wednesday} dollars, meaning his earnings were {earnings_first_two_days} + {earnings_wednesday} = <<{earnings_first_two_days}+{earnings_wednesday}={total_earnings_before_thursday}>>{total_earnings_before_thursday} dollars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "remaining_needed_earnings",
+      "question_inputs": [
+        "target_earnings"
+      ],
+      "solution_line_template": "The difference between Steve's earnings and his target is {target_earnings} - {total_earnings_before_thursday} = <<{target_earnings}-{total_earnings_before_thursday}={remaining_needed_earnings}>>{remaining_needed_earnings} dollars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "pounds_thursday",
+      "question_inputs": [],
+      "solution_line_template": "Since he was paid {pay_per_pound} dollars for each pound of lingonberries, Steve needed to pick {remaining_needed_earnings}/{pay_per_pound} = <<{remaining_needed_earnings}/{pay_per_pound}={pounds_thursday}>>{pounds_thursday} pounds"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Monday, Steve was paid 8 * 2 = <<8*2=16>>16 dollars",
+    "L2": "Tuesday's harvest was 3 * 8 = <<3*8=24>>24 pounds",
+    "L3": "The 24 pounds Steve picked on Tuesday gave him 24 * 2 = <<24*2=48>>48 dollars",
+    "L4": "So, the amount Steve earned from the first two days on the job is 16 +48 = <<16+48=64>>64 dollars",
+    "L5": "Since Steve rested on Wednesday, he made 0 dollars, meaning his earnings were 2 + 0 = <<2+0=2>>2 dollars",
+    "L6": "The difference between Steve's earnings and his target is 100 - 2 = <<100-2=98>>98 dollars",
+    "L7": "Since he was paid 2 dollars for each pound of lingonberries, Steve needed to pick 98/2 = <<98/2=49>>49 pounds",
+    "FA": "#### 49"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operand. The variable 'pay_per_pound' (value: 2) was used instead of 'earnings_first_two_days' (value: 64).",
+  "repro_seed": 7755988950157793402,
+  "model_name": "google_gemini-2.5-flash"
+}

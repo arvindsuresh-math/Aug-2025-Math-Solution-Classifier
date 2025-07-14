@@ -1,0 +1,74 @@
+{
+  "index": 161,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "The annual budget for policing is 32 / 2 = $<<32/2=16>>16 million.",
+    "L2": "The combined budget for education and policing is 16 + 12 = $<<16+12=28>>28 million.",
+    "L3": "There is 32 - 28 = $<<32-28=4>>4 million to manage public spaces."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 161.\n    Returns: the amount of money left for managing public spaces.\n    \"\"\"\n    # L1\n    total_budget = 32 # The town\u2019s annual budget totals $32 million\n    policing_divisor = 2 # half of the budget goes towards policing\n    policing_budget = total_budget / policing_divisor\n\n    # L2\n    education_budget = 12 # $12 million goes towards education\n    combined_budget = policing_budget + education_budget\n\n    # L3\n    remaining_budget = total_budget - combined_budget\n\n    # FA\n    answer = remaining_budget\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "combined_budget",
+    "operand_to_replace": "education_budget",
+    "replacement_variable": "policing_divisor"
+  },
+  "correct_trace": {
+    "total_budget": 32,
+    "policing_divisor": 2,
+    "policing_budget": 16.0,
+    "education_budget": 12,
+    "combined_budget": 28.0,
+    "remaining_budget": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "total_budget": 32,
+    "policing_divisor": 2,
+    "policing_budget": 16.0,
+    "education_budget": 12,
+    "combined_budget": 18.0,
+    "remaining_budget": 14.0,
+    "answer": 14.0
+  },
+  "correct_value": 28.0,
+  "flawed_value": 18.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "policing_budget",
+      "question_inputs": [
+        "total_budget",
+        "policing_divisor"
+      ],
+      "solution_line_template": "The annual budget for policing is {total_budget} / {policing_divisor} = $<<{total_budget}/{policing_divisor}={policing_budget}>>{policing_budget} million."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "combined_budget",
+      "question_inputs": [
+        "education_budget"
+      ],
+      "solution_line_template": "The combined budget for education and policing is {policing_budget} + {education_budget} = $<<{policing_budget}+{education_budget}={combined_budget}>>{combined_budget} million."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_budget",
+      "question_inputs": [],
+      "solution_line_template": "There is {total_budget} - {combined_budget} = $<<{total_budget}-{combined_budget}={remaining_budget}>>{remaining_budget} million to manage public spaces."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The annual budget for policing is 32 / 2 = $<<32/2=16>>16 million.",
+    "L2": "The combined budget for education and policing is 16 + 2 = $<<16+2=18>>18 million.",
+    "L3": "There is 32 - 18 = $<<32-18=14>>14 million to manage public spaces.",
+    "FA": "#### 14"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'policing_divisor' (2) was used instead of 'education_budget' (12).",
+  "repro_seed": -4532968549311630477,
+  "model_name": "google_gemini-2.5-flash"
+}

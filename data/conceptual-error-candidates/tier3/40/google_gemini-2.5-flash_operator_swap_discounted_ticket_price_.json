@@ -1,0 +1,114 @@
+{
+  "index": 40,
+  "original_solution_mapping": {
+    "FA": "#### 476",
+    "L1": "Mr. Benson had a 5% discount for each of the 12 - 10 = <<12-10=2>>2 tickets.",
+    "L2": "So, those two tickets had a $40 x 5/100 = $<<40*5/100=2>>2 discount each.",
+    "L3": "Hence, each ticket cost $40 - $2 = $<<40-2=38>>38 each.",
+    "L4": "Thus, two discounted tickets amount to $38 x 2 = $<<38*2=76>>76.",
+    "L5": "And the other ten tickets amount to $40 x 10 = $<<40*10=400>>400.",
+    "L6": "Hence, Mr. Benson paid a total of $400 + $76 = $<<400+76=476>>476."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 40.\n    Returns: the total amount Mr. Benson paid.\n    \"\"\"\n    # L1\n    total_tickets_bought = 12 # bought 12 tickets\n    threshold_for_discount = 10 # exceeds 10\n    discounted_tickets_count = total_tickets_bought - threshold_for_discount\n\n    # L2\n    original_ticket_cost = 40 # A concert ticket costs $40\n    discount_percentage = Fraction(5, 100) # 5% discount\n    discount_per_ticket = original_ticket_cost * discount_percentage\n\n    # L3\n    discounted_ticket_price = original_ticket_cost - discount_per_ticket\n\n    # L4\n    cost_of_discounted_tickets = discounted_ticket_price * discounted_tickets_count\n\n    # L5\n    non_discounted_tickets_count = 10 # the other ten tickets\n    cost_of_non_discounted_tickets = original_ticket_cost * non_discounted_tickets_count\n\n    # L6\n    total_paid = cost_of_non_discounted_tickets + cost_of_discounted_tickets\n\n    # FA\n    answer = total_paid\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "discounted_ticket_price",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x146b5edd0>"
+  },
+  "correct_trace": {
+    "total_tickets_bought": 12,
+    "threshold_for_discount": 10,
+    "discounted_tickets_count": 2,
+    "original_ticket_cost": 40,
+    "discount_percentage": "1/20",
+    "discount_per_ticket": "2",
+    "discounted_ticket_price": "38",
+    "cost_of_discounted_tickets": "76",
+    "non_discounted_tickets_count": 10,
+    "cost_of_non_discounted_tickets": 400,
+    "total_paid": "476",
+    "answer": "476"
+  },
+  "flawed_trace": {
+    "total_tickets_bought": 12,
+    "threshold_for_discount": 10,
+    "discounted_tickets_count": 2,
+    "original_ticket_cost": 40,
+    "discount_percentage": "1/20",
+    "discount_per_ticket": "2",
+    "discounted_ticket_price": "42",
+    "cost_of_discounted_tickets": "84",
+    "non_discounted_tickets_count": 10,
+    "cost_of_non_discounted_tickets": 400,
+    "total_paid": "484",
+    "answer": "484"
+  },
+  "correct_value": "38",
+  "flawed_value": "42",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "discounted_tickets_count",
+      "question_inputs": [
+        "total_tickets_bought",
+        "threshold_for_discount"
+      ],
+      "solution_line_template": "Mr. Benson had a 5% discount for each of the {total_tickets_bought} - {threshold_for_discount} = <<{total_tickets_bought}-{threshold_for_discount}={discounted_tickets_count}>>{discounted_tickets_count} tickets."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "discount_per_ticket",
+      "question_inputs": [
+        "original_ticket_cost",
+        "discount_percentage"
+      ],
+      "solution_line_template": "So, those two tickets had a ${original_ticket_cost} x {discount_percentage} = $<<{original_ticket_cost}*{discount_percentage}={discount_per_ticket}>>{discount_per_ticket} discount each."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "discounted_ticket_price",
+      "question_inputs": [],
+      "solution_line_template": "Hence, each ticket cost ${original_ticket_cost} - ${discount_per_ticket} = $<<{original_ticket_cost}-{discount_per_ticket}={discounted_ticket_price}>>{discounted_ticket_price} each."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "cost_of_discounted_tickets",
+      "question_inputs": [],
+      "solution_line_template": "Thus, {discounted_tickets_count} discounted tickets amount to ${discounted_ticket_price} x {discounted_tickets_count} = $<<{discounted_ticket_price}*{discounted_tickets_count}={cost_of_discounted_tickets}>>{cost_of_discounted_tickets}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "cost_of_non_discounted_tickets",
+      "question_inputs": [
+        "non_discounted_tickets_count"
+      ],
+      "solution_line_template": "And the other {non_discounted_tickets_count} tickets amount to ${original_ticket_cost} x {non_discounted_tickets_count} = $<<{original_ticket_cost}*{non_discounted_tickets_count}={cost_of_non_discounted_tickets}>>{cost_of_non_discounted_tickets}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_paid",
+      "question_inputs": [],
+      "solution_line_template": "Hence, Mr. Benson paid a total of ${cost_of_non_discounted_tickets} + ${cost_of_discounted_tickets} = $<<{cost_of_non_discounted_tickets}+{cost_of_discounted_tickets}={total_paid}>>{total_paid}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Mr. Benson had a 5% discount for each of the 12 - 10 = <<12-10=2>>2 tickets.",
+    "L2": "So, those two tickets had a $40 x 5/100 = $<<40*5/100=2>>2 discount each.",
+    "L3": "Hence, each ticket cost $40 - $2 = $<<40-2=42>>42 each.",
+    "L4": "Thus, 2 discounted tickets amount to $42 x 2 = $<<42*2=84>>84.",
+    "L5": "And the other 10 tickets amount to $40 x 10 = $<<40*10=400>>400.",
+    "L6": "Hence, Mr. Benson paid a total of $400 + $84 = $<<400+84=484>>484.",
+    "FA": "#### 484"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 5754619874389099021,
+  "model_name": "google_gemini-2.5-flash"
+}

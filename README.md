@@ -360,3 +360,110 @@ Our core strategy is to introduce **one single logical error** on a specific lin
 
 4. **Challenges & Difficulties:**
     * The main challenge is the heuristic-based identification of "unit conversion" steps. A misclassification is not critical, as it will still produce a valid conceptual error, just perhaps not a "unit" one.
+
+
+### **Error Type 8: Incorrect Final Answer Selection**
+
+1. **What it Emulates:** A student performs all intermediate calculations correctly but fails to answer the specific question asked in the final step. They might report a valid intermediate value (e.g., total items instead of remaining items) or misinterpret which calculated variable represents the requested answer. This is distinct from a `Skipped_Step` where a necessary calculation is omitted entirely. Here, the calculation for the correct answer is often present, but simply not returned.
+
+2. **AST Manipulation Strategy:**
+    * This error type does not typically involve modifying an intermediate calculation. Instead, it targets the final `return` statement of the `function_code`.
+    * Identify an intermediate variable in the `correct_trace` that is a plausible but incorrect final answer.
+    * In the `function_code`'s AST, change the `value` of the `ast.Return` node from the correct final variable to the identified intermediate variable (e.g., `return final_answer` becomes `return number_of_new_hires`).
+
+3. **Human Validation Task:**
+    * The validator is presented with a solution where the reasoning and calculations are perfectly sound up to the final line. The final sentence or `####` value is simply incorrect.
+    * **Example (Index 1132):** The validator sees the correct calculation for new hires (`213`) but the final answer is reported as `213` instead of `852 + 213 = 1065`.
+    * **Validator's Edit:** The validator simply needs to adjust the final sentence to match the flawed output. For example, changing `"Therefore, there are now 1065 employees"` to `"Therefore, 213 new employees were hired"`. This is a low-effort task focused on the concluding statement.
+
+4. **Challenges & Difficulties:**
+    * The primary challenge is programmatically identifying which intermediate variables are "plausible" incorrect answers. This may require heuristics (e.g., variables calculated in the penultimate step) or manual tagging within the `logical_steps` of the Formalization Template.
+
+
+### **Error Type 9: Incorrect Formula Application**
+
+1. **What it Emulates:** A student correctly identifies the necessary numerical inputs but combines them using a structurally incorrect formula. This goes beyond a simple operator swap; the entire equation or logical construct is wrong for the task.
+    * **Examples:** Using a simple average (`(a+b)/2`) when a weighted average is required; fundamentally misusing how ratios apply to a total; applying a dimensional property (like 'dots per inch') to the wrong kind of quantity (like 'area' instead of 'length').
+
+2. **AST Manipulation Strategy:**
+    * This is a complex category to generate programmatically. It would involve replacing an entire expression with another structurally different one.
+    * For example, an `ast.BinOp` node for a weighted average `(w1*a + w2*b) / (w1+w2)` might be replaced with a simple average `(a+b)/2`. This requires identifying common formulaic mistakes and having pre-defined AST templates for both the correct and incorrect formulas.
+
+3. **Human Validation Task:**
+    * The validator sees a calculation that is nonsensical for the problem type.
+    * **Example (Index 1265):** The validator might see `"The average monthly bill is ($30 + $24) / 2 = $27"`.
+    * **Validator's Edit:** The validator adjusts the text to justify this flawed approach. `"To find the average, we take the average of the two monthly rates: ($30 + $24) / 2 = $27"`. This text now matches the flawed formula.
+
+4. **Challenges & Difficulties:**
+    * Programmatically identifying which lines of code correspond to which high-level formulas is a significant challenge. It would likely require semantic analysis or special tagging in the Formalization Template.
+
+---
+
+I have analyzed the 100 samples from the provided CSV file. The existing taxonomy covers the majority of cases well, but the analysis reveals two recurring error patterns that are not precisely captured by the current definitions.
+
+To accurately classify all samples, I propose adding the following two error types to your taxonomy.
+
+---
+
+### **Error Type 10: Misinterpreted Scoping / Precedence**
+
+1. **What it Emulates:** A misunderstanding of how a natural language phrase maps to mathematical order of operations or grouping. This is common with phrases like "X less than Y times Z," where a student might incorrectly calculate `Y * (Z - X)` instead of `(Y * Z) - X`. It is not a simple operator swap, but an error in the structure of the expression itself.
+2. **AST Manipulation Strategy:**
+    * This involves restructuring an `ast.BinOp` node. For example, `(Y * Z) - X` which is `ast.BinOp(left=ast.BinOp(left=Y, op=ast.Mult, right=Z), op=ast.Sub, right=X)` might be incorrectly transformed into `ast.BinOp(left=Y, op=ast.Mult, right=ast.BinOp(left=Z, op=ast.Sub, right=X))`.
+    * This manipulates the tree structure to change which operations are performed first, directly modeling the precedence error.
+3. **Human Validation Task:**
+    * The validator sees a calculation that is mathematically valid but based on a flawed parsing of the problem statement.
+    * **Example (Index 1337):** The validator sees the text `2(x-5)=13` derived from "5 less than twice as many pairs".
+    * **Validator's Edit:** The user would adjust the prose to justify this flawed grouping, perhaps by rewriting the logic to something like: "First, find the difference between the number of shoes Becky owns and 5, then double it: `2(x-5)=13`."
+4. **Challenges & Difficulties:**
+    * Identifying these phrases programmatically requires robust NLP parsing or pattern matching.
+    * Generating plausible alternative text during the human validation step can be challenging, as it requires inventing a justification for the flawed grouping.
+
+---
+
+### **Error Type 11: Extraneous Operation / Invented Method**
+
+1. **What it Emulates:** The student, failing to identify the correct solution path, invents a completely unsupported mathematical procedure. This goes beyond using a wrong operator or variable; it involves introducing a calculation that has no basis in the problem's text.
+2. **AST Manipulation Strategy:**
+    * This is a significant mutation. It involves replacing a correct `ast.Assign` node's value with a new, structurally different expression.
+    * For example, replacing `ast.Call(func=ast.Name(id='sqrt'), ...)` with an `ast.BinOp` that averages two unrelated variables.
+3. **Human Validation Task:**
+    * The validator is presented with a solution line that uses a nonsensical method to arrive at a value.
+    * **Example (Index 1323):** The validator sees text like `"To turn it into a square, the side length would be (6 + 24) / 2 = 15 feet."`
+    * **Validator's Edit:** The validator must make the prose match this invented logic. The existing text is already a plausible (though incorrect) student justification, so the task is often just to approve the generated sample.
+4. **Challenges & Difficulties:**
+    * Generating *plausible* but incorrect methods is the primary challenge. Randomly inserting operations will likely produce nonsense. This will require a curated set of common but incorrect heuristics (e.g., "when in doubt, average them").
+
+### **Error Type 12: Algebraic Simplification Error**
+
+1. **What it Emulates:** A student correctly sets up an algebraic equation but makes a mistake during a simplification step. This is a procedural error in applying the rules of algebra.
+    * **Examples:** Incorrectly combining like terms (e.g., `3x + x = 2x`); incorrectly distributing a value or a negative sign across parentheses.
+2. **AST Manipulation Strategy:**
+    * This is a targeted transformation that mimics a specific algebraic rule violation.
+    * For `3x + x = 4x`, the `ast.BinOp` representing `3x+x` would be replaced by an `ast.BinOp` that results in `2x`. This is not a random change but a simulation of a common cognitive error. It requires modifying the coefficients in the expression's AST representation post-setup but pre-solving.
+3. **Human Validation Task:**
+    * The validator sees a line of algebraic reasoning that is internally inconsistent.
+    * **Example (Index 1420):** The validator would see `Combining like terms, we get 2w - 6 = 54` following the setup `3w - 6 + w = 54`.
+    * **Validator's Edit:** The text is often already plausible, as it describes the *intended* operation, even if executed incorrectly. The validator's role is to confirm that this is a common student mistake and accept the sample.
+4. **Challenges & Difficulties:**
+    * Generating these requires identifying expressions with like terms or other algebraic constructs ripe for simplification errors. The mutations must be specific (e.g., change the coefficient after combination) rather than random.
+
+### **Error Type 13: Constraint Violation**
+
+1. **What it Emulates:** A student understands the individual numbers and basic operations but fails to satisfy a key qualitative condition or constraint of the problem. This is not an arithmetic or algebraic mistake, but a failure in the logical setup.
+    * **Examples:** Calculating costs that exceed a stated budget; providing fewer items than required for a group (Index `803`); failing to select the "least" or "most" of a set of options when required.
+2. **AST Manipulation Strategy:** This is a high-level logical error that is difficult to generate via simple AST mutations. It would likely involve identifying a constraint in the problem's logic (e.g., `num_bags >= num_students`) and then generating a solution that violates it, perhaps by using `floor()` division where `ceil()` is needed, or by selecting a non-optimal value from a list of calculated options.
+3. **Human Validation Task:** The validator is presented with a solution that is numerically self-consistent but fails to solve the actual problem posed. For instance, the math for buying 10 bags for 11 students might be correct, but the solution is invalid because it leaves one student without a bag. The validator must confirm that the core constraint has been violated.
+4. **Challenges & Difficulties:** Programmatically identifying and then violating these high-level logical constraints is the primary challenge. This type of error generation would likely rely on more advanced analysis of the problem's semantic structure rather than just the `function_code`.
+
+---
+
+Great:
+
+I've attached a csv with ~100 samples of conceptually generated errors.
+
+I'd like you to carefully and meticulously analyze each row (i.e sample) and classify them into one of the pre-existing error types.
+If any sample fits naturally into multiple error types, then that is totally fine.
+If any sample does not fit into any of the existing error types, then please add a new, appropriate error type to the pre-existing list in the markdown, and give me the text describing the error type so I can add it to the markdown.
+
+After your classification is complete, please give me python lists for each error type containing the corresponding indices. 

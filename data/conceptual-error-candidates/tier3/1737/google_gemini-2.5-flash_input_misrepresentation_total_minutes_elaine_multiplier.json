@@ -1,0 +1,87 @@
+{
+  "index": 1737,
+  "original_solution_mapping": {
+    "FA": "#### 11",
+    "L1": "Elaine was in the pool for 2*3=<<2*3=6>>6 minutes.",
+    "L2": "George was in the pool for 6/3=<<6/3=2>>2 minutes.",
+    "L3": "Kramer never found the pool and thus swam for 0 minutes.",
+    "L4": "In total, Jerry and his friend were in the cold water for 3+6+2+0=<<3+6+2+0=11>>11 minutes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1737.\n    Returns: the combined total of minutes Jerry and his friends were in the cold water.\n    \"\"\"\n    # L1\n    jerry_minutes = 3 # Jerry was in the pool for 3 minutes\n    elaine_multiplier = 2 # twice as long as Jerry\n    elaine_minutes = elaine_multiplier * jerry_minutes\n\n    # L2\n    george_divisor = 3 # one-third as long as Elaine\n    george_minutes = elaine_minutes / george_divisor\n\n    # L3\n    kramer_minutes = 0 # Kramer, who accidentally locked himself in the bathroom, could not find the pool.\n\n    # L4\n    total_minutes = jerry_minutes + elaine_minutes + george_minutes + kramer_minutes\n\n    # FA\n    answer = total_minutes\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_minutes",
+    "operand_to_replace": "kramer_minutes",
+    "replacement_variable": "elaine_multiplier"
+  },
+  "correct_trace": {
+    "jerry_minutes": 3,
+    "elaine_multiplier": 2,
+    "elaine_minutes": 6,
+    "george_divisor": 3,
+    "george_minutes": 2.0,
+    "kramer_minutes": 0,
+    "total_minutes": 11.0,
+    "answer": 11.0
+  },
+  "flawed_trace": {
+    "jerry_minutes": 3,
+    "elaine_multiplier": 2,
+    "elaine_minutes": 6,
+    "george_divisor": 3,
+    "george_minutes": 2.0,
+    "kramer_minutes": 0,
+    "total_minutes": 13.0,
+    "answer": 13.0
+  },
+  "correct_value": 11.0,
+  "flawed_value": 13.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "elaine_minutes",
+      "question_inputs": [
+        "jerry_minutes",
+        "elaine_multiplier"
+      ],
+      "solution_line_template": "Elaine was in the pool for {elaine_multiplier}*{jerry_minutes}=<<{elaine_multiplier}*{jerry_minutes}={elaine_minutes}>>{elaine_minutes} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "george_minutes",
+      "question_inputs": [
+        "george_divisor"
+      ],
+      "solution_line_template": "George was in the pool for {elaine_minutes}/{george_divisor}=<<{elaine_minutes}/{george_divisor}={george_minutes}>>{george_minutes} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "kramer_minutes",
+      "question_inputs": [
+        "kramer_minutes"
+      ],
+      "solution_line_template": "Kramer never found the pool and thus swam for {kramer_minutes} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_minutes",
+      "question_inputs": [],
+      "solution_line_template": "In total, Jerry and his friend were in the cold water for {jerry_minutes}+{elaine_minutes}+{george_minutes}+{kramer_minutes}=<<{jerry_minutes}+{elaine_minutes}+{george_minutes}+{kramer_minutes}={total_minutes}>>{total_minutes} minutes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Elaine was in the pool for 2*3=<<2*3=6>>6 minutes.",
+    "L2": "George was in the pool for 6/3=<<6/3=2>>2 minutes.",
+    "L3": "Kramer never found the pool and thus swam for 0 minutes.",
+    "L4": "In total, Jerry and his friend were in the cold water for 3+6+2+2=<<3+6+2+2=13>>13 minutes.",
+    "FA": "#### 13"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'elaine_multiplier' (2) was used instead of 'kramer_minutes' (0).",
+  "repro_seed": -8989445727597514064,
+  "model_name": "google_gemini-2.5-flash"
+}

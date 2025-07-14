@@ -1,0 +1,61 @@
+{
+  "index": 707,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "Melanie starts with 1 slice of bread that she tears in half, making 2 halves.",
+    "L2": "She takes both of those halves and tears them each in half, 2 halves x 2 more halves in half = <<2*2=4>>4 pieces per slice of bread.",
+    "L3": "Melanie is using 2 slices of bread x 4 pieces each = <<2*4=8>>8 pieces overall to add to the blender."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 707.\n    Returns: the total number of bread pieces Melanie will put into the blender.\n    \"\"\"\n    # L2\n    pieces_after_first_tear_per_slice = 2\n    multiplier_for_second_tear = 2\n    pieces_per_slice = pieces_after_first_tear_per_slice * multiplier_for_second_tear\n\n    # L3\n    num_slices = 2 # 2 slices of bread\n    total_pieces = num_slices * pieces_per_slice\n\n    # FA\n    answer = total_pieces\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_pieces",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x145049fd0>"
+  },
+  "correct_trace": {
+    "pieces_after_first_tear_per_slice": 2,
+    "multiplier_for_second_tear": 2,
+    "pieces_per_slice": 4,
+    "num_slices": 2,
+    "total_pieces": 8,
+    "answer": 8
+  },
+  "flawed_trace": {
+    "pieces_after_first_tear_per_slice": 2,
+    "multiplier_for_second_tear": 2,
+    "pieces_per_slice": 4,
+    "num_slices": 2,
+    "total_pieces": 6,
+    "answer": 6
+  },
+  "correct_value": 8,
+  "flawed_value": 6,
+  "logical_steps": [
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "pieces_per_slice",
+      "solution_line_template": "She takes both of those halves and tears them each in half, {pieces_after_first_tear_per_slice} halves x {multiplier_for_second_tear} more halves in half = <<{pieces_after_first_tear_per_slice}*{multiplier_for_second_tear}={pieces_per_slice}>>{pieces_per_slice} pieces per slice of bread."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "num_slices"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_pieces",
+      "solution_line_template": "Melanie is using {num_slices} slices of bread x {pieces_per_slice} pieces each = <<{num_slices}*{pieces_per_slice}={total_pieces}>>{total_pieces} pieces overall to add to the blender."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "She takes both of those halves and tears them each in half, 2 halves x 2 more halves in half = <<2*2=4>>4 pieces per slice of bread.",
+    "L3": "Melanie is using 2 slices of bread x 4 pieces each = <<2*4=6>>6 pieces overall to add to the blender.",
+    "FA": "#### 6"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 5607438178457111631,
+  "model_name": "google_gemini-2.5-flash"
+}

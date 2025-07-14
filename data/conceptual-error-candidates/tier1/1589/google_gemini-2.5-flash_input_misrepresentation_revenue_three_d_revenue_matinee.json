@@ -1,0 +1,95 @@
+{
+  "index": 1589,
+  "original_solution_mapping": {
+    "FA": "#### 6600",
+    "L1": "First find the total revenue from the matinee tickets: $5/ticket * 200 tickets = $<<5*200=1000>>1000",
+    "L2": "Then find the total revenue from the evening tickets: $12/ticket * 300 tickets = $<<12*300=3600>>3600",
+    "L3": "Then find the total revenue from the 3D tickets: $20/ticket * 100 tickets = $<<20*100=2000>>2000",
+    "L4": "Then add the cost of each group of tickets to find the total cost: $1000 + $3600 + $2000 = $<<1000+3600+2000=6600>>6600"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1589.\n    Returns: the total money made from ticket sales.\n    \"\"\"\n    # L1\n    matinee_ticket_price = 5 # matinee tickets for $5\n    num_matinee_tickets = 200 # 200 matinee tickets\n    revenue_matinee = matinee_ticket_price * num_matinee_tickets\n\n    # L2\n    evening_ticket_price = 12 # evening tickets for $12\n    num_evening_tickets = 300 # 300 evening tickets\n    revenue_evening = evening_ticket_price * num_evening_tickets\n\n    # L3\n    three_d_ticket_price = 20 # 3D tickets for $20\n    num_three_d_tickets = 100 # 100 3D tickets\n    revenue_three_d = three_d_ticket_price * num_three_d_tickets\n\n    # L4\n    total_revenue = revenue_matinee + revenue_evening + revenue_three_d\n\n    # FA\n    answer = total_revenue\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "revenue_three_d",
+    "operand_to_replace": "three_d_ticket_price",
+    "replacement_variable": "revenue_matinee"
+  },
+  "correct_trace": {
+    "matinee_ticket_price": 5,
+    "num_matinee_tickets": 200,
+    "revenue_matinee": 1000,
+    "evening_ticket_price": 12,
+    "num_evening_tickets": 300,
+    "revenue_evening": 3600,
+    "three_d_ticket_price": 20,
+    "num_three_d_tickets": 100,
+    "revenue_three_d": 2000,
+    "total_revenue": 6600,
+    "answer": 6600
+  },
+  "flawed_trace": {
+    "matinee_ticket_price": 5,
+    "num_matinee_tickets": 200,
+    "revenue_matinee": 1000,
+    "evening_ticket_price": 12,
+    "num_evening_tickets": 300,
+    "revenue_evening": 3600,
+    "three_d_ticket_price": 20,
+    "num_three_d_tickets": 100,
+    "revenue_three_d": 100000,
+    "total_revenue": 104600,
+    "answer": 104600
+  },
+  "correct_value": 2000,
+  "flawed_value": 100000,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "matinee_ticket_price",
+        "num_matinee_tickets"
+      ],
+      "WK_inputs": [],
+      "output_variable": "revenue_matinee",
+      "solution_line_template": "First find the total revenue from the matinee tickets: ${matinee_ticket_price}/ticket * {num_matinee_tickets} tickets = $<<{matinee_ticket_price}*{num_matinee_tickets}={revenue_matinee}>>{revenue_matinee}"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "evening_ticket_price",
+        "num_evening_tickets"
+      ],
+      "WK_inputs": [],
+      "output_variable": "revenue_evening",
+      "solution_line_template": "Then find the total revenue from the evening tickets: ${evening_ticket_price}/ticket * {num_evening_tickets} tickets = $<<{evening_ticket_price}*{num_evening_tickets}={revenue_evening}>>{revenue_evening}"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "three_d_ticket_price",
+        "num_three_d_tickets"
+      ],
+      "WK_inputs": [],
+      "output_variable": "revenue_three_d",
+      "solution_line_template": "Then find the total revenue from the 3D tickets: ${three_d_ticket_price}/ticket * {num_three_d_tickets} tickets = $<<{three_d_ticket_price}*{num_three_d_tickets}={revenue_three_d}>>{revenue_three_d}"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_revenue",
+      "solution_line_template": "Then add the cost of each group of tickets to find the total cost: ${revenue_matinee} + ${revenue_evening} + ${revenue_three_d} = $<<{revenue_matinee}+{revenue_evening}+{revenue_three_d}={total_revenue}>>{total_revenue}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total revenue from the matinee tickets: $5/ticket * 200 tickets = $<<5*200=1000>>1000",
+    "L2": "Then find the total revenue from the evening tickets: $12/ticket * 300 tickets = $<<12*300=3600>>3600",
+    "L3": "Then find the total revenue from the 3D tickets: $1000/ticket * 100 tickets = $<<1000*100=100000>>100000",
+    "L4": "Then add the cost of each group of tickets to find the total cost: $1000 + $3600 + $100000 = $<<1000+3600+100000=104600>>104600",
+    "FA": "#### 104600"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'revenue_matinee' (1000) was used instead of 'three_d_ticket_price' (20).",
+  "repro_seed": -5519295730939083078,
+  "model_name": "google_gemini-2.5-flash"
+}

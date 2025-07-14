@@ -1,0 +1,68 @@
+{
+  "index": 901,
+  "original_solution_mapping": {
+    "FA": "#### 1050",
+    "L1": "Sandi spent 600/2 = <<600/2=300>>300 dollars at the farmer's market.",
+    "L2": "Gillian spent 300*3+150 = <<300*3+150=1050>>1050 dollars at the farmer's market."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 901.\n    Returns: the total amount Gillian spent at the farmer's market.\n    \"\"\"\n    # L1\n    sandi_initial_money = 600 # Sandi had $600\n    half_divisor = 2 # spent half of it\n    sandi_spent = sandi_initial_money / half_divisor\n\n    # L2\n    gillian_multiplier = 3 # three times Sandi's total\n    gillian_more_spent = 150 # spent $150 more\n    gillian_spent = sandi_spent * gillian_multiplier + gillian_more_spent\n\n    # FA\n    answer = gillian_spent\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "sandi_spent",
+    "operand_to_replace": "half_divisor",
+    "replacement_variable": "sandi_initial_money"
+  },
+  "correct_trace": {
+    "sandi_initial_money": 600,
+    "half_divisor": 2,
+    "sandi_spent": 300.0,
+    "gillian_multiplier": 3,
+    "gillian_more_spent": 150,
+    "gillian_spent": 1050.0,
+    "answer": 1050.0
+  },
+  "flawed_trace": {
+    "sandi_initial_money": 600,
+    "half_divisor": 2,
+    "sandi_spent": 1.0,
+    "gillian_multiplier": 3,
+    "gillian_more_spent": 150,
+    "gillian_spent": 153.0,
+    "answer": 153.0
+  },
+  "correct_value": 300.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "half_divisor"
+      ],
+      "line_number": "L1",
+      "output_variable": "sandi_spent",
+      "question_inputs": [
+        "sandi_initial_money"
+      ],
+      "solution_line_template": "Sandi spent {sandi_initial_money}/{half_divisor} = <<{sandi_initial_money}/{half_divisor}={sandi_spent}>>{sandi_spent} dollars at the farmer's market."
+    },
+    {
+      "WK_inputs": [
+        "gillian_multiplier"
+      ],
+      "line_number": "L2",
+      "output_variable": "gillian_spent",
+      "question_inputs": [
+        "gillian_more_spent"
+      ],
+      "solution_line_template": "Gillian spent {sandi_spent}*{gillian_multiplier}+{gillian_more_spent} = <<{sandi_spent}*{gillian_multiplier}+{gillian_more_spent}={gillian_spent}>>{gillian_spent} dollars at the farmer's market."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Sandi spent 600/600 = <<600/600=1>>1 dollars at the farmer's market.",
+    "L2": "Gillian spent 1*3+150 = <<1*3+150=153>>153 dollars at the farmer's market.",
+    "FA": "#### 153"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'sandi_initial_money' (600) was used instead of 'half_divisor' (2).",
+  "repro_seed": -7017797590959147111,
+  "model_name": "google_gemini-2.5-flash"
+}

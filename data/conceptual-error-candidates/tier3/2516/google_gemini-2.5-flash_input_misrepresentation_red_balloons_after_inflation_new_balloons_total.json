@@ -1,0 +1,70 @@
+{
+  "index": 2516,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "After inflating the 4 new balloons, she will have 2 red + 4 blue + 4 new = <<2+4+4=10>>10 total balloons",
+    "L2": "The probability of selecting red will be (2 red + 2 red newly inflated) / 10 total balloons = 40%"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2516.\n    Returns: the percent likelihood that one selected balloon will be red.\n    \"\"\"\n    # L1\n    initial_red_balloons = 2 # 2 red balloons\n    initial_blue_balloons = 4 # 4 blue balloons\n    new_balloons_total = 4 # inflates 4 more balloons\n    total_balloons = initial_red_balloons + initial_blue_balloons + new_balloons_total\n\n    # L2\n    new_red_balloons = 2 # two of each color red and blue\n    red_balloons_after_inflation = initial_red_balloons + new_red_balloons\n    red_probability_decimal = red_balloons_after_inflation / total_balloons\n    red_probability_percent = red_probability_decimal * 100\n\n    # FA\n    answer = red_probability_percent\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "red_balloons_after_inflation",
+    "operand_to_replace": "initial_red_balloons",
+    "replacement_variable": "new_balloons_total"
+  },
+  "correct_trace": {
+    "initial_red_balloons": 2,
+    "initial_blue_balloons": 4,
+    "new_balloons_total": 4,
+    "total_balloons": 10,
+    "new_red_balloons": 2,
+    "red_balloons_after_inflation": 4,
+    "red_probability_decimal": 0.4,
+    "red_probability_percent": 40.0,
+    "answer": 40.0
+  },
+  "flawed_trace": {
+    "initial_red_balloons": 2,
+    "initial_blue_balloons": 4,
+    "new_balloons_total": 4,
+    "total_balloons": 10,
+    "new_red_balloons": 2,
+    "red_balloons_after_inflation": 6,
+    "red_probability_decimal": 0.6,
+    "red_probability_percent": 60.0,
+    "answer": 60.0
+  },
+  "correct_value": 4,
+  "flawed_value": 6,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_balloons",
+      "question_inputs": [
+        "initial_red_balloons",
+        "initial_blue_balloons",
+        "new_balloons_total"
+      ],
+      "solution_line_template": "After inflating the {new_balloons_total} new balloons, she will have {initial_red_balloons} red + {initial_blue_balloons} blue + {new_balloons_total} new = <<{initial_red_balloons}+{initial_blue_balloons}+{new_balloons_total}={total_balloons}>>{total_balloons} total balloons"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "red_probability_percent",
+      "question_inputs": [
+        "new_red_balloons"
+      ],
+      "solution_line_template": "The probability of selecting red will be ({initial_red_balloons} red + {new_red_balloons} red newly inflated) / {total_balloons} total balloons = {red_probability_percent}%"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After inflating the 4 new balloons, she will have 2 red + 4 blue + 4 new = <<2+4+4=10>>10 total balloons",
+    "L2": "The probability of selecting red will be (2 red + 2 red newly inflated) / 10 total balloons = 60%",
+    "FA": "#### 60"
+  },
+  "erroneous_line_number": null,
+  "explanation": "Input misrepresentation. The value for 'new_balloons_total' (4) was used instead of 'initial_red_balloons' (2).",
+  "repro_seed": -727482887660778586,
+  "model_name": "google_gemini-2.5-flash"
+}

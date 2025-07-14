@@ -1,0 +1,99 @@
+{
+  "index": 1274,
+  "original_solution_mapping": {
+    "FA": "#### 19",
+    "L1": "The total number of teachers who ate pizza is 2/3*30 = <<2/3*30=20>>20",
+    "L2": "30-20 = <<30-20=10>>10 teachers did not eat pizza.",
+    "L3": "The number of staff members who ate pizza is 4/5*45 = <<4/5*45=36>>36",
+    "L4": "The number of staff members who did not eat pizza is 45-36 = <<45-36=9>>9",
+    "L5": "The number of non-pizza eaters is 9+10 = <<9+10=19>>19"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1274.\n    Returns: the total number of non-pizza eaters at Esme's school.\n    \"\"\"\n    # L1\n    teachers_pizza_fraction = Fraction(2, 3) # 2/3 of the teachers\n    total_teachers = 30 # 30 teachers\n    teachers_ate_pizza = teachers_pizza_fraction * total_teachers\n\n    # L2\n    teachers_no_pizza = total_teachers - teachers_ate_pizza\n\n    # L3\n    staff_pizza_fraction = Fraction(4, 5) # 4/5 of the staff members\n    total_staff = 45 # 45 staff members\n    staff_ate_pizza = staff_pizza_fraction * total_staff\n\n    # L4\n    staff_no_pizza = total_staff - staff_ate_pizza\n\n    # L5\n    total_non_pizza_eaters = staff_no_pizza + teachers_no_pizza\n\n    # FA\n    answer = total_non_pizza_eaters\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "staff_no_pizza",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x147ba9690>"
+  },
+  "correct_trace": {
+    "teachers_pizza_fraction": "2/3",
+    "total_teachers": 30,
+    "teachers_ate_pizza": "20",
+    "teachers_no_pizza": "10",
+    "staff_pizza_fraction": "4/5",
+    "total_staff": 45,
+    "staff_ate_pizza": "36",
+    "staff_no_pizza": "9",
+    "total_non_pizza_eaters": "19",
+    "answer": "19"
+  },
+  "flawed_trace": {
+    "teachers_pizza_fraction": "2/3",
+    "total_teachers": 30,
+    "teachers_ate_pizza": "20",
+    "teachers_no_pizza": "10",
+    "staff_pizza_fraction": "4/5",
+    "total_staff": 45,
+    "staff_ate_pizza": "36",
+    "staff_no_pizza": "5/4",
+    "total_non_pizza_eaters": "45/4",
+    "answer": "45/4"
+  },
+  "correct_value": "9",
+  "flawed_value": "5/4",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "teachers_ate_pizza",
+      "question_inputs": [
+        "teachers_pizza_fraction",
+        "total_teachers"
+      ],
+      "solution_line_template": "The total number of teachers who ate pizza is {teachers_pizza_fraction}*{total_teachers} = <<{teachers_pizza_fraction}*{total_teachers}={teachers_ate_pizza}>>{teachers_ate_pizza}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "teachers_no_pizza",
+      "question_inputs": [],
+      "solution_line_template": "{total_teachers}-{teachers_ate_pizza} = <<{total_teachers}-{teachers_ate_pizza}={teachers_no_pizza}>>{teachers_no_pizza} teachers did not eat pizza."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "staff_ate_pizza",
+      "question_inputs": [
+        "staff_pizza_fraction",
+        "total_staff"
+      ],
+      "solution_line_template": "The number of staff members who ate pizza is {staff_pizza_fraction}*{total_staff} = <<{staff_pizza_fraction}*{total_staff}={staff_ate_pizza}>>{staff_ate_pizza}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "staff_no_pizza",
+      "question_inputs": [],
+      "solution_line_template": "The number of staff members who did not eat pizza is {total_staff}-{staff_ate_pizza} = <<{total_staff}-{staff_ate_pizza}={staff_no_pizza}>>{staff_no_pizza}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_non_pizza_eaters",
+      "question_inputs": [],
+      "solution_line_template": "The number of non-pizza eaters is {staff_no_pizza}+{teachers_no_pizza} = <<{staff_no_pizza}+{teachers_no_pizza}={total_non_pizza_eaters}>>{total_non_pizza_eaters}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total number of teachers who ate pizza is 2/3*30 = <<2/3*30=20>>20",
+    "L2": "30-20 = <<30-20=10>>10 teachers did not eat pizza.",
+    "L3": "The number of staff members who ate pizza is 4/5*45 = <<4/5*45=36>>36",
+    "L4": "The number of staff members who did not eat pizza is 45-36 = <<45-36=5/4>>5/4",
+    "L5": "The number of non-pizza eaters is 5/4+10 = <<5/4+10=45/4>>45/4",
+    "FA": "#### 45/4"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": -6871751317653137455,
+  "model_name": "google_gemini-2.5-flash"
+}

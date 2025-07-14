@@ -1,0 +1,74 @@
+{
+  "index": 1861,
+  "original_solution_mapping": {
+    "FA": "#### 400",
+    "L1": "The number of cats on the street is 2/3*300 = <<2/3*300=200>>200",
+    "L2": "If there are 300 animals on the street, and 200 are cats, there are 300-200 = <<300-200=100>>100 dogs.",
+    "L3": "Since a dog has four legs, the total number of legs the 100 dogs have is 100*4 = <<100*4=400>>400 legs."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1861.\n    Returns: the total number of legs of dogs that are on the street.\n    \"\"\"\n    # L1\n    cat_fraction = Fraction(2, 3) # Two-thirds of all the animals\n    total_animals = 300 # 300 animals on the street\n    num_cats = cat_fraction * total_animals\n\n    # L2\n    num_dogs = total_animals - num_cats\n\n    # L3\n    legs_per_dog = 4 # WK\n    total_dog_legs = num_dogs * legs_per_dog\n\n    # FA\n    answer = total_dog_legs\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_dog_legs",
+    "operand_to_replace": "num_dogs",
+    "replacement_variable": "total_animals"
+  },
+  "correct_trace": {
+    "cat_fraction": "2/3",
+    "total_animals": 300,
+    "num_cats": "200",
+    "num_dogs": "100",
+    "legs_per_dog": 4,
+    "total_dog_legs": "400",
+    "answer": "400"
+  },
+  "flawed_trace": {
+    "cat_fraction": "2/3",
+    "total_animals": 300,
+    "num_cats": "200",
+    "num_dogs": "100",
+    "legs_per_dog": 4,
+    "total_dog_legs": 1200,
+    "answer": 1200
+  },
+  "correct_value": "400",
+  "flawed_value": 1200,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "num_cats",
+      "question_inputs": [
+        "cat_fraction",
+        "total_animals"
+      ],
+      "solution_line_template": "The number of cats on the street is {cat_fraction}*{total_animals} = <<{cat_fraction}*{total_animals}={num_cats}>>{num_cats}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_dogs",
+      "question_inputs": [],
+      "solution_line_template": "If there are {total_animals} animals on the street, and {num_cats} are cats, there are {total_animals}-{num_cats} = <<{total_animals}-{num_cats}={num_dogs}>>{num_dogs} dogs."
+    },
+    {
+      "WK_inputs": [
+        "legs_per_dog"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_dog_legs",
+      "question_inputs": [],
+      "solution_line_template": "Since a dog has four legs, the total number of legs the {num_dogs} dogs have is {num_dogs}*{legs_per_dog} = <<{num_dogs}*{legs_per_dog}={total_dog_legs}>>{total_dog_legs} legs."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The number of cats on the street is 2/3*300 = <<2/3*300=200>>200",
+    "L2": "If there are 300 animals on the street, and 200 are cats, there are 300-200 = <<300-200=100>>100 dogs.",
+    "L3": "Since a dog has four legs, the total number of legs the 300 dogs have is 300*4 = <<300*4=1200>>1200 legs.",
+    "FA": "#### 1200"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'total_animals' (value: 300) was used instead of 'num_dogs' (value: 100).",
+  "repro_seed": 3588625199930724048,
+  "model_name": "google_gemini-2.5-flash"
+}

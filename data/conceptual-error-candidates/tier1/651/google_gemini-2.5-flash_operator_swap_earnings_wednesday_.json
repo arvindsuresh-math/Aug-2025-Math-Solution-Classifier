@@ -1,0 +1,89 @@
+{
+  "index": 651,
+  "original_solution_mapping": {
+    "FA": "#### 117",
+    "L1": "Olivia made $9 * 4 hours = $<<9*4=36>>36 on Monday.",
+    "L2": "Olivia made $9 * 3 = $<<9*3=27>>27 on Wednesday.",
+    "L3": "Olivia made $9 * 6 hours = $<<9*6=54>>54 on Friday.",
+    "L4": "For the week Olivia made $36 + $27 + $54 = $<<36+27+54=117>>117."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 651.\n    Returns: the total money Olivia made this week.\n    \"\"\"\n    # L1\n    hourly_rate = 9 # $9 per hour\n    hours_monday = 4 # 4 hours on Monday\n    earnings_monday = hourly_rate * hours_monday\n\n    # L2\n    hours_wednesday = 3 # 3 hours on Wednesday\n    earnings_wednesday = hourly_rate * hours_wednesday\n\n    # L3\n    hours_friday = 6 # 6 hours on Friday\n    earnings_friday = hourly_rate * hours_friday\n\n    # L4\n    total_earnings_week = earnings_monday + earnings_wednesday + earnings_friday\n\n    # FA\n    answer = total_earnings_week\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "earnings_wednesday",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x1450aef90>"
+  },
+  "correct_trace": {
+    "hourly_rate": 9,
+    "hours_monday": 4,
+    "earnings_monday": 36,
+    "hours_wednesday": 3,
+    "earnings_wednesday": 27,
+    "hours_friday": 6,
+    "earnings_friday": 54,
+    "total_earnings_week": 117,
+    "answer": 117
+  },
+  "flawed_trace": {
+    "hourly_rate": 9,
+    "hours_monday": 4,
+    "earnings_monday": 36,
+    "hours_wednesday": 3,
+    "earnings_wednesday": 12,
+    "hours_friday": 6,
+    "earnings_friday": 54,
+    "total_earnings_week": 102,
+    "answer": 102
+  },
+  "correct_value": 27,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "hourly_rate",
+        "hours_monday"
+      ],
+      "WK_inputs": [],
+      "output_variable": "earnings_monday",
+      "solution_line_template": "Olivia made ${hourly_rate} * {hours_monday} hours = $<<{hourly_rate}*{hours_monday}={earnings_monday}>>{earnings_monday} on Monday."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "hours_wednesday"
+      ],
+      "WK_inputs": [],
+      "output_variable": "earnings_wednesday",
+      "solution_line_template": "Olivia made ${hourly_rate} * {hours_wednesday} = $<<{hourly_rate}*{hours_wednesday}={earnings_wednesday}>>{earnings_wednesday} on Wednesday."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "hours_friday"
+      ],
+      "WK_inputs": [],
+      "output_variable": "earnings_friday",
+      "solution_line_template": "Olivia made ${hourly_rate} * {hours_friday} hours = $<<{hourly_rate}*{hours_friday}={earnings_friday}>>{earnings_friday} on Friday."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_earnings_week",
+      "solution_line_template": "For the week Olivia made ${earnings_monday} + ${earnings_wednesday} + ${earnings_friday} = $<<{earnings_monday}+{earnings_wednesday}+{earnings_friday}={total_earnings_week}>>{total_earnings_week}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Olivia made $9 * 4 hours = $<<9*4=36>>36 on Monday.",
+    "L2": "Olivia made $9 * 3 = $<<9*3=12>>12 on Wednesday.",
+    "L3": "Olivia made $9 * 6 hours = $<<9*6=54>>54 on Friday.",
+    "L4": "For the week Olivia made $36 + $12 + $54 = $<<36+12+54=102>>102.",
+    "FA": "#### 102"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -5022259802115047913,
+  "model_name": "google_gemini-2.5-flash"
+}

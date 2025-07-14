@@ -1,0 +1,110 @@
+{
+  "index": 2507,
+  "original_solution_mapping": {
+    "FA": "#### 17",
+    "L1": "Sadie ran for 3 miles/hour * 2 hour = <<3*2=6>>6 miles.",
+    "L2": "Ariana covered a distance of 6 miles/hour * (1/2) hour = 3 miles.",
+    "L3": "Sarah ran for 4.5 hours - 2 hours - 0.5 hours = <<4.5-2-0.5=2>>2 hours.",
+    "L4": "In this time, Sarah traveled a distance of 4 miles/hour * 2 hours = <<4*2=8>>8 miles.",
+    "L5": "The total distance for the race was 6 miles + 3 miles + 8 miles = <<6+3+8=17>>17 miles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2507.\n    Returns: the total distance of the race.\n    \"\"\"\n    # L1\n    sadie_speed = 3 # 3 miles per hour\n    sadie_time = 2 # 2 hours\n    sadie_distance = sadie_speed * sadie_time\n\n    # L2\n    ariana_speed = 6 # 6 miles per hour\n    ariana_time_fraction = Fraction(1, 2) # half an hour\n    ariana_distance = ariana_speed * ariana_time_fraction\n\n    # L3\n    total_race_time = 4.5 # four and half hours\n    ariana_time_decimal = 0.5 # half an hour\n    sarah_time = total_race_time - sadie_time - ariana_time_decimal\n\n    # L4\n    sarah_speed = 4 # four miles per hour\n    sarah_distance = sarah_speed * sarah_time\n\n    # L5\n    total_distance = sadie_distance + ariana_distance + sarah_distance\n\n    # FA\n    answer = total_distance\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "sadie_distance",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x150945c90>"
+  },
+  "correct_trace": {
+    "sadie_speed": 3,
+    "sadie_time": 2,
+    "sadie_distance": 6,
+    "ariana_speed": 6,
+    "ariana_time_fraction": "1/2",
+    "ariana_distance": "3",
+    "total_race_time": 4.5,
+    "ariana_time_decimal": 0.5,
+    "sarah_time": 2.0,
+    "sarah_speed": 4,
+    "sarah_distance": 8.0,
+    "total_distance": 17.0,
+    "answer": 17.0
+  },
+  "flawed_trace": {
+    "sadie_speed": 3,
+    "sadie_time": 2,
+    "sadie_distance": 5,
+    "ariana_speed": 6,
+    "ariana_time_fraction": "1/2",
+    "ariana_distance": "3",
+    "total_race_time": 4.5,
+    "ariana_time_decimal": 0.5,
+    "sarah_time": 2.0,
+    "sarah_speed": 4,
+    "sarah_distance": 8.0,
+    "total_distance": 16.0,
+    "answer": 16.0
+  },
+  "correct_value": 6,
+  "flawed_value": 5,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "sadie_distance",
+      "question_inputs": [
+        "sadie_speed",
+        "sadie_time"
+      ],
+      "solution_line_template": "Sadie ran for {sadie_speed} miles/hour * {sadie_time} hour = <<{sadie_speed}*{sadie_time}={sadie_distance}>>{sadie_distance} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "ariana_distance",
+      "question_inputs": [
+        "ariana_speed",
+        "ariana_time_fraction"
+      ],
+      "solution_line_template": "Ariana covered a distance of {ariana_speed} miles/hour * ({ariana_time_fraction}) hour = {ariana_distance} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "sarah_time",
+      "question_inputs": [
+        "total_race_time",
+        "ariana_time_decimal"
+      ],
+      "solution_line_template": "Sarah ran for {total_race_time} hours - {sadie_time} hours - {ariana_time_decimal} hours = <<{total_race_time}-{sadie_time}-{ariana_time_decimal}={sarah_time}>>{sarah_time} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "sarah_distance",
+      "question_inputs": [
+        "sarah_speed"
+      ],
+      "solution_line_template": "In this time, Sarah traveled a distance of {sarah_speed} miles/hour * {sarah_time} hours = <<{sarah_speed}*{sarah_time}={sarah_distance}>>{sarah_distance} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_distance",
+      "question_inputs": [],
+      "solution_line_template": "The total distance for the race was {sadie_distance} miles + {ariana_distance} miles + {sarah_distance} miles = <<{sadie_distance}+{ariana_distance}+{sarah_distance}={total_distance}>>{total_distance} miles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Sadie ran for 3 miles/hour * 2 hour = <<3*2=5>>5 miles.",
+    "L2": "Ariana covered a distance of 6 miles/hour * (1/2) hour = 3 miles.",
+    "L3": "Sarah ran for 4.5 hours - 2 hours - 0.5 hours = <<4.5-2-0.5=2>>2 hours.",
+    "L4": "In this time, Sarah traveled a distance of 4 miles/hour * 2 hours = <<4*2=8>>8 miles.",
+    "L5": "The total distance for the race was 5 miles + 3 miles + 8 miles = <<5+3+8=16>>16 miles.",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 186359178136899177,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,98 @@
+{
+  "index": 929,
+  "original_solution_mapping": {
+    "FA": "#### 375",
+    "L1": "Tom can buy 1000/2=<<1000/2=500>>500 for half price.",
+    "L2": "He will spend $.50/2= $<<.50/2=.25>>.25 on the half-priced bricks.",
+    "L3": "Thus, he will spend 500*$.25=$<<500*.25=125>>125 on the half-priced bricks.",
+    "L4": "He will spend 500*$.50=$<<500*.50=250>>250 on the full-priced bricks.",
+    "L5": "Thus, he will spend $125+$250=$<<125+250=375>>375 total."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 929.\n    Returns: the total dollars Tom spends on bricks.\n    \"\"\"\n    # L1\n    total_bricks = 1000 # 1000 bricks\n    half_divisor = 2 # half of the bricks\n    bricks_half_price = total_bricks / half_divisor\n\n    # L2\n    full_price_per_brick = 0.50 # $.50\n    discount_divisor = 2 # 50% off\n    price_per_brick_half_price = full_price_per_brick / discount_divisor\n\n    # L3\n    cost_half_price_bricks = bricks_half_price * price_per_brick_half_price\n\n    # L4\n    cost_full_price_bricks = bricks_half_price * full_price_per_brick\n\n    # L5\n    total_cost = cost_half_price_bricks + cost_full_price_bricks\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_cost",
+    "replacement_variable": "cost_full_price_bricks"
+  },
+  "correct_trace": {
+    "total_bricks": 1000,
+    "half_divisor": 2,
+    "bricks_half_price": 500.0,
+    "full_price_per_brick": 0.5,
+    "discount_divisor": 2,
+    "price_per_brick_half_price": 0.25,
+    "cost_half_price_bricks": 125.0,
+    "cost_full_price_bricks": 250.0,
+    "total_cost": 375.0,
+    "answer": 375.0
+  },
+  "flawed_trace": {
+    "total_bricks": 1000,
+    "half_divisor": 2,
+    "bricks_half_price": 500.0,
+    "full_price_per_brick": 0.5,
+    "discount_divisor": 2,
+    "price_per_brick_half_price": 0.25,
+    "cost_half_price_bricks": 125.0,
+    "cost_full_price_bricks": 250.0,
+    "total_cost": 375.0,
+    "answer": 250.0
+  },
+  "correct_value": 375.0,
+  "flawed_value": 250.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "bricks_half_price",
+      "question_inputs": [
+        "total_bricks",
+        "half_divisor"
+      ],
+      "solution_line_template": "Tom can buy {total_bricks}/{half_divisor}=<<{total_bricks}/{half_divisor}={bricks_half_price}>>{bricks_half_price} for half price."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "price_per_brick_half_price",
+      "question_inputs": [
+        "full_price_per_brick",
+        "discount_divisor"
+      ],
+      "solution_line_template": "He will spend $.{full_price_per_brick}/{discount_divisor}= $<<{full_price_per_brick}/{discount_divisor}={price_per_brick_half_price}>>{price_per_brick_half_price} on the half-priced bricks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cost_half_price_bricks",
+      "question_inputs": [],
+      "solution_line_template": "Thus, he will spend {bricks_half_price}*$.{price_per_brick_half_price}=${cost_half_price_bricks}<<{bricks_half_price}*{price_per_brick_half_price}={cost_half_price_bricks}>>{cost_half_price_bricks} on the half-priced bricks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "cost_full_price_bricks",
+      "question_inputs": [],
+      "solution_line_template": "He will spend {bricks_half_price}*$.{full_price_per_brick}=${cost_full_price_bricks}<<{bricks_half_price}*{full_price_per_brick}={cost_full_price_bricks}>>{cost_full_price_bricks} on the full-priced bricks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_cost",
+      "question_inputs": [],
+      "solution_line_template": "Thus, he will spend ${cost_half_price_bricks}+${cost_full_price_bricks}=${total_cost}<<{cost_half_price_bricks}+{cost_full_price_bricks}={total_cost}>>{total_cost} total."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Tom can buy 1000/2=<<1000/2=500>>500 for half price.",
+    "L2": "He will spend $.0.5/2= $<<0.5/2=0.25>>0.25 on the half-priced bricks.",
+    "L3": "Thus, he will spend 500*$.0.25=$125<<500*0.25=125>>125 on the half-priced bricks.",
+    "L4": "He will spend 500*$.0.5=$250<<500*0.5=250>>250 on the full-priced bricks.",
+    "FA": "#### 250"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'cost_full_price_bricks' (value: 250.0) was reported instead of 'total_cost' (value: 375.0).",
+  "repro_seed": 4486158796960569044,
+  "model_name": "google_gemini-2.5-flash"
+}

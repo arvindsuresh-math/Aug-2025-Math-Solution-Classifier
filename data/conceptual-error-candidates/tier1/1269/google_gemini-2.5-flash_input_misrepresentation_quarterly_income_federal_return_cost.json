@@ -1,0 +1,95 @@
+{
+  "index": 1269,
+  "original_solution_mapping": {
+    "FA": "#### 4400",
+    "L1": "First find the total income from the federal returns: $50/return * 60 returns = $<<50*60=3000>>3000",
+    "L2": "Then find the total income from the state returns: $30/return * 20 returns = $<<30*20=600>>600",
+    "L3": "Then find the total income from the quarterly returns: $80/return * 10 returns = $<<80*10=800>>800",
+    "L4": "Then add the income from each source to find their total income: $3000 + $600 + $800 = $<<3000+600+800=4400>>4400"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1269.\n    Returns: the total revenue for the day.\n    \"\"\"\n    # L1\n    federal_return_cost = 50 # $50 for a federal return\n    federal_returns_sold = 60 # 60 federal returns\n    federal_income = federal_return_cost * federal_returns_sold\n\n    # L2\n    state_return_cost = 30 # $30 for a state return\n    state_returns_sold = 20 # 20 state returns\n    state_income = state_return_cost * state_returns_sold\n\n    # L3\n    quarterly_tax_cost = 80 # $80 for quarterly business taxes\n    quarterly_returns_sold = 10 # 10 quarterly returns\n    quarterly_income = quarterly_tax_cost * quarterly_returns_sold\n\n    # L4\n    total_revenue = federal_income + state_income + quarterly_income\n\n    # FA\n    answer = total_revenue\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "quarterly_income",
+    "operand_to_replace": "quarterly_returns_sold",
+    "replacement_variable": "federal_return_cost"
+  },
+  "correct_trace": {
+    "federal_return_cost": 50,
+    "federal_returns_sold": 60,
+    "federal_income": 3000,
+    "state_return_cost": 30,
+    "state_returns_sold": 20,
+    "state_income": 600,
+    "quarterly_tax_cost": 80,
+    "quarterly_returns_sold": 10,
+    "quarterly_income": 800,
+    "total_revenue": 4400,
+    "answer": 4400
+  },
+  "flawed_trace": {
+    "federal_return_cost": 50,
+    "federal_returns_sold": 60,
+    "federal_income": 3000,
+    "state_return_cost": 30,
+    "state_returns_sold": 20,
+    "state_income": 600,
+    "quarterly_tax_cost": 80,
+    "quarterly_returns_sold": 10,
+    "quarterly_income": 4000,
+    "total_revenue": 7600,
+    "answer": 7600
+  },
+  "correct_value": 800,
+  "flawed_value": 4000,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "federal_return_cost",
+        "federal_returns_sold"
+      ],
+      "WK_inputs": [],
+      "output_variable": "federal_income",
+      "solution_line_template": "First find the total income from the federal returns: ${federal_return_cost}/return * {federal_returns_sold} returns = $<<{federal_return_cost}*{federal_returns_sold}={federal_income}>>{federal_income}"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "state_return_cost",
+        "state_returns_sold"
+      ],
+      "WK_inputs": [],
+      "output_variable": "state_income",
+      "solution_line_template": "Then find the total income from the state returns: ${state_return_cost}/return * {state_returns_sold} returns = $<<{state_return_cost}*{state_returns_sold}={state_income}>>{state_income}"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "quarterly_tax_cost",
+        "quarterly_returns_sold"
+      ],
+      "WK_inputs": [],
+      "output_variable": "quarterly_income",
+      "solution_line_template": "Then find the total income from the quarterly returns: ${quarterly_tax_cost}/return * {quarterly_returns_sold} returns = $<<{quarterly_tax_cost}*{quarterly_returns_sold}={quarterly_income}>>{quarterly_income}"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_revenue",
+      "solution_line_template": "Then add the income from each source to find their total income: ${federal_income} + ${state_income} + ${quarterly_income} = $<<{federal_income}+{state_income}+{quarterly_income}={total_revenue}>>{total_revenue}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total income from the federal returns: $50/return * 60 returns = $<<50*60=3000>>3000",
+    "L2": "Then find the total income from the state returns: $30/return * 20 returns = $<<30*20=600>>600",
+    "L3": "Then find the total income from the quarterly returns: $80/return * 50 returns = $<<80*50=4000>>4000",
+    "L4": "Then add the income from each source to find their total income: $3000 + $600 + $4000 = $<<3000+600+4000=7600>>7600",
+    "FA": "#### 7600"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'federal_return_cost' (50) was used instead of 'quarterly_returns_sold' (10).",
+  "repro_seed": 7453290835139147442,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,67 @@
+{
+  "index": 842,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "If one meatball is made from 1/8 pound of hamburger meat, then 4 pounds of hamburger meat will make 4/(1/8)=4*8=<<4/(1/8)=32>>32 meatballs.",
+    "L2": "32 meatballs divided amongst 8 family members is 32/8=<<32/8=4>>4 meatballs per family member."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 842.\n    Returns: the number of meatballs Antonio will eat.\n    \"\"\"\n    # L1\n    hamburger_per_meatball = Fraction(1, 8) # 1/8 of a pound of hamburger per meatball\n    total_hamburger = 4 # 4 pounds of hamburger\n    reciprocal_of_hamburger_per_meatball = 8 # WK (reciprocal of 1/8)\n    total_meatballs = total_hamburger / hamburger_per_meatball\n\n    # L2\n    num_family_members = 8 # 8 family members\n    meatballs_per_person = total_meatballs / num_family_members\n\n    # FA\n    answer = meatballs_per_person\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_meatballs",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x147971cd0>"
+  },
+  "correct_trace": {
+    "hamburger_per_meatball": "1/8",
+    "total_hamburger": 4,
+    "reciprocal_of_hamburger_per_meatball": 8,
+    "total_meatballs": "32",
+    "num_family_members": 8,
+    "meatballs_per_person": "4",
+    "answer": "4"
+  },
+  "flawed_trace": {
+    "hamburger_per_meatball": "1/8",
+    "total_hamburger": 4,
+    "reciprocal_of_hamburger_per_meatball": 8,
+    "total_meatballs": "31/8",
+    "num_family_members": 8,
+    "meatballs_per_person": "31/64",
+    "answer": "31/64"
+  },
+  "correct_value": "32",
+  "flawed_value": "31/8",
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "reciprocal_of_hamburger_per_meatball"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_meatballs",
+      "question_inputs": [
+        "hamburger_per_meatball",
+        "total_hamburger"
+      ],
+      "solution_line_template": "If one meatball is made from {hamburger_per_meatball} pound of hamburger meat, then {total_hamburger} pounds of hamburger meat will make {total_hamburger}/({hamburger_per_meatball})={total_hamburger}*{reciprocal_of_hamburger_per_meatball}=<<{total_hamburger}/({hamburger_per_meatball})={total_meatballs}>>{total_meatballs} meatballs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "meatballs_per_person",
+      "question_inputs": [
+        "num_family_members"
+      ],
+      "solution_line_template": "{total_meatballs} meatballs divided amongst {num_family_members} family members is {total_meatballs}/{num_family_members}=<<{total_meatballs}/{num_family_members}={meatballs_per_person}>>{meatballs_per_person} meatballs per family member."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If one meatball is made from 1/8 pound of hamburger meat, then 4 pounds of hamburger meat will make 4/(1/8)=4*8=<<4/(1/8)=31/8>>31/8 meatballs.",
+    "L2": "31/8 meatballs divided amongst 8 family members is 31/8/8=<<31/8/8=31/64>>31/64 meatballs per family member.",
+    "FA": "#### 31/64"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": -1825358307511953623,
+  "model_name": "google_gemini-2.5-flash"
+}

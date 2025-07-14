@@ -1,0 +1,85 @@
+{
+  "index": 228,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "Drive to work:200(.60)=<<200*.60=120>>120",
+    "L2": "Don't Drive to work:200-120=<<200-120=80>>80",
+    "L3": "Public Transportation:80(.50)=40 employees",
+    "L4": "80-40=<<80-40=40>>40 employees"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 228.\n    Returns: the difference between employees who don't drive and those who take public transportation.\n    \"\"\"\n    # L1\n    total_employees = 200 # A company has 200 employees\n    drive_percent = 0.60 # 60% of the employees drive to work\n    employees_drive = total_employees * drive_percent\n\n    # L2\n    employees_dont_drive = total_employees - employees_drive\n\n    # L3\n    public_transport_fraction = 0.50 # half take public transportation\n    employees_public_transport = employees_dont_drive * public_transport_fraction\n\n    # L4\n    difference_dont_drive_public_transport = employees_dont_drive - employees_public_transport\n\n    # FA\n    answer = difference_dont_drive_public_transport\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "employees_public_transport",
+    "operand_to_replace": "employees_dont_drive",
+    "replacement_variable": "employees_drive"
+  },
+  "correct_trace": {
+    "total_employees": 200,
+    "drive_percent": 0.6,
+    "employees_drive": 120.0,
+    "employees_dont_drive": 80.0,
+    "public_transport_fraction": 0.5,
+    "employees_public_transport": 40.0,
+    "difference_dont_drive_public_transport": 40.0,
+    "answer": 40.0
+  },
+  "flawed_trace": {
+    "total_employees": 200,
+    "drive_percent": 0.6,
+    "employees_drive": 120.0,
+    "employees_dont_drive": 80.0,
+    "public_transport_fraction": 0.5,
+    "employees_public_transport": 60.0,
+    "difference_dont_drive_public_transport": 20.0,
+    "answer": 20.0
+  },
+  "correct_value": 40.0,
+  "flawed_value": 60.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "employees_drive",
+      "question_inputs": [
+        "total_employees",
+        "drive_percent"
+      ],
+      "solution_line_template": "Drive to work:{total_employees}({drive_percent})=<<{total_employees}*{drive_percent}={employees_drive}>>{employees_drive}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "employees_dont_drive",
+      "question_inputs": [],
+      "solution_line_template": "Don't Drive to work:{total_employees}-{employees_drive}=<<{total_employees}-{employees_drive}={employees_dont_drive}>>{employees_dont_drive}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "employees_public_transport",
+      "question_inputs": [
+        "public_transport_fraction"
+      ],
+      "solution_line_template": "Public Transportation:{employees_dont_drive}({public_transport_fraction})={employees_public_transport} employees"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "difference_dont_drive_public_transport",
+      "question_inputs": [],
+      "solution_line_template": "{employees_dont_drive}-{employees_public_transport}=<<{employees_dont_drive}-{employees_public_transport}={difference_dont_drive_public_transport}>>{difference_dont_drive_public_transport} employees"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Drive to work:200(0.6)=<<200*0.6=120>>120",
+    "L2": "Don't Drive to work:200-120=<<200-120=80>>80",
+    "L3": "Public Transportation:120(0.5)=60 employees",
+    "L4": "80-60=<<80-60=20>>20 employees",
+    "FA": "#### 20"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'employees_drive' (value: 120.0) was used instead of 'employees_dont_drive' (value: 80.0).",
+  "repro_seed": -3705674334965918584,
+  "model_name": "google_gemini-2.5-flash"
+}

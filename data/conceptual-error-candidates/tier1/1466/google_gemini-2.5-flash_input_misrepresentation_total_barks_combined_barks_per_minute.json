@@ -1,0 +1,63 @@
+{
+  "index": 1466,
+  "original_solution_mapping": {
+    "FA": "#### 600",
+    "L1": "There are 2 dogs and they each bark 30 times per minute so together they bark 2*30 = <<2*30=60>>60 times per minute",
+    "L2": "2 dogs bark a combined total of 60 times per minutes, after 10 minutes they will have barked 60*10 = <<60*10=600>>600 times"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1466.\n    Returns: the total number of times the dogs barked.\n    \"\"\"\n    # L1\n    num_dogs = 2 # 2 dogs\n    barks_per_dog_per_minute = 30 # 30 times per minute\n    combined_barks_per_minute = num_dogs * barks_per_dog_per_minute\n\n    # L2\n    time_in_minutes = 10 # after 10 minutes\n    total_barks = combined_barks_per_minute * time_in_minutes\n\n    # FA\n    answer = total_barks\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_barks",
+    "operand_to_replace": "time_in_minutes",
+    "replacement_variable": "combined_barks_per_minute"
+  },
+  "correct_trace": {
+    "num_dogs": 2,
+    "barks_per_dog_per_minute": 30,
+    "combined_barks_per_minute": 60,
+    "time_in_minutes": 10,
+    "total_barks": 600,
+    "answer": 600
+  },
+  "flawed_trace": {
+    "num_dogs": 2,
+    "barks_per_dog_per_minute": 30,
+    "combined_barks_per_minute": 60,
+    "time_in_minutes": 10,
+    "total_barks": 3600,
+    "answer": 3600
+  },
+  "correct_value": 600,
+  "flawed_value": 3600,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "num_dogs",
+        "barks_per_dog_per_minute"
+      ],
+      "WK_inputs": [],
+      "output_variable": "combined_barks_per_minute",
+      "solution_line_template": "There are {num_dogs} dogs and they each bark {barks_per_dog_per_minute} times per minute so together they bark {num_dogs}*{barks_per_dog_per_minute} = <<{num_dogs}*{barks_per_dog_per_minute}={combined_barks_per_minute}>>{combined_barks_per_minute} times per minute"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "time_in_minutes"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_barks",
+      "solution_line_template": "{num_dogs} dogs bark a combined total of {combined_barks_per_minute} times per minutes, after {time_in_minutes} minutes they will have barked {combined_barks_per_minute}*{time_in_minutes} = <<{combined_barks_per_minute}*{time_in_minutes}={total_barks}>>{total_barks} times"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 2 dogs and they each bark 30 times per minute so together they bark 2*30 = <<2*30=60>>60 times per minute",
+    "L2": "2 dogs bark a combined total of 60 times per minutes, after 60 minutes they will have barked 60*60 = <<60*60=3600>>3600 times",
+    "FA": "#### 3600"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'combined_barks_per_minute' (60) was used instead of 'time_in_minutes' (10).",
+  "repro_seed": 1666185530664917946,
+  "model_name": "google_gemini-2.5-flash"
+}

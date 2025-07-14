@@ -1,0 +1,63 @@
+{
+  "index": 398,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "The girls paid $2.50/person * 10 people = $<<2.5*10=25>>25.",
+    "L2": "The girls have $30 - $25 = $<<30-25=5>>5 left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 398.\n    Returns: the amount of money left after going to the pool.\n    \"\"\"\n    # L1\n    cost_per_person = 2.50 # $2.50 per person\n    num_people = 10 # 10 people are going\n    total_pool_cost = cost_per_person * num_people\n\n    # L2\n    initial_earnings = 30 # earned $30 total\n    amount_left = initial_earnings - total_pool_cost\n\n    # FA\n    answer = amount_left\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "amount_left",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x145d4cc90>"
+  },
+  "correct_trace": {
+    "cost_per_person": 2.5,
+    "num_people": 10,
+    "total_pool_cost": 25.0,
+    "initial_earnings": 30,
+    "amount_left": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "cost_per_person": 2.5,
+    "num_people": 10,
+    "total_pool_cost": 25.0,
+    "initial_earnings": 30,
+    "amount_left": 55.0,
+    "answer": 55.0
+  },
+  "correct_value": 5.0,
+  "flawed_value": 55.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_pool_cost",
+      "question_inputs": [
+        "cost_per_person",
+        "num_people"
+      ],
+      "solution_line_template": "The girls paid ${cost_per_person}/person * {num_people} people = $<<{cost_per_person}*{num_people}={total_pool_cost}>>{total_pool_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "amount_left",
+      "question_inputs": [
+        "initial_earnings"
+      ],
+      "solution_line_template": "The girls have ${initial_earnings} - ${total_pool_cost} = $<<{initial_earnings}-{total_pool_cost}={amount_left}>>{amount_left} left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The girls paid $2.5/person * 10 people = $<<2.5*10=25>>25.",
+    "L2": "The girls have $30 - $25 = $<<30-25=55>>55 left.",
+    "FA": "#### 55"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 5970600488701751619,
+  "model_name": "google_gemini-2.5-flash"
+}

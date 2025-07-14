@@ -1,0 +1,63 @@
+{
+  "index": 493,
+  "original_solution_mapping": {
+    "FA": "#### 4500",
+    "L1": "The total planned cost for the party was 100*50 = $<<100*50=5000>>5000",
+    "L2": "The total expenses for the party are 5000-500 = $<<5000-500=4500>>4500"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 493.\n    Returns: the total money used to pay for the party expenses.\n    \"\"\"\n    # L1\n    cost_per_attendee = 100 # each attendee had to pay $100\n    num_attendees = 50 # 50 people at the party\n    total_contributions = cost_per_attendee * num_attendees\n\n    # L2\n    expenses_less_than_contributions = 500 # $500 less than the total contributions\n    total_expenses = total_contributions - expenses_less_than_contributions\n\n    # FA\n    answer = total_expenses\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_expenses",
+    "operand_to_replace": "expenses_less_than_contributions",
+    "replacement_variable": "num_attendees"
+  },
+  "correct_trace": {
+    "cost_per_attendee": 100,
+    "num_attendees": 50,
+    "total_contributions": 5000,
+    "expenses_less_than_contributions": 500,
+    "total_expenses": 4500,
+    "answer": 4500
+  },
+  "flawed_trace": {
+    "cost_per_attendee": 100,
+    "num_attendees": 50,
+    "total_contributions": 5000,
+    "expenses_less_than_contributions": 500,
+    "total_expenses": 4950,
+    "answer": 4950
+  },
+  "correct_value": 4500,
+  "flawed_value": 4950,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "cost_per_attendee",
+        "num_attendees"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_contributions",
+      "solution_line_template": "The total planned cost for the party was {cost_per_attendee}*{num_attendees} = $<<{cost_per_attendee}*{num_attendees}={total_contributions}>>{total_contributions}"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "expenses_less_than_contributions"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_expenses",
+      "solution_line_template": "The total expenses for the party are {total_contributions}-{expenses_less_than_contributions} = $<<{total_contributions}-{expenses_less_than_contributions}={total_expenses}>>{total_expenses}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total planned cost for the party was 100*50 = $<<100*50=5000>>5000",
+    "L2": "The total expenses for the party are 5000-50 = $<<5000-50=4950>>4950",
+    "FA": "#### 4950"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_attendees' (50) was used instead of 'expenses_less_than_contributions' (500).",
+  "repro_seed": 4843942986796752026,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,89 @@
+{
+  "index": 3,
+  "original_solution_mapping": {
+    "FA": "#### 42",
+    "L1": "Maila read 12 x 2 = <<12*2=24>>24 pages today.",
+    "L2": "So she was able to read a total of 12 + 24 = <<12+24=36>>36 pages since yesterday.",
+    "L3": "There are 120 - 36 = <<120-36=84>>84 pages left to be read.",
+    "L4": "Since she wants to read half of the remaining pages tomorrow, then she should read 84/2 = <<84/2=42>>42 pages."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3.\n    Returns: the number of pages Julie should read tomorrow.\n    \"\"\"\n    # L1\n    pages_read_yesterday = 12 # Yesterday, she was able to read 12 pages\n    twice_factor = 2 # twice as many pages\n    pages_read_today = pages_read_yesterday * twice_factor\n\n    # L2\n    total_pages_read_so_far = pages_read_yesterday + pages_read_today\n\n    # L3\n    total_book_pages = 120 # Julie is reading a 120-page book\n    remaining_pages = total_book_pages - total_pages_read_so_far\n\n    # L4\n    half_factor = 2 # half of the remaining pages\n    pages_to_read_tomorrow = remaining_pages / half_factor\n\n    # FA\n    answer = pages_to_read_tomorrow\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "pages_read_today",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x146af0650>"
+  },
+  "correct_trace": {
+    "pages_read_yesterday": 12,
+    "twice_factor": 2,
+    "pages_read_today": 24,
+    "total_pages_read_so_far": 36,
+    "total_book_pages": 120,
+    "remaining_pages": 84,
+    "half_factor": 2,
+    "pages_to_read_tomorrow": 42.0,
+    "answer": 42.0
+  },
+  "flawed_trace": {
+    "pages_read_yesterday": 12,
+    "twice_factor": 2,
+    "pages_read_today": 6.0,
+    "total_pages_read_so_far": 18.0,
+    "total_book_pages": 120,
+    "remaining_pages": 102.0,
+    "half_factor": 2,
+    "pages_to_read_tomorrow": 51.0,
+    "answer": 51.0
+  },
+  "correct_value": 24,
+  "flawed_value": 6.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "pages_read_today",
+      "question_inputs": [
+        "pages_read_yesterday",
+        "twice_factor"
+      ],
+      "solution_line_template": "Maila read {pages_read_yesterday} x {twice_factor} = <<{pages_read_yesterday}*{twice_factor}={pages_read_today}>>{pages_read_today} pages today."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_pages_read_so_far",
+      "question_inputs": [],
+      "solution_line_template": "So she was able to read a total of {pages_read_yesterday} + {pages_read_today} = <<{pages_read_yesterday}+{pages_read_today}={total_pages_read_so_far}>>{total_pages_read_so_far} pages since yesterday."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_pages",
+      "question_inputs": [
+        "total_book_pages"
+      ],
+      "solution_line_template": "There are {total_book_pages} - {total_pages_read_so_far} = <<{total_book_pages}-{total_pages_read_so_far}={remaining_pages}>>{remaining_pages} pages left to be read."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "pages_to_read_tomorrow",
+      "question_inputs": [
+        "half_factor"
+      ],
+      "solution_line_template": "Since she wants to read half of the remaining pages tomorrow, then she should read {remaining_pages}/{half_factor} = <<{remaining_pages}/{half_factor}={pages_to_read_tomorrow}>>{pages_to_read_tomorrow} pages."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Maila read 12 x 2 = <<12*2=6>>6 pages today.",
+    "L2": "So she was able to read a total of 12 + 6 = <<12+6=18>>18 pages since yesterday.",
+    "L3": "There are 120 - 18 = <<120-18=102>>102 pages left to be read.",
+    "L4": "Since she wants to read half of the remaining pages tomorrow, then she should read 102/2 = <<102/2=51>>51 pages.",
+    "FA": "#### 51"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -6772259783052958740,
+  "model_name": "google_gemini-2.5-flash"
+}

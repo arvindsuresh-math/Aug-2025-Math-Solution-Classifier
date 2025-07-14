@@ -1,0 +1,77 @@
+{
+  "index": 1789,
+  "original_solution_mapping": {
+    "FA": "#### 35",
+    "L1": "Padma traded 2 + 15 of her cards = <<2+15=17>>17 cards.",
+    "L2": "Robert traded 10 + 8 of his cards = <<10+8=18>>18 cards.",
+    "L3": "In total, between both of them Padma and Robert traded 17 + 18 = <<17+18=35>>35 cards."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1789.\n    Returns: the total number of cards traded between Padma and Robert.\n    \"\"\"\n    # L1\n    padma_traded_valuable = 2 # traded 2 or her valuable ones\n    padma_traded_for_robert_cards = 15 # traded another 8 of his cards for 15 of Padma's cards\n    padma_total_traded = padma_traded_valuable + padma_traded_for_robert_cards\n\n    # L2\n    robert_traded_for_padma_cards = 10 # traded 2 or her valuable ones for 10 of Robert's cards\n    robert_traded_another = 8 # traded another 8 of his cards\n    robert_total_traded = robert_traded_for_padma_cards + robert_traded_another\n\n    # L3\n    total_cards_traded = padma_total_traded + robert_total_traded\n\n    # FA\n    answer = total_cards_traded\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "padma_total_traded",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x145746f50>"
+  },
+  "correct_trace": {
+    "padma_traded_valuable": 2,
+    "padma_traded_for_robert_cards": 15,
+    "padma_total_traded": 17,
+    "robert_traded_for_padma_cards": 10,
+    "robert_traded_another": 8,
+    "robert_total_traded": 18,
+    "total_cards_traded": 35,
+    "answer": 35
+  },
+  "flawed_trace": {
+    "padma_traded_valuable": 2,
+    "padma_traded_for_robert_cards": 15,
+    "padma_total_traded": 30,
+    "robert_traded_for_padma_cards": 10,
+    "robert_traded_another": 8,
+    "robert_total_traded": 18,
+    "total_cards_traded": 48,
+    "answer": 48
+  },
+  "correct_value": 17,
+  "flawed_value": 30,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "padma_traded_valuable",
+        "padma_traded_for_robert_cards"
+      ],
+      "WK_inputs": [],
+      "output_variable": "padma_total_traded",
+      "solution_line_template": "Padma traded {padma_traded_valuable} + {padma_traded_for_robert_cards} of her cards = <<{padma_traded_valuable}+{padma_traded_for_robert_cards}={padma_total_traded}>>{padma_total_traded} cards."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "robert_traded_for_padma_cards",
+        "robert_traded_another"
+      ],
+      "WK_inputs": [],
+      "output_variable": "robert_total_traded",
+      "solution_line_template": "Robert traded {robert_traded_for_padma_cards} + {robert_traded_another} of his cards = <<{robert_traded_for_padma_cards}+{robert_traded_another}={robert_total_traded}>>{robert_total_traded} cards."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_cards_traded",
+      "solution_line_template": "In total, between both of them Padma and Robert traded {padma_total_traded} + {robert_total_traded} = <<{padma_total_traded}+{robert_total_traded}={total_cards_traded}>>{total_cards_traded} cards."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Padma traded 2 + 15 of her cards = <<2+15=30>>30 cards.",
+    "L2": "Robert traded 10 + 8 of his cards = <<10+8=18>>18 cards.",
+    "L3": "In total, between both of them Padma and Robert traded 30 + 18 = <<30+18=48>>48 cards.",
+    "FA": "#### 48"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 2325023673936561265,
+  "model_name": "google_gemini-2.5-flash"
+}

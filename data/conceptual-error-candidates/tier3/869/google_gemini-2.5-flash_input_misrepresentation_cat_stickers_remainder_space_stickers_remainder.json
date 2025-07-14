@@ -1,0 +1,78 @@
+{
+  "index": 869,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "Paige has 100 space stickers that she is dividing among 3 friends, so 100 stickers / 3 friends = 33 stickers for each friend, with 1 remaining.",
+    "L2": "She also has 50 cat stickers that she is diving among 3 friends, so 50 stickers / 3 friends = 16 stickers for each friend, with 2 remaining.",
+    "L3": "So Paige will have 1 remaining space sticker + 2 remaining cat stickers = <<1+2=3>>3 stickers left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 869.\n    Returns: the number of stickers Paige will have left.\n    \"\"\"\n    # L1\n    space_stickers = 100 # a sheet of 100 space stickers\n    num_friends = 3 # 3 of her friends\n    space_stickers_per_friend = space_stickers // num_friends\n    space_stickers_remainder = space_stickers % num_friends\n\n    # L2\n    cat_stickers = 50 # a sheet of 50 cat stickers\n    cat_stickers_per_friend = cat_stickers // num_friends\n    cat_stickers_remainder = cat_stickers % num_friends\n\n    # L3\n    total_stickers_left = space_stickers_remainder + cat_stickers_remainder\n\n    # FA\n    answer = total_stickers_left\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "cat_stickers_remainder",
+    "operand_to_replace": "cat_stickers",
+    "replacement_variable": "space_stickers_remainder"
+  },
+  "correct_trace": {
+    "space_stickers": 100,
+    "num_friends": 3,
+    "space_stickers_per_friend": 33,
+    "space_stickers_remainder": 1,
+    "cat_stickers": 50,
+    "cat_stickers_per_friend": 16,
+    "cat_stickers_remainder": 2,
+    "total_stickers_left": 3,
+    "answer": 3
+  },
+  "flawed_trace": {
+    "space_stickers": 100,
+    "num_friends": 3,
+    "space_stickers_per_friend": 33,
+    "space_stickers_remainder": 1,
+    "cat_stickers": 50,
+    "cat_stickers_per_friend": 16,
+    "cat_stickers_remainder": 1,
+    "total_stickers_left": 2,
+    "answer": 2
+  },
+  "correct_value": 2,
+  "flawed_value": 1,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "space_stickers_remainder",
+      "question_inputs": [
+        "space_stickers",
+        "num_friends"
+      ],
+      "solution_line_template": "Paige has {space_stickers} space stickers that she is dividing among {num_friends} friends, so {space_stickers} stickers / {num_friends} friends = {space_stickers_per_friend} stickers for each friend, with {space_stickers_remainder} remaining."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cat_stickers_remainder",
+      "question_inputs": [
+        "cat_stickers"
+      ],
+      "solution_line_template": "She also has {cat_stickers} cat stickers that she is diving among {num_friends} friends, so {cat_stickers} stickers / {num_friends} friends = {cat_stickers_per_friend} stickers for each friend, with {cat_stickers_remainder} remaining."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_stickers_left",
+      "question_inputs": [],
+      "solution_line_template": "So Paige will have {space_stickers_remainder} remaining space sticker + {cat_stickers_remainder} remaining cat stickers = <<{space_stickers_remainder}+{cat_stickers_remainder}={total_stickers_left}>>{total_stickers_left} stickers left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Paige has 100 space stickers that she is dividing among 3 friends, so 100 stickers / 3 friends = 33 stickers for each friend, with 1 remaining.",
+    "L2": "She also has 1 cat stickers that she is diving among 3 friends, so 1 stickers / 3 friends = 16 stickers for each friend, with 1 remaining.",
+    "L3": "So Paige will have 1 remaining space sticker + 1 remaining cat stickers = <<1+1=2>>2 stickers left.",
+    "FA": "#### 2"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'space_stickers_remainder' (1) was used instead of 'cat_stickers' (50).",
+  "repro_seed": 2206574889167930629,
+  "model_name": "google_gemini-2.5-flash"
+}

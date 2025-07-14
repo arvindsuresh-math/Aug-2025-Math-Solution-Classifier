@@ -1,0 +1,63 @@
+{
+  "index": 1622,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "He needs 12 tablespoons of lemon juice for every dozen of cupcakes and he's making 3 dozen cupcakes so he needs 12*3 = <<12*3=36>>36 tablespoons of lemon juice",
+    "L2": "1 lemon provides 4 tablespoons of lemon juice and he needs 36 tablespoons so he will need 36/4 = <<36/4=9>>9 lemons"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1622.\n    Returns: the number of lemons Jose will need.\n    \"\"\"\n    # L1\n    tablespoons_per_dozen = 12 # 12 tablespoons of lemon juice to make a dozen\n    num_dozens = 3 # 3 dozen cupcakes\n    total_tablespoons_needed = tablespoons_per_dozen * num_dozens\n\n    # L2\n    tablespoons_per_lemon = 4 # Every lemon provides 4 tablespoons of lemon juice\n    lemons_needed = total_tablespoons_needed / tablespoons_per_lemon\n\n    # FA\n    answer = lemons_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_tablespoons_needed",
+    "operand_to_replace": "num_dozens",
+    "replacement_variable": "tablespoons_per_dozen"
+  },
+  "correct_trace": {
+    "tablespoons_per_dozen": 12,
+    "num_dozens": 3,
+    "total_tablespoons_needed": 36,
+    "tablespoons_per_lemon": 4,
+    "lemons_needed": 9.0,
+    "answer": 9.0
+  },
+  "flawed_trace": {
+    "tablespoons_per_dozen": 12,
+    "num_dozens": 3,
+    "total_tablespoons_needed": 144,
+    "tablespoons_per_lemon": 4,
+    "lemons_needed": 36.0,
+    "answer": 36.0
+  },
+  "correct_value": 36,
+  "flawed_value": 144,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_tablespoons_needed",
+      "question_inputs": [
+        "tablespoons_per_dozen",
+        "num_dozens"
+      ],
+      "solution_line_template": "He needs {tablespoons_per_dozen} tablespoons of lemon juice for every dozen of cupcakes and he's making {num_dozens} dozen cupcakes so he needs {tablespoons_per_dozen}*{num_dozens} = <<{tablespoons_per_dozen}*{num_dozens}={total_tablespoons_needed}>>{total_tablespoons_needed} tablespoons of lemon juice"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "lemons_needed",
+      "question_inputs": [
+        "tablespoons_per_lemon"
+      ],
+      "solution_line_template": "1 lemon provides {tablespoons_per_lemon} tablespoons of lemon juice and he needs {total_tablespoons_needed} tablespoons so he will need {total_tablespoons_needed}/{tablespoons_per_lemon} = <<{total_tablespoons_needed}/{tablespoons_per_lemon}={lemons_needed}>>{lemons_needed} lemons"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He needs 12 tablespoons of lemon juice for every dozen of cupcakes and he's making 12 dozen cupcakes so he needs 12*12 = <<12*12=144>>144 tablespoons of lemon juice",
+    "L2": "1 lemon provides 4 tablespoons of lemon juice and he needs 144 tablespoons so he will need 144/4 = <<144/4=36>>36 lemons",
+    "FA": "#### 36"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'tablespoons_per_dozen' (12) was used instead of 'num_dozens' (3).",
+  "repro_seed": 4906377577648425013,
+  "model_name": "google_gemini-2.5-flash"
+}

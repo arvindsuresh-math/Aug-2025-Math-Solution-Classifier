@@ -1,0 +1,84 @@
+{
+  "index": 2510,
+  "original_solution_mapping": {
+    "FA": "#### 36",
+    "L1": "Lindsey saved $50 + $37 + $11 = $<<50+37+11=98>>98.",
+    "L2": "$98 is greater than $75, so Lindsey is given an addition $25 + her original $98 = $<<98+25=123>>123.",
+    "L3": "Lindsey had $123 - $87 video game = $<<123-87=36>>36 remaining."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2510.\n    Returns: the amount of money Lindsey had left.\n    \"\"\"\n    # L1\n    saved_september = 50 # saved $50 in September\n    saved_october = 37 # saved $37 in October\n    saved_november = 11 # saved $11 in November\n    total_saved_initial = saved_september + saved_october + saved_november\n\n    # L2\n    mom_threshold = 75 # saved more than $75\n    mom_bonus = 25 # give Lindsey $25\n    total_after_bonus = total_saved_initial + mom_bonus\n\n    # L3\n    video_game_cost = 87 # spent $87 on a video game\n    money_left = total_after_bonus - video_game_cost\n\n    # FA\n    answer = money_left\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_saved_initial",
+    "operand_to_replace": "saved_november",
+    "replacement_variable": "saved_october"
+  },
+  "correct_trace": {
+    "saved_september": 50,
+    "saved_october": 37,
+    "saved_november": 11,
+    "total_saved_initial": 98,
+    "mom_threshold": 75,
+    "mom_bonus": 25,
+    "total_after_bonus": 123,
+    "video_game_cost": 87,
+    "money_left": 36,
+    "answer": 36
+  },
+  "flawed_trace": {
+    "saved_september": 50,
+    "saved_october": 37,
+    "saved_november": 11,
+    "total_saved_initial": 124,
+    "mom_threshold": 75,
+    "mom_bonus": 25,
+    "total_after_bonus": 149,
+    "video_game_cost": 87,
+    "money_left": 62,
+    "answer": 62
+  },
+  "correct_value": 98,
+  "flawed_value": 124,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "saved_september",
+        "saved_october",
+        "saved_november"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_saved_initial",
+      "solution_line_template": "Lindsey saved ${saved_september} + ${saved_october} + ${saved_november} = $<<{saved_september}+{saved_october}+{saved_november}={total_saved_initial}>>{total_saved_initial}."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "mom_threshold",
+        "mom_bonus"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_after_bonus",
+      "solution_line_template": "${total_saved_initial} is greater than ${mom_threshold}, so Lindsey is given an addition ${mom_bonus} + her original ${total_saved_initial} = $<<{total_saved_initial}+{mom_bonus}={total_after_bonus}>>{total_after_bonus}."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "video_game_cost"
+      ],
+      "WK_inputs": [],
+      "output_variable": "money_left",
+      "solution_line_template": "Lindsey had ${total_after_bonus} - ${video_game_cost} video game = $<<{total_after_bonus}-{video_game_cost}={money_left}>>{money_left} remaining."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Lindsey saved $50 + $37 + $37 = $<<50+37+37=124>>124.",
+    "L2": "$124 is greater than $75, so Lindsey is given an addition $25 + her original $124 = $<<124+25=149>>149.",
+    "L3": "Lindsey had $149 - $87 video game = $<<149-87=62>>62 remaining.",
+    "FA": "#### 62"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'saved_october' (37) was used instead of 'saved_november' (11).",
+  "repro_seed": -972882828895264564,
+  "model_name": "google_gemini-2.5-flash"
+}

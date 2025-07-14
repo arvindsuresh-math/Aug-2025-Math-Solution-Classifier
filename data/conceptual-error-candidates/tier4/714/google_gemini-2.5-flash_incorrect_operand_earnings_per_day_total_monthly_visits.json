@@ -1,0 +1,63 @@
+{
+  "index": 714,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "He gets 30,000/30=<<30000/30=1000>>1,000 visits per day",
+    "L2": "So that means he makes 1000*.01=$<<1000*.01=10>>10 per day"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 714.\n    Returns: the amount John makes per day.\n    \"\"\"\n    # L1\n    total_monthly_visits = 30000 # 30000 visits a month\n    normal_month_days = 30 # normal 30 day month\n    visits_per_day = total_monthly_visits / normal_month_days\n\n    # L2\n    earnings_per_visit = 0.01 # $.01 per visit\n    earnings_per_day = visits_per_day * earnings_per_visit\n\n    # FA\n    answer = earnings_per_day\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "earnings_per_day",
+    "operand_to_replace": "visits_per_day",
+    "replacement_variable": "total_monthly_visits"
+  },
+  "correct_trace": {
+    "total_monthly_visits": 30000,
+    "normal_month_days": 30,
+    "visits_per_day": 1000.0,
+    "earnings_per_visit": 0.01,
+    "earnings_per_day": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "total_monthly_visits": 30000,
+    "normal_month_days": 30,
+    "visits_per_day": 1000.0,
+    "earnings_per_visit": 0.01,
+    "earnings_per_day": 300.0,
+    "answer": 300.0
+  },
+  "correct_value": 10.0,
+  "flawed_value": 300.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "visits_per_day",
+      "question_inputs": [
+        "total_monthly_visits",
+        "normal_month_days"
+      ],
+      "solution_line_template": "He gets {total_monthly_visits}/{normal_month_days}=<<{total_monthly_visits}/{normal_month_days}={visits_per_day}>>1,000 visits per day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "earnings_per_day",
+      "question_inputs": [
+        "earnings_per_visit"
+      ],
+      "solution_line_template": "So that means he makes {visits_per_day}*{earnings_per_visit}=$<<{visits_per_day}*{earnings_per_visit}={earnings_per_day}>>{earnings_per_day} per day"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He gets 30000/30=<<30000/30=1000>>1,000 visits per day",
+    "L2": "So that means he makes 30000*0.01=$<<30000*0.01=300>>300 per day",
+    "FA": "#### 300"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'total_monthly_visits' (value: 30000) was used instead of 'visits_per_day' (value: 1000.0).",
+  "repro_seed": -2203685917917131787,
+  "model_name": "google_gemini-2.5-flash"
+}

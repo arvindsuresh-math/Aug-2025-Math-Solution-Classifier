@@ -1,0 +1,103 @@
+{
+  "index": 1231,
+  "original_solution_mapping": {
+    "FA": "#### 448",
+    "L1": "The first spacecraft flew for 30 minutes, or 30/60=1/2 hour.",
+    "L2": "The second spacecraft flew for 30+30=<<30+30=60>>60 minutes, or 1 hour.",
+    "L3": "Thus the first spacecraft traveled at a speed of 448 miles in 1/2 hour, or 448/(1/2)=896 miles per hour.",
+    "L4": "The second spacecraft traveled 448 miles in 1 hour, or 448/1=<<448/1=448>>448 miles per hour.",
+    "L5": "The difference in speed, in miles per hour, between the two spacecraft was 896-448=<<896-448=448>>448 miles per hour."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1231.\n    Returns: the difference in speed between the two spacecraft in miles per hour.\n    \"\"\"\n    # L1\n    first_spacecraft_flight_minutes = 30 # left New Orleans airport at 3:00 pm to travel the 448-mile distance to Dallas by air. Traveling nonstop, the first spacecraft landed in Dallas at 3:30 pm\n    minutes_per_hour = 60 # WK\n    first_spacecraft_flight_hours = first_spacecraft_flight_minutes / minutes_per_hour\n\n    # L2\n    additional_minutes_second_spacecraft = 30 # thirty minutes later\n    second_spacecraft_flight_minutes = first_spacecraft_flight_minutes + additional_minutes_second_spacecraft\n    second_spacecraft_flight_hours = second_spacecraft_flight_minutes / minutes_per_hour\n\n    # L3\n    distance_miles = 448 # 448-mile distance\n    first_spacecraft_speed_mph = distance_miles / first_spacecraft_flight_hours\n\n    # L4\n    second_spacecraft_speed_mph = distance_miles / second_spacecraft_flight_hours\n\n    # L5\n    speed_difference_mph = first_spacecraft_speed_mph - second_spacecraft_speed_mph\n\n    # FA\n    answer = speed_difference_mph\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "speed_difference_mph",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x147c51550>"
+  },
+  "correct_trace": {
+    "first_spacecraft_flight_minutes": 30,
+    "minutes_per_hour": 60,
+    "first_spacecraft_flight_hours": 0.5,
+    "additional_minutes_second_spacecraft": 30,
+    "second_spacecraft_flight_minutes": 60,
+    "second_spacecraft_flight_hours": 1.0,
+    "distance_miles": 448,
+    "first_spacecraft_speed_mph": 896.0,
+    "second_spacecraft_speed_mph": 448.0,
+    "speed_difference_mph": 448.0,
+    "answer": 448.0
+  },
+  "flawed_trace": {
+    "first_spacecraft_flight_minutes": 30,
+    "minutes_per_hour": 60,
+    "first_spacecraft_flight_hours": 0.5,
+    "additional_minutes_second_spacecraft": 30,
+    "second_spacecraft_flight_minutes": 60,
+    "second_spacecraft_flight_hours": 1.0,
+    "distance_miles": 448,
+    "first_spacecraft_speed_mph": 896.0,
+    "second_spacecraft_speed_mph": 448.0,
+    "speed_difference_mph": 2.0,
+    "answer": 2.0
+  },
+  "correct_value": 448.0,
+  "flawed_value": 2.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "first_spacecraft_flight_hours",
+      "question_inputs": [
+        "first_spacecraft_flight_minutes"
+      ],
+      "solution_line_template": "The first spacecraft flew for {first_spacecraft_flight_minutes} minutes, or {first_spacecraft_flight_minutes}/{minutes_per_hour}=1/2 hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "second_spacecraft_flight_minutes",
+      "question_inputs": [
+        "additional_minutes_second_spacecraft"
+      ],
+      "solution_line_template": "The second spacecraft flew for {first_spacecraft_flight_minutes}+{additional_minutes_second_spacecraft}=<<{first_spacecraft_flight_minutes}+{additional_minutes_second_spacecraft}={second_spacecraft_flight_minutes}>>{second_spacecraft_flight_minutes} minutes, or 1 hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "first_spacecraft_speed_mph",
+      "question_inputs": [
+        "distance_miles"
+      ],
+      "solution_line_template": "Thus the first spacecraft traveled at a speed of {distance_miles} miles in 1/2 hour, or {distance_miles}/({first_spacecraft_flight_hours})={first_spacecraft_speed_mph} miles per hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "second_spacecraft_speed_mph",
+      "question_inputs": [],
+      "solution_line_template": "The second spacecraft traveled {distance_miles} miles in 1 hour, or {distance_miles}/{second_spacecraft_flight_hours}=<<{distance_miles}/{second_spacecraft_flight_hours}={second_spacecraft_speed_mph}>>{second_spacecraft_speed_mph} miles per hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "speed_difference_mph",
+      "question_inputs": [],
+      "solution_line_template": "The difference in speed, in miles per hour, between the two spacecraft was {first_spacecraft_speed_mph}-{second_spacecraft_speed_mph}=<<{first_spacecraft_speed_mph}-{second_spacecraft_speed_mph}={speed_difference_mph}>>{speed_difference_mph} miles per hour."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The first spacecraft flew for 30 minutes, or 30/60=1/2 hour.",
+    "L2": "The second spacecraft flew for 30+30=<<30+30=60>>60 minutes, or 1 hour.",
+    "L3": "Thus the first spacecraft traveled at a speed of 448 miles in 1/2 hour, or 448/(0.5)=896 miles per hour.",
+    "L4": "The second spacecraft traveled 448 miles in 1 hour, or 448/1=<<448/1=448>>448 miles per hour.",
+    "L5": "The difference in speed, in miles per hour, between the two spacecraft was 896-448=<<896-448=2>>2 miles per hour.",
+    "FA": "#### 2"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": 8926590858859567214,
+  "model_name": "google_gemini-2.5-flash"
+}

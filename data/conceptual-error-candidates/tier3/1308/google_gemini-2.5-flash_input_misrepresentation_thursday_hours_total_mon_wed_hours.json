@@ -1,0 +1,119 @@
+{
+  "index": 1308,
+  "original_solution_mapping": {
+    "FA": "#### 19",
+    "L1": "On Monday, Jake watched 24 hours / 2 = <<24/2=12>>12 hours.",
+    "L2": "On Wednesday, he watched 24 hours / 4 = <<24/4=6>>6 hours.",
+    "L3": "So from Monday to Wednesday, he watched a total of 12 Monday hours + 4 Tuesday hours + 6 Wednesday hours = <<12+4+6=22>>22 hours.",
+    "L4": "He watched half of this on Thursday, which is 22 hours / 2 = <<22/2=11>>11 hours.",
+    "L5": "So from Monday to Thursday, he watched 22 + 11 = <<22+11=33>>33 hours.",
+    "L6": "To finish the show on Friday, he must have therefore watched 52 - 33 = <<52-33=19>>19 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1308.\n    Returns: the number of hours Jake watched on Friday.\n    \"\"\"\n    # L1\n    hours_per_day = 24 # WK\n    monday_divisor = 2 # half the day on Monday\n    monday_hours = hours_per_day / monday_divisor\n\n    # L2\n    wednesday_divisor = 4 # a quarter of the day on Wednesday\n    wednesday_hours = hours_per_day / wednesday_divisor\n\n    # L3\n    tuesday_hours = 4 # 4 hours on Tuesday\n    total_mon_wed_hours = monday_hours + tuesday_hours + wednesday_hours\n\n    # L4\n    thursday_divisor = 2 # half as much time watching the show on Thursday\n    thursday_hours = total_mon_wed_hours / thursday_divisor\n\n    # L5\n    total_mon_thu_hours = total_mon_wed_hours + thursday_hours\n\n    # L6\n    total_show_length = 52 # entire show is 52 hours long\n    friday_hours = total_show_length - total_mon_thu_hours\n\n    # FA\n    answer = friday_hours\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "thursday_hours",
+    "operand_to_replace": "thursday_divisor",
+    "replacement_variable": "total_mon_wed_hours"
+  },
+  "correct_trace": {
+    "hours_per_day": 24,
+    "monday_divisor": 2,
+    "monday_hours": 12.0,
+    "wednesday_divisor": 4,
+    "wednesday_hours": 6.0,
+    "tuesday_hours": 4,
+    "total_mon_wed_hours": 22.0,
+    "thursday_divisor": 2,
+    "thursday_hours": 11.0,
+    "total_mon_thu_hours": 33.0,
+    "total_show_length": 52,
+    "friday_hours": 19.0,
+    "answer": 19.0
+  },
+  "flawed_trace": {
+    "hours_per_day": 24,
+    "monday_divisor": 2,
+    "monday_hours": 12.0,
+    "wednesday_divisor": 4,
+    "wednesday_hours": 6.0,
+    "tuesday_hours": 4,
+    "total_mon_wed_hours": 22.0,
+    "thursday_divisor": 2,
+    "thursday_hours": 1.0,
+    "total_mon_thu_hours": 23.0,
+    "total_show_length": 52,
+    "friday_hours": 29.0,
+    "answer": 29.0
+  },
+  "correct_value": 11.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "hours_per_day",
+        "monday_divisor"
+      ],
+      "line_number": "L1",
+      "output_variable": "monday_hours",
+      "question_inputs": [],
+      "solution_line_template": "On Monday, Jake watched {hours_per_day} hours / {monday_divisor} = <<{hours_per_day}/{monday_divisor}={monday_hours}>>{monday_hours} hours."
+    },
+    {
+      "WK_inputs": [
+        "wednesday_divisor"
+      ],
+      "line_number": "L2",
+      "output_variable": "wednesday_hours",
+      "question_inputs": [],
+      "solution_line_template": "On Wednesday, he watched {hours_per_day} hours / {wednesday_divisor} = <<{hours_per_day}/{wednesday_divisor}={wednesday_hours}>>{wednesday_hours} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_mon_wed_hours",
+      "question_inputs": [
+        "tuesday_hours"
+      ],
+      "solution_line_template": "So from Monday to Wednesday, he watched a total of {monday_hours} Monday hours + {tuesday_hours} Tuesday hours + {wednesday_hours} Wednesday hours = <<{monday_hours}+{tuesday_hours}+{wednesday_hours}={total_mon_wed_hours}>>{total_mon_wed_hours} hours."
+    },
+    {
+      "WK_inputs": [
+        "thursday_divisor"
+      ],
+      "line_number": "L4",
+      "output_variable": "thursday_hours",
+      "question_inputs": [],
+      "solution_line_template": "He watched half of this on Thursday, which is {total_mon_wed_hours} hours / {thursday_divisor} = <<{total_mon_wed_hours}/{thursday_divisor}={thursday_hours}>>{thursday_hours} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_mon_thu_hours",
+      "question_inputs": [],
+      "solution_line_template": "So from Monday to Thursday, he watched {total_mon_wed_hours} + {thursday_hours} = <<{total_mon_wed_hours}+{thursday_hours}={total_mon_thu_hours}>>{total_mon_thu_hours} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "friday_hours",
+      "question_inputs": [
+        "total_show_length"
+      ],
+      "solution_line_template": "To finish the show on Friday, he must have therefore watched {total_show_length} - {total_mon_thu_hours} = <<{total_show_length}-{total_mon_thu_hours}={friday_hours}>>{friday_hours} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Monday, Jake watched 24 hours / 2 = <<24/2=12>>12 hours.",
+    "L2": "On Wednesday, he watched 24 hours / 4 = <<24/4=6>>6 hours.",
+    "L3": "So from Monday to Wednesday, he watched a total of 12 Monday hours + 4 Tuesday hours + 6 Wednesday hours = <<12+4+6=22>>22 hours.",
+    "L4": "He watched half of this on Thursday, which is 22 hours / 22 = <<22/22=1>>1 hours.",
+    "L5": "So from Monday to Thursday, he watched 22 + 1 = <<22+1=23>>23 hours.",
+    "L6": "To finish the show on Friday, he must have therefore watched 52 - 23 = <<52-23=29>>29 hours.",
+    "FA": "#### 29"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'total_mon_wed_hours' (22.0) was used instead of 'thursday_divisor' (2).",
+  "repro_seed": 113848309353037866,
+  "model_name": "google_gemini-2.5-flash"
+}

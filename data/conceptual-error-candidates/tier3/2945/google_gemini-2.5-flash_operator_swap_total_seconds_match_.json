@@ -1,0 +1,105 @@
+{
+  "index": 2945,
+  "original_solution_mapping": {
+    "FA": "#### 17",
+    "L1": "Both Polly and Peter played 30 / 2 =<<30/2=15>>15 moves each one",
+    "L2": "With an average of 28 seconds per move, Polly's moves lasted a total of 15 * 28 = <<15*28=420>>420 seconds.",
+    "L3": "With an average of 40 seconds per move, Peter's moves lasted a total of 15*40=<<15*40=600>>600 seconds.",
+    "L4": "In total, the match lasted 420 + 600 = <<420+600=1020>>1020 seconds.",
+    "L5": "In minutes, the match lasted 1020 / 60 = <<1020/60=17>>17 minutes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2945.\n    Returns: the total duration of the chess match in minutes.\n    \"\"\"\n    # L1\n    total_moves = 30 # The match ends after 30 moves\n    num_players = 2 # WK\n    moves_per_player = total_moves / num_players\n\n    # L2\n    polly_avg_seconds_per_move = 28 # Polly takes an average of 28 seconds per move\n    polly_total_seconds = moves_per_player * polly_avg_seconds_per_move\n\n    # L3\n    peter_avg_seconds_per_move = 40 # Peter takes an average of 40 seconds per move\n    peter_total_seconds = moves_per_player * peter_avg_seconds_per_move\n\n    # L4\n    total_seconds_match = polly_total_seconds + peter_total_seconds\n\n    # L5\n    seconds_per_minute = 60 # WK\n    total_minutes_match = total_seconds_match / seconds_per_minute\n\n    # FA\n    answer = total_minutes_match\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_seconds_match",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x1505a1950>"
+  },
+  "correct_trace": {
+    "total_moves": 30,
+    "num_players": 2,
+    "moves_per_player": 15.0,
+    "polly_avg_seconds_per_move": 28,
+    "polly_total_seconds": 420.0,
+    "peter_avg_seconds_per_move": 40,
+    "peter_total_seconds": 600.0,
+    "total_seconds_match": 1020.0,
+    "seconds_per_minute": 60,
+    "total_minutes_match": 17.0,
+    "answer": 17.0
+  },
+  "flawed_trace": {
+    "total_moves": 30,
+    "num_players": 2,
+    "moves_per_player": 15.0,
+    "polly_avg_seconds_per_move": 28,
+    "polly_total_seconds": 420.0,
+    "peter_avg_seconds_per_move": 40,
+    "peter_total_seconds": 600.0,
+    "total_seconds_match": 252000.0,
+    "seconds_per_minute": 60,
+    "total_minutes_match": 4200.0,
+    "answer": 4200.0
+  },
+  "correct_value": 1020.0,
+  "flawed_value": 252000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "num_players"
+      ],
+      "line_number": "L1",
+      "output_variable": "moves_per_player",
+      "question_inputs": [
+        "total_moves"
+      ],
+      "solution_line_template": "Both Polly and Peter played {total_moves} / {num_players} =<<{total_moves}/{num_players}={moves_per_player}>>{moves_per_player} moves each one"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "polly_total_seconds",
+      "question_inputs": [
+        "polly_avg_seconds_per_move"
+      ],
+      "solution_line_template": "With an average of {polly_avg_seconds_per_move} seconds per move, Polly's moves lasted a total of {moves_per_player} * {polly_avg_seconds_per_move} = <<{moves_per_player}*{polly_avg_seconds_per_move}={polly_total_seconds}>>{polly_total_seconds} seconds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "peter_total_seconds",
+      "question_inputs": [
+        "peter_avg_seconds_per_move"
+      ],
+      "solution_line_template": "With an average of {peter_avg_seconds_per_move} seconds per move, Peter's moves lasted a total of {moves_per_player}*{peter_avg_seconds_per_move}=<<{moves_per_player}*{peter_avg_seconds_per_move}={peter_total_seconds}>>{peter_total_seconds} seconds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_seconds_match",
+      "question_inputs": [],
+      "solution_line_template": "In total, the match lasted {polly_total_seconds} + {peter_total_seconds} = <<{polly_total_seconds}+{peter_total_seconds}={total_seconds_match}>>{total_seconds_match} seconds."
+    },
+    {
+      "WK_inputs": [
+        "seconds_per_minute"
+      ],
+      "line_number": "L5",
+      "output_variable": "total_minutes_match",
+      "question_inputs": [],
+      "solution_line_template": "In minutes, the match lasted {total_seconds_match} / {seconds_per_minute} = <<{total_seconds_match}/{seconds_per_minute}={total_minutes_match}>>{total_minutes_match} minutes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Both Polly and Peter played 30 / 2 =<<30/2=15>>15 moves each one",
+    "L2": "With an average of 28 seconds per move, Polly's moves lasted a total of 15 * 28 = <<15*28=420>>420 seconds.",
+    "L3": "With an average of 40 seconds per move, Peter's moves lasted a total of 15*40=<<15*40=600>>600 seconds.",
+    "L4": "In total, the match lasted 420 + 600 = <<420+600=252000>>252000 seconds.",
+    "L5": "In minutes, the match lasted 252000 / 60 = <<252000/60=4200>>4200 minutes",
+    "FA": "#### 4200"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 5736013288643111638,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 2228,
+  "original_solution_mapping": {
+    "FA": "#### 96",
+    "L1": "At each feeding Billy serves 4 horses x 4 pounds of oats/horse = <<4*4=16>>16 pounds/feeding",
+    "L2": "Each day Billy uses 16 pounds of oats/feeding x 2 feedings/day = <<16*2=32>>32 pounds of oats/day",
+    "L3": "Triple that amount to find the amount of oats needed to feed the four horses for three days: 32 pounds of oats/day x 3 days = <<32*3=96>>96 pounds"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2228.\n    Returns: the total pounds of oats needed for 3 days.\n    \"\"\"\n    # L1\n    num_horses = 4 # four horses\n    oats_per_horse_per_feeding = 4 # 4 pounds of oats\n    pounds_per_feeding = num_horses * oats_per_horse_per_feeding\n\n    # L2\n    feedings_per_day = 2 # twice a day\n    pounds_per_day = pounds_per_feeding * feedings_per_day\n\n    # L3\n    num_days = 3 # for 3 days\n    total_oats_needed = pounds_per_day * num_days\n\n    # FA\n    answer = total_oats_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_oats_needed",
+    "operand_to_replace": "num_days",
+    "replacement_variable": "pounds_per_feeding"
+  },
+  "correct_trace": {
+    "num_horses": 4,
+    "oats_per_horse_per_feeding": 4,
+    "pounds_per_feeding": 16,
+    "feedings_per_day": 2,
+    "pounds_per_day": 32,
+    "num_days": 3,
+    "total_oats_needed": 96,
+    "answer": 96
+  },
+  "flawed_trace": {
+    "num_horses": 4,
+    "oats_per_horse_per_feeding": 4,
+    "pounds_per_feeding": 16,
+    "feedings_per_day": 2,
+    "pounds_per_day": 32,
+    "num_days": 3,
+    "total_oats_needed": 512,
+    "answer": 512
+  },
+  "correct_value": 96,
+  "flawed_value": 512,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "num_horses",
+        "oats_per_horse_per_feeding"
+      ],
+      "WK_inputs": [],
+      "output_variable": "pounds_per_feeding",
+      "solution_line_template": "At each feeding Billy serves {num_horses} horses x {oats_per_horse_per_feeding} pounds of oats/horse = <<{num_horses}*{oats_per_horse_per_feeding}={pounds_per_feeding}>>{pounds_per_feeding} pounds/feeding"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "feedings_per_day"
+      ],
+      "WK_inputs": [],
+      "output_variable": "pounds_per_day",
+      "solution_line_template": "Each day Billy uses {pounds_per_feeding} pounds of oats/feeding x {feedings_per_day} feedings/day = <<{pounds_per_feeding}*{feedings_per_day}={pounds_per_day}>>{pounds_per_day} pounds of oats/day"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "num_days"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_oats_needed",
+      "solution_line_template": "Triple that amount to find the amount of oats needed to feed the four horses for three days: {pounds_per_day} pounds of oats/day x {num_days} days = <<{pounds_per_day}*{num_days}={total_oats_needed}>>{total_oats_needed} pounds"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "At each feeding Billy serves 4 horses x 4 pounds of oats/horse = <<4*4=16>>16 pounds/feeding",
+    "L2": "Each day Billy uses 16 pounds of oats/feeding x 2 feedings/day = <<16*2=32>>32 pounds of oats/day",
+    "L3": "Triple that amount to find the amount of oats needed to feed the four horses for three days: 32 pounds of oats/day x 16 days = <<32*16=512>>512 pounds",
+    "FA": "#### 512"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'pounds_per_feeding' (16) was used instead of 'num_days' (3).",
+  "repro_seed": 1333141485311353341,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,87 @@
+{
+  "index": 54,
+  "original_solution_mapping": {
+    "FA": "#### 11",
+    "L1": "Leah spent 28 / 7 = $<<28/7=4>>4 on a milkshake.",
+    "L2": "She had 28 - 4 = $<<28-4=24>>24 left.",
+    "L3": "She put half in her savings account and half in her wallet, so she had 24 / 2 = $<<24/2=12>>12 in her wallet.",
+    "L4": "Her dog shredded all the money in her wallet but $1, so Leah lost 12 - 1 = $<<12-1=11>>11."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 54.\n    Returns: the amount of money Leah lost.\n    \"\"\"\n    # L1\n    initial_money = 28 # Leah earned $28\n    milkshake_fraction_denominator = 7 # a seventh of it\n    milkshake_cost = initial_money / milkshake_fraction_denominator\n\n    # L2\n    money_after_milkshake = initial_money - milkshake_cost\n\n    # L3\n    wallet_fraction_denominator = 2 # half of the rest\n    money_in_wallet = money_after_milkshake / wallet_fraction_denominator\n\n    # L4\n    remaining_after_shredding = 1 # but $1\n    money_lost = money_in_wallet - remaining_after_shredding\n\n    # FA\n    answer = money_lost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "money_lost",
+    "replacement_variable": "money_after_milkshake"
+  },
+  "correct_trace": {
+    "initial_money": 28,
+    "milkshake_fraction_denominator": 7,
+    "milkshake_cost": 4.0,
+    "money_after_milkshake": 24.0,
+    "wallet_fraction_denominator": 2,
+    "money_in_wallet": 12.0,
+    "remaining_after_shredding": 1,
+    "money_lost": 11.0,
+    "answer": 11.0
+  },
+  "flawed_trace": {
+    "initial_money": 28,
+    "milkshake_fraction_denominator": 7,
+    "milkshake_cost": 4.0,
+    "money_after_milkshake": 24.0,
+    "wallet_fraction_denominator": 2,
+    "money_in_wallet": 12.0,
+    "remaining_after_shredding": 1,
+    "money_lost": 11.0,
+    "answer": 24.0
+  },
+  "correct_value": 11.0,
+  "flawed_value": 24.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "milkshake_cost",
+      "question_inputs": [
+        "initial_money",
+        "milkshake_fraction_denominator"
+      ],
+      "solution_line_template": "Leah spent {initial_money} / {milkshake_fraction_denominator} = $<<{initial_money}/{milkshake_fraction_denominator}={milkshake_cost}>>{milkshake_cost} on a milkshake."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_after_milkshake",
+      "question_inputs": [],
+      "solution_line_template": "She had {initial_money} - {milkshake_cost} = $<<{initial_money}-{milkshake_cost}={money_after_milkshake}>>{money_after_milkshake} left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "money_in_wallet",
+      "question_inputs": [
+        "wallet_fraction_denominator"
+      ],
+      "solution_line_template": "She put half in her savings account and half in her wallet, so she had {money_after_milkshake} / {wallet_fraction_denominator} = $<<{money_after_milkshake}/{wallet_fraction_denominator}={money_in_wallet}>>{money_in_wallet} in her wallet."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "money_lost",
+      "question_inputs": [
+        "remaining_after_shredding"
+      ],
+      "solution_line_template": "Her dog shredded all the money in her wallet but ${remaining_after_shredding}, so Leah lost {money_in_wallet} - {remaining_after_shredding} = $<<{money_in_wallet}-{remaining_after_shredding}={money_lost}>>{money_lost}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Leah spent 28 / 7 = $<<28/7=4>>4 on a milkshake.",
+    "L2": "She had 28 - 4 = $<<28-4=24>>24 left.",
+    "FA": "#### 24"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'money_after_milkshake' (value: 24.0) was reported instead of 'money_lost' (value: 11.0).",
+  "repro_seed": 7024736343234241758,
+  "model_name": "google_gemini-2.5-flash"
+}

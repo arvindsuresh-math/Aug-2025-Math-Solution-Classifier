@@ -1,0 +1,106 @@
+{
+  "index": 317,
+  "original_solution_mapping": {
+    "FA": "#### 46",
+    "L1": "Madeline spends 4*7=<<4*7=28>>28 hours on homework.",
+    "L2": "She spends 8*7-56 hours sleeping.",
+    "L3": "Therefore, she is busy 28+18+56+20=<<28+18+56+20=122>>122 hours per week.",
+    "L4": "There are 7*24=<<7*24=168>>168 hours per week.",
+    "L5": "Thus, Madeline has 168-122=<<168-122=46>>46 hours left over."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 317.\n    Returns: the number of hours Madeline has left over in a week.\n    \"\"\"\n    # L1\n    homework_hours_per_day = 4 # 4 hours per day working on homework\n    days_per_week = 7 # WK\n    homework_hours_per_week = homework_hours_per_day * days_per_week\n\n    # L2\n    sleep_hours_per_day = 8 # 8 hours per day sleeping\n    sleep_hours_per_week = sleep_hours_per_day * days_per_week\n\n    # L3\n    class_hours_per_week = 18 # 18 hours a week in class\n    work_hours_per_week = 20 # 20 hours per week part-time work\n    total_busy_hours = homework_hours_per_week + class_hours_per_week + sleep_hours_per_week + work_hours_per_week\n\n    # L4\n    hours_per_day = 24 # WK\n    total_hours_per_week = days_per_week * hours_per_day\n\n    # L5\n    answer = total_hours_per_week - total_busy_hours\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_busy_hours",
+    "operand_to_replace": "homework_hours_per_week",
+    "replacement_variable": "work_hours_per_week"
+  },
+  "correct_trace": {
+    "homework_hours_per_day": 4,
+    "days_per_week": 7,
+    "homework_hours_per_week": 28,
+    "sleep_hours_per_day": 8,
+    "sleep_hours_per_week": 56,
+    "class_hours_per_week": 18,
+    "work_hours_per_week": 20,
+    "total_busy_hours": 122,
+    "hours_per_day": 24,
+    "total_hours_per_week": 168,
+    "answer": 46
+  },
+  "flawed_trace": {
+    "homework_hours_per_day": 4,
+    "days_per_week": 7,
+    "homework_hours_per_week": 28,
+    "sleep_hours_per_day": 8,
+    "sleep_hours_per_week": 56,
+    "class_hours_per_week": 18,
+    "work_hours_per_week": 20,
+    "total_busy_hours": 114,
+    "hours_per_day": 24,
+    "total_hours_per_week": 168,
+    "answer": 54
+  },
+  "correct_value": 122,
+  "flawed_value": 114,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "homework_hours_per_day"
+      ],
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "output_variable": "homework_hours_per_week",
+      "solution_line_template": "Madeline spends {homework_hours_per_day}*{days_per_week}=<<{homework_hours_per_day}*{days_per_week}={homework_hours_per_week}>>{homework_hours_per_week} hours on homework."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "sleep_hours_per_day"
+      ],
+      "WK_inputs": [],
+      "output_variable": "sleep_hours_per_week",
+      "solution_line_template": "She spends {sleep_hours_per_day}*{days_per_week}-{sleep_hours_per_week} hours sleeping."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "class_hours_per_week",
+        "work_hours_per_week"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_busy_hours",
+      "solution_line_template": "Therefore, she is busy {homework_hours_per_week}+{class_hours_per_week}+{sleep_hours_per_week}+{work_hours_per_week}=<<{homework_hours_per_week}+{class_hours_per_week}+{sleep_hours_per_week}+{work_hours_per_week}={total_busy_hours}>>{total_busy_hours} hours per week."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [
+        "hours_per_day"
+      ],
+      "output_variable": "total_hours_per_week",
+      "solution_line_template": "There are {days_per_week}*{hours_per_day}=<<{days_per_week}*{hours_per_day}={total_hours_per_week}>>{total_hours_per_week} hours per week."
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "answer",
+      "solution_line_template": "Thus, Madeline has {total_hours_per_week}-{total_busy_hours}=<<{total_hours_per_week}-{total_busy_hours}={answer}>>{answer} hours left over."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Madeline spends 4*7=<<4*7=28>>28 hours on homework.",
+    "L2": "She spends 8*7-56 hours sleeping.",
+    "L3": "Therefore, she is busy 20+18+56+20=<<20+18+56+20=114>>114 hours per week.",
+    "L4": "There are 7*24=<<7*24=168>>168 hours per week.",
+    "L5": "Thus, Madeline has 168-114=<<168-114=54>>54 hours left over.",
+    "FA": "#### 54"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'work_hours_per_week' (value: 20) was used instead of 'homework_hours_per_week' (value: 28).",
+  "repro_seed": -6119727264304000745,
+  "model_name": "openai_gpt-4.1"
+}

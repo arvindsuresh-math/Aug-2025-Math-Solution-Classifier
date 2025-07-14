@@ -1,0 +1,63 @@
+{
+  "index": 805,
+  "original_solution_mapping": {
+    "FA": "#### 24",
+    "L1": "Each screen shows movies all day, which means each screen shows 8 hours/day / 2 hours per movie = <<8/2=4>>4 movies/day.",
+    "L2": "So in total, the movie theater shows 6 screens * 4 movies/day = <<6*4=24>>24 movies."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 805.\n    Returns: the total number of movies shown throughout the day.\n    \"\"\"\n    # L1\n    open_hours = 8 # movie theater is open for 8 hours\n    movie_duration = 2 # each movie lasts 2 hours\n    movies_per_screen_per_day = open_hours / movie_duration\n\n    # L2\n    num_screens = 6 # 6 screens\n    total_movies = num_screens * movies_per_screen_per_day\n\n    # FA\n    answer = total_movies\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_movies",
+    "operand_to_replace": "num_screens",
+    "replacement_variable": "open_hours"
+  },
+  "correct_trace": {
+    "open_hours": 8,
+    "movie_duration": 2,
+    "movies_per_screen_per_day": 4.0,
+    "num_screens": 6,
+    "total_movies": 24.0,
+    "answer": 24.0
+  },
+  "flawed_trace": {
+    "open_hours": 8,
+    "movie_duration": 2,
+    "movies_per_screen_per_day": 4.0,
+    "num_screens": 6,
+    "total_movies": 32.0,
+    "answer": 32.0
+  },
+  "correct_value": 24.0,
+  "flawed_value": 32.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "movies_per_screen_per_day",
+      "question_inputs": [
+        "open_hours",
+        "movie_duration"
+      ],
+      "solution_line_template": "Each screen shows movies all day, which means each screen shows {open_hours} hours/day / {movie_duration} hours per movie = <<{open_hours}/{movie_duration}={movies_per_screen_per_day}>>{movies_per_screen_per_day} movies/day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_movies",
+      "question_inputs": [
+        "num_screens"
+      ],
+      "solution_line_template": "So in total, the movie theater shows {num_screens} screens * {movies_per_screen_per_day} movies/day = <<{num_screens}*{movies_per_screen_per_day}={total_movies}>>{total_movies} movies."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each screen shows movies all day, which means each screen shows 8 hours/day / 2 hours per movie = <<8/2=4>>4 movies/day.",
+    "L2": "So in total, the movie theater shows 8 screens * 4 movies/day = <<8*4=32>>32 movies.",
+    "FA": "#### 32"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'open_hours' (8) was used instead of 'num_screens' (6).",
+  "repro_seed": 8971481162635642279,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,93 @@
+{
+  "index": 471,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "Earl was on the 1 + 5 = <<1+5=6>>6th floor after going up 5 floors.",
+    "L2": "When he went down 2 floors, he was on the 6 - 2 = <<6-2=4>>4th floor.",
+    "L3": "Since he went up 7 floors, he was then on the 4 + 7 = <<4+7=11>>11th floor.",
+    "L4": "Since he is 9 floors away from the top of the building, therefore the building has 11 + 9 = <<11+9=20>>20 floors."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 471.\n    Returns: the total number of floors in the building.\n    \"\"\"\n    # L1\n    start_floor = 1 # first floor\n    up_5_floors = 5 # went up 5 floors\n    current_floor_after_up_5 = start_floor + up_5_floors\n\n    # L2\n    down_2_floors = 2 # went down 2 floors\n    current_floor_after_down_2 = current_floor_after_up_5 - down_2_floors\n\n    # L3\n    up_7_floors = 7 # went up 7 floors\n    current_floor_after_up_7 = current_floor_after_down_2 + up_7_floors\n\n    # L4\n    floors_away_from_top = 9 # 9 floors away from the top of the building\n    total_floors = current_floor_after_up_7 + floors_away_from_top\n\n    # FA\n    answer = total_floors\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "current_floor_after_down_2",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x145028e90>"
+  },
+  "correct_trace": {
+    "start_floor": 1,
+    "up_5_floors": 5,
+    "current_floor_after_up_5": 6,
+    "down_2_floors": 2,
+    "current_floor_after_down_2": 4,
+    "up_7_floors": 7,
+    "current_floor_after_up_7": 11,
+    "floors_away_from_top": 9,
+    "total_floors": 20,
+    "answer": 20
+  },
+  "flawed_trace": {
+    "start_floor": 1,
+    "up_5_floors": 5,
+    "current_floor_after_up_5": 6,
+    "down_2_floors": 2,
+    "current_floor_after_down_2": 8,
+    "up_7_floors": 7,
+    "current_floor_after_up_7": 15,
+    "floors_away_from_top": 9,
+    "total_floors": 24,
+    "answer": 24
+  },
+  "correct_value": 4,
+  "flawed_value": 8,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "start_floor",
+        "up_5_floors"
+      ],
+      "WK_inputs": [],
+      "output_variable": "current_floor_after_up_5",
+      "solution_line_template": "Earl was on the {start_floor} + {up_5_floors} = <<{start_floor}+{up_5_floors}={current_floor_after_up_5}>>{current_floor_after_up_5}th floor after going up {up_5_floors} floors."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "down_2_floors"
+      ],
+      "WK_inputs": [],
+      "output_variable": "current_floor_after_down_2",
+      "solution_line_template": "When he went down {down_2_floors} floors, he was on the {current_floor_after_up_5} - {down_2_floors} = <<{current_floor_after_up_5}-{down_2_floors}={current_floor_after_down_2}>>{current_floor_after_down_2}th floor."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "up_7_floors"
+      ],
+      "WK_inputs": [],
+      "output_variable": "current_floor_after_up_7",
+      "solution_line_template": "Since he went up {up_7_floors} floors, he was then on the {current_floor_after_down_2} + {up_7_floors} = <<{current_floor_after_down_2}+{up_7_floors}={current_floor_after_up_7}>>{current_floor_after_up_7}th floor."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "floors_away_from_top"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_floors",
+      "solution_line_template": "Since he is {floors_away_from_top} floors away from the top of the building, therefore the building has {current_floor_after_up_7} + {floors_away_from_top} = <<{current_floor_after_up_7}+{floors_away_from_top}={total_floors}>>{total_floors} floors."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Earl was on the 1 + 5 = <<1+5=6>>6th floor after going up 5 floors.",
+    "L2": "When he went down 2 floors, he was on the 6 - 2 = <<6-2=8>>8th floor.",
+    "L3": "Since he went up 7 floors, he was then on the 8 + 7 = <<8+7=15>>15th floor.",
+    "L4": "Since he is 9 floors away from the top of the building, therefore the building has 15 + 9 = <<15+9=24>>24 floors.",
+    "FA": "#### 24"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -8466166092595399416,
+  "model_name": "google_gemini-2.5-flash"
+}

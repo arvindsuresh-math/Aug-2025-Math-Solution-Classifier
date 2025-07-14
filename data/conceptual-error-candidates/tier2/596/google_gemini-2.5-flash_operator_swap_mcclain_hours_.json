@@ -1,0 +1,100 @@
+{
+  "index": 596,
+  "original_solution_mapping": {
+    "FA": "#### 3240",
+    "L1": "Bianca = <<12.5=12.5>>12.5 hours",
+    "L2": "Celeste 2 * 12.5 = <<2*12.5=25>>25 hours",
+    "L3": "McClain = 25 - 8.5 = <<25-8.5=16.5>>16.5 hours",
+    "L4": "Total + 12.5 + 25 + 16.5 = <<+12.5+25+16.5=54>>54 hours",
+    "L5": "54 hours * 60 minutes = <<54*60=3240>>3240 minutes.",
+    "L6": "Bianca, Celeste and McClain worked a total of 3240 minutes last weekend."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 596.\n    Returns: the total number of minutes the three people worked.\n    \"\"\"\n    # L1\n    bianca_hours = 12.5 # worked for 12.5 hours last weekend\n    \n    # L2\n    celeste_multiplier = 2 # worked for twice that amount of time\n    celeste_hours = celeste_multiplier * bianca_hours\n\n    # L3\n    mcclain_less_hours = 8.5 # worked 8.5 hours less than Celeste\n    mcclain_hours = celeste_hours - mcclain_less_hours\n\n    # L4\n    total_hours = bianca_hours + celeste_hours + mcclain_hours\n\n    # L5\n    minutes_per_hour = 60 # WK\n    total_minutes = total_hours * minutes_per_hour\n\n    # FA\n    answer = total_minutes\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "mcclain_hours",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x145dc2cd0>"
+  },
+  "correct_trace": {
+    "bianca_hours": 12.5,
+    "celeste_multiplier": 2,
+    "celeste_hours": 25.0,
+    "mcclain_less_hours": 8.5,
+    "mcclain_hours": 16.5,
+    "total_hours": 54.0,
+    "minutes_per_hour": 60,
+    "total_minutes": 3240.0,
+    "answer": 3240.0
+  },
+  "flawed_trace": {
+    "bianca_hours": 12.5,
+    "celeste_multiplier": 2,
+    "celeste_hours": 25.0,
+    "mcclain_less_hours": 8.5,
+    "mcclain_hours": 33.5,
+    "total_hours": 71.0,
+    "minutes_per_hour": 60,
+    "total_minutes": 4260.0,
+    "answer": 4260.0
+  },
+  "correct_value": 16.5,
+  "flawed_value": 33.5,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "bianca_hours",
+      "question_inputs": [
+        "bianca_hours"
+      ],
+      "solution_line_template": "Bianca = <<{bianca_hours}={bianca_hours}>>{bianca_hours} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "celeste_hours",
+      "question_inputs": [
+        "celeste_multiplier"
+      ],
+      "solution_line_template": "Celeste {celeste_multiplier} * {bianca_hours} = <<{celeste_multiplier}*{bianca_hours}={celeste_hours}>>{celeste_hours} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "mcclain_hours",
+      "question_inputs": [
+        "mcclain_less_hours"
+      ],
+      "solution_line_template": "McClain = {celeste_hours} - {mcclain_less_hours} = <<{celeste_hours}-{mcclain_less_hours}={mcclain_hours}>>{mcclain_hours} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_hours",
+      "question_inputs": [],
+      "solution_line_template": "Total + {bianca_hours} + {celeste_hours} + {mcclain_hours} = <<+{bianca_hours}+{celeste_hours}+{mcclain_hours}={total_hours}>>{total_hours} hours"
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L5",
+      "output_variable": "total_minutes",
+      "question_inputs": [],
+      "solution_line_template": "{total_hours} hours * {minutes_per_hour} minutes = <<{total_hours}*{minutes_per_hour}={total_minutes}>>{total_minutes} minutes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Bianca = <<12.5=12.5>>12.5 hours",
+    "L2": "Celeste 2 * 12.5 = <<2*12.5=25>>25 hours",
+    "L3": "McClain = 25 - 8.5 = <<25-8.5=33.5>>33.5 hours",
+    "L4": "Total + 12.5 + 25 + 33.5 = <<+12.5+25+33.5=71>>71 hours",
+    "L5": "71 hours * 60 minutes = <<71*60=4260>>4260 minutes.",
+    "FA": "#### 4260"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -5509204084730687776,
+  "model_name": "google_gemini-2.5-flash"
+}

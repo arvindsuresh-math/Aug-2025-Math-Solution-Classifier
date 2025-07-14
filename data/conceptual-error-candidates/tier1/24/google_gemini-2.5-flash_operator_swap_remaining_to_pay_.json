@@ -1,0 +1,63 @@
+{
+  "index": 24,
+  "original_solution_mapping": {
+    "FA": "#### 62",
+    "L1": "So far, Mary has paid back $15 +$23=$<<15+23=38>>38 of the credit.",
+    "L2": "So she still needs to pay $100-$38=$<<100-38=62>>62"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 24.\n    Returns: the amount of credit Mary needs to pay before her next shopping trip.\n    \"\"\"\n    # L1\n    paid_tuesday = 15 # paid $15 of it on Tuesday\n    paid_thursday = 23 # paid $23 of it on Thursday\n    total_paid = paid_tuesday + paid_thursday\n\n    # L2\n    credit_limit = 100 # credit of $100\n    remaining_to_pay = credit_limit - total_paid\n\n    # FA\n    answer = remaining_to_pay\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "remaining_to_pay",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x144cd12d0>"
+  },
+  "correct_trace": {
+    "paid_tuesday": 15,
+    "paid_thursday": 23,
+    "total_paid": 38,
+    "credit_limit": 100,
+    "remaining_to_pay": 62,
+    "answer": 62
+  },
+  "flawed_trace": {
+    "paid_tuesday": 15,
+    "paid_thursday": 23,
+    "total_paid": 38,
+    "credit_limit": 100,
+    "remaining_to_pay": 138,
+    "answer": 138
+  },
+  "correct_value": 62,
+  "flawed_value": 138,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "paid_tuesday",
+        "paid_thursday"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_paid",
+      "solution_line_template": "So far, Mary has paid back ${paid_tuesday} +${paid_thursday}=$<<{paid_tuesday}+{paid_thursday}={total_paid}>>{total_paid} of the credit."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "credit_limit"
+      ],
+      "WK_inputs": [],
+      "output_variable": "remaining_to_pay",
+      "solution_line_template": "So she still needs to pay ${credit_limit}-${total_paid}=$<<{credit_limit}-{total_paid}={remaining_to_pay}>>{remaining_to_pay}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "So far, Mary has paid back $15 +$23=$<<15+23=38>>38 of the credit.",
+    "L2": "So she still needs to pay $100-$38=$<<100-38=138>>138",
+    "FA": "#### 138"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 8575901564581410284,
+  "model_name": "google_gemini-2.5-flash"
+}

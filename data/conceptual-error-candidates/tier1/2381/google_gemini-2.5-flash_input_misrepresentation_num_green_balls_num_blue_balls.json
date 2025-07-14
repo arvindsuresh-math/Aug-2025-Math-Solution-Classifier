@@ -1,0 +1,77 @@
+{
+  "index": 2381,
+  "original_solution_mapping": {
+    "FA": "#### 36",
+    "L1": "There are 3 times as many green balls as blue balls so green balls = blue balls * 3. Green balls = 6 blue balls * 3 = <<6*3=18>>18 green balls",
+    "L2": "There are 2 times as many yellow balls as red ones so yellow balls = red balls * 2. Yellow balls = 4 red balls * 2 = <<4*2=8>>8 yellow balls",
+    "L3": "The total number of all the balls is 6 blue + 4 red + 18 green + 8 yellow: 6+4+18+8 = <<6+4+18+8=36>>36 balls"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2381.\n    Returns: the total number of balls in the box.\n    \"\"\"\n    # L1\n    num_blue_balls = 6 # 6 blue balls\n    green_multiplier = 3 # 3 times as many green balls as blue ones\n    num_green_balls = num_blue_balls * green_multiplier\n\n    # L2\n    num_red_balls = 4 # 4 red balls\n    yellow_multiplier = 2 # twice as many yellow ones as red ones\n    num_yellow_balls = num_red_balls * yellow_multiplier\n\n    # L3\n    total_balls = num_blue_balls + num_red_balls + num_green_balls + num_yellow_balls\n\n    # FA\n    answer = total_balls\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "num_green_balls",
+    "operand_to_replace": "green_multiplier",
+    "replacement_variable": "num_blue_balls"
+  },
+  "correct_trace": {
+    "num_blue_balls": 6,
+    "green_multiplier": 3,
+    "num_green_balls": 18,
+    "num_red_balls": 4,
+    "yellow_multiplier": 2,
+    "num_yellow_balls": 8,
+    "total_balls": 36,
+    "answer": 36
+  },
+  "flawed_trace": {
+    "num_blue_balls": 6,
+    "green_multiplier": 3,
+    "num_green_balls": 36,
+    "num_red_balls": 4,
+    "yellow_multiplier": 2,
+    "num_yellow_balls": 8,
+    "total_balls": 54,
+    "answer": 54
+  },
+  "correct_value": 18,
+  "flawed_value": 36,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "num_blue_balls",
+        "green_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "num_green_balls",
+      "solution_line_template": "There are {green_multiplier} times as many green balls as blue balls so green balls = blue balls * {green_multiplier}. Green balls = {num_blue_balls} blue balls * {green_multiplier} = <<{num_blue_balls}*{green_multiplier}={num_green_balls}>>{num_green_balls} green balls"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "num_red_balls",
+        "yellow_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "num_yellow_balls",
+      "solution_line_template": "There are {yellow_multiplier} times as many yellow balls as red ones so yellow balls = red balls * {yellow_multiplier}. Yellow balls = {num_red_balls} red balls * {yellow_multiplier} = <<{num_red_balls}*{yellow_multiplier}={num_yellow_balls}>>{num_yellow_balls} yellow balls"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_balls",
+      "solution_line_template": "The total number of all the balls is {num_blue_balls} blue + {num_red_balls} red + {num_green_balls} green + {num_yellow_balls} yellow: {num_blue_balls}+{num_red_balls}+{num_green_balls}+{num_yellow_balls} = <<{num_blue_balls}+{num_red_balls}+{num_green_balls}+{num_yellow_balls}={total_balls}>>{total_balls} balls"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 6 times as many green balls as blue balls so green balls = blue balls * 6. Green balls = 6 blue balls * 6 = <<6*6=36>>36 green balls",
+    "L2": "There are 2 times as many yellow balls as red ones so yellow balls = red balls * 2. Yellow balls = 4 red balls * 2 = <<4*2=8>>8 yellow balls",
+    "L3": "The total number of all the balls is 6 blue + 4 red + 36 green + 8 yellow: 6+4+36+8 = <<6+4+36+8=54>>54 balls",
+    "FA": "#### 54"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'num_blue_balls' (6) was used instead of 'green_multiplier' (3).",
+  "repro_seed": -250736556347884461,
+  "model_name": "google_gemini-2.5-flash"
+}

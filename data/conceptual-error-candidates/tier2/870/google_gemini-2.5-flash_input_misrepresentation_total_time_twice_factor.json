@@ -1,0 +1,66 @@
+{
+  "index": 870,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "Twice 1.5 hours is 2*1.5=<<2*1.5=3>>3 hours.",
+    "L2": "Thus, on that day, it took Matthew 1+3+1=<<1+3+1=5>>5 hours to make the cakes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 870.\n    Returns: the total time it took Matthew to make the cakes on that day.\n    \"\"\"\n    # L1\n    usual_bake_time = 1.5 # 1.5 hours to bake the cakes\n    twice_factor = 2 # took twice as long\n    actual_bake_time = twice_factor * usual_bake_time\n\n    # L2\n    assemble_time = 1 # 1 hour to assemble ingredients\n    decorate_time = 1 # 1 hour to decorate each cake\n    total_time = assemble_time + actual_bake_time + decorate_time\n\n    # FA\n    answer = total_time\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_time",
+    "operand_to_replace": "decorate_time",
+    "replacement_variable": "twice_factor"
+  },
+  "correct_trace": {
+    "usual_bake_time": 1.5,
+    "twice_factor": 2,
+    "actual_bake_time": 3.0,
+    "assemble_time": 1,
+    "decorate_time": 1,
+    "total_time": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "usual_bake_time": 1.5,
+    "twice_factor": 2,
+    "actual_bake_time": 3.0,
+    "assemble_time": 1,
+    "decorate_time": 1,
+    "total_time": 6.0,
+    "answer": 6.0
+  },
+  "correct_value": 5.0,
+  "flawed_value": 6.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "actual_bake_time",
+      "question_inputs": [
+        "usual_bake_time",
+        "twice_factor"
+      ],
+      "solution_line_template": "Twice {usual_bake_time} hours is {twice_factor}*{usual_bake_time}=<<{twice_factor}*{usual_bake_time}={actual_bake_time}>>{actual_bake_time} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_time",
+      "question_inputs": [
+        "assemble_time",
+        "decorate_time"
+      ],
+      "solution_line_template": "Thus, on that day, it took Matthew {assemble_time}+{actual_bake_time}+{decorate_time}=<<{assemble_time}+{actual_bake_time}+{decorate_time}={total_time}>>{total_time} hours to make the cakes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Twice 1.5 hours is 2*1.5=<<2*1.5=3>>3 hours.",
+    "L2": "Thus, on that day, it took Matthew 1+3+2=<<1+3+2=6>>6 hours to make the cakes.",
+    "FA": "#### 6"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'twice_factor' (2) was used instead of 'decorate_time' (1).",
+  "repro_seed": -4685858641387287653,
+  "model_name": "google_gemini-2.5-flash"
+}

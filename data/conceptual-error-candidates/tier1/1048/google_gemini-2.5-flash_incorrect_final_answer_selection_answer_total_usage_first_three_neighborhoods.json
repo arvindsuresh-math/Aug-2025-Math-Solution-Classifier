@@ -1,0 +1,88 @@
+{
+  "index": 1048,
+  "original_solution_mapping": {
+    "FA": "#### 350",
+    "L1": "The second neighborhood uses 150 * 2 = <<150*2=300>>300 barrels of water.",
+    "L2": "The third neighborhood uses 300 + 100 = <<300+100=400>>400 barrels of water.",
+    "L3": "The first, second, and third neighborhoods together use 150 + 300 + 400 = <<150+300+400=850>>850 barrels of water.",
+    "L4": "Thus, the fourth neighborhood has 1200 - 850 = <<1200-850=350>>350 barrels of water left for it to use."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1048.\n    Returns: the number of barrels left for the fourth neighborhood.\n    \"\"\"\n    # L1\n    first_neighborhood_usage = 150 # one neighborhood uses 150 barrels of water in a week\n    multiplier_twice = 2 # twice as many barrels of water as the first neighborhood\n    second_neighborhood_usage = first_neighborhood_usage * multiplier_twice\n\n    # L2\n    third_neighborhood_extra = 100 # one hundred more barrels of water than the second neighborhood\n    third_neighborhood_usage = second_neighborhood_usage + third_neighborhood_extra\n\n    # L3\n    total_usage_first_three_neighborhoods = first_neighborhood_usage + second_neighborhood_usage + third_neighborhood_usage\n\n    # L4\n    total_capacity = 1200 # holds 1200 barrels of water\n    fourth_neighborhood_leftover = total_capacity - total_usage_first_three_neighborhoods\n\n    # FA\n    answer = fourth_neighborhood_leftover\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "fourth_neighborhood_leftover",
+    "replacement_variable": "total_usage_first_three_neighborhoods"
+  },
+  "correct_trace": {
+    "first_neighborhood_usage": 150,
+    "multiplier_twice": 2,
+    "second_neighborhood_usage": 300,
+    "third_neighborhood_extra": 100,
+    "third_neighborhood_usage": 400,
+    "total_usage_first_three_neighborhoods": 850,
+    "total_capacity": 1200,
+    "fourth_neighborhood_leftover": 350,
+    "answer": 350
+  },
+  "flawed_trace": {
+    "first_neighborhood_usage": 150,
+    "multiplier_twice": 2,
+    "second_neighborhood_usage": 300,
+    "third_neighborhood_extra": 100,
+    "third_neighborhood_usage": 400,
+    "total_usage_first_three_neighborhoods": 850,
+    "total_capacity": 1200,
+    "fourth_neighborhood_leftover": 350,
+    "answer": 850
+  },
+  "correct_value": 350,
+  "flawed_value": 850,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "first_neighborhood_usage",
+        "multiplier_twice"
+      ],
+      "WK_inputs": [],
+      "output_variable": "second_neighborhood_usage",
+      "solution_line_template": "The second neighborhood uses {first_neighborhood_usage} * {multiplier_twice} = <<{first_neighborhood_usage}*{multiplier_twice}={second_neighborhood_usage}>>{second_neighborhood_usage} barrels of water."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "third_neighborhood_extra"
+      ],
+      "WK_inputs": [],
+      "output_variable": "third_neighborhood_usage",
+      "solution_line_template": "The third neighborhood uses {second_neighborhood_usage} + {third_neighborhood_extra} = <<{second_neighborhood_usage}+{third_neighborhood_extra}={third_neighborhood_usage}>>{third_neighborhood_usage} barrels of water."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_usage_first_three_neighborhoods",
+      "solution_line_template": "The first, second, and third neighborhoods together use {first_neighborhood_usage} + {second_neighborhood_usage} + {third_neighborhood_usage} = <<{first_neighborhood_usage}+{second_neighborhood_usage}+{third_neighborhood_usage}={total_usage_first_three_neighborhoods}>>{total_usage_first_three_neighborhoods} barrels of water."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "total_capacity"
+      ],
+      "WK_inputs": [],
+      "output_variable": "fourth_neighborhood_leftover",
+      "solution_line_template": "Thus, the fourth neighborhood has {total_capacity} - {total_usage_first_three_neighborhoods} = <<{total_capacity}-{total_usage_first_three_neighborhoods}={fourth_neighborhood_leftover}>>{fourth_neighborhood_leftover} barrels of water left for it to use."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The second neighborhood uses 150 * 2 = <<150*2=300>>300 barrels of water.",
+    "L2": "The third neighborhood uses 300 + 100 = <<300+100=400>>400 barrels of water.",
+    "L3": "The first, second, and third neighborhoods together use 150 + 300 + 400 = <<150+300+400=850>>850 barrels of water.",
+    "FA": "#### 850"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'total_usage_first_three_neighborhoods' (value: 850) was reported instead of 'fourth_neighborhood_leftover' (value: 350).",
+  "repro_seed": 6126188124960638170,
+  "model_name": "google_gemini-2.5-flash"
+}

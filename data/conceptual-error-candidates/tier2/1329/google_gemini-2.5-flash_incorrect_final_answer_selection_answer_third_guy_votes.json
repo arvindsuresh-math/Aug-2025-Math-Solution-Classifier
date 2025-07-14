@@ -1,0 +1,84 @@
+{
+  "index": 1329,
+  "original_solution_mapping": {
+    "FA": "#### 150",
+    "L1": "There were 1150-150=<<1150-150=1000>>1000 people who didn't vote for John",
+    "L2": "That means James got 1000*.7=<<1000*.7=700>>700 votes",
+    "L3": "So the other candidate got 1000-700=<<1000-700=300>>300 votes",
+    "L4": "This means he got 300-150=<<300-150=150>>150 more votes than John."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1329.\n    Returns: the difference in votes between the third candidate and John.\n    \"\"\"\n    # L1\n    total_voters = 1150 # 1150 people voting\n    john_votes = 150 # John manages to capture 150 votes\n    remaining_votes = total_voters - john_votes\n\n    # L2\n    james_vote_percent = 0.7 # 70% of the remaining vote\n    james_votes = remaining_votes * james_vote_percent\n\n    # L3\n    third_guy_votes = remaining_votes - james_votes\n\n    # L4\n    vote_difference = third_guy_votes - john_votes\n\n    # FA\n    answer = vote_difference\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "vote_difference",
+    "replacement_variable": "third_guy_votes"
+  },
+  "correct_trace": {
+    "total_voters": 1150,
+    "john_votes": 150,
+    "remaining_votes": 1000,
+    "james_vote_percent": 0.7,
+    "james_votes": 700.0,
+    "third_guy_votes": 300.0,
+    "vote_difference": 150.0,
+    "answer": 150.0
+  },
+  "flawed_trace": {
+    "total_voters": 1150,
+    "john_votes": 150,
+    "remaining_votes": 1000,
+    "james_vote_percent": 0.7,
+    "james_votes": 700.0,
+    "third_guy_votes": 300.0,
+    "vote_difference": 150.0,
+    "answer": 300.0
+  },
+  "correct_value": 150.0,
+  "flawed_value": 300.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "remaining_votes",
+      "question_inputs": [
+        "total_voters",
+        "john_votes"
+      ],
+      "solution_line_template": "There were {total_voters}-{john_votes}=<<{total_voters}-{john_votes}={remaining_votes}>>{remaining_votes} people who didn't vote for John"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "james_votes",
+      "question_inputs": [
+        "james_vote_percent"
+      ],
+      "solution_line_template": "That means James got {remaining_votes}*{james_vote_percent}=<<{remaining_votes}*{james_vote_percent}={james_votes}>>{james_votes} votes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "third_guy_votes",
+      "question_inputs": [],
+      "solution_line_template": "So the other candidate got {remaining_votes}-{james_votes}=<<{remaining_votes}-{james_votes}={third_guy_votes}>>{third_guy_votes} votes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "vote_difference",
+      "question_inputs": [],
+      "solution_line_template": "This means he got {third_guy_votes}-{john_votes}=<<{third_guy_votes}-{john_votes}={vote_difference}>>{vote_difference} more votes than John."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There were 1150-150=<<1150-150=1000>>1000 people who didn't vote for John",
+    "L2": "That means James got 1000*0.7=<<1000*0.7=700>>700 votes",
+    "L3": "So the other candidate got 1000-700=<<1000-700=300>>300 votes",
+    "FA": "#### 300"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'third_guy_votes' (value: 300.0) was reported instead of 'vote_difference' (value: 150.0).",
+  "repro_seed": 8972691450777657573,
+  "model_name": "google_gemini-2.5-flash"
+}

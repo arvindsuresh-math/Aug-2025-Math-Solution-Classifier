@@ -1,0 +1,104 @@
+{
+  "index": 837,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "There are 2 dog walkers and they each have 2 legs so that's 2*2 = <<2*2=4>>4 legs",
+    "L2": "The other dog walker is walking 3 dogs that each have 4 legs so that's 3*4 = <<3*4=12>>12 legs",
+    "L3": "The dog walkers have 4 legs and the other dogs have 12 legs for a total of 4+12 = <<4+12=16>>16 legs",
+    "L4": "There are 36 legs total and 16 belong to the dog walkers and 3 dogs so that leaves 36-16 = <<36-16=20>>20 legs",
+    "L5": "Dogs have 4 legs and there are 20 legs so Mariel is walking 20/4 = 5 dogs"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 837.\n    Returns: the number of dogs Mariel is walking.\n    \"\"\"\n    # L1\n    num_dog_walkers = 2 # WK\n    legs_per_walker = 2 # WK\n    walker_legs = num_dog_walkers * legs_per_walker\n\n    # L2\n    other_walker_dogs = 3 # their 3 dogs\n    legs_per_dog = 4 # WK\n    other_dogs_legs = other_walker_dogs * legs_per_dog\n\n    # L3\n    total_known_legs = walker_legs + other_dogs_legs\n\n    # L4\n    total_tangled_legs = 36 # 36 legs tangled up in leashes\n    mariel_dogs_legs = total_tangled_legs - total_known_legs\n\n    # L5\n    mariel_dogs_count = mariel_dogs_legs / legs_per_dog\n\n    # FA\n    answer = mariel_dogs_count\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "mariel_dogs_count",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x147965dd0>"
+  },
+  "correct_trace": {
+    "num_dog_walkers": 2,
+    "legs_per_walker": 2,
+    "walker_legs": 4,
+    "other_walker_dogs": 3,
+    "legs_per_dog": 4,
+    "other_dogs_legs": 12,
+    "total_known_legs": 16,
+    "total_tangled_legs": 36,
+    "mariel_dogs_legs": 20,
+    "mariel_dogs_count": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "num_dog_walkers": 2,
+    "legs_per_walker": 2,
+    "walker_legs": 4,
+    "other_walker_dogs": 3,
+    "legs_per_dog": 4,
+    "other_dogs_legs": 12,
+    "total_known_legs": 16,
+    "total_tangled_legs": 36,
+    "mariel_dogs_legs": 20,
+    "mariel_dogs_count": 16,
+    "answer": 16
+  },
+  "correct_value": 5.0,
+  "flawed_value": 16,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "num_dog_walkers",
+        "legs_per_walker"
+      ],
+      "line_number": "L1",
+      "output_variable": "walker_legs",
+      "question_inputs": [],
+      "solution_line_template": "There are {num_dog_walkers} dog walkers and they each have {legs_per_walker} legs so that's {num_dog_walkers}*{legs_per_walker} = <<{num_dog_walkers}*{legs_per_walker}={walker_legs}>>{walker_legs} legs"
+    },
+    {
+      "WK_inputs": [
+        "legs_per_dog"
+      ],
+      "line_number": "L2",
+      "output_variable": "other_dogs_legs",
+      "question_inputs": [
+        "other_walker_dogs"
+      ],
+      "solution_line_template": "The other dog walker is walking {other_walker_dogs} dogs that each have {legs_per_dog} legs so that's {other_walker_dogs}*{legs_per_dog} = <<{other_walker_dogs}*{legs_per_dog}={other_dogs_legs}>>{other_dogs_legs} legs"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_known_legs",
+      "question_inputs": [],
+      "solution_line_template": "The dog walkers have {walker_legs} legs and the other dogs have {other_dogs_legs} legs for a total of {walker_legs}+{other_dogs_legs} = <<{walker_legs}+{other_dogs_legs}={total_known_legs}>>{total_known_legs} legs"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "mariel_dogs_legs",
+      "question_inputs": [
+        "total_tangled_legs"
+      ],
+      "solution_line_template": "There are {total_tangled_legs} legs total and {total_known_legs} belong to the dog walkers and 3 dogs so that leaves {total_tangled_legs}-{total_known_legs} = <<{total_tangled_legs}-{total_known_legs}={mariel_dogs_legs}>>{mariel_dogs_legs} legs"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "mariel_dogs_count",
+      "question_inputs": [],
+      "solution_line_template": "Dogs have {legs_per_dog} legs and there are {mariel_dogs_legs} legs so Mariel is walking {mariel_dogs_legs}/{legs_per_dog} = {mariel_dogs_count} dogs"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 2 dog walkers and they each have 2 legs so that's 2*2 = <<2*2=4>>4 legs",
+    "L2": "The other dog walker is walking 3 dogs that each have 4 legs so that's 3*4 = <<3*4=12>>12 legs",
+    "L3": "The dog walkers have 4 legs and the other dogs have 12 legs for a total of 4+12 = <<4+12=16>>16 legs",
+    "L4": "There are 36 legs total and 16 belong to the dog walkers and 3 dogs so that leaves 36-16 = <<36-16=20>>20 legs",
+    "L5": "Dogs have 4 legs and there are 20 legs so Mariel is walking 20/4 = 16 dogs",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 2299230784437657130,
+  "model_name": "google_gemini-2.5-flash"
+}

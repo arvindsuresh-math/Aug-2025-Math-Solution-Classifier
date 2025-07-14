@@ -1,0 +1,90 @@
+{
+  "index": 232,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "Their 1st child was born 15 years ago, and therefore is <<15=15>>15 years old.",
+    "L2": "Their 2nd child was born 1 year after their 15-year-old child, and therefore is 15-1=<<15-1=14>>14 years old.",
+    "L3": "Their 3rd child was born 4 years after their 14-year-old child, and therefore is 14-4=10 years old.",
+    "L4": "Their 4th child was born 2 years after their 10-year-old child, and therefore is 10-2=8 years old."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 232.\n    Returns: the age of their fourth child in years.\n    \"\"\"\n    # L1\n    first_child_birth_ago = 15 # Their first child exactly 15 years ago\n    first_child_age = first_child_birth_ago\n\n    # L2\n    second_child_birth_after_first = 1 # exactly one year after the birth of their first child\n    second_child_age = first_child_age - second_child_birth_after_first\n\n    # L3\n    third_child_birth_after_second = 4 # on the fourth birthday of their second child\n    third_child_age = second_child_age - third_child_birth_after_second\n\n    # L4\n    fourth_child_birth_after_third = 2 # Two years after the birth of their third child\n    fourth_child_age = third_child_age - fourth_child_birth_after_third\n\n    # FA\n    answer = fourth_child_age\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "fourth_child_age",
+    "operand_to_replace": "fourth_child_birth_after_third",
+    "replacement_variable": "third_child_birth_after_second"
+  },
+  "correct_trace": {
+    "first_child_birth_ago": 15,
+    "first_child_age": 15,
+    "second_child_birth_after_first": 1,
+    "second_child_age": 14,
+    "third_child_birth_after_second": 4,
+    "third_child_age": 10,
+    "fourth_child_birth_after_third": 2,
+    "fourth_child_age": 8,
+    "answer": 8
+  },
+  "flawed_trace": {
+    "first_child_birth_ago": 15,
+    "first_child_age": 15,
+    "second_child_birth_after_first": 1,
+    "second_child_age": 14,
+    "third_child_birth_after_second": 4,
+    "third_child_age": 10,
+    "fourth_child_birth_after_third": 2,
+    "fourth_child_age": 6,
+    "answer": 6
+  },
+  "correct_value": 8,
+  "flawed_value": 6,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "first_child_birth_ago"
+      ],
+      "WK_inputs": [],
+      "output_variable": "first_child_age",
+      "solution_line_template": "Their 1st child was born {first_child_birth_ago} years ago, and therefore is <<{first_child_birth_ago}={first_child_age}>>{first_child_age} years old."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "second_child_birth_after_first"
+      ],
+      "WK_inputs": [],
+      "output_variable": "second_child_age",
+      "solution_line_template": "Their 2nd child was born {second_child_birth_after_first} year after their {first_child_age}-year-old child, and therefore is {first_child_age}-{second_child_birth_after_first}=<<{first_child_age}-{second_child_birth_after_first}={second_child_age}>>{second_child_age} years old."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "third_child_birth_after_second"
+      ],
+      "WK_inputs": [],
+      "output_variable": "third_child_age",
+      "solution_line_template": "Their 3rd child was born {third_child_birth_after_second} years after their {second_child_age}-year-old child, and therefore is {second_child_age}-{third_child_birth_after_second}={third_child_age} years old."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "fourth_child_birth_after_third"
+      ],
+      "WK_inputs": [],
+      "output_variable": "fourth_child_age",
+      "solution_line_template": "Their 4th child was born {fourth_child_birth_after_third} years after their {third_child_age}-year-old child, and therefore is {third_child_age}-{fourth_child_birth_after_third}={fourth_child_age} years old."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Their 1st child was born 15 years ago, and therefore is <<15=15>>15 years old.",
+    "L2": "Their 2nd child was born 1 year after their 15-year-old child, and therefore is 15-1=<<15-1=14>>14 years old.",
+    "L3": "Their 3rd child was born 4 years after their 14-year-old child, and therefore is 14-4=10 years old.",
+    "L4": "Their 4th child was born 4 years after their 10-year-old child, and therefore is 10-4=6 years old.",
+    "FA": "#### 6"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'third_child_birth_after_second' (4) was used instead of 'fourth_child_birth_after_third' (2).",
+  "repro_seed": -6498146329793658919,
+  "model_name": "google_gemini-2.5-flash"
+}

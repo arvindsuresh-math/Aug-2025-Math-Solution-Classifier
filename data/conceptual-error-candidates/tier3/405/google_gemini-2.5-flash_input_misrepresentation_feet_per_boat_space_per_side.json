@@ -1,0 +1,74 @@
+{
+  "index": 405,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "Each boat will require 3 feet across to fit itself and 2 feet space on one side for a total of 2+3 = <<3+2=5>>5 feet per boat",
+    "L2": "The last boat will need an additional 2 feet space on its other side, so this 2 feet should be subtracted first from the 42 feet which leaves 42-2 = <<42-2=40>>40 feet",
+    "L3": "5 feet per boat on the remaining 40 feet for a total of 40/5 = <<40/5=8>>8 boats"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 405.\n    Returns: the number of boats that can race.\n    \"\"\"\n    # L1\n    space_per_side = 2 # at least 2 feet between them or the riverbank\n    boat_width = 3 # 3 feet across\n    feet_per_boat = space_per_side + boat_width\n\n    # L2\n    river_width = 42 # river that is 42 feet across\n    remaining_river_width = river_width - space_per_side\n\n    # L3\n    num_boats = remaining_river_width / feet_per_boat\n\n    # FA\n    answer = num_boats\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "feet_per_boat",
+    "operand_to_replace": "boat_width",
+    "replacement_variable": "space_per_side"
+  },
+  "correct_trace": {
+    "space_per_side": 2,
+    "boat_width": 3,
+    "feet_per_boat": 5,
+    "river_width": 42,
+    "remaining_river_width": 40,
+    "num_boats": 8.0,
+    "answer": 8.0
+  },
+  "flawed_trace": {
+    "space_per_side": 2,
+    "boat_width": 3,
+    "feet_per_boat": 4,
+    "river_width": 42,
+    "remaining_river_width": 40,
+    "num_boats": 10.0,
+    "answer": 10.0
+  },
+  "correct_value": 5,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "feet_per_boat",
+      "question_inputs": [
+        "space_per_side",
+        "boat_width"
+      ],
+      "solution_line_template": "Each boat will require {boat_width} feet across to fit itself and {space_per_side} feet space on one side for a total of {space_per_side}+{boat_width} = <<{boat_width}+{space_per_side}={feet_per_boat}>>{feet_per_boat} feet per boat"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_river_width",
+      "question_inputs": [
+        "river_width"
+      ],
+      "solution_line_template": "The last boat will need an additional {space_per_side} feet space on its other side, so this {space_per_side} feet should be subtracted first from the {river_width} feet which leaves {river_width}-{space_per_side} = <<{river_width}-{space_per_side}={remaining_river_width}>>{remaining_river_width} feet"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_boats",
+      "question_inputs": [],
+      "solution_line_template": "{feet_per_boat} feet per boat on the remaining {remaining_river_width} feet for a total of {remaining_river_width}/{feet_per_boat} = <<{remaining_river_width}/{feet_per_boat}={num_boats}>>{num_boats} boats"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each boat will require 2 feet across to fit itself and 2 feet space on one side for a total of 2+2 = <<2+2=4>>4 feet per boat",
+    "L2": "The last boat will need an additional 2 feet space on its other side, so this 2 feet should be subtracted first from the 42 feet which leaves 42-2 = <<42-2=40>>40 feet",
+    "L3": "4 feet per boat on the remaining 40 feet for a total of 40/4 = <<40/4=10>>10 boats",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'space_per_side' (2) was used instead of 'boat_width' (3).",
+  "repro_seed": 8997796414165846337,
+  "model_name": "google_gemini-2.5-flash"
+}

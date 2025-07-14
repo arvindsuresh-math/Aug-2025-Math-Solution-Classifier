@@ -1,0 +1,107 @@
+{
+  "index": 1211,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "The tickets for both of her brothers will cost her $10 * 2 = $<<10*2=20>>20.",
+    "L2": "To buy tickets for all of them, it will cost Isabelle $20 + $20 = $<<20+20=40>>40.",
+    "L3": "Between all of them, they have saved a total of $5 + $5 = $<<5+5=10>>10.",
+    "L4": "Since they have already saved $10, she needs to earn an additional $40 - $10 = $<<30=30>>30 to afford the tickets.",
+    "L5": "Since she makes $3 per week, it will take her $30 / ($3/week) = <<30/(3)=10>>10 weeks to save enough money for all of the tickets."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1211.\n    Returns: the number of weeks Isabelle must work to afford the tickets.\n    \"\"\"\n    # L1\n    brother_ticket_cost = 10 # each of their tickets cost $10\n    num_brothers = 2 # her two brothers\n    total_brother_tickets = brother_ticket_cost * num_brothers\n\n    # L2\n    isabelle_ticket_cost = 20 # Her ticket costs $20\n    total_ticket_cost = isabelle_ticket_cost + total_brother_tickets\n\n    # L3\n    brothers_saved = 5 # her brothers have saved $5 between the two of them\n    isabelle_saved = 5 # Isabelle has saved $5\n    total_saved = brothers_saved + isabelle_saved\n\n    # L4\n    additional_needed = total_ticket_cost - total_saved\n\n    # L5\n    weekly_pay = 3 # her job pays $3 per week\n    weeks_needed = additional_needed // weekly_pay\n\n    # FA\n    answer = weeks_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "additional_needed",
+    "operand_to_replace": "total_saved",
+    "replacement_variable": "num_brothers"
+  },
+  "correct_trace": {
+    "brother_ticket_cost": 10,
+    "num_brothers": 2,
+    "total_brother_tickets": 20,
+    "isabelle_ticket_cost": 20,
+    "total_ticket_cost": 40,
+    "brothers_saved": 5,
+    "isabelle_saved": 5,
+    "total_saved": 10,
+    "additional_needed": 30,
+    "weekly_pay": 3,
+    "weeks_needed": 10,
+    "answer": 10
+  },
+  "flawed_trace": {
+    "brother_ticket_cost": 10,
+    "num_brothers": 2,
+    "total_brother_tickets": 20,
+    "isabelle_ticket_cost": 20,
+    "total_ticket_cost": 40,
+    "brothers_saved": 5,
+    "isabelle_saved": 5,
+    "total_saved": 10,
+    "additional_needed": 38,
+    "weekly_pay": 3,
+    "weeks_needed": 12,
+    "answer": 12
+  },
+  "correct_value": 30,
+  "flawed_value": 38,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "brother_ticket_cost",
+        "num_brothers"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_brother_tickets",
+      "solution_line_template": "The tickets for both of her brothers will cost her ${brother_ticket_cost} * {num_brothers} = $<<{brother_ticket_cost}*{num_brothers}={total_brother_tickets}>>{total_brother_tickets}."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "isabelle_ticket_cost"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_ticket_cost",
+      "solution_line_template": "To buy tickets for all of them, it will cost Isabelle ${isabelle_ticket_cost} + ${total_brother_tickets} = $<<{isabelle_ticket_cost}+{total_brother_tickets}={total_ticket_cost}>>{total_ticket_cost}."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "brothers_saved",
+        "isabelle_saved"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_saved",
+      "solution_line_template": "Between all of them, they have saved a total of ${brothers_saved} + ${isabelle_saved} = $<<{brothers_saved}+{isabelle_saved}={total_saved}>>{total_saved}."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "additional_needed",
+      "solution_line_template": "Since they have already saved ${total_saved}, she needs to earn an additional ${total_ticket_cost} - ${total_saved} = $<<{additional_needed}={additional_needed}>>{additional_needed} to afford the tickets."
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [
+        "weekly_pay"
+      ],
+      "WK_inputs": [],
+      "output_variable": "weeks_needed",
+      "solution_line_template": "Since she makes ${weekly_pay} per week, it will take her ${additional_needed} / (${weekly_pay}/week) = <<{additional_needed}/({weekly_pay})={weeks_needed}>>{weeks_needed} weeks to save enough money for all of the tickets."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The tickets for both of her brothers will cost her $10 * 2 = $<<10*2=20>>20.",
+    "L2": "To buy tickets for all of them, it will cost Isabelle $20 + $20 = $<<20+20=40>>40.",
+    "L3": "Between all of them, they have saved a total of $5 + $5 = $<<5+5=10>>10.",
+    "L4": "Since they have already saved $2, she needs to earn an additional $40 - $2 = $<<38=38>>38 to afford the tickets.",
+    "L5": "Since she makes $3 per week, it will take her $38 / ($3/week) = <<38/(3)=12>>12 weeks to save enough money for all of the tickets.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'num_brothers' (value: 2) was used instead of 'total_saved' (value: 10).",
+  "repro_seed": 9178492992862389245,
+  "model_name": "openai_gpt-4.1"
+}

@@ -1,0 +1,85 @@
+{
+  "index": 156,
+  "original_solution_mapping": {
+    "FA": "#### 21",
+    "L1": "The juice was two times more expensive than the sandwich, so it was 4 * 2 = $<<2*4=8>>8.",
+    "L2": "The juice and the sandwich in total were a cost of 4 + 8 = $<<4+8=12>>12.",
+    "L3": "So the cost of one bottle of milk was 75/100 * 12 = $<<75/100*12=9>>9.",
+    "L4": "In total for all the food, George paid 12 + 9 = $<<12+9=21>>21."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 156.\n    Returns: the total amount George paid for his food.\n    \"\"\"\n    # L1\n    sandwich_cost = 4 # The sandwich was for $4\n    juice_multiplier = 2 # two times more expensive\n    juice_cost = sandwich_cost * juice_multiplier\n\n    # L2\n    sandwich_and_juice_total = sandwich_cost + juice_cost\n\n    # L3\n    milk_percentage = Fraction(75, 100) # 75% of the total cost\n    milk_cost = milk_percentage * sandwich_and_juice_total\n\n    # L4\n    total_food_cost = sandwich_and_juice_total + milk_cost\n\n    # FA\n    answer = total_food_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_food_cost",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x146d0ad90>"
+  },
+  "correct_trace": {
+    "sandwich_cost": 4,
+    "juice_multiplier": 2,
+    "juice_cost": 8,
+    "sandwich_and_juice_total": 12,
+    "milk_percentage": "3/4",
+    "milk_cost": "9",
+    "total_food_cost": "21",
+    "answer": "21"
+  },
+  "flawed_trace": {
+    "sandwich_cost": 4,
+    "juice_multiplier": 2,
+    "juice_cost": 8,
+    "sandwich_and_juice_total": 12,
+    "milk_percentage": "3/4",
+    "milk_cost": "9",
+    "total_food_cost": "108",
+    "answer": "108"
+  },
+  "correct_value": "21",
+  "flawed_value": "108",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "juice_cost",
+      "question_inputs": [
+        "sandwich_cost",
+        "juice_multiplier"
+      ],
+      "solution_line_template": "The juice was {juice_multiplier} times more expensive than the sandwich, so it was {sandwich_cost} * {juice_multiplier} = $<<{juice_multiplier}*{sandwich_cost}={juice_cost}>>{juice_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sandwich_and_juice_total",
+      "question_inputs": [],
+      "solution_line_template": "The juice and the sandwich in total were a cost of {sandwich_cost} + {juice_cost} = $<<{sandwich_cost}+{juice_cost}={sandwich_and_juice_total}>>{sandwich_and_juice_total}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "milk_cost",
+      "question_inputs": [
+        "milk_percentage"
+      ],
+      "solution_line_template": "So the cost of one bottle of milk was {milk_percentage} * {sandwich_and_juice_total} = $<<{milk_percentage}*{sandwich_and_juice_total}={milk_cost}>>{milk_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_food_cost",
+      "question_inputs": [],
+      "solution_line_template": "In total for all the food, George paid {sandwich_and_juice_total} + {milk_cost} = $<<{sandwich_and_juice_total}+{milk_cost}={total_food_cost}>>{total_food_cost}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The juice was 2 times more expensive than the sandwich, so it was 4 * 2 = $<<2*4=8>>8.",
+    "L2": "The juice and the sandwich in total were a cost of 4 + 8 = $<<4+8=12>>12.",
+    "L3": "So the cost of one bottle of milk was 75/100 * 12 = $<<75/100*12=9>>9.",
+    "L4": "In total for all the food, George paid 12 + 9 = $<<12+9=108>>108.",
+    "FA": "#### 108"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": -1002111728328193255,
+  "model_name": "google_gemini-2.5-flash"
+}

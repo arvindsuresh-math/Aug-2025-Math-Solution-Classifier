@@ -1,0 +1,100 @@
+{
+  "index": 2141,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "Jerry mows 8 acres x \u00be = 6 acres with a riding mower.",
+    "L2": "It will take him 6 acres / 2 each hour = <<6/2=3>>3 hours.",
+    "L3": "Jerry mows 8 acres - 6 acres mowed with a riding mower = <<8-6=2>>2 acres with a push mower.",
+    "L4": "It will take him 2 acres x 1 hour = <<2*1=2>>2 hours.",
+    "L5": "It takes Jerry a total of 3 hours on the riding mower + 2 hours on the push mower = <<3+2=5>>5 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2141.\n    Returns: the total time Jerry mows each week.\n    \"\"\"\n    # L1\n    total_acres_mowed_weekly = 8 # 8 acres of lawn each week\n    riding_mower_fraction = Fraction(3, 4) # \u00be of it\n    acres_mowed_riding_mower = total_acres_mowed_weekly * riding_mower_fraction\n\n    # L2\n    riding_mower_speed = 2 # can cut 2 acres an hour\n    time_riding_mower = acres_mowed_riding_mower / riding_mower_speed\n\n    # L3\n    acres_mowed_push_mower = total_acres_mowed_weekly - acres_mowed_riding_mower\n\n    # L4\n    push_mower_time_per_acre = 1 # can cut 1 acre an hour\n    time_push_mower = acres_mowed_push_mower * push_mower_time_per_acre\n\n    # L5\n    total_mowing_time = time_riding_mower + time_push_mower\n\n    # FA\n    answer = total_mowing_time\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "time_push_mower",
+    "operand_to_replace": "push_mower_time_per_acre",
+    "replacement_variable": "acres_mowed_push_mower"
+  },
+  "correct_trace": {
+    "total_acres_mowed_weekly": 8,
+    "riding_mower_fraction": "3/4",
+    "acres_mowed_riding_mower": "6",
+    "riding_mower_speed": 2,
+    "time_riding_mower": "3",
+    "acres_mowed_push_mower": "2",
+    "push_mower_time_per_acre": 1,
+    "time_push_mower": "2",
+    "total_mowing_time": "5",
+    "answer": "5"
+  },
+  "flawed_trace": {
+    "total_acres_mowed_weekly": 8,
+    "riding_mower_fraction": "3/4",
+    "acres_mowed_riding_mower": "6",
+    "riding_mower_speed": 2,
+    "time_riding_mower": "3",
+    "acres_mowed_push_mower": "2",
+    "push_mower_time_per_acre": 1,
+    "time_push_mower": "4",
+    "total_mowing_time": "7",
+    "answer": "7"
+  },
+  "correct_value": "2",
+  "flawed_value": "4",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "acres_mowed_riding_mower",
+      "question_inputs": [
+        "total_acres_mowed_weekly",
+        "riding_mower_fraction"
+      ],
+      "solution_line_template": "Jerry mows {total_acres_mowed_weekly} acres x {riding_mower_fraction} = {acres_mowed_riding_mower} acres with a riding mower."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "time_riding_mower",
+      "question_inputs": [
+        "riding_mower_speed"
+      ],
+      "solution_line_template": "It will take him {acres_mowed_riding_mower} acres / {riding_mower_speed} each hour = <<{acres_mowed_riding_mower}/{riding_mower_speed}={time_riding_mower}>>{time_riding_mower} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "acres_mowed_push_mower",
+      "question_inputs": [],
+      "solution_line_template": "Jerry mows {total_acres_mowed_weekly} acres - {acres_mowed_riding_mower} acres mowed with a riding mower = <<{total_acres_mowed_weekly}-{acres_mowed_riding_mower}={acres_mowed_push_mower}>>{acres_mowed_push_mower} acres with a push mower."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "time_push_mower",
+      "question_inputs": [
+        "push_mower_time_per_acre"
+      ],
+      "solution_line_template": "It will take him {acres_mowed_push_mower} acres x {push_mower_time_per_acre} hour = <<{acres_mowed_push_mower}*{push_mower_time_per_acre}={time_push_mower}>>{time_push_mower} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_mowing_time",
+      "question_inputs": [],
+      "solution_line_template": "It takes Jerry a total of {time_riding_mower} hours on the riding mower + {time_push_mower} hours on the push mower = <<{time_riding_mower}+{time_push_mower}={total_mowing_time}>>{total_mowing_time} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jerry mows 8 acres x 3/4 = 6 acres with a riding mower.",
+    "L2": "It will take him 6 acres / 2 each hour = <<6/2=3>>3 hours.",
+    "L3": "Jerry mows 8 acres - 6 acres mowed with a riding mower = <<8-6=2>>2 acres with a push mower.",
+    "L4": "It will take him 2 acres x 2 hour = <<2*2=4>>4 hours.",
+    "L5": "It takes Jerry a total of 3 hours on the riding mower + 4 hours on the push mower = <<3+4=7>>7 hours.",
+    "FA": "#### 7"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'acres_mowed_push_mower' (2) was used instead of 'push_mower_time_per_acre' (1).",
+  "repro_seed": 5789194265054957952,
+  "model_name": "google_gemini-2.5-flash"
+}

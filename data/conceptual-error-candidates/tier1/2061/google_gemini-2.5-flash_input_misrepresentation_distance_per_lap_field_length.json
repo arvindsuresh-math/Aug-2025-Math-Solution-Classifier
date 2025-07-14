@@ -1,0 +1,67 @@
+{
+  "index": 2061,
+  "original_solution_mapping": {
+    "FA": "#### 1800",
+    "L1": "One lap corresponds to the perimeter of a rectangle of 100 m length and 50 m width: 2*100 + 2 *50 = <<2*100+2*50=300>>300 metres.",
+    "L2": "Each player has to do six turns of the field, so runs 6*300 = <<6*300=1800>>1800 meters."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2061.\n    Returns: the total distance each player will run in meters.\n    \"\"\"\n    # L1\n    field_length = 100 # length 100 m\n    field_width = 50 # width 50 m\n    perimeter_factor = 2 # WK\n    distance_per_lap = perimeter_factor * field_length + perimeter_factor * field_width\n\n    # L2\n    num_laps = 6 # six laps\n    total_distance = num_laps * distance_per_lap\n\n    # FA\n    answer = total_distance\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "distance_per_lap",
+    "operand_to_replace": "field_width",
+    "replacement_variable": "field_length"
+  },
+  "correct_trace": {
+    "field_length": 100,
+    "field_width": 50,
+    "perimeter_factor": 2,
+    "distance_per_lap": 300,
+    "num_laps": 6,
+    "total_distance": 1800,
+    "answer": 1800
+  },
+  "flawed_trace": {
+    "field_length": 100,
+    "field_width": 50,
+    "perimeter_factor": 2,
+    "distance_per_lap": 400,
+    "num_laps": 6,
+    "total_distance": 2400,
+    "answer": 2400
+  },
+  "correct_value": 300,
+  "flawed_value": 400,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "field_length",
+        "field_width"
+      ],
+      "WK_inputs": [
+        "perimeter_factor"
+      ],
+      "output_variable": "distance_per_lap",
+      "solution_line_template": "One lap corresponds to the perimeter of a rectangle of {field_length} m length and {field_width} m width: {perimeter_factor}*{field_length} + {perimeter_factor} *{field_width} = <<{perimeter_factor}*{field_length}+{perimeter_factor}*{field_width}={distance_per_lap}>>{distance_per_lap} metres."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "num_laps"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_distance",
+      "solution_line_template": "Each player has to do {num_laps} turns of the field, so runs {num_laps}*{distance_per_lap} = <<{num_laps}*{distance_per_lap}={total_distance}>>{total_distance} meters."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "One lap corresponds to the perimeter of a rectangle of 100 m length and 100 m width: 2*100 + 2 *100 = <<2*100+2*100=400>>400 metres.",
+    "L2": "Each player has to do 6 turns of the field, so runs 6*400 = <<6*400=2400>>2400 meters.",
+    "FA": "#### 2400"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'field_length' (100) was used instead of 'field_width' (50).",
+  "repro_seed": 7062600320764841735,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,88 @@
+{
+  "index": 2999,
+  "original_solution_mapping": {
+    "FA": "#### 7",
+    "L1": "Half of the marbles are white, so there are 50 / 2 = <<50/2=25>>25 white marbles.",
+    "L2": "Green marbles are only 50% as many as yellow marbles, so there are 50/100 * 12 = <<50/100*12=6>>6 green marbles.",
+    "L3": "So currently we know that we have 25 + 12 + 6 = <<25+12+6=43>>43 marbles.",
+    "L4": "The rest are red, so there are 50 - 43 = <<50-43=7>>7 red marbles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2999.\n    Returns: the number of red marbles.\n    \"\"\"\n    # L1\n    total_marbles = 50 # George collected 50 marbles\n    half_divisor = 2 # Half of them are white\n    white_marbles = total_marbles / half_divisor\n\n    # L2\n    green_percentage = Fraction(50, 100) # 50% fewer green balls\n    yellow_marbles = 12 # 12 are yellow\n    green_marbles = green_percentage * yellow_marbles\n\n    # L3\n    known_marbles_sum = white_marbles + yellow_marbles + green_marbles\n\n    # L4\n    red_marbles = total_marbles - known_marbles_sum\n\n    # FA\n    answer = red_marbles\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "red_marbles",
+    "operand_to_replace": "known_marbles_sum",
+    "replacement_variable": "half_divisor"
+  },
+  "correct_trace": {
+    "total_marbles": 50,
+    "half_divisor": 2,
+    "white_marbles": 25.0,
+    "green_percentage": "1/2",
+    "yellow_marbles": 12,
+    "green_marbles": "6",
+    "known_marbles_sum": 43.0,
+    "red_marbles": 7.0,
+    "answer": 7.0
+  },
+  "flawed_trace": {
+    "total_marbles": 50,
+    "half_divisor": 2,
+    "white_marbles": 25.0,
+    "green_percentage": "1/2",
+    "yellow_marbles": 12,
+    "green_marbles": "6",
+    "known_marbles_sum": 43.0,
+    "red_marbles": 48,
+    "answer": 48
+  },
+  "correct_value": 7.0,
+  "flawed_value": 48,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "white_marbles",
+      "question_inputs": [
+        "total_marbles",
+        "half_divisor"
+      ],
+      "solution_line_template": "Half of the marbles are white, so there are {total_marbles} / {half_divisor} = <<{total_marbles}/{half_divisor}={white_marbles}>>{white_marbles} white marbles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "green_marbles",
+      "question_inputs": [
+        "green_percentage",
+        "yellow_marbles"
+      ],
+      "solution_line_template": "Green marbles are only {green_percentage} as many as yellow marbles, so there are {green_percentage} * {yellow_marbles} = <<{green_percentage}*{yellow_marbles}={green_marbles}>>{green_marbles} green marbles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "known_marbles_sum",
+      "question_inputs": [],
+      "solution_line_template": "So currently we know that we have {white_marbles} + {yellow_marbles} + {green_marbles} = <<{white_marbles}+{yellow_marbles}+{green_marbles}={known_marbles_sum}>>{known_marbles_sum} marbles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "red_marbles",
+      "question_inputs": [],
+      "solution_line_template": "The rest are red, so there are {total_marbles} - {known_marbles_sum} = <<{total_marbles}-{known_marbles_sum}={red_marbles}>>{red_marbles} red marbles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Half of the marbles are white, so there are 50 / 2 = <<50/2=25>>25 white marbles.",
+    "L2": "Green marbles are only 50/100 as many as yellow marbles, so there are 50/100 * 12 = <<50/100*12=6>>6 green marbles.",
+    "L3": "So currently we know that we have 25 + 12 + 6 = <<25+12+6=43>>43 marbles.",
+    "L4": "The rest are red, so there are 50 - 2 = <<50-2=48>>48 red marbles.",
+    "FA": "#### 48"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'half_divisor' (value: 2) was used instead of 'known_marbles_sum' (value: 43.0).",
+  "repro_seed": -3483373397205925461,
+  "model_name": "google_gemini-2.5-flash"
+}

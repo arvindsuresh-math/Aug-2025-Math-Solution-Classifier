@@ -1,0 +1,89 @@
+{
+  "index": 1118,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "If Phil had won 3 games more than did Charlie, and Phil won 12 games, then Charlie won 12-3=<<12-3=9>>9 games.",
+    "L2": "If Charlie had won 2 games fewer than Dana, and Charlie won 9 games, then Dana won 9+2=<<9+2=11>>11 games.",
+    "L3": "If Perry had won five more games than did Dana, and Dana won 11 games, then Perry won 11+5=<<11+5=16>>16 games.",
+    "L4": "Thus, Perry won 16-12=<<16-12=4>>4 more games than did Phil."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1118.\n    Returns: how many more games Perry won than Phil.\n    \"\"\"\n    # L1\n    phil_won_more_than_charlie = 3 # 3 games more than Charlie\n    phil_total_games = 12 # Phil won a total of 12 games\n    charlie_won_games = phil_total_games - phil_won_more_than_charlie\n\n    # L2\n    charlie_fewer_than_dana = 2 # 2 games fewer than Dana\n    dana_won_games = charlie_won_games + charlie_fewer_than_dana\n\n    # L3\n    perry_more_than_dana = 5 # five more games than Dana\n    perry_won_games = dana_won_games + perry_more_than_dana\n\n    # L4\n    perry_more_than_phil = perry_won_games - phil_total_games\n\n    # FA\n    answer = perry_more_than_phil\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "perry_more_than_phil",
+    "operand_to_replace": "phil_total_games",
+    "replacement_variable": "dana_won_games"
+  },
+  "correct_trace": {
+    "phil_won_more_than_charlie": 3,
+    "phil_total_games": 12,
+    "charlie_won_games": 9,
+    "charlie_fewer_than_dana": 2,
+    "dana_won_games": 11,
+    "perry_more_than_dana": 5,
+    "perry_won_games": 16,
+    "perry_more_than_phil": 4,
+    "answer": 4
+  },
+  "flawed_trace": {
+    "phil_won_more_than_charlie": 3,
+    "phil_total_games": 12,
+    "charlie_won_games": 9,
+    "charlie_fewer_than_dana": 2,
+    "dana_won_games": 11,
+    "perry_more_than_dana": 5,
+    "perry_won_games": 16,
+    "perry_more_than_phil": 5,
+    "answer": 5
+  },
+  "correct_value": 4,
+  "flawed_value": 5,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "phil_won_more_than_charlie",
+        "phil_total_games"
+      ],
+      "WK_inputs": [],
+      "output_variable": "charlie_won_games",
+      "solution_line_template": "If Phil had won {phil_won_more_than_charlie} games more than did Charlie, and Phil won {phil_total_games} games, then Charlie won {phil_total_games}-{phil_won_more_than_charlie}=<<{phil_total_games}-{phil_won_more_than_charlie}={charlie_won_games}>>{charlie_won_games} games."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "charlie_fewer_than_dana"
+      ],
+      "WK_inputs": [],
+      "output_variable": "dana_won_games",
+      "solution_line_template": "If Charlie had won {charlie_fewer_than_dana} games fewer than Dana, and Charlie won {charlie_won_games} games, then Dana won {charlie_won_games}+{charlie_fewer_than_dana}=<<{charlie_won_games}+{charlie_fewer_than_dana}={dana_won_games}>>{dana_won_games} games."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "perry_more_than_dana"
+      ],
+      "WK_inputs": [],
+      "output_variable": "perry_won_games",
+      "solution_line_template": "If Perry had won {perry_more_than_dana} more games than did Dana, and Dana won {dana_won_games} games, then Perry won {dana_won_games}+{perry_more_than_dana}=<<{dana_won_games}+{perry_more_than_dana}={perry_won_games}>>{perry_won_games} games."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "perry_more_than_phil",
+      "solution_line_template": "Thus, Perry won {perry_won_games}-{phil_total_games}=<<{perry_won_games}-{phil_total_games}={perry_more_than_phil}>>{perry_more_than_phil} more games than did Phil."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Phil had won 3 games more than did Charlie, and Phil won 12 games, then Charlie won 12-3=<<12-3=9>>9 games.",
+    "L2": "If Charlie had won 2 games fewer than Dana, and Charlie won 9 games, then Dana won 9+2=<<9+2=11>>11 games.",
+    "L3": "If Perry had won 5 more games than did Dana, and Dana won 11 games, then Perry won 11+5=<<11+5=16>>16 games.",
+    "L4": "Thus, Perry won 16-11=<<16-11=5>>5 more games than did Phil.",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'dana_won_games' (11) was used instead of 'phil_total_games' (12).",
+  "repro_seed": 3224976967751355375,
+  "model_name": "google_gemini-2.5-flash"
+}

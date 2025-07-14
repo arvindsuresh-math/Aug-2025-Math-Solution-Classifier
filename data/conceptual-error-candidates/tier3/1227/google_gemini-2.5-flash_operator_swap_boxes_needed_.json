@@ -1,0 +1,89 @@
+{
+  "index": 1227,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "Francine has 85 - 5 = <<85-5=80>>80 crayons in total that are in the boxes.",
+    "L2": "Thus, each box of crayons is filled with 80/5 = <<80/5=16>>16 crayons.",
+    "L3": "A total of 5 + 27 = <<5+27=32>>32 crayons need to be placed in the boxes.",
+    "L4": "Therefore, they still need 32/16 = <<32/16=2>>2 boxes for the loose crayons."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1227.\n    Returns: the number of additional boxes needed for loose crayons.\n    \"\"\"\n    # L1\n    total_crayons_francine = 85 # Francine has a total of 85 crayons\n    loose_crayons_francine = 5 # 5 loose crayons\n    crayons_in_boxes_francine = total_crayons_francine - loose_crayons_francine\n\n    # L2\n    num_full_boxes_francine = 5 # five full boxes of crayons\n    crayons_per_box = crayons_in_boxes_francine / num_full_boxes_francine\n\n    # L3\n    loose_crayons_friend = 27 # her friend has 27 loose crayons\n    total_loose_crayons = loose_crayons_francine + loose_crayons_friend\n\n    # L4\n    boxes_needed = total_loose_crayons / crayons_per_box\n\n    # FA\n    answer = boxes_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "boxes_needed",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x147c41c10>"
+  },
+  "correct_trace": {
+    "total_crayons_francine": 85,
+    "loose_crayons_francine": 5,
+    "crayons_in_boxes_francine": 80,
+    "num_full_boxes_francine": 5,
+    "crayons_per_box": 16.0,
+    "loose_crayons_friend": 27,
+    "total_loose_crayons": 32,
+    "boxes_needed": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "total_crayons_francine": 85,
+    "loose_crayons_francine": 5,
+    "crayons_in_boxes_francine": 80,
+    "num_full_boxes_francine": 5,
+    "crayons_per_box": 16.0,
+    "loose_crayons_friend": 27,
+    "total_loose_crayons": 32,
+    "boxes_needed": 512.0,
+    "answer": 512.0
+  },
+  "correct_value": 2.0,
+  "flawed_value": 512.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "crayons_in_boxes_francine",
+      "question_inputs": [
+        "total_crayons_francine",
+        "loose_crayons_francine"
+      ],
+      "solution_line_template": "Francine has {total_crayons_francine} - {loose_crayons_francine} = <<{total_crayons_francine}-{loose_crayons_francine}={crayons_in_boxes_francine}>>{crayons_in_boxes_francine} crayons in total that are in the boxes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "crayons_per_box",
+      "question_inputs": [
+        "num_full_boxes_francine"
+      ],
+      "solution_line_template": "Thus, each box of crayons is filled with {crayons_in_boxes_francine}/{num_full_boxes_francine} = <<{crayons_in_boxes_francine}/{num_full_boxes_francine}={crayons_per_box}>>{crayons_per_box} crayons."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_loose_crayons",
+      "question_inputs": [
+        "loose_crayons_friend"
+      ],
+      "solution_line_template": "A total of {loose_crayons_francine} + {loose_crayons_friend} = <<{loose_crayons_francine}+{loose_crayons_friend}={total_loose_crayons}>>{total_loose_crayons} crayons need to be placed in the boxes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "boxes_needed",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, they still need {total_loose_crayons}/{crayons_per_box} = <<{total_loose_crayons}/{crayons_per_box}={boxes_needed}>>{boxes_needed} boxes for the loose crayons."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Francine has 85 - 5 = <<85-5=80>>80 crayons in total that are in the boxes.",
+    "L2": "Thus, each box of crayons is filled with 80/5 = <<80/5=16>>16 crayons.",
+    "L3": "A total of 5 + 27 = <<5+27=32>>32 crayons need to be placed in the boxes.",
+    "L4": "Therefore, they still need 32/16 = <<32/16=512>>512 boxes for the loose crayons.",
+    "FA": "#### 512"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -6613007784177008786,
+  "model_name": "google_gemini-2.5-flash"
+}

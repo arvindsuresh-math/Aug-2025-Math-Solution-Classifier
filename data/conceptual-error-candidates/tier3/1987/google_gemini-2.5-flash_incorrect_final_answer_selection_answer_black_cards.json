@@ -1,0 +1,84 @@
+{
+  "index": 1987,
+  "original_solution_mapping": {
+    "FA": "#### 32",
+    "L1": "The number of red cards in the box, 2/5 of the total number, is 2/5*120 = <<2/5*120=48>>48.",
+    "L2": "The number of cards that are not red is 120-48 = <<120-48=72>>72.",
+    "L3": "If 5/9 of the remaining cards are black, then there are 5/9*72 = <<5/9*72=40>>40 black cards in the box.",
+    "L4": "If the remaining cards are green, then there are 72-40 = <<72-40=32>>32 green cards in the box."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1987.\n    Returns: the number of green cards in the box.\n    \"\"\"\n    # L1\n    total_cards = 120 # 120 cards in a box\n    red_fraction = Fraction(2, 5) # 2/5 of the cards are red\n    red_cards = red_fraction * total_cards\n\n    # L2\n    non_red_cards = total_cards - red_cards\n\n    # L3\n    black_fraction = Fraction(5, 9) # 5/9 of the remainder are black\n    black_cards = black_fraction * non_red_cards\n\n    # L4\n    green_cards = non_red_cards - black_cards\n\n    # FA\n    answer = green_cards\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "green_cards",
+    "replacement_variable": "black_cards"
+  },
+  "correct_trace": {
+    "total_cards": 120,
+    "red_fraction": "2/5",
+    "red_cards": "48",
+    "non_red_cards": "72",
+    "black_fraction": "5/9",
+    "black_cards": "40",
+    "green_cards": "32",
+    "answer": "32"
+  },
+  "flawed_trace": {
+    "total_cards": 120,
+    "red_fraction": "2/5",
+    "red_cards": "48",
+    "non_red_cards": "72",
+    "black_fraction": "5/9",
+    "black_cards": "40",
+    "green_cards": "32",
+    "answer": "40"
+  },
+  "correct_value": "32",
+  "flawed_value": "40",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "red_cards",
+      "question_inputs": [
+        "total_cards",
+        "red_fraction"
+      ],
+      "solution_line_template": "The number of red cards in the box, {red_fraction} of the total number, is {red_fraction}*{total_cards} = <<{red_fraction}*{total_cards}={red_cards}>>{red_cards}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "non_red_cards",
+      "question_inputs": [],
+      "solution_line_template": "The number of cards that are not red is {total_cards}-{red_cards} = <<{total_cards}-{red_cards}={non_red_cards}>>{non_red_cards}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "black_cards",
+      "question_inputs": [
+        "black_fraction"
+      ],
+      "solution_line_template": "If {black_fraction} of the remaining cards are black, then there are {black_fraction}*{non_red_cards} = <<{black_fraction}*{non_red_cards}={black_cards}>>{black_cards} black cards in the box."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "green_cards",
+      "question_inputs": [],
+      "solution_line_template": "If the remaining cards are green, then there are {non_red_cards}-{black_cards} = <<{non_red_cards}-{black_cards}={green_cards}>>{green_cards} green cards in the box."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The number of red cards in the box, 2/5 of the total number, is 2/5*120 = <<2/5*120=48>>48.",
+    "L2": "The number of cards that are not red is 120-48 = <<120-48=72>>72.",
+    "L3": "If 5/9 of the remaining cards are black, then there are 5/9*72 = <<5/9*72=40>>40 black cards in the box.",
+    "FA": "#### 40"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'black_cards' (value: 40) was reported instead of 'green_cards' (value: 32).",
+  "repro_seed": -3364912499194460822,
+  "model_name": "google_gemini-2.5-flash"
+}

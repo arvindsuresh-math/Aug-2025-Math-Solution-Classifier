@@ -1,0 +1,82 @@
+{
+  "index": 269,
+  "original_solution_mapping": {
+    "FA": "#### 13",
+    "L1": "John earnt $18 / 2 = $<<18/2=9>>9 on Sunday.",
+    "L2": "In total, John made $18 + $9 + $20 = $<<18+9+20=47>>47 over the two weekends.",
+    "L3": "John needs $60 - $47 = $<<60-47=13>>13 extra to buy the pogo stick."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 269.\n    Returns: the amount of money John still needs to earn.\n    \"\"\"\n    # L1\n    saturday_earnings = 18 # John earned $18 on Saturday\n    half_divisor = 2 # half that amount\n    sunday_earnings = saturday_earnings / half_divisor\n\n    # L2\n    previous_weekend_earnings = 20 # He earned $20 the previous weekend\n    total_earnings = saturday_earnings + sunday_earnings + previous_weekend_earnings\n\n    # L3\n    pogo_stick_cost = 60 # $60 he needs to buy a new pogo stick\n    money_needed = pogo_stick_cost - total_earnings\n\n    # FA\n    answer = money_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "incomplete_calculation",
+    "target_variable": "total_earnings",
+    "operand_to_remove": "sunday_earnings",
+    "original_operands": [
+      "previous_weekend_earnings",
+      "saturday_earnings",
+      "sunday_earnings"
+    ]
+  },
+  "correct_trace": {
+    "saturday_earnings": 18,
+    "half_divisor": 2,
+    "sunday_earnings": 9.0,
+    "previous_weekend_earnings": 20,
+    "total_earnings": 47.0,
+    "pogo_stick_cost": 60,
+    "money_needed": 13.0,
+    "answer": 13.0
+  },
+  "flawed_trace": {
+    "saturday_earnings": 18,
+    "half_divisor": 2,
+    "sunday_earnings": 9.0,
+    "previous_weekend_earnings": 20,
+    "total_earnings": 38,
+    "pogo_stick_cost": 60,
+    "money_needed": 22,
+    "answer": 22
+  },
+  "correct_value": 47.0,
+  "flawed_value": 38,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "sunday_earnings",
+      "question_inputs": [
+        "saturday_earnings",
+        "half_divisor"
+      ],
+      "solution_line_template": "John earnt ${saturday_earnings} / {half_divisor} = $<<{saturday_earnings}/{half_divisor}={sunday_earnings}>>{sunday_earnings} on Sunday."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_earnings",
+      "question_inputs": [
+        "previous_weekend_earnings"
+      ],
+      "solution_line_template": "In total, John made ${saturday_earnings} + ${sunday_earnings} + ${previous_weekend_earnings} = $<<{saturday_earnings}+{sunday_earnings}+{previous_weekend_earnings}={total_earnings}>>{total_earnings} over the two weekends."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "money_needed",
+      "question_inputs": [
+        "pogo_stick_cost"
+      ],
+      "solution_line_template": "John needs ${pogo_stick_cost} - ${total_earnings} = $<<{pogo_stick_cost}-{total_earnings}={money_needed}>>{money_needed} extra to buy the pogo stick."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "John earnt $18 / 2 = $<<18/2=9>>9 on Sunday.",
+    "L2": "In total, John made $18 + $$20 = $<<18+20=38>>38 over the two weekends.",
+    "L3": "John needs $60 - $38 = $<<60-38=22>>22 extra to buy the pogo stick.",
+    "FA": "#### 22"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incomplete calculation. The term 'sunday_earnings' (value: 9.0) was omitted from the operation.",
+  "repro_seed": 5547364799179061001,
+  "model_name": "google_gemini-2.5-flash"
+}

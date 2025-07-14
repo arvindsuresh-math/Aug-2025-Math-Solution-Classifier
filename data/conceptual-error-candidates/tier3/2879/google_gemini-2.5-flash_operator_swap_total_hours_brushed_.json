@@ -1,0 +1,78 @@
+{
+  "index": 2879,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "He brushes his teeth 3 times a day, after breakfast, lunch and dinner. He brushes for 2 minutes so that's 3*2 = <<3*2=6>>6 minutes per day.",
+    "L2": "He brushes 6 minutes per day so after 30 days he has brushed 6*30 = <<6*30=180>>180 minutes",
+    "L3": "There are 60 minutes in 1 hour and he brushes for 180 minutes so that's 180/60 = <<180/60=3>>3 hours"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2879.\n    Returns: the total number of hours Malcolm spends brushing his teeth.\n    \"\"\"\n    # L1\n    times_per_day = 3 # 3 times a day\n    minutes_per_brushing = 2 # 2 minutes\n    minutes_per_day = times_per_day * minutes_per_brushing\n\n    # L2\n    number_of_days = 30 # After 30 days\n    total_minutes_brushed = minutes_per_day * number_of_days\n\n    # L3\n    minutes_per_hour = 60 # 60 minutes in 1 hour\n    total_hours_brushed = total_minutes_brushed / minutes_per_hour\n\n    # FA\n    answer = total_hours_brushed\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_hours_brushed",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x1506270d0>"
+  },
+  "correct_trace": {
+    "times_per_day": 3,
+    "minutes_per_brushing": 2,
+    "minutes_per_day": 6,
+    "number_of_days": 30,
+    "total_minutes_brushed": 180,
+    "minutes_per_hour": 60,
+    "total_hours_brushed": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "times_per_day": 3,
+    "minutes_per_brushing": 2,
+    "minutes_per_day": 6,
+    "number_of_days": 30,
+    "total_minutes_brushed": 180,
+    "minutes_per_hour": 60,
+    "total_hours_brushed": 10800,
+    "answer": 10800
+  },
+  "correct_value": 3.0,
+  "flawed_value": 10800,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "minutes_per_day",
+      "question_inputs": [
+        "times_per_day",
+        "minutes_per_brushing"
+      ],
+      "solution_line_template": "He brushes his teeth {times_per_day} times a day, after breakfast, lunch and dinner. He brushes for {minutes_per_brushing} minutes so that's {times_per_day}*{minutes_per_brushing} = <<{times_per_day}*{minutes_per_brushing}={minutes_per_day}>>{minutes_per_day} minutes per day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_minutes_brushed",
+      "question_inputs": [
+        "number_of_days"
+      ],
+      "solution_line_template": "He brushes {minutes_per_day} minutes per day so after {number_of_days} days he has brushed {minutes_per_day}*{number_of_days} = <<{minutes_per_day}*{number_of_days}={total_minutes_brushed}>>{total_minutes_brushed} minutes"
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_hours_brushed",
+      "question_inputs": [],
+      "solution_line_template": "There are {minutes_per_hour} minutes in 1 hour and he brushes for {total_minutes_brushed} minutes so that's {total_minutes_brushed}/{minutes_per_hour} = <<{total_minutes_brushed}/{minutes_per_hour}={total_hours_brushed}>>{total_hours_brushed} hours"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He brushes his teeth 3 times a day, after breakfast, lunch and dinner. He brushes for 2 minutes so that's 3*2 = <<3*2=6>>6 minutes per day.",
+    "L2": "He brushes 6 minutes per day so after 30 days he has brushed 6*30 = <<6*30=180>>180 minutes",
+    "L3": "There are 60 minutes in 1 hour and he brushes for 180 minutes so that's 180/60 = <<180/60=10800>>10800 hours",
+    "FA": "#### 10800"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 6941695002595461935,
+  "model_name": "google_gemini-2.5-flash"
+}

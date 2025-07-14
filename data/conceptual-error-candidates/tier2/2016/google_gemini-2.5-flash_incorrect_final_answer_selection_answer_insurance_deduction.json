@@ -1,0 +1,103 @@
+{
+  "index": 2016,
+  "original_solution_mapping": {
+    "FA": "#### 310",
+    "L1": "Vikki earnt 10 * $42 = $<<10*42=420>>420 in one week.",
+    "L2": "She then gets taxed $420 * 0.2 = $<<420*0.2=84>>84.",
+    "L3": "She also loses $420 * 0.05 = $<<420*0.05=21>>21 due to insurance.",
+    "L4": "Vikki also pays $5 in union dues.",
+    "L5": "In total Vikki loses $84 + $21 + $5 = $<<84+21+5=110>>110 because of deductions.",
+    "L6": "Her final total pay after deductions is $420 - $110 = $<<420-110=310>>310"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2016.\n    Returns: the amount of money Vikki takes home after deductions.\n    \"\"\"\n    # L1\n    hourly_pay_rate = 10 # Her hourly pay rate is $10\n    hours_worked = 42 # worked 42 hours\n    weekly_earnings = hourly_pay_rate * hours_worked\n\n    # L2\n    tax_rate = 0.2 # 20% is deducted as tax\n    tax_deduction = weekly_earnings * tax_rate\n\n    # L3\n    insurance_rate = 0.05 # 5% is deducted as insurance cover\n    insurance_deduction = weekly_earnings * insurance_rate\n\n    # L5\n    union_dues = 5 # $5 is deducted for union dues\n    total_deductions = tax_deduction + insurance_deduction + union_dues\n\n    # L6\n    take_home_pay = weekly_earnings - total_deductions\n\n    # FA\n    answer = take_home_pay\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "take_home_pay",
+    "replacement_variable": "insurance_deduction"
+  },
+  "correct_trace": {
+    "hourly_pay_rate": 10,
+    "hours_worked": 42,
+    "weekly_earnings": 420,
+    "tax_rate": 0.2,
+    "tax_deduction": 84.0,
+    "insurance_rate": 0.05,
+    "insurance_deduction": 21.0,
+    "union_dues": 5,
+    "total_deductions": 110.0,
+    "take_home_pay": 310.0,
+    "answer": 310.0
+  },
+  "flawed_trace": {
+    "hourly_pay_rate": 10,
+    "hours_worked": 42,
+    "weekly_earnings": 420,
+    "tax_rate": 0.2,
+    "tax_deduction": 84.0,
+    "insurance_rate": 0.05,
+    "insurance_deduction": 21.0,
+    "union_dues": 5,
+    "total_deductions": 110.0,
+    "take_home_pay": 310.0,
+    "answer": 21.0
+  },
+  "correct_value": 310.0,
+  "flawed_value": 21.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "weekly_earnings",
+      "question_inputs": [
+        "hourly_pay_rate",
+        "hours_worked"
+      ],
+      "solution_line_template": "Vikki earnt {hourly_pay_rate} * ${hours_worked} = $<<{hourly_pay_rate}*{hours_worked}={weekly_earnings}>>{weekly_earnings} in one week."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "tax_deduction",
+      "question_inputs": [
+        "tax_rate"
+      ],
+      "solution_line_template": "She then gets taxed ${weekly_earnings} * {tax_rate} = $<<{weekly_earnings}*{tax_rate}={tax_deduction}>>{tax_deduction}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "insurance_deduction",
+      "question_inputs": [
+        "insurance_rate"
+      ],
+      "solution_line_template": "She also loses ${weekly_earnings} * {insurance_rate} = $<<{weekly_earnings}*{insurance_rate}={insurance_deduction}>>{insurance_deduction} due to insurance."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_deductions",
+      "question_inputs": [
+        "union_dues"
+      ],
+      "solution_line_template": "In total Vikki loses ${tax_deduction} + ${insurance_deduction} + ${union_dues} = $<<{tax_deduction}+{insurance_deduction}+{union_dues}={total_deductions}>>{total_deductions} because of deductions."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "take_home_pay",
+      "question_inputs": [],
+      "solution_line_template": "Her final total pay after deductions is ${weekly_earnings} - ${total_deductions} = $<<{weekly_earnings}-{total_deductions}={take_home_pay}>>{take_home_pay}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Vikki earnt 10 * $42 = $<<10*42=420>>420 in one week.",
+    "L2": "She then gets taxed $420 * 0.2 = $<<420*0.2=84>>84.",
+    "L3": "She also loses $420 * 0.05 = $<<420*0.05=21>>21 due to insurance.",
+    "FA": "#### 21"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'insurance_deduction' (value: 21.0) was reported instead of 'take_home_pay' (value: 310.0).",
+  "repro_seed": -6069375161465634508,
+  "model_name": "google_gemini-2.5-flash"
+}

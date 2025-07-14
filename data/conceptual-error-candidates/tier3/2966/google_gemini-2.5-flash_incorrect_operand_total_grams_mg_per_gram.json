@@ -1,0 +1,92 @@
+{
+  "index": 2966,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "He takes 12/4=<<12/4=3>>3 doses",
+    "L2": "Each dose is 500*2=<<500*2=1000>>1000 mg",
+    "L3": "So he takes 3*1000=<<3*1000=3000>>3000 mg",
+    "L4": "So he takes 3000/1000=<<3000/1000=3>>3 grams of Tylenol"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2966.\n    Returns: the total grams of Tylenol taken.\n    \"\"\"\n    # L1\n    total_hours = 12 # for 12 hours\n    dose_interval_hours = 4 # every 4 hours\n    num_doses = total_hours / dose_interval_hours\n\n    # L2\n    mg_per_tablet = 500 # 500 mg each\n    tablets_per_dose = 2 # 2 Tylenol tablets\n    mg_per_dose = mg_per_tablet * tablets_per_dose\n\n    # L3\n    total_mg = num_doses * mg_per_dose\n\n    # L4\n    mg_per_gram = 1000 # WK\n    total_grams = total_mg / mg_per_gram\n\n    # FA\n    answer = total_grams\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_grams",
+    "operand_to_replace": "total_mg",
+    "replacement_variable": "mg_per_gram"
+  },
+  "correct_trace": {
+    "total_hours": 12,
+    "dose_interval_hours": 4,
+    "num_doses": 3.0,
+    "mg_per_tablet": 500,
+    "tablets_per_dose": 2,
+    "mg_per_dose": 1000,
+    "total_mg": 3000.0,
+    "mg_per_gram": 1000,
+    "total_grams": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "total_hours": 12,
+    "dose_interval_hours": 4,
+    "num_doses": 3.0,
+    "mg_per_tablet": 500,
+    "tablets_per_dose": 2,
+    "mg_per_dose": 1000,
+    "total_mg": 3000.0,
+    "mg_per_gram": 1000,
+    "total_grams": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 3.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "num_doses",
+      "question_inputs": [
+        "total_hours",
+        "dose_interval_hours"
+      ],
+      "solution_line_template": "He takes {total_hours}/{dose_interval_hours}=<<{total_hours}/{dose_interval_hours}={num_doses}>>{num_doses} doses"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "mg_per_dose",
+      "question_inputs": [
+        "mg_per_tablet",
+        "tablets_per_dose"
+      ],
+      "solution_line_template": "Each dose is {mg_per_tablet}*{tablets_per_dose}=<<{mg_per_tablet}*{tablets_per_dose}={mg_per_dose}>>{mg_per_dose} mg"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_mg",
+      "question_inputs": [],
+      "solution_line_template": "So he takes {num_doses}*{mg_per_dose}=<<{num_doses}*{mg_per_dose}={total_mg}>>{total_mg} mg"
+    },
+    {
+      "WK_inputs": [
+        "mg_per_gram"
+      ],
+      "line_number": "L4",
+      "output_variable": "total_grams",
+      "question_inputs": [],
+      "solution_line_template": "So he takes {total_mg}/{mg_per_gram}=<<{total_mg}/{mg_per_gram}={total_grams}>>{total_grams} grams of Tylenol"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He takes 12/4=<<12/4=3>>3 doses",
+    "L2": "Each dose is 500*2=<<500*2=1000>>1000 mg",
+    "L3": "So he takes 3*1000=<<3*1000=3000>>3000 mg",
+    "L4": "So he takes 1000/1000=<<1000/1000=1>>1 grams of Tylenol",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'mg_per_gram' (value: 1000) was used instead of 'total_mg' (value: 3000.0).",
+  "repro_seed": 5766377465136579584,
+  "model_name": "google_gemini-2.5-flash"
+}

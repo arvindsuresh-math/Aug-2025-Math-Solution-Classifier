@@ -1,0 +1,85 @@
+{
+  "index": 2121,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "A jar of almond butter costs 3 * 3 = $<<3*3=9>>9.",
+    "L2": "It takes half a jar to make a batch of cookies, so it costs 9 / 2 = $<<9/2=4.50>>4.50 to use almond butter.",
+    "L3": "It costs 3 / 2 = $<<3/2=1.50>>1.50 to use peanut butter.",
+    "L4": "Thus, it costs 4.50 - 1.50 = $<<4.50-1.50=3>>3 more to make a batch of almond butter cookies than peanut butter cookies."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2121.\n    Returns: the additional cost per batch for almond butter cookies.\n    \"\"\"\n    # L1\n    pb_jar_cost = 3 # A jar of peanut butter costs $3\n    almond_butter_cost_factor = 3 # three times the amount that a jar of peanut butter does\n    almond_butter_jar_cost = almond_butter_cost_factor * pb_jar_cost\n\n    # L2\n    jar_fraction_for_batch_divisor = 2 # half a jar\n    almond_butter_batch_cost = almond_butter_jar_cost / jar_fraction_for_batch_divisor\n\n    # L3\n    pb_batch_cost = pb_jar_cost / jar_fraction_for_batch_divisor\n\n    # L4\n    cost_difference = almond_butter_batch_cost - pb_batch_cost\n\n    # FA\n    answer = cost_difference\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "cost_difference",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x1508e53d0>"
+  },
+  "correct_trace": {
+    "pb_jar_cost": 3,
+    "almond_butter_cost_factor": 3,
+    "almond_butter_jar_cost": 9,
+    "jar_fraction_for_batch_divisor": 2,
+    "almond_butter_batch_cost": 4.5,
+    "pb_batch_cost": 1.5,
+    "cost_difference": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "pb_jar_cost": 3,
+    "almond_butter_cost_factor": 3,
+    "almond_butter_jar_cost": 9,
+    "jar_fraction_for_batch_divisor": 2,
+    "almond_butter_batch_cost": 4.5,
+    "pb_batch_cost": 1.5,
+    "cost_difference": 6.0,
+    "answer": 6.0
+  },
+  "correct_value": 3.0,
+  "flawed_value": 6.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "almond_butter_jar_cost",
+      "question_inputs": [
+        "almond_butter_cost_factor",
+        "pb_jar_cost"
+      ],
+      "solution_line_template": "A jar of almond butter costs {almond_butter_cost_factor} * {pb_jar_cost} = $<<{almond_butter_cost_factor}*{pb_jar_cost}={almond_butter_jar_cost}>>{almond_butter_jar_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "almond_butter_batch_cost",
+      "question_inputs": [
+        "jar_fraction_for_batch_divisor"
+      ],
+      "solution_line_template": "It takes half a jar to make a batch of cookies, so it costs {almond_butter_jar_cost} / {jar_fraction_for_batch_divisor} = $<<{almond_butter_jar_cost}/{jar_fraction_for_batch_divisor}={almond_butter_batch_cost}>>{almond_butter_batch_cost} to use almond butter."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "pb_batch_cost",
+      "question_inputs": [],
+      "solution_line_template": "It costs {pb_jar_cost} / {jar_fraction_for_batch_divisor} = $<<{pb_jar_cost}/{jar_fraction_for_batch_divisor}={pb_batch_cost}>>{pb_batch_cost} to use peanut butter."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "cost_difference",
+      "question_inputs": [],
+      "solution_line_template": "Thus, it costs {almond_butter_batch_cost} - {pb_batch_cost} = $<<{almond_butter_batch_cost}-{pb_batch_cost}={cost_difference}>>{cost_difference} more to make a batch of almond butter cookies than peanut butter cookies."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "A jar of almond butter costs 3 * 3 = $<<3*3=9>>9.",
+    "L2": "It takes half a jar to make a batch of cookies, so it costs 9 / 2 = $<<9/2=4.5>>4.5 to use almond butter.",
+    "L3": "It costs 3 / 2 = $<<3/2=1.5>>1.5 to use peanut butter.",
+    "L4": "Thus, it costs 4.5 - 1.5 = $<<4.5-1.5=6>>6 more to make a batch of almond butter cookies than peanut butter cookies.",
+    "FA": "#### 6"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 7431821614851903740,
+  "model_name": "google_gemini-2.5-flash"
+}

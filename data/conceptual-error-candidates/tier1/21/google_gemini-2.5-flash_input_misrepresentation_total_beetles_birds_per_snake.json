@@ -1,0 +1,78 @@
+{
+  "index": 21,
+  "original_solution_mapping": {
+    "FA": "#### 1080",
+    "L1": "First find the total number of snakes eaten: 5 snakes/jaguar * 6 jaguars = <<5*6=30>>30 snakes",
+    "L2": "Then find the total number of birds eaten per day: 30 snakes * 3 birds/snake = <<30*3=90>>90 snakes",
+    "L3": "Then multiply the number of snakes by the number of beetles per snake to find the total number of beetles eaten per day: 90 snakes * 12 beetles/snake = <<90*12=1080>>1080 beetles"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 21.\n    Returns: the total number of beetles eaten each day.\n    \"\"\"\n    # L1\n    snakes_per_jaguar = 5 # each jaguar eats 5 snakes per day\n    num_jaguars = 6 # 6 jaguars in a forest\n    total_snakes = snakes_per_jaguar * num_jaguars\n\n    # L2\n    birds_per_snake = 3 # each snake eats 3 birds per day\n    total_birds = total_snakes * birds_per_snake\n\n    # L3\n    beetles_per_bird = 12 # Each bird eats 12 beetles per day\n    total_beetles = total_birds * beetles_per_bird\n\n    # FA\n    answer = total_beetles\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_beetles",
+    "operand_to_replace": "beetles_per_bird",
+    "replacement_variable": "birds_per_snake"
+  },
+  "correct_trace": {
+    "snakes_per_jaguar": 5,
+    "num_jaguars": 6,
+    "total_snakes": 30,
+    "birds_per_snake": 3,
+    "total_birds": 90,
+    "beetles_per_bird": 12,
+    "total_beetles": 1080,
+    "answer": 1080
+  },
+  "flawed_trace": {
+    "snakes_per_jaguar": 5,
+    "num_jaguars": 6,
+    "total_snakes": 30,
+    "birds_per_snake": 3,
+    "total_birds": 90,
+    "beetles_per_bird": 12,
+    "total_beetles": 270,
+    "answer": 270
+  },
+  "correct_value": 1080,
+  "flawed_value": 270,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "snakes_per_jaguar",
+        "num_jaguars"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_snakes",
+      "solution_line_template": "First find the total number of snakes eaten: {snakes_per_jaguar} snakes/jaguar * {num_jaguars} jaguars = <<{snakes_per_jaguar}*{num_jaguars}={total_snakes}>>{total_snakes} snakes"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "birds_per_snake"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_birds",
+      "solution_line_template": "Then find the total number of birds eaten per day: {total_snakes} snakes * {birds_per_snake} birds/snake = <<{total_snakes}*{birds_per_snake}={total_birds}>>{total_birds} snakes"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "beetles_per_bird"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_beetles",
+      "solution_line_template": "Then multiply the number of snakes by the number of beetles per snake to find the total number of beetles eaten per day: {total_birds} snakes * {beetles_per_bird} beetles/snake = <<{total_birds}*{beetles_per_bird}={total_beetles}>>{total_beetles} beetles"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total number of snakes eaten: 5 snakes/jaguar * 6 jaguars = <<5*6=30>>30 snakes",
+    "L2": "Then find the total number of birds eaten per day: 30 snakes * 3 birds/snake = <<30*3=90>>90 snakes",
+    "L3": "Then multiply the number of snakes by the number of beetles per snake to find the total number of beetles eaten per day: 90 snakes * 3 beetles/snake = <<90*3=270>>270 beetles",
+    "FA": "#### 270"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'birds_per_snake' (3) was used instead of 'beetles_per_bird' (12).",
+  "repro_seed": 2451947399598735396,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,85 @@
+{
+  "index": 2237,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "Mary spent 100/4= <<100/4=25>>25 dollars on a new video game.",
+    "L2": "So, after the video game purchase, Mary was left with 100 - 25 = <<100-25=75>>75 dollars.",
+    "L3": "Mary then bought swimming goggles for 75/5 = <<75/5=15>>15 dollars",
+    "L4": "Mary had 75 - 15 = <<75-15=60>>60 dollars left"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2237.\n    Returns: the amount of money Mary had left.\n    \"\"\"\n    # L1\n    initial_money = 100 # her brother surprised her with $100\n    video_game_divisor = 4 # a quarter of it\n    video_game_cost = initial_money / video_game_divisor\n\n    # L2\n    money_after_video_game = initial_money - video_game_cost\n\n    # L3\n    goggles_divisor = 5 # a fifth of what was left\n    goggles_cost = money_after_video_game / goggles_divisor\n\n    # L4\n    money_left = money_after_video_game - goggles_cost\n\n    # FA\n    answer = money_left\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "money_after_video_game",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x1501e2c90>"
+  },
+  "correct_trace": {
+    "initial_money": 100,
+    "video_game_divisor": 4,
+    "video_game_cost": 25.0,
+    "money_after_video_game": 75.0,
+    "goggles_divisor": 5,
+    "goggles_cost": 15.0,
+    "money_left": 60.0,
+    "answer": 60.0
+  },
+  "flawed_trace": {
+    "initial_money": 100,
+    "video_game_divisor": 4,
+    "video_game_cost": 25.0,
+    "money_after_video_game": 125.0,
+    "goggles_divisor": 5,
+    "goggles_cost": 25.0,
+    "money_left": 100.0,
+    "answer": 100.0
+  },
+  "correct_value": 75.0,
+  "flawed_value": 125.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "video_game_cost",
+      "question_inputs": [
+        "initial_money",
+        "video_game_divisor"
+      ],
+      "solution_line_template": "Mary spent {initial_money}/{video_game_divisor}= <<{initial_money}/{video_game_divisor}={video_game_cost}>>{video_game_cost} dollars on a new video game."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_after_video_game",
+      "question_inputs": [],
+      "solution_line_template": "So, after the video game purchase, Mary was left with {initial_money} - {video_game_cost} = <<{initial_money}-{video_game_cost}={money_after_video_game}>>{money_after_video_game} dollars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "goggles_cost",
+      "question_inputs": [
+        "goggles_divisor"
+      ],
+      "solution_line_template": "Mary then bought swimming goggles for {money_after_video_game}/{goggles_divisor} = <<{money_after_video_game}/{goggles_divisor}={goggles_cost}>>{goggles_cost} dollars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "money_left",
+      "question_inputs": [],
+      "solution_line_template": "Mary had {money_after_video_game} - {goggles_cost} = <<{money_after_video_game}-{goggles_cost}={money_left}>>{money_left} dollars left"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Mary spent 100/4= <<100/4=25>>25 dollars on a new video game.",
+    "L2": "So, after the video game purchase, Mary was left with 100 - 25 = <<100-25=125>>125 dollars.",
+    "L3": "Mary then bought swimming goggles for 125/5 = <<125/5=25>>25 dollars",
+    "L4": "Mary had 125 - 25 = <<125-25=100>>100 dollars left",
+    "FA": "#### 100"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 4165569777114168292,
+  "model_name": "google_gemini-2.5-flash"
+}

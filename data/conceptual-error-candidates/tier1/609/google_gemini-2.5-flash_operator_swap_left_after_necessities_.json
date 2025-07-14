@@ -1,0 +1,63 @@
+{
+  "index": 609,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "Angie earned 80 and paid 42 for necessities, so she had 80 - 42 = $<<80-42=38>>38 left.",
+    "L2": "Angie had 18 left after paying taxes, so her share of the taxes was 38- 18 = $20 this month."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 609.\n    Returns: the amount Angie paid in taxes this month.\n    \"\"\"\n    # L1\n    salary = 80 # salary of $80 per month\n    necessities_cost = 42 # contributes $42 a month for necessities\n    left_after_necessities = salary - necessities_cost\n\n    # L2\n    remaining_after_taxes = 18 # had $18 left over\n    taxes_paid = left_after_necessities - remaining_after_taxes\n\n    # FA\n    answer = taxes_paid\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "left_after_necessities",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x145132fd0>"
+  },
+  "correct_trace": {
+    "salary": 80,
+    "necessities_cost": 42,
+    "left_after_necessities": 38,
+    "remaining_after_taxes": 18,
+    "taxes_paid": 20,
+    "answer": 20
+  },
+  "flawed_trace": {
+    "salary": 80,
+    "necessities_cost": 42,
+    "left_after_necessities": 122,
+    "remaining_after_taxes": 18,
+    "taxes_paid": 104,
+    "answer": 104
+  },
+  "correct_value": 38,
+  "flawed_value": 122,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "salary",
+        "necessities_cost"
+      ],
+      "WK_inputs": [],
+      "output_variable": "left_after_necessities",
+      "solution_line_template": "Angie earned {salary} and paid {necessities_cost} for necessities, so she had {salary} - {necessities_cost} = $<<{salary}-{necessities_cost}={left_after_necessities}>>{left_after_necessities} left."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "remaining_after_taxes"
+      ],
+      "WK_inputs": [],
+      "output_variable": "taxes_paid",
+      "solution_line_template": "Angie had {remaining_after_taxes} left after paying taxes, so her share of the taxes was {left_after_necessities}- {remaining_after_taxes} = ${taxes_paid} this month."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Angie earned 80 and paid 42 for necessities, so she had 80 - 42 = $<<80-42=122>>122 left.",
+    "L2": "Angie had 18 left after paying taxes, so her share of the taxes was 122- 18 = $104 this month.",
+    "FA": "#### 104"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -9220518920320133354,
+  "model_name": "google_gemini-2.5-flash"
+}

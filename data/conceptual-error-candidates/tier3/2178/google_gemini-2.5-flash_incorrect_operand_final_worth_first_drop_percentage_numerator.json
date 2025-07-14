@@ -1,0 +1,89 @@
+{
+  "index": 2178,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "The first value drop of the lawnmower was 25/100 * 100 = $<<25/100*100=25>>25.",
+    "L2": "So the lawnmower was worth 100 - 25 = $<<100-25=75>>75.",
+    "L3": "Over the next year, the value dropped another 20%, which is 20/100 * 75 = $<<20/100*75=15>>15.",
+    "L4": "So after all this time, Ben's lawnmower is worth 75 - 15 = $<<75-15=60>>60."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2178.\n    Returns: the final worth of Ben's lawnmower.\n    \"\"\"\n    # L1\n    initial_cost = 100 # He paid $100 for it\n    first_drop_percentage_numerator = 25 # dropped by about 25%\n    percentage_denominator = 100 # WK\n    first_value_drop = (first_drop_percentage_numerator / percentage_denominator) * initial_cost\n\n    # L2\n    value_after_first_drop = initial_cost - first_value_drop\n\n    # L3\n    second_drop_percentage_numerator = 20 # dropped another 20%\n    second_value_drop = (second_drop_percentage_numerator / percentage_denominator) * value_after_first_drop\n\n    # L4\n    final_worth = value_after_first_drop - second_value_drop\n\n    # FA\n    answer = final_worth\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "final_worth",
+    "operand_to_replace": "second_value_drop",
+    "replacement_variable": "first_drop_percentage_numerator"
+  },
+  "correct_trace": {
+    "initial_cost": 100,
+    "first_drop_percentage_numerator": 25,
+    "percentage_denominator": 100,
+    "first_value_drop": 25.0,
+    "value_after_first_drop": 75.0,
+    "second_drop_percentage_numerator": 20,
+    "second_value_drop": 15.0,
+    "final_worth": 60.0,
+    "answer": 60.0
+  },
+  "flawed_trace": {
+    "initial_cost": 100,
+    "first_drop_percentage_numerator": 25,
+    "percentage_denominator": 100,
+    "first_value_drop": 25.0,
+    "value_after_first_drop": 75.0,
+    "second_drop_percentage_numerator": 20,
+    "second_value_drop": 15.0,
+    "final_worth": 50.0,
+    "answer": 50.0
+  },
+  "correct_value": 60.0,
+  "flawed_value": 50.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percentage_denominator"
+      ],
+      "line_number": "L1",
+      "output_variable": "first_value_drop",
+      "question_inputs": [
+        "initial_cost",
+        "first_drop_percentage_numerator"
+      ],
+      "solution_line_template": "The first value drop of the lawnmower was {first_drop_percentage_numerator}/{percentage_denominator} * {initial_cost} = $<<{first_drop_percentage_numerator}/{percentage_denominator}*{initial_cost}={first_value_drop}>>{first_value_drop}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "value_after_first_drop",
+      "question_inputs": [],
+      "solution_line_template": "So the lawnmower was worth {initial_cost} - {first_value_drop} = $<<{initial_cost}-{first_value_drop}={value_after_first_drop}>>{value_after_first_drop}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "second_value_drop",
+      "question_inputs": [
+        "second_drop_percentage_numerator"
+      ],
+      "solution_line_template": "Over the next year, the value dropped another {second_drop_percentage_numerator}/{percentage_denominator} * {value_after_first_drop} = $<<{second_drop_percentage_numerator}/{percentage_denominator}*{value_after_first_drop}={second_value_drop}>>{second_value_drop}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_worth",
+      "question_inputs": [],
+      "solution_line_template": "So after all this time, Ben's lawnmower is worth {value_after_first_drop} - {second_value_drop} = $<<{value_after_first_drop}-{second_value_drop}={final_worth}>>{final_worth}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The first value drop of the lawnmower was 25/100 * 100 = $<<25/100*100=25>>25.",
+    "L2": "So the lawnmower was worth 100 - 25 = $<<100-25=75>>75.",
+    "L3": "Over the next year, the value dropped another 20/100 * 75 = $<<20/100*75=15>>15.",
+    "L4": "So after all this time, Ben's lawnmower is worth 75 - 25 = $<<75-25=50>>50.",
+    "FA": "#### 50"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'first_drop_percentage_numerator' (value: 25) was used instead of 'second_value_drop' (value: 15.0).",
+  "repro_seed": 1011594258205046062,
+  "model_name": "google_gemini-2.5-flash"
+}

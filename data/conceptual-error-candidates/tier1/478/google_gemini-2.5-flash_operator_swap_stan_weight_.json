@@ -1,0 +1,74 @@
+{
+  "index": 478,
+  "original_solution_mapping": {
+    "FA": "#### 319",
+    "L1": "Steve weighs 110 - 8 = <<110-8=102>>102 pounds.",
+    "L2": "Stan weighs 102 + 5 = <<102+5=107>>107 pounds.",
+    "L3": "Their total weight is 102 + 107 + 110 = <<102+107+110=319>>319 pounds."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 478.\n    Returns: the total weight of Stan, Steve, and Jim.\n    \"\"\"\n    # L1\n    jim_weight = 110 # Jim weighs 110 pounds\n    steve_lighter_than_jim = 8 # Steve is eight pounds lighter than Jim\n    steve_weight = jim_weight - steve_lighter_than_jim\n\n    # L2\n    stan_more_than_steve = 5 # Stan weighs 5 more pounds than Steve\n    stan_weight = steve_weight + stan_more_than_steve\n\n    # L3\n    total_weight = steve_weight + stan_weight + jim_weight\n\n    # FA\n    answer = total_weight\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "stan_weight",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x144fb20d0>"
+  },
+  "correct_trace": {
+    "jim_weight": 110,
+    "steve_lighter_than_jim": 8,
+    "steve_weight": 102,
+    "stan_more_than_steve": 5,
+    "stan_weight": 107,
+    "total_weight": 319,
+    "answer": 319
+  },
+  "flawed_trace": {
+    "jim_weight": 110,
+    "steve_lighter_than_jim": 8,
+    "steve_weight": 102,
+    "stan_more_than_steve": 5,
+    "stan_weight": 97,
+    "total_weight": 309,
+    "answer": 309
+  },
+  "correct_value": 107,
+  "flawed_value": 97,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "jim_weight",
+        "steve_lighter_than_jim"
+      ],
+      "WK_inputs": [],
+      "output_variable": "steve_weight",
+      "solution_line_template": "Steve weighs {jim_weight} - {steve_lighter_than_jim} = <<{jim_weight}-{steve_lighter_than_jim}={steve_weight}>>{steve_weight} pounds."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "stan_more_than_steve"
+      ],
+      "WK_inputs": [],
+      "output_variable": "stan_weight",
+      "solution_line_template": "Stan weighs {steve_weight} + {stan_more_than_steve} = <<{steve_weight}+{stan_more_than_steve}={stan_weight}>>{stan_weight} pounds."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_weight",
+      "solution_line_template": "Their total weight is {steve_weight} + {stan_weight} + {jim_weight} = <<{steve_weight}+{stan_weight}+{jim_weight}={total_weight}>>{total_weight} pounds."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Steve weighs 110 - 8 = <<110-8=102>>102 pounds.",
+    "L2": "Stan weighs 102 + 5 = <<102+5=97>>97 pounds.",
+    "L3": "Their total weight is 102 + 97 + 110 = <<102+97+110=309>>309 pounds.",
+    "FA": "#### 309"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": 8088571149545280920,
+  "model_name": "google_gemini-2.5-flash"
+}

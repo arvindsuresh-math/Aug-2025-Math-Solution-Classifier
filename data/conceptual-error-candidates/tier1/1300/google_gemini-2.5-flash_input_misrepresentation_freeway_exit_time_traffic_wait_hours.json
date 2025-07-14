@@ -1,0 +1,59 @@
+{
+  "index": 1300,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "First find the total amount of time he spends trying to get off the freeway: 2 hours * 4 = <<2*4=8>>8 hours",
+    "L2": "Then add the time he spends waiting in traffic to find the total time: 8 hours + 2 hours = <<8+2=10>>10 hours"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1300.\n    Returns: the total time Martin wastes.\n    \"\"\"\n    # L1\n    traffic_wait_hours = 2 # 2 hours waiting in traffic\n    multiplier_freeway = 4 # four times that long\n    freeway_exit_time = traffic_wait_hours * multiplier_freeway\n\n    # L2\n    total_waste_time = freeway_exit_time + traffic_wait_hours\n\n    # FA\n    answer = total_waste_time\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "freeway_exit_time",
+    "operand_to_replace": "multiplier_freeway",
+    "replacement_variable": "traffic_wait_hours"
+  },
+  "correct_trace": {
+    "traffic_wait_hours": 2,
+    "multiplier_freeway": 4,
+    "freeway_exit_time": 8,
+    "total_waste_time": 10,
+    "answer": 10
+  },
+  "flawed_trace": {
+    "traffic_wait_hours": 2,
+    "multiplier_freeway": 4,
+    "freeway_exit_time": 4,
+    "total_waste_time": 6,
+    "answer": 6
+  },
+  "correct_value": 8,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "traffic_wait_hours",
+        "multiplier_freeway"
+      ],
+      "WK_inputs": [],
+      "output_variable": "freeway_exit_time",
+      "solution_line_template": "First find the total amount of time he spends trying to get off the freeway: {traffic_wait_hours} hours * {multiplier_freeway} = <<{traffic_wait_hours}*{multiplier_freeway}={freeway_exit_time}>>{freeway_exit_time} hours"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_waste_time",
+      "solution_line_template": "Then add the time he spends waiting in traffic to find the total time: {freeway_exit_time} hours + {traffic_wait_hours} hours = <<{freeway_exit_time}+{traffic_wait_hours}={total_waste_time}>>{total_waste_time} hours"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total amount of time he spends trying to get off the freeway: 2 hours * 2 = <<2*2=4>>4 hours",
+    "L2": "Then add the time he spends waiting in traffic to find the total time: 4 hours + 2 hours = <<4+2=6>>6 hours",
+    "FA": "#### 6"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'traffic_wait_hours' (2) was used instead of 'multiplier_freeway' (4).",
+  "repro_seed": -265935553463858788,
+  "model_name": "google_gemini-2.5-flash"
+}

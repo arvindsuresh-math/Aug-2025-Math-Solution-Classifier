@@ -1,0 +1,85 @@
+{
+  "index": 849,
+  "original_solution_mapping": {
+    "FA": "#### 80",
+    "L1": "After half an hour, the number of balloons that had blown up is 1/5*200 = <<1/5*200=40>>40",
+    "L2": "The number of balloons that haven't blown up so far is 200-40 = <<200-40=160>>160",
+    "L3": "In the next hour, 2*40 = <<2*40=80>>80 balloons blow up.",
+    "L4": "The number of balloons that haven't blown up now is 160-80 = <<160-80=80>>80"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 849.\n    Returns: the number of balloons in the hot air balloon that remain intact.\n    \"\"\"\n    # L1\n    initial_fraction_blown_up = Fraction(1, 5) # 1/5 of the total number of balloons\n    total_balloons = 200 # A hot air balloon with 200 balloons\n    initial_blown_up_balloons = initial_fraction_blown_up * total_balloons\n\n    # L2\n    remaining_after_half_hour = total_balloons - initial_blown_up_balloons\n\n    # L3\n    multiplier_next_hour = 2 # twice the number of balloons\n    additional_blown_up_balloons = multiplier_next_hour * initial_blown_up_balloons\n\n    # L4\n    final_intact_balloons = remaining_after_half_hour - additional_blown_up_balloons\n\n    # FA\n    answer = final_intact_balloons\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "initial_blown_up_balloons",
+    "operand_to_replace": "total_balloons",
+    "replacement_variable": "initial_fraction_blown_up"
+  },
+  "correct_trace": {
+    "initial_fraction_blown_up": "1/5",
+    "total_balloons": 200,
+    "initial_blown_up_balloons": "40",
+    "remaining_after_half_hour": "160",
+    "multiplier_next_hour": 2,
+    "additional_blown_up_balloons": "80",
+    "final_intact_balloons": "80",
+    "answer": "80"
+  },
+  "flawed_trace": {
+    "initial_fraction_blown_up": "1/5",
+    "total_balloons": 200,
+    "initial_blown_up_balloons": "1/25",
+    "remaining_after_half_hour": "4999/25",
+    "multiplier_next_hour": 2,
+    "additional_blown_up_balloons": "2/25",
+    "final_intact_balloons": "4997/25",
+    "answer": "4997/25"
+  },
+  "correct_value": "40",
+  "flawed_value": "1/25",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "initial_blown_up_balloons",
+      "question_inputs": [
+        "initial_fraction_blown_up",
+        "total_balloons"
+      ],
+      "solution_line_template": "After half an hour, the number of balloons that had blown up is {initial_fraction_blown_up}*{total_balloons} = <<{initial_fraction_blown_up}*{total_balloons}={initial_blown_up_balloons}>>{initial_blown_up_balloons}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_after_half_hour",
+      "question_inputs": [],
+      "solution_line_template": "The number of balloons that haven't blown up so far is {total_balloons}-{initial_blown_up_balloons} = <<{total_balloons}-{initial_blown_up_balloons}={remaining_after_half_hour}>>{remaining_after_half_hour}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "additional_blown_up_balloons",
+      "question_inputs": [
+        "multiplier_next_hour"
+      ],
+      "solution_line_template": "In the next hour, {multiplier_next_hour}*{initial_blown_up_balloons} = <<{multiplier_next_hour}*{initial_blown_up_balloons}={additional_blown_up_balloons}>>{additional_blown_up_balloons} balloons blow up."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_intact_balloons",
+      "question_inputs": [],
+      "solution_line_template": "The number of balloons that haven't blown up now is {remaining_after_half_hour}-{additional_blown_up_balloons} = <<{remaining_after_half_hour}-{additional_blown_up_balloons}={final_intact_balloons}>>{final_intact_balloons}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After half an hour, the number of balloons that had blown up is 1/5*1/5 = <<1/5*1/5=1/25>>1/25",
+    "L2": "The number of balloons that haven't blown up so far is 200-1/25 = <<200-1/25=4999/25>>4999/25",
+    "L3": "In the next hour, 2*1/25 = <<2*1/25=2/25>>2/25 balloons blow up.",
+    "L4": "The number of balloons that haven't blown up now is 4999/25-2/25 = <<4999/25-2/25=4997/25>>4997/25",
+    "FA": "#### 4997/25"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'initial_fraction_blown_up' (1/5) was used instead of 'total_balloons' (200).",
+  "repro_seed": 655805343394160584,
+  "model_name": "google_gemini-2.5-flash"
+}

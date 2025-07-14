@@ -1,0 +1,89 @@
+{
+  "index": 811,
+  "original_solution_mapping": {
+    "FA": "#### 300",
+    "L1": "If he had 200 fish and sells 50, he is left with 200 - 50 = <<200-50=150>>150 fish",
+    "L2": "If a third of them get spoiled 1/3 * 150 = <<150*1/3=50>>50 fish get spoiled",
+    "L3": "The remaining number of fish is now 150 - 50 = <<150-50=100>>100",
+    "L4": "He then gets 200 more to make 100 + 200 = <<100+200=300>>300 fish"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 811.\n    Returns: the total number of fish Steve has in stock.\n    \"\"\"\n    # L1\n    initial_stock = 200 # stock of 200 fish\n    sold_fish = 50 # sells 50 fish\n    remaining_after_sale = initial_stock - sold_fish\n\n    # L2\n    spoiled_fraction = Fraction(1, 3) # a third of the remaining fish\n    spoiled_fish = spoiled_fraction * remaining_after_sale\n\n    # L3\n    remaining_after_spoilage = remaining_after_sale - spoiled_fish\n\n    # L4\n    new_stock = 200 # A new stock of 200 more fish arrives\n    total_current_stock = remaining_after_spoilage + new_stock\n\n    # FA\n    answer = total_current_stock\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "remaining_after_sale",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x1479b3910>"
+  },
+  "correct_trace": {
+    "initial_stock": 200,
+    "sold_fish": 50,
+    "remaining_after_sale": 150,
+    "spoiled_fraction": "1/3",
+    "spoiled_fish": "50",
+    "remaining_after_spoilage": "100",
+    "new_stock": 200,
+    "total_current_stock": "300",
+    "answer": "300"
+  },
+  "flawed_trace": {
+    "initial_stock": 200,
+    "sold_fish": 50,
+    "remaining_after_sale": 4.0,
+    "spoiled_fraction": "1/3",
+    "spoiled_fish": 1.3333333333333333,
+    "remaining_after_spoilage": 2.666666666666667,
+    "new_stock": 200,
+    "total_current_stock": 202.66666666666666,
+    "answer": 202.66666666666666
+  },
+  "correct_value": 150,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "remaining_after_sale",
+      "question_inputs": [
+        "initial_stock",
+        "sold_fish"
+      ],
+      "solution_line_template": "If he had {initial_stock} fish and sells {sold_fish}, he is left with {initial_stock} - {sold_fish} = <<{initial_stock}-{sold_fish}={remaining_after_sale}>>{remaining_after_sale} fish"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "spoiled_fish",
+      "question_inputs": [
+        "spoiled_fraction"
+      ],
+      "solution_line_template": "If a third of them get spoiled {spoiled_fraction} * {remaining_after_sale} = <<{remaining_after_sale}*{spoiled_fraction}={spoiled_fish}>>{spoiled_fish} fish get spoiled"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_after_spoilage",
+      "question_inputs": [],
+      "solution_line_template": "The remaining number of fish is now {remaining_after_sale} - {spoiled_fish} = <<{remaining_after_sale}-{spoiled_fish}={remaining_after_spoilage}>>{remaining_after_spoilage}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_current_stock",
+      "question_inputs": [
+        "new_stock"
+      ],
+      "solution_line_template": "He then gets {new_stock} more to make {remaining_after_spoilage} + {new_stock} = <<{remaining_after_spoilage}+{new_stock}={total_current_stock}>>{total_current_stock} fish"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If he had 200 fish and sells 50, he is left with 200 - 50 = <<200-50=4>>4 fish",
+    "L2": "If a third of them get spoiled 1/3 * 4 = <<4*1/3=1.33>>1.33 fish get spoiled",
+    "L3": "The remaining number of fish is now 4 - 1.33 = <<4-1.33=2.67>>2.67",
+    "L4": "He then gets 200 more to make 2.67 + 200 = <<2.67+200=202.67>>202.67 fish",
+    "FA": "#### 202.67"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": 7626639191693663447,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 2229,
+  "original_solution_mapping": {
+    "FA": "#### 96",
+    "L1": "Every day Zainab passes out flyers, she earns $2 x 4 = $<<2*4=8>>8",
+    "L2": "If she hands out flyers for 3 days, she'll earn $8/day * 3 days = $<<8*3=24>>24",
+    "L3": "If she passes out flyers for 4 weeks, she will earn $24 * 4 = $<<24*4=96>>96"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2229.\n    Returns: the total money Zainab will earn after passing out flyers for 4 weeks.\n    \"\"\"\n    # L1\n    hourly_rate = 2 # $2 an hour\n    hours_per_day = 4 # for 4 hours at a time\n    earnings_per_day = hourly_rate * hours_per_day\n\n    # L2\n    days_per_week = 3 # on Monday, Wednesday, and Saturday each week\n    earnings_per_week = earnings_per_day * days_per_week\n\n    # L3\n    num_weeks = 4 # for 4 weeks\n    total_earnings = earnings_per_week * num_weeks\n\n    # FA\n    answer = total_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "earnings_per_day",
+    "operand_to_replace": "hours_per_day",
+    "replacement_variable": "hourly_rate"
+  },
+  "correct_trace": {
+    "hourly_rate": 2,
+    "hours_per_day": 4,
+    "earnings_per_day": 8,
+    "days_per_week": 3,
+    "earnings_per_week": 24,
+    "num_weeks": 4,
+    "total_earnings": 96,
+    "answer": 96
+  },
+  "flawed_trace": {
+    "hourly_rate": 2,
+    "hours_per_day": 4,
+    "earnings_per_day": 4,
+    "days_per_week": 3,
+    "earnings_per_week": 12,
+    "num_weeks": 4,
+    "total_earnings": 48,
+    "answer": 48
+  },
+  "correct_value": 8,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "hourly_rate",
+        "hours_per_day"
+      ],
+      "WK_inputs": [],
+      "output_variable": "earnings_per_day",
+      "solution_line_template": "Every day Zainab passes out flyers, she earns ${hourly_rate} x {hours_per_day} = $<<{hourly_rate}*{hours_per_day}={earnings_per_day}>>{earnings_per_day}"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "days_per_week"
+      ],
+      "WK_inputs": [],
+      "output_variable": "earnings_per_week",
+      "solution_line_template": "If she hands out flyers for {days_per_week} days, she'll earn ${earnings_per_day}/day * {days_per_week} days = $<<{earnings_per_day}*{days_per_week}={earnings_per_week}>>{earnings_per_week}"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "num_weeks"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_earnings",
+      "solution_line_template": "If she passes out flyers for {num_weeks} weeks, she will earn ${earnings_per_week} * {num_weeks} = $<<{earnings_per_week}*{num_weeks}={total_earnings}>>{total_earnings}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Every day Zainab passes out flyers, she earns $2 x 2 = $<<2*2=4>>4",
+    "L2": "If she hands out flyers for 3 days, she'll earn $4/day * 3 days = $<<4*3=12>>12",
+    "L3": "If she passes out flyers for 4 weeks, she will earn $12 * 4 = $<<12*4=48>>48",
+    "FA": "#### 48"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'hourly_rate' (2) was used instead of 'hours_per_day' (4).",
+  "repro_seed": 915121475550892910,
+  "model_name": "google_gemini-2.5-flash"
+}

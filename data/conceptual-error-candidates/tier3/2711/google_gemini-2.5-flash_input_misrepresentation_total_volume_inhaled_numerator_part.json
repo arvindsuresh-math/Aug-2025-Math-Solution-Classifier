@@ -1,0 +1,73 @@
+{
+  "index": 2711,
+  "original_solution_mapping": {
+    "FA": "#### 13600",
+    "L1": "We have 60 minutes per hour.",
+    "L2": "So, in 24 hours we have 60 * 24 = <<60*24=1440>>1440 minutes.",
+    "L3": "So, the volume of air Ross inhaled in 24 hours is: 17 breaths/minute * 5/9 L/breath * 1440 minutes = 122400 / 9 = <<17*5/9*1440=13600>>13600 liters.",
+    "L4": "The volume of air inhaled is 13600 liters."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2711.\n    Returns: the total volume of air inhaled.\n    \"\"\"\n    # L1\n    minutes_per_hour = 60 # WK\n\n    # L2\n    hours_in_day = 24 # 24 hours\n    total_minutes = minutes_per_hour * hours_in_day\n\n    # L3\n    breaths_per_minute = 17 # 17 breaths per minute\n    air_per_breath = Fraction(5, 9) # 5/9 liter of air\n    numerator_part = breaths_per_minute * air_per_breath.numerator * total_minutes\n    denominator_part = air_per_breath.denominator\n    total_volume_inhaled = breaths_per_minute * air_per_breath * total_minutes\n\n    # FA\n    answer = total_volume_inhaled\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_volume_inhaled",
+    "operand_to_replace": "air_per_breath",
+    "replacement_variable": "numerator_part"
+  },
+  "correct_trace": {
+    "minutes_per_hour": 60,
+    "hours_in_day": 24,
+    "total_minutes": 1440,
+    "breaths_per_minute": 17,
+    "air_per_breath": "5/9",
+    "numerator_part": 122400,
+    "denominator_part": 9,
+    "total_volume_inhaled": "13600",
+    "answer": "13600"
+  },
+  "flawed_trace": {
+    "minutes_per_hour": 60,
+    "hours_in_day": 24,
+    "total_minutes": 1440,
+    "breaths_per_minute": 17,
+    "air_per_breath": "5/9",
+    "numerator_part": 122400,
+    "denominator_part": 9,
+    "total_volume_inhaled": 2996352000,
+    "answer": 2996352000
+  },
+  "correct_value": "13600",
+  "flawed_value": 2996352000,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_minutes",
+      "question_inputs": [
+        "hours_in_day"
+      ],
+      "solution_line_template": "So, in {hours_in_day} hours we have {minutes_per_hour} * {hours_in_day} = <<{minutes_per_hour}*{hours_in_day}={total_minutes}>>{total_minutes} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_volume_inhaled",
+      "question_inputs": [
+        "breaths_per_minute",
+        "air_per_breath"
+      ],
+      "solution_line_template": "So, the volume of air Ross inhaled in {hours_in_day} hours is: {breaths_per_minute} breaths/minute * {air_per_breath} L/breath * {total_minutes} minutes = {numerator_part} / {denominator_part} = <<{breaths_per_minute}*{air_per_breath}*{total_minutes}={total_volume_inhaled}>>{total_volume_inhaled} liters."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "So, in 24 hours we have 60 * 24 = <<60*24=1440>>1440 minutes.",
+    "L3": "So, the volume of air Ross inhaled in 24 hours is: 17 breaths/minute * 122400 L/breath * 1440 minutes = 122400 / 9 = <<17*122400*1440=2996352000>>2996352000 liters.",
+    "FA": "#### 2996352000"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'numerator_part' (122400) was used instead of 'air_per_breath' (5/9).",
+  "repro_seed": -1482049576951931383,
+  "model_name": "google_gemini-2.5-flash"
+}

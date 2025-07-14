@@ -1,0 +1,104 @@
+{
+  "index": 650,
+  "original_solution_mapping": {
+    "FA": "#### 19",
+    "L1": "Josh gave a total of 3 x 10 = <<3*10=30>>30 candies to his siblings.",
+    "L2": "He was then left with 100 - 30 = <<100-30=70>>70 candies.",
+    "L3": "He gave 70/2 = <<70/2=35>>35 candies to his best friend.",
+    "L4": "So he had 70 - 35 = <<70-35=35>>35 candies left.",
+    "L5": "Since he only wants to eat 16 candies, there are still 35 - 16 = <<35-16=19>>19 candies left to be shared with others."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 650.\n    Returns: the number of candies left to be shared with others.\n    \"\"\"\n    # L1\n    num_siblings = 3 # his 3 siblings\n    candies_per_sibling = 10 # 10 candies each\n    candies_given_to_siblings = num_siblings * candies_per_sibling\n\n    # L2\n    initial_candies = 100 # 100 gummy bear candies\n    candies_after_siblings = initial_candies - candies_given_to_siblings\n\n    # L3\n    friend_share_divisor = 2 # half of the remaining candies\n    candies_given_to_friend = candies_after_siblings / friend_share_divisor\n\n    # L4\n    candies_after_friend = candies_after_siblings - candies_given_to_friend\n\n    # L5\n    candies_to_eat = 16 # only wants to eat 16 gummy bear candies\n    candies_for_sharing = candies_after_friend - candies_to_eat\n\n    # FA\n    answer = candies_for_sharing\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "candies_given_to_friend",
+    "operand_to_replace": "candies_after_siblings",
+    "replacement_variable": "candies_given_to_siblings"
+  },
+  "correct_trace": {
+    "num_siblings": 3,
+    "candies_per_sibling": 10,
+    "candies_given_to_siblings": 30,
+    "initial_candies": 100,
+    "candies_after_siblings": 70,
+    "friend_share_divisor": 2,
+    "candies_given_to_friend": 35.0,
+    "candies_after_friend": 35.0,
+    "candies_to_eat": 16,
+    "candies_for_sharing": 19.0,
+    "answer": 19.0
+  },
+  "flawed_trace": {
+    "num_siblings": 3,
+    "candies_per_sibling": 10,
+    "candies_given_to_siblings": 30,
+    "initial_candies": 100,
+    "candies_after_siblings": 70,
+    "friend_share_divisor": 2,
+    "candies_given_to_friend": 15.0,
+    "candies_after_friend": 55.0,
+    "candies_to_eat": 16,
+    "candies_for_sharing": 39.0,
+    "answer": 39.0
+  },
+  "correct_value": 35.0,
+  "flawed_value": 15.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "candies_given_to_siblings",
+      "question_inputs": [
+        "num_siblings",
+        "candies_per_sibling"
+      ],
+      "solution_line_template": "Josh gave a total of {num_siblings} x {candies_per_sibling} = <<{num_siblings}*{candies_per_sibling}={candies_given_to_siblings}>>{candies_given_to_siblings} candies to his siblings."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "candies_after_siblings",
+      "question_inputs": [
+        "initial_candies"
+      ],
+      "solution_line_template": "He was then left with {initial_candies} - {candies_given_to_siblings} = <<{initial_candies}-{candies_given_to_siblings}={candies_after_siblings}>>{candies_after_siblings} candies."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "candies_given_to_friend",
+      "question_inputs": [
+        "friend_share_divisor"
+      ],
+      "solution_line_template": "He gave {candies_after_siblings}/{friend_share_divisor} = <<{candies_after_siblings}/{friend_share_divisor}={candies_given_to_friend}>>{candies_given_to_friend} candies to his best friend."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "candies_after_friend",
+      "question_inputs": [],
+      "solution_line_template": "So he had {candies_after_siblings} - {candies_given_to_friend} = <<{candies_after_siblings}-{candies_given_to_friend}={candies_after_friend}>>{candies_after_friend} candies left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "candies_for_sharing",
+      "question_inputs": [
+        "candies_to_eat"
+      ],
+      "solution_line_template": "Since he only wants to eat {candies_to_eat} candies, there are still {candies_after_friend} - {candies_to_eat} = <<{candies_after_friend}-{candies_to_eat}={candies_for_sharing}>>{candies_for_sharing} candies left to be shared with others."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Josh gave a total of 3 x 10 = <<3*10=30>>30 candies to his siblings.",
+    "L2": "He was then left with 100 - 30 = <<100-30=70>>70 candies.",
+    "L3": "He gave 30/2 = <<30/2=15>>15 candies to his best friend.",
+    "L4": "So he had 70 - 15 = <<70-15=55>>55 candies left.",
+    "L5": "Since he only wants to eat 16 candies, there are still 55 - 16 = <<55-16=39>>39 candies left to be shared with others.",
+    "FA": "#### 39"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'candies_given_to_siblings' (value: 30) was used instead of 'candies_after_siblings' (value: 70).",
+  "repro_seed": 8537254276937560759,
+  "model_name": "google_gemini-2.5-flash"
+}

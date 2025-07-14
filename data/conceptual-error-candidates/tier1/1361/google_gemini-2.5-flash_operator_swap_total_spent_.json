@@ -1,0 +1,92 @@
+{
+  "index": 1361,
+  "original_solution_mapping": {
+    "FA": "#### 132",
+    "L1": "Annie spends 4*8=<<4*8=32>>32 dollars on hamburgers.",
+    "L2": "Annie spends 5*6=<<5*6=30>>30 dollars on milkshakes.",
+    "L3": "Annie spends 32+30=<<32+30=62>>62 dollars on hamburgers and milkshakes.",
+    "L4": "Annie had 62+70=<<62+70=132>>132 dollars at first."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1361.\n    Returns: the amount of money Annie had at first.\n    \"\"\"\n    # L1\n    hamburger_price = 4 # hamburgers for $4 each\n    num_hamburgers = 8 # buys 8 hamburgers\n    cost_hamburgers = hamburger_price * num_hamburgers\n\n    # L2\n    milkshake_price = 5 # milkshakes for $5 each\n    num_milkshakes = 6 # buys 6 milkshakes\n    cost_milkshakes = milkshake_price * num_milkshakes\n\n    # L3\n    total_spent = cost_hamburgers + cost_milkshakes\n\n    # L4\n    money_left = 70 # She has $70 left\n    initial_money = total_spent + money_left\n\n    # FA\n    answer = initial_money\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_spent",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x1454737d0>"
+  },
+  "correct_trace": {
+    "hamburger_price": 4,
+    "num_hamburgers": 8,
+    "cost_hamburgers": 32,
+    "milkshake_price": 5,
+    "num_milkshakes": 6,
+    "cost_milkshakes": 30,
+    "total_spent": 62,
+    "money_left": 70,
+    "initial_money": 132,
+    "answer": 132
+  },
+  "flawed_trace": {
+    "hamburger_price": 4,
+    "num_hamburgers": 8,
+    "cost_hamburgers": 32,
+    "milkshake_price": 5,
+    "num_milkshakes": 6,
+    "cost_milkshakes": 30,
+    "total_spent": 2,
+    "money_left": 70,
+    "initial_money": 72,
+    "answer": 72
+  },
+  "correct_value": 62,
+  "flawed_value": 2,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "hamburger_price",
+        "num_hamburgers"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cost_hamburgers",
+      "solution_line_template": "Annie spends {hamburger_price}*{num_hamburgers}=<<{hamburger_price}*{num_hamburgers}={cost_hamburgers}>>{cost_hamburgers} dollars on hamburgers."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "milkshake_price",
+        "num_milkshakes"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cost_milkshakes",
+      "solution_line_template": "Annie spends {milkshake_price}*{num_milkshakes}=<<{milkshake_price}*{num_milkshakes}={cost_milkshakes}>>{cost_milkshakes} dollars on milkshakes."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_spent",
+      "solution_line_template": "Annie spends {cost_hamburgers}+{cost_milkshakes}=<<{cost_hamburgers}+{cost_milkshakes}={total_spent}>>{total_spent} dollars on hamburgers and milkshakes."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "money_left"
+      ],
+      "WK_inputs": [],
+      "output_variable": "initial_money",
+      "solution_line_template": "Annie had {total_spent}+{money_left}=<<{total_spent}+{money_left}={initial_money}>>{initial_money} dollars at first."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Annie spends 4*8=<<4*8=32>>32 dollars on hamburgers.",
+    "L2": "Annie spends 5*6=<<5*6=30>>30 dollars on milkshakes.",
+    "L3": "Annie spends 32+30=<<32+30=2>>2 dollars on hamburgers and milkshakes.",
+    "L4": "Annie had 2+70=<<2+70=72>>72 dollars at first.",
+    "FA": "#### 72"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": 2525302765031723206,
+  "model_name": "google_gemini-2.5-flash"
+}

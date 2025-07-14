@@ -1,0 +1,63 @@
+{
+  "index": 217,
+  "original_solution_mapping": {
+    "FA": "#### 96",
+    "L1": "If Maude's age is 8 by the time Anne's age is four times Emile's age, Emile will be six times as old as Maude, which totals 6*8 = 48 years.",
+    "L2": "If Emile's age is 48 years old by the time Anne's age is twice her number, Anne will be 2*48 = <<48*2=96>>96 years."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 217.\n    Returns: Anne's age.\n    \"\"\"\n    # L1\n    maude_age = 8 # Maude will be 8 years old\n    emile_multiplier_maude = 6 # Emile will be six times as old as Maude\n    emile_age = emile_multiplier_maude * maude_age\n\n    # L2\n    anne_multiplier_emile = 2 # Anne is two times as old as Emile\n    anne_age = anne_multiplier_emile * emile_age\n\n    # FA\n    answer = anne_age\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "emile_age",
+    "operand_to_replace": "emile_multiplier_maude",
+    "replacement_variable": "maude_age"
+  },
+  "correct_trace": {
+    "maude_age": 8,
+    "emile_multiplier_maude": 6,
+    "emile_age": 48,
+    "anne_multiplier_emile": 2,
+    "anne_age": 96,
+    "answer": 96
+  },
+  "flawed_trace": {
+    "maude_age": 8,
+    "emile_multiplier_maude": 6,
+    "emile_age": 64,
+    "anne_multiplier_emile": 2,
+    "anne_age": 128,
+    "answer": 128
+  },
+  "correct_value": 48,
+  "flawed_value": 64,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "maude_age",
+        "emile_multiplier_maude"
+      ],
+      "WK_inputs": [],
+      "output_variable": "emile_age",
+      "solution_line_template": "If Maude's age is {maude_age} by the time Anne's age is four times Emile's age, Emile will be {emile_multiplier_maude} times as old as Maude, which totals {emile_multiplier_maude}*{maude_age} = {emile_age} years."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "anne_multiplier_emile"
+      ],
+      "WK_inputs": [],
+      "output_variable": "anne_age",
+      "solution_line_template": "If Emile's age is {emile_age} years old by the time Anne's age is twice her number, Anne will be {anne_multiplier_emile}*{emile_age} = <<{emile_age}*{anne_multiplier_emile}={anne_age}>>{anne_age} years."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Maude's age is 8 by the time Anne's age is four times Emile's age, Emile will be 8 times as old as Maude, which totals 8*8 = 64 years.",
+    "L2": "If Emile's age is 64 years old by the time Anne's age is twice her number, Anne will be 2*64 = <<64*2=128>>128 years.",
+    "FA": "#### 128"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'maude_age' (8) was used instead of 'emile_multiplier_maude' (6).",
+  "repro_seed": 5776931959927216936,
+  "model_name": "google_gemini-2.5-flash"
+}

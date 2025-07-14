@@ -1,0 +1,92 @@
+{
+  "index": 1252,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "Marnie bought 50 x 5 = <<50*5=250>>250 beads from the 5 bags of 50 beads.",
+    "L2": "She also bought 100 x 2 = <<100*2=200>>200 beads from the 2 bags of 100 beads.",
+    "L3": "She has a total of 250 + 200 = <<250+200=450>>450 beads.",
+    "L4": "Hence, she will be able to make 450/50 = <<450/50=9>>9 bracelets."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1252.\n    Returns: the total number of bracelets Marnie can make.\n    \"\"\"\n    # L1\n    beads_per_small_bag = 50 # 50 beads\n    num_small_bags = 5 # 5 bags\n    beads_from_small_bags = beads_per_small_bag * num_small_bags\n\n    # L2\n    beads_per_large_bag = 100 # 100 beads\n    num_large_bags = 2 # 2 bags\n    beads_from_large_bags = beads_per_large_bag * num_large_bags\n\n    # L3\n    total_beads = beads_from_small_bags + beads_from_large_bags\n\n    # L4\n    beads_per_bracelet = 50 # 50 beads are used to make one bracelet\n    num_bracelets = total_beads / beads_per_bracelet\n\n    # FA\n    answer = num_bracelets\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_beads",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x147b84590>"
+  },
+  "correct_trace": {
+    "beads_per_small_bag": 50,
+    "num_small_bags": 5,
+    "beads_from_small_bags": 250,
+    "beads_per_large_bag": 100,
+    "num_large_bags": 2,
+    "beads_from_large_bags": 200,
+    "total_beads": 450,
+    "beads_per_bracelet": 50,
+    "num_bracelets": 9.0,
+    "answer": 9.0
+  },
+  "flawed_trace": {
+    "beads_per_small_bag": 50,
+    "num_small_bags": 5,
+    "beads_from_small_bags": 250,
+    "beads_per_large_bag": 100,
+    "num_large_bags": 2,
+    "beads_from_large_bags": 200,
+    "total_beads": 50000,
+    "beads_per_bracelet": 50,
+    "num_bracelets": 1000.0,
+    "answer": 1000.0
+  },
+  "correct_value": 450,
+  "flawed_value": 50000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "beads_from_small_bags",
+      "question_inputs": [
+        "beads_per_small_bag",
+        "num_small_bags"
+      ],
+      "solution_line_template": "Marnie bought {beads_per_small_bag} x {num_small_bags} = <<{beads_per_small_bag}*{num_small_bags}={beads_from_small_bags}>>{beads_from_small_bags} beads from the {num_small_bags} bags of {beads_per_small_bag} beads."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "beads_from_large_bags",
+      "question_inputs": [
+        "beads_per_large_bag",
+        "num_large_bags"
+      ],
+      "solution_line_template": "She also bought {beads_per_large_bag} x {num_large_bags} = <<{beads_per_large_bag}*{num_large_bags}={beads_from_large_bags}>>{beads_from_large_bags} beads from the {num_large_bags} bags of {beads_per_large_bag} beads."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_beads",
+      "question_inputs": [],
+      "solution_line_template": "She has a total of {beads_from_small_bags} + {beads_from_large_bags} = <<{beads_from_small_bags}+{beads_from_large_bags}={total_beads}>>{total_beads} beads."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "num_bracelets",
+      "question_inputs": [
+        "beads_per_bracelet"
+      ],
+      "solution_line_template": "Hence, she will be able to make {total_beads}/{beads_per_bracelet} = <<{total_beads}/{beads_per_bracelet}={num_bracelets}>>{num_bracelets} bracelets."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Marnie bought 50 x 5 = <<50*5=250>>250 beads from the 5 bags of 50 beads.",
+    "L2": "She also bought 100 x 2 = <<100*2=200>>200 beads from the 2 bags of 100 beads.",
+    "L3": "She has a total of 250 + 200 = <<250+200=50000>>50000 beads.",
+    "L4": "Hence, she will be able to make 50000/50 = <<50000/50=1000>>1000 bracelets.",
+    "FA": "#### 1000"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 8698409469103883003,
+  "model_name": "google_gemini-2.5-flash"
+}

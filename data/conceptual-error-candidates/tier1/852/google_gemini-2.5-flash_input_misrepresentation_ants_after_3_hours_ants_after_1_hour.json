@@ -1,0 +1,92 @@
+{
+  "index": 852,
+  "original_solution_mapping": {
+    "FA": "#### 1600",
+    "L1": "After first hour, 50 * 2 = <<50*2=100>>100 ants.",
+    "L2": "After the second hour, 100 * 2 = <<100*2=200>>200 ants.",
+    "L3": "After the third hour, 200 * 2 = <<200*2=400>>400 ants.",
+    "L4": "After the fourth hour, 400 * 2 = <<400*2=800>>800 ants.",
+    "L5": "After the fifth hour, 800 * 2 = <<800*2=1600>>1600 ants."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 852.\n    Returns: the number of ants in the jar after 5 hours.\n    \"\"\"\n    # L1\n    initial_ants = 50 # 50 ants\n    doubling_factor = 2 # doubles each hour\n    ants_after_1_hour = initial_ants * doubling_factor\n\n    # L2\n    ants_after_2_hours = ants_after_1_hour * doubling_factor\n\n    # L3\n    ants_after_3_hours = ants_after_2_hours * doubling_factor\n\n    # L4\n    ants_after_4_hours = ants_after_3_hours * doubling_factor\n\n    # L5\n    ants_after_5_hours = ants_after_4_hours * doubling_factor\n\n    # FA\n    answer = ants_after_5_hours\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "ants_after_3_hours",
+    "operand_to_replace": "doubling_factor",
+    "replacement_variable": "ants_after_1_hour"
+  },
+  "correct_trace": {
+    "initial_ants": 50,
+    "doubling_factor": 2,
+    "ants_after_1_hour": 100,
+    "ants_after_2_hours": 200,
+    "ants_after_3_hours": 400,
+    "ants_after_4_hours": 800,
+    "ants_after_5_hours": 1600,
+    "answer": 1600
+  },
+  "flawed_trace": {
+    "initial_ants": 50,
+    "doubling_factor": 2,
+    "ants_after_1_hour": 100,
+    "ants_after_2_hours": 200,
+    "ants_after_3_hours": 20000,
+    "ants_after_4_hours": 40000,
+    "ants_after_5_hours": 80000,
+    "answer": 80000
+  },
+  "correct_value": 400,
+  "flawed_value": 20000,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "initial_ants",
+        "doubling_factor"
+      ],
+      "WK_inputs": [],
+      "output_variable": "ants_after_1_hour",
+      "solution_line_template": "After first hour, {initial_ants} * {doubling_factor} = <<{initial_ants}*{doubling_factor}={ants_after_1_hour}>>{ants_after_1_hour} ants."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "ants_after_2_hours",
+      "solution_line_template": "After the second hour, {ants_after_1_hour} * {doubling_factor} = <<{ants_after_1_hour}*{doubling_factor}={ants_after_2_hours}>>{ants_after_2_hours} ants."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "ants_after_3_hours",
+      "solution_line_template": "After the third hour, {ants_after_2_hours} * {doubling_factor} = <<{ants_after_2_hours}*{doubling_factor}={ants_after_3_hours}>>{ants_after_3_hours} ants."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "ants_after_4_hours",
+      "solution_line_template": "After the fourth hour, {ants_after_3_hours} * {doubling_factor} = <<{ants_after_3_hours}*{doubling_factor}={ants_after_4_hours}>>{ants_after_4_hours} ants."
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "ants_after_5_hours",
+      "solution_line_template": "After the fifth hour, {ants_after_4_hours} * {doubling_factor} = <<{ants_after_4_hours}*{doubling_factor}={ants_after_5_hours}>>{ants_after_5_hours} ants."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After first hour, 50 * 2 = <<50*2=100>>100 ants.",
+    "L2": "After the second hour, 100 * 2 = <<100*2=200>>200 ants.",
+    "L3": "After the third hour, 200 * 100 = <<200*100=20000>>20000 ants.",
+    "L4": "After the fourth hour, 20000 * 2 = <<20000*2=40000>>40000 ants.",
+    "L5": "After the fifth hour, 40000 * 2 = <<40000*2=80000>>80000 ants.",
+    "FA": "#### 80000"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'ants_after_1_hour' (100) was used instead of 'doubling_factor' (2).",
+  "repro_seed": -6180223223238559687,
+  "model_name": "google_gemini-2.5-flash"
+}

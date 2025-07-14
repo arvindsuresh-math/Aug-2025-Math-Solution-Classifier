@@ -1,0 +1,81 @@
+{
+  "index": 43,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "The second earthquake caused 2 * 4 = <<2*4=8>>8 buildings to collapse.",
+    "L2": "The third earthquake caused 2 * 8 = <<2*8=16>>16 buildings to collapse.",
+    "L3": "The fourth earthquake caused 16 * 2 = <<16*2=32>>32 buildings to collapse.",
+    "L4": "Including the first earthquake, the earthquakes caused 4 + 8 + 16 + 32 = <<4+8+16+32=60>>60 buildings to collapse."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 43.\n    Returns: the total number of buildings collapsed after all earthquakes.\n    \"\"\"\n    # L1\n    initial_collapsed_buildings = 4 # four buildings to collapse\n    double_factor = 2 # double the number\n    second_earthquake_collapsed = double_factor * initial_collapsed_buildings\n\n    # L2\n    third_earthquake_collapsed = double_factor * second_earthquake_collapsed\n\n    # L3\n    fourth_earthquake_collapsed = third_earthquake_collapsed * double_factor\n\n    # L4\n    total_collapsed_buildings = initial_collapsed_buildings + second_earthquake_collapsed + third_earthquake_collapsed + fourth_earthquake_collapsed\n\n    # FA\n    answer = total_collapsed_buildings\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "second_earthquake_collapsed",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x144d1d010>"
+  },
+  "correct_trace": {
+    "initial_collapsed_buildings": 4,
+    "double_factor": 2,
+    "second_earthquake_collapsed": 8,
+    "third_earthquake_collapsed": 16,
+    "fourth_earthquake_collapsed": 32,
+    "total_collapsed_buildings": 60,
+    "answer": 60
+  },
+  "flawed_trace": {
+    "initial_collapsed_buildings": 4,
+    "double_factor": 2,
+    "second_earthquake_collapsed": 6,
+    "third_earthquake_collapsed": 12,
+    "fourth_earthquake_collapsed": 24,
+    "total_collapsed_buildings": 46,
+    "answer": 46
+  },
+  "correct_value": 8,
+  "flawed_value": 6,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "initial_collapsed_buildings",
+        "double_factor"
+      ],
+      "WK_inputs": [],
+      "output_variable": "second_earthquake_collapsed",
+      "solution_line_template": "The second earthquake caused {double_factor} * {initial_collapsed_buildings} = <<{double_factor}*{initial_collapsed_buildings}={second_earthquake_collapsed}>>{second_earthquake_collapsed} buildings to collapse."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "third_earthquake_collapsed",
+      "solution_line_template": "The third earthquake caused {double_factor} * {second_earthquake_collapsed} = <<{double_factor}*{second_earthquake_collapsed}={third_earthquake_collapsed}>>{third_earthquake_collapsed} buildings to collapse."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "fourth_earthquake_collapsed",
+      "solution_line_template": "The fourth earthquake caused {third_earthquake_collapsed} * {double_factor} = <<{third_earthquake_collapsed}*{double_factor}={fourth_earthquake_collapsed}>>{fourth_earthquake_collapsed} buildings to collapse."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_collapsed_buildings",
+      "solution_line_template": "Including the first earthquake, the earthquakes caused {initial_collapsed_buildings} + {second_earthquake_collapsed} + {third_earthquake_collapsed} + {fourth_earthquake_collapsed} = <<{initial_collapsed_buildings}+{second_earthquake_collapsed}+{third_earthquake_collapsed}+{fourth_earthquake_collapsed}={total_collapsed_buildings}>>{total_collapsed_buildings} buildings to collapse."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The second earthquake caused 2 * 4 = <<2*4=6>>6 buildings to collapse.",
+    "L2": "The third earthquake caused 2 * 6 = <<2*6=12>>12 buildings to collapse.",
+    "L3": "The fourth earthquake caused 12 * 2 = <<12*2=24>>24 buildings to collapse.",
+    "L4": "Including the first earthquake, the earthquakes caused 4 + 6 + 12 + 24 = <<4+6+12+24=46>>46 buildings to collapse.",
+    "FA": "#### 46"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 6942744608091526642,
+  "model_name": "google_gemini-2.5-flash"
+}

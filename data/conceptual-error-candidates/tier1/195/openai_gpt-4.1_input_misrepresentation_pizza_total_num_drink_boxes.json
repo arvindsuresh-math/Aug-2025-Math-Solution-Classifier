@@ -1,0 +1,92 @@
+{
+  "index": 195,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "Mary spent 5 x $6 = $<<5*6=30>>30 on drinks.",
+    "L2": "She spent 10 x $14 = $<<10*14=140>>140 on pizzas.",
+    "L3": "She spent a total amount of $30 + $140 = $<<30+140=170>>170.",
+    "L4": "Therefore, Mary got a change of $200 - $170 = $<<200-170=30>>30 after paying all the items for her pizza party."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 195.\n    Returns: the amount of change Mary got back after her purchases.\n    \"\"\"\n    # L1\n    num_drink_boxes = 5 # 5 boxes of drinks\n    price_per_drink_box = 6 # $6 each box\n    drink_total = num_drink_boxes * price_per_drink_box\n\n    # L2\n    num_pizza_boxes = 10 # 10 boxes of pizzas\n    price_per_pizza_box = 14 # $14 each box\n    pizza_total = num_pizza_boxes * price_per_pizza_box\n\n    # L3\n    total_spent = drink_total + pizza_total\n\n    # L4\n    total_paid = 200 # She paid $200 for all the items\n    change = total_paid - total_spent\n\n    # FA\n    answer = change\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "pizza_total",
+    "operand_to_replace": "price_per_pizza_box",
+    "replacement_variable": "num_drink_boxes"
+  },
+  "correct_trace": {
+    "num_drink_boxes": 5,
+    "price_per_drink_box": 6,
+    "drink_total": 30,
+    "num_pizza_boxes": 10,
+    "price_per_pizza_box": 14,
+    "pizza_total": 140,
+    "total_spent": 170,
+    "total_paid": 200,
+    "change": 30,
+    "answer": 30
+  },
+  "flawed_trace": {
+    "num_drink_boxes": 5,
+    "price_per_drink_box": 6,
+    "drink_total": 30,
+    "num_pizza_boxes": 10,
+    "price_per_pizza_box": 14,
+    "pizza_total": 50,
+    "total_spent": 80,
+    "total_paid": 200,
+    "change": 120,
+    "answer": 120
+  },
+  "correct_value": 140,
+  "flawed_value": 50,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "num_drink_boxes",
+        "price_per_drink_box"
+      ],
+      "WK_inputs": [],
+      "output_variable": "drink_total",
+      "solution_line_template": "Mary spent {num_drink_boxes} x ${price_per_drink_box} = $<<{num_drink_boxes}*{price_per_drink_box}={drink_total}>>{drink_total} on drinks."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "num_pizza_boxes",
+        "price_per_pizza_box"
+      ],
+      "WK_inputs": [],
+      "output_variable": "pizza_total",
+      "solution_line_template": "She spent {num_pizza_boxes} x ${price_per_pizza_box} = $<<{num_pizza_boxes}*{price_per_pizza_box}={pizza_total}>>{pizza_total} on pizzas."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_spent",
+      "solution_line_template": "She spent a total amount of ${drink_total} + ${pizza_total} = $<<{drink_total}+{pizza_total}={total_spent}>>{total_spent}."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "total_paid"
+      ],
+      "WK_inputs": [],
+      "output_variable": "change",
+      "solution_line_template": "Therefore, Mary got a change of ${total_paid} - ${total_spent} = $<<{total_paid}-{total_spent}={change}>>{change} after paying all the items for her pizza party."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Mary spent 5 x $6 = $<<5*6=30>>30 on drinks.",
+    "L2": "She spent 10 x $5 = $<<10*5=50>>50 on pizzas.",
+    "L3": "She spent a total amount of $30 + $50 = $<<30+50=80>>80.",
+    "L4": "Therefore, Mary got a change of $200 - $80 = $<<200-80=120>>120 after paying all the items for her pizza party.",
+    "FA": "#### 120"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_drink_boxes' (5) was used instead of 'price_per_pizza_box' (14).",
+  "repro_seed": 2589770913983167282,
+  "model_name": "openai_gpt-4.1"
+}

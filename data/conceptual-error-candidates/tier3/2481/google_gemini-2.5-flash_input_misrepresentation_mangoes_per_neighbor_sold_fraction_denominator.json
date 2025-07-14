@@ -1,0 +1,63 @@
+{
+  "index": 2481,
+  "original_solution_mapping": {
+    "FA": "#### 35",
+    "L1": "Mr. Wong had 560/2 = <<560/2=280>>280 mangoes left",
+    "L2": "Each of his neighbors received 280/8 = <<280/8=35>>35 mangoes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2481.\n    Returns: the number of mangoes each neighbor receives.\n    \"\"\"\n    # L1\n    total_mangoes = 560 # 560 mangoes\n    sold_fraction_denominator = 2 # sold half of it\n    mangoes_left_after_selling = total_mangoes / sold_fraction_denominator\n\n    # L2\n    num_neighbors = 8 # 8 of his neighbors\n    mangoes_per_neighbor = mangoes_left_after_selling / num_neighbors\n\n    # FA\n    answer = mangoes_per_neighbor\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "mangoes_per_neighbor",
+    "operand_to_replace": "num_neighbors",
+    "replacement_variable": "sold_fraction_denominator"
+  },
+  "correct_trace": {
+    "total_mangoes": 560,
+    "sold_fraction_denominator": 2,
+    "mangoes_left_after_selling": 280.0,
+    "num_neighbors": 8,
+    "mangoes_per_neighbor": 35.0,
+    "answer": 35.0
+  },
+  "flawed_trace": {
+    "total_mangoes": 560,
+    "sold_fraction_denominator": 2,
+    "mangoes_left_after_selling": 280.0,
+    "num_neighbors": 8,
+    "mangoes_per_neighbor": 140.0,
+    "answer": 140.0
+  },
+  "correct_value": 35.0,
+  "flawed_value": 140.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "mangoes_left_after_selling",
+      "question_inputs": [
+        "total_mangoes",
+        "sold_fraction_denominator"
+      ],
+      "solution_line_template": "Mr. Wong had {total_mangoes}/{sold_fraction_denominator} = <<{total_mangoes}/{sold_fraction_denominator}={mangoes_left_after_selling}>>{mangoes_left_after_selling} mangoes left"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "mangoes_per_neighbor",
+      "question_inputs": [
+        "num_neighbors"
+      ],
+      "solution_line_template": "Each of his neighbors received {mangoes_left_after_selling}/{num_neighbors} = <<{mangoes_left_after_selling}/{num_neighbors}={mangoes_per_neighbor}>>{mangoes_per_neighbor} mangoes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Mr. Wong had 560/2 = <<560/2=280>>280 mangoes left",
+    "L2": "Each of his neighbors received 280/2 = <<280/2=140>>140 mangoes",
+    "FA": "#### 140"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'sold_fraction_denominator' (2) was used instead of 'num_neighbors' (8).",
+  "repro_seed": 6900847642109734509,
+  "model_name": "google_gemini-2.5-flash"
+}

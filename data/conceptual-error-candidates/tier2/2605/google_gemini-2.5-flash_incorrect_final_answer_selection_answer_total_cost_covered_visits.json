@@ -1,0 +1,102 @@
+{
+  "index": 2605,
+  "original_solution_mapping": {
+    "FA": "#### 660",
+    "L1": "He got a discount of 400*.8=$<<400*.8=320>>320",
+    "L2": "He got that discount for 3-1=<<3-1=2>>2 visits",
+    "L3": "So each of those visits cost 400-320=$<<400-320=80>>80",
+    "L4": "So he paid 2*80=$<<2*80=160>>160 for those visits",
+    "L5": "That means he paid a total of 400+160+100=$<<400+160+100=660>>660"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2605.\n    Returns: the total amount John paid.\n    \"\"\"\n    # L1\n    cost_per_appointment = 400 # cost $400 each\n    insurance_coverage_percent = 0.8 # covers 80% of the subsequent visits\n    discount_per_visit = cost_per_appointment * insurance_coverage_percent\n\n    # L2\n    total_appointments = 3 # 3 vet appointments\n    uncovered_appointments = 1 # After the first appointment\n    num_covered_visits = total_appointments - uncovered_appointments\n\n    # L3\n    cost_per_covered_visit = cost_per_appointment - discount_per_visit\n\n    # L4\n    total_cost_covered_visits = num_covered_visits * cost_per_covered_visit\n\n    # L5\n    insurance_cost = 100 # paid $100 for pet insurance\n    total_paid = cost_per_appointment + total_cost_covered_visits + insurance_cost\n\n    # FA\n    answer = total_paid\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_paid",
+    "replacement_variable": "total_cost_covered_visits"
+  },
+  "correct_trace": {
+    "cost_per_appointment": 400,
+    "insurance_coverage_percent": 0.8,
+    "discount_per_visit": 320.0,
+    "total_appointments": 3,
+    "uncovered_appointments": 1,
+    "num_covered_visits": 2,
+    "cost_per_covered_visit": 80.0,
+    "total_cost_covered_visits": 160.0,
+    "insurance_cost": 100,
+    "total_paid": 660.0,
+    "answer": 660.0
+  },
+  "flawed_trace": {
+    "cost_per_appointment": 400,
+    "insurance_coverage_percent": 0.8,
+    "discount_per_visit": 320.0,
+    "total_appointments": 3,
+    "uncovered_appointments": 1,
+    "num_covered_visits": 2,
+    "cost_per_covered_visit": 80.0,
+    "total_cost_covered_visits": 160.0,
+    "insurance_cost": 100,
+    "total_paid": 660.0,
+    "answer": 160.0
+  },
+  "correct_value": 660.0,
+  "flawed_value": 160.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "discount_per_visit",
+      "question_inputs": [
+        "cost_per_appointment",
+        "insurance_coverage_percent"
+      ],
+      "solution_line_template": "He got a discount of {cost_per_appointment}*{insurance_coverage_percent}=$<<{cost_per_appointment}*{insurance_coverage_percent}={discount_per_visit}>>{discount_per_visit}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_covered_visits",
+      "question_inputs": [
+        "total_appointments",
+        "uncovered_appointments"
+      ],
+      "solution_line_template": "He got that discount for {total_appointments}-{uncovered_appointments}=<<{total_appointments}-{uncovered_appointments}={num_covered_visits}>>{num_covered_visits} visits"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cost_per_covered_visit",
+      "question_inputs": [],
+      "solution_line_template": "So each of those visits cost {cost_per_appointment}-{discount_per_visit}=$<<{cost_per_appointment}-{discount_per_visit}={cost_per_covered_visit}>>{cost_per_covered_visit}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cost_covered_visits",
+      "question_inputs": [],
+      "solution_line_template": "So he paid {num_covered_visits}*{cost_per_covered_visit}=$<<{num_covered_visits}*{cost_per_covered_visit}={total_cost_covered_visits}>>{total_cost_covered_visits} for those visits"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_paid",
+      "question_inputs": [
+        "insurance_cost"
+      ],
+      "solution_line_template": "That means he paid a total of {cost_per_appointment}+{total_cost_covered_visits}+{insurance_cost}=$<<{cost_per_appointment}+{total_cost_covered_visits}+{insurance_cost}={total_paid}>>{total_paid}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He got a discount of 400*0.8=$<<400*0.8=320>>320",
+    "L2": "He got that discount for 3-1=<<3-1=2>>2 visits",
+    "L3": "So each of those visits cost 400-320=$<<400-320=80>>80",
+    "L4": "So he paid 2*80=$<<2*80=160>>160 for those visits",
+    "FA": "#### 160"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'total_cost_covered_visits' (value: 160.0) was reported instead of 'total_paid' (value: 660.0).",
+  "repro_seed": -5112509073024587765,
+  "model_name": "google_gemini-2.5-flash"
+}

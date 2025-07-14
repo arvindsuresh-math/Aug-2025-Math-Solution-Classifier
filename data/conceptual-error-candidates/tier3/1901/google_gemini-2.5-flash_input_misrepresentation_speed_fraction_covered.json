@@ -1,0 +1,100 @@
+{
+  "index": 1901,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "When they covered 1/4 of the total distance, they were 1/4 * 200 = <<1/4*200=50>>50 miles away from the starting point.",
+    "L2": "The total distance remaining is 200 - 50 = <<200-50=150>>150 miles.",
+    "L3": "If they took 1 hour to travel 50 miles, their speed was 50/1 = <<50/1=50>>50 miles per hour.",
+    "L4": "If Roger was driving at 50 miles per hour, then the total time it took him to travel 150 miles is 150/50 = <<150/50=3>>3 hours.",
+    "L5": "The total amount of time taken for the whole journey is 3 + 1 + 1= 5 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1901.\n    Returns: the total amount of time Roger and his friend took to travel.\n    \"\"\"\n    # L1\n    fraction_covered = Fraction(1, 4) # 1/4 of the total distance\n    total_distance = 200 # The total distance between 2 towns is 200 miles\n    distance_covered = fraction_covered * total_distance\n\n    # L2\n    remaining_distance = total_distance - distance_covered\n\n    # L3\n    time_first_part = 1 # taking 1 hour to do so\n    speed = distance_covered / time_first_part\n\n    # L4\n    time_remaining_distance = remaining_distance / speed\n\n    # L5\n    lunch_time = 1 # taking 1 hour and then drove\n    total_time = time_remaining_distance + time_first_part + lunch_time\n\n    # FA\n    answer = total_time\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "speed",
+    "operand_to_replace": "time_first_part",
+    "replacement_variable": "fraction_covered"
+  },
+  "correct_trace": {
+    "fraction_covered": "1/4",
+    "total_distance": 200,
+    "distance_covered": "50",
+    "remaining_distance": "150",
+    "time_first_part": 1,
+    "speed": "50",
+    "time_remaining_distance": "3",
+    "lunch_time": 1,
+    "total_time": "5",
+    "answer": "5"
+  },
+  "flawed_trace": {
+    "fraction_covered": "1/4",
+    "total_distance": 200,
+    "distance_covered": "50",
+    "remaining_distance": "150",
+    "time_first_part": 1,
+    "speed": "200",
+    "time_remaining_distance": "3/4",
+    "lunch_time": 1,
+    "total_time": "11/4",
+    "answer": "11/4"
+  },
+  "correct_value": "50",
+  "flawed_value": "200",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "distance_covered",
+      "question_inputs": [
+        "fraction_covered",
+        "total_distance"
+      ],
+      "solution_line_template": "When they covered {fraction_covered} of the total distance, they were {fraction_covered} * {total_distance} = <<{fraction_covered}*{total_distance}={distance_covered}>>{distance_covered} miles away from the starting point."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_distance",
+      "question_inputs": [],
+      "solution_line_template": "The total distance remaining is {total_distance} - {distance_covered} = <<{total_distance}-{distance_covered}={remaining_distance}>>{remaining_distance} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "speed",
+      "question_inputs": [
+        "time_first_part"
+      ],
+      "solution_line_template": "If they took {time_first_part} hour to travel {distance_covered} miles, their speed was {distance_covered}/{time_first_part} = <<{distance_covered}/{time_first_part}={speed}>>{speed} miles per hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "time_remaining_distance",
+      "question_inputs": [],
+      "solution_line_template": "If Roger was driving at {speed} miles per hour, then the total time it took him to travel {remaining_distance} miles is {remaining_distance}/{speed} = <<{remaining_distance}/{speed}={time_remaining_distance}>>{time_remaining_distance} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_time",
+      "question_inputs": [
+        "lunch_time"
+      ],
+      "solution_line_template": "The total amount of time taken for the whole journey is {time_remaining_distance} + {time_first_part} + {lunch_time}= {total_time} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "When they covered 1/4 of the total distance, they were 1/4 * 200 = <<1/4*200=50>>50 miles away from the starting point.",
+    "L2": "The total distance remaining is 200 - 50 = <<200-50=150>>150 miles.",
+    "L3": "If they took 1/4 hour to travel 50 miles, their speed was 50/1/4 = <<50/1/4=200>>200 miles per hour.",
+    "L4": "If Roger was driving at 200 miles per hour, then the total time it took him to travel 150 miles is 150/200 = <<150/200=3/4>>3/4 hours.",
+    "L5": "The total amount of time taken for the whole journey is 3/4 + 1 + 1= 11/4 hours.",
+    "FA": "#### 11/4"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'fraction_covered' (1/4) was used instead of 'time_first_part' (1).",
+  "repro_seed": -4485064987058963285,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 1486,
+  "original_solution_mapping": {
+    "FA": "#### 79",
+    "L1": "She has gotten 70 haircuts to get 5 free ones because 14 x 5 = <<70=70>>70",
+    "L2": "She has gotten 9 haircuts towards her 6th free one because 14 - 5 = <<14-5=9>>9",
+    "L3": "She has gotten 79 haircuts because 70 + 9 = <<70+9=79>>79"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1486.\n    Returns: the total number of haircuts Tammy has gotten.\n    \"\"\"\n    # L1\n    haircuts_per_free_one = 14 # For every 14 haircuts\n    free_haircuts_received = 5 # gotten 5 free haircuts already\n    haircuts_for_free_ones = haircuts_per_free_one * free_haircuts_received\n\n    # L2\n    haircuts_away_from_next_free = 5 # 5 haircuts away from another free one\n    haircuts_towards_next_free = haircuts_per_free_one - haircuts_away_from_next_free\n\n    # L3\n    total_haircuts = haircuts_for_free_ones + haircuts_towards_next_free\n\n    # FA\n    answer = total_haircuts\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_haircuts",
+    "operand_to_replace": "haircuts_towards_next_free",
+    "replacement_variable": "free_haircuts_received"
+  },
+  "correct_trace": {
+    "haircuts_per_free_one": 14,
+    "free_haircuts_received": 5,
+    "haircuts_for_free_ones": 70,
+    "haircuts_away_from_next_free": 5,
+    "haircuts_towards_next_free": 9,
+    "total_haircuts": 79,
+    "answer": 79
+  },
+  "flawed_trace": {
+    "haircuts_per_free_one": 14,
+    "free_haircuts_received": 5,
+    "haircuts_for_free_ones": 70,
+    "haircuts_away_from_next_free": 5,
+    "haircuts_towards_next_free": 9,
+    "total_haircuts": 75,
+    "answer": 75
+  },
+  "correct_value": 79,
+  "flawed_value": 75,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "haircuts_per_free_one",
+        "free_haircuts_received"
+      ],
+      "WK_inputs": [],
+      "output_variable": "haircuts_for_free_ones",
+      "solution_line_template": "She has gotten {haircuts_for_free_ones} haircuts to get {free_haircuts_received} free ones because {haircuts_per_free_one} x {free_haircuts_received} = <<{haircuts_for_free_ones}={haircuts_for_free_ones}>>{haircuts_for_free_ones}"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "haircuts_away_from_next_free"
+      ],
+      "WK_inputs": [],
+      "output_variable": "haircuts_towards_next_free",
+      "solution_line_template": "She has gotten {haircuts_towards_next_free} haircuts towards her 6th free one because {haircuts_per_free_one} - {haircuts_away_from_next_free} = <<{haircuts_per_free_one}-{haircuts_away_from_next_free}={haircuts_towards_next_free}>>{haircuts_towards_next_free}"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_haircuts",
+      "solution_line_template": "She has gotten {total_haircuts} haircuts because {haircuts_for_free_ones} + {haircuts_towards_next_free} = <<{haircuts_for_free_ones}+{haircuts_towards_next_free}={total_haircuts}>>{total_haircuts}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She has gotten 70 haircuts to get 5 free ones because 14 x 5 = <<70=70>>70",
+    "L2": "She has gotten 9 haircuts towards her 6th free one because 14 - 5 = <<14-5=9>>9",
+    "L3": "She has gotten 75 haircuts because 70 + 5 = <<70+5=75>>75",
+    "FA": "#### 75"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'free_haircuts_received' (value: 5) was used instead of 'haircuts_towards_next_free' (value: 9).",
+  "repro_seed": 3054976808145699000,
+  "model_name": "google_gemini-2.5-flash"
+}

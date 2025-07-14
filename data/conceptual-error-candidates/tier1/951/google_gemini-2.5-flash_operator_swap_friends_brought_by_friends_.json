@@ -1,0 +1,74 @@
+{
+  "index": 951,
+  "original_solution_mapping": {
+    "FA": "#### 54",
+    "L1": "Michonne has invited 6 + 12 = <<6+12=18>>18 friends.",
+    "L2": "These friends have invited another 18 friends * 2 = <<18*2=36>>36 people.",
+    "L3": "So in total, there are 18 friends + 36 people = <<18+36=54>>54 people going to Michonne's party."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 951.\n    Returns: the total number of people going to Michonne's birthday party.\n    \"\"\"\n    # L1\n    friends_from_school = 6 # 6 of her friends from school\n    friends_from_neighborhood = 12 # 12 of her friends from her neighborhood\n    total_invited_friends = friends_from_school + friends_from_neighborhood\n\n    # L2\n    friends_bring_along_count = 2 # bring two friends along\n    friends_brought_by_friends = total_invited_friends * friends_bring_along_count\n\n    # L3\n    total_people_at_party = total_invited_friends + friends_brought_by_friends\n\n    # FA\n    answer = total_people_at_party\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "friends_brought_by_friends",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x14523acd0>"
+  },
+  "correct_trace": {
+    "friends_from_school": 6,
+    "friends_from_neighborhood": 12,
+    "total_invited_friends": 18,
+    "friends_bring_along_count": 2,
+    "friends_brought_by_friends": 36,
+    "total_people_at_party": 54,
+    "answer": 54
+  },
+  "flawed_trace": {
+    "friends_from_school": 6,
+    "friends_from_neighborhood": 12,
+    "total_invited_friends": 18,
+    "friends_bring_along_count": 2,
+    "friends_brought_by_friends": 9.0,
+    "total_people_at_party": 27.0,
+    "answer": 27.0
+  },
+  "correct_value": 36,
+  "flawed_value": 9.0,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "friends_from_school",
+        "friends_from_neighborhood"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_invited_friends",
+      "solution_line_template": "Michonne has invited {friends_from_school} + {friends_from_neighborhood} = <<{friends_from_school}+{friends_from_neighborhood}={total_invited_friends}>>{total_invited_friends} friends."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "friends_bring_along_count"
+      ],
+      "WK_inputs": [],
+      "output_variable": "friends_brought_by_friends",
+      "solution_line_template": "These friends have invited another {total_invited_friends} friends * {friends_bring_along_count} = <<{total_invited_friends}*{friends_bring_along_count}={friends_brought_by_friends}>>{friends_brought_by_friends} people."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_people_at_party",
+      "solution_line_template": "So in total, there are {total_invited_friends} friends + {friends_brought_by_friends} people = <<{total_invited_friends}+{friends_brought_by_friends}={total_people_at_party}>>{total_people_at_party} people going to Michonne\u2019s party."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Michonne has invited 6 + 12 = <<6+12=18>>18 friends.",
+    "L2": "These friends have invited another 18 friends * 2 = <<18*2=9>>9 people.",
+    "L3": "So in total, there are 18 friends + 9 people = <<18+9=27>>27 people going to Michonne\u2019s party.",
+    "FA": "#### 27"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -5599450050217549934,
+  "model_name": "google_gemini-2.5-flash"
+}

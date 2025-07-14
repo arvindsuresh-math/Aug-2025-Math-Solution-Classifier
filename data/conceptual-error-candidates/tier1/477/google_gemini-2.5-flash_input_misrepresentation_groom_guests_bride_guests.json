@@ -1,0 +1,79 @@
+{
+  "index": 477,
+  "original_solution_mapping": {
+    "FA": "#### 100",
+    "L1": "From the bride's side, 20 couples * 2 guests/couple = <<20*2=40>>40 guests attended",
+    "L2": "From the groom's side, 20 couples * 2 guests/couple = <<20*2=40>>40 guests attended",
+    "L3": "Therefore 180 guests - (40 guests + 40 guests) = <<180-(40+40)=100>>100 friends attended the reception"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 477.\n    Returns: the number of friends who attended the reception.\n    \"\"\"\n    # L1\n    bride_invited_couples = 20 # invited 20 couples from their side of the family\n    guests_per_couple = 2 # WK\n    bride_guests = bride_invited_couples * guests_per_couple\n\n    # L2\n    groom_invited_couples = 20 # invited 20 couples from their side of the family\n    groom_guests = groom_invited_couples * guests_per_couple\n\n    # L3\n    total_people = 180 # 180 people\n    friends_attended = total_people - (bride_guests + groom_guests)\n\n    # FA\n    answer = friends_attended\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "groom_guests",
+    "operand_to_replace": "groom_invited_couples",
+    "replacement_variable": "bride_guests"
+  },
+  "correct_trace": {
+    "bride_invited_couples": 20,
+    "guests_per_couple": 2,
+    "bride_guests": 40,
+    "groom_invited_couples": 20,
+    "groom_guests": 40,
+    "total_people": 180,
+    "friends_attended": 100,
+    "answer": 100
+  },
+  "flawed_trace": {
+    "bride_invited_couples": 20,
+    "guests_per_couple": 2,
+    "bride_guests": 40,
+    "groom_invited_couples": 20,
+    "groom_guests": 80,
+    "total_people": 180,
+    "friends_attended": 60,
+    "answer": 60
+  },
+  "correct_value": 40,
+  "flawed_value": 80,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "bride_invited_couples"
+      ],
+      "WK_inputs": [
+        "guests_per_couple"
+      ],
+      "output_variable": "bride_guests",
+      "solution_line_template": "From the bride's side, {bride_invited_couples} couples * {guests_per_couple} guests/couple = <<{bride_invited_couples}*{guests_per_couple}={bride_guests}>>{bride_guests} guests attended"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "groom_invited_couples"
+      ],
+      "WK_inputs": [],
+      "output_variable": "groom_guests",
+      "solution_line_template": "From the groom's side, {groom_invited_couples} couples * {guests_per_couple} guests/couple = <<{groom_invited_couples}*{guests_per_couple}={groom_guests}>>{groom_guests} guests attended"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "total_people"
+      ],
+      "WK_inputs": [],
+      "output_variable": "friends_attended",
+      "solution_line_template": "Therefore {total_people} guests - ({bride_guests} guests + {groom_guests} guests) = <<{total_people}-({bride_guests}+{groom_guests})={friends_attended}>>{friends_attended} friends attended the reception"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "From the bride's side, 20 couples * 2 guests/couple = <<20*2=40>>40 guests attended",
+    "L2": "From the groom's side, 40 couples * 2 guests/couple = <<40*2=80>>80 guests attended",
+    "L3": "Therefore 180 guests - (40 guests + 80 guests) = <<180-(40+80)=60>>60 friends attended the reception",
+    "FA": "#### 60"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'bride_guests' (40) was used instead of 'groom_invited_couples' (20).",
+  "repro_seed": 4350447493710098264,
+  "model_name": "google_gemini-2.5-flash"
+}

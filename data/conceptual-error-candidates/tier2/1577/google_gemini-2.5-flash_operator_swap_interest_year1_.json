@@ -1,0 +1,85 @@
+{
+  "index": 1577,
+  "original_solution_mapping": {
+    "FA": "#### 142",
+    "L1": "After one year it earns $10 in interest because 100 x .1 = <<100*.1=10>>10",
+    "L2": "It has $120 in it after a year because 100 + 10 + 10 = <<100+10+10=120>>120",
+    "L3": "In the second year it earns $12 in interest because 120 x .1 = <<120*.1=12>>12",
+    "L4": "In the second year it has $142 in it because 120 + 12 + 10 = <<120+12+10=142>>142"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1577.\n    Returns: the amount of money in the account after two years.\n    \"\"\"\n    # L1\n    initial_deposit = 100 # He puts $100 in it\n    interest_rate_decimal = 0.1 # earns 10% interest every year\n    interest_year1 = initial_deposit * interest_rate_decimal\n\n    # L2\n    annual_deposit = 10 # and then 10 each year\n    balance_after_year1 = initial_deposit + interest_year1 + annual_deposit\n\n    # L3\n    interest_year2 = balance_after_year1 * interest_rate_decimal\n\n    # L4\n    balance_after_year2 = balance_after_year1 + interest_year2 + annual_deposit\n\n    # FA\n    answer = balance_after_year2\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "interest_year1",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x145dfd8d0>"
+  },
+  "correct_trace": {
+    "initial_deposit": 100,
+    "interest_rate_decimal": 0.1,
+    "interest_year1": 10.0,
+    "annual_deposit": 10,
+    "balance_after_year1": 120.0,
+    "interest_year2": 12.0,
+    "balance_after_year2": 142.0,
+    "answer": 142.0
+  },
+  "flawed_trace": {
+    "initial_deposit": 100,
+    "interest_rate_decimal": 0.1,
+    "interest_year1": 1000.0,
+    "annual_deposit": 10,
+    "balance_after_year1": 1110.0,
+    "interest_year2": 111.0,
+    "balance_after_year2": 1231.0,
+    "answer": 1231.0
+  },
+  "correct_value": 10.0,
+  "flawed_value": 1000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "interest_year1",
+      "question_inputs": [
+        "initial_deposit",
+        "interest_rate_decimal"
+      ],
+      "solution_line_template": "After one year it earns $10 in interest because {initial_deposit} x {interest_rate_decimal} = <<{initial_deposit}*{interest_rate_decimal}={interest_year1}>>{interest_year1}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "balance_after_year1",
+      "question_inputs": [
+        "annual_deposit"
+      ],
+      "solution_line_template": "It has $120 in it after a year because {initial_deposit} + {interest_year1} + {annual_deposit} = <<{initial_deposit}+{interest_year1}+{annual_deposit}={balance_after_year1}>>{balance_after_year1}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "interest_year2",
+      "question_inputs": [],
+      "solution_line_template": "In the second year it earns $12 in interest because {balance_after_year1} x {interest_rate_decimal} = <<{balance_after_year1}*{interest_rate_decimal}={interest_year2}>>{interest_year2}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "balance_after_year2",
+      "question_inputs": [],
+      "solution_line_template": "In the second year it has $142 in it because {balance_after_year1} + {interest_year2} + {annual_deposit} = <<{balance_after_year1}+{interest_year2}+{annual_deposit}={balance_after_year2}>>{balance_after_year2}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After one year it earns $10 in interest because 100 x 0.1 = <<100*0.1=1000>>1000",
+    "L2": "It has $120 in it after a year because 100 + 1000 + 10 = <<100+1000+10=1110>>1110",
+    "L3": "In the second year it earns $12 in interest because 1110 x 0.1 = <<1110*0.1=111>>111",
+    "L4": "In the second year it has $142 in it because 1110 + 111 + 10 = <<1110+111+10=1231>>1231",
+    "FA": "#### 1231"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 5077388169890903852,
+  "model_name": "google_gemini-2.5-flash"
+}

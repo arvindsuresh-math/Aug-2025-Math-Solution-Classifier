@@ -1,0 +1,78 @@
+{
+  "index": 1223,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "Stephanie fell 13 + 3 = <<13+3=16>>16 times.",
+    "L2": "Half the number of times Stephanie fell is 16/2 = <<16/2=8>>8 times.",
+    "L3": "Sonya fell down 8 - 2 = <<8-2=6>>6 times."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1223.\n    Returns: the number of times Sonya fell.\n    \"\"\"\n    # L1\n    stephanie_more_falls = 13 # 13 more falls than Steven\n    steven_falls = 3 # Steven only fell down 3 times\n    stephanie_falls = stephanie_more_falls + steven_falls\n\n    # L2\n    half_divisor = 2 # Half the number\n    half_stephanie_falls = stephanie_falls / half_divisor\n\n    # L3\n    sonya_less_falls = 2 # 2 times less than half the number of times Stephanie fell\n    sonya_falls = half_stephanie_falls - sonya_less_falls\n\n    # FA\n    answer = sonya_falls\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "sonya_falls",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x147c40c10>"
+  },
+  "correct_trace": {
+    "stephanie_more_falls": 13,
+    "steven_falls": 3,
+    "stephanie_falls": 16,
+    "half_divisor": 2,
+    "half_stephanie_falls": 8.0,
+    "sonya_less_falls": 2,
+    "sonya_falls": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "stephanie_more_falls": 13,
+    "steven_falls": 3,
+    "stephanie_falls": 16,
+    "half_divisor": 2,
+    "half_stephanie_falls": 8.0,
+    "sonya_less_falls": 2,
+    "sonya_falls": 10.0,
+    "answer": 10.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 10.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "stephanie_falls",
+      "question_inputs": [
+        "stephanie_more_falls",
+        "steven_falls"
+      ],
+      "solution_line_template": "Stephanie fell {stephanie_more_falls} + {steven_falls} = <<{stephanie_more_falls}+{steven_falls}={stephanie_falls}>>{stephanie_falls} times."
+    },
+    {
+      "WK_inputs": [
+        "half_divisor"
+      ],
+      "line_number": "L2",
+      "output_variable": "half_stephanie_falls",
+      "question_inputs": [],
+      "solution_line_template": "Half the number of times Stephanie fell is {stephanie_falls}/{half_divisor} = <<{stephanie_falls}/{half_divisor}={half_stephanie_falls}>>{half_stephanie_falls} times."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "sonya_falls",
+      "question_inputs": [
+        "sonya_less_falls"
+      ],
+      "solution_line_template": "Sonya fell down {half_stephanie_falls} - {sonya_less_falls} = <<{half_stephanie_falls}-{sonya_less_falls}={sonya_falls}>>{sonya_falls} times."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Stephanie fell 13 + 3 = <<13+3=16>>16 times.",
+    "L2": "Half the number of times Stephanie fell is 16/2 = <<16/2=8>>8 times.",
+    "L3": "Sonya fell down 8 - 2 = <<8-2=10>>10 times.",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -1079383863007488547,
+  "model_name": "google_gemini-2.5-flash"
+}

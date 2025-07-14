@@ -1,0 +1,77 @@
+{
+  "index": 445,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "Each bag was $6.00 but was marked down 75% for clearance so that's 6*.75 = $<<6*.75=4.50>>4.50 discount",
+    "L2": "Each bag was $6.00 and there is a $4.50 discount so each bag is 6-4.50 = $<<6-4.50=1.50>>1.50",
+    "L3": "Each bag was marked down to $1.50 a bag and she bought 2 bags for a total of 1.5*2 = $<<1.5*2=3.00>>3.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 445.\n    Returns: the total amount spent on 2 bags of candy.\n    \"\"\"\n    # L1\n    bag_original_price = 6.00 # Each bag was $6.00\n    discount_percent_num = 75 # 75% off\n    discount_percent_decimal = 0.75 # used as .75\n    discount_amount = bag_original_price * discount_percent_decimal\n\n    # L2\n    bag_price_after_discount = bag_original_price - discount_amount\n\n    # L3\n    num_bags = 2 # bought 2 bags\n    total_cost = bag_price_after_discount * num_bags\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "bag_price_after_discount",
+    "operand_to_replace": "bag_original_price",
+    "replacement_variable": "discount_percent_num"
+  },
+  "correct_trace": {
+    "bag_original_price": 6.0,
+    "discount_percent_num": 75,
+    "discount_percent_decimal": 0.75,
+    "discount_amount": 4.5,
+    "bag_price_after_discount": 1.5,
+    "num_bags": 2,
+    "total_cost": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "bag_original_price": 6.0,
+    "discount_percent_num": 75,
+    "discount_percent_decimal": 0.75,
+    "discount_amount": 4.5,
+    "bag_price_after_discount": 70.5,
+    "num_bags": 2,
+    "total_cost": 141.0,
+    "answer": 141.0
+  },
+  "correct_value": 1.5,
+  "flawed_value": 70.5,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "discount_amount",
+      "question_inputs": [
+        "bag_original_price",
+        "discount_percent_num",
+        "discount_percent_decimal"
+      ],
+      "solution_line_template": "Each bag was ${bag_original_price} but was marked down {discount_percent_num}% for clearance so that's {bag_original_price}*{discount_percent_decimal} = $<<{bag_original_price}*{discount_percent_decimal}={discount_amount}>>{discount_amount} discount"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "bag_price_after_discount",
+      "question_inputs": [],
+      "solution_line_template": "Each bag was ${bag_original_price} and there is a ${discount_amount} discount so each bag is {bag_original_price}-{discount_amount} = $<<{bag_original_price}-{discount_amount}={bag_price_after_discount}>>{bag_price_after_discount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "num_bags"
+      ],
+      "solution_line_template": "Each bag was marked down to ${bag_price_after_discount} a bag and she bought {num_bags} bags for a total of {bag_price_after_discount}*{num_bags} = $<<{bag_price_after_discount}*{num_bags}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each bag was $6 but was marked down 75% for clearance so that's 6*0.75 = $<<6*0.75=4.5>>4.5 discount",
+    "L2": "Each bag was $75 and there is a $4.5 discount so each bag is 75-4.5 = $<<75-4.5=70.5>>70.5",
+    "L3": "Each bag was marked down to $70.5 a bag and she bought 2 bags for a total of 70.5*2 = $<<70.5*2=141>>141",
+    "FA": "#### 141"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'discount_percent_num' (75) was used instead of 'bag_original_price' (6.0).",
+  "repro_seed": -6746927692738218454,
+  "model_name": "google_gemini-2.5-flash"
+}

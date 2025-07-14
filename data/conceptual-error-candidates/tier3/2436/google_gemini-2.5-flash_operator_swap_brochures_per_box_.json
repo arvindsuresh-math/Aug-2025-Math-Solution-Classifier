@@ -1,0 +1,59 @@
+{
+  "index": 2436,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "5000 x 1/5 = <<5000*1/5=1000>>1000 brochures can fit in one box.",
+    "L2": "Thus, 5000/1000 = <<5000/1000=5>>5 boxes are needed"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2436.\n    Returns: the number of boxes needed to ship the brochures.\n    \"\"\"\n    # L1\n    total_brochures = 5000 # 5000 brochures\n    fraction_per_box = Fraction(1, 5) # one-fifth of the brochures\n    brochures_per_box = total_brochures * fraction_per_box\n\n    # L2\n    boxes_needed = total_brochures / brochures_per_box\n\n    # FA\n    answer = boxes_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "brochures_per_box",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x150220810>"
+  },
+  "correct_trace": {
+    "total_brochures": 5000,
+    "fraction_per_box": "1/5",
+    "brochures_per_box": "1000",
+    "boxes_needed": "5",
+    "answer": "5"
+  },
+  "flawed_trace": {
+    "total_brochures": 5000,
+    "fraction_per_box": "1/5",
+    "brochures_per_box": "25000",
+    "boxes_needed": "1/5",
+    "answer": "1/5"
+  },
+  "correct_value": "1000",
+  "flawed_value": "25000",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "brochures_per_box",
+      "question_inputs": [
+        "total_brochures",
+        "fraction_per_box"
+      ],
+      "solution_line_template": "{total_brochures} x {fraction_per_box} = <<{total_brochures}*{fraction_per_box}={brochures_per_box}>>{brochures_per_box} brochures can fit in one box."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "boxes_needed",
+      "question_inputs": [],
+      "solution_line_template": "Thus, {total_brochures}/{brochures_per_box} = <<{total_brochures}/{brochures_per_box}={boxes_needed}>>{boxes_needed} boxes are needed"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "5000 x 1/5 = <<5000*1/5=25000>>25000 brochures can fit in one box.",
+    "L2": "Thus, 5000/25000 = <<5000/25000=1/5>>1/5 boxes are needed",
+    "FA": "#### 1/5"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 2024238435375702412,
+  "model_name": "google_gemini-2.5-flash"
+}

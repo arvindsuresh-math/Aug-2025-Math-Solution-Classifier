@@ -1,0 +1,59 @@
+{
+  "index": 273,
+  "original_solution_mapping": {
+    "FA": "#### 21",
+    "L1": "Ursula's boss want's the commercial to be 30/100 * 30 = <<30/100*30=9>>9 seconds shorter.",
+    "L2": "After Ursula makes the desired changes, the ad is going to be 30 - 9 = <<30-9=21>>21 seconds long."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 273.\n    Returns: the length of the commercial after changes.\n    \"\"\"\n    # L1\n    shorten_percentage = Fraction(30, 100) # shorten the commercial by 30%\n    commercial_length = 30 # a 30-second long commercial\n    seconds_to_shorten = shorten_percentage * commercial_length\n\n    # L2\n    final_commercial_length = commercial_length - seconds_to_shorten\n\n    # FA\n    answer = final_commercial_length\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "seconds_to_shorten",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x146f0a7d0>"
+  },
+  "correct_trace": {
+    "shorten_percentage": "3/10",
+    "commercial_length": 30,
+    "seconds_to_shorten": "9",
+    "final_commercial_length": "21",
+    "answer": "21"
+  },
+  "flawed_trace": {
+    "shorten_percentage": "3/10",
+    "commercial_length": 30,
+    "seconds_to_shorten": "1/100",
+    "final_commercial_length": "2999/100",
+    "answer": "2999/100"
+  },
+  "correct_value": "9",
+  "flawed_value": "1/100",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "seconds_to_shorten",
+      "question_inputs": [
+        "shorten_percentage",
+        "commercial_length"
+      ],
+      "solution_line_template": "Ursula's boss want's the commercial to be {shorten_percentage} * {commercial_length} = <<{shorten_percentage}*{commercial_length}={seconds_to_shorten}>>{seconds_to_shorten} seconds shorter."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "final_commercial_length",
+      "question_inputs": [],
+      "solution_line_template": "After Ursula makes the desired changes, the ad is going to be {commercial_length} - {seconds_to_shorten} = <<{commercial_length}-{seconds_to_shorten}={final_commercial_length}>>{final_commercial_length} seconds long."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Ursula's boss want's the commercial to be 30/100 * 30 = <<30/100*30=1/100>>1/100 seconds shorter.",
+    "L2": "After Ursula makes the desired changes, the ad is going to be 30 - 1/100 = <<30-1/100=2999/100>>2999/100 seconds long.",
+    "FA": "#### 2999/100"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 6443392379610374397,
+  "model_name": "google_gemini-2.5-flash"
+}

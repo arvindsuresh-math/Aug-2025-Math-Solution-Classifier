@@ -1,0 +1,67 @@
+{
+  "index": 505,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "First find the total number of sheep by dividing the number rounded up by 90%: 81 sheep / .9 = <<81/.9=90>>90 sheep",
+    "L2": "Then multiply that number by 10% to find the number that are in the hills: 90 sheep * 10% = <<90*10*.01=9>>9 sheep"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 505.\n    Returns: the number of sheep out in the wilderness.\n    \"\"\"\n    # L1\n    sheep_in_pen = 81 # 81 sheep in the pen\n    rounded_up_decimal = 0.9 # 90% of her sheep\n    total_sheep = sheep_in_pen / rounded_up_decimal\n\n    # L2\n    wandered_off_percent = 10 # remaining 10% wandered off\n    percent_to_decimal_factor = 0.01 # WK\n    sheep_in_wilderness = total_sheep * wandered_off_percent * percent_to_decimal_factor\n\n    # FA\n    answer = sheep_in_wilderness\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "sheep_in_wilderness",
+    "operand_to_replace": "percent_to_decimal_factor",
+    "replacement_variable": "total_sheep"
+  },
+  "correct_trace": {
+    "sheep_in_pen": 81,
+    "rounded_up_decimal": 0.9,
+    "total_sheep": 90.0,
+    "wandered_off_percent": 10,
+    "percent_to_decimal_factor": 0.01,
+    "sheep_in_wilderness": 9.0,
+    "answer": 9.0
+  },
+  "flawed_trace": {
+    "sheep_in_pen": 81,
+    "rounded_up_decimal": 0.9,
+    "total_sheep": 90.0,
+    "wandered_off_percent": 10,
+    "percent_to_decimal_factor": 0.01,
+    "sheep_in_wilderness": 81000.0,
+    "answer": 81000.0
+  },
+  "correct_value": 9.0,
+  "flawed_value": 81000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_sheep",
+      "question_inputs": [
+        "sheep_in_pen",
+        "rounded_up_decimal"
+      ],
+      "solution_line_template": "First find the total number of sheep by dividing the number rounded up by 90%: {sheep_in_pen} sheep / {rounded_up_decimal} = <<{sheep_in_pen}/{rounded_up_decimal}={total_sheep}>>{total_sheep} sheep"
+    },
+    {
+      "WK_inputs": [
+        "percent_to_decimal_factor"
+      ],
+      "line_number": "L2",
+      "output_variable": "sheep_in_wilderness",
+      "question_inputs": [
+        "wandered_off_percent"
+      ],
+      "solution_line_template": "Then multiply that number by {wandered_off_percent}% to find the number that are in the hills: {total_sheep} sheep * {wandered_off_percent}% = <<{total_sheep}*{wandered_off_percent}*{percent_to_decimal_factor}={sheep_in_wilderness}>>{sheep_in_wilderness} sheep"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total number of sheep by dividing the number rounded up by 90%: 81 sheep / 0.9 = <<81/0.9=90>>90 sheep",
+    "L2": "Then multiply that number by 10% to find the number that are in the hills: 90 sheep * 10% = <<90*10*90=81000>>81000 sheep",
+    "FA": "#### 81000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_sheep' (90.0) was used instead of 'percent_to_decimal_factor' (0.01).",
+  "repro_seed": -942986132864558749,
+  "model_name": "google_gemini-2.5-flash"
+}

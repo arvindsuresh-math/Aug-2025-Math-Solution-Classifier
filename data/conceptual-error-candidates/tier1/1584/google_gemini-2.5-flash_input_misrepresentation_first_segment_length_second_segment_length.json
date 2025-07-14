@@ -1,0 +1,74 @@
+{
+  "index": 1584,
+  "original_solution_mapping": {
+    "FA": "#### 90",
+    "L1": "If the third segment is half as long as the second, then the second segment is twice as long as the third, or 10*2=<<10*2=20>>20 minutes long.",
+    "L2": "The first segment is twice as long as the other two combined, or 2*(10+20)=<<2*(10+20)=60>>60 minutes.",
+    "L3": "Thus, in total, the show is 10+20+60=<<10+20+60=90>>90 minutes long."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1584.\n    Returns: the total length of the entire show in minutes.\n    \"\"\"\n    # L1\n    third_segment_length = 10 # If the third segment is 10 minutes long\n    second_segment_multiplier_to_third = 2 # the second segment is twice as long as the third\n    second_segment_length = third_segment_length * second_segment_multiplier_to_third\n\n    # L2\n    first_segment_multiplier = 2 # The first interview segment is always twice as long as the other two segments combined\n    first_segment_length = first_segment_multiplier * (third_segment_length + second_segment_length)\n\n    # L3\n    total_show_length = third_segment_length + second_segment_length + first_segment_length\n\n    # FA\n    answer = total_show_length\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "first_segment_length",
+    "operand_to_replace": "third_segment_length",
+    "replacement_variable": "second_segment_length"
+  },
+  "correct_trace": {
+    "third_segment_length": 10,
+    "second_segment_multiplier_to_third": 2,
+    "second_segment_length": 20,
+    "first_segment_multiplier": 2,
+    "first_segment_length": 60,
+    "total_show_length": 90,
+    "answer": 90
+  },
+  "flawed_trace": {
+    "third_segment_length": 10,
+    "second_segment_multiplier_to_third": 2,
+    "second_segment_length": 20,
+    "first_segment_multiplier": 2,
+    "first_segment_length": 80,
+    "total_show_length": 110,
+    "answer": 110
+  },
+  "correct_value": 60,
+  "flawed_value": 80,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "third_segment_length",
+        "second_segment_multiplier_to_third"
+      ],
+      "WK_inputs": [],
+      "output_variable": "second_segment_length",
+      "solution_line_template": "If the third segment is half as long as the second, then the second segment is twice as long as the third, or {third_segment_length}*{second_segment_multiplier_to_third}=<<{third_segment_length}*{second_segment_multiplier_to_third}={second_segment_length}>>{second_segment_length} minutes long."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "first_segment_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "first_segment_length",
+      "solution_line_template": "The first segment is twice as long as the other two combined, or {first_segment_multiplier}*({third_segment_length}+{second_segment_length})=<<{first_segment_multiplier}*({third_segment_length}+{second_segment_length})={first_segment_length}>>{first_segment_length} minutes."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_show_length",
+      "solution_line_template": "Thus, in total, the show is {third_segment_length}+{second_segment_length}+{first_segment_length}=<<{third_segment_length}+{second_segment_length}+{first_segment_length}={total_show_length}>>{total_show_length} minutes long."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the third segment is half as long as the second, then the second segment is twice as long as the third, or 10*2=<<10*2=20>>20 minutes long.",
+    "L2": "The first segment is twice as long as the other two combined, or 2*(20+20)=<<2*(20+20)=80>>80 minutes.",
+    "L3": "Thus, in total, the show is 10+20+80=<<10+20+80=110>>110 minutes long.",
+    "FA": "#### 110"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'second_segment_length' (20) was used instead of 'third_segment_length' (10).",
+  "repro_seed": -841918222501272567,
+  "model_name": "google_gemini-2.5-flash"
+}

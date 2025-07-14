@@ -1,0 +1,99 @@
+{
+  "index": 1662,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "When she picks 1/4 of the number of tomatoes, she goes home with 1/4*100 = <<1/4*100=25>>25 tomatoes.",
+    "L2": "The total number of tomatoes remaining will be 100-25 = <<100-25=75>>75 tomatoes.",
+    "L3": "After picking 20 more tomatoes the following week, the number of tomatoes remaining is 75-20 = <<75-20=55>>55 tomatoes.",
+    "L4": "The next week she picks twice the number she picked the previous week, that is 20*2 = <<20*2=40>>40 tomatoes.",
+    "L5": "The total number of tomatoes remaining after the final picking is 55-40 = <<55-40=15>>15 tomatoes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1662.\n    Returns: the total number of fruits remaining on the tomato plant.\n    \"\"\"\n    # L1\n    first_pick_fraction = Fraction(1, 4) # 1/4 of that number\n    initial_tomatoes = 100 # A tomato plant has 100 tomatoes\n    first_pick_amount = first_pick_fraction * initial_tomatoes\n\n    # L2\n    remaining_after_first_pick = initial_tomatoes - first_pick_amount\n\n    # L3\n    second_pick_amount = 20 # picks 20 more tomatoes\n    remaining_after_second_pick = remaining_after_first_pick - second_pick_amount\n\n    # L4\n    twice_factor = 2 # twice that number\n    third_pick_amount = second_pick_amount * twice_factor\n\n    # L5\n    final_remaining_tomatoes = remaining_after_second_pick - third_pick_amount\n\n    # FA\n    answer = final_remaining_tomatoes\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "final_remaining_tomatoes",
+    "replacement_variable": "third_pick_amount"
+  },
+  "correct_trace": {
+    "first_pick_fraction": "1/4",
+    "initial_tomatoes": 100,
+    "first_pick_amount": "25",
+    "remaining_after_first_pick": "75",
+    "second_pick_amount": 20,
+    "remaining_after_second_pick": "55",
+    "twice_factor": 2,
+    "third_pick_amount": 40,
+    "final_remaining_tomatoes": "15",
+    "answer": "15"
+  },
+  "flawed_trace": {
+    "first_pick_fraction": "1/4",
+    "initial_tomatoes": 100,
+    "first_pick_amount": "25",
+    "remaining_after_first_pick": "75",
+    "second_pick_amount": 20,
+    "remaining_after_second_pick": "55",
+    "twice_factor": 2,
+    "third_pick_amount": 40,
+    "final_remaining_tomatoes": "15",
+    "answer": 40
+  },
+  "correct_value": "15",
+  "flawed_value": 40,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "first_pick_amount",
+      "question_inputs": [
+        "first_pick_fraction",
+        "initial_tomatoes"
+      ],
+      "solution_line_template": "When she picks {first_pick_fraction} of the number of tomatoes, she goes home with {first_pick_fraction}*{initial_tomatoes} = <<{first_pick_fraction}*{initial_tomatoes}={first_pick_amount}>>{first_pick_amount} tomatoes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_after_first_pick",
+      "question_inputs": [],
+      "solution_line_template": "The total number of tomatoes remaining will be {initial_tomatoes}-{first_pick_amount} = <<{initial_tomatoes}-{first_pick_amount}={remaining_after_first_pick}>>{remaining_after_first_pick} tomatoes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_after_second_pick",
+      "question_inputs": [
+        "second_pick_amount"
+      ],
+      "solution_line_template": "After picking {second_pick_amount} more tomatoes the following week, the number of tomatoes remaining is {remaining_after_first_pick}-{second_pick_amount} = <<{remaining_after_first_pick}-{second_pick_amount}={remaining_after_second_pick}>>{remaining_after_second_pick} tomatoes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "third_pick_amount",
+      "question_inputs": [
+        "twice_factor"
+      ],
+      "solution_line_template": "The next week she picks twice the number she picked the previous week, that is {second_pick_amount}*{twice_factor} = <<{second_pick_amount}*{twice_factor}={third_pick_amount}>>{third_pick_amount} tomatoes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "final_remaining_tomatoes",
+      "question_inputs": [],
+      "solution_line_template": "The total number of tomatoes remaining after the final picking is {remaining_after_second_pick}-{third_pick_amount} = <<{remaining_after_second_pick}-{third_pick_amount}={final_remaining_tomatoes}>>{final_remaining_tomatoes} tomatoes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "When she picks 1/4 of the number of tomatoes, she goes home with 1/4*100 = <<1/4*100=25>>25 tomatoes.",
+    "L2": "The total number of tomatoes remaining will be 100-25 = <<100-25=75>>75 tomatoes.",
+    "L3": "After picking 20 more tomatoes the following week, the number of tomatoes remaining is 75-20 = <<75-20=55>>55 tomatoes.",
+    "L4": "The next week she picks twice the number she picked the previous week, that is 20*2 = <<20*2=40>>40 tomatoes.",
+    "FA": "#### 40"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'third_pick_amount' (value: 40) was reported instead of 'final_remaining_tomatoes' (value: 15).",
+  "repro_seed": 548454137693580148,
+  "model_name": "google_gemini-2.5-flash"
+}

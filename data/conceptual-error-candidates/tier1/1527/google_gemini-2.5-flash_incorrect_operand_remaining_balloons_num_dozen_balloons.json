@@ -1,0 +1,78 @@
+{
+  "index": 1527,
+  "original_solution_mapping": {
+    "FA": "#### 21",
+    "L1": "The clown is holding 3 x 12 = <<3*12=36>>36 balloons.",
+    "L2": "This many children buy a balloon: 3 + 12 = <<3+12=15>>15 kids.",
+    "L3": "After the children buy the balloons, the clown is holding this many in his hand 36 - 15 = <<36-15=21>>21 balloons."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1527.\n    Returns: the number of balloons the clown is still holding.\n    \"\"\"\n    # L1\n    num_dozen_balloons = 3 # 3 dozen balloons\n    dozen = 12 # WK\n    initial_balloons = num_dozen_balloons * dozen\n\n    # L2\n    num_boys = 3 # 3 boys\n    num_girls = 12 # 12 girls\n    children_buying_balloons = num_boys + num_girls\n\n    # L3\n    remaining_balloons = initial_balloons - children_buying_balloons\n\n    # FA\n    answer = remaining_balloons\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "remaining_balloons",
+    "operand_to_replace": "children_buying_balloons",
+    "replacement_variable": "num_dozen_balloons"
+  },
+  "correct_trace": {
+    "num_dozen_balloons": 3,
+    "dozen": 12,
+    "initial_balloons": 36,
+    "num_boys": 3,
+    "num_girls": 12,
+    "children_buying_balloons": 15,
+    "remaining_balloons": 21,
+    "answer": 21
+  },
+  "flawed_trace": {
+    "num_dozen_balloons": 3,
+    "dozen": 12,
+    "initial_balloons": 36,
+    "num_boys": 3,
+    "num_girls": 12,
+    "children_buying_balloons": 15,
+    "remaining_balloons": 33,
+    "answer": 33
+  },
+  "correct_value": 21,
+  "flawed_value": 33,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "num_dozen_balloons"
+      ],
+      "WK_inputs": [
+        "dozen"
+      ],
+      "output_variable": "initial_balloons",
+      "solution_line_template": "The clown is holding {num_dozen_balloons} x {dozen} = <<{num_dozen_balloons}*{dozen}={initial_balloons}>>{initial_balloons} balloons."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "num_boys",
+        "num_girls"
+      ],
+      "WK_inputs": [],
+      "output_variable": "children_buying_balloons",
+      "solution_line_template": "This many children buy a balloon: {num_boys} + {num_girls} = <<{num_boys}+{num_girls}={children_buying_balloons}>>{children_buying_balloons} kids."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "remaining_balloons",
+      "solution_line_template": "After the children buy the balloons, the clown is holding this many in his hand {initial_balloons} - {children_buying_balloons} = <<{initial_balloons}-{children_buying_balloons}={remaining_balloons}>>{remaining_balloons} balloons."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The clown is holding 3 x 12 = <<3*12=36>>36 balloons.",
+    "L2": "This many children buy a balloon: 3 + 12 = <<3+12=15>>15 kids.",
+    "L3": "After the children buy the balloons, the clown is holding this many in his hand 36 - 3 = <<36-3=33>>33 balloons.",
+    "FA": "#### 33"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'num_dozen_balloons' (value: 3) was used instead of 'children_buying_balloons' (value: 15).",
+  "repro_seed": 2645251621580585153,
+  "model_name": "google_gemini-2.5-flash"
+}

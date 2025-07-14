@@ -1,0 +1,66 @@
+{
+  "index": 2088,
+  "original_solution_mapping": {
+    "FA": "#### 1",
+    "L1": "The pasta is $1.00, the sauce is $2.00 and the meat is $5.00 for a total of 1+2+5 = $<<1+2+5=8.00>>8.00",
+    "L2": "He wants to stretch this meal into 8 servings so each serving will cost 8/8 = $<<8/8=1.00>>1.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2088.\n    Returns: the cost of each serving.\n    \"\"\"\n    # L1\n    pasta_cost = 1.00 # $1.00 per box\n    sauce_cost = 2.00 # $2.00\n    meatballs_cost = 5.00 # $5.00\n    total_meal_cost = pasta_cost + sauce_cost + meatballs_cost\n\n    # L2\n    num_servings = 8 # 8 servings\n    cost_per_serving = total_meal_cost / num_servings\n\n    # FA\n    answer = cost_per_serving\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "cost_per_serving",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x1508d73d0>"
+  },
+  "correct_trace": {
+    "pasta_cost": 1.0,
+    "sauce_cost": 2.0,
+    "meatballs_cost": 5.0,
+    "total_meal_cost": 8.0,
+    "num_servings": 8,
+    "cost_per_serving": 1.0,
+    "answer": 1.0
+  },
+  "flawed_trace": {
+    "pasta_cost": 1.0,
+    "sauce_cost": 2.0,
+    "meatballs_cost": 5.0,
+    "total_meal_cost": 8.0,
+    "num_servings": 8,
+    "cost_per_serving": 64.0,
+    "answer": 64.0
+  },
+  "correct_value": 1.0,
+  "flawed_value": 64.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_meal_cost",
+      "question_inputs": [
+        "pasta_cost",
+        "sauce_cost",
+        "meatballs_cost"
+      ],
+      "solution_line_template": "The pasta is ${pasta_cost}, the sauce is ${sauce_cost} and the meat is ${meatballs_cost} for a total of {pasta_cost}+{sauce_cost}+{meatballs_cost} = $<<{pasta_cost}+{sauce_cost}+{meatballs_cost}={total_meal_cost}>>{total_meal_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cost_per_serving",
+      "question_inputs": [
+        "num_servings"
+      ],
+      "solution_line_template": "He wants to stretch this meal into {num_servings} servings so each serving will cost {total_meal_cost}/{num_servings} = $<<{total_meal_cost}/{num_servings}={cost_per_serving}>>{cost_per_serving}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The pasta is $1, the sauce is $2 and the meat is $5 for a total of 1+2+5 = $<<1+2+5=8>>8",
+    "L2": "He wants to stretch this meal into 8 servings so each serving will cost 8/8 = $<<8/8=64>>64",
+    "FA": "#### 64"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 2404864123669765370,
+  "model_name": "google_gemini-2.5-flash"
+}

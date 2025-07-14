@@ -1,0 +1,115 @@
+{
+  "index": 1322,
+  "original_solution_mapping": {
+    "FA": "#### 54,000",
+    "L1": "He needs 500 * 12 = <<500*12=6000>>6000 square feet",
+    "L2": "This means it cost $5 * 6000 = $30,000",
+    "L3": "That means construction comes to $30000 * 2 = $<<30000*2=60000>>60,000",
+    "L4": "So the total cost is $60000 + $30000 = $<<60000+30000=90000>>90,000",
+    "L5": "His partner covers $90,000 * .4 = $<<90000*.4=36000>>36,000",
+    "L6": "So he has to pay $90,000 - $36,000 = $<<90000-36000=54000>>54,000"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1322.\n    Returns: the amount Tom spends.\n    \"\"\"\n    # L1\n    num_seats = 500 # 500 seat theater\n    sq_ft_per_seat = 12 # 12 square feet for every seat\n    total_sq_feet = num_seats * sq_ft_per_seat\n\n    # L2\n    cost_per_sq_ft = 5 # $5 per square foot\n    land_cost = cost_per_sq_ft * total_sq_feet\n\n    # L3\n    construction_cost_factor = 2 # construction will cost twice as much as the land\n    construction_cost = land_cost * construction_cost_factor\n\n    # L4\n    total_project_cost = construction_cost + land_cost\n\n    # L5\n    partner_coverage_percent = 0.4 # covers 40% of the cost\n    partner_covered_amount = total_project_cost * partner_coverage_percent\n\n    # L6\n    tom_cost = total_project_cost - partner_covered_amount\n\n    # FA\n    answer = tom_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "tom_cost",
+    "operand_to_replace": "partner_covered_amount",
+    "replacement_variable": "cost_per_sq_ft"
+  },
+  "correct_trace": {
+    "num_seats": 500,
+    "sq_ft_per_seat": 12,
+    "total_sq_feet": 6000,
+    "cost_per_sq_ft": 5,
+    "land_cost": 30000,
+    "construction_cost_factor": 2,
+    "construction_cost": 60000,
+    "total_project_cost": 90000,
+    "partner_coverage_percent": 0.4,
+    "partner_covered_amount": 36000.0,
+    "tom_cost": 54000.0,
+    "answer": 54000.0
+  },
+  "flawed_trace": {
+    "num_seats": 500,
+    "sq_ft_per_seat": 12,
+    "total_sq_feet": 6000,
+    "cost_per_sq_ft": 5,
+    "land_cost": 30000,
+    "construction_cost_factor": 2,
+    "construction_cost": 60000,
+    "total_project_cost": 90000,
+    "partner_coverage_percent": 0.4,
+    "partner_covered_amount": 36000.0,
+    "tom_cost": 89995,
+    "answer": 89995
+  },
+  "correct_value": 54000.0,
+  "flawed_value": 89995,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_sq_feet",
+      "question_inputs": [
+        "num_seats",
+        "sq_ft_per_seat"
+      ],
+      "solution_line_template": "He needs {num_seats} * {sq_ft_per_seat} = <<{num_seats}*{sq_ft_per_seat}={total_sq_feet}>>{total_sq_feet} square feet"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "land_cost",
+      "question_inputs": [
+        "cost_per_sq_ft"
+      ],
+      "solution_line_template": "This means it cost ${cost_per_sq_ft} * {total_sq_feet} = ${land_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "construction_cost",
+      "question_inputs": [
+        "construction_cost_factor"
+      ],
+      "solution_line_template": "That means construction comes to ${land_cost} * {construction_cost_factor} = $<<{land_cost}*{construction_cost_factor}={construction_cost}>>{construction_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_project_cost",
+      "question_inputs": [],
+      "solution_line_template": "So the total cost is ${construction_cost} + ${land_cost} = $<<{construction_cost}+{land_cost}={total_project_cost}>>{total_project_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "partner_covered_amount",
+      "question_inputs": [
+        "partner_coverage_percent"
+      ],
+      "solution_line_template": "His partner covers ${total_project_cost} * {partner_coverage_percent} = $<<{total_project_cost}*{partner_coverage_percent}={partner_covered_amount}>>{partner_covered_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "tom_cost",
+      "question_inputs": [],
+      "solution_line_template": "So he has to pay ${total_project_cost} - ${partner_covered_amount} = $<<{total_project_cost}-{partner_covered_amount}={tom_cost}>>{tom_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He needs 500 * 12 = <<500*12=6000>>6000 square feet",
+    "L2": "This means it cost $5 * 6000 = $30000",
+    "L3": "That means construction comes to $30000 * 2 = $<<30000*2=60000>>60000",
+    "L4": "So the total cost is $60000 + $30000 = $<<60000+30000=90000>>90000",
+    "L5": "His partner covers $90000 * 0.4 = $<<90000*0.4=36000>>36000",
+    "L6": "So he has to pay $90000 - $5 = $<<90000-5=89995>>89995",
+    "FA": "#### 89995"
+  },
+  "erroneous_line_number": "L6",
+  "explanation": "Incorrect operand. The variable 'cost_per_sq_ft' (value: 5) was used instead of 'partner_covered_amount' (value: 36000.0).",
+  "repro_seed": -420440857284868497,
+  "model_name": "google_gemini-2.5-flash"
+}

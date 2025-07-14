@@ -1,0 +1,97 @@
+{
+  "index": 1953,
+  "original_solution_mapping": {
+    "FA": "#### 570",
+    "L1": "The school bought 2 x 2 = <<2*2=4>>4 dinosaur models for the elementary library.",
+    "L2": "So the school bought a total of 2 + 4 = <<2+4=6>>6 models.",
+    "L3": "The price of each model was reduced by $100 x 5/100 = $<<100*5/100=5>>5.",
+    "L4": "Thus, each model cost $100 - $5 = $<<100-5=95>>95.",
+    "L5": "Therefore, the school paid a total of $95 x 6 = $<<95*6=570>>570."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1953.\n    Returns: the total amount the school paid for the models.\n    \"\"\"\n    # L1\n    kindergarten_models = 2 # bought 2 models for the kindergarten library\n    elementary_multiplier = 2 # twice as many for the elementary library\n    elementary_models = kindergarten_models * elementary_multiplier\n\n    # L2\n    total_models = kindergarten_models + elementary_models\n\n    # L3\n    original_price_per_model = 100 # dinosaur models for $100 each\n    discount_percentage = Fraction(5, 100) # 5% reduction in price\n    discount_amount = original_price_per_model * discount_percentage\n\n    # L4\n    final_model_cost = original_price_per_model - discount_amount\n\n    # L5\n    total_paid = final_model_cost * total_models\n\n    # FA\n    answer = total_paid\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_paid",
+    "replacement_variable": "discount_amount"
+  },
+  "correct_trace": {
+    "kindergarten_models": 2,
+    "elementary_multiplier": 2,
+    "elementary_models": 4,
+    "total_models": 6,
+    "original_price_per_model": 100,
+    "discount_percentage": "1/20",
+    "discount_amount": "5",
+    "final_model_cost": "95",
+    "total_paid": "570",
+    "answer": "570"
+  },
+  "flawed_trace": {
+    "kindergarten_models": 2,
+    "elementary_multiplier": 2,
+    "elementary_models": 4,
+    "total_models": 6,
+    "original_price_per_model": 100,
+    "discount_percentage": "1/20",
+    "discount_amount": "5",
+    "final_model_cost": "95",
+    "total_paid": "570",
+    "answer": "5"
+  },
+  "correct_value": "570",
+  "flawed_value": "5",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "elementary_models",
+      "question_inputs": [
+        "kindergarten_models",
+        "elementary_multiplier"
+      ],
+      "solution_line_template": "The school bought {kindergarten_models} x {elementary_multiplier} = <<{kindergarten_models}*{elementary_multiplier}={elementary_models}>>{elementary_models} dinosaur models for the elementary library."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_models",
+      "question_inputs": [],
+      "solution_line_template": "So the school bought a total of {kindergarten_models} + {elementary_models} = <<{kindergarten_models}+{elementary_models}={total_models}>>{total_models} models."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "discount_amount",
+      "question_inputs": [
+        "original_price_per_model",
+        "discount_percentage"
+      ],
+      "solution_line_template": "The price of each model was reduced by ${original_price_per_model} x {discount_percentage} = $<<{original_price_per_model}*{discount_percentage}={discount_amount}>>{discount_amount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_model_cost",
+      "question_inputs": [],
+      "solution_line_template": "Thus, each model cost ${original_price_per_model} - ${discount_amount} = $<<{original_price_per_model}-{discount_amount}={final_model_cost}>>{final_model_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_paid",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, the school paid a total of ${final_model_cost} x {total_models} = $<<{final_model_cost}*{total_models}={total_paid}>>{total_paid}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The school bought 2 x 2 = <<2*2=4>>4 dinosaur models for the elementary library.",
+    "L2": "So the school bought a total of 2 + 4 = <<2+4=6>>6 models.",
+    "L3": "The price of each model was reduced by $100 x 5/100 = $<<100*5/100=5>>5.",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'discount_amount' (value: 5) was reported instead of 'total_paid' (value: 570).",
+  "repro_seed": 6753605802522340429,
+  "model_name": "google_gemini-2.5-flash"
+}

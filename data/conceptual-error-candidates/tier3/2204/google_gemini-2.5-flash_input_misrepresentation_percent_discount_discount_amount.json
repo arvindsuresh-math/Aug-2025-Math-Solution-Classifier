@@ -1,0 +1,74 @@
+{
+  "index": 2204,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "The bag is now sold for $150 - $135 = $<<150-135=15>>15 less.",
+    "L2": "The discount is 15/150 = 1/10.",
+    "L3": "Thus, the percent discount is 1/10 x 100% = 10%."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2204.\n    Returns: the percent discount.\n    \"\"\"\n    # L1\n    original_price = 150 # cost $150 last week\n    sale_price = 135 # now on sale for $135\n    discount_amount = original_price - sale_price\n\n    # L2\n    discount_fraction = Fraction(discount_amount, original_price)\n\n    # L3\n    percentage_multiplier = 100 # WK\n    percent_discount = discount_fraction * percentage_multiplier\n\n    # FA\n    answer = percent_discount\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "percent_discount",
+    "operand_to_replace": "percentage_multiplier",
+    "replacement_variable": "discount_amount"
+  },
+  "correct_trace": {
+    "original_price": 150,
+    "sale_price": 135,
+    "discount_amount": 15,
+    "discount_fraction": "1/10",
+    "percentage_multiplier": 100,
+    "percent_discount": "10",
+    "answer": "10"
+  },
+  "flawed_trace": {
+    "original_price": 150,
+    "sale_price": 135,
+    "discount_amount": 15,
+    "discount_fraction": "1/10",
+    "percentage_multiplier": 100,
+    "percent_discount": "3/2",
+    "answer": "3/2"
+  },
+  "correct_value": "10",
+  "flawed_value": "3/2",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "discount_amount",
+      "question_inputs": [
+        "original_price",
+        "sale_price"
+      ],
+      "solution_line_template": "The bag is now sold for ${original_price} - ${sale_price} = $<<{original_price}-{sale_price}={discount_amount}>>{discount_amount} less."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "discount_fraction",
+      "question_inputs": [],
+      "solution_line_template": "The discount is {discount_amount}/{original_price} = <<{discount_amount}/{original_price}={discount_fraction}>>{discount_fraction}."
+    },
+    {
+      "WK_inputs": [
+        "percentage_multiplier"
+      ],
+      "line_number": "L3",
+      "output_variable": "percent_discount",
+      "question_inputs": [],
+      "solution_line_template": "Thus, the percent discount is {discount_fraction} x {percentage_multiplier}% = <<{discount_fraction}*{percentage_multiplier}={percent_discount}>>{percent_discount}%."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The bag is now sold for $150 - $135 = $<<150-135=15>>15 less.",
+    "L2": "The discount is 15/150 = <<15/150=15/150>>15/150.",
+    "L3": "Thus, the percent discount is 15/150 x 15% = <<15/150*15=3/2>>3/2%.",
+    "FA": "#### 3/2"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'discount_amount' (15) was used instead of 'percentage_multiplier' (100).",
+  "repro_seed": -4116973379171032318,
+  "model_name": "google_gemini-2.5-flash"
+}

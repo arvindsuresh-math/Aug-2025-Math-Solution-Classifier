@@ -1,0 +1,94 @@
+{
+  "index": 2166,
+  "original_solution_mapping": {
+    "FA": "#### 1440",
+    "L1": "Since there are 60 seconds in 1 minute, then there are 60/30 = <<60/30=2>>2 sets of 30 seconds in a minute.",
+    "L2": "So a wheel makes 6 x 2 = <<6*2=12>>12 turns in 1 minute.",
+    "L3": "Since there are 60 minutes in 1 hour, then a wheel makes 12 x 60 = <<12*60=720>>720 turns in an hour.",
+    "L4": "Therefore, the wheel makes 720 x 2 = <<720*2=1440>>1440 turns in 2 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2166.\n    Returns: the total number of turns the wheel makes in two hours.\n    \"\"\"\n    # L1\n    seconds_per_minute = 60 # WK\n    time_interval_seconds = 30 # 30 seconds\n    sets_of_30_seconds_per_minute = seconds_per_minute / time_interval_seconds\n\n    # L2\n    turns_per_30_seconds = 6 # 6 turns\n    turns_per_minute = turns_per_30_seconds * sets_of_30_seconds_per_minute\n\n    # L3\n    minutes_per_hour = 60 # WK\n    turns_per_hour = turns_per_minute * minutes_per_hour\n\n    # L4\n    target_hours = 2 # two hours\n    total_turns = turns_per_hour * target_hours\n\n    # FA\n    answer = total_turns\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_turns",
+    "operand_to_replace": "turns_per_hour",
+    "replacement_variable": "turns_per_30_seconds"
+  },
+  "correct_trace": {
+    "seconds_per_minute": 60,
+    "time_interval_seconds": 30,
+    "sets_of_30_seconds_per_minute": 2.0,
+    "turns_per_30_seconds": 6,
+    "turns_per_minute": 12.0,
+    "minutes_per_hour": 60,
+    "turns_per_hour": 720.0,
+    "target_hours": 2,
+    "total_turns": 1440.0,
+    "answer": 1440.0
+  },
+  "flawed_trace": {
+    "seconds_per_minute": 60,
+    "time_interval_seconds": 30,
+    "sets_of_30_seconds_per_minute": 2.0,
+    "turns_per_30_seconds": 6,
+    "turns_per_minute": 12.0,
+    "minutes_per_hour": 60,
+    "turns_per_hour": 720.0,
+    "target_hours": 2,
+    "total_turns": 12,
+    "answer": 12
+  },
+  "correct_value": 1440.0,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "seconds_per_minute"
+      ],
+      "line_number": "L1",
+      "output_variable": "sets_of_30_seconds_per_minute",
+      "question_inputs": [
+        "time_interval_seconds"
+      ],
+      "solution_line_template": "Since there are {seconds_per_minute} seconds in 1 minute, then there are {seconds_per_minute}/{time_interval_seconds} = <<{seconds_per_minute}/{time_interval_seconds}={sets_of_30_seconds_per_minute}>>{sets_of_30_seconds_per_minute} sets of {time_interval_seconds} seconds in a minute."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "turns_per_minute",
+      "question_inputs": [
+        "turns_per_30_seconds"
+      ],
+      "solution_line_template": "So a wheel makes {turns_per_30_seconds} x {sets_of_30_seconds_per_minute} = <<{turns_per_30_seconds}*{sets_of_30_seconds_per_minute}={turns_per_minute}>>{turns_per_minute} turns in 1 minute."
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L3",
+      "output_variable": "turns_per_hour",
+      "question_inputs": [],
+      "solution_line_template": "Since there are {minutes_per_hour} minutes in 1 hour, then a wheel makes {turns_per_minute} x {minutes_per_hour} = <<{turns_per_minute}*{minutes_per_hour}={turns_per_hour}>>{turns_per_hour} turns in an hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_turns",
+      "question_inputs": [
+        "target_hours"
+      ],
+      "solution_line_template": "Therefore, the wheel makes {turns_per_hour} x {target_hours} = <<{turns_per_hour}*{target_hours}={total_turns}>>{total_turns} turns in {target_hours} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since there are 60 seconds in 1 minute, then there are 60/30 = <<60/30=2>>2 sets of 30 seconds in a minute.",
+    "L2": "So a wheel makes 6 x 2 = <<6*2=12>>12 turns in 1 minute.",
+    "L3": "Since there are 60 minutes in 1 hour, then a wheel makes 12 x 60 = <<12*60=720>>720 turns in an hour.",
+    "L4": "Therefore, the wheel makes 6 x 2 = <<6*2=12>>12 turns in 2 hours.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'turns_per_30_seconds' (value: 6) was used instead of 'turns_per_hour' (value: 720.0).",
+  "repro_seed": -2911815262602250327,
+  "model_name": "google_gemini-2.5-flash"
+}

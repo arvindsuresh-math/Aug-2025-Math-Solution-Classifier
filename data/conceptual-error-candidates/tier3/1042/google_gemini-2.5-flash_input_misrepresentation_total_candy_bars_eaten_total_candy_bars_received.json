@@ -1,0 +1,77 @@
+{
+  "index": 1042,
+  "original_solution_mapping": {
+    "FA": "#### 28",
+    "L1": "Kim got 2 candy bars a week for 16 weeks so she got 2*16 = <<2*16=32>>32 candy bars",
+    "L2": "She would only eat 1 candy bar every 4 weeks so in 16 weeks she only ate 16/4 = <<16/4=4>>4 candy bars",
+    "L3": "She saved 32 candy bars and only ate 4 so she still has 32-4 = <<32-4=28>>28 candy bars"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1042.\n    Returns: the number of candy bars Kim had saved.\n    \"\"\"\n    # L1\n    candy_bars_per_week = 2 # 2 candy bars a week\n    total_weeks = 16 # After 16 weeks\n    total_candy_bars_received = candy_bars_per_week * total_weeks\n\n    # L2\n    weeks_per_eaten_bar = 4 # every 4 weeks\n    eaten_per_period = 1 # eat 1 candy bar\n    total_candy_bars_eaten = total_weeks / weeks_per_eaten_bar\n\n    # L3\n    candy_bars_saved = total_candy_bars_received - total_candy_bars_eaten\n\n    # FA\n    answer = candy_bars_saved\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_candy_bars_eaten",
+    "operand_to_replace": "total_weeks",
+    "replacement_variable": "total_candy_bars_received"
+  },
+  "correct_trace": {
+    "candy_bars_per_week": 2,
+    "total_weeks": 16,
+    "total_candy_bars_received": 32,
+    "weeks_per_eaten_bar": 4,
+    "eaten_per_period": 1,
+    "total_candy_bars_eaten": 4.0,
+    "candy_bars_saved": 28.0,
+    "answer": 28.0
+  },
+  "flawed_trace": {
+    "candy_bars_per_week": 2,
+    "total_weeks": 16,
+    "total_candy_bars_received": 32,
+    "weeks_per_eaten_bar": 4,
+    "eaten_per_period": 1,
+    "total_candy_bars_eaten": 8.0,
+    "candy_bars_saved": 24.0,
+    "answer": 24.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 8.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_candy_bars_received",
+      "question_inputs": [
+        "candy_bars_per_week",
+        "total_weeks"
+      ],
+      "solution_line_template": "Kim got {candy_bars_per_week} candy bars a week for {total_weeks} weeks so she got {candy_bars_per_week}*{total_weeks} = <<{candy_bars_per_week}*{total_weeks}={total_candy_bars_received}>>{total_candy_bars_received} candy bars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_candy_bars_eaten",
+      "question_inputs": [
+        "weeks_per_eaten_bar",
+        "eaten_per_period"
+      ],
+      "solution_line_template": "She would only eat {eaten_per_period} candy bar every {weeks_per_eaten_bar} weeks so in {total_weeks} weeks she only ate {total_weeks}/{weeks_per_eaten_bar} = <<{total_weeks}/{weeks_per_eaten_bar}={total_candy_bars_eaten}>>{total_candy_bars_eaten} candy bars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "candy_bars_saved",
+      "question_inputs": [],
+      "solution_line_template": "She saved {total_candy_bars_received} candy bars and only ate {total_candy_bars_eaten} so she still has {total_candy_bars_received}-{total_candy_bars_eaten} = <<{total_candy_bars_received}-{total_candy_bars_eaten}={candy_bars_saved}>>{candy_bars_saved} candy bars"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Kim got 2 candy bars a week for 16 weeks so she got 2*16 = <<2*16=32>>32 candy bars",
+    "L2": "She would only eat 1 candy bar every 4 weeks so in 32 weeks she only ate 32/4 = <<32/4=8>>8 candy bars",
+    "L3": "She saved 32 candy bars and only ate 8 so she still has 32-8 = <<32-8=24>>24 candy bars",
+    "FA": "#### 24"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_candy_bars_received' (32) was used instead of 'total_weeks' (16).",
+  "repro_seed": 102482980925152460,
+  "model_name": "google_gemini-2.5-flash"
+}

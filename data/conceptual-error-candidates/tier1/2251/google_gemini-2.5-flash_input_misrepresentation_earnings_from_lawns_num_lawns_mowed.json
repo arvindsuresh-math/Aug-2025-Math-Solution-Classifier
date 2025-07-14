@@ -1,0 +1,78 @@
+{
+  "index": 2251,
+  "original_solution_mapping": {
+    "FA": "#### 29",
+    "L1": "Tom earns 3 lawns * $12 per lawn = $<<3*12=36>>36 per month.",
+    "L2": "Tom earned $36 + $10 = $<<36+10=46>>46 last month.",
+    "L3": "Tom's profit last month was $46 - $17 gas money = $<<46-17=29>>29."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2251.\n    Returns: the total profit Tom earned last month.\n    \"\"\"\n    # L1\n    num_lawns_mowed = 3 # mows 3 lawns\n    charge_per_lawn = 12 # charging $12 per lawn mowed\n    earnings_from_lawns = num_lawns_mowed * charge_per_lawn\n\n    # L2\n    extra_money_weeds = 10 # made extra money pulling weeds for $10\n    total_earnings = earnings_from_lawns + extra_money_weeds\n\n    # L3\n    gas_cost_per_month = 17 # spends $17 on gas\n    profit = total_earnings - gas_cost_per_month\n\n    # FA\n    answer = profit\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "earnings_from_lawns",
+    "operand_to_replace": "charge_per_lawn",
+    "replacement_variable": "num_lawns_mowed"
+  },
+  "correct_trace": {
+    "num_lawns_mowed": 3,
+    "charge_per_lawn": 12,
+    "earnings_from_lawns": 36,
+    "extra_money_weeds": 10,
+    "total_earnings": 46,
+    "gas_cost_per_month": 17,
+    "profit": 29,
+    "answer": 29
+  },
+  "flawed_trace": {
+    "num_lawns_mowed": 3,
+    "charge_per_lawn": 12,
+    "earnings_from_lawns": 9,
+    "extra_money_weeds": 10,
+    "total_earnings": 19,
+    "gas_cost_per_month": 17,
+    "profit": 2,
+    "answer": 2
+  },
+  "correct_value": 36,
+  "flawed_value": 9,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "num_lawns_mowed",
+        "charge_per_lawn"
+      ],
+      "WK_inputs": [],
+      "output_variable": "earnings_from_lawns",
+      "solution_line_template": "Tom earns {num_lawns_mowed} lawns * ${charge_per_lawn} per lawn = $<<{num_lawns_mowed}*{charge_per_lawn}={earnings_from_lawns}>>{earnings_from_lawns} per month."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "extra_money_weeds"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_earnings",
+      "solution_line_template": "Tom earned ${earnings_from_lawns} + ${extra_money_weeds} = $<<{earnings_from_lawns}+{extra_money_weeds}={total_earnings}>>{total_earnings} last month."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "gas_cost_per_month"
+      ],
+      "WK_inputs": [],
+      "output_variable": "profit",
+      "solution_line_template": "Tom's profit last month was ${total_earnings} - ${gas_cost_per_month} gas money = $<<{total_earnings}-{gas_cost_per_month}={profit}>>{profit}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Tom earns 3 lawns * $3 per lawn = $<<3*3=9>>9 per month.",
+    "L2": "Tom earned $9 + $10 = $<<9+10=19>>19 last month.",
+    "L3": "Tom's profit last month was $19 - $17 gas money = $<<19-17=2>>2.",
+    "FA": "#### 2"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'num_lawns_mowed' (3) was used instead of 'charge_per_lawn' (12).",
+  "repro_seed": -3827283227353022620,
+  "model_name": "google_gemini-2.5-flash"
+}

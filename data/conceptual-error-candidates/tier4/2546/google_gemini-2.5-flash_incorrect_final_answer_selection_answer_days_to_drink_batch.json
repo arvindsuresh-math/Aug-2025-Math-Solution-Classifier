@@ -1,0 +1,106 @@
+{
+  "index": 2546,
+  "original_solution_mapping": {
+    "FA": "#### 120",
+    "L1": "He makes it in batches of 1.5*128=<<1.5*128=192>>192 ounces",
+    "L2": "He drinks 96/2=<<96/2=48>>48 ounces of coffee a day",
+    "L3": "So he drinks the coffee in 192/48=<<192/48=4>>4 days",
+    "L4": "So in 24 days he makes 24/4=<<24/4=6>>6 batches",
+    "L5": "That means he spends 6*20=<<6*20=120>>120 hours making coffee"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2546.\n    Returns: the total hours spent making coffee over 24 days.\n    \"\"\"\n    # L1\n    batch_gallons = 1.5 # batches of 1.5 gallons\n    ounces_per_gallon = 128 # WK\n    batch_ounces = batch_gallons * ounces_per_gallon\n\n    # L2\n    ounces_every_two_days = 96 # drinks 96 ounces of coffee every 2 days\n    days_for_consumption = 2 # drinks 96 ounces of coffee every 2 days\n    ounces_per_day = ounces_every_two_days / days_for_consumption\n\n    # L3\n    days_to_drink_batch = batch_ounces / ounces_per_day\n\n    # L4\n    total_days = 24 # over 24 days\n    num_batches = total_days / days_to_drink_batch\n\n    # L5\n    hours_per_batch = 20 # It takes 20 hours to make coffee\n    total_hours_making_coffee = num_batches * hours_per_batch\n\n    # FA\n    answer = total_hours_making_coffee\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_hours_making_coffee",
+    "replacement_variable": "days_to_drink_batch"
+  },
+  "correct_trace": {
+    "batch_gallons": 1.5,
+    "ounces_per_gallon": 128,
+    "batch_ounces": 192.0,
+    "ounces_every_two_days": 96,
+    "days_for_consumption": 2,
+    "ounces_per_day": 48.0,
+    "days_to_drink_batch": 4.0,
+    "total_days": 24,
+    "num_batches": 6.0,
+    "hours_per_batch": 20,
+    "total_hours_making_coffee": 120.0,
+    "answer": 120.0
+  },
+  "flawed_trace": {
+    "batch_gallons": 1.5,
+    "ounces_per_gallon": 128,
+    "batch_ounces": 192.0,
+    "ounces_every_two_days": 96,
+    "days_for_consumption": 2,
+    "ounces_per_day": 48.0,
+    "days_to_drink_batch": 4.0,
+    "total_days": 24,
+    "num_batches": 6.0,
+    "hours_per_batch": 20,
+    "total_hours_making_coffee": 120.0,
+    "answer": 4.0
+  },
+  "correct_value": 120.0,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "ounces_per_gallon"
+      ],
+      "line_number": "L1",
+      "output_variable": "batch_ounces",
+      "question_inputs": [
+        "batch_gallons"
+      ],
+      "solution_line_template": "He makes it in batches of {batch_gallons}*{ounces_per_gallon}=<<{batch_gallons}*{ounces_per_gallon}={batch_ounces}>>{batch_ounces} ounces"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "ounces_per_day",
+      "question_inputs": [
+        "ounces_every_two_days",
+        "days_for_consumption"
+      ],
+      "solution_line_template": "He drinks {ounces_every_two_days}/{days_for_consumption}=<<{ounces_every_two_days}/{days_for_consumption}={ounces_per_day}>>{ounces_per_day} ounces of coffee a day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "days_to_drink_batch",
+      "question_inputs": [],
+      "solution_line_template": "So he drinks the coffee in {batch_ounces}/{ounces_per_day}=<<{batch_ounces}/{ounces_per_day}={days_to_drink_batch}>>{days_to_drink_batch} days"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "num_batches",
+      "question_inputs": [
+        "total_days"
+      ],
+      "solution_line_template": "So in {total_days} days he makes {total_days}/{days_to_drink_batch}=<<{total_days}/{days_to_drink_batch}={num_batches}>>{num_batches} batches"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_hours_making_coffee",
+      "question_inputs": [
+        "hours_per_batch"
+      ],
+      "solution_line_template": "That means he spends {num_batches}*{hours_per_batch}=<<{num_batches}*{hours_per_batch}={total_hours_making_coffee}>>{total_hours_making_coffee} hours making coffee"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He makes it in batches of 1.5*128=<<1.5*128=192>>192 ounces",
+    "L2": "He drinks 96/2=<<96/2=48>>48 ounces of coffee a day",
+    "L3": "So he drinks the coffee in 192/48=<<192/48=4>>4 days",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'days_to_drink_batch' (value: 4.0) was reported instead of 'total_hours_making_coffee' (value: 120.0).",
+  "repro_seed": 9137251061219043477,
+  "model_name": "google_gemini-2.5-flash"
+}

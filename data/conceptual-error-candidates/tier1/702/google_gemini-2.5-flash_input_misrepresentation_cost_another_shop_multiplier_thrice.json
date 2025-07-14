@@ -1,0 +1,74 @@
+{
+  "index": 702,
+  "original_solution_mapping": {
+    "FA": "#### 27",
+    "L1": "After spending money on a shirt, Lily had $55 - $7 = $<<55-7=48>>48 left.",
+    "L2": "She spent $7 x 3 = $<<7*3=21>>21 on another store.",
+    "L3": "Therefore, she only has $48 - $21 = $<<48-21=27>>27 left on her account."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 702.\n    Returns: the amount of money left in Lily's account.\n    \"\"\"\n    # L1\n    initial_account_balance = 55 # Lily had $55 in her account\n    cost_shirt = 7 # She spent $7 on a shirt\n    balance_after_shirt = initial_account_balance - cost_shirt\n\n    # L2\n    multiplier_thrice = 3 # spent thrice as much\n    cost_another_shop = cost_shirt * multiplier_thrice\n\n    # L3\n    final_balance = balance_after_shirt - cost_another_shop\n\n    # FA\n    answer = final_balance\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "cost_another_shop",
+    "operand_to_replace": "cost_shirt",
+    "replacement_variable": "multiplier_thrice"
+  },
+  "correct_trace": {
+    "initial_account_balance": 55,
+    "cost_shirt": 7,
+    "balance_after_shirt": 48,
+    "multiplier_thrice": 3,
+    "cost_another_shop": 21,
+    "final_balance": 27,
+    "answer": 27
+  },
+  "flawed_trace": {
+    "initial_account_balance": 55,
+    "cost_shirt": 7,
+    "balance_after_shirt": 48,
+    "multiplier_thrice": 3,
+    "cost_another_shop": 9,
+    "final_balance": 39,
+    "answer": 39
+  },
+  "correct_value": 21,
+  "flawed_value": 9,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "initial_account_balance",
+        "cost_shirt"
+      ],
+      "WK_inputs": [],
+      "output_variable": "balance_after_shirt",
+      "solution_line_template": "After spending money on a shirt, Lily had ${initial_account_balance} - ${cost_shirt} = $<<{initial_account_balance}-{cost_shirt}={balance_after_shirt}>>{balance_after_shirt} left."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "multiplier_thrice"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cost_another_shop",
+      "solution_line_template": "She spent ${cost_shirt} x {multiplier_thrice} = $<<{cost_shirt}*{multiplier_thrice}={cost_another_shop}>>{cost_another_shop} on another store."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "final_balance",
+      "solution_line_template": "Therefore, she only has ${balance_after_shirt} - ${cost_another_shop} = $<<{balance_after_shirt}-{cost_another_shop}={final_balance}>>{final_balance} left on her account."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After spending money on a shirt, Lily had $55 - $7 = $<<55-7=48>>48 left.",
+    "L2": "She spent $3 x 3 = $<<3*3=9>>9 on another store.",
+    "L3": "Therefore, she only has $48 - $9 = $<<48-9=39>>39 left on her account.",
+    "FA": "#### 39"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'multiplier_thrice' (3) was used instead of 'cost_shirt' (7).",
+  "repro_seed": 5606938074474821815,
+  "model_name": "google_gemini-2.5-flash"
+}

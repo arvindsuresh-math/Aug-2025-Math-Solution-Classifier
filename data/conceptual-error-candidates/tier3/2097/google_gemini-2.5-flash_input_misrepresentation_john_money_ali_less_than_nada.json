@@ -1,0 +1,71 @@
+{
+  "index": 2097,
+  "original_solution_mapping": {
+    "FA": "#### 48",
+    "L1": "Let's say that N is what Nada has, J is what John has, and A is what Ali has. We know that A = N - 5 and J = 4N.",
+    "L2": "We also know that: N + A + J = $67",
+    "L3": "We can substitute the equations from step 1 into the equations from step 2 to get: N + 4N + (N-5) = $67",
+    "L4": "Combining like terms gets us 6N - 5 = $67",
+    "L5": "So, N=($67+5)/6 = $12",
+    "L6": "Substituting $12 back into the equation J = 4 N, we find John has 4 x 12 = $<<4*12=48>>48"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2097.\n    Returns: the amount of money John has.\n    \"\"\"\n    # L5\n    total_money = 67 # total of $67 in their wallets\n    ali_less_than_nada = 5 # Ali has $5 less than Nada\n    coefficient_N_combined_terms = 6 # WK\n    nada_money = (total_money + ali_less_than_nada) / coefficient_N_combined_terms\n\n    # L6\n    john_multiplier = 4 # John has 4 times more than Nada\n    john_money = john_multiplier * nada_money\n\n    # FA\n    answer = john_money\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "john_money",
+    "operand_to_replace": "john_multiplier",
+    "replacement_variable": "ali_less_than_nada"
+  },
+  "correct_trace": {
+    "total_money": 67,
+    "ali_less_than_nada": 5,
+    "coefficient_N_combined_terms": 6,
+    "nada_money": 12.0,
+    "john_multiplier": 4,
+    "john_money": 48.0,
+    "answer": 48.0
+  },
+  "flawed_trace": {
+    "total_money": 67,
+    "ali_less_than_nada": 5,
+    "coefficient_N_combined_terms": 6,
+    "nada_money": 12.0,
+    "john_multiplier": 4,
+    "john_money": 60.0,
+    "answer": 60.0
+  },
+  "correct_value": 48.0,
+  "flawed_value": 60.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "coefficient_N_combined_terms"
+      ],
+      "line_number": "L5",
+      "output_variable": "nada_money",
+      "question_inputs": [
+        "total_money",
+        "ali_less_than_nada"
+      ],
+      "solution_line_template": "So, N=(${total_money}+{ali_less_than_nada})/{coefficient_N_combined_terms} = ${nada_money}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "john_money",
+      "question_inputs": [
+        "john_multiplier"
+      ],
+      "solution_line_template": "Substituting ${nada_money} back into the equation J = {john_multiplier} N, we find John has {john_multiplier} x {nada_money} = $<<{john_multiplier}*{nada_money}={john_money}>>{john_money}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L5": "So, N=($67+5)/6 = $12",
+    "L6": "Substituting $12 back into the equation J = 5 N, we find John has 5 x 12 = $<<5*12=60>>60",
+    "FA": "#### 60"
+  },
+  "erroneous_line_number": "L6",
+  "explanation": "Input misrepresentation. The value for 'ali_less_than_nada' (5) was used instead of 'john_multiplier' (4).",
+  "repro_seed": -6239385885033385907,
+  "model_name": "google_gemini-2.5-flash"
+}

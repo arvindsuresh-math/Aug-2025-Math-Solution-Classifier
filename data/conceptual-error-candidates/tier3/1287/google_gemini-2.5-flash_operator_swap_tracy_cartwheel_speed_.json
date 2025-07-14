@@ -1,0 +1,80 @@
+{
+  "index": 1287,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "If Pete walks on hands at 1/4 what Tracy can do 1-handed cartwheels, then Tracy can do 1-handed cartwheels at 2*4=8 miles per hour.",
+    "L2": "Since Tracy does 1-handed cartwheels twice the rate of Susan's forward walking, then Susan walks at 8/2=<<8/2=4>>4 miles per hour.",
+    "L3": "Pete walks backwards 3x faster than Susan walks forward, and thus Pete walks backwards at 4*3=12 miles per hour."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1287.\n    Returns: the speed Pete can walk backwards in miles per hour.\n    \"\"\"\n    # L1\n    pete_hands_speed = 2 # Pete walks on his hands at 2 miles per hour\n    pete_hands_fraction = Fraction(1, 4) # only one quarter the speed that Tracy can do cartwheels\n    tracy_multiplier = 1 / pete_hands_fraction\n    tracy_cartwheel_speed = pete_hands_speed * tracy_multiplier\n\n    # L2\n    tracy_susan_speed_ratio = 2 # twice as fast as Susan walks forwards\n    susan_forward_speed = tracy_cartwheel_speed / tracy_susan_speed_ratio\n\n    # L3\n    pete_susan_speed_ratio = 3 # three times faster than Susan walks forwards\n    pete_backwards_speed = susan_forward_speed * pete_susan_speed_ratio\n\n    # FA\n    answer = pete_backwards_speed\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "tracy_cartwheel_speed",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x147bb2510>"
+  },
+  "correct_trace": {
+    "pete_hands_speed": 2,
+    "pete_hands_fraction": "1/4",
+    "tracy_multiplier": "4",
+    "tracy_cartwheel_speed": "8",
+    "tracy_susan_speed_ratio": 2,
+    "susan_forward_speed": "4",
+    "pete_susan_speed_ratio": 3,
+    "pete_backwards_speed": "12",
+    "answer": "12"
+  },
+  "flawed_trace": {
+    "pete_hands_speed": 2,
+    "pete_hands_fraction": "1/4",
+    "tracy_multiplier": "4",
+    "tracy_cartwheel_speed": "6",
+    "tracy_susan_speed_ratio": 2,
+    "susan_forward_speed": "3",
+    "pete_susan_speed_ratio": 3,
+    "pete_backwards_speed": "9",
+    "answer": "9"
+  },
+  "correct_value": "8",
+  "flawed_value": "6",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "tracy_cartwheel_speed",
+      "question_inputs": [
+        "pete_hands_speed",
+        "pete_hands_fraction"
+      ],
+      "solution_line_template": "If Pete walks on hands at {pete_hands_fraction} what Tracy can do 1-handed cartwheels, then Tracy can do 1-handed cartwheels at {pete_hands_speed}*{tracy_multiplier}={tracy_cartwheel_speed} miles per hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "susan_forward_speed",
+      "question_inputs": [
+        "tracy_susan_speed_ratio"
+      ],
+      "solution_line_template": "Since Tracy does 1-handed cartwheels twice the rate of Susan's forward walking, then Susan walks at {tracy_cartwheel_speed}/{tracy_susan_speed_ratio}=<<{tracy_cartwheel_speed}/{tracy_susan_speed_ratio}={susan_forward_speed}>>{susan_forward_speed} miles per hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "pete_backwards_speed",
+      "question_inputs": [
+        "pete_susan_speed_ratio"
+      ],
+      "solution_line_template": "Pete walks backwards {pete_susan_speed_ratio}x faster than Susan walks forward, and thus Pete walks backwards at {susan_forward_speed}*{pete_susan_speed_ratio}={pete_backwards_speed} miles per hour."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Pete walks on hands at 1/4 what Tracy can do 1-handed cartwheels, then Tracy can do 1-handed cartwheels at 2*4=6 miles per hour.",
+    "L2": "Since Tracy does 1-handed cartwheels twice the rate of Susan's forward walking, then Susan walks at 6/2=<<6/2=3>>3 miles per hour.",
+    "L3": "Pete walks backwards 3x faster than Susan walks forward, and thus Pete walks backwards at 3*3=9 miles per hour.",
+    "FA": "#### 9"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -1002302995572647715,
+  "model_name": "google_gemini-2.5-flash"
+}

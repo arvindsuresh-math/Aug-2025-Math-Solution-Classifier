@@ -1,0 +1,77 @@
+{
+  "index": 1437,
+  "original_solution_mapping": {
+    "FA": "#### 4800",
+    "L1": "The deck is 30*40=<<30*40=1200>>1200 square feet",
+    "L2": "He pays 3+1=$<<3+1=4>>4 per square foot",
+    "L3": "So he paid 1200*4=$<<1200*4=4800>>4800"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1437.\n    Returns: the total amount Mark paid for the deck and sealant.\n    \"\"\"\n    # L1\n    deck_width = 30 # 30 feet\n    deck_length = 40 # 40 feet\n    deck_area = deck_width * deck_length\n\n    # L2\n    cost_per_sq_ft = 3 # $3 per square foot\n    sealant_cost_per_sq_ft = 1 # $1 per square foot for sealant\n    total_cost_per_sq_ft = cost_per_sq_ft + sealant_cost_per_sq_ft\n\n    # L3\n    total_paid = deck_area * total_cost_per_sq_ft\n\n    # FA\n    answer = total_paid\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cost_per_sq_ft",
+    "operand_to_replace": "cost_per_sq_ft",
+    "replacement_variable": "deck_width"
+  },
+  "correct_trace": {
+    "deck_width": 30,
+    "deck_length": 40,
+    "deck_area": 1200,
+    "cost_per_sq_ft": 3,
+    "sealant_cost_per_sq_ft": 1,
+    "total_cost_per_sq_ft": 4,
+    "total_paid": 4800,
+    "answer": 4800
+  },
+  "flawed_trace": {
+    "deck_width": 30,
+    "deck_length": 40,
+    "deck_area": 1200,
+    "cost_per_sq_ft": 3,
+    "sealant_cost_per_sq_ft": 1,
+    "total_cost_per_sq_ft": 31,
+    "total_paid": 37200,
+    "answer": 37200
+  },
+  "correct_value": 4,
+  "flawed_value": 31,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "deck_width",
+        "deck_length"
+      ],
+      "WK_inputs": [],
+      "output_variable": "deck_area",
+      "solution_line_template": "The deck is {deck_width}*{deck_length}=<<{deck_width}*{deck_length}={deck_area}>>{deck_area} square feet"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "cost_per_sq_ft",
+        "sealant_cost_per_sq_ft"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_cost_per_sq_ft",
+      "solution_line_template": "He pays {cost_per_sq_ft}+{sealant_cost_per_sq_ft}=$<<{cost_per_sq_ft}+{sealant_cost_per_sq_ft}={total_cost_per_sq_ft}>>{total_cost_per_sq_ft} per square foot"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_paid",
+      "solution_line_template": "So he paid {deck_area}*{total_cost_per_sq_ft}=$<<{deck_area}*{total_cost_per_sq_ft}={total_paid}>>{total_paid}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The deck is 30*40=<<30*40=1200>>1200 square feet",
+    "L2": "He pays 30+1=$<<30+1=31>>31 per square foot",
+    "L3": "So he paid 1200*31=$<<1200*31=37200>>37200",
+    "FA": "#### 37200"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'deck_width' (30) was used instead of 'cost_per_sq_ft' (3).",
+  "repro_seed": 1141087152002898600,
+  "model_name": "google_gemini-2.5-flash"
+}

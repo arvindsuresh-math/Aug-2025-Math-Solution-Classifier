@@ -1,0 +1,78 @@
+{
+  "index": 2700,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "The students need eat 100 vegetables in total because 200 / 2 = <<200/2=100>>100",
+    "L2": "Each student needs to eat on average 4 vegetables because 100 / 25 = <<100/25=4>>4",
+    "L3": "Each student needs to eat 2 vegetables per school week because 4 / 2 = <<4/2=2>>2"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2700.\n    Returns: the average number of vegetables each student must eat per school week.\n    \"\"\"\n    # L1\n    points_needed = 200 # 200 points to win the movie day\n    points_per_vegetable = 2 # gives the student 2 points\n    total_vegetables_needed = points_needed / points_per_vegetable\n\n    # L2\n    num_students = 25 # 25 students in the class\n    vegetables_per_student_total = total_vegetables_needed / num_students\n\n    # L3\n    num_school_weeks = 2 # two school weeks\n    avg_vegetables_per_student_per_week = vegetables_per_student_total / num_school_weeks\n\n    # FA\n    answer = avg_vegetables_per_student_per_week\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "vegetables_per_student_total",
+    "operand_to_replace": "num_students",
+    "replacement_variable": "points_per_vegetable"
+  },
+  "correct_trace": {
+    "points_needed": 200,
+    "points_per_vegetable": 2,
+    "total_vegetables_needed": 100.0,
+    "num_students": 25,
+    "vegetables_per_student_total": 4.0,
+    "num_school_weeks": 2,
+    "avg_vegetables_per_student_per_week": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "points_needed": 200,
+    "points_per_vegetable": 2,
+    "total_vegetables_needed": 100.0,
+    "num_students": 25,
+    "vegetables_per_student_total": 50.0,
+    "num_school_weeks": 2,
+    "avg_vegetables_per_student_per_week": 25.0,
+    "answer": 25.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 50.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_vegetables_needed",
+      "question_inputs": [
+        "points_needed",
+        "points_per_vegetable"
+      ],
+      "solution_line_template": "The students need eat {points_needed} vegetables in total because {points_needed} / {points_per_vegetable} = <<{points_needed}/{points_per_vegetable}={total_vegetables_needed}>>{total_vegetables_needed}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "vegetables_per_student_total",
+      "question_inputs": [
+        "num_students"
+      ],
+      "solution_line_template": "Each student needs to eat on average {total_vegetables_needed} vegetables because {total_vegetables_needed} / {num_students} = <<{total_vegetables_needed}/{num_students}={vegetables_per_student_total}>>{vegetables_per_student_total}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "avg_vegetables_per_student_per_week",
+      "question_inputs": [
+        "num_school_weeks"
+      ],
+      "solution_line_template": "Each student needs to eat {vegetables_per_student_total} vegetables per school week because {vegetables_per_student_total} / {num_school_weeks} = <<{vegetables_per_student_total}/{num_school_weeks}={avg_vegetables_per_student_per_week}>>{avg_vegetables_per_student_per_week}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The students need eat 200 vegetables in total because 200 / 2 = <<200/2=100>>100",
+    "L2": "Each student needs to eat on average 100 vegetables because 100 / 2 = <<100/2=50>>50",
+    "L3": "Each student needs to eat 50 vegetables per school week because 50 / 2 = <<50/2=25>>25",
+    "FA": "#### 25"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'points_per_vegetable' (2) was used instead of 'num_students' (25).",
+  "repro_seed": 884301130212907751,
+  "model_name": "google_gemini-2.5-flash"
+}

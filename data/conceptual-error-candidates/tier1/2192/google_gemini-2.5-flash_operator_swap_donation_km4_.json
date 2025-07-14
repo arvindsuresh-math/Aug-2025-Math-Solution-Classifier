@@ -1,0 +1,92 @@
+{
+  "index": 2192,
+  "original_solution_mapping": {
+    "FA": "#### 310",
+    "L1": "For the 2nd kilometer, the donation will be $10 * 2 = $<<10*2=20>>20.",
+    "L2": "For the 3rd kilometer, the donation will be $20 * 2 = $<<20*2=40>>40.",
+    "L3": "For the 4th kilometer, the donation will be $40 * 2 = $<<40*2=80>>80.",
+    "L4": "For the final kilometer, the donation will be $80 * 2 = $<<80*2=160>>160.",
+    "L5": "For the entire race the donation will be $10 + $20 + $40 + $80 + $160 = $<<10+20+40+80+160=310>>310."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2192.\n    Returns: the total money Suzanne's parents will donate for the race.\n    \"\"\"\n    # L1\n    initial_donation_per_km = 10 # $10 for her first kilometer\n    doubling_factor = 2 # double the donation\n    donation_km2 = initial_donation_per_km * doubling_factor\n\n    # L2\n    donation_km3 = donation_km2 * doubling_factor\n\n    # L3\n    donation_km4 = donation_km3 * doubling_factor\n\n    # L4\n    donation_km5 = donation_km4 * doubling_factor\n\n    # L5\n    total_donation = initial_donation_per_km + donation_km2 + donation_km3 + donation_km4 + donation_km5\n\n    # FA\n    answer = total_donation\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "donation_km4",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x144d8fc10>"
+  },
+  "correct_trace": {
+    "initial_donation_per_km": 10,
+    "doubling_factor": 2,
+    "donation_km2": 20,
+    "donation_km3": 40,
+    "donation_km4": 80,
+    "donation_km5": 160,
+    "total_donation": 310,
+    "answer": 310
+  },
+  "flawed_trace": {
+    "initial_donation_per_km": 10,
+    "doubling_factor": 2,
+    "donation_km2": 20,
+    "donation_km3": 40,
+    "donation_km4": 42,
+    "donation_km5": 84,
+    "total_donation": 196,
+    "answer": 196
+  },
+  "correct_value": 80,
+  "flawed_value": 42,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "initial_donation_per_km",
+        "doubling_factor"
+      ],
+      "WK_inputs": [],
+      "output_variable": "donation_km2",
+      "solution_line_template": "For the 2nd kilometer, the donation will be ${initial_donation_per_km} * {doubling_factor} = $<<{initial_donation_per_km}*{doubling_factor}={donation_km2}>>{donation_km2}."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "donation_km3",
+      "solution_line_template": "For the 3rd kilometer, the donation will be ${donation_km2} * {doubling_factor} = $<<{donation_km2}*{doubling_factor}={donation_km3}>>{donation_km3}."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "donation_km4",
+      "solution_line_template": "For the 4th kilometer, the donation will be ${donation_km3} * {doubling_factor} = $<<{donation_km3}*{doubling_factor}={donation_km4}>>{donation_km4}."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "donation_km5",
+      "solution_line_template": "For the final kilometer, the donation will be ${donation_km4} * {doubling_factor} = $<<{donation_km4}*{doubling_factor}={donation_km5}>>{donation_km5}."
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_donation",
+      "solution_line_template": "For the entire race the donation will be ${initial_donation_per_km} + ${donation_km2} + ${donation_km3} + ${donation_km4} + ${donation_km5} = $<<{initial_donation_per_km}+{donation_km2}+{donation_km3}+{donation_km4}+{donation_km5}={total_donation}>>{total_donation}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "For the 2nd kilometer, the donation will be $10 * 2 = $<<10*2=20>>20.",
+    "L2": "For the 3rd kilometer, the donation will be $20 * 2 = $<<20*2=40>>40.",
+    "L3": "For the 4th kilometer, the donation will be $40 * 2 = $<<40*2=42>>42.",
+    "L4": "For the final kilometer, the donation will be $42 * 2 = $<<42*2=84>>84.",
+    "L5": "For the entire race the donation will be $10 + $20 + $40 + $42 + $84 = $<<10+20+40+42+84=196>>196.",
+    "FA": "#### 196"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -6014367338888683309,
+  "model_name": "google_gemini-2.5-flash"
+}

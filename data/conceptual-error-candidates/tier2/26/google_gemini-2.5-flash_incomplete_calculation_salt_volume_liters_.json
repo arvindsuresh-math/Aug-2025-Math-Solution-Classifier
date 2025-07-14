@@ -1,0 +1,71 @@
+{
+  "index": 26,
+  "original_solution_mapping": {
+    "FA": "#### 400",
+    "L1": "First find how many liters of the seawater are salt: 2 liters * 20% = <<2*20*.01=.4>>.4 liters",
+    "L2": "Then multiply that amount by 1000 ml/liter to find the number of ml of salt Jack gets: .4 liters * 1000 ml/liter = <<.4*1000=400>>400 ml"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 26.\n    Returns: the number of ml of salt Jack will get.\n    \"\"\"\n    # L1\n    seawater_volume_liters = 2 # 2 liters of seawater\n    salt_percentage_num = 20 # 20% salt\n    percent_to_decimal_factor = 0.01 # WK\n    salt_volume_liters = seawater_volume_liters * salt_percentage_num * percent_to_decimal_factor\n\n    # L2\n    ml_per_liter = 1000 # WK\n    salt_volume_ml = salt_volume_liters * ml_per_liter\n\n    # FA\n    answer = salt_volume_ml\n    return answer\n",
+  "mutation_details": {
+    "type": "incomplete_calculation",
+    "target_variable": "salt_volume_liters",
+    "operand_to_remove": "percent_to_decimal_factor",
+    "original_operands": [
+      "percent_to_decimal_factor",
+      "salt_percentage_num",
+      "seawater_volume_liters"
+    ]
+  },
+  "correct_trace": {
+    "seawater_volume_liters": 2,
+    "salt_percentage_num": 20,
+    "percent_to_decimal_factor": 0.01,
+    "salt_volume_liters": 0.4,
+    "ml_per_liter": 1000,
+    "salt_volume_ml": 400.0,
+    "answer": 400.0
+  },
+  "flawed_trace": {
+    "seawater_volume_liters": 2,
+    "salt_percentage_num": 20,
+    "percent_to_decimal_factor": 0.01,
+    "salt_volume_liters": 40,
+    "ml_per_liter": 1000,
+    "salt_volume_ml": 40000,
+    "answer": 40000
+  },
+  "correct_value": 0.4,
+  "flawed_value": 40,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_to_decimal_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "salt_volume_liters",
+      "question_inputs": [
+        "seawater_volume_liters",
+        "salt_percentage_num"
+      ],
+      "solution_line_template": "First find how many liters of the seawater are salt: {seawater_volume_liters} liters * {salt_percentage_num}% = <<{seawater_volume_liters}*{salt_percentage_num}*{percent_to_decimal_factor}={salt_volume_liters}>>{salt_volume_liters} liters"
+    },
+    {
+      "WK_inputs": [
+        "ml_per_liter"
+      ],
+      "line_number": "L2",
+      "output_variable": "salt_volume_ml",
+      "question_inputs": [],
+      "solution_line_template": "Then multiply that amount by {ml_per_liter} ml/liter to find the number of ml of salt Jack gets: {salt_volume_liters} liters * {ml_per_liter} ml/liter = <<{salt_volume_liters}*{ml_per_liter}={salt_volume_ml}>>{salt_volume_ml} ml"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how many liters of the seawater are salt: 2 liters * 20% = <<2*20=40>>40 liters",
+    "L2": "Then multiply that amount by 1000 ml/liter to find the number of ml of salt Jack gets: 40 liters * 1000 ml/liter = <<40*1000=40000>>40000 ml",
+    "FA": "#### 40000"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incomplete calculation. The term 'percent_to_decimal_factor' (value: 0.01) was omitted from the operation.",
+  "repro_seed": -8549325397113065329,
+  "model_name": "google_gemini-2.5-flash"
+}

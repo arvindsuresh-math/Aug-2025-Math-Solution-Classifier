@@ -1,0 +1,78 @@
+{
+  "index": 1058,
+  "original_solution_mapping": {
+    "FA": "#### 700",
+    "L1": "He reads 10/5=<<10/5=2>>2 hours per day",
+    "L2": "That means he reads 2*50=<<2*50=100>>100 pages per day",
+    "L3": "So he reads 100*7=<<100*7=700>>700 pages in 7 days"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1058.\n    Returns: the total number of pages Tom reads in 7 days.\n    \"\"\"\n    # L1\n    total_reading_hours = 10 # Tom reads 10 hours\n    initial_days = 5 # over 5 days\n    hours_per_day = total_reading_hours / initial_days\n\n    # L2\n    pages_per_hour = 50 # He can read 50 pages per hour\n    pages_per_day = hours_per_day * pages_per_hour\n\n    # L3\n    target_days = 7 # in 7 days\n    total_pages_in_7_days = pages_per_day * target_days\n\n    # FA\n    answer = total_pages_in_7_days\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "pages_per_day",
+    "operand_to_replace": "pages_per_hour",
+    "replacement_variable": "hours_per_day"
+  },
+  "correct_trace": {
+    "total_reading_hours": 10,
+    "initial_days": 5,
+    "hours_per_day": 2.0,
+    "pages_per_hour": 50,
+    "pages_per_day": 100.0,
+    "target_days": 7,
+    "total_pages_in_7_days": 700.0,
+    "answer": 700.0
+  },
+  "flawed_trace": {
+    "total_reading_hours": 10,
+    "initial_days": 5,
+    "hours_per_day": 2.0,
+    "pages_per_hour": 50,
+    "pages_per_day": 4.0,
+    "target_days": 7,
+    "total_pages_in_7_days": 28.0,
+    "answer": 28.0
+  },
+  "correct_value": 100.0,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "hours_per_day",
+      "question_inputs": [
+        "total_reading_hours",
+        "initial_days"
+      ],
+      "solution_line_template": "He reads {total_reading_hours}/{initial_days}=<<{total_reading_hours}/{initial_days}={hours_per_day}>>{hours_per_day} hours per day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "pages_per_day",
+      "question_inputs": [
+        "pages_per_hour"
+      ],
+      "solution_line_template": "That means he reads {hours_per_day}*{pages_per_hour}=<<{hours_per_day}*{pages_per_hour}={pages_per_day}>>{pages_per_day} pages per day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_pages_in_7_days",
+      "question_inputs": [
+        "target_days"
+      ],
+      "solution_line_template": "So he reads {pages_per_day}*{target_days}=<<{pages_per_day}*{target_days}={total_pages_in_7_days}>>{total_pages_in_7_days} pages in {target_days} days"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He reads 10/5=<<10/5=2>>2 hours per day",
+    "L2": "That means he reads 2*2=<<2*2=4>>4 pages per day",
+    "L3": "So he reads 4*7=<<4*7=28>>28 pages in 7 days",
+    "FA": "#### 28"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'hours_per_day' (2.0) was used instead of 'pages_per_hour' (50).",
+  "repro_seed": -3270258855089804718,
+  "model_name": "google_gemini-2.5-flash"
+}

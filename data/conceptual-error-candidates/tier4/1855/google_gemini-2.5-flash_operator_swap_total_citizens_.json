@@ -1,0 +1,79 @@
+{
+  "index": 1855,
+  "original_solution_mapping": {
+    "FA": "#### 100",
+    "L1": "Half the pet-owners have a cat because 1 - 1/2 = 1/2",
+    "L2": "There are 60 pet owners because 30 / (1/2) = <<30/(1/2)=60>>60",
+    "L3": "The town has 100 citizens because 60 / .6 = <<60/.6=100>>100"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1855.\n    Returns: the total number of citizens in the town.\n    \"\"\"\n    # L1\n    total_fraction_pet_owners = 1 # WK\n    fraction_own_dog = Fraction(1, 2) # half own a dog\n    fraction_own_cat = total_fraction_pet_owners - fraction_own_dog\n\n    # L2\n    num_cat_owners = 30 # 30 own a cat\n    total_pet_owners = num_cat_owners / fraction_own_cat\n\n    # L3\n    percent_citizens_own_pet = 0.6 # 60% of the citizens own a pet\n    total_citizens = total_pet_owners / percent_citizens_own_pet\n\n    # FA\n    answer = total_citizens\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_citizens",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x1509fa090>"
+  },
+  "correct_trace": {
+    "total_fraction_pet_owners": 1,
+    "fraction_own_dog": "1/2",
+    "fraction_own_cat": "1/2",
+    "num_cat_owners": 30,
+    "total_pet_owners": "60",
+    "percent_citizens_own_pet": 0.6,
+    "total_citizens": 100.0,
+    "answer": 100.0
+  },
+  "flawed_trace": {
+    "total_fraction_pet_owners": 1,
+    "fraction_own_dog": "1/2",
+    "fraction_own_cat": "1/2",
+    "num_cat_owners": 30,
+    "total_pet_owners": "60",
+    "percent_citizens_own_pet": 0.6,
+    "total_citizens": 36.0,
+    "answer": 36.0
+  },
+  "correct_value": 100.0,
+  "flawed_value": 36.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_fraction_pet_owners"
+      ],
+      "line_number": "L1",
+      "output_variable": "fraction_own_cat",
+      "question_inputs": [
+        "fraction_own_dog"
+      ],
+      "solution_line_template": "Half the pet-owners have a cat because {total_fraction_pet_owners} - {fraction_own_dog} = {fraction_own_cat}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_pet_owners",
+      "question_inputs": [
+        "num_cat_owners"
+      ],
+      "solution_line_template": "There are {total_pet_owners} pet owners because {num_cat_owners} / ({fraction_own_cat}) = <<{num_cat_owners}/({fraction_own_cat})={total_pet_owners}>>{total_pet_owners}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_citizens",
+      "question_inputs": [
+        "percent_citizens_own_pet"
+      ],
+      "solution_line_template": "The town has {total_citizens} citizens because {total_pet_owners} / {percent_citizens_own_pet} = <<{total_pet_owners}/{percent_citizens_own_pet}={total_citizens}>>{total_citizens}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Half the pet-owners have a cat because 1 - 1/2 = 1/2",
+    "L2": "There are 60 pet owners because 30 / (1/2) = <<30/(1/2)=60>>60",
+    "L3": "The town has 36 citizens because 60 / 0.6 = <<60/0.6=36>>36",
+    "FA": "#### 36"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 4498525521739007947,
+  "model_name": "google_gemini-2.5-flash"
+}

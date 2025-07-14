@@ -1,0 +1,78 @@
+{
+  "index": 542,
+  "original_solution_mapping": {
+    "FA": "#### 76",
+    "L1": "After 5 days, Sara has baked 5 days * 10 cakes/day = <<5*10=50>>50 cakes.",
+    "L2": "After Carol's feast, there are 50 cakes - 12 cakes = <<50-12=38>>38 cakes remaining.",
+    "L3": "Sara needs 2 cans/cake * 38 cakes = <<2*38=76>>76 cans of frosting."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 542.\n    Returns: the number of cans of frosting Bob needs to frost the remaining cakes.\n    \"\"\"\n    # L1\n    num_days = 5 # He does this for 5 days\n    cakes_per_day = 10 # Sara bakes 10 cakes\n    total_cakes_baked = num_days * cakes_per_day\n\n    # L2\n    carol_ate = 12 # eats 12 of his cakes\n    cakes_remaining_after_carol = total_cakes_baked - carol_ate\n\n    # L3\n    cans_per_cake = 2 # 2 cans of frosting to frost a single cake\n    cans_needed = cans_per_cake * cakes_remaining_after_carol\n\n    # FA\n    answer = cans_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "cans_needed",
+    "operand_to_replace": "cakes_remaining_after_carol",
+    "replacement_variable": "carol_ate"
+  },
+  "correct_trace": {
+    "num_days": 5,
+    "cakes_per_day": 10,
+    "total_cakes_baked": 50,
+    "carol_ate": 12,
+    "cakes_remaining_after_carol": 38,
+    "cans_per_cake": 2,
+    "cans_needed": 76,
+    "answer": 76
+  },
+  "flawed_trace": {
+    "num_days": 5,
+    "cakes_per_day": 10,
+    "total_cakes_baked": 50,
+    "carol_ate": 12,
+    "cakes_remaining_after_carol": 38,
+    "cans_per_cake": 2,
+    "cans_needed": 24,
+    "answer": 24
+  },
+  "correct_value": 76,
+  "flawed_value": 24,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "num_days",
+        "cakes_per_day"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_cakes_baked",
+      "solution_line_template": "After {num_days} days, Sara has baked {num_days} days * {cakes_per_day} cakes/day = <<{num_days}*{cakes_per_day}={total_cakes_baked}>>{total_cakes_baked} cakes."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "carol_ate"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cakes_remaining_after_carol",
+      "solution_line_template": "After Carol's feast, there are {total_cakes_baked} cakes - {carol_ate} cakes = <<{total_cakes_baked}-{carol_ate}={cakes_remaining_after_carol}>>{cakes_remaining_after_carol} cakes remaining."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "cans_per_cake"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cans_needed",
+      "solution_line_template": "Sara needs {cans_per_cake} cans/cake * {cakes_remaining_after_carol} cakes = <<{cans_per_cake}*{cakes_remaining_after_carol}={cans_needed}>>{cans_needed} cans of frosting."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After 5 days, Sara has baked 5 days * 10 cakes/day = <<5*10=50>>50 cakes.",
+    "L2": "After Carol's feast, there are 50 cakes - 12 cakes = <<50-12=38>>38 cakes remaining.",
+    "L3": "Sara needs 2 cans/cake * 12 cakes = <<2*12=24>>24 cans of frosting.",
+    "FA": "#### 24"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'carol_ate' (value: 12) was used instead of 'cakes_remaining_after_carol' (value: 38).",
+  "repro_seed": -8138395815533729568,
+  "model_name": "google_gemini-2.5-flash"
+}

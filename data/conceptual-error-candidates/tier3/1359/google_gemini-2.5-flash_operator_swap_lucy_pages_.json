@@ -1,0 +1,63 @@
+{
+  "index": 1359,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "Lucy can read 20 more pages than Oliver who can read 40 pages so Lucy can read 40+20 = <<20+40=60>>60 pages",
+    "L2": "Carter can read half as many pages as Lucy who can read 60 pages so he can read 60/2 = <<30=30>>30 pages in 1 hour"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1359.\n    Returns: the number of pages Carter can read in 1 hour.\n    \"\"\"\n    # L1\n    lucy_more_than_oliver = 20 # Lucy can read 20 more pages than Oliver\n    oliver_pages = 40 # Oliver can read 40 pages\n    lucy_pages = oliver_pages + lucy_more_than_oliver\n\n    # L2\n    half_divisor = 2 # half as many pages\n    carter_pages = lucy_pages / half_divisor\n\n    # FA\n    answer = carter_pages\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "lucy_pages",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x147bd5550>"
+  },
+  "correct_trace": {
+    "lucy_more_than_oliver": 20,
+    "oliver_pages": 40,
+    "lucy_pages": 60,
+    "half_divisor": 2,
+    "carter_pages": 30.0,
+    "answer": 30.0
+  },
+  "flawed_trace": {
+    "lucy_more_than_oliver": 20,
+    "oliver_pages": 40,
+    "lucy_pages": 800,
+    "half_divisor": 2,
+    "carter_pages": 400.0,
+    "answer": 400.0
+  },
+  "correct_value": 60,
+  "flawed_value": 800,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "lucy_pages",
+      "question_inputs": [
+        "lucy_more_than_oliver",
+        "oliver_pages"
+      ],
+      "solution_line_template": "Lucy can read {lucy_more_than_oliver} more pages than Oliver who can read {oliver_pages} pages so Lucy can read {oliver_pages}+{lucy_more_than_oliver} = <<{lucy_more_than_oliver}+{oliver_pages}={lucy_pages}>>{lucy_pages} pages"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "carter_pages",
+      "question_inputs": [
+        "half_divisor"
+      ],
+      "solution_line_template": "Carter can read half as many pages as Lucy who can read {lucy_pages} pages so he can read {lucy_pages}/{half_divisor} = <<{carter_pages}={carter_pages}>>{carter_pages} pages in 1 hour"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Lucy can read 20 more pages than Oliver who can read 40 pages so Lucy can read 40+20 = <<20+40=800>>800 pages",
+    "L2": "Carter can read half as many pages as Lucy who can read 800 pages so he can read 800/2 = <<400=400>>400 pages in 1 hour",
+    "FA": "#### 400"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 9138350482018643948,
+  "model_name": "google_gemini-2.5-flash"
+}

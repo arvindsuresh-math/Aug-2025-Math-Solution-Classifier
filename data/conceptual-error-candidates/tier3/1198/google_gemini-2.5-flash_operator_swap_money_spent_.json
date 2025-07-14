@@ -1,0 +1,59 @@
+{
+  "index": 1198,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "Arthur spent 4/5 * $200 = $<<4/5*200=160>>160.",
+    "L2": "Thus he has $200 - $160 = $<<200-160=40>>40 remaining."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1198.\n    Returns: the amount of money Arthur has left.\n    \"\"\"\n    # L1\n    fraction_spent = Fraction(4, 5) # four-fifths of that\n    initial_money = 200 # $200 in his wallet\n    money_spent = fraction_spent * initial_money\n\n    # L2\n    money_left = initial_money - money_spent\n\n    # FA\n    answer = money_left\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "money_spent",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x147c24390>"
+  },
+  "correct_trace": {
+    "fraction_spent": "4/5",
+    "initial_money": 200,
+    "money_spent": "160",
+    "money_left": "40",
+    "answer": "40"
+  },
+  "flawed_trace": {
+    "fraction_spent": "4/5",
+    "initial_money": 200,
+    "money_spent": "1/250",
+    "money_left": "49999/250",
+    "answer": "49999/250"
+  },
+  "correct_value": "160",
+  "flawed_value": "1/250",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_spent",
+      "question_inputs": [
+        "fraction_spent",
+        "initial_money"
+      ],
+      "solution_line_template": "Arthur spent {fraction_spent} * ${initial_money} = ${money_spent}<<{fraction_spent}*{initial_money}={money_spent}>>{money_spent}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_left",
+      "question_inputs": [],
+      "solution_line_template": "Thus he has ${initial_money} - ${money_spent} = ${money_left}<<{initial_money}-{money_spent}={money_left}>>{money_left} remaining."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Arthur spent 4/5 * $200 = $1/250<<4/5*200=1/250>>1/250.",
+    "L2": "Thus he has $200 - $1/250 = $49999/250<<200-1/250=49999/250>>49999/250 remaining.",
+    "FA": "#### 49999/250"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -8938879475592249948,
+  "model_name": "google_gemini-2.5-flash"
+}

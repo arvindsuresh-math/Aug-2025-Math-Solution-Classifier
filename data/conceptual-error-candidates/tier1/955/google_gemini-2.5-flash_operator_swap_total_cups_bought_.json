@@ -1,0 +1,63 @@
+{
+  "index": 955,
+  "original_solution_mapping": {
+    "FA": "#### 95",
+    "L1": "Mr. Williams bought 10 x 10 = <<10*10=100>>100 cups of juice.",
+    "L2": "Since 5 cups were left, then 100 - 5 = <<100-5=95>>95 cups were drunk."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 955.\n    Returns: the number of cups of juice that were drunk.\n    \"\"\"\n    # L1\n    gallons_bought = 10 # 10 gallons of juice\n    cups_per_gallon = 10 # Each gallon has 10 cups\n    total_cups_bought = gallons_bought * cups_per_gallon\n\n    # L2\n    cups_left = 5 # 5 cups of juice were left\n    cups_drunk = total_cups_bought - cups_left\n\n    # FA\n    answer = cups_drunk\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_cups_bought",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x145256090>"
+  },
+  "correct_trace": {
+    "gallons_bought": 10,
+    "cups_per_gallon": 10,
+    "total_cups_bought": 100,
+    "cups_left": 5,
+    "cups_drunk": 95,
+    "answer": 95
+  },
+  "flawed_trace": {
+    "gallons_bought": 10,
+    "cups_per_gallon": 10,
+    "total_cups_bought": 20,
+    "cups_left": 5,
+    "cups_drunk": 15,
+    "answer": 15
+  },
+  "correct_value": 100,
+  "flawed_value": 20,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "gallons_bought",
+        "cups_per_gallon"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_cups_bought",
+      "solution_line_template": "Mr. Williams bought {gallons_bought} x {cups_per_gallon} = <<{gallons_bought}*{cups_per_gallon}={total_cups_bought}>>{total_cups_bought} cups of juice."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "cups_left"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cups_drunk",
+      "solution_line_template": "Since {cups_left} cups were left, then {total_cups_bought} - {cups_left} = <<{total_cups_bought}-{cups_left}={cups_drunk}>>{cups_drunk} cups were drunk."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Mr. Williams bought 10 x 10 = <<10*10=20>>20 cups of juice.",
+    "L2": "Since 5 cups were left, then 20 - 5 = <<20-5=15>>15 cups were drunk.",
+    "FA": "#### 15"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 3601118546515976072,
+  "model_name": "google_gemini-2.5-flash"
+}

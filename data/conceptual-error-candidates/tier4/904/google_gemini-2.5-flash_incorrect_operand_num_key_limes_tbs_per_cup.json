@@ -1,0 +1,81 @@
+{
+  "index": 904,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "Her recipe calls for 1/4 cup of juice but she wants to double that so she needs 1/4+1/4 = 1/2 cup of lime juice",
+    "L2": "16 tablespoons are in 1 cup and she only needs 1/2 cup so she needs 16*.5 = <<16*.5=8>>8 tablespoons of juice",
+    "L3": "1 key lime yields 1 tablespoon of juice and she needs 8 tablespoons so she needs 1*8 = <<1*8=8>>8 key limes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 904.\n    Returns: the number of key limes Audrey needs.\n    \"\"\"\n    # L1\n    initial_juice_fraction = Fraction(1, 4) # 1/4 cup of key lime juice\n    doubled_juice_fraction_calc = initial_juice_fraction + initial_juice_fraction\n    doubled_juice_amount_decimal = float(doubled_juice_fraction_calc)\n\n    # L2\n    tbs_per_cup = 16 # 16 tablespoons in 1 cup\n    one_cup_value = 1 # WK\n    total_tbs_juice = tbs_per_cup * doubled_juice_amount_decimal\n\n    # L3\n    tbs_per_key_lime = 1 # Each key lime yields 1 tablespoon of juice\n    num_key_limes = tbs_per_key_lime * total_tbs_juice\n\n    # FA\n    answer = num_key_limes\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "num_key_limes",
+    "operand_to_replace": "total_tbs_juice",
+    "replacement_variable": "tbs_per_cup"
+  },
+  "correct_trace": {
+    "initial_juice_fraction": "1/4",
+    "doubled_juice_fraction_calc": "1/2",
+    "doubled_juice_amount_decimal": 0.5,
+    "tbs_per_cup": 16,
+    "one_cup_value": 1,
+    "total_tbs_juice": 8.0,
+    "tbs_per_key_lime": 1,
+    "num_key_limes": 8.0,
+    "answer": 8.0
+  },
+  "flawed_trace": {
+    "initial_juice_fraction": "1/4",
+    "doubled_juice_fraction_calc": "1/2",
+    "doubled_juice_amount_decimal": 0.5,
+    "tbs_per_cup": 16,
+    "one_cup_value": 1,
+    "total_tbs_juice": 8.0,
+    "tbs_per_key_lime": 1,
+    "num_key_limes": 16,
+    "answer": 16
+  },
+  "correct_value": 8.0,
+  "flawed_value": 16,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "doubled_juice_fraction_calc",
+      "question_inputs": [
+        "initial_juice_fraction"
+      ],
+      "solution_line_template": "Her recipe calls for {initial_juice_fraction} cup of juice but she wants to double that so she needs {initial_juice_fraction}+{initial_juice_fraction} = {doubled_juice_fraction_calc} cup of lime juice"
+    },
+    {
+      "WK_inputs": [
+        "one_cup_value"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_tbs_juice",
+      "question_inputs": [
+        "tbs_per_cup"
+      ],
+      "solution_line_template": "{tbs_per_cup} tablespoons are in {one_cup_value} cup and she only needs {doubled_juice_amount_decimal} cup so she needs {tbs_per_cup}*{doubled_juice_amount_decimal} = <<{tbs_per_cup}*{doubled_juice_amount_decimal}={total_tbs_juice}>>{total_tbs_juice} tablespoons of juice"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_key_limes",
+      "question_inputs": [
+        "tbs_per_key_lime"
+      ],
+      "solution_line_template": "{tbs_per_key_lime} key lime yields {tbs_per_key_lime} tablespoon of juice and she needs {total_tbs_juice} tablespoons so she needs {tbs_per_key_lime}*{total_tbs_juice} = <<{tbs_per_key_lime}*{total_tbs_juice}={num_key_limes}>>{num_key_limes} key limes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Her recipe calls for 1/4 cup of juice but she wants to double that so she needs 1/4+1/4 = 1/2 cup of lime juice",
+    "L2": "16 tablespoons are in 1 cup and she only needs 0.5 cup so she needs 16*0.5 = <<16*0.5=8>>8 tablespoons of juice",
+    "L3": "1 key lime yields 1 tablespoon of juice and she needs 16 tablespoons so she needs 1*16 = <<1*16=16>>16 key limes",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'tbs_per_cup' (value: 16) was used instead of 'total_tbs_juice' (value: 8.0).",
+  "repro_seed": -3680931233953004036,
+  "model_name": "google_gemini-2.5-flash"
+}

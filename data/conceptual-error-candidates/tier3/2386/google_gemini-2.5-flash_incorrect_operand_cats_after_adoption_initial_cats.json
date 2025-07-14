@@ -1,0 +1,104 @@
+{
+  "index": 2386,
+  "original_solution_mapping": {
+    "FA": "#### 19",
+    "L1": "The shelter started with 12 / 2 = <<12/2=6>>6 cats.",
+    "L2": "The cats they took in increased the number to 12 + 6 = <<12+6=18>>18 cats.",
+    "L3": "Three cats were adopted, so they had 18 - 3 = <<18-3=15>>15 cats.",
+    "L4": "One cat had 5 kittens, which increased the number of cats to 15 + 5 = 20 cats.",
+    "L5": "The pet owner came to get his missing cat, so they now have 20 - 1 = <<20-1=19>>19 cats."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2386.\n    Returns: the total number of cats the shelter has now.\n    \"\"\"\n    # L1\n    newly_taken_in_cats = 12 # recently took in twelve cats\n    initial_half_divisor = 2 # half that number of cats\n    initial_cats = newly_taken_in_cats / initial_half_divisor\n\n    # L2\n    cats_after_intake = newly_taken_in_cats + initial_cats\n\n    # L3\n    adopted_cats = 3 # three had been adopted\n    cats_after_adoption = cats_after_intake - adopted_cats\n\n    # L4\n    kittens = 5 # one of the cats had five kittens\n    cats_after_kittens = cats_after_adoption + kittens\n\n    # L5\n    missing_pet_returned = 1 # one person arrived to pick up one of the cats\n    final_cats = cats_after_kittens - missing_pet_returned\n\n    # FA\n    answer = final_cats\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "cats_after_adoption",
+    "operand_to_replace": "cats_after_intake",
+    "replacement_variable": "initial_cats"
+  },
+  "correct_trace": {
+    "newly_taken_in_cats": 12,
+    "initial_half_divisor": 2,
+    "initial_cats": 6.0,
+    "cats_after_intake": 18.0,
+    "adopted_cats": 3,
+    "cats_after_adoption": 15.0,
+    "kittens": 5,
+    "cats_after_kittens": 20.0,
+    "missing_pet_returned": 1,
+    "final_cats": 19.0,
+    "answer": 19.0
+  },
+  "flawed_trace": {
+    "newly_taken_in_cats": 12,
+    "initial_half_divisor": 2,
+    "initial_cats": 6.0,
+    "cats_after_intake": 18.0,
+    "adopted_cats": 3,
+    "cats_after_adoption": 3.0,
+    "kittens": 5,
+    "cats_after_kittens": 8.0,
+    "missing_pet_returned": 1,
+    "final_cats": 7.0,
+    "answer": 7.0
+  },
+  "correct_value": 15.0,
+  "flawed_value": 3.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "initial_cats",
+      "question_inputs": [
+        "newly_taken_in_cats",
+        "initial_half_divisor"
+      ],
+      "solution_line_template": "The shelter started with {newly_taken_in_cats} / {initial_half_divisor} = <<{newly_taken_in_cats}/{initial_half_divisor}={initial_cats}>>{initial_cats} cats."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cats_after_intake",
+      "question_inputs": [],
+      "solution_line_template": "The cats they took in increased the number to {newly_taken_in_cats} + {initial_cats} = <<{newly_taken_in_cats}+{initial_cats}={cats_after_intake}>>{cats_after_intake} cats."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cats_after_adoption",
+      "question_inputs": [
+        "adopted_cats"
+      ],
+      "solution_line_template": "Three cats were adopted, so they had {cats_after_intake} - {adopted_cats} = <<{cats_after_intake}-{adopted_cats}={cats_after_adoption}>>{cats_after_adoption} cats."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "cats_after_kittens",
+      "question_inputs": [
+        "kittens"
+      ],
+      "solution_line_template": "One cat had {kittens} kittens, which increased the number of cats to {cats_after_adoption} + {kittens} = {cats_after_kittens} cats."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "final_cats",
+      "question_inputs": [
+        "missing_pet_returned"
+      ],
+      "solution_line_template": "The pet owner came to get his missing cat, so they now have {cats_after_kittens} - {missing_pet_returned} = <<{cats_after_kittens}-{missing_pet_returned}={final_cats}>>{final_cats} cats."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The shelter started with 12 / 2 = <<12/2=6>>6 cats.",
+    "L2": "The cats they took in increased the number to 12 + 6 = <<12+6=18>>18 cats.",
+    "L3": "Three cats were adopted, so they had 6 - 3 = <<6-3=3>>3 cats.",
+    "L4": "One cat had 5 kittens, which increased the number of cats to 3 + 5 = 8 cats.",
+    "L5": "The pet owner came to get his missing cat, so they now have 8 - 1 = <<8-1=7>>7 cats.",
+    "FA": "#### 7"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'initial_cats' (value: 6.0) was used instead of 'cats_after_intake' (value: 18.0).",
+  "repro_seed": 799619256929267429,
+  "model_name": "google_gemini-2.5-flash"
+}

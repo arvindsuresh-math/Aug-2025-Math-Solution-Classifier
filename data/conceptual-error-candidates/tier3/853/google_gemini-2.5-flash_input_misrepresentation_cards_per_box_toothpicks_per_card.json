@@ -1,0 +1,77 @@
+{
+  "index": 853,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "If Eugene used all but 16 of the 52 cards, then he used 52-16=<<52-16=36>>36 cards.",
+    "L2": "If for every card he used 75 toothpicks, then a box of toothpicks would have enough toothpicks for 450/75=<<450/75=6>>6 cards.",
+    "L3": "Since one box has enough toothpicks for 6 cards, then for 36 cards he would need 36/6=<<36/6=6>>6 boxes of toothpicks."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 853.\n    Returns: the number of boxes of toothpicks Eugene used.\n    \"\"\"\n    # L1\n    total_cards = 52 # The deck of playing cards had 52 cards\n    cards_not_used = 16 # all but 16 of the cards\n    cards_used = total_cards - cards_not_used\n\n    # L2\n    toothpicks_per_card = 75 # For every card, he used 75 toothpicks\n    toothpicks_per_box = 450 # a box of toothpicks contains 450 toothpicks\n    cards_per_box = toothpicks_per_box / toothpicks_per_card\n\n    # L3\n    boxes_needed = cards_used / cards_per_box\n\n    # FA\n    answer = boxes_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "cards_per_box",
+    "operand_to_replace": "toothpicks_per_box",
+    "replacement_variable": "toothpicks_per_card"
+  },
+  "correct_trace": {
+    "total_cards": 52,
+    "cards_not_used": 16,
+    "cards_used": 36,
+    "toothpicks_per_card": 75,
+    "toothpicks_per_box": 450,
+    "cards_per_box": 6.0,
+    "boxes_needed": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "total_cards": 52,
+    "cards_not_used": 16,
+    "cards_used": 36,
+    "toothpicks_per_card": 75,
+    "toothpicks_per_box": 450,
+    "cards_per_box": 1.0,
+    "boxes_needed": 36.0,
+    "answer": 36.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cards_used",
+      "question_inputs": [
+        "total_cards",
+        "cards_not_used"
+      ],
+      "solution_line_template": "If Eugene used all but {cards_not_used} of the {total_cards} cards, then he used {total_cards}-{cards_not_used}=<<{total_cards}-{cards_not_used}={cards_used}>>{cards_used} cards."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cards_per_box",
+      "question_inputs": [
+        "toothpicks_per_card",
+        "toothpicks_per_box"
+      ],
+      "solution_line_template": "If for every card he used {toothpicks_per_card} toothpicks, then a box of toothpicks would have enough toothpicks for {toothpicks_per_box}/{toothpicks_per_card}=<<{toothpicks_per_box}/{toothpicks_per_card}={cards_per_box}>>{cards_per_box} cards."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "boxes_needed",
+      "question_inputs": [],
+      "solution_line_template": "Since one box has enough toothpicks for {cards_per_box} cards, then for {cards_used} cards he would need {cards_used}/{cards_per_box}=<<{cards_used}/{cards_per_box}={boxes_needed}>>{boxes_needed} boxes of toothpicks."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Eugene used all but 16 of the 52 cards, then he used 52-16=<<52-16=36>>36 cards.",
+    "L2": "If for every card he used 75 toothpicks, then a box of toothpicks would have enough toothpicks for 75/75=<<75/75=1>>1 cards.",
+    "L3": "Since one box has enough toothpicks for 1 cards, then for 36 cards he would need 36/1=<<36/1=36>>36 boxes of toothpicks.",
+    "FA": "#### 36"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'toothpicks_per_card' (75) was used instead of 'toothpicks_per_box' (450).",
+  "repro_seed": -3448230554737637717,
+  "model_name": "google_gemini-2.5-flash"
+}

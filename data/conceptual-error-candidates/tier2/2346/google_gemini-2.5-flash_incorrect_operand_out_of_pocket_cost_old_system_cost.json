@@ -1,0 +1,88 @@
+{
+  "index": 2346,
+  "original_solution_mapping": {
+    "FA": "#### 250",
+    "L1": "He got 250*.8=$<<250*.8=200>>200",
+    "L2": "He gets a 600*.25=$<<600*.25=150>>150 discount on the second system",
+    "L3": "So it cost 600-150=$<<600-150=450>>450",
+    "L4": "So he was 450-200=$<<450-200=250>>250 out of pocket"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2346.\n    Returns: the total money that came out of John's pocket.\n    \"\"\"\n    # L1\n    old_system_cost = 250 # His old system cost 250 dollars\n    trade_in_percentage = 0.8 # he got 80% of the value\n    trade_in_value = old_system_cost * trade_in_percentage\n\n    # L2\n    new_system_cost = 600 # system that costs $600\n    discount_percentage = 0.25 # 25% discount\n    new_system_discount = new_system_cost * discount_percentage\n\n    # L3\n    final_new_system_cost = new_system_cost - new_system_discount\n\n    # L4\n    out_of_pocket_cost = final_new_system_cost - trade_in_value\n\n    # FA\n    answer = out_of_pocket_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "out_of_pocket_cost",
+    "operand_to_replace": "final_new_system_cost",
+    "replacement_variable": "old_system_cost"
+  },
+  "correct_trace": {
+    "old_system_cost": 250,
+    "trade_in_percentage": 0.8,
+    "trade_in_value": 200.0,
+    "new_system_cost": 600,
+    "discount_percentage": 0.25,
+    "new_system_discount": 150.0,
+    "final_new_system_cost": 450.0,
+    "out_of_pocket_cost": 250.0,
+    "answer": 250.0
+  },
+  "flawed_trace": {
+    "old_system_cost": 250,
+    "trade_in_percentage": 0.8,
+    "trade_in_value": 200.0,
+    "new_system_cost": 600,
+    "discount_percentage": 0.25,
+    "new_system_discount": 150.0,
+    "final_new_system_cost": 450.0,
+    "out_of_pocket_cost": 50.0,
+    "answer": 50.0
+  },
+  "correct_value": 250.0,
+  "flawed_value": 50.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "trade_in_value",
+      "question_inputs": [
+        "old_system_cost",
+        "trade_in_percentage"
+      ],
+      "solution_line_template": "He got {old_system_cost}*{trade_in_percentage}=$<<{old_system_cost}*{trade_in_percentage}={trade_in_value}>>{trade_in_value}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "new_system_discount",
+      "question_inputs": [
+        "new_system_cost",
+        "discount_percentage"
+      ],
+      "solution_line_template": "He gets a {new_system_cost}*{discount_percentage}=$<<{new_system_cost}*{discount_percentage}={new_system_discount}>>{new_system_discount} discount on the second system"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_new_system_cost",
+      "question_inputs": [],
+      "solution_line_template": "So it cost {new_system_cost}-{new_system_discount}=$<<{new_system_cost}-{new_system_discount}={final_new_system_cost}>>{final_new_system_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "out_of_pocket_cost",
+      "question_inputs": [],
+      "solution_line_template": "So he was {final_new_system_cost}-{trade_in_value}=$<<{final_new_system_cost}-{trade_in_value}={out_of_pocket_cost}>>{out_of_pocket_cost} out of pocket"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He got 250*0.8=$<<250*0.8=200>>200",
+    "L2": "He gets a 600*0.25=$<<600*0.25=150>>150 discount on the second system",
+    "L3": "So it cost 600-150=$<<600-150=450>>450",
+    "L4": "So he was 250-200=$<<250-200=50>>50 out of pocket",
+    "FA": "#### 50"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'old_system_cost' (value: 250) was used instead of 'final_new_system_cost' (value: 450.0).",
+  "repro_seed": -5758782534097851823,
+  "model_name": "google_gemini-2.5-flash"
+}

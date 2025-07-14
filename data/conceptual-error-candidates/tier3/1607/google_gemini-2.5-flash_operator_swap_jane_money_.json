@@ -1,0 +1,70 @@
+{
+  "index": 1607,
+  "original_solution_mapping": {
+    "FA": "#### 57",
+    "L1": "Let's assume the total amount of money that Jane has is m.",
+    "L2": "Since Jean has 3 times as much money as Jane, he has 3*m=3m",
+    "L3": "Combined, Jean and Jane have a total of m+3m = $76",
+    "L4": "This evaluates to 4m=$76",
+    "L5": "The total amount of money that Jane has, represented by m, is m=$76/4",
+    "L6": "Jane has m=$<<19=19>>19",
+    "L7": "Since Jean has three times as much money as Jane, Jean has 3*$19=$57"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1607.\n    Returns: the amount of money Jean has.\n    \"\"\"\n    # L5\n    combined_total_money = 76 # They have a combined total of $76\n    jean_multiplier = 3 # three times as much money as Jane\n    jane_multiplier = 1 # WK\n    total_parts = jane_multiplier + jean_multiplier\n    jane_money = combined_total_money / total_parts\n\n    # L7\n    jean_money = jean_multiplier * jane_money\n\n    # FA\n    answer = jean_money\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "jane_money",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x147d7ecd0>"
+  },
+  "correct_trace": {
+    "combined_total_money": 76,
+    "jean_multiplier": 3,
+    "jane_multiplier": 1,
+    "total_parts": 4,
+    "jane_money": 19.0,
+    "jean_money": 57.0,
+    "answer": 57.0
+  },
+  "flawed_trace": {
+    "combined_total_money": 76,
+    "jean_multiplier": 3,
+    "jane_multiplier": 1,
+    "total_parts": 4,
+    "jane_money": 72,
+    "jean_money": 216,
+    "answer": 216
+  },
+  "correct_value": 19.0,
+  "flawed_value": 72,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "jane_multiplier"
+      ],
+      "line_number": "L5",
+      "output_variable": "jane_money",
+      "question_inputs": [
+        "combined_total_money",
+        "jean_multiplier"
+      ],
+      "solution_line_template": "The total amount of money that Jane has, represented by m, is m=${combined_total_money}/{total_parts}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "jean_money",
+      "question_inputs": [],
+      "solution_line_template": "Since Jean has {jean_multiplier} times as much money as Jane, Jean has {jean_multiplier}*${jane_money}=${jean_money}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L5": "The total amount of money that Jane has, represented by m, is m=$76/4",
+    "L7": "Since Jean has 3 times as much money as Jane, Jean has 3*$72=$216",
+    "FA": "#### 216"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": -6357467082776620286,
+  "model_name": "google_gemini-2.5-flash"
+}

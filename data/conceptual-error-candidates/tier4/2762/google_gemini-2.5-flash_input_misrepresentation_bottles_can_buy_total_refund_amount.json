@@ -1,0 +1,79 @@
+{
+  "index": 2762,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "He drinks 15 bottles every month and there are 12 months in 1 year so that's 15*12 = <<15*12=180>>180 bottles",
+    "L2": "He earns $0.10 on every bottle that he recycles so that's .10*180 = $<<.10*180=18.00>>18.00",
+    "L3": "He has $18.00 and each bottle costs $3.00 so he can buy 18/3 = <<18/3=6>>6 bottles"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2762.\n    Returns: the number of bottles of kombucha Henry can buy after receiving his cash refund.\n    \"\"\"\n    # L1\n    bottles_per_month = 15 # 15 bottles of kombucha every month\n    months_per_year = 12 # WK\n    total_bottles_per_year = bottles_per_month * months_per_year\n\n    # L2\n    refund_per_bottle = 0.10 # $0.10 per bottle\n    total_refund_amount = refund_per_bottle * total_bottles_per_year\n\n    # L3\n    cost_per_bottle = 3.00 # Each bottle costs $3.00\n    bottles_can_buy = total_refund_amount / cost_per_bottle\n\n    # FA\n    answer = bottles_can_buy\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "bottles_can_buy",
+    "operand_to_replace": "cost_per_bottle",
+    "replacement_variable": "total_refund_amount"
+  },
+  "correct_trace": {
+    "bottles_per_month": 15,
+    "months_per_year": 12,
+    "total_bottles_per_year": 180,
+    "refund_per_bottle": 0.1,
+    "total_refund_amount": 18.0,
+    "cost_per_bottle": 3.0,
+    "bottles_can_buy": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "bottles_per_month": 15,
+    "months_per_year": 12,
+    "total_bottles_per_year": 180,
+    "refund_per_bottle": 0.1,
+    "total_refund_amount": 18.0,
+    "cost_per_bottle": 3.0,
+    "bottles_can_buy": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_bottles_per_year",
+      "question_inputs": [
+        "bottles_per_month"
+      ],
+      "solution_line_template": "He drinks {bottles_per_month} bottles every month and there are {months_per_year} months in 1 year so that's {bottles_per_month}*{months_per_year} = <<{bottles_per_month}*{months_per_year}={total_bottles_per_year}>>{total_bottles_per_year} bottles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_refund_amount",
+      "question_inputs": [
+        "refund_per_bottle"
+      ],
+      "solution_line_template": "He earns ${refund_per_bottle} on every bottle that he recycles so that's {refund_per_bottle}*{total_bottles_per_year} = $<<{refund_per_bottle}*{total_bottles_per_year}={total_refund_amount}>>{total_refund_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "bottles_can_buy",
+      "question_inputs": [
+        "cost_per_bottle"
+      ],
+      "solution_line_template": "He has ${total_refund_amount} and each bottle costs ${cost_per_bottle} so he can buy {total_refund_amount}/{cost_per_bottle} = <<{total_refund_amount}/{cost_per_bottle}={bottles_can_buy}>>{bottles_can_buy} bottles"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He drinks 15 bottles every month and there are 12 months in 1 year so that's 15*12 = <<15*12=180>>180 bottles",
+    "L2": "He earns $0.1 on every bottle that he recycles so that's 0.1*180 = $<<0.1*180=18>>18",
+    "L3": "He has $18 and each bottle costs $18 so he can buy 18/18 = <<18/18=1>>1 bottles",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'total_refund_amount' (18.0) was used instead of 'cost_per_bottle' (3.0).",
+  "repro_seed": -3562761489380994829,
+  "model_name": "google_gemini-2.5-flash"
+}

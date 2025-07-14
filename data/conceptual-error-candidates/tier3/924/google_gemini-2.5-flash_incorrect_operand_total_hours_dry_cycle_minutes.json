@@ -1,0 +1,78 @@
+{
+  "index": 924,
+  "original_solution_mapping": {
+    "FA": "#### 14",
+    "L1": "Each load takes 60 + 45 = <<60+45=105>>105 minutes",
+    "L2": "There are 8 loads that take 8*105=<<8*105=840>>840 minutes",
+    "L3": "It takes 840/60=<<840/60=14>>14 hours"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 924.\n    Returns: the total time in hours to complete the laundry.\n    \"\"\"\n    # L1\n    dry_cycle_minutes = 60 # 1 hour in the dry cycle\n    wash_cycle_minutes = 45 # 45 minutes to complete in the wash cycle\n    minutes_per_load = dry_cycle_minutes + wash_cycle_minutes\n\n    # L2\n    num_loads = 8 # 8 loads of laundry\n    total_minutes = num_loads * minutes_per_load\n\n    # L3\n    minutes_in_hour = 60 # WK\n    total_hours = total_minutes / minutes_in_hour\n\n    # FA\n    answer = total_hours\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_hours",
+    "operand_to_replace": "total_minutes",
+    "replacement_variable": "dry_cycle_minutes"
+  },
+  "correct_trace": {
+    "dry_cycle_minutes": 60,
+    "wash_cycle_minutes": 45,
+    "minutes_per_load": 105,
+    "num_loads": 8,
+    "total_minutes": 840,
+    "minutes_in_hour": 60,
+    "total_hours": 14.0,
+    "answer": 14.0
+  },
+  "flawed_trace": {
+    "dry_cycle_minutes": 60,
+    "wash_cycle_minutes": 45,
+    "minutes_per_load": 105,
+    "num_loads": 8,
+    "total_minutes": 840,
+    "minutes_in_hour": 60,
+    "total_hours": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 14.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "minutes_per_load",
+      "question_inputs": [
+        "dry_cycle_minutes",
+        "wash_cycle_minutes"
+      ],
+      "solution_line_template": "Each load takes {dry_cycle_minutes} + {wash_cycle_minutes} = <<{dry_cycle_minutes}+{wash_cycle_minutes}={minutes_per_load}>>{minutes_per_load} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_minutes",
+      "question_inputs": [
+        "num_loads"
+      ],
+      "solution_line_template": "There are {num_loads} loads that take {num_loads}*{minutes_per_load}=<<{num_loads}*{minutes_per_load}={total_minutes}>>{total_minutes} minutes"
+    },
+    {
+      "WK_inputs": [
+        "minutes_in_hour"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_hours",
+      "question_inputs": [],
+      "solution_line_template": "It takes {total_minutes}/{minutes_in_hour}=<<{total_minutes}/{minutes_in_hour}={total_hours}>>{total_hours} hours"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each load takes 60 + 45 = <<60+45=105>>105 minutes",
+    "L2": "There are 8 loads that take 8*105=<<8*105=840>>840 minutes",
+    "L3": "It takes 60/60=<<60/60=1>>1 hours",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'dry_cycle_minutes' (value: 60) was used instead of 'total_minutes' (value: 840).",
+  "repro_seed": 961109235081274140,
+  "model_name": "google_gemini-2.5-flash"
+}

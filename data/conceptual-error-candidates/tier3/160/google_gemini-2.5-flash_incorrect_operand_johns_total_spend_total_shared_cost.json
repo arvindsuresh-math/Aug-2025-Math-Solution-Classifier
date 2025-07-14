@@ -1,0 +1,108 @@
+{
+  "index": 160,
+  "original_solution_mapping": {
+    "FA": "#### 295",
+    "L1": "He splits the cost 3+1=<<3+1=4>>4 ways",
+    "L2": "100 pounds of burgers at $3 per pound makes 100*3=$<<100*3=300>>300",
+    "L3": "In addition to $80 for condiments and propane the total cost was 300+80=$<<300+80=380>>380",
+    "L4": "That means each of them paid 380/4=$<<380/4=95>>95",
+    "L5": "Then adding in the cost of alcohol, John spent 200+95=$<<200+95=295>>295"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 160.\n    Returns: the total amount John spent.\n    \"\"\"\n    # L1\n    other_people_splitting_cost = 3 # splits the cost with 3 other people\n    john_himself = 1 # John is one of the people splitting the cost\n    total_people_splitting_cost = other_people_splitting_cost + john_himself\n\n    # L2\n    burger_pounds = 100 # 100 pounds of burgers\n    cost_per_pound_burger = 3 # $3 per pound\n    total_burger_cost = burger_pounds * cost_per_pound_burger\n\n    # L3\n    condiments_propane_cost = 80 # $80 of condiments and propane\n    total_shared_cost = total_burger_cost + condiments_propane_cost\n\n    # L4\n    cost_per_person = total_shared_cost / total_people_splitting_cost\n\n    # L5\n    alcohol_cost = 200 # alcohol which costs $200\n    johns_total_spend = alcohol_cost + cost_per_person\n\n    # FA\n    answer = johns_total_spend\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "johns_total_spend",
+    "operand_to_replace": "cost_per_person",
+    "replacement_variable": "total_shared_cost"
+  },
+  "correct_trace": {
+    "other_people_splitting_cost": 3,
+    "john_himself": 1,
+    "total_people_splitting_cost": 4,
+    "burger_pounds": 100,
+    "cost_per_pound_burger": 3,
+    "total_burger_cost": 300,
+    "condiments_propane_cost": 80,
+    "total_shared_cost": 380,
+    "cost_per_person": 95.0,
+    "alcohol_cost": 200,
+    "johns_total_spend": 295.0,
+    "answer": 295.0
+  },
+  "flawed_trace": {
+    "other_people_splitting_cost": 3,
+    "john_himself": 1,
+    "total_people_splitting_cost": 4,
+    "burger_pounds": 100,
+    "cost_per_pound_burger": 3,
+    "total_burger_cost": 300,
+    "condiments_propane_cost": 80,
+    "total_shared_cost": 380,
+    "cost_per_person": 95.0,
+    "alcohol_cost": 200,
+    "johns_total_spend": 580,
+    "answer": 580
+  },
+  "correct_value": 295.0,
+  "flawed_value": 580,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "john_himself"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_people_splitting_cost",
+      "question_inputs": [
+        "other_people_splitting_cost"
+      ],
+      "solution_line_template": "He splits the cost {other_people_splitting_cost}+{john_himself}=<<{other_people_splitting_cost}+{john_himself}={total_people_splitting_cost}>>{total_people_splitting_cost} ways"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_burger_cost",
+      "question_inputs": [
+        "burger_pounds",
+        "cost_per_pound_burger"
+      ],
+      "solution_line_template": "{burger_pounds} pounds of burgers at ${cost_per_pound_burger} per pound makes {burger_pounds}*{cost_per_pound_burger}=${total_burger_cost}>>{total_burger_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_shared_cost",
+      "question_inputs": [
+        "condiments_propane_cost"
+      ],
+      "solution_line_template": "In addition to ${condiments_propane_cost} for condiments and propane the total cost was {total_burger_cost}+{condiments_propane_cost}=${total_shared_cost}>>{total_shared_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "cost_per_person",
+      "question_inputs": [],
+      "solution_line_template": "That means each of them paid {total_shared_cost}/{total_people_splitting_cost}=${cost_per_person}>>{cost_per_person}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "johns_total_spend",
+      "question_inputs": [
+        "alcohol_cost"
+      ],
+      "solution_line_template": "Then adding in the cost of alcohol, John spent {alcohol_cost}+{cost_per_person}=${johns_total_spend}>>{johns_total_spend}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He splits the cost 3+1=<<3+1=4>>4 ways",
+    "L2": "100 pounds of burgers at $3 per pound makes 100*3=$300>>300",
+    "L3": "In addition to $80 for condiments and propane the total cost was 300+80=$380>>380",
+    "L4": "That means each of them paid 380/4=$95>>95",
+    "L5": "Then adding in the cost of alcohol, John spent 200+380=$580>>580",
+    "FA": "#### 580"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operand. The variable 'total_shared_cost' (value: 380) was used instead of 'cost_per_person' (value: 95.0).",
+  "repro_seed": -7956441128500450494,
+  "model_name": "google_gemini-2.5-flash"
+}

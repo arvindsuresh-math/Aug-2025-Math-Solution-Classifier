@@ -1,0 +1,100 @@
+{
+  "index": 1140,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "The team has won 40 x 70/100 = <<40*70/100=28>>28 games out of 40.",
+    "L2": "There a total of 40 + 10 = <<40+10=50>>50 games to be played.",
+    "L3": "The team has to win a total of is 50 x 60/100 = <<50*60/100=30>>30 games.",
+    "L4": "So, it still needs to win 30 - 28 = <<30-28=2>>2 more games.",
+    "L5": "Hence, they can still lose 10 - 2 = <<10-2=8>>8 games."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1140.\n    Returns: the number of games the team can lose.\n    \"\"\"\n    # L1\n    initial_games_played = 40 # played 40 games\n    win_percentage_initial = Fraction(70, 100) # won 70% of the games\n    games_won_initial = initial_games_played * win_percentage_initial\n\n    # L2\n    remaining_games = 10 # still had 10 games to play\n    total_games_overall = initial_games_played + remaining_games\n\n    # L3\n    target_win_percentage = Fraction(60, 100) # win 60% of their games\n    target_wins_total = total_games_overall * target_win_percentage\n\n    # L4\n    games_to_win_additionally = target_wins_total - games_won_initial\n\n    # L5\n    games_can_lose = remaining_games - games_to_win_additionally\n\n    # FA\n    answer = games_can_lose\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "games_can_lose",
+    "operand_to_replace": "remaining_games",
+    "replacement_variable": "total_games_overall"
+  },
+  "correct_trace": {
+    "initial_games_played": 40,
+    "win_percentage_initial": "7/10",
+    "games_won_initial": "28",
+    "remaining_games": 10,
+    "total_games_overall": 50,
+    "target_win_percentage": "3/5",
+    "target_wins_total": "30",
+    "games_to_win_additionally": "2",
+    "games_can_lose": "8",
+    "answer": "8"
+  },
+  "flawed_trace": {
+    "initial_games_played": 40,
+    "win_percentage_initial": "7/10",
+    "games_won_initial": "28",
+    "remaining_games": 10,
+    "total_games_overall": 50,
+    "target_win_percentage": "3/5",
+    "target_wins_total": "30",
+    "games_to_win_additionally": "2",
+    "games_can_lose": "48",
+    "answer": "48"
+  },
+  "correct_value": "8",
+  "flawed_value": "48",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "games_won_initial",
+      "question_inputs": [
+        "initial_games_played",
+        "win_percentage_initial"
+      ],
+      "solution_line_template": "The team has won {initial_games_played} x {win_percentage_initial} = <<{initial_games_played}*{win_percentage_initial}={games_won_initial}>>{games_won_initial} games out of {initial_games_played}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_games_overall",
+      "question_inputs": [
+        "remaining_games"
+      ],
+      "solution_line_template": "There a total of {initial_games_played} + {remaining_games} = <<{initial_games_played}+{remaining_games}={total_games_overall}>>{total_games_overall} games to be played."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "target_wins_total",
+      "question_inputs": [
+        "target_win_percentage"
+      ],
+      "solution_line_template": "The team has to win a total of is {total_games_overall} x {target_win_percentage} = <<{total_games_overall}*{target_win_percentage}={target_wins_total}>>{target_wins_total} games."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "games_to_win_additionally",
+      "question_inputs": [],
+      "solution_line_template": "So, it still needs to win {target_wins_total} - {games_won_initial} = <<{target_wins_total}-{games_won_initial}={games_to_win_additionally}>>{games_to_win_additionally} more games."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "games_can_lose",
+      "question_inputs": [],
+      "solution_line_template": "Hence, they can still lose {remaining_games} - {games_to_win_additionally} = <<{remaining_games}-{games_to_win_additionally}={games_can_lose}>>{games_can_lose} games."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The team has won 40 x 70/100 = <<40*70/100=28>>28 games out of 40.",
+    "L2": "There a total of 40 + 10 = <<40+10=50>>50 games to be played.",
+    "L3": "The team has to win a total of is 50 x 60/100 = <<50*60/100=30>>30 games.",
+    "L4": "So, it still needs to win 30 - 28 = <<30-28=2>>2 more games.",
+    "L5": "Hence, they can still lose 50 - 2 = <<50-2=48>>48 games.",
+    "FA": "#### 48"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Input misrepresentation. The value for 'total_games_overall' (50) was used instead of 'remaining_games' (10).",
+  "repro_seed": 5997773263716382384,
+  "model_name": "google_gemini-2.5-flash"
+}

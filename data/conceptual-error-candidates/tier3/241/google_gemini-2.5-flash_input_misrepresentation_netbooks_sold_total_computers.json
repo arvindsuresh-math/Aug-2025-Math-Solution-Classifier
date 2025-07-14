@@ -1,0 +1,85 @@
+{
+  "index": 241,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "There were 72/2 = <<72/2=36>>36 laptops sold.",
+    "L2": "There were 72/3 = <<72/3=24>>24 netbooks sold.",
+    "L3": "So, there were a total of 36 + 24 = <<36+24=60>>60 laptops and netbooks sold.",
+    "L4": "Thus, 72 - 60 = <<72-60=12>>12 desktop computers were sold last month."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 241.\n    Returns: the number of desktop computers sold.\n    \"\"\"\n    # L1\n    total_computers = 72 # total of 72 computers\n    laptop_divisor = 2 # half of their sales\n    laptops_sold = total_computers / laptop_divisor\n\n    # L2\n    netbook_divisor = 3 # one-third are netbooks\n    netbooks_sold = total_computers / netbook_divisor\n\n    # L3\n    total_laptops_netbooks = laptops_sold + netbooks_sold\n\n    # L4\n    desktop_computers_sold = total_computers - total_laptops_netbooks\n\n    # FA\n    answer = desktop_computers_sold\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "netbooks_sold",
+    "operand_to_replace": "netbook_divisor",
+    "replacement_variable": "total_computers"
+  },
+  "correct_trace": {
+    "total_computers": 72,
+    "laptop_divisor": 2,
+    "laptops_sold": 36.0,
+    "netbook_divisor": 3,
+    "netbooks_sold": 24.0,
+    "total_laptops_netbooks": 60.0,
+    "desktop_computers_sold": 12.0,
+    "answer": 12.0
+  },
+  "flawed_trace": {
+    "total_computers": 72,
+    "laptop_divisor": 2,
+    "laptops_sold": 36.0,
+    "netbook_divisor": 3,
+    "netbooks_sold": 1.0,
+    "total_laptops_netbooks": 37.0,
+    "desktop_computers_sold": 35.0,
+    "answer": 35.0
+  },
+  "correct_value": 24.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "laptops_sold",
+      "question_inputs": [
+        "total_computers",
+        "laptop_divisor"
+      ],
+      "solution_line_template": "There were {total_computers}/{laptop_divisor} = <<{total_computers}/{laptop_divisor}={laptops_sold}>>{laptops_sold} laptops sold."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "netbooks_sold",
+      "question_inputs": [
+        "netbook_divisor"
+      ],
+      "solution_line_template": "There were {total_computers}/{netbook_divisor} = <<{total_computers}/{netbook_divisor}={netbooks_sold}>>{netbooks_sold} netbooks sold."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_laptops_netbooks",
+      "question_inputs": [],
+      "solution_line_template": "So, there were a total of {laptops_sold} + {netbooks_sold} = <<{laptops_sold}+{netbooks_sold}={total_laptops_netbooks}>>{total_laptops_netbooks} laptops and netbooks sold."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "desktop_computers_sold",
+      "question_inputs": [],
+      "solution_line_template": "Thus, {total_computers} - {total_laptops_netbooks} = <<{total_computers}-{total_laptops_netbooks}={desktop_computers_sold}>>{desktop_computers_sold} desktop computers were sold last month."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There were 72/2 = <<72/2=36>>36 laptops sold.",
+    "L2": "There were 72/72 = <<72/72=1>>1 netbooks sold.",
+    "L3": "So, there were a total of 36 + 1 = <<36+1=37>>37 laptops and netbooks sold.",
+    "L4": "Thus, 72 - 37 = <<72-37=35>>35 desktop computers were sold last month.",
+    "FA": "#### 35"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_computers' (72) was used instead of 'netbook_divisor' (3).",
+  "repro_seed": 4931860757592264303,
+  "model_name": "google_gemini-2.5-flash"
+}

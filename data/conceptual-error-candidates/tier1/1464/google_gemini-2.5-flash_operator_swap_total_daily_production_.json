@@ -1,0 +1,74 @@
+{
+  "index": 1464,
+  "original_solution_mapping": {
+    "FA": "#### 868000",
+    "L1": "If the company was producing 7000 toilet paper per day, when it ramped up its toilet paper production three times per day, it produced 3*7000 = 21000 more per day.",
+    "L2": "The total toilet production by the company increased to 7000+21000 = <<7000+21000=28000>>28000",
+    "L3": "In March, with 31 days, the company produced a total of 28000*31 = <<28000*31=868000>>868000 toilet papers"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1464.\n    Returns: the total toilet paper production during March of 2020.\n    \"\"\"\n    # L1\n    initial_daily_production = 7000 # producing 7000 toilet paper per day\n    increase_multiplier = 3 # three times more\n    increased_amount_per_day = increase_multiplier * initial_daily_production\n\n    # L2\n    total_daily_production = initial_daily_production + increased_amount_per_day\n\n    # L3\n    days_in_march = 31 # In March, with 31 days\n    total_production_march = total_daily_production * days_in_march\n\n    # FA\n    answer = total_production_march\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_daily_production",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x1455c0dd0>"
+  },
+  "correct_trace": {
+    "initial_daily_production": 7000,
+    "increase_multiplier": 3,
+    "increased_amount_per_day": 21000,
+    "total_daily_production": 28000,
+    "days_in_march": 31,
+    "total_production_march": 868000,
+    "answer": 868000
+  },
+  "flawed_trace": {
+    "initial_daily_production": 7000,
+    "increase_multiplier": 3,
+    "increased_amount_per_day": 21000,
+    "total_daily_production": 147000000,
+    "days_in_march": 31,
+    "total_production_march": 4557000000,
+    "answer": 4557000000
+  },
+  "correct_value": 28000,
+  "flawed_value": 147000000,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "initial_daily_production",
+        "increase_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "increased_amount_per_day",
+      "solution_line_template": "If the company was producing {initial_daily_production} toilet paper per day, when it ramped up its toilet paper production {increase_multiplier} times per day, it produced {increase_multiplier}*{initial_daily_production} = {increased_amount_per_day} more per day."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_daily_production",
+      "solution_line_template": "The total toilet production by the company increased to {initial_daily_production}+{increased_amount_per_day} = <<{initial_daily_production}+{increased_amount_per_day}={total_daily_production}>>{total_daily_production}"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [
+        "days_in_march"
+      ],
+      "output_variable": "total_production_march",
+      "solution_line_template": "In March, with {days_in_march} days, the company produced a total of {total_daily_production}*{days_in_march} = <<{total_daily_production}*{days_in_march}={total_production_march}>>{total_production_march} toilet papers"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the company was producing 7000 toilet paper per day, when it ramped up its toilet paper production 3 times per day, it produced 3*7000 = 21000 more per day.",
+    "L2": "The total toilet production by the company increased to 7000+21000 = <<7000+21000=147000000>>147000000",
+    "L3": "In March, with 31 days, the company produced a total of 147000000*31 = <<147000000*31=4557000000>>4557000000 toilet papers",
+    "FA": "#### 4557000000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": -5408206120003574457,
+  "model_name": "google_gemini-2.5-flash"
+}

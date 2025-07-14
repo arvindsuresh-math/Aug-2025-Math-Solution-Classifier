@@ -1,0 +1,74 @@
+{
+  "index": 646,
+  "original_solution_mapping": {
+    "FA": "#### 310",
+    "L1": "From city A to city B, the bus carried 3/4*200 = <<3/4*200=150>>150 passengers",
+    "L2": "On the return trip, the bus carried 4/5*200 = <<4/5*200=160>>160 passengers",
+    "L3": "In total, the bus carried 160+150 = <<160+150=310>>310 passengers."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 646.\n    Returns: the total number of people the bus carried on the two trips.\n    \"\"\"\n    # L1\n    capacity = 200 # A bus has a capacity of 200 people\n    first_trip_fraction = Fraction(3, 4) # 3/4 of its capacity\n    passengers_first_trip = first_trip_fraction * capacity\n\n    # L2\n    return_trip_fraction = Fraction(4, 5) # 4/5 of its capacity\n    passengers_return_trip = return_trip_fraction * capacity\n\n    # L3\n    total_passengers = passengers_return_trip + passengers_first_trip\n\n    # FA\n    answer = total_passengers\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "passengers_return_trip",
+    "operand_to_replace": "capacity",
+    "replacement_variable": "first_trip_fraction"
+  },
+  "correct_trace": {
+    "capacity": 200,
+    "first_trip_fraction": "3/4",
+    "passengers_first_trip": "150",
+    "return_trip_fraction": "4/5",
+    "passengers_return_trip": "160",
+    "total_passengers": "310",
+    "answer": "310"
+  },
+  "flawed_trace": {
+    "capacity": 200,
+    "first_trip_fraction": "3/4",
+    "passengers_first_trip": "150",
+    "return_trip_fraction": "4/5",
+    "passengers_return_trip": "3/5",
+    "total_passengers": "753/5",
+    "answer": "753/5"
+  },
+  "correct_value": "160",
+  "flawed_value": "3/5",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "passengers_first_trip",
+      "question_inputs": [
+        "capacity",
+        "first_trip_fraction"
+      ],
+      "solution_line_template": "From city A to city B, the bus carried {first_trip_fraction}*{capacity} = <<{first_trip_fraction}*{capacity}={passengers_first_trip}>>{passengers_first_trip} passengers"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "passengers_return_trip",
+      "question_inputs": [
+        "return_trip_fraction"
+      ],
+      "solution_line_template": "On the return trip, the bus carried {return_trip_fraction}*{capacity} = <<{return_trip_fraction}*{capacity}={passengers_return_trip}>>{passengers_return_trip} passengers"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_passengers",
+      "question_inputs": [],
+      "solution_line_template": "In total, the bus carried {passengers_return_trip}+{passengers_first_trip} = <<{passengers_return_trip}+{passengers_first_trip}={total_passengers}>>{total_passengers} passengers."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "From city A to city B, the bus carried 3/4*200 = <<3/4*200=150>>150 passengers",
+    "L2": "On the return trip, the bus carried 4/5*3/4 = <<4/5*3/4=3/5>>3/5 passengers",
+    "L3": "In total, the bus carried 3/5+150 = <<3/5+150=753/5>>753/5 passengers.",
+    "FA": "#### 753/5"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'first_trip_fraction' (3/4) was used instead of 'capacity' (200).",
+  "repro_seed": 6819213246182220108,
+  "model_name": "google_gemini-2.5-flash"
+}

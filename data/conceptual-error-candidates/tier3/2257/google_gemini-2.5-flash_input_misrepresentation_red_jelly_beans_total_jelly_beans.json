@@ -1,0 +1,66 @@
+{
+  "index": 2257,
+  "original_solution_mapping": {
+    "FA": "#### 750",
+    "L1": "There are 4000/4*3=<<4000/4*3=3000>>3000 red jelly beans.",
+    "L2": "There are 3000/4=<<3000/4=750>>750 coconut flavored jelly beans."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2257.\n    Returns: the number of coconut flavored jelly beans.\n    \"\"\"\n    # L1\n    total_jelly_beans = 4000 # 4,000 jelly beans in a jar\n    red_fraction_denominator = 4 # three fourths of the jelly beans are red\n    red_fraction_numerator = 3 # three fourths of the jelly beans are red\n    red_jelly_beans = total_jelly_beans / red_fraction_denominator * red_fraction_numerator\n\n    # L2\n    coconut_fraction_denominator = 4 # one quarter of the red jelly beans are coconut flavored\n    coconut_flavored_jelly_beans = red_jelly_beans / coconut_fraction_denominator\n\n    # FA\n    answer = coconut_flavored_jelly_beans\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "red_jelly_beans",
+    "operand_to_replace": "red_fraction_numerator",
+    "replacement_variable": "total_jelly_beans"
+  },
+  "correct_trace": {
+    "total_jelly_beans": 4000,
+    "red_fraction_denominator": 4,
+    "red_fraction_numerator": 3,
+    "red_jelly_beans": 3000.0,
+    "coconut_fraction_denominator": 4,
+    "coconut_flavored_jelly_beans": 750.0,
+    "answer": 750.0
+  },
+  "flawed_trace": {
+    "total_jelly_beans": 4000,
+    "red_fraction_denominator": 4,
+    "red_fraction_numerator": 3,
+    "red_jelly_beans": 4000000.0,
+    "coconut_fraction_denominator": 4,
+    "coconut_flavored_jelly_beans": 1000000.0,
+    "answer": 1000000.0
+  },
+  "correct_value": 3000.0,
+  "flawed_value": 4000000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "red_jelly_beans",
+      "question_inputs": [
+        "total_jelly_beans",
+        "red_fraction_denominator",
+        "red_fraction_numerator"
+      ],
+      "solution_line_template": "There are {total_jelly_beans}/{red_fraction_denominator}*{red_fraction_numerator}=<<{total_jelly_beans}/{red_fraction_denominator}*{red_fraction_numerator}={red_jelly_beans}>>{red_jelly_beans} red jelly beans."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "coconut_flavored_jelly_beans",
+      "question_inputs": [
+        "coconut_fraction_denominator"
+      ],
+      "solution_line_template": "There are {red_jelly_beans}/{coconut_fraction_denominator}=<<{red_jelly_beans}/{coconut_fraction_denominator}={coconut_flavored_jelly_beans}>>{coconut_flavored_jelly_beans} coconut flavored jelly beans."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 4000/4*4000=<<4000/4*4000=4000000>>4000000 red jelly beans.",
+    "L2": "There are 4000000/4=<<4000000/4=1000000>>1000000 coconut flavored jelly beans.",
+    "FA": "#### 1000000"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'total_jelly_beans' (4000) was used instead of 'red_fraction_numerator' (3).",
+  "repro_seed": 6083875255220763360,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 1705,
+  "original_solution_mapping": {
+    "FA": "#### 42",
+    "L1": "Maria has 3 x 2 = <<3*2=6>>6 free flowers from buying 3 dozens flowers.",
+    "L2": "Since each dozen is equal to 12, then Maria bought 3 x 12 = <<3*12=36>>36 flowers.",
+    "L3": "Hence, she has a total of 36 + 6 = <<36+6=42>>42 flowers."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1705.\n    Returns: the total number of flowers Maria will have.\n    \"\"\"\n    # L1\n    num_dozens_bought = 3 # buy 3 dozens flowers\n    free_flowers_per_dozen = 2 # gets 2 free flowers\n    total_free_flowers = num_dozens_bought * free_flowers_per_dozen\n\n    # L2\n    dozen = 12 # WK\n    total_bought_flowers = num_dozens_bought * dozen\n\n    # L3\n    total_flowers = total_bought_flowers + total_free_flowers\n\n    # FA\n    answer = total_flowers\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_bought_flowers",
+    "operand_to_replace": "dozen",
+    "replacement_variable": "total_free_flowers"
+  },
+  "correct_trace": {
+    "num_dozens_bought": 3,
+    "free_flowers_per_dozen": 2,
+    "total_free_flowers": 6,
+    "dozen": 12,
+    "total_bought_flowers": 36,
+    "total_flowers": 42,
+    "answer": 42
+  },
+  "flawed_trace": {
+    "num_dozens_bought": 3,
+    "free_flowers_per_dozen": 2,
+    "total_free_flowers": 6,
+    "dozen": 12,
+    "total_bought_flowers": 18,
+    "total_flowers": 24,
+    "answer": 24
+  },
+  "correct_value": 36,
+  "flawed_value": 18,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "num_dozens_bought",
+        "free_flowers_per_dozen"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_free_flowers",
+      "solution_line_template": "Maria has {num_dozens_bought} x {free_flowers_per_dozen} = <<{num_dozens_bought}*{free_flowers_per_dozen}={total_free_flowers}>>{total_free_flowers} free flowers from buying {num_dozens_bought} dozens flowers."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [
+        "dozen"
+      ],
+      "output_variable": "total_bought_flowers",
+      "solution_line_template": "Since each dozen is equal to {dozen}, then Maria bought {num_dozens_bought} x {dozen} = <<{num_dozens_bought}*{dozen}={total_bought_flowers}>>{total_bought_flowers} flowers."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_flowers",
+      "solution_line_template": "Hence, she has a total of {total_bought_flowers} + {total_free_flowers} = <<{total_bought_flowers}+{total_free_flowers}={total_flowers}>>{total_flowers} flowers."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Maria has 3 x 2 = <<3*2=6>>6 free flowers from buying 3 dozens flowers.",
+    "L2": "Since each dozen is equal to 6, then Maria bought 3 x 6 = <<3*6=18>>18 flowers.",
+    "L3": "Hence, she has a total of 18 + 6 = <<18+6=24>>24 flowers.",
+    "FA": "#### 24"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_free_flowers' (6) was used instead of 'dozen' (12).",
+  "repro_seed": -7629586063087763862,
+  "model_name": "google_gemini-2.5-flash"
+}

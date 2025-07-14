@@ -1,0 +1,70 @@
+{
+  "index": 1973,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "She spent X dollars on Friday.",
+    "L2": "She spent 2X dollars on Saturday.",
+    "L3": "She spent 3X dollars on Sunday.",
+    "L4": "X+2X+3X=120",
+    "L5": "6X=120",
+    "L6": "X=<<20=20>>20"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1973.\n    Returns: the value of X, the amount Emily spent on Friday, in dollars.\n    \"\"\"\n    # L4\n    # X is unknown, but the sum is given\n    total_spent = 120 # she spent $120 over the three days\n    # L5\n    sum_coeff = 6 # X + 2X + 3X = 6X\n    # L6\n    X = total_spent // sum_coeff\n    # FA\n    answer = X\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "X",
+    "operand_to_replace": "total_spent",
+    "replacement_variable": "sum_coeff"
+  },
+  "correct_trace": {
+    "total_spent": 120,
+    "sum_coeff": 6,
+    "X": 20,
+    "answer": 20
+  },
+  "flawed_trace": {
+    "total_spent": 120,
+    "sum_coeff": 6,
+    "X": 1,
+    "answer": 1
+  },
+  "correct_value": 20,
+  "flawed_value": 1,
+  "logical_steps": [
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "total_spent"
+      ],
+      "WK_inputs": [],
+      "output_variable": null,
+      "solution_line_template": "X+2X+3X={total_spent}"
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": [
+        "sum_coeff"
+      ],
+      "output_variable": null,
+      "solution_line_template": "{sum_coeff}X={total_spent}"
+    },
+    {
+      "line_number": "L6",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "X",
+      "solution_line_template": "X=<<{total_spent}//{sum_coeff}={X}>>{X}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L4": "X+2X+3X=120",
+    "L5": "6X=120",
+    "L6": "X=<<6//6=1>>1",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L6",
+  "explanation": "Input misrepresentation. The value for 'sum_coeff' (6) was used instead of 'total_spent' (120).",
+  "repro_seed": 4174059890476271008,
+  "model_name": "openai_gpt-4.1"
+}

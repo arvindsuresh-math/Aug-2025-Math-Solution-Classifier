@@ -1,0 +1,85 @@
+{
+  "index": 1563,
+  "original_solution_mapping": {
+    "FA": "#### 570",
+    "L1": "If Matthews has 60 cows, Aaron has 4*60 = 240 cows.",
+    "L2": "Together, Aaron and Matthews have 240+60 = <<240+60=300>>300 cows.",
+    "L3": "Since Marovich has 30 fewer cows than the combined number of cows that Aaron and Matthews have, Marovich has 300-30 = <<300-30=270>>270 cows.",
+    "L4": "Altogether, the three have 270+300 = <<270+300=570>>570 cows"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1563.\n    Returns: the total number of cows the three (Aaron, Matthews, and Marovich) have altogether.\n    \"\"\"\n    # L1\n    matthews_cows = 60 # Matthews has 60 cows\n    aaron_multiplier = 4 # four times as many cows as does Matthews\n    aaron_cows = aaron_multiplier * matthews_cows\n\n    # L2\n    aaron_matthews_total_cows = aaron_cows + matthews_cows\n\n    # L3\n    marovich_fewer_than_combined = 30 # 30 more cows than Marovich (implies Marovich has 30 fewer)\n    marovich_cows = aaron_matthews_total_cows - marovich_fewer_than_combined\n\n    # L4\n    total_cows_three = marovich_cows + aaron_matthews_total_cows\n\n    # FA\n    answer = total_cows_three\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "marovich_cows",
+    "operand_to_replace": "marovich_fewer_than_combined",
+    "replacement_variable": "aaron_multiplier"
+  },
+  "correct_trace": {
+    "matthews_cows": 60,
+    "aaron_multiplier": 4,
+    "aaron_cows": 240,
+    "aaron_matthews_total_cows": 300,
+    "marovich_fewer_than_combined": 30,
+    "marovich_cows": 270,
+    "total_cows_three": 570,
+    "answer": 570
+  },
+  "flawed_trace": {
+    "matthews_cows": 60,
+    "aaron_multiplier": 4,
+    "aaron_cows": 240,
+    "aaron_matthews_total_cows": 300,
+    "marovich_fewer_than_combined": 30,
+    "marovich_cows": 296,
+    "total_cows_three": 596,
+    "answer": 596
+  },
+  "correct_value": 270,
+  "flawed_value": 296,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "matthews_cows",
+        "aaron_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "aaron_cows",
+      "solution_line_template": "If Matthews has {matthews_cows} cows, Aaron has {aaron_multiplier}*{matthews_cows} = {aaron_cows} cows."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "aaron_matthews_total_cows",
+      "solution_line_template": "Together, Aaron and Matthews have {aaron_cows}+{matthews_cows} = <<{aaron_cows}+{matthews_cows}={aaron_matthews_total_cows}>>{aaron_matthews_total_cows} cows."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "marovich_fewer_than_combined"
+      ],
+      "WK_inputs": [],
+      "output_variable": "marovich_cows",
+      "solution_line_template": "Since Marovich has {marovich_fewer_than_combined} fewer cows than the combined number of cows that Aaron and Matthews have, Marovich has {aaron_matthews_total_cows}-{marovich_fewer_than_combined} = <<{aaron_matthews_total_cows}-{marovich_fewer_than_combined}={marovich_cows}>>{marovich_cows} cows."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_cows_three",
+      "solution_line_template": "Altogether, the three have {marovich_cows}+{aaron_matthews_total_cows} = <<{marovich_cows}+{aaron_matthews_total_cows}={total_cows_three}>>{total_cows_three} cows"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Matthews has 60 cows, Aaron has 4*60 = 240 cows.",
+    "L2": "Together, Aaron and Matthews have 240+60 = <<240+60=300>>300 cows.",
+    "L3": "Since Marovich has 4 fewer cows than the combined number of cows that Aaron and Matthews have, Marovich has 300-4 = <<300-4=296>>296 cows.",
+    "L4": "Altogether, the three have 296+300 = <<296+300=596>>596 cows",
+    "FA": "#### 596"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'aaron_multiplier' (4) was used instead of 'marovich_fewer_than_combined' (30).",
+  "repro_seed": 2118839445298677771,
+  "model_name": "google_gemini-2.5-flash"
+}

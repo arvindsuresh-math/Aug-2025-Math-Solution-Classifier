@@ -1,0 +1,63 @@
+{
+  "index": 541,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "She spent $60 on her younger sister because 4 x 15 = <<4*15=60>>60",
+    "L2": "She buys 3 lego sets for her older sister because 60 / 20 = <<60/20=3>>3"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 541.\n    Returns: the number of lego sets Tonya buys.\n    \"\"\"\n    # L1\n    num_dolls = 4 # 4 dolls\n    cost_per_doll = 15 # $15 each\n    spent_on_younger_sister = num_dolls * cost_per_doll\n\n    # L2\n    cost_per_lego_set = 20 # They cost $20 each\n    num_lego_sets = spent_on_younger_sister / cost_per_lego_set\n\n    # FA\n    answer = num_lego_sets\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "num_lego_sets",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x146fd2290>"
+  },
+  "correct_trace": {
+    "num_dolls": 4,
+    "cost_per_doll": 15,
+    "spent_on_younger_sister": 60,
+    "cost_per_lego_set": 20,
+    "num_lego_sets": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "num_dolls": 4,
+    "cost_per_doll": 15,
+    "spent_on_younger_sister": 60,
+    "cost_per_lego_set": 20,
+    "num_lego_sets": 1200,
+    "answer": 1200
+  },
+  "correct_value": 3.0,
+  "flawed_value": 1200,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "spent_on_younger_sister",
+      "question_inputs": [
+        "num_dolls",
+        "cost_per_doll"
+      ],
+      "solution_line_template": "She spent $60 on her younger sister because {num_dolls} x {cost_per_doll} = <<{num_dolls}*{cost_per_doll}={spent_on_younger_sister}>>{spent_on_younger_sister}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_lego_sets",
+      "question_inputs": [
+        "cost_per_lego_set"
+      ],
+      "solution_line_template": "She buys {num_lego_sets} lego sets for her older sister because {spent_on_younger_sister} / {cost_per_lego_set} = <<{spent_on_younger_sister}/{cost_per_lego_set}={num_lego_sets}>>{num_lego_sets}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She spent $60 on her younger sister because 4 x 15 = <<4*15=60>>60",
+    "L2": "She buys 1200 lego sets for her older sister because 60 / 20 = <<60/20=1200>>1200",
+    "FA": "#### 1200"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -7154492153431369424,
+  "model_name": "google_gemini-2.5-flash"
+}

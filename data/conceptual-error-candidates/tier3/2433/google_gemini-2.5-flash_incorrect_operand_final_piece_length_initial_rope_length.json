@@ -1,0 +1,78 @@
+{
+  "index": 2433,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "John starts with 100ft of rope that he cuts in half, meaning he has 100/2= <<100/2=50>>50-foot sections of rope.",
+    "L2": "He then takes one of these sections and cuts it in half again, leaving him with two 50/2= <<50/2=25>>25-foot sections of rope.",
+    "L3": "He then takes one of these sections and cuts it into fifths, leaving him with 25/5= <<25/5=5>>5 foot sections of rope, one of which he is now holding."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2433.\n    Returns: the length of the final piece of rope.\n    \"\"\"\n    # L1\n    initial_rope_length = 100 # Josh has 100 feet of rope\n    first_cut_divisor = 2 # cuts the rope in half\n    first_half_length = initial_rope_length / first_cut_divisor\n\n    # L2\n    second_cut_divisor = 2 # cuts it in half again\n    second_half_length = first_half_length / second_cut_divisor\n\n    # L3\n    third_cut_divisor = 5 # cuts it into fifths\n    final_piece_length = second_half_length / third_cut_divisor\n\n    # FA\n    answer = final_piece_length\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "final_piece_length",
+    "operand_to_replace": "second_half_length",
+    "replacement_variable": "initial_rope_length"
+  },
+  "correct_trace": {
+    "initial_rope_length": 100,
+    "first_cut_divisor": 2,
+    "first_half_length": 50.0,
+    "second_cut_divisor": 2,
+    "second_half_length": 25.0,
+    "third_cut_divisor": 5,
+    "final_piece_length": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "initial_rope_length": 100,
+    "first_cut_divisor": 2,
+    "first_half_length": 50.0,
+    "second_cut_divisor": 2,
+    "second_half_length": 25.0,
+    "third_cut_divisor": 5,
+    "final_piece_length": 20.0,
+    "answer": 20.0
+  },
+  "correct_value": 5.0,
+  "flawed_value": 20.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "first_half_length",
+      "question_inputs": [
+        "initial_rope_length",
+        "first_cut_divisor"
+      ],
+      "solution_line_template": "John starts with {initial_rope_length}ft of rope that he cuts in half, meaning he has {initial_rope_length}/{first_cut_divisor}= <<{initial_rope_length}/{first_cut_divisor}={first_half_length}>>{first_half_length}-foot sections of rope."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "second_half_length",
+      "question_inputs": [
+        "second_cut_divisor"
+      ],
+      "solution_line_template": "He then takes one of these sections and cuts it in half again, leaving him with two {first_half_length}/{second_cut_divisor}= <<{first_half_length}/{second_cut_divisor}={second_half_length}>>{second_half_length}-foot sections of rope."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_piece_length",
+      "question_inputs": [
+        "third_cut_divisor"
+      ],
+      "solution_line_template": "He then takes one of these sections and cuts it into fifths, leaving him with {second_half_length}/{third_cut_divisor}= <<{second_half_length}/{third_cut_divisor}={final_piece_length}>>{final_piece_length} foot sections of rope, one of which he is now holding."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "John starts with 100ft of rope that he cuts in half, meaning he has 100/2= <<100/2=50>>50-foot sections of rope.",
+    "L2": "He then takes one of these sections and cuts it in half again, leaving him with two 50/2= <<50/2=25>>25-foot sections of rope.",
+    "L3": "He then takes one of these sections and cuts it into fifths, leaving him with 100/5= <<100/5=20>>20 foot sections of rope, one of which he is now holding.",
+    "FA": "#### 20"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'initial_rope_length' (value: 100) was used instead of 'second_half_length' (value: 25.0).",
+  "repro_seed": -2885086016382306813,
+  "model_name": "google_gemini-2.5-flash"
+}

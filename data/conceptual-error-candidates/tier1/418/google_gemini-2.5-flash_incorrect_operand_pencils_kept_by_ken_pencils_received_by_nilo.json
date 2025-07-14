@@ -1,0 +1,74 @@
+{
+  "index": 418,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "Nilo received 10 + 10 = <<10+10=20>>20.",
+    "L2": "Thus, Ken gave a total of 10 + 20 = <<10+20=30>>30.",
+    "L3": "Therefore, Ken kept 50 - 30 = <<50-30=20>>20 pencils."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 418.\n    Returns: the number of pencils Ken kept.\n    \"\"\"\n    # L1\n    pencils_given_to_manny = 10 # Ken gave ten pencils to Manny\n    more_pencils_to_nilo = 10 # ten more pencils to Nilo than he gave to Manny\n    pencils_received_by_nilo = pencils_given_to_manny + more_pencils_to_nilo\n\n    # L2\n    total_given_away = pencils_given_to_manny + pencils_received_by_nilo\n\n    # L3\n    initial_pencils = 50 # Ken had fifty pencils\n    pencils_kept_by_ken = initial_pencils - total_given_away\n\n    # FA\n    answer = pencils_kept_by_ken\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "pencils_kept_by_ken",
+    "operand_to_replace": "total_given_away",
+    "replacement_variable": "pencils_received_by_nilo"
+  },
+  "correct_trace": {
+    "pencils_given_to_manny": 10,
+    "more_pencils_to_nilo": 10,
+    "pencils_received_by_nilo": 20,
+    "total_given_away": 30,
+    "initial_pencils": 50,
+    "pencils_kept_by_ken": 20,
+    "answer": 20
+  },
+  "flawed_trace": {
+    "pencils_given_to_manny": 10,
+    "more_pencils_to_nilo": 10,
+    "pencils_received_by_nilo": 20,
+    "total_given_away": 30,
+    "initial_pencils": 50,
+    "pencils_kept_by_ken": 30,
+    "answer": 30
+  },
+  "correct_value": 20,
+  "flawed_value": 30,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "pencils_given_to_manny",
+        "more_pencils_to_nilo"
+      ],
+      "WK_inputs": [],
+      "output_variable": "pencils_received_by_nilo",
+      "solution_line_template": "Nilo received {pencils_given_to_manny} + {more_pencils_to_nilo} = <<{pencils_given_to_manny}+{more_pencils_to_nilo}={pencils_received_by_nilo}>>{pencils_received_by_nilo}."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_given_away",
+      "solution_line_template": "Thus, Ken gave a total of {pencils_given_to_manny} + {pencils_received_by_nilo} = <<{pencils_given_to_manny}+{pencils_received_by_nilo}={total_given_away}>>{total_given_away}."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "initial_pencils"
+      ],
+      "WK_inputs": [],
+      "output_variable": "pencils_kept_by_ken",
+      "solution_line_template": "Therefore, Ken kept {initial_pencils} - {total_given_away} = <<{initial_pencils}-{total_given_away}={pencils_kept_by_ken}>>{pencils_kept_by_ken} pencils."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Nilo received 10 + 10 = <<10+10=20>>20.",
+    "L2": "Thus, Ken gave a total of 10 + 20 = <<10+20=30>>30.",
+    "L3": "Therefore, Ken kept 50 - 20 = <<50-20=30>>30 pencils.",
+    "FA": "#### 30"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'pencils_received_by_nilo' (value: 20) was used instead of 'total_given_away' (value: 30).",
+  "repro_seed": -2969859284224238674,
+  "model_name": "google_gemini-2.5-flash"
+}

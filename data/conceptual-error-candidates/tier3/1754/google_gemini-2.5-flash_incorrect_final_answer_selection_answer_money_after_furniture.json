@@ -1,0 +1,72 @@
+{
+  "index": 1754,
+  "original_solution_mapping": {
+    "FA": "#### 400",
+    "L1": "Emma had $2000 - $400 = $<<2000-400=1600>>1600 left after buying furniture",
+    "L2": "Emma gave Anna 3/4 * $1600 = $<<3/4*1600=1200>>1200",
+    "L3": "So, Emma is left with $1600 - $1200 = $<<1600-1200=400>>400"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1754.\n    Returns: the amount of money left with Emma.\n    \"\"\"\n    # L1\n    initial_money = 2000 # Emma got $2000 from the bank\n    furniture_cost = 400 # She bought $400 of furniture\n    money_after_furniture = initial_money - furniture_cost\n\n    # L2\n    fraction_given_to_anna = Fraction(3, 4) # gave 3/4 of the rest to her friend Anna\n    money_given_to_anna = fraction_given_to_anna * money_after_furniture\n\n    # L3\n    money_left_with_emma = money_after_furniture - money_given_to_anna\n\n    # FA\n    answer = money_left_with_emma\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "money_left_with_emma",
+    "replacement_variable": "money_after_furniture"
+  },
+  "correct_trace": {
+    "initial_money": 2000,
+    "furniture_cost": 400,
+    "money_after_furniture": 1600,
+    "fraction_given_to_anna": "3/4",
+    "money_given_to_anna": "1200",
+    "money_left_with_emma": "400",
+    "answer": "400"
+  },
+  "flawed_trace": {
+    "initial_money": 2000,
+    "furniture_cost": 400,
+    "money_after_furniture": 1600,
+    "fraction_given_to_anna": "3/4",
+    "money_given_to_anna": "1200",
+    "money_left_with_emma": "400",
+    "answer": 1600
+  },
+  "correct_value": "400",
+  "flawed_value": 1600,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_after_furniture",
+      "question_inputs": [
+        "initial_money",
+        "furniture_cost"
+      ],
+      "solution_line_template": "Emma had ${initial_money} - ${furniture_cost} = $<<{initial_money}-{furniture_cost}={money_after_furniture}>>{money_after_furniture} left after buying furniture"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_given_to_anna",
+      "question_inputs": [
+        "fraction_given_to_anna"
+      ],
+      "solution_line_template": "Emma gave Anna {fraction_given_to_anna} * ${money_after_furniture} = $<<{fraction_given_to_anna}*{money_after_furniture}={money_given_to_anna}>>{money_given_to_anna}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "money_left_with_emma",
+      "question_inputs": [],
+      "solution_line_template": "So, Emma is left with ${money_after_furniture} - ${money_given_to_anna} = $<<{money_after_furniture}-{money_given_to_anna}={money_left_with_emma}>>{money_left_with_emma}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Emma had $2000 - $400 = $<<2000-400=1600>>1600 left after buying furniture",
+    "FA": "#### 1600"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'money_after_furniture' (value: 1600) was reported instead of 'money_left_with_emma' (value: 400).",
+  "repro_seed": -2211149632544969220,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 2066,
+  "original_solution_mapping": {
+    "FA": "#### 24",
+    "L1": "Customer donated a total of $120 because 40 x 3 = <<40*3=120>>120",
+    "L2": "They got $10 a total of 12 times because 120 / 10 = <<120/10=12>>12",
+    "L3": "They donated $24 because 12 x 2 = <<12*2=24>>24"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2066.\n    Returns: the total amount the restaurant donates.\n    \"\"\"\n    # L1\n    customers_that_day = 40 # 40 customers that day\n    average_customer_donation = 3 # average customer donates 3\n    total_customer_donation = customers_that_day * average_customer_donation\n\n    # L2\n    donation_unit = 10 # $10 donated by customers\n    num_donation_units = total_customer_donation / donation_unit\n\n    # L3\n    restaurant_donation_per_unit = 2 # $2 for every $10 donated\n    restaurant_total_donation = num_donation_units * restaurant_donation_per_unit\n\n    # FA\n    answer = restaurant_total_donation\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "restaurant_total_donation",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x150065e10>"
+  },
+  "correct_trace": {
+    "customers_that_day": 40,
+    "average_customer_donation": 3,
+    "total_customer_donation": 120,
+    "donation_unit": 10,
+    "num_donation_units": 12.0,
+    "restaurant_donation_per_unit": 2,
+    "restaurant_total_donation": 24.0,
+    "answer": 24.0
+  },
+  "flawed_trace": {
+    "customers_that_day": 40,
+    "average_customer_donation": 3,
+    "total_customer_donation": 120,
+    "donation_unit": 10,
+    "num_donation_units": 12.0,
+    "restaurant_donation_per_unit": 2,
+    "restaurant_total_donation": 14.0,
+    "answer": 14.0
+  },
+  "correct_value": 24.0,
+  "flawed_value": 14.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_customer_donation",
+      "question_inputs": [
+        "customers_that_day",
+        "average_customer_donation"
+      ],
+      "solution_line_template": "Customer donated a total of ${total_customer_donation} because {customers_that_day} x {average_customer_donation} = <<{customers_that_day}*{average_customer_donation}={total_customer_donation}>>{total_customer_donation}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_donation_units",
+      "question_inputs": [
+        "donation_unit"
+      ],
+      "solution_line_template": "They got ${donation_unit} a total of {num_donation_units} times because {total_customer_donation} / {donation_unit} = <<{total_customer_donation}/{donation_unit}={num_donation_units}>>{num_donation_units}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "restaurant_total_donation",
+      "question_inputs": [
+        "restaurant_donation_per_unit"
+      ],
+      "solution_line_template": "They donated ${restaurant_total_donation} because {num_donation_units} x {restaurant_donation_per_unit} = <<{num_donation_units}*{restaurant_donation_per_unit}={restaurant_total_donation}>>{restaurant_total_donation}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Customer donated a total of $120 because 40 x 3 = <<40*3=120>>120",
+    "L2": "They got $10 a total of 12 times because 120 / 10 = <<120/10=12>>12",
+    "L3": "They donated $14 because 12 x 2 = <<12*2=14>>14",
+    "FA": "#### 14"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 4346374691600215765,
+  "model_name": "google_gemini-2.5-flash"
+}

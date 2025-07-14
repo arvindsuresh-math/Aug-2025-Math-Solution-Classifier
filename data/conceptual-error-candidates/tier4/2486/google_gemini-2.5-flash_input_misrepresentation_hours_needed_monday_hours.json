@@ -1,0 +1,100 @@
+{
+  "index": 2486,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "On Monday, Joanna reads 3*16=<<3*16=48>>48 pages.",
+    "L2": "On Tuesday, Joanna reads 6.5 * 16 =<<6.5*16=104>>104 pages.",
+    "L3": "So far, she has read 48 +104 =<<48+104=152>>152 pages.",
+    "L4": "Thus, she has 248-152 = <<248-152=96>>96 pages left.",
+    "L5": "She will need to read for 96/16 = <<96/16=6>>6 hours to finish the book."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2486.\n    Returns: the number of additional hours Joanna needs to read to finish the book.\n    \"\"\"\n    # L1\n    monday_hours = 3 # reads for 3 hours\n    pages_per_hour = 16 # can read 16 pages per hour\n    monday_pages_read = monday_hours * pages_per_hour\n\n    # L2\n    tuesday_hours = 6.5 # reads for 6.5 hours\n    tuesday_pages_read = tuesday_hours * pages_per_hour\n\n    # L3\n    total_pages_read_so_far = monday_pages_read + tuesday_pages_read\n\n    # L4\n    total_pages_in_book = 248 # 248 pages in a book\n    pages_left = total_pages_in_book - total_pages_read_so_far\n\n    # L5\n    hours_needed = pages_left / pages_per_hour\n\n    # FA\n    answer = hours_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "hours_needed",
+    "operand_to_replace": "pages_per_hour",
+    "replacement_variable": "monday_hours"
+  },
+  "correct_trace": {
+    "monday_hours": 3,
+    "pages_per_hour": 16,
+    "monday_pages_read": 48,
+    "tuesday_hours": 6.5,
+    "tuesday_pages_read": 104.0,
+    "total_pages_read_so_far": 152.0,
+    "total_pages_in_book": 248,
+    "pages_left": 96.0,
+    "hours_needed": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "monday_hours": 3,
+    "pages_per_hour": 16,
+    "monday_pages_read": 48,
+    "tuesday_hours": 6.5,
+    "tuesday_pages_read": 104.0,
+    "total_pages_read_so_far": 152.0,
+    "total_pages_in_book": 248,
+    "pages_left": 96.0,
+    "hours_needed": 32.0,
+    "answer": 32.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 32.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "monday_pages_read",
+      "question_inputs": [
+        "monday_hours",
+        "pages_per_hour"
+      ],
+      "solution_line_template": "On Monday, Joanna reads {monday_hours}*{pages_per_hour}=<<{monday_hours}*{pages_per_hour}={monday_pages_read}>>{monday_pages_read} pages."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "tuesday_pages_read",
+      "question_inputs": [
+        "tuesday_hours"
+      ],
+      "solution_line_template": "On Tuesday, Joanna reads {tuesday_hours} * {pages_per_hour} =<<{tuesday_hours}*{pages_per_hour}={tuesday_pages_read}>>{tuesday_pages_read} pages."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_pages_read_so_far",
+      "question_inputs": [],
+      "solution_line_template": "So far, she has read {monday_pages_read} +{tuesday_pages_read} =<<{monday_pages_read}+{tuesday_pages_read}={total_pages_read_so_far}>>{total_pages_read_so_far} pages."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "pages_left",
+      "question_inputs": [
+        "total_pages_in_book"
+      ],
+      "solution_line_template": "Thus, she has {total_pages_in_book}-{total_pages_read_so_far} = <<{total_pages_in_book}-{total_pages_read_so_far}={pages_left}>>{pages_left} pages left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "hours_needed",
+      "question_inputs": [],
+      "solution_line_template": "She will need to read for {pages_left}/{pages_per_hour} = <<{pages_left}/{pages_per_hour}={hours_needed}>>{hours_needed} hours to finish the book."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Monday, Joanna reads 3*16=<<3*16=48>>48 pages.",
+    "L2": "On Tuesday, Joanna reads 6.5 * 16 =<<6.5*16=104>>104 pages.",
+    "L3": "So far, she has read 48 +104 =<<48+104=152>>152 pages.",
+    "L4": "Thus, she has 248-152 = <<248-152=96>>96 pages left.",
+    "L5": "She will need to read for 96/3 = <<96/3=32>>32 hours to finish the book.",
+    "FA": "#### 32"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Input misrepresentation. The value for 'monday_hours' (3) was used instead of 'pages_per_hour' (16).",
+  "repro_seed": 5531027612063770170,
+  "model_name": "google_gemini-2.5-flash"
+}

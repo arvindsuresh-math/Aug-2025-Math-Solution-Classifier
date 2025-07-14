@@ -1,0 +1,76 @@
+{
+  "index": 630,
+  "original_solution_mapping": {
+    "FA": "#### 27",
+    "L1": "If the ratio of red candles to blue candles Avianna bought was 5:3, then the total ratio was 5+3 = 8.",
+    "L2": "If 5 represented 45 candles in the total ratio, then 8, the actual ratio, represents 8*45 = 360 divided by 5 is 360/5 = 72 candles.",
+    "L3": "If the total number of candles was 72, then the number of blue candles is 72 candles - 45 candles = <<72-45=27>>27 candles"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 630.\n    Returns: the number of blue candles Avianna had.\n    \"\"\"\n    # L1\n    red_ratio_part = 5 # red candles and blue candles in the ratio of 5:3\n    blue_ratio_part = 3 # red candles and blue candles in the ratio of 5:3\n    total_ratio_parts = red_ratio_part + blue_ratio_part\n\n    # L2\n    red_candles = 45 # 45 red candles\n    intermediate_product = total_ratio_parts * red_candles\n    total_candles = intermediate_product / red_ratio_part\n\n    # L3\n    blue_candles = total_candles - red_candles\n\n    # FA\n    answer = blue_candles\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_ratio_parts",
+    "operand_to_replace": "blue_ratio_part",
+    "replacement_variable": "red_ratio_part"
+  },
+  "correct_trace": {
+    "red_ratio_part": 5,
+    "blue_ratio_part": 3,
+    "total_ratio_parts": 8,
+    "red_candles": 45,
+    "intermediate_product": 360,
+    "total_candles": 72.0,
+    "blue_candles": 27.0,
+    "answer": 27.0
+  },
+  "flawed_trace": {
+    "red_ratio_part": 5,
+    "blue_ratio_part": 3,
+    "total_ratio_parts": 10,
+    "red_candles": 45,
+    "intermediate_product": 450,
+    "total_candles": 90.0,
+    "blue_candles": 45.0,
+    "answer": 45.0
+  },
+  "correct_value": 8,
+  "flawed_value": 10,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_ratio_parts",
+      "question_inputs": [
+        "red_ratio_part",
+        "blue_ratio_part"
+      ],
+      "solution_line_template": "If the ratio of red candles to blue candles Avianna bought was {red_ratio_part}:{blue_ratio_part}, then the total ratio was {red_ratio_part}+{blue_ratio_part} = {total_ratio_parts}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_candles",
+      "question_inputs": [
+        "red_candles"
+      ],
+      "solution_line_template": "If {red_ratio_part} represented {red_candles} candles in the total ratio, then {total_ratio_parts}, the actual ratio, represents {total_ratio_parts}*{red_candles} = {intermediate_product} divided by {red_ratio_part} is {intermediate_product}/{red_ratio_part} = {total_candles} candles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "blue_candles",
+      "question_inputs": [],
+      "solution_line_template": "If the total number of candles was {total_candles}, then the number of blue candles is {total_candles} candles - {red_candles} candles = <<{total_candles}-{red_candles}={blue_candles}>>{blue_candles} candles"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the ratio of red candles to blue candles Avianna bought was 5:5, then the total ratio was 5+5 = 10.",
+    "L2": "If 5 represented 45 candles in the total ratio, then 10, the actual ratio, represents 10*45 = 450 divided by 5 is 450/5 = 90 candles.",
+    "L3": "If the total number of candles was 90, then the number of blue candles is 90 candles - 45 candles = <<90-45=45>>45 candles",
+    "FA": "#### 45"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'red_ratio_part' (5) was used instead of 'blue_ratio_part' (3).",
+  "repro_seed": 2400684302189628215,
+  "model_name": "google_gemini-2.5-flash"
+}

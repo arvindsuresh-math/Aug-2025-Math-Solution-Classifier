@@ -1,0 +1,78 @@
+{
+  "index": 2424,
+  "original_solution_mapping": {
+    "FA": "#### 7",
+    "L1": "Jen scored 20 + 10 = <<20+10=30>>30 on the exam.",
+    "L2": "Sammy scored two less, so his score was30 - 2 = <<30-2=28>>28.",
+    "L3": "Thus, Sammy made 35 - 28 = <<35-28=7>>7 mistakes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2424.\n    Returns: the number of mistakes Sammy made.\n    \"\"\"\n    # L1\n    bryan_score = 20 # Bryan's score on a math exam is 20\n    jen_more_than_bryan = 10 # Jen scored 10 more than Bryan\n    jen_score = bryan_score + jen_more_than_bryan\n\n    # L2\n    sammy_fewer_than_jen = 2 # Sammy scored 2 fewer than Jen\n    sammy_score = jen_score - sammy_fewer_than_jen\n\n    # L3\n    total_exam_points = 35 # the math exam has 35 points in all\n    sammy_mistakes = total_exam_points - sammy_score\n\n    # FA\n    answer = sammy_mistakes\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "sammy_mistakes",
+    "operand_to_replace": "total_exam_points",
+    "replacement_variable": "jen_score"
+  },
+  "correct_trace": {
+    "bryan_score": 20,
+    "jen_more_than_bryan": 10,
+    "jen_score": 30,
+    "sammy_fewer_than_jen": 2,
+    "sammy_score": 28,
+    "total_exam_points": 35,
+    "sammy_mistakes": 7,
+    "answer": 7
+  },
+  "flawed_trace": {
+    "bryan_score": 20,
+    "jen_more_than_bryan": 10,
+    "jen_score": 30,
+    "sammy_fewer_than_jen": 2,
+    "sammy_score": 28,
+    "total_exam_points": 35,
+    "sammy_mistakes": 2,
+    "answer": 2
+  },
+  "correct_value": 7,
+  "flawed_value": 2,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "bryan_score",
+        "jen_more_than_bryan"
+      ],
+      "WK_inputs": [],
+      "output_variable": "jen_score",
+      "solution_line_template": "Jen scored {bryan_score} + {jen_more_than_bryan} = <<{bryan_score}+{jen_more_than_bryan}={jen_score}>>{jen_score} on the exam."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "sammy_fewer_than_jen"
+      ],
+      "WK_inputs": [],
+      "output_variable": "sammy_score",
+      "solution_line_template": "Sammy scored two less, so his score was{jen_score} - {sammy_fewer_than_jen} = <<{jen_score}-{sammy_fewer_than_jen}={sammy_score}>>{sammy_score}."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "total_exam_points"
+      ],
+      "WK_inputs": [],
+      "output_variable": "sammy_mistakes",
+      "solution_line_template": "Thus, Sammy made {total_exam_points} - {sammy_score} = <<{total_exam_points}-{sammy_score}={sammy_mistakes}>>{sammy_mistakes} mistakes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jen scored 20 + 10 = <<20+10=30>>30 on the exam.",
+    "L2": "Sammy scored two less, so his score was30 - 2 = <<30-2=28>>28.",
+    "L3": "Thus, Sammy made 30 - 28 = <<30-28=2>>2 mistakes.",
+    "FA": "#### 2"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'jen_score' (30) was used instead of 'total_exam_points' (35).",
+  "repro_seed": -690509403587211943,
+  "model_name": "google_gemini-2.5-flash"
+}

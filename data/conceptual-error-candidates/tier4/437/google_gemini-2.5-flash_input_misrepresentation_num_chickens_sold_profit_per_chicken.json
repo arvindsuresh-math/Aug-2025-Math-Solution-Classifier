@@ -1,0 +1,93 @@
+{
+  "index": 437,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "A bag of feed is enough for 10 chickens because 20 / 2 = <<20/2=10>>10",
+    "L2": "Each chicken costs $.2 to raise because 2 / 10 = <<2/10=.2>>.2",
+    "L3": "Each chicken results in $1.3 of profit because 1.5 - .2 = <<1.5-.2=1.3>>1.3",
+    "L4": "He sells 50 chickens because 65 / 1.3 = <<65/1.3=50>>50"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 437.\n    Returns: the number of chickens Lao sold.\n    \"\"\"\n    # L1\n    bag_feed_weight = 20 # weighs 20 pounds\n    feed_per_chicken = 2 # Each chicken will need 2 pounds of feed\n    chickens_per_bag = bag_feed_weight / feed_per_chicken\n\n    # L2\n    bag_cost = 2 # costs $2\n    cost_per_chicken = bag_cost / chickens_per_bag\n\n    # L3\n    sell_price_per_chicken = 1.50 # sell each chicken for $1.50\n    profit_per_chicken = sell_price_per_chicken - cost_per_chicken\n\n    # L4\n    total_profit = 65 # makes $65 profit\n    num_chickens_sold = total_profit / profit_per_chicken\n\n    # FA\n    answer = num_chickens_sold\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "num_chickens_sold",
+    "operand_to_replace": "total_profit",
+    "replacement_variable": "profit_per_chicken"
+  },
+  "correct_trace": {
+    "bag_feed_weight": 20,
+    "feed_per_chicken": 2,
+    "chickens_per_bag": 10.0,
+    "bag_cost": 2,
+    "cost_per_chicken": 0.2,
+    "sell_price_per_chicken": 1.5,
+    "profit_per_chicken": 1.3,
+    "total_profit": 65,
+    "num_chickens_sold": 50.0,
+    "answer": 50.0
+  },
+  "flawed_trace": {
+    "bag_feed_weight": 20,
+    "feed_per_chicken": 2,
+    "chickens_per_bag": 10.0,
+    "bag_cost": 2,
+    "cost_per_chicken": 0.2,
+    "sell_price_per_chicken": 1.5,
+    "profit_per_chicken": 1.3,
+    "total_profit": 65,
+    "num_chickens_sold": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 50.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "chickens_per_bag",
+      "question_inputs": [
+        "bag_feed_weight",
+        "feed_per_chicken"
+      ],
+      "solution_line_template": "A bag of feed is enough for {chickens_per_bag} chickens because {bag_feed_weight} / {feed_per_chicken} = <<{bag_feed_weight}/{feed_per_chicken}={chickens_per_bag}>>{chickens_per_bag}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cost_per_chicken",
+      "question_inputs": [
+        "bag_cost"
+      ],
+      "solution_line_template": "Each chicken costs $.2 to raise because {bag_cost} / {chickens_per_bag} = <<{bag_cost}/{chickens_per_bag}={cost_per_chicken}>>{cost_per_chicken}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "profit_per_chicken",
+      "question_inputs": [
+        "sell_price_per_chicken"
+      ],
+      "solution_line_template": "Each chicken results in $1.3 of profit because {sell_price_per_chicken} - {cost_per_chicken} = <<{sell_price_per_chicken}-{cost_per_chicken}={profit_per_chicken}>>{profit_per_chicken}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "num_chickens_sold",
+      "question_inputs": [
+        "total_profit"
+      ],
+      "solution_line_template": "He sells {num_chickens_sold} chickens because {total_profit} / {profit_per_chicken} = <<{total_profit}/{profit_per_chicken}={num_chickens_sold}>>{num_chickens_sold}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "A bag of feed is enough for 10 chickens because 20 / 2 = <<20/2=10>>10",
+    "L2": "Each chicken costs $.2 to raise because 2 / 10 = <<2/10=0.2>>0.2",
+    "L3": "Each chicken results in $1.3 of profit because 1.5 - 0.2 = <<1.5-0.2=1.3>>1.3",
+    "L4": "He sells 1 chickens because 1.3 / 1.3 = <<1.3/1.3=1>>1",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'profit_per_chicken' (1.3) was used instead of 'total_profit' (65).",
+  "repro_seed": 656567546778279909,
+  "model_name": "google_gemini-2.5-flash"
+}

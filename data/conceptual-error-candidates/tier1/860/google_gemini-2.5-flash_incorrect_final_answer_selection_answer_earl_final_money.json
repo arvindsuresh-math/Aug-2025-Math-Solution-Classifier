@@ -1,0 +1,129 @@
+{
+  "index": 860,
+  "original_solution_mapping": {
+    "FA": "#### 130",
+    "L1": "Earl will have $90 - $28 = $<<90-28=62>>62 after paying off his debt to Fred.",
+    "L2": "Fred will have $48 + $28 = $<<48+28=76>>76 after being paid by Earl.",
+    "L3": "But then Fred will have $76 - $32 = $<<76-32=44>>44 after paying Greg.",
+    "L4": "Greg will have $36 + $32 = $<<36+32=68>>68 after Fred paid him.",
+    "L5": "Then, Greg will have $68 - $40 = $<<68-40=28>>28 after paying off his debt to Earl.",
+    "L6": "Then, Earl will then have $62 + $40 = $<<62+40=102>>102.",
+    "L7": "So together, Greg and Earl will have $28 + $102 = $<<28+102=130>>130."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 860.\n    Returns: the total amount Greg and Earl will have together in dollars.\n    \"\"\"\n    # L1\n    earl_initial_money = 90 # Earl has $90\n    earl_owes_fred = 28 # Earl owes Fred $28\n    earl_after_paying_fred = earl_initial_money - earl_owes_fred\n\n    # L2\n    fred_initial_money = 48 # Fred has $48\n    fred_after_earl_pays = fred_initial_money + earl_owes_fred\n\n    # L3\n    fred_owes_greg = 32 # Fred owes Greg $32\n    fred_after_paying_greg = fred_after_earl_pays - fred_owes_greg\n\n    # L4\n    greg_initial_money = 36 # Greg has $36\n    greg_after_fred_pays = greg_initial_money + fred_owes_greg\n\n    # L5\n    greg_owes_earl = 40 # Greg owes Earl $40\n    greg_after_paying_earl = greg_after_fred_pays - greg_owes_earl\n\n    # L6\n    earl_final_money = earl_after_paying_fred + greg_owes_earl\n\n    # L7\n    total_greg_earl = greg_after_paying_earl + earl_final_money\n\n    # FA\n    answer = total_greg_earl\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_greg_earl",
+    "replacement_variable": "earl_final_money"
+  },
+  "correct_trace": {
+    "earl_initial_money": 90,
+    "earl_owes_fred": 28,
+    "earl_after_paying_fred": 62,
+    "fred_initial_money": 48,
+    "fred_after_earl_pays": 76,
+    "fred_owes_greg": 32,
+    "fred_after_paying_greg": 44,
+    "greg_initial_money": 36,
+    "greg_after_fred_pays": 68,
+    "greg_owes_earl": 40,
+    "greg_after_paying_earl": 28,
+    "earl_final_money": 102,
+    "total_greg_earl": 130,
+    "answer": 130
+  },
+  "flawed_trace": {
+    "earl_initial_money": 90,
+    "earl_owes_fred": 28,
+    "earl_after_paying_fred": 62,
+    "fred_initial_money": 48,
+    "fred_after_earl_pays": 76,
+    "fred_owes_greg": 32,
+    "fred_after_paying_greg": 44,
+    "greg_initial_money": 36,
+    "greg_after_fred_pays": 68,
+    "greg_owes_earl": 40,
+    "greg_after_paying_earl": 28,
+    "earl_final_money": 102,
+    "total_greg_earl": 130,
+    "answer": 102
+  },
+  "correct_value": 130,
+  "flawed_value": 102,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "earl_initial_money",
+        "earl_owes_fred"
+      ],
+      "WK_inputs": [],
+      "output_variable": "earl_after_paying_fred",
+      "solution_line_template": "Earl will have ${earl_initial_money} - ${earl_owes_fred} = $<<{earl_initial_money}-{earl_owes_fred}={earl_after_paying_fred}>>{earl_after_paying_fred} after paying off his debt to Fred."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "fred_initial_money"
+      ],
+      "WK_inputs": [],
+      "output_variable": "fred_after_earl_pays",
+      "solution_line_template": "Fred will have ${fred_initial_money} + ${earl_owes_fred} = $<<{fred_initial_money}+{earl_owes_fred}={fred_after_earl_pays}>>{fred_after_earl_pays} after being paid by Earl."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "fred_owes_greg"
+      ],
+      "WK_inputs": [],
+      "output_variable": "fred_after_paying_greg",
+      "solution_line_template": "But then Fred will have ${fred_after_earl_pays} - ${fred_owes_greg} = $<<{fred_after_earl_pays}-{fred_owes_greg}={fred_after_paying_greg}>>{fred_after_paying_greg} after paying Greg."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "greg_initial_money"
+      ],
+      "WK_inputs": [],
+      "output_variable": "greg_after_fred_pays",
+      "solution_line_template": "Greg will have ${greg_initial_money} + ${fred_owes_greg} = $<<{greg_initial_money}+{fred_owes_greg}={greg_after_fred_pays}>>{greg_after_fred_pays} after Fred paid him."
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [
+        "greg_owes_earl"
+      ],
+      "WK_inputs": [],
+      "output_variable": "greg_after_paying_earl",
+      "solution_line_template": "Then, Greg will have ${greg_after_fred_pays} - ${greg_owes_earl} = $<<{greg_after_fred_pays}-{greg_owes_earl}={greg_after_paying_earl}>>{greg_after_paying_earl} after paying off his debt to Earl."
+    },
+    {
+      "line_number": "L6",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "earl_final_money",
+      "solution_line_template": "Then, Earl will then have ${earl_after_paying_fred} + ${greg_owes_earl} = $<<{earl_after_paying_fred}+{greg_owes_earl}={earl_final_money}>>{earl_final_money}."
+    },
+    {
+      "line_number": "L7",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_greg_earl",
+      "solution_line_template": "So together, Greg and Earl will have ${greg_after_paying_earl} + ${earl_final_money} = $<<{greg_after_paying_earl}+{earl_final_money}={total_greg_earl}>>{total_greg_earl}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Earl will have $90 - $28 = $<<90-28=62>>62 after paying off his debt to Fred.",
+    "L2": "Fred will have $48 + $28 = $<<48+28=76>>76 after being paid by Earl.",
+    "L3": "But then Fred will have $76 - $32 = $<<76-32=44>>44 after paying Greg.",
+    "L4": "Greg will have $36 + $32 = $<<36+32=68>>68 after Fred paid him.",
+    "L5": "Then, Greg will have $68 - $40 = $<<68-40=28>>28 after paying off his debt to Earl.",
+    "L6": "Then, Earl will then have $62 + $40 = $<<62+40=102>>102.",
+    "FA": "#### 102"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'earl_final_money' (value: 102) was reported instead of 'total_greg_earl' (value: 130).",
+  "repro_seed": 6567009639922459586,
+  "model_name": "google_gemini-2.5-flash"
+}

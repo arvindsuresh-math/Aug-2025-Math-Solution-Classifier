@@ -1,0 +1,75 @@
+{
+  "index": 2091,
+  "original_solution_mapping": {
+    "FA": "#### 16",
+    "L1": "The price that Shara paid is only 100% - 8% = 92% of the original price.",
+    "L2": "So, every 1% is equal to $184/92 = $2.",
+    "L3": "Therefore, Shara saved $2 x 8 = $<<2*8=16>>16."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2091.\n    Returns: the amount Shara saved.\n    \"\"\"\n    # L1\n    original_percentage = 100 # WK\n    discount_percentage = 8 # an 8% discount\n    paid_percentage = original_percentage - discount_percentage\n\n    # L2\n    paid_amount = 184 # paid $184\n    value_per_percent = paid_amount / paid_percentage\n\n    # L3\n    amount_saved = value_per_percent * discount_percentage\n\n    # FA\n    answer = amount_saved\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "amount_saved",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x150018cd0>"
+  },
+  "correct_trace": {
+    "original_percentage": 100,
+    "discount_percentage": 8,
+    "paid_percentage": 92,
+    "paid_amount": 184,
+    "value_per_percent": 2.0,
+    "amount_saved": 16.0,
+    "answer": 16.0
+  },
+  "flawed_trace": {
+    "original_percentage": 100,
+    "discount_percentage": 8,
+    "paid_percentage": 92,
+    "paid_amount": 184,
+    "value_per_percent": 2.0,
+    "amount_saved": 10.0,
+    "answer": 10.0
+  },
+  "correct_value": 16.0,
+  "flawed_value": 10.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "original_percentage"
+      ],
+      "line_number": "L1",
+      "output_variable": "paid_percentage",
+      "question_inputs": [
+        "discount_percentage"
+      ],
+      "solution_line_template": "The price that Shara paid is only {original_percentage}% - {discount_percentage}% = {paid_percentage}% of the original price."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "value_per_percent",
+      "question_inputs": [
+        "paid_amount"
+      ],
+      "solution_line_template": "So, every 1% is equal to ${paid_amount}/{paid_percentage} = ${value_per_percent}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "amount_saved",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, Shara saved ${value_per_percent} x {discount_percentage} = $<<{value_per_percent}*{discount_percentage}={amount_saved}>>{amount_saved}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The price that Shara paid is only 100% - 8% = 92% of the original price.",
+    "L2": "So, every 1% is equal to $184/92 = $2.",
+    "L3": "Therefore, Shara saved $2 x 8 = $<<2*8=10>>10.",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 8316366139727194424,
+  "model_name": "google_gemini-2.5-flash"
+}

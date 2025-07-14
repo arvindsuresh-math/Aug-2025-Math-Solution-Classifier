@@ -1,0 +1,69 @@
+{
+  "index": 454,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "12+5+5+2=<<12+5+5+2=24>>24 minutes are accounted for.",
+    "L2": "There are 30-24=<<30-24=6>>6 minutes of ads."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 454.\n    Returns: the number of minutes of advertising in the newscast.\n    \"\"\"\n    # L1\n    national_news_minutes = 12 # 12 minutes of national news\n    international_news_minutes = 5 # 5 minutes of international news\n    sports_minutes = 5 # 5 minutes of sports\n    weather_minutes = 2 # 2 minutes of weather forecasts\n    accounted_minutes = national_news_minutes + international_news_minutes + sports_minutes + weather_minutes\n\n    # L2\n    total_newscast_minutes = 30 # half-hour newscast\n    advertising_minutes = total_newscast_minutes - accounted_minutes\n\n    # FA\n    answer = advertising_minutes\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "accounted_minutes",
+    "operand_to_replace": "sports_minutes",
+    "replacement_variable": "weather_minutes"
+  },
+  "correct_trace": {
+    "national_news_minutes": 12,
+    "international_news_minutes": 5,
+    "sports_minutes": 5,
+    "weather_minutes": 2,
+    "accounted_minutes": 24,
+    "total_newscast_minutes": 30,
+    "advertising_minutes": 6,
+    "answer": 6
+  },
+  "flawed_trace": {
+    "national_news_minutes": 12,
+    "international_news_minutes": 5,
+    "sports_minutes": 5,
+    "weather_minutes": 2,
+    "accounted_minutes": 21,
+    "total_newscast_minutes": 30,
+    "advertising_minutes": 9,
+    "answer": 9
+  },
+  "correct_value": 24,
+  "flawed_value": 21,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "national_news_minutes",
+        "international_news_minutes",
+        "sports_minutes",
+        "weather_minutes"
+      ],
+      "WK_inputs": [],
+      "output_variable": "accounted_minutes",
+      "solution_line_template": "{national_news_minutes}+{international_news_minutes}+{sports_minutes}+{weather_minutes}=<<{national_news_minutes}+{international_news_minutes}+{sports_minutes}+{weather_minutes}={accounted_minutes}>>{accounted_minutes} minutes are accounted for."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "total_newscast_minutes"
+      ],
+      "WK_inputs": [],
+      "output_variable": "advertising_minutes",
+      "solution_line_template": "There are {total_newscast_minutes}-{accounted_minutes}=<<{total_newscast_minutes}-{accounted_minutes}={advertising_minutes}>>{advertising_minutes} minutes of ads."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "12+5+2+2=<<12+5+2+2=21>>21 minutes are accounted for.",
+    "L2": "There are 30-21=<<30-21=9>>9 minutes of ads.",
+    "FA": "#### 9"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'weather_minutes' (2) was used instead of 'sports_minutes' (5).",
+  "repro_seed": -1474777283106726709,
+  "model_name": "google_gemini-2.5-flash"
+}

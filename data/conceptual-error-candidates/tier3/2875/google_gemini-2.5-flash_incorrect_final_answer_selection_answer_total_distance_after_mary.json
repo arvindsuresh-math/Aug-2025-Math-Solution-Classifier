@@ -1,0 +1,94 @@
+{
+  "index": 2875,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "Ken's house is twice as far from Dawn's house as Mary's, so the distance between Ken's and Mary's is half that between Ken's and Dawn's (4 miles) which means the former is (1/2)*4 miles = <<4*1/2=2>>2 miles",
+    "L2": "If Ken goes from his house to Dawn's, he has covered 4 miles",
+    "L3": "He goes from there to Mary's (2 miles, same as Ken's to Mary's) for a total of 4+2 = <<4+2=6>>6 miles.",
+    "L4": "He goes back to Dawn's (another 2 miles) for a total of 6+2 = <<6+2=8>>8 miles",
+    "L5": "Then he goes to his own house (4 miles) for a final total of 8+4 = <<8+4=12>>12 miles"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2875.\n    Returns: the total distance Ken will cover.\n    \"\"\"\n    # L1\n    distance_ken_dawn = 4 # Ken's house is 4 miles away from Dawn's house\n    half_factor = Fraction(1, 2) # half that\n    distance_ken_mary = half_factor * distance_ken_dawn\n\n    # L2\n    leg1_distance = distance_ken_dawn\n\n    # L3\n    total_distance_after_mary = leg1_distance + distance_ken_mary\n\n    # L4\n    distance_mary_dawn = distance_ken_mary # another 2 miles (implied Mary's to Dawn's is same as Ken's to Mary's)\n    total_distance_back_to_dawn = total_distance_after_mary + distance_mary_dawn\n\n    # L5\n    distance_dawn_ken = distance_ken_dawn # 4 miles (back to his own house)\n    final_total_distance = total_distance_back_to_dawn + distance_dawn_ken\n\n    # FA\n    answer = final_total_distance\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "final_total_distance",
+    "replacement_variable": "total_distance_after_mary"
+  },
+  "correct_trace": {
+    "distance_ken_dawn": 4,
+    "half_factor": "1/2",
+    "distance_ken_mary": "2",
+    "leg1_distance": 4,
+    "total_distance_after_mary": "6",
+    "distance_mary_dawn": "2",
+    "total_distance_back_to_dawn": "8",
+    "distance_dawn_ken": 4,
+    "final_total_distance": "12",
+    "answer": "12"
+  },
+  "flawed_trace": {
+    "distance_ken_dawn": 4,
+    "half_factor": "1/2",
+    "distance_ken_mary": "2",
+    "leg1_distance": 4,
+    "total_distance_after_mary": "6",
+    "distance_mary_dawn": "2",
+    "total_distance_back_to_dawn": "8",
+    "distance_dawn_ken": 4,
+    "final_total_distance": "12",
+    "answer": "6"
+  },
+  "correct_value": "12",
+  "flawed_value": "6",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "distance_ken_mary",
+      "question_inputs": [
+        "distance_ken_dawn",
+        "half_factor"
+      ],
+      "solution_line_template": "Ken's house is twice as far from Dawn's house as Mary's, so the distance between Ken's and Mary's is half that between Ken's and Dawn's ({distance_ken_dawn} miles) which means the former is ({half_factor})*{distance_ken_dawn} miles = <<{distance_ken_dawn}*{half_factor}={distance_ken_mary}>>{distance_ken_mary} miles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "leg1_distance",
+      "question_inputs": [],
+      "solution_line_template": "If Ken goes from his house to Dawn's, he has covered {distance_ken_dawn} miles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_distance_after_mary",
+      "question_inputs": [],
+      "solution_line_template": "He goes from there to Mary's ({distance_ken_mary} miles, same as Ken's to Mary's) for a total of {leg1_distance}+{distance_ken_mary} = <<{leg1_distance}+{distance_ken_mary}={total_distance_after_mary}>>{total_distance_after_mary} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_distance_back_to_dawn",
+      "question_inputs": [],
+      "solution_line_template": "He goes back to Dawn's (another {distance_ken_mary} miles) for a total of {total_distance_after_mary}+{distance_ken_mary} = <<{total_distance_after_mary}+{distance_ken_mary}={total_distance_back_to_dawn}>>{total_distance_back_to_dawn} miles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "final_total_distance",
+      "question_inputs": [],
+      "solution_line_template": "Then he goes to his own house ({distance_ken_dawn} miles) for a final total of {total_distance_back_to_dawn}+{distance_ken_dawn} = <<{total_distance_back_to_dawn}+{distance_ken_dawn}={final_total_distance}>>{final_total_distance} miles"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Ken's house is twice as far from Dawn's house as Mary's, so the distance between Ken's and Mary's is half that between Ken's and Dawn's (4 miles) which means the former is (1/2)*4 miles = <<4*1/2=2>>2 miles",
+    "L2": "If Ken goes from his house to Dawn's, he has covered 4 miles",
+    "L3": "He goes from there to Mary's (2 miles, same as Ken's to Mary's) for a total of 4+2 = <<4+2=6>>6 miles.",
+    "FA": "#### 6"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'total_distance_after_mary' (value: 6) was reported instead of 'final_total_distance' (value: 12).",
+  "repro_seed": 8287625261907947477,
+  "model_name": "google_gemini-2.5-flash"
+}

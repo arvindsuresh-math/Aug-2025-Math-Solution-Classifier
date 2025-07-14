@@ -1,0 +1,94 @@
+{
+  "index": 441,
+  "original_solution_mapping": {
+    "FA": "#### 36",
+    "L1": "Martin invited 5 * 2 = <<5*2=10>>10 people from his school.",
+    "L2": "People from the sports club got 5 + 10 = <<5+10=15>>15 invitations.",
+    "L3": "So in total from the sports club, hometown and school, Martin invited 5 + 10 + 15 = <<5+10+15=30>>30 people.",
+    "L4": "All other invitations are 20% of the previous total, which means 20/100 * 30 = <<20/100*30=6>>6.",
+    "L5": "That means Martin invited to his party 30 + 6 = <<30+6=36>>36 people."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 441.\n    Returns: the total number of people Martin invited to his party.\n    \"\"\"\n    # L1\n    hometown_people = 5 # 5 people from his hometown\n    school_multiplier = 2 # twice as many people from his school\n    school_people = hometown_people * school_multiplier\n\n    # L2\n    sports_club_people = hometown_people + school_people\n\n    # L3\n    total_initial_invitations = hometown_people + school_people + sports_club_people\n\n    # L4\n    remaining_percentage = Fraction(20, 100) # 20% of the total previously mentioned\n    remaining_invitations = remaining_percentage * total_initial_invitations\n\n    # L5\n    total_people_invited = total_initial_invitations + remaining_invitations\n\n    # FA\n    answer = total_people_invited\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_people_invited",
+    "replacement_variable": "total_initial_invitations"
+  },
+  "correct_trace": {
+    "hometown_people": 5,
+    "school_multiplier": 2,
+    "school_people": 10,
+    "sports_club_people": 15,
+    "total_initial_invitations": 30,
+    "remaining_percentage": "1/5",
+    "remaining_invitations": "6",
+    "total_people_invited": "36",
+    "answer": "36"
+  },
+  "flawed_trace": {
+    "hometown_people": 5,
+    "school_multiplier": 2,
+    "school_people": 10,
+    "sports_club_people": 15,
+    "total_initial_invitations": 30,
+    "remaining_percentage": "1/5",
+    "remaining_invitations": "6",
+    "total_people_invited": "36",
+    "answer": 30
+  },
+  "correct_value": "36",
+  "flawed_value": 30,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "school_people",
+      "question_inputs": [
+        "hometown_people",
+        "school_multiplier"
+      ],
+      "solution_line_template": "Martin invited {hometown_people} * {school_multiplier} = <<{hometown_people}*{school_multiplier}={school_people}>>{school_people} people from his school."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sports_club_people",
+      "question_inputs": [],
+      "solution_line_template": "People from the sports club got {hometown_people} + {school_people} = <<{hometown_people}+{school_people}={sports_club_people}>>{sports_club_people} invitations."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_initial_invitations",
+      "question_inputs": [],
+      "solution_line_template": "So in total from the sports club, hometown and school, Martin invited {hometown_people} + {school_people} + {sports_club_people} = <<{hometown_people}+{school_people}+{sports_club_people}={total_initial_invitations}>>{total_initial_invitations} people."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "remaining_invitations",
+      "question_inputs": [
+        "remaining_percentage"
+      ],
+      "solution_line_template": "All other invitations are {remaining_percentage} * {total_initial_invitations} = <<{remaining_percentage}*{total_initial_invitations}={remaining_invitations}>>{remaining_invitations}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_people_invited",
+      "question_inputs": [],
+      "solution_line_template": "That means Martin invited to his party {total_initial_invitations} + {remaining_invitations} = <<{total_initial_invitations}+{remaining_invitations}={total_people_invited}>>{total_people_invited} people."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Martin invited 5 * 2 = <<5*2=10>>10 people from his school.",
+    "L2": "People from the sports club got 5 + 10 = <<5+10=15>>15 invitations.",
+    "L3": "So in total from the sports club, hometown and school, Martin invited 5 + 10 + 15 = <<5+10+15=30>>30 people.",
+    "FA": "#### 30"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'total_initial_invitations' (value: 30) was reported instead of 'total_people_invited' (value: 36).",
+  "repro_seed": -4066484077498062345,
+  "model_name": "google_gemini-2.5-flash"
+}

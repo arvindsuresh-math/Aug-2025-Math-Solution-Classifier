@@ -1,0 +1,104 @@
+{
+  "index": 2322,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "Richard has scored 84 touchdowns because 14 x 6 = <<14*6=84>>84",
+    "L2": "To beat the record he must score 90 touchdowns because 89 + 1 = <<90=90>>90",
+    "L3": "He needs 6 more touchdowns to beat the record because 90 - 84 = <<6=6>>6",
+    "L4": "He has two games left because 16 - 14 = <<16-14=2>>2",
+    "L5": "He needs to average 3 touchdowns a game to beat the record because 6 / 2 = <<6/2=3>>3"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2322.\n    Returns: the average touchdowns per game Richard must score in the final two games to beat Archie's record.\n    \"\"\"\n    # L1\n    games_played = 14 # first 14 games\n    avg_touchdowns_per_game = 6 # averaged 6 touchdowns a game\n    touchdowns_scored_so_far = games_played * avg_touchdowns_per_game\n\n    # L2\n    archie_record = 89 # Archie holds the school record for most touchdown passes with 89\n    to_beat_record_margin = 1 # WK\n    touchdowns_to_beat_record = archie_record + to_beat_record_margin\n\n    # L3\n    touchdowns_needed = touchdowns_to_beat_record - touchdowns_scored_so_far\n\n    # L4\n    total_games_season = 16 # season of 16 games\n    games_left = total_games_season - games_played\n\n    # L5\n    avg_touchdowns_needed_per_game = touchdowns_needed / games_left\n\n    # FA\n    answer = avg_touchdowns_needed_per_game\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "touchdowns_scored_so_far",
+    "operand_to_replace": "games_played",
+    "replacement_variable": "avg_touchdowns_per_game"
+  },
+  "correct_trace": {
+    "games_played": 14,
+    "avg_touchdowns_per_game": 6,
+    "touchdowns_scored_so_far": 84,
+    "archie_record": 89,
+    "to_beat_record_margin": 1,
+    "touchdowns_to_beat_record": 90,
+    "touchdowns_needed": 6,
+    "total_games_season": 16,
+    "games_left": 2,
+    "avg_touchdowns_needed_per_game": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "games_played": 14,
+    "avg_touchdowns_per_game": 6,
+    "touchdowns_scored_so_far": 36,
+    "archie_record": 89,
+    "to_beat_record_margin": 1,
+    "touchdowns_to_beat_record": 90,
+    "touchdowns_needed": 54,
+    "total_games_season": 16,
+    "games_left": 2,
+    "avg_touchdowns_needed_per_game": 27.0,
+    "answer": 27.0
+  },
+  "correct_value": 84,
+  "flawed_value": 36,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "touchdowns_scored_so_far",
+      "question_inputs": [
+        "games_played",
+        "avg_touchdowns_per_game"
+      ],
+      "solution_line_template": "Richard has scored {touchdowns_scored_so_far} touchdowns because {games_played} x {avg_touchdowns_per_game} = <<{games_played}*{avg_touchdowns_per_game}={touchdowns_scored_so_far}>>{touchdowns_scored_so_far}"
+    },
+    {
+      "WK_inputs": [
+        "to_beat_record_margin"
+      ],
+      "line_number": "L2",
+      "output_variable": "touchdowns_to_beat_record",
+      "question_inputs": [
+        "archie_record"
+      ],
+      "solution_line_template": "To beat the record he must score {touchdowns_to_beat_record} touchdowns because {archie_record} + {to_beat_record_margin} = <<{touchdowns_to_beat_record}={touchdowns_to_beat_record}>>{touchdowns_to_beat_record}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "touchdowns_needed",
+      "question_inputs": [],
+      "solution_line_template": "He needs {touchdowns_needed} more touchdowns to beat the record because {touchdowns_to_beat_record} - {touchdowns_scored_so_far} = <<{touchdowns_needed}={touchdowns_needed}>>{touchdowns_needed}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "games_left",
+      "question_inputs": [
+        "total_games_season"
+      ],
+      "solution_line_template": "He has {games_left} games left because {total_games_season} - {games_played} = <<{total_games_season}-{games_played}={games_left}>>{games_left}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "avg_touchdowns_needed_per_game",
+      "question_inputs": [],
+      "solution_line_template": "He needs to average {avg_touchdowns_needed_per_game} touchdowns a game to beat the record because {touchdowns_needed} / {games_left} = <<{touchdowns_needed}/{games_left}={avg_touchdowns_needed_per_game}>>{avg_touchdowns_needed_per_game}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Richard has scored 36 touchdowns because 6 x 6 = <<6*6=36>>36",
+    "L2": "To beat the record he must score 90 touchdowns because 89 + 1 = <<90=90>>90",
+    "L3": "He needs 54 more touchdowns to beat the record because 90 - 36 = <<54=54>>54",
+    "L4": "He has 2 games left because 16 - 14 = <<16-14=2>>2",
+    "L5": "He needs to average 27 touchdowns a game to beat the record because 54 / 2 = <<54/2=27>>27",
+    "FA": "#### 27"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'avg_touchdowns_per_game' (6) was used instead of 'games_played' (14).",
+  "repro_seed": -5293924068395693864,
+  "model_name": "google_gemini-2.5-flash"
+}

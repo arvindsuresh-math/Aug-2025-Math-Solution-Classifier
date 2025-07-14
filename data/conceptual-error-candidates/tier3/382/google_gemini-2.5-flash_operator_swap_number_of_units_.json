@@ -1,0 +1,63 @@
+{
+  "index": 382,
+  "original_solution_mapping": {
+    "FA": "#### 160",
+    "L1": "It takes 10 minutes to wash 4 windows and he has 64 windows so that breaks down to 64/4 = 16 units",
+    "L2": "It takes 10 minutes to wash a unit of windows and he has 16 units so 10*16 = <<10*16=160>>160 minutes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 382.\n    Returns: the total number of minutes it will take David to wash all windows.\n    \"\"\"\n    # L1\n    total_windows = 64 # David's house has 64 windows\n    windows_per_unit = 4 # wash 4 windows\n    number_of_units = total_windows / windows_per_unit\n\n    # L2\n    minutes_per_unit = 10 # It takes David 10 minutes\n    total_minutes = minutes_per_unit * number_of_units\n\n    # FA\n    answer = total_minutes\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "number_of_units",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x146dbd550>"
+  },
+  "correct_trace": {
+    "total_windows": 64,
+    "windows_per_unit": 4,
+    "number_of_units": 16.0,
+    "minutes_per_unit": 10,
+    "total_minutes": 160.0,
+    "answer": 160.0
+  },
+  "flawed_trace": {
+    "total_windows": 64,
+    "windows_per_unit": 4,
+    "number_of_units": 256,
+    "minutes_per_unit": 10,
+    "total_minutes": 2560,
+    "answer": 2560
+  },
+  "correct_value": 16.0,
+  "flawed_value": 256,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "number_of_units",
+      "question_inputs": [
+        "total_windows",
+        "windows_per_unit"
+      ],
+      "solution_line_template": "It takes 10 minutes to wash 4 windows and he has {total_windows} windows so that breaks down to {total_windows}/{windows_per_unit} = {number_of_units} units"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_minutes",
+      "question_inputs": [
+        "minutes_per_unit"
+      ],
+      "solution_line_template": "It takes {minutes_per_unit} minutes to wash a unit of windows and he has {number_of_units} units so {minutes_per_unit}*{number_of_units} = <<{minutes_per_unit}*{number_of_units}={total_minutes}>>{total_minutes} minutes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "It takes 10 minutes to wash 4 windows and he has 64 windows so that breaks down to 64/4 = 256 units",
+    "L2": "It takes 10 minutes to wash a unit of windows and he has 256 units so 10*256 = <<10*256=2560>>2560 minutes",
+    "FA": "#### 2560"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -1010802825292645314,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 2151,
+  "original_solution_mapping": {
+    "FA": "#### 16",
+    "L1": "If Charley bought 30 pencils and lost 6 while moving, she remained with 30-6=<<30-6=24>>24 pencils.",
+    "L2": "Because she isn't good at keeping track of her pencils, Charley lost 1/3*24 = <<1/3*24=8>>8 more pencils.",
+    "L3": "She currently has 24-8 = <<24-8=16>>16 pencils."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2151.\n    Returns: the number of pencils Charley currently has.\n    \"\"\"\n    # L1\n    initial_pencils = 30 # Charley bought 30 pencils\n    lost_moving = 6 # lost 6 pencils\n    pencils_after_moving = initial_pencils - lost_moving\n\n    # L2\n    fraction_lost_remaining = Fraction(1, 3) # lost 1/3 of the remaining pencils\n    lost_remaining = fraction_lost_remaining * pencils_after_moving\n\n    # L3\n    current_pencils = pencils_after_moving - lost_remaining\n\n    # FA\n    answer = current_pencils\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "lost_remaining",
+    "operand_to_replace": "pencils_after_moving",
+    "replacement_variable": "fraction_lost_remaining"
+  },
+  "correct_trace": {
+    "initial_pencils": 30,
+    "lost_moving": 6,
+    "pencils_after_moving": 24,
+    "fraction_lost_remaining": "1/3",
+    "lost_remaining": "8",
+    "current_pencils": "16",
+    "answer": "16"
+  },
+  "flawed_trace": {
+    "initial_pencils": 30,
+    "lost_moving": 6,
+    "pencils_after_moving": 24,
+    "fraction_lost_remaining": "1/3",
+    "lost_remaining": "1/9",
+    "current_pencils": "215/9",
+    "answer": "215/9"
+  },
+  "correct_value": "8",
+  "flawed_value": "1/9",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "pencils_after_moving",
+      "question_inputs": [
+        "initial_pencils",
+        "lost_moving"
+      ],
+      "solution_line_template": "If Charley bought {initial_pencils} pencils and lost {lost_moving} while moving, she remained with {initial_pencils}-{lost_moving}=<<{initial_pencils}-{lost_moving}={pencils_after_moving}>>{pencils_after_moving} pencils."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "lost_remaining",
+      "question_inputs": [
+        "fraction_lost_remaining"
+      ],
+      "solution_line_template": "Because she isn't good at keeping track of her pencils, Charley lost {fraction_lost_remaining}*{pencils_after_moving} = <<{fraction_lost_remaining}*{pencils_after_moving}={lost_remaining}>>{lost_remaining} more pencils."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "current_pencils",
+      "question_inputs": [],
+      "solution_line_template": "She currently has {pencils_after_moving}-{lost_remaining} = <<{pencils_after_moving}-{lost_remaining}={current_pencils}>>{current_pencils} pencils."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Charley bought 30 pencils and lost 6 while moving, she remained with 30-6=<<30-6=24>>24 pencils.",
+    "L2": "Because she isn't good at keeping track of her pencils, Charley lost 1/3*1/3 = <<1/3*1/3=1/9>>1/9 more pencils.",
+    "L3": "She currently has 24-1/9 = <<24-1/9=215/9>>215/9 pencils.",
+    "FA": "#### 215/9"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'fraction_lost_remaining' (value: 1/3) was used instead of 'pencils_after_moving' (value: 24).",
+  "repro_seed": 5266875680772239278,
+  "model_name": "google_gemini-2.5-flash"
+}

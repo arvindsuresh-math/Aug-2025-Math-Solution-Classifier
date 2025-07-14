@@ -1,0 +1,93 @@
+{
+  "index": 2202,
+  "original_solution_mapping": {
+    "FA": "#### 100",
+    "L1": "Each ml of ink costs 50 cents so 20 ml costs 20*50 = <<20*50=1000>>1000 cents",
+    "L2": "There are 2 whiteboards in each class so each class needs 2*1000 cents = <<2*1000=2000>>2000 cents",
+    "L3": "There are five classes in the block so they all need 5*1*2000 cents = <<5*1*2000=10000>>10000 cents",
+    "L4": "100 cents make a dollar so 10000 cents make 10000/100 = $<<10000/100=100>>100"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2202.\n    Returns: the total cost to use the boards for one day in dollars.\n    \"\"\"\n    # L1\n    ink_needed_per_whiteboard_ml = 20 # each whiteboard needs about 20ml of ink\n    cost_per_ml_cents = 50 # ink costs 50 cents per ml\n    cost_per_whiteboard_cents = ink_needed_per_whiteboard_ml * cost_per_ml_cents\n\n    # L2\n    whiteboards_per_class = 2 # Each class uses 2 whiteboards each\n    cost_per_class_cents = whiteboards_per_class * cost_per_whiteboard_cents\n\n    # L3\n    num_classes = 5 # there are 5 classes\n    total_cost_cents = num_classes * 1 * cost_per_class_cents\n\n    # L4\n    cents_per_dollar = 100 # 100 cents make a dollar\n    total_cost_dollars = total_cost_cents / cents_per_dollar\n\n    # FA\n    answer = total_cost_dollars\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cost_cents",
+    "operand_to_replace": "num_classes",
+    "replacement_variable": "ink_needed_per_whiteboard_ml"
+  },
+  "correct_trace": {
+    "ink_needed_per_whiteboard_ml": 20,
+    "cost_per_ml_cents": 50,
+    "cost_per_whiteboard_cents": 1000,
+    "whiteboards_per_class": 2,
+    "cost_per_class_cents": 2000,
+    "num_classes": 5,
+    "total_cost_cents": 10000,
+    "cents_per_dollar": 100,
+    "total_cost_dollars": 100.0,
+    "answer": 100.0
+  },
+  "flawed_trace": {
+    "ink_needed_per_whiteboard_ml": 20,
+    "cost_per_ml_cents": 50,
+    "cost_per_whiteboard_cents": 1000,
+    "whiteboards_per_class": 2,
+    "cost_per_class_cents": 2000,
+    "num_classes": 5,
+    "total_cost_cents": 40000,
+    "cents_per_dollar": 100,
+    "total_cost_dollars": 400.0,
+    "answer": 400.0
+  },
+  "correct_value": 10000,
+  "flawed_value": 40000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_per_whiteboard_cents",
+      "question_inputs": [
+        "ink_needed_per_whiteboard_ml",
+        "cost_per_ml_cents"
+      ],
+      "solution_line_template": "Each ml of ink costs {cost_per_ml_cents} cents so {ink_needed_per_whiteboard_ml} ml costs {ink_needed_per_whiteboard_ml}*{cost_per_ml_cents} = <<{ink_needed_per_whiteboard_ml}*{cost_per_ml_cents}={cost_per_whiteboard_cents}>>{cost_per_whiteboard_cents} cents"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cost_per_class_cents",
+      "question_inputs": [
+        "whiteboards_per_class"
+      ],
+      "solution_line_template": "There are {whiteboards_per_class} whiteboards in each class so each class needs {whiteboards_per_class}*{cost_per_whiteboard_cents} cents = <<{whiteboards_per_class}*{cost_per_whiteboard_cents}={cost_per_class_cents}>>{cost_per_class_cents} cents"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost_cents",
+      "question_inputs": [
+        "num_classes"
+      ],
+      "solution_line_template": "There are {num_classes} classes in the block so they all need {num_classes}*1*{cost_per_class_cents} cents = <<{num_classes}*1*{cost_per_class_cents}={total_cost_cents}>>{total_cost_cents} cents"
+    },
+    {
+      "WK_inputs": [
+        "cents_per_dollar"
+      ],
+      "line_number": "L4",
+      "output_variable": "total_cost_dollars",
+      "question_inputs": [],
+      "solution_line_template": "{cents_per_dollar} cents make a dollar so {total_cost_cents} cents make {total_cost_cents}/{cents_per_dollar} = $<<{total_cost_cents}/{cents_per_dollar}={total_cost_dollars}>>{total_cost_dollars}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each ml of ink costs 50 cents so 20 ml costs 20*50 = <<20*50=1000>>1000 cents",
+    "L2": "There are 2 whiteboards in each class so each class needs 2*1000 cents = <<2*1000=2000>>2000 cents",
+    "L3": "There are 20 classes in the block so they all need 20*1*2000 cents = <<20*1*2000=40000>>40000 cents",
+    "L4": "100 cents make a dollar so 40000 cents make 40000/100 = $<<40000/100=400>>400",
+    "FA": "#### 400"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'ink_needed_per_whiteboard_ml' (20) was used instead of 'num_classes' (5).",
+  "repro_seed": 2452345765433404811,
+  "model_name": "google_gemini-2.5-flash"
+}

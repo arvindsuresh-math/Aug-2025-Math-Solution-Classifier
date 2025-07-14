@@ -1,0 +1,84 @@
+{
+  "index": 2555,
+  "original_solution_mapping": {
+    "FA": "#### 250",
+    "L1": "30% of Mars is made up of other elements because 100 - 50 - 20 = <<100-50-20=30>>30",
+    "L2": "Mars weighs 500 tons because 150 / .3 = <<150/.3=500>>500",
+    "L3": "The moon weighs 250 tons because 500 / 2 = <<500/2=250>>250"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2555.\n    Returns: the weight of the moon in tons.\n    \"\"\"\n    # L1\n    total_percent = 100 # WK\n    iron_percent = 50 # 50% iron\n    carbon_percent = 20 # 20% carbon\n    other_elements_percent = total_percent - iron_percent - carbon_percent\n\n    # L2\n    mars_other_elements_weight = 150 # Mars is 150 tons of other elements\n    other_elements_decimal = other_elements_percent / 100\n    mars_weight = mars_other_elements_weight / other_elements_decimal\n\n    # L3\n    mars_moon_weight_ratio = 2 # Mars weighs twice as much as the moon\n    moon_weight = mars_weight / mars_moon_weight_ratio\n\n    # FA\n    answer = moon_weight\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "moon_weight",
+    "operand_to_replace": "mars_weight",
+    "replacement_variable": "mars_moon_weight_ratio"
+  },
+  "correct_trace": {
+    "total_percent": 100,
+    "iron_percent": 50,
+    "carbon_percent": 20,
+    "other_elements_percent": 30,
+    "mars_other_elements_weight": 150,
+    "other_elements_decimal": 0.3,
+    "mars_weight": 500.0,
+    "mars_moon_weight_ratio": 2,
+    "moon_weight": 250.0,
+    "answer": 250.0
+  },
+  "flawed_trace": {
+    "total_percent": 100,
+    "iron_percent": 50,
+    "carbon_percent": 20,
+    "other_elements_percent": 30,
+    "mars_other_elements_weight": 150,
+    "other_elements_decimal": 0.3,
+    "mars_weight": 500.0,
+    "mars_moon_weight_ratio": 2,
+    "moon_weight": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 250.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_percent"
+      ],
+      "line_number": "L1",
+      "output_variable": "other_elements_percent",
+      "question_inputs": [
+        "iron_percent",
+        "carbon_percent"
+      ],
+      "solution_line_template": "30% of Mars is made up of other elements because {total_percent} - {iron_percent} - {carbon_percent} = <<{total_percent}-{iron_percent}-{carbon_percent}={other_elements_percent}>>{other_elements_percent}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "mars_weight",
+      "question_inputs": [
+        "mars_other_elements_weight"
+      ],
+      "solution_line_template": "Mars weighs {mars_weight} tons because {mars_other_elements_weight} / {other_elements_decimal} = <<{mars_other_elements_weight}/{other_elements_decimal}={mars_weight}>>{mars_weight}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "moon_weight",
+      "question_inputs": [
+        "mars_moon_weight_ratio"
+      ],
+      "solution_line_template": "The moon weighs {moon_weight} tons because {mars_weight} / {mars_moon_weight_ratio} = <<{mars_weight}/{mars_moon_weight_ratio}={moon_weight}>>{moon_weight}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "30% of Mars is made up of other elements because 100 - 50 - 20 = <<100-50-20=30>>30",
+    "L2": "Mars weighs 500 tons because 150 / 0.3 = <<150/0.3=500>>500",
+    "L3": "The moon weighs 1 tons because 2 / 2 = <<2/2=1>>1",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'mars_moon_weight_ratio' (value: 2) was used instead of 'mars_weight' (value: 500.0).",
+  "repro_seed": -5541544775587802026,
+  "model_name": "google_gemini-2.5-flash"
+}

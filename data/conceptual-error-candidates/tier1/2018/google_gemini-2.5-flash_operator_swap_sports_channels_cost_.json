@@ -1,0 +1,63 @@
+{
+  "index": 2018,
+  "original_solution_mapping": {
+    "FA": "#### 36",
+    "L1": "The sports channels cost $12 - $3 = $<<12-3=9>>9 per month.",
+    "L2": "Jessica has to pay $15 + $12 + $9 = $<<15+12+9=36>>36 in total per month."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2018.\n    Returns: Jessica's total monthly payment if she adds movie and sports channels.\n    \"\"\"\n    # L1\n    movie_channels_cost = 12 # additional $12 per month\n    sports_channels_cost_reduction = 3 # $3 less per month than the movie channels\n    sports_channels_cost = movie_channels_cost - sports_channels_cost_reduction\n\n    # L2\n    basic_cable_cost = 15 # $15 per month\n    total_monthly_payment = basic_cable_cost + movie_channels_cost + sports_channels_cost\n\n    # FA\n    answer = total_monthly_payment\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "sports_channels_cost",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x14579ccd0>"
+  },
+  "correct_trace": {
+    "movie_channels_cost": 12,
+    "sports_channels_cost_reduction": 3,
+    "sports_channels_cost": 9,
+    "basic_cable_cost": 15,
+    "total_monthly_payment": 36,
+    "answer": 36
+  },
+  "flawed_trace": {
+    "movie_channels_cost": 12,
+    "sports_channels_cost_reduction": 3,
+    "sports_channels_cost": 15,
+    "basic_cable_cost": 15,
+    "total_monthly_payment": 42,
+    "answer": 42
+  },
+  "correct_value": 9,
+  "flawed_value": 15,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "movie_channels_cost",
+        "sports_channels_cost_reduction"
+      ],
+      "WK_inputs": [],
+      "output_variable": "sports_channels_cost",
+      "solution_line_template": "The sports channels cost ${movie_channels_cost} - ${sports_channels_cost_reduction} = $<<{movie_channels_cost}-{sports_channels_cost_reduction}={sports_channels_cost}>>{sports_channels_cost} per month."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "basic_cable_cost"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_monthly_payment",
+      "solution_line_template": "Jessica has to pay ${basic_cable_cost} + ${movie_channels_cost} + ${sports_channels_cost} = $<<{basic_cable_cost}+{movie_channels_cost}+{sports_channels_cost}={total_monthly_payment}>>{total_monthly_payment} in total per month."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The sports channels cost $12 - $3 = $<<12-3=15>>15 per month.",
+    "L2": "Jessica has to pay $15 + $12 + $15 = $<<15+12+15=42>>42 in total per month.",
+    "FA": "#### 42"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -4983341779336001292,
+  "model_name": "google_gemini-2.5-flash"
+}

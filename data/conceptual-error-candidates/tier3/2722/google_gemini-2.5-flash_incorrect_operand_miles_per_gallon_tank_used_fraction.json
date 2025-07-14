@@ -1,0 +1,94 @@
+{
+  "index": 2722,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "He used 1/3 of his tank because 1 - (2/3) = 1/3",
+    "L2": "He used 4 gallons of gas because 12 x (1/3) = <<12*(1/3)=4>>4",
+    "L3": "He drove 20 miles because 2 x 10 = <<2*10=20>>20",
+    "L4": "He gets 5 miles per gallon because 20 / 4 = <<20/4=5>>5"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2722.\n    Returns: the miles per gallon Jim gets.\n    \"\"\"\n    # L1\n    total_tank_fraction = 1 # WK\n    tank_left_fraction = Fraction(2, 3) # 2/3 of a tank left\n    tank_used_fraction = total_tank_fraction - tank_left_fraction\n\n    # L2\n    total_tank_capacity = 12 # His gas tank is 12 gallons\n    gallons_used = total_tank_capacity * tank_used_fraction\n\n    # L3\n    trips_count = 2 # to and from work\n    distance_one_way = 10 # 10 miles away from his house\n    total_miles_driven = trips_count * distance_one_way\n\n    # L4\n    miles_per_gallon = total_miles_driven / gallons_used\n\n    # FA\n    answer = miles_per_gallon\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "miles_per_gallon",
+    "operand_to_replace": "total_miles_driven",
+    "replacement_variable": "tank_used_fraction"
+  },
+  "correct_trace": {
+    "total_tank_fraction": 1,
+    "tank_left_fraction": "2/3",
+    "tank_used_fraction": "1/3",
+    "total_tank_capacity": 12,
+    "gallons_used": "4",
+    "trips_count": 2,
+    "distance_one_way": 10,
+    "total_miles_driven": 20,
+    "miles_per_gallon": "5",
+    "answer": "5"
+  },
+  "flawed_trace": {
+    "total_tank_fraction": 1,
+    "tank_left_fraction": "2/3",
+    "tank_used_fraction": "1/3",
+    "total_tank_capacity": 12,
+    "gallons_used": "4",
+    "trips_count": 2,
+    "distance_one_way": 10,
+    "total_miles_driven": 20,
+    "miles_per_gallon": "1/12",
+    "answer": "1/12"
+  },
+  "correct_value": "5",
+  "flawed_value": "1/12",
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_tank_fraction"
+      ],
+      "line_number": "L1",
+      "output_variable": "tank_used_fraction",
+      "question_inputs": [
+        "tank_left_fraction"
+      ],
+      "solution_line_template": "He used {tank_used_fraction} of his tank because {total_tank_fraction} - ({tank_left_fraction}) = {tank_used_fraction}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "gallons_used",
+      "question_inputs": [
+        "total_tank_capacity"
+      ],
+      "solution_line_template": "He used {gallons_used} gallons of gas because {total_tank_capacity} x ({tank_used_fraction}) = <<{total_tank_capacity}*{tank_used_fraction}={gallons_used}>>{gallons_used}"
+    },
+    {
+      "WK_inputs": [
+        "trips_count"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_miles_driven",
+      "question_inputs": [
+        "distance_one_way"
+      ],
+      "solution_line_template": "He drove {total_miles_driven} miles because {trips_count} x {distance_one_way} = <<{trips_count}*{distance_one_way}={total_miles_driven}>>{total_miles_driven}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "miles_per_gallon",
+      "question_inputs": [],
+      "solution_line_template": "He gets {miles_per_gallon} miles per gallon because {total_miles_driven} / {gallons_used} = <<{total_miles_driven}/{gallons_used}={miles_per_gallon}>>{miles_per_gallon}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He used 1/3 of his tank because 1 - (2/3) = 1/3",
+    "L2": "He used 4 gallons of gas because 12 x (1/3) = <<12*1/3=4>>4",
+    "L3": "He drove 20 miles because 2 x 10 = <<2*10=20>>20",
+    "L4": "He gets 1/12 miles per gallon because 1/3 / 4 = <<1/3/4=1/12>>1/12",
+    "FA": "#### 1/12"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'tank_used_fraction' (value: 1/3) was used instead of 'total_miles_driven' (value: 20).",
+  "repro_seed": -6578418703287342977,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,77 @@
+{
+  "index": 1730,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "Six sets of 1 dozen of doughnuts cost $8 x 6 = $<<6*8=48>>48.",
+    "L2": "Three sets of 2 dozens of doughnuts cost $14 x 3 = $42.",
+    "L3": "Therefore, you can save $48 - $42 = $<<48-42=6>>6."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1730.\n    Returns: the amount saved from buying 3 sets of 2 dozens than buying 6 sets of 1 dozen.\n    \"\"\"\n    # L1\n    cost_one_dozen = 8 # it costs $8\n    num_sets_one_dozen = 6 # 6 sets of 1 dozen\n    cost_six_sets_one_dozen = cost_one_dozen * num_sets_one_dozen\n\n    # L2\n    cost_two_dozens = 14 # it costs $14\n    num_sets_two_dozens = 3 # 3 sets of 2 dozens\n    cost_three_sets_two_dozens = cost_two_dozens * num_sets_two_dozens\n\n    # L3\n    savings = cost_six_sets_one_dozen - cost_three_sets_two_dozens\n\n    # FA\n    answer = savings\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "cost_three_sets_two_dozens",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x1457c8b10>"
+  },
+  "correct_trace": {
+    "cost_one_dozen": 8,
+    "num_sets_one_dozen": 6,
+    "cost_six_sets_one_dozen": 48,
+    "cost_two_dozens": 14,
+    "num_sets_two_dozens": 3,
+    "cost_three_sets_two_dozens": 42,
+    "savings": 6,
+    "answer": 6
+  },
+  "flawed_trace": {
+    "cost_one_dozen": 8,
+    "num_sets_one_dozen": 6,
+    "cost_six_sets_one_dozen": 48,
+    "cost_two_dozens": 14,
+    "num_sets_two_dozens": 3,
+    "cost_three_sets_two_dozens": 17,
+    "savings": 31,
+    "answer": 31
+  },
+  "correct_value": 42,
+  "flawed_value": 17,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "cost_one_dozen",
+        "num_sets_one_dozen"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cost_six_sets_one_dozen",
+      "solution_line_template": "Six sets of 1 dozen of doughnuts cost ${cost_one_dozen} x {num_sets_one_dozen} = $<<{num_sets_one_dozen}*{cost_one_dozen}={cost_six_sets_one_dozen}>>{cost_six_sets_one_dozen}."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "cost_two_dozens",
+        "num_sets_two_dozens"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cost_three_sets_two_dozens",
+      "solution_line_template": "Three sets of 2 dozens of doughnuts cost ${cost_two_dozens} x {num_sets_two_dozens} = ${cost_three_sets_two_dozens}."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "savings",
+      "solution_line_template": "Therefore, you can save ${cost_six_sets_one_dozen} - ${cost_three_sets_two_dozens} = $<<{cost_six_sets_one_dozen}-{cost_three_sets_two_dozens}={savings}>>{savings}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Six sets of 1 dozen of doughnuts cost $8 x 6 = $<<6*8=48>>48.",
+    "L2": "Three sets of 2 dozens of doughnuts cost $14 x 3 = $17.",
+    "L3": "Therefore, you can save $48 - $17 = $<<48-17=31>>31.",
+    "FA": "#### 31"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -862556184773459979,
+  "model_name": "google_gemini-2.5-flash"
+}

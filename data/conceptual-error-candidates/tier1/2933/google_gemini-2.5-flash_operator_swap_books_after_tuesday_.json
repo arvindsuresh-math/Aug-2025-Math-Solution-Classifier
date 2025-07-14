@@ -1,0 +1,78 @@
+{
+  "index": 2933,
+  "original_solution_mapping": {
+    "FA": "#### 29",
+    "L1": "On Tuesday, 227 books were taken, so there are 235 - 227= <<235-227=8>>8 books left.",
+    "L2": "56 books were brought back on Thursday, so there are 8 + 56 = <<8+56=64>>64 books in the library.",
+    "L3": "Finally, 35 books are taken out on Friday, leaving 64 - 35 = <<29=29>>29 books available."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2933.\n    Returns: the number of books remaining in the library.\n    \"\"\"\n    # L1\n    initial_books = 235 # 235 books in a library\n    books_taken_tuesday = 227 # 227 books are taken out\n    books_after_tuesday = initial_books - books_taken_tuesday\n\n    # L2\n    books_brought_back_thursday = 56 # 56 books are brought back\n    books_after_thursday = books_after_tuesday + books_brought_back_thursday\n\n    # L3\n    books_taken_friday = 35 # 35 books are taken out again on Friday\n    final_books = books_after_thursday - books_taken_friday\n\n    # FA\n    answer = final_books\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "books_after_tuesday",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x145bd4790>"
+  },
+  "correct_trace": {
+    "initial_books": 235,
+    "books_taken_tuesday": 227,
+    "books_after_tuesday": 8,
+    "books_brought_back_thursday": 56,
+    "books_after_thursday": 64,
+    "books_taken_friday": 35,
+    "final_books": 29,
+    "answer": 29
+  },
+  "flawed_trace": {
+    "initial_books": 235,
+    "books_taken_tuesday": 227,
+    "books_after_tuesday": 462,
+    "books_brought_back_thursday": 56,
+    "books_after_thursday": 518,
+    "books_taken_friday": 35,
+    "final_books": 483,
+    "answer": 483
+  },
+  "correct_value": 8,
+  "flawed_value": 462,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "initial_books",
+        "books_taken_tuesday"
+      ],
+      "WK_inputs": [],
+      "output_variable": "books_after_tuesday",
+      "solution_line_template": "On Tuesday, {books_taken_tuesday} books were taken, so there are {initial_books} - {books_taken_tuesday}= <<{initial_books}-{books_taken_tuesday}={books_after_tuesday}>>{books_after_tuesday} books left."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "books_brought_back_thursday"
+      ],
+      "WK_inputs": [],
+      "output_variable": "books_after_thursday",
+      "solution_line_template": "{books_brought_back_thursday} books were brought back on Thursday, so there are {books_after_tuesday} + {books_brought_back_thursday} = <<{books_after_tuesday}+{books_brought_back_thursday}={books_after_thursday}>>{books_after_thursday} books in the library."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "books_taken_friday"
+      ],
+      "WK_inputs": [],
+      "output_variable": "final_books",
+      "solution_line_template": "Finally, {books_taken_friday} books are taken out on Friday, leaving {books_after_thursday} - {books_taken_friday} = <<{final_books}={final_books}>>{final_books} books available."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Tuesday, 227 books were taken, so there are 235 - 227= <<235-227=462>>462 books left.",
+    "L2": "56 books were brought back on Thursday, so there are 462 + 56 = <<462+56=518>>518 books in the library.",
+    "L3": "Finally, 35 books are taken out on Friday, leaving 518 - 35 = <<483=483>>483 books available.",
+    "FA": "#### 483"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -7316385839373409733,
+  "model_name": "google_gemini-2.5-flash"
+}

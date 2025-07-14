@@ -1,0 +1,74 @@
+{
+  "index": 2868,
+  "original_solution_mapping": {
+    "FA": "#### 41",
+    "L1": "Maria has 8 + 10 = <<8+10=18>>18 black pens.",
+    "L2": "Maria has 8 + 7 = <<8+7=15>>15 blue pens.",
+    "L3": "Maria has 8 + 18 + 15 = <<8+18+15=41>>41 pens in total."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2868.\n    Returns: the total number of pens in Maria's desk drawer.\n    \"\"\"\n    # L1\n    red_pens = 8 # 8 red pens\n    more_black_than_red = 10 # 10 more black pens than red pens\n    black_pens = red_pens + more_black_than_red\n\n    # L2\n    more_blue_than_red = 7 # 7 more blue pens than red pens\n    blue_pens = red_pens + more_blue_than_red\n\n    # L3\n    total_pens = red_pens + black_pens + blue_pens\n\n    # FA\n    answer = total_pens\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "black_pens",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x145b70fd0>"
+  },
+  "correct_trace": {
+    "red_pens": 8,
+    "more_black_than_red": 10,
+    "black_pens": 18,
+    "more_blue_than_red": 7,
+    "blue_pens": 15,
+    "total_pens": 41,
+    "answer": 41
+  },
+  "flawed_trace": {
+    "red_pens": 8,
+    "more_black_than_red": 10,
+    "black_pens": 80,
+    "more_blue_than_red": 7,
+    "blue_pens": 15,
+    "total_pens": 103,
+    "answer": 103
+  },
+  "correct_value": 18,
+  "flawed_value": 80,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "red_pens",
+        "more_black_than_red"
+      ],
+      "WK_inputs": [],
+      "output_variable": "black_pens",
+      "solution_line_template": "Maria has {red_pens} + {more_black_than_red} = <<{red_pens}+{more_black_than_red}={black_pens}>>{black_pens} black pens."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "more_blue_than_red"
+      ],
+      "WK_inputs": [],
+      "output_variable": "blue_pens",
+      "solution_line_template": "Maria has {red_pens} + {more_blue_than_red} = <<{red_pens}+{more_blue_than_red}={blue_pens}>>{blue_pens} blue pens."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_pens",
+      "solution_line_template": "Maria has {red_pens} + {black_pens} + {blue_pens} = <<{red_pens}+{black_pens}+{blue_pens}={total_pens}>>{total_pens} pens in total."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Maria has 8 + 10 = <<8+10=80>>80 black pens.",
+    "L2": "Maria has 8 + 7 = <<8+7=15>>15 blue pens.",
+    "L3": "Maria has 8 + 80 + 15 = <<8+80+15=103>>103 pens in total.",
+    "FA": "#### 103"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": -353664913738875730,
+  "model_name": "google_gemini-2.5-flash"
+}

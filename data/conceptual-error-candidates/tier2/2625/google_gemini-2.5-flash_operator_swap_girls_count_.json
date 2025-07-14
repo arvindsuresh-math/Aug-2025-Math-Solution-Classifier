@@ -1,0 +1,80 @@
+{
+  "index": 2625,
+  "original_solution_mapping": {
+    "FA": "#### 27",
+    "L1": "Toby has 60 friends because 33 / .55 = <<33/.55=60>>60",
+    "L2": "45% of his friends are girls because 100 - 55 = <<100-55=45>>45",
+    "L3": "He has 27 friends who are girls because 60 x .45 = <<27=27>>27"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2625.\n    Returns: the number of friends Toby has who are girls.\n    \"\"\"\n    # L1\n    boys_count = 33 # 33 friends who are boys\n    boys_percentage_decimal = 0.55 # 55% of Toby's friends are boys\n    total_friends = boys_count / boys_percentage_decimal\n\n    # L2\n    total_percentage = 100 # WK\n    boys_percentage_num = 55 # 55% of Toby's friends are boys\n    girls_percentage_num = total_percentage - boys_percentage_num\n\n    # L3\n    girls_percentage_decimal = girls_percentage_num / 100\n    girls_count = total_friends * girls_percentage_decimal\n\n    # FA\n    answer = girls_count\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "girls_count",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x146b8e010>"
+  },
+  "correct_trace": {
+    "boys_count": 33,
+    "boys_percentage_decimal": 0.55,
+    "total_friends": 59.99999999999999,
+    "total_percentage": 100,
+    "boys_percentage_num": 55,
+    "girls_percentage_num": 45,
+    "girls_percentage_decimal": 0.45,
+    "girls_count": 26.999999999999996,
+    "answer": 26.999999999999996
+  },
+  "flawed_trace": {
+    "boys_count": 33,
+    "boys_percentage_decimal": 0.55,
+    "total_friends": 59.99999999999999,
+    "total_percentage": 100,
+    "boys_percentage_num": 55,
+    "girls_percentage_num": 45,
+    "girls_percentage_decimal": 0.45,
+    "girls_count": 60.449999999999996,
+    "answer": 60.449999999999996
+  },
+  "correct_value": 26.999999999999996,
+  "flawed_value": 60.449999999999996,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_friends",
+      "question_inputs": [
+        "boys_count",
+        "boys_percentage_decimal"
+      ],
+      "solution_line_template": "Toby has {total_friends} friends because {boys_count} / {boys_percentage_decimal} = <<{boys_count}/{boys_percentage_decimal}={total_friends}>>{total_friends}"
+    },
+    {
+      "WK_inputs": [
+        "total_percentage"
+      ],
+      "line_number": "L2",
+      "output_variable": "girls_percentage_num",
+      "question_inputs": [
+        "boys_percentage_num"
+      ],
+      "solution_line_template": "{girls_percentage_num}% of his friends are girls because {total_percentage} - {boys_percentage_num} = <<{total_percentage}-{boys_percentage_num}={girls_percentage_num}>>{girls_percentage_num}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "girls_count",
+      "question_inputs": [],
+      "solution_line_template": "He has {girls_count} friends who are girls because {total_friends} x {girls_percentage_decimal} = <<{girls_count}={girls_count}>>{girls_count}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Toby has 60.0 friends because 33 / 0.55 = <<33/0.55=60.0>>60.0",
+    "L2": "45% of his friends are girls because 100 - 55 = <<100-55=45>>45",
+    "L3": "He has 60.45 friends who are girls because 60.0 x 0.45 = <<60.45=60.45>>60.45",
+    "FA": "#### 60.45"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -4423281937003216146,
+  "model_name": "google_gemini-2.5-flash"
+}

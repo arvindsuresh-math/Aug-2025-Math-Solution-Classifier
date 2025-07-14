@@ -1,0 +1,60 @@
+{
+  "index": 652,
+  "original_solution_mapping": {
+    "FA": "#### 150",
+    "L1": "She sold 60*1.50=<<60*1.50=90>>90 boxes on Sunday.",
+    "L2": "The total is 60+90=<<60+90=150>>150 boxes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 652.\n    Returns: the total number of boxes sold over the two days.\n    \"\"\"\n    # L1\n    boxes_sold_saturday = 60 # sold 60 boxes\n    sunday_increase_factor = 1.50 # 50% more than on Saturday (100% + 50% = 150% or 1.50 times)\n    boxes_sold_sunday = boxes_sold_saturday * sunday_increase_factor\n\n    # L2\n    total_boxes = boxes_sold_saturday + boxes_sold_sunday\n\n    # FA\n    answer = total_boxes\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "boxes_sold_sunday",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x145dce290>"
+  },
+  "correct_trace": {
+    "boxes_sold_saturday": 60,
+    "sunday_increase_factor": 1.5,
+    "boxes_sold_sunday": 90.0,
+    "total_boxes": 150.0,
+    "answer": 150.0
+  },
+  "flawed_trace": {
+    "boxes_sold_saturday": 60,
+    "sunday_increase_factor": 1.5,
+    "boxes_sold_sunday": 40.0,
+    "total_boxes": 100.0,
+    "answer": 100.0
+  },
+  "correct_value": 90.0,
+  "flawed_value": 40.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "sunday_increase_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "boxes_sold_sunday",
+      "question_inputs": [
+        "boxes_sold_saturday"
+      ],
+      "solution_line_template": "She sold {boxes_sold_saturday}*{sunday_increase_factor}=<<{boxes_sold_saturday}*{sunday_increase_factor}={boxes_sold_sunday}>>{boxes_sold_sunday} boxes on Sunday."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_boxes",
+      "question_inputs": [],
+      "solution_line_template": "The total is {boxes_sold_saturday}+{boxes_sold_sunday}=<<{boxes_sold_saturday}+{boxes_sold_sunday}={total_boxes}>>{total_boxes} boxes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She sold 60*1.5=<<60*1.5=40>>40 boxes on Sunday.",
+    "L2": "The total is 60+40=<<60+40=100>>100 boxes.",
+    "FA": "#### 100"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 1185057779858676918,
+  "model_name": "google_gemini-2.5-flash"
+}

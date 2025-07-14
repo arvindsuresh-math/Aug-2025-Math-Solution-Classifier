@@ -1,0 +1,89 @@
+{
+  "index": 606,
+  "original_solution_mapping": {
+    "FA": "#### 88",
+    "L1": "There are 3 * 20 = <<3*20=60>>60 green marbles.",
+    "L2": "There are 60 * 20/100 = <<60*20/100=12>>12 yellow marbles",
+    "L3": "In total there are 3 * 60 = <<3*60=180>>180 marbles.",
+    "L4": "That leaves 180 - 20 - 60 - 12 = <<180-20-60-12=88>>88 marbles of another color in the box."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 606.\n    Returns: the number of marbles of a different color.\n    \"\"\"\n    # L1\n    red_marbles = 20 # 20 red marbles\n    green_multiplier = 3 # three times more green marbles\n    green_marbles = green_multiplier * red_marbles\n\n    # L2\n    yellow_percentage = Fraction(20, 100) # 20% of the green marbles\n    yellow_marbles = green_marbles * yellow_percentage\n\n    # L3\n    total_marbles_multiplier = 3 # total of all marbles in the box is three times more than the number of green marbles\n    total_marbles = total_marbles_multiplier * green_marbles\n\n    # L4\n    other_color_marbles = total_marbles - red_marbles - green_marbles - yellow_marbles\n\n    # FA\n    answer = other_color_marbles\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "green_marbles",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x146f6b0d0>"
+  },
+  "correct_trace": {
+    "red_marbles": 20,
+    "green_multiplier": 3,
+    "green_marbles": 60,
+    "yellow_percentage": "1/5",
+    "yellow_marbles": "12",
+    "total_marbles_multiplier": 3,
+    "total_marbles": 180,
+    "other_color_marbles": "88",
+    "answer": "88"
+  },
+  "flawed_trace": {
+    "red_marbles": 20,
+    "green_multiplier": 3,
+    "green_marbles": 23,
+    "yellow_percentage": "1/5",
+    "yellow_marbles": "23/5",
+    "total_marbles_multiplier": 3,
+    "total_marbles": 69,
+    "other_color_marbles": "107/5",
+    "answer": "107/5"
+  },
+  "correct_value": 60,
+  "flawed_value": 23,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "green_marbles",
+      "question_inputs": [
+        "red_marbles",
+        "green_multiplier"
+      ],
+      "solution_line_template": "There are {green_multiplier} * {red_marbles} = <<{green_multiplier}*{red_marbles}={green_marbles}>>{green_marbles} green marbles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "yellow_marbles",
+      "question_inputs": [
+        "yellow_percentage"
+      ],
+      "solution_line_template": "There are {green_marbles} * {yellow_percentage} = <<{green_marbles}*{yellow_percentage}={yellow_marbles}>>{yellow_marbles} yellow marbles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_marbles",
+      "question_inputs": [
+        "total_marbles_multiplier"
+      ],
+      "solution_line_template": "In total there are {total_marbles_multiplier} * {green_marbles} = <<{total_marbles_multiplier}*{green_marbles}={total_marbles}>>{total_marbles} marbles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "other_color_marbles",
+      "question_inputs": [],
+      "solution_line_template": "That leaves {total_marbles} - {red_marbles} - {green_marbles} - {yellow_marbles} = <<{total_marbles}-{red_marbles}-{green_marbles}-{yellow_marbles}={other_color_marbles}>>{other_color_marbles} marbles of another color in the box."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 3 * 20 = <<3*20=23>>23 green marbles.",
+    "L2": "There are 23 * 20/100 = <<23*20/100=23/5>>23/5 yellow marbles",
+    "L3": "In total there are 3 * 23 = <<3*23=69>>69 marbles.",
+    "L4": "That leaves 69 - 20 - 23 - 23/5 = <<69-20-23-23/5=107/5>>107/5 marbles of another color in the box.",
+    "FA": "#### 107/5"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 8854494603180464303,
+  "model_name": "google_gemini-2.5-flash"
+}

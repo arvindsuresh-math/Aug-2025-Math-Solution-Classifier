@@ -1,0 +1,113 @@
+{
+  "index": 1081,
+  "original_solution_mapping": {
+    "FA": "#### 2460",
+    "L1": "The second hive has 20/100*1000 = <<20/100*1000=200>>200 fewer bees.",
+    "L2": "This translates to 1000-200 = <<1000-200=800>>800 bees.",
+    "L3": "Each bee in the first hive produces 1000/500 = <<1000/500=2>>2 liters",
+    "L4": "The second hive has bees each producing 1.4*2 = <<1.4*2=2.8>>2.8 liters",
+    "L5": "The total amount of honey produces by the bees in the second hive is 2.8*700 = <<2.8*700=1960>>1960",
+    "L6": "The total honey produced is 1960+500 = <<1960+500=2460>>2460 liters"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1081.\n    Returns: the total amount of honey produced by both hives in liters.\n    \"\"\"\n    # L1\n    hive1_bees = 1000 # One of the hives has 1000 bees\n    hive2_fewer_percent_num = 20 # 20% fewer bees\n    percent_factor = 0.01 # WK\n    hive2_fewer_bees = hive2_fewer_percent_num / 100 * hive1_bees\n\n    # L2\n    hive2_bees = hive1_bees - hive2_fewer_bees\n\n    # L3\n    hive1_honey = 500 # produces 500 liters of honey\n    honey_per_bee_hive1 = hive1_honey / hive1_bees\n\n    # L4\n    hive2_honey_increase_factor = 1.4 # each bee produces 40% more honey\n    honey_per_bee_hive2 = hive2_honey_increase_factor * honey_per_bee_hive1\n\n    # L5\n    # Note: The solution mapping uses 700 bees in L5, but L2 computes 800 bees. This is likely a typo in the solution mapping. We'll use hive2_bees as computed.\n    hive2_honey = honey_per_bee_hive2 * hive2_bees\n\n    # L6\n    total_honey = hive2_honey + hive1_honey\n\n    # FA\n    answer = total_honey\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "hive2_honey",
+    "operand_to_replace": "honey_per_bee_hive2",
+    "replacement_variable": "hive2_fewer_percent_num"
+  },
+  "correct_trace": {
+    "hive1_bees": 1000,
+    "hive2_fewer_percent_num": 20,
+    "percent_factor": 0.01,
+    "hive2_fewer_bees": 200.0,
+    "hive2_bees": 800.0,
+    "hive1_honey": 500,
+    "honey_per_bee_hive1": 0.5,
+    "hive2_honey_increase_factor": 1.4,
+    "honey_per_bee_hive2": 0.7,
+    "hive2_honey": 560.0,
+    "total_honey": 1060.0,
+    "answer": 1060.0
+  },
+  "flawed_trace": {
+    "hive1_bees": 1000,
+    "hive2_fewer_percent_num": 20,
+    "percent_factor": 0.01,
+    "hive2_fewer_bees": 200.0,
+    "hive2_bees": 800.0,
+    "hive1_honey": 500,
+    "honey_per_bee_hive1": 0.5,
+    "hive2_honey_increase_factor": 1.4,
+    "honey_per_bee_hive2": 0.7,
+    "hive2_honey": 16000.0,
+    "total_honey": 16500.0,
+    "answer": 16500.0
+  },
+  "correct_value": 560.0,
+  "flawed_value": 16000.0,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "hive2_fewer_percent_num",
+        "hive1_bees"
+      ],
+      "WK_inputs": [],
+      "output_variable": "hive2_fewer_bees",
+      "solution_line_template": "The second hive has {hive2_fewer_percent_num}/100*{hive1_bees} = <<{hive2_fewer_percent_num}/100*{hive1_bees}={hive2_fewer_bees}>>{hive2_fewer_bees} fewer bees."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "hive2_bees",
+      "solution_line_template": "This translates to {hive1_bees}-{hive2_fewer_bees} = <<{hive1_bees}-{hive2_fewer_bees}={hive2_bees}>>{hive2_bees} bees."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "hive1_honey"
+      ],
+      "WK_inputs": [],
+      "output_variable": "honey_per_bee_hive1",
+      "solution_line_template": "Each bee in the first hive produces {hive1_bees}/{hive1_honey} = <<{hive1_bees}/{hive1_honey}={honey_per_bee_hive1}>>{honey_per_bee_hive1} liters"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "hive2_honey_increase_factor"
+      ],
+      "WK_inputs": [],
+      "output_variable": "honey_per_bee_hive2",
+      "solution_line_template": "The second hive has bees each producing {hive2_honey_increase_factor}*{honey_per_bee_hive1} = <<{hive2_honey_increase_factor}*{honey_per_bee_hive1}={honey_per_bee_hive2}>>{honey_per_bee_hive2} liters"
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "hive2_honey",
+      "solution_line_template": "The total amount of honey produces by the bees in the second hive is {honey_per_bee_hive2}*{hive2_bees} = <<{honey_per_bee_hive2}*{hive2_bees}={hive2_honey}>>{hive2_honey}"
+    },
+    {
+      "line_number": "L6",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_honey",
+      "solution_line_template": "The total honey produced is {hive2_honey}+{hive1_honey} = <<{hive2_honey}+{hive1_honey}={total_honey}>>{total_honey} liters"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The second hive has 20/100*1000 = <<20/100*1000=200>>200 fewer bees.",
+    "L2": "This translates to 1000-200 = <<1000-200=800>>800 bees.",
+    "L3": "Each bee in the first hive produces 1000/500 = <<1000/500=0.5>>0.5 liters",
+    "L4": "The second hive has bees each producing 1.4*0.5 = <<1.4*0.5=0.7>>0.7 liters",
+    "L5": "The total amount of honey produces by the bees in the second hive is 20*800 = <<20*800=16000>>16000",
+    "L6": "The total honey produced is 16000+500 = <<16000+500=16500>>16500 liters",
+    "FA": "#### 16500"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operand. The variable 'hive2_fewer_percent_num' (value: 20) was used instead of 'honey_per_bee_hive2' (value: 0.7).",
+  "repro_seed": 2856857156574753665,
+  "model_name": "openai_gpt-4.1"
+}

@@ -1,0 +1,80 @@
+{
+  "index": 884,
+  "original_solution_mapping": {
+    "FA": "#### 72",
+    "L1": "First find the number of new vampires after one night: 5 people/vampire * 2 vampires = <<5*2=10>>10 people",
+    "L2": "Add that to the starting number of vampires to find the total number of vampires after one night: 10 vampires + 2 vampires = <<10+2=12>>12 vampires",
+    "L3": "Then find the number of new vampires on the second night: 5 people/vampire * 12 vampires = <<5*12=60>>60 people",
+    "L4": "Add that number to the starting number of vampires on the second night to find the total number of vampires after two nights: 60 vampires + 12 vampires = <<60+12=72>>72 vampires"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 884.\n    Returns: the total number of vampires after two nights.\n    \"\"\"\n    # L1\n    people_turned_per_vampire_per_night = 5 # each vampire turns 5 more people\n    initial_vampires = 2 # Two vampires have come\n    new_vampires_night1 = people_turned_per_vampire_per_night * initial_vampires\n\n    # L2\n    total_vampires_after_night1 = new_vampires_night1 + initial_vampires\n\n    # L3\n    new_vampires_night2 = people_turned_per_vampire_per_night * total_vampires_after_night1\n\n    # L4\n    total_vampires_after_night2 = new_vampires_night2 + total_vampires_after_night1\n\n    # FA\n    answer = total_vampires_after_night2\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_vampires_after_night2",
+    "replacement_variable": "new_vampires_night2"
+  },
+  "correct_trace": {
+    "people_turned_per_vampire_per_night": 5,
+    "initial_vampires": 2,
+    "new_vampires_night1": 10,
+    "total_vampires_after_night1": 12,
+    "new_vampires_night2": 60,
+    "total_vampires_after_night2": 72,
+    "answer": 72
+  },
+  "flawed_trace": {
+    "people_turned_per_vampire_per_night": 5,
+    "initial_vampires": 2,
+    "new_vampires_night1": 10,
+    "total_vampires_after_night1": 12,
+    "new_vampires_night2": 60,
+    "total_vampires_after_night2": 72,
+    "answer": 60
+  },
+  "correct_value": 72,
+  "flawed_value": 60,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "people_turned_per_vampire_per_night",
+        "initial_vampires"
+      ],
+      "WK_inputs": [],
+      "output_variable": "new_vampires_night1",
+      "solution_line_template": "First find the number of new vampires after one night: {people_turned_per_vampire_per_night} people/vampire * {initial_vampires} vampires = <<{people_turned_per_vampire_per_night}*{initial_vampires}={new_vampires_night1}>>{new_vampires_night1} people"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_vampires_after_night1",
+      "solution_line_template": "Add that to the starting number of vampires to find the total number of vampires after one night: {new_vampires_night1} vampires + {initial_vampires} vampires = <<{new_vampires_night1}+{initial_vampires}={total_vampires_after_night1}>>{total_vampires_after_night1} vampires"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "new_vampires_night2",
+      "solution_line_template": "Then find the number of new vampires on the second night: {people_turned_per_vampire_per_night} people/vampire * {total_vampires_after_night1} vampires = <<{people_turned_per_vampire_per_night}*{total_vampires_after_night1}={new_vampires_night2}>>{new_vampires_night2} people"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_vampires_after_night2",
+      "solution_line_template": "Add that number to the starting number of vampires on the second night to find the total number of vampires after two nights: {new_vampires_night2} vampires + {total_vampires_after_night1} vampires = <<{new_vampires_night2}+{total_vampires_after_night1}={total_vampires_after_night2}>>{total_vampires_after_night2} vampires"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the number of new vampires after one night: 5 people/vampire * 2 vampires = <<5*2=10>>10 people",
+    "L2": "Add that to the starting number of vampires to find the total number of vampires after one night: 10 vampires + 2 vampires = <<10+2=12>>12 vampires",
+    "L3": "Then find the number of new vampires on the second night: 5 people/vampire * 12 vampires = <<5*12=60>>60 people",
+    "FA": "#### 60"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'new_vampires_night2' (value: 60) was reported instead of 'total_vampires_after_night2' (value: 72).",
+  "repro_seed": -2892343779392051622,
+  "model_name": "google_gemini-2.5-flash"
+}

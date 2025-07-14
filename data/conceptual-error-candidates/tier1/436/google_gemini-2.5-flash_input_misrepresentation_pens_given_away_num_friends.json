@@ -1,0 +1,104 @@
+{
+  "index": 436,
+  "original_solution_mapping": {
+    "FA": "#### 22",
+    "L1": "Catherine gave eight pens to each of her seven friends, a total of 8*7 = <<8*7=56>>56 pens.",
+    "L2": "She remained with 60-56 = <<60-56=4>>4 pens.",
+    "L3": "When she also gave 6 pencils to each of her seven friends, she gave away 6*7 = <<6*7=42>>42 pencils.",
+    "L4": "Since she had the same number of pencils as pens, she remained with 60-42 = <<60-42=18>>18 pencils.",
+    "L5": "The total number of pens and pencils that Catherine remained with is 4+18 = <<4+18=22>>22"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 436.\n    Returns: the total number of pens and pencils Catherine had left.\n    \"\"\"\n    # L1\n    pens_per_friend = 8 # gave eight pens\n    num_friends = 7 # seven friends\n    pens_given_away = pens_per_friend * num_friends\n\n    # L2\n    initial_pens = 60 # 60 pens\n    pens_remaining = initial_pens - pens_given_away\n\n    # L3\n    pencils_per_friend = 6 # 6 pencils\n    pencils_given_away = pencils_per_friend * num_friends\n\n    # L4\n    initial_pencils = 60 # equal number of pencils and pens (and she had 60 pens)\n    pencils_remaining = initial_pencils - pencils_given_away\n\n    # L5\n    total_remaining = pens_remaining + pencils_remaining\n\n    # FA\n    answer = total_remaining\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "pens_given_away",
+    "operand_to_replace": "pens_per_friend",
+    "replacement_variable": "num_friends"
+  },
+  "correct_trace": {
+    "pens_per_friend": 8,
+    "num_friends": 7,
+    "pens_given_away": 56,
+    "initial_pens": 60,
+    "pens_remaining": 4,
+    "pencils_per_friend": 6,
+    "pencils_given_away": 42,
+    "initial_pencils": 60,
+    "pencils_remaining": 18,
+    "total_remaining": 22,
+    "answer": 22
+  },
+  "flawed_trace": {
+    "pens_per_friend": 8,
+    "num_friends": 7,
+    "pens_given_away": 49,
+    "initial_pens": 60,
+    "pens_remaining": 11,
+    "pencils_per_friend": 6,
+    "pencils_given_away": 42,
+    "initial_pencils": 60,
+    "pencils_remaining": 18,
+    "total_remaining": 29,
+    "answer": 29
+  },
+  "correct_value": 56,
+  "flawed_value": 49,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "pens_per_friend",
+        "num_friends"
+      ],
+      "WK_inputs": [],
+      "output_variable": "pens_given_away",
+      "solution_line_template": "Catherine gave {pens_per_friend} pens to each of her {num_friends} friends, a total of {pens_per_friend}*{num_friends} = <<{pens_per_friend}*{num_friends}={pens_given_away}>>{pens_given_away} pens."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "initial_pens"
+      ],
+      "WK_inputs": [],
+      "output_variable": "pens_remaining",
+      "solution_line_template": "She remained with {initial_pens}-{pens_given_away} = <<{initial_pens}-{pens_given_away}={pens_remaining}>>{pens_remaining} pens."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "pencils_per_friend"
+      ],
+      "WK_inputs": [],
+      "output_variable": "pencils_given_away",
+      "solution_line_template": "When she also gave {pencils_per_friend} pencils to each of her {num_friends} friends, she gave away {pencils_per_friend}*{num_friends} = <<{pencils_per_friend}*{num_friends}={pencils_given_away}>>{pencils_given_away} pencils."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "initial_pencils"
+      ],
+      "WK_inputs": [],
+      "output_variable": "pencils_remaining",
+      "solution_line_template": "Since she had the same number of pencils as pens, she remained with {initial_pencils}-{pencils_given_away} = <<{initial_pencils}-{pencils_given_away}={pencils_remaining}>>{pencils_remaining} pencils."
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_remaining",
+      "solution_line_template": "The total number of pens and pencils that Catherine remained with is {pens_remaining}+{pencils_remaining} = <<{pens_remaining}+{pencils_remaining}={total_remaining}>>{total_remaining}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Catherine gave 7 pens to each of her 7 friends, a total of 7*7 = <<7*7=49>>49 pens.",
+    "L2": "She remained with 60-49 = <<60-49=11>>11 pens.",
+    "L3": "When she also gave 6 pencils to each of her 7 friends, she gave away 6*7 = <<6*7=42>>42 pencils.",
+    "L4": "Since she had the same number of pencils as pens, she remained with 60-42 = <<60-42=18>>18 pencils.",
+    "L5": "The total number of pens and pencils that Catherine remained with is 11+18 = <<11+18=29>>29",
+    "FA": "#### 29"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'num_friends' (7) was used instead of 'pens_per_friend' (8).",
+  "repro_seed": 8201571074520410598,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,64 @@
+{
+  "index": 2195,
+  "original_solution_mapping": {
+    "FA": "#### 1600",
+    "L1": "To go to school and back, Shane drives 2*10 = <<2*10=20>>20 miles per day.",
+    "L2": "In 80 days of a semester, he drives for 80*20 = <<80*20=1600>>1600 miles"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2195.\n    Returns: the total distance Shane drives in an 80-day semester.\n    \"\"\"\n    # L1\n    miles_one_way = 10 # 10 miles\n    round_trip_multiplier = 2 # WK\n    miles_per_day = round_trip_multiplier * miles_one_way\n\n    # L2\n    semester_days = 80 # 80 day semester\n    total_distance = semester_days * miles_per_day\n\n    # FA\n    answer = total_distance\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "miles_per_day",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x1440f2490>"
+  },
+  "correct_trace": {
+    "miles_one_way": 10,
+    "round_trip_multiplier": 2,
+    "miles_per_day": 20,
+    "semester_days": 80,
+    "total_distance": 1600,
+    "answer": 1600
+  },
+  "flawed_trace": {
+    "miles_one_way": 10,
+    "round_trip_multiplier": 2,
+    "miles_per_day": 12,
+    "semester_days": 80,
+    "total_distance": 960,
+    "answer": 960
+  },
+  "correct_value": 20,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "miles_one_way"
+      ],
+      "WK_inputs": [
+        "round_trip_multiplier"
+      ],
+      "output_variable": "miles_per_day",
+      "solution_line_template": "To go to school and back, Shane drives {round_trip_multiplier}*{miles_one_way} = <<{round_trip_multiplier}*{miles_one_way}={miles_per_day}>>{miles_per_day} miles per day."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "semester_days"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_distance",
+      "solution_line_template": "In {semester_days} days of a semester, he drives for {semester_days}*{miles_per_day} = <<{semester_days}*{miles_per_day}={total_distance}>>{total_distance} miles"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "To go to school and back, Shane drives 2*10 = <<2*10=12>>12 miles per day.",
+    "L2": "In 80 days of a semester, he drives for 80*12 = <<80*12=960>>960 miles",
+    "FA": "#### 960"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 2882308889552426027,
+  "model_name": "google_gemini-2.5-flash"
+}

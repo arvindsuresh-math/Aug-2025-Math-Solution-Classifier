@@ -1,0 +1,64 @@
+{
+  "index": 521,
+  "original_solution_mapping": {
+    "FA": "#### 18",
+    "L1": "Micah picks 2 x 12 = <<2*12=24>>24 strawberries.",
+    "L2": "After he eats 6, there are this many strawberries left for his mom: 24 - 6 = <<24-6=18>>18."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 521.\n    Returns: the number of strawberries left for his mom.\n    \"\"\"\n    # L1\n    num_dozen_picked = 2 # 2 dozen strawberries\n    dozen = 12 # WK\n    total_picked_strawberries = num_dozen_picked * dozen\n\n    # L2\n    eaten_strawberries = 6 # eats 6\n    strawberries_for_mom = total_picked_strawberries - eaten_strawberries\n\n    # FA\n    answer = strawberries_for_mom\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_picked_strawberries",
+    "operand_to_replace": "num_dozen_picked",
+    "replacement_variable": "dozen"
+  },
+  "correct_trace": {
+    "num_dozen_picked": 2,
+    "dozen": 12,
+    "total_picked_strawberries": 24,
+    "eaten_strawberries": 6,
+    "strawberries_for_mom": 18,
+    "answer": 18
+  },
+  "flawed_trace": {
+    "num_dozen_picked": 2,
+    "dozen": 12,
+    "total_picked_strawberries": 144,
+    "eaten_strawberries": 6,
+    "strawberries_for_mom": 138,
+    "answer": 138
+  },
+  "correct_value": 24,
+  "flawed_value": 144,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "num_dozen_picked"
+      ],
+      "WK_inputs": [
+        "dozen"
+      ],
+      "output_variable": "total_picked_strawberries",
+      "solution_line_template": "Micah picks {num_dozen_picked} x {dozen} = <<{num_dozen_picked}*{dozen}={total_picked_strawberries}>>{total_picked_strawberries} strawberries."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "eaten_strawberries"
+      ],
+      "WK_inputs": [],
+      "output_variable": "strawberries_for_mom",
+      "solution_line_template": "After he eats {eaten_strawberries}, there are this many strawberries left for his mom: {total_picked_strawberries} - {eaten_strawberries} = <<{total_picked_strawberries}-{eaten_strawberries}={strawberries_for_mom}>>{strawberries_for_mom}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Micah picks 12 x 12 = <<12*12=144>>144 strawberries.",
+    "L2": "After he eats 6, there are this many strawberries left for his mom: 144 - 6 = <<144-6=138>>138.",
+    "FA": "#### 138"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'dozen' (12) was used instead of 'num_dozen_picked' (2).",
+  "repro_seed": 5114602538880953242,
+  "model_name": "google_gemini-2.5-flash"
+}
