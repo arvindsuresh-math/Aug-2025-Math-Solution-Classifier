@@ -207,10 +207,11 @@ The GUI for each candidate would present:
 * **Action Buttons:**
   * `Accept`: Saves the edited solution and explanation, creating the final SFT-ready data point.
   * `Reject`: Discards the candidate entirely.
+  * `Skip`  : Temporarily ignore the candidate, can be re-visited in the future.
 
 **Advantages of this Revised Approach:**
 
-* **Preserves Numerical Integrity:** You are always working from a `flawed_trace` that is mathematically sound, given the logical mutation. The human edits text only.
+* **Preserves Numerical Integrity:** You are always working from a `flawed_trace` that is mathematically sound, given the logical mutation. The human edits ambient text only, without worrying about the numerical values.
 * **Maximizes Human Efficiency:** The human is not calculating anything. They are performing a constrained editing task: making the text match the numbers. The GUI provides all necessary context to do this quickly.
 * **Control:** You have full control over the final quality of every single data point.
 
@@ -220,7 +221,7 @@ The GUI for each candidate would present:
 
 ### **Objective**
 
-Below, we outline a taxonomy of conceptual error types that can be programmatically generated to create a high-quality SFT dataset. The goal is to simulate plausible student mistakes by manipulating the logic of validated "Formalization Templates."
+Below, we outline a taxonomy of conceptual error types that can be programmatically generated to create a high-quality SFT dataset. The goal is to simulate plausible student mistakes by manipulating the logic of validated "Formalization Templates." The error types below are sub-types of "conceptual error". 
 
 ### **Guiding Principle: "Single Point of Failure"**
 
@@ -474,3 +475,7 @@ Some pointers:
 2. If you find that many changes are needed, or that it's getting to be a pain, simply skip and move onto the next problem until you find one that's sufficiently simple.
 3. If you find the induced change is absurd or unrealistic, then simply reject the sample.
 4. Note: there are TONS of samples, so for a first pass it should be totally fine to simply skip over samples that appear too complicated. In all likelihood, we might already get enough samples with minor/no modification needed at all!
+
+
+---
+
