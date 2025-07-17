@@ -130,25 +130,20 @@ tier4_final = [3847, 4847, 5040, 7037]
 
 **Level 1**
 
-Features: Question, correct answer
-Label: 0 or 1 (correct or incorrect)
+Features: Question, answer (correct/flawed)
+Label: 0 or 1 (correct or flawed)
 
 **Level 2**
 
-Features: Question, correct answer, wrong answer
-Label: 0 or 1 (conceptual or computational)
+Features: Question, answer (correct/flawed)
+Label: 0, 1, or 2 (correct/conceptual error/computational error)
 
 **Level 3**
 
-Features: Question, answer (correct or flawed)
-Label: 0 or 1 or 2 (correct, conceptual, computational)
-
-**Level 4**
-
-Features: Question, answer (correct or flawed)
+Features: Question, answer (correct/flawed)
 Label: 0,1,2,3 (correct, conceptual, computational, skipped step)
 
-**Level 5**
+**Level 4**
 
 Features: Question, answer (correct or flawed)
 Label: Json object with verdict, error type, erroneous_line_number
