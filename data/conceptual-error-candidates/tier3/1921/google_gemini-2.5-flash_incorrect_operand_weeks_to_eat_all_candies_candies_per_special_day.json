@@ -1,0 +1,93 @@
+{
+  "index": 1921,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "On Monday and Tuesday, she eats 2 * 2 = <<2*2=4>>4 candies.",
+    "L2": "On the other days of the week, she eats 5 * 1=<<5*1=5>>5 candies.",
+    "L3": "In a week she eats 5 + 4= <<5+4=9>>9 candies.",
+    "L4": "So it takes 36 / 9 = <<36/9=4>>4 weeks for Lisa to eat all candies."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1921.\n    Returns: the number of weeks it takes for Lisa to eat all the candies.\n    \"\"\"\n    # L1\n    candies_per_special_day = 2 # eats 2 candies for each day\n    special_days_count = 2 # On Mondays and Wednesdays\n    candies_eaten_special_days = candies_per_special_day * special_days_count\n\n    # L2\n    candies_per_other_day = 1 # she eats 1 candy for each day\n    other_days_count = 5 # WK\n    candies_eaten_other_days = other_days_count * candies_per_other_day\n\n    # L3\n    candies_per_week = candies_eaten_other_days + candies_eaten_special_days\n\n    # L4\n    total_candies = 36 # Lisa has 36 candies\n    weeks_to_eat_all_candies = total_candies / candies_per_week\n\n    # FA\n    answer = weeks_to_eat_all_candies\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "weeks_to_eat_all_candies",
+    "operand_to_replace": "candies_per_week",
+    "replacement_variable": "candies_per_special_day"
+  },
+  "correct_trace": {
+    "candies_per_special_day": 2,
+    "special_days_count": 2,
+    "candies_eaten_special_days": 4,
+    "candies_per_other_day": 1,
+    "other_days_count": 5,
+    "candies_eaten_other_days": 5,
+    "candies_per_week": 9,
+    "total_candies": 36,
+    "weeks_to_eat_all_candies": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "candies_per_special_day": 2,
+    "special_days_count": 2,
+    "candies_eaten_special_days": 4,
+    "candies_per_other_day": 1,
+    "other_days_count": 5,
+    "candies_eaten_other_days": 5,
+    "candies_per_week": 9,
+    "total_candies": 36,
+    "weeks_to_eat_all_candies": 18.0,
+    "answer": 18.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 18.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "candies_eaten_special_days",
+      "question_inputs": [
+        "candies_per_special_day",
+        "special_days_count"
+      ],
+      "solution_line_template": "On Monday and Tuesday, she eats {candies_per_special_day} * {special_days_count} = <<{candies_per_special_day}*{special_days_count}={candies_eaten_special_days}>>{candies_eaten_special_days} candies."
+    },
+    {
+      "WK_inputs": [
+        "other_days_count"
+      ],
+      "line_number": "L2",
+      "output_variable": "candies_eaten_other_days",
+      "question_inputs": [
+        "candies_per_other_day"
+      ],
+      "solution_line_template": "On the other days of the week, she eats {other_days_count} * {candies_per_other_day}=<<{other_days_count}*{candies_per_other_day}={candies_eaten_other_days}>>{candies_eaten_other_days} candies."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "candies_per_week",
+      "question_inputs": [],
+      "solution_line_template": "In a week she eats {candies_eaten_other_days} + {candies_eaten_special_days}= <<{candies_eaten_other_days}+{candies_eaten_special_days}={candies_per_week}>>{candies_per_week} candies."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "weeks_to_eat_all_candies",
+      "question_inputs": [
+        "total_candies"
+      ],
+      "solution_line_template": "So it takes {total_candies} / {candies_per_week} = <<{total_candies}/{candies_per_week}={weeks_to_eat_all_candies}>>{weeks_to_eat_all_candies} weeks for Lisa to eat all candies."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Monday and Tuesday, she eats 2 * 2 = <<2*2=4>>4 candies.",
+    "L2": "On the other days of the week, she eats 5 * 1=<<5*1=5>>5 candies.",
+    "L3": "In a week she eats 5 + 4= <<5+4=9>>9 candies.",
+    "L4": "So it takes 36 / 2 = <<36/2=18>>18 weeks for Lisa to eat all candies.",
+    "FA": "#### 18"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'candies_per_special_day' (value: 2) was used instead of 'candies_per_week' (value: 9).",
+  "repro_seed": 9148949386157008131,
+  "model_name": "google_gemini-2.5-flash"
+}

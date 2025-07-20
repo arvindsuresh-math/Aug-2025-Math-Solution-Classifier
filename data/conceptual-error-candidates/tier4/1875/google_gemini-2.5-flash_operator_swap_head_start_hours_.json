@@ -1,0 +1,90 @@
+{
+  "index": 1875,
+  "original_solution_mapping": {
+    "FA": "#### 1",
+    "L1": "The cat got a 15/60=<<15/60=.25>>.25 hour head start",
+    "L2": "That means it ran 20*.25=<<20*.25=5>>5 miles",
+    "L3": "The rabbit goes 25-20=<<25-20=5>>5 mph faster than the cat",
+    "L4": "So it takes 5/5=<<5/5=1>>1 hour for the rabbit to catch up"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1875.\n    Returns: the time in hours for the rabbit to catch up to the cat.\n    \"\"\"\n    # L1\n    head_start_minutes = 15 # 15-minute head start\n    minutes_per_hour = 60 # WK\n    head_start_hours = head_start_minutes / minutes_per_hour\n\n    # L2\n    cat_speed = 20 # His cat can run 20 miles per hour\n    cat_head_start_distance = cat_speed * head_start_hours\n\n    # L3\n    rabbit_speed = 25 # Tom's rabbit can run at 25 miles per hour\n    speed_difference = rabbit_speed - cat_speed\n\n    # L4\n    time_to_catch_up = cat_head_start_distance / speed_difference\n\n    # FA\n    answer = time_to_catch_up\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "head_start_hours",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x31b914a10>"
+  },
+  "correct_trace": {
+    "head_start_minutes": 15,
+    "minutes_per_hour": 60,
+    "head_start_hours": 0.25,
+    "cat_speed": 20,
+    "cat_head_start_distance": 5.0,
+    "rabbit_speed": 25,
+    "speed_difference": 5,
+    "time_to_catch_up": 1.0,
+    "answer": 1.0
+  },
+  "flawed_trace": {
+    "head_start_minutes": 15,
+    "minutes_per_hour": 60,
+    "head_start_hours": 900,
+    "cat_speed": 20,
+    "cat_head_start_distance": 18000,
+    "rabbit_speed": 25,
+    "speed_difference": 5,
+    "time_to_catch_up": 3600.0,
+    "answer": 3600.0
+  },
+  "correct_value": 0.25,
+  "flawed_value": 900,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "head_start_hours",
+      "question_inputs": [
+        "head_start_minutes"
+      ],
+      "solution_line_template": "The cat got a {head_start_minutes}/{minutes_per_hour}=<<{head_start_minutes}/{minutes_per_hour}={head_start_hours}>>{head_start_hours} hour head start"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cat_head_start_distance",
+      "question_inputs": [
+        "cat_speed"
+      ],
+      "solution_line_template": "That means it ran {cat_speed}*{head_start_hours}=<<{cat_speed}*{head_start_hours}={cat_head_start_distance}>>{cat_head_start_distance} miles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "speed_difference",
+      "question_inputs": [
+        "rabbit_speed"
+      ],
+      "solution_line_template": "The rabbit goes {rabbit_speed}-{cat_speed}=<<{rabbit_speed}-{cat_speed}={speed_difference}>>{speed_difference} mph faster than the cat"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "time_to_catch_up",
+      "question_inputs": [],
+      "solution_line_template": "So it takes {cat_head_start_distance}/{speed_difference}=<<{cat_head_start_distance}/{speed_difference}={time_to_catch_up}>>{time_to_catch_up} hour for the rabbit to catch up"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The cat got a 15/60=<<15/60=900>>900 hour head start",
+    "L2": "That means it ran 20*900=<<20*900=18000>>18000 miles",
+    "L3": "The rabbit goes 25-20=<<25-20=5>>5 mph faster than the cat",
+    "L4": "So it takes 18000/5=<<18000/5=3600>>3600 hour for the rabbit to catch up",
+    "FA": "#### 3600"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -698054444793097395,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 1878,
+  "original_solution_mapping": {
+    "FA": "#### 47",
+    "L1": "Emma's sister is 7 + 9 = <<7+9=16>>16 years old.",
+    "L2": "In this many years, Emma's sister will be 56 years old: 56 - 16 = <<56-16=40>>40 years.",
+    "L3": "When her sister is 56 years old, Emma will be 7 + 40 = <<7+40=47>>47 years."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1878.\n    Returns: Emma's age when her sister is 56.\n    \"\"\"\n    # L1\n    emma_current_age = 7 # Emma is 7 years old\n    sister_age_difference = 9 # her sister is 9 years older than her\n    sister_current_age = emma_current_age + sister_age_difference\n\n    # L2\n    sister_future_age = 56 # when her sister is 56\n    years_to_future = sister_future_age - sister_current_age\n\n    # L3\n    emma_future_age = emma_current_age + years_to_future\n\n    # FA\n    answer = emma_future_age\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "years_to_future",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x318244bd0>"
+  },
+  "correct_trace": {
+    "emma_current_age": 7,
+    "sister_age_difference": 9,
+    "sister_current_age": 16,
+    "sister_future_age": 56,
+    "years_to_future": 40,
+    "emma_future_age": 47,
+    "answer": 47
+  },
+  "flawed_trace": {
+    "emma_current_age": 7,
+    "sister_age_difference": 9,
+    "sister_current_age": 16,
+    "sister_future_age": 56,
+    "years_to_future": 72,
+    "emma_future_age": 79,
+    "answer": 79
+  },
+  "correct_value": 40,
+  "flawed_value": 72,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "emma_current_age",
+        "sister_age_difference"
+      ],
+      "WK_inputs": [],
+      "output_variable": "sister_current_age",
+      "solution_line_template": "Emma\u2019s sister is {emma_current_age} + {sister_age_difference} = <<{emma_current_age}+{sister_age_difference}={sister_current_age}>>{sister_current_age} years old."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "sister_future_age"
+      ],
+      "WK_inputs": [],
+      "output_variable": "years_to_future",
+      "solution_line_template": "In this many years, Emma\u2019s sister will be {sister_future_age} years old: {sister_future_age} - {sister_current_age} = <<{sister_future_age}-{sister_current_age}={years_to_future}>>{years_to_future} years."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "emma_future_age",
+      "solution_line_template": "When her sister is {sister_future_age} years old, Emma will be {emma_current_age} + {years_to_future} = <<{emma_current_age}+{years_to_future}={emma_future_age}>>{emma_future_age} years."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Emma\u2019s sister is 7 + 9 = <<7+9=16>>16 years old.",
+    "L2": "In this many years, Emma\u2019s sister will be 56 years old: 56 - 16 = <<56-16=72>>72 years.",
+    "L3": "When her sister is 56 years old, Emma will be 7 + 72 = <<7+72=79>>79 years.",
+    "FA": "#### 79"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 8784393862054520830,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,104 @@
+{
+  "index": 4742,
+  "original_solution_mapping": {
+    "FA": "#### 70",
+    "L1": "Molly has two parents and three brothers, which totals 2+3=<<2+3=5>>5 parents and siblings.",
+    "L2": "Since each brother is married with 2 children, then each brother has a family containing 1+2=<<1+2=3>>3 people.",
+    "L3": "Thus, the families of the three brothers contain an additional 3*3=<<3*3=9>>9 relatives.",
+    "L4": "In total, Molly has 5+9=<<5+9=14>>14 relatives.",
+    "L5": "At $5 per package, Molly will spend 14*$5=$<<14*5=70>>70 to mail the packages."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4742.\n    Returns: the total cost to send all gifts by mail to relatives.\n    \"\"\"\n    # L1\n    num_parents = 2 # two parents\n    num_brothers = 3 # three brothers\n    parents_and_siblings = num_parents + num_brothers\n\n    # L2\n    children_per_brother = 2 # 2 children each\n    spouse_per_brother = 1 # WK\n    people_per_brother_family = spouse_per_brother + children_per_brother\n\n    # L3\n    relatives_from_brothers_families = num_brothers * people_per_brother_family\n\n    # L4\n    total_relatives = parents_and_siblings + relatives_from_brothers_families\n\n    # L5\n    cost_per_package = 5 # $5 per package\n    total_cost = total_relatives * cost_per_package\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_relatives",
+    "operand_to_replace": "relatives_from_brothers_families",
+    "replacement_variable": "children_per_brother"
+  },
+  "correct_trace": {
+    "num_parents": 2,
+    "num_brothers": 3,
+    "parents_and_siblings": 5,
+    "children_per_brother": 2,
+    "spouse_per_brother": 1,
+    "people_per_brother_family": 3,
+    "relatives_from_brothers_families": 9,
+    "total_relatives": 14,
+    "cost_per_package": 5,
+    "total_cost": 70,
+    "answer": 70
+  },
+  "flawed_trace": {
+    "num_parents": 2,
+    "num_brothers": 3,
+    "parents_and_siblings": 5,
+    "children_per_brother": 2,
+    "spouse_per_brother": 1,
+    "people_per_brother_family": 3,
+    "relatives_from_brothers_families": 9,
+    "total_relatives": 7,
+    "cost_per_package": 5,
+    "total_cost": 35,
+    "answer": 35
+  },
+  "correct_value": 14,
+  "flawed_value": 7,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "parents_and_siblings",
+      "question_inputs": [
+        "num_parents",
+        "num_brothers"
+      ],
+      "solution_line_template": "Molly has {num_parents} parents and {num_brothers} brothers, which totals {num_parents}+{num_brothers}=<<{num_parents}+{num_brothers}={parents_and_siblings}>>{parents_and_siblings} parents and siblings."
+    },
+    {
+      "WK_inputs": [
+        "spouse_per_brother"
+      ],
+      "line_number": "L2",
+      "output_variable": "people_per_brother_family",
+      "question_inputs": [
+        "children_per_brother"
+      ],
+      "solution_line_template": "Since each brother is married with {children_per_brother} children, then each brother has a family containing {spouse_per_brother}+{children_per_brother}=<<{spouse_per_brother}+{children_per_brother}={people_per_brother_family}>>{people_per_brother_family} people."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "relatives_from_brothers_families",
+      "question_inputs": [],
+      "solution_line_template": "Thus, the families of the three brothers contain an additional {num_brothers}*{people_per_brother_family}=<<{num_brothers}*{people_per_brother_family}={relatives_from_brothers_families}>>{relatives_from_brothers_families} relatives."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_relatives",
+      "question_inputs": [],
+      "solution_line_template": "In total, Molly has {parents_and_siblings}+{relatives_from_brothers_families}=<<{parents_and_siblings}+{relatives_from_brothers_families}={total_relatives}>>{total_relatives} relatives."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "cost_per_package"
+      ],
+      "solution_line_template": "At ${cost_per_package} per package, Molly will spend {total_relatives}*${cost_per_package}=$<<{total_relatives}*{cost_per_package}={total_cost}>>{total_cost} to mail the packages."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Molly has 2 parents and 3 brothers, which totals 2+3=<<2+3=5>>5 parents and siblings.",
+    "L2": "Since each brother is married with 2 children, then each brother has a family containing 1+2=<<1+2=3>>3 people.",
+    "L3": "Thus, the families of the three brothers contain an additional 3*3=<<3*3=9>>9 relatives.",
+    "L4": "In total, Molly has 5+2=<<5+2=7>>7 relatives.",
+    "L5": "At $5 per package, Molly will spend 7*$5=$<<7*5=35>>35 to mail the packages.",
+    "FA": "#### 35"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'children_per_brother' (value: 2) was used instead of 'relatives_from_brothers_families' (value: 9).",
+  "repro_seed": -2414042919790931607,
+  "model_name": "google_gemini-2.5-flash"
+}

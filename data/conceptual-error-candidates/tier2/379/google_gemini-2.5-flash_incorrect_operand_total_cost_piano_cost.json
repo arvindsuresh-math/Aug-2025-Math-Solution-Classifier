@@ -1,0 +1,89 @@
+{
+  "index": 379,
+  "original_solution_mapping": {
+    "FA": "#### 1100",
+    "L1": "The normal price of the lessons would be 20*40=$<<20*40=800>>800",
+    "L2": "The discount saves him 800*.25=$<<800*.25=200>>200",
+    "L3": "So the lessons cost him 800-200=$<<800-200=600>>600",
+    "L4": "That means everything costs 500+600=$<<500+600=1100>>1100"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 379.\n    Returns: the total cost of everything.\n    \"\"\"\n    # L1\n    num_lessons = 20 # 20 lessons\n    cost_per_lesson = 40 # $40 per lesson\n    normal_lesson_price = num_lessons * cost_per_lesson\n\n    # L2\n    discount_percent = 0.25 # 25% discount\n    discount_amount = normal_lesson_price * discount_percent\n\n    # L3\n    final_lesson_cost = normal_lesson_price - discount_amount\n\n    # L4\n    piano_cost = 500 # buys a piano for $500\n    total_cost = piano_cost + final_lesson_cost\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_cost",
+    "operand_to_replace": "final_lesson_cost",
+    "replacement_variable": "piano_cost"
+  },
+  "correct_trace": {
+    "num_lessons": 20,
+    "cost_per_lesson": 40,
+    "normal_lesson_price": 800,
+    "discount_percent": 0.25,
+    "discount_amount": 200.0,
+    "final_lesson_cost": 600.0,
+    "piano_cost": 500,
+    "total_cost": 1100.0,
+    "answer": 1100.0
+  },
+  "flawed_trace": {
+    "num_lessons": 20,
+    "cost_per_lesson": 40,
+    "normal_lesson_price": 800,
+    "discount_percent": 0.25,
+    "discount_amount": 200.0,
+    "final_lesson_cost": 600.0,
+    "piano_cost": 500,
+    "total_cost": 1000,
+    "answer": 1000
+  },
+  "correct_value": 1100.0,
+  "flawed_value": 1000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "normal_lesson_price",
+      "question_inputs": [
+        "num_lessons",
+        "cost_per_lesson"
+      ],
+      "solution_line_template": "The normal price of the lessons would be {num_lessons}*{cost_per_lesson}=$<<{num_lessons}*{cost_per_lesson}={normal_lesson_price}>>{normal_lesson_price}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "discount_amount",
+      "question_inputs": [
+        "discount_percent"
+      ],
+      "solution_line_template": "The discount saves him {normal_lesson_price}*{discount_percent}=$<<{normal_lesson_price}*{discount_percent}={discount_amount}>>{discount_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_lesson_cost",
+      "question_inputs": [],
+      "solution_line_template": "So the lessons cost him {normal_lesson_price}-{discount_amount}=$<<{normal_lesson_price}-{discount_amount}={final_lesson_cost}>>{final_lesson_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "piano_cost"
+      ],
+      "solution_line_template": "That means everything costs {piano_cost}+{final_lesson_cost}=$<<{piano_cost}+{final_lesson_cost}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The normal price of the lessons would be 20*40=$<<20*40=800>>800",
+    "L2": "The discount saves him 800*0.25=$<<800*0.25=200>>200",
+    "L3": "So the lessons cost him 800-200=$<<800-200=600>>600",
+    "L4": "That means everything costs 500+500=$<<500+500=1000>>1000",
+    "FA": "#### 1000"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'piano_cost' (value: 500) was used instead of 'final_lesson_cost' (value: 600.0).",
+  "repro_seed": 1541388805181783579,
+  "model_name": "google_gemini-2.5-flash"
+}

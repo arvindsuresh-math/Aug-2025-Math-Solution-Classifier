@@ -1,0 +1,94 @@
+{
+  "index": 264,
+  "original_solution_mapping": {
+    "FA": "#### 21600",
+    "L1": "On weekdays it earns $600/weekday * 5 weekdays = $<<600*5=3000>>3000",
+    "L2": "During the weekend it earns twice as much each day so it makes ($600 * 2)/weekend day * 2 weekend days = $<<(600*2)*2=2400>>2400",
+    "L3": "Every week it earns $3000 + $2400 = $<<3000+2400=5400>>5400",
+    "L4": "By the end of the month, it earns $5400/week * 4 weeks = $21600"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 264.\n    Returns: the total money earned by the end of the month.\n    \"\"\"\n    # L1\n    weekday_earnings_per_day = 600 # earns $600 every weekday\n    num_weekdays_per_week = 5 # WK\n    total_weekday_earnings_per_week = weekday_earnings_per_day * num_weekdays_per_week\n\n    # L2\n    multiplier_weekend = 2 # twice as much on the weekend\n    num_weekend_days_per_week = 2 # WK\n    total_weekend_earnings_per_week = (weekday_earnings_per_day * multiplier_weekend) * num_weekend_days_per_week\n\n    # L3\n    total_weekly_earnings = total_weekday_earnings_per_week + total_weekend_earnings_per_week\n\n    # L4\n    num_weeks_per_month = 4 # WK\n    total_monthly_earnings = total_weekly_earnings * num_weeks_per_month\n\n    # FA\n    answer = total_monthly_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_weekend_earnings_per_week",
+    "operand_to_replace": "num_weekend_days_per_week",
+    "replacement_variable": "weekday_earnings_per_day"
+  },
+  "correct_trace": {
+    "weekday_earnings_per_day": 600,
+    "num_weekdays_per_week": 5,
+    "total_weekday_earnings_per_week": 3000,
+    "multiplier_weekend": 2,
+    "num_weekend_days_per_week": 2,
+    "total_weekend_earnings_per_week": 2400,
+    "total_weekly_earnings": 5400,
+    "num_weeks_per_month": 4,
+    "total_monthly_earnings": 21600,
+    "answer": 21600
+  },
+  "flawed_trace": {
+    "weekday_earnings_per_day": 600,
+    "num_weekdays_per_week": 5,
+    "total_weekday_earnings_per_week": 3000,
+    "multiplier_weekend": 2,
+    "num_weekend_days_per_week": 2,
+    "total_weekend_earnings_per_week": 720000,
+    "total_weekly_earnings": 723000,
+    "num_weeks_per_month": 4,
+    "total_monthly_earnings": 2892000,
+    "answer": 2892000
+  },
+  "correct_value": 2400,
+  "flawed_value": 720000,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "weekday_earnings_per_day"
+      ],
+      "WK_inputs": [
+        "num_weekdays_per_week"
+      ],
+      "output_variable": "total_weekday_earnings_per_week",
+      "solution_line_template": "On weekdays it earns ${weekday_earnings_per_day}/weekday * {num_weekdays_per_week} weekdays = $<<{weekday_earnings_per_day}*{num_weekdays_per_week}={total_weekday_earnings_per_week}>>{total_weekday_earnings_per_week}"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "multiplier_weekend"
+      ],
+      "WK_inputs": [
+        "num_weekend_days_per_week"
+      ],
+      "output_variable": "total_weekend_earnings_per_week",
+      "solution_line_template": "During the weekend it earns twice as much each day so it makes (${weekday_earnings_per_day} * {multiplier_weekend})/weekend day * {num_weekend_days_per_week} weekend days = $<<({weekday_earnings_per_day}*{multiplier_weekend})*{num_weekend_days_per_week}={total_weekend_earnings_per_week}>>{total_weekend_earnings_per_week}"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_weekly_earnings",
+      "solution_line_template": "Every week it earns ${total_weekday_earnings_per_week} + ${total_weekend_earnings_per_week} = $<<{total_weekday_earnings_per_week}+{total_weekend_earnings_per_week}={total_weekly_earnings}>>{total_weekly_earnings}"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [
+        "num_weeks_per_month"
+      ],
+      "output_variable": "total_monthly_earnings",
+      "solution_line_template": "By the end of the month, it earns ${total_weekly_earnings}/week * {num_weeks_per_month} weeks = ${total_monthly_earnings}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On weekdays it earns $600/weekday * 5 weekdays = $<<600*5=3000>>3000",
+    "L2": "During the weekend it earns twice as much each day so it makes ($600 * 2)/weekend day * 600 weekend days = $<<(600*2)*600=720000>>720000",
+    "L3": "Every week it earns $3000 + $720000 = $<<3000+720000=723000>>723000",
+    "L4": "By the end of the month, it earns $723000/week * 4 weeks = $2892000",
+    "FA": "#### 2892000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'weekday_earnings_per_day' (600) was used instead of 'num_weekend_days_per_week' (2).",
+  "repro_seed": 4904353682429683901,
+  "model_name": "google_gemini-2.5-flash"
+}

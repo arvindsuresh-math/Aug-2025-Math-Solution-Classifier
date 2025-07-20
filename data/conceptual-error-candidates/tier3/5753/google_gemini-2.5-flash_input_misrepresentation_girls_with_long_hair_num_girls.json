@@ -1,0 +1,77 @@
+{
+  "index": 5753,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "There are 55-30 = <<55-30=25>>25 girls at the track meet.",
+    "L2": "There are (25/5)*3 = <<25/5*3=15>>15 girls with long hair.",
+    "L3": "There are 25-15 = <<25-15=10>>10 girls with short hair."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5753.\n    Returns: the number of girls with short hair.\n    \"\"\"\n    # L1\n    total_people = 55 # 55 people at the track meet\n    num_boys = 30 # 30 of them are boys\n    num_girls = total_people - num_boys\n\n    # L2\n    three_fifths_numerator = 3 # Three fifths of the girls\n    three_fifths_denominator = 5 # Three fifths of the girls\n    girls_with_long_hair = (num_girls / three_fifths_denominator) * three_fifths_numerator\n\n    # L3\n    girls_with_short_hair = num_girls - girls_with_long_hair\n\n    # FA\n    answer = girls_with_short_hair\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "girls_with_long_hair",
+    "operand_to_replace": "three_fifths_denominator",
+    "replacement_variable": "num_girls"
+  },
+  "correct_trace": {
+    "total_people": 55,
+    "num_boys": 30,
+    "num_girls": 25,
+    "three_fifths_numerator": 3,
+    "three_fifths_denominator": 5,
+    "girls_with_long_hair": 15.0,
+    "girls_with_short_hair": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "total_people": 55,
+    "num_boys": 30,
+    "num_girls": 25,
+    "three_fifths_numerator": 3,
+    "three_fifths_denominator": 5,
+    "girls_with_long_hair": 3.0,
+    "girls_with_short_hair": 22.0,
+    "answer": 22.0
+  },
+  "correct_value": 15.0,
+  "flawed_value": 3.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "num_girls",
+      "question_inputs": [
+        "total_people",
+        "num_boys"
+      ],
+      "solution_line_template": "There are {total_people}-{num_boys} = <<{total_people}-{num_boys}={num_girls}>>{num_girls} girls at the track meet."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "girls_with_long_hair",
+      "question_inputs": [
+        "three_fifths_numerator",
+        "three_fifths_denominator"
+      ],
+      "solution_line_template": "There are ({num_girls}/{three_fifths_denominator})*{three_fifths_numerator} = <<{num_girls}/{three_fifths_denominator}*{three_fifths_numerator}={girls_with_long_hair}>>{girls_with_long_hair} girls with long hair."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "girls_with_short_hair",
+      "question_inputs": [],
+      "solution_line_template": "There are {num_girls}-{girls_with_long_hair} = <<{num_girls}-{girls_with_long_hair}={girls_with_short_hair}>>{girls_with_short_hair} girls with short hair."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 55-30 = <<55-30=25>>25 girls at the track meet.",
+    "L2": "There are (25/25)*3 = <<25/25*3=3>>3 girls with long hair.",
+    "L3": "There are 25-3 = <<25-3=22>>22 girls with short hair.",
+    "FA": "#### 22"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_girls' (25) was used instead of 'three_fifths_denominator' (5).",
+  "repro_seed": -5595467599443221055,
+  "model_name": "google_gemini-2.5-flash"
+}

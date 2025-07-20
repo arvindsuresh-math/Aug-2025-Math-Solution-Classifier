@@ -1,0 +1,107 @@
+{
+  "index": 4169,
+  "original_solution_mapping": {
+    "FA": "#### 96",
+    "L1": "Initially, the were 180//3= <<180//3=60>>60 plums on the plum tree.",
+    "L2": "When Damien picked 3/5 of the apples from the apple tree, he picked 3/5*180 = <<3/5*180=108>>108 apples",
+    "L3": "The number of apples remaining on the apple tree is 180-108= <<180-108=72>>72",
+    "L4": "The number of plums that Damien picked from the plum tree is 3/5*60 = <<3/5*60=36>>36",
+    "L5": "The number of plums remaining on the plum tree is 60-36 = <<60-36=24>>24",
+    "L6": "The total number of fruits remaining on the trees is 72 apples+24 plums = <<72+24=96>>96"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4169.\n    Returns: the total number of plums and apples remaining on the trees.\n    \"\"\"\n    # L1\n    initial_apples = 180 # 180 apples on the apple tree\n    apple_to_plum_ratio = 3 # three times as many apples as the number of plums\n    initial_plums = initial_apples // apple_to_plum_ratio\n\n    # L2\n    fraction_picked = Fraction(3, 5) # 3/5 of the fruits\n    picked_apples = fraction_picked * initial_apples\n\n    # L3\n    remaining_apples = initial_apples - picked_apples\n\n    # L4\n    picked_plums = fraction_picked * initial_plums\n\n    # L5\n    remaining_plums = initial_plums - picked_plums\n\n    # L6\n    total_remaining_fruits = remaining_apples + remaining_plums\n\n    # FA\n    answer = total_remaining_fruits\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "remaining_apples",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x31242db90>"
+  },
+  "correct_trace": {
+    "initial_apples": 180,
+    "apple_to_plum_ratio": 3,
+    "initial_plums": 60,
+    "fraction_picked": "3/5",
+    "picked_apples": "108",
+    "remaining_apples": "72",
+    "picked_plums": "36",
+    "remaining_plums": "24",
+    "total_remaining_fruits": "96",
+    "answer": "96"
+  },
+  "flawed_trace": {
+    "initial_apples": 180,
+    "apple_to_plum_ratio": 3,
+    "initial_plums": 60,
+    "fraction_picked": "3/5",
+    "picked_apples": "108",
+    "remaining_apples": "5/3",
+    "picked_plums": "36",
+    "remaining_plums": "24",
+    "total_remaining_fruits": "77/3",
+    "answer": "77/3"
+  },
+  "correct_value": "72",
+  "flawed_value": "5/3",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "initial_plums",
+      "question_inputs": [
+        "initial_apples",
+        "apple_to_plum_ratio"
+      ],
+      "solution_line_template": "Initially, the were {initial_apples}//{apple_to_plum_ratio}= <<{initial_apples}//{apple_to_plum_ratio}={initial_plums}>>{initial_plums} plums on the plum tree."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "picked_apples",
+      "question_inputs": [
+        "fraction_picked"
+      ],
+      "solution_line_template": "When Damien picked {fraction_picked} of the apples from the apple tree, he picked {fraction_picked}*{initial_apples} = <<{fraction_picked}*{initial_apples}={picked_apples}>>{picked_apples} apples"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_apples",
+      "question_inputs": [],
+      "solution_line_template": "The number of apples remaining on the apple tree is {initial_apples}-{picked_apples}= <<{initial_apples}-{picked_apples}={remaining_apples}>>{remaining_apples}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "picked_plums",
+      "question_inputs": [],
+      "solution_line_template": "The number of plums that Damien picked from the plum tree is {fraction_picked}*{initial_plums} = <<{fraction_picked}*{initial_plums}={picked_plums}>>{picked_plums}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "remaining_plums",
+      "question_inputs": [],
+      "solution_line_template": "The number of plums remaining on the plum tree is {initial_plums}-{picked_plums} = <<{initial_plums}-{picked_plums}={remaining_plums}>>{remaining_plums}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_remaining_fruits",
+      "question_inputs": [],
+      "solution_line_template": "The total number of fruits remaining on the trees is {remaining_apples} apples+{remaining_plums} plums = <<{remaining_apples}+{remaining_plums}={total_remaining_fruits}>>{total_remaining_fruits}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Initially, the were 180//3= <<180//3=60>>60 plums on the plum tree.",
+    "L2": "When Damien picked 3/5 of the apples from the apple tree, he picked 3/5*180 = <<3/5*180=108>>108 apples",
+    "L3": "The number of apples remaining on the apple tree is 180-108= <<180-108=5/3>>5/3",
+    "L4": "The number of plums that Damien picked from the plum tree is 3/5*60 = <<3/5*60=36>>36",
+    "L5": "The number of plums remaining on the plum tree is 60-36 = <<60-36=24>>24",
+    "L6": "The total number of fruits remaining on the trees is 5/3 apples+24 plums = <<5/3+24=77/3>>77/3",
+    "FA": "#### 77/3"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": 9089217815494734823,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,89 @@
+{
+  "index": 999,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "The contribution of the students amounted to $5 x 20 = $<<5*20=100>>100.",
+    "L2": "So Miss Grayson's class had $100 + $50 = $<<100+50=150>>150 in all.",
+    "L3": "The cost of the field trip amounted to $7 x 20 = $<<7*20=140>>140.",
+    "L4": "Therefore, the class of Miss Grayson is left with $150 - $140 = $<<150-140=10>>10."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 999.\n    Returns: the amount of money left in Miss Grayson's class fund.\n    \"\"\"\n    # L1\n    student_contribution_per_student = 5 # contributed $5 each\n    num_students = 20 # 20 students in her class\n    total_student_contribution = student_contribution_per_student * num_students\n\n    # L2\n    initial_class_fund = 50 # raised $50 for their field trip\n    total_funds_available = total_student_contribution + initial_class_fund\n\n    # L3\n    cost_per_student = 7 # cost of the trip is $7 for each student\n    total_trip_cost = cost_per_student * num_students\n\n    # L4\n    remaining_fund = total_funds_available - total_trip_cost\n\n    # FA\n    answer = remaining_fund\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_trip_cost",
+    "operand_to_replace": "cost_per_student",
+    "replacement_variable": "student_contribution_per_student"
+  },
+  "correct_trace": {
+    "student_contribution_per_student": 5,
+    "num_students": 20,
+    "total_student_contribution": 100,
+    "initial_class_fund": 50,
+    "total_funds_available": 150,
+    "cost_per_student": 7,
+    "total_trip_cost": 140,
+    "remaining_fund": 10,
+    "answer": 10
+  },
+  "flawed_trace": {
+    "student_contribution_per_student": 5,
+    "num_students": 20,
+    "total_student_contribution": 100,
+    "initial_class_fund": 50,
+    "total_funds_available": 150,
+    "cost_per_student": 7,
+    "total_trip_cost": 100,
+    "remaining_fund": 50,
+    "answer": 50
+  },
+  "correct_value": 140,
+  "flawed_value": 100,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "student_contribution_per_student",
+        "num_students"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_student_contribution",
+      "solution_line_template": "The contribution of the students amounted to ${student_contribution_per_student} x {num_students} = $<<{student_contribution_per_student}*{num_students}={total_student_contribution}>>{total_student_contribution}."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "initial_class_fund"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_funds_available",
+      "solution_line_template": "So Miss Grayson's class had ${total_student_contribution} + ${initial_class_fund} = $<<{total_student_contribution}+{initial_class_fund}={total_funds_available}>>{total_funds_available} in all."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "cost_per_student"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_trip_cost",
+      "solution_line_template": "The cost of the field trip amounted to ${cost_per_student} x {num_students} = $<<{cost_per_student}*{num_students}={total_trip_cost}>>{total_trip_cost}."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "remaining_fund",
+      "solution_line_template": "Therefore, the class of Miss Grayson is left with ${total_funds_available} - ${total_trip_cost} = $<<{total_funds_available}-{total_trip_cost}={remaining_fund}>>{remaining_fund}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The contribution of the students amounted to $5 x 20 = $<<5*20=100>>100.",
+    "L2": "So Miss Grayson's class had $100 + $50 = $<<100+50=150>>150 in all.",
+    "L3": "The cost of the field trip amounted to $5 x 20 = $<<5*20=100>>100.",
+    "L4": "Therefore, the class of Miss Grayson is left with $150 - $100 = $<<150-100=50>>50.",
+    "FA": "#### 50"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'student_contribution_per_student' (5) was used instead of 'cost_per_student' (7).",
+  "repro_seed": 7927394150010244109,
+  "model_name": "google_gemini-2.5-flash"
+}

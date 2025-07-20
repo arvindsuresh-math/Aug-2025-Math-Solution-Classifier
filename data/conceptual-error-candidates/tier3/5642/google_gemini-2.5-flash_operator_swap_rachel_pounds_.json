@@ -1,0 +1,74 @@
+{
+  "index": 5642,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "Christine picked 10 pounds and Rachel picked twice as much, so Rachel picked 10*2 = <<10*2=20>>20 pounds of strawberries",
+    "L2": "Christine picked 10 pounds and Rachel picked 20 pounds for a combined total of 10+20 = <<10+20=30>>30 pounds of strawberries",
+    "L3": "They need 3 pounds of strawberries to make 1 pie and they have 30 pounds so they can make 30/3 = <<30/3=10>>10 strawberry pies"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5642.\n    Returns: the total number of pies they can make.\n    \"\"\"\n    # L1\n    christine_pounds = 10 # Christine picked 10 pounds of strawberries\n    rachel_multiplier = 2 # twice as much as Rachel\n    rachel_pounds = christine_pounds * rachel_multiplier\n\n    # L2\n    total_pounds = christine_pounds + rachel_pounds\n\n    # L3\n    pounds_per_pie = 3 # 3 pounds of strawberries per pie\n    num_pies = total_pounds / pounds_per_pie\n\n    # FA\n    answer = num_pies\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "rachel_pounds",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x31ad0bc90>"
+  },
+  "correct_trace": {
+    "christine_pounds": 10,
+    "rachel_multiplier": 2,
+    "rachel_pounds": 20,
+    "total_pounds": 30,
+    "pounds_per_pie": 3,
+    "num_pies": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "christine_pounds": 10,
+    "rachel_multiplier": 2,
+    "rachel_pounds": 5.0,
+    "total_pounds": 15.0,
+    "pounds_per_pie": 3,
+    "num_pies": 5.0,
+    "answer": 5.0
+  },
+  "correct_value": 20,
+  "flawed_value": 5.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "rachel_pounds",
+      "question_inputs": [
+        "christine_pounds",
+        "rachel_multiplier"
+      ],
+      "solution_line_template": "Christine picked {christine_pounds} pounds and Rachel picked twice as much, so Rachel picked {christine_pounds}*{rachel_multiplier} = <<{christine_pounds}*{rachel_multiplier}={rachel_pounds}>>{rachel_pounds} pounds of strawberries"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_pounds",
+      "question_inputs": [],
+      "solution_line_template": "Christine picked {christine_pounds} pounds and Rachel picked {rachel_pounds} pounds for a combined total of {christine_pounds}+{rachel_pounds} = <<{christine_pounds}+{rachel_pounds}={total_pounds}>>{total_pounds} pounds of strawberries"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_pies",
+      "question_inputs": [
+        "pounds_per_pie"
+      ],
+      "solution_line_template": "They need {pounds_per_pie} pounds of strawberries to make 1 pie and they have {total_pounds} pounds so they can make {total_pounds}/{pounds_per_pie} = <<{total_pounds}/{pounds_per_pie}={num_pies}>>{num_pies} strawberry pies"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Christine picked 10 pounds and Rachel picked twice as much, so Rachel picked 10*2 = <<10*2=5>>5 pounds of strawberries",
+    "L2": "Christine picked 10 pounds and Rachel picked 5 pounds for a combined total of 10+5 = <<10+5=15>>15 pounds of strawberries",
+    "L3": "They need 3 pounds of strawberries to make 1 pie and they have 15 pounds so they can make 15/3 = <<15/3=5>>5 strawberry pies",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 719869293390327082,
+  "model_name": "google_gemini-2.5-flash"
+}

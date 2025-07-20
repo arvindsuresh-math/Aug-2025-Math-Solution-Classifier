@@ -1,0 +1,74 @@
+{
+  "index": 6084,
+  "original_solution_mapping": {
+    "FA": "#### 225",
+    "L1": "There are 15+10 = <<15+10=25>>25 students in the class",
+    "L2": "375 books were divided equally among them for a total of 375/25 = <<375/25=15>>15 books each",
+    "L3": "15 girls will get a total of 15*15 = <<15*15=225>>225 books"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6084.\n    Returns: the total number of books all the girls got combined.\n    \"\"\"\n    # L1\n    num_girls = 15 # 15 girls\n    num_boys = 10 # 10 boys\n    total_students = num_girls + num_boys\n\n    # L2\n    total_books = 375 # divided 375 books\n    books_per_student = total_books / total_students\n\n    # L3\n    total_books_for_girls = num_girls * books_per_student\n\n    # FA\n    answer = total_books_for_girls\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_books_for_girls",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x31b0a7890>"
+  },
+  "correct_trace": {
+    "num_girls": 15,
+    "num_boys": 10,
+    "total_students": 25,
+    "total_books": 375,
+    "books_per_student": 15.0,
+    "total_books_for_girls": 225.0,
+    "answer": 225.0
+  },
+  "flawed_trace": {
+    "num_girls": 15,
+    "num_boys": 10,
+    "total_students": 25,
+    "total_books": 375,
+    "books_per_student": 15.0,
+    "total_books_for_girls": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 225.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_students",
+      "question_inputs": [
+        "num_girls",
+        "num_boys"
+      ],
+      "solution_line_template": "There are {num_girls}+{num_boys} = <<{num_girls}+{num_boys}={total_students}>>{total_students} students in the class"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "books_per_student",
+      "question_inputs": [
+        "total_books"
+      ],
+      "solution_line_template": "{total_books} books were divided equally among them for a total of {total_books}/{total_students} = <<{total_books}/{total_students}={books_per_student}>>{books_per_student} books each"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_books_for_girls",
+      "question_inputs": [],
+      "solution_line_template": "{num_girls} girls will get a total of {num_girls}*{books_per_student} = <<{num_girls}*{books_per_student}={total_books_for_girls}>>{total_books_for_girls} books"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 15+10 = <<15+10=25>>25 students in the class",
+    "L2": "375 books were divided equally among them for a total of 375/25 = <<375/25=15>>15 books each",
+    "L3": "15 girls will get a total of 15*15 = <<15*15=1>>1 books",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -4463447826607038129,
+  "model_name": "google_gemini-2.5-flash"
+}

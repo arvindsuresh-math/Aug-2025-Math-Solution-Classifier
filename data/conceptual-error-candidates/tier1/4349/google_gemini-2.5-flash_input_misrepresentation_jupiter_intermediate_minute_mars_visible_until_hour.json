@@ -1,0 +1,132 @@
+{
+  "index": 4349,
+  "original_solution_mapping": {
+    "FA": "#### 7",
+    "L1": "Jupiter appears 2 hours and 41 minutes after 12:10 AM, which can be calculated in two parts;",
+    "L2": "2 hours after 12:10 AM is 12:10+2:00 = 2:10 AM.",
+    "L3": "And an additional 41 minutes after 2:10 AM is 2:10+0:41 = 2:51 AM.",
+    "L4": "Uranus appears 3 hours and 16 minutes after 2:51 AM, which can be calculated in two parts:",
+    "L5": "3 hours after 2:51 AM is 2:51+3:00 = 5:51 AM.",
+    "L6": "And 16 minutes after 5:51 AM is 5:51+0:16 = 5:67 AM = 6:07 AM.",
+    "L7": "Thus, 6:07 AM is 7 minutes after 6:00 AM."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4349.\n    Returns: the number of minutes after 6:00 AM Uranus first appears.\n    \"\"\"\n    # L2\n    mars_visible_until_hour = 12 # Mars can be seen until 12:10 AM\n    mars_visible_until_minute = 10 # Mars can be seen until 12:10 AM\n    jupiter_delay_hours = 2 # 2 hours and 41 minutes later\n    jupiter_intermediate_hour = mars_visible_until_hour + jupiter_delay_hours\n    jupiter_intermediate_minute = mars_visible_until_minute\n\n    # L3\n    jupiter_delay_minutes = 41 # 2 hours and 41 minutes later\n    jupiter_appearance_minute = jupiter_intermediate_minute + jupiter_delay_minutes\n    jupiter_appearance_hour = jupiter_intermediate_hour\n\n    # L5\n    uranus_delay_hours = 3 # 3 hours and 16 minutes after Jupiter makes its first appearance\n    uranus_intermediate_hour = jupiter_appearance_hour + uranus_delay_hours\n    uranus_intermediate_minute = jupiter_appearance_minute\n\n    # L6\n    uranus_delay_minutes = 16 # 3 hours and 16 minutes after Jupiter makes its first appearance\n    minutes_per_hour = 60 # WK\n    uranus_total_minutes_from_intermediate = uranus_intermediate_minute + uranus_delay_minutes\n    uranus_appearance_hour = uranus_intermediate_hour + (uranus_total_minutes_from_intermediate // minutes_per_hour)\n    uranus_appearance_minute = uranus_total_minutes_from_intermediate % minutes_per_hour\n    uranus_intermediate_minute_plus_delay = uranus_total_minutes_from_intermediate\n\n    # L7\n    reference_hour = 6 # 6:00 AM\n    reference_minute = 0 # 6:00 AM\n    minutes_after_6am = uranus_appearance_minute - reference_minute\n\n    # FA\n    answer = minutes_after_6am\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "jupiter_intermediate_minute",
+    "operand_to_replace": "mars_visible_until_minute",
+    "replacement_variable": "mars_visible_until_hour"
+  },
+  "correct_trace": {
+    "mars_visible_until_hour": 12,
+    "mars_visible_until_minute": 10,
+    "jupiter_delay_hours": 2,
+    "jupiter_intermediate_hour": 14,
+    "jupiter_intermediate_minute": 10,
+    "jupiter_delay_minutes": 41,
+    "jupiter_appearance_minute": 51,
+    "jupiter_appearance_hour": 14,
+    "uranus_delay_hours": 3,
+    "uranus_intermediate_hour": 17,
+    "uranus_intermediate_minute": 51,
+    "uranus_delay_minutes": 16,
+    "minutes_per_hour": 60,
+    "uranus_total_minutes_from_intermediate": 67,
+    "uranus_appearance_hour": 18,
+    "uranus_appearance_minute": 7,
+    "uranus_intermediate_minute_plus_delay": 67,
+    "reference_hour": 6,
+    "reference_minute": 0,
+    "minutes_after_6am": 7,
+    "answer": 7
+  },
+  "flawed_trace": {
+    "mars_visible_until_hour": 12,
+    "mars_visible_until_minute": 10,
+    "jupiter_delay_hours": 2,
+    "jupiter_intermediate_hour": 14,
+    "jupiter_intermediate_minute": 12,
+    "jupiter_delay_minutes": 41,
+    "jupiter_appearance_minute": 53,
+    "jupiter_appearance_hour": 14,
+    "uranus_delay_hours": 3,
+    "uranus_intermediate_hour": 17,
+    "uranus_intermediate_minute": 53,
+    "uranus_delay_minutes": 16,
+    "minutes_per_hour": 60,
+    "uranus_total_minutes_from_intermediate": 69,
+    "uranus_appearance_hour": 18,
+    "uranus_appearance_minute": 9,
+    "uranus_intermediate_minute_plus_delay": 69,
+    "reference_hour": 6,
+    "reference_minute": 0,
+    "minutes_after_6am": 9,
+    "answer": 9
+  },
+  "correct_value": 10,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "jupiter_intermediate_hour",
+      "question_inputs": [
+        "mars_visible_until_hour",
+        "mars_visible_until_minute",
+        "jupiter_delay_hours"
+      ],
+      "solution_line_template": "{jupiter_delay_hours} hours after {mars_visible_until_hour}:{mars_visible_until_minute} AM is {mars_visible_until_hour}:{mars_visible_until_minute}+{jupiter_delay_hours}:00 = {jupiter_intermediate_hour}:{jupiter_intermediate_minute} AM."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "jupiter_appearance_minute",
+      "question_inputs": [
+        "jupiter_delay_minutes"
+      ],
+      "solution_line_template": "And an additional {jupiter_delay_minutes} minutes after {jupiter_intermediate_hour}:{jupiter_intermediate_minute} AM is {jupiter_intermediate_hour}:{jupiter_intermediate_minute}+0:{jupiter_delay_minutes} = {jupiter_appearance_hour}:{jupiter_appearance_minute} AM."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "uranus_intermediate_hour",
+      "question_inputs": [
+        "uranus_delay_hours"
+      ],
+      "solution_line_template": "{uranus_delay_hours} hours after {jupiter_appearance_hour}:{jupiter_appearance_minute} AM is {jupiter_appearance_hour}:{jupiter_appearance_minute}+{uranus_delay_hours}:00 = {uranus_intermediate_hour}:{uranus_intermediate_minute} AM."
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L6",
+      "output_variable": "uranus_appearance_hour",
+      "question_inputs": [
+        "uranus_delay_minutes"
+      ],
+      "solution_line_template": "And {uranus_delay_minutes} minutes after {uranus_intermediate_hour}:{uranus_intermediate_minute} AM is {uranus_intermediate_hour}:{uranus_intermediate_minute}+0:{uranus_delay_minutes} = {uranus_intermediate_hour}:{uranus_intermediate_minute_plus_delay} AM = {uranus_appearance_hour}:{uranus_appearance_minute} AM."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "minutes_after_6am",
+      "question_inputs": [
+        "reference_hour",
+        "reference_minute"
+      ],
+      "solution_line_template": "Thus, {uranus_appearance_hour}:{uranus_appearance_minute} AM is {minutes_after_6am} minutes after {reference_hour}:00 AM."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "2 hours after 12:10 AM is 12:10+2:00 = 14:12 AM.",
+    "L3": "And an additional 41 minutes after 14:12 AM is 14:12+0:41 = 14:53 AM.",
+    "L5": "3 hours after 14:53 AM is 14:53+3:00 = 17:53 AM.",
+    "L6": "And 16 minutes after 17:53 AM is 17:53+0:16 = 17:69 AM = 18:9 AM.",
+    "L7": "Thus, 18:9 AM is 9 minutes after 6:00 AM.",
+    "FA": "#### 9"
+  },
+  "erroneous_line_number": null,
+  "explanation": "Input misrepresentation. The value for 'mars_visible_until_hour' (12) was used instead of 'mars_visible_until_minute' (10).",
+  "repro_seed": -1175856811107313226,
+  "model_name": "google_gemini-2.5-flash"
+}

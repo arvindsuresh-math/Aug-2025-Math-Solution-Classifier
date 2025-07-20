@@ -1,0 +1,63 @@
+{
+  "index": 6227,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "First calculate the weight-based charge by multiplying the package's weight in pounds by the price per pound: 5 pounds * $0.80/pound = $<<5*0.80=4.00>>4.00",
+    "L2": "Then add the weight-based charge to the flat fee to find the total cost: $4.00 + $5.00 = $<<4+5=9.00>>9.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6227.\n    Returns: the total cost Carly pays for shipping.\n    \"\"\"\n    # L1\n    package_weight = 5 # weighs 5 pounds\n    cost_per_pound = 0.80 # $0.80 per pound of weight\n    weight_based_charge = package_weight * cost_per_pound\n\n    # L2\n    flat_fee = 5.00 # a flat $5.00 fee\n    total_cost = weight_based_charge + flat_fee\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_cost",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x315cd7290>"
+  },
+  "correct_trace": {
+    "package_weight": 5,
+    "cost_per_pound": 0.8,
+    "weight_based_charge": 4.0,
+    "flat_fee": 5.0,
+    "total_cost": 9.0,
+    "answer": 9.0
+  },
+  "flawed_trace": {
+    "package_weight": 5,
+    "cost_per_pound": 0.8,
+    "weight_based_charge": 4.0,
+    "flat_fee": 5.0,
+    "total_cost": 20.0,
+    "answer": 20.0
+  },
+  "correct_value": 9.0,
+  "flawed_value": 20.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "weight_based_charge",
+      "question_inputs": [
+        "package_weight",
+        "cost_per_pound"
+      ],
+      "solution_line_template": "First calculate the weight-based charge by multiplying the package's weight in pounds by the price per pound: {package_weight} pounds * ${cost_per_pound}/pound = $<<{package_weight}*{cost_per_pound}={weight_based_charge}>>{weight_based_charge}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "flat_fee"
+      ],
+      "solution_line_template": "Then add the weight-based charge to the flat fee to find the total cost: ${weight_based_charge} + ${flat_fee} = $<<{weight_based_charge}+{flat_fee}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First calculate the weight-based charge by multiplying the package's weight in pounds by the price per pound: 5 pounds * $0.8/pound = $<<5*0.8=4>>4",
+    "L2": "Then add the weight-based charge to the flat fee to find the total cost: $4 + $5 = $<<4+5=20>>20",
+    "FA": "#### 20"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 8497870442693099290,
+  "model_name": "google_gemini-2.5-flash"
+}

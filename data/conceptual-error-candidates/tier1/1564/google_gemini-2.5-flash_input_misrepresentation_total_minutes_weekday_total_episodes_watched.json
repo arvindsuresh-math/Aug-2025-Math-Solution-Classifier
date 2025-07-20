@@ -1,0 +1,92 @@
+{
+  "index": 1564,
+  "original_solution_mapping": {
+    "FA": "#### 105",
+    "L1": "Maddie watches a total of 8*44=<<8*44=352>>352 minutes of the TV show during the week.",
+    "L2": "On Friday, she watches 2*44=<<2*44=88>>88 minutes",
+    "L3": "On Monday, Thursday, and Friday, she watches 138+21+88 = <<138+21+88=247>>247 minutes.",
+    "L4": "Thus, on the weekend she watches 352-247 = <<352-247=105>>105 minutes of the TV show."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1564.\n    Returns: how many more minutes she watched over the weekend.\n    \"\"\"\n    # L1\n    total_episodes_watched = 8 # 8 episodes of a TV show this week\n    episode_length_minutes = 44 # Each episode is about 44 minutes long\n    total_minutes_watched_week = total_episodes_watched * episode_length_minutes\n\n    # L2\n    friday_episodes = 2 # On Friday, she watches 2 episodes\n    friday_minutes_watched = friday_episodes * episode_length_minutes\n\n    # L3\n    monday_minutes = 138 # 138 minutes of the show on Monday\n    thursday_minutes = 21 # On Thursday, she watches 21 minutes\n    total_minutes_weekday = monday_minutes + thursday_minutes + friday_minutes_watched\n\n    # L4\n    weekend_minutes_watched = total_minutes_watched_week - total_minutes_weekday\n\n    # FA\n    answer = weekend_minutes_watched\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_minutes_weekday",
+    "operand_to_replace": "thursday_minutes",
+    "replacement_variable": "total_episodes_watched"
+  },
+  "correct_trace": {
+    "total_episodes_watched": 8,
+    "episode_length_minutes": 44,
+    "total_minutes_watched_week": 352,
+    "friday_episodes": 2,
+    "friday_minutes_watched": 88,
+    "monday_minutes": 138,
+    "thursday_minutes": 21,
+    "total_minutes_weekday": 247,
+    "weekend_minutes_watched": 105,
+    "answer": 105
+  },
+  "flawed_trace": {
+    "total_episodes_watched": 8,
+    "episode_length_minutes": 44,
+    "total_minutes_watched_week": 352,
+    "friday_episodes": 2,
+    "friday_minutes_watched": 88,
+    "monday_minutes": 138,
+    "thursday_minutes": 21,
+    "total_minutes_weekday": 234,
+    "weekend_minutes_watched": 118,
+    "answer": 118
+  },
+  "correct_value": 247,
+  "flawed_value": 234,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "total_episodes_watched",
+        "episode_length_minutes"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_minutes_watched_week",
+      "solution_line_template": "Maddie watches a total of {total_episodes_watched}*{episode_length_minutes}=<<{total_episodes_watched}*{episode_length_minutes}={total_minutes_watched_week}>>{total_minutes_watched_week} minutes of the TV show during the week."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "friday_episodes"
+      ],
+      "WK_inputs": [],
+      "output_variable": "friday_minutes_watched",
+      "solution_line_template": "On Friday, she watches {friday_episodes}*{episode_length_minutes}=<<{friday_episodes}*{episode_length_minutes}={friday_minutes_watched}>>{friday_minutes_watched} minutes"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "monday_minutes",
+        "thursday_minutes"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_minutes_weekday",
+      "solution_line_template": "On Monday, Thursday, and Friday, she watches {monday_minutes}+{thursday_minutes}+{friday_minutes_watched} = <<{monday_minutes}+{thursday_minutes}+{friday_minutes_watched}={total_minutes_weekday}>>{total_minutes_weekday} minutes."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "weekend_minutes_watched",
+      "solution_line_template": "Thus, on the weekend she watches {total_minutes_watched_week}-{total_minutes_weekday} = <<{total_minutes_watched_week}-{total_minutes_weekday}={weekend_minutes_watched}>>{weekend_minutes_watched} minutes of the TV show."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Maddie watches a total of 8*44=<<8*44=352>>352 minutes of the TV show during the week.",
+    "L2": "On Friday, she watches 2*44=<<2*44=88>>88 minutes",
+    "L3": "On Monday, Thursday, and Friday, she watches 138+8+88 = <<138+8+88=234>>234 minutes.",
+    "L4": "Thus, on the weekend she watches 352-234 = <<352-234=118>>118 minutes of the TV show.",
+    "FA": "#### 118"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'total_episodes_watched' (8) was used instead of 'thursday_minutes' (21).",
+  "repro_seed": 2129815501477729879,
+  "model_name": "google_gemini-2.5-flash"
+}

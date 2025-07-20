@@ -1,0 +1,78 @@
+{
+  "index": 3790,
+  "original_solution_mapping": {
+    "FA": "#### 100",
+    "L1": "He produces 5*20=<<5*20=100>>100 liters of honey",
+    "L2": "That means he keeps 100/2=<<100/2=50>>50 liters of honey",
+    "L3": "So he needs 50/.5=<<50/.5=100>>100 jars"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3790.\n    Returns: the number of jars James needs to buy.\n    \"\"\"\n    # L1\n    num_hives = 5 # 5 hives\n    liters_per_hive = 20 # each produce 20 liters of honey\n    total_honey_produced = num_hives * liters_per_hive\n\n    # L2\n    honey_kept_divisor = 2 # half the honey\n    honey_james_keeps = total_honey_produced / honey_kept_divisor\n\n    # L3\n    jar_capacity = 0.5 # Each jar can hold .5 liters\n    jars_needed = honey_james_keeps / jar_capacity\n\n    # FA\n    answer = jars_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "honey_james_keeps",
+    "operand_to_replace": "honey_kept_divisor",
+    "replacement_variable": "liters_per_hive"
+  },
+  "correct_trace": {
+    "num_hives": 5,
+    "liters_per_hive": 20,
+    "total_honey_produced": 100,
+    "honey_kept_divisor": 2,
+    "honey_james_keeps": 50.0,
+    "jar_capacity": 0.5,
+    "jars_needed": 100.0,
+    "answer": 100.0
+  },
+  "flawed_trace": {
+    "num_hives": 5,
+    "liters_per_hive": 20,
+    "total_honey_produced": 100,
+    "honey_kept_divisor": 2,
+    "honey_james_keeps": 5.0,
+    "jar_capacity": 0.5,
+    "jars_needed": 10.0,
+    "answer": 10.0
+  },
+  "correct_value": 50.0,
+  "flawed_value": 5.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_honey_produced",
+      "question_inputs": [
+        "num_hives",
+        "liters_per_hive"
+      ],
+      "solution_line_template": "He produces {num_hives}*{liters_per_hive}=<<{num_hives}*{liters_per_hive}={total_honey_produced}>>{total_honey_produced} liters of honey"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "honey_james_keeps",
+      "question_inputs": [
+        "honey_kept_divisor"
+      ],
+      "solution_line_template": "That means he keeps {total_honey_produced}/{honey_kept_divisor}=<<{total_honey_produced}/{honey_kept_divisor}={honey_james_keeps}>>{honey_james_keeps} liters of honey"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "jars_needed",
+      "question_inputs": [
+        "jar_capacity"
+      ],
+      "solution_line_template": "So he needs {honey_james_keeps}/{jar_capacity}=<<{honey_james_keeps}/{jar_capacity}={jars_needed}>>{jars_needed} jars"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He produces 5*20=<<5*20=100>>100 liters of honey",
+    "L2": "That means he keeps 100/20=<<100/20=5>>5 liters of honey",
+    "L3": "So he needs 5/0.5=<<5/0.5=10>>10 jars",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'liters_per_hive' (20) was used instead of 'honey_kept_divisor' (2).",
+  "repro_seed": -8299992095410726881,
+  "model_name": "google_gemini-2.5-flash"
+}

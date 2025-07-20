@@ -1,0 +1,74 @@
+{
+  "index": 5773,
+  "original_solution_mapping": {
+    "FA": "#### 48",
+    "L1": "If there 20 gnomes in Westerville woods, the Ravenswood forest has 4*20=<<20*4=80>>80 gnomes.",
+    "L2": "If 40% of gnomes in the Ravenswood forest are taken for use by the owner of the forest, the number of gnomes will reduce by 40/100*80=<<40/100*80=32>>32",
+    "L3": "The number of gnomes that will remain is 80-32=<<80-32=48>>48"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5773.\n    Returns: the number of gnomes remaining in Ravenswood forest.\n    \"\"\"\n    # L1\n    gnomes_westerville = 20 # 20 gnomes in Westerville woods\n    ravenswood_multiplier = 4 # four times as many gnomes\n    gnomes_ravenswood = ravenswood_multiplier * gnomes_westerville\n\n    # L2\n    percentage_taken = Fraction(40, 100) # 40% of the gnomes are taken\n    gnomes_taken = percentage_taken * gnomes_ravenswood\n\n    # L3\n    remaining_gnomes = gnomes_ravenswood - gnomes_taken\n\n    # FA\n    answer = remaining_gnomes\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "remaining_gnomes",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x31aeb0c90>"
+  },
+  "correct_trace": {
+    "gnomes_westerville": 20,
+    "ravenswood_multiplier": 4,
+    "gnomes_ravenswood": 80,
+    "percentage_taken": "2/5",
+    "gnomes_taken": "32",
+    "remaining_gnomes": "48",
+    "answer": "48"
+  },
+  "flawed_trace": {
+    "gnomes_westerville": 20,
+    "ravenswood_multiplier": 4,
+    "gnomes_ravenswood": 80,
+    "percentage_taken": "2/5",
+    "gnomes_taken": "32",
+    "remaining_gnomes": "5/2",
+    "answer": "5/2"
+  },
+  "correct_value": "48",
+  "flawed_value": "5/2",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "gnomes_ravenswood",
+      "question_inputs": [
+        "gnomes_westerville",
+        "ravenswood_multiplier"
+      ],
+      "solution_line_template": "If there {gnomes_westerville} gnomes in Westerville woods, the Ravenswood forest has {ravenswood_multiplier}*{gnomes_westerville}=<<{gnomes_westerville}*{ravenswood_multiplier}={gnomes_ravenswood}>>{gnomes_ravenswood} gnomes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "gnomes_taken",
+      "question_inputs": [
+        "percentage_taken"
+      ],
+      "solution_line_template": "If 40% of gnomes in the Ravenswood forest are taken for use by the owner of the forest, the number of gnomes will reduce by {percentage_taken}*{gnomes_ravenswood}=<<{percentage_taken}*{gnomes_ravenswood}={gnomes_taken}>>{gnomes_taken}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_gnomes",
+      "question_inputs": [],
+      "solution_line_template": "The number of gnomes that will remain is {gnomes_ravenswood}-{gnomes_taken}=<<{gnomes_ravenswood}-{gnomes_taken}={remaining_gnomes}>>{remaining_gnomes}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If there 20 gnomes in Westerville woods, the Ravenswood forest has 4*20=<<20*4=80>>80 gnomes.",
+    "L2": "If 40% of gnomes in the Ravenswood forest are taken for use by the owner of the forest, the number of gnomes will reduce by 40/100*80=<<40/100*80=32>>32",
+    "L3": "The number of gnomes that will remain is 80-32=<<80-32=5/2>>5/2",
+    "FA": "#### 5/2"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": -7496963905680970716,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,59 @@
+{
+  "index": 6456,
+  "original_solution_mapping": {
+    "FA": "#### 840",
+    "L1": "30% of $1200 is (30/100)*$1200 = $<<(30/100)*1200=360>>360",
+    "L2": "Mrs. McPherson will pay $360 leaving $1200-$360 = $<<1200-360=840>>840 which Mr. McPherson will have to raise"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6456.\n    Returns: the amount Mr. McPherson needs to raise to complete the rent.\n    \"\"\"\n    # L1\n    mrs_mcpherson_percentage = Fraction(30, 100) # 30% of the money\n    total_rent = 1200 # rent is $1200 per year\n    mrs_mcpherson_contribution = mrs_mcpherson_percentage * total_rent\n\n    # L2\n    mr_mcpherson_contribution = total_rent - mrs_mcpherson_contribution\n\n    # FA\n    answer = mr_mcpherson_contribution\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "mrs_mcpherson_contribution",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x31b25ad10>"
+  },
+  "correct_trace": {
+    "mrs_mcpherson_percentage": "3/10",
+    "total_rent": 1200,
+    "mrs_mcpherson_contribution": "360",
+    "mr_mcpherson_contribution": "840",
+    "answer": "840"
+  },
+  "flawed_trace": {
+    "mrs_mcpherson_percentage": "3/10",
+    "total_rent": 1200,
+    "mrs_mcpherson_contribution": "1/4000",
+    "mr_mcpherson_contribution": "4799999/4000",
+    "answer": "4799999/4000"
+  },
+  "correct_value": "360",
+  "flawed_value": "1/4000",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "mrs_mcpherson_contribution",
+      "question_inputs": [
+        "mrs_mcpherson_percentage",
+        "total_rent"
+      ],
+      "solution_line_template": "30% of ${total_rent} is ({mrs_mcpherson_percentage})*${total_rent} = $<<({mrs_mcpherson_percentage})*{total_rent}={mrs_mcpherson_contribution}>>{mrs_mcpherson_contribution}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "mr_mcpherson_contribution",
+      "question_inputs": [],
+      "solution_line_template": "Mrs. McPherson will pay ${mrs_mcpherson_contribution} leaving ${total_rent}-${mrs_mcpherson_contribution} = $<<{total_rent}-{mrs_mcpherson_contribution}={mr_mcpherson_contribution}>>{mr_mcpherson_contribution} which Mr. McPherson will have to raise"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "30% of $1200 is (30/100)*$1200 = $<<(30/100)*1200=1/4000>>1/4000",
+    "L2": "Mrs. McPherson will pay $1/4000 leaving $1200-$1/4000 = $<<1200-1/4000=4799999/4000>>4799999/4000 which Mr. McPherson will have to raise",
+    "FA": "#### 4799999/4000"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 5153017671455954975,
+  "model_name": "google_gemini-2.5-flash"
+}

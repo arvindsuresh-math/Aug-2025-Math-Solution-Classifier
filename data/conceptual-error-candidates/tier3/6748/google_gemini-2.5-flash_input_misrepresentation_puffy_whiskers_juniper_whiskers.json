@@ -1,0 +1,78 @@
+{
+  "index": 6748,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "If Juniper has 12 whiskers, then Puffy has 3*12=<<12*3=36>>36 whiskers.",
+    "L2": "Since Puffy has half as many whiskers and Scruffy, then Scruffy has 36*2=<<36*2=72>>72 whiskers.",
+    "L3": "Since the number of whiskers on Buffy is the average between 12, 36, and 72 whiskers, then he has (12+36+72)/3=40 whiskers."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6748.\n    Returns: the number of whiskers Buffy has.\n    \"\"\"\n    # L1\n    juniper_whiskers = 12 # Juniper has 12 whiskers\n    puffy_multiplier = 3 # Puffy has three times more whiskers than Juniper\n    puffy_whiskers = puffy_multiplier * juniper_whiskers\n\n    # L2\n    scruffy_multiplier = 2 # half as many as Scruffy\n    scruffy_whiskers = puffy_whiskers * scruffy_multiplier\n\n    # L3\n    number_of_cats_for_average = 3 # average number of whiskers on the three other cats\n    buffy_whiskers = (juniper_whiskers + puffy_whiskers + scruffy_whiskers) / number_of_cats_for_average\n\n    # FA\n    answer = buffy_whiskers\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "puffy_whiskers",
+    "operand_to_replace": "puffy_multiplier",
+    "replacement_variable": "juniper_whiskers"
+  },
+  "correct_trace": {
+    "juniper_whiskers": 12,
+    "puffy_multiplier": 3,
+    "puffy_whiskers": 36,
+    "scruffy_multiplier": 2,
+    "scruffy_whiskers": 72,
+    "number_of_cats_for_average": 3,
+    "buffy_whiskers": 40.0,
+    "answer": 40.0
+  },
+  "flawed_trace": {
+    "juniper_whiskers": 12,
+    "puffy_multiplier": 3,
+    "puffy_whiskers": 144,
+    "scruffy_multiplier": 2,
+    "scruffy_whiskers": 288,
+    "number_of_cats_for_average": 3,
+    "buffy_whiskers": 148.0,
+    "answer": 148.0
+  },
+  "correct_value": 36,
+  "flawed_value": 144,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "puffy_whiskers",
+      "question_inputs": [
+        "juniper_whiskers",
+        "puffy_multiplier"
+      ],
+      "solution_line_template": "If Juniper has {juniper_whiskers} whiskers, then Puffy has {puffy_multiplier}*{juniper_whiskers}=<<{juniper_whiskers}*{puffy_multiplier}={puffy_whiskers}>>{puffy_whiskers} whiskers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "scruffy_whiskers",
+      "question_inputs": [
+        "scruffy_multiplier"
+      ],
+      "solution_line_template": "Since Puffy has half as many whiskers and Scruffy, then Scruffy has {puffy_whiskers}*{scruffy_multiplier}=<<{puffy_whiskers}*{scruffy_multiplier}={scruffy_whiskers}>>{scruffy_whiskers} whiskers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "buffy_whiskers",
+      "question_inputs": [
+        "number_of_cats_for_average"
+      ],
+      "solution_line_template": "Since the number of whiskers on Buffy is the average between {juniper_whiskers}, {puffy_whiskers}, and {scruffy_whiskers} whiskers, then he has ({juniper_whiskers}+{puffy_whiskers}+{scruffy_whiskers})/{number_of_cats_for_average}={buffy_whiskers} whiskers."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Juniper has 12 whiskers, then Puffy has 12*12=<<12*12=144>>144 whiskers.",
+    "L2": "Since Puffy has half as many whiskers and Scruffy, then Scruffy has 144*2=<<144*2=288>>288 whiskers.",
+    "L3": "Since the number of whiskers on Buffy is the average between 12, 144, and 288 whiskers, then he has (12+144+288)/3=148 whiskers.",
+    "FA": "#### 148"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'juniper_whiskers' (12) was used instead of 'puffy_multiplier' (3).",
+  "repro_seed": 2988140571204594843,
+  "model_name": "google_gemini-2.5-flash"
+}

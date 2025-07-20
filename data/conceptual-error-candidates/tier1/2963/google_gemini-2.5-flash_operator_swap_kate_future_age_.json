@@ -1,0 +1,89 @@
+{
+  "index": 2963,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "Three years from now, Kate will be 29 years + 3 years = <<29+3=32>>32 years old.",
+    "L2": "So by that time, Tully will be 32 years x 2 = <<32*2=64>>64 years old.",
+    "L3": "This means, Tully is 64 years - 3 years = <<64-3=61>>61 years old now.",
+    "L4": "Therefore, Tully was 61 years - 1 year = 60 years old last year."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2963.\n    Returns: Tully's age a year ago.\n    \"\"\"\n    # L1\n    kate_current_age = 29 # Kate is now 29 years old\n    years_from_now = 3 # Three years from now\n    kate_future_age = kate_current_age + years_from_now\n\n    # L2\n    tully_age_multiplier = 2 # twice as old\n    tully_future_age = kate_future_age * tully_age_multiplier\n\n    # L3\n    tully_current_age = tully_future_age - years_from_now\n\n    # L4\n    years_ago = 1 # a year ago\n    tully_age_last_year = tully_current_age - years_ago\n\n    # FA\n    answer = tully_age_last_year\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "kate_future_age",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x313968ad0>"
+  },
+  "correct_trace": {
+    "kate_current_age": 29,
+    "years_from_now": 3,
+    "kate_future_age": 32,
+    "tully_age_multiplier": 2,
+    "tully_future_age": 64,
+    "tully_current_age": 61,
+    "years_ago": 1,
+    "tully_age_last_year": 60,
+    "answer": 60
+  },
+  "flawed_trace": {
+    "kate_current_age": 29,
+    "years_from_now": 3,
+    "kate_future_age": 87,
+    "tully_age_multiplier": 2,
+    "tully_future_age": 174,
+    "tully_current_age": 171,
+    "years_ago": 1,
+    "tully_age_last_year": 170,
+    "answer": 170
+  },
+  "correct_value": 32,
+  "flawed_value": 87,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "kate_current_age",
+        "years_from_now"
+      ],
+      "WK_inputs": [],
+      "output_variable": "kate_future_age",
+      "solution_line_template": "Three years from now, Kate will be {kate_current_age} years + {years_from_now} years = <<{kate_current_age}+{years_from_now}={kate_future_age}>>{kate_future_age} years old."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "tully_age_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "tully_future_age",
+      "solution_line_template": "So by that time, Tully will be {kate_future_age} years x {tully_age_multiplier} = <<{kate_future_age}*{tully_age_multiplier}={tully_future_age}>>{tully_future_age} years old."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "tully_current_age",
+      "solution_line_template": "This means, Tully is {tully_future_age} years - {years_from_now} years = <<{tully_future_age}-{years_from_now}={tully_current_age}>>{tully_current_age} years old now."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "years_ago"
+      ],
+      "WK_inputs": [],
+      "output_variable": "tully_age_last_year",
+      "solution_line_template": "Therefore, Tully was {tully_current_age} years - {years_ago} year = {tully_age_last_year} years old last year."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Three years from now, Kate will be 29 years + 3 years = <<29+3=87>>87 years old.",
+    "L2": "So by that time, Tully will be 87 years x 2 = <<87*2=174>>174 years old.",
+    "L3": "This means, Tully is 174 years - 3 years = <<174-3=171>>171 years old now.",
+    "L4": "Therefore, Tully was 171 years - 1 year = 170 years old last year.",
+    "FA": "#### 170"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 3008192916239750531,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,100 @@
+{
+  "index": 1612,
+  "original_solution_mapping": {
+    "FA": "#### 340",
+    "L1": "His pay before taxes and fees is $12.50 x 40 hours = $<<12.5*40=500>>500.",
+    "L2": "He pays $500 * 0.20 = $<<500*0.20=100>>100 for taxes and fees.",
+    "L3": "Then he had $500 - $100 = $<<500-100=400>>400 remaining money.",
+    "L4": "He takes out $400 * 0.15 = $<<400*0.15=60>>60 for his gummy bears.",
+    "L5": "So he's left with $400 - $60 = $<<400-60=340>>340."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1612.\n    Returns: the amount of money Paul has left after expenses.\n    \"\"\"\n    # L1\n    hourly_rate = 12.50 # Paul earns $12.50 for each hour\n    hours_worked = 40 # working 40 hours\n    pay_before_taxes = hourly_rate * hours_worked\n\n    # L2\n    tax_rate = 0.20 # pay 20% for taxes and fees\n    taxes_and_fees_amount = pay_before_taxes * tax_rate\n\n    # L3\n    money_after_taxes = pay_before_taxes - taxes_and_fees_amount\n\n    # L4\n    gummy_bear_percent = 0.15 # spends 15% of his paycheck\n    gummy_bear_cost = money_after_taxes * gummy_bear_percent\n\n    # L5\n    money_left = money_after_taxes - gummy_bear_cost\n\n    # FA\n    answer = money_left\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "pay_before_taxes",
+    "operand_to_replace": "hourly_rate",
+    "replacement_variable": "hours_worked"
+  },
+  "correct_trace": {
+    "hourly_rate": 12.5,
+    "hours_worked": 40,
+    "pay_before_taxes": 500.0,
+    "tax_rate": 0.2,
+    "taxes_and_fees_amount": 100.0,
+    "money_after_taxes": 400.0,
+    "gummy_bear_percent": 0.15,
+    "gummy_bear_cost": 60.0,
+    "money_left": 340.0,
+    "answer": 340.0
+  },
+  "flawed_trace": {
+    "hourly_rate": 12.5,
+    "hours_worked": 40,
+    "pay_before_taxes": 1600,
+    "tax_rate": 0.2,
+    "taxes_and_fees_amount": 320.0,
+    "money_after_taxes": 1280.0,
+    "gummy_bear_percent": 0.15,
+    "gummy_bear_cost": 192.0,
+    "money_left": 1088.0,
+    "answer": 1088.0
+  },
+  "correct_value": 500.0,
+  "flawed_value": 1600,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "pay_before_taxes",
+      "question_inputs": [
+        "hourly_rate",
+        "hours_worked"
+      ],
+      "solution_line_template": "His pay before taxes and fees is ${hourly_rate} x {hours_worked} hours = $<<{hourly_rate}*{hours_worked}={pay_before_taxes}>>{pay_before_taxes}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "taxes_and_fees_amount",
+      "question_inputs": [
+        "tax_rate"
+      ],
+      "solution_line_template": "He pays ${pay_before_taxes} * {tax_rate} = $<<{pay_before_taxes}*{tax_rate}={taxes_and_fees_amount}>>{taxes_and_fees_amount} for taxes and fees."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "money_after_taxes",
+      "question_inputs": [],
+      "solution_line_template": "Then he had ${pay_before_taxes} - ${taxes_and_fees_amount} = $<<{pay_before_taxes}-{taxes_and_fees_amount}={money_after_taxes}>>{money_after_taxes} remaining money."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "gummy_bear_cost",
+      "question_inputs": [
+        "gummy_bear_percent"
+      ],
+      "solution_line_template": "He takes out ${money_after_taxes} * {gummy_bear_percent} = $<<{money_after_taxes}*{gummy_bear_percent}={gummy_bear_cost}>>{gummy_bear_cost} for his gummy bears."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "money_left",
+      "question_inputs": [],
+      "solution_line_template": "So he's left with ${money_after_taxes} - ${gummy_bear_cost} = $<<{money_after_taxes}-{gummy_bear_cost}={money_left}>>{money_left}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "His pay before taxes and fees is $40 x 40 hours = $<<40*40=1600>>1600.",
+    "L2": "He pays $1600 * 0.2 = $<<1600*0.2=320>>320 for taxes and fees.",
+    "L3": "Then he had $1600 - $320 = $<<1600-320=1280>>1280 remaining money.",
+    "L4": "He takes out $1280 * 0.15 = $<<1280*0.15=192>>192 for his gummy bears.",
+    "L5": "So he's left with $1280 - $192 = $<<1280-192=1088>>1088.",
+    "FA": "#### 1088"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'hours_worked' (40) was used instead of 'hourly_rate' (12.5).",
+  "repro_seed": -8568390015774738613,
+  "model_name": "google_gemini-2.5-flash"
+}

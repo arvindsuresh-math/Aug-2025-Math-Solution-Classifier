@@ -1,0 +1,79 @@
+{
+  "index": 4432,
+  "original_solution_mapping": {
+    "FA": "#### 21",
+    "L1": "Shane takes a total of 2 photos/day * 31 days = <<2*31=62>>62 photos in January.",
+    "L2": "This means he must have taken 146 total photos - 62 January photos = 84 photos in February.",
+    "L3": "As he took an equal number each week, he must have taken 84 photos / 4 weeks = <<84/4=21>>21 photos each week."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4432.\n    Returns: the number of photos Shane took each week in February.\n    \"\"\"\n    # L1\n    photos_per_day_january = 2 # 2 photos every day\n    days_in_january = 31 # WK\n    photos_in_january = photos_per_day_january * days_in_january\n\n    # L2\n    total_photos_first_two_months = 146 # 146 photos in the first 2 months\n    photos_in_february = total_photos_first_two_months - photos_in_january\n\n    # L3\n    weeks_in_february = 4 # WK\n    photos_per_week_february = photos_in_february / weeks_in_february\n\n    # FA\n    answer = photos_per_week_february\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "photos_in_february",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x31256ebd0>"
+  },
+  "correct_trace": {
+    "photos_per_day_january": 2,
+    "days_in_january": 31,
+    "photos_in_january": 62,
+    "total_photos_first_two_months": 146,
+    "photos_in_february": 84,
+    "weeks_in_february": 4,
+    "photos_per_week_february": 21.0,
+    "answer": 21.0
+  },
+  "flawed_trace": {
+    "photos_per_day_january": 2,
+    "days_in_january": 31,
+    "photos_in_january": 62,
+    "total_photos_first_two_months": 146,
+    "photos_in_february": 208,
+    "weeks_in_february": 4,
+    "photos_per_week_february": 52.0,
+    "answer": 52.0
+  },
+  "correct_value": 84,
+  "flawed_value": 208,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "days_in_january"
+      ],
+      "line_number": "L1",
+      "output_variable": "photos_in_january",
+      "question_inputs": [
+        "photos_per_day_january"
+      ],
+      "solution_line_template": "Shane takes a total of {photos_per_day_january} photos/day * {days_in_january} days = <<{photos_per_day_january}*{days_in_january}={photos_in_january}>>{photos_in_january} photos in January."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "photos_in_february",
+      "question_inputs": [
+        "total_photos_first_two_months"
+      ],
+      "solution_line_template": "This means he must have taken {total_photos_first_two_months} total photos - {photos_in_january} January photos = {photos_in_february} photos in February."
+    },
+    {
+      "WK_inputs": [
+        "weeks_in_february"
+      ],
+      "line_number": "L3",
+      "output_variable": "photos_per_week_february",
+      "question_inputs": [],
+      "solution_line_template": "As he took an equal number each week, he must have taken {photos_in_february} photos / {weeks_in_february} weeks = <<{photos_in_february}/{weeks_in_february}={photos_per_week_february}>>{photos_per_week_february} photos each week."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Shane takes a total of 2 photos/day * 31 days = <<2*31=62>>62 photos in January.",
+    "L2": "This means he must have taken 146 total photos - 62 January photos = 208 photos in February.",
+    "L3": "As he took an equal number each week, he must have taken 208 photos / 4 weeks = <<208/4=52>>52 photos each week.",
+    "FA": "#### 52"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 4269648434052461287,
+  "model_name": "google_gemini-2.5-flash"
+}

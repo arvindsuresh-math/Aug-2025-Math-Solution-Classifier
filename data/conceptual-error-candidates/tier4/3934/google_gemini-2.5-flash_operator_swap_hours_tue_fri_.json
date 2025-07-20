@@ -1,0 +1,78 @@
+{
+  "index": 3934,
+  "original_solution_mapping": {
+    "FA": "#### 1",
+    "L1": "Between Monday and Wednesday, she spends 1.5 hours + 1.5 hours = <<1.5+1.5=3>>3 hours.",
+    "L2": "That means she has 5 hours - 3 hours = <<5-3=2>>2 hours left for Tuesday and Wednesday",
+    "L3": "She spends 2 hours / 2=<<2/2=1>>1 hour on Friday"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3934.\n    Returns: the number of hours Janet spends at the gym on Friday.\n    \"\"\"\n    # L1\n    hours_monday = 1.5 # an hour and a half each day on Monday\n    hours_wednesday = 1.5 # an hour and a half each day on Wednesday\n    hours_mon_wed = hours_monday + hours_wednesday\n\n    # L2\n    total_weekly_hours = 5 # 5 hours a week\n    hours_tue_fri = total_weekly_hours - hours_mon_wed\n\n    # L3\n    num_tue_fri_days = 2 # WK\n    hours_friday = hours_tue_fri / num_tue_fri_days\n\n    # FA\n    answer = hours_friday\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "hours_tue_fri",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x31bbd0310>"
+  },
+  "correct_trace": {
+    "hours_monday": 1.5,
+    "hours_wednesday": 1.5,
+    "hours_mon_wed": 3.0,
+    "total_weekly_hours": 5,
+    "hours_tue_fri": 2.0,
+    "num_tue_fri_days": 2,
+    "hours_friday": 1.0,
+    "answer": 1.0
+  },
+  "flawed_trace": {
+    "hours_monday": 1.5,
+    "hours_wednesday": 1.5,
+    "hours_mon_wed": 3.0,
+    "total_weekly_hours": 5,
+    "hours_tue_fri": 8.0,
+    "num_tue_fri_days": 2,
+    "hours_friday": 4.0,
+    "answer": 4.0
+  },
+  "correct_value": 2.0,
+  "flawed_value": 8.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "hours_mon_wed",
+      "question_inputs": [
+        "hours_monday",
+        "hours_wednesday"
+      ],
+      "solution_line_template": "Between Monday and Wednesday, she spends {hours_monday} hours + {hours_wednesday} hours = <<{hours_monday}+{hours_wednesday}={hours_mon_wed}>>{hours_mon_wed} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "hours_tue_fri",
+      "question_inputs": [
+        "total_weekly_hours"
+      ],
+      "solution_line_template": "That means she has {total_weekly_hours} hours - {hours_mon_wed} hours = <<{total_weekly_hours}-{hours_mon_wed}={hours_tue_fri}>>{hours_tue_fri} hours left for Tuesday and Wednesday"
+    },
+    {
+      "WK_inputs": [
+        "num_tue_fri_days"
+      ],
+      "line_number": "L3",
+      "output_variable": "hours_friday",
+      "question_inputs": [],
+      "solution_line_template": "She spends {hours_tue_fri} hours / {num_tue_fri_days}=<<{hours_tue_fri}/{num_tue_fri_days}={hours_friday}>>{hours_friday} hour on Friday"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Between Monday and Wednesday, she spends 1.5 hours + 1.5 hours = <<1.5+1.5=3>>3 hours.",
+    "L2": "That means she has 5 hours - 3 hours = <<5-3=8>>8 hours left for Tuesday and Wednesday",
+    "L3": "She spends 8 hours / 2=<<8/2=4>>4 hour on Friday",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -295578097763597970,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,93 @@
+{
+  "index": 4030,
+  "original_solution_mapping": {
+    "FA": "#### 24",
+    "L1": "Bailey gave 2 + 2 = <<2+2=4>>4 bands.",
+    "L2": "So Bailey had 8 + 4 = <<8+4=12>>12 bands in the beginning.",
+    "L3": "Justine had 12 + 10 = <<12+10=22>>22 bands in the beginning.",
+    "L4": "Thus, Ylona had 22 + 2 = <<22+2=24>>24 bands in the beginning."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4030.\n    Returns: the number of rubber bands Ylona had in the beginning.\n    \"\"\"\n    # L1\n    band_given_to_justine = 2 # give two bands each to Justine\n    band_given_to_ylona = 2 # give two bands each to Ylona\n    bailey_gave_total = band_given_to_justine + band_given_to_ylona\n\n    # L2\n    bailey_left_with = 8 # left with only 8 rubber bands\n    bailey_initial = bailey_left_with + bailey_gave_total\n\n    # L3\n    justine_more_than_bailey = 10 # 10 more rubber bands than Bailey\n    justine_initial = bailey_initial + justine_more_than_bailey\n\n    # L4\n    ylona_more_than_justine = 2 # 2 fewer bands than Ylona\n    ylona_initial = justine_initial + ylona_more_than_justine\n\n    # FA\n    answer = ylona_initial\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "bailey_initial",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x317227690>"
+  },
+  "correct_trace": {
+    "band_given_to_justine": 2,
+    "band_given_to_ylona": 2,
+    "bailey_gave_total": 4,
+    "bailey_left_with": 8,
+    "bailey_initial": 12,
+    "justine_more_than_bailey": 10,
+    "justine_initial": 22,
+    "ylona_more_than_justine": 2,
+    "ylona_initial": 24,
+    "answer": 24
+  },
+  "flawed_trace": {
+    "band_given_to_justine": 2,
+    "band_given_to_ylona": 2,
+    "bailey_gave_total": 4,
+    "bailey_left_with": 8,
+    "bailey_initial": 4,
+    "justine_more_than_bailey": 10,
+    "justine_initial": 14,
+    "ylona_more_than_justine": 2,
+    "ylona_initial": 16,
+    "answer": 16
+  },
+  "correct_value": 12,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "bailey_gave_total",
+      "question_inputs": [
+        "band_given_to_justine",
+        "band_given_to_ylona"
+      ],
+      "solution_line_template": "Bailey gave {band_given_to_justine} + {band_given_to_ylona} = <<{band_given_to_justine}+{band_given_to_ylona}={bailey_gave_total}>>{bailey_gave_total} bands."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "bailey_initial",
+      "question_inputs": [
+        "bailey_left_with"
+      ],
+      "solution_line_template": "So Bailey had {bailey_left_with} + {bailey_gave_total} = <<{bailey_left_with}+{bailey_gave_total}={bailey_initial}>>{bailey_initial} bands in the beginning."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "justine_initial",
+      "question_inputs": [
+        "justine_more_than_bailey"
+      ],
+      "solution_line_template": "Justine had {bailey_initial} + {justine_more_than_bailey} = <<{bailey_initial}+{justine_more_than_bailey}={justine_initial}>>{justine_initial} bands in the beginning."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "ylona_initial",
+      "question_inputs": [
+        "ylona_more_than_justine"
+      ],
+      "solution_line_template": "Thus, Ylona had {justine_initial} + {ylona_more_than_justine} = <<{justine_initial}+{ylona_more_than_justine}={ylona_initial}>>{ylona_initial} bands in the beginning."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Bailey gave 2 + 2 = <<2+2=4>>4 bands.",
+    "L2": "So Bailey had 8 + 4 = <<8+4=4>>4 bands in the beginning.",
+    "L3": "Justine had 4 + 10 = <<4+10=14>>14 bands in the beginning.",
+    "L4": "Thus, Ylona had 14 + 2 = <<14+2=16>>16 bands in the beginning.",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": -1358480358712618164,
+  "model_name": "google_gemini-2.5-flash"
+}

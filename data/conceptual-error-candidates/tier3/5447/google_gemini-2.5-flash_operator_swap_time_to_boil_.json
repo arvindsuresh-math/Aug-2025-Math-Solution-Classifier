@@ -1,0 +1,92 @@
+{
+  "index": 5447,
+  "original_solution_mapping": {
+    "FA": "#### 73",
+    "L1": "First find how many degrees the temperature of the water needs to increase: 212 degrees - 41 degrees = <<212-41=171>>171 degrees",
+    "L2": "Then divide that amount by the number of degrees the water temperature increases each minute to find how long it takes the water to boil: 171 degrees / 3 degrees/minute = <<171/3=57>>57 minutes",
+    "L3": "Now figure out how long it takes to mix the pasta and make salad by dividing the pasta cook time by 3: 12 minutes / 3 = <<12/3=4>>4 minutes",
+    "L4": "Now add the boiling time, cook time, and mixing time to find the total time it takes to make dinner: 57 minutes + 4 minutes + 12 minutes = <<57+4+12=73>>73 minutes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5447.\n    Returns: the total time it takes Jason to cook dinner.\n    \"\"\"\n    # L1\n    final_temperature = 212 # 212 degrees\n    initial_temperature = 41 # 41 degree water\n    temperature_increase_needed = final_temperature - initial_temperature\n\n    # L2\n    temperature_increase_per_minute = 3 # increases by 3 degrees\n    time_to_boil = temperature_increase_needed / temperature_increase_per_minute\n\n    # L3\n    pasta_cook_time = 12 # cook his pasta for 12 minutes\n    mixing_salad_divisor = 3 # 1/3 that long\n    time_to_mix_salad = pasta_cook_time / mixing_salad_divisor\n\n    # L4\n    total_dinner_time = time_to_boil + time_to_mix_salad + pasta_cook_time\n\n    # FA\n    answer = total_dinner_time\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "time_to_boil",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x31ae31250>"
+  },
+  "correct_trace": {
+    "final_temperature": 212,
+    "initial_temperature": 41,
+    "temperature_increase_needed": 171,
+    "temperature_increase_per_minute": 3,
+    "time_to_boil": 57.0,
+    "pasta_cook_time": 12,
+    "mixing_salad_divisor": 3,
+    "time_to_mix_salad": 4.0,
+    "total_dinner_time": 73.0,
+    "answer": 73.0
+  },
+  "flawed_trace": {
+    "final_temperature": 212,
+    "initial_temperature": 41,
+    "temperature_increase_needed": 171,
+    "temperature_increase_per_minute": 3,
+    "time_to_boil": 168,
+    "pasta_cook_time": 12,
+    "mixing_salad_divisor": 3,
+    "time_to_mix_salad": 4.0,
+    "total_dinner_time": 184.0,
+    "answer": 184.0
+  },
+  "correct_value": 57.0,
+  "flawed_value": 168,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "temperature_increase_needed",
+      "question_inputs": [
+        "final_temperature",
+        "initial_temperature"
+      ],
+      "solution_line_template": "First find how many degrees the temperature of the water needs to increase: {final_temperature} degrees - {initial_temperature} degrees = <<{final_temperature}-{initial_temperature}={temperature_increase_needed}>>{temperature_increase_needed} degrees"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "time_to_boil",
+      "question_inputs": [
+        "temperature_increase_per_minute"
+      ],
+      "solution_line_template": "Then divide that amount by the number of degrees the water temperature increases each minute to find how long it takes the water to boil: {temperature_increase_needed} degrees / {temperature_increase_per_minute} degrees/minute = <<{temperature_increase_needed}/{temperature_increase_per_minute}={time_to_boil}>>{time_to_boil} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "time_to_mix_salad",
+      "question_inputs": [
+        "pasta_cook_time",
+        "mixing_salad_divisor"
+      ],
+      "solution_line_template": "Now figure out how long it takes to mix the pasta and make salad by dividing the pasta cook time by {mixing_salad_divisor}: {pasta_cook_time} minutes / {mixing_salad_divisor} = <<{pasta_cook_time}/{mixing_salad_divisor}={time_to_mix_salad}>>{time_to_mix_salad} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_dinner_time",
+      "question_inputs": [],
+      "solution_line_template": "Now add the boiling time, cook time, and mixing time to find the total time it takes to make dinner: {time_to_boil} minutes + {time_to_mix_salad} minutes + {pasta_cook_time} minutes = <<{time_to_boil}+{time_to_mix_salad}+{pasta_cook_time}={total_dinner_time}>>{total_dinner_time} minutes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how many degrees the temperature of the water needs to increase: 212 degrees - 41 degrees = <<212-41=171>>171 degrees",
+    "L2": "Then divide that amount by the number of degrees the water temperature increases each minute to find how long it takes the water to boil: 171 degrees / 3 degrees/minute = <<171/3=168>>168 minutes",
+    "L3": "Now figure out how long it takes to mix the pasta and make salad by dividing the pasta cook time by 3: 12 minutes / 3 = <<12/3=4>>4 minutes",
+    "L4": "Now add the boiling time, cook time, and mixing time to find the total time it takes to make dinner: 168 minutes + 4 minutes + 12 minutes = <<168+4+12=184>>184 minutes",
+    "FA": "#### 184"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": -2644565372750334944,
+  "model_name": "google_gemini-2.5-flash"
+}

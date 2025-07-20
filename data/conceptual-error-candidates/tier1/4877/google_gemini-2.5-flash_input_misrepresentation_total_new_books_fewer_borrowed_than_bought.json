@@ -1,0 +1,93 @@
+{
+  "index": 4877,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "Brianna needs 12 * 2 = <<12*2=24>>24 books to get her through the year.",
+    "L2": "She will borrow 8 - 2 = <<8-2=6>>6 new books from the library.",
+    "L3": "With the books she was given, the books she bought, and the library books, she will have 6 + 8 + 6 = <<6+8+6=20>>20 new books to read this year.",
+    "L4": "Thus, she will need to reread 24 - 20 = <<24-20=4>>4 of her old books this year."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4877.\n    Returns: the number of old books Brianna will have to reread this year.\n    \"\"\"\n    # L1\n    months_per_year = 12 # WK\n    books_per_month = 2 # reads two books a month\n    books_needed_per_year = months_per_year * books_per_month\n\n    # L2\n    books_bought = 8 # bought eight new books\n    fewer_borrowed_than_bought = 2 # borrow two fewer new books than she bought\n    books_borrowed = books_bought - fewer_borrowed_than_bought\n\n    # L3\n    books_given = 6 # given six new books as a gift\n    total_new_books = books_given + books_bought + books_borrowed\n\n    # L4\n    books_to_reread = books_needed_per_year - total_new_books\n\n    # FA\n    answer = books_to_reread\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_new_books",
+    "operand_to_replace": "books_given",
+    "replacement_variable": "fewer_borrowed_than_bought"
+  },
+  "correct_trace": {
+    "months_per_year": 12,
+    "books_per_month": 2,
+    "books_needed_per_year": 24,
+    "books_bought": 8,
+    "fewer_borrowed_than_bought": 2,
+    "books_borrowed": 6,
+    "books_given": 6,
+    "total_new_books": 20,
+    "books_to_reread": 4,
+    "answer": 4
+  },
+  "flawed_trace": {
+    "months_per_year": 12,
+    "books_per_month": 2,
+    "books_needed_per_year": 24,
+    "books_bought": 8,
+    "fewer_borrowed_than_bought": 2,
+    "books_borrowed": 6,
+    "books_given": 6,
+    "total_new_books": 16,
+    "books_to_reread": 8,
+    "answer": 8
+  },
+  "correct_value": 20,
+  "flawed_value": 16,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L1",
+      "output_variable": "books_needed_per_year",
+      "question_inputs": [
+        "books_per_month"
+      ],
+      "solution_line_template": "Brianna needs {months_per_year} * {books_per_month} = <<{months_per_year}*{books_per_month}={books_needed_per_year}>>{books_needed_per_year} books to get her through the year."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "books_borrowed",
+      "question_inputs": [
+        "books_bought",
+        "fewer_borrowed_than_bought"
+      ],
+      "solution_line_template": "She will borrow {books_bought} - {fewer_borrowed_than_bought} = <<{books_bought}-{fewer_borrowed_than_bought}={books_borrowed}>>{books_borrowed} new books from the library."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_new_books",
+      "question_inputs": [
+        "books_given"
+      ],
+      "solution_line_template": "With the books she was given, the books she bought, and the library books, she will have {books_given} + {books_bought} + {books_borrowed} = <<{books_given}+{books_bought}+{books_borrowed}={total_new_books}>>{total_new_books} new books to read this year."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "books_to_reread",
+      "question_inputs": [],
+      "solution_line_template": "Thus, she will need to reread {books_needed_per_year} - {total_new_books} = <<{books_needed_per_year}-{total_new_books}={books_to_reread}>>{books_to_reread} of her old books this year."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Brianna needs 12 * 2 = <<12*2=24>>24 books to get her through the year.",
+    "L2": "She will borrow 8 - 2 = <<8-2=6>>6 new books from the library.",
+    "L3": "With the books she was given, the books she bought, and the library books, she will have 2 + 8 + 6 = <<2+8+6=16>>16 new books to read this year.",
+    "L4": "Thus, she will need to reread 24 - 16 = <<24-16=8>>8 of her old books this year.",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'fewer_borrowed_than_bought' (2) was used instead of 'books_given' (6).",
+  "repro_seed": -1720326198897207205,
+  "model_name": "google_gemini-2.5-flash"
+}

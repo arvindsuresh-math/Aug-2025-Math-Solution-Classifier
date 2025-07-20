@@ -1,0 +1,78 @@
+{
+  "index": 6641,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "The spider weighs 6.4*2.5=<<6.4*2.5=16>>16 ounces",
+    "L2": "So each leg supports a weight of 16/8=<<16/8=2>>2 ounces",
+    "L3": "That means each leg undergoes a pressure of 2/.5=<<2/.5=4>>4 ounces per square inch"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6641.\n    Returns: the pressure each leg undergoes in ounces per square inch.\n    \"\"\"\n    # L1\n    previous_largest_spider_weight = 6.4 # which weighed 6.4 ounces\n    weight_multiplier = 2.5 # weighs 2.5 times the previous largest spider\n    giant_spider_weight = previous_largest_spider_weight * weight_multiplier\n\n    # L2\n    num_legs = 8 # WK\n    weight_per_leg = giant_spider_weight / num_legs\n\n    # L3\n    leg_cross_sectional_area = 0.5 # Each of its legs has a cross-sectional area of .5 square inches\n    pressure_per_leg = weight_per_leg / leg_cross_sectional_area\n\n    # FA\n    answer = pressure_per_leg\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "pressure_per_leg",
+    "operand_to_replace": "weight_per_leg",
+    "replacement_variable": "num_legs"
+  },
+  "correct_trace": {
+    "previous_largest_spider_weight": 6.4,
+    "weight_multiplier": 2.5,
+    "giant_spider_weight": 16.0,
+    "num_legs": 8,
+    "weight_per_leg": 2.0,
+    "leg_cross_sectional_area": 0.5,
+    "pressure_per_leg": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "previous_largest_spider_weight": 6.4,
+    "weight_multiplier": 2.5,
+    "giant_spider_weight": 16.0,
+    "num_legs": 8,
+    "weight_per_leg": 2.0,
+    "leg_cross_sectional_area": 0.5,
+    "pressure_per_leg": 16.0,
+    "answer": 16.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 16.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "giant_spider_weight",
+      "question_inputs": [
+        "previous_largest_spider_weight",
+        "weight_multiplier"
+      ],
+      "solution_line_template": "The spider weighs {previous_largest_spider_weight}*{weight_multiplier}=<<{previous_largest_spider_weight}*{weight_multiplier}={giant_spider_weight}>>{giant_spider_weight} ounces"
+    },
+    {
+      "WK_inputs": [
+        "num_legs"
+      ],
+      "line_number": "L2",
+      "output_variable": "weight_per_leg",
+      "question_inputs": [],
+      "solution_line_template": "So each leg supports a weight of {giant_spider_weight}/{num_legs}=<<{giant_spider_weight}/{num_legs}={weight_per_leg}>>{weight_per_leg} ounces"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "pressure_per_leg",
+      "question_inputs": [
+        "leg_cross_sectional_area"
+      ],
+      "solution_line_template": "That means each leg undergoes a pressure of {weight_per_leg}/{leg_cross_sectional_area}=<<{weight_per_leg}/{leg_cross_sectional_area}={pressure_per_leg}>>{pressure_per_leg} ounces per square inch"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The spider weighs 6.4*2.5=<<6.4*2.5=16>>16 ounces",
+    "L2": "So each leg supports a weight of 16/8=<<16/8=2>>2 ounces",
+    "L3": "That means each leg undergoes a pressure of 8/0.5=<<8/0.5=16>>16 ounces per square inch",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'num_legs' (value: 8) was used instead of 'weight_per_leg' (value: 2.0).",
+  "repro_seed": -790902721242254902,
+  "model_name": "google_gemini-2.5-flash"
+}

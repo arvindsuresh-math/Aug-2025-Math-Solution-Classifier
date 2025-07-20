@@ -1,0 +1,128 @@
+{
+  "index": 616,
+  "original_solution_mapping": {
+    "FA": "#### 240",
+    "L1": "Throughout the 30 minutes, Kris blows up 2 balloons per minute * 30 minutes = <<2*30=60>>60 balloons.",
+    "L2": "Her brother works at double Kris' speed in the first 15 minutes so he works at 2 balloons per minute * 2 = <<2*2=4>>4 balloons per minute.",
+    "L3": "So in the first 15 minutes, he blows up 4 balloons per minute * 15 minutes = <<4*15=60>>60 balloons.",
+    "L4": "In the second 15 minutes, he is working at double the rate he did previously, so he blows up 4 balloons per minute * 2 = <<4*2=8>>8 balloons per minute.",
+    "L5": "In the second 15 minutes, Kris' brother therefore blows up 8 balloons per minute * 15 minutes = <<8*15=120>>120 balloons.",
+    "L6": "Throughout the 30 minutes, he has blown up a total of 60 + 120 = <<60+120=180>>180 balloons.",
+    "L7": "Kris and her brother therefore blew up a total of 60 balloons from Kris + 180 balloons from Kris' brother = <<60+180=240>>240 balloons."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 616.\n    Returns: the total number of balloons Kris and her brother blew up.\n    \"\"\"\n    # L1\n    kris_balloons_per_minute = 2 # Kris can blow up a total of 2 balloon per minute\n    total_time_minutes = 30 # She has 30 minutes\n    kris_total_balloons = kris_balloons_per_minute * total_time_minutes\n\n    # L2\n    brother_speed_multiplier_initial = 2 # her brother works twice as fast\n    first_phase_duration_minutes = 15 # After 15 minutes\n    brother_speed_first_phase = kris_balloons_per_minute * brother_speed_multiplier_initial\n\n    # L3\n    brother_balloons_first_phase = brother_speed_first_phase * first_phase_duration_minutes\n\n    # L4\n    brother_speed_multiplier_second = 2 # brother doubles his speed\n    second_phase_duration_minutes = 15 # remaining 15 minutes\n    brother_speed_second_phase = brother_speed_first_phase * brother_speed_multiplier_second\n\n    # L5\n    brother_balloons_second_phase = brother_speed_second_phase * second_phase_duration_minutes\n\n    # L6\n    brother_total_balloons = brother_balloons_first_phase + brother_balloons_second_phase\n\n    # L7\n    total_balloons_both = kris_total_balloons + brother_total_balloons\n\n    # FA\n    answer = total_balloons_both\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "brother_balloons_first_phase",
+    "operand_to_replace": "first_phase_duration_minutes",
+    "replacement_variable": "kris_balloons_per_minute"
+  },
+  "correct_trace": {
+    "kris_balloons_per_minute": 2,
+    "total_time_minutes": 30,
+    "kris_total_balloons": 60,
+    "brother_speed_multiplier_initial": 2,
+    "first_phase_duration_minutes": 15,
+    "brother_speed_first_phase": 4,
+    "brother_balloons_first_phase": 60,
+    "brother_speed_multiplier_second": 2,
+    "second_phase_duration_minutes": 15,
+    "brother_speed_second_phase": 8,
+    "brother_balloons_second_phase": 120,
+    "brother_total_balloons": 180,
+    "total_balloons_both": 240,
+    "answer": 240
+  },
+  "flawed_trace": {
+    "kris_balloons_per_minute": 2,
+    "total_time_minutes": 30,
+    "kris_total_balloons": 60,
+    "brother_speed_multiplier_initial": 2,
+    "first_phase_duration_minutes": 15,
+    "brother_speed_first_phase": 4,
+    "brother_balloons_first_phase": 8,
+    "brother_speed_multiplier_second": 2,
+    "second_phase_duration_minutes": 15,
+    "brother_speed_second_phase": 8,
+    "brother_balloons_second_phase": 120,
+    "brother_total_balloons": 128,
+    "total_balloons_both": 188,
+    "answer": 188
+  },
+  "correct_value": 60,
+  "flawed_value": 8,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "kris_balloons_per_minute",
+        "total_time_minutes"
+      ],
+      "WK_inputs": [],
+      "output_variable": "kris_total_balloons",
+      "solution_line_template": "Throughout the {total_time_minutes} minutes, Kris blows up {kris_balloons_per_minute} balloons per minute * {total_time_minutes} minutes = <<{kris_balloons_per_minute}*{total_time_minutes}={kris_total_balloons}>>{kris_total_balloons} balloons."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "brother_speed_multiplier_initial",
+        "first_phase_duration_minutes"
+      ],
+      "WK_inputs": [],
+      "output_variable": "brother_speed_first_phase",
+      "solution_line_template": "Her brother works at double Kris' speed in the first {first_phase_duration_minutes} minutes so he works at {kris_balloons_per_minute} balloons per minute * {brother_speed_multiplier_initial} = <<{kris_balloons_per_minute}*{brother_speed_multiplier_initial}={brother_speed_first_phase}>>{brother_speed_first_phase} balloons per minute."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "brother_balloons_first_phase",
+      "solution_line_template": "So in the first {first_phase_duration_minutes} minutes, he blows up {brother_speed_first_phase} balloons per minute * {first_phase_duration_minutes} minutes = <<{brother_speed_first_phase}*{first_phase_duration_minutes}={brother_balloons_first_phase}>>{brother_balloons_first_phase} balloons."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "brother_speed_multiplier_second",
+        "second_phase_duration_minutes"
+      ],
+      "WK_inputs": [],
+      "output_variable": "brother_speed_second_phase",
+      "solution_line_template": "In the second {second_phase_duration_minutes} minutes, he is working at double the rate he did previously, so he blows up {brother_speed_first_phase} balloons per minute * {brother_speed_multiplier_second} = <<{brother_speed_first_phase}*{brother_speed_multiplier_second}={brother_speed_second_phase}>>{brother_speed_second_phase} balloons per minute."
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "brother_balloons_second_phase",
+      "solution_line_template": "In the second {second_phase_duration_minutes} minutes, Kris\u2019 brother therefore blows up {brother_speed_second_phase} balloons per minute * {second_phase_duration_minutes} minutes = <<{brother_speed_second_phase}*{second_phase_duration_minutes}={brother_balloons_second_phase}>>{brother_balloons_second_phase} balloons."
+    },
+    {
+      "line_number": "L6",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "brother_total_balloons",
+      "solution_line_template": "Throughout the {total_time_minutes} minutes, he has blown up a total of {brother_balloons_first_phase} + {brother_balloons_second_phase} = <<{brother_balloons_first_phase}+{brother_balloons_second_phase}={brother_total_balloons}>>{brother_total_balloons} balloons."
+    },
+    {
+      "line_number": "L7",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_balloons_both",
+      "solution_line_template": "Kris and her brother therefore blew up a total of {kris_total_balloons} balloons from Kris + {brother_total_balloons} balloons from Kris\u2019 brother = <<{kris_total_balloons}+{brother_total_balloons}={total_balloons_both}>>{total_balloons_both} balloons."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Throughout the 30 minutes, Kris blows up 2 balloons per minute * 30 minutes = <<2*30=60>>60 balloons.",
+    "L2": "Her brother works at double Kris' speed in the first 15 minutes so he works at 2 balloons per minute * 2 = <<2*2=4>>4 balloons per minute.",
+    "L3": "So in the first 2 minutes, he blows up 4 balloons per minute * 2 minutes = <<4*2=8>>8 balloons.",
+    "L4": "In the second 15 minutes, he is working at double the rate he did previously, so he blows up 4 balloons per minute * 2 = <<4*2=8>>8 balloons per minute.",
+    "L5": "In the second 15 minutes, Kris\u2019 brother therefore blows up 8 balloons per minute * 15 minutes = <<8*15=120>>120 balloons.",
+    "L6": "Throughout the 30 minutes, he has blown up a total of 8 + 120 = <<8+120=128>>128 balloons.",
+    "L7": "Kris and her brother therefore blew up a total of 60 balloons from Kris + 128 balloons from Kris\u2019 brother = <<60+128=188>>188 balloons.",
+    "FA": "#### 188"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'kris_balloons_per_minute' (2) was used instead of 'first_phase_duration_minutes' (15).",
+  "repro_seed": 4138674278367405677,
+  "model_name": "google_gemini-2.5-flash"
+}

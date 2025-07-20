@@ -1,0 +1,74 @@
+{
+  "index": 4510,
+  "original_solution_mapping": {
+    "FA": "#### 22",
+    "L1": "John is 8 years old because 18-10=<<18-10=8>>8 years old.",
+    "L2": "Their parents are currently 40 years old because 8*5=<<8*5=40>>40.",
+    "L3": "Therefore, they were 22 when Mark was born because 40-18 = <<40-18=22>>22 years old."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4510.\n    Returns: the age of Mark and John's parents when Mark was born.\n    \"\"\"\n    # L1\n    mark_age = 18 # Mark is 18 years old\n    john_younger_than_mark = 10 # John, who is 10 years younger\n    john_age = mark_age - john_younger_than_mark\n\n    # L2\n    parents_age_multiplier = 5 # parents are currently 5 times older than John\n    parents_current_age = john_age * parents_age_multiplier\n\n    # L3\n    parents_age_at_mark_birth = parents_current_age - mark_age\n\n    # FA\n    answer = parents_age_at_mark_birth\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "parents_current_age",
+    "operand_to_replace": "john_age",
+    "replacement_variable": "mark_age"
+  },
+  "correct_trace": {
+    "mark_age": 18,
+    "john_younger_than_mark": 10,
+    "john_age": 8,
+    "parents_age_multiplier": 5,
+    "parents_current_age": 40,
+    "parents_age_at_mark_birth": 22,
+    "answer": 22
+  },
+  "flawed_trace": {
+    "mark_age": 18,
+    "john_younger_than_mark": 10,
+    "john_age": 8,
+    "parents_age_multiplier": 5,
+    "parents_current_age": 90,
+    "parents_age_at_mark_birth": 72,
+    "answer": 72
+  },
+  "correct_value": 40,
+  "flawed_value": 90,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "john_age",
+      "question_inputs": [
+        "mark_age",
+        "john_younger_than_mark"
+      ],
+      "solution_line_template": "John is {john_age} years old because {mark_age}-{john_younger_than_mark}=<<{mark_age}-{john_younger_than_mark}={john_age}>>{john_age} years old."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "parents_current_age",
+      "question_inputs": [
+        "parents_age_multiplier"
+      ],
+      "solution_line_template": "Their parents are currently {parents_current_age} years old because {john_age}*{parents_age_multiplier}=<<{john_age}*{parents_age_multiplier}={parents_current_age}>>{parents_current_age}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "parents_age_at_mark_birth",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, they were {parents_age_at_mark_birth} when Mark was born because {parents_current_age}-{mark_age} = <<{parents_current_age}-{mark_age}={parents_age_at_mark_birth}>>{parents_age_at_mark_birth} years old."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "John is 8 years old because 18-10=<<18-10=8>>8 years old.",
+    "L2": "Their parents are currently 90 years old because 18*5=<<18*5=90>>90.",
+    "L3": "Therefore, they were 72 when Mark was born because 90-18 = <<90-18=72>>72 years old.",
+    "FA": "#### 72"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'mark_age' (value: 18) was used instead of 'john_age' (value: 8).",
+  "repro_seed": 8890486178350905363,
+  "model_name": "google_gemini-2.5-flash"
+}

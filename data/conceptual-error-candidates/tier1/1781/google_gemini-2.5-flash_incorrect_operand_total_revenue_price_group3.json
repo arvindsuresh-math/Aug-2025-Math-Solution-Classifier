@@ -1,0 +1,132 @@
+{
+  "index": 1781,
+  "original_solution_mapping": {
+    "FA": "#### 442",
+    "L1": "The salesman sold 17 bags for 17 bags x $18/bag = $<<17*18=306>>306",
+    "L2": "He sold 10 more for 10 bags x $25/bag = $<<10*25=250>>250",
+    "L3": "Thus far he has sold 17 bags + 10 bags = <<17+10=27>>27 bags",
+    "L4": "Therefore he sold 48 bags - 27 bags = <<48-27=21>>21 bags for $22 each",
+    "L5": "21 bags were sold for 21 bags x $22/bag = $<<21*22=462>>462",
+    "L6": "In total the salesman made $306 + $250 + $462 = $<<306+250+462=1018>>1018",
+    "L7": "The salesman made $1018 - $576 = $<<1018-576=442>>442 in profit."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1781.\n    Returns: the salesman's total profit.\n    \"\"\"\n    # L1\n    bags_sold_group1 = 17 # sold 17 of them\n    price_group1 = 18 # for $18 at the swap meet\n    revenue_group1 = bags_sold_group1 * price_group1\n\n    # L2\n    bags_sold_group2 = 10 # 10 were sold to a department store\n    price_group2 = 25 # for $25 each\n    revenue_group2 = bags_sold_group2 * price_group2\n\n    # L3\n    total_bags_sold_two_groups = bags_sold_group1 + bags_sold_group2\n\n    # L4\n    total_initial_bags = 48 # case of 48 backpacks\n    price_group3 = 22 # remainder were sold for $22 each\n    bags_sold_group3 = total_initial_bags - total_bags_sold_two_groups\n\n    # L5\n    revenue_group3 = bags_sold_group3 * price_group3\n\n    # L6\n    total_revenue = revenue_group1 + revenue_group2 + revenue_group3\n\n    # L7\n    initial_cost = 576 # bought a case of 48 backpacks for $576\n    profit = total_revenue - initial_cost\n\n    # FA\n    answer = profit\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_revenue",
+    "operand_to_replace": "revenue_group1",
+    "replacement_variable": "price_group3"
+  },
+  "correct_trace": {
+    "bags_sold_group1": 17,
+    "price_group1": 18,
+    "revenue_group1": 306,
+    "bags_sold_group2": 10,
+    "price_group2": 25,
+    "revenue_group2": 250,
+    "total_bags_sold_two_groups": 27,
+    "total_initial_bags": 48,
+    "price_group3": 22,
+    "bags_sold_group3": 21,
+    "revenue_group3": 462,
+    "total_revenue": 1018,
+    "initial_cost": 576,
+    "profit": 442,
+    "answer": 442
+  },
+  "flawed_trace": {
+    "bags_sold_group1": 17,
+    "price_group1": 18,
+    "revenue_group1": 306,
+    "bags_sold_group2": 10,
+    "price_group2": 25,
+    "revenue_group2": 250,
+    "total_bags_sold_two_groups": 27,
+    "total_initial_bags": 48,
+    "price_group3": 22,
+    "bags_sold_group3": 21,
+    "revenue_group3": 462,
+    "total_revenue": 734,
+    "initial_cost": 576,
+    "profit": 158,
+    "answer": 158
+  },
+  "correct_value": 1018,
+  "flawed_value": 734,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "bags_sold_group1",
+        "price_group1"
+      ],
+      "WK_inputs": [],
+      "output_variable": "revenue_group1",
+      "solution_line_template": "The salesman sold {bags_sold_group1} bags for {bags_sold_group1} bags x ${price_group1}/bag = $<<{bags_sold_group1}*{price_group1}={revenue_group1}>>{revenue_group1}"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "bags_sold_group2",
+        "price_group2"
+      ],
+      "WK_inputs": [],
+      "output_variable": "revenue_group2",
+      "solution_line_template": "He sold {bags_sold_group2} more for {bags_sold_group2} bags x ${price_group2}/bag = $<<{bags_sold_group2}*{price_group2}={revenue_group2}>>{revenue_group2}"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_bags_sold_two_groups",
+      "solution_line_template": "Thus far he has sold {bags_sold_group1} bags + {bags_sold_group2} bags = <<{bags_sold_group1}+{bags_sold_group2}={total_bags_sold_two_groups}>>{total_bags_sold_two_groups} bags"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "total_initial_bags",
+        "price_group3"
+      ],
+      "WK_inputs": [],
+      "output_variable": "bags_sold_group3",
+      "solution_line_template": "Therefore he sold {total_initial_bags} bags - {total_bags_sold_two_groups} bags = <<{total_initial_bags}-{total_bags_sold_two_groups}={bags_sold_group3}>>{bags_sold_group3} bags for ${price_group3} each"
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "revenue_group3",
+      "solution_line_template": "{bags_sold_group3} bags were sold for {bags_sold_group3} bags x ${price_group3}/bag = $<<{bags_sold_group3}*{price_group3}={revenue_group3}>>{revenue_group3}"
+    },
+    {
+      "line_number": "L6",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_revenue",
+      "solution_line_template": "In total the salesman made ${revenue_group1} + ${revenue_group2} + ${revenue_group3} = $<<{revenue_group1}+{revenue_group2}+{revenue_group3}={total_revenue}>>{total_revenue}"
+    },
+    {
+      "line_number": "L7",
+      "question_inputs": [
+        "initial_cost"
+      ],
+      "WK_inputs": [],
+      "output_variable": "profit",
+      "solution_line_template": "The salesman made ${total_revenue} - ${initial_cost} = $<<{total_revenue}-{initial_cost}={profit}>>{profit} in profit."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The salesman sold 17 bags for 17 bags x $18/bag = $<<17*18=306>>306",
+    "L2": "He sold 10 more for 10 bags x $25/bag = $<<10*25=250>>250",
+    "L3": "Thus far he has sold 17 bags + 10 bags = <<17+10=27>>27 bags",
+    "L4": "Therefore he sold 48 bags - 27 bags = <<48-27=21>>21 bags for $22 each",
+    "L5": "21 bags were sold for 21 bags x $22/bag = $<<21*22=462>>462",
+    "L6": "In total the salesman made $22 + $250 + $462 = $<<22+250+462=734>>734",
+    "L7": "The salesman made $734 - $576 = $<<734-576=158>>158 in profit.",
+    "FA": "#### 158"
+  },
+  "erroneous_line_number": "L6",
+  "explanation": "Incorrect operand. The variable 'price_group3' (value: 22) was used instead of 'revenue_group1' (value: 306).",
+  "repro_seed": -3744972443054889238,
+  "model_name": "google_gemini-2.5-flash"
+}

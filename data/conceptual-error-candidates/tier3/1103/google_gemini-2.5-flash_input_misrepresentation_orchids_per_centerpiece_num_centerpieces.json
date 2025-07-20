@@ -1,0 +1,92 @@
+{
+  "index": 1103,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "First figure out how many total flowers Martha is going to buy by dividing her total spending by the price per flower: $2700 / $15/flower = <<2700/15=180>>180 flowers",
+    "L2": "Now figure out how many flowers are in each centerpiece by dividing the total number of flowers by the number of centerpieces: 180 flowers / 6 centerpieces = <<180/6=30>>30 flowers / centerpiece",
+    "L3": "Now figure out how many orchids are in each centerpiece by multiplying the number of roses per centerpiece by 2: 8 roses/centerpiece * 2 = <<8*2=16>>16 orchids/centerpiece",
+    "L4": "Now subtract the number of roses and orchids per centerpiece from the total number of flowers per centerpiece to find the number of lilies per centerpiece: 30 flowers - 16 orchids - 8 roses = <<30-16-8=6>>6 lilies"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1103.\n    Returns: the number of lilies Martha will put in each centerpiece.\n    \"\"\"\n    # L1\n    total_spending = 2700 # spend $2700 total\n    price_per_flower = 15 # each flower costs $15\n    total_flowers_bought = total_spending / price_per_flower\n\n    # L2\n    num_centerpieces = 6 # six centerpieces\n    flowers_per_centerpiece = total_flowers_bought / num_centerpieces\n\n    # L3\n    roses_per_centerpiece = 8 # each centerpiece uses 8 roses\n    orchid_multiplier = 2 # twice as many orchids as roses\n    orchids_per_centerpiece = roses_per_centerpiece * orchid_multiplier\n\n    # L4\n    lilies_per_centerpiece = flowers_per_centerpiece - orchids_per_centerpiece - roses_per_centerpiece\n\n    # FA\n    answer = lilies_per_centerpiece\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "orchids_per_centerpiece",
+    "operand_to_replace": "roses_per_centerpiece",
+    "replacement_variable": "num_centerpieces"
+  },
+  "correct_trace": {
+    "total_spending": 2700,
+    "price_per_flower": 15,
+    "total_flowers_bought": 180.0,
+    "num_centerpieces": 6,
+    "flowers_per_centerpiece": 30.0,
+    "roses_per_centerpiece": 8,
+    "orchid_multiplier": 2,
+    "orchids_per_centerpiece": 16,
+    "lilies_per_centerpiece": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "total_spending": 2700,
+    "price_per_flower": 15,
+    "total_flowers_bought": 180.0,
+    "num_centerpieces": 6,
+    "flowers_per_centerpiece": 30.0,
+    "roses_per_centerpiece": 8,
+    "orchid_multiplier": 2,
+    "orchids_per_centerpiece": 12,
+    "lilies_per_centerpiece": 10.0,
+    "answer": 10.0
+  },
+  "correct_value": 16,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_flowers_bought",
+      "question_inputs": [
+        "total_spending",
+        "price_per_flower"
+      ],
+      "solution_line_template": "First figure out how many total flowers Martha is going to buy by dividing her total spending by the price per flower: ${total_spending} / ${price_per_flower}/flower = <<{total_spending}/{price_per_flower}={total_flowers_bought}>>{total_flowers_bought} flowers"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "flowers_per_centerpiece",
+      "question_inputs": [
+        "num_centerpieces"
+      ],
+      "solution_line_template": "Now figure out how many flowers are in each centerpiece by dividing the total number of flowers by the number of centerpieces: {total_flowers_bought} flowers / {num_centerpieces} centerpieces = <<{total_flowers_bought}/{num_centerpieces}={flowers_per_centerpiece}>>{flowers_per_centerpiece} flowers / centerpiece"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "orchids_per_centerpiece",
+      "question_inputs": [
+        "roses_per_centerpiece",
+        "orchid_multiplier"
+      ],
+      "solution_line_template": "Now figure out how many orchids are in each centerpiece by multiplying the number of roses per centerpiece by {orchid_multiplier}: {roses_per_centerpiece} roses/centerpiece * {orchid_multiplier} = <<{roses_per_centerpiece}*{orchid_multiplier}={orchids_per_centerpiece}>>{orchids_per_centerpiece} orchids/centerpiece"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "lilies_per_centerpiece",
+      "question_inputs": [],
+      "solution_line_template": "Now subtract the number of roses and orchids per centerpiece from the total number of flowers per centerpiece to find the number of lilies per centerpiece: {flowers_per_centerpiece} flowers - {orchids_per_centerpiece} orchids - {roses_per_centerpiece} roses = <<{flowers_per_centerpiece}-{orchids_per_centerpiece}-{roses_per_centerpiece}={lilies_per_centerpiece}>>{lilies_per_centerpiece} lilies"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First figure out how many total flowers Martha is going to buy by dividing her total spending by the price per flower: $2700 / $15/flower = <<2700/15=180>>180 flowers",
+    "L2": "Now figure out how many flowers are in each centerpiece by dividing the total number of flowers by the number of centerpieces: 180 flowers / 6 centerpieces = <<180/6=30>>30 flowers / centerpiece",
+    "L3": "Now figure out how many orchids are in each centerpiece by multiplying the number of roses per centerpiece by 2: 6 roses/centerpiece * 2 = <<6*2=12>>12 orchids/centerpiece",
+    "L4": "Now subtract the number of roses and orchids per centerpiece from the total number of flowers per centerpiece to find the number of lilies per centerpiece: 30 flowers - 12 orchids - 8 roses = <<30-12-8=10>>10 lilies",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'num_centerpieces' (6) was used instead of 'roses_per_centerpiece' (8).",
+  "repro_seed": 5100128898808737095,
+  "model_name": "google_gemini-2.5-flash"
+}

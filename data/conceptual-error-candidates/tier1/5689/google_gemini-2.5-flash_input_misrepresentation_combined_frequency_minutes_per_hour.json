@@ -1,0 +1,79 @@
+{
+  "index": 5689,
+  "original_solution_mapping": {
+    "FA": "#### 36000",
+    "L1": "If a bunny comes out of its hole three times in a minute, in an hour, with 60 minutes, the bunny will come out of the hole 60*3=<<60*3=180>>180 times.",
+    "L2": "In 10 hours, a bunny will come out of their hole 180*10=<<180*10=1800>>1800 times.",
+    "L3": "The combined time that 20 bunnies coming out of their holes will have taken in 10 hours is 1800*20=<<1800*20=36000>>36000 times."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5689.\n    Returns: the combined number of times 20 bunnies will have come out of their burrows in 10 hours.\n    \"\"\"\n    # L1\n    bunny_frequency_per_minute = 3 # 3 times per minute\n    minutes_per_hour = 60 # WK\n    bunny_frequency_per_hour = minutes_per_hour * bunny_frequency_per_minute\n\n    # L2\n    total_hours = 10 # in 10 hours\n    bunny_frequency_total_hours = bunny_frequency_per_hour * total_hours\n\n    # L3\n    num_bunnies = 20 # 20 bunnies\n    combined_frequency = bunny_frequency_total_hours * num_bunnies\n\n    # FA\n    answer = combined_frequency\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "combined_frequency",
+    "operand_to_replace": "num_bunnies",
+    "replacement_variable": "minutes_per_hour"
+  },
+  "correct_trace": {
+    "bunny_frequency_per_minute": 3,
+    "minutes_per_hour": 60,
+    "bunny_frequency_per_hour": 180,
+    "total_hours": 10,
+    "bunny_frequency_total_hours": 1800,
+    "num_bunnies": 20,
+    "combined_frequency": 36000,
+    "answer": 36000
+  },
+  "flawed_trace": {
+    "bunny_frequency_per_minute": 3,
+    "minutes_per_hour": 60,
+    "bunny_frequency_per_hour": 180,
+    "total_hours": 10,
+    "bunny_frequency_total_hours": 1800,
+    "num_bunnies": 20,
+    "combined_frequency": 108000,
+    "answer": 108000
+  },
+  "correct_value": 36000,
+  "flawed_value": 108000,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "bunny_frequency_per_hour",
+      "question_inputs": [
+        "bunny_frequency_per_minute"
+      ],
+      "solution_line_template": "If a bunny comes out of its hole three times in a minute, in an hour, with {minutes_per_hour} minutes, the bunny will come out of the hole {minutes_per_hour}*{bunny_frequency_per_minute}=<<{minutes_per_hour}*{bunny_frequency_per_minute}={bunny_frequency_per_hour}>>{bunny_frequency_per_hour} times."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "bunny_frequency_total_hours",
+      "question_inputs": [
+        "total_hours"
+      ],
+      "solution_line_template": "In {total_hours} hours, a bunny will come out of their hole {bunny_frequency_per_hour}*{total_hours}=<<{bunny_frequency_per_hour}*{total_hours}={bunny_frequency_total_hours}>>{bunny_frequency_total_hours} times."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "combined_frequency",
+      "question_inputs": [
+        "num_bunnies"
+      ],
+      "solution_line_template": "The combined time that {num_bunnies} bunnies coming out of their holes will have taken in {total_hours} hours is {bunny_frequency_total_hours}*{num_bunnies}=<<{bunny_frequency_total_hours}*{num_bunnies}={combined_frequency}>>{combined_frequency} times."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If a bunny comes out of its hole three times in a minute, in an hour, with 60 minutes, the bunny will come out of the hole 60*3=<<60*3=180>>180 times.",
+    "L2": "In 10 hours, a bunny will come out of their hole 180*10=<<180*10=1800>>1800 times.",
+    "L3": "The combined time that 60 bunnies coming out of their holes will have taken in 10 hours is 1800*60=<<1800*60=108000>>108000 times.",
+    "FA": "#### 108000"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'minutes_per_hour' (60) was used instead of 'num_bunnies' (20).",
+  "repro_seed": -9037133806070636156,
+  "model_name": "google_gemini-2.5-flash"
+}

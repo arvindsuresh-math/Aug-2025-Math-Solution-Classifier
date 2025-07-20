@@ -1,0 +1,95 @@
+{
+  "index": 4098,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "1/2 a cup = 4 ounces",
+    "L2": "Each thermos contains 16 ounces of coffee because 20 - 4 = <<20-4=16>>16",
+    "L3": "She drinks 32 ounces a day because 2 x 16 = <<2*16=32>>32",
+    "L4": "She drinks 160 ounces a week because 32 x 5 = <<32*5=160>>160",
+    "L5": "She starts drinking only 40 ounces because 160 / 4 = <<160/4=40>>40"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4098.\n    Returns: the number of ounces of coffee she now drinks a week.\n    \"\"\"\n    # L2\n    thermos_capacity = 20 # 20-ounce thermos\n    milk_ounces_per_half_cup = 4 # WK\n    coffee_per_thermos = thermos_capacity - milk_ounces_per_half_cup\n\n    # L3\n    times_per_day = 2 # twice a day\n    ounces_per_day = times_per_day * coffee_per_thermos\n\n    # L4\n    school_days_per_week = 5 # five-day school week\n    normal_weekly_ounces = ounces_per_day * school_days_per_week\n\n    # L5\n    reduction_divisor = 4 # 1/4 of what she normally drinks\n    reduced_weekly_ounces = normal_weekly_ounces / reduction_divisor\n\n    # FA\n    answer = reduced_weekly_ounces\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "reduced_weekly_ounces",
+    "operand_to_replace": "reduction_divisor",
+    "replacement_variable": "school_days_per_week"
+  },
+  "correct_trace": {
+    "thermos_capacity": 20,
+    "milk_ounces_per_half_cup": 4,
+    "coffee_per_thermos": 16,
+    "times_per_day": 2,
+    "ounces_per_day": 32,
+    "school_days_per_week": 5,
+    "normal_weekly_ounces": 160,
+    "reduction_divisor": 4,
+    "reduced_weekly_ounces": 40.0,
+    "answer": 40.0
+  },
+  "flawed_trace": {
+    "thermos_capacity": 20,
+    "milk_ounces_per_half_cup": 4,
+    "coffee_per_thermos": 16,
+    "times_per_day": 2,
+    "ounces_per_day": 32,
+    "school_days_per_week": 5,
+    "normal_weekly_ounces": 160,
+    "reduction_divisor": 4,
+    "reduced_weekly_ounces": 32.0,
+    "answer": 32.0
+  },
+  "correct_value": 40.0,
+  "flawed_value": 32.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "milk_ounces_per_half_cup"
+      ],
+      "line_number": "L2",
+      "output_variable": "coffee_per_thermos",
+      "question_inputs": [
+        "thermos_capacity"
+      ],
+      "solution_line_template": "Each thermos contains {coffee_per_thermos} ounces of coffee because {thermos_capacity} - {milk_ounces_per_half_cup} = <<{thermos_capacity}-{milk_ounces_per_half_cup}={coffee_per_thermos}>>{coffee_per_thermos}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "ounces_per_day",
+      "question_inputs": [
+        "times_per_day"
+      ],
+      "solution_line_template": "She drinks {ounces_per_day} ounces a day because {times_per_day} x {coffee_per_thermos} = <<{times_per_day}*{coffee_per_thermos}={ounces_per_day}>>{ounces_per_day}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "normal_weekly_ounces",
+      "question_inputs": [
+        "school_days_per_week"
+      ],
+      "solution_line_template": "She drinks {normal_weekly_ounces} ounces a week because {ounces_per_day} x {school_days_per_week} = <<{ounces_per_day}*{school_days_per_week}={normal_weekly_ounces}>>{normal_weekly_ounces}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "reduced_weekly_ounces",
+      "question_inputs": [
+        "reduction_divisor"
+      ],
+      "solution_line_template": "She starts drinking only {reduced_weekly_ounces} ounces because {normal_weekly_ounces} / {reduction_divisor} = <<{normal_weekly_ounces}/{reduction_divisor}={reduced_weekly_ounces}>>{reduced_weekly_ounces}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "Each thermos contains 16 ounces of coffee because 20 - 4 = <<20-4=16>>16",
+    "L3": "She drinks 32 ounces a day because 2 x 16 = <<2*16=32>>32",
+    "L4": "She drinks 160 ounces a week because 32 x 5 = <<32*5=160>>160",
+    "L5": "She starts drinking only 32 ounces because 160 / 5 = <<160/5=32>>32",
+    "FA": "#### 32"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Input misrepresentation. The value for 'school_days_per_week' (5) was used instead of 'reduction_divisor' (4).",
+  "repro_seed": 7508569364807542182,
+  "model_name": "google_gemini-2.5-flash"
+}

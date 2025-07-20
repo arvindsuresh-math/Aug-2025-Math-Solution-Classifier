@@ -1,0 +1,86 @@
+{
+  "index": 2656,
+  "original_solution_mapping": {
+    "FA": "#### 1000",
+    "L1": "If the card with the letter X has half the number the card with letter W has, it has 1/2*200= 100",
+    "L2": "Together, cards with letters W and X have tags that total 100+200 = <<100+200=300>>300.",
+    "L3": "If the card with the letter Y has the total of the numbers cards with letters, W and X have, then the total for cards with letters W, X, and Y is 300+300 = 600",
+    "L4": "Since the card with the letter Z has a tag of 200, the total of the numbers the tags have is 600+400= 1000"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2656.\n    Returns: the total of all the tagged numbers.\n    \"\"\"\n    # L1\n    w_tag = 200 # W is tagged with the number 200\n    half_fraction = Fraction(1, 2) # half the number W is tagged with\n    x_tag = half_fraction * w_tag\n\n    # L2\n    w_x_total = x_tag + w_tag\n\n    # L3\n    y_tag = w_x_total # Y is tagged with the total of X and W's tags\n    w_x_y_total = w_x_total + y_tag\n\n    # L4\n    z_tag = 400 # Z is tagged with the number 400\n    total_tagged_numbers = w_x_y_total + z_tag\n\n    # FA\n    answer = total_tagged_numbers\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_tagged_numbers",
+    "replacement_variable": "w_x_y_total"
+  },
+  "correct_trace": {
+    "w_tag": 200,
+    "half_fraction": "1/2",
+    "x_tag": "100",
+    "w_x_total": "300",
+    "y_tag": "300",
+    "w_x_y_total": "600",
+    "z_tag": 400,
+    "total_tagged_numbers": "1000",
+    "answer": "1000"
+  },
+  "flawed_trace": {
+    "w_tag": 200,
+    "half_fraction": "1/2",
+    "x_tag": "100",
+    "w_x_total": "300",
+    "y_tag": "300",
+    "w_x_y_total": "600",
+    "z_tag": 400,
+    "total_tagged_numbers": "1000",
+    "answer": "600"
+  },
+  "correct_value": "1000",
+  "flawed_value": "600",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "x_tag",
+      "question_inputs": [
+        "w_tag",
+        "half_fraction"
+      ],
+      "solution_line_template": "If the card with the letter X has half the number the card with letter W has, it has {half_fraction}*{w_tag}= {x_tag}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "w_x_total",
+      "question_inputs": [],
+      "solution_line_template": "Together, cards with letters W and X have tags that total {x_tag}+{w_tag} = <<{x_tag}+{w_tag}={w_x_total}>>{w_x_total}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "w_x_y_total",
+      "question_inputs": [],
+      "solution_line_template": "If the card with the letter Y has the total of the numbers cards with letters, W and X have, then the total for cards with letters W, X, and Y is {w_x_total}+{y_tag} = {w_x_y_total}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_tagged_numbers",
+      "question_inputs": [
+        "z_tag"
+      ],
+      "solution_line_template": "Since the card with the letter Z has a tag of 200, the total of the numbers the tags have is {w_x_y_total}+{z_tag}= {total_tagged_numbers}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the card with the letter X has half the number the card with letter W has, it has 1/2*200= 100",
+    "L2": "Together, cards with letters W and X have tags that total 100+200 = <<100+200=300>>300.",
+    "L3": "If the card with the letter Y has the total of the numbers cards with letters, W and X have, then the total for cards with letters W, X, and Y is 300+300 = 600",
+    "FA": "#### 600"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'w_x_y_total' (value: 600) was reported instead of 'total_tagged_numbers' (value: 1000).",
+  "repro_seed": 8087080640702066798,
+  "model_name": "google_gemini-2.5-flash"
+}

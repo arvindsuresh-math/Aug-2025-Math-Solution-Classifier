@@ -1,0 +1,63 @@
+{
+  "index": 4082,
+  "original_solution_mapping": {
+    "FA": "#### 33",
+    "L1": "Luke filled up 44/4=<<44/4=11>>11 water balloons",
+    "L2": "Tom filled up 11*3=<<11*3=33>>33 water balloons"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4082.\n    Returns: the number of water balloons Tom filled up.\n    \"\"\"\n    # L1\n    anthony_balloons = 44 # Anthony filled up 44 water balloons\n    luke_fraction_denominator = 4 # one fourth as many balloons as Anthony\n    luke_balloons = anthony_balloons / luke_fraction_denominator\n\n    # L2\n    tom_multiplier = 3 # Tom filled up 3 times as many\n    tom_balloons = luke_balloons * tom_multiplier\n\n    # FA\n    answer = tom_balloons\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "luke_balloons",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x3116c0d50>"
+  },
+  "correct_trace": {
+    "anthony_balloons": 44,
+    "luke_fraction_denominator": 4,
+    "luke_balloons": 11.0,
+    "tom_multiplier": 3,
+    "tom_balloons": 33.0,
+    "answer": 33.0
+  },
+  "flawed_trace": {
+    "anthony_balloons": 44,
+    "luke_fraction_denominator": 4,
+    "luke_balloons": 176,
+    "tom_multiplier": 3,
+    "tom_balloons": 528,
+    "answer": 528
+  },
+  "correct_value": 11.0,
+  "flawed_value": 176,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "luke_balloons",
+      "question_inputs": [
+        "anthony_balloons",
+        "luke_fraction_denominator"
+      ],
+      "solution_line_template": "Luke filled up {anthony_balloons}/{luke_fraction_denominator}=<<{anthony_balloons}/{luke_fraction_denominator}={luke_balloons}>>{luke_balloons} water balloons"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "tom_balloons",
+      "question_inputs": [
+        "tom_multiplier"
+      ],
+      "solution_line_template": "Tom filled up {luke_balloons}*{tom_multiplier}=<<{luke_balloons}*{tom_multiplier}={tom_balloons}>>{tom_balloons} water balloons"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Luke filled up 44/4=<<44/4=176>>176 water balloons",
+    "L2": "Tom filled up 176*3=<<176*3=528>>528 water balloons",
+    "FA": "#### 528"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -7272797548991117261,
+  "model_name": "google_gemini-2.5-flash"
+}

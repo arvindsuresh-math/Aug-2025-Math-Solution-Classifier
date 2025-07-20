@@ -1,0 +1,92 @@
+{
+  "index": 1606,
+  "original_solution_mapping": {
+    "FA": "#### 90",
+    "L1": "Maya can lift 240*0.25=<<240*0.25=60>>60 pounds.",
+    "L2": "Gaining progress, she can lift up to 60+10=<<60+10=70>>70 pounds.",
+    "L3": "At her peak, she can lift 300*0.5=<<300*0.5=150>>150 pounds.",
+    "L4": "Maya's peak is 150 pounds - 60 pounds when she started = <<150-60=90>>90 more pounds than when she started."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1606.\n    Returns: the difference in pounds Maya can lift between her peak and start.\n    \"\"\"\n    # L1\n    america_initial_lift = 240 # America can lift 240 pounds\n    maya_initial_fraction = 0.25 # a fourth of what America can\n    maya_initial_lift = america_initial_lift * maya_initial_fraction\n\n    # L2\n    maya_progress_gain = 10 # add 10 more pounds\n    maya_intermediate_lift = maya_initial_lift + maya_progress_gain\n\n    # L3\n    america_peak_lift = 300 # America has hit her peak lift at 300 pounds\n    maya_peak_fraction = 0.5 # can lift half of what America can lift\n    maya_peak_lift = america_peak_lift * maya_peak_fraction\n\n    # L4\n    maya_lift_increase = maya_peak_lift - maya_initial_lift\n\n    # FA\n    answer = maya_lift_increase\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "maya_lift_increase",
+    "operand_to_replace": "maya_peak_lift",
+    "replacement_variable": "maya_intermediate_lift"
+  },
+  "correct_trace": {
+    "america_initial_lift": 240,
+    "maya_initial_fraction": 0.25,
+    "maya_initial_lift": 60.0,
+    "maya_progress_gain": 10,
+    "maya_intermediate_lift": 70.0,
+    "america_peak_lift": 300,
+    "maya_peak_fraction": 0.5,
+    "maya_peak_lift": 150.0,
+    "maya_lift_increase": 90.0,
+    "answer": 90.0
+  },
+  "flawed_trace": {
+    "america_initial_lift": 240,
+    "maya_initial_fraction": 0.25,
+    "maya_initial_lift": 60.0,
+    "maya_progress_gain": 10,
+    "maya_intermediate_lift": 70.0,
+    "america_peak_lift": 300,
+    "maya_peak_fraction": 0.5,
+    "maya_peak_lift": 150.0,
+    "maya_lift_increase": 10.0,
+    "answer": 10.0
+  },
+  "correct_value": 90.0,
+  "flawed_value": 10.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "maya_initial_lift",
+      "question_inputs": [
+        "america_initial_lift",
+        "maya_initial_fraction"
+      ],
+      "solution_line_template": "Maya can lift {america_initial_lift}*{maya_initial_fraction}=<<{america_initial_lift}*{maya_initial_fraction}={maya_initial_lift}>>{maya_initial_lift} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "maya_intermediate_lift",
+      "question_inputs": [
+        "maya_progress_gain"
+      ],
+      "solution_line_template": "Gaining progress, she can lift up to {maya_initial_lift}+{maya_progress_gain}=<<{maya_initial_lift}+{maya_progress_gain}={maya_intermediate_lift}>>{maya_intermediate_lift} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "maya_peak_lift",
+      "question_inputs": [
+        "america_peak_lift",
+        "maya_peak_fraction"
+      ],
+      "solution_line_template": "At her peak, she can lift {america_peak_lift}*{maya_peak_fraction}=<<{america_peak_lift}*{maya_peak_fraction}={maya_peak_lift}>>{maya_peak_lift} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "maya_lift_increase",
+      "question_inputs": [],
+      "solution_line_template": "Maya's peak is {maya_peak_lift} pounds - {maya_initial_lift} pounds when she started = <<{maya_peak_lift}-{maya_initial_lift}={maya_lift_increase}>>{maya_lift_increase} more pounds than when she started."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Maya can lift 240*0.25=<<240*0.25=60>>60 pounds.",
+    "L2": "Gaining progress, she can lift up to 60+10=<<60+10=70>>70 pounds.",
+    "L3": "At her peak, she can lift 300*0.5=<<300*0.5=150>>150 pounds.",
+    "L4": "Maya's peak is 70 pounds - 60 pounds when she started = <<70-60=10>>10 more pounds than when she started.",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'maya_intermediate_lift' (value: 70.0) was used instead of 'maya_peak_lift' (value: 150.0).",
+  "repro_seed": -2375078743730778545,
+  "model_name": "google_gemini-2.5-flash"
+}

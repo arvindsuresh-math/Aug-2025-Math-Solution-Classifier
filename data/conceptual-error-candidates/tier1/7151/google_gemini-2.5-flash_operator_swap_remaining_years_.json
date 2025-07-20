@@ -1,0 +1,108 @@
+{
+  "index": 7151,
+  "original_solution_mapping": {
+    "FA": "#### 116",
+    "L1": "One year is 12 months, so during the first year, Kate spent $5/month * 12 months/year = $<<5*12=60>>60/year on the tickets.",
+    "L2": "After that, she went to the museum for 3 years - 1 year = <<3-1=2>>2 more years.",
+    "L3": "During this time, she visited the museum 2 years * 4 visits/year = <<2*4=8>>8 visits.",
+    "L4": "She had to pay the higher price of $7, so she spent $7/visit * 8 visits = $<<7*8=56>>56 in two last years.",
+    "L5": "In total Kate paid $56 + $60 = $<<56+60=116>>116 during 3 years."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7151.\n    Returns: the total amount Kate paid for all visits to the Art-museum after 3 years.\n    \"\"\"\n    # L1\n    entrance_fee_initial = 5 # The entrance fee is $5\n    months_per_year = 12 # WK\n    cost_first_year = entrance_fee_initial * months_per_year\n\n    # L2\n    total_years = 3 # after 3 years of visiting\n    first_period_years = 1 # After 1 year\n    remaining_years = total_years - first_period_years\n\n    # L3\n    visits_per_year_later = 4 # visit the museum only 4 times a year\n    total_visits_later = remaining_years * visits_per_year_later\n\n    # L4\n    entrance_fee_later = 7 # ticket price increased to $7\n    cost_later_years = entrance_fee_later * total_visits_later\n\n    # L5\n    total_cost = cost_later_years + cost_first_year\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "remaining_years",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x315337a10>"
+  },
+  "correct_trace": {
+    "entrance_fee_initial": 5,
+    "months_per_year": 12,
+    "cost_first_year": 60,
+    "total_years": 3,
+    "first_period_years": 1,
+    "remaining_years": 2,
+    "visits_per_year_later": 4,
+    "total_visits_later": 8,
+    "entrance_fee_later": 7,
+    "cost_later_years": 56,
+    "total_cost": 116,
+    "answer": 116
+  },
+  "flawed_trace": {
+    "entrance_fee_initial": 5,
+    "months_per_year": 12,
+    "cost_first_year": 60,
+    "total_years": 3,
+    "first_period_years": 1,
+    "remaining_years": 3.0,
+    "visits_per_year_later": 4,
+    "total_visits_later": 12.0,
+    "entrance_fee_later": 7,
+    "cost_later_years": 84.0,
+    "total_cost": 144.0,
+    "answer": 144.0
+  },
+  "correct_value": 2,
+  "flawed_value": 3.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L1",
+      "output_variable": "cost_first_year",
+      "question_inputs": [
+        "entrance_fee_initial"
+      ],
+      "solution_line_template": "One year is {months_per_year} months, so during the first year, Kate spent ${entrance_fee_initial}/month * {months_per_year} months/year = $<<{entrance_fee_initial}*{months_per_year}={cost_first_year}>>{cost_first_year}/year on the tickets."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_years",
+      "question_inputs": [
+        "total_years",
+        "first_period_years"
+      ],
+      "solution_line_template": "After that, she went to the museum for {total_years} years - {first_period_years} year = <<{total_years}-{first_period_years}={remaining_years}>>{remaining_years} more years."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_visits_later",
+      "question_inputs": [
+        "visits_per_year_later"
+      ],
+      "solution_line_template": "During this time, she visited the museum {remaining_years} years * {visits_per_year_later} visits/year = <<{remaining_years}*{visits_per_year_later}={total_visits_later}>>{total_visits_later} visits."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "cost_later_years",
+      "question_inputs": [
+        "entrance_fee_later"
+      ],
+      "solution_line_template": "She had to pay the higher price of ${entrance_fee_later}, so she spent ${entrance_fee_later}/visit * {total_visits_later} visits = $<<{entrance_fee_later}*{total_visits_later}={cost_later_years}>>{cost_later_years} in two last years."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_cost",
+      "question_inputs": [],
+      "solution_line_template": "In total Kate paid ${cost_later_years} + ${cost_first_year} = $<<{cost_later_years}+{cost_first_year}={total_cost}>>{total_cost} during 3 years."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "One year is 12 months, so during the first year, Kate spent $5/month * 12 months/year = $<<5*12=60>>60/year on the tickets.",
+    "L2": "After that, she went to the museum for 3 years - 1 year = <<3-1=3>>3 more years.",
+    "L3": "During this time, she visited the museum 3 years * 4 visits/year = <<3*4=12>>12 visits.",
+    "L4": "She had to pay the higher price of $7, so she spent $7/visit * 12 visits = $<<7*12=84>>84 in two last years.",
+    "L5": "In total Kate paid $84 + $60 = $<<84+60=144>>144 during 3 years.",
+    "FA": "#### 144"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": 1479866313064138108,
+  "model_name": "google_gemini-2.5-flash"
+}

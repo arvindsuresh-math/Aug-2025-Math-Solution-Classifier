@@ -1,0 +1,78 @@
+{
+  "index": 5831,
+  "original_solution_mapping": {
+    "FA": "#### 1280",
+    "L1": "Herman buys himself and 3 team members breakfast 5 days a week so that's 4*5 = 20 breakfast combo meals",
+    "L2": "Each combo meals costs $4.00 and he buys 20 of them a week so that's 4*20 = $<<4*20=80.00>>80.00",
+    "L3": "Over a 16 week period he spends 16*80 = $<<16*80=1280.00>>1,280.00 on breakfast"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5831.\n    Returns: the total amount Herman will spend on breakfast.\n    \"\"\"\n    # L1\n    num_people_eating = 4 # himself and 3 members of his team\n    days_per_week = 5 # 5 days, every week\n    meals_per_week = num_people_eating * days_per_week\n\n    # L2\n    cost_per_meal = 4.00 # Each meal costs $4.00\n    weekly_cost = cost_per_meal * meals_per_week\n\n    # L3\n    project_duration_weeks = 16 # This current project will last 16 weeks\n    total_breakfast_cost = project_duration_weeks * weekly_cost\n\n    # FA\n    answer = total_breakfast_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "weekly_cost",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x31420c510>"
+  },
+  "correct_trace": {
+    "num_people_eating": 4,
+    "days_per_week": 5,
+    "meals_per_week": 20,
+    "cost_per_meal": 4.0,
+    "weekly_cost": 80.0,
+    "project_duration_weeks": 16,
+    "total_breakfast_cost": 1280.0,
+    "answer": 1280.0
+  },
+  "flawed_trace": {
+    "num_people_eating": 4,
+    "days_per_week": 5,
+    "meals_per_week": 20,
+    "cost_per_meal": 4.0,
+    "weekly_cost": 24.0,
+    "project_duration_weeks": 16,
+    "total_breakfast_cost": 384.0,
+    "answer": 384.0
+  },
+  "correct_value": 80.0,
+  "flawed_value": 24.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "meals_per_week",
+      "question_inputs": [
+        "num_people_eating",
+        "days_per_week"
+      ],
+      "solution_line_template": "Herman buys himself and 3 team members breakfast {days_per_week} days a week so that's {num_people_eating}*{days_per_week} = {meals_per_week} breakfast combo meals"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "weekly_cost",
+      "question_inputs": [
+        "cost_per_meal"
+      ],
+      "solution_line_template": "Each combo meals costs ${cost_per_meal} and he buys {meals_per_week} of them a week so that's {cost_per_meal}*{meals_per_week} = $<<{cost_per_meal}*{meals_per_week}={weekly_cost}>>{weekly_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_breakfast_cost",
+      "question_inputs": [
+        "project_duration_weeks"
+      ],
+      "solution_line_template": "Over a {project_duration_weeks} week period he spends {project_duration_weeks}*{weekly_cost} = $<<{project_duration_weeks}*{weekly_cost}={total_breakfast_cost}>>{total_breakfast_cost} on breakfast"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Herman buys himself and 3 team members breakfast 5 days a week so that's 4*5 = 20 breakfast combo meals",
+    "L2": "Each combo meals costs $4 and he buys 20 of them a week so that's 4*20 = $<<4*20=24>>24",
+    "L3": "Over a 16 week period he spends 16*24 = $<<16*24=384>>384 on breakfast",
+    "FA": "#### 384"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -3251479389218574010,
+  "model_name": "google_gemini-2.5-flash"
+}

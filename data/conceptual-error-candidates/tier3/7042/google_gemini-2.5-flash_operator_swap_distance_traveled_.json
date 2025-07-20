@@ -1,0 +1,73 @@
+{
+  "index": 7042,
+  "original_solution_mapping": {
+    "FA": "#### 35",
+    "L1": "1 hour = <<60=60>>60 minutes.",
+    "L2": "We convert the time to hours, so 42 minutes = 42/60 hours = 7/10 hours.",
+    "L3": "So in 42 minutes, the distance the bus traveled in miles is 50 * (7/10) = <<50*(7/10)=35>>35 miles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7042.\n    Returns: the distance the bus traveled in miles.\n    \"\"\"\n    # L1\n    minutes_per_hour = 60 # WK\n\n    # L2\n    travel_minutes = 42 # 42 minutes\n    travel_hours = Fraction(travel_minutes, minutes_per_hour)\n\n    # L3\n    speed_mph = 50 # speed of 50 mph\n    distance_traveled = speed_mph * travel_hours\n\n    # FA\n    answer = distance_traveled\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "distance_traveled",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x31b640650>"
+  },
+  "correct_trace": {
+    "minutes_per_hour": 60,
+    "travel_minutes": 42,
+    "travel_hours": "7/10",
+    "speed_mph": 50,
+    "distance_traveled": "35",
+    "answer": "35"
+  },
+  "flawed_trace": {
+    "minutes_per_hour": 60,
+    "travel_minutes": 42,
+    "travel_hours": "7/10",
+    "speed_mph": 50,
+    "distance_traveled": "500/7",
+    "answer": "500/7"
+  },
+  "correct_value": "35",
+  "flawed_value": "500/7",
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "minutes_per_hour",
+      "question_inputs": [],
+      "solution_line_template": "1 hour = <<{minutes_per_hour}={minutes_per_hour}>>{minutes_per_hour} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "travel_hours",
+      "question_inputs": [
+        "travel_minutes"
+      ],
+      "solution_line_template": "We convert the time to hours, so {travel_minutes} minutes = {travel_minutes}/{minutes_per_hour} hours = {travel_hours} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "distance_traveled",
+      "question_inputs": [
+        "speed_mph"
+      ],
+      "solution_line_template": "So in {travel_minutes} minutes, the distance the bus traveled in miles is {speed_mph} * ({travel_hours}) = <<{speed_mph}*({travel_hours})={distance_traveled}>>{distance_traveled} miles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "1 hour = <<60=60>>60 minutes.",
+    "L2": "We convert the time to hours, so 42 minutes = 42/60 hours = 42/60 hours.",
+    "L3": "So in 42 minutes, the distance the bus traveled in miles is 50 * (42/60) = <<50*(42/60)=500/7>>500/7 miles.",
+    "FA": "#### 500/7"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 3929098818410506854,
+  "model_name": "google_gemini-2.5-flash"
+}

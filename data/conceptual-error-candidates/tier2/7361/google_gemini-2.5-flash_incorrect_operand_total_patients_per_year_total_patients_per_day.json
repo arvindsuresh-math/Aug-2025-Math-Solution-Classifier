@@ -1,0 +1,100 @@
+{
+  "index": 7361,
+  "original_solution_mapping": {
+    "FA": "#### 11000",
+    "L1": "He treats 20*.2=<<20*.2=4>>4 extra patients",
+    "L2": "So he treats 20+4=<<20+4=24>>24 patients at the second hospital",
+    "L3": "So he treats 20+24=<<20+24=44>>44 patients a day",
+    "L4": "That means he treats 44*5=<<44*5=220>>220 patients a week",
+    "L5": "So he treats 220*50=<<220*50=11000>>11,000 patients a year"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7361.\n    Returns: the total number of patients John treats in a year.\n    \"\"\"\n    # L1\n    patients_first_hospital = 20 # sees 20 different patients each day\n    extra_patients_percent = 0.2 # sees 20% more individual patients\n    extra_patients = patients_first_hospital * extra_patients_percent\n\n    # L2\n    patients_second_hospital = patients_first_hospital + extra_patients\n\n    # L3\n    total_patients_per_day = patients_first_hospital + patients_second_hospital\n\n    # L4\n    work_days_per_week = 5 # He works 5 days a week\n    total_patients_per_week = total_patients_per_day * work_days_per_week\n\n    # L5\n    work_weeks_per_year = 50 # he works 50 weeks a year\n    total_patients_per_year = total_patients_per_week * work_weeks_per_year\n\n    # FA\n    answer = total_patients_per_year\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_patients_per_year",
+    "operand_to_replace": "total_patients_per_week",
+    "replacement_variable": "total_patients_per_day"
+  },
+  "correct_trace": {
+    "patients_first_hospital": 20,
+    "extra_patients_percent": 0.2,
+    "extra_patients": 4.0,
+    "patients_second_hospital": 24.0,
+    "total_patients_per_day": 44.0,
+    "work_days_per_week": 5,
+    "total_patients_per_week": 220.0,
+    "work_weeks_per_year": 50,
+    "total_patients_per_year": 11000.0,
+    "answer": 11000.0
+  },
+  "flawed_trace": {
+    "patients_first_hospital": 20,
+    "extra_patients_percent": 0.2,
+    "extra_patients": 4.0,
+    "patients_second_hospital": 24.0,
+    "total_patients_per_day": 44.0,
+    "work_days_per_week": 5,
+    "total_patients_per_week": 220.0,
+    "work_weeks_per_year": 50,
+    "total_patients_per_year": 2200.0,
+    "answer": 2200.0
+  },
+  "correct_value": 11000.0,
+  "flawed_value": 2200.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "extra_patients",
+      "question_inputs": [
+        "patients_first_hospital",
+        "extra_patients_percent"
+      ],
+      "solution_line_template": "He treats {patients_first_hospital}*{extra_patients_percent}=<<{patients_first_hospital}*{extra_patients_percent}={extra_patients}>>{extra_patients} extra patients"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "patients_second_hospital",
+      "question_inputs": [],
+      "solution_line_template": "So he treats {patients_first_hospital}+{extra_patients}=<<{patients_first_hospital}+{extra_patients}={patients_second_hospital}>>{patients_second_hospital} patients at the second hospital"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_patients_per_day",
+      "question_inputs": [],
+      "solution_line_template": "So he treats {patients_first_hospital}+{patients_second_hospital}=<<{patients_first_hospital}+{patients_second_hospital}={total_patients_per_day}>>{total_patients_per_day} patients a day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_patients_per_week",
+      "question_inputs": [
+        "work_days_per_week"
+      ],
+      "solution_line_template": "That means he treats {total_patients_per_day}*{work_days_per_week}=<<{total_patients_per_day}*{work_days_per_week}={total_patients_per_week}>>{total_patients_per_week} patients a week"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_patients_per_year",
+      "question_inputs": [
+        "work_weeks_per_year"
+      ],
+      "solution_line_template": "So he treats {total_patients_per_week}*{work_weeks_per_year}=<<{total_patients_per_week}*{work_weeks_per_year}={total_patients_per_year}>>{total_patients_per_year} patients a year"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He treats 20*0.2=<<20*0.2=4>>4 extra patients",
+    "L2": "So he treats 20+4=<<20+4=24>>24 patients at the second hospital",
+    "L3": "So he treats 20+24=<<20+24=44>>44 patients a day",
+    "L4": "That means he treats 44*5=<<44*5=220>>220 patients a week",
+    "L5": "So he treats 44*50=<<44*50=2200>>2200 patients a year",
+    "FA": "#### 2200"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operand. The variable 'total_patients_per_day' (value: 44.0) was used instead of 'total_patients_per_week' (value: 220.0).",
+  "repro_seed": 6340251214754726560,
+  "model_name": "google_gemini-2.5-flash"
+}

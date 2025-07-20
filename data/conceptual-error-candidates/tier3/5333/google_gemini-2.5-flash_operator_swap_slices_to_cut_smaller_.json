@@ -1,0 +1,89 @@
+{
+  "index": 5333,
+  "original_solution_mapping": {
+    "FA": "#### 200",
+    "L1": "First, Tamia cuts the 5 bell peppers into 20 slices each, 5 x 20 = <<5*20=100>>100 slices.",
+    "L2": "Then, she takes 1/2 of those to cut into smaller pieces, 100 / 2 = <<100/2=50>>50 slices to cut smaller.",
+    "L3": "Tamia takes each of those 50 slices and cuts them into 3 pieces each, 50 x 3 = <<50*3=150>>150.",
+    "L4": "Tamia is adding 50 slices + 150 smaller pieces = <<50+150=200>>200 pieces of bell pepper added to her meal."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5333.\n    Returns: the total number of slices and pieces of bell pepper.\n    \"\"\"\n    # L1\n    num_bell_peppers = 5 # 5 bell peppers\n    slices_per_pepper = 20 # 20 large slices\n    total_large_slices = num_bell_peppers * slices_per_pepper\n\n    # L2\n    half_divisor = 2 # half those slices\n    slices_to_cut_smaller = total_large_slices / half_divisor\n\n    # L3\n    pieces_per_small_slice = 3 # cuts them into 3 smaller pieces each\n    total_small_pieces = slices_to_cut_smaller * pieces_per_small_slice\n\n    # L4\n    total_slices_and_pieces = slices_to_cut_smaller + total_small_pieces\n\n    # FA\n    answer = total_slices_and_pieces\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "slices_to_cut_smaller",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x31ab9b850>"
+  },
+  "correct_trace": {
+    "num_bell_peppers": 5,
+    "slices_per_pepper": 20,
+    "total_large_slices": 100,
+    "half_divisor": 2,
+    "slices_to_cut_smaller": 50.0,
+    "pieces_per_small_slice": 3,
+    "total_small_pieces": 150.0,
+    "total_slices_and_pieces": 200.0,
+    "answer": 200.0
+  },
+  "flawed_trace": {
+    "num_bell_peppers": 5,
+    "slices_per_pepper": 20,
+    "total_large_slices": 100,
+    "half_divisor": 2,
+    "slices_to_cut_smaller": 200,
+    "pieces_per_small_slice": 3,
+    "total_small_pieces": 600,
+    "total_slices_and_pieces": 800,
+    "answer": 800
+  },
+  "correct_value": 50.0,
+  "flawed_value": 200,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_large_slices",
+      "question_inputs": [
+        "num_bell_peppers",
+        "slices_per_pepper"
+      ],
+      "solution_line_template": "First, Tamia cuts the {num_bell_peppers} bell peppers into {slices_per_pepper} slices each, {num_bell_peppers} x {slices_per_pepper} = <<{num_bell_peppers}*{slices_per_pepper}={total_large_slices}>>{total_large_slices} slices."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "slices_to_cut_smaller",
+      "question_inputs": [
+        "half_divisor"
+      ],
+      "solution_line_template": "Then, she takes 1/{half_divisor} of those to cut into smaller pieces, {total_large_slices} / {half_divisor} = <<{total_large_slices}/{half_divisor}={slices_to_cut_smaller}>>{slices_to_cut_smaller} slices to cut smaller."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_small_pieces",
+      "question_inputs": [
+        "pieces_per_small_slice"
+      ],
+      "solution_line_template": "Tamia takes each of those {slices_to_cut_smaller} slices and cuts them into {pieces_per_small_slice} pieces each, {slices_to_cut_smaller} x {pieces_per_small_slice} = <<{slices_to_cut_smaller}*{pieces_per_small_slice}={total_small_pieces}>>{total_small_pieces}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_slices_and_pieces",
+      "question_inputs": [],
+      "solution_line_template": "Tamia is adding {slices_to_cut_smaller} slices + {total_small_pieces} smaller pieces = <<{slices_to_cut_smaller}+{total_small_pieces}={total_slices_and_pieces}>>{total_slices_and_pieces} pieces of bell pepper added to her meal."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First, Tamia cuts the 5 bell peppers into 20 slices each, 5 x 20 = <<5*20=100>>100 slices.",
+    "L2": "Then, she takes 1/2 of those to cut into smaller pieces, 100 / 2 = <<100/2=200>>200 slices to cut smaller.",
+    "L3": "Tamia takes each of those 200 slices and cuts them into 3 pieces each, 200 x 3 = <<200*3=600>>600.",
+    "L4": "Tamia is adding 200 slices + 600 smaller pieces = <<200+600=800>>800 pieces of bell pepper added to her meal.",
+    "FA": "#### 800"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -4114132247231679686,
+  "model_name": "google_gemini-2.5-flash"
+}

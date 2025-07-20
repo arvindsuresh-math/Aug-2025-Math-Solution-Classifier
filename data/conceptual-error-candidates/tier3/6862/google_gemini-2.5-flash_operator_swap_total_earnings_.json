@@ -1,0 +1,78 @@
+{
+  "index": 6862,
+  "original_solution_mapping": {
+    "FA": "#### 2625",
+    "L1": "The total earnings from the ticket are $30 x 500 = $<<30*500=15000>>15000.",
+    "L2": "The band got $15000 x 70/100 = $<<15000*70/100=10500>>10500.",
+    "L3": "So each band member got $10500/4 = $<<10500/4=2625>>2625."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6862.\n    Returns: the amount each band member got from the concert.\n    \"\"\"\n    # L1\n    ticket_price = 30 # each ticket costs $30\n    attendees = 500 # Five hundred people attended the band concert\n    total_earnings = ticket_price * attendees\n\n    # L2\n    band_percentage = Fraction(70, 100) # the band gets 70% of the ticket price\n    band_share = total_earnings * band_percentage\n\n    # L3\n    num_band_members = 4 # there are 4 members of the band\n    each_member_share = band_share / num_band_members\n\n    # FA\n    answer = each_member_share\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_earnings",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x31b4f14d0>"
+  },
+  "correct_trace": {
+    "ticket_price": 30,
+    "attendees": 500,
+    "total_earnings": 15000,
+    "band_percentage": "7/10",
+    "band_share": "10500",
+    "num_band_members": 4,
+    "each_member_share": "2625",
+    "answer": "2625"
+  },
+  "flawed_trace": {
+    "ticket_price": 30,
+    "attendees": 500,
+    "total_earnings": 530,
+    "band_percentage": "7/10",
+    "band_share": "371",
+    "num_band_members": 4,
+    "each_member_share": "371/4",
+    "answer": "371/4"
+  },
+  "correct_value": 15000,
+  "flawed_value": 530,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_earnings",
+      "question_inputs": [
+        "ticket_price",
+        "attendees"
+      ],
+      "solution_line_template": "The total earnings from the ticket are ${ticket_price} x {attendees} = $<<{ticket_price}*{attendees}={total_earnings}>>{total_earnings}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "band_share",
+      "question_inputs": [
+        "band_percentage"
+      ],
+      "solution_line_template": "The band got ${total_earnings} x {band_percentage} = $<<{total_earnings}*{band_percentage}={band_share}>>{band_share}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "each_member_share",
+      "question_inputs": [
+        "num_band_members"
+      ],
+      "solution_line_template": "So each band member got ${band_share}/{num_band_members} = $<<{band_share}/{num_band_members}={each_member_share}>>{each_member_share}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total earnings from the ticket are $30 x 500 = $<<30*500=530>>530.",
+    "L2": "The band got $530 x 70/100 = $<<530*70/100=371>>371.",
+    "L3": "So each band member got $371/4 = $<<371/4=371/4>>371/4.",
+    "FA": "#### 371/4"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -8342572600866726083,
+  "model_name": "google_gemini-2.5-flash"
+}

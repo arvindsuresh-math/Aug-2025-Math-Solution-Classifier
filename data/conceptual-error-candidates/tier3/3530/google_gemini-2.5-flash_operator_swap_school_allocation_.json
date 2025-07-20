@@ -1,0 +1,78 @@
+{
+  "index": 3530,
+  "original_solution_mapping": {
+    "FA": "#### 75",
+    "L1": "Walter's daily earning is $5 x 4 = $<<5*4=20>>20.",
+    "L2": "So he earns $20 x 5 = $<<20*5=100>>100 per week.",
+    "L3": "Therefore, he allocates $100 x 3/4 = $<<100*3/4=75>>75 for his school."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3530.\n    Returns: the amount Walter allocates for school.\n    \"\"\"\n    # L1\n    hourly_wage = 5 # earns $5 per hour\n    hours_per_day = 4 # work 4 hours a day\n    daily_earning = hourly_wage * hours_per_day\n\n    # L2\n    days_per_week = 5 # works 5 days a week\n    weekly_earning = daily_earning * days_per_week\n\n    # L3\n    school_allocation_fraction = Fraction(3, 4) # allocates 3/4 of his weekly earning\n    school_allocation = weekly_earning * school_allocation_fraction\n\n    # FA\n    answer = school_allocation\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "school_allocation",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x31134cc90>"
+  },
+  "correct_trace": {
+    "hourly_wage": 5,
+    "hours_per_day": 4,
+    "daily_earning": 20,
+    "days_per_week": 5,
+    "weekly_earning": 100,
+    "school_allocation_fraction": "3/4",
+    "school_allocation": "75",
+    "answer": "75"
+  },
+  "flawed_trace": {
+    "hourly_wage": 5,
+    "hours_per_day": 4,
+    "daily_earning": 20,
+    "days_per_week": 5,
+    "weekly_earning": 100,
+    "school_allocation_fraction": "3/4",
+    "school_allocation": "403/4",
+    "answer": "403/4"
+  },
+  "correct_value": "75",
+  "flawed_value": "403/4",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "daily_earning",
+      "question_inputs": [
+        "hourly_wage",
+        "hours_per_day"
+      ],
+      "solution_line_template": "Walter's daily earning is ${hourly_wage} x {hours_per_day} = $<<{hourly_wage}*{hours_per_day}={daily_earning}>>{daily_earning}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "weekly_earning",
+      "question_inputs": [
+        "days_per_week"
+      ],
+      "solution_line_template": "So he earns ${daily_earning} x {days_per_week} = $<<{daily_earning}*{days_per_week}={weekly_earning}>>{weekly_earning} per week."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "school_allocation",
+      "question_inputs": [
+        "school_allocation_fraction"
+      ],
+      "solution_line_template": "Therefore, he allocates ${weekly_earning} x {school_allocation_fraction} = $<<{weekly_earning}*{school_allocation_fraction}={school_allocation}>>{school_allocation} for his school."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Walter's daily earning is $5 x 4 = $<<5*4=20>>20.",
+    "L2": "So he earns $20 x 5 = $<<20*5=100>>100 per week.",
+    "L3": "Therefore, he allocates $100 x 3/4 = $<<100*3/4=403/4>>403/4 for his school.",
+    "FA": "#### 403/4"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -7624082286534139042,
+  "model_name": "google_gemini-2.5-flash"
+}

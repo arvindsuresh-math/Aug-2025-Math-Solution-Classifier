@@ -1,0 +1,85 @@
+{
+  "index": 4784,
+  "original_solution_mapping": {
+    "FA": "#### 450",
+    "L1": "If there are 200 lions in the park, which is twice the number of leopards in the park, there are 200/2 = <<200/2=100>>100 leopards in the park.",
+    "L2": "The total population of lions and leopards in the park is 200 lions + 100 leopards = <<200+100=300>>300",
+    "L3": "The number of elephants in the park is 1/2 the total population of lions and leopards; thus, there are 300/2 = <<300/2=150>>150 elephants in the park.",
+    "L4": "There are a total of 150+300 = <<150+300=450>>450 animals in the park."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4784.\n    Returns: the total population of the three animals in the park.\n    \"\"\"\n    # L1\n    lions_count = 200 # number of lions is 200\n    leopard_ratio_divisor = 2 # twice the number of leopards\n    leopards_count = lions_count / leopard_ratio_divisor\n\n    # L2\n    lions_and_leopards_total = lions_count + leopards_count\n\n    # L3\n    elephant_ratio_divisor = 2 # half the combined number of lions and leopards\n    elephants_count = lions_and_leopards_total / elephant_ratio_divisor\n\n    # L4\n    total_animals = elephants_count + lions_and_leopards_total\n\n    # FA\n    answer = total_animals\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "lions_and_leopards_total",
+    "operand_to_replace": "lions_count",
+    "replacement_variable": "leopard_ratio_divisor"
+  },
+  "correct_trace": {
+    "lions_count": 200,
+    "leopard_ratio_divisor": 2,
+    "leopards_count": 100.0,
+    "lions_and_leopards_total": 300.0,
+    "elephant_ratio_divisor": 2,
+    "elephants_count": 150.0,
+    "total_animals": 450.0,
+    "answer": 450.0
+  },
+  "flawed_trace": {
+    "lions_count": 200,
+    "leopard_ratio_divisor": 2,
+    "leopards_count": 100.0,
+    "lions_and_leopards_total": 102.0,
+    "elephant_ratio_divisor": 2,
+    "elephants_count": 51.0,
+    "total_animals": 153.0,
+    "answer": 153.0
+  },
+  "correct_value": 300.0,
+  "flawed_value": 102.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "leopards_count",
+      "question_inputs": [
+        "lions_count",
+        "leopard_ratio_divisor"
+      ],
+      "solution_line_template": "If there are {lions_count} lions in the park, which is twice the number of leopards in the park, there are {lions_count}/{leopard_ratio_divisor} = <<{lions_count}/{leopard_ratio_divisor}={leopards_count}>>{leopards_count} leopards in the park."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "lions_and_leopards_total",
+      "question_inputs": [],
+      "solution_line_template": "The total population of lions and leopards in the park is {lions_count} lions + {leopards_count} leopards = <<{lions_count}+{leopards_count}={lions_and_leopards_total}>>{lions_and_leopards_total}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "elephants_count",
+      "question_inputs": [
+        "elephant_ratio_divisor"
+      ],
+      "solution_line_template": "The number of elephants in the park is 1/2 the total population of lions and leopards; thus, there are {lions_and_leopards_total}/{elephant_ratio_divisor} = <<{lions_and_leopards_total}/{elephant_ratio_divisor}={elephants_count}>>{elephants_count} elephants in the park."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_animals",
+      "question_inputs": [],
+      "solution_line_template": "There are a total of {elephants_count}+{lions_and_leopards_total} = <<{elephants_count}+{lions_and_leopards_total}={total_animals}>>{total_animals} animals in the park."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If there are 200 lions in the park, which is twice the number of leopards in the park, there are 200/2 = <<200/2=100>>100 leopards in the park.",
+    "L2": "The total population of lions and leopards in the park is 2 lions + 100 leopards = <<2+100=102>>102",
+    "L3": "The number of elephants in the park is 1/2 the total population of lions and leopards; thus, there are 102/2 = <<102/2=51>>51 elephants in the park.",
+    "L4": "There are a total of 51+102 = <<51+102=153>>153 animals in the park.",
+    "FA": "#### 153"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'leopard_ratio_divisor' (2) was used instead of 'lions_count' (200).",
+  "repro_seed": -145820724010009411,
+  "model_name": "google_gemini-2.5-flash"
+}

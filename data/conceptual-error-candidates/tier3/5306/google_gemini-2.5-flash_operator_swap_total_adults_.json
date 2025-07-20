@@ -1,0 +1,74 @@
+{
+  "index": 5306,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "One third as many adults as children is 45/3=<<45/3=15>>15 adults.",
+    "L2": "One third of adults wore blue, or 15/3=<<15/3=5>>5 adults wore blue.",
+    "L3": "Thus, the remaining 15-5=<<15-5=10>>10 adults did not wear blue"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5306.\n    Returns: the number of adults who did not wear blue.\n    \"\"\"\n    # L1\n    num_children = 45 # 45 children\n    adult_fraction_denominator = 3 # one third as many adults\n    total_adults = num_children / adult_fraction_denominator\n\n    # L2\n    blue_wearers_fraction_denominator = 3 # One third of the adults wore blue\n    adults_wearing_blue = total_adults / blue_wearers_fraction_denominator\n\n    # L3\n    adults_not_wearing_blue = total_adults - adults_wearing_blue\n\n    # FA\n    answer = adults_not_wearing_blue\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_adults",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x31ab5b090>"
+  },
+  "correct_trace": {
+    "num_children": 45,
+    "adult_fraction_denominator": 3,
+    "total_adults": 15.0,
+    "blue_wearers_fraction_denominator": 3,
+    "adults_wearing_blue": 5.0,
+    "adults_not_wearing_blue": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "num_children": 45,
+    "adult_fraction_denominator": 3,
+    "total_adults": 42,
+    "blue_wearers_fraction_denominator": 3,
+    "adults_wearing_blue": 14.0,
+    "adults_not_wearing_blue": 28.0,
+    "answer": 28.0
+  },
+  "correct_value": 15.0,
+  "flawed_value": 42,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_adults",
+      "question_inputs": [
+        "num_children",
+        "adult_fraction_denominator"
+      ],
+      "solution_line_template": "One third as many adults as children is {num_children}/{adult_fraction_denominator}=<<{num_children}/{adult_fraction_denominator}={total_adults}>>{total_adults} adults."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "adults_wearing_blue",
+      "question_inputs": [
+        "blue_wearers_fraction_denominator"
+      ],
+      "solution_line_template": "One third of adults wore blue, or {total_adults}/{blue_wearers_fraction_denominator}=<<{total_adults}/{blue_wearers_fraction_denominator}={adults_wearing_blue}>>{adults_wearing_blue} adults wore blue."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "adults_not_wearing_blue",
+      "question_inputs": [],
+      "solution_line_template": "Thus, the remaining {total_adults}-{adults_wearing_blue}=<<{total_adults}-{adults_wearing_blue}={adults_not_wearing_blue}>>{adults_not_wearing_blue} adults did not wear blue"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "One third as many adults as children is 45/3=<<45/3=42>>42 adults.",
+    "L2": "One third of adults wore blue, or 42/3=<<42/3=14>>14 adults wore blue.",
+    "L3": "Thus, the remaining 42-14=<<42-14=28>>28 adults did not wear blue",
+    "FA": "#### 28"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 6534979323234814073,
+  "model_name": "google_gemini-2.5-flash"
+}

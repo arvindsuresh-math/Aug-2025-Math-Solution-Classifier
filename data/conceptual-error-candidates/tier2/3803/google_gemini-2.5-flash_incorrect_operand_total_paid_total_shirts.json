@@ -1,0 +1,114 @@
+{
+  "index": 3803,
+  "original_solution_mapping": {
+    "FA": "#### 264",
+    "L1": "He bought 5*4=<<5*4=20>>20 shirts",
+    "L2": "The discount saves him 15*.2=$<<15*.2=3>>3 per shirt",
+    "L3": "So each shirt cost 15-3=$<<15-3=12>>12",
+    "L4": "So the total order cost 20*12=$<<20*12=240>>240",
+    "L5": "Tax added 240*.1=$<<240*.1=24>>24",
+    "L6": "So he paid 240+24=$<<240+24=264>>264"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3803.\n    Returns: the total amount Tom paid.\n    \"\"\"\n    # L1\n    shirts_per_fandom = 5 # 5 t-shirts\n    num_fandoms = 4 # 4 favorite fandoms\n    total_shirts = shirts_per_fandom * num_fandoms\n\n    # L2\n    normal_shirt_cost = 15 # $15 each\n    discount_percent = 0.2 # 20% off sale\n    discount_per_shirt = normal_shirt_cost * discount_percent\n\n    # L3\n    cost_per_shirt_after_discount = normal_shirt_cost - discount_per_shirt\n\n    # L4\n    subtotal_cost = total_shirts * cost_per_shirt_after_discount\n\n    # L5\n    tax_percent = 0.1 # 10% tax\n    tax_amount = subtotal_cost * tax_percent\n\n    # L6\n    total_paid = subtotal_cost + tax_amount\n\n    # FA\n    answer = total_paid\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_paid",
+    "operand_to_replace": "tax_amount",
+    "replacement_variable": "total_shirts"
+  },
+  "correct_trace": {
+    "shirts_per_fandom": 5,
+    "num_fandoms": 4,
+    "total_shirts": 20,
+    "normal_shirt_cost": 15,
+    "discount_percent": 0.2,
+    "discount_per_shirt": 3.0,
+    "cost_per_shirt_after_discount": 12.0,
+    "subtotal_cost": 240.0,
+    "tax_percent": 0.1,
+    "tax_amount": 24.0,
+    "total_paid": 264.0,
+    "answer": 264.0
+  },
+  "flawed_trace": {
+    "shirts_per_fandom": 5,
+    "num_fandoms": 4,
+    "total_shirts": 20,
+    "normal_shirt_cost": 15,
+    "discount_percent": 0.2,
+    "discount_per_shirt": 3.0,
+    "cost_per_shirt_after_discount": 12.0,
+    "subtotal_cost": 240.0,
+    "tax_percent": 0.1,
+    "tax_amount": 24.0,
+    "total_paid": 260.0,
+    "answer": 260.0
+  },
+  "correct_value": 264.0,
+  "flawed_value": 260.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_shirts",
+      "question_inputs": [
+        "shirts_per_fandom",
+        "num_fandoms"
+      ],
+      "solution_line_template": "He bought {shirts_per_fandom}*{num_fandoms}=<<{shirts_per_fandom}*{num_fandoms}={total_shirts}>>{total_shirts} shirts"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "discount_per_shirt",
+      "question_inputs": [
+        "normal_shirt_cost",
+        "discount_percent"
+      ],
+      "solution_line_template": "The discount saves him {normal_shirt_cost}*{discount_percent}=$<<{normal_shirt_cost}*{discount_percent}={discount_per_shirt}>>{discount_per_shirt} per shirt"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cost_per_shirt_after_discount",
+      "question_inputs": [],
+      "solution_line_template": "So each shirt cost {normal_shirt_cost}-{discount_per_shirt}=$<<{normal_shirt_cost}-{discount_per_shirt}={cost_per_shirt_after_discount}>>{cost_per_shirt_after_discount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "subtotal_cost",
+      "question_inputs": [],
+      "solution_line_template": "So the total order cost {total_shirts}*{cost_per_shirt_after_discount}=$<<{total_shirts}*{cost_per_shirt_after_discount}={subtotal_cost}>>{subtotal_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "tax_amount",
+      "question_inputs": [
+        "tax_percent"
+      ],
+      "solution_line_template": "Tax added {subtotal_cost}*{tax_percent}=$<<{subtotal_cost}*{tax_percent}={tax_amount}>>{tax_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_paid",
+      "question_inputs": [],
+      "solution_line_template": "So he paid {subtotal_cost}+{tax_amount}=$<<{subtotal_cost}+{tax_amount}={total_paid}>>{total_paid}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He bought 5*4=<<5*4=20>>20 shirts",
+    "L2": "The discount saves him 15*0.2=$<<15*0.2=3>>3 per shirt",
+    "L3": "So each shirt cost 15-3=$<<15-3=12>>12",
+    "L4": "So the total order cost 20*12=$<<20*12=240>>240",
+    "L5": "Tax added 240*0.1=$<<240*0.1=24>>24",
+    "L6": "So he paid 240+20=$<<240+20=260>>260",
+    "FA": "#### 260"
+  },
+  "erroneous_line_number": "L6",
+  "explanation": "Incorrect operand. The variable 'total_shirts' (value: 20) was used instead of 'tax_amount' (value: 24.0).",
+  "repro_seed": 204811586991200914,
+  "model_name": "google_gemini-2.5-flash"
+}

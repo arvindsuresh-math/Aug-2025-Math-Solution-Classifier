@@ -1,0 +1,83 @@
+{
+  "index": 754,
+  "original_solution_mapping": {
+    "FA": "#### 42",
+    "L1": "Yvette spent 7.50+10+8.5+9 = $<<7.50+10+8.5+9=35.00>>35.00 on ice cream sundaes",
+    "L2": "Her bill comes to $35.00 and she leaves a 20% tip for the waiter so that's 35*.20 = $7.00",
+    "L3": "The bill was $35.00 and she added a $7.00 tip for a total of 35+7 = $<<35+7=42.00>>42.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 754.\n    Returns: the final bill amount.\n    \"\"\"\n    # L1\n    alicia_sundae_cost = 7.50 # Alicia orders the peanut butter sundae for $7.50\n    brant_sundae_cost = 10.00 # Brant orders the Royal banana split sundae for $10.00\n    josh_sundae_cost = 8.50 # Josh orders the death by chocolate sundae for $8.50\n    yvette_sundae_cost = 9.00 # Yvette orders the cherry jubilee sundae for $9.00\n    sundae_total_cost = alicia_sundae_cost + brant_sundae_cost + josh_sundae_cost + yvette_sundae_cost\n\n    # L2\n    tip_percent_num = 20 # a 20% tip\n    tip_percent_decimal = 0.20 # from solution text: 35*.20\n    tip_amount = sundae_total_cost * tip_percent_decimal\n\n    # L3\n    final_bill = sundae_total_cost + tip_amount\n\n    # FA\n    answer = final_bill\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "tip_amount",
+    "operand_to_replace": "tip_percent_decimal",
+    "replacement_variable": "sundae_total_cost"
+  },
+  "correct_trace": {
+    "alicia_sundae_cost": 7.5,
+    "brant_sundae_cost": 10.0,
+    "josh_sundae_cost": 8.5,
+    "yvette_sundae_cost": 9.0,
+    "sundae_total_cost": 35.0,
+    "tip_percent_num": 20,
+    "tip_percent_decimal": 0.2,
+    "tip_amount": 7.0,
+    "final_bill": 42.0,
+    "answer": 42.0
+  },
+  "flawed_trace": {
+    "alicia_sundae_cost": 7.5,
+    "brant_sundae_cost": 10.0,
+    "josh_sundae_cost": 8.5,
+    "yvette_sundae_cost": 9.0,
+    "sundae_total_cost": 35.0,
+    "tip_percent_num": 20,
+    "tip_percent_decimal": 0.2,
+    "tip_amount": 1225.0,
+    "final_bill": 1260.0,
+    "answer": 1260.0
+  },
+  "correct_value": 7.0,
+  "flawed_value": 1225.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "sundae_total_cost",
+      "question_inputs": [
+        "alicia_sundae_cost",
+        "brant_sundae_cost",
+        "josh_sundae_cost",
+        "yvette_sundae_cost"
+      ],
+      "solution_line_template": "Yvette spent {alicia_sundae_cost}+{brant_sundae_cost}+{josh_sundae_cost}+{yvette_sundae_cost} = $<<{alicia_sundae_cost}+{brant_sundae_cost}+{josh_sundae_cost}+{yvette_sundae_cost}={sundae_total_cost}>>{sundae_total_cost} on ice cream sundaes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "tip_amount",
+      "question_inputs": [
+        "tip_percent_num",
+        "tip_percent_decimal"
+      ],
+      "solution_line_template": "Her bill comes to ${sundae_total_cost} and she leaves a {tip_percent_num}% tip for the waiter so that's {sundae_total_cost}*{tip_percent_decimal} = ${tip_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_bill",
+      "question_inputs": [],
+      "solution_line_template": "The bill was ${sundae_total_cost} and she added a ${tip_amount} tip for a total of {sundae_total_cost}+{tip_amount} = $<<{sundae_total_cost}+{tip_amount}={final_bill}>>{final_bill}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Yvette spent 7.5+10+8.5+9 = $<<7.5+10+8.5+9=35>>35 on ice cream sundaes",
+    "L2": "Her bill comes to $35 and she leaves a 20% tip for the waiter so that's 35*35 = $1225",
+    "L3": "The bill was $35 and she added a $1225 tip for a total of 35+1225 = $<<35+1225=1260>>1260",
+    "FA": "#### 1260"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'sundae_total_cost' (35.0) was used instead of 'tip_percent_decimal' (0.2).",
+  "repro_seed": 4212810400811238955,
+  "model_name": "google_gemini-2.5-flash"
+}

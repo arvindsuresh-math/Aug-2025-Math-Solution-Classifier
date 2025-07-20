@@ -1,0 +1,90 @@
+{
+  "index": 2349,
+  "original_solution_mapping": {
+    "FA": "#### 24",
+    "L1": "They are to order a total of 3 burger meals and 3 sodas for Paulo and Jeremy.",
+    "L2": "The cost of a soda is $6/3 = $<<6/3=2>>2.",
+    "L3": "So, the 3 sodas will amount to $2/soda x 3 sodas = $<<2*3=6>>6.",
+    "L4": "The 3 burger meals will amount to $6/burger x 3 burgers = $<<6*3=18>>18.",
+    "L5": "Hence, the total cost for their orders is $6 + $18 = $<<6+18=24>>24."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2349.\n    Returns: the total combined cost of their orders.\n    \"\"\"\n    # L2\n    burger_meal_cost = 6 # burger meal that costs $6\n    soda_cost_divisor = 3 # 1/3 as much as the burger meal\n    soda_cost = burger_meal_cost / soda_cost_divisor\n\n    # L3\n    soda_count = 3 # They are to order a total of 3 sodas for Paulo and Jeremy (1 for Paulo + 2 for Jeremy)\n    total_soda_cost = soda_cost * soda_count\n\n    # L4\n    burger_meal_count = 3 # They are to order a total of 3 burger meals for Paulo and Jeremy (1 for Paulo + 2 for Jeremy)\n    total_burger_meal_cost = burger_meal_cost * burger_meal_count\n\n    # L5\n    total_combined_cost = total_soda_cost + total_burger_meal_cost\n\n    # FA\n    answer = total_combined_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_burger_meal_cost",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x314800f90>"
+  },
+  "correct_trace": {
+    "burger_meal_cost": 6,
+    "soda_cost_divisor": 3,
+    "soda_cost": 2.0,
+    "soda_count": 3,
+    "total_soda_cost": 6.0,
+    "burger_meal_count": 3,
+    "total_burger_meal_cost": 18,
+    "total_combined_cost": 24.0,
+    "answer": 24.0
+  },
+  "flawed_trace": {
+    "burger_meal_cost": 6,
+    "soda_cost_divisor": 3,
+    "soda_cost": 2.0,
+    "soda_count": 3,
+    "total_soda_cost": 6.0,
+    "burger_meal_count": 3,
+    "total_burger_meal_cost": 2.0,
+    "total_combined_cost": 8.0,
+    "answer": 8.0
+  },
+  "correct_value": 18,
+  "flawed_value": 2.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "soda_cost",
+      "question_inputs": [
+        "burger_meal_cost",
+        "soda_cost_divisor"
+      ],
+      "solution_line_template": "The cost of a soda is ${burger_meal_cost}/{soda_cost_divisor} = $<<{burger_meal_cost}/{soda_cost_divisor}={soda_cost}>>{soda_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_soda_cost",
+      "question_inputs": [
+        "soda_count"
+      ],
+      "solution_line_template": "So, the {soda_count} sodas will amount to ${soda_cost}/soda x {soda_count} sodas = $<<{soda_cost}*{soda_count}={total_soda_cost}>>{total_soda_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_burger_meal_cost",
+      "question_inputs": [
+        "burger_meal_count"
+      ],
+      "solution_line_template": "The {burger_meal_count} burger meals will amount to ${burger_meal_cost}/burger x {burger_meal_count} burgers = $<<{burger_meal_cost}*{burger_meal_count}={total_burger_meal_cost}>>{total_burger_meal_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_combined_cost",
+      "question_inputs": [],
+      "solution_line_template": "Hence, the total cost for their orders is ${total_soda_cost} + ${total_burger_meal_cost} = $<<{total_soda_cost}+{total_burger_meal_cost}={total_combined_cost}>>{total_combined_cost}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "The cost of a soda is $6/3 = $<<6/3=2>>2.",
+    "L3": "So, the 3 sodas will amount to $2/soda x 3 sodas = $<<2*3=6>>6.",
+    "L4": "The 3 burger meals will amount to $6/burger x 3 burgers = $<<6*3=2>>2.",
+    "L5": "Hence, the total cost for their orders is $6 + $2 = $<<6+2=8>>8.",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -6948978890121120063,
+  "model_name": "google_gemini-2.5-flash"
+}

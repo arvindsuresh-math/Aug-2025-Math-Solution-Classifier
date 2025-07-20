@@ -1,0 +1,77 @@
+{
+  "index": 4641,
+  "original_solution_mapping": {
+    "FA": "#### 2500",
+    "L1": "There were 10000 - 7000 = <<10000-7000=3000>>3000 women and children.",
+    "L2": "There were 3000 / (5+1) = <<3000/(5+1)=500>>500 women.",
+    "L3": "There are 500 * 5 = <<500*5=2500>>2500 children at the basketball match."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4641.\n    Returns: the number of children at the basketball match.\n    \"\"\"\n    # L1\n    total_spectators = 10000 # 10000 spectators\n    men_spectators = 7000 # 7000 of them were men\n    women_and_children = total_spectators - men_spectators\n\n    # L2\n    children_multiplier = 5 # 5 times as many children as women\n    women_ratio_part = 1 # WK\n    num_women = women_and_children / (children_multiplier + women_ratio_part)\n\n    # L3\n    num_children = num_women * children_multiplier\n\n    # FA\n    answer = num_children\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "num_children",
+    "replacement_variable": "num_women"
+  },
+  "correct_trace": {
+    "total_spectators": 10000,
+    "men_spectators": 7000,
+    "women_and_children": 3000,
+    "children_multiplier": 5,
+    "women_ratio_part": 1,
+    "num_women": 500.0,
+    "num_children": 2500.0,
+    "answer": 2500.0
+  },
+  "flawed_trace": {
+    "total_spectators": 10000,
+    "men_spectators": 7000,
+    "women_and_children": 3000,
+    "children_multiplier": 5,
+    "women_ratio_part": 1,
+    "num_women": 500.0,
+    "num_children": 2500.0,
+    "answer": 500.0
+  },
+  "correct_value": 2500.0,
+  "flawed_value": 500.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "women_and_children",
+      "question_inputs": [
+        "total_spectators",
+        "men_spectators"
+      ],
+      "solution_line_template": "There were {total_spectators} - {men_spectators} = <<{total_spectators}-{men_spectators}={women_and_children}>>{women_and_children} women and children."
+    },
+    {
+      "WK_inputs": [
+        "women_ratio_part"
+      ],
+      "line_number": "L2",
+      "output_variable": "num_women",
+      "question_inputs": [
+        "children_multiplier"
+      ],
+      "solution_line_template": "There were {women_and_children} / ({children_multiplier}+{women_ratio_part}) = <<{women_and_children}/({children_multiplier}+{women_ratio_part})={num_women}>>{num_women} women."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_children",
+      "question_inputs": [],
+      "solution_line_template": "There are {num_women} * {children_multiplier} = <<{num_women}*{children_multiplier}={num_children}>>{num_children} children at the basketball match."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There were 10000 - 7000 = <<10000-7000=3000>>3000 women and children.",
+    "L2": "There were 3000 / (5+1) = <<3000/(5+1)=500>>500 women.",
+    "FA": "#### 500"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'num_women' (value: 500.0) was reported instead of 'num_children' (value: 2500.0).",
+  "repro_seed": 1129277952196161349,
+  "model_name": "google_gemini-2.5-flash"
+}

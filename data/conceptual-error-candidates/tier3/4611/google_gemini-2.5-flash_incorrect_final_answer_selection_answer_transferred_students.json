@@ -1,0 +1,73 @@
+{
+  "index": 4611,
+  "original_solution_mapping": {
+    "FA": "#### 120",
+    "L1": "After 20 new students joined the class at the start of the school year, the number of students increased to 160+20 = <<160+20=180>>180",
+    "L2": "However, at the end of the year, 1/3*180 = <<1/3*180=60>>60 students had transferred from the school.",
+    "L3": "The total number of students remaining in the school at the end of the year is 180-60 = <<180-60=120>>120"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4611.\n    Returns: the number of students in the class at the end of the year.\n    \"\"\"\n    # L1\n    initial_students = 160 # number of students that were in Hendrix's class before 20 new students joined was 160\n    new_students = 20 # 20 new students\n    students_after_joining = initial_students + new_students\n\n    # L2\n    transfer_fraction = Fraction(1, 3) # 1/3 of the students\n    transferred_students = transfer_fraction * students_after_joining\n\n    # L3\n    remaining_students = students_after_joining - transferred_students\n\n    # FA\n    answer = remaining_students\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "remaining_students",
+    "replacement_variable": "transferred_students"
+  },
+  "correct_trace": {
+    "initial_students": 160,
+    "new_students": 20,
+    "students_after_joining": 180,
+    "transfer_fraction": "1/3",
+    "transferred_students": "60",
+    "remaining_students": "120",
+    "answer": "120"
+  },
+  "flawed_trace": {
+    "initial_students": 160,
+    "new_students": 20,
+    "students_after_joining": 180,
+    "transfer_fraction": "1/3",
+    "transferred_students": "60",
+    "remaining_students": "120",
+    "answer": "60"
+  },
+  "correct_value": "120",
+  "flawed_value": "60",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "students_after_joining",
+      "question_inputs": [
+        "initial_students",
+        "new_students"
+      ],
+      "solution_line_template": "After {new_students} new students joined the class at the start of the school year, the number of students increased to {initial_students}+{new_students} = <<{initial_students}+{new_students}={students_after_joining}>>{students_after_joining}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "transferred_students",
+      "question_inputs": [
+        "transfer_fraction"
+      ],
+      "solution_line_template": "However, at the end of the year, {transfer_fraction}*{students_after_joining} = <<{transfer_fraction}*{students_after_joining}={transferred_students}>>{transferred_students} students had transferred from the school."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_students",
+      "question_inputs": [],
+      "solution_line_template": "The total number of students remaining in the school at the end of the year is {students_after_joining}-{transferred_students} = <<{students_after_joining}-{transferred_students}={remaining_students}>>{remaining_students}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After 20 new students joined the class at the start of the school year, the number of students increased to 160+20 = <<160+20=180>>180",
+    "L2": "However, at the end of the year, 1/3*180 = <<1/3*180=60>>60 students had transferred from the school.",
+    "FA": "#### 60"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'transferred_students' (value: 60) was reported instead of 'remaining_students' (value: 120).",
+  "repro_seed": 2030477460475406759,
+  "model_name": "google_gemini-2.5-flash"
+}

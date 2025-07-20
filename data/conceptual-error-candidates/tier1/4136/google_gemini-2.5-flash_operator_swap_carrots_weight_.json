@@ -1,0 +1,78 @@
+{
+  "index": 4136,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "First find the total weight of the carrots: 4 pounds * 2 = <<4*2=8>>8 pounds",
+    "L2": "Now add the total weight of each item: 6 pounds + 8 pounds + 4 pounds = <<6+8+4=18>>18 pounds",
+    "L3": "Now subtract the total weight of the groceries from the bag's weight limit: 20 pounds - 18 pounds = <<20-18=2>>2 pounds"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4136.\n    Returns: the remaining capacity of the grocery bag.\n    \"\"\"\n    # L1\n    green_beans_weight = 4 # 4 pounds of green beans\n    carrot_multiplier = 2 # twice the amount of carrots\n    carrots_weight = green_beans_weight * carrot_multiplier\n\n    # L2\n    milk_weight = 6 # 6 pounds milk\n    total_groceries_weight = milk_weight + carrots_weight + green_beans_weight\n\n    # L3\n    bag_weight_limit = 20 # maximum of twenty pounds\n    remaining_capacity = bag_weight_limit - total_groceries_weight\n\n    # FA\n    answer = remaining_capacity\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "carrots_weight",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x3172d30d0>"
+  },
+  "correct_trace": {
+    "green_beans_weight": 4,
+    "carrot_multiplier": 2,
+    "carrots_weight": 8,
+    "milk_weight": 6,
+    "total_groceries_weight": 18,
+    "bag_weight_limit": 20,
+    "remaining_capacity": 2,
+    "answer": 2
+  },
+  "flawed_trace": {
+    "green_beans_weight": 4,
+    "carrot_multiplier": 2,
+    "carrots_weight": 2.0,
+    "milk_weight": 6,
+    "total_groceries_weight": 12.0,
+    "bag_weight_limit": 20,
+    "remaining_capacity": 8.0,
+    "answer": 8.0
+  },
+  "correct_value": 8,
+  "flawed_value": 2.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "carrots_weight",
+      "question_inputs": [
+        "green_beans_weight",
+        "carrot_multiplier"
+      ],
+      "solution_line_template": "First find the total weight of the carrots: {green_beans_weight} pounds * {carrot_multiplier} = <<{green_beans_weight}*{carrot_multiplier}={carrots_weight}>>{carrots_weight} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_groceries_weight",
+      "question_inputs": [
+        "milk_weight"
+      ],
+      "solution_line_template": "Now add the total weight of each item: {milk_weight} pounds + {carrots_weight} pounds + {green_beans_weight} pounds = <<{milk_weight}+{carrots_weight}+{green_beans_weight}={total_groceries_weight}>>{total_groceries_weight} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_capacity",
+      "question_inputs": [
+        "bag_weight_limit"
+      ],
+      "solution_line_template": "Now subtract the total weight of the groceries from the bag's weight limit: {bag_weight_limit} pounds - {total_groceries_weight} pounds = <<{bag_weight_limit}-{total_groceries_weight}={remaining_capacity}>>{remaining_capacity} pounds"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total weight of the carrots: 4 pounds * 2 = <<4*2=2>>2 pounds",
+    "L2": "Now add the total weight of each item: 6 pounds + 2 pounds + 4 pounds = <<6+2+4=12>>12 pounds",
+    "L3": "Now subtract the total weight of the groceries from the bag's weight limit: 20 pounds - 12 pounds = <<20-12=8>>8 pounds",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 2237185722475281779,
+  "model_name": "google_gemini-2.5-flash"
+}

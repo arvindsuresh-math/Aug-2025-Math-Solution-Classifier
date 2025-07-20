@@ -1,0 +1,63 @@
+{
+  "index": 4542,
+  "original_solution_mapping": {
+    "FA": "#### 100",
+    "L1": "The second and third tank each have 20*2=<<20*2=40>>40 fish",
+    "L2": "So in total there are 20+40*2=<<20+40*2=100>>100 fish"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4542.\n    Returns: the total number of fish.\n    \"\"\"\n    # L1\n    fish_in_first_tank = 20 # 1 of the tanks has 20 fish in it\n    multiplier_for_other_tanks = 2 # twice as many fish\n    fish_in_other_tanks = fish_in_first_tank * multiplier_for_other_tanks\n\n    # L2\n    num_other_tanks = 2 # the other two have twice as many fish\n    total_fish = fish_in_first_tank + fish_in_other_tanks * num_other_tanks\n\n    # FA\n    answer = total_fish\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "fish_in_other_tanks",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x3170f8890>"
+  },
+  "correct_trace": {
+    "fish_in_first_tank": 20,
+    "multiplier_for_other_tanks": 2,
+    "fish_in_other_tanks": 40,
+    "num_other_tanks": 2,
+    "total_fish": 100,
+    "answer": 100
+  },
+  "flawed_trace": {
+    "fish_in_first_tank": 20,
+    "multiplier_for_other_tanks": 2,
+    "fish_in_other_tanks": 10.0,
+    "num_other_tanks": 2,
+    "total_fish": 40.0,
+    "answer": 40.0
+  },
+  "correct_value": 40,
+  "flawed_value": 10.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "fish_in_other_tanks",
+      "question_inputs": [
+        "fish_in_first_tank",
+        "multiplier_for_other_tanks"
+      ],
+      "solution_line_template": "The second and third tank each have {fish_in_first_tank}*{multiplier_for_other_tanks}=<<{fish_in_first_tank}*{multiplier_for_other_tanks}={fish_in_other_tanks}>>{fish_in_other_tanks} fish"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_fish",
+      "question_inputs": [
+        "num_other_tanks"
+      ],
+      "solution_line_template": "So in total there are {fish_in_first_tank}+{fish_in_other_tanks}*{num_other_tanks}=<<{fish_in_first_tank}+{fish_in_other_tanks}*{num_other_tanks}={total_fish}>>{total_fish} fish"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The second and third tank each have 20*2=<<20*2=10>>10 fish",
+    "L2": "So in total there are 20+10*2=<<20+10*2=40>>40 fish",
+    "FA": "#### 40"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -2989206381321325213,
+  "model_name": "google_gemini-2.5-flash"
+}

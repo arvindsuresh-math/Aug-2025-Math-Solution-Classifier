@@ -1,0 +1,63 @@
+{
+  "index": 6134,
+  "original_solution_mapping": {
+    "FA": "#### 300",
+    "L1": "If there were 200 students on the field and 3/4 of the students looked up at the flying plane, 3/4*200 = <<3/4*200=150>>150 students saw the plane.",
+    "L2": "Since each student has two eyes, the number of eyes that looked at the plane is 2*150 = <<2*150=300>>300 years."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6134.\n    Returns: the total number of eyes that saw the airplane.\n    \"\"\"\n    # L1\n    total_students = 200 # 200 students\n    fraction_looked_up = Fraction(3, 4) # 3/4 of the students\n    students_looked_up = fraction_looked_up * total_students\n\n    # L2\n    eyes_per_student = 2 # each student has two eyes\n    total_eyes = eyes_per_student * students_looked_up\n\n    # FA\n    answer = total_eyes\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "students_looked_up",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x31b05f0d0>"
+  },
+  "correct_trace": {
+    "total_students": 200,
+    "fraction_looked_up": "3/4",
+    "students_looked_up": "150",
+    "eyes_per_student": 2,
+    "total_eyes": "300",
+    "answer": "300"
+  },
+  "flawed_trace": {
+    "total_students": 200,
+    "fraction_looked_up": "3/4",
+    "students_looked_up": "803/4",
+    "eyes_per_student": 2,
+    "total_eyes": "803/2",
+    "answer": "803/2"
+  },
+  "correct_value": "150",
+  "flawed_value": "803/4",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "students_looked_up",
+      "question_inputs": [
+        "total_students",
+        "fraction_looked_up"
+      ],
+      "solution_line_template": "If there were {total_students} students on the field and {fraction_looked_up} of the students looked up at the flying plane, {fraction_looked_up}*{total_students} = <<{fraction_looked_up}*{total_students}={students_looked_up}>>{students_looked_up} students saw the plane."
+    },
+    {
+      "WK_inputs": [
+        "eyes_per_student"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_eyes",
+      "question_inputs": [],
+      "solution_line_template": "Since each student has two eyes, the number of eyes that looked at the plane is {eyes_per_student}*{students_looked_up} = <<{eyes_per_student}*{students_looked_up}={total_eyes}>>{total_eyes} years."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If there were 200 students on the field and 3/4 of the students looked up at the flying plane, 3/4*200 = <<3/4*200=803/4>>803/4 students saw the plane.",
+    "L2": "Since each student has two eyes, the number of eyes that looked at the plane is 2*803/4 = <<2*803/4=803/2>>803/2 years.",
+    "FA": "#### 803/2"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -2788193837346626444,
+  "model_name": "google_gemini-2.5-flash"
+}

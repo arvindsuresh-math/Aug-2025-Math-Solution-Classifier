@@ -1,0 +1,99 @@
+{
+  "index": 3835,
+  "original_solution_mapping": {
+    "FA": "#### 280",
+    "L1": "First find the number of pups in the first generation: 8 mice * 6 pups/mouse = <<8*6=48>>48 pups",
+    "L2": "Then add the number of adult mice to find the total number of mice: 48 pups + 8 mice = <<48+8=56>>56 mice",
+    "L3": "Then find the number of pups per mouse that survive from the second generation: 6 pups/mouse - 2 pups/mouse = <<6-2=4>>4 pups/mouse",
+    "L4": "Then multiply that number by the number of adult mice to find the number of pups in the second generation: 56 mice * 4 pups/mouse = <<56*4=224>>224 mice",
+    "L5": "Then add the number of adult mice to the number of second-generation pups to find the total number of mice: 224 mice + 56 mice = <<224+56=280>>280 mice"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3835.\n    Returns: the number of mice left after all events.\n    \"\"\"\n    # L1\n    initial_mice = 8 # He starts with 8 mice\n    pups_per_mouse_first_gen = 6 # who each have 6 pups\n    first_gen_pups = initial_mice * pups_per_mouse_first_gen\n\n    # L2\n    total_mice_after_first_gen = first_gen_pups + initial_mice\n\n    # L3\n    pups_per_mouse_second_gen_initial = 6 # all the mice have another 6 pups\n    pups_eaten_per_mouse = 2 # each adult mouse eats 2 of their pups\n    surviving_pups_per_mouse_second_gen = pups_per_mouse_second_gen_initial - pups_eaten_per_mouse\n\n    # L4\n    second_gen_pups = total_mice_after_first_gen * surviving_pups_per_mouse_second_gen\n\n    # L5\n    final_total_mice = second_gen_pups + total_mice_after_first_gen\n\n    # FA\n    answer = final_total_mice\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "surviving_pups_per_mouse_second_gen",
+    "operand_to_replace": "pups_per_mouse_second_gen_initial",
+    "replacement_variable": "initial_mice"
+  },
+  "correct_trace": {
+    "initial_mice": 8,
+    "pups_per_mouse_first_gen": 6,
+    "first_gen_pups": 48,
+    "total_mice_after_first_gen": 56,
+    "pups_per_mouse_second_gen_initial": 6,
+    "pups_eaten_per_mouse": 2,
+    "surviving_pups_per_mouse_second_gen": 4,
+    "second_gen_pups": 224,
+    "final_total_mice": 280,
+    "answer": 280
+  },
+  "flawed_trace": {
+    "initial_mice": 8,
+    "pups_per_mouse_first_gen": 6,
+    "first_gen_pups": 48,
+    "total_mice_after_first_gen": 56,
+    "pups_per_mouse_second_gen_initial": 6,
+    "pups_eaten_per_mouse": 2,
+    "surviving_pups_per_mouse_second_gen": 6,
+    "second_gen_pups": 336,
+    "final_total_mice": 392,
+    "answer": 392
+  },
+  "correct_value": 4,
+  "flawed_value": 6,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "first_gen_pups",
+      "question_inputs": [
+        "initial_mice",
+        "pups_per_mouse_first_gen"
+      ],
+      "solution_line_template": "First find the number of pups in the first generation: {initial_mice} mice * {pups_per_mouse_first_gen} pups/mouse = <<{initial_mice}*{pups_per_mouse_first_gen}={first_gen_pups}>>{first_gen_pups} pups"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_mice_after_first_gen",
+      "question_inputs": [],
+      "solution_line_template": "Then add the number of adult mice to find the total number of mice: {first_gen_pups} pups + {initial_mice} mice = <<{first_gen_pups}+{initial_mice}={total_mice_after_first_gen}>>{total_mice_after_first_gen} mice"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "surviving_pups_per_mouse_second_gen",
+      "question_inputs": [
+        "pups_per_mouse_second_gen_initial",
+        "pups_eaten_per_mouse"
+      ],
+      "solution_line_template": "Then find the number of pups per mouse that survive from the second generation: {pups_per_mouse_second_gen_initial} pups/mouse - {pups_eaten_per_mouse} pups/mouse = <<{pups_per_mouse_second_gen_initial}-{pups_eaten_per_mouse}={surviving_pups_per_mouse_second_gen}>>{surviving_pups_per_mouse_second_gen} pups/mouse"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "second_gen_pups",
+      "question_inputs": [],
+      "solution_line_template": "Then multiply that number by the number of adult mice to find the number of pups in the second generation: {total_mice_after_first_gen} mice * {surviving_pups_per_mouse_second_gen} pups/mouse = <<{total_mice_after_first_gen}*{surviving_pups_per_mouse_second_gen}={second_gen_pups}>>{second_gen_pups} mice"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "final_total_mice",
+      "question_inputs": [],
+      "solution_line_template": "Then add the number of adult mice to the number of second-generation pups to find the total number of mice: {second_gen_pups} mice + {total_mice_after_first_gen} mice = <<{second_gen_pups}+{total_mice_after_first_gen}={final_total_mice}>>{final_total_mice} mice"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the number of pups in the first generation: 8 mice * 6 pups/mouse = <<8*6=48>>48 pups",
+    "L2": "Then add the number of adult mice to find the total number of mice: 48 pups + 8 mice = <<48+8=56>>56 mice",
+    "L3": "Then find the number of pups per mouse that survive from the second generation: 8 pups/mouse - 2 pups/mouse = <<8-2=6>>6 pups/mouse",
+    "L4": "Then multiply that number by the number of adult mice to find the number of pups in the second generation: 56 mice * 6 pups/mouse = <<56*6=336>>336 mice",
+    "L5": "Then add the number of adult mice to the number of second-generation pups to find the total number of mice: 336 mice + 56 mice = <<336+56=392>>392 mice",
+    "FA": "#### 392"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'initial_mice' (8) was used instead of 'pups_per_mouse_second_gen_initial' (6).",
+  "repro_seed": 4271266103728485189,
+  "model_name": "google_gemini-2.5-flash"
+}

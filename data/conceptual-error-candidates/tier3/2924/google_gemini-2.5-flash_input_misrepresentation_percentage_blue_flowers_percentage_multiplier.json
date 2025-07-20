@@ -1,0 +1,78 @@
+{
+  "index": 2924,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "There are 4+2 = <<4+2=6>>6 flowers that are not blue.",
+    "L2": "Thus, there are 10-6 = <<10-6=4>>4 blue flowers.",
+    "L3": "Thus, blue flowers make up (4/10)*100=<<4/10*100=40>>40%."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2924.\n    Returns: the percentage of flowers that are blue.\n    \"\"\"\n    # L1\n    red_flowers = 4 # 4 flowers are red\n    white_flowers = 2 # 2 flowers are white\n    non_blue_flowers = red_flowers + white_flowers\n\n    # L2\n    total_flowers = 10 # Madeline has 10 flowers\n    blue_flowers = total_flowers - non_blue_flowers\n\n    # L3\n    percentage_multiplier = 100 # WK\n    percentage_blue_flowers = (blue_flowers / total_flowers) * percentage_multiplier\n\n    # FA\n    answer = percentage_blue_flowers\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "percentage_blue_flowers",
+    "operand_to_replace": "total_flowers",
+    "replacement_variable": "percentage_multiplier"
+  },
+  "correct_trace": {
+    "red_flowers": 4,
+    "white_flowers": 2,
+    "non_blue_flowers": 6,
+    "total_flowers": 10,
+    "blue_flowers": 4,
+    "percentage_multiplier": 100,
+    "percentage_blue_flowers": 40.0,
+    "answer": 40.0
+  },
+  "flawed_trace": {
+    "red_flowers": 4,
+    "white_flowers": 2,
+    "non_blue_flowers": 6,
+    "total_flowers": 10,
+    "blue_flowers": 4,
+    "percentage_multiplier": 100,
+    "percentage_blue_flowers": 4.0,
+    "answer": 4.0
+  },
+  "correct_value": 40.0,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "non_blue_flowers",
+      "question_inputs": [
+        "red_flowers",
+        "white_flowers"
+      ],
+      "solution_line_template": "There are {red_flowers}+{white_flowers} = <<{red_flowers}+{white_flowers}={non_blue_flowers}>>{non_blue_flowers} flowers that are not blue."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "blue_flowers",
+      "question_inputs": [
+        "total_flowers"
+      ],
+      "solution_line_template": "Thus, there are {total_flowers}-{non_blue_flowers} = <<{total_flowers}-{non_blue_flowers}={blue_flowers}>>{blue_flowers} blue flowers."
+    },
+    {
+      "WK_inputs": [
+        "percentage_multiplier"
+      ],
+      "line_number": "L3",
+      "output_variable": "percentage_blue_flowers",
+      "question_inputs": [],
+      "solution_line_template": "Thus, blue flowers make up ({blue_flowers}/{total_flowers})*{percentage_multiplier}=<<{blue_flowers}/{total_flowers}*{percentage_multiplier}={percentage_blue_flowers}>>{percentage_blue_flowers}%."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 4+2 = <<4+2=6>>6 flowers that are not blue.",
+    "L2": "Thus, there are 10-6 = <<10-6=4>>4 blue flowers.",
+    "L3": "Thus, blue flowers make up (4/100)*100=<<4/100*100=4>>4%.",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'percentage_multiplier' (100) was used instead of 'total_flowers' (10).",
+  "repro_seed": -2028104045654386440,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,89 @@
+{
+  "index": 4724,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "On Monday, Mrs. Watson grades 120 x 60% = <<120*60*.01=72>>72 final exams.",
+    "L2": "At the end of Monday, she has 120 - 72 = <<120-72=48>>48 exams left to grade.",
+    "L3": "On Tuesday, she grades 48 x 75% = <<48*75*.01=36>>36 final exams.",
+    "L4": "On Wednesday, she has 48 - 36 = <<48-36=12>>12 exams left to grade."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4724.\n    Returns: the number of exams Mrs. Watson needs to grade on Wednesday.\n    \"\"\"\n    # L1\n    total_exams = 120 # 120 final exams\n    monday_grade_percent_num = 60 # 60% of the exams\n    percent_factor = 0.01 # WK\n    monday_graded_exams = total_exams * monday_grade_percent_num * percent_factor\n\n    # L2\n    remaining_exams_after_monday = total_exams - monday_graded_exams\n\n    # L3\n    tuesday_grade_percent_num = 75 # 75% of the remaining exams\n    tuesday_graded_exams = remaining_exams_after_monday * tuesday_grade_percent_num * percent_factor\n\n    # L4\n    wednesday_remaining_exams = remaining_exams_after_monday - tuesday_graded_exams\n\n    # FA\n    answer = wednesday_remaining_exams\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "tuesday_graded_exams",
+    "operand_to_replace": "remaining_exams_after_monday",
+    "replacement_variable": "monday_grade_percent_num"
+  },
+  "correct_trace": {
+    "total_exams": 120,
+    "monday_grade_percent_num": 60,
+    "percent_factor": 0.01,
+    "monday_graded_exams": 72.0,
+    "remaining_exams_after_monday": 48.0,
+    "tuesday_grade_percent_num": 75,
+    "tuesday_graded_exams": 36.0,
+    "wednesday_remaining_exams": 12.0,
+    "answer": 12.0
+  },
+  "flawed_trace": {
+    "total_exams": 120,
+    "monday_grade_percent_num": 60,
+    "percent_factor": 0.01,
+    "monday_graded_exams": 72.0,
+    "remaining_exams_after_monday": 48.0,
+    "tuesday_grade_percent_num": 75,
+    "tuesday_graded_exams": 45.0,
+    "wednesday_remaining_exams": 3.0,
+    "answer": 3.0
+  },
+  "correct_value": 36.0,
+  "flawed_value": 45.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "monday_graded_exams",
+      "question_inputs": [
+        "total_exams",
+        "monday_grade_percent_num"
+      ],
+      "solution_line_template": "On Monday, Mrs. Watson grades {total_exams} x {monday_grade_percent_num}% = <<{total_exams}*{monday_grade_percent_num}*{percent_factor}={monday_graded_exams}>>{monday_graded_exams} final exams."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_exams_after_monday",
+      "question_inputs": [],
+      "solution_line_template": "At the end of Monday, she has {total_exams} - {monday_graded_exams} = <<{total_exams}-{monday_graded_exams}={remaining_exams_after_monday}>>{remaining_exams_after_monday} exams left to grade."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "tuesday_graded_exams",
+      "question_inputs": [
+        "tuesday_grade_percent_num"
+      ],
+      "solution_line_template": "On Tuesday, she grades {remaining_exams_after_monday} x {tuesday_grade_percent_num}% = <<{remaining_exams_after_monday}*{tuesday_grade_percent_num}*{percent_factor}={tuesday_graded_exams}>>{tuesday_graded_exams} final exams."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "wednesday_remaining_exams",
+      "question_inputs": [],
+      "solution_line_template": "On Wednesday, she has {remaining_exams_after_monday} - {tuesday_graded_exams} = <<{remaining_exams_after_monday}-{tuesday_graded_exams}={wednesday_remaining_exams}>>{wednesday_remaining_exams} exams left to grade."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Monday, Mrs. Watson grades 120 x 60% = <<120*60*0.01=72>>72 final exams.",
+    "L2": "At the end of Monday, she has 120 - 72 = <<120-72=48>>48 exams left to grade.",
+    "L3": "On Tuesday, she grades 60 x 75% = <<60*75*0.01=45>>45 final exams.",
+    "L4": "On Wednesday, she has 48 - 45 = <<48-45=3>>3 exams left to grade.",
+    "FA": "#### 3"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'monday_grade_percent_num' (value: 60) was used instead of 'remaining_exams_after_monday' (value: 48.0).",
+  "repro_seed": -3723448061684660798,
+  "model_name": "google_gemini-2.5-flash"
+}

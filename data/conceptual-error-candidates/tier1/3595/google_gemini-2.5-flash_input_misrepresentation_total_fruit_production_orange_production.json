@@ -1,0 +1,89 @@
+{
+  "index": 3595,
+  "original_solution_mapping": {
+    "FA": "#### 90000",
+    "L1": "If the total production of mangoes was 400, then orange production was 400+200 = <<400+200=600>>600 kg of oranges.",
+    "L2": "Since apple production was twice the total production of mangoes, Mr. Sergio had 2*400 = <<2*400=800>>800 kg of apples.",
+    "L3": "The total quantity of fruits produced at Mr. Sergio's farm is 800 kg of apples+600 kg of oranges + 400 kg of mangoes = <<800+600+400=1800>>1800 kg of fruits.",
+    "L4": "If Mr. Sergio sold the fruits at $50 per kg, his total income from the sales is 1800*$50 = $<<1800*50=90000>>90000."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3595.\n    Returns: the total amount of money Mr. Sergio got in that season.\n    \"\"\"\n    # L1\n    mango_production = 400 # produced 400 kg of mangoes\n    orange_more_than_mango = 200 # 200 kg more than that of mangoes\n    orange_production = mango_production + orange_more_than_mango\n\n    # L2\n    apple_multiplier = 2 # twice the total produce of mangoes\n    apple_production = apple_multiplier * mango_production\n\n    # L3\n    total_fruit_production = apple_production + orange_production + mango_production\n\n    # L4\n    price_per_kg = 50 # sold the fruits at $50 per kg\n    total_income = total_fruit_production * price_per_kg\n\n    # FA\n    answer = total_income\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_fruit_production",
+    "operand_to_replace": "mango_production",
+    "replacement_variable": "orange_production"
+  },
+  "correct_trace": {
+    "mango_production": 400,
+    "orange_more_than_mango": 200,
+    "orange_production": 600,
+    "apple_multiplier": 2,
+    "apple_production": 800,
+    "total_fruit_production": 1800,
+    "price_per_kg": 50,
+    "total_income": 90000,
+    "answer": 90000
+  },
+  "flawed_trace": {
+    "mango_production": 400,
+    "orange_more_than_mango": 200,
+    "orange_production": 600,
+    "apple_multiplier": 2,
+    "apple_production": 800,
+    "total_fruit_production": 2000,
+    "price_per_kg": 50,
+    "total_income": 100000,
+    "answer": 100000
+  },
+  "correct_value": 1800,
+  "flawed_value": 2000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "orange_production",
+      "question_inputs": [
+        "mango_production",
+        "orange_more_than_mango"
+      ],
+      "solution_line_template": "If the total production of mangoes was {mango_production}, then orange production was {mango_production}+{orange_more_than_mango} = <<{mango_production}+{orange_more_than_mango}={orange_production}>>{orange_production} kg of oranges."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "apple_production",
+      "question_inputs": [
+        "apple_multiplier"
+      ],
+      "solution_line_template": "Since apple production was twice the total production of mangoes, Mr. Sergio had {apple_multiplier}*{mango_production} = <<{apple_multiplier}*{mango_production}={apple_production}>>{apple_production} kg of apples."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_fruit_production",
+      "question_inputs": [],
+      "solution_line_template": "The total quantity of fruits produced at Mr. Sergio's farm is {apple_production} kg of apples+{orange_production} kg of oranges + {mango_production} kg of mangoes = <<{apple_production}+{orange_production}+{mango_production}={total_fruit_production}>>{total_fruit_production} kg of fruits."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_income",
+      "question_inputs": [
+        "price_per_kg"
+      ],
+      "solution_line_template": "If Mr. Sergio sold the fruits at ${price_per_kg} per kg, his total income from the sales is {total_fruit_production}*${price_per_kg} = $<<{total_fruit_production}*{price_per_kg}={total_income}>>{total_income}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the total production of mangoes was 400, then orange production was 400+200 = <<400+200=600>>600 kg of oranges.",
+    "L2": "Since apple production was twice the total production of mangoes, Mr. Sergio had 2*400 = <<2*400=800>>800 kg of apples.",
+    "L3": "The total quantity of fruits produced at Mr. Sergio's farm is 800 kg of apples+600 kg of oranges + 600 kg of mangoes = <<800+600+600=2000>>2000 kg of fruits.",
+    "L4": "If Mr. Sergio sold the fruits at $50 per kg, his total income from the sales is 2000*$50 = $<<2000*50=100000>>100000.",
+    "FA": "#### 100000"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'orange_production' (600) was used instead of 'mango_production' (400).",
+  "repro_seed": -2537207819489107136,
+  "model_name": "google_gemini-2.5-flash"
+}

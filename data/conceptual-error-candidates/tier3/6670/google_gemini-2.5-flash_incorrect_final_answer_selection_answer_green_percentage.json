@@ -1,0 +1,87 @@
+{
+  "index": 6670,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "10% + 50% = 60% of the chips in the jar are not green.",
+    "L2": "So, 100% - 60% = 40% of the chips are green.",
+    "L3": "There are 40%/10% = 4 sets of 10% to make 40%.",
+    "L4": "Hence, there are 3 chips x 4 sets = <<3*4=12>>12 green chips."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6670.\n    Returns: the number of green chips in the jar.\n    \"\"\"\n    # L1\n    blue_percentage = 10 # 10% of the entire chips\n    white_percentage = 50 # 50% of the chips are white\n    non_green_percentage = blue_percentage + white_percentage\n\n    # L2\n    total_percentage = 100 # WK\n    green_percentage = total_percentage - non_green_percentage\n\n    # L3\n    num_sets_of_blue_percentage = green_percentage / blue_percentage\n\n    # L4\n    blue_chips_count = 3 # Three blue chips\n    green_chips_count = blue_chips_count * num_sets_of_blue_percentage\n\n    # FA\n    answer = green_chips_count\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "green_chips_count",
+    "replacement_variable": "green_percentage"
+  },
+  "correct_trace": {
+    "blue_percentage": 10,
+    "white_percentage": 50,
+    "non_green_percentage": 60,
+    "total_percentage": 100,
+    "green_percentage": 40,
+    "num_sets_of_blue_percentage": 4.0,
+    "blue_chips_count": 3,
+    "green_chips_count": 12.0,
+    "answer": 12.0
+  },
+  "flawed_trace": {
+    "blue_percentage": 10,
+    "white_percentage": 50,
+    "non_green_percentage": 60,
+    "total_percentage": 100,
+    "green_percentage": 40,
+    "num_sets_of_blue_percentage": 4.0,
+    "blue_chips_count": 3,
+    "green_chips_count": 12.0,
+    "answer": 40
+  },
+  "correct_value": 12.0,
+  "flawed_value": 40,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "non_green_percentage",
+      "question_inputs": [
+        "blue_percentage",
+        "white_percentage"
+      ],
+      "solution_line_template": "{blue_percentage}% + {white_percentage}% = {non_green_percentage}% of the chips in the jar are not green."
+    },
+    {
+      "WK_inputs": [
+        "total_percentage"
+      ],
+      "line_number": "L2",
+      "output_variable": "green_percentage",
+      "question_inputs": [],
+      "solution_line_template": "So, {total_percentage}% - {non_green_percentage}% = {green_percentage}% of the chips are green."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_sets_of_blue_percentage",
+      "question_inputs": [],
+      "solution_line_template": "There are {green_percentage}%/{blue_percentage}% = {num_sets_of_blue_percentage} sets of {blue_percentage}% to make {green_percentage}%."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "green_chips_count",
+      "question_inputs": [
+        "blue_chips_count"
+      ],
+      "solution_line_template": "Hence, there are {blue_chips_count} chips x {num_sets_of_blue_percentage} sets = <<{blue_chips_count}*{num_sets_of_blue_percentage}={green_chips_count}>>{green_chips_count} green chips."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "10% + 50% = 60% of the chips in the jar are not green.",
+    "L2": "So, 100% - 60% = 40% of the chips are green.",
+    "FA": "#### 40"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'green_percentage' (value: 40) was reported instead of 'green_chips_count' (value: 12.0).",
+  "repro_seed": 7043107643040613859,
+  "model_name": "google_gemini-2.5-flash"
+}

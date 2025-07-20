@@ -1,0 +1,100 @@
+{
+  "index": 6846,
+  "original_solution_mapping": {
+    "FA": "#### 115",
+    "L1": "If Isabella has $15 more than Giselle, she has $120+$15 = $135",
+    "L2": "Combined, Isabella and Giselle has $135+$120=$<<135+120=255>>255",
+    "L3": "Isabella has $45 more than Sam, meaning Sam has $135-$45=$90",
+    "L4": "Together, Sam, Isabella, and Giselle has $255+$90=$<<255+90=345>>345",
+    "L5": "if they donate the money to three shoppers at their local town's supermarket who share it equally, each shopper will receive $345/3=$<<345/3=115>>115"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6846.\n    Returns: the total amount of money each shopper will receive.\n    \"\"\"\n    # L1\n    giselle_money = 120 # Giselle has $120\n    isabella_more_than_giselle = 15 # only $15 more than Giselle\n    isabella_money = giselle_money + isabella_more_than_giselle\n\n    # L2\n    isabella_giselle_combined = isabella_money + giselle_money\n\n    # L3\n    isabella_more_than_sam = 45 # Isabella has $45 more than Sam\n    sam_money = isabella_money - isabella_more_than_sam\n\n    # L4\n    total_money = isabella_giselle_combined + sam_money\n\n    # L5\n    num_shoppers = 3 # three shoppers\n    money_per_shopper = total_money / num_shoppers\n\n    # FA\n    answer = money_per_shopper\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "isabella_giselle_combined",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x31b533550>"
+  },
+  "correct_trace": {
+    "giselle_money": 120,
+    "isabella_more_than_giselle": 15,
+    "isabella_money": 135,
+    "isabella_giselle_combined": 255,
+    "isabella_more_than_sam": 45,
+    "sam_money": 90,
+    "total_money": 345,
+    "num_shoppers": 3,
+    "money_per_shopper": 115.0,
+    "answer": 115.0
+  },
+  "flawed_trace": {
+    "giselle_money": 120,
+    "isabella_more_than_giselle": 15,
+    "isabella_money": 135,
+    "isabella_giselle_combined": 15,
+    "isabella_more_than_sam": 45,
+    "sam_money": 90,
+    "total_money": 105,
+    "num_shoppers": 3,
+    "money_per_shopper": 35.0,
+    "answer": 35.0
+  },
+  "correct_value": 255,
+  "flawed_value": 15,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "isabella_money",
+      "question_inputs": [
+        "giselle_money",
+        "isabella_more_than_giselle"
+      ],
+      "solution_line_template": "If Isabella has ${isabella_more_than_giselle} more than Giselle, she has ${giselle_money}+${isabella_more_than_giselle} = ${isabella_money}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "isabella_giselle_combined",
+      "question_inputs": [],
+      "solution_line_template": "Combined, Isabella and Giselle has ${isabella_money}+${giselle_money}=$<<{isabella_money}+{giselle_money}={isabella_giselle_combined}>>{isabella_giselle_combined}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "sam_money",
+      "question_inputs": [
+        "isabella_more_than_sam"
+      ],
+      "solution_line_template": "Isabella has ${isabella_more_than_sam} more than Sam, meaning Sam has ${isabella_money}-${isabella_more_than_sam}=${sam_money}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_money",
+      "question_inputs": [],
+      "solution_line_template": "Together, Sam, Isabella, and Giselle has ${isabella_giselle_combined}+${sam_money}=$<<{isabella_giselle_combined}+{sam_money}={total_money}>>{total_money}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "money_per_shopper",
+      "question_inputs": [
+        "num_shoppers"
+      ],
+      "solution_line_template": "if they donate the money to {num_shoppers} shoppers at their local town's supermarket who then decides to share it equally, each shopper will receive ${total_money}/{num_shoppers}=$<<{total_money}/{num_shoppers}={money_per_shopper}>>{money_per_shopper}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Isabella has $15 more than Giselle, she has $120+$15 = $135",
+    "L2": "Combined, Isabella and Giselle has $135+$120=$<<135+120=15>>15",
+    "L3": "Isabella has $45 more than Sam, meaning Sam has $135-$45=$90",
+    "L4": "Together, Sam, Isabella, and Giselle has $15+$90=$<<15+90=105>>105",
+    "L5": "if they donate the money to 3 shoppers at their local town's supermarket who then decides to share it equally, each shopper will receive $105/3=$<<105/3=35>>35",
+    "FA": "#### 35"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": -7663295519319724948,
+  "model_name": "google_gemini-2.5-flash"
+}

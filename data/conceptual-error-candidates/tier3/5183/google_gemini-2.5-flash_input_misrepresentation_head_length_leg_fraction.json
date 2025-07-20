@@ -1,0 +1,85 @@
+{
+  "index": 5183,
+  "original_solution_mapping": {
+    "FA": "#### 25",
+    "L1": "Miss Aisha's legs are 1/3*60 = <<1/3*60=20>>20 inches.",
+    "L2": "The length of her head is 1/4*60 = <<1/4*60=15>>15 inches.",
+    "L3": "Together, her head and legs are 15+20 = <<15+20=35>>35 inches.",
+    "L4": "If her total height is 60, the rest of her body has a length of 60-35 = <<60-35=25>>25 inches."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5183.\n    Returns: the length of the rest of Miss Aisha's body.\n    \"\"\"\n    # L1\n    leg_fraction = Fraction(1, 3) # 1/3 of her total height\n    total_height = 60 # 60 inches tall\n    leg_length = leg_fraction * total_height\n\n    # L2\n    head_fraction = Fraction(1, 4) # 1/4 of her total height\n    head_length = head_fraction * total_height\n\n    # L3\n    head_and_legs_length = head_length + leg_length\n\n    # L4\n    rest_of_body_length = total_height - head_and_legs_length\n\n    # FA\n    answer = rest_of_body_length\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "head_length",
+    "operand_to_replace": "total_height",
+    "replacement_variable": "leg_fraction"
+  },
+  "correct_trace": {
+    "leg_fraction": "1/3",
+    "total_height": 60,
+    "leg_length": "20",
+    "head_fraction": "1/4",
+    "head_length": "15",
+    "head_and_legs_length": "35",
+    "rest_of_body_length": "25",
+    "answer": "25"
+  },
+  "flawed_trace": {
+    "leg_fraction": "1/3",
+    "total_height": 60,
+    "leg_length": "20",
+    "head_fraction": "1/4",
+    "head_length": "1/12",
+    "head_and_legs_length": "241/12",
+    "rest_of_body_length": "479/12",
+    "answer": "479/12"
+  },
+  "correct_value": "15",
+  "flawed_value": "1/12",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "leg_length",
+      "question_inputs": [
+        "leg_fraction",
+        "total_height"
+      ],
+      "solution_line_template": "Miss Aisha's legs are {leg_fraction}*{total_height} = <<{leg_fraction}*{total_height}={leg_length}>>{leg_length} inches."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "head_length",
+      "question_inputs": [
+        "head_fraction"
+      ],
+      "solution_line_template": "The length of her head is {head_fraction}*{total_height} = <<{head_fraction}*{total_height}={head_length}>>{head_length} inches."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "head_and_legs_length",
+      "question_inputs": [],
+      "solution_line_template": "Together, her head and legs are {head_length}+{leg_length} = <<{head_length}+{leg_length}={head_and_legs_length}>>{head_and_legs_length} inches."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "rest_of_body_length",
+      "question_inputs": [],
+      "solution_line_template": "If her total height is {total_height}, the rest of her body has a length of {total_height}-{head_and_legs_length} = <<{total_height}-{head_and_legs_length}={rest_of_body_length}>>{rest_of_body_length} inches."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Miss Aisha's legs are 1/3*60 = <<1/3*60=20>>20 inches.",
+    "L2": "The length of her head is 1/4*1/3 = <<1/4*1/3=1/12>>1/12 inches.",
+    "L3": "Together, her head and legs are 1/12+20 = <<1/12+20=241/12>>241/12 inches.",
+    "L4": "If her total height is 60, the rest of her body has a length of 60-241/12 = <<60-241/12=479/12>>479/12 inches.",
+    "FA": "#### 479/12"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'leg_fraction' (1/3) was used instead of 'total_height' (60).",
+  "repro_seed": -4091842551746833995,
+  "model_name": "google_gemini-2.5-flash"
+}

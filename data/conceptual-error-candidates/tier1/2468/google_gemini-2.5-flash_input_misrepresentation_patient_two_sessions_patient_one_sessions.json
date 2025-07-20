@@ -1,0 +1,74 @@
+{
+  "index": 2468,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "The second patient needs 6+5 = <<6+5=11>>11 sessions.",
+    "L2": "The first two patients need 6+11=<<6+11=17>>17 sessions total.",
+    "L3": "25-17=<<25-17=8>>8 sessions."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2468.\n    Returns: the number of sessions the remaining patients need.\n    \"\"\"\n    # L1\n    patient_one_sessions = 6 # One of the patients needs 6 sessions\n    patient_two_more_than_one = 5 # 5 more than that\n    patient_two_sessions = patient_one_sessions + patient_two_more_than_one\n\n    # L2\n    first_two_patients_total_sessions = patient_one_sessions + patient_two_sessions\n\n    # L3\n    total_sessions_needed = 25 # 25 sessions in total\n    remaining_patients_sessions = total_sessions_needed - first_two_patients_total_sessions\n\n    # FA\n    answer = remaining_patients_sessions\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "patient_two_sessions",
+    "operand_to_replace": "patient_two_more_than_one",
+    "replacement_variable": "patient_one_sessions"
+  },
+  "correct_trace": {
+    "patient_one_sessions": 6,
+    "patient_two_more_than_one": 5,
+    "patient_two_sessions": 11,
+    "first_two_patients_total_sessions": 17,
+    "total_sessions_needed": 25,
+    "remaining_patients_sessions": 8,
+    "answer": 8
+  },
+  "flawed_trace": {
+    "patient_one_sessions": 6,
+    "patient_two_more_than_one": 5,
+    "patient_two_sessions": 12,
+    "first_two_patients_total_sessions": 18,
+    "total_sessions_needed": 25,
+    "remaining_patients_sessions": 7,
+    "answer": 7
+  },
+  "correct_value": 11,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "patient_one_sessions",
+        "patient_two_more_than_one"
+      ],
+      "WK_inputs": [],
+      "output_variable": "patient_two_sessions",
+      "solution_line_template": "The second patient needs {patient_one_sessions}+{patient_two_more_than_one} = <<{patient_one_sessions}+{patient_two_more_than_one}={patient_two_sessions}>>{patient_two_sessions} sessions."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "first_two_patients_total_sessions",
+      "solution_line_template": "The first two patients need {patient_one_sessions}+{patient_two_sessions}=<<{patient_one_sessions}+{patient_two_sessions}={first_two_patients_total_sessions}>>{first_two_patients_total_sessions} sessions total."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "total_sessions_needed"
+      ],
+      "WK_inputs": [],
+      "output_variable": "remaining_patients_sessions",
+      "solution_line_template": "{total_sessions_needed}-{first_two_patients_total_sessions}=<<{total_sessions_needed}-{first_two_patients_total_sessions}={remaining_patients_sessions}>>{remaining_patients_sessions} sessions."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The second patient needs 6+6 = <<6+6=12>>12 sessions.",
+    "L2": "The first two patients need 6+12=<<6+12=18>>18 sessions total.",
+    "L3": "25-18=<<25-18=7>>7 sessions.",
+    "FA": "#### 7"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'patient_one_sessions' (6) was used instead of 'patient_two_more_than_one' (5).",
+  "repro_seed": -2805638470290453830,
+  "model_name": "google_gemini-2.5-flash"
+}

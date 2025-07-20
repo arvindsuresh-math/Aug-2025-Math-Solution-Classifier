@@ -1,0 +1,76 @@
+{
+  "index": 4048,
+  "original_solution_mapping": {
+    "FA": "#### 39",
+    "L1": "Woody = 1.5 years = 18 months",
+    "L2": "Ivanka = 18 + 3 = <<18+3=21>>21 months",
+    "L3": "18 + 21 = <<18+21=39>>39 months",
+    "L4": "It took Ivanka and Woody 39 months to write their books."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4048.\n    Returns: the total number of months Ivanka and Woody needed to write their books.\n    \"\"\"\n    # L1\n    woody_years = 1.5 # Woody spent 1.5 years writing his book\n    months_per_year = 12 # WK\n    woody_months = woody_years * months_per_year\n\n    # L2\n    ivanka_extra_months = 3 # took her 3 more months\n    ivanka_months = woody_months + ivanka_extra_months\n\n    # L3\n    total_months = woody_months + ivanka_months\n\n    # FA\n    answer = total_months\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_months",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x313f1cd90>"
+  },
+  "correct_trace": {
+    "woody_years": 1.5,
+    "months_per_year": 12,
+    "woody_months": 18.0,
+    "ivanka_extra_months": 3,
+    "ivanka_months": 21.0,
+    "total_months": 39.0,
+    "answer": 39.0
+  },
+  "flawed_trace": {
+    "woody_years": 1.5,
+    "months_per_year": 12,
+    "woody_months": 18.0,
+    "ivanka_extra_months": 3,
+    "ivanka_months": 21.0,
+    "total_months": 378.0,
+    "answer": 378.0
+  },
+  "correct_value": 39.0,
+  "flawed_value": 378.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L1",
+      "output_variable": "woody_months",
+      "question_inputs": [
+        "woody_years"
+      ],
+      "solution_line_template": "Woody = {woody_years} years = {woody_months} months"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "ivanka_months",
+      "question_inputs": [
+        "ivanka_extra_months"
+      ],
+      "solution_line_template": "Ivanka = {woody_months} + {ivanka_extra_months} = <<{woody_months}+{ivanka_extra_months}={ivanka_months}>>{ivanka_months} months"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_months",
+      "question_inputs": [],
+      "solution_line_template": "{woody_months} + {ivanka_months} = <<{woody_months}+{ivanka_months}={total_months}>>{total_months} months"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Woody = 1.5 years = 18 months",
+    "L2": "Ivanka = 18 + 3 = <<18+3=21>>21 months",
+    "L3": "18 + 21 = <<18+21=378>>378 months",
+    "FA": "#### 378"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 7606210007338927807,
+  "model_name": "google_gemini-2.5-flash"
+}

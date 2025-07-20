@@ -1,0 +1,78 @@
+{
+  "index": 5083,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "The desk price was raised 65 - 15 = $<<65-15=50>>50.",
+    "L2": "At $5 per bid, there were 50 / 5 = <<50/5=10>>10 bids on the desk.",
+    "L3": "There were two bidders, so each bid 10 / 2 = <<10/2=5>>5 times on the desk."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5083.\n    Returns: the number of times each person bid on the desk.\n    \"\"\"\n    # L1\n    final_price = 65 # to $65\n    initial_price = 15 # from $15\n    total_price_increase = final_price - initial_price\n\n    # L2\n    price_increase_per_bid = 5 # raises the price of an item he is auctioning by $5 every time\n    total_bids = total_price_increase / price_increase_per_bid\n\n    # L3\n    number_of_bidders = 2 # Two people enter a bidding war\n    bids_per_person = total_bids / number_of_bidders\n\n    # FA\n    answer = bids_per_person\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_bids",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x31a8d9190>"
+  },
+  "correct_trace": {
+    "final_price": 65,
+    "initial_price": 15,
+    "total_price_increase": 50,
+    "price_increase_per_bid": 5,
+    "total_bids": 10.0,
+    "number_of_bidders": 2,
+    "bids_per_person": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "final_price": 65,
+    "initial_price": 15,
+    "total_price_increase": 50,
+    "price_increase_per_bid": 5,
+    "total_bids": 250,
+    "number_of_bidders": 2,
+    "bids_per_person": 125.0,
+    "answer": 125.0
+  },
+  "correct_value": 10.0,
+  "flawed_value": 250,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_price_increase",
+      "question_inputs": [
+        "final_price",
+        "initial_price"
+      ],
+      "solution_line_template": "The desk price was raised {final_price} - {initial_price} = $<<{final_price}-{initial_price}={total_price_increase}>>{total_price_increase}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_bids",
+      "question_inputs": [
+        "price_increase_per_bid"
+      ],
+      "solution_line_template": "At ${price_increase_per_bid} per bid, there were {total_price_increase} / {price_increase_per_bid} = <<{total_price_increase}/{price_increase_per_bid}={total_bids}>>{total_bids} bids on the desk."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "bids_per_person",
+      "question_inputs": [
+        "number_of_bidders"
+      ],
+      "solution_line_template": "There were two bidders, so each bid {total_bids} / {number_of_bidders} = <<{total_bids}/{number_of_bidders}={bids_per_person}>>{bids_per_person} times on the desk."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The desk price was raised 65 - 15 = $<<65-15=50>>50.",
+    "L2": "At $5 per bid, there were 50 / 5 = <<50/5=250>>250 bids on the desk.",
+    "L3": "There were two bidders, so each bid 250 / 2 = <<250/2=125>>125 times on the desk.",
+    "FA": "#### 125"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -4477096611904659128,
+  "model_name": "google_gemini-2.5-flash"
+}

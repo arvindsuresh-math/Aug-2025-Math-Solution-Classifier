@@ -1,0 +1,85 @@
+{
+  "index": 7027,
+  "original_solution_mapping": {
+    "FA": "#### 28",
+    "L1": "Day 1: 70(.20)=<<70*.20=14>>14 miles",
+    "L2": "70-14=<<70-14=56>>56 miles remaining",
+    "L3": "Day 2:56/2=<<56/2=28>>28 miles",
+    "L4": "56-28=<<56-28=28>>28 miles remaining"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7027.\n    Returns: the number of miles run on day three.\n    \"\"\"\n    # L1\n    total_miles = 70 # 70 miles\n    day1_percent = 0.20 # 20 percent of the total miles\n    day1_miles = total_miles * day1_percent\n\n    # L2\n    remaining_miles_after_day1 = total_miles - day1_miles\n\n    # L3\n    day2_divisor = 2 # 50 percent of the remaining miles\n    day2_miles = remaining_miles_after_day1 / day2_divisor\n\n    # L4\n    remaining_miles_after_day2 = remaining_miles_after_day1 - day2_miles\n\n    # FA\n    answer = remaining_miles_after_day2\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "day2_miles",
+    "operand_to_replace": "day2_divisor",
+    "replacement_variable": "day1_miles"
+  },
+  "correct_trace": {
+    "total_miles": 70,
+    "day1_percent": 0.2,
+    "day1_miles": 14.0,
+    "remaining_miles_after_day1": 56.0,
+    "day2_divisor": 2,
+    "day2_miles": 28.0,
+    "remaining_miles_after_day2": 28.0,
+    "answer": 28.0
+  },
+  "flawed_trace": {
+    "total_miles": 70,
+    "day1_percent": 0.2,
+    "day1_miles": 14.0,
+    "remaining_miles_after_day1": 56.0,
+    "day2_divisor": 2,
+    "day2_miles": 4.0,
+    "remaining_miles_after_day2": 52.0,
+    "answer": 52.0
+  },
+  "correct_value": 28.0,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "day1_miles",
+      "question_inputs": [
+        "total_miles",
+        "day1_percent"
+      ],
+      "solution_line_template": "Day 1: {total_miles}({day1_percent})=<<{total_miles}*{day1_percent}={day1_miles}>>{day1_miles} miles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_miles_after_day1",
+      "question_inputs": [],
+      "solution_line_template": "{total_miles}-{day1_miles}=<<{total_miles}-{day1_miles}={remaining_miles_after_day1}>>{remaining_miles_after_day1} miles remaining"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "day2_miles",
+      "question_inputs": [
+        "day2_divisor"
+      ],
+      "solution_line_template": "Day 2:{remaining_miles_after_day1}/{day2_divisor}=<<{remaining_miles_after_day1}/{day2_divisor}={day2_miles}>>{day2_miles} miles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "remaining_miles_after_day2",
+      "question_inputs": [],
+      "solution_line_template": "{remaining_miles_after_day1}-{day2_miles}=<<{remaining_miles_after_day1}-{day2_miles}={remaining_miles_after_day2}>>{remaining_miles_after_day2} miles remaining"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Day 1: 70(0.2)=<<70*0.2=14>>14 miles",
+    "L2": "70-14=<<70-14=56>>56 miles remaining",
+    "L3": "Day 2:56/14=<<56/14=4>>4 miles",
+    "L4": "56-4=<<56-4=52>>52 miles remaining",
+    "FA": "#### 52"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'day1_miles' (14.0) was used instead of 'day2_divisor' (2).",
+  "repro_seed": -7257573533076453531,
+  "model_name": "google_gemini-2.5-flash"
+}

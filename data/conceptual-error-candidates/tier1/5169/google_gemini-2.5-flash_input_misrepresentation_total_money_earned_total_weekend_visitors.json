@@ -1,0 +1,93 @@
+{
+  "index": 5169,
+  "original_solution_mapping": {
+    "FA": "#### 3000",
+    "L1": "During the weekdays it was visited by 100 * 5= <<100*5=500>>500 people",
+    "L2": "On Sunday and Saturday, it was visited by 200 + 300 = <<200+300=500>>500 people",
+    "L3": "In total 500 + 500 = <<500+500=1000>>1000 people visited the park in a week",
+    "L4": "So it earned 1000 * 3 = <<1000*3=3000>>3000 dollars in a week"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5169.\n    Returns: the total money earned by the amusement park in a week.\n    \"\"\"\n    # L1\n    people_per_weekday = 100 # 100 people per day\n    weekdays_in_week = 5 # WK\n    total_weekday_visitors = people_per_weekday * weekdays_in_week\n\n    # L2\n    saturday_visitors = 200 # on Saturday it was visited by 200 people\n    sunday_visitors = 300 # on Sunday by 300\n    total_weekend_visitors = saturday_visitors + sunday_visitors\n\n    # L3\n    total_weekly_visitors = total_weekday_visitors + total_weekend_visitors\n\n    # L4\n    ticket_price = 3 # tickets for $3\n    total_money_earned = total_weekly_visitors * ticket_price\n\n    # FA\n    answer = total_money_earned\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_money_earned",
+    "operand_to_replace": "ticket_price",
+    "replacement_variable": "total_weekend_visitors"
+  },
+  "correct_trace": {
+    "people_per_weekday": 100,
+    "weekdays_in_week": 5,
+    "total_weekday_visitors": 500,
+    "saturday_visitors": 200,
+    "sunday_visitors": 300,
+    "total_weekend_visitors": 500,
+    "total_weekly_visitors": 1000,
+    "ticket_price": 3,
+    "total_money_earned": 3000,
+    "answer": 3000
+  },
+  "flawed_trace": {
+    "people_per_weekday": 100,
+    "weekdays_in_week": 5,
+    "total_weekday_visitors": 500,
+    "saturday_visitors": 200,
+    "sunday_visitors": 300,
+    "total_weekend_visitors": 500,
+    "total_weekly_visitors": 1000,
+    "ticket_price": 3,
+    "total_money_earned": 500000,
+    "answer": 500000
+  },
+  "correct_value": 3000,
+  "flawed_value": 500000,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "weekdays_in_week"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_weekday_visitors",
+      "question_inputs": [
+        "people_per_weekday"
+      ],
+      "solution_line_template": "During the weekdays it was visited by {people_per_weekday} * {weekdays_in_week}= <<{people_per_weekday}*{weekdays_in_week}={total_weekday_visitors}>>{total_weekday_visitors} people"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_weekend_visitors",
+      "question_inputs": [
+        "saturday_visitors",
+        "sunday_visitors"
+      ],
+      "solution_line_template": "On Sunday and Saturday, it was visited by {saturday_visitors} + {sunday_visitors} = <<{saturday_visitors}+{sunday_visitors}={total_weekend_visitors}>>{total_weekend_visitors} people"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_weekly_visitors",
+      "question_inputs": [],
+      "solution_line_template": "In total {total_weekday_visitors} + {total_weekend_visitors} = <<{total_weekday_visitors}+{total_weekend_visitors}={total_weekly_visitors}>>{total_weekly_visitors} people visited the park in a week"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_money_earned",
+      "question_inputs": [
+        "ticket_price"
+      ],
+      "solution_line_template": "So it earned {total_weekly_visitors} * {ticket_price} = <<{total_weekly_visitors}*{ticket_price}={total_money_earned}>>{total_money_earned} dollars in a week"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "During the weekdays it was visited by 100 * 5= <<100*5=500>>500 people",
+    "L2": "On Sunday and Saturday, it was visited by 200 + 300 = <<200+300=500>>500 people",
+    "L3": "In total 500 + 500 = <<500+500=1000>>1000 people visited the park in a week",
+    "L4": "So it earned 1000 * 500 = <<1000*500=500000>>500000 dollars in a week",
+    "FA": "#### 500000"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'total_weekend_visitors' (500) was used instead of 'ticket_price' (3).",
+  "repro_seed": 7080014942677043604,
+  "model_name": "google_gemini-2.5-flash"
+}

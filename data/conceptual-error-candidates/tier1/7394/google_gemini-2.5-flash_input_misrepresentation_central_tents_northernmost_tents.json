@@ -1,0 +1,100 @@
+{
+  "index": 7394,
+  "original_solution_mapping": {
+    "FA": "#### 900",
+    "L1": "On the eastern part of the campsite, Mr Manuel counted 2*100 = <<2*100=200>>200 tents",
+    "L2": "The total number of tents in the eastern and the northern part of the campgrounds is 200+100 = <<200+100=300>>300",
+    "L3": "There are four times as many tents as the northernmost part in the central part of the campsite, which means there are 4*100 = <<4*100=400>>400 tents in the central part of the camp.",
+    "L4": "The total number of tents in the three parts of the campsite is 400+300 = <<400+300=700>>700",
+    "L5": "If you add the number of tents Mr. Manuel counted at the southern part of the campsite, you get 700+200 = <<700+200=900>>900 tents on the whole campsite"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7394.\n    Returns: the total number of tents in the recreation area.\n    \"\"\"\n    # L1\n    northernmost_tents = 100 # 100 tents in the northernmost part of the campsite\n    east_multiplier = 2 # twice that number on the east side\n    eastern_tents = east_multiplier * northernmost_tents\n\n    # L2\n    northern_and_eastern_tents = eastern_tents + northernmost_tents\n\n    # L3\n    central_multiplier = 4 # four times the number of tents in the northernmost part\n    central_tents = central_multiplier * northernmost_tents\n\n    # L4\n    total_three_parts = central_tents + northern_and_eastern_tents\n\n    # L5\n    southern_tents = 200 # 200 tents in the southern part of the campsite\n    total_campsite_tents = total_three_parts + southern_tents\n\n    # FA\n    answer = total_campsite_tents\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "central_tents",
+    "operand_to_replace": "central_multiplier",
+    "replacement_variable": "northernmost_tents"
+  },
+  "correct_trace": {
+    "northernmost_tents": 100,
+    "east_multiplier": 2,
+    "eastern_tents": 200,
+    "northern_and_eastern_tents": 300,
+    "central_multiplier": 4,
+    "central_tents": 400,
+    "total_three_parts": 700,
+    "southern_tents": 200,
+    "total_campsite_tents": 900,
+    "answer": 900
+  },
+  "flawed_trace": {
+    "northernmost_tents": 100,
+    "east_multiplier": 2,
+    "eastern_tents": 200,
+    "northern_and_eastern_tents": 300,
+    "central_multiplier": 4,
+    "central_tents": 10000,
+    "total_three_parts": 10300,
+    "southern_tents": 200,
+    "total_campsite_tents": 10500,
+    "answer": 10500
+  },
+  "correct_value": 400,
+  "flawed_value": 10000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "eastern_tents",
+      "question_inputs": [
+        "northernmost_tents",
+        "east_multiplier"
+      ],
+      "solution_line_template": "On the eastern part of the campsite, Mr Manuel counted {east_multiplier}*{northernmost_tents} = <<{east_multiplier}*{northernmost_tents}={eastern_tents}>>{eastern_tents} tents"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "northern_and_eastern_tents",
+      "question_inputs": [],
+      "solution_line_template": "The total number of tents in the eastern and the northern part of the campgrounds is {eastern_tents}+{northernmost_tents} = <<{eastern_tents}+{northernmost_tents}={northern_and_eastern_tents}>>{northern_and_eastern_tents}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "central_tents",
+      "question_inputs": [
+        "central_multiplier"
+      ],
+      "solution_line_template": "There are four times as many tents as the northernmost part in the central part of the campsite, which means there are {central_multiplier}*{northernmost_tents} = <<{central_multiplier}*{northernmost_tents}={central_tents}>>{central_tents} tents in the central part of the camp."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_three_parts",
+      "question_inputs": [],
+      "solution_line_template": "The total number of tents in the three parts of the campsite is {central_tents}+{northern_and_eastern_tents} = <<{central_tents}+{northern_and_eastern_tents}={total_three_parts}>>{total_three_parts}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_campsite_tents",
+      "question_inputs": [
+        "southern_tents"
+      ],
+      "solution_line_template": "If you add the number of tents Mr. Manuel counted at the southern part of the campsite, you get {total_three_parts}+{southern_tents} = <<{total_three_parts}+{southern_tents}={total_campsite_tents}>>{total_campsite_tents} tents on the whole campsite"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On the eastern part of the campsite, Mr Manuel counted 2*100 = <<2*100=200>>200 tents",
+    "L2": "The total number of tents in the eastern and the northern part of the campgrounds is 200+100 = <<200+100=300>>300",
+    "L3": "There are four times as many tents as the northernmost part in the central part of the campsite, which means there are 100*100 = <<100*100=10000>>10000 tents in the central part of the camp.",
+    "L4": "The total number of tents in the three parts of the campsite is 10000+300 = <<10000+300=10300>>10300",
+    "L5": "If you add the number of tents Mr. Manuel counted at the southern part of the campsite, you get 10300+200 = <<10300+200=10500>>10500 tents on the whole campsite",
+    "FA": "#### 10500"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'northernmost_tents' (100) was used instead of 'central_multiplier' (4).",
+  "repro_seed": 635124060371412947,
+  "model_name": "google_gemini-2.5-flash"
+}

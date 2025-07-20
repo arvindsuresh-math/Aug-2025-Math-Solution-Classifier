@@ -1,0 +1,109 @@
+{
+  "index": 64,
+  "original_solution_mapping": {
+    "FA": "#### 840",
+    "L1": "James earns 20*.2=$<<20*.2=4>>4 less while working his second job",
+    "L2": "So he earns 20-4=$<<20-4=16>>16 an hour",
+    "L3": "At his first job he earns 20*30=$<<20*30=600>>600",
+    "L4": "He works 30/2=<<30/2=15>>15 hours at his second job",
+    "L5": "So he earns 15*16=$<<15*16=240>>240",
+    "L6": "So he earns 600+240=$<<600+240=840>>840 a week"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 64.\n    Returns: the total amount James earns per week.\n    \"\"\"\n    # L1\n    main_job_hourly_rate = 20 # James earns $20 an hour while working at his main job\n    less_percent = 0.2 # 20% less\n    less_earning_second_job = main_job_hourly_rate * less_percent\n\n    # L2\n    second_job_hourly_rate = main_job_hourly_rate - less_earning_second_job\n\n    # L3\n    main_job_hours = 30 # He works 30 hours at his main job\n    main_job_earnings = main_job_hourly_rate * main_job_hours\n\n    # L4\n    second_job_hours_divisor = 2 # half that much at his second job\n    second_job_hours = main_job_hours / second_job_hours_divisor\n\n    # L5\n    second_job_earnings = second_job_hours * second_job_hourly_rate\n\n    # L6\n    total_weekly_earnings = main_job_earnings + second_job_earnings\n\n    # FA\n    answer = total_weekly_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_weekly_earnings",
+    "replacement_variable": "second_job_hours"
+  },
+  "correct_trace": {
+    "main_job_hourly_rate": 20,
+    "less_percent": 0.2,
+    "less_earning_second_job": 4.0,
+    "second_job_hourly_rate": 16.0,
+    "main_job_hours": 30,
+    "main_job_earnings": 600,
+    "second_job_hours_divisor": 2,
+    "second_job_hours": 15.0,
+    "second_job_earnings": 240.0,
+    "total_weekly_earnings": 840.0,
+    "answer": 840.0
+  },
+  "flawed_trace": {
+    "main_job_hourly_rate": 20,
+    "less_percent": 0.2,
+    "less_earning_second_job": 4.0,
+    "second_job_hourly_rate": 16.0,
+    "main_job_hours": 30,
+    "main_job_earnings": 600,
+    "second_job_hours_divisor": 2,
+    "second_job_hours": 15.0,
+    "second_job_earnings": 240.0,
+    "total_weekly_earnings": 840.0,
+    "answer": 15.0
+  },
+  "correct_value": 840.0,
+  "flawed_value": 15.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "less_earning_second_job",
+      "question_inputs": [
+        "main_job_hourly_rate",
+        "less_percent"
+      ],
+      "solution_line_template": "James earns {main_job_hourly_rate}*{less_percent}=${main_job_hourly_rate}*{less_percent}={less_earning_second_job}>>{less_earning_second_job} less while working his second job"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "second_job_hourly_rate",
+      "question_inputs": [],
+      "solution_line_template": "So he earns {main_job_hourly_rate}-{less_earning_second_job}=${main_job_hourly_rate}-{less_earning_second_job}={second_job_hourly_rate}>>{second_job_hourly_rate} an hour"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "main_job_earnings",
+      "question_inputs": [
+        "main_job_hours"
+      ],
+      "solution_line_template": "At his first job he earns {main_job_hourly_rate}*{main_job_hours}=${main_job_hourly_rate}*{main_job_hours}={main_job_earnings}>>{main_job_earnings}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "second_job_hours",
+      "question_inputs": [
+        "second_job_hours_divisor"
+      ],
+      "solution_line_template": "He works {main_job_hours}/{second_job_hours_divisor}=<<{main_job_hours}/{second_job_hours_divisor}={second_job_hours}>>{second_job_hours} hours at his second job"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "second_job_earnings",
+      "question_inputs": [],
+      "solution_line_template": "So he earns {second_job_hours}*{second_job_hourly_rate}=${second_job_hours}*{second_job_hourly_rate}={second_job_earnings}>>{second_job_earnings}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_weekly_earnings",
+      "question_inputs": [],
+      "solution_line_template": "So he earns {main_job_earnings}+{second_job_earnings}=${main_job_earnings}+{second_job_earnings}={total_weekly_earnings}>>{total_weekly_earnings} a week"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "James earns 20*0.2=$20*0.2=4>>4 less while working his second job",
+    "L2": "So he earns 20-4=$20-4=16>>16 an hour",
+    "L3": "At his first job he earns 20*30=$20*30=600>>600",
+    "L4": "He works 30/2=<<30/2=15>>15 hours at his second job",
+    "FA": "#### 15"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'second_job_hours' (value: 15.0) was reported instead of 'total_weekly_earnings' (value: 840.0).",
+  "repro_seed": 3184910334719513573,
+  "model_name": "google_gemini-2.5-flash"
+}

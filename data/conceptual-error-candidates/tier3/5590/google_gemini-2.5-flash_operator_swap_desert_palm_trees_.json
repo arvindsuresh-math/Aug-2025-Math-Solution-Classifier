@@ -1,0 +1,70 @@
+{
+  "index": 5590,
+  "original_solution_mapping": {
+    "FA": "#### 7000",
+    "L1": "The desert has 3/5 fewer palm trees than the forest, and since the forest has 5000 palm trees, the desert has 3/5*5000 = <<3/5*5000=3000>>3000 fewer palm trees.",
+    "L2": "The total number of palm trees in the desert is 5000-3000 = <<5000-3000=2000>>2000",
+    "L3": "Together, the desert and the forest have a total of 5000+2000 = <<5000+2000=7000>>7000 palm trees."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5590.\n    Returns: the total number of palm trees in both the desert and the forest combined.\n    \"\"\"\n    # L1\n    fewer_fraction = Fraction(3, 5) # 3/5 fewer palm trees\n    forest_palm_trees = 5000 # which has 5000 palm trees\n    fewer_palm_trees = fewer_fraction * forest_palm_trees\n\n    # L2\n    desert_palm_trees = forest_palm_trees - fewer_palm_trees\n\n    # L3\n    total_palm_trees = forest_palm_trees + desert_palm_trees\n\n    # FA\n    answer = total_palm_trees\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "desert_palm_trees",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x31adfd1d0>"
+  },
+  "correct_trace": {
+    "fewer_fraction": "3/5",
+    "forest_palm_trees": 5000,
+    "fewer_palm_trees": "3000",
+    "desert_palm_trees": "2000",
+    "total_palm_trees": "7000",
+    "answer": "7000"
+  },
+  "flawed_trace": {
+    "fewer_fraction": "3/5",
+    "forest_palm_trees": 5000,
+    "fewer_palm_trees": "3000",
+    "desert_palm_trees": "5/3",
+    "total_palm_trees": "15005/3",
+    "answer": "15005/3"
+  },
+  "correct_value": "2000",
+  "flawed_value": "5/3",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "fewer_palm_trees",
+      "question_inputs": [
+        "fewer_fraction",
+        "forest_palm_trees"
+      ],
+      "solution_line_template": "The desert has {fewer_fraction} fewer palm trees than the forest, and since the forest has {forest_palm_trees} palm trees, the desert has {fewer_fraction}*{forest_palm_trees} = <<{fewer_fraction}*{forest_palm_trees}={fewer_palm_trees}>>{fewer_palm_trees} fewer palm trees."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "desert_palm_trees",
+      "question_inputs": [],
+      "solution_line_template": "The total number of palm trees in the desert is {forest_palm_trees}-{fewer_palm_trees} = <<{forest_palm_trees}-{fewer_palm_trees}={desert_palm_trees}>>{desert_palm_trees}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_palm_trees",
+      "question_inputs": [],
+      "solution_line_template": "Together, the desert and the forest have a total of {forest_palm_trees}+{desert_palm_trees} = <<{forest_palm_trees}+{desert_palm_trees}={total_palm_trees}>>{total_palm_trees} palm trees."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The desert has 3/5 fewer palm trees than the forest, and since the forest has 5000 palm trees, the desert has 3/5*5000 = <<3/5*5000=3000>>3000 fewer palm trees.",
+    "L2": "The total number of palm trees in the desert is 5000-3000 = <<5000-3000=5/3>>5/3",
+    "L3": "Together, the desert and the forest have a total of 5000+5/3 = <<5000+5/3=15005/3>>15005/3 palm trees.",
+    "FA": "#### 15005/3"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": -3331223011982535841,
+  "model_name": "google_gemini-2.5-flash"
+}

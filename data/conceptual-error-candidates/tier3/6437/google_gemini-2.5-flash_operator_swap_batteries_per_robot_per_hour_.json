@@ -1,0 +1,93 @@
+{
+  "index": 6437,
+  "original_solution_mapping": {
+    "FA": "#### 200",
+    "L1": "For each battery that a robot makes, it takes 9 + 6 = <<9+6=15>>15 minutes to create the battery.",
+    "L2": "In 60 minutes, one robot can make 60 / 15 = <<60/15=4>>4 batteries per hour.",
+    "L3": "If the factory uses 10 robots at the same time, then they can produce 10 * 4 = <<10*4=40>>40 batteries per hour.",
+    "L4": "At a rate of 40 batteries per hour, 10 robots can produce 40 * 5 = <<40*5=200>>200 batteries in 5 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6437.\n    Returns: the total number of batteries the robots can manufacture.\n    \"\"\"\n    # L1\n    time_to_create_battery = 9 # 9 minutes to create the battery\n    time_to_gather_materials = 6 # 6 minutes to gather the materials\n    total_time_per_battery = time_to_create_battery + time_to_gather_materials\n\n    # L2\n    minutes_per_hour = 60 # WK\n    batteries_per_robot_per_hour = minutes_per_hour / total_time_per_battery\n\n    # L3\n    number_of_robots = 10 # 10 robots working on batteries\n    total_batteries_per_hour = number_of_robots * batteries_per_robot_per_hour\n\n    # L4\n    working_hours = 5 # in 5 hours\n    total_batteries_manufactured = total_batteries_per_hour * working_hours\n\n    # FA\n    answer = total_batteries_manufactured\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "batteries_per_robot_per_hour",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x31b234110>"
+  },
+  "correct_trace": {
+    "time_to_create_battery": 9,
+    "time_to_gather_materials": 6,
+    "total_time_per_battery": 15,
+    "minutes_per_hour": 60,
+    "batteries_per_robot_per_hour": 4.0,
+    "number_of_robots": 10,
+    "total_batteries_per_hour": 40.0,
+    "working_hours": 5,
+    "total_batteries_manufactured": 200.0,
+    "answer": 200.0
+  },
+  "flawed_trace": {
+    "time_to_create_battery": 9,
+    "time_to_gather_materials": 6,
+    "total_time_per_battery": 15,
+    "minutes_per_hour": 60,
+    "batteries_per_robot_per_hour": 900,
+    "number_of_robots": 10,
+    "total_batteries_per_hour": 9000,
+    "working_hours": 5,
+    "total_batteries_manufactured": 45000,
+    "answer": 45000
+  },
+  "correct_value": 4.0,
+  "flawed_value": 900,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_time_per_battery",
+      "question_inputs": [
+        "time_to_create_battery",
+        "time_to_gather_materials"
+      ],
+      "solution_line_template": "For each battery that a robot makes, it takes {time_to_create_battery} + {time_to_gather_materials} = <<{time_to_create_battery}+{time_to_gather_materials}={total_time_per_battery}>>{total_time_per_battery} minutes to create the battery."
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L2",
+      "output_variable": "batteries_per_robot_per_hour",
+      "question_inputs": [],
+      "solution_line_template": "In {minutes_per_hour} minutes, one robot can make {minutes_per_hour} / {total_time_per_battery} = <<{minutes_per_hour}/{total_time_per_battery}={batteries_per_robot_per_hour}>>{batteries_per_robot_per_hour} batteries per hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_batteries_per_hour",
+      "question_inputs": [
+        "number_of_robots"
+      ],
+      "solution_line_template": "If the factory uses {number_of_robots} robots at the same time, then they can produce {number_of_robots} * {batteries_per_robot_per_hour} = <<{number_of_robots}*{batteries_per_robot_per_hour}={total_batteries_per_hour}>>{total_batteries_per_hour} batteries per hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_batteries_manufactured",
+      "question_inputs": [
+        "working_hours"
+      ],
+      "solution_line_template": "At a rate of {total_batteries_per_hour} batteries per hour, {number_of_robots} robots can produce {total_batteries_per_hour} * {working_hours} = <<{total_batteries_per_hour}*{working_hours}={total_batteries_manufactured}>>{total_batteries_manufactured} batteries in {working_hours} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "For each battery that a robot makes, it takes 9 + 6 = <<9+6=15>>15 minutes to create the battery.",
+    "L2": "In 60 minutes, one robot can make 60 / 15 = <<60/15=900>>900 batteries per hour.",
+    "L3": "If the factory uses 10 robots at the same time, then they can produce 10 * 900 = <<10*900=9000>>9000 batteries per hour.",
+    "L4": "At a rate of 9000 batteries per hour, 10 robots can produce 9000 * 5 = <<9000*5=45000>>45000 batteries in 5 hours.",
+    "FA": "#### 45000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -4999010069509999716,
+  "model_name": "google_gemini-2.5-flash"
+}

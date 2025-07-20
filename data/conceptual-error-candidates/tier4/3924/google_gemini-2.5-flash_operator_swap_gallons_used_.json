@@ -1,0 +1,84 @@
+{
+  "index": 3924,
+  "original_solution_mapping": {
+    "FA": "#### 7",
+    "L1": "Luisa drives a total of 10 + 6 + 5 + 9 = <<10+6+5+9=30>>30 miles",
+    "L2": "Luisa uses 30 / 15 = <<30/15=2>>2 gallons of gas for her trip",
+    "L3": "The total cost of the gas for Luisa's trip is 2 * $3.50 = $<<2*3.5=7>>7"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3924.\n    Returns: the total cost of the gas for Luisa's entire trip.\n    \"\"\"\n    # L1\n    miles_to_grocery = 10 # 10 miles to the grocery store\n    miles_to_mall = 6 # 6 miles to the mall\n    miles_to_pet_store = 5 # 5 miles to the pet store\n    miles_back_home = 9 # 9 miles back home\n    total_miles_driven = miles_to_grocery + miles_to_mall + miles_to_pet_store + miles_back_home\n\n    # L2\n    miles_per_gallon = 15 # One gallon of gas can be used to drive 15 miles\n    gallons_used = total_miles_driven / miles_per_gallon\n\n    # L3\n    cost_per_gallon = 3.50 # one gallon of gas costs $3.50\n    total_cost = gallons_used * cost_per_gallon\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "gallons_used",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x31bbbe510>"
+  },
+  "correct_trace": {
+    "miles_to_grocery": 10,
+    "miles_to_mall": 6,
+    "miles_to_pet_store": 5,
+    "miles_back_home": 9,
+    "total_miles_driven": 30,
+    "miles_per_gallon": 15,
+    "gallons_used": 2.0,
+    "cost_per_gallon": 3.5,
+    "total_cost": 7.0,
+    "answer": 7.0
+  },
+  "flawed_trace": {
+    "miles_to_grocery": 10,
+    "miles_to_mall": 6,
+    "miles_to_pet_store": 5,
+    "miles_back_home": 9,
+    "total_miles_driven": 30,
+    "miles_per_gallon": 15,
+    "gallons_used": 450,
+    "cost_per_gallon": 3.5,
+    "total_cost": 1575.0,
+    "answer": 1575.0
+  },
+  "correct_value": 2.0,
+  "flawed_value": 450,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_miles_driven",
+      "question_inputs": [
+        "miles_to_grocery",
+        "miles_to_mall",
+        "miles_to_pet_store",
+        "miles_back_home"
+      ],
+      "solution_line_template": "Luisa drives a total of {miles_to_grocery} + {miles_to_mall} + {miles_to_pet_store} + {miles_back_home} = <<{miles_to_grocery}+{miles_to_mall}+{miles_to_pet_store}+{miles_back_home}={total_miles_driven}>>{total_miles_driven} miles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "gallons_used",
+      "question_inputs": [
+        "miles_per_gallon"
+      ],
+      "solution_line_template": "Luisa uses {total_miles_driven} / {miles_per_gallon} = <<{total_miles_driven}/{miles_per_gallon}={gallons_used}>>{gallons_used} gallons of gas for her trip"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "cost_per_gallon"
+      ],
+      "solution_line_template": "The total cost of the gas for Luisa's trip is {gallons_used} * ${cost_per_gallon} = $<<{gallons_used}*{cost_per_gallon}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Luisa drives a total of 10 + 6 + 5 + 9 = <<10+6+5+9=30>>30 miles",
+    "L2": "Luisa uses 30 / 15 = <<30/15=450>>450 gallons of gas for her trip",
+    "L3": "The total cost of the gas for Luisa's trip is 450 * $3.5 = $<<450*3.5=1575>>1575",
+    "FA": "#### 1575"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 8102611865386151626,
+  "model_name": "google_gemini-2.5-flash"
+}

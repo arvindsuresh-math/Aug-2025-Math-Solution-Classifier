@@ -1,0 +1,79 @@
+{
+  "index": 5068,
+  "original_solution_mapping": {
+    "FA": "#### 27",
+    "L1": "Little Andy ate 3 slices 2 times giving a total of 3*2=<<3*2=6>>6 slices of bread",
+    "L2": "1 piece of toast bread requires 2 slices of bread so 10 pieces need 10*2=<<10*2=20>>20 slices of bread",
+    "L3": "There is 1 slice of bread left so in total there were 6+20+1=<<6+20+1=27>>27 slices of bread in the loaf"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5068.\n    Returns: the number of slices in the original loaf of bread.\n    \"\"\"\n    # L1\n    andy_slices_per_time = 3 # ate 3 slices\n    andy_eating_times = 2 # at two different points in time\n    andy_total_slices_eaten = andy_slices_per_time * andy_eating_times\n\n    # L2\n    slices_per_toast = 2 # uses 2 slices of bread to make 1 piece of toast bread\n    num_toast_pieces = 10 # was able to make 10 pieces of toast bread\n    slices_for_toast = num_toast_pieces * slices_per_toast\n\n    # L3\n    slices_left = 1 # had 1 slice of bread left\n    original_loaf_slices = andy_total_slices_eaten + slices_for_toast + slices_left\n\n    # FA\n    answer = original_loaf_slices\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "original_loaf_slices",
+    "replacement_variable": "andy_total_slices_eaten"
+  },
+  "correct_trace": {
+    "andy_slices_per_time": 3,
+    "andy_eating_times": 2,
+    "andy_total_slices_eaten": 6,
+    "slices_per_toast": 2,
+    "num_toast_pieces": 10,
+    "slices_for_toast": 20,
+    "slices_left": 1,
+    "original_loaf_slices": 27,
+    "answer": 27
+  },
+  "flawed_trace": {
+    "andy_slices_per_time": 3,
+    "andy_eating_times": 2,
+    "andy_total_slices_eaten": 6,
+    "slices_per_toast": 2,
+    "num_toast_pieces": 10,
+    "slices_for_toast": 20,
+    "slices_left": 1,
+    "original_loaf_slices": 27,
+    "answer": 6
+  },
+  "correct_value": 27,
+  "flawed_value": 6,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "andy_total_slices_eaten",
+      "question_inputs": [
+        "andy_slices_per_time",
+        "andy_eating_times"
+      ],
+      "solution_line_template": "Little Andy ate {andy_slices_per_time} slices {andy_eating_times} times giving a total of {andy_slices_per_time}*{andy_eating_times}=<<{andy_slices_per_time}*{andy_eating_times}={andy_total_slices_eaten}>>{andy_total_slices_eaten} slices of bread"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "slices_for_toast",
+      "question_inputs": [
+        "slices_per_toast",
+        "num_toast_pieces"
+      ],
+      "solution_line_template": "1 piece of toast bread requires {slices_per_toast} slices of bread so {num_toast_pieces} pieces need {num_toast_pieces}*{slices_per_toast}=<<{num_toast_pieces}*{slices_per_toast}={slices_for_toast}>>{slices_for_toast} slices of bread"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "original_loaf_slices",
+      "question_inputs": [
+        "slices_left"
+      ],
+      "solution_line_template": "There is {slices_left} slice of bread left so in total there were {andy_total_slices_eaten}+{slices_for_toast}+{slices_left}=<<{andy_total_slices_eaten}+{slices_for_toast}+{slices_left}={original_loaf_slices}>>{original_loaf_slices} slices of bread in the loaf"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Little Andy ate 3 slices 2 times giving a total of 3*2=<<3*2=6>>6 slices of bread",
+    "FA": "#### 6"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'andy_total_slices_eaten' (value: 6) was reported instead of 'original_loaf_slices' (value: 27).",
+  "repro_seed": 4995392527944060783,
+  "model_name": "google_gemini-2.5-flash"
+}

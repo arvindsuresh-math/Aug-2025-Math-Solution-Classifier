@@ -1,0 +1,77 @@
+{
+  "index": 3259,
+  "original_solution_mapping": {
+    "FA": "#### 17",
+    "L1": "Michael gives away 42/2=<<42/2=21>>21 dollars.",
+    "L2": "Before buying candy, his brother has 35+3=<<35+3=38>>38 dollars.",
+    "L3": "His brother had 38-21=<<38-21=17>>17 dollars at first."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3259.\n    Returns: the initial amount of money his brother had.\n    \"\"\"\n    # L1\n    michael_initial_money = 42 # Michael has $42\n    half_divisor = 2 # half the money\n    money_michael_gives_away = michael_initial_money / half_divisor\n\n    # L2\n    brother_money_left = 35 # his brother has $35 left\n    candy_cost = 3 # buys 3 dollars worth of candy\n    brother_money_before_candy = brother_money_left + candy_cost\n\n    # L3\n    brother_initial_money = brother_money_before_candy - money_michael_gives_away\n\n    # FA\n    answer = brother_initial_money\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "brother_money_before_candy",
+    "operand_to_replace": "candy_cost",
+    "replacement_variable": "brother_money_left"
+  },
+  "correct_trace": {
+    "michael_initial_money": 42,
+    "half_divisor": 2,
+    "money_michael_gives_away": 21.0,
+    "brother_money_left": 35,
+    "candy_cost": 3,
+    "brother_money_before_candy": 38,
+    "brother_initial_money": 17.0,
+    "answer": 17.0
+  },
+  "flawed_trace": {
+    "michael_initial_money": 42,
+    "half_divisor": 2,
+    "money_michael_gives_away": 21.0,
+    "brother_money_left": 35,
+    "candy_cost": 3,
+    "brother_money_before_candy": 70,
+    "brother_initial_money": 49.0,
+    "answer": 49.0
+  },
+  "correct_value": 38,
+  "flawed_value": 70,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_michael_gives_away",
+      "question_inputs": [
+        "michael_initial_money",
+        "half_divisor"
+      ],
+      "solution_line_template": "Michael gives away {michael_initial_money}/{half_divisor}=<<{michael_initial_money}/{half_divisor}={money_michael_gives_away}>>{money_michael_gives_away} dollars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "brother_money_before_candy",
+      "question_inputs": [
+        "brother_money_left",
+        "candy_cost"
+      ],
+      "solution_line_template": "Before buying candy, his brother has {brother_money_left}+{candy_cost}=<<{brother_money_left}+{candy_cost}={brother_money_before_candy}>>{brother_money_before_candy} dollars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "brother_initial_money",
+      "question_inputs": [],
+      "solution_line_template": "His brother had {brother_money_before_candy}-{money_michael_gives_away}=<<{brother_money_before_candy}-{money_michael_gives_away}={brother_initial_money}>>{brother_initial_money} dollars at first."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Michael gives away 42/2=<<42/2=21>>21 dollars.",
+    "L2": "Before buying candy, his brother has 35+35=<<35+35=70>>70 dollars.",
+    "L3": "His brother had 70-21=<<70-21=49>>49 dollars at first.",
+    "FA": "#### 49"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'brother_money_left' (35) was used instead of 'candy_cost' (3).",
+  "repro_seed": 4946311615232656515,
+  "model_name": "google_gemini-2.5-flash"
+}

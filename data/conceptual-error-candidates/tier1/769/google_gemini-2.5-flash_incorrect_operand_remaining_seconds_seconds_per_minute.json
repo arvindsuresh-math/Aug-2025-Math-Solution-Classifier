@@ -1,0 +1,64 @@
+{
+  "index": 769,
+  "original_solution_mapping": {
+    "FA": "#### 255",
+    "L1": "Each minute last 60 seconds, so that means for the fries to be fully cooked Bill needs to cook them for 5*60=<<5*60=300>>300 seconds",
+    "L2": "Since Bill had the fries in the oven for 45 seconds so far, that means they need to stay in the oven for another 300-45= <<300-45=255>>255 seconds."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 769.\n    Returns: the number of seconds remaining for the french fries to be fully cooked.\n    \"\"\"\n    # L1\n    recommended_minutes = 5 # 5 minutes for them to be fully cooked\n    seconds_per_minute = 60 # WK\n    total_required_seconds = recommended_minutes * seconds_per_minute\n\n    # L2\n    cooked_seconds = 45 # put them in for 45 seconds\n    remaining_seconds = total_required_seconds - cooked_seconds\n\n    # FA\n    answer = remaining_seconds\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "remaining_seconds",
+    "operand_to_replace": "total_required_seconds",
+    "replacement_variable": "seconds_per_minute"
+  },
+  "correct_trace": {
+    "recommended_minutes": 5,
+    "seconds_per_minute": 60,
+    "total_required_seconds": 300,
+    "cooked_seconds": 45,
+    "remaining_seconds": 255,
+    "answer": 255
+  },
+  "flawed_trace": {
+    "recommended_minutes": 5,
+    "seconds_per_minute": 60,
+    "total_required_seconds": 300,
+    "cooked_seconds": 45,
+    "remaining_seconds": 15,
+    "answer": 15
+  },
+  "correct_value": 255,
+  "flawed_value": 15,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "recommended_minutes"
+      ],
+      "WK_inputs": [
+        "seconds_per_minute"
+      ],
+      "output_variable": "total_required_seconds",
+      "solution_line_template": "Each minute last {seconds_per_minute} seconds, so that means for the fries to be fully cooked Bill needs to cook them for {recommended_minutes}*{seconds_per_minute}=<<{recommended_minutes}*{seconds_per_minute}={total_required_seconds}>>{total_required_seconds} seconds"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "cooked_seconds"
+      ],
+      "WK_inputs": [],
+      "output_variable": "remaining_seconds",
+      "solution_line_template": "Since Bill had the fries in the oven for {cooked_seconds} seconds so far, that means they need to stay in the oven for another {total_required_seconds}-{cooked_seconds}= <<{total_required_seconds}-{cooked_seconds}={remaining_seconds}>>{remaining_seconds} seconds."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each minute last 60 seconds, so that means for the fries to be fully cooked Bill needs to cook them for 5*60=<<5*60=300>>300 seconds",
+    "L2": "Since Bill had the fries in the oven for 45 seconds so far, that means they need to stay in the oven for another 60-45= <<60-45=15>>15 seconds.",
+    "FA": "#### 15"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'seconds_per_minute' (value: 60) was used instead of 'total_required_seconds' (value: 300).",
+  "repro_seed": 6363304205586897679,
+  "model_name": "google_gemini-2.5-flash"
+}

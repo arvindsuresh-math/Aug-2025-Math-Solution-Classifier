@@ -1,0 +1,63 @@
+{
+  "index": 3013,
+  "original_solution_mapping": {
+    "FA": "#### 450",
+    "L1": "He presses 15 pounds x 10 reps = <<15*10=150>>150 pounds",
+    "L2": "He moves 3 sets x 150 pounds = <<3*150=450>>450 pounds in total."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3013.\n    Returns: the total weight John moves.\n    \"\"\"\n    # L1\n    weight_per_rep = 15 # 15 pounds\n    reps_per_set = 10 # 10 reps\n    weight_per_set = weight_per_rep * reps_per_set\n\n    # L2\n    num_sets = 3 # 3 sets\n    total_weight_moved = num_sets * weight_per_set\n\n    # FA\n    answer = total_weight_moved\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_weight_moved",
+    "operand_to_replace": "num_sets",
+    "replacement_variable": "weight_per_rep"
+  },
+  "correct_trace": {
+    "weight_per_rep": 15,
+    "reps_per_set": 10,
+    "weight_per_set": 150,
+    "num_sets": 3,
+    "total_weight_moved": 450,
+    "answer": 450
+  },
+  "flawed_trace": {
+    "weight_per_rep": 15,
+    "reps_per_set": 10,
+    "weight_per_set": 150,
+    "num_sets": 3,
+    "total_weight_moved": 2250,
+    "answer": 2250
+  },
+  "correct_value": 450,
+  "flawed_value": 2250,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "weight_per_set",
+      "question_inputs": [
+        "weight_per_rep",
+        "reps_per_set"
+      ],
+      "solution_line_template": "He presses {weight_per_rep} pounds x {reps_per_set} reps = <<{weight_per_rep}*{reps_per_set}={weight_per_set}>>{weight_per_set} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_weight_moved",
+      "question_inputs": [
+        "num_sets"
+      ],
+      "solution_line_template": "He moves {num_sets} sets x {weight_per_set} pounds = <<{num_sets}*{weight_per_set}={total_weight_moved}>>{total_weight_moved} pounds in total."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He presses 15 pounds x 10 reps = <<15*10=150>>150 pounds.",
+    "L2": "He moves 15 sets x 150 pounds = <<15*150=2250>>2250 pounds in total.",
+    "FA": "#### 2250"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'weight_per_rep' (15) was used instead of 'num_sets' (3).",
+  "repro_seed": 6371037695527324540,
+  "model_name": "google_gemini-2.5-flash"
+}

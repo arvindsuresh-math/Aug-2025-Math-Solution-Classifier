@@ -1,0 +1,78 @@
+{
+  "index": 4452,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "If there are half as many VW Bugs as there are Toyota trucks in this parking lot, and there are 5 VW Bugs, then there are 2*5=<<2*5=10>>10 Toyota trucks in the parking lot.",
+    "L2": "And if there are twice as many Ford trucks as Toyota trucks in this parking lot, then there are 2*10=<<2*10=20>>20 Ford trucks in the parking lot.",
+    "L3": "And if there are one-third as many Ford trucks as Dodge trucks in the parking lot, then there are 20*3=<<20*3=60>>60 Dodge trucks in the parking lot of the Taco Castle."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4452.\n    Returns: the number of Dodge trucks in the parking lot.\n    \"\"\"\n    # L1\n    num_vw_bugs = 5 # 5 Volkswagon Bugs\n    multiplier_for_toyota = 2 # half as many Volkswagen Bugs as there are Toyota trucks\n    num_toyota_trucks = multiplier_for_toyota * num_vw_bugs\n\n    # L2\n    multiplier_for_ford = 2 # twice as many Ford trucks as Toyota trucks\n    num_ford_trucks = multiplier_for_ford * num_toyota_trucks\n\n    # L3\n    multiplier_for_dodge = 3 # one-third as many Ford trucks as Dodge trucks\n    num_dodge_trucks = num_ford_trucks * multiplier_for_dodge\n\n    # FA\n    answer = num_dodge_trucks\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "num_ford_trucks",
+    "operand_to_replace": "num_toyota_trucks",
+    "replacement_variable": "multiplier_for_ford"
+  },
+  "correct_trace": {
+    "num_vw_bugs": 5,
+    "multiplier_for_toyota": 2,
+    "num_toyota_trucks": 10,
+    "multiplier_for_ford": 2,
+    "num_ford_trucks": 20,
+    "multiplier_for_dodge": 3,
+    "num_dodge_trucks": 60,
+    "answer": 60
+  },
+  "flawed_trace": {
+    "num_vw_bugs": 5,
+    "multiplier_for_toyota": 2,
+    "num_toyota_trucks": 10,
+    "multiplier_for_ford": 2,
+    "num_ford_trucks": 4,
+    "multiplier_for_dodge": 3,
+    "num_dodge_trucks": 12,
+    "answer": 12
+  },
+  "correct_value": 20,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "num_toyota_trucks",
+      "question_inputs": [
+        "num_vw_bugs",
+        "multiplier_for_toyota"
+      ],
+      "solution_line_template": "If there are half as many VW Bugs as there are Toyota trucks in this parking lot, and there are {num_vw_bugs} VW Bugs, then there are {multiplier_for_toyota}*{num_vw_bugs}=<<{multiplier_for_toyota}*{num_vw_bugs}={num_toyota_trucks}>>{num_toyota_trucks} Toyota trucks in the parking lot."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_ford_trucks",
+      "question_inputs": [
+        "multiplier_for_ford"
+      ],
+      "solution_line_template": "And if there are twice as many Ford trucks as Toyota trucks in this parking lot, then there are {multiplier_for_ford}*{num_toyota_trucks}=<<{multiplier_for_ford}*{num_toyota_trucks}={num_ford_trucks}>>{num_ford_trucks} Ford trucks in the parking lot."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_dodge_trucks",
+      "question_inputs": [
+        "multiplier_for_dodge"
+      ],
+      "solution_line_template": "And if there are one-third as many Ford trucks as Dodge trucks in the parking lot, then there are {num_ford_trucks}*{multiplier_for_dodge}=<<{num_ford_trucks}*{multiplier_for_dodge}={num_dodge_trucks}>>{num_dodge_trucks} Dodge trucks in the parking lot of the Taco Castle."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If there are half as many VW Bugs as there are Toyota trucks in this parking lot, and there are 5 VW Bugs, then there are 2*5=<<2*5=10>>10 Toyota trucks in the parking lot.",
+    "L2": "And if there are twice as many Ford trucks as Toyota trucks in this parking lot, then there are 2*2=<<2*2=4>>4 Ford trucks in the parking lot.",
+    "L3": "And if there are one-third as many Ford trucks as Dodge trucks in the parking lot, then there are 4*3=<<4*3=12>>12 Dodge trucks in the parking lot of the Taco Castle.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'multiplier_for_ford' (value: 2) was used instead of 'num_toyota_trucks' (value: 10).",
+  "repro_seed": 6147020000427873492,
+  "model_name": "google_gemini-2.5-flash"
+}

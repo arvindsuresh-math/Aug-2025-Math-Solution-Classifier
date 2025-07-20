@@ -1,0 +1,63 @@
+{
+  "index": 5698,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "The vacuum cleaner costs $120, so Daria needs 120 - 20 = $<<120-20=100>>100 more.",
+    "L2": "Daria will need 100 / 10 = <<100/10=10>>10 more weeks, to be able to buy the vacuum cleaner."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5698.\n    Returns: the number of weeks Daria needs to raise enough money.\n    \"\"\"\n    # L1\n    vacuum_cost = 120 # The vacuum cleaner costs $120\n    initial_collected = 20 # collected $20 in her piggy bank\n    money_needed = vacuum_cost - initial_collected\n\n    # L2\n    weekly_contribution = 10 # put $10 in it each week\n    weeks_needed = money_needed / weekly_contribution\n\n    # FA\n    answer = weeks_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "weeks_needed",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x31ae6ae90>"
+  },
+  "correct_trace": {
+    "vacuum_cost": 120,
+    "initial_collected": 20,
+    "money_needed": 100,
+    "weekly_contribution": 10,
+    "weeks_needed": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "vacuum_cost": 120,
+    "initial_collected": 20,
+    "money_needed": 100,
+    "weekly_contribution": 10,
+    "weeks_needed": 1000,
+    "answer": 1000
+  },
+  "correct_value": 10.0,
+  "flawed_value": 1000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_needed",
+      "question_inputs": [
+        "vacuum_cost",
+        "initial_collected"
+      ],
+      "solution_line_template": "The vacuum cleaner costs ${vacuum_cost}, so Daria needs {vacuum_cost} - {initial_collected} = $<<{vacuum_cost}-{initial_collected}={money_needed}>>{money_needed} more."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "weeks_needed",
+      "question_inputs": [
+        "weekly_contribution"
+      ],
+      "solution_line_template": "Daria will need {money_needed} / {weekly_contribution} = <<{money_needed}/{weekly_contribution}={weeks_needed}>>{weeks_needed} more weeks, to be able to buy the vacuum cleaner."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The vacuum cleaner costs $120, so Daria needs 120 - 20 = $<<120-20=100>>100 more.",
+    "L2": "Daria will need 100 / 10 = <<100/10=1000>>1000 more weeks, to be able to buy the vacuum cleaner.",
+    "FA": "#### 1000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -459056780852457548,
+  "model_name": "google_gemini-2.5-flash"
+}

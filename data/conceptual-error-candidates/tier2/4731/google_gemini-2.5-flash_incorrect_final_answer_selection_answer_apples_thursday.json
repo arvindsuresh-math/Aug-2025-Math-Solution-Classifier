@@ -1,0 +1,103 @@
+{
+  "index": 4731,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "On Tuesday, Billy ate 2 * 2 = <<2*2=4>>4 apples.",
+    "L2": "On Friday, he ate 2 * 0.5 = <<2*0.5=1>>1 apple.",
+    "L3": "On Thursday, he ate 4 * 1 = <<4*1=4>>4 apples.",
+    "L4": "So for Monday, Tuesday, Thursday, and Friday, Billy ate a total of 2 + 4 + 4 + 1 = <<2+4+4+1=11>>11 apples.",
+    "L5": "This means that on Wednesday, he must have eaten 20 - 11 = <<20-11=9>>9 apples."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4731.\n    Returns: the number of apples Billy ate on Wednesday.\n    \"\"\"\n    # L1\n    apples_monday = 2 # On Monday, he ate 2 apples\n    twice_factor = 2 # WK\n    apples_tuesday = apples_monday * twice_factor\n\n    # L2\n    half_factor = 0.5 # On Friday, he ate half of the amount he ate on Monday\n    apples_friday = apples_monday * half_factor\n\n    # L3\n    four_times_factor = 4 # On Thursday, he ate four times as many as he ate on Friday\n    apples_thursday = four_times_factor * apples_friday\n\n    # L4\n    total_apples_known_days = apples_monday + apples_tuesday + apples_thursday + apples_friday\n\n    # L5\n    total_apples_week = 20 # Billy ate 20 apples this week\n    apples_wednesday = total_apples_week - total_apples_known_days\n\n    # FA\n    answer = apples_wednesday\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "apples_wednesday",
+    "replacement_variable": "apples_thursday"
+  },
+  "correct_trace": {
+    "apples_monday": 2,
+    "twice_factor": 2,
+    "apples_tuesday": 4,
+    "half_factor": 0.5,
+    "apples_friday": 1.0,
+    "four_times_factor": 4,
+    "apples_thursday": 4.0,
+    "total_apples_known_days": 11.0,
+    "total_apples_week": 20,
+    "apples_wednesday": 9.0,
+    "answer": 9.0
+  },
+  "flawed_trace": {
+    "apples_monday": 2,
+    "twice_factor": 2,
+    "apples_tuesday": 4,
+    "half_factor": 0.5,
+    "apples_friday": 1.0,
+    "four_times_factor": 4,
+    "apples_thursday": 4.0,
+    "total_apples_known_days": 11.0,
+    "total_apples_week": 20,
+    "apples_wednesday": 9.0,
+    "answer": 4.0
+  },
+  "correct_value": 9.0,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "twice_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "apples_tuesday",
+      "question_inputs": [
+        "apples_monday"
+      ],
+      "solution_line_template": "On Tuesday, Billy ate {apples_monday} * {twice_factor} = <<{apples_monday}*{twice_factor}={apples_tuesday}>>{apples_tuesday} apples."
+    },
+    {
+      "WK_inputs": [
+        "half_factor"
+      ],
+      "line_number": "L2",
+      "output_variable": "apples_friday",
+      "question_inputs": [],
+      "solution_line_template": "On Friday, he ate {apples_monday} * {half_factor} = <<{apples_monday}*{half_factor}={apples_friday}>>{apples_friday} apple."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "apples_thursday",
+      "question_inputs": [
+        "four_times_factor"
+      ],
+      "solution_line_template": "On Thursday, he ate {four_times_factor} * {apples_friday} = <<{four_times_factor}*{apples_friday}={apples_thursday}>>{apples_thursday} apples."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_apples_known_days",
+      "question_inputs": [],
+      "solution_line_template": "So for Monday, Tuesday, Thursday, and Friday, Billy ate a total of {apples_monday} + {apples_tuesday} + {apples_thursday} + {apples_friday} = <<{apples_monday}+{apples_tuesday}+{apples_thursday}+{apples_friday}={total_apples_known_days}>>{total_apples_known_days} apples."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "apples_wednesday",
+      "question_inputs": [
+        "total_apples_week"
+      ],
+      "solution_line_template": "This means that on Wednesday, he must have eaten {total_apples_week} - {total_apples_known_days} = <<{total_apples_week}-{total_apples_known_days}={apples_wednesday}>>{apples_wednesday} apples."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Tuesday, Billy ate 2 * 2 = <<2*2=4>>4 apples.",
+    "L2": "On Friday, he ate 2 * 0.5 = <<2*0.5=1>>1 apple.",
+    "L3": "On Thursday, he ate 4 * 1 = <<4*1=4>>4 apples.",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'apples_thursday' (value: 4.0) was reported instead of 'apples_wednesday' (value: 9.0).",
+  "repro_seed": -7488404381588044154,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,59 @@
+{
+  "index": 4243,
+  "original_solution_mapping": {
+    "FA": "#### 22000",
+    "L1": "The tip was 20000*.1=$<<20000*.1=2000>>2000",
+    "L2": "So the total cost was 2000+20000=$<<2000+20000=22000>>22000"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4243.\n    Returns: the total amount the king paid after the tip.\n    \"\"\"\n    # L1\n    crown_cost = 20000 # costs $20,000\n    tip_rate = 0.1 # tips the person 10%\n    tip_amount = crown_cost * tip_rate\n\n    # L2\n    total_cost = tip_amount + crown_cost\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "tip_amount",
+    "operand_to_replace": "tip_rate",
+    "replacement_variable": "crown_cost"
+  },
+  "correct_trace": {
+    "crown_cost": 20000,
+    "tip_rate": 0.1,
+    "tip_amount": 2000.0,
+    "total_cost": 22000.0,
+    "answer": 22000.0
+  },
+  "flawed_trace": {
+    "crown_cost": 20000,
+    "tip_rate": 0.1,
+    "tip_amount": 400000000,
+    "total_cost": 400020000,
+    "answer": 400020000
+  },
+  "correct_value": 2000.0,
+  "flawed_value": 400000000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "tip_amount",
+      "question_inputs": [
+        "crown_cost",
+        "tip_rate"
+      ],
+      "solution_line_template": "The tip was {crown_cost}*{tip_rate}=$<<{crown_cost}*{tip_rate}={tip_amount}>>{tip_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost",
+      "question_inputs": [],
+      "solution_line_template": "So the total cost was {tip_amount}+{crown_cost}=$<<{tip_amount}+{crown_cost}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The tip was 20000*20000=$<<20000*20000=400000000>>400000000",
+    "L2": "So the total cost was 400000000+20000=$<<400000000+20000=400020000>>400020000",
+    "FA": "#### 400020000"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'crown_cost' (20000) was used instead of 'tip_rate' (0.1).",
+  "repro_seed": -1000896020053769565,
+  "model_name": "google_gemini-2.5-flash"
+}

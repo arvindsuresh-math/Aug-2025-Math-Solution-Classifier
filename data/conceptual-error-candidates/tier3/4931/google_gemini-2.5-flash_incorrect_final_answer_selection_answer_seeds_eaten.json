@@ -1,0 +1,87 @@
+{
+  "index": 4931,
+  "original_solution_mapping": {
+    "FA": "#### 75",
+    "L1": "First find the number of seeds that land in water: 300 seeds * 1/3 = <<300*1/3=100>>100 seeds",
+    "L2": "Then find the number of seeds that are eaten: 300 seeds * 1/6 = <<300*1/6=50>>50 seeds",
+    "L3": "Subtract the number of seeds that are destroyed to find the number that sprout: 300 seeds - 100 seeds - 50 seeds = <<300-100-50=150>>150 seeds",
+    "L4": "Then divide that number by 2 to find the number of sprouts that survive: 150 seeds / 2 = <<150/2=75>>75 seeds"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4931.\n    Returns: the number of dandelions that survive long enough to flower.\n    \"\"\"\n    # L1\n    initial_seeds = 300 # Each dandelion produces 300 seeds\n    water_fraction = Fraction(1, 3) # 1/3rd of the seeds\n    seeds_in_water = initial_seeds * water_fraction\n\n    # L2\n    eaten_fraction = Fraction(1, 6) # 1/6 of the starting number\n    seeds_eaten = initial_seeds * eaten_fraction\n\n    # L3\n    remaining_seeds_before_sprouting = initial_seeds - seeds_in_water - seeds_eaten\n\n    # L4\n    sprout_divisor = 2 # Half the remainder sprout\n    surviving_dandelions = remaining_seeds_before_sprouting / sprout_divisor\n\n    # FA\n    answer = surviving_dandelions\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "surviving_dandelions",
+    "replacement_variable": "seeds_eaten"
+  },
+  "correct_trace": {
+    "initial_seeds": 300,
+    "water_fraction": "1/3",
+    "seeds_in_water": "100",
+    "eaten_fraction": "1/6",
+    "seeds_eaten": "50",
+    "remaining_seeds_before_sprouting": "150",
+    "sprout_divisor": 2,
+    "surviving_dandelions": "75",
+    "answer": "75"
+  },
+  "flawed_trace": {
+    "initial_seeds": 300,
+    "water_fraction": "1/3",
+    "seeds_in_water": "100",
+    "eaten_fraction": "1/6",
+    "seeds_eaten": "50",
+    "remaining_seeds_before_sprouting": "150",
+    "sprout_divisor": 2,
+    "surviving_dandelions": "75",
+    "answer": "50"
+  },
+  "correct_value": "75",
+  "flawed_value": "50",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "seeds_in_water",
+      "question_inputs": [
+        "initial_seeds",
+        "water_fraction"
+      ],
+      "solution_line_template": "First find the number of seeds that land in water: {initial_seeds} seeds * {water_fraction} = <<{initial_seeds}*{water_fraction}={seeds_in_water}>>{seeds_in_water} seeds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "seeds_eaten",
+      "question_inputs": [
+        "eaten_fraction"
+      ],
+      "solution_line_template": "Then find the number of seeds that are eaten: {initial_seeds} seeds * {eaten_fraction} = <<{initial_seeds}*{eaten_fraction}={seeds_eaten}>>{seeds_eaten} seeds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_seeds_before_sprouting",
+      "question_inputs": [],
+      "solution_line_template": "Subtract the number of seeds that are destroyed to find the number that sprout: {initial_seeds} seeds - {seeds_in_water} seeds - {seeds_eaten} seeds = <<{initial_seeds}-{seeds_in_water}-{seeds_eaten}={remaining_seeds_before_sprouting}>>{remaining_seeds_before_sprouting} seeds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "surviving_dandelions",
+      "question_inputs": [
+        "sprout_divisor"
+      ],
+      "solution_line_template": "Then divide that number by {sprout_divisor} to find the number of sprouts that survive: {remaining_seeds_before_sprouting} seeds / {sprout_divisor} = <<{remaining_seeds_before_sprouting}/{sprout_divisor}={surviving_dandelions}>>{surviving_dandelions} seeds"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the number of seeds that land in water: 300 seeds * 1/3 = <<300*1/3=100>>100 seeds",
+    "L2": "Then find the number of seeds that are eaten: 300 seeds * 1/6 = <<300*1/6=50>>50 seeds",
+    "FA": "#### 50"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'seeds_eaten' (value: 50) was reported instead of 'surviving_dandelions' (value: 75).",
+  "repro_seed": -2501002714804310348,
+  "model_name": "google_gemini-2.5-flash"
+}

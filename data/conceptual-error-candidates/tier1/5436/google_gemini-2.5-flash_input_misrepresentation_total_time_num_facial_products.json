@@ -1,0 +1,63 @@
+{
+  "index": 5436,
+  "original_solution_mapping": {
+    "FA": "#### 55",
+    "L1": "She puts on 5 products that take 5 minutes each so it takes her 5*5 = <<5*5=25>>25 minutes",
+    "L2": "It takes 25 minutes to put the products on and an additional 30 minutes for her make-up so all total it takes her 25+30 = <<25+30=55>>55 minutes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5436.\n    Returns: the total time it takes to put on her full face.\n    \"\"\"\n    # L1\n    num_facial_products = 5 # 5 facial products\n    minutes_per_product_application = 5 # waits 5 minutes between each product\n    time_for_products = num_facial_products * minutes_per_product_application\n\n    # L2\n    additional_makeup_time = 30 # an additional 30 minutes putting on her make-up\n    total_time = time_for_products + additional_makeup_time\n\n    # FA\n    answer = total_time\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_time",
+    "operand_to_replace": "additional_makeup_time",
+    "replacement_variable": "num_facial_products"
+  },
+  "correct_trace": {
+    "num_facial_products": 5,
+    "minutes_per_product_application": 5,
+    "time_for_products": 25,
+    "additional_makeup_time": 30,
+    "total_time": 55,
+    "answer": 55
+  },
+  "flawed_trace": {
+    "num_facial_products": 5,
+    "minutes_per_product_application": 5,
+    "time_for_products": 25,
+    "additional_makeup_time": 30,
+    "total_time": 30,
+    "answer": 30
+  },
+  "correct_value": 55,
+  "flawed_value": 30,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "time_for_products",
+      "question_inputs": [
+        "num_facial_products",
+        "minutes_per_product_application"
+      ],
+      "solution_line_template": "She puts on {num_facial_products} products that take {minutes_per_product_application} minutes each so it takes her {num_facial_products}*{minutes_per_product_application} = <<{num_facial_products}*{minutes_per_product_application}={time_for_products}>>{time_for_products} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_time",
+      "question_inputs": [
+        "additional_makeup_time"
+      ],
+      "solution_line_template": "It takes {time_for_products} minutes to put the products on and an additional {additional_makeup_time} minutes for her make-up so all total it takes her {time_for_products}+{additional_makeup_time} = <<{time_for_products}+{additional_makeup_time}={total_time}>>{total_time} minutes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She puts on 5 products that take 5 minutes each so it takes her 5*5 = <<5*5=25>>25 minutes",
+    "L2": "It takes 25 minutes to put the products on and an additional 5 minutes for her make-up so all total it takes her 25+5 = <<25+5=30>>30 minutes",
+    "FA": "#### 30"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_facial_products' (5) was used instead of 'additional_makeup_time' (30).",
+  "repro_seed": -5364839301006602870,
+  "model_name": "google_gemini-2.5-flash"
+}

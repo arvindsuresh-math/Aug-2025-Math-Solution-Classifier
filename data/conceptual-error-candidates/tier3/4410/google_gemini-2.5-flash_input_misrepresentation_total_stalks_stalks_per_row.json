@@ -1,0 +1,63 @@
+{
+  "index": 4410,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "Bob has 5 rows of corn, each with 80 corn stalks, so he has 5 rows * 80 stalks per row = <<5*80=400>>400 corn stalks.",
+    "L2": "8 corn stalks will produce a bushel of corn, so Bob will harvest 400 corn stalks / 8 corn stalks per bushel = <<400/8=50>>50 bushels of corn."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4410.\n    Returns: the total number of bushels of corn Bob will harvest.\n    \"\"\"\n    # L1\n    num_rows = 5 # 5 rows of corn\n    stalks_per_row = 80 # each row has 80 corn stalks\n    total_stalks = num_rows * stalks_per_row\n\n    # L2\n    stalks_per_bushel = 8 # every 8 corn stalks will produce a bushel of corn\n    total_bushels = total_stalks / stalks_per_bushel\n\n    # FA\n    answer = total_bushels\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_stalks",
+    "operand_to_replace": "num_rows",
+    "replacement_variable": "stalks_per_row"
+  },
+  "correct_trace": {
+    "num_rows": 5,
+    "stalks_per_row": 80,
+    "total_stalks": 400,
+    "stalks_per_bushel": 8,
+    "total_bushels": 50.0,
+    "answer": 50.0
+  },
+  "flawed_trace": {
+    "num_rows": 5,
+    "stalks_per_row": 80,
+    "total_stalks": 6400,
+    "stalks_per_bushel": 8,
+    "total_bushels": 800.0,
+    "answer": 800.0
+  },
+  "correct_value": 400,
+  "flawed_value": 6400,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_stalks",
+      "question_inputs": [
+        "num_rows",
+        "stalks_per_row"
+      ],
+      "solution_line_template": "Bob has {num_rows} rows of corn, each with {stalks_per_row} corn stalks, so he has {num_rows} rows * {stalks_per_row} stalks per row = <<{num_rows}*{stalks_per_row}={total_stalks}>>{total_stalks} corn stalks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_bushels",
+      "question_inputs": [
+        "stalks_per_bushel"
+      ],
+      "solution_line_template": "{total_stalks} corn stalks will produce a bushel of corn, so Bob will harvest {total_stalks} corn stalks / {stalks_per_bushel} corn stalks per bushel = <<{total_stalks}/{stalks_per_bushel}={total_bushels}>>{total_bushels} bushels of corn."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Bob has 80 rows of corn, each with 80 corn stalks, so he has 80 rows * 80 stalks per row = <<80*80=6400>>6400 corn stalks.",
+    "L2": "6400 corn stalks will produce a bushel of corn, so Bob will harvest 6400 corn stalks / 8 corn stalks per bushel = <<6400/8=800>>800 bushels of corn.",
+    "FA": "#### 800"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'stalks_per_row' (80) was used instead of 'num_rows' (5).",
+  "repro_seed": 2325970956159803543,
+  "model_name": "google_gemini-2.5-flash"
+}

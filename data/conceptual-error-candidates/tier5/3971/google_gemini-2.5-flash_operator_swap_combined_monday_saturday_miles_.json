@@ -1,0 +1,66 @@
+{
+  "index": 3971,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "Let M be the number of miles Mona biked on Monday.",
+    "L2": "Thus, Mona biked 2M miles on Saturday.",
+    "L3": "In all, Mona biked M + 2M + 12 = 30 miles.",
+    "L4": "Thus, on Monday and Saturday, she biked M + 2M = 3M = 30 - 12 = 18 miles.",
+    "L5": "Therefore, on Monday, Mona biked M = 18 / 3 = <<18/3=6>>6 miles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3971.\n    Returns: the number of miles Mona biked on Monday.\n    \"\"\"\n    # L4\n    total_miles_week = 30 # Mona bikes 30 miles each week\n    miles_wednesday = 12 # On Wednesday, she biked 12 miles\n    combined_monday_saturday_miles = total_miles_week - miles_wednesday\n\n    # L5\n    coefficient_of_M = 3 # WK (from M + 2M = 3M)\n    miles_monday = combined_monday_saturday_miles / coefficient_of_M\n\n    # FA\n    answer = miles_monday\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "combined_monday_saturday_miles",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x31c1224d0>"
+  },
+  "correct_trace": {
+    "total_miles_week": 30,
+    "miles_wednesday": 12,
+    "combined_monday_saturday_miles": 18,
+    "coefficient_of_M": 3,
+    "miles_monday": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "total_miles_week": 30,
+    "miles_wednesday": 12,
+    "combined_monday_saturday_miles": 42,
+    "coefficient_of_M": 3,
+    "miles_monday": 14.0,
+    "answer": 14.0
+  },
+  "correct_value": 18,
+  "flawed_value": 42,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "combined_monday_saturday_miles",
+      "question_inputs": [
+        "total_miles_week",
+        "miles_wednesday"
+      ],
+      "solution_line_template": "Thus, on Monday and Saturday, she biked M + 2M = 3M = {total_miles_week} - {miles_wednesday} = <<{total_miles_week}-{miles_wednesday}={combined_monday_saturday_miles}>>{combined_monday_saturday_miles} miles."
+    },
+    {
+      "WK_inputs": [
+        "coefficient_of_M"
+      ],
+      "line_number": "L5",
+      "output_variable": "miles_monday",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, on Monday, Mona biked M = {combined_monday_saturday_miles} / {coefficient_of_M} = <<{combined_monday_saturday_miles}/{coefficient_of_M}={miles_monday}>>{miles_monday} miles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L4": "Thus, on Monday and Saturday, she biked M + 2M = 3M = 30 - 12 = <<30-12=42>>42 miles.",
+    "L5": "Therefore, on Monday, Mona biked M = 42 / 3 = <<42/3=14>>14 miles.",
+    "FA": "#### 14"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 541614906391377466,
+  "model_name": "google_gemini-2.5-flash"
+}

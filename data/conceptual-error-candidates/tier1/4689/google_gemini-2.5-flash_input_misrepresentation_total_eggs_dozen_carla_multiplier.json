@@ -1,0 +1,74 @@
+{
+  "index": 4689,
+  "original_solution_mapping": {
+    "FA": "#### 26",
+    "L1": "Carla:3(6)=18 dozen eggs",
+    "L2": "Trisha: 6-4=<<6-4=2>>2 dozen eggs",
+    "L3": "Total: 6+18+2=<<6+18+2=26>>26 dozen eggs"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4689.\n    Returns: the total number of dozen eggs collected by the three.\n    \"\"\"\n    # L1\n    benjamin_eggs_dozen = 6 # Benjamin collects 6 dozen eggs a day\n    carla_multiplier = 3 # 3 times the number of eggs that Benjamin collects\n    carla_eggs_dozen = carla_multiplier * benjamin_eggs_dozen\n\n    # L2\n    trisha_less_than_benjamin = 4 # 4 dozen less than Benjamin\n    trisha_eggs_dozen = benjamin_eggs_dozen - trisha_less_than_benjamin\n\n    # L3\n    total_eggs_dozen = benjamin_eggs_dozen + carla_eggs_dozen + trisha_eggs_dozen\n\n    # FA\n    answer = total_eggs_dozen\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_eggs_dozen",
+    "operand_to_replace": "benjamin_eggs_dozen",
+    "replacement_variable": "carla_multiplier"
+  },
+  "correct_trace": {
+    "benjamin_eggs_dozen": 6,
+    "carla_multiplier": 3,
+    "carla_eggs_dozen": 18,
+    "trisha_less_than_benjamin": 4,
+    "trisha_eggs_dozen": 2,
+    "total_eggs_dozen": 26,
+    "answer": 26
+  },
+  "flawed_trace": {
+    "benjamin_eggs_dozen": 6,
+    "carla_multiplier": 3,
+    "carla_eggs_dozen": 18,
+    "trisha_less_than_benjamin": 4,
+    "trisha_eggs_dozen": 2,
+    "total_eggs_dozen": 23,
+    "answer": 23
+  },
+  "correct_value": 26,
+  "flawed_value": 23,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "carla_eggs_dozen",
+      "question_inputs": [
+        "benjamin_eggs_dozen",
+        "carla_multiplier"
+      ],
+      "solution_line_template": "Carla:{carla_multiplier}({benjamin_eggs_dozen})={carla_eggs_dozen} dozen eggs"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "trisha_eggs_dozen",
+      "question_inputs": [
+        "trisha_less_than_benjamin"
+      ],
+      "solution_line_template": "Trisha: {benjamin_eggs_dozen}-{trisha_less_than_benjamin}=<<{benjamin_eggs_dozen}-{trisha_less_than_benjamin}={trisha_eggs_dozen}>>{trisha_eggs_dozen} dozen eggs"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_eggs_dozen",
+      "question_inputs": [],
+      "solution_line_template": "Total: {benjamin_eggs_dozen}+{carla_eggs_dozen}+{trisha_eggs_dozen}=<<{benjamin_eggs_dozen}+{carla_eggs_dozen}+{trisha_eggs_dozen}={total_eggs_dozen}>>{total_eggs_dozen} dozen eggs"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Carla:3(6)=18 dozen eggs",
+    "L2": "Trisha: 6-4=<<6-4=2>>2 dozen eggs",
+    "L3": "Total: 3+18+2=<<3+18+2=23>>23 dozen eggs",
+    "FA": "#### 23"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'carla_multiplier' (3) was used instead of 'benjamin_eggs_dozen' (6).",
+  "repro_seed": 1606714380232040619,
+  "model_name": "google_gemini-2.5-flash"
+}

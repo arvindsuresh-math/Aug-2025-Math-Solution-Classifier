@@ -1,0 +1,100 @@
+{
+  "index": 4424,
+  "original_solution_mapping": {
+    "FA": "#### 136",
+    "L1": "If 40% of the guests are females, then there are 40/100*200 = <<40/100*200=80>>80 female guests at the party.",
+    "L2": "The number of female guests wearing rabbit ears is 80/100* 80=<<80/100*80=64>>64",
+    "L3": "The number of male guests is 200 guests - 80 female guests = <<200-80=120>>120.",
+    "L4": "If 60% of the male guests are wearing rabbit ears, then there are 60/100 *120 = <<60/100*120=72>>72 male guests wearing rabbit ears.",
+    "L5": "The total number of guests wearing rabbit ears is 64+72 = <<64+72=136>>136"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4424.\n    Returns: the total number of people wearing rabbit ears.\n    \"\"\"\n    # L1\n    female_percentage = Fraction(40, 100) # 40% of the guests are women\n    total_guests = 200 # total number of guests at the party is 200\n    female_guests = female_percentage * total_guests\n\n    # L2\n    female_rabbit_ears_percentage = Fraction(80, 100) # 80% of the women are wearing rabbit ears\n    female_rabbit_ears = female_rabbit_ears_percentage * female_guests\n\n    # L3\n    male_guests = total_guests - female_guests\n\n    # L4\n    male_rabbit_ears_percentage = Fraction(60, 100) # 60% of the males are wearing rabbit ears\n    male_rabbit_ears = male_rabbit_ears_percentage * male_guests\n\n    # L5\n    total_rabbit_ears = female_rabbit_ears + male_rabbit_ears\n\n    # FA\n    answer = total_rabbit_ears\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "male_rabbit_ears",
+    "operand_to_replace": "male_guests",
+    "replacement_variable": "male_rabbit_ears_percentage"
+  },
+  "correct_trace": {
+    "female_percentage": "2/5",
+    "total_guests": 200,
+    "female_guests": "80",
+    "female_rabbit_ears_percentage": "4/5",
+    "female_rabbit_ears": "64",
+    "male_guests": "120",
+    "male_rabbit_ears_percentage": "3/5",
+    "male_rabbit_ears": "72",
+    "total_rabbit_ears": "136",
+    "answer": "136"
+  },
+  "flawed_trace": {
+    "female_percentage": "2/5",
+    "total_guests": 200,
+    "female_guests": "80",
+    "female_rabbit_ears_percentage": "4/5",
+    "female_rabbit_ears": "64",
+    "male_guests": "120",
+    "male_rabbit_ears_percentage": "3/5",
+    "male_rabbit_ears": "9/25",
+    "total_rabbit_ears": "1609/25",
+    "answer": "1609/25"
+  },
+  "correct_value": "72",
+  "flawed_value": "9/25",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "female_guests",
+      "question_inputs": [
+        "female_percentage",
+        "total_guests"
+      ],
+      "solution_line_template": "If {female_percentage} of the guests are females, then there are {female_percentage}*{total_guests} = <<{female_percentage}*{total_guests}={female_guests}>>{female_guests} female guests at the party."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "female_rabbit_ears",
+      "question_inputs": [
+        "female_rabbit_ears_percentage"
+      ],
+      "solution_line_template": "The number of female guests wearing rabbit ears is {female_rabbit_ears_percentage}* {female_guests}=<<{female_rabbit_ears_percentage}*{female_guests}={female_rabbit_ears}>>{female_rabbit_ears}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "male_guests",
+      "question_inputs": [],
+      "solution_line_template": "The number of male guests is {total_guests} guests - {female_guests} female guests = <<{total_guests}-{female_guests}={male_guests}>>{male_guests}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "male_rabbit_ears",
+      "question_inputs": [
+        "male_rabbit_ears_percentage"
+      ],
+      "solution_line_template": "If {male_rabbit_ears_percentage} of the male guests are wearing rabbit ears, then there are {male_rabbit_ears_percentage} *{male_guests} = <<{male_rabbit_ears_percentage}*{male_guests}={male_rabbit_ears}>>{male_rabbit_ears} male guests wearing rabbit ears."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_rabbit_ears",
+      "question_inputs": [],
+      "solution_line_template": "The total number of guests wearing rabbit ears is {female_rabbit_ears}+{male_rabbit_ears} = <<{female_rabbit_ears}+{male_rabbit_ears}={total_rabbit_ears}>>{total_rabbit_ears}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If 40/100 of the guests are females, then there are 40/100*200 = <<40/100*200=80>>80 female guests at the party.",
+    "L2": "The number of female guests wearing rabbit ears is 80/100* 80=<<80/100*80=64>>64",
+    "L3": "The number of male guests is 200 guests - 80 female guests = <<200-80=120>>120.",
+    "L4": "If 60/100 of the male guests are wearing rabbit ears, then there are 60/100 *60/100 = <<60/100*60/100=9/25>>9/25 male guests wearing rabbit ears.",
+    "L5": "The total number of guests wearing rabbit ears is 64+9/25 = <<64+9/25=1609/25>>1609/25",
+    "FA": "#### 1609/25"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'male_rabbit_ears_percentage' (value: 60/100) was used instead of 'male_guests' (value: 120).",
+  "repro_seed": 4754584431920966353,
+  "model_name": "google_gemini-2.5-flash"
+}

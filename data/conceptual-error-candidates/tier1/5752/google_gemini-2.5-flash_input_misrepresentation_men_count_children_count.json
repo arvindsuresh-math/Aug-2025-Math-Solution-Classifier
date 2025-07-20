@@ -1,0 +1,74 @@
+{
+  "index": 5752,
+  "original_solution_mapping": {
+    "FA": "#### 300",
+    "L1": "The number of women in the group is 3 women/child * 30 children = <<3*30=90>>90 women.",
+    "L2": "The number of men in the group is 2 men/woman * 90 women = <<2*90=180>>180 men.",
+    "L3": "The total number of people in the group is 180 men + 90 women + 30 children = <<180+90+30=300>>300 people."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5752.\n    Returns: the total number of people in the group.\n    \"\"\"\n    # L1\n    women_per_child_multiplier = 3 # number of women is 3 times the number of children\n    children_count = 30 # number of children is 30\n    women_count = women_per_child_multiplier * children_count\n\n    # L2\n    men_per_woman_multiplier = 2 # number of men is twice the number of women\n    men_count = men_per_woman_multiplier * women_count\n\n    # L3\n    total_people = men_count + women_count + children_count\n\n    # FA\n    answer = total_people\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "men_count",
+    "operand_to_replace": "men_per_woman_multiplier",
+    "replacement_variable": "children_count"
+  },
+  "correct_trace": {
+    "women_per_child_multiplier": 3,
+    "children_count": 30,
+    "women_count": 90,
+    "men_per_woman_multiplier": 2,
+    "men_count": 180,
+    "total_people": 300,
+    "answer": 300
+  },
+  "flawed_trace": {
+    "women_per_child_multiplier": 3,
+    "children_count": 30,
+    "women_count": 90,
+    "men_per_woman_multiplier": 2,
+    "men_count": 2700,
+    "total_people": 2820,
+    "answer": 2820
+  },
+  "correct_value": 180,
+  "flawed_value": 2700,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "women_count",
+      "question_inputs": [
+        "women_per_child_multiplier",
+        "children_count"
+      ],
+      "solution_line_template": "The number of women in the group is {women_per_child_multiplier} women/child * {children_count} children = <<{women_per_child_multiplier}*{children_count}={women_count}>>{women_count} women."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "men_count",
+      "question_inputs": [
+        "men_per_woman_multiplier"
+      ],
+      "solution_line_template": "The number of men in the group is {men_per_woman_multiplier} men/woman * {women_count} women = <<{men_per_woman_multiplier}*{women_count}={men_count}>>{men_count} men."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_people",
+      "question_inputs": [],
+      "solution_line_template": "The total number of people in the group is {men_count} men + {women_count} women + {children_count} children = <<{men_count}+{women_count}+{children_count}={total_people}>>{total_people} people."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The number of women in the group is 3 women/child * 30 children = <<3*30=90>>90 women.",
+    "L2": "The number of men in the group is 30 men/woman * 90 women = <<30*90=2700>>2700 men.",
+    "L3": "The total number of people in the group is 2700 men + 90 women + 30 children = <<2700+90+30=2820>>2820 people.",
+    "FA": "#### 2820"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'children_count' (30) was used instead of 'men_per_woman_multiplier' (2).",
+  "repro_seed": 460471091699220053,
+  "model_name": "google_gemini-2.5-flash"
+}

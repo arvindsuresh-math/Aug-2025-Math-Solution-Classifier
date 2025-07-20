@@ -1,0 +1,89 @@
+{
+  "index": 5985,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "Billy slept 6 hours the first night. He then slept 6+2=<<6+2=8>>8 hours the second night.",
+    "L2": "Billy then slept 8/2=<<8/2=4>>4 hours the third night.",
+    "L3": "Finally, Billy slept 4*3=<<4*3=12>>12 hours the fourth night.",
+    "L4": "In total, Billy slept 6+8+4+12=<<6+8+4+12=30>>30 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5985.\n    Returns: the total hours Billy slept in the four day period.\n    \"\"\"\n    # L1\n    first_night_sleep = 6 # 6 hours one night\n    additional_hours_second_night = 2 # 2 more hours than that\n    second_night_sleep = first_night_sleep + additional_hours_second_night\n\n    # L2\n    half_divisor = 2 # half the previous amount\n    third_night_sleep = second_night_sleep / half_divisor\n\n    # L3\n    triple_multiplier = 3 # triple the previous amount\n    fourth_night_sleep = third_night_sleep * triple_multiplier\n\n    # L4\n    total_sleep = first_night_sleep + second_night_sleep + third_night_sleep + fourth_night_sleep\n\n    # FA\n    answer = total_sleep\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "third_night_sleep",
+    "operand_to_replace": "half_divisor",
+    "replacement_variable": "second_night_sleep"
+  },
+  "correct_trace": {
+    "first_night_sleep": 6,
+    "additional_hours_second_night": 2,
+    "second_night_sleep": 8,
+    "half_divisor": 2,
+    "third_night_sleep": 4.0,
+    "triple_multiplier": 3,
+    "fourth_night_sleep": 12.0,
+    "total_sleep": 30.0,
+    "answer": 30.0
+  },
+  "flawed_trace": {
+    "first_night_sleep": 6,
+    "additional_hours_second_night": 2,
+    "second_night_sleep": 8,
+    "half_divisor": 2,
+    "third_night_sleep": 1.0,
+    "triple_multiplier": 3,
+    "fourth_night_sleep": 3.0,
+    "total_sleep": 18.0,
+    "answer": 18.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "second_night_sleep",
+      "question_inputs": [
+        "first_night_sleep",
+        "additional_hours_second_night"
+      ],
+      "solution_line_template": "Billy slept {first_night_sleep} hours the first night. He then slept {first_night_sleep}+{additional_hours_second_night}=<<{first_night_sleep}+{additional_hours_second_night}={second_night_sleep}>>{second_night_sleep} hours the second night."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "third_night_sleep",
+      "question_inputs": [
+        "half_divisor"
+      ],
+      "solution_line_template": "Billy then slept {second_night_sleep}/{half_divisor}=<<{second_night_sleep}/{half_divisor}={third_night_sleep}>>{third_night_sleep} hours the third night."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "fourth_night_sleep",
+      "question_inputs": [
+        "triple_multiplier"
+      ],
+      "solution_line_template": "Finally, Billy slept {third_night_sleep}*{triple_multiplier}=<<{third_night_sleep}*{triple_multiplier}={fourth_night_sleep}>>{fourth_night_sleep} hours the fourth night."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_sleep",
+      "question_inputs": [],
+      "solution_line_template": "In total, Billy slept {first_night_sleep}+{second_night_sleep}+{third_night_sleep}+{fourth_night_sleep}=<<{first_night_sleep}+{second_night_sleep}+{third_night_sleep}+{fourth_night_sleep}={total_sleep}>>{total_sleep} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Billy slept 6 hours the first night. He then slept 6+2=<<6+2=8>>8 hours the second night.",
+    "L2": "Billy then slept 8/8=<<8/8=1>>1 hours the third night.",
+    "L3": "Finally, Billy slept 1*3=<<1*3=3>>3 hours the fourth night.",
+    "L4": "In total, Billy slept 6+8+1+3=<<6+8+1+3=18>>18 hours.",
+    "FA": "#### 18"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'second_night_sleep' (8) was used instead of 'half_divisor' (2).",
+  "repro_seed": 2965478088970290966,
+  "model_name": "google_gemini-2.5-flash"
+}

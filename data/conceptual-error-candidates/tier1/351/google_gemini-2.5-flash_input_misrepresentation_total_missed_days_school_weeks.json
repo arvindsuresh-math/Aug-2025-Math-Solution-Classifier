@@ -1,0 +1,77 @@
+{
+  "index": 351,
+  "original_solution_mapping": {
+    "FA": "#### 69",
+    "L1": "36 weeks of school x 2 days of the week = <<36*2=72>>72 days of school",
+    "L2": "1 Wednesday + 2 Fridays = <<1+2=3>>3 days of school missed",
+    "L3": "72 days of school - 3 days of school missed = <<72-3=69>>69 peanut butter and jelly sandwiches eaten"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 351.\n    Returns: the total number of peanut butter and jelly sandwiches eaten.\n    \"\"\"\n    # L1\n    school_weeks = 36 # 36 weeks of school\n    pbj_days_per_week = 2 # Wednesdays and Fridays\n    potential_pbj_days = school_weeks * pbj_days_per_week\n\n    # L2\n    missed_wednesdays = 1 # missed 1 Wednesday\n    missed_fridays = 2 # missed 2 Fridays\n    total_missed_days = missed_wednesdays + missed_fridays\n\n    # L3\n    sandwiches_eaten = potential_pbj_days - total_missed_days\n\n    # FA\n    answer = sandwiches_eaten\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_missed_days",
+    "operand_to_replace": "missed_wednesdays",
+    "replacement_variable": "school_weeks"
+  },
+  "correct_trace": {
+    "school_weeks": 36,
+    "pbj_days_per_week": 2,
+    "potential_pbj_days": 72,
+    "missed_wednesdays": 1,
+    "missed_fridays": 2,
+    "total_missed_days": 3,
+    "sandwiches_eaten": 69,
+    "answer": 69
+  },
+  "flawed_trace": {
+    "school_weeks": 36,
+    "pbj_days_per_week": 2,
+    "potential_pbj_days": 72,
+    "missed_wednesdays": 1,
+    "missed_fridays": 2,
+    "total_missed_days": 38,
+    "sandwiches_eaten": 34,
+    "answer": 34
+  },
+  "correct_value": 3,
+  "flawed_value": 38,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "school_weeks",
+        "pbj_days_per_week"
+      ],
+      "WK_inputs": [],
+      "output_variable": "potential_pbj_days",
+      "solution_line_template": "{school_weeks} weeks of school x {pbj_days_per_week} days of the week = <<{school_weeks}*{pbj_days_per_week}={potential_pbj_days}>>{potential_pbj_days} days of school"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "missed_wednesdays",
+        "missed_fridays"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_missed_days",
+      "solution_line_template": "{missed_wednesdays} Wednesday + {missed_fridays} Fridays = <<{missed_wednesdays}+{missed_fridays}={total_missed_days}>>{total_missed_days} days of school missed"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "sandwiches_eaten",
+      "solution_line_template": "{potential_pbj_days} days of school \u2013 {total_missed_days} days of school missed = <<{potential_pbj_days}-{total_missed_days}={sandwiches_eaten}>>{sandwiches_eaten} peanut butter and jelly sandwiches eaten"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "36 weeks of school x 2 days of the week = <<36*2=72>>72 days of school",
+    "L2": "36 Wednesday + 2 Fridays = <<36+2=38>>38 days of school missed",
+    "L3": "72 days of school \u2013 38 days of school missed = <<72-38=34>>34 peanut butter and jelly sandwiches eaten",
+    "FA": "#### 34"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'school_weeks' (36) was used instead of 'missed_wednesdays' (1).",
+  "repro_seed": -9151711352130435005,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 7149,
+  "original_solution_mapping": {
+    "FA": "#### 28",
+    "L1": "She buys Wednesday, Thursday and Friday's paper for $0.50 each so that's 3*.50 = $<<3*.50=1.50>>1.50",
+    "L2": "She spends $1.50 for the weekday papers and $2.00 for the Sunday paper for a total of 1.5+2 = $<<1.5+2=3.50>>3.50 a week",
+    "L3": "Over 8 weeks she spends 8*3.5 = $<<8*3.5=28.00>>28.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7149.\n    Returns: the total amount spent on the newspaper over 8 weeks.\n    \"\"\"\n    # L1\n    num_weekday_papers = 3 # Wednesday, Thursday and Friday editions\n    cost_weekday_paper = 0.50 # $0.50 each\n    cost_weekday_papers_weekly = num_weekday_papers * cost_weekday_paper\n\n    # L2\n    cost_sunday_paper = 2.00 # $2.00 to get that copy\n    total_weekly_cost = cost_weekday_papers_weekly + cost_sunday_paper\n\n    # L3\n    num_weeks = 8 # over 8 weeks\n    total_cost_8_weeks = num_weeks * total_weekly_cost\n\n    # FA\n    answer = total_cost_8_weeks\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_weekly_cost",
+    "operand_to_replace": "cost_sunday_paper",
+    "replacement_variable": "cost_weekday_paper"
+  },
+  "correct_trace": {
+    "num_weekday_papers": 3,
+    "cost_weekday_paper": 0.5,
+    "cost_weekday_papers_weekly": 1.5,
+    "cost_sunday_paper": 2.0,
+    "total_weekly_cost": 3.5,
+    "num_weeks": 8,
+    "total_cost_8_weeks": 28.0,
+    "answer": 28.0
+  },
+  "flawed_trace": {
+    "num_weekday_papers": 3,
+    "cost_weekday_paper": 0.5,
+    "cost_weekday_papers_weekly": 1.5,
+    "cost_sunday_paper": 2.0,
+    "total_weekly_cost": 2.0,
+    "num_weeks": 8,
+    "total_cost_8_weeks": 16.0,
+    "answer": 16.0
+  },
+  "correct_value": 3.5,
+  "flawed_value": 2.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_weekday_papers_weekly",
+      "question_inputs": [
+        "num_weekday_papers",
+        "cost_weekday_paper"
+      ],
+      "solution_line_template": "She buys Wednesday, Thursday and Friday's paper for ${cost_weekday_paper} each so that's {num_weekday_papers}*{cost_weekday_paper} = $<<{num_weekday_papers}*{cost_weekday_paper}={cost_weekday_papers_weekly}>>{cost_weekday_papers_weekly}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_weekly_cost",
+      "question_inputs": [
+        "cost_sunday_paper"
+      ],
+      "solution_line_template": "She spends ${cost_weekday_papers_weekly} for the weekday papers and ${cost_sunday_paper} for the Sunday paper for a total of {cost_weekday_papers_weekly}+{cost_sunday_paper} = $<<{cost_weekday_papers_weekly}+{cost_sunday_paper}={total_weekly_cost}>>{total_weekly_cost} a week"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost_8_weeks",
+      "question_inputs": [
+        "num_weeks"
+      ],
+      "solution_line_template": "Over {num_weeks} weeks she spends {num_weeks}*{total_weekly_cost} = $<<{num_weeks}*{total_weekly_cost}={total_cost_8_weeks}>>{total_cost_8_weeks}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She buys Wednesday, Thursday and Friday's paper for $0.5 each so that's 3*0.5 = $<<3*0.5=1.5>>1.5",
+    "L2": "She spends $1.5 for the weekday papers and $0.5 for the Sunday paper for a total of 1.5+0.5 = $<<1.5+0.5=2>>2 a week",
+    "L3": "Over 8 weeks she spends 8*2 = $<<8*2=16>>16",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'cost_weekday_paper' (0.5) was used instead of 'cost_sunday_paper' (2.0).",
+  "repro_seed": 3809889949518434200,
+  "model_name": "google_gemini-2.5-flash"
+}

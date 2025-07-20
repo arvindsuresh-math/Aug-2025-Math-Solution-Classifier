@@ -1,0 +1,82 @@
+{
+  "index": 7300,
+  "original_solution_mapping": {
+    "FA": "#### 160",
+    "L1": "April has 30 days, so if he didn't walk the dog on Sundays, he worked for a total of 30 days - 4 days = <<30-4=26>>26 days.",
+    "L2": "If each day he earned $10, he ends up with 26 days * $10/day = $<<26*10=260>>260 .",
+    "L3": "After buying books and giving his sister $50, he ends up with $260 - $50 - $50 = $<<260-50-50=160>>160"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7300.\n    Returns: the amount of money John had left.\n    \"\"\"\n    # L1\n    days_in_april = 30 # WK\n    sundays_in_april = 4 # save for the 4 Sundays in April\n    days_worked = days_in_april - sundays_in_april\n\n    # L2\n    earnings_per_day = 10 # total of $10\n    total_earnings = days_worked * earnings_per_day\n\n    # L3\n    cost_of_books = 50 # spent $50 on books\n    given_to_kaylee = 50 # gave his sister Kaylee the same amount\n    money_left = total_earnings - cost_of_books - given_to_kaylee\n\n    # FA\n    answer = money_left\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_earnings",
+    "operand_to_replace": "earnings_per_day",
+    "replacement_variable": "sundays_in_april"
+  },
+  "correct_trace": {
+    "days_in_april": 30,
+    "sundays_in_april": 4,
+    "days_worked": 26,
+    "earnings_per_day": 10,
+    "total_earnings": 260,
+    "cost_of_books": 50,
+    "given_to_kaylee": 50,
+    "money_left": 160,
+    "answer": 160
+  },
+  "flawed_trace": {
+    "days_in_april": 30,
+    "sundays_in_april": 4,
+    "days_worked": 26,
+    "earnings_per_day": 10,
+    "total_earnings": 104,
+    "cost_of_books": 50,
+    "given_to_kaylee": 50,
+    "money_left": 4,
+    "answer": 4
+  },
+  "correct_value": 260,
+  "flawed_value": 104,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "days_in_april"
+      ],
+      "line_number": "L1",
+      "output_variable": "days_worked",
+      "question_inputs": [
+        "sundays_in_april"
+      ],
+      "solution_line_template": "April has {days_in_april} days, so if he didn't walk the dog on Sundays, he worked for a total of {days_in_april} days - {sundays_in_april} days = <<{days_in_april}-{sundays_in_april}={days_worked}>>{days_worked} days."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_earnings",
+      "question_inputs": [
+        "earnings_per_day"
+      ],
+      "solution_line_template": "If each day he earned ${earnings_per_day}, he ends up with {days_worked} days * ${earnings_per_day}/day = $<<{days_worked}*{earnings_per_day}={total_earnings}>>{total_earnings} ."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "money_left",
+      "question_inputs": [
+        "cost_of_books",
+        "given_to_kaylee"
+      ],
+      "solution_line_template": "After buying books and giving his sister ${given_to_kaylee}, he ends up with ${total_earnings} - ${cost_of_books} - ${given_to_kaylee} = $<<{total_earnings}-{cost_of_books}-{given_to_kaylee}={money_left}>>{money_left}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "April has 30 days, so if he didn't walk the dog on Sundays, he worked for a total of 30 days - 4 days = <<30-4=26>>26 days.",
+    "L2": "If each day he earned $4, he ends up with 26 days * $4/day = $<<26*4=104>>104 .",
+    "L3": "After buying books and giving his sister $50, he ends up with $104 - $50 - $50 = $<<104-50-50=4>>4",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'sundays_in_april' (4) was used instead of 'earnings_per_day' (10).",
+  "repro_seed": 1752914768099011636,
+  "model_name": "google_gemini-2.5-flash"
+}

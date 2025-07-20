@@ -1,0 +1,74 @@
+{
+  "index": 1077,
+  "original_solution_mapping": {
+    "FA": "#### 25",
+    "L1": "Louie got 100% - 80% = 20% of the total items incorrect, which is equal to 5 items.",
+    "L2": "So 1% is equal to 5/20 = 1/4 of an item.",
+    "L3": "Hence, the total number of items, represented by 100%, on the math quiz was 1/4 of an item x 100 = <<1/4*100=25>>25."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1077.\n    Returns: the total number of items on the math quiz.\n    \"\"\"\n    # L1\n    total_percentage = 100 # WK\n    score_percentage = 80 # Louie obtained 80% on a math quiz\n    mistakes = 5 # He had 5 mistakes\n    incorrect_percentage = total_percentage - score_percentage\n\n    # L2\n    items_per_percent = mistakes / incorrect_percentage\n\n    # L3\n    total_items = items_per_percent * total_percentage\n\n    # FA\n    answer = total_items\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_items",
+    "operand_to_replace": "items_per_percent",
+    "replacement_variable": "total_percentage"
+  },
+  "correct_trace": {
+    "total_percentage": 100,
+    "score_percentage": 80,
+    "mistakes": 5,
+    "incorrect_percentage": 20,
+    "items_per_percent": 0.25,
+    "total_items": 25.0,
+    "answer": 25.0
+  },
+  "flawed_trace": {
+    "total_percentage": 100,
+    "score_percentage": 80,
+    "mistakes": 5,
+    "incorrect_percentage": 20,
+    "items_per_percent": 0.25,
+    "total_items": 10000,
+    "answer": 10000
+  },
+  "correct_value": 25.0,
+  "flawed_value": 10000,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_percentage"
+      ],
+      "line_number": "L1",
+      "output_variable": "incorrect_percentage",
+      "question_inputs": [
+        "score_percentage",
+        "mistakes"
+      ],
+      "solution_line_template": "Louie got {total_percentage}% - {score_percentage}% = {incorrect_percentage}% of the total items incorrect, which is equal to {mistakes} items."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "items_per_percent",
+      "question_inputs": [],
+      "solution_line_template": "So 1% is equal to {mistakes}/{incorrect_percentage} = {items_per_percent} of an item."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_items",
+      "question_inputs": [],
+      "solution_line_template": "Hence, the total number of items, represented by 100%, on the math quiz was {items_per_percent} of an item x {total_percentage} = <<{items_per_percent}*{total_percentage}={total_items}>>{total_items}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Louie got 100% - 80% = 20% of the total items incorrect, which is equal to 5 items.",
+    "L2": "So 1% is equal to 5/20 = 0.25 of an item.",
+    "L3": "Hence, the total number of items, represented by 100%, on the math quiz was 100 of an item x 100 = <<100*100=10000>>10000.",
+    "FA": "#### 10000"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'total_percentage' (value: 100) was used instead of 'items_per_percent' (value: 0.25).",
+  "repro_seed": 6994090401663993344,
+  "model_name": "google_gemini-2.5-flash"
+}

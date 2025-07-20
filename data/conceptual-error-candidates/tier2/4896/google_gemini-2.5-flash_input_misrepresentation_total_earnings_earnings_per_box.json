@@ -1,0 +1,78 @@
+{
+  "index": 4896,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "Grover will earn $0.50 x 20 = $<<0.50*20=10>>10 for each box.",
+    "L2": "So, he will earn $10 x 3 = $<<10*3=30>>30 after selling all the face masks.",
+    "L3": "Therefore, his total profit will be $30 - $15 = $<<30-15=15>>15."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4896.\n    Returns: Grover's total profit from selling face masks.\n    \"\"\"\n    # L1\n    price_per_mask = 0.50 # $0.50 each\n    masks_per_box = 20 # each box has 20 face masks\n    earnings_per_box = price_per_mask * masks_per_box\n\n    # L2\n    num_boxes = 3 # 3 boxes of face masks\n    total_earnings = earnings_per_box * num_boxes\n\n    # L3\n    cost_of_boxes = 15 # bought the 3 boxes for $15\n    total_profit = total_earnings - cost_of_boxes\n\n    # FA\n    answer = total_profit\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_earnings",
+    "operand_to_replace": "num_boxes",
+    "replacement_variable": "earnings_per_box"
+  },
+  "correct_trace": {
+    "price_per_mask": 0.5,
+    "masks_per_box": 20,
+    "earnings_per_box": 10.0,
+    "num_boxes": 3,
+    "total_earnings": 30.0,
+    "cost_of_boxes": 15,
+    "total_profit": 15.0,
+    "answer": 15.0
+  },
+  "flawed_trace": {
+    "price_per_mask": 0.5,
+    "masks_per_box": 20,
+    "earnings_per_box": 10.0,
+    "num_boxes": 3,
+    "total_earnings": 100.0,
+    "cost_of_boxes": 15,
+    "total_profit": 85.0,
+    "answer": 85.0
+  },
+  "correct_value": 30.0,
+  "flawed_value": 100.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "earnings_per_box",
+      "question_inputs": [
+        "price_per_mask",
+        "masks_per_box"
+      ],
+      "solution_line_template": "Grover will earn ${price_per_mask} x {masks_per_box} = $<<{price_per_mask}*{masks_per_box}={earnings_per_box}>>{earnings_per_box} for each box."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_earnings",
+      "question_inputs": [
+        "num_boxes"
+      ],
+      "solution_line_template": "So, he will earn ${earnings_per_box} x {num_boxes} = $<<{earnings_per_box}*{num_boxes}={total_earnings}>>{total_earnings} after selling all the face masks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_profit",
+      "question_inputs": [
+        "cost_of_boxes"
+      ],
+      "solution_line_template": "Therefore, his total profit will be ${total_earnings} - ${cost_of_boxes} = $<<{total_earnings}-{cost_of_boxes}={total_profit}>>{total_profit}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Grover will earn $0.5 x 20 = $<<0.5*20=10>>10 for each box.",
+    "L2": "So, he will earn $10 x 10 = $<<10*10=100>>100 after selling all the face masks.",
+    "L3": "Therefore, his total profit will be $100 - $15 = $<<100-15=85>>85.",
+    "FA": "#### 85"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'earnings_per_box' (10.0) was used instead of 'num_boxes' (3).",
+  "repro_seed": 2478038496596103063,
+  "model_name": "google_gemini-2.5-flash"
+}

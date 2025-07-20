@@ -1,0 +1,63 @@
+{
+  "index": 6675,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "Each shirt cost 20*.5=$<<20*.5=10>>10 with the sale",
+    "L2": "So he paid 10*6=$<<10*6=60>>60"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6675.\n    Returns: the total amount James paid for the t-shirts.\n    \"\"\"\n    # L1\n    original_shirt_cost = 20 # They each cost $20\n    discount_percent = 0.5 # 50% off\n    cost_per_shirt_after_sale = original_shirt_cost * discount_percent\n\n    # L2\n    num_tshirts = 6 # 6 t-shirts\n    total_paid = cost_per_shirt_after_sale * num_tshirts\n\n    # FA\n    answer = total_paid\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "cost_per_shirt_after_sale",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x3165f7590>"
+  },
+  "correct_trace": {
+    "original_shirt_cost": 20,
+    "discount_percent": 0.5,
+    "cost_per_shirt_after_sale": 10.0,
+    "num_tshirts": 6,
+    "total_paid": 60.0,
+    "answer": 60.0
+  },
+  "flawed_trace": {
+    "original_shirt_cost": 20,
+    "discount_percent": 0.5,
+    "cost_per_shirt_after_sale": 40.0,
+    "num_tshirts": 6,
+    "total_paid": 240.0,
+    "answer": 240.0
+  },
+  "correct_value": 10.0,
+  "flawed_value": 40.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_per_shirt_after_sale",
+      "question_inputs": [
+        "original_shirt_cost",
+        "discount_percent"
+      ],
+      "solution_line_template": "Each shirt cost {original_shirt_cost}*{discount_percent}=$<<{original_shirt_cost}*{discount_percent}={cost_per_shirt_after_sale}>>{cost_per_shirt_after_sale} with the sale"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_paid",
+      "question_inputs": [
+        "num_tshirts"
+      ],
+      "solution_line_template": "So he paid {cost_per_shirt_after_sale}*{num_tshirts}=$<<{cost_per_shirt_after_sale}*{num_tshirts}={total_paid}>>{total_paid}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each shirt cost 20*0.5=$<<20*0.5=40>>40 with the sale",
+    "L2": "So he paid 40*6=$<<40*6=240>>240",
+    "FA": "#### 240"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -899794444124398908,
+  "model_name": "google_gemini-2.5-flash"
+}

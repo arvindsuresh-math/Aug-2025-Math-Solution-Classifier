@@ -1,0 +1,89 @@
+{
+  "index": 6788,
+  "original_solution_mapping": {
+    "FA": "#### 78",
+    "L1": "Roberta's bag costs $45 - $17 = $<<45-17=28>>28.",
+    "L2": "Roberta spend $28 / 4 = $<<28/4=7>>7 on lunch.",
+    "L3": "Roberta spend 45 + 28 + 7 = <<45+28+7=80>>80 in total.",
+    "L4": "Roberta has $158 - 80 = $<<158-80=78>>78 left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6788.\n    Returns: the amount of money Roberta has left after purchases.\n    \"\"\"\n    # L1\n    shoes_cost = 45 # spends $45 on new shoes\n    bag_discount = 17 # $17 less on a new bag\n    bag_cost = shoes_cost - bag_discount\n\n    # L2\n    lunch_divisor = 4 # a quarter of the price of the bag\n    lunch_cost = bag_cost / lunch_divisor\n\n    # L3\n    total_spent = shoes_cost + bag_cost + lunch_cost\n\n    # L4\n    initial_money = 158 # takes $158 with her\n    money_left = initial_money - total_spent\n\n    # FA\n    answer = money_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_spent",
+    "operand_to_replace": "bag_cost",
+    "replacement_variable": "lunch_cost"
+  },
+  "correct_trace": {
+    "shoes_cost": 45,
+    "bag_discount": 17,
+    "bag_cost": 28,
+    "lunch_divisor": 4,
+    "lunch_cost": 7.0,
+    "total_spent": 80.0,
+    "initial_money": 158,
+    "money_left": 78.0,
+    "answer": 78.0
+  },
+  "flawed_trace": {
+    "shoes_cost": 45,
+    "bag_discount": 17,
+    "bag_cost": 28,
+    "lunch_divisor": 4,
+    "lunch_cost": 7.0,
+    "total_spent": 59.0,
+    "initial_money": 158,
+    "money_left": 99.0,
+    "answer": 99.0
+  },
+  "correct_value": 80.0,
+  "flawed_value": 59.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "bag_cost",
+      "question_inputs": [
+        "shoes_cost",
+        "bag_discount"
+      ],
+      "solution_line_template": "Roberta's bag costs ${shoes_cost} - ${bag_discount} = $<<{shoes_cost}-{bag_discount}={bag_cost}>>{bag_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "lunch_cost",
+      "question_inputs": [
+        "lunch_divisor"
+      ],
+      "solution_line_template": "Roberta spend ${bag_cost} / {lunch_divisor} = $<<{bag_cost}/{lunch_divisor}={lunch_cost}>>{lunch_cost} on lunch."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_spent",
+      "question_inputs": [],
+      "solution_line_template": "Roberta spend {shoes_cost} + {bag_cost} + {lunch_cost} = <<{shoes_cost}+{bag_cost}+{lunch_cost}={total_spent}>>{total_spent} in total."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "money_left",
+      "question_inputs": [
+        "initial_money"
+      ],
+      "solution_line_template": "Roberta has ${initial_money} - {total_spent} = $<<{initial_money}-{total_spent}={money_left}>>{money_left} left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Roberta's bag costs $45 - $17 = $<<45-17=28>>28.",
+    "L2": "Roberta spend $28 / 4 = $<<28/4=7>>7 on lunch.",
+    "L3": "Roberta spend 45 + 7 + 7 = <<45+7+7=59>>59 in total.",
+    "L4": "Roberta has $158 - 59 = $<<158-59=99>>99 left.",
+    "FA": "#### 99"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'lunch_cost' (value: 7.0) was used instead of 'bag_cost' (value: 28).",
+  "repro_seed": -4320604394955171713,
+  "model_name": "google_gemini-2.5-flash"
+}

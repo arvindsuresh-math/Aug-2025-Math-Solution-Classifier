@@ -1,0 +1,81 @@
+{
+  "index": 2062,
+  "original_solution_mapping": {
+    "FA": "#### 27",
+    "L1": "She has 120 minutes to practice because 2 x 60 = <<2*60=120>>120",
+    "L2": "She has already spent 93 minutes on her work because 30 + 25 + 38 = <<30+25+38=93>>93",
+    "L3": "She has 27 minutes to use on finger exercise because 120-93 = <<120-93=27>>27"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2062.\n    Returns: the time Joan has left to use the special finger exerciser.\n    \"\"\"\n    # L1\n    total_hours = 2 # 2 hours to get all her music practice done\n    minutes_per_hour = 60 # WK\n    total_minutes_available = total_hours * minutes_per_hour\n\n    # L2\n    piano_time = 30 # 30 minutes on the piano\n    writing_music_time = 25 # 25 minutes writing music on her computer\n    reading_history_time = 38 # 38 minutes reading about the history of the piano\n    total_minutes_spent = piano_time + writing_music_time + reading_history_time\n\n    # L3\n    remaining_time = total_minutes_available - total_minutes_spent\n\n    # FA\n    answer = remaining_time\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_minutes_spent",
+    "operand_to_replace": "piano_time",
+    "replacement_variable": "reading_history_time"
+  },
+  "correct_trace": {
+    "total_hours": 2,
+    "minutes_per_hour": 60,
+    "total_minutes_available": 120,
+    "piano_time": 30,
+    "writing_music_time": 25,
+    "reading_history_time": 38,
+    "total_minutes_spent": 93,
+    "remaining_time": 27,
+    "answer": 27
+  },
+  "flawed_trace": {
+    "total_hours": 2,
+    "minutes_per_hour": 60,
+    "total_minutes_available": 120,
+    "piano_time": 30,
+    "writing_music_time": 25,
+    "reading_history_time": 38,
+    "total_minutes_spent": 101,
+    "remaining_time": 19,
+    "answer": 19
+  },
+  "correct_value": 93,
+  "flawed_value": 101,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "total_hours"
+      ],
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "output_variable": "total_minutes_available",
+      "solution_line_template": "She has {total_minutes_available} minutes to practice because {total_hours} x {minutes_per_hour} = <<{total_hours}*{minutes_per_hour}={total_minutes_available}>>{total_minutes_available}"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "piano_time",
+        "writing_music_time",
+        "reading_history_time"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_minutes_spent",
+      "solution_line_template": "She has already spent {total_minutes_spent} minutes on her work because {piano_time} + {writing_music_time} + {reading_history_time} = <<{piano_time}+{writing_music_time}+{reading_history_time}={total_minutes_spent}>>{total_minutes_spent}"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "remaining_time",
+      "solution_line_template": "She has {remaining_time} minutes to use on finger exercise because {total_minutes_available}-{total_minutes_spent} = <<{total_minutes_available}-{total_minutes_spent}={remaining_time}>>{remaining_time}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She has 120 minutes to practice because 2 x 60 = <<2*60=120>>120",
+    "L2": "She has already spent 101 minutes on her work because 38 + 25 + 38 = <<38+25+38=101>>101",
+    "L3": "She has 19 minutes to use on finger exercise because 120-101 = <<120-101=19>>19",
+    "FA": "#### 19"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'reading_history_time' (38) was used instead of 'piano_time' (30).",
+  "repro_seed": 7762399941932957606,
+  "model_name": "google_gemini-2.5-flash"
+}

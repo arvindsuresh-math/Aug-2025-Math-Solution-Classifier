@@ -1,0 +1,107 @@
+{
+  "index": 639,
+  "original_solution_mapping": {
+    "FA": "#### 80",
+    "L1": "The 15 families own 15x2=<<15*2=30>>30 dogs.",
+    "L2": "The 20 families own 20x1=<<20*1=20>>20 dogs.",
+    "L3": "There are 50-15-20=<<50-15-20=15>>15 cat owners.",
+    "L4": "The remaining families own 15x2=<<15*2=30>>30 cats.",
+    "L5": "There are 30+20+30=<<30+20+30=80>>80 dogs and cats in the village."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 639.\n    Returns: the total number of dogs and cats in the community.\n    \"\"\"\n    # L1\n    families_2_dogs = 15 # 15 families own 2 dogs\n    dogs_per_family_2_dogs = 2 # 2 dogs\n    dogs_from_2_dog_families = families_2_dogs * dogs_per_family_2_dogs\n\n    # L2\n    families_1_dog = 20 # 20 families own 1 dog\n    dogs_per_family_1_dog = 1 # 1 dog\n    dogs_from_1_dog_families = families_1_dog * dogs_per_family_1_dog\n\n    # L3\n    total_families = 50 # 50 families\n    cat_owners = total_families - families_2_dogs - families_1_dog\n\n    # L4\n    cats_per_family_remaining = 2 # 2 cats each\n    total_cats = cat_owners * cats_per_family_remaining\n\n    # L5\n    total_animals = dogs_from_2_dog_families + dogs_from_1_dog_families + total_cats\n\n    # FA\n    answer = total_animals\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "dogs_from_2_dog_families",
+    "operand_to_replace": "families_2_dogs",
+    "replacement_variable": "dogs_per_family_2_dogs"
+  },
+  "correct_trace": {
+    "families_2_dogs": 15,
+    "dogs_per_family_2_dogs": 2,
+    "dogs_from_2_dog_families": 30,
+    "families_1_dog": 20,
+    "dogs_per_family_1_dog": 1,
+    "dogs_from_1_dog_families": 20,
+    "total_families": 50,
+    "cat_owners": 15,
+    "cats_per_family_remaining": 2,
+    "total_cats": 30,
+    "total_animals": 80,
+    "answer": 80
+  },
+  "flawed_trace": {
+    "families_2_dogs": 15,
+    "dogs_per_family_2_dogs": 2,
+    "dogs_from_2_dog_families": 4,
+    "families_1_dog": 20,
+    "dogs_per_family_1_dog": 1,
+    "dogs_from_1_dog_families": 20,
+    "total_families": 50,
+    "cat_owners": 15,
+    "cats_per_family_remaining": 2,
+    "total_cats": 30,
+    "total_animals": 54,
+    "answer": 54
+  },
+  "correct_value": 30,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "families_2_dogs",
+        "dogs_per_family_2_dogs"
+      ],
+      "WK_inputs": [],
+      "output_variable": "dogs_from_2_dog_families",
+      "solution_line_template": "The {families_2_dogs} families own {families_2_dogs}x{dogs_per_family_2_dogs}=<<{families_2_dogs}*{dogs_per_family_2_dogs}={dogs_from_2_dog_families}>>{dogs_from_2_dog_families} dogs."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "families_1_dog",
+        "dogs_per_family_1_dog"
+      ],
+      "WK_inputs": [],
+      "output_variable": "dogs_from_1_dog_families",
+      "solution_line_template": "The {families_1_dog} families own {families_1_dog}x{dogs_per_family_1_dog}=<<{families_1_dog}*{dogs_per_family_1_dog}={dogs_from_1_dog_families}>>{dogs_from_1_dog_families} dogs."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "total_families"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cat_owners",
+      "solution_line_template": "There are {total_families}-{families_2_dogs}-{families_1_dog}=<<{total_families}-{families_2_dogs}-{families_1_dog}={cat_owners}>>{cat_owners} cat owners."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "cats_per_family_remaining"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_cats",
+      "solution_line_template": "The remaining families own {cat_owners}x{cats_per_family_remaining}=<<{cat_owners}*{cats_per_family_remaining}={total_cats}>>{total_cats} cats."
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_animals",
+      "solution_line_template": "There are {dogs_from_2_dog_families}+{dogs_from_1_dog_families}+{total_cats}=<<{dogs_from_2_dog_families}+{dogs_from_1_dog_families}+{total_cats}={total_animals}>>{total_animals} dogs and cats in the village."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The 2 families own 2x2=<<2*2=4>>4 dogs.",
+    "L2": "The 20 families own 20x1=<<20*1=20>>20 dogs.",
+    "L3": "There are 50-15-20=<<50-15-20=15>>15 cat owners.",
+    "L4": "The remaining families own 15x2=<<15*2=30>>30 cats.",
+    "L5": "There are 4+20+30=<<4+20+30=54>>54 dogs and cats in the village.",
+    "FA": "#### 54"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'dogs_per_family_2_dogs' (2) was used instead of 'families_2_dogs' (15).",
+  "repro_seed": 420437292445611867,
+  "model_name": "google_gemini-2.5-flash"
+}

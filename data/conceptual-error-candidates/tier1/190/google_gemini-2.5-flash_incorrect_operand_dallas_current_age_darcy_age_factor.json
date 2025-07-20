@@ -1,0 +1,90 @@
+{
+  "index": 190,
+  "original_solution_mapping": {
+    "FA": "#### 46",
+    "L1": "Darcy = 2*Dexter = 2*8 = 16",
+    "L2": "Last year Darcy was 16 - 1 = <<16-1=15>>15",
+    "L3": "Dallas was 3 times Darcy last year = 3*15 = <<3*15=45>>45",
+    "L4": "Dallas is a year older now = 45 + 1 = <<45+1=46>>46",
+    "L5": "Dallas is 46 years old now."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 190.\n    Returns: Dallas's current age.\n    \"\"\"\n    # L1\n    dexter_current_age = 8 # Dexter who is 8 right now\n    darcy_age_factor = 2 # Darcy is twice as old as Dexter\n    darcy_current_age = darcy_age_factor * dexter_current_age\n\n    # L2\n    years_passed = 1 # WK\n    darcy_age_last_year = darcy_current_age - years_passed\n\n    # L3\n    dallas_age_factor = 3 # Dallas was 3 times the age of his sister Darcy\n    dallas_age_last_year = dallas_age_factor * darcy_age_last_year\n\n    # L4\n    dallas_current_age = dallas_age_last_year + years_passed\n\n    # FA\n    answer = dallas_current_age\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "dallas_current_age",
+    "operand_to_replace": "dallas_age_last_year",
+    "replacement_variable": "darcy_age_factor"
+  },
+  "correct_trace": {
+    "dexter_current_age": 8,
+    "darcy_age_factor": 2,
+    "darcy_current_age": 16,
+    "years_passed": 1,
+    "darcy_age_last_year": 15,
+    "dallas_age_factor": 3,
+    "dallas_age_last_year": 45,
+    "dallas_current_age": 46,
+    "answer": 46
+  },
+  "flawed_trace": {
+    "dexter_current_age": 8,
+    "darcy_age_factor": 2,
+    "darcy_current_age": 16,
+    "years_passed": 1,
+    "darcy_age_last_year": 15,
+    "dallas_age_factor": 3,
+    "dallas_age_last_year": 45,
+    "dallas_current_age": 3,
+    "answer": 3
+  },
+  "correct_value": 46,
+  "flawed_value": 3,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "dexter_current_age",
+        "darcy_age_factor"
+      ],
+      "WK_inputs": [],
+      "output_variable": "darcy_current_age",
+      "solution_line_template": "Darcy = {darcy_age_factor}*{dexter_current_age} = {darcy_age_factor}*{dexter_current_age} = {darcy_current_age}"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [
+        "years_passed"
+      ],
+      "output_variable": "darcy_age_last_year",
+      "solution_line_template": "Last year Darcy was {darcy_current_age} - {years_passed} = <<{darcy_current_age}-{years_passed}={darcy_age_last_year}>>{darcy_age_last_year}"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "dallas_age_factor"
+      ],
+      "WK_inputs": [],
+      "output_variable": "dallas_age_last_year",
+      "solution_line_template": "Dallas was {dallas_age_factor} times Darcy last year = {dallas_age_factor}*{darcy_age_last_year} = <<{dallas_age_factor}*{darcy_age_last_year}={dallas_age_last_year}>>{dallas_age_last_year}"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "dallas_current_age",
+      "solution_line_template": "Dallas is a year older now = {dallas_age_last_year} + {years_passed} = <<{dallas_age_last_year}+{years_passed}={dallas_current_age}>>{dallas_current_age}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Darcy = 2*8 = 2*8 = 16",
+    "L2": "Last year Darcy was 16 - 1 = <<16-1=15>>15",
+    "L3": "Dallas was 3 times Darcy last year = 3*15 = <<3*15=45>>45",
+    "L4": "Dallas is a year older now = 2 + 1 = <<2+1=3>>3",
+    "FA": "#### 3"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'darcy_age_factor' (value: 2) was used instead of 'dallas_age_last_year' (value: 45).",
+  "repro_seed": -6463349192598105054,
+  "model_name": "google_gemini-2.5-flash"
+}

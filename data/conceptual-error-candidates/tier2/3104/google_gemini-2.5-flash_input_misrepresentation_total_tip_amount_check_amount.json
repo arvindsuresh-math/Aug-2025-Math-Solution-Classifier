@@ -1,0 +1,67 @@
+{
+  "index": 3104,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "First find the total tip amount: 20% * $200 = $<<20*.01*200=40>>40",
+    "L2": "Then subtract the friend's contribution: $40 - $10 = $<<40-10=30>>30"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3104.\n    Returns: the amount Mark should add for the tip.\n    \"\"\"\n    # L1\n    tip_percentage_num = 20 # 20%\n    check_amount = 200 # $200 check\n    percent_factor = 0.01 # WK\n    total_tip_amount = tip_percentage_num * percent_factor * check_amount\n\n    # L2\n    friend_contribution = 10 # kick in $10\n    mark_contribution = total_tip_amount - friend_contribution\n\n    # FA\n    answer = mark_contribution\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_tip_amount",
+    "operand_to_replace": "percent_factor",
+    "replacement_variable": "check_amount"
+  },
+  "correct_trace": {
+    "tip_percentage_num": 20,
+    "check_amount": 200,
+    "percent_factor": 0.01,
+    "total_tip_amount": 40.0,
+    "friend_contribution": 10,
+    "mark_contribution": 30.0,
+    "answer": 30.0
+  },
+  "flawed_trace": {
+    "tip_percentage_num": 20,
+    "check_amount": 200,
+    "percent_factor": 0.01,
+    "total_tip_amount": 800000,
+    "friend_contribution": 10,
+    "mark_contribution": 799990,
+    "answer": 799990
+  },
+  "correct_value": 40.0,
+  "flawed_value": 800000,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_tip_amount",
+      "question_inputs": [
+        "tip_percentage_num",
+        "check_amount"
+      ],
+      "solution_line_template": "First find the total tip amount: {tip_percentage_num}% * ${check_amount} = $<<{tip_percentage_num}*{percent_factor}*{check_amount}={total_tip_amount}>>{total_tip_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "mark_contribution",
+      "question_inputs": [
+        "friend_contribution"
+      ],
+      "solution_line_template": "Then subtract the friend's contribution: ${total_tip_amount} - ${friend_contribution} = $<<{total_tip_amount}-{friend_contribution}={mark_contribution}>>{mark_contribution}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total tip amount: 20% * $200 = $<<20*200*200=800000>>800000",
+    "L2": "Then subtract the friend's contribution: $800000 - $10 = $<<800000-10=799990>>799990",
+    "FA": "#### 799990"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'check_amount' (200) was used instead of 'percent_factor' (0.01).",
+  "repro_seed": -8791514158407000448,
+  "model_name": "google_gemini-2.5-flash"
+}

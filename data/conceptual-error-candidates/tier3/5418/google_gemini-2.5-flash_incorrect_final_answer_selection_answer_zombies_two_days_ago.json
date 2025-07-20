@@ -1,0 +1,86 @@
+{
+  "index": 5418,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "First find how many zombies there were one day ago: 480 zombies / 2 = <<480/2=240>>240 zombies",
+    "L2": "Then find how many zombies there were two days ago: 240 zombies / 2 = <<240/2=120>>120 zombies",
+    "L3": "Then find the number of zombies there were three days ago: 120 zombies / 2 = <<120/2=60>>60 zombies",
+    "L4": "Then find the number of zombies there were four days ago: 60 zombies / 2 = <<60/2=30>>30 zombies, which is less than 50, so there were less than 50 zombies 4 days ago."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5418.\n    Returns: the number of days ago there were less than 50 zombies.\n    \"\"\"\n    # L1\n    current_zombies = 480 # 480 zombies in the shopping mall\n    doubling_factor = 2 # doubled every day\n    zombies_one_day_ago = current_zombies / doubling_factor\n\n    # L2\n    zombies_two_days_ago = zombies_one_day_ago / doubling_factor\n\n    # L3\n    zombies_three_days_ago = zombies_two_days_ago / doubling_factor\n\n    # L4\n    threshold_zombies = 50 # less than 50 zombies\n    days_count = 4 # 4 days ago\n    zombies_four_days_ago = zombies_three_days_ago / doubling_factor\n\n    # FA\n    answer = days_count\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "days_count",
+    "replacement_variable": "zombies_two_days_ago"
+  },
+  "correct_trace": {
+    "current_zombies": 480,
+    "doubling_factor": 2,
+    "zombies_one_day_ago": 240.0,
+    "zombies_two_days_ago": 120.0,
+    "zombies_three_days_ago": 60.0,
+    "threshold_zombies": 50,
+    "days_count": 4,
+    "zombies_four_days_ago": 30.0,
+    "answer": 4
+  },
+  "flawed_trace": {
+    "current_zombies": 480,
+    "doubling_factor": 2,
+    "zombies_one_day_ago": 240.0,
+    "zombies_two_days_ago": 120.0,
+    "zombies_three_days_ago": 60.0,
+    "threshold_zombies": 50,
+    "days_count": 4,
+    "zombies_four_days_ago": 30.0,
+    "answer": 120.0
+  },
+  "correct_value": 4,
+  "flawed_value": 120.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "zombies_one_day_ago",
+      "question_inputs": [
+        "current_zombies",
+        "doubling_factor"
+      ],
+      "solution_line_template": "First find how many zombies there were one day ago: {current_zombies} zombies / {doubling_factor} = <<{current_zombies}/{doubling_factor}={zombies_one_day_ago}>>{zombies_one_day_ago} zombies"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "zombies_two_days_ago",
+      "question_inputs": [],
+      "solution_line_template": "Then find how many zombies there were two days ago: {zombies_one_day_ago} zombies / {doubling_factor} = <<{zombies_one_day_ago}/{doubling_factor}={zombies_two_days_ago}>>{zombies_two_days_ago} zombies"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "zombies_three_days_ago",
+      "question_inputs": [],
+      "solution_line_template": "Then find the number of zombies there were three days ago: {zombies_two_days_ago} zombies / {doubling_factor} = <<{zombies_two_days_ago}/{doubling_factor}={zombies_three_days_ago}>>{zombies_three_days_ago} zombies"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "zombies_four_days_ago",
+      "question_inputs": [
+        "threshold_zombies",
+        "days_count"
+      ],
+      "solution_line_template": "Then find the number of zombies there were {days_count} days ago: {zombies_three_days_ago} zombies / {doubling_factor} = <<{zombies_three_days_ago}/{doubling_factor}={zombies_four_days_ago}>>{zombies_four_days_ago} zombies, which is less than {threshold_zombies}, so there were less than {threshold_zombies} zombies {days_count} days ago."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how many zombies there were one day ago: 480 zombies / 2 = <<480/2=240>>240 zombies",
+    "L2": "Then find how many zombies there were two days ago: 240 zombies / 2 = <<240/2=120>>120 zombies",
+    "FA": "#### 120"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'zombies_two_days_ago' (value: 120.0) was reported instead of 'days_count' (value: 4).",
+  "repro_seed": -2058622623273383250,
+  "model_name": "google_gemini-2.5-flash"
+}

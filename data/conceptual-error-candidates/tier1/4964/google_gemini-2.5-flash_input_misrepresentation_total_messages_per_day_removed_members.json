@@ -1,0 +1,78 @@
+{
+  "index": 4964,
+  "original_solution_mapping": {
+    "FA": "#### 45500",
+    "L1": "If there were 150 members in the group before the admin removed 20, then 150-20 = <<150-20=130>>130 members remained after 20 were removed.",
+    "L2": "The group members each posted 50 messages in a day, a total of 50*130 = <<50*130=6500>>6500 messages.",
+    "L3": "In a week, with seven days, the group members would have posted 6500*7 = <<6500*7=45500>>45500 messages"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4964.\n    Returns: the total number of messages the remaining members would send in a week.\n    \"\"\"\n    # L1\n    initial_members = 150 # number of members in the group was 150 before the admin removed some\n    removed_members = 20 # 20 members of a Facebook group were removed\n    remaining_members = initial_members - removed_members\n\n    # L2\n    messages_per_member_per_day = 50 # each member posted 50 messages per day\n    total_messages_per_day = messages_per_member_per_day * remaining_members\n\n    # L3\n    days_in_week = 7 # WK\n    total_messages_per_week = total_messages_per_day * days_in_week\n\n    # FA\n    answer = total_messages_per_week\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_messages_per_day",
+    "operand_to_replace": "messages_per_member_per_day",
+    "replacement_variable": "removed_members"
+  },
+  "correct_trace": {
+    "initial_members": 150,
+    "removed_members": 20,
+    "remaining_members": 130,
+    "messages_per_member_per_day": 50,
+    "total_messages_per_day": 6500,
+    "days_in_week": 7,
+    "total_messages_per_week": 45500,
+    "answer": 45500
+  },
+  "flawed_trace": {
+    "initial_members": 150,
+    "removed_members": 20,
+    "remaining_members": 130,
+    "messages_per_member_per_day": 50,
+    "total_messages_per_day": 2600,
+    "days_in_week": 7,
+    "total_messages_per_week": 18200,
+    "answer": 18200
+  },
+  "correct_value": 6500,
+  "flawed_value": 2600,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "remaining_members",
+      "question_inputs": [
+        "initial_members",
+        "removed_members"
+      ],
+      "solution_line_template": "If there were {initial_members} members in the group before the admin removed {removed_members}, then {initial_members}-{removed_members} = <<{initial_members}-{removed_members}={remaining_members}>>{remaining_members} members remained after {removed_members} were removed."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_messages_per_day",
+      "question_inputs": [
+        "messages_per_member_per_day"
+      ],
+      "solution_line_template": "The group members each posted {messages_per_member_per_day} messages in a day, a total of {messages_per_member_per_day}*{remaining_members} = <<{messages_per_member_per_day}*{remaining_members}={total_messages_per_day}>>{total_messages_per_day} messages."
+    },
+    {
+      "WK_inputs": [
+        "days_in_week"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_messages_per_week",
+      "question_inputs": [],
+      "solution_line_template": "In a week, with seven days, the group members would have posted {total_messages_per_day}*{days_in_week} = <<{total_messages_per_day}*{days_in_week}={total_messages_per_week}>>{total_messages_per_week} messages"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If there were 150 members in the group before the admin removed 20, then 150-20 = <<150-20=130>>130 members remained after 20 were removed.",
+    "L2": "The group members each posted 20 messages in a day, a total of 20*130 = <<20*130=2600>>2600 messages.",
+    "L3": "In a week, with seven days, the group members would have posted 2600*7 = <<2600*7=18200>>18200 messages",
+    "FA": "#### 18200"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'removed_members' (20) was used instead of 'messages_per_member_per_day' (50).",
+  "repro_seed": -1020758367743027897,
+  "model_name": "google_gemini-2.5-flash"
+}

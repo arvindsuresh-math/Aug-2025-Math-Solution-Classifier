@@ -1,0 +1,118 @@
+{
+  "index": 3703,
+  "original_solution_mapping": {
+    "FA": "#### 1440",
+    "L1": "First find the total number of gates someone has to pass through: 12 floors / 3 floors/gate = <<12/3=4>>4 gates",
+    "L2": "Then find the total time someone spends waiting at the gates: 4 gates * 2 minutes/gate = <<4*2=8>>8 minutes",
+    "L3": "Then convert that time to seconds: 8 minutes * 60 seconds/minute = <<8*60=480>>480 seconds",
+    "L4": "Then find the time to drive through one floor in seconds: 800 feet / 10 feet/second = <<800/10=80>>80 seconds",
+    "L5": "Then multiply the time per floor by the number of floors to find the total driving time: 80 seconds/floor * 12 floors = 960 seconds",
+    "L6": "Then add the total driving time to the total time waiting at the gates to find the total time to get to the bottom: 960 seconds + 480 seconds = <<960+480=1440>>1440 seconds"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3703.\n    Returns: the total time in seconds to get to the bottom of the garage from the top.\n    \"\"\"\n    # L1\n    total_floors = 12 # 12 floors\n    floors_per_gate = 3 # Every 3rd floor has a gate\n    num_gates = total_floors / floors_per_gate\n\n    # L2\n    time_per_gate_minutes = 2 # takes two minutes\n    total_wait_time_minutes = num_gates * time_per_gate_minutes\n\n    # L3\n    seconds_per_minute = 60 # WK\n    total_wait_time_seconds = total_wait_time_minutes * seconds_per_minute\n\n    # L4\n    distance_per_floor_feet = 800 # drive 800 feet\n    speed_feet_per_second = 10 # at 10 feet/second\n    time_per_floor_seconds = distance_per_floor_feet / speed_feet_per_second\n\n    # L5\n    total_driving_time_seconds = time_per_floor_seconds * total_floors\n\n    # L6\n    total_time_to_bottom_seconds = total_driving_time_seconds + total_wait_time_seconds\n\n    # FA\n    answer = total_time_to_bottom_seconds\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "time_per_floor_seconds",
+    "operand_to_replace": "distance_per_floor_feet",
+    "replacement_variable": "speed_feet_per_second"
+  },
+  "correct_trace": {
+    "total_floors": 12,
+    "floors_per_gate": 3,
+    "num_gates": 4.0,
+    "time_per_gate_minutes": 2,
+    "total_wait_time_minutes": 8.0,
+    "seconds_per_minute": 60,
+    "total_wait_time_seconds": 480.0,
+    "distance_per_floor_feet": 800,
+    "speed_feet_per_second": 10,
+    "time_per_floor_seconds": 80.0,
+    "total_driving_time_seconds": 960.0,
+    "total_time_to_bottom_seconds": 1440.0,
+    "answer": 1440.0
+  },
+  "flawed_trace": {
+    "total_floors": 12,
+    "floors_per_gate": 3,
+    "num_gates": 4.0,
+    "time_per_gate_minutes": 2,
+    "total_wait_time_minutes": 8.0,
+    "seconds_per_minute": 60,
+    "total_wait_time_seconds": 480.0,
+    "distance_per_floor_feet": 800,
+    "speed_feet_per_second": 10,
+    "time_per_floor_seconds": 1.0,
+    "total_driving_time_seconds": 12.0,
+    "total_time_to_bottom_seconds": 492.0,
+    "answer": 492.0
+  },
+  "correct_value": 80.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "num_gates",
+      "question_inputs": [
+        "total_floors",
+        "floors_per_gate"
+      ],
+      "solution_line_template": "First find the total number of gates someone has to pass through: {total_floors} floors / {floors_per_gate} floors/gate = <<{total_floors}/{floors_per_gate}={num_gates}>>{num_gates} gates"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_wait_time_minutes",
+      "question_inputs": [
+        "time_per_gate_minutes"
+      ],
+      "solution_line_template": "Then find the total time someone spends waiting at the gates: {num_gates} gates * {time_per_gate_minutes} minutes/gate = <<{num_gates}*{time_per_gate_minutes}={total_wait_time_minutes}>>{total_wait_time_minutes} minutes"
+    },
+    {
+      "WK_inputs": [
+        "seconds_per_minute"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_wait_time_seconds",
+      "question_inputs": [],
+      "solution_line_template": "Then convert that time to seconds: {total_wait_time_minutes} minutes * {seconds_per_minute} seconds/minute = <<{total_wait_time_minutes}*{seconds_per_minute}={total_wait_time_seconds}>>{total_wait_time_seconds} seconds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "time_per_floor_seconds",
+      "question_inputs": [
+        "distance_per_floor_feet",
+        "speed_feet_per_second"
+      ],
+      "solution_line_template": "Then find the time to drive through one floor in seconds: {distance_per_floor_feet} feet / {speed_feet_per_second} feet/second = <<{distance_per_floor_feet}/{speed_feet_per_second}={time_per_floor_seconds}>>{time_per_floor_seconds} seconds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_driving_time_seconds",
+      "question_inputs": [],
+      "solution_line_template": "Then multiply the time per floor by the number of floors to find the total driving time: {time_per_floor_seconds} seconds/floor * {total_floors} floors = {total_driving_time_seconds} seconds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_time_to_bottom_seconds",
+      "question_inputs": [],
+      "solution_line_template": "Then add the total driving time to the total time waiting at the gates to find the total time to get to the bottom: {total_driving_time_seconds} seconds + {total_wait_time_seconds} seconds = <<{total_driving_time_seconds}+{total_wait_time_seconds}={total_time_to_bottom_seconds}>>{total_time_to_bottom_seconds} seconds"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total number of gates someone has to pass through: 12 floors / 3 floors/gate = <<12/3=4>>4 gates",
+    "L2": "Then find the total time someone spends waiting at the gates: 4 gates * 2 minutes/gate = <<4*2=8>>8 minutes",
+    "L3": "Then convert that time to seconds: 8 minutes * 60 seconds/minute = <<8*60=480>>480 seconds",
+    "L4": "Then find the time to drive through one floor in seconds: 10 feet / 10 feet/second = <<10/10=1>>1 seconds",
+    "L5": "Then multiply the time per floor by the number of floors to find the total driving time: 1 seconds/floor * 12 floors = 12 seconds",
+    "L6": "Then add the total driving time to the total time waiting at the gates to find the total time to get to the bottom: 12 seconds + 480 seconds = <<12+480=492>>492 seconds",
+    "FA": "#### 492"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'speed_feet_per_second' (10) was used instead of 'distance_per_floor_feet' (800).",
+  "repro_seed": -6957818442807551217,
+  "model_name": "google_gemini-2.5-flash"
+}

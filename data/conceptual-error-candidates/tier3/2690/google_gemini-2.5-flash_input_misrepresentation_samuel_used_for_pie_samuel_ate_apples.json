@@ -1,0 +1,89 @@
+{
+  "index": 2690,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "Samuel bought 20+8 = <<20+8=28>>28 apples.",
+    "L2": "Samuel ate 28/2 = <<28/2=14>>14 apples.",
+    "L3": "Samuel used 28/7 = <<28/7=4>>4 to make apple pie.",
+    "L4": "Samuel has 28-14-4 = <<28-14-4=10>>10 apples left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2690.\n    Returns: the number of apples Samuel has left.\n    \"\"\"\n    # L1\n    more_apples_than_bonnie = 20 # Samuel bought 20 more apples than Bonnie\n    bonnie_apples = 8 # Bonnie bought 8 apples\n    samuel_bought_apples = more_apples_than_bonnie + bonnie_apples\n\n    # L2\n    ate_divisor = 2 # Samuel then ate half of them\n    samuel_ate_apples = samuel_bought_apples / ate_divisor\n\n    # L3\n    pie_divisor = 7 # used 1/7 of them to make apple pie\n    samuel_used_for_pie = samuel_bought_apples / pie_divisor\n\n    # L4\n    samuel_apples_left = samuel_bought_apples - samuel_ate_apples - samuel_used_for_pie\n\n    # FA\n    answer = samuel_apples_left\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "samuel_used_for_pie",
+    "operand_to_replace": "pie_divisor",
+    "replacement_variable": "samuel_ate_apples"
+  },
+  "correct_trace": {
+    "more_apples_than_bonnie": 20,
+    "bonnie_apples": 8,
+    "samuel_bought_apples": 28,
+    "ate_divisor": 2,
+    "samuel_ate_apples": 14.0,
+    "pie_divisor": 7,
+    "samuel_used_for_pie": 4.0,
+    "samuel_apples_left": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "more_apples_than_bonnie": 20,
+    "bonnie_apples": 8,
+    "samuel_bought_apples": 28,
+    "ate_divisor": 2,
+    "samuel_ate_apples": 14.0,
+    "pie_divisor": 7,
+    "samuel_used_for_pie": 2.0,
+    "samuel_apples_left": 12.0,
+    "answer": 12.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 2.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "samuel_bought_apples",
+      "question_inputs": [
+        "more_apples_than_bonnie",
+        "bonnie_apples"
+      ],
+      "solution_line_template": "Samuel bought {more_apples_than_bonnie}+{bonnie_apples} = <<{more_apples_than_bonnie}+{bonnie_apples}={samuel_bought_apples}>>{samuel_bought_apples} apples."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "samuel_ate_apples",
+      "question_inputs": [
+        "ate_divisor"
+      ],
+      "solution_line_template": "Samuel ate {samuel_bought_apples}/{ate_divisor} = <<{samuel_bought_apples}/{ate_divisor}={samuel_ate_apples}>>{samuel_ate_apples} apples."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "samuel_used_for_pie",
+      "question_inputs": [
+        "pie_divisor"
+      ],
+      "solution_line_template": "Samuel used {samuel_bought_apples}/{pie_divisor} = <<{samuel_bought_apples}/{pie_divisor}={samuel_used_for_pie}>>{samuel_used_for_pie} to make apple pie."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "samuel_apples_left",
+      "question_inputs": [],
+      "solution_line_template": "Samuel has {samuel_bought_apples}-{samuel_ate_apples}-{samuel_used_for_pie} = <<{samuel_bought_apples}-{samuel_ate_apples}-{samuel_used_for_pie}={samuel_apples_left}>>{samuel_apples_left} apples left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Samuel bought 20+8 = <<20+8=28>>28 apples.",
+    "L2": "Samuel ate 28/2 = <<28/2=14>>14 apples.",
+    "L3": "Samuel used 28/14 = <<28/14=2>>2 to make apple pie.",
+    "L4": "Samuel has 28-14-2 = <<28-14-2=12>>12 apples left.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'samuel_ate_apples' (14.0) was used instead of 'pie_divisor' (7).",
+  "repro_seed": 5207446526986184579,
+  "model_name": "google_gemini-2.5-flash"
+}

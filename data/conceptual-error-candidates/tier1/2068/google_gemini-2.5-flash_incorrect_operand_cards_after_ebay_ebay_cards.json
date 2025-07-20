@@ -1,0 +1,93 @@
+{
+  "index": 2068,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "Janessa starts with 4 cards + 13 cards = <<4+13=17>>17 cards.",
+    "L2": "She adds 17 cards + 36 cards = <<17+36=53>>53 cards from the eBay purchase.",
+    "L3": "Janessa decides to throw away 53 cards - 4 cards = <<53-4=49>>49 cards due to damage.",
+    "L4": "After giving Dexter the present we know that Janessa kept 49 cards - 29 cards = <<49-29=20>>20 cards for herself."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2068.\n    Returns: the number of cards Janessa kept for herself.\n    \"\"\"\n    # L1\n    initial_cards_janessa = 4 # currently has 4 cards\n    cards_from_father = 13 # 13 that her father gave her\n    cards_before_ebay = initial_cards_janessa + cards_from_father\n\n    # L2\n    ebay_cards = 36 # ordered a collection of 36 cards from eBay\n    cards_after_ebay = cards_before_ebay + ebay_cards\n\n    # L3\n    damaged_cards = 4 # found 4 cards are in bad shape and decides to throw them away\n    cards_after_damage = cards_after_ebay - damaged_cards\n\n    # L4\n    cards_given_to_dexter = 29 # Janessa ended up giving Dexter 29 cards\n    cards_kept_by_janessa = cards_after_damage - cards_given_to_dexter\n\n    # FA\n    answer = cards_kept_by_janessa\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "cards_after_ebay",
+    "operand_to_replace": "cards_before_ebay",
+    "replacement_variable": "ebay_cards"
+  },
+  "correct_trace": {
+    "initial_cards_janessa": 4,
+    "cards_from_father": 13,
+    "cards_before_ebay": 17,
+    "ebay_cards": 36,
+    "cards_after_ebay": 53,
+    "damaged_cards": 4,
+    "cards_after_damage": 49,
+    "cards_given_to_dexter": 29,
+    "cards_kept_by_janessa": 20,
+    "answer": 20
+  },
+  "flawed_trace": {
+    "initial_cards_janessa": 4,
+    "cards_from_father": 13,
+    "cards_before_ebay": 17,
+    "ebay_cards": 36,
+    "cards_after_ebay": 72,
+    "damaged_cards": 4,
+    "cards_after_damage": 68,
+    "cards_given_to_dexter": 29,
+    "cards_kept_by_janessa": 39,
+    "answer": 39
+  },
+  "correct_value": 53,
+  "flawed_value": 72,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "initial_cards_janessa",
+        "cards_from_father"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cards_before_ebay",
+      "solution_line_template": "Janessa starts with {initial_cards_janessa} cards + {cards_from_father} cards = <<{initial_cards_janessa}+{cards_from_father}={cards_before_ebay}>>{cards_before_ebay} cards."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "ebay_cards"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cards_after_ebay",
+      "solution_line_template": "She adds {cards_before_ebay} cards + {ebay_cards} cards = <<{cards_before_ebay}+{ebay_cards}={cards_after_ebay}>>{cards_after_ebay} cards from the eBay purchase."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "damaged_cards"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cards_after_damage",
+      "solution_line_template": "Janessa decides to throw away {cards_after_ebay} cards - {damaged_cards} cards = <<{cards_after_ebay}-{damaged_cards}={cards_after_damage}>>{cards_after_damage} cards due to damage."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "cards_given_to_dexter"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cards_kept_by_janessa",
+      "solution_line_template": "After giving Dexter the present we know that Janessa kept {cards_after_damage} cards - {cards_given_to_dexter} cards = <<{cards_after_damage}-{cards_given_to_dexter}={cards_kept_by_janessa}>>{cards_kept_by_janessa} cards for herself."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Janessa starts with 4 cards + 13 cards = <<4+13=17>>17 cards.",
+    "L2": "She adds 36 cards + 36 cards = <<36+36=72>>72 cards from the eBay purchase.",
+    "L3": "Janessa decides to throw away 72 cards - 4 cards = <<72-4=68>>68 cards due to damage.",
+    "L4": "After giving Dexter the present we know that Janessa kept 68 cards - 29 cards = <<68-29=39>>39 cards for herself.",
+    "FA": "#### 39"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'ebay_cards' (value: 36) was used instead of 'cards_before_ebay' (value: 17).",
+  "repro_seed": 3307231391544816188,
+  "model_name": "google_gemini-2.5-flash"
+}

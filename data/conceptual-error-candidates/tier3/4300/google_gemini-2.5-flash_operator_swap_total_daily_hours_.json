@@ -1,0 +1,63 @@
+{
+  "index": 4300,
+  "original_solution_mapping": {
+    "FA": "#### 100",
+    "L1": "Every day, in addition to her 10-hour work schedule, Anie needs 5 extra hours, which means she works 10+5= <<10+5=15>>15 hours each day.",
+    "L2": "If the project is estimated to take 1500 hours, Anie will need to work for 1500/15 = <<1500/15=100>>100 days to complete the project."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4300.\n    Returns: the number of days it would take Anie to finish the job.\n    \"\"\"\n    # L1\n    normal_work_hours = 10 # her work schedule requires her to be productive for 10 hours\n    extra_hours = 5 # needs 5 hours extra\n    total_daily_hours = normal_work_hours + extra_hours\n\n    # L2\n    project_total_hours = 1500 # project is estimated to take 1500 hours\n    days_to_finish = project_total_hours / total_daily_hours\n\n    # FA\n    answer = days_to_finish\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_daily_hours",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x3123e4a90>"
+  },
+  "correct_trace": {
+    "normal_work_hours": 10,
+    "extra_hours": 5,
+    "total_daily_hours": 15,
+    "project_total_hours": 1500,
+    "days_to_finish": 100.0,
+    "answer": 100.0
+  },
+  "flawed_trace": {
+    "normal_work_hours": 10,
+    "extra_hours": 5,
+    "total_daily_hours": 5,
+    "project_total_hours": 1500,
+    "days_to_finish": 300.0,
+    "answer": 300.0
+  },
+  "correct_value": 15,
+  "flawed_value": 5,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_daily_hours",
+      "question_inputs": [
+        "normal_work_hours",
+        "extra_hours"
+      ],
+      "solution_line_template": "Every day, in addition to her {normal_work_hours}-hour work schedule, Anie needs {extra_hours} extra hours, which means she works {normal_work_hours}+{extra_hours}= <<{normal_work_hours}+{extra_hours}={total_daily_hours}>>{total_daily_hours} hours each day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "days_to_finish",
+      "question_inputs": [
+        "project_total_hours"
+      ],
+      "solution_line_template": "If the project is estimated to take {project_total_hours} hours, Anie will need to work for {project_total_hours}/{total_daily_hours} = <<{project_total_hours}/{total_daily_hours}={days_to_finish}>>{days_to_finish} days to complete the project."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Every day, in addition to her 10-hour work schedule, Anie needs 5 extra hours, which means she works 10+5= <<10+5=5>>5 hours each day.",
+    "L2": "If the project is estimated to take 1500 hours, Anie will need to work for 1500/5 = <<1500/5=300>>300 days to complete the project.",
+    "FA": "#### 300"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": 6419535709134886099,
+  "model_name": "google_gemini-2.5-flash"
+}

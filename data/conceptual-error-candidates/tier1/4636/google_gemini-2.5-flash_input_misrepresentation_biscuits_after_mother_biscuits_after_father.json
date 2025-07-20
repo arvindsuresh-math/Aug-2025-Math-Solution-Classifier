@@ -1,0 +1,78 @@
+{
+  "index": 4636,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "After his father gave him 13 biscuits, Randy has 32 + 13 = <<32+13=45>>45 biscuits.",
+    "L2": "After his mother gave him 15 biscuits, Randy has 45 + 15 = <<45+15=60>>60 biscuits.",
+    "L3": "After his brother ate 20 of the biscuits. Randy has 60 - 20 = <<60-20=40>>40 biscuits."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4636.\n    Returns: the number of biscuits Randy is left with.\n    \"\"\"\n    # L1\n    randy_initial_biscuits = 32 # Randy had 32 biscuits\n    father_gift = 13 # His father gave him 13 biscuits\n    biscuits_after_father = randy_initial_biscuits + father_gift\n\n    # L2\n    mother_gift = 15 # His mother gave him 15 biscuits\n    biscuits_after_mother = biscuits_after_father + mother_gift\n\n    # L3\n    brother_ate = 20 # Randy\u2019s brother ate 20 of these biscuits\n    biscuits_remaining = biscuits_after_mother - brother_ate\n\n    # FA\n    answer = biscuits_remaining\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "biscuits_after_mother",
+    "operand_to_replace": "mother_gift",
+    "replacement_variable": "biscuits_after_father"
+  },
+  "correct_trace": {
+    "randy_initial_biscuits": 32,
+    "father_gift": 13,
+    "biscuits_after_father": 45,
+    "mother_gift": 15,
+    "biscuits_after_mother": 60,
+    "brother_ate": 20,
+    "biscuits_remaining": 40,
+    "answer": 40
+  },
+  "flawed_trace": {
+    "randy_initial_biscuits": 32,
+    "father_gift": 13,
+    "biscuits_after_father": 45,
+    "mother_gift": 15,
+    "biscuits_after_mother": 90,
+    "brother_ate": 20,
+    "biscuits_remaining": 70,
+    "answer": 70
+  },
+  "correct_value": 60,
+  "flawed_value": 90,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "biscuits_after_father",
+      "question_inputs": [
+        "randy_initial_biscuits",
+        "father_gift"
+      ],
+      "solution_line_template": "After his father gave him {father_gift} biscuits, Randy has {randy_initial_biscuits} + {father_gift} = <<{randy_initial_biscuits}+{father_gift}={biscuits_after_father}>>{biscuits_after_father} biscuits."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "biscuits_after_mother",
+      "question_inputs": [
+        "mother_gift"
+      ],
+      "solution_line_template": "After his mother gave him {mother_gift} biscuits, Randy has {biscuits_after_father} + {mother_gift} = <<{biscuits_after_father}+{mother_gift}={biscuits_after_mother}>>{biscuits_after_mother} biscuits."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "biscuits_remaining",
+      "question_inputs": [
+        "brother_ate"
+      ],
+      "solution_line_template": "After his brother ate {brother_ate} of the biscuits. Randy has {biscuits_after_mother} - {brother_ate} = <<{biscuits_after_mother}-{brother_ate}={biscuits_remaining}>>{biscuits_remaining} biscuits."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After his father gave him 13 biscuits, Randy has 32 + 13 = <<32+13=45>>45 biscuits.",
+    "L2": "After his mother gave him 45 biscuits, Randy has 45 + 45 = <<45+45=90>>90 biscuits.",
+    "L3": "After his brother ate 20 of the biscuits. Randy has 90 - 20 = <<90-20=70>>70 biscuits.",
+    "FA": "#### 70"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'biscuits_after_father' (45) was used instead of 'mother_gift' (15).",
+  "repro_seed": -2625836114447675136,
+  "model_name": "google_gemini-2.5-flash"
+}

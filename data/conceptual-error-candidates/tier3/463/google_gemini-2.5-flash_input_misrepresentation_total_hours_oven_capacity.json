@@ -1,0 +1,120 @@
+{
+  "index": 463,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "Camilla needs 12/3 = <<12/3=4>>4 batches of pizza dough.",
+    "L2": "4 batches of pizza would require 30 x 4 = <<4*30=120>>120 minutes",
+    "L3": "Camilla needs to bake the pizzas 12/2 = <<12/2=6>>6 times",
+    "L4": "6 times in the oven would take 30 x 6 =<<6*30=180>>180 minutes",
+    "L5": "Altogether, it would take 120 + 180 = <<120+180=300>>300 minutes to finish making 12 pizzas",
+    "L6": "300 minutes is 300/60 = <<300/60=5>>5 hours"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 463.\n    Returns: the total time in hours to make 12 pizzas.\n    \"\"\"\n    # L1\n    total_pizzas_needed = 12 # how many hours would it take for Camilla to finish making 12 pizzas\n    pizzas_per_dough_batch = 3 # one batch of pizza dough can make 3 pizzas\n    dough_batches_needed = total_pizzas_needed / pizzas_per_dough_batch\n\n    # L2\n    dough_making_time_per_batch = 30 # It takes 30 minutes to make pizza dough\n    total_dough_making_time = dough_making_time_per_batch * dough_batches_needed\n\n    # L3\n    oven_capacity = 2 # the oven can only fit 2 pizzas at a time\n    oven_baking_times = total_pizzas_needed / oven_capacity\n\n    # L4\n    oven_cook_time_per_batch = 30 # another 30 minutes in the oven for the pizza to cook\n    total_oven_baking_time = oven_cook_time_per_batch * oven_baking_times\n\n    # L5\n    total_minutes = total_dough_making_time + total_oven_baking_time\n\n    # L6\n    minutes_per_hour = 60 # WK\n    total_hours = total_minutes / minutes_per_hour\n\n    # FA\n    answer = total_hours\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_hours",
+    "operand_to_replace": "minutes_per_hour",
+    "replacement_variable": "oven_capacity"
+  },
+  "correct_trace": {
+    "total_pizzas_needed": 12,
+    "pizzas_per_dough_batch": 3,
+    "dough_batches_needed": 4.0,
+    "dough_making_time_per_batch": 30,
+    "total_dough_making_time": 120.0,
+    "oven_capacity": 2,
+    "oven_baking_times": 6.0,
+    "oven_cook_time_per_batch": 30,
+    "total_oven_baking_time": 180.0,
+    "total_minutes": 300.0,
+    "minutes_per_hour": 60,
+    "total_hours": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "total_pizzas_needed": 12,
+    "pizzas_per_dough_batch": 3,
+    "dough_batches_needed": 4.0,
+    "dough_making_time_per_batch": 30,
+    "total_dough_making_time": 120.0,
+    "oven_capacity": 2,
+    "oven_baking_times": 6.0,
+    "oven_cook_time_per_batch": 30,
+    "total_oven_baking_time": 180.0,
+    "total_minutes": 300.0,
+    "minutes_per_hour": 60,
+    "total_hours": 150.0,
+    "answer": 150.0
+  },
+  "correct_value": 5.0,
+  "flawed_value": 150.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "dough_batches_needed",
+      "question_inputs": [
+        "total_pizzas_needed",
+        "pizzas_per_dough_batch"
+      ],
+      "solution_line_template": "Camilla needs {total_pizzas_needed}/{pizzas_per_dough_batch} = <<{total_pizzas_needed}/{pizzas_per_dough_batch}={dough_batches_needed}>>{dough_batches_needed} batches of pizza dough."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_dough_making_time",
+      "question_inputs": [
+        "dough_making_time_per_batch"
+      ],
+      "solution_line_template": "{dough_batches_needed} batches of pizza would require {dough_making_time_per_batch} x {dough_batches_needed} = <<{dough_batches_needed}*{dough_making_time_per_batch}={total_dough_making_time}>>{total_dough_making_time} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "oven_baking_times",
+      "question_inputs": [
+        "total_pizzas_needed",
+        "oven_capacity"
+      ],
+      "solution_line_template": "Camilla needs to bake the pizzas {total_pizzas_needed}/{oven_capacity} = <<{total_pizzas_needed}/{oven_capacity}={oven_baking_times}>>{oven_baking_times} times"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_oven_baking_time",
+      "question_inputs": [
+        "oven_cook_time_per_batch"
+      ],
+      "solution_line_template": "{oven_baking_times} times in the oven would take {oven_cook_time_per_batch} x {oven_baking_times} =<<{oven_baking_times}*{oven_cook_time_per_batch}={total_oven_baking_time}>>{total_oven_baking_time} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_minutes",
+      "question_inputs": [],
+      "solution_line_template": "Altogether, it would take {total_dough_making_time} + {total_oven_baking_time} = <<{total_dough_making_time}+{total_oven_baking_time}={total_minutes}>>{total_minutes} minutes to finish making {total_pizzas_needed} pizzas"
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L6",
+      "output_variable": "total_hours",
+      "question_inputs": [],
+      "solution_line_template": "{total_minutes} minutes is {total_minutes}/{minutes_per_hour} = <<{total_minutes}/{minutes_per_hour}={total_hours}>>{total_hours} hours"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Camilla needs 12/3 = <<12/3=4>>4 batches of pizza dough.",
+    "L2": "4 batches of pizza would require 30 x 4 = <<4*30=120>>120 minutes",
+    "L3": "Camilla needs to bake the pizzas 12/2 = <<12/2=6>>6 times",
+    "L4": "6 times in the oven would take 30 x 6 =<<6*30=180>>180 minutes",
+    "L5": "Altogether, it would take 120 + 180 = <<120+180=300>>300 minutes to finish making 12 pizzas",
+    "L6": "300 minutes is 300/2 = <<300/2=150>>150 hours",
+    "FA": "#### 150"
+  },
+  "erroneous_line_number": "L6",
+  "explanation": "Input misrepresentation. The value for 'oven_capacity' (2) was used instead of 'minutes_per_hour' (60).",
+  "repro_seed": -1708314372365103263,
+  "model_name": "google_gemini-2.5-flash"
+}

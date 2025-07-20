@@ -1,0 +1,75 @@
+{
+  "index": 5201,
+  "original_solution_mapping": {
+    "FA": "#### 270",
+    "L1": "Travel between the three stations takes 2+2 = <<2+2=4>>4 hours",
+    "L2": "The total time for the journey is 4*60 = <<4*60=240>>240 minutes.",
+    "L3": "If Kira takes a 30-minute break, her journey takes 240+30 = <<240+30=270>>270 minutes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5201.\n    Returns: the total time, in minutes, that Kira takes to travel between the first and third station.\n    \"\"\"\n    # L1\n    hours_between_stations = 2 # 2 hours apart from one another\n    travel_hours = hours_between_stations + hours_between_stations\n\n    # L2\n    minutes_per_hour = 60 # WK\n    travel_minutes = travel_hours * minutes_per_hour\n\n    # L3\n    break_minutes = 30 # taking a 30 minutes break\n    total_time_with_break = travel_minutes + break_minutes\n\n    # FA\n    answer = total_time_with_break\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "travel_minutes",
+    "operand_to_replace": "travel_hours",
+    "replacement_variable": "minutes_per_hour"
+  },
+  "correct_trace": {
+    "hours_between_stations": 2,
+    "travel_hours": 4,
+    "minutes_per_hour": 60,
+    "travel_minutes": 240,
+    "break_minutes": 30,
+    "total_time_with_break": 270,
+    "answer": 270
+  },
+  "flawed_trace": {
+    "hours_between_stations": 2,
+    "travel_hours": 4,
+    "minutes_per_hour": 60,
+    "travel_minutes": 3600,
+    "break_minutes": 30,
+    "total_time_with_break": 3630,
+    "answer": 3630
+  },
+  "correct_value": 240,
+  "flawed_value": 3600,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "travel_hours",
+      "question_inputs": [
+        "hours_between_stations"
+      ],
+      "solution_line_template": "Travel between the three stations takes {hours_between_stations}+{hours_between_stations} = <<{hours_between_stations}+{hours_between_stations}={travel_hours}>>{travel_hours} hours"
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L2",
+      "output_variable": "travel_minutes",
+      "question_inputs": [],
+      "solution_line_template": "The total time for the journey is {travel_hours}*{minutes_per_hour} = <<{travel_hours}*{minutes_per_hour}={travel_minutes}>>{travel_minutes} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_time_with_break",
+      "question_inputs": [
+        "break_minutes"
+      ],
+      "solution_line_template": "If Kira takes a {break_minutes}-minute break, her journey takes {travel_minutes}+{break_minutes} = <<{travel_minutes}+{break_minutes}={total_time_with_break}>>{total_time_with_break} minutes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Travel between the three stations takes 2+2 = <<2+2=4>>4 hours",
+    "L2": "The total time for the journey is 60*60 = <<60*60=3600>>3600 minutes.",
+    "L3": "If Kira takes a 30-minute break, her journey takes 3600+30 = <<3600+30=3630>>3630 minutes",
+    "FA": "#### 3630"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'minutes_per_hour' (value: 60) was used instead of 'travel_hours' (value: 4).",
+  "repro_seed": 4215189665914225639,
+  "model_name": "google_gemini-2.5-flash"
+}

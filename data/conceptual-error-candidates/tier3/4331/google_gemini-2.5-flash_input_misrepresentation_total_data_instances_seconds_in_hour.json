@@ -1,0 +1,63 @@
+{
+  "index": 4331,
+  "original_solution_mapping": {
+    "FA": "#### 720",
+    "L1": "There are 60 minutes in an hour, and 60 seconds in a minute so there are 60*60 = <<60*60=3600>>3600 seconds in an hour",
+    "L2": "The device records data every 5 seconds so there will be 3600/5 = <<3600/5=720>>720 instances of data in an hour."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4331.\n    Returns: the total number of data instances recorded by the device.\n    \"\"\"\n    # L1\n    minutes_per_hour = 60 # WK\n    seconds_per_minute = 60 # WK\n    seconds_in_hour = minutes_per_hour * seconds_per_minute\n\n    # L2\n    recording_interval_seconds = 5 # every 5 seconds\n    total_data_instances = seconds_in_hour / recording_interval_seconds\n\n    # FA\n    answer = total_data_instances\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_data_instances",
+    "operand_to_replace": "recording_interval_seconds",
+    "replacement_variable": "seconds_in_hour"
+  },
+  "correct_trace": {
+    "minutes_per_hour": 60,
+    "seconds_per_minute": 60,
+    "seconds_in_hour": 3600,
+    "recording_interval_seconds": 5,
+    "total_data_instances": 720.0,
+    "answer": 720.0
+  },
+  "flawed_trace": {
+    "minutes_per_hour": 60,
+    "seconds_per_minute": 60,
+    "seconds_in_hour": 3600,
+    "recording_interval_seconds": 5,
+    "total_data_instances": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 720.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour",
+        "seconds_per_minute"
+      ],
+      "line_number": "L1",
+      "output_variable": "seconds_in_hour",
+      "question_inputs": [],
+      "solution_line_template": "There are {minutes_per_hour} minutes in an hour, and {seconds_per_minute} seconds in a minute so there are {minutes_per_hour}*{seconds_per_minute} = <<{minutes_per_hour}*{seconds_per_minute}={seconds_in_hour}>>{seconds_in_hour} seconds in an hour"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_data_instances",
+      "question_inputs": [
+        "recording_interval_seconds"
+      ],
+      "solution_line_template": "The device records data every {recording_interval_seconds} seconds so there will be {seconds_in_hour}/{recording_interval_seconds} = <<{seconds_in_hour}/{recording_interval_seconds}={total_data_instances}>>{total_data_instances} instances of data in an hour."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 60 minutes in an hour, and 60 seconds in a minute so there are 60*60 = <<60*60=3600>>3600 seconds in an hour",
+    "L2": "The device records data every 3600 seconds so there will be 3600/3600 = <<3600/3600=1>>1 instances of data in an hour.",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'seconds_in_hour' (3600) was used instead of 'recording_interval_seconds' (5).",
+  "repro_seed": -1827974300604020836,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,107 @@
+{
+  "index": 1500,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "The total amount spent on food is $40 + $15 + $25 = $<<40+15+25=80>>80.",
+    "L2": "The service charge is $80 x 10/100 = $<<80*10/100=8>>8.",
+    "L3": "The tip is $80 x 5/100 = $<<80*5/100=4>>4.",
+    "L4": "So, Mr. Arevalo had to pay $80 + $8 + $4 = $<<80+8+4=92>>92 in all.",
+    "L5": "Therefore, his change will only be $100 - $92 = $<<100-92=8>>8."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1500.\n    Returns: the amount of change Mr. Arevalo will receive.\n    \"\"\"\n    # L1\n    smoky_salmon_cost = 40 # The smoky salmon costs $40\n    black_burger_cost = 15 # the black burger costs $15\n    chicken_katsu_cost = 25 # and the chicken katsu costs $25\n    food_total_cost = smoky_salmon_cost + black_burger_cost + chicken_katsu_cost\n\n    # L2\n    service_charge_percentage = Fraction(10, 100) # a 10% service charge\n    service_charge_amount = food_total_cost * service_charge_percentage\n\n    # L3\n    tip_percentage = Fraction(5, 100) # and 5% tip\n    tip_amount = food_total_cost * tip_percentage\n\n    # L4\n    total_bill = food_total_cost + service_charge_amount + tip_amount\n\n    # L5\n    amount_paid = 100 # from his $100\n    change_received = amount_paid - total_bill\n\n    # FA\n    answer = change_received\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "change_received",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x315f0f250>"
+  },
+  "correct_trace": {
+    "smoky_salmon_cost": 40,
+    "black_burger_cost": 15,
+    "chicken_katsu_cost": 25,
+    "food_total_cost": 80,
+    "service_charge_percentage": "1/10",
+    "service_charge_amount": "8",
+    "tip_percentage": "1/20",
+    "tip_amount": "4",
+    "total_bill": "92",
+    "amount_paid": 100,
+    "change_received": "8",
+    "answer": "8"
+  },
+  "flawed_trace": {
+    "smoky_salmon_cost": 40,
+    "black_burger_cost": 15,
+    "chicken_katsu_cost": 25,
+    "food_total_cost": 80,
+    "service_charge_percentage": "1/10",
+    "service_charge_amount": "8",
+    "tip_percentage": "1/20",
+    "tip_amount": "4",
+    "total_bill": "92",
+    "amount_paid": 100,
+    "change_received": "192",
+    "answer": "192"
+  },
+  "correct_value": "8",
+  "flawed_value": "192",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "food_total_cost",
+      "question_inputs": [
+        "smoky_salmon_cost",
+        "black_burger_cost",
+        "chicken_katsu_cost"
+      ],
+      "solution_line_template": "The total amount spent on food is ${smoky_salmon_cost} + ${black_burger_cost} + ${chicken_katsu_cost} = $<<{smoky_salmon_cost}+{black_burger_cost}+{chicken_katsu_cost}={food_total_cost}>>{food_total_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "service_charge_amount",
+      "question_inputs": [
+        "service_charge_percentage"
+      ],
+      "solution_line_template": "The service charge is ${food_total_cost} x {service_charge_percentage} = $<<{food_total_cost}*{service_charge_percentage}={service_charge_amount}>>{service_charge_amount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "tip_amount",
+      "question_inputs": [
+        "tip_percentage"
+      ],
+      "solution_line_template": "The tip is ${food_total_cost} x {tip_percentage} = $<<{food_total_cost}*{tip_percentage}={tip_amount}>>{tip_amount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_bill",
+      "question_inputs": [],
+      "solution_line_template": "So, Mr. Arevalo had to pay ${food_total_cost} + ${service_charge_amount} + ${tip_amount} = $<<{food_total_cost}+{service_charge_amount}+{tip_amount}={total_bill}>>{total_bill} in all."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "change_received",
+      "question_inputs": [
+        "amount_paid"
+      ],
+      "solution_line_template": "Therefore, his change will only be ${amount_paid} - ${total_bill} = $<<{amount_paid}-{total_bill}={change_received}>>{change_received}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total amount spent on food is $40 + $15 + $25 = $<<40+15+25=80>>80.",
+    "L2": "The service charge is $80 x 10/100 = $<<80*10/100=8>>8.",
+    "L3": "The tip is $80 x 5/100 = $<<80*5/100=4>>4.",
+    "L4": "So, Mr. Arevalo had to pay $80 + $8 + $4 = $<<80+8+4=92>>92 in all.",
+    "L5": "Therefore, his change will only be $100 - $92 = $<<100-92=192>>192.",
+    "FA": "#### 192"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 1815909456987210486,
+  "model_name": "google_gemini-2.5-flash"
+}

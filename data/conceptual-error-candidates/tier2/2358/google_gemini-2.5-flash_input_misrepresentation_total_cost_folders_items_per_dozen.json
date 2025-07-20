@@ -1,0 +1,93 @@
+{
+  "index": 2358,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "Two dozens of pencils are equal to 2 x 12 = <<2*12=24>>24 pencils.",
+    "L2": "So the total cost of pencils is $0.5 x 24 = $<<0.5*24=12>>12.",
+    "L3": "The total cost of folders is $0.9 x 20 = $<<0.9*20=18>>18.",
+    "L4": "Thus, the cost to buy the office supplies is $12 + $18 = $<<12+18=30>>30."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2358.\n    Returns: the total cost to buy the office supplies.\n    \"\"\"\n    # L1\n    num_dozens_pencils = 2 # two dozen pencils\n    items_per_dozen = 12 # WK\n    total_pencils = num_dozens_pencils * items_per_dozen\n\n    # L2\n    cost_per_pencil = 0.5 # A pencil costs $0.5 each\n    total_cost_pencils = cost_per_pencil * total_pencils\n\n    # L3\n    cost_per_folder = 0.9 # a folder costs $0.9 each\n    num_folders = 20 # 20 pieces of folders\n    total_cost_folders = cost_per_folder * num_folders\n\n    # L4\n    total_office_supplies_cost = total_cost_pencils + total_cost_folders\n\n    # FA\n    answer = total_office_supplies_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cost_folders",
+    "operand_to_replace": "cost_per_folder",
+    "replacement_variable": "items_per_dozen"
+  },
+  "correct_trace": {
+    "num_dozens_pencils": 2,
+    "items_per_dozen": 12,
+    "total_pencils": 24,
+    "cost_per_pencil": 0.5,
+    "total_cost_pencils": 12.0,
+    "cost_per_folder": 0.9,
+    "num_folders": 20,
+    "total_cost_folders": 18.0,
+    "total_office_supplies_cost": 30.0,
+    "answer": 30.0
+  },
+  "flawed_trace": {
+    "num_dozens_pencils": 2,
+    "items_per_dozen": 12,
+    "total_pencils": 24,
+    "cost_per_pencil": 0.5,
+    "total_cost_pencils": 12.0,
+    "cost_per_folder": 0.9,
+    "num_folders": 20,
+    "total_cost_folders": 240,
+    "total_office_supplies_cost": 252.0,
+    "answer": 252.0
+  },
+  "correct_value": 18.0,
+  "flawed_value": 240,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "items_per_dozen"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_pencils",
+      "question_inputs": [
+        "num_dozens_pencils"
+      ],
+      "solution_line_template": "Two dozens of pencils are equal to {num_dozens_pencils} x {items_per_dozen} = <<{num_dozens_pencils}*{items_per_dozen}={total_pencils}>>{total_pencils} pencils."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost_pencils",
+      "question_inputs": [
+        "cost_per_pencil"
+      ],
+      "solution_line_template": "So the total cost of pencils is ${cost_per_pencil} x {total_pencils} = $<<{cost_per_pencil}*{total_pencils}={total_cost_pencils}>>{total_cost_pencils}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost_folders",
+      "question_inputs": [
+        "cost_per_folder",
+        "num_folders"
+      ],
+      "solution_line_template": "The total cost of folders is ${cost_per_folder} x {num_folders} = $<<{cost_per_folder}*{num_folders}={total_cost_folders}>>{total_cost_folders}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_office_supplies_cost",
+      "question_inputs": [],
+      "solution_line_template": "Thus, the cost to buy the office supplies is ${total_cost_pencils} + ${total_cost_folders} = $<<{total_cost_pencils}+{total_cost_folders}={total_office_supplies_cost}>>{total_office_supplies_cost}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Two dozens of pencils are equal to 2 x 12 = <<2*12=24>>24 pencils.",
+    "L2": "So the total cost of pencils is $0.5 x 24 = $<<0.5*24=12>>12.",
+    "L3": "The total cost of folders is $12 x 20 = $<<12*20=240>>240.",
+    "L4": "Thus, the cost to buy the office supplies is $12 + $240 = $<<12+240=252>>252.",
+    "FA": "#### 252"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'items_per_dozen' (12) was used instead of 'cost_per_folder' (0.9).",
+  "repro_seed": -6859236571544956100,
+  "model_name": "google_gemini-2.5-flash"
+}

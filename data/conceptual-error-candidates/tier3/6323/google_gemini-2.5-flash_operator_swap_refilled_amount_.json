@@ -1,0 +1,100 @@
+{
+  "index": 6323,
+  "original_solution_mapping": {
+    "FA": "#### 72",
+    "L1": "There were 90-24 = <<90-24=66>>66 jellybeans in the jar after Samantha snuck some.",
+    "L2": "There were 66-12 = <<66-12=54>>54 jellybean in the jar after Shelby ate some.",
+    "L3": "Samantha and Shelby took 24+12 = <<24+12=36>>36 jellybeans from the jar.",
+    "L4": "Shelby refilled the jar with 36/2 = <<36/2=18>>18 jellybeans.",
+    "L5": "There are 54+18 = <<54+18=72>>72 jellybeans in the jar."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6323.\n    Returns: the total number of jellybeans in the jar.\n    \"\"\"\n    # L1\n    initial_jellybeans = 90 # 90 jellybeans in a jar\n    samantha_took = 24 # Samantha snuck 24 jellybeans\n    jellybeans_after_samantha = initial_jellybeans - samantha_took\n\n    # L2\n    shelby_ate = 12 # Shelby ate 12 jellybeans\n    jellybeans_after_shelby = jellybeans_after_samantha - shelby_ate\n\n    # L3\n    total_taken_out = samantha_took + shelby_ate\n\n    # L4\n    refill_divisor = 2 # half as much as Samantha and Shelby took out\n    refilled_amount = total_taken_out / refill_divisor\n\n    # L5\n    final_jellybeans = jellybeans_after_shelby + refilled_amount\n\n    # FA\n    answer = final_jellybeans\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "refilled_amount",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x31b1b5fd0>"
+  },
+  "correct_trace": {
+    "initial_jellybeans": 90,
+    "samantha_took": 24,
+    "jellybeans_after_samantha": 66,
+    "shelby_ate": 12,
+    "jellybeans_after_shelby": 54,
+    "total_taken_out": 36,
+    "refill_divisor": 2,
+    "refilled_amount": 18.0,
+    "final_jellybeans": 72.0,
+    "answer": 72.0
+  },
+  "flawed_trace": {
+    "initial_jellybeans": 90,
+    "samantha_took": 24,
+    "jellybeans_after_samantha": 66,
+    "shelby_ate": 12,
+    "jellybeans_after_shelby": 54,
+    "total_taken_out": 36,
+    "refill_divisor": 2,
+    "refilled_amount": 34,
+    "final_jellybeans": 88,
+    "answer": 88
+  },
+  "correct_value": 18.0,
+  "flawed_value": 34,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "jellybeans_after_samantha",
+      "question_inputs": [
+        "initial_jellybeans",
+        "samantha_took"
+      ],
+      "solution_line_template": "There were {initial_jellybeans}-{samantha_took} = <<{initial_jellybeans}-{samantha_took}={jellybeans_after_samantha}>>{jellybeans_after_samantha} jellybeans in the jar after Samantha snuck some."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "jellybeans_after_shelby",
+      "question_inputs": [
+        "shelby_ate"
+      ],
+      "solution_line_template": "There were {jellybeans_after_samantha}-{shelby_ate} = <<{jellybeans_after_samantha}-{shelby_ate}={jellybeans_after_shelby}>>{jellybeans_after_shelby} jellybean in the jar after Shelby ate some."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_taken_out",
+      "question_inputs": [],
+      "solution_line_template": "Samantha and Shelby took {samantha_took}+{shelby_ate} = <<{samantha_took}+{shelby_ate}={total_taken_out}>>{total_taken_out} jellybeans from the jar."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "refilled_amount",
+      "question_inputs": [
+        "refill_divisor"
+      ],
+      "solution_line_template": "Shelby refilled the jar with {total_taken_out}/{refill_divisor} = <<{total_taken_out}/{refill_divisor}={refilled_amount}>>{refilled_amount} jellybeans."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "final_jellybeans",
+      "question_inputs": [],
+      "solution_line_template": "There are {jellybeans_after_shelby}+{refilled_amount} = <<{jellybeans_after_shelby}+{refilled_amount}={final_jellybeans}>>{final_jellybeans} jellybeans in the jar."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There were 90-24 = <<90-24=66>>66 jellybeans in the jar after Samantha snuck some.",
+    "L2": "There were 66-12 = <<66-12=54>>54 jellybean in the jar after Shelby ate some.",
+    "L3": "Samantha and Shelby took 24+12 = <<24+12=36>>36 jellybeans from the jar.",
+    "L4": "Shelby refilled the jar with 36/2 = <<36/2=34>>34 jellybeans.",
+    "L5": "There are 54+34 = <<54+34=88>>88 jellybeans in the jar.",
+    "FA": "#### 88"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": -4097295324378228395,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,76 @@
+{
+  "index": 4568,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "The payout for blackjack is 3:2 or 3/2=1.5 times my bet",
+    "L2": "If my original bet was X then I won 1.5*X my bet",
+    "L3": "Given that I was paid $60 we know $60 = 1.5X",
+    "L4": "X=$60/1.5",
+    "L5": "X=$<<40=40>>40 was my original bet"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4568.\n    Returns: the original bet amount.\n    \"\"\"\n    # L1\n    payout_ratio_numerator = 3 # 3:2 if you get a blackjack\n    payout_ratio_denominator = 2 # 3:2 if you get a blackjack\n    payout_multiplier = payout_ratio_numerator / payout_ratio_denominator\n\n    # L4\n    paid_amount = 60 # paid $60\n    original_bet_calculated = paid_amount / payout_multiplier\n\n    # L5\n    original_bet = original_bet_calculated\n\n    # FA\n    answer = original_bet\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "payout_multiplier",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x31bd605d0>"
+  },
+  "correct_trace": {
+    "payout_ratio_numerator": 3,
+    "payout_ratio_denominator": 2,
+    "payout_multiplier": 1.5,
+    "paid_amount": 60,
+    "original_bet_calculated": 40.0,
+    "original_bet": 40.0,
+    "answer": 40.0
+  },
+  "flawed_trace": {
+    "payout_ratio_numerator": 3,
+    "payout_ratio_denominator": 2,
+    "payout_multiplier": 6,
+    "paid_amount": 60,
+    "original_bet_calculated": 10.0,
+    "original_bet": 10.0,
+    "answer": 10.0
+  },
+  "correct_value": 1.5,
+  "flawed_value": 6,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "payout_multiplier",
+      "question_inputs": [
+        "payout_ratio_numerator",
+        "payout_ratio_denominator"
+      ],
+      "solution_line_template": "The payout for blackjack is {payout_ratio_numerator}:{payout_ratio_denominator} or {payout_ratio_numerator}/{payout_ratio_denominator}={payout_multiplier} times my bet"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "original_bet_calculated",
+      "question_inputs": [
+        "paid_amount"
+      ],
+      "solution_line_template": "X=${paid_amount}/{payout_multiplier}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "original_bet",
+      "question_inputs": [],
+      "solution_line_template": "X=$<<{original_bet_calculated}={original_bet}>>{original_bet} was my original bet"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The payout for blackjack is 3:2 or 3/2=6 times my bet",
+    "L4": "X=$60/6",
+    "L5": "X=$<<10=10>>10 was my original bet",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 3494094672687378330,
+  "model_name": "google_gemini-2.5-flash"
+}

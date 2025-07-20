@@ -1,0 +1,103 @@
+{
+  "index": 5316,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "With 2 packages of sliced ham, Shane has 2 * 8 = <<2*8=16>>16 slices of ham.",
+    "L2": "Since he has 16 slices, Shane makes 16 sandwiches.",
+    "L3": "With 2 packages of sliced bread, he has 20 * 2 = <<20*2=40>>40 slices of bread.",
+    "L4": "To make the 16 sandwiches, he needs 16 * 2 = <<16*2=32>>32 slices of bread.",
+    "L5": "He has 40 - 32 = <<40-32=8>>8 slices of bread leftover."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5316.\n    Returns: the number of slices of bread Shane will have leftover.\n    \"\"\"\n    # L1\n    num_ham_packages = 2 # 2 packages of sliced ham\n    slices_per_ham_package = 8 # 8 slices each\n    total_ham_slices = num_ham_packages * slices_per_ham_package\n\n    # L2\n    num_sandwiches_made = total_ham_slices # makes as many sandwiches as he can according to the ham he has\n\n    # L3\n    slices_per_bread_package = 20 # 20 slices each\n    num_bread_packages = 2 # 2 packages of sliced bread\n    total_bread_slices = slices_per_bread_package * num_bread_packages\n\n    # L4\n    slices_per_sandwich = 2 # WK\n    bread_needed = num_sandwiches_made * slices_per_sandwich\n\n    # L5\n    bread_leftover = total_bread_slices - bread_needed\n\n    # FA\n    answer = bread_leftover\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_bread_slices",
+    "operand_to_replace": "num_bread_packages",
+    "replacement_variable": "num_sandwiches_made"
+  },
+  "correct_trace": {
+    "num_ham_packages": 2,
+    "slices_per_ham_package": 8,
+    "total_ham_slices": 16,
+    "num_sandwiches_made": 16,
+    "slices_per_bread_package": 20,
+    "num_bread_packages": 2,
+    "total_bread_slices": 40,
+    "slices_per_sandwich": 2,
+    "bread_needed": 32,
+    "bread_leftover": 8,
+    "answer": 8
+  },
+  "flawed_trace": {
+    "num_ham_packages": 2,
+    "slices_per_ham_package": 8,
+    "total_ham_slices": 16,
+    "num_sandwiches_made": 16,
+    "slices_per_bread_package": 20,
+    "num_bread_packages": 2,
+    "total_bread_slices": 320,
+    "slices_per_sandwich": 2,
+    "bread_needed": 32,
+    "bread_leftover": 288,
+    "answer": 288
+  },
+  "correct_value": 40,
+  "flawed_value": 320,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_ham_slices",
+      "question_inputs": [
+        "num_ham_packages",
+        "slices_per_ham_package"
+      ],
+      "solution_line_template": "With {num_ham_packages} packages of sliced ham, Shane has {num_ham_packages} * {slices_per_ham_package} = <<{num_ham_packages}*{slices_per_ham_package}={total_ham_slices}>>{total_ham_slices} slices of ham."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_sandwiches_made",
+      "question_inputs": [],
+      "solution_line_template": "Since he has {total_ham_slices} slices, Shane makes {num_sandwiches_made} sandwiches."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_bread_slices",
+      "question_inputs": [
+        "slices_per_bread_package",
+        "num_bread_packages"
+      ],
+      "solution_line_template": "With {num_bread_packages} packages of sliced bread, he has {slices_per_bread_package} * {num_bread_packages} = <<{slices_per_bread_package}*{num_bread_packages}={total_bread_slices}>>{total_bread_slices} slices of bread."
+    },
+    {
+      "WK_inputs": [
+        "slices_per_sandwich"
+      ],
+      "line_number": "L4",
+      "output_variable": "bread_needed",
+      "question_inputs": [],
+      "solution_line_template": "To make the {num_sandwiches_made} sandwiches, he needs {num_sandwiches_made} * {slices_per_sandwich} = <<{num_sandwiches_made}*{slices_per_sandwich}={bread_needed}>>{bread_needed} slices of bread."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "bread_leftover",
+      "question_inputs": [],
+      "solution_line_template": "He has {total_bread_slices} - {bread_needed} = <<{total_bread_slices}-{bread_needed}={bread_leftover}>>{bread_leftover} slices of bread leftover."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "With 2 packages of sliced ham, Shane has 2 * 8 = <<2*8=16>>16 slices of ham.",
+    "L2": "Since he has 16 slices, Shane makes 16 sandwiches.",
+    "L3": "With 16 packages of sliced bread, he has 20 * 16 = <<20*16=320>>320 slices of bread.",
+    "L4": "To make the 16 sandwiches, he needs 16 * 2 = <<16*2=32>>32 slices of bread.",
+    "L5": "He has 320 - 32 = <<320-32=288>>288 slices of bread leftover.",
+    "FA": "#### 288"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'num_sandwiches_made' (16) was used instead of 'num_bread_packages' (2).",
+  "repro_seed": 2301115149568138499,
+  "model_name": "google_gemini-2.5-flash"
+}

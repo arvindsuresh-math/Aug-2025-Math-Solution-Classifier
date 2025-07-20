@@ -1,0 +1,95 @@
+{
+  "index": 6252,
+  "original_solution_mapping": {
+    "FA": "#### 14",
+    "L1": "Jenny has played Mark 10 times, and since mark has only won once she's had 10-1=<<10-1=9>>9 wins.",
+    "L2": "Jenny has played Jill twice as many times as Mark, so they've played 10*2= <<10*2=20>>20 games",
+    "L3": "Of the 20 games Jenny and Jill have played, Jill has won 75% of them so she's had 20*.75= <<20*.75=15>>15 wins",
+    "L4": "If Jill has won 15 games, that means Jenny won 20-15=<<20-15=5>>5 games",
+    "L5": "For Jenny's total wins, her wins against Mark and Jill are added together for 5+9=<<5+9=14>>14 wins"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6252.\n    Returns: the total number of times Jenny has won board games with her two friends.\n    \"\"\"\n    # L1\n    games_played_mark = 10 # played him 10 times\n    mark_wins_against_jenny = 1 # Mark has only won once\n    jenny_wins_against_mark = games_played_mark - mark_wins_against_jenny\n\n    # L2\n    games_played_jill = games_played_mark * 2\n\n    # L3\n    jill_win_percentage = 0.75 # Jill has won 75% of them\n    jill_wins_against_jenny = games_played_jill * jill_win_percentage\n\n    # L4\n    jenny_wins_against_jill = games_played_jill - jill_wins_against_jenny\n\n    # L5\n    total_jenny_wins = jenny_wins_against_jill + jenny_wins_against_mark\n\n    # FA\n    answer = total_jenny_wins\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_jenny_wins",
+    "replacement_variable": "jenny_wins_against_jill"
+  },
+  "correct_trace": {
+    "games_played_mark": 10,
+    "mark_wins_against_jenny": 1,
+    "jenny_wins_against_mark": 9,
+    "games_played_jill": 20,
+    "jill_win_percentage": 0.75,
+    "jill_wins_against_jenny": 15.0,
+    "jenny_wins_against_jill": 5.0,
+    "total_jenny_wins": 14.0,
+    "answer": 14.0
+  },
+  "flawed_trace": {
+    "games_played_mark": 10,
+    "mark_wins_against_jenny": 1,
+    "jenny_wins_against_mark": 9,
+    "games_played_jill": 20,
+    "jill_win_percentage": 0.75,
+    "jill_wins_against_jenny": 15.0,
+    "jenny_wins_against_jill": 5.0,
+    "total_jenny_wins": 14.0,
+    "answer": 5.0
+  },
+  "correct_value": 14.0,
+  "flawed_value": 5.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "jenny_wins_against_mark",
+      "question_inputs": [
+        "games_played_mark",
+        "mark_wins_against_jenny"
+      ],
+      "solution_line_template": "Jenny has played Mark {games_played_mark} times, and since mark has only won once she's had {games_played_mark}-{mark_wins_against_jenny}=<<{games_played_mark}-{mark_wins_against_jenny}={jenny_wins_against_mark}>>{jenny_wins_against_mark} wins."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "games_played_jill",
+      "question_inputs": [],
+      "solution_line_template": "Jenny has played Jill twice as many times as Mark, so they've played {games_played_mark}*2= <<{games_played_mark}*2={games_played_jill}>>{games_played_jill} games"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "jill_wins_against_jenny",
+      "question_inputs": [
+        "jill_win_percentage"
+      ],
+      "solution_line_template": "Of the {games_played_jill} games Jenny and Jill have played, Jill has won 75% of them so she's had {games_played_jill}*{jill_win_percentage}= <<{games_played_jill}*{jill_win_percentage}={jill_wins_against_jenny}>>{jill_wins_against_jenny} wins"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "jenny_wins_against_jill",
+      "question_inputs": [],
+      "solution_line_template": "If Jill has won {jill_wins_against_jenny} games, that means Jenny won {games_played_jill}-{jill_wins_against_jenny}=<<{games_played_jill}-{jill_wins_against_jenny}={jenny_wins_against_jill}>>{jenny_wins_against_jill} games"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_jenny_wins",
+      "question_inputs": [],
+      "solution_line_template": "For Jenny's total wins, her wins against Mark and Jill are added together for {jenny_wins_against_jill}+{jenny_wins_against_mark}=<<{jenny_wins_against_jill}+{jenny_wins_against_mark}={total_jenny_wins}>>{total_jenny_wins} wins"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jenny has played Mark 10 times, and since mark has only won once she's had 10-1=<<10-1=9>>9 wins.",
+    "L2": "Jenny has played Jill twice as many times as Mark, so they've played 10*2= <<10*2=20>>20 games",
+    "L3": "Of the 20 games Jenny and Jill have played, Jill has won 75% of them so she's had 20*0.75= <<20*0.75=15>>15 wins",
+    "L4": "If Jill has won 15 games, that means Jenny won 20-15=<<20-15=5>>5 games",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'jenny_wins_against_jill' (value: 5.0) was reported instead of 'total_jenny_wins' (value: 14.0).",
+  "repro_seed": -4447703338673201849,
+  "model_name": "google_gemini-2.5-flash"
+}

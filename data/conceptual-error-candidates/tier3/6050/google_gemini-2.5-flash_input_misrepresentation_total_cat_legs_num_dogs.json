@@ -1,0 +1,94 @@
+{
+  "index": 6050,
+  "original_solution_mapping": {
+    "FA": "#### 14",
+    "L1": "The dogs have 16 total legs because 4 times 4 equals <<4*4=16>>16.",
+    "L2": "The cats have 12 total legs because 4 times 3 equals <<4*3=12>>12.",
+    "L3": "There are 28 total legs because 16 plus 12 equals <<16+12=28>>28.",
+    "L4": "She needs to buy 14 pairs because 28 divided by two equals <<28/2=14>>14."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6050.\n    Returns: the total number of pairs of leggings Haleigh needs.\n    \"\"\"\n    # L1\n    num_dogs = 4 # 4 dogs\n    legs_per_dog = 4 # WK\n    total_dog_legs = num_dogs * legs_per_dog\n\n    # L2\n    num_cats = 3 # 3 cats\n    legs_per_cat = 4 # WK\n    total_cat_legs = legs_per_cat * num_cats\n\n    # L3\n    total_legs = total_dog_legs + total_cat_legs\n\n    # L4\n    legs_per_pair = 2 # WK\n    pairs_of_leggings = total_legs / legs_per_pair\n\n    # FA\n    answer = pairs_of_leggings\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cat_legs",
+    "operand_to_replace": "num_cats",
+    "replacement_variable": "num_dogs"
+  },
+  "correct_trace": {
+    "num_dogs": 4,
+    "legs_per_dog": 4,
+    "total_dog_legs": 16,
+    "num_cats": 3,
+    "legs_per_cat": 4,
+    "total_cat_legs": 12,
+    "total_legs": 28,
+    "legs_per_pair": 2,
+    "pairs_of_leggings": 14.0,
+    "answer": 14.0
+  },
+  "flawed_trace": {
+    "num_dogs": 4,
+    "legs_per_dog": 4,
+    "total_dog_legs": 16,
+    "num_cats": 3,
+    "legs_per_cat": 4,
+    "total_cat_legs": 16,
+    "total_legs": 32,
+    "legs_per_pair": 2,
+    "pairs_of_leggings": 16.0,
+    "answer": 16.0
+  },
+  "correct_value": 12,
+  "flawed_value": 16,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "legs_per_dog"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_dog_legs",
+      "question_inputs": [
+        "num_dogs"
+      ],
+      "solution_line_template": "The dogs have {total_dog_legs} total legs because {num_dogs} times {legs_per_dog} equals <<{num_dogs}*{legs_per_dog}={total_dog_legs}>>{total_dog_legs}."
+    },
+    {
+      "WK_inputs": [
+        "legs_per_cat"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_cat_legs",
+      "question_inputs": [
+        "num_cats"
+      ],
+      "solution_line_template": "The cats have {total_cat_legs} total legs because {legs_per_cat} times {num_cats} equals <<{legs_per_cat}*{num_cats}={total_cat_legs}>>{total_cat_legs}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_legs",
+      "question_inputs": [],
+      "solution_line_template": "There are {total_legs} total legs because {total_dog_legs} plus {total_cat_legs} equals <<{total_dog_legs}+{total_cat_legs}={total_legs}>>{total_legs}."
+    },
+    {
+      "WK_inputs": [
+        "legs_per_pair"
+      ],
+      "line_number": "L4",
+      "output_variable": "pairs_of_leggings",
+      "question_inputs": [],
+      "solution_line_template": "She needs to buy {pairs_of_leggings} pairs because {total_legs} divided by {legs_per_pair} equals <<{total_legs}/{legs_per_pair}={pairs_of_leggings}>>{pairs_of_leggings}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The dogs have 16 total legs because 4 times 4 equals <<4*4=16>>16.",
+    "L2": "The cats have 16 total legs because 4 times 4 equals <<4*4=16>>16.",
+    "L3": "There are 32 total legs because 16 plus 16 equals <<16+16=32>>32.",
+    "L4": "She needs to buy 16 pairs because 32 divided by 2 equals <<32/2=16>>16.",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_dogs' (4) was used instead of 'num_cats' (3).",
+  "repro_seed": -7108079414364608683,
+  "model_name": "google_gemini-2.5-flash"
+}

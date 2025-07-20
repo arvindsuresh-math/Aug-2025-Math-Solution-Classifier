@@ -1,0 +1,78 @@
+{
+  "index": 82,
+  "original_solution_mapping": {
+    "FA": "#### 700",
+    "L1": "If Irene worked 50 hours last week, the total number of hours counting as overtime is 50-40 = <<50-40=10>>10 hours.",
+    "L2": "Since she's given $20 for every hour of overtime, she earned 10*$20 = $<<10*20=200>>200 in overtime.",
+    "L3": "Her total income, including the overtime, is $500+$200= $<<500+200=700>>700"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 82.\n    Returns: Irene's total income.\n    \"\"\"\n    # L1\n    total_hours_worked = 50 # worked 50 hours last week\n    regular_hours = 40 # works for 40 hours a week\n    overtime_hours = total_hours_worked - regular_hours\n\n    # L2\n    overtime_rate = 20 # gets an extra $20 for every hour of overtime\n    overtime_income = overtime_hours * overtime_rate\n\n    # L3\n    base_income = 500 # earns $500 if she works for 40 hours a week\n    total_income = base_income + overtime_income\n\n    # FA\n    answer = total_income\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "overtime_hours",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x316631dd0>"
+  },
+  "correct_trace": {
+    "total_hours_worked": 50,
+    "regular_hours": 40,
+    "overtime_hours": 10,
+    "overtime_rate": 20,
+    "overtime_income": 200,
+    "base_income": 500,
+    "total_income": 700,
+    "answer": 700
+  },
+  "flawed_trace": {
+    "total_hours_worked": 50,
+    "regular_hours": 40,
+    "overtime_hours": 90,
+    "overtime_rate": 20,
+    "overtime_income": 1800,
+    "base_income": 500,
+    "total_income": 2300,
+    "answer": 2300
+  },
+  "correct_value": 10,
+  "flawed_value": 90,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "total_hours_worked",
+        "regular_hours"
+      ],
+      "WK_inputs": [],
+      "output_variable": "overtime_hours",
+      "solution_line_template": "If Irene worked {total_hours_worked} hours last week, the total number of hours counting as overtime is {total_hours_worked}-{regular_hours} = <<{total_hours_worked}-{regular_hours}={overtime_hours}>>{overtime_hours} hours."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "overtime_rate"
+      ],
+      "WK_inputs": [],
+      "output_variable": "overtime_income",
+      "solution_line_template": "Since she's given ${overtime_rate} for every hour of overtime, she earned {overtime_hours}*${overtime_rate} = $<<{overtime_hours}*{overtime_rate}={overtime_income}>>{overtime_income} in overtime."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "base_income"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_income",
+      "solution_line_template": "Her total income, including the overtime, is ${base_income}+${overtime_income}= $<<{base_income}+{overtime_income}={total_income}>>{total_income}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Irene worked 50 hours last week, the total number of hours counting as overtime is 50-40 = <<50-40=90>>90 hours.",
+    "L2": "Since she's given $20 for every hour of overtime, she earned 90*$20 = $<<90*20=1800>>1800 in overtime.",
+    "L3": "Her total income, including the overtime, is $500+$1800= $<<500+1800=2300>>2300",
+    "FA": "#### 2300"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 5037826341782927032,
+  "model_name": "google_gemini-2.5-flash"
+}

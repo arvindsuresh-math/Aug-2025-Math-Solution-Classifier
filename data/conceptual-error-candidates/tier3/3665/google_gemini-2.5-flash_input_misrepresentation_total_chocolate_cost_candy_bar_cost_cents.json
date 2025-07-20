@@ -1,0 +1,96 @@
+{
+  "index": 3665,
+  "original_solution_mapping": {
+    "FA": "#### 11",
+    "L1": "Three candy bars cost \u00a225 x 3 = \u00a2<<25*3=75>>75.",
+    "L2": "Two pieces of chocolate cost \u00a275 x 2 = \u00a2<<75*2=150>>150.",
+    "L3": "So, the total amount needed to buy those is \u00a275 + \u00a2150 + \u00a250 = \u00a2<<75+150+50=275>>275.",
+    "L4": "Since a quarter is equal to \u00a225, therefore \u00a2275/\u00a225 = <<275/25=11>>11 quarters are needed."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3665.\n    Returns: the number of quarters needed to buy the items.\n    \"\"\"\n    # L1\n    candy_bar_cost_cents = 25 # Candy bars cost \u00a225\n    num_candy_bars = 3 # three candy bars\n    total_candy_bar_cost = candy_bar_cost_cents * num_candy_bars\n\n    # L2\n    chocolate_cost_cents = 75 # each piece of chocolate costs \u00a275\n    num_chocolate_pieces = 2 # two pieces of chocolate\n    total_chocolate_cost = chocolate_cost_cents * num_chocolate_pieces\n\n    # L3\n    juice_cost_cents = 50 # a pack of juice costs \u00a250\n    total_cost_cents = total_candy_bar_cost + total_chocolate_cost + juice_cost_cents\n\n    # L4\n    cents_per_quarter = 25 # a quarter is equal to \u00a225\n    quarters_needed = total_cost_cents / cents_per_quarter\n\n    # FA\n    answer = quarters_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_chocolate_cost",
+    "operand_to_replace": "num_chocolate_pieces",
+    "replacement_variable": "candy_bar_cost_cents"
+  },
+  "correct_trace": {
+    "candy_bar_cost_cents": 25,
+    "num_candy_bars": 3,
+    "total_candy_bar_cost": 75,
+    "chocolate_cost_cents": 75,
+    "num_chocolate_pieces": 2,
+    "total_chocolate_cost": 150,
+    "juice_cost_cents": 50,
+    "total_cost_cents": 275,
+    "cents_per_quarter": 25,
+    "quarters_needed": 11.0,
+    "answer": 11.0
+  },
+  "flawed_trace": {
+    "candy_bar_cost_cents": 25,
+    "num_candy_bars": 3,
+    "total_candy_bar_cost": 75,
+    "chocolate_cost_cents": 75,
+    "num_chocolate_pieces": 2,
+    "total_chocolate_cost": 1875,
+    "juice_cost_cents": 50,
+    "total_cost_cents": 2000,
+    "cents_per_quarter": 25,
+    "quarters_needed": 80.0,
+    "answer": 80.0
+  },
+  "correct_value": 150,
+  "flawed_value": 1875,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_candy_bar_cost",
+      "question_inputs": [
+        "candy_bar_cost_cents",
+        "num_candy_bars"
+      ],
+      "solution_line_template": "Three candy bars cost \u00a2{candy_bar_cost_cents} x {num_candy_bars} = \u00a2<<{candy_bar_cost_cents}*{num_candy_bars}={total_candy_bar_cost}>>{total_candy_bar_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_chocolate_cost",
+      "question_inputs": [
+        "chocolate_cost_cents",
+        "num_chocolate_pieces"
+      ],
+      "solution_line_template": "Two pieces of chocolate cost \u00a2{chocolate_cost_cents} x {num_chocolate_pieces} = \u00a2<<{chocolate_cost_cents}*{num_chocolate_pieces}={total_chocolate_cost}>>{total_chocolate_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost_cents",
+      "question_inputs": [
+        "juice_cost_cents"
+      ],
+      "solution_line_template": "So, the total amount needed to buy those is \u00a2{total_candy_bar_cost} + \u00a2{total_chocolate_cost} + \u00a2{juice_cost_cents} = \u00a2<<{total_candy_bar_cost}+{total_chocolate_cost}+{juice_cost_cents}={total_cost_cents}>>{total_cost_cents}."
+    },
+    {
+      "WK_inputs": [
+        "cents_per_quarter"
+      ],
+      "line_number": "L4",
+      "output_variable": "quarters_needed",
+      "question_inputs": [],
+      "solution_line_template": "Since a quarter is equal to \u00a2{cents_per_quarter}, therefore \u00a2{total_cost_cents}/\u00a2{cents_per_quarter} = <<{total_cost_cents}/{cents_per_quarter}={quarters_needed}>>{quarters_needed} quarters are needed."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Three candy bars cost \u00a225 x 3 = \u00a2<<25*3=75>>75.",
+    "L2": "Two pieces of chocolate cost \u00a275 x 25 = \u00a2<<75*25=1875>>1875.",
+    "L3": "So, the total amount needed to buy those is \u00a275 + \u00a21875 + \u00a250 = \u00a2<<75+1875+50=2000>>2000.",
+    "L4": "Since a quarter is equal to \u00a225, therefore \u00a22000/\u00a225 = <<2000/25=80>>80 quarters are needed.",
+    "FA": "#### 80"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'candy_bar_cost_cents' (25) was used instead of 'num_chocolate_pieces' (2).",
+  "repro_seed": 6613949150309332533,
+  "model_name": "google_gemini-2.5-flash"
+}

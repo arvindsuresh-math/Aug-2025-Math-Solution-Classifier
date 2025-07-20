@@ -1,0 +1,80 @@
+{
+  "index": 7323,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "It will take 45 minutes to drive to the airport and 15 minutes to park so that's 45+15 = <<45+15=60>>60 minutes (1 hour)",
+    "L2": "They need to check in 2 hours early and it will 1 hour to drive there and park so that's 2+1 = <<2+1=3>>3 hours",
+    "L3": "Their flight leaves at 8:00 pm and it will take 3 hours to drive there and check in so the latest they can leave is 8-3 = <<8-3=5>>5:00 pm"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7323.\n    Returns: the latest time they can leave their house.\n    \"\"\"\n    # L1\n    drive_time_minutes = 45 # 45 minutes to drive to the airport\n    park_time_minutes = 15 # 15 minutes to park their vehicle\n    total_travel_minutes = drive_time_minutes + park_time_minutes\n\n    # L2\n    total_travel_hours = 1 # (1 hour) derived from 60 minutes in L1\n    recommended_check_in_hours = 2 # check in 2 hours early\n    total_time_needed_hours = recommended_check_in_hours + total_travel_hours\n\n    # L3\n    flight_departure_hour = 8 # flight leaves at 8:00 pm\n    latest_departure_hour = flight_departure_hour - total_time_needed_hours\n\n    # FA\n    answer = latest_departure_hour\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "latest_departure_hour",
+    "operand_to_replace": "total_time_needed_hours",
+    "replacement_variable": "total_travel_hours"
+  },
+  "correct_trace": {
+    "drive_time_minutes": 45,
+    "park_time_minutes": 15,
+    "total_travel_minutes": 60,
+    "total_travel_hours": 1,
+    "recommended_check_in_hours": 2,
+    "total_time_needed_hours": 3,
+    "flight_departure_hour": 8,
+    "latest_departure_hour": 5,
+    "answer": 5
+  },
+  "flawed_trace": {
+    "drive_time_minutes": 45,
+    "park_time_minutes": 15,
+    "total_travel_minutes": 60,
+    "total_travel_hours": 1,
+    "recommended_check_in_hours": 2,
+    "total_time_needed_hours": 3,
+    "flight_departure_hour": 8,
+    "latest_departure_hour": 7,
+    "answer": 7
+  },
+  "correct_value": 5,
+  "flawed_value": 7,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_travel_minutes",
+      "question_inputs": [
+        "drive_time_minutes",
+        "park_time_minutes"
+      ],
+      "solution_line_template": "It will take {drive_time_minutes} minutes to drive to the airport and {park_time_minutes} minutes to park so that's {drive_time_minutes}+{park_time_minutes} = <<{drive_time_minutes}+{park_time_minutes}={total_travel_minutes}>>{total_travel_minutes} minutes (1 hour)"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_time_needed_hours",
+      "question_inputs": [
+        "recommended_check_in_hours"
+      ],
+      "solution_line_template": "They need to check in {recommended_check_in_hours} hours early and it will {total_travel_hours} hour to drive there and park so that's {recommended_check_in_hours}+{total_travel_hours} = <<{recommended_check_in_hours}+{total_travel_hours}={total_time_needed_hours}>>{total_time_needed_hours} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "latest_departure_hour",
+      "question_inputs": [
+        "flight_departure_hour"
+      ],
+      "solution_line_template": "Their flight leaves at {flight_departure_hour}:00 pm and it will take {total_time_needed_hours} hours to drive there and check in so the latest they can leave is {flight_departure_hour}-{total_time_needed_hours} = <<{flight_departure_hour}-{total_time_needed_hours}={latest_departure_hour}>>{latest_departure_hour}:00 pm"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "It will take 45 minutes to drive to the airport and 15 minutes to park so that's 45+15 = <<45+15=60>>60 minutes (1 hour)",
+    "L2": "They need to check in 2 hours early and it will 1 hour to drive there and park so that's 2+1 = <<2+1=3>>3 hours",
+    "L3": "Their flight leaves at 8:00 pm and it will take 1 hours to drive there and check in so the latest they can leave is 8-1 = <<8-1=7>>7:00 pm",
+    "FA": "#### 7"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'total_travel_hours' (value: 1) was used instead of 'total_time_needed_hours' (value: 3).",
+  "repro_seed": 1725886321851944101,
+  "model_name": "google_gemini-2.5-flash"
+}

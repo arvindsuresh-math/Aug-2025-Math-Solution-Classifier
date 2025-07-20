@@ -1,0 +1,66 @@
+{
+  "index": 3170,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "First find how long the second lock stalls them: 5 minutes * 3 - 3 minutes = <<5*3-3=12>>12 minutes",
+    "L2": "Then multiply that amount by 5 to find the total time the third lock stall the raccoon: 12 minutes * 5 = <<12*5=60>>60 minutes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3170.\n    Returns: the total time the raccoons were stalled by both locks.\n    \"\"\"\n    # L1\n    first_lock_stall_time = 5 # stalls them for 5 minutes\n    multiplier_three_times = 3 # three times as long as the first lock\n    less_than_three_times = 3 # 3 minutes less than three times as long\n    second_lock_stall_time = first_lock_stall_time * multiplier_three_times - less_than_three_times\n\n    # L2\n    multiplier_five_times = 5 # five times as long as the second lock alone\n    total_stall_time = second_lock_stall_time * multiplier_five_times\n\n    # FA\n    answer = total_stall_time\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_stall_time",
+    "operand_to_replace": "multiplier_five_times",
+    "replacement_variable": "multiplier_three_times"
+  },
+  "correct_trace": {
+    "first_lock_stall_time": 5,
+    "multiplier_three_times": 3,
+    "less_than_three_times": 3,
+    "second_lock_stall_time": 12,
+    "multiplier_five_times": 5,
+    "total_stall_time": 60,
+    "answer": 60
+  },
+  "flawed_trace": {
+    "first_lock_stall_time": 5,
+    "multiplier_three_times": 3,
+    "less_than_three_times": 3,
+    "second_lock_stall_time": 12,
+    "multiplier_five_times": 5,
+    "total_stall_time": 36,
+    "answer": 36
+  },
+  "correct_value": 60,
+  "flawed_value": 36,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "second_lock_stall_time",
+      "question_inputs": [
+        "first_lock_stall_time",
+        "multiplier_three_times",
+        "less_than_three_times"
+      ],
+      "solution_line_template": "First find how long the second lock stalls them: {first_lock_stall_time} minutes * {multiplier_three_times} - {less_than_three_times} minutes = <<{first_lock_stall_time}*{multiplier_three_times}-{less_than_three_times}={second_lock_stall_time}>>{second_lock_stall_time} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_stall_time",
+      "question_inputs": [
+        "multiplier_five_times"
+      ],
+      "solution_line_template": "Then multiply that amount by {multiplier_five_times} to find the total time the third lock stall the raccoon: {second_lock_stall_time} minutes * {multiplier_five_times} = <<{second_lock_stall_time}*{multiplier_five_times}={total_stall_time}>>{total_stall_time} minutes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how long the second lock stalls them: 5 minutes * 3 - 3 minutes = <<5*3-3=12>>12 minutes",
+    "L2": "Then multiply that amount by 3 to find the total time the third lock stall the raccoon: 12 minutes * 3 = <<12*3=36>>36 minutes",
+    "FA": "#### 36"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'multiplier_three_times' (3) was used instead of 'multiplier_five_times' (5).",
+  "repro_seed": -8252427443055302125,
+  "model_name": "google_gemini-2.5-flash"
+}

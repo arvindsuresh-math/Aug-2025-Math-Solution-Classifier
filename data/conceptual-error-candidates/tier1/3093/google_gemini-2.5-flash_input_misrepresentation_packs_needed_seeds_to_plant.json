@@ -1,0 +1,78 @@
+{
+  "index": 3093,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "Madeline needs to buy 2*20=<<2*20=40>>40 seeds to make sure that she will have 20 flowers.",
+    "L2": "Thus, Madeline will need to buy 2 packs of flowers to have at least 40 seeds.",
+    "L3": "Thus, Madeline will spend 2*5=$<<2*5=10>>10 on seeds."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3093.\n    Returns: the total cost Madeline will spend on seeds.\n    \"\"\"\n    # L1\n    flowers_needed = 20 # plant 20 flowers\n    death_rate_multiplier = 2 # about half of the seeds she plants will die\n    seeds_to_plant = death_rate_multiplier * flowers_needed\n\n    # L2\n    seeds_per_pack = 25 # 25 seeds per pack\n    packs_needed = (seeds_to_plant + seeds_per_pack - 1) // seeds_per_pack\n\n    # L3\n    cost_per_pack = 5 # Each pack is $5\n    total_cost = packs_needed * cost_per_pack\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "packs_needed",
+    "operand_to_replace": "seeds_per_pack",
+    "replacement_variable": "seeds_to_plant"
+  },
+  "correct_trace": {
+    "flowers_needed": 20,
+    "death_rate_multiplier": 2,
+    "seeds_to_plant": 40,
+    "seeds_per_pack": 25,
+    "packs_needed": 2,
+    "cost_per_pack": 5,
+    "total_cost": 10,
+    "answer": 10
+  },
+  "flawed_trace": {
+    "flowers_needed": 20,
+    "death_rate_multiplier": 2,
+    "seeds_to_plant": 40,
+    "seeds_per_pack": 25,
+    "packs_needed": 1,
+    "cost_per_pack": 5,
+    "total_cost": 5,
+    "answer": 5
+  },
+  "correct_value": 2,
+  "flawed_value": 1,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "seeds_to_plant",
+      "question_inputs": [
+        "flowers_needed",
+        "death_rate_multiplier"
+      ],
+      "solution_line_template": "Madeline needs to buy {death_rate_multiplier}*{flowers_needed}=<<{death_rate_multiplier}*{flowers_needed}={seeds_to_plant}>>{seeds_to_plant} seeds to make sure that she will have {flowers_needed} flowers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "packs_needed",
+      "question_inputs": [
+        "seeds_per_pack"
+      ],
+      "solution_line_template": "Thus, Madeline will need to buy {packs_needed} packs of flowers to have at least {seeds_to_plant} seeds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "cost_per_pack"
+      ],
+      "solution_line_template": "Thus, Madeline will spend {packs_needed}*{cost_per_pack}=${packs_needed}*{cost_per_pack}={total_cost}>>{total_cost} on seeds."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Madeline needs to buy 2*20=<<2*20=40>>40 seeds to make sure that she will have 20 flowers.",
+    "L2": "Thus, Madeline will need to buy 1 packs of flowers to have at least 40 seeds.",
+    "L3": "Thus, Madeline will spend 1*5=$1*5=5>>5 on seeds.",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'seeds_to_plant' (40) was used instead of 'seeds_per_pack' (25).",
+  "repro_seed": -8373412859756751980,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 536,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "First find the number of votes for the unicorn cake: 7 votes * 3 = <<7*3=21>>21 votes",
+    "L2": "Then find the number of votes for the dragon cake: 25 votes + 7 votes = <<25+7=32>>32 votes",
+    "L3": "Then add the number of votes for each cake to find the total number of votes: 21 votes + 32 votes + 7 votes = <<21+32+7=60>>60 votes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 536.\n    Returns: the total number of votes cast.\n    \"\"\"\n    # L1\n    witch_cake_votes = 7 # 7 people voted for the witch cake\n    unicorn_multiplier = 3 # three times as many people voted for the unicorn cake\n    unicorn_cake_votes = witch_cake_votes * unicorn_multiplier\n\n    # L2\n    dragon_cake_more_than_witch = 25 # 25 more than the number of votes for the witch cake\n    dragon_cake_votes = dragon_cake_more_than_witch + witch_cake_votes\n\n    # L3\n    total_votes = unicorn_cake_votes + dragon_cake_votes + witch_cake_votes\n\n    # FA\n    answer = total_votes\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "unicorn_cake_votes",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x317631390>"
+  },
+  "correct_trace": {
+    "witch_cake_votes": 7,
+    "unicorn_multiplier": 3,
+    "unicorn_cake_votes": 21,
+    "dragon_cake_more_than_witch": 25,
+    "dragon_cake_votes": 32,
+    "total_votes": 60,
+    "answer": 60
+  },
+  "flawed_trace": {
+    "witch_cake_votes": 7,
+    "unicorn_multiplier": 3,
+    "unicorn_cake_votes": 10,
+    "dragon_cake_more_than_witch": 25,
+    "dragon_cake_votes": 32,
+    "total_votes": 49,
+    "answer": 49
+  },
+  "correct_value": 21,
+  "flawed_value": 10,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "witch_cake_votes",
+        "unicorn_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "unicorn_cake_votes",
+      "solution_line_template": "First find the number of votes for the unicorn cake: {witch_cake_votes} votes * {unicorn_multiplier} = <<{witch_cake_votes}*{unicorn_multiplier}={unicorn_cake_votes}>>{unicorn_cake_votes} votes"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "dragon_cake_more_than_witch"
+      ],
+      "WK_inputs": [],
+      "output_variable": "dragon_cake_votes",
+      "solution_line_template": "Then find the number of votes for the dragon cake: {dragon_cake_more_than_witch} votes + {witch_cake_votes} votes = <<{dragon_cake_more_than_witch}+{witch_cake_votes}={dragon_cake_votes}>>{dragon_cake_votes} votes"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_votes",
+      "solution_line_template": "Then add the number of votes for each cake to find the total number of votes: {unicorn_cake_votes} votes + {dragon_cake_votes} votes + {witch_cake_votes} votes = <<{unicorn_cake_votes}+{dragon_cake_votes}+{witch_cake_votes}={total_votes}>>{total_votes} votes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the number of votes for the unicorn cake: 7 votes * 3 = <<7*3=10>>10 votes",
+    "L2": "Then find the number of votes for the dragon cake: 25 votes + 7 votes = <<25+7=32>>32 votes",
+    "L3": "Then add the number of votes for each cake to find the total number of votes: 10 votes + 32 votes + 7 votes = <<10+32+7=49>>49 votes",
+    "FA": "#### 49"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -957725508119738898,
+  "model_name": "google_gemini-2.5-flash"
+}

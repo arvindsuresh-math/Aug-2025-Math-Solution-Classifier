@@ -1,0 +1,79 @@
+{
+  "index": 3490,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "Each hour contains 60 minutes, so after 2 hours he took 2*60 = <<2*60=120>>120 minutes.",
+    "L2": "If each question takes two minutes, then he answered 120/2 = <<120/2=60>>60 questions.",
+    "L3": "Unanswered questions is 100-60 = <<100-60=40>>40 questions"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3490.\n    Returns: the number of unanswered questions.\n    \"\"\"\n    # L1\n    hours_spent = 2 # 2 hours\n    minutes_per_hour = 60 # Each hour contains 60 minutes\n    total_minutes_spent = hours_spent * minutes_per_hour\n\n    # L2\n    minutes_per_question = 2 # two minutes for each answer\n    questions_answered = total_minutes_spent / minutes_per_question\n\n    # L3\n    total_questions = 100 # 100 questions on a test\n    unanswered_questions = total_questions - questions_answered\n\n    # FA\n    answer = unanswered_questions\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_minutes_spent",
+    "operand_to_replace": "minutes_per_hour",
+    "replacement_variable": "hours_spent"
+  },
+  "correct_trace": {
+    "hours_spent": 2,
+    "minutes_per_hour": 60,
+    "total_minutes_spent": 120,
+    "minutes_per_question": 2,
+    "questions_answered": 60.0,
+    "total_questions": 100,
+    "unanswered_questions": 40.0,
+    "answer": 40.0
+  },
+  "flawed_trace": {
+    "hours_spent": 2,
+    "minutes_per_hour": 60,
+    "total_minutes_spent": 4,
+    "minutes_per_question": 2,
+    "questions_answered": 2.0,
+    "total_questions": 100,
+    "unanswered_questions": 98.0,
+    "answer": 98.0
+  },
+  "correct_value": 120,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_minutes_spent",
+      "question_inputs": [
+        "hours_spent"
+      ],
+      "solution_line_template": "Each hour contains {minutes_per_hour} minutes, so after {hours_spent} hours he took {hours_spent}*{minutes_per_hour} = <<{hours_spent}*{minutes_per_hour}={total_minutes_spent}>>{total_minutes_spent} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "questions_answered",
+      "question_inputs": [
+        "minutes_per_question"
+      ],
+      "solution_line_template": "If each question takes {minutes_per_question} minutes, then he answered {total_minutes_spent}/{minutes_per_question} = <<{total_minutes_spent}/{minutes_per_question}={questions_answered}>>{questions_answered} questions."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "unanswered_questions",
+      "question_inputs": [
+        "total_questions"
+      ],
+      "solution_line_template": "Unanswered questions is {total_questions}-{questions_answered} = <<{total_questions}-{questions_answered}={unanswered_questions}>>{unanswered_questions} questions"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each hour contains 2 minutes, so after 2 hours he took 2*2 = <<2*2=4>>4 minutes.",
+    "L2": "If each question takes 2 minutes, then he answered 4/2 = <<4/2=2>>2 questions.",
+    "L3": "Unanswered questions is 100-2 = <<100-2=98>>98 questions",
+    "FA": "#### 98"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'hours_spent' (2) was used instead of 'minutes_per_hour' (60).",
+  "repro_seed": -1236895562832089709,
+  "model_name": "google_gemini-2.5-flash"
+}

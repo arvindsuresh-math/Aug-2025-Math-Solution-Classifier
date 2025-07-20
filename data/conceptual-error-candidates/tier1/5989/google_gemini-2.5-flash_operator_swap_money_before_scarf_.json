@@ -1,0 +1,92 @@
+{
+  "index": 5989,
+  "original_solution_mapping": {
+    "FA": "#### 53",
+    "L1": "Before purchasing the beanie, Sarah has $7 + $14 = $<<7+14=21>>21",
+    "L2": "Before purchasing the scarf, Sarah has $21 + $10 = $<<21+10=31>>31",
+    "L3": "The total cost of the toy cars is 2 * $11 = $<<2*11=22>>22",
+    "L4": "Before purchasing the toy cars, Sarah has $31 + $22 = $<<31+22=53>>53"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5989.\n    Returns: the amount of money Sarah started with.\n    \"\"\"\n    # L1\n    money_remaining_after_beanie = 7 # If she has $7 remaining after purchasing the beanie\n    cost_beanie = 14 # a beanie for $14 for her brother\n    money_before_beanie = money_remaining_after_beanie + cost_beanie\n\n    # L2\n    cost_scarf = 10 # a scarf for $10 for her mother\n    money_before_scarf = money_before_beanie + cost_scarf\n\n    # L3\n    num_toy_cars = 2 # 2 toy cars\n    cost_per_toy_car = 11 # $11 each for her sons\n    total_cost_toy_cars = num_toy_cars * cost_per_toy_car\n\n    # L4\n    initial_money = money_before_scarf + total_cost_toy_cars\n\n    # FA\n    answer = initial_money\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "money_before_scarf",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x31442fd50>"
+  },
+  "correct_trace": {
+    "money_remaining_after_beanie": 7,
+    "cost_beanie": 14,
+    "money_before_beanie": 21,
+    "cost_scarf": 10,
+    "money_before_scarf": 31,
+    "num_toy_cars": 2,
+    "cost_per_toy_car": 11,
+    "total_cost_toy_cars": 22,
+    "initial_money": 53,
+    "answer": 53
+  },
+  "flawed_trace": {
+    "money_remaining_after_beanie": 7,
+    "cost_beanie": 14,
+    "money_before_beanie": 21,
+    "cost_scarf": 10,
+    "money_before_scarf": 210,
+    "num_toy_cars": 2,
+    "cost_per_toy_car": 11,
+    "total_cost_toy_cars": 22,
+    "initial_money": 232,
+    "answer": 232
+  },
+  "correct_value": 31,
+  "flawed_value": 210,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_before_beanie",
+      "question_inputs": [
+        "money_remaining_after_beanie",
+        "cost_beanie"
+      ],
+      "solution_line_template": "Before purchasing the beanie, Sarah has ${money_remaining_after_beanie} + ${cost_beanie} = $<<{money_remaining_after_beanie}+{cost_beanie}={money_before_beanie}>>{money_before_beanie}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_before_scarf",
+      "question_inputs": [
+        "cost_scarf"
+      ],
+      "solution_line_template": "Before purchasing the scarf, Sarah has ${money_before_beanie} + ${cost_scarf} = $<<{money_before_beanie}+{cost_scarf}={money_before_scarf}>>{money_before_scarf}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost_toy_cars",
+      "question_inputs": [
+        "num_toy_cars",
+        "cost_per_toy_car"
+      ],
+      "solution_line_template": "The total cost of the toy cars is {num_toy_cars} * ${cost_per_toy_car} = $<<{num_toy_cars}*{cost_per_toy_car}={total_cost_toy_cars}>>{total_cost_toy_cars}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "initial_money",
+      "question_inputs": [],
+      "solution_line_template": "Before purchasing the toy cars, Sarah has ${money_before_scarf} + ${total_cost_toy_cars} = $<<{money_before_scarf}+{total_cost_toy_cars}={initial_money}>>{initial_money}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Before purchasing the beanie, Sarah has $7 + $14 = $<<7+14=21>>21",
+    "L2": "Before purchasing the scarf, Sarah has $21 + $10 = $<<21+10=210>>210",
+    "L3": "The total cost of the toy cars is 2 * $11 = $<<2*11=22>>22",
+    "L4": "Before purchasing the toy cars, Sarah has $210 + $22 = $<<210+22=232>>232",
+    "FA": "#### 232"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": -6332704608292377552,
+  "model_name": "google_gemini-2.5-flash"
+}

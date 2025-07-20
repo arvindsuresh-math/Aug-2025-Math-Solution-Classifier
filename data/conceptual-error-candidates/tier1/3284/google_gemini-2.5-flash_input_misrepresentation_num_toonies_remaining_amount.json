@@ -1,0 +1,75 @@
+{
+  "index": 3284,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "If Antonella spent $3 and now has $11, that means initially she had $3 + $11 = $<<3+11=14>>14",
+    "L2": "Let the number of loonies Antonella had be L and the number of toonies be T. Initially she had in her purse a total of 1L + 2T = $14",
+    "L3": "We also know that she had 10 coins in total or 10=L+T",
+    "L4": "That means initially she had T=10-L toonies",
+    "L5": "Combining both equations we know that 14=1L+2*(10-L)",
+    "L6": "If we multiply through the parentheses, we get 14=1L+20-2L",
+    "L7": "If we combine the variables on one side and the constants on another, we get -6=-1L or L=6",
+    "L8": "Knowing the value of L, we can solve for T= 10 - L = 10 - 6 = <<10-6=4>>4"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3284.\n    Returns: the number of toonies Antonella initially had.\n    \"\"\"\n    # L1\n    spent_amount = 3 # bought a $3 Frappuccino\n    remaining_amount = 11 # still has $11\n    initial_total_money = spent_amount + remaining_amount\n\n    # Variables needed for solving the system of equations, not directly tied to templated solution lines L2-L7\n    loonie_value = 1 # A loonie equals $1\n    toonie_value = 2 # a toonie equals $2\n    total_coins_initial = 10 # ten Canadian coins\n\n    # Implicit calculation for L (number of loonies) by solving the system of equations:\n    # L + T = total_coins_initial\n    # loonie_value * L + toonie_value * T = initial_total_money\n    # Substituting T = total_coins_initial - L into the second equation:\n    # loonie_value * L + toonie_value * (total_coins_initial - L) = initial_total_money\n    # L + 2 * (10 - L) = 14\n    # L + 20 - 2L = 14\n    # 20 - L = 14\n    # L = 20 - 14\n    num_loonies = (toonie_value * total_coins_initial) - initial_total_money\n\n    # L8\n    num_toonies = total_coins_initial - num_loonies\n\n    # FA\n    answer = num_toonies\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "num_toonies",
+    "operand_to_replace": "total_coins_initial",
+    "replacement_variable": "remaining_amount"
+  },
+  "correct_trace": {
+    "spent_amount": 3,
+    "remaining_amount": 11,
+    "initial_total_money": 14,
+    "loonie_value": 1,
+    "toonie_value": 2,
+    "total_coins_initial": 10,
+    "num_loonies": 6,
+    "num_toonies": 4,
+    "answer": 4
+  },
+  "flawed_trace": {
+    "spent_amount": 3,
+    "remaining_amount": 11,
+    "initial_total_money": 14,
+    "loonie_value": 1,
+    "toonie_value": 2,
+    "total_coins_initial": 10,
+    "num_loonies": 6,
+    "num_toonies": 5,
+    "answer": 5
+  },
+  "correct_value": 4,
+  "flawed_value": 5,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "initial_total_money",
+      "question_inputs": [
+        "spent_amount",
+        "remaining_amount"
+      ],
+      "solution_line_template": "If Antonella spent ${spent_amount} and now has ${remaining_amount}, that means initially she had ${spent_amount} + ${remaining_amount} = $<<{spent_amount}+{remaining_amount}={initial_total_money}>>{initial_total_money}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L8",
+      "output_variable": "num_toonies",
+      "question_inputs": [
+        "total_coins_initial"
+      ],
+      "solution_line_template": "Knowing the value of L, we can solve for T= {total_coins_initial} - {num_loonies} = {total_coins_initial} - {num_loonies} = <<{total_coins_initial}-{num_loonies}={num_toonies}>>{num_toonies}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Antonella spent $3 and now has $11, that means initially she had $3 + $11 = $<<3+11=14>>14",
+    "L8": "Knowing the value of L, we can solve for T= 11 - 6 = 11 - 6 = <<11-6=5>>5",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": "L8",
+  "explanation": "Input misrepresentation. The value for 'remaining_amount' (11) was used instead of 'total_coins_initial' (10).",
+  "repro_seed": 9204193695625526535,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,89 @@
+{
+  "index": 7200,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "Johanna had 21 turtles - 5 turtles = <<21-5=16>>16 turtles.",
+    "L2": "After 1 month, Owen was left with 21 turtles * 2 = <<21*2=42>>42 turtles.",
+    "L3": "After 1 month, Johanna was left with 16 turtles / 2 = <<16/2=8>>8 turtles.",
+    "L4": "After Johanna's donation, Owen was left with 42 turtles + 8 turtles = <<42+8=50>>50 turtles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7200.\n    Returns: the total number of turtles Owen had.\n    \"\"\"\n    # L1\n    owen_initial_turtles = 21 # Owen bred 21 turtles\n    johanna_fewer_turtles = 5 # Johanna has 5 fewer turtles than Owen\n    johanna_initial_turtles = owen_initial_turtles - johanna_fewer_turtles\n\n    # L2\n    owen_multiplier = 2 # Owen has twice as many turtles as before\n    owen_turtles_after_month = owen_initial_turtles * owen_multiplier\n\n    # L3\n    johanna_loss_divisor = 2 # Johanna loses half of her turtles\n    johanna_turtles_after_loss = johanna_initial_turtles / johanna_loss_divisor\n\n    # L4\n    owen_total_turtles = owen_turtles_after_month + johanna_turtles_after_loss\n\n    # FA\n    answer = owen_total_turtles\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "johanna_initial_turtles",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x31b773850>"
+  },
+  "correct_trace": {
+    "owen_initial_turtles": 21,
+    "johanna_fewer_turtles": 5,
+    "johanna_initial_turtles": 16,
+    "owen_multiplier": 2,
+    "owen_turtles_after_month": 42,
+    "johanna_loss_divisor": 2,
+    "johanna_turtles_after_loss": 8.0,
+    "owen_total_turtles": 50.0,
+    "answer": 50.0
+  },
+  "flawed_trace": {
+    "owen_initial_turtles": 21,
+    "johanna_fewer_turtles": 5,
+    "johanna_initial_turtles": 26,
+    "owen_multiplier": 2,
+    "owen_turtles_after_month": 42,
+    "johanna_loss_divisor": 2,
+    "johanna_turtles_after_loss": 13.0,
+    "owen_total_turtles": 55.0,
+    "answer": 55.0
+  },
+  "correct_value": 16,
+  "flawed_value": 26,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "johanna_initial_turtles",
+      "question_inputs": [
+        "owen_initial_turtles",
+        "johanna_fewer_turtles"
+      ],
+      "solution_line_template": "Johanna had {owen_initial_turtles} turtles - {johanna_fewer_turtles} turtles = <<{owen_initial_turtles}-{johanna_fewer_turtles}={johanna_initial_turtles}>>{johanna_initial_turtles} turtles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "owen_turtles_after_month",
+      "question_inputs": [
+        "owen_multiplier"
+      ],
+      "solution_line_template": "After 1 month, Owen was left with {owen_initial_turtles} turtles * {owen_multiplier} = <<{owen_initial_turtles}*{owen_multiplier}={owen_turtles_after_month}>>{owen_turtles_after_month} turtles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "johanna_turtles_after_loss",
+      "question_inputs": [
+        "johanna_loss_divisor"
+      ],
+      "solution_line_template": "After 1 month, Johanna was left with {johanna_initial_turtles} turtles / {johanna_loss_divisor} = <<{johanna_initial_turtles}/{johanna_loss_divisor}={johanna_turtles_after_loss}>>{johanna_turtles_after_loss} turtles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "owen_total_turtles",
+      "question_inputs": [],
+      "solution_line_template": "After Johanna's donation, Owen was left with {owen_turtles_after_month} turtles + {johanna_turtles_after_loss} turtles = <<{owen_turtles_after_month}+{johanna_turtles_after_loss}={owen_total_turtles}>>{owen_total_turtles} turtles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Johanna had 21 turtles - 5 turtles = <<21-5=26>>26 turtles.",
+    "L2": "After 1 month, Owen was left with 21 turtles * 2 = <<21*2=42>>42 turtles.",
+    "L3": "After 1 month, Johanna was left with 26 turtles / 2 = <<26/2=13>>13 turtles.",
+    "L4": "After Johanna's donation, Owen was left with 42 turtles + 13 turtles = <<42+13=55>>55 turtles.",
+    "FA": "#### 55"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -3812379474241785096,
+  "model_name": "google_gemini-2.5-flash"
+}

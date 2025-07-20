@@ -1,0 +1,74 @@
+{
+  "index": 561,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "Betty's daughter is 40/100 * 60 = <<40/100*60=24>>24 years younger than she is.",
+    "L2": "That means her daughter is 60 - 24 = <<60-24=36>>36 years old.",
+    "L3": "So the granddaughter is 1/3 * 36 = <<1/3*36=12>>12 years old."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 561.\n    Returns: the age of the granddaughter.\n    \"\"\"\n    # L1\n    daughter_younger_percentage = Fraction(40, 100) # 40 percent younger than she is\n    betty_age = 60 # Betty is 60 years old\n    daughter_age_reduction = daughter_younger_percentage * betty_age\n\n    # L2\n    daughter_age = betty_age - daughter_age_reduction\n\n    # L3\n    granddaughter_age_fraction = Fraction(1, 3) # one-third her mother's age\n    granddaughter_age = granddaughter_age_fraction * daughter_age\n\n    # FA\n    answer = granddaughter_age\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "granddaughter_age",
+    "operand_to_replace": "daughter_age",
+    "replacement_variable": "betty_age"
+  },
+  "correct_trace": {
+    "daughter_younger_percentage": "2/5",
+    "betty_age": 60,
+    "daughter_age_reduction": "24",
+    "daughter_age": "36",
+    "granddaughter_age_fraction": "1/3",
+    "granddaughter_age": "12",
+    "answer": "12"
+  },
+  "flawed_trace": {
+    "daughter_younger_percentage": "2/5",
+    "betty_age": 60,
+    "daughter_age_reduction": "24",
+    "daughter_age": "36",
+    "granddaughter_age_fraction": "1/3",
+    "granddaughter_age": "20",
+    "answer": "20"
+  },
+  "correct_value": "12",
+  "flawed_value": "20",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "daughter_age_reduction",
+      "question_inputs": [
+        "daughter_younger_percentage",
+        "betty_age"
+      ],
+      "solution_line_template": "Betty's daughter is {daughter_younger_percentage} * {betty_age} = <<{daughter_younger_percentage}*{betty_age}={daughter_age_reduction}>>{daughter_age_reduction} years younger than she is."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "daughter_age",
+      "question_inputs": [],
+      "solution_line_template": "That means her daughter is {betty_age} - {daughter_age_reduction} = <<{betty_age}-{daughter_age_reduction}={daughter_age}>>{daughter_age} years old."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "granddaughter_age",
+      "question_inputs": [
+        "granddaughter_age_fraction"
+      ],
+      "solution_line_template": "So the granddaughter is {granddaughter_age_fraction} * {daughter_age} = <<{granddaughter_age_fraction}*{daughter_age}={granddaughter_age}>>{granddaughter_age} years old."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Betty's daughter is 40/100 * 60 = <<40/100*60=24>>24 years younger than she is.",
+    "L2": "That means her daughter is 60 - 24 = <<60-24=36>>36 years old.",
+    "L3": "So the granddaughter is 1/3 * 60 = <<1/3*60=20>>20 years old.",
+    "FA": "#### 20"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'betty_age' (value: 60) was used instead of 'daughter_age' (value: 36).",
+  "repro_seed": -9041418230999722066,
+  "model_name": "google_gemini-2.5-flash"
+}

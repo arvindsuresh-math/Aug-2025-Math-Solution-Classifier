@@ -1,0 +1,74 @@
+{
+  "index": 460,
+  "original_solution_mapping": {
+    "FA": "#### 220000",
+    "L1": "First we need to determine the bonus percentage, which is found by dividing the bonus amount by the amount John made for the year, taking 10,000/100,000= <<10000/100000=.10>>.10, or 10 percent.",
+    "L2": "Then, we take John's earnings from this year and multiply them by the same percentage, taking 200,000*.1= 20,000 dollars in bonuses",
+    "L3": "We then add these two numbers together, for a total of 200,000+20,000= <<200000+20000=220000>>220,000 dollars."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 460.\n    Returns: John's total earnings this year including his bonus.\n    \"\"\"\n    # L1\n    last_year_bonus_amount = 10000 # $10,000 bonus\n    last_year_salary = 100000 # $100,000\n    bonus_percentage = last_year_bonus_amount / last_year_salary\n\n    # L2\n    this_year_salary = 200000 # $200,000\n    this_year_bonus_amount = this_year_salary * bonus_percentage\n\n    # L3\n    total_earnings_this_year = this_year_salary + this_year_bonus_amount\n\n    # FA\n    answer = total_earnings_this_year\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "this_year_bonus_amount",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x31b8a1350>"
+  },
+  "correct_trace": {
+    "last_year_bonus_amount": 10000,
+    "last_year_salary": 100000,
+    "bonus_percentage": 0.1,
+    "this_year_salary": 200000,
+    "this_year_bonus_amount": 20000.0,
+    "total_earnings_this_year": 220000.0,
+    "answer": 220000.0
+  },
+  "flawed_trace": {
+    "last_year_bonus_amount": 10000,
+    "last_year_salary": 100000,
+    "bonus_percentage": 0.1,
+    "this_year_salary": 200000,
+    "this_year_bonus_amount": 2000000.0,
+    "total_earnings_this_year": 2200000.0,
+    "answer": 2200000.0
+  },
+  "correct_value": 20000.0,
+  "flawed_value": 2000000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "bonus_percentage",
+      "question_inputs": [
+        "last_year_bonus_amount",
+        "last_year_salary"
+      ],
+      "solution_line_template": "First we need to determine the bonus percentage, which is found by dividing the bonus amount by the amount John made for the year, taking {last_year_bonus_amount}/{last_year_salary}= <<{last_year_bonus_amount}/{last_year_salary}={bonus_percentage}>>{bonus_percentage}, or 10 percent."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "this_year_bonus_amount",
+      "question_inputs": [
+        "this_year_salary"
+      ],
+      "solution_line_template": "Then, we take John's earnings from this year and multiply them by the same percentage, taking {this_year_salary}*{bonus_percentage}= {this_year_bonus_amount} dollars in bonuses"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_earnings_this_year",
+      "question_inputs": [],
+      "solution_line_template": "We then add these two numbers together, for a total of {this_year_salary}+{this_year_bonus_amount}= <<{this_year_salary}+{this_year_bonus_amount}={total_earnings_this_year}>>{total_earnings_this_year} dollars."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First we need to determine the bonus percentage, which is found by dividing the bonus amount by the amount John made for the year, taking 10000/100000= <<10000/100000=0.1>>0.1, or 10 percent.",
+    "L2": "Then, we take John's earnings from this year and multiply them by the same percentage, taking 200000*0.1= 2000000 dollars in bonuses",
+    "L3": "We then add these two numbers together, for a total of 200000+2000000= <<200000+2000000=2200000>>2200000 dollars.",
+    "FA": "#### 2200000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -7304710871418284528,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,85 @@
+{
+  "index": 4885,
+  "original_solution_mapping": {
+    "FA": "#### 80",
+    "L1": "Jade spends $1600 x 75/100 = $<<1600*75/100=1200>>1200 for living expenses.",
+    "L2": "She spends $1600 x 1/5 = $<<1600*1/5=320>>320 for insurance.",
+    "L3": "She spends a total of $1200 + $320 = $<<1200+320=1520>>1520 for living expenses and insurance.",
+    "L4": "So, she saves $1600 - $1520 = $<<1600-1520=80>>80 per month."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4885.\n    Returns: the amount Jade saves per month.\n    \"\"\"\n    # L1\n    monthly_income = 1600 # $1600 per month\n    living_expense_percentage = Fraction(75, 100) # 75% of it on living expenses\n    living_expenses = monthly_income * living_expense_percentage\n\n    # L2\n    insurance_fraction = Fraction(1, 5) # one-fifth on insurance\n    insurance_cost = monthly_income * insurance_fraction\n\n    # L3\n    total_expenses = living_expenses + insurance_cost\n\n    # L4\n    monthly_savings = monthly_income - total_expenses\n\n    # FA\n    answer = monthly_savings\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_expenses",
+    "operand_to_replace": "living_expenses",
+    "replacement_variable": "insurance_fraction"
+  },
+  "correct_trace": {
+    "monthly_income": 1600,
+    "living_expense_percentage": "3/4",
+    "living_expenses": "1200",
+    "insurance_fraction": "1/5",
+    "insurance_cost": "320",
+    "total_expenses": "1520",
+    "monthly_savings": "80",
+    "answer": "80"
+  },
+  "flawed_trace": {
+    "monthly_income": 1600,
+    "living_expense_percentage": "3/4",
+    "living_expenses": "1200",
+    "insurance_fraction": "1/5",
+    "insurance_cost": "320",
+    "total_expenses": "1601/5",
+    "monthly_savings": "6399/5",
+    "answer": "6399/5"
+  },
+  "correct_value": "1520",
+  "flawed_value": "1601/5",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "living_expenses",
+      "question_inputs": [
+        "monthly_income",
+        "living_expense_percentage"
+      ],
+      "solution_line_template": "Jade spends ${monthly_income} x {living_expense_percentage} = $<<{monthly_income}*{living_expense_percentage}={living_expenses}>>{living_expenses} for living expenses."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "insurance_cost",
+      "question_inputs": [
+        "insurance_fraction"
+      ],
+      "solution_line_template": "She spends ${monthly_income} x {insurance_fraction} = $<<{monthly_income}*{insurance_fraction}={insurance_cost}>>{insurance_cost} for insurance."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_expenses",
+      "question_inputs": [],
+      "solution_line_template": "She spends a total of ${living_expenses} + ${insurance_cost} = $<<{living_expenses}+{insurance_cost}={total_expenses}>>{total_expenses} for living expenses and insurance."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "monthly_savings",
+      "question_inputs": [],
+      "solution_line_template": "So, she saves ${monthly_income} - ${total_expenses} = $<<{monthly_income}-{total_expenses}={monthly_savings}>>{monthly_savings} per month."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jade spends $1600 x 75/100 = $<<1600*75/100=1200>>1200 for living expenses.",
+    "L2": "She spends $1600 x 1/5 = $<<1600*1/5=320>>320 for insurance.",
+    "L3": "She spends a total of $1/5 + $320 = $<<1/5+320=1601/5>>1601/5 for living expenses and insurance.",
+    "L4": "So, she saves $1600 - $1601/5 = $<<1600-1601/5=6399/5>>6399/5 per month.",
+    "FA": "#### 6399/5"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'insurance_fraction' (value: 1/5) was used instead of 'living_expenses' (value: 1200).",
+  "repro_seed": -7022732445891047273,
+  "model_name": "google_gemini-2.5-flash"
+}

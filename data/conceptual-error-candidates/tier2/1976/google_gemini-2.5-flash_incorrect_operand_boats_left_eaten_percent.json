@@ -1,0 +1,67 @@
+{
+  "index": 1976,
+  "original_solution_mapping": {
+    "FA": "#### 22",
+    "L1": "First find the number of boats eaten by fish: 30 boats * 20% = <<30*20*.01=6>>6 boats",
+    "L2": "Then subtract the two groups of boats that were destroyed from the original number to find the number left: 30 boats - 6 boats - 2 boats = <<30-6-2=22>>22 boats"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1976.\n    Returns: the number of boats left.\n    \"\"\"\n    # L1\n    total_boats = 30 # Madison makes 30 paper boats\n    eaten_percent = 20 # 20% are eaten by fish\n    percent_factor = 0.01 # WK\n    boats_eaten_by_fish = total_boats * eaten_percent * percent_factor\n\n    # L2\n    shot_boats = 2 # shoots two of the others\n    boats_left = total_boats - boats_eaten_by_fish - shot_boats\n\n    # FA\n    answer = boats_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "boats_left",
+    "operand_to_replace": "boats_eaten_by_fish",
+    "replacement_variable": "eaten_percent"
+  },
+  "correct_trace": {
+    "total_boats": 30,
+    "eaten_percent": 20,
+    "percent_factor": 0.01,
+    "boats_eaten_by_fish": 6.0,
+    "shot_boats": 2,
+    "boats_left": 22.0,
+    "answer": 22.0
+  },
+  "flawed_trace": {
+    "total_boats": 30,
+    "eaten_percent": 20,
+    "percent_factor": 0.01,
+    "boats_eaten_by_fish": 6.0,
+    "shot_boats": 2,
+    "boats_left": 8,
+    "answer": 8
+  },
+  "correct_value": 22.0,
+  "flawed_value": 8,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "boats_eaten_by_fish",
+      "question_inputs": [
+        "total_boats",
+        "eaten_percent"
+      ],
+      "solution_line_template": "First find the number of boats eaten by fish: {total_boats} boats * {eaten_percent}% = <<{total_boats}*{eaten_percent}*{percent_factor}={boats_eaten_by_fish}>>{boats_eaten_by_fish} boats"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "boats_left",
+      "question_inputs": [
+        "shot_boats"
+      ],
+      "solution_line_template": "Then subtract the two groups of boats that were destroyed from the original number to find the number left: {total_boats} boats - {boats_eaten_by_fish} boats - {shot_boats} boats = <<{total_boats}-{boats_eaten_by_fish}-{shot_boats}={boats_left}>>{boats_left} boats"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the number of boats eaten by fish: 30 boats * 20% = <<30*20*0.01=6>>6 boats",
+    "L2": "Then subtract the two groups of boats that were destroyed from the original number to find the number left: 30 boats - 20 boats - 2 boats = <<30-20-2=8>>8 boats",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'eaten_percent' (value: 20) was used instead of 'boats_eaten_by_fish' (value: 6.0).",
+  "repro_seed": -4007354322350178795,
+  "model_name": "google_gemini-2.5-flash"
+}

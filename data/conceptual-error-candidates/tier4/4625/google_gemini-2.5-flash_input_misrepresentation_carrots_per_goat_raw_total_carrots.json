@@ -1,0 +1,73 @@
+{
+  "index": 4625,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "Alma has 47 baby carrots to feed 3 goats, 47 / 4 = <<47/4=11.75>>11.75 baby carrots.",
+    "L2": "If she takes away the remaining .75, each goat gets an even 11 carrots each.",
+    "L3": "If Alma feeds 11 carrots to each of 4 goats, that's a total of 11 * 4 = <<11*4=44>>44 carrots Alma feeds the goats.",
+    "L4": "She started with 47 baby carrots - 44 she feeds the goats = <<47-44=3>>3 baby carrots left over."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4625.\n    Returns: the number of baby carrots left over.\n    \"\"\"\n    # L1\n    total_carrots = 47 # 47 baby carrots\n    num_goats = 4 # four goats\n    carrots_per_goat_raw = total_carrots / num_goats\n\n    # L2\n    carrots_per_goat_even = int(carrots_per_goat_raw)\n\n    # L3\n    total_carrots_fed = carrots_per_goat_even * num_goats\n\n    # L4\n    carrots_left_over = total_carrots - total_carrots_fed\n\n    # FA\n    answer = carrots_left_over\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "carrots_per_goat_raw",
+    "operand_to_replace": "num_goats",
+    "replacement_variable": "total_carrots"
+  },
+  "correct_trace": {
+    "total_carrots": 47,
+    "num_goats": 4,
+    "carrots_per_goat_raw": 11.75,
+    "carrots_per_goat_even": 11,
+    "total_carrots_fed": 44,
+    "carrots_left_over": 3,
+    "answer": 3
+  },
+  "flawed_trace": {
+    "total_carrots": 47,
+    "num_goats": 4,
+    "carrots_per_goat_raw": 1.0,
+    "carrots_per_goat_even": 1,
+    "total_carrots_fed": 4,
+    "carrots_left_over": 43,
+    "answer": 43
+  },
+  "correct_value": 11.75,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "carrots_per_goat_raw",
+      "question_inputs": [
+        "total_carrots",
+        "num_goats"
+      ],
+      "solution_line_template": "Alma has {total_carrots} baby carrots to feed 3 goats, {total_carrots} / {num_goats} = <<{total_carrots}/{num_goats}={carrots_per_goat_raw}>>{carrots_per_goat_raw} baby carrots."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_carrots_fed",
+      "question_inputs": [],
+      "solution_line_template": "If Alma feeds {carrots_per_goat_even} carrots to each of {num_goats} goats, that's a total of {carrots_per_goat_even} * {num_goats} = <<{carrots_per_goat_even}*{num_goats}={total_carrots_fed}>>{total_carrots_fed} carrots Alma feeds the goats."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "carrots_left_over",
+      "question_inputs": [],
+      "solution_line_template": "She started with {total_carrots} baby carrots - {total_carrots_fed} she feeds the goats = <<{total_carrots}-{total_carrots_fed}={carrots_left_over}>>{carrots_left_over} baby carrots left over."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Alma has 47 baby carrots to feed 3 goats, 47 / 47 = <<47/47=1>>1 baby carrots.",
+    "L3": "If Alma feeds 1 carrots to each of 4 goats, that's a total of 1 * 4 = <<1*4=4>>4 carrots Alma feeds the goats.",
+    "L4": "She started with 47 baby carrots - 4 she feeds the goats = <<47-4=43>>43 baby carrots left over.",
+    "FA": "#### 43"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'total_carrots' (47) was used instead of 'num_goats' (4).",
+  "repro_seed": -5340505182819436434,
+  "model_name": "google_gemini-2.5-flash"
+}

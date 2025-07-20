@@ -1,0 +1,79 @@
+{
+  "index": 4974,
+  "original_solution_mapping": {
+    "FA": "#### 160",
+    "L1": "He streams for 7-3=<<7-3=4>>4 days a week",
+    "L2": "So he streams 4*4=<<4*4=16>>16 hours a week",
+    "L3": "That means he makes 16*10=$<<16*10=160>>160 a week"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4974.\n    Returns: the total amount John makes a week.\n    \"\"\"\n    # L1\n    days_in_week = 7 # WK\n    days_off_streaming = 3 # 3 days off of streaming per week\n    streaming_days_per_week = days_in_week - days_off_streaming\n\n    # L2\n    hours_per_stream_day = 4 # streams for 4 hours at a time\n    total_streaming_hours_per_week = streaming_days_per_week * hours_per_stream_day\n\n    # L3\n    hourly_rate = 10 # makes $10 an hour\n    weekly_earnings = total_streaming_hours_per_week * hourly_rate\n\n    # FA\n    answer = weekly_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "streaming_days_per_week",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x3144a7e50>"
+  },
+  "correct_trace": {
+    "days_in_week": 7,
+    "days_off_streaming": 3,
+    "streaming_days_per_week": 4,
+    "hours_per_stream_day": 4,
+    "total_streaming_hours_per_week": 16,
+    "hourly_rate": 10,
+    "weekly_earnings": 160,
+    "answer": 160
+  },
+  "flawed_trace": {
+    "days_in_week": 7,
+    "days_off_streaming": 3,
+    "streaming_days_per_week": 10,
+    "hours_per_stream_day": 4,
+    "total_streaming_hours_per_week": 40,
+    "hourly_rate": 10,
+    "weekly_earnings": 400,
+    "answer": 400
+  },
+  "correct_value": 4,
+  "flawed_value": 10,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "days_in_week"
+      ],
+      "line_number": "L1",
+      "output_variable": "streaming_days_per_week",
+      "question_inputs": [
+        "days_off_streaming"
+      ],
+      "solution_line_template": "He streams for {days_in_week}-{days_off_streaming}=<<{days_in_week}-{days_off_streaming}={streaming_days_per_week}>>{streaming_days_per_week} days a week"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_streaming_hours_per_week",
+      "question_inputs": [
+        "hours_per_stream_day"
+      ],
+      "solution_line_template": "So he streams {streaming_days_per_week}*{hours_per_stream_day}=<<{streaming_days_per_week}*{hours_per_stream_day}={total_streaming_hours_per_week}>>{total_streaming_hours_per_week} hours a week"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "weekly_earnings",
+      "question_inputs": [
+        "hourly_rate"
+      ],
+      "solution_line_template": "That means he makes {total_streaming_hours_per_week}*{hourly_rate}=$<<{total_streaming_hours_per_week}*{hourly_rate}={weekly_earnings}>>{weekly_earnings} a week"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He streams for 7-3=<<7-3=10>>10 days a week",
+    "L2": "So he streams 10*4=<<10*4=40>>40 hours a week",
+    "L3": "That means he makes 40*10=$<<40*10=400>>400 a week",
+    "FA": "#### 400"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -2060104513673936785,
+  "model_name": "google_gemini-2.5-flash"
+}

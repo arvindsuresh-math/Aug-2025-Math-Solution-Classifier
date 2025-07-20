@@ -1,0 +1,89 @@
+{
+  "index": 4790,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "If Rehana is currently 25 years old, she will be 25+5=<<25+5=30>>30 in five years.",
+    "L2": "Rehana will be three times as old as Phoebe in five years, meaning Phoebe will be 30/3=10 years old in five years.",
+    "L3": "Currently, Phoebe is 10-5=<<10-5=5>>5 years old.",
+    "L4": "3/5 of Phoebe's age now is 3/5*5=<<3/5*5=3>>3 years, which is Jacob's age."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4790.\n    Returns: Jacob's current age.\n    \"\"\"\n    # L1\n    rehana_current_age = 25 # Rehana is currently 25 years old\n    years_in_future = 5 # In five years\n    rehana_age_in_five_years = rehana_current_age + years_in_future\n\n    # L2\n    rehana_phoebe_age_multiplier = 3 # three times as old as Phoebe\n    phoebe_age_in_five_years = rehana_age_in_five_years / rehana_phoebe_age_multiplier\n\n    # L3\n    phoebe_current_age = phoebe_age_in_five_years - years_in_future\n\n    # L4\n    jacob_phoebe_age_fraction = Fraction(3, 5) # Jacob, Rehana's brother, is 3/5 of Phoebe's current age\n    jacob_current_age = jacob_phoebe_age_fraction * phoebe_current_age\n\n    # FA\n    answer = jacob_current_age\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "jacob_current_age",
+    "operand_to_replace": "jacob_phoebe_age_fraction",
+    "replacement_variable": "phoebe_current_age"
+  },
+  "correct_trace": {
+    "rehana_current_age": 25,
+    "years_in_future": 5,
+    "rehana_age_in_five_years": 30,
+    "rehana_phoebe_age_multiplier": 3,
+    "phoebe_age_in_five_years": 10.0,
+    "phoebe_current_age": 5.0,
+    "jacob_phoebe_age_fraction": "3/5",
+    "jacob_current_age": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "rehana_current_age": 25,
+    "years_in_future": 5,
+    "rehana_age_in_five_years": 30,
+    "rehana_phoebe_age_multiplier": 3,
+    "phoebe_age_in_five_years": 10.0,
+    "phoebe_current_age": 5.0,
+    "jacob_phoebe_age_fraction": "3/5",
+    "jacob_current_age": 25.0,
+    "answer": 25.0
+  },
+  "correct_value": 3.0,
+  "flawed_value": 25.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "rehana_age_in_five_years",
+      "question_inputs": [
+        "rehana_current_age",
+        "years_in_future"
+      ],
+      "solution_line_template": "If Rehana is currently {rehana_current_age} years old, she will be {rehana_current_age}+{years_in_future}=<<{rehana_current_age}+{years_in_future}={rehana_age_in_five_years}>>{rehana_age_in_five_years} in five years."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "phoebe_age_in_five_years",
+      "question_inputs": [
+        "rehana_phoebe_age_multiplier"
+      ],
+      "solution_line_template": "Rehana will be three times as old as Phoebe in five years, meaning Phoebe will be {rehana_age_in_five_years}/{rehana_phoebe_age_multiplier}={phoebe_age_in_five_years} years old in five years."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "phoebe_current_age",
+      "question_inputs": [],
+      "solution_line_template": "Currently, Phoebe is {phoebe_age_in_five_years}-{years_in_future}=<<{phoebe_age_in_five_years}-{years_in_future}={phoebe_current_age}>>{phoebe_current_age} years old."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "jacob_current_age",
+      "question_inputs": [
+        "jacob_phoebe_age_fraction"
+      ],
+      "solution_line_template": "{jacob_phoebe_age_fraction} of Phoebe's age now is {jacob_phoebe_age_fraction}*{phoebe_current_age}=<<{jacob_phoebe_age_fraction}*{phoebe_current_age}={jacob_current_age}>>{jacob_current_age} years, which is Jacob's age."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Rehana is currently 25 years old, she will be 25+5=<<25+5=30>>30 in five years.",
+    "L2": "Rehana will be three times as old as Phoebe in five years, meaning Phoebe will be 30/3=10 years old in five years.",
+    "L3": "Currently, Phoebe is 10-5=<<10-5=5>>5 years old.",
+    "L4": "5 of Phoebe's age now is 5*5=<<5*5=25>>25 years, which is Jacob's age.",
+    "FA": "#### 25"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'phoebe_current_age' (5.0) was used instead of 'jacob_phoebe_age_fraction' (3/5).",
+  "repro_seed": -6711900096082514955,
+  "model_name": "google_gemini-2.5-flash"
+}

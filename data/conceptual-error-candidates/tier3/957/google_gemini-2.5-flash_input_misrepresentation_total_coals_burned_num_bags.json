@@ -1,0 +1,66 @@
+{
+  "index": 957,
+  "original_solution_mapping": {
+    "FA": "#### 240",
+    "L1": "The grill burned 3 * 60 = <<3*60=180>>180 coals.",
+    "L2": "It takes 20 minutes to burn 15 coals, so the grill ran for 180 / 15 * 20 = <<180/15*20=240>>240 minutes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 957.\n    Returns: the total time the grill ran in minutes.\n    \"\"\"\n    # L1\n    num_bags = 3 # three bags of coals\n    coals_per_bag = 60 # Each bag of coal contains 60 coals\n    total_coals_burned = num_bags * coals_per_bag\n\n    # L2\n    coals_burned_per_interval = 15 # burns fifteen coals\n    minutes_per_interval = 20 # every twenty minutes\n    total_minutes_ran = total_coals_burned / coals_burned_per_interval * minutes_per_interval\n\n    # FA\n    answer = total_minutes_ran\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_coals_burned",
+    "operand_to_replace": "coals_per_bag",
+    "replacement_variable": "num_bags"
+  },
+  "correct_trace": {
+    "num_bags": 3,
+    "coals_per_bag": 60,
+    "total_coals_burned": 180,
+    "coals_burned_per_interval": 15,
+    "minutes_per_interval": 20,
+    "total_minutes_ran": 240.0,
+    "answer": 240.0
+  },
+  "flawed_trace": {
+    "num_bags": 3,
+    "coals_per_bag": 60,
+    "total_coals_burned": 9,
+    "coals_burned_per_interval": 15,
+    "minutes_per_interval": 20,
+    "total_minutes_ran": 12.0,
+    "answer": 12.0
+  },
+  "correct_value": 180,
+  "flawed_value": 9,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_coals_burned",
+      "question_inputs": [
+        "num_bags",
+        "coals_per_bag"
+      ],
+      "solution_line_template": "The grill burned {num_bags} * {coals_per_bag} = <<{num_bags}*{coals_per_bag}={total_coals_burned}>>{total_coals_burned} coals."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_minutes_ran",
+      "question_inputs": [
+        "coals_burned_per_interval",
+        "minutes_per_interval"
+      ],
+      "solution_line_template": "It takes {minutes_per_interval} minutes to burn {coals_burned_per_interval} coals, so the grill ran for {total_coals_burned} / {coals_burned_per_interval} * {minutes_per_interval} = <<{total_coals_burned}/{coals_burned_per_interval}*{minutes_per_interval}={total_minutes_ran}>>{total_minutes_ran} minutes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The grill burned 3 * 3 = <<3*3=9>>9 coals.",
+    "L2": "It takes 20 minutes to burn 15 coals, so the grill ran for 9 / 15 * 20 = <<9/15*20=12>>12 minutes.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'num_bags' (3) was used instead of 'coals_per_bag' (60).",
+  "repro_seed": 8058679088607676763,
+  "model_name": "google_gemini-2.5-flash"
+}

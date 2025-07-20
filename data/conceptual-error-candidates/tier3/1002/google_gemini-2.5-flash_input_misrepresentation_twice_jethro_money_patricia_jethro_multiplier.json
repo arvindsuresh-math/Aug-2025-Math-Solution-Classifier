@@ -1,0 +1,89 @@
+{
+  "index": 1002,
+  "original_solution_mapping": {
+    "FA": "#### 113",
+    "L1": "Jethro has 60/3 = $<<60/3=20>>20.",
+    "L2": "Twice of what Jethro has is $20 x 2 = $40",
+    "L3": "Carmen has $40 - 7 = $<<40-7=33>>33",
+    "L4": "The sum of all their money is $60 + $20 + $33 = $<<60+20+33=113>>113"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1002.\n    Returns: the sum of all their money.\n    \"\"\"\n    # L1\n    patricia_money = 60 # Patricia has $60\n    patricia_jethro_multiplier = 3 # 3 times as much as Jethro\n    jethro_money = patricia_money / patricia_jethro_multiplier\n\n    # L2\n    carmen_target_multiplier = 2 # twice the amount of money that Jethro has\n    twice_jethro_money = jethro_money * carmen_target_multiplier\n\n    # L3\n    carmen_needs_more = 7 # $7 more\n    carmen_money = twice_jethro_money - carmen_needs_more\n\n    # L4\n    total_money = patricia_money + jethro_money + carmen_money\n\n    # FA\n    answer = total_money\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "twice_jethro_money",
+    "operand_to_replace": "carmen_target_multiplier",
+    "replacement_variable": "patricia_jethro_multiplier"
+  },
+  "correct_trace": {
+    "patricia_money": 60,
+    "patricia_jethro_multiplier": 3,
+    "jethro_money": 20.0,
+    "carmen_target_multiplier": 2,
+    "twice_jethro_money": 40.0,
+    "carmen_needs_more": 7,
+    "carmen_money": 33.0,
+    "total_money": 113.0,
+    "answer": 113.0
+  },
+  "flawed_trace": {
+    "patricia_money": 60,
+    "patricia_jethro_multiplier": 3,
+    "jethro_money": 20.0,
+    "carmen_target_multiplier": 2,
+    "twice_jethro_money": 60.0,
+    "carmen_needs_more": 7,
+    "carmen_money": 53.0,
+    "total_money": 133.0,
+    "answer": 133.0
+  },
+  "correct_value": 40.0,
+  "flawed_value": 60.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "jethro_money",
+      "question_inputs": [
+        "patricia_money",
+        "patricia_jethro_multiplier"
+      ],
+      "solution_line_template": "Jethro has {patricia_money}/{patricia_jethro_multiplier} = $<<{patricia_money}/{patricia_jethro_multiplier}={jethro_money}>>{jethro_money}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "twice_jethro_money",
+      "question_inputs": [
+        "carmen_target_multiplier"
+      ],
+      "solution_line_template": "Twice of what Jethro has is ${jethro_money} x {carmen_target_multiplier} = ${twice_jethro_money}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "carmen_money",
+      "question_inputs": [
+        "carmen_needs_more"
+      ],
+      "solution_line_template": "Carmen has ${twice_jethro_money} - {carmen_needs_more} = $<<{twice_jethro_money}-{carmen_needs_more}={carmen_money}>>{carmen_money}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_money",
+      "question_inputs": [],
+      "solution_line_template": "The sum of all their money is ${patricia_money} + ${jethro_money} + ${carmen_money} = $<<{patricia_money}+{jethro_money}+{carmen_money}={total_money}>>{total_money}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jethro has 60/3 = $<<60/3=20>>20.",
+    "L2": "Twice of what Jethro has is $20 x 3 = $60",
+    "L3": "Carmen has $60 - 7 = $<<60-7=53>>53",
+    "L4": "The sum of all their money is $60 + $20 + $53 = $<<60+20+53=133>>133",
+    "FA": "#### 133"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'patricia_jethro_multiplier' (3) was used instead of 'carmen_target_multiplier' (2).",
+  "repro_seed": -6222416817340659792,
+  "model_name": "google_gemini-2.5-flash"
+}

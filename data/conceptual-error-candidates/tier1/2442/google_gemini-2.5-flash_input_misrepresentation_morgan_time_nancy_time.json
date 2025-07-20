@@ -1,0 +1,63 @@
+{
+  "index": 2442,
+  "original_solution_mapping": {
+    "FA": "#### 21",
+    "L1": "Casey can hula hoop 3 minutes less than Nancy so she can hula hoop for 10-3 = <<10-3=7>>7 minutes",
+    "L2": "Morgan can hula hoop three times as long as Casey, who can hula hoop for 7 minutes, so she can hula hoop for 3*7 = <<3*7=21>>21 minutes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2442.\n    Returns: how long Morgan can hula hoop.\n    \"\"\"\n    # L1\n    nancy_time = 10 # 10 minutes\n    casey_less_than_nancy = 3 # 3 minutes less than Nancy\n    casey_time = nancy_time - casey_less_than_nancy\n\n    # L2\n    morgan_multiplier = 3 # three times as long as Casey\n    morgan_time = morgan_multiplier * casey_time\n\n    # FA\n    answer = morgan_time\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "morgan_time",
+    "operand_to_replace": "morgan_multiplier",
+    "replacement_variable": "nancy_time"
+  },
+  "correct_trace": {
+    "nancy_time": 10,
+    "casey_less_than_nancy": 3,
+    "casey_time": 7,
+    "morgan_multiplier": 3,
+    "morgan_time": 21,
+    "answer": 21
+  },
+  "flawed_trace": {
+    "nancy_time": 10,
+    "casey_less_than_nancy": 3,
+    "casey_time": 7,
+    "morgan_multiplier": 3,
+    "morgan_time": 70,
+    "answer": 70
+  },
+  "correct_value": 21,
+  "flawed_value": 70,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "nancy_time",
+        "casey_less_than_nancy"
+      ],
+      "WK_inputs": [],
+      "output_variable": "casey_time",
+      "solution_line_template": "Casey can hula hoop {casey_less_than_nancy} minutes less than Nancy so she can hula hoop for {nancy_time}-{casey_less_than_nancy} = <<{nancy_time}-{casey_less_than_nancy}={casey_time}>>{casey_time} minutes"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "morgan_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "morgan_time",
+      "solution_line_template": "Morgan can hula hoop three times as long as Casey, who can hula hoop for {casey_time} minutes, so she can hula hoop for {morgan_multiplier}*{casey_time} = <<{morgan_multiplier}*{casey_time}={morgan_time}>>{morgan_time} minutes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Casey can hula hoop 3 minutes less than Nancy so she can hula hoop for 10-3 = <<10-3=7>>7 minutes",
+    "L2": "Morgan can hula hoop three times as long as Casey, who can hula hoop for 7 minutes, so she can hula hoop for 10*7 = <<10*7=70>>70 minutes",
+    "FA": "#### 70"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'nancy_time' (10) was used instead of 'morgan_multiplier' (3).",
+  "repro_seed": -4270336703034114856,
+  "model_name": "google_gemini-2.5-flash"
+}

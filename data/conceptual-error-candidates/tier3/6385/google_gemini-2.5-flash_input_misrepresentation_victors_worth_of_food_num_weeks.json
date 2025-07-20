@@ -1,0 +1,79 @@
+{
+  "index": 6385,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "There are 3 x 7 = <<3*7=21>>21 days in 3 weeks.",
+    "L2": "In 3 weeks, a bear would eat 90 x 21 = <<90*21=1890>>1890 pounds of food.",
+    "L3": "A bear would eat 1890/126 = <<1890/126=15>>15 \"Victors\" worth of food in 3 weeks."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6385.\n    Returns: the number of \"Victors\" worth of food a bear would eat.\n    \"\"\"\n    # L1\n    num_weeks = 3 # in 3 weeks\n    days_per_week = 7 # WK\n    total_days = num_weeks * days_per_week\n\n    # L2\n    food_per_day = 90 # 90 pounds of food per day\n    total_food_eaten = food_per_day * total_days\n\n    # L3\n    victor_weight = 126 # Victor weighs 126 pounds\n    victors_worth_of_food = total_food_eaten / victor_weight\n\n    # FA\n    answer = victors_worth_of_food\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "victors_worth_of_food",
+    "operand_to_replace": "victor_weight",
+    "replacement_variable": "num_weeks"
+  },
+  "correct_trace": {
+    "num_weeks": 3,
+    "days_per_week": 7,
+    "total_days": 21,
+    "food_per_day": 90,
+    "total_food_eaten": 1890,
+    "victor_weight": 126,
+    "victors_worth_of_food": 15.0,
+    "answer": 15.0
+  },
+  "flawed_trace": {
+    "num_weeks": 3,
+    "days_per_week": 7,
+    "total_days": 21,
+    "food_per_day": 90,
+    "total_food_eaten": 1890,
+    "victor_weight": 126,
+    "victors_worth_of_food": 630.0,
+    "answer": 630.0
+  },
+  "correct_value": 15.0,
+  "flawed_value": 630.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_days",
+      "question_inputs": [
+        "num_weeks"
+      ],
+      "solution_line_template": "There are {num_weeks} x {days_per_week} = <<{num_weeks}*{days_per_week}={total_days}>>{total_days} days in {num_weeks} weeks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_food_eaten",
+      "question_inputs": [
+        "food_per_day"
+      ],
+      "solution_line_template": "In {num_weeks} weeks, a bear would eat {food_per_day} x {total_days} = <<{food_per_day}*{total_days}={total_food_eaten}>>{total_food_eaten} pounds of food."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "victors_worth_of_food",
+      "question_inputs": [
+        "victor_weight"
+      ],
+      "solution_line_template": "A bear would eat {total_food_eaten}/{victor_weight} = <<{total_food_eaten}/{victor_weight}={victors_worth_of_food}>>{victors_worth_of_food} \"Victors\" worth of food in {num_weeks} weeks."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 3 x 7 = <<3*7=21>>21 days in 3 weeks.",
+    "L2": "In 3 weeks, a bear would eat 90 x 21 = <<90*21=1890>>1890 pounds of food.",
+    "L3": "A bear would eat 1890/3 = <<1890/3=630>>630 \"Victors\" worth of food in 3 weeks.",
+    "FA": "#### 630"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'num_weeks' (3) was used instead of 'victor_weight' (126).",
+  "repro_seed": -7942426425708077788,
+  "model_name": "google_gemini-2.5-flash"
+}

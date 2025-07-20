@@ -1,0 +1,89 @@
+{
+  "index": 6695,
+  "original_solution_mapping": {
+    "FA": "#### 32",
+    "L1": "First find how many packs Amanda would have to buy on Amazon: 24 lighters / 12 lighters/pack = <<24/12=2>>2 packs",
+    "L2": "Then multiply that number by the cost per pack to find the total cost from Amazon: 2 packs * $5/pack = $<<2*5=10>>10",
+    "L3": "Then multiply the total number of lighters Amanda buys by the cost per lighter at the gas station: 24 lighters * $1.75/lighter = $<<24*1.75=42>>42",
+    "L4": "Then subtract the total Amazon cost from the total gas station cost to find the savings: $42 - $10 = $<<42-10=32>>32"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6695.\n    Returns: the amount Amanda would save by buying lighters online instead of at the gas station.\n    \"\"\"\n    # L1\n    total_lighters_needed = 24 # buying 24 lighters\n    lighters_per_pack = 12 # per pack of twelve\n    num_packs = total_lighters_needed / lighters_per_pack\n\n    # L2\n    cost_per_pack_amazon = 5.00 # $5.00 per pack of twelve on Amazon\n    total_cost_amazon = num_packs * cost_per_pack_amazon\n\n    # L3\n    cost_per_lighter_gas_station = 1.75 # $1.75 each at the gas station\n    total_cost_gas_station = total_lighters_needed * cost_per_lighter_gas_station\n\n    # L4\n    savings = total_cost_gas_station - total_cost_amazon\n\n    # FA\n    answer = savings\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cost_gas_station",
+    "operand_to_replace": "total_lighters_needed",
+    "replacement_variable": "lighters_per_pack"
+  },
+  "correct_trace": {
+    "total_lighters_needed": 24,
+    "lighters_per_pack": 12,
+    "num_packs": 2.0,
+    "cost_per_pack_amazon": 5.0,
+    "total_cost_amazon": 10.0,
+    "cost_per_lighter_gas_station": 1.75,
+    "total_cost_gas_station": 42.0,
+    "savings": 32.0,
+    "answer": 32.0
+  },
+  "flawed_trace": {
+    "total_lighters_needed": 24,
+    "lighters_per_pack": 12,
+    "num_packs": 2.0,
+    "cost_per_pack_amazon": 5.0,
+    "total_cost_amazon": 10.0,
+    "cost_per_lighter_gas_station": 1.75,
+    "total_cost_gas_station": 21.0,
+    "savings": 11.0,
+    "answer": 11.0
+  },
+  "correct_value": 42.0,
+  "flawed_value": 21.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "num_packs",
+      "question_inputs": [
+        "total_lighters_needed",
+        "lighters_per_pack"
+      ],
+      "solution_line_template": "First find how many packs Amanda would have to buy on Amazon: {total_lighters_needed} lighters / {lighters_per_pack} lighters/pack = <<{total_lighters_needed}/{lighters_per_pack}={num_packs}>>{num_packs} packs"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost_amazon",
+      "question_inputs": [
+        "cost_per_pack_amazon"
+      ],
+      "solution_line_template": "Then multiply that number by the cost per pack to find the total cost from Amazon: {num_packs} packs * ${cost_per_pack_amazon}/pack = $<<{num_packs}*{cost_per_pack_amazon}={total_cost_amazon}>>{total_cost_amazon}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost_gas_station",
+      "question_inputs": [
+        "cost_per_lighter_gas_station"
+      ],
+      "solution_line_template": "Then multiply the total number of lighters Amanda buys by the cost per lighter at the gas station: {total_lighters_needed} lighters * ${cost_per_lighter_gas_station}/lighter = $<<{total_lighters_needed}*{cost_per_lighter_gas_station}={total_cost_gas_station}>>{total_cost_gas_station}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "savings",
+      "question_inputs": [],
+      "solution_line_template": "Then subtract the total Amazon cost from the total gas station cost to find the savings: ${total_cost_gas_station} - ${total_cost_amazon} = $<<{total_cost_gas_station}-{total_cost_amazon}={savings}>>{savings}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how many packs Amanda would have to buy on Amazon: 24 lighters / 12 lighters/pack = <<24/12=2>>2 packs",
+    "L2": "Then multiply that number by the cost per pack to find the total cost from Amazon: 2 packs * $5/pack = $<<2*5=10>>10",
+    "L3": "Then multiply the total number of lighters Amanda buys by the cost per lighter at the gas station: 12 lighters * $1.75/lighter = $<<12*1.75=21>>21",
+    "L4": "Then subtract the total Amazon cost from the total gas station cost to find the savings: $21 - $10 = $<<21-10=11>>11",
+    "FA": "#### 11"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'lighters_per_pack' (12) was used instead of 'total_lighters_needed' (24).",
+  "repro_seed": 3146277141029328246,
+  "model_name": "google_gemini-2.5-flash"
+}

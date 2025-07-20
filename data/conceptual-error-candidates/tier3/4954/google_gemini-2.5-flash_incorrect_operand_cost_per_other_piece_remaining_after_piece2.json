@@ -1,0 +1,83 @@
+{
+  "index": 4954,
+  "original_solution_mapping": {
+    "FA": "#### 96",
+    "L1": "610 - 49 = 561, and then 561 - 81 = 480",
+    "L2": "There were 7 - 2 = <<7-2=5>>5 other pieces.",
+    "L3": "480/5 = <<480/5=96>>96 dollars",
+    "L4": "The other 5 pieces cost $96 each."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4954.\n    Returns: the cost of one of the other pieces of clothing.\n    \"\"\"\n    # L1\n    total_spent = 610 # Jangshe spent $610\n    cost_piece1 = 49 # One piece was $49\n    remaining_after_piece1 = total_spent - cost_piece1\n    cost_piece2 = 81 # another piece was $81\n    remaining_after_piece2 = remaining_after_piece1 - cost_piece2\n\n    # L2\n    total_pieces = 7 # 7 pieces of clothing\n    known_pieces = 2 # One piece was $49 and another piece was $81\n    other_pieces_count = total_pieces - known_pieces\n\n    # L3\n    cost_per_other_piece = remaining_after_piece2 / other_pieces_count\n\n    # FA\n    answer = cost_per_other_piece\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "cost_per_other_piece",
+    "operand_to_replace": "other_pieces_count",
+    "replacement_variable": "remaining_after_piece2"
+  },
+  "correct_trace": {
+    "total_spent": 610,
+    "cost_piece1": 49,
+    "remaining_after_piece1": 561,
+    "cost_piece2": 81,
+    "remaining_after_piece2": 480,
+    "total_pieces": 7,
+    "known_pieces": 2,
+    "other_pieces_count": 5,
+    "cost_per_other_piece": 96.0,
+    "answer": 96.0
+  },
+  "flawed_trace": {
+    "total_spent": 610,
+    "cost_piece1": 49,
+    "remaining_after_piece1": 561,
+    "cost_piece2": 81,
+    "remaining_after_piece2": 480,
+    "total_pieces": 7,
+    "known_pieces": 2,
+    "other_pieces_count": 5,
+    "cost_per_other_piece": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 96.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "remaining_after_piece2",
+      "question_inputs": [
+        "total_spent",
+        "cost_piece1",
+        "cost_piece2"
+      ],
+      "solution_line_template": "{total_spent} - {cost_piece1} = {remaining_after_piece1}, and then {remaining_after_piece1} - {cost_piece2} = {remaining_after_piece2}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "other_pieces_count",
+      "question_inputs": [
+        "total_pieces",
+        "known_pieces"
+      ],
+      "solution_line_template": "There were {total_pieces} - {known_pieces} = <<{total_pieces}-{known_pieces}={other_pieces_count}>>{other_pieces_count} other pieces."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cost_per_other_piece",
+      "question_inputs": [],
+      "solution_line_template": "{remaining_after_piece2}/{other_pieces_count} = <<{remaining_after_piece2}/{other_pieces_count}={cost_per_other_piece}>>{cost_per_other_piece} dollars"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "610 - 49 = 561, and then 561 - 81 = 480",
+    "L2": "There were 7 - 2 = <<7-2=5>>5 other pieces.",
+    "L3": "480/480 = <<480/480=1>>1 dollars",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'remaining_after_piece2' (value: 480) was used instead of 'other_pieces_count' (value: 5).",
+  "repro_seed": -5881130448591255850,
+  "model_name": "google_gemini-2.5-flash"
+}

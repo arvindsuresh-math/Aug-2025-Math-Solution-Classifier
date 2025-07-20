@@ -1,0 +1,89 @@
+{
+  "index": 3939,
+  "original_solution_mapping": {
+    "FA": "#### 160",
+    "L1": "Jean's dress was $10 less than Pauline's $30 dress, meaning it was 30-10= <<30-10=20>>20 dollars.",
+    "L2": "Ida's dress was $30 more than Jean's $20 dress, meaning it was 30+20=<<30+20=50>>50 dollars.",
+    "L3": "Patty's dress was $10 more than Ida's $50 dress, meaning it was 50+10=<<50+10=60>>60 dollars.",
+    "L4": "Therefore, all four women together spent 60+50+20+30=<<60+50+20+30=160>>160 dollars."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3939.\n    Returns: the total amount all the ladies spent on dresses.\n    \"\"\"\n    # L1\n    pauline_dress_cost = 30 # Pauline's dress was $30\n    jean_less_than_pauline = 10 # Jean's dress was $10 less than Pauline's dress\n    jean_dress_cost = pauline_dress_cost - jean_less_than_pauline\n\n    # L2\n    ida_more_than_jean = 30 # Ida's dress was $30 more than Jean's dress\n    ida_dress_cost = ida_more_than_jean + jean_dress_cost\n\n    # L3\n    patty_more_than_ida = 10 # Patty's dress was $10 more than Ida's dress\n    patty_dress_cost = ida_dress_cost + patty_more_than_ida\n\n    # L4\n    total_spent = patty_dress_cost + ida_dress_cost + jean_dress_cost + pauline_dress_cost\n\n    # FA\n    answer = total_spent\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "patty_dress_cost",
+    "operand_to_replace": "ida_dress_cost",
+    "replacement_variable": "patty_more_than_ida"
+  },
+  "correct_trace": {
+    "pauline_dress_cost": 30,
+    "jean_less_than_pauline": 10,
+    "jean_dress_cost": 20,
+    "ida_more_than_jean": 30,
+    "ida_dress_cost": 50,
+    "patty_more_than_ida": 10,
+    "patty_dress_cost": 60,
+    "total_spent": 160,
+    "answer": 160
+  },
+  "flawed_trace": {
+    "pauline_dress_cost": 30,
+    "jean_less_than_pauline": 10,
+    "jean_dress_cost": 20,
+    "ida_more_than_jean": 30,
+    "ida_dress_cost": 50,
+    "patty_more_than_ida": 10,
+    "patty_dress_cost": 20,
+    "total_spent": 120,
+    "answer": 120
+  },
+  "correct_value": 60,
+  "flawed_value": 20,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "jean_dress_cost",
+      "question_inputs": [
+        "pauline_dress_cost",
+        "jean_less_than_pauline"
+      ],
+      "solution_line_template": "Jean's dress was ${jean_less_than_pauline} less than Pauline's ${pauline_dress_cost} dress, meaning it was {pauline_dress_cost}-{jean_less_than_pauline}= <<{pauline_dress_cost}-{jean_less_than_pauline}={jean_dress_cost}>>{jean_dress_cost} dollars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "ida_dress_cost",
+      "question_inputs": [
+        "ida_more_than_jean"
+      ],
+      "solution_line_template": "Ida's dress was ${ida_more_than_jean} more than Jean's ${jean_dress_cost} dress, meaning it was {ida_more_than_jean}+{jean_dress_cost}=<<{ida_more_than_jean}+{jean_dress_cost}={ida_dress_cost}>>{ida_dress_cost} dollars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "patty_dress_cost",
+      "question_inputs": [
+        "patty_more_than_ida"
+      ],
+      "solution_line_template": "Patty's dress was ${patty_more_than_ida} more than Ida's ${ida_dress_cost} dress, meaning it was {ida_dress_cost}+{patty_more_than_ida}=<<{ida_dress_cost}+{patty_more_than_ida}={patty_dress_cost}>>{patty_dress_cost} dollars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_spent",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, all four women together spent {patty_dress_cost}+{ida_dress_cost}+{jean_dress_cost}+{pauline_dress_cost}=<<{patty_dress_cost}+{ida_dress_cost}+{jean_dress_cost}+{pauline_dress_cost}={total_spent}>>{total_spent} dollars."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jean's dress was $10 less than Pauline's $30 dress, meaning it was 30-10= <<30-10=20>>20 dollars.",
+    "L2": "Ida's dress was $30 more than Jean's $20 dress, meaning it was 30+20=<<30+20=50>>50 dollars.",
+    "L3": "Patty's dress was $10 more than Ida's $10 dress, meaning it was 10+10=<<10+10=20>>20 dollars.",
+    "L4": "Therefore, all four women together spent 20+50+20+30=<<20+50+20+30=120>>120 dollars.",
+    "FA": "#### 120"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'patty_more_than_ida' (value: 10) was used instead of 'ida_dress_cost' (value: 50).",
+  "repro_seed": -6252385806255957409,
+  "model_name": "google_gemini-2.5-flash"
+}

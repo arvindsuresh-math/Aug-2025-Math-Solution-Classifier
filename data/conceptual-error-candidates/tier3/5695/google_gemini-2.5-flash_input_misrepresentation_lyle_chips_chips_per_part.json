@@ -1,0 +1,89 @@
+{
+  "index": 5695,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "The chips were divided into 4 + 6 = <<4+6=10>>10 parts.",
+    "L2": "Each part has 100/10 = <<100/10=10>>10 chips.",
+    "L3": "Since Lyle owns 6 parts, then he has 6 x 10 = <<6*10=60>>60 chips.",
+    "L4": "This is 60/100 x 100 = <<60/100*100=60>>60% of the entire chips."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5695.\n    Returns: the percentage of chips Lyle had.\n    \"\"\"\n    # L1\n    ian_ratio_part = 4 # in the ratio 4:6\n    lyle_ratio_part = 6 # in the ratio 4:6\n    total_ratio_parts = ian_ratio_part + lyle_ratio_part\n\n    # L2\n    total_chips = 100 # One hundred chips\n    chips_per_part = total_chips / total_ratio_parts\n\n    # L3\n    lyle_chips = lyle_ratio_part * chips_per_part\n\n    # L4\n    percentage_multiplier = 100 # for converting to percentage\n    lyle_percentage = (lyle_chips / total_chips) * percentage_multiplier\n\n    # FA\n    answer = lyle_percentage\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "lyle_chips",
+    "operand_to_replace": "lyle_ratio_part",
+    "replacement_variable": "chips_per_part"
+  },
+  "correct_trace": {
+    "ian_ratio_part": 4,
+    "lyle_ratio_part": 6,
+    "total_ratio_parts": 10,
+    "total_chips": 100,
+    "chips_per_part": 10.0,
+    "lyle_chips": 60.0,
+    "percentage_multiplier": 100,
+    "lyle_percentage": 60.0,
+    "answer": 60.0
+  },
+  "flawed_trace": {
+    "ian_ratio_part": 4,
+    "lyle_ratio_part": 6,
+    "total_ratio_parts": 10,
+    "total_chips": 100,
+    "chips_per_part": 10.0,
+    "lyle_chips": 100.0,
+    "percentage_multiplier": 100,
+    "lyle_percentage": 100.0,
+    "answer": 100.0
+  },
+  "correct_value": 60.0,
+  "flawed_value": 100.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_ratio_parts",
+      "question_inputs": [
+        "ian_ratio_part",
+        "lyle_ratio_part"
+      ],
+      "solution_line_template": "The chips were divided into {ian_ratio_part} + {lyle_ratio_part} = <<{ian_ratio_part}+{lyle_ratio_part}={total_ratio_parts}>>{total_ratio_parts} parts."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "chips_per_part",
+      "question_inputs": [
+        "total_chips"
+      ],
+      "solution_line_template": "Each part has {total_chips}/{total_ratio_parts} = <<{total_chips}/{total_ratio_parts}={chips_per_part}>>{chips_per_part} chips."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "lyle_chips",
+      "question_inputs": [],
+      "solution_line_template": "Since Lyle owns {lyle_ratio_part} parts, then he has {lyle_ratio_part} x {chips_per_part} = <<{lyle_ratio_part}*{chips_per_part}={lyle_chips}>>{lyle_chips} chips."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "lyle_percentage",
+      "question_inputs": [
+        "percentage_multiplier"
+      ],
+      "solution_line_template": "This is {lyle_chips}/{total_chips} x {percentage_multiplier} = <<{lyle_chips}/{total_chips}*{percentage_multiplier}={lyle_percentage}>>{lyle_percentage}% of the entire chips."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The chips were divided into 4 + 6 = <<4+6=10>>10 parts.",
+    "L2": "Each part has 100/10 = <<100/10=10>>10 chips.",
+    "L3": "Since Lyle owns 10 parts, then he has 10 x 10 = <<10*10=100>>100 chips.",
+    "L4": "This is 100/100 x 100 = <<100/100*100=100>>100% of the entire chips.",
+    "FA": "#### 100"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'chips_per_part' (10.0) was used instead of 'lyle_ratio_part' (6).",
+  "repro_seed": -4899712934345282581,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,143 @@
+{
+  "index": 4569,
+  "original_solution_mapping": {
+    "FA": "#### 360",
+    "L1": "First, the 144 acres of grass will be eaten according to the equation 5*2*T + 8*1*T = 144.",
+    "L2": "Solving this equation for T, we find 18*T = 144, or T = 8 months of food are covered by the animals grazing on the rancher's pasture.",
+    "L3": "This means the farmer must buy feed corn for the remaining 12 - 8 = <<12-8=4>>4 months.",
+    "L4": "Next, the rancher's 8 sheep will require 4/2 = 2 bags of feed corn each, or 8*2 = <<8*2=16>>16 bags of feed corn in total for the 4 month period.",
+    "L5": "The rancher's 5 cows will require 4/1 = 4 bags of feed corn each, or 5*4 = <<5*4=20>>20 bags of feed corn in total for the month.",
+    "L6": "Therefore, the rancher needs 16+20 = <<16+20=36>>36 bags of feed corn for all of his animals.",
+    "L7": "So, the rancher will need to spend 36*10 = $<<36*10=360>>360 per year on feed corn."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4569.\n    Returns: the total cost of feed corn per year.\n    \"\"\"\n    # L1\n    num_sheep = 8 # 8 sheep\n    sheep_acres_per_month = 1 # each sheep eats 1 acre of grass per month\n    num_cattle = 5 # 5 cattle\n    cattle_acres_per_month = 2 # each cow eats 2 acres of grass per month\n    total_acres_grass = 144 # 144 acres of grass\n    total_acres_eaten_per_month = (num_cattle * cattle_acres_per_month) + (num_sheep * sheep_acres_per_month)\n\n    # L2\n    months_grazing = total_acres_grass / total_acres_eaten_per_month\n\n    # L3\n    months_per_year = 12 # WK\n    months_needing_feed = months_per_year - months_grazing\n\n    # L4\n    sheep_feed_months_per_bag = 2 # each sheep for 2 months\n    bags_per_sheep = months_needing_feed / sheep_feed_months_per_bag\n    total_bags_for_sheep = num_sheep * bags_per_sheep\n\n    # L5\n    cattle_feed_months_per_bag = 1 # each cow for 1 month\n    bags_per_cattle = months_needing_feed / cattle_feed_months_per_bag\n    total_bags_for_cattle = num_cattle * bags_per_cattle\n\n    # L6\n    total_bags_of_feed_corn = total_bags_for_sheep + total_bags_for_cattle\n\n    # L7\n    cost_per_bag = 10 # $10 per bag\n    total_cost_feed_corn = total_bags_of_feed_corn * cost_per_bag\n\n    # FA\n    answer = total_cost_feed_corn\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "bags_per_cattle",
+    "operand_to_replace": "cattle_feed_months_per_bag",
+    "replacement_variable": "sheep_feed_months_per_bag"
+  },
+  "correct_trace": {
+    "num_sheep": 8,
+    "sheep_acres_per_month": 1,
+    "num_cattle": 5,
+    "cattle_acres_per_month": 2,
+    "total_acres_grass": 144,
+    "total_acres_eaten_per_month": 18,
+    "months_grazing": 8.0,
+    "months_per_year": 12,
+    "months_needing_feed": 4.0,
+    "sheep_feed_months_per_bag": 2,
+    "bags_per_sheep": 2.0,
+    "total_bags_for_sheep": 16.0,
+    "cattle_feed_months_per_bag": 1,
+    "bags_per_cattle": 4.0,
+    "total_bags_for_cattle": 20.0,
+    "total_bags_of_feed_corn": 36.0,
+    "cost_per_bag": 10,
+    "total_cost_feed_corn": 360.0,
+    "answer": 360.0
+  },
+  "flawed_trace": {
+    "num_sheep": 8,
+    "sheep_acres_per_month": 1,
+    "num_cattle": 5,
+    "cattle_acres_per_month": 2,
+    "total_acres_grass": 144,
+    "total_acres_eaten_per_month": 18,
+    "months_grazing": 8.0,
+    "months_per_year": 12,
+    "months_needing_feed": 4.0,
+    "sheep_feed_months_per_bag": 2,
+    "bags_per_sheep": 2.0,
+    "total_bags_for_sheep": 16.0,
+    "cattle_feed_months_per_bag": 1,
+    "bags_per_cattle": 2.0,
+    "total_bags_for_cattle": 10.0,
+    "total_bags_of_feed_corn": 26.0,
+    "cost_per_bag": 10,
+    "total_cost_feed_corn": 260.0,
+    "answer": 260.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 2.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_acres_eaten_per_month",
+      "question_inputs": [
+        "num_sheep",
+        "sheep_acres_per_month",
+        "num_cattle",
+        "cattle_acres_per_month",
+        "total_acres_grass"
+      ],
+      "solution_line_template": "First, the {total_acres_grass} acres of grass will be eaten according to the equation {num_cattle}*{cattle_acres_per_month}*T + {num_sheep}*{sheep_acres_per_month}*T = {total_acres_grass}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "months_grazing",
+      "question_inputs": [],
+      "solution_line_template": "Solving this equation for T, we find {total_acres_eaten_per_month}*T = {total_acres_grass}, or T = {total_acres_grass}/{total_acres_eaten_per_month} = <<{total_acres_grass}/{total_acres_eaten_per_month}={months_grazing}>>{months_grazing} months of food are covered by the animals grazing on the rancher's pasture."
+    },
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L3",
+      "output_variable": "months_needing_feed",
+      "question_inputs": [],
+      "solution_line_template": "This means the farmer must buy feed corn for the remaining {months_per_year} - {months_grazing} = <<{months_per_year}-{months_grazing}={months_needing_feed}>>{months_needing_feed} months."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_bags_for_sheep",
+      "question_inputs": [
+        "sheep_feed_months_per_bag"
+      ],
+      "solution_line_template": "Next, the rancher's {num_sheep} sheep will require {months_needing_feed}/{sheep_feed_months_per_bag} = {bags_per_sheep} bags of feed corn each, or {num_sheep}*{bags_per_sheep} = <<{num_sheep}*{bags_per_sheep}={total_bags_for_sheep}>>{total_bags_for_sheep} bags of feed corn in total for the {months_needing_feed} month period."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_bags_for_cattle",
+      "question_inputs": [
+        "cattle_feed_months_per_bag"
+      ],
+      "solution_line_template": "The rancher's {num_cattle} cows will require {months_needing_feed}/{cattle_feed_months_per_bag} = {bags_per_cattle} bags of feed corn each, or {num_cattle}*{bags_per_cattle} = <<{num_cattle}*{bags_per_cattle}={total_bags_for_cattle}>>{total_bags_for_cattle} bags of feed corn in total for the month."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_bags_of_feed_corn",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, the rancher needs {total_bags_for_sheep}+{total_bags_for_cattle} = <<{total_bags_for_sheep}+{total_bags_for_cattle}={total_bags_of_feed_corn}>>{total_bags_of_feed_corn} bags of feed corn for all of his animals."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "total_cost_feed_corn",
+      "question_inputs": [
+        "cost_per_bag"
+      ],
+      "solution_line_template": "So, the rancher will need to spend {total_bags_of_feed_corn}*{cost_per_bag} = $<<{total_bags_of_feed_corn}*{cost_per_bag}={total_cost_feed_corn}>>{total_cost_feed_corn} per year on feed corn."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First, the 144 acres of grass will be eaten according to the equation 5*2*T + 8*1*T = 144.",
+    "L2": "Solving this equation for T, we find 18*T = 144, or T = 144/18 = <<144/18=8>>8 months of food are covered by the animals grazing on the rancher's pasture.",
+    "L3": "This means the farmer must buy feed corn for the remaining 12 - 8 = <<12-8=4>>4 months.",
+    "L4": "Next, the rancher's 8 sheep will require 4/2 = 2 bags of feed corn each, or 8*2 = <<8*2=16>>16 bags of feed corn in total for the 4 month period.",
+    "L5": "The rancher's 5 cows will require 4/1 = 2 bags of feed corn each, or 5*2 = <<5*2=10>>10 bags of feed corn in total for the month.",
+    "L6": "Therefore, the rancher needs 16+10 = <<16+10=26>>26 bags of feed corn for all of his animals.",
+    "L7": "So, the rancher will need to spend 26*10 = $<<26*10=260>>260 per year on feed corn.",
+    "FA": "#### 260"
+  },
+  "erroneous_line_number": null,
+  "explanation": "Input misrepresentation. The value for 'sheep_feed_months_per_bag' (2) was used instead of 'cattle_feed_months_per_bag' (1).",
+  "repro_seed": -9115458271171933970,
+  "model_name": "google_gemini-2.5-flash"
+}

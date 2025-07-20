@@ -1,0 +1,100 @@
+{
+  "index": 3188,
+  "original_solution_mapping": {
+    "FA": "#### 144",
+    "L1": "There were 1+2+3=<<1+2+3=6>>6 people at the house",
+    "L2": "That means they use 6*2=<<6*2=12>>12 plates per meal",
+    "L3": "So they use 12*3=<<12*3=36>>36 plates per day",
+    "L4": "That means they use 36*4=<<36*4=144>>144 plates for the visit"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3188.\n    Returns: the total number of plates used during the visit.\n    \"\"\"\n    # L1\n    tom_count = 1 # Tom invites his parents and 3 siblings to his house.\n    parents_count = 2 # Tom invites his parents\n    siblings_count = 3 # 3 siblings\n    total_people = tom_count + parents_count + siblings_count\n\n    # L2\n    plates_per_person_per_meal = 2 # each person uses 2 plates per meal\n    plates_per_meal = total_people * plates_per_person_per_meal\n\n    # L3\n    meals_per_day = 3 # They each eat 3 times a day\n    plates_per_day = plates_per_meal * meals_per_day\n\n    # L4\n    duration_days = 4 # for the 4 days\n    total_plates_for_visit = plates_per_day * duration_days\n\n    # FA\n    answer = total_plates_for_visit\n    return answer\n",
+  "mutation_details": {
+    "type": "incomplete_calculation",
+    "target_variable": "total_people",
+    "operand_to_remove": "siblings_count",
+    "original_operands": [
+      "parents_count",
+      "siblings_count",
+      "tom_count"
+    ]
+  },
+  "correct_trace": {
+    "tom_count": 1,
+    "parents_count": 2,
+    "siblings_count": 3,
+    "total_people": 6,
+    "plates_per_person_per_meal": 2,
+    "plates_per_meal": 12,
+    "meals_per_day": 3,
+    "plates_per_day": 36,
+    "duration_days": 4,
+    "total_plates_for_visit": 144,
+    "answer": 144
+  },
+  "flawed_trace": {
+    "tom_count": 1,
+    "parents_count": 2,
+    "siblings_count": 3,
+    "total_people": 3,
+    "plates_per_person_per_meal": 2,
+    "plates_per_meal": 6,
+    "meals_per_day": 3,
+    "plates_per_day": 18,
+    "duration_days": 4,
+    "total_plates_for_visit": 72,
+    "answer": 72
+  },
+  "correct_value": 6,
+  "flawed_value": 3,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_people",
+      "question_inputs": [
+        "tom_count",
+        "parents_count",
+        "siblings_count"
+      ],
+      "solution_line_template": "There were {tom_count}+{parents_count}+{siblings_count}=<<{tom_count}+{parents_count}+{siblings_count}={total_people}>>{total_people} people at the house"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "plates_per_meal",
+      "question_inputs": [
+        "plates_per_person_per_meal"
+      ],
+      "solution_line_template": "That means they use {total_people}*{plates_per_person_per_meal}=<<{total_people}*{plates_per_person_per_meal}={plates_per_meal}>>{plates_per_meal} plates per meal"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "plates_per_day",
+      "question_inputs": [
+        "meals_per_day"
+      ],
+      "solution_line_template": "So they use {plates_per_meal}*{meals_per_day}=<<{plates_per_meal}*{meals_per_day}={plates_per_day}>>{plates_per_day} plates per day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_plates_for_visit",
+      "question_inputs": [
+        "duration_days"
+      ],
+      "solution_line_template": "That means they use {plates_per_day}*{duration_days}=<<{plates_per_day}*{duration_days}={total_plates_for_visit}>>{total_plates_for_visit} plates for the visit"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There were 1+2=<<1+2=3>>3 people at the house",
+    "L2": "That means they use 3*2=<<3*2=6>>6 plates per meal",
+    "L3": "So they use 6*3=<<6*3=18>>18 plates per day",
+    "L4": "That means they use 18*4=<<18*4=72>>72 plates for the visit",
+    "FA": "#### 72"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incomplete calculation. The term 'siblings_count' (value: 3) was omitted from the operation.",
+  "repro_seed": -2181215522656412812,
+  "model_name": "google_gemini-2.5-flash"
+}

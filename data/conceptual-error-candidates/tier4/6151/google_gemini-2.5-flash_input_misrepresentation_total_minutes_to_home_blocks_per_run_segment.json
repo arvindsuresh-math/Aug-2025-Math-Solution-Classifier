@@ -1,0 +1,63 @@
+{
+  "index": 6151,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "There are 8/2 = <<8/2=4>>4 sets of two blocks that Justin can run.",
+    "L2": "Thus, he can run home for 4 x 1.5 = <<4*1.5=6>>6 minutes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6151.\n    Returns: the time in minutes Justin can run home.\n    \"\"\"\n    # L1\n    total_blocks_to_home = 8 # 8 blocks from home\n    blocks_per_run_segment = 2 # 2 blocks in 1.5 minutes\n    num_segments = total_blocks_to_home / blocks_per_run_segment\n\n    # L2\n    minutes_per_run_segment = 1.5 # 1.5 minutes\n    total_minutes_to_home = num_segments * minutes_per_run_segment\n\n    # FA\n    answer = total_minutes_to_home\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_minutes_to_home",
+    "operand_to_replace": "minutes_per_run_segment",
+    "replacement_variable": "blocks_per_run_segment"
+  },
+  "correct_trace": {
+    "total_blocks_to_home": 8,
+    "blocks_per_run_segment": 2,
+    "num_segments": 4.0,
+    "minutes_per_run_segment": 1.5,
+    "total_minutes_to_home": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "total_blocks_to_home": 8,
+    "blocks_per_run_segment": 2,
+    "num_segments": 4.0,
+    "minutes_per_run_segment": 1.5,
+    "total_minutes_to_home": 8.0,
+    "answer": 8.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 8.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "num_segments",
+      "question_inputs": [
+        "total_blocks_to_home",
+        "blocks_per_run_segment"
+      ],
+      "solution_line_template": "There are {total_blocks_to_home}/{blocks_per_run_segment} = <<{total_blocks_to_home}/{blocks_per_run_segment}={num_segments}>>{num_segments} sets of two blocks that Justin can run."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_minutes_to_home",
+      "question_inputs": [
+        "minutes_per_run_segment"
+      ],
+      "solution_line_template": "Thus, he can run home for {num_segments} x {minutes_per_run_segment} = <<{num_segments}*{minutes_per_run_segment}={total_minutes_to_home}>>{total_minutes_to_home} minutes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 8/2 = <<8/2=4>>4 sets of two blocks that Justin can run.",
+    "L2": "Thus, he can run home for 4 x 2 = <<4*2=8>>8 minutes.",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'blocks_per_run_segment' (2) was used instead of 'minutes_per_run_segment' (1.5).",
+  "repro_seed": -3143502134980794436,
+  "model_name": "google_gemini-2.5-flash"
+}

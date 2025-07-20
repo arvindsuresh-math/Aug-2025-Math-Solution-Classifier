@@ -1,0 +1,78 @@
+{
+  "index": 5980,
+  "original_solution_mapping": {
+    "FA": "#### 120",
+    "L1": "He has 3*4=<<3*4=12>>12 puppies",
+    "L2": "So they need 12*2=<<12*2=24>>24 shots",
+    "L3": "That means the vaccines cost 24*5=$<<24*5=120>>120"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5980.\n    Returns: the total cost of the shots.\n    \"\"\"\n    # L1\n    num_pregnant_dogs = 3 # 3 pregnant dogs\n    puppies_per_dog = 4 # give birth to 4 puppies\n    total_puppies = num_pregnant_dogs * puppies_per_dog\n\n    # L2\n    shots_per_puppy = 2 # Each puppy needs 2 shots\n    total_shots = total_puppies * shots_per_puppy\n\n    # L3\n    cost_per_shot = 5 # each shot costs $5\n    total_cost = total_shots * cost_per_shot\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cost",
+    "operand_to_replace": "cost_per_shot",
+    "replacement_variable": "puppies_per_dog"
+  },
+  "correct_trace": {
+    "num_pregnant_dogs": 3,
+    "puppies_per_dog": 4,
+    "total_puppies": 12,
+    "shots_per_puppy": 2,
+    "total_shots": 24,
+    "cost_per_shot": 5,
+    "total_cost": 120,
+    "answer": 120
+  },
+  "flawed_trace": {
+    "num_pregnant_dogs": 3,
+    "puppies_per_dog": 4,
+    "total_puppies": 12,
+    "shots_per_puppy": 2,
+    "total_shots": 24,
+    "cost_per_shot": 5,
+    "total_cost": 96,
+    "answer": 96
+  },
+  "correct_value": 120,
+  "flawed_value": 96,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_puppies",
+      "question_inputs": [
+        "num_pregnant_dogs",
+        "puppies_per_dog"
+      ],
+      "solution_line_template": "He has {num_pregnant_dogs}*{puppies_per_dog}=<<{num_pregnant_dogs}*{puppies_per_dog}={total_puppies}>>{total_puppies} puppies"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_shots",
+      "question_inputs": [
+        "shots_per_puppy"
+      ],
+      "solution_line_template": "So they need {total_puppies}*{shots_per_puppy}=<<{total_puppies}*{shots_per_puppy}={total_shots}>>{total_shots} shots"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "cost_per_shot"
+      ],
+      "solution_line_template": "That means the vaccines cost {total_shots}*{cost_per_shot}=$<<{total_shots}*{cost_per_shot}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He has 3*4=<<3*4=12>>12 puppies",
+    "L2": "So they need 12*2=<<12*2=24>>24 shots",
+    "L3": "That means the vaccines cost 24*4=$<<24*4=96>>96",
+    "FA": "#### 96"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'puppies_per_dog' (4) was used instead of 'cost_per_shot' (5).",
+  "repro_seed": -7647836905078196918,
+  "model_name": "google_gemini-2.5-flash"
+}

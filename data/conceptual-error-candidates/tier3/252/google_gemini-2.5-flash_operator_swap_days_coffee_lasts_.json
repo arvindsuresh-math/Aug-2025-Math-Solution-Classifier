@@ -1,0 +1,63 @@
+{
+  "index": 252,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "A pound of coffee makes 40 cups of coffee, so 3 lbs. coffee * 40 cups of coffee per lb. = <<3*40=120>>120 cups of coffee.",
+    "L2": "Angie drinks 3 cups of coffee a day, so she has enough coffee to last her 120 cups of coffee / 3 cups of coffee per day = <<120/3=40>>40 days"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 252.\n    Returns: the number of days the coffee will last.\n    \"\"\"\n    # L1\n    coffee_lbs = 3 # 3 lbs. of coffee\n    cups_per_lb = 40 # 40 cups of coffee\n    total_cups_of_coffee = coffee_lbs * cups_per_lb\n\n    # L2\n    cups_per_day = 3 # 3 cups of coffee every day\n    days_coffee_lasts = total_cups_of_coffee / cups_per_day\n\n    # FA\n    answer = days_coffee_lasts\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "days_coffee_lasts",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x31458d7d0>"
+  },
+  "correct_trace": {
+    "coffee_lbs": 3,
+    "cups_per_lb": 40,
+    "total_cups_of_coffee": 120,
+    "cups_per_day": 3,
+    "days_coffee_lasts": 40.0,
+    "answer": 40.0
+  },
+  "flawed_trace": {
+    "coffee_lbs": 3,
+    "cups_per_lb": 40,
+    "total_cups_of_coffee": 120,
+    "cups_per_day": 3,
+    "days_coffee_lasts": 117,
+    "answer": 117
+  },
+  "correct_value": 40.0,
+  "flawed_value": 117,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_cups_of_coffee",
+      "question_inputs": [
+        "coffee_lbs",
+        "cups_per_lb"
+      ],
+      "solution_line_template": "A pound of coffee makes 40 cups of coffee, so {coffee_lbs} lbs. coffee * {cups_per_lb} cups of coffee per lb. = <<{coffee_lbs}*{cups_per_lb}={total_cups_of_coffee}>>{total_cups_of_coffee} cups of coffee."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "days_coffee_lasts",
+      "question_inputs": [
+        "cups_per_day"
+      ],
+      "solution_line_template": "Angie drinks {cups_per_day} cups of coffee a day, so she has enough coffee to last her {total_cups_of_coffee} cups of coffee / {cups_per_day} cups of coffee per day = <<{total_cups_of_coffee}/{cups_per_day}={days_coffee_lasts}>>{days_coffee_lasts} days"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "A pound of coffee makes 40 cups of coffee, so 3 lbs. coffee * 40 cups of coffee per lb. = <<3*40=120>>120 cups of coffee.",
+    "L2": "Angie drinks 3 cups of coffee a day, so she has enough coffee to last her 120 cups of coffee / 3 cups of coffee per day = <<120/3=117>>117 days",
+    "FA": "#### 117"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": -4315942703182808375,
+  "model_name": "google_gemini-2.5-flash"
+}

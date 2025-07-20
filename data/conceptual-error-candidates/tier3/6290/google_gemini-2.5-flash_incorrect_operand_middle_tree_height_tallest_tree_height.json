@@ -1,0 +1,78 @@
+{
+  "index": 6290,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "Tallest Tree: <<150=150>>150 feet",
+    "L2": "Middle Tree:150(2/3)=300/3=100 feet",
+    "L3": "Shortest Tree:100/2=<<100/2=50>>50 feet"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6290.\n    Returns: the height of the shortest tree.\n    \"\"\"\n    # L1\n    tallest_tree_height = 150 # The tallest tree is 150 feet tall\n\n    # L2\n    middle_tree_fraction_numerator = 2 # 2/3 the height of the tallest tree\n    middle_tree_fraction_denominator = 3 # 2/3 the height of the tallest tree\n    intermediate_product = tallest_tree_height * middle_tree_fraction_numerator\n    middle_tree_height = intermediate_product / middle_tree_fraction_denominator\n\n    # L3\n    shortest_tree_divisor = 2 # half the size of the middle tree\n    shortest_tree_height = middle_tree_height / shortest_tree_divisor\n\n    # FA\n    answer = shortest_tree_height\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "middle_tree_height",
+    "operand_to_replace": "intermediate_product",
+    "replacement_variable": "tallest_tree_height"
+  },
+  "correct_trace": {
+    "tallest_tree_height": 150,
+    "middle_tree_fraction_numerator": 2,
+    "middle_tree_fraction_denominator": 3,
+    "intermediate_product": 300,
+    "middle_tree_height": 100.0,
+    "shortest_tree_divisor": 2,
+    "shortest_tree_height": 50.0,
+    "answer": 50.0
+  },
+  "flawed_trace": {
+    "tallest_tree_height": 150,
+    "middle_tree_fraction_numerator": 2,
+    "middle_tree_fraction_denominator": 3,
+    "intermediate_product": 300,
+    "middle_tree_height": 50.0,
+    "shortest_tree_divisor": 2,
+    "shortest_tree_height": 25.0,
+    "answer": 25.0
+  },
+  "correct_value": 100.0,
+  "flawed_value": 50.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "tallest_tree_height",
+      "question_inputs": [
+        "tallest_tree_height"
+      ],
+      "solution_line_template": "Tallest Tree: <<{tallest_tree_height}={tallest_tree_height}>>{tallest_tree_height} feet"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "middle_tree_height",
+      "question_inputs": [
+        "middle_tree_fraction_numerator",
+        "middle_tree_fraction_denominator"
+      ],
+      "solution_line_template": "Middle Tree:{tallest_tree_height}({middle_tree_fraction_numerator}/{middle_tree_fraction_denominator})={intermediate_product}/{middle_tree_fraction_denominator}={middle_tree_height} feet"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "shortest_tree_height",
+      "question_inputs": [
+        "shortest_tree_divisor"
+      ],
+      "solution_line_template": "Shortest Tree:{middle_tree_height}/{shortest_tree_divisor}=<<{middle_tree_height}/{shortest_tree_divisor}={shortest_tree_height}>>{shortest_tree_height} feet"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Tallest Tree: <<150=150>>150 feet",
+    "L2": "Middle Tree:150(2/3)=150/3=50 feet",
+    "L3": "Shortest Tree:50/2=<<50/2=25>>25 feet",
+    "FA": "#### 25"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'tallest_tree_height' (value: 150) was used instead of 'intermediate_product' (value: 300).",
+  "repro_seed": -3199807129492682858,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 6530,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "Charles drew 6 + 6 = <<6+6=12>>12 pictures.",
+    "L2": "He has 20 - 12 = <<20-12=8>>8 papers left.",
+    "L3": "So Charles drew when he came back from work 8 - 2 = <<8-2=6>>6 pictures."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6530.\n    Returns: the number of pictures Charles drew when he came back from work.\n    \"\"\"\n    # L1\n    today_drew = 6 # Today Charles drew 6 pictures\n    yesterday_before_work = 6 # Yesterday he drew 6 pictures before going to work\n    total_drawn_before_return = today_drew + yesterday_before_work\n\n    # L2\n    total_papers_bought = 20 # Charles bought 20 papers to draw\n    papers_remaining_before_return_drawings = total_papers_bought - total_drawn_before_return\n\n    # L3\n    final_papers_left = 2 # he has 2 papers left\n    pictures_drawn_after_work = papers_remaining_before_return_drawings - final_papers_left\n\n    # FA\n    answer = pictures_drawn_after_work\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "papers_remaining_before_return_drawings",
+    "operand_to_replace": "total_drawn_before_return",
+    "replacement_variable": "yesterday_before_work"
+  },
+  "correct_trace": {
+    "today_drew": 6,
+    "yesterday_before_work": 6,
+    "total_drawn_before_return": 12,
+    "total_papers_bought": 20,
+    "papers_remaining_before_return_drawings": 8,
+    "final_papers_left": 2,
+    "pictures_drawn_after_work": 6,
+    "answer": 6
+  },
+  "flawed_trace": {
+    "today_drew": 6,
+    "yesterday_before_work": 6,
+    "total_drawn_before_return": 12,
+    "total_papers_bought": 20,
+    "papers_remaining_before_return_drawings": 14,
+    "final_papers_left": 2,
+    "pictures_drawn_after_work": 12,
+    "answer": 12
+  },
+  "correct_value": 8,
+  "flawed_value": 14,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_drawn_before_return",
+      "question_inputs": [
+        "today_drew",
+        "yesterday_before_work"
+      ],
+      "solution_line_template": "Charles drew {today_drew} + {yesterday_before_work} = <<{today_drew}+{yesterday_before_work}={total_drawn_before_return}>>{total_drawn_before_return} pictures."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "papers_remaining_before_return_drawings",
+      "question_inputs": [
+        "total_papers_bought"
+      ],
+      "solution_line_template": "He has {total_papers_bought} - {total_drawn_before_return} = <<{total_papers_bought}-{total_drawn_before_return}={papers_remaining_before_return_drawings}>>{papers_remaining_before_return_drawings} papers left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "pictures_drawn_after_work",
+      "question_inputs": [
+        "final_papers_left"
+      ],
+      "solution_line_template": "So Charles drew when he came back from work {papers_remaining_before_return_drawings} - {final_papers_left} = <<{papers_remaining_before_return_drawings}-{final_papers_left}={pictures_drawn_after_work}>>{pictures_drawn_after_work} pictures."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Charles drew 6 + 6 = <<6+6=12>>12 pictures.",
+    "L2": "He has 20 - 6 = <<20-6=14>>14 papers left.",
+    "L3": "So Charles drew when he came back from work 14 - 2 = <<14-2=12>>12 pictures.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'yesterday_before_work' (value: 6) was used instead of 'total_drawn_before_return' (value: 12).",
+  "repro_seed": -8220875387065782790,
+  "model_name": "google_gemini-2.5-flash"
+}

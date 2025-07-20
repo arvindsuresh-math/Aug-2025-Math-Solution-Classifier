@@ -1,0 +1,82 @@
+{
+  "index": 906,
+  "original_solution_mapping": {
+    "FA": "#### 11",
+    "L1": "There are 7 people on the bus after the first stop.",
+    "L2": "There are 7+5-3=<<7+5-3=9>>9 people on the bus after the second stop.",
+    "L3": "There are 9+4-2=<<9+4-2=11>>11 people on the bus after the third stop.",
+    "L4": "11 passengers are now on the bus."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 906.\n    Returns: the number of passengers on the bus after the third stop.\n    \"\"\"\n    # L1\n    first_stop_on = 7 # 7 people got on\n    passengers_after_first_stop = first_stop_on\n\n    # L2\n    second_stop_off = 3 # 3 people got off\n    second_stop_on = 5 # 5 people got on\n    passengers_after_second_stop = passengers_after_first_stop + second_stop_on - second_stop_off\n\n    # L3\n    third_stop_off = 2 # 2 people got off\n    third_stop_on = 4 # 4 people got on\n    passengers_after_third_stop = passengers_after_second_stop + third_stop_on - third_stop_off\n\n    # FA\n    answer = passengers_after_third_stop\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "passengers_after_third_stop",
+    "operand_to_replace": "third_stop_on",
+    "replacement_variable": "second_stop_off"
+  },
+  "correct_trace": {
+    "first_stop_on": 7,
+    "passengers_after_first_stop": 7,
+    "second_stop_off": 3,
+    "second_stop_on": 5,
+    "passengers_after_second_stop": 9,
+    "third_stop_off": 2,
+    "third_stop_on": 4,
+    "passengers_after_third_stop": 11,
+    "answer": 11
+  },
+  "flawed_trace": {
+    "first_stop_on": 7,
+    "passengers_after_first_stop": 7,
+    "second_stop_off": 3,
+    "second_stop_on": 5,
+    "passengers_after_second_stop": 9,
+    "third_stop_off": 2,
+    "third_stop_on": 4,
+    "passengers_after_third_stop": 10,
+    "answer": 10
+  },
+  "correct_value": 11,
+  "flawed_value": 10,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "first_stop_on"
+      ],
+      "WK_inputs": [],
+      "output_variable": "passengers_after_first_stop",
+      "solution_line_template": "There are {first_stop_on} people on the bus after the first stop."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "second_stop_off",
+        "second_stop_on"
+      ],
+      "WK_inputs": [],
+      "output_variable": "passengers_after_second_stop",
+      "solution_line_template": "There are {passengers_after_first_stop}+{second_stop_on}-{second_stop_off}=<<{passengers_after_first_stop}+{second_stop_on}-{second_stop_off}={passengers_after_second_stop}>>{passengers_after_second_stop} people on the bus after the second stop."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "third_stop_off",
+        "third_stop_on"
+      ],
+      "WK_inputs": [],
+      "output_variable": "passengers_after_third_stop",
+      "solution_line_template": "There are {passengers_after_second_stop}+{third_stop_on}-{third_stop_off}=<<{passengers_after_second_stop}+{third_stop_on}-{third_stop_off}={passengers_after_third_stop}>>{passengers_after_third_stop} people on the bus after the third stop."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 7 people on the bus after the first stop.",
+    "L2": "There are 7+5-3=<<7+5-3=9>>9 people on the bus after the second stop.",
+    "L3": "There are 9+3-2=<<9+3-2=10>>10 people on the bus after the third stop.",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'second_stop_off' (3) was used instead of 'third_stop_on' (4).",
+  "repro_seed": 8619211512744259297,
+  "model_name": "google_gemini-2.5-flash"
+}

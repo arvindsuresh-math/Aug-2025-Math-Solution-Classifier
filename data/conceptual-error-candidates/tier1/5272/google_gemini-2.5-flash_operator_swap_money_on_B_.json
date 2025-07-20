@@ -1,0 +1,85 @@
+{
+  "index": 5272,
+  "original_solution_mapping": {
+    "FA": "#### 220",
+    "L1": "If table C had $20 more than table A, then table C had $20+$40=$<<20+40=60>>60",
+    "L2": "Roulette tables A and C had $60+$40=$<<60+40=100>>100",
+    "L3": "Table B had twice as much money on it as table C, meaning table B had $60*2=$<<60*2=120>>120",
+    "L4": "Together, the three roulette tables had $120+$100=$<<120+100=220>>220"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5272.\n    Returns: the total amount of money on all the tables.\n    \"\"\"\n    # L1\n    money_more_C_than_A = 20 # $20 more than table A\n    money_on_A = 40 # $40 on table A\n    money_on_C = money_more_C_than_A + money_on_A\n\n    # L2\n    money_on_A_and_C = money_on_C + money_on_A\n\n    # L3\n    multiplier_B_vs_C = 2 # twice as much money\n    money_on_B = money_on_C * multiplier_B_vs_C\n\n    # L4\n    total_money = money_on_B + money_on_A_and_C\n\n    # FA\n    answer = total_money\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "money_on_B",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x313ced650>"
+  },
+  "correct_trace": {
+    "money_more_C_than_A": 20,
+    "money_on_A": 40,
+    "money_on_C": 60,
+    "money_on_A_and_C": 100,
+    "multiplier_B_vs_C": 2,
+    "money_on_B": 120,
+    "total_money": 220,
+    "answer": 220
+  },
+  "flawed_trace": {
+    "money_more_C_than_A": 20,
+    "money_on_A": 40,
+    "money_on_C": 60,
+    "money_on_A_and_C": 100,
+    "multiplier_B_vs_C": 2,
+    "money_on_B": 62,
+    "total_money": 162,
+    "answer": 162
+  },
+  "correct_value": 120,
+  "flawed_value": 62,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_on_C",
+      "question_inputs": [
+        "money_more_C_than_A",
+        "money_on_A"
+      ],
+      "solution_line_template": "If table C had ${money_more_C_than_A} more than table A, then table C had ${money_more_C_than_A}+${money_on_A}=$<<{money_more_C_than_A}+{money_on_A}={money_on_C}>>{money_on_C}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_on_A_and_C",
+      "question_inputs": [],
+      "solution_line_template": "Roulette tables A and C had ${money_on_C}+${money_on_A}=$<<{money_on_C}+{money_on_A}={money_on_A_and_C}>>{money_on_A_and_C}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "money_on_B",
+      "question_inputs": [
+        "multiplier_B_vs_C"
+      ],
+      "solution_line_template": "Table B had twice as much money on it as table C, meaning table B had ${money_on_C}*{multiplier_B_vs_C}=$<<{money_on_C}*{multiplier_B_vs_C}={money_on_B}>>{money_on_B}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_money",
+      "question_inputs": [],
+      "solution_line_template": "Together, the three roulette tables had ${money_on_B}+${money_on_A_and_C}=$<<{money_on_B}+{money_on_A_and_C}={total_money}>>{total_money}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If table C had $20 more than table A, then table C had $20+$40=$<<20+40=60>>60",
+    "L2": "Roulette tables A and C had $60+$40=$<<60+40=100>>100",
+    "L3": "Table B had twice as much money on it as table C, meaning table B had $60*2=$<<60*2=62>>62",
+    "L4": "Together, the three roulette tables had $62+$100=$<<62+100=162>>162",
+    "FA": "#### 162"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -8289722899840279700,
+  "model_name": "google_gemini-2.5-flash"
+}

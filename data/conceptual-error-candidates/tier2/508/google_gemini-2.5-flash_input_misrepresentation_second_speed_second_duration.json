@@ -1,0 +1,92 @@
+{
+  "index": 508,
+  "original_solution_mapping": {
+    "FA": "#### 75",
+    "L1": "His first drive was 30*.5=<<30*.5=15>>15 miles",
+    "L2": "The next leg was .5*2=<<.5*2=1>>1 hour",
+    "L3": "The speed of the trip was 30*2=<<30*2=60>>60 mph",
+    "L4": "So he drove 60*1=<<60=60>>60 miles",
+    "L5": "So in total he drove 60+15=<<60+15=75>>75 miles"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 508.\n    Returns: the total distance James drove.\n    \"\"\"\n    # L1\n    first_speed = 30 # James drives 30 mph\n    first_duration = 0.5 # for half an hour\n    first_distance = first_speed * first_duration\n\n    # L2\n    second_duration = first_duration * 2\n\n    # L3\n    second_speed = first_speed * 2\n\n    # L4\n    second_distance = second_speed * second_duration\n\n    # L5\n    total_distance = second_distance + first_distance\n\n    # FA\n    answer = total_distance\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "second_speed",
+    "operand_to_replace": "first_speed",
+    "replacement_variable": "second_duration"
+  },
+  "correct_trace": {
+    "first_speed": 30,
+    "first_duration": 0.5,
+    "first_distance": 15.0,
+    "second_duration": 1.0,
+    "second_speed": 60,
+    "second_distance": 60.0,
+    "total_distance": 75.0,
+    "answer": 75.0
+  },
+  "flawed_trace": {
+    "first_speed": 30,
+    "first_duration": 0.5,
+    "first_distance": 15.0,
+    "second_duration": 1.0,
+    "second_speed": 2.0,
+    "second_distance": 2.0,
+    "total_distance": 17.0,
+    "answer": 17.0
+  },
+  "correct_value": 60,
+  "flawed_value": 2.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "first_distance",
+      "question_inputs": [
+        "first_speed",
+        "first_duration"
+      ],
+      "solution_line_template": "His first drive was {first_speed}*{first_duration}=<<{first_speed}*{first_duration}={first_distance}>>{first_distance} miles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "second_duration",
+      "question_inputs": [],
+      "solution_line_template": "The next leg was {first_duration}*2=<<{first_duration}*2={second_duration}>>{second_duration} hour"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "second_speed",
+      "question_inputs": [],
+      "solution_line_template": "The speed of the trip was {first_speed}*2=<<{first_speed}*2={second_speed}>>{second_speed} mph"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "second_distance",
+      "question_inputs": [],
+      "solution_line_template": "So he drove {second_speed}*{second_duration}=<<{second_distance}={second_distance}>>{second_distance} miles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_distance",
+      "question_inputs": [],
+      "solution_line_template": "So in total he drove {second_distance}+{first_distance}=<<{second_distance}+{first_distance}={total_distance}>>{total_distance} miles"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "His first drive was 30*0.5=<<30*0.5=15>>15 miles",
+    "L2": "The next leg was 0.5*2=<<0.5*2=1>>1 hour",
+    "L3": "The speed of the trip was 1*2=<<1*2=2>>2 mph",
+    "L4": "So he drove 2*1=<<2=2>>2 miles",
+    "L5": "So in total he drove 2+15=<<2+15=17>>17 miles",
+    "FA": "#### 17"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'second_duration' (1.0) was used instead of 'first_speed' (30).",
+  "repro_seed": -7156459702643809862,
+  "model_name": "google_gemini-2.5-flash"
+}

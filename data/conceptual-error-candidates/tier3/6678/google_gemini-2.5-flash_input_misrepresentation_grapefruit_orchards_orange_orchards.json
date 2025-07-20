@@ -1,0 +1,78 @@
+{
+  "index": 6678,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "Oranges will occupy 8 / 2 = <<8/2=4>>4 orchards.",
+    "L2": "There will be 16 - 8 - 4 = <<16-8-4=4>>4 orchards remaining for limes and grapefruits.",
+    "L3": "Thus, 4 / 2 = <<4/2=2>>2 orchards will be growing grapefruits."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6678.\n    Returns: the number of citrus orchards growing grapefruits.\n    \"\"\"\n    # L1\n    lemons_orchards = 8 # Lemons, their most popular citrus fruit, will take up eight orchards\n    orange_divisor = 2 # half as many orchards as the lemons\n    orange_orchards = lemons_orchards / orange_divisor\n\n    # L2\n    total_orchards = 16 # sixteen orchards\n    remaining_orchards = total_orchards - lemons_orchards - orange_orchards\n\n    # L3\n    split_divisor = 2 # Limes and grapefruits will split the remaining orchards\n    grapefruit_orchards = remaining_orchards / split_divisor\n\n    # FA\n    answer = grapefruit_orchards\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "grapefruit_orchards",
+    "operand_to_replace": "split_divisor",
+    "replacement_variable": "orange_orchards"
+  },
+  "correct_trace": {
+    "lemons_orchards": 8,
+    "orange_divisor": 2,
+    "orange_orchards": 4.0,
+    "total_orchards": 16,
+    "remaining_orchards": 4.0,
+    "split_divisor": 2,
+    "grapefruit_orchards": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "lemons_orchards": 8,
+    "orange_divisor": 2,
+    "orange_orchards": 4.0,
+    "total_orchards": 16,
+    "remaining_orchards": 4.0,
+    "split_divisor": 2,
+    "grapefruit_orchards": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 2.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "orange_orchards",
+      "question_inputs": [
+        "lemons_orchards",
+        "orange_divisor"
+      ],
+      "solution_line_template": "Oranges will occupy {lemons_orchards} / {orange_divisor} = <<{lemons_orchards}/{orange_divisor}={orange_orchards}>>{orange_orchards} orchards."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_orchards",
+      "question_inputs": [
+        "total_orchards"
+      ],
+      "solution_line_template": "There will be {total_orchards} - {lemons_orchards} - {orange_orchards} = <<{total_orchards}-{lemons_orchards}-{orange_orchards}={remaining_orchards}>>{remaining_orchards} orchards remaining for limes and grapefruits."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "grapefruit_orchards",
+      "question_inputs": [
+        "split_divisor"
+      ],
+      "solution_line_template": "Thus, {remaining_orchards} / {split_divisor} = <<{remaining_orchards}/{split_divisor}={grapefruit_orchards}>>{grapefruit_orchards} orchards will be growing grapefruits."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Oranges will occupy 8 / 2 = <<8/2=4>>4 orchards.",
+    "L2": "There will be 16 - 8 - 4 = <<16-8-4=4>>4 orchards remaining for limes and grapefruits.",
+    "L3": "Thus, 4 / 4 = <<4/4=1>>1 orchards will be growing grapefruits.",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'orange_orchards' (4.0) was used instead of 'split_divisor' (2).",
+  "repro_seed": 6109846961778987379,
+  "model_name": "google_gemini-2.5-flash"
+}

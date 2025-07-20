@@ -1,0 +1,99 @@
+{
+  "index": 6066,
+  "original_solution_mapping": {
+    "FA": "#### 84",
+    "L1": "If one \"AVN\" is half the price of one \"The Dark\" CD, that means one CD of \"The Dark\" costs 12 * 2 = $<<12*2=24>>24.",
+    "L2": "So for two \"The Dark\" CDs, Alan needs to pay 24 * 2 = $<<24*2=48>>48.",
+    "L3": "So all CDs cost by now 12 + 48 = $<<12+48=60>>60.",
+    "L4": "The 90s music CDs cost 40/100 * 60 = $<<40/100*60=24>>24.",
+    "L5": "That means for all CDs Alan needs to pay 60 + 24 = $<<60+24=84>>84."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6066.\n    Returns: the total amount Alan will have to pay for all the products.\n    \"\"\"\n    # L1\n    avn_cd_price = 12 # The price of the \"AVN\" CD is $12\n    dark_cd_price_multiplier = 2 # half the price of one CD by \"The Dark\"\n    dark_cd_price = avn_cd_price * dark_cd_price_multiplier\n\n    # L2\n    num_dark_cds = 2 # buy 2 CDs by \"The Dark\"\n    total_dark_cds_cost = dark_cd_price * num_dark_cds\n\n    # L3\n    cost_of_other_cds = avn_cd_price + total_dark_cds_cost\n\n    # L4\n    nineties_music_percentage = Fraction(40, 100) # 40% of all the cost of all other CDs\n    nineties_music_cds_cost = nineties_music_percentage * cost_of_other_cds\n\n    # L5\n    total_cost = cost_of_other_cds + nineties_music_cds_cost\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_cost",
+    "replacement_variable": "nineties_music_cds_cost"
+  },
+  "correct_trace": {
+    "avn_cd_price": 12,
+    "dark_cd_price_multiplier": 2,
+    "dark_cd_price": 24,
+    "num_dark_cds": 2,
+    "total_dark_cds_cost": 48,
+    "cost_of_other_cds": 60,
+    "nineties_music_percentage": "2/5",
+    "nineties_music_cds_cost": "24",
+    "total_cost": "84",
+    "answer": "84"
+  },
+  "flawed_trace": {
+    "avn_cd_price": 12,
+    "dark_cd_price_multiplier": 2,
+    "dark_cd_price": 24,
+    "num_dark_cds": 2,
+    "total_dark_cds_cost": 48,
+    "cost_of_other_cds": 60,
+    "nineties_music_percentage": "2/5",
+    "nineties_music_cds_cost": "24",
+    "total_cost": "84",
+    "answer": "24"
+  },
+  "correct_value": "84",
+  "flawed_value": "24",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "dark_cd_price",
+      "question_inputs": [
+        "avn_cd_price",
+        "dark_cd_price_multiplier"
+      ],
+      "solution_line_template": "If one \"AVN\" is half the price of one \"The Dark\" CD, that means one CD of \"The Dark\" costs {avn_cd_price} * {dark_cd_price_multiplier} = $<<{avn_cd_price}*{dark_cd_price_multiplier}={dark_cd_price}>>{dark_cd_price}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_dark_cds_cost",
+      "question_inputs": [
+        "num_dark_cds"
+      ],
+      "solution_line_template": "So for {num_dark_cds} \"The Dark\" CDs, Alan needs to pay {dark_cd_price} * {num_dark_cds} = $<<{dark_cd_price}*{num_dark_cds}={total_dark_cds_cost}>>{total_dark_cds_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cost_of_other_cds",
+      "question_inputs": [],
+      "solution_line_template": "So all CDs cost by now {avn_cd_price} + {total_dark_cds_cost} = $<<{avn_cd_price}+{total_dark_cds_cost}={cost_of_other_cds}>>{cost_of_other_cds}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "nineties_music_cds_cost",
+      "question_inputs": [
+        "nineties_music_percentage"
+      ],
+      "solution_line_template": "The 90s music CDs cost {nineties_music_percentage} * {cost_of_other_cds} = $<<{nineties_music_percentage}*{cost_of_other_cds}={nineties_music_cds_cost}>>{nineties_music_cds_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_cost",
+      "question_inputs": [],
+      "solution_line_template": "That means for all CDs Alan needs to pay {cost_of_other_cds} + {nineties_music_cds_cost} = $<<{cost_of_other_cds}+{nineties_music_cds_cost}={total_cost}>>{total_cost}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If one \"AVN\" is half the price of one \"The Dark\" CD, that means one CD of \"The Dark\" costs 12 * 2 = $<<12*2=24>>24.",
+    "L2": "So for 2 \"The Dark\" CDs, Alan needs to pay 24 * 2 = $<<24*2=48>>48.",
+    "L3": "So all CDs cost by now 12 + 48 = $<<12+48=60>>60.",
+    "L4": "The 90s music CDs cost 40/100 * 60 = $<<40/100*60=24>>24.",
+    "FA": "#### 24"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'nineties_music_cds_cost' (value: 24) was reported instead of 'total_cost' (value: 84).",
+  "repro_seed": -1094195368411950418,
+  "model_name": "google_gemini-2.5-flash"
+}

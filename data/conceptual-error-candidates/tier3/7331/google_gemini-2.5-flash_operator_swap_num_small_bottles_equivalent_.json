@@ -1,0 +1,78 @@
+{
+  "index": 7331,
+  "original_solution_mapping": {
+    "FA": "#### 300",
+    "L1": "The equivalent is 30/6=<<30/6=5>>5 small bottles.",
+    "L2": "Five small bottles at 600 pesetas each is 5*600=<<5*600=3000>>3000 pesetas.",
+    "L3": "The savings is 3000-2700=<<3000-2700=300>>300."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7331.\n    Returns: the amount of pesetas saved by buying a big bottle instead of smaller bottles.\n    \"\"\"\n    # L1\n    big_bottle_volume = 30 # The big bottles of mango juice hold 30 ounces\n    small_bottle_volume = 6 # The small bottles hold 6 ounces\n    num_small_bottles_equivalent = big_bottle_volume / small_bottle_volume\n\n    # L2\n    small_bottle_cost = 600 # cost 600 pesetas each\n    cost_of_equivalent_small_bottles = num_small_bottles_equivalent * small_bottle_cost\n\n    # L3\n    big_bottle_cost = 2700 # cost 2700 pesetas each\n    savings = cost_of_equivalent_small_bottles - big_bottle_cost\n\n    # FA\n    answer = savings\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "num_small_bottles_equivalent",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x31b7e1c90>"
+  },
+  "correct_trace": {
+    "big_bottle_volume": 30,
+    "small_bottle_volume": 6,
+    "num_small_bottles_equivalent": 5.0,
+    "small_bottle_cost": 600,
+    "cost_of_equivalent_small_bottles": 3000.0,
+    "big_bottle_cost": 2700,
+    "savings": 300.0,
+    "answer": 300.0
+  },
+  "flawed_trace": {
+    "big_bottle_volume": 30,
+    "small_bottle_volume": 6,
+    "num_small_bottles_equivalent": 24,
+    "small_bottle_cost": 600,
+    "cost_of_equivalent_small_bottles": 14400,
+    "big_bottle_cost": 2700,
+    "savings": 11700,
+    "answer": 11700
+  },
+  "correct_value": 5.0,
+  "flawed_value": 24,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "num_small_bottles_equivalent",
+      "question_inputs": [
+        "big_bottle_volume",
+        "small_bottle_volume"
+      ],
+      "solution_line_template": "The equivalent is {big_bottle_volume}/{small_bottle_volume}=<<{big_bottle_volume}/{small_bottle_volume}={num_small_bottles_equivalent}>>{num_small_bottles_equivalent} small bottles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cost_of_equivalent_small_bottles",
+      "question_inputs": [
+        "small_bottle_cost"
+      ],
+      "solution_line_template": "Five small bottles at {small_bottle_cost} pesetas each is {num_small_bottles_equivalent}*{small_bottle_cost}=<<{num_small_bottles_equivalent}*{small_bottle_cost}={cost_of_equivalent_small_bottles}>>{cost_of_equivalent_small_bottles} pesetas."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "savings",
+      "question_inputs": [
+        "big_bottle_cost"
+      ],
+      "solution_line_template": "The savings is {cost_of_equivalent_small_bottles}-{big_bottle_cost}=<<{cost_of_equivalent_small_bottles}-{big_bottle_cost}={savings}>>{savings}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The equivalent is 30/6=<<30/6=24>>24 small bottles.",
+    "L2": "Five small bottles at 600 pesetas each is 24*600=<<24*600=14400>>14400 pesetas.",
+    "L3": "The savings is 14400-2700=<<14400-2700=11700>>11700.",
+    "FA": "#### 11700"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": -287640871173789937,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 4042,
+  "original_solution_mapping": {
+    "FA": "#### 900",
+    "L1": "Carlson bought land that cost $20 per square meter, therefore the size of the land he bought is 8000/20 = 400.",
+    "L2": "And the size of the other land he bought is 4000/20 = <<4000/20=200>>200.",
+    "L3": "Therefore the total size of the land he owns is 400+200+300 = <<400+200+300=900>>900."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4042.\n    Returns: the total size of Carlson's land after buying new land.\n    \"\"\"\n    # L1\n    cost_land_1 = 8000 # land that cost $8000\n    cost_per_sq_meter = 20 # costs $20 per square meter\n    size_land_1 = cost_land_1 / cost_per_sq_meter\n\n    # L2\n    cost_land_2 = 4000 # additional land that cost $4000\n    size_land_2 = cost_land_2 / cost_per_sq_meter\n\n    # L3\n    initial_land_size = 300 # initially owned 300 square meters of land\n    total_land_size = size_land_1 + size_land_2 + initial_land_size\n\n    # FA\n    answer = total_land_size\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "size_land_2",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x3116927d0>"
+  },
+  "correct_trace": {
+    "cost_land_1": 8000,
+    "cost_per_sq_meter": 20,
+    "size_land_1": 400.0,
+    "cost_land_2": 4000,
+    "size_land_2": 200.0,
+    "initial_land_size": 300,
+    "total_land_size": 900.0,
+    "answer": 900.0
+  },
+  "flawed_trace": {
+    "cost_land_1": 8000,
+    "cost_per_sq_meter": 20,
+    "size_land_1": 400.0,
+    "cost_land_2": 4000,
+    "size_land_2": 3980,
+    "initial_land_size": 300,
+    "total_land_size": 4680.0,
+    "answer": 4680.0
+  },
+  "correct_value": 200.0,
+  "flawed_value": 3980,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "size_land_1",
+      "question_inputs": [
+        "cost_land_1",
+        "cost_per_sq_meter"
+      ],
+      "solution_line_template": "Carlson bought land that cost ${cost_per_sq_meter} per square meter, therefore the size of the land he bought is {cost_land_1}/{cost_per_sq_meter} = <<{cost_land_1}/{cost_per_sq_meter}={size_land_1}>>{size_land_1}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "size_land_2",
+      "question_inputs": [
+        "cost_land_2"
+      ],
+      "solution_line_template": "And the size of the other land he bought is {cost_land_2}/{cost_per_sq_meter} = <<{cost_land_2}/{cost_per_sq_meter}={size_land_2}>>{size_land_2}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_land_size",
+      "question_inputs": [
+        "initial_land_size"
+      ],
+      "solution_line_template": "Therefore the total size of the land he owns is {size_land_1}+{size_land_2}+{initial_land_size} = <<{size_land_1}+{size_land_2}+{initial_land_size}={total_land_size}>>{total_land_size}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Carlson bought land that cost $20 per square meter, therefore the size of the land he bought is 8000/20 = <<8000/20=400>>400.",
+    "L2": "And the size of the other land he bought is 4000/20 = <<4000/20=3980>>3980.",
+    "L3": "Therefore the total size of the land he owns is 400+3980+300 = <<400+3980+300=4680>>4680.",
+    "FA": "#### 4680"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": -6730203931169292754,
+  "model_name": "google_gemini-2.5-flash"
+}

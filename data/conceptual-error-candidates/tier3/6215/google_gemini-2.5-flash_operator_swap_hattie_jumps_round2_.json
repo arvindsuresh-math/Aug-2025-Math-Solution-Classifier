@@ -1,0 +1,89 @@
+{
+  "index": 6215,
+  "original_solution_mapping": {
+    "FA": "#### 605",
+    "L1": "In the first round, Lorelei did 3/4 * 180 jumps = <<3/4*180=135>>135 jumps.",
+    "L2": "In the second round, Hattie did 2/3 * 180 jumps = <<2/3*180=120>>120 jumps, while",
+    "L3": "Lorelei did 120 jumps + 50 jumps = <<120+50=170>>170 jumps.",
+    "L4": "The total number of jumps for the two in both rounds is 170 jumps + 120 jumps + 135 jumps + 180 jumps = <<170+120+135+180=605>>605 jumps"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6215.\n    Returns: the total number of jumps by Hattie and Lorelei in two rounds.\n    \"\"\"\n    # L1\n    hattie_jumps_round1 = 180 # Hattie does 180 jumps in the first round\n    lorelei_fraction_round1 = Fraction(3, 4) # Lorelei jumps 3/4 as many times as Hattie\n    lorelei_jumps_round1 = lorelei_fraction_round1 * hattie_jumps_round1\n\n    # L2\n    hattie_fraction_round2 = Fraction(2, 3) # Hattie managed to jump 2/3 times the number of jumps she did in the first round\n    hattie_jumps_round2 = hattie_fraction_round2 * hattie_jumps_round1\n\n    # L3\n    lorelei_additional_jumps_round2 = 50 # Lorelei does 50 more jumps than Hattie\n    lorelei_jumps_round2 = hattie_jumps_round2 + lorelei_additional_jumps_round2\n\n    # L4\n    total_jumps = lorelei_jumps_round2 + hattie_jumps_round2 + lorelei_jumps_round1 + hattie_jumps_round1\n\n    # FA\n    answer = total_jumps\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "hattie_jumps_round2",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x31b1f0210>"
+  },
+  "correct_trace": {
+    "hattie_jumps_round1": 180,
+    "lorelei_fraction_round1": "3/4",
+    "lorelei_jumps_round1": "135",
+    "hattie_fraction_round2": "2/3",
+    "hattie_jumps_round2": "120",
+    "lorelei_additional_jumps_round2": 50,
+    "lorelei_jumps_round2": "170",
+    "total_jumps": "605",
+    "answer": "605"
+  },
+  "flawed_trace": {
+    "hattie_jumps_round1": 180,
+    "lorelei_fraction_round1": "3/4",
+    "lorelei_jumps_round1": "135",
+    "hattie_fraction_round2": "2/3",
+    "hattie_jumps_round2": "1/270",
+    "lorelei_additional_jumps_round2": 50,
+    "lorelei_jumps_round2": "13501/270",
+    "total_jumps": "49276/135",
+    "answer": "49276/135"
+  },
+  "correct_value": "120",
+  "flawed_value": "1/270",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "lorelei_jumps_round1",
+      "question_inputs": [
+        "hattie_jumps_round1",
+        "lorelei_fraction_round1"
+      ],
+      "solution_line_template": "In the first round, Lorelei did {lorelei_fraction_round1} * {hattie_jumps_round1} jumps = <<{lorelei_fraction_round1}*{hattie_jumps_round1}={lorelei_jumps_round1}>>{lorelei_jumps_round1} jumps."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "hattie_jumps_round2",
+      "question_inputs": [
+        "hattie_fraction_round2"
+      ],
+      "solution_line_template": "In the second round, Hattie did {hattie_fraction_round2} * {hattie_jumps_round1} jumps = <<{hattie_fraction_round2}*{hattie_jumps_round1}={hattie_jumps_round2}>>{hattie_jumps_round2} jumps, while"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "lorelei_jumps_round2",
+      "question_inputs": [
+        "lorelei_additional_jumps_round2"
+      ],
+      "solution_line_template": "Lorelei did {hattie_jumps_round2} jumps + {lorelei_additional_jumps_round2} jumps = <<{hattie_jumps_round2}+{lorelei_additional_jumps_round2}={lorelei_jumps_round2}>>{lorelei_jumps_round2} jumps."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_jumps",
+      "question_inputs": [],
+      "solution_line_template": "The total number of jumps for the two in both rounds is {lorelei_jumps_round2} jumps + {hattie_jumps_round2} jumps + {lorelei_jumps_round1} jumps + {hattie_jumps_round1} jumps = <<{lorelei_jumps_round2}+{hattie_jumps_round2}+{lorelei_jumps_round1}+{hattie_jumps_round1}={total_jumps}>>{total_jumps} jumps"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In the first round, Lorelei did 3/4 * 180 jumps = <<3/4*180=135>>135 jumps.",
+    "L2": "In the second round, Hattie did 2/3 * 180 jumps = <<2/3*180=1/270>>1/270 jumps, while",
+    "L3": "Lorelei did 1/270 jumps + 50 jumps = <<1/270+50=13501/270>>13501/270 jumps.",
+    "L4": "The total number of jumps for the two in both rounds is 13501/270 jumps + 1/270 jumps + 135 jumps + 180 jumps = <<13501/270+1/270+135+180=49276/135>>49276/135 jumps",
+    "FA": "#### 49276/135"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -2307595110180834115,
+  "model_name": "google_gemini-2.5-flash"
+}

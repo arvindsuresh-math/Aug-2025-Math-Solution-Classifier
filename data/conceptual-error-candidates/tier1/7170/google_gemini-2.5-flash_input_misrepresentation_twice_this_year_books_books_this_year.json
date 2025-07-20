@@ -1,0 +1,78 @@
+{
+  "index": 7170,
+  "original_solution_mapping": {
+    "FA": "#### 69",
+    "L1": "The number of books that Monica read this year is 2 * 16 = <<2*16=32>>32 books.",
+    "L2": "Twice the number of books that Monica read this year is 2 * 32 = <<2*32=64>>64 books.",
+    "L3": "The number of books that Monica will read next year is 64 + 5 = <<64+5=69>>69 books."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7170.\n    Returns: the number of books Monica will read next year.\n    \"\"\"\n    # L1\n    books_last_year = 16 # 16 books last year\n    multiplier_this_year = 2 # twice the number of books she read last year\n    books_this_year = multiplier_this_year * books_last_year\n\n    # L2\n    multiplier_for_next_year_base = 2 # twice the number of books she read this year\n    twice_this_year_books = multiplier_for_next_year_base * books_this_year\n\n    # L3\n    additional_next_year = 5 # 5 more\n    books_next_year = twice_this_year_books + additional_next_year\n\n    # FA\n    answer = books_next_year\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "twice_this_year_books",
+    "operand_to_replace": "multiplier_for_next_year_base",
+    "replacement_variable": "books_this_year"
+  },
+  "correct_trace": {
+    "books_last_year": 16,
+    "multiplier_this_year": 2,
+    "books_this_year": 32,
+    "multiplier_for_next_year_base": 2,
+    "twice_this_year_books": 64,
+    "additional_next_year": 5,
+    "books_next_year": 69,
+    "answer": 69
+  },
+  "flawed_trace": {
+    "books_last_year": 16,
+    "multiplier_this_year": 2,
+    "books_this_year": 32,
+    "multiplier_for_next_year_base": 2,
+    "twice_this_year_books": 1024,
+    "additional_next_year": 5,
+    "books_next_year": 1029,
+    "answer": 1029
+  },
+  "correct_value": 64,
+  "flawed_value": 1024,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "books_this_year",
+      "question_inputs": [
+        "books_last_year",
+        "multiplier_this_year"
+      ],
+      "solution_line_template": "The number of books that Monica read this year is {multiplier_this_year} * {books_last_year} = <<{multiplier_this_year}*{books_last_year}={books_this_year}>>{books_this_year} books."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "twice_this_year_books",
+      "question_inputs": [
+        "multiplier_for_next_year_base"
+      ],
+      "solution_line_template": "Twice the number of books that Monica read this year is {multiplier_for_next_year_base} * {books_this_year} = <<{multiplier_for_next_year_base}*{books_this_year}={twice_this_year_books}>>{twice_this_year_books} books."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "books_next_year",
+      "question_inputs": [
+        "additional_next_year"
+      ],
+      "solution_line_template": "The number of books that Monica will read next year is {twice_this_year_books} + {additional_next_year} = <<{twice_this_year_books}+{additional_next_year}={books_next_year}>>{books_next_year} books."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The number of books that Monica read this year is 2 * 16 = <<2*16=32>>32 books.",
+    "L2": "Twice the number of books that Monica read this year is 32 * 32 = <<32*32=1024>>1024 books.",
+    "L3": "The number of books that Monica will read next year is 1024 + 5 = <<1024+5=1029>>1029 books.",
+    "FA": "#### 1029"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'books_this_year' (32) was used instead of 'multiplier_for_next_year_base' (2).",
+  "repro_seed": -1086270322588600395,
+  "model_name": "google_gemini-2.5-flash"
+}

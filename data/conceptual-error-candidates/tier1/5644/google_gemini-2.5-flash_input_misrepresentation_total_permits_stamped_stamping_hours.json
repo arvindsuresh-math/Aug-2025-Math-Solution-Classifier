@@ -1,0 +1,78 @@
+{
+  "index": 5644,
+  "original_solution_mapping": {
+    "FA": "#### 100",
+    "L1": "First find the total length of the appointments: 2 appointments * 3 hours/appointment = <<2*3=6>>6 hours",
+    "L2": "Then subtract that time from the length of Andrew's workday to find how many hours he spends stamping permits: 8 hours - 6 hours = <<8-6=2>>2 hours",
+    "L3": "Then multiply that number by the number of permits he can stamp per day to find how many permits he stamps: 50 permits/hour * 2 hours = <<50*2=100>>100 permits"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5644.\n    Returns: the total number of permits Andrew stamps today.\n    \"\"\"\n    # L1\n    num_appointments = 2 # 2 3-hour appointments\n    hours_per_appointment = 3 # 3-hour appointments\n    total_appointment_hours = num_appointments * hours_per_appointment\n\n    # L2\n    total_workday_hours = 8 # 8-hour workday\n    stamping_hours = total_workday_hours - total_appointment_hours\n\n    # L3\n    permits_per_hour = 50 # stamp 50 permit applications an hour\n    total_permits_stamped = permits_per_hour * stamping_hours\n\n    # FA\n    answer = total_permits_stamped\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_permits_stamped",
+    "operand_to_replace": "permits_per_hour",
+    "replacement_variable": "stamping_hours"
+  },
+  "correct_trace": {
+    "num_appointments": 2,
+    "hours_per_appointment": 3,
+    "total_appointment_hours": 6,
+    "total_workday_hours": 8,
+    "stamping_hours": 2,
+    "permits_per_hour": 50,
+    "total_permits_stamped": 100,
+    "answer": 100
+  },
+  "flawed_trace": {
+    "num_appointments": 2,
+    "hours_per_appointment": 3,
+    "total_appointment_hours": 6,
+    "total_workday_hours": 8,
+    "stamping_hours": 2,
+    "permits_per_hour": 50,
+    "total_permits_stamped": 4,
+    "answer": 4
+  },
+  "correct_value": 100,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_appointment_hours",
+      "question_inputs": [
+        "num_appointments",
+        "hours_per_appointment"
+      ],
+      "solution_line_template": "First find the total length of the appointments: {num_appointments} appointments * {hours_per_appointment} hours/appointment = <<{num_appointments}*{hours_per_appointment}={total_appointment_hours}>>{total_appointment_hours} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "stamping_hours",
+      "question_inputs": [
+        "total_workday_hours"
+      ],
+      "solution_line_template": "Then subtract that time from the length of Andrew's workday to find how many hours he spends stamping permits: {total_workday_hours} hours - {total_appointment_hours} hours = <<{total_workday_hours}-{total_appointment_hours}={stamping_hours}>>{stamping_hours} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_permits_stamped",
+      "question_inputs": [
+        "permits_per_hour"
+      ],
+      "solution_line_template": "Then multiply that number by the number of permits he can stamp per day to find how many permits he stamps: {permits_per_hour} permits/hour * {stamping_hours} hours = <<{permits_per_hour}*{stamping_hours}={total_permits_stamped}>>{total_permits_stamped} permits"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total length of the appointments: 2 appointments * 3 hours/appointment = <<2*3=6>>6 hours",
+    "L2": "Then subtract that time from the length of Andrew's workday to find how many hours he spends stamping permits: 8 hours - 6 hours = <<8-6=2>>2 hours",
+    "L3": "Then multiply that number by the number of permits he can stamp per day to find how many permits he stamps: 2 permits/hour * 2 hours = <<2*2=4>>4 permits",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'stamping_hours' (2) was used instead of 'permits_per_hour' (50).",
+  "repro_seed": 3683413078039986459,
+  "model_name": "google_gemini-2.5-flash"
+}

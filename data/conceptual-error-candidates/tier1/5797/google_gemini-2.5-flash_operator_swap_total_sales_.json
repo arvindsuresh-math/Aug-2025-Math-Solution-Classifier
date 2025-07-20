@@ -1,0 +1,77 @@
+{
+  "index": 5797,
+  "original_solution_mapping": {
+    "FA": "#### 67",
+    "L1": "Sale from coffee is 7 x $5 = $<<7*5=35>>35.",
+    "L2": "Sale from tea is 8 x $4 = $<<8*4=32>>32.",
+    "L3": "Total sales is $35 + $32 = $<<35+32=67>>67."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5797.\n    Returns: the total money the coffee shop made.\n    \"\"\"\n    # L1\n    num_coffee_customers = 7 # 7 customers order coffee\n    price_per_coffee = 5 # $5 each\n    coffee_sales = num_coffee_customers * price_per_coffee\n\n    # L2\n    num_tea_customers = 8 # 8 customers order tea\n    price_per_tea = 4 # $4 each\n    tea_sales = num_tea_customers * price_per_tea\n\n    # L3\n    total_sales = coffee_sales + tea_sales\n\n    # FA\n    answer = total_sales\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_sales",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x313e39a10>"
+  },
+  "correct_trace": {
+    "num_coffee_customers": 7,
+    "price_per_coffee": 5,
+    "coffee_sales": 35,
+    "num_tea_customers": 8,
+    "price_per_tea": 4,
+    "tea_sales": 32,
+    "total_sales": 67,
+    "answer": 67
+  },
+  "flawed_trace": {
+    "num_coffee_customers": 7,
+    "price_per_coffee": 5,
+    "coffee_sales": 35,
+    "num_tea_customers": 8,
+    "price_per_tea": 4,
+    "tea_sales": 32,
+    "total_sales": 1120,
+    "answer": 1120
+  },
+  "correct_value": 67,
+  "flawed_value": 1120,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "coffee_sales",
+      "question_inputs": [
+        "num_coffee_customers",
+        "price_per_coffee"
+      ],
+      "solution_line_template": "Sale from coffee is {num_coffee_customers} x ${price_per_coffee} = $<<{num_coffee_customers}*{price_per_coffee}={coffee_sales}>>{coffee_sales}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "tea_sales",
+      "question_inputs": [
+        "num_tea_customers",
+        "price_per_tea"
+      ],
+      "solution_line_template": "Sale from tea is {num_tea_customers} x ${price_per_tea} = $<<{num_tea_customers}*{price_per_tea}={tea_sales}>>{tea_sales}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_sales",
+      "question_inputs": [],
+      "solution_line_template": "Total sales is ${coffee_sales} + ${tea_sales} = $<<{coffee_sales}+{tea_sales}={total_sales}>>{total_sales}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Sale from coffee is 7 x $5 = $<<7*5=35>>35.",
+    "L2": "Sale from tea is 8 x $4 = $<<8*4=32>>32.",
+    "L3": "Total sales is $35 + $32 = $<<35+32=1120>>1120.",
+    "FA": "#### 1120"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": -2822766022048507775,
+  "model_name": "google_gemini-2.5-flash"
+}

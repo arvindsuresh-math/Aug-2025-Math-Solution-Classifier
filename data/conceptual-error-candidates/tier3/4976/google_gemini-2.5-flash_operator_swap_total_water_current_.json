@@ -1,0 +1,85 @@
+{
+  "index": 4976,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "A glass is filled with 6 x 4/5 = 24/5 ounces of water.",
+    "L2": "So, 10 6-ounces of glasses contains a total of 24/5 x 10 = <<24/5*10=48>>48 ounces of water.",
+    "L3": "To fill the 10 glasses to the brim, 10 x 6 = <<10*6=60>>60 ounces of water are needed.",
+    "L4": "Hence, 60 - 48 = <<60-48=12>>12 ounces of water are still needed."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4976.\n    Returns: the total ounces of water needed to fill all glasses to the brim.\n    \"\"\"\n    # L1\n    glass_capacity = 6 # 6-ounces of glasses\n    fill_fraction = Fraction(4, 5) # 4/5 full of water\n    water_per_glass = glass_capacity * fill_fraction\n\n    # L2\n    num_glasses = 10 # 10 6-ounces of glasses\n    total_water_current = water_per_glass * num_glasses\n\n    # L3\n    total_capacity = num_glasses * glass_capacity\n\n    # L4\n    water_needed = total_capacity - total_water_current\n\n    # FA\n    answer = water_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_water_current",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x31a8a3b90>"
+  },
+  "correct_trace": {
+    "glass_capacity": 6,
+    "fill_fraction": "4/5",
+    "water_per_glass": "24/5",
+    "num_glasses": 10,
+    "total_water_current": "48",
+    "total_capacity": 60,
+    "water_needed": "12",
+    "answer": "12"
+  },
+  "flawed_trace": {
+    "glass_capacity": 6,
+    "fill_fraction": "4/5",
+    "water_per_glass": "24/5",
+    "num_glasses": 10,
+    "total_water_current": "74/5",
+    "total_capacity": 60,
+    "water_needed": "226/5",
+    "answer": "226/5"
+  },
+  "correct_value": "48",
+  "flawed_value": "74/5",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "water_per_glass",
+      "question_inputs": [
+        "glass_capacity",
+        "fill_fraction"
+      ],
+      "solution_line_template": "A glass is filled with {glass_capacity} x {fill_fraction} = {water_per_glass} ounces of water."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_water_current",
+      "question_inputs": [
+        "num_glasses"
+      ],
+      "solution_line_template": "So, {num_glasses} 6-ounces of glasses contains a total of {water_per_glass} x {num_glasses} = <<{water_per_glass}*{num_glasses}={total_water_current}>>{total_water_current} ounces of water."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_capacity",
+      "question_inputs": [],
+      "solution_line_template": "To fill the {num_glasses} glasses to the brim, {num_glasses} x {glass_capacity} = <<{num_glasses}*{glass_capacity}={total_capacity}>>{total_capacity} ounces of water are needed."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "water_needed",
+      "question_inputs": [],
+      "solution_line_template": "Hence, {total_capacity} - {total_water_current} = <<{total_capacity}-{total_water_current}={water_needed}>>{water_needed} ounces of water are still needed."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "A glass is filled with 6 x 4/5 = 24/5 ounces of water.",
+    "L2": "So, 10 6-ounces of glasses contains a total of 24/5 x 10 = <<24/5*10=74/5>>74/5 ounces of water.",
+    "L3": "To fill the 10 glasses to the brim, 10 x 6 = <<10*6=60>>60 ounces of water are needed.",
+    "L4": "Hence, 60 - 74/5 = <<60-74/5=226/5>>226/5 ounces of water are still needed.",
+    "FA": "#### 226/5"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 6227194968204360500,
+  "model_name": "google_gemini-2.5-flash"
+}

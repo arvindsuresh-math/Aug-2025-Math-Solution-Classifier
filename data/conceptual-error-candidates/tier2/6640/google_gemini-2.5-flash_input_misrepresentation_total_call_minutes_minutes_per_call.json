@@ -1,0 +1,64 @@
+{
+  "index": 6640,
+  "original_solution_mapping": {
+    "FA": "#### 78",
+    "L1": "A year has 52 weeks, so if he talks for 30 minutes every week, the total number of call hours is 52*30 = <<52*30=1560>>1560 minutes.",
+    "L2": "Since he is charged 0.05 cents per call, the total cost is 1560*.05 = <<1560*.05=78>>78 dollars"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6640.\n    Returns: the total amount Noah would be billed for calls in a year.\n    \"\"\"\n    # L1\n    weeks_per_year = 52 # WK\n    minutes_per_call = 30 # each call lasts 30 minutes\n    total_call_minutes = weeks_per_year * minutes_per_call\n\n    # L2\n    cost_per_minute = 0.05 # $0.05 per call minute\n    total_cost = total_call_minutes * cost_per_minute\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_call_minutes",
+    "operand_to_replace": "weeks_per_year",
+    "replacement_variable": "minutes_per_call"
+  },
+  "correct_trace": {
+    "weeks_per_year": 52,
+    "minutes_per_call": 30,
+    "total_call_minutes": 1560,
+    "cost_per_minute": 0.05,
+    "total_cost": 78.0,
+    "answer": 78.0
+  },
+  "flawed_trace": {
+    "weeks_per_year": 52,
+    "minutes_per_call": 30,
+    "total_call_minutes": 900,
+    "cost_per_minute": 0.05,
+    "total_cost": 45.0,
+    "answer": 45.0
+  },
+  "correct_value": 1560,
+  "flawed_value": 900,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "weeks_per_year"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_call_minutes",
+      "question_inputs": [
+        "minutes_per_call"
+      ],
+      "solution_line_template": "A year has {weeks_per_year} weeks, so if he talks for {minutes_per_call} minutes every week, the total number of call hours is {weeks_per_year}*{minutes_per_call} = <<{weeks_per_year}*{minutes_per_call}={total_call_minutes}>>{total_call_minutes} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "cost_per_minute"
+      ],
+      "solution_line_template": "Since he is charged {cost_per_minute} cents per call, the total cost is {total_call_minutes}*{cost_per_minute} = <<{total_call_minutes}*{cost_per_minute}={total_cost}>>{total_cost} dollars"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "A year has 30 weeks, so if he talks for 30 minutes every week, the total number of call hours is 30*30 = <<30*30=900>>900 minutes.",
+    "L2": "Since he is charged 0.05 cents per call, the total cost is 900*0.05 = <<900*0.05=45>>45 dollars",
+    "FA": "#### 45"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'minutes_per_call' (30) was used instead of 'weeks_per_year' (52).",
+  "repro_seed": -1692326327139220388,
+  "model_name": "google_gemini-2.5-flash"
+}

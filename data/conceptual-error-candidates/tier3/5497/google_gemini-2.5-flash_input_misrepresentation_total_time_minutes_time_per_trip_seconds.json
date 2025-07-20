@@ -1,0 +1,78 @@
+{
+  "index": 5497,
+  "original_solution_mapping": {
+    "FA": "#### 14",
+    "L1": "It will take 84 / 2 = <<84/2=42>>42 trips to fill the pool with water.",
+    "L2": "This will take Jimmy 42 trips * 20 seconds per trip = <<42*20=840>>840 seconds.",
+    "L3": "This means that Jimmy will spend 840 seconds * 1 minute/ 60 seconds = 14 minutes filling the pool."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5497.\n    Returns: the total time in minutes to fill the pool.\n    \"\"\"\n    # L1\n    pool_capacity = 84 # pool holds 84 gallons of water\n    bucket_capacity = 2 # 2 gallon bucket\n    number_of_trips = pool_capacity / bucket_capacity\n\n    # L2\n    time_per_trip_seconds = 20 # 20 seconds to fill the bucket from the tap and carry it to the pool\n    total_time_seconds = number_of_trips * time_per_trip_seconds\n\n    # L3\n    minutes_per_second_fraction = Fraction(1, 60) # WK\n    total_time_minutes = total_time_seconds * minutes_per_second_fraction\n\n    # FA\n    answer = total_time_minutes\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_time_minutes",
+    "operand_to_replace": "minutes_per_second_fraction",
+    "replacement_variable": "time_per_trip_seconds"
+  },
+  "correct_trace": {
+    "pool_capacity": 84,
+    "bucket_capacity": 2,
+    "number_of_trips": 42.0,
+    "time_per_trip_seconds": 20,
+    "total_time_seconds": 840.0,
+    "minutes_per_second_fraction": "1/60",
+    "total_time_minutes": 14.0,
+    "answer": 14.0
+  },
+  "flawed_trace": {
+    "pool_capacity": 84,
+    "bucket_capacity": 2,
+    "number_of_trips": 42.0,
+    "time_per_trip_seconds": 20,
+    "total_time_seconds": 840.0,
+    "minutes_per_second_fraction": "1/60",
+    "total_time_minutes": 16800.0,
+    "answer": 16800.0
+  },
+  "correct_value": 14.0,
+  "flawed_value": 16800.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "number_of_trips",
+      "question_inputs": [
+        "pool_capacity",
+        "bucket_capacity"
+      ],
+      "solution_line_template": "It will take {pool_capacity} / {bucket_capacity} = <<{pool_capacity}/{bucket_capacity}={number_of_trips}>>{number_of_trips} trips to fill the pool with water."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_time_seconds",
+      "question_inputs": [
+        "time_per_trip_seconds"
+      ],
+      "solution_line_template": "This will take Jimmy {number_of_trips} trips * {time_per_trip_seconds} seconds per trip = <<{number_of_trips}*{time_per_trip_seconds}={total_time_seconds}>>{total_time_seconds} seconds."
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_second_fraction"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_time_minutes",
+      "question_inputs": [],
+      "solution_line_template": "This means that Jimmy will spend {total_time_seconds} seconds * {minutes_per_second_fraction} = {total_time_minutes} minutes filling the pool."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "It will take 84 / 2 = <<84/2=42>>42 trips to fill the pool with water.",
+    "L2": "This will take Jimmy 42 trips * 20 seconds per trip = <<42*20=840>>840 seconds.",
+    "L3": "This means that Jimmy will spend 840 seconds * 20 = 16800 minutes filling the pool.",
+    "FA": "#### 16800"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'time_per_trip_seconds' (20) was used instead of 'minutes_per_second_fraction' (1/60).",
+  "repro_seed": 2059033765595337323,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 4705,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "Jackson used 20 x 1/4 = <<20*1/4=5>>5 kilograms of meat to make meatballs.",
+    "L2": "He had 20 - 5 = <<20-5=15>>15 kilograms of meat left.",
+    "L3": "So 15 - 3 = <<15-3=12>>12 kilograms of meat are left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4705.\n    Returns: the remaining kilograms of meat.\n    \"\"\"\n    # L1\n    initial_meat_kg = 20 # Jackson had 20 kilograms of meat\n    meatball_fraction = Fraction(1, 4) # 1/4 of the meat\n    meat_for_meatballs = initial_meat_kg * meatball_fraction\n\n    # L2\n    meat_after_meatballs = initial_meat_kg - meat_for_meatballs\n\n    # L3\n    meat_for_spring_rolls = 3 # used 3 kilograms of meat to make spring rolls\n    remaining_meat = meat_after_meatballs - meat_for_spring_rolls\n\n    # FA\n    answer = remaining_meat\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "remaining_meat",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x31a7b7490>"
+  },
+  "correct_trace": {
+    "initial_meat_kg": 20,
+    "meatball_fraction": "1/4",
+    "meat_for_meatballs": "5",
+    "meat_after_meatballs": "15",
+    "meat_for_spring_rolls": 3,
+    "remaining_meat": "12",
+    "answer": "12"
+  },
+  "flawed_trace": {
+    "initial_meat_kg": 20,
+    "meatball_fraction": "1/4",
+    "meat_for_meatballs": "5",
+    "meat_after_meatballs": "15",
+    "meat_for_spring_rolls": 3,
+    "remaining_meat": "18",
+    "answer": "18"
+  },
+  "correct_value": "12",
+  "flawed_value": "18",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "meat_for_meatballs",
+      "question_inputs": [
+        "initial_meat_kg",
+        "meatball_fraction"
+      ],
+      "solution_line_template": "Jackson used {initial_meat_kg} x {meatball_fraction} = <<{initial_meat_kg}*{meatball_fraction}={meat_for_meatballs}>>{meat_for_meatballs} kilograms of meat to make meatballs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "meat_after_meatballs",
+      "question_inputs": [],
+      "solution_line_template": "He had {initial_meat_kg} - {meat_for_meatballs} = <<{initial_meat_kg}-{meat_for_meatballs}={meat_after_meatballs}>>{meat_after_meatballs} kilograms of meat left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_meat",
+      "question_inputs": [
+        "meat_for_spring_rolls"
+      ],
+      "solution_line_template": "So {meat_after_meatballs} - {meat_for_spring_rolls} = <<{meat_after_meatballs}-{meat_for_spring_rolls}={remaining_meat}>>{remaining_meat} kilograms of meat are left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jackson used 20 x 1/4 = <<20*1/4=5>>5 kilograms of meat to make meatballs.",
+    "L2": "He had 20 - 5 = <<20-5=15>>15 kilograms of meat left.",
+    "L3": "So 15 - 3 = <<15-3=18>>18 kilograms of meat are left.",
+    "FA": "#### 18"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 1656278274889825687,
+  "model_name": "google_gemini-2.5-flash"
+}

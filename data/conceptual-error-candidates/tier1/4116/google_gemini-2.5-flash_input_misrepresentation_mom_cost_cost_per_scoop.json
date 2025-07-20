@@ -1,0 +1,74 @@
+{
+  "index": 4116,
+  "original_solution_mapping": {
+    "FA": "#### 14",
+    "L1": "His ice cream is $6 because 3 x 2 = <<3*2=6>>6",
+    "L2": "His mom's is $8 because 4 x 2 = <<4*2=8>>8",
+    "L3": "The total is $14 because 6 + 8 = <<6+8=14>>14"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4116.\n    Returns: the total bill for the ice cream.\n    \"\"\"\n    # L1\n    pierre_scoops = 3 # 3 scoops\n    cost_per_scoop = 2 # Each scoop is $2\n    pierre_cost = pierre_scoops * cost_per_scoop\n\n    # L2\n    mom_scoops = 4 # his mom gets 4\n    mom_cost = mom_scoops * cost_per_scoop\n\n    # L3\n    total_bill = pierre_cost + mom_cost\n\n    # FA\n    answer = total_bill\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "mom_cost",
+    "operand_to_replace": "mom_scoops",
+    "replacement_variable": "cost_per_scoop"
+  },
+  "correct_trace": {
+    "pierre_scoops": 3,
+    "cost_per_scoop": 2,
+    "pierre_cost": 6,
+    "mom_scoops": 4,
+    "mom_cost": 8,
+    "total_bill": 14,
+    "answer": 14
+  },
+  "flawed_trace": {
+    "pierre_scoops": 3,
+    "cost_per_scoop": 2,
+    "pierre_cost": 6,
+    "mom_scoops": 4,
+    "mom_cost": 4,
+    "total_bill": 10,
+    "answer": 10
+  },
+  "correct_value": 8,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "pierre_cost",
+      "question_inputs": [
+        "pierre_scoops",
+        "cost_per_scoop"
+      ],
+      "solution_line_template": "His ice cream is ${pierre_cost} because {pierre_scoops} x {cost_per_scoop} = <<{pierre_scoops}*{cost_per_scoop}={pierre_cost}>>{pierre_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "mom_cost",
+      "question_inputs": [
+        "mom_scoops"
+      ],
+      "solution_line_template": "His mom's is ${mom_cost} because {mom_scoops} x {cost_per_scoop} = <<{mom_scoops}*{cost_per_scoop}={mom_cost}>>{mom_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_bill",
+      "question_inputs": [],
+      "solution_line_template": "The total is ${total_bill} because {pierre_cost} + {mom_cost} = <<{pierre_cost}+{mom_cost}={total_bill}>>{total_bill}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "His ice cream is $6 because 3 x 2 = <<3*2=6>>6",
+    "L2": "His mom's is $4 because 2 x 2 = <<2*2=4>>4",
+    "L3": "The total is $10 because 6 + 4 = <<6+4=10>>10",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'cost_per_scoop' (2) was used instead of 'mom_scoops' (4).",
+  "repro_seed": 2854169105711816200,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,82 @@
+{
+  "index": 739,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "Each day it needs to consume 7/7=<<7/7=1>>1 gallon of blood",
+    "L2": "There are 128/16=<<128/16=8>>8 pints per gallon",
+    "L3": "So he needs to suck blood from 8/2=<<8/2=4>>4 people per day"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 739.\n    Returns: the number of people the vampire needs to suck each day.\n    \"\"\"\n    # L1\n    weekly_blood_needed_gallons = 7 # 7 gallons of blood per week\n    days_per_week = 7 # WK\n    daily_blood_needed_gallons = weekly_blood_needed_gallons / days_per_week\n\n    # L2\n    total_ounces_per_gallon = 128 # WK\n    ounces_per_pint = 16 # WK\n    pints_per_gallon = total_ounces_per_gallon / ounces_per_pint\n\n    # L3\n    daily_pints_required = daily_blood_needed_gallons * pints_per_gallon\n    pints_per_person = 2 # 2 pints of blood per person\n    people_per_day = daily_pints_required / pints_per_person\n\n    # FA\n    answer = people_per_day\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "people_per_day",
+    "replacement_variable": "daily_blood_needed_gallons"
+  },
+  "correct_trace": {
+    "weekly_blood_needed_gallons": 7,
+    "days_per_week": 7,
+    "daily_blood_needed_gallons": 1.0,
+    "total_ounces_per_gallon": 128,
+    "ounces_per_pint": 16,
+    "pints_per_gallon": 8.0,
+    "daily_pints_required": 8.0,
+    "pints_per_person": 2,
+    "people_per_day": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "weekly_blood_needed_gallons": 7,
+    "days_per_week": 7,
+    "daily_blood_needed_gallons": 1.0,
+    "total_ounces_per_gallon": 128,
+    "ounces_per_pint": 16,
+    "pints_per_gallon": 8.0,
+    "daily_pints_required": 8.0,
+    "pints_per_person": 2,
+    "people_per_day": 4.0,
+    "answer": 1.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L1",
+      "output_variable": "daily_blood_needed_gallons",
+      "question_inputs": [
+        "weekly_blood_needed_gallons"
+      ],
+      "solution_line_template": "Each day it needs to consume {weekly_blood_needed_gallons}/{days_per_week}=<<{weekly_blood_needed_gallons}/{days_per_week}={daily_blood_needed_gallons}>>{daily_blood_needed_gallons} gallon of blood"
+    },
+    {
+      "WK_inputs": [
+        "total_ounces_per_gallon",
+        "ounces_per_pint"
+      ],
+      "line_number": "L2",
+      "output_variable": "pints_per_gallon",
+      "question_inputs": [],
+      "solution_line_template": "There are {total_ounces_per_gallon}/{ounces_per_pint}=<<{total_ounces_per_gallon}/{ounces_per_pint}={pints_per_gallon}>>{pints_per_gallon} pints per gallon"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "people_per_day",
+      "question_inputs": [
+        "pints_per_person"
+      ],
+      "solution_line_template": "So he needs to suck blood from {daily_pints_required}/{pints_per_person}=<<{daily_pints_required}/{pints_per_person}={people_per_day}>>{people_per_day} people per day"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each day it needs to consume 7/7=<<7/7=1>>1 gallon of blood",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'daily_blood_needed_gallons' (value: 1.0) was reported instead of 'people_per_day' (value: 4.0).",
+  "repro_seed": 93513350211943541,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,63 @@
+{
+  "index": 4050,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "If Ollie caught 7 less than Angus, then Angus caught 5+7=12 fish.",
+    "L2": "And since Angus caught four more than Patrick, then Patrick caught 12-4=<<12-4=8>>8 fish."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4050.\n    Returns: the number of fish Patrick caught.\n    \"\"\"\n    # L1\n    ollie_caught = 5 # If Ollie caught 5 fish\n    angus_more_than_ollie = 7 # Ollie caught 7 fewer fish than Angus\n    angus_caught = ollie_caught + angus_more_than_ollie\n\n    # L2\n    angus_more_than_patrick = 4 # Angus caught 4 more fish than Patrick did\n    patrick_caught = angus_caught - angus_more_than_patrick\n\n    # FA\n    answer = patrick_caught\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "patrick_caught",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x31720b710>"
+  },
+  "correct_trace": {
+    "ollie_caught": 5,
+    "angus_more_than_ollie": 7,
+    "angus_caught": 12,
+    "angus_more_than_patrick": 4,
+    "patrick_caught": 8,
+    "answer": 8
+  },
+  "flawed_trace": {
+    "ollie_caught": 5,
+    "angus_more_than_ollie": 7,
+    "angus_caught": 12,
+    "angus_more_than_patrick": 4,
+    "patrick_caught": 16,
+    "answer": 16
+  },
+  "correct_value": 8,
+  "flawed_value": 16,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "angus_caught",
+      "question_inputs": [
+        "ollie_caught",
+        "angus_more_than_ollie"
+      ],
+      "solution_line_template": "If Ollie caught {angus_more_than_ollie} less than Angus, then Angus caught {ollie_caught}+{angus_more_than_ollie}={angus_caught} fish."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "patrick_caught",
+      "question_inputs": [
+        "angus_more_than_patrick"
+      ],
+      "solution_line_template": "And since Angus caught four more than Patrick, then Patrick caught {angus_caught}-{angus_more_than_patrick}=<<{angus_caught}-{angus_more_than_patrick}={patrick_caught}>>{patrick_caught} fish."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Ollie caught 7 less than Angus, then Angus caught 5+7=12 fish.",
+    "L2": "And since Angus caught four more than Patrick, then Patrick caught 12-4=<<12-4=16>>16 fish.",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -3254513493224608690,
+  "model_name": "google_gemini-2.5-flash"
+}

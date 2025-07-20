@@ -1,0 +1,63 @@
+{
+  "index": 3775,
+  "original_solution_mapping": {
+    "FA": "#### 108",
+    "L1": "Half of much as ProcGen's maximum reward is 240/2=<<240/2=120>>120 reward",
+    "L2": "90% of CoinRun's maximum reward is 120*.9=<<120*.9=108>>108 reward"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3775.\n    Returns: the reward Greg's PPO algorithm obtained.\n    \"\"\"\n    # L1\n    procgen_max_reward = 240 # ProcGen reward of 240\n    coinrun_max_reward_divisor = 2 # half as much\n    coinrun_max_reward = procgen_max_reward / coinrun_max_reward_divisor\n\n    # L2\n    ppo_reward_percent = 0.9 # 90% of the possible reward\n    greg_ppo_reward = coinrun_max_reward * ppo_reward_percent\n\n    # FA\n    answer = greg_ppo_reward\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "greg_ppo_reward",
+    "operand_to_replace": "ppo_reward_percent",
+    "replacement_variable": "coinrun_max_reward_divisor"
+  },
+  "correct_trace": {
+    "procgen_max_reward": 240,
+    "coinrun_max_reward_divisor": 2,
+    "coinrun_max_reward": 120.0,
+    "ppo_reward_percent": 0.9,
+    "greg_ppo_reward": 108.0,
+    "answer": 108.0
+  },
+  "flawed_trace": {
+    "procgen_max_reward": 240,
+    "coinrun_max_reward_divisor": 2,
+    "coinrun_max_reward": 120.0,
+    "ppo_reward_percent": 0.9,
+    "greg_ppo_reward": 240.0,
+    "answer": 240.0
+  },
+  "correct_value": 108.0,
+  "flawed_value": 240.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "coinrun_max_reward",
+      "question_inputs": [
+        "procgen_max_reward",
+        "coinrun_max_reward_divisor"
+      ],
+      "solution_line_template": "Half of much as ProcGen's maximum reward is {procgen_max_reward}/{coinrun_max_reward_divisor}=<<{procgen_max_reward}/{coinrun_max_reward_divisor}={coinrun_max_reward}>>{coinrun_max_reward} reward"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "greg_ppo_reward",
+      "question_inputs": [
+        "ppo_reward_percent"
+      ],
+      "solution_line_template": "90% of CoinRun's maximum reward is {coinrun_max_reward}*{ppo_reward_percent}=<<{coinrun_max_reward}*{ppo_reward_percent}={greg_ppo_reward}>>{greg_ppo_reward} reward"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Half of much as ProcGen's maximum reward is 240/2=<<240/2=120>>120 reward",
+    "L2": "90% of CoinRun's maximum reward is 120*2=<<120*2=240>>240 reward",
+    "FA": "#### 240"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'coinrun_max_reward_divisor' (2) was used instead of 'ppo_reward_percent' (0.9).",
+  "repro_seed": 1678370873531664965,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,85 @@
+{
+  "index": 7301,
+  "original_solution_mapping": {
+    "FA": "#### 2756",
+    "L1": "She puts $100.00 into her 401k from every paycheck and she gets 26 paychecks so that's 100*26 = $<<100*26=2600.00>>2,600.00",
+    "L2": "Her company matches her $100.00 by 6% so they contribute 100*.06 = $<<100*.06=6.00>>6.00 every paycheck",
+    "L3": "Over a year, the company contributes $6.00 to her 401k with every paycheck so they contribute 6*26 = $<<6*26=156.00>>156.00",
+    "L4": "Holly puts $2,600.00 into her 401k annually and her company contributes $156.00 annually so she has 2600+156 = $<<2600+156=2756>>2,756 in her 401k"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7301.\n    Returns: the total money contributed to her 401k after 1 year.\n    \"\"\"\n    # L1\n    contribution_per_paycheck = 100.00 # puts $100.00 from every paycheck\n    paychecks_per_year = 26 # 26 paychecks per year\n    annual_personal_contribution = contribution_per_paycheck * paychecks_per_year\n\n    # L2\n    match_rate_decimal = 0.06 # by 6%\n    company_contribution_per_paycheck = contribution_per_paycheck * match_rate_decimal\n\n    # L3\n    annual_company_contribution = company_contribution_per_paycheck * paychecks_per_year\n\n    # L4\n    total_annual_contribution = annual_personal_contribution + annual_company_contribution\n\n    # FA\n    answer = total_annual_contribution\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "annual_personal_contribution",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x315baced0>"
+  },
+  "correct_trace": {
+    "contribution_per_paycheck": 100.0,
+    "paychecks_per_year": 26,
+    "annual_personal_contribution": 2600.0,
+    "match_rate_decimal": 0.06,
+    "company_contribution_per_paycheck": 6.0,
+    "annual_company_contribution": 156.0,
+    "total_annual_contribution": 2756.0,
+    "answer": 2756.0
+  },
+  "flawed_trace": {
+    "contribution_per_paycheck": 100.0,
+    "paychecks_per_year": 26,
+    "annual_personal_contribution": 126.0,
+    "match_rate_decimal": 0.06,
+    "company_contribution_per_paycheck": 6.0,
+    "annual_company_contribution": 156.0,
+    "total_annual_contribution": 282.0,
+    "answer": 282.0
+  },
+  "correct_value": 2600.0,
+  "flawed_value": 126.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "annual_personal_contribution",
+      "question_inputs": [
+        "contribution_per_paycheck",
+        "paychecks_per_year"
+      ],
+      "solution_line_template": "She puts ${contribution_per_paycheck} into her 401k from every paycheck and she gets {paychecks_per_year} paychecks so that's {contribution_per_paycheck}*{paychecks_per_year} = $<<{contribution_per_paycheck}*{paychecks_per_year}={annual_personal_contribution}>>{annual_personal_contribution}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "company_contribution_per_paycheck",
+      "question_inputs": [
+        "match_rate_decimal"
+      ],
+      "solution_line_template": "Her company matches her ${contribution_per_paycheck} by 6% so they contribute {contribution_per_paycheck}*{match_rate_decimal} = $<<{contribution_per_paycheck}*{match_rate_decimal}={company_contribution_per_paycheck}>>{company_contribution_per_paycheck} every paycheck"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "annual_company_contribution",
+      "question_inputs": [],
+      "solution_line_template": "Over a year, the company contributes ${company_contribution_per_paycheck} to her 401k with every paycheck so they contribute {company_contribution_per_paycheck}*{paychecks_per_year} = $<<{company_contribution_per_paycheck}*{paychecks_per_year}={annual_company_contribution}>>{annual_company_contribution}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_annual_contribution",
+      "question_inputs": [],
+      "solution_line_template": "Holly puts ${annual_personal_contribution} into her 401k annually and her company contributes ${annual_company_contribution} annually so she has {annual_personal_contribution}+{annual_company_contribution} = $<<{annual_personal_contribution}+{annual_company_contribution}={total_annual_contribution}>>{total_annual_contribution} in her 401k"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She puts $100 into her 401k from every paycheck and she gets 26 paychecks so that's 100*26 = $<<100*26=126>>126",
+    "L2": "Her company matches her $100 by 6% so they contribute 100*0.06 = $<<100*0.06=6>>6 every paycheck",
+    "L3": "Over a year, the company contributes $6 to her 401k with every paycheck so they contribute 6*26 = $<<6*26=156>>156",
+    "L4": "Holly puts $126 into her 401k annually and her company contributes $156 annually so she has 126+156 = $<<126+156=282>>282 in her 401k",
+    "FA": "#### 282"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 7791998136725542682,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 1067,
+  "original_solution_mapping": {
+    "FA": "#### 100",
+    "L1": "The total number of apples delivered was: 180 apples x 12 crates = <<180*12=2160>>2160 apples",
+    "L2": "So, the number of remaining apples after throwing away the rotten ones was: 2160 apples - 160 apples = <<2160-160=2000>>2000 apples",
+    "L3": "And now, we can find the total number of boxes of apples by dividing the remaining number of apples by the number of apples per box: 2000 apples / 20 apples/box = <<2000/20=100>>100 boxes of apples."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1067.\n    Returns: the total number of boxes of apples.\n    \"\"\"\n    # L1\n    apples_per_crate = 180 # 180 apples in each crate\n    num_crates = 12 # 12 such crates of apples\n    total_apples_delivered = apples_per_crate * num_crates\n\n    # L2\n    rotten_apples = 160 # 160 apples were rotten\n    remaining_apples = total_apples_delivered - rotten_apples\n\n    # L3\n    apples_per_box = 20 # boxes of 20 apples each\n    total_boxes = remaining_apples / apples_per_box\n\n    # FA\n    answer = total_boxes\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "remaining_apples",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x3140ad790>"
+  },
+  "correct_trace": {
+    "apples_per_crate": 180,
+    "num_crates": 12,
+    "total_apples_delivered": 2160,
+    "rotten_apples": 160,
+    "remaining_apples": 2000,
+    "apples_per_box": 20,
+    "total_boxes": 100.0,
+    "answer": 100.0
+  },
+  "flawed_trace": {
+    "apples_per_crate": 180,
+    "num_crates": 12,
+    "total_apples_delivered": 2160,
+    "rotten_apples": 160,
+    "remaining_apples": 2320,
+    "apples_per_box": 20,
+    "total_boxes": 116.0,
+    "answer": 116.0
+  },
+  "correct_value": 2000,
+  "flawed_value": 2320,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_apples_delivered",
+      "question_inputs": [
+        "apples_per_crate",
+        "num_crates"
+      ],
+      "solution_line_template": "The total number of apples delivered was: {apples_per_crate} apples x {num_crates} crates = <<{apples_per_crate}*{num_crates}={total_apples_delivered}>>{total_apples_delivered} apples"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_apples",
+      "question_inputs": [
+        "rotten_apples"
+      ],
+      "solution_line_template": "So, the number of remaining apples after throwing away the rotten ones was: {total_apples_delivered} apples - {rotten_apples} apples = <<{total_apples_delivered}-{rotten_apples}={remaining_apples}>>{remaining_apples} apples"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_boxes",
+      "question_inputs": [
+        "apples_per_box"
+      ],
+      "solution_line_template": "And now, we can find the total number of boxes of apples by dividing the remaining number of apples by the number of apples per box: {remaining_apples} apples / {apples_per_box} apples/box = <<{remaining_apples}/{apples_per_box}={total_boxes}>>{total_boxes} boxes of apples."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total number of apples delivered was: 180 apples x 12 crates = <<180*12=2160>>2160 apples",
+    "L2": "So, the number of remaining apples after throwing away the rotten ones was: 2160 apples - 160 apples = <<2160-160=2320>>2320 apples",
+    "L3": "And now, we can find the total number of boxes of apples by dividing the remaining number of apples by the number of apples per box: 2320 apples / 20 apples/box = <<2320/20=116>>116 boxes of apples.",
+    "FA": "#### 116"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -2052036390509170638,
+  "model_name": "google_gemini-2.5-flash"
+}

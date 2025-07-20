@@ -1,0 +1,89 @@
+{
+  "index": 3838,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "The dinner cost 10+2.5=$<<10+2.5=12.5>>12.5.",
+    "L2": "The tip comes to 12.5*.2=$2.5.",
+    "L3": "So the total cost is 12.5+2.5=$<<12.5+2.5=15>>15.",
+    "L4": "That means she gets 20-15=$<<20-15=5>>5 in change."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3838.\n    Returns: the amount of change Kim gets.\n    \"\"\"\n    # L1\n    meal_cost = 10 # $10 meal\n    drink_cost = 2.5 # drink for 2.5\n    dinner_cost = meal_cost + drink_cost\n\n    # L2\n    tip_percent_decimal = 0.2 # 20% tip\n    tip_amount = dinner_cost * tip_percent_decimal\n\n    # L3\n    total_cost = dinner_cost + tip_amount\n\n    # L4\n    bill_paid = 20 # $20 bill\n    change_amount = bill_paid - total_cost\n\n    # FA\n    answer = change_amount\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "tip_amount",
+    "operand_to_replace": "dinner_cost",
+    "replacement_variable": "drink_cost"
+  },
+  "correct_trace": {
+    "meal_cost": 10,
+    "drink_cost": 2.5,
+    "dinner_cost": 12.5,
+    "tip_percent_decimal": 0.2,
+    "tip_amount": 2.5,
+    "total_cost": 15.0,
+    "bill_paid": 20,
+    "change_amount": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "meal_cost": 10,
+    "drink_cost": 2.5,
+    "dinner_cost": 12.5,
+    "tip_percent_decimal": 0.2,
+    "tip_amount": 0.5,
+    "total_cost": 13.0,
+    "bill_paid": 20,
+    "change_amount": 7.0,
+    "answer": 7.0
+  },
+  "correct_value": 2.5,
+  "flawed_value": 0.5,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "dinner_cost",
+      "question_inputs": [
+        "meal_cost",
+        "drink_cost"
+      ],
+      "solution_line_template": "The dinner cost {meal_cost}+{drink_cost}=$<<{meal_cost}+{drink_cost}={dinner_cost}>>{dinner_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "tip_amount",
+      "question_inputs": [
+        "tip_percent_decimal"
+      ],
+      "solution_line_template": "The tip comes to {dinner_cost}*{tip_percent_decimal}=${tip_amount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost",
+      "question_inputs": [],
+      "solution_line_template": "So the total cost is {dinner_cost}+{tip_amount}=$<<{dinner_cost}+{tip_amount}={total_cost}>>{total_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "change_amount",
+      "question_inputs": [
+        "bill_paid"
+      ],
+      "solution_line_template": "That means she gets {bill_paid}-{total_cost}=$<<{bill_paid}-{total_cost}={change_amount}>>{change_amount} in change."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The dinner cost 10+2.5=$<<10+2.5=12.5>>12.5.",
+    "L2": "The tip comes to 2.5*0.2=$0.5.",
+    "L3": "So the total cost is 12.5+0.5=$<<12.5+0.5=13>>13.",
+    "L4": "That means she gets 20-13=$<<20-13=7>>7 in change.",
+    "FA": "#### 7"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'drink_cost' (value: 2.5) was used instead of 'dinner_cost' (value: 12.5).",
+  "repro_seed": -7593036757791205980,
+  "model_name": "google_gemini-2.5-flash"
+}

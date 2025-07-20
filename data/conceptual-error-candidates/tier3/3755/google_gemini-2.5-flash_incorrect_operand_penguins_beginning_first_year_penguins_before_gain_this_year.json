@@ -1,0 +1,93 @@
+{
+  "index": 3755,
+  "original_solution_mapping": {
+    "FA": "#### 237",
+    "L1": "The colony had 1077 - 129 = <<1077-129=948>>948 penguins in it at the beginning of this year.",
+    "L2": "At the beginning of the second year, the colony had 948 / 3 = <<948/3=316>>316 penguins in it.",
+    "L3": "At the beginning of the first year, it had 316 / 2 = <<316/2=158>>158 penguins in it.",
+    "L4": "Thus, at the beginning of the first year, the penguin colony was catching 158 * 1 1/2 = 237 fish per day."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3755.\n    Returns: the number of fish the whole colony caught per day at the beginning of the first year.\n    \"\"\"\n    # L1\n    current_penguins = 1077 # The colony has 1077 penguins in it now\n    gained_this_year = 129 # colony only gained 129 penguins\n    penguins_before_gain_this_year = current_penguins - gained_this_year\n\n    # L2\n    tripled_factor = 3 # then tripled in the next year\n    penguins_beginning_second_year = penguins_before_gain_this_year / tripled_factor\n\n    # L3\n    doubled_factor = 2 # size doubled in the first year\n    penguins_beginning_first_year = penguins_beginning_second_year / doubled_factor\n\n    # L4\n    fish_per_penguin = Fraction(3, 2) # one and a half fish\n    total_fish_per_day = penguins_beginning_first_year * fish_per_penguin\n\n    # FA\n    answer = total_fish_per_day\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "penguins_beginning_first_year",
+    "operand_to_replace": "penguins_beginning_second_year",
+    "replacement_variable": "penguins_before_gain_this_year"
+  },
+  "correct_trace": {
+    "current_penguins": 1077,
+    "gained_this_year": 129,
+    "penguins_before_gain_this_year": 948,
+    "tripled_factor": 3,
+    "penguins_beginning_second_year": 316.0,
+    "doubled_factor": 2,
+    "penguins_beginning_first_year": 158.0,
+    "fish_per_penguin": "3/2",
+    "total_fish_per_day": 237.0,
+    "answer": 237.0
+  },
+  "flawed_trace": {
+    "current_penguins": 1077,
+    "gained_this_year": 129,
+    "penguins_before_gain_this_year": 948,
+    "tripled_factor": 3,
+    "penguins_beginning_second_year": 316.0,
+    "doubled_factor": 2,
+    "penguins_beginning_first_year": 474.0,
+    "fish_per_penguin": "3/2",
+    "total_fish_per_day": 711.0,
+    "answer": 711.0
+  },
+  "correct_value": 158.0,
+  "flawed_value": 474.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "penguins_before_gain_this_year",
+      "question_inputs": [
+        "current_penguins",
+        "gained_this_year"
+      ],
+      "solution_line_template": "The colony had {current_penguins} - {gained_this_year} = <<{current_penguins}-{gained_this_year}={penguins_before_gain_this_year}>>{penguins_before_gain_this_year} penguins in it at the beginning of this year."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "penguins_beginning_second_year",
+      "question_inputs": [
+        "tripled_factor"
+      ],
+      "solution_line_template": "At the beginning of the second year, the colony had {penguins_before_gain_this_year} / {tripled_factor} = <<{penguins_before_gain_this_year}/{tripled_factor}={penguins_beginning_second_year}>>{penguins_beginning_second_year} penguins in it."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "penguins_beginning_first_year",
+      "question_inputs": [
+        "doubled_factor"
+      ],
+      "solution_line_template": "At the beginning of the first year, it had {penguins_beginning_second_year} / {doubled_factor} = <<{penguins_beginning_second_year}/{doubled_factor}={penguins_beginning_first_year}>>{penguins_beginning_first_year} penguins in it."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_fish_per_day",
+      "question_inputs": [
+        "fish_per_penguin"
+      ],
+      "solution_line_template": "Thus, at the beginning of the first year, the penguin colony was catching {penguins_beginning_first_year} * {fish_per_penguin} = {total_fish_per_day} fish per day."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The colony had 1077 - 129 = <<1077-129=948>>948 penguins in it at the beginning of this year.",
+    "L2": "At the beginning of the second year, the colony had 948 / 3 = <<948/3=316>>316 penguins in it.",
+    "L3": "At the beginning of the first year, it had 948 / 2 = <<948/2=474>>474 penguins in it.",
+    "L4": "Thus, at the beginning of the first year, the penguin colony was catching 474 * 3/2 = 711 fish per day.",
+    "FA": "#### 711"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'penguins_before_gain_this_year' (value: 948) was used instead of 'penguins_beginning_second_year' (value: 316.0).",
+  "repro_seed": 822591316483079895,
+  "model_name": "google_gemini-2.5-flash"
+}

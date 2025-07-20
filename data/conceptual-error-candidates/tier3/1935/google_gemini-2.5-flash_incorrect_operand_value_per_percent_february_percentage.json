@@ -1,0 +1,103 @@
+{
+  "index": 1935,
+  "original_solution_mapping": {
+    "FA": "#### 11000",
+    "L1": "The total percentage of money that Reese spent in February and March is 20% + 40% = 60%.",
+    "L2": "This means the April expenses and the money left in her account make up 100% - 60% = 40% of her savings.",
+    "L3": "Reese had $2900 + $1500 = $<<2900+1500=4400>>4400 for the April expenses and the money left in her account.",
+    "L4": "So, $4400 is equal to 40% which means every 1% is equal to $4400/40 = $<<4400/40=110>>110.",
+    "L5": "Therefore, Reese originally had $110 x 100 = $<<110*100=11000>>11000 in her savings account."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1935.\n    Returns: the original amount of money Reese had in her savings account.\n    \"\"\"\n    # L1\n    february_percentage = 20 # spent 20% of her savings for her expenses in February\n    march_percentage = 40 # 40% of it in March\n    total_percentage_spent_feb_mar = february_percentage + march_percentage\n\n    # L2\n    total_percentage_base = 100 # WK\n    remaining_percentage = total_percentage_base - total_percentage_spent_feb_mar\n\n    # L3\n    money_left = 2900 # she still has $2900\n    april_expenses = 1500 # and $1500 in April\n    amount_corresponding_to_remaining_percentage = money_left + april_expenses\n\n    # L4\n    value_per_percent = amount_corresponding_to_remaining_percentage / remaining_percentage\n\n    # L5\n    original_savings = value_per_percent * total_percentage_base\n\n    # FA\n    answer = original_savings\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "value_per_percent",
+    "operand_to_replace": "remaining_percentage",
+    "replacement_variable": "february_percentage"
+  },
+  "correct_trace": {
+    "february_percentage": 20,
+    "march_percentage": 40,
+    "total_percentage_spent_feb_mar": 60,
+    "total_percentage_base": 100,
+    "remaining_percentage": 40,
+    "money_left": 2900,
+    "april_expenses": 1500,
+    "amount_corresponding_to_remaining_percentage": 4400,
+    "value_per_percent": 110.0,
+    "original_savings": 11000.0,
+    "answer": 11000.0
+  },
+  "flawed_trace": {
+    "february_percentage": 20,
+    "march_percentage": 40,
+    "total_percentage_spent_feb_mar": 60,
+    "total_percentage_base": 100,
+    "remaining_percentage": 40,
+    "money_left": 2900,
+    "april_expenses": 1500,
+    "amount_corresponding_to_remaining_percentage": 4400,
+    "value_per_percent": 220.0,
+    "original_savings": 22000.0,
+    "answer": 22000.0
+  },
+  "correct_value": 110.0,
+  "flawed_value": 220.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_percentage_spent_feb_mar",
+      "question_inputs": [
+        "february_percentage",
+        "march_percentage"
+      ],
+      "solution_line_template": "The total percentage of money that Reese spent in February and March is {february_percentage}% + {march_percentage}% = {total_percentage_spent_feb_mar}%."
+    },
+    {
+      "WK_inputs": [
+        "total_percentage_base"
+      ],
+      "line_number": "L2",
+      "output_variable": "remaining_percentage",
+      "question_inputs": [],
+      "solution_line_template": "This means the April expenses and the money left in her account make up {total_percentage_base}% - {total_percentage_spent_feb_mar}% = {remaining_percentage}% of her savings."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "amount_corresponding_to_remaining_percentage",
+      "question_inputs": [
+        "money_left",
+        "april_expenses"
+      ],
+      "solution_line_template": "Reese had ${money_left} + ${april_expenses} = $<<{money_left}+{april_expenses}={amount_corresponding_to_remaining_percentage}>>{amount_corresponding_to_remaining_percentage} for the April expenses and the money left in her account."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "value_per_percent",
+      "question_inputs": [],
+      "solution_line_template": "So, ${amount_corresponding_to_remaining_percentage} is equal to {remaining_percentage}% which means every 1% is equal to ${amount_corresponding_to_remaining_percentage}/{remaining_percentage} = $<<{amount_corresponding_to_remaining_percentage}/{remaining_percentage}={value_per_percent}>>{value_per_percent}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "original_savings",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, Reese originally had ${value_per_percent} x {total_percentage_base} = $<<{value_per_percent}*{total_percentage_base}={original_savings}>>{original_savings} in her savings account."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total percentage of money that Reese spent in February and March is 20% + 40% = 60%.",
+    "L2": "This means the April expenses and the money left in her account make up 100% - 60% = 40% of her savings.",
+    "L3": "Reese had $2900 + $1500 = $<<2900+1500=4400>>4400 for the April expenses and the money left in her account.",
+    "L4": "So, $4400 is equal to 20% which means every 1% is equal to $4400/20 = $<<4400/20=220>>220.",
+    "L5": "Therefore, Reese originally had $220 x 100 = $<<220*100=22000>>22000 in her savings account.",
+    "FA": "#### 22000"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'february_percentage' (value: 20) was used instead of 'remaining_percentage' (value: 40).",
+  "repro_seed": 1894260074276383886,
+  "model_name": "google_gemini-2.5-flash"
+}

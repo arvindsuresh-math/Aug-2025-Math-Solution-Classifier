@@ -1,0 +1,107 @@
+{
+  "index": 4911,
+  "original_solution_mapping": {
+    "FA": "#### 134",
+    "L1": "Ajax weighs 80 x 2.2 = <<80*2.2=176>>176 in pounds.",
+    "L2": "He will lose 1.5 x 2 = <<1.5*2=3>>3 pounds per day.",
+    "L3": "So he will lose 3 x 7 = <<3*7=21>>21 pounds per week.",
+    "L4": "So, he will lose 21x 2 = <<21*2=42>>42 pounds after 2 weeks.",
+    "L5": "Therefore, he will weigh 176 - 42 = <<176-42=134>>134 pounds after 2 weeks."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4911.\n    Returns: the final weight of Ajax in pounds after exercising.\n    \"\"\"\n    # L1\n    ajax_weight_kg = 80 # Ajax is 80 kilograms\n    kg_to_lbs_conversion = 2.2 # 1 kilogram is equal to 2.2 pounds\n    ajax_weight_lbs = ajax_weight_kg * kg_to_lbs_conversion\n\n    # L2\n    pounds_lost_per_hour = 1.5 # lose 1.5 pounds\n    exercise_hours_per_day = 2 # exercises for 2 hours every day\n    pounds_lost_per_day = pounds_lost_per_hour * exercise_hours_per_day\n\n    # L3\n    days_per_week = 7 # WK\n    pounds_lost_per_week = pounds_lost_per_day * days_per_week\n\n    # L4\n    num_weeks = 2 # two weeks\n    total_pounds_lost = pounds_lost_per_week * num_weeks\n\n    # L5\n    final_weight_lbs = ajax_weight_lbs - total_pounds_lost\n\n    # FA\n    answer = final_weight_lbs\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_pounds_lost",
+    "operand_to_replace": "num_weeks",
+    "replacement_variable": "pounds_lost_per_day"
+  },
+  "correct_trace": {
+    "ajax_weight_kg": 80,
+    "kg_to_lbs_conversion": 2.2,
+    "ajax_weight_lbs": 176.0,
+    "pounds_lost_per_hour": 1.5,
+    "exercise_hours_per_day": 2,
+    "pounds_lost_per_day": 3.0,
+    "days_per_week": 7,
+    "pounds_lost_per_week": 21.0,
+    "num_weeks": 2,
+    "total_pounds_lost": 42.0,
+    "final_weight_lbs": 134.0,
+    "answer": 134.0
+  },
+  "flawed_trace": {
+    "ajax_weight_kg": 80,
+    "kg_to_lbs_conversion": 2.2,
+    "ajax_weight_lbs": 176.0,
+    "pounds_lost_per_hour": 1.5,
+    "exercise_hours_per_day": 2,
+    "pounds_lost_per_day": 3.0,
+    "days_per_week": 7,
+    "pounds_lost_per_week": 21.0,
+    "num_weeks": 2,
+    "total_pounds_lost": 63.0,
+    "final_weight_lbs": 113.0,
+    "answer": 113.0
+  },
+  "correct_value": 42.0,
+  "flawed_value": 63.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "ajax_weight_lbs",
+      "question_inputs": [
+        "ajax_weight_kg",
+        "kg_to_lbs_conversion"
+      ],
+      "solution_line_template": "Ajax weighs {ajax_weight_kg} x {kg_to_lbs_conversion} = <<{ajax_weight_kg}*{kg_to_lbs_conversion}={ajax_weight_lbs}>>{ajax_weight_lbs} in pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "pounds_lost_per_day",
+      "question_inputs": [
+        "pounds_lost_per_hour",
+        "exercise_hours_per_day"
+      ],
+      "solution_line_template": "He will lose {pounds_lost_per_hour} x {exercise_hours_per_day} = <<{pounds_lost_per_hour}*{exercise_hours_per_day}={pounds_lost_per_day}>>{pounds_lost_per_day} pounds per day."
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L3",
+      "output_variable": "pounds_lost_per_week",
+      "question_inputs": [],
+      "solution_line_template": "So he will lose {pounds_lost_per_day} x {days_per_week} = <<{pounds_lost_per_day}*{days_per_week}={pounds_lost_per_week}>>{pounds_lost_per_week} pounds per week."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_pounds_lost",
+      "question_inputs": [
+        "num_weeks"
+      ],
+      "solution_line_template": "So, he will lose {pounds_lost_per_week}x {num_weeks} = <<{pounds_lost_per_week}*{num_weeks}={total_pounds_lost}>>{total_pounds_lost} pounds after {num_weeks} weeks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "final_weight_lbs",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, he will weigh {ajax_weight_lbs} - {total_pounds_lost} = <<{ajax_weight_lbs}-{total_pounds_lost}={final_weight_lbs}>>{final_weight_lbs} pounds after {num_weeks} weeks."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Ajax weighs 80 x 2.2 = <<80*2.2=176>>176 in pounds.",
+    "L2": "He will lose 1.5 x 2 = <<1.5*2=3>>3 pounds per day.",
+    "L3": "So he will lose 3 x 7 = <<3*7=21>>21 pounds per week.",
+    "L4": "So, he will lose 21x 3 = <<21*3=63>>63 pounds after 3 weeks.",
+    "L5": "Therefore, he will weigh 176 - 63 = <<176-63=113>>113 pounds after 2 weeks.",
+    "FA": "#### 113"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'pounds_lost_per_day' (3.0) was used instead of 'num_weeks' (2).",
+  "repro_seed": -7616497643612287790,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 4792,
+  "original_solution_mapping": {
+    "FA": "#### 14",
+    "L1": "On Tuesday, Nancy creates 12 clay pots * 2 = <<12*2=24>>24 clay plots.",
+    "L2": "So she created a combined total of 12 + 24 = <<12+24=36>>36 clay pots on Monday and Tuesday.",
+    "L3": "Subtracting this from the number of clay pots she ended the week with means she must have created 50 - 36 = <<50-36=14>>14 clay pots on Wednesday."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4792.\n    Returns: the number of clay pots Nancy created on Wednesday.\n    \"\"\"\n    # L1\n    monday_pots = 12 # 12 clay pots on Monday\n    multiplier_tuesday = 2 # twice as many on Tuesday\n    tuesday_pots = monday_pots * multiplier_tuesday\n\n    # L2\n    monday_tuesday_total = monday_pots + tuesday_pots\n\n    # L3\n    total_end_week = 50 # ends the week with 50 clay pots\n    wednesday_pots = total_end_week - monday_tuesday_total\n\n    # FA\n    answer = wednesday_pots\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "tuesday_pots",
+    "operand_to_replace": "monday_pots",
+    "replacement_variable": "multiplier_tuesday"
+  },
+  "correct_trace": {
+    "monday_pots": 12,
+    "multiplier_tuesday": 2,
+    "tuesday_pots": 24,
+    "monday_tuesday_total": 36,
+    "total_end_week": 50,
+    "wednesday_pots": 14,
+    "answer": 14
+  },
+  "flawed_trace": {
+    "monday_pots": 12,
+    "multiplier_tuesday": 2,
+    "tuesday_pots": 4,
+    "monday_tuesday_total": 16,
+    "total_end_week": 50,
+    "wednesday_pots": 34,
+    "answer": 34
+  },
+  "correct_value": 24,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "tuesday_pots",
+      "question_inputs": [
+        "monday_pots",
+        "multiplier_tuesday"
+      ],
+      "solution_line_template": "On Tuesday, Nancy creates {monday_pots} clay pots * {multiplier_tuesday} = <<{monday_pots}*{multiplier_tuesday}={tuesday_pots}>>{tuesday_pots} clay plots."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "monday_tuesday_total",
+      "question_inputs": [],
+      "solution_line_template": "So she created a combined total of {monday_pots} + {tuesday_pots} = <<{monday_pots}+{tuesday_pots}={monday_tuesday_total}>>{monday_tuesday_total} clay pots on Monday and Tuesday."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "wednesday_pots",
+      "question_inputs": [
+        "total_end_week"
+      ],
+      "solution_line_template": "Subtracting this from the number of clay pots she ended the week with means she must have created {total_end_week} - {monday_tuesday_total} = <<{total_end_week}-{monday_tuesday_total}={wednesday_pots}>>{wednesday_pots} clay pots on Wednesday."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Tuesday, Nancy creates 2 clay pots * 2 = <<2*2=4>>4 clay plots.",
+    "L2": "So she created a combined total of 12 + 4 = <<12+4=16>>16 clay pots on Monday and Tuesday.",
+    "L3": "Subtracting this from the number of clay pots she ended the week with means she must have created 50 - 16 = <<50-16=34>>34 clay pots on Wednesday.",
+    "FA": "#### 34"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'multiplier_tuesday' (2) was used instead of 'monday_pots' (12).",
+  "repro_seed": -5635094256907185071,
+  "model_name": "google_gemini-2.5-flash"
+}

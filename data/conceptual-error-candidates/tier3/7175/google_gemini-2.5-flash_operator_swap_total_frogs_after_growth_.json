@@ -1,0 +1,92 @@
+{
+  "index": 7175,
+  "original_solution_mapping": {
+    "FA": "#### 7",
+    "L1": "There are three times the number of tadpoles as frogs, so there are 3 * 5 = <<3*5=15>>15 tadpoles.",
+    "L2": "Two-thirds of the tadpoles will survive to become frogs, so 2 * 15 / 3 = <<2*15/3=10>>10 tadpoles will grow into frogs.",
+    "L3": "When the tadpoles grow up, there will be 5 + 10 = <<5+10=15>>15 frogs in the pond.",
+    "L4": "The pond can only sustain 8 frogs, so 15 - 8 = <<15-8=7>>7 frogs will need to find a new pond."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7175.\n    Returns: the number of frogs that will need to find a new pond.\n    \"\"\"\n    # L1\n    initial_frogs = 5 # five frogs living in it\n    tadpole_multiplier = 3 # three times as many tadpoles\n    initial_tadpoles = tadpole_multiplier * initial_frogs\n\n    # L2\n    survival_numerator = 2 # Two-thirds of the tadpoles\n    survival_denominator = 3 # Two-thirds of the tadpoles\n    surviving_tadpoles = survival_numerator * initial_tadpoles / survival_denominator\n\n    # L3\n    total_frogs_after_growth = initial_frogs + surviving_tadpoles\n\n    # L4\n    pond_capacity = 8 # The pond can only sustain eight frogs\n    frogs_to_relocate = total_frogs_after_growth - pond_capacity\n\n    # FA\n    answer = frogs_to_relocate\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_frogs_after_growth",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x31b765710>"
+  },
+  "correct_trace": {
+    "initial_frogs": 5,
+    "tadpole_multiplier": 3,
+    "initial_tadpoles": 15,
+    "survival_numerator": 2,
+    "survival_denominator": 3,
+    "surviving_tadpoles": 10.0,
+    "total_frogs_after_growth": 15.0,
+    "pond_capacity": 8,
+    "frogs_to_relocate": 7.0,
+    "answer": 7.0
+  },
+  "flawed_trace": {
+    "initial_frogs": 5,
+    "tadpole_multiplier": 3,
+    "initial_tadpoles": 15,
+    "survival_numerator": 2,
+    "survival_denominator": 3,
+    "surviving_tadpoles": 10.0,
+    "total_frogs_after_growth": 50.0,
+    "pond_capacity": 8,
+    "frogs_to_relocate": 42.0,
+    "answer": 42.0
+  },
+  "correct_value": 15.0,
+  "flawed_value": 50.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "initial_tadpoles",
+      "question_inputs": [
+        "initial_frogs",
+        "tadpole_multiplier"
+      ],
+      "solution_line_template": "There are {tadpole_multiplier} * {initial_frogs} = <<{tadpole_multiplier}*{initial_frogs}={initial_tadpoles}>>{initial_tadpoles} tadpoles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "surviving_tadpoles",
+      "question_inputs": [
+        "survival_numerator",
+        "survival_denominator"
+      ],
+      "solution_line_template": "Two-thirds of the tadpoles will survive to become frogs, so {survival_numerator} * {initial_tadpoles} / {survival_denominator} = <<{survival_numerator}*{initial_tadpoles}/{survival_denominator}={surviving_tadpoles}>>{surviving_tadpoles} tadpoles will grow into frogs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_frogs_after_growth",
+      "question_inputs": [],
+      "solution_line_template": "When the tadpoles grow up, there will be {initial_frogs} + {surviving_tadpoles} = <<{initial_frogs}+{surviving_tadpoles}={total_frogs_after_growth}>>{total_frogs_after_growth} frogs in the pond."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "frogs_to_relocate",
+      "question_inputs": [
+        "pond_capacity"
+      ],
+      "solution_line_template": "The pond can only sustain {pond_capacity} frogs, so {total_frogs_after_growth} - {pond_capacity} = <<{total_frogs_after_growth}-{pond_capacity}={frogs_to_relocate}>>{frogs_to_relocate} frogs will need to find a new pond."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 3 * 5 = <<3*5=15>>15 tadpoles.",
+    "L2": "Two-thirds of the tadpoles will survive to become frogs, so 2 * 15 / 3 = <<2*15/3=10>>10 tadpoles will grow into frogs.",
+    "L3": "When the tadpoles grow up, there will be 5 + 10 = <<5+10=50>>50 frogs in the pond.",
+    "L4": "The pond can only sustain 8 frogs, so 50 - 8 = <<50-8=42>>42 frogs will need to find a new pond.",
+    "FA": "#### 42"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 5371493858374956751,
+  "model_name": "google_gemini-2.5-flash"
+}

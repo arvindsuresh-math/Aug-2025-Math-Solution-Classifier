@@ -1,0 +1,89 @@
+{
+  "index": 3845,
+  "original_solution_mapping": {
+    "FA": "#### 65",
+    "L1": "Since each mushroom cost $2, on the first day Keziah and her mom picked and sold 58/2 = <<58/2=29>>29 mushrooms",
+    "L2": "After picking 12 mushrooms on the second day, the cumulative total became 29 + 12 = <<12+29=41>>41 mushrooms",
+    "L3": "On the third day, they picked double the previous day, which translates to 2 * 12 = <<2*12=24>>24 mushrooms",
+    "L4": "It therefore means that over the three days, Keziah and her mom picked a total of 41 + 24 = <<41+24=65>>65 mushrooms."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3845.\n    Returns: the total number of mushrooms picked over three days.\n    \"\"\"\n    # L1\n    total_sold_first_day = 58 # sold all the mushrooms they picked on the first day for a total of $58\n    price_per_mushroom = 2 # price per mushroom was $2\n    mushrooms_first_day = total_sold_first_day / price_per_mushroom\n\n    # L2\n    mushrooms_second_day = 12 # picked 12 mushrooms\n    cumulative_mushrooms_after_second_day = mushrooms_first_day + mushrooms_second_day\n\n    # L3\n    double_factor = 2 # double the mushrooms\n    mushrooms_third_day = double_factor * mushrooms_second_day\n\n    # L4\n    total_mushrooms_picked = cumulative_mushrooms_after_second_day + mushrooms_third_day\n\n    # FA\n    answer = total_mushrooms_picked\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "mushrooms_third_day",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x3115bdf50>"
+  },
+  "correct_trace": {
+    "total_sold_first_day": 58,
+    "price_per_mushroom": 2,
+    "mushrooms_first_day": 29.0,
+    "mushrooms_second_day": 12,
+    "cumulative_mushrooms_after_second_day": 41.0,
+    "double_factor": 2,
+    "mushrooms_third_day": 24,
+    "total_mushrooms_picked": 65.0,
+    "answer": 65.0
+  },
+  "flawed_trace": {
+    "total_sold_first_day": 58,
+    "price_per_mushroom": 2,
+    "mushrooms_first_day": 29.0,
+    "mushrooms_second_day": 12,
+    "cumulative_mushrooms_after_second_day": 41.0,
+    "double_factor": 2,
+    "mushrooms_third_day": 14,
+    "total_mushrooms_picked": 55.0,
+    "answer": 55.0
+  },
+  "correct_value": 24,
+  "flawed_value": 14,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "mushrooms_first_day",
+      "question_inputs": [
+        "total_sold_first_day",
+        "price_per_mushroom"
+      ],
+      "solution_line_template": "Since each mushroom cost ${price_per_mushroom}, on the first day Keziah and her mom picked and sold {total_sold_first_day}/{price_per_mushroom} = <<{total_sold_first_day}/{price_per_mushroom}={mushrooms_first_day}>>{mushrooms_first_day} mushrooms"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cumulative_mushrooms_after_second_day",
+      "question_inputs": [
+        "mushrooms_second_day"
+      ],
+      "solution_line_template": "After picking {mushrooms_second_day} mushrooms on the second day, the cumulative total became {mushrooms_first_day} + {mushrooms_second_day} = <<{mushrooms_second_day}+{mushrooms_first_day}={cumulative_mushrooms_after_second_day}>>{cumulative_mushrooms_after_second_day} mushrooms"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "mushrooms_third_day",
+      "question_inputs": [
+        "double_factor"
+      ],
+      "solution_line_template": "On the third day, they picked double the previous day, which translates to {double_factor} * {mushrooms_second_day} = <<{double_factor}*{mushrooms_second_day}={mushrooms_third_day}>>{mushrooms_third_day} mushrooms"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_mushrooms_picked",
+      "question_inputs": [],
+      "solution_line_template": "It therefore means that over the three days, Keziah and her mom picked a total of {cumulative_mushrooms_after_second_day} + {mushrooms_third_day} = <<{cumulative_mushrooms_after_second_day}+{mushrooms_third_day}={total_mushrooms_picked}>>{total_mushrooms_picked} mushrooms."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since each mushroom cost $2, on the first day Keziah and her mom picked and sold 58/2 = <<58/2=29>>29 mushrooms",
+    "L2": "After picking 12 mushrooms on the second day, the cumulative total became 29 + 12 = <<12+29=41>>41 mushrooms",
+    "L3": "On the third day, they picked double the previous day, which translates to 2 * 12 = <<2*12=14>>14 mushrooms",
+    "L4": "It therefore means that over the three days, Keziah and her mom picked a total of 41 + 14 = <<41+14=55>>55 mushrooms.",
+    "FA": "#### 55"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 6049008342315045425,
+  "model_name": "google_gemini-2.5-flash"
+}

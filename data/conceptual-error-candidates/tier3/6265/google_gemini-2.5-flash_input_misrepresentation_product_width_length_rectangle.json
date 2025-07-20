@@ -1,0 +1,86 @@
+{
+  "index": 6265,
+  "original_solution_mapping": {
+    "FA": "#### 700",
+    "L1": "If the rectangular patch of land measures 400 feet by 300 feet, the total length around it or its perimeter is given by 2 * 400 + 2 * 300 = 800 + 600 = <<2*400+2*300=1400>>1400",
+    "L2": "The square patch's perimeter is double that length, so it's 1400 * 2 = <<1400*2=2800>>2800",
+    "L3": "Since the square has four equal sides, one side of the square patch of land will have a length of 2800/4 = <<2800/4=700>>700 feet"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6265.\n    Returns: the length of one side of the square patch of land.\n    \"\"\"\n    # L1\n    length_rectangle = 400 # length of 400 feet\n    width_rectangle = 300 # width of 300 feet\n    sides_multiplier = 2 # WK\n    product_length = sides_multiplier * length_rectangle\n    product_width = sides_multiplier * width_rectangle\n    perimeter_rectangle = product_length + product_width\n\n    # L2\n    double_multiplier = 2 # twice as large\n    perimeter_square = perimeter_rectangle * double_multiplier\n\n    # L3\n    sides_square = 4 # WK\n    side_length_square = perimeter_square / sides_square\n\n    # FA\n    answer = side_length_square\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "product_width",
+    "operand_to_replace": "width_rectangle",
+    "replacement_variable": "length_rectangle"
+  },
+  "correct_trace": {
+    "length_rectangle": 400,
+    "width_rectangle": 300,
+    "sides_multiplier": 2,
+    "product_length": 800,
+    "product_width": 600,
+    "perimeter_rectangle": 1400,
+    "double_multiplier": 2,
+    "perimeter_square": 2800,
+    "sides_square": 4,
+    "side_length_square": 700.0,
+    "answer": 700.0
+  },
+  "flawed_trace": {
+    "length_rectangle": 400,
+    "width_rectangle": 300,
+    "sides_multiplier": 2,
+    "product_length": 800,
+    "product_width": 800,
+    "perimeter_rectangle": 1600,
+    "double_multiplier": 2,
+    "perimeter_square": 3200,
+    "sides_square": 4,
+    "side_length_square": 800.0,
+    "answer": 800.0
+  },
+  "correct_value": 600,
+  "flawed_value": 800,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "sides_multiplier"
+      ],
+      "line_number": "L1",
+      "output_variable": "perimeter_rectangle",
+      "question_inputs": [
+        "length_rectangle",
+        "width_rectangle"
+      ],
+      "solution_line_template": "If the rectangular patch of land measures {length_rectangle} feet by {width_rectangle} feet, the total length around it or its perimeter is given by {sides_multiplier} * {length_rectangle} + {sides_multiplier} * {width_rectangle} = {product_length} + {product_width} = <<{sides_multiplier}*{length_rectangle}+{sides_multiplier}*{width_rectangle}={perimeter_rectangle}>>{perimeter_rectangle}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "perimeter_square",
+      "question_inputs": [
+        "double_multiplier"
+      ],
+      "solution_line_template": "The square patch's perimeter is double that length, so it's {perimeter_rectangle} * {double_multiplier} = <<{perimeter_rectangle}*{double_multiplier}={perimeter_square}>>{perimeter_square}"
+    },
+    {
+      "WK_inputs": [
+        "sides_square"
+      ],
+      "line_number": "L3",
+      "output_variable": "side_length_square",
+      "question_inputs": [],
+      "solution_line_template": "Since the square has four equal sides, one side of the square patch of land will have a length of {perimeter_square}/{sides_square} = <<{perimeter_square}/{sides_square}={side_length_square}>>{side_length_square} feet"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the rectangular patch of land measures 400 feet by 300 feet, the total length around it or its perimeter is given by 2 * 400 + 2 * 300 = 800 + 800 = <<2*400+2*300=1600>>1600",
+    "L2": "The square patch's perimeter is double that length, so it's 1600 * 2 = <<1600*2=3200>>3200",
+    "L3": "Since the square has four equal sides, one side of the square patch of land will have a length of 3200/4 = <<3200/4=800>>800 feet",
+    "FA": "#### 800"
+  },
+  "erroneous_line_number": null,
+  "explanation": "Input misrepresentation. The value for 'length_rectangle' (400) was used instead of 'width_rectangle' (300).",
+  "repro_seed": -458670574714502475,
+  "model_name": "google_gemini-2.5-flash"
+}

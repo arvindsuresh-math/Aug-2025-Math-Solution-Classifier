@@ -1,0 +1,91 @@
+{
+  "index": 7192,
+  "original_solution_mapping": {
+    "FA": "#### 110",
+    "L1": "His new deadlift is 300*2.5+100=<<300*2.5+100=850>>850 pounds",
+    "L2": "So he added 850-300=<<850-300=550>>550 pounds to his deadlift",
+    "L3": "This took 18-13=<<18-13=5>>5 years",
+    "L4": "So he added 550/5=<<550/5=110>>110 pounds per year"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7192.\n    Returns: the number of pounds Bobby added per year to his deadlift.\n    \"\"\"\n    # L1\n    initial_deadlift = 300 # deadlift 300 pounds at 13\n    percentage_factor = 2.5 # 250% of his previous deadlift\n    increase_amount = 100 # 100 pounds more\n    new_deadlift = initial_deadlift * percentage_factor + increase_amount\n\n    # L2\n    pounds_added_total = new_deadlift - initial_deadlift\n\n    # L3\n    age_later = 18 # When he is 18\n    age_earlier = 13 # at 13\n    years_passed = age_later - age_earlier\n\n    # L4\n    pounds_per_year = pounds_added_total / years_passed\n\n    # FA\n    answer = pounds_per_year\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "pounds_added_total",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x31bfef7d0>"
+  },
+  "correct_trace": {
+    "initial_deadlift": 300,
+    "percentage_factor": 2.5,
+    "increase_amount": 100,
+    "new_deadlift": 850.0,
+    "pounds_added_total": 550.0,
+    "age_later": 18,
+    "age_earlier": 13,
+    "years_passed": 5,
+    "pounds_per_year": 110.0,
+    "answer": 110.0
+  },
+  "flawed_trace": {
+    "initial_deadlift": 300,
+    "percentage_factor": 2.5,
+    "increase_amount": 100,
+    "new_deadlift": 850.0,
+    "pounds_added_total": 1150.0,
+    "age_later": 18,
+    "age_earlier": 13,
+    "years_passed": 5,
+    "pounds_per_year": 230.0,
+    "answer": 230.0
+  },
+  "correct_value": 550.0,
+  "flawed_value": 1150.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "new_deadlift",
+      "question_inputs": [
+        "initial_deadlift",
+        "percentage_factor",
+        "increase_amount"
+      ],
+      "solution_line_template": "His new deadlift is {initial_deadlift}*{percentage_factor}+{increase_amount}=<<{initial_deadlift}*{percentage_factor}+{increase_amount}={new_deadlift}>>{new_deadlift} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "pounds_added_total",
+      "question_inputs": [],
+      "solution_line_template": "So he added {new_deadlift}-{initial_deadlift}=<<{new_deadlift}-{initial_deadlift}={pounds_added_total}>>{pounds_added_total} pounds to his deadlift"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "years_passed",
+      "question_inputs": [
+        "age_later",
+        "age_earlier"
+      ],
+      "solution_line_template": "This took {age_later}-{age_earlier}=<<{age_later}-{age_earlier}={years_passed}>>{years_passed} years"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "pounds_per_year",
+      "question_inputs": [],
+      "solution_line_template": "So he added {pounds_added_total}/{years_passed}=<<{pounds_added_total}/{years_passed}={pounds_per_year}>>{pounds_per_year} pounds per year"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "His new deadlift is 300*2.5+100=<<300*2.5+100=850>>850 pounds",
+    "L2": "So he added 850-300=<<850-300=1150>>1150 pounds to his deadlift",
+    "L3": "This took 18-13=<<18-13=5>>5 years",
+    "L4": "So he added 1150/5=<<1150/5=230>>230 pounds per year",
+    "FA": "#### 230"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -2859586162771081698,
+  "model_name": "google_gemini-2.5-flash"
+}

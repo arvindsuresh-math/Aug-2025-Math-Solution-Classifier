@@ -1,0 +1,136 @@
+{
+  "index": 2401,
+  "original_solution_mapping": {
+    "FA": "#### 135",
+    "L1": "He was running for 4-1=<<4-1=3>>3 hours",
+    "L2": "So in that time he runs 3*25=<<3*25=75>>75 miles",
+    "L3": "Since he slowed down after 4 hours, the time he spent running at 25mph was an additional 4-3=<<4-3=1>>1 hours",
+    "L4": "So in the first hour they were finding him, he ran 1*25=<<1*25=25>>25 miles",
+    "L5": "In the second hour they were finding him, he ran 1*10=<<1*10=10>>10 miles",
+    "L6": "Finally, during the chase, he ran 50*.5=<<50*.5=25>>25 miles",
+    "L7": "So he is 75+25+10+25=<<75+25+10+25=135>>135 miles away"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2401.\n    Returns: how far away from the zoo the tiger was caught.\n    \"\"\"\n    # L1\n    notice_time = 4 # zookeepers do not notice he is missing until 4 AM\n    escape_time = 1 # escapes at 1 AM\n    initial_run_duration = notice_time - escape_time\n\n    # L2\n    fast_speed = 25 # runs at a speed of 25 mph\n    distance_before_notice = initial_run_duration * fast_speed\n\n    # L3\n    time_before_slow = 4 # after 4 hours of running\n    additional_fast_run_duration = time_before_slow - initial_run_duration\n\n    # L4\n    additional_fast_distance = additional_fast_run_duration * fast_speed\n\n    # L5\n    slow_run_duration = 1 # It takes 2 more hours to find him (second hour of finding)\n    slow_speed = 10 # the tiger slows his speed to 10 mph\n    slow_distance = slow_run_duration * slow_speed\n\n    # L6\n    chase_speed = 50 # going 50 mph\n    chase_duration = 0.5 # for half an hour\n    chase_distance = chase_speed * chase_duration\n\n    # L7\n    total_distance = distance_before_notice + additional_fast_distance + slow_distance + chase_distance\n\n    # FA\n    answer = total_distance\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "chase_distance",
+    "operand_to_replace": "chase_duration",
+    "replacement_variable": "initial_run_duration"
+  },
+  "correct_trace": {
+    "notice_time": 4,
+    "escape_time": 1,
+    "initial_run_duration": 3,
+    "fast_speed": 25,
+    "distance_before_notice": 75,
+    "time_before_slow": 4,
+    "additional_fast_run_duration": 1,
+    "additional_fast_distance": 25,
+    "slow_run_duration": 1,
+    "slow_speed": 10,
+    "slow_distance": 10,
+    "chase_speed": 50,
+    "chase_duration": 0.5,
+    "chase_distance": 25.0,
+    "total_distance": 135.0,
+    "answer": 135.0
+  },
+  "flawed_trace": {
+    "notice_time": 4,
+    "escape_time": 1,
+    "initial_run_duration": 3,
+    "fast_speed": 25,
+    "distance_before_notice": 75,
+    "time_before_slow": 4,
+    "additional_fast_run_duration": 1,
+    "additional_fast_distance": 25,
+    "slow_run_duration": 1,
+    "slow_speed": 10,
+    "slow_distance": 10,
+    "chase_speed": 50,
+    "chase_duration": 0.5,
+    "chase_distance": 150,
+    "total_distance": 260,
+    "answer": 260
+  },
+  "correct_value": 25.0,
+  "flawed_value": 150,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "initial_run_duration",
+      "question_inputs": [
+        "notice_time",
+        "escape_time"
+      ],
+      "solution_line_template": "He was running for {notice_time}-{escape_time}=<<{notice_time}-{escape_time}={initial_run_duration}>>{initial_run_duration} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "distance_before_notice",
+      "question_inputs": [
+        "fast_speed"
+      ],
+      "solution_line_template": "So in that time he runs {initial_run_duration}*{fast_speed}=<<{initial_run_duration}*{fast_speed}={distance_before_notice}>>{distance_before_notice} miles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "additional_fast_run_duration",
+      "question_inputs": [
+        "time_before_slow"
+      ],
+      "solution_line_template": "Since he slowed down after {time_before_slow} hours, the time he spent running at 25mph was an additional {time_before_slow}-{initial_run_duration}=<<{time_before_slow}-{initial_run_duration}={additional_fast_run_duration}>>{additional_fast_run_duration} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "additional_fast_distance",
+      "question_inputs": [],
+      "solution_line_template": "So in the first hour they were finding him, he ran {additional_fast_run_duration}*{fast_speed}=<<{additional_fast_run_duration}*{fast_speed}={additional_fast_distance}>>{additional_fast_distance} miles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "slow_distance",
+      "question_inputs": [
+        "slow_run_duration",
+        "slow_speed"
+      ],
+      "solution_line_template": "In the second hour they were finding him, he ran {slow_run_duration}*{slow_speed}=<<{slow_run_duration}*{slow_speed}={slow_distance}>>{slow_distance} miles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "chase_distance",
+      "question_inputs": [
+        "chase_speed",
+        "chase_duration"
+      ],
+      "solution_line_template": "Finally, during the chase, he ran {chase_speed}*{chase_duration}=<<{chase_speed}*{chase_duration}={chase_distance}>>{chase_distance} miles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "total_distance",
+      "question_inputs": [],
+      "solution_line_template": "So he is {distance_before_notice}+{additional_fast_distance}+{slow_distance}+{chase_distance}=<<{distance_before_notice}+{additional_fast_distance}+{slow_distance}+{chase_distance}={total_distance}>>{total_distance} miles away"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He was running for 4-1=<<4-1=3>>3 hours",
+    "L2": "So in that time he runs 3*25=<<3*25=75>>75 miles",
+    "L3": "Since he slowed down after 4 hours, the time he spent running at 25mph was an additional 4-3=<<4-3=1>>1 hours",
+    "L4": "So in the first hour they were finding him, he ran 1*25=<<1*25=25>>25 miles",
+    "L5": "In the second hour they were finding him, he ran 1*10=<<1*10=10>>10 miles",
+    "L6": "Finally, during the chase, he ran 50*3=<<50*3=150>>150 miles",
+    "L7": "So he is 75+25+10+150=<<75+25+10+150=260>>260 miles away",
+    "FA": "#### 260"
+  },
+  "erroneous_line_number": "L6",
+  "explanation": "Input misrepresentation. The value for 'initial_run_duration' (3) was used instead of 'chase_duration' (0.5).",
+  "repro_seed": -7889769337757607647,
+  "model_name": "google_gemini-2.5-flash"
+}

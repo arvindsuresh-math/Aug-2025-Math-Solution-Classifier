@@ -1,0 +1,74 @@
+{
+  "index": 2142,
+  "original_solution_mapping": {
+    "FA": "#### 150",
+    "L1": "First find what percent of the seaweed can be used for something besides starting fires: 400 pounds / 2 = <<400/2=200>>200 pounds",
+    "L2": "Then divide that amount by 4 to find the amount that's eaten by humans: 200 pounds / 4 = <<200/4=50>>50 pounds",
+    "L3": "Then subtract that amount from the 200 pounds to find how much is eaten by livestock: 200 pounds - 50 pounds = <<200-50=150>>150 pounds"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2142.\n    Returns: the number of pounds of seaweed fed to livestock.\n    \"\"\"\n    # L1\n    total_seaweed_pounds = 400 # Carson harvests 400 pounds of seaweed\n    fire_seaweed_divisor = 2 # 50% of the seaweed is only good for starting fires\n    seaweed_not_for_fire = total_seaweed_pounds / fire_seaweed_divisor\n\n    # L2\n    human_food_divisor = 4 # 25% of what's left can be eaten by humans\n    seaweed_for_humans = seaweed_not_for_fire / human_food_divisor\n\n    # L3\n    seaweed_for_livestock = seaweed_not_for_fire - seaweed_for_humans\n\n    # FA\n    answer = seaweed_for_livestock\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "seaweed_for_humans",
+    "operand_to_replace": "human_food_divisor",
+    "replacement_variable": "seaweed_not_for_fire"
+  },
+  "correct_trace": {
+    "total_seaweed_pounds": 400,
+    "fire_seaweed_divisor": 2,
+    "seaweed_not_for_fire": 200.0,
+    "human_food_divisor": 4,
+    "seaweed_for_humans": 50.0,
+    "seaweed_for_livestock": 150.0,
+    "answer": 150.0
+  },
+  "flawed_trace": {
+    "total_seaweed_pounds": 400,
+    "fire_seaweed_divisor": 2,
+    "seaweed_not_for_fire": 200.0,
+    "human_food_divisor": 4,
+    "seaweed_for_humans": 1.0,
+    "seaweed_for_livestock": 199.0,
+    "answer": 199.0
+  },
+  "correct_value": 50.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "seaweed_not_for_fire",
+      "question_inputs": [
+        "total_seaweed_pounds",
+        "fire_seaweed_divisor"
+      ],
+      "solution_line_template": "First find what percent of the seaweed can be used for something besides starting fires: {total_seaweed_pounds} pounds / {fire_seaweed_divisor} = <<{total_seaweed_pounds}/{fire_seaweed_divisor}={seaweed_not_for_fire}>>{seaweed_not_for_fire} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "seaweed_for_humans",
+      "question_inputs": [
+        "human_food_divisor"
+      ],
+      "solution_line_template": "Then divide that amount by {human_food_divisor} to find the amount that's eaten by humans: {seaweed_not_for_fire} pounds / {human_food_divisor} = <<{seaweed_not_for_fire}/{human_food_divisor}={seaweed_for_humans}>>{seaweed_for_humans} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "seaweed_for_livestock",
+      "question_inputs": [],
+      "solution_line_template": "Then subtract that amount from the {seaweed_not_for_fire} pounds to find how much is eaten by livestock: {seaweed_not_for_fire} pounds - {seaweed_for_humans} pounds = <<{seaweed_not_for_fire}-{seaweed_for_humans}={seaweed_for_livestock}>>{seaweed_for_livestock} pounds"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find what percent of the seaweed can be used for something besides starting fires: 400 pounds / 2 = <<400/2=200>>200 pounds",
+    "L2": "Then divide that amount by 200 to find the amount that's eaten by humans: 200 pounds / 200 = <<200/200=1>>1 pounds",
+    "L3": "Then subtract that amount from the 200 pounds to find how much is eaten by livestock: 200 pounds - 1 pounds = <<200-1=199>>199 pounds",
+    "FA": "#### 199"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'seaweed_not_for_fire' (200.0) was used instead of 'human_food_divisor' (4).",
+  "repro_seed": -795513711439837021,
+  "model_name": "google_gemini-2.5-flash"
+}

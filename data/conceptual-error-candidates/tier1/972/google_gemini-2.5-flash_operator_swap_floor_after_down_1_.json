@@ -1,0 +1,78 @@
+{
+  "index": 972,
+  "original_solution_mapping": {
+    "FA": "#### 13",
+    "L1": "From the 9th floor, the elevator went down to the 9 - 7 = <<9-7=2>>2nd floor.",
+    "L2": "Then went up to the 2 + 3 = <<2+3=5>>5th floor.",
+    "L3": "Then, went up to the 5 + 8 = <<5+8=13>>13th floor; hence there are 13 floors in the building."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 972.\n    Returns: the total number of floors in the building.\n    \"\"\"\n    # L1\n    initial_floor = 9 # on the 9th floor\n    down_floors_1 = 7 # goes down 7 floors\n    floor_after_down_1 = initial_floor - down_floors_1\n\n    # L2\n    up_floors_1 = 3 # then up 3 floors\n    floor_after_up_1 = floor_after_down_1 + up_floors_1\n\n    # L3\n    up_floors_2 = 8 # then up 8 floors\n    final_floor = floor_after_up_1 + up_floors_2\n\n    # FA\n    answer = final_floor\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "floor_after_down_1",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x315c330d0>"
+  },
+  "correct_trace": {
+    "initial_floor": 9,
+    "down_floors_1": 7,
+    "floor_after_down_1": 2,
+    "up_floors_1": 3,
+    "floor_after_up_1": 5,
+    "up_floors_2": 8,
+    "final_floor": 13,
+    "answer": 13
+  },
+  "flawed_trace": {
+    "initial_floor": 9,
+    "down_floors_1": 7,
+    "floor_after_down_1": 16,
+    "up_floors_1": 3,
+    "floor_after_up_1": 19,
+    "up_floors_2": 8,
+    "final_floor": 27,
+    "answer": 27
+  },
+  "correct_value": 2,
+  "flawed_value": 16,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "initial_floor",
+        "down_floors_1"
+      ],
+      "WK_inputs": [],
+      "output_variable": "floor_after_down_1",
+      "solution_line_template": "From the {initial_floor}th floor, the elevator went down to the {initial_floor} - {down_floors_1} = <<{initial_floor}-{down_floors_1}={floor_after_down_1}>>{floor_after_down_1}nd floor."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "up_floors_1"
+      ],
+      "WK_inputs": [],
+      "output_variable": "floor_after_up_1",
+      "solution_line_template": "Then went up to the {floor_after_down_1} + {up_floors_1} = <<{floor_after_down_1}+{up_floors_1}={floor_after_up_1}>>{floor_after_up_1}th floor."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "up_floors_2"
+      ],
+      "WK_inputs": [],
+      "output_variable": "final_floor",
+      "solution_line_template": "Then, went up to the {floor_after_up_1} + {up_floors_2} = <<{floor_after_up_1}+{up_floors_2}={final_floor}>>{final_floor}th floor; hence there are {final_floor} floors in the building."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "From the 9th floor, the elevator went down to the 9 - 7 = <<9-7=16>>16nd floor.",
+    "L2": "Then went up to the 16 + 3 = <<16+3=19>>19th floor.",
+    "L3": "Then, went up to the 19 + 8 = <<19+8=27>>27th floor; hence there are 27 floors in the building.",
+    "FA": "#### 27"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 5471235217389432622,
+  "model_name": "google_gemini-2.5-flash"
+}

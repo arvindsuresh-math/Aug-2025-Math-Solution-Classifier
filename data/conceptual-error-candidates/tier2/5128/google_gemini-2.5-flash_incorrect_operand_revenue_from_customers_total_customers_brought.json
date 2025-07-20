@@ -1,0 +1,78 @@
+{
+  "index": 5128,
+  "original_solution_mapping": {
+    "FA": "#### 1000",
+    "L1": "100*.8=<<100*.8=80>>80 customers bought something",
+    "L2": "That means they were worth 80*25=$<<80*25=2000>>2000",
+    "L3": "So he gained 2000-1000=$<<2000-1000=1000>>1000 from the ad"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5128.\n    Returns: the profit gained from the ad.\n    \"\"\"\n    # L1\n    total_customers_brought = 100 # 100 customers\n    purchase_rate_decimal = 0.8 # 80% of those bought something\n    customers_who_bought = total_customers_brought * purchase_rate_decimal\n\n    # L2\n    cost_per_item = 25 # cost $25\n    revenue_from_customers = customers_who_bought * cost_per_item\n\n    # L3\n    advertising_cost = 1000 # $1000 for advertising\n    profit = revenue_from_customers - advertising_cost\n\n    # FA\n    answer = profit\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "revenue_from_customers",
+    "operand_to_replace": "customers_who_bought",
+    "replacement_variable": "total_customers_brought"
+  },
+  "correct_trace": {
+    "total_customers_brought": 100,
+    "purchase_rate_decimal": 0.8,
+    "customers_who_bought": 80.0,
+    "cost_per_item": 25,
+    "revenue_from_customers": 2000.0,
+    "advertising_cost": 1000,
+    "profit": 1000.0,
+    "answer": 1000.0
+  },
+  "flawed_trace": {
+    "total_customers_brought": 100,
+    "purchase_rate_decimal": 0.8,
+    "customers_who_bought": 80.0,
+    "cost_per_item": 25,
+    "revenue_from_customers": 2500,
+    "advertising_cost": 1000,
+    "profit": 1500,
+    "answer": 1500
+  },
+  "correct_value": 2000.0,
+  "flawed_value": 2500,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "customers_who_bought",
+      "question_inputs": [
+        "total_customers_brought",
+        "purchase_rate_decimal"
+      ],
+      "solution_line_template": "{total_customers_brought}*{purchase_rate_decimal}=<<{total_customers_brought}*{purchase_rate_decimal}={customers_who_bought}>>{customers_who_bought} customers bought something"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "revenue_from_customers",
+      "question_inputs": [
+        "cost_per_item"
+      ],
+      "solution_line_template": "That means they were worth {customers_who_bought}*{cost_per_item}=$<<{customers_who_bought}*{cost_per_item}={revenue_from_customers}>>{revenue_from_customers}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "profit",
+      "question_inputs": [
+        "advertising_cost"
+      ],
+      "solution_line_template": "So he gained {revenue_from_customers}-{advertising_cost}=$<<{revenue_from_customers}-{advertising_cost}={profit}>>{profit} from the ad"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "100*0.8=<<100*0.8=80>>80 customers bought something",
+    "L2": "That means they were worth 100*25=$<<100*25=2500>>2500",
+    "L3": "So he gained 2500-1000=$<<2500-1000=1500>>1500 from the ad",
+    "FA": "#### 1500"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'total_customers_brought' (value: 100) was used instead of 'customers_who_bought' (value: 80.0).",
+  "repro_seed": -8326465280348548917,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,91 @@
+{
+  "index": 867,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "Bob runs .1 miles per minute because 6 / 60 = <<6/60=.1>>.1",
+    "L2": "Jim run at .15 miles per minute 9 / 60 = <<9/60=.15>>.15",
+    "L3": "We know that .1(Number of Minutes) + 1 = .15(Number of Minutes)",
+    "L4": "Therefore 1 = .05(Number of minutes)",
+    "L5": "Therefore (Number of minutes) = 20 because 1 / .05 = <<1/.05=20>>20"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 867.\n    Returns: the number of minutes it will take before Jim catches Bob.\n    \"\"\"\n    # L1\n    bob_speed_mph = 6 # Bob runs 6 miles per hour\n    minutes_per_hour = 60 # WK\n    bob_speed_mpm = bob_speed_mph / minutes_per_hour\n\n    # L2\n    jim_speed_mph = 9 # Jim runs at 9 miles per hour\n    jim_speed_mpm = jim_speed_mph / minutes_per_hour\n\n    # L4\n    bob_head_start_miles = 1 # Bob has a 1 mile head-start\n    relative_speed_mpm = jim_speed_mpm - bob_speed_mpm\n\n    # L5\n    time_to_catch_minutes = bob_head_start_miles / relative_speed_mpm\n\n    # FA\n    answer = time_to_catch_minutes\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "time_to_catch_minutes",
+    "operand_to_replace": "relative_speed_mpm",
+    "replacement_variable": "jim_speed_mpm"
+  },
+  "correct_trace": {
+    "bob_speed_mph": 6,
+    "minutes_per_hour": 60,
+    "bob_speed_mpm": 0.1,
+    "jim_speed_mph": 9,
+    "jim_speed_mpm": 0.15,
+    "bob_head_start_miles": 1,
+    "relative_speed_mpm": 0.04999999999999999,
+    "time_to_catch_minutes": 20.000000000000004,
+    "answer": 20.000000000000004
+  },
+  "flawed_trace": {
+    "bob_speed_mph": 6,
+    "minutes_per_hour": 60,
+    "bob_speed_mpm": 0.1,
+    "jim_speed_mph": 9,
+    "jim_speed_mpm": 0.15,
+    "bob_head_start_miles": 1,
+    "relative_speed_mpm": 0.04999999999999999,
+    "time_to_catch_minutes": 6.666666666666667,
+    "answer": 6.666666666666667
+  },
+  "correct_value": 20.000000000000004,
+  "flawed_value": 6.666666666666667,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "bob_speed_mpm",
+      "question_inputs": [
+        "bob_speed_mph"
+      ],
+      "solution_line_template": "Bob runs .1 miles per minute because {bob_speed_mph} / {minutes_per_hour} = <<{bob_speed_mph}/{minutes_per_hour}={bob_speed_mpm}>>{bob_speed_mpm}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "jim_speed_mpm",
+      "question_inputs": [
+        "jim_speed_mph"
+      ],
+      "solution_line_template": "Jim run at .15 miles per minute {jim_speed_mph} / {minutes_per_hour} = <<{jim_speed_mph}/{minutes_per_hour}={jim_speed_mpm}>>{jim_speed_mpm}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "relative_speed_mpm",
+      "question_inputs": [
+        "bob_head_start_miles"
+      ],
+      "solution_line_template": "Therefore {bob_head_start_miles} = {relative_speed_mpm}(Number of minutes)"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "time_to_catch_minutes",
+      "question_inputs": [],
+      "solution_line_template": "Therefore (Number of minutes) = {time_to_catch_minutes} because {bob_head_start_miles} / {relative_speed_mpm} = <<{bob_head_start_miles}/{relative_speed_mpm}={time_to_catch_minutes}>>{time_to_catch_minutes}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Bob runs .1 miles per minute because 6 / 60 = <<6/60=0.1>>0.1",
+    "L2": "Jim run at .15 miles per minute 9 / 60 = <<9/60=0.15>>0.15",
+    "L4": "Therefore 1 = 0.05(Number of minutes)",
+    "L5": "Therefore (Number of minutes) = 6.67 because 1 / 0.15 = <<1/0.15=6.67>>6.67",
+    "FA": "#### 6.67"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operand. The variable 'jim_speed_mpm' (value: 0.15) was used instead of 'relative_speed_mpm' (value: 0.04999999999999999).",
+  "repro_seed": 7809515182747898807,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,89 @@
+{
+  "index": 4820,
+  "original_solution_mapping": {
+    "FA": "#### 70",
+    "L1": "First find how much soda Danny drank: 1 bottle * .9 = <<1*.9=.9>>.9 bottles",
+    "L2": "Then find how much soda Danny gave to his friends: 2 friends * 1 bottle/friend * .7 = <<2*1*.7=1.4>>1.4 bottles",
+    "L3": "Now subtract the soda drunk and given away to find the remaining amount of soda: 3 bottles - .9 bottles - 1.4 bottles = .7 bottles * 100% = 70%"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4820.\n    Returns: the amount of soda Danny has left, expressed as a percentage of a bottle.\n    \"\"\"\n    # L1\n    drank_bottle_count = 1 # one bottle\n    drank_percentage_decimal = 0.9 # 90% of one bottle\n    soda_drank = drank_bottle_count * drank_percentage_decimal\n\n    # L2\n    friends_count = 2 # other two bottles\n    given_percentage_decimal = 0.7 # 70% of the other two bottles\n    bottles_per_friend = 1 # WK\n    soda_given_away = friends_count * bottles_per_friend * given_percentage_decimal\n\n    # L3\n    total_bottles = 3 # 3 bottles of soda\n    remaining_soda_decimal = total_bottles - soda_drank - soda_given_away\n    percentage_factor = 100 # WK\n    remaining_soda_percentage = remaining_soda_decimal * percentage_factor\n\n    # FA\n    answer = remaining_soda_percentage\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "remaining_soda_percentage",
+    "replacement_variable": "soda_drank"
+  },
+  "correct_trace": {
+    "drank_bottle_count": 1,
+    "drank_percentage_decimal": 0.9,
+    "soda_drank": 0.9,
+    "friends_count": 2,
+    "given_percentage_decimal": 0.7,
+    "bottles_per_friend": 1,
+    "soda_given_away": 1.4,
+    "total_bottles": 3,
+    "remaining_soda_decimal": 0.7000000000000002,
+    "percentage_factor": 100,
+    "remaining_soda_percentage": 70.00000000000001,
+    "answer": 70.00000000000001
+  },
+  "flawed_trace": {
+    "drank_bottle_count": 1,
+    "drank_percentage_decimal": 0.9,
+    "soda_drank": 0.9,
+    "friends_count": 2,
+    "given_percentage_decimal": 0.7,
+    "bottles_per_friend": 1,
+    "soda_given_away": 1.4,
+    "total_bottles": 3,
+    "remaining_soda_decimal": 0.7000000000000002,
+    "percentage_factor": 100,
+    "remaining_soda_percentage": 70.00000000000001,
+    "answer": 0.9
+  },
+  "correct_value": 70.00000000000001,
+  "flawed_value": 0.9,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "soda_drank",
+      "question_inputs": [
+        "drank_bottle_count",
+        "drank_percentage_decimal"
+      ],
+      "solution_line_template": "First find how much soda Danny drank: {drank_bottle_count} bottle * {drank_percentage_decimal} = <<{drank_bottle_count}*{drank_percentage_decimal}={soda_drank}>>{soda_drank} bottles"
+    },
+    {
+      "WK_inputs": [
+        "bottles_per_friend"
+      ],
+      "line_number": "L2",
+      "output_variable": "soda_given_away",
+      "question_inputs": [
+        "friends_count",
+        "given_percentage_decimal"
+      ],
+      "solution_line_template": "Then find how much soda Danny gave to his friends: {friends_count} friends * {bottles_per_friend} bottle/friend * {given_percentage_decimal} = <<{friends_count}*{bottles_per_friend}*{given_percentage_decimal}={soda_given_away}>>{soda_given_away} bottles"
+    },
+    {
+      "WK_inputs": [
+        "percentage_factor"
+      ],
+      "line_number": "L3",
+      "output_variable": "remaining_soda_percentage",
+      "question_inputs": [
+        "total_bottles"
+      ],
+      "solution_line_template": "Now subtract the soda drunk and given away to find the remaining amount of soda: {total_bottles} bottles - {soda_drank} bottles - {soda_given_away} bottles = {remaining_soda_decimal} bottles * {percentage_factor}% = {remaining_soda_percentage}%"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how much soda Danny drank: 1 bottle * 0.9 = <<1*0.9=0.9>>0.9 bottles",
+    "FA": "#### 0.9"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'soda_drank' (value: 0.9) was reported instead of 'remaining_soda_percentage' (value: 70.00000000000001).",
+  "repro_seed": -3483965274804529201,
+  "model_name": "google_gemini-2.5-flash"
+}

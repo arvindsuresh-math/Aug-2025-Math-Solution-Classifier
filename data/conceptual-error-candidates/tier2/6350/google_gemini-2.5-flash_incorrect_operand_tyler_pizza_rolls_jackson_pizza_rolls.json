@@ -1,0 +1,74 @@
+{
+  "index": 6350,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "Jerome ate 2 times the amount of Jackson's 10 pizza rolls, so 2*10 = <<2*10=20>>20 pizza rolls",
+    "L2": "Tyler ate 1.5 times more than Jerome's 20 pizza rolls, so Tyler ate 1.5*20 = <<1.5*20=30>>30 pizza rolls",
+    "L3": "Tyler ate 30 pizza rolls and Jackson only ate 10 pizza rolls so Tyler ate 30-10 = <<30-10=20>>20 more pizza rolls"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6350.\n    Returns: the difference in pizza rolls eaten by Tyler and Jackson.\n    \"\"\"\n    # L1\n    jackson_pizza_rolls = 10 # Jackson ate 10 pizza rolls\n    jerome_factor = 2 # twice that amount\n    jerome_pizza_rolls = jerome_factor * jackson_pizza_rolls\n\n    # L2\n    tyler_factor = 1.5 # one and half times more\n    tyler_pizza_rolls = tyler_factor * jerome_pizza_rolls\n\n    # L3\n    difference_tyler_jackson = tyler_pizza_rolls - jackson_pizza_rolls\n\n    # FA\n    answer = difference_tyler_jackson\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "tyler_pizza_rolls",
+    "operand_to_replace": "jerome_pizza_rolls",
+    "replacement_variable": "jackson_pizza_rolls"
+  },
+  "correct_trace": {
+    "jackson_pizza_rolls": 10,
+    "jerome_factor": 2,
+    "jerome_pizza_rolls": 20,
+    "tyler_factor": 1.5,
+    "tyler_pizza_rolls": 30.0,
+    "difference_tyler_jackson": 20.0,
+    "answer": 20.0
+  },
+  "flawed_trace": {
+    "jackson_pizza_rolls": 10,
+    "jerome_factor": 2,
+    "jerome_pizza_rolls": 20,
+    "tyler_factor": 1.5,
+    "tyler_pizza_rolls": 15.0,
+    "difference_tyler_jackson": 5.0,
+    "answer": 5.0
+  },
+  "correct_value": 30.0,
+  "flawed_value": 15.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "jerome_pizza_rolls",
+      "question_inputs": [
+        "jackson_pizza_rolls",
+        "jerome_factor"
+      ],
+      "solution_line_template": "Jerome ate {jerome_factor} times the amount of Jackson's {jackson_pizza_rolls} pizza rolls, so {jerome_factor}*{jackson_pizza_rolls} = <<{jerome_factor}*{jackson_pizza_rolls}={jerome_pizza_rolls}>>{jerome_pizza_rolls} pizza rolls"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "tyler_pizza_rolls",
+      "question_inputs": [
+        "tyler_factor"
+      ],
+      "solution_line_template": "Tyler ate {tyler_factor} times more than Jerome's {jerome_pizza_rolls} pizza rolls, so Tyler ate {tyler_factor}*{jerome_pizza_rolls} = <<{tyler_factor}*{jerome_pizza_rolls}={tyler_pizza_rolls}>>{tyler_pizza_rolls} pizza rolls"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "difference_tyler_jackson",
+      "question_inputs": [],
+      "solution_line_template": "Tyler ate {tyler_pizza_rolls} pizza rolls and Jackson only ate {jackson_pizza_rolls} pizza rolls so Tyler ate {tyler_pizza_rolls}-{jackson_pizza_rolls} = <<{tyler_pizza_rolls}-{jackson_pizza_rolls}={difference_tyler_jackson}>>{difference_tyler_jackson} more pizza rolls"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jerome ate 2 times the amount of Jackson's 10 pizza rolls, so 2*10 = <<2*10=20>>20 pizza rolls",
+    "L2": "Tyler ate 1.5 times more than Jerome's 10 pizza rolls, so Tyler ate 1.5*10 = <<1.5*10=15>>15 pizza rolls",
+    "L3": "Tyler ate 15 pizza rolls and Jackson only ate 10 pizza rolls so Tyler ate 15-10 = <<15-10=5>>5 more pizza rolls",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'jackson_pizza_rolls' (value: 10) was used instead of 'jerome_pizza_rolls' (value: 20).",
+  "repro_seed": 7038686744926586006,
+  "model_name": "google_gemini-2.5-flash"
+}

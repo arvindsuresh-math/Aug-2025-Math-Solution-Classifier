@@ -1,0 +1,63 @@
+{
+  "index": 6579,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "Megan was the lead actress in 100 * 80% = <<100*80*.01=80>>80 plays.",
+    "L2": "So Megan was not the lead actress in 100 - 80 = <<100-80=20>>20 plays."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6579.\n    Returns: the number of times Megan was not the lead actress.\n    \"\"\"\n    # L1\n    total_plays = 100 # participated in 100 plays\n    lead_actress_percentage_num = 80 # lead actress in 80% of her work\n    percent_factor = 0.01 # WK\n    lead_actress_plays = total_plays * lead_actress_percentage_num * percent_factor\n\n    # L2\n    not_lead_actress_plays = total_plays - lead_actress_plays\n\n    # FA\n    answer = not_lead_actress_plays\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "not_lead_actress_plays",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x315589110>"
+  },
+  "correct_trace": {
+    "total_plays": 100,
+    "lead_actress_percentage_num": 80,
+    "percent_factor": 0.01,
+    "lead_actress_plays": 80.0,
+    "not_lead_actress_plays": 20.0,
+    "answer": 20.0
+  },
+  "flawed_trace": {
+    "total_plays": 100,
+    "lead_actress_percentage_num": 80,
+    "percent_factor": 0.01,
+    "lead_actress_plays": 80.0,
+    "not_lead_actress_plays": 180.0,
+    "answer": 180.0
+  },
+  "correct_value": 20.0,
+  "flawed_value": 180.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "lead_actress_plays",
+      "question_inputs": [
+        "total_plays",
+        "lead_actress_percentage_num"
+      ],
+      "solution_line_template": "Megan was the lead actress in {total_plays} * {lead_actress_percentage_num}% = <<{total_plays}*{lead_actress_percentage_num}*{percent_factor}={lead_actress_plays}>>{lead_actress_plays} plays."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "not_lead_actress_plays",
+      "question_inputs": [],
+      "solution_line_template": "So Megan was not the lead actress in {total_plays} - {lead_actress_plays} = <<{total_plays}-{lead_actress_plays}={not_lead_actress_plays}>>{not_lead_actress_plays} plays."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Megan was the lead actress in 100 * 80% = <<100*80*0.01=80>>80 plays.",
+    "L2": "So Megan was not the lead actress in 100 - 80 = <<100-80=180>>180 plays.",
+    "FA": "#### 180"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -4042877457556727291,
+  "model_name": "google_gemini-2.5-flash"
+}

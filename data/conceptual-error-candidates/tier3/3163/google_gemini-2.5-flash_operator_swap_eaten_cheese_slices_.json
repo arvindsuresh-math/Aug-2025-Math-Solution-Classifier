@@ -1,0 +1,108 @@
+{
+  "index": 3163,
+  "original_solution_mapping": {
+    "FA": "#### 32",
+    "L1": "Cheese pizzas are 2/3 of the pizza's purchased because 2 / (2+1) = 2/3",
+    "L2": "She buys 4 cheese pizzas because 6 x (2/3) = <<6*2/3=4>>4",
+    "L3": "These give her 72 pieces of cheese pizza because 4 x 18 = <<4*18=72>>72",
+    "L4": "The students at 64 pieces of cheese because 72 - 8 = <<72-8=64>>64",
+    "L5": "There are 32 students in her class because 64 / 2 = <<64/2=32>>32"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3163.\n    Returns: the number of students in the class.\n    \"\"\"\n    # L1\n    cheese_ratio_numerator = 2 # 2 pieces of cheese\n    onion_ratio_denominator = 1 # 1 piece of onion\n    cheese_pizza_ratio = Fraction(cheese_ratio_numerator, cheese_ratio_numerator + onion_ratio_denominator)\n\n    # L2\n    total_pizzas = 6 # She orders 6 total pizzas\n    num_cheese_pizzas = total_pizzas * cheese_pizza_ratio\n\n    # L3\n    slices_per_pizza = 18 # A large pizza has 18 slices\n    total_cheese_slices = num_cheese_pizzas * slices_per_pizza\n\n    # L4\n    leftover_cheese_slices = 8 # 8 pieces of cheese\n    eaten_cheese_slices = total_cheese_slices - leftover_cheese_slices\n\n    # L5\n    cheese_slices_per_student = 2 # 2 pieces of cheese\n    num_students = eaten_cheese_slices / cheese_slices_per_student\n\n    # FA\n    answer = num_students\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "eaten_cheese_slices",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x318533210>"
+  },
+  "correct_trace": {
+    "cheese_ratio_numerator": 2,
+    "onion_ratio_denominator": 1,
+    "cheese_pizza_ratio": "2/3",
+    "total_pizzas": 6,
+    "num_cheese_pizzas": "4",
+    "slices_per_pizza": 18,
+    "total_cheese_slices": "72",
+    "leftover_cheese_slices": 8,
+    "eaten_cheese_slices": "64",
+    "cheese_slices_per_student": 2,
+    "num_students": "32",
+    "answer": "32"
+  },
+  "flawed_trace": {
+    "cheese_ratio_numerator": 2,
+    "onion_ratio_denominator": 1,
+    "cheese_pizza_ratio": "2/3",
+    "total_pizzas": 6,
+    "num_cheese_pizzas": "4",
+    "slices_per_pizza": 18,
+    "total_cheese_slices": "72",
+    "leftover_cheese_slices": 8,
+    "eaten_cheese_slices": "80",
+    "cheese_slices_per_student": 2,
+    "num_students": "40",
+    "answer": "40"
+  },
+  "correct_value": "64",
+  "flawed_value": "80",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cheese_pizza_ratio",
+      "question_inputs": [
+        "cheese_ratio_numerator",
+        "onion_ratio_denominator"
+      ],
+      "solution_line_template": "Cheese pizzas are {cheese_pizza_ratio} of the pizza's purchased because {cheese_ratio_numerator} / ({cheese_ratio_numerator}+{onion_ratio_denominator}) = {cheese_pizza_ratio}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_cheese_pizzas",
+      "question_inputs": [
+        "total_pizzas"
+      ],
+      "solution_line_template": "She buys {num_cheese_pizzas} cheese pizzas because {total_pizzas} x ({cheese_pizza_ratio}) = <<{total_pizzas}*{cheese_pizza_ratio}={num_cheese_pizzas}>>{num_cheese_pizzas}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cheese_slices",
+      "question_inputs": [
+        "slices_per_pizza"
+      ],
+      "solution_line_template": "These give her {total_cheese_slices} pieces of cheese pizza because {num_cheese_pizzas} x {slices_per_pizza} = <<{num_cheese_pizzas}*{slices_per_pizza}={total_cheese_slices}>>{total_cheese_slices}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "eaten_cheese_slices",
+      "question_inputs": [
+        "leftover_cheese_slices"
+      ],
+      "solution_line_template": "The students at {eaten_cheese_slices} pieces of cheese because {total_cheese_slices} - {leftover_cheese_slices} = <<{total_cheese_slices}-{leftover_cheese_slices}={eaten_cheese_slices}>>{eaten_cheese_slices}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "num_students",
+      "question_inputs": [
+        "cheese_slices_per_student"
+      ],
+      "solution_line_template": "There are {num_students} students in her class because {eaten_cheese_slices} / {cheese_slices_per_student} = <<{eaten_cheese_slices}/{cheese_slices_per_student}={num_students}>>{num_students}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Cheese pizzas are 2/3 of the pizza's purchased because 2 / (2+1) = 2/3",
+    "L2": "She buys 4 cheese pizzas because 6 x (2/3) = <<6*2/3=4>>4",
+    "L3": "These give her 72 pieces of cheese pizza because 4 x 18 = <<4*18=72>>72",
+    "L4": "The students at 80 pieces of cheese because 72 - 8 = <<72-8=80>>80",
+    "L5": "There are 40 students in her class because 80 / 2 = <<80/2=40>>40",
+    "FA": "#### 40"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 2499346109317718126,
+  "model_name": "google_gemini-2.5-flash"
+}

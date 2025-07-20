@@ -1,0 +1,77 @@
+{
+  "index": 5280,
+  "original_solution_mapping": {
+    "FA": "#### 540",
+    "L1": "When Haman collected 10 trays and dropped 2 trays, he was left with 10 trays - 2 trays = <<10-2=8>>8 trays.",
+    "L2": "When he added 7 more trays, the total number of trays became 8 trays + 7 trays = <<8+7=15>>15 trays.",
+    "L3": "Since each tray contains 36 eggs, the total number of eggs to be sold is 36 eggs/tray * 15 trays = 540 eggs."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5280.\n    Returns: the total number of eggs sold that day.\n    \"\"\"\n    # L1\n    collected_trays = 10 # collect 10 trays of eggs\n    dropped_trays = 2 # dropped two trays\n    remaining_trays_after_drop = collected_trays - dropped_trays\n\n    # L2\n    added_trays = 7 # add 7 more trays\n    total_trays = remaining_trays_after_drop + added_trays\n\n    # L3\n    eggs_per_tray = 36 # WK\n    total_eggs_sold = eggs_per_tray * total_trays\n\n    # FA\n    answer = total_eggs_sold\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_eggs_sold",
+    "replacement_variable": "total_trays"
+  },
+  "correct_trace": {
+    "collected_trays": 10,
+    "dropped_trays": 2,
+    "remaining_trays_after_drop": 8,
+    "added_trays": 7,
+    "total_trays": 15,
+    "eggs_per_tray": 36,
+    "total_eggs_sold": 540,
+    "answer": 540
+  },
+  "flawed_trace": {
+    "collected_trays": 10,
+    "dropped_trays": 2,
+    "remaining_trays_after_drop": 8,
+    "added_trays": 7,
+    "total_trays": 15,
+    "eggs_per_tray": 36,
+    "total_eggs_sold": 540,
+    "answer": 15
+  },
+  "correct_value": 540,
+  "flawed_value": 15,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "remaining_trays_after_drop",
+      "question_inputs": [
+        "collected_trays",
+        "dropped_trays"
+      ],
+      "solution_line_template": "When Haman collected {collected_trays} trays and dropped {dropped_trays} trays, he was left with {collected_trays} trays - {dropped_trays} trays = <<{collected_trays}-{dropped_trays}={remaining_trays_after_drop}>>{remaining_trays_after_drop} trays."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_trays",
+      "question_inputs": [
+        "added_trays"
+      ],
+      "solution_line_template": "When he added {added_trays} more trays, the total number of trays became {remaining_trays_after_drop} trays + {added_trays} trays = <<{remaining_trays_after_drop}+{added_trays}={total_trays}>>{total_trays} trays."
+    },
+    {
+      "WK_inputs": [
+        "eggs_per_tray"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_eggs_sold",
+      "question_inputs": [],
+      "solution_line_template": "Since each tray contains {eggs_per_tray} eggs, the total number of eggs to be sold is {eggs_per_tray} eggs/tray * {total_trays} trays = {total_eggs_sold} eggs."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "When Haman collected 10 trays and dropped 2 trays, he was left with 10 trays - 2 trays = <<10-2=8>>8 trays.",
+    "L2": "When he added 7 more trays, the total number of trays became 8 trays + 7 trays = <<8+7=15>>15 trays.",
+    "FA": "#### 15"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'total_trays' (value: 15) was reported instead of 'total_eggs_sold' (value: 540).",
+  "repro_seed": 7743670799275255867,
+  "model_name": "google_gemini-2.5-flash"
+}

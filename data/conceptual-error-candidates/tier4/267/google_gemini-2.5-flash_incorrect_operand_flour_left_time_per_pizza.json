@@ -1,0 +1,105 @@
+{
+  "index": 267,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "Each hour Jimmy makes 60min / 10min/pizza = <<60/10=6>>6 Pizzas",
+    "L2": "The number of total pizzas made equals 7 hours x 6 pizzas/hour = <<7*6=42>>42 pizzas",
+    "L3": "The amount of total flour used equals 42 pizzas x 0.5 kg/pizza = <<42*0.5=21>>21 kg",
+    "L4": "The amount of flour left equals 22 kg - 21 kg = <<22-21=1>>1 kg",
+    "L5": "The number of pizzas Jimmy can make is 1kg / 0.5kg/pizza = <<1/0.5=2>>2 pizzas"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 267.\n    Returns: the number of pizzas Jimmy can make with the flour left.\n    \"\"\"\n    # L1\n    minutes_per_hour = 60 # WK\n    time_per_pizza = 10 # he takes 10 min to make each pizza\n    pizzas_per_hour = minutes_per_hour / time_per_pizza\n\n    # L2\n    total_hours = 7 # 7 hours\n    total_pizzas_made = total_hours * pizzas_per_hour\n\n    # L3\n    flour_per_pizza = 0.5 # each pizza needs 0.5kg of flour\n    total_flour_used = total_pizzas_made * flour_per_pizza\n\n    # L4\n    initial_flour_sack_kg = 22 # 22kg sack of flour\n    flour_left = initial_flour_sack_kg - total_flour_used\n\n    # L5\n    pizzas_from_leftover_flour = flour_left / flour_per_pizza\n\n    # FA\n    answer = pizzas_from_leftover_flour\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "flour_left",
+    "operand_to_replace": "total_flour_used",
+    "replacement_variable": "time_per_pizza"
+  },
+  "correct_trace": {
+    "minutes_per_hour": 60,
+    "time_per_pizza": 10,
+    "pizzas_per_hour": 6.0,
+    "total_hours": 7,
+    "total_pizzas_made": 42.0,
+    "flour_per_pizza": 0.5,
+    "total_flour_used": 21.0,
+    "initial_flour_sack_kg": 22,
+    "flour_left": 1.0,
+    "pizzas_from_leftover_flour": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "minutes_per_hour": 60,
+    "time_per_pizza": 10,
+    "pizzas_per_hour": 6.0,
+    "total_hours": 7,
+    "total_pizzas_made": 42.0,
+    "flour_per_pizza": 0.5,
+    "total_flour_used": 21.0,
+    "initial_flour_sack_kg": 22,
+    "flour_left": 12,
+    "pizzas_from_leftover_flour": 24.0,
+    "answer": 24.0
+  },
+  "correct_value": 1.0,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "pizzas_per_hour",
+      "question_inputs": [
+        "time_per_pizza"
+      ],
+      "solution_line_template": "Each hour Jimmy makes {minutes_per_hour}min / {time_per_pizza}min/pizza = <<{minutes_per_hour}/{time_per_pizza}={pizzas_per_hour}>>{pizzas_per_hour} Pizzas"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_pizzas_made",
+      "question_inputs": [
+        "total_hours"
+      ],
+      "solution_line_template": "The number of total pizzas made equals {total_hours} hours x {pizzas_per_hour} pizzas/hour = <<{total_hours}*{pizzas_per_hour}={total_pizzas_made}>>{total_pizzas_made} pizzas"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_flour_used",
+      "question_inputs": [
+        "flour_per_pizza"
+      ],
+      "solution_line_template": "The amount of total flour used equals {total_pizzas_made} pizzas x {flour_per_pizza} kg/pizza = <<{total_pizzas_made}*{flour_per_pizza}={total_flour_used}>>{total_flour_used} kg"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "flour_left",
+      "question_inputs": [
+        "initial_flour_sack_kg"
+      ],
+      "solution_line_template": "The amount of flour left equals {initial_flour_sack_kg} kg - {total_flour_used} kg = <<{initial_flour_sack_kg}-{total_flour_used}={flour_left}>>{flour_left} kg"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "pizzas_from_leftover_flour",
+      "question_inputs": [],
+      "solution_line_template": "The number of pizzas Jimmy can make is {flour_left}kg / {flour_per_pizza}kg/pizza = <<{flour_left}/{flour_per_pizza}={pizzas_from_leftover_flour}>>{pizzas_from_leftover_flour} pizzas"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each hour Jimmy makes 60min / 10min/pizza = <<60/10=6>>6 Pizzas",
+    "L2": "The number of total pizzas made equals 7 hours x 6 pizzas/hour = <<7*6=42>>42 pizzas",
+    "L3": "The amount of total flour used equals 42 pizzas x 0.5 kg/pizza = <<42*0.5=21>>21 kg",
+    "L4": "The amount of flour left equals 22 kg - 10 kg = <<22-10=12>>12 kg",
+    "L5": "The number of pizzas Jimmy can make is 12kg / 0.5kg/pizza = <<12/0.5=24>>24 pizzas",
+    "FA": "#### 24"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'time_per_pizza' (value: 10) was used instead of 'total_flour_used' (value: 21.0).",
+  "repro_seed": -4735285089578024220,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,79 @@
+{
+  "index": 3699,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "Let x = the number of weeks.",
+    "L2": "60 + 9x = 90 + 3x to set them equal.",
+    "L3": "9x = 30 + 3x",
+    "L4": "6x = 30",
+    "L5": "x = <<5=5>>5",
+    "L6": "In 5 weeks they will have equal money."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3699.\n    Returns: the number of weeks until Carol and Mike have the same amount of money.\n    \"\"\"\n    # L3\n    carol_initial_money = 60 # Carol has $60\n    carol_weekly_saving = 9 # saves $9 per week\n    mike_initial_money = 90 # Mike has $90\n    mike_weekly_saving = 3 # saves $3 per week\n    initial_money_difference = mike_initial_money - carol_initial_money\n\n    # L4\n    weekly_saving_difference = carol_weekly_saving - mike_weekly_saving\n\n    # L5\n    num_weeks = initial_money_difference / weekly_saving_difference\n\n    # FA\n    answer = num_weeks\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "initial_money_difference",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x31c102c50>"
+  },
+  "correct_trace": {
+    "carol_initial_money": 60,
+    "carol_weekly_saving": 9,
+    "mike_initial_money": 90,
+    "mike_weekly_saving": 3,
+    "initial_money_difference": 30,
+    "weekly_saving_difference": 6,
+    "num_weeks": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "carol_initial_money": 60,
+    "carol_weekly_saving": 9,
+    "mike_initial_money": 90,
+    "mike_weekly_saving": 3,
+    "initial_money_difference": 150,
+    "weekly_saving_difference": 6,
+    "num_weeks": 25.0,
+    "answer": 25.0
+  },
+  "correct_value": 30,
+  "flawed_value": 150,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "initial_money_difference",
+      "question_inputs": [
+        "carol_initial_money",
+        "carol_weekly_saving",
+        "mike_initial_money",
+        "mike_weekly_saving"
+      ],
+      "solution_line_template": "{carol_weekly_saving}x = {initial_money_difference} + {mike_weekly_saving}x"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "weekly_saving_difference",
+      "question_inputs": [],
+      "solution_line_template": "{weekly_saving_difference}x = {initial_money_difference}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "num_weeks",
+      "question_inputs": [],
+      "solution_line_template": "x = <<{initial_money_difference}/{weekly_saving_difference}={num_weeks}>>{num_weeks}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L3": "9x = 150 + 3x",
+    "L4": "6x = 150",
+    "L5": "x = <<150/6=25>>25",
+    "FA": "#### 25"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -4135769987573944179,
+  "model_name": "google_gemini-2.5-flash"
+}

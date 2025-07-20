@@ -1,0 +1,77 @@
+{
+  "index": 4231,
+  "original_solution_mapping": {
+    "FA": "#### 250",
+    "L1": "He needs 12.5 gallons per day because 25 x .5 = <<25*.5=12.5>>12.5",
+    "L2": "It will take 20 days of travel because 4,000 / 200 = <<4000/200=20>>20",
+    "L3": "He will need 250 gallons of water because 20 x 12.5 = <<20*12.5=250>>250"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4231.\n    Returns: the total gallons of water needed.\n    \"\"\"\n    # L1\n    num_men = 25 # 25 men, including himself\n    water_per_man_per_day = 0.5 # 1/2 a gallon of water per day per man\n    water_needed_per_day = num_men * water_per_man_per_day\n\n    # L2\n    total_distance = 4000 # 4,000 miles\n    boat_speed = 200 # 200 miles per day\n    travel_days = total_distance / boat_speed\n\n    # L3\n    total_water_needed = travel_days * water_needed_per_day\n\n    # FA\n    answer = total_water_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "travel_days",
+    "operand_to_replace": "boat_speed",
+    "replacement_variable": "water_needed_per_day"
+  },
+  "correct_trace": {
+    "num_men": 25,
+    "water_per_man_per_day": 0.5,
+    "water_needed_per_day": 12.5,
+    "total_distance": 4000,
+    "boat_speed": 200,
+    "travel_days": 20.0,
+    "total_water_needed": 250.0,
+    "answer": 250.0
+  },
+  "flawed_trace": {
+    "num_men": 25,
+    "water_per_man_per_day": 0.5,
+    "water_needed_per_day": 12.5,
+    "total_distance": 4000,
+    "boat_speed": 200,
+    "travel_days": 320.0,
+    "total_water_needed": 4000.0,
+    "answer": 4000.0
+  },
+  "correct_value": 20.0,
+  "flawed_value": 320.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "water_needed_per_day",
+      "question_inputs": [
+        "num_men",
+        "water_per_man_per_day"
+      ],
+      "solution_line_template": "He needs {water_needed_per_day} gallons per day because {num_men} x {water_per_man_per_day} = <<{num_men}*{water_per_man_per_day}={water_needed_per_day}>>{water_needed_per_day}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "travel_days",
+      "question_inputs": [
+        "total_distance",
+        "boat_speed"
+      ],
+      "solution_line_template": "It will take {travel_days} days of travel because {total_distance} / {boat_speed} = <<{total_distance}/{boat_speed}={travel_days}>>{travel_days}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_water_needed",
+      "question_inputs": [],
+      "solution_line_template": "He will need {total_water_needed} gallons of water because {travel_days} x {water_needed_per_day} = <<{travel_days}*{water_needed_per_day}={total_water_needed}>>{total_water_needed}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He needs 12.5 gallons per day because 25 x 0.5 = <<25*0.5=12.5>>12.5",
+    "L2": "It will take 320 days of travel because 4000 / 12.5 = <<4000/12.5=320>>320",
+    "L3": "He will need 4000 gallons of water because 320 x 12.5 = <<320*12.5=4000>>4000",
+    "FA": "#### 4000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'water_needed_per_day' (12.5) was used instead of 'boat_speed' (200).",
+  "repro_seed": -3891680009054926407,
+  "model_name": "google_gemini-2.5-flash"
+}

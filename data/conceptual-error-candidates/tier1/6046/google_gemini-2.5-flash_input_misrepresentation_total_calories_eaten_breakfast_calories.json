@@ -1,0 +1,66 @@
+{
+  "index": 6046,
+  "original_solution_mapping": {
+    "FA": "#### 832",
+    "L1": "Ellen ate 353 calories for breakfast + 885 for lunch + 130 for a snack = <<353+885+130=1368>>1368 calories.",
+    "L2": "Ellen has 2,200 calories - 1368 = <<2200-1368=832>>832 calories left for dinner."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6046.\n    Returns: the number of calories Ellen has left for dinner.\n    \"\"\"\n    # L1\n    breakfast_calories = 353 # 353 calories\n    lunch_calories = 885 # 885\n    snack_calories = 130 # 130 calories\n    total_calories_eaten = breakfast_calories + lunch_calories + snack_calories\n\n    # L2\n    daily_calorie_limit = 2200 # 2,200 calorie a day diet\n    calories_left_for_dinner = daily_calorie_limit - total_calories_eaten\n\n    # FA\n    answer = calories_left_for_dinner\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_calories_eaten",
+    "operand_to_replace": "snack_calories",
+    "replacement_variable": "breakfast_calories"
+  },
+  "correct_trace": {
+    "breakfast_calories": 353,
+    "lunch_calories": 885,
+    "snack_calories": 130,
+    "total_calories_eaten": 1368,
+    "daily_calorie_limit": 2200,
+    "calories_left_for_dinner": 832,
+    "answer": 832
+  },
+  "flawed_trace": {
+    "breakfast_calories": 353,
+    "lunch_calories": 885,
+    "snack_calories": 130,
+    "total_calories_eaten": 1591,
+    "daily_calorie_limit": 2200,
+    "calories_left_for_dinner": 609,
+    "answer": 609
+  },
+  "correct_value": 1368,
+  "flawed_value": 1591,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_calories_eaten",
+      "question_inputs": [
+        "breakfast_calories",
+        "lunch_calories",
+        "snack_calories"
+      ],
+      "solution_line_template": "Ellen ate {breakfast_calories} calories for breakfast + {lunch_calories} for lunch + {snack_calories} for a snack = <<{breakfast_calories}+{lunch_calories}+{snack_calories}={total_calories_eaten}>>{total_calories_eaten} calories."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "calories_left_for_dinner",
+      "question_inputs": [
+        "daily_calorie_limit"
+      ],
+      "solution_line_template": "Ellen has {daily_calorie_limit} calories - {total_calories_eaten} = <<{daily_calorie_limit}-{total_calories_eaten}={calories_left_for_dinner}>>{calories_left_for_dinner} calories left for dinner."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Ellen ate 353 calories for breakfast + 885 for lunch + 353 for a snack = <<353+885+353=1591>>1591 calories.",
+    "L2": "Ellen has 2200 calories - 1591 = <<2200-1591=609>>609 calories left for dinner.",
+    "FA": "#### 609"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'breakfast_calories' (353) was used instead of 'snack_calories' (130).",
+  "repro_seed": 326319958691014356,
+  "model_name": "google_gemini-2.5-flash"
+}

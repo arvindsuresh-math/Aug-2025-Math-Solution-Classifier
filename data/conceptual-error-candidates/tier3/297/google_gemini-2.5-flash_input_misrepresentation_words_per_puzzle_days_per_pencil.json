@@ -1,0 +1,64 @@
+{
+  "index": 297,
+  "original_solution_mapping": {
+    "FA": "#### 75",
+    "L1": "At 7 days a week, it takes Bert 2 * 7 = <<2*7=14>>14 days of daily crossword puzzles to use up a pencil.",
+    "L2": "Since Bert does one puzzle a day, each crossword puzzle has 1050 / 14 = <<1050/14=75>>75 words."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 297.\n    Returns: the average number of words in each crossword puzzle.\n    \"\"\"\n    # L1\n    weeks_per_pencil = 2 # every two weeks\n    days_per_week = 7 # WK\n    days_per_pencil = weeks_per_pencil * days_per_week\n\n    # L2\n    words_per_pencil = 1050 # 1050 words to use up a pencil\n    words_per_puzzle = words_per_pencil / days_per_pencil\n\n    # FA\n    answer = words_per_puzzle\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "words_per_puzzle",
+    "operand_to_replace": "words_per_pencil",
+    "replacement_variable": "days_per_pencil"
+  },
+  "correct_trace": {
+    "weeks_per_pencil": 2,
+    "days_per_week": 7,
+    "days_per_pencil": 14,
+    "words_per_pencil": 1050,
+    "words_per_puzzle": 75.0,
+    "answer": 75.0
+  },
+  "flawed_trace": {
+    "weeks_per_pencil": 2,
+    "days_per_week": 7,
+    "days_per_pencil": 14,
+    "words_per_pencil": 1050,
+    "words_per_puzzle": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 75.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L1",
+      "output_variable": "days_per_pencil",
+      "question_inputs": [
+        "weeks_per_pencil"
+      ],
+      "solution_line_template": "At {days_per_week} days a week, it takes Bert {weeks_per_pencil} * {days_per_week} = <<{weeks_per_pencil}*{days_per_week}={days_per_pencil}>>{days_per_pencil} days of daily crossword puzzles to use up a pencil."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "words_per_puzzle",
+      "question_inputs": [
+        "words_per_pencil"
+      ],
+      "solution_line_template": "Since Bert does one puzzle a day, each crossword puzzle has {words_per_pencil} / {days_per_pencil} = <<{words_per_pencil}/{days_per_pencil}={words_per_puzzle}>>{words_per_puzzle} words."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "At 7 days a week, it takes Bert 2 * 7 = <<2*7=14>>14 days of daily crossword puzzles to use up a pencil.",
+    "L2": "Since Bert does one puzzle a day, each crossword puzzle has 14 / 14 = <<14/14=1>>1 words.",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'days_per_pencil' (14) was used instead of 'words_per_pencil' (1050).",
+  "repro_seed": -7579254143142841102,
+  "model_name": "google_gemini-2.5-flash"
+}

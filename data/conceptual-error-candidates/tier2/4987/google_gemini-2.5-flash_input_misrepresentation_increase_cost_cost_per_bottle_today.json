@@ -1,0 +1,66 @@
+{
+  "index": 4987,
+  "original_solution_mapping": {
+    "FA": "#### 25",
+    "L1": "Today, 5 bottles of $20.00 wine will cost 5*20 = $<<5*20=100.00>>100.00",
+    "L2": "In 2 months there will be a 25% tariff on the 5 bottles of wine that cost $100.00 so that makes the 5 bottles .25*100 = $25.00 more expensive"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4987.\n    Returns: how much more expensive 5 bottles of wine will be in 2 months.\n    \"\"\"\n    # L1\n    num_bottles = 5 # 5 bottles of wine\n    cost_per_bottle_today = 20.00 # $20.00 today\n    total_cost_today = num_bottles * cost_per_bottle_today\n\n    # L2\n    tariff_increase_percent_num = 25 # increase by 25%\n    tariff_increase_percent_decimal = 0.25 # .25*100\n    increase_cost = tariff_increase_percent_decimal * total_cost_today\n\n    # FA\n    answer = increase_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "increase_cost",
+    "operand_to_replace": "tariff_increase_percent_decimal",
+    "replacement_variable": "cost_per_bottle_today"
+  },
+  "correct_trace": {
+    "num_bottles": 5,
+    "cost_per_bottle_today": 20.0,
+    "total_cost_today": 100.0,
+    "tariff_increase_percent_num": 25,
+    "tariff_increase_percent_decimal": 0.25,
+    "increase_cost": 25.0,
+    "answer": 25.0
+  },
+  "flawed_trace": {
+    "num_bottles": 5,
+    "cost_per_bottle_today": 20.0,
+    "total_cost_today": 100.0,
+    "tariff_increase_percent_num": 25,
+    "tariff_increase_percent_decimal": 0.25,
+    "increase_cost": 2000.0,
+    "answer": 2000.0
+  },
+  "correct_value": 25.0,
+  "flawed_value": 2000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_cost_today",
+      "question_inputs": [
+        "num_bottles",
+        "cost_per_bottle_today"
+      ],
+      "solution_line_template": "Today, {num_bottles} bottles of ${cost_per_bottle_today} wine will cost {num_bottles}*{cost_per_bottle_today} = $<<{num_bottles}*{cost_per_bottle_today}={total_cost_today}>>{total_cost_today}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "increase_cost",
+      "question_inputs": [
+        "tariff_increase_percent_num",
+        "tariff_increase_percent_decimal"
+      ],
+      "solution_line_template": "In 2 months there will be a {tariff_increase_percent_num}% tariff on the {num_bottles} bottles of wine that cost ${total_cost_today} so that makes the {num_bottles} bottles {tariff_increase_percent_decimal}*{total_cost_today} = ${increase_cost} more expensive"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Today, 5 bottles of $20 wine will cost 5*20 = $<<5*20=100>>100",
+    "L2": "In 2 months there will be a 25% tariff on the 5 bottles of wine that cost $100 so that makes the 5 bottles 20*100 = $2000 more expensive",
+    "FA": "#### 2000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'cost_per_bottle_today' (20.0) was used instead of 'tariff_increase_percent_decimal' (0.25).",
+  "repro_seed": 5126818950639291561,
+  "model_name": "google_gemini-2.5-flash"
+}

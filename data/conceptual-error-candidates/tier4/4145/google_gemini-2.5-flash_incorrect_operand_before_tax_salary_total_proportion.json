@@ -1,0 +1,78 @@
+{
+  "index": 4145,
+  "original_solution_mapping": {
+    "FA": "#### 3000",
+    "L1": "First divide that amount of the car payment by 20% to find Ben's after-tax salary: $400 / .2 = $<<400/.2=2000>>2000",
+    "L2": "Then find the proportion of his salary Ben keeps after taxes by subtracting the tax rate from 1: 1 - 1/3 = 2/3",
+    "L3": "Then divide Ben's after-tax salary by the proportion of his salary he keeps to find his before-tax salary: $2000 / 2/3 = $3000"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4145.\n    Returns: Ben's monthly income before taxes.\n    \"\"\"\n    # L1\n    car_payment = 400 # car payment is $400\n    car_expense_percent = 0.2 # 20% of his after-tax income on his car\n    after_tax_salary = car_payment / car_expense_percent\n\n    # L2\n    total_proportion = 1 # WK\n    tax_rate_fraction = Fraction(1, 3) # 1/3 of his gross income in taxes\n    proportion_kept_after_tax = total_proportion - tax_rate_fraction\n\n    # L3\n    before_tax_salary = after_tax_salary / proportion_kept_after_tax\n\n    # FA\n    answer = before_tax_salary\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "before_tax_salary",
+    "operand_to_replace": "proportion_kept_after_tax",
+    "replacement_variable": "total_proportion"
+  },
+  "correct_trace": {
+    "car_payment": 400,
+    "car_expense_percent": 0.2,
+    "after_tax_salary": 2000.0,
+    "total_proportion": 1,
+    "tax_rate_fraction": "1/3",
+    "proportion_kept_after_tax": "2/3",
+    "before_tax_salary": 3000.0,
+    "answer": 3000.0
+  },
+  "flawed_trace": {
+    "car_payment": 400,
+    "car_expense_percent": 0.2,
+    "after_tax_salary": 2000.0,
+    "total_proportion": 1,
+    "tax_rate_fraction": "1/3",
+    "proportion_kept_after_tax": "2/3",
+    "before_tax_salary": 2000.0,
+    "answer": 2000.0
+  },
+  "correct_value": 3000.0,
+  "flawed_value": 2000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "after_tax_salary",
+      "question_inputs": [
+        "car_payment",
+        "car_expense_percent"
+      ],
+      "solution_line_template": "First divide that amount of the car payment by {car_expense_percent} to find Ben's after-tax salary: ${car_payment} / {car_expense_percent} = $<<{car_payment}/{car_expense_percent}={after_tax_salary}>>{after_tax_salary}"
+    },
+    {
+      "WK_inputs": [
+        "total_proportion"
+      ],
+      "line_number": "L2",
+      "output_variable": "proportion_kept_after_tax",
+      "question_inputs": [
+        "tax_rate_fraction"
+      ],
+      "solution_line_template": "Then find the proportion of his salary Ben keeps after taxes by subtracting the tax rate from {total_proportion}: {total_proportion} - {tax_rate_fraction} = {proportion_kept_after_tax}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "before_tax_salary",
+      "question_inputs": [],
+      "solution_line_template": "Then divide Ben's after-tax salary by the proportion of his salary he keeps to find his before-tax salary: ${after_tax_salary} / {proportion_kept_after_tax} = ${before_tax_salary}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First divide that amount of the car payment by 0.2 to find Ben's after-tax salary: $400 / 0.2 = $<<400/0.2=2000>>2000",
+    "L2": "Then find the proportion of his salary Ben keeps after taxes by subtracting the tax rate from 1: 1 - 1/3 = 2/3",
+    "L3": "Then divide Ben's after-tax salary by the proportion of his salary he keeps to find his before-tax salary: $2000 / 1 = $2000",
+    "FA": "#### 2000"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'total_proportion' (value: 1) was used instead of 'proportion_kept_after_tax' (value: 2/3).",
+  "repro_seed": 5790909993507069653,
+  "model_name": "google_gemini-2.5-flash"
+}

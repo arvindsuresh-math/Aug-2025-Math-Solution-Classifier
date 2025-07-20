@@ -1,0 +1,85 @@
+{
+  "index": 6793,
+  "original_solution_mapping": {
+    "FA": "#### 160",
+    "L1": "Boxes of oil = 7 * 20 + 5 * 12 = <<7*20+5*12=200>>200 boxes",
+    "L2": "Containers of oil = 200 boxes * 8 containers = <<200*8=1600>>1600 containers of oil",
+    "L3": "1600/10 = <<1600/10=160>>160",
+    "L4": "Each truck will carry 160 containers of oil."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6793.\n    Returns: the number of containers of oil each truck will have after redistribution.\n    \"\"\"\n    # L1\n    trucks_type1_count = 7 # 7 trucks\n    boxes_per_truck_type1 = 20 # 20 boxes\n    trucks_type2_count = 5 # 5 trucks\n    boxes_per_truck_type2 = 12 # 12 boxes\n    total_boxes_of_oil = trucks_type1_count * boxes_per_truck_type1 + trucks_type2_count * boxes_per_truck_type2\n\n    # L2\n    containers_per_box = 8 # Each box holds 8 containers of oil\n    total_containers_of_oil = total_boxes_of_oil * containers_per_box\n\n    # L3\n    redistribution_trucks = 10 # redistributed onto 10 trucks\n    containers_per_redistributed_truck = total_containers_of_oil / redistribution_trucks\n\n    # FA\n    answer = containers_per_redistributed_truck\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_containers_of_oil",
+    "operand_to_replace": "containers_per_box",
+    "replacement_variable": "boxes_per_truck_type2"
+  },
+  "correct_trace": {
+    "trucks_type1_count": 7,
+    "boxes_per_truck_type1": 20,
+    "trucks_type2_count": 5,
+    "boxes_per_truck_type2": 12,
+    "total_boxes_of_oil": 200,
+    "containers_per_box": 8,
+    "total_containers_of_oil": 1600,
+    "redistribution_trucks": 10,
+    "containers_per_redistributed_truck": 160.0,
+    "answer": 160.0
+  },
+  "flawed_trace": {
+    "trucks_type1_count": 7,
+    "boxes_per_truck_type1": 20,
+    "trucks_type2_count": 5,
+    "boxes_per_truck_type2": 12,
+    "total_boxes_of_oil": 200,
+    "containers_per_box": 8,
+    "total_containers_of_oil": 2400,
+    "redistribution_trucks": 10,
+    "containers_per_redistributed_truck": 240.0,
+    "answer": 240.0
+  },
+  "correct_value": 1600,
+  "flawed_value": 2400,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_boxes_of_oil",
+      "question_inputs": [
+        "trucks_type1_count",
+        "boxes_per_truck_type1",
+        "trucks_type2_count",
+        "boxes_per_truck_type2"
+      ],
+      "solution_line_template": "Boxes of oil = {trucks_type1_count} * {boxes_per_truck_type1} + {trucks_type2_count} * {boxes_per_truck_type2} = <<{trucks_type1_count}*{boxes_per_truck_type1}+{trucks_type2_count}*{boxes_per_truck_type2}={total_boxes_of_oil}>>{total_boxes_of_oil} boxes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_containers_of_oil",
+      "question_inputs": [
+        "containers_per_box"
+      ],
+      "solution_line_template": "Containers of oil = {total_boxes_of_oil} boxes * {containers_per_box} containers = <<{total_boxes_of_oil}*{containers_per_box}={total_containers_of_oil}>>{total_containers_of_oil} containers of oil"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "containers_per_redistributed_truck",
+      "question_inputs": [
+        "redistribution_trucks"
+      ],
+      "solution_line_template": "{total_containers_of_oil}/{redistribution_trucks} = <<{total_containers_of_oil}/{redistribution_trucks}={containers_per_redistributed_truck}>>{containers_per_redistributed_truck}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Boxes of oil = 7 * 20 + 5 * 12 = <<7*20+5*12=200>>200 boxes",
+    "L2": "Containers of oil = 200 boxes * 12 containers = <<200*12=2400>>2400 containers of oil",
+    "L3": "2400/10 = <<2400/10=240>>240",
+    "FA": "#### 240"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'boxes_per_truck_type2' (12) was used instead of 'containers_per_box' (8).",
+  "repro_seed": -2513461689108313095,
+  "model_name": "google_gemini-2.5-flash"
+}

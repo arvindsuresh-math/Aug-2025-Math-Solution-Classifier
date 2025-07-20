@@ -1,0 +1,81 @@
+{
+  "index": 6666,
+  "original_solution_mapping": {
+    "FA": "#### 336",
+    "L1": "Each week, David will spend 3 hours + 3 hours + 4 hours = <<3+3+4=10>>10 hours in class.",
+    "L2": "Add to that his 4 hours of small group work, 4 + 10 = <<4+10=14>>14 hours a week.",
+    "L3": "He will spend 14 hours x 24 weeks = <<14*24=336>>336 hours on the course."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6666.\n    Returns: the total hours David will spend on the course.\n    \"\"\"\n    # L1\n    class_duration_1 = 3 # 2 three-hour classes\n    class_duration_2 = 3 # 2 three-hour classes\n    class_duration_3 = 4 # 1 four-hour class\n    weekly_class_hours = class_duration_1 + class_duration_2 + class_duration_3\n\n    # L2\n    homework_hours = 4 # 4 hours each week working on small group homework assignments\n    total_weekly_hours = homework_hours + weekly_class_hours\n\n    # L3\n    course_duration_weeks = 24 # lasts for 24 weeks\n    total_course_hours = total_weekly_hours * course_duration_weeks\n\n    # FA\n    answer = total_course_hours\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_weekly_hours",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x314324e10>"
+  },
+  "correct_trace": {
+    "class_duration_1": 3,
+    "class_duration_2": 3,
+    "class_duration_3": 4,
+    "weekly_class_hours": 10,
+    "homework_hours": 4,
+    "total_weekly_hours": 14,
+    "course_duration_weeks": 24,
+    "total_course_hours": 336,
+    "answer": 336
+  },
+  "flawed_trace": {
+    "class_duration_1": 3,
+    "class_duration_2": 3,
+    "class_duration_3": 4,
+    "weekly_class_hours": 10,
+    "homework_hours": 4,
+    "total_weekly_hours": 40,
+    "course_duration_weeks": 24,
+    "total_course_hours": 960,
+    "answer": 960
+  },
+  "correct_value": 14,
+  "flawed_value": 40,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "weekly_class_hours",
+      "question_inputs": [
+        "class_duration_1",
+        "class_duration_2",
+        "class_duration_3"
+      ],
+      "solution_line_template": "Each week, David will spend {class_duration_1} hours + {class_duration_2} hours + {class_duration_3} hours = <<{class_duration_1}+{class_duration_2}+{class_duration_3}={weekly_class_hours}>>{weekly_class_hours} hours in class."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_weekly_hours",
+      "question_inputs": [
+        "homework_hours"
+      ],
+      "solution_line_template": "Add to that his {homework_hours} hours of small group work, {homework_hours} + {weekly_class_hours} = <<{homework_hours}+{weekly_class_hours}={total_weekly_hours}>>{total_weekly_hours} hours a week."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_course_hours",
+      "question_inputs": [
+        "course_duration_weeks"
+      ],
+      "solution_line_template": "He will spend {total_weekly_hours} hours x {course_duration_weeks} weeks = <<{total_weekly_hours}*{course_duration_weeks}={total_course_hours}>>{total_course_hours} hours on the course."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each week, David will spend 3 hours + 3 hours + 4 hours = <<3+3+4=10>>10 hours in class.",
+    "L2": "Add to that his 4 hours of small group work, 4 + 10 = <<4+10=40>>40 hours a week.",
+    "L3": "He will spend 40 hours x 24 weeks = <<40*24=960>>960 hours on the course.",
+    "FA": "#### 960"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 6858401366733526046,
+  "model_name": "google_gemini-2.5-flash"
+}

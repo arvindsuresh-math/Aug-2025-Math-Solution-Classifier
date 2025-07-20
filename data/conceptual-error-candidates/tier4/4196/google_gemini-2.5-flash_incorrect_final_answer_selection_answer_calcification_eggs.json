@@ -1,0 +1,84 @@
+{
+  "index": 4196,
+  "original_solution_mapping": {
+    "FA": "#### 16",
+    "L1": "Infertile:30(.20)=6",
+    "L2": "30-6=<<30-6=24>>24 eggs remain",
+    "L3": "Calcification Issues:24(1/3)=8",
+    "L4": "24-8=<<24-8=16>>16 eggs that will hatch"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4196.\n    Returns: the number of eggs that actually hatch.\n    \"\"\"\n    # L1\n    total_eggs_per_year = 30 # 30 eggs per year\n    infertile_percent = 0.20 # 20 percent of them are infertile\n    infertile_eggs = total_eggs_per_year * infertile_percent\n\n    # L2\n    eggs_after_infertile = total_eggs_per_year - infertile_eggs\n\n    # L3\n    calcification_fraction = Fraction(1, 3) # a third of the remaining eggs will not hatch\n    calcification_eggs = eggs_after_infertile * calcification_fraction\n\n    # L4\n    hatchable_eggs = eggs_after_infertile - calcification_eggs\n\n    # FA\n    answer = hatchable_eggs\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "hatchable_eggs",
+    "replacement_variable": "calcification_eggs"
+  },
+  "correct_trace": {
+    "total_eggs_per_year": 30,
+    "infertile_percent": 0.2,
+    "infertile_eggs": 6.0,
+    "eggs_after_infertile": 24.0,
+    "calcification_fraction": "1/3",
+    "calcification_eggs": 8.0,
+    "hatchable_eggs": 16.0,
+    "answer": 16.0
+  },
+  "flawed_trace": {
+    "total_eggs_per_year": 30,
+    "infertile_percent": 0.2,
+    "infertile_eggs": 6.0,
+    "eggs_after_infertile": 24.0,
+    "calcification_fraction": "1/3",
+    "calcification_eggs": 8.0,
+    "hatchable_eggs": 16.0,
+    "answer": 8.0
+  },
+  "correct_value": 16.0,
+  "flawed_value": 8.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "infertile_eggs",
+      "question_inputs": [
+        "total_eggs_per_year",
+        "infertile_percent"
+      ],
+      "solution_line_template": "Infertile:{total_eggs_per_year}({infertile_percent})={infertile_eggs}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "eggs_after_infertile",
+      "question_inputs": [],
+      "solution_line_template": "{total_eggs_per_year}-{infertile_eggs}=<<{total_eggs_per_year}-{infertile_eggs}={eggs_after_infertile}>>{eggs_after_infertile} eggs remain"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "calcification_eggs",
+      "question_inputs": [
+        "calcification_fraction"
+      ],
+      "solution_line_template": "Calcification Issues:{eggs_after_infertile}({calcification_fraction})={calcification_eggs}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "hatchable_eggs",
+      "question_inputs": [],
+      "solution_line_template": "{eggs_after_infertile}-{calcification_eggs}=<<{eggs_after_infertile}-{calcification_eggs}={hatchable_eggs}>>{hatchable_eggs} eggs that will hatch"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Infertile:30(0.2)=6",
+    "L2": "30-6=<<30-6=24>>24 eggs remain",
+    "L3": "Calcification Issues:24(1/3)=8",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'calcification_eggs' (value: 8.0) was reported instead of 'hatchable_eggs' (value: 16.0).",
+  "repro_seed": -2076437869823157278,
+  "model_name": "google_gemini-2.5-flash"
+}

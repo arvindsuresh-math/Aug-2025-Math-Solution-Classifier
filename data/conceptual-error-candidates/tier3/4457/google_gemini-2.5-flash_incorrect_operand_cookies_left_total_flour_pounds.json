@@ -1,0 +1,93 @@
+{
+  "index": 4457,
+  "original_solution_mapping": {
+    "FA": "#### 105",
+    "L1": "Matt used 4*5=<<4*5=20>>20 pounds of flour",
+    "L2": "That means he made 20/2=<<20/2=10>>10 batches",
+    "L3": "So he cooked 10*12=<<10*12=120>>120 cookies",
+    "L4": "After Jim eats 15 there are 120-15=<<120-15=105>>105 cookies left"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4457.\n    Returns: the number of cookies left after Jim eats some.\n    \"\"\"\n    # L1\n    num_flour_bags = 4 # 4 bags of flour\n    weight_per_bag = 5 # weighing 5 pounds\n    total_flour_pounds = num_flour_bags * weight_per_bag\n\n    # L2\n    flour_per_batch = 2 # using 2 pounds of flour\n    num_batches = total_flour_pounds / flour_per_batch\n\n    # L3\n    cookies_per_dozen = 12 # a dozen cookies\n    total_cookies_cooked = num_batches * cookies_per_dozen\n\n    # L4\n    cookies_jim_ate = 15 # Jim eats 15 cookies\n    cookies_left = total_cookies_cooked - cookies_jim_ate\n\n    # FA\n    answer = cookies_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "cookies_left",
+    "operand_to_replace": "total_cookies_cooked",
+    "replacement_variable": "total_flour_pounds"
+  },
+  "correct_trace": {
+    "num_flour_bags": 4,
+    "weight_per_bag": 5,
+    "total_flour_pounds": 20,
+    "flour_per_batch": 2,
+    "num_batches": 10.0,
+    "cookies_per_dozen": 12,
+    "total_cookies_cooked": 120.0,
+    "cookies_jim_ate": 15,
+    "cookies_left": 105.0,
+    "answer": 105.0
+  },
+  "flawed_trace": {
+    "num_flour_bags": 4,
+    "weight_per_bag": 5,
+    "total_flour_pounds": 20,
+    "flour_per_batch": 2,
+    "num_batches": 10.0,
+    "cookies_per_dozen": 12,
+    "total_cookies_cooked": 120.0,
+    "cookies_jim_ate": 15,
+    "cookies_left": 5,
+    "answer": 5
+  },
+  "correct_value": 105.0,
+  "flawed_value": 5,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_flour_pounds",
+      "question_inputs": [
+        "num_flour_bags",
+        "weight_per_bag"
+      ],
+      "solution_line_template": "Matt used {num_flour_bags}*{weight_per_bag}=<<{num_flour_bags}*{weight_per_bag}={total_flour_pounds}>>{total_flour_pounds} pounds of flour"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_batches",
+      "question_inputs": [
+        "flour_per_batch"
+      ],
+      "solution_line_template": "That means he made {total_flour_pounds}/{flour_per_batch}=<<{total_flour_pounds}/{flour_per_batch}={num_batches}>>{num_batches} batches"
+    },
+    {
+      "WK_inputs": [
+        "cookies_per_dozen"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_cookies_cooked",
+      "question_inputs": [],
+      "solution_line_template": "So he cooked {num_batches}*{cookies_per_dozen}=<<{num_batches}*{cookies_per_dozen}={total_cookies_cooked}>>{total_cookies_cooked} cookies"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "cookies_left",
+      "question_inputs": [
+        "cookies_jim_ate"
+      ],
+      "solution_line_template": "After Jim eats {cookies_jim_ate} there are {total_cookies_cooked}-{cookies_jim_ate}=<<{total_cookies_cooked}-{cookies_jim_ate}={cookies_left}>>{cookies_left} cookies left"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Matt used 4*5=<<4*5=20>>20 pounds of flour",
+    "L2": "That means he made 20/2=<<20/2=10>>10 batches",
+    "L3": "So he cooked 10*12=<<10*12=120>>120 cookies",
+    "L4": "After Jim eats 15 there are 20-15=<<20-15=5>>5 cookies left",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'total_flour_pounds' (value: 20) was used instead of 'total_cookies_cooked' (value: 120.0).",
+  "repro_seed": 4617104823608800622,
+  "model_name": "google_gemini-2.5-flash"
+}

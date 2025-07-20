@@ -1,0 +1,116 @@
+{
+  "index": 2660,
+  "original_solution_mapping": {
+    "FA": "#### 32",
+    "L1": "Mr. Salazar had 7 x 12 = <<7*12=84>>84 oranges.",
+    "L2": "He reserved 84 x 1/4 = <<84*1/4=21>>21 oranges for his friend.",
+    "L3": "Ha had 84 - 21 = <<84-21=63>>63 oranges to be sold yesterday.",
+    "L4": "But only 63 x 3/7 = <<63*3/7=27>>27 oranges were sold yesterday.",
+    "L5": "So, he had 63 - 27 = <<63-27=36>>36 oranges left.",
+    "L6": "Since four oranges are rotten, then only 36 - 4 = <<36-4=32>>32 oranges are left to be sold today."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2660.\n    Returns: the number of oranges left to be sold today.\n    \"\"\"\n    # L1\n    seven_dozen = 7 # seven dozen oranges\n    dozen = 12 # WK\n    total_oranges = seven_dozen * dozen\n\n    # L2\n    reserved_fraction = Fraction(1, 4) # 1/4 of it\n    reserved_oranges = total_oranges * reserved_fraction\n\n    # L3\n    oranges_after_reservation = total_oranges - reserved_oranges\n\n    # L4\n    sold_yesterday_fraction = Fraction(3, 7) # 3/7 of the remaining\n    oranges_sold_yesterday = oranges_after_reservation * sold_yesterday_fraction\n\n    # L5\n    oranges_left_after_sale = oranges_after_reservation - oranges_sold_yesterday\n\n    # L6\n    rotten_oranges = 4 # four rotten oranges\n    oranges_left_to_sell_today = oranges_left_after_sale - rotten_oranges\n\n    # FA\n    answer = oranges_left_to_sell_today\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "oranges_left_after_sale",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x31622db50>"
+  },
+  "correct_trace": {
+    "seven_dozen": 7,
+    "dozen": 12,
+    "total_oranges": 84,
+    "reserved_fraction": "1/4",
+    "reserved_oranges": "21",
+    "oranges_after_reservation": "63",
+    "sold_yesterday_fraction": "3/7",
+    "oranges_sold_yesterday": "27",
+    "oranges_left_after_sale": "36",
+    "rotten_oranges": 4,
+    "oranges_left_to_sell_today": "32",
+    "answer": "32"
+  },
+  "flawed_trace": {
+    "seven_dozen": 7,
+    "dozen": 12,
+    "total_oranges": 84,
+    "reserved_fraction": "1/4",
+    "reserved_oranges": "21",
+    "oranges_after_reservation": "63",
+    "sold_yesterday_fraction": "3/7",
+    "oranges_sold_yesterday": "27",
+    "oranges_left_after_sale": "90",
+    "rotten_oranges": 4,
+    "oranges_left_to_sell_today": "86",
+    "answer": "86"
+  },
+  "correct_value": "36",
+  "flawed_value": "90",
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "dozen"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_oranges",
+      "question_inputs": [
+        "seven_dozen"
+      ],
+      "solution_line_template": "Mr. Salazar had {seven_dozen} x {dozen} = <<{seven_dozen}*{dozen}={total_oranges}>>{total_oranges} oranges."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "reserved_oranges",
+      "question_inputs": [
+        "reserved_fraction"
+      ],
+      "solution_line_template": "He reserved {total_oranges} x {reserved_fraction} = <<{total_oranges}*{reserved_fraction}={reserved_oranges}>>{reserved_oranges} oranges for his friend."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "oranges_after_reservation",
+      "question_inputs": [],
+      "solution_line_template": "Ha had {total_oranges} - {reserved_oranges} = <<{total_oranges}-{reserved_oranges}={oranges_after_reservation}>>{oranges_after_reservation} oranges to be sold yesterday."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "oranges_sold_yesterday",
+      "question_inputs": [
+        "sold_yesterday_fraction"
+      ],
+      "solution_line_template": "But only {oranges_after_reservation} x {sold_yesterday_fraction} = <<{oranges_after_reservation}*{sold_yesterday_fraction}={oranges_sold_yesterday}>>{oranges_sold_yesterday} oranges were sold yesterday."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "oranges_left_after_sale",
+      "question_inputs": [],
+      "solution_line_template": "So, he had {oranges_after_reservation} - {oranges_sold_yesterday} = <<{oranges_after_reservation}-{oranges_sold_yesterday}={oranges_left_after_sale}>>{oranges_left_after_sale} oranges left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "oranges_left_to_sell_today",
+      "question_inputs": [
+        "rotten_oranges"
+      ],
+      "solution_line_template": "Since four oranges are rotten, then only {oranges_left_after_sale} - {rotten_oranges} = <<{oranges_left_after_sale}-{rotten_oranges}={oranges_left_to_sell_today}>>{oranges_left_to_sell_today} oranges are left to be sold today."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Mr. Salazar had 7 x 12 = <<7*12=84>>84 oranges.",
+    "L2": "He reserved 84 x 1/4 = <<84*1/4=21>>21 oranges for his friend.",
+    "L3": "Ha had 84 - 21 = <<84-21=63>>63 oranges to be sold yesterday.",
+    "L4": "But only 63 x 3/7 = <<63*3/7=27>>27 oranges were sold yesterday.",
+    "L5": "So, he had 63 - 27 = <<63-27=90>>90 oranges left.",
+    "L6": "Since four oranges are rotten, then only 90 - 4 = <<90-4=86>>86 oranges are left to be sold today.",
+    "FA": "#### 86"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -6343234594486932541,
+  "model_name": "google_gemini-2.5-flash"
+}

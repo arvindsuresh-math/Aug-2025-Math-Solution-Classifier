@@ -1,0 +1,92 @@
+{
+  "index": 5944,
+  "original_solution_mapping": {
+    "FA": "#### 120",
+    "L1": "The farmer had a total of 10 rows of corn stalks * 9 corn cobs each = <<10*9=90>>90 corn cobs.",
+    "L2": "He also had a total of 5 rows of potatoes * 30 potatoes each = <<5*30=150>>150 potatoes.",
+    "L3": "This was a total of 90 corn cobs + 150 potatoes = <<90+150=240>>240 crops.",
+    "L4": "Because pests destroyed half of his crops, he now has 240 crops * 0.5 = <<240*0.5=120>>120 crops."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5944.\n    Returns: the number of crops the farmer still has.\n    \"\"\"\n    # L1\n    num_corn_rows = 10 # 10 rows of corn stalks\n    corn_cobs_per_row = 9 # 9 corn cobs each\n    total_corn_cobs = num_corn_rows * corn_cobs_per_row\n\n    # L2\n    num_potato_rows = 5 # 5 rows of potatoes\n    potatoes_per_row = 30 # 30 potatoes each\n    total_potatoes = num_potato_rows * potatoes_per_row\n\n    # L3\n    total_initial_crops = total_corn_cobs + total_potatoes\n\n    # L4\n    destroyed_fraction = 0.5 # half of his crops\n    remaining_crops = total_initial_crops * destroyed_fraction\n\n    # FA\n    answer = remaining_crops\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "remaining_crops",
+    "operand_to_replace": "destroyed_fraction",
+    "replacement_variable": "corn_cobs_per_row"
+  },
+  "correct_trace": {
+    "num_corn_rows": 10,
+    "corn_cobs_per_row": 9,
+    "total_corn_cobs": 90,
+    "num_potato_rows": 5,
+    "potatoes_per_row": 30,
+    "total_potatoes": 150,
+    "total_initial_crops": 240,
+    "destroyed_fraction": 0.5,
+    "remaining_crops": 120.0,
+    "answer": 120.0
+  },
+  "flawed_trace": {
+    "num_corn_rows": 10,
+    "corn_cobs_per_row": 9,
+    "total_corn_cobs": 90,
+    "num_potato_rows": 5,
+    "potatoes_per_row": 30,
+    "total_potatoes": 150,
+    "total_initial_crops": 240,
+    "destroyed_fraction": 0.5,
+    "remaining_crops": 2160,
+    "answer": 2160
+  },
+  "correct_value": 120.0,
+  "flawed_value": 2160,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_corn_cobs",
+      "question_inputs": [
+        "num_corn_rows",
+        "corn_cobs_per_row"
+      ],
+      "solution_line_template": "The farmer had a total of {num_corn_rows} rows of corn stalks * {corn_cobs_per_row} corn cobs each = <<{num_corn_rows}*{corn_cobs_per_row}={total_corn_cobs}>>{total_corn_cobs} corn cobs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_potatoes",
+      "question_inputs": [
+        "num_potato_rows",
+        "potatoes_per_row"
+      ],
+      "solution_line_template": "He also had a total of {num_potato_rows} rows of potatoes * {potatoes_per_row} potatoes each = <<{num_potato_rows}*{potatoes_per_row}={total_potatoes}>>{total_potatoes} potatoes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_initial_crops",
+      "question_inputs": [],
+      "solution_line_template": "This was a total of {total_corn_cobs} corn cobs + {total_potatoes} potatoes = <<{total_corn_cobs}+{total_potatoes}={total_initial_crops}>>{total_initial_crops} crops."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "remaining_crops",
+      "question_inputs": [
+        "destroyed_fraction"
+      ],
+      "solution_line_template": "Because pests destroyed half of his crops, he now has {total_initial_crops} crops * {destroyed_fraction} = <<{total_initial_crops}*{destroyed_fraction}={remaining_crops}>>{remaining_crops} crops."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The farmer had a total of 10 rows of corn stalks * 9 corn cobs each = <<10*9=90>>90 corn cobs.",
+    "L2": "He also had a total of 5 rows of potatoes * 30 potatoes each = <<5*30=150>>150 potatoes.",
+    "L3": "This was a total of 90 corn cobs + 150 potatoes = <<90+150=240>>240 crops.",
+    "L4": "Because pests destroyed half of his crops, he now has 240 crops * 9 = <<240*9=2160>>2160 crops.",
+    "FA": "#### 2160"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'corn_cobs_per_row' (9) was used instead of 'destroyed_fraction' (0.5).",
+  "repro_seed": -402183743912118880,
+  "model_name": "google_gemini-2.5-flash"
+}

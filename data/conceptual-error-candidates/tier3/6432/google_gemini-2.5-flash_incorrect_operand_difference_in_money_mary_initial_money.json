@@ -1,0 +1,89 @@
+{
+  "index": 6432,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "Half of what Marco has is $24 / 2 = $<<24/2=12>>12.",
+    "L2": "If he gives Mary $12, she has $12 + $15 = $<<12+15=27>>27.",
+    "L3": "Now subtract the money Mary spends: $27 - $5 = $<<27-5=22>>22.",
+    "L4": "Now subtract Marco's money from Mary's remaining money, $22 - $12 = $<<22-12=10>>10."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6432.\n    Returns: the difference in money between Mary and Marco.\n    \"\"\"\n    # L1\n    marco_initial_money = 24 # Marco has $24\n    half_divisor = 2 # half of what he has\n    marco_half_money = marco_initial_money / half_divisor\n\n    # L2\n    mary_initial_money = 15 # Mary has $15\n    mary_money_after_receiving = marco_half_money + mary_initial_money\n\n    # L3\n    mary_spends = 5 # Mary spends $5\n    mary_money_after_spending = mary_money_after_receiving - mary_spends\n\n    # L4\n    difference_in_money = mary_money_after_spending - marco_half_money\n\n    # FA\n    answer = difference_in_money\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "difference_in_money",
+    "operand_to_replace": "mary_money_after_spending",
+    "replacement_variable": "mary_initial_money"
+  },
+  "correct_trace": {
+    "marco_initial_money": 24,
+    "half_divisor": 2,
+    "marco_half_money": 12.0,
+    "mary_initial_money": 15,
+    "mary_money_after_receiving": 27.0,
+    "mary_spends": 5,
+    "mary_money_after_spending": 22.0,
+    "difference_in_money": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "marco_initial_money": 24,
+    "half_divisor": 2,
+    "marco_half_money": 12.0,
+    "mary_initial_money": 15,
+    "mary_money_after_receiving": 27.0,
+    "mary_spends": 5,
+    "mary_money_after_spending": 22.0,
+    "difference_in_money": 3.0,
+    "answer": 3.0
+  },
+  "correct_value": 10.0,
+  "flawed_value": 3.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "marco_half_money",
+      "question_inputs": [
+        "marco_initial_money",
+        "half_divisor"
+      ],
+      "solution_line_template": "Half of what Marco has is ${marco_initial_money} / {half_divisor} = $<<{marco_initial_money}/{half_divisor}={marco_half_money}>>{marco_half_money}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "mary_money_after_receiving",
+      "question_inputs": [
+        "mary_initial_money"
+      ],
+      "solution_line_template": "If he gives Mary ${marco_half_money}, she has ${marco_half_money} + ${mary_initial_money} = $<<{marco_half_money}+{mary_initial_money}={mary_money_after_receiving}>>{mary_money_after_receiving}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "mary_money_after_spending",
+      "question_inputs": [
+        "mary_spends"
+      ],
+      "solution_line_template": "Now subtract the money Mary spends: ${mary_money_after_receiving} - ${mary_spends} = $<<{mary_money_after_receiving}-{mary_spends}={mary_money_after_spending}>>{mary_money_after_spending}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "difference_in_money",
+      "question_inputs": [],
+      "solution_line_template": "Now subtract Marco's money from Mary's remaining money, ${mary_money_after_spending} - ${marco_half_money} = $<<{mary_money_after_spending}-{marco_half_money}={difference_in_money}>>{difference_in_money}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Half of what Marco has is $24 / 2 = $<<24/2=12>>12.",
+    "L2": "If he gives Mary $12, she has $12 + $15 = $<<12+15=27>>27.",
+    "L3": "Now subtract the money Mary spends: $27 - $5 = $<<27-5=22>>22.",
+    "L4": "Now subtract Marco's money from Mary's remaining money, $15 - $12 = $<<15-12=3>>3.",
+    "FA": "#### 3"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'mary_initial_money' (value: 15) was used instead of 'mary_money_after_spending' (value: 22.0).",
+  "repro_seed": -1320364644391967496,
+  "model_name": "google_gemini-2.5-flash"
+}

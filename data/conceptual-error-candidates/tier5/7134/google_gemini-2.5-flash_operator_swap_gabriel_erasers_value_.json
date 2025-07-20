@@ -1,0 +1,121 @@
+{
+  "index": 7134,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "Let x represent the number of erasers Gabriel collected.",
+    "L2": "Celine collected 2*x erasers.",
+    "L3": "Julian collected 2*x*2=4*x erasers.",
+    "L4": "In total, Gabriel, Celine and Julian collected x+2*x+4*x=7*x erasers.",
+    "L5": "7*x=35",
+    "L6": "x=<<5=5>>5",
+    "L7": "Celine collected 5*2=<<5*2=10>>10 erasers."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7134.\n    Returns: the number of erasers Celine collected.\n    \"\"\"\n    # L2\n    multiplier_celine = 2 # twice as many erasers as Gabriel did\n    celine_coefficient = multiplier_celine\n\n    # L3\n    multiplier_julian = 2 # twice as many erasers as Celine did\n    julian_coefficient = multiplier_julian * celine_coefficient\n    simplified_julian_coefficient = 4 # This is 2*2, used in template\n\n    # L4\n    gabriel_coefficient = 1 # WK\n    total_coefficient_sum = gabriel_coefficient + celine_coefficient + julian_coefficient\n\n    # L6\n    total_erasers_total = 35 # 35 erasers in total\n    gabriel_erasers_value = total_erasers_total / total_coefficient_sum\n\n    # L7\n    celine_collected_final = gabriel_erasers_value * multiplier_celine\n\n    # FA\n    answer = celine_collected_final\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "gabriel_erasers_value",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x31c1f6f50>"
+  },
+  "correct_trace": {
+    "multiplier_celine": 2,
+    "celine_coefficient": 2,
+    "multiplier_julian": 2,
+    "julian_coefficient": 4,
+    "simplified_julian_coefficient": 4,
+    "gabriel_coefficient": 1,
+    "total_coefficient_sum": 7,
+    "total_erasers_total": 35,
+    "gabriel_erasers_value": 5.0,
+    "celine_collected_final": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "multiplier_celine": 2,
+    "celine_coefficient": 2,
+    "multiplier_julian": 2,
+    "julian_coefficient": 4,
+    "simplified_julian_coefficient": 4,
+    "gabriel_coefficient": 1,
+    "total_coefficient_sum": 7,
+    "total_erasers_total": 35,
+    "gabriel_erasers_value": 28,
+    "celine_collected_final": 56,
+    "answer": 56
+  },
+  "correct_value": 5.0,
+  "flawed_value": 28,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "None",
+      "question_inputs": [],
+      "solution_line_template": "Let x represent the number of erasers Gabriel collected."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "celine_coefficient",
+      "question_inputs": [
+        "multiplier_celine"
+      ],
+      "solution_line_template": "Celine collected {multiplier_celine}*x erasers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "julian_coefficient",
+      "question_inputs": [
+        "multiplier_julian"
+      ],
+      "solution_line_template": "Julian collected {multiplier_julian}*x*{multiplier_celine}={simplified_julian_coefficient}*x erasers."
+    },
+    {
+      "WK_inputs": [
+        "gabriel_coefficient"
+      ],
+      "line_number": "L4",
+      "output_variable": "total_coefficient_sum",
+      "question_inputs": [],
+      "solution_line_template": "In total, Gabriel, Celine and Julian collected x+{celine_coefficient}*x+{julian_coefficient}*x={total_coefficient_sum}*x erasers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "None",
+      "question_inputs": [
+        "total_erasers_total"
+      ],
+      "solution_line_template": "{total_coefficient_sum}*x={total_erasers_total}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "gabriel_erasers_value",
+      "question_inputs": [],
+      "solution_line_template": "x=<<{total_erasers_total}/{total_coefficient_sum}={gabriel_erasers_value}>>{gabriel_erasers_value}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "celine_collected_final",
+      "question_inputs": [],
+      "solution_line_template": "Celine collected {gabriel_erasers_value}*{multiplier_celine}=<<{gabriel_erasers_value}*{multiplier_celine}={celine_collected_final}>>{celine_collected_final} erasers."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Let x represent the number of erasers Gabriel collected.",
+    "L2": "Celine collected 2*x erasers.",
+    "L3": "Julian collected 2*x*2=4*x erasers.",
+    "L4": "In total, Gabriel, Celine and Julian collected x+2*x+4*x=7*x erasers.",
+    "L5": "7*x=35",
+    "L6": "x=<<35/7=28>>28",
+    "L7": "Celine collected 28*2=<<28*2=56>>56 erasers.",
+    "FA": "#### 56"
+  },
+  "erroneous_line_number": "L6",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": -8782120916541830321,
+  "model_name": "google_gemini-2.5-flash"
+}

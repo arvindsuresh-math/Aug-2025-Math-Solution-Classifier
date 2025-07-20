@@ -1,0 +1,74 @@
+{
+  "index": 6928,
+  "original_solution_mapping": {
+    "FA": "#### 750",
+    "L1": "In a week, he orders 10 * 300 = <<10*300=3000>>3000 apples.",
+    "L2": "When 3/4 of the stock is sold, the total amount of apples sold becomes 3/4 * 3000 = <<3/4*3000=2250>>2250 apples.",
+    "L3": "The amount of apples remaining is 3000 - 2250 = <<3000-2250=750>>750 apples."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6928.\n    Returns: the total number of apples not sold.\n    \"\"\"\n    # L1\n    num_boxes = 10 # orders 10 boxes of apples\n    apples_per_box = 300 # each box has 300 apples\n    apples_ordered_weekly = num_boxes * apples_per_box\n\n    # L2\n    fraction_sold = Fraction(3, 4) # sells 3/4 of his stock\n    apples_sold = fraction_sold * apples_ordered_weekly\n\n    # L3\n    apples_not_sold = apples_ordered_weekly - apples_sold\n\n    # FA\n    answer = apples_not_sold\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "apples_sold",
+    "operand_to_replace": "apples_ordered_weekly",
+    "replacement_variable": "num_boxes"
+  },
+  "correct_trace": {
+    "num_boxes": 10,
+    "apples_per_box": 300,
+    "apples_ordered_weekly": 3000,
+    "fraction_sold": "3/4",
+    "apples_sold": "2250",
+    "apples_not_sold": "750",
+    "answer": "750"
+  },
+  "flawed_trace": {
+    "num_boxes": 10,
+    "apples_per_box": 300,
+    "apples_ordered_weekly": 3000,
+    "fraction_sold": "3/4",
+    "apples_sold": "15/2",
+    "apples_not_sold": "5985/2",
+    "answer": "5985/2"
+  },
+  "correct_value": "2250",
+  "flawed_value": "15/2",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "apples_ordered_weekly",
+      "question_inputs": [
+        "num_boxes",
+        "apples_per_box"
+      ],
+      "solution_line_template": "In a week, he orders {num_boxes} * {apples_per_box} = <<{num_boxes}*{apples_per_box}={apples_ordered_weekly}>>{apples_ordered_weekly} apples."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "apples_sold",
+      "question_inputs": [
+        "fraction_sold"
+      ],
+      "solution_line_template": "When {fraction_sold} of the stock is sold, the total amount of apples sold becomes {fraction_sold} * {apples_ordered_weekly} = <<{fraction_sold}*{apples_ordered_weekly}={apples_sold}>>{apples_sold} apples."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "apples_not_sold",
+      "question_inputs": [],
+      "solution_line_template": "The amount of apples remaining is {apples_ordered_weekly} - {apples_sold} = <<{apples_ordered_weekly}-{apples_sold}={apples_not_sold}>>{apples_not_sold} apples."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In a week, he orders 10 * 300 = <<10*300=3000>>3000 apples.",
+    "L2": "When 3/4 of the stock is sold, the total amount of apples sold becomes 3/4 * 10 = <<3/4*10=15/2>>15/2 apples.",
+    "L3": "The amount of apples remaining is 3000 - 15/2 = <<3000-15/2=5985/2>>5985/2 apples.",
+    "FA": "#### 5985/2"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'num_boxes' (value: 10) was used instead of 'apples_ordered_weekly' (value: 3000).",
+  "repro_seed": -3961815047902594676,
+  "model_name": "google_gemini-2.5-flash"
+}

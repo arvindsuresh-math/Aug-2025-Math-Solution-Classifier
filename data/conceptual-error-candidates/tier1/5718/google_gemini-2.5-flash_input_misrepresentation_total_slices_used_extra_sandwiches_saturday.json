@@ -1,0 +1,94 @@
+{
+  "index": 5718,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "There are 7 days in a week, so Tony made 1 * 7 = <<1*7=7>>7 sandwiches.",
+    "L2": "On Saturday, he made 1 extra sandwich, so he made 7 + 1 = <<7+1=8>>8 sandwiches this week.",
+    "L3": "A sandwich has 2 slices of bread, so he used 8 * 2 = <<8*2=16>>16 slices.",
+    "L4": "Thus, Tony has 22 - 16 = <<22-16=6>>6 slices of bread left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5718.\n    Returns: the number of slices of bread left from the loaf.\n    \"\"\"\n    # L1\n    sandwiches_per_day_regular = 1 # made a sandwich for lunch every day\n    days_in_week = 7 # WK\n    regular_sandwiches_made = sandwiches_per_day_regular * days_in_week\n\n    # L2\n    extra_sandwiches_saturday = 1 # made two sandwiches (one extra on Saturday)\n    total_sandwiches_made = regular_sandwiches_made + extra_sandwiches_saturday\n\n    # L3\n    slices_per_sandwich = 2 # two slices of bread\n    total_slices_used = total_sandwiches_made * slices_per_sandwich\n\n    # L4\n    initial_loaf_size = 22 # 22-slice loaf\n    slices_left = initial_loaf_size - total_slices_used\n\n    # FA\n    answer = slices_left\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_slices_used",
+    "operand_to_replace": "slices_per_sandwich",
+    "replacement_variable": "extra_sandwiches_saturday"
+  },
+  "correct_trace": {
+    "sandwiches_per_day_regular": 1,
+    "days_in_week": 7,
+    "regular_sandwiches_made": 7,
+    "extra_sandwiches_saturday": 1,
+    "total_sandwiches_made": 8,
+    "slices_per_sandwich": 2,
+    "total_slices_used": 16,
+    "initial_loaf_size": 22,
+    "slices_left": 6,
+    "answer": 6
+  },
+  "flawed_trace": {
+    "sandwiches_per_day_regular": 1,
+    "days_in_week": 7,
+    "regular_sandwiches_made": 7,
+    "extra_sandwiches_saturday": 1,
+    "total_sandwiches_made": 8,
+    "slices_per_sandwich": 2,
+    "total_slices_used": 8,
+    "initial_loaf_size": 22,
+    "slices_left": 14,
+    "answer": 14
+  },
+  "correct_value": 16,
+  "flawed_value": 8,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "days_in_week"
+      ],
+      "line_number": "L1",
+      "output_variable": "regular_sandwiches_made",
+      "question_inputs": [
+        "sandwiches_per_day_regular"
+      ],
+      "solution_line_template": "There are {days_in_week} days in a week, so Tony made {sandwiches_per_day_regular} * {days_in_week} = <<{sandwiches_per_day_regular}*{days_in_week}={regular_sandwiches_made}>>{regular_sandwiches_made} sandwiches."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_sandwiches_made",
+      "question_inputs": [
+        "extra_sandwiches_saturday"
+      ],
+      "solution_line_template": "On Saturday, he made {extra_sandwiches_saturday} extra sandwich, so he made {regular_sandwiches_made} + {extra_sandwiches_saturday} = <<{regular_sandwiches_made}+{extra_sandwiches_saturday}={total_sandwiches_made}>>{total_sandwiches_made} sandwiches this week."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_slices_used",
+      "question_inputs": [
+        "slices_per_sandwich"
+      ],
+      "solution_line_template": "A sandwich has {slices_per_sandwich} slices of bread, so he used {total_sandwiches_made} * {slices_per_sandwich} = <<{total_sandwiches_made}*{slices_per_sandwich}={total_slices_used}>>{total_slices_used} slices."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "slices_left",
+      "question_inputs": [
+        "initial_loaf_size"
+      ],
+      "solution_line_template": "Thus, Tony has {initial_loaf_size} - {total_slices_used} = <<{initial_loaf_size}-{total_slices_used}={slices_left}>>{slices_left} slices of bread left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 7 days in a week, so Tony made 1 * 7 = <<1*7=7>>7 sandwiches.",
+    "L2": "On Saturday, he made 1 extra sandwich, so he made 7 + 1 = <<7+1=8>>8 sandwiches this week.",
+    "L3": "A sandwich has 1 slices of bread, so he used 8 * 1 = <<8*1=8>>8 slices.",
+    "L4": "Thus, Tony has 22 - 8 = <<22-8=14>>14 slices of bread left.",
+    "FA": "#### 14"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'extra_sandwiches_saturday' (1) was used instead of 'slices_per_sandwich' (2).",
+  "repro_seed": 167819113278120071,
+  "model_name": "google_gemini-2.5-flash"
+}

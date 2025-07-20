@@ -1,0 +1,96 @@
+{
+  "index": 3802,
+  "original_solution_mapping": {
+    "FA": "#### 43",
+    "L1": "Every day she buys $3.75 latte and $3.50 croissant for a total of 3.75+3.50 = $<<3.75+3.50=7.25>>7.25 per day",
+    "L2": "If she spends $7.25 a day for 7 days she will spend 7.25*7 = $<<7.25*7=50.75>>50.75 in one week",
+    "L3": "If she buys 5 cookies at $1.25 each she will spend 5*1.25 = $<<5*1.25=6.25>>6.25",
+    "L4": "Her gift card is for $100 and she spends $50.75 and an additional $6.25 that will leave her with 100-50.75-6.25 = $<<100-50.75-6.25=43.00>>43.00 on her gift card"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3802.\n    Returns: the money left on her card after a week of coffee and pastry.\n    \"\"\"\n    # L1\n    latte_cost = 3.75 # latte that cost $3.75\n    croissant_cost = 3.50 # croissant for $3.50\n    daily_cost = latte_cost + croissant_cost\n\n    # L2\n    num_days_in_week = 7 # for a week\n    weekly_food_cost = daily_cost * num_days_in_week\n\n    # L3\n    num_cookies = 5 # buy 5 cookies\n    cookie_cost = 1.25 # $1.25 each\n    total_cookie_cost = num_cookies * cookie_cost\n\n    # L4\n    gift_card_value = 100 # $100 gift card\n    remaining_balance = gift_card_value - weekly_food_cost - total_cookie_cost\n\n    # FA\n    answer = remaining_balance\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "remaining_balance",
+    "operand_to_replace": "weekly_food_cost",
+    "replacement_variable": "latte_cost"
+  },
+  "correct_trace": {
+    "latte_cost": 3.75,
+    "croissant_cost": 3.5,
+    "daily_cost": 7.25,
+    "num_days_in_week": 7,
+    "weekly_food_cost": 50.75,
+    "num_cookies": 5,
+    "cookie_cost": 1.25,
+    "total_cookie_cost": 6.25,
+    "gift_card_value": 100,
+    "remaining_balance": 43.0,
+    "answer": 43.0
+  },
+  "flawed_trace": {
+    "latte_cost": 3.75,
+    "croissant_cost": 3.5,
+    "daily_cost": 7.25,
+    "num_days_in_week": 7,
+    "weekly_food_cost": 50.75,
+    "num_cookies": 5,
+    "cookie_cost": 1.25,
+    "total_cookie_cost": 6.25,
+    "gift_card_value": 100,
+    "remaining_balance": 90.0,
+    "answer": 90.0
+  },
+  "correct_value": 43.0,
+  "flawed_value": 90.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "daily_cost",
+      "question_inputs": [
+        "latte_cost",
+        "croissant_cost"
+      ],
+      "solution_line_template": "Every day she buys ${latte_cost} latte and ${croissant_cost} croissant for a total of {latte_cost}+{croissant_cost} = $<<{latte_cost}+{croissant_cost}={daily_cost}>>{daily_cost} per day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "weekly_food_cost",
+      "question_inputs": [
+        "num_days_in_week"
+      ],
+      "solution_line_template": "If she spends ${daily_cost} a day for {num_days_in_week} days she will spend {daily_cost}*{num_days_in_week} = $<<{daily_cost}*{num_days_in_week}={weekly_food_cost}>>{weekly_food_cost} in one week"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cookie_cost",
+      "question_inputs": [
+        "num_cookies",
+        "cookie_cost"
+      ],
+      "solution_line_template": "If she buys {num_cookies} cookies at ${cookie_cost} each she will spend {num_cookies}*{cookie_cost} = $<<{num_cookies}*{cookie_cost}={total_cookie_cost}>>{total_cookie_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "remaining_balance",
+      "question_inputs": [
+        "gift_card_value"
+      ],
+      "solution_line_template": "Her gift card is for ${gift_card_value} and she spends ${weekly_food_cost} and an additional ${total_cookie_cost} that will leave her with {gift_card_value}-{weekly_food_cost}-{total_cookie_cost} = $<<{gift_card_value}-{weekly_food_cost}-{total_cookie_cost}={remaining_balance}>>{remaining_balance} on her gift card"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Every day she buys $3.75 latte and $3.5 croissant for a total of 3.75+3.5 = $<<3.75+3.5=7.25>>7.25 per day",
+    "L2": "If she spends $7.25 a day for 7 days she will spend 7.25*7 = $<<7.25*7=50.75>>50.75 in one week",
+    "L3": "If she buys 5 cookies at $1.25 each she will spend 5*1.25 = $<<5*1.25=6.25>>6.25",
+    "L4": "Her gift card is for $100 and she spends $3.75 and an additional $6.25 that will leave her with 100-3.75-6.25 = $<<100-3.75-6.25=90>>90 on her gift card",
+    "FA": "#### 90"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'latte_cost' (value: 3.75) was used instead of 'weekly_food_cost' (value: 50.75).",
+  "repro_seed": 1122822803795927540,
+  "model_name": "google_gemini-2.5-flash"
+}

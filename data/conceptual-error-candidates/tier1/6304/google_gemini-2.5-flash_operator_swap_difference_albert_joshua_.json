@@ -1,0 +1,74 @@
+{
+  "index": 6304,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "Jose collected 80 - 14 = <<80-14=66>>66 rocks.",
+    "L2": "Albert collected 66 + 20 = <<66+20=86>>86 rocks.",
+    "L3": "Thus, Albert collected 86 - 80 = <<86-80=6>>6 more rocks than Joshua."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6304.\n    Returns: the number of more rocks Albert collected than Joshua.\n    \"\"\"\n    # L1\n    joshua_rocks = 80 # Joshua collected 80 rocks\n    jose_fewer_than_joshua = 14 # Jose collected 14 fewer rocks\n    jose_rocks = joshua_rocks - jose_fewer_than_joshua\n\n    # L2\n    albert_more_than_jose = 20 # Albert has collected 20 more rocks than Jose\n    albert_rocks = jose_rocks + albert_more_than_jose\n\n    # L3\n    difference_albert_joshua = albert_rocks - joshua_rocks\n\n    # FA\n    answer = difference_albert_joshua\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "difference_albert_joshua",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x3161279d0>"
+  },
+  "correct_trace": {
+    "joshua_rocks": 80,
+    "jose_fewer_than_joshua": 14,
+    "jose_rocks": 66,
+    "albert_more_than_jose": 20,
+    "albert_rocks": 86,
+    "difference_albert_joshua": 6,
+    "answer": 6
+  },
+  "flawed_trace": {
+    "joshua_rocks": 80,
+    "jose_fewer_than_joshua": 14,
+    "jose_rocks": 66,
+    "albert_more_than_jose": 20,
+    "albert_rocks": 86,
+    "difference_albert_joshua": 166,
+    "answer": 166
+  },
+  "correct_value": 6,
+  "flawed_value": 166,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "jose_rocks",
+      "question_inputs": [
+        "joshua_rocks",
+        "jose_fewer_than_joshua"
+      ],
+      "solution_line_template": "Jose collected {joshua_rocks} - {jose_fewer_than_joshua} = <<{joshua_rocks}-{jose_fewer_than_joshua}={jose_rocks}>>{jose_rocks} rocks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "albert_rocks",
+      "question_inputs": [
+        "albert_more_than_jose"
+      ],
+      "solution_line_template": "Albert collected {jose_rocks} + {albert_more_than_jose} = <<{jose_rocks}+{albert_more_than_jose}={albert_rocks}>>{albert_rocks} rocks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "difference_albert_joshua",
+      "question_inputs": [],
+      "solution_line_template": "Thus, Albert collected {albert_rocks} - {joshua_rocks} = <<{albert_rocks}-{joshua_rocks}={difference_albert_joshua}>>{difference_albert_joshua} more rocks than Joshua."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jose collected 80 - 14 = <<80-14=66>>66 rocks.",
+    "L2": "Albert collected 66 + 20 = <<66+20=86>>86 rocks.",
+    "L3": "Thus, Albert collected 86 - 80 = <<86-80=166>>166 more rocks than Joshua.",
+    "FA": "#### 166"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -6546065115926589102,
+  "model_name": "google_gemini-2.5-flash"
+}

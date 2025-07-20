@@ -1,0 +1,78 @@
+{
+  "index": 7350,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "The canvases cost $40.00 and she spent half that amount on paint so she spent 40/2 = $<<40/2=20.00>>20.00 on paint",
+    "L2": "She spent $40.00 on canvases, $20.00 on paint and $15.00 on an easel so she spent 40+20+15 = $<<40+20+15=75.00>>75.00",
+    "L3": "She spent $90.00 total and her other purchases totaled $75.00 so she spent 90-75 = $<<90-75=15.00>>15.00 on paint brushes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7350.\n    Returns: the amount of money Tonya spent on paintbrushes.\n    \"\"\"\n    # L1\n    canvases_cost = 40.00 # 4 canvases cost $40.00\n    paint_cost_divisor = 2 # 1/2 that much\n    paint_cost = canvases_cost / paint_cost_divisor\n\n    # L2\n    easel_cost = 15.00 # spent $15.00 on an easel\n    total_other_purchases = canvases_cost + paint_cost + easel_cost\n\n    # L3\n    total_spent = 90.00 # Tonya spent $90.00 on art supplies\n    paintbrushes_cost = total_spent - total_other_purchases\n\n    # FA\n    answer = paintbrushes_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "paint_cost",
+    "operand_to_replace": "canvases_cost",
+    "replacement_variable": "paint_cost_divisor"
+  },
+  "correct_trace": {
+    "canvases_cost": 40.0,
+    "paint_cost_divisor": 2,
+    "paint_cost": 20.0,
+    "easel_cost": 15.0,
+    "total_other_purchases": 75.0,
+    "total_spent": 90.0,
+    "paintbrushes_cost": 15.0,
+    "answer": 15.0
+  },
+  "flawed_trace": {
+    "canvases_cost": 40.0,
+    "paint_cost_divisor": 2,
+    "paint_cost": 1.0,
+    "easel_cost": 15.0,
+    "total_other_purchases": 56.0,
+    "total_spent": 90.0,
+    "paintbrushes_cost": 34.0,
+    "answer": 34.0
+  },
+  "correct_value": 20.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "paint_cost",
+      "question_inputs": [
+        "canvases_cost",
+        "paint_cost_divisor"
+      ],
+      "solution_line_template": "The canvases cost ${canvases_cost} and she spent half that amount on paint so she spent {canvases_cost}/{paint_cost_divisor} = $<<{canvases_cost}/{paint_cost_divisor}={paint_cost}>>{paint_cost} on paint"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_other_purchases",
+      "question_inputs": [
+        "easel_cost"
+      ],
+      "solution_line_template": "She spent ${canvases_cost} on canvases, ${paint_cost} on paint and ${easel_cost} on an easel so she spent {canvases_cost}+{paint_cost}+{easel_cost} = $<<{canvases_cost}+{paint_cost}+{easel_cost}={total_other_purchases}>>{total_other_purchases}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "paintbrushes_cost",
+      "question_inputs": [
+        "total_spent"
+      ],
+      "solution_line_template": "She spent ${total_spent} total and her other purchases totaled ${total_other_purchases} so she spent {total_spent}-{total_other_purchases} = $<<{total_spent}-{total_other_purchases}={paintbrushes_cost}>>{paintbrushes_cost} on paint brushes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The canvases cost $2 and she spent half that amount on paint so she spent 2/2 = $<<2/2=1>>1 on paint",
+    "L2": "She spent $40 on canvases, $1 on paint and $15 on an easel so she spent 40+1+15 = $<<40+1+15=56>>56",
+    "L3": "She spent $90 total and her other purchases totaled $56 so she spent 90-56 = $<<90-56=34>>34 on paint brushes",
+    "FA": "#### 34"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'paint_cost_divisor' (2) was used instead of 'canvases_cost' (40.0).",
+  "repro_seed": -370772165820116657,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,79 @@
+{
+  "index": 5982,
+  "original_solution_mapping": {
+    "FA": "#### 32",
+    "L1": "From Monday to Friday, Ralph watches TV for 4 * 5 = <<4*5=20>>20 hours.",
+    "L2": "On Saturday and Sunday, Ralph watches TV for 2 * 6 = <<2*6=12>>12 hours.",
+    "L3": "In one week, Ralph watches TV for a total of 20 + 12 = <<20+12=32>>32 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5982.\n    Returns: the total hours Ralph spends watching TV in one week.\n    \"\"\"\n    # L1\n    hours_per_weekday = 4 # 4 hours a day from Monday to Friday\n    num_weekdays = 5 # WK\n    weekday_hours = hours_per_weekday * num_weekdays\n\n    # L2\n    num_weekend_days = 2 # WK\n    hours_per_weekend_day = 6 # 6 hours a day on Saturday and Sunday\n    weekend_hours = num_weekend_days * hours_per_weekend_day\n\n    # L3\n    total_weekly_hours = weekday_hours + weekend_hours\n\n    # FA\n    answer = total_weekly_hours\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_weekly_hours",
+    "operand_to_replace": "weekend_hours",
+    "replacement_variable": "hours_per_weekday"
+  },
+  "correct_trace": {
+    "hours_per_weekday": 4,
+    "num_weekdays": 5,
+    "weekday_hours": 20,
+    "num_weekend_days": 2,
+    "hours_per_weekend_day": 6,
+    "weekend_hours": 12,
+    "total_weekly_hours": 32,
+    "answer": 32
+  },
+  "flawed_trace": {
+    "hours_per_weekday": 4,
+    "num_weekdays": 5,
+    "weekday_hours": 20,
+    "num_weekend_days": 2,
+    "hours_per_weekend_day": 6,
+    "weekend_hours": 12,
+    "total_weekly_hours": 24,
+    "answer": 24
+  },
+  "correct_value": 32,
+  "flawed_value": 24,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "num_weekdays"
+      ],
+      "line_number": "L1",
+      "output_variable": "weekday_hours",
+      "question_inputs": [
+        "hours_per_weekday"
+      ],
+      "solution_line_template": "From Monday to Friday, Ralph watches TV for {hours_per_weekday} * {num_weekdays} = <<{hours_per_weekday}*{num_weekdays}={weekday_hours}>>{weekday_hours} hours."
+    },
+    {
+      "WK_inputs": [
+        "num_weekend_days"
+      ],
+      "line_number": "L2",
+      "output_variable": "weekend_hours",
+      "question_inputs": [
+        "hours_per_weekend_day"
+      ],
+      "solution_line_template": "On Saturday and Sunday, Ralph watches TV for {num_weekend_days} * {hours_per_weekend_day} = <<{num_weekend_days}*{hours_per_weekend_day}={weekend_hours}>>{weekend_hours} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_weekly_hours",
+      "question_inputs": [],
+      "solution_line_template": "In one week, Ralph watches TV for a total of {weekday_hours} + {weekend_hours} = <<{weekday_hours}+{weekend_hours}={total_weekly_hours}>>{total_weekly_hours} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "From Monday to Friday, Ralph watches TV for 4 * 5 = <<4*5=20>>20 hours.",
+    "L2": "On Saturday and Sunday, Ralph watches TV for 2 * 6 = <<2*6=12>>12 hours.",
+    "L3": "In one week, Ralph watches TV for a total of 20 + 4 = <<20+4=24>>24 hours.",
+    "FA": "#### 24"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'hours_per_weekday' (value: 4) was used instead of 'weekend_hours' (value: 12).",
+  "repro_seed": -4011503211059534501,
+  "model_name": "google_gemini-2.5-flash"
+}

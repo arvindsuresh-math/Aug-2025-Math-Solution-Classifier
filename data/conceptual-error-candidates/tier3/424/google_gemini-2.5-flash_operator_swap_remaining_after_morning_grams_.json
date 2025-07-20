@@ -1,0 +1,100 @@
+{
+  "index": 424,
+  "original_solution_mapping": {
+    "FA": "#### 750",
+    "L1": "Rose cooked 10 x 9/10 = <<10*9/10=9>>9 kilograms of rice in the morning.",
+    "L2": "She had 10 - 9 = <<10-9=1>>1 kilogram of rice left then.",
+    "L3": "One kilogram is equal to 1 x 1000 = <<1*1000=1000>>1000 grams.",
+    "L4": "So, Rose cooked 1000 x 1/4 = <<1000*1/4=250>>250 grams of rice in the evening.",
+    "L5": "Therefore, she has 1000 - 250 = <<1000-250=750>>750 grams of rice left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 424.\n    Returns: the total number of grams of rice Rose had left.\n    \"\"\"\n    # L1\n    initial_rice_kg = 10 # 10 kilograms of rice\n    morning_fraction = Fraction(9, 10) # cooked 9/10 kilograms in the morning\n    cooked_morning_kg = initial_rice_kg * morning_fraction\n\n    # L2\n    remaining_after_morning_kg = initial_rice_kg - cooked_morning_kg\n\n    # L3\n    grams_per_kilogram = 1000 # WK\n    remaining_after_morning_grams = remaining_after_morning_kg * grams_per_kilogram\n\n    # L4\n    evening_fraction = Fraction(1, 4) # 1/4 of the remaining in the evening\n    cooked_evening_grams = remaining_after_morning_grams * evening_fraction\n\n    # L5\n    final_remaining_grams = remaining_after_morning_grams - cooked_evening_grams\n\n    # FA\n    answer = final_remaining_grams\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "remaining_after_morning_grams",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x3145ac650>"
+  },
+  "correct_trace": {
+    "initial_rice_kg": 10,
+    "morning_fraction": "9/10",
+    "cooked_morning_kg": "9",
+    "remaining_after_morning_kg": "1",
+    "grams_per_kilogram": 1000,
+    "remaining_after_morning_grams": "1000",
+    "evening_fraction": "1/4",
+    "cooked_evening_grams": "250",
+    "final_remaining_grams": "750",
+    "answer": "750"
+  },
+  "flawed_trace": {
+    "initial_rice_kg": 10,
+    "morning_fraction": "9/10",
+    "cooked_morning_kg": "9",
+    "remaining_after_morning_kg": "1",
+    "grams_per_kilogram": 1000,
+    "remaining_after_morning_grams": "1/1000",
+    "evening_fraction": "1/4",
+    "cooked_evening_grams": "1/4000",
+    "final_remaining_grams": "3/4000",
+    "answer": "3/4000"
+  },
+  "correct_value": "1000",
+  "flawed_value": "1/1000",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cooked_morning_kg",
+      "question_inputs": [
+        "initial_rice_kg",
+        "morning_fraction"
+      ],
+      "solution_line_template": "Rose cooked {initial_rice_kg} x {morning_fraction} = <<{initial_rice_kg}*{morning_fraction}={cooked_morning_kg}>>{cooked_morning_kg} kilograms of rice in the morning."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_after_morning_kg",
+      "question_inputs": [],
+      "solution_line_template": "She had {initial_rice_kg} - {cooked_morning_kg} = <<{initial_rice_kg}-{cooked_morning_kg}={remaining_after_morning_kg}>>{remaining_after_morning_kg} kilogram of rice left then."
+    },
+    {
+      "WK_inputs": [
+        "grams_per_kilogram"
+      ],
+      "line_number": "L3",
+      "output_variable": "remaining_after_morning_grams",
+      "question_inputs": [],
+      "solution_line_template": "One kilogram is equal to {remaining_after_morning_kg} x {grams_per_kilogram} = <<{remaining_after_morning_kg}*{grams_per_kilogram}={remaining_after_morning_grams}>>{remaining_after_morning_grams} grams."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "cooked_evening_grams",
+      "question_inputs": [
+        "evening_fraction"
+      ],
+      "solution_line_template": "So, Rose cooked {remaining_after_morning_grams} x {evening_fraction} = <<{remaining_after_morning_grams}*{evening_fraction}={cooked_evening_grams}>>{cooked_evening_grams} grams of rice in the evening."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "final_remaining_grams",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, she has {remaining_after_morning_grams} - {cooked_evening_grams} = <<{remaining_after_morning_grams}-{cooked_evening_grams}={final_remaining_grams}>>{final_remaining_grams} grams of rice left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Rose cooked 10 x 9/10 = <<10*9/10=9>>9 kilograms of rice in the morning.",
+    "L2": "She had 10 - 9 = <<10-9=1>>1 kilogram of rice left then.",
+    "L3": "One kilogram is equal to 1 x 1000 = <<1*1000=1/1000>>1/1000 grams.",
+    "L4": "So, Rose cooked 1/1000 x 1/4 = <<1/1000*1/4=1/4000>>1/4000 grams of rice in the evening.",
+    "L5": "Therefore, she has 1/1000 - 1/4000 = <<1/1000-1/4000=3/4000>>3/4000 grams of rice left.",
+    "FA": "#### 3/4000"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -3483572055512501145,
+  "model_name": "google_gemini-2.5-flash"
+}

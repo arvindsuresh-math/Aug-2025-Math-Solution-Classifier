@@ -1,0 +1,100 @@
+{
+  "index": 227,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "Starting with $100, he paid $20 to Colin, leaving him with $100-$20=$<<100-20=80>>80.",
+    "L2": "Twice as much as $20 is 2*$20=$<<2*20=40>>40.",
+    "L3": "Thus, he paid $40 to Helen, leaving him with $80-$40=$<<80-40=40>>40.",
+    "L4": "Half as much to Benedict as he had paid to Helen is $40/2=$<<40/2=20>>20.",
+    "L5": "Thus, he paid $20 to Benedict, leaving him with $40-$20=$20 after paying off all debts."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 227.\n    Returns: the amount of money Ian has left after paying off debts.\n    \"\"\"\n    # L1\n    initial_money = 100 # Ian won $100 in the lottery\n    paid_to_colin = 20 # He paid $20 to Colin\n    money_after_colin = initial_money - paid_to_colin\n\n    # L2\n    multiplier_helen = 2 # twice as much\n    paid_to_helen = multiplier_helen * paid_to_colin\n\n    # L3\n    money_after_helen = money_after_colin - paid_to_helen\n\n    # L4\n    divisor_benedict = 2 # half as much\n    paid_to_benedict = paid_to_helen / divisor_benedict\n\n    # L5\n    money_left = money_after_helen - paid_to_benedict\n\n    # FA\n    answer = money_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "paid_to_benedict",
+    "operand_to_replace": "paid_to_helen",
+    "replacement_variable": "paid_to_colin"
+  },
+  "correct_trace": {
+    "initial_money": 100,
+    "paid_to_colin": 20,
+    "money_after_colin": 80,
+    "multiplier_helen": 2,
+    "paid_to_helen": 40,
+    "money_after_helen": 40,
+    "divisor_benedict": 2,
+    "paid_to_benedict": 20.0,
+    "money_left": 20.0,
+    "answer": 20.0
+  },
+  "flawed_trace": {
+    "initial_money": 100,
+    "paid_to_colin": 20,
+    "money_after_colin": 80,
+    "multiplier_helen": 2,
+    "paid_to_helen": 40,
+    "money_after_helen": 40,
+    "divisor_benedict": 2,
+    "paid_to_benedict": 10.0,
+    "money_left": 30.0,
+    "answer": 30.0
+  },
+  "correct_value": 20.0,
+  "flawed_value": 10.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_after_colin",
+      "question_inputs": [
+        "initial_money",
+        "paid_to_colin"
+      ],
+      "solution_line_template": "Starting with ${initial_money}, he paid ${paid_to_colin} to Colin, leaving him with ${initial_money}-${paid_to_colin}=$<<{initial_money}-{paid_to_colin}={money_after_colin}>>{money_after_colin}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "paid_to_helen",
+      "question_inputs": [
+        "multiplier_helen"
+      ],
+      "solution_line_template": "Twice as much as ${paid_to_colin} is {multiplier_helen}*${paid_to_colin}=$<<{multiplier_helen}*{paid_to_colin}={paid_to_helen}>>{paid_to_helen}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "money_after_helen",
+      "question_inputs": [],
+      "solution_line_template": "Thus, he paid ${paid_to_helen} to Helen, leaving him with ${money_after_colin}-${paid_to_helen}=$<<{money_after_colin}-{paid_to_helen}={money_after_helen}>>{money_after_helen}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "paid_to_benedict",
+      "question_inputs": [
+        "divisor_benedict"
+      ],
+      "solution_line_template": "Half as much to Benedict as he had paid to Helen is ${paid_to_helen}/{divisor_benedict}=$<<{paid_to_helen}/{divisor_benedict}={paid_to_benedict}>>{paid_to_benedict}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "money_left",
+      "question_inputs": [],
+      "solution_line_template": "Thus, he paid ${paid_to_benedict} to Benedict, leaving him with ${money_after_helen}-${paid_to_benedict}=${money_left} after paying off all debts."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Starting with $100, he paid $20 to Colin, leaving him with $100-$20=$<<100-20=80>>80.",
+    "L2": "Twice as much as $20 is 2*$20=$<<2*20=40>>40.",
+    "L3": "Thus, he paid $40 to Helen, leaving him with $80-$40=$<<80-40=40>>40.",
+    "L4": "Half as much to Benedict as he had paid to Helen is $20/2=$<<20/2=10>>10.",
+    "L5": "Thus, he paid $10 to Benedict, leaving him with $40-$10=$30 after paying off all debts.",
+    "FA": "#### 30"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'paid_to_colin' (value: 20) was used instead of 'paid_to_helen' (value: 40).",
+  "repro_seed": 6177675844774802192,
+  "model_name": "google_gemini-2.5-flash"
+}

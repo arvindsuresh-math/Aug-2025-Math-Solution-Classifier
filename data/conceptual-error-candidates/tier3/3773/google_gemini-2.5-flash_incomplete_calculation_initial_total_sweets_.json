@@ -1,0 +1,77 @@
+{
+  "index": 3773,
+  "original_solution_mapping": {
+    "FA": "#### 55",
+    "L1": "Aaron eats 1/2*30 sweets + 1/2*40 sweets + 1/2*50 sweets = <<1/2*30+1/2*40+1/2*50=60>>60 candy sweets.",
+    "L2": "The packet of candy sweets still has 60 sweets - 5 sweets = <<60-5=55>>55 candy sweets."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3773.\n    Returns: the number of sweets still in the packet.\n    \"\"\"\n    # L1\n    cherry_sweets = 30 # 30 cherry-flavored sweets\n    strawberry_sweets = 40 # 40 strawberry-flavored sweets\n    pineapple_sweets = 50 # 50 pineapple-flavored sweets\n    eaten_fraction = Fraction(1, 2) # half of each of the flavored sweets\n    sweets_eaten_by_aaron = eaten_fraction * cherry_sweets + eaten_fraction * strawberry_sweets + eaten_fraction * pineapple_sweets\n\n    initial_total_sweets = cherry_sweets + strawberry_sweets + pineapple_sweets\n    sweets_after_aaron_eats = initial_total_sweets - sweets_eaten_by_aaron\n\n    # L2\n    given_to_friend = 5 # gives 5 cherry-flavored sweets to his friend\n    sweets_remaining = sweets_after_aaron_eats - given_to_friend\n\n    # FA\n    answer = sweets_remaining\n    return answer\n",
+  "mutation_details": {
+    "type": "incomplete_calculation",
+    "target_variable": "initial_total_sweets",
+    "operand_to_remove": "pineapple_sweets",
+    "original_operands": [
+      "cherry_sweets",
+      "pineapple_sweets",
+      "strawberry_sweets"
+    ]
+  },
+  "correct_trace": {
+    "cherry_sweets": 30,
+    "strawberry_sweets": 40,
+    "pineapple_sweets": 50,
+    "eaten_fraction": "1/2",
+    "sweets_eaten_by_aaron": "60",
+    "initial_total_sweets": 120,
+    "sweets_after_aaron_eats": "60",
+    "given_to_friend": 5,
+    "sweets_remaining": "55",
+    "answer": "55"
+  },
+  "flawed_trace": {
+    "cherry_sweets": 30,
+    "strawberry_sweets": 40,
+    "pineapple_sweets": 50,
+    "eaten_fraction": "1/2",
+    "sweets_eaten_by_aaron": "60",
+    "initial_total_sweets": 70,
+    "sweets_after_aaron_eats": "10",
+    "given_to_friend": 5,
+    "sweets_remaining": "5",
+    "answer": "5"
+  },
+  "correct_value": 120,
+  "flawed_value": 70,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "sweets_eaten_by_aaron",
+      "question_inputs": [
+        "cherry_sweets",
+        "strawberry_sweets",
+        "pineapple_sweets",
+        "eaten_fraction"
+      ],
+      "solution_line_template": "Aaron eats {eaten_fraction}*{cherry_sweets} sweets + {eaten_fraction}*{strawberry_sweets} sweets + {eaten_fraction}*{pineapple_sweets} sweets = <<{eaten_fraction}*{cherry_sweets}+{eaten_fraction}*{strawberry_sweets}+{eaten_fraction}*{pineapple_sweets}={sweets_eaten_by_aaron}>>{sweets_eaten_by_aaron} candy sweets."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sweets_remaining",
+      "question_inputs": [
+        "given_to_friend"
+      ],
+      "solution_line_template": "The packet of candy sweets still has {sweets_after_aaron_eats} sweets - {given_to_friend} sweets = <<{sweets_after_aaron_eats}-{given_to_friend}={sweets_remaining}>>{sweets_remaining} candy sweets."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Aaron eats 1/2*30 sweets + 1/2*40 sweets + 1/2*50 sweets = <<1/2*30+1/2*40+1/2*50=60>>60 candy sweets.",
+    "L2": "The packet of candy sweets still has 10 sweets - 5 sweets = <<10-5=5>>5 candy sweets.",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": null,
+  "explanation": "Incomplete calculation. The term 'pineapple_sweets' (value: 50) was omitted from the operation.",
+  "repro_seed": 8704145281108622645,
+  "model_name": "google_gemini-2.5-flash"
+}

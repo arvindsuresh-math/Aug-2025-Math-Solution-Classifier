@@ -1,0 +1,67 @@
+{
+  "index": 3565,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "Let's make \"x\" be the width of the patio.",
+    "L2": "Then the length of the patio would be 4*x.",
+    "L3": "And the perimeter of the patio would be the sum of all four sides, or x+(4*x)+x+(4*x)=100 feet.",
+    "L4": "This simplifies to 10x=100 feet.",
+    "L5": "And the width of the patio x=<<10=10>>10 feet.",
+    "L6": "And the length of the patio is 4*x = 4*10 = 40 feet."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3565.\n    Returns: the length of the patio in feet.\n    \"\"\"\n    # L5\n    perimeter = 100 # perimeter of the patio was 100 feet\n    # The problem states the length is four times the width. For a rectangle, the perimeter is 2*(width + length).\n    # If width = x and length = 4x, then perimeter = 2*(x + 4x) = 2*(5x) = 10x.\n    # The coefficient '10' is derived from this relationship and the perimeter formula.\n    perimeter_equation_coefficient = 10 # derived from the relationship between length and width in the perimeter formula\n    width = perimeter / perimeter_equation_coefficient\n\n    # L6\n    length_multiplier = 4 # four times as long as it was wide\n    length = length_multiplier * width\n\n    # FA\n    answer = length\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "length",
+    "operand_to_replace": "length_multiplier",
+    "replacement_variable": "width"
+  },
+  "correct_trace": {
+    "perimeter": 100,
+    "perimeter_equation_coefficient": 10,
+    "width": 10.0,
+    "length_multiplier": 4,
+    "length": 40.0,
+    "answer": 40.0
+  },
+  "flawed_trace": {
+    "perimeter": 100,
+    "perimeter_equation_coefficient": 10,
+    "width": 10.0,
+    "length_multiplier": 4,
+    "length": 100.0,
+    "answer": 100.0
+  },
+  "correct_value": 40.0,
+  "flawed_value": 100.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "width",
+      "question_inputs": [
+        "perimeter",
+        "perimeter_equation_coefficient"
+      ],
+      "solution_line_template": "And the width of the patio x=<<{width}={width}>>{width} feet."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "length",
+      "question_inputs": [
+        "length_multiplier"
+      ],
+      "solution_line_template": "And the length of the patio is {length_multiplier}*x = {length_multiplier}*{width} = <<{length_multiplier}*{width}={length}>>{length} feet."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L5": "And the width of the patio x=<<10=10>>10 feet.",
+    "L6": "And the length of the patio is 10*x = 10*10 = <<10*10=100>>100 feet.",
+    "FA": "#### 100"
+  },
+  "erroneous_line_number": "L6",
+  "explanation": "Input misrepresentation. The value for 'width' (10.0) was used instead of 'length_multiplier' (4).",
+  "repro_seed": 4328276817807430765,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,63 @@
+{
+  "index": 7249,
+  "original_solution_mapping": {
+    "FA": "#### 100",
+    "L1": "Vinnie has written a total of 450 words on Saturday + 650 words on Sunday = <<450+650=1100>>1100 words.",
+    "L2": "He has therefore exceeded the limit by 1100 written words - 1000 word limit = <<1100-1000=100>>100 words."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7249.\n    Returns: the number of words Vinnie has exceeded the limit by.\n    \"\"\"\n    # L1\n    words_saturday = 450 # 450 words on Saturday\n    words_sunday = 650 # 650 words on Sunday\n    total_words_written = words_saturday + words_sunday\n\n    # L2\n    word_limit = 1000 # 1000-word limit\n    words_exceeded = total_words_written - word_limit\n\n    # FA\n    answer = words_exceeded\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_words_written",
+    "operand_to_replace": "words_saturday",
+    "replacement_variable": "words_sunday"
+  },
+  "correct_trace": {
+    "words_saturday": 450,
+    "words_sunday": 650,
+    "total_words_written": 1100,
+    "word_limit": 1000,
+    "words_exceeded": 100,
+    "answer": 100
+  },
+  "flawed_trace": {
+    "words_saturday": 450,
+    "words_sunday": 650,
+    "total_words_written": 1300,
+    "word_limit": 1000,
+    "words_exceeded": 300,
+    "answer": 300
+  },
+  "correct_value": 1100,
+  "flawed_value": 1300,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_words_written",
+      "question_inputs": [
+        "words_saturday",
+        "words_sunday"
+      ],
+      "solution_line_template": "Vinnie has written a total of {words_saturday} words on Saturday + {words_sunday} words on Sunday = <<{words_saturday}+{words_sunday}={total_words_written}>>{total_words_written} words."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "words_exceeded",
+      "question_inputs": [
+        "word_limit"
+      ],
+      "solution_line_template": "He has therefore exceeded the limit by {total_words_written} written words - {word_limit} word limit = <<{total_words_written}-{word_limit}={words_exceeded}>>{words_exceeded} words."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Vinnie has written a total of 650 words on Saturday + 650 words on Sunday = <<650+650=1300>>1300 words.",
+    "L2": "He has therefore exceeded the limit by 1300 written words - 1000 word limit = <<1300-1000=300>>300 words.",
+    "FA": "#### 300"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'words_sunday' (650) was used instead of 'words_saturday' (450).",
+  "repro_seed": 6098627889626359502,
+  "model_name": "google_gemini-2.5-flash"
+}

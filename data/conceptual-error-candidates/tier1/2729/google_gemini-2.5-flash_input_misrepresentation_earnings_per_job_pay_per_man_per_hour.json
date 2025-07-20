@@ -1,0 +1,63 @@
+{
+  "index": 2729,
+  "original_solution_mapping": {
+    "FA": "#### 150",
+    "L1": "Since they are paid $10 each per hour of work and can complete a job in one hour, they earn a total of $10*3=$<<10*3=30>>30 together for an hour of work.",
+    "L2": "If they earn together $30 for one job, for the five jobs, they'll earn $30*5=$<<30*5=150>>150"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2729.\n    Returns: the total amount of money the three men will earn.\n    \"\"\"\n    # L1\n    pay_per_man_per_hour = 10 # $10 per hour\n    men_count = 3 # 3 men\n    earnings_per_job = pay_per_man_per_hour * men_count\n\n    # L2\n    num_jobs = 5 # 5 such similar jobs\n    total_earnings = earnings_per_job * num_jobs\n\n    # FA\n    answer = total_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "earnings_per_job",
+    "operand_to_replace": "men_count",
+    "replacement_variable": "pay_per_man_per_hour"
+  },
+  "correct_trace": {
+    "pay_per_man_per_hour": 10,
+    "men_count": 3,
+    "earnings_per_job": 30,
+    "num_jobs": 5,
+    "total_earnings": 150,
+    "answer": 150
+  },
+  "flawed_trace": {
+    "pay_per_man_per_hour": 10,
+    "men_count": 3,
+    "earnings_per_job": 100,
+    "num_jobs": 5,
+    "total_earnings": 500,
+    "answer": 500
+  },
+  "correct_value": 30,
+  "flawed_value": 100,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "pay_per_man_per_hour",
+        "men_count"
+      ],
+      "WK_inputs": [],
+      "output_variable": "earnings_per_job",
+      "solution_line_template": "Since they are paid ${pay_per_man_per_hour} each per hour of work and can complete a job in one hour, they earn a total of ${pay_per_man_per_hour}*{men_count}=$<<{pay_per_man_per_hour}*{men_count}={earnings_per_job}>>{earnings_per_job} together for an hour of work."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "num_jobs"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_earnings",
+      "solution_line_template": "If they earn together ${earnings_per_job} for one job, for the five jobs, they'll earn ${earnings_per_job}*{num_jobs}=$<<{earnings_per_job}*{num_jobs}={total_earnings}>>{total_earnings}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since they are paid $10 each per hour of work and can complete a job in one hour, they earn a total of $10*10=$<<10*10=100>>100 together for an hour of work.",
+    "L2": "If they earn together $100 for one job, for the five jobs, they'll earn $100*5=$<<100*5=500>>500",
+    "FA": "#### 500"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'pay_per_man_per_hour' (10) was used instead of 'men_count' (3).",
+  "repro_seed": -8823150012157217143,
+  "model_name": "google_gemini-2.5-flash"
+}

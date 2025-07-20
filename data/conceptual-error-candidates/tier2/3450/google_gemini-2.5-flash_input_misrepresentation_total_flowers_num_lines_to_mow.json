@@ -1,0 +1,92 @@
+{
+  "index": 3450,
+  "original_solution_mapping": {
+    "FA": "#### 108",
+    "L1": "First find the total time Carson spends mowing: 40 lines * 2 minutes/line = <<40*2=80>>80 minutes",
+    "L2": "Then find the total number of flowers Carson plants: 8 rows * 7 flowers/row = <<8*7=56>>56 flowers",
+    "L3": "Then multiply that number by the time taken to plant each flower to find the total time spent planting flowers: .5 minutes/flower * 56 flowers = <<.5*56=28>>28 minutes",
+    "L4": "Finally, add that time to the time spent mowing to find the total time spent gardening: 28 minutes + 80 minutes = <<28+80=108>>108 minutes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3450.\n    Returns: the total minutes Carson will spend gardening.\n    \"\"\"\n    # L1\n    num_lines_to_mow = 40 # mow 40 lines\n    time_per_line = 2 # 2 minutes to mow one line\n    mowing_time = num_lines_to_mow * time_per_line\n\n    # L2\n    num_rows_flowers = 8 # 8 rows of flowers\n    flowers_per_row = 7 # each with 7 flowers\n    total_flowers = num_rows_flowers * flowers_per_row\n\n    # L3\n    time_per_flower = 0.5 # half a minute to plant each flower\n    planting_time = time_per_flower * total_flowers\n\n    # L4\n    total_gardening_time = planting_time + mowing_time\n\n    # FA\n    answer = total_gardening_time\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_flowers",
+    "operand_to_replace": "flowers_per_row",
+    "replacement_variable": "num_lines_to_mow"
+  },
+  "correct_trace": {
+    "num_lines_to_mow": 40,
+    "time_per_line": 2,
+    "mowing_time": 80,
+    "num_rows_flowers": 8,
+    "flowers_per_row": 7,
+    "total_flowers": 56,
+    "time_per_flower": 0.5,
+    "planting_time": 28.0,
+    "total_gardening_time": 108.0,
+    "answer": 108.0
+  },
+  "flawed_trace": {
+    "num_lines_to_mow": 40,
+    "time_per_line": 2,
+    "mowing_time": 80,
+    "num_rows_flowers": 8,
+    "flowers_per_row": 7,
+    "total_flowers": 320,
+    "time_per_flower": 0.5,
+    "planting_time": 160.0,
+    "total_gardening_time": 240.0,
+    "answer": 240.0
+  },
+  "correct_value": 56,
+  "flawed_value": 320,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "mowing_time",
+      "question_inputs": [
+        "num_lines_to_mow",
+        "time_per_line"
+      ],
+      "solution_line_template": "First find the total time Carson spends mowing: {num_lines_to_mow} lines * {time_per_line} minutes/line = <<{num_lines_to_mow}*{time_per_line}={mowing_time}>>{mowing_time} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_flowers",
+      "question_inputs": [
+        "num_rows_flowers",
+        "flowers_per_row"
+      ],
+      "solution_line_template": "Then find the total number of flowers Carson plants: {num_rows_flowers} rows * {flowers_per_row} flowers/row = <<{num_rows_flowers}*{flowers_per_row}={total_flowers}>>{total_flowers} flowers"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "planting_time",
+      "question_inputs": [
+        "time_per_flower"
+      ],
+      "solution_line_template": "Then multiply that number by the time taken to plant each flower to find the total time spent planting flowers: {time_per_flower} minutes/flower * {total_flowers} flowers = <<{time_per_flower}*{total_flowers}={planting_time}>>{planting_time} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_gardening_time",
+      "question_inputs": [],
+      "solution_line_template": "Finally, add that time to the time spent mowing to find the total time spent gardening: {planting_time} minutes + {mowing_time} minutes = <<{planting_time}+{mowing_time}={total_gardening_time}>>{total_gardening_time} minutes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total time Carson spends mowing: 40 lines * 2 minutes/line = <<40*2=80>>80 minutes",
+    "L2": "Then find the total number of flowers Carson plants: 8 rows * 40 flowers/row = <<8*40=320>>320 flowers",
+    "L3": "Then multiply that number by the time taken to plant each flower to find the total time spent planting flowers: 0.5 minutes/flower * 320 flowers = <<0.5*320=160>>160 minutes",
+    "L4": "Finally, add that time to the time spent mowing to find the total time spent gardening: 160 minutes + 80 minutes = <<160+80=240>>240 minutes",
+    "FA": "#### 240"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_lines_to_mow' (40) was used instead of 'flowers_per_row' (7).",
+  "repro_seed": -4200876283028048230,
+  "model_name": "google_gemini-2.5-flash"
+}

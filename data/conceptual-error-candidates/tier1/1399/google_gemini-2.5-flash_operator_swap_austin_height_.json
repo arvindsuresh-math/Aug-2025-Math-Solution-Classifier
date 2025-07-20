@@ -1,0 +1,83 @@
+{
+  "index": 1399,
+  "original_solution_mapping": {
+    "FA": "#### 26",
+    "L1": "The shortest wave was 7 + 3 = <<7+3=10>>10 feet tall.",
+    "L2": "Austin is 10 - 4 = <<10-4=6>>6 feet tall.",
+    "L3": "Thus, the highest wave Austin caught was 6 * 4 + 2 = 24 + 2 = <<6*4+2=26>>26 feet tall."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1399.\n    Returns: the height of the highest wave Austin caught.\n    \"\"\"\n    # L1\n    surfboard_length = 7 # 7-foot surfboard\n    shortest_wave_higher_than_surfboard = 3 # three feet higher than his 7-foot surfboard\n    shortest_wave_height = surfboard_length + shortest_wave_higher_than_surfboard\n\n    # L2\n    shortest_wave_higher_than_austin = 4 # four feet higher than his height\n    austin_height = shortest_wave_height - shortest_wave_higher_than_austin\n\n    # L3\n    highest_wave_multiplier = 4 # four times his height\n    highest_wave_additional_height = 2 # two feet higher\n    austin_height_times_multiplier = austin_height * highest_wave_multiplier\n    highest_wave_height = austin_height_times_multiplier + highest_wave_additional_height\n\n    # FA\n    answer = highest_wave_height\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "austin_height",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x317dee690>"
+  },
+  "correct_trace": {
+    "surfboard_length": 7,
+    "shortest_wave_higher_than_surfboard": 3,
+    "shortest_wave_height": 10,
+    "shortest_wave_higher_than_austin": 4,
+    "austin_height": 6,
+    "highest_wave_multiplier": 4,
+    "highest_wave_additional_height": 2,
+    "austin_height_times_multiplier": 24,
+    "highest_wave_height": 26,
+    "answer": 26
+  },
+  "flawed_trace": {
+    "surfboard_length": 7,
+    "shortest_wave_higher_than_surfboard": 3,
+    "shortest_wave_height": 10,
+    "shortest_wave_higher_than_austin": 4,
+    "austin_height": 14,
+    "highest_wave_multiplier": 4,
+    "highest_wave_additional_height": 2,
+    "austin_height_times_multiplier": 56,
+    "highest_wave_height": 58,
+    "answer": 58
+  },
+  "correct_value": 6,
+  "flawed_value": 14,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "surfboard_length",
+        "shortest_wave_higher_than_surfboard"
+      ],
+      "WK_inputs": [],
+      "output_variable": "shortest_wave_height",
+      "solution_line_template": "The shortest wave was {surfboard_length} + {shortest_wave_higher_than_surfboard} = <<{surfboard_length}+{shortest_wave_higher_than_surfboard}={shortest_wave_height}>>{shortest_wave_height} feet tall."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "shortest_wave_higher_than_austin"
+      ],
+      "WK_inputs": [],
+      "output_variable": "austin_height",
+      "solution_line_template": "Austin is {shortest_wave_height} - {shortest_wave_higher_than_austin} = <<{shortest_wave_height}-{shortest_wave_higher_than_austin}={austin_height}>>{austin_height} feet tall."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "highest_wave_multiplier",
+        "highest_wave_additional_height"
+      ],
+      "WK_inputs": [],
+      "output_variable": "highest_wave_height",
+      "solution_line_template": "Thus, the highest wave Austin caught was {austin_height} * {highest_wave_multiplier} + {highest_wave_additional_height} = {austin_height_times_multiplier} + {highest_wave_additional_height} = <<{austin_height}*{highest_wave_multiplier}+{highest_wave_additional_height}={highest_wave_height}>>{highest_wave_height} feet tall."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The shortest wave was 7 + 3 = <<7+3=10>>10 feet tall.",
+    "L2": "Austin is 10 - 4 = <<10-4=14>>14 feet tall.",
+    "L3": "Thus, the highest wave Austin caught was 14 * 4 + 2 = 56 + 2 = <<14*4+2=58>>58 feet tall.",
+    "FA": "#### 58"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 422100487892379066,
+  "model_name": "google_gemini-2.5-flash"
+}

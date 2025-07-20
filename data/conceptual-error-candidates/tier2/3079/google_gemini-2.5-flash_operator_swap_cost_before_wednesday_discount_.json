@@ -1,0 +1,65 @@
+{
+  "index": 3079,
+  "original_solution_mapping": {
+    "FA": "#### 49",
+    "L1": "Before the Wednesday discount, the cost of the jean is $14.50 + $10.00 = $<<14.5+10=24.50>>24.50.",
+    "L2": "Since the original price was reduced by 50%, the original cost for the jeans is $24.50 * 2 = $<<24.5*2=49.00>>49.00."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3079.\n    Returns: the original cost for the jeans before all the discounts.\n    \"\"\"\n    # L1\n    final_cost_after_all_discounts = 14.50 # the cost of a pair of jeans is $14.50\n    wednesday_discount_amount = 10.00 # additional $10.00 off\n    cost_before_wednesday_discount = final_cost_after_all_discounts + wednesday_discount_amount\n\n    # L2\n    summer_discount_percent = 0.50 # 50% discount\n    multiplier_for_original_cost = 1 / summer_discount_percent\n    original_cost = cost_before_wednesday_discount * multiplier_for_original_cost\n\n    # FA\n    answer = original_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "cost_before_wednesday_discount",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x315416e50>"
+  },
+  "correct_trace": {
+    "final_cost_after_all_discounts": 14.5,
+    "wednesday_discount_amount": 10.0,
+    "cost_before_wednesday_discount": 24.5,
+    "summer_discount_percent": 0.5,
+    "multiplier_for_original_cost": 2.0,
+    "original_cost": 49.0,
+    "answer": 49.0
+  },
+  "flawed_trace": {
+    "final_cost_after_all_discounts": 14.5,
+    "wednesday_discount_amount": 10.0,
+    "cost_before_wednesday_discount": 145.0,
+    "summer_discount_percent": 0.5,
+    "multiplier_for_original_cost": 2.0,
+    "original_cost": 290.0,
+    "answer": 290.0
+  },
+  "correct_value": 24.5,
+  "flawed_value": 145.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_before_wednesday_discount",
+      "question_inputs": [
+        "final_cost_after_all_discounts",
+        "wednesday_discount_amount"
+      ],
+      "solution_line_template": "Before the Wednesday discount, the cost of the jean is ${final_cost_after_all_discounts} + ${wednesday_discount_amount} = $<<{final_cost_after_all_discounts}+{wednesday_discount_amount}={cost_before_wednesday_discount}>>{cost_before_wednesday_discount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "original_cost",
+      "question_inputs": [
+        "summer_discount_percent"
+      ],
+      "solution_line_template": "Since the original price was reduced by 50%, the original cost for the jeans is ${cost_before_wednesday_discount} * {multiplier_for_original_cost} = $<<{cost_before_wednesday_discount}*{multiplier_for_original_cost}={original_cost}>>{original_cost}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Before the Wednesday discount, the cost of the jean is $14.5 + $10 = $<<14.5+10=145>>145.",
+    "L2": "Since the original price was reduced by 50%, the original cost for the jeans is $145 * 2 = $<<145*2=290>>290.",
+    "FA": "#### 290"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 6186436807082669037,
+  "model_name": "google_gemini-2.5-flash"
+}

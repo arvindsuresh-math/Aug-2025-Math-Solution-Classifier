@@ -1,0 +1,74 @@
+{
+  "index": 4488,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "First find how long it takes Janet to cross the lake: 60 miles / 30 miles/hour = <<60/30=2>>2 hours",
+    "L2": "Then find how long it takes her sister to cross the lake: 60 miles / 12 miles/hour = <<60/12=5>>5 hours",
+    "L3": "Then subtract Janet's travel time from her sister's travel time to find the difference: 5 hours - 2 hours = <<5-2=3>>3 hours"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4488.\n    Returns: the time Janet has to wait for her sister.\n    \"\"\"\n    # L1\n    lake_width = 60 # lake is 60 miles wide\n    janet_speed = 30 # going 30 miles per hour\n    janet_travel_time = lake_width / janet_speed\n\n    # L2\n    sister_speed = 12 # speed of 12 miles per hour\n    sister_travel_time = lake_width / sister_speed\n\n    # L3\n    wait_time = sister_travel_time - janet_travel_time\n\n    # FA\n    answer = wait_time\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "janet_travel_time",
+    "operand_to_replace": "janet_speed",
+    "replacement_variable": "lake_width"
+  },
+  "correct_trace": {
+    "lake_width": 60,
+    "janet_speed": 30,
+    "janet_travel_time": 2.0,
+    "sister_speed": 12,
+    "sister_travel_time": 5.0,
+    "wait_time": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "lake_width": 60,
+    "janet_speed": 30,
+    "janet_travel_time": 1.0,
+    "sister_speed": 12,
+    "sister_travel_time": 5.0,
+    "wait_time": 4.0,
+    "answer": 4.0
+  },
+  "correct_value": 2.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "janet_travel_time",
+      "question_inputs": [
+        "lake_width",
+        "janet_speed"
+      ],
+      "solution_line_template": "First find how long it takes Janet to cross the lake: {lake_width} miles / {janet_speed} miles/hour = <<{lake_width}/{janet_speed}={janet_travel_time}>>{janet_travel_time} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sister_travel_time",
+      "question_inputs": [
+        "sister_speed"
+      ],
+      "solution_line_template": "Then find how long it takes her sister to cross the lake: {lake_width} miles / {sister_speed} miles/hour = <<{lake_width}/{sister_speed}={sister_travel_time}>>{sister_travel_time} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "wait_time",
+      "question_inputs": [],
+      "solution_line_template": "Then subtract Janet's travel time from her sister's travel time to find the difference: {sister_travel_time} hours - {janet_travel_time} hours = <<{sister_travel_time}-{janet_travel_time}={wait_time}>>{wait_time} hours"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how long it takes Janet to cross the lake: 60 miles / 60 miles/hour = <<60/60=1>>1 hours",
+    "L2": "Then find how long it takes her sister to cross the lake: 60 miles / 12 miles/hour = <<60/12=5>>5 hours",
+    "L3": "Then subtract Janet's travel time from her sister's travel time to find the difference: 5 hours - 1 hours = <<5-1=4>>4 hours",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'lake_width' (60) was used instead of 'janet_speed' (30).",
+  "repro_seed": -1827644890779661179,
+  "model_name": "google_gemini-2.5-flash"
+}

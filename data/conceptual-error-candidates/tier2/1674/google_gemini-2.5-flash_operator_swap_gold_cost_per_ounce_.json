@@ -1,0 +1,100 @@
+{
+  "index": 1674,
+  "original_solution_mapping": {
+    "FA": "#### 3030",
+    "L1": "He buys the silver for 1.5*$20=$<<1.5*20=30>>30",
+    "L2": "He bought 1.5*2=<<1.5*2=3>>3 ounces of gold",
+    "L3": "The gold is worth %20*50=$<<20*50=1000>>1000 per ounce",
+    "L4": "So he buys 3*$1000=$<<3*1000=3000>>3000 on gold",
+    "L5": "So he spent $30+$3000=$<<30+3000=3030>>3030 on everything"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1674.\n    Returns: the total amount John spends on silver and gold.\n    \"\"\"\n    # L1\n    silver_ounces = 1.5 # 1.5 ounces of silver\n    silver_cost_per_ounce = 20 # $20 per ounce\n    total_silver_cost = silver_ounces * silver_cost_per_ounce\n\n    # L2\n    gold_multiplier = 2 # twice as much gold\n    gold_ounces = silver_ounces * gold_multiplier\n\n    # L3\n    gold_price_multiplier = 50 # 50 times more expensive\n    gold_cost_per_ounce = silver_cost_per_ounce * gold_price_multiplier\n\n    # L4\n    total_gold_cost = gold_ounces * gold_cost_per_ounce\n\n    # L5\n    total_spent = total_silver_cost + total_gold_cost\n\n    # FA\n    answer = total_spent\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "gold_cost_per_ounce",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x31576f3d0>"
+  },
+  "correct_trace": {
+    "silver_ounces": 1.5,
+    "silver_cost_per_ounce": 20,
+    "total_silver_cost": 30.0,
+    "gold_multiplier": 2,
+    "gold_ounces": 3.0,
+    "gold_price_multiplier": 50,
+    "gold_cost_per_ounce": 1000,
+    "total_gold_cost": 3000.0,
+    "total_spent": 3030.0,
+    "answer": 3030.0
+  },
+  "flawed_trace": {
+    "silver_ounces": 1.5,
+    "silver_cost_per_ounce": 20,
+    "total_silver_cost": 30.0,
+    "gold_multiplier": 2,
+    "gold_ounces": 3.0,
+    "gold_price_multiplier": 50,
+    "gold_cost_per_ounce": 70,
+    "total_gold_cost": 210.0,
+    "total_spent": 240.0,
+    "answer": 240.0
+  },
+  "correct_value": 1000,
+  "flawed_value": 70,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_silver_cost",
+      "question_inputs": [
+        "silver_ounces",
+        "silver_cost_per_ounce"
+      ],
+      "solution_line_template": "He buys the silver for {silver_ounces}*${silver_cost_per_ounce}=$<<{silver_ounces}*{silver_cost_per_ounce}={total_silver_cost}>>{total_silver_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "gold_ounces",
+      "question_inputs": [
+        "gold_multiplier"
+      ],
+      "solution_line_template": "He bought {silver_ounces}*{gold_multiplier}=<<{silver_ounces}*{gold_multiplier}={gold_ounces}>>{gold_ounces} ounces of gold"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "gold_cost_per_ounce",
+      "question_inputs": [
+        "gold_price_multiplier"
+      ],
+      "solution_line_template": "The gold is worth %{silver_cost_per_ounce}*{gold_price_multiplier}=$<<{silver_cost_per_ounce}*{gold_price_multiplier}={gold_cost_per_ounce}>>{gold_cost_per_ounce} per ounce"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_gold_cost",
+      "question_inputs": [],
+      "solution_line_template": "So he buys {gold_ounces}*${gold_cost_per_ounce}=$<<{gold_ounces}*{gold_cost_per_ounce}={total_gold_cost}>>{total_gold_cost} on gold"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_spent",
+      "question_inputs": [],
+      "solution_line_template": "So he spent ${total_silver_cost}+${total_gold_cost}=$<<{total_silver_cost}+{total_gold_cost}={total_spent}>>{total_spent} on everything"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He buys the silver for 1.5*$20=$<<1.5*20=30>>30",
+    "L2": "He bought 1.5*2=<<1.5*2=3>>3 ounces of gold",
+    "L3": "The gold is worth %20*50=$<<20*50=70>>70 per ounce",
+    "L4": "So he buys 3*$70=$<<3*70=210>>210 on gold",
+    "L5": "So he spent $30+$210=$<<30+210=240>>240 on everything",
+    "FA": "#### 240"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 8291896540026091800,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,68 @@
+{
+  "index": 5963,
+  "original_solution_mapping": {
+    "FA": "#### 330",
+    "L1": "The price of 2 armchairs is $425 x 2 = $<<425*2=850>>850. Mrs. Dubois will pay $850 for the 2 seats.",
+    "L2": "Thus the Coffee table price is $2,430 - ($1,250 + $850) = $2,430 - $2,100 = $<<2430-2100=330>>330"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5963.\n    Returns: the price of the coffee table.\n    \"\"\"\n    # L1\n    armchair_cost_each = 425 # 2 armchairs costing $425 each\n    num_armchairs = 2 # 2 armchairs\n    total_armchair_cost = armchair_cost_each * num_armchairs\n\n    # L2\n    total_invoice_amount = 2430 # The total amount of the invoice is $2,430\n    sofa_cost = 1250 # a sofa worth $1,250\n    intermediate_sum = sofa_cost + total_armchair_cost\n    coffee_table_price = total_invoice_amount - intermediate_sum\n\n    # FA\n    answer = coffee_table_price\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_armchair_cost",
+    "operand_to_replace": "armchair_cost_each",
+    "replacement_variable": "num_armchairs"
+  },
+  "correct_trace": {
+    "armchair_cost_each": 425,
+    "num_armchairs": 2,
+    "total_armchair_cost": 850,
+    "total_invoice_amount": 2430,
+    "sofa_cost": 1250,
+    "intermediate_sum": 2100,
+    "coffee_table_price": 330,
+    "answer": 330
+  },
+  "flawed_trace": {
+    "armchair_cost_each": 425,
+    "num_armchairs": 2,
+    "total_armchair_cost": 4,
+    "total_invoice_amount": 2430,
+    "sofa_cost": 1250,
+    "intermediate_sum": 1254,
+    "coffee_table_price": 1176,
+    "answer": 1176
+  },
+  "correct_value": 850,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_armchair_cost",
+      "question_inputs": [
+        "armchair_cost_each",
+        "num_armchairs"
+      ],
+      "solution_line_template": "The price of {num_armchairs} armchairs is ${armchair_cost_each} x {num_armchairs} = $<<{armchair_cost_each}*{num_armchairs}={total_armchair_cost}>>{total_armchair_cost}. Mrs. Dubois will pay ${total_armchair_cost} for the {num_armchairs} seats."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "coffee_table_price",
+      "question_inputs": [
+        "total_invoice_amount",
+        "sofa_cost"
+      ],
+      "solution_line_template": "Thus the Coffee table price is ${total_invoice_amount} - (${sofa_cost} + ${total_armchair_cost}) = ${total_invoice_amount} - ${intermediate_sum} = $<<{total_invoice_amount}-{intermediate_sum}={coffee_table_price}>>{coffee_table_price}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The price of 2 armchairs is $2 x 2 = $<<2*2=4>>4. Mrs. Dubois will pay $4 for the 2 seats.",
+    "L2": "Thus the Coffee table price is $2430 - ($1250 + $4) = $2430 - $1254 = $<<2430-1254=1176>>1176",
+    "FA": "#### 1176"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'num_armchairs' (2) was used instead of 'armchair_cost_each' (425).",
+  "repro_seed": 7810421222581781347,
+  "model_name": "google_gemini-2.5-flash"
+}

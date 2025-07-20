@@ -1,0 +1,82 @@
+{
+  "index": 7051,
+  "original_solution_mapping": {
+    "FA": "#### 240",
+    "L1": "First find the number of people that win a prize: 800 people * 15% = <<800*15*.01=120>>120 people",
+    "L2": "Then multiply that number by the number of minnows each person wins: 120 people * 3 minnows/person = <<120*3=360>>360 minnows",
+    "L3": "Then subtract that number of minnows won from the starting number to find the number that are left: 600 minnows - 360 minnows = <<600-360=240>>240 minnows"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7051.\n    Returns: the number of minnows left over.\n    \"\"\"\n    # L1\n    total_people = 800 # 800 people are going to play the game\n    win_percentage_num = 15 # 15% win a prize\n    percent_factor = 0.01 # WK\n    winning_people = total_people * win_percentage_num * percent_factor\n\n    # L2\n    minnows_per_prize = 3 # each prize is a bowl with 3 minnows\n    total_minnows_needed = winning_people * minnows_per_prize\n\n    # L3\n    initial_minnows = 600 # bought 600 minnows\n    minnows_left_over = initial_minnows - total_minnows_needed\n\n    # FA\n    answer = minnows_left_over\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "minnows_left_over",
+    "operand_to_replace": "total_minnows_needed",
+    "replacement_variable": "win_percentage_num"
+  },
+  "correct_trace": {
+    "total_people": 800,
+    "win_percentage_num": 15,
+    "percent_factor": 0.01,
+    "winning_people": 120.0,
+    "minnows_per_prize": 3,
+    "total_minnows_needed": 360.0,
+    "initial_minnows": 600,
+    "minnows_left_over": 240.0,
+    "answer": 240.0
+  },
+  "flawed_trace": {
+    "total_people": 800,
+    "win_percentage_num": 15,
+    "percent_factor": 0.01,
+    "winning_people": 120.0,
+    "minnows_per_prize": 3,
+    "total_minnows_needed": 360.0,
+    "initial_minnows": 600,
+    "minnows_left_over": 585,
+    "answer": 585
+  },
+  "correct_value": 240.0,
+  "flawed_value": 585,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "winning_people",
+      "question_inputs": [
+        "total_people",
+        "win_percentage_num"
+      ],
+      "solution_line_template": "First find the number of people that win a prize: {total_people} people * {win_percentage_num}% = <<{total_people}*{win_percentage_num}*{percent_factor}={winning_people}>>{winning_people} people"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_minnows_needed",
+      "question_inputs": [
+        "minnows_per_prize"
+      ],
+      "solution_line_template": "Then multiply that number by the number of minnows each person wins: {winning_people} people * {minnows_per_prize} minnows/person = <<{winning_people}*{minnows_per_prize}={total_minnows_needed}>>{total_minnows_needed} minnows"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "minnows_left_over",
+      "question_inputs": [
+        "initial_minnows"
+      ],
+      "solution_line_template": "Then subtract that number of minnows won from the starting number to find the number that are left: {initial_minnows} minnows - {total_minnows_needed} minnows = <<{initial_minnows}-{total_minnows_needed}={minnows_left_over}>>{minnows_left_over} minnows"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the number of people that win a prize: 800 people * 15% = <<800*15*0.01=120>>120 people",
+    "L2": "Then multiply that number by the number of minnows each person wins: 120 people * 3 minnows/person = <<120*3=360>>360 minnows",
+    "L3": "Then subtract that number of minnows won from the starting number to find the number that are left: 600 minnows - 15 minnows = <<600-15=585>>585 minnows",
+    "FA": "#### 585"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'win_percentage_num' (value: 15) was used instead of 'total_minnows_needed' (value: 360.0).",
+  "repro_seed": -213860217255975791,
+  "model_name": "google_gemini-2.5-flash"
+}

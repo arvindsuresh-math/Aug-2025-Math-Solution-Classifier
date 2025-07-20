@@ -1,0 +1,64 @@
+{
+  "index": 6598,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "1/3 of her fish are female because 1 - (2/3) = 1/3",
+    "L2": "She has 15 female fish because 45 x (1/3) = <<45*(1/3)=15>>15"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6598.\n    Returns: the number of female fish Ariel has.\n    \"\"\"\n    # L1\n    total_fraction = 1 # WK\n    male_fraction = Fraction(2, 3) # 2/3 are male\n    female_fraction = total_fraction - male_fraction\n\n    # L2\n    total_fish = 45 # She has 45 fish\n    female_fish = total_fish * female_fraction\n\n    # FA\n    answer = female_fish\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "female_fish",
+    "operand_to_replace": "total_fish",
+    "replacement_variable": "male_fraction"
+  },
+  "correct_trace": {
+    "total_fraction": 1,
+    "male_fraction": "2/3",
+    "female_fraction": "1/3",
+    "total_fish": 45,
+    "female_fish": "15",
+    "answer": "15"
+  },
+  "flawed_trace": {
+    "total_fraction": 1,
+    "male_fraction": "2/3",
+    "female_fraction": "1/3",
+    "total_fish": 45,
+    "female_fish": "2/9",
+    "answer": "2/9"
+  },
+  "correct_value": "15",
+  "flawed_value": "2/9",
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_fraction"
+      ],
+      "line_number": "L1",
+      "output_variable": "female_fraction",
+      "question_inputs": [
+        "male_fraction"
+      ],
+      "solution_line_template": "{female_fraction} of her fish are female because {total_fraction} - ({male_fraction}) = {female_fraction}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "female_fish",
+      "question_inputs": [
+        "total_fish"
+      ],
+      "solution_line_template": "She has {female_fish} female fish because {total_fish} x ({female_fraction}) = <<{total_fish}*{female_fraction}={female_fish}>>{female_fish}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "1/3 of her fish are female because 1 - (2/3) = 1/3",
+    "L2": "She has 2/9 female fish because 2/3 x (1/3) = <<2/3*1/3=2/9>>2/9",
+    "FA": "#### 2/9"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'male_fraction' (2/3) was used instead of 'total_fish' (45).",
+  "repro_seed": 5882467305782954417,
+  "model_name": "google_gemini-2.5-flash"
+}

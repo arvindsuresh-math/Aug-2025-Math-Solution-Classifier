@@ -1,0 +1,92 @@
+{
+  "index": 6451,
+  "original_solution_mapping": {
+    "FA": "#### 150",
+    "L1": "He needs to get an oil change every 3000/1000 = <<3000/1000=3>>3 months",
+    "L2": "So he gets 12/3 = <<12/3=4>>4 oil changes a year",
+    "L3": "That means he pays for 4-1 = <<4-1=3>>3 oil changes a year",
+    "L4": "So he pays 3*$50 = $<<3*50=150>>150 a year"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6451.\n    Returns: the total annual cost of oil changes.\n    \"\"\"\n    # L1\n    oil_change_interval_miles = 3000 # every 3000 miles\n    miles_per_month = 1000 # drives 1000 miles a month\n    oil_change_interval_months = oil_change_interval_miles / miles_per_month\n\n    # L2\n    months_per_year = 12 # WK\n    total_oil_changes_per_year = months_per_year / oil_change_interval_months\n\n    # L3\n    free_oil_changes_per_year = 1 # 1 free oil change a year\n    paid_oil_changes_per_year = total_oil_changes_per_year - free_oil_changes_per_year\n\n    # L4\n    cost_per_oil_change = 50 # an oil change costs $50\n    total_annual_cost = paid_oil_changes_per_year * cost_per_oil_change\n\n    # FA\n    answer = total_annual_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_annual_cost",
+    "replacement_variable": "paid_oil_changes_per_year"
+  },
+  "correct_trace": {
+    "oil_change_interval_miles": 3000,
+    "miles_per_month": 1000,
+    "oil_change_interval_months": 3.0,
+    "months_per_year": 12,
+    "total_oil_changes_per_year": 4.0,
+    "free_oil_changes_per_year": 1,
+    "paid_oil_changes_per_year": 3.0,
+    "cost_per_oil_change": 50,
+    "total_annual_cost": 150.0,
+    "answer": 150.0
+  },
+  "flawed_trace": {
+    "oil_change_interval_miles": 3000,
+    "miles_per_month": 1000,
+    "oil_change_interval_months": 3.0,
+    "months_per_year": 12,
+    "total_oil_changes_per_year": 4.0,
+    "free_oil_changes_per_year": 1,
+    "paid_oil_changes_per_year": 3.0,
+    "cost_per_oil_change": 50,
+    "total_annual_cost": 150.0,
+    "answer": 3.0
+  },
+  "correct_value": 150.0,
+  "flawed_value": 3.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "oil_change_interval_months",
+      "question_inputs": [
+        "oil_change_interval_miles",
+        "miles_per_month"
+      ],
+      "solution_line_template": "He needs to get an oil change every {oil_change_interval_miles}/{miles_per_month} = <<{oil_change_interval_miles}/{miles_per_month}={oil_change_interval_months}>>{oil_change_interval_months} months"
+    },
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_oil_changes_per_year",
+      "question_inputs": [],
+      "solution_line_template": "So he gets {months_per_year}/{oil_change_interval_months} = <<{months_per_year}/{oil_change_interval_months}={total_oil_changes_per_year}>>{total_oil_changes_per_year} oil changes a year"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "paid_oil_changes_per_year",
+      "question_inputs": [
+        "free_oil_changes_per_year"
+      ],
+      "solution_line_template": "That means he pays for {total_oil_changes_per_year}-{free_oil_changes_per_year} = <<{total_oil_changes_per_year}-{free_oil_changes_per_year}={paid_oil_changes_per_year}>>{paid_oil_changes_per_year} oil changes a year"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_annual_cost",
+      "question_inputs": [
+        "cost_per_oil_change"
+      ],
+      "solution_line_template": "So he pays {paid_oil_changes_per_year}*${cost_per_oil_change} = $<<{paid_oil_changes_per_year}*{cost_per_oil_change}={total_annual_cost}>>{total_annual_cost} a year"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He needs to get an oil change every 3000/1000 = <<3000/1000=3>>3 months",
+    "L2": "So he gets 12/3 = <<12/3=4>>4 oil changes a year",
+    "L3": "That means he pays for 4-1 = <<4-1=3>>3 oil changes a year",
+    "FA": "#### 3"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'paid_oil_changes_per_year' (value: 3.0) was reported instead of 'total_annual_cost' (value: 150.0).",
+  "repro_seed": 5844998759731453700,
+  "model_name": "google_gemini-2.5-flash"
+}

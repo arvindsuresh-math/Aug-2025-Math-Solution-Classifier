@@ -1,0 +1,74 @@
+{
+  "index": 4988,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "After Greg lent her $40, Tessa paid him back 40 / 2 =$<<40/2=20>>20.",
+    "L2": "So Tessa's debt was 40 - 20 = $<<40-20=20>>20.",
+    "L3": "Finally, she asked for $10 more, leaving the debt at 20 + 10 = $<<20+10=30>>30."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4988.\n    Returns: the amount Tessa still owes Greg.\n    \"\"\"\n    # L1\n    initial_debt = 40 # lent her $40\n    paid_back_divisor = 2 # paid him back half of her debt\n    amount_paid_back = initial_debt / paid_back_divisor\n\n    # L2\n    debt_after_payment = initial_debt - amount_paid_back\n\n    # L3\n    additional_loan = 10 # asked him for $10 more\n    final_debt = debt_after_payment + additional_loan\n\n    # FA\n    answer = final_debt\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "amount_paid_back",
+    "operand_to_replace": "paid_back_divisor",
+    "replacement_variable": "initial_debt"
+  },
+  "correct_trace": {
+    "initial_debt": 40,
+    "paid_back_divisor": 2,
+    "amount_paid_back": 20.0,
+    "debt_after_payment": 20.0,
+    "additional_loan": 10,
+    "final_debt": 30.0,
+    "answer": 30.0
+  },
+  "flawed_trace": {
+    "initial_debt": 40,
+    "paid_back_divisor": 2,
+    "amount_paid_back": 1.0,
+    "debt_after_payment": 39.0,
+    "additional_loan": 10,
+    "final_debt": 49.0,
+    "answer": 49.0
+  },
+  "correct_value": 20.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "amount_paid_back",
+      "question_inputs": [
+        "initial_debt",
+        "paid_back_divisor"
+      ],
+      "solution_line_template": "After Greg lent her ${initial_debt}, Tessa paid him back {initial_debt} / {paid_back_divisor} =$<<{initial_debt}/{paid_back_divisor}={amount_paid_back}>>{amount_paid_back}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "debt_after_payment",
+      "question_inputs": [],
+      "solution_line_template": "So Tessa's debt was {initial_debt} - {amount_paid_back} = $<<{initial_debt}-{amount_paid_back}={debt_after_payment}>>{debt_after_payment}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_debt",
+      "question_inputs": [
+        "additional_loan"
+      ],
+      "solution_line_template": "Finally, she asked for ${additional_loan} more, leaving the debt at {debt_after_payment} + {additional_loan} = $<<{debt_after_payment}+{additional_loan}={final_debt}>>{final_debt}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After Greg lent her $40, Tessa paid him back 40 / 40 =$<<40/40=1>>1.",
+    "L2": "So Tessa's debt was 40 - 1 = $<<40-1=39>>39.",
+    "L3": "Finally, she asked for $10 more, leaving the debt at 39 + 10 = $<<39+10=49>>49.",
+    "FA": "#### 49"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'initial_debt' (40) was used instead of 'paid_back_divisor' (2).",
+  "repro_seed": 8640649402673272276,
+  "model_name": "google_gemini-2.5-flash"
+}

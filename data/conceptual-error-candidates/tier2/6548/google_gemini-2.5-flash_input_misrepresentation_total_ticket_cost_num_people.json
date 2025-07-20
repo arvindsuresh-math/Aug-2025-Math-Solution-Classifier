@@ -1,0 +1,93 @@
+{
+  "index": 6548,
+  "original_solution_mapping": {
+    "FA": "#### 24",
+    "L1": "Noah and Ava's zoo entry tickets are $5 x 2 = $<<5*2=10>>10.",
+    "L2": "Their round trip bus fare will be $1.50 x 2 x 2 = $<<1.5*2*2=6>>6.",
+    "L3": "Zoo tickets and bus fare will cost $10 + $6 = $<<10+6=16>>16.",
+    "L4": "For lunch and snacks, they will have $40 - $16 = $<<40-16=24>>24."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6548.\n    Returns: the money left to spend on lunch and snacks.\n    \"\"\"\n    # L1\n    ticket_cost_per_person = 5 # $5 per person\n    num_people = 2 # Noah and Ava\n    total_ticket_cost = ticket_cost_per_person * num_people\n\n    # L2\n    bus_fare_one_way_per_person = 1.50 # $1.50 per person one way\n    num_trips = 2 # WK\n    total_bus_fare = bus_fare_one_way_per_person * num_people * num_trips\n\n    # L3\n    total_transport_and_entry_cost = total_ticket_cost + total_bus_fare\n\n    # L4\n    initial_money = 40 # $40 with them\n    money_left_for_lunch_snacks = initial_money - total_transport_and_entry_cost\n\n    # FA\n    answer = money_left_for_lunch_snacks\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_ticket_cost",
+    "operand_to_replace": "ticket_cost_per_person",
+    "replacement_variable": "num_people"
+  },
+  "correct_trace": {
+    "ticket_cost_per_person": 5,
+    "num_people": 2,
+    "total_ticket_cost": 10,
+    "bus_fare_one_way_per_person": 1.5,
+    "num_trips": 2,
+    "total_bus_fare": 6.0,
+    "total_transport_and_entry_cost": 16.0,
+    "initial_money": 40,
+    "money_left_for_lunch_snacks": 24.0,
+    "answer": 24.0
+  },
+  "flawed_trace": {
+    "ticket_cost_per_person": 5,
+    "num_people": 2,
+    "total_ticket_cost": 4,
+    "bus_fare_one_way_per_person": 1.5,
+    "num_trips": 2,
+    "total_bus_fare": 6.0,
+    "total_transport_and_entry_cost": 10.0,
+    "initial_money": 40,
+    "money_left_for_lunch_snacks": 30.0,
+    "answer": 30.0
+  },
+  "correct_value": 10,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_ticket_cost",
+      "question_inputs": [
+        "ticket_cost_per_person",
+        "num_people"
+      ],
+      "solution_line_template": "Noah and Ava's zoo entry tickets are ${ticket_cost_per_person} x {num_people} = $<<{ticket_cost_per_person}*{num_people}={total_ticket_cost}>>{total_ticket_cost}."
+    },
+    {
+      "WK_inputs": [
+        "num_trips"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_bus_fare",
+      "question_inputs": [
+        "bus_fare_one_way_per_person"
+      ],
+      "solution_line_template": "Their round trip bus fare will be ${bus_fare_one_way_per_person} x {num_people} x {num_trips} = $<<{bus_fare_one_way_per_person}*{num_people}*{num_trips}={total_bus_fare}>>{total_bus_fare}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_transport_and_entry_cost",
+      "question_inputs": [],
+      "solution_line_template": "Zoo tickets and bus fare will cost ${total_ticket_cost} + ${total_bus_fare} = $<<{total_ticket_cost}+{total_bus_fare}={total_transport_and_entry_cost}>>{total_transport_and_entry_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "money_left_for_lunch_snacks",
+      "question_inputs": [
+        "initial_money"
+      ],
+      "solution_line_template": "For lunch and snacks, they will have ${initial_money} - ${total_transport_and_entry_cost} = $<<{initial_money}-{total_transport_and_entry_cost}={money_left_for_lunch_snacks}>>{money_left_for_lunch_snacks}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Noah and Ava's zoo entry tickets are $2 x 2 = $<<2*2=4>>4.",
+    "L2": "Their round trip bus fare will be $1.5 x 2 x 2 = $<<1.5*2*2=6>>6.",
+    "L3": "Zoo tickets and bus fare will cost $4 + $6 = $<<4+6=10>>10.",
+    "L4": "For lunch and snacks, they will have $40 - $10 = $<<40-10=30>>30.",
+    "FA": "#### 30"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'num_people' (2) was used instead of 'ticket_cost_per_person' (5).",
+  "repro_seed": -793263294563765552,
+  "model_name": "google_gemini-2.5-flash"
+}

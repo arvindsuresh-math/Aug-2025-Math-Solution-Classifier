@@ -1,0 +1,81 @@
+{
+  "index": 1164,
+  "original_solution_mapping": {
+    "FA": "#### 36",
+    "L1": "Over the four hours, the tank loses 2 * 4 = <<2*4=8>>8 gallons of water.",
+    "L2": "Hayden adds a total of 1 + 3 = <<1+3=4>>4 gallons of water.",
+    "L3": "At the end of the four hours, there is 40 - 8 + 4 = <<40-8+4=36>>36 gallons of water left in the tank."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1164.\n    Returns: the amount of water left in the tank at the end of the fourth hour.\n    \"\"\"\n    # L1\n    loss_rate_per_hour = 2 # loses 2 gallons of water per hour\n    total_hours = 4 # at the end of the fourth hour\n    total_loss = loss_rate_per_hour * total_hours\n\n    # L2\n    added_hour_3 = 1 # adds 1 gallon of water to the tank in hour three\n    added_hour_4 = 3 # adds three gallons of water to the tank in the fourth hour\n    total_added = added_hour_3 + added_hour_4\n\n    # L3\n    initial_water = 40 # tank starts with 40 gallons of water\n    water_left = initial_water - total_loss + total_added\n\n    # FA\n    answer = water_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "water_left",
+    "operand_to_replace": "total_loss",
+    "replacement_variable": "initial_water"
+  },
+  "correct_trace": {
+    "loss_rate_per_hour": 2,
+    "total_hours": 4,
+    "total_loss": 8,
+    "added_hour_3": 1,
+    "added_hour_4": 3,
+    "total_added": 4,
+    "initial_water": 40,
+    "water_left": 36,
+    "answer": 36
+  },
+  "flawed_trace": {
+    "loss_rate_per_hour": 2,
+    "total_hours": 4,
+    "total_loss": 8,
+    "added_hour_3": 1,
+    "added_hour_4": 3,
+    "total_added": 4,
+    "initial_water": 40,
+    "water_left": 4,
+    "answer": 4
+  },
+  "correct_value": 36,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "loss_rate_per_hour",
+        "total_hours"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_loss",
+      "solution_line_template": "Over the four hours, the tank loses {loss_rate_per_hour} * {total_hours} = <<{loss_rate_per_hour}*{total_hours}={total_loss}>>{total_loss} gallons of water."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "added_hour_3",
+        "added_hour_4"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_added",
+      "solution_line_template": "Hayden adds a total of {added_hour_3} + {added_hour_4} = <<{added_hour_3}+{added_hour_4}={total_added}>>{total_added} gallons of water."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "initial_water"
+      ],
+      "WK_inputs": [],
+      "output_variable": "water_left",
+      "solution_line_template": "At the end of the four hours, there is {initial_water} - {total_loss} + {total_added} = <<{initial_water}-{total_loss}+{total_added}={water_left}>>{water_left} gallons of water left in the tank."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Over the four hours, the tank loses 2 * 4 = <<2*4=8>>8 gallons of water.",
+    "L2": "Hayden adds a total of 1 + 3 = <<1+3=4>>4 gallons of water.",
+    "L3": "At the end of the four hours, there is 40 - 40 + 4 = <<40-40+4=4>>4 gallons of water left in the tank.",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'initial_water' (value: 40) was used instead of 'total_loss' (value: 8).",
+  "repro_seed": -4559151832841278267,
+  "model_name": "google_gemini-2.5-flash"
+}

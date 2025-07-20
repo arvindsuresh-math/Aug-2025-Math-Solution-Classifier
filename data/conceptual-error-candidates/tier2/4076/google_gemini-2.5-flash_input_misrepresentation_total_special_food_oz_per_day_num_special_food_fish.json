@@ -1,0 +1,78 @@
+{
+  "index": 4076,
+  "original_solution_mapping": {
+    "FA": "#### 45",
+    "L1": "There are 10 fish who need the special food because 50 x .2 = <<50*.2=10>>10",
+    "L2": "These fish eat 15 ounces a day because 10 x 1.5 = <<10*1.5=15>>15",
+    "L3": "This food costs $45 because 15 x 3 = <<15*3=45>>45"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4076.\n    Returns: the total cost to feed the special food fish.\n    \"\"\"\n    # L1\n    total_goldfish = 50 # 50 goldfish\n    special_food_percentage = 0.2 # 20% of the goldfish\n    num_special_food_fish = total_goldfish * special_food_percentage\n\n    # L2\n    food_per_goldfish_oz = 1.5 # eats 1.5 ounces of food per day\n    total_special_food_oz_per_day = num_special_food_fish * food_per_goldfish_oz\n\n    # L3\n    cost_special_food_per_oz = 3 # costs $3 an ounce\n    total_cost_special_food = total_special_food_oz_per_day * cost_special_food_per_oz\n\n    # FA\n    answer = total_cost_special_food\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_special_food_oz_per_day",
+    "operand_to_replace": "food_per_goldfish_oz",
+    "replacement_variable": "num_special_food_fish"
+  },
+  "correct_trace": {
+    "total_goldfish": 50,
+    "special_food_percentage": 0.2,
+    "num_special_food_fish": 10.0,
+    "food_per_goldfish_oz": 1.5,
+    "total_special_food_oz_per_day": 15.0,
+    "cost_special_food_per_oz": 3,
+    "total_cost_special_food": 45.0,
+    "answer": 45.0
+  },
+  "flawed_trace": {
+    "total_goldfish": 50,
+    "special_food_percentage": 0.2,
+    "num_special_food_fish": 10.0,
+    "food_per_goldfish_oz": 1.5,
+    "total_special_food_oz_per_day": 100.0,
+    "cost_special_food_per_oz": 3,
+    "total_cost_special_food": 300.0,
+    "answer": 300.0
+  },
+  "correct_value": 15.0,
+  "flawed_value": 100.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "num_special_food_fish",
+      "question_inputs": [
+        "total_goldfish",
+        "special_food_percentage"
+      ],
+      "solution_line_template": "There are {num_special_food_fish} fish who need the special food because {total_goldfish} x {special_food_percentage} = <<{total_goldfish}*{special_food_percentage}={num_special_food_fish}>>{num_special_food_fish}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_special_food_oz_per_day",
+      "question_inputs": [
+        "food_per_goldfish_oz"
+      ],
+      "solution_line_template": "These fish eat {total_special_food_oz_per_day} ounces a day because {num_special_food_fish} x {food_per_goldfish_oz} = <<{num_special_food_fish}*{food_per_goldfish_oz}={total_special_food_oz_per_day}>>{total_special_food_oz_per_day}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost_special_food",
+      "question_inputs": [
+        "cost_special_food_per_oz"
+      ],
+      "solution_line_template": "This food costs ${total_cost_special_food} because {total_special_food_oz_per_day} x {cost_special_food_per_oz} = <<{total_special_food_oz_per_day}*{cost_special_food_per_oz}={total_cost_special_food}>>{total_cost_special_food}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 10 fish who need the special food because 50 x 0.2 = <<50*0.2=10>>10",
+    "L2": "These fish eat 100 ounces a day because 10 x 10 = <<10*10=100>>100",
+    "L3": "This food costs $300 because 100 x 3 = <<100*3=300>>300",
+    "FA": "#### 300"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_special_food_fish' (10.0) was used instead of 'food_per_goldfish_oz' (1.5).",
+  "repro_seed": -8498100399168226158,
+  "model_name": "google_gemini-2.5-flash"
+}

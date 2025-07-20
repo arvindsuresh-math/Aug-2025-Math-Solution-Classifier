@@ -1,0 +1,74 @@
+{
+  "index": 5292,
+  "original_solution_mapping": {
+    "FA": "#### 300",
+    "L1": "Gretchen threw half as many pennies into the fountain as did Rachelle, for a total of 180/2=<<180/2=90>>90 pennies.",
+    "L2": "Rocky threw one-third as many as Gretchen, for a total of 90/3=<<90/3=30>>30 pennies.",
+    "L3": "In total, the three threw 180+90+30=<<180+90+30=300>>300 pennies into the fountain."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5292.\n    Returns: the total number of pennies thrown into the fountain.\n    \"\"\"\n    # L1\n    rachelle_pennies = 180 # Rachelle threw 180 pennies\n    half_divisor = 2 # half as many pennies\n    gretchen_pennies = rachelle_pennies / half_divisor\n\n    # L2\n    one_third_divisor = 3 # one-third as many pennies\n    rocky_pennies = gretchen_pennies / one_third_divisor\n\n    # L3\n    total_pennies = rachelle_pennies + gretchen_pennies + rocky_pennies\n\n    # FA\n    answer = total_pennies\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "rocky_pennies",
+    "operand_to_replace": "one_third_divisor",
+    "replacement_variable": "half_divisor"
+  },
+  "correct_trace": {
+    "rachelle_pennies": 180,
+    "half_divisor": 2,
+    "gretchen_pennies": 90.0,
+    "one_third_divisor": 3,
+    "rocky_pennies": 30.0,
+    "total_pennies": 300.0,
+    "answer": 300.0
+  },
+  "flawed_trace": {
+    "rachelle_pennies": 180,
+    "half_divisor": 2,
+    "gretchen_pennies": 90.0,
+    "one_third_divisor": 3,
+    "rocky_pennies": 45.0,
+    "total_pennies": 315.0,
+    "answer": 315.0
+  },
+  "correct_value": 30.0,
+  "flawed_value": 45.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "gretchen_pennies",
+      "question_inputs": [
+        "rachelle_pennies",
+        "half_divisor"
+      ],
+      "solution_line_template": "Gretchen threw half as many pennies into the fountain as did Rachelle, for a total of {rachelle_pennies}/{half_divisor}=<<{rachelle_pennies}/{half_divisor}={gretchen_pennies}>>{gretchen_pennies} pennies."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "rocky_pennies",
+      "question_inputs": [
+        "one_third_divisor"
+      ],
+      "solution_line_template": "Rocky threw one-third as many as Gretchen, for a total of {gretchen_pennies}/{one_third_divisor}=<<{gretchen_pennies}/{one_third_divisor}={rocky_pennies}>>{rocky_pennies} pennies."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_pennies",
+      "question_inputs": [],
+      "solution_line_template": "In total, the three threw {rachelle_pennies}+{gretchen_pennies}+{rocky_pennies}=<<{rachelle_pennies}+{gretchen_pennies}+{rocky_pennies}={total_pennies}>>{total_pennies} pennies into the fountain."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Gretchen threw half as many pennies into the fountain as did Rachelle, for a total of 180/2=<<180/2=90>>90 pennies.",
+    "L2": "Rocky threw one-third as many as Gretchen, for a total of 90/2=<<90/2=45>>45 pennies.",
+    "L3": "In total, the three threw 180+90+45=<<180+90+45=315>>315 pennies into the fountain.",
+    "FA": "#### 315"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'half_divisor' (2) was used instead of 'one_third_divisor' (3).",
+  "repro_seed": 7616705926542934605,
+  "model_name": "google_gemini-2.5-flash"
+}

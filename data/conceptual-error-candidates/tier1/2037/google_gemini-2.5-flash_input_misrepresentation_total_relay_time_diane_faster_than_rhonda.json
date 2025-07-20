@@ -1,0 +1,74 @@
+{
+  "index": 2037,
+  "original_solution_mapping": {
+    "FA": "#### 71",
+    "L1": "Sally takes 24+2=<<24+2=26>>26 seconds.",
+    "L2": "Diane takes 24-3=<<24-3=21>>21 seconds.",
+    "L3": "Thus, the three take 24+26+21=<<24+26+21=71>>71 seconds to run the 600-meter relay race."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2037.\n    Returns: the total time in seconds for the three to run the 600-meter relay race.\n    \"\"\"\n    # L1\n    rhonda_time_200m = 24 # Rhonda can run 200 meters in 24 seconds\n    sally_longer_than_rhonda = 2 # Sally takes two seconds longer\n    sally_time_200m = rhonda_time_200m + sally_longer_than_rhonda\n\n    # L2\n    diane_faster_than_rhonda = 3 # Diane can run 200 meters three seconds faster than Rhonda\n    diane_time_200m = rhonda_time_200m - diane_faster_than_rhonda\n\n    # L3\n    total_relay_time = rhonda_time_200m + sally_time_200m + diane_time_200m\n\n    # FA\n    answer = total_relay_time\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_relay_time",
+    "operand_to_replace": "rhonda_time_200m",
+    "replacement_variable": "diane_faster_than_rhonda"
+  },
+  "correct_trace": {
+    "rhonda_time_200m": 24,
+    "sally_longer_than_rhonda": 2,
+    "sally_time_200m": 26,
+    "diane_faster_than_rhonda": 3,
+    "diane_time_200m": 21,
+    "total_relay_time": 71,
+    "answer": 71
+  },
+  "flawed_trace": {
+    "rhonda_time_200m": 24,
+    "sally_longer_than_rhonda": 2,
+    "sally_time_200m": 26,
+    "diane_faster_than_rhonda": 3,
+    "diane_time_200m": 21,
+    "total_relay_time": 50,
+    "answer": 50
+  },
+  "correct_value": 71,
+  "flawed_value": 50,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "rhonda_time_200m",
+        "sally_longer_than_rhonda"
+      ],
+      "WK_inputs": [],
+      "output_variable": "sally_time_200m",
+      "solution_line_template": "Sally takes {rhonda_time_200m}+{sally_longer_than_rhonda}=<<{rhonda_time_200m}+{sally_longer_than_rhonda}={sally_time_200m}>>{sally_time_200m} seconds."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "diane_faster_than_rhonda"
+      ],
+      "WK_inputs": [],
+      "output_variable": "diane_time_200m",
+      "solution_line_template": "Diane takes {rhonda_time_200m}-{diane_faster_than_rhonda}=<<{rhonda_time_200m}-{diane_faster_than_rhonda}={diane_time_200m}>>{diane_time_200m} seconds."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_relay_time",
+      "solution_line_template": "Thus, the three take {rhonda_time_200m}+{sally_time_200m}+{diane_time_200m}=<<{rhonda_time_200m}+{sally_time_200m}+{diane_time_200m}={total_relay_time}>>{total_relay_time} seconds to run the 600-meter relay race."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Sally takes 24+2=<<24+2=26>>26 seconds.",
+    "L2": "Diane takes 24-3=<<24-3=21>>21 seconds.",
+    "L3": "Thus, the three take 3+26+21=<<3+26+21=50>>50 seconds to run the 600-meter relay race.",
+    "FA": "#### 50"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'diane_faster_than_rhonda' (3) was used instead of 'rhonda_time_200m' (24).",
+  "repro_seed": 2486269439553339298,
+  "model_name": "google_gemini-2.5-flash"
+}

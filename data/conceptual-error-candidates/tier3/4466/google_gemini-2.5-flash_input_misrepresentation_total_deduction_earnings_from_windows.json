@@ -1,0 +1,92 @@
+{
+  "index": 4466,
+  "original_solution_mapping": {
+    "FA": "#### 16",
+    "L1": "Lucas cleans a total of 3 floors * 3 windows/floor = <<3*3=9>>9 windows.",
+    "L2": "The windows cleaned earn Lucas 2 dollars each, so Lucas earns 9 windows * $2/window = $<<9*2=18>>18",
+    "L3": "For taking 6 days to clean, Lucas' father subtracts 6 days / $3/day = $<<6/3=2>>2",
+    "L4": "In total, Lucas' father will pay him $18 - $2 = $<<18-2=16>>16"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4466.\n    Returns: the total amount Lucas' father will pay him.\n    \"\"\"\n    # L1\n    num_floors = 3 # a 3-story house\n    windows_per_floor = 3 # Each floor of Lucas' house has 3 windows\n    total_windows = num_floors * windows_per_floor\n\n    # L2\n    pay_per_window = 2 # $2 for each window\n    earnings_from_windows = total_windows * pay_per_window\n\n    # L3\n    days_taken = 6 # In 6 days, Lucas finishes\n    deduction_interval = 3 # $1 for every 3 days\n    total_deduction = days_taken / deduction_interval\n\n    # L4\n    final_payment = earnings_from_windows - total_deduction\n\n    # FA\n    answer = final_payment\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_deduction",
+    "operand_to_replace": "days_taken",
+    "replacement_variable": "earnings_from_windows"
+  },
+  "correct_trace": {
+    "num_floors": 3,
+    "windows_per_floor": 3,
+    "total_windows": 9,
+    "pay_per_window": 2,
+    "earnings_from_windows": 18,
+    "days_taken": 6,
+    "deduction_interval": 3,
+    "total_deduction": 2.0,
+    "final_payment": 16.0,
+    "answer": 16.0
+  },
+  "flawed_trace": {
+    "num_floors": 3,
+    "windows_per_floor": 3,
+    "total_windows": 9,
+    "pay_per_window": 2,
+    "earnings_from_windows": 18,
+    "days_taken": 6,
+    "deduction_interval": 3,
+    "total_deduction": 6.0,
+    "final_payment": 12.0,
+    "answer": 12.0
+  },
+  "correct_value": 2.0,
+  "flawed_value": 6.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_windows",
+      "question_inputs": [
+        "num_floors",
+        "windows_per_floor"
+      ],
+      "solution_line_template": "Lucas cleans a total of {num_floors} floors * {windows_per_floor} windows/floor = <<{num_floors}*{windows_per_floor}={total_windows}>>{total_windows} windows."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "earnings_from_windows",
+      "question_inputs": [
+        "pay_per_window"
+      ],
+      "solution_line_template": "The windows cleaned earn Lucas {pay_per_window} dollars each, so Lucas earns {total_windows} windows * ${pay_per_window}/window = $<<{total_windows}*{pay_per_window}={earnings_from_windows}>>{earnings_from_windows}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_deduction",
+      "question_inputs": [
+        "days_taken",
+        "deduction_interval"
+      ],
+      "solution_line_template": "For taking {days_taken} days to clean, Lucas' father subtracts {days_taken} days / ${deduction_interval}/day = $<<{days_taken}/{deduction_interval}={total_deduction}>>{total_deduction}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_payment",
+      "question_inputs": [],
+      "solution_line_template": "In total, Lucas' father will pay him ${earnings_from_windows} - ${total_deduction} = $<<{earnings_from_windows}-{total_deduction}={final_payment}>>{final_payment}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Lucas cleans a total of 3 floors * 3 windows/floor = <<3*3=9>>9 windows.",
+    "L2": "The windows cleaned earn Lucas 2 dollars each, so Lucas earns 9 windows * $2/window = $<<9*2=18>>18",
+    "L3": "For taking 18 days to clean, Lucas' father subtracts 18 days / $3/day = $<<18/3=6>>6",
+    "L4": "In total, Lucas' father will pay him $18 - $6 = $<<18-6=12>>12",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'earnings_from_windows' (18) was used instead of 'days_taken' (6).",
+  "repro_seed": -357521524872063755,
+  "model_name": "google_gemini-2.5-flash"
+}

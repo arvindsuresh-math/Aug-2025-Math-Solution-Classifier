@@ -1,0 +1,63 @@
+{
+  "index": 4430,
+  "original_solution_mapping": {
+    "FA": "#### 16",
+    "L1": "Since barbara needs $100, and she currently has $20, she is remaining with $100-$20 = $<<100-20=80>>80 to save",
+    "L2": "With an allowance of $5 each week, she'll need to save for 80/5 = 16 weeks"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4430.\n    Returns: the number of additional weeks Barbara needs to save.\n    \"\"\"\n    # L1\n    watch_cost = 100 # wristwatch that costs $100\n    current_savings = 20 # currently only has $20\n    remaining_to_save = watch_cost - current_savings\n\n    # L2\n    weekly_allowance = 5 # allowance of $5 a week\n    weeks_needed = remaining_to_save / weekly_allowance\n\n    # FA\n    answer = weeks_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "weeks_needed",
+    "operand_to_replace": "weekly_allowance",
+    "replacement_variable": "current_savings"
+  },
+  "correct_trace": {
+    "watch_cost": 100,
+    "current_savings": 20,
+    "remaining_to_save": 80,
+    "weekly_allowance": 5,
+    "weeks_needed": 16.0,
+    "answer": 16.0
+  },
+  "flawed_trace": {
+    "watch_cost": 100,
+    "current_savings": 20,
+    "remaining_to_save": 80,
+    "weekly_allowance": 5,
+    "weeks_needed": 4.0,
+    "answer": 4.0
+  },
+  "correct_value": 16.0,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "remaining_to_save",
+      "question_inputs": [
+        "watch_cost",
+        "current_savings"
+      ],
+      "solution_line_template": "Since barbara needs ${watch_cost}, and she currently has ${current_savings}, she is remaining with ${watch_cost}-${current_savings} = $<<{watch_cost}-{current_savings}={remaining_to_save}>>{remaining_to_save} to save"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "weeks_needed",
+      "question_inputs": [
+        "weekly_allowance"
+      ],
+      "solution_line_template": "With an allowance of ${weekly_allowance} each week, she'll need to save for {remaining_to_save}/{weekly_allowance} = {weeks_needed} weeks"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since barbara needs $100, and she currently has $20, she is remaining with $100-$20 = $<<100-20=80>>80 to save",
+    "L2": "With an allowance of $20 each week, she'll need to save for 80/20 = 4 weeks",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'current_savings' (20) was used instead of 'weekly_allowance' (5).",
+  "repro_seed": -6783404166189846732,
+  "model_name": "google_gemini-2.5-flash"
+}

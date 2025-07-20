@@ -1,0 +1,66 @@
+{
+  "index": 6591,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "If you add all the songs together, Gabe's playlist is 3 + 2 + 3 = <<3+2+3=8>>8 minutes long.",
+    "L2": "During the 40-minute car ride, Gabe can listen to his 8-minute playlist 40 / 8 = <<40/8=5>>5 times."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6591.\n    Returns: the number of times Gabe can listen to his entire playlist.\n    \"\"\"\n    # L1\n    song1_length = 3 # \u201cThe Best Day\u201d is 3 minutes\n    song2_length = 2 # \u201cRaise the Roof\u201d is 2 minutes\n    song3_length = 3 # \u201cRap Battle\u201d is 3 minutes\n    playlist_length = song1_length + song2_length + song3_length\n\n    # L2\n    ride_duration = 40 # 40-minute ride\n    times_can_listen = ride_duration / playlist_length\n\n    # FA\n    answer = times_can_listen\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "times_can_listen",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x31b3470d0>"
+  },
+  "correct_trace": {
+    "song1_length": 3,
+    "song2_length": 2,
+    "song3_length": 3,
+    "playlist_length": 8,
+    "ride_duration": 40,
+    "times_can_listen": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "song1_length": 3,
+    "song2_length": 2,
+    "song3_length": 3,
+    "playlist_length": 8,
+    "ride_duration": 40,
+    "times_can_listen": 32,
+    "answer": 32
+  },
+  "correct_value": 5.0,
+  "flawed_value": 32,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "playlist_length",
+      "question_inputs": [
+        "song1_length",
+        "song2_length",
+        "song3_length"
+      ],
+      "solution_line_template": "If you add all the songs together, Gabe's playlist is {song1_length} + {song2_length} + {song3_length} = <<{song1_length}+{song2_length}+{song3_length}={playlist_length}>>{playlist_length} minutes long."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "times_can_listen",
+      "question_inputs": [
+        "ride_duration"
+      ],
+      "solution_line_template": "During the {ride_duration}-minute car ride, Gabe can listen to his {playlist_length}-minute playlist {ride_duration} / {playlist_length} = <<{ride_duration}/{playlist_length}={times_can_listen}>>{times_can_listen} times."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If you add all the songs together, Gabe's playlist is 3 + 2 + 3 = <<3+2+3=8>>8 minutes long.",
+    "L2": "During the 40-minute car ride, Gabe can listen to his 8-minute playlist 40 / 8 = <<40/8=32>>32 times.",
+    "FA": "#### 32"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 2974307639820770414,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,96 @@
+{
+  "index": 5694,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "The second movie was 2*.5=<<2*.5=1>>1` hour longer than the first movie",
+    "L2": "So the second movie was 2+1=<<2+1=3>>3 hours long",
+    "L3": "That means the first two movies had a combined time of 3+2=<<3+2=5>>5 hours",
+    "L4": "So the last movie had a length of 5-1=<<5-1=4>>4 hours",
+    "L5": "That means the marathon lasted 5+4=<<5+4=9>>9 hours"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5694.\n    Returns: the total duration of the movie marathon.\n    \"\"\"\n    # L1\n    first_movie_duration = 2 # The first movie is 2 hours long\n    longer_percentage = 0.5 # The next movie is 50% longer\n    second_movie_extra_duration = first_movie_duration * longer_percentage\n\n    # L2\n    second_movie_duration = first_movie_duration + second_movie_extra_duration\n\n    # L3\n    combined_first_two_movies_duration = second_movie_duration + first_movie_duration\n\n    # L4\n    shorter_amount = 1 # 1 hour shorter\n    last_movie_duration = combined_first_two_movies_duration - shorter_amount\n\n    # L5\n    total_marathon_duration = combined_first_two_movies_duration + last_movie_duration\n\n    # FA\n    answer = total_marathon_duration\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "last_movie_duration",
+    "operand_to_replace": "combined_first_two_movies_duration",
+    "replacement_variable": "first_movie_duration"
+  },
+  "correct_trace": {
+    "first_movie_duration": 2,
+    "longer_percentage": 0.5,
+    "second_movie_extra_duration": 1.0,
+    "second_movie_duration": 3.0,
+    "combined_first_two_movies_duration": 5.0,
+    "shorter_amount": 1,
+    "last_movie_duration": 4.0,
+    "total_marathon_duration": 9.0,
+    "answer": 9.0
+  },
+  "flawed_trace": {
+    "first_movie_duration": 2,
+    "longer_percentage": 0.5,
+    "second_movie_extra_duration": 1.0,
+    "second_movie_duration": 3.0,
+    "combined_first_two_movies_duration": 5.0,
+    "shorter_amount": 1,
+    "last_movie_duration": 1,
+    "total_marathon_duration": 6.0,
+    "answer": 6.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 1,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "second_movie_extra_duration",
+      "question_inputs": [
+        "first_movie_duration",
+        "longer_percentage"
+      ],
+      "solution_line_template": "The second movie was {first_movie_duration}*{longer_percentage}=<<{first_movie_duration}*{longer_percentage}={second_movie_extra_duration}>>{second_movie_extra_duration}` hour longer than the first movie"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "second_movie_duration",
+      "question_inputs": [],
+      "solution_line_template": "So the second movie was {first_movie_duration}+{second_movie_extra_duration}=<<{first_movie_duration}+{second_movie_extra_duration}={second_movie_duration}>>{second_movie_duration} hours long"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "combined_first_two_movies_duration",
+      "question_inputs": [],
+      "solution_line_template": "That means the first two movies had a combined time of {second_movie_duration}+{first_movie_duration}=<<{second_movie_duration}+{first_movie_duration}={combined_first_two_movies_duration}>>{combined_first_two_movies_duration} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "last_movie_duration",
+      "question_inputs": [
+        "shorter_amount"
+      ],
+      "solution_line_template": "So the last movie had a length of {combined_first_two_movies_duration}-{shorter_amount}=<<{combined_first_two_movies_duration}-{shorter_amount}={last_movie_duration}>>{last_movie_duration} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_marathon_duration",
+      "question_inputs": [],
+      "solution_line_template": "That means the marathon lasted {combined_first_two_movies_duration}+{last_movie_duration}=<<{combined_first_two_movies_duration}+{last_movie_duration}={total_marathon_duration}>>{total_marathon_duration} hours"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The second movie was 2*0.5=<<2*0.5=1>>1` hour longer than the first movie",
+    "L2": "So the second movie was 2+1=<<2+1=3>>3 hours long",
+    "L3": "That means the first two movies had a combined time of 3+2=<<3+2=5>>5 hours",
+    "L4": "So the last movie had a length of 2-1=<<2-1=1>>1 hours",
+    "L5": "That means the marathon lasted 5+1=<<5+1=6>>6 hours",
+    "FA": "#### 6"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'first_movie_duration' (value: 2) was used instead of 'combined_first_two_movies_duration' (value: 5.0).",
+  "repro_seed": 3269883613723669435,
+  "model_name": "google_gemini-2.5-flash"
+}

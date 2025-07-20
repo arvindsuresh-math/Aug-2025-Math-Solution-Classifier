@@ -1,0 +1,82 @@
+{
+  "index": 2949,
+  "original_solution_mapping": {
+    "FA": "#### 55",
+    "L1": "Between 2:30 pm and 5:00 pm, there are 2.5 hours.",
+    "L2": "There are 60 minutes in an hour, so 2.5 hours x 60 = <<2.5*60=150>>150 minutes.",
+    "L3": "Her family was in the bathroom 45 + 30 + 20 = <<45+30+20=95>>95 minutes.",
+    "L4": "Mrs. Parker has 150 minutes - 95 minutes = <<150-95=55>>55 minutes in the bathroom."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2949.\n    Returns: the time Mrs. Parker has to use the bathroom.\n    \"\"\"\n    # L2\n    total_available_hours = 2.5 # time between 2:30 pm and 5 pm\n    minutes_per_hour = 60 # WK\n    total_available_minutes = total_available_hours * minutes_per_hour\n\n    # L3\n    oldest_daughter_time = 45 # used the bathroom for 45 minutes\n    youngest_daughter_time = 30 # used the bathroom for another 30 minutes\n    husband_time = 20 # used it for 20 minutes\n    family_total_time = oldest_daughter_time + youngest_daughter_time + husband_time\n\n    # L4\n    mrs_parker_time = total_available_minutes - family_total_time\n\n    # FA\n    answer = mrs_parker_time\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "mrs_parker_time",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x3173c9d50>"
+  },
+  "correct_trace": {
+    "total_available_hours": 2.5,
+    "minutes_per_hour": 60,
+    "total_available_minutes": 150.0,
+    "oldest_daughter_time": 45,
+    "youngest_daughter_time": 30,
+    "husband_time": 20,
+    "family_total_time": 95,
+    "mrs_parker_time": 55.0,
+    "answer": 55.0
+  },
+  "flawed_trace": {
+    "total_available_hours": 2.5,
+    "minutes_per_hour": 60,
+    "total_available_minutes": 150.0,
+    "oldest_daughter_time": 45,
+    "youngest_daughter_time": 30,
+    "husband_time": 20,
+    "family_total_time": 95,
+    "mrs_parker_time": 245.0,
+    "answer": 245.0
+  },
+  "correct_value": 55.0,
+  "flawed_value": 245.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_available_minutes",
+      "question_inputs": [
+        "total_available_hours"
+      ],
+      "solution_line_template": "There are {minutes_per_hour} minutes in an hour, so {total_available_hours} hours x {minutes_per_hour} = <<{total_available_hours}*{minutes_per_hour}={total_available_minutes}>>{total_available_minutes} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "family_total_time",
+      "question_inputs": [
+        "oldest_daughter_time",
+        "youngest_daughter_time",
+        "husband_time"
+      ],
+      "solution_line_template": "Her family was in the bathroom {oldest_daughter_time} + {youngest_daughter_time} + {husband_time} = <<{oldest_daughter_time}+{youngest_daughter_time}+{husband_time}={family_total_time}>>{family_total_time} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "mrs_parker_time",
+      "question_inputs": [],
+      "solution_line_template": "Mrs. Parker has {total_available_minutes} minutes \u2013 {family_total_time} minutes = <<{total_available_minutes}-{family_total_time}={mrs_parker_time}>>{mrs_parker_time} minutes in the bathroom."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "There are 60 minutes in an hour, so 2.5 hours x 60 = <<2.5*60=150>>150 minutes.",
+    "L3": "Her family was in the bathroom 45 + 30 + 20 = <<45+30+20=95>>95 minutes.",
+    "L4": "Mrs. Parker has 150 minutes \u2013 95 minutes = <<150-95=245>>245 minutes in the bathroom.",
+    "FA": "#### 245"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -3232967906072884313,
+  "model_name": "google_gemini-2.5-flash"
+}

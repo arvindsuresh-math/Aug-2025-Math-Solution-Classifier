@@ -1,0 +1,63 @@
+{
+  "index": 6396,
+  "original_solution_mapping": {
+    "FA": "#### 144000",
+    "L1": "Since the pay for a person holding a degree is three times the amount paid for a diploma holder, Jared will earn 3*$4000 = $<<4000*3=12000>>12000 per month.",
+    "L2": "In a year with 12 months, Jared will earn a total of 12*12000 = <<12*12000=144000>>144000"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6396.\n    Returns: the total amount Jared will earn in a year.\n    \"\"\"\n    # L1\n    degree_multiplier = 3 # three times the amount paid to a diploma holder\n    diploma_pay_per_month = 4000 # $4000 per month\n    jared_pay_per_month = diploma_pay_per_month * degree_multiplier\n\n    # L2\n    months_per_year = 12 # WK\n    jared_pay_per_year = months_per_year * jared_pay_per_month\n\n    # FA\n    answer = jared_pay_per_year\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "jared_pay_per_month",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x316473c50>"
+  },
+  "correct_trace": {
+    "degree_multiplier": 3,
+    "diploma_pay_per_month": 4000,
+    "jared_pay_per_month": 12000,
+    "months_per_year": 12,
+    "jared_pay_per_year": 144000,
+    "answer": 144000
+  },
+  "flawed_trace": {
+    "degree_multiplier": 3,
+    "diploma_pay_per_month": 4000,
+    "jared_pay_per_month": 4003,
+    "months_per_year": 12,
+    "jared_pay_per_year": 48036,
+    "answer": 48036
+  },
+  "correct_value": 12000,
+  "flawed_value": 4003,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "jared_pay_per_month",
+      "question_inputs": [
+        "degree_multiplier",
+        "diploma_pay_per_month"
+      ],
+      "solution_line_template": "Since the pay for a person holding a degree is three times the amount paid for a diploma holder, Jared will earn {degree_multiplier}*${diploma_pay_per_month} = $<<{diploma_pay_per_month}*{degree_multiplier}={jared_pay_per_month}>>{jared_pay_per_month} per month."
+    },
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L2",
+      "output_variable": "jared_pay_per_year",
+      "question_inputs": [],
+      "solution_line_template": "In a year with {months_per_year} months, Jared will earn a total of {months_per_year}*{jared_pay_per_month} = <<{months_per_year}*{jared_pay_per_month}={jared_pay_per_year}>>{jared_pay_per_year}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since the pay for a person holding a degree is three times the amount paid for a diploma holder, Jared will earn 3*$4000 = $<<4000*3=4003>>4003 per month.",
+    "L2": "In a year with 12 months, Jared will earn a total of 12*4003 = <<12*4003=48036>>48036",
+    "FA": "#### 48036"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -9008802789753037754,
+  "model_name": "google_gemini-2.5-flash"
+}

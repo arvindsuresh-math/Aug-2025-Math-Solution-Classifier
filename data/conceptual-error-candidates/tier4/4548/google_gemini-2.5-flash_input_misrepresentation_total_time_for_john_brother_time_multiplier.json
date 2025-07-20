@@ -1,0 +1,79 @@
+{
+  "index": 4548,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "Reading 60% faster means John's brother takes 1+.6=1.6 times as long as John to read",
+    "L2": "So John reads a book in 8/1.6=<<8/1.6=5>>5 hours",
+    "L3": "So it would take John 5*3=<<5*3=15>>15 hours to read 3 books"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4548.\n    Returns: the total time it would take John to read 3 books.\n    \"\"\"\n    # L1\n    speed_increase_decimal = 0.6 # 60% faster\n    base_ratio = 1 # WK\n    brother_time_multiplier = base_ratio + speed_increase_decimal\n\n    # L2\n    brother_time_per_book = 8 # 8 hours to read a book\n    john_time_per_book = brother_time_per_book / brother_time_multiplier\n\n    # L3\n    num_books_john_reads = 3 # 3 books\n    total_time_for_john = john_time_per_book * num_books_john_reads\n\n    # FA\n    answer = total_time_for_john\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_time_for_john",
+    "operand_to_replace": "num_books_john_reads",
+    "replacement_variable": "brother_time_multiplier"
+  },
+  "correct_trace": {
+    "speed_increase_decimal": 0.6,
+    "base_ratio": 1,
+    "brother_time_multiplier": 1.6,
+    "brother_time_per_book": 8,
+    "john_time_per_book": 5.0,
+    "num_books_john_reads": 3,
+    "total_time_for_john": 15.0,
+    "answer": 15.0
+  },
+  "flawed_trace": {
+    "speed_increase_decimal": 0.6,
+    "base_ratio": 1,
+    "brother_time_multiplier": 1.6,
+    "brother_time_per_book": 8,
+    "john_time_per_book": 5.0,
+    "num_books_john_reads": 3,
+    "total_time_for_john": 8.0,
+    "answer": 8.0
+  },
+  "correct_value": 15.0,
+  "flawed_value": 8.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "base_ratio"
+      ],
+      "line_number": "L1",
+      "output_variable": "brother_time_multiplier",
+      "question_inputs": [
+        "speed_increase_decimal"
+      ],
+      "solution_line_template": "Reading 60% faster means John's brother takes {base_ratio}+{speed_increase_decimal}={brother_time_multiplier} times as long as John to read"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "john_time_per_book",
+      "question_inputs": [
+        "brother_time_per_book"
+      ],
+      "solution_line_template": "So John reads a book in {brother_time_per_book}/{brother_time_multiplier}=<<{brother_time_per_book}/{brother_time_multiplier}={john_time_per_book}>>{john_time_per_book} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_time_for_john",
+      "question_inputs": [
+        "num_books_john_reads"
+      ],
+      "solution_line_template": "So it would take John {john_time_per_book}*{num_books_john_reads}=<<{john_time_per_book}*{num_books_john_reads}={total_time_for_john}>>{total_time_for_john} hours to read {num_books_john_reads} books"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Reading 60% faster means John's brother takes 1+0.6=1.6 times as long as John to read",
+    "L2": "So John reads a book in 8/1.6=<<8/1.6=5>>5 hours",
+    "L3": "So it would take John 5*1.6=<<5*1.6=8>>8 hours to read 1.6 books",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'brother_time_multiplier' (1.6) was used instead of 'num_books_john_reads' (3).",
+  "repro_seed": -2412957338682081980,
+  "model_name": "google_gemini-2.5-flash"
+}

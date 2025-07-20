@@ -1,0 +1,77 @@
+{
+  "index": 3708,
+  "original_solution_mapping": {
+    "FA": "#### 88",
+    "L1": "Rudy first runs for 5 * 10 = <<5*10=50>>50 minutes.",
+    "L2": "Then Rudy runs for 4 * 9.5 = <<4*9.5=38>>38 minutes.",
+    "L3": "Rudy runs for a total length of 50 + 38 = <<50+38=88>>88 minutes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3708.\n    Returns: the total length of time Rudy runs.\n    \"\"\"\n    # L1\n    first_run_miles = 5 # runs 5 miles\n    first_run_rate = 10 # at a rate of 10 minutes per mile\n    first_run_duration = first_run_miles * first_run_rate\n\n    # L2\n    second_run_miles = 4 # runs 4 miles\n    second_run_rate = 9.5 # at a rate of 9.5 minutes per mile\n    second_run_duration = second_run_miles * second_run_rate\n\n    # L3\n    total_run_duration = first_run_duration + second_run_duration\n\n    # FA\n    answer = total_run_duration\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "second_run_duration",
+    "operand_to_replace": "second_run_rate",
+    "replacement_variable": "first_run_duration"
+  },
+  "correct_trace": {
+    "first_run_miles": 5,
+    "first_run_rate": 10,
+    "first_run_duration": 50,
+    "second_run_miles": 4,
+    "second_run_rate": 9.5,
+    "second_run_duration": 38.0,
+    "total_run_duration": 88.0,
+    "answer": 88.0
+  },
+  "flawed_trace": {
+    "first_run_miles": 5,
+    "first_run_rate": 10,
+    "first_run_duration": 50,
+    "second_run_miles": 4,
+    "second_run_rate": 9.5,
+    "second_run_duration": 200,
+    "total_run_duration": 250,
+    "answer": 250
+  },
+  "correct_value": 38.0,
+  "flawed_value": 200,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "first_run_duration",
+      "question_inputs": [
+        "first_run_miles",
+        "first_run_rate"
+      ],
+      "solution_line_template": "Rudy first runs for {first_run_miles} * {first_run_rate} = <<{first_run_miles}*{first_run_rate}={first_run_duration}>>{first_run_duration} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "second_run_duration",
+      "question_inputs": [
+        "second_run_miles",
+        "second_run_rate"
+      ],
+      "solution_line_template": "Then Rudy runs for {second_run_miles} * {second_run_rate} = <<{second_run_miles}*{second_run_rate}={second_run_duration}>>{second_run_duration} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_run_duration",
+      "question_inputs": [],
+      "solution_line_template": "Rudy runs for a total length of {first_run_duration} + {second_run_duration} = <<{first_run_duration}+{second_run_duration}={total_run_duration}>>{total_run_duration} minutes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Rudy first runs for 5 * 10 = <<5*10=50>>50 minutes.",
+    "L2": "Then Rudy runs for 4 * 50 = <<4*50=200>>200 minutes.",
+    "L3": "Rudy runs for a total length of 50 + 200 = <<50+200=250>>250 minutes",
+    "FA": "#### 250"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'first_run_duration' (50) was used instead of 'second_run_rate' (9.5).",
+  "repro_seed": 6706737118641889139,
+  "model_name": "google_gemini-2.5-flash"
+}

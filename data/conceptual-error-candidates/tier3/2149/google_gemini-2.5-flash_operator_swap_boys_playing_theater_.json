@@ -1,0 +1,64 @@
+{
+  "index": 2149,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "Half his friends are boys because 1 - 1/2 = 1/2",
+    "L2": "He plays with four boys because 8 x 1/2= <<8*1/2=4>>4"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2149.\n    Returns: the number of boys who play theater with Ocho.\n    \"\"\"\n    # L1\n    girls_fraction = Fraction(1, 2) # half are girls\n    total_fraction_of_friends = 1 # WK\n    boys_fraction = total_fraction_of_friends - girls_fraction\n\n    # L2\n    total_friends = 8 # Ocho has 8 friends\n    boys_playing_theater = total_friends * boys_fraction\n\n    # FA\n    answer = boys_playing_theater\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "boys_playing_theater",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x314aea2d0>"
+  },
+  "correct_trace": {
+    "girls_fraction": "1/2",
+    "total_fraction_of_friends": 1,
+    "boys_fraction": "1/2",
+    "total_friends": 8,
+    "boys_playing_theater": "4",
+    "answer": "4"
+  },
+  "flawed_trace": {
+    "girls_fraction": "1/2",
+    "total_fraction_of_friends": 1,
+    "boys_fraction": "1/2",
+    "total_friends": 8,
+    "boys_playing_theater": "17/2",
+    "answer": "17/2"
+  },
+  "correct_value": "4",
+  "flawed_value": "17/2",
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_fraction_of_friends"
+      ],
+      "line_number": "L1",
+      "output_variable": "boys_fraction",
+      "question_inputs": [
+        "girls_fraction"
+      ],
+      "solution_line_template": "Half his friends are boys because {total_fraction_of_friends} - {girls_fraction} = <<{total_fraction_of_friends}-{girls_fraction}={boys_fraction}>>{boys_fraction}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "boys_playing_theater",
+      "question_inputs": [
+        "total_friends"
+      ],
+      "solution_line_template": "He plays with four boys because {total_friends} x {boys_fraction}= <<{total_friends}*{boys_fraction}={boys_playing_theater}>>{boys_playing_theater}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Half his friends are boys because 1 - 1/2 = <<1-1/2=1/2>>1/2",
+    "L2": "He plays with four boys because 8 x 1/2= <<8*1/2=17/2>>17/2",
+    "FA": "#### 17/2"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -234711822683479559,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,69 @@
+{
+  "index": 1150,
+  "original_solution_mapping": {
+    "FA": "#### 1140",
+    "L1": "The driver travels (3 hours * 30 mph) + (25 mph * 4 hours) = <<(3*30)+(25*4)=190>>190 miles per day",
+    "L2": "From Monday to Saturday he travels in total 190 miles/day * 6 days = <<190*6=1140>>1,140 miles in a week"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1150.\n    Returns: the total miles the driver travels in a week.\n    \"\"\"\n    # L1\n    first_duration_hours = 3 # 3 hours\n    first_speed_mph = 30 # 30 miles per hour\n    second_speed_mph = 25 # 25 miles per hour\n    second_duration_hours = 4 # 4 hours\n    miles_per_day = (first_duration_hours * first_speed_mph) + (second_speed_mph * second_duration_hours)\n\n    # L2\n    delivery_days_per_week = 6 # from Monday to Saturday\n    total_miles_per_week = miles_per_day * delivery_days_per_week\n\n    # FA\n    answer = total_miles_per_week\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_miles_per_week",
+    "operand_to_replace": "delivery_days_per_week",
+    "replacement_variable": "miles_per_day"
+  },
+  "correct_trace": {
+    "first_duration_hours": 3,
+    "first_speed_mph": 30,
+    "second_speed_mph": 25,
+    "second_duration_hours": 4,
+    "miles_per_day": 190,
+    "delivery_days_per_week": 6,
+    "total_miles_per_week": 1140,
+    "answer": 1140
+  },
+  "flawed_trace": {
+    "first_duration_hours": 3,
+    "first_speed_mph": 30,
+    "second_speed_mph": 25,
+    "second_duration_hours": 4,
+    "miles_per_day": 190,
+    "delivery_days_per_week": 6,
+    "total_miles_per_week": 36100,
+    "answer": 36100
+  },
+  "correct_value": 1140,
+  "flawed_value": 36100,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "first_duration_hours",
+        "first_speed_mph",
+        "second_speed_mph",
+        "second_duration_hours"
+      ],
+      "WK_inputs": [],
+      "output_variable": "miles_per_day",
+      "solution_line_template": "The driver travels ({first_duration_hours} hours * {first_speed_mph} mph) + ({second_speed_mph} mph * {second_duration_hours} hours) = <<({first_duration_hours}*{first_speed_mph})+({second_speed_mph}*{second_duration_hours})={miles_per_day}>>{miles_per_day} miles per day"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "delivery_days_per_week"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_miles_per_week",
+      "solution_line_template": "From Monday to Saturday he travels in total {miles_per_day} miles/day * {delivery_days_per_week} days = <<{miles_per_day}*{delivery_days_per_week}={total_miles_per_week}>>{total_miles_per_week} miles in a week"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The driver travels (3 hours * 30 mph) + (25 mph * 4 hours) = <<(3*30)+(25*4)=190>>190 miles per day",
+    "L2": "From Monday to Saturday he travels in total 190 miles/day * 190 days = <<190*190=36100>>36100 miles in a week",
+    "FA": "#### 36100"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'miles_per_day' (190) was used instead of 'delivery_days_per_week' (6).",
+  "repro_seed": 1192319852799774816,
+  "model_name": "google_gemini-2.5-flash"
+}

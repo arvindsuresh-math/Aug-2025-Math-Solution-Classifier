@@ -1,0 +1,103 @@
+{
+  "index": 2853,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "Each episode takes 20*.5=<<20*.5=10>>10 minutes longer to film than it is",
+    "L2": "So it takes 20+10=<<20+10=30>>30 minutes",
+    "L3": "They are filming 5*4=<<5*4=20>>20 episodes",
+    "L4": "So it takes 20*30=<<20*30=600>>600 minutes",
+    "L5": "This is equivalent to 600 / 60 = <<600/60=10>>10 hours"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2853.\n    Returns: the total hours it would take to film the episodes.\n    \"\"\"\n    # L1\n    episode_length_minutes = 20 # Each episode is 20 minutes long\n    longer_filming_percentage = 0.5 # it takes 50% longer than that to film each episode\n    extra_filming_minutes = episode_length_minutes * longer_filming_percentage\n\n    # L2\n    total_filming_minutes_per_episode = episode_length_minutes + extra_filming_minutes\n\n    # L3\n    episodes_per_week = 5 # Each week they show 5 episodes\n    num_weeks = 4 # film 4 weeks of episodes\n    total_episodes_to_film = episodes_per_week * num_weeks\n\n    # L4\n    total_filming_minutes = total_episodes_to_film * total_filming_minutes_per_episode\n\n    # L5\n    minutes_per_hour = 60 # WK\n    total_filming_hours = total_filming_minutes / minutes_per_hour\n\n    # FA\n    answer = total_filming_hours\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_filming_hours",
+    "operand_to_replace": "minutes_per_hour",
+    "replacement_variable": "num_weeks"
+  },
+  "correct_trace": {
+    "episode_length_minutes": 20,
+    "longer_filming_percentage": 0.5,
+    "extra_filming_minutes": 10.0,
+    "total_filming_minutes_per_episode": 30.0,
+    "episodes_per_week": 5,
+    "num_weeks": 4,
+    "total_episodes_to_film": 20,
+    "total_filming_minutes": 600.0,
+    "minutes_per_hour": 60,
+    "total_filming_hours": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "episode_length_minutes": 20,
+    "longer_filming_percentage": 0.5,
+    "extra_filming_minutes": 10.0,
+    "total_filming_minutes_per_episode": 30.0,
+    "episodes_per_week": 5,
+    "num_weeks": 4,
+    "total_episodes_to_film": 20,
+    "total_filming_minutes": 600.0,
+    "minutes_per_hour": 60,
+    "total_filming_hours": 150.0,
+    "answer": 150.0
+  },
+  "correct_value": 10.0,
+  "flawed_value": 150.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "extra_filming_minutes",
+      "question_inputs": [
+        "episode_length_minutes",
+        "longer_filming_percentage"
+      ],
+      "solution_line_template": "Each episode takes {episode_length_minutes}*{longer_filming_percentage}=<<{episode_length_minutes}*{longer_filming_percentage}={extra_filming_minutes}>>{extra_filming_minutes} minutes longer to film than it is"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_filming_minutes_per_episode",
+      "question_inputs": [],
+      "solution_line_template": "So it takes {episode_length_minutes}+{extra_filming_minutes}=<<{episode_length_minutes}+{extra_filming_minutes}={total_filming_minutes_per_episode}>>{total_filming_minutes_per_episode} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_episodes_to_film",
+      "question_inputs": [
+        "episodes_per_week",
+        "num_weeks"
+      ],
+      "solution_line_template": "They are filming {episodes_per_week}*{num_weeks}=<<{episodes_per_week}*{num_weeks}={total_episodes_to_film}>>{total_episodes_to_film} episodes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_filming_minutes",
+      "question_inputs": [],
+      "solution_line_template": "So it takes {total_episodes_to_film}*{total_filming_minutes_per_episode}=<<{total_episodes_to_film}*{total_filming_minutes_per_episode}={total_filming_minutes}>>{total_filming_minutes} minutes"
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L5",
+      "output_variable": "total_filming_hours",
+      "question_inputs": [],
+      "solution_line_template": "This is equivalent to {total_filming_minutes} / {minutes_per_hour} = <<{total_filming_minutes}/{minutes_per_hour}={total_filming_hours}>>{total_filming_hours} hours"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each episode takes 20*0.5=<<20*0.5=10>>10 minutes longer to film than it is",
+    "L2": "So it takes 20+10=<<20+10=30>>30 minutes",
+    "L3": "They are filming 5*4=<<5*4=20>>20 episodes",
+    "L4": "So it takes 20*30=<<20*30=600>>600 minutes",
+    "L5": "This is equivalent to 600 / 4 = <<600/4=150>>150 hours",
+    "FA": "#### 150"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Input misrepresentation. The value for 'num_weeks' (4) was used instead of 'minutes_per_hour' (60).",
+  "repro_seed": -2955333716609384253,
+  "model_name": "google_gemini-2.5-flash"
+}

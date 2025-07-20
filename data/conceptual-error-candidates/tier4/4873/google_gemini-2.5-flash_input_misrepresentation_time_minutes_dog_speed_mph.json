@@ -1,0 +1,81 @@
+{
+  "index": 4873,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "The dog runs .4 miles per minute because 24 / 60 = <<24/60=.4>>.4",
+    "L2": "The rabbit runs .25 miles per minute because 15 / 60 = <<15/60=.25>>.25",
+    "L3": "We know that .4(Number of Minutes) = .25(Number of Minutes) + .6",
+    "L4": "Therefore .15(Number of Minutes) = .6",
+    "L5": "Therefore (Number of Minutes) = 4"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4873.\n    Returns: the time in minutes for the dog to catch up to the rabbit.\n    \"\"\"\n    # L1\n    dog_speed_mph = 24 # Erik's dog can run 24 miles per hour\n    minutes_per_hour = 60 # WK\n    dog_speed_mpm = dog_speed_mph / minutes_per_hour\n\n    # L2\n    rabbit_speed_mph = 15 # rabbit that can run 15 miles per hour\n    rabbit_speed_mpm = rabbit_speed_mph / minutes_per_hour\n\n    # L5\n    rabbit_head_start_miles = 0.6 # head start of .6 miles\n    time_minutes = rabbit_head_start_miles / (dog_speed_mpm - rabbit_speed_mpm)\n\n    # FA\n    answer = time_minutes\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "time_minutes",
+    "operand_to_replace": "rabbit_head_start_miles",
+    "replacement_variable": "dog_speed_mph"
+  },
+  "correct_trace": {
+    "dog_speed_mph": 24,
+    "minutes_per_hour": 60,
+    "dog_speed_mpm": 0.4,
+    "rabbit_speed_mph": 15,
+    "rabbit_speed_mpm": 0.25,
+    "rabbit_head_start_miles": 0.6,
+    "time_minutes": 3.999999999999999,
+    "answer": 3.999999999999999
+  },
+  "flawed_trace": {
+    "dog_speed_mph": 24,
+    "minutes_per_hour": 60,
+    "dog_speed_mpm": 0.4,
+    "rabbit_speed_mph": 15,
+    "rabbit_speed_mpm": 0.25,
+    "rabbit_head_start_miles": 0.6,
+    "time_minutes": 159.99999999999997,
+    "answer": 159.99999999999997
+  },
+  "correct_value": 3.999999999999999,
+  "flawed_value": 159.99999999999997,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "dog_speed_mpm",
+      "question_inputs": [
+        "dog_speed_mph"
+      ],
+      "solution_line_template": "The dog runs {dog_speed_mpm} miles per minute because {dog_speed_mph} / {minutes_per_hour} = <<{dog_speed_mph}/{minutes_per_hour}={dog_speed_mpm}>>{dog_speed_mpm}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "rabbit_speed_mpm",
+      "question_inputs": [
+        "rabbit_speed_mph"
+      ],
+      "solution_line_template": "The rabbit runs {rabbit_speed_mpm} miles per minute because {rabbit_speed_mph} / {minutes_per_hour} = <<{rabbit_speed_mph}/{minutes_per_hour}={rabbit_speed_mpm}>>{rabbit_speed_mpm}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "time_minutes",
+      "question_inputs": [
+        "rabbit_head_start_miles"
+      ],
+      "solution_line_template": "Therefore (Number of Minutes) = {time_minutes}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The dog runs 0.4 miles per minute because 24 / 60 = <<24/60=0.4>>0.4",
+    "L2": "The rabbit runs 0.25 miles per minute because 15 / 60 = <<15/60=0.25>>0.25",
+    "L5": "Therefore (Number of Minutes) = 160.0",
+    "FA": "#### 160.0"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Input misrepresentation. The value for 'dog_speed_mph' (24) was used instead of 'rabbit_head_start_miles' (0.6).",
+  "repro_seed": 2976182579363001734,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,99 @@
+{
+  "index": 7214,
+  "original_solution_mapping": {
+    "FA": "#### 97",
+    "L1": "The total cost of pizza, soda and jeans is $2.75 + $1.50 + $11.50 = $<<2.75+1.5+11.5=15.75>>15.75",
+    "L2": "He now has $40 - $15.75 = $<<40-15.75=24.25>>24.25 left.",
+    "L3": "There are 4 quarters in $1.00 so $24 is equal to 24 x 4 = <<24*4=96>>96 quarters.",
+    "L4": "25 cents is equal to 1 quarter.",
+    "L5": "Therefore, Phil has 96 quarters + 1 quarter = <<96+1=97>>97 quarters now."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7214.\n    Returns: the number of quarters Phil has left.\n    \"\"\"\n    # L1\n    pizza_cost = 2.75 # a slice of pizza for $2.75\n    soda_cost = 1.50 # a soda for $1.50\n    jeans_cost = 11.50 # a pair of jeans for $11.50\n    total_spent = pizza_cost + soda_cost + jeans_cost\n\n    # L2\n    initial_money = 40 # started his day with $40\n    money_left = initial_money - total_spent\n\n    # L3\n    quarters_per_dollar = 4 # 4 quarters in $1.00\n    money_left_whole_dollars = int(money_left)\n    quarters_from_dollars = money_left_whole_dollars * quarters_per_dollar\n\n    # L5\n    quarter_from_cents = 1 # 1 quarter (from 25 cents)\n    total_quarters = quarters_from_dollars + quarter_from_cents\n\n    # FA\n    answer = total_quarters\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_spent",
+    "operand_to_replace": "jeans_cost",
+    "replacement_variable": "pizza_cost"
+  },
+  "correct_trace": {
+    "pizza_cost": 2.75,
+    "soda_cost": 1.5,
+    "jeans_cost": 11.5,
+    "total_spent": 15.75,
+    "initial_money": 40,
+    "money_left": 24.25,
+    "quarters_per_dollar": 4,
+    "money_left_whole_dollars": 24,
+    "quarters_from_dollars": 96,
+    "quarter_from_cents": 1,
+    "total_quarters": 97,
+    "answer": 97
+  },
+  "flawed_trace": {
+    "pizza_cost": 2.75,
+    "soda_cost": 1.5,
+    "jeans_cost": 11.5,
+    "total_spent": 7.0,
+    "initial_money": 40,
+    "money_left": 33.0,
+    "quarters_per_dollar": 4,
+    "money_left_whole_dollars": 33,
+    "quarters_from_dollars": 132,
+    "quarter_from_cents": 1,
+    "total_quarters": 133,
+    "answer": 133
+  },
+  "correct_value": 15.75,
+  "flawed_value": 7.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_spent",
+      "question_inputs": [
+        "pizza_cost",
+        "soda_cost",
+        "jeans_cost"
+      ],
+      "solution_line_template": "The total cost of pizza, soda and jeans is ${pizza_cost} + ${soda_cost} + ${jeans_cost} = $<<{pizza_cost}+{soda_cost}+{jeans_cost}={total_spent}>>{total_spent}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_left",
+      "question_inputs": [
+        "initial_money"
+      ],
+      "solution_line_template": "He now has ${initial_money} - ${total_spent} = $<<{initial_money}-{total_spent}={money_left}>>{money_left} left."
+    },
+    {
+      "WK_inputs": [
+        "quarters_per_dollar"
+      ],
+      "line_number": "L3",
+      "output_variable": "quarters_from_dollars",
+      "question_inputs": [],
+      "solution_line_template": "There are {quarters_per_dollar} quarters in $1.00 so ${money_left_whole_dollars} is equal to {money_left_whole_dollars} x {quarters_per_dollar} = <<{money_left_whole_dollars}*{quarters_per_dollar}={quarters_from_dollars}>>{quarters_from_dollars} quarters."
+    },
+    {
+      "WK_inputs": [
+        "quarter_from_cents"
+      ],
+      "line_number": "L5",
+      "output_variable": "total_quarters",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, Phil has {quarters_from_dollars} quarters + {quarter_from_cents} quarter = <<{quarters_from_dollars}+{quarter_from_cents}={total_quarters}>>{total_quarters} quarters now."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total cost of pizza, soda and jeans is $2.75 + $1.5 + $2.75 = $<<2.75+1.5+2.75=7>>7",
+    "L2": "He now has $40 - $7 = $<<40-7=33>>33 left.",
+    "L3": "There are 4 quarters in $1.00 so $33 is equal to 33 x 4 = <<33*4=132>>132 quarters.",
+    "L5": "Therefore, Phil has 132 quarters + 1 quarter = <<132+1=133>>133 quarters now.",
+    "FA": "#### 133"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'pizza_cost' (2.75) was used instead of 'jeans_cost' (11.5).",
+  "repro_seed": -4320050347050781011,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,64 @@
+{
+  "index": 3940,
+  "original_solution_mapping": {
+    "FA": "#### 390",
+    "L1": "She hand washes them every 4 weeks and there are 52 weeks in a year so she washes them 52/4 = <<52/4=13>>13 times per year",
+    "L2": "It takes her 30 minutes to hand wash the pillowcases and she does this 13 times per year for a total of 30*13 = <<30*13=390>>390 minutes per year"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3940.\n    Returns: the total time Helen spends hand washing her pillowcases in a year.\n    \"\"\"\n    # L1\n    weeks_per_wash_cycle = 4 # Every 4 weeks\n    weeks_per_year = 52 # 52 weeks in a year\n    wash_frequency_per_year = weeks_per_year / weeks_per_wash_cycle\n\n    # L2\n    time_per_wash = 30 # It takes 30 minutes to hand wash all of them\n    total_time_per_year_minutes = time_per_wash * wash_frequency_per_year\n\n    # FA\n    answer = total_time_per_year_minutes\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "wash_frequency_per_year",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x3116e5ad0>"
+  },
+  "correct_trace": {
+    "weeks_per_wash_cycle": 4,
+    "weeks_per_year": 52,
+    "wash_frequency_per_year": 13.0,
+    "time_per_wash": 30,
+    "total_time_per_year_minutes": 390.0,
+    "answer": 390.0
+  },
+  "flawed_trace": {
+    "weeks_per_wash_cycle": 4,
+    "weeks_per_year": 52,
+    "wash_frequency_per_year": 208,
+    "time_per_wash": 30,
+    "total_time_per_year_minutes": 6240,
+    "answer": 6240
+  },
+  "correct_value": 13.0,
+  "flawed_value": 208,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "weeks_per_year"
+      ],
+      "line_number": "L1",
+      "output_variable": "wash_frequency_per_year",
+      "question_inputs": [
+        "weeks_per_wash_cycle"
+      ],
+      "solution_line_template": "She hand washes them every {weeks_per_wash_cycle} weeks and there are {weeks_per_year} weeks in a year so she washes them {weeks_per_year}/{weeks_per_wash_cycle} = <<{weeks_per_year}/{weeks_per_wash_cycle}={wash_frequency_per_year}>>{wash_frequency_per_year} times per year"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_time_per_year_minutes",
+      "question_inputs": [
+        "time_per_wash"
+      ],
+      "solution_line_template": "It takes her {time_per_wash} minutes to hand wash the pillowcases and she does this {wash_frequency_per_year} times per year for a total of {time_per_wash}*{wash_frequency_per_year} = <<{time_per_wash}*{wash_frequency_per_year}={total_time_per_year_minutes}>>{total_time_per_year_minutes} minutes per year"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She hand washes them every 4 weeks and there are 52 weeks in a year so she washes them 52/4 = <<52/4=208>>208 times per year",
+    "L2": "It takes her 30 minutes to hand wash the pillowcases and she does this 208 times per year for a total of 30*208 = <<30*208=6240>>6240 minutes per year",
+    "FA": "#### 6240"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -3516870662665044771,
+  "model_name": "google_gemini-2.5-flash"
+}

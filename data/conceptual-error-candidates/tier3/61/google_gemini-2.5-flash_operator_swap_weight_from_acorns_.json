@@ -1,0 +1,103 @@
+{
+  "index": 61,
+  "original_solution_mapping": {
+    "FA": "#### 200",
+    "L1": "The bear gained 1 / 5 * 1000 = <<1/5*1000=200>>200 pounds from berries.",
+    "L2": "It gained 2 * 200 = <<2*200=400>>400 pounds from acorns.",
+    "L3": "It still needed 1000 - 200 - 400 = <<1000-200-400=400>>400 pounds.",
+    "L4": "Thus, it gained 400 / 2 = <<400/2=200>>200 pounds from salmon.",
+    "L5": "Therefore, the bear gained 400 - 200 = <<400-200=200>>200 pounds from small animals."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 61.\n    Returns: the pounds gained from eating small animals.\n    \"\"\"\n    # L1\n    total_weight_needed = 1000 # needs to gain 1000 pounds\n    berry_fraction_numerator = 1 # a fifth of the weight\n    berry_fraction_denominator = 5 # a fifth of the weight\n    weight_from_berries = berry_fraction_numerator / berry_fraction_denominator * total_weight_needed\n\n    # L2\n    acorn_multiplier = 2 # twice that amount from acorns\n    weight_from_acorns = acorn_multiplier * weight_from_berries\n\n    # L3\n    remaining_weight_after_berries_acorns = total_weight_needed - weight_from_berries - weight_from_acorns\n\n    # L4\n    salmon_divisor = 2 # half of the remaining weight\n    weight_from_salmon = remaining_weight_after_berries_acorns / salmon_divisor\n\n    # L5\n    weight_from_small_animals = remaining_weight_after_berries_acorns - weight_from_salmon\n\n    # FA\n    answer = weight_from_small_animals\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "weight_from_acorns",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x316c11e90>"
+  },
+  "correct_trace": {
+    "total_weight_needed": 1000,
+    "berry_fraction_numerator": 1,
+    "berry_fraction_denominator": 5,
+    "weight_from_berries": 200.0,
+    "acorn_multiplier": 2,
+    "weight_from_acorns": 400.0,
+    "remaining_weight_after_berries_acorns": 400.0,
+    "salmon_divisor": 2,
+    "weight_from_salmon": 200.0,
+    "weight_from_small_animals": 200.0,
+    "answer": 200.0
+  },
+  "flawed_trace": {
+    "total_weight_needed": 1000,
+    "berry_fraction_numerator": 1,
+    "berry_fraction_denominator": 5,
+    "weight_from_berries": 200.0,
+    "acorn_multiplier": 2,
+    "weight_from_acorns": 202.0,
+    "remaining_weight_after_berries_acorns": 598.0,
+    "salmon_divisor": 2,
+    "weight_from_salmon": 299.0,
+    "weight_from_small_animals": 299.0,
+    "answer": 299.0
+  },
+  "correct_value": 400.0,
+  "flawed_value": 202.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "weight_from_berries",
+      "question_inputs": [
+        "total_weight_needed",
+        "berry_fraction_numerator",
+        "berry_fraction_denominator"
+      ],
+      "solution_line_template": "The bear gained {berry_fraction_numerator} / {berry_fraction_denominator} * {total_weight_needed} = <<{berry_fraction_numerator}/{berry_fraction_denominator}*{total_weight_needed}={weight_from_berries}>>{weight_from_berries} pounds from berries."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "weight_from_acorns",
+      "question_inputs": [
+        "acorn_multiplier"
+      ],
+      "solution_line_template": "It gained {acorn_multiplier} * {weight_from_berries} = <<{acorn_multiplier}*{weight_from_berries}={weight_from_acorns}>>{weight_from_acorns} pounds from acorns."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_weight_after_berries_acorns",
+      "question_inputs": [],
+      "solution_line_template": "It still needed {total_weight_needed} - {weight_from_berries} - {weight_from_acorns} = <<{total_weight_needed}-{weight_from_berries}-{weight_from_acorns}={remaining_weight_after_berries_acorns}>>{remaining_weight_after_berries_acorns} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "weight_from_salmon",
+      "question_inputs": [
+        "salmon_divisor"
+      ],
+      "solution_line_template": "Thus, it gained {remaining_weight_after_berries_acorns} / {salmon_divisor} = <<{remaining_weight_after_berries_acorns}/{salmon_divisor}={weight_from_salmon}>>{weight_from_salmon} pounds from salmon."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "weight_from_small_animals",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, the bear gained {remaining_weight_after_berries_acorns} - {weight_from_salmon} = <<{remaining_weight_after_berries_acorns}-{weight_from_salmon}={weight_from_small_animals}>>{weight_from_small_animals} pounds from small animals."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The bear gained 1 / 5 * 1000 = <<1/5*1000=200>>200 pounds from berries.",
+    "L2": "It gained 2 * 200 = <<2*200=202>>202 pounds from acorns.",
+    "L3": "It still needed 1000 - 200 - 202 = <<1000-200-202=598>>598 pounds.",
+    "L4": "Thus, it gained 598 / 2 = <<598/2=299>>299 pounds from salmon.",
+    "L5": "Therefore, the bear gained 598 - 299 = <<598-299=299>>299 pounds from small animals.",
+    "FA": "#### 299"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -2762943420522009090,
+  "model_name": "google_gemini-2.5-flash"
+}

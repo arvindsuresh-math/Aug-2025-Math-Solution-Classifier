@@ -1,0 +1,63 @@
+{
+  "index": 7100,
+  "original_solution_mapping": {
+    "FA": "#### 25600",
+    "L1": "Gunther can type 480 / 3 = <<480/3=160>>160 sets of 160 words per 3 minutes.",
+    "L2": "Therefore, he can type 160 x 160 = <<160*160=25600>>25,600 words per day."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7100.\n    Returns: the total number of words Gunther can type in a working day.\n    \"\"\"\n    # L1\n    total_working_minutes_per_day = 480 # he works 480 minutes per day\n    minutes_per_set = 3 # every 3 minutes\n    sets_of_words_per_day = total_working_minutes_per_day / minutes_per_set\n\n    # L2\n    words_per_set = 160 # 160 words every 3 minutes\n    total_words_per_day = words_per_set * sets_of_words_per_day\n\n    # FA\n    answer = total_words_per_day\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "sets_of_words_per_day",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x31b612bd0>"
+  },
+  "correct_trace": {
+    "total_working_minutes_per_day": 480,
+    "minutes_per_set": 3,
+    "sets_of_words_per_day": 160.0,
+    "words_per_set": 160,
+    "total_words_per_day": 25600.0,
+    "answer": 25600.0
+  },
+  "flawed_trace": {
+    "total_working_minutes_per_day": 480,
+    "minutes_per_set": 3,
+    "sets_of_words_per_day": 1440,
+    "words_per_set": 160,
+    "total_words_per_day": 230400,
+    "answer": 230400
+  },
+  "correct_value": 160.0,
+  "flawed_value": 1440,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "sets_of_words_per_day",
+      "question_inputs": [
+        "total_working_minutes_per_day",
+        "minutes_per_set"
+      ],
+      "solution_line_template": "Gunther can type {total_working_minutes_per_day} / {minutes_per_set} = <<{total_working_minutes_per_day}/{minutes_per_set}={sets_of_words_per_day}>>{sets_of_words_per_day} sets of 160 words per 3 minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_words_per_day",
+      "question_inputs": [
+        "words_per_set"
+      ],
+      "solution_line_template": "Therefore, he can type {words_per_set} x {sets_of_words_per_day} = <<{words_per_set}*{sets_of_words_per_day}={total_words_per_day}>>{total_words_per_day} words per day."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Gunther can type 480 / 3 = <<480/3=1440>>1440 sets of 160 words per 3 minutes.",
+    "L2": "Therefore, he can type 160 x 1440 = <<160*1440=230400>>230400 words per day.",
+    "FA": "#### 230400"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -5449423501509318908,
+  "model_name": "google_gemini-2.5-flash"
+}

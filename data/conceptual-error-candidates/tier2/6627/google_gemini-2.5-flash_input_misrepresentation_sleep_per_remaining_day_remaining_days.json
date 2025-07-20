@@ -1,0 +1,103 @@
+{
+  "index": 6627,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "For the 2 days he gets 2*3=<<2*3=6>>6 hours",
+    "L2": "He gets 60% of the recommended amount for 7-2=5 days",
+    "L3": "On those days he gets 8*.6=<<8*.6=4.8>>4.8 hours",
+    "L4": "So he gets 5*4.8=<<5*4.8=24>>24 hours",
+    "L5": "So he gets a total of 24+6=<<24+6=30>>30 hours of sleep"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6627.\n    Returns: the total amount of sleep John got this week.\n    \"\"\"\n    # L1\n    days_with_low_sleep = 2 # 2 of the days\n    hours_low_sleep_per_day = 3 # 3 hours of sleep\n    total_low_sleep_hours = days_with_low_sleep * hours_low_sleep_per_day\n\n    # L2\n    days_in_week = 7 # WK\n    remaining_days = days_in_week - days_with_low_sleep\n\n    # L3\n    recommended_sleep_hours = 8 # recommended 8 hours of sleep\n    percentage_of_recommended_sleep = 0.6 # 60% of the recommended\n    sleep_per_remaining_day = recommended_sleep_hours * percentage_of_recommended_sleep\n\n    # L4\n    total_remaining_sleep_hours = remaining_days * sleep_per_remaining_day\n\n    # L5\n    total_sleep_this_week = total_remaining_sleep_hours + total_low_sleep_hours\n\n    # FA\n    answer = total_sleep_this_week\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "sleep_per_remaining_day",
+    "operand_to_replace": "percentage_of_recommended_sleep",
+    "replacement_variable": "remaining_days"
+  },
+  "correct_trace": {
+    "days_with_low_sleep": 2,
+    "hours_low_sleep_per_day": 3,
+    "total_low_sleep_hours": 6,
+    "days_in_week": 7,
+    "remaining_days": 5,
+    "recommended_sleep_hours": 8,
+    "percentage_of_recommended_sleep": 0.6,
+    "sleep_per_remaining_day": 4.8,
+    "total_remaining_sleep_hours": 24.0,
+    "total_sleep_this_week": 30.0,
+    "answer": 30.0
+  },
+  "flawed_trace": {
+    "days_with_low_sleep": 2,
+    "hours_low_sleep_per_day": 3,
+    "total_low_sleep_hours": 6,
+    "days_in_week": 7,
+    "remaining_days": 5,
+    "recommended_sleep_hours": 8,
+    "percentage_of_recommended_sleep": 0.6,
+    "sleep_per_remaining_day": 40,
+    "total_remaining_sleep_hours": 200,
+    "total_sleep_this_week": 206,
+    "answer": 206
+  },
+  "correct_value": 4.8,
+  "flawed_value": 40,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_low_sleep_hours",
+      "question_inputs": [
+        "days_with_low_sleep",
+        "hours_low_sleep_per_day"
+      ],
+      "solution_line_template": "For the {days_with_low_sleep} days he gets {days_with_low_sleep}*{hours_low_sleep_per_day}=<<{days_with_low_sleep}*{hours_low_sleep_per_day}={total_low_sleep_hours}>>{total_low_sleep_hours} hours"
+    },
+    {
+      "WK_inputs": [
+        "days_in_week"
+      ],
+      "line_number": "L2",
+      "output_variable": "remaining_days",
+      "question_inputs": [],
+      "solution_line_template": "He gets 60% of the recommended amount for {days_in_week}-{days_with_low_sleep}={remaining_days} days"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "sleep_per_remaining_day",
+      "question_inputs": [
+        "recommended_sleep_hours",
+        "percentage_of_recommended_sleep"
+      ],
+      "solution_line_template": "On those days he gets {recommended_sleep_hours}*{percentage_of_recommended_sleep}=<<{recommended_sleep_hours}*{percentage_of_recommended_sleep}={sleep_per_remaining_day}>>{sleep_per_remaining_day} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_remaining_sleep_hours",
+      "question_inputs": [],
+      "solution_line_template": "So he gets {remaining_days}*{sleep_per_remaining_day}=<<{remaining_days}*{sleep_per_remaining_day}={total_remaining_sleep_hours}>>{total_remaining_sleep_hours} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_sleep_this_week",
+      "question_inputs": [],
+      "solution_line_template": "So he gets a total of {total_remaining_sleep_hours}+{total_low_sleep_hours}=<<{total_remaining_sleep_hours}+{total_low_sleep_hours}={total_sleep_this_week}>>{total_sleep_this_week} hours of sleep"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "For the 2 days he gets 2*3=<<2*3=6>>6 hours",
+    "L2": "He gets 60% of the recommended amount for 7-2=5 days",
+    "L3": "On those days he gets 8*5=<<8*5=40>>40 hours",
+    "L4": "So he gets 5*40=<<5*40=200>>200 hours",
+    "L5": "So he gets a total of 200+6=<<200+6=206>>206 hours of sleep",
+    "FA": "#### 206"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'remaining_days' (5) was used instead of 'percentage_of_recommended_sleep' (0.6).",
+  "repro_seed": 8312737566698810923,
+  "model_name": "google_gemini-2.5-flash"
+}

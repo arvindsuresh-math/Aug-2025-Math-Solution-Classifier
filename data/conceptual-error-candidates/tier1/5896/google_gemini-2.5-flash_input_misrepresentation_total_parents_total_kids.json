@@ -1,0 +1,63 @@
+{
+  "index": 5896,
+  "original_solution_mapping": {
+    "FA": "#### 28",
+    "L1": "There are 6 + 8 = <<6+8=14>>14 kids in the school play.",
+    "L2": "Each child has 2 parents attending the play and therefore there are 14 x 2 = <<2*14=28>>28 parents in the auditorium."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5896.\n    Returns: the total number of parents in the auditorium.\n    \"\"\"\n    # L1\n    num_girls = 6 # 6 girls\n    num_boys = 8 # 8 boys\n    total_kids = num_girls + num_boys\n\n    # L2\n    parents_per_kid = 2 # both parents of each kid\n    total_parents = total_kids * parents_per_kid\n\n    # FA\n    answer = total_parents\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_parents",
+    "operand_to_replace": "parents_per_kid",
+    "replacement_variable": "total_kids"
+  },
+  "correct_trace": {
+    "num_girls": 6,
+    "num_boys": 8,
+    "total_kids": 14,
+    "parents_per_kid": 2,
+    "total_parents": 28,
+    "answer": 28
+  },
+  "flawed_trace": {
+    "num_girls": 6,
+    "num_boys": 8,
+    "total_kids": 14,
+    "parents_per_kid": 2,
+    "total_parents": 196,
+    "answer": 196
+  },
+  "correct_value": 28,
+  "flawed_value": 196,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_kids",
+      "question_inputs": [
+        "num_girls",
+        "num_boys"
+      ],
+      "solution_line_template": "There are {num_girls} + {num_boys} = <<{num_girls}+{num_boys}={total_kids}>>{total_kids} kids in the school play."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_parents",
+      "question_inputs": [
+        "parents_per_kid"
+      ],
+      "solution_line_template": "Each child has {parents_per_kid} parents attending the play and therefore there are {total_kids} x {parents_per_kid} = <<{parents_per_kid}*{total_kids}={total_parents}>>{total_parents} parents in the auditorium."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 6 + 8 = <<6+8=14>>14 kids in the school play.",
+    "L2": "Each child has 14 parents attending the play and therefore there are 14 x 14 = <<14*14=196>>196 parents in the auditorium.",
+    "FA": "#### 196"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_kids' (14) was used instead of 'parents_per_kid' (2).",
+  "repro_seed": 3177184172987525643,
+  "model_name": "google_gemini-2.5-flash"
+}

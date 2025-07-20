@@ -1,0 +1,110 @@
+{
+  "index": 6701,
+  "original_solution_mapping": {
+    "FA": "#### 200",
+    "L1": "5 nights a week she sleeps for 6 hours so she sleeps 5*6 = <<5*6=30>>30 hours",
+    "L2": "2 nights a week she sleeps for 9 hours so she sleeps 2*9 = <<2*9=18>>18 hours",
+    "L3": "2 days a week she naps for 1 hour so she sleeps 2*1 = <<2*1=2>>2 hours",
+    "L4": "Over 1 week she sleeps 30+18+2 = <<30+18+2=50>>50 hours",
+    "L5": "Over 4 weeks she sleeps 4*50 = <<4*50=200>>200 hours"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6701.\n    Returns: the total amount of sleep Prudence gets in 4 weeks.\n    \"\"\"\n    # L1\n    nights_sleep_6_hours = 5 # From Sunday to Thursday, Prudence sleeps 6 hours a night.\n    hours_sleep_weekday = 6 # sleeps 6 hours a night\n    hours_from_weekday_sleep = nights_sleep_6_hours * hours_sleep_weekday\n\n    # L2\n    nights_sleep_9_hours = 2 # Friday and Saturday she sleeps for 9 hours a night.\n    hours_sleep_weekend_night = 9 # sleeps for 9 hours a night\n    hours_from_weekend_night_sleep = nights_sleep_9_hours * hours_sleep_weekend_night\n\n    # L3\n    days_nap = 2 # on Saturday and Sunday\n    hours_nap_per_day = 1 # a 1-hour nap\n    hours_from_nap = days_nap * hours_nap_per_day\n\n    # L4\n    total_sleep_per_week = hours_from_weekday_sleep + hours_from_weekend_night_sleep + hours_from_nap\n\n    # L5\n    num_weeks = 4 # in 4 weeks\n    total_sleep_4_weeks = num_weeks * total_sleep_per_week\n\n    # FA\n    answer = total_sleep_4_weeks\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "hours_from_weekend_night_sleep",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x3143487d0>"
+  },
+  "correct_trace": {
+    "nights_sleep_6_hours": 5,
+    "hours_sleep_weekday": 6,
+    "hours_from_weekday_sleep": 30,
+    "nights_sleep_9_hours": 2,
+    "hours_sleep_weekend_night": 9,
+    "hours_from_weekend_night_sleep": 18,
+    "days_nap": 2,
+    "hours_nap_per_day": 1,
+    "hours_from_nap": 2,
+    "total_sleep_per_week": 50,
+    "num_weeks": 4,
+    "total_sleep_4_weeks": 200,
+    "answer": 200
+  },
+  "flawed_trace": {
+    "nights_sleep_6_hours": 5,
+    "hours_sleep_weekday": 6,
+    "hours_from_weekday_sleep": 30,
+    "nights_sleep_9_hours": 2,
+    "hours_sleep_weekend_night": 9,
+    "hours_from_weekend_night_sleep": 11,
+    "days_nap": 2,
+    "hours_nap_per_day": 1,
+    "hours_from_nap": 2,
+    "total_sleep_per_week": 43,
+    "num_weeks": 4,
+    "total_sleep_4_weeks": 172,
+    "answer": 172
+  },
+  "correct_value": 18,
+  "flawed_value": 11,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "hours_from_weekday_sleep",
+      "question_inputs": [
+        "nights_sleep_6_hours",
+        "hours_sleep_weekday"
+      ],
+      "solution_line_template": "{nights_sleep_6_hours} nights a week she sleeps for {hours_sleep_weekday} hours so she sleeps {nights_sleep_6_hours}*{hours_sleep_weekday} = <<{nights_sleep_6_hours}*{hours_sleep_weekday}={hours_from_weekday_sleep}>>{hours_from_weekday_sleep} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "hours_from_weekend_night_sleep",
+      "question_inputs": [
+        "nights_sleep_9_hours",
+        "hours_sleep_weekend_night"
+      ],
+      "solution_line_template": "{nights_sleep_9_hours} nights a week she sleeps for {hours_sleep_weekend_night} hours so she sleeps {nights_sleep_9_hours}*{hours_sleep_weekend_night} = <<{nights_sleep_9_hours}*{hours_sleep_weekend_night}={hours_from_weekend_night_sleep}>>{hours_from_weekend_night_sleep} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "hours_from_nap",
+      "question_inputs": [
+        "days_nap",
+        "hours_nap_per_day"
+      ],
+      "solution_line_template": "{days_nap} days a week she naps for {hours_nap_per_day} hour so she sleeps {days_nap}*{hours_nap_per_day} = <<{days_nap}*{hours_nap_per_day}={hours_from_nap}>>{hours_from_nap} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_sleep_per_week",
+      "question_inputs": [],
+      "solution_line_template": "Over 1 week she sleeps {hours_from_weekday_sleep}+{hours_from_weekend_night_sleep}+{hours_from_nap} = <<{hours_from_weekday_sleep}+{hours_from_weekend_night_sleep}+{hours_from_nap}={total_sleep_per_week}>>{total_sleep_per_week} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_sleep_4_weeks",
+      "question_inputs": [
+        "num_weeks"
+      ],
+      "solution_line_template": "Over {num_weeks} weeks she sleeps {num_weeks}*{total_sleep_per_week} = <<{num_weeks}*{total_sleep_per_week}={total_sleep_4_weeks}>>{total_sleep_4_weeks} hours"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "5 nights a week she sleeps for 6 hours so she sleeps 5*6 = <<5*6=30>>30 hours",
+    "L2": "2 nights a week she sleeps for 9 hours so she sleeps 2*9 = <<2*9=11>>11 hours",
+    "L3": "2 days a week she naps for 1 hour so she sleeps 2*1 = <<2*1=2>>2 hours",
+    "L4": "Over 1 week she sleeps 30+11+2 = <<30+11+2=43>>43 hours",
+    "L5": "Over 4 weeks she sleeps 4*43 = <<4*43=172>>172 hours",
+    "FA": "#### 172"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -8071577698549824666,
+  "model_name": "google_gemini-2.5-flash"
+}

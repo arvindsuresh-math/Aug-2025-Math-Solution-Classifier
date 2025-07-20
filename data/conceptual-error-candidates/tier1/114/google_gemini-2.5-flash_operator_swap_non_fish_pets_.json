@@ -1,0 +1,74 @@
+{
+  "index": 114,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "If Ed has 2 dogs and 3 cats he has in total 2+3 = <<2+3=5>>5 pets that are not fish",
+    "L2": "If Ed has twice as many cats and dogs combined he has 2*5 = <<2*5=10>>10 fish",
+    "L3": "Therefore, in total Ed has 5+10 = <<5+10=15>>15 pets"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 114.\n    Returns: the total number of pets Ed has.\n    \"\"\"\n    # L1\n    dogs = 2 # 2 dogs\n    cats = 3 # 3 cats\n    non_fish_pets = dogs + cats\n\n    # L2\n    multiplier_for_fish = 2 # twice as many fish\n    fish = multiplier_for_fish * non_fish_pets\n\n    # L3\n    total_pets = non_fish_pets + fish\n\n    # FA\n    answer = total_pets\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "non_fish_pets",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x30f1d6550>"
+  },
+  "correct_trace": {
+    "dogs": 2,
+    "cats": 3,
+    "non_fish_pets": 5,
+    "multiplier_for_fish": 2,
+    "fish": 10,
+    "total_pets": 15,
+    "answer": 15
+  },
+  "flawed_trace": {
+    "dogs": 2,
+    "cats": 3,
+    "non_fish_pets": 6,
+    "multiplier_for_fish": 2,
+    "fish": 12,
+    "total_pets": 18,
+    "answer": 18
+  },
+  "correct_value": 5,
+  "flawed_value": 6,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "dogs",
+        "cats"
+      ],
+      "WK_inputs": [],
+      "output_variable": "non_fish_pets",
+      "solution_line_template": "If Ed has {dogs} dogs and {cats} cats he has in total {dogs}+{cats} = <<{dogs}+{cats}={non_fish_pets}>>{non_fish_pets} pets that are not fish"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "multiplier_for_fish"
+      ],
+      "WK_inputs": [],
+      "output_variable": "fish",
+      "solution_line_template": "If Ed has twice as many cats and dogs combined he has {multiplier_for_fish}*{non_fish_pets} = <<{multiplier_for_fish}*{non_fish_pets}={fish}>>{fish} fish"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_pets",
+      "solution_line_template": "Therefore, in total Ed has {non_fish_pets}+{fish} = <<{non_fish_pets}+{fish}={total_pets}>>{total_pets} pets"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Ed has 2 dogs and 3 cats he has in total 2+3 = <<2+3=6>>6 pets that are not fish",
+    "L2": "If Ed has twice as many cats and dogs combined he has 2*6 = <<2*6=12>>12 fish",
+    "L3": "Therefore, in total Ed has 6+12 = <<6+12=18>>18 pets",
+    "FA": "#### 18"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 381025171993635604,
+  "model_name": "google_gemini-2.5-flash"
+}

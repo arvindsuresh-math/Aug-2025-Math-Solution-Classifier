@@ -1,0 +1,96 @@
+{
+  "index": 3194,
+  "original_solution_mapping": {
+    "FA": "#### 100",
+    "L1": "There are 1000 x 30/100 = <<1000*30/100=300>>300 people who are married.",
+    "L2": "There are 1000 x 50/100 = <<1000*50/100=500>>500 people who are single.",
+    "L3": "So, there are a total of 300 + 500 = <<300+500=800>>800 that are either married or single.",
+    "L4": "This means, 1000 - 800 = <<1000-800=200>>200 are children.",
+    "L5": "Therefore, there are 300 - 200 = <<300-200=100>>100 more married people than children."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3194.\n    Returns: the difference in the number of married people and children.\n    \"\"\"\n    # L1\n    total_guests = 1000 # 1000 guests\n    married_percentage = Fraction(30, 100) # 30% of the guests are married\n    married_guests = total_guests * married_percentage\n\n    # L2\n    single_percentage = Fraction(50, 100) # 50% are single\n    single_guests = total_guests * single_percentage\n\n    # L3\n    married_and_single_guests = married_guests + single_guests\n\n    # L4\n    children_guests = total_guests - married_and_single_guests\n\n    # L5\n    difference_married_children = married_guests - children_guests\n\n    # FA\n    answer = difference_married_children\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "difference_married_children",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x318569490>"
+  },
+  "correct_trace": {
+    "total_guests": 1000,
+    "married_percentage": "3/10",
+    "married_guests": "300",
+    "single_percentage": "1/2",
+    "single_guests": "500",
+    "married_and_single_guests": "800",
+    "children_guests": "200",
+    "difference_married_children": "100",
+    "answer": "100"
+  },
+  "flawed_trace": {
+    "total_guests": 1000,
+    "married_percentage": "3/10",
+    "married_guests": "300",
+    "single_percentage": "1/2",
+    "single_guests": "500",
+    "married_and_single_guests": "800",
+    "children_guests": "200",
+    "difference_married_children": "3/2",
+    "answer": "3/2"
+  },
+  "correct_value": "100",
+  "flawed_value": "3/2",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "married_guests",
+      "question_inputs": [
+        "total_guests",
+        "married_percentage"
+      ],
+      "solution_line_template": "There are {total_guests} x {married_percentage} = <<{total_guests}*{married_percentage}={married_guests}>>{married_guests} people who are married."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "single_guests",
+      "question_inputs": [
+        "single_percentage"
+      ],
+      "solution_line_template": "There are {total_guests} x {single_percentage} = <<{total_guests}*{single_percentage}={single_guests}>>{single_guests} people who are single."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "married_and_single_guests",
+      "question_inputs": [],
+      "solution_line_template": "So, there are a total of {married_guests} + {single_guests} = <<{married_guests}+{single_guests}={married_and_single_guests}>>{married_and_single_guests} that are either married or single."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "children_guests",
+      "question_inputs": [],
+      "solution_line_template": "This means, {total_guests} - {married_and_single_guests} = <<{total_guests}-{married_and_single_guests}={children_guests}>>{children_guests} are children."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "difference_married_children",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, there are {married_guests} - {children_guests} = <<{married_guests}-{children_guests}={difference_married_children}>>{difference_married_children} more married people than children."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 1000 x 30/100 = <<1000*30/100=300>>300 people who are married.",
+    "L2": "There are 1000 x 50/100 = <<1000*50/100=500>>500 people who are single.",
+    "L3": "So, there are a total of 300 + 500 = <<300+500=800>>800 that are either married or single.",
+    "L4": "This means, 1000 - 800 = <<1000-800=200>>200 are children.",
+    "L5": "Therefore, there are 300 - 200 = <<300-200=3/2>>3/2 more married people than children.",
+    "FA": "#### 3/2"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": -570149179562137016,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 5941,
+  "original_solution_mapping": {
+    "FA": "#### 148",
+    "L1": "Today Aunt May's cows gave her 365 gallons + 380 = <<365+380=745>>745 gallons of milk.",
+    "L2": "She had 745 gallons - 612 gallons sold to the ice cream factory = <<745-612=133>>133 gallons of milk left.",
+    "L3": "Combined with the leftover from yesterday, Aunt May has 133 gallons + 15 gallons = <<133+15=148>>148 gallons of milk."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5941.\n    Returns: the number of gallons of milk Aunt May has left.\n    \"\"\"\n    # L1\n    morning_milk = 365 # This morning she got 365 gallons of milk\n    evening_milk = 380 # This evening she got 380 gallons\n    total_milk_today = morning_milk + evening_milk\n\n    # L2\n    sold_to_factory = 612 # sold 612 gallons to the local ice cream factory\n    milk_after_sale = total_milk_today - sold_to_factory\n\n    # L3\n    leftover_yesterday = 15 # 15 gallons left over from yesterday\n    final_milk_left = milk_after_sale + leftover_yesterday\n\n    # FA\n    answer = final_milk_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "final_milk_left",
+    "operand_to_replace": "milk_after_sale",
+    "replacement_variable": "total_milk_today"
+  },
+  "correct_trace": {
+    "morning_milk": 365,
+    "evening_milk": 380,
+    "total_milk_today": 745,
+    "sold_to_factory": 612,
+    "milk_after_sale": 133,
+    "leftover_yesterday": 15,
+    "final_milk_left": 148,
+    "answer": 148
+  },
+  "flawed_trace": {
+    "morning_milk": 365,
+    "evening_milk": 380,
+    "total_milk_today": 745,
+    "sold_to_factory": 612,
+    "milk_after_sale": 133,
+    "leftover_yesterday": 15,
+    "final_milk_left": 760,
+    "answer": 760
+  },
+  "correct_value": 148,
+  "flawed_value": 760,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_milk_today",
+      "question_inputs": [
+        "morning_milk",
+        "evening_milk"
+      ],
+      "solution_line_template": "Today Aunt May's cows gave her {morning_milk} gallons + {evening_milk} = <<{morning_milk}+{evening_milk}={total_milk_today}>>{total_milk_today} gallons of milk."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "milk_after_sale",
+      "question_inputs": [
+        "sold_to_factory"
+      ],
+      "solution_line_template": "She had {total_milk_today} gallons - {sold_to_factory} gallons sold to the ice cream factory = <<{total_milk_today}-{sold_to_factory}={milk_after_sale}>>{milk_after_sale} gallons of milk left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_milk_left",
+      "question_inputs": [
+        "leftover_yesterday"
+      ],
+      "solution_line_template": "Combined with the leftover from yesterday, Aunt May has {milk_after_sale} gallons + {leftover_yesterday} gallons = <<{milk_after_sale}+{leftover_yesterday}={final_milk_left}>>{final_milk_left} gallons of milk."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Today Aunt May's cows gave her 365 gallons + 380 = <<365+380=745>>745 gallons of milk.",
+    "L2": "She had 745 gallons - 612 gallons sold to the ice cream factory = <<745-612=133>>133 gallons of milk left.",
+    "L3": "Combined with the leftover from yesterday, Aunt May has 745 gallons + 15 gallons = <<745+15=760>>760 gallons of milk.",
+    "FA": "#### 760"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'total_milk_today' (value: 745) was used instead of 'milk_after_sale' (value: 133).",
+  "repro_seed": 6664271200863636953,
+  "model_name": "google_gemini-2.5-flash"
+}

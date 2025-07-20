@@ -1,0 +1,79 @@
+{
+  "index": 462,
+  "original_solution_mapping": {
+    "FA": "#### 2,250",
+    "L1": "Roberto skips 70 times per minute because 4,200 / 60 = <<4200/60=70>>70.",
+    "L2": "Together they skip 150 times a minute.",
+    "L3": "They will skip 2,250 times because 150 x 15 = <<150*15=2250>>2,250"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 462.\n    Returns: the total number of skips by Roberto and Valerie.\n    \"\"\"\n    # L1\n    roberto_skips_per_hour = 4200 # Roberto can skip 4,200 times an hour\n    minutes_per_hour = 60 # WK\n    roberto_skips_per_minute = roberto_skips_per_hour / minutes_per_hour\n\n    # L2\n    valerie_skips_per_minute = 80 # Valerie can skip 80 times a minute\n    total_skips_per_minute = roberto_skips_per_minute + valerie_skips_per_minute\n\n    # L3\n    jump_duration_minutes = 15 # jump rope for fifteen minutes straight\n    total_skips = total_skips_per_minute * jump_duration_minutes\n\n    # FA\n    answer = total_skips\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_skips",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x3161d4490>"
+  },
+  "correct_trace": {
+    "roberto_skips_per_hour": 4200,
+    "minutes_per_hour": 60,
+    "roberto_skips_per_minute": 70.0,
+    "valerie_skips_per_minute": 80,
+    "total_skips_per_minute": 150.0,
+    "jump_duration_minutes": 15,
+    "total_skips": 2250.0,
+    "answer": 2250.0
+  },
+  "flawed_trace": {
+    "roberto_skips_per_hour": 4200,
+    "minutes_per_hour": 60,
+    "roberto_skips_per_minute": 70.0,
+    "valerie_skips_per_minute": 80,
+    "total_skips_per_minute": 150.0,
+    "jump_duration_minutes": 15,
+    "total_skips": 165.0,
+    "answer": 165.0
+  },
+  "correct_value": 2250.0,
+  "flawed_value": 165.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "roberto_skips_per_minute",
+      "question_inputs": [
+        "roberto_skips_per_hour"
+      ],
+      "solution_line_template": "Roberto skips {roberto_skips_per_minute} times per minute because {roberto_skips_per_hour} / {minutes_per_hour} = <<{roberto_skips_per_hour}/{minutes_per_hour}={roberto_skips_per_minute}>>{roberto_skips_per_minute}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_skips_per_minute",
+      "question_inputs": [
+        "valerie_skips_per_minute"
+      ],
+      "solution_line_template": "Together they skip {total_skips_per_minute} times a minute."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_skips",
+      "question_inputs": [
+        "jump_duration_minutes"
+      ],
+      "solution_line_template": "They will skip {total_skips} times because {total_skips_per_minute} x {jump_duration_minutes} = <<{total_skips_per_minute}*{jump_duration_minutes}={total_skips}>>{total_skips}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Roberto skips 70 times per minute because 4200 / 60 = <<4200/60=70>>70.",
+    "L2": "Together they skip 150 times a minute.",
+    "L3": "They will skip 165 times because 150 x 15 = <<150*15=165>>165",
+    "FA": "#### 165"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -4299469632809021208,
+  "model_name": "google_gemini-2.5-flash"
+}

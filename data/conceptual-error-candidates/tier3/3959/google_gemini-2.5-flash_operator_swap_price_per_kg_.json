@@ -1,0 +1,63 @@
+{
+  "index": 3959,
+  "original_solution_mapping": {
+    "FA": "#### 36",
+    "L1": "The price of 1 kg of oranges is $6 / 2 kg = $<<6/2=3>>3/kg",
+    "L2": "So Ali will pay 12 kg * $3/kg = $<<12*3=36>>36 for 12 kg of oranges."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3959.\n    Returns: the total amount Annie will pay for 12 kg of oranges.\n    \"\"\"\n    # L1\n    price_paid_initial = 6 # Annie paid $6\n    mass_purchased_initial = 2 # for 2 kg of oranges\n    price_per_kg = price_paid_initial / mass_purchased_initial\n\n    # L2\n    mass_purchased_final = 12 # for 12 kg of oranges\n    total_cost_final = mass_purchased_final * price_per_kg\n\n    # FA\n    answer = total_cost_final\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "price_per_kg",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x31152c790>"
+  },
+  "correct_trace": {
+    "price_paid_initial": 6,
+    "mass_purchased_initial": 2,
+    "price_per_kg": 3.0,
+    "mass_purchased_final": 12,
+    "total_cost_final": 36.0,
+    "answer": 36.0
+  },
+  "flawed_trace": {
+    "price_paid_initial": 6,
+    "mass_purchased_initial": 2,
+    "price_per_kg": 12,
+    "mass_purchased_final": 12,
+    "total_cost_final": 144,
+    "answer": 144
+  },
+  "correct_value": 3.0,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "price_per_kg",
+      "question_inputs": [
+        "price_paid_initial",
+        "mass_purchased_initial"
+      ],
+      "solution_line_template": "The price of 1 kg of oranges is ${price_paid_initial} / {mass_purchased_initial} kg = $<<{price_paid_initial}/{mass_purchased_initial}={price_per_kg}>>{price_per_kg}/kg"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost_final",
+      "question_inputs": [
+        "mass_purchased_final"
+      ],
+      "solution_line_template": "So Ali will pay {mass_purchased_final} kg * ${price_per_kg}/kg = $<<{mass_purchased_final}*{price_per_kg}={total_cost_final}>>{total_cost_final} for {mass_purchased_final} kg of oranges."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The price of 1 kg of oranges is $6 / 2 kg = $<<6/2=12>>12/kg",
+    "L2": "So Ali will pay 12 kg * $12/kg = $<<12*12=144>>144 for 12 kg of oranges.",
+    "FA": "#### 144"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -427215369267430578,
+  "model_name": "google_gemini-2.5-flash"
+}

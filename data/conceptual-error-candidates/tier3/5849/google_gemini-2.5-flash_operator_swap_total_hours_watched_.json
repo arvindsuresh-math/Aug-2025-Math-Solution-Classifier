@@ -1,0 +1,73 @@
+{
+  "index": 5849,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "The show runs from 2:00 pm to 2:30 pm so that is 30 minutes.",
+    "L2": "From Monday to Thursday, he watched a total of 30 * 4 = <<30*4=120>>120 minutes.",
+    "L3": "In hours, this is equal to 120 / 60 = <<120/60=2>>2 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5849.\n    Returns: the total hours of the show Max watched.\n    \"\"\"\n    # L1\n    episode_duration_minutes = 30 # 2:00 pm to 2:30 pm so that is 30 minutes.\n\n    # L2\n    episodes_watched_per_week = 4 # misses the Friday episode\n    total_minutes_watched = episode_duration_minutes * episodes_watched_per_week\n\n    # L3\n    minutes_per_hour = 60 # WK\n    total_hours_watched = total_minutes_watched / minutes_per_hour\n\n    # FA\n    answer = total_hours_watched\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_hours_watched",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x31af20650>"
+  },
+  "correct_trace": {
+    "episode_duration_minutes": 30,
+    "episodes_watched_per_week": 4,
+    "total_minutes_watched": 120,
+    "minutes_per_hour": 60,
+    "total_hours_watched": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "episode_duration_minutes": 30,
+    "episodes_watched_per_week": 4,
+    "total_minutes_watched": 120,
+    "minutes_per_hour": 60,
+    "total_hours_watched": 60,
+    "answer": 60
+  },
+  "correct_value": 2.0,
+  "flawed_value": 60,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "episode_duration_minutes",
+      "question_inputs": [
+        "episode_duration_minutes"
+      ],
+      "solution_line_template": "The show runs from 2:00 pm to 2:30 pm so that is {episode_duration_minutes} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_minutes_watched",
+      "question_inputs": [
+        "episodes_watched_per_week"
+      ],
+      "solution_line_template": "From Monday to Thursday, he watched a total of {episode_duration_minutes} * {episodes_watched_per_week} = <<{episode_duration_minutes}*{episodes_watched_per_week}={total_minutes_watched}>>{total_minutes_watched} minutes."
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_hours_watched",
+      "question_inputs": [],
+      "solution_line_template": "In hours, this is equal to {total_minutes_watched} / {minutes_per_hour} = <<{total_minutes_watched}/{minutes_per_hour}={total_hours_watched}>>{total_hours_watched} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The show runs from 2:00 pm to 2:30 pm so that is 30 minutes.",
+    "L2": "From Monday to Thursday, he watched a total of 30 * 4 = <<30*4=120>>120 minutes.",
+    "L3": "In hours, this is equal to 120 / 60 = <<120/60=60>>60 hours.",
+    "FA": "#### 60"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": -2947228618070203520,
+  "model_name": "google_gemini-2.5-flash"
+}

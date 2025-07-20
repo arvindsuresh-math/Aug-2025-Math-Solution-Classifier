@@ -1,0 +1,146 @@
+{
+  "index": 3856,
+  "original_solution_mapping": {
+    "FA": "#### 401",
+    "L1": "In the first year, Lilith collects 3 caps * 12 months = <<3*12=36>>36 caps.",
+    "L2": "Every year afterwards, she collects 5 caps * 12 months = <<5*12=60>>60 caps.",
+    "L3": "She does this for a total of 5 - 1 = <<5-1=4>>4 years.",
+    "L4": "This is a total of 60 caps * 4 years = <<60*4=240>>240 caps.",
+    "L5": "In total, she collects 36 + 240 = <<36+240=276>>276 caps by herself.",
+    "L6": "Over the Christmases, she receives 40 caps * 5 years = <<40*5=200>>200 caps from friends and family.",
+    "L7": "She also loses 15 caps * 5 years = <<15*5=75>>75 caps over the years.",
+    "L8": "She has therefore collected 276 + 200 - 75 = <<276+200-75=401>>401 caps."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3856.\n    Returns: the total number of caps Lilith has collected.\n    \"\"\"\n    # L1\n    caps_per_month_first_year = 3 # 3 caps per month in the first year\n    months_per_year = 12 # WK\n    caps_first_year = caps_per_month_first_year * months_per_year\n\n    # L2\n    caps_per_month_after_first_year = 5 # 5 caps per month after the first year\n    caps_per_year_after_first = caps_per_month_after_first_year * months_per_year\n\n    # L3\n    total_years_collecting = 5 # collecting for 5 years\n    first_year_duration = 1 # implicit in \"after the first year\"\n    years_after_first = total_years_collecting - first_year_duration\n\n    # L4\n    caps_after_first_period = caps_per_year_after_first * years_after_first\n\n    # L5\n    total_caps_collected_by_self = caps_first_year + caps_after_first_period\n\n    # L6\n    caps_from_christmas = 40 # receives 40 caps from friends and family\n    total_caps_from_christmas = caps_from_christmas * total_years_collecting\n\n    # L7\n    caps_lost_per_year = 15 # loses 15 of the caps she has collected\n    total_caps_lost = caps_lost_per_year * total_years_collecting\n\n    # L8\n    final_caps_collected = total_caps_collected_by_self + total_caps_from_christmas - total_caps_lost\n\n    # FA\n    answer = final_caps_collected\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_caps_from_christmas",
+    "operand_to_replace": "caps_from_christmas",
+    "replacement_variable": "months_per_year"
+  },
+  "correct_trace": {
+    "caps_per_month_first_year": 3,
+    "months_per_year": 12,
+    "caps_first_year": 36,
+    "caps_per_month_after_first_year": 5,
+    "caps_per_year_after_first": 60,
+    "total_years_collecting": 5,
+    "first_year_duration": 1,
+    "years_after_first": 4,
+    "caps_after_first_period": 240,
+    "total_caps_collected_by_self": 276,
+    "caps_from_christmas": 40,
+    "total_caps_from_christmas": 200,
+    "caps_lost_per_year": 15,
+    "total_caps_lost": 75,
+    "final_caps_collected": 401,
+    "answer": 401
+  },
+  "flawed_trace": {
+    "caps_per_month_first_year": 3,
+    "months_per_year": 12,
+    "caps_first_year": 36,
+    "caps_per_month_after_first_year": 5,
+    "caps_per_year_after_first": 60,
+    "total_years_collecting": 5,
+    "first_year_duration": 1,
+    "years_after_first": 4,
+    "caps_after_first_period": 240,
+    "total_caps_collected_by_self": 276,
+    "caps_from_christmas": 40,
+    "total_caps_from_christmas": 60,
+    "caps_lost_per_year": 15,
+    "total_caps_lost": 75,
+    "final_caps_collected": 261,
+    "answer": 261
+  },
+  "correct_value": 200,
+  "flawed_value": 60,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L1",
+      "output_variable": "caps_first_year",
+      "question_inputs": [
+        "caps_per_month_first_year"
+      ],
+      "solution_line_template": "In the first year, Lilith collects {caps_per_month_first_year} caps * {months_per_year} months = <<{caps_per_month_first_year}*{months_per_year}={caps_first_year}>>{caps_first_year} caps."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "caps_per_year_after_first",
+      "question_inputs": [
+        "caps_per_month_after_first_year"
+      ],
+      "solution_line_template": "Every year afterwards, she collects {caps_per_month_after_first_year} caps * {months_per_year} months = <<{caps_per_month_after_first_year}*{months_per_year}={caps_per_year_after_first}>>{caps_per_year_after_first} caps."
+    },
+    {
+      "WK_inputs": [
+        "first_year_duration"
+      ],
+      "line_number": "L3",
+      "output_variable": "years_after_first",
+      "question_inputs": [
+        "total_years_collecting"
+      ],
+      "solution_line_template": "She does this for a total of {total_years_collecting} - {first_year_duration} = <<{total_years_collecting}-{first_year_duration}={years_after_first}>>{years_after_first} years."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "caps_after_first_period",
+      "question_inputs": [],
+      "solution_line_template": "This is a total of {caps_per_year_after_first} caps * {years_after_first} years = <<{caps_per_year_after_first}*{years_after_first}={caps_after_first_period}>>{caps_after_first_period} caps."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_caps_collected_by_self",
+      "question_inputs": [],
+      "solution_line_template": "In total, she collects {caps_first_year} + {caps_after_first_period} = <<{caps_first_year}+{caps_after_first_period}={total_caps_collected_by_self}>>{total_caps_collected_by_self} caps by herself."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_caps_from_christmas",
+      "question_inputs": [
+        "caps_from_christmas"
+      ],
+      "solution_line_template": "Over the Christmases, she receives {caps_from_christmas} caps * {total_years_collecting} years = <<{caps_from_christmas}*{total_years_collecting}={total_caps_from_christmas}>>{total_caps_from_christmas} caps from friends and family."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "total_caps_lost",
+      "question_inputs": [
+        "caps_lost_per_year"
+      ],
+      "solution_line_template": "She also loses {caps_lost_per_year} caps * {total_years_collecting} years = <<{caps_lost_per_year}*{total_years_collecting}={total_caps_lost}>>{total_caps_lost} caps over the years."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L8",
+      "output_variable": "final_caps_collected",
+      "question_inputs": [],
+      "solution_line_template": "She has therefore collected {total_caps_collected_by_self} + {total_caps_from_christmas} - {total_caps_lost} = <<{total_caps_collected_by_self}+{total_caps_from_christmas}-{total_caps_lost}={final_caps_collected}>>{final_caps_collected} caps."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In the first year, Lilith collects 3 caps * 12 months = <<3*12=36>>36 caps.",
+    "L2": "Every year afterwards, she collects 5 caps * 12 months = <<5*12=60>>60 caps.",
+    "L3": "She does this for a total of 5 - 1 = <<5-1=4>>4 years.",
+    "L4": "This is a total of 60 caps * 4 years = <<60*4=240>>240 caps.",
+    "L5": "In total, she collects 36 + 240 = <<36+240=276>>276 caps by herself.",
+    "L6": "Over the Christmases, she receives 12 caps * 5 years = <<12*5=60>>60 caps from friends and family.",
+    "L7": "She also loses 15 caps * 5 years = <<15*5=75>>75 caps over the years.",
+    "L8": "She has therefore collected 276 + 60 - 75 = <<276+60-75=261>>261 caps.",
+    "FA": "#### 261"
+  },
+  "erroneous_line_number": "L6",
+  "explanation": "Input misrepresentation. The value for 'months_per_year' (12) was used instead of 'caps_from_christmas' (40).",
+  "repro_seed": -4753127807557842128,
+  "model_name": "google_gemini-2.5-flash"
+}

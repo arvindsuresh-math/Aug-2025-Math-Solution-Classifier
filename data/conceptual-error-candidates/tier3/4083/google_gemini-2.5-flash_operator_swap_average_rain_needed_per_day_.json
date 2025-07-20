@@ -1,0 +1,79 @@
+{
+  "index": 4083,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "They need 730 inches of rain a year to average 2 inches a day because 365 x 2 = 730",
+    "L2": "They need 300 more inches because 730 - 430 = <<730-430=300>>300",
+    "L3": "They need 3 inches a day because 300 / 100 = <<300/100=3>>3"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4083.\n    Returns: the average inches of rain needed per day to finish the year with the normal average.\n    \"\"\"\n    # L1\n    normal_daily_average_rain = 2 # average of 2 inches of rain a day\n    days_in_year = 365 # WK\n    total_normal_rain_per_year = days_in_year * normal_daily_average_rain\n\n    # L2\n    rain_received_so_far = 430 # they've gotten 430 inches of rain\n    rain_needed_more = total_normal_rain_per_year - rain_received_so_far\n\n    # L3\n    days_left_in_year = 100 # With 100 days left in the year\n    average_rain_needed_per_day = rain_needed_more / days_left_in_year\n\n    # FA\n    answer = average_rain_needed_per_day\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "average_rain_needed_per_day",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x3116c1ad0>"
+  },
+  "correct_trace": {
+    "normal_daily_average_rain": 2,
+    "days_in_year": 365,
+    "total_normal_rain_per_year": 730,
+    "rain_received_so_far": 430,
+    "rain_needed_more": 300,
+    "days_left_in_year": 100,
+    "average_rain_needed_per_day": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "normal_daily_average_rain": 2,
+    "days_in_year": 365,
+    "total_normal_rain_per_year": 730,
+    "rain_received_so_far": 430,
+    "rain_needed_more": 300,
+    "days_left_in_year": 100,
+    "average_rain_needed_per_day": 30000,
+    "answer": 30000
+  },
+  "correct_value": 3.0,
+  "flawed_value": 30000,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "days_in_year"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_normal_rain_per_year",
+      "question_inputs": [
+        "normal_daily_average_rain"
+      ],
+      "solution_line_template": "They need {total_normal_rain_per_year} inches of rain a year to average {normal_daily_average_rain} inches a day because {days_in_year} x {normal_daily_average_rain} = {total_normal_rain_per_year}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "rain_needed_more",
+      "question_inputs": [
+        "rain_received_so_far"
+      ],
+      "solution_line_template": "They need {rain_needed_more} more inches because {total_normal_rain_per_year} - {rain_received_so_far} = <<{total_normal_rain_per_year}-{rain_received_so_far}={rain_needed_more}>>{rain_needed_more}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "average_rain_needed_per_day",
+      "question_inputs": [
+        "days_left_in_year"
+      ],
+      "solution_line_template": "They need {average_rain_needed_per_day} inches a day because {rain_needed_more} / {days_left_in_year} = <<{rain_needed_more}/{days_left_in_year}={average_rain_needed_per_day}>>{average_rain_needed_per_day}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "They need 730 inches of rain a year to average 2 inches a day because 365 x 2 = 730",
+    "L2": "They need 300 more inches because 730 - 430 = <<730-430=300>>300",
+    "L3": "They need 30000 inches a day because 300 / 100 = <<300/100=30000>>30000",
+    "FA": "#### 30000"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 1429909203585374024,
+  "model_name": "google_gemini-2.5-flash"
+}

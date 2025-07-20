@@ -1,0 +1,63 @@
+{
+  "index": 3740,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "Grace's grandmother is 2 * 80 years = <<2*80=160>>160 years old.",
+    "L2": "Grace's age is 3/8 * 160 years = <<3/8*160=60>>60 years old."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3740.\n    Returns: Grace's age.\n    \"\"\"\n    # L1\n    grandmother_multiplier = 2 # twice the age\n    mother_age = 80 # Grace's mother is 80 years old\n    grandmother_age = grandmother_multiplier * mother_age\n\n    # L2\n    grace_age_fraction = Fraction(3, 8) # 3/8th the age\n    grace_age = grace_age_fraction * grandmother_age\n\n    # FA\n    answer = grace_age\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "grace_age",
+    "operand_to_replace": "grace_age_fraction",
+    "replacement_variable": "mother_age"
+  },
+  "correct_trace": {
+    "grandmother_multiplier": 2,
+    "mother_age": 80,
+    "grandmother_age": 160,
+    "grace_age_fraction": "3/8",
+    "grace_age": "60",
+    "answer": "60"
+  },
+  "flawed_trace": {
+    "grandmother_multiplier": 2,
+    "mother_age": 80,
+    "grandmother_age": 160,
+    "grace_age_fraction": "3/8",
+    "grace_age": 12800,
+    "answer": 12800
+  },
+  "correct_value": "60",
+  "flawed_value": 12800,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "grandmother_age",
+      "question_inputs": [
+        "grandmother_multiplier",
+        "mother_age"
+      ],
+      "solution_line_template": "Grace's grandmother is {grandmother_multiplier} * {mother_age} years = <<{grandmother_multiplier}*{mother_age}={grandmother_age}>>{grandmother_age} years old."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "grace_age",
+      "question_inputs": [
+        "grace_age_fraction"
+      ],
+      "solution_line_template": "Grace's age is {grace_age_fraction} * {grandmother_age} years = <<{grace_age_fraction}*{grandmother_age}={grace_age}>>{grace_age} years old."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Grace's grandmother is 2 * 80 years = <<2*80=160>>160 years old.",
+    "L2": "Grace's age is 80 * 160 years = <<80*160=12800>>12800 years old.",
+    "FA": "#### 12800"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'mother_age' (80) was used instead of 'grace_age_fraction' (3/8).",
+  "repro_seed": -4567918646682059606,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,63 @@
+{
+  "index": 6868,
+  "original_solution_mapping": {
+    "FA": "#### 14",
+    "L1": "He spends 2*1=<<2*1=2>>2 hours reading",
+    "L2": "So he reads for 2*7=<<2*7=14>>14 hours a week"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6868.\n    Returns: the total time Tim spends reading per week.\n    \"\"\"\n    # L1\n    reading_multiplier = 2 # twice as much time reading\n    meditating_hours_per_day = 1 # 1 hour a day meditating\n    reading_hours_per_day = reading_multiplier * meditating_hours_per_day\n\n    # L2\n    days_in_week = 7 # WK\n    reading_hours_per_week = reading_hours_per_day * days_in_week\n\n    # FA\n    answer = reading_hours_per_week\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "reading_hours_per_day",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x3152b30d0>"
+  },
+  "correct_trace": {
+    "reading_multiplier": 2,
+    "meditating_hours_per_day": 1,
+    "reading_hours_per_day": 2,
+    "days_in_week": 7,
+    "reading_hours_per_week": 14,
+    "answer": 14
+  },
+  "flawed_trace": {
+    "reading_multiplier": 2,
+    "meditating_hours_per_day": 1,
+    "reading_hours_per_day": 3,
+    "days_in_week": 7,
+    "reading_hours_per_week": 21,
+    "answer": 21
+  },
+  "correct_value": 2,
+  "flawed_value": 3,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "reading_hours_per_day",
+      "question_inputs": [
+        "reading_multiplier",
+        "meditating_hours_per_day"
+      ],
+      "solution_line_template": "He spends {reading_multiplier}*{meditating_hours_per_day}=<<{reading_multiplier}*{meditating_hours_per_day}={reading_hours_per_day}>>{reading_hours_per_day} hours reading"
+    },
+    {
+      "WK_inputs": [
+        "days_in_week"
+      ],
+      "line_number": "L2",
+      "output_variable": "reading_hours_per_week",
+      "question_inputs": [],
+      "solution_line_template": "So he reads for {reading_hours_per_day}*{days_in_week}=<<{reading_hours_per_day}*{days_in_week}={reading_hours_per_week}>>{reading_hours_per_week} hours a week"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He spends 2*1=<<2*1=3>>3 hours reading",
+    "L2": "So he reads for 3*7=<<3*7=21>>21 hours a week",
+    "FA": "#### 21"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 4029442287767271553,
+  "model_name": "google_gemini-2.5-flash"
+}

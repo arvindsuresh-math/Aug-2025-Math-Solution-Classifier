@@ -1,0 +1,92 @@
+{
+  "index": 5299,
+  "original_solution_mapping": {
+    "FA": "#### 9,450",
+    "L1": "Diane made 1000*15= $<<1000*15=15000>>15000 in sales because she had 1000 customers each buy a $15 book.",
+    "L2": "37% of those customers returned their books, so that means she had .37*1000= <<37*.01*1000=370>>370 returns",
+    "L3": "Each of those returns was for a $15 book, so she had 370*15= $<<370*15=5550>>5,550 in returns",
+    "L4": "For her total leftover income, we subtract the returns from the sales and end up with 15000-5550= $<<15000-5550=9450>>9450 in income."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5299.\n    Returns: the money Dianne keeps in sales after subtracting the returns.\n    \"\"\"\n    # L1\n    num_customers = 1000 # 1000 customers\n    book_cost = 15 # 15 dollars apiece\n    total_sales = num_customers * book_cost\n\n    # L2\n    return_percent_num = 37 # 37% of her 1000 customers\n    return_percent_decimal = 0.37 # from solution text: .37*1000\n    percent_factor = 0.01 # WK\n    num_returns = return_percent_num * percent_factor * num_customers\n\n    # L3\n    total_returns_cost = num_returns * book_cost\n\n    # L4\n    final_income = total_sales - total_returns_cost\n\n    # FA\n    answer = final_income\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_returns_cost",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x3141c9b90>"
+  },
+  "correct_trace": {
+    "num_customers": 1000,
+    "book_cost": 15,
+    "total_sales": 15000,
+    "return_percent_num": 37,
+    "return_percent_decimal": 0.37,
+    "percent_factor": 0.01,
+    "num_returns": 370.0,
+    "total_returns_cost": 5550.0,
+    "final_income": 9450.0,
+    "answer": 9450.0
+  },
+  "flawed_trace": {
+    "num_customers": 1000,
+    "book_cost": 15,
+    "total_sales": 15000,
+    "return_percent_num": 37,
+    "return_percent_decimal": 0.37,
+    "percent_factor": 0.01,
+    "num_returns": 370.0,
+    "total_returns_cost": 385.0,
+    "final_income": 14615.0,
+    "answer": 14615.0
+  },
+  "correct_value": 5550.0,
+  "flawed_value": 385.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_sales",
+      "question_inputs": [
+        "num_customers",
+        "book_cost"
+      ],
+      "solution_line_template": "Diane made {num_customers}*{book_cost}= $<<{num_customers}*{book_cost}={total_sales}>>{total_sales} in sales because she had {num_customers} customers each buy a ${book_cost} book."
+    },
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L2",
+      "output_variable": "num_returns",
+      "question_inputs": [
+        "return_percent_num",
+        "return_percent_decimal"
+      ],
+      "solution_line_template": "{return_percent_num}% of those customers returned their books, so that means she had {return_percent_decimal}*{num_customers}= <<{return_percent_num}*{percent_factor}*{num_customers}={num_returns}>>{num_returns} returns"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_returns_cost",
+      "question_inputs": [],
+      "solution_line_template": "Each of those returns was for a ${book_cost} book, so she had {num_returns}*{book_cost}= $<<{num_returns}*{book_cost}={total_returns_cost}>>{total_returns_cost} in returns"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_income",
+      "question_inputs": [],
+      "solution_line_template": "For her total leftover income, we subtract the returns from the sales and end up with {total_sales}-{total_returns_cost}= $<<{total_sales}-{total_returns_cost}={final_income}>>{final_income} in income."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Diane made 1000*15= $<<1000*15=15000>>15000 in sales because she had 1000 customers each buy a $15 book.",
+    "L2": "37% of those customers returned their books, so that means she had 0.37*1000= <<37*0.01*1000=370>>370 returns",
+    "L3": "Each of those returns was for a $15 book, so she had 370*15= $<<370*15=385>>385 in returns",
+    "L4": "For her total leftover income, we subtract the returns from the sales and end up with 15000-385= $<<15000-385=14615>>14615 in income.",
+    "FA": "#### 14615"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 3421552394736318913,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,93 @@
+{
+  "index": 6959,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "Debelyn had 20 - 2 = <<20-2=18>>18 dolls left after giving out 2 dolls to Christel.",
+    "L2": "Christel had 24 + 2 = <<24+2=26>>26 dolls after receiving 2 dolls from Debelyn.",
+    "L3": "Christel had 24 - 5 = <<24-5=19>>19 dolls after giving Andrena 5 dolls.",
+    "L4": "So, Andrena has 19 +2 = <<19+2=21>>21 dolls now.",
+    "L5": "Therefore, Andrena has 21 - 18 = <<21-18=3>>3 more dolls than Debelyn."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6959.\n    Returns: how many more dolls Andrena has than Debelyn.\n    \"\"\"\n    # L1\n    debelyn_initial_dolls = 20 # Debelyn had 20 dolls\n    debelyn_gave_andrena = 2 # gave Andrena 2 dolls\n    debelyn_remaining_dolls = debelyn_initial_dolls - debelyn_gave_andrena\n\n    # L3\n    christel_initial_dolls = 24 # Christel had 24 dolls\n    christel_gave_andrena = 5 # giving Andrena 5 dolls\n    christel_remaining_dolls = christel_initial_dolls - christel_gave_andrena\n\n    # L4\n    andrena_more_than_christel = 2 # Andrena now has 2 more dolls than Christel\n    andrena_total_dolls = christel_remaining_dolls + andrena_more_than_christel\n\n    # L5\n    andrena_more_than_debelyn = andrena_total_dolls - debelyn_remaining_dolls\n\n    # FA\n    answer = andrena_more_than_debelyn\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "andrena_more_than_debelyn",
+    "operand_to_replace": "debelyn_remaining_dolls",
+    "replacement_variable": "debelyn_gave_andrena"
+  },
+  "correct_trace": {
+    "debelyn_initial_dolls": 20,
+    "debelyn_gave_andrena": 2,
+    "debelyn_remaining_dolls": 18,
+    "christel_initial_dolls": 24,
+    "christel_gave_andrena": 5,
+    "christel_remaining_dolls": 19,
+    "andrena_more_than_christel": 2,
+    "andrena_total_dolls": 21,
+    "andrena_more_than_debelyn": 3,
+    "answer": 3
+  },
+  "flawed_trace": {
+    "debelyn_initial_dolls": 20,
+    "debelyn_gave_andrena": 2,
+    "debelyn_remaining_dolls": 18,
+    "christel_initial_dolls": 24,
+    "christel_gave_andrena": 5,
+    "christel_remaining_dolls": 19,
+    "andrena_more_than_christel": 2,
+    "andrena_total_dolls": 21,
+    "andrena_more_than_debelyn": 19,
+    "answer": 19
+  },
+  "correct_value": 3,
+  "flawed_value": 19,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "debelyn_remaining_dolls",
+      "question_inputs": [
+        "debelyn_initial_dolls",
+        "debelyn_gave_andrena"
+      ],
+      "solution_line_template": "Debelyn had {debelyn_initial_dolls} - {debelyn_gave_andrena} = <<{debelyn_initial_dolls}-{debelyn_gave_andrena}={debelyn_remaining_dolls}>>{debelyn_remaining_dolls} dolls left after giving out {debelyn_gave_andrena} dolls to Christel."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "christel_remaining_dolls",
+      "question_inputs": [
+        "christel_initial_dolls",
+        "christel_gave_andrena"
+      ],
+      "solution_line_template": "Christel had {christel_initial_dolls} - {christel_gave_andrena} = <<{christel_initial_dolls}-{christel_gave_andrena}={christel_remaining_dolls}>>{christel_remaining_dolls} dolls after giving Andrena {christel_gave_andrena} dolls."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "andrena_total_dolls",
+      "question_inputs": [
+        "andrena_more_than_christel"
+      ],
+      "solution_line_template": "So, Andrena has {christel_remaining_dolls} +{andrena_more_than_christel} = <<{christel_remaining_dolls}+{andrena_more_than_christel}={andrena_total_dolls}>>{andrena_total_dolls} dolls now."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "andrena_more_than_debelyn",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, Andrena has {andrena_total_dolls} - {debelyn_remaining_dolls} = <<{andrena_total_dolls}-{debelyn_remaining_dolls}={andrena_more_than_debelyn}>>{andrena_more_than_debelyn} more dolls than Debelyn."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Debelyn had 20 - 2 = <<20-2=18>>18 dolls left after giving out 2 dolls to Christel.",
+    "L3": "Christel had 24 - 5 = <<24-5=19>>19 dolls after giving Andrena 5 dolls.",
+    "L4": "So, Andrena has 19 +2 = <<19+2=21>>21 dolls now.",
+    "L5": "Therefore, Andrena has 21 - 2 = <<21-2=19>>19 more dolls than Debelyn.",
+    "FA": "#### 19"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operand. The variable 'debelyn_gave_andrena' (value: 2) was used instead of 'debelyn_remaining_dolls' (value: 18).",
+  "repro_seed": 1239550298200951270,
+  "model_name": "google_gemini-2.5-flash"
+}

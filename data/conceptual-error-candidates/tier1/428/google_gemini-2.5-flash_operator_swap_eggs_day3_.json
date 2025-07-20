@@ -1,0 +1,99 @@
+{
+  "index": 428,
+  "original_solution_mapping": {
+    "FA": "#### 810",
+    "L1": "Day 1:50",
+    "L2": "Day 2:50(2)=100",
+    "L3": "Day 3:100+20=<<100+20=120>>120",
+    "L4": "Day 4:2(50+100+120)=540",
+    "L5": "Total:50+100+120+540=<<50+100+120+540=810>>810 eggs"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 428.\n    Returns: the total number of eggs laid by the frog over 4 days.\n    \"\"\"\n    # L1\n    eggs_day1 = 50 # The first day she lays 50 eggs.\n\n    # L2\n    multiplier_double = 2 # she doubles her production of eggs\n    eggs_day2 = eggs_day1 * multiplier_double\n\n    # L3\n    more_than_day2 = 20 # lays 20 more than the second day\n    eggs_day3 = eggs_day2 + more_than_day2\n\n    # L4\n    multiplier_double_total = 2 # doubles the first three days total\n    eggs_day4 = multiplier_double_total * (eggs_day1 + eggs_day2 + eggs_day3)\n\n    # L5\n    total_eggs = eggs_day1 + eggs_day2 + eggs_day3 + eggs_day4\n\n    # FA\n    answer = total_eggs\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "eggs_day3",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x3169f3c50>"
+  },
+  "correct_trace": {
+    "eggs_day1": 50,
+    "multiplier_double": 2,
+    "eggs_day2": 100,
+    "more_than_day2": 20,
+    "eggs_day3": 120,
+    "multiplier_double_total": 2,
+    "eggs_day4": 540,
+    "total_eggs": 810,
+    "answer": 810
+  },
+  "flawed_trace": {
+    "eggs_day1": 50,
+    "multiplier_double": 2,
+    "eggs_day2": 100,
+    "more_than_day2": 20,
+    "eggs_day3": 2000,
+    "multiplier_double_total": 2,
+    "eggs_day4": 4300,
+    "total_eggs": 6450,
+    "answer": 6450
+  },
+  "correct_value": 120,
+  "flawed_value": 2000,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "eggs_day1"
+      ],
+      "WK_inputs": [],
+      "output_variable": "eggs_day1",
+      "solution_line_template": "Day 1:{eggs_day1}"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "multiplier_double"
+      ],
+      "WK_inputs": [],
+      "output_variable": "eggs_day2",
+      "solution_line_template": "Day 2:{eggs_day1}({multiplier_double})={eggs_day2}"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "more_than_day2"
+      ],
+      "WK_inputs": [],
+      "output_variable": "eggs_day3",
+      "solution_line_template": "Day 3:{eggs_day2}+{more_than_day2}=<<{eggs_day2}+{more_than_day2}={eggs_day3}>>{eggs_day3}"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "multiplier_double_total"
+      ],
+      "WK_inputs": [],
+      "output_variable": "eggs_day4",
+      "solution_line_template": "Day 4:{multiplier_double_total}({eggs_day1}+{eggs_day2}+{eggs_day3})={eggs_day4}"
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_eggs",
+      "solution_line_template": "Total:{eggs_day1}+{eggs_day2}+{eggs_day3}+{eggs_day4}=<<{eggs_day1}+{eggs_day2}+{eggs_day3}+{eggs_day4}={total_eggs}>>{total_eggs} eggs"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Day 1:50",
+    "L2": "Day 2:50(2)=100",
+    "L3": "Day 3:100+20=<<100+20=2000>>2000",
+    "L4": "Day 4:2(50+100+2000)=4300",
+    "L5": "Total:50+100+2000+4300=<<50+100+2000+4300=6450>>6450 eggs",
+    "FA": "#### 6450"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 8389934410288617291,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 3257,
+  "original_solution_mapping": {
+    "FA": "#### 49",
+    "L1": "There are 50+16=<<50+16=66>>66 passengers at first.",
+    "L2": "Then 66 - 22 = <<66-22=44>>44 passengers remain.",
+    "L3": "Since 5 more passengers get on the bus there are 44 + 5 = <<44+5=49>>49 passengers on the bus."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3257.\n    Returns: the total number of passengers on the bus at the last station.\n    \"\"\"\n    # L1\n    initial_passengers = 50 # 50 passengers on a bus\n    first_stop_get_on = 16 # 16 more passengers get on the bus\n    passengers_after_first_stop = initial_passengers + first_stop_get_on\n\n    # L2\n    other_stops_get_off = 22 # 22 passengers get off the bus\n    passengers_after_get_off = passengers_after_first_stop - other_stops_get_off\n\n    # L3\n    other_stops_get_on = 5 # 5 passengers more get on the bus\n    final_passengers = passengers_after_get_off + other_stops_get_on\n\n    # FA\n    answer = final_passengers\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "passengers_after_first_stop",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x3156f0190>"
+  },
+  "correct_trace": {
+    "initial_passengers": 50,
+    "first_stop_get_on": 16,
+    "passengers_after_first_stop": 66,
+    "other_stops_get_off": 22,
+    "passengers_after_get_off": 44,
+    "other_stops_get_on": 5,
+    "final_passengers": 49,
+    "answer": 49
+  },
+  "flawed_trace": {
+    "initial_passengers": 50,
+    "first_stop_get_on": 16,
+    "passengers_after_first_stop": 34,
+    "other_stops_get_off": 22,
+    "passengers_after_get_off": 12,
+    "other_stops_get_on": 5,
+    "final_passengers": 17,
+    "answer": 17
+  },
+  "correct_value": 66,
+  "flawed_value": 34,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "passengers_after_first_stop",
+      "question_inputs": [
+        "initial_passengers",
+        "first_stop_get_on"
+      ],
+      "solution_line_template": "There are {initial_passengers}+{first_stop_get_on}=<<{initial_passengers}+{first_stop_get_on}={passengers_after_first_stop}>>{passengers_after_first_stop} passengers at first."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "passengers_after_get_off",
+      "question_inputs": [
+        "other_stops_get_off"
+      ],
+      "solution_line_template": "Then {passengers_after_first_stop} - {other_stops_get_off} = <<{passengers_after_first_stop}-{other_stops_get_off}={passengers_after_get_off}>>{passengers_after_get_off} passengers remain."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_passengers",
+      "question_inputs": [
+        "other_stops_get_on"
+      ],
+      "solution_line_template": "Since {other_stops_get_on} more passengers get on the bus there are {passengers_after_get_off} + {other_stops_get_on} = <<{passengers_after_get_off}+{other_stops_get_on}={final_passengers}>>{final_passengers} passengers on the bus."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 50+16=<<50+16=34>>34 passengers at first.",
+    "L2": "Then 34 - 22 = <<34-22=12>>12 passengers remain.",
+    "L3": "Since 5 more passengers get on the bus there are 12 + 5 = <<12+5=17>>17 passengers on the bus.",
+    "FA": "#### 17"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": 7977359248180535800,
+  "model_name": "google_gemini-2.5-flash"
+}

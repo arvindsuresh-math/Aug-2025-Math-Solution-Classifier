@@ -1,0 +1,74 @@
+{
+  "index": 6756,
+  "original_solution_mapping": {
+    "FA": "#### 14000",
+    "L1": "If John gave his fiancee a $4000 ring on their engagement day, a $2000 car as a gift on their wedding day, the total cost for the two presents is $4000+$2000=$<<4000+2000=6000>>6000.",
+    "L2": "He also gave his fiancee a diamond brace twice as expensive as the ring costing 2*$4000=$<<2*4000=8000>>8000",
+    "L3": "The total worth of the presents John gave to his fiancee is $6000+$8000 =$<<6000+8000=14000>>14000"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6756.\n    Returns: the total worth of the presents John gave to his fiancee.\n    \"\"\"\n    # L1\n    ring_cost = 4000 # $4000 ring\n    car_cost = 2000 # $2000 car\n    initial_presents_cost = ring_cost + car_cost\n\n    # L2\n    multiplier_brace = 2 # twice as expensive\n    brace_cost = multiplier_brace * ring_cost\n\n    # L3\n    total_worth = initial_presents_cost + brace_cost\n\n    # FA\n    answer = total_worth\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "brace_cost",
+    "operand_to_replace": "multiplier_brace",
+    "replacement_variable": "initial_presents_cost"
+  },
+  "correct_trace": {
+    "ring_cost": 4000,
+    "car_cost": 2000,
+    "initial_presents_cost": 6000,
+    "multiplier_brace": 2,
+    "brace_cost": 8000,
+    "total_worth": 14000,
+    "answer": 14000
+  },
+  "flawed_trace": {
+    "ring_cost": 4000,
+    "car_cost": 2000,
+    "initial_presents_cost": 6000,
+    "multiplier_brace": 2,
+    "brace_cost": 24000000,
+    "total_worth": 24006000,
+    "answer": 24006000
+  },
+  "correct_value": 8000,
+  "flawed_value": 24000000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "initial_presents_cost",
+      "question_inputs": [
+        "ring_cost",
+        "car_cost"
+      ],
+      "solution_line_template": "If John gave his fiancee a ${ring_cost} ring on their engagement day, a ${car_cost} car as a gift on their wedding day, the total cost for the two presents is ${ring_cost}+${car_cost}=$<<{ring_cost}+{car_cost}={initial_presents_cost}>>{initial_presents_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "brace_cost",
+      "question_inputs": [
+        "multiplier_brace"
+      ],
+      "solution_line_template": "He also gave his fiancee a diamond brace twice as expensive as the ring costing {multiplier_brace}*${ring_cost}=$<<{multiplier_brace}*{ring_cost}={brace_cost}>>{brace_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_worth",
+      "question_inputs": [],
+      "solution_line_template": "The total worth of the presents John gave to his fiancee is ${initial_presents_cost}+${brace_cost} =$<<{initial_presents_cost}+{brace_cost}={total_worth}>>{total_worth}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If John gave his fiancee a $4000 ring on their engagement day, a $2000 car as a gift on their wedding day, the total cost for the two presents is $4000+$2000=$<<4000+2000=6000>>6000.",
+    "L2": "He also gave his fiancee a diamond brace twice as expensive as the ring costing 6000*$4000=$<<6000*4000=24000000>>24000000",
+    "L3": "The total worth of the presents John gave to his fiancee is $6000+$24000000 =$<<6000+24000000=24006000>>24006000",
+    "FA": "#### 24006000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'initial_presents_cost' (6000) was used instead of 'multiplier_brace' (2).",
+  "repro_seed": 41346711171886470,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,96 @@
+{
+  "index": 5062,
+  "original_solution_mapping": {
+    "FA": "#### 39",
+    "L1": "Since 5 rooms have 4 windows, this accounts for 20 windows because 4*5=<<4*5=20>>20 windows.",
+    "L2": "Since 8 rooms have 3 windows, this accounts for 24 windows because 8*3=<<8*3=24>>24 windows.",
+    "L3": "There are 78 windows left over because 122-20-24 = <<122-20-24=78>>78.",
+    "L4": "Therefore, there are 39 rooms with 2 windows because 78/2 = <<78/2=39>>39."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5062.\n    Returns: the number of rooms in the building that have 2 windows.\n    \"\"\"\n    # L1\n    rooms_with_4_windows = 5 # 5 rooms have 4 windows\n    windows_per_4_window_room = 4 # 4 windows\n    windows_from_4_window_rooms = windows_per_4_window_room * rooms_with_4_windows\n\n    # L2\n    rooms_with_3_windows = 8 # 8 rooms have 3 windows\n    windows_per_3_window_room = 3 # 3 windows\n    windows_from_3_window_rooms = rooms_with_3_windows * windows_per_3_window_room\n\n    # L3\n    total_windows = 122 # 122 windows total\n    remaining_windows = total_windows - windows_from_4_window_rooms - windows_from_3_window_rooms\n\n    # L4\n    windows_per_2_window_room = 2 # have 2 windows\n    rooms_with_2_windows = remaining_windows / windows_per_2_window_room\n\n    # FA\n    answer = rooms_with_2_windows\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "windows_from_3_window_rooms",
+    "operand_to_replace": "rooms_with_3_windows",
+    "replacement_variable": "windows_from_4_window_rooms"
+  },
+  "correct_trace": {
+    "rooms_with_4_windows": 5,
+    "windows_per_4_window_room": 4,
+    "windows_from_4_window_rooms": 20,
+    "rooms_with_3_windows": 8,
+    "windows_per_3_window_room": 3,
+    "windows_from_3_window_rooms": 24,
+    "total_windows": 122,
+    "remaining_windows": 78,
+    "windows_per_2_window_room": 2,
+    "rooms_with_2_windows": 39.0,
+    "answer": 39.0
+  },
+  "flawed_trace": {
+    "rooms_with_4_windows": 5,
+    "windows_per_4_window_room": 4,
+    "windows_from_4_window_rooms": 20,
+    "rooms_with_3_windows": 8,
+    "windows_per_3_window_room": 3,
+    "windows_from_3_window_rooms": 60,
+    "total_windows": 122,
+    "remaining_windows": 42,
+    "windows_per_2_window_room": 2,
+    "rooms_with_2_windows": 21.0,
+    "answer": 21.0
+  },
+  "correct_value": 24,
+  "flawed_value": 60,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "windows_from_4_window_rooms",
+      "question_inputs": [
+        "rooms_with_4_windows",
+        "windows_per_4_window_room"
+      ],
+      "solution_line_template": "Since {rooms_with_4_windows} rooms have {windows_per_4_window_room} windows, this accounts for {windows_from_4_window_rooms} windows because {windows_per_4_window_room}*{rooms_with_4_windows}=<<{windows_per_4_window_room}*{rooms_with_4_windows}={windows_from_4_window_rooms}>>{windows_from_4_window_rooms} windows."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "windows_from_3_window_rooms",
+      "question_inputs": [
+        "rooms_with_3_windows",
+        "windows_per_3_window_room"
+      ],
+      "solution_line_template": "Since {rooms_with_3_windows} rooms have {windows_per_3_window_room} windows, this accounts for {windows_from_3_window_rooms} windows because {rooms_with_3_windows}*{windows_per_3_window_room}=<<{rooms_with_3_windows}*{windows_per_3_window_room}={windows_from_3_window_rooms}>>{windows_from_3_window_rooms} windows."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_windows",
+      "question_inputs": [
+        "total_windows"
+      ],
+      "solution_line_template": "There are {remaining_windows} windows left over because {total_windows}-{windows_from_4_window_rooms}-{windows_from_3_window_rooms} = <<{total_windows}-{windows_from_4_window_rooms}-{windows_from_3_window_rooms}={remaining_windows}>>{remaining_windows}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "rooms_with_2_windows",
+      "question_inputs": [
+        "windows_per_2_window_room"
+      ],
+      "solution_line_template": "Therefore, there are {rooms_with_2_windows} rooms with {windows_per_2_window_room} windows because {remaining_windows}/{windows_per_2_window_room} = <<{remaining_windows}/{windows_per_2_window_room}={rooms_with_2_windows}>>{rooms_with_2_windows}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since 5 rooms have 4 windows, this accounts for 20 windows because 4*5=<<4*5=20>>20 windows.",
+    "L2": "Since 20 rooms have 3 windows, this accounts for 60 windows because 20*3=<<20*3=60>>60 windows.",
+    "L3": "There are 42 windows left over because 122-20-60 = <<122-20-60=42>>42.",
+    "L4": "Therefore, there are 21 rooms with 2 windows because 42/2 = <<42/2=21>>21.",
+    "FA": "#### 21"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'windows_from_4_window_rooms' (20) was used instead of 'rooms_with_3_windows' (8).",
+  "repro_seed": -576355682212427960,
+  "model_name": "google_gemini-2.5-flash"
+}

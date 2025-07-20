@@ -1,0 +1,81 @@
+{
+  "index": 2912,
+  "original_solution_mapping": {
+    "FA": "#### 369",
+    "L1": "The third level has 80 books because 64 / .8 = <<64/.8=80>>80",
+    "L2": "The second level has 100 books because 80 / .8 = <<80/.8=100>>100",
+    "L3": "The first level has 125 books because 100 / .8 = <<100/.8=125>>125",
+    "L4": "In total there are 369 books because 64 + 80 + 100 + 125 = <<64+80+100+125=369>>369"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2912.\n    Returns: the total number of books in the pyramid.\n    \"\"\"\n    # L1\n    top_level_books = 64 # the top level has 64 books\n    level_ratio = 0.8 # 80% as many books\n    third_level_books = top_level_books / level_ratio\n\n    # L2\n    second_level_books = third_level_books / level_ratio\n\n    # L3\n    first_level_books = second_level_books / level_ratio\n\n    # L4\n    total_books = top_level_books + third_level_books + second_level_books + first_level_books\n\n    # FA\n    answer = total_books\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "second_level_books",
+    "operand_to_replace": "third_level_books",
+    "replacement_variable": "top_level_books"
+  },
+  "correct_trace": {
+    "top_level_books": 64,
+    "level_ratio": 0.8,
+    "third_level_books": 80.0,
+    "second_level_books": 100.0,
+    "first_level_books": 125.0,
+    "total_books": 369.0,
+    "answer": 369.0
+  },
+  "flawed_trace": {
+    "top_level_books": 64,
+    "level_ratio": 0.8,
+    "third_level_books": 80.0,
+    "second_level_books": 80.0,
+    "first_level_books": 100.0,
+    "total_books": 324.0,
+    "answer": 324.0
+  },
+  "correct_value": 100.0,
+  "flawed_value": 80.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "third_level_books",
+      "question_inputs": [
+        "top_level_books",
+        "level_ratio"
+      ],
+      "solution_line_template": "The third level has {third_level_books} books because {top_level_books} / {level_ratio} = <<{top_level_books}/{level_ratio}={third_level_books}>>{third_level_books}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "second_level_books",
+      "question_inputs": [],
+      "solution_line_template": "The second level has {second_level_books} books because {third_level_books} / {level_ratio} = <<{third_level_books}/{level_ratio}={second_level_books}>>{second_level_books}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "first_level_books",
+      "question_inputs": [],
+      "solution_line_template": "The first level has {first_level_books} books because {second_level_books} / {level_ratio} = <<{second_level_books}/{level_ratio}={first_level_books}>>{first_level_books}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_books",
+      "question_inputs": [],
+      "solution_line_template": "In total there are {total_books} books because {top_level_books} + {third_level_books} + {second_level_books} + {first_level_books} = <<{top_level_books}+{third_level_books}+{second_level_books}+{first_level_books}={total_books}>>{total_books}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The third level has 80 books because 64 / 0.8 = <<64/0.8=80>>80",
+    "L2": "The second level has 80 books because 64 / 0.8 = <<64/0.8=80>>80",
+    "L3": "The first level has 100 books because 80 / 0.8 = <<80/0.8=100>>100",
+    "L4": "In total there are 324 books because 64 + 80 + 80 + 100 = <<64+80+80+100=324>>324",
+    "FA": "#### 324"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'top_level_books' (value: 64) was used instead of 'third_level_books' (value: 80.0).",
+  "repro_seed": 6756128506236289673,
+  "model_name": "google_gemini-2.5-flash"
+}

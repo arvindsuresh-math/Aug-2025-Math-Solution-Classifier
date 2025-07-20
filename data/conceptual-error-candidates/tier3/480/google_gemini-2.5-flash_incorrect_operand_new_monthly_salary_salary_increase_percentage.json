@@ -1,0 +1,97 @@
+{
+  "index": 480,
+  "original_solution_mapping": {
+    "FA": "#### 259200",
+    "L1": "His annual salary for the first year of working is 6000 x 12= $<<6000*12=72000>>72000.",
+    "L2": "Kirt's monthly increase is $6000 x 30/100= $<<6000*30/100=1800>>1800.",
+    "L3": "So, he received $6000 + $1800= $<<6000+1800=7800>>7800 monthly on the second and third year of working.",
+    "L4": "Kirt's annual salary in the second and third year was $7800 x 12 = $93600.",
+    "L5": "Thus, his total earning after 3 years is $72000 + $93600 + $93600 = $<<72000+93600+93600=259200>>259200."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 480.\n    Returns: Kirt's total earnings after 3 years.\n    \"\"\"\n    # L1\n    monthly_salary = 6000 # a $6000 monthly salary\n    months_per_year = 12 # WK\n    annual_salary_first_year = monthly_salary * months_per_year\n\n    # L2\n    salary_increase_percentage = Fraction(30, 100) # salary increased by 30%\n    monthly_increase = monthly_salary * salary_increase_percentage\n\n    # L3\n    new_monthly_salary = monthly_salary + monthly_increase\n\n    # L4\n    annual_salary_subsequent_years = new_monthly_salary * months_per_year\n\n    # L5\n    total_earnings = annual_salary_first_year + annual_salary_subsequent_years + annual_salary_subsequent_years\n\n    # FA\n    answer = total_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "new_monthly_salary",
+    "operand_to_replace": "monthly_increase",
+    "replacement_variable": "salary_increase_percentage"
+  },
+  "correct_trace": {
+    "monthly_salary": 6000,
+    "months_per_year": 12,
+    "annual_salary_first_year": 72000,
+    "salary_increase_percentage": "3/10",
+    "monthly_increase": "1800",
+    "new_monthly_salary": "7800",
+    "annual_salary_subsequent_years": "93600",
+    "total_earnings": "259200",
+    "answer": "259200"
+  },
+  "flawed_trace": {
+    "monthly_salary": 6000,
+    "months_per_year": 12,
+    "annual_salary_first_year": 72000,
+    "salary_increase_percentage": "3/10",
+    "monthly_increase": "1800",
+    "new_monthly_salary": "60003/10",
+    "annual_salary_subsequent_years": "360018/5",
+    "total_earnings": "1080036/5",
+    "answer": "1080036/5"
+  },
+  "correct_value": "7800",
+  "flawed_value": "60003/10",
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L1",
+      "output_variable": "annual_salary_first_year",
+      "question_inputs": [
+        "monthly_salary"
+      ],
+      "solution_line_template": "His annual salary for the first year of working is {monthly_salary} x {months_per_year}= $<<{monthly_salary}*{months_per_year}={annual_salary_first_year}>>{annual_salary_first_year}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "monthly_increase",
+      "question_inputs": [
+        "salary_increase_percentage"
+      ],
+      "solution_line_template": "Kirt's monthly increase is ${monthly_salary} x {salary_increase_percentage}= $<<{monthly_salary}*{salary_increase_percentage}={monthly_increase}>>{monthly_increase}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "new_monthly_salary",
+      "question_inputs": [],
+      "solution_line_template": "So, he received ${monthly_salary} + ${monthly_increase}= $<<{monthly_salary}+{monthly_increase}={new_monthly_salary}>>{new_monthly_salary} monthly on the second and third year of working."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "annual_salary_subsequent_years",
+      "question_inputs": [],
+      "solution_line_template": "Kirt's annual salary in the second and third year was ${new_monthly_salary} x {months_per_year} = ${annual_salary_subsequent_years}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_earnings",
+      "question_inputs": [],
+      "solution_line_template": "Thus, his total earning after 3 years is ${annual_salary_first_year} + ${annual_salary_subsequent_years} + ${annual_salary_subsequent_years} = $<<{annual_salary_first_year}+{annual_salary_subsequent_years}+{annual_salary_subsequent_years}={total_earnings}>>{total_earnings}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "His annual salary for the first year of working is 6000 x 12= $<<6000*12=72000>>72000.",
+    "L2": "Kirt's monthly increase is $6000 x 30/100= $<<6000*30/100=1800>>1800.",
+    "L3": "So, he received $6000 + $30/100= $<<6000+30/100=60003/10>>60003/10 monthly on the second and third year of working.",
+    "L4": "Kirt's annual salary in the second and third year was $60003/10 x 12 = $360018/5.",
+    "L5": "Thus, his total earning after 3 years is $72000 + $360018/5 + $360018/5 = $<<72000+360018/5+360018/5=1080036/5>>1080036/5.",
+    "FA": "#### 1080036/5"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'salary_increase_percentage' (value: 30/100) was used instead of 'monthly_increase' (value: 1800).",
+  "repro_seed": 4028779972680049113,
+  "model_name": "google_gemini-2.5-flash"
+}

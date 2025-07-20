@@ -1,0 +1,100 @@
+{
+  "index": 5387,
+  "original_solution_mapping": {
+    "FA": "#### 675",
+    "L1": "April has thirty days, so half will be 30 / 2 = <<30/2=15>>15.",
+    "L2": "For the first 15 days, he received 20 * 15 = <<20*15=300>>300 emails.",
+    "L3": "For the remaining 15 days, the number of emails increased to 20 + 5 = 25 emails.",
+    "L4": "The total number of emails for the remaining days of the month is 25 * 15 = <<25*15=375>>375 emails.",
+    "L5": "The total number of emails for April is 375 + 300 = <<375+300=675>>675 emails."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5387.\n    Returns: the total number of emails Jimmy's father had at the end of April.\n    \"\"\"\n    # L1\n    days_in_april = 30 # WK\n    half_divisor = 2 # WK\n    first_half_days = days_in_april / half_divisor\n\n    # L2\n    daily_emails_initial = 20 # 20 emails a day\n    emails_first_half = daily_emails_initial * first_half_days\n\n    # L3\n    additional_emails_per_day = 5 # sent 5 more emails per day\n    daily_emails_after_subscription = daily_emails_initial + additional_emails_per_day\n\n    # L4\n    emails_second_half = daily_emails_after_subscription * first_half_days\n\n    # L5\n    total_emails_april = emails_second_half + emails_first_half\n\n    # FA\n    answer = total_emails_april\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "first_half_days",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x31ad9d490>"
+  },
+  "correct_trace": {
+    "days_in_april": 30,
+    "half_divisor": 2,
+    "first_half_days": 15.0,
+    "daily_emails_initial": 20,
+    "emails_first_half": 300.0,
+    "additional_emails_per_day": 5,
+    "daily_emails_after_subscription": 25,
+    "emails_second_half": 375.0,
+    "total_emails_april": 675.0,
+    "answer": 675.0
+  },
+  "flawed_trace": {
+    "days_in_april": 30,
+    "half_divisor": 2,
+    "first_half_days": 28,
+    "daily_emails_initial": 20,
+    "emails_first_half": 560,
+    "additional_emails_per_day": 5,
+    "daily_emails_after_subscription": 25,
+    "emails_second_half": 700,
+    "total_emails_april": 1260,
+    "answer": 1260
+  },
+  "correct_value": 15.0,
+  "flawed_value": 28,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "days_in_april",
+        "half_divisor"
+      ],
+      "line_number": "L1",
+      "output_variable": "first_half_days",
+      "question_inputs": [],
+      "solution_line_template": "April has {days_in_april} days, so half will be {days_in_april} / {half_divisor} = <<{days_in_april}/{half_divisor}={first_half_days}>>{first_half_days}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "emails_first_half",
+      "question_inputs": [
+        "daily_emails_initial"
+      ],
+      "solution_line_template": "For the first {first_half_days} days, he received {daily_emails_initial} * {first_half_days} = <<{daily_emails_initial}*{first_half_days}={emails_first_half}>>{emails_first_half} emails."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "daily_emails_after_subscription",
+      "question_inputs": [
+        "additional_emails_per_day"
+      ],
+      "solution_line_template": "For the remaining {first_half_days} days, the number of emails increased to {daily_emails_initial} + {additional_emails_per_day} = {daily_emails_after_subscription} emails."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "emails_second_half",
+      "question_inputs": [],
+      "solution_line_template": "The total number of emails for the remaining days of the month is {daily_emails_after_subscription} * {first_half_days} = <<{daily_emails_after_subscription}*{first_half_days}={emails_second_half}>>{emails_second_half} emails."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_emails_april",
+      "question_inputs": [],
+      "solution_line_template": "The total number of emails for April is {emails_second_half} + {emails_first_half} = <<{emails_second_half}+{emails_first_half}={total_emails_april}>>{total_emails_april} emails."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "April has 30 days, so half will be 30 / 2 = <<30/2=28>>28.",
+    "L2": "For the first 28 days, he received 20 * 28 = <<20*28=560>>560 emails.",
+    "L3": "For the remaining 28 days, the number of emails increased to 20 + 5 = 25 emails.",
+    "L4": "The total number of emails for the remaining days of the month is 25 * 28 = <<25*28=700>>700 emails.",
+    "L5": "The total number of emails for April is 700 + 560 = <<700+560=1260>>1260 emails.",
+    "FA": "#### 1260"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": -993026498138313570,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 3401,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "Jack had 13 more than 8 notebooks for a total of 13+8 = <<13+8=21>>21 notebooks",
+    "L2": "He gave 5 notebooks to Paula so he has 21-5 = <<21-5=16>>16 notebooks left",
+    "L3": "He gave another 6 to Mike so he has 16-6 = <<16-6=10>>10 notebooks left"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3401.\n    Returns: the number of notebooks Jack has left.\n    \"\"\"\n    # L1\n    jack_more_than_gerald = 13 # 13 more notebooks\n    gerald_notebooks = 8 # Gerald has 8 notebooks\n    jack_initial_notebooks = jack_more_than_gerald + gerald_notebooks\n\n    # L2\n    given_to_paula = 5 # gives 5 notebooks to Paula\n    after_paula_given = jack_initial_notebooks - given_to_paula\n\n    # L3\n    given_to_mike = 6 # 6 notebooks to Mike\n    jack_notebooks_left = after_paula_given - given_to_mike\n\n    # FA\n    answer = jack_notebooks_left\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "jack_initial_notebooks",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x317c3ae50>"
+  },
+  "correct_trace": {
+    "jack_more_than_gerald": 13,
+    "gerald_notebooks": 8,
+    "jack_initial_notebooks": 21,
+    "given_to_paula": 5,
+    "after_paula_given": 16,
+    "given_to_mike": 6,
+    "jack_notebooks_left": 10,
+    "answer": 10
+  },
+  "flawed_trace": {
+    "jack_more_than_gerald": 13,
+    "gerald_notebooks": 8,
+    "jack_initial_notebooks": 104,
+    "given_to_paula": 5,
+    "after_paula_given": 99,
+    "given_to_mike": 6,
+    "jack_notebooks_left": 93,
+    "answer": 93
+  },
+  "correct_value": 21,
+  "flawed_value": 104,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "jack_initial_notebooks",
+      "question_inputs": [
+        "jack_more_than_gerald",
+        "gerald_notebooks"
+      ],
+      "solution_line_template": "Jack had {jack_more_than_gerald} more than {gerald_notebooks} notebooks for a total of {jack_more_than_gerald}+{gerald_notebooks} = <<{jack_more_than_gerald}+{gerald_notebooks}={jack_initial_notebooks}>>{jack_initial_notebooks} notebooks"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "after_paula_given",
+      "question_inputs": [
+        "given_to_paula"
+      ],
+      "solution_line_template": "He gave {given_to_paula} notebooks to Paula so he has {jack_initial_notebooks}-{given_to_paula} = <<{jack_initial_notebooks}-{given_to_paula}={after_paula_given}>>{after_paula_given} notebooks left"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "jack_notebooks_left",
+      "question_inputs": [
+        "given_to_mike"
+      ],
+      "solution_line_template": "He gave another {given_to_mike} to Mike so he has {after_paula_given}-{given_to_mike} = <<{after_paula_given}-{given_to_mike}={jack_notebooks_left}>>{jack_notebooks_left} notebooks left"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jack had 13 more than 8 notebooks for a total of 13+8 = <<13+8=104>>104 notebooks",
+    "L2": "He gave 5 notebooks to Paula so he has 104-5 = <<104-5=99>>99 notebooks left",
+    "L3": "He gave another 6 to Mike so he has 99-6 = <<99-6=93>>93 notebooks left",
+    "FA": "#### 93"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": -3254611275038885872,
+  "model_name": "google_gemini-2.5-flash"
+}

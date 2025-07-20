@@ -1,0 +1,76 @@
+{
+  "index": 876,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "In the first verse, 30 / 2 = <<30/2=15>>15 singers sang.",
+    "L2": "In the second verse, 15 / 3 = <<15/3=5>>5 singers joined in.",
+    "L3": "In the final verse, 30 - 15 - 5 = <<30-15-5=10>>10 singers joined for the whole choir to sing together."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 876.\n    Returns: the number of people who joined in the final third verse.\n    \"\"\"\n    # L1\n    total_singers = 30 # 30 singers\n    first_verse_divisor = 2 # half of them sang\n    singers_first_verse = total_singers / first_verse_divisor\n\n    # L2\n    remaining_after_first_verse = total_singers - singers_first_verse # remaining singers\n    second_verse_divisor = 3 # a third of the remaining singers\n    singers_second_verse = remaining_after_first_verse / second_verse_divisor\n\n    # L3\n    singers_third_verse = total_singers - singers_first_verse - singers_second_verse\n\n    # FA\n    answer = singers_third_verse\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "singers_second_verse",
+    "operand_to_replace": "second_verse_divisor",
+    "replacement_variable": "singers_first_verse"
+  },
+  "correct_trace": {
+    "total_singers": 30,
+    "first_verse_divisor": 2,
+    "singers_first_verse": 15.0,
+    "remaining_after_first_verse": 15.0,
+    "second_verse_divisor": 3,
+    "singers_second_verse": 5.0,
+    "singers_third_verse": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "total_singers": 30,
+    "first_verse_divisor": 2,
+    "singers_first_verse": 15.0,
+    "remaining_after_first_verse": 15.0,
+    "second_verse_divisor": 3,
+    "singers_second_verse": 1.0,
+    "singers_third_verse": 14.0,
+    "answer": 14.0
+  },
+  "correct_value": 5.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "singers_first_verse",
+      "question_inputs": [
+        "total_singers",
+        "first_verse_divisor"
+      ],
+      "solution_line_template": "In the first verse, {total_singers} / {first_verse_divisor} = <<{total_singers}/{first_verse_divisor}={singers_first_verse}>>{singers_first_verse} singers sang."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "singers_second_verse",
+      "question_inputs": [
+        "second_verse_divisor"
+      ],
+      "solution_line_template": "In the second verse, {remaining_after_first_verse} / {second_verse_divisor} = <<{remaining_after_first_verse}/{second_verse_divisor}={singers_second_verse}>>{singers_second_verse} singers joined in."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "singers_third_verse",
+      "question_inputs": [],
+      "solution_line_template": "In the final verse, {total_singers} - {singers_first_verse} - {singers_second_verse} = <<{total_singers}-{singers_first_verse}-{singers_second_verse}={singers_third_verse}>>{singers_third_verse} singers joined for the whole choir to sing together."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In the first verse, 30 / 2 = <<30/2=15>>15 singers sang.",
+    "L2": "In the second verse, 15 / 15 = <<15/15=1>>1 singers joined in.",
+    "L3": "In the final verse, 30 - 15 - 1 = <<30-15-1=14>>14 singers joined for the whole choir to sing together.",
+    "FA": "#### 14"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'singers_first_verse' (15.0) was used instead of 'second_verse_divisor' (3).",
+  "repro_seed": -6353979059857207188,
+  "model_name": "google_gemini-2.5-flash"
+}

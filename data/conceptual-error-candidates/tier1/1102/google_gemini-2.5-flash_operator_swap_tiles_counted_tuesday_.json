@@ -1,0 +1,77 @@
+{
+  "index": 1102,
+  "original_solution_mapping": {
+    "FA": "#### 301",
+    "L1": "When Carla was waiting on Monday she counted 38 ceiling tiles and on Tuesday she counted them twice, 38 ceiling tiles x 2 = <<38*2=76>>76 times she counted a ceiling tile.",
+    "L2": "She also counted 75 books in the room on Monday and counted them three times in a row on Tuesday, 75 books x 3 = <<75*3=225>>225 times she counted a book.",
+    "L3": "On Tuesday Carla counted the ceiling tiles 76 times + counted books 225 times = <<76+225=301>>301 times Carla counted something on Tuesday."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1102.\n    Returns: the total number of times Carla counted something on Tuesday.\n    \"\"\"\n    # L1\n    ceiling_tiles_monday = 38 # counts the tiles on the ceiling--38\n    times_counted_tiles_tuesday = 2 # counted all the tiles twice in a row\n    tiles_counted_tuesday = ceiling_tiles_monday * times_counted_tiles_tuesday\n\n    # L2\n    books_monday = 75 # counts the books in the room--75\n    times_counted_books_tuesday = 3 # counts the books three times in a row\n    books_counted_tuesday = books_monday * times_counted_books_tuesday\n\n    # L3\n    total_counts_tuesday = tiles_counted_tuesday + books_counted_tuesday\n\n    # FA\n    answer = total_counts_tuesday\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "tiles_counted_tuesday",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x31764a610>"
+  },
+  "correct_trace": {
+    "ceiling_tiles_monday": 38,
+    "times_counted_tiles_tuesday": 2,
+    "tiles_counted_tuesday": 76,
+    "books_monday": 75,
+    "times_counted_books_tuesday": 3,
+    "books_counted_tuesday": 225,
+    "total_counts_tuesday": 301,
+    "answer": 301
+  },
+  "flawed_trace": {
+    "ceiling_tiles_monday": 38,
+    "times_counted_tiles_tuesday": 2,
+    "tiles_counted_tuesday": 40,
+    "books_monday": 75,
+    "times_counted_books_tuesday": 3,
+    "books_counted_tuesday": 225,
+    "total_counts_tuesday": 265,
+    "answer": 265
+  },
+  "correct_value": 76,
+  "flawed_value": 40,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "ceiling_tiles_monday",
+        "times_counted_tiles_tuesday"
+      ],
+      "WK_inputs": [],
+      "output_variable": "tiles_counted_tuesday",
+      "solution_line_template": "When Carla was waiting on Monday she counted {ceiling_tiles_monday} ceiling tiles and on Tuesday she counted them twice, {ceiling_tiles_monday} ceiling tiles x {times_counted_tiles_tuesday} = <<{ceiling_tiles_monday}*{times_counted_tiles_tuesday}={tiles_counted_tuesday}>>{tiles_counted_tuesday} times she counted a ceiling tile."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "books_monday",
+        "times_counted_books_tuesday"
+      ],
+      "WK_inputs": [],
+      "output_variable": "books_counted_tuesday",
+      "solution_line_template": "She also counted {books_monday} books in the room on Monday and counted them three times in a row on Tuesday, {books_monday} books x {times_counted_books_tuesday} = <<{books_monday}*{times_counted_books_tuesday}={books_counted_tuesday}>>{books_counted_tuesday} times she counted a book."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_counts_tuesday",
+      "solution_line_template": "On Tuesday Carla counted the ceiling tiles {tiles_counted_tuesday} times + counted books {books_counted_tuesday} times = <<{tiles_counted_tuesday}+{books_counted_tuesday}={total_counts_tuesday}>>{total_counts_tuesday} times Carla counted something on Tuesday."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "When Carla was waiting on Monday she counted 38 ceiling tiles and on Tuesday she counted them twice, 38 ceiling tiles x 2 = <<38*2=40>>40 times she counted a ceiling tile.",
+    "L2": "She also counted 75 books in the room on Monday and counted them three times in a row on Tuesday, 75 books x 3 = <<75*3=225>>225 times she counted a book.",
+    "L3": "On Tuesday Carla counted the ceiling tiles 40 times + counted books 225 times = <<40+225=265>>265 times Carla counted something on Tuesday.",
+    "FA": "#### 265"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 8166413037447784235,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 3306,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "Larry jogs for a total of 3 + 5 = <<3+5=8>>8 days.",
+    "L2": "Thus, he jogs a total of 8 x 30 = <<8*30=240>>240 minutes.",
+    "L3": "This is equal to 240/60 = <<240/60=4>>4 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3306.\n    Returns: the total hours Larry jogs for two weeks.\n    \"\"\"\n    # L1\n    days_week_1 = 3 # jogs for 3 days\n    days_week_2 = 5 # jogs for 5 days\n    total_days_jogged = days_week_1 + days_week_2\n\n    # L2\n    minutes_per_day = 30 # jogs for 30 minutes each day\n    total_minutes_jogged = total_days_jogged * minutes_per_day\n\n    # L3\n    minutes_per_hour = 60 # WK\n    total_hours_jogged = total_minutes_jogged / minutes_per_hour\n\n    # FA\n    answer = total_hours_jogged\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_hours_jogged",
+    "operand_to_replace": "minutes_per_hour",
+    "replacement_variable": "minutes_per_day"
+  },
+  "correct_trace": {
+    "days_week_1": 3,
+    "days_week_2": 5,
+    "total_days_jogged": 8,
+    "minutes_per_day": 30,
+    "total_minutes_jogged": 240,
+    "minutes_per_hour": 60,
+    "total_hours_jogged": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "days_week_1": 3,
+    "days_week_2": 5,
+    "total_days_jogged": 8,
+    "minutes_per_day": 30,
+    "total_minutes_jogged": 240,
+    "minutes_per_hour": 60,
+    "total_hours_jogged": 8.0,
+    "answer": 8.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 8.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_days_jogged",
+      "question_inputs": [
+        "days_week_1",
+        "days_week_2"
+      ],
+      "solution_line_template": "Larry jogs for a total of {days_week_1} + {days_week_2} = <<{days_week_1}+{days_week_2}={total_days_jogged}>>{total_days_jogged} days."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_minutes_jogged",
+      "question_inputs": [
+        "minutes_per_day"
+      ],
+      "solution_line_template": "Thus, he jogs a total of {total_days_jogged} x {minutes_per_day} = <<{total_days_jogged}*{minutes_per_day}={total_minutes_jogged}>>{total_minutes_jogged} minutes."
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_hours_jogged",
+      "question_inputs": [],
+      "solution_line_template": "This is equal to {total_minutes_jogged}/{minutes_per_hour} = <<{total_minutes_jogged}/{minutes_per_hour}={total_hours_jogged}>>{total_hours_jogged} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Larry jogs for a total of 3 + 5 = <<3+5=8>>8 days.",
+    "L2": "Thus, he jogs a total of 8 x 30 = <<8*30=240>>240 minutes.",
+    "L3": "This is equal to 240/30 = <<240/30=8>>8 hours.",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'minutes_per_day' (30) was used instead of 'minutes_per_hour' (60).",
+  "repro_seed": 732128999025325308,
+  "model_name": "google_gemini-2.5-flash"
+}

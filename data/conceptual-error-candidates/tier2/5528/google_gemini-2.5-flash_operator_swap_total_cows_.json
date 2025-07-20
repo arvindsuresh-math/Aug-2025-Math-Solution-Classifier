@@ -1,0 +1,78 @@
+{
+  "index": 5528,
+  "original_solution_mapping": {
+    "FA": "#### 150",
+    "L1": "The farmer has 125 cows because 50 / .4 = <<50/.4=125>>125",
+    "L2": "The farmer has 75 female cows because 125 x .6 = <<125*.6=75>>75",
+    "L3": "The farmer will get 150 gallons of milk a day because 75 x 2 = <<75*2=150>>150"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5528.\n    Returns: the total amount of milk the farmer will get a day.\n    \"\"\"\n    # L1\n    male_cows_count = 50 # 50 male cows\n    male_percentage_decimal = 0.4 # 40% of a farmer's cattle are males\n    total_cows = male_cows_count / male_percentage_decimal\n\n    # L2\n    female_percentage_decimal = 0.6 # The rest are females (100% - 40% = 60%)\n    female_cows_count = total_cows * female_percentage_decimal\n\n    # L3\n    milk_per_female_cow = 2 # produces 2 gallons of milk a day\n    total_milk_per_day = female_cows_count * milk_per_female_cow\n\n    # FA\n    answer = total_milk_per_day\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_cows",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x315cf5610>"
+  },
+  "correct_trace": {
+    "male_cows_count": 50,
+    "male_percentage_decimal": 0.4,
+    "total_cows": 125.0,
+    "female_percentage_decimal": 0.6,
+    "female_cows_count": 75.0,
+    "milk_per_female_cow": 2,
+    "total_milk_per_day": 150.0,
+    "answer": 150.0
+  },
+  "flawed_trace": {
+    "male_cows_count": 50,
+    "male_percentage_decimal": 0.4,
+    "total_cows": 20.0,
+    "female_percentage_decimal": 0.6,
+    "female_cows_count": 12.0,
+    "milk_per_female_cow": 2,
+    "total_milk_per_day": 24.0,
+    "answer": 24.0
+  },
+  "correct_value": 125.0,
+  "flawed_value": 20.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_cows",
+      "question_inputs": [
+        "male_cows_count",
+        "male_percentage_decimal"
+      ],
+      "solution_line_template": "The farmer has {total_cows} cows because {male_cows_count} / {male_percentage_decimal} = <<{male_cows_count}/{male_percentage_decimal}={total_cows}>>{total_cows}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "female_cows_count",
+      "question_inputs": [
+        "female_percentage_decimal"
+      ],
+      "solution_line_template": "The farmer has {female_cows_count} female cows because {total_cows} x {female_percentage_decimal} = <<{total_cows}*{female_percentage_decimal}={female_cows_count}>>{female_cows_count}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_milk_per_day",
+      "question_inputs": [
+        "milk_per_female_cow"
+      ],
+      "solution_line_template": "The farmer will get {total_milk_per_day} gallons of milk a day because {female_cows_count} x {milk_per_female_cow} = <<{female_cows_count}*{milk_per_female_cow}={total_milk_per_day}>>{total_milk_per_day}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The farmer has 20 cows because 50 / 0.4 = <<50/0.4=20>>20",
+    "L2": "The farmer has 12 female cows because 20 x 0.6 = <<20*0.6=12>>12",
+    "L3": "The farmer will get 24 gallons of milk a day because 12 x 2 = <<12*2=24>>24",
+    "FA": "#### 24"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -593544265218774530,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,64 @@
+{
+  "index": 6208,
+  "original_solution_mapping": {
+    "FA": "#### 44",
+    "L1": "Flour + sugar = 4 + 1.5 = <<4+1.5=5.5>>5.5 cups",
+    "L2": "8 batches = 5.5 * 8 = <<8*5.5=44>>44 cups",
+    "L3": "There would be 44 cups of flour and sugar combined for 8 batches of cookies."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6208.\n    Returns: the total cups of flour and sugar needed for 8 batches of cookies.\n    \"\"\"\n    # L1\n    flour_per_batch = 4 # 4 cups of flour\n    sugar_per_batch = 1.5 # 1.5 cups of sugar\n    total_ingredients_per_batch = flour_per_batch + sugar_per_batch\n\n    # L2\n    num_batches = 8 # 8 batches\n    total_cups_needed = total_ingredients_per_batch * num_batches\n\n    # FA\n    answer = total_cups_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cups_needed",
+    "operand_to_replace": "num_batches",
+    "replacement_variable": "flour_per_batch"
+  },
+  "correct_trace": {
+    "flour_per_batch": 4,
+    "sugar_per_batch": 1.5,
+    "total_ingredients_per_batch": 5.5,
+    "num_batches": 8,
+    "total_cups_needed": 44.0,
+    "answer": 44.0
+  },
+  "flawed_trace": {
+    "flour_per_batch": 4,
+    "sugar_per_batch": 1.5,
+    "total_ingredients_per_batch": 5.5,
+    "num_batches": 8,
+    "total_cups_needed": 22.0,
+    "answer": 22.0
+  },
+  "correct_value": 44.0,
+  "flawed_value": 22.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_ingredients_per_batch",
+      "question_inputs": [
+        "flour_per_batch",
+        "sugar_per_batch"
+      ],
+      "solution_line_template": "Flour + sugar = {flour_per_batch} + {sugar_per_batch} = <<{flour_per_batch}+{sugar_per_batch}={total_ingredients_per_batch}>>{total_ingredients_per_batch} cups"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cups_needed",
+      "question_inputs": [
+        "num_batches"
+      ],
+      "solution_line_template": "{num_batches} batches = {total_ingredients_per_batch} * {num_batches} = <<{num_batches}*{total_ingredients_per_batch}={total_cups_needed}>>{total_cups_needed} cups"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Flour + sugar = 4 + 1.5 = <<4+1.5=5.5>>5.5 cups",
+    "L2": "4 batches = 5.5 * 4 = <<4*5.5=22>>22 cups",
+    "FA": "#### 22"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'flour_per_batch' (4) was used instead of 'num_batches' (8).",
+  "repro_seed": -6249882966634933511,
+  "model_name": "google_gemini-2.5-flash"
+}

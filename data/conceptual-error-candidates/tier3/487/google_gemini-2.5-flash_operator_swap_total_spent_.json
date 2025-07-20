@@ -1,0 +1,104 @@
+{
+  "index": 487,
+  "original_solution_mapping": {
+    "FA": "#### 72",
+    "L1": "Jonah spent 6 x $3 = $<<6*3=18>>18",
+    "L2": "He made a total of 6 x 12 = <<6*12=72>>72 pineapple rings.",
+    "L3": "He sold 72/4 = <<72/4=18>>18 sets of pineapple rings.",
+    "L4": "He made 18 x $5 = $<<18*5=90>>90",
+    "L5": "His profit was $90 - $18 = $<<90-18=72>>72"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 487.\n    Returns: the profit Jonah made.\n    \"\"\"\n    # L1\n    num_pineapples = 6 # Jonah bought 6 pineapples\n    cost_per_pineapple = 3 # for $3 each\n    total_spent = num_pineapples * cost_per_pineapple\n\n    # L2\n    rings_per_pineapple = 12 # Each pineapple could be cut into 12 pineapple rings\n    total_pineapple_rings = num_pineapples * rings_per_pineapple\n\n    # L3\n    rings_per_set_sold = 4 # sold 4 pineapple rings\n    num_sets_sold = total_pineapple_rings / rings_per_set_sold\n\n    # L4\n    price_per_set = 5 # for $5 each\n    total_revenue = num_sets_sold * price_per_set\n\n    # L5\n    profit = total_revenue - total_spent\n\n    # FA\n    answer = profit\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_spent",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x316202ed0>"
+  },
+  "correct_trace": {
+    "num_pineapples": 6,
+    "cost_per_pineapple": 3,
+    "total_spent": 18,
+    "rings_per_pineapple": 12,
+    "total_pineapple_rings": 72,
+    "rings_per_set_sold": 4,
+    "num_sets_sold": 18.0,
+    "price_per_set": 5,
+    "total_revenue": 90.0,
+    "profit": 72.0,
+    "answer": 72.0
+  },
+  "flawed_trace": {
+    "num_pineapples": 6,
+    "cost_per_pineapple": 3,
+    "total_spent": 9,
+    "rings_per_pineapple": 12,
+    "total_pineapple_rings": 72,
+    "rings_per_set_sold": 4,
+    "num_sets_sold": 18.0,
+    "price_per_set": 5,
+    "total_revenue": 90.0,
+    "profit": 81.0,
+    "answer": 81.0
+  },
+  "correct_value": 18,
+  "flawed_value": 9,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_spent",
+      "question_inputs": [
+        "num_pineapples",
+        "cost_per_pineapple"
+      ],
+      "solution_line_template": "Jonah spent {num_pineapples} x ${cost_per_pineapple} = $<<{num_pineapples}*{cost_per_pineapple}={total_spent}>>{total_spent}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_pineapple_rings",
+      "question_inputs": [
+        "rings_per_pineapple"
+      ],
+      "solution_line_template": "He made a total of {num_pineapples} x {rings_per_pineapple} = <<{num_pineapples}*{rings_per_pineapple}={total_pineapple_rings}>>{total_pineapple_rings} pineapple rings."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_sets_sold",
+      "question_inputs": [
+        "rings_per_set_sold"
+      ],
+      "solution_line_template": "He sold {total_pineapple_rings}/{rings_per_set_sold} = <<{total_pineapple_rings}/{rings_per_set_sold}={num_sets_sold}>>{num_sets_sold} sets of pineapple rings."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_revenue",
+      "question_inputs": [
+        "price_per_set"
+      ],
+      "solution_line_template": "He made {num_sets_sold} x ${price_per_set} = $<<{num_sets_sold}*{price_per_set}={total_revenue}>>{total_revenue}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "profit",
+      "question_inputs": [],
+      "solution_line_template": "His profit was ${total_revenue} - ${total_spent} = $<<{total_revenue}-{total_spent}={profit}>>{profit}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jonah spent 6 x $3 = $<<6*3=9>>9",
+    "L2": "He made a total of 6 x 12 = <<6*12=72>>72 pineapple rings.",
+    "L3": "He sold 72/4 = <<72/4=18>>18 sets of pineapple rings.",
+    "L4": "He made 18 x $5 = $<<18*5=90>>90",
+    "L5": "His profit was $90 - $9 = $<<90-9=81>>81",
+    "FA": "#### 81"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 1655296417177316164,
+  "model_name": "google_gemini-2.5-flash"
+}

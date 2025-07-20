@@ -1,0 +1,85 @@
+{
+  "index": 4760,
+  "original_solution_mapping": {
+    "FA": "#### 540",
+    "L1": "If Mary weighs 160 lbs, Jamison weighs 160 lbs + 20 lbs = <<160+20=180>>180 lbs.",
+    "L2": "If John weighs one-quarter less than what Mary weighs, he weighs 1/4 * 160 lbs = <<1/4*160=40>>40 lbs more.",
+    "L3": "The total weight of John is 160 lbs + 40 lbs = <<160+40=200>>200 lbs.",
+    "L4": "The total weight for the three is 200 lbs + 180 lbs + 160 lbs = <<200+180+160=540>>540 lbs."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4760.\n    Returns: the combined weight of John, Mary, and Jamison.\n    \"\"\"\n    # L1\n    mary_weight = 160 # Mary weighs 160 lbs\n    weight_difference_mary_jamison = 20 # 20 lbs less than Jamison's weight\n    jamison_weight = mary_weight + weight_difference_mary_jamison\n\n    # L2\n    john_fraction_more = Fraction(1, 4) # one-quarter times more\n    john_additional_weight = john_fraction_more * mary_weight\n\n    # L3\n    john_total_weight = mary_weight + john_additional_weight\n\n    # L4\n    total_combined_weight = john_total_weight + jamison_weight + mary_weight\n\n    # FA\n    answer = total_combined_weight\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "john_total_weight",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x31a7cbb90>"
+  },
+  "correct_trace": {
+    "mary_weight": 160,
+    "weight_difference_mary_jamison": 20,
+    "jamison_weight": 180,
+    "john_fraction_more": "1/4",
+    "john_additional_weight": "40",
+    "john_total_weight": "200",
+    "total_combined_weight": "540",
+    "answer": "540"
+  },
+  "flawed_trace": {
+    "mary_weight": 160,
+    "weight_difference_mary_jamison": 20,
+    "jamison_weight": 180,
+    "john_fraction_more": "1/4",
+    "john_additional_weight": "40",
+    "john_total_weight": "120",
+    "total_combined_weight": "460",
+    "answer": "460"
+  },
+  "correct_value": "200",
+  "flawed_value": "120",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "jamison_weight",
+      "question_inputs": [
+        "mary_weight",
+        "weight_difference_mary_jamison"
+      ],
+      "solution_line_template": "If Mary weighs {mary_weight} lbs, Jamison weighs {mary_weight} lbs + {weight_difference_mary_jamison} lbs = <<{mary_weight}+{weight_difference_mary_jamison}={jamison_weight}>>{jamison_weight} lbs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "john_additional_weight",
+      "question_inputs": [
+        "john_fraction_more"
+      ],
+      "solution_line_template": "If John weighs one-quarter less than what Mary weighs, he weighs {john_fraction_more} * {mary_weight} lbs = <<{john_fraction_more}*{mary_weight}={john_additional_weight}>>{john_additional_weight} lbs more."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "john_total_weight",
+      "question_inputs": [],
+      "solution_line_template": "The total weight of John is {mary_weight} lbs + {john_additional_weight} lbs = <<{mary_weight}+{john_additional_weight}={john_total_weight}>>{john_total_weight} lbs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_combined_weight",
+      "question_inputs": [],
+      "solution_line_template": "The total weight for the three is {john_total_weight} lbs + {jamison_weight} lbs + {mary_weight} lbs = <<{john_total_weight}+{jamison_weight}+{mary_weight}={total_combined_weight}>>{total_combined_weight} lbs."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Mary weighs 160 lbs, Jamison weighs 160 lbs + 20 lbs = <<160+20=180>>180 lbs.",
+    "L2": "If John weighs one-quarter less than what Mary weighs, he weighs 1/4 * 160 lbs = <<1/4*160=40>>40 lbs more.",
+    "L3": "The total weight of John is 160 lbs + 40 lbs = <<160+40=120>>120 lbs.",
+    "L4": "The total weight for the three is 120 lbs + 180 lbs + 160 lbs = <<120+180+160=460>>460 lbs.",
+    "FA": "#### 460"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": -8937330451223281647,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,85 @@
+{
+  "index": 2995,
+  "original_solution_mapping": {
+    "FA": "#### 720",
+    "L1": "The number of trees that Amiyah cut is 20/100*400 = <<20/100*400=80>>80",
+    "L2": "The number of trees remaining on the farm after she cut 80 trees is 400-80 = <<400-80=320>>320",
+    "L3": "For every tree that Amiyah cut, she plants 5 new trees, and since she cut 80 trees, she planted 80*5 = <<80*5=400>>400 new trees.",
+    "L4": "The total number of trees on the farm is now 320+400 = <<320+400=720>>720 trees."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2995.\n    Returns: the total number of trees on the farm.\n    \"\"\"\n    # L1\n    percentage_cut = Fraction(20, 100) # cut 20% of them\n    initial_trees = 400 # 400 trees on her farm\n    trees_cut = percentage_cut * initial_trees\n\n    # L2\n    trees_remaining = initial_trees - trees_cut\n\n    # L3\n    trees_planted_per_cut_tree = 5 # plants 5 new trees\n    new_trees_planted = trees_cut * trees_planted_per_cut_tree\n\n    # L4\n    total_trees_on_farm = trees_remaining + new_trees_planted\n\n    # FA\n    answer = total_trees_on_farm\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "new_trees_planted",
+    "operand_to_replace": "trees_cut",
+    "replacement_variable": "trees_planted_per_cut_tree"
+  },
+  "correct_trace": {
+    "percentage_cut": "1/5",
+    "initial_trees": 400,
+    "trees_cut": "80",
+    "trees_remaining": "320",
+    "trees_planted_per_cut_tree": 5,
+    "new_trees_planted": "400",
+    "total_trees_on_farm": "720",
+    "answer": "720"
+  },
+  "flawed_trace": {
+    "percentage_cut": "1/5",
+    "initial_trees": 400,
+    "trees_cut": "80",
+    "trees_remaining": "320",
+    "trees_planted_per_cut_tree": 5,
+    "new_trees_planted": 25,
+    "total_trees_on_farm": "345",
+    "answer": "345"
+  },
+  "correct_value": "400",
+  "flawed_value": 25,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "trees_cut",
+      "question_inputs": [
+        "percentage_cut",
+        "initial_trees"
+      ],
+      "solution_line_template": "The number of trees that Amiyah cut is {percentage_cut}*{initial_trees} = <<{percentage_cut}*{initial_trees}={trees_cut}>>{trees_cut}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "trees_remaining",
+      "question_inputs": [],
+      "solution_line_template": "The number of trees remaining on the farm after she cut {trees_cut} trees is {initial_trees}-{trees_cut} = <<{initial_trees}-{trees_cut}={trees_remaining}>>{trees_remaining}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "new_trees_planted",
+      "question_inputs": [
+        "trees_planted_per_cut_tree"
+      ],
+      "solution_line_template": "For every tree that Amiyah cut, she plants {trees_planted_per_cut_tree} new trees, and since she cut {trees_cut} trees, she planted {trees_cut}*{trees_planted_per_cut_tree} = <<{trees_cut}*{trees_planted_per_cut_tree}={new_trees_planted}>>{new_trees_planted} new trees."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_trees_on_farm",
+      "question_inputs": [],
+      "solution_line_template": "The total number of trees on the farm is now {trees_remaining}+{new_trees_planted} = <<{trees_remaining}+{new_trees_planted}={total_trees_on_farm}>>{total_trees_on_farm} trees."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The number of trees that Amiyah cut is 20/100*400 = <<20/100*400=80>>80",
+    "L2": "The number of trees remaining on the farm after she cut 80 trees is 400-80 = <<400-80=320>>320",
+    "L3": "For every tree that Amiyah cut, she plants 5 new trees, and since she cut 5 trees, she planted 5*5 = <<5*5=25>>25 new trees.",
+    "L4": "The total number of trees on the farm is now 320+25 = <<320+25=345>>345 trees.",
+    "FA": "#### 345"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'trees_planted_per_cut_tree' (value: 5) was used instead of 'trees_cut' (value: 80).",
+  "repro_seed": 8759663558503789336,
+  "model_name": "google_gemini-2.5-flash"
+}

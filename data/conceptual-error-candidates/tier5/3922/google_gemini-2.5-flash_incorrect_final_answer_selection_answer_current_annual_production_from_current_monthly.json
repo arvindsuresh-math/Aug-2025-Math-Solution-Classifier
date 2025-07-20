@@ -1,0 +1,74 @@
+{
+  "index": 3922,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "Let Y be the number of cars needed to be added to the current monthly production.",
+    "L2": "Then ((100 + Y) * 12) = 1800.",
+    "L3": "So 1200 + 12 * Y = 1800.",
+    "L4": "12 * Y = 1800 - 1200 = 600",
+    "L5": "Y = 600 / 12 = <<600/12=50>>50"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3922.\n    Returns: the number of cars to add to monthly production.\n    \"\"\"\n    current_monthly_production = 100 # produces 100 cars per month\n    target_annual_production = 1800 # reach 1800 cars per year\n    months_per_year = 12 # WK\n\n    # L3\n    current_annual_production_from_current_monthly = current_monthly_production * months_per_year\n\n    # L4\n    additional_annual_production_needed = target_annual_production - current_annual_production_from_current_monthly\n\n    # L5\n    cars_to_add_monthly = additional_annual_production_needed / months_per_year\n\n    # FA\n    answer = cars_to_add_monthly\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "cars_to_add_monthly",
+    "replacement_variable": "current_annual_production_from_current_monthly"
+  },
+  "correct_trace": {
+    "current_monthly_production": 100,
+    "target_annual_production": 1800,
+    "months_per_year": 12,
+    "current_annual_production_from_current_monthly": 1200,
+    "additional_annual_production_needed": 600,
+    "cars_to_add_monthly": 50.0,
+    "answer": 50.0
+  },
+  "flawed_trace": {
+    "current_monthly_production": 100,
+    "target_annual_production": 1800,
+    "months_per_year": 12,
+    "current_annual_production_from_current_monthly": 1200,
+    "additional_annual_production_needed": 600,
+    "cars_to_add_monthly": 50.0,
+    "answer": 1200
+  },
+  "correct_value": 50.0,
+  "flawed_value": 1200,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L3",
+      "output_variable": "current_annual_production_from_current_monthly",
+      "question_inputs": [
+        "current_monthly_production",
+        "target_annual_production"
+      ],
+      "solution_line_template": "So {current_annual_production_from_current_monthly} + {months_per_year} * Y = {target_annual_production}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "additional_annual_production_needed",
+      "question_inputs": [],
+      "solution_line_template": "{months_per_year} * Y = {target_annual_production} - {current_annual_production_from_current_monthly} = {additional_annual_production_needed}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "cars_to_add_monthly",
+      "question_inputs": [],
+      "solution_line_template": "Y = {additional_annual_production_needed} / {months_per_year} = <<{additional_annual_production_needed}/{months_per_year}={cars_to_add_monthly}>>{cars_to_add_monthly}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L3": "So 1200 + 12 * Y = 1800.",
+    "FA": "#### 1200"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'current_annual_production_from_current_monthly' (value: 1200) was reported instead of 'cars_to_add_monthly' (value: 50.0).",
+  "repro_seed": -4169865097238382919,
+  "model_name": "google_gemini-2.5-flash"
+}

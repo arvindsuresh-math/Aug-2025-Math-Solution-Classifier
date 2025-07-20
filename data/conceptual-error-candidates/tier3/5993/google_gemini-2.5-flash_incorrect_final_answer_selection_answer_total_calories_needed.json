@@ -1,0 +1,76 @@
+{
+  "index": 5993,
+  "original_solution_mapping": {
+    "FA": "#### 80",
+    "L1": "He burns 2300-1800=<<2300-1800=500>>500 calories a day",
+    "L2": "He needs to burn 4000*10=<<4000*10=40000>>40,000 calories to hit his goal",
+    "L3": "That means it will take him 40,000/500=<<40000/500=80>>80 days"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5993.\n    Returns: the number of days it will take to lose the target weight.\n    \"\"\"\n    # L1\n    calories_burned_daily = 2300 # burns 2300 a day\n    calories_eaten_daily = 1800 # eats 1800 calories a day\n    net_calories_burned_daily = calories_burned_daily - calories_eaten_daily\n\n    # L2\n    calories_per_pound = 4000 # burn 4000 calories to lose 1 pound\n    pounds_to_lose = 10 # lose 10 pounds\n    total_calories_needed = calories_per_pound * pounds_to_lose\n\n    # L3\n    days_to_lose_weight = total_calories_needed / net_calories_burned_daily\n\n    # FA\n    answer = days_to_lose_weight\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "days_to_lose_weight",
+    "replacement_variable": "total_calories_needed"
+  },
+  "correct_trace": {
+    "calories_burned_daily": 2300,
+    "calories_eaten_daily": 1800,
+    "net_calories_burned_daily": 500,
+    "calories_per_pound": 4000,
+    "pounds_to_lose": 10,
+    "total_calories_needed": 40000,
+    "days_to_lose_weight": 80.0,
+    "answer": 80.0
+  },
+  "flawed_trace": {
+    "calories_burned_daily": 2300,
+    "calories_eaten_daily": 1800,
+    "net_calories_burned_daily": 500,
+    "calories_per_pound": 4000,
+    "pounds_to_lose": 10,
+    "total_calories_needed": 40000,
+    "days_to_lose_weight": 80.0,
+    "answer": 40000
+  },
+  "correct_value": 80.0,
+  "flawed_value": 40000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "net_calories_burned_daily",
+      "question_inputs": [
+        "calories_burned_daily",
+        "calories_eaten_daily"
+      ],
+      "solution_line_template": "He burns {calories_burned_daily}-{calories_eaten_daily}=<<{calories_burned_daily}-{calories_eaten_daily}={net_calories_burned_daily}>>{net_calories_burned_daily} calories a day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_calories_needed",
+      "question_inputs": [
+        "calories_per_pound",
+        "pounds_to_lose"
+      ],
+      "solution_line_template": "He needs to burn {calories_per_pound}*{pounds_to_lose}=<<{calories_per_pound}*{pounds_to_lose}={total_calories_needed}>>{total_calories_needed} calories to hit his goal"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "days_to_lose_weight",
+      "question_inputs": [],
+      "solution_line_template": "That means it will take him {total_calories_needed}/{net_calories_burned_daily}=<<{total_calories_needed}/{net_calories_burned_daily}={days_to_lose_weight}>>{days_to_lose_weight} days"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He burns 2300-1800=<<2300-1800=500>>500 calories a day",
+    "L2": "He needs to burn 4000*10=<<4000*10=40000>>40000 calories to hit his goal",
+    "FA": "#### 40000"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'total_calories_needed' (value: 40000) was reported instead of 'days_to_lose_weight' (value: 80.0).",
+  "repro_seed": 7175289622475160718,
+  "model_name": "google_gemini-2.5-flash"
+}

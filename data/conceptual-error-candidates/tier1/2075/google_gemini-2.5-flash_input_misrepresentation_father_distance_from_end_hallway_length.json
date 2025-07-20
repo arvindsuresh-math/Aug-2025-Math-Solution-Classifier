@@ -1,0 +1,64 @@
+{
+  "index": 2075,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "Since the father is walking 3 times as fast as his son, their speeds are in a ratio of 3:1 respectively",
+    "L2": "They started at the same time so they will cover distance at the same ratio of 3:1",
+    "L3": "Each portion of the distance they covered is 16/(3+1) = <<16/(3+1)=4>>4m",
+    "L4": "The father covered three portions of the distance which is 3*4m = <<3*4=12>>12m from his end"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2075.\n    Returns: the distance from the father's end of the hallway where they will meet.\n    \"\"\"\n    # L3\n    hallway_length = 16 # hallway that is 16m long\n    father_speed_ratio = 3 # father is walking three times as fast\n    son_speed_ratio = 1 # implied by 'three times as fast as the son'\n    distance_portion = hallway_length / (father_speed_ratio + son_speed_ratio)\n\n    # L4\n    father_distance_from_end = father_speed_ratio * distance_portion\n\n    # FA\n    answer = father_distance_from_end\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "father_distance_from_end",
+    "operand_to_replace": "father_speed_ratio",
+    "replacement_variable": "hallway_length"
+  },
+  "correct_trace": {
+    "hallway_length": 16,
+    "father_speed_ratio": 3,
+    "son_speed_ratio": 1,
+    "distance_portion": 4.0,
+    "father_distance_from_end": 12.0,
+    "answer": 12.0
+  },
+  "flawed_trace": {
+    "hallway_length": 16,
+    "father_speed_ratio": 3,
+    "son_speed_ratio": 1,
+    "distance_portion": 4.0,
+    "father_distance_from_end": 64.0,
+    "answer": 64.0
+  },
+  "correct_value": 12.0,
+  "flawed_value": 64.0,
+  "logical_steps": [
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "hallway_length",
+        "father_speed_ratio",
+        "son_speed_ratio"
+      ],
+      "WK_inputs": [],
+      "output_variable": "distance_portion",
+      "solution_line_template": "Each portion of the distance they covered is {hallway_length}/({father_speed_ratio}+{son_speed_ratio}) = <<{hallway_length}/({father_speed_ratio}+{son_speed_ratio})={distance_portion}>>{distance_portion}m"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "father_distance_from_end",
+      "solution_line_template": "The father covered three portions of the distance which is {father_speed_ratio}*{distance_portion}m = <<{father_speed_ratio}*{distance_portion}={father_distance_from_end}>>{father_distance_from_end}m from his end"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L3": "Each portion of the distance they covered is 16/(3+1) = <<16/(3+1)=4>>4m",
+    "L4": "The father covered three portions of the distance which is 16*4m = <<16*4=64>>64m from his end",
+    "FA": "#### 64"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'hallway_length' (16) was used instead of 'father_speed_ratio' (3).",
+  "repro_seed": -8622635100805251156,
+  "model_name": "google_gemini-2.5-flash"
+}

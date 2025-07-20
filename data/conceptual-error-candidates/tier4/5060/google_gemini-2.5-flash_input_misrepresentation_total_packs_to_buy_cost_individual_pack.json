@@ -1,0 +1,92 @@
+{
+  "index": 5060,
+  "original_solution_mapping": {
+    "FA": "#### 1",
+    "L1": "The price per 500 mL milk from the 2 packs is $2.50/2 = $<<2.5/2=1.25>>1.25.",
+    "L2": "This means that for each pack of 500 mL milk, you can save $1.30 - $1.25 = $0.05.",
+    "L3": "Ten sets of 2 packs mean 10 x 2 = <<10*2=20>>20 packs of 500 mL of milk.",
+    "L4": "So, your total savings will be $0.05 x 20 = $<<0.05*20=1>>1."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5060.\n    Returns: the total savings from buying ten sets of 2 packs of 500 mL milk.\n    \"\"\"\n    # L1\n    cost_two_packs = 2.50 # $2.50\n    num_packs_in_set = 2 # 2 packs\n    price_per_pack_bulk = cost_two_packs / num_packs_in_set\n\n    # L2\n    cost_individual_pack = 1.30 # $1.30 each\n    savings_per_pack = cost_individual_pack - price_per_pack_bulk\n\n    # L3\n    num_sets = 10 # Ten sets\n    packs_per_set = 2 # 2 packs\n    total_packs_to_buy = num_sets * packs_per_set\n\n    # L4\n    total_savings = savings_per_pack * total_packs_to_buy\n\n    # FA\n    answer = total_savings\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_packs_to_buy",
+    "operand_to_replace": "packs_per_set",
+    "replacement_variable": "cost_individual_pack"
+  },
+  "correct_trace": {
+    "cost_two_packs": 2.5,
+    "num_packs_in_set": 2,
+    "price_per_pack_bulk": 1.25,
+    "cost_individual_pack": 1.3,
+    "savings_per_pack": 0.050000000000000044,
+    "num_sets": 10,
+    "packs_per_set": 2,
+    "total_packs_to_buy": 20,
+    "total_savings": 1.0000000000000009,
+    "answer": 1.0000000000000009
+  },
+  "flawed_trace": {
+    "cost_two_packs": 2.5,
+    "num_packs_in_set": 2,
+    "price_per_pack_bulk": 1.25,
+    "cost_individual_pack": 1.3,
+    "savings_per_pack": 0.050000000000000044,
+    "num_sets": 10,
+    "packs_per_set": 2,
+    "total_packs_to_buy": 13.0,
+    "total_savings": 0.6500000000000006,
+    "answer": 0.6500000000000006
+  },
+  "correct_value": 20,
+  "flawed_value": 13.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "price_per_pack_bulk",
+      "question_inputs": [
+        "cost_two_packs",
+        "num_packs_in_set"
+      ],
+      "solution_line_template": "The price per 500 mL milk from the {num_packs_in_set} packs is ${cost_two_packs}/{num_packs_in_set} = $<<{cost_two_packs}/{num_packs_in_set}={price_per_pack_bulk}>>{price_per_pack_bulk}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "savings_per_pack",
+      "question_inputs": [
+        "cost_individual_pack"
+      ],
+      "solution_line_template": "This means that for each pack of 500 mL milk, you can save ${cost_individual_pack} - ${price_per_pack_bulk} = ${savings_per_pack}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_packs_to_buy",
+      "question_inputs": [
+        "num_sets",
+        "packs_per_set"
+      ],
+      "solution_line_template": "Ten sets of {packs_per_set} packs mean {num_sets} x {packs_per_set} = <<{num_sets}*{packs_per_set}={total_packs_to_buy}>>{total_packs_to_buy} packs of 500 mL of milk."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_savings",
+      "question_inputs": [],
+      "solution_line_template": "So, your total savings will be ${savings_per_pack} x {total_packs_to_buy} = $<<{savings_per_pack}*{total_packs_to_buy}={total_savings}>>{total_savings}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The price per 500 mL milk from the 2 packs is $2.5/2 = $<<2.5/2=1.25>>1.25.",
+    "L2": "This means that for each pack of 500 mL milk, you can save $1.3 - $1.25 = $0.05.",
+    "L3": "Ten sets of 1.3 packs mean 10 x 1.3 = <<10*1.3=13>>13 packs of 500 mL of milk.",
+    "L4": "So, your total savings will be $0.05 x 13 = $<<0.05*13=0.65>>0.65.",
+    "FA": "#### 0.65"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'cost_individual_pack' (1.3) was used instead of 'packs_per_set' (2).",
+  "repro_seed": 1047980569921903661,
+  "model_name": "google_gemini-2.5-flash"
+}

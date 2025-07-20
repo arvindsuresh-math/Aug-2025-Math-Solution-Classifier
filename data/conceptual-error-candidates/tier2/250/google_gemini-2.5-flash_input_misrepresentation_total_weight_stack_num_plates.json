@@ -1,0 +1,74 @@
+{
+  "index": 250,
+  "original_solution_mapping": {
+    "FA": "#### 360",
+    "L1": "The weight stack weighed 10*30=<<10*30=300>>300 pounds",
+    "L2": "So the added weight made it 300*.2=<<300*.2=60>>60 pounds heavier",
+    "L3": "So when he lowered the weight it was 300+60=<<300+60=360>>360 pounds"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 250.\n    Returns: how heavy the weights felt when being lowered.\n    \"\"\"\n    # L1\n    num_plates = 10 # 10 weight plates\n    weight_per_plate = 30 # each weighing 30 pounds\n    total_weight_stack = num_plates * weight_per_plate\n\n    # L2\n    heavier_percentage = 0.2 # 20% heavier\n    added_weight = total_weight_stack * heavier_percentage\n\n    # L3\n    felt_weight = total_weight_stack + added_weight\n\n    # FA\n    answer = felt_weight\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_weight_stack",
+    "operand_to_replace": "weight_per_plate",
+    "replacement_variable": "num_plates"
+  },
+  "correct_trace": {
+    "num_plates": 10,
+    "weight_per_plate": 30,
+    "total_weight_stack": 300,
+    "heavier_percentage": 0.2,
+    "added_weight": 60.0,
+    "felt_weight": 360.0,
+    "answer": 360.0
+  },
+  "flawed_trace": {
+    "num_plates": 10,
+    "weight_per_plate": 30,
+    "total_weight_stack": 100,
+    "heavier_percentage": 0.2,
+    "added_weight": 20.0,
+    "felt_weight": 120.0,
+    "answer": 120.0
+  },
+  "correct_value": 300,
+  "flawed_value": 100,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_weight_stack",
+      "question_inputs": [
+        "num_plates",
+        "weight_per_plate"
+      ],
+      "solution_line_template": "The weight stack weighed {num_plates}*{weight_per_plate}=<<{num_plates}*{weight_per_plate}={total_weight_stack}>>{total_weight_stack} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "added_weight",
+      "question_inputs": [
+        "heavier_percentage"
+      ],
+      "solution_line_template": "So the added weight made it {total_weight_stack}*{heavier_percentage}=<<{total_weight_stack}*{heavier_percentage}={added_weight}>>{added_weight} pounds heavier"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "felt_weight",
+      "question_inputs": [],
+      "solution_line_template": "So when he lowered the weight it was {total_weight_stack}+{added_weight}=<<{total_weight_stack}+{added_weight}={felt_weight}>>{felt_weight} pounds"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The weight stack weighed 10*10=<<10*10=100>>100 pounds",
+    "L2": "So the added weight made it 100*0.2=<<100*0.2=20>>20 pounds heavier",
+    "L3": "So when he lowered the weight it was 100+20=<<100+20=120>>120 pounds",
+    "FA": "#### 120"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'num_plates' (10) was used instead of 'weight_per_plate' (30).",
+  "repro_seed": 7917262570833852160,
+  "model_name": "google_gemini-2.5-flash"
+}

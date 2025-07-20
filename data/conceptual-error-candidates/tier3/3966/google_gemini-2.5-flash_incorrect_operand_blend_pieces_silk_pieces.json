@@ -1,0 +1,74 @@
+{
+  "index": 3966,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "Luther has 10 / 2 = <<10/2=5>>5 pieces made with cashmere.",
+    "L2": "He has 13 - 10 = <<13-10=3>>3 pieces made without silk using only cashmere.",
+    "L3": "Thus, Luther has 5 - 3 = <<5-3=2>>2 pieces made using a blend of cashmere and silk."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3966.\n    Returns: the number of pieces that use a blend of cashmere and silk.\n    \"\"\"\n    # L1\n    silk_pieces = 10 # Ten pieces made with silk\n    half_divisor = 2 # half that number made with cashmere\n    cashmere_pieces = silk_pieces / half_divisor\n\n    # L2\n    total_pieces_line = 13 # latest line has thirteen pieces\n    pieces_only_cashmere = total_pieces_line - silk_pieces\n\n    # L3\n    blend_pieces = cashmere_pieces - pieces_only_cashmere\n\n    # FA\n    answer = blend_pieces\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "blend_pieces",
+    "operand_to_replace": "cashmere_pieces",
+    "replacement_variable": "silk_pieces"
+  },
+  "correct_trace": {
+    "silk_pieces": 10,
+    "half_divisor": 2,
+    "cashmere_pieces": 5.0,
+    "total_pieces_line": 13,
+    "pieces_only_cashmere": 3,
+    "blend_pieces": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "silk_pieces": 10,
+    "half_divisor": 2,
+    "cashmere_pieces": 5.0,
+    "total_pieces_line": 13,
+    "pieces_only_cashmere": 3,
+    "blend_pieces": 7,
+    "answer": 7
+  },
+  "correct_value": 2.0,
+  "flawed_value": 7,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cashmere_pieces",
+      "question_inputs": [
+        "silk_pieces",
+        "half_divisor"
+      ],
+      "solution_line_template": "Luther has {silk_pieces} / {half_divisor} = <<{silk_pieces}/{half_divisor}={cashmere_pieces}>>{cashmere_pieces} pieces made with cashmere."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "pieces_only_cashmere",
+      "question_inputs": [
+        "total_pieces_line"
+      ],
+      "solution_line_template": "He has {total_pieces_line} - {silk_pieces} = <<{total_pieces_line}-{silk_pieces}={pieces_only_cashmere}>>{pieces_only_cashmere} pieces made without silk using only cashmere."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "blend_pieces",
+      "question_inputs": [],
+      "solution_line_template": "Thus, Luther has {cashmere_pieces} - {pieces_only_cashmere} = <<{cashmere_pieces}-{pieces_only_cashmere}={blend_pieces}>>{blend_pieces} pieces made using a blend of cashmere and silk."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Luther has 10 / 2 = <<10/2=5>>5 pieces made with cashmere.",
+    "L2": "He has 13 - 10 = <<13-10=3>>3 pieces made without silk using only cashmere.",
+    "L3": "Thus, Luther has 10 - 3 = <<10-3=7>>7 pieces made using a blend of cashmere and silk.",
+    "FA": "#### 7"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'silk_pieces' (value: 10) was used instead of 'cashmere_pieces' (value: 5.0).",
+  "repro_seed": -8486270205650829812,
+  "model_name": "google_gemini-2.5-flash"
+}

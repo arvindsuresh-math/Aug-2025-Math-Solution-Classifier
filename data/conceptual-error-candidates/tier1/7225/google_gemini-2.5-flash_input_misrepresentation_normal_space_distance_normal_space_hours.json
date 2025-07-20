@@ -1,0 +1,89 @@
+{
+  "index": 7225,
+  "original_solution_mapping": {
+    "FA": "#### 26",
+    "L1": "A spacecraft flying through normal space for seven hours at 2-billion miles per hour travels 7*2=<<7*2=14>>14 billion miles.",
+    "L2": "A spacecraft flying through a black hole at 3*2=<<3*2=6>>6 billion miles per hour.",
+    "L3": "Thus, a spacecraft flying through a black hole for two hours travels 2*6=<<2*6=12>>12 billion miles.",
+    "L4": "Therefore, in total, the Zargon spacecraft will travel 14+12=<<14+12=26>>26 billion miles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7225.\n    Returns: the total billions of miles traveled by the Zargon Destroyer.\n    \"\"\"\n    # L1\n    normal_space_hours = 7 # seven hours in normal space\n    normal_space_speed = 2 # 2 billion miles per hour in normal space\n    normal_space_distance = normal_space_hours * normal_space_speed\n\n    # L2\n    black_hole_speed_multiplier = 3 # three times faster\n    black_hole_speed = black_hole_speed_multiplier * normal_space_speed\n\n    # L3\n    black_hole_hours = 2 # two hours through a black hole\n    black_hole_distance = black_hole_hours * black_hole_speed\n\n    # L4\n    total_distance = normal_space_distance + black_hole_distance\n\n    # FA\n    answer = total_distance\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "normal_space_distance",
+    "operand_to_replace": "normal_space_speed",
+    "replacement_variable": "normal_space_hours"
+  },
+  "correct_trace": {
+    "normal_space_hours": 7,
+    "normal_space_speed": 2,
+    "normal_space_distance": 14,
+    "black_hole_speed_multiplier": 3,
+    "black_hole_speed": 6,
+    "black_hole_hours": 2,
+    "black_hole_distance": 12,
+    "total_distance": 26,
+    "answer": 26
+  },
+  "flawed_trace": {
+    "normal_space_hours": 7,
+    "normal_space_speed": 2,
+    "normal_space_distance": 49,
+    "black_hole_speed_multiplier": 3,
+    "black_hole_speed": 6,
+    "black_hole_hours": 2,
+    "black_hole_distance": 12,
+    "total_distance": 61,
+    "answer": 61
+  },
+  "correct_value": 14,
+  "flawed_value": 49,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "normal_space_distance",
+      "question_inputs": [
+        "normal_space_hours",
+        "normal_space_speed"
+      ],
+      "solution_line_template": "A spacecraft flying through normal space for {normal_space_hours} hours at {normal_space_speed}-billion miles per hour travels {normal_space_hours}*{normal_space_speed}=<<{normal_space_hours}*{normal_space_speed}={normal_space_distance}>>{normal_space_distance} billion miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "black_hole_speed",
+      "question_inputs": [
+        "black_hole_speed_multiplier"
+      ],
+      "solution_line_template": "A spacecraft flying through a black hole at {black_hole_speed_multiplier}*{normal_space_speed}=<<{black_hole_speed_multiplier}*{normal_space_speed}={black_hole_speed}>>{black_hole_speed} billion miles per hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "black_hole_distance",
+      "question_inputs": [
+        "black_hole_hours"
+      ],
+      "solution_line_template": "Thus, a spacecraft flying through a black hole for {black_hole_hours} hours travels {black_hole_hours}*{black_hole_speed}=<<{black_hole_hours}*{black_hole_speed}={black_hole_distance}>>{black_hole_distance} billion miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_distance",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, in total, the Zargon spacecraft will travel {normal_space_distance}+{black_hole_distance}=<<{normal_space_distance}+{black_hole_distance}={total_distance}>>{total_distance} billion miles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "A spacecraft flying through normal space for 7 hours at 7-billion miles per hour travels 7*7=<<7*7=49>>49 billion miles.",
+    "L2": "A spacecraft flying through a black hole at 3*2=<<3*2=6>>6 billion miles per hour.",
+    "L3": "Thus, a spacecraft flying through a black hole for 2 hours travels 2*6=<<2*6=12>>12 billion miles.",
+    "L4": "Therefore, in total, the Zargon spacecraft will travel 49+12=<<49+12=61>>61 billion miles.",
+    "FA": "#### 61"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'normal_space_hours' (7) was used instead of 'normal_space_speed' (2).",
+  "repro_seed": 8263232462731391455,
+  "model_name": "google_gemini-2.5-flash"
+}

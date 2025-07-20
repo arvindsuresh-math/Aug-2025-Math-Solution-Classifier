@@ -1,0 +1,92 @@
+{
+  "index": 4902,
+  "original_solution_mapping": {
+    "FA": "#### 17",
+    "L1": "She gave 7 pens each to 44 students for a total of 7*44 = <<7*44=308>>308 pens",
+    "L2": "There are now 342-308 = <<342-308=34>>34 pens left",
+    "L3": "She left half of 34 pens in her locker which is 34*(1/2) = <<34*(1/2)=17>>17 pens",
+    "L4": "She took 34-17 = <<34-17=17>>17 pens home"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4902.\n    Returns: the number of pens Sally took home.\n    \"\"\"\n    # L1\n    pens_per_student = 7 # gave 7 pens to each student\n    num_students = 44 # class of 44 students\n    pens_given_to_students = pens_per_student * num_students\n\n    # L2\n    initial_pens = 342 # Sally took 342 pens\n    remaining_pens = initial_pens - pens_given_to_students\n\n    # L3\n    fraction_left_in_locker_numerator = 1 # half of the remainder\n    fraction_left_in_locker_denominator = 2 # half of the remainder\n    pens_in_locker = remaining_pens * Fraction(fraction_left_in_locker_numerator, fraction_left_in_locker_denominator)\n\n    # L4\n    pens_taken_home = remaining_pens - pens_in_locker\n\n    # FA\n    answer = pens_taken_home\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "remaining_pens",
+    "operand_to_replace": "pens_given_to_students",
+    "replacement_variable": "num_students"
+  },
+  "correct_trace": {
+    "pens_per_student": 7,
+    "num_students": 44,
+    "pens_given_to_students": 308,
+    "initial_pens": 342,
+    "remaining_pens": 34,
+    "fraction_left_in_locker_numerator": 1,
+    "fraction_left_in_locker_denominator": 2,
+    "pens_in_locker": "17",
+    "pens_taken_home": "17",
+    "answer": "17"
+  },
+  "flawed_trace": {
+    "pens_per_student": 7,
+    "num_students": 44,
+    "pens_given_to_students": 308,
+    "initial_pens": 342,
+    "remaining_pens": 298,
+    "fraction_left_in_locker_numerator": 1,
+    "fraction_left_in_locker_denominator": 2,
+    "pens_in_locker": "149",
+    "pens_taken_home": "149",
+    "answer": "149"
+  },
+  "correct_value": 34,
+  "flawed_value": 298,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "pens_given_to_students",
+      "question_inputs": [
+        "pens_per_student",
+        "num_students"
+      ],
+      "solution_line_template": "She gave {pens_per_student} pens each to {num_students} students for a total of {pens_per_student}*{num_students} = <<{pens_per_student}*{num_students}={pens_given_to_students}>>{pens_given_to_students} pens"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_pens",
+      "question_inputs": [
+        "initial_pens"
+      ],
+      "solution_line_template": "There are now {initial_pens}-{pens_given_to_students} = <<{initial_pens}-{pens_given_to_students}={remaining_pens}>>{remaining_pens} pens left"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "pens_in_locker",
+      "question_inputs": [
+        "fraction_left_in_locker_numerator",
+        "fraction_left_in_locker_denominator"
+      ],
+      "solution_line_template": "She left half of {remaining_pens} pens in her locker which is {remaining_pens}*({fraction_left_in_locker_numerator}/{fraction_left_in_locker_denominator}) = <<{remaining_pens}*({fraction_left_in_locker_numerator}/{fraction_left_in_locker_denominator})={pens_in_locker}>>{pens_in_locker} pens"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "pens_taken_home",
+      "question_inputs": [],
+      "solution_line_template": "She took {remaining_pens}-{pens_in_locker} = <<{remaining_pens}-{pens_in_locker}={pens_taken_home}>>{pens_taken_home} pens home"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She gave 7 pens each to 44 students for a total of 7*44 = <<7*44=308>>308 pens",
+    "L2": "There are now 342-44 = <<342-44=298>>298 pens left",
+    "L3": "She left half of 298 pens in her locker which is 298*(1/2) = <<298*(1/2)=149>>149 pens",
+    "L4": "She took 298-149 = <<298-149=149>>149 pens home",
+    "FA": "#### 149"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'num_students' (value: 44) was used instead of 'pens_given_to_students' (value: 308).",
+  "repro_seed": -8747587103824789398,
+  "model_name": "google_gemini-2.5-flash"
+}

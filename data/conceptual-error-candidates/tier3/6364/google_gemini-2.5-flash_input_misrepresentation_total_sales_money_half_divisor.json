@@ -1,0 +1,89 @@
+{
+  "index": 6364,
+  "original_solution_mapping": {
+    "FA": "#### 600",
+    "L1": "The chest of drawers sold for half as much as the treadmill, for a price of $100/2= $<<100/2=50>>50.",
+    "L2": "The television sold for three times what he earned for the treadmill, for a price of $100*3= $<<100*3=300>>300.",
+    "L3": "For the three items, he raised $100+$50+$300 = $<<100+50+300=450>>450.",
+    "L4": "If $450 is 75% of the total sum of money that Toby made at the garage sale, then the total amount is $450 / (75/100) = $600."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6364.\n    Returns: the total sum of money Toby made at the garage sale.\n    \"\"\"\n    # L1\n    treadmill_price = 100 # sold a treadmill for $100\n    half_divisor = 2 # half as much\n    chest_of_drawers_price = treadmill_price / half_divisor\n\n    # L2\n    three_times_multiplier = 3 # three times\n    television_price = treadmill_price * three_times_multiplier\n\n    # L3\n    three_items_total = treadmill_price + chest_of_drawers_price + television_price\n\n    # L4\n    percentage_of_total = Fraction(75, 100) # 75% of the total amount of sales money\n    total_sales_money = three_items_total / percentage_of_total\n\n    # FA\n    answer = total_sales_money\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_sales_money",
+    "operand_to_replace": "percentage_of_total",
+    "replacement_variable": "half_divisor"
+  },
+  "correct_trace": {
+    "treadmill_price": 100,
+    "half_divisor": 2,
+    "chest_of_drawers_price": 50.0,
+    "three_times_multiplier": 3,
+    "television_price": 300,
+    "three_items_total": 450.0,
+    "percentage_of_total": "3/4",
+    "total_sales_money": 600.0,
+    "answer": 600.0
+  },
+  "flawed_trace": {
+    "treadmill_price": 100,
+    "half_divisor": 2,
+    "chest_of_drawers_price": 50.0,
+    "three_times_multiplier": 3,
+    "television_price": 300,
+    "three_items_total": 450.0,
+    "percentage_of_total": "3/4",
+    "total_sales_money": 225.0,
+    "answer": 225.0
+  },
+  "correct_value": 600.0,
+  "flawed_value": 225.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "chest_of_drawers_price",
+      "question_inputs": [
+        "treadmill_price",
+        "half_divisor"
+      ],
+      "solution_line_template": "The chest of drawers sold for half as much as the treadmill, for a price of ${treadmill_price}/{half_divisor}= $<<{treadmill_price}/{half_divisor}={chest_of_drawers_price}>>{chest_of_drawers_price}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "television_price",
+      "question_inputs": [
+        "three_times_multiplier"
+      ],
+      "solution_line_template": "The television sold for three times what he earned for the treadmill, for a price of ${treadmill_price}*{three_times_multiplier}= $<<{treadmill_price}*{three_times_multiplier}={television_price}>>{television_price}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "three_items_total",
+      "question_inputs": [],
+      "solution_line_template": "For the three items, he raised ${treadmill_price}+${chest_of_drawers_price}+${television_price} = $<<{treadmill_price}+{chest_of_drawers_price}+{television_price}={three_items_total}>>{three_items_total}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_sales_money",
+      "question_inputs": [
+        "percentage_of_total"
+      ],
+      "solution_line_template": "If ${three_items_total} is {percentage_of_total} of the total sum of money that Toby made at the garage sale, then the total amount is ${three_items_total} / ({percentage_of_total}) = ${total_sales_money}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The chest of drawers sold for half as much as the treadmill, for a price of $100/2= $<<100/2=50>>50.",
+    "L2": "The television sold for three times what he earned for the treadmill, for a price of $100*3= $<<100*3=300>>300.",
+    "L3": "For the three items, he raised $100+$50+$300 = $<<100+50+300=450>>450.",
+    "L4": "If $450 is 2 of the total sum of money that Toby made at the garage sale, then the total amount is $450 / (2) = $225.",
+    "FA": "#### 225"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'half_divisor' (2) was used instead of 'percentage_of_total' (75/100).",
+  "repro_seed": -4451092208536876418,
+  "model_name": "google_gemini-2.5-flash"
+}

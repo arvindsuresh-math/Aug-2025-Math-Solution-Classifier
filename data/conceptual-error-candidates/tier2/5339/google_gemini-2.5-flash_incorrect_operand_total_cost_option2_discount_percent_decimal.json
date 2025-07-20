@@ -1,0 +1,81 @@
+{
+  "index": 5339,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "If she uses the coupon, she will pay 2*0.5 = $<<2*0.5=1>>1 for each 4oz package.",
+    "L2": "Thus, she will pay 4 + 2*1 = $<<4+2*1=6>>6 in total for the 8oz package and the two 4oz packages she needs to reach 16 oz of butter when using the coupon.",
+    "L3": "Therefore, the lowest amount she can pay is $6, as this is cheaper than the $7 price for a 16 oz package."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5339.\n    Returns: the lowest price the woman can pay for 16 oz of butter.\n    \"\"\"\n    # L1\n    normal_price_4oz_package = 2.0 # normally sell for $2.0 each\n    discount_percent_decimal = 0.5 # a 50% discount\n    cost_per_discounted_4oz_package = normal_price_4oz_package * discount_percent_decimal\n\n    # L2\n    cost_8oz_package = 4 # an 8oz package of store butter for $4\n    num_4oz_packages_needed = 2 # two 4 oz packages\n    total_cost_option2 = cost_8oz_package + num_4oz_packages_needed * cost_per_discounted_4oz_package\n\n    # L3\n    cost_16oz_package = 7 # a single 16 oz package of the store-brand butter for $7\n    lowest_price = min(total_cost_option2, cost_16oz_package)\n\n    # FA\n    answer = lowest_price\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_cost_option2",
+    "operand_to_replace": "cost_per_discounted_4oz_package",
+    "replacement_variable": "discount_percent_decimal"
+  },
+  "correct_trace": {
+    "normal_price_4oz_package": 2.0,
+    "discount_percent_decimal": 0.5,
+    "cost_per_discounted_4oz_package": 1.0,
+    "cost_8oz_package": 4,
+    "num_4oz_packages_needed": 2,
+    "total_cost_option2": 6.0,
+    "cost_16oz_package": 7,
+    "lowest_price": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "normal_price_4oz_package": 2.0,
+    "discount_percent_decimal": 0.5,
+    "cost_per_discounted_4oz_package": 1.0,
+    "cost_8oz_package": 4,
+    "num_4oz_packages_needed": 2,
+    "total_cost_option2": 5.0,
+    "cost_16oz_package": 7,
+    "lowest_price": 5.0,
+    "answer": 5.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 5.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_per_discounted_4oz_package",
+      "question_inputs": [
+        "normal_price_4oz_package",
+        "discount_percent_decimal"
+      ],
+      "solution_line_template": "If she uses the coupon, she will pay {normal_price_4oz_package}*{discount_percent_decimal} = $<<{normal_price_4oz_package}*{discount_percent_decimal}={cost_per_discounted_4oz_package}>>{cost_per_discounted_4oz_package} for each 4oz package."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost_option2",
+      "question_inputs": [
+        "cost_8oz_package",
+        "num_4oz_packages_needed"
+      ],
+      "solution_line_template": "Thus, she will pay {cost_8oz_package} + {num_4oz_packages_needed}*{cost_per_discounted_4oz_package} = $<<{cost_8oz_package}+{num_4oz_packages_needed}*{cost_per_discounted_4oz_package}={total_cost_option2}>>{total_cost_option2} in total for the 8oz package and the two 4oz packages she needs to reach 16 oz of butter when using the coupon."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "lowest_price",
+      "question_inputs": [
+        "cost_16oz_package"
+      ],
+      "solution_line_template": "Therefore, the lowest amount she can pay is ${total_cost_option2}, as this is cheaper than the ${cost_16oz_package} price for a 16 oz package."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If she uses the coupon, she will pay 2*0.5 = $<<2*0.5=1>>1 for each 4oz package.",
+    "L2": "Thus, she will pay 4 + 2*0.5 = $<<4+2*0.5=5>>5 in total for the 8oz package and the two 4oz packages she needs to reach 16 oz of butter when using the coupon.",
+    "L3": "Therefore, the lowest amount she can pay is $5, as this is cheaper than the $7 price for a 16 oz package.",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'discount_percent_decimal' (value: 0.5) was used instead of 'cost_per_discounted_4oz_package' (value: 1.0).",
+  "repro_seed": 288351776023033182,
+  "model_name": "google_gemini-2.5-flash"
+}

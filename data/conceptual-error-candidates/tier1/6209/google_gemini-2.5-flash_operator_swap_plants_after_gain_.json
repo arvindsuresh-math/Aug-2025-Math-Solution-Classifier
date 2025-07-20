@@ -1,0 +1,81 @@
+{
+  "index": 6209,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "Gilbert planted 3 + 1 + 2 = <<3+1+2=6>>6 herb plants.",
+    "L2": "He gained a basil plant when one of the basil plants seeded a new plant, so he had 6 + 1 = <<6+1=7>>7 plants.",
+    "L3": "The rabbit ate both mint plants, so Gilbert had 7 - 2 = <<7-2=5>>5 herb plants when spring ended."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6209.\n    Returns: the number of herb plants Gilbert had when spring ended.\n    \"\"\"\n    # L1\n    basil_planted = 3 # three basil bushes\n    parsley_planted = 1 # a parsley plant\n    mint_planted = 2 # two kinds of mint\n    initial_plants = basil_planted + parsley_planted + mint_planted\n\n    # L2\n    gained_basil = 1 # made an extra basil plant grow\n    plants_after_gain = initial_plants + gained_basil\n\n    # L3\n    mint_eaten = 2 # ate all the mint\n    final_plants = plants_after_gain - mint_eaten\n\n    # FA\n    answer = final_plants\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "plants_after_gain",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x3161245d0>"
+  },
+  "correct_trace": {
+    "basil_planted": 3,
+    "parsley_planted": 1,
+    "mint_planted": 2,
+    "initial_plants": 6,
+    "gained_basil": 1,
+    "plants_after_gain": 7,
+    "mint_eaten": 2,
+    "final_plants": 5,
+    "answer": 5
+  },
+  "flawed_trace": {
+    "basil_planted": 3,
+    "parsley_planted": 1,
+    "mint_planted": 2,
+    "initial_plants": 6,
+    "gained_basil": 1,
+    "plants_after_gain": 5,
+    "mint_eaten": 2,
+    "final_plants": 3,
+    "answer": 3
+  },
+  "correct_value": 7,
+  "flawed_value": 5,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "initial_plants",
+      "question_inputs": [
+        "basil_planted",
+        "parsley_planted",
+        "mint_planted"
+      ],
+      "solution_line_template": "Gilbert planted {basil_planted} + {parsley_planted} + {mint_planted} = <<{basil_planted}+{parsley_planted}+{mint_planted}={initial_plants}>>{initial_plants} herb plants."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "plants_after_gain",
+      "question_inputs": [
+        "gained_basil"
+      ],
+      "solution_line_template": "He gained a basil plant when one of the basil plants seeded a new plant, so he had {initial_plants} + {gained_basil} = <<{initial_plants}+{gained_basil}={plants_after_gain}>>{plants_after_gain} plants."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_plants",
+      "question_inputs": [
+        "mint_eaten"
+      ],
+      "solution_line_template": "The rabbit ate both mint plants, so Gilbert had {plants_after_gain} - {mint_eaten} = <<{plants_after_gain}-{mint_eaten}={final_plants}>>{final_plants} herb plants when spring ended."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Gilbert planted 3 + 1 + 2 = <<3+1+2=6>>6 herb plants.",
+    "L2": "He gained a basil plant when one of the basil plants seeded a new plant, so he had 6 + 1 = <<6+1=5>>5 plants.",
+    "L3": "The rabbit ate both mint plants, so Gilbert had 5 - 2 = <<5-2=3>>3 herb plants when spring ended.",
+    "FA": "#### 3"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": 8224288438319861819,
+  "model_name": "google_gemini-2.5-flash"
+}

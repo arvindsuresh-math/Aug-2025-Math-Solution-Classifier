@@ -1,0 +1,104 @@
+{
+  "index": 4863,
+  "original_solution_mapping": {
+    "FA": "#### 1500",
+    "L1": "Adding Harry's $200 to the initial value, the bid is at 300 + 200 = $<<300+200=500>>500.",
+    "L2": "The second bidder doubles the previous value, reaching a value of 500 * 2 = $<<500*2=1000>>1000.",
+    "L3": "The third bidder adds three times the value of Harry's, then adds 500 * 3 = $<<3*500=1500>>1500",
+    "L4": "Adding the $1500 to the value of the second bid, the bid is at 1500 + 1000 =$<<1500+1000=2500>>2500.",
+    "L5": "With the final bid of $4000, Harry bids 4000 - 2500 = $<<4000-2500=1500>>1500 more than the third bidder."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4863.\n    Returns: the amount Harry's final bid exceeded the third bidder's bid.\n    \"\"\"\n    # L1\n    starting_bid = 300 # The auction starts at $300\n    harry_first_bid_amount = 200 # adding $200 to the starting value\n    bid_after_harry_first = starting_bid + harry_first_bid_amount\n\n    # L2\n    second_bidder_multiplier = 2 # a second bidder doubles the bid\n    bid_after_second_bidder = bid_after_harry_first * second_bidder_multiplier\n\n    # L3\n    third_bidder_multiplier = 3 # three times Harry's bid (interpreted by solution as 3 times the current bid after Harry's first bid)\n    third_bidder_added_amount = bid_after_harry_first * third_bidder_multiplier\n\n    # L4\n    bid_after_third_bidder = third_bidder_added_amount + bid_after_second_bidder\n\n    # L5\n    harry_final_bid = 4000 # Harry bids $4,000\n    harry_exceeds_third_bidder = harry_final_bid - bid_after_third_bidder\n\n    # FA\n    answer = harry_exceeds_third_bidder\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "bid_after_third_bidder",
+    "operand_to_replace": "third_bidder_added_amount",
+    "replacement_variable": "harry_first_bid_amount"
+  },
+  "correct_trace": {
+    "starting_bid": 300,
+    "harry_first_bid_amount": 200,
+    "bid_after_harry_first": 500,
+    "second_bidder_multiplier": 2,
+    "bid_after_second_bidder": 1000,
+    "third_bidder_multiplier": 3,
+    "third_bidder_added_amount": 1500,
+    "bid_after_third_bidder": 2500,
+    "harry_final_bid": 4000,
+    "harry_exceeds_third_bidder": 1500,
+    "answer": 1500
+  },
+  "flawed_trace": {
+    "starting_bid": 300,
+    "harry_first_bid_amount": 200,
+    "bid_after_harry_first": 500,
+    "second_bidder_multiplier": 2,
+    "bid_after_second_bidder": 1000,
+    "third_bidder_multiplier": 3,
+    "third_bidder_added_amount": 1500,
+    "bid_after_third_bidder": 1200,
+    "harry_final_bid": 4000,
+    "harry_exceeds_third_bidder": 2800,
+    "answer": 2800
+  },
+  "correct_value": 2500,
+  "flawed_value": 1200,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "bid_after_harry_first",
+      "question_inputs": [
+        "starting_bid",
+        "harry_first_bid_amount"
+      ],
+      "solution_line_template": "Adding Harry's ${harry_first_bid_amount} to the initial value, the bid is at {starting_bid} + {harry_first_bid_amount} = $<<{starting_bid}+{harry_first_bid_amount}={bid_after_harry_first}>>{bid_after_harry_first}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "bid_after_second_bidder",
+      "question_inputs": [
+        "second_bidder_multiplier"
+      ],
+      "solution_line_template": "The second bidder doubles the previous value, reaching a value of {bid_after_harry_first} * {second_bidder_multiplier} = $<<{bid_after_harry_first}*{second_bidder_multiplier}={bid_after_second_bidder}>>{bid_after_second_bidder}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "third_bidder_added_amount",
+      "question_inputs": [
+        "third_bidder_multiplier"
+      ],
+      "solution_line_template": "The third bidder adds three times the value of Harry's, then adds {bid_after_harry_first} * {third_bidder_multiplier} = $<<{third_bidder_multiplier}*{bid_after_harry_first}={third_bidder_added_amount}>>{third_bidder_added_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "bid_after_third_bidder",
+      "question_inputs": [],
+      "solution_line_template": "Adding the ${third_bidder_added_amount} to the value of the second bid, the bid is at {third_bidder_added_amount} + {bid_after_second_bidder} =$<<{third_bidder_added_amount}+{bid_after_second_bidder}={bid_after_third_bidder}>>{bid_after_third_bidder}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "harry_exceeds_third_bidder",
+      "question_inputs": [
+        "harry_final_bid"
+      ],
+      "solution_line_template": "With the final bid of ${harry_final_bid}, Harry bids {harry_final_bid} - {bid_after_third_bidder} = $<<{harry_final_bid}-{bid_after_third_bidder}={harry_exceeds_third_bidder}>>{harry_exceeds_third_bidder} more than the third bidder."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Adding Harry's $200 to the initial value, the bid is at 300 + 200 = $<<300+200=500>>500.",
+    "L2": "The second bidder doubles the previous value, reaching a value of 500 * 2 = $<<500*2=1000>>1000.",
+    "L3": "The third bidder adds three times the value of Harry's, then adds 500 * 3 = $<<3*500=1500>>1500",
+    "L4": "Adding the $200 to the value of the second bid, the bid is at 200 + 1000 =$<<200+1000=1200>>1200.",
+    "L5": "With the final bid of $4000, Harry bids 4000 - 1200 = $<<4000-1200=2800>>2800 more than the third bidder.",
+    "FA": "#### 2800"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'harry_first_bid_amount' (value: 200) was used instead of 'third_bidder_added_amount' (value: 1500).",
+  "repro_seed": 3178366674829653074,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,96 @@
+{
+  "index": 6664,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "The total cost of toilet paper is 10 * $1.5 = $<<10*1.5=15>>15",
+    "L2": "The total cost of paper towels is 7 * $2 = $<<7*2=14>>14",
+    "L3": "The total cost of tissues is $35 - $15 - $14 = $<<35-15-14=6>>6",
+    "L4": "The cost of one box of tissues is $6 / 3 = $<<6/3=2>>2."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6664.\n    Returns: the cost of one box of tissues.\n    \"\"\"\n    # L1\n    num_toilet_paper_rolls = 10 # 10 rolls of toilet paper\n    cost_toilet_paper_per_roll = 1.50 # One roll of toilet paper costs $1.50\n    total_cost_toilet_paper = num_toilet_paper_rolls * cost_toilet_paper_per_roll\n\n    # L2\n    num_paper_towel_rolls = 7 # 7 rolls of paper towels\n    cost_paper_towel_per_roll = 2 # One roll of paper towels costs $2\n    total_cost_paper_towels = num_paper_towel_rolls * cost_paper_towel_per_roll\n\n    # L3\n    total_cost_all_items = 35 # total cost of all the items is $35\n    total_cost_tissues = total_cost_all_items - total_cost_toilet_paper - total_cost_paper_towels\n\n    # L4\n    num_tissue_boxes = 3 # 3 boxes of tissues\n    cost_one_box_tissues = total_cost_tissues / num_tissue_boxes\n\n    # FA\n    answer = cost_one_box_tissues\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "cost_one_box_tissues",
+    "operand_to_replace": "num_tissue_boxes",
+    "replacement_variable": "cost_toilet_paper_per_roll"
+  },
+  "correct_trace": {
+    "num_toilet_paper_rolls": 10,
+    "cost_toilet_paper_per_roll": 1.5,
+    "total_cost_toilet_paper": 15.0,
+    "num_paper_towel_rolls": 7,
+    "cost_paper_towel_per_roll": 2,
+    "total_cost_paper_towels": 14,
+    "total_cost_all_items": 35,
+    "total_cost_tissues": 6.0,
+    "num_tissue_boxes": 3,
+    "cost_one_box_tissues": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "num_toilet_paper_rolls": 10,
+    "cost_toilet_paper_per_roll": 1.5,
+    "total_cost_toilet_paper": 15.0,
+    "num_paper_towel_rolls": 7,
+    "cost_paper_towel_per_roll": 2,
+    "total_cost_paper_towels": 14,
+    "total_cost_all_items": 35,
+    "total_cost_tissues": 6.0,
+    "num_tissue_boxes": 3,
+    "cost_one_box_tissues": 4.0,
+    "answer": 4.0
+  },
+  "correct_value": 2.0,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_cost_toilet_paper",
+      "question_inputs": [
+        "num_toilet_paper_rolls",
+        "cost_toilet_paper_per_roll"
+      ],
+      "solution_line_template": "The total cost of toilet paper is {num_toilet_paper_rolls} * ${cost_toilet_paper_per_roll} = $<<{num_toilet_paper_rolls}*{cost_toilet_paper_per_roll}={total_cost_toilet_paper}>>{total_cost_toilet_paper}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost_paper_towels",
+      "question_inputs": [
+        "num_paper_towel_rolls",
+        "cost_paper_towel_per_roll"
+      ],
+      "solution_line_template": "The total cost of paper towels is {num_paper_towel_rolls} * ${cost_paper_towel_per_roll} = $<<{num_paper_towel_rolls}*{cost_paper_towel_per_roll}={total_cost_paper_towels}>>{total_cost_paper_towels}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost_tissues",
+      "question_inputs": [
+        "total_cost_all_items"
+      ],
+      "solution_line_template": "The total cost of tissues is ${total_cost_all_items} - ${total_cost_toilet_paper} - ${total_cost_paper_towels} = $<<{total_cost_all_items}-{total_cost_toilet_paper}-{total_cost_paper_towels}={total_cost_tissues}>>{total_cost_tissues}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "cost_one_box_tissues",
+      "question_inputs": [
+        "num_tissue_boxes"
+      ],
+      "solution_line_template": "The cost of one box of tissues is ${total_cost_tissues} / {num_tissue_boxes} = $<<{total_cost_tissues}/{num_tissue_boxes}={cost_one_box_tissues}>>{cost_one_box_tissues}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total cost of toilet paper is 10 * $1.5 = $<<10*1.5=15>>15",
+    "L2": "The total cost of paper towels is 7 * $2 = $<<7*2=14>>14",
+    "L3": "The total cost of tissues is $35 - $15 - $14 = $<<35-15-14=6>>6",
+    "L4": "The cost of one box of tissues is $6 / 1.5 = $<<6/1.5=4>>4.",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'cost_toilet_paper_per_roll' (1.5) was used instead of 'num_tissue_boxes' (3).",
+  "repro_seed": 4027303982690282055,
+  "model_name": "google_gemini-2.5-flash"
+}

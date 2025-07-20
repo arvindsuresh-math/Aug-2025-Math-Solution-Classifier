@@ -1,0 +1,89 @@
+{
+  "index": 3248,
+  "original_solution_mapping": {
+    "FA": "#### 70",
+    "L1": "First find the number of students who went through breakups: 1/4 * 180 = <<1/4*180=45>>45 students",
+    "L2": "Then subtract that number from the total number: 180 students - 45 students = <<180-45=135>>135 students",
+    "L3": "Then divide that number by 3 to find the number of students who didn't show up to take the test: 135 students / 3 = <<135/3=45>>45 students",
+    "L4": "Then subtract the number of students who failed in each way from the total number to find the number who passed: 180 students - 45 students - 45 students - 20 students = <<180-45-45-20=70>>70 students"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3248.\n    Returns: the number of students who passed their finals.\n    \"\"\"\n    # L1\n    total_students = 180 # 180 students in ninth grade\n    breakup_fraction = Fraction(1, 4) # 1/4 of them bombed their finals\n    students_with_breakups = breakup_fraction * total_students\n\n    # L2\n    remaining_students_after_breakups = total_students - students_with_breakups\n\n    # L3\n    no_show_denominator = 3 # 1/3rd of the rest didn't show up\n    students_no_show = remaining_students_after_breakups / no_show_denominator\n\n    # L4\n    failed_less_than_D = 20 # another 20 got less than a D\n    students_passed = total_students - students_with_breakups - students_no_show - failed_less_than_D\n\n    # FA\n    answer = students_passed\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "students_no_show",
+    "operand_to_replace": "remaining_students_after_breakups",
+    "replacement_variable": "no_show_denominator"
+  },
+  "correct_trace": {
+    "total_students": 180,
+    "breakup_fraction": "1/4",
+    "students_with_breakups": "45",
+    "remaining_students_after_breakups": "135",
+    "no_show_denominator": 3,
+    "students_no_show": "45",
+    "failed_less_than_D": 20,
+    "students_passed": "70",
+    "answer": "70"
+  },
+  "flawed_trace": {
+    "total_students": 180,
+    "breakup_fraction": "1/4",
+    "students_with_breakups": "45",
+    "remaining_students_after_breakups": "135",
+    "no_show_denominator": 3,
+    "students_no_show": 1.0,
+    "failed_less_than_D": 20,
+    "students_passed": 114.0,
+    "answer": 114.0
+  },
+  "correct_value": "45",
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "students_with_breakups",
+      "question_inputs": [
+        "total_students",
+        "breakup_fraction"
+      ],
+      "solution_line_template": "First find the number of students who went through breakups: {breakup_fraction} * {total_students} = <<{breakup_fraction}*{total_students}={students_with_breakups}>>{students_with_breakups} students"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_students_after_breakups",
+      "question_inputs": [],
+      "solution_line_template": "Then subtract that number from the total number: {total_students} students - {students_with_breakups} students = <<{total_students}-{students_with_breakups}={remaining_students_after_breakups}>>{remaining_students_after_breakups} students"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "students_no_show",
+      "question_inputs": [
+        "no_show_denominator"
+      ],
+      "solution_line_template": "Then divide that number by {no_show_denominator} to find the number of students who didn't show up to take the test: {remaining_students_after_breakups} students / {no_show_denominator} = <<{remaining_students_after_breakups}/{no_show_denominator}={students_no_show}>>{students_no_show} students"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "students_passed",
+      "question_inputs": [
+        "failed_less_than_D"
+      ],
+      "solution_line_template": "Then subtract the number of students who failed in each way from the total number to find the number who passed: {total_students} students - {students_with_breakups} students - {students_no_show} students - {failed_less_than_D} students = <<{total_students}-{students_with_breakups}-{students_no_show}-{failed_less_than_D}={students_passed}>>{students_passed} students"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the number of students who went through breakups: 1/4 * 180 = <<1/4*180=45>>45 students",
+    "L2": "Then subtract that number from the total number: 180 students - 45 students = <<180-45=135>>135 students",
+    "L3": "Then divide that number by 3 to find the number of students who didn't show up to take the test: 3 students / 3 = <<3/3=1>>1 students",
+    "L4": "Then subtract the number of students who failed in each way from the total number to find the number who passed: 180 students - 45 students - 1 students - 20 students = <<180-45-1-20=114>>114 students",
+    "FA": "#### 114"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'no_show_denominator' (value: 3) was used instead of 'remaining_students_after_breakups' (value: 135).",
+  "repro_seed": 472485648776977724,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,92 @@
+{
+  "index": 4287,
+  "original_solution_mapping": {
+    "FA": "#### 11",
+    "L1": "Carmen decorates 8 plates with 1 whole sprig of parsley, 8 plates x 1 parsley sprig each = <<8*1=8>>8 parsley sprigs.",
+    "L2": "She also decorates 12 plates with 1/2 a sprig each, 12 x 1/2 = <<12*1/2=6>>6 parsley sprigs.",
+    "L3": "She started with 25 parsley sprigs and has used 8 + 6 = 14 parsley sprigs.",
+    "L4": "After using 14 parsley sprigs, she has 25 - 14 = <<25-14=11>>11 sprigs left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4287.\n    Returns: the number of parsley sprigs Carmen has left.\n    \"\"\"\n    # L1\n    plates_one_sprig = 8 # 8 plates\n    whole_sprig_amount = 1 # 1 whole parsley sprig\n    sprigs_for_whole_plates = plates_one_sprig * whole_sprig_amount\n\n    # L2\n    plates_half_sprig = 12 # 12 plates\n    half_sprig_amount = Fraction(1, 2) # 1/2 a sprig\n    sprigs_for_half_plates = plates_half_sprig * half_sprig_amount\n\n    # L3\n    initial_sprigs = 25 # started with 25 parsley sprigs\n    total_sprigs_used = sprigs_for_whole_plates + sprigs_for_half_plates\n\n    # L4\n    sprigs_left = initial_sprigs - total_sprigs_used\n\n    # FA\n    answer = sprigs_left\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "sprigs_for_half_plates",
+    "operand_to_replace": "half_sprig_amount",
+    "replacement_variable": "whole_sprig_amount"
+  },
+  "correct_trace": {
+    "plates_one_sprig": 8,
+    "whole_sprig_amount": 1,
+    "sprigs_for_whole_plates": 8,
+    "plates_half_sprig": 12,
+    "half_sprig_amount": "1/2",
+    "sprigs_for_half_plates": "6",
+    "initial_sprigs": 25,
+    "total_sprigs_used": "14",
+    "sprigs_left": "11",
+    "answer": "11"
+  },
+  "flawed_trace": {
+    "plates_one_sprig": 8,
+    "whole_sprig_amount": 1,
+    "sprigs_for_whole_plates": 8,
+    "plates_half_sprig": 12,
+    "half_sprig_amount": "1/2",
+    "sprigs_for_half_plates": 12,
+    "initial_sprigs": 25,
+    "total_sprigs_used": 20,
+    "sprigs_left": 5,
+    "answer": 5
+  },
+  "correct_value": "6",
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "sprigs_for_whole_plates",
+      "question_inputs": [
+        "plates_one_sprig",
+        "whole_sprig_amount"
+      ],
+      "solution_line_template": "Carmen decorates {plates_one_sprig} plates with {whole_sprig_amount} whole sprig of parsley, {plates_one_sprig} plates x {whole_sprig_amount} parsley sprig each = <<{plates_one_sprig}*{whole_sprig_amount}={sprigs_for_whole_plates}>>{sprigs_for_whole_plates} parsley sprigs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sprigs_for_half_plates",
+      "question_inputs": [
+        "plates_half_sprig",
+        "half_sprig_amount"
+      ],
+      "solution_line_template": "She also decorates {plates_half_sprig} plates with {half_sprig_amount} a sprig each, {plates_half_sprig} x {half_sprig_amount} = <<{plates_half_sprig}*{half_sprig_amount}={sprigs_for_half_plates}>>{sprigs_for_half_plates} parsley sprigs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_sprigs_used",
+      "question_inputs": [
+        "initial_sprigs"
+      ],
+      "solution_line_template": "She started with {initial_sprigs} parsley sprigs and has used {sprigs_for_whole_plates} + {sprigs_for_half_plates} = {total_sprigs_used} parsley sprigs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "sprigs_left",
+      "question_inputs": [],
+      "solution_line_template": "After using {total_sprigs_used} parsley sprigs, she has {initial_sprigs} - {total_sprigs_used} = <<{initial_sprigs}-{total_sprigs_used}={sprigs_left}>>{sprigs_left} sprigs left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Carmen decorates 8 plates with 1 whole sprig of parsley, 8 plates x 1 parsley sprig each = <<8*1=8>>8 parsley sprigs.",
+    "L2": "She also decorates 12 plates with 1 a sprig each, 12 x 1 = <<12*1=12>>12 parsley sprigs.",
+    "L3": "She started with 25 parsley sprigs and has used 8 + 12 = 20 parsley sprigs.",
+    "L4": "After using 20 parsley sprigs, she has 25 - 20 = <<25-20=5>>5 sprigs left.",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'whole_sprig_amount' (1) was used instead of 'half_sprig_amount' (1/2).",
+  "repro_seed": -1709862559927729025,
+  "model_name": "google_gemini-2.5-flash"
+}

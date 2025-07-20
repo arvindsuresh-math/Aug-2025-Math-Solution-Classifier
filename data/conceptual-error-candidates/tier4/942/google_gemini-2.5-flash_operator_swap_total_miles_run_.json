@@ -1,0 +1,78 @@
+{
+  "index": 942,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "He runs for 3 hours because 2 x 1.5 = <<2*1.5=3>>3",
+    "L2": "He runs for 180 minutes because 3 x 60 = <<3*60=180>>180",
+    "L3": "He runs 15 miles because 180 / 12 = <<180/12=15>>15"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 942.\n    Returns: the total number of miles Paul runs.\n    \"\"\"\n    # L1\n    num_movies = 2 # two movies\n    avg_movie_length_hours = 1.5 # average length of 1.5 hours\n    total_running_hours = num_movies * avg_movie_length_hours\n\n    # L2\n    minutes_per_hour = 60 # WK\n    total_running_minutes = total_running_hours * minutes_per_hour\n\n    # L3\n    minutes_per_mile = 12 # run a mile in 12 minutes\n    total_miles_run = total_running_minutes / minutes_per_mile\n\n    # FA\n    answer = total_miles_run\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_miles_run",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x31b80f810>"
+  },
+  "correct_trace": {
+    "num_movies": 2,
+    "avg_movie_length_hours": 1.5,
+    "total_running_hours": 3.0,
+    "minutes_per_hour": 60,
+    "total_running_minutes": 180.0,
+    "minutes_per_mile": 12,
+    "total_miles_run": 15.0,
+    "answer": 15.0
+  },
+  "flawed_trace": {
+    "num_movies": 2,
+    "avg_movie_length_hours": 1.5,
+    "total_running_hours": 3.0,
+    "minutes_per_hour": 60,
+    "total_running_minutes": 180.0,
+    "minutes_per_mile": 12,
+    "total_miles_run": 168.0,
+    "answer": 168.0
+  },
+  "correct_value": 15.0,
+  "flawed_value": 168.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_running_hours",
+      "question_inputs": [
+        "num_movies",
+        "avg_movie_length_hours"
+      ],
+      "solution_line_template": "He runs for {total_running_hours} hours because {num_movies} x {avg_movie_length_hours} = <<{num_movies}*{avg_movie_length_hours}={total_running_hours}>>{total_running_hours}"
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_running_minutes",
+      "question_inputs": [],
+      "solution_line_template": "He runs for {total_running_minutes} minutes because {total_running_hours} x {minutes_per_hour} = <<{total_running_hours}*{minutes_per_hour}={total_running_minutes}>>{total_running_minutes}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_miles_run",
+      "question_inputs": [
+        "minutes_per_mile"
+      ],
+      "solution_line_template": "He runs {total_miles_run} miles because {total_running_minutes} / {minutes_per_mile} = <<{total_running_minutes}/{minutes_per_mile}={total_miles_run}>>{total_miles_run}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He runs for 3 hours because 2 x 1.5 = <<2*1.5=3>>3",
+    "L2": "He runs for 180 minutes because 3 x 60 = <<3*60=180>>180",
+    "L3": "He runs 168 miles because 180 / 12 = <<180/12=168>>168",
+    "FA": "#### 168"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": -6203031526078057484,
+  "model_name": "google_gemini-2.5-flash"
+}

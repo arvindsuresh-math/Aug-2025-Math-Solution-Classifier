@@ -1,0 +1,70 @@
+{
+  "index": 3674,
+  "original_solution_mapping": {
+    "FA": "#### 62",
+    "L1": "Let's assume the number of female attendees is x.",
+    "L2": "The number of male attendees is x+4.",
+    "L3": "The sum of male attendees and female attendees is x+x+4 = 120",
+    "L4": "2x+4 = 120",
+    "L5": "2x = 116",
+    "L6": "The number of female attendees is x=116/2 = <<116/2=58>>58",
+    "L7": "The number of male attendees is 58+4 = <<58+4=62>>62"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3674.\n    Returns: the number of male attendees.\n    \"\"\"\n    # L6\n    total_attendees = 120 # 120 conference attendees\n    male_female_difference = 4 # 4 more male attendees than female attendees\n    value_116 = total_attendees - male_female_difference\n    divisor_for_x = 2 # WK\n    female_attendees = value_116 / divisor_for_x\n\n    # L7\n    male_attendees = female_attendees + male_female_difference\n\n    # FA\n    answer = male_attendees\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "female_attendees",
+    "operand_to_replace": "divisor_for_x",
+    "replacement_variable": "male_female_difference"
+  },
+  "correct_trace": {
+    "total_attendees": 120,
+    "male_female_difference": 4,
+    "value_116": 116,
+    "divisor_for_x": 2,
+    "female_attendees": 58.0,
+    "male_attendees": 62.0,
+    "answer": 62.0
+  },
+  "flawed_trace": {
+    "total_attendees": 120,
+    "male_female_difference": 4,
+    "value_116": 116,
+    "divisor_for_x": 2,
+    "female_attendees": 29.0,
+    "male_attendees": 33.0,
+    "answer": 33.0
+  },
+  "correct_value": 58.0,
+  "flawed_value": 29.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "divisor_for_x"
+      ],
+      "line_number": "L6",
+      "output_variable": "female_attendees",
+      "question_inputs": [
+        "total_attendees",
+        "male_female_difference"
+      ],
+      "solution_line_template": "The number of female attendees is x={value_116}/{divisor_for_x} = <<{value_116}/{divisor_for_x}={female_attendees}>>{female_attendees}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "male_attendees",
+      "question_inputs": [],
+      "solution_line_template": "The number of male attendees is {female_attendees}+{male_female_difference} = <<{female_attendees}+{male_female_difference}={male_attendees}>>{male_attendees}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L6": "The number of female attendees is x=116/4 = <<116/4=29>>29",
+    "L7": "The number of male attendees is 29+4 = <<29+4=33>>33",
+    "FA": "#### 33"
+  },
+  "erroneous_line_number": "L6",
+  "explanation": "Input misrepresentation. The value for 'male_female_difference' (4) was used instead of 'divisor_for_x' (2).",
+  "repro_seed": 6284836785538087275,
+  "model_name": "google_gemini-2.5-flash"
+}

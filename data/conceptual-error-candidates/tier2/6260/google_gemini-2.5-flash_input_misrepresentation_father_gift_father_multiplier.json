@@ -1,0 +1,110 @@
+{
+  "index": 6260,
+  "original_solution_mapping": {
+    "FA": "#### 11",
+    "L1": "Sandra's father gave her $4 * 2 = $<<4*2=8>>8.",
+    "L2": "So Sandra has in total $8 + $4 + $10 = $<<8+4+10=22>>22.",
+    "L3": "She wants 14 candies, so she is going to pay 14 candies * $0.50/candy = $<<14*0.5=7>>7 for them.",
+    "L4": "She wants also 20 jellybeans, and they're going to cost 20 jellybeans * $0.20/jellybean = $<<20*0.2=4>>4.",
+    "L5": "So after the purchase, she will be left with $22 - $4 - $7 = $<<22-4-7=11>>11."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6260.\n    Returns: the amount of money Sandra will be left with after the purchase.\n    \"\"\"\n    # L1\n    mother_gift = 4 # her mother gave her an additional $4\n    father_multiplier = 2 # twice as much as her mother\n    father_gift = mother_gift * father_multiplier\n\n    # L2\n    sandra_saved = 10 # She saved $10\n    total_money = father_gift + mother_gift + sandra_saved\n\n    # L3\n    num_candies = 14 # 14 candies\n    cost_per_candy = 0.5 # One candy costs $0.5\n    cost_candies = num_candies * cost_per_candy\n\n    # L4\n    num_jellybeans = 20 # 20 jelly beans\n    cost_per_jellybean = 0.2 # one jelly bean $0.2\n    cost_jellybeans = num_jellybeans * cost_per_jellybean\n\n    # L5\n    money_left = total_money - cost_jellybeans - cost_candies\n\n    # FA\n    answer = money_left\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "father_gift",
+    "operand_to_replace": "mother_gift",
+    "replacement_variable": "father_multiplier"
+  },
+  "correct_trace": {
+    "mother_gift": 4,
+    "father_multiplier": 2,
+    "father_gift": 8,
+    "sandra_saved": 10,
+    "total_money": 22,
+    "num_candies": 14,
+    "cost_per_candy": 0.5,
+    "cost_candies": 7.0,
+    "num_jellybeans": 20,
+    "cost_per_jellybean": 0.2,
+    "cost_jellybeans": 4.0,
+    "money_left": 11.0,
+    "answer": 11.0
+  },
+  "flawed_trace": {
+    "mother_gift": 4,
+    "father_multiplier": 2,
+    "father_gift": 4,
+    "sandra_saved": 10,
+    "total_money": 18,
+    "num_candies": 14,
+    "cost_per_candy": 0.5,
+    "cost_candies": 7.0,
+    "num_jellybeans": 20,
+    "cost_per_jellybean": 0.2,
+    "cost_jellybeans": 4.0,
+    "money_left": 7.0,
+    "answer": 7.0
+  },
+  "correct_value": 8,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "father_gift",
+      "question_inputs": [
+        "mother_gift",
+        "father_multiplier"
+      ],
+      "solution_line_template": "Sandra's father gave her ${mother_gift} * {father_multiplier} = $<<{mother_gift}*{father_multiplier}={father_gift}>>{father_gift}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_money",
+      "question_inputs": [
+        "sandra_saved"
+      ],
+      "solution_line_template": "So Sandra has in total ${father_gift} + ${mother_gift} + ${sandra_saved} = $<<{father_gift}+{mother_gift}+{sandra_saved}={total_money}>>{total_money}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cost_candies",
+      "question_inputs": [
+        "num_candies",
+        "cost_per_candy"
+      ],
+      "solution_line_template": "She wants {num_candies} candies, so she is going to pay {num_candies} candies * ${cost_per_candy}/candy = $<<{num_candies}*{cost_per_candy}={cost_candies}>>{cost_candies} for them."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "cost_jellybeans",
+      "question_inputs": [
+        "num_jellybeans",
+        "cost_per_jellybean"
+      ],
+      "solution_line_template": "She wants also {num_jellybeans} jellybeans, and they're going to cost {num_jellybeans} jellybeans * ${cost_per_jellybean}/jellybean = $<<{num_jellybeans}*{cost_per_jellybean}={cost_jellybeans}>>{cost_jellybeans}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "money_left",
+      "question_inputs": [],
+      "solution_line_template": "So after the purchase, she will be left with ${total_money} - ${cost_jellybeans} - ${cost_candies} = $<<{total_money}-{cost_jellybeans}-{cost_candies}={money_left}>>{money_left}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Sandra's father gave her $2 * 2 = $<<2*2=4>>4.",
+    "L2": "So Sandra has in total $4 + $4 + $10 = $<<4+4+10=18>>18.",
+    "L3": "She wants 14 candies, so she is going to pay 14 candies * $0.5/candy = $<<14*0.5=7>>7 for them.",
+    "L4": "She wants also 20 jellybeans, and they're going to cost 20 jellybeans * $0.2/jellybean = $<<20*0.2=4>>4.",
+    "L5": "So after the purchase, she will be left with $18 - $4 - $7 = $<<18-4-7=7>>7.",
+    "FA": "#### 7"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'father_multiplier' (2) was used instead of 'mother_gift' (4).",
+  "repro_seed": 1713791055392559402,
+  "model_name": "google_gemini-2.5-flash"
+}

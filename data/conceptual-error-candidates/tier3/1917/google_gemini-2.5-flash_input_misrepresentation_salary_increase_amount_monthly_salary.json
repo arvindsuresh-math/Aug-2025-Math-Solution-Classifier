@@ -1,0 +1,63 @@
+{
+  "index": 1917,
+  "original_solution_mapping": {
+    "FA": "#### 10200",
+    "L1": "We have the amount the salary will increase: 10000 * 2 / 100 = <<10000*2/100=200>>200\u20ac",
+    "L2": "So the new salary is: 10000 + 200= <<10000+200=10200>>10200\u20ac"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1917.\n    Returns: the secretary's new salary.\n    \"\"\"\n    # L1\n    monthly_salary = 10000 # earns \u20ac10,000 a month\n    increase_percentage_value = 2 # salary increase of 2%\n    percentage_divisor = 100 # WK\n    salary_increase_amount = monthly_salary * increase_percentage_value / percentage_divisor\n\n    # L2\n    new_salary = monthly_salary + salary_increase_amount\n\n    # FA\n    answer = new_salary\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "salary_increase_amount",
+    "operand_to_replace": "increase_percentage_value",
+    "replacement_variable": "monthly_salary"
+  },
+  "correct_trace": {
+    "monthly_salary": 10000,
+    "increase_percentage_value": 2,
+    "percentage_divisor": 100,
+    "salary_increase_amount": 200.0,
+    "new_salary": 10200.0,
+    "answer": 10200.0
+  },
+  "flawed_trace": {
+    "monthly_salary": 10000,
+    "increase_percentage_value": 2,
+    "percentage_divisor": 100,
+    "salary_increase_amount": 1000000.0,
+    "new_salary": 1010000.0,
+    "answer": 1010000.0
+  },
+  "correct_value": 200.0,
+  "flawed_value": 1000000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percentage_divisor"
+      ],
+      "line_number": "L1",
+      "output_variable": "salary_increase_amount",
+      "question_inputs": [
+        "monthly_salary",
+        "increase_percentage_value"
+      ],
+      "solution_line_template": "We have the amount the salary will increase: {monthly_salary} * {increase_percentage_value} / {percentage_divisor} = <<{monthly_salary}*{increase_percentage_value}/{percentage_divisor}={salary_increase_amount}>>{salary_increase_amount}\u20ac"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "new_salary",
+      "question_inputs": [],
+      "solution_line_template": "So the new salary is: {monthly_salary} + {salary_increase_amount}= <<{monthly_salary}+{salary_increase_amount}={new_salary}>>{new_salary}\u20ac"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "We have the amount the salary will increase: 10000 * 10000 / 100 = <<10000*10000/100=1000000>>1000000\u20ac",
+    "L2": "So the new salary is: 10000 + 1000000= <<10000+1000000=1010000>>1010000\u20ac",
+    "FA": "#### 1010000"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'monthly_salary' (10000) was used instead of 'increase_percentage_value' (2).",
+  "repro_seed": -667281140831986766,
+  "model_name": "google_gemini-2.5-flash"
+}

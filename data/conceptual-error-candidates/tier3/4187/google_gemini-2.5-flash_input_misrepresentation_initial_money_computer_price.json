@@ -1,0 +1,74 @@
+{
+  "index": 4187,
+  "original_solution_mapping": {
+    "FA": "#### 2700",
+    "L1": "At the start, Jeremy had two times more money than the price of the computer, which means he had 2 * 3000 = $<<2*3000=6000>>6000.",
+    "L2": "The cost of the accessories stands at 3000 * 1/10 = $<<3000*1/10=300>>300.",
+    "L3": "This leaves Jeremy with 6000 - 3000 - 300 = $<<6000-3000-300=2700>>2700."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4187.\n    Returns: the amount of money Jeremy has remaining after the purchase.\n    \"\"\"\n    # L1\n    money_multiplier = 2 # two times more money\n    computer_price = 3000 # a computer for $3000\n    initial_money = money_multiplier * computer_price\n\n    # L2\n    accessories_fraction = Fraction(1, 10) # 10% of the price\n    accessories_cost = computer_price * accessories_fraction\n\n    # L3\n    money_remaining = initial_money - computer_price - accessories_cost\n\n    # FA\n    answer = money_remaining\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "initial_money",
+    "operand_to_replace": "money_multiplier",
+    "replacement_variable": "computer_price"
+  },
+  "correct_trace": {
+    "money_multiplier": 2,
+    "computer_price": 3000,
+    "initial_money": 6000,
+    "accessories_fraction": "1/10",
+    "accessories_cost": "300",
+    "money_remaining": "2700",
+    "answer": "2700"
+  },
+  "flawed_trace": {
+    "money_multiplier": 2,
+    "computer_price": 3000,
+    "initial_money": 9000000,
+    "accessories_fraction": "1/10",
+    "accessories_cost": "300",
+    "money_remaining": "8996700",
+    "answer": "8996700"
+  },
+  "correct_value": 6000,
+  "flawed_value": 9000000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "initial_money",
+      "question_inputs": [
+        "money_multiplier",
+        "computer_price"
+      ],
+      "solution_line_template": "At the start, Jeremy had {money_multiplier} * {computer_price} = $<<{money_multiplier}*{computer_price}={initial_money}>>{initial_money}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "accessories_cost",
+      "question_inputs": [
+        "accessories_fraction"
+      ],
+      "solution_line_template": "The cost of the accessories stands at {computer_price} * {accessories_fraction} = $<<{computer_price}*{accessories_fraction}={accessories_cost}>>{accessories_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "money_remaining",
+      "question_inputs": [],
+      "solution_line_template": "This leaves Jeremy with {initial_money} - {computer_price} - {accessories_cost} = $<<{initial_money}-{computer_price}-{accessories_cost}={money_remaining}>>{money_remaining}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "At the start, Jeremy had 3000 * 3000 = $<<3000*3000=9000000>>9000000.",
+    "L2": "The cost of the accessories stands at 3000 * 1/10 = $<<3000*1/10=300>>300.",
+    "L3": "This leaves Jeremy with 9000000 - 3000 - 300 = $<<9000000-3000-300=8996700>>8996700.",
+    "FA": "#### 8996700"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'computer_price' (3000) was used instead of 'money_multiplier' (2).",
+  "repro_seed": -3461012205346277995,
+  "model_name": "google_gemini-2.5-flash"
+}

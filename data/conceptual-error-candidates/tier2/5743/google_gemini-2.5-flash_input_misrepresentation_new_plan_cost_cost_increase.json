@@ -1,0 +1,59 @@
+{
+  "index": 5743,
+  "original_solution_mapping": {
+    "FA": "#### 195",
+    "L1": "His new plan is 150*.3=$<<150*.3=45>>45 more expensive than his old plan",
+    "L2": "So his new plan is 150+45=$<<150+45=195>>195"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5743.\n    Returns: the cost of Mark's new phone plan.\n    \"\"\"\n    # L1\n    old_plan_cost = 150 # old plan was $150 a month\n    increase_percent_decimal = 0.3 # 30% more expensive\n    cost_increase = old_plan_cost * increase_percent_decimal\n\n    # L2\n    new_plan_cost = old_plan_cost + cost_increase\n\n    # FA\n    answer = new_plan_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "new_plan_cost",
+    "operand_to_replace": "old_plan_cost",
+    "replacement_variable": "cost_increase"
+  },
+  "correct_trace": {
+    "old_plan_cost": 150,
+    "increase_percent_decimal": 0.3,
+    "cost_increase": 45.0,
+    "new_plan_cost": 195.0,
+    "answer": 195.0
+  },
+  "flawed_trace": {
+    "old_plan_cost": 150,
+    "increase_percent_decimal": 0.3,
+    "cost_increase": 45.0,
+    "new_plan_cost": 90.0,
+    "answer": 90.0
+  },
+  "correct_value": 195.0,
+  "flawed_value": 90.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_increase",
+      "question_inputs": [
+        "old_plan_cost",
+        "increase_percent_decimal"
+      ],
+      "solution_line_template": "His new plan is {old_plan_cost}*{increase_percent_decimal}=$<<{old_plan_cost}*{increase_percent_decimal}={cost_increase}>>{cost_increase} more expensive than his old plan"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "new_plan_cost",
+      "question_inputs": [],
+      "solution_line_template": "So his new plan is {old_plan_cost}+{cost_increase}=$<<{old_plan_cost}+{cost_increase}={new_plan_cost}>>{new_plan_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "His new plan is 150*0.3=$<<150*0.3=45>>45 more expensive than his old plan",
+    "L2": "So his new plan is 45+45=$<<45+45=90>>90",
+    "FA": "#### 90"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'cost_increase' (45.0) was used instead of 'old_plan_cost' (150).",
+  "repro_seed": 202411974949095121,
+  "model_name": "google_gemini-2.5-flash"
+}

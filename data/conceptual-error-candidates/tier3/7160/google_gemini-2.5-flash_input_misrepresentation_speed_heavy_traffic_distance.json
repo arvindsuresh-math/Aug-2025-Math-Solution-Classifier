@@ -1,0 +1,74 @@
+{
+  "index": 7160,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "Jennie can cover the 200-mile distance in 5 hours when there is heavy traffic, so her average speed is 200/5 = <<200/5=40>>40mph",
+    "L2": "She can cover the same distance in 4 hours when there is no traffic for an average speed of 200/4 = <<200/4=50>>50mph",
+    "L3": "The difference in average speed between the two scenarios is (50-40)mph = <<(50-40)=10>>10mph"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7160.\n    Returns: the difference in average speed between heavy traffic and no traffic.\n    \"\"\"\n    # L1\n    distance = 200 # her son's house is 200 miles away\n    time_heavy_traffic = 5 # in 5 hours when there is heavy traffic\n    speed_heavy_traffic = distance / time_heavy_traffic\n\n    # L2\n    time_no_traffic = 4 # takes only 4 hours\n    speed_no_traffic = distance / time_no_traffic\n\n    # L3\n    speed_difference = speed_no_traffic - speed_heavy_traffic\n\n    # FA\n    answer = speed_difference\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "speed_heavy_traffic",
+    "operand_to_replace": "time_heavy_traffic",
+    "replacement_variable": "distance"
+  },
+  "correct_trace": {
+    "distance": 200,
+    "time_heavy_traffic": 5,
+    "speed_heavy_traffic": 40.0,
+    "time_no_traffic": 4,
+    "speed_no_traffic": 50.0,
+    "speed_difference": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "distance": 200,
+    "time_heavy_traffic": 5,
+    "speed_heavy_traffic": 1.0,
+    "time_no_traffic": 4,
+    "speed_no_traffic": 50.0,
+    "speed_difference": 49.0,
+    "answer": 49.0
+  },
+  "correct_value": 40.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "speed_heavy_traffic",
+      "question_inputs": [
+        "distance",
+        "time_heavy_traffic"
+      ],
+      "solution_line_template": "Jennie can cover the {distance}-mile distance in {time_heavy_traffic} hours when there is heavy traffic, so her average speed is {distance}/{time_heavy_traffic} = <<{distance}/{time_heavy_traffic}={speed_heavy_traffic}>>{speed_heavy_traffic}mph"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "speed_no_traffic",
+      "question_inputs": [
+        "time_no_traffic"
+      ],
+      "solution_line_template": "She can cover the same distance in {time_no_traffic} hours when there is no traffic for an average speed of {distance}/{time_no_traffic} = <<{distance}/{time_no_traffic}={speed_no_traffic}>>{speed_no_traffic}mph"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "speed_difference",
+      "question_inputs": [],
+      "solution_line_template": "The difference in average speed between the two scenarios is ({speed_no_traffic}-{speed_heavy_traffic})mph = <<({speed_no_traffic}-{speed_heavy_traffic})={speed_difference}>>{speed_difference}mph"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jennie can cover the 200-mile distance in 200 hours when there is heavy traffic, so her average speed is 200/200 = <<200/200=1>>1mph",
+    "L2": "She can cover the same distance in 4 hours when there is no traffic for an average speed of 200/4 = <<200/4=50>>50mph",
+    "L3": "The difference in average speed between the two scenarios is (50-1)mph = <<(50-1)=49>>49mph",
+    "FA": "#### 49"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'distance' (200) was used instead of 'time_heavy_traffic' (5).",
+  "repro_seed": -752515975040352876,
+  "model_name": "google_gemini-2.5-flash"
+}

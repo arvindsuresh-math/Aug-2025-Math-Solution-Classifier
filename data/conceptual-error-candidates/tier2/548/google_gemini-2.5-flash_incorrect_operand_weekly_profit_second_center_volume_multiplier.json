@@ -1,0 +1,89 @@
+{
+  "index": 548,
+  "original_solution_mapping": {
+    "FA": "#### 14000",
+    "L1": "First find how many packages the second center processes per day: 10000 packages/day * 3 = <<10000*3=30000>>30000 packages/day",
+    "L2": "Then add the packages the first center processes: 30000 packages/day + 10000 packages/day = <<30000+10000=40000>>40000 packages/day",
+    "L3": "Then multiply the number of packages by Amazon's profit per package to find Amazon's daily profit: 40000 packages/day * $0.05/package = $2000/day",
+    "L4": "Then multiply the daily profits by the number of days in a week to find the weekly profits: $2000/day * 7 days/week = $<<2000*7=14000>>14000/week"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 548.\n    Returns: the total profit per week from the two centers combined.\n    \"\"\"\n    # L1\n    first_center_packages_per_day = 10000 # The first center processes 10000 packages per day\n    second_center_volume_multiplier = 3 # the second center processes three times that volume\n    second_center_packages_per_day = first_center_packages_per_day * second_center_volume_multiplier\n\n    # L2\n    total_packages_per_day = second_center_packages_per_day + first_center_packages_per_day\n\n    # L3\n    profit_per_package = 0.05 # Amazon makes 5 cents of profit per package\n    daily_profit = total_packages_per_day * profit_per_package\n\n    # L4\n    days_per_week = 7 # WK\n    weekly_profit = daily_profit * days_per_week\n\n    # FA\n    answer = weekly_profit\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "weekly_profit",
+    "operand_to_replace": "daily_profit",
+    "replacement_variable": "second_center_volume_multiplier"
+  },
+  "correct_trace": {
+    "first_center_packages_per_day": 10000,
+    "second_center_volume_multiplier": 3,
+    "second_center_packages_per_day": 30000,
+    "total_packages_per_day": 40000,
+    "profit_per_package": 0.05,
+    "daily_profit": 2000.0,
+    "days_per_week": 7,
+    "weekly_profit": 14000.0,
+    "answer": 14000.0
+  },
+  "flawed_trace": {
+    "first_center_packages_per_day": 10000,
+    "second_center_volume_multiplier": 3,
+    "second_center_packages_per_day": 30000,
+    "total_packages_per_day": 40000,
+    "profit_per_package": 0.05,
+    "daily_profit": 2000.0,
+    "days_per_week": 7,
+    "weekly_profit": 21,
+    "answer": 21
+  },
+  "correct_value": 14000.0,
+  "flawed_value": 21,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "second_center_packages_per_day",
+      "question_inputs": [
+        "first_center_packages_per_day",
+        "second_center_volume_multiplier"
+      ],
+      "solution_line_template": "First find how many packages the second center processes per day: {first_center_packages_per_day} packages/day * {second_center_volume_multiplier} = <<{first_center_packages_per_day}*{second_center_volume_multiplier}={second_center_packages_per_day}>>{second_center_packages_per_day} packages/day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_packages_per_day",
+      "question_inputs": [],
+      "solution_line_template": "Then add the packages the first center processes: {second_center_packages_per_day} packages/day + {first_center_packages_per_day} packages/day = <<{second_center_packages_per_day}+{first_center_packages_per_day}={total_packages_per_day}>>{total_packages_per_day} packages/day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "daily_profit",
+      "question_inputs": [
+        "profit_per_package"
+      ],
+      "solution_line_template": "Then multiply the number of packages by Amazon's profit per package to find Amazon's daily profit: {total_packages_per_day} packages/day * ${profit_per_package}/package = ${daily_profit}/day"
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L4",
+      "output_variable": "weekly_profit",
+      "question_inputs": [],
+      "solution_line_template": "Then multiply the daily profits by the number of days in a week to find the weekly profits: ${daily_profit}/day * {days_per_week} days/week = $<<{daily_profit}*{days_per_week}={weekly_profit}>>{weekly_profit}/week"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how many packages the second center processes per day: 10000 packages/day * 3 = <<10000*3=30000>>30000 packages/day",
+    "L2": "Then add the packages the first center processes: 30000 packages/day + 10000 packages/day = <<30000+10000=40000>>40000 packages/day",
+    "L3": "Then multiply the number of packages by Amazon's profit per package to find Amazon's daily profit: 40000 packages/day * $0.05/package = $2000/day",
+    "L4": "Then multiply the daily profits by the number of days in a week to find the weekly profits: $3/day * 7 days/week = $<<3*7=21>>21/week",
+    "FA": "#### 21"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'second_center_volume_multiplier' (value: 3) was used instead of 'daily_profit' (value: 2000.0).",
+  "repro_seed": -5383592030326607303,
+  "model_name": "google_gemini-2.5-flash"
+}

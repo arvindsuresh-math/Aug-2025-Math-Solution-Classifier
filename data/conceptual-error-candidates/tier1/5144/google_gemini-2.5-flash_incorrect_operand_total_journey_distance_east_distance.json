@@ -1,0 +1,85 @@
+{
+  "index": 5144,
+  "original_solution_mapping": {
+    "FA": "#### 220",
+    "L1": "If the distance he took traveling to the East is 20 miles more than the distance he took to travel to the south, he took 40+20 = 60 miles traveling to the East.",
+    "L2": "Johny's total distance traveling to the south and then to the East is 60+40 = <<60+40=100>>100 miles.",
+    "L3": "The journey to the North was 2*60 = <<2*60=120>>120, twice the distance he took traveling to the East.",
+    "L4": "The whole journey took 100+120 = <<100+120=220>>220 miles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5144.\n    Returns: the total distance of Johny's journey.\n    \"\"\"\n    # L1\n    south_distance = 40 # traveled South 40 miles\n    east_more_than_south = 20 # 20 more miles than the distance he took to travel to the south\n    east_distance = south_distance + east_more_than_south\n\n    # L2\n    south_east_total_distance = east_distance + south_distance\n\n    # L3\n    north_multiplier = 2 # twice the distance he had traveled to the East\n    north_distance = north_multiplier * east_distance\n\n    # L4\n    total_journey_distance = south_east_total_distance + north_distance\n\n    # FA\n    answer = total_journey_distance\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_journey_distance",
+    "operand_to_replace": "south_east_total_distance",
+    "replacement_variable": "east_distance"
+  },
+  "correct_trace": {
+    "south_distance": 40,
+    "east_more_than_south": 20,
+    "east_distance": 60,
+    "south_east_total_distance": 100,
+    "north_multiplier": 2,
+    "north_distance": 120,
+    "total_journey_distance": 220,
+    "answer": 220
+  },
+  "flawed_trace": {
+    "south_distance": 40,
+    "east_more_than_south": 20,
+    "east_distance": 60,
+    "south_east_total_distance": 100,
+    "north_multiplier": 2,
+    "north_distance": 120,
+    "total_journey_distance": 180,
+    "answer": 180
+  },
+  "correct_value": 220,
+  "flawed_value": 180,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "east_distance",
+      "question_inputs": [
+        "south_distance",
+        "east_more_than_south"
+      ],
+      "solution_line_template": "If the distance he took traveling to the East is {east_more_than_south} miles more than the distance he took to travel to the south, he took {south_distance}+{east_more_than_south} = {east_distance} miles traveling to the East."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "south_east_total_distance",
+      "question_inputs": [],
+      "solution_line_template": "Johny's total distance traveling to the south and then to the East is {east_distance}+{south_distance} = <<{east_distance}+{south_distance}={south_east_total_distance}>>{south_east_total_distance} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "north_distance",
+      "question_inputs": [
+        "north_multiplier"
+      ],
+      "solution_line_template": "The journey to the North was {north_multiplier}*{east_distance} = <<{north_multiplier}*{east_distance}={north_distance}>>{north_distance}, twice the distance he took traveling to the East."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_journey_distance",
+      "question_inputs": [],
+      "solution_line_template": "The whole journey took {south_east_total_distance}+{north_distance} = <<{south_east_total_distance}+{north_distance}={total_journey_distance}>>{total_journey_distance} miles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the distance he took traveling to the East is 20 miles more than the distance he took to travel to the south, he took 40+20 = 60 miles traveling to the East.",
+    "L2": "Johny's total distance traveling to the south and then to the East is 60+40 = <<60+40=100>>100 miles.",
+    "L3": "The journey to the North was 2*60 = <<2*60=120>>120, twice the distance he took traveling to the East.",
+    "L4": "The whole journey took 60+120 = <<60+120=180>>180 miles.",
+    "FA": "#### 180"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'east_distance' (value: 60) was used instead of 'south_east_total_distance' (value: 100).",
+  "repro_seed": -9135762692194052170,
+  "model_name": "google_gemini-2.5-flash"
+}

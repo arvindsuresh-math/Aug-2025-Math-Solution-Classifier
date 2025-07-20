@@ -1,0 +1,111 @@
+{
+  "index": 5623,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "30 x 1/5 = <<30*1/5=6>>6 students like Math.",
+    "L2": "30 x 1/3 = <<30*1/3=10>>10 students like English.",
+    "L3": "So, 6 + 10 = <<6+10=16>>16 students like either Math or English.",
+    "L4": "Thus, 30 - 16 = <<30-16=14>>14 students neither like Math nor English.",
+    "L5": "Since 1/7 of the remaining like Science, therefore 14 x 1/7 = <<14*1/7=2>>2 students like Science.",
+    "L6": "Hence, 14 - 2 = <<14-2=12>>12 students neither likes the 3 subjects."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5623.\n    Returns: the number of students who don't have a favorite subject.\n    \"\"\"\n    # L1\n    total_students = 30 # In a class of 30 students\n    math_fraction = Fraction(1, 5) # 1/5 of the students like Math\n    math_students = total_students * math_fraction\n\n    # L2\n    english_fraction = Fraction(1, 3) # 1/3 like English\n    english_students = total_students * english_fraction\n\n    # L3\n    math_english_students = math_students + english_students\n\n    # L4\n    remaining_students_after_math_english = total_students - math_english_students\n\n    # L5\n    science_fraction = Fraction(1, 7) # 1/7 of the remaining students like Science\n    science_students = remaining_students_after_math_english * science_fraction\n\n    # L6\n    no_favorite_subject_students = remaining_students_after_math_english - science_students\n\n    # FA\n    answer = no_favorite_subject_students\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "science_students",
+    "operand_to_replace": "science_fraction",
+    "replacement_variable": "math_fraction"
+  },
+  "correct_trace": {
+    "total_students": 30,
+    "math_fraction": "1/5",
+    "math_students": "6",
+    "english_fraction": "1/3",
+    "english_students": "10",
+    "math_english_students": "16",
+    "remaining_students_after_math_english": "14",
+    "science_fraction": "1/7",
+    "science_students": "2",
+    "no_favorite_subject_students": "12",
+    "answer": "12"
+  },
+  "flawed_trace": {
+    "total_students": 30,
+    "math_fraction": "1/5",
+    "math_students": "6",
+    "english_fraction": "1/3",
+    "english_students": "10",
+    "math_english_students": "16",
+    "remaining_students_after_math_english": "14",
+    "science_fraction": "1/7",
+    "science_students": "14/5",
+    "no_favorite_subject_students": "56/5",
+    "answer": "56/5"
+  },
+  "correct_value": "2",
+  "flawed_value": "14/5",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "math_students",
+      "question_inputs": [
+        "total_students",
+        "math_fraction"
+      ],
+      "solution_line_template": "{total_students} x {math_fraction} = <<{total_students}*{math_fraction}={math_students}>>{math_students} students like Math."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "english_students",
+      "question_inputs": [
+        "english_fraction"
+      ],
+      "solution_line_template": "{total_students} x {english_fraction} = <<{total_students}*{english_fraction}={english_students}>>{english_students} students like English."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "math_english_students",
+      "question_inputs": [],
+      "solution_line_template": "So, {math_students} + {english_students} = <<{math_students}+{english_students}={math_english_students}>>{math_english_students} students like either Math or English."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "remaining_students_after_math_english",
+      "question_inputs": [],
+      "solution_line_template": "Thus, {total_students} - {math_english_students} = <<{total_students}-{math_english_students}={remaining_students_after_math_english}>>{remaining_students_after_math_english} students neither like Math nor English."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "science_students",
+      "question_inputs": [
+        "science_fraction"
+      ],
+      "solution_line_template": "Since {science_fraction} of the remaining like Science, therefore {remaining_students_after_math_english} x {science_fraction} = <<{remaining_students_after_math_english}*{science_fraction}={science_students}>>{science_students} students like Science."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "no_favorite_subject_students",
+      "question_inputs": [],
+      "solution_line_template": "Hence, {remaining_students_after_math_english} - {science_students} = <<{remaining_students_after_math_english}-{science_students}={no_favorite_subject_students}>>{no_favorite_subject_students} students neither likes the 3 subjects."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "30 x 1/5 = <<30*1/5=6>>6 students like Math.",
+    "L2": "30 x 1/3 = <<30*1/3=10>>10 students like English.",
+    "L3": "So, 6 + 10 = <<6+10=16>>16 students like either Math or English.",
+    "L4": "Thus, 30 - 16 = <<30-16=14>>14 students neither like Math nor English.",
+    "L5": "Since 1/5 of the remaining like Science, therefore 14 x 1/5 = <<14*1/5=14/5>>14/5 students like Science.",
+    "L6": "Hence, 14 - 14/5 = <<14-14/5=56/5>>56/5 students neither likes the 3 subjects.",
+    "FA": "#### 56/5"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Input misrepresentation. The value for 'math_fraction' (1/5) was used instead of 'science_fraction' (1/7).",
+  "repro_seed": -4672845361823287160,
+  "model_name": "google_gemini-2.5-flash"
+}

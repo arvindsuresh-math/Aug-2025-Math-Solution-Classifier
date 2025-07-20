@@ -1,0 +1,112 @@
+{
+  "index": 2048,
+  "original_solution_mapping": {
+    "FA": "#### 57600",
+    "L1": "If each user posts an average of 3 questions per hour, the average number of answers posted on the forum is 3 times the number of questions which totals to 3*3 = <<3*3=9>>9 answers per",
+    "L2": "hour.",
+    "L3": "In a day, with 24 hours, the average number of questions asked by each member is 24*3 = <<24*3=72>>72,",
+    "L4": "If there are 200 users of the forum, the total number of questions asked is 200*72 = <<200*72=14400>>14400 questions in a day.",
+    "L5": "At the same time, a member posts an average of 9*24 = <<9*24=216>>216 answers in a day.",
+    "L6": "Since there are 200 members who use the forum, the total number of answers posted in the forum in a day is 200*216 = <<200*216=43200>>43200.",
+    "L7": "In total, the number of questions and answers posted on the forum is 43200+14400 = <<43200+14400=57600>>57600"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2048.\n    Returns: the total number of questions and answers posted on the forum by its users in a day.\n    \"\"\"\n    # L1\n    questions_per_hour_per_user = 3 # 3 questions per hour\n    answers_multiplier = 3 # three times as many as the number of questions asked\n    answers_per_hour_per_user = answers_multiplier * questions_per_hour_per_user\n\n    # L3\n    hours_per_day = 24 # WK\n    questions_per_day_per_member = hours_per_day * questions_per_hour_per_user\n\n    # L4\n    num_members = 200 # 200 members\n    total_questions_per_day = num_members * questions_per_day_per_member\n\n    # L5\n    answers_per_day_per_member = answers_per_hour_per_user * hours_per_day\n\n    # L6\n    total_answers_per_day = num_members * answers_per_day_per_member\n\n    # L7\n    total_posts_per_day = total_answers_per_day + total_questions_per_day\n\n    # FA\n    answer = total_posts_per_day\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "questions_per_day_per_member",
+    "operand_to_replace": "hours_per_day",
+    "replacement_variable": "answers_multiplier"
+  },
+  "correct_trace": {
+    "questions_per_hour_per_user": 3,
+    "answers_multiplier": 3,
+    "answers_per_hour_per_user": 9,
+    "hours_per_day": 24,
+    "questions_per_day_per_member": 72,
+    "num_members": 200,
+    "total_questions_per_day": 14400,
+    "answers_per_day_per_member": 216,
+    "total_answers_per_day": 43200,
+    "total_posts_per_day": 57600,
+    "answer": 57600
+  },
+  "flawed_trace": {
+    "questions_per_hour_per_user": 3,
+    "answers_multiplier": 3,
+    "answers_per_hour_per_user": 9,
+    "hours_per_day": 24,
+    "questions_per_day_per_member": 9,
+    "num_members": 200,
+    "total_questions_per_day": 1800,
+    "answers_per_day_per_member": 216,
+    "total_answers_per_day": 43200,
+    "total_posts_per_day": 45000,
+    "answer": 45000
+  },
+  "correct_value": 72,
+  "flawed_value": 9,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "questions_per_hour_per_user",
+        "answers_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "answers_per_hour_per_user",
+      "solution_line_template": "If each user posts an average of {questions_per_hour_per_user} questions per hour, the average number of answers posted on the forum is {answers_multiplier} times the number of questions which totals to {answers_multiplier}*{questions_per_hour_per_user} = <<{answers_multiplier}*{questions_per_hour_per_user}={answers_per_hour_per_user}>>{answers_per_hour_per_user} answers per"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [
+        "hours_per_day"
+      ],
+      "output_variable": "questions_per_day_per_member",
+      "solution_line_template": "In a day, with {hours_per_day} hours, the average number of questions asked by each member is {hours_per_day}*{questions_per_hour_per_user} = <<{hours_per_day}*{questions_per_hour_per_user}={questions_per_day_per_member}>>{questions_per_day_per_member},"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "num_members"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_questions_per_day",
+      "solution_line_template": "If there are {num_members} users of the forum, the total number of questions asked is {num_members}*{questions_per_day_per_member} = <<{num_members}*{questions_per_day_per_member}={total_questions_per_day}>>{total_questions_per_day} questions in a day."
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "answers_per_day_per_member",
+      "solution_line_template": "At the same time, a member posts an average of {answers_per_hour_per_user}*{hours_per_day} = <<{answers_per_hour_per_user}*{hours_per_day}={answers_per_day_per_member}>>{answers_per_day_per_member} answers in a day."
+    },
+    {
+      "line_number": "L6",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_answers_per_day",
+      "solution_line_template": "Since there are {num_members} members who use the forum, the total number of answers posted in the forum in a day is {num_members}*{answers_per_day_per_member} = <<{num_members}*{answers_per_day_per_member}={total_answers_per_day}>>{total_answers_per_day}."
+    },
+    {
+      "line_number": "L7",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_posts_per_day",
+      "solution_line_template": "In total, the number of questions and answers posted on the forum is {total_answers_per_day}+{total_questions_per_day} = <<{total_answers_per_day}+{total_questions_per_day}={total_posts_per_day}>>{total_posts_per_day}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If each user posts an average of 3 questions per hour, the average number of answers posted on the forum is 3 times the number of questions which totals to 3*3 = <<3*3=9>>9 answers per",
+    "L3": "In a day, with 3 hours, the average number of questions asked by each member is 3*3 = <<3*3=9>>9,",
+    "L4": "If there are 200 users of the forum, the total number of questions asked is 200*9 = <<200*9=1800>>1800 questions in a day.",
+    "L5": "At the same time, a member posts an average of 9*24 = <<9*24=216>>216 answers in a day.",
+    "L6": "Since there are 200 members who use the forum, the total number of answers posted in the forum in a day is 200*216 = <<200*216=43200>>43200.",
+    "L7": "In total, the number of questions and answers posted on the forum is 43200+1800 = <<43200+1800=45000>>45000",
+    "FA": "#### 45000"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'answers_multiplier' (3) was used instead of 'hours_per_day' (24).",
+  "repro_seed": -201306061235797330,
+  "model_name": "google_gemini-2.5-flash"
+}

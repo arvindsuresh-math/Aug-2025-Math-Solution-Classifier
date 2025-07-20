@@ -1,0 +1,89 @@
+{
+  "index": 1900,
+  "original_solution_mapping": {
+    "FA": "#### 1600",
+    "L1": "On Saturday, he threw the ball 20 times, and since the temperature was 50 degrees, he could throw only 20 yards, totaling 20*20 = <<20*20=400>>400 yards.",
+    "L2": "On Sunday, the temperature favored him, and he threw the ball twice the distance he could throw on Saturday, which is 2*20 = <<2*20=40>>40 yards.",
+    "L3": "If he threw the ball 30 times, he threw for 30*40 = <<30*40=1200>>1200 yards.",
+    "L4": "In the two days, he threw 1200+400 = <<1200+400=1600>>1600 yards."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1900.\n    Returns: the total number of yards he threw the ball in the two days.\n    \"\"\"\n    # L1\n    times_thrown_saturday = 20 # threw the ball twenty times\n    distance_50_deg = 20 # throws a football 20 yards when the temperature is 50 degrees Fahrenheit\n    yards_saturday = times_thrown_saturday * distance_50_deg\n\n    # L2\n    multiplier_twice = 2 # ball moves twice as far\n    distance_80_deg = multiplier_twice * distance_50_deg\n\n    # L3\n    times_thrown_sunday = 30 # threw the ball 30 times\n    yards_sunday = times_thrown_sunday * distance_80_deg\n\n    # L4\n    total_yards = yards_sunday + yards_saturday\n\n    # FA\n    answer = total_yards\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_yards",
+    "operand_to_replace": "yards_saturday",
+    "replacement_variable": "yards_sunday"
+  },
+  "correct_trace": {
+    "times_thrown_saturday": 20,
+    "distance_50_deg": 20,
+    "yards_saturday": 400,
+    "multiplier_twice": 2,
+    "distance_80_deg": 40,
+    "times_thrown_sunday": 30,
+    "yards_sunday": 1200,
+    "total_yards": 1600,
+    "answer": 1600
+  },
+  "flawed_trace": {
+    "times_thrown_saturday": 20,
+    "distance_50_deg": 20,
+    "yards_saturday": 400,
+    "multiplier_twice": 2,
+    "distance_80_deg": 40,
+    "times_thrown_sunday": 30,
+    "yards_sunday": 1200,
+    "total_yards": 2400,
+    "answer": 2400
+  },
+  "correct_value": 1600,
+  "flawed_value": 2400,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "times_thrown_saturday",
+        "distance_50_deg"
+      ],
+      "WK_inputs": [],
+      "output_variable": "yards_saturday",
+      "solution_line_template": "On Saturday, he threw the ball {times_thrown_saturday} times, and since the temperature was 50 degrees, he could throw only {distance_50_deg} yards, totaling {times_thrown_saturday}*{distance_50_deg} = <<{times_thrown_saturday}*{distance_50_deg}={yards_saturday}>>{yards_saturday} yards."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "multiplier_twice"
+      ],
+      "WK_inputs": [],
+      "output_variable": "distance_80_deg",
+      "solution_line_template": "On Sunday, the temperature favored him, and he threw the ball twice the distance he could throw on Saturday, which is {multiplier_twice}*{distance_50_deg} = <<{multiplier_twice}*{distance_50_deg}={distance_80_deg}>>{distance_80_deg} yards."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "times_thrown_sunday"
+      ],
+      "WK_inputs": [],
+      "output_variable": "yards_sunday",
+      "solution_line_template": "If he threw the ball {times_thrown_sunday} times, he threw for {times_thrown_sunday}*{distance_80_deg} = <<{times_thrown_sunday}*{distance_80_deg}={yards_sunday}>>{yards_sunday} yards."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_yards",
+      "solution_line_template": "In the two days, he threw {yards_sunday}+{yards_saturday} = <<{yards_sunday}+{yards_saturday}={total_yards}>>{total_yards} yards."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Saturday, he threw the ball 20 times, and since the temperature was 50 degrees, he could throw only 20 yards, totaling 20*20 = <<20*20=400>>400 yards.",
+    "L2": "On Sunday, the temperature favored him, and he threw the ball twice the distance he could throw on Saturday, which is 2*20 = <<2*20=40>>40 yards.",
+    "L3": "If he threw the ball 30 times, he threw for 30*40 = <<30*40=1200>>1200 yards.",
+    "L4": "In the two days, he threw 1200+1200 = <<1200+1200=2400>>2400 yards.",
+    "FA": "#### 2400"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'yards_sunday' (value: 1200) was used instead of 'yards_saturday' (value: 400).",
+  "repro_seed": 6591649569270016752,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,70 @@
+{
+  "index": 5016,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "40% of the marbles are of other colors because 100 - 20 - 40 = <<100-20-40=40>>40",
+    "L2": "The friend will on average get 2 other colored marbles because 5 x .4 = <<5*.4=2>>2"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5016.\n    Returns: the average number of marbles of other colors the friend will get.\n    \"\"\"\n    # L1\n    total_percentage = 100 # WK\n    black_percent = 20 # 20% are black\n    clear_percent = 40 # 40% of them are clear\n    other_colors_percent = total_percentage - black_percent - clear_percent\n\n    # L2\n    marbles_taken = 5 # take five marbles\n    other_colors_decimal = 0.4 # 40% as a decimal, derived from the remainder of colors\n    average_other_colors_marbles = marbles_taken * other_colors_decimal\n\n    # FA\n    answer = average_other_colors_marbles\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "average_other_colors_marbles",
+    "operand_to_replace": "marbles_taken",
+    "replacement_variable": "black_percent"
+  },
+  "correct_trace": {
+    "total_percentage": 100,
+    "black_percent": 20,
+    "clear_percent": 40,
+    "other_colors_percent": 40,
+    "marbles_taken": 5,
+    "other_colors_decimal": 0.4,
+    "average_other_colors_marbles": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "total_percentage": 100,
+    "black_percent": 20,
+    "clear_percent": 40,
+    "other_colors_percent": 40,
+    "marbles_taken": 5,
+    "other_colors_decimal": 0.4,
+    "average_other_colors_marbles": 8.0,
+    "answer": 8.0
+  },
+  "correct_value": 2.0,
+  "flawed_value": 8.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_percentage"
+      ],
+      "line_number": "L1",
+      "output_variable": "other_colors_percent",
+      "question_inputs": [
+        "black_percent",
+        "clear_percent"
+      ],
+      "solution_line_template": "{other_colors_percent}% of the marbles are of other colors because {total_percentage} - {black_percent} - {clear_percent} = <<{total_percentage}-{black_percent}-{clear_percent}={other_colors_percent}>>{other_colors_percent}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "average_other_colors_marbles",
+      "question_inputs": [
+        "marbles_taken",
+        "other_colors_decimal"
+      ],
+      "solution_line_template": "The friend will on average get {average_other_colors_marbles} other colored marbles because {marbles_taken} x {other_colors_decimal} = <<{marbles_taken}*{other_colors_decimal}={average_other_colors_marbles}>>{average_other_colors_marbles}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "40% of the marbles are of other colors because 100 - 20 - 40 = <<100-20-40=40>>40",
+    "L2": "The friend will on average get 8 other colored marbles because 20 x 0.4 = <<20*0.4=8>>8",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'black_percent' (20) was used instead of 'marbles_taken' (5).",
+  "repro_seed": 7843076376988894665,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 448,
+  "original_solution_mapping": {
+    "FA": "#### 148",
+    "L1": "Jar B has 28 + 12 = <<28+12=40>>40 marbles.",
+    "L2": "Jar C has 2 x 40 = <<2*40=80>>80 marbles.",
+    "L3": "Therefore, there are 28 + 40 + 80 = <<28+40+80=148>>148 marbles altogether."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 448.\n    Returns: the total number of marbles in all jars.\n    \"\"\"\n    # L1\n    jar_a_marbles = 28 # Jar A has 28 marbles\n    more_than_jar_a = 12 # 12 more marbles than jar A\n    jar_b_marbles = jar_a_marbles + more_than_jar_a\n\n    # L2\n    multiplier_for_jar_c = 2 # twice as many marbles\n    jar_c_marbles = multiplier_for_jar_c * jar_b_marbles\n\n    # L3\n    total_marbles = jar_a_marbles + jar_b_marbles + jar_c_marbles\n\n    # FA\n    answer = total_marbles\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "jar_c_marbles",
+    "operand_to_replace": "multiplier_for_jar_c",
+    "replacement_variable": "jar_b_marbles"
+  },
+  "correct_trace": {
+    "jar_a_marbles": 28,
+    "more_than_jar_a": 12,
+    "jar_b_marbles": 40,
+    "multiplier_for_jar_c": 2,
+    "jar_c_marbles": 80,
+    "total_marbles": 148,
+    "answer": 148
+  },
+  "flawed_trace": {
+    "jar_a_marbles": 28,
+    "more_than_jar_a": 12,
+    "jar_b_marbles": 40,
+    "multiplier_for_jar_c": 2,
+    "jar_c_marbles": 1600,
+    "total_marbles": 1668,
+    "answer": 1668
+  },
+  "correct_value": 80,
+  "flawed_value": 1600,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "jar_a_marbles",
+        "more_than_jar_a"
+      ],
+      "WK_inputs": [],
+      "output_variable": "jar_b_marbles",
+      "solution_line_template": "Jar B has {jar_a_marbles} + {more_than_jar_a} = <<{jar_a_marbles}+{more_than_jar_a}={jar_b_marbles}>>{jar_b_marbles} marbles."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "multiplier_for_jar_c"
+      ],
+      "WK_inputs": [],
+      "output_variable": "jar_c_marbles",
+      "solution_line_template": "Jar C has {multiplier_for_jar_c} x {jar_b_marbles} = <<{multiplier_for_jar_c}*{jar_b_marbles}={jar_c_marbles}>>{jar_c_marbles} marbles."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_marbles",
+      "solution_line_template": "Therefore, there are {jar_a_marbles} + {jar_b_marbles} + {jar_c_marbles} = <<{jar_a_marbles}+{jar_b_marbles}+{jar_c_marbles}={total_marbles}>>{total_marbles} marbles altogether."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jar B has 28 + 12 = <<28+12=40>>40 marbles.",
+    "L2": "Jar C has 40 x 40 = <<40*40=1600>>1600 marbles.",
+    "L3": "Therefore, there are 28 + 40 + 1600 = <<28+40+1600=1668>>1668 marbles altogether.",
+    "FA": "#### 1668"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'jar_b_marbles' (40) was used instead of 'multiplier_for_jar_c' (2).",
+  "repro_seed": -4763831188404063523,
+  "model_name": "google_gemini-2.5-flash"
+}

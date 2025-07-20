@@ -1,0 +1,83 @@
+{
+  "index": 3232,
+  "original_solution_mapping": {
+    "FA": "#### 99000",
+    "L1": "Mr. Grey had a $100 000 x 10/100 = $<<100000*10/100=10000>>10,000 profit.",
+    "L2": "So, Mr. Grey sold the house to Mr. Brown for $100 000 + $10 000 = $<<100000+10000=110000>>110,000.",
+    "L3": "Mr. Brown sold the house $110 000 x 10/100 = $<<110000*10/100=11000>>11,000 less than its purchased price.",
+    "L4": "Thus, Mr. Brown sold it for $110 000 - $11 000 = $99,000 to his friend."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3232.\n    Returns: Mr. Brown's selling price of the house.\n    \"\"\"\n    # L1\n    initial_house_value = 100000 # $100,000\n    profit_percentage = Fraction(10, 100) # profit of 10%\n    grey_profit = initial_house_value * profit_percentage\n\n    # L2\n    brown_purchase_price = initial_house_value + grey_profit\n\n    # L3\n    loss_percentage = Fraction(10, 100) # a 10% loss\n    brown_loss = brown_purchase_price * loss_percentage\n\n    # L4\n    brown_selling_price = brown_purchase_price - brown_loss\n\n    # FA\n    answer = brown_selling_price\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "brown_selling_price",
+    "replacement_variable": "brown_purchase_price"
+  },
+  "correct_trace": {
+    "initial_house_value": 100000,
+    "profit_percentage": "1/10",
+    "grey_profit": "10000",
+    "brown_purchase_price": "110000",
+    "loss_percentage": "1/10",
+    "brown_loss": "11000",
+    "brown_selling_price": "99000",
+    "answer": "99000"
+  },
+  "flawed_trace": {
+    "initial_house_value": 100000,
+    "profit_percentage": "1/10",
+    "grey_profit": "10000",
+    "brown_purchase_price": "110000",
+    "loss_percentage": "1/10",
+    "brown_loss": "11000",
+    "brown_selling_price": "99000",
+    "answer": "110000"
+  },
+  "correct_value": "99000",
+  "flawed_value": "110000",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "grey_profit",
+      "question_inputs": [
+        "initial_house_value",
+        "profit_percentage"
+      ],
+      "solution_line_template": "Mr. Grey had a ${initial_house_value} x {profit_percentage} = $<<{initial_house_value}*{profit_percentage}={grey_profit}>>{grey_profit} profit."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "brown_purchase_price",
+      "question_inputs": [],
+      "solution_line_template": "So, Mr. Grey sold the house to Mr. Brown for ${initial_house_value} + ${grey_profit} = $<<{initial_house_value}+{grey_profit}={brown_purchase_price}>>{brown_purchase_price}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "brown_loss",
+      "question_inputs": [
+        "loss_percentage"
+      ],
+      "solution_line_template": "Mr. Brown sold the house ${brown_purchase_price} x {loss_percentage} = $<<{brown_purchase_price}*{loss_percentage}={brown_loss}>>{brown_loss} less than its purchased price."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "brown_selling_price",
+      "question_inputs": [],
+      "solution_line_template": "Thus, Mr. Brown sold it for ${brown_purchase_price} - ${brown_loss} = ${brown_selling_price} to his friend."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Mr. Grey had a $100000 x 10/100 = $<<100000*10/100=10000>>10000 profit.",
+    "L2": "So, Mr. Grey sold the house to Mr. Brown for $100000 + $10000 = $<<100000+10000=110000>>110000.",
+    "FA": "#### 110000"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'brown_purchase_price' (value: 110000) was reported instead of 'brown_selling_price' (value: 99000).",
+  "repro_seed": 3018396721834075079,
+  "model_name": "google_gemini-2.5-flash"
+}

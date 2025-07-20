@@ -1,0 +1,89 @@
+{
+  "index": 146,
+  "original_solution_mapping": {
+    "FA": "#### 136",
+    "L1": "Cory takes 22 + 3 = <<22+3=25>>25 minutes to clean her room.",
+    "L2": "Blake takes 25 - 4 = <<25-4=21>>21 minutes to clean his room.",
+    "L3": "The three of them can clean their room in 22 + 25 + 21 = <<22+25+21=68>>68 minutes in all.",
+    "L4": "In a week, they spend 68 x 2 = <<68*2=136>>136 minutes cleaning their rooms."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 146.\n    Returns: the total minutes all three spend cleaning their rooms each week.\n    \"\"\"\n    # L1\n    richard_time = 22 # Richard can clean his room in 22 minutes.\n    cory_more_than_richard = 3 # 3 minutes more than Richard\n    cory_time = richard_time + cory_more_than_richard\n\n    # L2\n    blake_quicker_than_cory = 4 # 4 minutes more quickly than Cory\n    blake_time = cory_time - blake_quicker_than_cory\n\n    # L3\n    total_time_per_cleaning = richard_time + cory_time + blake_time\n\n    # L4\n    cleanings_per_week = 2 # twice a week\n    total_weekly_cleaning_time = total_time_per_cleaning * cleanings_per_week\n\n    # FA\n    answer = total_weekly_cleaning_time\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_weekly_cleaning_time",
+    "operand_to_replace": "cleanings_per_week",
+    "replacement_variable": "cory_more_than_richard"
+  },
+  "correct_trace": {
+    "richard_time": 22,
+    "cory_more_than_richard": 3,
+    "cory_time": 25,
+    "blake_quicker_than_cory": 4,
+    "blake_time": 21,
+    "total_time_per_cleaning": 68,
+    "cleanings_per_week": 2,
+    "total_weekly_cleaning_time": 136,
+    "answer": 136
+  },
+  "flawed_trace": {
+    "richard_time": 22,
+    "cory_more_than_richard": 3,
+    "cory_time": 25,
+    "blake_quicker_than_cory": 4,
+    "blake_time": 21,
+    "total_time_per_cleaning": 68,
+    "cleanings_per_week": 2,
+    "total_weekly_cleaning_time": 204,
+    "answer": 204
+  },
+  "correct_value": 136,
+  "flawed_value": 204,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "richard_time",
+        "cory_more_than_richard"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cory_time",
+      "solution_line_template": "Cory takes {richard_time} + {cory_more_than_richard} = <<{richard_time}+{cory_more_than_richard}={cory_time}>>{cory_time} minutes to clean her room."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "blake_quicker_than_cory"
+      ],
+      "WK_inputs": [],
+      "output_variable": "blake_time",
+      "solution_line_template": "Blake takes {cory_time} - {blake_quicker_than_cory} = <<{cory_time}-{blake_quicker_than_cory}={blake_time}>>{blake_time} minutes to clean his room."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_time_per_cleaning",
+      "solution_line_template": "The three of them can clean their room in {richard_time} + {cory_time} + {blake_time} = <<{richard_time}+{cory_time}+{blake_time}={total_time_per_cleaning}>>{total_time_per_cleaning} minutes in all."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "cleanings_per_week"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_weekly_cleaning_time",
+      "solution_line_template": "In a week, they spend {total_time_per_cleaning} x {cleanings_per_week} = <<{total_time_per_cleaning}*{cleanings_per_week}={total_weekly_cleaning_time}>>{total_weekly_cleaning_time} minutes cleaning their rooms."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Cory takes 22 + 3 = <<22+3=25>>25 minutes to clean her room.",
+    "L2": "Blake takes 25 - 4 = <<25-4=21>>21 minutes to clean his room.",
+    "L3": "The three of them can clean their room in 22 + 25 + 21 = <<22+25+21=68>>68 minutes in all.",
+    "L4": "In a week, they spend 68 x 3 = <<68*3=204>>204 minutes cleaning their rooms.",
+    "FA": "#### 204"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'cory_more_than_richard' (3) was used instead of 'cleanings_per_week' (2).",
+  "repro_seed": 177743738139895196,
+  "model_name": "google_gemini-2.5-flash"
+}

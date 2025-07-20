@@ -1,0 +1,130 @@
+{
+  "index": 4865,
+  "original_solution_mapping": {
+    "FA": "#### 370000",
+    "L1": "There was a net immigration to the country of 50,000-30,000=<<50000-30000=20000>>20,000",
+    "L2": "So the total number of people before birth is 300,000+20,000=<<300000+20000=320000>>320,000",
+    "L3": "That means 320,000/8=<<320000/8=40000>>40,000 get pregnant",
+    "L4": "So 40,000/4=<<40000/4=10000>>10,000 have twins",
+    "L5": "So that means they have 10,000*2=<<10000*2=20000>>20,000 children",
+    "L6": "There are 40,000-10,000=<<40000-10000=30000>>30,000 children from single births",
+    "L7": "So the total number of people is 320,000+30,000+20,000=<<320000+30000+20000=370000>>370,000"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4865.\n    Returns: the total population after the births.\n    \"\"\"\n    # L1\n    immigrants = 50000 # 50,000 people immigrate\n    emigrants = 30000 # 30,000 people leave\n    net_immigration = immigrants - emigrants\n\n    # L2\n    initial_population = 300000 # population of 300,000\n    population_before_births = initial_population + net_immigration\n\n    # L3\n    pregnant_denominator = 8 # 1/8 of the population gets pregnant\n    pregnant_people = population_before_births / pregnant_denominator\n\n    # L4\n    twins_denominator = 4 # 1/4 of those people have twins\n    people_with_twins = pregnant_people / twins_denominator\n\n    # L5\n    children_per_twin_birth = 2 # have twins\n    children_from_twins = people_with_twins * children_per_twin_birth\n\n    # L6\n    children_from_single_births = pregnant_people - people_with_twins\n\n    # L7\n    total_population_after_births = population_before_births + children_from_single_births + children_from_twins\n\n    # FA\n    answer = total_population_after_births\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "children_from_twins",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x31aa6e290>"
+  },
+  "correct_trace": {
+    "immigrants": 50000,
+    "emigrants": 30000,
+    "net_immigration": 20000,
+    "initial_population": 300000,
+    "population_before_births": 320000,
+    "pregnant_denominator": 8,
+    "pregnant_people": 40000.0,
+    "twins_denominator": 4,
+    "people_with_twins": 10000.0,
+    "children_per_twin_birth": 2,
+    "children_from_twins": 20000.0,
+    "children_from_single_births": 30000.0,
+    "total_population_after_births": 370000.0,
+    "answer": 370000.0
+  },
+  "flawed_trace": {
+    "immigrants": 50000,
+    "emigrants": 30000,
+    "net_immigration": 20000,
+    "initial_population": 300000,
+    "population_before_births": 320000,
+    "pregnant_denominator": 8,
+    "pregnant_people": 40000.0,
+    "twins_denominator": 4,
+    "people_with_twins": 10000.0,
+    "children_per_twin_birth": 2,
+    "children_from_twins": 5000.0,
+    "children_from_single_births": 30000.0,
+    "total_population_after_births": 355000.0,
+    "answer": 355000.0
+  },
+  "correct_value": 20000.0,
+  "flawed_value": 5000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "net_immigration",
+      "question_inputs": [
+        "immigrants",
+        "emigrants"
+      ],
+      "solution_line_template": "There was a net immigration to the country of {immigrants}-{emigrants}=<<{immigrants}-{emigrants}={net_immigration}>>{net_immigration}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "population_before_births",
+      "question_inputs": [
+        "initial_population"
+      ],
+      "solution_line_template": "So the total number of people before birth is {initial_population}+{net_immigration}=<<{initial_population}+{net_immigration}={population_before_births}>>{population_before_births}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "pregnant_people",
+      "question_inputs": [
+        "pregnant_denominator"
+      ],
+      "solution_line_template": "That means {population_before_births}/{pregnant_denominator}=<<{population_before_births}/{pregnant_denominator}={pregnant_people}>>{pregnant_people} get pregnant"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "people_with_twins",
+      "question_inputs": [
+        "twins_denominator"
+      ],
+      "solution_line_template": "So {pregnant_people}/{twins_denominator}=<<{pregnant_people}/{twins_denominator}={people_with_twins}>>{people_with_twins} have twins"
+    },
+    {
+      "WK_inputs": [
+        "children_per_twin_birth"
+      ],
+      "line_number": "L5",
+      "output_variable": "children_from_twins",
+      "question_inputs": [],
+      "solution_line_template": "So that means they have {people_with_twins}*{children_per_twin_birth}=<<{people_with_twins}*{children_per_twin_birth}={children_from_twins}>>{children_from_twins} children"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "children_from_single_births",
+      "question_inputs": [],
+      "solution_line_template": "There are {pregnant_people}-{people_with_twins}=<<{pregnant_people}-{people_with_twins}={children_from_single_births}>>{children_from_single_births} children from single births"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "total_population_after_births",
+      "question_inputs": [],
+      "solution_line_template": "So the total number of people is {population_before_births}+{children_from_single_births}+{children_from_twins}=<<{population_before_births}+{children_from_single_births}+{children_from_twins}={total_population_after_births}>>{total_population_after_births}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There was a net immigration to the country of 50000-30000=<<50000-30000=20000>>20000",
+    "L2": "So the total number of people before birth is 300000+20000=<<300000+20000=320000>>320000",
+    "L3": "That means 320000/8=<<320000/8=40000>>40000 get pregnant",
+    "L4": "So 40000/4=<<40000/4=10000>>10000 have twins",
+    "L5": "So that means they have 10000*2=<<10000*2=5000>>5000 children",
+    "L6": "There are 40000-10000=<<40000-10000=30000>>30000 children from single births",
+    "L7": "So the total number of people is 320000+30000+5000=<<320000+30000+5000=355000>>355000",
+    "FA": "#### 355000"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -8227958762601650206,
+  "model_name": "google_gemini-2.5-flash"
+}

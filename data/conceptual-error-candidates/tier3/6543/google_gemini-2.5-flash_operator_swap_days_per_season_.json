@@ -1,0 +1,63 @@
+{
+  "index": 6543,
+  "original_solution_mapping": {
+    "FA": "#### 150",
+    "L1": "If 1 year is 250 days, and each year is divided into 5 equal-length seasons, then each season is 250/5=<<250/5=50>>50 days long.",
+    "L2": "If an astronaut stays on the planet for three seasons, then they remain there for 3*50=<<3*50=150>>150 days."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6543.\n    Returns: the number of days the astronaut will spend on Orbius-5.\n    \"\"\"\n    # L1\n    days_per_year = 250 # 250 days per year\n    seasons_per_year = 5 # 5 seasons\n    days_per_season = days_per_year / seasons_per_year\n\n    # L2\n    seasons_stayed = 3 # stays there for 3 seasons\n    total_days_stayed = seasons_stayed * days_per_season\n\n    # FA\n    answer = total_days_stayed\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "days_per_season",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x31b309250>"
+  },
+  "correct_trace": {
+    "days_per_year": 250,
+    "seasons_per_year": 5,
+    "days_per_season": 50.0,
+    "seasons_stayed": 3,
+    "total_days_stayed": 150.0,
+    "answer": 150.0
+  },
+  "flawed_trace": {
+    "days_per_year": 250,
+    "seasons_per_year": 5,
+    "days_per_season": 245,
+    "seasons_stayed": 3,
+    "total_days_stayed": 735,
+    "answer": 735
+  },
+  "correct_value": 50.0,
+  "flawed_value": 245,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "days_per_season",
+      "question_inputs": [
+        "days_per_year",
+        "seasons_per_year"
+      ],
+      "solution_line_template": "If 1 year is {days_per_year} days, and each year is divided into {seasons_per_year} equal-length seasons, then each season is {days_per_year}/{seasons_per_year}=<<{days_per_year}/{seasons_per_year}={days_per_season}>>{days_per_season} days long."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_days_stayed",
+      "question_inputs": [
+        "seasons_stayed"
+      ],
+      "solution_line_template": "If an astronaut stays on the planet for {seasons_stayed} seasons, then they remain there for {seasons_stayed}*{days_per_season}=<<{seasons_stayed}*{days_per_season}={total_days_stayed}>>{total_days_stayed} days."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If 1 year is 250 days, and each year is divided into 5 equal-length seasons, then each season is 250/5=<<250/5=245>>245 days long.",
+    "L2": "If an astronaut stays on the planet for 3 seasons, then they remain there for 3*245=<<3*245=735>>735 days.",
+    "FA": "#### 735"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 6448122443354061613,
+  "model_name": "google_gemini-2.5-flash"
+}

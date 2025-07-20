@@ -1,0 +1,77 @@
+{
+  "index": 5866,
+  "original_solution_mapping": {
+    "FA": "#### 180",
+    "L1": "There will be 50 x 2 = <<50*2=100>>100 parents that are expected to attend.",
+    "L2": "20/2 = <<20/2=10>>10 administrators will attend.",
+    "L3": "Hence, 50 graduates + 100 parents + 20 teachers + 10 administrators = 180 chairs must be prepared."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5866.\n    Returns: the total number of chairs needed for the ceremony.\n    \"\"\"\n    # L1\n    num_graduates = 50 # 50 graduates\n    parents_per_graduate = 2 # 2 parents\n    num_parents = num_graduates * parents_per_graduate\n\n    # L2\n    num_teachers = 20 # Twenty teachers\n    administrator_divisor = 2 # half as many administrators\n    num_administrators = num_teachers / administrator_divisor\n\n    # L3\n    total_chairs = num_graduates + num_parents + num_teachers + num_administrators\n\n    # FA\n    answer = total_chairs\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "num_parents",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x31af31710>"
+  },
+  "correct_trace": {
+    "num_graduates": 50,
+    "parents_per_graduate": 2,
+    "num_parents": 100,
+    "num_teachers": 20,
+    "administrator_divisor": 2,
+    "num_administrators": 10.0,
+    "total_chairs": 180.0,
+    "answer": 180.0
+  },
+  "flawed_trace": {
+    "num_graduates": 50,
+    "parents_per_graduate": 2,
+    "num_parents": 52,
+    "num_teachers": 20,
+    "administrator_divisor": 2,
+    "num_administrators": 10.0,
+    "total_chairs": 132.0,
+    "answer": 132.0
+  },
+  "correct_value": 100,
+  "flawed_value": 52,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "num_parents",
+      "question_inputs": [
+        "num_graduates",
+        "parents_per_graduate"
+      ],
+      "solution_line_template": "There will be {num_graduates} x {parents_per_graduate} = <<{num_graduates}*{parents_per_graduate}={num_parents}>>{num_parents} parents that are expected to attend."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_administrators",
+      "question_inputs": [
+        "num_teachers",
+        "administrator_divisor"
+      ],
+      "solution_line_template": "{num_teachers}/{administrator_divisor} = <<{num_teachers}/{administrator_divisor}={num_administrators}>>{num_administrators} administrators will attend."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_chairs",
+      "question_inputs": [],
+      "solution_line_template": "Hence, {num_graduates} graduates + {num_parents} parents + {num_teachers} teachers + {num_administrators} administrators = {total_chairs} chairs must be prepared."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There will be 50 x 2 = <<50*2=52>>52 parents that are expected to attend.",
+    "L2": "20/2 = <<20/2=10>>10 administrators will attend.",
+    "L3": "Hence, 50 graduates + 52 parents + 20 teachers + 10 administrators = 132 chairs must be prepared.",
+    "FA": "#### 132"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -5206419289888661510,
+  "model_name": "google_gemini-2.5-flash"
+}

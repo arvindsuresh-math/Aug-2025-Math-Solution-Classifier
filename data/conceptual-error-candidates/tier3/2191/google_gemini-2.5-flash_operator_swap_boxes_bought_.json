@@ -1,0 +1,104 @@
+{
+  "index": 2191,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "There were 10 + 15 = <<10+15=25>>25 girls in the party.",
+    "L2": "So, there were a total of 15 + 25 = <<15+25=40>>40 attendees.",
+    "L3": "40 x 2 = <<40*2=80>>80 cans of soft drinks are needed.",
+    "L4": "So, Mary bought 80/8 = <<80/8=10>>10 boxes of soft drinks.",
+    "L5": "Therefore, Mary spent 10 x $5 = $<<10*5=50>>50 on soft drinks."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2191.\n    Returns: the total amount Mary spent on soft drinks.\n    \"\"\"\n    # L1\n    more_girls = 10 # 10 more girls\n    males = 15 # 15 males\n    girls = more_girls + males\n\n    # L2\n    total_attendees = males + girls\n\n    # L3\n    cans_per_attendee = 2 # Each attendee received 2 cans of soft drinks\n    total_cans_needed = total_attendees * cans_per_attendee\n\n    # L4\n    cans_per_box = 8 # a box contains 8 cans\n    boxes_bought = total_cans_needed / cans_per_box\n\n    # L5\n    price_per_box = 5 # is priced at $5 for each box\n    total_cost = boxes_bought * price_per_box\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "boxes_bought",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x3147f2710>"
+  },
+  "correct_trace": {
+    "more_girls": 10,
+    "males": 15,
+    "girls": 25,
+    "total_attendees": 40,
+    "cans_per_attendee": 2,
+    "total_cans_needed": 80,
+    "cans_per_box": 8,
+    "boxes_bought": 10.0,
+    "price_per_box": 5,
+    "total_cost": 50.0,
+    "answer": 50.0
+  },
+  "flawed_trace": {
+    "more_girls": 10,
+    "males": 15,
+    "girls": 25,
+    "total_attendees": 40,
+    "cans_per_attendee": 2,
+    "total_cans_needed": 80,
+    "cans_per_box": 8,
+    "boxes_bought": 72,
+    "price_per_box": 5,
+    "total_cost": 360,
+    "answer": 360
+  },
+  "correct_value": 10.0,
+  "flawed_value": 72,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "girls",
+      "question_inputs": [
+        "more_girls",
+        "males"
+      ],
+      "solution_line_template": "There were {more_girls} + {males} = <<{more_girls}+{males}={girls}>>{girls} girls in the party."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_attendees",
+      "question_inputs": [],
+      "solution_line_template": "So, there were a total of {males} + {girls} = <<{males}+{girls}={total_attendees}>>{total_attendees} attendees."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cans_needed",
+      "question_inputs": [
+        "cans_per_attendee"
+      ],
+      "solution_line_template": "{total_attendees} x {cans_per_attendee} = <<{total_attendees}*{cans_per_attendee}={total_cans_needed}>>{total_cans_needed} cans of soft drinks are needed."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "boxes_bought",
+      "question_inputs": [
+        "cans_per_box"
+      ],
+      "solution_line_template": "So, Mary bought {total_cans_needed}/{cans_per_box} = <<{total_cans_needed}/{cans_per_box}={boxes_bought}>>{boxes_bought} boxes of soft drinks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "price_per_box"
+      ],
+      "solution_line_template": "Therefore, Mary spent {boxes_bought} x ${price_per_box} = $<<{boxes_bought}*{price_per_box}={total_cost}>>{total_cost} on soft drinks."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There were 10 + 15 = <<10+15=25>>25 girls in the party.",
+    "L2": "So, there were a total of 15 + 25 = <<15+25=40>>40 attendees.",
+    "L3": "40 x 2 = <<40*2=80>>80 cans of soft drinks are needed.",
+    "L4": "So, Mary bought 80/8 = <<80/8=72>>72 boxes of soft drinks.",
+    "L5": "Therefore, Mary spent 72 x $5 = $<<72*5=360>>360 on soft drinks.",
+    "FA": "#### 360"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 4632475436257023527,
+  "model_name": "google_gemini-2.5-flash"
+}

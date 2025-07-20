@@ -1,0 +1,78 @@
+{
+  "index": 2861,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "There are 30 games total because 20 + 10 = <<20+10=30>>30",
+    "L2": "They need to win 20 games because 30 x (2/3) = <<30*(2/3)=20>>20",
+    "L3": "The need to win 8 more games because 20 - 12 = <<20-12=8>>8"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2861.\n    Returns: the number of additional games the team needs to win to make the playoffs.\n    \"\"\"\n    # L1\n    games_played = 20 # played 20 games\n    games_left = 10 # 10 games left\n    total_games = games_played + games_left\n\n    # L2\n    win_fraction = Fraction(2, 3) # win 2/3 of their games\n    required_wins = total_games * win_fraction\n\n    # L3\n    games_won_so_far = 12 # won 12 of them\n    additional_wins_needed = required_wins - games_won_so_far\n\n    # FA\n    answer = additional_wins_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "additional_wins_needed",
+    "operand_to_replace": "games_won_so_far",
+    "replacement_variable": "games_left"
+  },
+  "correct_trace": {
+    "games_played": 20,
+    "games_left": 10,
+    "total_games": 30,
+    "win_fraction": "2/3",
+    "required_wins": "20",
+    "games_won_so_far": 12,
+    "additional_wins_needed": "8",
+    "answer": "8"
+  },
+  "flawed_trace": {
+    "games_played": 20,
+    "games_left": 10,
+    "total_games": 30,
+    "win_fraction": "2/3",
+    "required_wins": "20",
+    "games_won_so_far": 12,
+    "additional_wins_needed": "10",
+    "answer": "10"
+  },
+  "correct_value": "8",
+  "flawed_value": "10",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_games",
+      "question_inputs": [
+        "games_played",
+        "games_left"
+      ],
+      "solution_line_template": "There are {total_games} games total because {games_played} + {games_left} = <<{games_played}+{games_left}={total_games}>>{total_games}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "required_wins",
+      "question_inputs": [
+        "win_fraction"
+      ],
+      "solution_line_template": "They need to win {required_wins} games because {total_games} x ({win_fraction}) = <<{total_games}*({win_fraction})={required_wins}>>{required_wins}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "additional_wins_needed",
+      "question_inputs": [
+        "games_won_so_far"
+      ],
+      "solution_line_template": "The need to win {additional_wins_needed} more games because {required_wins} - {games_won_so_far} = <<{required_wins}-{games_won_so_far}={additional_wins_needed}>>{additional_wins_needed}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 30 games total because 20 + 10 = <<20+10=30>>30",
+    "L2": "They need to win 20 games because 30 x (2/3) = <<30*(2/3)=20>>20",
+    "L3": "The need to win 10 more games because 20 - 10 = <<20-10=10>>10",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'games_left' (10) was used instead of 'games_won_so_far' (12).",
+  "repro_seed": -4318075129503060385,
+  "model_name": "google_gemini-2.5-flash"
+}

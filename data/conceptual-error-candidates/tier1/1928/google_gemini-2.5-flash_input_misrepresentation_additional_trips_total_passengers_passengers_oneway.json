@@ -1,0 +1,74 @@
+{
+  "index": 1928,
+  "original_solution_mapping": {
+    "FA": "#### 640",
+    "L1": "The total number of people transported in the first trip is 100 one way + 60 on the return trip = <<100+60=160>>160 people.",
+    "L2": "If the train made three more round trips that day carrying the same number of passengers in each trip as the first, it carried a total of 3*160 = <<3*160=480>>480 in all three round trips.",
+    "L3": "In total, the train carried 160+480 = <<160+480=640>>640 people over all its trips that day"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1928.\n    Returns: the total number of passengers transported between both stations.\n    \"\"\"\n    # L1\n    passengers_oneway = 100 # 100 passengers from one station to the other one way\n    passengers_return = 60 # on the return trip carried 60 passengers\n    first_trip_total_passengers = passengers_oneway + passengers_return\n\n    # L2\n    additional_round_trips = 3 # three more round trips\n    additional_trips_total_passengers = additional_round_trips * first_trip_total_passengers\n\n    # L3\n    total_passengers_transported = first_trip_total_passengers + additional_trips_total_passengers\n\n    # FA\n    answer = total_passengers_transported\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "additional_trips_total_passengers",
+    "operand_to_replace": "additional_round_trips",
+    "replacement_variable": "passengers_oneway"
+  },
+  "correct_trace": {
+    "passengers_oneway": 100,
+    "passengers_return": 60,
+    "first_trip_total_passengers": 160,
+    "additional_round_trips": 3,
+    "additional_trips_total_passengers": 480,
+    "total_passengers_transported": 640,
+    "answer": 640
+  },
+  "flawed_trace": {
+    "passengers_oneway": 100,
+    "passengers_return": 60,
+    "first_trip_total_passengers": 160,
+    "additional_round_trips": 3,
+    "additional_trips_total_passengers": 16000,
+    "total_passengers_transported": 16160,
+    "answer": 16160
+  },
+  "correct_value": 480,
+  "flawed_value": 16000,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "passengers_oneway",
+        "passengers_return"
+      ],
+      "WK_inputs": [],
+      "output_variable": "first_trip_total_passengers",
+      "solution_line_template": "The total number of people transported in the first trip is {passengers_oneway} one way + {passengers_return} on the return trip = <<{passengers_oneway}+{passengers_return}={first_trip_total_passengers}>>{first_trip_total_passengers} people."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "additional_round_trips"
+      ],
+      "WK_inputs": [],
+      "output_variable": "additional_trips_total_passengers",
+      "solution_line_template": "If the train made three more round trips that day carrying the same number of passengers in each trip as the first, it carried a total of {additional_round_trips}*{first_trip_total_passengers} = <<{additional_round_trips}*{first_trip_total_passengers}={additional_trips_total_passengers}>>{additional_trips_total_passengers} in all three round trips."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_passengers_transported",
+      "solution_line_template": "In total, the train carried {first_trip_total_passengers}+{additional_trips_total_passengers} = <<{first_trip_total_passengers}+{additional_trips_total_passengers}={total_passengers_transported}>>{total_passengers_transported} people over all its trips that day"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total number of people transported in the first trip is 100 one way + 60 on the return trip = <<100+60=160>>160 people.",
+    "L2": "If the train made three more round trips that day carrying the same number of passengers in each trip as the first, it carried a total of 100*160 = <<100*160=16000>>16000 in all three round trips.",
+    "L3": "In total, the train carried 160+16000 = <<160+16000=16160>>16160 people over all its trips that day",
+    "FA": "#### 16160"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'passengers_oneway' (100) was used instead of 'additional_round_trips' (3).",
+  "repro_seed": 6570834822259825183,
+  "model_name": "google_gemini-2.5-flash"
+}

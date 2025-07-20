@@ -1,0 +1,80 @@
+{
+  "index": 3517,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "The nuts are $25.00 and he has a $5.00 coupon, so the nuts are on sale for $25-$5 = $<<25-5=20.00>>20.00",
+    "L2": "He eats 1 oz of nuts every evening and the bag has 40 oz of nuts, so it has 40/1 = <<40/1=40>>40 1 oz servings",
+    "L3": "The nuts cost $20.00 and there are 40 servings per bag, so his snack is $20/40 = $<<20/40=0.50>>0.50 per serving"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3517.\n    Returns: the cost of each serving of nuts in cents.\n    \"\"\"\n    # L1\n    bag_cost_dollars = 25.00 # $25.00 a bag\n    coupon_value_dollars = 5.00 # $5.00 coupon\n    sale_cost_dollars = bag_cost_dollars - coupon_value_dollars\n\n    # L2\n    serving_size_oz = 1 # 1 oz of mixed nuts\n    bag_size_oz = 40 # holds 40 oz of mixed nuts\n    num_servings = bag_size_oz / serving_size_oz\n\n    # L3\n    cost_per_serving_dollars = sale_cost_dollars / num_servings\n\n    # Convert to cents as required by the question\n    cents_per_dollar = 100 # WK\n    cost_per_serving_cents = cost_per_serving_dollars * cents_per_dollar\n\n    # FA\n    answer = cost_per_serving_cents\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "cost_per_serving_cents",
+    "replacement_variable": "num_servings"
+  },
+  "correct_trace": {
+    "bag_cost_dollars": 25.0,
+    "coupon_value_dollars": 5.0,
+    "sale_cost_dollars": 20.0,
+    "serving_size_oz": 1,
+    "bag_size_oz": 40,
+    "num_servings": 40.0,
+    "cost_per_serving_dollars": 0.5,
+    "cents_per_dollar": 100,
+    "cost_per_serving_cents": 50.0,
+    "answer": 50.0
+  },
+  "flawed_trace": {
+    "bag_cost_dollars": 25.0,
+    "coupon_value_dollars": 5.0,
+    "sale_cost_dollars": 20.0,
+    "serving_size_oz": 1,
+    "bag_size_oz": 40,
+    "num_servings": 40.0,
+    "cost_per_serving_dollars": 0.5,
+    "cents_per_dollar": 100,
+    "cost_per_serving_cents": 50.0,
+    "answer": 40.0
+  },
+  "correct_value": 50.0,
+  "flawed_value": 40.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "sale_cost_dollars",
+      "question_inputs": [
+        "bag_cost_dollars",
+        "coupon_value_dollars"
+      ],
+      "solution_line_template": "The nuts are ${bag_cost_dollars} and he has a ${coupon_value_dollars} coupon, so the nuts are on sale for ${bag_cost_dollars}-${coupon_value_dollars} = $<<{bag_cost_dollars}-{coupon_value_dollars}={sale_cost_dollars}>>{sale_cost_dollars}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_servings",
+      "question_inputs": [
+        "bag_size_oz",
+        "serving_size_oz"
+      ],
+      "solution_line_template": "He eats {serving_size_oz} oz of nuts every evening and the bag has {bag_size_oz} oz of nuts, so it has {bag_size_oz}/{serving_size_oz} = <<{bag_size_oz}/{serving_size_oz}={num_servings}>>{num_servings} {serving_size_oz} oz servings"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cost_per_serving_dollars",
+      "question_inputs": [],
+      "solution_line_template": "The nuts cost ${sale_cost_dollars} and there are {num_servings} servings per bag, so his snack is ${sale_cost_dollars}/{num_servings} = $<<{sale_cost_dollars}/{num_servings}={cost_per_serving_dollars}>>{cost_per_serving_dollars} per serving"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The nuts are $25 and he has a $5 coupon, so the nuts are on sale for $25-$5 = $<<25-5=20>>20",
+    "L2": "He eats 1 oz of nuts every evening and the bag has 40 oz of nuts, so it has 40/1 = <<40/1=40>>40 1 oz servings",
+    "FA": "#### 40"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'num_servings' (value: 40.0) was reported instead of 'cost_per_serving_cents' (value: 50.0).",
+  "repro_seed": 4057324036445174159,
+  "model_name": "google_gemini-2.5-flash"
+}

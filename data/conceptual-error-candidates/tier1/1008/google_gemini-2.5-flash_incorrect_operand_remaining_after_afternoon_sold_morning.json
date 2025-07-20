@@ -1,0 +1,63 @@
+{
+  "index": 1008,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "Lana sold 12 muffins and has to sell 20 - 12 = 8 to hit her goal before the bake sale ends.",
+    "L2": "When she sells another 4 in the afternoon Lana has 8 - 4 = <<8-4=4>>4 muffins left to sell to meet her target."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1008.\n    Returns: the number of more muffins Lana needs to sell to hit her goal.\n    \"\"\"\n    # L1\n    total_goal = 20 # Lana aims to sell 20 muffins\n    sold_morning = 12 # sells 12 muffins in the morning\n    remaining_after_morning = total_goal - sold_morning\n\n    # L2\n    sold_afternoon = 4 # sells another 4 in the afternoon\n    remaining_after_afternoon = remaining_after_morning - sold_afternoon\n\n    # FA\n    answer = remaining_after_afternoon\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "remaining_after_afternoon",
+    "operand_to_replace": "remaining_after_morning",
+    "replacement_variable": "sold_morning"
+  },
+  "correct_trace": {
+    "total_goal": 20,
+    "sold_morning": 12,
+    "remaining_after_morning": 8,
+    "sold_afternoon": 4,
+    "remaining_after_afternoon": 4,
+    "answer": 4
+  },
+  "flawed_trace": {
+    "total_goal": 20,
+    "sold_morning": 12,
+    "remaining_after_morning": 8,
+    "sold_afternoon": 4,
+    "remaining_after_afternoon": 8,
+    "answer": 8
+  },
+  "correct_value": 4,
+  "flawed_value": 8,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "total_goal",
+        "sold_morning"
+      ],
+      "WK_inputs": [],
+      "output_variable": "remaining_after_morning",
+      "solution_line_template": "Lana sold {sold_morning} muffins and has to sell {total_goal} - {sold_morning} = {remaining_after_morning} to hit her goal before the bake sale ends."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "sold_afternoon"
+      ],
+      "WK_inputs": [],
+      "output_variable": "remaining_after_afternoon",
+      "solution_line_template": "When she sells another {sold_afternoon} in the afternoon Lana has {remaining_after_morning} - {sold_afternoon} = <<{remaining_after_morning}-{sold_afternoon}={remaining_after_afternoon}>>{remaining_after_afternoon} muffins left to sell to meet her target."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Lana sold 12 muffins and has to sell 20 - 12 = 8 to hit her goal before the bake sale ends.",
+    "L2": "When she sells another 4 in the afternoon Lana has 12 - 4 = <<12-4=8>>8 muffins left to sell to meet her target.",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'sold_morning' (value: 12) was used instead of 'remaining_after_morning' (value: 8).",
+  "repro_seed": 3762607771546784402,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,63 @@
+{
+  "index": 6549,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "In January and February, Benny added 19 + 19 = $<<19+19=38>>38 to the piggy bank.",
+    "L2": "Calculating the difference between this and the total he has at the end of March shows that he saved 46 - 38 = $<<46-38=8>>8 in March."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6549.\n    Returns: the amount of money added to the piggy bank in March.\n    \"\"\"\n    # L1\n    january_amount = 19 # In January he adds $19\n    february_amount = 19 # adds the same amount in February\n    total_jan_feb = january_amount + february_amount\n\n    # L2\n    total_end_march = 46 # By the end of March, he has $46\n    march_amount = total_end_march - total_jan_feb\n\n    # FA\n    answer = march_amount\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "march_amount",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x3164d4890>"
+  },
+  "correct_trace": {
+    "january_amount": 19,
+    "february_amount": 19,
+    "total_jan_feb": 38,
+    "total_end_march": 46,
+    "march_amount": 8,
+    "answer": 8
+  },
+  "flawed_trace": {
+    "january_amount": 19,
+    "february_amount": 19,
+    "total_jan_feb": 38,
+    "total_end_march": 46,
+    "march_amount": 84,
+    "answer": 84
+  },
+  "correct_value": 8,
+  "flawed_value": 84,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_jan_feb",
+      "question_inputs": [
+        "january_amount",
+        "february_amount"
+      ],
+      "solution_line_template": "In January and February, Benny added {january_amount} + {february_amount} = $<<{january_amount}+{february_amount}={total_jan_feb}>>{total_jan_feb} to the piggy bank."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "march_amount",
+      "question_inputs": [
+        "total_end_march"
+      ],
+      "solution_line_template": "Calculating the difference between this and the total he has at the end of March shows that he saved {total_end_march} - {total_jan_feb} = $<<{total_end_march}-{total_jan_feb}={march_amount}>>{march_amount} in March."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In January and February, Benny added 19 + 19 = $<<19+19=38>>38 to the piggy bank.",
+    "L2": "Calculating the difference between this and the total he has at the end of March shows that he saved 46 - 38 = $<<46-38=84>>84 in March.",
+    "FA": "#### 84"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 5310162321304932187,
+  "model_name": "google_gemini-2.5-flash"
+}

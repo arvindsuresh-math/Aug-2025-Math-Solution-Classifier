@@ -1,0 +1,63 @@
+{
+  "index": 5522,
+  "original_solution_mapping": {
+    "FA": "#### 45",
+    "L1": "Mrs. Lacson sold a total of 20 + 15 = <<20+15=35>>35 sweet potatoes.",
+    "L2": "Hence, there are still 80 - 35 = <<80-35=45>>45 sweet potatoes left unsold."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5522.\n    Returns: the number of sweet potatoes not yet sold.\n    \"\"\"\n    # L1\n    sold_to_mrs_adams = 20 # sold 20 of them to Mrs. Adams\n    sold_to_mr_lenon = 15 # and 15 of them to Mr. Lenon\n    total_sold = sold_to_mrs_adams + sold_to_mr_lenon\n\n    # L2\n    total_harvested = 80 # harvested 80 sweet potatoes\n    not_yet_sold = total_harvested - total_sold\n\n    # FA\n    answer = not_yet_sold\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "not_yet_sold",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x314991610>"
+  },
+  "correct_trace": {
+    "sold_to_mrs_adams": 20,
+    "sold_to_mr_lenon": 15,
+    "total_sold": 35,
+    "total_harvested": 80,
+    "not_yet_sold": 45,
+    "answer": 45
+  },
+  "flawed_trace": {
+    "sold_to_mrs_adams": 20,
+    "sold_to_mr_lenon": 15,
+    "total_sold": 35,
+    "total_harvested": 80,
+    "not_yet_sold": 115,
+    "answer": 115
+  },
+  "correct_value": 45,
+  "flawed_value": 115,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_sold",
+      "question_inputs": [
+        "sold_to_mrs_adams",
+        "sold_to_mr_lenon"
+      ],
+      "solution_line_template": "Mrs. Lacson sold a total of {sold_to_mrs_adams} + {sold_to_mr_lenon} = <<{sold_to_mrs_adams}+{sold_to_mr_lenon}={total_sold}>>{total_sold} sweet potatoes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "not_yet_sold",
+      "question_inputs": [
+        "total_harvested"
+      ],
+      "solution_line_template": "Hence, there are still {total_harvested} - {total_sold} = <<{total_harvested}-{total_sold}={not_yet_sold}>>{not_yet_sold} sweet potatoes left unsold."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Mrs. Lacson sold a total of 20 + 15 = <<20+15=35>>35 sweet potatoes.",
+    "L2": "Hence, there are still 80 - 35 = <<80-35=115>>115 sweet potatoes left unsold.",
+    "FA": "#### 115"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -6574466452051658891,
+  "model_name": "google_gemini-2.5-flash"
+}

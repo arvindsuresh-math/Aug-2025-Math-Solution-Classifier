@@ -1,0 +1,74 @@
+{
+  "index": 6869,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "They played 15 rounds and William won 5 more rounds than Harry so that leaves 15 - 5 = <<15-5=10>>10 round",
+    "L2": "There are 2 players and 10 rounds so they each won 10/2 = 5 rounds",
+    "L3": "William won 5 more rounds than Harry and they each won 5 rounds so William won 5+5 = <<5+5=10>>10 rounds"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6869.\n    Returns: the number of rounds William won.\n    \"\"\"\n    # L1\n    total_rounds = 15 # played 15 rounds of tic-tac-toe\n    william_more_wins = 5 # William won 5 more rounds than Harry\n    remaining_rounds = total_rounds - william_more_wins\n\n    # L2\n    num_players = 2 # There are 2 players\n    rounds_per_player_equal_share = remaining_rounds / num_players\n\n    # L3\n    william_wins = rounds_per_player_equal_share + william_more_wins\n\n    # FA\n    answer = william_wins\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "remaining_rounds",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x31b4f3210>"
+  },
+  "correct_trace": {
+    "total_rounds": 15,
+    "william_more_wins": 5,
+    "remaining_rounds": 10,
+    "num_players": 2,
+    "rounds_per_player_equal_share": 5.0,
+    "william_wins": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "total_rounds": 15,
+    "william_more_wins": 5,
+    "remaining_rounds": 20,
+    "num_players": 2,
+    "rounds_per_player_equal_share": 10.0,
+    "william_wins": 15.0,
+    "answer": 15.0
+  },
+  "correct_value": 10,
+  "flawed_value": 20,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "remaining_rounds",
+      "question_inputs": [
+        "total_rounds",
+        "william_more_wins"
+      ],
+      "solution_line_template": "They played {total_rounds} rounds and William won {william_more_wins} more rounds than Harry so that leaves {total_rounds} - {william_more_wins} = <<{total_rounds}-{william_more_wins}={remaining_rounds}>>{remaining_rounds} round"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "rounds_per_player_equal_share",
+      "question_inputs": [
+        "num_players"
+      ],
+      "solution_line_template": "There are {num_players} players and {remaining_rounds} rounds so they each won {remaining_rounds}/{num_players} = {rounds_per_player_equal_share} rounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "william_wins",
+      "question_inputs": [],
+      "solution_line_template": "William won {william_more_wins} more rounds than Harry and they each won {rounds_per_player_equal_share} rounds so William won {rounds_per_player_equal_share}+{william_more_wins} = <<{rounds_per_player_equal_share}+{william_more_wins}={william_wins}>>{william_wins} rounds"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "They played 15 rounds and William won 5 more rounds than Harry so that leaves 15 - 5 = <<15-5=20>>20 round",
+    "L2": "There are 2 players and 20 rounds so they each won 20/2 = 10 rounds",
+    "L3": "William won 5 more rounds than Harry and they each won 10 rounds so William won 10+5 = <<10+5=15>>15 rounds",
+    "FA": "#### 15"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -5232821587660807585,
+  "model_name": "google_gemini-2.5-flash"
+}

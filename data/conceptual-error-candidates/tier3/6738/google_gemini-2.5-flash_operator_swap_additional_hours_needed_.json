@@ -1,0 +1,63 @@
+{
+  "index": 6738,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "For an 8-hour dive, she will use her 2-hour primary tanks and will need supplemental tanks for 8-2=<<8-2=6>>6 additional hours.",
+    "L2": "Since each supplemental tank holds 1 hour of oxygen, for 6 hours she will need 6/1=<<6/1=6>>6 supplemental tanks."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6738.\n    Returns: the number of supplemental tanks needed.\n    \"\"\"\n    # L1\n    total_dive_hours = 8 # be underwater for 8 hours\n    primary_tank_hours = 2 # primary tank, which she wears when she first enters the water, has enough oxygen to allow her to stay underwater for 2 hours\n    additional_hours_needed = total_dive_hours - primary_tank_hours\n\n    # L2\n    hours_per_supplemental_tank = 1 # 1-hour supplemental tanks\n    num_supplemental_tanks = additional_hours_needed / hours_per_supplemental_tank\n\n    # FA\n    answer = num_supplemental_tanks\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "additional_hours_needed",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x31b470390>"
+  },
+  "correct_trace": {
+    "total_dive_hours": 8,
+    "primary_tank_hours": 2,
+    "additional_hours_needed": 6,
+    "hours_per_supplemental_tank": 1,
+    "num_supplemental_tanks": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "total_dive_hours": 8,
+    "primary_tank_hours": 2,
+    "additional_hours_needed": 10,
+    "hours_per_supplemental_tank": 1,
+    "num_supplemental_tanks": 10.0,
+    "answer": 10.0
+  },
+  "correct_value": 6,
+  "flawed_value": 10,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "additional_hours_needed",
+      "question_inputs": [
+        "total_dive_hours",
+        "primary_tank_hours"
+      ],
+      "solution_line_template": "For an {total_dive_hours}-hour dive, she will use her {primary_tank_hours}-hour primary tanks and will need supplemental tanks for {total_dive_hours}-{primary_tank_hours}=<<{total_dive_hours}-{primary_tank_hours}={additional_hours_needed}>>{additional_hours_needed} additional hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_supplemental_tanks",
+      "question_inputs": [
+        "hours_per_supplemental_tank"
+      ],
+      "solution_line_template": "Since each supplemental tank holds {hours_per_supplemental_tank} hour of oxygen, for {additional_hours_needed} hours she will need {additional_hours_needed}/{hours_per_supplemental_tank}=<<{additional_hours_needed}/{hours_per_supplemental_tank}={num_supplemental_tanks}>>{num_supplemental_tanks} supplemental tanks."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "For an 8-hour dive, she will use her 2-hour primary tanks and will need supplemental tanks for 8-2=<<8-2=10>>10 additional hours.",
+    "L2": "Since each supplemental tank holds 1 hour of oxygen, for 10 hours she will need 10/1=<<10/1=10>>10 supplemental tanks.",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 2139615407239023910,
+  "model_name": "google_gemini-2.5-flash"
+}

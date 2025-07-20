@@ -1,0 +1,89 @@
+{
+  "index": 131,
+  "original_solution_mapping": {
+    "FA": "#### 500",
+    "L1": "Since each chapter of the book has 40 pages, Mitchell had read 10*40 = <<10*40=400>>400 pages from the first ten chapters.",
+    "L2": "After reading 20 pages of the eleventh chapter, the total number of pages that Mitchell had read is 400+20 = <<400+20=420>>420",
+    "L3": "The next two chapters that she read had 2*40 = <<2*40=80>>80 pages.",
+    "L4": "In total, Mitchell read 420+80 = <<420+80=500>>500 pages of the book that day."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 131.\n    Returns: the total number of pages that Mitchell had read altogether.\n    \"\"\"\n    # L1\n    num_chapters_initial = 10 # read ten chapters of a book\n    pages_per_chapter = 40 # each chapter in the book had 40 pages\n    pages_from_first_ten_chapters = num_chapters_initial * pages_per_chapter\n\n    # L2\n    pages_in_11th_chapter = 20 # read 20 pages of the 11th chapter\n    total_pages_after_11th_chapter_partial = pages_from_first_ten_chapters + pages_in_11th_chapter\n\n    # L3\n    num_additional_chapters = 2 # read 2 more chapters\n    pages_from_additional_chapters = num_additional_chapters * pages_per_chapter\n\n    # L4\n    total_pages_read = total_pages_after_11th_chapter_partial + pages_from_additional_chapters\n\n    # FA\n    answer = total_pages_read\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_pages_read",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x316ef7d90>"
+  },
+  "correct_trace": {
+    "num_chapters_initial": 10,
+    "pages_per_chapter": 40,
+    "pages_from_first_ten_chapters": 400,
+    "pages_in_11th_chapter": 20,
+    "total_pages_after_11th_chapter_partial": 420,
+    "num_additional_chapters": 2,
+    "pages_from_additional_chapters": 80,
+    "total_pages_read": 500,
+    "answer": 500
+  },
+  "flawed_trace": {
+    "num_chapters_initial": 10,
+    "pages_per_chapter": 40,
+    "pages_from_first_ten_chapters": 400,
+    "pages_in_11th_chapter": 20,
+    "total_pages_after_11th_chapter_partial": 420,
+    "num_additional_chapters": 2,
+    "pages_from_additional_chapters": 80,
+    "total_pages_read": 33600,
+    "answer": 33600
+  },
+  "correct_value": 500,
+  "flawed_value": 33600,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "num_chapters_initial",
+        "pages_per_chapter"
+      ],
+      "WK_inputs": [],
+      "output_variable": "pages_from_first_ten_chapters",
+      "solution_line_template": "Since each chapter of the book has {pages_per_chapter} pages, Mitchell had read {num_chapters_initial}*{pages_per_chapter} = <<{num_chapters_initial}*{pages_per_chapter}={pages_from_first_ten_chapters}>>{pages_from_first_ten_chapters} pages from the first ten chapters."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "pages_in_11th_chapter"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_pages_after_11th_chapter_partial",
+      "solution_line_template": "After reading {pages_in_11th_chapter} pages of the eleventh chapter, the total number of pages that Mitchell had read is {pages_from_first_ten_chapters}+{pages_in_11th_chapter} = <<{pages_from_first_ten_chapters}+{pages_in_11th_chapter}={total_pages_after_11th_chapter_partial}>>{total_pages_after_11th_chapter_partial}"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "num_additional_chapters"
+      ],
+      "WK_inputs": [],
+      "output_variable": "pages_from_additional_chapters",
+      "solution_line_template": "The next {num_additional_chapters} chapters that she read had {num_additional_chapters}*{pages_per_chapter} = <<{num_additional_chapters}*{pages_per_chapter}={pages_from_additional_chapters}>>{pages_from_additional_chapters} pages."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_pages_read",
+      "solution_line_template": "In total, Mitchell read {total_pages_after_11th_chapter_partial}+{pages_from_additional_chapters} = <<{total_pages_after_11th_chapter_partial}+{pages_from_additional_chapters}={total_pages_read}>>{total_pages_read} pages of the book that day."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since each chapter of the book has 40 pages, Mitchell had read 10*40 = <<10*40=400>>400 pages from the first ten chapters.",
+    "L2": "After reading 20 pages of the eleventh chapter, the total number of pages that Mitchell had read is 400+20 = <<400+20=420>>420",
+    "L3": "The next 2 chapters that she read had 2*40 = <<2*40=80>>80 pages.",
+    "L4": "In total, Mitchell read 420+80 = <<420+80=33600>>33600 pages of the book that day.",
+    "FA": "#### 33600"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": -8419793861663110063,
+  "model_name": "google_gemini-2.5-flash"
+}

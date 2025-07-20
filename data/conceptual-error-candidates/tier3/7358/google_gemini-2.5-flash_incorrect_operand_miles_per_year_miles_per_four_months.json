@@ -1,0 +1,79 @@
+{
+  "index": 7358,
+  "original_solution_mapping": {
+    "FA": "#### 999,000",
+    "L1": "There are 12/4 = <<12/4=3>>3 four month groups in a year",
+    "L2": "Jack drives 37,000*3 = <<37000*3=111000>>111,000 miles in a year.",
+    "L3": "Jack has driven 111,000*9 = <<111000*9=999000>>999,000 miles since he has started driving."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7358.\n    Returns: the total number of miles Jack has driven.\n    \"\"\"\n    # L1\n    months_per_year = 12 # WK\n    months_in_group = 4 # every four months\n    four_month_groups_per_year = months_per_year / months_in_group\n\n    # L2\n    miles_per_four_months = 37000 # 37,000 miles every four months\n    miles_per_year = miles_per_four_months * four_month_groups_per_year\n\n    # L3\n    years_driven = 9 # driving for the past 9 years\n    total_miles_driven = miles_per_year * years_driven\n\n    # FA\n    answer = total_miles_driven\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "miles_per_year",
+    "operand_to_replace": "four_month_groups_per_year",
+    "replacement_variable": "miles_per_four_months"
+  },
+  "correct_trace": {
+    "months_per_year": 12,
+    "months_in_group": 4,
+    "four_month_groups_per_year": 3.0,
+    "miles_per_four_months": 37000,
+    "miles_per_year": 111000.0,
+    "years_driven": 9,
+    "total_miles_driven": 999000.0,
+    "answer": 999000.0
+  },
+  "flawed_trace": {
+    "months_per_year": 12,
+    "months_in_group": 4,
+    "four_month_groups_per_year": 3.0,
+    "miles_per_four_months": 37000,
+    "miles_per_year": 1369000000,
+    "years_driven": 9,
+    "total_miles_driven": 12321000000,
+    "answer": 12321000000
+  },
+  "correct_value": 111000.0,
+  "flawed_value": 1369000000,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L1",
+      "output_variable": "four_month_groups_per_year",
+      "question_inputs": [
+        "months_in_group"
+      ],
+      "solution_line_template": "There are {months_per_year}/{months_in_group} = <<{months_per_year}/{months_in_group}={four_month_groups_per_year}>>{four_month_groups_per_year} four month groups in a year"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "miles_per_year",
+      "question_inputs": [
+        "miles_per_four_months"
+      ],
+      "solution_line_template": "Jack drives {miles_per_four_months}*{four_month_groups_per_year} = <<{miles_per_four_months}*{four_month_groups_per_year}={miles_per_year}>>{miles_per_year} miles in a year."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_miles_driven",
+      "question_inputs": [
+        "years_driven"
+      ],
+      "solution_line_template": "Jack has driven {miles_per_year}*{years_driven} = <<{miles_per_year}*{years_driven}={total_miles_driven}>>{total_miles_driven} miles since he has started driving."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 12/4 = <<12/4=3>>3 four month groups in a year",
+    "L2": "Jack drives 37000*37000 = <<37000*37000=1369000000>>1369000000 miles in a year.",
+    "L3": "Jack has driven 1369000000*9 = <<1369000000*9=12321000000>>12321000000 miles since he has started driving.",
+    "FA": "#### 12321000000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'miles_per_four_months' (value: 37000) was used instead of 'four_month_groups_per_year' (value: 3.0).",
+  "repro_seed": -8618930392190241677,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,64 @@
+{
+  "index": 7026,
+  "original_solution_mapping": {
+    "FA": "#### 36",
+    "L1": "Alton earns $8 x 7 = $<<8*7=56>>56 per week.",
+    "L2": "Therefore, his weekly profit after paying the rent is $56 - $20 = $<<56-20=36>>36."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7026.\n    Returns: Alton's total profit every week.\n    \"\"\"\n    # L1\n    daily_earnings = 8 # $8 per day\n    days_per_week = 7 # WK\n    weekly_earnings = daily_earnings * days_per_week\n\n    # L2\n    weekly_rent_cost = 20 # $20 per week\n    weekly_profit = weekly_earnings - weekly_rent_cost\n\n    # FA\n    answer = weekly_profit\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "weekly_profit",
+    "operand_to_replace": "weekly_rent_cost",
+    "replacement_variable": "days_per_week"
+  },
+  "correct_trace": {
+    "daily_earnings": 8,
+    "days_per_week": 7,
+    "weekly_earnings": 56,
+    "weekly_rent_cost": 20,
+    "weekly_profit": 36,
+    "answer": 36
+  },
+  "flawed_trace": {
+    "daily_earnings": 8,
+    "days_per_week": 7,
+    "weekly_earnings": 56,
+    "weekly_rent_cost": 20,
+    "weekly_profit": 49,
+    "answer": 49
+  },
+  "correct_value": 36,
+  "flawed_value": 49,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L1",
+      "output_variable": "weekly_earnings",
+      "question_inputs": [
+        "daily_earnings"
+      ],
+      "solution_line_template": "Alton earns ${daily_earnings} x {days_per_week} = ${weekly_earnings}<<{daily_earnings}*{days_per_week}={weekly_earnings}>>{weekly_earnings} per week."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "weekly_profit",
+      "question_inputs": [
+        "weekly_rent_cost"
+      ],
+      "solution_line_template": "Therefore, his weekly profit after paying the rent is ${weekly_earnings} - ${weekly_rent_cost} = ${weekly_profit}<<{weekly_earnings}-{weekly_rent_cost}={weekly_profit}>>{weekly_profit}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Alton earns $8 x 7 = $56<<8*7=56>>56 per week.",
+    "L2": "Therefore, his weekly profit after paying the rent is $56 - $7 = $49<<56-7=49>>49.",
+    "FA": "#### 49"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'days_per_week' (7) was used instead of 'weekly_rent_cost' (20).",
+  "repro_seed": -6170013626555619704,
+  "model_name": "google_gemini-2.5-flash"
+}

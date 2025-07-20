@@ -1,0 +1,89 @@
+{
+  "index": 4168,
+  "original_solution_mapping": {
+    "FA": "#### 72",
+    "L1": "Jimmy weighs 75+6 = <<75+6=81>>81 pounds.",
+    "L2": "Adam's weight is 75-15= <<75-15=60>>60 pounds.",
+    "L3": "In total, the three weigh 75 + 81 + 60 = <<75+81+60=216>>216 pounds.",
+    "L4": "The average weight of the three is 216/3 = <<216/3=72>>72 pounds"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4168.\n    Returns: the average weight of the three people.\n    \"\"\"\n    # L1\n    rachel_weight = 75 # Rachel weighs 75 pounds\n    less_than_jimmy = 6 # 6 pounds less than Jimmy\n    jimmy_weight = rachel_weight + less_than_jimmy\n\n    # L2\n    more_than_adam = 15 # 15 pounds more than Adam\n    adam_weight = rachel_weight - more_than_adam\n\n    # L3\n    total_weight = rachel_weight + jimmy_weight + adam_weight\n\n    # L4\n    number_of_people = 3 # three people\n    average_weight = total_weight / number_of_people\n\n    # FA\n    answer = average_weight\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_weight",
+    "operand_to_replace": "rachel_weight",
+    "replacement_variable": "adam_weight"
+  },
+  "correct_trace": {
+    "rachel_weight": 75,
+    "less_than_jimmy": 6,
+    "jimmy_weight": 81,
+    "more_than_adam": 15,
+    "adam_weight": 60,
+    "total_weight": 216,
+    "number_of_people": 3,
+    "average_weight": 72.0,
+    "answer": 72.0
+  },
+  "flawed_trace": {
+    "rachel_weight": 75,
+    "less_than_jimmy": 6,
+    "jimmy_weight": 81,
+    "more_than_adam": 15,
+    "adam_weight": 60,
+    "total_weight": 201,
+    "number_of_people": 3,
+    "average_weight": 67.0,
+    "answer": 67.0
+  },
+  "correct_value": 216,
+  "flawed_value": 201,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "jimmy_weight",
+      "question_inputs": [
+        "rachel_weight",
+        "less_than_jimmy"
+      ],
+      "solution_line_template": "Jimmy weighs {rachel_weight}+{less_than_jimmy} = <<{rachel_weight}+{less_than_jimmy}={jimmy_weight}>>{jimmy_weight} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "adam_weight",
+      "question_inputs": [
+        "more_than_adam"
+      ],
+      "solution_line_template": "Adam's weight is {rachel_weight}-{more_than_adam}= <<{rachel_weight}-{more_than_adam}={adam_weight}>>{adam_weight} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_weight",
+      "question_inputs": [],
+      "solution_line_template": "In total, the three weigh {rachel_weight} + {jimmy_weight} + {adam_weight} = <<{rachel_weight}+{jimmy_weight}+{adam_weight}={total_weight}>>{total_weight} pounds."
+    },
+    {
+      "WK_inputs": [
+        "number_of_people"
+      ],
+      "line_number": "L4",
+      "output_variable": "average_weight",
+      "question_inputs": [],
+      "solution_line_template": "The average weight of the three is {total_weight}/{number_of_people} = <<{total_weight}/{number_of_people}={average_weight}>>{average_weight} pounds"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jimmy weighs 75+6 = <<75+6=81>>81 pounds.",
+    "L2": "Adam's weight is 75-15= <<75-15=60>>60 pounds.",
+    "L3": "In total, the three weigh 60 + 81 + 60 = <<60+81+60=201>>201 pounds.",
+    "L4": "The average weight of the three is 201/3 = <<201/3=67>>67 pounds",
+    "FA": "#### 67"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'adam_weight' (60) was used instead of 'rachel_weight' (75).",
+  "repro_seed": -8442979552379869562,
+  "model_name": "google_gemini-2.5-flash"
+}

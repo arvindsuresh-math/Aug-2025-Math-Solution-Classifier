@@ -1,0 +1,85 @@
+{
+  "index": 6946,
+  "original_solution_mapping": {
+    "FA": "#### 96",
+    "L1": "After one day of sailing, 2/5*400 = <<2/5*400=160>>160 pounds of food supplies had been used.",
+    "L2": "The total number of supplies remaining in the ship is 400-160 = <<400-160=240>>240 pounds.",
+    "L3": "After another 2 days of sailing, 3/5*240 = <<3/5*240=144>>144 pounds of food had been used.",
+    "L4": "The total number of supplies remaining in the ship is now 240-144 = <<240-144=96>>96 pounds."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6946.\n    Returns: the number of supplies remaining in the ship.\n    \"\"\"\n    # L1\n    initial_food_supply = 400 # 400 pounds of food for the journey's supply\n    first_day_fraction_used = Fraction(2, 5) # 2/5 of the supplies had been used\n    food_used_first_day = first_day_fraction_used * initial_food_supply\n\n    # L2\n    remaining_supplies_after_first_day = initial_food_supply - food_used_first_day\n\n    # L3\n    subsequent_days_fraction_used = Fraction(3, 5) # 3/5 of the remaining supplies\n    food_used_subsequent_days = subsequent_days_fraction_used * remaining_supplies_after_first_day\n\n    # L4\n    final_remaining_supplies = remaining_supplies_after_first_day - food_used_subsequent_days\n\n    # FA\n    answer = final_remaining_supplies\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "food_used_subsequent_days",
+    "operand_to_replace": "subsequent_days_fraction_used",
+    "replacement_variable": "first_day_fraction_used"
+  },
+  "correct_trace": {
+    "initial_food_supply": 400,
+    "first_day_fraction_used": "2/5",
+    "food_used_first_day": "160",
+    "remaining_supplies_after_first_day": "240",
+    "subsequent_days_fraction_used": "3/5",
+    "food_used_subsequent_days": "144",
+    "final_remaining_supplies": "96",
+    "answer": "96"
+  },
+  "flawed_trace": {
+    "initial_food_supply": 400,
+    "first_day_fraction_used": "2/5",
+    "food_used_first_day": "160",
+    "remaining_supplies_after_first_day": "240",
+    "subsequent_days_fraction_used": "3/5",
+    "food_used_subsequent_days": "96",
+    "final_remaining_supplies": "144",
+    "answer": "144"
+  },
+  "correct_value": "144",
+  "flawed_value": "96",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "food_used_first_day",
+      "question_inputs": [
+        "initial_food_supply",
+        "first_day_fraction_used"
+      ],
+      "solution_line_template": "After one day of sailing, {first_day_fraction_used}*{initial_food_supply} = <<{first_day_fraction_used}*{initial_food_supply}={food_used_first_day}>>{food_used_first_day} pounds of food supplies had been used."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_supplies_after_first_day",
+      "question_inputs": [],
+      "solution_line_template": "The total number of supplies remaining in the ship is {initial_food_supply}-{food_used_first_day} = <<{initial_food_supply}-{food_used_first_day}={remaining_supplies_after_first_day}>>{remaining_supplies_after_first_day} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "food_used_subsequent_days",
+      "question_inputs": [
+        "subsequent_days_fraction_used"
+      ],
+      "solution_line_template": "After another 2 days of sailing, {subsequent_days_fraction_used}*{remaining_supplies_after_first_day} = <<{subsequent_days_fraction_used}*{remaining_supplies_after_first_day}={food_used_subsequent_days}>>{food_used_subsequent_days} pounds of food had been used."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_remaining_supplies",
+      "question_inputs": [],
+      "solution_line_template": "The total number of supplies remaining in the ship is now {remaining_supplies_after_first_day}-{food_used_subsequent_days} = <<{remaining_supplies_after_first_day}-{food_used_subsequent_days}={final_remaining_supplies}>>{final_remaining_supplies} pounds."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After one day of sailing, 2/5*400 = <<2/5*400=160>>160 pounds of food supplies had been used.",
+    "L2": "The total number of supplies remaining in the ship is 400-160 = <<400-160=240>>240 pounds.",
+    "L3": "After another 2 days of sailing, 2/5*240 = <<2/5*240=96>>96 pounds of food had been used.",
+    "L4": "The total number of supplies remaining in the ship is now 240-96 = <<240-96=144>>144 pounds.",
+    "FA": "#### 144"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'first_day_fraction_used' (2/5) was used instead of 'subsequent_days_fraction_used' (3/5).",
+  "repro_seed": 4207037527070117799,
+  "model_name": "google_gemini-2.5-flash"
+}

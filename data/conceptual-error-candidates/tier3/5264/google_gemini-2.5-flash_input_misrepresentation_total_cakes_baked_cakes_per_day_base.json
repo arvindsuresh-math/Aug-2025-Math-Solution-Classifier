@@ -1,0 +1,89 @@
+{
+  "index": 5264,
+  "original_solution_mapping": {
+    "FA": "#### 21",
+    "L1": "Julia baked one less than 5 cakes per day, or 5-1=<<5-1=4>>4 cakes per day.",
+    "L2": "For 6 days, Julia baked 4 cakes per day, for a total of 4*6=<<4*6=24>>24 cakes.",
+    "L3": "Over 6 days, every other day, Clifford sneaks into Julia's house and eats one of Julia's cakes resulting in disappearance of 6/2=<<6/2=3>>3 cakes.",
+    "L4": "At the end of 6 days, Julia has 24-3=<<24-3=21>>21 cakes remaining."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5264.\n    Returns: the number of cakes Julia has remaining.\n    \"\"\"\n    # L1\n    cakes_per_day_base = 5 # 5 cakes per day\n    less_cakes = 1 # one less than 5 cakes\n    cakes_per_day = cakes_per_day_base - less_cakes\n\n    # L2\n    num_days = 6 # for 6 days\n    total_cakes_baked = cakes_per_day * num_days\n\n    # L3\n    eating_frequency_divisor = 2 # every other day\n    cakes_eaten_by_clifford = num_days / eating_frequency_divisor\n\n    # L4\n    cakes_remaining = total_cakes_baked - cakes_eaten_by_clifford\n\n    # FA\n    answer = cakes_remaining\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cakes_baked",
+    "operand_to_replace": "num_days",
+    "replacement_variable": "cakes_per_day_base"
+  },
+  "correct_trace": {
+    "cakes_per_day_base": 5,
+    "less_cakes": 1,
+    "cakes_per_day": 4,
+    "num_days": 6,
+    "total_cakes_baked": 24,
+    "eating_frequency_divisor": 2,
+    "cakes_eaten_by_clifford": 3.0,
+    "cakes_remaining": 21.0,
+    "answer": 21.0
+  },
+  "flawed_trace": {
+    "cakes_per_day_base": 5,
+    "less_cakes": 1,
+    "cakes_per_day": 4,
+    "num_days": 6,
+    "total_cakes_baked": 20,
+    "eating_frequency_divisor": 2,
+    "cakes_eaten_by_clifford": 3.0,
+    "cakes_remaining": 17.0,
+    "answer": 17.0
+  },
+  "correct_value": 24,
+  "flawed_value": 20,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cakes_per_day",
+      "question_inputs": [
+        "cakes_per_day_base",
+        "less_cakes"
+      ],
+      "solution_line_template": "Julia baked one less than {cakes_per_day_base} cakes per day, or {cakes_per_day_base}-{less_cakes}=<<{cakes_per_day_base}-{less_cakes}={cakes_per_day}>>{cakes_per_day} cakes per day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cakes_baked",
+      "question_inputs": [
+        "num_days"
+      ],
+      "solution_line_template": "For {num_days} days, Julia baked {cakes_per_day} cakes per day, for a total of {cakes_per_day}*{num_days}=<<{cakes_per_day}*{num_days}={total_cakes_baked}>>{total_cakes_baked} cakes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cakes_eaten_by_clifford",
+      "question_inputs": [
+        "eating_frequency_divisor"
+      ],
+      "solution_line_template": "Over {num_days} days, every other day, Clifford sneaks into Julia's house and eats one of Julia's cakes resulting in disappearance of {num_days}/{eating_frequency_divisor}=<<{num_days}/{eating_frequency_divisor}={cakes_eaten_by_clifford}>>{cakes_eaten_by_clifford} cakes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "cakes_remaining",
+      "question_inputs": [],
+      "solution_line_template": "At the end of 6 days, Julia has {total_cakes_baked}-{cakes_eaten_by_clifford}=<<{total_cakes_baked}-{cakes_eaten_by_clifford}={cakes_remaining}>>{cakes_remaining} cakes remaining."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Julia baked one less than 5 cakes per day, or 5-1=<<5-1=4>>4 cakes per day.",
+    "L2": "For 5 days, Julia baked 4 cakes per day, for a total of 4*5=<<4*5=20>>20 cakes.",
+    "L3": "Over 6 days, every other day, Clifford sneaks into Julia's house and eats one of Julia's cakes resulting in disappearance of 6/2=<<6/2=3>>3 cakes.",
+    "L4": "At the end of 6 days, Julia has 20-3=<<20-3=17>>17 cakes remaining.",
+    "FA": "#### 17"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'cakes_per_day_base' (5) was used instead of 'num_days' (6).",
+  "repro_seed": 5306574085104924959,
+  "model_name": "google_gemini-2.5-flash"
+}

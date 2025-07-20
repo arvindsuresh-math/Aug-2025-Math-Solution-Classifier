@@ -1,0 +1,117 @@
+{
+  "index": 355,
+  "original_solution_mapping": {
+    "FA": "#### 66",
+    "L1": "There are 10 x 15 = <<10*15=150>>150 squares in a grid.",
+    "L2": "4 x 6 = <<4*6=24>>24 squares are colored red.",
+    "L3": "There are 2 + 2 = <<2+2=4>>4 rows that are all blue.",
+    "L4": "Thus, a total of 4 x 15 = <<4*15=60>>60 squares are colored blue.",
+    "L5": "24 + 60 = <<24+60=84>>84 squares are color red or blue.",
+    "L6": "Therefore, 150 - 84 = <<150-84=66>>66 square are green."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 355.\n    Returns: the number of squares Marla colors green.\n    \"\"\"\n    # L1\n    num_rows = 10 # 10 rows\n    squares_per_row = 15 # 15 squares in each row\n    total_squares_grid = num_rows * squares_per_row\n\n    # L2\n    red_rows = 4 # 4 rows of 6 squares\n    red_squares_per_row = 6 # 6 squares in the middle of the grid with red\n    red_squares = red_rows * red_squares_per_row\n\n    # L3\n    first_blue_rows = 2 # first 2 and last 2 rows\n    last_blue_rows = 2 # first 2 and last 2 rows\n    total_blue_rows = first_blue_rows + last_blue_rows\n\n    # L4\n    blue_squares = total_blue_rows * squares_per_row\n\n    # L5\n    red_or_blue_squares = red_squares + blue_squares\n\n    # L6\n    green_squares = total_squares_grid - red_or_blue_squares\n\n    # FA\n    answer = green_squares\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "blue_squares",
+    "operand_to_replace": "squares_per_row",
+    "replacement_variable": "red_squares_per_row"
+  },
+  "correct_trace": {
+    "num_rows": 10,
+    "squares_per_row": 15,
+    "total_squares_grid": 150,
+    "red_rows": 4,
+    "red_squares_per_row": 6,
+    "red_squares": 24,
+    "first_blue_rows": 2,
+    "last_blue_rows": 2,
+    "total_blue_rows": 4,
+    "blue_squares": 60,
+    "red_or_blue_squares": 84,
+    "green_squares": 66,
+    "answer": 66
+  },
+  "flawed_trace": {
+    "num_rows": 10,
+    "squares_per_row": 15,
+    "total_squares_grid": 150,
+    "red_rows": 4,
+    "red_squares_per_row": 6,
+    "red_squares": 24,
+    "first_blue_rows": 2,
+    "last_blue_rows": 2,
+    "total_blue_rows": 4,
+    "blue_squares": 24,
+    "red_or_blue_squares": 48,
+    "green_squares": 102,
+    "answer": 102
+  },
+  "correct_value": 60,
+  "flawed_value": 24,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "num_rows",
+        "squares_per_row"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_squares_grid",
+      "solution_line_template": "There are {num_rows} x {squares_per_row} = <<{num_rows}*{squares_per_row}={total_squares_grid}>>{total_squares_grid} squares in a grid."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "red_rows",
+        "red_squares_per_row"
+      ],
+      "WK_inputs": [],
+      "output_variable": "red_squares",
+      "solution_line_template": "{red_rows} x {red_squares_per_row} = <<{red_rows}*{red_squares_per_row}={red_squares}>>{red_squares} squares are colored red."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "first_blue_rows",
+        "last_blue_rows"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_blue_rows",
+      "solution_line_template": "There are {first_blue_rows} + {last_blue_rows} = <<{first_blue_rows}+{last_blue_rows}={total_blue_rows}>>{total_blue_rows} rows that are all blue."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "blue_squares",
+      "solution_line_template": "Thus, a total of {total_blue_rows} x {squares_per_row} = <<{total_blue_rows}*{squares_per_row}={blue_squares}>>{blue_squares} squares are colored blue."
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "red_or_blue_squares",
+      "solution_line_template": "{red_squares} + {blue_squares} = <<{red_squares}+{blue_squares}={red_or_blue_squares}>>{red_or_blue_squares} squares are color red or blue."
+    },
+    {
+      "line_number": "L6",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "green_squares",
+      "solution_line_template": "Therefore, {total_squares_grid} - {red_or_blue_squares} = <<{total_squares_grid}-{red_or_blue_squares}={green_squares}>>{green_squares} square are green."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 10 x 15 = <<10*15=150>>150 squares in a grid.",
+    "L2": "4 x 6 = <<4*6=24>>24 squares are colored red.",
+    "L3": "There are 2 + 2 = <<2+2=4>>4 rows that are all blue.",
+    "L4": "Thus, a total of 4 x 6 = <<4*6=24>>24 squares are colored blue.",
+    "L5": "24 + 24 = <<24+24=48>>48 squares are color red or blue.",
+    "L6": "Therefore, 150 - 48 = <<150-48=102>>102 square are green.",
+    "FA": "#### 102"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'red_squares_per_row' (6) was used instead of 'squares_per_row' (15).",
+  "repro_seed": 7073121917872711543,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,89 @@
+{
+  "index": 1365,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "The drive has 1.5 * 2000 = <<1.5*2000=3000>>3000 kilobytes of storage space.",
+    "L2": "It already has 1.5 * 400 = <<1.5*400=600>>600 kilobytes of storage space taken up.",
+    "L3": "Thus, it has 3000 - 600 = <<3000-600=2400>>2400 kilobytes of space left.",
+    "L4": "The portable drive can store 2400 / 200 = <<2400/200=12>>12 200-kilobyte videos on it with 400 photos."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1365.\n    Returns: the number of 200-kilobyte videos the drive can store.\n    \"\"\"\n    # L1\n    photo_size_kb = 1.5 # Each photo is 1.5 kilobytes in size\n    max_photos = 2000 # store 2000 photos\n    total_storage_kb = photo_size_kb * max_photos\n\n    # L2\n    current_photos = 400 # already has 400 photos on it\n    taken_storage_kb = photo_size_kb * current_photos\n\n    # L3\n    remaining_storage_kb = total_storage_kb - taken_storage_kb\n\n    # L4\n    video_size_kb = 200 # 200-kilobyte videos\n    num_videos_stored = remaining_storage_kb / video_size_kb\n\n    # FA\n    answer = num_videos_stored\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "num_videos_stored",
+    "operand_to_replace": "remaining_storage_kb",
+    "replacement_variable": "max_photos"
+  },
+  "correct_trace": {
+    "photo_size_kb": 1.5,
+    "max_photos": 2000,
+    "total_storage_kb": 3000.0,
+    "current_photos": 400,
+    "taken_storage_kb": 600.0,
+    "remaining_storage_kb": 2400.0,
+    "video_size_kb": 200,
+    "num_videos_stored": 12.0,
+    "answer": 12.0
+  },
+  "flawed_trace": {
+    "photo_size_kb": 1.5,
+    "max_photos": 2000,
+    "total_storage_kb": 3000.0,
+    "current_photos": 400,
+    "taken_storage_kb": 600.0,
+    "remaining_storage_kb": 2400.0,
+    "video_size_kb": 200,
+    "num_videos_stored": 10.0,
+    "answer": 10.0
+  },
+  "correct_value": 12.0,
+  "flawed_value": 10.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_storage_kb",
+      "question_inputs": [
+        "photo_size_kb",
+        "max_photos"
+      ],
+      "solution_line_template": "The drive has {photo_size_kb} * {max_photos} = <<{photo_size_kb}*{max_photos}={total_storage_kb}>>{total_storage_kb} kilobytes of storage space."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "taken_storage_kb",
+      "question_inputs": [
+        "current_photos"
+      ],
+      "solution_line_template": "It already has {photo_size_kb} * {current_photos} = <<{photo_size_kb}*{current_photos}={taken_storage_kb}>>{taken_storage_kb} kilobytes of storage space taken up."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_storage_kb",
+      "question_inputs": [],
+      "solution_line_template": "Thus, it has {total_storage_kb} - {taken_storage_kb} = <<{total_storage_kb}-{taken_storage_kb}={remaining_storage_kb}>>{remaining_storage_kb} kilobytes of space left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "num_videos_stored",
+      "question_inputs": [
+        "video_size_kb"
+      ],
+      "solution_line_template": "The portable drive can store {remaining_storage_kb} / {video_size_kb} = <<{remaining_storage_kb}/{video_size_kb}={num_videos_stored}>>{num_videos_stored} 200-kilobyte videos on it with 400 photos."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The drive has 1.5 * 2000 = <<1.5*2000=3000>>3000 kilobytes of storage space.",
+    "L2": "It already has 1.5 * 400 = <<1.5*400=600>>600 kilobytes of storage space taken up.",
+    "L3": "Thus, it has 3000 - 600 = <<3000-600=2400>>2400 kilobytes of space left.",
+    "L4": "The portable drive can store 2000 / 200 = <<2000/200=10>>10 200-kilobyte videos on it with 400 photos.",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'max_photos' (value: 2000) was used instead of 'remaining_storage_kb' (value: 2400.0).",
+  "repro_seed": -4544373122767368498,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,80 @@
+{
+  "index": 3022,
+  "original_solution_mapping": {
+    "FA": "#### 100000",
+    "L1": "He paid 25% of the new home price because 100 - 75 = <<100-75=25>>25",
+    "L2": "He paid $125,000 towards the new home because 500,000 x .25 = <<500000*.25=125000>>125,000",
+    "L3": "Therefore he paid $100,000 for his first home because 125,000 / 1.25 = <<125000/1.25=100000>>100,000"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3022.\n    Returns: the original purchase price of the first house.\n    \"\"\"\n    # L1\n    total_percent = 100 # WK\n    loan_percent = 75 # 75% he can't pay\n    paid_percent_num = total_percent - loan_percent\n\n    # L2\n    new_house_cost = 500000 # new house that costs $500,000\n    paid_percent_decimal = 0.25 # 25% of the new home price\n    paid_towards_new_home = new_house_cost * paid_percent_decimal\n\n    # L3\n    first_house_worth_increase_factor = 1.25 # 25% more than he bought it for (1 + 0.25)\n    first_house_purchase_price = paid_towards_new_home / first_house_worth_increase_factor\n\n    # FA\n    answer = first_house_purchase_price\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "first_house_purchase_price",
+    "replacement_variable": "paid_percent_num"
+  },
+  "correct_trace": {
+    "total_percent": 100,
+    "loan_percent": 75,
+    "paid_percent_num": 25,
+    "new_house_cost": 500000,
+    "paid_percent_decimal": 0.25,
+    "paid_towards_new_home": 125000.0,
+    "first_house_worth_increase_factor": 1.25,
+    "first_house_purchase_price": 100000.0,
+    "answer": 100000.0
+  },
+  "flawed_trace": {
+    "total_percent": 100,
+    "loan_percent": 75,
+    "paid_percent_num": 25,
+    "new_house_cost": 500000,
+    "paid_percent_decimal": 0.25,
+    "paid_towards_new_home": 125000.0,
+    "first_house_worth_increase_factor": 1.25,
+    "first_house_purchase_price": 100000.0,
+    "answer": 25
+  },
+  "correct_value": 100000.0,
+  "flawed_value": 25,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_percent"
+      ],
+      "line_number": "L1",
+      "output_variable": "paid_percent_num",
+      "question_inputs": [
+        "loan_percent"
+      ],
+      "solution_line_template": "He paid {paid_percent_num}% of the new home price because {total_percent} - {loan_percent} = <<{total_percent}-{loan_percent}={paid_percent_num}>>{paid_percent_num}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "paid_towards_new_home",
+      "question_inputs": [
+        "new_house_cost",
+        "paid_percent_decimal"
+      ],
+      "solution_line_template": "He paid ${paid_towards_new_home} towards the new home because {new_house_cost} x {paid_percent_decimal} = <<{new_house_cost}*{paid_percent_decimal}={paid_towards_new_home}>>{paid_towards_new_home}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "first_house_purchase_price",
+      "question_inputs": [
+        "first_house_worth_increase_factor"
+      ],
+      "solution_line_template": "Therefore he paid ${first_house_purchase_price} for his first home because {paid_towards_new_home} / {first_house_worth_increase_factor} = <<{paid_towards_new_home}/{first_house_worth_increase_factor}={first_house_purchase_price}>>{first_house_purchase_price}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He paid 25% of the new home price because 100 - 75 = <<100-75=25>>25",
+    "FA": "#### 25"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'paid_percent_num' (value: 25) was reported instead of 'first_house_purchase_price' (value: 100000.0).",
+  "repro_seed": -7414203518505762202,
+  "model_name": "google_gemini-2.5-flash"
+}

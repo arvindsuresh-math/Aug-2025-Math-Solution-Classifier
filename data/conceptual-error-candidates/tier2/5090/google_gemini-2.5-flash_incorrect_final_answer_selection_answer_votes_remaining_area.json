@@ -1,0 +1,73 @@
+{
+  "index": 5090,
+  "original_solution_mapping": {
+    "FA": "#### 210,000",
+    "L1": "He got 100,000*.7=<<100000*.7=70000>>70,000 votes from the first area",
+    "L2": "He got 70,000*2=<<70000*2=140000>>140,000 votes in the remaining areas",
+    "L3": "So in total he got 140,000+70,000=<<140000+70000=210000>>210,000 votes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5090.\n    Returns: the total number of votes Mark got.\n    \"\"\"\n    # L1\n    total_voters = 100000 # 100,000 voters\n    win_percent_decimal = 0.7 # wins 70% of the votes\n    votes_first_area = total_voters * win_percent_decimal\n\n    # L2\n    multiplier_remaining_area = 2 # twice as many total votes\n    votes_remaining_area = votes_first_area * multiplier_remaining_area\n\n    # L3\n    total_votes = votes_remaining_area + votes_first_area\n\n    # FA\n    answer = total_votes\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_votes",
+    "replacement_variable": "votes_remaining_area"
+  },
+  "correct_trace": {
+    "total_voters": 100000,
+    "win_percent_decimal": 0.7,
+    "votes_first_area": 70000.0,
+    "multiplier_remaining_area": 2,
+    "votes_remaining_area": 140000.0,
+    "total_votes": 210000.0,
+    "answer": 210000.0
+  },
+  "flawed_trace": {
+    "total_voters": 100000,
+    "win_percent_decimal": 0.7,
+    "votes_first_area": 70000.0,
+    "multiplier_remaining_area": 2,
+    "votes_remaining_area": 140000.0,
+    "total_votes": 210000.0,
+    "answer": 140000.0
+  },
+  "correct_value": 210000.0,
+  "flawed_value": 140000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "votes_first_area",
+      "question_inputs": [
+        "total_voters",
+        "win_percent_decimal"
+      ],
+      "solution_line_template": "He got {total_voters}*{win_percent_decimal}=<<{total_voters}*{win_percent_decimal}={votes_first_area}>>{votes_first_area} votes from the first area"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "votes_remaining_area",
+      "question_inputs": [
+        "multiplier_remaining_area"
+      ],
+      "solution_line_template": "He got {votes_first_area}*{multiplier_remaining_area}=<<{votes_first_area}*{multiplier_remaining_area}={votes_remaining_area}>>{votes_remaining_area} votes in the remaining areas"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_votes",
+      "question_inputs": [],
+      "solution_line_template": "So in total he got {votes_remaining_area}+{votes_first_area}=<<{votes_remaining_area}+{votes_first_area}={total_votes}>>{total_votes} votes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He got 100000*0.7=<<100000*0.7=70000>>70000 votes from the first area",
+    "L2": "He got 70000*2=<<70000*2=140000>>140000 votes in the remaining areas",
+    "FA": "#### 140000"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'votes_remaining_area' (value: 140000.0) was reported instead of 'total_votes' (value: 210000.0).",
+  "repro_seed": -3021107869397207861,
+  "model_name": "google_gemini-2.5-flash"
+}

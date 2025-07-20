@@ -1,0 +1,97 @@
+{
+  "index": 6615,
+  "original_solution_mapping": {
+    "FA": "#### 200",
+    "L1": "Pete spends 4*5 = <<4*5=20>>20 cents.",
+    "L2": "Raymond has 7*10 = <<7*10=70>>70 cents left.",
+    "L3": "Raymond spent 250-70 = <<250-70=180>>180 cents.",
+    "L4": "Together, Pete and Raymond spent 20+180 = <<20+180=200>>200 cents."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6615.\n    Returns: the total amount Pete and Raymond spent altogether, in cents.\n    \"\"\"\n    # L1\n    pete_nickels_spent = 4 # spends 4 nickels\n    nickel_value_cents = 5 # WK\n    pete_spent_cents = pete_nickels_spent * nickel_value_cents\n\n    # L2\n    raymond_dimes_left = 7 # has 7 dimes left\n    dime_value_cents = 10 # WK\n    raymond_left_cents = raymond_dimes_left * dime_value_cents\n\n    # L3\n    initial_money_dollars = 2.50 # $2.50 from their grandmother\n    initial_money_cents = int(initial_money_dollars * 100) # Convert dollars to cents\n    raymond_spent_cents = initial_money_cents - raymond_left_cents\n\n    # L4\n    total_spent_cents = pete_spent_cents + raymond_spent_cents\n\n    # FA\n    answer = total_spent_cents\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "initial_money_cents",
+    "operand_to_replace": "initial_money_dollars",
+    "replacement_variable": "pete_nickels_spent"
+  },
+  "correct_trace": {
+    "pete_nickels_spent": 4,
+    "nickel_value_cents": 5,
+    "pete_spent_cents": 20,
+    "raymond_dimes_left": 7,
+    "dime_value_cents": 10,
+    "raymond_left_cents": 70,
+    "initial_money_dollars": 2.5,
+    "initial_money_cents": 250,
+    "raymond_spent_cents": 180,
+    "total_spent_cents": 200,
+    "answer": 200
+  },
+  "flawed_trace": {
+    "pete_nickels_spent": 4,
+    "nickel_value_cents": 5,
+    "pete_spent_cents": 20,
+    "raymond_dimes_left": 7,
+    "dime_value_cents": 10,
+    "raymond_left_cents": 70,
+    "initial_money_dollars": 2.5,
+    "initial_money_cents": 400,
+    "raymond_spent_cents": 330,
+    "total_spent_cents": 350,
+    "answer": 350
+  },
+  "correct_value": 250,
+  "flawed_value": 400,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "nickel_value_cents"
+      ],
+      "line_number": "L1",
+      "output_variable": "pete_spent_cents",
+      "question_inputs": [
+        "pete_nickels_spent"
+      ],
+      "solution_line_template": "Pete spends {pete_nickels_spent}*{nickel_value_cents} = <<{pete_nickels_spent}*{nickel_value_cents}={pete_spent_cents}>>{pete_spent_cents} cents."
+    },
+    {
+      "WK_inputs": [
+        "dime_value_cents"
+      ],
+      "line_number": "L2",
+      "output_variable": "raymond_left_cents",
+      "question_inputs": [
+        "raymond_dimes_left"
+      ],
+      "solution_line_template": "Raymond has {raymond_dimes_left}*{dime_value_cents} = <<{raymond_dimes_left}*{dime_value_cents}={raymond_left_cents}>>{raymond_left_cents} cents left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "raymond_spent_cents",
+      "question_inputs": [
+        "initial_money_dollars",
+        "initial_money_cents"
+      ],
+      "solution_line_template": "Raymond spent {initial_money_cents}-{raymond_left_cents} = <<{initial_money_cents}-{raymond_left_cents}={raymond_spent_cents}>>{raymond_spent_cents} cents."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_spent_cents",
+      "question_inputs": [],
+      "solution_line_template": "Together, Pete and Raymond spent {pete_spent_cents}+{raymond_spent_cents} = <<{pete_spent_cents}+{raymond_spent_cents}={total_spent_cents}>>{total_spent_cents} cents."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Pete spends 4*5 = <<4*5=20>>20 cents.",
+    "L2": "Raymond has 7*10 = <<7*10=70>>70 cents left.",
+    "L3": "Raymond spent 400-70 = <<400-70=330>>330 cents.",
+    "L4": "Together, Pete and Raymond spent 20+330 = <<20+330=350>>350 cents.",
+    "FA": "#### 350"
+  },
+  "erroneous_line_number": null,
+  "explanation": "Input misrepresentation. The value for 'pete_nickels_spent' (4) was used instead of 'initial_money_dollars' (2.5).",
+  "repro_seed": 949495301664250546,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 7441,
+  "original_solution_mapping": {
+    "FA": "#### 41",
+    "L1": "Peter drew 5+3 = <<5+3=8>>8 pictures.",
+    "L2": "Quincy drew 20+8 = <<20+8=28>>28 pictures.",
+    "L3": "Altogether they drew 5+8+28 = <<5+8+28=41>>41 pictures"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7441.\n    Returns: the total number of pictures drawn by Randy, Peter, and Quincy.\n    \"\"\"\n    # L1\n    randy_pictures = 5 # Randy drew 5 pictures\n    peter_more_than_randy = 3 # 3 more pictures than Randy\n    peter_pictures = randy_pictures + peter_more_than_randy\n\n    # L2\n    quincy_more_than_peter = 20 # 20 more pictures than Peter\n    quincy_pictures = quincy_more_than_peter + peter_pictures\n\n    # L3\n    total_pictures = randy_pictures + peter_pictures + quincy_pictures\n\n    # FA\n    answer = total_pictures\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "quincy_pictures",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x3149850d0>"
+  },
+  "correct_trace": {
+    "randy_pictures": 5,
+    "peter_more_than_randy": 3,
+    "peter_pictures": 8,
+    "quincy_more_than_peter": 20,
+    "quincy_pictures": 28,
+    "total_pictures": 41,
+    "answer": 41
+  },
+  "flawed_trace": {
+    "randy_pictures": 5,
+    "peter_more_than_randy": 3,
+    "peter_pictures": 8,
+    "quincy_more_than_peter": 20,
+    "quincy_pictures": 160,
+    "total_pictures": 173,
+    "answer": 173
+  },
+  "correct_value": 28,
+  "flawed_value": 160,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "peter_pictures",
+      "question_inputs": [
+        "randy_pictures",
+        "peter_more_than_randy"
+      ],
+      "solution_line_template": "Peter drew {randy_pictures}+{peter_more_than_randy} = <<{randy_pictures}+{peter_more_than_randy}={peter_pictures}>>{peter_pictures} pictures."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "quincy_pictures",
+      "question_inputs": [
+        "quincy_more_than_peter"
+      ],
+      "solution_line_template": "Quincy drew {quincy_more_than_peter}+{peter_pictures} = <<{quincy_more_than_peter}+{peter_pictures}={quincy_pictures}>>{quincy_pictures} pictures."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_pictures",
+      "question_inputs": [],
+      "solution_line_template": "Altogether they drew {randy_pictures}+{peter_pictures}+{quincy_pictures} = <<{randy_pictures}+{peter_pictures}+{quincy_pictures}={total_pictures}>>{total_pictures} pictures"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Peter drew 5+3 = <<5+3=8>>8 pictures.",
+    "L2": "Quincy drew 20+8 = <<20+8=160>>160 pictures.",
+    "L3": "Altogether they drew 5+8+160 = <<5+8+160=173>>173 pictures",
+    "FA": "#### 173"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 4321254539185919129,
+  "model_name": "google_gemini-2.5-flash"
+}

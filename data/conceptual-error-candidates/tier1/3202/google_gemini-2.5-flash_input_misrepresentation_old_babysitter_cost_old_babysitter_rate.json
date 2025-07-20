@@ -1,0 +1,92 @@
+{
+  "index": 3202,
+  "original_solution_mapping": {
+    "FA": "#### 18",
+    "L1": "First figure out how much the first babysitter costs by multiplying her hourly rate by the number of hours she works: $16/hour * 6 hours = $<<16*6=96>>96",
+    "L2": "Then use the same method to figure out how much the second babysitter charges before any screaming: $12/hour * 6 hours = $<<12*6=72>>72",
+    "L3": "Then figure out how much the babysitter charges for two screams: 2 screams * $3/scream = $<<2*3=6>>6",
+    "L4": "Finally, subtract the second babysitter's two charges from the first babysitter's total charge to find the difference: $96 - $72 - $6 = $<<96-72-6=18>>18"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3202.\n    Returns: how much less the new babysitter will cost.\n    \"\"\"\n    # L1\n    old_babysitter_rate = 16 # $16/hour\n    hours_hired = 6 # hires the babysitter for 6 hours\n    old_babysitter_cost = old_babysitter_rate * hours_hired\n\n    # L2\n    new_babysitter_rate = 12 # charges $12/hour\n    new_babysitter_base_cost = new_babysitter_rate * hours_hired\n\n    # L3\n    num_screams = 2 # kids usually scream twice\n    scream_charge_per_scream = 3 # extra $3 for each time the kids scream\n    scream_cost = num_screams * scream_charge_per_scream\n\n    # L4\n    cost_difference = old_babysitter_cost - new_babysitter_base_cost - scream_cost\n\n    # FA\n    answer = cost_difference\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "old_babysitter_cost",
+    "operand_to_replace": "hours_hired",
+    "replacement_variable": "old_babysitter_rate"
+  },
+  "correct_trace": {
+    "old_babysitter_rate": 16,
+    "hours_hired": 6,
+    "old_babysitter_cost": 96,
+    "new_babysitter_rate": 12,
+    "new_babysitter_base_cost": 72,
+    "num_screams": 2,
+    "scream_charge_per_scream": 3,
+    "scream_cost": 6,
+    "cost_difference": 18,
+    "answer": 18
+  },
+  "flawed_trace": {
+    "old_babysitter_rate": 16,
+    "hours_hired": 6,
+    "old_babysitter_cost": 256,
+    "new_babysitter_rate": 12,
+    "new_babysitter_base_cost": 72,
+    "num_screams": 2,
+    "scream_charge_per_scream": 3,
+    "scream_cost": 6,
+    "cost_difference": 178,
+    "answer": 178
+  },
+  "correct_value": 96,
+  "flawed_value": 256,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "old_babysitter_cost",
+      "question_inputs": [
+        "old_babysitter_rate",
+        "hours_hired"
+      ],
+      "solution_line_template": "First figure out how much the first babysitter costs by multiplying her hourly rate by the number of hours she works: ${old_babysitter_rate}/hour * {hours_hired} hours = $<<{old_babysitter_rate}*{hours_hired}={old_babysitter_cost}>>{old_babysitter_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "new_babysitter_base_cost",
+      "question_inputs": [
+        "new_babysitter_rate"
+      ],
+      "solution_line_template": "Then use the same method to figure out how much the second babysitter charges before any screaming: ${new_babysitter_rate}/hour * {hours_hired} hours = $<<{new_babysitter_rate}*{hours_hired}={new_babysitter_base_cost}>>{new_babysitter_base_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "scream_cost",
+      "question_inputs": [
+        "num_screams",
+        "scream_charge_per_scream"
+      ],
+      "solution_line_template": "Then figure out how much the babysitter charges for two screams: {num_screams} screams * ${scream_charge_per_scream}/scream = $<<{num_screams}*{scream_charge_per_scream}={scream_cost}>>{scream_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "cost_difference",
+      "question_inputs": [],
+      "solution_line_template": "Finally, subtract the second babysitter's two charges from the first babysitter's total charge to find the difference: ${old_babysitter_cost} - ${new_babysitter_base_cost} - ${scream_cost} = $<<{old_babysitter_cost}-{new_babysitter_base_cost}-{scream_cost}={cost_difference}>>{cost_difference}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First figure out how much the first babysitter costs by multiplying her hourly rate by the number of hours she works: $16/hour * 16 hours = $<<16*16=256>>256",
+    "L2": "Then use the same method to figure out how much the second babysitter charges before any screaming: $12/hour * 6 hours = $<<12*6=72>>72",
+    "L3": "Then figure out how much the babysitter charges for two screams: 2 screams * $3/scream = $<<2*3=6>>6",
+    "L4": "Finally, subtract the second babysitter's two charges from the first babysitter's total charge to find the difference: $256 - $72 - $6 = $<<256-72-6=178>>178",
+    "FA": "#### 178"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'old_babysitter_rate' (16) was used instead of 'hours_hired' (6).",
+  "repro_seed": 6611453356735488977,
+  "model_name": "google_gemini-2.5-flash"
+}

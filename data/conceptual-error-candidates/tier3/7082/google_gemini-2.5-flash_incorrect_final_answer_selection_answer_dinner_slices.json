@@ -1,0 +1,73 @@
+{
+  "index": 7082,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "Her pizza has 12 slices and she ate 1/2 of the pizza for lunch so that leaves 12/2 = <<12/2=6>>6 slices left",
+    "L2": "She eats 1/3 of the pizza for dinner, so she eats 1/3*6 = <<1/3*6=2>>2 slices",
+    "L3": "She had 6 slices and ate 2 slices, so that leaves her with 6-2 = <<6-2=4>>4 slices for tomorrow's lunch"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7082.\n    Returns: the number of pizza slices left for tomorrow's lunch.\n    \"\"\"\n    # L1\n    total_slices = 12 # Donna cut her pizza into 12 slices\n    lunch_divisor = 2 # ate half for lunch\n    slices_after_lunch = total_slices / lunch_divisor\n\n    # L2\n    dinner_fraction = Fraction(1, 3) # ate 1/3 of the remaining pizza for dinner\n    dinner_slices = dinner_fraction * slices_after_lunch\n\n    # L3\n    slices_for_tomorrow = slices_after_lunch - dinner_slices\n\n    # FA\n    answer = slices_for_tomorrow\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "slices_for_tomorrow",
+    "replacement_variable": "dinner_slices"
+  },
+  "correct_trace": {
+    "total_slices": 12,
+    "lunch_divisor": 2,
+    "slices_after_lunch": 6.0,
+    "dinner_fraction": "1/3",
+    "dinner_slices": 2.0,
+    "slices_for_tomorrow": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "total_slices": 12,
+    "lunch_divisor": 2,
+    "slices_after_lunch": 6.0,
+    "dinner_fraction": "1/3",
+    "dinner_slices": 2.0,
+    "slices_for_tomorrow": 4.0,
+    "answer": 2.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 2.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "slices_after_lunch",
+      "question_inputs": [
+        "total_slices",
+        "lunch_divisor"
+      ],
+      "solution_line_template": "Her pizza has {total_slices} slices and she ate 1/2 of the pizza for lunch so that leaves {total_slices}/{lunch_divisor} = <<{total_slices}/{lunch_divisor}={slices_after_lunch}>>{slices_after_lunch} slices left"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "dinner_slices",
+      "question_inputs": [
+        "dinner_fraction"
+      ],
+      "solution_line_template": "She eats {dinner_fraction} of the pizza for dinner, so she eats {dinner_fraction}*{slices_after_lunch} = <<{dinner_fraction}*{slices_after_lunch}={dinner_slices}>>{dinner_slices} slices"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "slices_for_tomorrow",
+      "question_inputs": [],
+      "solution_line_template": "She had {slices_after_lunch} slices and ate {dinner_slices} slices, so that leaves her with {slices_after_lunch}-{dinner_slices} = <<{slices_after_lunch}-{dinner_slices}={slices_for_tomorrow}>>{slices_for_tomorrow} slices for tomorrow's lunch"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Her pizza has 12 slices and she ate 1/2 of the pizza for lunch so that leaves 12/2 = <<12/2=6>>6 slices left",
+    "L2": "She eats 1/3 of the pizza for dinner, so she eats 1/3*6 = <<1/3*6=2>>2 slices",
+    "FA": "#### 2"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'dinner_slices' (value: 2.0) was reported instead of 'slices_for_tomorrow' (value: 4.0).",
+  "repro_seed": -4991067857893695261,
+  "model_name": "google_gemini-2.5-flash"
+}

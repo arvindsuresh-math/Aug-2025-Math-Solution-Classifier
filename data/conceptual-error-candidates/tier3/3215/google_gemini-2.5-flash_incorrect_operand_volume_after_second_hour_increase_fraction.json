@@ -1,0 +1,81 @@
+{
+  "index": 3215,
+  "original_solution_mapping": {
+    "FA": "#### 980",
+    "L1": "In the first hour, the balloon will increase in volume by two-fifths of 500cm\u00b3 which is (2/5)*500cm\u00b3 = <<2/5*500=200>>200cm\u00b3",
+    "L2": "After the first hour, it will have a volume of (500+200)cm\u00b3 = <<(500+200)=700>>700cm\u00b3",
+    "L3": "In the second hour, it will increase in volume by two-fifths of 700cm\u00b3 which is (2/5)*700cm\u00b3 = <<2/5*700=280>>280cm\u00b3",
+    "L4": "After the second hour, it's volume will be (700+280)cm\u00b3 = <<(700+280)=980>>980cm\u00b3"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3215.\n    Returns: the volume of the balloon after 2 hours.\n    \"\"\"\n    # L1\n    increase_fraction = Fraction(2, 5) # two-fifths of its previous volume\n    original_volume = 500 # original volume is 500cm\u00b3\n    increase_first_hour = increase_fraction * original_volume\n\n    # L2\n    volume_after_first_hour = original_volume + increase_first_hour\n\n    # L3\n    increase_second_hour = increase_fraction * volume_after_first_hour\n\n    # L4\n    volume_after_second_hour = volume_after_first_hour + increase_second_hour\n\n    # FA\n    answer = volume_after_second_hour\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "volume_after_second_hour",
+    "operand_to_replace": "volume_after_first_hour",
+    "replacement_variable": "increase_fraction"
+  },
+  "correct_trace": {
+    "increase_fraction": "2/5",
+    "original_volume": 500,
+    "increase_first_hour": "200",
+    "volume_after_first_hour": "700",
+    "increase_second_hour": "280",
+    "volume_after_second_hour": "980",
+    "answer": "980"
+  },
+  "flawed_trace": {
+    "increase_fraction": "2/5",
+    "original_volume": 500,
+    "increase_first_hour": "200",
+    "volume_after_first_hour": "700",
+    "increase_second_hour": "280",
+    "volume_after_second_hour": "1402/5",
+    "answer": "1402/5"
+  },
+  "correct_value": "980",
+  "flawed_value": "1402/5",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "increase_first_hour",
+      "question_inputs": [
+        "increase_fraction",
+        "original_volume"
+      ],
+      "solution_line_template": "In the first hour, the balloon will increase in volume by {increase_fraction} of {original_volume}cm\u00b3 which is ({increase_fraction})*{original_volume}cm\u00b3 = <<{increase_fraction}*{original_volume}={increase_first_hour}>>{increase_first_hour}cm\u00b3"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "volume_after_first_hour",
+      "question_inputs": [],
+      "solution_line_template": "After the first hour, it will have a volume of ({original_volume}+{increase_first_hour})cm\u00b3 = <<({original_volume}+{increase_first_hour})={volume_after_first_hour}>>{volume_after_first_hour}cm\u00b3"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "increase_second_hour",
+      "question_inputs": [],
+      "solution_line_template": "In the second hour, it will increase in volume by {increase_fraction} of {volume_after_first_hour}cm\u00b3 which is ({increase_fraction})*{volume_after_first_hour}cm\u00b3 = <<{increase_fraction}*{volume_after_first_hour}={increase_second_hour}>>{increase_second_hour}cm\u00b3"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "volume_after_second_hour",
+      "question_inputs": [],
+      "solution_line_template": "After the second hour, it's volume will be ({volume_after_first_hour}+{increase_second_hour})cm\u00b3 = <<({volume_after_first_hour}+{increase_second_hour})={volume_after_second_hour}>>{volume_after_second_hour}cm\u00b3"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In the first hour, the balloon will increase in volume by 2/5 of 500cm\u00b3 which is (2/5)*500cm\u00b3 = <<2/5*500=200>>200cm\u00b3",
+    "L2": "After the first hour, it will have a volume of (500+200)cm\u00b3 = <<(500+200)=700>>700cm\u00b3",
+    "L3": "In the second hour, it will increase in volume by 2/5 of 700cm\u00b3 which is (2/5)*700cm\u00b3 = <<2/5*700=280>>280cm\u00b3",
+    "L4": "After the second hour, it's volume will be (2/5+280)cm\u00b3 = <<(2/5+280)=1402/5>>1402/5cm\u00b3",
+    "FA": "#### 1402/5"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'increase_fraction' (value: 2/5) was used instead of 'volume_after_first_hour' (value: 700).",
+  "repro_seed": 5802595327237952403,
+  "model_name": "google_gemini-2.5-flash"
+}

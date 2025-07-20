@@ -1,0 +1,87 @@
+{
+  "index": 4305,
+  "original_solution_mapping": {
+    "FA": "#### 28",
+    "L1": "On Tuesday she sells 5 crates * 2 = <<5*2=10>>10 crates of eggs.",
+    "L2": "On Wednesday she sells 10 crates - 2 crates = <<10-2=8>>8 crates of eggs.",
+    "L3": "On Thursday she sells 1/2 * 10 crates = <<1/2*10=5>>5 crates of eggs.",
+    "L4": "She sells a total of 5 crates + 10 crates + 8 crates + 5 crates = <<5+10+8+5=28>>28 crates of eggs."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4305.\n    Returns: the total number of crates of eggs sold over 4 days.\n    \"\"\"\n    # L1\n    monday_sales = 5 # On Monday she sells 5 crates of eggs\n    tuesday_multiplier = 2 # 2 times as many crates of eggs as Monday\n    tuesday_sales = monday_sales * tuesday_multiplier\n\n    # L2\n    wednesday_fewer = 2 # 2 fewer crates than Tuesday\n    wednesday_sales = tuesday_sales - wednesday_fewer\n\n    # L3\n    thursday_fraction = Fraction(1, 2) # half as many crates of eggs as she sells on Tuesday\n    thursday_sales = thursday_fraction * tuesday_sales\n\n    # L4\n    total_sales = monday_sales + tuesday_sales + wednesday_sales + thursday_sales\n\n    # FA\n    answer = total_sales\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_sales",
+    "replacement_variable": "wednesday_sales"
+  },
+  "correct_trace": {
+    "monday_sales": 5,
+    "tuesday_multiplier": 2,
+    "tuesday_sales": 10,
+    "wednesday_fewer": 2,
+    "wednesday_sales": 8,
+    "thursday_fraction": "1/2",
+    "thursday_sales": "5",
+    "total_sales": "28",
+    "answer": "28"
+  },
+  "flawed_trace": {
+    "monday_sales": 5,
+    "tuesday_multiplier": 2,
+    "tuesday_sales": 10,
+    "wednesday_fewer": 2,
+    "wednesday_sales": 8,
+    "thursday_fraction": "1/2",
+    "thursday_sales": "5",
+    "total_sales": "28",
+    "answer": 8
+  },
+  "correct_value": "28",
+  "flawed_value": 8,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "tuesday_sales",
+      "question_inputs": [
+        "monday_sales",
+        "tuesday_multiplier"
+      ],
+      "solution_line_template": "On Tuesday she sells {monday_sales} crates * {tuesday_multiplier} = <<{monday_sales}*{tuesday_multiplier}={tuesday_sales}>>{tuesday_sales} crates of eggs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "wednesday_sales",
+      "question_inputs": [
+        "wednesday_fewer"
+      ],
+      "solution_line_template": "On Wednesday she sells {tuesday_sales} crates - {wednesday_fewer} crates = <<{tuesday_sales}-{wednesday_fewer}={wednesday_sales}>>{wednesday_sales} crates of eggs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "thursday_sales",
+      "question_inputs": [
+        "thursday_fraction"
+      ],
+      "solution_line_template": "On Thursday she sells {thursday_fraction} * {tuesday_sales} crates = <<{thursday_fraction}*{tuesday_sales}={thursday_sales}>>{thursday_sales} crates of eggs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_sales",
+      "question_inputs": [],
+      "solution_line_template": "She sells a total of {monday_sales} crates + {tuesday_sales} crates + {wednesday_sales} crates + {thursday_sales} crates = <<{monday_sales}+{tuesday_sales}+{wednesday_sales}+{thursday_sales}={total_sales}>>{total_sales} crates of eggs."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Tuesday she sells 5 crates * 2 = <<5*2=10>>10 crates of eggs.",
+    "L2": "On Wednesday she sells 10 crates - 2 crates = <<10-2=8>>8 crates of eggs.",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'wednesday_sales' (value: 8) was reported instead of 'total_sales' (value: 28).",
+  "repro_seed": -6163365029214954109,
+  "model_name": "google_gemini-2.5-flash"
+}

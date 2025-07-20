@@ -1,0 +1,141 @@
+{
+  "index": 1971,
+  "original_solution_mapping": {
+    "FA": "#### 4104",
+    "L1": "The company pays a total of 10/100*$400000 = $<<10/100*400000=40000>>40000 on taxes",
+    "L2": "After taxes, the company revenue is $400000-$40000 = $<<400000-40000=360000>>360,000",
+    "L3": "The costs of marketing and ads campaign are 5/100*$360000 = $<<5/100*360000=18000>>18000",
+    "L4": "After deducting the costs of marketing and adds campaign, the company remains with = $342,000 in revenue",
+    "L5": "Operational costs for the company are 20/100*$342000 = $<<20/100*342000=68400>>68400",
+    "L6": "After taking out the operational costs, the company remains with $342000-$68400 = $273600",
+    "L7": "The company also pays employee wages of 15/100*$273600 =$<<15/100*273600=41040>>41040",
+    "L8": "If the total number of employees is 10, each employee is paid a salary of $41040/10 = $4104 per month"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1971.\n    Returns: the amount of money each employee is paid monthly.\n    \"\"\"\n    # L1\n    tax_percentage = Fraction(10, 100) # 10% in taxes\n    monthly_revenue = 400000 # revenue of $400000 a month\n    taxes_paid = tax_percentage * monthly_revenue\n\n    # L2\n    revenue_after_taxes = monthly_revenue - taxes_paid\n\n    # L3\n    marketing_percentage = Fraction(5, 100) # 5% of the remaining amount on marketing and ads\n    marketing_costs = marketing_percentage * revenue_after_taxes\n\n    # L4\n    revenue_after_marketing = revenue_after_taxes - marketing_costs\n\n    # L5\n    operational_percentage = Fraction(20, 100) # 20% of the remaining amount on operational costs\n    operational_costs = operational_percentage * revenue_after_marketing\n\n    # L6\n    revenue_after_operational_costs = revenue_after_marketing - operational_costs\n\n    # L7\n    wages_percentage = Fraction(15, 100) # 15% of the remaining amount on employee wages\n    total_wages = wages_percentage * revenue_after_operational_costs\n\n    # L8\n    num_employees = 10 # 10 employees\n    wage_per_employee = total_wages / num_employees\n\n    # FA\n    answer = wage_per_employee\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "operational_costs",
+    "operand_to_replace": "operational_percentage",
+    "replacement_variable": "tax_percentage"
+  },
+  "correct_trace": {
+    "tax_percentage": "1/10",
+    "monthly_revenue": 400000,
+    "taxes_paid": "40000",
+    "revenue_after_taxes": "360000",
+    "marketing_percentage": "1/20",
+    "marketing_costs": "18000",
+    "revenue_after_marketing": "342000",
+    "operational_percentage": "1/5",
+    "operational_costs": "68400",
+    "revenue_after_operational_costs": "273600",
+    "wages_percentage": "3/20",
+    "total_wages": "41040",
+    "num_employees": 10,
+    "wage_per_employee": "4104",
+    "answer": "4104"
+  },
+  "flawed_trace": {
+    "tax_percentage": "1/10",
+    "monthly_revenue": 400000,
+    "taxes_paid": "40000",
+    "revenue_after_taxes": "360000",
+    "marketing_percentage": "1/20",
+    "marketing_costs": "18000",
+    "revenue_after_marketing": "342000",
+    "operational_percentage": "1/5",
+    "operational_costs": "34200",
+    "revenue_after_operational_costs": "307800",
+    "wages_percentage": "3/20",
+    "total_wages": "46170",
+    "num_employees": 10,
+    "wage_per_employee": "4617",
+    "answer": "4617"
+  },
+  "correct_value": "68400",
+  "flawed_value": "34200",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "taxes_paid",
+      "question_inputs": [
+        "tax_percentage",
+        "monthly_revenue"
+      ],
+      "solution_line_template": "The company pays a total of {tax_percentage}*${monthly_revenue} = $<<{tax_percentage}*{monthly_revenue}={taxes_paid}>>{taxes_paid} on taxes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "revenue_after_taxes",
+      "question_inputs": [],
+      "solution_line_template": "After taxes, the company revenue is ${monthly_revenue}-${taxes_paid} = $<<{monthly_revenue}-{taxes_paid}={revenue_after_taxes}>>{revenue_after_taxes}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "marketing_costs",
+      "question_inputs": [
+        "marketing_percentage"
+      ],
+      "solution_line_template": "The costs of marketing and ads campaign are {marketing_percentage}*${revenue_after_taxes} = $<<{marketing_percentage}*{revenue_after_taxes}={marketing_costs}>>{marketing_costs}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "revenue_after_marketing",
+      "question_inputs": [],
+      "solution_line_template": "After deducting the costs of marketing and adds campaign, the company remains with = ${revenue_after_marketing} in revenue"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "operational_costs",
+      "question_inputs": [
+        "operational_percentage"
+      ],
+      "solution_line_template": "Operational costs for the company are {operational_percentage}*${revenue_after_marketing} = $<<{operational_percentage}*{revenue_after_marketing}={operational_costs}>>{operational_costs}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "revenue_after_operational_costs",
+      "question_inputs": [],
+      "solution_line_template": "After taking out the operational costs, the company remains with ${revenue_after_marketing}-${operational_costs} = ${revenue_after_operational_costs}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "total_wages",
+      "question_inputs": [
+        "wages_percentage"
+      ],
+      "solution_line_template": "The company also pays employee wages of {wages_percentage}*${revenue_after_operational_costs} =$<<{wages_percentage}*{revenue_after_operational_costs}={total_wages}>>{total_wages}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L8",
+      "output_variable": "wage_per_employee",
+      "question_inputs": [
+        "num_employees"
+      ],
+      "solution_line_template": "If the total number of employees is {num_employees}, each employee is paid a salary of ${total_wages}/{num_employees} = ${wage_per_employee} per month"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The company pays a total of 10/100*$400000 = $<<10/100*400000=40000>>40000 on taxes",
+    "L2": "After taxes, the company revenue is $400000-$40000 = $<<400000-40000=360000>>360000",
+    "L3": "The costs of marketing and ads campaign are 5/100*$360000 = $<<5/100*360000=18000>>18000",
+    "L4": "After deducting the costs of marketing and adds campaign, the company remains with = $342000 in revenue",
+    "L5": "Operational costs for the company are 10/100*$342000 = $<<10/100*342000=34200>>34200",
+    "L6": "After taking out the operational costs, the company remains with $342000-$34200 = $307800",
+    "L7": "The company also pays employee wages of 15/100*$307800 =$<<15/100*307800=46170>>46170",
+    "L8": "If the total number of employees is 10, each employee is paid a salary of $46170/10 = $4617 per month",
+    "FA": "#### 4617"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Input misrepresentation. The value for 'tax_percentage' (10/100) was used instead of 'operational_percentage' (20/100).",
+  "repro_seed": -8731291528675388834,
+  "model_name": "google_gemini-2.5-flash"
+}

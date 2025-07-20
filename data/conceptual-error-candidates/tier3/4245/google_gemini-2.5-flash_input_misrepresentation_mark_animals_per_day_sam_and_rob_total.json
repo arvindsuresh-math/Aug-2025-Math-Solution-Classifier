@@ -1,0 +1,100 @@
+{
+  "index": 4245,
+  "original_solution_mapping": {
+    "FA": "#### 21",
+    "L1": "Rob hunts 1/2 * 6 animals/day = <<1/2*6=3>>3 animals/day.",
+    "L2": "Rob and Sam hunt 3 animals/day + 6 animals/day = <<3+6=9>>9 animals/day.",
+    "L3": "Mark hunts 1/3 * 9 animals/day = <<1/3*9=3>>3 animals in a day.",
+    "L4": "Peter hunts 3 * 3 animals/day = <<3*3=9>>9 animals in a day.",
+    "L5": "The total they all hunt in a day is 6 animals/day + 3 animals/day + 3 animals/day + 9 animals/day = <<6+3+3+9=21>>21 animals."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4245.\n    Returns: the total number of animals hunted by all four in a day.\n    \"\"\"\n    # L1\n    rob_fraction = Fraction(1, 2) # half as many animals as Sam\n    sam_animals_per_day = 6 # Sam hunts 6 animals\n    rob_animals_per_day = rob_fraction * sam_animals_per_day\n\n    # L2\n    sam_and_rob_total = rob_animals_per_day + sam_animals_per_day\n\n    # L3\n    mark_fraction = Fraction(1, 3) # 1/3 of the total of what Rob and Sam hunt\n    mark_animals_per_day = mark_fraction * sam_and_rob_total\n\n    # L4\n    peter_multiplier = 3 # 3 times as many animals as Mark does\n    peter_animals_per_day = peter_multiplier * mark_animals_per_day\n\n    # L5\n    total_animals_hunted = sam_animals_per_day + rob_animals_per_day + mark_animals_per_day + peter_animals_per_day\n\n    # FA\n    answer = total_animals_hunted\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "mark_animals_per_day",
+    "operand_to_replace": "mark_fraction",
+    "replacement_variable": "sam_and_rob_total"
+  },
+  "correct_trace": {
+    "rob_fraction": "1/2",
+    "sam_animals_per_day": 6,
+    "rob_animals_per_day": "3",
+    "sam_and_rob_total": "9",
+    "mark_fraction": "1/3",
+    "mark_animals_per_day": "3",
+    "peter_multiplier": 3,
+    "peter_animals_per_day": "9",
+    "total_animals_hunted": "21",
+    "answer": "21"
+  },
+  "flawed_trace": {
+    "rob_fraction": "1/2",
+    "sam_animals_per_day": 6,
+    "rob_animals_per_day": "3",
+    "sam_and_rob_total": "9",
+    "mark_fraction": "1/3",
+    "mark_animals_per_day": "81",
+    "peter_multiplier": 3,
+    "peter_animals_per_day": "243",
+    "total_animals_hunted": "333",
+    "answer": "333"
+  },
+  "correct_value": "3",
+  "flawed_value": "81",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "rob_animals_per_day",
+      "question_inputs": [
+        "rob_fraction",
+        "sam_animals_per_day"
+      ],
+      "solution_line_template": "Rob hunts {rob_fraction} * {sam_animals_per_day} animals/day = <<{rob_fraction}*{sam_animals_per_day}={rob_animals_per_day}>>{rob_animals_per_day} animals/day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sam_and_rob_total",
+      "question_inputs": [],
+      "solution_line_template": "Rob and Sam hunt {rob_animals_per_day} animals/day + {sam_animals_per_day} animals/day = <<{rob_animals_per_day}+{sam_animals_per_day}={sam_and_rob_total}>>{sam_and_rob_total} animals/day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "mark_animals_per_day",
+      "question_inputs": [
+        "mark_fraction"
+      ],
+      "solution_line_template": "Mark hunts {mark_fraction} * {sam_and_rob_total} animals/day = <<{mark_fraction}*{sam_and_rob_total}={mark_animals_per_day}>>{mark_animals_per_day} animals in a day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "peter_animals_per_day",
+      "question_inputs": [
+        "peter_multiplier"
+      ],
+      "solution_line_template": "Peter hunts {peter_multiplier} * {mark_animals_per_day} animals/day = <<{peter_multiplier}*{mark_animals_per_day}={peter_animals_per_day}>>{peter_animals_per_day} animals in a day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_animals_hunted",
+      "question_inputs": [],
+      "solution_line_template": "The total they all hunt in a day is {sam_animals_per_day} animals/day + {rob_animals_per_day} animals/day + {mark_animals_per_day} animals/day + {peter_animals_per_day} animals/day = <<{sam_animals_per_day}+{rob_animals_per_day}+{mark_animals_per_day}+{peter_animals_per_day}={total_animals_hunted}>>{total_animals_hunted} animals."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Rob hunts 1/2 * 6 animals/day = <<1/2*6=3>>3 animals/day.",
+    "L2": "Rob and Sam hunt 3 animals/day + 6 animals/day = <<3+6=9>>9 animals/day.",
+    "L3": "Mark hunts 9 * 9 animals/day = <<9*9=81>>81 animals in a day.",
+    "L4": "Peter hunts 3 * 81 animals/day = <<3*81=243>>243 animals in a day.",
+    "L5": "The total they all hunt in a day is 6 animals/day + 3 animals/day + 81 animals/day + 243 animals/day = <<6+3+81+243=333>>333 animals.",
+    "FA": "#### 333"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'sam_and_rob_total' (9) was used instead of 'mark_fraction' (1/3).",
+  "repro_seed": -1756460181599183649,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,63 @@
+{
+  "index": 3379,
+  "original_solution_mapping": {
+    "FA": "#### 17",
+    "L1": "Kim answered 22+3=<<22+3=25>>25 questions correctly.",
+    "L2": "Cherry answered 25-8=<<25-8=17>>17 questions correctly."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3379.\n    Returns: the number of questions Cherry answered correctly.\n    \"\"\"\n    # L1\n    nicole_correct = 22 # Nicole answered 22 correctly\n    nicole_fewer_than_kim = 3 # 3 fewer questions correctly than Kim\n    kim_correct = nicole_correct + nicole_fewer_than_kim\n\n    # L2\n    kim_more_than_cherry = 8 # 8 more questions correctly than Cherry\n    cherry_correct = kim_correct - kim_more_than_cherry\n\n    # FA\n    answer = cherry_correct\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "kim_correct",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x317c6ae10>"
+  },
+  "correct_trace": {
+    "nicole_correct": 22,
+    "nicole_fewer_than_kim": 3,
+    "kim_correct": 25,
+    "kim_more_than_cherry": 8,
+    "cherry_correct": 17,
+    "answer": 17
+  },
+  "flawed_trace": {
+    "nicole_correct": 22,
+    "nicole_fewer_than_kim": 3,
+    "kim_correct": 66,
+    "kim_more_than_cherry": 8,
+    "cherry_correct": 58,
+    "answer": 58
+  },
+  "correct_value": 25,
+  "flawed_value": 66,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "kim_correct",
+      "question_inputs": [
+        "nicole_correct",
+        "nicole_fewer_than_kim"
+      ],
+      "solution_line_template": "Kim answered {nicole_correct}+{nicole_fewer_than_kim}=<<{nicole_correct}+{nicole_fewer_than_kim}={kim_correct}>>{kim_correct} questions correctly."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cherry_correct",
+      "question_inputs": [
+        "kim_more_than_cherry"
+      ],
+      "solution_line_template": "Cherry answered {kim_correct}-{kim_more_than_cherry}=<<{kim_correct}-{kim_more_than_cherry}={cherry_correct}>>{cherry_correct} questions correctly."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Kim answered 22+3=<<22+3=66>>66 questions correctly.",
+    "L2": "Cherry answered 66-8=<<66-8=58>>58 questions correctly.",
+    "FA": "#### 58"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 6086948196376420171,
+  "model_name": "google_gemini-2.5-flash"
+}

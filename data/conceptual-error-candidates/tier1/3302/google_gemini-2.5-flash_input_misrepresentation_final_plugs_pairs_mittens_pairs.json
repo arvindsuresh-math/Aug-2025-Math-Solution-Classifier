@@ -1,0 +1,78 @@
+{
+  "index": 3302,
+  "original_solution_mapping": {
+    "FA": "#### 400",
+    "L1": "Since there are 20 fewer mittens pairs than the plugs, there are 150+20 = 170 pairs of plugs.",
+    "L2": "When Gunner decides to add 30 more plugs pairs into the box of plugs, the number of plug pairs increases to 170+30 = <<170+30=200>>200",
+    "L3": "Since a pair has two, the 200 pairs of plugs total 200*2 = <<200*2=400>>400 plugs."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3302.\n    Returns: the total number of plugs.\n    \"\"\"\n    # L1\n    mittens_fewer_than_plugs = 20 # 20 fewer pairs\n    mittens_pairs = 150 # box of mittens has 150 pairs of mittens\n    initial_plugs_pairs = mittens_pairs + mittens_fewer_than_plugs\n\n    # L2\n    added_plugs_pairs = 30 # put 30 more pairs of plugs\n    final_plugs_pairs = initial_plugs_pairs + added_plugs_pairs\n\n    # L3\n    items_per_pair = 2 # WK\n    total_plugs = final_plugs_pairs * items_per_pair\n\n    # FA\n    answer = total_plugs\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "final_plugs_pairs",
+    "operand_to_replace": "added_plugs_pairs",
+    "replacement_variable": "mittens_pairs"
+  },
+  "correct_trace": {
+    "mittens_fewer_than_plugs": 20,
+    "mittens_pairs": 150,
+    "initial_plugs_pairs": 170,
+    "added_plugs_pairs": 30,
+    "final_plugs_pairs": 200,
+    "items_per_pair": 2,
+    "total_plugs": 400,
+    "answer": 400
+  },
+  "flawed_trace": {
+    "mittens_fewer_than_plugs": 20,
+    "mittens_pairs": 150,
+    "initial_plugs_pairs": 170,
+    "added_plugs_pairs": 30,
+    "final_plugs_pairs": 320,
+    "items_per_pair": 2,
+    "total_plugs": 640,
+    "answer": 640
+  },
+  "correct_value": 200,
+  "flawed_value": 320,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "initial_plugs_pairs",
+      "question_inputs": [
+        "mittens_fewer_than_plugs",
+        "mittens_pairs"
+      ],
+      "solution_line_template": "Since there are {mittens_fewer_than_plugs} fewer mittens pairs than the plugs, there are {mittens_pairs}+{mittens_fewer_than_plugs} = {initial_plugs_pairs} pairs of plugs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "final_plugs_pairs",
+      "question_inputs": [
+        "added_plugs_pairs"
+      ],
+      "solution_line_template": "When Gunner decides to add {added_plugs_pairs} more plugs pairs into the box of plugs, the number of plug pairs increases to {initial_plugs_pairs}+{added_plugs_pairs} = <<{initial_plugs_pairs}+{added_plugs_pairs}={final_plugs_pairs}>>{final_plugs_pairs}"
+    },
+    {
+      "WK_inputs": [
+        "items_per_pair"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_plugs",
+      "question_inputs": [],
+      "solution_line_template": "Since a pair has two, the {final_plugs_pairs} pairs of plugs total {final_plugs_pairs}*{items_per_pair} = <<{final_plugs_pairs}*{items_per_pair}={total_plugs}>>{total_plugs} plugs."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since there are 20 fewer mittens pairs than the plugs, there are 150+20 = 170 pairs of plugs.",
+    "L2": "When Gunner decides to add 150 more plugs pairs into the box of plugs, the number of plug pairs increases to 170+150 = <<170+150=320>>320",
+    "L3": "Since a pair has two, the 320 pairs of plugs total 320*2 = <<320*2=640>>640 plugs.",
+    "FA": "#### 640"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'mittens_pairs' (150) was used instead of 'added_plugs_pairs' (30).",
+  "repro_seed": 174016708020911383,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,59 @@
+{
+  "index": 6789,
+  "original_solution_mapping": {
+    "FA": "#### 585",
+    "L1": "Jebb has to pay $650 x 10/100 = $<<650*10/100=65>>65.",
+    "L2": "Therefore, Jebb's take-home pay is $650 - $65 = $<<650-65=585>>585."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6789.\n    Returns: Jebb's take-home pay.\n    \"\"\"\n    # L1\n    pay = 650 # his pay is $650\n    tax_percentage = Fraction(10, 100) # pay 10% for the tax\n    tax_amount = pay * tax_percentage\n\n    # L2\n    take_home_pay = pay - tax_amount\n\n    # FA\n    answer = take_home_pay\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "take_home_pay",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x31b559950>"
+  },
+  "correct_trace": {
+    "pay": 650,
+    "tax_percentage": "1/10",
+    "tax_amount": "65",
+    "take_home_pay": "585",
+    "answer": "585"
+  },
+  "flawed_trace": {
+    "pay": 650,
+    "tax_percentage": "1/10",
+    "tax_amount": "65",
+    "take_home_pay": "10",
+    "answer": "10"
+  },
+  "correct_value": "585",
+  "flawed_value": "10",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "tax_amount",
+      "question_inputs": [
+        "pay",
+        "tax_percentage"
+      ],
+      "solution_line_template": "Jebb has to pay ${pay} x {tax_percentage} = $<<{pay}*{tax_percentage}={tax_amount}>>{tax_amount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "take_home_pay",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, Jebb's take-home pay is ${pay} - ${tax_amount} = $<<{pay}-{tax_amount}={take_home_pay}>>{take_home_pay}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jebb has to pay $650 x 10/100 = $<<650*10/100=65>>65.",
+    "L2": "Therefore, Jebb's take-home pay is $650 - $65 = $<<650-65=10>>10.",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": 8502975052648821311,
+  "model_name": "google_gemini-2.5-flash"
+}

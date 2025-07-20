@@ -1,0 +1,63 @@
+{
+  "index": 6172,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "Mary has 2 * 3 = <<2*3=6>>6 cards.",
+    "L2": "Jimmy has 18 - 3 - 6 = <<18-3-6=9>>9 cards left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6172.\n    Returns: the number of cards Jimmy has left.\n    \"\"\"\n    # L1\n    multiplier_mary = 2 # twice as many cards\n    cards_given_to_bob = 3 # gives three cards to Bob\n    mary_cards = multiplier_mary * cards_given_to_bob\n\n    # L2\n    jimmy_initial_cards = 18 # Jimmy has 18 cards\n    jimmy_cards_left = jimmy_initial_cards - cards_given_to_bob - mary_cards\n\n    # FA\n    answer = jimmy_cards_left\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "mary_cards",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x316105010>"
+  },
+  "correct_trace": {
+    "multiplier_mary": 2,
+    "cards_given_to_bob": 3,
+    "mary_cards": 6,
+    "jimmy_initial_cards": 18,
+    "jimmy_cards_left": 9,
+    "answer": 9
+  },
+  "flawed_trace": {
+    "multiplier_mary": 2,
+    "cards_given_to_bob": 3,
+    "mary_cards": 5,
+    "jimmy_initial_cards": 18,
+    "jimmy_cards_left": 10,
+    "answer": 10
+  },
+  "correct_value": 6,
+  "flawed_value": 5,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "mary_cards",
+      "question_inputs": [
+        "multiplier_mary",
+        "cards_given_to_bob"
+      ],
+      "solution_line_template": "Mary has {multiplier_mary} * {cards_given_to_bob} = <<{multiplier_mary}*{cards_given_to_bob}={mary_cards}>>{mary_cards} cards."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "jimmy_cards_left",
+      "question_inputs": [
+        "jimmy_initial_cards"
+      ],
+      "solution_line_template": "Jimmy has {jimmy_initial_cards} - {cards_given_to_bob} - {mary_cards} = <<{jimmy_initial_cards}-{cards_given_to_bob}-{mary_cards}={jimmy_cards_left}>>{jimmy_cards_left} cards left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Mary has 2 * 3 = <<2*3=5>>5 cards.",
+    "L2": "Jimmy has 18 - 3 - 5 = <<18-3-5=10>>10 cards left.",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -1880365851012618920,
+  "model_name": "google_gemini-2.5-flash"
+}

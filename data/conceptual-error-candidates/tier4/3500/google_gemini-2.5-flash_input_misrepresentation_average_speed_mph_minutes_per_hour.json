@@ -1,0 +1,64 @@
+{
+  "index": 3500,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "First convert 90 minutes to hours: 90 minutes / 60 minutes/hours = <<90/60=1.5>>1.5 hours.",
+    "L2": "In 1 hour, I run 12 miles / 1.5 hours = <<12/1.5=8>>8 miles/hour."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3500.\n    Returns: the average speed in miles per hour.\n    \"\"\"\n    # L1\n    total_minutes = 90 # 90 minutes\n    minutes_per_hour = 60 # WK\n    total_hours = total_minutes / minutes_per_hour\n\n    # L2\n    total_miles = 12 # 12 miles\n    average_speed_mph = total_miles / total_hours\n\n    # FA\n    answer = average_speed_mph\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "average_speed_mph",
+    "operand_to_replace": "total_miles",
+    "replacement_variable": "minutes_per_hour"
+  },
+  "correct_trace": {
+    "total_minutes": 90,
+    "minutes_per_hour": 60,
+    "total_hours": 1.5,
+    "total_miles": 12,
+    "average_speed_mph": 8.0,
+    "answer": 8.0
+  },
+  "flawed_trace": {
+    "total_minutes": 90,
+    "minutes_per_hour": 60,
+    "total_hours": 1.5,
+    "total_miles": 12,
+    "average_speed_mph": 40.0,
+    "answer": 40.0
+  },
+  "correct_value": 8.0,
+  "flawed_value": 40.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_hours",
+      "question_inputs": [
+        "total_minutes"
+      ],
+      "solution_line_template": "First convert {total_minutes} minutes to hours: {total_minutes} minutes / {minutes_per_hour} minutes/hours = <<{total_minutes}/{minutes_per_hour}={total_hours}>>{total_hours} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "average_speed_mph",
+      "question_inputs": [
+        "total_miles"
+      ],
+      "solution_line_template": "In 1 hour, I run {total_miles} miles / {total_hours} hours = <<{total_miles}/{total_hours}={average_speed_mph}>>{average_speed_mph} miles/hour."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First convert 90 minutes to hours: 90 minutes / 60 minutes/hours = <<90/60=1.5>>1.5 hours.",
+    "L2": "In 1 hour, I run 60 miles / 1.5 hours = <<60/1.5=40>>40 miles/hour.",
+    "FA": "#### 40"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'minutes_per_hour' (60) was used instead of 'total_miles' (12).",
+  "repro_seed": 8720446651327769782,
+  "model_name": "google_gemini-2.5-flash"
+}

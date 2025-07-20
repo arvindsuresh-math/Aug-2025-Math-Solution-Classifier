@@ -1,0 +1,109 @@
+{
+  "index": 7307,
+  "original_solution_mapping": {
+    "FA": "#### 14",
+    "L1": "He needs food for 21 days because 3 x 7 = <<3*7=21>>21",
+    "L2": "The puppy will eat 7 cups of food because 21 x (1/3) = <<21*(1/3)=7>>7",
+    "L3": "He needs 2 bags of food because 7 / 3.5 = <<7/3.5=2>>2",
+    "L4": "The food will cost him $4 because 2 x 2 = <<2*2=4>>4",
+    "L5": "It will cost $14 in total because 10 + 4 = <<10+4=14>>14"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7307.\n    Returns: the total cost for Mark.\n    \"\"\"\n    # L1\n    weeks_of_food = 3 # enough food for 3 weeks\n    days_per_week = 7 # WK\n    total_days_food_needed = weeks_of_food * days_per_week\n\n    # L2\n    food_per_day = Fraction(1, 3) # puppy eats 1/3 cup of food a day\n    total_cups_eaten = total_days_food_needed * food_per_day\n\n    # L3\n    cups_per_bag = 3.5 # A bag of food with 3.5 cups\n    num_bags_needed = total_cups_eaten / cups_per_bag\n\n    # L4\n    cost_per_bag = 2 # costs $2\n    total_food_cost = num_bags_needed * cost_per_bag\n\n    # L5\n    puppy_cost = 10 # puppy that cost $10\n    total_overall_cost = puppy_cost + total_food_cost\n\n    # FA\n    answer = total_overall_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_food_cost",
+    "operand_to_replace": "num_bags_needed",
+    "replacement_variable": "cups_per_bag"
+  },
+  "correct_trace": {
+    "weeks_of_food": 3,
+    "days_per_week": 7,
+    "total_days_food_needed": 21,
+    "food_per_day": "1/3",
+    "total_cups_eaten": "7",
+    "cups_per_bag": 3.5,
+    "num_bags_needed": 2.0,
+    "cost_per_bag": 2,
+    "total_food_cost": 4.0,
+    "puppy_cost": 10,
+    "total_overall_cost": 14.0,
+    "answer": 14.0
+  },
+  "flawed_trace": {
+    "weeks_of_food": 3,
+    "days_per_week": 7,
+    "total_days_food_needed": 21,
+    "food_per_day": "1/3",
+    "total_cups_eaten": "7",
+    "cups_per_bag": 3.5,
+    "num_bags_needed": 2.0,
+    "cost_per_bag": 2,
+    "total_food_cost": 7.0,
+    "puppy_cost": 10,
+    "total_overall_cost": 17.0,
+    "answer": 17.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 7.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_days_food_needed",
+      "question_inputs": [
+        "weeks_of_food"
+      ],
+      "solution_line_template": "He needs food for {total_days_food_needed} days because {weeks_of_food} x {days_per_week} = <<{weeks_of_food}*{days_per_week}={total_days_food_needed}>>{total_days_food_needed}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cups_eaten",
+      "question_inputs": [
+        "food_per_day"
+      ],
+      "solution_line_template": "The puppy will eat {total_cups_eaten} cups of food because {total_days_food_needed} x ({food_per_day}) = <<{total_days_food_needed}*({food_per_day})={total_cups_eaten}>>{total_cups_eaten}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_bags_needed",
+      "question_inputs": [
+        "cups_per_bag"
+      ],
+      "solution_line_template": "He needs {num_bags_needed} bags of food because {total_cups_eaten} / {cups_per_bag} = <<{total_cups_eaten}/{cups_per_bag}={num_bags_needed}>>{num_bags_needed}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_food_cost",
+      "question_inputs": [
+        "cost_per_bag"
+      ],
+      "solution_line_template": "The food will cost him ${total_food_cost} because {num_bags_needed} x {cost_per_bag} = <<{num_bags_needed}*{cost_per_bag}={total_food_cost}>>{total_food_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_overall_cost",
+      "question_inputs": [
+        "puppy_cost"
+      ],
+      "solution_line_template": "It will cost ${total_overall_cost} in total because {puppy_cost} + {total_food_cost} = <<{puppy_cost}+{total_food_cost}={total_overall_cost}>>{total_overall_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He needs food for 21 days because 3 x 7 = <<3*7=21>>21",
+    "L2": "The puppy will eat 7 cups of food because 21 x (1/3) = <<21*(1/3)=7>>7",
+    "L3": "He needs 2 bags of food because 7 / 3.5 = <<7/3.5=2>>2",
+    "L4": "The food will cost him $7 because 3.5 x 2 = <<3.5*2=7>>7",
+    "L5": "It will cost $17 in total because 10 + 7 = <<10+7=17>>17",
+    "FA": "#### 17"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'cups_per_bag' (value: 3.5) was used instead of 'num_bags_needed' (value: 2.0).",
+  "repro_seed": -2156016186299227031,
+  "model_name": "google_gemini-2.5-flash"
+}

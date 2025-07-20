@@ -1,0 +1,93 @@
+{
+  "index": 1912,
+  "original_solution_mapping": {
+    "FA": "#### 240",
+    "L1": "Each pair of boxes weighs 40 pounds + 10 pounds, or <<40+10=50>>50 pounds.",
+    "L2": "Each pair weighs 50 pounds, so the delivery trucks can carry 2000 / 50 pairs of boxes or <<2000/50=40>>40 pairs.",
+    "L3": "Steven has three trucks, so each trip can move 40 * 3 pairs of boxes = <<40*3=120>>120 pairs of boxes.",
+    "L4": "Each pair is a set of two boxes, so each delivery contains 120 * 2 boxes = <<120*2=240>>240 boxes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1912.\n    Returns: the total number of boxes Steven can ship in each delivery.\n    \"\"\"\n    # L1\n    heavier_box_weight = 40 # some of the boxes weigh 40 pounds\n    lighter_box_weight = 10 # some of the boxes weigh 10 pounds\n    pair_weight = heavier_box_weight + lighter_box_weight\n\n    # L2\n    max_truck_load = 2000 # Each truck can carry a load of no more than 2,000 pounds of cargo\n    pairs_per_truck = max_truck_load / pair_weight\n\n    # L3\n    num_trucks = 3 # Steven has three trucks\n    total_pairs_per_delivery = pairs_per_truck * num_trucks\n\n    # L4\n    boxes_per_pair = 2 # WK\n    total_boxes_per_delivery = total_pairs_per_delivery * boxes_per_pair\n\n    # FA\n    answer = total_boxes_per_delivery\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_pairs_per_delivery",
+    "operand_to_replace": "pairs_per_truck",
+    "replacement_variable": "pair_weight"
+  },
+  "correct_trace": {
+    "heavier_box_weight": 40,
+    "lighter_box_weight": 10,
+    "pair_weight": 50,
+    "max_truck_load": 2000,
+    "pairs_per_truck": 40.0,
+    "num_trucks": 3,
+    "total_pairs_per_delivery": 120.0,
+    "boxes_per_pair": 2,
+    "total_boxes_per_delivery": 240.0,
+    "answer": 240.0
+  },
+  "flawed_trace": {
+    "heavier_box_weight": 40,
+    "lighter_box_weight": 10,
+    "pair_weight": 50,
+    "max_truck_load": 2000,
+    "pairs_per_truck": 40.0,
+    "num_trucks": 3,
+    "total_pairs_per_delivery": 150,
+    "boxes_per_pair": 2,
+    "total_boxes_per_delivery": 300,
+    "answer": 300
+  },
+  "correct_value": 120.0,
+  "flawed_value": 150,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "pair_weight",
+      "question_inputs": [
+        "heavier_box_weight",
+        "lighter_box_weight"
+      ],
+      "solution_line_template": "Each pair of boxes weighs {heavier_box_weight} pounds + {lighter_box_weight} pounds, or <<{heavier_box_weight}+{lighter_box_weight}={pair_weight}>>{pair_weight} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "pairs_per_truck",
+      "question_inputs": [
+        "max_truck_load"
+      ],
+      "solution_line_template": "Each pair weighs {pair_weight} pounds, so the delivery trucks can carry {max_truck_load} / {pair_weight} pairs of boxes or <<{max_truck_load}/{pair_weight}={pairs_per_truck}>>{pairs_per_truck} pairs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_pairs_per_delivery",
+      "question_inputs": [
+        "num_trucks"
+      ],
+      "solution_line_template": "Steven has three trucks, so each trip can move {pairs_per_truck} * {num_trucks} pairs of boxes = <<{pairs_per_truck}*{num_trucks}={total_pairs_per_delivery}>>{total_pairs_per_delivery} pairs of boxes."
+    },
+    {
+      "WK_inputs": [
+        "boxes_per_pair"
+      ],
+      "line_number": "L4",
+      "output_variable": "total_boxes_per_delivery",
+      "question_inputs": [],
+      "solution_line_template": "Each pair is a set of {boxes_per_pair} boxes, so each delivery contains {total_pairs_per_delivery} * {boxes_per_pair} boxes = <<{total_pairs_per_delivery}*{boxes_per_pair}={total_boxes_per_delivery}>>{total_boxes_per_delivery} boxes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each pair of boxes weighs 40 pounds + 10 pounds, or <<40+10=50>>50 pounds.",
+    "L2": "Each pair weighs 50 pounds, so the delivery trucks can carry 2000 / 50 pairs of boxes or <<2000/50=40>>40 pairs.",
+    "L3": "Steven has three trucks, so each trip can move 50 * 3 pairs of boxes = <<50*3=150>>150 pairs of boxes.",
+    "L4": "Each pair is a set of 2 boxes, so each delivery contains 150 * 2 boxes = <<150*2=300>>300 boxes",
+    "FA": "#### 300"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'pair_weight' (value: 50) was used instead of 'pairs_per_truck' (value: 40.0).",
+  "repro_seed": 3447743002291398838,
+  "model_name": "google_gemini-2.5-flash"
+}

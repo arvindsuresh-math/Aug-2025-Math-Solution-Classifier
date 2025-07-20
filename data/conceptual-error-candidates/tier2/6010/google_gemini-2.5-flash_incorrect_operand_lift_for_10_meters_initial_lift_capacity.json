@@ -1,0 +1,100 @@
+{
+  "index": 6010,
+  "original_solution_mapping": {
+    "FA": "#### 546",
+    "L1": "After the increase, he can lift 300+50=<<300+50=350>>350 pounds",
+    "L2": "Decreasing the distance increase the amount he can lift by 350*.3=<<350*.3=105>>105 pounds",
+    "L3": "So he can lift 350+105=<<350+105=455>>455 for 10 feet",
+    "L4": "The straps add another 455*.2=<<455*.2=91>>91 pounds",
+    "L5": "So his total weight is 455+91=<<455+91=546>>546 pounds per hand"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6010.\n    Returns: the total weight James can move with lifting straps for 10 meters.\n    \"\"\"\n    # L1\n    initial_lift_capacity = 300 # 300 pounds per hand\n    increase_without_straps = 50 # increases his 20-meter distance without straps by 50 pounds\n    lift_after_initial_increase = initial_lift_capacity + increase_without_straps\n\n    # L2\n    distance_increase_percent = 0.3 # lift 30% more\n    lift_increase_from_distance = lift_after_initial_increase * distance_increase_percent\n\n    # L3\n    lift_for_10_meters = lift_after_initial_increase + lift_increase_from_distance\n\n    # L4\n    straps_increase_percent = 0.2 # another 20%\n    lift_increase_from_straps = lift_for_10_meters * straps_increase_percent\n\n    # L5\n    total_lift_capacity = lift_for_10_meters + lift_increase_from_straps\n\n    # FA\n    answer = total_lift_capacity\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "lift_for_10_meters",
+    "operand_to_replace": "lift_after_initial_increase",
+    "replacement_variable": "initial_lift_capacity"
+  },
+  "correct_trace": {
+    "initial_lift_capacity": 300,
+    "increase_without_straps": 50,
+    "lift_after_initial_increase": 350,
+    "distance_increase_percent": 0.3,
+    "lift_increase_from_distance": 105.0,
+    "lift_for_10_meters": 455.0,
+    "straps_increase_percent": 0.2,
+    "lift_increase_from_straps": 91.0,
+    "total_lift_capacity": 546.0,
+    "answer": 546.0
+  },
+  "flawed_trace": {
+    "initial_lift_capacity": 300,
+    "increase_without_straps": 50,
+    "lift_after_initial_increase": 350,
+    "distance_increase_percent": 0.3,
+    "lift_increase_from_distance": 105.0,
+    "lift_for_10_meters": 405.0,
+    "straps_increase_percent": 0.2,
+    "lift_increase_from_straps": 81.0,
+    "total_lift_capacity": 486.0,
+    "answer": 486.0
+  },
+  "correct_value": 455.0,
+  "flawed_value": 405.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "lift_after_initial_increase",
+      "question_inputs": [
+        "initial_lift_capacity",
+        "increase_without_straps"
+      ],
+      "solution_line_template": "After the increase, he can lift {initial_lift_capacity}+{increase_without_straps}=<<{initial_lift_capacity}+{increase_without_straps}={lift_after_initial_increase}>>{lift_after_initial_increase} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "lift_increase_from_distance",
+      "question_inputs": [
+        "distance_increase_percent"
+      ],
+      "solution_line_template": "Decreasing the distance increase the amount he can lift by {lift_after_initial_increase}*{distance_increase_percent}=<<{lift_after_initial_increase}*{distance_increase_percent}={lift_increase_from_distance}>>{lift_increase_from_distance} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "lift_for_10_meters",
+      "question_inputs": [],
+      "solution_line_template": "So he can lift {lift_after_initial_increase}+{lift_increase_from_distance}=<<{lift_after_initial_increase}+{lift_increase_from_distance}={lift_for_10_meters}>>{lift_for_10_meters} for 10 feet"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "lift_increase_from_straps",
+      "question_inputs": [
+        "straps_increase_percent"
+      ],
+      "solution_line_template": "The straps add another {lift_for_10_meters}*{straps_increase_percent}=<<{lift_for_10_meters}*{straps_increase_percent}={lift_increase_from_straps}>>{lift_increase_from_straps} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_lift_capacity",
+      "question_inputs": [],
+      "solution_line_template": "So his total weight is {lift_for_10_meters}+{lift_increase_from_straps}=<<{lift_for_10_meters}+{lift_increase_from_straps}={total_lift_capacity}>>{total_lift_capacity} pounds per hand"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After the increase, he can lift 300+50=<<300+50=350>>350 pounds",
+    "L2": "Decreasing the distance increase the amount he can lift by 350*0.3=<<350*0.3=105>>105 pounds",
+    "L3": "So he can lift 300+105=<<300+105=405>>405 for 10 feet",
+    "L4": "The straps add another 405*0.2=<<405*0.2=81>>81 pounds",
+    "L5": "So his total weight is 405+81=<<405+81=486>>486 pounds per hand",
+    "FA": "#### 486"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'initial_lift_capacity' (value: 300) was used instead of 'lift_after_initial_increase' (value: 350).",
+  "repro_seed": -1985810933327123083,
+  "model_name": "google_gemini-2.5-flash"
+}

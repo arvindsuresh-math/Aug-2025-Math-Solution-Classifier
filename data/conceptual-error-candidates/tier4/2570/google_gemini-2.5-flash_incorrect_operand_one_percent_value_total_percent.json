@@ -1,0 +1,79 @@
+{
+  "index": 2570,
+  "original_solution_mapping": {
+    "FA": "#### 450",
+    "L1": "Since Kenneth spent 10%, then he is left with 100% - 10% = 90% of his earnings.",
+    "L2": "Since 90% of his earnings is worth $405, then 1% of his earnings is $405/90 = $<<405/90=4.50>>4.50.",
+    "L3": "Hence, Kenneth's earnings is $4.50 x 100 = $<<450=450>>450."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2570.\n    Returns: Kenneth's total earnings.\n    \"\"\"\n    # L1\n    spent_percent = 10 # spent 10% of this earnings\n    total_percent = 100 # WK\n    remaining_percent = total_percent - spent_percent\n\n    # L2\n    remaining_amount = 405 # left with $405\n    one_percent_value = remaining_amount / remaining_percent\n\n    # L3\n    percent_multiplier = 100 # WK\n    total_earnings = one_percent_value * percent_multiplier\n\n    # FA\n    answer = total_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "one_percent_value",
+    "operand_to_replace": "remaining_percent",
+    "replacement_variable": "total_percent"
+  },
+  "correct_trace": {
+    "spent_percent": 10,
+    "total_percent": 100,
+    "remaining_percent": 90,
+    "remaining_amount": 405,
+    "one_percent_value": 4.5,
+    "percent_multiplier": 100,
+    "total_earnings": 450.0,
+    "answer": 450.0
+  },
+  "flawed_trace": {
+    "spent_percent": 10,
+    "total_percent": 100,
+    "remaining_percent": 90,
+    "remaining_amount": 405,
+    "one_percent_value": 4.05,
+    "percent_multiplier": 100,
+    "total_earnings": 405.0,
+    "answer": 405.0
+  },
+  "correct_value": 4.5,
+  "flawed_value": 4.05,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_percent"
+      ],
+      "line_number": "L1",
+      "output_variable": "remaining_percent",
+      "question_inputs": [
+        "spent_percent"
+      ],
+      "solution_line_template": "Since Kenneth spent {spent_percent}%, then he is left with {total_percent}% - {spent_percent}% = {remaining_percent}% of his earnings."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "one_percent_value",
+      "question_inputs": [
+        "remaining_amount"
+      ],
+      "solution_line_template": "Since {remaining_percent}% of his earnings is worth ${remaining_amount}, then 1% of his earnings is ${remaining_amount}/{remaining_percent} = $<<{remaining_amount}/{remaining_percent}={one_percent_value}>>{one_percent_value}."
+    },
+    {
+      "WK_inputs": [
+        "percent_multiplier"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_earnings",
+      "question_inputs": [],
+      "solution_line_template": "Hence, Kenneth's earnings is ${one_percent_value} x {percent_multiplier} = $<<{one_percent_value}*{percent_multiplier}={total_earnings}>>{total_earnings}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since Kenneth spent 10%, then he is left with 100% - 10% = 90% of his earnings.",
+    "L2": "Since 100% of his earnings is worth $405, then 1% of his earnings is $405/100 = $<<405/100=4.05>>4.05.",
+    "L3": "Hence, Kenneth's earnings is $4.05 x 100 = $<<4.05*100=405>>405.",
+    "FA": "#### 405"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'total_percent' (value: 100) was used instead of 'remaining_percent' (value: 90).",
+  "repro_seed": -2108463245783462043,
+  "model_name": "google_gemini-2.5-flash"
+}

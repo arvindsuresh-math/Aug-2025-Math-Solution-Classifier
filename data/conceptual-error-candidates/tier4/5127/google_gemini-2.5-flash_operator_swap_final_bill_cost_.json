@@ -1,0 +1,63 @@
+{
+  "index": 5127,
+  "original_solution_mapping": {
+    "FA": "#### 17",
+    "L1": "Curtis had the Salisbury steak for $16.00 and Rob had the Chicken Fried Steak at $18.00 so their meal cost 16+18 = $<<16+18=34.00>>34.00",
+    "L2": "They ate 3 pm so their meal is half off so their meal cost 34/2 = $17.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5127.\n    Returns: the cost of their total bill after discount.\n    \"\"\"\n    # L1\n    curtis_steak_cost = 16.00 # Salisbury Steak that costs $16.00\n    rob_steak_cost = 18.00 # Chicken Fried Steak at $18.00\n    initial_total_cost = curtis_steak_cost + rob_steak_cost\n\n    # L2\n    discount_divisor = 2 # half off\n    final_bill_cost = initial_total_cost / discount_divisor\n\n    # FA\n    answer = final_bill_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "final_bill_cost",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x31bdd7a50>"
+  },
+  "correct_trace": {
+    "curtis_steak_cost": 16.0,
+    "rob_steak_cost": 18.0,
+    "initial_total_cost": 34.0,
+    "discount_divisor": 2,
+    "final_bill_cost": 17.0,
+    "answer": 17.0
+  },
+  "flawed_trace": {
+    "curtis_steak_cost": 16.0,
+    "rob_steak_cost": 18.0,
+    "initial_total_cost": 34.0,
+    "discount_divisor": 2,
+    "final_bill_cost": 68.0,
+    "answer": 68.0
+  },
+  "correct_value": 17.0,
+  "flawed_value": 68.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "initial_total_cost",
+      "question_inputs": [
+        "curtis_steak_cost",
+        "rob_steak_cost"
+      ],
+      "solution_line_template": "Curtis had the Salisbury steak for ${curtis_steak_cost} and Rob had the Chicken Fried Steak at ${rob_steak_cost} so their meal cost {curtis_steak_cost}+{rob_steak_cost} = $<<{curtis_steak_cost}+{rob_steak_cost}={initial_total_cost}>>{initial_total_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "final_bill_cost",
+      "question_inputs": [
+        "discount_divisor"
+      ],
+      "solution_line_template": "They ate 3 pm so their meal is half off so their meal cost {initial_total_cost}/{discount_divisor} = ${final_bill_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Curtis had the Salisbury steak for $16 and Rob had the Chicken Fried Steak at $18 so their meal cost 16+18 = $<<16+18=34>>34",
+    "L2": "They ate 3 pm so their meal is half off so their meal cost 34/2 = $68",
+    "FA": "#### 68"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -1808092159875015,
+  "model_name": "google_gemini-2.5-flash"
+}

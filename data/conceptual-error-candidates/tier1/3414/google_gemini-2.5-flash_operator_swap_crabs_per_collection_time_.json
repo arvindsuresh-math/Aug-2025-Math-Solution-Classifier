@@ -1,0 +1,78 @@
+{
+  "index": 3414,
+  "original_solution_mapping": {
+    "FA": "#### 72",
+    "L1": "He collects 3*4=<<3*4=12>>12 crabs each time.",
+    "L2": "He thus collects 12*2=<<12*2=24>>24 crabs a week.",
+    "L3": "So he makes 24*3=$<<24*3=72>>72 a week."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3414.\n    Returns: the total money John makes per week.\n    \"\"\"\n    # L1\n    baskets_per_week = 3 # 3 crab baskets a week\n    crabs_per_basket = 4 # Each basket holds 4 crabs\n    crabs_per_collection_time = baskets_per_week * crabs_per_basket\n\n    # L2\n    collection_times_per_week = 2 # collects crabs twice a week\n    total_crabs_per_week = crabs_per_collection_time * collection_times_per_week\n\n    # L3\n    price_per_crab = 3 # Each crab sells for $3\n    money_per_week = total_crabs_per_week * price_per_crab\n\n    # FA\n    answer = money_per_week\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "crabs_per_collection_time",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x317c6e210>"
+  },
+  "correct_trace": {
+    "baskets_per_week": 3,
+    "crabs_per_basket": 4,
+    "crabs_per_collection_time": 12,
+    "collection_times_per_week": 2,
+    "total_crabs_per_week": 24,
+    "price_per_crab": 3,
+    "money_per_week": 72,
+    "answer": 72
+  },
+  "flawed_trace": {
+    "baskets_per_week": 3,
+    "crabs_per_basket": 4,
+    "crabs_per_collection_time": 7,
+    "collection_times_per_week": 2,
+    "total_crabs_per_week": 14,
+    "price_per_crab": 3,
+    "money_per_week": 42,
+    "answer": 42
+  },
+  "correct_value": 12,
+  "flawed_value": 7,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "crabs_per_collection_time",
+      "question_inputs": [
+        "baskets_per_week",
+        "crabs_per_basket"
+      ],
+      "solution_line_template": "He collects {baskets_per_week}*{crabs_per_basket}=<<{baskets_per_week}*{crabs_per_basket}={crabs_per_collection_time}>>{crabs_per_collection_time} crabs each time."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_crabs_per_week",
+      "question_inputs": [
+        "collection_times_per_week"
+      ],
+      "solution_line_template": "He thus collects {crabs_per_collection_time}*{collection_times_per_week}=<<{crabs_per_collection_time}*{collection_times_per_week}={total_crabs_per_week}>>{total_crabs_per_week} crabs a week."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "money_per_week",
+      "question_inputs": [
+        "price_per_crab"
+      ],
+      "solution_line_template": "So he makes {total_crabs_per_week}*{price_per_crab}=$<<{total_crabs_per_week}*{price_per_crab}={money_per_week}>>{money_per_week} a week."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He collects 3*4=<<3*4=7>>7 crabs each time.",
+    "L2": "He thus collects 7*2=<<7*2=14>>14 crabs a week.",
+    "L3": "So he makes 14*3=$<<14*3=42>>42 a week.",
+    "FA": "#### 42"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 713952282818452131,
+  "model_name": "google_gemini-2.5-flash"
+}

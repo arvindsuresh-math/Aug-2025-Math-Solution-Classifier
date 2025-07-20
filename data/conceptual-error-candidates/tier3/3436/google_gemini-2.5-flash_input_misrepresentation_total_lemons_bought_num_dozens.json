@@ -1,0 +1,75 @@
+{
+  "index": 3436,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "Cristine bought 1 x 12 = <<1*12=12>>12 lemons.",
+    "L2": "She gave 12 x 1/4 = <<12*1/4=3>>3 lemons to her neighbor.",
+    "L3": "So, Cristine is left with 12 - 3 = <<12-3=9>>9 lemons."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3436.\n    Returns: the number of lemons Cristine has left.\n    \"\"\"\n    # L1\n    num_dozens = 1 # a dozen lemons\n    lemons_per_dozen = 12 # WK\n    total_lemons_bought = num_dozens * lemons_per_dozen\n\n    # L2\n    fraction_given = Fraction(1, 4) # 1/4 of them\n    lemons_given_to_neighbor = total_lemons_bought * fraction_given\n\n    # L3\n    lemons_left = total_lemons_bought - lemons_given_to_neighbor\n\n    # FA\n    answer = lemons_left\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_lemons_bought",
+    "operand_to_replace": "lemons_per_dozen",
+    "replacement_variable": "num_dozens"
+  },
+  "correct_trace": {
+    "num_dozens": 1,
+    "lemons_per_dozen": 12,
+    "total_lemons_bought": 12,
+    "fraction_given": "1/4",
+    "lemons_given_to_neighbor": "3",
+    "lemons_left": "9",
+    "answer": "9"
+  },
+  "flawed_trace": {
+    "num_dozens": 1,
+    "lemons_per_dozen": 12,
+    "total_lemons_bought": 1,
+    "fraction_given": "1/4",
+    "lemons_given_to_neighbor": "1/4",
+    "lemons_left": "3/4",
+    "answer": "3/4"
+  },
+  "correct_value": 12,
+  "flawed_value": 1,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "lemons_per_dozen"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_lemons_bought",
+      "question_inputs": [
+        "num_dozens"
+      ],
+      "solution_line_template": "Cristine bought {num_dozens} x {lemons_per_dozen} = <<{num_dozens}*{lemons_per_dozen}={total_lemons_bought}>>{total_lemons_bought} lemons."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "lemons_given_to_neighbor",
+      "question_inputs": [
+        "fraction_given"
+      ],
+      "solution_line_template": "She gave {total_lemons_bought} x {fraction_given} = <<{total_lemons_bought}*{fraction_given}={lemons_given_to_neighbor}>>{lemons_given_to_neighbor} lemons to her neighbor."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "lemons_left",
+      "question_inputs": [],
+      "solution_line_template": "So, Cristine is left with {total_lemons_bought} - {lemons_given_to_neighbor} = <<{total_lemons_bought}-{lemons_given_to_neighbor}={lemons_left}>>{lemons_left} lemons."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Cristine bought 1 x 1 = <<1*1=1>>1 lemons.",
+    "L2": "She gave 1 x 1/4 = <<1*1/4=1/4>>1/4 lemons to her neighbor.",
+    "L3": "So, Cristine is left with 1 - 1/4 = <<1-1/4=3/4>>3/4 lemons.",
+    "FA": "#### 3/4"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'num_dozens' (1) was used instead of 'lemons_per_dozen' (12).",
+  "repro_seed": -2434262477599680778,
+  "model_name": "google_gemini-2.5-flash"
+}

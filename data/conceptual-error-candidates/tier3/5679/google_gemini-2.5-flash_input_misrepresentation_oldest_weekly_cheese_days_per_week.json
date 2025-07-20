@@ -1,0 +1,104 @@
+{
+  "index": 5679,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "Her oldest wants 2 strings cheeses a day for 5 days so 2*5 = <<2*5=10>>10 string cheeses",
+    "L2": "Her youngest wants 1 string cheese a day for 5 days so 1*5 = <<1*5=5>>5 string cheeses",
+    "L3": "Together they want 10+5= <<10+5=15>>15 string cheeses a week",
+    "L4": "Over 4 weeks, her kids will eat 15 string cheeses so 4*15 = <<15*4=60>>60 string cheeses",
+    "L5": "The bags have 30 per pack and she needs 60 so 60/30 = <<60/30=2>>2 packs of string cheese"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5679.\n    Returns: the number of packages of string cheese Kelly will need.\n    \"\"\"\n    # L1\n    oldest_daily_cheese = 2 # Her oldest wants 2 every day\n    days_per_week = 5 # 5 days per week\n    oldest_weekly_cheese = oldest_daily_cheese * days_per_week\n\n    # L2\n    youngest_daily_cheese = 1 # her youngest will only eat 1\n    youngest_weekly_cheese = youngest_daily_cheese * days_per_week\n\n    # L3\n    total_weekly_cheese = oldest_weekly_cheese + youngest_weekly_cheese\n\n    # L4\n    num_weeks = 4 # for 4 weeks\n    total_cheese_needed = num_weeks * total_weekly_cheese\n\n    # L5\n    cheese_per_pack = 30 # 30 string cheeses per pack\n    num_packages = total_cheese_needed / cheese_per_pack\n\n    # FA\n    answer = num_packages\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "oldest_weekly_cheese",
+    "operand_to_replace": "oldest_daily_cheese",
+    "replacement_variable": "days_per_week"
+  },
+  "correct_trace": {
+    "oldest_daily_cheese": 2,
+    "days_per_week": 5,
+    "oldest_weekly_cheese": 10,
+    "youngest_daily_cheese": 1,
+    "youngest_weekly_cheese": 5,
+    "total_weekly_cheese": 15,
+    "num_weeks": 4,
+    "total_cheese_needed": 60,
+    "cheese_per_pack": 30,
+    "num_packages": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "oldest_daily_cheese": 2,
+    "days_per_week": 5,
+    "oldest_weekly_cheese": 25,
+    "youngest_daily_cheese": 1,
+    "youngest_weekly_cheese": 5,
+    "total_weekly_cheese": 30,
+    "num_weeks": 4,
+    "total_cheese_needed": 120,
+    "cheese_per_pack": 30,
+    "num_packages": 4.0,
+    "answer": 4.0
+  },
+  "correct_value": 10,
+  "flawed_value": 25,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "oldest_weekly_cheese",
+      "question_inputs": [
+        "oldest_daily_cheese",
+        "days_per_week"
+      ],
+      "solution_line_template": "Her oldest wants {oldest_daily_cheese} strings cheeses a day for {days_per_week} days so {oldest_daily_cheese}*{days_per_week} = <<{oldest_daily_cheese}*{days_per_week}={oldest_weekly_cheese}>>{oldest_weekly_cheese} string cheeses"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "youngest_weekly_cheese",
+      "question_inputs": [
+        "youngest_daily_cheese"
+      ],
+      "solution_line_template": "Her youngest wants {youngest_daily_cheese} string cheese a day for {days_per_week} days so {youngest_daily_cheese}*{days_per_week} = <<{youngest_daily_cheese}*{days_per_week}={youngest_weekly_cheese}>>{youngest_weekly_cheese} string cheeses"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_weekly_cheese",
+      "question_inputs": [],
+      "solution_line_template": "Together they want {oldest_weekly_cheese}+{youngest_weekly_cheese}= <<{oldest_weekly_cheese}+{youngest_weekly_cheese}={total_weekly_cheese}>>{total_weekly_cheese} string cheeses a week"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cheese_needed",
+      "question_inputs": [
+        "num_weeks"
+      ],
+      "solution_line_template": "Over {num_weeks} weeks, her kids will eat {total_weekly_cheese} string cheeses so {num_weeks}*{total_weekly_cheese} = <<{total_weekly_cheese}*{num_weeks}={total_cheese_needed}>>{total_cheese_needed} string cheeses"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "num_packages",
+      "question_inputs": [
+        "cheese_per_pack"
+      ],
+      "solution_line_template": "The bags have {cheese_per_pack} per pack and she needs {total_cheese_needed} so {total_cheese_needed}/{cheese_per_pack} = <<{total_cheese_needed}/{cheese_per_pack}={num_packages}>>{num_packages} packs of string cheese"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Her oldest wants 5 strings cheeses a day for 5 days so 5*5 = <<5*5=25>>25 string cheeses",
+    "L2": "Her youngest wants 1 string cheese a day for 5 days so 1*5 = <<1*5=5>>5 string cheeses",
+    "L3": "Together they want 25+5= <<25+5=30>>30 string cheeses a week",
+    "L4": "Over 4 weeks, her kids will eat 30 string cheeses so 4*30 = <<30*4=120>>120 string cheeses",
+    "L5": "The bags have 30 per pack and she needs 120 so 120/30 = <<120/30=4>>4 packs of string cheese",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'days_per_week' (5) was used instead of 'oldest_daily_cheese' (2).",
+  "repro_seed": -1017726053519340353,
+  "model_name": "google_gemini-2.5-flash"
+}

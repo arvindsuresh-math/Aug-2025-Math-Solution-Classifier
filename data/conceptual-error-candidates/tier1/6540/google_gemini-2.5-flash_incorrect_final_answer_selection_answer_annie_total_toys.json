@@ -1,0 +1,83 @@
+{
+  "index": 6540,
+  "original_solution_mapping": {
+    "FA": "#### 56",
+    "L1": "Annie has three times more toys than Mike, which means she has 3 * 6 = <<3*6=18>>18 more toys than Mike.",
+    "L2": "Annie has a total of 18+6= <<18+6=24>>24 toys.",
+    "L3": "Tom has two toys more than Annie, so he has 24 + 2 = <<24+2=26>>26 toys.",
+    "L4": "In total Annie, Mike, and Tom have 6 + 24 + 26 = <<6+24+26=56>>56 toys."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6540.\n    Returns: the total number of toys Annie, Mike, and Tom have.\n    \"\"\"\n    # L1\n    annie_multiplier = 3 # three times more toys\n    mike_toys = 6 # Mike has 6 toys\n    annie_more_than_mike = annie_multiplier * mike_toys\n\n    # L2\n    annie_total_toys = annie_more_than_mike + mike_toys\n\n    # L3\n    tom_more_than_annie = 2 # two less than Tom (implies Tom has 2 more than Annie)\n    tom_total_toys = annie_total_toys + tom_more_than_annie\n\n    # L4\n    total_toys = mike_toys + annie_total_toys + tom_total_toys\n\n    # FA\n    answer = total_toys\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_toys",
+    "replacement_variable": "annie_total_toys"
+  },
+  "correct_trace": {
+    "annie_multiplier": 3,
+    "mike_toys": 6,
+    "annie_more_than_mike": 18,
+    "annie_total_toys": 24,
+    "tom_more_than_annie": 2,
+    "tom_total_toys": 26,
+    "total_toys": 56,
+    "answer": 56
+  },
+  "flawed_trace": {
+    "annie_multiplier": 3,
+    "mike_toys": 6,
+    "annie_more_than_mike": 18,
+    "annie_total_toys": 24,
+    "tom_more_than_annie": 2,
+    "tom_total_toys": 26,
+    "total_toys": 56,
+    "answer": 24
+  },
+  "correct_value": 56,
+  "flawed_value": 24,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "annie_more_than_mike",
+      "question_inputs": [
+        "annie_multiplier",
+        "mike_toys"
+      ],
+      "solution_line_template": "Annie has three times more toys than Mike, which means she has {annie_multiplier} * {mike_toys} = <<{annie_multiplier}*{mike_toys}={annie_more_than_mike}>>{annie_more_than_mike} more toys than Mike."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "annie_total_toys",
+      "question_inputs": [],
+      "solution_line_template": "Annie has a total of {annie_more_than_mike}+{mike_toys}= <<{annie_more_than_mike}+{mike_toys}={annie_total_toys}>>{annie_total_toys} toys."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "tom_total_toys",
+      "question_inputs": [
+        "tom_more_than_annie"
+      ],
+      "solution_line_template": "Tom has two toys more than Annie, so he has {annie_total_toys} + {tom_more_than_annie} = <<{annie_total_toys}+{tom_more_than_annie}={tom_total_toys}>>{tom_total_toys} toys."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_toys",
+      "question_inputs": [],
+      "solution_line_template": "In total Annie, Mike, and Tom have {mike_toys} + {annie_total_toys} + {tom_total_toys} = <<{mike_toys}+{annie_total_toys}+{tom_total_toys}={total_toys}>>{total_toys} toys."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Annie has three times more toys than Mike, which means she has 3 * 6 = <<3*6=18>>18 more toys than Mike.",
+    "L2": "Annie has a total of 18+6= <<18+6=24>>24 toys.",
+    "FA": "#### 24"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'annie_total_toys' (value: 24) was reported instead of 'total_toys' (value: 56).",
+  "repro_seed": 1019811899503252135,
+  "model_name": "google_gemini-2.5-flash"
+}

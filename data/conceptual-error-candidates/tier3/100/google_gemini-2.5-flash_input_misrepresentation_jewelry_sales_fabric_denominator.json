@@ -1,0 +1,74 @@
+{
+  "index": 100,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "The craft store made 36 / 3 = <<36/3=12>>12 sales in the fabric section.",
+    "L2": "It made 36 / 4 = <<36/4=9>>9 sales in the jewelry section.",
+    "L3": "Thus, there were 36 - 12 - 9 = <<36-12-9=15>>15 sales in the stationery section."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 100.\n    Returns: the number of sales in the stationery section.\n    \"\"\"\n    # L1\n    total_sales = 36 # They made 36 sales today\n    fabric_denominator = 3 # a third of its sales\n    fabric_sales = total_sales / fabric_denominator\n\n    # L2\n    jewelry_denominator = 4 # a quarter of its sales\n    jewelry_sales = total_sales / jewelry_denominator\n\n    # L3\n    stationery_sales = total_sales - fabric_sales - jewelry_sales\n\n    # FA\n    answer = stationery_sales\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "jewelry_sales",
+    "operand_to_replace": "jewelry_denominator",
+    "replacement_variable": "fabric_denominator"
+  },
+  "correct_trace": {
+    "total_sales": 36,
+    "fabric_denominator": 3,
+    "fabric_sales": 12.0,
+    "jewelry_denominator": 4,
+    "jewelry_sales": 9.0,
+    "stationery_sales": 15.0,
+    "answer": 15.0
+  },
+  "flawed_trace": {
+    "total_sales": 36,
+    "fabric_denominator": 3,
+    "fabric_sales": 12.0,
+    "jewelry_denominator": 4,
+    "jewelry_sales": 12.0,
+    "stationery_sales": 12.0,
+    "answer": 12.0
+  },
+  "correct_value": 9.0,
+  "flawed_value": 12.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "fabric_sales",
+      "question_inputs": [
+        "total_sales",
+        "fabric_denominator"
+      ],
+      "solution_line_template": "The craft store made {total_sales} / {fabric_denominator} = <<{total_sales}/{fabric_denominator}={fabric_sales}>>{fabric_sales} sales in the fabric section."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "jewelry_sales",
+      "question_inputs": [
+        "jewelry_denominator"
+      ],
+      "solution_line_template": "It made {total_sales} / {jewelry_denominator} = <<{total_sales}/{jewelry_denominator}={jewelry_sales}>>{jewelry_sales} sales in the jewelry section."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "stationery_sales",
+      "question_inputs": [],
+      "solution_line_template": "Thus, there were {total_sales} - {fabric_sales} - {jewelry_sales} = <<{total_sales}-{fabric_sales}-{jewelry_sales}={stationery_sales}>>{stationery_sales} sales in the stationery section."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The craft store made 36 / 3 = <<36/3=12>>12 sales in the fabric section.",
+    "L2": "It made 36 / 3 = <<36/3=12>>12 sales in the jewelry section.",
+    "L3": "Thus, there were 36 - 12 - 12 = <<36-12-12=12>>12 sales in the stationery section.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'fabric_denominator' (3) was used instead of 'jewelry_denominator' (4).",
+  "repro_seed": 7354757623060319750,
+  "model_name": "google_gemini-2.5-flash"
+}

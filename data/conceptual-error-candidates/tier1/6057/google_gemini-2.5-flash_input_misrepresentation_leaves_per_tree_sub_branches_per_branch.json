@@ -1,0 +1,78 @@
+{
+  "index": 6057,
+  "original_solution_mapping": {
+    "FA": "#### 96000",
+    "L1": "If the tree's 10 branches have 40 sub-branches each, the total number of sub-branches on the tree is 10*40 = <<10*40=400>>400",
+    "L2": "Since each sub-branch has 60 leaves, the tree has 60*400 = <<60*400=24000>>24000 leaves.",
+    "L3": "If there are four trees on the farm with the same number of leaves, they all have 24000*4 = <<24000*4=96000>>96000 leaves."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6057.\n    Returns: the total number of leaves on all the trees.\n    \"\"\"\n    # L1\n    num_branches = 10 # 10 branches\n    sub_branches_per_branch = 40 # 40 sub-branches\n    total_sub_branches_per_tree = num_branches * sub_branches_per_branch\n\n    # L2\n    leaves_per_sub_branch = 60 # 60 leaves each\n    leaves_per_tree = leaves_per_sub_branch * total_sub_branches_per_tree\n\n    # L3\n    total_trees_on_farm = 4 # total number of trees on the farm is 4\n    total_leaves_on_all_trees = leaves_per_tree * total_trees_on_farm\n\n    # FA\n    answer = total_leaves_on_all_trees\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "leaves_per_tree",
+    "operand_to_replace": "leaves_per_sub_branch",
+    "replacement_variable": "sub_branches_per_branch"
+  },
+  "correct_trace": {
+    "num_branches": 10,
+    "sub_branches_per_branch": 40,
+    "total_sub_branches_per_tree": 400,
+    "leaves_per_sub_branch": 60,
+    "leaves_per_tree": 24000,
+    "total_trees_on_farm": 4,
+    "total_leaves_on_all_trees": 96000,
+    "answer": 96000
+  },
+  "flawed_trace": {
+    "num_branches": 10,
+    "sub_branches_per_branch": 40,
+    "total_sub_branches_per_tree": 400,
+    "leaves_per_sub_branch": 60,
+    "leaves_per_tree": 16000,
+    "total_trees_on_farm": 4,
+    "total_leaves_on_all_trees": 64000,
+    "answer": 64000
+  },
+  "correct_value": 24000,
+  "flawed_value": 16000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_sub_branches_per_tree",
+      "question_inputs": [
+        "num_branches",
+        "sub_branches_per_branch"
+      ],
+      "solution_line_template": "If the tree's {num_branches} branches have {sub_branches_per_branch} sub-branches each, the total number of sub-branches on the tree is {num_branches}*{sub_branches_per_branch} = <<{num_branches}*{sub_branches_per_branch}={total_sub_branches_per_tree}>>{total_sub_branches_per_tree}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "leaves_per_tree",
+      "question_inputs": [
+        "leaves_per_sub_branch"
+      ],
+      "solution_line_template": "Since each sub-branch has {leaves_per_sub_branch} leaves, the tree has {leaves_per_sub_branch}*{total_sub_branches_per_tree} = <<{leaves_per_sub_branch}*{total_sub_branches_per_tree}={leaves_per_tree}>>{leaves_per_tree} leaves."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_leaves_on_all_trees",
+      "question_inputs": [
+        "total_trees_on_farm"
+      ],
+      "solution_line_template": "If there are {total_trees_on_farm} trees on the farm with the same number of leaves, they all have {leaves_per_tree}*{total_trees_on_farm} = <<{leaves_per_tree}*{total_trees_on_farm}={total_leaves_on_all_trees}>>{total_leaves_on_all_trees} leaves."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the tree's 10 branches have 40 sub-branches each, the total number of sub-branches on the tree is 10*40 = <<10*40=400>>400",
+    "L2": "Since each sub-branch has 40 leaves, the tree has 40*400 = <<40*400=16000>>16000 leaves.",
+    "L3": "If there are 4 trees on the farm with the same number of leaves, they all have 16000*4 = <<16000*4=64000>>64000 leaves.",
+    "FA": "#### 64000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'sub_branches_per_branch' (40) was used instead of 'leaves_per_sub_branch' (60).",
+  "repro_seed": 4380745219624233976,
+  "model_name": "google_gemini-2.5-flash"
+}

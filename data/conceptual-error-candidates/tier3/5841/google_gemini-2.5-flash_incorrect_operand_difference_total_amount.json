@@ -1,0 +1,85 @@
+{
+  "index": 5841,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "40% of $50 is (40/100)*$50 = $<<(40/100)*50=20>>20",
+    "L2": "After Moses takes $20, there will be $50-$20 = $<<50-20=30>>30 left",
+    "L3": "Tony and Esther will split $30 equally among themselves so each of them will get $30/2 = $<<30/2=15>>15",
+    "L4": "Moses gets $20-$15 = $<<20-15=5>>5 more than Esther"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5841.\n    Returns: the difference in amount Moses gets compared to Esther.\n    \"\"\"\n    # L1\n    moses_percentage = Fraction(40, 100) # 40% of the total amount\n    total_amount = 50 # share $50\n    moses_share = moses_percentage * total_amount\n\n    # L2\n    remainder = total_amount - moses_share\n\n    # L3\n    num_people_splitting = 2 # Tony and Esther will split the remainder equally among themselves\n    tony_esther_share = remainder / num_people_splitting\n\n    # L4\n    difference = moses_share - tony_esther_share\n\n    # FA\n    answer = difference\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "difference",
+    "operand_to_replace": "moses_share",
+    "replacement_variable": "total_amount"
+  },
+  "correct_trace": {
+    "moses_percentage": "2/5",
+    "total_amount": 50,
+    "moses_share": "20",
+    "remainder": "30",
+    "num_people_splitting": 2,
+    "tony_esther_share": "15",
+    "difference": "5",
+    "answer": "5"
+  },
+  "flawed_trace": {
+    "moses_percentage": "2/5",
+    "total_amount": 50,
+    "moses_share": "20",
+    "remainder": "30",
+    "num_people_splitting": 2,
+    "tony_esther_share": "15",
+    "difference": "35",
+    "answer": "35"
+  },
+  "correct_value": "5",
+  "flawed_value": "35",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "moses_share",
+      "question_inputs": [
+        "moses_percentage",
+        "total_amount"
+      ],
+      "solution_line_template": "40% of ${total_amount} is {moses_percentage}*${total_amount} = $<<{moses_percentage}*{total_amount}={moses_share}>>{moses_share}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remainder",
+      "question_inputs": [],
+      "solution_line_template": "After Moses takes ${moses_share}, there will be ${total_amount}-${moses_share} = $<<{total_amount}-{moses_share}={remainder}>>{remainder} left"
+    },
+    {
+      "WK_inputs": [
+        "num_people_splitting"
+      ],
+      "line_number": "L3",
+      "output_variable": "tony_esther_share",
+      "question_inputs": [],
+      "solution_line_template": "Tony and Esther will split ${remainder} equally among themselves so each of them will get ${remainder}/{num_people_splitting} = $<<{remainder}/{num_people_splitting}={tony_esther_share}>>{tony_esther_share}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "difference",
+      "question_inputs": [],
+      "solution_line_template": "Moses gets ${moses_share}-${tony_esther_share} = $<<{moses_share}-{tony_esther_share}={difference}>>{difference} more than Esther"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "40% of $50 is 40/100*$50 = $<<40/100*50=20>>20",
+    "L2": "After Moses takes $20, there will be $50-$20 = $<<50-20=30>>30 left",
+    "L3": "Tony and Esther will split $30 equally among themselves so each of them will get $30/2 = $<<30/2=15>>15",
+    "L4": "Moses gets $50-$15 = $<<50-15=35>>35 more than Esther",
+    "FA": "#### 35"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'total_amount' (value: 50) was used instead of 'moses_share' (value: 20).",
+  "repro_seed": 2713656937841157165,
+  "model_name": "google_gemini-2.5-flash"
+}

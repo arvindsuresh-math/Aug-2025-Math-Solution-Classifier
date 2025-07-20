@@ -1,0 +1,90 @@
+{
+  "index": 1823,
+  "original_solution_mapping": {
+    "FA": "#### 36",
+    "L1": "First convert the 2-year sentence to months: 2 years * 12 months/year = <<2*12=24>>24 months",
+    "L2": "Then add the 3 months for assault: 24 months + 3 months = <<24+3=27>>27 months",
+    "L3": "Then find how long the 1/3 extension is: 27 months / 3 = <<27/3=9>>9 months",
+    "L4": "Finally, add up the three lengths of time to find the total sentence length: 27 months + 9 months = <<27+9=36>>36 months"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1823.\n    Returns: the total number of months Gerald spends in jail.\n    \"\"\"\n    # L1\n    years_sentence = 2 # 2 years for poisoning\n    months_per_year = 12 # WK\n    sentence_in_months = years_sentence * months_per_year\n\n    # L2\n    assault_months = 3 # 3 months for assault\n    total_months_initial = sentence_in_months + assault_months\n\n    # L3\n    extension_divisor = 3 # extends his sentence by 1/3\n    extension_months = total_months_initial / extension_divisor\n\n    # L4\n    total_sentence_length = total_months_initial + extension_months\n\n    # FA\n    answer = total_sentence_length\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_months_initial",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x315a834d0>"
+  },
+  "correct_trace": {
+    "years_sentence": 2,
+    "months_per_year": 12,
+    "sentence_in_months": 24,
+    "assault_months": 3,
+    "total_months_initial": 27,
+    "extension_divisor": 3,
+    "extension_months": 9.0,
+    "total_sentence_length": 36.0,
+    "answer": 36.0
+  },
+  "flawed_trace": {
+    "years_sentence": 2,
+    "months_per_year": 12,
+    "sentence_in_months": 24,
+    "assault_months": 3,
+    "total_months_initial": 21,
+    "extension_divisor": 3,
+    "extension_months": 7.0,
+    "total_sentence_length": 28.0,
+    "answer": 28.0
+  },
+  "correct_value": 27,
+  "flawed_value": 21,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L1",
+      "output_variable": "sentence_in_months",
+      "question_inputs": [
+        "years_sentence"
+      ],
+      "solution_line_template": "First convert the {years_sentence}-year sentence to months: {years_sentence} years * {months_per_year} months/year = <<{years_sentence}*{months_per_year}={sentence_in_months}>>{sentence_in_months} months"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_months_initial",
+      "question_inputs": [
+        "assault_months"
+      ],
+      "solution_line_template": "Then add the {assault_months} months for assault: {sentence_in_months} months + {assault_months} months = <<{sentence_in_months}+{assault_months}={total_months_initial}>>{total_months_initial} months"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "extension_months",
+      "question_inputs": [
+        "extension_divisor"
+      ],
+      "solution_line_template": "Then find how long the 1/{extension_divisor} extension is: {total_months_initial} months / {extension_divisor} = <<{total_months_initial}/{extension_divisor}={extension_months}>>{extension_months} months"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_sentence_length",
+      "question_inputs": [],
+      "solution_line_template": "Finally, add up the three lengths of time to find the total sentence length: {total_months_initial} months + {extension_months} months = <<{total_months_initial}+{extension_months}={total_sentence_length}>>{total_sentence_length} months"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First convert the 2-year sentence to months: 2 years * 12 months/year = <<2*12=24>>24 months",
+    "L2": "Then add the 3 months for assault: 24 months + 3 months = <<24+3=21>>21 months",
+    "L3": "Then find how long the 1/3 extension is: 21 months / 3 = <<21/3=7>>7 months",
+    "L4": "Finally, add up the three lengths of time to find the total sentence length: 21 months + 7 months = <<21+7=28>>28 months",
+    "FA": "#### 28"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": -3482833166313759259,
+  "model_name": "google_gemini-2.5-flash"
+}

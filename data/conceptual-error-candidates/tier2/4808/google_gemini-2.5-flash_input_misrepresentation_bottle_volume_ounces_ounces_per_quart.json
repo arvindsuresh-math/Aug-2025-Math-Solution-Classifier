@@ -1,0 +1,64 @@
+{
+  "index": 4808,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "The bottle was 1.5*32=<<1.5*32=48>>48 ounces.",
+    "L2": "So she drinks 48+12=<<48+12=60>>60 ounces of water."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4808.\n    Returns: the total ounces of water Kim drank.\n    \"\"\"\n    # L1\n    bottle_volume_quarts = 1.5 # 1.5-quart bottle\n    ounces_per_quart = 32 # WK\n    bottle_volume_ounces = bottle_volume_quarts * ounces_per_quart\n\n    # L2\n    can_volume_ounces = 12 # 12 ounce can\n    total_ounces_drank = bottle_volume_ounces + can_volume_ounces\n\n    # FA\n    answer = total_ounces_drank\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "bottle_volume_ounces",
+    "operand_to_replace": "bottle_volume_quarts",
+    "replacement_variable": "ounces_per_quart"
+  },
+  "correct_trace": {
+    "bottle_volume_quarts": 1.5,
+    "ounces_per_quart": 32,
+    "bottle_volume_ounces": 48.0,
+    "can_volume_ounces": 12,
+    "total_ounces_drank": 60.0,
+    "answer": 60.0
+  },
+  "flawed_trace": {
+    "bottle_volume_quarts": 1.5,
+    "ounces_per_quart": 32,
+    "bottle_volume_ounces": 1024,
+    "can_volume_ounces": 12,
+    "total_ounces_drank": 1036,
+    "answer": 1036
+  },
+  "correct_value": 48.0,
+  "flawed_value": 1024,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "ounces_per_quart"
+      ],
+      "line_number": "L1",
+      "output_variable": "bottle_volume_ounces",
+      "question_inputs": [
+        "bottle_volume_quarts"
+      ],
+      "solution_line_template": "The bottle was {bottle_volume_quarts}*{ounces_per_quart}=<<{bottle_volume_quarts}*{ounces_per_quart}={bottle_volume_ounces}>>{bottle_volume_ounces} ounces."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_ounces_drank",
+      "question_inputs": [
+        "can_volume_ounces"
+      ],
+      "solution_line_template": "So she drinks {bottle_volume_ounces}+{can_volume_ounces}=<<{bottle_volume_ounces}+{can_volume_ounces}={total_ounces_drank}>>{total_ounces_drank} ounces of water."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The bottle was 32*32=<<32*32=1024>>1024 ounces.",
+    "L2": "So she drinks 1024+12=<<1024+12=1036>>1036 ounces of water.",
+    "FA": "#### 1036"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'ounces_per_quart' (32) was used instead of 'bottle_volume_quarts' (1.5).",
+  "repro_seed": -3778236192514112169,
+  "model_name": "google_gemini-2.5-flash"
+}

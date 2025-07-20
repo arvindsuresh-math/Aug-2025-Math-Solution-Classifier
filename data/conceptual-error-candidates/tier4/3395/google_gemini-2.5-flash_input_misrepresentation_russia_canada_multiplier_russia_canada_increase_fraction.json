@@ -1,0 +1,64 @@
+{
+  "index": 3395,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "Canada equals 1.5 United States",
+    "L2": "Russia equals 2 United States because 1.5 x (1 + 1/3) = <<2=2>>2"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3395.\n    Returns: how many times bigger Russia is than the United States.\n    \"\"\"\n    # L1\n    canada_us_ratio = 1.5 # Canada is 1.5 times bigger than the United States\n\n    # L2\n    russia_canada_increase_fraction = Fraction(1, 3) # Russia is 1/3 bigger than Canada\n    russia_canada_multiplier_base = 1 # WK\n    russia_canada_multiplier = russia_canada_multiplier_base + russia_canada_increase_fraction\n    russia_us_ratio = canada_us_ratio * russia_canada_multiplier\n\n    # FA\n    answer = russia_us_ratio\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "russia_canada_multiplier",
+    "operand_to_replace": "russia_canada_multiplier_base",
+    "replacement_variable": "russia_canada_increase_fraction"
+  },
+  "correct_trace": {
+    "canada_us_ratio": 1.5,
+    "russia_canada_increase_fraction": "1/3",
+    "russia_canada_multiplier_base": 1,
+    "russia_canada_multiplier": "4/3",
+    "russia_us_ratio": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "canada_us_ratio": 1.5,
+    "russia_canada_increase_fraction": "1/3",
+    "russia_canada_multiplier_base": 1,
+    "russia_canada_multiplier": "2/3",
+    "russia_us_ratio": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": "4/3",
+  "flawed_value": "2/3",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "canada_us_ratio",
+      "question_inputs": [
+        "canada_us_ratio"
+      ],
+      "solution_line_template": "Canada equals {canada_us_ratio} United States"
+    },
+    {
+      "WK_inputs": [
+        "russia_canada_multiplier_base"
+      ],
+      "line_number": "L2",
+      "output_variable": "russia_us_ratio",
+      "question_inputs": [
+        "russia_canada_increase_fraction"
+      ],
+      "solution_line_template": "Russia equals {russia_us_ratio} United States because {canada_us_ratio} x ({russia_canada_multiplier_base} + {russia_canada_increase_fraction}) = <<{russia_us_ratio}={russia_us_ratio}>>{russia_us_ratio}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Canada equals 1.5 United States",
+    "L2": "Russia equals 1 United States because 1.5 x (1 + 1/3) = <<1=1>>1",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": null,
+  "explanation": "Input misrepresentation. The value for 'russia_canada_increase_fraction' (1/3) was used instead of 'russia_canada_multiplier_base' (1).",
+  "repro_seed": 1509652557587204623,
+  "model_name": "google_gemini-2.5-flash"
+}

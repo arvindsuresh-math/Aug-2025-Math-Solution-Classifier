@@ -1,0 +1,63 @@
+{
+  "index": 7279,
+  "original_solution_mapping": {
+    "FA": "#### 364000",
+    "L1": "Per day, the amount of milk produced is 1000*52 = <<1000*52=52000>>52000 oz.",
+    "L2": "Per week, the amount of milk produced is 52000*7 = <<52000*7=364000>>364000 oz."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7279.\n    Returns: the total amount of milk produced per week by the cows.\n    \"\"\"\n    # L1\n    milk_per_cow_per_day = 1000 # 1000 oz of milk per day\n    num_cows = 52 # 52 dairy cows\n    milk_per_day = milk_per_cow_per_day * num_cows\n\n    # L2\n    days_per_week = 7 # WK\n    milk_per_week = milk_per_day * days_per_week\n\n    # FA\n    answer = milk_per_week\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "milk_per_day",
+    "operand_to_replace": "milk_per_cow_per_day",
+    "replacement_variable": "num_cows"
+  },
+  "correct_trace": {
+    "milk_per_cow_per_day": 1000,
+    "num_cows": 52,
+    "milk_per_day": 52000,
+    "days_per_week": 7,
+    "milk_per_week": 364000,
+    "answer": 364000
+  },
+  "flawed_trace": {
+    "milk_per_cow_per_day": 1000,
+    "num_cows": 52,
+    "milk_per_day": 2704,
+    "days_per_week": 7,
+    "milk_per_week": 18928,
+    "answer": 18928
+  },
+  "correct_value": 52000,
+  "flawed_value": 2704,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "milk_per_day",
+      "question_inputs": [
+        "milk_per_cow_per_day",
+        "num_cows"
+      ],
+      "solution_line_template": "Per day, the amount of milk produced is {milk_per_cow_per_day}*{num_cows} = <<{milk_per_cow_per_day}*{num_cows}={milk_per_day}>>{milk_per_day} oz."
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L2",
+      "output_variable": "milk_per_week",
+      "question_inputs": [],
+      "solution_line_template": "Per week, the amount of milk produced is {milk_per_day}*{days_per_week} = <<{milk_per_day}*{days_per_week}={milk_per_week}>>{milk_per_week} oz."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Per day, the amount of milk produced is 52*52 = <<52*52=2704>>2704 oz.",
+    "L2": "Per week, the amount of milk produced is 2704*7 = <<2704*7=18928>>18928 oz.",
+    "FA": "#### 18928"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'num_cows' (52) was used instead of 'milk_per_cow_per_day' (1000).",
+  "repro_seed": -634453533480846735,
+  "model_name": "google_gemini-2.5-flash"
+}

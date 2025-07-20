@@ -1,0 +1,74 @@
+{
+  "index": 6998,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "She reads 90-60=<<90-60=30>>30 pages in an hour.",
+    "L2": "She needs to read 210-90=<<210-90=120>>120 more pages.",
+    "L3": "For an additional 120 pages, she will need 120/30=<<120/30=4>>4 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6998.\n    Returns: the number of additional hours Jo will be reading the book.\n    \"\"\"\n    # L1\n    current_page = 90 # Now, she is at page 90\n    page_an_hour_ago = 60 # An hour ago, she was at page 60\n    pages_per_hour = current_page - page_an_hour_ago\n\n    # L2\n    total_pages = 210 # Her current book has 210 pages\n    remaining_pages = total_pages - current_page\n\n    # L3\n    hours_needed = remaining_pages / pages_per_hour\n\n    # FA\n    answer = hours_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "remaining_pages",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x31b5de490>"
+  },
+  "correct_trace": {
+    "current_page": 90,
+    "page_an_hour_ago": 60,
+    "pages_per_hour": 30,
+    "total_pages": 210,
+    "remaining_pages": 120,
+    "hours_needed": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "current_page": 90,
+    "page_an_hour_ago": 60,
+    "pages_per_hour": 30,
+    "total_pages": 210,
+    "remaining_pages": 300,
+    "hours_needed": 10.0,
+    "answer": 10.0
+  },
+  "correct_value": 120,
+  "flawed_value": 300,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "pages_per_hour",
+      "question_inputs": [
+        "current_page",
+        "page_an_hour_ago"
+      ],
+      "solution_line_template": "She reads {current_page}-{page_an_hour_ago}=<<{current_page}-{page_an_hour_ago}={pages_per_hour}>>{pages_per_hour} pages in an hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_pages",
+      "question_inputs": [
+        "total_pages"
+      ],
+      "solution_line_template": "She needs to read {total_pages}-{current_page}=<<{total_pages}-{current_page}={remaining_pages}>>{remaining_pages} more pages."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "hours_needed",
+      "question_inputs": [],
+      "solution_line_template": "For an additional {remaining_pages} pages, she will need {remaining_pages}/{pages_per_hour}=<<{remaining_pages}/{pages_per_hour}={hours_needed}>>{hours_needed} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She reads 90-60=<<90-60=30>>30 pages in an hour.",
+    "L2": "She needs to read 210-90=<<210-90=300>>300 more pages.",
+    "L3": "For an additional 300 pages, she will need 300/30=<<300/30=10>>10 hours.",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -5887685970890090964,
+  "model_name": "google_gemini-2.5-flash"
+}

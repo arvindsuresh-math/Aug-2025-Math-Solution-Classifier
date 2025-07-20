@@ -1,0 +1,77 @@
+{
+  "index": 7181,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "There are 50 / 2 = <<50/2=25>>25 people in economy class.",
+    "L2": "There are 25 people in business first and business class, so there are 25 - 3 = <<25-3=22>>22 in business class.",
+    "L3": "Thus, there are 30 - 22 = <<30-22=8>>8 unoccupied seats in business class."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7181.\n    Returns: the number of unoccupied seats in business class.\n    \"\"\"\n    # L1\n    economy_class_capacity = 50 # 50 in economy class seating\n    economy_class_occupancy_divisor = 2 # economy class is half full\n    economy_class_people = economy_class_capacity / economy_class_occupancy_divisor\n\n    # L2\n    first_class_people = 3 # only three people on the flight have first class seats\n    business_class_people = economy_class_people - first_class_people\n\n    # L3\n    business_class_capacity = 30 # 30 in business class\n    unoccupied_business_seats = business_class_capacity - business_class_people\n\n    # FA\n    answer = unoccupied_business_seats\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "unoccupied_business_seats",
+    "replacement_variable": "business_class_people"
+  },
+  "correct_trace": {
+    "economy_class_capacity": 50,
+    "economy_class_occupancy_divisor": 2,
+    "economy_class_people": 25.0,
+    "first_class_people": 3,
+    "business_class_people": 22.0,
+    "business_class_capacity": 30,
+    "unoccupied_business_seats": 8.0,
+    "answer": 8.0
+  },
+  "flawed_trace": {
+    "economy_class_capacity": 50,
+    "economy_class_occupancy_divisor": 2,
+    "economy_class_people": 25.0,
+    "first_class_people": 3,
+    "business_class_people": 22.0,
+    "business_class_capacity": 30,
+    "unoccupied_business_seats": 8.0,
+    "answer": 22.0
+  },
+  "correct_value": 8.0,
+  "flawed_value": 22.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "economy_class_people",
+      "question_inputs": [
+        "economy_class_capacity",
+        "economy_class_occupancy_divisor"
+      ],
+      "solution_line_template": "There are {economy_class_capacity} / {economy_class_occupancy_divisor} = <<{economy_class_capacity}/{economy_class_occupancy_divisor}={economy_class_people}>>{economy_class_people} people in economy class."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "business_class_people",
+      "question_inputs": [
+        "first_class_people"
+      ],
+      "solution_line_template": "There are {economy_class_people} people in business first and business class, so there are {economy_class_people} - {first_class_people} = <<{economy_class_people}-{first_class_people}={business_class_people}>>{business_class_people} in business class."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "unoccupied_business_seats",
+      "question_inputs": [
+        "business_class_capacity"
+      ],
+      "solution_line_template": "Thus, there are {business_class_capacity} - {business_class_people} = <<{business_class_capacity}-{business_class_people}={unoccupied_business_seats}>>{unoccupied_business_seats} unoccupied seats in business class."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 50 / 2 = <<50/2=25>>25 people in economy class.",
+    "L2": "There are 25 people in business first and business class, so there are 25 - 3 = <<25-3=22>>22 in business class.",
+    "FA": "#### 22"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'business_class_people' (value: 22.0) was reported instead of 'unoccupied_business_seats' (value: 8.0).",
+  "repro_seed": -483872535300298272,
+  "model_name": "google_gemini-2.5-flash"
+}

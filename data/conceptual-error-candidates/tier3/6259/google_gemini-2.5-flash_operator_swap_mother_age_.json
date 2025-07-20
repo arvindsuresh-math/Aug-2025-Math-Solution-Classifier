@@ -1,0 +1,74 @@
+{
+  "index": 6259,
+  "original_solution_mapping": {
+    "FA": "#### 16",
+    "L1": "John is half times his father's age. Thus 1/2*40 = <<1/2*40=20>>20 years.",
+    "L2": "Since the mother is 4 years younger than the father, she is 40-4= <<40-4=36>>36 years old.",
+    "L3": "The age difference between John and his mother is 36-20 = <<36-20=16>>16 years"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6259.\n    Returns: the age difference between John and his mother.\n    \"\"\"\n    # L1\n    john_age_fraction = Fraction(1, 2) # half times younger\n    father_age = 40 # John's father is 40 years old\n    john_age = john_age_fraction * father_age\n\n    # L2\n    age_difference_father_mother = 4 # 4 years older than John's mother\n    mother_age = father_age - age_difference_father_mother\n\n    # L3\n    age_difference_john_mother = mother_age - john_age\n\n    # FA\n    answer = age_difference_john_mother\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "mother_age",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x31b11b5d0>"
+  },
+  "correct_trace": {
+    "john_age_fraction": "1/2",
+    "father_age": 40,
+    "john_age": "20",
+    "age_difference_father_mother": 4,
+    "mother_age": 36,
+    "age_difference_john_mother": "16",
+    "answer": "16"
+  },
+  "flawed_trace": {
+    "john_age_fraction": "1/2",
+    "father_age": 40,
+    "john_age": "20",
+    "age_difference_father_mother": 4,
+    "mother_age": 44,
+    "age_difference_john_mother": "24",
+    "answer": "24"
+  },
+  "correct_value": 36,
+  "flawed_value": 44,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "john_age",
+      "question_inputs": [
+        "john_age_fraction",
+        "father_age"
+      ],
+      "solution_line_template": "John is half times his father's age. Thus {john_age_fraction}*{father_age} = <<{john_age_fraction}*{father_age}={john_age}>>{john_age} years."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "mother_age",
+      "question_inputs": [
+        "age_difference_father_mother"
+      ],
+      "solution_line_template": "Since the mother is {age_difference_father_mother} years younger than the father, she is {father_age}-{age_difference_father_mother}= <<{father_age}-{age_difference_father_mother}={mother_age}>>{mother_age} years old."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "age_difference_john_mother",
+      "question_inputs": [],
+      "solution_line_template": "The age difference between John and his mother is {mother_age}-{john_age} = <<{mother_age}-{john_age}={age_difference_john_mother}>>{age_difference_john_mother} years"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "John is half times his father's age. Thus 1/2*40 = <<1/2*40=20>>20 years.",
+    "L2": "Since the mother is 4 years younger than the father, she is 40-4= <<40-4=44>>44 years old.",
+    "L3": "The age difference between John and his mother is 44-20 = <<44-20=24>>24 years",
+    "FA": "#### 24"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -1108963154483253144,
+  "model_name": "google_gemini-2.5-flash"
+}

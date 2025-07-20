@@ -1,0 +1,95 @@
+{
+  "index": 5783,
+  "original_solution_mapping": {
+    "FA": "#### 28",
+    "L1": "Josiah saves 0.25 x 24= $<<0.25*24=6>>6.",
+    "L2": "Leah saves 0.50 x 20 = $<<0.50*20=10>>10.",
+    "L3": "Megan saves $1 x 12 = $<<1*12=12>>12.",
+    "L4": "Together, the children save $6 + $10 + $12 = $<<6+10+12=28>>28."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5783.\n    Returns: the total amount of money the three children save together.\n    \"\"\"\n    # L1\n    josiah_daily_saving = 0.25 # a quarter\n    josiah_days = 24 # 24 days\n    josiah_total_saving = josiah_daily_saving * josiah_days\n\n    # L2\n    leah_daily_saving = 0.50 # 50 cents\n    leah_days = 20 # 20 days\n    leah_total_saving = leah_daily_saving * leah_days\n\n    # L3\n    megan_daily_saving = 1 # twice as much as Leah (0.50 * 2 = 1)\n    megan_days = 12 # 12 days\n    megan_total_saving = megan_daily_saving * megan_days\n\n    # L4\n    total_saving = josiah_total_saving + leah_total_saving + megan_total_saving\n\n    # FA\n    answer = total_saving\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "leah_total_saving",
+    "operand_to_replace": "leah_daily_saving",
+    "replacement_variable": "josiah_days"
+  },
+  "correct_trace": {
+    "josiah_daily_saving": 0.25,
+    "josiah_days": 24,
+    "josiah_total_saving": 6.0,
+    "leah_daily_saving": 0.5,
+    "leah_days": 20,
+    "leah_total_saving": 10.0,
+    "megan_daily_saving": 1,
+    "megan_days": 12,
+    "megan_total_saving": 12,
+    "total_saving": 28.0,
+    "answer": 28.0
+  },
+  "flawed_trace": {
+    "josiah_daily_saving": 0.25,
+    "josiah_days": 24,
+    "josiah_total_saving": 6.0,
+    "leah_daily_saving": 0.5,
+    "leah_days": 20,
+    "leah_total_saving": 480,
+    "megan_daily_saving": 1,
+    "megan_days": 12,
+    "megan_total_saving": 12,
+    "total_saving": 498.0,
+    "answer": 498.0
+  },
+  "correct_value": 10.0,
+  "flawed_value": 480,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "josiah_total_saving",
+      "question_inputs": [
+        "josiah_daily_saving",
+        "josiah_days"
+      ],
+      "solution_line_template": "Josiah saves {josiah_daily_saving} x {josiah_days}= $<<{josiah_daily_saving}*{josiah_days}={josiah_total_saving}>>{josiah_total_saving}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "leah_total_saving",
+      "question_inputs": [
+        "leah_daily_saving",
+        "leah_days"
+      ],
+      "solution_line_template": "Leah saves {leah_daily_saving} x {leah_days} = $<<{leah_daily_saving}*{leah_days}={leah_total_saving}>>{leah_total_saving}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "megan_total_saving",
+      "question_inputs": [
+        "megan_daily_saving",
+        "megan_days"
+      ],
+      "solution_line_template": "Megan saves ${megan_daily_saving} x {megan_days} = $<<{megan_daily_saving}*{megan_days}={megan_total_saving}>>{megan_total_saving}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_saving",
+      "question_inputs": [],
+      "solution_line_template": "Together, the children save ${josiah_total_saving} + ${leah_total_saving} + ${megan_total_saving} = $<<{josiah_total_saving}+{leah_total_saving}+{megan_total_saving}={total_saving}>>{total_saving}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Josiah saves 0.25 x 24= $<<0.25*24=6>>6.",
+    "L2": "Leah saves 24 x 20 = $<<24*20=480>>480.",
+    "L3": "Megan saves $1 x 12 = $<<1*12=12>>12.",
+    "L4": "Together, the children save $6 + $480 + $12 = $<<6+480+12=498>>498.",
+    "FA": "#### 498"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'josiah_days' (24) was used instead of 'leah_daily_saving' (0.5).",
+  "repro_seed": -584738607268702364,
+  "model_name": "google_gemini-2.5-flash"
+}

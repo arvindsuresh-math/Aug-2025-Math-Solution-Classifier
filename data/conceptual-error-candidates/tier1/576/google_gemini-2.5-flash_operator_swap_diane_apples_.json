@@ -1,0 +1,59 @@
+{
+  "index": 576,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "Diane bought 15 + 20 = <<15+20=35>>35 apples.",
+    "L2": "Therefore, they bought 15 + 35 = <<15+35=50>>50 apples altogether."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 576.\n    Returns: the total number of apples bought by Diane and Cecile.\n    \"\"\"\n    # L1\n    cecile_apples = 15 # Cecile bought 15 apples\n    diane_more_than_cecile = 20 # twenty more apples than Cecile\n    diane_apples = cecile_apples + diane_more_than_cecile\n\n    # L2\n    total_apples = cecile_apples + diane_apples\n\n    # FA\n    answer = total_apples\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "diane_apples",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x3175fb910>"
+  },
+  "correct_trace": {
+    "cecile_apples": 15,
+    "diane_more_than_cecile": 20,
+    "diane_apples": 35,
+    "total_apples": 50,
+    "answer": 50
+  },
+  "flawed_trace": {
+    "cecile_apples": 15,
+    "diane_more_than_cecile": 20,
+    "diane_apples": 300,
+    "total_apples": 315,
+    "answer": 315
+  },
+  "correct_value": 35,
+  "flawed_value": 300,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "cecile_apples",
+        "diane_more_than_cecile"
+      ],
+      "WK_inputs": [],
+      "output_variable": "diane_apples",
+      "solution_line_template": "Diane bought {cecile_apples} + {diane_more_than_cecile} = <<{cecile_apples}+{diane_more_than_cecile}={diane_apples}>>{diane_apples} apples."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_apples",
+      "solution_line_template": "Therefore, they bought {cecile_apples} + {diane_apples} = <<{cecile_apples}+{diane_apples}={total_apples}>>{total_apples} apples altogether."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Diane bought 15 + 20 = <<15+20=300>>300 apples.",
+    "L2": "Therefore, they bought 15 + 300 = <<15+300=315>>315 apples altogether.",
+    "FA": "#### 315"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": -2663988032612873897,
+  "model_name": "google_gemini-2.5-flash"
+}

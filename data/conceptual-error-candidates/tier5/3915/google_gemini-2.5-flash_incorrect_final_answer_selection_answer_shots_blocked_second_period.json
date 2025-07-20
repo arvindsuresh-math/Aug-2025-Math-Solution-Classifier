@@ -1,0 +1,87 @@
+{
+  "index": 3915,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "Let F be the number of shots Jordan blocked in the fourth period.",
+    "L2": "In the second period, he blocked 2 * 4 = <<2*4=8>>8 shots.",
+    "L3": "In the third period, he blocked 8 - 3 = <<8-3=5>>5 shots.",
+    "L4": "In the whole game, he blocked 4 + 8 + 5 + F = 17 + F = 21 shots.",
+    "L5": "Thus, Jordan blocked F = 21 - 17 = <<21-17=4>>4 shots in the fourth period."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3915.\n    Returns: the number of shots Jordan blocked in the fourth period.\n    \"\"\"\n    # L2\n    shots_blocked_first_period = 4 # blocked four shots\n    multiplier_second_period = 2 # twice as many shots\n    shots_blocked_second_period = multiplier_second_period * shots_blocked_first_period\n\n    # L3\n    fewer_than_second_period = 3 # three fewer than in the second period\n    shots_blocked_third_period = shots_blocked_second_period - fewer_than_second_period\n\n    # L4\n    total_shots_blocked = 21 # blocked 21 shots in all\n    sum_known_periods = shots_blocked_first_period + shots_blocked_second_period + shots_blocked_third_period\n\n    # L5\n    shots_blocked_fourth_period = total_shots_blocked - sum_known_periods\n\n    # FA\n    answer = shots_blocked_fourth_period\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "shots_blocked_fourth_period",
+    "replacement_variable": "shots_blocked_second_period"
+  },
+  "correct_trace": {
+    "shots_blocked_first_period": 4,
+    "multiplier_second_period": 2,
+    "shots_blocked_second_period": 8,
+    "fewer_than_second_period": 3,
+    "shots_blocked_third_period": 5,
+    "total_shots_blocked": 21,
+    "sum_known_periods": 17,
+    "shots_blocked_fourth_period": 4,
+    "answer": 4
+  },
+  "flawed_trace": {
+    "shots_blocked_first_period": 4,
+    "multiplier_second_period": 2,
+    "shots_blocked_second_period": 8,
+    "fewer_than_second_period": 3,
+    "shots_blocked_third_period": 5,
+    "total_shots_blocked": 21,
+    "sum_known_periods": 17,
+    "shots_blocked_fourth_period": 4,
+    "answer": 8
+  },
+  "correct_value": 4,
+  "flawed_value": 8,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "shots_blocked_second_period",
+      "question_inputs": [
+        "shots_blocked_first_period",
+        "multiplier_second_period"
+      ],
+      "solution_line_template": "In the second period, he blocked {multiplier_second_period} * {shots_blocked_first_period} = <<{multiplier_second_period}*{shots_blocked_first_period}={shots_blocked_second_period}>>{shots_blocked_second_period} shots."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "shots_blocked_third_period",
+      "question_inputs": [
+        "fewer_than_second_period"
+      ],
+      "solution_line_template": "In the third period, he blocked {shots_blocked_second_period} - {fewer_than_second_period} = <<{shots_blocked_second_period}-{fewer_than_second_period}={shots_blocked_third_period}>>{shots_blocked_third_period} shots."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "sum_known_periods",
+      "question_inputs": [
+        "total_shots_blocked"
+      ],
+      "solution_line_template": "In the whole game, he blocked {shots_blocked_first_period} + {shots_blocked_second_period} + {shots_blocked_third_period} + F = {sum_known_periods} + F = {total_shots_blocked} shots."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "shots_blocked_fourth_period",
+      "question_inputs": [],
+      "solution_line_template": "Thus, Jordan blocked F = {total_shots_blocked} - {sum_known_periods} = <<{total_shots_blocked}-{sum_known_periods}={shots_blocked_fourth_period}>>{shots_blocked_fourth_period} shots in the fourth period."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "In the second period, he blocked 2 * 4 = <<2*4=8>>8 shots.",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'shots_blocked_second_period' (value: 8) was reported instead of 'shots_blocked_fourth_period' (value: 4).",
+  "repro_seed": -1643121232557972684,
+  "model_name": "google_gemini-2.5-flash"
+}

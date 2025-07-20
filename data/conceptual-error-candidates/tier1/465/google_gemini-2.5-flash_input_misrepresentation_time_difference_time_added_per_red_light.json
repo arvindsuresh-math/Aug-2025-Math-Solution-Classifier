@@ -1,0 +1,66 @@
+{
+  "index": 465,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "If all 3 stoplights are red, the first route will take 10 + 3*3 = <<10+3*3=19>>19 minutes.",
+    "L2": "Thus, the first route will take 19-14 = <<19-14=5>>5 minutes longer than the second route."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 465.\n    Returns: how much longer the first route will be if all 3 stoplights are red compared to the second route.\n    \"\"\"\n    # L1\n    time_route1_all_green = 10 # 10 minutes if all three lights are green\n    num_stoplights_route1 = 3 # 3 stoplights\n    time_added_per_red_light = 3 # each light that is red will add 3 minutes\n    time_route1_all_red = time_route1_all_green + num_stoplights_route1 * time_added_per_red_light\n\n    # L2\n    time_route2 = 14 # takes 14 minutes\n    time_difference = time_route1_all_red - time_route2\n\n    # FA\n    answer = time_difference\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "time_difference",
+    "operand_to_replace": "time_route2",
+    "replacement_variable": "time_added_per_red_light"
+  },
+  "correct_trace": {
+    "time_route1_all_green": 10,
+    "num_stoplights_route1": 3,
+    "time_added_per_red_light": 3,
+    "time_route1_all_red": 19,
+    "time_route2": 14,
+    "time_difference": 5,
+    "answer": 5
+  },
+  "flawed_trace": {
+    "time_route1_all_green": 10,
+    "num_stoplights_route1": 3,
+    "time_added_per_red_light": 3,
+    "time_route1_all_red": 19,
+    "time_route2": 14,
+    "time_difference": 16,
+    "answer": 16
+  },
+  "correct_value": 5,
+  "flawed_value": 16,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "time_route1_all_green",
+        "num_stoplights_route1",
+        "time_added_per_red_light"
+      ],
+      "WK_inputs": [],
+      "output_variable": "time_route1_all_red",
+      "solution_line_template": "If all {num_stoplights_route1} stoplights are red, the first route will take {time_route1_all_green} + {num_stoplights_route1}*{time_added_per_red_light} = <<{time_route1_all_green}+{num_stoplights_route1}*{time_added_per_red_light}={time_route1_all_red}>>{time_route1_all_red} minutes."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "time_route2"
+      ],
+      "WK_inputs": [],
+      "output_variable": "time_difference",
+      "solution_line_template": "Thus, the first route will take {time_route1_all_red}-{time_route2} = <<{time_route1_all_red}-{time_route2}={time_difference}>>{time_difference} minutes longer than the second route."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If all 3 stoplights are red, the first route will take 10 + 3*3 = <<10+3*3=19>>19 minutes.",
+    "L2": "Thus, the first route will take 19-3 = <<19-3=16>>16 minutes longer than the second route.",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'time_added_per_red_light' (3) was used instead of 'time_route2' (14).",
+  "repro_seed": 3952591429499569798,
+  "model_name": "google_gemini-2.5-flash"
+}

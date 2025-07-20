@@ -1,0 +1,111 @@
+{
+  "index": 3733,
+  "original_solution_mapping": {
+    "FA": "#### 20000",
+    "L1": "Jorge has 60 * (1/3) = <<60*(1/3)=20>>20 acres of clay-rich soil.",
+    "L2": "He has 60 - 20 = <<60-20=40>>40 acres of good soil.",
+    "L3": "At 400 bushels per acre, his 40 acres of good soil produced 40 * 400 = <<400*40=16000>>16,000 bushels of corn.",
+    "L4": "If good soil produces 400 bushels per acre, clay-rich soil produces 400 / 2 = <<400/2=200>>200 bushels per acre.",
+    "L5": "At 200 bushels per acre, his 20 acres of clay-rich soil produced 20 * 200 = <<200*20=4000>>4,000 bushels of corn.",
+    "L6": "Altogether, his land produced 16,000 + 4,000 = <<16000+4000=20000>>20,000 bushels of corn."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3733.\n    Returns: the total bushels of corn Jorge's land yielded.\n    \"\"\"\n    # L1\n    total_acres = 60 # 60 acres of property\n    clay_fraction = Fraction(1, 3) # One-third of Jorge's 60 acres\n    clay_acres = total_acres * clay_fraction\n\n    # L2\n    good_soil_acres = total_acres - clay_acres\n\n    # L3\n    good_soil_yield_per_acre = 400 # yields 400 bushels per acre\n    good_soil_total_bushels = good_soil_acres * good_soil_yield_per_acre\n\n    # L4\n    clay_soil_yield_divisor = 2 # only half as much per acre as in good soil\n    clay_soil_yield_per_acre = good_soil_yield_per_acre / clay_soil_yield_divisor\n\n    # L5\n    clay_soil_total_bushels = clay_acres * clay_soil_yield_per_acre\n\n    # L6\n    total_bushels = good_soil_total_bushels + clay_soil_total_bushels\n\n    # FA\n    answer = total_bushels\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "good_soil_acres",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x311760210>"
+  },
+  "correct_trace": {
+    "total_acres": 60,
+    "clay_fraction": "1/3",
+    "clay_acres": "20",
+    "good_soil_acres": "40",
+    "good_soil_yield_per_acre": 400,
+    "good_soil_total_bushels": "16000",
+    "clay_soil_yield_divisor": 2,
+    "clay_soil_yield_per_acre": 200.0,
+    "clay_soil_total_bushels": 4000.0,
+    "total_bushels": 20000.0,
+    "answer": 20000.0
+  },
+  "flawed_trace": {
+    "total_acres": 60,
+    "clay_fraction": "1/3",
+    "clay_acres": "20",
+    "good_soil_acres": "3",
+    "good_soil_yield_per_acre": 400,
+    "good_soil_total_bushels": "1200",
+    "clay_soil_yield_divisor": 2,
+    "clay_soil_yield_per_acre": 200.0,
+    "clay_soil_total_bushels": 4000.0,
+    "total_bushels": 5200.0,
+    "answer": 5200.0
+  },
+  "correct_value": "40",
+  "flawed_value": "3",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "clay_acres",
+      "question_inputs": [
+        "total_acres",
+        "clay_fraction"
+      ],
+      "solution_line_template": "Jorge has {total_acres} * ({clay_fraction}) = <<{total_acres}*({clay_fraction})={clay_acres}>>{clay_acres} acres of clay-rich soil."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "good_soil_acres",
+      "question_inputs": [],
+      "solution_line_template": "He has {total_acres} - {clay_acres} = <<{total_acres}-{clay_acres}={good_soil_acres}>>{good_soil_acres} acres of good soil."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "good_soil_total_bushels",
+      "question_inputs": [
+        "good_soil_yield_per_acre"
+      ],
+      "solution_line_template": "At {good_soil_yield_per_acre} bushels per acre, his {good_soil_acres} acres of good soil produced {good_soil_acres} * {good_soil_yield_per_acre} = <<{good_soil_yield_per_acre}*{good_soil_acres}={good_soil_total_bushels}>>{good_soil_total_bushels} bushels of corn."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "clay_soil_yield_per_acre",
+      "question_inputs": [
+        "clay_soil_yield_divisor"
+      ],
+      "solution_line_template": "If good soil produces {good_soil_yield_per_acre} bushels per acre, clay-rich soil produces {good_soil_yield_per_acre} / {clay_soil_yield_divisor} = <<{good_soil_yield_per_acre}/{clay_soil_yield_divisor}={clay_soil_yield_per_acre}>>{clay_soil_yield_per_acre} bushels per acre."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "clay_soil_total_bushels",
+      "question_inputs": [],
+      "solution_line_template": "At {clay_soil_yield_per_acre} bushels per acre, his {clay_acres} acres of clay-rich soil produced {clay_acres} * {clay_soil_yield_per_acre} = <<{clay_soil_yield_per_acre}*{clay_acres}={clay_soil_total_bushels}>>{clay_soil_total_bushels} bushels of corn."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_bushels",
+      "question_inputs": [],
+      "solution_line_template": "Altogether, his land produced {good_soil_total_bushels} + {clay_soil_total_bushels} = <<{good_soil_total_bushels}+{clay_soil_total_bushels}={total_bushels}>>{total_bushels} bushels of corn."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jorge has 60 * (1/3) = <<60*(1/3)=20>>20 acres of clay-rich soil.",
+    "L2": "He has 60 - 20 = <<60-20=3>>3 acres of good soil.",
+    "L3": "At 400 bushels per acre, his 3 acres of good soil produced 3 * 400 = <<400*3=1200>>1200 bushels of corn.",
+    "L4": "If good soil produces 400 bushels per acre, clay-rich soil produces 400 / 2 = <<400/2=200>>200 bushels per acre.",
+    "L5": "At 200 bushels per acre, his 20 acres of clay-rich soil produced 20 * 200 = <<200*20=4000>>4000 bushels of corn.",
+    "L6": "Altogether, his land produced 1200 + 4000 = <<1200+4000=5200>>5200 bushels of corn.",
+    "FA": "#### 5200"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": 1889957874773667474,
+  "model_name": "google_gemini-2.5-flash"
+}

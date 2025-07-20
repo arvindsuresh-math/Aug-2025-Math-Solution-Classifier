@@ -1,0 +1,78 @@
+{
+  "index": 3632,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "He bought 2*50=<<2*50=100>>100 pages",
+    "L2": "It cost 5*100=<<5*100=500>>500 cents",
+    "L3": "So he spent 500/100=<<500/100=5>>5 cents per page"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3632.\n    Returns: the cost per page in cents.\n    \"\"\"\n    # L1\n    num_notebooks = 2 # 2 notebooks\n    pages_per_notebook = 50 # 50 pages each\n    total_pages = num_notebooks * pages_per_notebook\n\n    # L2\n    cost_dollars = 5 # $5\n    cents_per_dollar = 100 # WK\n    total_cost_cents = cost_dollars * cents_per_dollar\n\n    # L3\n    cost_per_page_cents = total_cost_cents / total_pages\n\n    # FA\n    answer = cost_per_page_cents\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cost_cents",
+    "operand_to_replace": "cost_dollars",
+    "replacement_variable": "cents_per_dollar"
+  },
+  "correct_trace": {
+    "num_notebooks": 2,
+    "pages_per_notebook": 50,
+    "total_pages": 100,
+    "cost_dollars": 5,
+    "cents_per_dollar": 100,
+    "total_cost_cents": 500,
+    "cost_per_page_cents": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "num_notebooks": 2,
+    "pages_per_notebook": 50,
+    "total_pages": 100,
+    "cost_dollars": 5,
+    "cents_per_dollar": 100,
+    "total_cost_cents": 10000,
+    "cost_per_page_cents": 100.0,
+    "answer": 100.0
+  },
+  "correct_value": 500,
+  "flawed_value": 10000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_pages",
+      "question_inputs": [
+        "num_notebooks",
+        "pages_per_notebook"
+      ],
+      "solution_line_template": "He bought {num_notebooks}*{pages_per_notebook}=<<{num_notebooks}*{pages_per_notebook}={total_pages}>>{total_pages} pages"
+    },
+    {
+      "WK_inputs": [
+        "cents_per_dollar"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_cost_cents",
+      "question_inputs": [
+        "cost_dollars"
+      ],
+      "solution_line_template": "It cost {cost_dollars}*{cents_per_dollar}=<<{cost_dollars}*{cents_per_dollar}={total_cost_cents}>>{total_cost_cents} cents"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cost_per_page_cents",
+      "question_inputs": [],
+      "solution_line_template": "So he spent {total_cost_cents}/{total_pages}=<<{total_cost_cents}/{total_pages}={cost_per_page_cents}>>{cost_per_page_cents} cents per page"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He bought 2*50=<<2*50=100>>100 pages",
+    "L2": "It cost 100*100=<<100*100=10000>>10000 cents",
+    "L3": "So he spent 10000/100=<<10000/100=100>>100 cents per page",
+    "FA": "#### 100"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'cents_per_dollar' (100) was used instead of 'cost_dollars' (5).",
+  "repro_seed": 6862824746819195717,
+  "model_name": "google_gemini-2.5-flash"
+}

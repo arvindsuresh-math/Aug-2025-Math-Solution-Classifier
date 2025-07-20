@@ -1,0 +1,78 @@
+{
+  "index": 3315,
+  "original_solution_mapping": {
+    "FA": "#### 375",
+    "L1": "The factory due to shortages will produce 200 - 50 = <<200-50=150>>150 cars.",
+    "L2": "Due to the pandemic, they will now produce 150 / 2 = <<150/2=75>>75 cars.",
+    "L3": "The company will have to manufacture 75 * 5 = <<75*5=375>>375 doors."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3315.\n    Returns: the total number of doors the factory will produce.\n    \"\"\"\n    # L1\n    initial_production = 200 # planning to produce 200 cars\n    shortage_reduction = 50 # decreased the production by 50 cars\n    cars_after_shortage = initial_production - shortage_reduction\n\n    # L2\n    pandemic_reduction_divisor = 2 # cut production by another 50%\n    cars_after_pandemic = cars_after_shortage / pandemic_reduction_divisor\n\n    # L3\n    doors_per_car = 5 # cars with 5 doors\n    total_doors = cars_after_pandemic * doors_per_car\n\n    # FA\n    answer = total_doors\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_doors",
+    "operand_to_replace": "doors_per_car",
+    "replacement_variable": "pandemic_reduction_divisor"
+  },
+  "correct_trace": {
+    "initial_production": 200,
+    "shortage_reduction": 50,
+    "cars_after_shortage": 150,
+    "pandemic_reduction_divisor": 2,
+    "cars_after_pandemic": 75.0,
+    "doors_per_car": 5,
+    "total_doors": 375.0,
+    "answer": 375.0
+  },
+  "flawed_trace": {
+    "initial_production": 200,
+    "shortage_reduction": 50,
+    "cars_after_shortage": 150,
+    "pandemic_reduction_divisor": 2,
+    "cars_after_pandemic": 75.0,
+    "doors_per_car": 5,
+    "total_doors": 150.0,
+    "answer": 150.0
+  },
+  "correct_value": 375.0,
+  "flawed_value": 150.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cars_after_shortage",
+      "question_inputs": [
+        "initial_production",
+        "shortage_reduction"
+      ],
+      "solution_line_template": "The factory due to shortages will produce {initial_production} - {shortage_reduction} = <<{initial_production}-{shortage_reduction}={cars_after_shortage}>>{cars_after_shortage} cars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cars_after_pandemic",
+      "question_inputs": [
+        "pandemic_reduction_divisor"
+      ],
+      "solution_line_template": "Due to the pandemic, they will now produce {cars_after_shortage} / {pandemic_reduction_divisor} = <<{cars_after_shortage}/{pandemic_reduction_divisor}={cars_after_pandemic}>>{cars_after_pandemic} cars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_doors",
+      "question_inputs": [
+        "doors_per_car"
+      ],
+      "solution_line_template": "The company will have to manufacture {cars_after_pandemic} * {doors_per_car} = <<{cars_after_pandemic}*{doors_per_car}={total_doors}>>{total_doors} doors."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The factory due to shortages will produce 200 - 50 = <<200-50=150>>150 cars.",
+    "L2": "Due to the pandemic, they will now produce 150 / 2 = <<150/2=75>>75 cars.",
+    "L3": "The company will have to manufacture 75 * 2 = <<75*2=150>>150 doors.",
+    "FA": "#### 150"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'pandemic_reduction_divisor' (2) was used instead of 'doors_per_car' (5).",
+  "repro_seed": 7395783902850193575,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,64 @@
+{
+  "index": 1330,
+  "original_solution_mapping": {
+    "FA": "#### 45",
+    "L1": "Roy is <<36=36>>36 inches tall",
+    "L2": "Joe is 3+36=<<3+36=39>>39 inches tall",
+    "L3": "Sara is 6+39=<<6+39=45>>45 inches tall"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1330.\n    Returns: Sara's height in inches.\n    \"\"\"\n    # L2\n    roy_height = 36 # If Roy is 36 inches tall\n    joe_taller_than_roy = 3 # Joe is 3 inches taller than his friend Roy\n    joe_height = joe_taller_than_roy + roy_height\n\n    # L3\n    sara_taller_than_joe = 6 # Sara is 6 inches taller than her brother Joe\n    sara_height = sara_taller_than_joe + joe_height\n\n    # FA\n    answer = sara_height\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "joe_height",
+    "operand_to_replace": "joe_taller_than_roy",
+    "replacement_variable": "roy_height"
+  },
+  "correct_trace": {
+    "roy_height": 36,
+    "joe_taller_than_roy": 3,
+    "joe_height": 39,
+    "sara_taller_than_joe": 6,
+    "sara_height": 45,
+    "answer": 45
+  },
+  "flawed_trace": {
+    "roy_height": 36,
+    "joe_taller_than_roy": 3,
+    "joe_height": 72,
+    "sara_taller_than_joe": 6,
+    "sara_height": 78,
+    "answer": 78
+  },
+  "correct_value": 39,
+  "flawed_value": 72,
+  "logical_steps": [
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "roy_height",
+        "joe_taller_than_roy"
+      ],
+      "WK_inputs": [],
+      "output_variable": "joe_height",
+      "solution_line_template": "Joe is {joe_taller_than_roy}+{roy_height}=<<{joe_taller_than_roy}+{roy_height}={joe_height}>>{joe_height} inches tall"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "sara_taller_than_joe"
+      ],
+      "WK_inputs": [],
+      "output_variable": "sara_height",
+      "solution_line_template": "Sara is {sara_taller_than_joe}+{joe_height}=<<{sara_taller_than_joe}+{joe_height}={sara_height}>>{sara_height} inches tall"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "Joe is 36+36=<<36+36=72>>72 inches tall",
+    "L3": "Sara is 6+72=<<6+72=78>>78 inches tall",
+    "FA": "#### 78"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'roy_height' (36) was used instead of 'joe_taller_than_roy' (3).",
+  "repro_seed": -6745082694216497059,
+  "model_name": "google_gemini-2.5-flash"
+}

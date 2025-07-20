@@ -1,0 +1,66 @@
+{
+  "index": 5962,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "The purchases he made totaled $30 + $10 + $5 = $<<30+10+5=45>>45",
+    "L2": "He should pay $45, but he only paid $43, so $45 - $43 = $<<45-43=2>>2 was the discount they gave him"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5962.\n    Returns: the amount of discount given in dollars.\n    \"\"\"\n    # L1\n    tshirt_price = 30 # a t-shirt for $30\n    backpack_price = 10 # a backpack for $10\n    cap_price = 5 # a blue cap for $5\n    total_purchases = tshirt_price + backpack_price + cap_price\n\n    # L2\n    amount_paid = 43 # he only spent $43\n    discount_amount = total_purchases - amount_paid\n\n    # FA\n    answer = discount_amount\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "discount_amount",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x3143d11d0>"
+  },
+  "correct_trace": {
+    "tshirt_price": 30,
+    "backpack_price": 10,
+    "cap_price": 5,
+    "total_purchases": 45,
+    "amount_paid": 43,
+    "discount_amount": 2,
+    "answer": 2
+  },
+  "flawed_trace": {
+    "tshirt_price": 30,
+    "backpack_price": 10,
+    "cap_price": 5,
+    "total_purchases": 45,
+    "amount_paid": 43,
+    "discount_amount": 88,
+    "answer": 88
+  },
+  "correct_value": 2,
+  "flawed_value": 88,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_purchases",
+      "question_inputs": [
+        "tshirt_price",
+        "backpack_price",
+        "cap_price"
+      ],
+      "solution_line_template": "The purchases he made totaled ${tshirt_price} + ${backpack_price} + ${cap_price} = $<<{tshirt_price}+{backpack_price}+{cap_price}={total_purchases}>>{total_purchases}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "discount_amount",
+      "question_inputs": [
+        "amount_paid"
+      ],
+      "solution_line_template": "He should pay ${total_purchases}, but he only paid ${amount_paid}, so ${total_purchases} - ${amount_paid} = $<<{total_purchases}-{amount_paid}={discount_amount}>>{discount_amount} was the discount they gave him"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The purchases he made totaled $30 + $10 + $5 = $<<30+10+5=45>>45",
+    "L2": "He should pay $45, but he only paid $43, so $45 - $43 = $<<45-43=88>>88 was the discount they gave him",
+    "FA": "#### 88"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 229127872032411504,
+  "model_name": "google_gemini-2.5-flash"
+}

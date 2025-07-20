@@ -1,0 +1,76 @@
+{
+  "index": 6840,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "On Monday, he spent half of $80 leaving him with $80-(1/2)*$80 = $<<80-(1/2)*80=40>>40",
+    "L2": "On Tuesday, he spent 1/5th of $40 leaving $40-(1/5)*40 = $<<40-(1/5)*40=32>>32",
+    "L3": "On Wednesday, he spent 3/8ths of $32 leaving $32-(3/8)*$32 = $20"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6840.\n    Returns: the amount of money Bob has left.\n    \"\"\"\n    # L1\n    initial_money = 80 # Bob started out the week with $80\n    monday_fraction = Fraction(1, 2) # half the money\n    money_after_monday = initial_money - (monday_fraction * initial_money)\n\n    # L2\n    tuesday_fraction = Fraction(1, 5) # one-fifth of the amount left from Monday\n    money_after_tuesday = money_after_monday - (tuesday_fraction * money_after_monday)\n\n    # L3\n    wednesday_fraction = Fraction(3, 8) # 3/8ths of the amount left from Tuesday\n    money_after_wednesday = money_after_tuesday - (wednesday_fraction * money_after_tuesday)\n\n    # FA\n    answer = money_after_wednesday\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "money_after_wednesday",
+    "replacement_variable": "money_after_monday"
+  },
+  "correct_trace": {
+    "initial_money": 80,
+    "monday_fraction": "1/2",
+    "money_after_monday": "40",
+    "tuesday_fraction": "1/5",
+    "money_after_tuesday": "32",
+    "wednesday_fraction": "3/8",
+    "money_after_wednesday": "20",
+    "answer": "20"
+  },
+  "flawed_trace": {
+    "initial_money": 80,
+    "monday_fraction": "1/2",
+    "money_after_monday": "40",
+    "tuesday_fraction": "1/5",
+    "money_after_tuesday": "32",
+    "wednesday_fraction": "3/8",
+    "money_after_wednesday": "20",
+    "answer": "40"
+  },
+  "correct_value": "20",
+  "flawed_value": "40",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_after_monday",
+      "question_inputs": [
+        "initial_money",
+        "monday_fraction"
+      ],
+      "solution_line_template": "On Monday, he spent half of ${initial_money} leaving him with ${initial_money}-({monday_fraction})*${initial_money} = $<<{initial_money}-({monday_fraction})*{initial_money}={money_after_monday}>>{money_after_monday}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_after_tuesday",
+      "question_inputs": [
+        "tuesday_fraction"
+      ],
+      "solution_line_template": "On Tuesday, he spent {tuesday_fraction}th of ${money_after_monday} leaving ${money_after_monday}-({tuesday_fraction})*{money_after_monday} = $<<{money_after_monday}-({tuesday_fraction})*{money_after_monday}={money_after_tuesday}>>{money_after_tuesday}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "money_after_wednesday",
+      "question_inputs": [
+        "wednesday_fraction"
+      ],
+      "solution_line_template": "On Wednesday, he spent {wednesday_fraction}ths of ${money_after_tuesday} leaving ${money_after_tuesday}-({wednesday_fraction})*${money_after_tuesday} = ${money_after_wednesday}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Monday, he spent half of $80 leaving him with $80-(1/2)*$80 = $<<80-(1/2)*80=40>>40",
+    "FA": "#### 40"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'money_after_monday' (value: 40) was reported instead of 'money_after_wednesday' (value: 20).",
+  "repro_seed": 3722406916554633119,
+  "model_name": "google_gemini-2.5-flash"
+}

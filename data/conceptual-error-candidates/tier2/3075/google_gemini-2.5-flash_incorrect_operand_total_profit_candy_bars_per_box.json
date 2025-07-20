@@ -1,0 +1,77 @@
+{
+  "index": 3075,
+  "original_solution_mapping": {
+    "FA": "#### 25",
+    "L1": "He makes 1.5-1=$<<1.5-1=.5>>.5 from each candy bar",
+    "L2": "He sells 5*10=<<5*10=50>>50 candy bars",
+    "L3": "So he makes 50*.5=$<<50*.5=25>>25"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3075.\n    Returns: the total profit James makes from the sales.\n    \"\"\"\n    # L1\n    selling_price_per_bar = 1.5 # sells each candy bar for $1.50\n    buying_price_per_bar = 1 # buys each bar for $1\n    profit_per_bar = selling_price_per_bar - buying_price_per_bar\n\n    # L2\n    num_boxes_sold = 5 # sells 5 boxes\n    candy_bars_per_box = 10 # Each box has 10 candy bars\n    total_candy_bars_sold = num_boxes_sold * candy_bars_per_box\n\n    # L3\n    total_profit = total_candy_bars_sold * profit_per_bar\n\n    # FA\n    answer = total_profit\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_profit",
+    "operand_to_replace": "total_candy_bars_sold",
+    "replacement_variable": "candy_bars_per_box"
+  },
+  "correct_trace": {
+    "selling_price_per_bar": 1.5,
+    "buying_price_per_bar": 1,
+    "profit_per_bar": 0.5,
+    "num_boxes_sold": 5,
+    "candy_bars_per_box": 10,
+    "total_candy_bars_sold": 50,
+    "total_profit": 25.0,
+    "answer": 25.0
+  },
+  "flawed_trace": {
+    "selling_price_per_bar": 1.5,
+    "buying_price_per_bar": 1,
+    "profit_per_bar": 0.5,
+    "num_boxes_sold": 5,
+    "candy_bars_per_box": 10,
+    "total_candy_bars_sold": 50,
+    "total_profit": 5.0,
+    "answer": 5.0
+  },
+  "correct_value": 25.0,
+  "flawed_value": 5.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "profit_per_bar",
+      "question_inputs": [
+        "selling_price_per_bar",
+        "buying_price_per_bar"
+      ],
+      "solution_line_template": "He makes {selling_price_per_bar}-{buying_price_per_bar}=$<<{selling_price_per_bar}-{buying_price_per_bar}={profit_per_bar}>>{profit_per_bar} from each candy bar"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_candy_bars_sold",
+      "question_inputs": [
+        "num_boxes_sold",
+        "candy_bars_per_box"
+      ],
+      "solution_line_template": "He sells {num_boxes_sold}*{candy_bars_per_box}=<<{num_boxes_sold}*{candy_bars_per_box}={total_candy_bars_sold}>>{total_candy_bars_sold} candy bars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_profit",
+      "question_inputs": [],
+      "solution_line_template": "So he makes {total_candy_bars_sold}*{profit_per_bar}=$<<{total_candy_bars_sold}*{profit_per_bar}={total_profit}>>{total_profit}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He makes 1.5-1=$<<1.5-1=0.5>>0.5 from each candy bar",
+    "L2": "He sells 5*10=<<5*10=50>>50 candy bars",
+    "L3": "So he makes 10*0.5=$<<10*0.5=5>>5",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'candy_bars_per_box' (value: 10) was used instead of 'total_candy_bars_sold' (value: 50).",
+  "repro_seed": 3795207897875095913,
+  "model_name": "google_gemini-2.5-flash"
+}

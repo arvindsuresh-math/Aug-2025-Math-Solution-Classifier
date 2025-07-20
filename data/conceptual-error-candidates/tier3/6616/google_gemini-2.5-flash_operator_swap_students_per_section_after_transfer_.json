@@ -1,0 +1,63 @@
+{
+  "index": 6616,
+  "original_solution_mapping": {
+    "FA": "#### 23",
+    "L1": "There are 50/2 = <<50/2=25>>25 students in each section now.",
+    "L2": "So, there were 25 - 2 = <<25-2=23>>23 students in section Diligence before 2 students were transferred in their section."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6616.\n    Returns: the number of students in section Diligence before the transfer.\n    \"\"\"\n    # L1\n    total_students_combined = 50 # in both sections combined, there are a total of 50 students\n    num_sections = 2 # two sections\n    students_per_section_after_transfer = total_students_combined / num_sections\n\n    # L2\n    students_transferred_to_diligence = 2 # 2 students were transferred from section Industry to Diligence\n    diligence_students_before_transfer = students_per_section_after_transfer - students_transferred_to_diligence\n\n    # FA\n    answer = diligence_students_before_transfer\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "students_per_section_after_transfer",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x31b378a10>"
+  },
+  "correct_trace": {
+    "total_students_combined": 50,
+    "num_sections": 2,
+    "students_per_section_after_transfer": 25.0,
+    "students_transferred_to_diligence": 2,
+    "diligence_students_before_transfer": 23.0,
+    "answer": 23.0
+  },
+  "flawed_trace": {
+    "total_students_combined": 50,
+    "num_sections": 2,
+    "students_per_section_after_transfer": 48,
+    "students_transferred_to_diligence": 2,
+    "diligence_students_before_transfer": 46,
+    "answer": 46
+  },
+  "correct_value": 25.0,
+  "flawed_value": 48,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "students_per_section_after_transfer",
+      "question_inputs": [
+        "total_students_combined",
+        "num_sections"
+      ],
+      "solution_line_template": "There are {total_students_combined}/{num_sections} = <<{total_students_combined}/{num_sections}={students_per_section_after_transfer}>>{students_per_section_after_transfer} students in each section now."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "diligence_students_before_transfer",
+      "question_inputs": [
+        "students_transferred_to_diligence"
+      ],
+      "solution_line_template": "So, there were {students_per_section_after_transfer} - {students_transferred_to_diligence} = <<{students_per_section_after_transfer}-{students_transferred_to_diligence}={diligence_students_before_transfer}>>{diligence_students_before_transfer} students in section Diligence before {students_transferred_to_diligence} students were transferred in their section."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 50/2 = <<50/2=48>>48 students in each section now.",
+    "L2": "So, there were 48 - 2 = <<48-2=46>>46 students in section Diligence before 2 students were transferred in their section.",
+    "FA": "#### 46"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 7113761066208862741,
+  "model_name": "google_gemini-2.5-flash"
+}

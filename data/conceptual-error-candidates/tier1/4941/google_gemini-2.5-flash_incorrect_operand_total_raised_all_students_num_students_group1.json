@@ -1,0 +1,89 @@
+{
+  "index": 4941,
+  "original_solution_mapping": {
+    "FA": "#### 800",
+    "L1": "Ten students raised a total of $20 x 10 = $<<20*10=200>>200.",
+    "L2": "There are 30 - 10 = <<30-10=20>>20 students who raised $30 each.",
+    "L3": "Twenty students raised a total of $30 x 20 = $<<30*20=600>>600.",
+    "L4": "Therefore, the students raised a total of $200 + $600 = $<<200+600=800>>800."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4941.\n    Returns: the total amount of money raised by the students.\n    \"\"\"\n    # L1\n    amount_per_student_group1 = 20 # raised $20 each\n    num_students_group1 = 10 # Ten of the students\n    total_raised_group1 = amount_per_student_group1 * num_students_group1\n\n    # L2\n    total_students = 30 # Thirty students\n    num_students_group2 = total_students - num_students_group1\n\n    # L3\n    amount_per_student_group2 = 30 # raised $30 each\n    total_raised_group2 = amount_per_student_group2 * num_students_group2\n\n    # L4\n    total_raised_all_students = total_raised_group1 + total_raised_group2\n\n    # FA\n    answer = total_raised_all_students\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_raised_all_students",
+    "operand_to_replace": "total_raised_group2",
+    "replacement_variable": "num_students_group1"
+  },
+  "correct_trace": {
+    "amount_per_student_group1": 20,
+    "num_students_group1": 10,
+    "total_raised_group1": 200,
+    "total_students": 30,
+    "num_students_group2": 20,
+    "amount_per_student_group2": 30,
+    "total_raised_group2": 600,
+    "total_raised_all_students": 800,
+    "answer": 800
+  },
+  "flawed_trace": {
+    "amount_per_student_group1": 20,
+    "num_students_group1": 10,
+    "total_raised_group1": 200,
+    "total_students": 30,
+    "num_students_group2": 20,
+    "amount_per_student_group2": 30,
+    "total_raised_group2": 600,
+    "total_raised_all_students": 210,
+    "answer": 210
+  },
+  "correct_value": 800,
+  "flawed_value": 210,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_raised_group1",
+      "question_inputs": [
+        "amount_per_student_group1",
+        "num_students_group1"
+      ],
+      "solution_line_template": "Ten students raised a total of ${amount_per_student_group1} x {num_students_group1} = $<<{amount_per_student_group1}*{num_students_group1}={total_raised_group1}>>{total_raised_group1}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_students_group2",
+      "question_inputs": [
+        "total_students"
+      ],
+      "solution_line_template": "There are {total_students} - {num_students_group1} = <<{total_students}-{num_students_group1}={num_students_group2}>>{num_students_group2} students who raised $30 each."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_raised_group2",
+      "question_inputs": [
+        "amount_per_student_group2"
+      ],
+      "solution_line_template": "Twenty students raised a total of ${amount_per_student_group2} x {num_students_group2} = $<<{amount_per_student_group2}*{num_students_group2}={total_raised_group2}>>{total_raised_group2}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_raised_all_students",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, the students raised a total of ${total_raised_group1} + ${total_raised_group2} = $<<{total_raised_group1}+{total_raised_group2}={total_raised_all_students}>>{total_raised_all_students}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Ten students raised a total of $20 x 10 = $<<20*10=200>>200.",
+    "L2": "There are 30 - 10 = <<30-10=20>>20 students who raised $30 each.",
+    "L3": "Twenty students raised a total of $30 x 20 = $<<30*20=600>>600.",
+    "L4": "Therefore, the students raised a total of $200 + $10 = $<<200+10=210>>210.",
+    "FA": "#### 210"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'num_students_group1' (value: 10) was used instead of 'total_raised_group2' (value: 600).",
+  "repro_seed": -7704961862278544035,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,102 @@
+{
+  "index": 3288,
+  "original_solution_mapping": {
+    "FA": "#### 234",
+    "L1": "She watches 30 minutes of tv per night, 5 days a week so that's 30*5 = <<30*5=150>>150 minutes of tv",
+    "L2": "She watches 2 hours of tv on the weekends and 60 minutes are in 1 hour so that's 2*60 = <<2*60=120>>120 minutes of tv",
+    "L3": "All total she watches 150+120 = <<150+120=270>>270 minutes of tv per week",
+    "L4": "There are 52 weeks in a year and she watches 270 minutes per week so that's 52*270 = <<52*270=14040>>14,040 minutes of tv per year",
+    "L5": "She watches 14,040 minutes of tv and 60 minutes are in an hour so she watches 14040/60 = <<14040/60=234>>234 hours"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3288.\n    Returns: the total hours of TV Flynn watches in 52 weeks.\n    \"\"\"\n    # L1\n    minutes_per_night = 30 # 30 minutes of tv every night\n    weekdays_per_week = 5 # weekdays\n    weekday_minutes_per_week = minutes_per_night * weekdays_per_week\n\n    # L2\n    weekend_hours = 2 # additional 2 hours of TV\n    minutes_per_hour = 60 # WK\n    weekend_minutes_per_week = weekend_hours * minutes_per_hour\n\n    # L3\n    total_minutes_per_week = weekday_minutes_per_week + weekend_minutes_per_week\n\n    # L4\n    total_weeks = 52 # in 52 weeks\n    total_minutes_per_year = total_weeks * total_minutes_per_week\n\n    # L5\n    total_hours_per_year = total_minutes_per_year / minutes_per_hour\n\n    # FA\n    answer = total_hours_per_year\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_hours_per_year",
+    "replacement_variable": "total_minutes_per_week"
+  },
+  "correct_trace": {
+    "minutes_per_night": 30,
+    "weekdays_per_week": 5,
+    "weekday_minutes_per_week": 150,
+    "weekend_hours": 2,
+    "minutes_per_hour": 60,
+    "weekend_minutes_per_week": 120,
+    "total_minutes_per_week": 270,
+    "total_weeks": 52,
+    "total_minutes_per_year": 14040,
+    "total_hours_per_year": 234.0,
+    "answer": 234.0
+  },
+  "flawed_trace": {
+    "minutes_per_night": 30,
+    "weekdays_per_week": 5,
+    "weekday_minutes_per_week": 150,
+    "weekend_hours": 2,
+    "minutes_per_hour": 60,
+    "weekend_minutes_per_week": 120,
+    "total_minutes_per_week": 270,
+    "total_weeks": 52,
+    "total_minutes_per_year": 14040,
+    "total_hours_per_year": 234.0,
+    "answer": 270
+  },
+  "correct_value": 234.0,
+  "flawed_value": 270,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "weekday_minutes_per_week",
+      "question_inputs": [
+        "minutes_per_night",
+        "weekdays_per_week"
+      ],
+      "solution_line_template": "She watches {minutes_per_night} minutes of tv per night, {weekdays_per_week} days a week so that's {minutes_per_night}*{weekdays_per_week} = <<{minutes_per_night}*{weekdays_per_week}={weekday_minutes_per_week}>>{weekday_minutes_per_week} minutes of tv"
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L2",
+      "output_variable": "weekend_minutes_per_week",
+      "question_inputs": [
+        "weekend_hours"
+      ],
+      "solution_line_template": "She watches {weekend_hours} hours of tv on the weekends and {minutes_per_hour} minutes are in 1 hour so that's {weekend_hours}*{minutes_per_hour} = <<{weekend_hours}*{minutes_per_hour}={weekend_minutes_per_week}>>{weekend_minutes_per_week} minutes of tv"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_minutes_per_week",
+      "question_inputs": [],
+      "solution_line_template": "All total she watches {weekday_minutes_per_week}+{weekend_minutes_per_week} = <<{weekday_minutes_per_week}+{weekend_minutes_per_week}={total_minutes_per_week}>>{total_minutes_per_week} minutes of tv per week"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_minutes_per_year",
+      "question_inputs": [
+        "total_weeks"
+      ],
+      "solution_line_template": "There are {total_weeks} weeks in a year and she watches {total_minutes_per_week} minutes per week so that's {total_weeks}*{total_minutes_per_week} = <<{total_weeks}*{total_minutes_per_week}={total_minutes_per_year}>>{total_minutes_per_year} minutes of tv per year"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_hours_per_year",
+      "question_inputs": [],
+      "solution_line_template": "She watches {total_minutes_per_year} minutes of tv and {minutes_per_hour} minutes are in an hour so she watches {total_minutes_per_year}/{minutes_per_hour} = <<{total_minutes_per_year}/{minutes_per_hour}={total_hours_per_year}>>{total_hours_per_year} hours"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She watches 30 minutes of tv per night, 5 days a week so that's 30*5 = <<30*5=150>>150 minutes of tv",
+    "L2": "She watches 2 hours of tv on the weekends and 60 minutes are in 1 hour so that's 2*60 = <<2*60=120>>120 minutes of tv",
+    "L3": "All total she watches 150+120 = <<150+120=270>>270 minutes of tv per week",
+    "FA": "#### 270"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'total_minutes_per_week' (value: 270) was reported instead of 'total_hours_per_year' (value: 234.0).",
+  "repro_seed": 7252539934642190243,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,95 @@
+{
+  "index": 6676,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "The museum has 2 * 12 + 1 = <<2*12+1=25>>25 paintings displayed in the painting wings.",
+    "L2": "There are 4 times as many artifacts displayed, so there are 25 * 4 = <<25*4=100>>100 artifacts.",
+    "L3": "There are 8 wings and 3 are painting wings, so there are 8 - 3 = <<8-3=5>>5 artifact wings.",
+    "L4": "Each artifact wing has 100 / 5 = <<100/5=20>>20 artifacts in it."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6676.\n    Returns: the number of artifacts in each artifact wing.\n    \"\"\"\n    # L1\n    two_other_wings = 2 # the other two wings\n    smaller_paintings_per_wing = 12 # 12 smaller paintings each\n    large_painting_wing = 1 # One painting is so large it takes up an entire wing\n    total_paintings = two_other_wings * smaller_paintings_per_wing + large_painting_wing\n\n    # L2\n    artifact_multiplier = 4 # four times as many artifacts\n    total_artifacts = total_paintings * artifact_multiplier\n\n    # L3\n    total_wings = 8 # eight different wings\n    painting_wings = 3 # Three of the wings are dedicated to paintings\n    artifact_wings = total_wings - painting_wings\n\n    # L4\n    artifacts_per_wing = total_artifacts / artifact_wings\n\n    # FA\n    answer = artifacts_per_wing\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_paintings",
+    "operand_to_replace": "two_other_wings",
+    "replacement_variable": "smaller_paintings_per_wing"
+  },
+  "correct_trace": {
+    "two_other_wings": 2,
+    "smaller_paintings_per_wing": 12,
+    "large_painting_wing": 1,
+    "total_paintings": 25,
+    "artifact_multiplier": 4,
+    "total_artifacts": 100,
+    "total_wings": 8,
+    "painting_wings": 3,
+    "artifact_wings": 5,
+    "artifacts_per_wing": 20.0,
+    "answer": 20.0
+  },
+  "flawed_trace": {
+    "two_other_wings": 2,
+    "smaller_paintings_per_wing": 12,
+    "large_painting_wing": 1,
+    "total_paintings": 145,
+    "artifact_multiplier": 4,
+    "total_artifacts": 580,
+    "total_wings": 8,
+    "painting_wings": 3,
+    "artifact_wings": 5,
+    "artifacts_per_wing": 116.0,
+    "answer": 116.0
+  },
+  "correct_value": 25,
+  "flawed_value": 145,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_paintings",
+      "question_inputs": [
+        "two_other_wings",
+        "smaller_paintings_per_wing",
+        "large_painting_wing"
+      ],
+      "solution_line_template": "The museum has {two_other_wings} * {smaller_paintings_per_wing} + {large_painting_wing} = <<{two_other_wings}*{smaller_paintings_per_wing}+{large_painting_wing}={total_paintings}>>{total_paintings} paintings displayed in the painting wings."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_artifacts",
+      "question_inputs": [
+        "artifact_multiplier"
+      ],
+      "solution_line_template": "There are {artifact_multiplier} times as many artifacts displayed, so there are {total_paintings} * {artifact_multiplier} = <<{total_paintings}*{artifact_multiplier}={total_artifacts}>>{total_artifacts} artifacts."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "artifact_wings",
+      "question_inputs": [
+        "total_wings",
+        "painting_wings"
+      ],
+      "solution_line_template": "There are {total_wings} wings and {painting_wings} are painting wings, so there are {total_wings} - {painting_wings} = <<{total_wings}-{painting_wings}={artifact_wings}>>{artifact_wings} artifact wings."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "artifacts_per_wing",
+      "question_inputs": [],
+      "solution_line_template": "Each artifact wing has {total_artifacts} / {artifact_wings} = <<{total_artifacts}/{artifact_wings}={artifacts_per_wing}>>{artifacts_per_wing} artifacts in it."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The museum has 12 * 12 + 1 = <<12*12+1=145>>145 paintings displayed in the painting wings.",
+    "L2": "There are 4 times as many artifacts displayed, so there are 145 * 4 = <<145*4=580>>580 artifacts.",
+    "L3": "There are 8 wings and 3 are painting wings, so there are 8 - 3 = <<8-3=5>>5 artifact wings.",
+    "L4": "Each artifact wing has 580 / 5 = <<580/5=116>>116 artifacts in it.",
+    "FA": "#### 116"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'smaller_paintings_per_wing' (12) was used instead of 'two_other_wings' (2).",
+  "repro_seed": 3736250307877582093,
+  "model_name": "google_gemini-2.5-flash"
+}

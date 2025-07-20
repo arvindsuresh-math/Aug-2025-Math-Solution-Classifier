@@ -1,0 +1,89 @@
+{
+  "index": 6870,
+  "original_solution_mapping": {
+    "FA": "#### 120",
+    "L1": "Jamie and Oliver will spend $24 x 2 = $<<24*2=48>>48 for the plane ticket.",
+    "L2": "They will spend $12 x 2 = $<<12*2=24>>24 for staying in the hotel per day.",
+    "L3": "So, the total amount they will spend on the hotel for a 3-day stay is $24 x 3 = $<<24*3=72>>72.",
+    "L4": "Therefore, the total amount they will spend on their vacation is $72 + $48 = $<<72+48=120>>120."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6870.\n    Returns: the total money spent on the vacation.\n    \"\"\"\n    # L1\n    cost_plane_ticket_per_person = 24 # $24 for each person\n    num_people = 2 # Jamie and Oliver\n    total_plane_ticket_cost = cost_plane_ticket_per_person * num_people\n\n    # L2\n    cost_hotel_per_person_per_day = 12 # $12 for each person per day\n    cost_hotel_per_day_for_two = cost_hotel_per_person_per_day * num_people\n\n    # L3\n    num_days_stay = 3 # stay for 3 days\n    total_hotel_cost = cost_hotel_per_day_for_two * num_days_stay\n\n    # L4\n    total_vacation_cost = total_hotel_cost + total_plane_ticket_cost\n\n    # FA\n    answer = total_vacation_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_hotel_cost",
+    "operand_to_replace": "num_days_stay",
+    "replacement_variable": "cost_plane_ticket_per_person"
+  },
+  "correct_trace": {
+    "cost_plane_ticket_per_person": 24,
+    "num_people": 2,
+    "total_plane_ticket_cost": 48,
+    "cost_hotel_per_person_per_day": 12,
+    "cost_hotel_per_day_for_two": 24,
+    "num_days_stay": 3,
+    "total_hotel_cost": 72,
+    "total_vacation_cost": 120,
+    "answer": 120
+  },
+  "flawed_trace": {
+    "cost_plane_ticket_per_person": 24,
+    "num_people": 2,
+    "total_plane_ticket_cost": 48,
+    "cost_hotel_per_person_per_day": 12,
+    "cost_hotel_per_day_for_two": 24,
+    "num_days_stay": 3,
+    "total_hotel_cost": 576,
+    "total_vacation_cost": 624,
+    "answer": 624
+  },
+  "correct_value": 72,
+  "flawed_value": 576,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_plane_ticket_cost",
+      "question_inputs": [
+        "cost_plane_ticket_per_person",
+        "num_people"
+      ],
+      "solution_line_template": "Jamie and Oliver will spend ${cost_plane_ticket_per_person} x {num_people} = $<<{cost_plane_ticket_per_person}*{num_people}={total_plane_ticket_cost}>>{total_plane_ticket_cost} for the plane ticket."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cost_hotel_per_day_for_two",
+      "question_inputs": [
+        "cost_hotel_per_person_per_day"
+      ],
+      "solution_line_template": "They will spend ${cost_hotel_per_person_per_day} x {num_people} = $<<{cost_hotel_per_person_per_day}*{num_people}={cost_hotel_per_day_for_two}>>{cost_hotel_per_day_for_two} for staying in the hotel per day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_hotel_cost",
+      "question_inputs": [
+        "num_days_stay"
+      ],
+      "solution_line_template": "So, the total amount they will spend on the hotel for a {num_days_stay}-day stay is ${cost_hotel_per_day_for_two} x {num_days_stay} = $<<{cost_hotel_per_day_for_two}*{num_days_stay}={total_hotel_cost}>>{total_hotel_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_vacation_cost",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, the total amount they will spend on their vacation is ${total_hotel_cost} + ${total_plane_ticket_cost} = $<<{total_hotel_cost}+{total_plane_ticket_cost}={total_vacation_cost}>>{total_vacation_cost}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jamie and Oliver will spend $24 x 2 = $<<24*2=48>>48 for the plane ticket.",
+    "L2": "They will spend $12 x 2 = $<<12*2=24>>24 for staying in the hotel per day.",
+    "L3": "So, the total amount they will spend on the hotel for a 24-day stay is $24 x 24 = $<<24*24=576>>576.",
+    "L4": "Therefore, the total amount they will spend on their vacation is $576 + $48 = $<<576+48=624>>624.",
+    "FA": "#### 624"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'cost_plane_ticket_per_person' (24) was used instead of 'num_days_stay' (3).",
+  "repro_seed": 2698294497337427070,
+  "model_name": "google_gemini-2.5-flash"
+}

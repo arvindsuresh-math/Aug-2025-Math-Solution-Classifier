@@ -1,0 +1,107 @@
+{
+  "index": 7263,
+  "original_solution_mapping": {
+    "FA": "#### 35",
+    "L1": "Sidney has 3 adult cats * 1 can of food = <<3*1=3>>3 cans of food per day.",
+    "L2": "Sidney's adult cats will need 3 cans * 7 days = <<3*7=21>>21 cans for the week.",
+    "L3": "Sidney has 4 kittens * 3/4 cup of food = <<4*3/4=3>>3 cans of food per day.",
+    "L4": "Sidney's kittens will need 3 cans * 7 days = <<3*7=21>>21 cans for the week.",
+    "L5": "Sidney will need to buy 21 cans + 21 cans - 7 cans = <<21+21-7=35>>35 cans."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7263.\n    Returns: the number of additional cans of food Sidney needs to buy.\n    \"\"\"\n    # L1\n    adult_cats = 3 # 3 adult cats\n    cans_per_adult_cat = 1 # 1 can of food per day\n    adult_cat_food_per_day = adult_cats * cans_per_adult_cat\n\n    # L2\n    num_days = 7 # for 7 days\n    adult_cat_food_per_week = adult_cat_food_per_day * num_days\n\n    # L3\n    num_kittens = 4 # 4 kittens\n    cans_per_kitten_fraction = Fraction(3, 4) # 3/4 of a can per day\n    kitten_food_per_day = num_kittens * cans_per_kitten_fraction\n\n    # L4\n    kitten_food_per_week = kitten_food_per_day * num_days\n\n    # L5\n    initial_cans = 7 # 7 cans of cat food\n    additional_cans_needed = adult_cat_food_per_week + kitten_food_per_week - initial_cans\n\n    # FA\n    answer = additional_cans_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "adult_cat_food_per_day",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x31b711f90>"
+  },
+  "correct_trace": {
+    "adult_cats": 3,
+    "cans_per_adult_cat": 1,
+    "adult_cat_food_per_day": 3,
+    "num_days": 7,
+    "adult_cat_food_per_week": 21,
+    "num_kittens": 4,
+    "cans_per_kitten_fraction": "3/4",
+    "kitten_food_per_day": "3",
+    "kitten_food_per_week": "21",
+    "initial_cans": 7,
+    "additional_cans_needed": "35",
+    "answer": "35"
+  },
+  "flawed_trace": {
+    "adult_cats": 3,
+    "cans_per_adult_cat": 1,
+    "adult_cat_food_per_day": 4,
+    "num_days": 7,
+    "adult_cat_food_per_week": 28,
+    "num_kittens": 4,
+    "cans_per_kitten_fraction": "3/4",
+    "kitten_food_per_day": "3",
+    "kitten_food_per_week": "21",
+    "initial_cans": 7,
+    "additional_cans_needed": "42",
+    "answer": "42"
+  },
+  "correct_value": 3,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "adult_cat_food_per_day",
+      "question_inputs": [
+        "adult_cats",
+        "cans_per_adult_cat"
+      ],
+      "solution_line_template": "Sidney has {adult_cats} adult cats * {cans_per_adult_cat} can of food = <<{adult_cats}*{cans_per_adult_cat}={adult_cat_food_per_day}>>{adult_cat_food_per_day} cans of food per day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "adult_cat_food_per_week",
+      "question_inputs": [
+        "num_days"
+      ],
+      "solution_line_template": "Sidney's adult cats will need {adult_cat_food_per_day} cans * {num_days} days = <<{adult_cat_food_per_day}*{num_days}={adult_cat_food_per_week}>>{adult_cat_food_per_week} cans for the week."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "kitten_food_per_day",
+      "question_inputs": [
+        "num_kittens",
+        "cans_per_kitten_fraction"
+      ],
+      "solution_line_template": "Sidney has {num_kittens} kittens * {cans_per_kitten_fraction} cup of food = <<{num_kittens}*{cans_per_kitten_fraction}={kitten_food_per_day}>>{kitten_food_per_day} cans of food per day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "kitten_food_per_week",
+      "question_inputs": [],
+      "solution_line_template": "Sidney's kittens will need {kitten_food_per_day} cans * {num_days} days = <<{kitten_food_per_day}*{num_days}={kitten_food_per_week}>>{kitten_food_per_week} cans for the week."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "additional_cans_needed",
+      "question_inputs": [
+        "initial_cans"
+      ],
+      "solution_line_template": "Sidney will need to buy {adult_cat_food_per_week} cans + {kitten_food_per_week} cans - {initial_cans} cans = <<{adult_cat_food_per_week}+{kitten_food_per_week}-{initial_cans}={additional_cans_needed}>>{additional_cans_needed} cans."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Sidney has 3 adult cats * 1 can of food = <<3*1=4>>4 cans of food per day.",
+    "L2": "Sidney's adult cats will need 4 cans * 7 days = <<4*7=28>>28 cans for the week.",
+    "L3": "Sidney has 4 kittens * 3/4 cup of food = <<4*3/4=3>>3 cans of food per day.",
+    "L4": "Sidney's kittens will need 3 cans * 7 days = <<3*7=21>>21 cans for the week.",
+    "L5": "Sidney will need to buy 28 cans + 21 cans - 7 cans = <<28+21-7=42>>42 cans.",
+    "FA": "#### 42"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 268186255427843365,
+  "model_name": "google_gemini-2.5-flash"
+}

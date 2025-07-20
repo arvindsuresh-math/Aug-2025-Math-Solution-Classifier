@@ -1,0 +1,66 @@
+{
+  "index": 3150,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "He needs to earn $150 more dollars because 500 - 200 - 150 = <<500-200-150=150>>150",
+    "L2": "He needs to sell 20 games because 150 / 7.5 = <<150/7.5=20>>20"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3150.\n    Returns: the number of games Percy needs to sell.\n    \"\"\"\n    # L1\n    playstation_cost = 500 # PlayStation, which costs $500\n    birthday_money = 200 # $200 on his birthday\n    christmas_money = 150 # $150 at Christmas\n    money_needed = playstation_cost - birthday_money - christmas_money\n\n    # L2\n    game_price = 7.5 # $7.5 each\n    games_to_sell = money_needed / game_price\n\n    # FA\n    answer = games_to_sell\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "games_to_sell",
+    "operand_to_replace": "game_price",
+    "replacement_variable": "christmas_money"
+  },
+  "correct_trace": {
+    "playstation_cost": 500,
+    "birthday_money": 200,
+    "christmas_money": 150,
+    "money_needed": 150,
+    "game_price": 7.5,
+    "games_to_sell": 20.0,
+    "answer": 20.0
+  },
+  "flawed_trace": {
+    "playstation_cost": 500,
+    "birthday_money": 200,
+    "christmas_money": 150,
+    "money_needed": 150,
+    "game_price": 7.5,
+    "games_to_sell": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 20.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_needed",
+      "question_inputs": [
+        "playstation_cost",
+        "birthday_money",
+        "christmas_money"
+      ],
+      "solution_line_template": "He needs to earn $150 more dollars because {playstation_cost} - {birthday_money} - {christmas_money} = <<{playstation_cost}-{birthday_money}-{christmas_money}={money_needed}>>{money_needed}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "games_to_sell",
+      "question_inputs": [
+        "game_price"
+      ],
+      "solution_line_template": "He needs to sell {games_to_sell} games because {money_needed} / {game_price} = <<{money_needed}/{game_price}={games_to_sell}>>{games_to_sell}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He needs to earn $150 more dollars because 500 - 200 - 150 = <<500-200-150=150>>150",
+    "L2": "He needs to sell 1 games because 150 / 150 = <<150/150=1>>1",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'christmas_money' (150) was used instead of 'game_price' (7.5).",
+  "repro_seed": 1688200995774419266,
+  "model_name": "google_gemini-2.5-flash"
+}

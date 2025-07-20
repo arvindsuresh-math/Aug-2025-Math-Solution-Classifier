@@ -1,0 +1,89 @@
+{
+  "index": 6648,
+  "original_solution_mapping": {
+    "FA": "#### 480",
+    "L1": "Cindi bought 30/0.50 = <<30/0.50=60>>60 pencils.",
+    "L2": "Marcia bought 2*60 = <<2*60=120>>120 pencils.",
+    "L3": "Donna bought 3*120 = <<3*120=360>>360 pencils.",
+    "L4": "Altogether, Donna and Marcia bought 120+360 = <<120+360=480>>480 pencils."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6648.\n    Returns: the total number of pencils Donna and Marcia bought altogether.\n    \"\"\"\n    # L1\n    cindi_spent = 30 # Cindi spent $30\n    pencil_cost = 0.50 # $0.50 pencils\n    cindi_pencils = cindi_spent / pencil_cost\n\n    # L2\n    marcia_multiplier = 2 # double the number of pencils as Cindi did\n    marcia_pencils = marcia_multiplier * cindi_pencils\n\n    # L3\n    donna_multiplier = 3 # 3 times as many pencils as Marcia did\n    donna_pencils = donna_multiplier * marcia_pencils\n\n    # L4\n    total_pencils = marcia_pencils + donna_pencils\n\n    # FA\n    answer = total_pencils\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "cindi_pencils",
+    "operand_to_replace": "cindi_spent",
+    "replacement_variable": "pencil_cost"
+  },
+  "correct_trace": {
+    "cindi_spent": 30,
+    "pencil_cost": 0.5,
+    "cindi_pencils": 60.0,
+    "marcia_multiplier": 2,
+    "marcia_pencils": 120.0,
+    "donna_multiplier": 3,
+    "donna_pencils": 360.0,
+    "total_pencils": 480.0,
+    "answer": 480.0
+  },
+  "flawed_trace": {
+    "cindi_spent": 30,
+    "pencil_cost": 0.5,
+    "cindi_pencils": 1.0,
+    "marcia_multiplier": 2,
+    "marcia_pencils": 2.0,
+    "donna_multiplier": 3,
+    "donna_pencils": 6.0,
+    "total_pencils": 8.0,
+    "answer": 8.0
+  },
+  "correct_value": 60.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cindi_pencils",
+      "question_inputs": [
+        "cindi_spent",
+        "pencil_cost"
+      ],
+      "solution_line_template": "Cindi bought {cindi_spent}/{pencil_cost} = <<{cindi_spent}/{pencil_cost}={cindi_pencils}>>{cindi_pencils} pencils."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "marcia_pencils",
+      "question_inputs": [
+        "marcia_multiplier"
+      ],
+      "solution_line_template": "Marcia bought {marcia_multiplier}*{cindi_pencils} = <<{marcia_multiplier}*{cindi_pencils}={marcia_pencils}>>{marcia_pencils} pencils."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "donna_pencils",
+      "question_inputs": [
+        "donna_multiplier"
+      ],
+      "solution_line_template": "Donna bought {donna_multiplier}*{marcia_pencils} = <<{donna_multiplier}*{marcia_pencils}={donna_pencils}>>{donna_pencils} pencils."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_pencils",
+      "question_inputs": [],
+      "solution_line_template": "Altogether, Donna and Marcia bought {marcia_pencils}+{donna_pencils} = <<{marcia_pencils}+{donna_pencils}={total_pencils}>>{total_pencils} pencils."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Cindi bought 0.5/0.5 = <<0.5/0.5=1>>1 pencils.",
+    "L2": "Marcia bought 2*1 = <<2*1=2>>2 pencils.",
+    "L3": "Donna bought 3*2 = <<3*2=6>>6 pencils.",
+    "L4": "Altogether, Donna and Marcia bought 2+6 = <<2+6=8>>8 pencils.",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'pencil_cost' (0.5) was used instead of 'cindi_spent' (30).",
+  "repro_seed": -8611011032291068987,
+  "model_name": "google_gemini-2.5-flash"
+}

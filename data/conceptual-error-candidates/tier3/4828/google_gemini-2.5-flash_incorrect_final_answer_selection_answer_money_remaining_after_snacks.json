@@ -1,0 +1,83 @@
+{
+  "index": 4828,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "John spent $20 x 1/5 = $<<20*1/5=4>>4 on snacks.",
+    "L2": "He had $20 - $4 = $<<20-4=16>>16 remaining.",
+    "L3": "He spent $16 x 3/4 = $<<16*3/4=12>>12 on his necessities.",
+    "L4": "So, John is left with $16 - $12 = $<<16-12=4>>4."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4828.\n    Returns: the amount of money John has left.\n    \"\"\"\n    # L1\n    initial_money = 20 # John had $20\n    snack_fraction = Fraction(1, 5) # 1/5 of his money on snacks\n    money_spent_on_snacks = initial_money * snack_fraction\n\n    # L2\n    money_remaining_after_snacks = initial_money - money_spent_on_snacks\n\n    # L3\n    necessities_fraction = Fraction(3, 4) # 3/4 of the remaining money on necessities\n    money_spent_on_necessities = money_remaining_after_snacks * necessities_fraction\n\n    # L4\n    money_left = money_remaining_after_snacks - money_spent_on_necessities\n\n    # FA\n    answer = money_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "money_left",
+    "replacement_variable": "money_remaining_after_snacks"
+  },
+  "correct_trace": {
+    "initial_money": 20,
+    "snack_fraction": "1/5",
+    "money_spent_on_snacks": "4",
+    "money_remaining_after_snacks": "16",
+    "necessities_fraction": "3/4",
+    "money_spent_on_necessities": "12",
+    "money_left": "4",
+    "answer": "4"
+  },
+  "flawed_trace": {
+    "initial_money": 20,
+    "snack_fraction": "1/5",
+    "money_spent_on_snacks": "4",
+    "money_remaining_after_snacks": "16",
+    "necessities_fraction": "3/4",
+    "money_spent_on_necessities": "12",
+    "money_left": "4",
+    "answer": "16"
+  },
+  "correct_value": "4",
+  "flawed_value": "16",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_spent_on_snacks",
+      "question_inputs": [
+        "initial_money",
+        "snack_fraction"
+      ],
+      "solution_line_template": "John spent ${initial_money} x {snack_fraction} = $<<{initial_money}*{snack_fraction}={money_spent_on_snacks}>>{money_spent_on_snacks} on snacks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_remaining_after_snacks",
+      "question_inputs": [],
+      "solution_line_template": "He had ${initial_money} - ${money_spent_on_snacks} = $<<{initial_money}-{money_spent_on_snacks}={money_remaining_after_snacks}>>{money_remaining_after_snacks} remaining."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "money_spent_on_necessities",
+      "question_inputs": [
+        "necessities_fraction"
+      ],
+      "solution_line_template": "He spent ${money_remaining_after_snacks} x {necessities_fraction} = $<<{money_remaining_after_snacks}*{necessities_fraction}={money_spent_on_necessities}>>{money_spent_on_necessities} on his necessities."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "money_left",
+      "question_inputs": [],
+      "solution_line_template": "So, John is left with ${money_remaining_after_snacks} - ${money_spent_on_necessities} = $<<{money_remaining_after_snacks}-{money_spent_on_necessities}={money_left}>>{money_left}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "John spent $20 x 1/5 = $<<20*1/5=4>>4 on snacks.",
+    "L2": "He had $20 - $4 = $<<20-4=16>>16 remaining.",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'money_remaining_after_snacks' (value: 16) was reported instead of 'money_left' (value: 4).",
+  "repro_seed": -3208733298117060755,
+  "model_name": "google_gemini-2.5-flash"
+}

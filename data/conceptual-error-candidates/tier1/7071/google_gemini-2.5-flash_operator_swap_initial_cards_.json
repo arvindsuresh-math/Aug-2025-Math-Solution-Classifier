@@ -1,0 +1,64 @@
+{
+  "index": 7071,
+  "original_solution_mapping": {
+    "FA": "#### 84",
+    "L1": "Keith's dog ate half of his collection so he had 2 * 46 cards = <<2*46=92>>92 cards before his dog ate them.",
+    "L2": "Keith had added 8 new cards to his collection so he had 92 cards - 8 = <<92-8=84>>84 cards to start with."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7071.\n    Returns: the number of cards Keith started with.\n    \"\"\"\n    # L1\n    cards_left = 46 # There are now only 46 cards left\n    multiplier_for_half = 2 # WK\n    cards_before_dog_ate = multiplier_for_half * cards_left\n\n    # L2\n    new_cards_added = 8 # bought 8 new baseball trading cards\n    initial_cards = cards_before_dog_ate - new_cards_added\n\n    # FA\n    answer = initial_cards\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "initial_cards",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x3152a5190>"
+  },
+  "correct_trace": {
+    "cards_left": 46,
+    "multiplier_for_half": 2,
+    "cards_before_dog_ate": 92,
+    "new_cards_added": 8,
+    "initial_cards": 84,
+    "answer": 84
+  },
+  "flawed_trace": {
+    "cards_left": 46,
+    "multiplier_for_half": 2,
+    "cards_before_dog_ate": 92,
+    "new_cards_added": 8,
+    "initial_cards": 100,
+    "answer": 100
+  },
+  "correct_value": 84,
+  "flawed_value": 100,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "multiplier_for_half"
+      ],
+      "line_number": "L1",
+      "output_variable": "cards_before_dog_ate",
+      "question_inputs": [
+        "cards_left"
+      ],
+      "solution_line_template": "Keith's dog ate half of his collection so he had {multiplier_for_half} * {cards_left} cards = <<{multiplier_for_half}*{cards_left}={cards_before_dog_ate}>>{cards_before_dog_ate} cards before his dog ate them."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "initial_cards",
+      "question_inputs": [
+        "new_cards_added"
+      ],
+      "solution_line_template": "Keith had added {new_cards_added} new cards to his collection so he had {cards_before_dog_ate} cards - {new_cards_added} = <<{cards_before_dog_ate}-{new_cards_added}={initial_cards}>>{initial_cards} cards to start with."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Keith's dog ate half of his collection so he had 2 * 46 cards = <<2*46=92>>92 cards before his dog ate them.",
+    "L2": "Keith had added 8 new cards to his collection so he had 92 cards - 8 = <<92-8=100>>100 cards to start with.",
+    "FA": "#### 100"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -4047957363648570531,
+  "model_name": "google_gemini-2.5-flash"
+}

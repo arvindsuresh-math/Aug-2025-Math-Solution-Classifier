@@ -1,0 +1,63 @@
+{
+  "index": 6191,
+  "original_solution_mapping": {
+    "FA": "#### 40,000",
+    "L1": "The number of seats sold was 0.75*60,000=<<0.75*60000=45000>>45,000.",
+    "L2": "And 45,000-5,000=<<45000-5000=40000>>40,000."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6191.\n    Returns: the number of fans who attended the show.\n    \"\"\"\n    # L1\n    percent_seats_sold = 0.75 # 75% of the seats\n    total_seats = 60000 # seats 60,000 fans\n    seats_sold = percent_seats_sold * total_seats\n\n    # L2\n    fans_stayed_home = 5000 # 5,000 fans stayed home\n    attended_show = seats_sold - fans_stayed_home\n\n    # FA\n    answer = attended_show\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "attended_show",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x315cd6190>"
+  },
+  "correct_trace": {
+    "percent_seats_sold": 0.75,
+    "total_seats": 60000,
+    "seats_sold": 45000.0,
+    "fans_stayed_home": 5000,
+    "attended_show": 40000.0,
+    "answer": 40000.0
+  },
+  "flawed_trace": {
+    "percent_seats_sold": 0.75,
+    "total_seats": 60000,
+    "seats_sold": 45000.0,
+    "fans_stayed_home": 5000,
+    "attended_show": 50000.0,
+    "answer": 50000.0
+  },
+  "correct_value": 40000.0,
+  "flawed_value": 50000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "seats_sold",
+      "question_inputs": [
+        "percent_seats_sold",
+        "total_seats"
+      ],
+      "solution_line_template": "The number of seats sold was {percent_seats_sold}*{total_seats}=<<{percent_seats_sold}*{total_seats}={seats_sold}>>{seats_sold}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "attended_show",
+      "question_inputs": [
+        "fans_stayed_home"
+      ],
+      "solution_line_template": "And {seats_sold}-{fans_stayed_home}=<<{seats_sold}-{fans_stayed_home}={attended_show}>>{attended_show}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The number of seats sold was 0.75*60000=<<0.75*60000=45000>>45000.",
+    "L2": "And 45000-5000=<<45000-5000=50000>>50000.",
+    "FA": "#### 50000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -419199375437235837,
+  "model_name": "google_gemini-2.5-flash"
+}

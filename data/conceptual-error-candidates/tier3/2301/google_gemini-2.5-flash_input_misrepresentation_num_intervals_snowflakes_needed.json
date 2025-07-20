@@ -1,0 +1,78 @@
+{
+  "index": 2301,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "Without the first 10 snowflakes, there are 58-10=<<58-10=48>>48 snowflakes needed.",
+    "L2": "48/4=12 5-minute intervals are needed to get the additional snowflakes.",
+    "L3": "12*5=<<12*5=60>>60 minutes passed."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2301.\n    Returns: the total number of minutes passed.\n    \"\"\"\n    # L1\n    total_snowflakes_target = 58 # 58 snowflakes\n    initial_snowflakes = 10 # 10 snowflakes at first\n    snowflakes_needed = total_snowflakes_target - initial_snowflakes\n\n    # L2\n    snowflakes_per_interval = 4 # an additional 4 snowflakes every 5 minutes\n    num_intervals = snowflakes_needed / snowflakes_per_interval\n\n    # L3\n    minutes_per_interval = 5 # every 5 minutes\n    total_minutes_passed = num_intervals * minutes_per_interval\n\n    # FA\n    answer = total_minutes_passed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "num_intervals",
+    "operand_to_replace": "snowflakes_per_interval",
+    "replacement_variable": "snowflakes_needed"
+  },
+  "correct_trace": {
+    "total_snowflakes_target": 58,
+    "initial_snowflakes": 10,
+    "snowflakes_needed": 48,
+    "snowflakes_per_interval": 4,
+    "num_intervals": 12.0,
+    "minutes_per_interval": 5,
+    "total_minutes_passed": 60.0,
+    "answer": 60.0
+  },
+  "flawed_trace": {
+    "total_snowflakes_target": 58,
+    "initial_snowflakes": 10,
+    "snowflakes_needed": 48,
+    "snowflakes_per_interval": 4,
+    "num_intervals": 1.0,
+    "minutes_per_interval": 5,
+    "total_minutes_passed": 5.0,
+    "answer": 5.0
+  },
+  "correct_value": 12.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "snowflakes_needed",
+      "question_inputs": [
+        "total_snowflakes_target",
+        "initial_snowflakes"
+      ],
+      "solution_line_template": "Without the first {initial_snowflakes} snowflakes, there are {total_snowflakes_target}-{initial_snowflakes}=<<{total_snowflakes_target}-{initial_snowflakes}={snowflakes_needed}>>{snowflakes_needed} snowflakes needed."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_intervals",
+      "question_inputs": [
+        "snowflakes_per_interval"
+      ],
+      "solution_line_template": "{snowflakes_needed}/{snowflakes_per_interval}={num_intervals} 5-minute intervals are needed to get the additional snowflakes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_minutes_passed",
+      "question_inputs": [
+        "minutes_per_interval"
+      ],
+      "solution_line_template": "{num_intervals}*{minutes_per_interval}=<<{num_intervals}*{minutes_per_interval}={total_minutes_passed}>>{total_minutes_passed} minutes passed."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Without the first 10 snowflakes, there are 58-10=<<58-10=48>>48 snowflakes needed.",
+    "L2": "48/48=1 5-minute intervals are needed to get the additional snowflakes.",
+    "L3": "1*5=<<1*5=5>>5 minutes passed.",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'snowflakes_needed' (48) was used instead of 'snowflakes_per_interval' (4).",
+  "repro_seed": 4887532054145637421,
+  "model_name": "google_gemini-2.5-flash"
+}

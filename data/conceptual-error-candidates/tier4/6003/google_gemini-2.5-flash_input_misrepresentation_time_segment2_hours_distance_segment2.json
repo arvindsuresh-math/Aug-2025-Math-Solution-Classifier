@@ -1,0 +1,107 @@
+{
+  "index": 6003,
+  "original_solution_mapping": {
+    "FA": "#### 270",
+    "L1": "If in one hour he covers 10 miles and rides for 15 miles at the rate of 10 miles per hour, then the time taken for the 15 miles will be 15/10 = <<15/10=1.5>>1.5 hours.",
+    "L2": "The time in minutes is 1.5 * 60 = <<1.5*60=90>>90 minutes.",
+    "L3": "The time taken for the remaining 20 miles at a rate of 10 miles per hour is 20/10= <<20/10=2>>2 hours.",
+    "L4": "The time in minutes is 2*60 = <<2*60=120>>120 minutes.",
+    "L5": "The total time taken for the whole journey is the first 30 minutes + 90 + 30 minutes for resting +120 minutes = <<30+90+30+120=270>>270 minutes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6003.\n    Returns: the total time in minutes took to travel the whole journey.\n    \"\"\"\n    # L1\n    speed = 10 # 10 miles per hour\n    distance_segment1 = 15 # another 15 miles\n    time_segment1_hours = distance_segment1 / speed\n\n    # L2\n    minutes_per_hour = 60 # WK\n    time_segment1_minutes = time_segment1_hours * minutes_per_hour\n\n    # L3\n    distance_segment2 = 20 # remaining distance of 20 miles\n    time_segment2_hours = distance_segment2 / speed\n\n    # L4\n    time_segment2_minutes = time_segment2_hours * minutes_per_hour\n\n    # L5\n    initial_ride_time_minutes = 30 # for 30 minutes\n    rest_time_minutes = 30 # rests for 30 minutes\n    total_journey_time_minutes = initial_ride_time_minutes + time_segment1_minutes + rest_time_minutes + time_segment2_minutes\n\n    # FA\n    answer = total_journey_time_minutes\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "time_segment2_hours",
+    "operand_to_replace": "speed",
+    "replacement_variable": "distance_segment2"
+  },
+  "correct_trace": {
+    "speed": 10,
+    "distance_segment1": 15,
+    "time_segment1_hours": 1.5,
+    "minutes_per_hour": 60,
+    "time_segment1_minutes": 90.0,
+    "distance_segment2": 20,
+    "time_segment2_hours": 2.0,
+    "time_segment2_minutes": 120.0,
+    "initial_ride_time_minutes": 30,
+    "rest_time_minutes": 30,
+    "total_journey_time_minutes": 270.0,
+    "answer": 270.0
+  },
+  "flawed_trace": {
+    "speed": 10,
+    "distance_segment1": 15,
+    "time_segment1_hours": 1.5,
+    "minutes_per_hour": 60,
+    "time_segment1_minutes": 90.0,
+    "distance_segment2": 20,
+    "time_segment2_hours": 1.0,
+    "time_segment2_minutes": 60.0,
+    "initial_ride_time_minutes": 30,
+    "rest_time_minutes": 30,
+    "total_journey_time_minutes": 210.0,
+    "answer": 210.0
+  },
+  "correct_value": 2.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "time_segment1_hours",
+      "question_inputs": [
+        "speed",
+        "distance_segment1"
+      ],
+      "solution_line_template": "If in one hour he covers {speed} miles and rides for {distance_segment1} miles at the rate of {speed} miles per hour, then the time taken for the {distance_segment1} miles will be {distance_segment1}/{speed} = <<{distance_segment1}/{speed}={time_segment1_hours}>>{time_segment1_hours} hours."
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L2",
+      "output_variable": "time_segment1_minutes",
+      "question_inputs": [],
+      "solution_line_template": "The time in minutes is {time_segment1_hours} * {minutes_per_hour} = <<{time_segment1_hours}*{minutes_per_hour}={time_segment1_minutes}>>{time_segment1_minutes} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "time_segment2_hours",
+      "question_inputs": [
+        "distance_segment2"
+      ],
+      "solution_line_template": "The time taken for the remaining {distance_segment2} miles at a rate of {speed} miles per hour is {distance_segment2}/{speed}= <<{distance_segment2}/{speed}={time_segment2_hours}>>{time_segment2_hours} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "time_segment2_minutes",
+      "question_inputs": [],
+      "solution_line_template": "The time in minutes is {time_segment2_hours}*{minutes_per_hour} = <<{time_segment2_hours}*{minutes_per_hour}={time_segment2_minutes}>>{time_segment2_minutes} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_journey_time_minutes",
+      "question_inputs": [
+        "initial_ride_time_minutes",
+        "rest_time_minutes"
+      ],
+      "solution_line_template": "The total time taken for the whole journey is the first {initial_ride_time_minutes} minutes + {time_segment1_minutes} + {rest_time_minutes} minutes for resting +{time_segment2_minutes} minutes = <<{initial_ride_time_minutes}+{time_segment1_minutes}+{rest_time_minutes}+{time_segment2_minutes}={total_journey_time_minutes}>>{total_journey_time_minutes} minutes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If in one hour he covers 10 miles and rides for 15 miles at the rate of 10 miles per hour, then the time taken for the 15 miles will be 15/10 = <<15/10=1.5>>1.5 hours.",
+    "L2": "The time in minutes is 1.5 * 60 = <<1.5*60=90>>90 minutes.",
+    "L3": "The time taken for the remaining 20 miles at a rate of 20 miles per hour is 20/20= <<20/20=1>>1 hours.",
+    "L4": "The time in minutes is 1*60 = <<1*60=60>>60 minutes.",
+    "L5": "The total time taken for the whole journey is the first 30 minutes + 90 + 30 minutes for resting +60 minutes = <<30+90+30+60=210>>210 minutes.",
+    "FA": "#### 210"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'distance_segment2' (20) was used instead of 'speed' (10).",
+  "repro_seed": 2584086110817687120,
+  "model_name": "google_gemini-2.5-flash"
+}

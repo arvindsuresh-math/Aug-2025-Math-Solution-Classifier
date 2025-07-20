@@ -1,0 +1,93 @@
+{
+  "index": 2364,
+  "original_solution_mapping": {
+    "FA": "#### 27",
+    "L1": "The total percentage the class needs to get is 18.75 because 25 x .75 = <<25*.75=18.75>>18.75",
+    "L2": "The total percentage the class has absent the one student is <<18.48=18.48>>18.48",
+    "L3": "The lowest the absent student can get and still have a pizza party is 27% because (18.75-18.48)x 100 = <<(18.75-18.48)*100=27>>27"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2364.\n    Returns: the lowest grade the absent student can get for the class to still get a pizza party.\n    \"\"\"\n    # L1\n    total_students = 25 # 25 students in the class\n    target_average_score_percent = 75 # higher than 75%\n    target_average_score_decimal = target_average_score_percent / 100 # WK\n    required_total_score_sum = total_students * target_average_score_decimal\n\n    # L2\n    absent_student_count = 1 # One student is absent\n    students_who_took_test = total_students - absent_student_count\n    average_score_taken_test_percent = 77 # average score of the students who took the test was 77%\n    average_score_taken_test_decimal = average_score_taken_test_percent / 100 # WK\n    current_total_score_sum = students_who_took_test * average_score_taken_test_decimal\n\n    # L3\n    percent_conversion_factor = 100 # WK\n    score_needed_decimal = required_total_score_sum - current_total_score_sum\n    lowest_grade_absent_student_percent = score_needed_decimal * percent_conversion_factor\n\n    # FA\n    answer = lowest_grade_absent_student_percent\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "lowest_grade_absent_student_percent",
+    "operand_to_replace": "score_needed_decimal",
+    "replacement_variable": "students_who_took_test"
+  },
+  "correct_trace": {
+    "total_students": 25,
+    "target_average_score_percent": 75,
+    "target_average_score_decimal": 0.75,
+    "required_total_score_sum": 18.75,
+    "absent_student_count": 1,
+    "students_who_took_test": 24,
+    "average_score_taken_test_percent": 77,
+    "average_score_taken_test_decimal": 0.77,
+    "current_total_score_sum": 18.48,
+    "percent_conversion_factor": 100,
+    "score_needed_decimal": 0.2699999999999996,
+    "lowest_grade_absent_student_percent": 26.999999999999957,
+    "answer": 26.999999999999957
+  },
+  "flawed_trace": {
+    "total_students": 25,
+    "target_average_score_percent": 75,
+    "target_average_score_decimal": 0.75,
+    "required_total_score_sum": 18.75,
+    "absent_student_count": 1,
+    "students_who_took_test": 24,
+    "average_score_taken_test_percent": 77,
+    "average_score_taken_test_decimal": 0.77,
+    "current_total_score_sum": 18.48,
+    "percent_conversion_factor": 100,
+    "score_needed_decimal": 0.2699999999999996,
+    "lowest_grade_absent_student_percent": 2400,
+    "answer": 2400
+  },
+  "correct_value": 26.999999999999957,
+  "flawed_value": 2400,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "target_average_score_decimal"
+      ],
+      "line_number": "L1",
+      "output_variable": "required_total_score_sum",
+      "question_inputs": [
+        "total_students",
+        "target_average_score_percent"
+      ],
+      "solution_line_template": "The total percentage the class needs to get is {required_total_score_sum} because {total_students} x {target_average_score_decimal} = <<{total_students}*{target_average_score_decimal}={required_total_score_sum}>>{required_total_score_sum}"
+    },
+    {
+      "WK_inputs": [
+        "average_score_taken_test_decimal"
+      ],
+      "line_number": "L2",
+      "output_variable": "current_total_score_sum",
+      "question_inputs": [
+        "absent_student_count",
+        "average_score_taken_test_percent"
+      ],
+      "solution_line_template": "The total percentage the class has absent the one student is <<{current_total_score_sum}={current_total_score_sum}>>{current_total_score_sum}"
+    },
+    {
+      "WK_inputs": [
+        "percent_conversion_factor"
+      ],
+      "line_number": "L3",
+      "output_variable": "lowest_grade_absent_student_percent",
+      "question_inputs": [],
+      "solution_line_template": "The lowest the absent student can get and still have a pizza party is {lowest_grade_absent_student_percent}% because ({required_total_score_sum}-{current_total_score_sum})x {percent_conversion_factor} = <<({required_total_score_sum}-{current_total_score_sum})*{percent_conversion_factor}={lowest_grade_absent_student_percent}>>{lowest_grade_absent_student_percent}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total percentage the class needs to get is 18.75 because 25 x 0.75 = <<25*0.75=18.75>>18.75",
+    "L2": "The total percentage the class has absent the one student is <<18.48=18.48>>18.48",
+    "L3": "The lowest the absent student can get and still have a pizza party is 2400% because (18.75-18.48)x 100 = <<(18.75-18.48)*100=2400>>2400",
+    "FA": "#### 2400"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'students_who_took_test' (value: 24) was used instead of 'score_needed_decimal' (value: 0.2699999999999996).",
+  "repro_seed": -1857141597856802896,
+  "model_name": "google_gemini-2.5-flash"
+}

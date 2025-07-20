@@ -1,0 +1,72 @@
+{
+  "index": 5507,
+  "original_solution_mapping": {
+    "FA": "#### 550",
+    "L1": "He wants to stay 1000*.2=<<1000*.2=200>>200 pounds under the max",
+    "L2": "So he wants to stay under 1000-200=<<1000-200=800>>800 pounds",
+    "L3": "That means he can put 800-250=<<800-250=550>>550 pounds on the bar"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5507.\n    Returns: the amount of weight John can put on the bar.\n    \"\"\"\n    # L1\n    max_support_weight = 1000 # support 1000 pounds\n    safety_margin_percent = 0.2 # stay 20% under that weight\n    safety_margin_amount = max_support_weight * safety_margin_percent\n\n    # L2\n    safe_max_weight = max_support_weight - safety_margin_amount\n\n    # L3\n    johns_weight = 250 # weighs 250 pounds\n    weight_on_bar = safe_max_weight - johns_weight\n\n    # FA\n    answer = weight_on_bar\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "weight_on_bar",
+    "replacement_variable": "safety_margin_amount"
+  },
+  "correct_trace": {
+    "max_support_weight": 1000,
+    "safety_margin_percent": 0.2,
+    "safety_margin_amount": 200.0,
+    "safe_max_weight": 800.0,
+    "johns_weight": 250,
+    "weight_on_bar": 550.0,
+    "answer": 550.0
+  },
+  "flawed_trace": {
+    "max_support_weight": 1000,
+    "safety_margin_percent": 0.2,
+    "safety_margin_amount": 200.0,
+    "safe_max_weight": 800.0,
+    "johns_weight": 250,
+    "weight_on_bar": 550.0,
+    "answer": 200.0
+  },
+  "correct_value": 550.0,
+  "flawed_value": 200.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "safety_margin_amount",
+      "question_inputs": [
+        "max_support_weight",
+        "safety_margin_percent"
+      ],
+      "solution_line_template": "He wants to stay {max_support_weight}*{safety_margin_percent}=<<{max_support_weight}*{safety_margin_percent}={safety_margin_amount}>>{safety_margin_amount} pounds under the max"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "safe_max_weight",
+      "question_inputs": [],
+      "solution_line_template": "So he wants to stay under {max_support_weight}-{safety_margin_amount}=<<{max_support_weight}-{safety_margin_amount}={safe_max_weight}>>{safe_max_weight} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "weight_on_bar",
+      "question_inputs": [
+        "johns_weight"
+      ],
+      "solution_line_template": "That means he can put {safe_max_weight}-{johns_weight}=<<{safe_max_weight}-{johns_weight}={weight_on_bar}>>{weight_on_bar} pounds on the bar"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He wants to stay 1000*0.2=<<1000*0.2=200>>200 pounds under the max",
+    "FA": "#### 200"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'safety_margin_amount' (value: 200.0) was reported instead of 'weight_on_bar' (value: 550.0).",
+  "repro_seed": 1452799975790927649,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,93 @@
+{
+  "index": 7133,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "2 children sold 4 apples each which gives 2*4 = <<2*4=8>>8 apples",
+    "L2": "Another child gave out an additional 7 apples making 8+7 = <<8+7=15>>15 apples removed from the total",
+    "L3": "There were 60 apples left after these, so the original total must have been 15+60 = <<15+60=75>>75 apples",
+    "L4": "Each child collected 15 apples so there are 75/15 = 5 children"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7133.\n    Returns: the number of children the farmer has.\n    \"\"\"\n    # L1\n    children_who_ate = 2 # 2 of the children have eaten\n    apples_eaten_per_child = 4 # eaten 4 apples each\n    apples_eaten_by_two_children = children_who_ate * apples_eaten_per_child\n\n    # L2\n    apples_sold_by_one_child = 7 # another child sold 7 of his apples\n    total_apples_removed = apples_eaten_by_two_children + apples_sold_by_one_child\n\n    # L3\n    apples_left_at_home = 60 # 60 apples left by the time they got home\n    original_total_apples = total_apples_removed + apples_left_at_home\n\n    # L4\n    apples_per_child_bag = 15 # each bag was filled with 15 apples each\n    number_of_children = original_total_apples / apples_per_child_bag\n\n    # FA\n    answer = number_of_children\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "original_total_apples",
+    "operand_to_replace": "apples_left_at_home",
+    "replacement_variable": "total_apples_removed"
+  },
+  "correct_trace": {
+    "children_who_ate": 2,
+    "apples_eaten_per_child": 4,
+    "apples_eaten_by_two_children": 8,
+    "apples_sold_by_one_child": 7,
+    "total_apples_removed": 15,
+    "apples_left_at_home": 60,
+    "original_total_apples": 75,
+    "apples_per_child_bag": 15,
+    "number_of_children": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "children_who_ate": 2,
+    "apples_eaten_per_child": 4,
+    "apples_eaten_by_two_children": 8,
+    "apples_sold_by_one_child": 7,
+    "total_apples_removed": 15,
+    "apples_left_at_home": 60,
+    "original_total_apples": 30,
+    "apples_per_child_bag": 15,
+    "number_of_children": 2.0,
+    "answer": 2.0
+  },
+  "correct_value": 75,
+  "flawed_value": 30,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "apples_eaten_by_two_children",
+      "question_inputs": [
+        "children_who_ate",
+        "apples_eaten_per_child"
+      ],
+      "solution_line_template": "{children_who_ate} children sold {apples_eaten_per_child} apples each which gives {children_who_ate}*{apples_eaten_per_child} = <<{children_who_ate}*{apples_eaten_per_child}={apples_eaten_by_two_children}>>{apples_eaten_by_two_children} apples"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_apples_removed",
+      "question_inputs": [
+        "apples_sold_by_one_child"
+      ],
+      "solution_line_template": "Another child gave out an additional {apples_sold_by_one_child} apples making {apples_eaten_by_two_children}+{apples_sold_by_one_child} = <<{apples_eaten_by_two_children}+{apples_sold_by_one_child}={total_apples_removed}>>{total_apples_removed} apples removed from the total"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "original_total_apples",
+      "question_inputs": [
+        "apples_left_at_home"
+      ],
+      "solution_line_template": "There were {apples_left_at_home} apples left after these, so the original total must have been {total_apples_removed}+{apples_left_at_home} = <<{total_apples_removed}+{apples_left_at_home}={original_total_apples}>>{original_total_apples} apples"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "number_of_children",
+      "question_inputs": [
+        "apples_per_child_bag"
+      ],
+      "solution_line_template": "Each child collected {apples_per_child_bag} apples so there are {original_total_apples}/{apples_per_child_bag} = {number_of_children} children"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "2 children sold 4 apples each which gives 2*4 = <<2*4=8>>8 apples",
+    "L2": "Another child gave out an additional 7 apples making 8+7 = <<8+7=15>>15 apples removed from the total",
+    "L3": "There were 15 apples left after these, so the original total must have been 15+15 = <<15+15=30>>30 apples",
+    "L4": "Each child collected 15 apples so there are 30/15 = 2 children",
+    "FA": "#### 2"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'total_apples_removed' (15) was used instead of 'apples_left_at_home' (60).",
+  "repro_seed": 322348165392415823,
+  "model_name": "google_gemini-2.5-flash"
+}

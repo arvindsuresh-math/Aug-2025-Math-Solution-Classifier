@@ -1,0 +1,66 @@
+{
+  "index": 3313,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "Marco gets 28 / 1/5 = 28 * 5 = 140 cups of tea from a box.",
+    "L2": "At 7 days a week, Marco gets 140 / 7 = <<140/7=20>>20 weeks of daily tea from a box."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3313.\n    Returns: the number of weeks of daily tea Marco gets from a box.\n    \"\"\"\n    # L1\n    total_ounces_in_box = 28 # boxes of 28 ounces\n    ounces_per_cup_fraction = Fraction(1, 5) # a fifth of an ounce\n    reciprocal_of_ounces_per_cup = 5 # derived from '1/5'\n    total_cups_from_box = total_ounces_in_box * reciprocal_of_ounces_per_cup\n\n    # L2\n    days_per_week = 7 # 7 days a week\n    weeks_of_tea = total_cups_from_box / days_per_week\n\n    # FA\n    answer = weeks_of_tea\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "weeks_of_tea",
+    "operand_to_replace": "days_per_week",
+    "replacement_variable": "total_cups_from_box"
+  },
+  "correct_trace": {
+    "total_ounces_in_box": 28,
+    "ounces_per_cup_fraction": "1/5",
+    "reciprocal_of_ounces_per_cup": 5,
+    "total_cups_from_box": 140,
+    "days_per_week": 7,
+    "weeks_of_tea": 20.0,
+    "answer": 20.0
+  },
+  "flawed_trace": {
+    "total_ounces_in_box": 28,
+    "ounces_per_cup_fraction": "1/5",
+    "reciprocal_of_ounces_per_cup": 5,
+    "total_cups_from_box": 140,
+    "days_per_week": 7,
+    "weeks_of_tea": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 20.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_cups_from_box",
+      "question_inputs": [
+        "total_ounces_in_box",
+        "ounces_per_cup_fraction",
+        "reciprocal_of_ounces_per_cup"
+      ],
+      "solution_line_template": "Marco gets {total_ounces_in_box} / {ounces_per_cup_fraction} = {total_ounces_in_box} * {reciprocal_of_ounces_per_cup} = <<{total_ounces_in_box}*{reciprocal_of_ounces_per_cup}={total_cups_from_box}>>{total_cups_from_box} cups of tea from a box."
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L2",
+      "output_variable": "weeks_of_tea",
+      "question_inputs": [],
+      "solution_line_template": "At {days_per_week} days a week, Marco gets {total_cups_from_box} / {days_per_week} = <<{total_cups_from_box}/{days_per_week}={weeks_of_tea}>>{weeks_of_tea} weeks of daily tea from a box."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Marco gets 28 / 1/5 = 28 * 5 = <<28*5=140>>140 cups of tea from a box.",
+    "L2": "At 140 days a week, Marco gets 140 / 140 = <<140/140=1>>1 weeks of daily tea from a box.",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_cups_from_box' (140) was used instead of 'days_per_week' (7).",
+  "repro_seed": 605643489533899007,
+  "model_name": "google_gemini-2.5-flash"
+}

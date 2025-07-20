@@ -1,0 +1,64 @@
+{
+  "index": 7382,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "He needs 80 ounces of steak because 5 x 16 = <<5*16=80>>80",
+    "L2": "He need 4 steaks because 80 / 20 = <<80/20=4>>4"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7382.\n    Returns: the number of steaks Tommy needs to buy.\n    \"\"\"\n    # L1\n    num_family_members = 5 # 5 of them in total\n    ounces_per_pound = 16 # each member wants one pound\n    total_ounces_needed = num_family_members * ounces_per_pound\n\n    # L2\n    ounces_per_steak = 20 # the steaks are 20 ounces each\n    num_steaks_needed = total_ounces_needed / ounces_per_steak\n\n    # FA\n    answer = num_steaks_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "num_steaks_needed",
+    "operand_to_replace": "ounces_per_steak",
+    "replacement_variable": "total_ounces_needed"
+  },
+  "correct_trace": {
+    "num_family_members": 5,
+    "ounces_per_pound": 16,
+    "total_ounces_needed": 80,
+    "ounces_per_steak": 20,
+    "num_steaks_needed": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "num_family_members": 5,
+    "ounces_per_pound": 16,
+    "total_ounces_needed": 80,
+    "ounces_per_steak": 20,
+    "num_steaks_needed": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "ounces_per_pound"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_ounces_needed",
+      "question_inputs": [
+        "num_family_members"
+      ],
+      "solution_line_template": "He needs {total_ounces_needed} ounces of steak because {num_family_members} x {ounces_per_pound} = <<{num_family_members}*{ounces_per_pound}={total_ounces_needed}>>{total_ounces_needed}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_steaks_needed",
+      "question_inputs": [
+        "ounces_per_steak"
+      ],
+      "solution_line_template": "He need {num_steaks_needed} steaks because {total_ounces_needed} / {ounces_per_steak} = <<{total_ounces_needed}/{ounces_per_steak}={num_steaks_needed}>>{num_steaks_needed}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He needs 80 ounces of steak because 5 x 16 = <<5*16=80>>80",
+    "L2": "He need 1 steaks because 80 / 80 = <<80/80=1>>1",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_ounces_needed' (80) was used instead of 'ounces_per_steak' (20).",
+  "repro_seed": 3253103594333702730,
+  "model_name": "google_gemini-2.5-flash"
+}

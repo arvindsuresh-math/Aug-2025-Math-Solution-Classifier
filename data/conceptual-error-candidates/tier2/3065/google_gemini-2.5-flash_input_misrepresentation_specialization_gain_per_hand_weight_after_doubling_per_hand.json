@@ -1,0 +1,90 @@
+{
+  "index": 3065,
+  "original_solution_mapping": {
+    "FA": "#### 352",
+    "L1": "After doubling he was able to hold 80*2=<<80*2=160>>160 kg per hand",
+    "L2": "Specialization gave him another 160*.1=<<160*.1=16>>16 kg",
+    "L3": "So he lifted 160+16=<<160+16=176>>176 kg per hand",
+    "L4": "That means he lifted a total of 352 kg"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3065.\n    Returns: the total weight Tom can hold.\n    \"\"\"\n    # L1\n    initial_weight_per_hand = 80 # 80 kg farmer handles per hand\n    doubling_factor = 2 # WK\n    weight_after_doubling_per_hand = initial_weight_per_hand * doubling_factor\n\n    # L2\n    specialization_percent_decimal = 0.1 # extra 10%\n    specialization_gain_per_hand = weight_after_doubling_per_hand * specialization_percent_decimal\n\n    # L3\n    total_weight_per_hand = weight_after_doubling_per_hand + specialization_gain_per_hand\n\n    # L4\n    num_hands = 2 # WK\n    total_weight_both_hands = total_weight_per_hand * num_hands\n\n    # FA\n    answer = total_weight_both_hands\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "specialization_gain_per_hand",
+    "operand_to_replace": "specialization_percent_decimal",
+    "replacement_variable": "weight_after_doubling_per_hand"
+  },
+  "correct_trace": {
+    "initial_weight_per_hand": 80,
+    "doubling_factor": 2,
+    "weight_after_doubling_per_hand": 160,
+    "specialization_percent_decimal": 0.1,
+    "specialization_gain_per_hand": 16.0,
+    "total_weight_per_hand": 176.0,
+    "num_hands": 2,
+    "total_weight_both_hands": 352.0,
+    "answer": 352.0
+  },
+  "flawed_trace": {
+    "initial_weight_per_hand": 80,
+    "doubling_factor": 2,
+    "weight_after_doubling_per_hand": 160,
+    "specialization_percent_decimal": 0.1,
+    "specialization_gain_per_hand": 25600,
+    "total_weight_per_hand": 25760,
+    "num_hands": 2,
+    "total_weight_both_hands": 51520,
+    "answer": 51520
+  },
+  "correct_value": 16.0,
+  "flawed_value": 25600,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "doubling_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "weight_after_doubling_per_hand",
+      "question_inputs": [
+        "initial_weight_per_hand"
+      ],
+      "solution_line_template": "After doubling he was able to hold {initial_weight_per_hand}*{doubling_factor}=<<{initial_weight_per_hand}*{doubling_factor}={weight_after_doubling_per_hand}>>{weight_after_doubling_per_hand} kg per hand"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "specialization_gain_per_hand",
+      "question_inputs": [
+        "specialization_percent_decimal"
+      ],
+      "solution_line_template": "Specialization gave him another {weight_after_doubling_per_hand}*{specialization_percent_decimal}=<<{weight_after_doubling_per_hand}*{specialization_percent_decimal}={specialization_gain_per_hand}>>{specialization_gain_per_hand} kg"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_weight_per_hand",
+      "question_inputs": [],
+      "solution_line_template": "So he lifted {weight_after_doubling_per_hand}+{specialization_gain_per_hand}=<<{weight_after_doubling_per_hand}+{specialization_gain_per_hand}={total_weight_per_hand}>>{total_weight_per_hand} kg per hand"
+    },
+    {
+      "WK_inputs": [
+        "num_hands"
+      ],
+      "line_number": "L4",
+      "output_variable": "total_weight_both_hands",
+      "question_inputs": [],
+      "solution_line_template": "That means he lifted a total of {total_weight_both_hands} kg"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After doubling he was able to hold 80*2=<<80*2=160>>160 kg per hand",
+    "L2": "Specialization gave him another 160*160=<<160*160=25600>>25600 kg",
+    "L3": "So he lifted 160+25600=<<160+25600=25760>>25760 kg per hand",
+    "L4": "That means he lifted a total of 51520 kg",
+    "FA": "#### 51520"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'weight_after_doubling_per_hand' (160) was used instead of 'specialization_percent_decimal' (0.1).",
+  "repro_seed": -618249122107593069,
+  "model_name": "google_gemini-2.5-flash"
+}

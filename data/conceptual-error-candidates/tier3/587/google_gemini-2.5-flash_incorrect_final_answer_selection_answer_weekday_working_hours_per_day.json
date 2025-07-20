@@ -1,0 +1,80 @@
+{
+  "index": 587,
+  "original_solution_mapping": {
+    "FA": "#### 62",
+    "L1": "On the weekend, Jeff works 3 / 3 = <<3/3=1>>1 hour each day.",
+    "L2": "On the weekdays, he spends 4 * 3 = <<4*3=12>>12 hours working each day.",
+    "L3": "Thus, he spends 2 * 1 + 5 * 12 = <<2*1+5*12=62>>62 hours working each week."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 587.\n    Returns: the total hours Jeff spends working in an entire week.\n    \"\"\"\n    # L1\n    daily_catching_up_hours = 3 # 3 hours every day catching up\n    weekend_catch_up_multiple = 3 # three times as many hours on the weekend catching up with his Facebook pals as he does working\n    weekend_working_hours_per_day = daily_catching_up_hours / weekend_catch_up_multiple\n\n    # L2\n    weekday_work_multiple = 4 # four times as many hours working as he does catching up\n    weekday_working_hours_per_day = weekday_work_multiple * daily_catching_up_hours\n\n    # L3\n    weekend_days = 2 # WK\n    weekday_days = 5 # WK\n    total_working_hours_per_week = weekend_days * weekend_working_hours_per_day + weekday_days * weekday_working_hours_per_day\n\n    # FA\n    answer = total_working_hours_per_week\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_working_hours_per_week",
+    "replacement_variable": "weekday_working_hours_per_day"
+  },
+  "correct_trace": {
+    "daily_catching_up_hours": 3,
+    "weekend_catch_up_multiple": 3,
+    "weekend_working_hours_per_day": 1.0,
+    "weekday_work_multiple": 4,
+    "weekday_working_hours_per_day": 12,
+    "weekend_days": 2,
+    "weekday_days": 5,
+    "total_working_hours_per_week": 62.0,
+    "answer": 62.0
+  },
+  "flawed_trace": {
+    "daily_catching_up_hours": 3,
+    "weekend_catch_up_multiple": 3,
+    "weekend_working_hours_per_day": 1.0,
+    "weekday_work_multiple": 4,
+    "weekday_working_hours_per_day": 12,
+    "weekend_days": 2,
+    "weekday_days": 5,
+    "total_working_hours_per_week": 62.0,
+    "answer": 12
+  },
+  "correct_value": 62.0,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "weekend_working_hours_per_day",
+      "question_inputs": [
+        "daily_catching_up_hours",
+        "weekend_catch_up_multiple"
+      ],
+      "solution_line_template": "On the weekend, Jeff works {daily_catching_up_hours} / {weekend_catch_up_multiple} = <<{daily_catching_up_hours}/{weekend_catch_up_multiple}={weekend_working_hours_per_day}>>{weekend_working_hours_per_day} hour each day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "weekday_working_hours_per_day",
+      "question_inputs": [
+        "weekday_work_multiple"
+      ],
+      "solution_line_template": "On the weekdays, he spends {weekday_work_multiple} * {daily_catching_up_hours} = <<{weekday_work_multiple}*{daily_catching_up_hours}={weekday_working_hours_per_day}>>{weekday_working_hours_per_day} hours working each day."
+    },
+    {
+      "WK_inputs": [
+        "weekend_days",
+        "weekday_days"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_working_hours_per_week",
+      "question_inputs": [],
+      "solution_line_template": "Thus, he spends {weekend_days} * {weekend_working_hours_per_day} + {weekday_days} * {weekday_working_hours_per_day} = <<{weekend_days}*{weekend_working_hours_per_day}+{weekday_days}*{weekday_working_hours_per_day}={total_working_hours_per_week}>>{total_working_hours_per_week} hours working each week."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On the weekend, Jeff works 3 / 3 = <<3/3=1>>1 hour each day.",
+    "L2": "On the weekdays, he spends 4 * 3 = <<4*3=12>>12 hours working each day.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'weekday_working_hours_per_day' (value: 12) was reported instead of 'total_working_hours_per_week' (value: 62.0).",
+  "repro_seed": 782454918119858658,
+  "model_name": "google_gemini-2.5-flash"
+}

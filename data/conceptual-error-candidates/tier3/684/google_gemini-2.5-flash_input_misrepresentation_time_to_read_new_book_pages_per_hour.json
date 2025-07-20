@@ -1,0 +1,63 @@
+{
+  "index": 684,
+  "original_solution_mapping": {
+    "FA": "#### 25",
+    "L1": "Grace can read 200/20 = <<200/20=10>>10 pages in 1 hour.",
+    "L2": "So she can finish a 250-page book in 250/10 = <<250/10=25>>25 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 684.\n    Returns: the time it would take Grace to finish reading the new book.\n    \"\"\"\n    # L1\n    total_pages_initial_book = 200 # a 200-page book\n    time_to_read_initial_book = 20 # in 20 hours\n    pages_per_hour = total_pages_initial_book / time_to_read_initial_book\n\n    # L2\n    pages_new_book = 250 # a 250-page book\n    time_to_read_new_book = pages_new_book / pages_per_hour\n\n    # FA\n    answer = time_to_read_new_book\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "time_to_read_new_book",
+    "operand_to_replace": "pages_new_book",
+    "replacement_variable": "pages_per_hour"
+  },
+  "correct_trace": {
+    "total_pages_initial_book": 200,
+    "time_to_read_initial_book": 20,
+    "pages_per_hour": 10.0,
+    "pages_new_book": 250,
+    "time_to_read_new_book": 25.0,
+    "answer": 25.0
+  },
+  "flawed_trace": {
+    "total_pages_initial_book": 200,
+    "time_to_read_initial_book": 20,
+    "pages_per_hour": 10.0,
+    "pages_new_book": 250,
+    "time_to_read_new_book": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 25.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "pages_per_hour",
+      "question_inputs": [
+        "total_pages_initial_book",
+        "time_to_read_initial_book"
+      ],
+      "solution_line_template": "Grace can read {total_pages_initial_book}/{time_to_read_initial_book} = <<{total_pages_initial_book}/{time_to_read_initial_book}={pages_per_hour}>>{pages_per_hour} pages in 1 hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "time_to_read_new_book",
+      "question_inputs": [
+        "pages_new_book"
+      ],
+      "solution_line_template": "So she can finish a {pages_new_book}/{pages_per_hour} = <<{pages_new_book}/{pages_per_hour}={time_to_read_new_book}>>{time_to_read_new_book} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Grace can read 200/20 = <<200/20=10>>10 pages in 1 hour.",
+    "L2": "So she can finish a 10/10 = <<10/10=1>>1 hours.",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'pages_per_hour' (10.0) was used instead of 'pages_new_book' (250).",
+  "repro_seed": -8139300719708072940,
+  "model_name": "google_gemini-2.5-flash"
+}

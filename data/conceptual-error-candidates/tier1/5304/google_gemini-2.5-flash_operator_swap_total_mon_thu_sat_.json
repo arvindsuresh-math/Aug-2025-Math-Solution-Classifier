@@ -1,0 +1,94 @@
+{
+  "index": 5304,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "Gumball's total water intake on Monday, Thursday, and Saturday is 9 x 3 = <<9*3=27>>27 liters.",
+    "L2": "And his total water intake on Tuesday, Friday, and Sunday is 8 x 3 = <<8*3=24>>24 liters.",
+    "L3": "So his total water intake for 6 days is 24 + 27 = <<24+27=51>>51 liters.",
+    "L4": "Therefore Gumball's water intake on Wednesday is 60 - 51 = <<60-51=9>>9 liters."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5304.\n    Returns: the liters of water Gumball drank on Wednesday.\n    \"\"\"\n    # L1\n    liters_per_day_mon_thu_sat = 9 # drank nine liters of water on Monday, Thursday and Saturday\n    num_days_mon_thu_sat = 3 # WK\n    total_mon_thu_sat = liters_per_day_mon_thu_sat * num_days_mon_thu_sat\n\n    # L2\n    liters_per_day_tue_fri_sun = 8 # 8 liters of water on Tuesday, Friday and Sunday\n    num_days_tue_fri_sun = 3 # WK\n    total_tue_fri_sun = liters_per_day_tue_fri_sun * num_days_tue_fri_sun\n\n    # L3\n    total_six_days = total_tue_fri_sun + total_mon_thu_sat\n\n    # L4\n    total_water_week = 60 # drank 60 liters of water for the week\n    water_wednesday = total_water_week - total_six_days\n\n    # FA\n    answer = water_wednesday\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_mon_thu_sat",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x3159c6090>"
+  },
+  "correct_trace": {
+    "liters_per_day_mon_thu_sat": 9,
+    "num_days_mon_thu_sat": 3,
+    "total_mon_thu_sat": 27,
+    "liters_per_day_tue_fri_sun": 8,
+    "num_days_tue_fri_sun": 3,
+    "total_tue_fri_sun": 24,
+    "total_six_days": 51,
+    "total_water_week": 60,
+    "water_wednesday": 9,
+    "answer": 9
+  },
+  "flawed_trace": {
+    "liters_per_day_mon_thu_sat": 9,
+    "num_days_mon_thu_sat": 3,
+    "total_mon_thu_sat": 3.0,
+    "liters_per_day_tue_fri_sun": 8,
+    "num_days_tue_fri_sun": 3,
+    "total_tue_fri_sun": 24,
+    "total_six_days": 27.0,
+    "total_water_week": 60,
+    "water_wednesday": 33.0,
+    "answer": 33.0
+  },
+  "correct_value": 27,
+  "flawed_value": 3.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "num_days_mon_thu_sat"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_mon_thu_sat",
+      "question_inputs": [
+        "liters_per_day_mon_thu_sat"
+      ],
+      "solution_line_template": "Gumball's total water intake on Monday, Thursday, and Saturday is {liters_per_day_mon_thu_sat} x {num_days_mon_thu_sat} = <<{liters_per_day_mon_thu_sat}*{num_days_mon_thu_sat}={total_mon_thu_sat}>>{total_mon_thu_sat} liters."
+    },
+    {
+      "WK_inputs": [
+        "num_days_tue_fri_sun"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_tue_fri_sun",
+      "question_inputs": [
+        "liters_per_day_tue_fri_sun"
+      ],
+      "solution_line_template": "And his total water intake on Tuesday, Friday, and Sunday is {liters_per_day_tue_fri_sun} x {num_days_tue_fri_sun} = <<{liters_per_day_tue_fri_sun}*{num_days_tue_fri_sun}={total_tue_fri_sun}>>{total_tue_fri_sun} liters."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_six_days",
+      "question_inputs": [],
+      "solution_line_template": "So his total water intake for 6 days is {total_tue_fri_sun} + {total_mon_thu_sat} = <<{total_tue_fri_sun}+{total_mon_thu_sat}={total_six_days}>>{total_six_days} liters."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "water_wednesday",
+      "question_inputs": [
+        "total_water_week"
+      ],
+      "solution_line_template": "Therefore Gumball's water intake on Wednesday is {total_water_week} - {total_six_days} = <<{total_water_week}-{total_six_days}={water_wednesday}>>{water_wednesday} liters."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Gumball's total water intake on Monday, Thursday, and Saturday is 9 x 3 = <<9*3=3>>3 liters.",
+    "L2": "And his total water intake on Tuesday, Friday, and Sunday is 8 x 3 = <<8*3=24>>24 liters.",
+    "L3": "So his total water intake for 6 days is 24 + 3 = <<24+3=27>>27 liters.",
+    "L4": "Therefore Gumball's water intake on Wednesday is 60 - 27 = <<60-27=33>>33 liters.",
+    "FA": "#### 33"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -984088549849439137,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,85 @@
+{
+  "index": 2974,
+  "original_solution_mapping": {
+    "FA": "#### 10,100",
+    "L1": "It takes him 2*49=<<2*49=98>>98 hours to go from knowing how to play to proficient",
+    "L2": "So he spends 98+2=<<98+2=100>>100 hours combined on those",
+    "L3": "So it takes him 100*100=<<100*100=10000>>10,000 hours to become a master from proficient",
+    "L4": "So the total time was 100+10000=<<100+10000=10100>>10,100 hours"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2974.\n    Returns: the total time James spent to become a master.\n    \"\"\"\n    # L1\n    time_to_learn_rules = 2 # 2 hours to learn the rules\n    proficiency_multiplier = 49 # 49 times that long\n    time_to_proficiency = time_to_learn_rules * proficiency_multiplier\n\n    # L2\n    combined_time_to_proficient = time_to_proficiency + time_to_learn_rules\n\n    # L3\n    master_multiplier = 100 # 100 times as much as the combined time\n    time_to_master = master_multiplier * combined_time_to_proficient\n\n    # L4\n    total_time = combined_time_to_proficient + time_to_master\n\n    # FA\n    answer = total_time\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "combined_time_to_proficient",
+    "operand_to_replace": "time_to_learn_rules",
+    "replacement_variable": "time_to_proficiency"
+  },
+  "correct_trace": {
+    "time_to_learn_rules": 2,
+    "proficiency_multiplier": 49,
+    "time_to_proficiency": 98,
+    "combined_time_to_proficient": 100,
+    "master_multiplier": 100,
+    "time_to_master": 10000,
+    "total_time": 10100,
+    "answer": 10100
+  },
+  "flawed_trace": {
+    "time_to_learn_rules": 2,
+    "proficiency_multiplier": 49,
+    "time_to_proficiency": 98,
+    "combined_time_to_proficient": 196,
+    "master_multiplier": 100,
+    "time_to_master": 19600,
+    "total_time": 19796,
+    "answer": 19796
+  },
+  "correct_value": 100,
+  "flawed_value": 196,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "time_to_learn_rules",
+        "proficiency_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "time_to_proficiency",
+      "solution_line_template": "It takes him {time_to_learn_rules}*{proficiency_multiplier}=<<{time_to_learn_rules}*{proficiency_multiplier}={time_to_proficiency}>>{time_to_proficiency} hours to go from knowing how to play to proficient"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "combined_time_to_proficient",
+      "solution_line_template": "So he spends {time_to_proficiency}+{time_to_learn_rules}=<<{time_to_proficiency}+{time_to_learn_rules}={combined_time_to_proficient}>>{combined_time_to_proficient} hours combined on those"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "master_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "time_to_master",
+      "solution_line_template": "So it takes him {master_multiplier}*{combined_time_to_proficient}=<<{master_multiplier}*{combined_time_to_proficient}={time_to_master}>>{time_to_master} hours to become a master from proficient"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_time",
+      "solution_line_template": "So the total time was {combined_time_to_proficient}+{time_to_master}=<<{combined_time_to_proficient}+{time_to_master}={total_time}>>{total_time} hours"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "It takes him 2*49=<<2*49=98>>98 hours to go from knowing how to play to proficient",
+    "L2": "So he spends 98+98=<<98+98=196>>196 hours combined on those",
+    "L3": "So it takes him 100*196=<<100*196=19600>>19600 hours to become a master from proficient",
+    "L4": "So the total time was 196+19600=<<196+19600=19796>>19796 hours",
+    "FA": "#### 19796"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'time_to_proficiency' (98) was used instead of 'time_to_learn_rules' (2).",
+  "repro_seed": -4269686692335852557,
+  "model_name": "google_gemini-2.5-flash"
+}

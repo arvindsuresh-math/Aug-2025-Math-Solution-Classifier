@@ -1,0 +1,83 @@
+{
+  "index": 6634,
+  "original_solution_mapping": {
+    "FA": "#### 450",
+    "L1": "Boys make up 100% - 60% = 40% of the total number of students.",
+    "L2": "The total number of students at the school is 300 / (40/100) = <<300/(40/100)=750>>750 students.",
+    "L3": "Since 60% of the students are female, there are (60/100) * 750 = <<60/100*750=450>>450 female students."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6634.\n    Returns: the number of girls at the school.\n    \"\"\"\n    # L1\n    total_percentage_val = 100 # WK\n    girls_percentage_val = 60 # 60% of the students at school are girls\n    boys_percentage_val = total_percentage_val - girls_percentage_val\n\n    # L2\n    number_of_boys = 300 # the number of boys is 300\n    percentage_denominator = 100 # WK\n    boys_fraction_for_calc = Fraction(boys_percentage_val, percentage_denominator)\n    total_students = number_of_boys / boys_fraction_for_calc\n\n    # L3\n    girls_fraction_for_calc = Fraction(girls_percentage_val, percentage_denominator)\n    number_of_girls = girls_fraction_for_calc * total_students\n\n    # FA\n    answer = number_of_girls\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "girls_fraction_for_calc",
+    "operand_to_replace": "percentage_denominator",
+    "replacement_variable": "boys_fraction_for_calc"
+  },
+  "correct_trace": {
+    "total_percentage_val": 100,
+    "girls_percentage_val": 60,
+    "boys_percentage_val": 40,
+    "number_of_boys": 300,
+    "percentage_denominator": 100,
+    "boys_fraction_for_calc": "2/5",
+    "total_students": "750",
+    "girls_fraction_for_calc": "3/5",
+    "number_of_girls": "450",
+    "answer": "450"
+  },
+  "flawed_trace": {
+    "total_percentage_val": 100,
+    "girls_percentage_val": 60,
+    "boys_percentage_val": 40,
+    "number_of_boys": 300,
+    "percentage_denominator": 100,
+    "boys_fraction_for_calc": "2/5",
+    "total_students": "750",
+    "girls_fraction_for_calc": "150/1",
+    "number_of_girls": "112500",
+    "answer": "112500"
+  },
+  "correct_value": "3/5",
+  "flawed_value": "150/1",
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_percentage_val"
+      ],
+      "line_number": "L1",
+      "output_variable": "boys_percentage_val",
+      "question_inputs": [
+        "girls_percentage_val"
+      ],
+      "solution_line_template": "Boys make up {total_percentage_val}% - {girls_percentage_val}% = {boys_percentage_val}% of the total number of students."
+    },
+    {
+      "WK_inputs": [
+        "percentage_denominator"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_students",
+      "question_inputs": [
+        "number_of_boys"
+      ],
+      "solution_line_template": "The total number of students at the school is {number_of_boys} / ({boys_percentage_val}/{percentage_denominator}) = <<{number_of_boys}/({boys_percentage_val}/{percentage_denominator})={total_students}>>{total_students} students."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "number_of_girls",
+      "question_inputs": [],
+      "solution_line_template": "Since 60% of the students are female, there are ({girls_percentage_val}/{percentage_denominator}) * {total_students} = <<{girls_percentage_val}/{percentage_denominator}*{total_students}={number_of_girls}>>{number_of_girls} female students."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Boys make up 100% - 60% = 40% of the total number of students.",
+    "L2": "The total number of students at the school is 300 / (40/100) = <<300/(40/100)=750>>750 students.",
+    "L3": "Since 60% of the students are female, there are (60/100) * 750 = <<60/100*750=112500>>112500 female students.",
+    "FA": "#### 112500"
+  },
+  "erroneous_line_number": null,
+  "explanation": "Input misrepresentation. The value for 'boys_fraction_for_calc' (40/100) was used instead of 'percentage_denominator' (100).",
+  "repro_seed": 4329158922079629452,
+  "model_name": "google_gemini-2.5-flash"
+}

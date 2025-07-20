@@ -1,0 +1,63 @@
+{
+  "index": 3201,
+  "original_solution_mapping": {
+    "FA": "#### 16000",
+    "L1": "A sheet has 16 cookies, so if each church member baked 10 sheets, they each baked 10 sheets/person * 16 cookies/sheet = <<10*16=160>>160 cookies/person",
+    "L2": "The total number of church members who decided to volunteer is 100, so in total, they baked 160 cookies/person * 100 people = <<100*160=16000>>16000 cookies"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3201.\n    Returns: the total number of cookies baked by the church members.\n    \"\"\"\n    # L1\n    sheets_per_member = 10 # each member baked 10 sheets\n    cookies_per_sheet = 16 # each sheet has 16 cookies\n    cookies_per_member = sheets_per_member * cookies_per_sheet\n\n    # L2\n    num_members = 100 # 100 members\n    total_cookies = cookies_per_member * num_members\n\n    # FA\n    answer = total_cookies\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_cookies",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x316807890>"
+  },
+  "correct_trace": {
+    "sheets_per_member": 10,
+    "cookies_per_sheet": 16,
+    "cookies_per_member": 160,
+    "num_members": 100,
+    "total_cookies": 16000,
+    "answer": 16000
+  },
+  "flawed_trace": {
+    "sheets_per_member": 10,
+    "cookies_per_sheet": 16,
+    "cookies_per_member": 160,
+    "num_members": 100,
+    "total_cookies": 260,
+    "answer": 260
+  },
+  "correct_value": 16000,
+  "flawed_value": 260,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cookies_per_member",
+      "question_inputs": [
+        "sheets_per_member",
+        "cookies_per_sheet"
+      ],
+      "solution_line_template": "A sheet has {cookies_per_sheet} cookies, so if each church member baked {sheets_per_member} sheets, they each baked {sheets_per_member} sheets/person * {cookies_per_sheet} cookies/sheet = <<{sheets_per_member}*{cookies_per_sheet}={cookies_per_member}>>{cookies_per_member} cookies/person"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cookies",
+      "question_inputs": [
+        "num_members"
+      ],
+      "solution_line_template": "The total number of church members who decided to volunteer is {num_members}, so in total, they baked {cookies_per_member} cookies/person * {num_members} people = <<{num_members}*{cookies_per_member}={total_cookies}>>{total_cookies} cookies"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "A sheet has 16 cookies, so if each church member baked 10 sheets, they each baked 10 sheets/person * 16 cookies/sheet = <<10*16=160>>160 cookies/person",
+    "L2": "The total number of church members who decided to volunteer is 100, so in total, they baked 160 cookies/person * 100 people = <<100*160=260>>260 cookies",
+    "FA": "#### 260"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -765491050239157648,
+  "model_name": "google_gemini-2.5-flash"
+}

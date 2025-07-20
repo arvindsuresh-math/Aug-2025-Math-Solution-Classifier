@@ -1,0 +1,87 @@
+{
+  "index": 3528,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "If the box has four dozen bottles of water, there are 4*12 = <<4*12=48>>48 bottles of water in the box",
+    "L2": "After the first half, the 11 players take 11*2 = <<11*2=22>>22 bottles of water from the box.",
+    "L3": "If they take 11 more bottles of water at the end of the game, the number increases to 22+11 = 33 bottles of water taken",
+    "L4": "Without the bottles taken, there are 48-33 =<<48-33=15>>15 bottles of water remaining in the box"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3528.\n    Returns: the number of bottles of water remaining in Samira's box.\n    \"\"\"\n    # L1\n    num_dozen_bottles = 4 # four dozen water bottles\n    dozen = 12 # WK\n    initial_bottles = num_dozen_bottles * dozen\n\n    # L2\n    num_players = 11 # the 11 players\n    bottles_per_player_first_break = 2 # each take two bottles\n    bottles_taken_first_break = num_players * bottles_per_player_first_break\n\n    # L3\n    total_bottles_taken = bottles_taken_first_break + num_players\n\n    # L4\n    remaining_bottles = initial_bottles - total_bottles_taken\n\n    # FA\n    answer = remaining_bottles\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "remaining_bottles",
+    "replacement_variable": "bottles_taken_first_break"
+  },
+  "correct_trace": {
+    "num_dozen_bottles": 4,
+    "dozen": 12,
+    "initial_bottles": 48,
+    "num_players": 11,
+    "bottles_per_player_first_break": 2,
+    "bottles_taken_first_break": 22,
+    "total_bottles_taken": 33,
+    "remaining_bottles": 15,
+    "answer": 15
+  },
+  "flawed_trace": {
+    "num_dozen_bottles": 4,
+    "dozen": 12,
+    "initial_bottles": 48,
+    "num_players": 11,
+    "bottles_per_player_first_break": 2,
+    "bottles_taken_first_break": 22,
+    "total_bottles_taken": 33,
+    "remaining_bottles": 15,
+    "answer": 22
+  },
+  "correct_value": 15,
+  "flawed_value": 22,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "dozen"
+      ],
+      "line_number": "L1",
+      "output_variable": "initial_bottles",
+      "question_inputs": [
+        "num_dozen_bottles"
+      ],
+      "solution_line_template": "If the box has four dozen bottles of water, there are {num_dozen_bottles}*{dozen} = <<{num_dozen_bottles}*{dozen}={initial_bottles}>>{initial_bottles} bottles of water in the box"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "bottles_taken_first_break",
+      "question_inputs": [
+        "num_players",
+        "bottles_per_player_first_break"
+      ],
+      "solution_line_template": "After the first half, the {num_players} players take {num_players}*{bottles_per_player_first_break} = <<{num_players}*{bottles_per_player_first_break}={bottles_taken_first_break}>>{bottles_taken_first_break} bottles of water from the box."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_bottles_taken",
+      "question_inputs": [],
+      "solution_line_template": "If they take {num_players} more bottles of water at the end of the game, the number increases to {bottles_taken_first_break}+{num_players} = {total_bottles_taken} bottles of water taken"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "remaining_bottles",
+      "question_inputs": [],
+      "solution_line_template": "Without the bottles taken, there are {initial_bottles}-{total_bottles_taken} =<<{initial_bottles}-{total_bottles_taken}={remaining_bottles}>>{remaining_bottles} bottles of water remaining in the box"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the box has four dozen bottles of water, there are 4*12 = <<4*12=48>>48 bottles of water in the box",
+    "L2": "After the first half, the 11 players take 11*2 = <<11*2=22>>22 bottles of water from the box.",
+    "FA": "#### 22"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'bottles_taken_first_break' (value: 22) was reported instead of 'remaining_bottles' (value: 15).",
+  "repro_seed": -8612081516053087960,
+  "model_name": "google_gemini-2.5-flash"
+}

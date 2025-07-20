@@ -1,0 +1,90 @@
+{
+  "index": 2182,
+  "original_solution_mapping": {
+    "FA": "#### 80",
+    "L1": "5 pm-6 pm is one hour and they measure service in 15-minute blocks so 60/15 = <<60/15=4>>4 15 min blocks",
+    "L2": "At peak times, they serve 12 cars every 15 minutes so they serve 12*4 = <<12*4=48>>48 cars in 60 minutes",
+    "L3": "Off peak times, 4pm-5 pm, they serve 8 cars every 15 minutes so they serve 8*4 = <<8*4=32>>32 cars in 60 minutes",
+    "L4": "From 4pm-5 pm they serve 32 cars and from 5pm-6 pm they serve 48 cars so they serve 32+48 = 80 cars"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2182.\n    Returns: the total number of customers served from 4 pm - 6 pm.\n    \"\"\"\n    # L1\n    minutes_per_hour = 60 # WK\n    block_duration_minutes = 15 # every 15 minutes\n    num_15_min_blocks_per_hour = minutes_per_hour / block_duration_minutes\n\n    # L2\n    peak_cars_per_block = 12 # 12 cars every 15 minutes\n    peak_cars_per_hour = peak_cars_per_block * num_15_min_blocks_per_hour\n\n    # L3\n    off_peak_cars_per_block = 8 # 8 cars every 15 minutes\n    off_peak_cars_per_hour = off_peak_cars_per_block * num_15_min_blocks_per_hour\n\n    # L4\n    total_cars_served = off_peak_cars_per_hour + peak_cars_per_hour\n\n    # FA\n    answer = total_cars_served\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "num_15_min_blocks_per_hour",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x3147f0350>"
+  },
+  "correct_trace": {
+    "minutes_per_hour": 60,
+    "block_duration_minutes": 15,
+    "num_15_min_blocks_per_hour": 4.0,
+    "peak_cars_per_block": 12,
+    "peak_cars_per_hour": 48.0,
+    "off_peak_cars_per_block": 8,
+    "off_peak_cars_per_hour": 32.0,
+    "total_cars_served": 80.0,
+    "answer": 80.0
+  },
+  "flawed_trace": {
+    "minutes_per_hour": 60,
+    "block_duration_minutes": 15,
+    "num_15_min_blocks_per_hour": 900,
+    "peak_cars_per_block": 12,
+    "peak_cars_per_hour": 10800,
+    "off_peak_cars_per_block": 8,
+    "off_peak_cars_per_hour": 7200,
+    "total_cars_served": 18000,
+    "answer": 18000
+  },
+  "correct_value": 4.0,
+  "flawed_value": 900,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "num_15_min_blocks_per_hour",
+      "question_inputs": [
+        "block_duration_minutes"
+      ],
+      "solution_line_template": "5 pm-6 pm is one hour and they measure service in 15-minute blocks so {minutes_per_hour}/{block_duration_minutes} = <<{minutes_per_hour}/{block_duration_minutes}={num_15_min_blocks_per_hour}>>{num_15_min_blocks_per_hour} 15 min blocks"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "peak_cars_per_hour",
+      "question_inputs": [
+        "peak_cars_per_block"
+      ],
+      "solution_line_template": "At peak times, they serve {peak_cars_per_block} cars every 15 minutes so they serve {peak_cars_per_block}*{num_15_min_blocks_per_hour} = <<{peak_cars_per_block}*{num_15_min_blocks_per_hour}={peak_cars_per_hour}>>{peak_cars_per_hour} cars in 60 minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "off_peak_cars_per_hour",
+      "question_inputs": [
+        "off_peak_cars_per_block"
+      ],
+      "solution_line_template": "Off peak times, 4pm-5 pm, they serve {off_peak_cars_per_block} cars every 15 minutes so they serve {off_peak_cars_per_block}*{num_15_min_blocks_per_hour} = <<{off_peak_cars_per_block}*{num_15_min_blocks_per_hour}={off_peak_cars_per_hour}>>{off_peak_cars_per_hour} cars in 60 minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cars_served",
+      "question_inputs": [],
+      "solution_line_template": "From 4pm-5 pm they serve {off_peak_cars_per_hour} cars and from 5pm-6 pm they serve {peak_cars_per_hour} cars so they serve {off_peak_cars_per_hour}+{peak_cars_per_hour} = {total_cars_served} cars"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "5 pm-6 pm is one hour and they measure service in 15-minute blocks so 60/15 = <<60/15=900>>900 15 min blocks",
+    "L2": "At peak times, they serve 12 cars every 15 minutes so they serve 12*900 = <<12*900=10800>>10800 cars in 60 minutes",
+    "L3": "Off peak times, 4pm-5 pm, they serve 8 cars every 15 minutes so they serve 8*900 = <<8*900=7200>>7200 cars in 60 minutes",
+    "L4": "From 4pm-5 pm they serve 7200 cars and from 5pm-6 pm they serve 10800 cars so they serve 7200+10800 = 18000 cars",
+    "FA": "#### 18000"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 4638327074446324846,
+  "model_name": "google_gemini-2.5-flash"
+}

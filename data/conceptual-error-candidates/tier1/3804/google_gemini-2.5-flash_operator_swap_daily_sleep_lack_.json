@@ -1,0 +1,63 @@
+{
+  "index": 3804,
+  "original_solution_mapping": {
+    "FA": "#### 14",
+    "L1": "Corveus lacks 6 - 4 = <<6-4=2>>2 hours of sleep every day.",
+    "L2": "Therefore, Corveus' total hours of lack of sleep every week is 2 x 7 = <<2*7=14>>14."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3804.\n    Returns: the total hours of sleep Corveus lacks in a week.\n    \"\"\"\n    # L1\n    recommended_sleep_hours = 6 # doctor recommended for him to sleep 6 hours a day\n    current_sleep_hours = 4 # sleeps 4 hours a day\n    daily_sleep_lack = recommended_sleep_hours - current_sleep_hours\n\n    # L2\n    days_in_week = 7 # WK\n    weekly_sleep_lack = daily_sleep_lack * days_in_week\n\n    # FA\n    answer = weekly_sleep_lack\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "daily_sleep_lack",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x31593b290>"
+  },
+  "correct_trace": {
+    "recommended_sleep_hours": 6,
+    "current_sleep_hours": 4,
+    "daily_sleep_lack": 2,
+    "days_in_week": 7,
+    "weekly_sleep_lack": 14,
+    "answer": 14
+  },
+  "flawed_trace": {
+    "recommended_sleep_hours": 6,
+    "current_sleep_hours": 4,
+    "daily_sleep_lack": 10,
+    "days_in_week": 7,
+    "weekly_sleep_lack": 70,
+    "answer": 70
+  },
+  "correct_value": 2,
+  "flawed_value": 10,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "daily_sleep_lack",
+      "question_inputs": [
+        "recommended_sleep_hours",
+        "current_sleep_hours"
+      ],
+      "solution_line_template": "Corveus lacks {recommended_sleep_hours} - {current_sleep_hours} = <<{recommended_sleep_hours}-{current_sleep_hours}={daily_sleep_lack}>>{daily_sleep_lack} hours of sleep every day."
+    },
+    {
+      "WK_inputs": [
+        "days_in_week"
+      ],
+      "line_number": "L2",
+      "output_variable": "weekly_sleep_lack",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, Corveus' total hours of lack of sleep every week is {daily_sleep_lack} x {days_in_week} = <<{daily_sleep_lack}*{days_in_week}={weekly_sleep_lack}>>{weekly_sleep_lack}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Corveus lacks 6 - 4 = <<6-4=10>>10 hours of sleep every day.",
+    "L2": "Therefore, Corveus' total hours of lack of sleep every week is 10 x 7 = <<10*7=70>>70.",
+    "FA": "#### 70"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 903744868064092446,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,109 @@
+{
+  "index": 4563,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "The dolphins are fed 4/2 = <<4/2=2>>2 buckets of fish each day.",
+    "L2": "The sea animals are fed 4 x 5 = <<4*5=20>>20 buckets of fish each day.",
+    "L3": "So, the Mystic Aquarium needs 4 + 2 + 20 = <<4+2+20=26>>26 buckets of fish each day.",
+    "L4": "Thus in a week, it needs 26 x 7 = <<26*7=182>>182 buckets of fish.",
+    "L5": "Therefore, 546 buckets of fish will last for 546/182 = <<546/182=3>>3 weeks."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4563.\n    Returns: the number of weeks 546 buckets of fish will last.\n    \"\"\"\n    # L1\n    sharks_fed_buckets = 4 # sharks are fed four buckets of fish each day\n    dolphins_divisor = 2 # half as many buckets\n    dolphins_fed_buckets = sharks_fed_buckets / dolphins_divisor\n\n    # L2\n    sea_animals_multiplier = 5 # five times as many buckets\n    sea_animals_fed_buckets = sharks_fed_buckets * sea_animals_multiplier\n\n    # L3\n    total_daily_buckets = sharks_fed_buckets + dolphins_fed_buckets + sea_animals_fed_buckets\n\n    # L4\n    days_per_week = 7 # in a week\n    total_weekly_buckets = total_daily_buckets * days_per_week\n\n    # L5\n    total_available_buckets = 546 # 546 buckets of fish\n    weeks_last = total_available_buckets / total_weekly_buckets\n\n    # FA\n    answer = weeks_last\n    return answer\n",
+  "mutation_details": {
+    "type": "incomplete_calculation",
+    "target_variable": "total_daily_buckets",
+    "operand_to_remove": "sea_animals_fed_buckets",
+    "original_operands": [
+      "dolphins_fed_buckets",
+      "sea_animals_fed_buckets",
+      "sharks_fed_buckets"
+    ]
+  },
+  "correct_trace": {
+    "sharks_fed_buckets": 4,
+    "dolphins_divisor": 2,
+    "dolphins_fed_buckets": 2.0,
+    "sea_animals_multiplier": 5,
+    "sea_animals_fed_buckets": 20,
+    "total_daily_buckets": 26.0,
+    "days_per_week": 7,
+    "total_weekly_buckets": 182.0,
+    "total_available_buckets": 546,
+    "weeks_last": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "sharks_fed_buckets": 4,
+    "dolphins_divisor": 2,
+    "dolphins_fed_buckets": 2.0,
+    "sea_animals_multiplier": 5,
+    "sea_animals_fed_buckets": 20,
+    "total_daily_buckets": 6.0,
+    "days_per_week": 7,
+    "total_weekly_buckets": 42.0,
+    "total_available_buckets": 546,
+    "weeks_last": 13.0,
+    "answer": 13.0
+  },
+  "correct_value": 26.0,
+  "flawed_value": 6.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "dolphins_divisor"
+      ],
+      "line_number": "L1",
+      "output_variable": "dolphins_fed_buckets",
+      "question_inputs": [
+        "sharks_fed_buckets"
+      ],
+      "solution_line_template": "The dolphins are fed {sharks_fed_buckets}/{dolphins_divisor} = <<{sharks_fed_buckets}/{dolphins_divisor}={dolphins_fed_buckets}>>{dolphins_fed_buckets} buckets of fish each day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sea_animals_fed_buckets",
+      "question_inputs": [
+        "sea_animals_multiplier"
+      ],
+      "solution_line_template": "The sea animals are fed {sharks_fed_buckets} x {sea_animals_multiplier} = <<{sharks_fed_buckets}*{sea_animals_multiplier}={sea_animals_fed_buckets}>>{sea_animals_fed_buckets} buckets of fish each day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_daily_buckets",
+      "question_inputs": [],
+      "solution_line_template": "So, the Mystic Aquarium needs {sharks_fed_buckets} + {dolphins_fed_buckets} + {sea_animals_fed_buckets} = <<{sharks_fed_buckets}+{dolphins_fed_buckets}+{sea_animals_fed_buckets}={total_daily_buckets}>>{total_daily_buckets} buckets of fish each day."
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L4",
+      "output_variable": "total_weekly_buckets",
+      "question_inputs": [],
+      "solution_line_template": "Thus in a week, it needs {total_daily_buckets} x {days_per_week} = <<{total_daily_buckets}*{days_per_week}={total_weekly_buckets}>>{total_weekly_buckets} buckets of fish."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "weeks_last",
+      "question_inputs": [
+        "total_available_buckets"
+      ],
+      "solution_line_template": "Therefore, {total_available_buckets} buckets of fish will last for {total_available_buckets}/{total_weekly_buckets} = <<{total_available_buckets}/{total_weekly_buckets}={weeks_last}>>{weeks_last} weeks."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The dolphins are fed 4/2 = <<4/2=2>>2 buckets of fish each day.",
+    "L2": "The sea animals are fed 4 x 5 = <<4*5=20>>20 buckets of fish each day.",
+    "L3": "So, the Mystic Aquarium needs 4 + 2 = <<4+2=6>>6 buckets of fish each day.",
+    "L4": "Thus in a week, it needs 6 x 7 = <<6*7=42>>42 buckets of fish.",
+    "L5": "Therefore, 546 buckets of fish will last for 546/42 = <<546/42=13>>13 weeks.",
+    "FA": "#### 13"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incomplete calculation. The term 'sea_animals_fed_buckets' (value: 20) was omitted from the operation.",
+  "repro_seed": -2880437056967927580,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,63 @@
+{
+  "index": 278,
+  "original_solution_mapping": {
+    "FA": "#### 333200",
+    "L1": "The house is 2,400 sq ft and the barn is 1,000 sq ft so it's 2400+1000 = <<2400+1000=3400>>3,400 sq ft",
+    "L2": "The price is $98 per sq ft and it's 3,400 sq ft big so the property costs 98*3400 = $<<98*3400=333200.00>>333,200.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 278.\n    Returns: the total cost of the property.\n    \"\"\"\n    # L1\n    house_area = 2400 # 2,400 sq ft\n    barn_area = 1000 # 1,000 sq ft\n    total_area = house_area + barn_area\n\n    # L2\n    price_per_sq_ft = 98 # $98 per square foot\n    total_property_cost = price_per_sq_ft * total_area\n\n    # FA\n    answer = total_property_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_area",
+    "operand_to_replace": "barn_area",
+    "replacement_variable": "house_area"
+  },
+  "correct_trace": {
+    "house_area": 2400,
+    "barn_area": 1000,
+    "total_area": 3400,
+    "price_per_sq_ft": 98,
+    "total_property_cost": 333200,
+    "answer": 333200
+  },
+  "flawed_trace": {
+    "house_area": 2400,
+    "barn_area": 1000,
+    "total_area": 4800,
+    "price_per_sq_ft": 98,
+    "total_property_cost": 470400,
+    "answer": 470400
+  },
+  "correct_value": 3400,
+  "flawed_value": 4800,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_area",
+      "question_inputs": [
+        "house_area",
+        "barn_area"
+      ],
+      "solution_line_template": "The house is {house_area} sq ft and the barn is {barn_area} sq ft so it's {house_area}+{barn_area} = <<{house_area}+{barn_area}={total_area}>>{total_area} sq ft"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_property_cost",
+      "question_inputs": [
+        "price_per_sq_ft"
+      ],
+      "solution_line_template": "The price is ${price_per_sq_ft} per sq ft and it's {total_area} sq ft big so the property costs {price_per_sq_ft}*{total_area} = $<<{price_per_sq_ft}*{total_area}={total_property_cost}>>{total_property_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The house is 2400 sq ft and the barn is 2400 sq ft so it's 2400+2400 = <<2400+2400=4800>>4800 sq ft",
+    "L2": "The price is $98 per sq ft and it's 4800 sq ft big so the property costs 98*4800 = $<<98*4800=470400>>470400",
+    "FA": "#### 470400"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'house_area' (2400) was used instead of 'barn_area' (1000).",
+  "repro_seed": 7342847669321612080,
+  "model_name": "google_gemini-2.5-flash"
+}

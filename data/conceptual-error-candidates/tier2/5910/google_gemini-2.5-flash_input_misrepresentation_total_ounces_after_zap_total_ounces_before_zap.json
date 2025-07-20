@@ -1,0 +1,63 @@
+{
+  "index": 5910,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "Before the zap, the wife held 5 cups, each with 8 ounces of coffee, for a total of 5*8=<<5*8=40>>40 ounces of coffee.",
+    "L2": "After the zap, the coffee cups and their contents were shrunk by 50%, for a total of 0.5*40=<<0.5*40=20>>20 ounces of coffee."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5910.\n    Returns: the remaining ounces of coffee after being shrink zapped.\n    \"\"\"\n    # L1\n    num_cups = 5 # 5 cups\n    ounces_per_cup = 8 # 8 ounces of fluid\n    total_ounces_before_zap = num_cups * ounces_per_cup\n\n    # L2\n    shrink_factor = 0.5 # shrink by 50%\n    total_ounces_after_zap = shrink_factor * total_ounces_before_zap\n\n    # FA\n    answer = total_ounces_after_zap\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_ounces_after_zap",
+    "operand_to_replace": "shrink_factor",
+    "replacement_variable": "total_ounces_before_zap"
+  },
+  "correct_trace": {
+    "num_cups": 5,
+    "ounces_per_cup": 8,
+    "total_ounces_before_zap": 40,
+    "shrink_factor": 0.5,
+    "total_ounces_after_zap": 20.0,
+    "answer": 20.0
+  },
+  "flawed_trace": {
+    "num_cups": 5,
+    "ounces_per_cup": 8,
+    "total_ounces_before_zap": 40,
+    "shrink_factor": 0.5,
+    "total_ounces_after_zap": 1600,
+    "answer": 1600
+  },
+  "correct_value": 20.0,
+  "flawed_value": 1600,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_ounces_before_zap",
+      "question_inputs": [
+        "num_cups",
+        "ounces_per_cup"
+      ],
+      "solution_line_template": "Before the zap, the wife held {num_cups} cups, each with {ounces_per_cup} ounces of coffee, for a total of {num_cups}*{ounces_per_cup}=<<{num_cups}*{ounces_per_cup}={total_ounces_before_zap}>>{total_ounces_before_zap} ounces of coffee."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_ounces_after_zap",
+      "question_inputs": [
+        "shrink_factor"
+      ],
+      "solution_line_template": "After the zap, the coffee cups and their contents were shrunk by 50%, for a total of {shrink_factor}*{total_ounces_before_zap}=<<{shrink_factor}*{total_ounces_before_zap}={total_ounces_after_zap}>>{total_ounces_after_zap} ounces of coffee."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Before the zap, the wife held 5 cups, each with 8 ounces of coffee, for a total of 5*8=<<5*8=40>>40 ounces of coffee.",
+    "L2": "After the zap, the coffee cups and their contents were shrunk by 50%, for a total of 40*40=<<40*40=1600>>1600 ounces of coffee.",
+    "FA": "#### 1600"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_ounces_before_zap' (40) was used instead of 'shrink_factor' (0.5).",
+  "repro_seed": -8604993881584309499,
+  "model_name": "google_gemini-2.5-flash"
+}

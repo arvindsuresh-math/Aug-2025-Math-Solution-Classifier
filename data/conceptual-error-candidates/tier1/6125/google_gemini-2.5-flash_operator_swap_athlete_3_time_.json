@@ -1,0 +1,89 @@
+{
+  "index": 6125,
+  "original_solution_mapping": {
+    "FA": "#### 200",
+    "L1": "Athlete 2 ran the relay race for 55 + 10 = <<55+10=65>>65 seconds.",
+    "L2": "Athlete 3 ran for 65 - 15 = <<65-15=50>>50 seconds.",
+    "L3": "While athlete 4 finished the relay race for 55 - 25 = <<55-25=30>>30 seconds.",
+    "L4": "So,It take them 55 + 65 + 50 + 30 = <<55+65+50+30=200>>200 seconds to they finish the relay race."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6125.\n    Returns: the total time in seconds it took to finish the relay race.\n    \"\"\"\n    # L1\n    athlete_1_time = 55 # Athlete 1 ran for 55 seconds\n    athlete_2_more_than_1 = 10 # athlete 2 ran 10 seconds more than athlete 1\n    athlete_2_time = athlete_1_time + athlete_2_more_than_1\n\n    # L2\n    athlete_3_less_than_2 = 15 # athlete 3 ran 15 seconds less than athlete 2\n    athlete_3_time = athlete_2_time - athlete_3_less_than_2\n\n    # L3\n    athlete_4_less_than_1 = 25 # athlete four finished it 25 seconds less than athlete 1\n    athlete_4_time = athlete_1_time - athlete_4_less_than_1\n\n    # L4\n    total_time = athlete_1_time + athlete_2_time + athlete_3_time + athlete_4_time\n\n    # FA\n    answer = total_time\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "athlete_3_time",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x3160cf5d0>"
+  },
+  "correct_trace": {
+    "athlete_1_time": 55,
+    "athlete_2_more_than_1": 10,
+    "athlete_2_time": 65,
+    "athlete_3_less_than_2": 15,
+    "athlete_3_time": 50,
+    "athlete_4_less_than_1": 25,
+    "athlete_4_time": 30,
+    "total_time": 200,
+    "answer": 200
+  },
+  "flawed_trace": {
+    "athlete_1_time": 55,
+    "athlete_2_more_than_1": 10,
+    "athlete_2_time": 65,
+    "athlete_3_less_than_2": 15,
+    "athlete_3_time": 80,
+    "athlete_4_less_than_1": 25,
+    "athlete_4_time": 30,
+    "total_time": 230,
+    "answer": 230
+  },
+  "correct_value": 50,
+  "flawed_value": 80,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "athlete_2_time",
+      "question_inputs": [
+        "athlete_1_time",
+        "athlete_2_more_than_1"
+      ],
+      "solution_line_template": "Athlete 2 ran the relay race for {athlete_1_time} + {athlete_2_more_than_1} = <<{athlete_1_time}+{athlete_2_more_than_1}={athlete_2_time}>>{athlete_2_time} seconds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "athlete_3_time",
+      "question_inputs": [
+        "athlete_3_less_than_2"
+      ],
+      "solution_line_template": "Athlete 3 ran for {athlete_2_time} - {athlete_3_less_than_2} = <<{athlete_2_time}-{athlete_3_less_than_2}={athlete_3_time}>>{athlete_3_time} seconds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "athlete_4_time",
+      "question_inputs": [
+        "athlete_4_less_than_1"
+      ],
+      "solution_line_template": "While athlete 4 finished the relay race for {athlete_1_time} - {athlete_4_less_than_1} = <<{athlete_1_time}-{athlete_4_less_than_1}={athlete_4_time}>>{athlete_4_time} seconds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_time",
+      "question_inputs": [],
+      "solution_line_template": "So,It take them {athlete_1_time} + {athlete_2_time} + {athlete_3_time} + {athlete_4_time} = <<{athlete_1_time}+{athlete_2_time}+{athlete_3_time}+{athlete_4_time}={total_time}>>{total_time} seconds to they finish the relay race."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Athlete 2 ran the relay race for 55 + 10 = <<55+10=65>>65 seconds.",
+    "L2": "Athlete 3 ran for 65 - 15 = <<65-15=80>>80 seconds.",
+    "L3": "While athlete 4 finished the relay race for 55 - 25 = <<55-25=30>>30 seconds.",
+    "L4": "So,It take them 55 + 65 + 80 + 30 = <<55+65+80+30=230>>230 seconds to they finish the relay race.",
+    "FA": "#### 230"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -8188134562807080226,
+  "model_name": "google_gemini-2.5-flash"
+}

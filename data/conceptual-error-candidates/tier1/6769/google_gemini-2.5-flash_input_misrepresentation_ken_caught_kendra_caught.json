@@ -1,0 +1,74 @@
+{
+  "index": 6769,
+  "original_solution_mapping": {
+    "FA": "#### 87",
+    "L1": "Ken caught 30*2=<<30*2=60>>60 fish.",
+    "L2": "Ken brought home 60-3=<<60-3=57>>57 fish.",
+    "L3": "Ken and Kendra brought home 57+30=<<57+30=87>>87 fish."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6769.\n    Returns: the total number of fish Ken and Kendra brought home.\n    \"\"\"\n    # L1\n    kendra_caught = 30 # Kendra caught 30 fish\n    ken_multiplier = 2 # twice as many fish as Kendra\n    ken_caught = kendra_caught * ken_multiplier\n\n    # L2\n    ken_released = 3 # Ken released 3 fish\n    ken_brought_home = ken_caught - ken_released\n\n    # L3\n    total_brought_home = ken_brought_home + kendra_caught\n\n    # FA\n    answer = total_brought_home\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "ken_caught",
+    "operand_to_replace": "ken_multiplier",
+    "replacement_variable": "kendra_caught"
+  },
+  "correct_trace": {
+    "kendra_caught": 30,
+    "ken_multiplier": 2,
+    "ken_caught": 60,
+    "ken_released": 3,
+    "ken_brought_home": 57,
+    "total_brought_home": 87,
+    "answer": 87
+  },
+  "flawed_trace": {
+    "kendra_caught": 30,
+    "ken_multiplier": 2,
+    "ken_caught": 900,
+    "ken_released": 3,
+    "ken_brought_home": 897,
+    "total_brought_home": 927,
+    "answer": 927
+  },
+  "correct_value": 60,
+  "flawed_value": 900,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "ken_caught",
+      "question_inputs": [
+        "kendra_caught",
+        "ken_multiplier"
+      ],
+      "solution_line_template": "Ken caught {kendra_caught}*{ken_multiplier}=<<{kendra_caught}*{ken_multiplier}={ken_caught}>>{ken_caught} fish."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "ken_brought_home",
+      "question_inputs": [
+        "ken_released"
+      ],
+      "solution_line_template": "Ken brought home {ken_caught}-{ken_released}=<<{ken_caught}-{ken_released}={ken_brought_home}>>{ken_brought_home} fish."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_brought_home",
+      "question_inputs": [],
+      "solution_line_template": "Ken and Kendra brought home {ken_brought_home}+{kendra_caught}=<<{ken_brought_home}+{kendra_caught}={total_brought_home}>>{total_brought_home} fish."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Ken caught 30*30=<<30*30=900>>900 fish.",
+    "L2": "Ken brought home 900-3=<<900-3=897>>897 fish.",
+    "L3": "Ken and Kendra brought home 897+30=<<897+30=927>>927 fish.",
+    "FA": "#### 927"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'kendra_caught' (30) was used instead of 'ken_multiplier' (2).",
+  "repro_seed": 5288011096624257872,
+  "model_name": "google_gemini-2.5-flash"
+}

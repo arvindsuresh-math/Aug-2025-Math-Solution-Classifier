@@ -1,0 +1,64 @@
+{
+  "index": 6860,
+  "original_solution_mapping": {
+    "FA": "#### 154",
+    "L1": "Since Calvin loses 10 pounds every month, his total weight loss after one year is 12*8 = <<12*8=96>>96 pounds.",
+    "L2": "Calvin weighs 250-96 = <<250-96=154>>154 pounds after a year of hitting the gym."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6860.\n    Returns: Calvin's weight after one year of training.\n    \"\"\"\n    # L1\n    pounds_lost_per_month = 8 # lost 8 pounds every month\n    months_per_year = 12 # WK\n    total_pounds_lost = months_per_year * pounds_lost_per_month\n\n    # L2\n    initial_weight = 250 # weighed 250 pounds to start with\n    final_weight = initial_weight - total_pounds_lost\n\n    # FA\n    answer = final_weight\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_pounds_lost",
+    "operand_to_replace": "months_per_year",
+    "replacement_variable": "pounds_lost_per_month"
+  },
+  "correct_trace": {
+    "pounds_lost_per_month": 8,
+    "months_per_year": 12,
+    "total_pounds_lost": 96,
+    "initial_weight": 250,
+    "final_weight": 154,
+    "answer": 154
+  },
+  "flawed_trace": {
+    "pounds_lost_per_month": 8,
+    "months_per_year": 12,
+    "total_pounds_lost": 64,
+    "initial_weight": 250,
+    "final_weight": 186,
+    "answer": 186
+  },
+  "correct_value": 96,
+  "flawed_value": 64,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_pounds_lost",
+      "question_inputs": [
+        "pounds_lost_per_month"
+      ],
+      "solution_line_template": "Since Calvin loses 10 pounds every month, his total weight loss after one year is {months_per_year}*{pounds_lost_per_month} = <<{months_per_year}*{pounds_lost_per_month}={total_pounds_lost}>>{total_pounds_lost} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "final_weight",
+      "question_inputs": [
+        "initial_weight"
+      ],
+      "solution_line_template": "Calvin weighs {initial_weight}-{total_pounds_lost} = <<{initial_weight}-{total_pounds_lost}={final_weight}>>{final_weight} pounds after a year of hitting the gym."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since Calvin loses 10 pounds every month, his total weight loss after one year is 8*8 = <<8*8=64>>64 pounds.",
+    "L2": "Calvin weighs 250-64 = <<250-64=186>>186 pounds after a year of hitting the gym.",
+    "FA": "#### 186"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'pounds_lost_per_month' (8) was used instead of 'months_per_year' (12).",
+  "repro_seed": -288915007264626163,
+  "model_name": "google_gemini-2.5-flash"
+}

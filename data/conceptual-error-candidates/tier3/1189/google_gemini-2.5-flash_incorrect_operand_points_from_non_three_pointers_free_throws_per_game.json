@@ -1,0 +1,123 @@
+{
+  "index": 1189,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "She averaged 23 points per game because 345 / 15 = <<345/15=23>>23",
+    "L2": "She averaged 10 points a game off two-point baskets because 5 x 2 = 10",
+    "L3": "She averaged 4 points a game from free throws because 4 x 1 = <<4*1=4>>4",
+    "L4": "She averaged 14 points a game off non-three point baskets because 10 + 4 = <<10+4=14>>14",
+    "L5": "She averaged 9 points from three-pointers because 23-14 = <<23-14=9>>9",
+    "L6": "She averaged 3 three-pointers a game because 9 / 3 = <<9/3=3>>3"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1189.\n    Returns: the average number of three-point baskets per game.\n    \"\"\"\n    # L1\n    total_points_season = 345 # 345 points over the entire season\n    total_games = 15 # 15 games over the season\n    avg_points_per_game = total_points_season / total_games\n\n    # L2\n    two_point_baskets_per_game = 5 # 5 two-point baskets per game\n    two_point_value = 2 # two-point baskets\n    points_from_two_pointers = two_point_baskets_per_game * two_point_value\n\n    # L3\n    free_throws_per_game = 4 # 4 free throws\n    free_throw_value = 1 # worth one point\n    points_from_free_throws = free_throws_per_game * free_throw_value\n\n    # L4\n    points_from_non_three_pointers = points_from_two_pointers + points_from_free_throws\n\n    # L5\n    points_from_three_pointers = avg_points_per_game - points_from_non_three_pointers\n\n    # L6\n    three_point_value = 3 # three-point baskets\n    avg_three_pointers_per_game = points_from_three_pointers / three_point_value\n\n    # FA\n    answer = avg_three_pointers_per_game\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "points_from_non_three_pointers",
+    "operand_to_replace": "points_from_two_pointers",
+    "replacement_variable": "free_throws_per_game"
+  },
+  "correct_trace": {
+    "total_points_season": 345,
+    "total_games": 15,
+    "avg_points_per_game": 23.0,
+    "two_point_baskets_per_game": 5,
+    "two_point_value": 2,
+    "points_from_two_pointers": 10,
+    "free_throws_per_game": 4,
+    "free_throw_value": 1,
+    "points_from_free_throws": 4,
+    "points_from_non_three_pointers": 14,
+    "points_from_three_pointers": 9.0,
+    "three_point_value": 3,
+    "avg_three_pointers_per_game": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "total_points_season": 345,
+    "total_games": 15,
+    "avg_points_per_game": 23.0,
+    "two_point_baskets_per_game": 5,
+    "two_point_value": 2,
+    "points_from_two_pointers": 10,
+    "free_throws_per_game": 4,
+    "free_throw_value": 1,
+    "points_from_free_throws": 4,
+    "points_from_non_three_pointers": 8,
+    "points_from_three_pointers": 15.0,
+    "three_point_value": 3,
+    "avg_three_pointers_per_game": 5.0,
+    "answer": 5.0
+  },
+  "correct_value": 14,
+  "flawed_value": 8,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "avg_points_per_game",
+      "question_inputs": [
+        "total_points_season",
+        "total_games"
+      ],
+      "solution_line_template": "She averaged {avg_points_per_game} points per game because {total_points_season} / {total_games} = <<{total_points_season}/{total_games}={avg_points_per_game}>>{avg_points_per_game}"
+    },
+    {
+      "WK_inputs": [
+        "two_point_value"
+      ],
+      "line_number": "L2",
+      "output_variable": "points_from_two_pointers",
+      "question_inputs": [
+        "two_point_baskets_per_game"
+      ],
+      "solution_line_template": "She averaged {points_from_two_pointers} points a game off two-point baskets because {two_point_baskets_per_game} x {two_point_value} = {points_from_two_pointers}"
+    },
+    {
+      "WK_inputs": [
+        "free_throw_value"
+      ],
+      "line_number": "L3",
+      "output_variable": "points_from_free_throws",
+      "question_inputs": [
+        "free_throws_per_game"
+      ],
+      "solution_line_template": "She averaged {points_from_free_throws} points a game from free throws because {free_throws_per_game} x {free_throw_value} = <<{free_throws_per_game}*{free_throw_value}={points_from_free_throws}>>{points_from_free_throws}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "points_from_non_three_pointers",
+      "question_inputs": [],
+      "solution_line_template": "She averaged {points_from_non_three_pointers} points a game off non-three point baskets because {points_from_two_pointers} + {points_from_free_throws} = <<{points_from_two_pointers}+{points_from_free_throws}={points_from_non_three_pointers}>>{points_from_non_three_pointers}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "points_from_three_pointers",
+      "question_inputs": [],
+      "solution_line_template": "She averaged {points_from_three_pointers} points from three-pointers because {avg_points_per_game}-{points_from_non_three_pointers} = <<{avg_points_per_game}-{points_from_non_three_pointers}={points_from_three_pointers}>>{points_from_three_pointers}"
+    },
+    {
+      "WK_inputs": [
+        "three_point_value"
+      ],
+      "line_number": "L6",
+      "output_variable": "avg_three_pointers_per_game",
+      "question_inputs": [],
+      "solution_line_template": "She averaged {avg_three_pointers_per_game} three-pointers a game because {points_from_three_pointers} / {three_point_value} = <<{points_from_three_pointers}/{three_point_value}={avg_three_pointers_per_game}>>{avg_three_pointers_per_game}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She averaged 23 points per game because 345 / 15 = <<345/15=23>>23",
+    "L2": "She averaged 10 points a game off two-point baskets because 5 x 2 = 10",
+    "L3": "She averaged 4 points a game from free throws because 4 x 1 = <<4*1=4>>4",
+    "L4": "She averaged 8 points a game off non-three point baskets because 4 + 4 = <<4+4=8>>8",
+    "L5": "She averaged 15 points from three-pointers because 23-8 = <<23-8=15>>15",
+    "L6": "She averaged 5 three-pointers a game because 15 / 3 = <<15/3=5>>5",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'free_throws_per_game' (value: 4) was used instead of 'points_from_two_pointers' (value: 10).",
+  "repro_seed": -7935431119446092209,
+  "model_name": "google_gemini-2.5-flash"
+}

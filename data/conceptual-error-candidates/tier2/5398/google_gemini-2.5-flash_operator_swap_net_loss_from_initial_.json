@@ -1,0 +1,74 @@
+{
+  "index": 5398,
+  "original_solution_mapping": {
+    "FA": "#### 200",
+    "L1": "He lost 220*.1=<<220*.1=22>>22 pounds",
+    "L2": "So after gaining some weight back he was 22-2=<<22-2=20>>20 pounds lighter than before",
+    "L3": "So his weight is 220-20=<<220-20=200>>200 pounds"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5398.\n    Returns: John's weight at the end.\n    \"\"\"\n    # L1\n    initial_weight = 220 # John weighs 220 pounds\n    percentage_lost_decimal = 0.1 # lose 10% of his body weight\n    weight_lost = initial_weight * percentage_lost_decimal\n\n    # L2\n    weight_gained = 2 # gains back 2 pounds\n    net_loss_from_initial = weight_lost - weight_gained\n\n    # L3\n    final_weight = initial_weight - net_loss_from_initial\n\n    # FA\n    answer = final_weight\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "net_loss_from_initial",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x31424df90>"
+  },
+  "correct_trace": {
+    "initial_weight": 220,
+    "percentage_lost_decimal": 0.1,
+    "weight_lost": 22.0,
+    "weight_gained": 2,
+    "net_loss_from_initial": 20.0,
+    "final_weight": 200.0,
+    "answer": 200.0
+  },
+  "flawed_trace": {
+    "initial_weight": 220,
+    "percentage_lost_decimal": 0.1,
+    "weight_lost": 22.0,
+    "weight_gained": 2,
+    "net_loss_from_initial": 24.0,
+    "final_weight": 196.0,
+    "answer": 196.0
+  },
+  "correct_value": 20.0,
+  "flawed_value": 24.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "weight_lost",
+      "question_inputs": [
+        "initial_weight",
+        "percentage_lost_decimal"
+      ],
+      "solution_line_template": "He lost {initial_weight}*{percentage_lost_decimal}=<<{initial_weight}*{percentage_lost_decimal}={weight_lost}>>{weight_lost} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "net_loss_from_initial",
+      "question_inputs": [
+        "weight_gained"
+      ],
+      "solution_line_template": "So after gaining some weight back he was {weight_lost}-{weight_gained}=<<{weight_lost}-{weight_gained}={net_loss_from_initial}>>{net_loss_from_initial} pounds lighter than before"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_weight",
+      "question_inputs": [],
+      "solution_line_template": "So his weight is {initial_weight}-{net_loss_from_initial}=<<{initial_weight}-{net_loss_from_initial}={final_weight}>>{final_weight} pounds"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He lost 220*0.1=<<220*0.1=22>>22 pounds",
+    "L2": "So after gaining some weight back he was 22-2=<<22-2=24>>24 pounds lighter than before",
+    "L3": "So his weight is 220-24=<<220-24=196>>196 pounds",
+    "FA": "#### 196"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 2382962626391883137,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 6082,
+  "original_solution_mapping": {
+    "FA": "#### 33",
+    "L1": "Kenny has 24/4 = <<24/4=6>>6 cookies.",
+    "L2": "Chris has 6/2 = <<6/2=3>>3 cookies.",
+    "L3": "These three boys have 24+6+3= <<24+6+3=33>>33 cookies."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6082.\n    Returns: the total number of cookies these three boys have.\n    \"\"\"\n    # L1\n    glenn_cookies = 24 # Glenn has 24 cookies\n    glenn_multiplier = 4 # Glenn has four times as many cookies as Kenny\n    kenny_cookies = glenn_cookies / glenn_multiplier\n\n    # L2\n    chris_divisor = 2 # Chris has half as many cookies as Kenny\n    chris_cookies = kenny_cookies / chris_divisor\n\n    # L3\n    total_cookies = glenn_cookies + kenny_cookies + chris_cookies\n\n    # FA\n    answer = total_cookies\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "kenny_cookies",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x31b0a6190>"
+  },
+  "correct_trace": {
+    "glenn_cookies": 24,
+    "glenn_multiplier": 4,
+    "kenny_cookies": 6.0,
+    "chris_divisor": 2,
+    "chris_cookies": 3.0,
+    "total_cookies": 33.0,
+    "answer": 33.0
+  },
+  "flawed_trace": {
+    "glenn_cookies": 24,
+    "glenn_multiplier": 4,
+    "kenny_cookies": 20,
+    "chris_divisor": 2,
+    "chris_cookies": 10.0,
+    "total_cookies": 54.0,
+    "answer": 54.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 20,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "kenny_cookies",
+      "question_inputs": [
+        "glenn_cookies",
+        "glenn_multiplier"
+      ],
+      "solution_line_template": "Kenny has {glenn_cookies}/{glenn_multiplier} = <<{glenn_cookies}/{glenn_multiplier}={kenny_cookies}>>{kenny_cookies} cookies."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "chris_cookies",
+      "question_inputs": [
+        "chris_divisor"
+      ],
+      "solution_line_template": "Chris has {kenny_cookies}/{chris_divisor} = <<{kenny_cookies}/{chris_divisor}={chris_cookies}>>{chris_cookies} cookies."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cookies",
+      "question_inputs": [],
+      "solution_line_template": "These three boys have {glenn_cookies}+{kenny_cookies}+{chris_cookies}= <<{glenn_cookies}+{kenny_cookies}+{chris_cookies}={total_cookies}>>{total_cookies} cookies."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Kenny has 24/4 = <<24/4=20>>20 cookies.",
+    "L2": "Chris has 20/2 = <<20/2=10>>10 cookies.",
+    "L3": "These three boys have 24+20+10= <<24+20+10=54>>54 cookies.",
+    "FA": "#### 54"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 6739693178885830426,
+  "model_name": "google_gemini-2.5-flash"
+}

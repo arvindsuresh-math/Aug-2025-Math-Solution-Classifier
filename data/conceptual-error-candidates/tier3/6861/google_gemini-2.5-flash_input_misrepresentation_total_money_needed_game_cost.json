@@ -1,0 +1,63 @@
+{
+  "index": 6861,
+  "original_solution_mapping": {
+    "FA": "#### 24",
+    "L1": "They need $60/game x 2 games= $120 in total.",
+    "L2": "If one ice cream is sold for $5, they will need to sell $120 / $5/ice cream = <<120/5=24>>24 ice creams."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6861.\n    Returns: the total number of ice creams needed to be sold.\n    \"\"\"\n    # L1\n    game_cost = 60 # The game costs $60\n    number_of_players = 2 # for both to be able to afford to buy the game\n    total_money_needed = game_cost * number_of_players\n\n    # L2\n    ice_cream_price = 5 # sell each ice cream for $5\n    number_of_ice_creams = total_money_needed / ice_cream_price\n\n    # FA\n    answer = number_of_ice_creams\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_money_needed",
+    "operand_to_replace": "number_of_players",
+    "replacement_variable": "game_cost"
+  },
+  "correct_trace": {
+    "game_cost": 60,
+    "number_of_players": 2,
+    "total_money_needed": 120,
+    "ice_cream_price": 5,
+    "number_of_ice_creams": 24.0,
+    "answer": 24.0
+  },
+  "flawed_trace": {
+    "game_cost": 60,
+    "number_of_players": 2,
+    "total_money_needed": 3600,
+    "ice_cream_price": 5,
+    "number_of_ice_creams": 720.0,
+    "answer": 720.0
+  },
+  "correct_value": 120,
+  "flawed_value": 3600,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_money_needed",
+      "question_inputs": [
+        "game_cost",
+        "number_of_players"
+      ],
+      "solution_line_template": "They need ${game_cost}/game x {number_of_players} games= ${total_money_needed} in total."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "number_of_ice_creams",
+      "question_inputs": [
+        "ice_cream_price"
+      ],
+      "solution_line_template": "If one ice cream is sold for ${ice_cream_price}, they will need to sell ${total_money_needed} / ${ice_cream_price}/ice cream = <<{total_money_needed}/{ice_cream_price}={number_of_ice_creams}>>{number_of_ice_creams} ice creams."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "They need $60/game x 60 games= $3600 in total.",
+    "L2": "If one ice cream is sold for $5, they will need to sell $3600 / $5/ice cream = <<3600/5=720>>720 ice creams.",
+    "FA": "#### 720"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'game_cost' (60) was used instead of 'number_of_players' (2).",
+  "repro_seed": -3930214554705648072,
+  "model_name": "google_gemini-2.5-flash"
+}

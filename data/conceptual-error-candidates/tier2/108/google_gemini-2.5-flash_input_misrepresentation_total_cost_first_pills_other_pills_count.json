@@ -1,0 +1,99 @@
+{
+  "index": 108,
+  "original_solution_mapping": {
+    "FA": "#### 41",
+    "L1": "There were 9-4 = <<9-4=5>>5 other pills",
+    "L2": "Each of the other pills cost 1.50+5.50 = <<1.50+5.50=7>>7 dollars each.",
+    "L3": "The 5 pills cost a total of 7*5 = <<7*5=35>>35 dollars.",
+    "L4": "The first 4 pills cost 1.50*4 = <<1.50*4=6>>6 dollars in total.",
+    "L5": "Henry spent a total of 35+6 = <<35+6=41>>41 dollars."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 108.\n    Returns: the total cost of pills for one day.\n    \"\"\"\n    # L1\n    total_pills_per_day = 9 # 9 pills a day\n    cost_1_pills_count = 4 # 4 pills cost $1.50 each\n    other_pills_count = total_pills_per_day - cost_1_pills_count\n\n    # L2\n    cost_1_per_pill = 1.50 # 4 pills cost $1.50 each\n    extra_cost_other_pills = 5.50 # the other pills each cost $5.50 more\n    cost_other_pills_per_pill = cost_1_per_pill + extra_cost_other_pills\n\n    # L3\n    total_cost_other_pills = cost_other_pills_per_pill * other_pills_count\n\n    # L4\n    total_cost_first_pills = cost_1_per_pill * cost_1_pills_count\n\n    # L5\n    total_cost_per_day = total_cost_other_pills + total_cost_first_pills\n\n    # FA\n    answer = total_cost_per_day\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cost_first_pills",
+    "operand_to_replace": "cost_1_per_pill",
+    "replacement_variable": "other_pills_count"
+  },
+  "correct_trace": {
+    "total_pills_per_day": 9,
+    "cost_1_pills_count": 4,
+    "other_pills_count": 5,
+    "cost_1_per_pill": 1.5,
+    "extra_cost_other_pills": 5.5,
+    "cost_other_pills_per_pill": 7.0,
+    "total_cost_other_pills": 35.0,
+    "total_cost_first_pills": 6.0,
+    "total_cost_per_day": 41.0,
+    "answer": 41.0
+  },
+  "flawed_trace": {
+    "total_pills_per_day": 9,
+    "cost_1_pills_count": 4,
+    "other_pills_count": 5,
+    "cost_1_per_pill": 1.5,
+    "extra_cost_other_pills": 5.5,
+    "cost_other_pills_per_pill": 7.0,
+    "total_cost_other_pills": 35.0,
+    "total_cost_first_pills": 20,
+    "total_cost_per_day": 55.0,
+    "answer": 55.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 20,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "other_pills_count",
+      "question_inputs": [
+        "total_pills_per_day",
+        "cost_1_pills_count"
+      ],
+      "solution_line_template": "There were {total_pills_per_day}-{cost_1_pills_count} = <<{total_pills_per_day}-{cost_1_pills_count}={other_pills_count}>>{other_pills_count} other pills"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cost_other_pills_per_pill",
+      "question_inputs": [
+        "cost_1_per_pill",
+        "extra_cost_other_pills"
+      ],
+      "solution_line_template": "Each of the other pills cost {cost_1_per_pill}+{extra_cost_other_pills} = <<{cost_1_per_pill}+{extra_cost_other_pills}={cost_other_pills_per_pill}>>{cost_other_pills_per_pill} dollars each."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost_other_pills",
+      "question_inputs": [],
+      "solution_line_template": "The {other_pills_count} pills cost a total of {cost_other_pills_per_pill}*{other_pills_count} = <<{cost_other_pills_per_pill}*{other_pills_count}={total_cost_other_pills}>>{total_cost_other_pills} dollars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cost_first_pills",
+      "question_inputs": [],
+      "solution_line_template": "The first {cost_1_pills_count} pills cost {cost_1_per_pill}*{cost_1_pills_count} = <<{cost_1_per_pill}*{cost_1_pills_count}={total_cost_first_pills}>>{total_cost_first_pills} dollars in total."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_cost_per_day",
+      "question_inputs": [],
+      "solution_line_template": "Henry spent a total of {total_cost_other_pills}+{total_cost_first_pills} = <<{total_cost_other_pills}+{total_cost_first_pills}={total_cost_per_day}>>{total_cost_per_day} dollars."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There were 9-4 = <<9-4=5>>5 other pills",
+    "L2": "Each of the other pills cost 1.5+5.5 = <<1.5+5.5=7>>7 dollars each.",
+    "L3": "The 5 pills cost a total of 7*5 = <<7*5=35>>35 dollars.",
+    "L4": "The first 4 pills cost 5*4 = <<5*4=20>>20 dollars in total.",
+    "L5": "Henry spent a total of 35+20 = <<35+20=55>>55 dollars.",
+    "FA": "#### 55"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'other_pills_count' (5) was used instead of 'cost_1_per_pill' (1.5).",
+  "repro_seed": -8301176163508633344,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,64 @@
+{
+  "index": 1378,
+  "original_solution_mapping": {
+    "FA": "#### 70",
+    "L1": "Let Mel's weight be m",
+    "L2": "Brenda's weight is 3*m + 10 = 220 pounds",
+    "L3": "Thus 3m = 220 - 10 = 210 pounds",
+    "L4": "Therefore Mel's weight is m = 210/3 = <<210/3=70>>70 pounds"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1378.\n    Returns: Mel's weight.\n    \"\"\"\n    # L3\n    brenda_weight = 220 # Brenda weighs 220 pounds\n    additional_weight = 10 # 10 pounds more\n    multiplier_for_mel = 3 # 3 times Mel's weight\n    three_times_mel_weight = brenda_weight - additional_weight\n\n    # L4\n    mel_weight = three_times_mel_weight / multiplier_for_mel\n\n    # FA\n    answer = mel_weight\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "mel_weight",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x317886250>"
+  },
+  "correct_trace": {
+    "brenda_weight": 220,
+    "additional_weight": 10,
+    "multiplier_for_mel": 3,
+    "three_times_mel_weight": 210,
+    "mel_weight": 70.0,
+    "answer": 70.0
+  },
+  "flawed_trace": {
+    "brenda_weight": 220,
+    "additional_weight": 10,
+    "multiplier_for_mel": 3,
+    "three_times_mel_weight": 210,
+    "mel_weight": 630,
+    "answer": 630
+  },
+  "correct_value": 70.0,
+  "flawed_value": 630,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "three_times_mel_weight",
+      "question_inputs": [
+        "brenda_weight",
+        "additional_weight",
+        "multiplier_for_mel"
+      ],
+      "solution_line_template": "Thus {multiplier_for_mel}m = {brenda_weight} - {additional_weight} = {three_times_mel_weight} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "mel_weight",
+      "question_inputs": [],
+      "solution_line_template": "Therefore Mel's weight is m = {three_times_mel_weight}/{multiplier_for_mel} = <<{three_times_mel_weight}/{multiplier_for_mel}={mel_weight}>>{mel_weight} pounds"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L3": "Thus 3m = 220 - 10 = 210 pounds",
+    "L4": "Therefore Mel's weight is m = 210/3 = <<210/3=630>>630 pounds",
+    "FA": "#### 630"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 1974988288118466161,
+  "model_name": "google_gemini-2.5-flash"
+}

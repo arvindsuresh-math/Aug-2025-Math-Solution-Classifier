@@ -1,0 +1,69 @@
+{
+  "index": 2113,
+  "original_solution_mapping": {
+    "FA": "#### 100",
+    "L1": "There are 20 coins during the first hour. 30 coins are added during the second and third hours and 40 coins are added during the fourth hour. By the fourth hour there are 20+30+30+40 =<<20+30+30+40=120>>120 coins",
+    "L2": "The number of coins after giving 20 to her mother is 120-20=<<120-20=100>>100"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2113.\n    Returns: the number of coins left after the fifth hour.\n    \"\"\"\n    # L1\n    coins_hour1 = 20 # In the first hour she puts in 20 coins\n    coins_hour2 = 30 # During the next two hours she puts in 30 coins each time\n    coins_hour3 = 30 # During the next two hours she puts in 30 coins each time\n    coins_hour4 = 40 # During the fourth hour she puts in 40 coins\n    coins_after_fourth_hour = coins_hour1 + coins_hour2 + coins_hour3 + coins_hour4\n\n    # L2\n    coins_taken_out = 20 # she takes 20 coins out\n    coins_left_after_fifth_hour = coins_after_fourth_hour - coins_taken_out\n\n    # FA\n    answer = coins_left_after_fifth_hour\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "coins_after_fourth_hour",
+    "operand_to_replace": "coins_hour4",
+    "replacement_variable": "coins_hour3"
+  },
+  "correct_trace": {
+    "coins_hour1": 20,
+    "coins_hour2": 30,
+    "coins_hour3": 30,
+    "coins_hour4": 40,
+    "coins_after_fourth_hour": 120,
+    "coins_taken_out": 20,
+    "coins_left_after_fifth_hour": 100,
+    "answer": 100
+  },
+  "flawed_trace": {
+    "coins_hour1": 20,
+    "coins_hour2": 30,
+    "coins_hour3": 30,
+    "coins_hour4": 40,
+    "coins_after_fourth_hour": 110,
+    "coins_taken_out": 20,
+    "coins_left_after_fifth_hour": 90,
+    "answer": 90
+  },
+  "correct_value": 120,
+  "flawed_value": 110,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "coins_hour1",
+        "coins_hour2",
+        "coins_hour3",
+        "coins_hour4"
+      ],
+      "WK_inputs": [],
+      "output_variable": "coins_after_fourth_hour",
+      "solution_line_template": "There are {coins_hour1} coins during the first hour. {coins_hour2} coins are added during the second and third hours and {coins_hour4} coins are added during the fourth hour. By the fourth hour there are {coins_hour1}+{coins_hour2}+{coins_hour3}+{coins_hour4} =<<{coins_hour1}+{coins_hour2}+{coins_hour3}+{coins_hour4}={coins_after_fourth_hour}>>{coins_after_fourth_hour} coins"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "coins_taken_out"
+      ],
+      "WK_inputs": [],
+      "output_variable": "coins_left_after_fifth_hour",
+      "solution_line_template": "The number of coins after giving {coins_taken_out} to her mother is {coins_after_fourth_hour}-{coins_taken_out}=<<{coins_after_fourth_hour}-{coins_taken_out}={coins_left_after_fifth_hour}>>{coins_left_after_fifth_hour}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 20 coins during the first hour. 30 coins are added during the second and third hours and 30 coins are added during the fourth hour. By the fourth hour there are 20+30+30+30 =<<20+30+30+30=110>>110 coins",
+    "L2": "The number of coins after giving 20 to her mother is 110-20=<<110-20=90>>90",
+    "FA": "#### 90"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'coins_hour3' (30) was used instead of 'coins_hour4' (40).",
+  "repro_seed": -7851646009182031989,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 7012,
+  "original_solution_mapping": {
+    "FA": "#### 720",
+    "L1": "Jake earns $6 * 3 = $<<6*3=18>>18 per hour.",
+    "L2": "Working, 8 hour in a day, he earns $18 * 8 = $<<8*18=144>>144.",
+    "L3": "So in 5 days, Jake earns $144 x 5 = $<<144*5=720>>720."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7012.\n    Returns: the total amount Jake earns in 5 days.\n    \"\"\"\n    # L1\n    jacob_hourly_wage = 6 # Jacob earns $6 per hour\n    jake_multiplier = 3 # Jake earns thrice what Jacob does\n    jake_hourly_wage = jacob_hourly_wage * jake_multiplier\n\n    # L2\n    hours_per_day = 8 # working 8 hours a day\n    jake_daily_earnings = jake_hourly_wage * hours_per_day\n\n    # L3\n    num_days = 5 # in 5 days\n    jake_total_earnings = jake_daily_earnings * num_days\n\n    # FA\n    answer = jake_total_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "jake_daily_earnings",
+    "operand_to_replace": "hours_per_day",
+    "replacement_variable": "jake_multiplier"
+  },
+  "correct_trace": {
+    "jacob_hourly_wage": 6,
+    "jake_multiplier": 3,
+    "jake_hourly_wage": 18,
+    "hours_per_day": 8,
+    "jake_daily_earnings": 144,
+    "num_days": 5,
+    "jake_total_earnings": 720,
+    "answer": 720
+  },
+  "flawed_trace": {
+    "jacob_hourly_wage": 6,
+    "jake_multiplier": 3,
+    "jake_hourly_wage": 18,
+    "hours_per_day": 8,
+    "jake_daily_earnings": 54,
+    "num_days": 5,
+    "jake_total_earnings": 270,
+    "answer": 270
+  },
+  "correct_value": 144,
+  "flawed_value": 54,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "jake_hourly_wage",
+      "question_inputs": [
+        "jacob_hourly_wage",
+        "jake_multiplier"
+      ],
+      "solution_line_template": "Jake earns ${jacob_hourly_wage} * {jake_multiplier} = $<<{jacob_hourly_wage}*{jake_multiplier}={jake_hourly_wage}>>{jake_hourly_wage} per hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "jake_daily_earnings",
+      "question_inputs": [
+        "hours_per_day"
+      ],
+      "solution_line_template": "Working, {hours_per_day} hour in a day, he earns ${jake_hourly_wage} * {hours_per_day} = $<<{hours_per_day}*{jake_hourly_wage}={jake_daily_earnings}>>{jake_daily_earnings}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "jake_total_earnings",
+      "question_inputs": [
+        "num_days"
+      ],
+      "solution_line_template": "So in {num_days} days, Jake earns ${jake_daily_earnings} x {num_days} = $<<{jake_daily_earnings}*{num_days}={jake_total_earnings}>>{jake_total_earnings}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jake earns $6 * 3 = $<<6*3=18>>18 per hour.",
+    "L2": "Working, 3 hour in a day, he earns $18 * 3 = $<<3*18=54>>54.",
+    "L3": "So in 5 days, Jake earns $54 x 5 = $<<54*5=270>>270.",
+    "FA": "#### 270"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'jake_multiplier' (3) was used instead of 'hours_per_day' (8).",
+  "repro_seed": -3954532210376190253,
+  "model_name": "google_gemini-2.5-flash"
+}

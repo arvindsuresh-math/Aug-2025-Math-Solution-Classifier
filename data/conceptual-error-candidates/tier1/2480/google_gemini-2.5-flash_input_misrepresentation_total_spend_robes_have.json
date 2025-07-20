@@ -1,0 +1,63 @@
+{
+  "index": 2480,
+  "original_solution_mapping": {
+    "FA": "#### 36",
+    "L1": "The school needs to buy 30 - 12 = <<30-12=18>>18 robes.",
+    "L2": "So the school will spend 18 x $2 = $<<18*2=36>>36."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2480.\n    Returns: the total amount the school will spend on robes.\n    \"\"\"\n    # L1\n    robes_needed = 30 # 30 singers\n    robes_have = 12 # only 12 robes\n    robes_to_buy = robes_needed - robes_have\n\n    # L2\n    cost_per_robe = 2 # $2\n    total_spend = robes_to_buy * cost_per_robe\n\n    # FA\n    answer = total_spend\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_spend",
+    "operand_to_replace": "cost_per_robe",
+    "replacement_variable": "robes_have"
+  },
+  "correct_trace": {
+    "robes_needed": 30,
+    "robes_have": 12,
+    "robes_to_buy": 18,
+    "cost_per_robe": 2,
+    "total_spend": 36,
+    "answer": 36
+  },
+  "flawed_trace": {
+    "robes_needed": 30,
+    "robes_have": 12,
+    "robes_to_buy": 18,
+    "cost_per_robe": 2,
+    "total_spend": 216,
+    "answer": 216
+  },
+  "correct_value": 36,
+  "flawed_value": 216,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "robes_needed",
+        "robes_have"
+      ],
+      "WK_inputs": [],
+      "output_variable": "robes_to_buy",
+      "solution_line_template": "The school needs to buy {robes_needed} - {robes_have} = <<{robes_needed}-{robes_have}={robes_to_buy}>>{robes_to_buy} robes."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "cost_per_robe"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_spend",
+      "solution_line_template": "So the school will spend {robes_to_buy} x ${cost_per_robe} = $<<{robes_to_buy}*{cost_per_robe}={total_spend}>>{total_spend}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The school needs to buy 30 - 12 = <<30-12=18>>18 robes.",
+    "L2": "So the school will spend 18 x $12 = $<<18*12=216>>216.",
+    "FA": "#### 216"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'robes_have' (12) was used instead of 'cost_per_robe' (2).",
+  "repro_seed": 1760199939193115239,
+  "model_name": "google_gemini-2.5-flash"
+}

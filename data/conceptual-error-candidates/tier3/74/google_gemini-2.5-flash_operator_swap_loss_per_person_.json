@@ -1,0 +1,79 @@
+{
+  "index": 74,
+  "original_solution_mapping": {
+    "FA": "#### 28",
+    "L1": "Second person = 27 - 7 = <<27-7=20>>20 kg",
+    "L2": "103 - 27 - 20 = <<103-27-20=56>>56 kg",
+    "L3": "56/2 = <<56/2=28>>28 kg",
+    "L4": "The last two people each lost 28 kilograms of weight."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 74.\n    Returns: the weight lost by each of the last two people.\n    \"\"\"\n    # L1\n    first_person_loss = 27 # The first person lost 27 kilograms\n    less_than_first = 7 # 7 kilograms less than the first person\n    second_person_loss = first_person_loss - less_than_first\n\n    # L2\n    total_loss = 103 # lost a total of 103 kilograms\n    remaining_loss = total_loss - first_person_loss - second_person_loss\n\n    # L3\n    num_remaining_people = 2 # The two remaining people\n    loss_per_person = remaining_loss / num_remaining_people\n\n    # FA\n    answer = loss_per_person\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "loss_per_person",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x316c3e2d0>"
+  },
+  "correct_trace": {
+    "first_person_loss": 27,
+    "less_than_first": 7,
+    "second_person_loss": 20,
+    "total_loss": 103,
+    "remaining_loss": 56,
+    "num_remaining_people": 2,
+    "loss_per_person": 28.0,
+    "answer": 28.0
+  },
+  "flawed_trace": {
+    "first_person_loss": 27,
+    "less_than_first": 7,
+    "second_person_loss": 20,
+    "total_loss": 103,
+    "remaining_loss": 56,
+    "num_remaining_people": 2,
+    "loss_per_person": 54,
+    "answer": 54
+  },
+  "correct_value": 28.0,
+  "flawed_value": 54,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "second_person_loss",
+      "question_inputs": [
+        "first_person_loss",
+        "less_than_first"
+      ],
+      "solution_line_template": "Second person = {first_person_loss} - {less_than_first} = <<{first_person_loss}-{less_than_first}={second_person_loss}>>{second_person_loss} kg"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_loss",
+      "question_inputs": [
+        "total_loss"
+      ],
+      "solution_line_template": "{total_loss} - {first_person_loss} - {second_person_loss} = <<{total_loss}-{first_person_loss}-{second_person_loss}={remaining_loss}>>{remaining_loss} kg"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "loss_per_person",
+      "question_inputs": [
+        "num_remaining_people"
+      ],
+      "solution_line_template": "{remaining_loss}/{num_remaining_people} = <<{remaining_loss}/{num_remaining_people}={loss_per_person}>>{loss_per_person} kg"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Second person = 27 - 7 = <<27-7=20>>20 kg",
+    "L2": "103 - 27 - 20 = <<103-27-20=56>>56 kg",
+    "L3": "56/2 = <<56/2=54>>54 kg",
+    "FA": "#### 54"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 7394076360463316800,
+  "model_name": "google_gemini-2.5-flash"
+}

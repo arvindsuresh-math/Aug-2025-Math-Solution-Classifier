@@ -1,0 +1,84 @@
+{
+  "index": 7443,
+  "original_solution_mapping": {
+    "FA": "#### 22",
+    "L1": "Harry's father is 50 years + 24 years = <<50+24=74>>74 years old.",
+    "L2": "Harry's mother is 1/25 * 50 years = <<1/25*50=2>>2 years younger than his father.",
+    "L3": "So she is currently 74 years - 2 years = <<74-2=72>>72 years old.",
+    "L4": "So when Harry was born, she was 72 years - 50 years = <<72-50=22>>22 years old."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7443.\n    Returns: the age of Harry's mother when she gave birth to him.\n    \"\"\"\n    # L1\n    harry_age = 50 # Harry is 50 years old\n    father_age_difference = 24 # His father is currently 24 years older than he is\n    father_current_age = harry_age + father_age_difference\n\n    # L2\n    mother_age_fraction = Fraction(1, 25) # younger than his father by 1/25 of Harry's current age\n    mother_age_difference_from_father = mother_age_fraction * harry_age\n\n    # L3\n    mother_current_age = father_current_age - mother_age_difference_from_father\n\n    # L4\n    mother_age_at_birth = mother_current_age - harry_age\n\n    # FA\n    answer = mother_age_at_birth\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "mother_age_at_birth",
+    "replacement_variable": "mother_current_age"
+  },
+  "correct_trace": {
+    "harry_age": 50,
+    "father_age_difference": 24,
+    "father_current_age": 74,
+    "mother_age_fraction": "1/25",
+    "mother_age_difference_from_father": "2",
+    "mother_current_age": "72",
+    "mother_age_at_birth": "22",
+    "answer": "22"
+  },
+  "flawed_trace": {
+    "harry_age": 50,
+    "father_age_difference": 24,
+    "father_current_age": 74,
+    "mother_age_fraction": "1/25",
+    "mother_age_difference_from_father": "2",
+    "mother_current_age": "72",
+    "mother_age_at_birth": "22",
+    "answer": "72"
+  },
+  "correct_value": "22",
+  "flawed_value": "72",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "father_current_age",
+      "question_inputs": [
+        "harry_age",
+        "father_age_difference"
+      ],
+      "solution_line_template": "Harry's father is {harry_age} years + {father_age_difference} years = <<{harry_age}+{father_age_difference}={father_current_age}>>{father_current_age} years old."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "mother_age_difference_from_father",
+      "question_inputs": [
+        "mother_age_fraction"
+      ],
+      "solution_line_template": "Harry's mother is {mother_age_fraction} * {harry_age} years = <<{mother_age_fraction}*{harry_age}={mother_age_difference_from_father}>>{mother_age_difference_from_father} years younger than his father."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "mother_current_age",
+      "question_inputs": [],
+      "solution_line_template": "So she is currently {father_current_age} years - {mother_age_difference_from_father} years = <<{father_current_age}-{mother_age_difference_from_father}={mother_current_age}>>{mother_current_age} years old."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "mother_age_at_birth",
+      "question_inputs": [],
+      "solution_line_template": "So when Harry was born, she was {mother_current_age} years - {harry_age} years = <<{mother_current_age}-{harry_age}={mother_age_at_birth}>>{mother_age_at_birth} years old."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Harry's father is 50 years + 24 years = <<50+24=74>>74 years old.",
+    "L2": "Harry's mother is 1/25 * 50 years = <<1/25*50=2>>2 years younger than his father.",
+    "L3": "So she is currently 74 years - 2 years = <<74-2=72>>72 years old.",
+    "FA": "#### 72"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'mother_current_age' (value: 72) was reported instead of 'mother_age_at_birth' (value: 22).",
+  "repro_seed": -8342176693756127313,
+  "model_name": "google_gemini-2.5-flash"
+}

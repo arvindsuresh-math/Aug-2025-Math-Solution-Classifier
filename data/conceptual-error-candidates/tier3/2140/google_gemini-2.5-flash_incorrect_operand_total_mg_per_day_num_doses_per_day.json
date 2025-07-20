@@ -1,0 +1,78 @@
+{
+  "index": 2140,
+  "original_solution_mapping": {
+    "FA": "#### 3000",
+    "L1": "Each dose is 375*2=<<375*2=750>>750 mg",
+    "L2": "He takes it 24/6=<<24/6=4>>4 times",
+    "L3": "So he takes 750*4=<<750*4=3000>>3000 mg a day"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2140.\n    Returns: the total mg of Tylenol James takes a day.\n    \"\"\"\n    # L1\n    tablet_strength = 375 # 375 mg each\n    num_tablets_per_dose = 2 # 2 Tylenol tablets\n    mg_per_dose = tablet_strength * num_tablets_per_dose\n\n    # L2\n    hours_per_day = 24 # WK\n    dose_interval_hours = 6 # every 6 hours\n    num_doses_per_day = hours_per_day / dose_interval_hours\n\n    # L3\n    total_mg_per_day = mg_per_dose * num_doses_per_day\n\n    # FA\n    answer = total_mg_per_day\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_mg_per_day",
+    "operand_to_replace": "mg_per_dose",
+    "replacement_variable": "num_doses_per_day"
+  },
+  "correct_trace": {
+    "tablet_strength": 375,
+    "num_tablets_per_dose": 2,
+    "mg_per_dose": 750,
+    "hours_per_day": 24,
+    "dose_interval_hours": 6,
+    "num_doses_per_day": 4.0,
+    "total_mg_per_day": 3000.0,
+    "answer": 3000.0
+  },
+  "flawed_trace": {
+    "tablet_strength": 375,
+    "num_tablets_per_dose": 2,
+    "mg_per_dose": 750,
+    "hours_per_day": 24,
+    "dose_interval_hours": 6,
+    "num_doses_per_day": 4.0,
+    "total_mg_per_day": 16.0,
+    "answer": 16.0
+  },
+  "correct_value": 3000.0,
+  "flawed_value": 16.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "mg_per_dose",
+      "question_inputs": [
+        "tablet_strength",
+        "num_tablets_per_dose"
+      ],
+      "solution_line_template": "Each dose is {tablet_strength}*{num_tablets_per_dose}=<<{tablet_strength}*{num_tablets_per_dose}={mg_per_dose}>>{mg_per_dose} mg"
+    },
+    {
+      "WK_inputs": [
+        "hours_per_day"
+      ],
+      "line_number": "L2",
+      "output_variable": "num_doses_per_day",
+      "question_inputs": [
+        "dose_interval_hours"
+      ],
+      "solution_line_template": "He takes it {hours_per_day}/{dose_interval_hours}=<<{hours_per_day}/{dose_interval_hours}={num_doses_per_day}>>{num_doses_per_day} times"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_mg_per_day",
+      "question_inputs": [],
+      "solution_line_template": "So he takes {mg_per_dose}*{num_doses_per_day}=<<{mg_per_dose}*{num_doses_per_day}={total_mg_per_day}>>{total_mg_per_day} mg a day"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each dose is 375*2=<<375*2=750>>750 mg",
+    "L2": "He takes it 24/6=<<24/6=4>>4 times",
+    "L3": "So he takes 4*4=<<4*4=16>>16 mg a day",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'num_doses_per_day' (value: 4.0) was used instead of 'mg_per_dose' (value: 750).",
+  "repro_seed": -6425067757221723140,
+  "model_name": "google_gemini-2.5-flash"
+}

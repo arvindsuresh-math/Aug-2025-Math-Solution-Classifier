@@ -1,0 +1,85 @@
+{
+  "index": 6424,
+  "original_solution_mapping": {
+    "FA": "#### 18",
+    "L1": "A grade:32(.25)=8",
+    "L2": "32-8=<<32-8=24>>24 students remaining",
+    "L3": "B/C grade:24/4=<<24/4=6>>6",
+    "L4": "24-6=<<24-6=18>>18 students fail"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6424.\n    Returns: the number of students who failed.\n    \"\"\"\n    # L1\n    total_students = 32 # 32 students in a statistics course\n    a_grade_percent = 0.25 # 25 percent of the class received an A\n    a_grade_students = total_students * a_grade_percent\n\n    # L2\n    remaining_students_after_a = total_students - a_grade_students\n\n    # L3\n    bc_grade_fraction_denominator = 4 # 1/4 of the remaining students got either a B or C\n    bc_grade_students = remaining_students_after_a / bc_grade_fraction_denominator\n\n    # L4\n    failed_students = remaining_students_after_a - bc_grade_students\n\n    # FA\n    answer = failed_students\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "remaining_students_after_a",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x31bf9e350>"
+  },
+  "correct_trace": {
+    "total_students": 32,
+    "a_grade_percent": 0.25,
+    "a_grade_students": 8.0,
+    "remaining_students_after_a": 24.0,
+    "bc_grade_fraction_denominator": 4,
+    "bc_grade_students": 6.0,
+    "failed_students": 18.0,
+    "answer": 18.0
+  },
+  "flawed_trace": {
+    "total_students": 32,
+    "a_grade_percent": 0.25,
+    "a_grade_students": 8.0,
+    "remaining_students_after_a": 4.0,
+    "bc_grade_fraction_denominator": 4,
+    "bc_grade_students": 1.0,
+    "failed_students": 3.0,
+    "answer": 3.0
+  },
+  "correct_value": 24.0,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "a_grade_students",
+      "question_inputs": [
+        "total_students",
+        "a_grade_percent"
+      ],
+      "solution_line_template": "A grade:{total_students}({a_grade_percent})={a_grade_students}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_students_after_a",
+      "question_inputs": [],
+      "solution_line_template": "{total_students}-{a_grade_students}=<<{total_students}-{a_grade_students}={remaining_students_after_a}>>{remaining_students_after_a} students remaining"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "bc_grade_students",
+      "question_inputs": [
+        "bc_grade_fraction_denominator"
+      ],
+      "solution_line_template": "B/C grade:{remaining_students_after_a}/{bc_grade_fraction_denominator}=<<{remaining_students_after_a}/{bc_grade_fraction_denominator}={bc_grade_students}>>{bc_grade_students}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "failed_students",
+      "question_inputs": [],
+      "solution_line_template": "{remaining_students_after_a}-{bc_grade_students}=<<{remaining_students_after_a}-{bc_grade_students}={failed_students}>>{failed_students} students fail"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "A grade:32(0.25)=8",
+    "L2": "32-8=<<32-8=4>>4 students remaining",
+    "L3": "B/C grade:4/4=<<4/4=1>>1",
+    "L4": "4-1=<<4-1=3>>3 students fail",
+    "FA": "#### 3"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": -5222201256635298065,
+  "model_name": "google_gemini-2.5-flash"
+}

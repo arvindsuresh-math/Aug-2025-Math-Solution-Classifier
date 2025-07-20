@@ -1,0 +1,78 @@
+{
+  "index": 5702,
+  "original_solution_mapping": {
+    "FA": "#### 14",
+    "L1": "He needs 150 - 38 = <<150-38=112>>112 liters more to have a full tank of gas.",
+    "L2": "Donny will pay 112 x $3 = $<<112*3=336>>336 for a full tank of gas.",
+    "L3": "His will get $350 - $336 = $<<350-336=14>>14 change.\""
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5702.\n    Returns: the amount of change Donny will get.\n    \"\"\"\n    # L1\n    tank_capacity = 150 # truck holds 150 liters of fuel\n    already_contained = 38 # truck already contained 38 liters\n    liters_needed = tank_capacity - already_contained\n\n    # L2\n    cost_per_liter = 3 # each liter of fuel costs $3\n    total_cost = liters_needed * cost_per_liter\n\n    # L3\n    money_given = 350 # get from $350\n    change_received = money_given - total_cost\n\n    # FA\n    answer = change_received\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "change_received",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x316ca7010>"
+  },
+  "correct_trace": {
+    "tank_capacity": 150,
+    "already_contained": 38,
+    "liters_needed": 112,
+    "cost_per_liter": 3,
+    "total_cost": 336,
+    "money_given": 350,
+    "change_received": 14,
+    "answer": 14
+  },
+  "flawed_trace": {
+    "tank_capacity": 150,
+    "already_contained": 38,
+    "liters_needed": 112,
+    "cost_per_liter": 3,
+    "total_cost": 336,
+    "money_given": 350,
+    "change_received": 686,
+    "answer": 686
+  },
+  "correct_value": 14,
+  "flawed_value": 686,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "liters_needed",
+      "question_inputs": [
+        "tank_capacity",
+        "already_contained"
+      ],
+      "solution_line_template": "He needs {tank_capacity} - {already_contained} = <<{tank_capacity}-{already_contained}={liters_needed}>>{liters_needed} liters more to have a full tank of gas."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "cost_per_liter"
+      ],
+      "solution_line_template": "Donny will pay {liters_needed} x ${cost_per_liter} = $<<{liters_needed}*{cost_per_liter}={total_cost}>>{total_cost} for a full tank of gas."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "change_received",
+      "question_inputs": [
+        "money_given"
+      ],
+      "solution_line_template": "His will get ${money_given} - ${total_cost} = $<<{money_given}-{total_cost}={change_received}>>{change_received} change.\""
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He needs 150 - 38 = <<150-38=112>>112 liters more to have a full tank of gas.",
+    "L2": "Donny will pay 112 x $3 = $<<112*3=336>>336 for a full tank of gas.",
+    "L3": "His will get $350 - $336 = $<<350-336=686>>686 change.\"",
+    "FA": "#### 686"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 3632276635937697105,
+  "model_name": "google_gemini-2.5-flash"
+}

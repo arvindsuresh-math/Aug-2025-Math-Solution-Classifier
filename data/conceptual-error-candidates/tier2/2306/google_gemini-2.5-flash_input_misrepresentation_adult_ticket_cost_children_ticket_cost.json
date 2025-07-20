@@ -1,0 +1,104 @@
+{
+  "index": 2306,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "The adult tickets cost $4.25 + $3.25 = $<<4.25+3.25=7.50>>7.50.",
+    "L2": "So two adult tickets cost $7.50 x 2 = $<<7.5*2=15>>15.",
+    "L3": "Four children's tickets cost $4.25 x 4 = $<<4*4.25=17>>17.",
+    "L4": "So the total cost of all the tickets amounted to $15 + $17 = $<<15+17=32>>32.",
+    "L5": "The family had a discount, so they paid a total of $32 - $2 = $<<32-2=30>>30."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2306.\n    Returns: the total amount spent on movie tickets after discount.\n    \"\"\"\n    # L1\n    children_ticket_cost = 4.25 # Children\u2019s tickets cost $4.25\n    adult_ticket_markup = 3.25 # adult tickets cost $3.25 more\n    adult_ticket_cost = children_ticket_cost + adult_ticket_markup\n\n    # L2\n    num_adult_tickets = 2 # two adult tickets\n    total_adult_tickets_cost = adult_ticket_cost * num_adult_tickets\n\n    # L3\n    num_children_tickets = 4 # four children\u2019s tickets\n    total_children_tickets_cost = children_ticket_cost * num_children_tickets\n\n    # L4\n    subtotal_tickets_cost = total_adult_tickets_cost + total_children_tickets_cost\n\n    # L5\n    discount_amount = 2 # $2 discount\n    final_cost = subtotal_tickets_cost - discount_amount\n\n    # FA\n    answer = final_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "adult_ticket_cost",
+    "operand_to_replace": "adult_ticket_markup",
+    "replacement_variable": "children_ticket_cost"
+  },
+  "correct_trace": {
+    "children_ticket_cost": 4.25,
+    "adult_ticket_markup": 3.25,
+    "adult_ticket_cost": 7.5,
+    "num_adult_tickets": 2,
+    "total_adult_tickets_cost": 15.0,
+    "num_children_tickets": 4,
+    "total_children_tickets_cost": 17.0,
+    "subtotal_tickets_cost": 32.0,
+    "discount_amount": 2,
+    "final_cost": 30.0,
+    "answer": 30.0
+  },
+  "flawed_trace": {
+    "children_ticket_cost": 4.25,
+    "adult_ticket_markup": 3.25,
+    "adult_ticket_cost": 8.5,
+    "num_adult_tickets": 2,
+    "total_adult_tickets_cost": 17.0,
+    "num_children_tickets": 4,
+    "total_children_tickets_cost": 17.0,
+    "subtotal_tickets_cost": 34.0,
+    "discount_amount": 2,
+    "final_cost": 32.0,
+    "answer": 32.0
+  },
+  "correct_value": 7.5,
+  "flawed_value": 8.5,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "adult_ticket_cost",
+      "question_inputs": [
+        "children_ticket_cost",
+        "adult_ticket_markup"
+      ],
+      "solution_line_template": "The adult tickets cost ${children_ticket_cost} + ${adult_ticket_markup} = $<<{children_ticket_cost}+{adult_ticket_markup}={adult_ticket_cost}>>{adult_ticket_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_adult_tickets_cost",
+      "question_inputs": [
+        "num_adult_tickets"
+      ],
+      "solution_line_template": "So {num_adult_tickets} adult tickets cost ${adult_ticket_cost} x {num_adult_tickets} = $<<{adult_ticket_cost}*{num_adult_tickets}={total_adult_tickets_cost}>>{total_adult_tickets_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_children_tickets_cost",
+      "question_inputs": [
+        "num_children_tickets"
+      ],
+      "solution_line_template": "Four children's tickets cost ${children_ticket_cost} x {num_children_tickets} = $<<{num_children_tickets}*{children_ticket_cost}={total_children_tickets_cost}>>{total_children_tickets_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "subtotal_tickets_cost",
+      "question_inputs": [],
+      "solution_line_template": "So the total cost of all the tickets amounted to ${total_adult_tickets_cost} + ${total_children_tickets_cost} = $<<{total_adult_tickets_cost}+{total_children_tickets_cost}={subtotal_tickets_cost}>>{subtotal_tickets_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "final_cost",
+      "question_inputs": [
+        "discount_amount"
+      ],
+      "solution_line_template": "The family had a discount, so they paid a total of ${subtotal_tickets_cost} - ${discount_amount} = $<<{subtotal_tickets_cost}-{discount_amount}={final_cost}>>{final_cost}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The adult tickets cost $4.25 + $4.25 = $<<4.25+4.25=8.5>>8.5.",
+    "L2": "So 2 adult tickets cost $8.5 x 2 = $<<8.5*2=17>>17.",
+    "L3": "Four children's tickets cost $4.25 x 4 = $<<4*4.25=17>>17.",
+    "L4": "So the total cost of all the tickets amounted to $17 + $17 = $<<17+17=34>>34.",
+    "L5": "The family had a discount, so they paid a total of $34 - $2 = $<<34-2=32>>32.",
+    "FA": "#### 32"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'children_ticket_cost' (4.25) was used instead of 'adult_ticket_markup' (3.25).",
+  "repro_seed": -7595165730750942871,
+  "model_name": "google_gemini-2.5-flash"
+}

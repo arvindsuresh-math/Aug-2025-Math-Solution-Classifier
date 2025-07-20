@@ -1,0 +1,103 @@
+{
+  "index": 2693,
+  "original_solution_mapping": {
+    "FA": "#### 12000",
+    "L1": "His taxable income is 100,000-30,000=$<<100000-30000=70000>>70,000",
+    "L2": "So he pays 20,000*.1=$<<20000*.1=2000>>2000 tax at the lower rate",
+    "L3": "He has to pay 70,000-20,000=$<<70000-20000=50000>>50,000 at the higher rate",
+    "L4": "The taxes for that is 50,000*.2=$<<50000*.2=10000>>10,000",
+    "L5": "So his total tax bill is 10,000+2,000=$<<10000+2000=12000>>12,000"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2693.\n    Returns: the total amount John pays in taxes.\n    \"\"\"\n    # L1\n    earned_income = 100000 # earned $100,000 for the year\n    deductions = 30000 # $30,000 in deductions\n    taxable_income = earned_income - deductions\n\n    # L2\n    first_bracket_amount = 20000 # The first $20,000 of taxable income\n    lower_tax_rate = 0.1 # taxed at 10%\n    tax_lower_rate = first_bracket_amount * lower_tax_rate\n\n    # L3\n    remaining_taxable_income = taxable_income - first_bracket_amount\n\n    # L4\n    higher_tax_rate = 0.2 # taxed at 20%\n    tax_higher_rate = remaining_taxable_income * higher_tax_rate\n\n    # L5\n    total_tax_bill = tax_higher_rate + tax_lower_rate\n\n    # FA\n    answer = total_tax_bill\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "tax_lower_rate",
+    "operand_to_replace": "lower_tax_rate",
+    "replacement_variable": "earned_income"
+  },
+  "correct_trace": {
+    "earned_income": 100000,
+    "deductions": 30000,
+    "taxable_income": 70000,
+    "first_bracket_amount": 20000,
+    "lower_tax_rate": 0.1,
+    "tax_lower_rate": 2000.0,
+    "remaining_taxable_income": 50000,
+    "higher_tax_rate": 0.2,
+    "tax_higher_rate": 10000.0,
+    "total_tax_bill": 12000.0,
+    "answer": 12000.0
+  },
+  "flawed_trace": {
+    "earned_income": 100000,
+    "deductions": 30000,
+    "taxable_income": 70000,
+    "first_bracket_amount": 20000,
+    "lower_tax_rate": 0.1,
+    "tax_lower_rate": 2000000000,
+    "remaining_taxable_income": 50000,
+    "higher_tax_rate": 0.2,
+    "tax_higher_rate": 10000.0,
+    "total_tax_bill": 2000010000.0,
+    "answer": 2000010000.0
+  },
+  "correct_value": 2000.0,
+  "flawed_value": 2000000000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "taxable_income",
+      "question_inputs": [
+        "earned_income",
+        "deductions"
+      ],
+      "solution_line_template": "His taxable income is {earned_income}-{deductions}=<<{earned_income}-{deductions}={taxable_income}>>{taxable_income}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "tax_lower_rate",
+      "question_inputs": [
+        "first_bracket_amount",
+        "lower_tax_rate"
+      ],
+      "solution_line_template": "So he pays {first_bracket_amount}*{lower_tax_rate}=<<{first_bracket_amount}*{lower_tax_rate}={tax_lower_rate}>>{tax_lower_rate} tax at the lower rate"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_taxable_income",
+      "question_inputs": [],
+      "solution_line_template": "He has to pay {taxable_income}-{first_bracket_amount}=<<{taxable_income}-{first_bracket_amount}={remaining_taxable_income}>>{remaining_taxable_income} at the higher rate"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "tax_higher_rate",
+      "question_inputs": [
+        "higher_tax_rate"
+      ],
+      "solution_line_template": "The taxes for that is {remaining_taxable_income}*{higher_tax_rate}=<<{remaining_taxable_income}*{higher_tax_rate}={tax_higher_rate}>>{tax_higher_rate}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_tax_bill",
+      "question_inputs": [],
+      "solution_line_template": "So his total tax bill is {tax_higher_rate}+{tax_lower_rate}=<<{tax_higher_rate}+{tax_lower_rate}={total_tax_bill}>>{total_tax_bill}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "His taxable income is 100000-30000=<<100000-30000=70000>>70000",
+    "L2": "So he pays 20000*100000=<<20000*100000=2000000000>>2000000000 tax at the lower rate",
+    "L3": "He has to pay 70000-20000=<<70000-20000=50000>>50000 at the higher rate",
+    "L4": "The taxes for that is 50000*0.2=<<50000*0.2=10000>>10000",
+    "L5": "So his total tax bill is 10000+2000000000=<<10000+2000000000=2000010000>>2000010000",
+    "FA": "#### 2000010000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'earned_income' (100000) was used instead of 'lower_tax_rate' (0.1).",
+  "repro_seed": 7929894036173582929,
+  "model_name": "google_gemini-2.5-flash"
+}

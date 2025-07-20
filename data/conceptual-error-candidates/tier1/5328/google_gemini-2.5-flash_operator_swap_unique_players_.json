@@ -1,0 +1,77 @@
+{
+  "index": 5328,
+  "original_solution_mapping": {
+    "FA": "#### 33",
+    "L1": "Mona joined 9 groups, so she played with 9 * 4 = <<9*4=36>>36 people.",
+    "L2": "She grouped with 2 + 1 = <<2+1=3>>3 people twice.",
+    "L3": "Thus, she played with 36 - 3 = <<36-3=33>>33 unique players that weekend."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5328.\n    Returns: the number of unique players Mona grouped with on the video game that weekend.\n    \"\"\"\n    # L1\n    num_groups = 9 # joined 9 groups\n    players_per_group = 4 # four other players\n    total_player_instances = num_groups * players_per_group\n\n    # L2\n    re_grouped_group1 = 2 # One of the groups included two players she had grouped with before\n    re_grouped_group2 = 1 # another group included one person she had grouped with before\n    total_re_grouped_instances = re_grouped_group1 + re_grouped_group2\n\n    # L3\n    unique_players = total_player_instances - total_re_grouped_instances\n\n    # FA\n    answer = unique_players\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "unique_players",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x315df5450>"
+  },
+  "correct_trace": {
+    "num_groups": 9,
+    "players_per_group": 4,
+    "total_player_instances": 36,
+    "re_grouped_group1": 2,
+    "re_grouped_group2": 1,
+    "total_re_grouped_instances": 3,
+    "unique_players": 33,
+    "answer": 33
+  },
+  "flawed_trace": {
+    "num_groups": 9,
+    "players_per_group": 4,
+    "total_player_instances": 36,
+    "re_grouped_group1": 2,
+    "re_grouped_group2": 1,
+    "total_re_grouped_instances": 3,
+    "unique_players": 12.0,
+    "answer": 12.0
+  },
+  "correct_value": 33,
+  "flawed_value": 12.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_player_instances",
+      "question_inputs": [
+        "num_groups",
+        "players_per_group"
+      ],
+      "solution_line_template": "Mona joined {num_groups} groups, so she played with {num_groups} * {players_per_group} = <<{num_groups}*{players_per_group}={total_player_instances}>>{total_player_instances} people."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_re_grouped_instances",
+      "question_inputs": [
+        "re_grouped_group1",
+        "re_grouped_group2"
+      ],
+      "solution_line_template": "She grouped with {re_grouped_group1} + {re_grouped_group2} = <<{re_grouped_group1}+{re_grouped_group2}={total_re_grouped_instances}>>{total_re_grouped_instances} people twice."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "unique_players",
+      "question_inputs": [],
+      "solution_line_template": "Thus, she played with {total_player_instances} - {total_re_grouped_instances} = <<{total_player_instances}-{total_re_grouped_instances}={unique_players}>>{unique_players} unique players that weekend."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Mona joined 9 groups, so she played with 9 * 4 = <<9*4=36>>36 people.",
+    "L2": "She grouped with 2 + 1 = <<2+1=3>>3 people twice.",
+    "L3": "Thus, she played with 36 - 3 = <<36-3=12>>12 unique players that weekend.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": -2154863969602024294,
+  "model_name": "google_gemini-2.5-flash"
+}

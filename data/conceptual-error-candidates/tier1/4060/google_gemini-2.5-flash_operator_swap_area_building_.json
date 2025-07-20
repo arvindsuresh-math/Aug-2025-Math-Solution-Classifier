@@ -1,0 +1,75 @@
+{
+  "index": 4060,
+  "original_solution_mapping": {
+    "FA": "#### 104",
+    "L1": "12 * 12 = <<12*12=144>>144 square meters",
+    "L2": "8 * 5 = <<8*5=40>>40 square meters",
+    "L3": "144 - 40 = <<144-40=104>>104 square meters",
+    "L4": "104 square meters of the playground are not covered by the maintenance building."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4060.\n    Returns: the square meters of the playground not covered by the maintenance building.\n    \"\"\"\n    # L1\n    side_length_playground = 12 # side length of 12 meters\n    area_playground = side_length_playground * side_length_playground\n\n    # L2\n    building_length = 8 # measures 8 meters by 5 meters\n    building_width = 5 # measures 8 meters by 5 meters\n    area_building = building_length * building_width\n\n    # L3\n    uncovered_area = area_playground - area_building\n\n    # FA\n    answer = uncovered_area\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "area_building",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x317239a90>"
+  },
+  "correct_trace": {
+    "side_length_playground": 12,
+    "area_playground": 144,
+    "building_length": 8,
+    "building_width": 5,
+    "area_building": 40,
+    "uncovered_area": 104,
+    "answer": 104
+  },
+  "flawed_trace": {
+    "side_length_playground": 12,
+    "area_playground": 144,
+    "building_length": 8,
+    "building_width": 5,
+    "area_building": 13,
+    "uncovered_area": 131,
+    "answer": 131
+  },
+  "correct_value": 40,
+  "flawed_value": 13,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "area_playground",
+      "question_inputs": [
+        "side_length_playground"
+      ],
+      "solution_line_template": "{side_length_playground} * {side_length_playground} = <<{side_length_playground}*{side_length_playground}={area_playground}>>{area_playground} square meters"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "area_building",
+      "question_inputs": [
+        "building_length",
+        "building_width"
+      ],
+      "solution_line_template": "{building_length} * {building_width} = <<{building_length}*{building_width}={area_building}>>{area_building} square meters"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "uncovered_area",
+      "question_inputs": [],
+      "solution_line_template": "{area_playground} - {area_building} = <<{area_playground}-{area_building}={uncovered_area}>>{uncovered_area} square meters"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "12 * 12 = <<12*12=144>>144 square meters",
+    "L2": "8 * 5 = <<8*5=13>>13 square meters",
+    "L3": "144 - 13 = <<144-13=131>>131 square meters",
+    "FA": "#### 131"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -5492657365185785259,
+  "model_name": "google_gemini-2.5-flash"
+}

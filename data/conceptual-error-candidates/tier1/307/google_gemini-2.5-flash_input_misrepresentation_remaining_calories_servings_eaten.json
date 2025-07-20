@@ -1,0 +1,63 @@
+{
+  "index": 307,
+  "original_solution_mapping": {
+    "FA": "#### 1210",
+    "L1": "The block has 16 servings and he has eaten 5 servings leaving 16-5 = <<16-5=11>>11 servings of cheese",
+    "L2": "There are 11 servings of cheese left and each serving is 110 calories for a total of 11*110 = <<11*110=1210>>1,210 calories"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 307.\n    Returns: the number of calories remaining in the block.\n    \"\"\"\n    # L1\n    servings_per_block = 16 # Rick buys the large blocks that have 16 servings per block\n    servings_eaten = 5 # Rick has already eaten 5 servings of cheese\n    remaining_servings = servings_per_block - servings_eaten\n\n    # L2\n    calories_per_serving = 110 # 110 calories in a serving of cheese\n    remaining_calories = remaining_servings * calories_per_serving\n\n    # FA\n    answer = remaining_calories\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "remaining_calories",
+    "operand_to_replace": "calories_per_serving",
+    "replacement_variable": "servings_eaten"
+  },
+  "correct_trace": {
+    "servings_per_block": 16,
+    "servings_eaten": 5,
+    "remaining_servings": 11,
+    "calories_per_serving": 110,
+    "remaining_calories": 1210,
+    "answer": 1210
+  },
+  "flawed_trace": {
+    "servings_per_block": 16,
+    "servings_eaten": 5,
+    "remaining_servings": 11,
+    "calories_per_serving": 110,
+    "remaining_calories": 55,
+    "answer": 55
+  },
+  "correct_value": 1210,
+  "flawed_value": 55,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "servings_per_block",
+        "servings_eaten"
+      ],
+      "WK_inputs": [],
+      "output_variable": "remaining_servings",
+      "solution_line_template": "The block has {servings_per_block} servings and he has eaten {servings_eaten} servings leaving {servings_per_block}-{servings_eaten} = <<{servings_per_block}-{servings_eaten}={remaining_servings}>>{remaining_servings} servings of cheese"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "calories_per_serving"
+      ],
+      "WK_inputs": [],
+      "output_variable": "remaining_calories",
+      "solution_line_template": "There are {remaining_servings} servings of cheese left and each serving is {calories_per_serving} calories for a total of {remaining_servings}*{calories_per_serving} = <<{remaining_servings}*{calories_per_serving}={remaining_calories}>>{remaining_calories} calories"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The block has 16 servings and he has eaten 5 servings leaving 16-5 = <<16-5=11>>11 servings of cheese",
+    "L2": "There are 11 servings of cheese left and each serving is 5 calories for a total of 11*5 = <<11*5=55>>55 calories",
+    "FA": "#### 55"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'servings_eaten' (5) was used instead of 'calories_per_serving' (110).",
+  "repro_seed": -4569357062274803522,
+  "model_name": "google_gemini-2.5-flash"
+}

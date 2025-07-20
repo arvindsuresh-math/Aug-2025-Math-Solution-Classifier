@@ -1,0 +1,59 @@
+{
+  "index": 1806,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "He was stuck in traffic for 5*2=<<5*2=10>>10 hours",
+    "L2": "So his trip took 10+5=<<10+5=15>>15 hours"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1806.\n    Returns: the total duration of the trip in hours.\n    \"\"\"\n    # L1\n    hours_driven = 5 # He drove 5 hours\n    multiplier_traffic = 2 # twice as long\n    traffic_hours = hours_driven * multiplier_traffic\n\n    # L2\n    total_trip_hours = traffic_hours + hours_driven\n\n    # FA\n    answer = total_trip_hours\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_trip_hours",
+    "operand_to_replace": "hours_driven",
+    "replacement_variable": "multiplier_traffic"
+  },
+  "correct_trace": {
+    "hours_driven": 5,
+    "multiplier_traffic": 2,
+    "traffic_hours": 10,
+    "total_trip_hours": 15,
+    "answer": 15
+  },
+  "flawed_trace": {
+    "hours_driven": 5,
+    "multiplier_traffic": 2,
+    "traffic_hours": 10,
+    "total_trip_hours": 12,
+    "answer": 12
+  },
+  "correct_value": 15,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "hours_driven",
+        "multiplier_traffic"
+      ],
+      "WK_inputs": [],
+      "output_variable": "traffic_hours",
+      "solution_line_template": "He was stuck in traffic for {hours_driven}*{multiplier_traffic}=<<{hours_driven}*{multiplier_traffic}={traffic_hours}>>{traffic_hours} hours"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_trip_hours",
+      "solution_line_template": "So his trip took {traffic_hours}+{hours_driven}=<<{traffic_hours}+{hours_driven}={total_trip_hours}>>{total_trip_hours} hours"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He was stuck in traffic for 5*2=<<5*2=10>>10 hours",
+    "L2": "So his trip took 10+2=<<10+2=12>>12 hours",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'multiplier_traffic' (2) was used instead of 'hours_driven' (5).",
+  "repro_seed": -8732668665820710322,
+  "model_name": "google_gemini-2.5-flash"
+}

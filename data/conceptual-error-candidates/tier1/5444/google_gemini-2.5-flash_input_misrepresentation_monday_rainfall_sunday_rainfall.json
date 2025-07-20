@@ -1,0 +1,74 @@
+{
+  "index": 5444,
+  "original_solution_mapping": {
+    "FA": "#### 25",
+    "L1": "It rained 3+4=<<3+4=7>>7 inches on Monday",
+    "L2": "So it rained 7*2=<<7*2=14>>14 inches on Tuesday",
+    "L3": "That means the total rainfall was 7+14+4=<<7+14+4=25>>25 inches"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5444.\n    Returns: the total rainfall over the 3 days.\n    \"\"\"\n    # L1\n    monday_more_than_sunday = 3 # 3 inches more than Sunday\n    sunday_rainfall = 4 # 4 inches on Sunday\n    monday_rainfall = monday_more_than_sunday + sunday_rainfall\n\n    # L2\n    tuesday_multiplier = 2 # twice as much on Tuesday as Monday\n    tuesday_rainfall = monday_rainfall * tuesday_multiplier\n\n    # L3\n    total_rainfall = monday_rainfall + tuesday_rainfall + sunday_rainfall\n\n    # FA\n    answer = total_rainfall\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "monday_rainfall",
+    "operand_to_replace": "monday_more_than_sunday",
+    "replacement_variable": "sunday_rainfall"
+  },
+  "correct_trace": {
+    "monday_more_than_sunday": 3,
+    "sunday_rainfall": 4,
+    "monday_rainfall": 7,
+    "tuesday_multiplier": 2,
+    "tuesday_rainfall": 14,
+    "total_rainfall": 25,
+    "answer": 25
+  },
+  "flawed_trace": {
+    "monday_more_than_sunday": 3,
+    "sunday_rainfall": 4,
+    "monday_rainfall": 8,
+    "tuesday_multiplier": 2,
+    "tuesday_rainfall": 16,
+    "total_rainfall": 28,
+    "answer": 28
+  },
+  "correct_value": 7,
+  "flawed_value": 8,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "monday_rainfall",
+      "question_inputs": [
+        "monday_more_than_sunday",
+        "sunday_rainfall"
+      ],
+      "solution_line_template": "It rained {monday_more_than_sunday}+{sunday_rainfall}=<<{monday_more_than_sunday}+{sunday_rainfall}={monday_rainfall}>>{monday_rainfall} inches on Monday"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "tuesday_rainfall",
+      "question_inputs": [
+        "tuesday_multiplier"
+      ],
+      "solution_line_template": "So it rained {monday_rainfall}*{tuesday_multiplier}=<<{monday_rainfall}*{tuesday_multiplier}={tuesday_rainfall}>>{tuesday_rainfall} inches on Tuesday"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_rainfall",
+      "question_inputs": [],
+      "solution_line_template": "That means the total rainfall was {monday_rainfall}+{tuesday_rainfall}+{sunday_rainfall}=<<{monday_rainfall}+{tuesday_rainfall}+{sunday_rainfall}={total_rainfall}>>{total_rainfall} inches"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "It rained 4+4=<<4+4=8>>8 inches on Monday",
+    "L2": "So it rained 8*2=<<8*2=16>>16 inches on Tuesday",
+    "L3": "That means the total rainfall was 8+16+4=<<8+16+4=28>>28 inches",
+    "FA": "#### 28"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'sunday_rainfall' (4) was used instead of 'monday_more_than_sunday' (3).",
+  "repro_seed": 8051879456617415861,
+  "model_name": "google_gemini-2.5-flash"
+}

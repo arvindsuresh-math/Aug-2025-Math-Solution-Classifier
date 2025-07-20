@@ -1,0 +1,65 @@
+{
+  "index": 7390,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "We know that my age divided by three is equal to my age minus six therefore X/3 = X-6 where X = My age",
+    "L2": "This means that X = 3X - 18 because we can multiply both sides by 3",
+    "L3": "This also means that -2X=-18 because we can subtract 3X from the right side.",
+    "L4": "Therefore X = 9 because - 18/-2 = <<-18/-2=9>>9"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7390.\n    Returns: the current age.\n    \"\"\"\n    # L2\n    age_multiplier = 3 # three times older\n    years_ago = 6 # six years ago\n    years_ago_times_multiplier = years_ago * age_multiplier\n\n    # L4\n    # The solution implicitly performs the rearrangement from X = 3X - 18 to -2X = -18\n    # before the final division. The values -2 and -18 are derived from these steps.\n    coefficient_of_X = 1 - age_multiplier\n    constant_term_after_rearrangement = -years_ago_times_multiplier\n    current_age = constant_term_after_rearrangement / coefficient_of_X\n\n    # FA\n    answer = current_age\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "current_age",
+    "operand_to_replace": "constant_term_after_rearrangement",
+    "replacement_variable": "coefficient_of_X"
+  },
+  "correct_trace": {
+    "age_multiplier": 3,
+    "years_ago": 6,
+    "years_ago_times_multiplier": 18,
+    "coefficient_of_X": -2,
+    "constant_term_after_rearrangement": -18,
+    "current_age": 9.0,
+    "answer": 9.0
+  },
+  "flawed_trace": {
+    "age_multiplier": 3,
+    "years_ago": 6,
+    "years_ago_times_multiplier": 18,
+    "coefficient_of_X": -2,
+    "constant_term_after_rearrangement": -18,
+    "current_age": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 9.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "years_ago_times_multiplier",
+      "question_inputs": [
+        "age_multiplier",
+        "years_ago"
+      ],
+      "solution_line_template": "This means that X = {age_multiplier}X - {years_ago_times_multiplier} because we can multiply both sides by {age_multiplier}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "current_age",
+      "question_inputs": [],
+      "solution_line_template": "Therefore X = {current_age} because {constant_term_after_rearrangement}/{coefficient_of_X} = <<{constant_term_after_rearrangement}/{coefficient_of_X}={current_age}>>{current_age}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "This means that X = 3X - 18 because we can multiply both sides by 3",
+    "L4": "Therefore X = 1 because -2/-2 = <<-2/-2=1>>1",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'coefficient_of_X' (value: -2) was used instead of 'constant_term_after_rearrangement' (value: -18).",
+  "repro_seed": 6282537476642455163,
+  "model_name": "google_gemini-2.5-flash"
+}

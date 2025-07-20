@@ -1,0 +1,92 @@
+{
+  "index": 254,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "First find the number of cars in Section G by multiplying the number of rows by the number of cars per row: 15 rows * 10 cars/row = <<15*10=150>>150 cars",
+    "L2": "Then do the same thing for Section H: 20 rows * 9 cars/row = <<20*9=180>>180 cars",
+    "L3": "Then add the two quantities of cars to find the total number of cars Nate walked past: 150 cars + 180 cars = <<150+180=330>>330 cars",
+    "L4": "Finally, divide the number of cars Nate passed by the numbers he passes each minute to find how long he spent searching: 330 cars / 11 cars/minute = <<330/11=30>>30 minutes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 254.\n    Returns: the number of minutes Nate spent searching the parking lot.\n    \"\"\"\n    # L1\n    g_rows = 15 # Section G has 15 rows\n    g_cars_per_row = 10 # each hold 10 cars\n    total_cars_g = g_rows * g_cars_per_row\n\n    # L2\n    h_rows = 20 # Section H has 20 rows\n    h_cars_per_row = 9 # each hold 9 cars\n    total_cars_h = h_rows * h_cars_per_row\n\n    # L3\n    total_cars_walked_past = total_cars_g + total_cars_h\n\n    # L4\n    cars_per_minute = 11 # walk past 11 cars per minute\n    time_spent_searching = total_cars_walked_past / cars_per_minute\n\n    # FA\n    answer = time_spent_searching\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "time_spent_searching",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x31458da90>"
+  },
+  "correct_trace": {
+    "g_rows": 15,
+    "g_cars_per_row": 10,
+    "total_cars_g": 150,
+    "h_rows": 20,
+    "h_cars_per_row": 9,
+    "total_cars_h": 180,
+    "total_cars_walked_past": 330,
+    "cars_per_minute": 11,
+    "time_spent_searching": 30.0,
+    "answer": 30.0
+  },
+  "flawed_trace": {
+    "g_rows": 15,
+    "g_cars_per_row": 10,
+    "total_cars_g": 150,
+    "h_rows": 20,
+    "h_cars_per_row": 9,
+    "total_cars_h": 180,
+    "total_cars_walked_past": 330,
+    "cars_per_minute": 11,
+    "time_spent_searching": 319,
+    "answer": 319
+  },
+  "correct_value": 30.0,
+  "flawed_value": 319,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_cars_g",
+      "question_inputs": [
+        "g_rows",
+        "g_cars_per_row"
+      ],
+      "solution_line_template": "First find the number of cars in Section G by multiplying the number of rows by the number of cars per row: {g_rows} rows * {g_cars_per_row} cars/row = <<{g_rows}*{g_cars_per_row}={total_cars_g}>>{total_cars_g} cars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cars_h",
+      "question_inputs": [
+        "h_rows",
+        "h_cars_per_row"
+      ],
+      "solution_line_template": "Then do the same thing for Section H: {h_rows} rows * {h_cars_per_row} cars/row = <<{h_rows}*{h_cars_per_row}={total_cars_h}>>{total_cars_h} cars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cars_walked_past",
+      "question_inputs": [],
+      "solution_line_template": "Then add the two quantities of cars to find the total number of cars Nate walked past: {total_cars_g} cars + {total_cars_h} cars = <<{total_cars_g}+{total_cars_h}={total_cars_walked_past}>>{total_cars_walked_past} cars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "time_spent_searching",
+      "question_inputs": [
+        "cars_per_minute"
+      ],
+      "solution_line_template": "Finally, divide the number of cars Nate passed by the numbers he passes each minute to find how long he spent searching: {total_cars_walked_past} cars / {cars_per_minute} cars/minute = <<{total_cars_walked_past}/{cars_per_minute}={time_spent_searching}>>{time_spent_searching} minutes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the number of cars in Section G by multiplying the number of rows by the number of cars per row: 15 rows * 10 cars/row = <<15*10=150>>150 cars",
+    "L2": "Then do the same thing for Section H: 20 rows * 9 cars/row = <<20*9=180>>180 cars",
+    "L3": "Then add the two quantities of cars to find the total number of cars Nate walked past: 150 cars + 180 cars = <<150+180=330>>330 cars",
+    "L4": "Finally, divide the number of cars Nate passed by the numbers he passes each minute to find how long he spent searching: 330 cars / 11 cars/minute = <<330/11=319>>319 minutes",
+    "FA": "#### 319"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": -6818658872868768345,
+  "model_name": "google_gemini-2.5-flash"
+}

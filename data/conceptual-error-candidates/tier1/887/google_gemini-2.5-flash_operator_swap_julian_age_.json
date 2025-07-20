@@ -1,0 +1,78 @@
+{
+  "index": 887,
+  "original_solution_mapping": {
+    "FA": "#### 25",
+    "L1": "Frederick is 20 * 2 = <<20*2=40>>40 years old",
+    "L2": "Julian is 40 - 20 = <<40-20=20>>20 years old",
+    "L3": "Kyle is 20 + 5 = <<20+5=25>>25 years old"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 887.\n    Returns: Kyle's age.\n    \"\"\"\n    # L1\n    tyson_age = 20 # Tyson is 20\n    times_older = 2 # 2 times older than Tyson\n    frederick_age = tyson_age * times_older\n\n    # L2\n    julian_younger_than_frederick = 20 # 20 years younger than Frederick\n    julian_age = frederick_age - julian_younger_than_frederick\n\n    # L3\n    kyle_older_than_julian = 5 # 5 years older than Julian\n    kyle_age = julian_age + kyle_older_than_julian\n\n    # FA\n    answer = kyle_age\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "julian_age",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x317ea4490>"
+  },
+  "correct_trace": {
+    "tyson_age": 20,
+    "times_older": 2,
+    "frederick_age": 40,
+    "julian_younger_than_frederick": 20,
+    "julian_age": 20,
+    "kyle_older_than_julian": 5,
+    "kyle_age": 25,
+    "answer": 25
+  },
+  "flawed_trace": {
+    "tyson_age": 20,
+    "times_older": 2,
+    "frederick_age": 40,
+    "julian_younger_than_frederick": 20,
+    "julian_age": 60,
+    "kyle_older_than_julian": 5,
+    "kyle_age": 65,
+    "answer": 65
+  },
+  "correct_value": 20,
+  "flawed_value": 60,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "tyson_age",
+        "times_older"
+      ],
+      "WK_inputs": [],
+      "output_variable": "frederick_age",
+      "solution_line_template": "Frederick is {tyson_age} * {times_older} = <<{tyson_age}*{times_older}={frederick_age}>>{frederick_age} years old"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "julian_younger_than_frederick"
+      ],
+      "WK_inputs": [],
+      "output_variable": "julian_age",
+      "solution_line_template": "Julian is {frederick_age} - {julian_younger_than_frederick} = <<{frederick_age}-{julian_younger_than_frederick}={julian_age}>>{julian_age} years old"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "kyle_older_than_julian"
+      ],
+      "WK_inputs": [],
+      "output_variable": "kyle_age",
+      "solution_line_template": "Kyle is {julian_age} + {kyle_older_than_julian} = <<{julian_age}+{kyle_older_than_julian}={kyle_age}>>{kyle_age} years old"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Frederick is 20 * 2 = <<20*2=40>>40 years old",
+    "L2": "Julian is 40 - 20 = <<40-20=60>>60 years old",
+    "L3": "Kyle is 60 + 5 = <<60+5=65>>65 years old",
+    "FA": "#### 65"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -7322276689995663736,
+  "model_name": "google_gemini-2.5-flash"
+}

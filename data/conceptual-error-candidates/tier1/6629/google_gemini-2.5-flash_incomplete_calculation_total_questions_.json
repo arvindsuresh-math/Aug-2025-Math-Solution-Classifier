@@ -1,0 +1,140 @@
+{
+  "index": 6629,
+  "original_solution_mapping": {
+    "FA": "#### 68",
+    "L1": "Cameron answered 2 * 6 = <<2*6=12>>12 questions for the first group.",
+    "L2": "He answered 2 * 11 = <<2*11=22>>22 questions for the second group.",
+    "L3": "The third group had 8 - 1 = 7 tourists that asked 2 questions each.",
+    "L4": "The third group also had 1 tourist that asked 2 * 3 = <<1*2*3=6>>6 questions.",
+    "L5": "Thus, the third group asked 7 * 2 + 6 = 14 + 6 = <<7*2+6=20>>20 questions.",
+    "L6": "The last group asked 7 * 2 = <<7*2=14>>14 questions.",
+    "L7": "For all four tours, Cameron answered 12 + 22 + 20 + 14 = <<12+22+20+14=68>>68 questions."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6629.\n    Returns: the total number of questions Cameron answered.\n    \"\"\"\n    # L1\n    questions_per_tourist = 2 # two questions per tourist\n    first_group_size = 6 # first group was only 6 people\n    questions_first_group = questions_per_tourist * first_group_size\n\n    # L2\n    second_group_size = 11 # following group was a busy group of 11\n    questions_second_group = questions_per_tourist * second_group_size\n\n    # L3\n    third_group_size = 8 # The third group had 8 people\n    inquisitive_tourist_count = 1 # one was inquisitive\n    normal_tourists_third_group = third_group_size - inquisitive_tourist_count\n\n    # L4\n    inquisitive_multiplier = 3 # asked three times as many questions as usual\n    questions_inquisitive_tourist = inquisitive_tourist_count * questions_per_tourist * inquisitive_multiplier\n\n    # L5\n    normal_tourists_third_group_subtotal = normal_tourists_third_group * questions_per_tourist\n    questions_third_group = normal_tourists_third_group_subtotal + questions_inquisitive_tourist\n\n    # L6\n    last_group_size = 7 # last group of the day was a late group of 7\n    questions_last_group = last_group_size * questions_per_tourist\n\n    # L7\n    total_questions = questions_first_group + questions_second_group + questions_third_group + questions_last_group\n\n    # FA\n    answer = total_questions\n    return answer\n",
+  "mutation_details": {
+    "type": "incomplete_calculation",
+    "target_variable": "total_questions",
+    "operand_to_remove": "questions_last_group",
+    "original_operands": [
+      "questions_first_group",
+      "questions_last_group",
+      "questions_second_group",
+      "questions_third_group"
+    ]
+  },
+  "correct_trace": {
+    "questions_per_tourist": 2,
+    "first_group_size": 6,
+    "questions_first_group": 12,
+    "second_group_size": 11,
+    "questions_second_group": 22,
+    "third_group_size": 8,
+    "inquisitive_tourist_count": 1,
+    "normal_tourists_third_group": 7,
+    "inquisitive_multiplier": 3,
+    "questions_inquisitive_tourist": 6,
+    "normal_tourists_third_group_subtotal": 14,
+    "questions_third_group": 20,
+    "last_group_size": 7,
+    "questions_last_group": 14,
+    "total_questions": 68,
+    "answer": 68
+  },
+  "flawed_trace": {
+    "questions_per_tourist": 2,
+    "first_group_size": 6,
+    "questions_first_group": 12,
+    "second_group_size": 11,
+    "questions_second_group": 22,
+    "third_group_size": 8,
+    "inquisitive_tourist_count": 1,
+    "normal_tourists_third_group": 7,
+    "inquisitive_multiplier": 3,
+    "questions_inquisitive_tourist": 6,
+    "normal_tourists_third_group_subtotal": 14,
+    "questions_third_group": 20,
+    "last_group_size": 7,
+    "questions_last_group": 14,
+    "total_questions": 54,
+    "answer": 54
+  },
+  "correct_value": 68,
+  "flawed_value": 54,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "questions_first_group",
+      "question_inputs": [
+        "questions_per_tourist",
+        "first_group_size"
+      ],
+      "solution_line_template": "Cameron answered {questions_per_tourist} * {first_group_size} = <<{questions_per_tourist}*{first_group_size}={questions_first_group}>>{questions_first_group} questions for the first group."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "questions_second_group",
+      "question_inputs": [
+        "second_group_size"
+      ],
+      "solution_line_template": "He answered {questions_per_tourist} * {second_group_size} = <<{questions_per_tourist}*{second_group_size}={questions_second_group}>>{questions_second_group} questions for the second group."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "normal_tourists_third_group",
+      "question_inputs": [
+        "third_group_size",
+        "inquisitive_tourist_count"
+      ],
+      "solution_line_template": "The third group had {third_group_size} - {inquisitive_tourist_count} = {normal_tourists_third_group} tourists that asked {questions_per_tourist} questions each."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "questions_inquisitive_tourist",
+      "question_inputs": [
+        "inquisitive_multiplier"
+      ],
+      "solution_line_template": "The third group also had {inquisitive_tourist_count} tourist that asked {questions_per_tourist} * {inquisitive_multiplier} = <<{inquisitive_tourist_count}*{questions_per_tourist}*{inquisitive_multiplier}={questions_inquisitive_tourist}>>{questions_inquisitive_tourist} questions."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "questions_third_group",
+      "question_inputs": [],
+      "solution_line_template": "Thus, the third group asked {normal_tourists_third_group} * {questions_per_tourist} + {questions_inquisitive_tourist} = {normal_tourists_third_group_subtotal} + {questions_inquisitive_tourist} = <<{normal_tourists_third_group}*{questions_per_tourist}+{questions_inquisitive_tourist}={questions_third_group}>>{questions_third_group} questions."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "questions_last_group",
+      "question_inputs": [
+        "last_group_size"
+      ],
+      "solution_line_template": "The last group asked {last_group_size} * {questions_per_tourist} = <<{last_group_size}*{questions_per_tourist}={questions_last_group}>>{questions_last_group} questions."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "total_questions",
+      "question_inputs": [],
+      "solution_line_template": "For all four tours, Cameron answered {questions_first_group} + {questions_second_group} + {questions_third_group} + {questions_last_group} = <<{questions_first_group}+{questions_second_group}+{questions_third_group}+{questions_last_group}={total_questions}>>{total_questions} questions."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Cameron answered 2 * 6 = <<2*6=12>>12 questions for the first group.",
+    "L2": "He answered 2 * 11 = <<2*11=22>>22 questions for the second group.",
+    "L3": "The third group had 8 - 1 = 7 tourists that asked 2 questions each.",
+    "L4": "The third group also had 1 tourist that asked 2 * 3 = <<1*2*3=6>>6 questions.",
+    "L5": "Thus, the third group asked 7 * 2 + 6 = 14 + 6 = <<7*2+6=20>>20 questions.",
+    "L6": "The last group asked 7 * 2 = <<7*2=14>>14 questions.",
+    "L7": "For all four tours, Cameron answered 12 + 22 + 20 = <<12+22+20=54>>54 questions.",
+    "FA": "#### 54"
+  },
+  "erroneous_line_number": "L7",
+  "explanation": "Incomplete calculation. The term 'questions_last_group' (value: 14) was omitted from the operation.",
+  "repro_seed": -1410594104987210910,
+  "model_name": "google_gemini-2.5-flash"
+}

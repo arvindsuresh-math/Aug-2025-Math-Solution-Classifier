@@ -1,0 +1,74 @@
+{
+  "index": 4523,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "He returned 200*.8=<<200*.8=160>>160 people",
+    "L2": "So he had 200-160=<<200-160=40>>40 people",
+    "L3": "He took 10 of those to another planet so he took 40-10=<<30=30>>30 to his home planet"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4523.\n    Returns: the number of people the alien took to his home planet.\n    \"\"\"\n    # L1\n    total_abducted = 200 # abducts 200 people\n    returned_percentage = 0.8 # returns 80% of the people abducted\n    returned_people = total_abducted * returned_percentage\n\n    # L2\n    remaining_after_return = total_abducted - returned_people\n\n    # L3\n    taken_to_another_planet = 10 # takes 10 people to another planet\n    taken_to_home_planet = remaining_after_return - taken_to_another_planet\n\n    # FA\n    answer = taken_to_home_planet\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "taken_to_home_planet",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x31768c910>"
+  },
+  "correct_trace": {
+    "total_abducted": 200,
+    "returned_percentage": 0.8,
+    "returned_people": 160.0,
+    "remaining_after_return": 40.0,
+    "taken_to_another_planet": 10,
+    "taken_to_home_planet": 30.0,
+    "answer": 30.0
+  },
+  "flawed_trace": {
+    "total_abducted": 200,
+    "returned_percentage": 0.8,
+    "returned_people": 160.0,
+    "remaining_after_return": 40.0,
+    "taken_to_another_planet": 10,
+    "taken_to_home_planet": 50.0,
+    "answer": 50.0
+  },
+  "correct_value": 30.0,
+  "flawed_value": 50.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "returned_people",
+      "question_inputs": [
+        "total_abducted",
+        "returned_percentage"
+      ],
+      "solution_line_template": "He returned {total_abducted}*{returned_percentage}=<<{total_abducted}*{returned_percentage}={returned_people}>>{returned_people} people"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_after_return",
+      "question_inputs": [],
+      "solution_line_template": "So he had {total_abducted}-{returned_people}=<<{total_abducted}-{returned_people}={remaining_after_return}>>{remaining_after_return} people"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "taken_to_home_planet",
+      "question_inputs": [
+        "taken_to_another_planet"
+      ],
+      "solution_line_template": "He took {taken_to_another_planet} of those to another planet so he took {remaining_after_return}-{taken_to_another_planet}=<<{taken_to_home_planet}={taken_to_home_planet}>>{taken_to_home_planet} to his home planet"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He returned 200*0.8=<<200*0.8=160>>160 people",
+    "L2": "So he had 200-160=<<200-160=40>>40 people",
+    "L3": "He took 10 of those to another planet so he took 40-10=<<50=50>>50 to his home planet",
+    "FA": "#### 50"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 6328391947933322430,
+  "model_name": "google_gemini-2.5-flash"
+}

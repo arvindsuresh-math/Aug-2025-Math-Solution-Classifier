@@ -1,0 +1,92 @@
+{
+  "index": 4351,
+  "original_solution_mapping": {
+    "FA": "#### 14",
+    "L1": "7 notebooks cost 7 notebooks x $4/notebook = $<<7*4=28>>28",
+    "L2": "2 books cost 2 books x $7/book = $<<2*7=14>>14",
+    "L3": "In total Joe has spent $28 + $14 = $<<28+14=42>>42",
+    "L4": "He has $56 - $42 = $<<56-42=14>>14 left"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4351.\n    Returns: the amount of money Joe has left.\n    \"\"\"\n    # L1\n    num_notebooks = 7 # 7 notebooks\n    cost_per_notebook = 4 # $4\n    cost_notebooks = num_notebooks * cost_per_notebook\n\n    # L2\n    num_books = 2 # 2 books\n    cost_per_book = 7 # $7\n    cost_books = num_books * cost_per_book\n\n    # L3\n    total_spent = cost_notebooks + cost_books\n\n    # L4\n    initial_money = 56 # $56 to go to the store\n    money_left = initial_money - total_spent\n\n    # FA\n    answer = money_left\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_spent",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x317bfcdd0>"
+  },
+  "correct_trace": {
+    "num_notebooks": 7,
+    "cost_per_notebook": 4,
+    "cost_notebooks": 28,
+    "num_books": 2,
+    "cost_per_book": 7,
+    "cost_books": 14,
+    "total_spent": 42,
+    "initial_money": 56,
+    "money_left": 14,
+    "answer": 14
+  },
+  "flawed_trace": {
+    "num_notebooks": 7,
+    "cost_per_notebook": 4,
+    "cost_notebooks": 28,
+    "num_books": 2,
+    "cost_per_book": 7,
+    "cost_books": 14,
+    "total_spent": 14,
+    "initial_money": 56,
+    "money_left": 42,
+    "answer": 42
+  },
+  "correct_value": 42,
+  "flawed_value": 14,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_notebooks",
+      "question_inputs": [
+        "num_notebooks",
+        "cost_per_notebook"
+      ],
+      "solution_line_template": "7 notebooks cost {num_notebooks} notebooks x ${cost_per_notebook}/notebook = $<<{num_notebooks}*{cost_per_notebook}={cost_notebooks}>>{cost_notebooks}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cost_books",
+      "question_inputs": [
+        "num_books",
+        "cost_per_book"
+      ],
+      "solution_line_template": "2 books cost {num_books} books x ${cost_per_book}/book = $<<{num_books}*{cost_per_book}={cost_books}>>{cost_books}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_spent",
+      "question_inputs": [],
+      "solution_line_template": "In total Joe has spent ${cost_notebooks} + ${cost_books} = $<<{cost_notebooks}+{cost_books}={total_spent}>>{total_spent}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "money_left",
+      "question_inputs": [
+        "initial_money"
+      ],
+      "solution_line_template": "He has ${initial_money} - ${total_spent} = $<<{initial_money}-{total_spent}={money_left}>>{money_left} left"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "7 notebooks cost 7 notebooks x $4/notebook = $<<7*4=28>>28",
+    "L2": "2 books cost 2 books x $7/book = $<<2*7=14>>14",
+    "L3": "In total Joe has spent $28 + $14 = $<<28+14=14>>14",
+    "L4": "He has $56 - $14 = $<<56-14=42>>42 left",
+    "FA": "#### 42"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": 4688517757415184494,
+  "model_name": "google_gemini-2.5-flash"
+}

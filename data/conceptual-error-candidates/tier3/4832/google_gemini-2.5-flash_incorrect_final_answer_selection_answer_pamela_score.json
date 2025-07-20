@@ -1,0 +1,88 @@
+{
+  "index": 4832,
+  "original_solution_mapping": {
+    "FA": "#### 84",
+    "L1": "Lowella got 100 x 35/100 = <<100*35/100=35>>35 correct answers.",
+    "L2": "Pamela got 35 x 20/100 = <<35*20/100=7>>7 more correct answers than Lowella.",
+    "L3": "So, Pamela got 35 + 7 = <<35+7=42>>42 correct answers.",
+    "L4": "Thus, Mandy got 42 x 2 = <<42*2=84>>84 correct answers."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4832.\n    Returns: Mandy's score.\n    \"\"\"\n    # L1\n    total_items = 100 # 100-item exam\n    lowella_percentage = Fraction(35, 100) # 35% of the questions correctly\n    lowella_score = total_items * lowella_percentage\n\n    # L2\n    pamela_additional_percentage = Fraction(20, 100) # 20% more correct answers\n    pamela_additional_score = lowella_score * pamela_additional_percentage\n\n    # L3\n    pamela_score = lowella_score + pamela_additional_score\n\n    # L4\n    mandy_multiplier = 2 # twice Pamela's score\n    mandy_score = pamela_score * mandy_multiplier\n\n    # FA\n    answer = mandy_score\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "mandy_score",
+    "replacement_variable": "pamela_score"
+  },
+  "correct_trace": {
+    "total_items": 100,
+    "lowella_percentage": "7/20",
+    "lowella_score": "35",
+    "pamela_additional_percentage": "1/5",
+    "pamela_additional_score": "7",
+    "pamela_score": "42",
+    "mandy_multiplier": 2,
+    "mandy_score": "84",
+    "answer": "84"
+  },
+  "flawed_trace": {
+    "total_items": 100,
+    "lowella_percentage": "7/20",
+    "lowella_score": "35",
+    "pamela_additional_percentage": "1/5",
+    "pamela_additional_score": "7",
+    "pamela_score": "42",
+    "mandy_multiplier": 2,
+    "mandy_score": "84",
+    "answer": "42"
+  },
+  "correct_value": "84",
+  "flawed_value": "42",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "lowella_score",
+      "question_inputs": [
+        "total_items",
+        "lowella_percentage"
+      ],
+      "solution_line_template": "Lowella got {total_items} x {lowella_percentage} = <<{total_items}*{lowella_percentage}={lowella_score}>>{lowella_score} correct answers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "pamela_additional_score",
+      "question_inputs": [
+        "pamela_additional_percentage"
+      ],
+      "solution_line_template": "Pamela got {lowella_score} x {pamela_additional_percentage} = <<{lowella_score}*{pamela_additional_percentage}={pamela_additional_score}>>{pamela_additional_score} more correct answers than Lowella."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "pamela_score",
+      "question_inputs": [],
+      "solution_line_template": "So, Pamela got {lowella_score} + {pamela_additional_score} = <<{lowella_score}+{pamela_additional_score}={pamela_score}>>{pamela_score} correct answers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "mandy_score",
+      "question_inputs": [
+        "mandy_multiplier"
+      ],
+      "solution_line_template": "Thus, Mandy got {pamela_score} x {mandy_multiplier} = <<{pamela_score}*{mandy_multiplier}={mandy_score}>>{mandy_score} correct answers."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Lowella got 100 x 35/100 = <<100*35/100=35>>35 correct answers.",
+    "L2": "Pamela got 35 x 20/100 = <<35*20/100=7>>7 more correct answers than Lowella.",
+    "L3": "So, Pamela got 35 + 7 = <<35+7=42>>42 correct answers.",
+    "FA": "#### 42"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'pamela_score' (value: 42) was reported instead of 'mandy_score' (value: 84).",
+  "repro_seed": -8869336964256519404,
+  "model_name": "google_gemini-2.5-flash"
+}

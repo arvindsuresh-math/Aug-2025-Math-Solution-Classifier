@@ -1,0 +1,106 @@
+{
+  "index": 3137,
+  "original_solution_mapping": {
+    "FA": "#### 70",
+    "L1": "5 students scored a combined total of 92 * 5 = <<92*5=460>>460",
+    "L2": "4 additional students scored a combined total of 80 * 4 = <<80*4=320>>320",
+    "L3": "9 students therefore scored a combined total of 460 + 320 = <<460+320=780>>780",
+    "L4": "We know the total combined score for 10 students must be at least 85 average * 10 students = <<85*10=850>>850",
+    "L5": "Therefore, the last student must score at least an 850 - 780 = <<850-780=70>>70"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3137.\n    Returns: the minimum score the last student needs to make the teacher happy.\n    \"\"\"\n    # L1\n    num_students_group1 = 5 # 5 students\n    score_group1 = 92 # scored a 92 on the test\n    combined_score_group1 = score_group1 * num_students_group1\n\n    # L2\n    num_students_group2 = 4 # 4 of which\n    score_group2 = 80 # scored an 80\n    combined_score_group2 = score_group2 * num_students_group2\n\n    # L3\n    combined_score_9_students = combined_score_group1 + combined_score_group2\n\n    # L4\n    target_average = 85 # at least 85\n    total_students = 10 # 10 students in the class\n    required_total_score = target_average * total_students\n\n    # L5\n    score_last_student = required_total_score - combined_score_9_students\n\n    # FA\n    answer = score_last_student\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "combined_score_group1",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x316797cd0>"
+  },
+  "correct_trace": {
+    "num_students_group1": 5,
+    "score_group1": 92,
+    "combined_score_group1": 460,
+    "num_students_group2": 4,
+    "score_group2": 80,
+    "combined_score_group2": 320,
+    "combined_score_9_students": 780,
+    "target_average": 85,
+    "total_students": 10,
+    "required_total_score": 850,
+    "score_last_student": 70,
+    "answer": 70
+  },
+  "flawed_trace": {
+    "num_students_group1": 5,
+    "score_group1": 92,
+    "combined_score_group1": 97,
+    "num_students_group2": 4,
+    "score_group2": 80,
+    "combined_score_group2": 320,
+    "combined_score_9_students": 417,
+    "target_average": 85,
+    "total_students": 10,
+    "required_total_score": 850,
+    "score_last_student": 433,
+    "answer": 433
+  },
+  "correct_value": 460,
+  "flawed_value": 97,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "combined_score_group1",
+      "question_inputs": [
+        "num_students_group1",
+        "score_group1"
+      ],
+      "solution_line_template": "{num_students_group1} students scored a combined total of {score_group1} * {num_students_group1} = <<{score_group1}*{num_students_group1}={combined_score_group1}>>{combined_score_group1}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "combined_score_group2",
+      "question_inputs": [
+        "num_students_group2",
+        "score_group2"
+      ],
+      "solution_line_template": "{num_students_group2} additional students scored a combined total of {score_group2} * {num_students_group2} = <<{score_group2}*{num_students_group2}={combined_score_group2}>>{combined_score_group2}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "combined_score_9_students",
+      "question_inputs": [],
+      "solution_line_template": "9 students therefore scored a combined total of {combined_score_group1} + {combined_score_group2} = <<{combined_score_group1}+{combined_score_group2}={combined_score_9_students}>>{combined_score_9_students}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "required_total_score",
+      "question_inputs": [
+        "target_average",
+        "total_students"
+      ],
+      "solution_line_template": "We know the total combined score for {total_students} students must be at least {target_average} average * {total_students} students = <<{target_average}*{total_students}={required_total_score}>>{required_total_score}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "score_last_student",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, the last student must score at least an {required_total_score} - {combined_score_9_students} = <<{required_total_score}-{combined_score_9_students}={score_last_student}>>{score_last_student}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "5 students scored a combined total of 92 * 5 = <<92*5=97>>97",
+    "L2": "4 additional students scored a combined total of 80 * 4 = <<80*4=320>>320",
+    "L3": "9 students therefore scored a combined total of 97 + 320 = <<97+320=417>>417",
+    "L4": "We know the total combined score for 10 students must be at least 85 average * 10 students = <<85*10=850>>850",
+    "L5": "Therefore, the last student must score at least an 850 - 417 = <<850-417=433>>433",
+    "FA": "#### 433"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 4639043854755892143,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 5396,
+  "original_solution_mapping": {
+    "FA": "#### 130",
+    "L1": "10 pages per day on day 1 * 2 = <<10*2=20>>20 pages per day for days 2 through 7",
+    "L2": "20 * 6 remaining days = <<20*6=120>>120 pages total from days 2 through 7",
+    "L3": "10 pages day 1 + 120 pages days 2 through 7 = <<10+120=130>>130 total pages read in one week"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5396.\n    Returns: the total number of pages read after the week is over.\n    \"\"\"\n    # L1\n    pages_day1 = 10 # He has read 10 pages already on the first day.\n    multiplier_for_remaining_days = 2 # reads twice the amount of pages as the first day\n    pages_per_day_remaining = pages_day1 * multiplier_for_remaining_days\n\n    # L2\n    remaining_days = 6 # remaining 6 days\n    total_pages_remaining_days = pages_per_day_remaining * remaining_days\n\n    # L3\n    total_pages_week = pages_day1 + total_pages_remaining_days\n\n    # FA\n    answer = total_pages_week\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_pages_remaining_days",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x317f51d50>"
+  },
+  "correct_trace": {
+    "pages_day1": 10,
+    "multiplier_for_remaining_days": 2,
+    "pages_per_day_remaining": 20,
+    "remaining_days": 6,
+    "total_pages_remaining_days": 120,
+    "total_pages_week": 130,
+    "answer": 130
+  },
+  "flawed_trace": {
+    "pages_day1": 10,
+    "multiplier_for_remaining_days": 2,
+    "pages_per_day_remaining": 20,
+    "remaining_days": 6,
+    "total_pages_remaining_days": 26,
+    "total_pages_week": 36,
+    "answer": 36
+  },
+  "correct_value": 120,
+  "flawed_value": 26,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "pages_per_day_remaining",
+      "question_inputs": [
+        "pages_day1",
+        "multiplier_for_remaining_days"
+      ],
+      "solution_line_template": "{pages_day1} pages per day on day 1 * {multiplier_for_remaining_days} = <<{pages_day1}*{multiplier_for_remaining_days}={pages_per_day_remaining}>>{pages_per_day_remaining} pages per day for days 2 through 7"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_pages_remaining_days",
+      "question_inputs": [
+        "remaining_days"
+      ],
+      "solution_line_template": "{pages_per_day_remaining} * {remaining_days} remaining days = <<{pages_per_day_remaining}*{remaining_days}={total_pages_remaining_days}>>{total_pages_remaining_days} pages total from days 2 through 7"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_pages_week",
+      "question_inputs": [],
+      "solution_line_template": "{pages_day1} pages day 1 + {total_pages_remaining_days} pages days 2 through 7 = <<{pages_day1}+{total_pages_remaining_days}={total_pages_week}>>{total_pages_week} total pages read in one week"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "10 pages per day on day 1 * 2 = <<10*2=20>>20 pages per day for days 2 through 7",
+    "L2": "20 * 6 remaining days = <<20*6=26>>26 pages total from days 2 through 7",
+    "L3": "10 pages day 1 + 26 pages days 2 through 7 = <<10+26=36>>36 total pages read in one week",
+    "FA": "#### 36"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -7842924285475715697,
+  "model_name": "google_gemini-2.5-flash"
+}

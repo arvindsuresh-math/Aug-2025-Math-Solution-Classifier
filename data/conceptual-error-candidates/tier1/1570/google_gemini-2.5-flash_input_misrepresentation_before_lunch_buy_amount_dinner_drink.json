@@ -1,0 +1,93 @@
+{
+  "index": 1570,
+  "original_solution_mapping": {
+    "FA": "#### 16",
+    "L1": "Before dinner, she had 56+8=<<56+8=64>>64 ounces of CM.",
+    "L2": "Before drinking 8 ounces of CM during lunch, she had 64+8=<<64+8=72>>72 ounces of CM.",
+    "L3": "Before buying 64 ounces of CM, she had 72-64=<<72-64=8>>8 ounces of CM.",
+    "L4": "And before breakfast, she had 8+8=<<8+8=16>>16 ounces of chocolate milk."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1570.\n    Returns: the ounces of chocolate milk Holly began the day with.\n    \"\"\"\n    # L1\n    end_of_day_amount = 56 # If she ends the day with 56 ounces of chocolate milk\n    dinner_drink = 8 # With dinner, she drinks another 8 ounces of chocolate milk\n    before_dinner_amount = end_of_day_amount + dinner_drink\n\n    # L2\n    lunch_drink = 8 # drinks 8 ounces of it (during her lunch break)\n    before_lunch_drink_amount = before_dinner_amount + lunch_drink\n\n    # L3\n    lunch_buy = 64 # buys a new 64-ounce container of chocolate milk\n    before_lunch_buy_amount = before_lunch_drink_amount - lunch_buy\n\n    # L4\n    breakfast_drink = 8 # With breakfast, she drinks 8 ounces of chocolate milk\n    initial_amount = before_lunch_buy_amount + breakfast_drink\n\n    # FA\n    answer = initial_amount\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "before_lunch_buy_amount",
+    "operand_to_replace": "lunch_buy",
+    "replacement_variable": "dinner_drink"
+  },
+  "correct_trace": {
+    "end_of_day_amount": 56,
+    "dinner_drink": 8,
+    "before_dinner_amount": 64,
+    "lunch_drink": 8,
+    "before_lunch_drink_amount": 72,
+    "lunch_buy": 64,
+    "before_lunch_buy_amount": 8,
+    "breakfast_drink": 8,
+    "initial_amount": 16,
+    "answer": 16
+  },
+  "flawed_trace": {
+    "end_of_day_amount": 56,
+    "dinner_drink": 8,
+    "before_dinner_amount": 64,
+    "lunch_drink": 8,
+    "before_lunch_drink_amount": 72,
+    "lunch_buy": 64,
+    "before_lunch_buy_amount": 64,
+    "breakfast_drink": 8,
+    "initial_amount": 72,
+    "answer": 72
+  },
+  "correct_value": 8,
+  "flawed_value": 64,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "end_of_day_amount",
+        "dinner_drink"
+      ],
+      "WK_inputs": [],
+      "output_variable": "before_dinner_amount",
+      "solution_line_template": "Before dinner, she had {end_of_day_amount}+{dinner_drink}=<<{end_of_day_amount}+{dinner_drink}={before_dinner_amount}>>{before_dinner_amount} ounces of CM."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "lunch_drink"
+      ],
+      "WK_inputs": [],
+      "output_variable": "before_lunch_drink_amount",
+      "solution_line_template": "Before drinking {lunch_drink} ounces of CM during lunch, she had {before_dinner_amount}+{lunch_drink}=<<{before_dinner_amount}+{lunch_drink}={before_lunch_drink_amount}>>{before_lunch_drink_amount} ounces of CM."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "lunch_buy"
+      ],
+      "WK_inputs": [],
+      "output_variable": "before_lunch_buy_amount",
+      "solution_line_template": "Before buying {lunch_buy} ounces of CM, she had {before_lunch_drink_amount}-{lunch_buy}=<<{before_lunch_drink_amount}-{lunch_buy}={before_lunch_buy_amount}>>{before_lunch_buy_amount} ounces of CM."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "breakfast_drink"
+      ],
+      "WK_inputs": [],
+      "output_variable": "initial_amount",
+      "solution_line_template": "And before breakfast, she had {before_lunch_buy_amount}+{breakfast_drink}=<<{before_lunch_buy_amount}+{breakfast_drink}={initial_amount}>>{initial_amount} ounces of chocolate milk."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Before dinner, she had 56+8=<<56+8=64>>64 ounces of CM.",
+    "L2": "Before drinking 8 ounces of CM during lunch, she had 64+8=<<64+8=72>>72 ounces of CM.",
+    "L3": "Before buying 8 ounces of CM, she had 72-8=<<72-8=64>>64 ounces of CM.",
+    "L4": "And before breakfast, she had 64+8=<<64+8=72>>72 ounces of chocolate milk.",
+    "FA": "#### 72"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'dinner_drink' (8) was used instead of 'lunch_buy' (64).",
+  "repro_seed": -1246697752040174704,
+  "model_name": "google_gemini-2.5-flash"
+}

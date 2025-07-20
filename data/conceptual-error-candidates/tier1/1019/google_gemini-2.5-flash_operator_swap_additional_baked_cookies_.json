@@ -1,0 +1,92 @@
+{
+  "index": 1019,
+  "original_solution_mapping": {
+    "FA": "#### 29",
+    "L1": "Before throwing the cookies, Alice and Bob baked 74 + 7 = <<74+7=81>>81 cookies.",
+    "L2": "After throwing the cookies, they baked 5 + 36 = <<5+36=41>>41 cookies.",
+    "L3": "In total, they baked 81 + 41 = <<81+41=122>>122 cookies",
+    "L4": "They threw 122 - 93 = <<122-93=29>>29 cookies on the floor."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1019.\n    Returns: the number of cookies accidentally thrown on the floor.\n    \"\"\"\n    # L1\n    alice_initial_cookies = 74 # Alice baked 74 chocolate chip cookies\n    bob_initial_cookies = 7 # Bob baked 7 peanut butter cookies\n    initial_baked_cookies = alice_initial_cookies + bob_initial_cookies\n\n    # L2\n    alice_additional_cookies = 5 # Alice baked 5 more cookies\n    bob_additional_cookies = 36 # Bob baked 36 more\n    additional_baked_cookies = alice_additional_cookies + bob_additional_cookies\n\n    # L3\n    total_baked_cookies = initial_baked_cookies + additional_baked_cookies\n\n    # L4\n    edible_cookies = 93 # they had 93 edible cookies at the end\n    thrown_cookies = total_baked_cookies - edible_cookies\n\n    # FA\n    answer = thrown_cookies\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "additional_baked_cookies",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x317755a90>"
+  },
+  "correct_trace": {
+    "alice_initial_cookies": 74,
+    "bob_initial_cookies": 7,
+    "initial_baked_cookies": 81,
+    "alice_additional_cookies": 5,
+    "bob_additional_cookies": 36,
+    "additional_baked_cookies": 41,
+    "total_baked_cookies": 122,
+    "edible_cookies": 93,
+    "thrown_cookies": 29,
+    "answer": 29
+  },
+  "flawed_trace": {
+    "alice_initial_cookies": 74,
+    "bob_initial_cookies": 7,
+    "initial_baked_cookies": 81,
+    "alice_additional_cookies": 5,
+    "bob_additional_cookies": 36,
+    "additional_baked_cookies": 180,
+    "total_baked_cookies": 261,
+    "edible_cookies": 93,
+    "thrown_cookies": 168,
+    "answer": 168
+  },
+  "correct_value": 41,
+  "flawed_value": 180,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "alice_initial_cookies",
+        "bob_initial_cookies"
+      ],
+      "WK_inputs": [],
+      "output_variable": "initial_baked_cookies",
+      "solution_line_template": "Before throwing the cookies, Alice and Bob baked {alice_initial_cookies} + {bob_initial_cookies} = <<{alice_initial_cookies}+{bob_initial_cookies}={initial_baked_cookies}>>{initial_baked_cookies} cookies."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "alice_additional_cookies",
+        "bob_additional_cookies"
+      ],
+      "WK_inputs": [],
+      "output_variable": "additional_baked_cookies",
+      "solution_line_template": "After throwing the cookies, they baked {alice_additional_cookies} + {bob_additional_cookies} = <<{alice_additional_cookies}+{bob_additional_cookies}={additional_baked_cookies}>>{additional_baked_cookies} cookies."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_baked_cookies",
+      "solution_line_template": "In total, they baked {initial_baked_cookies} + {additional_baked_cookies} = <<{initial_baked_cookies}+{additional_baked_cookies}={total_baked_cookies}>>{total_baked_cookies} cookies"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "edible_cookies"
+      ],
+      "WK_inputs": [],
+      "output_variable": "thrown_cookies",
+      "solution_line_template": "They threw {total_baked_cookies} - {edible_cookies} = <<{total_baked_cookies}-{edible_cookies}={thrown_cookies}>>{thrown_cookies} cookies on the floor."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Before throwing the cookies, Alice and Bob baked 74 + 7 = <<74+7=81>>81 cookies.",
+    "L2": "After throwing the cookies, they baked 5 + 36 = <<5+36=180>>180 cookies.",
+    "L3": "In total, they baked 81 + 180 = <<81+180=261>>261 cookies",
+    "L4": "They threw 261 - 93 = <<261-93=168>>168 cookies on the floor.",
+    "FA": "#### 168"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 8038439314813694185,
+  "model_name": "google_gemini-2.5-flash"
+}

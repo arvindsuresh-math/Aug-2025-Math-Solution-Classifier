@@ -1,0 +1,68 @@
+{
+  "index": 5374,
+  "original_solution_mapping": {
+    "FA": "#### 164",
+    "L1": "Let x = the number of marbles in the jar.",
+    "L2": "If 50% of the marbles are blue, and 25% of them are red, then the remaining 25% must be either green or yellow.",
+    "L3": "So 0.25 * x = 27 green marbles + 14 yellow marbles = 41 marbles.",
+    "L4": "So there are a total of 4 * 41 = <<4*41=164>>164 marbles in the jar."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5374.\n    Returns: the total number of marbles in the jar.\n    \"\"\"\n    # L3\n    remaining_fraction = 0.25 # Derived from: 1 (total) - 0.5 (blue) - 0.25 (red) = 0.25\n    green_marbles = 27 # 27 of them are green\n    yellow_marbles = 14 # 14 of them are yellow\n    green_plus_yellow_marbles = green_marbles + yellow_marbles\n\n    # L4\n    # The solution implies that green and yellow marbles constitute 25% of the total.\n    # To find the total, we multiply the sum of green and yellow marbles by 1 / 0.25 = 4.\n    multiplier_from_percentage = 4 # Derived from 1 / remaining_fraction\n    total_marbles = multiplier_from_percentage * green_plus_yellow_marbles\n\n    # FA\n    answer = total_marbles\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "green_plus_yellow_marbles",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x31c0bd090>"
+  },
+  "correct_trace": {
+    "remaining_fraction": 0.25,
+    "green_marbles": 27,
+    "yellow_marbles": 14,
+    "green_plus_yellow_marbles": 41,
+    "multiplier_from_percentage": 4,
+    "total_marbles": 164,
+    "answer": 164
+  },
+  "flawed_trace": {
+    "remaining_fraction": 0.25,
+    "green_marbles": 27,
+    "yellow_marbles": 14,
+    "green_plus_yellow_marbles": 13,
+    "multiplier_from_percentage": 4,
+    "total_marbles": 52,
+    "answer": 52
+  },
+  "correct_value": 41,
+  "flawed_value": 13,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "green_plus_yellow_marbles",
+      "question_inputs": [
+        "remaining_fraction",
+        "green_marbles",
+        "yellow_marbles"
+      ],
+      "solution_line_template": "So {remaining_fraction} * x = {green_marbles} green marbles + {yellow_marbles} yellow marbles = {green_plus_yellow_marbles} marbles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_marbles",
+      "question_inputs": [
+        "multiplier_from_percentage"
+      ],
+      "solution_line_template": "So there are a total of {multiplier_from_percentage} * {green_plus_yellow_marbles} = <<{multiplier_from_percentage}*{green_plus_yellow_marbles}={total_marbles}>>{total_marbles} marbles in the jar."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L3": "So 0.25 * x = 27 green marbles + 14 yellow marbles = 13 marbles.",
+    "L4": "So there are a total of 4 * 13 = <<4*13=52>>52 marbles in the jar.",
+    "FA": "#### 52"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": 5394851734280058788,
+  "model_name": "google_gemini-2.5-flash"
+}

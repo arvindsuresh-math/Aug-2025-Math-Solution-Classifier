@@ -1,0 +1,64 @@
+{
+  "index": 4033,
+  "original_solution_mapping": {
+    "FA": "#### 168",
+    "L1": "He sent 2*12=<<2*12=24>>24 roses per day",
+    "L2": "That means he sent 24*7=<<24*7=168>>168 roses for the month"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4033.\n    Returns: the total number of roses sent.\n    \"\"\"\n    # L1\n    num_dozen_per_day = 2 # 2 dozen roses every day\n    dozen = 12 # WK\n    roses_per_day = num_dozen_per_day * dozen\n\n    # L2\n    days_in_week = 7 # WK\n    total_roses = roses_per_day * days_in_week\n\n    # FA\n    answer = total_roses\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_roses",
+    "operand_to_replace": "days_in_week",
+    "replacement_variable": "num_dozen_per_day"
+  },
+  "correct_trace": {
+    "num_dozen_per_day": 2,
+    "dozen": 12,
+    "roses_per_day": 24,
+    "days_in_week": 7,
+    "total_roses": 168,
+    "answer": 168
+  },
+  "flawed_trace": {
+    "num_dozen_per_day": 2,
+    "dozen": 12,
+    "roses_per_day": 24,
+    "days_in_week": 7,
+    "total_roses": 48,
+    "answer": 48
+  },
+  "correct_value": 168,
+  "flawed_value": 48,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "dozen"
+      ],
+      "line_number": "L1",
+      "output_variable": "roses_per_day",
+      "question_inputs": [
+        "num_dozen_per_day"
+      ],
+      "solution_line_template": "He sent {num_dozen_per_day}*{dozen}=<<{num_dozen_per_day}*{dozen}={roses_per_day}>>{roses_per_day} roses per day"
+    },
+    {
+      "WK_inputs": [
+        "days_in_week"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_roses",
+      "question_inputs": [],
+      "solution_line_template": "That means he sent {roses_per_day}*{days_in_week}=<<{roses_per_day}*{days_in_week}={total_roses}>>{total_roses} roses for the month"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He sent 2*12=<<2*12=24>>24 roses per day",
+    "L2": "That means he sent 24*2=<<24*2=48>>48 roses for the month",
+    "FA": "#### 48"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_dozen_per_day' (2) was used instead of 'days_in_week' (7).",
+  "repro_seed": 4604281014088364204,
+  "model_name": "google_gemini-2.5-flash"
+}

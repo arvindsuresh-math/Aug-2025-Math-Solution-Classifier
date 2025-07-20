@@ -1,0 +1,94 @@
+{
+  "index": 5222,
+  "original_solution_mapping": {
+    "FA": "#### 16",
+    "L1": "A gallon is 1*128=<<1*128=128>>128 ounces",
+    "L2": "So he needs to buy 128/16=<<128/16=8>>8 of the small bottles",
+    "L3": "That would cost 8*3=<<8*3=24>>24 dollars",
+    "L4": "So he saves 24-8=$<<24-8=16>>16"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5222.\n    Returns: the amount of money saved by buying the gallon container.\n    \"\"\"\n    # L1\n    gallons = 1 # 1 gallon of mayo\n    ounces_per_gallon = 128 # WK\n    total_ounces_gallon = gallons * ounces_per_gallon\n\n    # L2\n    ounces_per_small_bottle = 16 # a 16-ounce bottle\n    num_small_bottles = total_ounces_gallon / ounces_per_small_bottle\n\n    # L3\n    cost_per_small_bottle = 3 # bottle costs $3\n    cost_small_bottles = num_small_bottles * cost_per_small_bottle\n\n    # L4\n    cost_gallon_costco = 8 # 1 gallon of mayo at Costco for 8 dollars\n    money_saved = cost_small_bottles - cost_gallon_costco\n\n    # FA\n    answer = money_saved\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "cost_small_bottles",
+    "operand_to_replace": "num_small_bottles",
+    "replacement_variable": "total_ounces_gallon"
+  },
+  "correct_trace": {
+    "gallons": 1,
+    "ounces_per_gallon": 128,
+    "total_ounces_gallon": 128,
+    "ounces_per_small_bottle": 16,
+    "num_small_bottles": 8.0,
+    "cost_per_small_bottle": 3,
+    "cost_small_bottles": 24.0,
+    "cost_gallon_costco": 8,
+    "money_saved": 16.0,
+    "answer": 16.0
+  },
+  "flawed_trace": {
+    "gallons": 1,
+    "ounces_per_gallon": 128,
+    "total_ounces_gallon": 128,
+    "ounces_per_small_bottle": 16,
+    "num_small_bottles": 8.0,
+    "cost_per_small_bottle": 3,
+    "cost_small_bottles": 384,
+    "cost_gallon_costco": 8,
+    "money_saved": 376,
+    "answer": 376
+  },
+  "correct_value": 24.0,
+  "flawed_value": 384,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "ounces_per_gallon"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_ounces_gallon",
+      "question_inputs": [
+        "gallons"
+      ],
+      "solution_line_template": "A gallon is {gallons}*{ounces_per_gallon}=<<{gallons}*{ounces_per_gallon}={total_ounces_gallon}>>{total_ounces_gallon} ounces"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_small_bottles",
+      "question_inputs": [
+        "ounces_per_small_bottle"
+      ],
+      "solution_line_template": "So he needs to buy {total_ounces_gallon}/{ounces_per_small_bottle}=<<{total_ounces_gallon}/{ounces_per_small_bottle}={num_small_bottles}>>{num_small_bottles} of the small bottles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cost_small_bottles",
+      "question_inputs": [
+        "cost_per_small_bottle"
+      ],
+      "solution_line_template": "That would cost {num_small_bottles}*{cost_per_small_bottle}=<<{num_small_bottles}*{cost_per_small_bottle}={cost_small_bottles}>>{cost_small_bottles} dollars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "money_saved",
+      "question_inputs": [
+        "cost_gallon_costco"
+      ],
+      "solution_line_template": "So he saves {cost_small_bottles}-{cost_gallon_costco}=${cost_small_bottles}-{cost_gallon_costco}={money_saved}>>{money_saved}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "A gallon is 1*128=<<1*128=128>>128 ounces",
+    "L2": "So he needs to buy 128/16=<<128/16=8>>8 of the small bottles",
+    "L3": "That would cost 128*3=<<128*3=384>>384 dollars",
+    "L4": "So he saves 384-8=$384-8=376>>376",
+    "FA": "#### 376"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'total_ounces_gallon' (value: 128) was used instead of 'num_small_bottles' (value: 8.0).",
+  "repro_seed": -72919632283414039,
+  "model_name": "google_gemini-2.5-flash"
+}

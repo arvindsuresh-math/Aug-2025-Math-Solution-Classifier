@@ -1,0 +1,75 @@
+{
+  "index": 2333,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "If one egg weighs 1/16 of a pound then 1 pound will be made up of 1/(1/16) = 16 eggs",
+    "L2": "One pound of eggs is 16 eggs so 6 pounds is 6*16 = <<6*16=96>>96 eggs",
+    "L3": "One dozen is 12 eggs so 96 eggs will make 96/12 = <<96/12=8>>8 dozens"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2333.\n    Returns: the number of dozens of eggs Milo should buy.\n    \"\"\"\n    # L1\n    egg_weight_per_pound = Fraction(1, 16) # an egg weighs 1/16 of a pound\n    eggs_per_pound = 1 / egg_weight_per_pound\n\n    # L2\n    total_pounds_needed = 6 # He needs 6 pounds in total\n    total_eggs_needed = total_pounds_needed * eggs_per_pound\n\n    # L3\n    eggs_per_dozen = 12 # WK\n    total_dozens = total_eggs_needed / eggs_per_dozen\n\n    # FA\n    answer = total_dozens\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_dozens",
+    "operand_to_replace": "eggs_per_dozen",
+    "replacement_variable": "total_eggs_needed"
+  },
+  "correct_trace": {
+    "egg_weight_per_pound": "1/16",
+    "eggs_per_pound": "16",
+    "total_pounds_needed": 6,
+    "total_eggs_needed": "96",
+    "eggs_per_dozen": 12,
+    "total_dozens": "8",
+    "answer": "8"
+  },
+  "flawed_trace": {
+    "egg_weight_per_pound": "1/16",
+    "eggs_per_pound": "16",
+    "total_pounds_needed": 6,
+    "total_eggs_needed": "96",
+    "eggs_per_dozen": 12,
+    "total_dozens": "1",
+    "answer": "1"
+  },
+  "correct_value": "8",
+  "flawed_value": "1",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "eggs_per_pound",
+      "question_inputs": [
+        "egg_weight_per_pound"
+      ],
+      "solution_line_template": "If one egg weighs {egg_weight_per_pound} of a pound then 1 pound will be made up of 1/({egg_weight_per_pound}) = {eggs_per_pound} eggs"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_eggs_needed",
+      "question_inputs": [
+        "total_pounds_needed"
+      ],
+      "solution_line_template": "One pound of eggs is {eggs_per_pound} eggs so {total_pounds_needed} pounds is {total_pounds_needed}*{eggs_per_pound} = <<{total_pounds_needed}*{eggs_per_pound}={total_eggs_needed}>>{total_eggs_needed} eggs"
+    },
+    {
+      "WK_inputs": [
+        "eggs_per_dozen"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_dozens",
+      "question_inputs": [],
+      "solution_line_template": "One dozen is {eggs_per_dozen} eggs so {total_eggs_needed} eggs will make {total_eggs_needed}/{eggs_per_dozen} = <<{total_eggs_needed}/{eggs_per_dozen}={total_dozens}>>{total_dozens} dozens"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If one egg weighs 1/16 of a pound then 1 pound will be made up of 1/(1/16) = 16 eggs",
+    "L2": "One pound of eggs is 16 eggs so 6 pounds is 6*16 = <<6*16=96>>96 eggs",
+    "L3": "One dozen is 96 eggs so 96 eggs will make 96/96 = <<96/96=1>>1 dozens",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'total_eggs_needed' (96) was used instead of 'eggs_per_dozen' (12).",
+  "repro_seed": -7748379464614726831,
+  "model_name": "google_gemini-2.5-flash"
+}

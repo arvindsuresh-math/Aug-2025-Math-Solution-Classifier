@@ -1,0 +1,63 @@
+{
+  "index": 7107,
+  "original_solution_mapping": {
+    "FA": "#### 126",
+    "L1": "We know she counted 24 red jelly beans and 18 white jelly beans so 24 + 18 = <<24+18=42>>42 jelly beans",
+    "L2": "Even though she only bought 1 bag of jellybeans, she thought it would take 3 bags to fill up the bowl. So 3 bags * 42 jellybeans = <<1*42+1*42+1*42=126>>126 total red & white jellybeans"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7107.\n    Returns: Jessica's guess as to how many red and white jelly beans were in the fishbowl.\n    \"\"\"\n    # L1\n    red_jellybeans = 24 # 24 red\n    white_jellybeans = 18 # 18 white\n    red_white_per_bag = red_jellybeans + white_jellybeans\n\n    # L2\n    num_bags_to_fill_bowl = 3 # three bags of jelly beans\n    total_red_white_jellybeans = num_bags_to_fill_bowl * red_white_per_bag\n\n    # FA\n    answer = total_red_white_jellybeans\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "red_white_per_bag",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x3171e9150>"
+  },
+  "correct_trace": {
+    "red_jellybeans": 24,
+    "white_jellybeans": 18,
+    "red_white_per_bag": 42,
+    "num_bags_to_fill_bowl": 3,
+    "total_red_white_jellybeans": 126,
+    "answer": 126
+  },
+  "flawed_trace": {
+    "red_jellybeans": 24,
+    "white_jellybeans": 18,
+    "red_white_per_bag": 432,
+    "num_bags_to_fill_bowl": 3,
+    "total_red_white_jellybeans": 1296,
+    "answer": 1296
+  },
+  "correct_value": 42,
+  "flawed_value": 432,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "red_white_per_bag",
+      "question_inputs": [
+        "red_jellybeans",
+        "white_jellybeans"
+      ],
+      "solution_line_template": "We know she counted {red_jellybeans} red jelly beans and {white_jellybeans} white jelly beans so {red_jellybeans} + {white_jellybeans} = <<{red_jellybeans}+{white_jellybeans}={red_white_per_bag}>>{red_white_per_bag} jelly beans"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_red_white_jellybeans",
+      "question_inputs": [
+        "num_bags_to_fill_bowl"
+      ],
+      "solution_line_template": "Even though she only bought 1 bag of jellybeans, she thought it would take {num_bags_to_fill_bowl} bags to fill up the bowl. So {num_bags_to_fill_bowl} bags * {red_white_per_bag} jellybeans = <<1*{red_white_per_bag}+1*{red_white_per_bag}+1*{red_white_per_bag}={total_red_white_jellybeans}>>{total_red_white_jellybeans} total red & white jellybeans"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "We know she counted 24 red jelly beans and 18 white jelly beans so 24 + 18 = <<24+18=432>>432 jelly beans",
+    "L2": "Even though she only bought 1 bag of jellybeans, she thought it would take 3 bags to fill up the bowl. So 3 bags * 432 jellybeans = <<1*432+1*432+1*432=1296>>1296 total red & white jellybeans",
+    "FA": "#### 1296"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 6472453323463683169,
+  "model_name": "google_gemini-2.5-flash"
+}

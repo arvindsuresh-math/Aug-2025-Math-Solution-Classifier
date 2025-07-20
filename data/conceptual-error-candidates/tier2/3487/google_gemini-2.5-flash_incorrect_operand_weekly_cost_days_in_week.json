@@ -1,0 +1,93 @@
+{
+  "index": 3487,
+  "original_solution_mapping": {
+    "FA": "#### 1920",
+    "L1": "He uses 40*1.5=<<40*1.5=60>>60 pounds of crab meat per day",
+    "L2": "That cost 60*8=$<<60*8=480>>480 per day",
+    "L3": "He is open 7-3=<<7-3=4>>4 days a week",
+    "L4": "So he spends 480*4=$<<480*4=1920>>1920 a week"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3487.\n    Returns: the total amount Johnny spends on crab meat in a week.\n    \"\"\"\n    # L1\n    dishes_per_day = 40 # 40 times a day\n    crab_meat_per_dish = 1.5 # 1.5 pounds of crab meat\n    daily_crab_meat_pounds = dishes_per_day * crab_meat_per_dish\n\n    # L2\n    cost_per_pound = 8 # $8 per pound\n    daily_cost = daily_crab_meat_pounds * cost_per_pound\n\n    # L3\n    days_in_week = 7 # WK\n    closed_days_per_week = 3 # closed 3 days a week\n    open_days_per_week = days_in_week - closed_days_per_week\n\n    # L4\n    weekly_cost = daily_cost * open_days_per_week\n\n    # FA\n    answer = weekly_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "weekly_cost",
+    "operand_to_replace": "open_days_per_week",
+    "replacement_variable": "days_in_week"
+  },
+  "correct_trace": {
+    "dishes_per_day": 40,
+    "crab_meat_per_dish": 1.5,
+    "daily_crab_meat_pounds": 60.0,
+    "cost_per_pound": 8,
+    "daily_cost": 480.0,
+    "days_in_week": 7,
+    "closed_days_per_week": 3,
+    "open_days_per_week": 4,
+    "weekly_cost": 1920.0,
+    "answer": 1920.0
+  },
+  "flawed_trace": {
+    "dishes_per_day": 40,
+    "crab_meat_per_dish": 1.5,
+    "daily_crab_meat_pounds": 60.0,
+    "cost_per_pound": 8,
+    "daily_cost": 480.0,
+    "days_in_week": 7,
+    "closed_days_per_week": 3,
+    "open_days_per_week": 4,
+    "weekly_cost": 3360.0,
+    "answer": 3360.0
+  },
+  "correct_value": 1920.0,
+  "flawed_value": 3360.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "daily_crab_meat_pounds",
+      "question_inputs": [
+        "dishes_per_day",
+        "crab_meat_per_dish"
+      ],
+      "solution_line_template": "He uses {dishes_per_day}*{crab_meat_per_dish}=<<{dishes_per_day}*{crab_meat_per_dish}={daily_crab_meat_pounds}>>{daily_crab_meat_pounds} pounds of crab meat per day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "daily_cost",
+      "question_inputs": [
+        "cost_per_pound"
+      ],
+      "solution_line_template": "That cost {daily_crab_meat_pounds}*{cost_per_pound}=$<<{daily_crab_meat_pounds}*{cost_per_pound}={daily_cost}>>{daily_cost} per day"
+    },
+    {
+      "WK_inputs": [
+        "days_in_week"
+      ],
+      "line_number": "L3",
+      "output_variable": "open_days_per_week",
+      "question_inputs": [
+        "closed_days_per_week"
+      ],
+      "solution_line_template": "He is open {days_in_week}-{closed_days_per_week}=<<{days_in_week}-{closed_days_per_week}={open_days_per_week}>>{open_days_per_week} days a week"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "weekly_cost",
+      "question_inputs": [],
+      "solution_line_template": "So he spends {daily_cost}*{open_days_per_week}=$<<{daily_cost}*{open_days_per_week}={weekly_cost}>>{weekly_cost} a week"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He uses 40*1.5=<<40*1.5=60>>60 pounds of crab meat per day",
+    "L2": "That cost 60*8=$<<60*8=480>>480 per day",
+    "L3": "He is open 7-3=<<7-3=4>>4 days a week",
+    "L4": "So he spends 480*7=$<<480*7=3360>>3360 a week",
+    "FA": "#### 3360"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'days_in_week' (value: 7) was used instead of 'open_days_per_week' (value: 4).",
+  "repro_seed": 6566599761913849539,
+  "model_name": "google_gemini-2.5-flash"
+}

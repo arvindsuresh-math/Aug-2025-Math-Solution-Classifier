@@ -1,0 +1,63 @@
+{
+  "index": 899,
+  "original_solution_mapping": {
+    "FA": "#### 16",
+    "L1": "He works 8 hours a day for 10 days means he works 8*10 = <<8*10=80>>80 hours",
+    "L2": "It takes him 5 hours to build one rocking chair so over 80 hours he builds 80/5 = <<80/5=16>>16 rocking chairs"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 899.\n    Returns: the total number of chairs Ben can build.\n    \"\"\"\n    # L1\n    hours_per_day = 8 # 8-hour shifts\n    number_of_days = 10 # in 10 days\n    total_hours_worked = hours_per_day * number_of_days\n\n    # L2\n    hours_per_chair = 5 # 5 hours to build 1 rocking chair\n    total_chairs_built = total_hours_worked / hours_per_chair\n\n    # FA\n    answer = total_chairs_built\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_chairs_built",
+    "operand_to_replace": "hours_per_chair",
+    "replacement_variable": "number_of_days"
+  },
+  "correct_trace": {
+    "hours_per_day": 8,
+    "number_of_days": 10,
+    "total_hours_worked": 80,
+    "hours_per_chair": 5,
+    "total_chairs_built": 16.0,
+    "answer": 16.0
+  },
+  "flawed_trace": {
+    "hours_per_day": 8,
+    "number_of_days": 10,
+    "total_hours_worked": 80,
+    "hours_per_chair": 5,
+    "total_chairs_built": 8.0,
+    "answer": 8.0
+  },
+  "correct_value": 16.0,
+  "flawed_value": 8.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_hours_worked",
+      "question_inputs": [
+        "hours_per_day",
+        "number_of_days"
+      ],
+      "solution_line_template": "He works {hours_per_day} hours a day for {number_of_days} days means he works {hours_per_day}*{number_of_days} = <<{hours_per_day}*{number_of_days}={total_hours_worked}>>{total_hours_worked} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_chairs_built",
+      "question_inputs": [
+        "hours_per_chair"
+      ],
+      "solution_line_template": "It takes him {hours_per_chair} hours to build one rocking chair so over {total_hours_worked} hours he builds {total_hours_worked}/{hours_per_chair} = <<{total_hours_worked}/{hours_per_chair}={total_chairs_built}>>{total_chairs_built} rocking chairs"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He works 8 hours a day for 10 days means he works 8*10 = <<8*10=80>>80 hours",
+    "L2": "It takes him 10 hours to build one rocking chair so over 80 hours he builds 80/10 = <<80/10=8>>8 rocking chairs",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'number_of_days' (10) was used instead of 'hours_per_chair' (5).",
+  "repro_seed": 3812303069585894975,
+  "model_name": "google_gemini-2.5-flash"
+}

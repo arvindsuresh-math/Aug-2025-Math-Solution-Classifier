@@ -1,0 +1,78 @@
+{
+  "index": 2682,
+  "original_solution_mapping": {
+    "FA": "#### 18",
+    "L1": "In a day, John uses 75x 8 = <<75*8=600>>600 watts.",
+    "L2": "So in a month, he uses 600 x 30 = 18 000 watts.",
+    "L3": "Since there are 1000 watts in 1 kilowatt, then John uses 18000/1000 = <<18000/1000=18>>18."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2682.\n    Returns: the total kWh of electric energy consumed per month.\n    \"\"\"\n    # L1\n    fan_wattage = 75 # 75-watt electric fan\n    hours_per_day = 8 # 8 hours a day\n    daily_watt_hours = fan_wattage * hours_per_day\n\n    # L2\n    days_per_month = 30 # 30 days\n    monthly_watt_hours = daily_watt_hours * days_per_month\n\n    # L3\n    watts_per_kilowatt = 1000 # 1000 watts in 1 kilowatt\n    monthly_kwh = monthly_watt_hours / watts_per_kilowatt\n\n    # FA\n    answer = monthly_kwh\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "monthly_kwh",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x314663c10>"
+  },
+  "correct_trace": {
+    "fan_wattage": 75,
+    "hours_per_day": 8,
+    "daily_watt_hours": 600,
+    "days_per_month": 30,
+    "monthly_watt_hours": 18000,
+    "watts_per_kilowatt": 1000,
+    "monthly_kwh": 18.0,
+    "answer": 18.0
+  },
+  "flawed_trace": {
+    "fan_wattage": 75,
+    "hours_per_day": 8,
+    "daily_watt_hours": 600,
+    "days_per_month": 30,
+    "monthly_watt_hours": 18000,
+    "watts_per_kilowatt": 1000,
+    "monthly_kwh": 18000000,
+    "answer": 18000000
+  },
+  "correct_value": 18.0,
+  "flawed_value": 18000000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "daily_watt_hours",
+      "question_inputs": [
+        "fan_wattage",
+        "hours_per_day"
+      ],
+      "solution_line_template": "In a day, John uses {fan_wattage}x {hours_per_day} = <<{fan_wattage}*{hours_per_day}={daily_watt_hours}>>{daily_watt_hours} watts."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "monthly_watt_hours",
+      "question_inputs": [
+        "days_per_month"
+      ],
+      "solution_line_template": "So in a month, he uses {daily_watt_hours} x {days_per_month} = {monthly_watt_hours} watts."
+    },
+    {
+      "WK_inputs": [
+        "watts_per_kilowatt"
+      ],
+      "line_number": "L3",
+      "output_variable": "monthly_kwh",
+      "question_inputs": [],
+      "solution_line_template": "Since there are {watts_per_kilowatt} watts in 1 kilowatt, then John uses {monthly_watt_hours}/{watts_per_kilowatt} = <<{monthly_watt_hours}/{watts_per_kilowatt}={monthly_kwh}>>{monthly_kwh}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In a day, John uses 75x 8 = <<75*8=600>>600 watts.",
+    "L2": "So in a month, he uses 600 x 30 = 18000 watts.",
+    "L3": "Since there are 1000 watts in 1 kilowatt, then John uses 18000/1000 = <<18000/1000=18000000>>18000000.",
+    "FA": "#### 18000000"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -1889994231679784471,
+  "model_name": "google_gemini-2.5-flash"
+}

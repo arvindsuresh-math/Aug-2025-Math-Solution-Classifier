@@ -1,0 +1,63 @@
+{
+  "index": 5622,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "In March and April, he lost 3 + 4 = <<3+4=7>>7 pounds.",
+    "L2": "To meet his goal, he needs to lose 10 - 7 = <<10-7=3>>3 pounds."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5622.\n    Returns: the remaining weight Michael needs to lose to meet his goal.\n    \"\"\"\n    # L1\n    lost_march = 3 # lost 3 pounds in March\n    lost_april = 4 # lost 4 pounds in April\n    total_lost_march_april = lost_march + lost_april\n\n    # L2\n    goal_weight_loss = 10 # lose 10 pounds by June\n    remaining_weight_to_lose = goal_weight_loss - total_lost_march_april\n\n    # FA\n    answer = remaining_weight_to_lose\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_lost_march_april",
+    "operand_to_replace": "lost_april",
+    "replacement_variable": "lost_march"
+  },
+  "correct_trace": {
+    "lost_march": 3,
+    "lost_april": 4,
+    "total_lost_march_april": 7,
+    "goal_weight_loss": 10,
+    "remaining_weight_to_lose": 3,
+    "answer": 3
+  },
+  "flawed_trace": {
+    "lost_march": 3,
+    "lost_april": 4,
+    "total_lost_march_april": 6,
+    "goal_weight_loss": 10,
+    "remaining_weight_to_lose": 4,
+    "answer": 4
+  },
+  "correct_value": 7,
+  "flawed_value": 6,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_lost_march_april",
+      "question_inputs": [
+        "lost_march",
+        "lost_april"
+      ],
+      "solution_line_template": "In March and April, he lost {lost_march} + {lost_april} = <<{lost_march}+{lost_april}={total_lost_march_april}>>{total_lost_march_april} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_weight_to_lose",
+      "question_inputs": [
+        "goal_weight_loss"
+      ],
+      "solution_line_template": "To meet his goal, he needs to lose {goal_weight_loss} - {total_lost_march_april} = <<{goal_weight_loss}-{total_lost_march_april}={remaining_weight_to_lose}>>{remaining_weight_to_lose} pounds."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In March and April, he lost 3 + 3 = <<3+3=6>>6 pounds.",
+    "L2": "To meet his goal, he needs to lose 10 - 6 = <<10-6=4>>4 pounds.",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'lost_march' (3) was used instead of 'lost_april' (4).",
+  "repro_seed": 1973642710480043898,
+  "model_name": "google_gemini-2.5-flash"
+}

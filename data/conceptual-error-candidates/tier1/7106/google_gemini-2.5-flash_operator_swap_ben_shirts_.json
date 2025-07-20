@@ -1,0 +1,63 @@
+{
+  "index": 7106,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "Joe has 4+3=<<4+3=7>>7 new shirts.",
+    "L2": "Ben has 8+7=<<8+7=15>>15 new shirts."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7106.\n    Returns: the number of new shirts Ben has.\n    \"\"\"\n    # L1\n    alex_shirts = 4 # Alex has 4 new shirts\n    joe_more_than_alex = 3 # Joe has 3 more new shirts than Alex\n    joe_shirts = alex_shirts + joe_more_than_alex\n\n    # L2\n    ben_more_than_joe = 8 # Ben has eight more new shirts than Joe\n    ben_shirts = ben_more_than_joe + joe_shirts\n\n    # FA\n    answer = ben_shirts\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "ben_shirts",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x3171e8110>"
+  },
+  "correct_trace": {
+    "alex_shirts": 4,
+    "joe_more_than_alex": 3,
+    "joe_shirts": 7,
+    "ben_more_than_joe": 8,
+    "ben_shirts": 15,
+    "answer": 15
+  },
+  "flawed_trace": {
+    "alex_shirts": 4,
+    "joe_more_than_alex": 3,
+    "joe_shirts": 7,
+    "ben_more_than_joe": 8,
+    "ben_shirts": 1,
+    "answer": 1
+  },
+  "correct_value": 15,
+  "flawed_value": 1,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "joe_shirts",
+      "question_inputs": [
+        "alex_shirts",
+        "joe_more_than_alex"
+      ],
+      "solution_line_template": "Joe has {alex_shirts}+{joe_more_than_alex}=<<{alex_shirts}+{joe_more_than_alex}={joe_shirts}>>{joe_shirts} new shirts."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "ben_shirts",
+      "question_inputs": [
+        "ben_more_than_joe"
+      ],
+      "solution_line_template": "Ben has {ben_more_than_joe}+{joe_shirts}=<<{ben_more_than_joe}+{joe_shirts}={ben_shirts}>>{ben_shirts} new shirts."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Joe has 4+3=<<4+3=7>>7 new shirts.",
+    "L2": "Ben has 8+7=<<8+7=1>>1 new shirts.",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": 8314187697635315819,
+  "model_name": "google_gemini-2.5-flash"
+}

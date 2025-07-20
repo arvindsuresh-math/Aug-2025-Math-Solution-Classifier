@@ -1,0 +1,63 @@
+{
+  "index": 6164,
+  "original_solution_mapping": {
+    "FA": "#### 11",
+    "L1": "Adam bought 3 sandwiches, so he paid 3 * 3 = $<<3*3=9>>9 for them.",
+    "L2": "In total Adam bought products for 2 + 9 = $<<2+9=11>>11."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6164.\n    Returns: the total amount Adam paid for shopping.\n    \"\"\"\n    # L1\n    num_sandwiches = 3 # 3 sandwiches\n    price_per_sandwich = 3 # $3 each\n    cost_sandwiches = num_sandwiches * price_per_sandwich\n\n    # L2\n    cost_water = 2 # a bottle of water for $2\n    total_cost = cost_water + cost_sandwiches\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "cost_sandwiches",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x3175b1e10>"
+  },
+  "correct_trace": {
+    "num_sandwiches": 3,
+    "price_per_sandwich": 3,
+    "cost_sandwiches": 9,
+    "cost_water": 2,
+    "total_cost": 11,
+    "answer": 11
+  },
+  "flawed_trace": {
+    "num_sandwiches": 3,
+    "price_per_sandwich": 3,
+    "cost_sandwiches": 6,
+    "cost_water": 2,
+    "total_cost": 8,
+    "answer": 8
+  },
+  "correct_value": 9,
+  "flawed_value": 6,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_sandwiches",
+      "question_inputs": [
+        "num_sandwiches",
+        "price_per_sandwich"
+      ],
+      "solution_line_template": "Adam bought {num_sandwiches} sandwiches, so he paid {num_sandwiches} * {price_per_sandwich} = $<<{num_sandwiches}*{price_per_sandwich}={cost_sandwiches}>>{cost_sandwiches} for them."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "cost_water"
+      ],
+      "solution_line_template": "In total Adam bought products for {cost_water} + {cost_sandwiches} = $<<{cost_water}+{cost_sandwiches}={total_cost}>>{total_cost}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Adam bought 3 sandwiches, so he paid 3 * 3 = $<<3*3=6>>6 for them.",
+    "L2": "In total Adam bought products for 2 + 6 = $<<2+6=8>>8.",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -7140869376704656046,
+  "model_name": "google_gemini-2.5-flash"
+}

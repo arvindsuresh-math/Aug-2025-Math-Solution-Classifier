@@ -1,0 +1,107 @@
+{
+  "index": 163,
+  "original_solution_mapping": {
+    "FA": "#### 72",
+    "L1": "He scored 4*6=<<4*6=24>>24 points per game",
+    "L2": "So he scored 15*24=<<15*24=360>>360 points from touchdowns",
+    "L3": "He also scored 2*6=<<2*6=12>>12 points from the 2 point conversions",
+    "L4": "So he scored a total of 360+12=<<360+12=372>>372 points",
+    "L5": "That means he beat the old record by 372-300=<<372-300=72>>72 points"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 163.\n    Returns: the number of points James beat the old record by.\n    \"\"\"\n    # L1\n    touchdowns_per_game = 4 # scores 4 touchdowns per game\n    points_per_touchdown = 6 # each touchdown is worth 6 points\n    points_per_game_from_touchdowns = touchdowns_per_game * points_per_touchdown\n\n    # L2\n    num_games_in_season = 15 # 15 games in the season\n    total_points_from_touchdowns = num_games_in_season * points_per_game_from_touchdowns\n\n    # L3\n    points_per_conversion = 2 # score 2 point conversions\n    num_conversions = 6 # 6 times during the season\n    total_points_from_conversions = points_per_conversion * num_conversions\n\n    # L4\n    james_total_points = total_points_from_touchdowns + total_points_from_conversions\n\n    # L5\n    old_record_points = 300 # The old record was 300 points\n    points_beat_record_by = james_total_points - old_record_points\n\n    # FA\n    answer = points_beat_record_by\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "points_beat_record_by",
+    "operand_to_replace": "old_record_points",
+    "replacement_variable": "num_games_in_season"
+  },
+  "correct_trace": {
+    "touchdowns_per_game": 4,
+    "points_per_touchdown": 6,
+    "points_per_game_from_touchdowns": 24,
+    "num_games_in_season": 15,
+    "total_points_from_touchdowns": 360,
+    "points_per_conversion": 2,
+    "num_conversions": 6,
+    "total_points_from_conversions": 12,
+    "james_total_points": 372,
+    "old_record_points": 300,
+    "points_beat_record_by": 72,
+    "answer": 72
+  },
+  "flawed_trace": {
+    "touchdowns_per_game": 4,
+    "points_per_touchdown": 6,
+    "points_per_game_from_touchdowns": 24,
+    "num_games_in_season": 15,
+    "total_points_from_touchdowns": 360,
+    "points_per_conversion": 2,
+    "num_conversions": 6,
+    "total_points_from_conversions": 12,
+    "james_total_points": 372,
+    "old_record_points": 300,
+    "points_beat_record_by": 357,
+    "answer": 357
+  },
+  "correct_value": 72,
+  "flawed_value": 357,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "touchdowns_per_game",
+        "points_per_touchdown"
+      ],
+      "WK_inputs": [],
+      "output_variable": "points_per_game_from_touchdowns",
+      "solution_line_template": "He scored {touchdowns_per_game}*{points_per_touchdown}=<<{touchdowns_per_game}*{points_per_touchdown}={points_per_game_from_touchdowns}>>{points_per_game_from_touchdowns} points per game"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "num_games_in_season"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_points_from_touchdowns",
+      "solution_line_template": "So he scored {num_games_in_season}*{points_per_game_from_touchdowns}=<<{num_games_in_season}*{points_per_game_from_touchdowns}={total_points_from_touchdowns}>>{total_points_from_touchdowns} points from touchdowns"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "points_per_conversion",
+        "num_conversions"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_points_from_conversions",
+      "solution_line_template": "He also scored {points_per_conversion}*{num_conversions}=<<{points_per_conversion}*{num_conversions}={total_points_from_conversions}>>{total_points_from_conversions} points from the {points_per_conversion} point conversions"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "james_total_points",
+      "solution_line_template": "So he scored a total of {total_points_from_touchdowns}+{total_points_from_conversions}=<<{total_points_from_touchdowns}+{total_points_from_conversions}={james_total_points}>>{james_total_points} points"
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [
+        "old_record_points"
+      ],
+      "WK_inputs": [],
+      "output_variable": "points_beat_record_by",
+      "solution_line_template": "That means he beat the old record by {james_total_points}-{old_record_points}=<<{james_total_points}-{old_record_points}={points_beat_record_by}>>{points_beat_record_by} points"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He scored 4*6=<<4*6=24>>24 points per game",
+    "L2": "So he scored 15*24=<<15*24=360>>360 points from touchdowns",
+    "L3": "He also scored 2*6=<<2*6=12>>12 points from the 2 point conversions",
+    "L4": "So he scored a total of 360+12=<<360+12=372>>372 points",
+    "L5": "That means he beat the old record by 372-15=<<372-15=357>>357 points",
+    "FA": "#### 357"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Input misrepresentation. The value for 'num_games_in_season' (15) was used instead of 'old_record_points' (300).",
+  "repro_seed": -382199448478564878,
+  "model_name": "google_gemini-2.5-flash"
+}

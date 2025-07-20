@@ -1,0 +1,74 @@
+{
+  "index": 3843,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "The total number of slices she gave to Joe and Darcy is 1/2 x 8 = <<1/2*8=4>>4.",
+    "L2": "The total slice she gave to Carl is 1/4 x 8 = <<1/4*8=2>>2.",
+    "L3": "Therefore, the total slices left is 8 - 4 - 2 = <<8-4-2=2>>2."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3843.\n    Returns: the number of slices left.\n    \"\"\"\n    # L1\n    total_slices = 8 # sliced it into 8 pieces\n    joe_darcy_fraction = Fraction(1, 2) # gave 1/2 to Joe and Darcy\n    slices_given_to_joe_darcy = joe_darcy_fraction * total_slices\n\n    # L2\n    carl_fraction = Fraction(1, 4) # gave 1/4 to Carl\n    slices_given_to_carl = carl_fraction * total_slices\n\n    # L3\n    slices_left = total_slices - slices_given_to_joe_darcy - slices_given_to_carl\n\n    # FA\n    answer = slices_left\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "slices_given_to_carl",
+    "operand_to_replace": "total_slices",
+    "replacement_variable": "carl_fraction"
+  },
+  "correct_trace": {
+    "total_slices": 8,
+    "joe_darcy_fraction": "1/2",
+    "slices_given_to_joe_darcy": "4",
+    "carl_fraction": "1/4",
+    "slices_given_to_carl": "2",
+    "slices_left": "2",
+    "answer": "2"
+  },
+  "flawed_trace": {
+    "total_slices": 8,
+    "joe_darcy_fraction": "1/2",
+    "slices_given_to_joe_darcy": "4",
+    "carl_fraction": "1/4",
+    "slices_given_to_carl": "1/16",
+    "slices_left": "63/16",
+    "answer": "63/16"
+  },
+  "correct_value": "2",
+  "flawed_value": "1/16",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "slices_given_to_joe_darcy",
+      "question_inputs": [
+        "total_slices",
+        "joe_darcy_fraction"
+      ],
+      "solution_line_template": "The total number of slices she gave to Joe and Darcy is {joe_darcy_fraction} x {total_slices} = <<{joe_darcy_fraction}*{total_slices}={slices_given_to_joe_darcy}>>{slices_given_to_joe_darcy}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "slices_given_to_carl",
+      "question_inputs": [
+        "carl_fraction"
+      ],
+      "solution_line_template": "The total slice she gave to Carl is {carl_fraction} x {total_slices} = <<{carl_fraction}*{total_slices}={slices_given_to_carl}>>{slices_given_to_carl}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "slices_left",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, the total slices left is {total_slices} - {slices_given_to_joe_darcy} - {slices_given_to_carl} = <<{total_slices}-{slices_given_to_joe_darcy}-{slices_given_to_carl}={slices_left}>>{slices_left}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total number of slices she gave to Joe and Darcy is 1/2 x 8 = <<1/2*8=4>>4.",
+    "L2": "The total slice she gave to Carl is 1/4 x 1/4 = <<1/4*1/4=1/16>>1/16.",
+    "L3": "Therefore, the total slices left is 8 - 4 - 1/16 = <<8-4-1/16=63/16>>63/16.",
+    "FA": "#### 63/16"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'carl_fraction' (1/4) was used instead of 'total_slices' (8).",
+  "repro_seed": 4427239499835916113,
+  "model_name": "google_gemini-2.5-flash"
+}
