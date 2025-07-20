@@ -140,8 +140,8 @@ Label: 0, 1, or 2 (correct/conceptual error/computational error)
 
 **Level 3**
 
-Features: Question, answer (correct/flawed)
-Label: 0,1,2,3 (correct, conceptual, computational, skipped step)
+Features: Question, correct answer *and* wrong answer
+Label: 0 or 1 (conceptual or computational)
 
 **Level 4**
 
@@ -474,3 +474,65 @@ Some pointers:
 
 ---
 
+### **The Productionization Goal: A Frictionless Demo Experience**
+
+Your aim is not to build a scalable, production-ready API. It is to create a polished, self-contained demonstration that showcases the model's capability in the most favorable light. The primary tool for this will be a simple web application.
+
+**Recommended Tool:** **Streamlit or Gradio.** Both are designed for exactly this purpose: quickly building interactive ML demos in Python. Streamlit is often slightly more flexible for custom layouts, while Gradio is faster for standard input/output components. For your use case, either is an excellent choice.
+
+---
+
+### **Targeted Suggestions for a "Proof-of-Thought" Product**
+
+Your demo app should be simple, clean, and focused on the core task.
+
+#### **1. The User Interface (UI)**
+
+The UI should have four main components:
+
+* **Input Area:**
+* A text box for the **Problem Statement**.
+* A larger text box for the **Solution Text**.
+* A clear "Verify Solution" button.
+
+* **Output Area (The "Verdict"):**
+* This is where you display the model's analysis. Do not just dump the raw JSON. Present it in a human-readable format.
+* Use colored badges or icons. A green checkmark for `final_answer_verdict: "correct"`, a red 'X' for `"incorrect"`.
+* A clear header: `Final Answer: Correct`.
+* Another header: `Reasoning Quality: Computational Error`.
+* Display the `erroneous_line_number` and the model's `explanation` clearly.
+
+* **"Show Your Work" Panel (The Model's Guts):**
+* Have a small, expandable section labeled "Show Raw JSON Output" or "Model Internals."
+* Inside, display the raw, pretty-printed JSON that the model generated.
+* **Why this is critical:** This proves to the judges that you are not faking the UI. It shows the real, structured output from your fine-tuned model, directly connecting the polished UI to your backend work.
+
+* **Pre-loaded Examples Dropdown:**
+* **This is the most important feature for a successful demo.** Do not rely on typing in examples live.
+* Create a dropdown menu with 5-10 curated examples from your test set. These should be your "greatest hits" that perfectly showcase the model's capabilities:
+  * A `correct_and_complete` example.
+  * An `incorrect_computational_error` that is subtle.
+  * A clear `incorrect_conceptual_error`.
+  * Your most impressive case: a `correct_with_unjustified_value` example. This is your key differentiator.
+
+#### **2. The Backend Logic**
+
+* **Model Loading:** The app should load your fine-tuned model and tokenizer from the Hugging Face Hub on startup. Add a status indicator (`st.spinner("Loading Verifier Model...")`) to show that something is happening.
+* **Inference Function:** Create a clean `verify()` function that takes the problem and solution text, formats them into the correct prompt structure, runs inference, and parses the output JSON. This function should handle potential errors, like the model generating malformed JSON, and display a user-friendly error message.
+
+#### **3. Deployment and Presentation**
+
+* **Deployment:** The easiest way to deploy for the demo is using **Hugging Face Spaces**. It's free, integrates perfectly with models on the Hub, and can host Streamlit and Gradio apps with minimal configuration. You can create a public URL for your app that you can link to in your repo and presentation. This is extremely professional.
+* **The 5-Minute Pitch (Revised for Product Focus):**
+* **Hook:** "Every teacher has seen a student get the right answer for the wrong reason. We've built an AI that can spot the difference."
+* **Problem:** Briefly mention the challenge of verifying reasoning, not just answers.
+* **Live Demo (The Core of the Presentation):** Spend the majority of your time (2.5-3 minutes) walking through the app.
+        1.  Start with the app open.
+        2.  Select the "Unjustified Value" example from your pre-loaded dropdown. Click "Verify."
+        3.  Narrate the output: "As you can see, the model correctly identifies that the final answer is correct, but flags the solution for using an unjustified value on Line 3. It even provides a coherent explanation."
+        4.  Quickly show another example, like a `Computational_Error`, to demonstrate versatility.
+        5.  Briefly expand the "Show Raw JSON" panel to prove it's real.
+* **How it Works (Briefly):** "This is powered by a compact 4B parameter model fine-tuned on our custom-generated synthetic dataset. We use a novel AST-based error injection pipeline to create thousands of high-quality training examples." (You can briefly flash the pipeline diagram).
+* **Conclusion:** "This proof-of-concept demonstrates the feasibility of building lightweight, specialized AI tools for complex, real-world verification tasks."
+
+This product-focused approach, centered on a polished and well-rehearsed demo, is the most effective way to impress an industry-focused audience and demonstrate the practical value of your rigorous backend work.
