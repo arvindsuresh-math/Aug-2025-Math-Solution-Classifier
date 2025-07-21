@@ -395,12 +395,6 @@ Our core strategy is to introduce **one single logical error** on a specific lin
 
 ---
 
-I have analyzed the 100 samples from the provided CSV file. The existing taxonomy covers the majority of cases well, but the analysis reveals two recurring error patterns that are not precisely captured by the current definitions.
-
-To accurately classify all samples, I propose adding the following two error types to your taxonomy.
-
----
-
 ### **Error Type 10: Misinterpreted Scoping / Precedence**
 
 1. **What it Emulates:** A misunderstanding of how a natural language phrase maps to mathematical order of operations or grouping. This is common with phrases like "X less than Y times Z," where a student might incorrectly calculate `Y * (Z - X)` instead of `(Y * Z) - X`. It is not a simple operator swap, but an error in the structure of the expression itself.
@@ -459,8 +453,11 @@ To accurately classify all samples, I propose adding the following two error typ
 Run this in the terminal from the project root:
 
 ```bash
-streamlit run validate_candidates.py --theme.base "light" -- --candidates-dir data/conceptual-error-candidates
+streamlit run validate_candidates.py --theme.base "light" -- --candidates-dir data/conceptual-error-candidates --person-name {your_name}
 ```
+
+Above you should replace `{your_name}` with your first name in simple lower-case. These are the options:
+`ali`, `arvind`, `ling`, `mauro`, `yewei`.
 
 It will open the validation app in the browser. The erroneous line number will tell you which line the error was injected; you can ignore all previous lines.
 

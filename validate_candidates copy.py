@@ -62,32 +62,9 @@ def load_or_initialize_catalog(catalog_path: Path):
         'decision_time_utc', 'status', 'manual_edits', 'filepath', 'validator'
     ]
     if catalog_path.exists():
-        df = pd.read_csv(catalog_path)
-        # Ensure proper data types
-        df['decision_date_utc'] = df['decision_date_utc'].astype('string')
-        df['decision_time_utc'] = df['decision_time_utc'].astype('string')
-        df['manual_edits'] = df['manual_edits'].astype('string')
-        df['filepath'] = df['filepath'].astype('string')
-        return df
+        return pd.read_csv(catalog_path)
     else:
-        # Create DataFrame with proper dtypes
-        dtypes = {
-            'index': 'int64',
-            'tier': 'string',
-            'model': 'string',
-            'mutation_type': 'string',
-            'target_variable': 'string',
-            'correct_value': 'string',
-            'flawed_value': 'string',
-            'repro_seed': 'string',
-            'decision_date_utc': 'string',
-            'decision_time_utc': 'string',
-            'status': 'string',
-            'manual_edits': 'string',
-            'filepath': 'string',
-            'validator': 'string'
-        }
-        return pd.DataFrame(columns=catalog_columns).astype(dtypes)
+        return pd.DataFrame(columns=catalog_columns)
 
 def get_candidate_file_path(candidates_dir: Path, tier: str, index: int, model: str, mutation_type: str):
     """
@@ -203,15 +180,6 @@ st.markdown("""
         text-align: center;
         font-weight: bold;
     }
-    /* Style for erroneous line marker */
-    div[data-testid="stTextInput"] input[value*="● L1"],
-    div[data-testid="stTextInput"] input[value*="● L2"],
-    div[data-testid="stTextInput"] input[value*="● L3"],
-    div[data-testid="stTextInput"] input[value*="● L4"],
-    div[data-testid="stTextInput"] input[value*="● FA"] {
-        color: #d32f2f !important;
-        font-weight: bold !important;
-    }
     /* Success message styling */
     .validator-success {
         padding: 0.5rem;
@@ -238,88 +206,6 @@ st.markdown("""
         border-radius: 5px;
         color: #0D47A1;
         margin-bottom: 1rem;
-    }
-    /* Enhanced button styling */
-    .stButton > button {
-        height: 3.5em !important;
-        font-size: 1.3em !important;
-        font-weight: bold !important;
-        width: 100% !important;
-        border-radius: 10px !important;
-        margin-bottom: 0.5em !important;
-        border: 2px solid transparent !important;
-        transition: all 0.3s ease !important;
-    }
-    /* Accept button - Green */
-    .stButton:nth-of-type(1) > button {
-        background-color: #4CAF50 !important;
-        color: white !important;
-        border-color: #45a049 !important;
-    }
-    .stButton:nth-of-type(1) > button:hover {
-        background-color: #45a049 !important;
-        border-color: #3d8b40 !important;
-        transform: translateY(-2px) !important;
-        box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3) !important;
-    }
-    /* Skip button - Yellow */
-    .stButton:nth-of-type(2) > button {
-        background-color: #FFD600 !important;
-        color: #333 !important;
-        border-color: #FFC107 !important;
-    }
-    .stButton:nth-of-type(2) > button:hover {
-        background-color: #FFC107 !important;
-        border-color: #FFB300 !important;
-        transform: translateY(-2px) !important;
-        box-shadow: 0 4px 8px rgba(255, 214, 0, 0.3) !important;
-    }
-    /* Reject button - Red */
-    .stButton:nth-of-type(3) > button {
-        background-color: #F44336 !important;
-        color: white !important;
-        border-color: #e53935 !important;
-    }
-    .stButton:nth-of-type(3) > button:hover {
-        background-color: #e53935 !important;
-        border-color: #d32f2f !important;
-        transform: translateY(-2px) !important;
-        box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3) !important;
-    }
-    /* Keyboard shortcut hints */
-    .shortcut-hint {
-        font-size: 0.8em;
-        opacity: 0.7;
-        margin-top: 0.25em;
-    }
-    /* Status badge styling */
-    .status-badge {
-        display: inline-block;
-        padding: 0.2em 0.6em;
-        border-radius: 15px;
-        font-size: 0.9em;
-        font-weight: bold;
-        margin-left: 0.5em;
-    }
-    .status-todo {
-        background-color: #fff3cd;
-        color: #856404;
-        border: 1px solid #ffeaa7;
-    }
-    .status-accepted {
-        background-color: #d1f2eb;
-        color: #0c5460;
-        border: 1px solid #7dcea0;
-    }
-    .status-rejected {
-        background-color: #f8d7da;
-        color: #721c24;
-        border: 1px solid #f5c6cb;
-    }
-    .status-skipped {
-        background-color: #e2e3e5;
-        color: #383d41;
-        border: 1px solid #d6d8db;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -427,29 +313,35 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# Show progress info with enhanced status badge
+# Show progress info
 current_status = current_entry['status']
-status_class = f"status-{current_status.replace('ed', '')}" if current_status != 'todo' else "status-todo"
-status_badge = f'<span class="status-badge {status_class}">{current_status.title()}</span>'
-
 st.markdown(f"""
 <div class="progress-info">
     📊 <strong>Progress:</strong> {current_index + 1}/{len(ordered_catalog)} | 
     <strong>Index:</strong> {index} |
-    <strong>Current Status:</strong> {status_badge} | 
+    <strong>Current Status:</strong> {current_status.title()} | 
     <strong>Tier:</strong> {current_entry['tier']} | 
     <strong>Mutation:</strong> {mutation_type} |
     <strong>Filename:</strong> {filename}
 </div>
 """, unsafe_allow_html=True)
 
-# Get the erroneous line number for highlighting
-erroneous_line_number = candidate_data.get("erroneous_line_number", "")
+# # ...existing code...
+# meta_col1, meta_col2, meta_col3 = st.columns([1, 3, 7])
+# with meta_col1:
+#     st.markdown('<p class="metadata-label">Index</p>', unsafe_allow_html=True)
+#     st.text_input("Index", value=str(index), key="index_display", disabled=True, label_visibility="collapsed")
+# with meta_col2:
+#     st.markdown('<p class="metadata-label">Mutation type</p>', unsafe_allow_html=True)
+#     st.text_input("Mutation type", value=str(mutation_type), key="mutation_type_display", disabled=True, label_visibility="collapsed")
+# with meta_col3:
+#     st.markdown('<p class="metadata-label">Filename</p>', unsafe_allow_html=True)
+#     st.text_input("Filename", value=str(filename), key="filename_display", disabled=True, label_visibility="collapsed")
 
 col1_meta, col2_meta = st.columns([1, 5])
 with col1_meta:
     st.markdown('<p class="metadata-label">Erroneous Line</p>', unsafe_allow_html=True)
-    st.text_input("Erroneous Line", value=erroneous_line_number, key="erroneous_line_number_edit", label_visibility="collapsed")
+    st.text_input("Erroneous Line", value=candidate_data.get("erroneous_line_number"), key="erroneous_line_number_edit", label_visibility="collapsed")
 with col2_meta:
     st.markdown('<p class="metadata-label">Explanation</p>', unsafe_allow_html=True)
     st.text_input("Explanation", value=candidate_data.get("explanation"), key="explanation_edit", label_visibility="collapsed")
@@ -457,6 +349,7 @@ with col2_meta:
 st.markdown("---")
 
 # --- Main Comparison View ---
+# st.subheader("Solution Comparison and Editing")
 col1, col2, col3 = st.columns([8, 1, 8], gap="small")
 col1.markdown("##### ✅ Correct Solution")
 col2.markdown("##### Line")
@@ -465,18 +358,14 @@ col3.markdown("##### ✏️ Flawed Solution (Editable)")
 line_keys = sorted(original_solution.keys(), key=lambda k: (k != 'FA', int(k[1:]) if k.startswith('L') else float('inf')))
 
 for line_num in line_keys:
-    is_erroneous_line = line_num == erroneous_line_number
-    
     with col1:
         st.text_input(
             label=f"display_{line_num}", value=original_solution.get(line_num, ''),
             key=f"display_{line_num}", disabled=True, label_visibility="collapsed"
         )
     with col2:
-        # Add visual marker for erroneous line
-        line_display = f"● {line_num}" if is_erroneous_line else line_num
         st.text_input(
-            label=f"line_num_display_{line_num}", value=line_display,
+            label=f"line_num_display_{line_num}", value=line_num,
             key=f"line_num_display_{line_num}", disabled=True, label_visibility="collapsed"
         )
     with col3:
@@ -488,53 +377,53 @@ for line_num in line_keys:
 # --- Decision Buttons ---
 st.markdown("---")
 
-# Show keyboard shortcuts hint
-st.markdown("""
-<div style="text-align: center; margin-bottom: 1rem; opacity: 0.7;">
-    💡 <strong>Keyboard shortcuts:</strong> Press A for Accept, S for Skip, R for Reject
-</div>
-""", unsafe_allow_html=True)
-
-# Enhanced Decision Buttons with better spacing and tooltips
+# --- Decision Buttons (large, colored, full-width, ordered Accept, Skip, Reject) ---
 btn_col1, btn_col2, btn_col3 = st.columns(3, gap="large")
+
+# Custom CSS for button colors and size
+st.markdown("""
+<style>
+.custom-btn {
+    height: 3.5em !important;
+    font-size: 1.3em !important;
+    font-weight: bold !important;
+    width: 100% !important;
+    border-radius: 10px !important;
+    margin-bottom: 0.5em !important;
+    border: none !important;
+}
+.accept-btn {
+    background-color: #4CAF50 !important;
+    color: white !important;
+}
+.skip-btn {
+    background-color: #FFD600 !important;
+    color: #333 !important;
+}
+.reject-btn {
+    background-color: #F44336 !important;
+    color: white !important;
+}
+</style>
+""", unsafe_allow_html=True)
 
 decision = None
 
 with btn_col1:
-    accept = st.button("✅ Accept", key="accept_btn", use_container_width=True, help="Accept this error candidate (Shortcut: A)")
-    st.markdown('<div class="shortcut-hint">Press A</div>', unsafe_allow_html=True)
+    accept = st.button("✅ Accept", key="accept_btn", use_container_width=True)
 with btn_col2:
-    skip = st.button("⏭️ Skip", key="skip_btn", use_container_width=True, help="Skip this candidate for now (Shortcut: S)")
-    st.markdown('<div class="shortcut-hint">Press S</div>', unsafe_allow_html=True)
+    skip = st.button("⏭️ Skip", key="skip_btn", use_container_width=True)
 with btn_col3:
-    reject = st.button("❌ Reject", key="reject_btn", use_container_width=True, help="Reject this error candidate (Shortcut: R)")
-    st.markdown('<div class="shortcut-hint">Press R</div>', unsafe_allow_html=True)
+    reject = st.button("❌ Reject", key="reject_btn", use_container_width=True)
 
-# Add keyboard shortcut functionality
+# JavaScript to apply custom classes to Streamlit buttons
 st.markdown("""
 <script>
-document.addEventListener('keydown', function(event) {
-    if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
-        return; // Don't trigger shortcuts when typing in input fields
-    }
-    
-    switch(event.key.toLowerCase()) {
-        case 'a':
-            event.preventDefault();
-            const acceptBtn = window.parent.document.querySelector('button[kind="primary"]');
-            if (acceptBtn && acceptBtn.innerText.includes('Accept')) acceptBtn.click();
-            break;
-        case 's':
-            event.preventDefault();
-            const skipBtn = window.parent.document.querySelector('button[kind="primary"]');
-            if (skipBtn && skipBtn.innerText.includes('Skip')) skipBtn.click();
-            break;
-        case 'r':
-            event.preventDefault();
-            const rejectBtn = window.parent.document.querySelector('button[kind="primary"]');
-            if (rejectBtn && rejectBtn.innerText.includes('Reject')) rejectBtn.click();
-            break;
-    }
+const btns = window.parent.document.querySelectorAll('button');
+btns.forEach(btn => {
+    if (btn.innerText.includes('Accept')) btn.classList.add('custom-btn', 'accept-btn');
+    if (btn.innerText.includes('Skip')) btn.classList.add('custom-btn', 'skip-btn');
+    if (btn.innerText.includes('Reject')) btn.classList.add('custom-btn', 'reject-btn');
 });
 </script>
 """, unsafe_allow_html=True)
@@ -580,24 +469,22 @@ if decision:
     manual_edits_str = ','.join(manual_edits) if manual_edits else ''
     
     # Update the existing row in the catalog
-    mask = (
+    catalog_df.loc[
         (catalog_df['index'] == index) & 
         (catalog_df['tier'] == current_entry['tier']) & 
-        (catalog_df['mutation_type'] == mutation_type)
-    )
-    catalog_df.loc[mask, 'decision_date_utc'] = now_utc.strftime('%Y-%m-%d')
-    catalog_df.loc[mask, 'decision_time_utc'] = now_utc.strftime('%H:%M:%S')
-    catalog_df.loc[mask, 'status'] = decision
-    catalog_df.loc[mask, 'manual_edits'] = manual_edits_str
-    catalog_df.loc[mask, 'filepath'] = final_filepath_str
+        (catalog_df['mutation_type'] == mutation_type),
+        ['decision_date_utc', 'decision_time_utc', 'status', 'manual_edits', 'filepath']
+    ] = [
+        now_utc.strftime('%Y-%m-%d'),
+        now_utc.strftime('%H:%M:%S'),
+        decision,
+        manual_edits_str,  # Use the string version instead of the list
+        final_filepath_str
+    ]
 
     # Save updated catalog
     st.session_state.catalog_df = catalog_df
     catalog_df.to_csv(st.session_state.CATALOG_PATH, index=False)
-    
-    # Show success message with action taken
-    decision_emoji = {"accepted": "✅", "skipped": "⏭️", "rejected": "❌"}
-    st.success(f"{decision_emoji[decision]} {decision.title()} item {index}! Moving to next candidate...")
     
     # Refresh the ordered catalog for the next iteration
     st.session_state.ordered_catalog = get_ordered_todo_items(catalog_df)
