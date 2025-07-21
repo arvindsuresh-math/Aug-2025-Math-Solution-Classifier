@@ -1,0 +1,89 @@
+{
+  "index": 411,
+  "original_solution_mapping": {
+    "FA": "#### 58",
+    "L1": "Out of his 8 children, 2 have only 5 children so the rest who have 8 ( the same number as him) are 8-2 = <<8-2=6>>6",
+    "L2": "6 of Max's children have 8 children each for a total of 6*8 = <<6*8=48>>48 grandchildren",
+    "L3": "2 of Max's children have 5 children each for a total of 5*2 = <<5*2=10>>10 grandchildren",
+    "L4": "In total he has 48+10 = <<48+10=58>>58 grandchildren"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 411.\n    Returns: the total number of grandchildren Max has.\n    \"\"\"\n    # L1\n    max_children = 8 # Max has 8 children\n    children_with_different_num_grandchildren = 2 # 2 who have 5 children each\n    children_with_same_num_grandchildren = max_children - children_with_different_num_grandchildren\n\n    # L2\n    grandchildren_per_same_child = 8 # children as he does (8)\n    grandchildren_from_same_children = children_with_same_num_grandchildren * grandchildren_per_same_child\n\n    # L3\n    grandchildren_per_different_child = 5 # 5 children each\n    grandchildren_from_different_children = grandchildren_per_different_child * children_with_different_num_grandchildren\n\n    # L4\n    total_grandchildren = grandchildren_from_same_children + grandchildren_from_different_children\n\n    # FA\n    answer = total_grandchildren\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "children_with_same_num_grandchildren",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x309b9d090>"
+  },
+  "correct_trace": {
+    "max_children": 8,
+    "children_with_different_num_grandchildren": 2,
+    "children_with_same_num_grandchildren": 6,
+    "grandchildren_per_same_child": 8,
+    "grandchildren_from_same_children": 48,
+    "grandchildren_per_different_child": 5,
+    "grandchildren_from_different_children": 10,
+    "total_grandchildren": 58,
+    "answer": 58
+  },
+  "flawed_trace": {
+    "max_children": 8,
+    "children_with_different_num_grandchildren": 2,
+    "children_with_same_num_grandchildren": 4.0,
+    "grandchildren_per_same_child": 8,
+    "grandchildren_from_same_children": 32.0,
+    "grandchildren_per_different_child": 5,
+    "grandchildren_from_different_children": 10,
+    "total_grandchildren": 42.0,
+    "answer": 42.0
+  },
+  "correct_value": 6,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "max_children",
+        "children_with_different_num_grandchildren"
+      ],
+      "WK_inputs": [],
+      "output_variable": "children_with_same_num_grandchildren",
+      "solution_line_template": "Out of his {max_children} children, {children_with_different_num_grandchildren} have only 5 children so the rest who have 8 ( the same number as him) are {max_children}-{children_with_different_num_grandchildren} = <<{max_children}-{children_with_different_num_grandchildren}={children_with_same_num_grandchildren}>>{children_with_same_num_grandchildren}"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "grandchildren_per_same_child"
+      ],
+      "WK_inputs": [],
+      "output_variable": "grandchildren_from_same_children",
+      "solution_line_template": "{children_with_same_num_grandchildren} of Max's children have {grandchildren_per_same_child} children each for a total of {children_with_same_num_grandchildren}*{grandchildren_per_same_child} = <<{children_with_same_num_grandchildren}*{grandchildren_per_same_child}={grandchildren_from_same_children}>>{grandchildren_from_same_children} grandchildren"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "grandchildren_per_different_child"
+      ],
+      "WK_inputs": [],
+      "output_variable": "grandchildren_from_different_children",
+      "solution_line_template": "{children_with_different_num_grandchildren} of Max's children have {grandchildren_per_different_child} children each for a total of {grandchildren_per_different_child}*{children_with_different_num_grandchildren} = <<{grandchildren_per_different_child}*{children_with_different_num_grandchildren}={grandchildren_from_different_children}>>{grandchildren_from_different_children} grandchildren"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_grandchildren",
+      "solution_line_template": "In total he has {grandchildren_from_same_children}+{grandchildren_from_different_children} = <<{grandchildren_from_same_children}+{grandchildren_from_different_children}={total_grandchildren}>>{total_grandchildren} grandchildren"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Out of his 8 children, 2 have only 5 children so the rest who have 8 ( the same number as him) are 8-2 = <<8-2=4>>4",
+    "L2": "4 of Max's children have 8 children each for a total of 4*8 = <<4*8=32>>32 grandchildren",
+    "L3": "2 of Max's children have 5 children each for a total of 5*2 = <<5*2=10>>10 grandchildren",
+    "L4": "In total he has 32+10 = <<32+10=42>>42 grandchildren",
+    "FA": "#### 42"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": 5932845998755112290,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,94 @@
+{
+  "index": 3001,
+  "original_solution_mapping": {
+    "FA": "#### 36",
+    "L1": "There are 5 ladies total in the group. They all walk 3 miles a day for 6 days so 3*6 = 18 miles",
+    "L2": "Jamie walks an additional 2 miles per day for 6 days so 2*6 = <<2*6=12>>12 miles",
+    "L3": "Sue walks half the distance of Jamie so 12/2 = <<12/2=6>>6 miles",
+    "L4": "Together, the ladies walk 18+12+6 = <<18+12+6=36>>36 miles"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3001.\n    Returns: the total number of miles the ladies walk.\n    \"\"\"\n    # L1\n    num_other_ladies = 4 # with 4 other ladies\n    num_ladies_in_group = num_other_ladies + 1\n    group_daily_miles = 3 # all walk 3 miles together\n    num_days_walked = 6 # for 6 days\n    group_total_miles = group_daily_miles * num_days_walked\n\n    # L2\n    jamie_additional_daily_miles = 2 # Jamie walks an additional 2 miles per day\n    jamie_additional_total_miles = jamie_additional_daily_miles * num_days_walked\n\n    # L3\n    sue_half_divisor = 2 # walks half that amount\n    sue_total_miles = jamie_additional_total_miles / sue_half_divisor\n\n    # L4\n    total_miles_walked = group_total_miles + jamie_additional_total_miles + sue_total_miles\n\n    # FA\n    answer = total_miles_walked\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_miles_walked",
+    "operand_to_replace": "sue_total_miles",
+    "replacement_variable": "num_ladies_in_group"
+  },
+  "correct_trace": {
+    "num_other_ladies": 4,
+    "num_ladies_in_group": 5,
+    "group_daily_miles": 3,
+    "num_days_walked": 6,
+    "group_total_miles": 18,
+    "jamie_additional_daily_miles": 2,
+    "jamie_additional_total_miles": 12,
+    "sue_half_divisor": 2,
+    "sue_total_miles": 6.0,
+    "total_miles_walked": 36.0,
+    "answer": 36.0
+  },
+  "flawed_trace": {
+    "num_other_ladies": 4,
+    "num_ladies_in_group": 5,
+    "group_daily_miles": 3,
+    "num_days_walked": 6,
+    "group_total_miles": 18,
+    "jamie_additional_daily_miles": 2,
+    "jamie_additional_total_miles": 12,
+    "sue_half_divisor": 2,
+    "sue_total_miles": 6.0,
+    "total_miles_walked": 35,
+    "answer": 35
+  },
+  "correct_value": 36.0,
+  "flawed_value": 35,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "group_total_miles",
+      "question_inputs": [
+        "num_other_ladies",
+        "group_daily_miles",
+        "num_days_walked"
+      ],
+      "solution_line_template": "There are {num_ladies_in_group} ladies total in the group. They all walk {group_daily_miles} miles a day for {num_days_walked} days so {group_daily_miles}*{num_days_walked} = {group_total_miles} miles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "jamie_additional_total_miles",
+      "question_inputs": [
+        "jamie_additional_daily_miles"
+      ],
+      "solution_line_template": "Jamie walks an additional {jamie_additional_daily_miles} miles per day for {num_days_walked} days so {jamie_additional_daily_miles}*{num_days_walked} = <<{jamie_additional_daily_miles}*{num_days_walked}={jamie_additional_total_miles}>>{jamie_additional_total_miles} miles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "sue_total_miles",
+      "question_inputs": [
+        "sue_half_divisor"
+      ],
+      "solution_line_template": "Sue walks half the distance of Jamie so {jamie_additional_total_miles}/{sue_half_divisor} = <<{jamie_additional_total_miles}/{sue_half_divisor}={sue_total_miles}>>{sue_total_miles} miles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_miles_walked",
+      "question_inputs": [],
+      "solution_line_template": "Together, the ladies walk {group_total_miles}+{jamie_additional_total_miles}+{sue_total_miles} = <<{group_total_miles}+{jamie_additional_total_miles}+{sue_total_miles}={total_miles_walked}>>{total_miles_walked} miles"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 5 ladies total in the group. They all walk 3 miles a day for 6 days so 3*6 = 18 miles",
+    "L2": "Jamie walks an additional 2 miles per day for 6 days so 2*6 = <<2*6=12>>12 miles",
+    "L3": "Sue walks half the distance of Jamie so 12/2 = <<12/2=6>>6 miles",
+    "L4": "Together, the ladies walk 18+12+5 = <<18+12+5=35>>35 miles",
+    "FA": "#### 35"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'num_ladies_in_group' (value: 5) was used instead of 'sue_total_miles' (value: 6.0).",
+  "repro_seed": 1636858581366126006,
+  "model_name": "google_gemini-2.5-flash"
+}

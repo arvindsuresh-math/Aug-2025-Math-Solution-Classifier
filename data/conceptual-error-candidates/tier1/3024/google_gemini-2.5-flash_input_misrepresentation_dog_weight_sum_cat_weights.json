@@ -1,0 +1,63 @@
+{
+  "index": 3024,
+  "original_solution_mapping": {
+    "FA": "#### 34",
+    "L1": "The sum of the weights of Christine's two cats is 7 + 10 = <<7+10=17>>17 pounds.",
+    "L2": "Christine's dog weighs 17 x 2 = <<17*2=34>>34 pounds."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3024.\n    Returns: the dog's weight.\n    \"\"\"\n    # L1\n    cat1_weight = 7 # 7 and 10 pounds\n    cat2_weight = 10 # 7 and 10 pounds\n    sum_cat_weights = cat1_weight + cat2_weight\n\n    # L2\n    multiplier_dog_weight = 2 # twice the sum\n    dog_weight = sum_cat_weights * multiplier_dog_weight\n\n    # FA\n    answer = dog_weight\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "dog_weight",
+    "operand_to_replace": "multiplier_dog_weight",
+    "replacement_variable": "sum_cat_weights"
+  },
+  "correct_trace": {
+    "cat1_weight": 7,
+    "cat2_weight": 10,
+    "sum_cat_weights": 17,
+    "multiplier_dog_weight": 2,
+    "dog_weight": 34,
+    "answer": 34
+  },
+  "flawed_trace": {
+    "cat1_weight": 7,
+    "cat2_weight": 10,
+    "sum_cat_weights": 17,
+    "multiplier_dog_weight": 2,
+    "dog_weight": 289,
+    "answer": 289
+  },
+  "correct_value": 34,
+  "flawed_value": 289,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "sum_cat_weights",
+      "question_inputs": [
+        "cat1_weight",
+        "cat2_weight"
+      ],
+      "solution_line_template": "The sum of the weights of Christine's two cats is {cat1_weight} + {cat2_weight} = <<{cat1_weight}+{cat2_weight}={sum_cat_weights}>>{sum_cat_weights} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "dog_weight",
+      "question_inputs": [
+        "multiplier_dog_weight"
+      ],
+      "solution_line_template": "Christine's dog weighs {sum_cat_weights} x {multiplier_dog_weight} = <<{sum_cat_weights}*{multiplier_dog_weight}={dog_weight}>>{dog_weight} pounds."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The sum of the weights of Christine's two cats is 7 + 10 = <<7+10=17>>17 pounds.",
+    "L2": "Christine's dog weighs 17 x 17 = <<17*17=289>>289 pounds.",
+    "FA": "#### 289"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'sum_cat_weights' (17) was used instead of 'multiplier_dog_weight' (2).",
+  "repro_seed": 842138178598905625,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,63 @@
+{
+  "index": 932,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "If she receives 6 job requests every day and works on 4 every day, she remains with 6-4 = <<6-4=2>>2 requests.",
+    "L2": "After 5 days, she will be remaining with 5*2 = <<5*2=10>>10 requests which she hasn't worked on."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 932.\n    Returns: the number of client requests remaining to work on after 5 days.\n    \"\"\"\n    # L1\n    client_requests_daily = 6 # 6 client requests every day\n    worked_on_daily = 4 # works on four of them each day\n    remaining_daily = client_requests_daily - worked_on_daily\n\n    # L2\n    num_days = 5 # after 5 days\n    total_remaining = num_days * remaining_daily\n\n    # FA\n    answer = total_remaining\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_remaining",
+    "operand_to_replace": "num_days",
+    "replacement_variable": "client_requests_daily"
+  },
+  "correct_trace": {
+    "client_requests_daily": 6,
+    "worked_on_daily": 4,
+    "remaining_daily": 2,
+    "num_days": 5,
+    "total_remaining": 10,
+    "answer": 10
+  },
+  "flawed_trace": {
+    "client_requests_daily": 6,
+    "worked_on_daily": 4,
+    "remaining_daily": 2,
+    "num_days": 5,
+    "total_remaining": 12,
+    "answer": 12
+  },
+  "correct_value": 10,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "client_requests_daily",
+        "worked_on_daily"
+      ],
+      "WK_inputs": [],
+      "output_variable": "remaining_daily",
+      "solution_line_template": "If she receives {client_requests_daily} job requests every day and works on {worked_on_daily} every day, she remains with {client_requests_daily}-{worked_on_daily} = <<{client_requests_daily}-{worked_on_daily}={remaining_daily}>>{remaining_daily} requests."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "num_days"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_remaining",
+      "solution_line_template": "After {num_days} days, she will be remaining with {num_days}*{remaining_daily} = <<{num_days}*{remaining_daily}={total_remaining}>>{total_remaining} requests which she hasn't worked on."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If she receives 6 job requests every day and works on 4 every day, she remains with 6-4 = <<6-4=2>>2 requests.",
+    "L2": "After 6 days, she will be remaining with 6*2 = <<6*2=12>>12 requests which she hasn't worked on.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'client_requests_daily' (6) was used instead of 'num_days' (5).",
+  "repro_seed": -5310204334766979779,
+  "model_name": "google_gemini-2.5-flash"
+}

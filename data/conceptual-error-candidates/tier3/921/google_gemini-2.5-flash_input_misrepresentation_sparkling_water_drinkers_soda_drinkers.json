@@ -1,0 +1,92 @@
+{
+  "index": 921,
+  "original_solution_mapping": {
+    "FA": "#### 115",
+    "L1": "The soda cans were consumed by 90 / 2 = <<90/2=45>>45 guests.",
+    "L2": "The sparkling water was consumed by 90 / 3 = <<90/3=30>>30 guests.",
+    "L3": "The juice bottles were consumed by 4/5 x 50 = <<4/5*50=40>>40 guests",
+    "L4": "In total there are 45 + 30 + 40 = <<45+30+40=115>>115 recyclable cans and bottles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 921.\n    Returns: the total number of recyclable cans and bottles collected.\n    \"\"\"\n    # L1\n    total_people = 90 # There were 90 people at the summer picnic\n    soda_drank_fraction_denominator = 2 # One-half of the guests drank soda\n    soda_drinkers = total_people / soda_drank_fraction_denominator\n\n    # L2\n    sparkling_water_drank_fraction_denominator = 3 # one-third of the guests drank sparkling water\n    sparkling_water_drinkers = total_people / sparkling_water_drank_fraction_denominator\n\n    # L3\n    juice_consumed_fraction = Fraction(4, 5) # four-fifths of the juices were consumed\n    total_juice_bottles = 50 # 50 glass bottles of juice\n    juice_consumed = juice_consumed_fraction * total_juice_bottles\n\n    # L4\n    total_recyclables = soda_drinkers + sparkling_water_drinkers + juice_consumed\n\n    # FA\n    answer = total_recyclables\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "sparkling_water_drinkers",
+    "operand_to_replace": "total_people",
+    "replacement_variable": "soda_drinkers"
+  },
+  "correct_trace": {
+    "total_people": 90,
+    "soda_drank_fraction_denominator": 2,
+    "soda_drinkers": 45.0,
+    "sparkling_water_drank_fraction_denominator": 3,
+    "sparkling_water_drinkers": 30.0,
+    "juice_consumed_fraction": "4/5",
+    "total_juice_bottles": 50,
+    "juice_consumed": "40",
+    "total_recyclables": 115.0,
+    "answer": 115.0
+  },
+  "flawed_trace": {
+    "total_people": 90,
+    "soda_drank_fraction_denominator": 2,
+    "soda_drinkers": 45.0,
+    "sparkling_water_drank_fraction_denominator": 3,
+    "sparkling_water_drinkers": 15.0,
+    "juice_consumed_fraction": "4/5",
+    "total_juice_bottles": 50,
+    "juice_consumed": "40",
+    "total_recyclables": 100.0,
+    "answer": 100.0
+  },
+  "correct_value": 30.0,
+  "flawed_value": 15.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "soda_drinkers",
+      "question_inputs": [
+        "total_people",
+        "soda_drank_fraction_denominator"
+      ],
+      "solution_line_template": "The soda cans were consumed by {total_people} / {soda_drank_fraction_denominator} = <<{total_people}/{soda_drank_fraction_denominator}={soda_drinkers}>>{soda_drinkers} guests."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sparkling_water_drinkers",
+      "question_inputs": [
+        "sparkling_water_drank_fraction_denominator"
+      ],
+      "solution_line_template": "The sparkling water was consumed by {total_people} / {sparkling_water_drank_fraction_denominator} = <<{total_people}/{sparkling_water_drank_fraction_denominator}={sparkling_water_drinkers}>>{sparkling_water_drinkers} guests."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "juice_consumed",
+      "question_inputs": [
+        "juice_consumed_fraction",
+        "total_juice_bottles"
+      ],
+      "solution_line_template": "The juice bottles were consumed by {juice_consumed_fraction} x {total_juice_bottles} = <<{juice_consumed_fraction}*{total_juice_bottles}={juice_consumed}>>{juice_consumed} guests"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_recyclables",
+      "question_inputs": [],
+      "solution_line_template": "In total there are {soda_drinkers} + {sparkling_water_drinkers} + {juice_consumed} = <<{soda_drinkers}+{sparkling_water_drinkers}+{juice_consumed}={total_recyclables}>>{total_recyclables} recyclable cans and bottles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The soda cans were consumed by 90 / 2 = <<90/2=45>>45 guests.",
+    "L2": "The sparkling water was consumed by 45 / 3 = <<45/3=15>>15 guests.",
+    "L3": "The juice bottles were consumed by 4/5 x 50 = <<4/5*50=40>>40 guests",
+    "L4": "In total there are 45 + 15 + 40 = <<45+15+40=100>>100 recyclable cans and bottles.",
+    "FA": "#### 100"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'soda_drinkers' (45.0) was used instead of 'total_people' (90).",
+  "repro_seed": -3182649839946227036,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,92 @@
+{
+  "index": 5476,
+  "original_solution_mapping": {
+    "FA": "#### 64",
+    "L1": "Adding the pizzas delivered in the park and in the building, Jimmy delivered a total of 2 + 3 = <<2+3=5>>5 pizzas",
+    "L2": "The value of the 5 pizzas without delivery charge is 5 pizzas * $12/pizza = $<<5*12=60>>60.",
+    "L3": "The cost of the delivery charge for two pizzas is 2 pizzas * $2/pizza = $<<2*2=4>>4",
+    "L4": "In total, Jimmy got paid $60 + $4 = $<<60+4=64>>64 for the pizzas."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5476.\n    Returns: the total money Jimmy got paid for the pizzas.\n    \"\"\"\n    # L1\n    pizzas_building = 2 # 2 pizzas in a building\n    pizzas_park = 3 # 3 pizzas in the park\n    total_pizzas = pizzas_building + pizzas_park\n\n    # L2\n    cost_per_pizza = 12 # Each pizza costs 12 dollars\n    total_pizza_value = total_pizzas * cost_per_pizza\n\n    # L3\n    num_pizzas_with_delivery_charge = 2 # 2 pizzas in a building 2 km away\n    delivery_charge_per_pizza = 2 # delivery charge is 2 extra dollars\n    total_delivery_charge = num_pizzas_with_delivery_charge * delivery_charge_per_pizza\n\n    # L4\n    total_paid = total_pizza_value + total_delivery_charge\n\n    # FA\n    answer = total_paid\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_paid",
+    "operand_to_replace": "total_delivery_charge",
+    "replacement_variable": "delivery_charge_per_pizza"
+  },
+  "correct_trace": {
+    "pizzas_building": 2,
+    "pizzas_park": 3,
+    "total_pizzas": 5,
+    "cost_per_pizza": 12,
+    "total_pizza_value": 60,
+    "num_pizzas_with_delivery_charge": 2,
+    "delivery_charge_per_pizza": 2,
+    "total_delivery_charge": 4,
+    "total_paid": 64,
+    "answer": 64
+  },
+  "flawed_trace": {
+    "pizzas_building": 2,
+    "pizzas_park": 3,
+    "total_pizzas": 5,
+    "cost_per_pizza": 12,
+    "total_pizza_value": 60,
+    "num_pizzas_with_delivery_charge": 2,
+    "delivery_charge_per_pizza": 2,
+    "total_delivery_charge": 4,
+    "total_paid": 62,
+    "answer": 62
+  },
+  "correct_value": 64,
+  "flawed_value": 62,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_pizzas",
+      "question_inputs": [
+        "pizzas_building",
+        "pizzas_park"
+      ],
+      "solution_line_template": "Adding the pizzas delivered in the park and in the building, Jimmy delivered a total of {pizzas_building} + {pizzas_park} = <<{pizzas_building}+{pizzas_park}={total_pizzas}>>{total_pizzas} pizzas"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_pizza_value",
+      "question_inputs": [
+        "cost_per_pizza"
+      ],
+      "solution_line_template": "The value of the {total_pizzas} pizzas without delivery charge is {total_pizzas} pizzas * ${cost_per_pizza}/pizza = $<<{total_pizzas}*{cost_per_pizza}={total_pizza_value}>>{total_pizza_value}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_delivery_charge",
+      "question_inputs": [
+        "num_pizzas_with_delivery_charge",
+        "delivery_charge_per_pizza"
+      ],
+      "solution_line_template": "The cost of the delivery charge for {num_pizzas_with_delivery_charge} pizzas is {num_pizzas_with_delivery_charge} pizzas * ${delivery_charge_per_pizza}/pizza = $<<{num_pizzas_with_delivery_charge}*{delivery_charge_per_pizza}={total_delivery_charge}>>{total_delivery_charge}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_paid",
+      "question_inputs": [],
+      "solution_line_template": "In total, Jimmy got paid ${total_pizza_value} + ${total_delivery_charge} = $<<{total_pizza_value}+{total_delivery_charge}={total_paid}>>{total_paid} for the pizzas."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Adding the pizzas delivered in the park and in the building, Jimmy delivered a total of 2 + 3 = <<2+3=5>>5 pizzas",
+    "L2": "The value of the 5 pizzas without delivery charge is 5 pizzas * $12/pizza = $<<5*12=60>>60.",
+    "L3": "The cost of the delivery charge for 2 pizzas is 2 pizzas * $2/pizza = $<<2*2=4>>4",
+    "L4": "In total, Jimmy got paid $60 + $2 = $<<60+2=62>>62 for the pizzas.",
+    "FA": "#### 62"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'delivery_charge_per_pizza' (value: 2) was used instead of 'total_delivery_charge' (value: 4).",
+  "repro_seed": -8731065262822241744,
+  "model_name": "google_gemini-2.5-flash"
+}

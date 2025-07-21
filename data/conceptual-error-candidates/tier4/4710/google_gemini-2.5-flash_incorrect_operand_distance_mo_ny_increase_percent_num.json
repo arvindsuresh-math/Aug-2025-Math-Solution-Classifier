@@ -1,0 +1,79 @@
+{
+  "index": 4710,
+  "original_solution_mapping": {
+    "FA": "#### 1400",
+    "L1": "The distance between Arizona and New York is 2,000 miles by plane.",
+    "L2": "The distance between Arizona and New York is 40% greater by car, which is 40% * 2,000 = <<40*.01*2000=800>>800 miles.",
+    "L3": "This results in a total of 2,000 + 800 = <<2000+800=2800>>2,800 miles between Arizona and New York by car.",
+    "L4": "If Missouri is in the middle of the way between Arizona and New York, someone would drive half of the distance to go from Missouri to New York, which is 2,800 / 2 = <<2800/2=1400>>1,400."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4710.\n    Returns: the distance from Missouri to New York by car.\n    \"\"\"\n    # L1\n    plane_distance_az_ny = 2000 # 2,000 miles by plane\n\n    # L2\n    increase_percent_num = 40 # increases by 40%\n    percent_factor = 0.01 # WK\n    increase_distance = increase_percent_num * percent_factor * plane_distance_az_ny\n\n    # L3\n    car_distance_az_ny = plane_distance_az_ny + increase_distance\n\n    # L4\n    midway_divisor = 2 # Missouri is midway\n    distance_mo_ny = car_distance_az_ny / midway_divisor\n\n    # FA\n    answer = distance_mo_ny\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "distance_mo_ny",
+    "operand_to_replace": "car_distance_az_ny",
+    "replacement_variable": "increase_percent_num"
+  },
+  "correct_trace": {
+    "plane_distance_az_ny": 2000,
+    "increase_percent_num": 40,
+    "percent_factor": 0.01,
+    "increase_distance": 800.0,
+    "car_distance_az_ny": 2800.0,
+    "midway_divisor": 2,
+    "distance_mo_ny": 1400.0,
+    "answer": 1400.0
+  },
+  "flawed_trace": {
+    "plane_distance_az_ny": 2000,
+    "increase_percent_num": 40,
+    "percent_factor": 0.01,
+    "increase_distance": 800.0,
+    "car_distance_az_ny": 2800.0,
+    "midway_divisor": 2,
+    "distance_mo_ny": 20.0,
+    "answer": 20.0
+  },
+  "correct_value": 1400.0,
+  "flawed_value": 20.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L2",
+      "output_variable": "increase_distance",
+      "question_inputs": [
+        "increase_percent_num",
+        "plane_distance_az_ny"
+      ],
+      "solution_line_template": "The distance between Arizona and New York is 40% greater by car, which is {increase_percent_num}% * {plane_distance_az_ny} = <<{increase_percent_num}*{percent_factor}*{plane_distance_az_ny}={increase_distance}>>{increase_distance} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "car_distance_az_ny",
+      "question_inputs": [],
+      "solution_line_template": "This results in a total of {plane_distance_az_ny} + {increase_distance} = <<{plane_distance_az_ny}+{increase_distance}={car_distance_az_ny}>>{car_distance_az_ny} miles between Arizona and New York by car."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "distance_mo_ny",
+      "question_inputs": [
+        "midway_divisor"
+      ],
+      "solution_line_template": "If Missouri is in the middle of the way between Arizona and New York, someone would drive half of the distance to go from Missouri to New York, which is {car_distance_az_ny} / {midway_divisor} = <<{car_distance_az_ny}/{midway_divisor}={distance_mo_ny}>>{distance_mo_ny}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "The distance between Arizona and New York is 40% greater by car, which is 40% * 2000 = <<40*0.01*2000=800>>800 miles.",
+    "L3": "This results in a total of 2000 + 800 = <<2000+800=2800>>2800 miles between Arizona and New York by car.",
+    "L4": "If Missouri is in the middle of the way between Arizona and New York, someone would drive half of the distance to go from Missouri to New York, which is 40 / 2 = <<40/2=20>>20.",
+    "FA": "#### 20"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'increase_percent_num' (value: 40) was used instead of 'car_distance_az_ny' (value: 2800.0).",
+  "repro_seed": 2642298517130017583,
+  "model_name": "google_gemini-2.5-flash"
+}

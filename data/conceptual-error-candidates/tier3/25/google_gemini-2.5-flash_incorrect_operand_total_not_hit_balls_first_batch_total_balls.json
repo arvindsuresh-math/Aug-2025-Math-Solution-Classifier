@@ -1,0 +1,77 @@
+{
+  "index": 25,
+  "original_solution_mapping": {
+    "FA": "#### 110",
+    "L1": "Out of the first 100 balls, Ralph was able to hit 2/5 of them and not able to hit 3/5 of them, 3/5 x 100 = 60 tennis balls Ralph didn't hit.",
+    "L2": "Out of the next 75 balls, Ralph was able to hit 1/3 of them and not able to hit 2/3 of them, 2/3 x 75 = 50 tennis balls that Ralph didn't hit.",
+    "L3": "Combined, Ralph was not able to hit 60 + 50 = <<60+50=110>>110 tennis balls Ralph didn't hit."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 25.\n    Returns: the total number of tennis balls Ralph did not hit.\n    \"\"\"\n    # L1\n    first_batch_total_balls = 100 # first 100 balls\n    not_hit_first_batch_fraction = Fraction(3, 5) # not able to hit 3/5 of them\n    not_hit_first_batch_count = not_hit_first_batch_fraction * first_batch_total_balls\n\n    # L2\n    second_batch_total_balls = 75 # next 75 tennis balls\n    not_hit_second_batch_fraction = Fraction(2, 3) # not able to hit 2/3 of them\n    not_hit_second_batch_count = not_hit_second_batch_fraction * second_batch_total_balls\n\n    # L3\n    total_not_hit_balls = not_hit_first_batch_count + not_hit_second_batch_count\n\n    # FA\n    answer = total_not_hit_balls\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_not_hit_balls",
+    "operand_to_replace": "not_hit_second_batch_count",
+    "replacement_variable": "first_batch_total_balls"
+  },
+  "correct_trace": {
+    "first_batch_total_balls": 100,
+    "not_hit_first_batch_fraction": "3/5",
+    "not_hit_first_batch_count": "60",
+    "second_batch_total_balls": 75,
+    "not_hit_second_batch_fraction": "2/3",
+    "not_hit_second_batch_count": "50",
+    "total_not_hit_balls": "110",
+    "answer": "110"
+  },
+  "flawed_trace": {
+    "first_batch_total_balls": 100,
+    "not_hit_first_batch_fraction": "3/5",
+    "not_hit_first_batch_count": "60",
+    "second_batch_total_balls": 75,
+    "not_hit_second_batch_fraction": "2/3",
+    "not_hit_second_batch_count": "50",
+    "total_not_hit_balls": "160",
+    "answer": "160"
+  },
+  "correct_value": "110",
+  "flawed_value": "160",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "not_hit_first_batch_count",
+      "question_inputs": [
+        "first_batch_total_balls",
+        "not_hit_first_batch_fraction"
+      ],
+      "solution_line_template": "Out of the first {first_batch_total_balls} balls, Ralph was able to hit 2/5 of them and not able to hit {not_hit_first_batch_fraction} of them, {not_hit_first_batch_fraction} x {first_batch_total_balls} = <<{not_hit_first_batch_fraction}*{first_batch_total_balls}={not_hit_first_batch_count}>>{not_hit_first_batch_count} tennis balls Ralph didn't hit."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "not_hit_second_batch_count",
+      "question_inputs": [
+        "second_batch_total_balls",
+        "not_hit_second_batch_fraction"
+      ],
+      "solution_line_template": "Out of the next {second_batch_total_balls} balls, Ralph was able to hit 1/3 of them and not able to hit {not_hit_second_batch_fraction} of them, {not_hit_second_batch_fraction} x {second_batch_total_balls} = <<{not_hit_second_batch_fraction}*{second_batch_total_balls}={not_hit_second_batch_count}>>{not_hit_second_batch_count} tennis balls that Ralph didn't hit."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_not_hit_balls",
+      "question_inputs": [],
+      "solution_line_template": "Combined, Ralph was not able to hit {not_hit_first_batch_count} + {not_hit_second_batch_count} = <<{not_hit_first_batch_count}+{not_hit_second_batch_count}={total_not_hit_balls}>>{total_not_hit_balls} tennis balls Ralph didn't hit."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Out of the first 100 balls, Ralph was able to hit 2/5 of them and not able to hit 3/5 of them, 3/5 x 100 = <<3/5*100=60>>60 tennis balls Ralph didn't hit.",
+    "L2": "Out of the next 75 balls, Ralph was able to hit 1/3 of them and not able to hit 2/3 of them, 2/3 x 75 = <<2/3*75=50>>50 tennis balls that Ralph didn't hit.",
+    "L3": "Combined, Ralph was not able to hit 60 + 100 = <<60+100=160>>160 tennis balls Ralph didn't hit.",
+    "FA": "#### 160"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'first_batch_total_balls' (value: 100) was used instead of 'not_hit_second_batch_count' (value: 50).",
+  "repro_seed": 8151016270438213006,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,107 @@
+{
+  "index": 7451,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "They sold $200 worth of cars each month because 4 x 50 = <<4*50=200>>200",
+    "L2": "They made $100 a month off cars because 200 - 100 = <<200-100=100>>100",
+    "L3": "They sold $400 worth of motorcycles each month because 8 x 50 = <<8*50=400>>400",
+    "L4": "They make $150 a month off motorcycles because 400 - 250 = <<400-250=150>>150",
+    "L5": "They make $50 more a month off motorcycles than cars because 150 - 100 = <<150-100=50>>50"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7451.\n    Returns: how much more profit they make per month selling motorcycles instead of cars.\n    \"\"\"\n    # L1\n    num_cars_made = 4 # make 4 cars\n    car_sale_price = 50 # sold each car for $50\n    car_sales_revenue = num_cars_made * car_sale_price\n\n    # L2\n    car_materials_cost = 100 # cost $100 for materials\n    car_profit = car_sales_revenue - car_materials_cost\n\n    # L3\n    num_motorcycles_sold = 8 # sell 8 of them\n    motorcycle_sale_price = 50 # for $50 each\n    motorcycle_sales_revenue = num_motorcycles_sold * motorcycle_sale_price\n\n    # L4\n    motorcycle_materials_cost = 250 # it costs $250 for materials\n    motorcycle_profit = motorcycle_sales_revenue - motorcycle_materials_cost\n\n    # L5\n    profit_difference = motorcycle_profit - car_profit\n\n    # FA\n    answer = profit_difference\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "profit_difference",
+    "operand_to_replace": "car_profit",
+    "replacement_variable": "num_motorcycles_sold"
+  },
+  "correct_trace": {
+    "num_cars_made": 4,
+    "car_sale_price": 50,
+    "car_sales_revenue": 200,
+    "car_materials_cost": 100,
+    "car_profit": 100,
+    "num_motorcycles_sold": 8,
+    "motorcycle_sale_price": 50,
+    "motorcycle_sales_revenue": 400,
+    "motorcycle_materials_cost": 250,
+    "motorcycle_profit": 150,
+    "profit_difference": 50,
+    "answer": 50
+  },
+  "flawed_trace": {
+    "num_cars_made": 4,
+    "car_sale_price": 50,
+    "car_sales_revenue": 200,
+    "car_materials_cost": 100,
+    "car_profit": 100,
+    "num_motorcycles_sold": 8,
+    "motorcycle_sale_price": 50,
+    "motorcycle_sales_revenue": 400,
+    "motorcycle_materials_cost": 250,
+    "motorcycle_profit": 150,
+    "profit_difference": 142,
+    "answer": 142
+  },
+  "correct_value": 50,
+  "flawed_value": 142,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "car_sales_revenue",
+      "question_inputs": [
+        "num_cars_made",
+        "car_sale_price"
+      ],
+      "solution_line_template": "They sold ${car_sales_revenue} worth of cars each month because {num_cars_made} x {car_sale_price} = <<{num_cars_made}*{car_sale_price}={car_sales_revenue}>>{car_sales_revenue}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "car_profit",
+      "question_inputs": [
+        "car_materials_cost"
+      ],
+      "solution_line_template": "They made ${car_profit} a month off cars because {car_sales_revenue} - {car_materials_cost} = <<{car_sales_revenue}-{car_materials_cost}={car_profit}>>{car_profit}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "motorcycle_sales_revenue",
+      "question_inputs": [
+        "num_motorcycles_sold",
+        "motorcycle_sale_price"
+      ],
+      "solution_line_template": "They sold ${motorcycle_sales_revenue} worth of motorcycles each month because {num_motorcycles_sold} x {motorcycle_sale_price} = <<{num_motorcycles_sold}*{motorcycle_sale_price}={motorcycle_sales_revenue}>>{motorcycle_sales_revenue}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "motorcycle_profit",
+      "question_inputs": [
+        "motorcycle_materials_cost"
+      ],
+      "solution_line_template": "They make ${motorcycle_profit} a month off motorcycles because {motorcycle_sales_revenue} - {motorcycle_materials_cost} = <<{motorcycle_sales_revenue}-{motorcycle_materials_cost}={motorcycle_profit}>>{motorcycle_profit}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "profit_difference",
+      "question_inputs": [],
+      "solution_line_template": "They make ${profit_difference} more a month off motorcycles than cars because {motorcycle_profit} - {car_profit} = <<{motorcycle_profit}-{car_profit}={profit_difference}>>{profit_difference}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "They sold $200 worth of cars each month because 4 x 50 = <<4*50=200>>200",
+    "L2": "They made $100 a month off cars because 200 - 100 = <<200-100=100>>100",
+    "L3": "They sold $400 worth of motorcycles each month because 8 x 50 = <<8*50=400>>400",
+    "L4": "They make $150 a month off motorcycles because 400 - 250 = <<400-250=150>>150",
+    "L5": "They make $142 more a month off motorcycles than cars because 150 - 8 = <<150-8=142>>142",
+    "FA": "#### 142"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operand. The variable 'num_motorcycles_sold' (value: 8) was used instead of 'car_profit' (value: 100).",
+  "repro_seed": -8486502040322983333,
+  "model_name": "google_gemini-2.5-flash"
+}

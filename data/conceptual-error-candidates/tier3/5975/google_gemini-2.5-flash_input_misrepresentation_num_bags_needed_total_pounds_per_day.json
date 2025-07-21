@@ -1,0 +1,108 @@
+{
+  "index": 5975,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "Each dog eats 6*2=<<6*2=12>>12 cups of food a day",
+    "L2": "His two dogs eat 12*2=<<12*2=24>>24 cups a day",
+    "L3": "Thus they eat 24/4=<<24/4=6>>6 pounds a day",
+    "L4": "So they eat 6*30=<<6*30=180>>180 pounds a month",
+    "L5": "So he needs to buy 180/20=<<180/20=9>>9 bags of food"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5975.\n    Returns: the number of 20-pound dog food bags Mike needs to buy a month.\n    \"\"\"\n    # L1\n    cups_per_feeding = 6 # 6 cups of dog food\n    feedings_per_day = 2 # twice a day\n    cups_per_dog_per_day = cups_per_feeding * feedings_per_day\n\n    # L2\n    number_of_dogs = 2 # 2 dogs\n    total_cups_per_day = cups_per_dog_per_day * number_of_dogs\n\n    # L3\n    pounds_per_cup_denominator = 4 # 1/4 of a pound\n    total_pounds_per_day = total_cups_per_day / pounds_per_cup_denominator\n\n    # L4\n    days_per_month = 30 # WK\n    total_pounds_per_month = total_pounds_per_day * days_per_month\n\n    # L5\n    pounds_per_bag = 20 # 20 pound bags\n    num_bags_needed = total_pounds_per_month / pounds_per_bag\n\n    # FA\n    answer = num_bags_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "num_bags_needed",
+    "operand_to_replace": "pounds_per_bag",
+    "replacement_variable": "total_pounds_per_day"
+  },
+  "correct_trace": {
+    "cups_per_feeding": 6,
+    "feedings_per_day": 2,
+    "cups_per_dog_per_day": 12,
+    "number_of_dogs": 2,
+    "total_cups_per_day": 24,
+    "pounds_per_cup_denominator": 4,
+    "total_pounds_per_day": 6.0,
+    "days_per_month": 30,
+    "total_pounds_per_month": 180.0,
+    "pounds_per_bag": 20,
+    "num_bags_needed": 9.0,
+    "answer": 9.0
+  },
+  "flawed_trace": {
+    "cups_per_feeding": 6,
+    "feedings_per_day": 2,
+    "cups_per_dog_per_day": 12,
+    "number_of_dogs": 2,
+    "total_cups_per_day": 24,
+    "pounds_per_cup_denominator": 4,
+    "total_pounds_per_day": 6.0,
+    "days_per_month": 30,
+    "total_pounds_per_month": 180.0,
+    "pounds_per_bag": 20,
+    "num_bags_needed": 30.0,
+    "answer": 30.0
+  },
+  "correct_value": 9.0,
+  "flawed_value": 30.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cups_per_dog_per_day",
+      "question_inputs": [
+        "cups_per_feeding",
+        "feedings_per_day"
+      ],
+      "solution_line_template": "Each dog eats {cups_per_feeding}*{feedings_per_day}=<<{cups_per_feeding}*{feedings_per_day}={cups_per_dog_per_day}>>{cups_per_dog_per_day} cups of food a day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cups_per_day",
+      "question_inputs": [
+        "number_of_dogs"
+      ],
+      "solution_line_template": "His {number_of_dogs} dogs eat {cups_per_dog_per_day}*{number_of_dogs}=<<{cups_per_dog_per_day}*{number_of_dogs}={total_cups_per_day}>>{total_cups_per_day} cups a day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_pounds_per_day",
+      "question_inputs": [
+        "pounds_per_cup_denominator"
+      ],
+      "solution_line_template": "Thus they eat {total_cups_per_day}/{pounds_per_cup_denominator}=<<{total_cups_per_day}/{pounds_per_cup_denominator}={total_pounds_per_day}>>{total_pounds_per_day} pounds a day"
+    },
+    {
+      "WK_inputs": [
+        "days_per_month"
+      ],
+      "line_number": "L4",
+      "output_variable": "total_pounds_per_month",
+      "question_inputs": [],
+      "solution_line_template": "So they eat {total_pounds_per_day}*{days_per_month}=<<{total_pounds_per_day}*{days_per_month}={total_pounds_per_month}>>{total_pounds_per_month} pounds a month"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "num_bags_needed",
+      "question_inputs": [
+        "pounds_per_bag"
+      ],
+      "solution_line_template": "So he needs to buy {total_pounds_per_month}/{pounds_per_bag}=<<{total_pounds_per_month}/{pounds_per_bag}={num_bags_needed}>>{num_bags_needed} bags of food"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each dog eats 6*2=<<6*2=12>>12 cups of food a day",
+    "L2": "His 2 dogs eat 12*2=<<12*2=24>>24 cups a day",
+    "L3": "Thus they eat 24/4=<<24/4=6>>6 pounds a day",
+    "L4": "So they eat 6*30=<<6*30=180>>180 pounds a month",
+    "L5": "So he needs to buy 180/6=<<180/6=30>>30 bags of food",
+    "FA": "#### 30"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Input misrepresentation. The value for 'total_pounds_per_day' (6.0) was used instead of 'pounds_per_bag' (20).",
+  "repro_seed": 1976368319864967489,
+  "model_name": "google_gemini-2.5-flash"
+}

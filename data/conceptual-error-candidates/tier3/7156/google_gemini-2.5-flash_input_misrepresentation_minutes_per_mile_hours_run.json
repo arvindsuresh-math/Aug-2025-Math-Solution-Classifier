@@ -1,0 +1,79 @@
+{
+  "index": 7156,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "3 hours is 3*60=<<3*60=180>>180 minutes.",
+    "L2": "Thus 3 hours and 36 minutes is 180+36=216 minutes.",
+    "L3": "Thus, he ran the 24 miles in 216 minutes, and each mile took 216/24=<<216/24=9>>9 minutes for Rich to run."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7156.\n    Returns: the average time in minutes it took Rich to run a mile.\n    \"\"\"\n    # L1\n    hours_run = 3 # 3 hours\n    minutes_per_hour = 60 # WK\n    hours_to_minutes = hours_run * minutes_per_hour\n\n    # L2\n    additional_minutes = 36 # 36 minutes\n    total_minutes = hours_to_minutes + additional_minutes\n\n    # L3\n    total_miles = 24 # 24-mile marathon\n    minutes_per_mile = total_minutes / total_miles\n\n    # FA\n    answer = minutes_per_mile\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "minutes_per_mile",
+    "operand_to_replace": "total_miles",
+    "replacement_variable": "hours_run"
+  },
+  "correct_trace": {
+    "hours_run": 3,
+    "minutes_per_hour": 60,
+    "hours_to_minutes": 180,
+    "additional_minutes": 36,
+    "total_minutes": 216,
+    "total_miles": 24,
+    "minutes_per_mile": 9.0,
+    "answer": 9.0
+  },
+  "flawed_trace": {
+    "hours_run": 3,
+    "minutes_per_hour": 60,
+    "hours_to_minutes": 180,
+    "additional_minutes": 36,
+    "total_minutes": 216,
+    "total_miles": 24,
+    "minutes_per_mile": 72.0,
+    "answer": 72.0
+  },
+  "correct_value": 9.0,
+  "flawed_value": 72.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "hours_to_minutes",
+      "question_inputs": [
+        "hours_run"
+      ],
+      "solution_line_template": "3 hours is {hours_run}*{minutes_per_hour}=<<{hours_run}*{minutes_per_hour}={hours_to_minutes}>>{hours_to_minutes} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_minutes",
+      "question_inputs": [
+        "additional_minutes"
+      ],
+      "solution_line_template": "Thus 3 hours and 36 minutes is {hours_to_minutes}+{additional_minutes}={total_minutes} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "minutes_per_mile",
+      "question_inputs": [
+        "total_miles"
+      ],
+      "solution_line_template": "Thus, he ran the {total_miles} miles in {total_minutes} minutes, and each mile took {total_minutes}/{total_miles}=<<{total_minutes}/{total_miles}={minutes_per_mile}>>{minutes_per_mile} minutes for Rich to run."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "3 hours is 3*60=<<3*60=180>>180 minutes.",
+    "L2": "Thus 3 hours and 36 minutes is 180+36=216 minutes.",
+    "L3": "Thus, he ran the 3 miles in 216 minutes, and each mile took 216/3=<<216/3=72>>72 minutes for Rich to run.",
+    "FA": "#### 72"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'hours_run' (3) was used instead of 'total_miles' (24).",
+  "repro_seed": 5013651032035452137,
+  "model_name": "google_gemini-2.5-flash"
+}

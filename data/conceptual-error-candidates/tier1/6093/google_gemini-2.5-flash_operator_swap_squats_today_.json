@@ -1,0 +1,70 @@
+{
+  "index": 6093,
+  "original_solution_mapping": {
+    "FA": "#### 45",
+    "L1": "Today, I will perform 30 + 5 = <<30+5=35>>35 squats.",
+    "L2": "Tomorrow, I will perform 35 + 5 = <<35+5=40>>40 squats.",
+    "L3": "So the day after tomorrow, I will perform 40 + 5 = <<40+5=45>>45 squats."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6093.\n    Returns: the number of squats performed the day after tomorrow.\n    \"\"\"\n    # L1\n    squats_yesterday = 30 # I did 30 squats\n    increase_per_day = 5 # increase my number of squats by 5 more than the previous day\n    squats_today = squats_yesterday + increase_per_day\n\n    # L2\n    squats_tomorrow = squats_today + increase_per_day\n\n    # L3\n    squats_day_after_tomorrow = squats_tomorrow + increase_per_day\n\n    # FA\n    answer = squats_day_after_tomorrow\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "squats_today",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x30aef7950>"
+  },
+  "correct_trace": {
+    "squats_yesterday": 30,
+    "increase_per_day": 5,
+    "squats_today": 35,
+    "squats_tomorrow": 40,
+    "squats_day_after_tomorrow": 45,
+    "answer": 45
+  },
+  "flawed_trace": {
+    "squats_yesterday": 30,
+    "increase_per_day": 5,
+    "squats_today": 150,
+    "squats_tomorrow": 155,
+    "squats_day_after_tomorrow": 160,
+    "answer": 160
+  },
+  "correct_value": 35,
+  "flawed_value": 150,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "squats_today",
+      "question_inputs": [
+        "squats_yesterday",
+        "increase_per_day"
+      ],
+      "solution_line_template": "Today, I will perform {squats_yesterday} + {increase_per_day} = <<{squats_yesterday}+{increase_per_day}={squats_today}>>{squats_today} squats."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "squats_tomorrow",
+      "question_inputs": [],
+      "solution_line_template": "Tomorrow, I will perform {squats_today} + {increase_per_day} = <<{squats_today}+{increase_per_day}={squats_tomorrow}>>{squats_tomorrow} squats."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "squats_day_after_tomorrow",
+      "question_inputs": [],
+      "solution_line_template": "So the day after tomorrow, I will perform {squats_tomorrow} + {increase_per_day} = <<{squats_tomorrow}+{increase_per_day}={squats_day_after_tomorrow}>>{squats_day_after_tomorrow} squats."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Today, I will perform 30 + 5 = <<30+5=150>>150 squats.",
+    "L2": "Tomorrow, I will perform 150 + 5 = <<150+5=155>>155 squats.",
+    "L3": "So the day after tomorrow, I will perform 155 + 5 = <<155+5=160>>160 squats.",
+    "FA": "#### 160"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": -3931638694647010807,
+  "model_name": "google_gemini-2.5-flash"
+}

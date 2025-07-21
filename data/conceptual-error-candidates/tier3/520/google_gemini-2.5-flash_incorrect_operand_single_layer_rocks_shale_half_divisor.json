@@ -1,0 +1,93 @@
+{
+  "index": 520,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "There are 25 - 5 = <<25-5=20>>20 layers of rock that are not limestone.",
+    "L2": "Half of those 20 are sandstone, so there are 20 / 2 = <<20/2=10>>10 that are not limestone or sandstone.",
+    "L3": "Four of those are quartz, so 10 - 4 = <<10-4=6>>6 layers are not limestone, sandstone, or quartz.",
+    "L4": "Half of the rest are shale, so 6 / 2 = <<6/2=3>>3 kinds of rock remain that make up only one layer in the strata."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 520.\n    Returns: the number of kinds of rock that make up only one layer.\n    \"\"\"\n    # L1\n    total_layers = 25 # 25 different layers of rock\n    limestone_layers = 5 # Five of the layers are limestone\n    non_limestone_layers = total_layers - limestone_layers\n\n    # L2\n    half_divisor = 2 # Half of the rest are sandstone\n    non_limestone_sandstone_layers = non_limestone_layers / half_divisor\n\n    # L3\n    quartz_layers = 4 # Four of the remaining are quartz\n    non_limestone_sandstone_quartz_layers = non_limestone_sandstone_layers - quartz_layers\n\n    # L4\n    shale_half_divisor = 2 # Half of the rest are shale\n    single_layer_rocks = non_limestone_sandstone_quartz_layers / shale_half_divisor\n\n    # FA\n    answer = single_layer_rocks\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "single_layer_rocks",
+    "operand_to_replace": "non_limestone_sandstone_quartz_layers",
+    "replacement_variable": "shale_half_divisor"
+  },
+  "correct_trace": {
+    "total_layers": 25,
+    "limestone_layers": 5,
+    "non_limestone_layers": 20,
+    "half_divisor": 2,
+    "non_limestone_sandstone_layers": 10.0,
+    "quartz_layers": 4,
+    "non_limestone_sandstone_quartz_layers": 6.0,
+    "shale_half_divisor": 2,
+    "single_layer_rocks": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "total_layers": 25,
+    "limestone_layers": 5,
+    "non_limestone_layers": 20,
+    "half_divisor": 2,
+    "non_limestone_sandstone_layers": 10.0,
+    "quartz_layers": 4,
+    "non_limestone_sandstone_quartz_layers": 6.0,
+    "shale_half_divisor": 2,
+    "single_layer_rocks": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 3.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "non_limestone_layers",
+      "question_inputs": [
+        "total_layers",
+        "limestone_layers"
+      ],
+      "solution_line_template": "There are {total_layers} - {limestone_layers} = <<{total_layers}-{limestone_layers}={non_limestone_layers}>>{non_limestone_layers} layers of rock that are not limestone."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "non_limestone_sandstone_layers",
+      "question_inputs": [
+        "half_divisor"
+      ],
+      "solution_line_template": "Half of those {non_limestone_layers} are sandstone, so there are {non_limestone_layers} / {half_divisor} = <<{non_limestone_layers}/{half_divisor}={non_limestone_sandstone_layers}>>{non_limestone_sandstone_layers} that are not limestone or sandstone."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "non_limestone_sandstone_quartz_layers",
+      "question_inputs": [
+        "quartz_layers"
+      ],
+      "solution_line_template": "Four of those are quartz, so {non_limestone_sandstone_layers} - {quartz_layers} = <<{non_limestone_sandstone_layers}-{quartz_layers}={non_limestone_sandstone_quartz_layers}>>{non_limestone_sandstone_quartz_layers} layers are not limestone, sandstone, or quartz."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "single_layer_rocks",
+      "question_inputs": [
+        "shale_half_divisor"
+      ],
+      "solution_line_template": "Half of the rest are shale, so {non_limestone_sandstone_quartz_layers} / {shale_half_divisor} = <<{non_limestone_sandstone_quartz_layers}/{shale_half_divisor}={single_layer_rocks}>>{single_layer_rocks} kinds of rock remain that make up only one layer in the strata."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 25 - 5 = <<25-5=20>>20 layers of rock that are not limestone.",
+    "L2": "Half of those 20 are sandstone, so there are 20 / 2 = <<20/2=10>>10 that are not limestone or sandstone.",
+    "L3": "Four of those are quartz, so 10 - 4 = <<10-4=6>>6 layers are not limestone, sandstone, or quartz.",
+    "L4": "Half of the rest are shale, so 2 / 2 = <<2/2=1>>1 kinds of rock remain that make up only one layer in the strata.",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'shale_half_divisor' (value: 2) was used instead of 'non_limestone_sandstone_quartz_layers' (value: 6.0).",
+  "repro_seed": -1851218747050670412,
+  "model_name": "google_gemini-2.5-flash"
+}

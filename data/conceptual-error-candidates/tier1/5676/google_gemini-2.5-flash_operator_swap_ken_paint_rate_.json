@@ -1,0 +1,104 @@
+{
+  "index": 5676,
+  "original_solution_mapping": {
+    "FA": "#### 375",
+    "L1": "Ken paints 3 tiles/minute + 2 tiles/minute = <<3+2=5>>5 tiles/minute.",
+    "L2": "Laura can paint 5 tiles/minute x 2 = <<5*2=10>>10 tiles/minute.",
+    "L3": "Kim can paint 10 tiles/minute - 3 tiles/minute = <<10-3=7>>7 tiles/minute.",
+    "L4": "All 4 can paint 3 tiles/minute + 5 tiles/minute + 10 tiles/minute + 7 tiles/minute = 25 tiles/minute.",
+    "L5": "In 15 minutes, they can paint 15 minutes x 25 tiles/minute = <<15*25=375>>375 tiles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5676.\n    Returns: the total number of tiles Don, Ken, Laura, and Kim can paint in 15 minutes.\n    \"\"\"\n    # L1\n    don_paint_rate = 3 # Don can paint 3 tiles a minute\n    ken_more_than_don = 2 # Ken can paint 2 more tiles a minute than Don\n    ken_paint_rate = don_paint_rate + ken_more_than_don\n\n    # L2\n    laura_multiplier_ken = 2 # Laura can paint twice as many tiles as Ken\n    laura_paint_rate = ken_paint_rate * laura_multiplier_ken\n\n    # L3\n    kim_fewer_than_laura = 3 # Kim can paint 3 fewer tiles than Laura\n    kim_paint_rate = laura_paint_rate - kim_fewer_than_laura\n\n    # L4\n    total_paint_rate_per_minute = don_paint_rate + ken_paint_rate + laura_paint_rate + kim_paint_rate\n\n    # L5\n    total_minutes = 15 # in 15 minutes\n    total_tiles_painted = total_minutes * total_paint_rate_per_minute\n\n    # FA\n    answer = total_tiles_painted\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "ken_paint_rate",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x309b1c750>"
+  },
+  "correct_trace": {
+    "don_paint_rate": 3,
+    "ken_more_than_don": 2,
+    "ken_paint_rate": 5,
+    "laura_multiplier_ken": 2,
+    "laura_paint_rate": 10,
+    "kim_fewer_than_laura": 3,
+    "kim_paint_rate": 7,
+    "total_paint_rate_per_minute": 25,
+    "total_minutes": 15,
+    "total_tiles_painted": 375,
+    "answer": 375
+  },
+  "flawed_trace": {
+    "don_paint_rate": 3,
+    "ken_more_than_don": 2,
+    "ken_paint_rate": 6,
+    "laura_multiplier_ken": 2,
+    "laura_paint_rate": 12,
+    "kim_fewer_than_laura": 3,
+    "kim_paint_rate": 9,
+    "total_paint_rate_per_minute": 30,
+    "total_minutes": 15,
+    "total_tiles_painted": 450,
+    "answer": 450
+  },
+  "correct_value": 5,
+  "flawed_value": 6,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "ken_paint_rate",
+      "question_inputs": [
+        "don_paint_rate",
+        "ken_more_than_don"
+      ],
+      "solution_line_template": "Ken paints {don_paint_rate} tiles/minute + {ken_more_than_don} tiles/minute = <<{don_paint_rate}+{ken_more_than_don}={ken_paint_rate}>>{ken_paint_rate} tiles/minute."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "laura_paint_rate",
+      "question_inputs": [
+        "laura_multiplier_ken"
+      ],
+      "solution_line_template": "Laura can paint {ken_paint_rate} tiles/minute x {laura_multiplier_ken} = <<{ken_paint_rate}*{laura_multiplier_ken}={laura_paint_rate}>>{laura_paint_rate} tiles/minute."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "kim_paint_rate",
+      "question_inputs": [
+        "kim_fewer_than_laura"
+      ],
+      "solution_line_template": "Kim can paint {laura_paint_rate} tiles/minute - {kim_fewer_than_laura} tiles/minute = <<{laura_paint_rate}-{kim_fewer_than_laura}={kim_paint_rate}>>{kim_paint_rate} tiles/minute."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_paint_rate_per_minute",
+      "question_inputs": [],
+      "solution_line_template": "All 4 can paint {don_paint_rate} tiles/minute + {ken_paint_rate} tiles/minute + {laura_paint_rate} tiles/minute + {kim_paint_rate} tiles/minute = {total_paint_rate_per_minute} tiles/minute."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_tiles_painted",
+      "question_inputs": [
+        "total_minutes"
+      ],
+      "solution_line_template": "In {total_minutes} minutes, they can paint {total_minutes} minutes x {total_paint_rate_per_minute} tiles/minute = <<{total_minutes}*{total_paint_rate_per_minute}={total_tiles_painted}>>{total_tiles_painted} tiles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Ken paints 3 tiles/minute + 2 tiles/minute = <<3+2=6>>6 tiles/minute.",
+    "L2": "Laura can paint 6 tiles/minute x 2 = <<6*2=12>>12 tiles/minute.",
+    "L3": "Kim can paint 12 tiles/minute - 3 tiles/minute = <<12-3=9>>9 tiles/minute.",
+    "L4": "All 4 can paint 3 tiles/minute + 6 tiles/minute + 12 tiles/minute + 9 tiles/minute = 30 tiles/minute.",
+    "L5": "In 15 minutes, they can paint 15 minutes x 30 tiles/minute = <<15*30=450>>450 tiles.",
+    "FA": "#### 450"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": -982951497908719847,
+  "model_name": "google_gemini-2.5-flash"
+}

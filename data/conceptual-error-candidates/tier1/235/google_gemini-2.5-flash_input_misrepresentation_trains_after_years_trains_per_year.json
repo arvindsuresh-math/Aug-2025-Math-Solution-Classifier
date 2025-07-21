@@ -1,0 +1,89 @@
+{
+  "index": 235,
+  "original_solution_mapping": {
+    "FA": "#### 45",
+    "L1": "Max gets 1+2=<<1+2=3>>3 trains per year.",
+    "L2": "He repeats this for 5 years, meaning he gets 5*3 =<<5*3=15>>15 trains.",
+    "L3": "When this number is doubled by his parents, it becomes 15*2= <<15*2=30>>30 trains.",
+    "L4": "Since he already had 15 model trains, his total becomes 15+30= <<15+30=45>>45 trains."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 235.\n    Returns: the total number of trains Max has.\n    \"\"\"\n    # L1\n    trains_per_birthday = 1 # one for every birthday\n    trains_per_christmas = 2 # two each Christmas\n    trains_per_year = trains_per_birthday + trains_per_christmas\n\n    # L2\n    num_years = 5 # 5 years\n    trains_after_years = num_years * trains_per_year\n\n    # L3\n    multiplier_double = 2 # double the number of trains\n    trains_doubled_by_parents = trains_after_years * multiplier_double\n\n    # L4\n    total_trains = trains_after_years + trains_doubled_by_parents\n\n    # FA\n    answer = total_trains\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "trains_after_years",
+    "operand_to_replace": "num_years",
+    "replacement_variable": "trains_per_year"
+  },
+  "correct_trace": {
+    "trains_per_birthday": 1,
+    "trains_per_christmas": 2,
+    "trains_per_year": 3,
+    "num_years": 5,
+    "trains_after_years": 15,
+    "multiplier_double": 2,
+    "trains_doubled_by_parents": 30,
+    "total_trains": 45,
+    "answer": 45
+  },
+  "flawed_trace": {
+    "trains_per_birthday": 1,
+    "trains_per_christmas": 2,
+    "trains_per_year": 3,
+    "num_years": 5,
+    "trains_after_years": 9,
+    "multiplier_double": 2,
+    "trains_doubled_by_parents": 18,
+    "total_trains": 27,
+    "answer": 27
+  },
+  "correct_value": 15,
+  "flawed_value": 9,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "trains_per_birthday",
+        "trains_per_christmas"
+      ],
+      "WK_inputs": [],
+      "output_variable": "trains_per_year",
+      "solution_line_template": "Max gets {trains_per_birthday}+{trains_per_christmas}=<<{trains_per_birthday}+{trains_per_christmas}={trains_per_year}>>{trains_per_year} trains per year."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "num_years"
+      ],
+      "WK_inputs": [],
+      "output_variable": "trains_after_years",
+      "solution_line_template": "He repeats this for {num_years} years, meaning he gets {num_years}*{trains_per_year} =<<{num_years}*{trains_per_year}={trains_after_years}>>{trains_after_years} trains."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "multiplier_double"
+      ],
+      "WK_inputs": [],
+      "output_variable": "trains_doubled_by_parents",
+      "solution_line_template": "When this number is doubled by his parents, it becomes {trains_after_years}*{multiplier_double}= <<{trains_after_years}*{multiplier_double}={trains_doubled_by_parents}>>{trains_doubled_by_parents} trains."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_trains",
+      "solution_line_template": "Since he already had {trains_after_years} model trains, his total becomes {trains_after_years}+{trains_doubled_by_parents}= <<{trains_after_years}+{trains_doubled_by_parents}={total_trains}>>{total_trains} trains."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Max gets 1+2=<<1+2=3>>3 trains per year.",
+    "L2": "He repeats this for 3 years, meaning he gets 3*3 =<<3*3=9>>9 trains.",
+    "L3": "When this number is doubled by his parents, it becomes 9*2= <<9*2=18>>18 trains.",
+    "L4": "Since he already had 9 model trains, his total becomes 9+18= <<9+18=27>>27 trains.",
+    "FA": "#### 27"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'trains_per_year' (3) was used instead of 'num_years' (5).",
+  "repro_seed": -5922931982955590453,
+  "model_name": "google_gemini-2.5-flash"
+}

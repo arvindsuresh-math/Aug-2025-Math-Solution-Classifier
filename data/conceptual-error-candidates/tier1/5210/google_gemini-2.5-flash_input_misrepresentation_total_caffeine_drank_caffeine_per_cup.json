@@ -1,0 +1,63 @@
+{
+  "index": 5210,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "Lisa drinks 80*3=<<80*3=240>>240 mg of caffeine in 3 cups of coffee.",
+    "L2": "She wanted to have 200, so she is 40 mg over her goal because 240-200 = <<240-200=40>>40mg."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5210.\n    Returns: the milligrams of coffee Lisa drank over her goal.\n    \"\"\"\n    # L1\n    caffeine_per_cup = 80 # 80 mg of caffeine in a cup of coffee\n    num_cups = 3 # three cups of coffee\n    total_caffeine_drank = caffeine_per_cup * num_cups\n\n    # L2\n    caffeine_goal = 200 # not want to drink more than 200 mg of caffeine per day\n    over_goal = total_caffeine_drank - caffeine_goal\n\n    # FA\n    answer = over_goal\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_caffeine_drank",
+    "operand_to_replace": "num_cups",
+    "replacement_variable": "caffeine_per_cup"
+  },
+  "correct_trace": {
+    "caffeine_per_cup": 80,
+    "num_cups": 3,
+    "total_caffeine_drank": 240,
+    "caffeine_goal": 200,
+    "over_goal": 40,
+    "answer": 40
+  },
+  "flawed_trace": {
+    "caffeine_per_cup": 80,
+    "num_cups": 3,
+    "total_caffeine_drank": 6400,
+    "caffeine_goal": 200,
+    "over_goal": 6200,
+    "answer": 6200
+  },
+  "correct_value": 240,
+  "flawed_value": 6400,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_caffeine_drank",
+      "question_inputs": [
+        "caffeine_per_cup",
+        "num_cups"
+      ],
+      "solution_line_template": "Lisa drinks {caffeine_per_cup}*{num_cups}=<<{caffeine_per_cup}*{num_cups}={total_caffeine_drank}>>{total_caffeine_drank} mg of caffeine in {num_cups} cups of coffee."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "over_goal",
+      "question_inputs": [
+        "caffeine_goal"
+      ],
+      "solution_line_template": "She wanted to have {caffeine_goal}, so she is {over_goal} mg over her goal because {total_caffeine_drank}-{caffeine_goal} = <<{total_caffeine_drank}-{caffeine_goal}={over_goal}>>{over_goal}mg."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Lisa drinks 80*80=<<80*80=6400>>6400 mg of caffeine in 80 cups of coffee.",
+    "L2": "She wanted to have 200, so she is 6200 mg over her goal because 6400-200 = <<6400-200=6200>>6200mg.",
+    "FA": "#### 6200"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'caffeine_per_cup' (80) was used instead of 'num_cups' (3).",
+  "repro_seed": -4557614710829041853,
+  "model_name": "google_gemini-2.5-flash"
+}

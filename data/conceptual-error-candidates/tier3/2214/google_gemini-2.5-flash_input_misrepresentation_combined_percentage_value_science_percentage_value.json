@@ -1,0 +1,76 @@
+{
+  "index": 2214,
+  "original_solution_mapping": {
+    "FA": "#### 45",
+    "L1": "Matt spent on math and science 30% + 40% = 70% of the time.",
+    "L2": "This means he did homework from these two subjects for 70/100 * 150 minutes = <<70/100*150=105>>105 minutes.",
+    "L3": "So Matt spent 150 minutes - 105 minutes = <<150-105=45>>45 minutes doing homework from other subjects."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2214.\n    Returns: the time Matt spent on homework in other subjects.\n    \"\"\"\n    # L1\n    math_percentage_value = 30 # 30% of that time on math\n    science_percentage_value = 40 # 40% on science\n    combined_percentage_value = math_percentage_value + science_percentage_value\n\n    # L2\n    combined_percentage_fraction = Fraction(combined_percentage_value, 100)\n    total_homework_minutes = 150 # Matt did his homework for 150 minutes\n    time_on_math_science = combined_percentage_fraction * total_homework_minutes\n\n    # L3\n    time_on_other_subjects = total_homework_minutes - time_on_math_science\n\n    # FA\n    answer = time_on_other_subjects\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "combined_percentage_value",
+    "operand_to_replace": "math_percentage_value",
+    "replacement_variable": "science_percentage_value"
+  },
+  "correct_trace": {
+    "math_percentage_value": 30,
+    "science_percentage_value": 40,
+    "combined_percentage_value": 70,
+    "combined_percentage_fraction": "7/10",
+    "total_homework_minutes": 150,
+    "time_on_math_science": "105",
+    "time_on_other_subjects": "45",
+    "answer": "45"
+  },
+  "flawed_trace": {
+    "math_percentage_value": 30,
+    "science_percentage_value": 40,
+    "combined_percentage_value": 80,
+    "combined_percentage_fraction": "4/5",
+    "total_homework_minutes": 150,
+    "time_on_math_science": "120",
+    "time_on_other_subjects": "30",
+    "answer": "30"
+  },
+  "correct_value": 70,
+  "flawed_value": 80,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "combined_percentage_value",
+      "question_inputs": [
+        "math_percentage_value",
+        "science_percentage_value"
+      ],
+      "solution_line_template": "Matt spent on math and science {math_percentage_value}% + {science_percentage_value}% = {combined_percentage_value}% of the time."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "time_on_math_science",
+      "question_inputs": [
+        "total_homework_minutes"
+      ],
+      "solution_line_template": "This means he did homework from these two subjects for {combined_percentage_fraction} * {total_homework_minutes} minutes = <<{combined_percentage_fraction}*{total_homework_minutes}={time_on_math_science}>>{time_on_math_science} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "time_on_other_subjects",
+      "question_inputs": [],
+      "solution_line_template": "So Matt spent {total_homework_minutes} minutes - {time_on_math_science} minutes = <<{total_homework_minutes}-{time_on_math_science}={time_on_other_subjects}>>{time_on_other_subjects} minutes doing homework from other subjects."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Matt spent on math and science 40% + 40% = 80% of the time.",
+    "L2": "This means he did homework from these two subjects for 80/100 * 150 minutes = <<80/100*150=120>>120 minutes.",
+    "L3": "So Matt spent 150 minutes - 120 minutes = <<150-120=30>>30 minutes doing homework from other subjects.",
+    "FA": "#### 30"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'science_percentage_value' (40) was used instead of 'math_percentage_value' (30).",
+  "repro_seed": -4452159015684687635,
+  "model_name": "google_gemini-2.5-flash"
+}

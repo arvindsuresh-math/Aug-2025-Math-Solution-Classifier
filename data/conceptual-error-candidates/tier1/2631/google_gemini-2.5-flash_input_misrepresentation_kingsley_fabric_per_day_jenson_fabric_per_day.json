@@ -1,0 +1,92 @@
+{
+  "index": 2631,
+  "original_solution_mapping": {
+    "FA": "#### 93",
+    "L1": "Jenson uses 2 x 3 = <<2*3=6>>6 yards of fabric for making shirts every day.",
+    "L2": "Kingsley uses 5 x 5 = <<5*5=25>>25 yards of fabric every day for making pair of pants.",
+    "L3": "So, the total yards of fabric they use per day is 25 + 6 = <<25+6=31>>31",
+    "L4": "Therefore, the total yards of fabric they use every 3 days is 31 x 3 = <<31*3=93>>93."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2631.\n    Returns: the total yards of fabric needed for 3 days.\n    \"\"\"\n    # L1\n    yards_per_shirt = 2 # 2 yards of fabric\n    shirts_per_day_jenson = 3 # 3 shirts\n    jenson_fabric_per_day = yards_per_shirt * shirts_per_day_jenson\n\n    # L2\n    yards_per_pant = 5 # 5 yards of fabric\n    pants_per_day_kingsley = 5 # 5 pairs of pants\n    kingsley_fabric_per_day = yards_per_pant * pants_per_day_kingsley\n\n    # L3\n    total_fabric_per_day = kingsley_fabric_per_day + jenson_fabric_per_day\n\n    # L4\n    num_days = 3 # every 3 days\n    total_fabric_three_days = total_fabric_per_day * num_days\n\n    # FA\n    answer = total_fabric_three_days\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "kingsley_fabric_per_day",
+    "operand_to_replace": "yards_per_pant",
+    "replacement_variable": "jenson_fabric_per_day"
+  },
+  "correct_trace": {
+    "yards_per_shirt": 2,
+    "shirts_per_day_jenson": 3,
+    "jenson_fabric_per_day": 6,
+    "yards_per_pant": 5,
+    "pants_per_day_kingsley": 5,
+    "kingsley_fabric_per_day": 25,
+    "total_fabric_per_day": 31,
+    "num_days": 3,
+    "total_fabric_three_days": 93,
+    "answer": 93
+  },
+  "flawed_trace": {
+    "yards_per_shirt": 2,
+    "shirts_per_day_jenson": 3,
+    "jenson_fabric_per_day": 6,
+    "yards_per_pant": 5,
+    "pants_per_day_kingsley": 5,
+    "kingsley_fabric_per_day": 30,
+    "total_fabric_per_day": 36,
+    "num_days": 3,
+    "total_fabric_three_days": 108,
+    "answer": 108
+  },
+  "correct_value": 25,
+  "flawed_value": 30,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "yards_per_shirt",
+        "shirts_per_day_jenson"
+      ],
+      "WK_inputs": [],
+      "output_variable": "jenson_fabric_per_day",
+      "solution_line_template": "Jenson uses {yards_per_shirt} x {shirts_per_day_jenson} = <<{yards_per_shirt}*{shirts_per_day_jenson}={jenson_fabric_per_day}>>{jenson_fabric_per_day} yards of fabric for making shirts every day."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "yards_per_pant",
+        "pants_per_day_kingsley"
+      ],
+      "WK_inputs": [],
+      "output_variable": "kingsley_fabric_per_day",
+      "solution_line_template": "Kingsley uses {yards_per_pant} x {pants_per_day_kingsley} = <<{yards_per_pant}*{pants_per_day_kingsley}={kingsley_fabric_per_day}>>{kingsley_fabric_per_day} yards of fabric every day for making pair of pants."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_fabric_per_day",
+      "solution_line_template": "So, the total yards of fabric they use per day is {kingsley_fabric_per_day} + {jenson_fabric_per_day} = <<{kingsley_fabric_per_day}+{jenson_fabric_per_day}={total_fabric_per_day}>>{total_fabric_per_day}"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "num_days"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_fabric_three_days",
+      "solution_line_template": "Therefore, the total yards of fabric they use every {num_days} days is {total_fabric_per_day} x {num_days} = <<{total_fabric_per_day}*{num_days}={total_fabric_three_days}>>{total_fabric_three_days}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jenson uses 2 x 3 = <<2*3=6>>6 yards of fabric for making shirts every day.",
+    "L2": "Kingsley uses 6 x 5 = <<6*5=30>>30 yards of fabric every day for making pair of pants.",
+    "L3": "So, the total yards of fabric they use per day is 30 + 6 = <<30+6=36>>36",
+    "L4": "Therefore, the total yards of fabric they use every 3 days is 36 x 3 = <<36*3=108>>108.",
+    "FA": "#### 108"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'jenson_fabric_per_day' (6) was used instead of 'yards_per_pant' (5).",
+  "repro_seed": 762054519552648371,
+  "model_name": "google_gemini-2.5-flash"
+}

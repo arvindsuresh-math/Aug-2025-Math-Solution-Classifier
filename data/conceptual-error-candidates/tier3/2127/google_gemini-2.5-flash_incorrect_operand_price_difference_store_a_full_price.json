@@ -1,0 +1,99 @@
+{
+  "index": 2127,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "Store A has a $125 x 8/100 = $<<125*8/100=10>>10 discount.",
+    "L2": "So the smartphone from store A will only cost $125 - $10 = $<<125-10=115>>115.",
+    "L3": "Store B has a $130 x 10/100 = $<<130*10/100=13>>13 discount.",
+    "L4": "So the smartphone from store B will only cost $130 - $13 = $<<130-13=117>>117.",
+    "L5": "Thus, store A's smartphone is $117 - $115 = $<<117-115=2>>2 cheaper than that of store B."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2127.\n    Returns: the price difference between store A's and store B's smartphones.\n    \"\"\"\n    # L1\n    store_a_full_price = 125 # full price of $125\n    store_a_discount_percentage = Fraction(8, 100) # additional discount of 8%\n    store_a_discount_amount = store_a_full_price * store_a_discount_percentage\n\n    # L2\n    store_a_final_price = store_a_full_price - store_a_discount_amount\n\n    # L3\n    store_b_full_price = 130 # lists the same smartphone for $130\n    store_b_discount_percentage = Fraction(10, 100) # additional discount of 10%\n    store_b_discount_amount = store_b_full_price * store_b_discount_percentage\n\n    # L4\n    store_b_final_price = store_b_full_price - store_b_discount_amount\n\n    # L5\n    price_difference = store_b_final_price - store_a_final_price\n\n    # FA\n    answer = price_difference\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "price_difference",
+    "operand_to_replace": "store_b_final_price",
+    "replacement_variable": "store_a_full_price"
+  },
+  "correct_trace": {
+    "store_a_full_price": 125,
+    "store_a_discount_percentage": "2/25",
+    "store_a_discount_amount": "10",
+    "store_a_final_price": "115",
+    "store_b_full_price": 130,
+    "store_b_discount_percentage": "1/10",
+    "store_b_discount_amount": "13",
+    "store_b_final_price": "117",
+    "price_difference": "2",
+    "answer": "2"
+  },
+  "flawed_trace": {
+    "store_a_full_price": 125,
+    "store_a_discount_percentage": "2/25",
+    "store_a_discount_amount": "10",
+    "store_a_final_price": "115",
+    "store_b_full_price": 130,
+    "store_b_discount_percentage": "1/10",
+    "store_b_discount_amount": "13",
+    "store_b_final_price": "117",
+    "price_difference": "10",
+    "answer": "10"
+  },
+  "correct_value": "2",
+  "flawed_value": "10",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "store_a_discount_amount",
+      "question_inputs": [
+        "store_a_full_price",
+        "store_a_discount_percentage"
+      ],
+      "solution_line_template": "Store A has a ${store_a_full_price} x {store_a_discount_percentage} = $<<{store_a_full_price}*{store_a_discount_percentage}={store_a_discount_amount}>>{store_a_discount_amount} discount."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "store_a_final_price",
+      "question_inputs": [],
+      "solution_line_template": "So the smartphone from store A will only cost ${store_a_full_price} - ${store_a_discount_amount} = $<<{store_a_full_price}-{store_a_discount_amount}={store_a_final_price}>>{store_a_final_price}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "store_b_discount_amount",
+      "question_inputs": [
+        "store_b_full_price",
+        "store_b_discount_percentage"
+      ],
+      "solution_line_template": "Store B has a ${store_b_full_price} x {store_b_discount_percentage} = $<<{store_b_full_price}*{store_b_discount_percentage}={store_b_discount_amount}>>{store_b_discount_amount} discount."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "store_b_final_price",
+      "question_inputs": [],
+      "solution_line_template": "So the smartphone from store B will only cost ${store_b_full_price} - ${store_b_discount_amount} = $<<{store_b_full_price}-{store_b_discount_amount}={store_b_final_price}>>{store_b_final_price}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "price_difference",
+      "question_inputs": [],
+      "solution_line_template": "Thus, store A's smartphone is ${store_b_final_price} - ${store_a_final_price} = $<<{store_b_final_price}-{store_a_final_price}={price_difference}>>{price_difference} cheaper than that of store B."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Store A has a $125 x 8/100 = $<<125*8/100=10>>10 discount.",
+    "L2": "So the smartphone from store A will only cost $125 - $10 = $<<125-10=115>>115.",
+    "L3": "Store B has a $130 x 10/100 = $<<130*10/100=13>>13 discount.",
+    "L4": "So the smartphone from store B will only cost $130 - $13 = $<<130-13=117>>117.",
+    "L5": "Thus, store A's smartphone is $125 - $115 = $<<125-115=10>>10 cheaper than that of store B.",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operand. The variable 'store_a_full_price' (value: 125) was used instead of 'store_b_final_price' (value: 117).",
+  "repro_seed": 4064839734468130768,
+  "model_name": "google_gemini-2.5-flash"
+}

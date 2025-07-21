@@ -1,0 +1,89 @@
+{
+  "index": 2889,
+  "original_solution_mapping": {
+    "FA": "#### 16",
+    "L1": "Yes RSVP responses are 200 x 83% = <<200*83*.01=166>>166 guests.",
+    "L2": "No RSVP responses are 200 x 9% = <<200*9*.01=18>>18 guests.",
+    "L3": "Guests who responded are 166 + 18 = <<166+18=184>>184.",
+    "L4": "Guests who did not respond at all are 200 - 184 = <<200-184=16>>16."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2889.\n    Returns: the number of guests who did not respond at all.\n    \"\"\"\n    # L1\n    total_guests = 200 # 200 guests\n    yes_rsvp_percent_num = 83 # 83% of the guests\n    percent_factor = 0.01 # WK\n    yes_responses = total_guests * yes_rsvp_percent_num * percent_factor\n\n    # L2\n    no_rsvp_percent_num = 9 # 9% of the guests\n    no_responses = total_guests * no_rsvp_percent_num * percent_factor\n\n    # L3\n    total_responded_guests = yes_responses + no_responses\n\n    # L4\n    unresponded_guests = total_guests - total_responded_guests\n\n    # FA\n    answer = unresponded_guests\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "unresponded_guests",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30e591210>"
+  },
+  "correct_trace": {
+    "total_guests": 200,
+    "yes_rsvp_percent_num": 83,
+    "percent_factor": 0.01,
+    "yes_responses": 166.0,
+    "no_rsvp_percent_num": 9,
+    "no_responses": 18.0,
+    "total_responded_guests": 184.0,
+    "unresponded_guests": 16.0,
+    "answer": 16.0
+  },
+  "flawed_trace": {
+    "total_guests": 200,
+    "yes_rsvp_percent_num": 83,
+    "percent_factor": 0.01,
+    "yes_responses": 166.0,
+    "no_rsvp_percent_num": 9,
+    "no_responses": 18.0,
+    "total_responded_guests": 184.0,
+    "unresponded_guests": 384.0,
+    "answer": 384.0
+  },
+  "correct_value": 16.0,
+  "flawed_value": 384.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "yes_responses",
+      "question_inputs": [
+        "total_guests",
+        "yes_rsvp_percent_num"
+      ],
+      "solution_line_template": "Yes RSVP responses are {total_guests} x {yes_rsvp_percent_num}% = <<{total_guests}*{yes_rsvp_percent_num}*{percent_factor}={yes_responses}>>{yes_responses} guests."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "no_responses",
+      "question_inputs": [
+        "no_rsvp_percent_num"
+      ],
+      "solution_line_template": "No RSVP responses are {total_guests} x {no_rsvp_percent_num}% = <<{total_guests}*{no_rsvp_percent_num}*{percent_factor}={no_responses}>>{no_responses} guests."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_responded_guests",
+      "question_inputs": [],
+      "solution_line_template": "Guests who responded are {yes_responses} + {no_responses} = <<{yes_responses}+{no_responses}={total_responded_guests}>>{total_responded_guests}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "unresponded_guests",
+      "question_inputs": [],
+      "solution_line_template": "Guests who did not respond at all are {total_guests} - {total_responded_guests} = <<{total_guests}-{total_responded_guests}={unresponded_guests}>>{unresponded_guests}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Yes RSVP responses are 200 x 83% = <<200*83*0.01=166>>166 guests.",
+    "L2": "No RSVP responses are 200 x 9% = <<200*9*0.01=18>>18 guests.",
+    "L3": "Guests who responded are 166 + 18 = <<166+18=184>>184.",
+    "L4": "Guests who did not respond at all are 200 - 184 = <<200-184=384>>384.",
+    "FA": "#### 384"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 495533055129466522,
+  "model_name": "google_gemini-2.5-flash"
+}

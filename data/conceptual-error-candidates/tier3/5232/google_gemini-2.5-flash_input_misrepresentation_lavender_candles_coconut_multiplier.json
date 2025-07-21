@@ -1,0 +1,63 @@
+{
+  "index": 5232,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "Jill made one and a half times as many coconut candles as almond candles, so she made 10 * 1 1/2 = 15 coconut candles.",
+    "L2": "She made twice as many lavender candles as coconut candles, so she made 2 * 15 = <<2*15=30>>30 lavender candles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5232.\n    Returns: the number of lavender candles Jill made.\n    \"\"\"\n    # L1\n    almond_candles = 10 # after making ten candles\n    coconut_multiplier = Fraction(3, 2) # one and a half times as much coconut scent as almond scent\n    coconut_candles = almond_candles * coconut_multiplier\n\n    # L2\n    lavender_multiplier = 2 # twice as many lavender candles\n    lavender_candles = lavender_multiplier * coconut_candles\n\n    # FA\n    answer = lavender_candles\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "lavender_candles",
+    "operand_to_replace": "lavender_multiplier",
+    "replacement_variable": "coconut_multiplier"
+  },
+  "correct_trace": {
+    "almond_candles": 10,
+    "coconut_multiplier": "3/2",
+    "coconut_candles": "15",
+    "lavender_multiplier": 2,
+    "lavender_candles": "30",
+    "answer": "30"
+  },
+  "flawed_trace": {
+    "almond_candles": 10,
+    "coconut_multiplier": "3/2",
+    "coconut_candles": "15",
+    "lavender_multiplier": 2,
+    "lavender_candles": "45/2",
+    "answer": "45/2"
+  },
+  "correct_value": "30",
+  "flawed_value": "45/2",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "coconut_candles",
+      "question_inputs": [
+        "almond_candles",
+        "coconut_multiplier"
+      ],
+      "solution_line_template": "Jill made one and a half times as many coconut candles as almond candles, so she made {almond_candles} * {coconut_multiplier} = {coconut_candles} coconut candles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "lavender_candles",
+      "question_inputs": [
+        "lavender_multiplier"
+      ],
+      "solution_line_template": "She made twice as many lavender candles as coconut candles, so she made {lavender_multiplier} * {coconut_candles} = <<{lavender_multiplier}*{coconut_candles}={lavender_candles}>>{lavender_candles} lavender candles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jill made one and a half times as many coconut candles as almond candles, so she made 10 * 3/2 = 15 coconut candles.",
+    "L2": "She made twice as many lavender candles as coconut candles, so she made 3/2 * 15 = <<3/2*15=45/2>>45/2 lavender candles.",
+    "FA": "#### 45/2"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'coconut_multiplier' (3/2) was used instead of 'lavender_multiplier' (2).",
+  "repro_seed": 3597257298590761564,
+  "model_name": "google_gemini-2.5-flash"
+}

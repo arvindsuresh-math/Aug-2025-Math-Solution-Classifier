@@ -1,0 +1,63 @@
+{
+  "index": 6863,
+  "original_solution_mapping": {
+    "FA": "#### 25",
+    "L1": "The firewood is made from 500 pieces of firewood / 5 pieces of firewood per log = <<500/5=100>>100 logs.",
+    "L2": "So the logs are chopped from 100 logs / 4 logs per tree = <<100/4=25>>25 trees."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6863.\n    Returns: the total number of trees chopped down.\n    \"\"\"\n    # L1\n    total_firewood_pieces = 500 # chopped 500 pieces of firewood\n    pieces_per_log = 5 # each log is then chopped into 5 pieces of firewood\n    total_logs = total_firewood_pieces / pieces_per_log\n\n    # L2\n    logs_per_tree = 4 # produces 4 logs each\n    total_trees = total_logs / logs_per_tree\n\n    # FA\n    answer = total_trees\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_trees",
+    "operand_to_replace": "logs_per_tree",
+    "replacement_variable": "pieces_per_log"
+  },
+  "correct_trace": {
+    "total_firewood_pieces": 500,
+    "pieces_per_log": 5,
+    "total_logs": 100.0,
+    "logs_per_tree": 4,
+    "total_trees": 25.0,
+    "answer": 25.0
+  },
+  "flawed_trace": {
+    "total_firewood_pieces": 500,
+    "pieces_per_log": 5,
+    "total_logs": 100.0,
+    "logs_per_tree": 4,
+    "total_trees": 20.0,
+    "answer": 20.0
+  },
+  "correct_value": 25.0,
+  "flawed_value": 20.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_logs",
+      "question_inputs": [
+        "total_firewood_pieces",
+        "pieces_per_log"
+      ],
+      "solution_line_template": "The firewood is made from {total_firewood_pieces} pieces of firewood / {pieces_per_log} pieces of firewood per log = <<{total_firewood_pieces}/{pieces_per_log}={total_logs}>>{total_logs} logs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_trees",
+      "question_inputs": [
+        "logs_per_tree"
+      ],
+      "solution_line_template": "So the logs are chopped from {total_logs} logs / {logs_per_tree} logs per tree = <<{total_logs}/{logs_per_tree}={total_trees}>>{total_trees} trees."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The firewood is made from 500 pieces of firewood / 5 pieces of firewood per log = <<500/5=100>>100 logs.",
+    "L2": "So the logs are chopped from 100 logs / 5 logs per tree = <<100/5=20>>20 trees.",
+    "FA": "#### 20"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'pieces_per_log' (5) was used instead of 'logs_per_tree' (4).",
+  "repro_seed": -78709394555487277,
+  "model_name": "google_gemini-2.5-flash"
+}

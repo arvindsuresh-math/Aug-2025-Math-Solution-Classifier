@@ -1,0 +1,104 @@
+{
+  "index": 4304,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "Rachel's grandfather is 12 x 7 = <<12*7=84>>84 years old.",
+    "L2": "Her mother is 84/2 = <<84/2=42>>42 years old.",
+    "L3": "Her father is 42 + 5 = <<42+5=47>>47 years old.",
+    "L4": "Rachel will be 25 years old in 25 - 12 = <<25-12=13>>13 years.",
+    "L5": "Rachel's father will be 47 + 13 = <<47+13=60>>60 years old."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4304.\n    Returns: the age of Rachel's father when she is 25 years old.\n    \"\"\"\n    # L1\n    rachel_age = 12 # Rachel is 12 years old\n    grandfather_age_multiplier = 7 # grandfather is 7 times her age\n    grandfather_age = rachel_age * grandfather_age_multiplier\n\n    # L2\n    mother_age_divisor = 2 # mother is half grandfather's age\n    mother_age = grandfather_age / mother_age_divisor\n\n    # L3\n    father_age_difference = 5 # father is 5 years older than her mother\n    father_age = mother_age + father_age_difference\n\n    # L4\n    rachel_future_age = 25 # when she is 25 years old\n    years_until_rachel_25 = rachel_future_age - rachel_age\n\n    # L5\n    father_future_age = father_age + years_until_rachel_25\n\n    # FA\n    answer = father_future_age\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "mother_age",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x30b79d310>"
+  },
+  "correct_trace": {
+    "rachel_age": 12,
+    "grandfather_age_multiplier": 7,
+    "grandfather_age": 84,
+    "mother_age_divisor": 2,
+    "mother_age": 42.0,
+    "father_age_difference": 5,
+    "father_age": 47.0,
+    "rachel_future_age": 25,
+    "years_until_rachel_25": 13,
+    "father_future_age": 60.0,
+    "answer": 60.0
+  },
+  "flawed_trace": {
+    "rachel_age": 12,
+    "grandfather_age_multiplier": 7,
+    "grandfather_age": 84,
+    "mother_age_divisor": 2,
+    "mother_age": 168,
+    "father_age_difference": 5,
+    "father_age": 173,
+    "rachel_future_age": 25,
+    "years_until_rachel_25": 13,
+    "father_future_age": 186,
+    "answer": 186
+  },
+  "correct_value": 42.0,
+  "flawed_value": 168,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "grandfather_age",
+      "question_inputs": [
+        "rachel_age",
+        "grandfather_age_multiplier"
+      ],
+      "solution_line_template": "Rachel's grandfather is {rachel_age} x {grandfather_age_multiplier} = <<{rachel_age}*{grandfather_age_multiplier}={grandfather_age}>>{grandfather_age} years old."
+    },
+    {
+      "WK_inputs": [
+        "mother_age_divisor"
+      ],
+      "line_number": "L2",
+      "output_variable": "mother_age",
+      "question_inputs": [],
+      "solution_line_template": "Her mother is {grandfather_age}/{mother_age_divisor} = <<{grandfather_age}/{mother_age_divisor}={mother_age}>>{mother_age} years old."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "father_age",
+      "question_inputs": [
+        "father_age_difference"
+      ],
+      "solution_line_template": "Her father is {mother_age} + {father_age_difference} = <<{mother_age}+{father_age_difference}={father_age}>>{father_age} years old."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "years_until_rachel_25",
+      "question_inputs": [
+        "rachel_future_age"
+      ],
+      "solution_line_template": "Rachel will be {rachel_future_age} years old in {rachel_future_age} - {rachel_age} = <<{rachel_future_age}-{rachel_age}={years_until_rachel_25}>>{years_until_rachel_25} years."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "father_future_age",
+      "question_inputs": [],
+      "solution_line_template": "Rachel's father will be {father_age} + {years_until_rachel_25} = <<{father_age}+{years_until_rachel_25}={father_future_age}>>{father_future_age} years old."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Rachel's grandfather is 12 x 7 = <<12*7=84>>84 years old.",
+    "L2": "Her mother is 84/2 = <<84/2=168>>168 years old.",
+    "L3": "Her father is 168 + 5 = <<168+5=173>>173 years old.",
+    "L4": "Rachel will be 25 years old in 25 - 12 = <<25-12=13>>13 years.",
+    "L5": "Rachel's father will be 173 + 13 = <<173+13=186>>186 years old.",
+    "FA": "#### 186"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 6676017108298579781,
+  "model_name": "google_gemini-2.5-flash"
+}

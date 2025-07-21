@@ -1,0 +1,63 @@
+{
+  "index": 176,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "A total of 20 x 100 = <<20*100=2000>>2000 grams are sold every week.",
+    "L2": "Since 1 kilogram is equal to 1000 grams, then 2000/1000 = <<2000/1000=2>>2 kilograms of sugar are sold every week."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 176.\n    Returns: the total kilograms of sugar sold every week.\n    \"\"\"\n    # L1\n    packets_sold_per_week = 20 # 20 packets\n    grams_per_packet = 100 # 100 grams of sugar\n    total_grams_sold = packets_sold_per_week * grams_per_packet\n\n    # L2\n    grams_per_kilogram = 1000 # 1 kilogram is equal to 1000 grams\n    total_kilograms_sold = total_grams_sold / grams_per_kilogram\n\n    # FA\n    answer = total_kilograms_sold\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_grams_sold",
+    "operand_to_replace": "packets_sold_per_week",
+    "replacement_variable": "grams_per_packet"
+  },
+  "correct_trace": {
+    "packets_sold_per_week": 20,
+    "grams_per_packet": 100,
+    "total_grams_sold": 2000,
+    "grams_per_kilogram": 1000,
+    "total_kilograms_sold": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "packets_sold_per_week": 20,
+    "grams_per_packet": 100,
+    "total_grams_sold": 10000,
+    "grams_per_kilogram": 1000,
+    "total_kilograms_sold": 10.0,
+    "answer": 10.0
+  },
+  "correct_value": 2000,
+  "flawed_value": 10000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_grams_sold",
+      "question_inputs": [
+        "packets_sold_per_week",
+        "grams_per_packet"
+      ],
+      "solution_line_template": "A total of {packets_sold_per_week} x {grams_per_packet} = <<{packets_sold_per_week}*{grams_per_packet}={total_grams_sold}>>{total_grams_sold} grams are sold every week."
+    },
+    {
+      "WK_inputs": [
+        "grams_per_kilogram"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_kilograms_sold",
+      "question_inputs": [],
+      "solution_line_template": "Since 1 kilogram is equal to 1000 grams, then {total_grams_sold}/{grams_per_kilogram} = <<{total_grams_sold}/{grams_per_kilogram}={total_kilograms_sold}>>{total_kilograms_sold} kilograms of sugar are sold every week."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "A total of 100 x 100 = <<100*100=10000>>10000 grams are sold every week.",
+    "L2": "Since 1 kilogram is equal to 1000 grams, then 10000/1000 = <<10000/1000=10>>10 kilograms of sugar are sold every week.",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'grams_per_packet' (100) was used instead of 'packets_sold_per_week' (20).",
+  "repro_seed": -1814984458178244726,
+  "model_name": "google_gemini-2.5-flash"
+}

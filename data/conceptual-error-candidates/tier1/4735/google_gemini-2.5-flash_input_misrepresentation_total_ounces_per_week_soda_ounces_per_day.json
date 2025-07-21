@@ -1,0 +1,78 @@
+{
+  "index": 4735,
+  "original_solution_mapping": {
+    "FA": "#### 868",
+    "L1": "He drinks 12 * 5 = <<12*5=60>>60 ounces of soda a day",
+    "L2": "So he drinks 60 + 64 = <<60+64=124>>124 ounces of liquid a day",
+    "L3": "So in total he drinks 124 * 7 = <<124*7=868>>868 ounces of liquid a week"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4735.\n    Returns: the total ounces of fluid Tom drinks in a week.\n    \"\"\"\n    # L1\n    soda_can_size = 12 # 12-oz cans of soda\n    cans_per_day = 5 # 5 12-oz cans of soda\n    soda_ounces_per_day = soda_can_size * cans_per_day\n\n    # L2\n    water_ounces_per_day = 64 # 64 ounces of water\n    total_ounces_per_day = soda_ounces_per_day + water_ounces_per_day\n\n    # L3\n    days_per_week = 7 # WK\n    total_ounces_per_week = total_ounces_per_day * days_per_week\n\n    # FA\n    answer = total_ounces_per_week\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_ounces_per_week",
+    "operand_to_replace": "days_per_week",
+    "replacement_variable": "soda_ounces_per_day"
+  },
+  "correct_trace": {
+    "soda_can_size": 12,
+    "cans_per_day": 5,
+    "soda_ounces_per_day": 60,
+    "water_ounces_per_day": 64,
+    "total_ounces_per_day": 124,
+    "days_per_week": 7,
+    "total_ounces_per_week": 868,
+    "answer": 868
+  },
+  "flawed_trace": {
+    "soda_can_size": 12,
+    "cans_per_day": 5,
+    "soda_ounces_per_day": 60,
+    "water_ounces_per_day": 64,
+    "total_ounces_per_day": 124,
+    "days_per_week": 7,
+    "total_ounces_per_week": 7440,
+    "answer": 7440
+  },
+  "correct_value": 868,
+  "flawed_value": 7440,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "soda_ounces_per_day",
+      "question_inputs": [
+        "soda_can_size",
+        "cans_per_day"
+      ],
+      "solution_line_template": "He drinks {soda_can_size} * {cans_per_day} = <<{soda_can_size}*{cans_per_day}={soda_ounces_per_day}>>{soda_ounces_per_day} ounces of soda a day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_ounces_per_day",
+      "question_inputs": [
+        "water_ounces_per_day"
+      ],
+      "solution_line_template": "So he drinks {soda_ounces_per_day} + {water_ounces_per_day} = <<{soda_ounces_per_day}+{water_ounces_per_day}={total_ounces_per_day}>>{total_ounces_per_day} ounces of liquid a day"
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_ounces_per_week",
+      "question_inputs": [],
+      "solution_line_template": "So in total he drinks {total_ounces_per_day} * {days_per_week} = <<{total_ounces_per_day}*{days_per_week}={total_ounces_per_week}>>{total_ounces_per_week} ounces of liquid a week"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He drinks 12 * 5 = <<12*5=60>>60 ounces of soda a day",
+    "L2": "So he drinks 60 + 64 = <<60+64=124>>124 ounces of liquid a day",
+    "L3": "So in total he drinks 124 * 60 = <<124*60=7440>>7440 ounces of liquid a week",
+    "FA": "#### 7440"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'soda_ounces_per_day' (60) was used instead of 'days_per_week' (7).",
+  "repro_seed": 3613611995384800304,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 671,
+  "original_solution_mapping": {
+    "FA": "#### 96",
+    "L1": "The number of ripe mangoes from the tree is 3/5*400 = <<3/5*400=240>>240",
+    "L2": "If Lindsay eats 60% of the ripe mangoes, she eats 60/100*240 = <<60/100*240=144>>144 mangoes.",
+    "L3": "The total number of ripe mangoes remaining is 240-144 =<<240-144=96>>96"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 671.\n    Returns: the number of ripe mangoes remaining.\n    \"\"\"\n    # L1\n    ripe_fraction = Fraction(3, 5) # 3/5 of the mangoes\n    total_mangoes = 400 # 400 mangoes on the tree\n    ripe_mangoes = ripe_fraction * total_mangoes\n\n    # L2\n    eaten_percentage = Fraction(60, 100) # 60% of the ripe mangoes\n    mangoes_eaten = eaten_percentage * ripe_mangoes\n\n    # L3\n    remaining_ripe_mangoes = ripe_mangoes - mangoes_eaten\n\n    # FA\n    answer = remaining_ripe_mangoes\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "ripe_mangoes",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x30b4bfcd0>"
+  },
+  "correct_trace": {
+    "ripe_fraction": "3/5",
+    "total_mangoes": 400,
+    "ripe_mangoes": "240",
+    "eaten_percentage": "3/5",
+    "mangoes_eaten": "144",
+    "remaining_ripe_mangoes": "96",
+    "answer": "96"
+  },
+  "flawed_trace": {
+    "ripe_fraction": "3/5",
+    "total_mangoes": 400,
+    "ripe_mangoes": "3/2000",
+    "eaten_percentage": "3/5",
+    "mangoes_eaten": "9/10000",
+    "remaining_ripe_mangoes": "3/5000",
+    "answer": "3/5000"
+  },
+  "correct_value": "240",
+  "flawed_value": "3/2000",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "ripe_mangoes",
+      "question_inputs": [
+        "ripe_fraction",
+        "total_mangoes"
+      ],
+      "solution_line_template": "The number of ripe mangoes from the tree is {ripe_fraction}*{total_mangoes} = <<{ripe_fraction}*{total_mangoes}={ripe_mangoes}>>{ripe_mangoes}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "mangoes_eaten",
+      "question_inputs": [
+        "eaten_percentage"
+      ],
+      "solution_line_template": "If Lindsay eats 60% of the ripe mangoes, she eats {eaten_percentage}*{ripe_mangoes} = <<{eaten_percentage}*{ripe_mangoes}={mangoes_eaten}>>{mangoes_eaten} mangoes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_ripe_mangoes",
+      "question_inputs": [],
+      "solution_line_template": "The total number of ripe mangoes remaining is {ripe_mangoes}-{mangoes_eaten} =<<{ripe_mangoes}-{mangoes_eaten}={remaining_ripe_mangoes}>>{remaining_ripe_mangoes}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The number of ripe mangoes from the tree is 3/5*400 = <<3/5*400=3/2000>>3/2000",
+    "L2": "If Lindsay eats 60% of the ripe mangoes, she eats 60/100*3/2000 = <<60/100*3/2000=9/10000>>9/10000 mangoes.",
+    "L3": "The total number of ripe mangoes remaining is 3/2000-9/10000 =<<3/2000-9/10000=3/5000>>3/5000",
+    "FA": "#### 3/5000"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -3389833544830589211,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,93 @@
+{
+  "index": 4996,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "Rebecca bought 3 * 6 = <<3*6=18>>18 bottles of soda.",
+    "L2": "A week is 7 days, so she will drink 4 * 7 = <<4*7=28>>28 half bottles of soda in four weeks.",
+    "L3": "A bottle is two half bottles, so she will drink 28 / 2 = <<28/2=14>>14 bottles of soda in four weeks.",
+    "L4": "Thus, after 4 weeks, she will have 18 - 14 = <<18-14=4>>4 bottles of soda left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4996.\n    Returns: the number of bottles of soda Rebecca will have left.\n    \"\"\"\n    # L1\n    packs_bought = 3 # three 6-packs of sodas\n    bottles_per_pack = 6 # 6-packs of sodas\n    total_bottles_bought = packs_bought * bottles_per_pack\n\n    # L2\n    num_weeks = 4 # four weeks\n    days_per_week = 7 # A week is 7 days\n    total_half_bottles_drunk = num_weeks * days_per_week\n\n    # L3\n    half_bottles_per_bottle = 2 # A bottle is two half bottles\n    total_bottles_drunk = total_half_bottles_drunk / half_bottles_per_bottle\n\n    # L4\n    bottles_left = total_bottles_bought - total_bottles_drunk\n\n    # FA\n    answer = bottles_left\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_bottles_bought",
+    "operand_to_replace": "packs_bought",
+    "replacement_variable": "bottles_per_pack"
+  },
+  "correct_trace": {
+    "packs_bought": 3,
+    "bottles_per_pack": 6,
+    "total_bottles_bought": 18,
+    "num_weeks": 4,
+    "days_per_week": 7,
+    "total_half_bottles_drunk": 28,
+    "half_bottles_per_bottle": 2,
+    "total_bottles_drunk": 14.0,
+    "bottles_left": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "packs_bought": 3,
+    "bottles_per_pack": 6,
+    "total_bottles_bought": 36,
+    "num_weeks": 4,
+    "days_per_week": 7,
+    "total_half_bottles_drunk": 28,
+    "half_bottles_per_bottle": 2,
+    "total_bottles_drunk": 14.0,
+    "bottles_left": 22.0,
+    "answer": 22.0
+  },
+  "correct_value": 18,
+  "flawed_value": 36,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_bottles_bought",
+      "question_inputs": [
+        "packs_bought",
+        "bottles_per_pack"
+      ],
+      "solution_line_template": "Rebecca bought {packs_bought} * {bottles_per_pack} = <<{packs_bought}*{bottles_per_pack}={total_bottles_bought}>>{total_bottles_bought} bottles of soda."
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_half_bottles_drunk",
+      "question_inputs": [
+        "num_weeks"
+      ],
+      "solution_line_template": "A week is {days_per_week} days, so she will drink {num_weeks} * {days_per_week} = <<{num_weeks}*{days_per_week}={total_half_bottles_drunk}>>{total_half_bottles_drunk} half bottles of soda in four weeks."
+    },
+    {
+      "WK_inputs": [
+        "half_bottles_per_bottle"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_bottles_drunk",
+      "question_inputs": [],
+      "solution_line_template": "A bottle is {half_bottles_per_bottle} half bottles, so she will drink {total_half_bottles_drunk} / {half_bottles_per_bottle} = <<{total_half_bottles_drunk}/{half_bottles_per_bottle}={total_bottles_drunk}>>{total_bottles_drunk} bottles of soda in four weeks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "bottles_left",
+      "question_inputs": [],
+      "solution_line_template": "Thus, after {num_weeks} weeks, she will have {total_bottles_bought} - {total_bottles_drunk} = <<{total_bottles_bought}-{total_bottles_drunk}={bottles_left}>>{bottles_left} bottles of soda left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Rebecca bought 6 * 6 = <<6*6=36>>36 bottles of soda.",
+    "L2": "A week is 7 days, so she will drink 4 * 7 = <<4*7=28>>28 half bottles of soda in four weeks.",
+    "L3": "A bottle is 2 half bottles, so she will drink 28 / 2 = <<28/2=14>>14 bottles of soda in four weeks.",
+    "L4": "Thus, after 4 weeks, she will have 36 - 14 = <<36-14=22>>22 bottles of soda left.",
+    "FA": "#### 22"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'bottles_per_pack' (6) was used instead of 'packs_bought' (3).",
+  "repro_seed": 4422647643234873664,
+  "model_name": "google_gemini-2.5-flash"
+}

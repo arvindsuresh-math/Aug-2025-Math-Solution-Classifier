@@ -1,0 +1,85 @@
+{
+  "index": 3791,
+  "original_solution_mapping": {
+    "FA": "#### 150",
+    "L1": "Susan spent 600/2=<<600/2=300>>300 on clothes",
+    "L2": "After buying clothes she had 600-300= <<600-300=300>>300 dollars left",
+    "L3": "She spent 300/2=<<300/2=150>>150 dollars on books",
+    "L4": "She had 300-150=<<300-150=150>>150 dollars left"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3791.\n    Returns: the amount of money Susan had left.\n    \"\"\"\n    # L1\n    initial_money = 600 # Susan earned $600 from babysitting\n    clothes_divisor = 2 # spent half of it on clothes\n    spent_on_clothes = initial_money / clothes_divisor\n\n    # L2\n    money_left_after_clothes = initial_money - spent_on_clothes\n\n    # L3\n    books_divisor = 2 # spent half of what was left on books\n    spent_on_books = money_left_after_clothes / books_divisor\n\n    # L4\n    final_money_left = money_left_after_clothes - spent_on_books\n\n    # FA\n    answer = final_money_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "final_money_left",
+    "operand_to_replace": "money_left_after_clothes",
+    "replacement_variable": "initial_money"
+  },
+  "correct_trace": {
+    "initial_money": 600,
+    "clothes_divisor": 2,
+    "spent_on_clothes": 300.0,
+    "money_left_after_clothes": 300.0,
+    "books_divisor": 2,
+    "spent_on_books": 150.0,
+    "final_money_left": 150.0,
+    "answer": 150.0
+  },
+  "flawed_trace": {
+    "initial_money": 600,
+    "clothes_divisor": 2,
+    "spent_on_clothes": 300.0,
+    "money_left_after_clothes": 300.0,
+    "books_divisor": 2,
+    "spent_on_books": 150.0,
+    "final_money_left": 450.0,
+    "answer": 450.0
+  },
+  "correct_value": 150.0,
+  "flawed_value": 450.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "spent_on_clothes",
+      "question_inputs": [
+        "initial_money",
+        "clothes_divisor"
+      ],
+      "solution_line_template": "Susan spent {initial_money}/{clothes_divisor}=<<{initial_money}/{clothes_divisor}={spent_on_clothes}>>{spent_on_clothes} on clothes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_left_after_clothes",
+      "question_inputs": [],
+      "solution_line_template": "After buying clothes she had {initial_money}-{spent_on_clothes}= <<{initial_money}-{spent_on_clothes}={money_left_after_clothes}>>{money_left_after_clothes} dollars left"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "spent_on_books",
+      "question_inputs": [
+        "books_divisor"
+      ],
+      "solution_line_template": "She spent {money_left_after_clothes}/{books_divisor}=<<{money_left_after_clothes}/{books_divisor}={spent_on_books}>>{spent_on_books} dollars on books"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_money_left",
+      "question_inputs": [],
+      "solution_line_template": "She had {money_left_after_clothes}-{spent_on_books}=<<{money_left_after_clothes}-{spent_on_books}={final_money_left}>>{final_money_left} dollars left"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Susan spent 600/2=<<600/2=300>>300 on clothes",
+    "L2": "After buying clothes she had 600-300= <<600-300=300>>300 dollars left",
+    "L3": "She spent 300/2=<<300/2=150>>150 dollars on books",
+    "L4": "She had 600-150=<<600-150=450>>450 dollars left",
+    "FA": "#### 450"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'initial_money' (value: 600) was used instead of 'money_left_after_clothes' (value: 300.0).",
+  "repro_seed": -3945641739447751021,
+  "model_name": "google_gemini-2.5-flash"
+}

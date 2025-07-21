@@ -1,0 +1,79 @@
+{
+  "index": 7020,
+  "original_solution_mapping": {
+    "FA": "#### 108",
+    "L1": "In March, she walked for 31-4 = <<31-4=27>>27 days.",
+    "L2": "If she walks for an hour a day, the total number of hours she'll walk in March is 27 days*1 hour a day= <<27*1=27>>27 hours.",
+    "L3": "If each walk is 4 miles, the number of miles she walked in March is 27*4 = <<27*4=108>>108 miles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7020.\n    Returns: the total number of miles Emberly walked in March.\n    \"\"\"\n    # L1\n    days_in_march = 31 # WK\n    days_not_walked = 4 # didn't walk for 4 days in March\n    days_walked = days_in_march - days_not_walked\n\n    # L2\n    hours_per_walk = 1 # each walk takes her 1 hour\n    total_hours_walked = days_walked * hours_per_walk\n\n    # L3\n    miles_per_walk = 4 # covering 4 miles\n    total_miles_walked = total_hours_walked * miles_per_walk\n\n    # FA\n    answer = total_miles_walked\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "days_walked",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x15f472d90>"
+  },
+  "correct_trace": {
+    "days_in_march": 31,
+    "days_not_walked": 4,
+    "days_walked": 27,
+    "hours_per_walk": 1,
+    "total_hours_walked": 27,
+    "miles_per_walk": 4,
+    "total_miles_walked": 108,
+    "answer": 108
+  },
+  "flawed_trace": {
+    "days_in_march": 31,
+    "days_not_walked": 4,
+    "days_walked": 35,
+    "hours_per_walk": 1,
+    "total_hours_walked": 35,
+    "miles_per_walk": 4,
+    "total_miles_walked": 140,
+    "answer": 140
+  },
+  "correct_value": 27,
+  "flawed_value": 35,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "days_in_march"
+      ],
+      "line_number": "L1",
+      "output_variable": "days_walked",
+      "question_inputs": [
+        "days_not_walked"
+      ],
+      "solution_line_template": "In March, she walked for {days_in_march}-{days_not_walked} = <<{days_in_march}-{days_not_walked}={days_walked}>>{days_walked} days."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_hours_walked",
+      "question_inputs": [
+        "hours_per_walk"
+      ],
+      "solution_line_template": "If she walks for an hour a day, the total number of hours she'll walk in March is {days_walked} days*{hours_per_walk} hour a day= <<{days_walked}*{hours_per_walk}={total_hours_walked}>>{total_hours_walked} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_miles_walked",
+      "question_inputs": [
+        "miles_per_walk"
+      ],
+      "solution_line_template": "If each walk is {miles_per_walk} miles, the number of miles she walked in March is {total_hours_walked}*{miles_per_walk} = <<{total_hours_walked}*{miles_per_walk}={total_miles_walked}>>{total_miles_walked} miles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In March, she walked for 31-4 = <<31-4=35>>35 days.",
+    "L2": "If she walks for an hour a day, the total number of hours she'll walk in March is 35 days*1 hour a day= <<35*1=35>>35 hours.",
+    "L3": "If each walk is 4 miles, the number of miles she walked in March is 35*4 = <<35*4=140>>140 miles.",
+    "FA": "#### 140"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -6796917154306490306,
+  "model_name": "google_gemini-2.5-flash"
+}

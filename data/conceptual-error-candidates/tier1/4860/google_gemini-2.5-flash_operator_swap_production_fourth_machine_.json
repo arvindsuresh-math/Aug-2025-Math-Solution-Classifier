@@ -1,0 +1,104 @@
+{
+  "index": 4860,
+  "original_solution_mapping": {
+    "FA": "#### 8100",
+    "L1": "The total runtime for the first three machines is 3 machines * 23 hours/day/machine = <<3*23=69>>69 hours/day.",
+    "L2": "So these machines could produce 69 hours/day * 2 kg/hour = <<69*2=138>>138 kg/day.",
+    "L3": "The fourth machine could produce 12 hours/day * 2 kg/hour = <<12*2=24>>24 kg/day of material.",
+    "L4": "In total all the machines would produce 138 kg/day + 24 kg/day = <<138+24=162>>162 kg/day of material.",
+    "L5": "The factory would therefore earn 162 kg/day * $50/kg = $<<162*50=8100>>8100/day."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4860.\n    Returns: the total earnings of the factory in one day.\n    \"\"\"\n    # L1\n    num_machines_initial = 3 # 3 machines\n    hours_per_day_initial_machine = 23 # 23 hours a day\n    total_runtime_initial_machines = num_machines_initial * hours_per_day_initial_machine\n\n    # L2\n    kg_per_hour_per_machine = 2 # 2 kg of material every hour\n    production_initial_machines = total_runtime_initial_machines * kg_per_hour_per_machine\n\n    # L3\n    hours_per_day_fourth_machine = 12 # works only 12 hours a day\n    production_fourth_machine = hours_per_day_fourth_machine * kg_per_hour_per_machine\n\n    # L4\n    total_production_per_day = production_initial_machines + production_fourth_machine\n\n    # L5\n    price_per_kg = 50 # $50 per 1 kg\n    daily_earnings = total_production_per_day * price_per_kg\n\n    # FA\n    answer = daily_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "production_fourth_machine",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x309f9f7d0>"
+  },
+  "correct_trace": {
+    "num_machines_initial": 3,
+    "hours_per_day_initial_machine": 23,
+    "total_runtime_initial_machines": 69,
+    "kg_per_hour_per_machine": 2,
+    "production_initial_machines": 138,
+    "hours_per_day_fourth_machine": 12,
+    "production_fourth_machine": 24,
+    "total_production_per_day": 162,
+    "price_per_kg": 50,
+    "daily_earnings": 8100,
+    "answer": 8100
+  },
+  "flawed_trace": {
+    "num_machines_initial": 3,
+    "hours_per_day_initial_machine": 23,
+    "total_runtime_initial_machines": 69,
+    "kg_per_hour_per_machine": 2,
+    "production_initial_machines": 138,
+    "hours_per_day_fourth_machine": 12,
+    "production_fourth_machine": 6.0,
+    "total_production_per_day": 144.0,
+    "price_per_kg": 50,
+    "daily_earnings": 7200.0,
+    "answer": 7200.0
+  },
+  "correct_value": 24,
+  "flawed_value": 6.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_runtime_initial_machines",
+      "question_inputs": [
+        "num_machines_initial",
+        "hours_per_day_initial_machine"
+      ],
+      "solution_line_template": "The total runtime for the first three machines is {num_machines_initial} machines * {hours_per_day_initial_machine} hours/day/machine = <<{num_machines_initial}*{hours_per_day_initial_machine}={total_runtime_initial_machines}>>{total_runtime_initial_machines} hours/day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "production_initial_machines",
+      "question_inputs": [
+        "kg_per_hour_per_machine"
+      ],
+      "solution_line_template": "So these machines could produce {total_runtime_initial_machines} hours/day * {kg_per_hour_per_machine} kg/hour = <<{total_runtime_initial_machines}*{kg_per_hour_per_machine}={production_initial_machines}>>{production_initial_machines} kg/day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "production_fourth_machine",
+      "question_inputs": [
+        "hours_per_day_fourth_machine"
+      ],
+      "solution_line_template": "The fourth machine could produce {hours_per_day_fourth_machine} hours/day * {kg_per_hour_per_machine} kg/hour = <<{hours_per_day_fourth_machine}*{kg_per_hour_per_machine}={production_fourth_machine}>>{production_fourth_machine} kg/day of material."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_production_per_day",
+      "question_inputs": [],
+      "solution_line_template": "In total all the machines would produce {production_initial_machines} kg/day + {production_fourth_machine} kg/day = <<{production_initial_machines}+{production_fourth_machine}={total_production_per_day}>>{total_production_per_day} kg/day of material."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "daily_earnings",
+      "question_inputs": [
+        "price_per_kg"
+      ],
+      "solution_line_template": "The factory would therefore earn {total_production_per_day} kg/day * ${price_per_kg}/kg = $<<{total_production_per_day}*{price_per_kg}={daily_earnings}>>{daily_earnings}/day."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total runtime for the first three machines is 3 machines * 23 hours/day/machine = <<3*23=69>>69 hours/day.",
+    "L2": "So these machines could produce 69 hours/day * 2 kg/hour = <<69*2=138>>138 kg/day.",
+    "L3": "The fourth machine could produce 12 hours/day * 2 kg/hour = <<12*2=6>>6 kg/day of material.",
+    "L4": "In total all the machines would produce 138 kg/day + 6 kg/day = <<138+6=144>>144 kg/day of material.",
+    "L5": "The factory would therefore earn 144 kg/day * $50/kg = $<<144*50=7200>>7200/day.",
+    "FA": "#### 7200"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 7728322962541845774,
+  "model_name": "google_gemini-2.5-flash"
+}

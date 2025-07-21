@@ -1,0 +1,111 @@
+{
+  "index": 3258,
+  "original_solution_mapping": {
+    "FA": "#### 45",
+    "L1": "On Monday, Mr Castiel ate 2/5*600 = <<2/5*600=240>>240 sausages.",
+    "L2": "The remaining number of sausages after he ate 240 on Monday is 600-240 = <<600-240=360>>360",
+    "L3": "On Tuesday, he ate half of the remaining sausages, a total of 360/2 = <<360/2=180>>180.",
+    "L4": "The remaining number of sausages that he saved for Friday after eating 180 on Tuesday is 360-180 = <<360-180=180>>180.",
+    "L5": "On Friday, Mr Castiel ate 3/4*180 = <<3/4*180=135>>135 of the sausages he had kept.",
+    "L6": "The remaining number of sausages after he ate 135 on Friday is 180-135 = <<180-135=45>>45"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3258.\n    Returns: the number of sausages left.\n    \"\"\"\n    # L1\n    initial_sausages = 600 # prepared 600 boar sausages\n    monday_fraction = Fraction(2, 5) # ate 2/5 of them on Monday\n    sausages_eaten_monday = monday_fraction * initial_sausages\n\n    # L2\n    remaining_after_monday = initial_sausages - sausages_eaten_monday\n\n    # L3\n    tuesday_divisor = 2 # half of the remaining on Tuesday\n    sausages_eaten_tuesday = remaining_after_monday / tuesday_divisor\n\n    # L4\n    remaining_for_friday = remaining_after_monday - sausages_eaten_tuesday\n\n    # L5\n    friday_fraction = Fraction(3, 4) # ate 3/4 of the remaining boar sausages on Friday\n    sausages_eaten_friday = friday_fraction * remaining_for_friday\n\n    # L6\n    final_remaining_sausages = remaining_for_friday - sausages_eaten_friday\n\n    # FA\n    answer = final_remaining_sausages\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "sausages_eaten_friday",
+    "operand_to_replace": "friday_fraction",
+    "replacement_variable": "monday_fraction"
+  },
+  "correct_trace": {
+    "initial_sausages": 600,
+    "monday_fraction": "2/5",
+    "sausages_eaten_monday": "240",
+    "remaining_after_monday": "360",
+    "tuesday_divisor": 2,
+    "sausages_eaten_tuesday": "180",
+    "remaining_for_friday": "180",
+    "friday_fraction": "3/4",
+    "sausages_eaten_friday": "135",
+    "final_remaining_sausages": "45",
+    "answer": "45"
+  },
+  "flawed_trace": {
+    "initial_sausages": 600,
+    "monday_fraction": "2/5",
+    "sausages_eaten_monday": "240",
+    "remaining_after_monday": "360",
+    "tuesday_divisor": 2,
+    "sausages_eaten_tuesday": "180",
+    "remaining_for_friday": "180",
+    "friday_fraction": "3/4",
+    "sausages_eaten_friday": "72",
+    "final_remaining_sausages": "108",
+    "answer": "108"
+  },
+  "correct_value": "135",
+  "flawed_value": "72",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "sausages_eaten_monday",
+      "question_inputs": [
+        "initial_sausages",
+        "monday_fraction"
+      ],
+      "solution_line_template": "On Monday, Mr Castiel ate {monday_fraction}*{initial_sausages} = <<{monday_fraction}*{initial_sausages}={sausages_eaten_monday}>>{sausages_eaten_monday} sausages."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_after_monday",
+      "question_inputs": [],
+      "solution_line_template": "The remaining number of sausages after he ate {sausages_eaten_monday} on Monday is {initial_sausages}-{sausages_eaten_monday} = <<{initial_sausages}-{sausages_eaten_monday}={remaining_after_monday}>>{remaining_after_monday}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "sausages_eaten_tuesday",
+      "question_inputs": [
+        "tuesday_divisor"
+      ],
+      "solution_line_template": "On Tuesday, he ate half of the remaining sausages, a total of {remaining_after_monday}/{tuesday_divisor} = <<{remaining_after_monday}/{tuesday_divisor}={sausages_eaten_tuesday}>>{sausages_eaten_tuesday}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "remaining_for_friday",
+      "question_inputs": [],
+      "solution_line_template": "The remaining number of sausages that he saved for Friday after eating {sausages_eaten_tuesday} on Tuesday is {remaining_after_monday}-{sausages_eaten_tuesday} = <<{remaining_after_monday}-{sausages_eaten_tuesday}={remaining_for_friday}>>{remaining_for_friday}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "sausages_eaten_friday",
+      "question_inputs": [
+        "friday_fraction"
+      ],
+      "solution_line_template": "On Friday, Mr Castiel ate {friday_fraction}*{remaining_for_friday} = <<{friday_fraction}*{remaining_for_friday}={sausages_eaten_friday}>>{sausages_eaten_friday} of the sausages he had kept."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "final_remaining_sausages",
+      "question_inputs": [],
+      "solution_line_template": "The remaining number of sausages after he ate {sausages_eaten_friday} on Friday is {remaining_for_friday}-{sausages_eaten_friday} = <<{remaining_for_friday}-{sausages_eaten_friday}={final_remaining_sausages}>>{final_remaining_sausages}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Monday, Mr Castiel ate 2/5*600 = <<2/5*600=240>>240 sausages.",
+    "L2": "The remaining number of sausages after he ate 240 on Monday is 600-240 = <<600-240=360>>360",
+    "L3": "On Tuesday, he ate half of the remaining sausages, a total of 360/2 = <<360/2=180>>180.",
+    "L4": "The remaining number of sausages that he saved for Friday after eating 180 on Tuesday is 360-180 = <<360-180=180>>180.",
+    "L5": "On Friday, Mr Castiel ate 2/5*180 = <<2/5*180=72>>72 of the sausages he had kept.",
+    "L6": "The remaining number of sausages after he ate 72 on Friday is 180-72 = <<180-72=108>>108",
+    "FA": "#### 108"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Input misrepresentation. The value for 'monday_fraction' (2/5) was used instead of 'friday_fraction' (3/4).",
+  "repro_seed": 3988129963751892892,
+  "model_name": "google_gemini-2.5-flash"
+}

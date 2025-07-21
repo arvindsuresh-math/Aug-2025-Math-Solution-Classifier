@@ -1,0 +1,63 @@
+{
+  "index": 802,
+  "original_solution_mapping": {
+    "FA": "#### 21",
+    "L1": "The squirrel steals 1/2 cup of birdseed every week, so the birds eat 2 - 1/2 = 1 1/2 cups of birdseed.",
+    "L2": "Each cup feeds 14 birds, so Ivan's bird feeder feeds 14 * 1 1/2 = 21 birds weekly."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 802.\n    Returns: the number of birds Ivan's bird feeder feeds weekly.\n    \"\"\"\n    # L1\n    total_capacity = 2 # holds two cups of birdseed\n    squirrel_theft = Fraction(1, 2) # steals half a cup of birdseed\n    actual_birdseed_eaten = total_capacity - squirrel_theft\n\n    # L2\n    birds_per_cup = 14 # Each cup of birdseed can feed fourteen birds\n    total_birds_fed = birds_per_cup * actual_birdseed_eaten\n\n    # FA\n    answer = total_birds_fed\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_birds_fed",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30b4d84d0>"
+  },
+  "correct_trace": {
+    "total_capacity": 2,
+    "squirrel_theft": "1/2",
+    "actual_birdseed_eaten": "3/2",
+    "birds_per_cup": 14,
+    "total_birds_fed": "21",
+    "answer": "21"
+  },
+  "flawed_trace": {
+    "total_capacity": 2,
+    "squirrel_theft": "1/2",
+    "actual_birdseed_eaten": "3/2",
+    "birds_per_cup": 14,
+    "total_birds_fed": "31/2",
+    "answer": "31/2"
+  },
+  "correct_value": "21",
+  "flawed_value": "31/2",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "actual_birdseed_eaten",
+      "question_inputs": [
+        "total_capacity",
+        "squirrel_theft"
+      ],
+      "solution_line_template": "The squirrel steals {squirrel_theft} cup of birdseed every week, so the birds eat {total_capacity} - {squirrel_theft} = <<{total_capacity}-{squirrel_theft}={actual_birdseed_eaten}>>{actual_birdseed_eaten} cups of birdseed."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_birds_fed",
+      "question_inputs": [
+        "birds_per_cup"
+      ],
+      "solution_line_template": "Each cup feeds {birds_per_cup} birds, so Ivan's bird feeder feeds {birds_per_cup} * {actual_birdseed_eaten} = <<{birds_per_cup}*{actual_birdseed_eaten}={total_birds_fed}>>{total_birds_fed} birds weekly."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The squirrel steals 1/2 cup of birdseed every week, so the birds eat 2 - 1/2 = <<2-1/2=3/2>>3/2 cups of birdseed.",
+    "L2": "Each cup feeds 14 birds, so Ivan's bird feeder feeds 14 * 3/2 = <<14*3/2=31/2>>31/2 birds weekly.",
+    "FA": "#### 31/2"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -2325063992592435408,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 2221,
+  "original_solution_mapping": {
+    "FA": "#### 1500",
+    "L1": "The amount of money Diana earned in August is 3 * $150 = $<<3*150=450>>450.",
+    "L2": "The amount of money Diana earned in September is 2 * $450 = $<<2*450=900>>900.",
+    "L3": "The total amount of money Diana earned over the three months is $150 + $450 + $900 = $<<150+450+900=1500>>1500."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2221.\n    Returns: the total money Diana earned over three months.\n    \"\"\"\n    # L1\n    july_earnings = 150 # earned $150 in July\n    august_multiplier = 3 # 3 times this amount\n    august_earnings = august_multiplier * july_earnings\n\n    # L2\n    september_multiplier = 2 # twice the money she earned in August\n    september_earnings = september_multiplier * august_earnings\n\n    # L3\n    total_earnings = july_earnings + august_earnings + september_earnings\n\n    # FA\n    answer = total_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "incomplete_calculation",
+    "target_variable": "total_earnings",
+    "operand_to_remove": "july_earnings",
+    "original_operands": [
+      "august_earnings",
+      "july_earnings",
+      "september_earnings"
+    ]
+  },
+  "correct_trace": {
+    "july_earnings": 150,
+    "august_multiplier": 3,
+    "august_earnings": 450,
+    "september_multiplier": 2,
+    "september_earnings": 900,
+    "total_earnings": 1500,
+    "answer": 1500
+  },
+  "flawed_trace": {
+    "july_earnings": 150,
+    "august_multiplier": 3,
+    "august_earnings": 450,
+    "september_multiplier": 2,
+    "september_earnings": 900,
+    "total_earnings": 1350,
+    "answer": 1350
+  },
+  "correct_value": 1500,
+  "flawed_value": 1350,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "july_earnings",
+        "august_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "august_earnings",
+      "solution_line_template": "The amount of money Diana earned in August is {august_multiplier} * ${july_earnings} = $<<{august_multiplier}*{july_earnings}={august_earnings}>>{august_earnings}."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "september_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "september_earnings",
+      "solution_line_template": "The amount of money Diana earned in September is {september_multiplier} * ${august_earnings} = $<<{september_multiplier}*{august_earnings}={september_earnings}>>{september_earnings}."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_earnings",
+      "solution_line_template": "The total amount of money Diana earned over the three months is ${july_earnings} + ${august_earnings} + ${september_earnings} = $<<{july_earnings}+{august_earnings}+{september_earnings}={total_earnings}>>{total_earnings}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The amount of money Diana earned in August is 3 * $150 = $<<3*150=450>>450.",
+    "L2": "The amount of money Diana earned in September is 2 * $450 = $<<2*450=900>>900.",
+    "L3": "The total amount of money Diana earned over the three months is $$450 + $900 = $<<450+900=1350>>1350.",
+    "FA": "#### 1350"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incomplete calculation. The term 'july_earnings' (value: 150) was omitted from the operation.",
+  "repro_seed": 1222687518707444083,
+  "model_name": "google_gemini-2.5-flash"
+}

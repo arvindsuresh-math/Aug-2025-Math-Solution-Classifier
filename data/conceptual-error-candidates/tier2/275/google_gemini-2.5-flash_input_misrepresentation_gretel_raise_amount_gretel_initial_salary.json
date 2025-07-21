@@ -1,0 +1,105 @@
+{
+  "index": 275,
+  "original_solution_mapping": {
+    "FA": "#### 1500",
+    "L1": "Hansel makes $30,000 and received a 10% raise so his raise is 30,000*.10 = $3,000.00",
+    "L2": "Hansel now makes 30,000+ 3,000 = $<<30000+3000=33000>>33,000 a year",
+    "L3": "Gretel makes $30,000 and received a 15% raise so her raise is 30,000*.15 = $4,500.00",
+    "L4": "Gretel now makes 30,000+4,500 = $<<30000+4500=34500>>34,500 a year",
+    "L5": "If Gretel makes $34,500 a year and Hansel makes $33,000 then Gretel makes 34,500-33,000 = $<<34500-33000=1500>>1,500 more a year than Hansel"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 275.\n    Returns: the difference in annual earnings between Gretel and Hansel.\n    \"\"\"\n    # L1\n    hansel_initial_salary = 30000 # Hansel makes $30,000 a year\n    hansel_raise_percent_num = 10 # received a 10% raise\n    hansel_raise_percent_decimal = 0.10 # received a 10% raise\n    hansel_raise_amount = hansel_initial_salary * hansel_raise_percent_decimal\n\n    # L2\n    hansel_new_salary = hansel_initial_salary + hansel_raise_amount\n\n    # L3\n    gretel_initial_salary = 30000 # Gretel makes the same amount as Hansel\n    gretel_raise_percent_num = 15 # received a 15% raise\n    gretel_raise_percent_decimal = 0.15 # received a 15% raise\n    gretel_raise_amount = gretel_initial_salary * gretel_raise_percent_decimal\n\n    # L4\n    gretel_new_salary = gretel_initial_salary + gretel_raise_amount\n\n    # L5\n    gretel_more_money = gretel_new_salary - hansel_new_salary\n\n    # FA\n    answer = gretel_more_money\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "gretel_raise_amount",
+    "operand_to_replace": "gretel_raise_percent_decimal",
+    "replacement_variable": "gretel_initial_salary"
+  },
+  "correct_trace": {
+    "hansel_initial_salary": 30000,
+    "hansel_raise_percent_num": 10,
+    "hansel_raise_percent_decimal": 0.1,
+    "hansel_raise_amount": 3000.0,
+    "hansel_new_salary": 33000.0,
+    "gretel_initial_salary": 30000,
+    "gretel_raise_percent_num": 15,
+    "gretel_raise_percent_decimal": 0.15,
+    "gretel_raise_amount": 4500.0,
+    "gretel_new_salary": 34500.0,
+    "gretel_more_money": 1500.0,
+    "answer": 1500.0
+  },
+  "flawed_trace": {
+    "hansel_initial_salary": 30000,
+    "hansel_raise_percent_num": 10,
+    "hansel_raise_percent_decimal": 0.1,
+    "hansel_raise_amount": 3000.0,
+    "hansel_new_salary": 33000.0,
+    "gretel_initial_salary": 30000,
+    "gretel_raise_percent_num": 15,
+    "gretel_raise_percent_decimal": 0.15,
+    "gretel_raise_amount": 900000000,
+    "gretel_new_salary": 900030000,
+    "gretel_more_money": 899997000.0,
+    "answer": 899997000.0
+  },
+  "correct_value": 4500.0,
+  "flawed_value": 900000000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "hansel_raise_amount",
+      "question_inputs": [
+        "hansel_initial_salary",
+        "hansel_raise_percent_num",
+        "hansel_raise_percent_decimal"
+      ],
+      "solution_line_template": "Hansel makes ${hansel_initial_salary} and received a {hansel_raise_percent_num}% raise so his raise is {hansel_initial_salary}*{hansel_raise_percent_decimal} = ${hansel_raise_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "hansel_new_salary",
+      "question_inputs": [],
+      "solution_line_template": "Hansel now makes {hansel_initial_salary}+ {hansel_raise_amount} = $<<{hansel_initial_salary}+{hansel_raise_amount}={hansel_new_salary}>>{hansel_new_salary} a year"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "gretel_raise_amount",
+      "question_inputs": [
+        "gretel_initial_salary",
+        "gretel_raise_percent_num",
+        "gretel_raise_percent_decimal"
+      ],
+      "solution_line_template": "Gretel makes ${gretel_initial_salary} and received a {gretel_raise_percent_num}% raise so her raise is {gretel_initial_salary}*{gretel_raise_percent_decimal} = ${gretel_raise_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "gretel_new_salary",
+      "question_inputs": [],
+      "solution_line_template": "Gretel now makes {gretel_initial_salary}+{gretel_raise_amount} = $<<{gretel_initial_salary}+{gretel_raise_amount}={gretel_new_salary}>>{gretel_new_salary} a year"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "gretel_more_money",
+      "question_inputs": [],
+      "solution_line_template": "If Gretel makes ${gretel_new_salary} a year and Hansel makes ${hansel_new_salary} then Gretel makes {gretel_new_salary}-{hansel_new_salary} = $<<{gretel_new_salary}-{hansel_new_salary}={gretel_more_money}>>{gretel_more_money} more a year than Hansel"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Hansel makes $30000 and received a 10% raise so his raise is 30000*0.1 = $3000",
+    "L2": "Hansel now makes 30000+ 3000 = $<<30000+3000=33000>>33000 a year",
+    "L3": "Gretel makes $30000 and received a 15% raise so her raise is 30000*30000 = $900000000",
+    "L4": "Gretel now makes 30000+900000000 = $<<30000+900000000=900030000>>900030000 a year",
+    "L5": "If Gretel makes $900030000 a year and Hansel makes $33000 then Gretel makes 900030000-33000 = $<<900030000-33000=899997000>>899997000 more a year than Hansel",
+    "FA": "#### 899997000"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'gretel_initial_salary' (30000) was used instead of 'gretel_raise_percent_decimal' (0.15).",
+  "repro_seed": 7462136066255361247,
+  "model_name": "google_gemini-2.5-flash"
+}

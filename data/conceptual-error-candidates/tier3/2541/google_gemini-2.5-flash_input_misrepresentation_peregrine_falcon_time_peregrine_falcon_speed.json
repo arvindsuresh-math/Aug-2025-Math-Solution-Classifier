@@ -1,0 +1,65 @@
+{
+  "index": 2541,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "Twice the speed of the bald eagle is 100*2=<<100*2=200>>200 miles per hour.",
+    "L2": "Let \"x\" be the time in seconds it takes the peregrine falcon to travel to the ground.",
+    "L3": "Thus, based on the ratio of their speeds, the following expression is given: x=30*(100/200).",
+    "L4": "Thus, x=15 seconds."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2541.\n    Returns: the time it takes the peregrine falcon to dive the same distance.\n    \"\"\"\n    # L1\n    bald_eagle_speed = 100 # The bald eagle can dive at a speed of 100 miles per hour\n    multiplier = 2 # twice that of the bald eagle\n    peregrine_falcon_speed = bald_eagle_speed * multiplier\n\n    # L3\n    bald_eagle_time = 30 # it takes the bald eagle 30 seconds\n    peregrine_falcon_time = bald_eagle_time * (bald_eagle_speed / peregrine_falcon_speed)\n\n    # FA\n    answer = peregrine_falcon_time\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "peregrine_falcon_time",
+    "operand_to_replace": "bald_eagle_time",
+    "replacement_variable": "peregrine_falcon_speed"
+  },
+  "correct_trace": {
+    "bald_eagle_speed": 100,
+    "multiplier": 2,
+    "peregrine_falcon_speed": 200,
+    "bald_eagle_time": 30,
+    "peregrine_falcon_time": 15.0,
+    "answer": 15.0
+  },
+  "flawed_trace": {
+    "bald_eagle_speed": 100,
+    "multiplier": 2,
+    "peregrine_falcon_speed": 200,
+    "bald_eagle_time": 30,
+    "peregrine_falcon_time": 100.0,
+    "answer": 100.0
+  },
+  "correct_value": 15.0,
+  "flawed_value": 100.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "peregrine_falcon_speed",
+      "question_inputs": [
+        "bald_eagle_speed",
+        "multiplier"
+      ],
+      "solution_line_template": "Twice the speed of the bald eagle is {bald_eagle_speed}*{multiplier}=<<{bald_eagle_speed}*{multiplier}={peregrine_falcon_speed}>>{peregrine_falcon_speed} miles per hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "peregrine_falcon_time",
+      "question_inputs": [
+        "bald_eagle_time"
+      ],
+      "solution_line_template": "Thus, based on the ratio of their speeds, the following expression is given: x={bald_eagle_time}*({bald_eagle_speed}/{peregrine_falcon_speed})."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Twice the speed of the bald eagle is 100*2=<<100*2=200>>200 miles per hour.",
+    "L3": "Thus, based on the ratio of their speeds, the following expression is given: x=200*(100/200).",
+    "FA": "#### 100"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'peregrine_falcon_speed' (200) was used instead of 'bald_eagle_time' (30).",
+  "repro_seed": -5907417000322850310,
+  "model_name": "google_gemini-2.5-flash"
+}

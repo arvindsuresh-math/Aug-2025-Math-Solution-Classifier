@@ -1,0 +1,100 @@
+{
+  "index": 7159,
+  "original_solution_mapping": {
+    "FA": "#### 160",
+    "L1": "Since Ponce weighs 10 pounds lighter than Jalen, he weighs 160-10 = 150 pounds.",
+    "L2": "The sum of Jalen and Ponce's weight is 150+160 = <<150+160=310>>310 pounds.",
+    "L3": "Ishmael is 20 pounds heavier than Ponce, meaning he weighs 150+20 = <<20+150=170>>170 pounds.",
+    "L4": "The total weight of the three is 310+170 = <<310+170=480>>480 pounds.",
+    "L5": "The average weight of the three is the total weight divided by their number, which totals 480/3 = <<480/3=160>>160 pounds."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7159.\n    Returns: the average weight of the three individuals.\n    \"\"\"\n    # L1\n    jalen_weight = 160 # Jalen weighed 160 pounds\n    ponce_lighter_than_jalen = 10 # Ponce was 10 pounds lighter than Jalen\n    ponce_weight = jalen_weight - ponce_lighter_than_jalen\n\n    # L2\n    jalen_ponce_sum_weight = ponce_weight + jalen_weight\n\n    # L3\n    ishmael_heavier_than_ponce = 20 # Ishmael was 20 pounds heavier than Ponce\n    ishmael_weight = ponce_weight + ishmael_heavier_than_ponce\n\n    # L4\n    total_weight = jalen_ponce_sum_weight + ishmael_weight\n\n    # L5\n    number_of_people = 3 # WK\n    average_weight = total_weight / number_of_people\n\n    # FA\n    answer = average_weight\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "average_weight",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x17204d4d0>"
+  },
+  "correct_trace": {
+    "jalen_weight": 160,
+    "ponce_lighter_than_jalen": 10,
+    "ponce_weight": 150,
+    "jalen_ponce_sum_weight": 310,
+    "ishmael_heavier_than_ponce": 20,
+    "ishmael_weight": 170,
+    "total_weight": 480,
+    "number_of_people": 3,
+    "average_weight": 160.0,
+    "answer": 160.0
+  },
+  "flawed_trace": {
+    "jalen_weight": 160,
+    "ponce_lighter_than_jalen": 10,
+    "ponce_weight": 150,
+    "jalen_ponce_sum_weight": 310,
+    "ishmael_heavier_than_ponce": 20,
+    "ishmael_weight": 170,
+    "total_weight": 480,
+    "number_of_people": 3,
+    "average_weight": 1440,
+    "answer": 1440
+  },
+  "correct_value": 160.0,
+  "flawed_value": 1440,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "ponce_weight",
+      "question_inputs": [
+        "jalen_weight",
+        "ponce_lighter_than_jalen"
+      ],
+      "solution_line_template": "Since Ponce weighs {ponce_lighter_than_jalen} pounds lighter than Jalen, he weighs {jalen_weight}-{ponce_lighter_than_jalen} = {ponce_weight} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "jalen_ponce_sum_weight",
+      "question_inputs": [],
+      "solution_line_template": "The sum of Jalen and Ponce's weight is {ponce_weight}+{jalen_weight} = <<{ponce_weight}+{jalen_weight}={jalen_ponce_sum_weight}>>{jalen_ponce_sum_weight} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "ishmael_weight",
+      "question_inputs": [
+        "ishmael_heavier_than_ponce"
+      ],
+      "solution_line_template": "Ishmael is {ishmael_heavier_than_ponce} pounds heavier than Ponce, meaning he weighs {ponce_weight}+{ishmael_heavier_than_ponce} = <<{ishmael_heavier_than_ponce}+{ponce_weight}={ishmael_weight}>>{ishmael_weight} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_weight",
+      "question_inputs": [],
+      "solution_line_template": "The total weight of the three is {jalen_ponce_sum_weight}+{ishmael_weight} = <<{jalen_ponce_sum_weight}+{ishmael_weight}={total_weight}>>{total_weight} pounds."
+    },
+    {
+      "WK_inputs": [
+        "number_of_people"
+      ],
+      "line_number": "L5",
+      "output_variable": "average_weight",
+      "question_inputs": [],
+      "solution_line_template": "The average weight of the three is the total weight divided by their number, which totals {total_weight}/{number_of_people} = <<{total_weight}/{number_of_people}={average_weight}>>{average_weight} pounds."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since Ponce weighs 10 pounds lighter than Jalen, he weighs 160-10 = 150 pounds.",
+    "L2": "The sum of Jalen and Ponce's weight is 150+160 = <<150+160=310>>310 pounds.",
+    "L3": "Ishmael is 20 pounds heavier than Ponce, meaning he weighs 150+20 = <<20+150=170>>170 pounds.",
+    "L4": "The total weight of the three is 310+170 = <<310+170=480>>480 pounds.",
+    "L5": "The average weight of the three is the total weight divided by their number, which totals 480/3 = <<480/3=1440>>1440 pounds.",
+    "FA": "#### 1440"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -5913801824495368998,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,137 @@
+{
+  "index": 5480,
+  "original_solution_mapping": {
+    "FA": "#### 250",
+    "L1": "Helga writes 5 x 2 = <<5*2=10>>10 articles per hour.",
+    "L2": "And she can write 10 x 4 = <<10*4=40>>40 articles every 4 hours.",
+    "L3": "So, the total number of articles she usually writes for a week is 40 x 5 = <<40*5=200>>200 articles.",
+    "L4": "She was able to write 10 x 2 = <<10*2=20>>20 articles on her extra 2 hours last Thursday.",
+    "L5": "And she was able to write 10 x 3 = <<10*3=30>>30 articles on her extra hour last Friday.",
+    "L6": "So, the total number of articles she was able to write on her extra hours is 20 + 30= <<20+30=50>>50.",
+    "L7": "Therefore, she was able to write a total of 200 + 50 = <<200+50=250>>250 this week."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5480.\n    Returns: the total number of articles Helga was able to write this week.\n    \"\"\"\n    # L1\n    articles_per_30_min = 5 # 5 articles every 30 minutes\n    minutes_in_half_hour = 30 # WK\n    minutes_per_hour = 60 # WK\n    multiplier_for_articles_per_hour = minutes_per_hour / minutes_in_half_hour # WK\n    articles_per_hour = articles_per_30_min * multiplier_for_articles_per_hour\n\n    # L2\n    daily_work_hours = 4 # works 4 hours a day\n    articles_per_day_usual = articles_per_hour * daily_work_hours\n\n    # L3\n    usual_work_days_per_week = 5 # 5 days a week\n    articles_per_week_usual = articles_per_day_usual * usual_work_days_per_week\n\n    # L4\n    extra_hours_thursday = 2 # extra 2 hours last Thursday\n    articles_extra_thursday = articles_per_hour * extra_hours_thursday\n\n    # L5\n    extra_hours_friday = 3 # extra 3 hours last Friday\n    articles_extra_friday = articles_per_hour * extra_hours_friday\n\n    # L6\n    total_extra_articles = articles_extra_thursday + articles_extra_friday\n\n    # L7\n    total_articles_this_week = articles_per_week_usual + total_extra_articles\n\n    # FA\n    answer = total_articles_this_week\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "articles_per_hour",
+    "operand_to_replace": "articles_per_30_min",
+    "replacement_variable": "minutes_in_half_hour"
+  },
+  "correct_trace": {
+    "articles_per_30_min": 5,
+    "minutes_in_half_hour": 30,
+    "minutes_per_hour": 60,
+    "multiplier_for_articles_per_hour": 2.0,
+    "articles_per_hour": 10.0,
+    "daily_work_hours": 4,
+    "articles_per_day_usual": 40.0,
+    "usual_work_days_per_week": 5,
+    "articles_per_week_usual": 200.0,
+    "extra_hours_thursday": 2,
+    "articles_extra_thursday": 20.0,
+    "extra_hours_friday": 3,
+    "articles_extra_friday": 30.0,
+    "total_extra_articles": 50.0,
+    "total_articles_this_week": 250.0,
+    "answer": 250.0
+  },
+  "flawed_trace": {
+    "articles_per_30_min": 5,
+    "minutes_in_half_hour": 30,
+    "minutes_per_hour": 60,
+    "multiplier_for_articles_per_hour": 2.0,
+    "articles_per_hour": 60.0,
+    "daily_work_hours": 4,
+    "articles_per_day_usual": 240.0,
+    "usual_work_days_per_week": 5,
+    "articles_per_week_usual": 1200.0,
+    "extra_hours_thursday": 2,
+    "articles_extra_thursday": 120.0,
+    "extra_hours_friday": 3,
+    "articles_extra_friday": 180.0,
+    "total_extra_articles": 300.0,
+    "total_articles_this_week": 1500.0,
+    "answer": 1500.0
+  },
+  "correct_value": 10.0,
+  "flawed_value": 60.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_in_half_hour",
+        "minutes_per_hour",
+        "multiplier_for_articles_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "articles_per_hour",
+      "question_inputs": [
+        "articles_per_30_min"
+      ],
+      "solution_line_template": "Helga writes {articles_per_30_min} x {multiplier_for_articles_per_hour} = <<{articles_per_30_min}*{multiplier_for_articles_per_hour}={articles_per_hour}>>{articles_per_hour} articles per hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "articles_per_day_usual",
+      "question_inputs": [
+        "daily_work_hours"
+      ],
+      "solution_line_template": "And she can write {articles_per_hour} x {daily_work_hours} = <<{articles_per_hour}*{daily_work_hours}={articles_per_day_usual}>>{articles_per_day_usual} articles every {daily_work_hours} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "articles_per_week_usual",
+      "question_inputs": [
+        "usual_work_days_per_week"
+      ],
+      "solution_line_template": "So, the total number of articles she usually writes for a week is {articles_per_day_usual} x {usual_work_days_per_week} = <<{articles_per_day_usual}*{usual_work_days_per_week}={articles_per_week_usual}>>{articles_per_week_usual} articles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "articles_extra_thursday",
+      "question_inputs": [
+        "extra_hours_thursday"
+      ],
+      "solution_line_template": "She was able to write {articles_per_hour} x {extra_hours_thursday} = <<{articles_per_hour}*{extra_hours_thursday}={articles_extra_thursday}>>{articles_extra_thursday} articles on her extra {extra_hours_thursday} hours last Thursday."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "articles_extra_friday",
+      "question_inputs": [
+        "extra_hours_friday"
+      ],
+      "solution_line_template": "And she was able to write {articles_per_hour} x {extra_hours_friday} = <<{articles_per_hour}*{extra_hours_friday}={articles_extra_friday}>>{articles_extra_friday} articles on her extra hour last Friday."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_extra_articles",
+      "question_inputs": [],
+      "solution_line_template": "So, the total number of articles she was able to write on her extra hours is {articles_extra_thursday} + {articles_extra_friday}= <<{articles_extra_thursday}+{articles_extra_friday}={total_extra_articles}>>{total_extra_articles}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "total_articles_this_week",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, she was able to write a total of {articles_per_week_usual} + {total_extra_articles} = <<{articles_per_week_usual}+{total_extra_articles}={total_articles_this_week}>>{total_articles_this_week} this week."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Helga writes 30 x 2 = <<30*2=60>>60 articles per hour.",
+    "L2": "And she can write 60 x 4 = <<60*4=240>>240 articles every 4 hours.",
+    "L3": "So, the total number of articles she usually writes for a week is 240 x 5 = <<240*5=1200>>1200 articles.",
+    "L4": "She was able to write 60 x 2 = <<60*2=120>>120 articles on her extra 2 hours last Thursday.",
+    "L5": "And she was able to write 60 x 3 = <<60*3=180>>180 articles on her extra hour last Friday.",
+    "L6": "So, the total number of articles she was able to write on her extra hours is 120 + 180= <<120+180=300>>300.",
+    "L7": "Therefore, she was able to write a total of 1200 + 300 = <<1200+300=1500>>1500 this week.",
+    "FA": "#### 1500"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'minutes_in_half_hour' (30) was used instead of 'articles_per_30_min' (5).",
+  "repro_seed": 3146977573109264662,
+  "model_name": "google_gemini-2.5-flash"
+}

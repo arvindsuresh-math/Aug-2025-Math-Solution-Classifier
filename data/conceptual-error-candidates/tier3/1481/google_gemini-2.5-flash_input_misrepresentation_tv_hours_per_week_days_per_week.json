@@ -1,0 +1,89 @@
+{
+  "index": 1481,
+  "original_solution_mapping": {
+    "FA": "#### 34",
+    "L1": "He plays video games for 4/2=<<4/2=2>>2 hours a day",
+    "L2": "He watches TV for 4*7=<<4*7=28>>28 hours a week",
+    "L3": "He plays video games for 3*2=<<3*2=6>>6 hours",
+    "L4": "So in total he spends 6+28=<<6+28=34>>34 hours on those activities"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1481.\n    Returns: the total hours Mike spends watching TV and playing video games.\n    \"\"\"\n    # L1\n    tv_hours_per_day = 4 # watches TV for 4 hours every day\n    half_divisor = 2 # half as long as he watches TV\n    video_game_hours_per_day = tv_hours_per_day / half_divisor\n\n    # L2\n    days_per_week = 7 # WK\n    tv_hours_per_week = tv_hours_per_day * days_per_week\n\n    # L3\n    days_playing_video_games_per_week = 3 # If he plays video games 3 days a week\n    total_video_game_hours_per_week = days_playing_video_games_per_week * video_game_hours_per_day\n\n    # L4\n    total_hours_spent = total_video_game_hours_per_week + tv_hours_per_week\n\n    # FA\n    answer = total_hours_spent\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "tv_hours_per_week",
+    "operand_to_replace": "tv_hours_per_day",
+    "replacement_variable": "days_per_week"
+  },
+  "correct_trace": {
+    "tv_hours_per_day": 4,
+    "half_divisor": 2,
+    "video_game_hours_per_day": 2.0,
+    "days_per_week": 7,
+    "tv_hours_per_week": 28,
+    "days_playing_video_games_per_week": 3,
+    "total_video_game_hours_per_week": 6.0,
+    "total_hours_spent": 34.0,
+    "answer": 34.0
+  },
+  "flawed_trace": {
+    "tv_hours_per_day": 4,
+    "half_divisor": 2,
+    "video_game_hours_per_day": 2.0,
+    "days_per_week": 7,
+    "tv_hours_per_week": 49,
+    "days_playing_video_games_per_week": 3,
+    "total_video_game_hours_per_week": 6.0,
+    "total_hours_spent": 55.0,
+    "answer": 55.0
+  },
+  "correct_value": 28,
+  "flawed_value": 49,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "video_game_hours_per_day",
+      "question_inputs": [
+        "tv_hours_per_day",
+        "half_divisor"
+      ],
+      "solution_line_template": "He plays video games for {tv_hours_per_day}/{half_divisor}=<<{tv_hours_per_day}/{half_divisor}={video_game_hours_per_day}>>{video_game_hours_per_day} hours a day"
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L2",
+      "output_variable": "tv_hours_per_week",
+      "question_inputs": [],
+      "solution_line_template": "He watches TV for {tv_hours_per_day}*{days_per_week}=<<{tv_hours_per_day}*{days_per_week}={tv_hours_per_week}>>{tv_hours_per_week} hours a week"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_video_game_hours_per_week",
+      "question_inputs": [
+        "days_playing_video_games_per_week"
+      ],
+      "solution_line_template": "He plays video games for {days_playing_video_games_per_week}*{video_game_hours_per_day}=<<{days_playing_video_games_per_week}*{video_game_hours_per_day}={total_video_game_hours_per_week}>>{total_video_game_hours_per_week} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_hours_spent",
+      "question_inputs": [],
+      "solution_line_template": "So in total he spends {total_video_game_hours_per_week}+{tv_hours_per_week}=<<{total_video_game_hours_per_week}+{tv_hours_per_week}={total_hours_spent}>>{total_hours_spent} hours on those activities"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He plays video games for 4/2=<<4/2=2>>2 hours a day",
+    "L2": "He watches TV for 7*7=<<7*7=49>>49 hours a week",
+    "L3": "He plays video games for 3*2=<<3*2=6>>6 hours",
+    "L4": "So in total he spends 6+49=<<6+49=55>>55 hours on those activities",
+    "FA": "#### 55"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'days_per_week' (7) was used instead of 'tv_hours_per_day' (4).",
+  "repro_seed": -273665359480124701,
+  "model_name": "google_gemini-2.5-flash"
+}

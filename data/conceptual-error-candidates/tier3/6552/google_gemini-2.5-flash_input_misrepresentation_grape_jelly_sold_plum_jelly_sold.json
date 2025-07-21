@@ -1,0 +1,78 @@
+{
+  "index": 6552,
+  "original_solution_mapping": {
+    "FA": "#### 18",
+    "L1": "They sell twice as much raspberry jelly as plum jelly, so they sold 2 * 6 = <<2*6=12>>12 jars of raspberry jelly today.",
+    "L2": "The raspberry jelly sells a third as much as the grape jelly, so they sold 12 * 3 = <<12*3=36>>36 jars of grape jelly today.",
+    "L3": "The grape jelly sells twice as much as the strawberry jelly, so they sold 36 / 2 = <<36/2=18>>18 jars of strawberry jelly today."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6552.\n    Returns: the number of jars of strawberry jelly sold.\n    \"\"\"\n    # L1\n    raspberry_multiplier = 2 # twice as much as strawberry jelly\n    plum_jelly_sold = 6 # sold 6 jars of plum jelly today\n    raspberry_jelly_sold = raspberry_multiplier * plum_jelly_sold\n\n    # L2\n    grape_multiplier = 3 # a third as much as the grape jelly\n    grape_jelly_sold = raspberry_jelly_sold * grape_multiplier\n\n    # L3\n    strawberry_divisor = 2 # twice as much as the strawberry jelly\n    strawberry_jelly_sold = grape_jelly_sold / strawberry_divisor\n\n    # FA\n    answer = strawberry_jelly_sold\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "grape_jelly_sold",
+    "operand_to_replace": "grape_multiplier",
+    "replacement_variable": "plum_jelly_sold"
+  },
+  "correct_trace": {
+    "raspberry_multiplier": 2,
+    "plum_jelly_sold": 6,
+    "raspberry_jelly_sold": 12,
+    "grape_multiplier": 3,
+    "grape_jelly_sold": 36,
+    "strawberry_divisor": 2,
+    "strawberry_jelly_sold": 18.0,
+    "answer": 18.0
+  },
+  "flawed_trace": {
+    "raspberry_multiplier": 2,
+    "plum_jelly_sold": 6,
+    "raspberry_jelly_sold": 12,
+    "grape_multiplier": 3,
+    "grape_jelly_sold": 72,
+    "strawberry_divisor": 2,
+    "strawberry_jelly_sold": 36.0,
+    "answer": 36.0
+  },
+  "correct_value": 36,
+  "flawed_value": 72,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "raspberry_jelly_sold",
+      "question_inputs": [
+        "raspberry_multiplier",
+        "plum_jelly_sold"
+      ],
+      "solution_line_template": "They sell twice as much raspberry jelly as plum jelly, so they sold {raspberry_multiplier} * {plum_jelly_sold} = <<{raspberry_multiplier}*{plum_jelly_sold}={raspberry_jelly_sold}>>{raspberry_jelly_sold} jars of raspberry jelly today."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "grape_jelly_sold",
+      "question_inputs": [
+        "grape_multiplier"
+      ],
+      "solution_line_template": "The raspberry jelly sells a third as much as the grape jelly, so they sold {raspberry_jelly_sold} * {grape_multiplier} = <<{raspberry_jelly_sold}*{grape_multiplier}={grape_jelly_sold}>>{grape_jelly_sold} jars of grape jelly today."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "strawberry_jelly_sold",
+      "question_inputs": [
+        "strawberry_divisor"
+      ],
+      "solution_line_template": "The grape jelly sells twice as much as the strawberry jelly, so they sold {grape_jelly_sold} / {strawberry_divisor} = <<{grape_jelly_sold}/{strawberry_divisor}={strawberry_jelly_sold}>>{strawberry_jelly_sold} jars of strawberry jelly today."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "They sell twice as much raspberry jelly as plum jelly, so they sold 2 * 6 = <<2*6=12>>12 jars of raspberry jelly today.",
+    "L2": "The raspberry jelly sells a third as much as the grape jelly, so they sold 12 * 6 = <<12*6=72>>72 jars of grape jelly today.",
+    "L3": "The grape jelly sells twice as much as the strawberry jelly, so they sold 72 / 2 = <<72/2=36>>36 jars of strawberry jelly today.",
+    "FA": "#### 36"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'plum_jelly_sold' (6) was used instead of 'grape_multiplier' (3).",
+  "repro_seed": -3363495245560467429,
+  "model_name": "google_gemini-2.5-flash"
+}

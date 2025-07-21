@@ -1,0 +1,103 @@
+{
+  "index": 414,
+  "original_solution_mapping": {
+    "FA": "#### 750",
+    "L1": "The second drink was 2/12=1/6 the size of the first drink",
+    "L2": "So it had 1/6*3=1/2 the caffeine",
+    "L3": "That means it had 1/2*250=<<250/2=125>>125 grams of caffeine",
+    "L4": "So the total amount of caffeine he drank was 125+250=<<125+250=375>>375 grams",
+    "L5": "So he consumed 375*2=<<375*2=750>>750 grams of caffeine for the day"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 414.\n    Returns: the total amount of caffeine John consumed in grams.\n    \"\"\"\n    # L1\n    second_drink_ounces = 2 # only 2 ounces\n    first_drink_ounces = 12 # 12-ounce drink\n    size_ratio = second_drink_ounces / first_drink_ounces\n\n    # L2\n    caffeine_multiplier = 3 # 3 times more caffeinated per ounce\n    caffeine_ratio = size_ratio * caffeine_multiplier\n\n    # L3\n    first_drink_caffeine = 250 # 250 grams of caffeine\n    second_drink_caffeine = caffeine_ratio * first_drink_caffeine\n\n    # L4\n    total_drink_caffeine = second_drink_caffeine + first_drink_caffeine\n\n    # L5\n    caffeine_pill_multiplier = 2 # caffeine pill that has as much caffeine as his 2 drinks combined\n    total_caffeine = total_drink_caffeine * caffeine_pill_multiplier\n\n    # FA\n    answer = total_caffeine\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_caffeine",
+    "replacement_variable": "total_drink_caffeine"
+  },
+  "correct_trace": {
+    "second_drink_ounces": 2,
+    "first_drink_ounces": 12,
+    "size_ratio": 0.16666666666666666,
+    "caffeine_multiplier": 3,
+    "caffeine_ratio": 0.5,
+    "first_drink_caffeine": 250,
+    "second_drink_caffeine": 125.0,
+    "total_drink_caffeine": 375.0,
+    "caffeine_pill_multiplier": 2,
+    "total_caffeine": 750.0,
+    "answer": 750.0
+  },
+  "flawed_trace": {
+    "second_drink_ounces": 2,
+    "first_drink_ounces": 12,
+    "size_ratio": 0.16666666666666666,
+    "caffeine_multiplier": 3,
+    "caffeine_ratio": 0.5,
+    "first_drink_caffeine": 250,
+    "second_drink_caffeine": 125.0,
+    "total_drink_caffeine": 375.0,
+    "caffeine_pill_multiplier": 2,
+    "total_caffeine": 750.0,
+    "answer": 375.0
+  },
+  "correct_value": 750.0,
+  "flawed_value": 375.0,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "second_drink_ounces",
+        "first_drink_ounces"
+      ],
+      "WK_inputs": [],
+      "output_variable": "size_ratio",
+      "solution_line_template": "The second drink was {second_drink_ounces}/{first_drink_ounces}=1/6 the size of the first drink"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "caffeine_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "caffeine_ratio",
+      "solution_line_template": "So it had {size_ratio}*{caffeine_multiplier}=1/2 the caffeine"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "first_drink_caffeine"
+      ],
+      "WK_inputs": [],
+      "output_variable": "second_drink_caffeine",
+      "solution_line_template": "That means it had {caffeine_ratio}*{first_drink_caffeine}=<<{first_drink_caffeine}/2={second_drink_caffeine}>>{second_drink_caffeine} grams of caffeine"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_drink_caffeine",
+      "solution_line_template": "So the total amount of caffeine he drank was {second_drink_caffeine}+{first_drink_caffeine}=<<{second_drink_caffeine}+{first_drink_caffeine}={total_drink_caffeine}>>{total_drink_caffeine} grams"
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [
+        "caffeine_pill_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_caffeine",
+      "solution_line_template": "So he consumed {total_drink_caffeine}*{caffeine_pill_multiplier}=<<{total_drink_caffeine}*{caffeine_pill_multiplier}={total_caffeine}>>{total_caffeine} grams of caffeine for the day"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The second drink was 2/12=1/6 the size of the first drink",
+    "L2": "So it had 0.17*3=1/2 the caffeine",
+    "L3": "That means it had 0.5*250=<<250/2=125>>125 grams of caffeine",
+    "L4": "So the total amount of caffeine he drank was 125+250=<<125+250=375>>375 grams",
+    "FA": "#### 375"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'total_drink_caffeine' (value: 375.0) was reported instead of 'total_caffeine' (value: 750.0).",
+  "repro_seed": 5518204297912107957,
+  "model_name": "openai_gpt-4.1"
+}

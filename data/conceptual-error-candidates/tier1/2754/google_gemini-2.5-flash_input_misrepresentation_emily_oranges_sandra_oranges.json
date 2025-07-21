@@ -1,0 +1,63 @@
+{
+  "index": 2754,
+  "original_solution_mapping": {
+    "FA": "#### 252",
+    "L1": "Sandra has 3 * 12 = <<3*12=36>>36 oranges.",
+    "L2": "So, Emily has 7 * 36 = <<7*36=252>>252 oranges."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2754.\n    Returns: the number of oranges Emily has.\n    \"\"\"\n    # L1\n    sandra_multiplier = 3 # Sandra has 3 times as many oranges as Betty\n    betty_oranges = 12 # Betty has 12 oranges\n    sandra_oranges = sandra_multiplier * betty_oranges\n\n    # L2\n    emily_multiplier = 7 # Emily has 7 times as many oranges as Sandra\n    emily_oranges = emily_multiplier * sandra_oranges\n\n    # FA\n    answer = emily_oranges\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "emily_oranges",
+    "operand_to_replace": "emily_multiplier",
+    "replacement_variable": "sandra_oranges"
+  },
+  "correct_trace": {
+    "sandra_multiplier": 3,
+    "betty_oranges": 12,
+    "sandra_oranges": 36,
+    "emily_multiplier": 7,
+    "emily_oranges": 252,
+    "answer": 252
+  },
+  "flawed_trace": {
+    "sandra_multiplier": 3,
+    "betty_oranges": 12,
+    "sandra_oranges": 36,
+    "emily_multiplier": 7,
+    "emily_oranges": 1296,
+    "answer": 1296
+  },
+  "correct_value": 252,
+  "flawed_value": 1296,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "sandra_multiplier",
+        "betty_oranges"
+      ],
+      "WK_inputs": [],
+      "output_variable": "sandra_oranges",
+      "solution_line_template": "Sandra has {sandra_multiplier} * {betty_oranges} = <<{sandra_multiplier}*{betty_oranges}={sandra_oranges}>>{sandra_oranges} oranges."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "emily_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "emily_oranges",
+      "solution_line_template": "So, Emily has {emily_multiplier} * {sandra_oranges} = <<{emily_multiplier}*{sandra_oranges}={emily_oranges}>>{emily_oranges} oranges."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Sandra has 3 * 12 = <<3*12=36>>36 oranges.",
+    "L2": "So, Emily has 36 * 36 = <<36*36=1296>>1296 oranges.",
+    "FA": "#### 1296"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'sandra_oranges' (36) was used instead of 'emily_multiplier' (7).",
+  "repro_seed": -979819768432182535,
+  "model_name": "google_gemini-2.5-flash"
+}

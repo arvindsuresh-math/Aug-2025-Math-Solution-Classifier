@@ -1,0 +1,88 @@
+{
+  "index": 734,
+  "original_solution_mapping": {
+    "FA": "#### 100",
+    "L1": "25% of the apples are sour because 100 - 75 = <<100-75=25>>25",
+    "L2": "The average price of an apple sold is $.4 because .75(.5) + .25(.1)= .4",
+    "L3": "He got 100 apples because 40 / .4 = <<40/.4=100>>100"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 734.\n    Returns: the total number of apples the trees gave him.\n    \"\"\"\n    # L1\n    total_percentage = 100 # WK\n    sweet_apple_percentage_num = 75 # 75% of the apples he gets are sweet\n    sour_apple_percentage_num = total_percentage - sweet_apple_percentage_num\n\n    # L2\n    sweet_apple_percentage_decimal = 0.75 # 75% of the apples he gets are sweet\n    sweet_apple_price = 0.5 # $.5 an apple\n    sour_apple_percentage_decimal = 0.25 # the rest are sour\n    sour_apple_price = 0.1 # $.1 an apple\n    average_apple_price = sweet_apple_percentage_decimal * sweet_apple_price + sour_apple_percentage_decimal * sour_apple_price\n\n    # L3\n    total_earnings = 40 # If he earns $40\n    total_apples = total_earnings / average_apple_price\n\n    # FA\n    answer = total_apples\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_apples",
+    "operand_to_replace": "total_earnings",
+    "replacement_variable": "average_apple_price"
+  },
+  "correct_trace": {
+    "total_percentage": 100,
+    "sweet_apple_percentage_num": 75,
+    "sour_apple_percentage_num": 25,
+    "sweet_apple_percentage_decimal": 0.75,
+    "sweet_apple_price": 0.5,
+    "sour_apple_percentage_decimal": 0.25,
+    "sour_apple_price": 0.1,
+    "average_apple_price": 0.4,
+    "total_earnings": 40,
+    "total_apples": 100.0,
+    "answer": 100.0
+  },
+  "flawed_trace": {
+    "total_percentage": 100,
+    "sweet_apple_percentage_num": 75,
+    "sour_apple_percentage_num": 25,
+    "sweet_apple_percentage_decimal": 0.75,
+    "sweet_apple_price": 0.5,
+    "sour_apple_percentage_decimal": 0.25,
+    "sour_apple_price": 0.1,
+    "average_apple_price": 0.4,
+    "total_earnings": 40,
+    "total_apples": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 100.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_percentage"
+      ],
+      "line_number": "L1",
+      "output_variable": "sour_apple_percentage_num",
+      "question_inputs": [
+        "sweet_apple_percentage_num"
+      ],
+      "solution_line_template": "25% of the apples are sour because {total_percentage} - {sweet_apple_percentage_num} = <<{total_percentage}-{sweet_apple_percentage_num}={sour_apple_percentage_num}>>{sour_apple_percentage_num}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "average_apple_price",
+      "question_inputs": [
+        "sweet_apple_percentage_decimal",
+        "sweet_apple_price",
+        "sour_apple_percentage_decimal",
+        "sour_apple_price"
+      ],
+      "solution_line_template": "The average price of an apple sold is $.4 because {sweet_apple_percentage_decimal}({sweet_apple_price}) + {sour_apple_percentage_decimal}({sour_apple_price})= {average_apple_price}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_apples",
+      "question_inputs": [
+        "total_earnings"
+      ],
+      "solution_line_template": "He got {total_apples} apples because {total_earnings} / {average_apple_price} = <<{total_earnings}/{average_apple_price}={total_apples}>>{total_apples}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "25% of the apples are sour because 100 - 75 = <<100-75=25>>25",
+    "L2": "The average price of an apple sold is $.4 because 0.75(0.5) + 0.25(0.1)= 0.4",
+    "L3": "He got 1 apples because 0.4 / 0.4 = <<0.4/0.4=1>>1",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'average_apple_price' (0.4) was used instead of 'total_earnings' (40).",
+  "repro_seed": 8192496151443536574,
+  "model_name": "google_gemini-2.5-flash"
+}

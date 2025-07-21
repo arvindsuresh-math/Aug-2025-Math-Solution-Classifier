@@ -1,0 +1,89 @@
+{
+  "index": 4049,
+  "original_solution_mapping": {
+    "FA": "#### 210",
+    "L1": "Ethan read a total of 40 pages + 10 pages = <<40+10=50>>50 pages on Saturday.",
+    "L2": "On the next day, he read a total of 50 pages x 2 = <<50*2=100>>100 pages.",
+    "L3": "The total number of pages that Ethan had read is 50 pages + 100 pages = <<50+100=150>>150 pages.",
+    "L4": "Therefore, Ethan has 360 pages - 150 pages = <<360-150=210>>210 pages left to read."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4049.\n    Returns: the number of pages Ethan has left to read.\n    \"\"\"\n    # L1\n    pages_read_saturday_morning = 40 # 40 pages on Saturday morning\n    pages_read_saturday_night = 10 # another 10 pages at night\n    total_pages_saturday = pages_read_saturday_morning + pages_read_saturday_night\n\n    # L2\n    multiplier_next_day = 2 # twice the total pages as on Saturday\n    pages_read_next_day = total_pages_saturday * multiplier_next_day\n\n    # L3\n    total_pages_read = total_pages_saturday + pages_read_next_day\n\n    # L4\n    total_book_pages = 360 # 360 pages\n    pages_left_to_read = total_book_pages - total_pages_read\n\n    # FA\n    answer = pages_left_to_read\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "pages_left_to_read",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30985a890>"
+  },
+  "correct_trace": {
+    "pages_read_saturday_morning": 40,
+    "pages_read_saturday_night": 10,
+    "total_pages_saturday": 50,
+    "multiplier_next_day": 2,
+    "pages_read_next_day": 100,
+    "total_pages_read": 150,
+    "total_book_pages": 360,
+    "pages_left_to_read": 210,
+    "answer": 210
+  },
+  "flawed_trace": {
+    "pages_read_saturday_morning": 40,
+    "pages_read_saturday_night": 10,
+    "total_pages_saturday": 50,
+    "multiplier_next_day": 2,
+    "pages_read_next_day": 100,
+    "total_pages_read": 150,
+    "total_book_pages": 360,
+    "pages_left_to_read": 510,
+    "answer": 510
+  },
+  "correct_value": 210,
+  "flawed_value": 510,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_pages_saturday",
+      "question_inputs": [
+        "pages_read_saturday_morning",
+        "pages_read_saturday_night"
+      ],
+      "solution_line_template": "Ethan read a total of {pages_read_saturday_morning} pages + {pages_read_saturday_night} pages = <<{pages_read_saturday_morning}+{pages_read_saturday_night}={total_pages_saturday}>>{total_pages_saturday} pages on Saturday."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "pages_read_next_day",
+      "question_inputs": [
+        "multiplier_next_day"
+      ],
+      "solution_line_template": "On the next day, he read a total of {total_pages_saturday} pages x {multiplier_next_day} = <<{total_pages_saturday}*{multiplier_next_day}={pages_read_next_day}>>{pages_read_next_day} pages."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_pages_read",
+      "question_inputs": [],
+      "solution_line_template": "The total number of pages that Ethan had read is {total_pages_saturday} pages + {pages_read_next_day} pages = <<{total_pages_saturday}+{pages_read_next_day}={total_pages_read}>>{total_pages_read} pages."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "pages_left_to_read",
+      "question_inputs": [
+        "total_book_pages"
+      ],
+      "solution_line_template": "Therefore, Ethan has {total_book_pages} pages - {total_pages_read} pages = <<{total_book_pages}-{total_pages_read}={pages_left_to_read}>>{pages_left_to_read} pages left to read."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Ethan read a total of 40 pages + 10 pages = <<40+10=50>>50 pages on Saturday.",
+    "L2": "On the next day, he read a total of 50 pages x 2 = <<50*2=100>>100 pages.",
+    "L3": "The total number of pages that Ethan had read is 50 pages + 100 pages = <<50+100=150>>150 pages.",
+    "L4": "Therefore, Ethan has 360 pages - 150 pages = <<360-150=510>>510 pages left to read.",
+    "FA": "#### 510"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 50151095920616306,
+  "model_name": "google_gemini-2.5-flash"
+}

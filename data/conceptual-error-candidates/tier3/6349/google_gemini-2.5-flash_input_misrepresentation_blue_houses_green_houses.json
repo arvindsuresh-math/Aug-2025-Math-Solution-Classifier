@@ -1,0 +1,74 @@
+{
+  "index": 6349,
+  "original_solution_mapping": {
+    "FA": "#### 160",
+    "L1": "If the number of green houses is three times the number of yellow houses, and there are 90 green houses, then there are 90/3 = 30 yellow houses.",
+    "L2": "She also has 40 fewer yellow houses than blue houses, meaning there are 30+40 = <<30+40=70>>70 blue houses.",
+    "L3": "The number of houses that are not yellow is 70 blue houses +90 green houses = <<70+90=160>>160"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6349.\n    Returns: the total number of houses that are not yellow.\n    \"\"\"\n    # L1\n    green_houses = 90 # 90 green houses\n    green_yellow_multiplier = 3 # three times as many green houses as yellow houses\n    yellow_houses = green_houses / green_yellow_multiplier\n\n    # L2\n    yellow_house_difference = 40 # 40 fewer yellow houses than red houses\n    blue_houses = yellow_houses + yellow_house_difference\n\n    # L3\n    houses_not_yellow = blue_houses + green_houses\n\n    # FA\n    answer = houses_not_yellow\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "blue_houses",
+    "operand_to_replace": "yellow_house_difference",
+    "replacement_variable": "green_houses"
+  },
+  "correct_trace": {
+    "green_houses": 90,
+    "green_yellow_multiplier": 3,
+    "yellow_houses": 30.0,
+    "yellow_house_difference": 40,
+    "blue_houses": 70.0,
+    "houses_not_yellow": 160.0,
+    "answer": 160.0
+  },
+  "flawed_trace": {
+    "green_houses": 90,
+    "green_yellow_multiplier": 3,
+    "yellow_houses": 30.0,
+    "yellow_house_difference": 40,
+    "blue_houses": 120.0,
+    "houses_not_yellow": 210.0,
+    "answer": 210.0
+  },
+  "correct_value": 70.0,
+  "flawed_value": 120.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "yellow_houses",
+      "question_inputs": [
+        "green_houses",
+        "green_yellow_multiplier"
+      ],
+      "solution_line_template": "If the number of green houses is three times the number of yellow houses, and there are {green_houses} green houses, then there are {green_houses}/{green_yellow_multiplier} = {yellow_houses} yellow houses."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "blue_houses",
+      "question_inputs": [
+        "yellow_house_difference"
+      ],
+      "solution_line_template": "She also has {yellow_house_difference} fewer yellow houses than blue houses, meaning there are {yellow_houses}+{yellow_house_difference} = <<{yellow_houses}+{yellow_house_difference}={blue_houses}>>{blue_houses} blue houses."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "houses_not_yellow",
+      "question_inputs": [],
+      "solution_line_template": "The number of houses that are not yellow is {blue_houses} blue houses +{green_houses} green houses = <<{blue_houses}+{green_houses}={houses_not_yellow}>>{houses_not_yellow}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the number of green houses is three times the number of yellow houses, and there are 90 green houses, then there are 90/3 = 30 yellow houses.",
+    "L2": "She also has 90 fewer yellow houses than blue houses, meaning there are 30+90 = <<30+90=120>>120 blue houses.",
+    "L3": "The number of houses that are not yellow is 120 blue houses +90 green houses = <<120+90=210>>210",
+    "FA": "#### 210"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'green_houses' (90) was used instead of 'yellow_house_difference' (40).",
+  "repro_seed": 416616844758048083,
+  "model_name": "google_gemini-2.5-flash"
+}

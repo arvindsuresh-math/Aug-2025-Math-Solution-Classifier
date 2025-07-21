@@ -1,0 +1,89 @@
+{
+  "index": 1448,
+  "original_solution_mapping": {
+    "FA": "#### 112",
+    "L1": "Half of the class consists of 28 students / 2 = <<28/2=14>>14 students.",
+    "L2": "One half of the students have 14 students * 3 notebooks/student = <<14*3=42>>42 notebooks.",
+    "L3": "The other half have 14 students * 5 notebooks/student = <<14*5=70>>70 notebooks.",
+    "L4": "There are 42 notebooks + 70 notebooks = <<42+70=112>>112 notebooks in total in the classroom."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1448.\n    Returns: the total number of notebooks in the classroom.\n    \"\"\"\n    # L1\n    total_students = 28 # There are 28 students in a classroom\n    half_divisor = 2 # Half of them\n    half_class_students = total_students / half_divisor\n\n    # L2\n    notebooks_per_student_group1 = 3 # the other half have 3 notebooks each\n    notebooks_group1 = half_class_students * notebooks_per_student_group1\n\n    # L3\n    notebooks_per_student_group2 = 5 # Half of them have 5 notebooks each\n    notebooks_group2 = half_class_students * notebooks_per_student_group2\n\n    # L4\n    total_notebooks = notebooks_group1 + notebooks_group2\n\n    # FA\n    answer = total_notebooks\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "notebooks_group1",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30d2b1a90>"
+  },
+  "correct_trace": {
+    "total_students": 28,
+    "half_divisor": 2,
+    "half_class_students": 14.0,
+    "notebooks_per_student_group1": 3,
+    "notebooks_group1": 42.0,
+    "notebooks_per_student_group2": 5,
+    "notebooks_group2": 70.0,
+    "total_notebooks": 112.0,
+    "answer": 112.0
+  },
+  "flawed_trace": {
+    "total_students": 28,
+    "half_divisor": 2,
+    "half_class_students": 14.0,
+    "notebooks_per_student_group1": 3,
+    "notebooks_group1": 17.0,
+    "notebooks_per_student_group2": 5,
+    "notebooks_group2": 70.0,
+    "total_notebooks": 87.0,
+    "answer": 87.0
+  },
+  "correct_value": 42.0,
+  "flawed_value": 17.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "half_class_students",
+      "question_inputs": [
+        "total_students",
+        "half_divisor"
+      ],
+      "solution_line_template": "Half of the class consists of {total_students} students / {half_divisor} = <<{total_students}/{half_divisor}={half_class_students}>>{half_class_students} students."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "notebooks_group1",
+      "question_inputs": [
+        "notebooks_per_student_group1"
+      ],
+      "solution_line_template": "One half of the students have {half_class_students} students * {notebooks_per_student_group1} notebooks/student = <<{half_class_students}*{notebooks_per_student_group1}={notebooks_group1}>>{notebooks_group1} notebooks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "notebooks_group2",
+      "question_inputs": [
+        "notebooks_per_student_group2"
+      ],
+      "solution_line_template": "The other half have {half_class_students} students * {notebooks_per_student_group2} notebooks/student = <<{half_class_students}*{notebooks_per_student_group2}={notebooks_group2}>>{notebooks_group2} notebooks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_notebooks",
+      "question_inputs": [],
+      "solution_line_template": "There are {notebooks_group1} notebooks + {notebooks_group2} notebooks = <<{notebooks_group1}+{notebooks_group2}={total_notebooks}>>{total_notebooks} notebooks in total in the classroom."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Half of the class consists of 28 students / 2 = <<28/2=14>>14 students.",
+    "L2": "One half of the students have 14 students * 3 notebooks/student = <<14*3=17>>17 notebooks.",
+    "L3": "The other half have 14 students * 5 notebooks/student = <<14*5=70>>70 notebooks.",
+    "L4": "There are 17 notebooks + 70 notebooks = <<17+70=87>>87 notebooks in total in the classroom.",
+    "FA": "#### 87"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -8820546500026433030,
+  "model_name": "google_gemini-2.5-flash"
+}

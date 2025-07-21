@@ -1,0 +1,63 @@
+{
+  "index": 3558,
+  "original_solution_mapping": {
+    "FA": "#### 19",
+    "L1": "Knockouts:190(.50)=95",
+    "L2": "First Round:95(.2)=19"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3558.\n    Returns: the number of knockouts Rocky had in the first round.\n    \"\"\"\n    # L1\n    total_fights = 190 # 190 fights\n    knockout_percentage_decimal = 0.50 # 50 percent of his fights\n    total_knockouts = total_fights * knockout_percentage_decimal\n\n    # L2\n    first_round_knockout_percentage_decimal = 0.2 # 20 percent of the knockouts\n    first_round_knockouts = total_knockouts * first_round_knockout_percentage_decimal\n\n    # FA\n    answer = first_round_knockouts\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "first_round_knockouts",
+    "operand_to_replace": "first_round_knockout_percentage_decimal",
+    "replacement_variable": "total_knockouts"
+  },
+  "correct_trace": {
+    "total_fights": 190,
+    "knockout_percentage_decimal": 0.5,
+    "total_knockouts": 95.0,
+    "first_round_knockout_percentage_decimal": 0.2,
+    "first_round_knockouts": 19.0,
+    "answer": 19.0
+  },
+  "flawed_trace": {
+    "total_fights": 190,
+    "knockout_percentage_decimal": 0.5,
+    "total_knockouts": 95.0,
+    "first_round_knockout_percentage_decimal": 0.2,
+    "first_round_knockouts": 9025.0,
+    "answer": 9025.0
+  },
+  "correct_value": 19.0,
+  "flawed_value": 9025.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_knockouts",
+      "question_inputs": [
+        "total_fights",
+        "knockout_percentage_decimal"
+      ],
+      "solution_line_template": "Knockouts:{total_fights}({knockout_percentage_decimal})={total_knockouts}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "first_round_knockouts",
+      "question_inputs": [
+        "first_round_knockout_percentage_decimal"
+      ],
+      "solution_line_template": "First Round:{total_knockouts}({first_round_knockout_percentage_decimal})={first_round_knockouts}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Knockouts:190(0.5)=95",
+    "L2": "First Round:95(95)=9025",
+    "FA": "#### 9025"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_knockouts' (95.0) was used instead of 'first_round_knockout_percentage_decimal' (0.2).",
+  "repro_seed": 6739346837022102041,
+  "model_name": "google_gemini-2.5-flash"
+}

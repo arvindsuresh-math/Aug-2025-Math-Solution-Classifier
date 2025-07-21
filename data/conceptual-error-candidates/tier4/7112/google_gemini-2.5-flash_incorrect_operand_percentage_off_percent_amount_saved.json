@@ -1,0 +1,65 @@
+{
+  "index": 7112,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "Asia saved $350 - $140 = $<<350-140=210>>210 on the dress.",
+    "L2": "That means she saved $210 / $350 = <<210/350=0.60>>0.60 or 60% off on the dress."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7112.\n    Returns: the percentage off Asia got at the sale.\n    \"\"\"\n    # L1\n    original_price = 350 # originally priced at $350\n    sale_price = 140 # bought a homecoming dress on sale for $140\n    amount_saved = original_price - sale_price\n\n    # L2\n    percent_multiplier = 100 # WK\n    percentage_off_decimal = amount_saved / original_price\n    percentage_off_percent = percentage_off_decimal * percent_multiplier\n\n    # FA\n    answer = percentage_off_percent\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "percentage_off_percent",
+    "operand_to_replace": "percentage_off_decimal",
+    "replacement_variable": "amount_saved"
+  },
+  "correct_trace": {
+    "original_price": 350,
+    "sale_price": 140,
+    "amount_saved": 210,
+    "percent_multiplier": 100,
+    "percentage_off_decimal": 0.6,
+    "percentage_off_percent": 60.0,
+    "answer": 60.0
+  },
+  "flawed_trace": {
+    "original_price": 350,
+    "sale_price": 140,
+    "amount_saved": 210,
+    "percent_multiplier": 100,
+    "percentage_off_decimal": 0.6,
+    "percentage_off_percent": 21000,
+    "answer": 21000
+  },
+  "correct_value": 60.0,
+  "flawed_value": 21000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "amount_saved",
+      "question_inputs": [
+        "original_price",
+        "sale_price"
+      ],
+      "solution_line_template": "Asia saved ${original_price} - ${sale_price} = $<<{original_price}-{sale_price}={amount_saved}>>{amount_saved} on the dress."
+    },
+    {
+      "WK_inputs": [
+        "percent_multiplier"
+      ],
+      "line_number": "L2",
+      "output_variable": "percentage_off_percent",
+      "question_inputs": [],
+      "solution_line_template": "That means she saved ${amount_saved} / ${original_price} = <<{amount_saved}/{original_price}={percentage_off_decimal}>>{percentage_off_decimal} or {percentage_off_percent}% off on the dress."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Asia saved $350 - $140 = $<<350-140=210>>210 on the dress.",
+    "L2": "That means she saved $210 / $350 = <<210/350=210>>210 or 21000% off on the dress.",
+    "FA": "#### 21000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'amount_saved' (value: 210) was used instead of 'percentage_off_decimal' (value: 0.6).",
+  "repro_seed": 3343630067091793508,
+  "model_name": "google_gemini-2.5-flash"
+}

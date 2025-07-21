@@ -1,0 +1,78 @@
+{
+  "index": 5085,
+  "original_solution_mapping": {
+    "FA": "#### 377050",
+    "L1": "The number of inhabitants of Salem is 15 * 58940 = <<15*58940=884100>>884100 inhabitants.",
+    "L2": "But some have moved, so there are 884100 - 130000 = <<884100-130000=754100>>754100 inhabitants left",
+    "L3": "Of these, 754100/2 = <<754100/2=377050>>377050 are women."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5085.\n    Returns: the number of women living in Salem.\n    \"\"\"\n    # L1\n    salem_multiplier = 15 # Salem is 15 times the size of Leesburg\n    leesburg_population = 58940 # Leesburg has 58940 people\n    salem_initial_population = salem_multiplier * leesburg_population\n\n    # L2\n    people_moved_out = 130000 # 130000 people move out of Salem\n    salem_current_population = salem_initial_population - people_moved_out\n\n    # L3\n    women_fraction_denominator = 2 # half of Salem's population is women\n    women_in_salem = salem_current_population / women_fraction_denominator\n\n    # FA\n    answer = women_in_salem\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "women_in_salem",
+    "operand_to_replace": "salem_current_population",
+    "replacement_variable": "people_moved_out"
+  },
+  "correct_trace": {
+    "salem_multiplier": 15,
+    "leesburg_population": 58940,
+    "salem_initial_population": 884100,
+    "people_moved_out": 130000,
+    "salem_current_population": 754100,
+    "women_fraction_denominator": 2,
+    "women_in_salem": 377050.0,
+    "answer": 377050.0
+  },
+  "flawed_trace": {
+    "salem_multiplier": 15,
+    "leesburg_population": 58940,
+    "salem_initial_population": 884100,
+    "people_moved_out": 130000,
+    "salem_current_population": 754100,
+    "women_fraction_denominator": 2,
+    "women_in_salem": 65000.0,
+    "answer": 65000.0
+  },
+  "correct_value": 377050.0,
+  "flawed_value": 65000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "salem_initial_population",
+      "question_inputs": [
+        "salem_multiplier",
+        "leesburg_population"
+      ],
+      "solution_line_template": "The number of inhabitants of Salem is {salem_multiplier} * {leesburg_population} = <<{salem_multiplier}*{leesburg_population}={salem_initial_population}>>{salem_initial_population} inhabitants."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "salem_current_population",
+      "question_inputs": [
+        "people_moved_out"
+      ],
+      "solution_line_template": "But some have moved, so there are {salem_initial_population} - {people_moved_out} = <<{salem_initial_population}-{people_moved_out}={salem_current_population}>>{salem_current_population} inhabitants left"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "women_in_salem",
+      "question_inputs": [
+        "women_fraction_denominator"
+      ],
+      "solution_line_template": "Of these, {salem_current_population}/{women_fraction_denominator} = <<{salem_current_population}/{women_fraction_denominator}={women_in_salem}>>{women_in_salem} are women."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The number of inhabitants of Salem is 15 * 58940 = <<15*58940=884100>>884100 inhabitants.",
+    "L2": "But some have moved, so there are 884100 - 130000 = <<884100-130000=754100>>754100 inhabitants left",
+    "L3": "Of these, 130000/2 = <<130000/2=65000>>65000 are women.",
+    "FA": "#### 65000"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'people_moved_out' (value: 130000) was used instead of 'salem_current_population' (value: 754100).",
+  "repro_seed": -6518666351084628951,
+  "model_name": "google_gemini-2.5-flash"
+}

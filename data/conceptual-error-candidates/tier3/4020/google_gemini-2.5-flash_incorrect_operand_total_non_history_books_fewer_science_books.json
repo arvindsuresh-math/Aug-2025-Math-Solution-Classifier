@@ -1,0 +1,100 @@
+{
+  "index": 4020,
+  "original_solution_mapping": {
+    "FA": "#### 1",
+    "L1": "Out of the 10 books, 10 x 2/5 = <<10*2/5=4>>4 are reading books.",
+    "L2": "While 10 x 3/10 = <<10*3/10=3>>3 are math books.",
+    "L3": "There are 3 - 1 = <<3-1=2>>2 science books.",
+    "L4": "So, the total number of reading, math, and science books is 4 + 3 + 2 = <<4+3+2=9>>9.",
+    "L5": "Thus, there is only 10 - 9 = <<10-9=1>>1 history book."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4020.\n    Returns: the number of history books.\n    \"\"\"\n    # L1\n    total_books = 10 # 10 books on the table\n    reading_fraction = Fraction(2, 5) # Two-fifths of them are reading books\n    reading_books = total_books * reading_fraction\n\n    # L2\n    math_fraction = Fraction(3, 10) # three-tenths of them are math books\n    math_books = total_books * math_fraction\n\n    # L3\n    fewer_science_books = 1 # one fewer science book\n    science_books = math_books - fewer_science_books\n\n    # L4\n    total_non_history_books = reading_books + math_books + science_books\n\n    # L5\n    history_books = total_books - total_non_history_books\n\n    # FA\n    answer = history_books\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_non_history_books",
+    "operand_to_replace": "reading_books",
+    "replacement_variable": "fewer_science_books"
+  },
+  "correct_trace": {
+    "total_books": 10,
+    "reading_fraction": "2/5",
+    "reading_books": "4",
+    "math_fraction": "3/10",
+    "math_books": "3",
+    "fewer_science_books": 1,
+    "science_books": "2",
+    "total_non_history_books": "9",
+    "history_books": "1",
+    "answer": "1"
+  },
+  "flawed_trace": {
+    "total_books": 10,
+    "reading_fraction": "2/5",
+    "reading_books": "4",
+    "math_fraction": "3/10",
+    "math_books": "3",
+    "fewer_science_books": 1,
+    "science_books": "2",
+    "total_non_history_books": "6",
+    "history_books": "4",
+    "answer": "4"
+  },
+  "correct_value": "9",
+  "flawed_value": "6",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "reading_books",
+      "question_inputs": [
+        "total_books",
+        "reading_fraction"
+      ],
+      "solution_line_template": "Out of the {total_books} books, {total_books} x {reading_fraction} = <<{total_books}*{reading_fraction}={reading_books}>>{reading_books} are reading books."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "math_books",
+      "question_inputs": [
+        "math_fraction"
+      ],
+      "solution_line_template": "While {total_books} x {math_fraction} = <<{total_books}*{math_fraction}={math_books}>>{math_books} are math books."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "science_books",
+      "question_inputs": [
+        "fewer_science_books"
+      ],
+      "solution_line_template": "There are {math_books} - {fewer_science_books} = <<{math_books}-{fewer_science_books}={science_books}>>{science_books} science books."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_non_history_books",
+      "question_inputs": [],
+      "solution_line_template": "So, the total number of reading, math, and science books is {reading_books} + {math_books} + {science_books} = <<{reading_books}+{math_books}+{science_books}={total_non_history_books}>>{total_non_history_books}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "history_books",
+      "question_inputs": [],
+      "solution_line_template": "Thus, there is only {total_books} - {total_non_history_books} = <<{total_books}-{total_non_history_books}={history_books}>>{history_books} history book."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Out of the 10 books, 10 x 2/5 = <<10*2/5=4>>4 are reading books.",
+    "L2": "While 10 x 3/10 = <<10*3/10=3>>3 are math books.",
+    "L3": "There are 3 - 1 = <<3-1=2>>2 science books.",
+    "L4": "So, the total number of reading, math, and science books is 1 + 3 + 2 = <<1+3+2=6>>6.",
+    "L5": "Thus, there is only 10 - 6 = <<10-6=4>>4 history book.",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'fewer_science_books' (value: 1) was used instead of 'reading_books' (value: 4).",
+  "repro_seed": -7416954269622540197,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 3327,
+  "original_solution_mapping": {
+    "FA": "#### 30,000",
+    "L1": "He bought 250*100=<<250*100=25000>>25000 gems",
+    "L2": "He got a 25,000*.2=<<25000*.2=5000>>5,000 gem bonus",
+    "L3": "So he got a total of 25000+5000=<<25000+5000=30000>>30,000 gems"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3327.\n    Returns: the total number of gems Tom ended up with.\n    \"\"\"\n    # L1\n    money_spent = 250 # Tom spends $250\n    gems_per_dollar = 100 # 100 gems for each dollar\n    initial_gems = money_spent * gems_per_dollar\n\n    # L2\n    bonus_percent = 0.2 # 20% bonus\n    bonus_gems = initial_gems * bonus_percent\n\n    # L3\n    total_gems = initial_gems + bonus_gems\n\n    # FA\n    answer = total_gems\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "bonus_gems",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x30e6681d0>"
+  },
+  "correct_trace": {
+    "money_spent": 250,
+    "gems_per_dollar": 100,
+    "initial_gems": 25000,
+    "bonus_percent": 0.2,
+    "bonus_gems": 5000.0,
+    "total_gems": 30000.0,
+    "answer": 30000.0
+  },
+  "flawed_trace": {
+    "money_spent": 250,
+    "gems_per_dollar": 100,
+    "initial_gems": 25000,
+    "bonus_percent": 0.2,
+    "bonus_gems": 125000.0,
+    "total_gems": 150000.0,
+    "answer": 150000.0
+  },
+  "correct_value": 5000.0,
+  "flawed_value": 125000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "initial_gems",
+      "question_inputs": [
+        "money_spent",
+        "gems_per_dollar"
+      ],
+      "solution_line_template": "He bought {money_spent}*{gems_per_dollar}=<<{money_spent}*{gems_per_dollar}={initial_gems}>>{initial_gems} gems"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "bonus_gems",
+      "question_inputs": [
+        "bonus_percent"
+      ],
+      "solution_line_template": "He got a {initial_gems}*{bonus_percent}=<<{initial_gems}*{bonus_percent}={bonus_gems}>>{bonus_gems} gem bonus"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_gems",
+      "question_inputs": [],
+      "solution_line_template": "So he got a total of {initial_gems}+{bonus_gems}=<<{initial_gems}+{bonus_gems}={total_gems}>>{total_gems} gems"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He bought 250*100=<<250*100=25000>>25000 gems",
+    "L2": "He got a 25000*0.2=<<25000*0.2=125000>>125000 gem bonus",
+    "L3": "So he got a total of 25000+125000=<<25000+125000=150000>>150000 gems",
+    "FA": "#### 150000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 4144810981900218182,
+  "model_name": "google_gemini-2.5-flash"
+}

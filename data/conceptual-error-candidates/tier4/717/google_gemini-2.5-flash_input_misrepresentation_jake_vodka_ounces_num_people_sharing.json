@@ -1,0 +1,78 @@
+{
+  "index": 717,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "Jake drank 8/2=<<8/2=4>>4 shots",
+    "L2": "So he drank 4*1.5=<<4*1.5=6>>6 ounces of vodka",
+    "L3": "That means he drank 6*.5=<<6*.5=3>>3 ounces of pure alcohol"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 717.\n    Returns: the amount of pure alcohol Jake drank in ounces.\n    \"\"\"\n    # L1\n    total_shots = 8 # 8 shots of vodka\n    num_people_sharing = 2 # splits ... with his friend\n    jake_shots = total_shots / num_people_sharing\n\n    # L2\n    ounces_per_shot = 1.5 # Each shot of vodka is 1.5 ounces\n    jake_vodka_ounces = jake_shots * ounces_per_shot\n\n    # L3\n    alcohol_purity_decimal = 0.5 # 50% pure alcohol\n    jake_pure_alcohol_ounces = jake_vodka_ounces * alcohol_purity_decimal\n\n    # FA\n    answer = jake_pure_alcohol_ounces\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "jake_vodka_ounces",
+    "operand_to_replace": "ounces_per_shot",
+    "replacement_variable": "num_people_sharing"
+  },
+  "correct_trace": {
+    "total_shots": 8,
+    "num_people_sharing": 2,
+    "jake_shots": 4.0,
+    "ounces_per_shot": 1.5,
+    "jake_vodka_ounces": 6.0,
+    "alcohol_purity_decimal": 0.5,
+    "jake_pure_alcohol_ounces": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "total_shots": 8,
+    "num_people_sharing": 2,
+    "jake_shots": 4.0,
+    "ounces_per_shot": 1.5,
+    "jake_vodka_ounces": 8.0,
+    "alcohol_purity_decimal": 0.5,
+    "jake_pure_alcohol_ounces": 4.0,
+    "answer": 4.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 8.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "jake_shots",
+      "question_inputs": [
+        "total_shots",
+        "num_people_sharing"
+      ],
+      "solution_line_template": "Jake drank {total_shots}/{num_people_sharing}=<<{total_shots}/{num_people_sharing}={jake_shots}>>{jake_shots} shots"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "jake_vodka_ounces",
+      "question_inputs": [
+        "ounces_per_shot"
+      ],
+      "solution_line_template": "So he drank {jake_shots}*{ounces_per_shot}=<<{jake_shots}*{ounces_per_shot}={jake_vodka_ounces}>>{jake_vodka_ounces} ounces of vodka"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "jake_pure_alcohol_ounces",
+      "question_inputs": [
+        "alcohol_purity_decimal"
+      ],
+      "solution_line_template": "That means he drank {jake_vodka_ounces}*{alcohol_purity_decimal}=<<{jake_vodka_ounces}*{alcohol_purity_decimal}={jake_pure_alcohol_ounces}>>{jake_pure_alcohol_ounces} ounces of pure alcohol"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jake drank 8/2=<<8/2=4>>4 shots",
+    "L2": "So he drank 4*2=<<4*2=8>>8 ounces of vodka",
+    "L3": "That means he drank 8*0.5=<<8*0.5=4>>4 ounces of pure alcohol",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_people_sharing' (2) was used instead of 'ounces_per_shot' (1.5).",
+  "repro_seed": -3451458846321304004,
+  "model_name": "google_gemini-2.5-flash"
+}

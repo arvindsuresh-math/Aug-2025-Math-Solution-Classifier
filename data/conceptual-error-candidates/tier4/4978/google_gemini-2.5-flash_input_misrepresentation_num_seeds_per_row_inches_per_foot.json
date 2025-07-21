@@ -1,0 +1,64 @@
+{
+  "index": 4978,
+  "original_solution_mapping": {
+    "FA": "#### 80",
+    "L1": "18 inches is equal to 18/12 = <<18/12=1.5>>1.5 feet.",
+    "L2": "Each row is 120 feet long, so there are 120/1.5 = <<120/1.5=80>>80 18-inch lengths on which seeds can be planted."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4978.\n    Returns: the number of seeds Bob can plant in each row.\n    \"\"\"\n    # L1\n    seed_space_inches = 18 # 18 inches to its right\n    inches_per_foot = 12 # WK\n    seed_space_feet = seed_space_inches / inches_per_foot\n\n    # L2\n    row_length_feet = 120 # The rows are 120 feet long\n    num_seeds_per_row = row_length_feet / seed_space_feet\n\n    # FA\n    answer = num_seeds_per_row\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "num_seeds_per_row",
+    "operand_to_replace": "row_length_feet",
+    "replacement_variable": "inches_per_foot"
+  },
+  "correct_trace": {
+    "seed_space_inches": 18,
+    "inches_per_foot": 12,
+    "seed_space_feet": 1.5,
+    "row_length_feet": 120,
+    "num_seeds_per_row": 80.0,
+    "answer": 80.0
+  },
+  "flawed_trace": {
+    "seed_space_inches": 18,
+    "inches_per_foot": 12,
+    "seed_space_feet": 1.5,
+    "row_length_feet": 120,
+    "num_seeds_per_row": 8.0,
+    "answer": 8.0
+  },
+  "correct_value": 80.0,
+  "flawed_value": 8.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "inches_per_foot"
+      ],
+      "line_number": "L1",
+      "output_variable": "seed_space_feet",
+      "question_inputs": [
+        "seed_space_inches"
+      ],
+      "solution_line_template": "{seed_space_inches} inches is equal to {seed_space_inches}/{inches_per_foot} = <<{seed_space_inches}/{inches_per_foot}={seed_space_feet}>>{seed_space_feet} feet."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_seeds_per_row",
+      "question_inputs": [
+        "row_length_feet"
+      ],
+      "solution_line_template": "Each row is {row_length_feet} feet long, so there are {row_length_feet}/{seed_space_feet} = <<{row_length_feet}/{seed_space_feet}={num_seeds_per_row}>>{num_seeds_per_row} 18-inch lengths on which seeds can be planted."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "18 inches is equal to 18/12 = <<18/12=1.5>>1.5 feet.",
+    "L2": "Each row is 12 feet long, so there are 12/1.5 = <<12/1.5=8>>8 18-inch lengths on which seeds can be planted.",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'inches_per_foot' (12) was used instead of 'row_length_feet' (120).",
+  "repro_seed": 3105432718506366216,
+  "model_name": "google_gemini-2.5-flash"
+}

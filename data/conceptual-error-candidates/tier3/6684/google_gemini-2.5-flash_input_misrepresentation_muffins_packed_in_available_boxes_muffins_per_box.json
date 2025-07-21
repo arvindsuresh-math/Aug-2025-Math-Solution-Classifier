@@ -1,0 +1,74 @@
+{
+  "index": 6684,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "A total of 10 x 5 = <<10*5=50>>50 muffins will be packed in 10 boxes.",
+    "L2": "So 95 - 50 = <<95-50=45>>45 muffins still need to be packed in the boxes.",
+    "L3": "Thus, 45/5 = <<45/5=9>>9 boxes are still needed to pack all those 45 muffins."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6684.\n    Returns: the number of additional boxes needed to pack all muffins.\n    \"\"\"\n    # L1\n    available_boxes = 10 # only 10 available boxes\n    muffins_per_box = 5 # 5 muffins in each box\n    muffins_packed_in_available_boxes = available_boxes * muffins_per_box\n\n    # L2\n    total_muffins = 95 # The bakery made 95 muffins\n    remaining_muffins = total_muffins - muffins_packed_in_available_boxes\n\n    # L3\n    boxes_still_needed = remaining_muffins / muffins_per_box\n\n    # FA\n    answer = boxes_still_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "muffins_packed_in_available_boxes",
+    "operand_to_replace": "available_boxes",
+    "replacement_variable": "muffins_per_box"
+  },
+  "correct_trace": {
+    "available_boxes": 10,
+    "muffins_per_box": 5,
+    "muffins_packed_in_available_boxes": 50,
+    "total_muffins": 95,
+    "remaining_muffins": 45,
+    "boxes_still_needed": 9.0,
+    "answer": 9.0
+  },
+  "flawed_trace": {
+    "available_boxes": 10,
+    "muffins_per_box": 5,
+    "muffins_packed_in_available_boxes": 25,
+    "total_muffins": 95,
+    "remaining_muffins": 70,
+    "boxes_still_needed": 14.0,
+    "answer": 14.0
+  },
+  "correct_value": 50,
+  "flawed_value": 25,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "muffins_packed_in_available_boxes",
+      "question_inputs": [
+        "available_boxes",
+        "muffins_per_box"
+      ],
+      "solution_line_template": "A total of {available_boxes} x {muffins_per_box} = <<{available_boxes}*{muffins_per_box}={muffins_packed_in_available_boxes}>>{muffins_packed_in_available_boxes} muffins will be packed in {available_boxes} boxes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_muffins",
+      "question_inputs": [
+        "total_muffins"
+      ],
+      "solution_line_template": "So {total_muffins} - {muffins_packed_in_available_boxes} = <<{total_muffins}-{muffins_packed_in_available_boxes}={remaining_muffins}>>{remaining_muffins} muffins still need to be packed in the boxes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "boxes_still_needed",
+      "question_inputs": [],
+      "solution_line_template": "Thus, {remaining_muffins}/{muffins_per_box} = <<{remaining_muffins}/{muffins_per_box}={boxes_still_needed}>>{boxes_still_needed} boxes are still needed to pack all those {remaining_muffins} muffins."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "A total of 5 x 5 = <<5*5=25>>25 muffins will be packed in 5 boxes.",
+    "L2": "So 95 - 25 = <<95-25=70>>70 muffins still need to be packed in the boxes.",
+    "L3": "Thus, 70/5 = <<70/5=14>>14 boxes are still needed to pack all those 70 muffins.",
+    "FA": "#### 14"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'muffins_per_box' (5) was used instead of 'available_boxes' (10).",
+  "repro_seed": -5506118950490730038,
+  "model_name": "google_gemini-2.5-flash"
+}

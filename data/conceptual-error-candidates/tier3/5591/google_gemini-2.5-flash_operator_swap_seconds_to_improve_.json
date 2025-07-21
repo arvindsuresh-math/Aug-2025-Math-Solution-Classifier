@@ -1,0 +1,63 @@
+{
+  "index": 5591,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "He still has to improve by 60 more seconds because 90 - 30 = <<90-30=60>>60",
+    "L2": "This will take 6 days because 60 / 10 = <<60/10=6>>6"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5591.\n    Returns: the number of additional days until Chris can hold his breath for 90 seconds.\n    \"\"\"\n    # L1\n    goal_seconds = 90 # 90 straight seconds\n    current_seconds_day3 = 30 # On the third day, he holds it for 30 seconds\n    seconds_to_improve = goal_seconds - current_seconds_day3\n\n    # L2\n    improvement_per_day = 10 # ten extra seconds each day\n    days_to_reach_goal = seconds_to_improve / improvement_per_day\n\n    # FA\n    answer = days_to_reach_goal\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "seconds_to_improve",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x177df7ad0>"
+  },
+  "correct_trace": {
+    "goal_seconds": 90,
+    "current_seconds_day3": 30,
+    "seconds_to_improve": 60,
+    "improvement_per_day": 10,
+    "days_to_reach_goal": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "goal_seconds": 90,
+    "current_seconds_day3": 30,
+    "seconds_to_improve": 120,
+    "improvement_per_day": 10,
+    "days_to_reach_goal": 12.0,
+    "answer": 12.0
+  },
+  "correct_value": 60,
+  "flawed_value": 120,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "seconds_to_improve",
+      "question_inputs": [
+        "goal_seconds",
+        "current_seconds_day3"
+      ],
+      "solution_line_template": "He still has to improve by {seconds_to_improve} more seconds because {goal_seconds} - {current_seconds_day3} = <<{goal_seconds}-{current_seconds_day3}={seconds_to_improve}>>{seconds_to_improve}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "days_to_reach_goal",
+      "question_inputs": [
+        "improvement_per_day"
+      ],
+      "solution_line_template": "This will take {days_to_reach_goal} days because {seconds_to_improve} / {improvement_per_day} = <<{seconds_to_improve}/{improvement_per_day}={days_to_reach_goal}>>{days_to_reach_goal}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He still has to improve by 120 more seconds because 90 - 30 = <<90-30=120>>120",
+    "L2": "This will take 12 days because 120 / 10 = <<120/10=12>>12",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -4176435908671860831,
+  "model_name": "google_gemini-2.5-flash"
+}

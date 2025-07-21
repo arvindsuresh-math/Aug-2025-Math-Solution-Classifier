@@ -1,0 +1,85 @@
+{
+  "index": 3552,
+  "original_solution_mapping": {
+    "FA": "#### 8640",
+    "L1": "First find the total number of records that can fit on all the shelves: 4 cases * 3 shelves/case * 20 records/shelf = <<4*3*20=240>>240 records",
+    "L2": "Then multiply that number by 60% to find the number of records actually on the shelves: 240 records * 60% = <<240*60*.01=144>>144 records",
+    "L3": "Then multiply that number by 60 to find the number of ridges on all the records: 144 records * 60 ridges/record = <<144*60=8640>>8640 ridges"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3552.\n    Returns: the total number of ridges on all of Jerry's records.\n    \"\"\"\n    # L1\n    num_cases = 4 # 4 cases\n    shelves_per_case = 3 # 3 shelves\n    records_per_shelf = 20 # 20 records each\n    total_capacity_records = num_cases * shelves_per_case * records_per_shelf\n\n    # L2\n    full_percent_num = 60 # 60% full\n    percent_factor = 0.01 # WK\n    actual_records = total_capacity_records * full_percent_num * percent_factor\n\n    # L3\n    ridges_per_record = 60 # 60 ridges on a vinyl record\n    total_ridges = actual_records * ridges_per_record\n\n    # FA\n    answer = total_ridges\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_ridges",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30e67ea90>"
+  },
+  "correct_trace": {
+    "num_cases": 4,
+    "shelves_per_case": 3,
+    "records_per_shelf": 20,
+    "total_capacity_records": 240,
+    "full_percent_num": 60,
+    "percent_factor": 0.01,
+    "actual_records": 144.0,
+    "ridges_per_record": 60,
+    "total_ridges": 8640.0,
+    "answer": 8640.0
+  },
+  "flawed_trace": {
+    "num_cases": 4,
+    "shelves_per_case": 3,
+    "records_per_shelf": 20,
+    "total_capacity_records": 240,
+    "full_percent_num": 60,
+    "percent_factor": 0.01,
+    "actual_records": 144.0,
+    "ridges_per_record": 60,
+    "total_ridges": 204.0,
+    "answer": 204.0
+  },
+  "correct_value": 8640.0,
+  "flawed_value": 204.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_capacity_records",
+      "question_inputs": [
+        "num_cases",
+        "shelves_per_case",
+        "records_per_shelf"
+      ],
+      "solution_line_template": "First find the total number of records that can fit on all the shelves: {num_cases} cases * {shelves_per_case} shelves/case * {records_per_shelf} records/shelf = <<{num_cases}*{shelves_per_case}*{records_per_shelf}={total_capacity_records}>>{total_capacity_records} records"
+    },
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L2",
+      "output_variable": "actual_records",
+      "question_inputs": [
+        "full_percent_num"
+      ],
+      "solution_line_template": "Then multiply that number by {full_percent_num}% to find the number of records actually on the shelves: {total_capacity_records} records * {full_percent_num}% = <<{total_capacity_records}*{full_percent_num}*{percent_factor}={actual_records}>>{actual_records} records"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_ridges",
+      "question_inputs": [
+        "ridges_per_record"
+      ],
+      "solution_line_template": "Then multiply that number by {ridges_per_record} to find the number of ridges on all the records: {actual_records} records * {ridges_per_record} ridges/record = <<{actual_records}*{ridges_per_record}={total_ridges}>>{total_ridges} ridges"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total number of records that can fit on all the shelves: 4 cases * 3 shelves/case * 20 records/shelf = <<4*3*20=240>>240 records",
+    "L2": "Then multiply that number by 60% to find the number of records actually on the shelves: 240 records * 60% = <<240*60*0.01=144>>144 records",
+    "L3": "Then multiply that number by 60 to find the number of ridges on all the records: 144 records * 60 ridges/record = <<144*60=204>>204 ridges",
+    "FA": "#### 204"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 4845275674262397616,
+  "model_name": "google_gemini-2.5-flash"
+}

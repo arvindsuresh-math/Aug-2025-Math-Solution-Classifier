@@ -1,0 +1,109 @@
+{
+  "index": 6473,
+  "original_solution_mapping": {
+    "FA": "#### 18",
+    "L1": "He eats 2 each from Monday through Friday for a total of 2*5 = <<2*5=10>>10 candies",
+    "L2": "He eats 1 each every other day of the week (Saturday and Sunday) for a total of 1*2 = <<1*2=2>>2 candies",
+    "L3": "In a week, he consumes a total of 10+2 = <<10+2=12>>12 candies",
+    "L4": "Doing this for 3 weeks, he will consume 3*12 = <<3*12=36>>36 candies",
+    "L5": "If 2 packets contain 36 candies, then 1 contains 36/2 = 18 candies"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6473.\n    Returns: the number of candies in one packet.\n    \"\"\"\n    # L1\n    candies_per_weekday = 2 # eats two candies every day from Monday through Friday\n    weekdays_count = 5 # WK\n    candies_weekdays = candies_per_weekday * weekdays_count\n\n    # L2\n    candies_per_weekend_day = 1 # takes one each during the remaining days of the week\n    weekend_days_count = 2 # WK\n    candies_weekend = candies_per_weekend_day * weekend_days_count\n\n    # L3\n    candies_per_week = candies_weekdays + candies_weekend\n\n    # L4\n    num_weeks = 3 # it takes him 3 such weeks\n    total_candies_consumed = num_weeks * candies_per_week\n\n    # L5\n    num_packets = 2 # two packets of candy\n    candies_per_packet = total_candies_consumed / num_packets\n\n    # FA\n    answer = candies_per_packet\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "candies_per_week",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x172113d10>"
+  },
+  "correct_trace": {
+    "candies_per_weekday": 2,
+    "weekdays_count": 5,
+    "candies_weekdays": 10,
+    "candies_per_weekend_day": 1,
+    "weekend_days_count": 2,
+    "candies_weekend": 2,
+    "candies_per_week": 12,
+    "num_weeks": 3,
+    "total_candies_consumed": 36,
+    "num_packets": 2,
+    "candies_per_packet": 18.0,
+    "answer": 18.0
+  },
+  "flawed_trace": {
+    "candies_per_weekday": 2,
+    "weekdays_count": 5,
+    "candies_weekdays": 10,
+    "candies_per_weekend_day": 1,
+    "weekend_days_count": 2,
+    "candies_weekend": 2,
+    "candies_per_week": 8,
+    "num_weeks": 3,
+    "total_candies_consumed": 24,
+    "num_packets": 2,
+    "candies_per_packet": 12.0,
+    "answer": 12.0
+  },
+  "correct_value": 12,
+  "flawed_value": 8,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "weekdays_count"
+      ],
+      "line_number": "L1",
+      "output_variable": "candies_weekdays",
+      "question_inputs": [
+        "candies_per_weekday"
+      ],
+      "solution_line_template": "He eats {candies_per_weekday} each from Monday through Friday for a total of {candies_per_weekday}*{weekdays_count} = <<{candies_per_weekday}*{weekdays_count}={candies_weekdays}>>{candies_weekdays} candies"
+    },
+    {
+      "WK_inputs": [
+        "weekend_days_count"
+      ],
+      "line_number": "L2",
+      "output_variable": "candies_weekend",
+      "question_inputs": [
+        "candies_per_weekend_day"
+      ],
+      "solution_line_template": "He eats {candies_per_weekend_day} each every other day of the week (Saturday and Sunday) for a total of {candies_per_weekend_day}*{weekend_days_count} = <<{candies_per_weekend_day}*{weekend_days_count}={candies_weekend}>>{candies_weekend} candies"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "candies_per_week",
+      "question_inputs": [],
+      "solution_line_template": "In a week, he consumes a total of {candies_weekdays}+{candies_weekend} = <<{candies_weekdays}+{candies_weekend}={candies_per_week}>>{candies_per_week} candies"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_candies_consumed",
+      "question_inputs": [
+        "num_weeks"
+      ],
+      "solution_line_template": "Doing this for {num_weeks} weeks, he will consume {num_weeks}*{candies_per_week} = <<{num_weeks}*{candies_per_week}={total_candies_consumed}>>{total_candies_consumed} candies"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "candies_per_packet",
+      "question_inputs": [
+        "num_packets"
+      ],
+      "solution_line_template": "If {num_packets} packets contain {total_candies_consumed} candies, then 1 contains {total_candies_consumed}/{num_packets} = <<{total_candies_consumed}/{num_packets}={candies_per_packet}>>{candies_per_packet} candies"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He eats 2 each from Monday through Friday for a total of 2*5 = <<2*5=10>>10 candies",
+    "L2": "He eats 1 each every other day of the week (Saturday and Sunday) for a total of 1*2 = <<1*2=2>>2 candies",
+    "L3": "In a week, he consumes a total of 10+2 = <<10+2=8>>8 candies",
+    "L4": "Doing this for 3 weeks, he will consume 3*8 = <<3*8=24>>24 candies",
+    "L5": "If 2 packets contain 24 candies, then 1 contains 24/2 = <<24/2=12>>12 candies",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": -2031836619697810159,
+  "model_name": "google_gemini-2.5-flash"
+}

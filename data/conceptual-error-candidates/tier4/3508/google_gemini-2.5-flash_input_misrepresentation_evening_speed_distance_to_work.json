@@ -1,0 +1,63 @@
+{
+  "index": 3508,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "In the morning he travels at an average speed of 30mph for 1 hour so he covers a distance of 30*1 = <<30*1=30>>30 miles",
+    "L2": "He covers the same distance of 30 miles in the evening spending 1.5 hours so his average speed must be 30/1.5 = <<30/1.5=20>>20mph"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3508.\n    Returns: the average speed of his return journey.\n    \"\"\"\n    # L1\n    morning_speed = 30 # average speed of 30mph in the morning\n    morning_time = 1 # 1 hr to drive to work in the morning\n    distance_to_work = morning_speed * morning_time\n\n    # L2\n    evening_time = 1.5 # 1 and half hours to drive back home in the evening\n    evening_speed = distance_to_work / evening_time\n\n    # FA\n    answer = evening_speed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "evening_speed",
+    "operand_to_replace": "evening_time",
+    "replacement_variable": "distance_to_work"
+  },
+  "correct_trace": {
+    "morning_speed": 30,
+    "morning_time": 1,
+    "distance_to_work": 30,
+    "evening_time": 1.5,
+    "evening_speed": 20.0,
+    "answer": 20.0
+  },
+  "flawed_trace": {
+    "morning_speed": 30,
+    "morning_time": 1,
+    "distance_to_work": 30,
+    "evening_time": 1.5,
+    "evening_speed": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 20.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "distance_to_work",
+      "question_inputs": [
+        "morning_speed",
+        "morning_time"
+      ],
+      "solution_line_template": "In the morning he travels at an average speed of {morning_speed}mph for {morning_time} hour so he covers a distance of {morning_speed}*{morning_time} = <<{morning_speed}*{morning_time}={distance_to_work}>>{distance_to_work} miles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "evening_speed",
+      "question_inputs": [
+        "evening_time"
+      ],
+      "solution_line_template": "He covers the same distance of {distance_to_work} miles in the evening spending {evening_time} hours so his average speed must be {distance_to_work}/{evening_time} = <<{distance_to_work}/{evening_time}={evening_speed}>>{evening_speed}mph"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In the morning he travels at an average speed of 30mph for 1 hour so he covers a distance of 30*1 = <<30*1=30>>30 miles",
+    "L2": "He covers the same distance of 30 miles in the evening spending 30 hours so his average speed must be 30/30 = <<30/30=1>>1mph",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'distance_to_work' (30) was used instead of 'evening_time' (1.5).",
+  "repro_seed": 8809245205309618672,
+  "model_name": "google_gemini-2.5-flash"
+}

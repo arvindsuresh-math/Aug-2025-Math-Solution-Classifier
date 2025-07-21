@@ -1,0 +1,93 @@
+{
+  "index": 2736,
+  "original_solution_mapping": {
+    "FA": "#### 2100",
+    "L1": "Since Paul makes 3 trips per day, and each trip involves going both down and up, this means he travels the full vertical distance of his apartment complex 3*2=<<3*2=6>>6 times a day.",
+    "L2": "Since there are 7 days in a week, this means he makes this trip 6*7=42 times a week.",
+    "L3": "Since each story is 10 feet tall, that means with 5 stories he travels 5*10= <<5*10=50>>50 feet each trip.",
+    "L4": "Since he made 42 trips of 50 feet each, this means he traveled 50*42= <<50*42=2100>>2100 feet in a week."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2736.\n    Returns: the total vertical distance traveled by Paul in a week.\n    \"\"\"\n    # L1\n    trips_per_day = 3 # 3 trips out from and back to his apartment\n    movements_per_trip = 2 # each trip involves going both down and up\n    vertical_movements_per_day = trips_per_day * movements_per_trip\n\n    # L2\n    days_in_week = 7 # WK\n    vertical_movements_per_week = vertical_movements_per_day * days_in_week\n\n    # L3\n    num_stories = 5 # 5th story apartment\n    story_height_feet = 10 # each story is 10 feet tall\n    feet_per_vertical_movement = num_stories * story_height_feet\n\n    # L4\n    total_vertical_distance = feet_per_vertical_movement * vertical_movements_per_week\n\n    # FA\n    answer = total_vertical_distance\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "feet_per_vertical_movement",
+    "operand_to_replace": "num_stories",
+    "replacement_variable": "days_in_week"
+  },
+  "correct_trace": {
+    "trips_per_day": 3,
+    "movements_per_trip": 2,
+    "vertical_movements_per_day": 6,
+    "days_in_week": 7,
+    "vertical_movements_per_week": 42,
+    "num_stories": 5,
+    "story_height_feet": 10,
+    "feet_per_vertical_movement": 50,
+    "total_vertical_distance": 2100,
+    "answer": 2100
+  },
+  "flawed_trace": {
+    "trips_per_day": 3,
+    "movements_per_trip": 2,
+    "vertical_movements_per_day": 6,
+    "days_in_week": 7,
+    "vertical_movements_per_week": 42,
+    "num_stories": 5,
+    "story_height_feet": 10,
+    "feet_per_vertical_movement": 70,
+    "total_vertical_distance": 2940,
+    "answer": 2940
+  },
+  "correct_value": 50,
+  "flawed_value": 70,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "trips_per_day"
+      ],
+      "WK_inputs": [
+        "movements_per_trip"
+      ],
+      "output_variable": "vertical_movements_per_day",
+      "solution_line_template": "Since Paul makes {trips_per_day} trips per day, and each trip involves going both down and up, this means he travels the full vertical distance of his apartment complex {trips_per_day}*{movements_per_trip}=<<{trips_per_day}*{movements_per_trip}={vertical_movements_per_day}>>{vertical_movements_per_day} times a day."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [
+        "days_in_week"
+      ],
+      "output_variable": "vertical_movements_per_week",
+      "solution_line_template": "Since there are {days_in_week} days in a week, this means he makes this trip {vertical_movements_per_day}*{days_in_week}={vertical_movements_per_week} times a week."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "num_stories",
+        "story_height_feet"
+      ],
+      "WK_inputs": [],
+      "output_variable": "feet_per_vertical_movement",
+      "solution_line_template": "Since each story is {story_height_feet} feet tall, that means with {num_stories} stories he travels {num_stories}*{story_height_feet}= <<{num_stories}*{story_height_feet}={feet_per_vertical_movement}>>{feet_per_vertical_movement} feet each trip."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_vertical_distance",
+      "solution_line_template": "Since he made {vertical_movements_per_week} trips of {feet_per_vertical_movement} feet each, this means he traveled {feet_per_vertical_movement}*{vertical_movements_per_week}= <<{feet_per_vertical_movement}*{vertical_movements_per_week}={total_vertical_distance}>>{total_vertical_distance} feet in a week."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since Paul makes 3 trips per day, and each trip involves going both down and up, this means he travels the full vertical distance of his apartment complex 3*2=<<3*2=6>>6 times a day.",
+    "L2": "Since there are 7 days in a week, this means he makes this trip 6*7=42 times a week.",
+    "L3": "Since each story is 10 feet tall, that means with 7 stories he travels 7*10= <<7*10=70>>70 feet each trip.",
+    "L4": "Since he made 42 trips of 70 feet each, this means he traveled 70*42= <<70*42=2940>>2940 feet in a week.",
+    "FA": "#### 2940"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'days_in_week' (7) was used instead of 'num_stories' (5).",
+  "repro_seed": -3592495673696990022,
+  "model_name": "google_gemini-2.5-flash"
+}

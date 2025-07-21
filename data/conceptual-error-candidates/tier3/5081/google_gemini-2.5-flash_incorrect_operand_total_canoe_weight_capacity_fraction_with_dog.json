@@ -1,0 +1,92 @@
+{
+  "index": 5081,
+  "original_solution_mapping": {
+    "FA": "#### 595",
+    "L1": "When Penny has her dog inside the canoe, only 2/3*6 = <<2/3*6=4>>4 people could fit inside the canoe.",
+    "L2": "If every person in a trip where Penny had her dog inside the canoe weighed 140 pounds, the total weight of people inside the canoe was 140*4= <<140*4=560>>560 pounds.",
+    "L3": "The dog weighs 1/4*140 = <<140/4=35>>35 pounds",
+    "L4": "On the trip, the canoe was carrying 560+35 = <<560+35=595>>595 pounds"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5081.\n    Returns: the total weight the canoe was carrying.\n    \"\"\"\n    # L1\n    total_capacity = 6 # 6 people\n    capacity_fraction_with_dog = Fraction(2, 3) # 2/3 of that number\n    people_with_dog = capacity_fraction_with_dog * total_capacity\n\n    # L2\n    person_weight = 140 # weighed 140 pounds\n    total_people_weight = person_weight * people_with_dog\n\n    # L3\n    dog_weight_fraction = Fraction(1, 4) # 1/4 as much weight\n    dog_weight_divisor = 4 # 1/4 as much weight\n    dog_weight = dog_weight_fraction * person_weight\n\n    # L4\n    total_canoe_weight = total_people_weight + dog_weight\n\n    # FA\n    answer = total_canoe_weight\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_canoe_weight",
+    "operand_to_replace": "dog_weight",
+    "replacement_variable": "capacity_fraction_with_dog"
+  },
+  "correct_trace": {
+    "total_capacity": 6,
+    "capacity_fraction_with_dog": "2/3",
+    "people_with_dog": "4",
+    "person_weight": 140,
+    "total_people_weight": "560",
+    "dog_weight_fraction": "1/4",
+    "dog_weight_divisor": 4,
+    "dog_weight": "35",
+    "total_canoe_weight": "595",
+    "answer": "595"
+  },
+  "flawed_trace": {
+    "total_capacity": 6,
+    "capacity_fraction_with_dog": "2/3",
+    "people_with_dog": "4",
+    "person_weight": 140,
+    "total_people_weight": "560",
+    "dog_weight_fraction": "1/4",
+    "dog_weight_divisor": 4,
+    "dog_weight": "35",
+    "total_canoe_weight": "1682/3",
+    "answer": "1682/3"
+  },
+  "correct_value": "595",
+  "flawed_value": "1682/3",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "people_with_dog",
+      "question_inputs": [
+        "total_capacity",
+        "capacity_fraction_with_dog"
+      ],
+      "solution_line_template": "When Penny has her dog inside the canoe, only {capacity_fraction_with_dog}*{total_capacity} = <<{capacity_fraction_with_dog}*{total_capacity}={people_with_dog}>>{people_with_dog} people could fit inside the canoe."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_people_weight",
+      "question_inputs": [
+        "person_weight"
+      ],
+      "solution_line_template": "If every person in a trip where Penny had her dog inside the canoe weighed {person_weight} pounds, the total weight of people inside the canoe was {person_weight}*{people_with_dog}= <<{person_weight}*{people_with_dog}={total_people_weight}>>{total_people_weight} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "dog_weight",
+      "question_inputs": [
+        "dog_weight_fraction",
+        "dog_weight_divisor"
+      ],
+      "solution_line_template": "The dog weighs {dog_weight_fraction}*{person_weight} = <<{person_weight}/{dog_weight_divisor}={dog_weight}>>{dog_weight} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_canoe_weight",
+      "question_inputs": [],
+      "solution_line_template": "On the trip, the canoe was carrying {total_people_weight}+{dog_weight} = <<{total_people_weight}+{dog_weight}={total_canoe_weight}>>{total_canoe_weight} pounds"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "When Penny has her dog inside the canoe, only 2/3*6 = <<2/3*6=4>>4 people could fit inside the canoe.",
+    "L2": "If every person in a trip where Penny had her dog inside the canoe weighed 140 pounds, the total weight of people inside the canoe was 140*4= <<140*4=560>>560 pounds.",
+    "L3": "The dog weighs 1/4*140 = <<140/4=35>>35 pounds",
+    "L4": "On the trip, the canoe was carrying 560+2/3 = <<560+2/3=1682/3>>1682/3 pounds",
+    "FA": "#### 1682/3"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'capacity_fraction_with_dog' (value: 2/3) was used instead of 'dog_weight' (value: 35).",
+  "repro_seed": -2032483806420056478,
+  "model_name": "google_gemini-2.5-flash"
+}

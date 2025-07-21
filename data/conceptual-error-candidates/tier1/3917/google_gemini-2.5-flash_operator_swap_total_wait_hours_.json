@@ -1,0 +1,64 @@
+{
+  "index": 3917,
+  "original_solution_mapping": {
+    "FA": "#### 356",
+    "L1": "First convert the quarantine wait time to hours by multiplying the number of days by the number of hours in a day: 14 days * 24 hours/day = <<14*24=336>>336 hours",
+    "L2": "Then add the time Jack spent waiting in customs to the quarantine time: 336 hours + 20 hours = <<336+20=356>>356 hours"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3917.\n    Returns: the total number of hours Jack had to wait.\n    \"\"\"\n    # L1\n    quarantine_days = 14 # 14 days in coronavirus quarantine\n    hours_per_day = 24 # WK\n    quarantine_hours = quarantine_days * hours_per_day\n\n    # L2\n    customs_wait_hours = 20 # 20 hours to get through customs\n    total_wait_hours = quarantine_hours + customs_wait_hours\n\n    # FA\n    answer = total_wait_hours\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_wait_hours",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x30df185d0>"
+  },
+  "correct_trace": {
+    "quarantine_days": 14,
+    "hours_per_day": 24,
+    "quarantine_hours": 336,
+    "customs_wait_hours": 20,
+    "total_wait_hours": 356,
+    "answer": 356
+  },
+  "flawed_trace": {
+    "quarantine_days": 14,
+    "hours_per_day": 24,
+    "quarantine_hours": 336,
+    "customs_wait_hours": 20,
+    "total_wait_hours": 6720,
+    "answer": 6720
+  },
+  "correct_value": 356,
+  "flawed_value": 6720,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "hours_per_day"
+      ],
+      "line_number": "L1",
+      "output_variable": "quarantine_hours",
+      "question_inputs": [
+        "quarantine_days"
+      ],
+      "solution_line_template": "First convert the quarantine wait time to hours by multiplying the number of days by the number of hours in a day: {quarantine_days} days * {hours_per_day} hours/day = <<{quarantine_days}*{hours_per_day}={quarantine_hours}>>{quarantine_hours} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_wait_hours",
+      "question_inputs": [
+        "customs_wait_hours"
+      ],
+      "solution_line_template": "Then add the time Jack spent waiting in customs to the quarantine time: {quarantine_hours} hours + {customs_wait_hours} hours = <<{quarantine_hours}+{customs_wait_hours}={total_wait_hours}>>{total_wait_hours} hours"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First convert the quarantine wait time to hours by multiplying the number of days by the number of hours in a day: 14 days * 24 hours/day = <<14*24=336>>336 hours",
+    "L2": "Then add the time Jack spent waiting in customs to the quarantine time: 336 hours + 20 hours = <<336+20=6720>>6720 hours",
+    "FA": "#### 6720"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 8112092284781076966,
+  "model_name": "google_gemini-2.5-flash"
+}

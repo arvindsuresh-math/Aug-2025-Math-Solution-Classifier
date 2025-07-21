@@ -1,0 +1,100 @@
+{
+  "index": 5381,
+  "original_solution_mapping": {
+    "FA": "#### 600",
+    "L1": "Mickey runs around the block twice because half of 4 is <<4/2=2>>2.",
+    "L2": "Mickey runs 400 meters in total because 2 times 200 equals <<2*200=400>>400.",
+    "L3": "Johnny runs 800 meters because 4 times 200 equals <<4*200=800>>800.",
+    "L4": "In total, they run 1200 meters because 400 plus 800 equals 1200.",
+    "L5": "On average, they run 600 meters because 1200 divided by 2 equals <<1200/2=600>>600"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5381.\n    Returns: the average distance run by Johnny and Mickey.\n    \"\"\"\n    # L1\n    johnny_runs_times = 4 # Johnny runs around the block 4 times\n    half_divisor = 2 # half of 4\n    mickey_runs_times = johnny_runs_times / half_divisor\n\n    # L2\n    meters_per_block = 200 # One time around the block equals 200 meters\n    mickey_distance = mickey_runs_times * meters_per_block\n\n    # L3\n    johnny_distance = johnny_runs_times * meters_per_block\n\n    # L4\n    total_distance = mickey_distance + johnny_distance\n\n    # L5\n    number_of_people = 2 # WK\n    average_distance = total_distance / number_of_people\n\n    # FA\n    answer = average_distance\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "johnny_distance",
+    "operand_to_replace": "meters_per_block",
+    "replacement_variable": "mickey_runs_times"
+  },
+  "correct_trace": {
+    "johnny_runs_times": 4,
+    "half_divisor": 2,
+    "mickey_runs_times": 2.0,
+    "meters_per_block": 200,
+    "mickey_distance": 400.0,
+    "johnny_distance": 800,
+    "total_distance": 1200.0,
+    "number_of_people": 2,
+    "average_distance": 600.0,
+    "answer": 600.0
+  },
+  "flawed_trace": {
+    "johnny_runs_times": 4,
+    "half_divisor": 2,
+    "mickey_runs_times": 2.0,
+    "meters_per_block": 200,
+    "mickey_distance": 400.0,
+    "johnny_distance": 8.0,
+    "total_distance": 408.0,
+    "number_of_people": 2,
+    "average_distance": 204.0,
+    "answer": 204.0
+  },
+  "correct_value": 800,
+  "flawed_value": 8.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "mickey_runs_times",
+      "question_inputs": [
+        "johnny_runs_times",
+        "half_divisor"
+      ],
+      "solution_line_template": "Mickey runs around the block twice because half of {johnny_runs_times} is <<{johnny_runs_times}/{half_divisor}={mickey_runs_times}>>{mickey_runs_times}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "mickey_distance",
+      "question_inputs": [
+        "meters_per_block"
+      ],
+      "solution_line_template": "Mickey runs {mickey_distance} meters in total because {mickey_runs_times} times {meters_per_block} equals <<{mickey_runs_times}*{meters_per_block}={mickey_distance}>>{mickey_distance}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "johnny_distance",
+      "question_inputs": [],
+      "solution_line_template": "Johnny runs {johnny_distance} meters because {johnny_runs_times} times {meters_per_block} equals <<{johnny_runs_times}*{meters_per_block}={johnny_distance}>>{johnny_distance}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_distance",
+      "question_inputs": [],
+      "solution_line_template": "In total, they run {total_distance} meters because {mickey_distance} plus {johnny_distance} equals {total_distance}."
+    },
+    {
+      "WK_inputs": [
+        "number_of_people"
+      ],
+      "line_number": "L5",
+      "output_variable": "average_distance",
+      "question_inputs": [],
+      "solution_line_template": "On average, they run {average_distance} meters because {total_distance} divided by {number_of_people} equals <<{total_distance}/{number_of_people}={average_distance}>>{average_distance}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Mickey runs around the block twice because half of 4 is <<4/2=2>>2.",
+    "L2": "Mickey runs 400 meters in total because 2 times 200 equals <<2*200=400>>400.",
+    "L3": "Johnny runs 8 meters because 4 times 2 equals <<4*2=8>>8.",
+    "L4": "In total, they run 408 meters because 400 plus 8 equals 408.",
+    "L5": "On average, they run 204 meters because 408 divided by 2 equals <<408/2=204>>204",
+    "FA": "#### 204"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'mickey_runs_times' (2.0) was used instead of 'meters_per_block' (200).",
+  "repro_seed": 2861969765638352888,
+  "model_name": "google_gemini-2.5-flash"
+}

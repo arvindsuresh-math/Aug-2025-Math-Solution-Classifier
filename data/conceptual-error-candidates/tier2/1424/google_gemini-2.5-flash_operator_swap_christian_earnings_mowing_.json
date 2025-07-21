@@ -1,0 +1,99 @@
+{
+  "index": 1424,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "Christian just mowed 4 yards at $5.00 each so he made 4*5 = $<<4*5=20.00>>20.00",
+    "L2": "Sue just walked 6 dogs at $2.00 each so she made 6*2 = $<<6*2=12.00>>12.00",
+    "L3": "Christian had $5.00 saved and just made $20.00 while Sue had $7.00 saved and just made $12.00 so together they had 5+20+7+12 = $<<5+20+7+12=44>>44",
+    "L4": "The perfume cost $50.00 and they had $44.00 so they needed to make 50-44 = $<<50-44=6.00>>6.00 more dollars"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1424.\n    Returns: how much more money Christian and Sue need to make.\n    \"\"\"\n    # L1\n    yards_mowed_christian = 4 # mowed 4 of his neighbors' yards\n    charge_per_yard = 5.00 # charging $5.00 each\n    christian_earnings_mowing = yards_mowed_christian * charge_per_yard\n\n    # L2\n    dogs_walked_sue = 6 # walked 6 dogs\n    charge_per_dog = 2.00 # charging $2.00 per dog\n    sue_earnings_walking = dogs_walked_sue * charge_per_dog\n\n    # L3\n    christian_saved = 5.00 # Christian had $5.00 saved up\n    sue_saved = 7.00 # Sue had $7.00\n    total_money_combined = christian_saved + christian_earnings_mowing + sue_saved + sue_earnings_walking\n\n    # L4\n    perfume_cost = 50.00 # $50.00 bottle of perfume\n    money_needed = perfume_cost - total_money_combined\n\n    # FA\n    answer = money_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "christian_earnings_mowing",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30e41ef10>"
+  },
+  "correct_trace": {
+    "yards_mowed_christian": 4,
+    "charge_per_yard": 5.0,
+    "christian_earnings_mowing": 20.0,
+    "dogs_walked_sue": 6,
+    "charge_per_dog": 2.0,
+    "sue_earnings_walking": 12.0,
+    "christian_saved": 5.0,
+    "sue_saved": 7.0,
+    "total_money_combined": 44.0,
+    "perfume_cost": 50.0,
+    "money_needed": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "yards_mowed_christian": 4,
+    "charge_per_yard": 5.0,
+    "christian_earnings_mowing": 9.0,
+    "dogs_walked_sue": 6,
+    "charge_per_dog": 2.0,
+    "sue_earnings_walking": 12.0,
+    "christian_saved": 5.0,
+    "sue_saved": 7.0,
+    "total_money_combined": 33.0,
+    "perfume_cost": 50.0,
+    "money_needed": 17.0,
+    "answer": 17.0
+  },
+  "correct_value": 20.0,
+  "flawed_value": 9.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "christian_earnings_mowing",
+      "question_inputs": [
+        "yards_mowed_christian",
+        "charge_per_yard"
+      ],
+      "solution_line_template": "Christian just mowed {yards_mowed_christian} yards at ${charge_per_yard} each so he made {yards_mowed_christian}*{charge_per_yard} = $<<{yards_mowed_christian}*{charge_per_yard}={christian_earnings_mowing}>>{christian_earnings_mowing}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sue_earnings_walking",
+      "question_inputs": [
+        "dogs_walked_sue",
+        "charge_per_dog"
+      ],
+      "solution_line_template": "Sue just walked {dogs_walked_sue} dogs at ${charge_per_dog} each so she made {dogs_walked_sue}*{charge_per_dog} = $<<{dogs_walked_sue}*{charge_per_dog}={sue_earnings_walking}>>{sue_earnings_walking}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_money_combined",
+      "question_inputs": [
+        "christian_saved",
+        "sue_saved"
+      ],
+      "solution_line_template": "Christian had ${christian_saved} saved and just made ${christian_earnings_mowing} while Sue had ${sue_saved} saved and just made ${sue_earnings_walking} so together they had {christian_saved}+{christian_earnings_mowing}+{sue_saved}+{sue_earnings_walking} = $<<{christian_saved}+{christian_earnings_mowing}+{sue_saved}+{sue_earnings_walking}={total_money_combined}>>{total_money_combined}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "money_needed",
+      "question_inputs": [
+        "perfume_cost"
+      ],
+      "solution_line_template": "The perfume cost ${perfume_cost} and they had ${total_money_combined} so they needed to make {perfume_cost}-{total_money_combined} = $<<{perfume_cost}-{total_money_combined}={money_needed}>>{money_needed} more dollars"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Christian just mowed 4 yards at $5 each so he made 4*5 = $<<4*5=9>>9",
+    "L2": "Sue just walked 6 dogs at $2 each so she made 6*2 = $<<6*2=12>>12",
+    "L3": "Christian had $5 saved and just made $9 while Sue had $7 saved and just made $12 so together they had 5+9+7+12 = $<<5+9+7+12=33>>33",
+    "L4": "The perfume cost $50 and they had $33 so they needed to make 50-33 = $<<50-33=17>>17 more dollars",
+    "FA": "#### 17"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 1561473718445956724,
+  "model_name": "google_gemini-2.5-flash"
+}

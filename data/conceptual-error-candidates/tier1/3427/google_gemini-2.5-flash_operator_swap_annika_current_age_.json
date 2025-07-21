@@ -1,0 +1,74 @@
+{
+  "index": 3427,
+  "original_solution_mapping": {
+    "FA": "#### 32",
+    "L1": "In four years, Hans will be 8+4=<<8+4=12>>12 years old.",
+    "L2": "Then Annika will be 12*3=<<12*3=36>>36 years old.",
+    "L3": "So Annika right now is 36-4=<<36-4=32>>32 years old."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3427.\n    Returns: Annika's current age.\n    \"\"\"\n    # L1\n    hans_current_age = 8 # Hans is now 8 years old\n    years_in_future = 4 # In four years\n    hans_age_in_future = hans_current_age + years_in_future\n\n    # L2\n    annika_age_multiplier = 3 # three times as old as Hans\n    annika_age_in_future = hans_age_in_future * annika_age_multiplier\n\n    # L3\n    annika_current_age = annika_age_in_future - years_in_future\n\n    # FA\n    answer = annika_current_age\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "annika_current_age",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x30c8e9e90>"
+  },
+  "correct_trace": {
+    "hans_current_age": 8,
+    "years_in_future": 4,
+    "hans_age_in_future": 12,
+    "annika_age_multiplier": 3,
+    "annika_age_in_future": 36,
+    "annika_current_age": 32,
+    "answer": 32
+  },
+  "flawed_trace": {
+    "hans_current_age": 8,
+    "years_in_future": 4,
+    "hans_age_in_future": 12,
+    "annika_age_multiplier": 3,
+    "annika_age_in_future": 36,
+    "annika_current_age": 9.0,
+    "answer": 9.0
+  },
+  "correct_value": 32,
+  "flawed_value": 9.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "hans_age_in_future",
+      "question_inputs": [
+        "hans_current_age",
+        "years_in_future"
+      ],
+      "solution_line_template": "In four years, Hans will be {hans_current_age}+{years_in_future}=<<{hans_current_age}+{years_in_future}={hans_age_in_future}>>{hans_age_in_future} years old."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "annika_age_in_future",
+      "question_inputs": [
+        "annika_age_multiplier"
+      ],
+      "solution_line_template": "Then Annika will be {hans_age_in_future}*{annika_age_multiplier}=<<{hans_age_in_future}*{annika_age_multiplier}={annika_age_in_future}>>{annika_age_in_future} years old."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "annika_current_age",
+      "question_inputs": [],
+      "solution_line_template": "So Annika right now is {annika_age_in_future}-{years_in_future}=<<{annika_age_in_future}-{years_in_future}={annika_current_age}>>{annika_current_age} years old."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In four years, Hans will be 8+4=<<8+4=12>>12 years old.",
+    "L2": "Then Annika will be 12*3=<<12*3=36>>36 years old.",
+    "L3": "So Annika right now is 36-4=<<36-4=9>>9 years old.",
+    "FA": "#### 9"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": -6766339824015582472,
+  "model_name": "google_gemini-2.5-flash"
+}

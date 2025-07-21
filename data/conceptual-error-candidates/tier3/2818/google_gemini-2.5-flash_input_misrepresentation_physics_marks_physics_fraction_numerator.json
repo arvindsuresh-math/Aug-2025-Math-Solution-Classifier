@@ -1,0 +1,92 @@
+{
+  "index": 2818,
+  "original_solution_mapping": {
+    "FA": "#### 275",
+    "L1": "The total marks of science and music are 70+80 = <<70+80=150>>150",
+    "L2": "When you add the marks she scored in social studies, the full marks become 150+85 = <<150+85=235>>235.",
+    "L3": "She scored half as many marks in physics as she scored music, totaling 1/2*80 = 40 marks.",
+    "L4": "When you add the marks she scored in physics to the total marks of the other subjects, the full marks become 235+40 = <<235+40=275>>275"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2818.\n    Returns: the total marks Teresa scored in all subjects.\n    \"\"\"\n    # L1\n    science_marks = 70 # 70 marks in science\n    music_marks = 80 # 80 in music\n    science_and_music_total = science_marks + music_marks\n\n    # L2\n    social_studies_marks = 85 # 85 in social studies\n    total_after_social_studies = science_and_music_total + social_studies_marks\n\n    # L3\n    physics_fraction_numerator = 1 # half as many marks\n    physics_fraction_denominator = 2 # half as many marks\n    physics_marks = (physics_fraction_numerator / physics_fraction_denominator) * music_marks\n\n    # L4\n    final_total_marks = total_after_social_studies + physics_marks\n\n    # FA\n    answer = final_total_marks\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "physics_marks",
+    "operand_to_replace": "physics_fraction_denominator",
+    "replacement_variable": "physics_fraction_numerator"
+  },
+  "correct_trace": {
+    "science_marks": 70,
+    "music_marks": 80,
+    "science_and_music_total": 150,
+    "social_studies_marks": 85,
+    "total_after_social_studies": 235,
+    "physics_fraction_numerator": 1,
+    "physics_fraction_denominator": 2,
+    "physics_marks": 40.0,
+    "final_total_marks": 275.0,
+    "answer": 275.0
+  },
+  "flawed_trace": {
+    "science_marks": 70,
+    "music_marks": 80,
+    "science_and_music_total": 150,
+    "social_studies_marks": 85,
+    "total_after_social_studies": 235,
+    "physics_fraction_numerator": 1,
+    "physics_fraction_denominator": 2,
+    "physics_marks": 80.0,
+    "final_total_marks": 315.0,
+    "answer": 315.0
+  },
+  "correct_value": 40.0,
+  "flawed_value": 80.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "science_and_music_total",
+      "question_inputs": [
+        "science_marks",
+        "music_marks"
+      ],
+      "solution_line_template": "The total marks of science and music are {science_marks}+{music_marks} = <<{science_marks}+{music_marks}={science_and_music_total}>>{science_and_music_total}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_after_social_studies",
+      "question_inputs": [
+        "social_studies_marks"
+      ],
+      "solution_line_template": "When you add the marks she scored in social studies, the full marks become {science_and_music_total}+{social_studies_marks} = <<{science_and_music_total}+{social_studies_marks}={total_after_social_studies}>>{total_after_social_studies}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "physics_marks",
+      "question_inputs": [
+        "physics_fraction_numerator",
+        "physics_fraction_denominator"
+      ],
+      "solution_line_template": "She scored half as many marks in physics as she scored music, totaling {physics_fraction_numerator}/{physics_fraction_denominator}*{music_marks} = {physics_marks} marks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_total_marks",
+      "question_inputs": [],
+      "solution_line_template": "When you add the marks she scored in physics to the total marks of the other subjects, the full marks become {total_after_social_studies}+{physics_marks} = <<{total_after_social_studies}+{physics_marks}={final_total_marks}>>{final_total_marks}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total marks of science and music are 70+80 = <<70+80=150>>150",
+    "L2": "When you add the marks she scored in social studies, the full marks become 150+85 = <<150+85=235>>235.",
+    "L3": "She scored half as many marks in physics as she scored music, totaling 1/1*80 = 80 marks.",
+    "L4": "When you add the marks she scored in physics to the total marks of the other subjects, the full marks become 235+80 = <<235+80=315>>315",
+    "FA": "#### 315"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'physics_fraction_numerator' (1) was used instead of 'physics_fraction_denominator' (2).",
+  "repro_seed": -7683709374560572759,
+  "model_name": "google_gemini-2.5-flash"
+}

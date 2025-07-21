@@ -1,0 +1,98 @@
+{
+  "index": 5246,
+  "original_solution_mapping": {
+    "FA": "#### 171",
+    "L1": "Single dog is $20 + (10 minutes * $1 per minute) = $<<20+10*1=30>>30.",
+    "L2": "Two dogs are 2 * ($20 + (7 minutes * $1 per minute)) = $<<2*(20+7*1)=54>>54",
+    "L3": "Three dogs are 3 * ($20 + (9 minutes * $1 per minute)) = $<<3*(20+9*1)=87>>87",
+    "L4": "The total is $30 + $54 + $87 = $<<30+54+87=171>>171."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5246.\n    Returns: the total money Greg earns from dog walking.\n    \"\"\"\n    # L1\n    charge_per_dog = 20 # charges $20 per dog\n    cost_per_minute_per_dog = 1 # $1 per minute per dog\n    minutes_dog1 = 10 # walks one dog for 10 minutes\n    cost_dog1 = charge_per_dog + (minutes_dog1 * cost_per_minute_per_dog)\n\n    # L2\n    num_dogs_batch2 = 2 # two dogs\n    minutes_dog2 = 7 # for 7 minutes\n    cost_dog2 = num_dogs_batch2 * (charge_per_dog + (minutes_dog2 * cost_per_minute_per_dog))\n\n    # L3\n    num_dogs_batch3 = 3 # three dogs\n    minutes_dog3 = 9 # for 9 minutes\n    cost_dog3 = num_dogs_batch3 * (charge_per_dog + (minutes_dog3 * cost_per_minute_per_dog))\n\n    # L4\n    total_earnings = cost_dog1 + cost_dog2 + cost_dog3\n\n    # FA\n    answer = total_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_earnings",
+    "operand_to_replace": "cost_dog2",
+    "replacement_variable": "minutes_dog1"
+  },
+  "correct_trace": {
+    "charge_per_dog": 20,
+    "cost_per_minute_per_dog": 1,
+    "minutes_dog1": 10,
+    "cost_dog1": 30,
+    "num_dogs_batch2": 2,
+    "minutes_dog2": 7,
+    "cost_dog2": 54,
+    "num_dogs_batch3": 3,
+    "minutes_dog3": 9,
+    "cost_dog3": 87,
+    "total_earnings": 171,
+    "answer": 171
+  },
+  "flawed_trace": {
+    "charge_per_dog": 20,
+    "cost_per_minute_per_dog": 1,
+    "minutes_dog1": 10,
+    "cost_dog1": 30,
+    "num_dogs_batch2": 2,
+    "minutes_dog2": 7,
+    "cost_dog2": 54,
+    "num_dogs_batch3": 3,
+    "minutes_dog3": 9,
+    "cost_dog3": 87,
+    "total_earnings": 127,
+    "answer": 127
+  },
+  "correct_value": 171,
+  "flawed_value": 127,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_dog1",
+      "question_inputs": [
+        "charge_per_dog",
+        "cost_per_minute_per_dog",
+        "minutes_dog1"
+      ],
+      "solution_line_template": "Single dog is ${charge_per_dog} + ({minutes_dog1} minutes * ${cost_per_minute_per_dog} per minute) = $<<{charge_per_dog}+{minutes_dog1}*{cost_per_minute_per_dog}={cost_dog1}>>{cost_dog1}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cost_dog2",
+      "question_inputs": [
+        "num_dogs_batch2",
+        "minutes_dog2"
+      ],
+      "solution_line_template": "Two dogs are {num_dogs_batch2} * (${charge_per_dog} + ({minutes_dog2} minutes * ${cost_per_minute_per_dog} per minute)) = $<<{num_dogs_batch2}*({charge_per_dog}+{minutes_dog2}*{cost_per_minute_per_dog})={cost_dog2}>>{cost_dog2}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cost_dog3",
+      "question_inputs": [
+        "num_dogs_batch3",
+        "minutes_dog3"
+      ],
+      "solution_line_template": "Three dogs are {num_dogs_batch3} * (${charge_per_dog} + ({minutes_dog3} minutes * ${cost_per_minute_per_dog} per minute)) = $<<{num_dogs_batch3}*({charge_per_dog}+{minutes_dog3}*{cost_per_minute_per_dog})={cost_dog3}>>{cost_dog3}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_earnings",
+      "question_inputs": [],
+      "solution_line_template": "The total is ${cost_dog1} + ${cost_dog2} + ${cost_dog3} = $<<{cost_dog1}+{cost_dog2}+{cost_dog3}={total_earnings}>>{total_earnings}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Single dog is $20 + (10 minutes * $1 per minute) = $<<20+10*1=30>>30.",
+    "L2": "Two dogs are 2 * ($20 + (7 minutes * $1 per minute)) = $<<2*(20+7*1)=54>>54",
+    "L3": "Three dogs are 3 * ($20 + (9 minutes * $1 per minute)) = $<<3*(20+9*1)=87>>87",
+    "L4": "The total is $30 + $10 + $87 = $<<30+10+87=127>>127.",
+    "FA": "#### 127"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'minutes_dog1' (value: 10) was used instead of 'cost_dog2' (value: 54).",
+  "repro_seed": -2751571637848985406,
+  "model_name": "google_gemini-2.5-flash"
+}

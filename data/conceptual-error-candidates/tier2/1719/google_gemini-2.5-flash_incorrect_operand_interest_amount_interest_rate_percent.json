@@ -1,0 +1,77 @@
+{
+  "index": 1719,
+  "original_solution_mapping": {
+    "FA": "#### 120",
+    "L1": "Her card has a $150.00 balance and she makes a $50.00 payment so the new balance is 150-50 = $<<150-50=100.00>>100.00",
+    "L2": "She didn't pay it off so she is charged 20% interest on her $100.00 balance so the interest is .20*100 = $20.00",
+    "L3": "Her balance was $100.00 and she was charged $20.00 in interest so her new balance is 100+20 = $<<100+20=120.00>>120.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1719.\n    Returns: the new balance on the credit card.\n    \"\"\"\n    # L1\n    initial_balance = 150.00 # Tonya has $150.00 on her credit card.\n    payment_amount = 50.00 # she makes a $50.00 payment\n    balance_after_payment = initial_balance - payment_amount\n\n    # L2\n    interest_rate_percent = 20 # charged 20% interest\n    interest_rate_decimal = 0.20 # from solution text: .20*100\n    interest_amount = interest_rate_decimal * balance_after_payment\n\n    # L3\n    final_balance = balance_after_payment + interest_amount\n\n    # FA\n    answer = final_balance\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "interest_amount",
+    "operand_to_replace": "balance_after_payment",
+    "replacement_variable": "interest_rate_percent"
+  },
+  "correct_trace": {
+    "initial_balance": 150.0,
+    "payment_amount": 50.0,
+    "balance_after_payment": 100.0,
+    "interest_rate_percent": 20,
+    "interest_rate_decimal": 0.2,
+    "interest_amount": 20.0,
+    "final_balance": 120.0,
+    "answer": 120.0
+  },
+  "flawed_trace": {
+    "initial_balance": 150.0,
+    "payment_amount": 50.0,
+    "balance_after_payment": 100.0,
+    "interest_rate_percent": 20,
+    "interest_rate_decimal": 0.2,
+    "interest_amount": 4.0,
+    "final_balance": 104.0,
+    "answer": 104.0
+  },
+  "correct_value": 20.0,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "balance_after_payment",
+      "question_inputs": [
+        "initial_balance",
+        "payment_amount"
+      ],
+      "solution_line_template": "Her card has a ${initial_balance} balance and she makes a ${payment_amount} payment so the new balance is {initial_balance}-{payment_amount} = $<<{initial_balance}-{payment_amount}={balance_after_payment}>>{balance_after_payment}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "interest_amount",
+      "question_inputs": [
+        "interest_rate_percent",
+        "interest_rate_decimal"
+      ],
+      "solution_line_template": "She didn't pay it off so she is charged {interest_rate_percent}% interest on her ${balance_after_payment} balance so the interest is {interest_rate_decimal}*{balance_after_payment} = ${interest_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_balance",
+      "question_inputs": [],
+      "solution_line_template": "Her balance was ${balance_after_payment} and she was charged ${interest_amount} in interest so her new balance is {balance_after_payment}+{interest_amount} = $<<{balance_after_payment}+{interest_amount}={final_balance}>>{final_balance}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Her card has a $150 balance and she makes a $50 payment so the new balance is 150-50 = $<<150-50=100>>100",
+    "L2": "She didn't pay it off so she is charged 20% interest on her $20 balance so the interest is 0.2*20 = $4",
+    "L3": "Her balance was $100 and she was charged $4 in interest so her new balance is 100+4 = $<<100+4=104>>104",
+    "FA": "#### 104"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'interest_rate_percent' (value: 20) was used instead of 'balance_after_payment' (value: 100.0).",
+  "repro_seed": 8525777025430240808,
+  "model_name": "google_gemini-2.5-flash"
+}

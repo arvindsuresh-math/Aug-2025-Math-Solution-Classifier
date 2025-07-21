@@ -1,0 +1,89 @@
+{
+  "index": 6561,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "He cuts off 50/5=<<50/5=10>>10 feet",
+    "L2": "So he has 50-10=<<50-10=40>>40 feet left",
+    "L3": "He gives half away which means he has 40/2=<<40/2=20>>20 feet",
+    "L4": "So he has 20/2=<<20/2=10>>10 sections"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6561.\n    Returns: the number of 2-foot sections Bob gets from the rope.\n    \"\"\"\n    # L1\n    total_rope_length = 50 # Bob buys 50 feet of rope\n    fraction_denominator = 5 # a 5th of it\n    rope_used_for_art = total_rope_length / fraction_denominator\n\n    # L2\n    rope_remaining_after_art = total_rope_length - rope_used_for_art\n\n    # L3\n    half_divisor = 2 # half of it\n    rope_after_giving_to_friend = rope_remaining_after_art / half_divisor\n\n    # L4\n    section_length = 2 # 2-foot sections\n    number_of_sections = rope_after_giving_to_friend / section_length\n\n    # FA\n    answer = number_of_sections\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "rope_after_giving_to_friend",
+    "operand_to_replace": "half_divisor",
+    "replacement_variable": "fraction_denominator"
+  },
+  "correct_trace": {
+    "total_rope_length": 50,
+    "fraction_denominator": 5,
+    "rope_used_for_art": 10.0,
+    "rope_remaining_after_art": 40.0,
+    "half_divisor": 2,
+    "rope_after_giving_to_friend": 20.0,
+    "section_length": 2,
+    "number_of_sections": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "total_rope_length": 50,
+    "fraction_denominator": 5,
+    "rope_used_for_art": 10.0,
+    "rope_remaining_after_art": 40.0,
+    "half_divisor": 2,
+    "rope_after_giving_to_friend": 8.0,
+    "section_length": 2,
+    "number_of_sections": 4.0,
+    "answer": 4.0
+  },
+  "correct_value": 20.0,
+  "flawed_value": 8.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "rope_used_for_art",
+      "question_inputs": [
+        "total_rope_length",
+        "fraction_denominator"
+      ],
+      "solution_line_template": "He cuts off {total_rope_length}/{fraction_denominator}=<<{total_rope_length}/{fraction_denominator}={rope_used_for_art}>>{rope_used_for_art} feet"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "rope_remaining_after_art",
+      "question_inputs": [],
+      "solution_line_template": "So he has {total_rope_length}-{rope_used_for_art}=<<{total_rope_length}-{rope_used_for_art}={rope_remaining_after_art}>>{rope_remaining_after_art} feet left"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "rope_after_giving_to_friend",
+      "question_inputs": [
+        "half_divisor"
+      ],
+      "solution_line_template": "He gives half away which means he has {rope_remaining_after_art}/{half_divisor}=<<{rope_remaining_after_art}/{half_divisor}={rope_after_giving_to_friend}>>{rope_after_giving_to_friend} feet"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "number_of_sections",
+      "question_inputs": [
+        "section_length"
+      ],
+      "solution_line_template": "So he has {rope_after_giving_to_friend}/{section_length}=<<{rope_after_giving_to_friend}/{section_length}={number_of_sections}>>{number_of_sections} sections"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He cuts off 50/5=<<50/5=10>>10 feet",
+    "L2": "So he has 50-10=<<50-10=40>>40 feet left",
+    "L3": "He gives half away which means he has 40/5=<<40/5=8>>8 feet",
+    "L4": "So he has 8/2=<<8/2=4>>4 sections",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'fraction_denominator' (5) was used instead of 'half_divisor' (2).",
+  "repro_seed": -1923293794147534908,
+  "model_name": "google_gemini-2.5-flash"
+}

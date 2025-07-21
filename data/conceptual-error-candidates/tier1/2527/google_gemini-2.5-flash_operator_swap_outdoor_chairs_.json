@@ -1,0 +1,77 @@
+{
+  "index": 2527,
+  "original_solution_mapping": {
+    "FA": "#### 123",
+    "L1": "There are 9 indoor tables * 10 chairs = <<9*10=90>>90 chairs.",
+    "L2": "There are 11 outdoor tables * 3 chairs = <<11*3=33>>33 chairs.",
+    "L3": "The total number of chairs is 90 chairs + 33 chairs = <<90+33=123>>123 chairs."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2527.\n    Returns: the total number of chairs in the cafe.\n    \"\"\"\n    # L1\n    indoor_tables = 9 # 9 indoor tables\n    chairs_per_indoor_table = 10 # 10 chairs\n    indoor_chairs = indoor_tables * chairs_per_indoor_table\n\n    # L2\n    outdoor_tables = 11 # 11 outdoor tables\n    chairs_per_outdoor_table = 3 # 3 chairs\n    outdoor_chairs = outdoor_tables * chairs_per_outdoor_table\n\n    # L3\n    total_chairs = indoor_chairs + outdoor_chairs\n\n    # FA\n    answer = total_chairs\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "outdoor_chairs",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x15f3e93d0>"
+  },
+  "correct_trace": {
+    "indoor_tables": 9,
+    "chairs_per_indoor_table": 10,
+    "indoor_chairs": 90,
+    "outdoor_tables": 11,
+    "chairs_per_outdoor_table": 3,
+    "outdoor_chairs": 33,
+    "total_chairs": 123,
+    "answer": 123
+  },
+  "flawed_trace": {
+    "indoor_tables": 9,
+    "chairs_per_indoor_table": 10,
+    "indoor_chairs": 90,
+    "outdoor_tables": 11,
+    "chairs_per_outdoor_table": 3,
+    "outdoor_chairs": 14,
+    "total_chairs": 104,
+    "answer": 104
+  },
+  "correct_value": 33,
+  "flawed_value": 14,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "indoor_tables",
+        "chairs_per_indoor_table"
+      ],
+      "WK_inputs": [],
+      "output_variable": "indoor_chairs",
+      "solution_line_template": "There are {indoor_tables} indoor tables * {chairs_per_indoor_table} chairs = <<{indoor_tables}*{chairs_per_indoor_table}={indoor_chairs}>>{indoor_chairs} chairs."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "outdoor_tables",
+        "chairs_per_outdoor_table"
+      ],
+      "WK_inputs": [],
+      "output_variable": "outdoor_chairs",
+      "solution_line_template": "There are {outdoor_tables} outdoor tables * {chairs_per_outdoor_table} chairs = <<{outdoor_tables}*{chairs_per_outdoor_table}={outdoor_chairs}>>{outdoor_chairs} chairs."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_chairs",
+      "solution_line_template": "The total number of chairs is {indoor_chairs} chairs + {outdoor_chairs} chairs = <<{indoor_chairs}+{outdoor_chairs}={total_chairs}>>{total_chairs} chairs."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 9 indoor tables * 10 chairs = <<9*10=90>>90 chairs.",
+    "L2": "There are 11 outdoor tables * 3 chairs = <<11*3=14>>14 chairs.",
+    "L3": "The total number of chairs is 90 chairs + 14 chairs = <<90+14=104>>104 chairs.",
+    "FA": "#### 104"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 6735154996576050774,
+  "model_name": "google_gemini-2.5-flash"
+}

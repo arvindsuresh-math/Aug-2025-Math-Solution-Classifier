@@ -1,0 +1,90 @@
+{
+  "index": 6460,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "First we must determine the percentage of the grey and green stones. We add the two amounts together, finding 40+60=<<40+60=100>>100",
+    "L2": "We then figure out that 40/100=<<40/100=.4>>.4, meaning 40 percent of the stones are grey in the second selection.",
+    "L3": "This means that 1.0-.4= <<1.0-.4=.6>>.6, or 60 percent of the stones are green.",
+    "L4": "Since there are more green stones than grey stones, and the white and black pile have the same percentage, and there are more white stones than black stones, that means there are 60 percent white stones in the first pile.",
+    "L5": "Therefore, to find the number of white stones we multiply 100*.6= 60 white stones."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6460.\n    Returns: the number of white stones Brian has.\n    \"\"\"\n    # L1\n    grey_stones = 40 # 40 grey stones\n    green_stones = 60 # 60 green stones\n    total_grey_green_stones = grey_stones + green_stones\n\n    # L2\n    grey_percentage_decimal = grey_stones / total_grey_green_stones\n\n    # L3\n    total_percentage_decimal = 1.0 # WK\n    green_percentage_decimal = total_percentage_decimal - grey_percentage_decimal\n\n    # L5\n    total_first_collection_stones = 100 # collection of 100 stones\n    white_stones = total_first_collection_stones * green_percentage_decimal\n\n    # FA\n    answer = white_stones\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_grey_green_stones",
+    "operand_to_replace": "green_stones",
+    "replacement_variable": "grey_stones"
+  },
+  "correct_trace": {
+    "grey_stones": 40,
+    "green_stones": 60,
+    "total_grey_green_stones": 100,
+    "grey_percentage_decimal": 0.4,
+    "total_percentage_decimal": 1.0,
+    "green_percentage_decimal": 0.6,
+    "total_first_collection_stones": 100,
+    "white_stones": 60.0,
+    "answer": 60.0
+  },
+  "flawed_trace": {
+    "grey_stones": 40,
+    "green_stones": 60,
+    "total_grey_green_stones": 80,
+    "grey_percentage_decimal": 0.5,
+    "total_percentage_decimal": 1.0,
+    "green_percentage_decimal": 0.5,
+    "total_first_collection_stones": 100,
+    "white_stones": 50.0,
+    "answer": 50.0
+  },
+  "correct_value": 100,
+  "flawed_value": 80,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_grey_green_stones",
+      "question_inputs": [
+        "grey_stones",
+        "green_stones"
+      ],
+      "solution_line_template": "First we must determine the percentage of the grey and green stones. We add the two amounts together, finding {grey_stones}+{green_stones}=<<{grey_stones}+{green_stones}={total_grey_green_stones}>>{total_grey_green_stones}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "grey_percentage_decimal",
+      "question_inputs": [],
+      "solution_line_template": "We then figure out that {grey_stones}/{total_grey_green_stones}=<<{grey_stones}/{total_grey_green_stones}={grey_percentage_decimal}>>{grey_percentage_decimal}, meaning 40 percent of the stones are grey in the second selection."
+    },
+    {
+      "WK_inputs": [
+        "total_percentage_decimal"
+      ],
+      "line_number": "L3",
+      "output_variable": "green_percentage_decimal",
+      "question_inputs": [],
+      "solution_line_template": "This means that {total_percentage_decimal}-{grey_percentage_decimal}= <<{total_percentage_decimal}-{grey_percentage_decimal}={green_percentage_decimal}>>{green_percentage_decimal}, or 60 percent of the stones are green."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "white_stones",
+      "question_inputs": [
+        "total_first_collection_stones"
+      ],
+      "solution_line_template": "Therefore, to find the number of white stones we multiply {total_first_collection_stones}*{green_percentage_decimal}= {white_stones} white stones."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First we must determine the percentage of the grey and green stones. We add the two amounts together, finding 40+40=<<40+40=80>>80",
+    "L2": "We then figure out that 40/80=<<40/80=0.5>>0.5, meaning 40 percent of the stones are grey in the second selection.",
+    "L3": "This means that 1-0.5= <<1-0.5=0.5>>0.5, or 60 percent of the stones are green.",
+    "L5": "Therefore, to find the number of white stones we multiply 100*0.5= 50 white stones.",
+    "FA": "#### 50"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'grey_stones' (40) was used instead of 'green_stones' (60).",
+  "repro_seed": 8044315641399469650,
+  "model_name": "google_gemini-2.5-flash"
+}

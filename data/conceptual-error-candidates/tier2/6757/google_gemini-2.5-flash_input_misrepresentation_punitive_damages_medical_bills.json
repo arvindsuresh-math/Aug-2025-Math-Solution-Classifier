@@ -1,0 +1,107 @@
+{
+  "index": 6757,
+  "original_solution_mapping": {
+    "FA": "#### 5440000",
+    "L1": "First find the total cost of Jerry's lost salary: $50,000/year * 30 years = $<<50000*30=1500000>>1,500,000",
+    "L2": "Then add the cost of the medical bills: $1,500,000 + $200,000 = $<<1500000+200000=1700000>>1,700,000",
+    "L3": "Then triple that number to find the cost of the punitive damages: $1,700,000 * 3 = $<<1700000*3=5100000>>5,100,000",
+    "L4": "Then add the cost of the medical and salary damages to find how much Jerry asked for: $1,700,000 + $5,100,000 = $<<1700000+5100000=6800000>>6,800,000",
+    "L5": "Then multiply that number by 80% to find how much money Jerry is awarded: $6,800,000 * 80% = $<<6800000*0.8=5440000>>5,440,000"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6757.\n    Returns: the amount of money Jerry gets from the lawsuit.\n    \"\"\"\n    # L1\n    annual_salary = 50000 # $50,000 annual salary\n    years = 30 # for 30 years\n    lost_salary_total = annual_salary * years\n\n    # L2\n    medical_bills = 200000 # $200,000 in medical bills\n    salary_and_medical_damages = lost_salary_total + medical_bills\n\n    # L3\n    punitive_multiplier = 3 # triple the medical and salary damages\n    punitive_damages = salary_and_medical_damages * punitive_multiplier\n\n    # L4\n    total_asked_for = salary_and_medical_damages + punitive_damages\n\n    # L5\n    awarded_percentage_num = 80 # 80%\n    awarded_percentage_decimal = 0.8 # 80%\n    money_awarded = total_asked_for * awarded_percentage_decimal\n\n    # FA\n    answer = money_awarded\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "punitive_damages",
+    "operand_to_replace": "punitive_multiplier",
+    "replacement_variable": "medical_bills"
+  },
+  "correct_trace": {
+    "annual_salary": 50000,
+    "years": 30,
+    "lost_salary_total": 1500000,
+    "medical_bills": 200000,
+    "salary_and_medical_damages": 1700000,
+    "punitive_multiplier": 3,
+    "punitive_damages": 5100000,
+    "total_asked_for": 6800000,
+    "awarded_percentage_num": 80,
+    "awarded_percentage_decimal": 0.8,
+    "money_awarded": 5440000.0,
+    "answer": 5440000.0
+  },
+  "flawed_trace": {
+    "annual_salary": 50000,
+    "years": 30,
+    "lost_salary_total": 1500000,
+    "medical_bills": 200000,
+    "salary_and_medical_damages": 1700000,
+    "punitive_multiplier": 3,
+    "punitive_damages": 340000000000,
+    "total_asked_for": 340001700000,
+    "awarded_percentage_num": 80,
+    "awarded_percentage_decimal": 0.8,
+    "money_awarded": 272001360000.0,
+    "answer": 272001360000.0
+  },
+  "correct_value": 5100000,
+  "flawed_value": 340000000000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "lost_salary_total",
+      "question_inputs": [
+        "annual_salary",
+        "years"
+      ],
+      "solution_line_template": "First find the total cost of Jerry's lost salary: ${annual_salary}/year * {years} years = $<<{annual_salary}*{years}={lost_salary_total}>>{lost_salary_total}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "salary_and_medical_damages",
+      "question_inputs": [
+        "medical_bills"
+      ],
+      "solution_line_template": "Then add the cost of the medical bills: ${lost_salary_total} + ${medical_bills} = $<<{lost_salary_total}+{medical_bills}={salary_and_medical_damages}>>{salary_and_medical_damages}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "punitive_damages",
+      "question_inputs": [
+        "punitive_multiplier"
+      ],
+      "solution_line_template": "Then triple that number to find the cost of the punitive damages: ${salary_and_medical_damages} * {punitive_multiplier} = $<<{salary_and_medical_damages}*{punitive_multiplier}={punitive_damages}>>{punitive_damages}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_asked_for",
+      "question_inputs": [],
+      "solution_line_template": "Then add the cost of the medical and salary damages to find how much Jerry asked for: ${salary_and_medical_damages} + ${punitive_damages} = $<<{salary_and_medical_damages}+{punitive_damages}={total_asked_for}>>{total_asked_for}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "money_awarded",
+      "question_inputs": [
+        "awarded_percentage_num",
+        "awarded_percentage_decimal"
+      ],
+      "solution_line_template": "Then multiply that number by {awarded_percentage_num}% to find how much money Jerry is awarded: ${total_asked_for} * {awarded_percentage_decimal} = $<<{total_asked_for}*{awarded_percentage_decimal}={money_awarded}>>{money_awarded}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total cost of Jerry's lost salary: $50000/year * 30 years = $<<50000*30=1500000>>1500000",
+    "L2": "Then add the cost of the medical bills: $1500000 + $200000 = $<<1500000+200000=1700000>>1700000",
+    "L3": "Then triple that number to find the cost of the punitive damages: $1700000 * 200000 = $<<1700000*200000=340000000000>>340000000000",
+    "L4": "Then add the cost of the medical and salary damages to find how much Jerry asked for: $1700000 + $340000000000 = $<<1700000+340000000000=340001700000>>340001700000",
+    "L5": "Then multiply that number by 80% to find how much money Jerry is awarded: $340001700000 * 0.8 = $<<340001700000*0.8=272001360000>>272001360000",
+    "FA": "#### 272001360000"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'medical_bills' (200000) was used instead of 'punitive_multiplier' (3).",
+  "repro_seed": 1138326360800624858,
+  "model_name": "google_gemini-2.5-flash"
+}

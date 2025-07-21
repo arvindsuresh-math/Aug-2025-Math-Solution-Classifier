@@ -1,0 +1,81 @@
+{
+  "index": 4698,
+  "original_solution_mapping": {
+    "FA": "#### 80",
+    "L1": "Andrew's family consists of 1 + 2 + 2 = <<1+2+2=5>>5 people.",
+    "L2": "Each of Andrew's family members uses 100 masks / 5 = <<100/5=20>>20 masks.",
+    "L3": "With everyone wearing a mask every 4 days, the masks will last 20 masks * 4 days/mask = <<20*4=80>>80 days."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4698.\n    Returns: the number of days it will take to finish the pack of masks.\n    \"\"\"\n    # L1\n    andrew = 1 # Andrew lives with his 2 parents and 2 siblings\n    parents = 2 # Andrew lives with his 2 parents and 2 siblings\n    siblings = 2 # Andrew lives with his 2 parents and 2 siblings\n    family_members = andrew + parents + siblings\n\n    # L2\n    total_masks = 100 # buys a package of 100 masks\n    masks_per_person = total_masks / family_members\n\n    # L3\n    days_per_mask_change = 4 # All members of Andrew's family change masks every 4 days\n    total_days = masks_per_person * days_per_mask_change\n\n    # FA\n    answer = total_days\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_days",
+    "operand_to_replace": "masks_per_person",
+    "replacement_variable": "family_members"
+  },
+  "correct_trace": {
+    "andrew": 1,
+    "parents": 2,
+    "siblings": 2,
+    "family_members": 5,
+    "total_masks": 100,
+    "masks_per_person": 20.0,
+    "days_per_mask_change": 4,
+    "total_days": 80.0,
+    "answer": 80.0
+  },
+  "flawed_trace": {
+    "andrew": 1,
+    "parents": 2,
+    "siblings": 2,
+    "family_members": 5,
+    "total_masks": 100,
+    "masks_per_person": 20.0,
+    "days_per_mask_change": 4,
+    "total_days": 20,
+    "answer": 20
+  },
+  "correct_value": 80.0,
+  "flawed_value": 20,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "family_members",
+      "question_inputs": [
+        "andrew",
+        "parents",
+        "siblings"
+      ],
+      "solution_line_template": "Andrew's family consists of {andrew} + {parents} + {siblings} = <<{andrew}+{parents}+{siblings}={family_members}>>{family_members} people."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "masks_per_person",
+      "question_inputs": [
+        "total_masks"
+      ],
+      "solution_line_template": "Each of Andrew's family members uses {total_masks} masks / {family_members} = <<{total_masks}/{family_members}={masks_per_person}>>{masks_per_person} masks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_days",
+      "question_inputs": [
+        "days_per_mask_change"
+      ],
+      "solution_line_template": "With everyone wearing a mask every {days_per_mask_change} days, the masks will last {masks_per_person} masks * {days_per_mask_change} days/mask = <<{masks_per_person}*{days_per_mask_change}={total_days}>>{total_days} days."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Andrew's family consists of 1 + 2 + 2 = <<1+2+2=5>>5 people.",
+    "L2": "Each of Andrew's family members uses 100 masks / 5 = <<100/5=20>>20 masks.",
+    "L3": "With everyone wearing a mask every 4 days, the masks will last 5 masks * 4 days/mask = <<5*4=20>>20 days.",
+    "FA": "#### 20"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'family_members' (value: 5) was used instead of 'masks_per_person' (value: 20.0).",
+  "repro_seed": 4000284007506119023,
+  "model_name": "google_gemini-2.5-flash"
+}

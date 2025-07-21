@@ -1,0 +1,77 @@
+{
+  "index": 5223,
+  "original_solution_mapping": {
+    "FA": "#### 78",
+    "L1": "Spongebob earned 30 x $2 = $<<30*2=60>>60 for the burgers.",
+    "L2": "He also earned 12 x $1.5 = $<<12*1.5=18>>18 for the large fries.",
+    "L3": "Therefore, Spongebob earned $60 + $18 = $<<60+18=78>>78 for the day."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5223.\n    Returns: the total amount Spongebob will earn for the day.\n    \"\"\"\n    # L1\n    num_burgers = 30 # sells 30 burgers\n    price_per_burger = 2 # for $2 each\n    earnings_burgers = num_burgers * price_per_burger\n\n    # L2\n    num_fries = 12 # 12 large fries\n    price_per_fry = 1.5 # for $1.5\n    earnings_fries = num_fries * price_per_fry\n\n    # L3\n    total_earnings = earnings_burgers + earnings_fries\n\n    # FA\n    answer = total_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "earnings_burgers",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x30e901010>"
+  },
+  "correct_trace": {
+    "num_burgers": 30,
+    "price_per_burger": 2,
+    "earnings_burgers": 60,
+    "num_fries": 12,
+    "price_per_fry": 1.5,
+    "earnings_fries": 18.0,
+    "total_earnings": 78.0,
+    "answer": 78.0
+  },
+  "flawed_trace": {
+    "num_burgers": 30,
+    "price_per_burger": 2,
+    "earnings_burgers": 15.0,
+    "num_fries": 12,
+    "price_per_fry": 1.5,
+    "earnings_fries": 18.0,
+    "total_earnings": 33.0,
+    "answer": 33.0
+  },
+  "correct_value": 60,
+  "flawed_value": 15.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "earnings_burgers",
+      "question_inputs": [
+        "num_burgers",
+        "price_per_burger"
+      ],
+      "solution_line_template": "Spongebob earned {num_burgers} x ${price_per_burger} = $<<{num_burgers}*{price_per_burger}={earnings_burgers}>>{earnings_burgers} for the burgers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "earnings_fries",
+      "question_inputs": [
+        "num_fries",
+        "price_per_fry"
+      ],
+      "solution_line_template": "He also earned {num_fries} x ${price_per_fry} = $<<{num_fries}*{price_per_fry}={earnings_fries}>>{earnings_fries} for the large fries."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_earnings",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, Spongebob earned ${earnings_burgers} + ${earnings_fries} = $<<{earnings_burgers}+{earnings_fries}={total_earnings}>>{total_earnings} for the day."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Spongebob earned 30 x $2 = $<<30*2=15>>15 for the burgers.",
+    "L2": "He also earned 12 x $1.5 = $<<12*1.5=18>>18 for the large fries.",
+    "L3": "Therefore, Spongebob earned $15 + $18 = $<<15+18=33>>33 for the day.",
+    "FA": "#### 33"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -4589537481961465819,
+  "model_name": "google_gemini-2.5-flash"
+}

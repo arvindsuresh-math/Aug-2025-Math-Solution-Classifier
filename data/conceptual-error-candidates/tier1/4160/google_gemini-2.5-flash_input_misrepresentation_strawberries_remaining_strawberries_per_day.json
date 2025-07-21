@@ -1,0 +1,78 @@
+{
+  "index": 4160,
+  "original_solution_mapping": {
+    "FA": "#### 100",
+    "L1": "Hannah harvests a total of 5*30=<<5*30=150>>150 strawberries.",
+    "L2": "After giving her friends, Hannah is left with 150-20=<<150-20=130>>130 strawberries.",
+    "L3": "After some were stolen, Hannah is left with 130-30=<<130-30=100>>100 strawberries."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4160.\n    Returns: the number of strawberries Hannah has by the end of April.\n    \"\"\"\n    # L1\n    strawberries_per_day = 5 # harvests 5 strawberries daily\n    days_in_april = 30 # month of April, which has 30 days\n    total_harvested_strawberries = strawberries_per_day * days_in_april\n\n    # L2\n    given_to_friends = 20 # gives away 20 strawberries to her friends\n    strawberries_after_giving = total_harvested_strawberries - given_to_friends\n\n    # L3\n    stolen_strawberries = 30 # 30 strawberries are stolen\n    strawberries_remaining = strawberries_after_giving - stolen_strawberries\n\n    # FA\n    answer = strawberries_remaining\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "strawberries_remaining",
+    "operand_to_replace": "stolen_strawberries",
+    "replacement_variable": "strawberries_per_day"
+  },
+  "correct_trace": {
+    "strawberries_per_day": 5,
+    "days_in_april": 30,
+    "total_harvested_strawberries": 150,
+    "given_to_friends": 20,
+    "strawberries_after_giving": 130,
+    "stolen_strawberries": 30,
+    "strawberries_remaining": 100,
+    "answer": 100
+  },
+  "flawed_trace": {
+    "strawberries_per_day": 5,
+    "days_in_april": 30,
+    "total_harvested_strawberries": 150,
+    "given_to_friends": 20,
+    "strawberries_after_giving": 130,
+    "stolen_strawberries": 30,
+    "strawberries_remaining": 125,
+    "answer": 125
+  },
+  "correct_value": 100,
+  "flawed_value": 125,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_harvested_strawberries",
+      "question_inputs": [
+        "strawberries_per_day",
+        "days_in_april"
+      ],
+      "solution_line_template": "Hannah harvests a total of {strawberries_per_day}*{days_in_april}=<<{strawberries_per_day}*{days_in_april}={total_harvested_strawberries}>>{total_harvested_strawberries} strawberries."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "strawberries_after_giving",
+      "question_inputs": [
+        "given_to_friends"
+      ],
+      "solution_line_template": "After giving her friends, Hannah is left with {total_harvested_strawberries}-{given_to_friends}=<<{total_harvested_strawberries}-{given_to_friends}={strawberries_after_giving}>>{strawberries_after_giving} strawberries."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "strawberries_remaining",
+      "question_inputs": [
+        "stolen_strawberries"
+      ],
+      "solution_line_template": "After some were stolen, Hannah is left with {strawberries_after_giving}-{stolen_strawberries}=<<{strawberries_after_giving}-{stolen_strawberries}={strawberries_remaining}>>{strawberries_remaining} strawberries."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Hannah harvests a total of 5*30=<<5*30=150>>150 strawberries.",
+    "L2": "After giving her friends, Hannah is left with 150-20=<<150-20=130>>130 strawberries.",
+    "L3": "After some were stolen, Hannah is left with 130-5=<<130-5=125>>125 strawberries.",
+    "FA": "#### 125"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'strawberries_per_day' (5) was used instead of 'stolen_strawberries' (30).",
+  "repro_seed": -4587200069302988170,
+  "model_name": "google_gemini-2.5-flash"
+}

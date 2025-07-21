@@ -1,0 +1,89 @@
+{
+  "index": 676,
+  "original_solution_mapping": {
+    "FA": "#### 54",
+    "L1": "It cost 2*1.5=$<<2*1.5=3>>3 a day.",
+    "L2": "So it cost 3*30=$<<3*30=90>>90 per day.",
+    "L3": "Insurance covers 90*.4=$<<90*.4=36>>36.",
+    "L4": "So he pays 90-36=$<<90-36=54>>54 a month."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 676.\n    Returns: the amount John pays for pills in a 30-day month.\n    \"\"\"\n    # L1\n    pills_per_day = 2 # 2 pills a day\n    cost_per_pill = 1.5 # One pill costs $1.5\n    daily_cost = pills_per_day * cost_per_pill\n\n    # L2\n    days_in_month = 30 # a 30-day month\n    monthly_cost_before_insurance = daily_cost * days_in_month\n\n    # L3\n    insurance_coverage_percent = 0.4 # covers 40% of the cost\n    insurance_coverage_amount = monthly_cost_before_insurance * insurance_coverage_percent\n\n    # L4\n    final_monthly_payment = monthly_cost_before_insurance - insurance_coverage_amount\n\n    # FA\n    answer = final_monthly_payment\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "insurance_coverage_amount",
+    "operand_to_replace": "monthly_cost_before_insurance",
+    "replacement_variable": "days_in_month"
+  },
+  "correct_trace": {
+    "pills_per_day": 2,
+    "cost_per_pill": 1.5,
+    "daily_cost": 3.0,
+    "days_in_month": 30,
+    "monthly_cost_before_insurance": 90.0,
+    "insurance_coverage_percent": 0.4,
+    "insurance_coverage_amount": 36.0,
+    "final_monthly_payment": 54.0,
+    "answer": 54.0
+  },
+  "flawed_trace": {
+    "pills_per_day": 2,
+    "cost_per_pill": 1.5,
+    "daily_cost": 3.0,
+    "days_in_month": 30,
+    "monthly_cost_before_insurance": 90.0,
+    "insurance_coverage_percent": 0.4,
+    "insurance_coverage_amount": 12.0,
+    "final_monthly_payment": 78.0,
+    "answer": 78.0
+  },
+  "correct_value": 36.0,
+  "flawed_value": 12.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "daily_cost",
+      "question_inputs": [
+        "pills_per_day",
+        "cost_per_pill"
+      ],
+      "solution_line_template": "It cost {pills_per_day}*{cost_per_pill}=$<<{pills_per_day}*{cost_per_pill}={daily_cost}>>{daily_cost} a day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "monthly_cost_before_insurance",
+      "question_inputs": [
+        "days_in_month"
+      ],
+      "solution_line_template": "So it cost {daily_cost}*{days_in_month}=$<<{daily_cost}*{days_in_month}={monthly_cost_before_insurance}>>{monthly_cost_before_insurance} per day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "insurance_coverage_amount",
+      "question_inputs": [
+        "insurance_coverage_percent"
+      ],
+      "solution_line_template": "Insurance covers {monthly_cost_before_insurance}*{insurance_coverage_percent}=$<<{monthly_cost_before_insurance}*{insurance_coverage_percent}={insurance_coverage_amount}>>{insurance_coverage_amount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_monthly_payment",
+      "question_inputs": [],
+      "solution_line_template": "So he pays {monthly_cost_before_insurance}-{insurance_coverage_amount}=$<<{monthly_cost_before_insurance}-{insurance_coverage_amount}={final_monthly_payment}>>{final_monthly_payment} a month."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "It cost 2*1.5=$<<2*1.5=3>>3 a day.",
+    "L2": "So it cost 3*30=$<<3*30=90>>90 per day.",
+    "L3": "Insurance covers 30*0.4=$<<30*0.4=12>>12.",
+    "L4": "So he pays 90-12=$<<90-12=78>>78 a month.",
+    "FA": "#### 78"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'days_in_month' (value: 30) was used instead of 'monthly_cost_before_insurance' (value: 90.0).",
+  "repro_seed": -2874719308569913154,
+  "model_name": "google_gemini-2.5-flash"
+}

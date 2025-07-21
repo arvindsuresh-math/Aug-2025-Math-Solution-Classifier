@@ -1,0 +1,74 @@
+{
+  "index": 4845,
+  "original_solution_mapping": {
+    "FA": "#### 150",
+    "L1": "The wallet costs $60 more than the food, so it's $30 + $60 = $<<30+60=90>>90.",
+    "L2": "So the cost of the shirt is 1/3 * $90 = $<<1/3*90=30>>30.",
+    "L3": "Mike spent that day $30 + $30 + $90 = $<<30+30+90=150>>150."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4845.\n    Returns: the total amount Mike spent on shopping that day.\n    \"\"\"\n    # L1\n    food_cost = 30 # Mike spent $30\n    wallet_more_than_food = 60 # The wallet is $60 more than the cost of the food\n    wallet_cost = food_cost + wallet_more_than_food\n\n    # L2\n    shirt_fraction = Fraction(1, 3) # The shirt costs a third of the value of the wallet\n    shirt_cost = shirt_fraction * wallet_cost\n\n    # L3\n    total_spent = food_cost + shirt_cost + wallet_cost\n\n    # FA\n    answer = total_spent\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "wallet_cost",
+    "operand_to_replace": "wallet_more_than_food",
+    "replacement_variable": "food_cost"
+  },
+  "correct_trace": {
+    "food_cost": 30,
+    "wallet_more_than_food": 60,
+    "wallet_cost": 90,
+    "shirt_fraction": "1/3",
+    "shirt_cost": "30",
+    "total_spent": "150",
+    "answer": "150"
+  },
+  "flawed_trace": {
+    "food_cost": 30,
+    "wallet_more_than_food": 60,
+    "wallet_cost": 60,
+    "shirt_fraction": "1/3",
+    "shirt_cost": "20",
+    "total_spent": "110",
+    "answer": "110"
+  },
+  "correct_value": 90,
+  "flawed_value": 60,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "wallet_cost",
+      "question_inputs": [
+        "food_cost",
+        "wallet_more_than_food"
+      ],
+      "solution_line_template": "The wallet costs ${wallet_more_than_food} more than the food, so it's ${food_cost} + ${wallet_more_than_food} = $<<{food_cost}+{wallet_more_than_food}={wallet_cost}>>{wallet_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "shirt_cost",
+      "question_inputs": [
+        "shirt_fraction"
+      ],
+      "solution_line_template": "So the cost of the shirt is {shirt_fraction} * ${wallet_cost} = $<<{shirt_fraction}*{wallet_cost}={shirt_cost}>>{shirt_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_spent",
+      "question_inputs": [],
+      "solution_line_template": "Mike spent that day ${food_cost} + ${shirt_cost} + ${wallet_cost} = $<<{food_cost}+{shirt_cost}+{wallet_cost}={total_spent}>>{total_spent}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The wallet costs $30 more than the food, so it's $30 + $30 = $<<30+30=60>>60.",
+    "L2": "So the cost of the shirt is 1/3 * $60 = $<<1/3*60=20>>20.",
+    "L3": "Mike spent that day $30 + $20 + $60 = $<<30+20+60=110>>110.",
+    "FA": "#### 110"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'food_cost' (30) was used instead of 'wallet_more_than_food' (60).",
+  "repro_seed": 8954203616798323382,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,94 @@
+{
+  "index": 1569,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "The perimeter of the lake is 4*15=<<4*15=60>>60 miles",
+    "L2": "He swims at a speed of 60/20=<<60/20=3>>3 mph",
+    "L3": "So he rows at a speed of 3*2=<<3*2=6>>6 mph",
+    "L4": "That means it takes him 60/6=<<60/6=10>>10 hours to row around the lake"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1569.\n    Returns: the time in hours it takes to row the lake.\n    \"\"\"\n    # L1\n    side_length = 15 # Each side of the lake is 15 miles\n    sides_of_square = 4 # WK\n    perimeter = sides_of_square * side_length\n\n    # L2\n    minutes_per_hour = 60 # WK\n    swim_time_minutes_per_mile = 20 # 20 minutes to swim 1 mile\n    swim_speed_mph = minutes_per_hour / swim_time_minutes_per_mile\n\n    # L3\n    rowing_speed_multiplier = 2 # twice the speed he can swim\n    row_speed_mph = swim_speed_mph * rowing_speed_multiplier\n\n    # L4\n    time_to_row_lake_hours = perimeter / row_speed_mph\n\n    # FA\n    answer = time_to_row_lake_hours\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "swim_speed_mph",
+    "operand_to_replace": "swim_time_minutes_per_mile",
+    "replacement_variable": "perimeter"
+  },
+  "correct_trace": {
+    "side_length": 15,
+    "sides_of_square": 4,
+    "perimeter": 60,
+    "minutes_per_hour": 60,
+    "swim_time_minutes_per_mile": 20,
+    "swim_speed_mph": 3.0,
+    "rowing_speed_multiplier": 2,
+    "row_speed_mph": 6.0,
+    "time_to_row_lake_hours": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "side_length": 15,
+    "sides_of_square": 4,
+    "perimeter": 60,
+    "minutes_per_hour": 60,
+    "swim_time_minutes_per_mile": 20,
+    "swim_speed_mph": 1.0,
+    "rowing_speed_multiplier": 2,
+    "row_speed_mph": 2.0,
+    "time_to_row_lake_hours": 30.0,
+    "answer": 30.0
+  },
+  "correct_value": 3.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "sides_of_square"
+      ],
+      "line_number": "L1",
+      "output_variable": "perimeter",
+      "question_inputs": [
+        "side_length"
+      ],
+      "solution_line_template": "The perimeter of the lake is {sides_of_square}*{side_length}=<<{sides_of_square}*{side_length}={perimeter}>>{perimeter} miles"
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L2",
+      "output_variable": "swim_speed_mph",
+      "question_inputs": [
+        "swim_time_minutes_per_mile"
+      ],
+      "solution_line_template": "He swims at a speed of {minutes_per_hour}/{swim_time_minutes_per_mile}=<<{minutes_per_hour}/{swim_time_minutes_per_mile}={swim_speed_mph}>>{swim_speed_mph} mph"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "row_speed_mph",
+      "question_inputs": [
+        "rowing_speed_multiplier"
+      ],
+      "solution_line_template": "So he rows at a speed of {swim_speed_mph}*{rowing_speed_multiplier}=<<{swim_speed_mph}*{rowing_speed_multiplier}={row_speed_mph}>>{row_speed_mph} mph"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "time_to_row_lake_hours",
+      "question_inputs": [],
+      "solution_line_template": "That means it takes him {perimeter}/{row_speed_mph}=<<{perimeter}/{row_speed_mph}={time_to_row_lake_hours}>>{time_to_row_lake_hours} hours to row around the lake"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The perimeter of the lake is 4*15=<<4*15=60>>60 miles",
+    "L2": "He swims at a speed of 60/60=<<60/60=1>>1 mph",
+    "L3": "So he rows at a speed of 1*2=<<1*2=2>>2 mph",
+    "L4": "That means it takes him 60/2=<<60/2=30>>30 hours to row around the lake",
+    "FA": "#### 30"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'perimeter' (60) was used instead of 'swim_time_minutes_per_mile' (20).",
+  "repro_seed": 6412112641572228332,
+  "model_name": "google_gemini-2.5-flash"
+}

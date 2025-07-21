@@ -1,0 +1,74 @@
+{
+  "index": 472,
+  "original_solution_mapping": {
+    "FA": "#### 11",
+    "L1": "The tree has been planted for 9 - 4 = <<9-4=5>>5 years",
+    "L2": "It will take another 7 - 5 = <<7-5=2>>2 years for it to bear fruit",
+    "L3": "Lydia will be 9 + 2 = <<9+2=11>>11 years old"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 472.\n    Returns: Lydia's age when she gets to eat an apple from her tree for the first time.\n    \"\"\"\n    # L1\n    lydia_current_age = 9 # is now 9 years old\n    lydia_age_when_planted = 4 # when she was 4 years old\n    years_tree_planted = lydia_current_age - lydia_age_when_planted\n\n    # L2\n    years_to_bear_fruit_total = 7 # takes 7 years for an apple tree to bear fruit\n    years_remaining_to_bear_fruit = years_to_bear_fruit_total - years_tree_planted\n\n    # L3\n    lydia_age_when_fruit_bears = lydia_current_age + years_remaining_to_bear_fruit\n\n    # FA\n    answer = lydia_age_when_fruit_bears\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "years_remaining_to_bear_fruit",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30c868d90>"
+  },
+  "correct_trace": {
+    "lydia_current_age": 9,
+    "lydia_age_when_planted": 4,
+    "years_tree_planted": 5,
+    "years_to_bear_fruit_total": 7,
+    "years_remaining_to_bear_fruit": 2,
+    "lydia_age_when_fruit_bears": 11,
+    "answer": 11
+  },
+  "flawed_trace": {
+    "lydia_current_age": 9,
+    "lydia_age_when_planted": 4,
+    "years_tree_planted": 5,
+    "years_to_bear_fruit_total": 7,
+    "years_remaining_to_bear_fruit": 12,
+    "lydia_age_when_fruit_bears": 21,
+    "answer": 21
+  },
+  "correct_value": 2,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "lydia_current_age",
+        "lydia_age_when_planted"
+      ],
+      "WK_inputs": [],
+      "output_variable": "years_tree_planted",
+      "solution_line_template": "The tree has been planted for {lydia_current_age} - {lydia_age_when_planted} = <<{lydia_current_age}-{lydia_age_when_planted}={years_tree_planted}>>{years_tree_planted} years"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "years_to_bear_fruit_total"
+      ],
+      "WK_inputs": [],
+      "output_variable": "years_remaining_to_bear_fruit",
+      "solution_line_template": "It will take another {years_to_bear_fruit_total} - {years_tree_planted} = <<{years_to_bear_fruit_total}-{years_tree_planted}={years_remaining_to_bear_fruit}>>{years_remaining_to_bear_fruit} years for it to bear fruit"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "lydia_age_when_fruit_bears",
+      "solution_line_template": "Lydia will be {lydia_current_age} + {years_remaining_to_bear_fruit} = <<{lydia_current_age}+{years_remaining_to_bear_fruit}={lydia_age_when_fruit_bears}>>{lydia_age_when_fruit_bears} years old"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The tree has been planted for 9 - 4 = <<9-4=5>>5 years",
+    "L2": "It will take another 7 - 5 = <<7-5=12>>12 years for it to bear fruit",
+    "L3": "Lydia will be 9 + 12 = <<9+12=21>>21 years old",
+    "FA": "#### 21"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 1400074496517539150,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,81 @@
+{
+  "index": 5035,
+  "original_solution_mapping": {
+    "FA": "#### 363",
+    "L1": "After the first month you get 10/100 * $300 = $<<10/100*300=30>>30 interest.",
+    "L2": "After the first month you will have $300 + $30 = $<<300+30=330>>330 in total.",
+    "L3": "After the second month you get = 10/100 * $330 = $<<10/100*330=33>>33 interest.",
+    "L4": "After the second month you will have $330 + $33 = $<<330+33=363>>363 in total."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5035.\n    Returns: the total amount of money after 2 months, including interest.\n    \"\"\"\n    # L1\n    interest_rate_fraction = Fraction(10, 100) # 10 percent interest\n    initial_investment = 300 # invest $300\n    interest_month1 = interest_rate_fraction * initial_investment\n\n    # L2\n    total_after_month1 = initial_investment + interest_month1\n\n    # L3\n    interest_month2 = interest_rate_fraction * total_after_month1\n\n    # L4\n    total_after_month2 = total_after_month1 + interest_month2\n\n    # FA\n    answer = total_after_month2\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "interest_month1",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x3090db810>"
+  },
+  "correct_trace": {
+    "interest_rate_fraction": "1/10",
+    "initial_investment": 300,
+    "interest_month1": "30",
+    "total_after_month1": "330",
+    "interest_month2": "33",
+    "total_after_month2": "363",
+    "answer": "363"
+  },
+  "flawed_trace": {
+    "interest_rate_fraction": "1/10",
+    "initial_investment": 300,
+    "interest_month1": "3001/10",
+    "total_after_month1": "6001/10",
+    "interest_month2": "6001/100",
+    "total_after_month2": "66011/100",
+    "answer": "66011/100"
+  },
+  "correct_value": "30",
+  "flawed_value": "3001/10",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "interest_month1",
+      "question_inputs": [
+        "interest_rate_fraction",
+        "initial_investment"
+      ],
+      "solution_line_template": "After the first month you get {interest_rate_fraction} * ${initial_investment} = $<<{interest_rate_fraction}*{initial_investment}={interest_month1}>>{interest_month1} interest."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_after_month1",
+      "question_inputs": [],
+      "solution_line_template": "After the first month you will have ${initial_investment} + ${interest_month1} = $<<{initial_investment}+{interest_month1}={total_after_month1}>>{total_after_month1} in total."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "interest_month2",
+      "question_inputs": [],
+      "solution_line_template": "After the second month you get = {interest_rate_fraction} * ${total_after_month1} = $<<{interest_rate_fraction}*{total_after_month1}={interest_month2}>>{interest_month2} interest."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_after_month2",
+      "question_inputs": [],
+      "solution_line_template": "After the second month you will have ${total_after_month1} + ${interest_month2} = $<<{total_after_month1}+{interest_month2}={total_after_month2}>>{total_after_month2} in total."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After the first month you get 10/100 * $300 = $<<10/100*300=3001/10>>3001/10 interest.",
+    "L2": "After the first month you will have $300 + $3001/10 = $<<300+3001/10=6001/10>>6001/10 in total.",
+    "L3": "After the second month you get = 10/100 * $6001/10 = $<<10/100*6001/10=6001/100>>6001/100 interest.",
+    "L4": "After the second month you will have $6001/10 + $6001/100 = $<<6001/10+6001/100=66011/100>>66011/100 in total.",
+    "FA": "#### 66011/100"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -4412569414796083032,
+  "model_name": "google_gemini-2.5-flash"
+}

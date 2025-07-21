@@ -1,0 +1,74 @@
+{
+  "index": 2313,
+  "original_solution_mapping": {
+    "FA": "#### 72",
+    "L1": "If in eight years Brian will be 40 years old, he is currently 40-8 = <<40-8=32>>32 years old.",
+    "L2": "Since Christian is twice as old as Brian, he is 2*32 = <<2*32=64>>64 years old.",
+    "L3": "In 8 years, Christian will be 64+8 = <<64+8=72>>72 years old."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2313.\n    Returns: Christian's age in eight years.\n    \"\"\"\n    # L1\n    brian_future_age = 40 # Brian will be 40 years old\n    years_in_future = 8 # In eight more years\n    brian_current_age = brian_future_age - years_in_future\n\n    # L2\n    christian_age_multiplier = 2 # Christian is twice as old as Brian\n    christian_current_age = christian_age_multiplier * brian_current_age\n\n    # L3\n    christian_future_age = christian_current_age + years_in_future\n\n    # FA\n    answer = christian_future_age\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "christian_current_age",
+    "operand_to_replace": "christian_age_multiplier",
+    "replacement_variable": "brian_current_age"
+  },
+  "correct_trace": {
+    "brian_future_age": 40,
+    "years_in_future": 8,
+    "brian_current_age": 32,
+    "christian_age_multiplier": 2,
+    "christian_current_age": 64,
+    "christian_future_age": 72,
+    "answer": 72
+  },
+  "flawed_trace": {
+    "brian_future_age": 40,
+    "years_in_future": 8,
+    "brian_current_age": 32,
+    "christian_age_multiplier": 2,
+    "christian_current_age": 1024,
+    "christian_future_age": 1032,
+    "answer": 1032
+  },
+  "correct_value": 64,
+  "flawed_value": 1024,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "brian_future_age",
+        "years_in_future"
+      ],
+      "WK_inputs": [],
+      "output_variable": "brian_current_age",
+      "solution_line_template": "If in eight years Brian will be {brian_future_age} years old, he is currently {brian_future_age}-{years_in_future} = <<{brian_future_age}-{years_in_future}={brian_current_age}>>{brian_current_age} years old."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "christian_age_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "christian_current_age",
+      "solution_line_template": "Since Christian is twice as old as Brian, he is {christian_age_multiplier}*{brian_current_age} = <<{christian_age_multiplier}*{brian_current_age}={christian_current_age}>>{christian_current_age} years old."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "christian_future_age",
+      "solution_line_template": "In {years_in_future} years, Christian will be {christian_current_age}+{years_in_future} = <<{christian_current_age}+{years_in_future}={christian_future_age}>>{christian_future_age} years old."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If in eight years Brian will be 40 years old, he is currently 40-8 = <<40-8=32>>32 years old.",
+    "L2": "Since Christian is twice as old as Brian, he is 32*32 = <<32*32=1024>>1024 years old.",
+    "L3": "In 8 years, Christian will be 1024+8 = <<1024+8=1032>>1032 years old.",
+    "FA": "#### 1032"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'brian_current_age' (32) was used instead of 'christian_age_multiplier' (2).",
+  "repro_seed": -4574303030608501855,
+  "model_name": "google_gemini-2.5-flash"
+}

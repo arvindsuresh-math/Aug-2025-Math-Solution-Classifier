@@ -1,0 +1,74 @@
+{
+  "index": 4186,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "He bought 40/5=<<40/5=8>>8 boxes",
+    "L2": "He loses an average of 5-3.5=$<<5-3.5=1.50>>1.50 per box",
+    "L3": "So he loses an average of 1.5*8=$<<1.5*8=12>>12"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4186.\n    Returns: the average amount John lost.\n    \"\"\"\n    # L1\n    total_spent = 40 # He spends $40 on loot boxes\n    cost_per_box = 5 # loot boxes for $5 each\n    num_boxes = total_spent / cost_per_box\n\n    # L2\n    average_item_value = 3.5 # The average value of items inside is $3.5\n    loss_per_box = cost_per_box - average_item_value\n\n    # L3\n    total_loss = loss_per_box * num_boxes\n\n    # FA\n    answer = total_loss\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_loss",
+    "operand_to_replace": "loss_per_box",
+    "replacement_variable": "average_item_value"
+  },
+  "correct_trace": {
+    "total_spent": 40,
+    "cost_per_box": 5,
+    "num_boxes": 8.0,
+    "average_item_value": 3.5,
+    "loss_per_box": 1.5,
+    "total_loss": 12.0,
+    "answer": 12.0
+  },
+  "flawed_trace": {
+    "total_spent": 40,
+    "cost_per_box": 5,
+    "num_boxes": 8.0,
+    "average_item_value": 3.5,
+    "loss_per_box": 1.5,
+    "total_loss": 28.0,
+    "answer": 28.0
+  },
+  "correct_value": 12.0,
+  "flawed_value": 28.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "num_boxes",
+      "question_inputs": [
+        "total_spent",
+        "cost_per_box"
+      ],
+      "solution_line_template": "He bought {total_spent}/{cost_per_box}=<<{total_spent}/{cost_per_box}={num_boxes}>>{num_boxes} boxes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "loss_per_box",
+      "question_inputs": [
+        "average_item_value"
+      ],
+      "solution_line_template": "He loses an average of {cost_per_box}-{average_item_value}=$<<{cost_per_box}-{average_item_value}={loss_per_box}>>{loss_per_box} per box"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_loss",
+      "question_inputs": [],
+      "solution_line_template": "So he loses an average of {loss_per_box}*{num_boxes}=$<<{loss_per_box}*{num_boxes}={total_loss}>>{total_loss}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He bought 40/5=<<40/5=8>>8 boxes",
+    "L2": "He loses an average of 5-3.5=$<<5-3.5=1.5>>1.5 per box",
+    "L3": "So he loses an average of 3.5*8=$<<3.5*8=28>>28",
+    "FA": "#### 28"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'average_item_value' (value: 3.5) was used instead of 'loss_per_box' (value: 1.5).",
+  "repro_seed": 5374587267694096141,
+  "model_name": "google_gemini-2.5-flash"
+}

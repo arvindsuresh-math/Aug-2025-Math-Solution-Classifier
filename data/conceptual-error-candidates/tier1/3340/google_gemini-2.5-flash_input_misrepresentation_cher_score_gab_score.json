@@ -1,0 +1,89 @@
+{
+  "index": 3340,
+  "original_solution_mapping": {
+    "FA": "#### 55",
+    "L1": "Gab scored 20 x 2 = <<20*2=40>>40 points.",
+    "L2": "Cher scored 40 x 2 = <<40*2=80>>80 points.",
+    "L3": "Their team scored 20 + 40 + 80 = <<20+40+80=140>>140 points.",
+    "L4": "Therefore, they scored 140 - 85 = <<140-85=55>>55 more points than their opponent."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3340.\n    Returns: the difference in points between their team and their opponent.\n    \"\"\"\n    # L1\n    sammy_score = 20 # Sammy scored 20 points\n    gab_multiplier = 2 # twice as many as Sammy's score\n    gab_score = sammy_score * gab_multiplier\n\n    # L2\n    cher_multiplier = 2 # twice as many as Gab's score\n    cher_score = gab_score * cher_multiplier\n\n    # L3\n    team_score = sammy_score + gab_score + cher_score\n\n    # L4\n    opponent_score = 85 # their opponent scored 85 points\n    point_difference = team_score - opponent_score\n\n    # FA\n    answer = point_difference\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "cher_score",
+    "operand_to_replace": "cher_multiplier",
+    "replacement_variable": "gab_score"
+  },
+  "correct_trace": {
+    "sammy_score": 20,
+    "gab_multiplier": 2,
+    "gab_score": 40,
+    "cher_multiplier": 2,
+    "cher_score": 80,
+    "team_score": 140,
+    "opponent_score": 85,
+    "point_difference": 55,
+    "answer": 55
+  },
+  "flawed_trace": {
+    "sammy_score": 20,
+    "gab_multiplier": 2,
+    "gab_score": 40,
+    "cher_multiplier": 2,
+    "cher_score": 1600,
+    "team_score": 1660,
+    "opponent_score": 85,
+    "point_difference": 1575,
+    "answer": 1575
+  },
+  "correct_value": 80,
+  "flawed_value": 1600,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "gab_score",
+      "question_inputs": [
+        "sammy_score",
+        "gab_multiplier"
+      ],
+      "solution_line_template": "Gab scored {sammy_score} x {gab_multiplier} = <<{sammy_score}*{gab_multiplier}={gab_score}>>{gab_score} points."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cher_score",
+      "question_inputs": [
+        "cher_multiplier"
+      ],
+      "solution_line_template": "Cher scored {gab_score} x {cher_multiplier} = <<{gab_score}*{cher_multiplier}={cher_score}>>{cher_score} points."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "team_score",
+      "question_inputs": [],
+      "solution_line_template": "Their team scored {sammy_score} + {gab_score} + {cher_score} = <<{sammy_score}+{gab_score}+{cher_score}={team_score}>>{team_score} points."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "point_difference",
+      "question_inputs": [
+        "opponent_score"
+      ],
+      "solution_line_template": "Therefore, they scored {team_score} - {opponent_score} = <<{team_score}-{opponent_score}={point_difference}>>{point_difference} more points than their opponent."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Gab scored 20 x 2 = <<20*2=40>>40 points.",
+    "L2": "Cher scored 40 x 40 = <<40*40=1600>>1600 points.",
+    "L3": "Their team scored 20 + 40 + 1600 = <<20+40+1600=1660>>1660 points.",
+    "L4": "Therefore, they scored 1660 - 85 = <<1660-85=1575>>1575 more points than their opponent.",
+    "FA": "#### 1575"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'gab_score' (40) was used instead of 'cher_multiplier' (2).",
+  "repro_seed": 1748177238032122626,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,110 @@
+{
+  "index": 242,
+  "original_solution_mapping": {
+    "FA": "#### 36",
+    "L1": "Ann had 3 dozen oatmeal cookies - 2 dozen = <<3-2=1>>1 dozen oatmeal cookies left.",
+    "L2": "Ann had 2 dozen sugar cookies - 1.5 dozen = <<2-1.5=.5>>.5 dozen sugar cookies left.",
+    "L3": "Ann had 4 dozen chocolate chip cookies - 2.5 dozen = 1.5 dozen chocolate chip cookies left.",
+    "L4": "Ann has a total of 1 + .5 + 1.5 dozen cookies = <<1+.5+1.5=3>>3 dozen cookies.",
+    "L5": "3 dozen cookies is 3 *12 cookies = <<3*12=36>>36 cookies remaining."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 242.\n    Returns: the total number of cookies Ann keeps.\n    \"\"\"\n    # L1\n    oatmeal_baked_dozens = 3 # three dozen oatmeal raisin cookies\n    oatmeal_given_dozens = 2 # two dozen oatmeal raisin cookies\n    oatmeal_left_dozens = oatmeal_baked_dozens - oatmeal_given_dozens\n\n    # L2\n    sugar_baked_dozens = 2 # two dozen sugar cookies\n    sugar_given_dozens = 1.5 # 1.5 dozen sugar cookies\n    sugar_left_dozens = sugar_baked_dozens - sugar_given_dozens\n\n    # L3\n    chocolate_chip_baked_dozens = 4 # four dozen chocolate chip cookies\n    chocolate_chip_given_dozens = 2.5 # 2.5 dozen chocolate chip cookies\n    chocolate_chip_left_dozens = chocolate_chip_baked_dozens - chocolate_chip_given_dozens\n\n    # L4\n    total_dozens_kept = oatmeal_left_dozens + sugar_left_dozens + chocolate_chip_left_dozens\n\n    # L5\n    dozen = 12 # WK\n    total_cookies_kept = total_dozens_kept * dozen\n\n    # FA\n    answer = total_cookies_kept\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cookies_kept",
+    "operand_to_replace": "dozen",
+    "replacement_variable": "sugar_baked_dozens"
+  },
+  "correct_trace": {
+    "oatmeal_baked_dozens": 3,
+    "oatmeal_given_dozens": 2,
+    "oatmeal_left_dozens": 1,
+    "sugar_baked_dozens": 2,
+    "sugar_given_dozens": 1.5,
+    "sugar_left_dozens": 0.5,
+    "chocolate_chip_baked_dozens": 4,
+    "chocolate_chip_given_dozens": 2.5,
+    "chocolate_chip_left_dozens": 1.5,
+    "total_dozens_kept": 3.0,
+    "dozen": 12,
+    "total_cookies_kept": 36.0,
+    "answer": 36.0
+  },
+  "flawed_trace": {
+    "oatmeal_baked_dozens": 3,
+    "oatmeal_given_dozens": 2,
+    "oatmeal_left_dozens": 1,
+    "sugar_baked_dozens": 2,
+    "sugar_given_dozens": 1.5,
+    "sugar_left_dozens": 0.5,
+    "chocolate_chip_baked_dozens": 4,
+    "chocolate_chip_given_dozens": 2.5,
+    "chocolate_chip_left_dozens": 1.5,
+    "total_dozens_kept": 3.0,
+    "dozen": 12,
+    "total_cookies_kept": 6.0,
+    "answer": 6.0
+  },
+  "correct_value": 36.0,
+  "flawed_value": 6.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "oatmeal_left_dozens",
+      "question_inputs": [
+        "oatmeal_baked_dozens",
+        "oatmeal_given_dozens"
+      ],
+      "solution_line_template": "Ann had {oatmeal_baked_dozens} dozen oatmeal cookies - {oatmeal_given_dozens} dozen = <<{oatmeal_baked_dozens}-{oatmeal_given_dozens}={oatmeal_left_dozens}>>{oatmeal_left_dozens} dozen oatmeal cookies left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sugar_left_dozens",
+      "question_inputs": [
+        "sugar_baked_dozens",
+        "sugar_given_dozens"
+      ],
+      "solution_line_template": "Ann had {sugar_baked_dozens} dozen sugar cookies - {sugar_given_dozens} dozen = <<{sugar_baked_dozens}-{sugar_given_dozens}={sugar_left_dozens}>>{sugar_left_dozens} dozen sugar cookies left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "chocolate_chip_left_dozens",
+      "question_inputs": [
+        "chocolate_chip_baked_dozens",
+        "chocolate_chip_given_dozens"
+      ],
+      "solution_line_template": "Ann had {chocolate_chip_baked_dozens} dozen chocolate chip cookies - {chocolate_chip_given_dozens} dozen = {chocolate_chip_left_dozens} dozen chocolate chip cookies left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_dozens_kept",
+      "question_inputs": [],
+      "solution_line_template": "Ann has a total of {oatmeal_left_dozens} + {sugar_left_dozens} + {chocolate_chip_left_dozens} dozen cookies = <<{oatmeal_left_dozens}+{sugar_left_dozens}+{chocolate_chip_left_dozens}={total_dozens_kept}>>{total_dozens_kept} dozen cookies."
+    },
+    {
+      "WK_inputs": [
+        "dozen"
+      ],
+      "line_number": "L5",
+      "output_variable": "total_cookies_kept",
+      "question_inputs": [],
+      "solution_line_template": "{total_dozens_kept} dozen cookies is {total_dozens_kept} *{dozen} cookies = <<{total_dozens_kept}*{dozen}={total_cookies_kept}>>{total_cookies_kept} cookies remaining."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Ann had 3 dozen oatmeal cookies - 2 dozen = <<3-2=1>>1 dozen oatmeal cookies left.",
+    "L2": "Ann had 2 dozen sugar cookies - 1.5 dozen = <<2-1.5=0.5>>0.5 dozen sugar cookies left.",
+    "L3": "Ann had 4 dozen chocolate chip cookies - 2.5 dozen = 1.5 dozen chocolate chip cookies left.",
+    "L4": "Ann has a total of 1 + 0.5 + 1.5 dozen cookies = <<1+0.5+1.5=3>>3 dozen cookies.",
+    "L5": "3 dozen cookies is 3 *2 cookies = <<3*2=6>>6 cookies remaining.",
+    "FA": "#### 6"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Input misrepresentation. The value for 'sugar_baked_dozens' (2) was used instead of 'dozen' (12).",
+  "repro_seed": -833361227100473970,
+  "model_name": "google_gemini-2.5-flash"
+}

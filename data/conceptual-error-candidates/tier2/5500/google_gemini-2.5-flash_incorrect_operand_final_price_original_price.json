@@ -1,0 +1,110 @@
+{
+  "index": 5500,
+  "original_solution_mapping": {
+    "FA": "#### 1330",
+    "L1": "The bedroom set is $2000 and it's currently 15% off so 2000*.15 = $<<2000*.15=300.00>>300.00 off",
+    "L2": "So the new price of the set is 2000-300 = $<<2000-300=1700.00>>1,700.00",
+    "L3": "He signs up for the credit card so that's 10% off so .10*1700 = $<<10*.01*1700=170.00>>170.00",
+    "L4": "Now the set is 1700-170 = $<<1700-170=1530.00>>1,530.00",
+    "L5": "He has a $200.00 gift card which brings the price to 1530-200 = $1,330.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5500.\n    Returns: the final price of the set.\n    \"\"\"\n    # L1\n    original_price = 2000 # new modern bedroom set for $2000\n    initial_discount_percent_num = 15 # 15% off\n    initial_discount_percent_decimal = 0.15 # 2000*.15\n    initial_discount_amount = original_price * initial_discount_percent_decimal\n\n    # L2\n    price_after_initial_discount = original_price - initial_discount_amount\n\n    # L3\n    credit_card_discount_percent_num = 10 # additional 10% off\n    credit_card_discount_percent_decimal = 0.10 # .10*1700\n    percent_factor = 0.01 # WK\n    credit_card_discount_amount = credit_card_discount_percent_num * percent_factor * price_after_initial_discount\n\n    # L4\n    price_after_credit_card_discount = price_after_initial_discount - credit_card_discount_amount\n\n    # L5\n    gift_card_amount = 200.00 # $200.00 in gift cards\n    final_price = price_after_credit_card_discount - gift_card_amount\n\n    # FA\n    answer = final_price\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "final_price",
+    "operand_to_replace": "price_after_credit_card_discount",
+    "replacement_variable": "original_price"
+  },
+  "correct_trace": {
+    "original_price": 2000,
+    "initial_discount_percent_num": 15,
+    "initial_discount_percent_decimal": 0.15,
+    "initial_discount_amount": 300.0,
+    "price_after_initial_discount": 1700.0,
+    "credit_card_discount_percent_num": 10,
+    "credit_card_discount_percent_decimal": 0.1,
+    "percent_factor": 0.01,
+    "credit_card_discount_amount": 170.0,
+    "price_after_credit_card_discount": 1530.0,
+    "gift_card_amount": 200.0,
+    "final_price": 1330.0,
+    "answer": 1330.0
+  },
+  "flawed_trace": {
+    "original_price": 2000,
+    "initial_discount_percent_num": 15,
+    "initial_discount_percent_decimal": 0.15,
+    "initial_discount_amount": 300.0,
+    "price_after_initial_discount": 1700.0,
+    "credit_card_discount_percent_num": 10,
+    "credit_card_discount_percent_decimal": 0.1,
+    "percent_factor": 0.01,
+    "credit_card_discount_amount": 170.0,
+    "price_after_credit_card_discount": 1530.0,
+    "gift_card_amount": 200.0,
+    "final_price": 1800.0,
+    "answer": 1800.0
+  },
+  "correct_value": 1330.0,
+  "flawed_value": 1800.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "initial_discount_amount",
+      "question_inputs": [
+        "original_price",
+        "initial_discount_percent_num",
+        "initial_discount_percent_decimal"
+      ],
+      "solution_line_template": "The bedroom set is ${original_price} and it's currently {initial_discount_percent_num}% off so {original_price}*{initial_discount_percent_decimal} = $<<{original_price}*{initial_discount_percent_decimal}={initial_discount_amount}>>{initial_discount_amount} off"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "price_after_initial_discount",
+      "question_inputs": [],
+      "solution_line_template": "So the new price of the set is {original_price}-{initial_discount_amount} = $<<{original_price}-{initial_discount_amount}={price_after_initial_discount}>>{price_after_initial_discount}"
+    },
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L3",
+      "output_variable": "credit_card_discount_amount",
+      "question_inputs": [
+        "credit_card_discount_percent_num",
+        "credit_card_discount_percent_decimal"
+      ],
+      "solution_line_template": "He signs up for the credit card so that's {credit_card_discount_percent_num}% off so {credit_card_discount_percent_decimal}*{price_after_initial_discount} = $<<{credit_card_discount_percent_num}*{percent_factor}*{price_after_initial_discount}={credit_card_discount_amount}>>{credit_card_discount_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "price_after_credit_card_discount",
+      "question_inputs": [],
+      "solution_line_template": "Now the set is {price_after_initial_discount}-{credit_card_discount_amount} = $<<{price_after_initial_discount}-{credit_card_discount_amount}={price_after_credit_card_discount}>>{price_after_credit_card_discount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "final_price",
+      "question_inputs": [
+        "gift_card_amount"
+      ],
+      "solution_line_template": "He has a ${gift_card_amount} gift card which brings the price to {price_after_credit_card_discount}-{gift_card_amount} = ${final_price}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The bedroom set is $2000 and it's currently 15% off so 2000*0.15 = $<<2000*0.15=300>>300 off",
+    "L2": "So the new price of the set is 2000-300 = $<<2000-300=1700>>1700",
+    "L3": "He signs up for the credit card so that's 10% off so 0.1*1700 = $<<10*0.01*1700=170>>170",
+    "L4": "Now the set is 1700-170 = $<<1700-170=1530>>1530",
+    "L5": "He has a $200 gift card which brings the price to 2000-200 = $1800",
+    "FA": "#### 1800"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operand. The variable 'original_price' (value: 2000) was used instead of 'price_after_credit_card_discount' (value: 1530.0).",
+  "repro_seed": 5787883786651477155,
+  "model_name": "google_gemini-2.5-flash"
+}

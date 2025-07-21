@@ -1,0 +1,77 @@
+{
+  "index": 5951,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "Let P be the number of pages Cora has to read on Thursday.",
+    "L2": "If she finishes the book by the end of Friday, she will have read 23 + 38 + 61 + P + 2P = 158 pages.",
+    "L3": "The pages she has left to read by Thursday are P + 2P = 3P = 158 - 23 - 38 - 61 = pages.",
+    "L4": "Thus, by Thursday she has 3P = 36 pages left to read.",
+    "L5": "Therefore, to finish the book on Friday, Cora has to read P = 36 / 3 = <<36/3=12>>12 pages on Thursday."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5951.\n    Returns: the number of pages Cora has to read on Thursday.\n    \"\"\"\n    # L3\n    pages_monday = 23 # read 23 pages on Monday\n    pages_tuesday = 38 # 38 pages on Tuesday\n    pages_wednesday = 61 # 61 pages on Wednesday\n    total_pages_book = 158 # a 158-page book\n    multiplier_friday = 2 # twice as much on Friday as she does on Thursday\n    coefficient_P = 1 # WK\n    combined_coefficient_P = coefficient_P + multiplier_friday\n    pages_remaining_for_thursday_friday = total_pages_book - pages_monday - pages_tuesday - pages_wednesday\n\n    # L5\n    pages_on_thursday = pages_remaining_for_thursday_friday / combined_coefficient_P\n\n    # FA\n    answer = pages_on_thursday\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "combined_coefficient_P",
+    "operand_to_replace": "multiplier_friday",
+    "replacement_variable": "coefficient_P"
+  },
+  "correct_trace": {
+    "pages_monday": 23,
+    "pages_tuesday": 38,
+    "pages_wednesday": 61,
+    "total_pages_book": 158,
+    "multiplier_friday": 2,
+    "coefficient_P": 1,
+    "combined_coefficient_P": 3,
+    "pages_remaining_for_thursday_friday": 36,
+    "pages_on_thursday": 12.0,
+    "answer": 12.0
+  },
+  "flawed_trace": {
+    "pages_monday": 23,
+    "pages_tuesday": 38,
+    "pages_wednesday": 61,
+    "total_pages_book": 158,
+    "multiplier_friday": 2,
+    "coefficient_P": 1,
+    "combined_coefficient_P": 2,
+    "pages_remaining_for_thursday_friday": 36,
+    "pages_on_thursday": 18.0,
+    "answer": 18.0
+  },
+  "correct_value": 3,
+  "flawed_value": 2,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "coefficient_P"
+      ],
+      "line_number": "L3",
+      "output_variable": "pages_remaining_for_thursday_friday",
+      "question_inputs": [
+        "pages_monday",
+        "pages_tuesday",
+        "pages_wednesday",
+        "total_pages_book",
+        "multiplier_friday"
+      ],
+      "solution_line_template": "The pages she has left to read by Thursday are P + {multiplier_friday}P = {combined_coefficient_P}P = {total_pages_book} - {pages_monday} - {pages_tuesday} - {pages_wednesday} = {pages_remaining_for_thursday_friday} pages."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "pages_on_thursday",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, to finish the book on Friday, Cora has to read P = {pages_remaining_for_thursday_friday} / {combined_coefficient_P} = <<{pages_remaining_for_thursday_friday}/{combined_coefficient_P}={pages_on_thursday}>>{pages_on_thursday} pages on Thursday."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L3": "The pages she has left to read by Thursday are P + 2P = 2P = 158 - 23 - 38 - 61 = 36 pages.",
+    "L5": "Therefore, to finish the book on Friday, Cora has to read P = 36 / 2 = <<36/2=18>>18 pages on Thursday.",
+    "FA": "#### 18"
+  },
+  "erroneous_line_number": null,
+  "explanation": "Input misrepresentation. The value for 'coefficient_P' (1) was used instead of 'multiplier_friday' (2).",
+  "repro_seed": -3135487213941439005,
+  "model_name": "google_gemini-2.5-flash"
+}

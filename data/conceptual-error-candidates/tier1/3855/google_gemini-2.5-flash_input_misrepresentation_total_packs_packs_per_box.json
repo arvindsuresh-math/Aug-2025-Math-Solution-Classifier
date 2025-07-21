@@ -1,0 +1,78 @@
+{
+  "index": 3855,
+  "original_solution_mapping": {
+    "FA": "#### 960000",
+    "L1": "When she orders 30 boxes, the total number of packs in the boxes is 30*40 = <<30*40=1200>>1200 packs.",
+    "L2": "If a pack has 160 diapers, 1200 packs contain 1200*160 = <<1200*160=192000>>192000 diapers.",
+    "L3": "After selling all the diapers, Meadow gets 192000*$5 = $<<192000*5=960000>>960000"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3855.\n    Returns: the total money Meadow makes from selling all her diapers.\n    \"\"\"\n    # L1\n    num_boxes = 30 # orders 30 boxes of diapers\n    packs_per_box = 40 # containing 40 packs weekly\n    total_packs = num_boxes * packs_per_box\n\n    # L2\n    diapers_per_pack = 160 # each pack having 160 diapers\n    total_diapers = total_packs * diapers_per_pack\n\n    # L3\n    price_per_diaper = 5 # sells each diaper for $5\n    total_money = total_diapers * price_per_diaper\n\n    # FA\n    answer = total_money\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_packs",
+    "operand_to_replace": "num_boxes",
+    "replacement_variable": "packs_per_box"
+  },
+  "correct_trace": {
+    "num_boxes": 30,
+    "packs_per_box": 40,
+    "total_packs": 1200,
+    "diapers_per_pack": 160,
+    "total_diapers": 192000,
+    "price_per_diaper": 5,
+    "total_money": 960000,
+    "answer": 960000
+  },
+  "flawed_trace": {
+    "num_boxes": 30,
+    "packs_per_box": 40,
+    "total_packs": 1600,
+    "diapers_per_pack": 160,
+    "total_diapers": 256000,
+    "price_per_diaper": 5,
+    "total_money": 1280000,
+    "answer": 1280000
+  },
+  "correct_value": 1200,
+  "flawed_value": 1600,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_packs",
+      "question_inputs": [
+        "num_boxes",
+        "packs_per_box"
+      ],
+      "solution_line_template": "When she orders {num_boxes} boxes, the total number of packs in the boxes is {num_boxes}*{packs_per_box} = <<{num_boxes}*{packs_per_box}={total_packs}>>{total_packs} packs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_diapers",
+      "question_inputs": [
+        "diapers_per_pack"
+      ],
+      "solution_line_template": "If a pack has {diapers_per_pack} diapers, {total_packs} packs contain {total_packs}*{diapers_per_pack} = <<{total_packs}*{diapers_per_pack}={total_diapers}>>{total_diapers} diapers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_money",
+      "question_inputs": [
+        "price_per_diaper"
+      ],
+      "solution_line_template": "After selling all the diapers, Meadow gets {total_diapers}*${price_per_diaper} = $<<{total_diapers}*{price_per_diaper}={total_money}>>{total_money}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "When she orders 40 boxes, the total number of packs in the boxes is 40*40 = <<40*40=1600>>1600 packs.",
+    "L2": "If a pack has 160 diapers, 1600 packs contain 1600*160 = <<1600*160=256000>>256000 diapers.",
+    "L3": "After selling all the diapers, Meadow gets 256000*$5 = $<<256000*5=1280000>>1280000",
+    "FA": "#### 1280000"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'packs_per_box' (40) was used instead of 'num_boxes' (30).",
+  "repro_seed": -6765031913023206504,
+  "model_name": "google_gemini-2.5-flash"
+}

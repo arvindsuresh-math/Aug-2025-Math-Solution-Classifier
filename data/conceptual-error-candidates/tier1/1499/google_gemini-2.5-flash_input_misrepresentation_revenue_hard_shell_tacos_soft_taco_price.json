@@ -1,0 +1,97 @@
+{
+  "index": 1499,
+  "original_solution_mapping": {
+    "FA": "#### 66",
+    "L1": "The taco truck sold 3 + 2 * 10 = 3 + 20 = <<3+2*10=23>>23 soft tacos.",
+    "L2": "It made 2 * 23 = $<<2*23=46>>46 from soft tacos.",
+    "L3": "It made 5 * 4 = $<<5*4=20>>20 from hard shell tacos.",
+    "L4": "Thus, the taco truck made 46 + 20 = $<<46+20=66>>66 during the lunch rush."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1499.\n    Returns: the total dollars the taco truck made during the lunch rush.\n    \"\"\"\n    # L1\n    family_soft_tacos = 3 # three soft tacos\n    soft_tacos_per_other_customer = 2 # two soft tacos each\n    num_other_customers = 10 # ten customers after the family\n    soft_tacos_from_other_customers = soft_tacos_per_other_customer * num_other_customers\n    total_soft_tacos = family_soft_tacos + soft_tacos_from_other_customers\n\n    # L2\n    soft_taco_price = 2 # soft tacos for $2\n    revenue_soft_tacos = soft_taco_price * total_soft_tacos\n\n    # L3\n    hard_shell_taco_price = 5 # hard shell tacos for $5\n    family_hard_shell_tacos = 4 # four hard shell tacos\n    revenue_hard_shell_tacos = hard_shell_taco_price * family_hard_shell_tacos\n\n    # L4\n    total_revenue = revenue_soft_tacos + revenue_hard_shell_tacos\n\n    # FA\n    answer = total_revenue\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "revenue_hard_shell_tacos",
+    "operand_to_replace": "family_hard_shell_tacos",
+    "replacement_variable": "soft_taco_price"
+  },
+  "correct_trace": {
+    "family_soft_tacos": 3,
+    "soft_tacos_per_other_customer": 2,
+    "num_other_customers": 10,
+    "soft_tacos_from_other_customers": 20,
+    "total_soft_tacos": 23,
+    "soft_taco_price": 2,
+    "revenue_soft_tacos": 46,
+    "hard_shell_taco_price": 5,
+    "family_hard_shell_tacos": 4,
+    "revenue_hard_shell_tacos": 20,
+    "total_revenue": 66,
+    "answer": 66
+  },
+  "flawed_trace": {
+    "family_soft_tacos": 3,
+    "soft_tacos_per_other_customer": 2,
+    "num_other_customers": 10,
+    "soft_tacos_from_other_customers": 20,
+    "total_soft_tacos": 23,
+    "soft_taco_price": 2,
+    "revenue_soft_tacos": 46,
+    "hard_shell_taco_price": 5,
+    "family_hard_shell_tacos": 4,
+    "revenue_hard_shell_tacos": 10,
+    "total_revenue": 56,
+    "answer": 56
+  },
+  "correct_value": 20,
+  "flawed_value": 10,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "family_soft_tacos",
+        "soft_tacos_per_other_customer",
+        "num_other_customers"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_soft_tacos",
+      "solution_line_template": "The taco truck sold {family_soft_tacos} + {soft_tacos_per_other_customer} * {num_other_customers} = {family_soft_tacos} + {soft_tacos_from_other_customers} = <<{family_soft_tacos}+{soft_tacos_per_other_customer}*{num_other_customers}={total_soft_tacos}>>{total_soft_tacos} soft tacos."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "soft_taco_price"
+      ],
+      "WK_inputs": [],
+      "output_variable": "revenue_soft_tacos",
+      "solution_line_template": "It made {soft_taco_price} * {total_soft_tacos} = ${soft_taco_price}*{total_soft_tacos}={revenue_soft_tacos}>>{revenue_soft_tacos} from soft tacos."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "hard_shell_taco_price",
+        "family_hard_shell_tacos"
+      ],
+      "WK_inputs": [],
+      "output_variable": "revenue_hard_shell_tacos",
+      "solution_line_template": "It made {hard_shell_taco_price} * {family_hard_shell_tacos} = ${hard_shell_taco_price}*{family_hard_shell_tacos}={revenue_hard_shell_tacos}>>{revenue_hard_shell_tacos} from hard shell tacos."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_revenue",
+      "solution_line_template": "Thus, the taco truck made {revenue_soft_tacos} + {revenue_hard_shell_tacos} = ${revenue_soft_tacos}+{revenue_hard_shell_tacos}={total_revenue}>>{total_revenue} during the lunch rush."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The taco truck sold 3 + 2 * 10 = 3 + 20 = <<3+2*10=23>>23 soft tacos.",
+    "L2": "It made 2 * 23 = $2*23=46>>46 from soft tacos.",
+    "L3": "It made 5 * 2 = $5*2=10>>10 from hard shell tacos.",
+    "L4": "Thus, the taco truck made 46 + 10 = $46+10=56>>56 during the lunch rush.",
+    "FA": "#### 56"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'soft_taco_price' (2) was used instead of 'family_hard_shell_tacos' (4).",
+  "repro_seed": -1399382702575781257,
+  "model_name": "google_gemini-2.5-flash"
+}

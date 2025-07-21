@@ -1,0 +1,93 @@
+{
+  "index": 5161,
+  "original_solution_mapping": {
+    "FA": "#### 2913",
+    "L1": "First figure out how many silver coins the 100 gold coins are worth by multiplying the number of gold coins by the exchange rate between gold and silver: 100 gold * 3 silver/gold = <<100*3=300>>300 silver",
+    "L2": "Then add the value of the gold in silver to the number of silver coins to find the total value of the gold and silver expressed in silver coins: 300 silver + 60 silver = <<300+60=360>>360 silver",
+    "L3": "Now multiply that value by the exchange rate between silver and copper to express its value in terms of copper coins: 360 silver * 8 copper/silver = <<360*8=2880>>2880 copper",
+    "L4": "Then add the value of the gold and silver expressed in copper coins (the value from the last step) to the number of copper coins to find the total value of the hoard: 2880 + 33 = <<2880+33=2913>>2913"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5161.\n    Returns: the total value of Smaug's hoard expressed as a number of copper coins.\n    \"\"\"\n    # L1\n    gold_coins = 100 # 100 gold coins\n    silver_per_gold = 3 # 3 silver coins\n    gold_value_in_silver = gold_coins * silver_per_gold\n\n    # L2\n    silver_coins = 60 # 60 silver coins\n    total_gold_silver_in_silver = gold_value_in_silver + silver_coins\n\n    # L3\n    copper_per_silver = 8 # 8 copper coins\n    gold_silver_value_in_copper = total_gold_silver_in_silver * copper_per_silver\n\n    # L4\n    copper_coins = 33 # 33 copper coins\n    total_hoard_value_in_copper = gold_silver_value_in_copper + copper_coins\n\n    # FA\n    answer = total_hoard_value_in_copper\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_gold_silver_in_silver",
+    "operand_to_replace": "gold_value_in_silver",
+    "replacement_variable": "gold_coins"
+  },
+  "correct_trace": {
+    "gold_coins": 100,
+    "silver_per_gold": 3,
+    "gold_value_in_silver": 300,
+    "silver_coins": 60,
+    "total_gold_silver_in_silver": 360,
+    "copper_per_silver": 8,
+    "gold_silver_value_in_copper": 2880,
+    "copper_coins": 33,
+    "total_hoard_value_in_copper": 2913,
+    "answer": 2913
+  },
+  "flawed_trace": {
+    "gold_coins": 100,
+    "silver_per_gold": 3,
+    "gold_value_in_silver": 300,
+    "silver_coins": 60,
+    "total_gold_silver_in_silver": 160,
+    "copper_per_silver": 8,
+    "gold_silver_value_in_copper": 1280,
+    "copper_coins": 33,
+    "total_hoard_value_in_copper": 1313,
+    "answer": 1313
+  },
+  "correct_value": 360,
+  "flawed_value": 160,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "gold_value_in_silver",
+      "question_inputs": [
+        "gold_coins",
+        "silver_per_gold"
+      ],
+      "solution_line_template": "First figure out how many silver coins the {gold_coins} gold coins are worth by multiplying the number of gold coins by the exchange rate between gold and silver: {gold_coins} gold * {silver_per_gold} silver/gold = <<{gold_coins}*{silver_per_gold}={gold_value_in_silver}>>{gold_value_in_silver} silver"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_gold_silver_in_silver",
+      "question_inputs": [
+        "silver_coins"
+      ],
+      "solution_line_template": "Then add the value of the gold in silver to the number of silver coins to find the total value of the gold and silver expressed in silver coins: {gold_value_in_silver} silver + {silver_coins} silver = <<{gold_value_in_silver}+{silver_coins}={total_gold_silver_in_silver}>>{total_gold_silver_in_silver} silver"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "gold_silver_value_in_copper",
+      "question_inputs": [
+        "copper_per_silver"
+      ],
+      "solution_line_template": "Now multiply that value by the exchange rate between silver and copper to express its value in terms of copper coins: {total_gold_silver_in_silver} silver * {copper_per_silver} copper/silver = <<{total_gold_silver_in_silver}*{copper_per_silver}={gold_silver_value_in_copper}>>{gold_silver_value_in_copper} copper"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_hoard_value_in_copper",
+      "question_inputs": [
+        "copper_coins"
+      ],
+      "solution_line_template": "Then add the value of the gold and silver expressed in copper coins (the value from the last step) to the number of copper coins to find the total value of the hoard: {gold_silver_value_in_copper} + {copper_coins} = <<{gold_silver_value_in_copper}+{copper_coins}={total_hoard_value_in_copper}>>{total_hoard_value_in_copper}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First figure out how many silver coins the 100 gold coins are worth by multiplying the number of gold coins by the exchange rate between gold and silver: 100 gold * 3 silver/gold = <<100*3=300>>300 silver",
+    "L2": "Then add the value of the gold in silver to the number of silver coins to find the total value of the gold and silver expressed in silver coins: 100 silver + 60 silver = <<100+60=160>>160 silver",
+    "L3": "Now multiply that value by the exchange rate between silver and copper to express its value in terms of copper coins: 160 silver * 8 copper/silver = <<160*8=1280>>1280 copper",
+    "L4": "Then add the value of the gold and silver expressed in copper coins (the value from the last step) to the number of copper coins to find the total value of the hoard: 1280 + 33 = <<1280+33=1313>>1313",
+    "FA": "#### 1313"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'gold_coins' (value: 100) was used instead of 'gold_value_in_silver' (value: 300).",
+  "repro_seed": 7084881099041819935,
+  "model_name": "google_gemini-2.5-flash"
+}

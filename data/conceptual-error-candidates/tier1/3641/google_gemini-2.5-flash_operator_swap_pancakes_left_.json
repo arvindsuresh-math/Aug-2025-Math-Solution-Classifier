@@ -1,0 +1,63 @@
+{
+  "index": 3641,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "Bobby ate 5 pancakes and his dog ate 7 so 5+7 = <<5+7=12>>12",
+    "L2": "The recipe makes 21 pancakes and 12 were eaten so 21-12 = <<21-12=9>>9 pancakes were left"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3641.\n    Returns: the number of pancakes Bobby has left.\n    \"\"\"\n    # L1\n    bobby_ate = 5 # he ate 5 pancakes\n    dog_ate = 7 # his dog jumped up and was able to eat 7\n    total_eaten = bobby_ate + dog_ate\n\n    # L2\n    recipe_makes = 21 # The recipe on the box makes 21 pancakes\n    pancakes_left = recipe_makes - total_eaten\n\n    # FA\n    answer = pancakes_left\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "pancakes_left",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x3099908d0>"
+  },
+  "correct_trace": {
+    "bobby_ate": 5,
+    "dog_ate": 7,
+    "total_eaten": 12,
+    "recipe_makes": 21,
+    "pancakes_left": 9,
+    "answer": 9
+  },
+  "flawed_trace": {
+    "bobby_ate": 5,
+    "dog_ate": 7,
+    "total_eaten": 12,
+    "recipe_makes": 21,
+    "pancakes_left": 33,
+    "answer": 33
+  },
+  "correct_value": 9,
+  "flawed_value": 33,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_eaten",
+      "question_inputs": [
+        "bobby_ate",
+        "dog_ate"
+      ],
+      "solution_line_template": "Bobby ate {bobby_ate} pancakes and his dog ate {dog_ate} so {bobby_ate}+{dog_ate} = <<{bobby_ate}+{dog_ate}={total_eaten}>>{total_eaten}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "pancakes_left",
+      "question_inputs": [
+        "recipe_makes"
+      ],
+      "solution_line_template": "The recipe makes {recipe_makes} pancakes and {total_eaten} were eaten so {recipe_makes}-{total_eaten} = <<{recipe_makes}-{total_eaten}={pancakes_left}>>{pancakes_left} pancakes were left"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Bobby ate 5 pancakes and his dog ate 7 so 5+7 = <<5+7=12>>12",
+    "L2": "The recipe makes 21 pancakes and 12 were eaten so 21-12 = <<21-12=33>>33 pancakes were left",
+    "FA": "#### 33"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 2594392144154886148,
+  "model_name": "google_gemini-2.5-flash"
+}

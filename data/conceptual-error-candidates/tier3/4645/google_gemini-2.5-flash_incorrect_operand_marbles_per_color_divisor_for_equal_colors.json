@@ -1,0 +1,100 @@
+{
+  "index": 4645,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "20 of 50 marbles are white so there are 50-20 = 30 red and blue marbles",
+    "L2": "The number of red marbles and blue marbles is the same, so there are 30/2 = <<30/2=15>>15 of each color",
+    "L3": "The difference between the number of white marbles and blue marbles is 20-15 = <<20-15=5>>5",
+    "L4": "Double the difference is 5*2 = <<5*2=10>>10 marbles",
+    "L5": "10 marbles are removed to leave 50-10 = <<50-10=40>>40 marbles"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4645.\n    Returns: the number of marbles left in the box.\n    \"\"\"\n    # L1\n    total_marbles = 50 # 50 marbles in a box\n    white_marbles_original = 20 # 20 white marbles\n    red_blue_marbles_total = total_marbles - white_marbles_original\n\n    # L2\n    divisor_for_equal_colors = 2 # an equal number of red and blue marbles\n    marbles_per_color = red_blue_marbles_total / divisor_for_equal_colors\n\n    # L3\n    difference_white_blue = white_marbles_original - marbles_per_color\n\n    # L4\n    double_factor = 2 # double the difference\n    marbles_removed = difference_white_blue * double_factor\n\n    # L5\n    marbles_left = total_marbles - marbles_removed\n\n    # FA\n    answer = marbles_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "marbles_per_color",
+    "operand_to_replace": "red_blue_marbles_total",
+    "replacement_variable": "divisor_for_equal_colors"
+  },
+  "correct_trace": {
+    "total_marbles": 50,
+    "white_marbles_original": 20,
+    "red_blue_marbles_total": 30,
+    "divisor_for_equal_colors": 2,
+    "marbles_per_color": 15.0,
+    "difference_white_blue": 5.0,
+    "double_factor": 2,
+    "marbles_removed": 10.0,
+    "marbles_left": 40.0,
+    "answer": 40.0
+  },
+  "flawed_trace": {
+    "total_marbles": 50,
+    "white_marbles_original": 20,
+    "red_blue_marbles_total": 30,
+    "divisor_for_equal_colors": 2,
+    "marbles_per_color": 1.0,
+    "difference_white_blue": 19.0,
+    "double_factor": 2,
+    "marbles_removed": 38.0,
+    "marbles_left": 12.0,
+    "answer": 12.0
+  },
+  "correct_value": 15.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "red_blue_marbles_total",
+      "question_inputs": [
+        "total_marbles",
+        "white_marbles_original"
+      ],
+      "solution_line_template": "{white_marbles_original} of {total_marbles} marbles are white so there are {total_marbles}-{white_marbles_original} = {red_blue_marbles_total} red and blue marbles"
+    },
+    {
+      "WK_inputs": [
+        "divisor_for_equal_colors"
+      ],
+      "line_number": "L2",
+      "output_variable": "marbles_per_color",
+      "question_inputs": [],
+      "solution_line_template": "The number of red marbles and blue marbles is the same, so there are {red_blue_marbles_total}/{divisor_for_equal_colors} = <<{red_blue_marbles_total}/{divisor_for_equal_colors}={marbles_per_color}>>{marbles_per_color} of each color"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "difference_white_blue",
+      "question_inputs": [],
+      "solution_line_template": "The difference between the number of white marbles and blue marbles is {white_marbles_original}-{marbles_per_color} = <<{white_marbles_original}-{marbles_per_color}={difference_white_blue}>>{difference_white_blue}"
+    },
+    {
+      "WK_inputs": [
+        "double_factor"
+      ],
+      "line_number": "L4",
+      "output_variable": "marbles_removed",
+      "question_inputs": [],
+      "solution_line_template": "Double the difference is {difference_white_blue}*{double_factor} = <<{difference_white_blue}*{double_factor}={marbles_removed}>>{marbles_removed} marbles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "marbles_left",
+      "question_inputs": [],
+      "solution_line_template": "{marbles_removed} marbles are removed to leave {total_marbles}-{marbles_removed} = <<{total_marbles}-{marbles_removed}={marbles_left}>>{marbles_left} marbles"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "20 of 50 marbles are white so there are 50-20 = 30 red and blue marbles",
+    "L2": "The number of red marbles and blue marbles is the same, so there are 2/2 = <<2/2=1>>1 of each color",
+    "L3": "The difference between the number of white marbles and blue marbles is 20-1 = <<20-1=19>>19",
+    "L4": "Double the difference is 19*2 = <<19*2=38>>38 marbles",
+    "L5": "38 marbles are removed to leave 50-38 = <<50-38=12>>12 marbles",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'divisor_for_equal_colors' (value: 2) was used instead of 'red_blue_marbles_total' (value: 30).",
+  "repro_seed": 1158135679661199027,
+  "model_name": "google_gemini-2.5-flash"
+}

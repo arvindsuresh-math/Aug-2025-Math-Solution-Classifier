@@ -1,0 +1,85 @@
+{
+  "index": 7465,
+  "original_solution_mapping": {
+    "FA": "#### 150",
+    "L1": "He gains 120*.2=<<120*.2=24>>24 kg in muscles",
+    "L2": "So he gains 24/4=<<24/4=6>>6 kg of fat",
+    "L3": "That means he gains a total of 24+6=<<24+6=30>>30 kg of bodyweight",
+    "L4": "So his new body weight is 120+30=<<120+30=150>>150 kg"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7465.\n    Returns: James's new body weight.\n    \"\"\"\n    # L1\n    initial_weight = 120 # He weighs 120 kg\n    muscle_gain_percent = 0.2 # gains 20% of his body weight\n    muscle_gain_kg = initial_weight * muscle_gain_percent\n\n    # L2\n    fat_gain_fraction_divisor = 4 # 1 quarter that much in fat\n    fat_gain_kg = muscle_gain_kg / fat_gain_fraction_divisor\n\n    # L3\n    total_gain_kg = muscle_gain_kg + fat_gain_kg\n\n    # L4\n    new_weight = initial_weight + total_gain_kg\n\n    # FA\n    answer = new_weight\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "fat_gain_kg",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x16a032710>"
+  },
+  "correct_trace": {
+    "initial_weight": 120,
+    "muscle_gain_percent": 0.2,
+    "muscle_gain_kg": 24.0,
+    "fat_gain_fraction_divisor": 4,
+    "fat_gain_kg": 6.0,
+    "total_gain_kg": 30.0,
+    "new_weight": 150.0,
+    "answer": 150.0
+  },
+  "flawed_trace": {
+    "initial_weight": 120,
+    "muscle_gain_percent": 0.2,
+    "muscle_gain_kg": 24.0,
+    "fat_gain_fraction_divisor": 4,
+    "fat_gain_kg": 20.0,
+    "total_gain_kg": 44.0,
+    "new_weight": 164.0,
+    "answer": 164.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 20.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "muscle_gain_kg",
+      "question_inputs": [
+        "initial_weight",
+        "muscle_gain_percent"
+      ],
+      "solution_line_template": "He gains {initial_weight}*{muscle_gain_percent}=<<{initial_weight}*{muscle_gain_percent}={muscle_gain_kg}>>{muscle_gain_kg} kg in muscles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "fat_gain_kg",
+      "question_inputs": [
+        "fat_gain_fraction_divisor"
+      ],
+      "solution_line_template": "So he gains {muscle_gain_kg}/{fat_gain_fraction_divisor}=<<{muscle_gain_kg}/{fat_gain_fraction_divisor}={fat_gain_kg}>>{fat_gain_kg} kg of fat"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_gain_kg",
+      "question_inputs": [],
+      "solution_line_template": "That means he gains a total of {muscle_gain_kg}+{fat_gain_kg}=<<{muscle_gain_kg}+{fat_gain_kg}={total_gain_kg}>>{total_gain_kg} kg of bodyweight"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "new_weight",
+      "question_inputs": [],
+      "solution_line_template": "So his new body weight is {initial_weight}+{total_gain_kg}=<<{initial_weight}+{total_gain_kg}={new_weight}>>{new_weight} kg"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He gains 120*0.2=<<120*0.2=24>>24 kg in muscles",
+    "L2": "So he gains 24/4=<<24/4=20>>20 kg of fat",
+    "L3": "That means he gains a total of 24+20=<<24+20=44>>44 kg of bodyweight",
+    "L4": "So his new body weight is 120+44=<<120+44=164>>164 kg",
+    "FA": "#### 164"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 3316193685205951720,
+  "model_name": "google_gemini-2.5-flash"
+}

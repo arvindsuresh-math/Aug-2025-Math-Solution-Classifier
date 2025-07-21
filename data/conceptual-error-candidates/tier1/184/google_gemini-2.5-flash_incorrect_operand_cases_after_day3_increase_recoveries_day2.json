@@ -1,0 +1,93 @@
+{
+  "index": 184,
+  "original_solution_mapping": {
+    "FA": "#### 3750",
+    "L1": "When 500 new cases were recorded after the tests, the total number of positive cases increased to 2000 cases + 500 cases = <<2000+500=2500>>2500 cases.",
+    "L2": "With 50 recoveries, the total number of cases reduced to 2500 cases - 50 cases = <<2500-50=2450>>2450 cases.",
+    "L3": "On the third day, with 1500 new cases, the total number of cases became 2450 cases + 1500 cases = <<2450+1500=3950>>3950 cases.",
+    "L4": "If 200 people recovered from the virus, the total number of people with Coronavirus became 3950 cases - 200 cases = 3750 cases"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 184.\n    Returns: the total number of positive Coronavirus cases after the third day.\n    \"\"\"\n    # L1\n    initial_cases = 2000 # 2000 positive cases on a particular day\n    new_cases_day2 = 500 # increased by 500 on the second day\n    cases_after_day2_increase = initial_cases + new_cases_day2\n\n    # L2\n    recoveries_day2 = 50 # 50 recoveries\n    cases_after_day2_recoveries = cases_after_day2_increase - recoveries_day2\n\n    # L3\n    new_cases_day3 = 1500 # new cases spiked to 1500\n    cases_after_day3_increase = cases_after_day2_recoveries + new_cases_day3\n\n    # L4\n    recoveries_day3 = 200 # 200 recoveries\n    total_cases_after_day3 = cases_after_day3_increase - recoveries_day3\n\n    # FA\n    answer = total_cases_after_day3\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "cases_after_day3_increase",
+    "operand_to_replace": "cases_after_day2_recoveries",
+    "replacement_variable": "recoveries_day2"
+  },
+  "correct_trace": {
+    "initial_cases": 2000,
+    "new_cases_day2": 500,
+    "cases_after_day2_increase": 2500,
+    "recoveries_day2": 50,
+    "cases_after_day2_recoveries": 2450,
+    "new_cases_day3": 1500,
+    "cases_after_day3_increase": 3950,
+    "recoveries_day3": 200,
+    "total_cases_after_day3": 3750,
+    "answer": 3750
+  },
+  "flawed_trace": {
+    "initial_cases": 2000,
+    "new_cases_day2": 500,
+    "cases_after_day2_increase": 2500,
+    "recoveries_day2": 50,
+    "cases_after_day2_recoveries": 2450,
+    "new_cases_day3": 1500,
+    "cases_after_day3_increase": 1550,
+    "recoveries_day3": 200,
+    "total_cases_after_day3": 1350,
+    "answer": 1350
+  },
+  "correct_value": 3950,
+  "flawed_value": 1550,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "initial_cases",
+        "new_cases_day2"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cases_after_day2_increase",
+      "solution_line_template": "When {new_cases_day2} new cases were recorded after the tests, the total number of positive cases increased to {initial_cases} cases + {new_cases_day2} cases = <<{initial_cases}+{new_cases_day2}={cases_after_day2_increase}>>{cases_after_day2_increase} cases."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "recoveries_day2"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cases_after_day2_recoveries",
+      "solution_line_template": "With {recoveries_day2} recoveries, the total number of cases reduced to {cases_after_day2_increase} cases - {recoveries_day2} cases = <<{cases_after_day2_increase}-{recoveries_day2}={cases_after_day2_recoveries}>>{cases_after_day2_recoveries} cases."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "new_cases_day3"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cases_after_day3_increase",
+      "solution_line_template": "On the third day, with {new_cases_day3} new cases, the total number of cases became {cases_after_day2_recoveries} cases + {new_cases_day3} cases = <<{cases_after_day2_recoveries}+{new_cases_day3}={cases_after_day3_increase}>>{cases_after_day3_increase} cases."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "recoveries_day3"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_cases_after_day3",
+      "solution_line_template": "If {recoveries_day3} people recovered from the virus, the total number of people with Coronavirus became {cases_after_day3_increase} cases - {recoveries_day3} cases = {total_cases_after_day3} cases"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "When 500 new cases were recorded after the tests, the total number of positive cases increased to 2000 cases + 500 cases = <<2000+500=2500>>2500 cases.",
+    "L2": "With 50 recoveries, the total number of cases reduced to 2500 cases - 50 cases = <<2500-50=2450>>2450 cases.",
+    "L3": "On the third day, with 1500 new cases, the total number of cases became 50 cases + 1500 cases = <<50+1500=1550>>1550 cases.",
+    "L4": "If 200 people recovered from the virus, the total number of people with Coronavirus became 1550 cases - 200 cases = 1350 cases",
+    "FA": "#### 1350"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'recoveries_day2' (value: 50) was used instead of 'cases_after_day2_recoveries' (value: 2450).",
+  "repro_seed": -7354690859396428177,
+  "model_name": "google_gemini-2.5-flash"
+}

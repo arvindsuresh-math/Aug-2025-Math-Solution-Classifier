@@ -1,0 +1,89 @@
+{
+  "index": 7294,
+  "original_solution_mapping": {
+    "FA": "#### 14",
+    "L1": "Micah had to buy 6*2=<<6*2=12>>12 stamps for 6 envelopes less than 5 pounds.",
+    "L2": "He has 52-12=<<52-12=40>>40 more stamps to buy.",
+    "L3": "There are 40/5=<<40/5=8>>8 envelopes that weigh more than 5 pounds.",
+    "L4": "Micah needed to buy 8+6=<<8+6=14>>14 envelopes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7294.\n    Returns: the total number of envelopes Micah needed to buy.\n    \"\"\"\n    # L1\n    num_light_envelopes = 6 # 6 envelopes that weigh less than 5 pounds\n    stamps_per_light_envelope = 2 # it will only need 2 stamps\n    stamps_for_light_envelopes = num_light_envelopes * stamps_per_light_envelope\n\n    # L2\n    total_stamps_bought = 52 # bought 52 stamps\n    remaining_stamps = total_stamps_bought - stamps_for_light_envelopes\n\n    # L3\n    stamps_per_heavy_envelope = 5 # he will need 5 stamps\n    num_heavy_envelopes = remaining_stamps / stamps_per_heavy_envelope\n\n    # L4\n    total_envelopes = num_heavy_envelopes + num_light_envelopes\n\n    # FA\n    answer = total_envelopes\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "num_heavy_envelopes",
+    "operand_to_replace": "stamps_per_heavy_envelope",
+    "replacement_variable": "remaining_stamps"
+  },
+  "correct_trace": {
+    "num_light_envelopes": 6,
+    "stamps_per_light_envelope": 2,
+    "stamps_for_light_envelopes": 12,
+    "total_stamps_bought": 52,
+    "remaining_stamps": 40,
+    "stamps_per_heavy_envelope": 5,
+    "num_heavy_envelopes": 8.0,
+    "total_envelopes": 14.0,
+    "answer": 14.0
+  },
+  "flawed_trace": {
+    "num_light_envelopes": 6,
+    "stamps_per_light_envelope": 2,
+    "stamps_for_light_envelopes": 12,
+    "total_stamps_bought": 52,
+    "remaining_stamps": 40,
+    "stamps_per_heavy_envelope": 5,
+    "num_heavy_envelopes": 1.0,
+    "total_envelopes": 7.0,
+    "answer": 7.0
+  },
+  "correct_value": 8.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "stamps_for_light_envelopes",
+      "question_inputs": [
+        "num_light_envelopes",
+        "stamps_per_light_envelope"
+      ],
+      "solution_line_template": "Micah had to buy {num_light_envelopes}*{stamps_per_light_envelope}=<<{num_light_envelopes}*{stamps_per_light_envelope}={stamps_for_light_envelopes}>>{stamps_for_light_envelopes} stamps for {num_light_envelopes} envelopes less than 5 pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_stamps",
+      "question_inputs": [
+        "total_stamps_bought"
+      ],
+      "solution_line_template": "He has {total_stamps_bought}-{stamps_for_light_envelopes}=<<{total_stamps_bought}-{stamps_for_light_envelopes}={remaining_stamps}>>{remaining_stamps} more stamps to buy."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_heavy_envelopes",
+      "question_inputs": [
+        "stamps_per_heavy_envelope"
+      ],
+      "solution_line_template": "There are {remaining_stamps}/{stamps_per_heavy_envelope}=<<{remaining_stamps}/{stamps_per_heavy_envelope}={num_heavy_envelopes}>>{num_heavy_envelopes} envelopes that weigh more than 5 pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_envelopes",
+      "question_inputs": [],
+      "solution_line_template": "Micah needed to buy {num_heavy_envelopes}+{num_light_envelopes}=<<{num_heavy_envelopes}+{num_light_envelopes}={total_envelopes}>>{total_envelopes} envelopes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Micah had to buy 6*2=<<6*2=12>>12 stamps for 6 envelopes less than 5 pounds.",
+    "L2": "He has 52-12=<<52-12=40>>40 more stamps to buy.",
+    "L3": "There are 40/40=<<40/40=1>>1 envelopes that weigh more than 5 pounds.",
+    "L4": "Micah needed to buy 1+6=<<1+6=7>>7 envelopes.",
+    "FA": "#### 7"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'remaining_stamps' (40) was used instead of 'stamps_per_heavy_envelope' (5).",
+  "repro_seed": -8909657538920739894,
+  "model_name": "google_gemini-2.5-flash"
+}

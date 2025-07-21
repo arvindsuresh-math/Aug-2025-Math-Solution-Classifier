@@ -1,0 +1,74 @@
+{
+  "index": 4418,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "He spent $50.00 and 80% of the meal went to entrees so he spent 50*.80 = $40.00 on entrees",
+    "L2": "He spent $50.00 and $40.00 went to entrees so that leaves $50 - $40 = $<<50-40=10.00>>10.00 for appetizers",
+    "L3": "Each appetizer costs the same amount and he spent $10.00 all together so each appetizer is $10/2 = $<<10/2=5.00>>5.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4418.\n    Returns: the price of a single appetizer.\n    \"\"\"\n    # L1\n    total_meal_cost = 50.00 # $50.00 on Chinese take-out\n    entree_percentage_as_decimal = 0.80 # 80% of the cost went to 4 entrees\n    cost_on_entrees = total_meal_cost * entree_percentage_as_decimal\n\n    # L2\n    cost_on_appetizers = total_meal_cost - cost_on_entrees\n\n    # L3\n    num_appetizers = 2 # 2 appetizers\n    price_per_appetizer = cost_on_appetizers / num_appetizers\n\n    # FA\n    answer = price_per_appetizer\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "price_per_appetizer",
+    "operand_to_replace": "cost_on_appetizers",
+    "replacement_variable": "num_appetizers"
+  },
+  "correct_trace": {
+    "total_meal_cost": 50.0,
+    "entree_percentage_as_decimal": 0.8,
+    "cost_on_entrees": 40.0,
+    "cost_on_appetizers": 10.0,
+    "num_appetizers": 2,
+    "price_per_appetizer": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "total_meal_cost": 50.0,
+    "entree_percentage_as_decimal": 0.8,
+    "cost_on_entrees": 40.0,
+    "cost_on_appetizers": 10.0,
+    "num_appetizers": 2,
+    "price_per_appetizer": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 5.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_on_entrees",
+      "question_inputs": [
+        "total_meal_cost",
+        "entree_percentage_as_decimal"
+      ],
+      "solution_line_template": "He spent ${total_meal_cost} and 80% of the meal went to entrees so he spent {total_meal_cost}*{entree_percentage_as_decimal} = ${cost_on_entrees} on entrees"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cost_on_appetizers",
+      "question_inputs": [],
+      "solution_line_template": "He spent ${total_meal_cost} and ${cost_on_entrees} went to entrees so that leaves ${total_meal_cost} - ${cost_on_entrees} = $<<{total_meal_cost}-{cost_on_entrees}={cost_on_appetizers}>>{cost_on_appetizers} for appetizers"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "price_per_appetizer",
+      "question_inputs": [
+        "num_appetizers"
+      ],
+      "solution_line_template": "Each appetizer costs the same amount and he spent ${cost_on_appetizers} all together so each appetizer is ${cost_on_appetizers}/{num_appetizers} = $<<{cost_on_appetizers}/{num_appetizers}={price_per_appetizer}>>{price_per_appetizer}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He spent $50 and 80% of the meal went to entrees so he spent 50*0.8 = $40 on entrees",
+    "L2": "He spent $50 and $40 went to entrees so that leaves $50 - $40 = $<<50-40=10>>10 for appetizers",
+    "L3": "Each appetizer costs the same amount and he spent $2 all together so each appetizer is $2/2 = $<<2/2=1>>1",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'num_appetizers' (value: 2) was used instead of 'cost_on_appetizers' (value: 10.0).",
+  "repro_seed": -7882376342474444380,
+  "model_name": "google_gemini-2.5-flash"
+}

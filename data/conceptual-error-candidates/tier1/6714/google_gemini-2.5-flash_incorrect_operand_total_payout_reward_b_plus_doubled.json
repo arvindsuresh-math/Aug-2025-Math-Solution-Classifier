@@ -1,0 +1,112 @@
+{
+  "index": 6714,
+  "original_solution_mapping": {
+    "FA": "#### 190",
+    "L1": "We know Paul would get $5 for a B+. However, we know this could be (2x) doubled if he obtains at least two A+. This means 2*$5 = $<<2*5=10>>10 for a B+ if Paul gets at least two A+",
+    "L2": "We know Paul would get twice the reward of a B+ if he gets an A. This means 2*$5 = $<<5*2=10>>10 for every A",
+    "L3": "However, we know his reward for every A could be (2x) doubled if he obtains at least two A+. This means 2*$10 = $<<2*10=20>>20 for every A if Paul gets at least two A+",
+    "L4": "We learn here then that Paul will get a higher reward for obtaining A grades ($20) than getting A+ grades ($15) as long as he's able to score at least two A+.",
+    "L5": "To maximize his payout, Paul will need to get only (2) two A+ from his 10 courses. Therefore he should aim to get an A in the remaining 10-2 = <<10-2=8>>8 courses",
+    "L6": "Assuming Paul can get two A+ and eight A in his next scorecard his total payout would be 2*$15 + 8*$20",
+    "L7": "This translates into $30 + $160 or $<<30+160=190>>190"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6714.\n    Returns: the maximum amount Paul could receive from his dad.\n    \"\"\"\n    # L1\n    reward_b_plus_initial = 5 # $5 for every B+\n    doubling_factor = 2 # double the previous rewards\n    reward_b_plus_doubled = doubling_factor * reward_b_plus_initial\n\n    # L2\n    twice_factor = 2 # twice that amount for every A\n    reward_a_initial = reward_b_plus_initial * twice_factor\n\n    # L3\n    reward_a_doubled = doubling_factor * reward_a_initial\n\n    # L5\n    num_a_plus_for_bonus = 2 # at least two A+\n    total_courses = 10 # 10 courses\n    reward_a_plus_flat = 15 # $15 for every A+ obtained\n    remaining_courses_for_a = total_courses - num_a_plus_for_bonus\n\n    # L7\n    payout_a_plus_part = num_a_plus_for_bonus * reward_a_plus_flat\n    payout_a_part = remaining_courses_for_a * reward_a_doubled\n    total_payout = payout_a_plus_part + payout_a_part\n\n    # FA\n    answer = total_payout\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_payout",
+    "operand_to_replace": "payout_a_part",
+    "replacement_variable": "reward_b_plus_doubled"
+  },
+  "correct_trace": {
+    "reward_b_plus_initial": 5,
+    "doubling_factor": 2,
+    "reward_b_plus_doubled": 10,
+    "twice_factor": 2,
+    "reward_a_initial": 10,
+    "reward_a_doubled": 20,
+    "num_a_plus_for_bonus": 2,
+    "total_courses": 10,
+    "reward_a_plus_flat": 15,
+    "remaining_courses_for_a": 8,
+    "payout_a_plus_part": 30,
+    "payout_a_part": 160,
+    "total_payout": 190,
+    "answer": 190
+  },
+  "flawed_trace": {
+    "reward_b_plus_initial": 5,
+    "doubling_factor": 2,
+    "reward_b_plus_doubled": 10,
+    "twice_factor": 2,
+    "reward_a_initial": 10,
+    "reward_a_doubled": 20,
+    "num_a_plus_for_bonus": 2,
+    "total_courses": 10,
+    "reward_a_plus_flat": 15,
+    "remaining_courses_for_a": 8,
+    "payout_a_plus_part": 30,
+    "payout_a_part": 160,
+    "total_payout": 40,
+    "answer": 40
+  },
+  "correct_value": 190,
+  "flawed_value": 40,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "reward_b_plus_doubled",
+      "question_inputs": [
+        "reward_b_plus_initial",
+        "doubling_factor"
+      ],
+      "solution_line_template": "We know Paul would get ${reward_b_plus_initial} for a B+. However, we know this could be ({doubling_factor}x) doubled if he obtains at least two A+. This means {doubling_factor}*${reward_b_plus_initial} = $<<{doubling_factor}*{reward_b_plus_initial}={reward_b_plus_doubled}>>{reward_b_plus_doubled} for a B+ if Paul gets at least two A+"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "reward_a_initial",
+      "question_inputs": [
+        "twice_factor"
+      ],
+      "solution_line_template": "We know Paul would get twice the reward of a B+ if he gets an A. This means {twice_factor}*${reward_b_plus_initial} = $<<{reward_b_plus_initial}*{twice_factor}={reward_a_initial}>>{reward_a_initial} for every A"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "reward_a_doubled",
+      "question_inputs": [],
+      "solution_line_template": "However, we know his reward for every A could be ({doubling_factor}x) doubled if he obtains at least two A+. This means {doubling_factor}*${reward_a_initial} = $<<{doubling_factor}*{reward_a_initial}={reward_a_doubled}>>{reward_a_doubled} for every A if Paul gets at least two A+"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "remaining_courses_for_a",
+      "question_inputs": [
+        "num_a_plus_for_bonus",
+        "total_courses",
+        "reward_a_plus_flat"
+      ],
+      "solution_line_template": "To maximize his payout, Paul will need to get only ({num_a_plus_for_bonus}) two A+ from his {total_courses} courses. Therefore he should aim to get an A in the remaining {total_courses}-{num_a_plus_for_bonus} = <<{total_courses}-{num_a_plus_for_bonus}={remaining_courses_for_a}>>{remaining_courses_for_a} courses"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "total_payout",
+      "question_inputs": [],
+      "solution_line_template": "This translates into ${payout_a_plus_part} + ${payout_a_part} or $<<{payout_a_plus_part}+{payout_a_part}={total_payout}>>{total_payout}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "We know Paul would get $5 for a B+. However, we know this could be (2x) doubled if he obtains at least two A+. This means 2*$5 = $<<2*5=10>>10 for a B+ if Paul gets at least two A+",
+    "L2": "We know Paul would get twice the reward of a B+ if he gets an A. This means 2*$5 = $<<5*2=10>>10 for every A",
+    "L3": "However, we know his reward for every A could be (2x) doubled if he obtains at least two A+. This means 2*$10 = $<<2*10=20>>20 for every A if Paul gets at least two A+",
+    "L5": "To maximize his payout, Paul will need to get only (2) two A+ from his 10 courses. Therefore he should aim to get an A in the remaining 10-2 = <<10-2=8>>8 courses",
+    "L7": "This translates into $30 + $10 or $<<30+10=40>>40",
+    "FA": "#### 40"
+  },
+  "erroneous_line_number": "L7",
+  "explanation": "Incorrect operand. The variable 'reward_b_plus_doubled' (value: 10) was used instead of 'payout_a_part' (value: 160).",
+  "repro_seed": -1057175165422970639,
+  "model_name": "google_gemini-2.5-flash"
+}

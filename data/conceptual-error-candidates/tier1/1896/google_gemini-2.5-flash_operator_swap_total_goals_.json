@@ -1,0 +1,59 @@
+{
+  "index": 1896,
+  "original_solution_mapping": {
+    "FA": "#### 16",
+    "L1": "Bruce scored <<4=4>>4 goals",
+    "L2": "Scoring 3 times more than Bruce, Michael scored 4 * 3 = <<4*3=12>>12 goals.",
+    "L3": "Both, Bruce and Michael scored 12 + 4 =<<12+4=16>>16 goals."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1896.\n    Returns: the total number of goals Bruce and Michael scored.\n    \"\"\"\n    bruce_goals = 4 # Bruce scored 4 goals\n\n    # L2\n    michael_multiplier = 3 # 3 times more than Bruce\n    michael_goals = bruce_goals * michael_multiplier\n\n    # L3\n    total_goals = michael_goals + bruce_goals\n\n    # FA\n    answer = total_goals\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_goals",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x30b8e4850>"
+  },
+  "correct_trace": {
+    "bruce_goals": 4,
+    "michael_multiplier": 3,
+    "michael_goals": 12,
+    "total_goals": 16,
+    "answer": 16
+  },
+  "flawed_trace": {
+    "bruce_goals": 4,
+    "michael_multiplier": 3,
+    "michael_goals": 12,
+    "total_goals": 8,
+    "answer": 8
+  },
+  "correct_value": 16,
+  "flawed_value": 8,
+  "logical_steps": [
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "michael_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "michael_goals",
+      "solution_line_template": "Scoring {michael_multiplier} times more than Bruce, Michael scored {bruce_goals} * {michael_multiplier} = <<{bruce_goals}*{michael_multiplier}={michael_goals}>>{michael_goals} goals."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_goals",
+      "solution_line_template": "Both, Bruce and Michael scored {michael_goals} + {bruce_goals} =<<{michael_goals}+{bruce_goals}={total_goals}>>{total_goals} goals."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "Scoring 3 times more than Bruce, Michael scored 4 * 3 = <<4*3=12>>12 goals.",
+    "L3": "Both, Bruce and Michael scored 12 + 4 =<<12+4=8>>8 goals.",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": -671879399029553672,
+  "model_name": "google_gemini-2.5-flash"
+}

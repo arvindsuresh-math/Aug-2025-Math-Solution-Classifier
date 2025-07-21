@@ -1,0 +1,91 @@
+{
+  "index": 4217,
+  "original_solution_mapping": {
+    "FA": "#### 16",
+    "L1": "First, subtract the two tourists the anacondas got from the initial 30 tourists: 30 - 2 = <<30-2=28>>28",
+    "L2": "Next, divide 28 by two to find out how many tourists got poisoned: 28 / 2 = <<28/2=14>>14.",
+    "L3": "Now figure out how many of the 14 poisoned tourists recovered: 14 / 7 = <<14/7=2>>2.",
+    "L4": "The total number of surviving tourists is 14 + 2 = <<14+2=16>>16."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4217.\n    Returns: the total number of tourists left at the end of the tour.\n    \"\"\"\n    # L1\n    initial_tourists = 30 # A group of 30 tourists\n    eaten_by_anacondas = 2 # Two tourists are eaten by anacondas\n    remaining_after_anacondas = initial_tourists - eaten_by_anacondas\n\n    # L2\n    poisoned_divisor = 2 # half the remaining tourists\n    poisoned_tourists = remaining_after_anacondas / poisoned_divisor\n    unpoisoned_tourists = remaining_after_anacondas - poisoned_tourists\n\n    # L3\n    recovered_divisor = 7 # 1/7 of the poisoned tourists recovered\n    recovered_tourists = poisoned_tourists / recovered_divisor\n\n    # L4\n    total_surviving_tourists = unpoisoned_tourists + recovered_tourists\n\n    # FA\n    answer = total_surviving_tourists\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "unpoisoned_tourists",
+    "operand_to_replace": "poisoned_tourists",
+    "replacement_variable": "eaten_by_anacondas"
+  },
+  "correct_trace": {
+    "initial_tourists": 30,
+    "eaten_by_anacondas": 2,
+    "remaining_after_anacondas": 28,
+    "poisoned_divisor": 2,
+    "poisoned_tourists": 14.0,
+    "unpoisoned_tourists": 14.0,
+    "recovered_divisor": 7,
+    "recovered_tourists": 2.0,
+    "total_surviving_tourists": 16.0,
+    "answer": 16.0
+  },
+  "flawed_trace": {
+    "initial_tourists": 30,
+    "eaten_by_anacondas": 2,
+    "remaining_after_anacondas": 28,
+    "poisoned_divisor": 2,
+    "poisoned_tourists": 14.0,
+    "unpoisoned_tourists": 26,
+    "recovered_divisor": 7,
+    "recovered_tourists": 2.0,
+    "total_surviving_tourists": 28.0,
+    "answer": 28.0
+  },
+  "correct_value": 14.0,
+  "flawed_value": 26,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "remaining_after_anacondas",
+      "question_inputs": [
+        "initial_tourists",
+        "eaten_by_anacondas"
+      ],
+      "solution_line_template": "First, subtract the {eaten_by_anacondas} tourists the anacondas got from the initial {initial_tourists} tourists: {initial_tourists} - {eaten_by_anacondas} = <<{initial_tourists}-{eaten_by_anacondas}={remaining_after_anacondas}>>{remaining_after_anacondas}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "poisoned_tourists",
+      "question_inputs": [
+        "poisoned_divisor"
+      ],
+      "solution_line_template": "Next, divide {remaining_after_anacondas} by {poisoned_divisor} to find out how many tourists got poisoned: {remaining_after_anacondas} / {poisoned_divisor} = <<{remaining_after_anacondas}/{poisoned_divisor}={poisoned_tourists}>>{poisoned_tourists}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "recovered_tourists",
+      "question_inputs": [
+        "recovered_divisor"
+      ],
+      "solution_line_template": "Now figure out how many of the {poisoned_tourists} poisoned tourists recovered: {poisoned_tourists} / {recovered_divisor} = <<{poisoned_tourists}/{recovered_divisor}={recovered_tourists}>>{recovered_tourists}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_surviving_tourists",
+      "question_inputs": [],
+      "solution_line_template": "The total number of surviving tourists is {unpoisoned_tourists} + {recovered_tourists} = <<{unpoisoned_tourists}+{recovered_tourists}={total_surviving_tourists}>>{total_surviving_tourists}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First, subtract the 2 tourists the anacondas got from the initial 30 tourists: 30 - 2 = <<30-2=28>>28",
+    "L2": "Next, divide 28 by 2 to find out how many tourists got poisoned: 28 / 2 = <<28/2=14>>14.",
+    "L3": "Now figure out how many of the 14 poisoned tourists recovered: 14 / 7 = <<14/7=2>>2.",
+    "L4": "The total number of surviving tourists is 26 + 2 = <<26+2=28>>28.",
+    "FA": "#### 28"
+  },
+  "erroneous_line_number": null,
+  "explanation": "Incorrect operand. The variable 'eaten_by_anacondas' (value: 2) was used instead of 'poisoned_tourists' (value: 14.0).",
+  "repro_seed": -6408373781465166534,
+  "model_name": "google_gemini-2.5-flash"
+}

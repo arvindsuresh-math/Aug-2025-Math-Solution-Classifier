@@ -1,0 +1,89 @@
+{
+  "index": 327,
+  "original_solution_mapping": {
+    "FA": "#### 7",
+    "L1": "First find the total number of baby minks: 30 minks * 6 babies/mink = <<30*6=180>>180 minks",
+    "L2": "Add this to the number of adult minks: 180 minks + 30 minks = <<180+30=210>>210 minks",
+    "L3": "Then divide this number in half to find how many aren't set free: 210 minks / 2 = <<210/2=105>>105 minks",
+    "L4": "Then divide the remaining number of minks by the number of minks per coat to find the number of coats: 105 minks / 15 minks/coat = <<105/15=7>>7 coats"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 327.\n    Returns: the number of coats Andy can make.\n    \"\"\"\n    # L1\n    initial_minks = 30 # Andy buys 30 minks\n    babies_per_mink = 6 # each mink has 6 babies\n    total_baby_minks = initial_minks * babies_per_mink\n\n    # L2\n    total_minks_before_release = total_baby_minks + initial_minks\n\n    # L3\n    release_divisor = 2 # half the total minks are set free\n    remaining_minks = total_minks_before_release / release_divisor\n\n    # L4\n    minks_per_coat = 15 # It takes 15 mink skins to make a coat\n    num_coats = remaining_minks / minks_per_coat\n\n    # FA\n    answer = num_coats\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "num_coats",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x30cc984d0>"
+  },
+  "correct_trace": {
+    "initial_minks": 30,
+    "babies_per_mink": 6,
+    "total_baby_minks": 180,
+    "total_minks_before_release": 210,
+    "release_divisor": 2,
+    "remaining_minks": 105.0,
+    "minks_per_coat": 15,
+    "num_coats": 7.0,
+    "answer": 7.0
+  },
+  "flawed_trace": {
+    "initial_minks": 30,
+    "babies_per_mink": 6,
+    "total_baby_minks": 180,
+    "total_minks_before_release": 210,
+    "release_divisor": 2,
+    "remaining_minks": 105.0,
+    "minks_per_coat": 15,
+    "num_coats": 90.0,
+    "answer": 90.0
+  },
+  "correct_value": 7.0,
+  "flawed_value": 90.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_baby_minks",
+      "question_inputs": [
+        "initial_minks",
+        "babies_per_mink"
+      ],
+      "solution_line_template": "First find the total number of baby minks: {initial_minks} minks * {babies_per_mink} babies/mink = <<{initial_minks}*{babies_per_mink}={total_baby_minks}>>{total_baby_minks} minks"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_minks_before_release",
+      "question_inputs": [],
+      "solution_line_template": "Add this to the number of adult minks: {total_baby_minks} minks + {initial_minks} minks = <<{total_baby_minks}+{initial_minks}={total_minks_before_release}>>{total_minks_before_release} minks"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_minks",
+      "question_inputs": [
+        "release_divisor"
+      ],
+      "solution_line_template": "Then divide this number in half to find how many aren't set free: {total_minks_before_release} minks / {release_divisor} = <<{total_minks_before_release}/{release_divisor}={remaining_minks}>>{remaining_minks} minks"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "num_coats",
+      "question_inputs": [
+        "minks_per_coat"
+      ],
+      "solution_line_template": "Then divide the remaining number of minks by the number of minks per coat to find the number of coats: {remaining_minks} minks / {minks_per_coat} minks/coat = <<{remaining_minks}/{minks_per_coat}={num_coats}>>{num_coats} coats"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total number of baby minks: 30 minks * 6 babies/mink = <<30*6=180>>180 minks",
+    "L2": "Add this to the number of adult minks: 180 minks + 30 minks = <<180+30=210>>210 minks",
+    "L3": "Then divide this number in half to find how many aren't set free: 210 minks / 2 = <<210/2=105>>105 minks",
+    "L4": "Then divide the remaining number of minks by the number of minks per coat to find the number of coats: 105 minks / 15 minks/coat = <<105/15=90>>90 coats",
+    "FA": "#### 90"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 1540409118998710860,
+  "model_name": "google_gemini-2.5-flash"
+}

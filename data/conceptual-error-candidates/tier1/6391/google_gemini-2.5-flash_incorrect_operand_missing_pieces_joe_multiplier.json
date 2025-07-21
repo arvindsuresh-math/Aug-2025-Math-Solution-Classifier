@@ -1,0 +1,88 @@
+{
+  "index": 6391,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "The puzzle is 500 pieces and the border used 75 pieces so 500-75 = <<500-75=425>>425 pieces left",
+    "L2": "Joe placed three times as many puzzle pieces as Trevor who placed 105 so Joe placed 3*105=315 piece",
+    "L3": "Together Joe and Trevor placed 315+105 pieces for a total of <<315+105=420>>420 pieces",
+    "L4": "With the border down that left 425 pieces left and they put down 420 pieces so that meant 425-420 = <<425-420=5>>5 pieces were missing"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6391.\n    Returns: the number of puzzle pieces that are missing.\n    \"\"\"\n    # L1\n    total_pieces = 500 # 500 piece puzzle\n    border_pieces = 75 # border used 75 pieces\n    pieces_after_border = total_pieces - border_pieces\n\n    # L2\n    trevor_pieces = 105 # Trevor was able to place 105 pieces\n    joe_multiplier = 3 # three times the number of puzzle pieces as Trevor\n    joe_pieces = joe_multiplier * trevor_pieces\n\n    # L3\n    total_placed_by_trevor_joe = joe_pieces + trevor_pieces\n\n    # L4\n    missing_pieces = pieces_after_border - total_placed_by_trevor_joe\n\n    # FA\n    answer = missing_pieces\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "missing_pieces",
+    "operand_to_replace": "total_placed_by_trevor_joe",
+    "replacement_variable": "joe_multiplier"
+  },
+  "correct_trace": {
+    "total_pieces": 500,
+    "border_pieces": 75,
+    "pieces_after_border": 425,
+    "trevor_pieces": 105,
+    "joe_multiplier": 3,
+    "joe_pieces": 315,
+    "total_placed_by_trevor_joe": 420,
+    "missing_pieces": 5,
+    "answer": 5
+  },
+  "flawed_trace": {
+    "total_pieces": 500,
+    "border_pieces": 75,
+    "pieces_after_border": 425,
+    "trevor_pieces": 105,
+    "joe_multiplier": 3,
+    "joe_pieces": 315,
+    "total_placed_by_trevor_joe": 420,
+    "missing_pieces": 422,
+    "answer": 422
+  },
+  "correct_value": 5,
+  "flawed_value": 422,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "pieces_after_border",
+      "question_inputs": [
+        "total_pieces",
+        "border_pieces"
+      ],
+      "solution_line_template": "The puzzle is {total_pieces} pieces and the border used {border_pieces} pieces so {total_pieces}-{border_pieces} = <<{total_pieces}-{border_pieces}={pieces_after_border}>>{pieces_after_border} pieces left"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "joe_pieces",
+      "question_inputs": [
+        "trevor_pieces",
+        "joe_multiplier"
+      ],
+      "solution_line_template": "Joe placed three times as many puzzle pieces as Trevor who placed {trevor_pieces} so Joe placed {joe_multiplier}*{trevor_pieces}={joe_pieces} piece"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_placed_by_trevor_joe",
+      "question_inputs": [],
+      "solution_line_template": "Together Joe and Trevor placed {joe_pieces}+{trevor_pieces} pieces for a total of <<{joe_pieces}+{trevor_pieces}={total_placed_by_trevor_joe}>>{total_placed_by_trevor_joe} pieces"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "missing_pieces",
+      "question_inputs": [],
+      "solution_line_template": "With the border down that left {pieces_after_border} pieces left and they put down {total_placed_by_trevor_joe} pieces so that meant {pieces_after_border}-{total_placed_by_trevor_joe} = <<{pieces_after_border}-{total_placed_by_trevor_joe}={missing_pieces}>>{missing_pieces} pieces were missing"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The puzzle is 500 pieces and the border used 75 pieces so 500-75 = <<500-75=425>>425 pieces left",
+    "L2": "Joe placed three times as many puzzle pieces as Trevor who placed 105 so Joe placed 3*105=315 piece",
+    "L3": "Together Joe and Trevor placed 315+105 pieces for a total of <<315+105=420>>420 pieces",
+    "L4": "With the border down that left 425 pieces left and they put down 3 pieces so that meant 425-3 = <<425-3=422>>422 pieces were missing",
+    "FA": "#### 422"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'joe_multiplier' (value: 3) was used instead of 'total_placed_by_trevor_joe' (value: 420).",
+  "repro_seed": -8788003945109968812,
+  "model_name": "google_gemini-2.5-flash"
+}

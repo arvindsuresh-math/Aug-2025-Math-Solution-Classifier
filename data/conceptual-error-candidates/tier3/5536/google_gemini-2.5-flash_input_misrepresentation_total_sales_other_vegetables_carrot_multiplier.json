@@ -1,0 +1,104 @@
+{
+  "index": 5536,
+  "original_solution_mapping": {
+    "FA": "#### 136",
+    "L1": "The sales of the carrot is 57 x 2 = $<<57*2=114>>114",
+    "L2": "Half the sales of carrot is $114 / 2 = $<<114/2=57>>57.",
+    "L3": "So, the sales of the spinach is $57 + $16 = <<57+16=73>>73",
+    "L4": "The total sales of the broccolis, carrots, spinach is $57 + $114 + $73 =$<<57+114+73=244>>244.",
+    "L5": "They made $380 - $244 = $<<380-244=136>>136 from cauliflower sales."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5536.\n    Returns: the amount of money made from cauliflower sales.\n    \"\"\"\n    # L1\n    broccoli_sales = 57 # made $57 from broccoli\n    carrot_multiplier = 2 # twice as much as the sales of broccoli\n    carrot_sales = broccoli_sales * carrot_multiplier\n\n    # L2\n    half_divisor = 2 # half of the sales of carrots\n    half_carrot_sales = carrot_sales / half_divisor\n\n    # L3\n    spinach_additional_amount = 16 # $16 more than half of the sales of carrots\n    spinach_sales = half_carrot_sales + spinach_additional_amount\n\n    # L4\n    total_sales_other_vegetables = broccoli_sales + carrot_sales + spinach_sales\n\n    # L5\n    total_earnings = 380 # made $380\n    cauliflower_sales = total_earnings - total_sales_other_vegetables\n\n    # FA\n    answer = cauliflower_sales\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_sales_other_vegetables",
+    "operand_to_replace": "broccoli_sales",
+    "replacement_variable": "carrot_multiplier"
+  },
+  "correct_trace": {
+    "broccoli_sales": 57,
+    "carrot_multiplier": 2,
+    "carrot_sales": 114,
+    "half_divisor": 2,
+    "half_carrot_sales": 57.0,
+    "spinach_additional_amount": 16,
+    "spinach_sales": 73.0,
+    "total_sales_other_vegetables": 244.0,
+    "total_earnings": 380,
+    "cauliflower_sales": 136.0,
+    "answer": 136.0
+  },
+  "flawed_trace": {
+    "broccoli_sales": 57,
+    "carrot_multiplier": 2,
+    "carrot_sales": 114,
+    "half_divisor": 2,
+    "half_carrot_sales": 57.0,
+    "spinach_additional_amount": 16,
+    "spinach_sales": 73.0,
+    "total_sales_other_vegetables": 189.0,
+    "total_earnings": 380,
+    "cauliflower_sales": 191.0,
+    "answer": 191.0
+  },
+  "correct_value": 244.0,
+  "flawed_value": 189.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "carrot_sales",
+      "question_inputs": [
+        "broccoli_sales",
+        "carrot_multiplier"
+      ],
+      "solution_line_template": "The sales of the carrot is {broccoli_sales} x {carrot_multiplier} = $<<{broccoli_sales}*{carrot_multiplier}={carrot_sales}>>{carrot_sales}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "half_carrot_sales",
+      "question_inputs": [
+        "half_divisor"
+      ],
+      "solution_line_template": "Half the sales of carrot is ${carrot_sales} / {half_divisor} = $<<{carrot_sales}/{half_divisor}={half_carrot_sales}>>{half_carrot_sales}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "spinach_sales",
+      "question_inputs": [
+        "spinach_additional_amount"
+      ],
+      "solution_line_template": "So, the sales of the spinach is ${half_carrot_sales} + ${spinach_additional_amount} = <<{half_carrot_sales}+{spinach_additional_amount}={spinach_sales}>>{spinach_sales}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_sales_other_vegetables",
+      "question_inputs": [],
+      "solution_line_template": "The total sales of the broccolis, carrots, spinach is ${broccoli_sales} + ${carrot_sales} + ${spinach_sales} =$<<{broccoli_sales}+{carrot_sales}+{spinach_sales}={total_sales_other_vegetables}>>{total_sales_other_vegetables}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "cauliflower_sales",
+      "question_inputs": [
+        "total_earnings"
+      ],
+      "solution_line_template": "They made ${total_earnings} - ${total_sales_other_vegetables} = $<<{total_earnings}-{total_sales_other_vegetables}={cauliflower_sales}>>{cauliflower_sales} from cauliflower sales."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The sales of the carrot is 57 x 2 = $<<57*2=114>>114",
+    "L2": "Half the sales of carrot is $114 / 2 = $<<114/2=57>>57.",
+    "L3": "So, the sales of the spinach is $57 + $16 = <<57+16=73>>73",
+    "L4": "The total sales of the broccolis, carrots, spinach is $2 + $114 + $73 =$<<2+114+73=189>>189.",
+    "L5": "They made $380 - $189 = $<<380-189=191>>191 from cauliflower sales.",
+    "FA": "#### 191"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'carrot_multiplier' (2) was used instead of 'broccoli_sales' (57).",
+  "repro_seed": -5490833764856818164,
+  "model_name": "google_gemini-2.5-flash"
+}

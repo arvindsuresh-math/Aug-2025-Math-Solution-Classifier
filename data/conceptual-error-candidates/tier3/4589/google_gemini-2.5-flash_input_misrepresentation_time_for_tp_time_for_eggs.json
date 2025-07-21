@@ -1,0 +1,93 @@
+{
+  "index": 4589,
+  "original_solution_mapping": {
+    "FA": "#### 225",
+    "L1": "First find how many eggs per minute the owner can clean up: 60 seconds/minute / 15 seconds/egg = <<60/15=4>>4 eggs/minute",
+    "L2": "Then divide the total number of eggs by the number of eggs cleaned per minute to find how long the owner spends cleaning them up: 60 eggs / 4 eggs/minute = <<60/4=15>>15 minutes",
+    "L3": "Then find the total time the owner spends cleaning up toilet paper: 7 rolls * 30 minutes/roll = <<7*30=210>>210 minutes",
+    "L4": "Finally, add that amount to the egg cleaning time to find the total cleaning time: 210 minutes + 15 minutes = <<210+15=225>>225 minutes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4589.\n    Returns: the total time spent cleaning up in minutes.\n    \"\"\"\n    # L1\n    seconds_per_minute = 60 # WK\n    time_per_egg_seconds = 15 # 15 seconds cleaning up each egg\n    eggs_per_minute = seconds_per_minute / time_per_egg_seconds\n\n    # L2\n    total_eggs = 60 # 60 eggs\n    time_for_eggs = total_eggs / eggs_per_minute\n\n    # L3\n    total_tp_rolls = 7 # 7 rolls of toilet paper\n    time_per_tp_roll_minutes = 30 # 30 minutes cleaning up each roll of toilet paper\n    time_for_tp = total_tp_rolls * time_per_tp_roll_minutes\n\n    # L4\n    total_cleaning_time = time_for_tp + time_for_eggs\n\n    # FA\n    answer = total_cleaning_time\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "time_for_tp",
+    "operand_to_replace": "total_tp_rolls",
+    "replacement_variable": "time_for_eggs"
+  },
+  "correct_trace": {
+    "seconds_per_minute": 60,
+    "time_per_egg_seconds": 15,
+    "eggs_per_minute": 4.0,
+    "total_eggs": 60,
+    "time_for_eggs": 15.0,
+    "total_tp_rolls": 7,
+    "time_per_tp_roll_minutes": 30,
+    "time_for_tp": 210,
+    "total_cleaning_time": 225.0,
+    "answer": 225.0
+  },
+  "flawed_trace": {
+    "seconds_per_minute": 60,
+    "time_per_egg_seconds": 15,
+    "eggs_per_minute": 4.0,
+    "total_eggs": 60,
+    "time_for_eggs": 15.0,
+    "total_tp_rolls": 7,
+    "time_per_tp_roll_minutes": 30,
+    "time_for_tp": 450.0,
+    "total_cleaning_time": 465.0,
+    "answer": 465.0
+  },
+  "correct_value": 210,
+  "flawed_value": 450.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "seconds_per_minute"
+      ],
+      "line_number": "L1",
+      "output_variable": "eggs_per_minute",
+      "question_inputs": [
+        "time_per_egg_seconds"
+      ],
+      "solution_line_template": "First find how many eggs per minute the owner can clean up: {seconds_per_minute} seconds/minute / {time_per_egg_seconds} seconds/egg = <<{seconds_per_minute}/{time_per_egg_seconds}={eggs_per_minute}>>{eggs_per_minute} eggs/minute"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "time_for_eggs",
+      "question_inputs": [
+        "total_eggs"
+      ],
+      "solution_line_template": "Then divide the total number of eggs by the number of eggs cleaned per minute to find how long the owner spends cleaning them up: {total_eggs} eggs / {eggs_per_minute} eggs/minute = <<{total_eggs}/{eggs_per_minute}={time_for_eggs}>>{time_for_eggs} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "time_for_tp",
+      "question_inputs": [
+        "total_tp_rolls",
+        "time_per_tp_roll_minutes"
+      ],
+      "solution_line_template": "Then find the total time the owner spends cleaning up toilet paper: {total_tp_rolls} rolls * {time_per_tp_roll_minutes} minutes/roll = <<{total_tp_rolls}*{time_per_tp_roll_minutes}={time_for_tp}>>{time_for_tp} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cleaning_time",
+      "question_inputs": [],
+      "solution_line_template": "Finally, add that amount to the egg cleaning time to find the total cleaning time: {time_for_tp} minutes + {time_for_eggs} minutes = <<{time_for_tp}+{time_for_eggs}={total_cleaning_time}>>{total_cleaning_time} minutes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how many eggs per minute the owner can clean up: 60 seconds/minute / 15 seconds/egg = <<60/15=4>>4 eggs/minute",
+    "L2": "Then divide the total number of eggs by the number of eggs cleaned per minute to find how long the owner spends cleaning them up: 60 eggs / 4 eggs/minute = <<60/4=15>>15 minutes",
+    "L3": "Then find the total time the owner spends cleaning up toilet paper: 15 rolls * 30 minutes/roll = <<15*30=450>>450 minutes",
+    "L4": "Finally, add that amount to the egg cleaning time to find the total cleaning time: 450 minutes + 15 minutes = <<450+15=465>>465 minutes",
+    "FA": "#### 465"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'time_for_eggs' (15.0) was used instead of 'total_tp_rolls' (7).",
+  "repro_seed": 5840884638261999013,
+  "model_name": "google_gemini-2.5-flash"
+}

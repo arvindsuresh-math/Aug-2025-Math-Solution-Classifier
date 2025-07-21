@@ -1,0 +1,67 @@
+{
+  "index": 1382,
+  "original_solution_mapping": {
+    "FA": "#### 84",
+    "L1": "An even split is 50%. If the monthly subscription is $14, but I pay only 50% that means I pay every month $14*50%=$<<14*50*.01=7>>7",
+    "L2": "We know that in 1 year there are 12 months. Therefore if each month I pay $7, in 12 months I'd pay $7*12=$<<7*12=84>>84"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1382.\n    Returns: the total amount paid for the service after the first year.\n    \"\"\"\n    # L1\n    monthly_subscription_cost = 14 # $14 a month\n    split_percent_text = 50 # 50%\n    percent_factor = 0.01 # WK\n    monthly_payment = monthly_subscription_cost * split_percent_text * percent_factor\n\n    # L2\n    months_per_year = 12 # in 1 year there are 12 months\n    total_yearly_payment = monthly_payment * months_per_year\n\n    # FA\n    answer = total_yearly_payment\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_yearly_payment",
+    "operand_to_replace": "monthly_payment",
+    "replacement_variable": "split_percent_text"
+  },
+  "correct_trace": {
+    "monthly_subscription_cost": 14,
+    "split_percent_text": 50,
+    "percent_factor": 0.01,
+    "monthly_payment": 7.0,
+    "months_per_year": 12,
+    "total_yearly_payment": 84.0,
+    "answer": 84.0
+  },
+  "flawed_trace": {
+    "monthly_subscription_cost": 14,
+    "split_percent_text": 50,
+    "percent_factor": 0.01,
+    "monthly_payment": 7.0,
+    "months_per_year": 12,
+    "total_yearly_payment": 600,
+    "answer": 600
+  },
+  "correct_value": 84.0,
+  "flawed_value": 600,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "monthly_payment",
+      "question_inputs": [
+        "monthly_subscription_cost",
+        "split_percent_text"
+      ],
+      "solution_line_template": "An even split is {split_percent_text}%. If the monthly subscription is ${monthly_subscription_cost}, but I pay only {split_percent_text}% that means I pay every month ${monthly_subscription_cost}*{split_percent_text}%=$<<{monthly_subscription_cost}*{split_percent_text}*{percent_factor}={monthly_payment}>>{monthly_payment}"
+    },
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_yearly_payment",
+      "question_inputs": [],
+      "solution_line_template": "We know that in 1 year there are {months_per_year} months. Therefore if each month I pay ${monthly_payment}, in {months_per_year} months I'd pay ${monthly_payment}*{months_per_year}=$<<{monthly_payment}*{months_per_year}={total_yearly_payment}>>{total_yearly_payment}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "An even split is 50%. If the monthly subscription is $14, but I pay only 50% that means I pay every month $14*50%=$<<14*50*0.01=7>>7",
+    "L2": "We know that in 1 year there are 12 months. Therefore if each month I pay $50, in 12 months I'd pay $50*12=$<<50*12=600>>600",
+    "FA": "#### 600"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'split_percent_text' (value: 50) was used instead of 'monthly_payment' (value: 7.0).",
+  "repro_seed": 7294922733660136735,
+  "model_name": "google_gemini-2.5-flash"
+}
