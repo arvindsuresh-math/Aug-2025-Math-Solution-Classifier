@@ -1,0 +1,107 @@
+{
+  "index": 2738,
+  "original_solution_mapping": {
+    "FA": "#### 42",
+    "L1": "Two $20 bills amount to $20 x 2 = $<<20*2=40>>40.",
+    "L2": "Three $5 bills amount to $5 x 3 = $<<5*3=15>>15.",
+    "L3": "So, Marj has $40 + $15 + $4.50 = $<<40+15+4.5=59.50>>59.50 in her wallet.",
+    "L4": "If she buys a cake, she will be left with $59.50 - $17.50 = $<<59.5-17.5=42>>42."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2738.\n    Returns: the amount of money left in Marj's wallet.\n    \"\"\"\n    # L1\n    bill_denomination_20 = 20 # two $20 bills\n    num_20_bills = 2 # two $20 bills\n    amount_from_20_bills = bill_denomination_20 * num_20_bills\n\n    # L2\n    bill_denomination_5 = 5 # three $5 bills\n    num_5_bills = 3 # three $5 bills\n    amount_from_5_bills = bill_denomination_5 * num_5_bills\n\n    # L3\n    loose_coins_amount = 4.50 # $4.50 in loose coins\n    loose_coins_amount_calc = 4.5 # WK\n    total_money_initial = amount_from_20_bills + amount_from_5_bills + loose_coins_amount_calc\n\n    # L4\n    cake_cost = 17.50 # cake that costs $17.50\n    total_money_initial_calc = 59.5 # WK\n    cake_cost_calc = 17.5 # WK\n    money_left = total_money_initial_calc - cake_cost_calc\n\n    # FA\n    answer = money_left\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "money_left",
+    "operand_to_replace": "cake_cost_calc",
+    "replacement_variable": "loose_coins_amount"
+  },
+  "correct_trace": {
+    "bill_denomination_20": 20,
+    "num_20_bills": 2,
+    "amount_from_20_bills": 40,
+    "bill_denomination_5": 5,
+    "num_5_bills": 3,
+    "amount_from_5_bills": 15,
+    "loose_coins_amount": 4.5,
+    "loose_coins_amount_calc": 4.5,
+    "total_money_initial": 59.5,
+    "cake_cost": 17.5,
+    "total_money_initial_calc": 59.5,
+    "cake_cost_calc": 17.5,
+    "money_left": 42.0,
+    "answer": 42.0
+  },
+  "flawed_trace": {
+    "bill_denomination_20": 20,
+    "num_20_bills": 2,
+    "amount_from_20_bills": 40,
+    "bill_denomination_5": 5,
+    "num_5_bills": 3,
+    "amount_from_5_bills": 15,
+    "loose_coins_amount": 4.5,
+    "loose_coins_amount_calc": 4.5,
+    "total_money_initial": 59.5,
+    "cake_cost": 17.5,
+    "total_money_initial_calc": 59.5,
+    "cake_cost_calc": 17.5,
+    "money_left": 55.0,
+    "answer": 55.0
+  },
+  "correct_value": 42.0,
+  "flawed_value": 55.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "amount_from_20_bills",
+      "question_inputs": [
+        "bill_denomination_20",
+        "num_20_bills"
+      ],
+      "solution_line_template": "Two ${bill_denomination_20} bills amount to ${bill_denomination_20} x {num_20_bills} = $<<{bill_denomination_20}*{num_20_bills}={amount_from_20_bills}>>{amount_from_20_bills}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "amount_from_5_bills",
+      "question_inputs": [
+        "bill_denomination_5",
+        "num_5_bills"
+      ],
+      "solution_line_template": "Three ${bill_denomination_5} bills amount to ${bill_denomination_5} x {num_5_bills} = $<<{bill_denomination_5}*{num_5_bills}={amount_from_5_bills}>>{amount_from_5_bills}."
+    },
+    {
+      "WK_inputs": [
+        "loose_coins_amount_calc"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_money_initial",
+      "question_inputs": [
+        "loose_coins_amount"
+      ],
+      "solution_line_template": "So, Marj has ${amount_from_20_bills} + ${amount_from_5_bills} + ${loose_coins_amount} = $<<{amount_from_20_bills}+{amount_from_5_bills}+{loose_coins_amount_calc}={total_money_initial}>>{total_money_initial} in her wallet."
+    },
+    {
+      "WK_inputs": [
+        "total_money_initial_calc",
+        "cake_cost_calc"
+      ],
+      "line_number": "L4",
+      "output_variable": "money_left",
+      "question_inputs": [
+        "cake_cost"
+      ],
+      "solution_line_template": "If she buys a cake, she will be left with ${total_money_initial} - ${cake_cost} = $<<{total_money_initial_calc}-{cake_cost_calc}={money_left}>>{money_left}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Two $20 bills amount to $20 x 2 = $<<20*2=40>>40.",
+    "L2": "Three $5 bills amount to $5 x 3 = $<<5*3=15>>15.",
+    "L3": "So, Marj has $40 + $15 + $4.5 = $<<40+15+4.5=59.5>>59.5 in her wallet.",
+    "L4": "If she buys a cake, she will be left with $59.5 - $17.5 = $<<59.5-4.5=55>>55.",
+    "FA": "#### 55"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'loose_coins_amount' (4.5) was used instead of 'cake_cost_calc' (17.5).",
+  "repro_seed": -7677987664853729408,
+  "model_name": "google_gemini-2.5-flash"
+}

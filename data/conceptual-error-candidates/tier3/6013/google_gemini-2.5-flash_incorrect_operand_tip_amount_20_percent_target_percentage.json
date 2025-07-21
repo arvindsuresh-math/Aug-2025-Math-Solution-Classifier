@@ -1,0 +1,70 @@
+{
+  "index": 6013,
+  "original_solution_mapping": {
+    "FA": "#### 56",
+    "L1": "If 15% is known to be $42, then 5% can be found by dividing $42 / 3 = $<<42/3=14>>14.",
+    "L2": "So 20% is $14 + $42 = $56."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6013.\n    Returns: the amount of a 20% tip.\n    \"\"\"\n    # L1\n    tip_amount_15_percent = 42 # 15% tip of $42\n    percentage_known = 15 # If 15% is known\n    percentage_part = 5 # then 5% can be found\n    division_factor = percentage_known / percentage_part\n    tip_amount_5_percent = tip_amount_15_percent / division_factor\n\n    # L2\n    target_percentage = 20 # 20% tip\n    tip_amount_20_percent = tip_amount_5_percent + tip_amount_15_percent\n\n    # FA\n    answer = tip_amount_20_percent\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "tip_amount_20_percent",
+    "operand_to_replace": "tip_amount_5_percent",
+    "replacement_variable": "target_percentage"
+  },
+  "correct_trace": {
+    "tip_amount_15_percent": 42,
+    "percentage_known": 15,
+    "percentage_part": 5,
+    "division_factor": 3.0,
+    "tip_amount_5_percent": 14.0,
+    "target_percentage": 20,
+    "tip_amount_20_percent": 56.0,
+    "answer": 56.0
+  },
+  "flawed_trace": {
+    "tip_amount_15_percent": 42,
+    "percentage_known": 15,
+    "percentage_part": 5,
+    "division_factor": 3.0,
+    "tip_amount_5_percent": 14.0,
+    "target_percentage": 20,
+    "tip_amount_20_percent": 62,
+    "answer": 62
+  },
+  "correct_value": 56.0,
+  "flawed_value": 62,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percentage_known",
+        "percentage_part",
+        "division_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "tip_amount_5_percent",
+      "question_inputs": [
+        "tip_amount_15_percent"
+      ],
+      "solution_line_template": "If {percentage_known}% is known to be ${tip_amount_15_percent}, then {percentage_part}% can be found by dividing ${tip_amount_15_percent} / {division_factor} = $<<{tip_amount_15_percent}/{division_factor}={tip_amount_5_percent}>>{tip_amount_5_percent}."
+    },
+    {
+      "WK_inputs": [
+        "target_percentage"
+      ],
+      "line_number": "L2",
+      "output_variable": "tip_amount_20_percent",
+      "question_inputs": [],
+      "solution_line_template": "So {target_percentage}% is ${tip_amount_5_percent} + ${tip_amount_15_percent} = ${tip_amount_20_percent}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If 15% is known to be $42, then 5% can be found by dividing $42 / 3 = $<<42/3=14>>14.",
+    "L2": "So 20% is $20 + $42 = $62.",
+    "FA": "#### 62"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'target_percentage' (value: 20) was used instead of 'tip_amount_5_percent' (value: 14.0).",
+  "repro_seed": 6962899662197769969,
+  "model_name": "google_gemini-2.5-flash"
+}

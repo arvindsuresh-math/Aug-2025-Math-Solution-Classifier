@@ -1,0 +1,85 @@
+{
+  "index": 2170,
+  "original_solution_mapping": {
+    "FA": "#### 14",
+    "L1": "Kristine spends $3 + $1 = $<<3+1=4>>4.",
+    "L2": "Three sets of barrettes cost 3 x $3 = $<<3*3=9>>9.",
+    "L3": "Crystal spends $9 + $1 = $<<9+1=10>>10.",
+    "L4": "Therefore, the two girls spend $4 + $10 = $<<4+10=14>>14."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2170.\n    Returns: the total amount the two girls spend altogether.\n    \"\"\"\n    # L1\n    barrette_cost_per_set = 3 # One set of barrettes costs $3 each\n    comb_cost_per_unit = 1 # one comb costs $1 each\n    kristine_total_spend = barrette_cost_per_set + comb_cost_per_unit\n\n    # L2\n    crystal_barrettes_sets = 3 # three sets of barrettes\n    crystal_barrettes_cost = crystal_barrettes_sets * barrette_cost_per_set\n\n    # L3\n    crystal_total_spend = crystal_barrettes_cost + comb_cost_per_unit\n\n    # L4\n    total_spend_altogether = kristine_total_spend + crystal_total_spend\n\n    # FA\n    answer = total_spend_altogether\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "crystal_total_spend",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x177ecba50>"
+  },
+  "correct_trace": {
+    "barrette_cost_per_set": 3,
+    "comb_cost_per_unit": 1,
+    "kristine_total_spend": 4,
+    "crystal_barrettes_sets": 3,
+    "crystal_barrettes_cost": 9,
+    "crystal_total_spend": 10,
+    "total_spend_altogether": 14,
+    "answer": 14
+  },
+  "flawed_trace": {
+    "barrette_cost_per_set": 3,
+    "comb_cost_per_unit": 1,
+    "kristine_total_spend": 4,
+    "crystal_barrettes_sets": 3,
+    "crystal_barrettes_cost": 9,
+    "crystal_total_spend": 9,
+    "total_spend_altogether": 13,
+    "answer": 13
+  },
+  "correct_value": 10,
+  "flawed_value": 9,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "barrette_cost_per_set",
+        "comb_cost_per_unit"
+      ],
+      "WK_inputs": [],
+      "output_variable": "kristine_total_spend",
+      "solution_line_template": "Kristine spends ${barrette_cost_per_set} + ${comb_cost_per_unit} = $<<{barrette_cost_per_set}+{comb_cost_per_unit}={kristine_total_spend}>>{kristine_total_spend}."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "crystal_barrettes_sets"
+      ],
+      "WK_inputs": [],
+      "output_variable": "crystal_barrettes_cost",
+      "solution_line_template": "Three sets of barrettes cost {crystal_barrettes_sets} x ${barrette_cost_per_set} = $<<{crystal_barrettes_sets}*{barrette_cost_per_set}={crystal_barrettes_cost}>>{crystal_barrettes_cost}."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "crystal_total_spend",
+      "solution_line_template": "Crystal spends ${crystal_barrettes_cost} + ${comb_cost_per_unit} = $<<{crystal_barrettes_cost}+{comb_cost_per_unit}={crystal_total_spend}>>{crystal_total_spend}."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_spend_altogether",
+      "solution_line_template": "Therefore, the two girls spend ${kristine_total_spend} + ${crystal_total_spend} = $<<{kristine_total_spend}+{crystal_total_spend}={total_spend_altogether}>>{total_spend_altogether}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Kristine spends $3 + $1 = $<<3+1=4>>4.",
+    "L2": "Three sets of barrettes cost 3 x $3 = $<<3*3=9>>9.",
+    "L3": "Crystal spends $9 + $1 = $<<9+1=9>>9.",
+    "L4": "Therefore, the two girls spend $4 + $9 = $<<4+9=13>>13.",
+    "FA": "#### 13"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 1795206303481481041,
+  "model_name": "google_gemini-2.5-flash"
+}

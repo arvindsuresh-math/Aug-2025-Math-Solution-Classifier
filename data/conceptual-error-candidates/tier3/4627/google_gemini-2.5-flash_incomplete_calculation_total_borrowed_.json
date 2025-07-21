@@ -1,0 +1,111 @@
+{
+  "index": 4627,
+  "original_solution_mapping": {
+    "FA": "#### 65",
+    "L1": "With the amount borrowed from her family, she has a total of 20+40+30= <<20+40+30=90>>90 dollars.",
+    "L2": "With the amount gifted from her granny, she has 70+90 = <<70+90=160>>160 dollars.",
+    "L3": "She adds this to her savings, ending up with a total of 160+100 = <<160+100=260>>260 dollars.",
+    "L4": "She spends 3/4 of this money, which is 3/4*260 = <<3/4*260=195>>195 dollars.",
+    "L5": "The total she remains with is 260-195 = <<260-195=65>>65 dollars"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4627.\n    Returns: the remaining money Asha has.\n    \"\"\"\n    # L1\n    borrowed_brother = 20 # borrow $20 from her brother\n    borrowed_father = 40 # $40 from her father\n    borrowed_mother = 30 # $30 from her mother\n    total_borrowed = borrowed_brother + borrowed_father + borrowed_mother\n\n    # L2\n    gifted_granny = 70 # gifted $70 by her granny\n    total_after_granny_gift = gifted_granny + total_borrowed\n\n    # L3\n    initial_savings = 100 # her savings of $100\n    total_money_before_spending = total_after_granny_gift + initial_savings\n\n    # L4\n    spent_fraction = Fraction(3, 4) # spent 3/4 of the money\n    money_spent = spent_fraction * total_money_before_spending\n\n    # L5\n    remaining_money = total_money_before_spending - money_spent\n\n    # FA\n    answer = remaining_money\n    return answer\n",
+  "mutation_details": {
+    "type": "incomplete_calculation",
+    "target_variable": "total_borrowed",
+    "operand_to_remove": "borrowed_father",
+    "original_operands": [
+      "borrowed_brother",
+      "borrowed_father",
+      "borrowed_mother"
+    ]
+  },
+  "correct_trace": {
+    "borrowed_brother": 20,
+    "borrowed_father": 40,
+    "borrowed_mother": 30,
+    "total_borrowed": 90,
+    "gifted_granny": 70,
+    "total_after_granny_gift": 160,
+    "initial_savings": 100,
+    "total_money_before_spending": 260,
+    "spent_fraction": "3/4",
+    "money_spent": "195",
+    "remaining_money": "65",
+    "answer": "65"
+  },
+  "flawed_trace": {
+    "borrowed_brother": 20,
+    "borrowed_father": 40,
+    "borrowed_mother": 30,
+    "total_borrowed": 50,
+    "gifted_granny": 70,
+    "total_after_granny_gift": 120,
+    "initial_savings": 100,
+    "total_money_before_spending": 220,
+    "spent_fraction": "3/4",
+    "money_spent": "165",
+    "remaining_money": "55",
+    "answer": "55"
+  },
+  "correct_value": 90,
+  "flawed_value": 50,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_borrowed",
+      "question_inputs": [
+        "borrowed_brother",
+        "borrowed_father",
+        "borrowed_mother"
+      ],
+      "solution_line_template": "With the amount borrowed from her family, she has a total of {borrowed_brother}+{borrowed_father}+{borrowed_mother}= <<{borrowed_brother}+{borrowed_father}+{borrowed_mother}={total_borrowed}>>{total_borrowed} dollars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_after_granny_gift",
+      "question_inputs": [
+        "gifted_granny"
+      ],
+      "solution_line_template": "With the amount gifted from her granny, she has {gifted_granny}+{total_borrowed} = <<{gifted_granny}+{total_borrowed}={total_after_granny_gift}>>{total_after_granny_gift} dollars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_money_before_spending",
+      "question_inputs": [
+        "initial_savings"
+      ],
+      "solution_line_template": "She adds this to her savings, ending up with a total of {total_after_granny_gift}+{initial_savings} = <<{total_after_granny_gift}+{initial_savings}={total_money_before_spending}>>{total_money_before_spending} dollars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "money_spent",
+      "question_inputs": [
+        "spent_fraction"
+      ],
+      "solution_line_template": "She spends {spent_fraction} of this money, which is {spent_fraction}*{total_money_before_spending} = <<{spent_fraction}*{total_money_before_spending}={money_spent}>>{money_spent} dollars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "remaining_money",
+      "question_inputs": [],
+      "solution_line_template": "The total she remains with is {total_money_before_spending}-{money_spent} = <<{total_money_before_spending}-{money_spent}={remaining_money}>>{remaining_money} dollars"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "With the amount borrowed from her family, she has a total of 20+30= <<20+30=50>>50 dollars.",
+    "L2": "With the amount gifted from her granny, she has 70+50 = <<70+50=120>>120 dollars.",
+    "L3": "She adds this to her savings, ending up with a total of 120+100 = <<120+100=220>>220 dollars.",
+    "L4": "She spends 3/4 of this money, which is 3/4*220 = <<3/4*220=165>>165 dollars.",
+    "L5": "The total she remains with is 220-165 = <<220-165=55>>55 dollars",
+    "FA": "#### 55"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incomplete calculation. The term 'borrowed_father' (value: 40) was omitted from the operation.",
+  "repro_seed": 5903059774443634987,
+  "model_name": "google_gemini-2.5-flash"
+}

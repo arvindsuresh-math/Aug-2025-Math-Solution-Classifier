@@ -1,0 +1,89 @@
+{
+  "index": 3535,
+  "original_solution_mapping": {
+    "FA": "#### 14",
+    "L1": "Her hair was 24\" long and she cut half off so she cut 24/2 = <<24/2=12>>12 inches",
+    "L2": "Her hair was 24\" long and she cut 12\" off so she has 24-12 = <<24-12=12>>12 inches left",
+    "L3": "She has 12\" of hair and lets it grow 4 more inches for a total of 12+4 = <<12+4=16>>16 inches",
+    "L4": "She has 16\" and cuts off 2 more inches which leaves her hair 16-2 = <<16-2=14>>14 inches long"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3535.\n    Returns: the final length of Marcia's hair.\n    \"\"\"\n    # L1\n    initial_hair_length = 24 # Marcia's hair is 24\" long\n    cut_fraction_denominator = 2 # cuts half of her hair off\n    cut_amount = initial_hair_length / cut_fraction_denominator\n\n    # L2\n    hair_after_first_cut = initial_hair_length - cut_amount\n\n    # L3\n    growth_amount = 4 # lets it grow out 4 more inches\n    hair_after_growth = hair_after_first_cut + growth_amount\n\n    # L4\n    second_cut_amount = 2 # cuts off another 2\" of hair\n    final_hair_length = hair_after_growth - second_cut_amount\n\n    # FA\n    answer = final_hair_length\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "cut_amount",
+    "operand_to_replace": "initial_hair_length",
+    "replacement_variable": "cut_fraction_denominator"
+  },
+  "correct_trace": {
+    "initial_hair_length": 24,
+    "cut_fraction_denominator": 2,
+    "cut_amount": 12.0,
+    "hair_after_first_cut": 12.0,
+    "growth_amount": 4,
+    "hair_after_growth": 16.0,
+    "second_cut_amount": 2,
+    "final_hair_length": 14.0,
+    "answer": 14.0
+  },
+  "flawed_trace": {
+    "initial_hair_length": 24,
+    "cut_fraction_denominator": 2,
+    "cut_amount": 1.0,
+    "hair_after_first_cut": 23.0,
+    "growth_amount": 4,
+    "hair_after_growth": 27.0,
+    "second_cut_amount": 2,
+    "final_hair_length": 25.0,
+    "answer": 25.0
+  },
+  "correct_value": 12.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cut_amount",
+      "question_inputs": [
+        "initial_hair_length",
+        "cut_fraction_denominator"
+      ],
+      "solution_line_template": "Her hair was {initial_hair_length}\" long and she cut half off so she cut {initial_hair_length}/{cut_fraction_denominator} = <<{initial_hair_length}/{cut_fraction_denominator}={cut_amount}>>{cut_amount} inches"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "hair_after_first_cut",
+      "question_inputs": [],
+      "solution_line_template": "Her hair was {initial_hair_length}\" long and she cut {cut_amount}\" off so she has {initial_hair_length}-{cut_amount} = <<{initial_hair_length}-{cut_amount}={hair_after_first_cut}>>{hair_after_first_cut} inches left"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "hair_after_growth",
+      "question_inputs": [
+        "growth_amount"
+      ],
+      "solution_line_template": "She has {hair_after_first_cut}\" of hair and lets it grow {growth_amount} more inches for a total of {hair_after_first_cut}+{growth_amount} = <<{hair_after_first_cut}+{growth_amount}={hair_after_growth}>>{hair_after_growth} inches"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_hair_length",
+      "question_inputs": [
+        "second_cut_amount"
+      ],
+      "solution_line_template": "She has {hair_after_growth}\" and cuts off {second_cut_amount} more inches which leaves her hair {hair_after_growth}-{second_cut_amount} = <<{hair_after_growth}-{second_cut_amount}={final_hair_length}>>{final_hair_length} inches long"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Her hair was 2\" long and she cut half off so she cut 2/2 = <<2/2=1>>1 inches",
+    "L2": "Her hair was 24\" long and she cut 1\" off so she has 24-1 = <<24-1=23>>23 inches left",
+    "L3": "She has 23\" of hair and lets it grow 4 more inches for a total of 23+4 = <<23+4=27>>27 inches",
+    "L4": "She has 27\" and cuts off 2 more inches which leaves her hair 27-2 = <<27-2=25>>25 inches long",
+    "FA": "#### 25"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'cut_fraction_denominator' (2) was used instead of 'initial_hair_length' (24).",
+  "repro_seed": -3851479640604487240,
+  "model_name": "google_gemini-2.5-flash"
+}

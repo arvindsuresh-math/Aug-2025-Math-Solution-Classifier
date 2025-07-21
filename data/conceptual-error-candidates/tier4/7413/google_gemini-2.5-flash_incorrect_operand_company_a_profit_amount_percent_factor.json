@@ -1,0 +1,81 @@
+{
+  "index": 7413,
+  "original_solution_mapping": {
+    "FA": "#### 90000",
+    "L1": "Let the total profit of both companies be denoted by x.",
+    "L2": "Therefore, 40% * x = 0.4 * x = $60000",
+    "L3": "So x = $60000 / 0.4 = $150000.",
+    "L4": "If Company B gets 60 % of the profits, it gets 60% of $150000, which is 0.6 * $150000 = $<<0.6*150000=90000>>90000."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7413.\n    Returns: the profit Company A gets.\n    \"\"\"\n    # L2\n    company_b_profit_percent_num = 40 # company B receives 40% of the profits\n    company_b_profit_amount = 60000 # company B gets a total of $60000 in profit\n    percent_factor = 0.01 # WK\n    company_b_profit_percent_decimal = company_b_profit_percent_num * percent_factor\n\n    # L3\n    total_profit = company_b_profit_amount / company_b_profit_percent_decimal\n\n    # L4\n    company_a_profit_percent_num = 60 # Company A receives 60% of the combined profits\n    company_a_profit_percent_decimal = company_a_profit_percent_num * percent_factor\n    company_a_profit_amount = company_a_profit_percent_decimal * total_profit\n\n    # FA\n    answer = company_a_profit_amount\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "company_a_profit_amount",
+    "operand_to_replace": "company_a_profit_percent_decimal",
+    "replacement_variable": "percent_factor"
+  },
+  "correct_trace": {
+    "company_b_profit_percent_num": 40,
+    "company_b_profit_amount": 60000,
+    "percent_factor": 0.01,
+    "company_b_profit_percent_decimal": 0.4,
+    "total_profit": 150000.0,
+    "company_a_profit_percent_num": 60,
+    "company_a_profit_percent_decimal": 0.6,
+    "company_a_profit_amount": 90000.0,
+    "answer": 90000.0
+  },
+  "flawed_trace": {
+    "company_b_profit_percent_num": 40,
+    "company_b_profit_amount": 60000,
+    "percent_factor": 0.01,
+    "company_b_profit_percent_decimal": 0.4,
+    "total_profit": 150000.0,
+    "company_a_profit_percent_num": 60,
+    "company_a_profit_percent_decimal": 0.6,
+    "company_a_profit_amount": 1500.0,
+    "answer": 1500.0
+  },
+  "correct_value": 90000.0,
+  "flawed_value": 1500.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L2",
+      "output_variable": "company_b_profit_percent_decimal",
+      "question_inputs": [
+        "company_b_profit_percent_num",
+        "company_b_profit_amount"
+      ],
+      "solution_line_template": "Therefore, {company_b_profit_percent_num}% * x = {company_b_profit_percent_decimal} * x = ${company_b_profit_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_profit",
+      "question_inputs": [],
+      "solution_line_template": "So x = ${company_b_profit_amount} / {company_b_profit_percent_decimal} = ${total_profit}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "company_a_profit_amount",
+      "question_inputs": [
+        "company_a_profit_percent_num"
+      ],
+      "solution_line_template": "If Company B gets {company_a_profit_percent_num} % of the profits, it gets {company_a_profit_percent_num}% of ${total_profit}, which is {company_a_profit_percent_decimal} * ${total_profit} = $<<{company_a_profit_percent_decimal}*{total_profit}={company_a_profit_amount}>>{company_a_profit_amount}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "Therefore, 40% * x = 0.4 * x = $60000",
+    "L3": "So x = $60000 / 0.4 = $150000.",
+    "L4": "If Company B gets 60 % of the profits, it gets 60% of $150000, which is 0.01 * $150000 = $<<0.01*150000=1500>>1500.",
+    "FA": "#### 1500"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'percent_factor' (value: 0.01) was used instead of 'company_a_profit_percent_decimal' (value: 0.6).",
+  "repro_seed": 632422013881489644,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,68 @@
+{
+  "index": 1617,
+  "original_solution_mapping": {
+    "FA": "#### 90",
+    "L1": "First find the cost of two slices of bread: $0.15/slice * 2 slices = $<<0.15*2=0.30>>0.30",
+    "L2": "Then add the cost of one slice each of ham and cheese: $0.30 + $0.25 + $0.35 = $<<0.30+0.25+0.35=0.90>>0.90"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1617.\n    Returns: the cost of a sandwich in cents.\n    \"\"\"\n    # L1\n    bread_slice_cost = 0.15 # a slice of bread costs $0.15\n    num_bread_slices = 2 # two slices of bread\n    cost_bread = bread_slice_cost * num_bread_slices\n\n    # L2\n    ham_slice_cost = 0.25 # a slice of ham costs $0.25\n    cheese_slice_cost = 0.35 # a slice of cheese costs $0.35\n    total_cost_dollars = cost_bread + ham_slice_cost + cheese_slice_cost\n\n    # FA\n    cents_per_dollar = 100 # WK\n    answer = total_cost_dollars * cents_per_dollar\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_cost_dollars",
+    "operand_to_replace": "cost_bread",
+    "replacement_variable": "num_bread_slices"
+  },
+  "correct_trace": {
+    "bread_slice_cost": 0.15,
+    "num_bread_slices": 2,
+    "cost_bread": 0.3,
+    "ham_slice_cost": 0.25,
+    "cheese_slice_cost": 0.35,
+    "total_cost_dollars": 0.9,
+    "cents_per_dollar": 100,
+    "answer": 90.0
+  },
+  "flawed_trace": {
+    "bread_slice_cost": 0.15,
+    "num_bread_slices": 2,
+    "cost_bread": 0.3,
+    "ham_slice_cost": 0.25,
+    "cheese_slice_cost": 0.35,
+    "total_cost_dollars": 2.6,
+    "cents_per_dollar": 100,
+    "answer": 260.0
+  },
+  "correct_value": 0.9,
+  "flawed_value": 2.6,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_bread",
+      "question_inputs": [
+        "bread_slice_cost",
+        "num_bread_slices"
+      ],
+      "solution_line_template": "First find the cost of {num_bread_slices} slices of bread: ${bread_slice_cost}/slice * {num_bread_slices} slices = $<<{bread_slice_cost}*{num_bread_slices}={cost_bread}>>{cost_bread}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost_dollars",
+      "question_inputs": [
+        "ham_slice_cost",
+        "cheese_slice_cost"
+      ],
+      "solution_line_template": "Then add the cost of one slice each of ham and cheese: ${cost_bread} + ${ham_slice_cost} + ${cheese_slice_cost} = $<<{cost_bread}+{ham_slice_cost}+{cheese_slice_cost}={total_cost_dollars}>>{total_cost_dollars}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the cost of 2 slices of bread: $0.15/slice * 2 slices = $<<0.15*2=0.3>>0.3",
+    "L2": "Then add the cost of one slice each of ham and cheese: $2 + $0.25 + $0.35 = $<<2+0.25+0.35=2.6>>2.6",
+    "FA": "#### 260"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'num_bread_slices' (value: 2) was used instead of 'cost_bread' (value: 0.3).",
+  "repro_seed": -6542993295743364749,
+  "model_name": "google_gemini-2.5-flash"
+}

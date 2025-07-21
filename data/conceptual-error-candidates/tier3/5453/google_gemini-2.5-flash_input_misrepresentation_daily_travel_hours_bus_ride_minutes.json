@@ -1,0 +1,96 @@
+{
+  "index": 5453,
+  "original_solution_mapping": {
+    "FA": "#### 365",
+    "L1": "Bryan spends 5+20+5 =<<5+20+5=30>>30 minutes traveling to work.",
+    "L2": "He does this twice a day, so he spends 30*2=<<30*2=60>>60 minutes traveling per day.",
+    "L3": "Thus, he spends 60/60=<<60/60=1>>1 hour traveling to and from work every day.",
+    "L4": "Thus, he spends 1 hour*365 days =<<1*365=365>>365 hours traveling per year."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5453.\n    Returns: the total hours Bryan spends traveling per year.\n    \"\"\"\n    # L1\n    walk_to_bus_minutes = 5 # 5 minutes to walk from his house to the bus station\n    bus_ride_minutes = 20 # rides the bus for 20 minutes\n    walk_from_bus_minutes = 5 # walks 5 minutes from the bus station to his job\n    travel_to_work_minutes = walk_to_bus_minutes + bus_ride_minutes + walk_from_bus_minutes\n\n    # L2\n    times_per_day = 2 # twice a day\n    daily_travel_minutes = travel_to_work_minutes * times_per_day\n\n    # L3\n    minutes_per_hour = 60 # WK\n    daily_travel_hours = daily_travel_minutes / minutes_per_hour\n\n    # L4\n    days_per_year = 365 # WK\n    annual_travel_hours = daily_travel_hours * days_per_year\n\n    # FA\n    answer = annual_travel_hours\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "daily_travel_hours",
+    "operand_to_replace": "minutes_per_hour",
+    "replacement_variable": "bus_ride_minutes"
+  },
+  "correct_trace": {
+    "walk_to_bus_minutes": 5,
+    "bus_ride_minutes": 20,
+    "walk_from_bus_minutes": 5,
+    "travel_to_work_minutes": 30,
+    "times_per_day": 2,
+    "daily_travel_minutes": 60,
+    "minutes_per_hour": 60,
+    "daily_travel_hours": 1.0,
+    "days_per_year": 365,
+    "annual_travel_hours": 365.0,
+    "answer": 365.0
+  },
+  "flawed_trace": {
+    "walk_to_bus_minutes": 5,
+    "bus_ride_minutes": 20,
+    "walk_from_bus_minutes": 5,
+    "travel_to_work_minutes": 30,
+    "times_per_day": 2,
+    "daily_travel_minutes": 60,
+    "minutes_per_hour": 60,
+    "daily_travel_hours": 3.0,
+    "days_per_year": 365,
+    "annual_travel_hours": 1095.0,
+    "answer": 1095.0
+  },
+  "correct_value": 1.0,
+  "flawed_value": 3.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "travel_to_work_minutes",
+      "question_inputs": [
+        "walk_to_bus_minutes",
+        "bus_ride_minutes",
+        "walk_from_bus_minutes"
+      ],
+      "solution_line_template": "Bryan spends {walk_to_bus_minutes}+{bus_ride_minutes}+{walk_from_bus_minutes} =<<{walk_to_bus_minutes}+{bus_ride_minutes}+{walk_from_bus_minutes}={travel_to_work_minutes}>>{travel_to_work_minutes} minutes traveling to work."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "daily_travel_minutes",
+      "question_inputs": [
+        "times_per_day"
+      ],
+      "solution_line_template": "He does this {times_per_day} a day, so he spends {travel_to_work_minutes}*{times_per_day}=<<{travel_to_work_minutes}*{times_per_day}={daily_travel_minutes}>>{daily_travel_minutes} minutes traveling per day."
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L3",
+      "output_variable": "daily_travel_hours",
+      "question_inputs": [],
+      "solution_line_template": "Thus, he spends {daily_travel_minutes}/{minutes_per_hour}=<<{daily_travel_minutes}/{minutes_per_hour}={daily_travel_hours}>>{daily_travel_hours} hour traveling to and from work every day."
+    },
+    {
+      "WK_inputs": [
+        "days_per_year"
+      ],
+      "line_number": "L4",
+      "output_variable": "annual_travel_hours",
+      "question_inputs": [],
+      "solution_line_template": "Thus, he spends {daily_travel_hours} hour*{days_per_year} days =<<{daily_travel_hours}*{days_per_year}={annual_travel_hours}>>{annual_travel_hours} hours traveling per year."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Bryan spends 5+20+5 =<<5+20+5=30>>30 minutes traveling to work.",
+    "L2": "He does this 2 a day, so he spends 30*2=<<30*2=60>>60 minutes traveling per day.",
+    "L3": "Thus, he spends 60/20=<<60/20=3>>3 hour traveling to and from work every day.",
+    "L4": "Thus, he spends 3 hour*365 days =<<3*365=1095>>1095 hours traveling per year.",
+    "FA": "#### 1095"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'bus_ride_minutes' (20) was used instead of 'minutes_per_hour' (60).",
+  "repro_seed": -6382092187220004028,
+  "model_name": "google_gemini-2.5-flash"
+}

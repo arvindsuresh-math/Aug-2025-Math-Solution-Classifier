@@ -1,0 +1,89 @@
+{
+  "index": 1800,
+  "original_solution_mapping": {
+    "FA": "#### 28",
+    "L1": "Leo got 2 x 2 = <<2*2=4>>4 mistakes.",
+    "L2": "So, Brent got 4 + 1 = <<4+1=5>>5 mistakes.",
+    "L3": "This means that 25 + 5 = <<25+5=30>>30 is the perfect score.",
+    "L4": "Hence, Madeline got a score of 30 - 2 = <<30-2=28>>28."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1800.\n    Returns: Madeline's score in the Geometry exam.\n    \"\"\"\n    # L1\n    madeline_mistakes = 2 # Madeline got 2 mistakes\n    multiplier_for_leo = 2 # half as many mistakes as Leo\n    leo_mistakes = madeline_mistakes * multiplier_for_leo\n\n    # L2\n    brent_more_mistakes_than_leo = 1 # 1 more mistake than Leo\n    brent_mistakes = leo_mistakes + brent_more_mistakes_than_leo\n\n    # L3\n    brent_score = 25 # Brent scored 25\n    perfect_score = brent_score + brent_mistakes\n\n    # L4\n    madeline_score = perfect_score - madeline_mistakes\n\n    # FA\n    answer = madeline_score\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "madeline_score",
+    "operand_to_replace": "madeline_mistakes",
+    "replacement_variable": "brent_score"
+  },
+  "correct_trace": {
+    "madeline_mistakes": 2,
+    "multiplier_for_leo": 2,
+    "leo_mistakes": 4,
+    "brent_more_mistakes_than_leo": 1,
+    "brent_mistakes": 5,
+    "brent_score": 25,
+    "perfect_score": 30,
+    "madeline_score": 28,
+    "answer": 28
+  },
+  "flawed_trace": {
+    "madeline_mistakes": 2,
+    "multiplier_for_leo": 2,
+    "leo_mistakes": 4,
+    "brent_more_mistakes_than_leo": 1,
+    "brent_mistakes": 5,
+    "brent_score": 25,
+    "perfect_score": 30,
+    "madeline_score": 5,
+    "answer": 5
+  },
+  "correct_value": 28,
+  "flawed_value": 5,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "madeline_mistakes",
+        "multiplier_for_leo"
+      ],
+      "WK_inputs": [],
+      "output_variable": "leo_mistakes",
+      "solution_line_template": "Leo got {madeline_mistakes} x {multiplier_for_leo} = <<{madeline_mistakes}*{multiplier_for_leo}={leo_mistakes}>>{leo_mistakes} mistakes."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "brent_more_mistakes_than_leo"
+      ],
+      "WK_inputs": [],
+      "output_variable": "brent_mistakes",
+      "solution_line_template": "So, Brent got {leo_mistakes} + {brent_more_mistakes_than_leo} = <<{leo_mistakes}+{brent_more_mistakes_than_leo}={brent_mistakes}>>{brent_mistakes} mistakes."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "brent_score"
+      ],
+      "WK_inputs": [],
+      "output_variable": "perfect_score",
+      "solution_line_template": "This means that {brent_score} + {brent_mistakes} = <<{brent_score}+{brent_mistakes}={perfect_score}>>{perfect_score} is the perfect score."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "madeline_score",
+      "solution_line_template": "Hence, Madeline got a score of {perfect_score} - {madeline_mistakes} = <<{perfect_score}-{madeline_mistakes}={madeline_score}>>{madeline_score}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Leo got 2 x 2 = <<2*2=4>>4 mistakes.",
+    "L2": "So, Brent got 4 + 1 = <<4+1=5>>5 mistakes.",
+    "L3": "This means that 25 + 5 = <<25+5=30>>30 is the perfect score.",
+    "L4": "Hence, Madeline got a score of 30 - 25 = <<30-25=5>>5.",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'brent_score' (25) was used instead of 'madeline_mistakes' (2).",
+  "repro_seed": -5857911300544815050,
+  "model_name": "google_gemini-2.5-flash"
+}

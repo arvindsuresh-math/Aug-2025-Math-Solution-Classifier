@@ -1,0 +1,89 @@
+{
+  "index": 4511,
+  "original_solution_mapping": {
+    "FA": "#### 7",
+    "L1": "The teacher brings 14 bars to school because 7 x 2 = <<7*2=14>>14",
+    "L2": "There are 21 total bars of chocolate because 7 + 14 = <<7+14=21>>21",
+    "L3": "There are 168 total squares of chocolate because 21 x 8 = <<21*8=168>>168",
+    "L4": "Each student gets 7 squares because 168 / 24 = <<168/24=7>>7"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4511.\n    Returns: the number of chocolate squares each student gets.\n    \"\"\"\n    # L1\n    gerald_bars = 7 # He brings 7 total bars\n    teacher_multiplier = 2 # she will bring two more identical ones\n    teacher_bars = gerald_bars * teacher_multiplier\n\n    # L2\n    total_bars = gerald_bars + teacher_bars\n\n    # L3\n    squares_per_bar = 8 # Each bar contains 8 squares\n    total_squares = total_bars * squares_per_bar\n\n    # L4\n    num_students = 24 # There are 24 students in class\n    squares_per_student = total_squares / num_students\n\n    # FA\n    answer = squares_per_student\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "squares_per_student",
+    "operand_to_replace": "total_squares",
+    "replacement_variable": "num_students"
+  },
+  "correct_trace": {
+    "gerald_bars": 7,
+    "teacher_multiplier": 2,
+    "teacher_bars": 14,
+    "total_bars": 21,
+    "squares_per_bar": 8,
+    "total_squares": 168,
+    "num_students": 24,
+    "squares_per_student": 7.0,
+    "answer": 7.0
+  },
+  "flawed_trace": {
+    "gerald_bars": 7,
+    "teacher_multiplier": 2,
+    "teacher_bars": 14,
+    "total_bars": 21,
+    "squares_per_bar": 8,
+    "total_squares": 168,
+    "num_students": 24,
+    "squares_per_student": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 7.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "teacher_bars",
+      "question_inputs": [
+        "gerald_bars",
+        "teacher_multiplier"
+      ],
+      "solution_line_template": "The teacher brings {teacher_bars} bars to school because {gerald_bars} x {teacher_multiplier} = <<{gerald_bars}*{teacher_multiplier}={teacher_bars}>>{teacher_bars}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_bars",
+      "question_inputs": [],
+      "solution_line_template": "There are {total_bars} total bars of chocolate because {gerald_bars} + {teacher_bars} = <<{gerald_bars}+{teacher_bars}={total_bars}>>{total_bars}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_squares",
+      "question_inputs": [
+        "squares_per_bar"
+      ],
+      "solution_line_template": "There are {total_squares} total squares of chocolate because {total_bars} x {squares_per_bar} = <<{total_bars}*{squares_per_bar}={total_squares}>>{total_squares}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "squares_per_student",
+      "question_inputs": [
+        "num_students"
+      ],
+      "solution_line_template": "Each student gets {squares_per_student} squares because {total_squares} / {num_students} = <<{total_squares}/{num_students}={squares_per_student}>>{squares_per_student}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The teacher brings 14 bars to school because 7 x 2 = <<7*2=14>>14",
+    "L2": "There are 21 total bars of chocolate because 7 + 14 = <<7+14=21>>21",
+    "L3": "There are 168 total squares of chocolate because 21 x 8 = <<21*8=168>>168",
+    "L4": "Each student gets 1 squares because 24 / 24 = <<24/24=1>>1",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'num_students' (value: 24) was used instead of 'total_squares' (value: 168).",
+  "repro_seed": 142951096860615289,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 5745,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "Each turn Barry takes standing on his head lasts for 10+5=<<10+5=15>>15 minutes.",
+    "L2": "2 hours is 60*2=<<2*60=120>>120 minutes.",
+    "L3": "Barry can take 120/15=<<120/15=8>>8 turns standing on his head over two hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5745.\n    Returns: the number of turns Barry can take standing on his head.\n    \"\"\"\n    # L1\n    headstand_duration = 10 # stands on his head for 10 minutes\n    rest_duration = 5 # sit for 5 minutes\n    total_turn_duration = headstand_duration + rest_duration\n\n    # L2\n    hours_period = 2 # single 2-hour period\n    minutes_per_hour = 60 # WK\n    total_minutes_period = minutes_per_hour * hours_period\n\n    # L3\n    number_of_turns = total_minutes_period / total_turn_duration\n\n    # FA\n    answer = number_of_turns\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_minutes_period",
+    "operand_to_replace": "minutes_per_hour",
+    "replacement_variable": "total_turn_duration"
+  },
+  "correct_trace": {
+    "headstand_duration": 10,
+    "rest_duration": 5,
+    "total_turn_duration": 15,
+    "hours_period": 2,
+    "minutes_per_hour": 60,
+    "total_minutes_period": 120,
+    "number_of_turns": 8.0,
+    "answer": 8.0
+  },
+  "flawed_trace": {
+    "headstand_duration": 10,
+    "rest_duration": 5,
+    "total_turn_duration": 15,
+    "hours_period": 2,
+    "minutes_per_hour": 60,
+    "total_minutes_period": 30,
+    "number_of_turns": 2.0,
+    "answer": 2.0
+  },
+  "correct_value": 120,
+  "flawed_value": 30,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_turn_duration",
+      "question_inputs": [
+        "headstand_duration",
+        "rest_duration"
+      ],
+      "solution_line_template": "Each turn Barry takes standing on his head lasts for {headstand_duration}+{rest_duration}=<<{headstand_duration}+{rest_duration}={total_turn_duration}>>{total_turn_duration} minutes."
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_minutes_period",
+      "question_inputs": [
+        "hours_period"
+      ],
+      "solution_line_template": "{hours_period} hours is {minutes_per_hour}*{hours_period}=<<{hours_period}*{minutes_per_hour}={total_minutes_period}>>{total_minutes_period} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "number_of_turns",
+      "question_inputs": [],
+      "solution_line_template": "Barry can take {total_minutes_period}/{total_turn_duration}=<<{total_minutes_period}/{total_turn_duration}={number_of_turns}>>{number_of_turns} turns standing on his head over two hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each turn Barry takes standing on his head lasts for 10+5=<<10+5=15>>15 minutes.",
+    "L2": "2 hours is 15*2=<<2*15=30>>30 minutes.",
+    "L3": "Barry can take 30/15=<<30/15=2>>2 turns standing on his head over two hours.",
+    "FA": "#### 2"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_turn_duration' (15) was used instead of 'minutes_per_hour' (60).",
+  "repro_seed": -7892784133569486282,
+  "model_name": "google_gemini-2.5-flash"
+}

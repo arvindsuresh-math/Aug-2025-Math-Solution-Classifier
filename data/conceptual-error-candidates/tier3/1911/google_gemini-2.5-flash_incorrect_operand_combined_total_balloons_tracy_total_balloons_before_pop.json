@@ -1,0 +1,92 @@
+{
+  "index": 1911,
+  "original_solution_mapping": {
+    "FA": "#### 35",
+    "L1": "When Brooke gets twelve more balloons, his total becomes 12+8 = <<12+8=20>>20",
+    "L2": "When Tracy adds 24 more balloons to her 6, her total number of balloons becomes 24+6 = <<24+6=30>>30",
+    "L3": "When half of Tracy's balloons pop, she remains with 1/2*30 =<<1/2*30=15>>15",
+    "L4": "The combined total balloons for the two is 15+20 = <<15+20=35>>35 balloons"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1911.\n    Returns: the total number of balloons they will have.\n    \"\"\"\n    # L1\n    brooke_current_balloons = 12 # his current 12\n    brooke_added_balloons = 8 # adds eight balloons\n    brooke_total_balloons = brooke_current_balloons + brooke_added_balloons\n\n    # L2\n    tracy_added_balloons = 24 # adds 24\n    tracy_current_balloons = 6 # her current 6\n    tracy_total_balloons_before_pop = tracy_added_balloons + tracy_current_balloons\n\n    # L3\n    pop_fraction = Fraction(1, 2) # pops half of her balloons\n    tracy_balloons_after_pop = pop_fraction * tracy_total_balloons_before_pop\n\n    # L4\n    combined_total_balloons = tracy_balloons_after_pop + brooke_total_balloons\n\n    # FA\n    answer = combined_total_balloons\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "combined_total_balloons",
+    "operand_to_replace": "brooke_total_balloons",
+    "replacement_variable": "tracy_total_balloons_before_pop"
+  },
+  "correct_trace": {
+    "brooke_current_balloons": 12,
+    "brooke_added_balloons": 8,
+    "brooke_total_balloons": 20,
+    "tracy_added_balloons": 24,
+    "tracy_current_balloons": 6,
+    "tracy_total_balloons_before_pop": 30,
+    "pop_fraction": "1/2",
+    "tracy_balloons_after_pop": "15",
+    "combined_total_balloons": "35",
+    "answer": "35"
+  },
+  "flawed_trace": {
+    "brooke_current_balloons": 12,
+    "brooke_added_balloons": 8,
+    "brooke_total_balloons": 20,
+    "tracy_added_balloons": 24,
+    "tracy_current_balloons": 6,
+    "tracy_total_balloons_before_pop": 30,
+    "pop_fraction": "1/2",
+    "tracy_balloons_after_pop": "15",
+    "combined_total_balloons": "45",
+    "answer": "45"
+  },
+  "correct_value": "35",
+  "flawed_value": "45",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "brooke_total_balloons",
+      "question_inputs": [
+        "brooke_current_balloons",
+        "brooke_added_balloons"
+      ],
+      "solution_line_template": "When Brooke gets {brooke_current_balloons} more balloons, his total becomes {brooke_current_balloons}+{brooke_added_balloons} = <<{brooke_current_balloons}+{brooke_added_balloons}={brooke_total_balloons}>>{brooke_total_balloons}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "tracy_total_balloons_before_pop",
+      "question_inputs": [
+        "tracy_added_balloons",
+        "tracy_current_balloons"
+      ],
+      "solution_line_template": "When Tracy adds {tracy_added_balloons} more balloons to her {tracy_current_balloons}, her total number of balloons becomes {tracy_added_balloons}+{tracy_current_balloons} = <<{tracy_added_balloons}+{tracy_current_balloons}={tracy_total_balloons_before_pop}>>{tracy_total_balloons_before_pop}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "tracy_balloons_after_pop",
+      "question_inputs": [
+        "pop_fraction"
+      ],
+      "solution_line_template": "When half of Tracy's balloons pop, she remains with {pop_fraction}*{tracy_total_balloons_before_pop} =<<{pop_fraction}*{tracy_total_balloons_before_pop}={tracy_balloons_after_pop}>>{tracy_balloons_after_pop}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "combined_total_balloons",
+      "question_inputs": [],
+      "solution_line_template": "The combined total balloons for the two is {tracy_balloons_after_pop}+{brooke_total_balloons} = <<{tracy_balloons_after_pop}+{brooke_total_balloons}={combined_total_balloons}>>{combined_total_balloons} balloons"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "When Brooke gets 12 more balloons, his total becomes 12+8 = <<12+8=20>>20",
+    "L2": "When Tracy adds 24 more balloons to her 6, her total number of balloons becomes 24+6 = <<24+6=30>>30",
+    "L3": "When half of Tracy's balloons pop, she remains with 1/2*30 =<<1/2*30=15>>15",
+    "L4": "The combined total balloons for the two is 15+30 = <<15+30=45>>45 balloons",
+    "FA": "#### 45"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'tracy_total_balloons_before_pop' (value: 30) was used instead of 'brooke_total_balloons' (value: 20).",
+  "repro_seed": 5141648920763749438,
+  "model_name": "google_gemini-2.5-flash"
+}

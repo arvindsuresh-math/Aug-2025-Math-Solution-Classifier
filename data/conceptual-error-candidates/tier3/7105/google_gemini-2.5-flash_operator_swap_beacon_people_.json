@@ -1,0 +1,63 @@
+{
+  "index": 7105,
+  "original_solution_mapping": {
+    "FA": "#### 500",
+    "L1": "Victoria has 3000-1000=<<3000-1000=2000>>2000 people.",
+    "L2": "Beacon has 2000/4=<<2000/4=500>>500 people."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7105.\n    Returns: the number of people in Beacon.\n    \"\"\"\n    # L1\n    richmond_people = 3000 # Richmond has 3000 people\n    more_than_victoria = 1000 # 1000 more people than Victoria\n    victoria_people = richmond_people - more_than_victoria\n\n    # L2\n    times_as_many = 4 # Victoria has 4 times as many people as Beacon\n    beacon_people = victoria_people / times_as_many\n\n    # FA\n    answer = beacon_people\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "beacon_people",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x30b3fe090>"
+  },
+  "correct_trace": {
+    "richmond_people": 3000,
+    "more_than_victoria": 1000,
+    "victoria_people": 2000,
+    "times_as_many": 4,
+    "beacon_people": 500.0,
+    "answer": 500.0
+  },
+  "flawed_trace": {
+    "richmond_people": 3000,
+    "more_than_victoria": 1000,
+    "victoria_people": 2000,
+    "times_as_many": 4,
+    "beacon_people": 1996,
+    "answer": 1996
+  },
+  "correct_value": 500.0,
+  "flawed_value": 1996,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "victoria_people",
+      "question_inputs": [
+        "richmond_people",
+        "more_than_victoria"
+      ],
+      "solution_line_template": "Victoria has {richmond_people}-{more_than_victoria}=<<{richmond_people}-{more_than_victoria}={victoria_people}>>{victoria_people} people."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "beacon_people",
+      "question_inputs": [
+        "times_as_many"
+      ],
+      "solution_line_template": "Beacon has {victoria_people}/{times_as_many}=<<{victoria_people}/{times_as_many}={beacon_people}>>{beacon_people} people."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Victoria has 3000-1000=<<3000-1000=2000>>2000 people.",
+    "L2": "Beacon has 2000/4=<<2000/4=1996>>1996 people.",
+    "FA": "#### 1996"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 205351128220159092,
+  "model_name": "google_gemini-2.5-flash"
+}

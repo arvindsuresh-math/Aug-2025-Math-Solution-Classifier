@@ -1,0 +1,85 @@
+{
+  "index": 7372,
+  "original_solution_mapping": {
+    "FA": "#### 550",
+    "L1": "Since the distance between city A and B is 100 miles, and city B and C are 50 more miles apart than city A and B, then city B and C are 100+50 = <<100+50=150>>150 miles apart.",
+    "L2": "The plane's total flying distance between cities A and C is 100+150= <<100+150=250>>250 miles.",
+    "L3": "The distance between city C and city D is twice the distance between city B and city C, meaning city C and city D are 2*150 = <<300=300>>300 miles apart.",
+    "L4": "The plane flies a distance of 250+300 = <<250+300=550>>550 miles from city A to city D."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7372.\n    Returns: the total distance between city A and city D.\n    \"\"\"\n    # L1\n    dist_AB = 100 # The distance between city A and city B is 100 miles\n    dist_BC_more_than_AB = 50 # city B and C are 50 more miles apart than city A and B\n    dist_BC = dist_AB + dist_BC_more_than_AB\n\n    # L2\n    dist_AC = dist_AB + dist_BC\n\n    # L3\n    multiplier_CD_BC = 2 # twice the distance between city B and city C\n    dist_CD = multiplier_CD_BC * dist_BC\n\n    # L4\n    total_distance_AD = dist_AC + dist_CD\n\n    # FA\n    answer = total_distance_AD\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_distance_AD",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x1696a7110>"
+  },
+  "correct_trace": {
+    "dist_AB": 100,
+    "dist_BC_more_than_AB": 50,
+    "dist_BC": 150,
+    "dist_AC": 250,
+    "multiplier_CD_BC": 2,
+    "dist_CD": 300,
+    "total_distance_AD": 550,
+    "answer": 550
+  },
+  "flawed_trace": {
+    "dist_AB": 100,
+    "dist_BC_more_than_AB": 50,
+    "dist_BC": 150,
+    "dist_AC": 250,
+    "multiplier_CD_BC": 2,
+    "dist_CD": 300,
+    "total_distance_AD": 75000,
+    "answer": 75000
+  },
+  "correct_value": 550,
+  "flawed_value": 75000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "dist_BC",
+      "question_inputs": [
+        "dist_AB",
+        "dist_BC_more_than_AB"
+      ],
+      "solution_line_template": "Since the distance between city A and B is {dist_AB} miles, and city B and C are {dist_BC_more_than_AB} more miles apart than city A and B, then city B and C are {dist_AB}+{dist_BC_more_than_AB} = <<{dist_AB}+{dist_BC_more_than_AB}={dist_BC}>>{dist_BC} miles apart."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "dist_AC",
+      "question_inputs": [],
+      "solution_line_template": "The plane's total flying distance between cities A and C is {dist_AB}+{dist_BC}= <<{dist_AB}+{dist_BC}={dist_AC}>>{dist_AC} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "dist_CD",
+      "question_inputs": [
+        "multiplier_CD_BC"
+      ],
+      "solution_line_template": "The distance between city C and city D is twice the distance between city B and city C, meaning city C and city D are {multiplier_CD_BC}*{dist_BC} = <<{dist_CD}={dist_CD}>>{dist_CD} miles apart."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_distance_AD",
+      "question_inputs": [],
+      "solution_line_template": "The plane flies a distance of {dist_AC}+{dist_CD} = <<{dist_AC}+{dist_CD}={total_distance_AD}>>{total_distance_AD} miles from city A to city D."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since the distance between city A and B is 100 miles, and city B and C are 50 more miles apart than city A and B, then city B and C are 100+50 = <<100+50=150>>150 miles apart.",
+    "L2": "The plane's total flying distance between cities A and C is 100+150= <<100+150=250>>250 miles.",
+    "L3": "The distance between city C and city D is twice the distance between city B and city C, meaning city C and city D are 2*150 = <<300=300>>300 miles apart.",
+    "L4": "The plane flies a distance of 250+300 = <<250+300=75000>>75000 miles from city A to city D.",
+    "FA": "#### 75000"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 7173223801358397803,
+  "model_name": "google_gemini-2.5-flash"
+}

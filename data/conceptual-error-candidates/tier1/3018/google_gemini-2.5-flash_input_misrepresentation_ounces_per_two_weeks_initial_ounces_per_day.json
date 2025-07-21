@@ -1,0 +1,104 @@
+{
+  "index": 3018,
+  "original_solution_mapping": {
+    "FA": "#### 160",
+    "L1": "Kara drinks 4 * 3 = <<4*3=12>>12 ounces of water with her medication each day.",
+    "L2": "In a week, she drinks 12 * 7 = <<12*7=84>>84 ounces of water with her medication.",
+    "L3": "In two weeks, she drinks 84 * 2 = <<84*2=168>>168 ounces of water with her medication.",
+    "L4": "One day, she forgot two tablets, so she did not drink 2 * 4 = <<2*4=8>>8 ounces of water.",
+    "L5": "Thus, Kara drank 168 - 8 = <<168-8=160>>160 ounces of water with her medication over two weeks."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3018.\n    Returns: the total ounces of water Kara drank with her medication over two weeks.\n    \"\"\"\n    # L1\n    ounces_per_tablet = 4 # 4 ounces of water\n    tablets_per_day = 3 # take one tablet three times a day\n    ounces_per_day = ounces_per_tablet * tablets_per_day\n\n    # L2\n    days_per_week = 7 # WK\n    ounces_per_week = ounces_per_day * days_per_week\n\n    # L3\n    num_weeks = 2 # over those two weeks\n    ounces_per_two_weeks_initial = ounces_per_week * num_weeks\n\n    # L4\n    forgotten_tablets = 2 # forgot twice on one day\n    forgotten_ounces = forgotten_tablets * ounces_per_tablet\n\n    # L5\n    total_ounces_drank = ounces_per_two_weeks_initial - forgotten_ounces\n\n    # FA\n    answer = total_ounces_drank\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "ounces_per_two_weeks_initial",
+    "operand_to_replace": "num_weeks",
+    "replacement_variable": "ounces_per_day"
+  },
+  "correct_trace": {
+    "ounces_per_tablet": 4,
+    "tablets_per_day": 3,
+    "ounces_per_day": 12,
+    "days_per_week": 7,
+    "ounces_per_week": 84,
+    "num_weeks": 2,
+    "ounces_per_two_weeks_initial": 168,
+    "forgotten_tablets": 2,
+    "forgotten_ounces": 8,
+    "total_ounces_drank": 160,
+    "answer": 160
+  },
+  "flawed_trace": {
+    "ounces_per_tablet": 4,
+    "tablets_per_day": 3,
+    "ounces_per_day": 12,
+    "days_per_week": 7,
+    "ounces_per_week": 84,
+    "num_weeks": 2,
+    "ounces_per_two_weeks_initial": 1008,
+    "forgotten_tablets": 2,
+    "forgotten_ounces": 8,
+    "total_ounces_drank": 1000,
+    "answer": 1000
+  },
+  "correct_value": 168,
+  "flawed_value": 1008,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "ounces_per_day",
+      "question_inputs": [
+        "ounces_per_tablet",
+        "tablets_per_day"
+      ],
+      "solution_line_template": "Kara drinks {ounces_per_tablet} * {tablets_per_day} = <<{ounces_per_tablet}*{tablets_per_day}={ounces_per_day}>>{ounces_per_day} ounces of water with her medication each day."
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L2",
+      "output_variable": "ounces_per_week",
+      "question_inputs": [],
+      "solution_line_template": "In a week, she drinks {ounces_per_day} * {days_per_week} = <<{ounces_per_day}*{days_per_week}={ounces_per_week}>>{ounces_per_week} ounces of water with her medication."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "ounces_per_two_weeks_initial",
+      "question_inputs": [
+        "num_weeks"
+      ],
+      "solution_line_template": "In two weeks, she drinks {ounces_per_week} * {num_weeks} = <<{ounces_per_week}*{num_weeks}={ounces_per_two_weeks_initial}>>{ounces_per_two_weeks_initial} ounces of water with her medication."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "forgotten_ounces",
+      "question_inputs": [
+        "forgotten_tablets"
+      ],
+      "solution_line_template": "One day, she forgot two tablets, so she did not drink {forgotten_tablets} * {ounces_per_tablet} = <<{forgotten_tablets}*{ounces_per_tablet}={forgotten_ounces}>>{forgotten_ounces} ounces of water."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_ounces_drank",
+      "question_inputs": [],
+      "solution_line_template": "Thus, Kara drank {ounces_per_two_weeks_initial} - {forgotten_ounces} = <<{ounces_per_two_weeks_initial}-{forgotten_ounces}={total_ounces_drank}>>{total_ounces_drank} ounces of water with her medication over two weeks."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Kara drinks 4 * 3 = <<4*3=12>>12 ounces of water with her medication each day.",
+    "L2": "In a week, she drinks 12 * 7 = <<12*7=84>>84 ounces of water with her medication.",
+    "L3": "In two weeks, she drinks 84 * 12 = <<84*12=1008>>1008 ounces of water with her medication.",
+    "L4": "One day, she forgot two tablets, so she did not drink 2 * 4 = <<2*4=8>>8 ounces of water.",
+    "L5": "Thus, Kara drank 1008 - 8 = <<1008-8=1000>>1000 ounces of water with her medication over two weeks.",
+    "FA": "#### 1000"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'ounces_per_day' (12) was used instead of 'num_weeks' (2).",
+  "repro_seed": -1486164613150577188,
+  "model_name": "google_gemini-2.5-flash"
+}

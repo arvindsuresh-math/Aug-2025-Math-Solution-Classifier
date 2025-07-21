@@ -1,0 +1,63 @@
+{
+  "index": 3286,
+  "original_solution_mapping": {
+    "FA": "#### 245",
+    "L1": "He is getting an extra 55-20=<<55-20=35>>35 text messages per day",
+    "L2": "So he is getting an extra 35*7=<<35*7=245>>245 text messages per week"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3286.\n    Returns: the number of text messages per week that are not intended for him.\n    \"\"\"\n    # L1\n    new_texts_per_day = 55 # Now he is getting 55\n    old_texts_per_day = 20 # He used to get 20 text messages a day\n    extra_texts_per_day = new_texts_per_day - old_texts_per_day\n\n    # L2\n    days_per_week = 7 # WK\n    extra_texts_per_week = extra_texts_per_day * days_per_week\n\n    # FA\n    answer = extra_texts_per_week\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "extra_texts_per_week",
+    "operand_to_replace": "days_per_week",
+    "replacement_variable": "extra_texts_per_day"
+  },
+  "correct_trace": {
+    "new_texts_per_day": 55,
+    "old_texts_per_day": 20,
+    "extra_texts_per_day": 35,
+    "days_per_week": 7,
+    "extra_texts_per_week": 245,
+    "answer": 245
+  },
+  "flawed_trace": {
+    "new_texts_per_day": 55,
+    "old_texts_per_day": 20,
+    "extra_texts_per_day": 35,
+    "days_per_week": 7,
+    "extra_texts_per_week": 1225,
+    "answer": 1225
+  },
+  "correct_value": 245,
+  "flawed_value": 1225,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "extra_texts_per_day",
+      "question_inputs": [
+        "new_texts_per_day",
+        "old_texts_per_day"
+      ],
+      "solution_line_template": "He is getting an extra {new_texts_per_day}-{old_texts_per_day}=<<{new_texts_per_day}-{old_texts_per_day}={extra_texts_per_day}>>{extra_texts_per_day} text messages per day"
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L2",
+      "output_variable": "extra_texts_per_week",
+      "question_inputs": [],
+      "solution_line_template": "So he is getting an extra {extra_texts_per_day}*{days_per_week}=<<{extra_texts_per_day}*{days_per_week}={extra_texts_per_week}>>{extra_texts_per_week} text messages per week"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He is getting an extra 55-20=<<55-20=35>>35 text messages per day",
+    "L2": "So he is getting an extra 35*35=<<35*35=1225>>1225 text messages per week",
+    "FA": "#### 1225"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'extra_texts_per_day' (35) was used instead of 'days_per_week' (7).",
+  "repro_seed": 3538128369184579685,
+  "model_name": "google_gemini-2.5-flash"
+}

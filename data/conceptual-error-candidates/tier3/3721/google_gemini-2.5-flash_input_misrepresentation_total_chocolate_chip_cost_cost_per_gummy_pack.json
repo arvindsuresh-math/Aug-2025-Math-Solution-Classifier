@@ -1,0 +1,107 @@
+{
+  "index": 3721,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "The gummy bears cost 10*2=$<<10*2=20>>20.",
+    "L2": "The chocolate chips cost 5*20=$<<5*20=100>>100.",
+    "L3": "The total cost for these two is 100+20=$<<100+20=120>>120.",
+    "L4": "The chocolate bars in total cost 150-120=$<<150-120=30>>30.",
+    "L5": "A single chocolate bar costs 30/10=$<<30/10=3>>3."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3721.\n    Returns: the cost of one chocolate bar.\n    \"\"\"\n    # L1\n    num_gummy_packs = 10 # 10 packs of gummy bears\n    cost_per_gummy_pack = 2 # cost of a pack of gummy bears is $2\n    total_gummy_cost = num_gummy_packs * cost_per_gummy_pack\n\n    # L2\n    cost_per_chocolate_chip_bag = 5 # a bag of chocolate chips costs $5\n    num_chocolate_chip_bags = 20 # 20 bags of chocolate chips\n    total_chocolate_chip_cost = cost_per_chocolate_chip_bag * num_chocolate_chip_bags\n\n    # L3\n    total_gummy_and_chip_cost = total_chocolate_chip_cost + total_gummy_cost\n\n    # L4\n    total_bill = 150 # Her total rang up to $150\n    total_chocolate_bar_cost = total_bill - total_gummy_and_chip_cost\n\n    # L5\n    num_chocolate_bars = 10 # 10 chocolate bars\n    cost_per_chocolate_bar = total_chocolate_bar_cost / num_chocolate_bars\n\n    # FA\n    answer = cost_per_chocolate_bar\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_chocolate_chip_cost",
+    "operand_to_replace": "cost_per_chocolate_chip_bag",
+    "replacement_variable": "cost_per_gummy_pack"
+  },
+  "correct_trace": {
+    "num_gummy_packs": 10,
+    "cost_per_gummy_pack": 2,
+    "total_gummy_cost": 20,
+    "cost_per_chocolate_chip_bag": 5,
+    "num_chocolate_chip_bags": 20,
+    "total_chocolate_chip_cost": 100,
+    "total_gummy_and_chip_cost": 120,
+    "total_bill": 150,
+    "total_chocolate_bar_cost": 30,
+    "num_chocolate_bars": 10,
+    "cost_per_chocolate_bar": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "num_gummy_packs": 10,
+    "cost_per_gummy_pack": 2,
+    "total_gummy_cost": 20,
+    "cost_per_chocolate_chip_bag": 5,
+    "num_chocolate_chip_bags": 20,
+    "total_chocolate_chip_cost": 40,
+    "total_gummy_and_chip_cost": 60,
+    "total_bill": 150,
+    "total_chocolate_bar_cost": 90,
+    "num_chocolate_bars": 10,
+    "cost_per_chocolate_bar": 9.0,
+    "answer": 9.0
+  },
+  "correct_value": 100,
+  "flawed_value": 40,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_gummy_cost",
+      "question_inputs": [
+        "num_gummy_packs",
+        "cost_per_gummy_pack"
+      ],
+      "solution_line_template": "The gummy bears cost {num_gummy_packs}*{cost_per_gummy_pack}=$<<{num_gummy_packs}*{cost_per_gummy_pack}={total_gummy_cost}>>{total_gummy_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_chocolate_chip_cost",
+      "question_inputs": [
+        "cost_per_chocolate_chip_bag",
+        "num_chocolate_chip_bags"
+      ],
+      "solution_line_template": "The chocolate chips cost {cost_per_chocolate_chip_bag}*{num_chocolate_chip_bags}=$<<{cost_per_chocolate_chip_bag}*{num_chocolate_chip_bags}={total_chocolate_chip_cost}>>{total_chocolate_chip_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_gummy_and_chip_cost",
+      "question_inputs": [],
+      "solution_line_template": "The total cost for these two is {total_chocolate_chip_cost}+{total_gummy_cost}=$<<{total_chocolate_chip_cost}+{total_gummy_cost}={total_gummy_and_chip_cost}>>{total_gummy_and_chip_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_chocolate_bar_cost",
+      "question_inputs": [
+        "total_bill"
+      ],
+      "solution_line_template": "The chocolate bars in total cost {total_bill}-{total_gummy_and_chip_cost}=$<<{total_bill}-{total_gummy_and_chip_cost}={total_chocolate_bar_cost}>>{total_chocolate_bar_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "cost_per_chocolate_bar",
+      "question_inputs": [
+        "num_chocolate_bars"
+      ],
+      "solution_line_template": "A single chocolate bar costs {total_chocolate_bar_cost}/{num_chocolate_bars}=$<<{total_chocolate_bar_cost}/{num_chocolate_bars}={cost_per_chocolate_bar}>>{cost_per_chocolate_bar}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The gummy bears cost 10*2=$<<10*2=20>>20.",
+    "L2": "The chocolate chips cost 2*20=$<<2*20=40>>40.",
+    "L3": "The total cost for these two is 40+20=$<<40+20=60>>60.",
+    "L4": "The chocolate bars in total cost 150-60=$<<150-60=90>>90.",
+    "L5": "A single chocolate bar costs 90/10=$<<90/10=9>>9.",
+    "FA": "#### 9"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'cost_per_gummy_pack' (2) was used instead of 'cost_per_chocolate_chip_bag' (5).",
+  "repro_seed": 6520616572074146480,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,107 @@
+{
+  "index": 1054,
+  "original_solution_mapping": {
+    "FA": "#### 135",
+    "L1": "The tickets are $50.00 each and they need 2 tickets so that's 50*2 = $<<50*2=100.00>>100.00",
+    "L2": "There is a 15% processing fee for the tickets so that's 100*.15 = $<<100*.15=15.00>>15.00",
+    "L3": "The tickets are $100.00 and the processing fee is $15.00 for a total of 100+15 = $<<100+15=115.00>>115.00",
+    "L4": "There is a $5.00 per person entrance fee and there are 2 people so that's 5*2 = $<<5*2=10.00>>10.00",
+    "L5": "The tickets are $115.00, parking is $10.00 and the entrance fee is $10.0 for a total of 115+10+10 = $<<115+10+10=135.00>>135.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1054.\n    Returns: the total cost to go to the concert.\n    \"\"\"\n    # L1\n    ticket_price = 50.00 # tickets are $50.00 each\n    num_people = 2 # Seth and his brother\n    tickets_total_cost = ticket_price * num_people\n\n    # L2\n    processing_fee_percent_text = 15 # 15% processing fee\n    processing_fee_percent_decimal = 0.15 # 15% processing fee\n    processing_fee_amount = tickets_total_cost * processing_fee_percent_decimal\n\n    # L3\n    cost_after_processing = tickets_total_cost + processing_fee_amount\n\n    # L4\n    entrance_fee_per_person = 5.00 # $5.00 per person entrance fee\n    total_entrance_fee = entrance_fee_per_person * num_people\n\n    # L5\n    parking_fee = 10.00 # $10.00 for parking\n    total_cost = cost_after_processing + parking_fee + total_entrance_fee\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cost",
+    "operand_to_replace": "parking_fee",
+    "replacement_variable": "num_people"
+  },
+  "correct_trace": {
+    "ticket_price": 50.0,
+    "num_people": 2,
+    "tickets_total_cost": 100.0,
+    "processing_fee_percent_text": 15,
+    "processing_fee_percent_decimal": 0.15,
+    "processing_fee_amount": 15.0,
+    "cost_after_processing": 115.0,
+    "entrance_fee_per_person": 5.0,
+    "total_entrance_fee": 10.0,
+    "parking_fee": 10.0,
+    "total_cost": 135.0,
+    "answer": 135.0
+  },
+  "flawed_trace": {
+    "ticket_price": 50.0,
+    "num_people": 2,
+    "tickets_total_cost": 100.0,
+    "processing_fee_percent_text": 15,
+    "processing_fee_percent_decimal": 0.15,
+    "processing_fee_amount": 15.0,
+    "cost_after_processing": 115.0,
+    "entrance_fee_per_person": 5.0,
+    "total_entrance_fee": 10.0,
+    "parking_fee": 10.0,
+    "total_cost": 127.0,
+    "answer": 127.0
+  },
+  "correct_value": 135.0,
+  "flawed_value": 127.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "tickets_total_cost",
+      "question_inputs": [
+        "ticket_price",
+        "num_people"
+      ],
+      "solution_line_template": "The tickets are ${ticket_price} each and they need {num_people} tickets so that's {ticket_price}*{num_people} = $<<{ticket_price}*{num_people}={tickets_total_cost}>>{tickets_total_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "processing_fee_amount",
+      "question_inputs": [
+        "processing_fee_percent_text",
+        "processing_fee_percent_decimal"
+      ],
+      "solution_line_template": "There is a {processing_fee_percent_text}% processing fee for the tickets so that's {tickets_total_cost}*{processing_fee_percent_decimal} = $<<{tickets_total_cost}*{processing_fee_percent_decimal}={processing_fee_amount}>>{processing_fee_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cost_after_processing",
+      "question_inputs": [],
+      "solution_line_template": "The tickets are ${tickets_total_cost} and the processing fee is ${processing_fee_amount} for a total of {tickets_total_cost}+{processing_fee_amount} = $<<{tickets_total_cost}+{processing_fee_amount}={cost_after_processing}>>{cost_after_processing}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_entrance_fee",
+      "question_inputs": [
+        "entrance_fee_per_person"
+      ],
+      "solution_line_template": "There is a ${entrance_fee_per_person} per person entrance fee and there are {num_people} people so that's {entrance_fee_per_person}*{num_people} = $<<{entrance_fee_per_person}*{num_people}={total_entrance_fee}>>{total_entrance_fee}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "parking_fee"
+      ],
+      "solution_line_template": "The tickets are ${cost_after_processing}, parking is ${parking_fee} and the entrance fee is ${total_entrance_fee} for a total of {cost_after_processing}+{parking_fee}+{total_entrance_fee} = $<<{cost_after_processing}+{parking_fee}+{total_entrance_fee}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The tickets are $50 each and they need 2 tickets so that's 50*2 = $<<50*2=100>>100",
+    "L2": "There is a 15% processing fee for the tickets so that's 100*0.15 = $<<100*0.15=15>>15",
+    "L3": "The tickets are $100 and the processing fee is $15 for a total of 100+15 = $<<100+15=115>>115",
+    "L4": "There is a $5 per person entrance fee and there are 2 people so that's 5*2 = $<<5*2=10>>10",
+    "L5": "The tickets are $115, parking is $2 and the entrance fee is $10 for a total of 115+2+10 = $<<115+2+10=127>>127",
+    "FA": "#### 127"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Input misrepresentation. The value for 'num_people' (2) was used instead of 'parking_fee' (10.0).",
+  "repro_seed": -2174938817663704465,
+  "model_name": "google_gemini-2.5-flash"
+}

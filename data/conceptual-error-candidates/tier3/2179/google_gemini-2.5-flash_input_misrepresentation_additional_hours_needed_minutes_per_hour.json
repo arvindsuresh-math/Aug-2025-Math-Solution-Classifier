@@ -1,0 +1,111 @@
+{
+  "index": 2179,
+  "original_solution_mapping": {
+    "FA": "#### 1",
+    "L1": "The second podcast was twice as long as the first so 2*45 = <<2*45=90>>90",
+    "L2": "1 hour is 60 mins. So his 1 hour and 45 min podcast is 60+45 = <<1*60+45=105>>105 minutes long",
+    "L3": "So far he has downloaded 45+90+105+60 = <<45+90+105+60=300>>300 min",
+    "L4": "If he converts 300 min to hours then he has 300/60 = <<300/60=5>>5 hours of podcasts downloaded",
+    "L5": "He has 5 hours of podcasts and his drive is 6 hours so he will need 6 - 5 = <<6-5=1>>1 more hour of podcasts"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2179.\n    Returns: the number of additional hours the next podcast needs to be.\n    \"\"\"\n    # L1\n    first_podcast_minutes = 45 # The first podcast was 45 minutes long\n    twice_factor = 2 # twice as long as that\n    second_podcast_minutes = twice_factor * first_podcast_minutes\n\n    # L2\n    third_podcast_hours = 1 # 1 hour and 45 minutes long\n    third_podcast_minutes_extra = 45 # 1 hour and 45 minutes long\n    minutes_per_hour = 60 # 1 hour is 60 mins\n    third_podcast_total_minutes = third_podcast_hours * minutes_per_hour + third_podcast_minutes_extra\n\n    # L3\n    fourth_podcast_minutes = 60 # His fourth podcast is 1 hour long\n    total_downloaded_minutes = first_podcast_minutes + second_podcast_minutes + third_podcast_total_minutes + fourth_podcast_minutes\n\n    # L4\n    total_downloaded_hours = total_downloaded_minutes / minutes_per_hour\n\n    # L5\n    total_drive_hours = 6 # a 6-hour drive planned out\n    additional_hours_needed = total_drive_hours - total_downloaded_hours\n\n    # FA\n    answer = additional_hours_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "additional_hours_needed",
+    "operand_to_replace": "total_drive_hours",
+    "replacement_variable": "minutes_per_hour"
+  },
+  "correct_trace": {
+    "first_podcast_minutes": 45,
+    "twice_factor": 2,
+    "second_podcast_minutes": 90,
+    "third_podcast_hours": 1,
+    "third_podcast_minutes_extra": 45,
+    "minutes_per_hour": 60,
+    "third_podcast_total_minutes": 105,
+    "fourth_podcast_minutes": 60,
+    "total_downloaded_minutes": 300,
+    "total_downloaded_hours": 5.0,
+    "total_drive_hours": 6,
+    "additional_hours_needed": 1.0,
+    "answer": 1.0
+  },
+  "flawed_trace": {
+    "first_podcast_minutes": 45,
+    "twice_factor": 2,
+    "second_podcast_minutes": 90,
+    "third_podcast_hours": 1,
+    "third_podcast_minutes_extra": 45,
+    "minutes_per_hour": 60,
+    "third_podcast_total_minutes": 105,
+    "fourth_podcast_minutes": 60,
+    "total_downloaded_minutes": 300,
+    "total_downloaded_hours": 5.0,
+    "total_drive_hours": 6,
+    "additional_hours_needed": 55.0,
+    "answer": 55.0
+  },
+  "correct_value": 1.0,
+  "flawed_value": 55.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "second_podcast_minutes",
+      "question_inputs": [
+        "first_podcast_minutes",
+        "twice_factor"
+      ],
+      "solution_line_template": "The second podcast was twice as long as the first so {twice_factor}*{first_podcast_minutes} = <<{twice_factor}*{first_podcast_minutes}={second_podcast_minutes}>>{second_podcast_minutes}"
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L2",
+      "output_variable": "third_podcast_total_minutes",
+      "question_inputs": [
+        "third_podcast_hours",
+        "third_podcast_minutes_extra"
+      ],
+      "solution_line_template": "1 hour is {minutes_per_hour} mins. So his {third_podcast_hours} hour and {third_podcast_minutes_extra} min podcast is {third_podcast_hours}*{minutes_per_hour}+{third_podcast_minutes_extra} = <<{third_podcast_hours}*{minutes_per_hour}+{third_podcast_minutes_extra}={third_podcast_total_minutes}>>{third_podcast_total_minutes} minutes long"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_downloaded_minutes",
+      "question_inputs": [
+        "fourth_podcast_minutes"
+      ],
+      "solution_line_template": "So far he has downloaded {first_podcast_minutes}+{second_podcast_minutes}+{third_podcast_total_minutes}+{fourth_podcast_minutes} = <<{first_podcast_minutes}+{second_podcast_minutes}+{third_podcast_total_minutes}+{fourth_podcast_minutes}={total_downloaded_minutes}>>{total_downloaded_minutes} min"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_downloaded_hours",
+      "question_inputs": [],
+      "solution_line_template": "If he converts {total_downloaded_minutes} min to hours then he has {total_downloaded_minutes}/{minutes_per_hour} = <<{total_downloaded_minutes}/{minutes_per_hour}={total_downloaded_hours}>>{total_downloaded_hours} hours of podcasts downloaded"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "additional_hours_needed",
+      "question_inputs": [
+        "total_drive_hours"
+      ],
+      "solution_line_template": "He has {total_downloaded_hours} hours of podcasts and his drive is {total_drive_hours} hours so he will need {total_drive_hours} - {total_downloaded_hours} = <<{total_drive_hours}-{total_downloaded_hours}={additional_hours_needed}>>{additional_hours_needed} more hour of podcasts"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The second podcast was twice as long as the first so 2*45 = <<2*45=90>>90",
+    "L2": "1 hour is 60 mins. So his 1 hour and 45 min podcast is 1*60+45 = <<1*60+45=105>>105 minutes long",
+    "L3": "So far he has downloaded 45+90+105+60 = <<45+90+105+60=300>>300 min",
+    "L4": "If he converts 300 min to hours then he has 300/60 = <<300/60=5>>5 hours of podcasts downloaded",
+    "L5": "He has 5 hours of podcasts and his drive is 60 hours so he will need 60 - 5 = <<60-5=55>>55 more hour of podcasts",
+    "FA": "#### 55"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Input misrepresentation. The value for 'minutes_per_hour' (60) was used instead of 'total_drive_hours' (6).",
+  "repro_seed": 7246238184390988143,
+  "model_name": "google_gemini-2.5-flash"
+}

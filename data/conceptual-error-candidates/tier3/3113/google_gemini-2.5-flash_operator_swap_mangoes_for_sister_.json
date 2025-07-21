@@ -1,0 +1,89 @@
+{
+  "index": 3113,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "Jordan picked 54/3 = <<54/3=18>>18 ripe mangoes.",
+    "L2": "He picked 54 - 18 = <<54-18=36>>36 unripe mangoes.",
+    "L3": "Jordan gave 36 - 16 = <<36-16=20>>20 unripe mangoes to his sister.",
+    "L4": "Jordan's sister can make 20/4 = <<20/4=5>>5 jars of pickled mangoes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3113.\n    Returns: the number of jars of pickled mangoes Jordan's sister can make.\n    \"\"\"\n    # L1\n    total_mangoes = 54 # Jordan picked 54 mangoes\n    ripe_fraction_denominator = 3 # One-third of the mangoes\n    ripe_mangoes = total_mangoes / ripe_fraction_denominator\n\n    # L2\n    unripe_mangoes = total_mangoes - ripe_mangoes\n\n    # L3\n    kept_unripe_mangoes = 16 # Jordan kept 16 unripe mangoes\n    mangoes_for_sister = unripe_mangoes - kept_unripe_mangoes\n\n    # L4\n    mangoes_per_jar = 4 # it takes 4 mangoes to fill a jar\n    jars_made = mangoes_for_sister / mangoes_per_jar\n\n    # FA\n    answer = jars_made\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "mangoes_for_sister",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x15f6df550>"
+  },
+  "correct_trace": {
+    "total_mangoes": 54,
+    "ripe_fraction_denominator": 3,
+    "ripe_mangoes": 18.0,
+    "unripe_mangoes": 36.0,
+    "kept_unripe_mangoes": 16,
+    "mangoes_for_sister": 20.0,
+    "mangoes_per_jar": 4,
+    "jars_made": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "total_mangoes": 54,
+    "ripe_fraction_denominator": 3,
+    "ripe_mangoes": 18.0,
+    "unripe_mangoes": 36.0,
+    "kept_unripe_mangoes": 16,
+    "mangoes_for_sister": 52.0,
+    "mangoes_per_jar": 4,
+    "jars_made": 13.0,
+    "answer": 13.0
+  },
+  "correct_value": 20.0,
+  "flawed_value": 52.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "ripe_mangoes",
+      "question_inputs": [
+        "total_mangoes",
+        "ripe_fraction_denominator"
+      ],
+      "solution_line_template": "Jordan picked {total_mangoes}/{ripe_fraction_denominator} = <<{total_mangoes}/{ripe_fraction_denominator}={ripe_mangoes}>>{ripe_mangoes} ripe mangoes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "unripe_mangoes",
+      "question_inputs": [],
+      "solution_line_template": "He picked {total_mangoes} - {ripe_mangoes} = <<{total_mangoes}-{ripe_mangoes}={unripe_mangoes}>>{unripe_mangoes} unripe mangoes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "mangoes_for_sister",
+      "question_inputs": [
+        "kept_unripe_mangoes"
+      ],
+      "solution_line_template": "Jordan gave {unripe_mangoes} - {kept_unripe_mangoes} = <<{unripe_mangoes}-{kept_unripe_mangoes}={mangoes_for_sister}>>{mangoes_for_sister} unripe mangoes to his sister."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "jars_made",
+      "question_inputs": [
+        "mangoes_per_jar"
+      ],
+      "solution_line_template": "Jordan's sister can make {mangoes_for_sister}/{mangoes_per_jar} = <<{mangoes_for_sister}/{mangoes_per_jar}={jars_made}>>{jars_made} jars of pickled mangoes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jordan picked 54/3 = <<54/3=18>>18 ripe mangoes.",
+    "L2": "He picked 54 - 18 = <<54-18=36>>36 unripe mangoes.",
+    "L3": "Jordan gave 36 - 16 = <<36-16=52>>52 unripe mangoes to his sister.",
+    "L4": "Jordan's sister can make 52/4 = <<52/4=13>>13 jars of pickled mangoes.",
+    "FA": "#### 13"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -9155346976475092721,
+  "model_name": "google_gemini-2.5-flash"
+}

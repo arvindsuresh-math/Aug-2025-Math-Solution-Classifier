@@ -1,0 +1,89 @@
+{
+  "index": 5330,
+  "original_solution_mapping": {
+    "FA": "#### 27,200",
+    "L1": "Taxes:40000(.20)=8000$",
+    "L2": "Healthcare:40000(.10)=4000$",
+    "L3": "Dues:<<800=800>>800$",
+    "L4": "Total:40000-8000-4000-800=<<40000-8000-4000-800=27200>>27,200$"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5330.\n    Returns: the amount of money Steve takes home.\n    \"\"\"\n    # L1\n    annual_salary = 40000 # Steve makes 40000$ a year\n    tax_percent_decimal = 0.20 # loses 20 percent to taxes\n    taxes_amount = annual_salary * tax_percent_decimal\n\n    # L2\n    healthcare_percent_decimal = 0.10 # 10 percent to healthcare\n    healthcare_amount = annual_salary * healthcare_percent_decimal\n\n    # L3\n    union_dues = 800 # 800$ to local union dues\n    dues_amount = union_dues\n\n    # L4\n    take_home_pay = annual_salary - taxes_amount - healthcare_amount - dues_amount\n\n    # FA\n    answer = take_home_pay\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "take_home_pay",
+    "operand_to_replace": "taxes_amount",
+    "replacement_variable": "healthcare_amount"
+  },
+  "correct_trace": {
+    "annual_salary": 40000,
+    "tax_percent_decimal": 0.2,
+    "taxes_amount": 8000.0,
+    "healthcare_percent_decimal": 0.1,
+    "healthcare_amount": 4000.0,
+    "union_dues": 800,
+    "dues_amount": 800,
+    "take_home_pay": 27200.0,
+    "answer": 27200.0
+  },
+  "flawed_trace": {
+    "annual_salary": 40000,
+    "tax_percent_decimal": 0.2,
+    "taxes_amount": 8000.0,
+    "healthcare_percent_decimal": 0.1,
+    "healthcare_amount": 4000.0,
+    "union_dues": 800,
+    "dues_amount": 800,
+    "take_home_pay": 31200.0,
+    "answer": 31200.0
+  },
+  "correct_value": 27200.0,
+  "flawed_value": 31200.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "taxes_amount",
+      "question_inputs": [
+        "annual_salary",
+        "tax_percent_decimal"
+      ],
+      "solution_line_template": "Taxes:{annual_salary}({tax_percent_decimal})={taxes_amount}$"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "healthcare_amount",
+      "question_inputs": [
+        "healthcare_percent_decimal"
+      ],
+      "solution_line_template": "Healthcare:{annual_salary}({healthcare_percent_decimal})={healthcare_amount}$"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "dues_amount",
+      "question_inputs": [
+        "union_dues"
+      ],
+      "solution_line_template": "Dues:<<{union_dues}={dues_amount}>>{dues_amount}$"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "take_home_pay",
+      "question_inputs": [],
+      "solution_line_template": "Total:{annual_salary}-{taxes_amount}-{healthcare_amount}-{dues_amount}=<<{annual_salary}-{taxes_amount}-{healthcare_amount}-{dues_amount}={take_home_pay}>>{take_home_pay}$"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Taxes:40000(0.2)=8000$",
+    "L2": "Healthcare:40000(0.1)=4000$",
+    "L3": "Dues:<<800=800>>800$",
+    "L4": "Total:40000-4000-4000-800=<<40000-4000-4000-800=31200>>31200$",
+    "FA": "#### 31200"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'healthcare_amount' (value: 4000.0) was used instead of 'taxes_amount' (value: 8000.0).",
+  "repro_seed": -8652160651336819230,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,92 @@
+{
+  "index": 3046,
+  "original_solution_mapping": {
+    "FA": "#### 11",
+    "L1": "On Monday, Kekai uses 40 * 6 = <<40*6=240>>240 m&ms",
+    "L2": "On Tuesday, Kekai uses 20 * 10 = <<20*10=200>>200 m&ms",
+    "L3": "Kekai uses a total of 240 + 200 = <<240+200=440>>440 m&ms",
+    "L4": "Kekai uses a 440 / 40 = <<440/40=11>>11 m&m packs"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3046.\n    Returns: the total number of m&m packs Kekai uses.\n    \"\"\"\n    # L1\n    sundaes_monday = 40 # 40 sundaes\n    mms_per_sundae_monday = 6 # 6 m&ms on each sundae\n    mms_monday = sundaes_monday * mms_per_sundae_monday\n\n    # L2\n    sundaes_tuesday = 20 # 20 sundaes\n    mms_per_sundae_tuesday = 10 # 10 m&ms on each sundae\n    mms_tuesday = sundaes_tuesday * mms_per_sundae_tuesday\n\n    # L3\n    total_mms_used = mms_monday + mms_tuesday\n\n    # L4\n    mms_per_pack = 40 # each m&m pack contains 40 m&ms\n    total_mms_packs = total_mms_used / mms_per_pack\n\n    # FA\n    answer = total_mms_packs\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "mms_tuesday",
+    "operand_to_replace": "sundaes_tuesday",
+    "replacement_variable": "sundaes_monday"
+  },
+  "correct_trace": {
+    "sundaes_monday": 40,
+    "mms_per_sundae_monday": 6,
+    "mms_monday": 240,
+    "sundaes_tuesday": 20,
+    "mms_per_sundae_tuesday": 10,
+    "mms_tuesday": 200,
+    "total_mms_used": 440,
+    "mms_per_pack": 40,
+    "total_mms_packs": 11.0,
+    "answer": 11.0
+  },
+  "flawed_trace": {
+    "sundaes_monday": 40,
+    "mms_per_sundae_monday": 6,
+    "mms_monday": 240,
+    "sundaes_tuesday": 20,
+    "mms_per_sundae_tuesday": 10,
+    "mms_tuesday": 400,
+    "total_mms_used": 640,
+    "mms_per_pack": 40,
+    "total_mms_packs": 16.0,
+    "answer": 16.0
+  },
+  "correct_value": 200,
+  "flawed_value": 400,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "mms_monday",
+      "question_inputs": [
+        "sundaes_monday",
+        "mms_per_sundae_monday"
+      ],
+      "solution_line_template": "On Monday, Kekai uses {sundaes_monday} * {mms_per_sundae_monday} = <<{sundaes_monday}*{mms_per_sundae_monday}={mms_monday}>>{mms_monday} m&ms"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "mms_tuesday",
+      "question_inputs": [
+        "sundaes_tuesday",
+        "mms_per_sundae_tuesday"
+      ],
+      "solution_line_template": "On Tuesday, Kekai uses {sundaes_tuesday} * {mms_per_sundae_tuesday} = <<{sundaes_tuesday}*{mms_per_sundae_tuesday}={mms_tuesday}>>{mms_tuesday} m&ms"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_mms_used",
+      "question_inputs": [],
+      "solution_line_template": "Kekai uses a total of {mms_monday} + {mms_tuesday} = <<{mms_monday}+{mms_tuesday}={total_mms_used}>>{total_mms_used} m&ms"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_mms_packs",
+      "question_inputs": [
+        "mms_per_pack"
+      ],
+      "solution_line_template": "Kekai uses a {total_mms_used} / {mms_per_pack} = <<{total_mms_used}/{mms_per_pack}={total_mms_packs}>>{total_mms_packs} m&m packs"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Monday, Kekai uses 40 * 6 = <<40*6=240>>240 m&ms",
+    "L2": "On Tuesday, Kekai uses 40 * 10 = <<40*10=400>>400 m&ms",
+    "L3": "Kekai uses a total of 240 + 400 = <<240+400=640>>640 m&ms",
+    "L4": "Kekai uses a 640 / 40 = <<640/40=16>>16 m&m packs",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'sundaes_monday' (40) was used instead of 'sundaes_tuesday' (20).",
+  "repro_seed": 1527868605355991061,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,98 @@
+{
+  "index": 3142,
+  "original_solution_mapping": {
+    "FA": "#### 4000",
+    "L1": "Three-quarters of oil from the initially full 4000-liter tank would be 4000*(3/4)= <<4000*3/4=3000>>3000 liters",
+    "L2": "In addition to the 3000 liters that were already in the large tanker, there are 3000+3000 = <<3000+3000=6000>>6000 liters in it now.",
+    "L3": "The tanker would be filled to half capacity by (1/2)*20000 = <<(1/2)*20000=10000>>10000 liters of oil",
+    "L4": "There are 10000-6000 = <<10000-6000=4000>>4000 liters left to reach half capacity."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3142.\n    Returns: the number of additional liters of oil needed to make the large tanker half-full.\n    \"\"\"\n    # L1\n    initial_tank_capacity = 4000 # 4000-liter tank\n    fraction_numerator = 3 # Three-quarters of the oil\n    fraction_denominator = 4 # Three-quarters of the oil\n    oil_poured = initial_tank_capacity * (fraction_numerator / fraction_denominator)\n\n    # L2\n    initial_oil_in_tanker = 3000 # already had 3000 liters of oil\n    current_oil_in_tanker = initial_oil_in_tanker + oil_poured\n\n    # L3\n    tanker_capacity = 20000 # 20000-liter capacity tanker\n    half_capacity_numerator = 1 # half-full\n    half_capacity_denominator = 2 # half-full\n    half_tanker_capacity = (half_capacity_numerator / half_capacity_denominator) * tanker_capacity\n\n    # L4\n    liters_needed = half_tanker_capacity - current_oil_in_tanker\n\n    # FA\n    answer = liters_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "half_tanker_capacity",
+    "operand_to_replace": "half_capacity_numerator",
+    "replacement_variable": "current_oil_in_tanker"
+  },
+  "correct_trace": {
+    "initial_tank_capacity": 4000,
+    "fraction_numerator": 3,
+    "fraction_denominator": 4,
+    "oil_poured": 3000.0,
+    "initial_oil_in_tanker": 3000,
+    "current_oil_in_tanker": 6000.0,
+    "tanker_capacity": 20000,
+    "half_capacity_numerator": 1,
+    "half_capacity_denominator": 2,
+    "half_tanker_capacity": 10000.0,
+    "liters_needed": 4000.0,
+    "answer": 4000.0
+  },
+  "flawed_trace": {
+    "initial_tank_capacity": 4000,
+    "fraction_numerator": 3,
+    "fraction_denominator": 4,
+    "oil_poured": 3000.0,
+    "initial_oil_in_tanker": 3000,
+    "current_oil_in_tanker": 6000.0,
+    "tanker_capacity": 20000,
+    "half_capacity_numerator": 1,
+    "half_capacity_denominator": 2,
+    "half_tanker_capacity": 60000000.0,
+    "liters_needed": 59994000.0,
+    "answer": 59994000.0
+  },
+  "correct_value": 10000.0,
+  "flawed_value": 60000000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "oil_poured",
+      "question_inputs": [
+        "initial_tank_capacity",
+        "fraction_numerator",
+        "fraction_denominator"
+      ],
+      "solution_line_template": "Three-quarters of oil from the initially full {initial_tank_capacity}-liter tank would be {initial_tank_capacity}*({fraction_numerator}/{fraction_denominator})= <<{initial_tank_capacity}*{fraction_numerator}/{fraction_denominator}={oil_poured}>>{oil_poured} liters"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "current_oil_in_tanker",
+      "question_inputs": [
+        "initial_oil_in_tanker"
+      ],
+      "solution_line_template": "In addition to the {initial_oil_in_tanker} liters that were already in the large tanker, there are {initial_oil_in_tanker}+{oil_poured} = <<{initial_oil_in_tanker}+{oil_poured}={current_oil_in_tanker}>>{current_oil_in_tanker} liters in it now."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "half_tanker_capacity",
+      "question_inputs": [
+        "tanker_capacity",
+        "half_capacity_numerator",
+        "half_capacity_denominator"
+      ],
+      "solution_line_template": "The tanker would be filled to half capacity by ({half_capacity_numerator}/{half_capacity_denominator})*{tanker_capacity} = <<({half_capacity_numerator}/{half_capacity_denominator})*{tanker_capacity}={half_tanker_capacity}>>{half_tanker_capacity} liters of oil"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "liters_needed",
+      "question_inputs": [],
+      "solution_line_template": "There are {half_tanker_capacity}-{current_oil_in_tanker} = <<{half_tanker_capacity}-{current_oil_in_tanker}={liters_needed}>>{liters_needed} liters left to reach half capacity."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Three-quarters of oil from the initially full 4000-liter tank would be 4000*(3/4)= <<4000*3/4=3000>>3000 liters",
+    "L2": "In addition to the 3000 liters that were already in the large tanker, there are 3000+3000 = <<3000+3000=6000>>6000 liters in it now.",
+    "L3": "The tanker would be filled to half capacity by (6000/2)*20000 = <<(6000/2)*20000=60000000>>60000000 liters of oil",
+    "L4": "There are 60000000-6000 = <<60000000-6000=59994000>>59994000 liters left to reach half capacity.",
+    "FA": "#### 59994000"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'current_oil_in_tanker' (6000.0) was used instead of 'half_capacity_numerator' (1).",
+  "repro_seed": -952759051818576644,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,63 @@
+{
+  "index": 510,
+  "original_solution_mapping": {
+    "FA": "#### 180",
+    "L1": "The pie shop has 6 x 10 = <<6*10=60>>60 slices of custard pie.",
+    "L2": "Therefore, the pie shop will earn $3 x 60 = $<<3*60=180>>180 for the 60 slices of custard pie."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 510.\n    Returns: the total money the pie shop will earn.\n    \"\"\"\n    # L1\n    num_whole_pies = 6 # 6 whole custard pies\n    slices_per_pie = 10 # cut each whole pie into 10 slices\n    total_slices = num_whole_pies * slices_per_pie\n\n    # L2\n    price_per_slice = 3 # $3 per slice\n    total_earnings = price_per_slice * total_slices\n\n    # FA\n    answer = total_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_earnings",
+    "operand_to_replace": "price_per_slice",
+    "replacement_variable": "slices_per_pie"
+  },
+  "correct_trace": {
+    "num_whole_pies": 6,
+    "slices_per_pie": 10,
+    "total_slices": 60,
+    "price_per_slice": 3,
+    "total_earnings": 180,
+    "answer": 180
+  },
+  "flawed_trace": {
+    "num_whole_pies": 6,
+    "slices_per_pie": 10,
+    "total_slices": 60,
+    "price_per_slice": 3,
+    "total_earnings": 600,
+    "answer": 600
+  },
+  "correct_value": 180,
+  "flawed_value": 600,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "num_whole_pies",
+        "slices_per_pie"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_slices",
+      "solution_line_template": "The pie shop has {num_whole_pies} x {slices_per_pie} = <<{num_whole_pies}*{slices_per_pie}={total_slices}>>{total_slices} slices of custard pie."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "price_per_slice"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_earnings",
+      "solution_line_template": "Therefore, the pie shop will earn ${price_per_slice} x {total_slices} = $<<{price_per_slice}*{total_slices}={total_earnings}>>{total_earnings} for the {total_slices} slices of custard pie."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The pie shop has 6 x 10 = <<6*10=60>>60 slices of custard pie.",
+    "L2": "Therefore, the pie shop will earn $10 x 60 = $<<10*60=600>>600 for the 60 slices of custard pie.",
+    "FA": "#### 600"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'slices_per_pie' (10) was used instead of 'price_per_slice' (3).",
+  "repro_seed": -2524591975074063265,
+  "model_name": "google_gemini-2.5-flash"
+}

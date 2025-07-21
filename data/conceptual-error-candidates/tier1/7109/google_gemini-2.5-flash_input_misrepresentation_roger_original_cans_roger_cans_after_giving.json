@@ -1,0 +1,74 @@
+{
+  "index": 7109,
+  "original_solution_mapping": {
+    "FA": "#### 24",
+    "L1": "Roger originally had 4 cans of silly string + 2 can he gave to his brothers = <<4+2=6>>6 cans.",
+    "L2": "Since his friends received the same amount as Roger did originally, 3 friends x 6 cans of silly string = <<3*6=18>>18 cans.",
+    "L3": "Michelle started with 6 cans that went to Roger + 18 cans that went to his friends = <<6+18=24>>24 cans of silly string."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7109.\n    Returns: the number of cans of silly string Michelle had to start with.\n    \"\"\"\n    # L1\n    roger_cans_after_giving = 4 # he now has 4 for himself\n    roger_gave_to_brothers = 2 # give 2 of his cans to his brothers\n    roger_original_cans = roger_cans_after_giving + roger_gave_to_brothers\n\n    # L2\n    num_friends = 3 # 3 of his friends\n    friends_total_cans = num_friends * roger_original_cans\n\n    # L3\n    michelle_start_cans = roger_original_cans + friends_total_cans\n\n    # FA\n    answer = michelle_start_cans\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "roger_original_cans",
+    "operand_to_replace": "roger_gave_to_brothers",
+    "replacement_variable": "roger_cans_after_giving"
+  },
+  "correct_trace": {
+    "roger_cans_after_giving": 4,
+    "roger_gave_to_brothers": 2,
+    "roger_original_cans": 6,
+    "num_friends": 3,
+    "friends_total_cans": 18,
+    "michelle_start_cans": 24,
+    "answer": 24
+  },
+  "flawed_trace": {
+    "roger_cans_after_giving": 4,
+    "roger_gave_to_brothers": 2,
+    "roger_original_cans": 8,
+    "num_friends": 3,
+    "friends_total_cans": 24,
+    "michelle_start_cans": 32,
+    "answer": 32
+  },
+  "correct_value": 6,
+  "flawed_value": 8,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "roger_original_cans",
+      "question_inputs": [
+        "roger_cans_after_giving",
+        "roger_gave_to_brothers"
+      ],
+      "solution_line_template": "Roger originally had {roger_cans_after_giving} cans of silly string + {roger_gave_to_brothers} can he gave to his brothers = <<{roger_cans_after_giving}+{roger_gave_to_brothers}={roger_original_cans}>>{roger_original_cans} cans."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "friends_total_cans",
+      "question_inputs": [
+        "num_friends"
+      ],
+      "solution_line_template": "Since his friends received the same amount as Roger did originally, {num_friends} friends x {roger_original_cans} cans of silly string = <<{num_friends}*{roger_original_cans}={friends_total_cans}>>{friends_total_cans} cans."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "michelle_start_cans",
+      "question_inputs": [],
+      "solution_line_template": "Michelle started with {roger_original_cans} cans that went to Roger + {friends_total_cans} cans that went to his friends = <<{roger_original_cans}+{friends_total_cans}={michelle_start_cans}>>{michelle_start_cans} cans of silly string."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Roger originally had 4 cans of silly string + 4 can he gave to his brothers = <<4+4=8>>8 cans.",
+    "L2": "Since his friends received the same amount as Roger did originally, 3 friends x 8 cans of silly string = <<3*8=24>>24 cans.",
+    "L3": "Michelle started with 8 cans that went to Roger + 24 cans that went to his friends = <<8+24=32>>32 cans of silly string.",
+    "FA": "#### 32"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'roger_cans_after_giving' (4) was used instead of 'roger_gave_to_brothers' (2).",
+  "repro_seed": 2306362070773736058,
+  "model_name": "google_gemini-2.5-flash"
+}

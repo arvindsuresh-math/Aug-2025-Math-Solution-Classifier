@@ -1,0 +1,74 @@
+{
+  "index": 1356,
+  "original_solution_mapping": {
+    "FA": "#### 32",
+    "L1": "Since Cristian's house has ten rooms, he painted 3/5*10 = <<3/5*10=6>>6 rooms with green color.",
+    "L2": "The number of rooms he painted with purple is 10-6 = <<10-6=4>>4 rooms.",
+    "L3": "Since each room in the house has eight walls, the number of walls painted purple is 8*4= <<8*4=32>>32."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1356.\n    Returns: the total number of walls painted purple.\n    \"\"\"\n    # L1\n    total_rooms = 10 # a ten-bedroom house\n    green_fraction = Fraction(3, 5) # 3/5 of the rooms\n    green_rooms = green_fraction * total_rooms\n\n    # L2\n    purple_rooms = total_rooms - green_rooms\n\n    # L3\n    walls_per_room = 8 # 8 walls in each room\n    purple_walls = walls_per_room * purple_rooms\n\n    # FA\n    answer = purple_walls\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "green_rooms",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x1681c8110>"
+  },
+  "correct_trace": {
+    "total_rooms": 10,
+    "green_fraction": "3/5",
+    "green_rooms": "6",
+    "purple_rooms": "4",
+    "walls_per_room": 8,
+    "purple_walls": "32",
+    "answer": "32"
+  },
+  "flawed_trace": {
+    "total_rooms": 10,
+    "green_fraction": "3/5",
+    "green_rooms": "3/50",
+    "purple_rooms": "497/50",
+    "walls_per_room": 8,
+    "purple_walls": "1988/25",
+    "answer": "1988/25"
+  },
+  "correct_value": "6",
+  "flawed_value": "3/50",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "green_rooms",
+      "question_inputs": [
+        "total_rooms",
+        "green_fraction"
+      ],
+      "solution_line_template": "Since Cristian's house has {total_rooms} rooms, he painted {green_fraction}*{total_rooms} = <<{green_fraction}*{total_rooms}={green_rooms}>>{green_rooms} rooms with green color."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "purple_rooms",
+      "question_inputs": [],
+      "solution_line_template": "The number of rooms he painted with purple is {total_rooms}-{green_rooms} = <<{total_rooms}-{green_rooms}={purple_rooms}>>{purple_rooms} rooms."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "purple_walls",
+      "question_inputs": [
+        "walls_per_room"
+      ],
+      "solution_line_template": "Since each room in the house has {walls_per_room} walls, the number of walls painted purple is {walls_per_room}*{purple_rooms}= <<{walls_per_room}*{purple_rooms}={purple_walls}>>{purple_walls}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since Cristian's house has 10 rooms, he painted 3/5*10 = <<3/5*10=3/50>>3/50 rooms with green color.",
+    "L2": "The number of rooms he painted with purple is 10-3/50 = <<10-3/50=497/50>>497/50 rooms.",
+    "L3": "Since each room in the house has 8 walls, the number of walls painted purple is 8*497/50= <<8*497/50=1988/25>>1988/25.",
+    "FA": "#### 1988/25"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -2991209262658039086,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 440,
+  "original_solution_mapping": {
+    "FA": "#### 19",
+    "L1": "In 5 years, Cori will be 3 + 5 = <<3+5=8>>8 years old.",
+    "L2": "In 5 years, Cori's aunt will be 8 x 3 = <<8*3=24>>24 years old.",
+    "L3": "Today, her aunt is 24 - 5 = <<24-5=19>>19 years old."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 440.\n    Returns: the current age of Cori's aunt.\n    \"\"\"\n    # L1\n    cori_current_age = 3 # Cori is 3 years old today\n    years_in_future = 5 # In 5 years\n    cori_future_age = cori_current_age + years_in_future\n\n    # L2\n    aunt_age_multiplier = 3 # one-third the age of her aunt\n    aunt_future_age = cori_future_age * aunt_age_multiplier\n\n    # L3\n    aunt_current_age = aunt_future_age - years_in_future\n\n    # FA\n    answer = aunt_current_age\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "aunt_current_age",
+    "operand_to_replace": "years_in_future",
+    "replacement_variable": "aunt_age_multiplier"
+  },
+  "correct_trace": {
+    "cori_current_age": 3,
+    "years_in_future": 5,
+    "cori_future_age": 8,
+    "aunt_age_multiplier": 3,
+    "aunt_future_age": 24,
+    "aunt_current_age": 19,
+    "answer": 19
+  },
+  "flawed_trace": {
+    "cori_current_age": 3,
+    "years_in_future": 5,
+    "cori_future_age": 8,
+    "aunt_age_multiplier": 3,
+    "aunt_future_age": 24,
+    "aunt_current_age": 21,
+    "answer": 21
+  },
+  "correct_value": 19,
+  "flawed_value": 21,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "cori_current_age",
+        "years_in_future"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cori_future_age",
+      "solution_line_template": "In {years_in_future} years, Cori will be {cori_current_age} + {years_in_future} = <<{cori_current_age}+{years_in_future}={cori_future_age}>>{cori_future_age} years old."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "aunt_age_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "aunt_future_age",
+      "solution_line_template": "In 5 years, Cori\u2019s aunt will be {cori_future_age} x {aunt_age_multiplier} = <<{cori_future_age}*{aunt_age_multiplier}={aunt_future_age}>>{aunt_future_age} years old."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "aunt_current_age",
+      "solution_line_template": "Today, her aunt is {aunt_future_age} - {years_in_future} = <<{aunt_future_age}-{years_in_future}={aunt_current_age}>>{aunt_current_age} years old."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In 5 years, Cori will be 3 + 5 = <<3+5=8>>8 years old.",
+    "L2": "In 5 years, Cori\u2019s aunt will be 8 x 3 = <<8*3=24>>24 years old.",
+    "L3": "Today, her aunt is 24 - 3 = <<24-3=21>>21 years old.",
+    "FA": "#### 21"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'aunt_age_multiplier' (3) was used instead of 'years_in_future' (5).",
+  "repro_seed": 4751332301665452926,
+  "model_name": "google_gemini-2.5-flash"
+}

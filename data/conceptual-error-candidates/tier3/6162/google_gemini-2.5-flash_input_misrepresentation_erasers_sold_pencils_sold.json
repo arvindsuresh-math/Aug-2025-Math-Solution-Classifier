@@ -1,0 +1,85 @@
+{
+  "index": 6162,
+  "original_solution_mapping": {
+    "FA": "#### 1",
+    "L1": "They sold 40 erasers because 20 x 2 = <<20*2=40>>40",
+    "L2": "Therefore 20(Pencil Price) + (1/2)(40 x Pencil Price) = 80",
+    "L3": "Therefore 40(Pencil Price) = 80",
+    "L4": "Therefore (Pencil Price) equals 2 because 80 / 40 = <<80/40=2>>2",
+    "L5": "An eraser costs $1 because 2 / 2 = <<2/2=1>>1"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6162.\n    Returns: the cost of erasers.\n    \"\"\"\n    # L1\n    pencils_sold = 20 # sold 20 pencils\n    erasers_per_pencil = 2 # for every pencil you buy, you must buy 2 erasers\n    erasers_sold = pencils_sold * erasers_per_pencil\n\n    # L4\n    total_earned = 80 # earned $80\n    eraser_price_ratio = Fraction(1, 2) # cost 1/2 the price of the pencils\n    effective_units_for_pencil_price = pencils_sold + (eraser_price_ratio * erasers_sold)\n    pencil_price = total_earned / effective_units_for_pencil_price\n\n    # L5\n    eraser_price_denominator = 2 # 1/2 the price of the pencils\n    eraser_cost = pencil_price / eraser_price_denominator\n\n    # FA\n    answer = eraser_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "erasers_sold",
+    "operand_to_replace": "erasers_per_pencil",
+    "replacement_variable": "pencils_sold"
+  },
+  "correct_trace": {
+    "pencils_sold": 20,
+    "erasers_per_pencil": 2,
+    "erasers_sold": 40,
+    "total_earned": 80,
+    "eraser_price_ratio": "1/2",
+    "effective_units_for_pencil_price": "40",
+    "pencil_price": "2",
+    "eraser_price_denominator": 2,
+    "eraser_cost": "1",
+    "answer": "1"
+  },
+  "flawed_trace": {
+    "pencils_sold": 20,
+    "erasers_per_pencil": 2,
+    "erasers_sold": 400,
+    "total_earned": 80,
+    "eraser_price_ratio": "1/2",
+    "effective_units_for_pencil_price": "220",
+    "pencil_price": "4/11",
+    "eraser_price_denominator": 2,
+    "eraser_cost": "2/11",
+    "answer": "2/11"
+  },
+  "correct_value": 40,
+  "flawed_value": 400,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "erasers_sold",
+      "question_inputs": [
+        "pencils_sold",
+        "erasers_per_pencil"
+      ],
+      "solution_line_template": "They sold {erasers_sold} erasers because {pencils_sold} x {erasers_per_pencil} = <<{pencils_sold}*{erasers_per_pencil}={erasers_sold}>>{erasers_sold}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "pencil_price",
+      "question_inputs": [
+        "total_earned",
+        "eraser_price_ratio"
+      ],
+      "solution_line_template": "Therefore (Pencil Price) equals {pencil_price} because {total_earned} / {effective_units_for_pencil_price} = <<{total_earned}/{effective_units_for_pencil_price}={pencil_price}>>{pencil_price}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "eraser_cost",
+      "question_inputs": [
+        "eraser_price_denominator"
+      ],
+      "solution_line_template": "An eraser costs ${eraser_cost} because {pencil_price} / {eraser_price_denominator} = <<{pencil_price}/{eraser_price_denominator}={eraser_cost}>>{eraser_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "They sold 400 erasers because 20 x 20 = <<20*20=400>>400",
+    "L4": "Therefore (Pencil Price) equals 4/11 because 80 / 220 = <<80/220=4/11>>4/11",
+    "L5": "An eraser costs $2/11 because 4/11 / 2 = <<4/11/2=2/11>>2/11",
+    "FA": "#### 2/11"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'pencils_sold' (20) was used instead of 'erasers_per_pencil' (2).",
+  "repro_seed": -3897491180748430681,
+  "model_name": "google_gemini-2.5-flash"
+}

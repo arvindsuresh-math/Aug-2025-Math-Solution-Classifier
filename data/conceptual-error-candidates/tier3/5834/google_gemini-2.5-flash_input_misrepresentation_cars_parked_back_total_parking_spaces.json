@@ -1,0 +1,89 @@
+{
+  "index": 5834,
+  "original_solution_mapping": {
+    "FA": "#### 32",
+    "L1": "There are a total of 52 + 38 = <<52+38=90>>90 parking spaces in the school.",
+    "L2": "Since half of the spaces are filled then, 38 x 1/2 = <<38*1/2=19>>19 cars have parked at the back.",
+    "L3": "So, a total of 39 + 19 = <<39+19=58>>58 cars have parked in the school.",
+    "L4": "Therefore, 90 - 58 = <<90-58=32>>32 parking spaces are still available."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5834.\n    Returns: the number of parking spaces still available in the school.\n    \"\"\"\n    # L1\n    front_parking_spaces = 52 # 52 parking spaces\n    back_parking_spaces = 38 # 38 spaces\n    total_parking_spaces = front_parking_spaces + back_parking_spaces\n\n    # L2\n    back_spaces_filled_fraction = Fraction(1, 2) # 1/2 of the spaces of the back are filled\n    cars_parked_back = back_parking_spaces * back_spaces_filled_fraction\n\n    # L3\n    cars_parked_front = 39 # 39 cars have parked\n    total_cars_parked = cars_parked_front + cars_parked_back\n\n    # L4\n    available_parking_spaces = total_parking_spaces - total_cars_parked\n\n    # FA\n    answer = available_parking_spaces\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "cars_parked_back",
+    "operand_to_replace": "back_parking_spaces",
+    "replacement_variable": "total_parking_spaces"
+  },
+  "correct_trace": {
+    "front_parking_spaces": 52,
+    "back_parking_spaces": 38,
+    "total_parking_spaces": 90,
+    "back_spaces_filled_fraction": "1/2",
+    "cars_parked_back": "19",
+    "cars_parked_front": 39,
+    "total_cars_parked": "58",
+    "available_parking_spaces": "32",
+    "answer": "32"
+  },
+  "flawed_trace": {
+    "front_parking_spaces": 52,
+    "back_parking_spaces": 38,
+    "total_parking_spaces": 90,
+    "back_spaces_filled_fraction": "1/2",
+    "cars_parked_back": "45",
+    "cars_parked_front": 39,
+    "total_cars_parked": "84",
+    "available_parking_spaces": "6",
+    "answer": "6"
+  },
+  "correct_value": "19",
+  "flawed_value": "45",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_parking_spaces",
+      "question_inputs": [
+        "front_parking_spaces",
+        "back_parking_spaces"
+      ],
+      "solution_line_template": "There are a total of {front_parking_spaces} + {back_parking_spaces} = <<{front_parking_spaces}+{back_parking_spaces}={total_parking_spaces}>>{total_parking_spaces} parking spaces in the school."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cars_parked_back",
+      "question_inputs": [
+        "back_spaces_filled_fraction"
+      ],
+      "solution_line_template": "Since half of the spaces are filled then, {back_parking_spaces} x {back_spaces_filled_fraction} = <<{back_parking_spaces}*{back_spaces_filled_fraction}={cars_parked_back}>>{cars_parked_back} cars have parked at the back."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cars_parked",
+      "question_inputs": [
+        "cars_parked_front"
+      ],
+      "solution_line_template": "So, a total of {cars_parked_front} + {cars_parked_back} = <<{cars_parked_front}+{cars_parked_back}={total_cars_parked}>>{total_cars_parked} cars have parked in the school."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "available_parking_spaces",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, {total_parking_spaces} - {total_cars_parked} = <<{total_parking_spaces}-{total_cars_parked}={available_parking_spaces}>>{available_parking_spaces} parking spaces are still available."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are a total of 52 + 38 = <<52+38=90>>90 parking spaces in the school.",
+    "L2": "Since half of the spaces are filled then, 90 x 1/2 = <<90*1/2=45>>45 cars have parked at the back.",
+    "L3": "So, a total of 39 + 45 = <<39+45=84>>84 cars have parked in the school.",
+    "L4": "Therefore, 90 - 84 = <<90-84=6>>6 parking spaces are still available.",
+    "FA": "#### 6"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_parking_spaces' (90) was used instead of 'back_parking_spaces' (38).",
+  "repro_seed": -4844571286998976576,
+  "model_name": "google_gemini-2.5-flash"
+}

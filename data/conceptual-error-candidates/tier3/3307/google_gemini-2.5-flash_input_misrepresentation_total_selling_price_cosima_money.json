@@ -1,0 +1,111 @@
+{
+  "index": 3307,
+  "original_solution_mapping": {
+    "FA": "#### 36",
+    "L1": "If Natasha has $60, which is 3 times as much money as Carla, Carla has $60/3=$<<60/3=20>>20",
+    "L2": "Together, Carla and Natasha have $20+$60=$<<20+60=80>>80",
+    "L3": "Carla has twice as much money as Cosima, meaning Cosima has $20/2=$10",
+    "L4": "Combined, the three have $10+$80=$<<10+80=90>>90",
+    "L5": "If they buy goods with the amount they have and sell at 7/5 of the buying price, the total amount of money they will get from selling the goods is 7/5*90=$<<7/5*90=126>>126",
+    "L6": "If they earn $126 from the sale of the goods they bought with the money they had, their profit is $126-$90=$<<126-90=36>>36"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3307.\n    Returns: the profit made from selling the goods.\n    \"\"\"\n    # L1\n    natasha_money = 60 # Natasha has $60\n    natasha_carla_multiplier = 3 # 3 times as much money as Carla\n    carla_money = natasha_money / natasha_carla_multiplier\n\n    # L2\n    carla_natasha_total = carla_money + natasha_money\n\n    # L3\n    carla_cosima_multiplier = 2 # twice as much money as Cosima\n    cosima_money = carla_money / carla_cosima_multiplier\n\n    # L4\n    total_money_initial = cosima_money + carla_natasha_total\n\n    # L5\n    selling_price_fraction = Fraction(7, 5) # 7/5 of the buying price\n    total_selling_price = selling_price_fraction * total_money_initial\n\n    # L6\n    profit = total_selling_price - total_money_initial\n\n    # FA\n    answer = profit\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_selling_price",
+    "operand_to_replace": "selling_price_fraction",
+    "replacement_variable": "cosima_money"
+  },
+  "correct_trace": {
+    "natasha_money": 60,
+    "natasha_carla_multiplier": 3,
+    "carla_money": 20.0,
+    "carla_natasha_total": 80.0,
+    "carla_cosima_multiplier": 2,
+    "cosima_money": 10.0,
+    "total_money_initial": 90.0,
+    "selling_price_fraction": "7/5",
+    "total_selling_price": 125.99999999999999,
+    "profit": 35.999999999999986,
+    "answer": 35.999999999999986
+  },
+  "flawed_trace": {
+    "natasha_money": 60,
+    "natasha_carla_multiplier": 3,
+    "carla_money": 20.0,
+    "carla_natasha_total": 80.0,
+    "carla_cosima_multiplier": 2,
+    "cosima_money": 10.0,
+    "total_money_initial": 90.0,
+    "selling_price_fraction": "7/5",
+    "total_selling_price": 900.0,
+    "profit": 810.0,
+    "answer": 810.0
+  },
+  "correct_value": 125.99999999999999,
+  "flawed_value": 900.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "carla_money",
+      "question_inputs": [
+        "natasha_money",
+        "natasha_carla_multiplier"
+      ],
+      "solution_line_template": "If Natasha has ${natasha_money}, which is {natasha_carla_multiplier} times as much money as Carla, Carla has ${natasha_money}/{natasha_carla_multiplier}=$<<{natasha_money}/{natasha_carla_multiplier}={carla_money}>>{carla_money}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "carla_natasha_total",
+      "question_inputs": [],
+      "solution_line_template": "Together, Carla and Natasha have ${carla_money}+${natasha_money}=$<<{carla_money}+{natasha_money}={carla_natasha_total}>>{carla_natasha_total}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cosima_money",
+      "question_inputs": [
+        "carla_cosima_multiplier"
+      ],
+      "solution_line_template": "Carla has twice as much money as Cosima, meaning Cosima has ${carla_money}/{carla_cosima_multiplier}=${cosima_money}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_money_initial",
+      "question_inputs": [],
+      "solution_line_template": "Combined, the three have ${cosima_money}+${carla_natasha_total}=$<<{cosima_money}+{carla_natasha_total}={total_money_initial}>>{total_money_initial}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_selling_price",
+      "question_inputs": [
+        "selling_price_fraction"
+      ],
+      "solution_line_template": "If they buy goods with the amount they have and sell at {selling_price_fraction} of the buying price, the total amount of money they will get from selling the goods is {selling_price_fraction}*{total_money_initial}=$<<{selling_price_fraction}*{total_money_initial}={total_selling_price}>>{total_selling_price}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "profit",
+      "question_inputs": [],
+      "solution_line_template": "If they earn ${total_selling_price} from the sale of the goods they bought with the money they had, their profit is ${total_selling_price}-${total_money_initial}=$<<{total_selling_price}-{total_money_initial}={profit}>>{profit}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Natasha has $60, which is 3 times as much money as Carla, Carla has $60/3=$<<60/3=20>>20",
+    "L2": "Together, Carla and Natasha have $20+$60=$<<20+60=80>>80",
+    "L3": "Carla has twice as much money as Cosima, meaning Cosima has $20/2=$10",
+    "L4": "Combined, the three have $10+$80=$<<10+80=90>>90",
+    "L5": "If they buy goods with the amount they have and sell at 10 of the buying price, the total amount of money they will get from selling the goods is 10*90=$<<10*90=900>>900",
+    "L6": "If they earn $900 from the sale of the goods they bought with the money they had, their profit is $900-$90=$<<900-90=810>>810",
+    "FA": "#### 810"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Input misrepresentation. The value for 'cosima_money' (10.0) was used instead of 'selling_price_fraction' (7/5).",
+  "repro_seed": -66443983026964821,
+  "model_name": "google_gemini-2.5-flash"
+}

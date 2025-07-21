@@ -1,0 +1,81 @@
+{
+  "index": 5035,
+  "original_solution_mapping": {
+    "FA": "#### 363",
+    "L1": "After the first month you get 10/100 * $300 = $<<10/100*300=30>>30 interest.",
+    "L2": "After the first month you will have $300 + $30 = $<<300+30=330>>330 in total.",
+    "L3": "After the second month you get = 10/100 * $330 = $<<10/100*330=33>>33 interest.",
+    "L4": "After the second month you will have $330 + $33 = $<<330+33=363>>363 in total."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5035.\n    Returns: the total amount of money after 2 months, including interest.\n    \"\"\"\n    # L1\n    interest_rate_fraction = Fraction(10, 100) # 10 percent interest\n    initial_investment = 300 # invest $300\n    interest_month1 = interest_rate_fraction * initial_investment\n\n    # L2\n    total_after_month1 = initial_investment + interest_month1\n\n    # L3\n    interest_month2 = interest_rate_fraction * total_after_month1\n\n    # L4\n    total_after_month2 = total_after_month1 + interest_month2\n\n    # FA\n    answer = total_after_month2\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_after_month1",
+    "operand_to_replace": "initial_investment",
+    "replacement_variable": "interest_month1"
+  },
+  "correct_trace": {
+    "interest_rate_fraction": "1/10",
+    "initial_investment": 300,
+    "interest_month1": "30",
+    "total_after_month1": "330",
+    "interest_month2": "33",
+    "total_after_month2": "363",
+    "answer": "363"
+  },
+  "flawed_trace": {
+    "interest_rate_fraction": "1/10",
+    "initial_investment": 300,
+    "interest_month1": "30",
+    "total_after_month1": "60",
+    "interest_month2": "6",
+    "total_after_month2": "66",
+    "answer": "66"
+  },
+  "correct_value": "330",
+  "flawed_value": "60",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "interest_month1",
+      "question_inputs": [
+        "interest_rate_fraction",
+        "initial_investment"
+      ],
+      "solution_line_template": "After the first month you get {interest_rate_fraction} * ${initial_investment} = $<<{interest_rate_fraction}*{initial_investment}={interest_month1}>>{interest_month1} interest."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_after_month1",
+      "question_inputs": [],
+      "solution_line_template": "After the first month you will have ${initial_investment} + ${interest_month1} = $<<{initial_investment}+{interest_month1}={total_after_month1}>>{total_after_month1} in total."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "interest_month2",
+      "question_inputs": [],
+      "solution_line_template": "After the second month you get = {interest_rate_fraction} * ${total_after_month1} = $<<{interest_rate_fraction}*{total_after_month1}={interest_month2}>>{interest_month2} interest."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_after_month2",
+      "question_inputs": [],
+      "solution_line_template": "After the second month you will have ${total_after_month1} + ${interest_month2} = $<<{total_after_month1}+{interest_month2}={total_after_month2}>>{total_after_month2} in total."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After the first month you get 10/100 * $300 = $<<10/100*300=30>>30 interest.",
+    "L2": "After the first month you will have $30 + $30 = $<<30+30=60>>60 in total.",
+    "L3": "After the second month you get = 10/100 * $60 = $<<10/100*60=6>>6 interest.",
+    "L4": "After the second month you will have $60 + $6 = $<<60+6=66>>66 in total.",
+    "FA": "#### 66"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'interest_month1' (30) was used instead of 'initial_investment' (300).",
+  "repro_seed": -4899903650905158932,
+  "model_name": "google_gemini-2.5-flash"
+}

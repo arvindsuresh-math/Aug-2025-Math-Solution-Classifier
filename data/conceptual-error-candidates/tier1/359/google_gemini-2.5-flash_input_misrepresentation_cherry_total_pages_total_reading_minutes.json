@@ -1,0 +1,94 @@
+{
+  "index": 359,
+  "original_solution_mapping": {
+    "FA": "#### 328",
+    "L1": "Rene finished 30 x 4 = <<30*4=120>>120 pages in 240 minutes.",
+    "L2": "Lulu finished 27 x 4 = <<27*4=108>>108 pages in 240 minutes.",
+    "L3": "Cherry finished 25 x 4 = <<25*4=100>>100 pages in 240 minutes.",
+    "L4": "Therefore they have finished a total of 120 + 108 + 100 = 328 pages in 240 minutes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 359.\n    Returns: the total number of pages finished by Rene, Lulu, and Cherry.\n    \"\"\"\n    # Intermediate calculation for the time multiplier, derived from question inputs.\n    initial_time_unit_minutes = 60 # 60 minutes\n    total_reading_minutes = 240 # reading for 240 minutes\n    time_multiplier = total_reading_minutes / initial_time_unit_minutes\n\n    # L1\n    rene_pages_per_60_min = 30 # 30 pages in 60 minutes\n    rene_total_pages = rene_pages_per_60_min * time_multiplier\n\n    # L2\n    lulu_pages_per_60_min = 27 # 27 pages in 60 minutes\n    lulu_total_pages = lulu_pages_per_60_min * time_multiplier\n\n    # L3\n    cherry_pages_per_60_min = 25 # 25 pages in 60 minutes\n    cherry_total_pages = cherry_pages_per_60_min * time_multiplier\n\n    # L4\n    total_pages_finished = rene_total_pages + lulu_total_pages + cherry_total_pages\n\n    # FA\n    answer = total_pages_finished\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "cherry_total_pages",
+    "operand_to_replace": "cherry_pages_per_60_min",
+    "replacement_variable": "total_reading_minutes"
+  },
+  "correct_trace": {
+    "initial_time_unit_minutes": 60,
+    "total_reading_minutes": 240,
+    "time_multiplier": 4.0,
+    "rene_pages_per_60_min": 30,
+    "rene_total_pages": 120.0,
+    "lulu_pages_per_60_min": 27,
+    "lulu_total_pages": 108.0,
+    "cherry_pages_per_60_min": 25,
+    "cherry_total_pages": 100.0,
+    "total_pages_finished": 328.0,
+    "answer": 328.0
+  },
+  "flawed_trace": {
+    "initial_time_unit_minutes": 60,
+    "total_reading_minutes": 240,
+    "time_multiplier": 4.0,
+    "rene_pages_per_60_min": 30,
+    "rene_total_pages": 120.0,
+    "lulu_pages_per_60_min": 27,
+    "lulu_total_pages": 108.0,
+    "cherry_pages_per_60_min": 25,
+    "cherry_total_pages": 960.0,
+    "total_pages_finished": 1188.0,
+    "answer": 1188.0
+  },
+  "correct_value": 100.0,
+  "flawed_value": 960.0,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "rene_pages_per_60_min",
+        "total_reading_minutes",
+        "initial_time_unit_minutes"
+      ],
+      "WK_inputs": [],
+      "output_variable": "rene_total_pages",
+      "solution_line_template": "Rene finished {rene_pages_per_60_min} x {time_multiplier} = <<{rene_pages_per_60_min}*{time_multiplier}={rene_total_pages}>>{rene_total_pages} pages in {total_reading_minutes} minutes."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "lulu_pages_per_60_min"
+      ],
+      "WK_inputs": [],
+      "output_variable": "lulu_total_pages",
+      "solution_line_template": "Lulu finished {lulu_pages_per_60_min} x {time_multiplier} = <<{lulu_pages_per_60_min}*{time_multiplier}={lulu_total_pages}>>{lulu_total_pages} pages in {total_reading_minutes} minutes."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "cherry_pages_per_60_min"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cherry_total_pages",
+      "solution_line_template": "Cherry finished {cherry_pages_per_60_min} x {time_multiplier} = <<{cherry_pages_per_60_min}*{time_multiplier}={cherry_total_pages}>>{cherry_total_pages} pages in {total_reading_minutes} minutes."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_pages_finished",
+      "solution_line_template": "Therefore they have finished a total of {rene_total_pages} + {lulu_total_pages} + {cherry_total_pages} = {total_pages_finished} pages in {total_reading_minutes} minutes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Rene finished 30 x 4 = <<30*4=120>>120 pages in 240 minutes.",
+    "L2": "Lulu finished 27 x 4 = <<27*4=108>>108 pages in 240 minutes.",
+    "L3": "Cherry finished 240 x 4 = <<240*4=960>>960 pages in 240 minutes.",
+    "L4": "Therefore they have finished a total of 120 + 108 + 960 = 1188 pages in 240 minutes.",
+    "FA": "#### 1188"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'total_reading_minutes' (240) was used instead of 'cherry_pages_per_60_min' (25).",
+  "repro_seed": -3278713198026166163,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,94 @@
+{
+  "index": 5855,
+  "original_solution_mapping": {
+    "FA": "#### 64",
+    "L1": "Let G be the number of gummy worms in the bag when Carlos bought it.",
+    "L2": "On the first day, he ate half the gummy worms, so he had G / 2 gummy worms.",
+    "L3": "On the second day, he ate half of the remaining gummy worms, so he had G / 2 / 2 = G / 4 gummy worms.",
+    "L4": "On the third day, he ate another half, so he had G / 4 / 2 = G / 8 gummy worms.",
+    "L5": "On the fourth day, he ate another half and had 4 left, so he had G / 8 / 2 = G / 16 = 4 gummy worms.",
+    "L6": "Thus, there were G = 4 * 16 = <<4*16=64>>64 gummy worms in the bag when Carlos bought it."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5855.\n    Returns: the number of gummy worms in the bag when Carlos bought it.\n    \"\"\"\n    # L2\n    half_factor = 2 # WK\n    denominator_day1 = half_factor\n\n    # L3\n    denominator_day2 = denominator_day1 * half_factor\n\n    # L4\n    denominator_day3 = denominator_day2 * half_factor\n\n    # L5\n    gummy_worms_left_final = 4 # had 4 gummy worms left\n    denominator_day4 = denominator_day3 * half_factor\n\n    # L6\n    initial_gummy_worms = gummy_worms_left_final * denominator_day4\n\n    # FA\n    answer = initial_gummy_worms\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "initial_gummy_worms",
+    "operand_to_replace": "denominator_day4",
+    "replacement_variable": "denominator_day2"
+  },
+  "correct_trace": {
+    "half_factor": 2,
+    "denominator_day1": 2,
+    "denominator_day2": 4,
+    "denominator_day3": 8,
+    "gummy_worms_left_final": 4,
+    "denominator_day4": 16,
+    "initial_gummy_worms": 64,
+    "answer": 64
+  },
+  "flawed_trace": {
+    "half_factor": 2,
+    "denominator_day1": 2,
+    "denominator_day2": 4,
+    "denominator_day3": 8,
+    "gummy_worms_left_final": 4,
+    "denominator_day4": 16,
+    "initial_gummy_worms": 16,
+    "answer": 16
+  },
+  "correct_value": 64,
+  "flawed_value": 16,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "half_factor"
+      ],
+      "line_number": "L2",
+      "output_variable": "denominator_day1",
+      "question_inputs": [],
+      "solution_line_template": "On the first day, he ate half the gummy worms, so he had G / {half_factor} gummy worms."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "denominator_day2",
+      "question_inputs": [],
+      "solution_line_template": "On the second day, he ate half of the remaining gummy worms, so he had G / {denominator_day1} / {half_factor} = G / {denominator_day2} gummy worms."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "denominator_day3",
+      "question_inputs": [],
+      "solution_line_template": "On the third day, he ate another half, so he had G / {denominator_day2} / {half_factor} = G / {denominator_day3} gummy worms."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "denominator_day4",
+      "question_inputs": [
+        "gummy_worms_left_final"
+      ],
+      "solution_line_template": "On the fourth day, he ate another half and had {gummy_worms_left_final} left, so he had G / {denominator_day3} / {half_factor} = G / {denominator_day4} = {gummy_worms_left_final} gummy worms."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "initial_gummy_worms",
+      "question_inputs": [],
+      "solution_line_template": "Thus, there were G = {gummy_worms_left_final} * {denominator_day4} = <<{gummy_worms_left_final}*{denominator_day4}={initial_gummy_worms}>>{initial_gummy_worms} gummy worms in the bag when Carlos bought it."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "On the first day, he ate half the gummy worms, so he had G / 2 gummy worms.",
+    "L3": "On the second day, he ate half of the remaining gummy worms, so he had G / 2 / 2 = G / 4 gummy worms.",
+    "L4": "On the third day, he ate another half, so he had G / 4 / 2 = G / 8 gummy worms.",
+    "L5": "On the fourth day, he ate another half and had 4 left, so he had G / 8 / 2 = G / 16 = 4 gummy worms.",
+    "L6": "Thus, there were G = 4 * 4 = <<4*4=16>>16 gummy worms in the bag when Carlos bought it.",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L6",
+  "explanation": "Incorrect operand. The variable 'denominator_day2' (value: 4) was used instead of 'denominator_day4' (value: 16).",
+  "repro_seed": -2299332878332699646,
+  "model_name": "google_gemini-2.5-flash"
+}

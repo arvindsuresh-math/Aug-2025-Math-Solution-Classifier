@@ -1,0 +1,70 @@
+{
+  "index": 2292,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "One quarter of $4 is (1/4)*$4 = $<<(1/4)*4=1>>1",
+    "L2": "$1 is equivalent to 100 cents",
+    "L3": "20 cents will buy 1 candy so 100 cents will buy 100/20 = <<100/20=5>>5 candies"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2292.\n    Returns: the number of candies the friend can purchase.\n    \"\"\"\n    # L1\n    fraction_given = Fraction(1, 4) # one-quarter of his feeding allowance\n    feeding_allowance = 4 # feeding allowance is $4\n    money_given_to_friend = fraction_given * feeding_allowance\n\n    # L3\n    cents_per_dollar = 100 # WK\n    candy_cost_cents = 20 # candies cost 20 cents apiece\n    money_given_to_friend_cents = money_given_to_friend * cents_per_dollar\n    candies_purchased = money_given_to_friend_cents / candy_cost_cents\n\n    # FA\n    answer = candies_purchased\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "money_given_to_friend_cents",
+    "operand_to_replace": "cents_per_dollar",
+    "replacement_variable": "feeding_allowance"
+  },
+  "correct_trace": {
+    "fraction_given": "1/4",
+    "feeding_allowance": 4,
+    "money_given_to_friend": "1",
+    "cents_per_dollar": 100,
+    "candy_cost_cents": 20,
+    "money_given_to_friend_cents": "100",
+    "candies_purchased": "5",
+    "answer": "5"
+  },
+  "flawed_trace": {
+    "fraction_given": "1/4",
+    "feeding_allowance": 4,
+    "money_given_to_friend": "1",
+    "cents_per_dollar": 100,
+    "candy_cost_cents": 20,
+    "money_given_to_friend_cents": "4",
+    "candies_purchased": "1/5",
+    "answer": "1/5"
+  },
+  "correct_value": "100",
+  "flawed_value": "4",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_given_to_friend",
+      "question_inputs": [
+        "fraction_given",
+        "feeding_allowance"
+      ],
+      "solution_line_template": "One quarter of ${feeding_allowance} is ({fraction_given})*${feeding_allowance} = $<<({fraction_given})*{feeding_allowance}={money_given_to_friend}>>{money_given_to_friend}"
+    },
+    {
+      "WK_inputs": [
+        "cents_per_dollar"
+      ],
+      "line_number": "L3",
+      "output_variable": "candies_purchased",
+      "question_inputs": [
+        "candy_cost_cents"
+      ],
+      "solution_line_template": "20 cents will buy 1 candy so {money_given_to_friend_cents} cents will buy {money_given_to_friend_cents}/{candy_cost_cents} = <<{money_given_to_friend_cents}/{candy_cost_cents}={candies_purchased}>>{candies_purchased} candies"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "One quarter of $4 is (1/4)*$4 = $<<(1/4)*4=1>>1",
+    "L3": "20 cents will buy 1 candy so 4 cents will buy 4/20 = <<4/20=1/5>>1/5 candies",
+    "FA": "#### 1/5"
+  },
+  "erroneous_line_number": null,
+  "explanation": "Input misrepresentation. The value for 'feeding_allowance' (4) was used instead of 'cents_per_dollar' (100).",
+  "repro_seed": -783593659131123442,
+  "model_name": "google_gemini-2.5-flash"
+}

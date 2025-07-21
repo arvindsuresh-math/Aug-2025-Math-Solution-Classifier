@@ -1,0 +1,100 @@
+{
+  "index": 1780,
+  "original_solution_mapping": {
+    "FA": "#### 675",
+    "L1": "Faith earns $13.50 x 8 = $<<13.5*8=108>>108 per day.",
+    "L2": "Since she works 5 days a week, she earns 5 x $108 = $<<5*108=540>>540 per week.",
+    "L3": "She gets an additional 2 x $13.50 = $<<2*13.5=27>>27 per day for the overtime pay.",
+    "L4": "She earns a total of $27 x 5 = $<<27*5=135>>135 additional pay for her weekly overtime.",
+    "L5": "Therefore, Faith earns $540 + $135 = $<<540+135=675>>675 per week."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1780.\n    Returns: the total amount Faith will earn by the end of the week.\n    \"\"\"\n    # L1\n    hourly_rate = 13.50 # $13.50 per hour\n    normal_hours_per_day = 8 # 8 hours a day\n    daily_normal_earnings = hourly_rate * normal_hours_per_day\n\n    # L2\n    normal_work_days_per_week = 5 # 5 days a week\n    weekly_normal_earnings = normal_work_days_per_week * daily_normal_earnings\n\n    # L3\n    overtime_hours_per_day = 2 # 2 hours of overtime per day\n    daily_overtime_earnings = overtime_hours_per_day * hourly_rate\n\n    # L4\n    weekly_overtime_earnings = daily_overtime_earnings * normal_work_days_per_week\n\n    # L5\n    total_weekly_earnings = weekly_normal_earnings + weekly_overtime_earnings\n\n    # FA\n    answer = total_weekly_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "daily_overtime_earnings",
+    "operand_to_replace": "hourly_rate",
+    "replacement_variable": "normal_work_days_per_week"
+  },
+  "correct_trace": {
+    "hourly_rate": 13.5,
+    "normal_hours_per_day": 8,
+    "daily_normal_earnings": 108.0,
+    "normal_work_days_per_week": 5,
+    "weekly_normal_earnings": 540.0,
+    "overtime_hours_per_day": 2,
+    "daily_overtime_earnings": 27.0,
+    "weekly_overtime_earnings": 135.0,
+    "total_weekly_earnings": 675.0,
+    "answer": 675.0
+  },
+  "flawed_trace": {
+    "hourly_rate": 13.5,
+    "normal_hours_per_day": 8,
+    "daily_normal_earnings": 108.0,
+    "normal_work_days_per_week": 5,
+    "weekly_normal_earnings": 540.0,
+    "overtime_hours_per_day": 2,
+    "daily_overtime_earnings": 10,
+    "weekly_overtime_earnings": 50,
+    "total_weekly_earnings": 590.0,
+    "answer": 590.0
+  },
+  "correct_value": 27.0,
+  "flawed_value": 10,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "daily_normal_earnings",
+      "question_inputs": [
+        "hourly_rate",
+        "normal_hours_per_day"
+      ],
+      "solution_line_template": "Faith earns ${hourly_rate} x {normal_hours_per_day} = $<<{hourly_rate}*{normal_hours_per_day}={daily_normal_earnings}>>{daily_normal_earnings} per day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "weekly_normal_earnings",
+      "question_inputs": [
+        "normal_work_days_per_week"
+      ],
+      "solution_line_template": "Since she works {normal_work_days_per_week} days a week, she earns {normal_work_days_per_week} x ${daily_normal_earnings} = $<<{normal_work_days_per_week}*{daily_normal_earnings}={weekly_normal_earnings}>>{weekly_normal_earnings} per week."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "daily_overtime_earnings",
+      "question_inputs": [
+        "overtime_hours_per_day"
+      ],
+      "solution_line_template": "She gets an additional {overtime_hours_per_day} x ${hourly_rate} = $<<{overtime_hours_per_day}*{hourly_rate}={daily_overtime_earnings}>>{daily_overtime_earnings} per day for the overtime pay."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "weekly_overtime_earnings",
+      "question_inputs": [],
+      "solution_line_template": "She earns a total of ${daily_overtime_earnings} x {normal_work_days_per_week} = $<<{daily_overtime_earnings}*{normal_work_days_per_week}={weekly_overtime_earnings}>>{weekly_overtime_earnings} additional pay for her weekly overtime."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_weekly_earnings",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, Faith earns ${weekly_normal_earnings} + ${weekly_overtime_earnings} = $<<{weekly_normal_earnings}+{weekly_overtime_earnings}={total_weekly_earnings}>>{total_weekly_earnings} per week."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Faith earns $13.5 x 8 = $<<13.5*8=108>>108 per day.",
+    "L2": "Since she works 5 days a week, she earns 5 x $108 = $<<5*108=540>>540 per week.",
+    "L3": "She gets an additional 2 x $5 = $<<2*5=10>>10 per day for the overtime pay.",
+    "L4": "She earns a total of $10 x 5 = $<<10*5=50>>50 additional pay for her weekly overtime.",
+    "L5": "Therefore, Faith earns $540 + $50 = $<<540+50=590>>590 per week.",
+    "FA": "#### 590"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'normal_work_days_per_week' (5) was used instead of 'hourly_rate' (13.5).",
+  "repro_seed": 2420170648159362508,
+  "model_name": "google_gemini-2.5-flash"
+}

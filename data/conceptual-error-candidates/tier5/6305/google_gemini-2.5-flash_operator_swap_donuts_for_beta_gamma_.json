@@ -1,0 +1,67 @@
+{
+  "index": 6305,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "Let x = the number of donuts Gamma took.",
+    "L2": "The total donuts Gamma and Beta have is 40 - 8 = <<40-8=32>>32 donuts.",
+    "L3": "3x is the number of donuts for Beta.",
+    "L4": "3x + x is the number of total donuts for Beta and Gamma.",
+    "L5": "If we add the two x terms, we get 4x = 32.",
+    "L6": "If we divide both sides by 4, we get x = 8, so Gamma has 8 donuts."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6305.\n    Returns: the number of donuts Gamma received.\n    \"\"\"\n    # L2\n    total_donuts_initial = 40 # Delta, Beta and Gamma decided to share 40 donuts\n    delta_donuts = 8 # Delta took 8 donuts\n    donuts_for_beta_gamma = total_donuts_initial - delta_donuts\n\n    # L6\n    # Beta took three times as many as Gamma (3x), and Gamma took x, so total is 4x.\n    division_coefficient = 4 # from 4x = 32, dividing by 4\n    gamma_donuts = donuts_for_beta_gamma / division_coefficient\n\n    # FA\n    answer = gamma_donuts\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "donuts_for_beta_gamma",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30a817450>"
+  },
+  "correct_trace": {
+    "total_donuts_initial": 40,
+    "delta_donuts": 8,
+    "donuts_for_beta_gamma": 32,
+    "division_coefficient": 4,
+    "gamma_donuts": 8.0,
+    "answer": 8.0
+  },
+  "flawed_trace": {
+    "total_donuts_initial": 40,
+    "delta_donuts": 8,
+    "donuts_for_beta_gamma": 48,
+    "division_coefficient": 4,
+    "gamma_donuts": 12.0,
+    "answer": 12.0
+  },
+  "correct_value": 32,
+  "flawed_value": 48,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "donuts_for_beta_gamma",
+      "question_inputs": [
+        "total_donuts_initial",
+        "delta_donuts"
+      ],
+      "solution_line_template": "The total donuts Gamma and Beta have is {total_donuts_initial} - {delta_donuts} = <<{total_donuts_initial}-{delta_donuts}={donuts_for_beta_gamma}>>{donuts_for_beta_gamma} donuts."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "gamma_donuts",
+      "question_inputs": [
+        "division_coefficient"
+      ],
+      "solution_line_template": "If we divide both sides by {division_coefficient}, we get x = {gamma_donuts}, so Gamma has {gamma_donuts} donuts."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "The total donuts Gamma and Beta have is 40 - 8 = <<40-8=48>>48 donuts.",
+    "L6": "If we divide both sides by 4, we get x = 12, so Gamma has 12 donuts.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 2075140851003217616,
+  "model_name": "google_gemini-2.5-flash"
+}

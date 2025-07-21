@@ -1,0 +1,67 @@
+{
+  "index": 3860,
+  "original_solution_mapping": {
+    "FA": "#### 83200",
+    "L1": "If there are 4 hearts on a card, a standard deck of 52 playing cards will have 208 hearts.",
+    "L2": "There are twice as many cows in Devonshire as there are hearts on a standard deck of 52 playing cards, meaning there are 2*208 = <<2*208=416>>416 cows in Devonshire.",
+    "L3": "The total cost of the cows when they are sold at $200 each is 416*$200 =$<<416*200=83200>>83200"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3860.\n    Returns: the total cost of the cows.\n    \"\"\"\n    # Values derived from the question, used in subsequent steps\n    hearts_per_card = 4 # 4 hearts on a card\n    num_cards_in_deck = 52 # standard deck of 52 playing cards\n    total_hearts_in_deck = hearts_per_card * num_cards_in_deck\n\n    # L2\n    multiplier_cows = 2 # twice as many cows\n    num_cows = multiplier_cows * total_hearts_in_deck\n\n    # L3\n    price_per_cow = 200 # $200 each\n    total_cost = num_cows * price_per_cow\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cost",
+    "operand_to_replace": "price_per_cow",
+    "replacement_variable": "multiplier_cows"
+  },
+  "correct_trace": {
+    "hearts_per_card": 4,
+    "num_cards_in_deck": 52,
+    "total_hearts_in_deck": 208,
+    "multiplier_cows": 2,
+    "num_cows": 416,
+    "price_per_cow": 200,
+    "total_cost": 83200,
+    "answer": 83200
+  },
+  "flawed_trace": {
+    "hearts_per_card": 4,
+    "num_cards_in_deck": 52,
+    "total_hearts_in_deck": 208,
+    "multiplier_cows": 2,
+    "num_cows": 416,
+    "price_per_cow": 200,
+    "total_cost": 832,
+    "answer": 832
+  },
+  "correct_value": 83200,
+  "flawed_value": 832,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_cows",
+      "question_inputs": [
+        "multiplier_cows"
+      ],
+      "solution_line_template": "There are twice as many cows in Devonshire as there are hearts on a standard deck of 52 playing cards, meaning there are {multiplier_cows}*{total_hearts_in_deck} = <<{multiplier_cows}*{total_hearts_in_deck}={num_cows}>>{num_cows} cows in Devonshire."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "price_per_cow"
+      ],
+      "solution_line_template": "The total cost of the cows when they are sold at ${price_per_cow} each is {num_cows}*${price_per_cow} =$<<{num_cows}*{price_per_cow}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "There are twice as many cows in Devonshire as there are hearts on a standard deck of 52 playing cards, meaning there are 2*208 = <<2*208=416>>416 cows in Devonshire.",
+    "L3": "The total cost of the cows when they are sold at $2 each is 416*$2 =$<<416*2=832>>832",
+    "FA": "#### 832"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'multiplier_cows' (2) was used instead of 'price_per_cow' (200).",
+  "repro_seed": 1569977141799855673,
+  "model_name": "google_gemini-2.5-flash"
+}

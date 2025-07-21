@@ -1,0 +1,63 @@
+{
+  "index": 3507,
+  "original_solution_mapping": {
+    "FA": "#### 275",
+    "L1": "Last year Ella made a total of $100 / (40/100) = $<<100/(40/100)=250>>250",
+    "L2": "This year with her raise, Ella's salary will be $250 * (110/100) = $<<250*(110/100)=275>>275"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3507.\n    Returns: Ella's new salary.\n    \"\"\"\n    # L1\n    spent_on_games = 100 # spent $100\n    percentage_on_games = Fraction(40, 100) # 40% of the money\n    last_year_salary = spent_on_games / percentage_on_games\n\n    # L2\n    raise_percentage = Fraction(110, 100) # 10% raise (100% + 10% = 110%)\n    new_salary = last_year_salary * raise_percentage\n\n    # FA\n    answer = new_salary\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "last_year_salary",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x177f4e6d0>"
+  },
+  "correct_trace": {
+    "spent_on_games": 100,
+    "percentage_on_games": "2/5",
+    "last_year_salary": "250",
+    "raise_percentage": "11/10",
+    "new_salary": "275",
+    "answer": "275"
+  },
+  "flawed_trace": {
+    "spent_on_games": 100,
+    "percentage_on_games": "2/5",
+    "last_year_salary": "40",
+    "raise_percentage": "11/10",
+    "new_salary": "44",
+    "answer": "44"
+  },
+  "correct_value": "250",
+  "flawed_value": "40",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "last_year_salary",
+      "question_inputs": [
+        "spent_on_games",
+        "percentage_on_games"
+      ],
+      "solution_line_template": "Last year Ella made a total of ${spent_on_games} / ({percentage_on_games}) = $<<{spent_on_games}/({percentage_on_games})={last_year_salary}>>{last_year_salary}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "new_salary",
+      "question_inputs": [
+        "raise_percentage"
+      ],
+      "solution_line_template": "This year with her raise, Ella's salary will be ${last_year_salary} * ({raise_percentage}) = $<<{last_year_salary}*({raise_percentage})={new_salary}>>{new_salary}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Last year Ella made a total of $100 / (40/100) = $<<100/(40/100)=40>>40",
+    "L2": "This year with her raise, Ella's salary will be $40 * (110/100) = $<<40*(110/100)=44>>44",
+    "FA": "#### 44"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 8931110384906569083,
+  "model_name": "google_gemini-2.5-flash"
+}

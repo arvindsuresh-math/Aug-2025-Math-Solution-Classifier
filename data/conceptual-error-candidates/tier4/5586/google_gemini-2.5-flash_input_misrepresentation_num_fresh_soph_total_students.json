@@ -1,0 +1,74 @@
+{
+  "index": 5586,
+  "original_solution_mapping": {
+    "FA": "#### 160",
+    "L1": "Freshman/Sophomores:400(.50)=200 students",
+    "L2": "Have pets:200/5=<<200/5=40>>40 students",
+    "L3": "200-40=<<200-40=160>>160 do not have pets"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5586.\n    Returns: the number of freshmen and sophomores who do not own a pet.\n    \"\"\"\n    # L1\n    total_students = 400 # 400 students in a local high school\n    fresh_soph_percent = 0.50 # 50 percent are freshmen or sophomores\n    num_fresh_soph = total_students * fresh_soph_percent\n\n    # L2\n    pet_owner_fraction_denominator = 5 # 1/5 of freshmen and sophomores own a pet\n    num_fresh_soph_with_pets = num_fresh_soph / pet_owner_fraction_denominator\n\n    # L3\n    num_fresh_soph_no_pets = num_fresh_soph - num_fresh_soph_with_pets\n\n    # FA\n    answer = num_fresh_soph_no_pets\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "num_fresh_soph",
+    "operand_to_replace": "fresh_soph_percent",
+    "replacement_variable": "total_students"
+  },
+  "correct_trace": {
+    "total_students": 400,
+    "fresh_soph_percent": 0.5,
+    "num_fresh_soph": 200.0,
+    "pet_owner_fraction_denominator": 5,
+    "num_fresh_soph_with_pets": 40.0,
+    "num_fresh_soph_no_pets": 160.0,
+    "answer": 160.0
+  },
+  "flawed_trace": {
+    "total_students": 400,
+    "fresh_soph_percent": 0.5,
+    "num_fresh_soph": 160000,
+    "pet_owner_fraction_denominator": 5,
+    "num_fresh_soph_with_pets": 32000.0,
+    "num_fresh_soph_no_pets": 128000.0,
+    "answer": 128000.0
+  },
+  "correct_value": 200.0,
+  "flawed_value": 160000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "num_fresh_soph",
+      "question_inputs": [
+        "total_students",
+        "fresh_soph_percent"
+      ],
+      "solution_line_template": "Freshman/Sophomores:{total_students}({fresh_soph_percent})={num_fresh_soph} students"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_fresh_soph_with_pets",
+      "question_inputs": [
+        "pet_owner_fraction_denominator"
+      ],
+      "solution_line_template": "Have pets:{num_fresh_soph}/{pet_owner_fraction_denominator}=<<{num_fresh_soph}/{pet_owner_fraction_denominator}={num_fresh_soph_with_pets}>>{num_fresh_soph_with_pets} students"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_fresh_soph_no_pets",
+      "question_inputs": [],
+      "solution_line_template": "{num_fresh_soph}-{num_fresh_soph_with_pets}=<<{num_fresh_soph}-{num_fresh_soph_with_pets}={num_fresh_soph_no_pets}>>{num_fresh_soph_no_pets} do not have pets"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Freshman/Sophomores:400(400)=160000 students",
+    "L2": "Have pets:160000/5=<<160000/5=32000>>32000 students",
+    "L3": "160000-32000=<<160000-32000=128000>>128000 do not have pets",
+    "FA": "#### 128000"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'total_students' (400) was used instead of 'fresh_soph_percent' (0.5).",
+  "repro_seed": 5804527120700834593,
+  "model_name": "google_gemini-2.5-flash"
+}

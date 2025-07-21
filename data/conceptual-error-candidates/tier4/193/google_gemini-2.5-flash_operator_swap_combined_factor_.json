@@ -1,0 +1,64 @@
+{
+  "index": 193,
+  "original_solution_mapping": {
+    "FA": "#### 160",
+    "L1": "The height of the sunflowers from Packet A is the same as the height of the sunflowers from Packet B + 20%. If Y represents the height of the sunflowers from Packet B, Y + 0.20Y = the height of sunflowers from Packet A.",
+    "L2": "We know the height of the sunflowers from Packet A is 192 inches = Y + 0.20Y or 1.2Y.",
+    "L3": "To figure out Y, we would divide both sides of the equation by 1.2, like this: 192 / 1.2 = 1.2Y / 1.2 or 160 = Y."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 193.\n    Returns: the height of sunflowers from Packet B.\n    \"\"\"\n    # L2\n    packet_a_height = 192 # 192 inches tall\n    taller_percentage = 0.20 # 20% taller\n    base_factor = 1 # WK\n    combined_factor = base_factor + taller_percentage\n\n    # L3\n    packet_b_height = packet_a_height / combined_factor\n\n    # FA\n    answer = packet_b_height\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "combined_factor",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x30b444b10>"
+  },
+  "correct_trace": {
+    "packet_a_height": 192,
+    "taller_percentage": 0.2,
+    "base_factor": 1,
+    "combined_factor": 1.2,
+    "packet_b_height": 160.0,
+    "answer": 160.0
+  },
+  "flawed_trace": {
+    "packet_a_height": 192,
+    "taller_percentage": 0.2,
+    "base_factor": 1,
+    "combined_factor": 0.8,
+    "packet_b_height": 240.0,
+    "answer": 240.0
+  },
+  "correct_value": 1.2,
+  "flawed_value": 0.8,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "base_factor"
+      ],
+      "line_number": "L2",
+      "output_variable": "combined_factor",
+      "question_inputs": [
+        "packet_a_height",
+        "taller_percentage"
+      ],
+      "solution_line_template": "We know the height of the sunflowers from Packet A is {packet_a_height} inches = Y + {taller_percentage}Y or {combined_factor}Y."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "packet_b_height",
+      "question_inputs": [],
+      "solution_line_template": "To figure out Y, we would divide both sides of the equation by {combined_factor}, like this: {packet_a_height} / {combined_factor} = {combined_factor}Y / {combined_factor} or {packet_b_height} = Y."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "We know the height of the sunflowers from Packet A is 192 inches = Y + 0.2Y or 0.8Y.",
+    "L3": "To figure out Y, we would divide both sides of the equation by 0.8, like this: 192 / 0.8 = 0.8Y / 0.8 or 240 = Y.",
+    "FA": "#### 240"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": -8417848106684913358,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,66 @@
+{
+  "index": 3813,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "Burning a candle for 1 hour lasts her 8 nights so if she burns for 2 hours it will last her 8/2 = <<1*8/2=4>>4 nights",
+    "L2": "1 candle now lasts 4 nights and she needs enough for 24 nights so she needs 24/4 = <<24/4=6>>6 candles"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3813.\n    Returns: the number of candles Carmen will use.\n    \"\"\"\n    # L1\n    initial_burn_hours = 1 # Burning a candle for 1 hour\n    initial_duration_nights = 8 # lasts her 8 nights\n    new_burn_hours = 2 # burns the candle for 2 hours a night\n    new_duration_nights = initial_duration_nights / new_burn_hours\n\n    # L2\n    total_nights_needed = 24 # over 24 nights\n    candles_needed = total_nights_needed / new_duration_nights\n\n    # FA\n    answer = candles_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "candles_needed",
+    "operand_to_replace": "new_duration_nights",
+    "replacement_variable": "new_burn_hours"
+  },
+  "correct_trace": {
+    "initial_burn_hours": 1,
+    "initial_duration_nights": 8,
+    "new_burn_hours": 2,
+    "new_duration_nights": 4.0,
+    "total_nights_needed": 24,
+    "candles_needed": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "initial_burn_hours": 1,
+    "initial_duration_nights": 8,
+    "new_burn_hours": 2,
+    "new_duration_nights": 4.0,
+    "total_nights_needed": 24,
+    "candles_needed": 12.0,
+    "answer": 12.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 12.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "new_duration_nights",
+      "question_inputs": [
+        "initial_burn_hours",
+        "initial_duration_nights",
+        "new_burn_hours"
+      ],
+      "solution_line_template": "Burning a candle for {initial_burn_hours} hour lasts her {initial_duration_nights} nights so if she burns for {new_burn_hours} hours it will last her {initial_duration_nights}/{new_burn_hours} = <<{initial_burn_hours}*{initial_duration_nights}/{new_burn_hours}={new_duration_nights}>>{new_duration_nights} nights"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "candles_needed",
+      "question_inputs": [
+        "total_nights_needed"
+      ],
+      "solution_line_template": "{initial_burn_hours} candle now lasts {new_duration_nights} nights and she needs enough for {total_nights_needed} nights so she needs {total_nights_needed}/{new_duration_nights} = <<{total_nights_needed}/{new_duration_nights}={candles_needed}>>{candles_needed} candles"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Burning a candle for 1 hour lasts her 8 nights so if she burns for 2 hours it will last her 8/2 = <<1*8/2=4>>4 nights",
+    "L2": "1 candle now lasts 2 nights and she needs enough for 24 nights so she needs 24/2 = <<24/2=12>>12 candles",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'new_burn_hours' (value: 2) was used instead of 'new_duration_nights' (value: 4.0).",
+  "repro_seed": 7592762467364599879,
+  "model_name": "google_gemini-2.5-flash"
+}

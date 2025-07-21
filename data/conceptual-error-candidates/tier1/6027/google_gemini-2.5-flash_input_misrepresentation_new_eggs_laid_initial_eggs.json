@@ -1,0 +1,77 @@
+{
+  "index": 6027,
+  "original_solution_mapping": {
+    "FA": "#### 11",
+    "L1": "There were 10 eggs but 5 of them were used so, there are 10 - 5 = <<10-5=5>>5 eggs.",
+    "L2": "Then the two chickens laid 2 * 3 = <<2*3=6>>6 eggs in total.",
+    "L3": "Thus, the family has 5 + 6 = <<5+6=11>>11 eggs now."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6027.\n    Returns: the total number of eggs the family has now.\n    \"\"\"\n    # L1\n    initial_eggs = 10 # 10 eggs\n    eggs_used_for_omelet = 5 # used 5 of them\n    eggs_after_omelet = initial_eggs - eggs_used_for_omelet\n\n    # L2\n    num_chickens = 2 # 2 chickens\n    eggs_per_chicken = 3 # laid 3 eggs each\n    new_eggs_laid = num_chickens * eggs_per_chicken\n\n    # L3\n    total_eggs = eggs_after_omelet + new_eggs_laid\n\n    # FA\n    answer = total_eggs\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "new_eggs_laid",
+    "operand_to_replace": "num_chickens",
+    "replacement_variable": "initial_eggs"
+  },
+  "correct_trace": {
+    "initial_eggs": 10,
+    "eggs_used_for_omelet": 5,
+    "eggs_after_omelet": 5,
+    "num_chickens": 2,
+    "eggs_per_chicken": 3,
+    "new_eggs_laid": 6,
+    "total_eggs": 11,
+    "answer": 11
+  },
+  "flawed_trace": {
+    "initial_eggs": 10,
+    "eggs_used_for_omelet": 5,
+    "eggs_after_omelet": 5,
+    "num_chickens": 2,
+    "eggs_per_chicken": 3,
+    "new_eggs_laid": 30,
+    "total_eggs": 35,
+    "answer": 35
+  },
+  "correct_value": 6,
+  "flawed_value": 30,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "eggs_after_omelet",
+      "question_inputs": [
+        "initial_eggs",
+        "eggs_used_for_omelet"
+      ],
+      "solution_line_template": "There were {initial_eggs} eggs but {eggs_used_for_omelet} of them were used so, there are {initial_eggs} - {eggs_used_for_omelet} = <<{initial_eggs}-{eggs_used_for_omelet}={eggs_after_omelet}>>{eggs_after_omelet} eggs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "new_eggs_laid",
+      "question_inputs": [
+        "num_chickens",
+        "eggs_per_chicken"
+      ],
+      "solution_line_template": "Then the two chickens laid {num_chickens} * {eggs_per_chicken} = <<{num_chickens}*{eggs_per_chicken}={new_eggs_laid}>>{new_eggs_laid} eggs in total."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_eggs",
+      "question_inputs": [],
+      "solution_line_template": "Thus, the family has {eggs_after_omelet} + {new_eggs_laid} = <<{eggs_after_omelet}+{new_eggs_laid}={total_eggs}>>{total_eggs} eggs now."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There were 10 eggs but 5 of them were used so, there are 10 - 5 = <<10-5=5>>5 eggs.",
+    "L2": "Then the two chickens laid 10 * 3 = <<10*3=30>>30 eggs in total.",
+    "L3": "Thus, the family has 5 + 30 = <<5+30=35>>35 eggs now.",
+    "FA": "#### 35"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'initial_eggs' (10) was used instead of 'num_chickens' (2).",
+  "repro_seed": -3710568891357503783,
+  "model_name": "google_gemini-2.5-flash"
+}

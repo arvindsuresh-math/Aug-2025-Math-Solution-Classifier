@@ -1,0 +1,78 @@
+{
+  "index": 5895,
+  "original_solution_mapping": {
+    "FA": "#### 16",
+    "L1": "Lisa can jump 6*2 =<<6*2=12>>12 inches.",
+    "L2": "Jacob can jump 12 *2 = <<12*2=24>>24 inches.",
+    "L3": "James can jump 24*(2/3)= <<24*(2/3)=16>>16 inches high."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5895.\n    Returns: the height James can jump.\n    \"\"\"\n    # L1\n    mark_jump_height = 6 # Mark can jump 6 inches\n    lisa_multiplier = 2 # double the height as Mark\n    lisa_jump_height = mark_jump_height * lisa_multiplier\n\n    # L2\n    jacob_multiplier = 2 # double the height of Lisa\n    jacob_jump_height = lisa_jump_height * jacob_multiplier\n\n    # L3\n    james_fraction = Fraction(2, 3) # James jumps 2/3 as high Jacob\n    james_jump_height = jacob_jump_height * james_fraction\n\n    # FA\n    answer = james_jump_height\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "jacob_jump_height",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x30d494a10>"
+  },
+  "correct_trace": {
+    "mark_jump_height": 6,
+    "lisa_multiplier": 2,
+    "lisa_jump_height": 12,
+    "jacob_multiplier": 2,
+    "jacob_jump_height": 24,
+    "james_fraction": "2/3",
+    "james_jump_height": "16",
+    "answer": "16"
+  },
+  "flawed_trace": {
+    "mark_jump_height": 6,
+    "lisa_multiplier": 2,
+    "lisa_jump_height": 12,
+    "jacob_multiplier": 2,
+    "jacob_jump_height": 6.0,
+    "james_fraction": "2/3",
+    "james_jump_height": 4.0,
+    "answer": 4.0
+  },
+  "correct_value": 24,
+  "flawed_value": 6.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "lisa_jump_height",
+      "question_inputs": [
+        "mark_jump_height",
+        "lisa_multiplier"
+      ],
+      "solution_line_template": "Lisa can jump {mark_jump_height}*{lisa_multiplier} =<<{mark_jump_height}*{lisa_multiplier}={lisa_jump_height}>>{lisa_jump_height} inches."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "jacob_jump_height",
+      "question_inputs": [
+        "jacob_multiplier"
+      ],
+      "solution_line_template": "Jacob can jump {lisa_jump_height} *{jacob_multiplier} = <<{lisa_jump_height}*{jacob_multiplier}={jacob_jump_height}>>{jacob_jump_height} inches."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "james_jump_height",
+      "question_inputs": [
+        "james_fraction"
+      ],
+      "solution_line_template": "James can jump {jacob_jump_height}*({james_fraction})= <<{jacob_jump_height}*({james_fraction})={james_jump_height}>>{james_jump_height} inches high."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Lisa can jump 6*2 =<<6*2=12>>12 inches.",
+    "L2": "Jacob can jump 12 *2 = <<12*2=6>>6 inches.",
+    "L3": "James can jump 6*(2/3)= <<6*(2/3)=4>>4 inches high.",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 4699685976688300964,
+  "model_name": "google_gemini-2.5-flash"
+}

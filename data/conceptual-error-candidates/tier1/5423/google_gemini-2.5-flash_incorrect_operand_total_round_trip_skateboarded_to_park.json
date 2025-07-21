@@ -1,0 +1,74 @@
+{
+  "index": 5423,
+  "original_solution_mapping": {
+    "FA": "#### 24",
+    "L1": "John traveled 10 + 4 = <<10+4=14>>14 miles to the park.",
+    "L2": "His round trip would take 14 x 2 = <<14*2=28>>28 miles.",
+    "L3": "If you subtract the 4 miles he walked then John traveled 28 - 4 = <<28-4=24>>24 miles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5423.\n    Returns: the total miles John skateboarded.\n    \"\"\"\n    # L1\n    skateboarded_to_park = 10 # skateboarded for 10 miles\n    walked_to_park = 4 # walked another 4 miles\n    total_to_park = skateboarded_to_park + walked_to_park\n\n    # L2\n    round_trip_multiplier = 2 # WK\n    total_round_trip = total_to_park * round_trip_multiplier\n\n    # L3\n    total_skateboarded = total_round_trip - walked_to_park\n\n    # FA\n    answer = total_skateboarded\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_round_trip",
+    "operand_to_replace": "total_to_park",
+    "replacement_variable": "skateboarded_to_park"
+  },
+  "correct_trace": {
+    "skateboarded_to_park": 10,
+    "walked_to_park": 4,
+    "total_to_park": 14,
+    "round_trip_multiplier": 2,
+    "total_round_trip": 28,
+    "total_skateboarded": 24,
+    "answer": 24
+  },
+  "flawed_trace": {
+    "skateboarded_to_park": 10,
+    "walked_to_park": 4,
+    "total_to_park": 14,
+    "round_trip_multiplier": 2,
+    "total_round_trip": 20,
+    "total_skateboarded": 16,
+    "answer": 16
+  },
+  "correct_value": 28,
+  "flawed_value": 20,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_to_park",
+      "question_inputs": [
+        "skateboarded_to_park",
+        "walked_to_park"
+      ],
+      "solution_line_template": "John traveled {skateboarded_to_park} + {walked_to_park} = <<{skateboarded_to_park}+{walked_to_park}={total_to_park}>>{total_to_park} miles to the park."
+    },
+    {
+      "WK_inputs": [
+        "round_trip_multiplier"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_round_trip",
+      "question_inputs": [],
+      "solution_line_template": "His round trip would take {total_to_park} x {round_trip_multiplier} = <<{total_to_park}*{round_trip_multiplier}={total_round_trip}>>{total_round_trip} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_skateboarded",
+      "question_inputs": [],
+      "solution_line_template": "If you subtract the {walked_to_park} miles he walked then John traveled {total_round_trip} - {walked_to_park} = <<{total_round_trip}-{walked_to_park}={total_skateboarded}>>{total_skateboarded} miles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "John traveled 10 + 4 = <<10+4=14>>14 miles to the park.",
+    "L2": "His round trip would take 10 x 2 = <<10*2=20>>20 miles.",
+    "L3": "If you subtract the 4 miles he walked then John traveled 20 - 4 = <<20-4=16>>16 miles.",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'skateboarded_to_park' (value: 10) was used instead of 'total_to_park' (value: 14).",
+  "repro_seed": -5674576161033720977,
+  "model_name": "google_gemini-2.5-flash"
+}

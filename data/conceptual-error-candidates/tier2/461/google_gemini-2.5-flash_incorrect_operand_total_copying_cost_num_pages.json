@@ -1,0 +1,89 @@
+{
+  "index": 461,
+  "original_solution_mapping": {
+    "FA": "#### 250",
+    "L1": "The manuscript is 400 pages and the printers charge $0.05 per page for a total of 400*.05 = $<<400*0.05=20.00>>20.00 per manuscript",
+    "L2": "She needs 10 copies made and it costs $20.00 per manuscript so that's 10*20 = $<<10*20=200.00>>200.00",
+    "L3": "She also needs each of the 10 copies to be bound, which is $5.00 per manuscript so that's 5*10 = $<<10*5=50.00>>50.00",
+    "L4": "It will cost $200.00 to have them printed and $50.00 to have them bound for a total of 200+50 = $<<200+50=250.00>>250.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 461.\n    Returns: the total cost to copy and bind the manuscripts.\n    \"\"\"\n    # L1\n    num_pages = 400 # manuscript is 400 pages\n    cost_per_page = 0.05 # $0.05 per page\n    copying_cost_per_manuscript = num_pages * cost_per_page\n\n    # L2\n    num_copies = 10 # 10 copies\n    total_copying_cost = num_copies * copying_cost_per_manuscript\n\n    # L3\n    binding_cost_per_manuscript = 5.00 # $5.00 per manuscript\n    total_binding_cost = binding_cost_per_manuscript * num_copies\n\n    # L4\n    total_cost = total_copying_cost + total_binding_cost\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_copying_cost",
+    "operand_to_replace": "copying_cost_per_manuscript",
+    "replacement_variable": "num_pages"
+  },
+  "correct_trace": {
+    "num_pages": 400,
+    "cost_per_page": 0.05,
+    "copying_cost_per_manuscript": 20.0,
+    "num_copies": 10,
+    "total_copying_cost": 200.0,
+    "binding_cost_per_manuscript": 5.0,
+    "total_binding_cost": 50.0,
+    "total_cost": 250.0,
+    "answer": 250.0
+  },
+  "flawed_trace": {
+    "num_pages": 400,
+    "cost_per_page": 0.05,
+    "copying_cost_per_manuscript": 20.0,
+    "num_copies": 10,
+    "total_copying_cost": 4000,
+    "binding_cost_per_manuscript": 5.0,
+    "total_binding_cost": 50.0,
+    "total_cost": 4050.0,
+    "answer": 4050.0
+  },
+  "correct_value": 200.0,
+  "flawed_value": 4000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "copying_cost_per_manuscript",
+      "question_inputs": [
+        "num_pages",
+        "cost_per_page"
+      ],
+      "solution_line_template": "The manuscript is {num_pages} pages and the printers charge ${cost_per_page} per page for a total of {num_pages}*{cost_per_page} = $<<{num_pages}*{cost_per_page}={copying_cost_per_manuscript}>>{copying_cost_per_manuscript} per manuscript"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_copying_cost",
+      "question_inputs": [
+        "num_copies"
+      ],
+      "solution_line_template": "She needs {num_copies} copies made and it costs ${copying_cost_per_manuscript} per manuscript so that's {num_copies}*{copying_cost_per_manuscript} = $<<{num_copies}*{copying_cost_per_manuscript}={total_copying_cost}>>{total_copying_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_binding_cost",
+      "question_inputs": [
+        "binding_cost_per_manuscript"
+      ],
+      "solution_line_template": "She also needs each of the {num_copies} copies to be bound, which is ${binding_cost_per_manuscript} per manuscript so that's {binding_cost_per_manuscript}*{num_copies} = $<<{num_copies}*{binding_cost_per_manuscript}={total_binding_cost}>>{total_binding_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cost",
+      "question_inputs": [],
+      "solution_line_template": "It will cost ${total_copying_cost} to have them printed and ${total_binding_cost} to have them bound for a total of {total_copying_cost}+{total_binding_cost} = $<<{total_copying_cost}+{total_binding_cost}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The manuscript is 400 pages and the printers charge $0.05 per page for a total of 400*0.05 = $<<400*0.05=20>>20 per manuscript",
+    "L2": "She needs 10 copies made and it costs $400 per manuscript so that's 10*400 = $<<10*400=4000>>4000",
+    "L3": "She also needs each of the 10 copies to be bound, which is $5 per manuscript so that's 5*10 = $<<10*5=50>>50",
+    "L4": "It will cost $4000 to have them printed and $50 to have them bound for a total of 4000+50 = $<<4000+50=4050>>4050",
+    "FA": "#### 4050"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'num_pages' (value: 400) was used instead of 'copying_cost_per_manuscript' (value: 20.0).",
+  "repro_seed": 7329159407763318297,
+  "model_name": "google_gemini-2.5-flash"
+}

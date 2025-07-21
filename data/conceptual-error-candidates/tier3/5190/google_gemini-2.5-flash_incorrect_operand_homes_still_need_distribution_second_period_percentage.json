@@ -1,0 +1,85 @@
+{
+  "index": 5190,
+  "original_solution_mapping": {
+    "FA": "#### 48",
+    "L1": "After the first hour of work, he has distributed newspapers to 2/5*200 = <<2/5*200=80>>80 homes",
+    "L2": "The number of homes that still need newspapers is 200-80 = <<200-80=120>>120",
+    "L3": "Two hours later, the number of homes he has distributed newspapers to is 60/100 * 120 = <<60/100*120=72>>72 homes.",
+    "L4": "The number of homes he still needs to distribute newspapers to is 120-72 = <<120-72=48>>48 homes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5190.\n    Returns: the number of homes Kiaan still needs to distribute newspapers to.\n    \"\"\"\n    # L1\n    total_homes = 200 # 200 homes\n    first_hour_fraction = Fraction(2, 5) # 2/5 of the homes\n    homes_distributed_first_hour = first_hour_fraction * total_homes\n\n    # L2\n    remaining_homes_after_first_hour = total_homes - homes_distributed_first_hour\n\n    # L3\n    second_period_percentage = Fraction(60, 100) # 60 percent of the remaining homes\n    homes_distributed_second_period = second_period_percentage * remaining_homes_after_first_hour\n\n    # L4\n    homes_still_need_distribution = remaining_homes_after_first_hour - homes_distributed_second_period\n\n    # FA\n    answer = homes_still_need_distribution\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "homes_still_need_distribution",
+    "operand_to_replace": "homes_distributed_second_period",
+    "replacement_variable": "second_period_percentage"
+  },
+  "correct_trace": {
+    "total_homes": 200,
+    "first_hour_fraction": "2/5",
+    "homes_distributed_first_hour": "80",
+    "remaining_homes_after_first_hour": "120",
+    "second_period_percentage": "3/5",
+    "homes_distributed_second_period": "72",
+    "homes_still_need_distribution": "48",
+    "answer": "48"
+  },
+  "flawed_trace": {
+    "total_homes": 200,
+    "first_hour_fraction": "2/5",
+    "homes_distributed_first_hour": "80",
+    "remaining_homes_after_first_hour": "120",
+    "second_period_percentage": "3/5",
+    "homes_distributed_second_period": "72",
+    "homes_still_need_distribution": "597/5",
+    "answer": "597/5"
+  },
+  "correct_value": "48",
+  "flawed_value": "597/5",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "homes_distributed_first_hour",
+      "question_inputs": [
+        "total_homes",
+        "first_hour_fraction"
+      ],
+      "solution_line_template": "After the first hour of work, he has distributed newspapers to {first_hour_fraction}*{total_homes} = <<{first_hour_fraction}*{total_homes}={homes_distributed_first_hour}>>{homes_distributed_first_hour} homes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_homes_after_first_hour",
+      "question_inputs": [],
+      "solution_line_template": "The number of homes that still need newspapers is {total_homes}-{homes_distributed_first_hour} = <<{total_homes}-{homes_distributed_first_hour}={remaining_homes_after_first_hour}>>{remaining_homes_after_first_hour}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "homes_distributed_second_period",
+      "question_inputs": [
+        "second_period_percentage"
+      ],
+      "solution_line_template": "Two hours later, the number of homes he has distributed newspapers to is {second_period_percentage} * {remaining_homes_after_first_hour} = <<{second_period_percentage}*{remaining_homes_after_first_hour}={homes_distributed_second_period}>>{homes_distributed_second_period} homes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "homes_still_need_distribution",
+      "question_inputs": [],
+      "solution_line_template": "The number of homes he still needs to distribute newspapers to is {remaining_homes_after_first_hour}-{homes_distributed_second_period} = <<{remaining_homes_after_first_hour}-{homes_distributed_second_period}={homes_still_need_distribution}>>{homes_still_need_distribution} homes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After the first hour of work, he has distributed newspapers to 2/5*200 = <<2/5*200=80>>80 homes",
+    "L2": "The number of homes that still need newspapers is 200-80 = <<200-80=120>>120",
+    "L3": "Two hours later, the number of homes he has distributed newspapers to is 60/100 * 120 = <<60/100*120=72>>72 homes.",
+    "L4": "The number of homes he still needs to distribute newspapers to is 120-60/100 = <<120-60/100=597/5>>597/5 homes",
+    "FA": "#### 597/5"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'second_period_percentage' (value: 60/100) was used instead of 'homes_distributed_second_period' (value: 72).",
+  "repro_seed": -5921940265839737910,
+  "model_name": "google_gemini-2.5-flash"
+}

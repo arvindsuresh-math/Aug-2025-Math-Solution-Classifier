@@ -1,0 +1,74 @@
+{
+  "index": 7250,
+  "original_solution_mapping": {
+    "FA": "#### 48",
+    "L1": "10 cars are parked around for the party, 10 x 4 wheels each car = <<10*4=40>>40 wheels total.",
+    "L2": "Dylan's parents both have a car with 4 wheels each, 2 x 4 = <<4*2=8>>8 more wheels.",
+    "L3": "Combined, there are 40 + 8 = <<40+8=48>>48 wheels total on the Dylan family property."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7250.\n    Returns: the total number of car wheels in the parking lot.\n    \"\"\"\n    # L1\n    num_guest_cars = 10 # 10 cars that they park in the parking lot\n    wheels_per_car = 4 # If each car has 4 wheels\n    guest_car_wheels = num_guest_cars * wheels_per_car\n\n    # L2\n    num_parents_cars = 2 # her car and her husband's jeep\n    parents_car_wheels = num_parents_cars * wheels_per_car\n\n    # L3\n    total_wheels = guest_car_wheels + parents_car_wheels\n\n    # FA\n    answer = total_wheels\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "parents_car_wheels",
+    "operand_to_replace": "wheels_per_car",
+    "replacement_variable": "num_parents_cars"
+  },
+  "correct_trace": {
+    "num_guest_cars": 10,
+    "wheels_per_car": 4,
+    "guest_car_wheels": 40,
+    "num_parents_cars": 2,
+    "parents_car_wheels": 8,
+    "total_wheels": 48,
+    "answer": 48
+  },
+  "flawed_trace": {
+    "num_guest_cars": 10,
+    "wheels_per_car": 4,
+    "guest_car_wheels": 40,
+    "num_parents_cars": 2,
+    "parents_car_wheels": 4,
+    "total_wheels": 44,
+    "answer": 44
+  },
+  "correct_value": 8,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "guest_car_wheels",
+      "question_inputs": [
+        "num_guest_cars",
+        "wheels_per_car"
+      ],
+      "solution_line_template": "{num_guest_cars} cars are parked around for the party, {num_guest_cars} x {wheels_per_car} wheels each car = <<{num_guest_cars}*{wheels_per_car}={guest_car_wheels}>>{guest_car_wheels} wheels total."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "parents_car_wheels",
+      "question_inputs": [
+        "num_parents_cars"
+      ],
+      "solution_line_template": "Dylan's parents both have a car with {wheels_per_car} wheels each, {num_parents_cars} x {wheels_per_car} = <<{wheels_per_car}*{num_parents_cars}={parents_car_wheels}>>{parents_car_wheels} more wheels."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_wheels",
+      "question_inputs": [],
+      "solution_line_template": "Combined, there are {guest_car_wheels} + {parents_car_wheels} = <<{guest_car_wheels}+{parents_car_wheels}={total_wheels}>>{total_wheels} wheels total on the Dylan family property."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "10 cars are parked around for the party, 10 x 4 wheels each car = <<10*4=40>>40 wheels total.",
+    "L2": "Dylan's parents both have a car with 2 wheels each, 2 x 2 = <<2*2=4>>4 more wheels.",
+    "L3": "Combined, there are 40 + 4 = <<40+4=44>>44 wheels total on the Dylan family property.",
+    "FA": "#### 44"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_parents_cars' (2) was used instead of 'wheels_per_car' (4).",
+  "repro_seed": 523487098470760300,
+  "model_name": "google_gemini-2.5-flash"
+}

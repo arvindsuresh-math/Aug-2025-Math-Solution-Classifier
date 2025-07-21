@@ -1,0 +1,85 @@
+{
+  "index": 3529,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "50 x 60/100 = <<50*60/100=30>>30 people support the first team.",
+    "L2": "50 x 34/100 = <<50*34/100=17>>17 people support the second team.",
+    "L3": "So, a total of 30 + 17 = <<30+17=47>>47 people supported the first and second teams.",
+    "L4": "Thus, 50 - 47 = <<50-47=3>>3 people did not support either team."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3529.\n    Returns: the number of people who did not support either team.\n    \"\"\"\n    # L1\n    total_attendees = 50 # a total of 50 people attended\n    first_team_percentage_from_solution = Fraction(60, 100) # 60/100\n    first_team_supporters = total_attendees * first_team_percentage_from_solution\n\n    # L2\n    second_team_percentage = Fraction(34, 100) # thirty-four percent of the audiences are supporters of the second teams\n    second_team_supporters = total_attendees * second_team_percentage\n\n    # L3\n    total_supporters = first_team_supporters + second_team_supporters\n\n    # L4\n    non_supporters = total_attendees - total_supporters\n\n    # FA\n    answer = non_supporters\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "second_team_supporters",
+    "operand_to_replace": "total_attendees",
+    "replacement_variable": "first_team_supporters"
+  },
+  "correct_trace": {
+    "total_attendees": 50,
+    "first_team_percentage_from_solution": "3/5",
+    "first_team_supporters": "30",
+    "second_team_percentage": "17/50",
+    "second_team_supporters": "17",
+    "total_supporters": "47",
+    "non_supporters": "3",
+    "answer": "3"
+  },
+  "flawed_trace": {
+    "total_attendees": 50,
+    "first_team_percentage_from_solution": "3/5",
+    "first_team_supporters": "30",
+    "second_team_percentage": "17/50",
+    "second_team_supporters": "51/5",
+    "total_supporters": "201/5",
+    "non_supporters": "49/5",
+    "answer": "49/5"
+  },
+  "correct_value": "17",
+  "flawed_value": "51/5",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "first_team_supporters",
+      "question_inputs": [
+        "total_attendees",
+        "first_team_percentage_from_solution"
+      ],
+      "solution_line_template": "{total_attendees} x {first_team_percentage_from_solution} = <<{total_attendees}*{first_team_percentage_from_solution}={first_team_supporters}>>{first_team_supporters} people support the first team."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "second_team_supporters",
+      "question_inputs": [
+        "second_team_percentage"
+      ],
+      "solution_line_template": "{total_attendees} x {second_team_percentage} = <<{total_attendees}*{second_team_percentage}={second_team_supporters}>>{second_team_supporters} people support the second team."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_supporters",
+      "question_inputs": [],
+      "solution_line_template": "So, a total of {first_team_supporters} + {second_team_supporters} = <<{first_team_supporters}+{second_team_supporters}={total_supporters}>>{total_supporters} people supported the first and second teams."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "non_supporters",
+      "question_inputs": [],
+      "solution_line_template": "Thus, {total_attendees} - {total_supporters} = <<{total_attendees}-{total_supporters}={non_supporters}>>{non_supporters} people did not support either team."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "50 x 60/100 = <<50*60/100=30>>30 people support the first team.",
+    "L2": "30 x 34/100 = <<30*34/100=51/5>>51/5 people support the second team.",
+    "L3": "So, a total of 30 + 51/5 = <<30+51/5=201/5>>201/5 people supported the first and second teams.",
+    "L4": "Thus, 50 - 201/5 = <<50-201/5=49/5>>49/5 people did not support either team.",
+    "FA": "#### 49/5"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'first_team_supporters' (30) was used instead of 'total_attendees' (50).",
+  "repro_seed": 2473869725658037978,
+  "model_name": "google_gemini-2.5-flash"
+}

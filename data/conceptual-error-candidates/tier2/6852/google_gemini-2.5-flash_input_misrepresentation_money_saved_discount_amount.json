@@ -1,0 +1,74 @@
+{
+  "index": 6852,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "The discount is worth 300*.2=$<<300*.2=60>>60",
+    "L2": "So the lens cost 300-60=$<<300-60=240>>240",
+    "L3": "That means he saves 240-220=$<<240-220=20>>20 by buying the cheaper lens"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6852.\n    Returns: the amount of money saved by buying the cheaper lens.\n    \"\"\"\n    # L1\n    original_lens_cost = 300 # $300 lens\n    discount_rate = 0.2 # 20% discount\n    discount_amount = original_lens_cost * discount_rate\n\n    # L2\n    discounted_lens_cost = original_lens_cost - discount_amount\n\n    # L3\n    cheaper_lens_cost = 220 # $220 lens\n    money_saved = discounted_lens_cost - cheaper_lens_cost\n\n    # FA\n    answer = money_saved\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "money_saved",
+    "operand_to_replace": "cheaper_lens_cost",
+    "replacement_variable": "discount_amount"
+  },
+  "correct_trace": {
+    "original_lens_cost": 300,
+    "discount_rate": 0.2,
+    "discount_amount": 60.0,
+    "discounted_lens_cost": 240.0,
+    "cheaper_lens_cost": 220,
+    "money_saved": 20.0,
+    "answer": 20.0
+  },
+  "flawed_trace": {
+    "original_lens_cost": 300,
+    "discount_rate": 0.2,
+    "discount_amount": 60.0,
+    "discounted_lens_cost": 240.0,
+    "cheaper_lens_cost": 220,
+    "money_saved": 180.0,
+    "answer": 180.0
+  },
+  "correct_value": 20.0,
+  "flawed_value": 180.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "discount_amount",
+      "question_inputs": [
+        "original_lens_cost",
+        "discount_rate"
+      ],
+      "solution_line_template": "The discount is worth {original_lens_cost}*{discount_rate}=$<<{original_lens_cost}*{discount_rate}={discount_amount}>>{discount_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "discounted_lens_cost",
+      "question_inputs": [],
+      "solution_line_template": "So the lens cost {original_lens_cost}-{discount_amount}=$<<{original_lens_cost}-{discount_amount}={discounted_lens_cost}>>{discounted_lens_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "money_saved",
+      "question_inputs": [
+        "cheaper_lens_cost"
+      ],
+      "solution_line_template": "That means he saves {discounted_lens_cost}-{cheaper_lens_cost}=$<<{discounted_lens_cost}-{cheaper_lens_cost}={money_saved}>>{money_saved} by buying the cheaper lens"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The discount is worth 300*0.2=$<<300*0.2=60>>60",
+    "L2": "So the lens cost 300-60=$<<300-60=240>>240",
+    "L3": "That means he saves 240-60=$<<240-60=180>>180 by buying the cheaper lens",
+    "FA": "#### 180"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'discount_amount' (60.0) was used instead of 'cheaper_lens_cost' (220).",
+  "repro_seed": 6677118606428622847,
+  "model_name": "google_gemini-2.5-flash"
+}

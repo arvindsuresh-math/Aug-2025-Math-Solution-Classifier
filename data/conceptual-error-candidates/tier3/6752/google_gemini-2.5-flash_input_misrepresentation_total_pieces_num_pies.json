@@ -1,0 +1,78 @@
+{
+  "index": 6752,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "Four dozen apples contain 4*12=<<4*12=48>>48 apples.",
+    "L2": "Four pies, each cut into 6 pieces, contain 4*6=<<4*6=24>>24 pieces.",
+    "L3": "Thus, there are 48/24=<<48/24=2>>2 apples in every slice of Cassandra's apple pie."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6752.\n    Returns: the number of apples in each slice of pie.\n    \"\"\"\n    # L1\n    num_dozens = 4 # four dozen Granny Smith apples\n    items_per_dozen = 12 # WK\n    total_apples = num_dozens * items_per_dozen\n\n    # L2\n    num_pies = 4 # four apple pies\n    pieces_per_pie = 6 # 6 large pieces\n    total_pieces = num_pies * pieces_per_pie\n\n    # L3\n    apples_per_slice = total_apples / total_pieces\n\n    # FA\n    answer = apples_per_slice\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_pieces",
+    "operand_to_replace": "pieces_per_pie",
+    "replacement_variable": "num_pies"
+  },
+  "correct_trace": {
+    "num_dozens": 4,
+    "items_per_dozen": 12,
+    "total_apples": 48,
+    "num_pies": 4,
+    "pieces_per_pie": 6,
+    "total_pieces": 24,
+    "apples_per_slice": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "num_dozens": 4,
+    "items_per_dozen": 12,
+    "total_apples": 48,
+    "num_pies": 4,
+    "pieces_per_pie": 6,
+    "total_pieces": 16,
+    "apples_per_slice": 3.0,
+    "answer": 3.0
+  },
+  "correct_value": 24,
+  "flawed_value": 16,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "items_per_dozen"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_apples",
+      "question_inputs": [
+        "num_dozens"
+      ],
+      "solution_line_template": "Four dozen apples contain {num_dozens}*{items_per_dozen}=<<{num_dozens}*{items_per_dozen}={total_apples}>>{total_apples} apples."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_pieces",
+      "question_inputs": [
+        "num_pies",
+        "pieces_per_pie"
+      ],
+      "solution_line_template": "Four pies, each cut into {pieces_per_pie} pieces, contain {num_pies}*{pieces_per_pie}=<<{num_pies}*{pieces_per_pie}={total_pieces}>>{total_pieces} pieces."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "apples_per_slice",
+      "question_inputs": [],
+      "solution_line_template": "Thus, there are {total_apples}/{total_pieces}=<<{total_apples}/{total_pieces}={apples_per_slice}>>{apples_per_slice} apples in every slice of Cassandra's apple pie."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Four dozen apples contain 4*12=<<4*12=48>>48 apples.",
+    "L2": "Four pies, each cut into 4 pieces, contain 4*4=<<4*4=16>>16 pieces.",
+    "L3": "Thus, there are 48/16=<<48/16=3>>3 apples in every slice of Cassandra's apple pie.",
+    "FA": "#### 3"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_pies' (4) was used instead of 'pieces_per_pie' (6).",
+  "repro_seed": -7373464450846240826,
+  "model_name": "google_gemini-2.5-flash"
+}

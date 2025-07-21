@@ -1,0 +1,94 @@
+{
+  "index": 5926,
+  "original_solution_mapping": {
+    "FA": "#### 9400",
+    "L1": "First convert the euros to pounds: 11 euros * 2 pounds/euro = <<11*2=22>>22 pounds.",
+    "L2": "Then add that amount to the amount Jack has in pounds: 22 pounds + 42 pounds = <<22+42=64>>64 pounds.",
+    "L3": "Then convert the pounds to yen: 64 pounds * 100 yen/pound = <<64*100=6400>>6400 yen.",
+    "L4": "Then add that amount to the amount Jack has in yen: 6400 yen + 3000 yen = <<6400+3000=9400>>9400 yen."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5926.\n    Returns: the total amount Jack has in yen.\n    \"\"\"\n    # L1\n    euros_jack_has = 11 # 11 euros\n    pounds_per_euro = 2 # 2 pounds per euro\n    euros_to_pounds = euros_jack_has * pounds_per_euro\n\n    # L2\n    pounds_jack_has = 42 # 42 pounds\n    total_pounds = euros_to_pounds + pounds_jack_has\n\n    # L3\n    yen_per_pound = 100 # 100 yen per pound\n    pounds_to_yen = total_pounds * yen_per_pound\n\n    # L4\n    yen_jack_has = 3000 # 3000 yen\n    total_yen = pounds_to_yen + yen_jack_has\n\n    # FA\n    answer = total_yen\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "pounds_to_yen",
+    "operand_to_replace": "yen_per_pound",
+    "replacement_variable": "pounds_jack_has"
+  },
+  "correct_trace": {
+    "euros_jack_has": 11,
+    "pounds_per_euro": 2,
+    "euros_to_pounds": 22,
+    "pounds_jack_has": 42,
+    "total_pounds": 64,
+    "yen_per_pound": 100,
+    "pounds_to_yen": 6400,
+    "yen_jack_has": 3000,
+    "total_yen": 9400,
+    "answer": 9400
+  },
+  "flawed_trace": {
+    "euros_jack_has": 11,
+    "pounds_per_euro": 2,
+    "euros_to_pounds": 22,
+    "pounds_jack_has": 42,
+    "total_pounds": 64,
+    "yen_per_pound": 100,
+    "pounds_to_yen": 2688,
+    "yen_jack_has": 3000,
+    "total_yen": 5688,
+    "answer": 5688
+  },
+  "correct_value": 6400,
+  "flawed_value": 2688,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "pounds_per_euro"
+      ],
+      "line_number": "L1",
+      "output_variable": "euros_to_pounds",
+      "question_inputs": [
+        "euros_jack_has"
+      ],
+      "solution_line_template": "First convert the euros to pounds: {euros_jack_has} euros * {pounds_per_euro} pounds/euro = <<{euros_jack_has}*{pounds_per_euro}={euros_to_pounds}>>{euros_to_pounds} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_pounds",
+      "question_inputs": [
+        "pounds_jack_has"
+      ],
+      "solution_line_template": "Then add that amount to the amount Jack has in pounds: {euros_to_pounds} pounds + {pounds_jack_has} pounds = <<{euros_to_pounds}+{pounds_jack_has}={total_pounds}>>{total_pounds} pounds."
+    },
+    {
+      "WK_inputs": [
+        "yen_per_pound"
+      ],
+      "line_number": "L3",
+      "output_variable": "pounds_to_yen",
+      "question_inputs": [],
+      "solution_line_template": "Then convert the pounds to yen: {total_pounds} pounds * {yen_per_pound} yen/pound = <<{total_pounds}*{yen_per_pound}={pounds_to_yen}>>{pounds_to_yen} yen."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_yen",
+      "question_inputs": [
+        "yen_jack_has"
+      ],
+      "solution_line_template": "Then add that amount to the amount Jack has in yen: {pounds_to_yen} yen + {yen_jack_has} yen = <<{pounds_to_yen}+{yen_jack_has}={total_yen}>>{total_yen} yen."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First convert the euros to pounds: 11 euros * 2 pounds/euro = <<11*2=22>>22 pounds.",
+    "L2": "Then add that amount to the amount Jack has in pounds: 22 pounds + 42 pounds = <<22+42=64>>64 pounds.",
+    "L3": "Then convert the pounds to yen: 64 pounds * 42 yen/pound = <<64*42=2688>>2688 yen.",
+    "L4": "Then add that amount to the amount Jack has in yen: 2688 yen + 3000 yen = <<2688+3000=5688>>5688 yen.",
+    "FA": "#### 5688"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'pounds_jack_has' (42) was used instead of 'yen_per_pound' (100).",
+  "repro_seed": 4359625157186199241,
+  "model_name": "google_gemini-2.5-flash"
+}

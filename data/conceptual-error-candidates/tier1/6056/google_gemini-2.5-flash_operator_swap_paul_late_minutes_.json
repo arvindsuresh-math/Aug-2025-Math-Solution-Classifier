@@ -1,0 +1,78 @@
+{
+  "index": 6056,
+  "original_solution_mapping": {
+    "FA": "#### 165",
+    "L1": "If the party was planned to start at 8:00 am, Paul was 8:25-8:00 = <<825-800=25>>25 minutes late.",
+    "L2": "If Paul was 25 minutes late, Amoura was 25+30 = <<25+30=55>>55 minutes late.",
+    "L3": "If Ingrid was three times late than Amoura was, she was 3*55 = <<3*55=165>>165 minutes late"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6056.\n    Returns: how late, in minutes, Ingrid was to the party.\n    \"\"\"\n    # L1\n    paul_arrival_time_minutes_representation = 825 # Paul arrived at 8:25\n    party_start_time_minutes_representation = 800 # party planned to start at 8:00 a.m.\n    paul_late_minutes = paul_arrival_time_minutes_representation - party_start_time_minutes_representation\n\n    # L2\n    amoura_delay_from_paul = 30 # Amoura arrived 30 minutes later than Paul\n    amoura_late_minutes = paul_late_minutes + amoura_delay_from_paul\n\n    # L3\n    ingrid_multiplier = 3 # Ingrid was three times later than Amoura\n    ingrid_late_minutes = ingrid_multiplier * amoura_late_minutes\n\n    # FA\n    answer = ingrid_late_minutes\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "paul_late_minutes",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x169ec2a50>"
+  },
+  "correct_trace": {
+    "paul_arrival_time_minutes_representation": 825,
+    "party_start_time_minutes_representation": 800,
+    "paul_late_minutes": 25,
+    "amoura_delay_from_paul": 30,
+    "amoura_late_minutes": 55,
+    "ingrid_multiplier": 3,
+    "ingrid_late_minutes": 165,
+    "answer": 165
+  },
+  "flawed_trace": {
+    "paul_arrival_time_minutes_representation": 825,
+    "party_start_time_minutes_representation": 800,
+    "paul_late_minutes": 1625,
+    "amoura_delay_from_paul": 30,
+    "amoura_late_minutes": 1655,
+    "ingrid_multiplier": 3,
+    "ingrid_late_minutes": 4965,
+    "answer": 4965
+  },
+  "correct_value": 25,
+  "flawed_value": 1625,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "paul_late_minutes",
+      "question_inputs": [
+        "paul_arrival_time_minutes_representation",
+        "party_start_time_minutes_representation"
+      ],
+      "solution_line_template": "If the party was planned to start at 8:00 am, Paul was {paul_arrival_time_minutes_representation}-{party_start_time_minutes_representation} = <<{paul_arrival_time_minutes_representation}-{party_start_time_minutes_representation}={paul_late_minutes}>>{paul_late_minutes} minutes late."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "amoura_late_minutes",
+      "question_inputs": [
+        "amoura_delay_from_paul"
+      ],
+      "solution_line_template": "If Paul was {paul_late_minutes} minutes late, Amoura was {paul_late_minutes}+{amoura_delay_from_paul} = <<{paul_late_minutes}+{amoura_delay_from_paul}={amoura_late_minutes}>>{amoura_late_minutes} minutes late."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "ingrid_late_minutes",
+      "question_inputs": [
+        "ingrid_multiplier"
+      ],
+      "solution_line_template": "If Ingrid was three times late than Amoura was, she was {ingrid_multiplier}*{amoura_late_minutes} = <<{ingrid_multiplier}*{amoura_late_minutes}={ingrid_late_minutes}>>{ingrid_late_minutes} minutes late"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the party was planned to start at 8:00 am, Paul was 825-800 = <<825-800=1625>>1625 minutes late.",
+    "L2": "If Paul was 1625 minutes late, Amoura was 1625+30 = <<1625+30=1655>>1655 minutes late.",
+    "L3": "If Ingrid was three times late than Amoura was, she was 3*1655 = <<3*1655=4965>>4965 minutes late",
+    "FA": "#### 4965"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -6432237515762199235,
+  "model_name": "google_gemini-2.5-flash"
+}

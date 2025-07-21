@@ -1,0 +1,83 @@
+{
+  "index": 4125,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "There are 7 days in one week so one week and 2 days = 7+2 = <<7+2=9>>9 days",
+    "L2": "Call the time Ethan spends learning tricks e. Alexa spent 9 days on vacation which is 3/4ths of the time Ethan spent learning 12 fencing tricks, hence (3/4)e = 9 days",
+    "L3": "If we multiply both sides of this equation by 4/3, we get e = (4/3)*9 days = <<(4/3)*9=12>>12 days",
+    "L4": "Joey spent half of 12 days which is 12/2 = <<12/2=6>>6 days to learn swimming"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4125.\n    Returns: the number of days it took Joey to learn swimming.\n    \"\"\"\n    # L1\n    days_per_week = 7 # WK\n    extra_days = 2 # a week and 2 days\n    alexa_vacation_days = days_per_week + extra_days\n\n    # L3\n    # The question states \"3/4ths of the time\". The solution uses its reciprocal \"4/3\".\n    # These values are derived from the fraction stated in the question.\n    reciprocal_numerator = 4 # derived from 3/4ths of the time\n    reciprocal_denominator = 3 # derived from 3/4ths of the time\n    ethan_learning_days = Fraction(reciprocal_numerator, reciprocal_denominator) * alexa_vacation_days\n\n    # L4\n    half_divisor = 2 # half as much\n    joey_swimming_days = ethan_learning_days / half_divisor\n\n    # FA\n    answer = joey_swimming_days\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "alexa_vacation_days",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x16a0b91d0>"
+  },
+  "correct_trace": {
+    "days_per_week": 7,
+    "extra_days": 2,
+    "alexa_vacation_days": 9,
+    "reciprocal_numerator": 4,
+    "reciprocal_denominator": 3,
+    "ethan_learning_days": "12",
+    "half_divisor": 2,
+    "joey_swimming_days": "6",
+    "answer": "6"
+  },
+  "flawed_trace": {
+    "days_per_week": 7,
+    "extra_days": 2,
+    "alexa_vacation_days": 5,
+    "reciprocal_numerator": 4,
+    "reciprocal_denominator": 3,
+    "ethan_learning_days": "20/3",
+    "half_divisor": 2,
+    "joey_swimming_days": "10/3",
+    "answer": "10/3"
+  },
+  "correct_value": 9,
+  "flawed_value": 5,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L1",
+      "output_variable": "alexa_vacation_days",
+      "question_inputs": [
+        "extra_days"
+      ],
+      "solution_line_template": "There are {days_per_week} days in one week so one week and {extra_days} days = {days_per_week}+{extra_days} = <<{days_per_week}+{extra_days}={alexa_vacation_days}>>{alexa_vacation_days} days"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "ethan_learning_days",
+      "question_inputs": [
+        "reciprocal_numerator",
+        "reciprocal_denominator"
+      ],
+      "solution_line_template": "If we multiply both sides of this equation by {reciprocal_numerator}/{reciprocal_denominator}, we get e = ({reciprocal_numerator}/{reciprocal_denominator})*{alexa_vacation_days} days = <<({reciprocal_numerator}/{reciprocal_denominator})*{alexa_vacation_days}={ethan_learning_days}>>{ethan_learning_days} days"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "joey_swimming_days",
+      "question_inputs": [
+        "half_divisor"
+      ],
+      "solution_line_template": "Joey spent half of {ethan_learning_days} days which is {ethan_learning_days}/{half_divisor} = <<{ethan_learning_days}/{half_divisor}={joey_swimming_days}>>{joey_swimming_days} days to learn swimming"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 7 days in one week so one week and 2 days = 7+2 = <<7+2=5>>5 days",
+    "L3": "If we multiply both sides of this equation by 4/3, we get e = (4/3)*5 days = <<(4/3)*5=20/3>>20/3 days",
+    "L4": "Joey spent half of 20/3 days which is 20/3/2 = <<20/3/2=10/3>>10/3 days to learn swimming",
+    "FA": "#### 10/3"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": 5895237293809012272,
+  "model_name": "google_gemini-2.5-flash"
+}

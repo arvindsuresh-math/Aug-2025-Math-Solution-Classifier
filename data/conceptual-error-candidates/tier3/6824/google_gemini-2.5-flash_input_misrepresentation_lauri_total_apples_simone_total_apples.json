@@ -1,0 +1,78 @@
+{
+  "index": 6824,
+  "original_solution_mapping": {
+    "FA": "#### 13",
+    "L1": "Simone = (1/2) * 16 = <<(1/2)*16=8>>8",
+    "L2": "Lauri = (1/3) * 15 = <<(1/3)*15=5>>5",
+    "L3": "8 + 5 = <<8+5=13>>13",
+    "L4": "Together they ate 13 apples."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6824.\n    Returns: the total number of apples eaten by both girls.\n    \"\"\"\n    # L1\n    simone_fraction_per_day = Fraction(1, 2) # 1/2 of an apple each day\n    simone_days = 16 # for 16 days\n    simone_total_apples = simone_fraction_per_day * simone_days\n\n    # L2\n    lauri_fraction_per_day = Fraction(1, 3) # 1/3 of an apple each day\n    lauri_days = 15 # for 15 days\n    lauri_total_apples = lauri_fraction_per_day * lauri_days\n\n    # L3\n    total_apples_eaten = simone_total_apples + lauri_total_apples\n\n    # FA\n    answer = total_apples_eaten\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "lauri_total_apples",
+    "operand_to_replace": "lauri_fraction_per_day",
+    "replacement_variable": "simone_total_apples"
+  },
+  "correct_trace": {
+    "simone_fraction_per_day": "1/2",
+    "simone_days": 16,
+    "simone_total_apples": "8",
+    "lauri_fraction_per_day": "1/3",
+    "lauri_days": 15,
+    "lauri_total_apples": "5",
+    "total_apples_eaten": "13",
+    "answer": "13"
+  },
+  "flawed_trace": {
+    "simone_fraction_per_day": "1/2",
+    "simone_days": 16,
+    "simone_total_apples": "8",
+    "lauri_fraction_per_day": "1/3",
+    "lauri_days": 15,
+    "lauri_total_apples": "120",
+    "total_apples_eaten": "128",
+    "answer": "128"
+  },
+  "correct_value": "5",
+  "flawed_value": "120",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "simone_total_apples",
+      "question_inputs": [
+        "simone_fraction_per_day",
+        "simone_days"
+      ],
+      "solution_line_template": "Simone = ({simone_fraction_per_day}) * {simone_days} = <<({simone_fraction_per_day})*{simone_days}={simone_total_apples}>>{simone_total_apples}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "lauri_total_apples",
+      "question_inputs": [
+        "lauri_fraction_per_day",
+        "lauri_days"
+      ],
+      "solution_line_template": "Lauri = ({lauri_fraction_per_day}) * {lauri_days} = <<({lauri_fraction_per_day})*{lauri_days}={lauri_total_apples}>>{lauri_total_apples}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_apples_eaten",
+      "question_inputs": [],
+      "solution_line_template": "{simone_total_apples} + {lauri_total_apples} = <<{simone_total_apples}+{lauri_total_apples}={total_apples_eaten}>>{total_apples_eaten}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Simone = (1/2) * 16 = <<(1/2)*16=8>>8",
+    "L2": "Lauri = (8) * 15 = <<(8)*15=120>>120",
+    "L3": "8 + 120 = <<8+120=128>>128",
+    "FA": "#### 128"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'simone_total_apples' (8) was used instead of 'lauri_fraction_per_day' (1/3).",
+  "repro_seed": 212539673231238268,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 4546,
+  "original_solution_mapping": {
+    "FA": "#### 48",
+    "L1": "Each table takes 12 pieces of wood to make so 24 tables will take 24*12 = <<12*24=288>>288",
+    "L2": "There were originally 672 pieces of wood so now there are 672-288 = <<672-288=384>>384 pieces left",
+    "L3": "8 pieces of wood make 1 chair so 384 pieces can make 384/8 = <<384/8=48>>48 chairs"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4546.\n    Returns: the number of chairs Gerald can make.\n    \"\"\"\n    # L1\n    pieces_per_table = 12 # 12 pieces of wood to make a table\n    num_tables = 24 # if he makes 24 tables\n    wood_for_tables = num_tables * pieces_per_table\n\n    # L2\n    total_wood_pieces = 672 # He has 672 pieces of wood\n    remaining_wood = total_wood_pieces - wood_for_tables\n\n    # L3\n    pieces_per_chair = 8 # 8 pieces of wood to make a chair\n    num_chairs = remaining_wood / pieces_per_chair\n\n    # FA\n    answer = num_chairs\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "num_chairs",
+    "operand_to_replace": "remaining_wood",
+    "replacement_variable": "pieces_per_chair"
+  },
+  "correct_trace": {
+    "pieces_per_table": 12,
+    "num_tables": 24,
+    "wood_for_tables": 288,
+    "total_wood_pieces": 672,
+    "remaining_wood": 384,
+    "pieces_per_chair": 8,
+    "num_chairs": 48.0,
+    "answer": 48.0
+  },
+  "flawed_trace": {
+    "pieces_per_table": 12,
+    "num_tables": 24,
+    "wood_for_tables": 288,
+    "total_wood_pieces": 672,
+    "remaining_wood": 384,
+    "pieces_per_chair": 8,
+    "num_chairs": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 48.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "wood_for_tables",
+      "question_inputs": [
+        "pieces_per_table",
+        "num_tables"
+      ],
+      "solution_line_template": "Each table takes {pieces_per_table} pieces of wood to make so {num_tables} tables will take {num_tables}*{pieces_per_table} = <<{pieces_per_table}*{num_tables}={wood_for_tables}>>{wood_for_tables}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_wood",
+      "question_inputs": [
+        "total_wood_pieces"
+      ],
+      "solution_line_template": "There were originally {total_wood_pieces} pieces of wood so now there are {total_wood_pieces}-{wood_for_tables} = <<{total_wood_pieces}-{wood_for_tables}={remaining_wood}>>{remaining_wood} pieces left"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_chairs",
+      "question_inputs": [
+        "pieces_per_chair"
+      ],
+      "solution_line_template": "{pieces_per_chair} pieces of wood make 1 chair so {remaining_wood} pieces can make {remaining_wood}/{pieces_per_chair} = <<{remaining_wood}/{pieces_per_chair}={num_chairs}>>{num_chairs} chairs"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each table takes 12 pieces of wood to make so 24 tables will take 24*12 = <<12*24=288>>288",
+    "L2": "There were originally 672 pieces of wood so now there are 672-288 = <<672-288=384>>384 pieces left",
+    "L3": "8 pieces of wood make 1 chair so 8 pieces can make 8/8 = <<8/8=1>>1 chairs",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'pieces_per_chair' (value: 8) was used instead of 'remaining_wood' (value: 384).",
+  "repro_seed": -1821356572776629284,
+  "model_name": "google_gemini-2.5-flash"
+}

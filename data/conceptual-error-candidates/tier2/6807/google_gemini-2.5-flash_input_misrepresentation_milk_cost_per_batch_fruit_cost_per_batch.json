@@ -1,0 +1,92 @@
+{
+  "index": 6807,
+  "original_solution_mapping": {
+    "FA": "#### 63",
+    "L1": "For the fruits, the company needs to pay 3 * 2 = $<<3*2=6>>6 per batch.",
+    "L2": "10 liters of milk is a cost of 10 * 1.5 = $<<10*1.5=15>>15 for the company.",
+    "L3": "So in total one batch is a cost of 15 + 6 = $<<15+6=21>>21.",
+    "L4": "So three batches of yogurt is a cost of 3 * 21 = $<<3*21=63>>63."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6807.\n    Returns: the total cost for the firm to produce three batches of yogurt.\n    \"\"\"\n    # L1\n    fruit_quantity_per_batch = 3 # 3 kilograms of fruit\n    fruit_cost_per_kg = 2 # fruit at $2 per kilogram\n    fruit_cost_per_batch = fruit_quantity_per_batch * fruit_cost_per_kg\n\n    # L2\n    milk_quantity_per_batch = 10 # 10 liters of milk\n    milk_cost_per_liter = 1.5 # Milk is bought at $1.5 per liter\n    milk_cost_per_batch = milk_quantity_per_batch * milk_cost_per_liter\n\n    # L3\n    total_cost_per_batch = milk_cost_per_batch + fruit_cost_per_batch\n\n    # L4\n    num_batches = 3 # three batches of yogurt\n    total_cost_three_batches = num_batches * total_cost_per_batch\n\n    # FA\n    answer = total_cost_three_batches\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "milk_cost_per_batch",
+    "operand_to_replace": "milk_quantity_per_batch",
+    "replacement_variable": "fruit_cost_per_batch"
+  },
+  "correct_trace": {
+    "fruit_quantity_per_batch": 3,
+    "fruit_cost_per_kg": 2,
+    "fruit_cost_per_batch": 6,
+    "milk_quantity_per_batch": 10,
+    "milk_cost_per_liter": 1.5,
+    "milk_cost_per_batch": 15.0,
+    "total_cost_per_batch": 21.0,
+    "num_batches": 3,
+    "total_cost_three_batches": 63.0,
+    "answer": 63.0
+  },
+  "flawed_trace": {
+    "fruit_quantity_per_batch": 3,
+    "fruit_cost_per_kg": 2,
+    "fruit_cost_per_batch": 6,
+    "milk_quantity_per_batch": 10,
+    "milk_cost_per_liter": 1.5,
+    "milk_cost_per_batch": 9.0,
+    "total_cost_per_batch": 15.0,
+    "num_batches": 3,
+    "total_cost_three_batches": 45.0,
+    "answer": 45.0
+  },
+  "correct_value": 15.0,
+  "flawed_value": 9.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "fruit_cost_per_batch",
+      "question_inputs": [
+        "fruit_quantity_per_batch",
+        "fruit_cost_per_kg"
+      ],
+      "solution_line_template": "For the fruits, the company needs to pay {fruit_quantity_per_batch} * {fruit_cost_per_kg} = $<<{fruit_quantity_per_batch}*{fruit_cost_per_kg}={fruit_cost_per_batch}>>{fruit_cost_per_batch} per batch."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "milk_cost_per_batch",
+      "question_inputs": [
+        "milk_quantity_per_batch",
+        "milk_cost_per_liter"
+      ],
+      "solution_line_template": "{milk_quantity_per_batch} liters of milk is a cost of {milk_quantity_per_batch} * {milk_cost_per_liter} = $<<{milk_quantity_per_batch}*{milk_cost_per_liter}={milk_cost_per_batch}>>{milk_cost_per_batch} for the company."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost_per_batch",
+      "question_inputs": [],
+      "solution_line_template": "So in total one batch is a cost of {milk_cost_per_batch} + {fruit_cost_per_batch} = $<<{milk_cost_per_batch}+{fruit_cost_per_batch}={total_cost_per_batch}>>{total_cost_per_batch}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cost_three_batches",
+      "question_inputs": [
+        "num_batches"
+      ],
+      "solution_line_template": "So {num_batches} batches of yogurt is a cost of {num_batches} * {total_cost_per_batch} = $<<{num_batches}*{total_cost_per_batch}={total_cost_three_batches}>>{total_cost_three_batches}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "For the fruits, the company needs to pay 3 * 2 = $<<3*2=6>>6 per batch.",
+    "L2": "6 liters of milk is a cost of 6 * 1.5 = $<<6*1.5=9>>9 for the company.",
+    "L3": "So in total one batch is a cost of 9 + 6 = $<<9+6=15>>15.",
+    "L4": "So 3 batches of yogurt is a cost of 3 * 15 = $<<3*15=45>>45.",
+    "FA": "#### 45"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'fruit_cost_per_batch' (6) was used instead of 'milk_quantity_per_batch' (10).",
+  "repro_seed": 4451459777081913039,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,96 @@
+{
+  "index": 1581,
+  "original_solution_mapping": {
+    "FA": "#### 13",
+    "L1": "Gordon has 4 / 2 = <<4/2=2>>2 Persians.",
+    "L2": "Gordon has 2 + 1 = <<2+1=3>>3 Maine Coons.",
+    "L3": "Hawkeye has 3 - 1 = <<3-1=2>>2 Maine Coons.",
+    "L4": "In total, they have 4 + 2 + 2 + 3 + 2 + 0 = <<4+2+2+3+2+0=13>>13 cats."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1581.\n    Returns: the total number of cats when they are brought together.\n    \"\"\"\n    # L1\n    jamie_persian_cats = 4 # Jamie owns 4 Persian cats\n    half_divisor = 2 # half as many Persians\n    gordon_persian_cats = jamie_persian_cats / half_divisor\n\n    # L2\n    jamie_maine_coons = 2 # 2 Maine Coons\n    one_more = 1 # one more Maine Coon\n    gordon_maine_coons = jamie_maine_coons + one_more\n\n    # L3\n    one_less = 1 # one less Maine Coon\n    hawkeye_maine_coons = gordon_maine_coons - one_less\n\n    # L4\n    hawkeye_persian_cats = 0 # no Persian cats\n    total_cats = jamie_persian_cats + jamie_maine_coons + gordon_persian_cats + gordon_maine_coons + hawkeye_maine_coons + hawkeye_persian_cats\n\n    # FA\n    answer = total_cats\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "gordon_persian_cats",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x1684df4d0>"
+  },
+  "correct_trace": {
+    "jamie_persian_cats": 4,
+    "half_divisor": 2,
+    "gordon_persian_cats": 2.0,
+    "jamie_maine_coons": 2,
+    "one_more": 1,
+    "gordon_maine_coons": 3,
+    "one_less": 1,
+    "hawkeye_maine_coons": 2,
+    "hawkeye_persian_cats": 0,
+    "total_cats": 13.0,
+    "answer": 13.0
+  },
+  "flawed_trace": {
+    "jamie_persian_cats": 4,
+    "half_divisor": 2,
+    "gordon_persian_cats": 8,
+    "jamie_maine_coons": 2,
+    "one_more": 1,
+    "gordon_maine_coons": 3,
+    "one_less": 1,
+    "hawkeye_maine_coons": 2,
+    "hawkeye_persian_cats": 0,
+    "total_cats": 19,
+    "answer": 19
+  },
+  "correct_value": 2.0,
+  "flawed_value": 8,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "gordon_persian_cats",
+      "question_inputs": [
+        "jamie_persian_cats",
+        "half_divisor"
+      ],
+      "solution_line_template": "Gordon has {jamie_persian_cats} / {half_divisor} = <<{jamie_persian_cats}/{half_divisor}={gordon_persian_cats}>>{gordon_persian_cats} Persians."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "gordon_maine_coons",
+      "question_inputs": [
+        "jamie_maine_coons",
+        "one_more"
+      ],
+      "solution_line_template": "Gordon has {jamie_maine_coons} + {one_more} = <<{jamie_maine_coons}+{one_more}={gordon_maine_coons}>>{gordon_maine_coons} Maine Coons."
+    },
+    {
+      "WK_inputs": [
+        "one_less"
+      ],
+      "line_number": "L3",
+      "output_variable": "hawkeye_maine_coons",
+      "question_inputs": [],
+      "solution_line_template": "Hawkeye has {gordon_maine_coons} - {one_less} = <<{gordon_maine_coons}-{one_less}={hawkeye_maine_coons}>>{hawkeye_maine_coons} Maine Coons."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cats",
+      "question_inputs": [
+        "hawkeye_persian_cats"
+      ],
+      "solution_line_template": "In total, they have {jamie_persian_cats} + {jamie_maine_coons} + {gordon_persian_cats} + {gordon_maine_coons} + {hawkeye_maine_coons} + {hawkeye_persian_cats} = <<{jamie_persian_cats}+{jamie_maine_coons}+{gordon_persian_cats}+{gordon_maine_coons}+{hawkeye_maine_coons}+{hawkeye_persian_cats}={total_cats}>>{total_cats} cats."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Gordon has 4 / 2 = <<4/2=8>>8 Persians.",
+    "L2": "Gordon has 2 + 1 = <<2+1=3>>3 Maine Coons.",
+    "L3": "Hawkeye has 3 - 1 = <<3-1=2>>2 Maine Coons.",
+    "L4": "In total, they have 4 + 2 + 8 + 3 + 2 + 0 = <<4+2+8+3+2+0=19>>19 cats.",
+    "FA": "#### 19"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 3800327738660248540,
+  "model_name": "google_gemini-2.5-flash"
+}

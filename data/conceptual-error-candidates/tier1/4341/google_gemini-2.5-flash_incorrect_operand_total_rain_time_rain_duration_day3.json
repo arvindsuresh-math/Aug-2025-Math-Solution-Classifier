@@ -1,0 +1,89 @@
+{
+  "index": 4341,
+  "original_solution_mapping": {
+    "FA": "#### 46",
+    "L1": "On the first day, it rained for 17:00 - 7:00 = 10 hours",
+    "L2": "On the second day, it 10 hours + 2 hours = <<10+2=12>>12 hours for the rain to stop",
+    "L3": "It rained for 2 * 12 hours = <<2*12=24>>24 hours on the third day.",
+    "L4": "In the three days, it was raining for 24 hours + 12 hours + 10 hours = <<24+12+10=46>>46 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4341.\n    Returns: the total time it was raining in the three days.\n    \"\"\"\n    # L1\n    stop_time_day1 = 17 # stops at 17:00\n    start_time_day1 = 7 # starts raining at 7:00\n    rain_duration_day1 = stop_time_day1 - start_time_day1\n\n    # L2\n    extra_hours_day2 = 2 # takes 2 more hours\n    rain_duration_day2 = rain_duration_day1 + extra_hours_day2\n\n    # L3\n    multiplier_day3 = 2 # twice the amount of time\n    rain_duration_day3 = multiplier_day3 * rain_duration_day2\n\n    # L4\n    total_rain_time = rain_duration_day3 + rain_duration_day2 + rain_duration_day1\n\n    # FA\n    answer = total_rain_time\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_rain_time",
+    "operand_to_replace": "rain_duration_day1",
+    "replacement_variable": "rain_duration_day3"
+  },
+  "correct_trace": {
+    "stop_time_day1": 17,
+    "start_time_day1": 7,
+    "rain_duration_day1": 10,
+    "extra_hours_day2": 2,
+    "rain_duration_day2": 12,
+    "multiplier_day3": 2,
+    "rain_duration_day3": 24,
+    "total_rain_time": 46,
+    "answer": 46
+  },
+  "flawed_trace": {
+    "stop_time_day1": 17,
+    "start_time_day1": 7,
+    "rain_duration_day1": 10,
+    "extra_hours_day2": 2,
+    "rain_duration_day2": 12,
+    "multiplier_day3": 2,
+    "rain_duration_day3": 24,
+    "total_rain_time": 60,
+    "answer": 60
+  },
+  "correct_value": 46,
+  "flawed_value": 60,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "rain_duration_day1",
+      "question_inputs": [
+        "stop_time_day1",
+        "start_time_day1"
+      ],
+      "solution_line_template": "On the first day, it rained for {stop_time_day1}:00 - {start_time_day1}:00 = {rain_duration_day1} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "rain_duration_day2",
+      "question_inputs": [
+        "extra_hours_day2"
+      ],
+      "solution_line_template": "On the second day, it {rain_duration_day1} hours + {extra_hours_day2} hours = <<{rain_duration_day1}+{extra_hours_day2}={rain_duration_day2}>>{rain_duration_day2} hours for the rain to stop"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "rain_duration_day3",
+      "question_inputs": [
+        "multiplier_day3"
+      ],
+      "solution_line_template": "It rained for {multiplier_day3} * {rain_duration_day2} hours = <<{multiplier_day3}*{rain_duration_day2}={rain_duration_day3}>>{rain_duration_day3} hours on the third day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_rain_time",
+      "question_inputs": [],
+      "solution_line_template": "In the three days, it was raining for {rain_duration_day3} hours + {rain_duration_day2} hours + {rain_duration_day1} hours = <<{rain_duration_day3}+{rain_duration_day2}+{rain_duration_day1}={total_rain_time}>>{total_rain_time} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On the first day, it rained for 17:00 - 7:00 = 10 hours",
+    "L2": "On the second day, it 10 hours + 2 hours = <<10+2=12>>12 hours for the rain to stop",
+    "L3": "It rained for 2 * 12 hours = <<2*12=24>>24 hours on the third day.",
+    "L4": "In the three days, it was raining for 24 hours + 12 hours + 24 hours = <<24+12+24=60>>60 hours.",
+    "FA": "#### 60"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'rain_duration_day3' (value: 24) was used instead of 'rain_duration_day1' (value: 10).",
+  "repro_seed": -6866602230012540564,
+  "model_name": "google_gemini-2.5-flash"
+}

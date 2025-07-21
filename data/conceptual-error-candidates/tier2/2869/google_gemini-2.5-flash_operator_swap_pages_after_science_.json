@@ -1,0 +1,74 @@
+{
+  "index": 2869,
+  "original_solution_mapping": {
+    "FA": "#### 80",
+    "L1": "He used 0.25*120=<<0.25*120=30>>30 on science",
+    "L2": "There were 120-30=<<120-30=90>>90 pages left",
+    "L3": "And then he has 90-10=<<90-10=80>>80 after math."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2869.\n    Returns: the number of pages remaining in the pad.\n    \"\"\"\n    # L1\n    science_percent_decimal = 0.25 # uses 25% of the pages\n    total_pages = 120 # new pad of paper has 120 pages\n    pages_for_science = science_percent_decimal * total_pages\n\n    # L2\n    pages_after_science = total_pages - pages_for_science\n\n    # L3\n    pages_for_math = 10 # another 10 pages\n    pages_remaining = pages_after_science - pages_for_math\n\n    # FA\n    answer = pages_remaining\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "pages_after_science",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x16929ed50>"
+  },
+  "correct_trace": {
+    "science_percent_decimal": 0.25,
+    "total_pages": 120,
+    "pages_for_science": 30.0,
+    "pages_after_science": 90.0,
+    "pages_for_math": 10,
+    "pages_remaining": 80.0,
+    "answer": 80.0
+  },
+  "flawed_trace": {
+    "science_percent_decimal": 0.25,
+    "total_pages": 120,
+    "pages_for_science": 30.0,
+    "pages_after_science": 150.0,
+    "pages_for_math": 10,
+    "pages_remaining": 140.0,
+    "answer": 140.0
+  },
+  "correct_value": 90.0,
+  "flawed_value": 150.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "pages_for_science",
+      "question_inputs": [
+        "science_percent_decimal",
+        "total_pages"
+      ],
+      "solution_line_template": "He used {science_percent_decimal}*{total_pages}=<<{science_percent_decimal}*{total_pages}={pages_for_science}>>{pages_for_science} on science"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "pages_after_science",
+      "question_inputs": [],
+      "solution_line_template": "There were {total_pages}-{pages_for_science}=<<{total_pages}-{pages_for_science}={pages_after_science}>>{pages_after_science} pages left"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "pages_remaining",
+      "question_inputs": [
+        "pages_for_math"
+      ],
+      "solution_line_template": "And then he has {pages_after_science}-{pages_for_math}=<<{pages_after_science}-{pages_for_math}={pages_remaining}>>{pages_remaining} after math."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He used 0.25*120=<<0.25*120=30>>30 on science",
+    "L2": "There were 120-30=<<120-30=150>>150 pages left",
+    "L3": "And then he has 150-10=<<150-10=140>>140 after math.",
+    "FA": "#### 140"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -6789856932797285647,
+  "model_name": "google_gemini-2.5-flash"
+}

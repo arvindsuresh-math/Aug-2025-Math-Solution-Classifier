@@ -1,0 +1,71 @@
+{
+  "index": 3866,
+  "original_solution_mapping": {
+    "FA": "#### 51",
+    "L1": "There are approximately 4 weeks in a month.",
+    "L2": "The shop owner added 3 bikes every week for 4 weeks for a total addition of 3*4 = <<3*4=12>>12 bikes",
+    "L3": "The shop owner now has the original number of bikes + <<12=12>>12 bikes",
+    "L4": "She sold 18 bikes within the same time frame",
+    "L5": "She now has a total of 45 bikes which is: the original number of bikes + 12 - 18 = <<45=45>>45 bikes",
+    "L6": "The original number of bikes = 45-12+18 = <<45-12+18=51>>51 bikes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3866.\n    Returns: the original number of bikes the shop owner had.\n    \"\"\"\n    # L2\n    bikes_added_per_week = 3 # adds 3 bikes to her stock every week\n    weeks_per_month = 4 # WK\n    total_bikes_added = bikes_added_per_week * weeks_per_month\n\n    # L6\n    bikes_in_stock_final = 45 # still had 45 bikes in stock\n    bikes_sold = 18 # sold 18 bikes\n    original_bikes = bikes_in_stock_final - total_bikes_added + bikes_sold\n\n    # FA\n    answer = original_bikes\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_bikes_added",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x16ab46690>"
+  },
+  "correct_trace": {
+    "bikes_added_per_week": 3,
+    "weeks_per_month": 4,
+    "total_bikes_added": 12,
+    "bikes_in_stock_final": 45,
+    "bikes_sold": 18,
+    "original_bikes": 51,
+    "answer": 51
+  },
+  "flawed_trace": {
+    "bikes_added_per_week": 3,
+    "weeks_per_month": 4,
+    "total_bikes_added": 7,
+    "bikes_in_stock_final": 45,
+    "bikes_sold": 18,
+    "original_bikes": 56,
+    "answer": 56
+  },
+  "correct_value": 12,
+  "flawed_value": 7,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "weeks_per_month"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_bikes_added",
+      "question_inputs": [
+        "bikes_added_per_week"
+      ],
+      "solution_line_template": "The shop owner added {bikes_added_per_week} bikes every week for {weeks_per_month} weeks for a total addition of {bikes_added_per_week}*{weeks_per_month} = <<{bikes_added_per_week}*{weeks_per_month}={total_bikes_added}>>{total_bikes_added} bikes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "original_bikes",
+      "question_inputs": [
+        "bikes_in_stock_final",
+        "bikes_sold"
+      ],
+      "solution_line_template": "The original number of bikes = {bikes_in_stock_final}-{total_bikes_added}+{bikes_sold} = <<{bikes_in_stock_final}-{total_bikes_added}+{bikes_sold}={original_bikes}>>{original_bikes} bikes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "The shop owner added 3 bikes every week for 4 weeks for a total addition of 3*4 = <<3*4=7>>7 bikes",
+    "L6": "The original number of bikes = 45-7+18 = <<45-7+18=56>>56 bikes",
+    "FA": "#### 56"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -6691131785294041650,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 7387,
+  "original_solution_mapping": {
+    "FA": "#### 400",
+    "L1": "If she works for 10 hours a day at an hourly pay of $50, then her total income in a day is $<<10*50=500>>500.",
+    "L2": "If she doesn't meet the deadline Jose gave her, she'll lose 20/100*$500 = $<<20/100*500=100>>100",
+    "L3": "She'll receive $500-$100= $<<500-100=400>>400 if Jose cuts out 20% of her pay."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7387.\n    Returns: the amount of money Amanda will receive.\n    \"\"\"\n    # L1\n    hours_worked_per_day = 10 # works for 10 hours a day\n    hourly_pay = 50 # makes $50.00 an hour\n    total_daily_income = hours_worked_per_day * hourly_pay\n\n    # L2\n    withholding_percentage = Fraction(20, 100) # withhold 20% of Amanda's pay\n    amount_withheld = withholding_percentage * total_daily_income\n\n    # L3\n    money_received = total_daily_income - amount_withheld\n\n    # FA\n    answer = money_received\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_daily_income",
+    "operand_to_replace": "hourly_pay",
+    "replacement_variable": "hours_worked_per_day"
+  },
+  "correct_trace": {
+    "hours_worked_per_day": 10,
+    "hourly_pay": 50,
+    "total_daily_income": 500,
+    "withholding_percentage": "1/5",
+    "amount_withheld": "100",
+    "money_received": "400",
+    "answer": "400"
+  },
+  "flawed_trace": {
+    "hours_worked_per_day": 10,
+    "hourly_pay": 50,
+    "total_daily_income": 100,
+    "withholding_percentage": "1/5",
+    "amount_withheld": "20",
+    "money_received": "80",
+    "answer": "80"
+  },
+  "correct_value": 500,
+  "flawed_value": 100,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_daily_income",
+      "question_inputs": [
+        "hours_worked_per_day",
+        "hourly_pay"
+      ],
+      "solution_line_template": "If she works for {hours_worked_per_day} hours a day at an hourly pay of ${hourly_pay}, then her total income in a day is $<<{hours_worked_per_day}*{hourly_pay}={total_daily_income}>>{total_daily_income}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "amount_withheld",
+      "question_inputs": [
+        "withholding_percentage"
+      ],
+      "solution_line_template": "If she doesn't meet the deadline Jose gave her, she'll lose {withholding_percentage}*${total_daily_income} = $<<{withholding_percentage}*{total_daily_income}={amount_withheld}>>{amount_withheld}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "money_received",
+      "question_inputs": [],
+      "solution_line_template": "She'll receive ${total_daily_income}-${amount_withheld}= $<<{total_daily_income}-{amount_withheld}={money_received}>>{money_received} if Jose cuts out 20% of her pay."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If she works for 10 hours a day at an hourly pay of $10, then her total income in a day is $<<10*10=100>>100.",
+    "L2": "If she doesn't meet the deadline Jose gave her, she'll lose 20/100*$100 = $<<20/100*100=20>>20",
+    "L3": "She'll receive $100-$20= $<<100-20=80>>80 if Jose cuts out 20% of her pay.",
+    "FA": "#### 80"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'hours_worked_per_day' (10) was used instead of 'hourly_pay' (50).",
+  "repro_seed": -4013437641547811569,
+  "model_name": "google_gemini-2.5-flash"
+}

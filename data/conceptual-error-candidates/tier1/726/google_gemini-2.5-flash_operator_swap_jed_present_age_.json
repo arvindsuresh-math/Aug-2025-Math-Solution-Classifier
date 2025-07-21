@@ -1,0 +1,74 @@
+{
+  "index": 726,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "Jed is 25 - 10 = <<25-10=15>>15 years old now.",
+    "L2": "So, Matt is 15 - 10 = <<15-10=5>>5 years old now.",
+    "L3": "Thus, the sum of their present ages is 15 + 5 = <<15+5=20>>20."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 726.\n    Returns: the sum of their present ages.\n    \"\"\"\n    # L1\n    jed_age_in_future = 25 # Jed will be 25 years old\n    years_from_now = 10 # In 10 years\n    jed_present_age = jed_age_in_future - years_from_now\n\n    # L2\n    jed_older_than_matt = 10 # Jed is 10 years older than Matt\n    matt_present_age = jed_present_age - jed_older_than_matt\n\n    # L3\n    sum_of_present_ages = jed_present_age + matt_present_age\n\n    # FA\n    answer = sum_of_present_ages\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "jed_present_age",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30d611050>"
+  },
+  "correct_trace": {
+    "jed_age_in_future": 25,
+    "years_from_now": 10,
+    "jed_present_age": 15,
+    "jed_older_than_matt": 10,
+    "matt_present_age": 5,
+    "sum_of_present_ages": 20,
+    "answer": 20
+  },
+  "flawed_trace": {
+    "jed_age_in_future": 25,
+    "years_from_now": 10,
+    "jed_present_age": 35,
+    "jed_older_than_matt": 10,
+    "matt_present_age": 25,
+    "sum_of_present_ages": 60,
+    "answer": 60
+  },
+  "correct_value": 15,
+  "flawed_value": 35,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "jed_age_in_future",
+        "years_from_now"
+      ],
+      "WK_inputs": [],
+      "output_variable": "jed_present_age",
+      "solution_line_template": "Jed is {jed_age_in_future} - {years_from_now} = <<{jed_age_in_future}-{years_from_now}={jed_present_age}>>{jed_present_age} years old now."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "jed_older_than_matt"
+      ],
+      "WK_inputs": [],
+      "output_variable": "matt_present_age",
+      "solution_line_template": "So, Matt is {jed_present_age} - {jed_older_than_matt} = <<{jed_present_age}-{jed_older_than_matt}={matt_present_age}>>{matt_present_age} years old now."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "sum_of_present_ages",
+      "solution_line_template": "Thus, the sum of their present ages is {jed_present_age} + {matt_present_age} = <<{jed_present_age}+{matt_present_age}={sum_of_present_ages}>>{sum_of_present_ages}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jed is 25 - 10 = <<25-10=35>>35 years old now.",
+    "L2": "So, Matt is 35 - 10 = <<35-10=25>>25 years old now.",
+    "L3": "Thus, the sum of their present ages is 35 + 25 = <<35+25=60>>60.",
+    "FA": "#### 60"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -2869581984175598024,
+  "model_name": "google_gemini-2.5-flash"
+}

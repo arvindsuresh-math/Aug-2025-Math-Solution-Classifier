@@ -1,0 +1,89 @@
+{
+  "index": 1860,
+  "original_solution_mapping": {
+    "FA": "#### 11",
+    "L1": "The movie that is being replayed 6 times takes 1.5 x 6 = <<6*1.5=9>>9 hours.",
+    "L2": "The advertisements before the start of the movie take 20 x 6 = <<20*6=120>>120 minutes in all.",
+    "L3": "One hundred twenty minutes is equal to 120/60 = <<120/60=2>>2 hours.",
+    "L4": "Thus, the movie theater operates for 9 + 2 = <<9+2=11>>11 hours each day."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1860.\n    Returns: the total hours the movie theater operates each day.\n    \"\"\"\n    # L1\n    movie_length_hours = 1.5 # 1.5 hours long\n    num_replays = 6 # replayed 6 times\n    total_movie_time_hours = movie_length_hours * num_replays\n\n    # L2\n    ad_duration_minutes = 20 # 20-minute advertisement\n    total_ad_time_minutes = ad_duration_minutes * num_replays\n\n    # L3\n    minutes_per_hour = 60 # WK\n    total_ad_time_hours = total_ad_time_minutes / minutes_per_hour\n\n    # L4\n    total_operation_hours = total_movie_time_hours + total_ad_time_hours\n\n    # FA\n    answer = total_operation_hours\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_ad_time_hours",
+    "operand_to_replace": "minutes_per_hour",
+    "replacement_variable": "num_replays"
+  },
+  "correct_trace": {
+    "movie_length_hours": 1.5,
+    "num_replays": 6,
+    "total_movie_time_hours": 9.0,
+    "ad_duration_minutes": 20,
+    "total_ad_time_minutes": 120,
+    "minutes_per_hour": 60,
+    "total_ad_time_hours": 2.0,
+    "total_operation_hours": 11.0,
+    "answer": 11.0
+  },
+  "flawed_trace": {
+    "movie_length_hours": 1.5,
+    "num_replays": 6,
+    "total_movie_time_hours": 9.0,
+    "ad_duration_minutes": 20,
+    "total_ad_time_minutes": 120,
+    "minutes_per_hour": 60,
+    "total_ad_time_hours": 20.0,
+    "total_operation_hours": 29.0,
+    "answer": 29.0
+  },
+  "correct_value": 2.0,
+  "flawed_value": 20.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_movie_time_hours",
+      "question_inputs": [
+        "movie_length_hours",
+        "num_replays"
+      ],
+      "solution_line_template": "The movie that is being replayed {num_replays} times takes {movie_length_hours} x {num_replays} = <<{num_replays}*{movie_length_hours}={total_movie_time_hours}>>{total_movie_time_hours} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_ad_time_minutes",
+      "question_inputs": [
+        "ad_duration_minutes"
+      ],
+      "solution_line_template": "The advertisements before the start of the movie take {ad_duration_minutes} x {num_replays} = <<{ad_duration_minutes}*{num_replays}={total_ad_time_minutes}>>{total_ad_time_minutes} minutes in all."
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_ad_time_hours",
+      "question_inputs": [],
+      "solution_line_template": "One hundred twenty minutes is equal to {total_ad_time_minutes}/{minutes_per_hour} = <<{total_ad_time_minutes}/{minutes_per_hour}={total_ad_time_hours}>>{total_ad_time_hours} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_operation_hours",
+      "question_inputs": [],
+      "solution_line_template": "Thus, the movie theater operates for {total_movie_time_hours} + {total_ad_time_hours} = <<{total_movie_time_hours}+{total_ad_time_hours}={total_operation_hours}>>{total_operation_hours} hours each day."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The movie that is being replayed 6 times takes 1.5 x 6 = <<6*1.5=9>>9 hours.",
+    "L2": "The advertisements before the start of the movie take 20 x 6 = <<20*6=120>>120 minutes in all.",
+    "L3": "One hundred twenty minutes is equal to 120/6 = <<120/6=20>>20 hours.",
+    "L4": "Thus, the movie theater operates for 9 + 20 = <<9+20=29>>29 hours each day.",
+    "FA": "#### 29"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'num_replays' (6) was used instead of 'minutes_per_hour' (60).",
+  "repro_seed": -7200623433627481634,
+  "model_name": "google_gemini-2.5-flash"
+}

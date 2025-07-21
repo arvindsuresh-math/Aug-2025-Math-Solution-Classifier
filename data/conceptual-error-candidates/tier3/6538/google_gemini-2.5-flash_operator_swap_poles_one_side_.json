@@ -1,0 +1,78 @@
+{
+  "index": 6538,
+  "original_solution_mapping": {
+    "FA": "#### 286",
+    "L1": "There are 900 - 42 = <<900-42=858>>858 feet of path to line.",
+    "L2": "There are poles every 6 feet, so the company needs 858 / 6 = <<858/6=143>>143 poles.",
+    "L3": "The poles have to go on both sides of the path, so there will be 143 * 2 = <<143*2=286>>286 fence poles along the whole path."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6538.\n    Returns: the total number of fence poles placed along the path on both sides.\n    \"\"\"\n    # L1\n    total_path_length = 900 # a 900-foot path\n    bridge_length = 42 # a 42-foot bridge\n    path_to_line = total_path_length - bridge_length\n\n    # L2\n    pole_spacing = 6 # Every 6 feet, a fence pole is placed\n    poles_one_side = path_to_line / pole_spacing\n\n    # L3\n    number_of_sides = 2 # on both sides\n    total_fence_poles = poles_one_side * number_of_sides\n\n    # FA\n    answer = total_fence_poles\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "poles_one_side",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x309025950>"
+  },
+  "correct_trace": {
+    "total_path_length": 900,
+    "bridge_length": 42,
+    "path_to_line": 858,
+    "pole_spacing": 6,
+    "poles_one_side": 143.0,
+    "number_of_sides": 2,
+    "total_fence_poles": 286.0,
+    "answer": 286.0
+  },
+  "flawed_trace": {
+    "total_path_length": 900,
+    "bridge_length": 42,
+    "path_to_line": 858,
+    "pole_spacing": 6,
+    "poles_one_side": 5148,
+    "number_of_sides": 2,
+    "total_fence_poles": 10296,
+    "answer": 10296
+  },
+  "correct_value": 143.0,
+  "flawed_value": 5148,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "path_to_line",
+      "question_inputs": [
+        "total_path_length",
+        "bridge_length"
+      ],
+      "solution_line_template": "There are {total_path_length} - {bridge_length} = <<{total_path_length}-{bridge_length}={path_to_line}>>{path_to_line} feet of path to line."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "poles_one_side",
+      "question_inputs": [
+        "pole_spacing"
+      ],
+      "solution_line_template": "There are poles every {pole_spacing} feet, so the company needs {path_to_line} / {pole_spacing} = <<{path_to_line}/{pole_spacing}={poles_one_side}>>{poles_one_side} poles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_fence_poles",
+      "question_inputs": [
+        "number_of_sides"
+      ],
+      "solution_line_template": "The poles have to go on both sides of the path, so there will be {poles_one_side} * {number_of_sides} = <<{poles_one_side}*{number_of_sides}={total_fence_poles}>>{total_fence_poles} fence poles along the whole path."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 900 - 42 = <<900-42=858>>858 feet of path to line.",
+    "L2": "There are poles every 6 feet, so the company needs 858 / 6 = <<858/6=5148>>5148 poles.",
+    "L3": "The poles have to go on both sides of the path, so there will be 5148 * 2 = <<5148*2=10296>>10296 fence poles along the whole path.",
+    "FA": "#### 10296"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -4542382843580135501,
+  "model_name": "google_gemini-2.5-flash"
+}

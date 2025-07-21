@@ -12,7 +12,7 @@ All decisions are logged in a persistent CSV catalog, enabling the session
 to be stopped and resumed at any time.
 
 Usage:
-    streamlit run validate_candidates.py --theme.base "light" -- --candidates-dir <path_to_candidates>
+    streamlit run validate_candidates.py --theme.base "light" -- --candidates-dir <path_to_candidates> --person-name <validator_name>
 """
 
 from __future__ import annotations
@@ -59,7 +59,7 @@ def load_or_initialize_catalog(catalog_path: Path):
     catalog_columns = [
         'index', 'tier', 'model', 'mutation_type', 'target_variable',
         'correct_value', 'flawed_value', 'repro_seed', 'decision_date_utc',
-        'decision_time_utc', 'status', 'manual_edits', 'filepath'
+        'decision_time_utc', 'status', 'manual_edits', 'filepath', 'validator'
     ]
     if catalog_path.exists():
         return pd.read_csv(catalog_path)
@@ -122,6 +122,24 @@ st.markdown("""
         text-align: center;
         font-weight: bold;
     }
+    /* Success message styling */
+    .validator-success {
+        padding: 0.5rem;
+        background-color: #D4EDDA;
+        border: 1px solid #C3E6CB;
+        border-radius: 5px;
+        color: #155724;
+        margin-bottom: 1rem;
+    }
+    /* Error message styling */
+    .validator-error {
+        padding: 0.5rem;
+        background-color: #F8D7DA;
+        border: 1px solid #F5C6CB;
+        border-radius: 5px;
+        color: #721C24;
+        margin-bottom: 1rem;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -129,13 +147,40 @@ st.markdown("""
 if "initialised" not in st.session_state:
     parser = argparse.ArgumentParser(add_help=False)
     parser.add_argument("--candidates-dir", type=Path, required=True, help="Directory containing candidate JSON files.")
+    parser.add_argument("--person-name", type=str, required=True, help="Name of the person doing validation (used for catalog naming)")
     cli_args, _ = parser.parse_known_args()
+    
+    # Define valid team member names (update this list with your actual team names)
+    VALID_VALIDATORS = ['ali', 'arvind', 'ling', 'mauro', 'yewei']  # Replace with actual names
+    
+    # Validate person name
+    person_name = cli_args.person_name.lower().strip()
+    if person_name not in VALID_VALIDATORS:
+        st.markdown(f"""
+        <div class="validator-error">
+            ⚠️ <strong>Invalid validator name:</strong> "{cli_args.person_name}"<br>
+            <strong>Valid names are:</strong> {', '.join(VALID_VALIDATORS)}<br>
+            <strong>Usage:</strong> <code>streamlit run validate_candidates.py --theme.base "light" -- --candidates-dir &lt;path&gt; --person-name &lt;name&gt;</code>
+        </div>
+        """, unsafe_allow_html=True)
+        st.stop()
+    
+    # Show success message for valid validator
+    st.markdown(f"""
+    <div class="validator-success">
+        ✅ <strong>Validation session for:</strong> {person_name.title()}<br>
+        <strong>Personal catalog:</strong> validation_catalog_{person_name}.csv
+    </div>
+    """, unsafe_allow_html=True)
     
     PROJECT_ROOT = find_project_root()
     st.session_state.PROJECT_ROOT = PROJECT_ROOT
     st.session_state.CANDIDATES_DIR = cli_args.candidates_dir.resolve()
     st.session_state.ACCEPTED_DIR = PROJECT_ROOT / 'data' / 'conceptual-errors-accepted'
-    st.session_state.CATALOG_PATH = st.session_state.CANDIDATES_DIR / "validation_catalog.csv"
+    st.session_state.person_name = person_name
+    
+    # Updated catalog path to include person name
+    st.session_state.CATALOG_PATH = st.session_state.CANDIDATES_DIR / f"validation_catalog_{person_name}.csv"
 
     catalog_df = load_or_initialize_catalog(st.session_state.CATALOG_PATH)
     st.session_state.catalog_df = catalog_df
@@ -155,6 +200,7 @@ catalog_df = st.session_state.catalog_df
 candidate_paths = st.session_state.candidate_paths
 current_index = st.session_state.current_index
 PROJECT_ROOT = st.session_state.PROJECT_ROOT
+person_name = st.session_state.person_name
 
 # ──────────────────────────────────────────────────────────────────────────
 # Main Application UI
@@ -178,11 +224,12 @@ initial_flawed_reconstruction = candidate_data.get("flawed_nl_reconstruction", {
 # --- Header and Metadata Section (Revised Layout) ---
 st.markdown(f"""
 <div class="title-container">
-    <h3>Conceptual Error Validation</h3>
+    <h3>Conceptual Error Validation - {person_name.title()}</h3>
     <h3>Remaining: {len(candidate_paths) - current_index}</h3>
 </div>
 """, unsafe_allow_html=True)
 
+# ...existing code...
 meta_col1, meta_col2, meta_col3 = st.columns([1, 3, 7])
 with meta_col1:
     st.markdown('<p class="metadata-label">Index</p>', unsafe_allow_html=True)
@@ -333,7 +380,8 @@ if decision:
         'decision_time_utc': now_utc.strftime('%H:%M:%S'),
         'status': decision,
         'manual_edits': manual_edits,
-        'filepath': final_filepath_str
+        'filepath': final_filepath_str,
+        'validator': person_name  # Add validator name to the record
     }
 
     st.session_state.catalog_df = pd.concat([catalog_df, pd.DataFrame([new_row])], ignore_index=True)

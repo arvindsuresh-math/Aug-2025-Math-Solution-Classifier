@@ -1,0 +1,98 @@
+{
+  "index": 1645,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "Three bracelets cost 3 x $15 = $<<3*15=45>>45.",
+    "L2": "Two gold necklaces cost 2 x $10 = $<<2*10=20>>20.",
+    "L3": "Thus, the total amount is $45 + $20 + $20 = $<<45+20+20=85>>85.",
+    "L4": "Therefore, Raine gets a change of $100 - $85 = $<<100-85=15>>15."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1645.\n    Returns: the amount of change Raine gets back from a $100 bill after her purchase.\n    \"\"\"\n    # L1\n    num_bracelets = 3 # three bracelets\n    price_bracelet = 15 # bracelets at $15 each\n    bracelets_total = num_bracelets * price_bracelet\n\n    # L2\n    num_necklaces = 2 # two gold heart necklaces\n    price_necklace = 10 # gold heart necklace at $10\n    necklaces_total = num_necklaces * price_necklace\n\n    # L3\n    price_mug = 20 # personalized coffee mug at $20\n    mugs_total = price_mug # one coffee mug\n    total_amount = bracelets_total + necklaces_total + mugs_total\n\n    # L4\n    bill_given = 100 # one hundred dollar bill\n    change = bill_given - total_amount\n\n    # FA\n    answer = change\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "necklaces_total",
+    "operand_to_replace": "num_necklaces",
+    "replacement_variable": "num_bracelets"
+  },
+  "correct_trace": {
+    "num_bracelets": 3,
+    "price_bracelet": 15,
+    "bracelets_total": 45,
+    "num_necklaces": 2,
+    "price_necklace": 10,
+    "necklaces_total": 20,
+    "price_mug": 20,
+    "mugs_total": 20,
+    "total_amount": 85,
+    "bill_given": 100,
+    "change": 15,
+    "answer": 15
+  },
+  "flawed_trace": {
+    "num_bracelets": 3,
+    "price_bracelet": 15,
+    "bracelets_total": 45,
+    "num_necklaces": 2,
+    "price_necklace": 10,
+    "necklaces_total": 30,
+    "price_mug": 20,
+    "mugs_total": 20,
+    "total_amount": 95,
+    "bill_given": 100,
+    "change": 5,
+    "answer": 5
+  },
+  "correct_value": 20,
+  "flawed_value": 30,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "num_bracelets",
+        "price_bracelet"
+      ],
+      "WK_inputs": [],
+      "output_variable": "bracelets_total",
+      "solution_line_template": "Three bracelets cost {num_bracelets} x ${price_bracelet} = $<<{num_bracelets}*{price_bracelet}={bracelets_total}>>{bracelets_total}."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "num_necklaces",
+        "price_necklace"
+      ],
+      "WK_inputs": [],
+      "output_variable": "necklaces_total",
+      "solution_line_template": "Two gold necklaces cost {num_necklaces} x ${price_necklace} = $<<{num_necklaces}*{price_necklace}={necklaces_total}>>{necklaces_total}."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "price_mug"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_amount",
+      "solution_line_template": "Thus, the total amount is ${bracelets_total} + ${necklaces_total} + ${price_mug} = $<<{bracelets_total}+{necklaces_total}+{price_mug}={total_amount}>>{total_amount}."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "bill_given"
+      ],
+      "WK_inputs": [],
+      "output_variable": "change",
+      "solution_line_template": "Therefore, Raine gets a change of ${bill_given} - ${total_amount} = $<<{bill_given}-{total_amount}={change}>>{change}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Three bracelets cost 3 x $15 = $<<3*15=45>>45.",
+    "L2": "Two gold necklaces cost 3 x $10 = $<<3*10=30>>30.",
+    "L3": "Thus, the total amount is $45 + $30 + $20 = $<<45+30+20=95>>95.",
+    "L4": "Therefore, Raine gets a change of $100 - $95 = $<<100-95=5>>5.",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_bracelets' (3) was used instead of 'num_necklaces' (2).",
+  "repro_seed": -183911211872120460,
+  "model_name": "openai_gpt-4.1"
+}

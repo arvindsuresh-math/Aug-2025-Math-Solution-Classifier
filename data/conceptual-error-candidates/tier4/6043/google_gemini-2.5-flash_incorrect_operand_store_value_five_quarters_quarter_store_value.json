@@ -1,0 +1,78 @@
+{
+  "index": 6043,
+  "original_solution_mapping": {
+    "FA": "#### 80",
+    "L1": "If he melts them down, five quarters equals $100 because 1 / (1/5) = <<5=5>>5",
+    "L2": "If he spends those five quarters they are worth $1.25 because 5 x .25 = <<5*.25=1.25>>1.25",
+    "L3": "They are worth 80 times more melted down because 100 / 1.25 = <<100/1.25=80>>80"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6043.\n    Returns: how many times more money he would get from melting them down instead of spending them in a store.\n    \"\"\"\n    # L1\n    quarter_weight = Fraction(1, 5) # Each quarter weighs 1/5 of an ounce\n    melt_value_per_ounce = 100 # $100 per ounce\n    one_ounce_for_calc = 1 # WK\n    quarters_per_ounce = one_ounce_for_calc / quarter_weight\n\n    # L2\n    quarter_store_value = 0.25 # worth the regular amount\n    store_value_five_quarters = quarters_per_ounce * quarter_store_value\n\n    # L3\n    melt_vs_store_ratio = melt_value_per_ounce / store_value_five_quarters\n\n    # FA\n    answer = melt_vs_store_ratio\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "store_value_five_quarters",
+    "operand_to_replace": "quarters_per_ounce",
+    "replacement_variable": "quarter_store_value"
+  },
+  "correct_trace": {
+    "quarter_weight": "1/5",
+    "melt_value_per_ounce": 100,
+    "one_ounce_for_calc": 1,
+    "quarters_per_ounce": "5",
+    "quarter_store_value": 0.25,
+    "store_value_five_quarters": 1.25,
+    "melt_vs_store_ratio": 80.0,
+    "answer": 80.0
+  },
+  "flawed_trace": {
+    "quarter_weight": "1/5",
+    "melt_value_per_ounce": 100,
+    "one_ounce_for_calc": 1,
+    "quarters_per_ounce": "5",
+    "quarter_store_value": 0.25,
+    "store_value_five_quarters": 0.0625,
+    "melt_vs_store_ratio": 1600.0,
+    "answer": 1600.0
+  },
+  "correct_value": 1.25,
+  "flawed_value": 0.0625,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "one_ounce_for_calc"
+      ],
+      "line_number": "L1",
+      "output_variable": "quarters_per_ounce",
+      "question_inputs": [
+        "quarter_weight",
+        "melt_value_per_ounce"
+      ],
+      "solution_line_template": "If he melts them down, {quarters_per_ounce} quarters equals ${melt_value_per_ounce} because {one_ounce_for_calc} / ({quarter_weight}) = <<{one_ounce_for_calc}/{quarter_weight}={quarters_per_ounce}>>{quarters_per_ounce}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "store_value_five_quarters",
+      "question_inputs": [
+        "quarter_store_value"
+      ],
+      "solution_line_template": "If he spends those {quarters_per_ounce} quarters they are worth ${store_value_five_quarters} because {quarters_per_ounce} x {quarter_store_value} = <<{quarters_per_ounce}*{quarter_store_value}={store_value_five_quarters}>>{store_value_five_quarters}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "melt_vs_store_ratio",
+      "question_inputs": [],
+      "solution_line_template": "They are worth {melt_vs_store_ratio} times more melted down because {melt_value_per_ounce} / {store_value_five_quarters} = <<{melt_value_per_ounce}/{store_value_five_quarters}={melt_vs_store_ratio}>>{melt_vs_store_ratio}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If he melts them down, 5 quarters equals $100 because 1 / (1/5) = <<1/1/5=5>>5",
+    "L2": "If he spends those 0.25 quarters they are worth $0.06 because 0.25 x 0.25 = <<0.25*0.25=0.06>>0.06",
+    "L3": "They are worth 1600 times more melted down because 100 / 0.06 = <<100/0.06=1600>>1600",
+    "FA": "#### 1600"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'quarter_store_value' (value: 0.25) was used instead of 'quarters_per_ounce' (value: 5).",
+  "repro_seed": -9062904023746971583,
+  "model_name": "google_gemini-2.5-flash"
+}

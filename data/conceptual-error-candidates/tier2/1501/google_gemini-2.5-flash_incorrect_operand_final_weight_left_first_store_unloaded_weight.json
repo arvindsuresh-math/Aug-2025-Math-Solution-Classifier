@@ -1,0 +1,85 @@
+{
+  "index": 1501,
+  "original_solution_mapping": {
+    "FA": "#### 36000",
+    "L1": "First Store:50000(.10)=<<5000=5000>>5000",
+    "L2": "50000-5000=<<50000-5000=45000>>45000 pounds",
+    "L3": "Second Store:45000(.20)=9000",
+    "L4": "45000-9000=<<45000-9000=36000>>36000 pounds"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1501.\n    Returns: the weight, in pounds, left on the truck after the two deliveries.\n    \"\"\"\n    # L1\n    initial_load = 50000 # load of 50000 pounds\n    first_store_unload_percent = 0.10 # 10% of the weight\n    first_store_unloaded_weight = initial_load * first_store_unload_percent\n\n    # L2\n    weight_after_first_store = initial_load - first_store_unloaded_weight\n\n    # L3\n    second_store_unload_percent = 0.20 # 20% of the remaining load\n    second_store_unloaded_weight = weight_after_first_store * second_store_unload_percent\n\n    # L4\n    final_weight_left = weight_after_first_store - second_store_unloaded_weight\n\n    # FA\n    answer = final_weight_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "final_weight_left",
+    "operand_to_replace": "second_store_unloaded_weight",
+    "replacement_variable": "first_store_unloaded_weight"
+  },
+  "correct_trace": {
+    "initial_load": 50000,
+    "first_store_unload_percent": 0.1,
+    "first_store_unloaded_weight": 5000.0,
+    "weight_after_first_store": 45000.0,
+    "second_store_unload_percent": 0.2,
+    "second_store_unloaded_weight": 9000.0,
+    "final_weight_left": 36000.0,
+    "answer": 36000.0
+  },
+  "flawed_trace": {
+    "initial_load": 50000,
+    "first_store_unload_percent": 0.1,
+    "first_store_unloaded_weight": 5000.0,
+    "weight_after_first_store": 45000.0,
+    "second_store_unload_percent": 0.2,
+    "second_store_unloaded_weight": 9000.0,
+    "final_weight_left": 40000.0,
+    "answer": 40000.0
+  },
+  "correct_value": 36000.0,
+  "flawed_value": 40000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "first_store_unloaded_weight",
+      "question_inputs": [
+        "initial_load",
+        "first_store_unload_percent"
+      ],
+      "solution_line_template": "First Store:{initial_load}({first_store_unload_percent})=<<{first_store_unloaded_weight}={first_store_unloaded_weight}>>{first_store_unloaded_weight}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "weight_after_first_store",
+      "question_inputs": [],
+      "solution_line_template": "{initial_load}-{first_store_unloaded_weight}=<<{initial_load}-{first_store_unloaded_weight}={weight_after_first_store}>>{weight_after_first_store} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "second_store_unloaded_weight",
+      "question_inputs": [
+        "second_store_unload_percent"
+      ],
+      "solution_line_template": "Second Store:{weight_after_first_store}({second_store_unload_percent})={second_store_unloaded_weight}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_weight_left",
+      "question_inputs": [],
+      "solution_line_template": "{weight_after_first_store}-{second_store_unloaded_weight}=<<{weight_after_first_store}-{second_store_unloaded_weight}={final_weight_left}>>{final_weight_left} pounds"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First Store:50000(0.1)=<<5000=5000>>5000",
+    "L2": "50000-5000=<<50000-5000=45000>>45000 pounds",
+    "L3": "Second Store:45000(0.2)=9000",
+    "L4": "45000-5000=<<45000-5000=40000>>40000 pounds",
+    "FA": "#### 40000"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'first_store_unloaded_weight' (value: 5000.0) was used instead of 'second_store_unloaded_weight' (value: 9000.0).",
+  "repro_seed": 1167220230117665306,
+  "model_name": "google_gemini-2.5-flash"
+}

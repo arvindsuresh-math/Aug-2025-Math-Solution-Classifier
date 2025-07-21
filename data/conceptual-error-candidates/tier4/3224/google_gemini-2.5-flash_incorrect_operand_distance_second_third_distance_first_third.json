@@ -1,0 +1,105 @@
+{
+  "index": 3224,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "15 minutes is 15/60=<<15/60=0.25>>0.25 hours.",
+    "L2": "Traveling 15 minutes at 16 miles per hour, Stephen travels 16*0.25 = 4 miles.",
+    "L3": "Traveling 15 minutes at 12 miles per hour, Stephen travels 12*0.25 = 3 miles.",
+    "L4": "Traveling 15 minutes at 20 miles per hour, Stephen travels 20*0.25 = 5 miles.",
+    "L5": "All together, Stephen travels 4+3+5=<<4+3+5=12>>12 miles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3224.\n    Returns: the total distance Stephen rides his bicycle to church in miles.\n    \"\"\"\n    # L1\n    minutes_per_third_trip = 15 # If each third of his trip takes 15 minutes\n    minutes_per_hour = 60 # WK\n    time_per_third_trip_hours = minutes_per_third_trip / minutes_per_hour\n\n    # L2\n    speed_first_third = 16 # 16 miles per hour\n    distance_first_third = speed_first_third * time_per_third_trip_hours\n\n    # L3\n    speed_second_third = 12 # 12 miles per hour\n    distance_second_third = speed_second_third * time_per_third_trip_hours\n\n    # L4\n    speed_third_third = 20 # 20 miles per hour\n    distance_third_third = speed_third_third * time_per_third_trip_hours\n\n    # L5\n    total_distance = distance_first_third + distance_second_third + distance_third_third\n\n    # FA\n    answer = total_distance\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "distance_second_third",
+    "operand_to_replace": "time_per_third_trip_hours",
+    "replacement_variable": "distance_first_third"
+  },
+  "correct_trace": {
+    "minutes_per_third_trip": 15,
+    "minutes_per_hour": 60,
+    "time_per_third_trip_hours": 0.25,
+    "speed_first_third": 16,
+    "distance_first_third": 4.0,
+    "speed_second_third": 12,
+    "distance_second_third": 3.0,
+    "speed_third_third": 20,
+    "distance_third_third": 5.0,
+    "total_distance": 12.0,
+    "answer": 12.0
+  },
+  "flawed_trace": {
+    "minutes_per_third_trip": 15,
+    "minutes_per_hour": 60,
+    "time_per_third_trip_hours": 0.25,
+    "speed_first_third": 16,
+    "distance_first_third": 4.0,
+    "speed_second_third": 12,
+    "distance_second_third": 48.0,
+    "speed_third_third": 20,
+    "distance_third_third": 5.0,
+    "total_distance": 57.0,
+    "answer": 57.0
+  },
+  "correct_value": 3.0,
+  "flawed_value": 48.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "time_per_third_trip_hours",
+      "question_inputs": [
+        "minutes_per_third_trip"
+      ],
+      "solution_line_template": "{minutes_per_third_trip} minutes is {minutes_per_third_trip}/{minutes_per_hour}=<<{minutes_per_third_trip}/{minutes_per_hour}={time_per_third_trip_hours}>>{time_per_third_trip_hours} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "distance_first_third",
+      "question_inputs": [
+        "speed_first_third"
+      ],
+      "solution_line_template": "Traveling 15 minutes at {speed_first_third} miles per hour, Stephen travels {speed_first_third}*{time_per_third_trip_hours} = {distance_first_third} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "distance_second_third",
+      "question_inputs": [
+        "speed_second_third"
+      ],
+      "solution_line_template": "Traveling 15 minutes at {speed_second_third} miles per hour, Stephen travels {speed_second_third}*{time_per_third_trip_hours} = {distance_second_third} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "distance_third_third",
+      "question_inputs": [
+        "speed_third_third"
+      ],
+      "solution_line_template": "Traveling 15 minutes at {speed_third_third} miles per hour, Stephen travels {speed_third_third}*{time_per_third_trip_hours} = {distance_third_third} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_distance",
+      "question_inputs": [],
+      "solution_line_template": "All together, Stephen travels {distance_first_third}+{distance_second_third}+{distance_third_third}=<<{distance_first_third}+{distance_second_third}+{distance_third_third}={total_distance}>>{total_distance} miles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "15 minutes is 15/60=<<15/60=0.25>>0.25 hours.",
+    "L2": "Traveling 15 minutes at 16 miles per hour, Stephen travels 16*0.25 = 4 miles.",
+    "L3": "Traveling 15 minutes at 12 miles per hour, Stephen travels 12*4 = 48 miles.",
+    "L4": "Traveling 15 minutes at 20 miles per hour, Stephen travels 20*0.25 = 5 miles.",
+    "L5": "All together, Stephen travels 4+48+5=<<4+48+5=57>>57 miles.",
+    "FA": "#### 57"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'distance_first_third' (value: 4.0) was used instead of 'time_per_third_trip_hours' (value: 0.25).",
+  "repro_seed": -3577891822763553735,
+  "model_name": "google_gemini-2.5-flash"
+}

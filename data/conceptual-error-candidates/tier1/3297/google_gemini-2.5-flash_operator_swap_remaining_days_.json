@@ -1,0 +1,89 @@
+{
+  "index": 3297,
+  "original_solution_mapping": {
+    "FA": "#### 11860",
+    "L1": "For the first 183 days he drives 183*30=<<183*30=5490>>5490 miles",
+    "L2": "There are 365-183=<<365-183=182>>182 days left in the year",
+    "L3": "He drives 35*182=<<35*182=6370>>6370 for those days",
+    "L4": "So in total he drives 5490+6370=<<5490+6370=11860>>11,860"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3297.\n    Returns: the total miles Tom drives for the year.\n    \"\"\"\n    # L1\n    first_period_days = 183 # 183 days\n    miles_per_day_first_period = 30 # 30 miles per day\n    miles_first_period = first_period_days * miles_per_day_first_period\n\n    # L2\n    days_in_year = 365 # WK\n    remaining_days = days_in_year - first_period_days\n\n    # L3\n    miles_per_day_rest_of_year = 35 # 35 miles per day\n    miles_rest_of_year = miles_per_day_rest_of_year * remaining_days\n\n    # L4\n    total_miles = miles_first_period + miles_rest_of_year\n\n    # FA\n    answer = total_miles\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "remaining_days",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x17226d510>"
+  },
+  "correct_trace": {
+    "first_period_days": 183,
+    "miles_per_day_first_period": 30,
+    "miles_first_period": 5490,
+    "days_in_year": 365,
+    "remaining_days": 182,
+    "miles_per_day_rest_of_year": 35,
+    "miles_rest_of_year": 6370,
+    "total_miles": 11860,
+    "answer": 11860
+  },
+  "flawed_trace": {
+    "first_period_days": 183,
+    "miles_per_day_first_period": 30,
+    "miles_first_period": 5490,
+    "days_in_year": 365,
+    "remaining_days": 548,
+    "miles_per_day_rest_of_year": 35,
+    "miles_rest_of_year": 19180,
+    "total_miles": 24670,
+    "answer": 24670
+  },
+  "correct_value": 182,
+  "flawed_value": 548,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "miles_first_period",
+      "question_inputs": [
+        "first_period_days",
+        "miles_per_day_first_period"
+      ],
+      "solution_line_template": "For the first {first_period_days} days he drives {first_period_days}*{miles_per_day_first_period}=<<{first_period_days}*{miles_per_day_first_period}={miles_first_period}>>{miles_first_period} miles"
+    },
+    {
+      "WK_inputs": [
+        "days_in_year"
+      ],
+      "line_number": "L2",
+      "output_variable": "remaining_days",
+      "question_inputs": [],
+      "solution_line_template": "There are {days_in_year}-{first_period_days}=<<{days_in_year}-{first_period_days}={remaining_days}>>{remaining_days} days left in the year"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "miles_rest_of_year",
+      "question_inputs": [
+        "miles_per_day_rest_of_year"
+      ],
+      "solution_line_template": "He drives {miles_per_day_rest_of_year}*{remaining_days}=<<{miles_per_day_rest_of_year}*{remaining_days}={miles_rest_of_year}>>{miles_rest_of_year} for those days"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_miles",
+      "question_inputs": [],
+      "solution_line_template": "So in total he drives {miles_first_period}+{miles_rest_of_year}=<<{miles_first_period}+{miles_rest_of_year}={total_miles}>>{total_miles}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "For the first 183 days he drives 183*30=<<183*30=5490>>5490 miles",
+    "L2": "There are 365-183=<<365-183=548>>548 days left in the year",
+    "L3": "He drives 35*548=<<35*548=19180>>19180 for those days",
+    "L4": "So in total he drives 5490+19180=<<5490+19180=24670>>24670",
+    "FA": "#### 24670"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 5746098932298943012,
+  "model_name": "google_gemini-2.5-flash"
+}

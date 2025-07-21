@@ -1,0 +1,99 @@
+{
+  "index": 4235,
+  "original_solution_mapping": {
+    "FA": "#### 780",
+    "L1": "If the population is halving then at the end of the third year, the population must have been 60 people in the fourth year * 2 = <<60*2=120>>120 people.",
+    "L2": "In the second year, the population was 120 people in the third year * 2 = <<120*2=240>>240 people.",
+    "L3": "And in the first year, the population was 240 people in the third year * 2 = <<240*2=480>>480 people.",
+    "L4": "Additional people moved out in the first year, so accounting for these shows the population was 480 people + 400 people who moved out = <<480+400=880>>880 people.",
+    "L5": "Then removing the new people shows there were originally 880 people - 100 new people = <<880-100=780>>780 people."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4235.\n    Returns: the original population of the town before new people moved in.\n    \"\"\"\n    # L1\n    final_population = 60 # After 4 years, the population is 60 people\n    halving_factor = 2 # WK\n    population_end_year_3 = final_population * halving_factor\n\n    # L2\n    population_end_year_2 = population_end_year_3 * halving_factor\n\n    # L3\n    population_end_year_1 = population_end_year_2 * halving_factor\n\n    # L4\n    original_moved_out = 400 # 400 of the original population move out\n    population_before_original_move_out = population_end_year_1 + original_moved_out\n\n    # L5\n    new_people_moved_in = 100 # 100 new people move into a town\n    original_population = population_before_original_move_out - new_people_moved_in\n\n    # FA\n    answer = original_population\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "original_population",
+    "replacement_variable": "population_end_year_1"
+  },
+  "correct_trace": {
+    "final_population": 60,
+    "halving_factor": 2,
+    "population_end_year_3": 120,
+    "population_end_year_2": 240,
+    "population_end_year_1": 480,
+    "original_moved_out": 400,
+    "population_before_original_move_out": 880,
+    "new_people_moved_in": 100,
+    "original_population": 780,
+    "answer": 780
+  },
+  "flawed_trace": {
+    "final_population": 60,
+    "halving_factor": 2,
+    "population_end_year_3": 120,
+    "population_end_year_2": 240,
+    "population_end_year_1": 480,
+    "original_moved_out": 400,
+    "population_before_original_move_out": 880,
+    "new_people_moved_in": 100,
+    "original_population": 780,
+    "answer": 480
+  },
+  "correct_value": 780,
+  "flawed_value": 480,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "halving_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "population_end_year_3",
+      "question_inputs": [
+        "final_population"
+      ],
+      "solution_line_template": "If the population is halving then at the end of the third year, the population must have been {final_population} people in the fourth year * {halving_factor} = <<{final_population}*{halving_factor}={population_end_year_3}>>{population_end_year_3} people."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "population_end_year_2",
+      "question_inputs": [],
+      "solution_line_template": "In the second year, the population was {population_end_year_3} people in the third year * {halving_factor} = <<{population_end_year_3}*{halving_factor}={population_end_year_2}>>{population_end_year_2} people."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "population_end_year_1",
+      "question_inputs": [],
+      "solution_line_template": "And in the first year, the population was {population_end_year_2} people in the third year * {halving_factor} = <<{population_end_year_2}*{halving_factor}={population_end_year_1}>>{population_end_year_1} people."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "population_before_original_move_out",
+      "question_inputs": [
+        "original_moved_out"
+      ],
+      "solution_line_template": "Additional people moved out in the first year, so accounting for these shows the population was {population_end_year_1} people + {original_moved_out} people who moved out = <<{population_end_year_1}+{original_moved_out}={population_before_original_move_out}>>{population_before_original_move_out} people."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "original_population",
+      "question_inputs": [
+        "new_people_moved_in"
+      ],
+      "solution_line_template": "Then removing the new people shows there were originally {population_before_original_move_out} people - {new_people_moved_in} new people = <<{population_before_original_move_out}-{new_people_moved_in}={original_population}>>{original_population} people."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the population is halving then at the end of the third year, the population must have been 60 people in the fourth year * 2 = <<60*2=120>>120 people.",
+    "L2": "In the second year, the population was 120 people in the third year * 2 = <<120*2=240>>240 people.",
+    "L3": "And in the first year, the population was 240 people in the third year * 2 = <<240*2=480>>480 people.",
+    "FA": "#### 480"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'population_end_year_1' (value: 480) was reported instead of 'original_population' (value: 780).",
+  "repro_seed": 3351772437970537506,
+  "model_name": "google_gemini-2.5-flash"
+}

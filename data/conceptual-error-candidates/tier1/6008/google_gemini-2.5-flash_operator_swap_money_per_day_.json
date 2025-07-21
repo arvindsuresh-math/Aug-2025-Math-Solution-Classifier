@@ -1,0 +1,78 @@
+{
+  "index": 6008,
+  "original_solution_mapping": {
+    "FA": "#### 3360",
+    "L1": "He catches 8*12=<<8*12=96>>96 crabs a day",
+    "L2": "So he makes 96*5=$<<96*5=480>>480 per day",
+    "L3": "That means he makes 7*480=$<<7*480=3360>>3360 a day"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6008.\n    Returns: the total money Tom makes per week.\n    \"\"\"\n    # L1\n    num_crab_buckets = 8 # 8 crab buckets\n    crabs_per_bucket = 12 # 12 crabs\n    crabs_per_day = num_crab_buckets * crabs_per_bucket\n\n    # L2\n    price_per_crab = 5 # $5 each\n    money_per_day = crabs_per_day * price_per_crab\n\n    # L3\n    days_per_week = 7 # WK\n    money_per_week = days_per_week * money_per_day\n\n    # FA\n    answer = money_per_week\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "money_per_day",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x169f14f50>"
+  },
+  "correct_trace": {
+    "num_crab_buckets": 8,
+    "crabs_per_bucket": 12,
+    "crabs_per_day": 96,
+    "price_per_crab": 5,
+    "money_per_day": 480,
+    "days_per_week": 7,
+    "money_per_week": 3360,
+    "answer": 3360
+  },
+  "flawed_trace": {
+    "num_crab_buckets": 8,
+    "crabs_per_bucket": 12,
+    "crabs_per_day": 96,
+    "price_per_crab": 5,
+    "money_per_day": 101,
+    "days_per_week": 7,
+    "money_per_week": 707,
+    "answer": 707
+  },
+  "correct_value": 480,
+  "flawed_value": 101,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "crabs_per_day",
+      "question_inputs": [
+        "num_crab_buckets",
+        "crabs_per_bucket"
+      ],
+      "solution_line_template": "He catches {num_crab_buckets}*{crabs_per_bucket}=<<{num_crab_buckets}*{crabs_per_bucket}={crabs_per_day}>>{crabs_per_day} crabs a day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_per_day",
+      "question_inputs": [
+        "price_per_crab"
+      ],
+      "solution_line_template": "So he makes {crabs_per_day}*{price_per_crab}=${crabs_per_day}*{price_per_crab}={money_per_day}>>{money_per_day} per day"
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L3",
+      "output_variable": "money_per_week",
+      "question_inputs": [],
+      "solution_line_template": "That means he makes {days_per_week}*{money_per_day}=${days_per_week}*{money_per_day}={money_per_week}>>{money_per_week} a day"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He catches 8*12=<<8*12=96>>96 crabs a day",
+    "L2": "So he makes 96*5=$96*5=101>>101 per day",
+    "L3": "That means he makes 7*101=$7*101=707>>707 a day",
+    "FA": "#### 707"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 7664832166172268454,
+  "model_name": "google_gemini-2.5-flash"
+}

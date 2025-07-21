@@ -1,0 +1,134 @@
+{
+  "index": 2732,
+  "original_solution_mapping": {
+    "FA": "#### 1740",
+    "L1": "In an hour, the baker bakes 5 x 4 = <<5*4=20>>20 loaves of bread.",
+    "L2": "From Monday to Friday, he bakes 5 x 20 = <<5*20=100>>100 loaves of bread per day.",
+    "L3": "From Monday to Friday, he bakes a total of 100 x 5 = <<100*5=500>>500 loaves of bread.",
+    "L4": "On Saturday and Sunday, he bakes 2 x 20 = <<2*20=40>>40 loaves of bread per day.",
+    "L5": "On Saturday and Sunday, he bakes a total of 40 x 2 = <<40*2=80>>80 loaves of bread.",
+    "L6": "In a week, he bakes 500 + 80 = <<500+80=580>>580 loaves of bread.",
+    "L7": "In 3 weeks, he bakes 580 x 3 = <<580*3=1740>>1740 loaves of bread."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2732.\n    Returns: the total number of loaves of bread the baker bakes in 3 weeks.\n    \"\"\"\n    # L1\n    loaves_per_hour_per_oven = 5 # bakes 5 loaves of bread an hour in one oven\n    num_ovens = 4 # He has 4 ovens\n    loaves_per_hour_total = loaves_per_hour_per_oven * num_ovens\n\n    # L2\n    baking_hours_weekday = 5 # bakes for 5 hours\n    loaves_per_day_weekday = baking_hours_weekday * loaves_per_hour_total\n\n    # L3\n    weekdays_in_week = 5 # WK\n    total_loaves_weekday = loaves_per_day_weekday * weekdays_in_week\n\n    # L4\n    baking_hours_weekend = 2 # only bakes for 2 hours\n    loaves_per_day_weekend = baking_hours_weekend * loaves_per_hour_total\n\n    # L5\n    weekend_days_in_week = 2 # WK\n    total_loaves_weekend = loaves_per_day_weekend * weekend_days_in_week\n\n    # L6\n    total_loaves_per_week = total_loaves_weekday + total_loaves_weekend\n\n    # L7\n    num_weeks = 3 # in 3 weeks\n    total_loaves_three_weeks = total_loaves_per_week * num_weeks\n\n    # FA\n    answer = total_loaves_three_weeks\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_loaves_per_week",
+    "operand_to_replace": "total_loaves_weekday",
+    "replacement_variable": "weekdays_in_week"
+  },
+  "correct_trace": {
+    "loaves_per_hour_per_oven": 5,
+    "num_ovens": 4,
+    "loaves_per_hour_total": 20,
+    "baking_hours_weekday": 5,
+    "loaves_per_day_weekday": 100,
+    "weekdays_in_week": 5,
+    "total_loaves_weekday": 500,
+    "baking_hours_weekend": 2,
+    "loaves_per_day_weekend": 40,
+    "weekend_days_in_week": 2,
+    "total_loaves_weekend": 80,
+    "total_loaves_per_week": 580,
+    "num_weeks": 3,
+    "total_loaves_three_weeks": 1740,
+    "answer": 1740
+  },
+  "flawed_trace": {
+    "loaves_per_hour_per_oven": 5,
+    "num_ovens": 4,
+    "loaves_per_hour_total": 20,
+    "baking_hours_weekday": 5,
+    "loaves_per_day_weekday": 100,
+    "weekdays_in_week": 5,
+    "total_loaves_weekday": 500,
+    "baking_hours_weekend": 2,
+    "loaves_per_day_weekend": 40,
+    "weekend_days_in_week": 2,
+    "total_loaves_weekend": 80,
+    "total_loaves_per_week": 85,
+    "num_weeks": 3,
+    "total_loaves_three_weeks": 255,
+    "answer": 255
+  },
+  "correct_value": 580,
+  "flawed_value": 85,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "loaves_per_hour_per_oven",
+        "num_ovens"
+      ],
+      "WK_inputs": [],
+      "output_variable": "loaves_per_hour_total",
+      "solution_line_template": "In an hour, the baker bakes {loaves_per_hour_per_oven} x {num_ovens} = <<{loaves_per_hour_per_oven}*{num_ovens}={loaves_per_hour_total}>>{loaves_per_hour_total} loaves of bread."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "baking_hours_weekday"
+      ],
+      "WK_inputs": [],
+      "output_variable": "loaves_per_day_weekday",
+      "solution_line_template": "From Monday to Friday, he bakes {baking_hours_weekday} x {loaves_per_hour_total} = <<{baking_hours_weekday}*{loaves_per_hour_total}={loaves_per_day_weekday}>>{loaves_per_day_weekday} loaves of bread per day."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [
+        "weekdays_in_week"
+      ],
+      "output_variable": "total_loaves_weekday",
+      "solution_line_template": "From Monday to Friday, he bakes a total of {loaves_per_day_weekday} x {weekdays_in_week} = <<{loaves_per_day_weekday}*{weekdays_in_week}={total_loaves_weekday}>>{total_loaves_weekday} loaves of bread."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "baking_hours_weekend"
+      ],
+      "WK_inputs": [],
+      "output_variable": "loaves_per_day_weekend",
+      "solution_line_template": "On Saturday and Sunday, he bakes {baking_hours_weekend} x {loaves_per_hour_total} = <<{baking_hours_weekend}*{loaves_per_hour_total}={loaves_per_day_weekend}>>{loaves_per_day_weekend} loaves of bread per day."
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": [
+        "weekend_days_in_week"
+      ],
+      "output_variable": "total_loaves_weekend",
+      "solution_line_template": "On Saturday and Sunday, he bakes a total of {loaves_per_day_weekend} x {weekend_days_in_week} = <<{loaves_per_day_weekend}*{weekend_days_in_week}={total_loaves_weekend}>>{total_loaves_weekend} loaves of bread."
+    },
+    {
+      "line_number": "L6",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_loaves_per_week",
+      "solution_line_template": "In a week, he bakes {total_loaves_weekday} + {total_loaves_weekend} = <<{total_loaves_weekday}+{total_loaves_weekend}={total_loaves_per_week}>>{total_loaves_per_week} loaves of bread."
+    },
+    {
+      "line_number": "L7",
+      "question_inputs": [
+        "num_weeks"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_loaves_three_weeks",
+      "solution_line_template": "In {num_weeks} weeks, he bakes {total_loaves_per_week} x {num_weeks} = <<{total_loaves_per_week}*{num_weeks}={total_loaves_three_weeks}>>{total_loaves_three_weeks} loaves of bread."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In an hour, the baker bakes 5 x 4 = <<5*4=20>>20 loaves of bread.",
+    "L2": "From Monday to Friday, he bakes 5 x 20 = <<5*20=100>>100 loaves of bread per day.",
+    "L3": "From Monday to Friday, he bakes a total of 100 x 5 = <<100*5=500>>500 loaves of bread.",
+    "L4": "On Saturday and Sunday, he bakes 2 x 20 = <<2*20=40>>40 loaves of bread per day.",
+    "L5": "On Saturday and Sunday, he bakes a total of 40 x 2 = <<40*2=80>>80 loaves of bread.",
+    "L6": "In a week, he bakes 5 + 80 = <<5+80=85>>85 loaves of bread.",
+    "L7": "In 3 weeks, he bakes 85 x 3 = <<85*3=255>>255 loaves of bread.",
+    "FA": "#### 255"
+  },
+  "erroneous_line_number": "L6",
+  "explanation": "Incorrect operand. The variable 'weekdays_in_week' (value: 5) was used instead of 'total_loaves_weekday' (value: 500).",
+  "repro_seed": -227489951331009808,
+  "model_name": "google_gemini-2.5-flash"
+}

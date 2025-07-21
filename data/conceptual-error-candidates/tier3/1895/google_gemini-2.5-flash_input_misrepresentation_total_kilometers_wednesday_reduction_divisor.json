@@ -1,0 +1,74 @@
+{
+  "index": 1895,
+  "original_solution_mapping": {
+    "FA": "#### 180",
+    "L1": "On Wednesday she covered half of the distance from Tuesday, so 50 / 2 = <<50/2=25>>25 kilometers.",
+    "L2": "On Thursday she rode 40 + 25 = <<40+25=65>>65 kilometers.",
+    "L3": "In total, Natalia rode 40 + 50 + 25 + 65 = <<40+50+25+65=180>>180 kilometers."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1895.\n    Returns: the total kilometers Natalia rode.\n    \"\"\"\n    # L1\n    tuesday_kilometers = 50 # on Tuesday 50 kilometers\n    wednesday_reduction_divisor = 2 # 50% fewer kilometers than the day before\n    wednesday_kilometers = tuesday_kilometers / wednesday_reduction_divisor\n\n    # L2\n    monday_kilometers = 40 # On Monday she rode 40 kilometers\n    thursday_kilometers = monday_kilometers + wednesday_kilometers\n\n    # L3\n    total_kilometers = monday_kilometers + tuesday_kilometers + wednesday_kilometers + thursday_kilometers\n\n    # FA\n    answer = total_kilometers\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_kilometers",
+    "operand_to_replace": "tuesday_kilometers",
+    "replacement_variable": "wednesday_reduction_divisor"
+  },
+  "correct_trace": {
+    "tuesday_kilometers": 50,
+    "wednesday_reduction_divisor": 2,
+    "wednesday_kilometers": 25.0,
+    "monday_kilometers": 40,
+    "thursday_kilometers": 65.0,
+    "total_kilometers": 180.0,
+    "answer": 180.0
+  },
+  "flawed_trace": {
+    "tuesday_kilometers": 50,
+    "wednesday_reduction_divisor": 2,
+    "wednesday_kilometers": 25.0,
+    "monday_kilometers": 40,
+    "thursday_kilometers": 65.0,
+    "total_kilometers": 132.0,
+    "answer": 132.0
+  },
+  "correct_value": 180.0,
+  "flawed_value": 132.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "wednesday_kilometers",
+      "question_inputs": [
+        "tuesday_kilometers",
+        "wednesday_reduction_divisor"
+      ],
+      "solution_line_template": "On Wednesday she covered half of the distance from Tuesday, so {tuesday_kilometers} / {wednesday_reduction_divisor} = <<{tuesday_kilometers}/{wednesday_reduction_divisor}={wednesday_kilometers}>>{wednesday_kilometers} kilometers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "thursday_kilometers",
+      "question_inputs": [
+        "monday_kilometers"
+      ],
+      "solution_line_template": "On Thursday she rode {monday_kilometers} + {wednesday_kilometers} = <<{monday_kilometers}+{wednesday_kilometers}={thursday_kilometers}>>{thursday_kilometers} kilometers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_kilometers",
+      "question_inputs": [],
+      "solution_line_template": "In total, Natalia rode {monday_kilometers} + {tuesday_kilometers} + {wednesday_kilometers} + {thursday_kilometers} = <<{monday_kilometers}+{tuesday_kilometers}+{wednesday_kilometers}+{thursday_kilometers}={total_kilometers}>>{total_kilometers} kilometers."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Wednesday she covered half of the distance from Tuesday, so 50 / 2 = <<50/2=25>>25 kilometers.",
+    "L2": "On Thursday she rode 40 + 25 = <<40+25=65>>65 kilometers.",
+    "L3": "In total, Natalia rode 40 + 2 + 25 + 65 = <<40+2+25+65=132>>132 kilometers.",
+    "FA": "#### 132"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'wednesday_reduction_divisor' (2) was used instead of 'tuesday_kilometers' (50).",
+  "repro_seed": -5562332770465630964,
+  "model_name": "google_gemini-2.5-flash"
+}

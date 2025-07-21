@@ -1,0 +1,100 @@
+{
+  "index": 2761,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "Will caught 16+10= <<16+10=26>>26 fishes",
+    "L2": "Henry caught 3 trout for each catfish Will caught so since Will caught 16 catfish, Henry caught 16*3 = <<3*16=48>>48 trout",
+    "L3": "Half of 48 trout is (1/2)*48 = 24",
+    "L4": "Henry returned 24 trout leaving him with 48-24 = <<48-24=24>>24 trout",
+    "L5": "They now have a total of 26+24 = <<26+24=50>>50 fishes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2761.\n    Returns: the total number of fish Will and Henry have altogether.\n    \"\"\"\n    # L1\n    will_catfish = 16 # Will catches 16 catfish\n    will_eels = 10 # and 10 eels\n    will_total_fish = will_catfish + will_eels\n\n    # L2\n    trout_per_catfish = 3 # catch 3 trout for every catfish Will catches\n    henry_caught_trout = will_catfish * trout_per_catfish\n\n    # L3\n    half_fraction = Fraction(1, 2) # WK\n    trout_returned = half_fraction * henry_caught_trout\n\n    # L4\n    henry_remaining_trout = henry_caught_trout - trout_returned\n\n    # L5\n    total_fish_altogether = will_total_fish + henry_remaining_trout\n\n    # FA\n    answer = total_fish_altogether\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_fish_altogether",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x15f8b1410>"
+  },
+  "correct_trace": {
+    "will_catfish": 16,
+    "will_eels": 10,
+    "will_total_fish": 26,
+    "trout_per_catfish": 3,
+    "henry_caught_trout": 48,
+    "half_fraction": "1/2",
+    "trout_returned": "24",
+    "henry_remaining_trout": "24",
+    "total_fish_altogether": "50",
+    "answer": "50"
+  },
+  "flawed_trace": {
+    "will_catfish": 16,
+    "will_eels": 10,
+    "will_total_fish": 26,
+    "trout_per_catfish": 3,
+    "henry_caught_trout": 48,
+    "half_fraction": "1/2",
+    "trout_returned": "24",
+    "henry_remaining_trout": "24",
+    "total_fish_altogether": "624",
+    "answer": "624"
+  },
+  "correct_value": "50",
+  "flawed_value": "624",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "will_total_fish",
+      "question_inputs": [
+        "will_catfish",
+        "will_eels"
+      ],
+      "solution_line_template": "Will caught {will_catfish}+{will_eels}= <<{will_catfish}+{will_eels}={will_total_fish}>>{will_total_fish} fishes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "henry_caught_trout",
+      "question_inputs": [
+        "trout_per_catfish"
+      ],
+      "solution_line_template": "Henry caught {trout_per_catfish} trout for each catfish Will caught so since Will caught {will_catfish} catfish, Henry caught {will_catfish}*{trout_per_catfish} = <<{trout_per_catfish}*{will_catfish}={henry_caught_trout}>>{henry_caught_trout} trout"
+    },
+    {
+      "WK_inputs": [
+        "half_fraction"
+      ],
+      "line_number": "L3",
+      "output_variable": "trout_returned",
+      "question_inputs": [],
+      "solution_line_template": "Half of {henry_caught_trout} trout is ({half_fraction})*{henry_caught_trout} = {trout_returned}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "henry_remaining_trout",
+      "question_inputs": [],
+      "solution_line_template": "Henry returned {trout_returned} trout leaving him with {henry_caught_trout}-{trout_returned} = <<{henry_caught_trout}-{trout_returned}={henry_remaining_trout}>>{henry_remaining_trout} trout"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_fish_altogether",
+      "question_inputs": [],
+      "solution_line_template": "They now have a total of {will_total_fish}+{henry_remaining_trout} = <<{will_total_fish}+{henry_remaining_trout}={total_fish_altogether}>>{total_fish_altogether} fishes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Will caught 16+10= <<16+10=26>>26 fishes",
+    "L2": "Henry caught 3 trout for each catfish Will caught so since Will caught 16 catfish, Henry caught 16*3 = <<3*16=48>>48 trout",
+    "L3": "Half of 48 trout is (1/2)*48 = 24",
+    "L4": "Henry returned 24 trout leaving him with 48-24 = <<48-24=24>>24 trout",
+    "L5": "They now have a total of 26+24 = <<26+24=624>>624 fishes",
+    "FA": "#### 624"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": -2269339745127248230,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,63 @@
+{
+  "index": 6882,
+  "original_solution_mapping": {
+    "FA": "#### 1000",
+    "L1": "The total amount of money used to charge the debit card is 1/2*$5000 = $<<1/2*5000=2500>>2500.",
+    "L2": "When he buys the used car, he still has $2500 - $1500 = $<<2500-1500=1000>>1000 left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6882.\n    Returns: the total amount of remaining money at the end of the month.\n    \"\"\"\n    # L1\n    debit_card_fraction = Fraction(1, 2) # half of his pay\n    total_pay = 5000 # In June, he earned $5000\n    debit_card_recharge = debit_card_fraction * total_pay\n\n    # L2\n    car_cost = 1500 # bought himself a used car worth $1500\n    remaining_money = debit_card_recharge - car_cost\n\n    # FA\n    answer = remaining_money\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "remaining_money",
+    "operand_to_replace": "car_cost",
+    "replacement_variable": "debit_card_fraction"
+  },
+  "correct_trace": {
+    "debit_card_fraction": "1/2",
+    "total_pay": 5000,
+    "debit_card_recharge": "2500",
+    "car_cost": 1500,
+    "remaining_money": "1000",
+    "answer": "1000"
+  },
+  "flawed_trace": {
+    "debit_card_fraction": "1/2",
+    "total_pay": 5000,
+    "debit_card_recharge": "2500",
+    "car_cost": 1500,
+    "remaining_money": "4999/2",
+    "answer": "4999/2"
+  },
+  "correct_value": "1000",
+  "flawed_value": "4999/2",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "debit_card_recharge",
+      "question_inputs": [
+        "debit_card_fraction",
+        "total_pay"
+      ],
+      "solution_line_template": "The total amount of money used to charge the debit card is {debit_card_fraction}*${total_pay} = ${debit_card_recharge}<<{debit_card_fraction}*{total_pay}={debit_card_recharge}>>{debit_card_recharge}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_money",
+      "question_inputs": [
+        "car_cost"
+      ],
+      "solution_line_template": "When he buys the used car, he still has ${debit_card_recharge} - ${car_cost} = ${remaining_money}<<{debit_card_recharge}-{car_cost}={remaining_money}>>{remaining_money} left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total amount of money used to charge the debit card is 1/2*$5000 = $2500<<1/2*5000=2500>>2500.",
+    "L2": "When he buys the used car, he still has $2500 - $1/2 = $4999/2<<2500-1/2=4999/2>>4999/2 left.",
+    "FA": "#### 4999/2"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'debit_card_fraction' (1/2) was used instead of 'car_cost' (1500).",
+  "repro_seed": 6250351349069935017,
+  "model_name": "google_gemini-2.5-flash"
+}

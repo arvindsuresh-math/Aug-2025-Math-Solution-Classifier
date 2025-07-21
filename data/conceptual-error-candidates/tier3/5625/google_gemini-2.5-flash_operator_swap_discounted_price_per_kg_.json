@@ -1,0 +1,74 @@
+{
+  "index": 5625,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "A 40% discount on each kilogram of apples would mean the price being 40/100 * 5 = $<<40/100*5=2>>2 smaller.",
+    "L2": "So one kilogram of apples would cost not $5, but 5 - 2 = $<<5-2=3>>3.",
+    "L3": "So for 10 kilograms of apples Hannah would pay 3 * 10 = $<<3*10=30>>30."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5625.\n    Returns: the total cost Hannah would pay for apples.\n    \"\"\"\n    # L1\n    discount_percentage = Fraction(40, 100) # 40% discount\n    price_per_kg = 5 # $5 per kilogram\n    discount_amount_per_kg = discount_percentage * price_per_kg\n\n    # L2\n    discounted_price_per_kg = price_per_kg - discount_amount_per_kg\n\n    # L3\n    quantity_kg = 10 # 10 kilograms of them\n    total_cost = discounted_price_per_kg * quantity_kg\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "discounted_price_per_kg",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x30d8e3410>"
+  },
+  "correct_trace": {
+    "discount_percentage": "2/5",
+    "price_per_kg": 5,
+    "discount_amount_per_kg": "2",
+    "discounted_price_per_kg": "3",
+    "quantity_kg": 10,
+    "total_cost": "30",
+    "answer": "30"
+  },
+  "flawed_trace": {
+    "discount_percentage": "2/5",
+    "price_per_kg": 5,
+    "discount_amount_per_kg": "2",
+    "discounted_price_per_kg": "5/2",
+    "quantity_kg": 10,
+    "total_cost": "25",
+    "answer": "25"
+  },
+  "correct_value": "3",
+  "flawed_value": "5/2",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "discount_amount_per_kg",
+      "question_inputs": [
+        "discount_percentage",
+        "price_per_kg"
+      ],
+      "solution_line_template": "A {discount_percentage} discount on each kilogram of apples would mean the price being {discount_percentage} * {price_per_kg} = $<<{discount_percentage}*{price_per_kg}={discount_amount_per_kg}>>{discount_amount_per_kg} smaller."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "discounted_price_per_kg",
+      "question_inputs": [],
+      "solution_line_template": "So one kilogram of apples would cost not ${price_per_kg}, but {price_per_kg} - {discount_amount_per_kg} = $<<{price_per_kg}-{discount_amount_per_kg}={discounted_price_per_kg}>>{discounted_price_per_kg}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "quantity_kg"
+      ],
+      "solution_line_template": "So for {quantity_kg} kilograms of apples Hannah would pay {discounted_price_per_kg} * {quantity_kg} = $<<{discounted_price_per_kg}*{quantity_kg}={total_cost}>>{total_cost}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "A 40/100 discount on each kilogram of apples would mean the price being 40/100 * 5 = $<<40/100*5=2>>2 smaller.",
+    "L2": "So one kilogram of apples would cost not $5, but 5 - 2 = $<<5-2=5/2>>5/2.",
+    "L3": "So for 10 kilograms of apples Hannah would pay 5/2 * 10 = $<<5/2*10=25>>25.",
+    "FA": "#### 25"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": -7994745087428431578,
+  "model_name": "google_gemini-2.5-flash"
+}

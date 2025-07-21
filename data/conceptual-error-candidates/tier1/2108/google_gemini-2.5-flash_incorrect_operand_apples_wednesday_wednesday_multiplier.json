@@ -1,0 +1,74 @@
+{
+  "index": 2108,
+  "original_solution_mapping": {
+    "FA": "#### 240",
+    "L1": "On Tuesday, Adam bought 3 * 15 apples = <<3*15=45>>45 apples.",
+    "L2": "On Wednesday, Adam bought 4 * 45 apples = <<4*45=180>>180 apples.",
+    "L3": "Adam bought 15 apples + 45 apples + 180 apples = <<15+45+180=240>>240 apples on the three days."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2108.\n    Returns: the total quantity of apples Adam bought on the three days.\n    \"\"\"\n    # L1\n    apples_monday = 15 # 15 apples on Monday\n    tuesday_multiplier = 3 # 3 times that quantity\n    apples_tuesday = tuesday_multiplier * apples_monday\n\n    # L2\n    wednesday_multiplier = 4 # 4 times the quantity he bought on Tuesday\n    apples_wednesday = wednesday_multiplier * apples_tuesday\n\n    # L3\n    total_apples = apples_monday + apples_tuesday + apples_wednesday\n\n    # FA\n    answer = total_apples\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "apples_wednesday",
+    "operand_to_replace": "apples_tuesday",
+    "replacement_variable": "wednesday_multiplier"
+  },
+  "correct_trace": {
+    "apples_monday": 15,
+    "tuesday_multiplier": 3,
+    "apples_tuesday": 45,
+    "wednesday_multiplier": 4,
+    "apples_wednesday": 180,
+    "total_apples": 240,
+    "answer": 240
+  },
+  "flawed_trace": {
+    "apples_monday": 15,
+    "tuesday_multiplier": 3,
+    "apples_tuesday": 45,
+    "wednesday_multiplier": 4,
+    "apples_wednesday": 16,
+    "total_apples": 76,
+    "answer": 76
+  },
+  "correct_value": 180,
+  "flawed_value": 16,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "apples_monday",
+        "tuesday_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "apples_tuesday",
+      "solution_line_template": "On Tuesday, Adam bought {tuesday_multiplier} * {apples_monday} apples = <<{tuesday_multiplier}*{apples_monday}={apples_tuesday}>>{apples_tuesday} apples."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "wednesday_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "apples_wednesday",
+      "solution_line_template": "On Wednesday, Adam bought {wednesday_multiplier} * {apples_tuesday} apples = <<{wednesday_multiplier}*{apples_tuesday}={apples_wednesday}>>{apples_wednesday} apples."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_apples",
+      "solution_line_template": "Adam bought {apples_monday} apples + {apples_tuesday} apples + {apples_wednesday} apples = <<{apples_monday}+{apples_tuesday}+{apples_wednesday}={total_apples}>>{total_apples} apples on the three days."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Tuesday, Adam bought 3 * 15 apples = <<3*15=45>>45 apples.",
+    "L2": "On Wednesday, Adam bought 4 * 4 apples = <<4*4=16>>16 apples.",
+    "L3": "Adam bought 15 apples + 45 apples + 16 apples = <<15+45+16=76>>76 apples on the three days.",
+    "FA": "#### 76"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'wednesday_multiplier' (value: 4) was used instead of 'apples_tuesday' (value: 45).",
+  "repro_seed": -9094626561778405386,
+  "model_name": "google_gemini-2.5-flash"
+}

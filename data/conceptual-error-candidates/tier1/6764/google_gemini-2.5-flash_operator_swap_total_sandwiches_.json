@@ -1,0 +1,94 @@
+{
+  "index": 6764,
+  "original_solution_mapping": {
+    "FA": "#### 120",
+    "L1": "If each student travels with 5 others, then groups are made up of 5 + 1 = <<5+1=6>>6 students.",
+    "L2": "This means there are a total of 5 groups * 6 students = <<5*6=30>>30 students in the class.",
+    "L3": "Each student needs 2 sandwiches, which means the teacher will make 30 students * 2 sandwiches per student= <<30*2=60>>60 sandwiches in total.",
+    "L4": "Therefore, the teachers will need 60 sandwiches * 2 pieces of bread per sandwich= <<60*2=120>>120 pieces of bread."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6764.\n    Returns: the total number of pieces of bread needed.\n    \"\"\"\n    # L1\n    other_students_in_group = 5 # travel in a group with 5 other students\n    student_self = 1 # WK\n    students_per_group = other_students_in_group + student_self\n\n    # L2\n    total_groups = 5 # a total of 5 groups\n    total_students = total_groups * students_per_group\n\n    # L3\n    sandwiches_per_student = 2 # Each student needs 2 sandwiches\n    total_sandwiches = total_students * sandwiches_per_student\n\n    # L4\n    pieces_of_bread_per_sandwich = 2 # WK\n    total_bread_pieces = total_sandwiches * pieces_of_bread_per_sandwich\n\n    # FA\n    answer = total_bread_pieces\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_sandwiches",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x169a0c3d0>"
+  },
+  "correct_trace": {
+    "other_students_in_group": 5,
+    "student_self": 1,
+    "students_per_group": 6,
+    "total_groups": 5,
+    "total_students": 30,
+    "sandwiches_per_student": 2,
+    "total_sandwiches": 60,
+    "pieces_of_bread_per_sandwich": 2,
+    "total_bread_pieces": 120,
+    "answer": 120
+  },
+  "flawed_trace": {
+    "other_students_in_group": 5,
+    "student_self": 1,
+    "students_per_group": 6,
+    "total_groups": 5,
+    "total_students": 30,
+    "sandwiches_per_student": 2,
+    "total_sandwiches": 32,
+    "pieces_of_bread_per_sandwich": 2,
+    "total_bread_pieces": 64,
+    "answer": 64
+  },
+  "correct_value": 60,
+  "flawed_value": 32,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "student_self"
+      ],
+      "line_number": "L1",
+      "output_variable": "students_per_group",
+      "question_inputs": [
+        "other_students_in_group"
+      ],
+      "solution_line_template": "If each student travels with {other_students_in_group} others, then groups are made up of {other_students_in_group} + {student_self} = <<{other_students_in_group}+{student_self}={students_per_group}>>{students_per_group} students."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_students",
+      "question_inputs": [
+        "total_groups"
+      ],
+      "solution_line_template": "This means there are a total of {total_groups} groups * {students_per_group} students = <<{total_groups}*{students_per_group}={total_students}>>{total_students} students in the class."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_sandwiches",
+      "question_inputs": [
+        "sandwiches_per_student"
+      ],
+      "solution_line_template": "Each student needs {sandwiches_per_student} sandwiches, which means the teacher will make {total_students} students * {sandwiches_per_student} sandwiches per student= <<{total_students}*{sandwiches_per_student}={total_sandwiches}>>{total_sandwiches} sandwiches in total."
+    },
+    {
+      "WK_inputs": [
+        "pieces_of_bread_per_sandwich"
+      ],
+      "line_number": "L4",
+      "output_variable": "total_bread_pieces",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, the teachers will need {total_sandwiches} sandwiches * {pieces_of_bread_per_sandwich} pieces of bread per sandwich= <<{total_sandwiches}*{pieces_of_bread_per_sandwich}={total_bread_pieces}>>{total_bread_pieces} pieces of bread."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If each student travels with 5 others, then groups are made up of 5 + 1 = <<5+1=6>>6 students.",
+    "L2": "This means there are a total of 5 groups * 6 students = <<5*6=30>>30 students in the class.",
+    "L3": "Each student needs 2 sandwiches, which means the teacher will make 30 students * 2 sandwiches per student= <<30*2=32>>32 sandwiches in total.",
+    "L4": "Therefore, the teachers will need 32 sandwiches * 2 pieces of bread per sandwich= <<32*2=64>>64 pieces of bread.",
+    "FA": "#### 64"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -1064400217269934029,
+  "model_name": "google_gemini-2.5-flash"
+}

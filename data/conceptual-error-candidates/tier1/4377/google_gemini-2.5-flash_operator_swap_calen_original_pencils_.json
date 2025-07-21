@@ -1,0 +1,94 @@
+{
+  "index": 4377,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "If Calen lost 10 pencils, which left him with 10 pencils, then Calen originally had 10+10=<<10+10=20>>20 pencils.",
+    "L2": "Calen originally had 5 more pencils than does Caleb, and thus Caleb has 20-5=<<20-5=15>>15 pencils.",
+    "L3": "Let's let \"x\" represent the number of pencils owned by Candy.",
+    "L4": "Since Caleb has 3 less than twice as many pencils as does Candy, then (2*x)-3=15.",
+    "L5": "This simplifies to 2*x=18.",
+    "L6": "Thus, the number of pencils owned by Candy is x=<<9=9>>9 pencils."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4377.\n    Returns: the number of pencils Candy has.\n    \"\"\"\n    # L1\n    calen_lost_pencils = 10 # lost 10 pencils\n    calen_remaining_pencils = 10 # left him with 10 pencils\n    calen_original_pencils = calen_remaining_pencils + calen_lost_pencils\n\n    # L2\n    calen_more_than_caleb = 5 # 5 more pencils than does Caleb\n    caleb_pencils = calen_original_pencils - calen_more_than_caleb\n\n    # L5\n    multiplier_for_twice = 2 # twice as many pencils\n    caleb_less_than_twice_candy = 3 # 3 less than twice as many pencils\n    twice_candy_pencils = caleb_pencils + caleb_less_than_twice_candy\n\n    # L6\n    candy_pencils = twice_candy_pencils / multiplier_for_twice\n\n    # FA\n    answer = candy_pencils\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "calen_original_pencils",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x16a838710>"
+  },
+  "correct_trace": {
+    "calen_lost_pencils": 10,
+    "calen_remaining_pencils": 10,
+    "calen_original_pencils": 20,
+    "calen_more_than_caleb": 5,
+    "caleb_pencils": 15,
+    "multiplier_for_twice": 2,
+    "caleb_less_than_twice_candy": 3,
+    "twice_candy_pencils": 18,
+    "candy_pencils": 9.0,
+    "answer": 9.0
+  },
+  "flawed_trace": {
+    "calen_lost_pencils": 10,
+    "calen_remaining_pencils": 10,
+    "calen_original_pencils": 100,
+    "calen_more_than_caleb": 5,
+    "caleb_pencils": 95,
+    "multiplier_for_twice": 2,
+    "caleb_less_than_twice_candy": 3,
+    "twice_candy_pencils": 98,
+    "candy_pencils": 49.0,
+    "answer": 49.0
+  },
+  "correct_value": 20,
+  "flawed_value": 100,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "calen_original_pencils",
+      "question_inputs": [
+        "calen_lost_pencils",
+        "calen_remaining_pencils"
+      ],
+      "solution_line_template": "If Calen lost {calen_lost_pencils} pencils, which left him with {calen_remaining_pencils} pencils, then Calen originally had {calen_remaining_pencils}+{calen_lost_pencils}=<<{calen_remaining_pencils}+{calen_lost_pencils}={calen_original_pencils}>>{calen_original_pencils} pencils."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "caleb_pencils",
+      "question_inputs": [
+        "calen_more_than_caleb"
+      ],
+      "solution_line_template": "Calen originally had {calen_more_than_caleb} more pencils than does Caleb, and thus Caleb has {calen_original_pencils}-{calen_more_than_caleb}=<<{calen_original_pencils}-{calen_more_than_caleb}={caleb_pencils}>>{caleb_pencils} pencils."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "twice_candy_pencils",
+      "question_inputs": [
+        "multiplier_for_twice",
+        "caleb_less_than_twice_candy"
+      ],
+      "solution_line_template": "This simplifies to {multiplier_for_twice}*x={twice_candy_pencils}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "candy_pencils",
+      "question_inputs": [],
+      "solution_line_template": "Thus, the number of pencils owned by Candy is x=<<{candy_pencils}={candy_pencils}>>{candy_pencils} pencils."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Calen lost 10 pencils, which left him with 10 pencils, then Calen originally had 10+10=<<10+10=100>>100 pencils.",
+    "L2": "Calen originally had 5 more pencils than does Caleb, and thus Caleb has 100-5=<<100-5=95>>95 pencils.",
+    "L5": "This simplifies to 2*x=98.",
+    "L6": "Thus, the number of pencils owned by Candy is x=<<49=49>>49 pencils.",
+    "FA": "#### 49"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 528082734943670500,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,88 @@
+{
+  "index": 153,
+  "original_solution_mapping": {
+    "FA": "#### 135",
+    "L1": "The insurance covers 300*.75=$<<300*.75=225>>225",
+    "L2": "So he had to pay 300-225=$<<300-225=75>>75",
+    "L3": "The cats visit cost 120-60=$<<120-60=60>>60",
+    "L4": "So in total he paid 75+60=$<<75+60=135>>135"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 153.\n    Returns: the total amount Tim paid for his and his cat's visits.\n    \"\"\"\n    # L1\n    doctor_visit_cost = 300 # His doctor's visits $300\n    insurance_coverage_percent = 0.75 # insurance covered 75%\n    insurance_covered_amount = doctor_visit_cost * insurance_coverage_percent\n\n    # L2\n    paid_for_doctor_visit = doctor_visit_cost - insurance_covered_amount\n\n    # L3\n    cat_visit_cost = 120 # His cat's visit cost $120\n    pet_insurance_covered_amount = 60 # his pet insurance covered $60\n    paid_for_cat_visit = cat_visit_cost - pet_insurance_covered_amount\n\n    # L4\n    total_paid = paid_for_doctor_visit + paid_for_cat_visit\n\n    # FA\n    answer = total_paid\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "paid_for_cat_visit",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x169815390>"
+  },
+  "correct_trace": {
+    "doctor_visit_cost": 300,
+    "insurance_coverage_percent": 0.75,
+    "insurance_covered_amount": 225.0,
+    "paid_for_doctor_visit": 75.0,
+    "cat_visit_cost": 120,
+    "pet_insurance_covered_amount": 60,
+    "paid_for_cat_visit": 60,
+    "total_paid": 135.0,
+    "answer": 135.0
+  },
+  "flawed_trace": {
+    "doctor_visit_cost": 300,
+    "insurance_coverage_percent": 0.75,
+    "insurance_covered_amount": 225.0,
+    "paid_for_doctor_visit": 75.0,
+    "cat_visit_cost": 120,
+    "pet_insurance_covered_amount": 60,
+    "paid_for_cat_visit": 2.0,
+    "total_paid": 77.0,
+    "answer": 77.0
+  },
+  "correct_value": 60,
+  "flawed_value": 2.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "insurance_covered_amount",
+      "question_inputs": [
+        "doctor_visit_cost",
+        "insurance_coverage_percent"
+      ],
+      "solution_line_template": "The insurance covers {doctor_visit_cost}*{insurance_coverage_percent}=$<<{doctor_visit_cost}*{insurance_coverage_percent}={insurance_covered_amount}>>{insurance_covered_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "paid_for_doctor_visit",
+      "question_inputs": [],
+      "solution_line_template": "So he had to pay {doctor_visit_cost}-{insurance_covered_amount}=$<<{doctor_visit_cost}-{insurance_covered_amount}={paid_for_doctor_visit}>>{paid_for_doctor_visit}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "paid_for_cat_visit",
+      "question_inputs": [
+        "cat_visit_cost",
+        "pet_insurance_covered_amount"
+      ],
+      "solution_line_template": "The cats visit cost {cat_visit_cost}-{pet_insurance_covered_amount}=$<<{cat_visit_cost}-{pet_insurance_covered_amount}={paid_for_cat_visit}>>{paid_for_cat_visit}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_paid",
+      "question_inputs": [],
+      "solution_line_template": "So in total he paid {paid_for_doctor_visit}+{paid_for_cat_visit}=$<<{paid_for_doctor_visit}+{paid_for_cat_visit}={total_paid}>>{total_paid}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The insurance covers 300*0.75=$<<300*0.75=225>>225",
+    "L2": "So he had to pay 300-225=$<<300-225=75>>75",
+    "L3": "The cats visit cost 120-60=$<<120-60=2>>2",
+    "L4": "So in total he paid 75+2=$<<75+2=77>>77",
+    "FA": "#### 77"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": 4121348012910869188,
+  "model_name": "google_gemini-2.5-flash"
+}

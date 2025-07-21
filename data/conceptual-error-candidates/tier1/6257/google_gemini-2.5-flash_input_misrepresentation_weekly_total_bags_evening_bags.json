@@ -1,0 +1,89 @@
+{
+  "index": 6257,
+  "original_solution_mapping": {
+    "FA": "#### 126",
+    "L1": "Droid uses 3 x 3 = <<3*3=9>>9 bags of coffee beans in the afternoon.",
+    "L2": "He uses 3 x 2 = <<3*2=6>>6 bags of coffee beans in the evening.",
+    "L3": "So, he uses a total of 3 + 9 + 6 = <<3+9+6=18>>18 bags of coffee beans every day.",
+    "L4": "Therefore, Droid uses a total of 18 x 7 = <<18*7=126>>126 bags of coffee beans every week."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6257.\n    Returns: the total number of coffee bean bags used per week.\n    \"\"\"\n    # L1\n    morning_bags = 3 # 3 bags of coffee beans every morning\n    afternoon_multiplier = 3 # triple that number in the afternoon\n    afternoon_bags = morning_bags * afternoon_multiplier\n\n    # L2\n    evening_multiplier = 2 # twice the morning number in the evening\n    evening_bags = morning_bags * evening_multiplier\n\n    # L3\n    daily_total_bags = morning_bags + afternoon_bags + evening_bags\n\n    # L4\n    days_in_week = 7 # WK\n    weekly_total_bags = daily_total_bags * days_in_week\n\n    # FA\n    answer = weekly_total_bags\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "weekly_total_bags",
+    "operand_to_replace": "days_in_week",
+    "replacement_variable": "evening_bags"
+  },
+  "correct_trace": {
+    "morning_bags": 3,
+    "afternoon_multiplier": 3,
+    "afternoon_bags": 9,
+    "evening_multiplier": 2,
+    "evening_bags": 6,
+    "daily_total_bags": 18,
+    "days_in_week": 7,
+    "weekly_total_bags": 126,
+    "answer": 126
+  },
+  "flawed_trace": {
+    "morning_bags": 3,
+    "afternoon_multiplier": 3,
+    "afternoon_bags": 9,
+    "evening_multiplier": 2,
+    "evening_bags": 6,
+    "daily_total_bags": 18,
+    "days_in_week": 7,
+    "weekly_total_bags": 108,
+    "answer": 108
+  },
+  "correct_value": 126,
+  "flawed_value": 108,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "afternoon_bags",
+      "question_inputs": [
+        "morning_bags",
+        "afternoon_multiplier"
+      ],
+      "solution_line_template": "Droid uses {morning_bags} x {afternoon_multiplier} = <<{morning_bags}*{afternoon_multiplier}={afternoon_bags}>>{afternoon_bags} bags of coffee beans in the afternoon."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "evening_bags",
+      "question_inputs": [
+        "evening_multiplier"
+      ],
+      "solution_line_template": "He uses {morning_bags} x {evening_multiplier} = <<{morning_bags}*{evening_multiplier}={evening_bags}>>{evening_bags} bags of coffee beans in the evening."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "daily_total_bags",
+      "question_inputs": [],
+      "solution_line_template": "So, he uses a total of {morning_bags} + {afternoon_bags} + {evening_bags} = <<{morning_bags}+{afternoon_bags}+{evening_bags}={daily_total_bags}>>{daily_total_bags} bags of coffee beans every day."
+    },
+    {
+      "WK_inputs": [
+        "days_in_week"
+      ],
+      "line_number": "L4",
+      "output_variable": "weekly_total_bags",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, Droid uses a total of {daily_total_bags} x {days_in_week} = <<{daily_total_bags}*{days_in_week}={weekly_total_bags}>>{weekly_total_bags} bags of coffee beans every week."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Droid uses 3 x 3 = <<3*3=9>>9 bags of coffee beans in the afternoon.",
+    "L2": "He uses 3 x 2 = <<3*2=6>>6 bags of coffee beans in the evening.",
+    "L3": "So, he uses a total of 3 + 9 + 6 = <<3+9+6=18>>18 bags of coffee beans every day.",
+    "L4": "Therefore, Droid uses a total of 18 x 6 = <<18*6=108>>108 bags of coffee beans every week.",
+    "FA": "#### 108"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'evening_bags' (6) was used instead of 'days_in_week' (7).",
+  "repro_seed": -8943839243054631206,
+  "model_name": "google_gemini-2.5-flash"
+}

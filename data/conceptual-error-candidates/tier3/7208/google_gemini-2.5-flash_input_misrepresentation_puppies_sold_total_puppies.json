@@ -1,0 +1,75 @@
+{
+  "index": 7208,
+  "original_solution_mapping": {
+    "FA": "#### 3000",
+    "L1": "If the two expectant dogs gave birth to 10 puppies each, the total number of puppies Nalani had is 10+10= <<10+10=20>>20",
+    "L2": "When they came of age, Nalani sold 3/4 of the dogs, a total of 3/4*20 = <<3/4*20=15>>15 dogs.",
+    "L3": "If each dog sold for $200, Nalani received 15*200 = $<<15*200=3000>>3000 from the sale of the dogs."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7208.\n    Returns: the total amount of money received from the sale of the puppies.\n    \"\"\"\n    # L1\n    puppies_per_dog = 10 # 10 puppies each\n    total_puppies = puppies_per_dog + puppies_per_dog\n\n    # L2\n    fraction_sold = Fraction(3, 4) # 3/4 of the puppies\n    puppies_sold = fraction_sold * total_puppies\n\n    # L3\n    price_per_puppy = 200 # each at $200\n    total_money_received = puppies_sold * price_per_puppy\n\n    # FA\n    answer = total_money_received\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "puppies_sold",
+    "operand_to_replace": "fraction_sold",
+    "replacement_variable": "total_puppies"
+  },
+  "correct_trace": {
+    "puppies_per_dog": 10,
+    "total_puppies": 20,
+    "fraction_sold": "3/4",
+    "puppies_sold": "15",
+    "price_per_puppy": 200,
+    "total_money_received": "3000",
+    "answer": "3000"
+  },
+  "flawed_trace": {
+    "puppies_per_dog": 10,
+    "total_puppies": 20,
+    "fraction_sold": "3/4",
+    "puppies_sold": 400,
+    "price_per_puppy": 200,
+    "total_money_received": 80000,
+    "answer": 80000
+  },
+  "correct_value": "15",
+  "flawed_value": 400,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_puppies",
+      "question_inputs": [
+        "puppies_per_dog"
+      ],
+      "solution_line_template": "If the two expectant dogs gave birth to {puppies_per_dog} puppies each, the total number of puppies Nalani had is {puppies_per_dog}+{puppies_per_dog}= <<{puppies_per_dog}+{puppies_per_dog}={total_puppies}>>{total_puppies}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "puppies_sold",
+      "question_inputs": [
+        "fraction_sold"
+      ],
+      "solution_line_template": "When they came of age, Nalani sold {fraction_sold} of the dogs, a total of {fraction_sold}*{total_puppies} = <<{fraction_sold}*{total_puppies}={puppies_sold}>>{puppies_sold} dogs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_money_received",
+      "question_inputs": [
+        "price_per_puppy"
+      ],
+      "solution_line_template": "If each dog sold for ${price_per_puppy}, Nalani received {puppies_sold}*{price_per_puppy} = $<<{puppies_sold}*{price_per_puppy}={total_money_received}>>{total_money_received} from the sale of the dogs."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the two expectant dogs gave birth to 10 puppies each, the total number of puppies Nalani had is 10+10= <<10+10=20>>20",
+    "L2": "When they came of age, Nalani sold 20 of the dogs, a total of 20*20 = <<20*20=400>>400 dogs.",
+    "L3": "If each dog sold for $200, Nalani received 400*200 = $<<400*200=80000>>80000 from the sale of the dogs.",
+    "FA": "#### 80000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_puppies' (20) was used instead of 'fraction_sold' (3/4).",
+  "repro_seed": 1640041149199042176,
+  "model_name": "google_gemini-2.5-flash"
+}

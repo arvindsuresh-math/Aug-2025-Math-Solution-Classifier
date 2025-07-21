@@ -1,0 +1,89 @@
+{
+  "index": 3399,
+  "original_solution_mapping": {
+    "FA": "#### 70",
+    "L1": "There are 13-1=<<13-1=12>>12 stripes left",
+    "L2": "So there are 12/2=<<12/2=6>>6 red stripes",
+    "L3": "So the total number of red stripes is 6+1=<<6+1=7>>7 red stripes",
+    "L4": "So he has a total of 7*10=<<7*10=70>>70 red stripes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3399.\n    Returns: the total number of red stripes on all flags.\n    \"\"\"\n    # L1\n    total_stripes_per_flag = 13 # Each flag has 13 stripes\n    first_red_stripe = 1 # the first stripe is red\n    remaining_stripes = total_stripes_per_flag - first_red_stripe\n\n    # L2\n    half_divisor = 2 # half of the remaining stripes are also red\n    red_stripes_from_remaining = remaining_stripes / half_divisor\n\n    # L3\n    total_red_stripes_per_flag = red_stripes_from_remaining + first_red_stripe\n\n    # L4\n    number_of_flags = 10 # John buys 10 flags\n    total_red_stripes_all_flags = total_red_stripes_per_flag * number_of_flags\n\n    # FA\n    answer = total_red_stripes_all_flags\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_red_stripes_all_flags",
+    "operand_to_replace": "number_of_flags",
+    "replacement_variable": "red_stripes_from_remaining"
+  },
+  "correct_trace": {
+    "total_stripes_per_flag": 13,
+    "first_red_stripe": 1,
+    "remaining_stripes": 12,
+    "half_divisor": 2,
+    "red_stripes_from_remaining": 6.0,
+    "total_red_stripes_per_flag": 7.0,
+    "number_of_flags": 10,
+    "total_red_stripes_all_flags": 70.0,
+    "answer": 70.0
+  },
+  "flawed_trace": {
+    "total_stripes_per_flag": 13,
+    "first_red_stripe": 1,
+    "remaining_stripes": 12,
+    "half_divisor": 2,
+    "red_stripes_from_remaining": 6.0,
+    "total_red_stripes_per_flag": 7.0,
+    "number_of_flags": 10,
+    "total_red_stripes_all_flags": 42.0,
+    "answer": 42.0
+  },
+  "correct_value": 70.0,
+  "flawed_value": 42.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "remaining_stripes",
+      "question_inputs": [
+        "total_stripes_per_flag",
+        "first_red_stripe"
+      ],
+      "solution_line_template": "There are {total_stripes_per_flag}-{first_red_stripe}=<<{total_stripes_per_flag}-{first_red_stripe}={remaining_stripes}>>{remaining_stripes} stripes left"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "red_stripes_from_remaining",
+      "question_inputs": [
+        "half_divisor"
+      ],
+      "solution_line_template": "So there are {remaining_stripes}/{half_divisor}=<<{remaining_stripes}/{half_divisor}={red_stripes_from_remaining}>>{red_stripes_from_remaining} red stripes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_red_stripes_per_flag",
+      "question_inputs": [],
+      "solution_line_template": "So the total number of red stripes is {red_stripes_from_remaining}+{first_red_stripe}=<<{red_stripes_from_remaining}+{first_red_stripe}={total_red_stripes_per_flag}>>{total_red_stripes_per_flag} red stripes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_red_stripes_all_flags",
+      "question_inputs": [
+        "number_of_flags"
+      ],
+      "solution_line_template": "So he has a total of {total_red_stripes_per_flag}*{number_of_flags}=<<{total_red_stripes_per_flag}*{number_of_flags}={total_red_stripes_all_flags}>>{total_red_stripes_all_flags} red stripes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 13-1=<<13-1=12>>12 stripes left",
+    "L2": "So there are 12/2=<<12/2=6>>6 red stripes",
+    "L3": "So the total number of red stripes is 6+1=<<6+1=7>>7 red stripes",
+    "L4": "So he has a total of 7*6=<<7*6=42>>42 red stripes",
+    "FA": "#### 42"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'red_stripes_from_remaining' (6.0) was used instead of 'number_of_flags' (10).",
+  "repro_seed": 6366936061004610729,
+  "model_name": "google_gemini-2.5-flash"
+}

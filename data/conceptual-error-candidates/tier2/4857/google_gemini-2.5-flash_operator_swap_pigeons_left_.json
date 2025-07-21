@@ -1,0 +1,89 @@
+{
+  "index": 4857,
+  "original_solution_mapping": {
+    "FA": "#### 196",
+    "L1": "First find the total number of chicks: 40 pigeons * 6 chicks/pigeon = <<40*6=240>>240 chicks",
+    "L2": "Then add that to the number of adult pigeons to find the total number of pigeons: 240 chicks + 40 pigeons = <<240+40=280>>280 pigeons",
+    "L3": "Then multiply that number by 30% to find the number of pigeons that were eaten: 280 pigeons * 30% = <<280*30*.01=84>>84 pigeons",
+    "L4": "Then subtract that number from the total number of pigeons to find the number that are left: 280 pigeons - 84 pigeons = <<280-84=196>>196 pigeons"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4857.\n    Returns: the number of pigeons left.\n    \"\"\"\n    # L1\n    num_pigeons = 40 # 40 pigeons\n    chicks_per_pigeon = 6 # 6 chicks\n    total_chicks = num_pigeons * chicks_per_pigeon\n\n    # L2\n    total_pigeons = total_chicks + num_pigeons\n\n    # L3\n    percent_eaten_num = 30 # 30%\n    percent_factor = 0.01 # WK\n    pigeons_eaten = total_pigeons * percent_eaten_num * percent_factor\n\n    # L4\n    pigeons_left = total_pigeons - pigeons_eaten\n\n    # FA\n    answer = pigeons_left\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "pigeons_left",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x168eb0890>"
+  },
+  "correct_trace": {
+    "num_pigeons": 40,
+    "chicks_per_pigeon": 6,
+    "total_chicks": 240,
+    "total_pigeons": 280,
+    "percent_eaten_num": 30,
+    "percent_factor": 0.01,
+    "pigeons_eaten": 84.0,
+    "pigeons_left": 196.0,
+    "answer": 196.0
+  },
+  "flawed_trace": {
+    "num_pigeons": 40,
+    "chicks_per_pigeon": 6,
+    "total_chicks": 240,
+    "total_pigeons": 280,
+    "percent_eaten_num": 30,
+    "percent_factor": 0.01,
+    "pigeons_eaten": 84.0,
+    "pigeons_left": 364.0,
+    "answer": 364.0
+  },
+  "correct_value": 196.0,
+  "flawed_value": 364.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_chicks",
+      "question_inputs": [
+        "num_pigeons",
+        "chicks_per_pigeon"
+      ],
+      "solution_line_template": "First find the total number of chicks: {num_pigeons} pigeons * {chicks_per_pigeon} chicks/pigeon = <<{num_pigeons}*{chicks_per_pigeon}={total_chicks}>>{total_chicks} chicks"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_pigeons",
+      "question_inputs": [],
+      "solution_line_template": "Then add that to the number of adult pigeons to find the total number of pigeons: {total_chicks} chicks + {num_pigeons} pigeons = <<{total_chicks}+{num_pigeons}={total_pigeons}>>{total_pigeons} pigeons"
+    },
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L3",
+      "output_variable": "pigeons_eaten",
+      "question_inputs": [
+        "percent_eaten_num"
+      ],
+      "solution_line_template": "Then multiply that number by {percent_eaten_num}% to find the number of pigeons that were eaten: {total_pigeons} pigeons * {percent_eaten_num}% = <<{total_pigeons}*{percent_eaten_num}*{percent_factor}={pigeons_eaten}>>{pigeons_eaten} pigeons"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "pigeons_left",
+      "question_inputs": [],
+      "solution_line_template": "Then subtract that number from the total number of pigeons to find the number that are left: {total_pigeons} pigeons - {pigeons_eaten} pigeons = <<{total_pigeons}-{pigeons_eaten}={pigeons_left}>>{pigeons_left} pigeons"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total number of chicks: 40 pigeons * 6 chicks/pigeon = <<40*6=240>>240 chicks",
+    "L2": "Then add that to the number of adult pigeons to find the total number of pigeons: 240 chicks + 40 pigeons = <<240+40=280>>280 pigeons",
+    "L3": "Then multiply that number by 30% to find the number of pigeons that were eaten: 280 pigeons * 30% = <<280*30*0.01=84>>84 pigeons",
+    "L4": "Then subtract that number from the total number of pigeons to find the number that are left: 280 pigeons - 84 pigeons = <<280-84=364>>364 pigeons",
+    "FA": "#### 364"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 1965493258641536312,
+  "model_name": "google_gemini-2.5-flash"
+}

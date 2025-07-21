@@ -1,0 +1,63 @@
+{
+  "index": 6468,
+  "original_solution_mapping": {
+    "FA": "#### 2040",
+    "L1": "The difference in price is 2% * 2000 = $<<2*.01*2000=40>>40",
+    "L2": "So, the price of John's phone is 2000+40 = $<<2000+40=2040>>2040"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6468.\n    Returns: the amount John spent on his phone.\n    \"\"\"\n    # L1\n    price_increase_percent = 2 # 2% more expensive\n    alan_phone_price = 2000 # Alan bought a $2000 phone\n    percent_factor = 0.01 # WK\n    price_difference = price_increase_percent * percent_factor * alan_phone_price\n\n    # L2\n    john_phone_price = alan_phone_price + price_difference\n\n    # FA\n    answer = john_phone_price\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "john_phone_price",
+    "operand_to_replace": "price_difference",
+    "replacement_variable": "alan_phone_price"
+  },
+  "correct_trace": {
+    "price_increase_percent": 2,
+    "alan_phone_price": 2000,
+    "percent_factor": 0.01,
+    "price_difference": 40.0,
+    "john_phone_price": 2040.0,
+    "answer": 2040.0
+  },
+  "flawed_trace": {
+    "price_increase_percent": 2,
+    "alan_phone_price": 2000,
+    "percent_factor": 0.01,
+    "price_difference": 40.0,
+    "john_phone_price": 4000,
+    "answer": 4000
+  },
+  "correct_value": 2040.0,
+  "flawed_value": 4000,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "price_difference",
+      "question_inputs": [
+        "price_increase_percent",
+        "alan_phone_price"
+      ],
+      "solution_line_template": "The difference in price is {price_increase_percent}% * {alan_phone_price} = $<<{price_increase_percent}*{percent_factor}*{alan_phone_price}={price_difference}>>{price_difference}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "john_phone_price",
+      "question_inputs": [],
+      "solution_line_template": "So, the price of John's phone is {alan_phone_price}+{price_difference} = $<<{alan_phone_price}+{price_difference}={john_phone_price}>>{john_phone_price}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The difference in price is 2% * 2000 = $<<2*0.01*2000=40>>40",
+    "L2": "So, the price of John's phone is 2000+2000 = $<<2000+2000=4000>>4000",
+    "FA": "#### 4000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'alan_phone_price' (value: 2000) was used instead of 'price_difference' (value: 40.0).",
+  "repro_seed": 8304257275163399615,
+  "model_name": "google_gemini-2.5-flash"
+}

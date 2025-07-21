@@ -1,0 +1,90 @@
+{
+  "index": 7385,
+  "original_solution_mapping": {
+    "FA": "#### 4455",
+    "L1": "The silver has a volume of 3*3*3=<<3*3*3=27>>27 cubic inches",
+    "L2": "So it weighs 27*6=<<27*6=162>>162 ounces",
+    "L3": "So its value is 162*25=$<<162*25=4050>>4050",
+    "L4": "That means he sold it for 4050*1.1=$<<4050*1.1=4455>>4455"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7385.\n    Returns: the amount Bob sells the silver for.\n    \"\"\"\n    # L1\n    side_length = 3 # 3 inches on each side\n    volume_cubic_inches = side_length * side_length * side_length\n\n    # L2\n    weight_per_cubic_inch = 6 # A cubic inch of silver weighs 6 ounces\n    total_weight_ounces = volume_cubic_inches * weight_per_cubic_inch\n\n    # L3\n    price_per_ounce = 25 # Each ounce of silver sells for $25\n    silver_value = total_weight_ounces * price_per_ounce\n\n    # L4\n    sale_percentage_decimal = 1.1 # 110% of its silver value\n    final_sale_price = silver_value * sale_percentage_decimal\n\n    # FA\n    answer = final_sale_price\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "final_sale_price",
+    "operand_to_replace": "sale_percentage_decimal",
+    "replacement_variable": "total_weight_ounces"
+  },
+  "correct_trace": {
+    "side_length": 3,
+    "volume_cubic_inches": 27,
+    "weight_per_cubic_inch": 6,
+    "total_weight_ounces": 162,
+    "price_per_ounce": 25,
+    "silver_value": 4050,
+    "sale_percentage_decimal": 1.1,
+    "final_sale_price": 4455.0,
+    "answer": 4455.0
+  },
+  "flawed_trace": {
+    "side_length": 3,
+    "volume_cubic_inches": 27,
+    "weight_per_cubic_inch": 6,
+    "total_weight_ounces": 162,
+    "price_per_ounce": 25,
+    "silver_value": 4050,
+    "sale_percentage_decimal": 1.1,
+    "final_sale_price": 656100,
+    "answer": 656100
+  },
+  "correct_value": 4455.0,
+  "flawed_value": 656100,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "volume_cubic_inches",
+      "question_inputs": [
+        "side_length"
+      ],
+      "solution_line_template": "The silver has a volume of {side_length}*{side_length}*{side_length}=<<{side_length}*{side_length}*{side_length}={volume_cubic_inches}>>{volume_cubic_inches} cubic inches"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_weight_ounces",
+      "question_inputs": [
+        "weight_per_cubic_inch"
+      ],
+      "solution_line_template": "So it weighs {volume_cubic_inches}*{weight_per_cubic_inch}=<<{volume_cubic_inches}*{weight_per_cubic_inch}={total_weight_ounces}>>{total_weight_ounces} ounces"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "silver_value",
+      "question_inputs": [
+        "price_per_ounce"
+      ],
+      "solution_line_template": "So its value is {total_weight_ounces}*{price_per_ounce}=$<<{total_weight_ounces}*{price_per_ounce}={silver_value}>>{silver_value}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_sale_price",
+      "question_inputs": [
+        "sale_percentage_decimal"
+      ],
+      "solution_line_template": "That means he sold it for {silver_value}*{sale_percentage_decimal}=$<<{silver_value}*{sale_percentage_decimal}={final_sale_price}>>{final_sale_price}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The silver has a volume of 3*3*3=<<3*3*3=27>>27 cubic inches",
+    "L2": "So it weighs 27*6=<<27*6=162>>162 ounces",
+    "L3": "So its value is 162*25=$<<162*25=4050>>4050",
+    "L4": "That means he sold it for 4050*162=$<<4050*162=656100>>656100",
+    "FA": "#### 656100"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'total_weight_ounces' (162) was used instead of 'sale_percentage_decimal' (1.1).",
+  "repro_seed": 9158836935705733744,
+  "model_name": "google_gemini-2.5-flash"
+}

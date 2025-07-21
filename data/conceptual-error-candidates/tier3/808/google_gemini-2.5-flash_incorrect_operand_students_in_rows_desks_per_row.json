@@ -1,0 +1,95 @@
+{
+  "index": 808,
+  "original_solution_mapping": {
+    "FA": "#### 23",
+    "L1": "First find the number of absent students: 2 students * 3 - 1= <<2*3-1=5>>5 students",
+    "L2": "Now find the number of students in each row of desks: 6 desks/row * 2 students / 3 desks = 4 students/row",
+    "L3": "Now find the number of students in all the rows: 4 rows * 4 students/row = <<4*4=16>>16 students",
+    "L4": "Now add the students that are absent or in the bathroom: 16 students + 2 students + 5 students = <<16+2+5=23>>23 students"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 808.\n    Returns: the total number of students Carla teaches.\n    \"\"\"\n    # L1\n    students_in_restroom = 2 # 2 students are in the restroom\n    multiplier_absent = 3 # three times that number\n    subtractor_absent = 1 # one less than\n    absent_students = students_in_restroom * multiplier_absent - subtractor_absent\n\n    # L2\n    desks_per_row = 6 # six desks each\n    fraction_full = Fraction(2, 3) # 2/3 full\n    students_per_row = desks_per_row * fraction_full\n\n    # L3\n    num_rows = 4 # four rows\n    students_in_rows = num_rows * students_per_row\n\n    # L4\n    total_students_carla_teaches = students_in_rows + students_in_restroom + absent_students\n\n    # FA\n    answer = total_students_carla_teaches\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "students_in_rows",
+    "operand_to_replace": "students_per_row",
+    "replacement_variable": "desks_per_row"
+  },
+  "correct_trace": {
+    "students_in_restroom": 2,
+    "multiplier_absent": 3,
+    "subtractor_absent": 1,
+    "absent_students": 5,
+    "desks_per_row": 6,
+    "fraction_full": "2/3",
+    "students_per_row": "4",
+    "num_rows": 4,
+    "students_in_rows": "16",
+    "total_students_carla_teaches": "23",
+    "answer": "23"
+  },
+  "flawed_trace": {
+    "students_in_restroom": 2,
+    "multiplier_absent": 3,
+    "subtractor_absent": 1,
+    "absent_students": 5,
+    "desks_per_row": 6,
+    "fraction_full": "2/3",
+    "students_per_row": "4",
+    "num_rows": 4,
+    "students_in_rows": 24,
+    "total_students_carla_teaches": 31,
+    "answer": 31
+  },
+  "correct_value": "16",
+  "flawed_value": 24,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "absent_students",
+      "question_inputs": [
+        "students_in_restroom",
+        "multiplier_absent",
+        "subtractor_absent"
+      ],
+      "solution_line_template": "First find the number of absent students: {students_in_restroom} students * {multiplier_absent} - {subtractor_absent}= <<{students_in_restroom}*{multiplier_absent}-{subtractor_absent}={absent_students}>>{absent_students} students"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "students_per_row",
+      "question_inputs": [
+        "desks_per_row",
+        "fraction_full"
+      ],
+      "solution_line_template": "Now find the number of students in each row of desks: {desks_per_row} desks/row * {fraction_full} = {students_per_row} students/row"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "students_in_rows",
+      "question_inputs": [
+        "num_rows"
+      ],
+      "solution_line_template": "Now find the number of students in all the rows: {num_rows} rows * {students_per_row} students/row = <<{num_rows}*{students_per_row}={students_in_rows}>>{students_in_rows} students"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_students_carla_teaches",
+      "question_inputs": [],
+      "solution_line_template": "Now add the students that are absent or in the bathroom: {students_in_rows} students + {students_in_restroom} students + {absent_students} students = <<{students_in_rows}+{students_in_restroom}+{absent_students}={total_students_carla_teaches}>>{total_students_carla_teaches} students"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the number of absent students: 2 students * 3 - 1= <<2*3-1=5>>5 students",
+    "L2": "Now find the number of students in each row of desks: 6 desks/row * 2/3 = 4 students/row",
+    "L3": "Now find the number of students in all the rows: 4 rows * 6 students/row = <<4*6=24>>24 students",
+    "L4": "Now add the students that are absent or in the bathroom: 24 students + 2 students + 5 students = <<24+2+5=31>>31 students",
+    "FA": "#### 31"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'desks_per_row' (value: 6) was used instead of 'students_per_row' (value: 4).",
+  "repro_seed": 7506986804332174578,
+  "model_name": "google_gemini-2.5-flash"
+}

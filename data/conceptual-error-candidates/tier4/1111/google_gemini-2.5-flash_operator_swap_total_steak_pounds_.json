@@ -1,0 +1,92 @@
+{
+  "index": 1111,
+  "original_solution_mapping": {
+    "FA": "#### 42",
+    "L1": "She ordered 4 1/2 pound steaks so that's 4*.5 = <<4*.5=2>>2 pounds of steak.",
+    "L2": "The steak cost $15.00 a pound and she bought 2 pounds so that's 15*2 = $<<15*2=30.00>>30.00 for 4 steaks.",
+    "L3": "She also needed 1.5 pounds of chicken breasts at $8.00 a pound so that's 1.5*8 = $<<1.5*8=12.00>>12.00 for chicken.",
+    "L4": "The steaks cost $30.00 and the chicken cost $12.00 for a total of 30+12 = $<<30+12=42.00>>42.00 spent at the butchers."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1111.\n    Returns: the total amount spent at the butchers.\n    \"\"\"\n    # L1\n    num_steaks = 4 # 4 1/2 pound steaks\n    steak_weight_per_steak = 0.5 # 1/2 pound steaks\n    total_steak_pounds = num_steaks * steak_weight_per_steak\n\n    # L2\n    steak_cost_per_pound = 15.00 # $15.00/pound\n    total_steak_cost = steak_cost_per_pound * total_steak_pounds\n\n    # L3\n    chicken_pounds = 1.5 # a pound and half of chicken breasts\n    chicken_cost_per_pound = 8.00 # $8.00 a pound\n    total_chicken_cost = chicken_pounds * chicken_cost_per_pound\n\n    # L4\n    total_spent = total_steak_cost + total_chicken_cost\n\n    # FA\n    answer = total_spent\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_steak_pounds",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x30b42cad0>"
+  },
+  "correct_trace": {
+    "num_steaks": 4,
+    "steak_weight_per_steak": 0.5,
+    "total_steak_pounds": 2.0,
+    "steak_cost_per_pound": 15.0,
+    "total_steak_cost": 30.0,
+    "chicken_pounds": 1.5,
+    "chicken_cost_per_pound": 8.0,
+    "total_chicken_cost": 12.0,
+    "total_spent": 42.0,
+    "answer": 42.0
+  },
+  "flawed_trace": {
+    "num_steaks": 4,
+    "steak_weight_per_steak": 0.5,
+    "total_steak_pounds": 8.0,
+    "steak_cost_per_pound": 15.0,
+    "total_steak_cost": 120.0,
+    "chicken_pounds": 1.5,
+    "chicken_cost_per_pound": 8.0,
+    "total_chicken_cost": 12.0,
+    "total_spent": 132.0,
+    "answer": 132.0
+  },
+  "correct_value": 2.0,
+  "flawed_value": 8.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_steak_pounds",
+      "question_inputs": [
+        "num_steaks",
+        "steak_weight_per_steak"
+      ],
+      "solution_line_template": "She ordered 4 1/2 pound steaks so that's {num_steaks}*{steak_weight_per_steak} = <<{num_steaks}*{steak_weight_per_steak}={total_steak_pounds}>>{total_steak_pounds} pounds of steak."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_steak_cost",
+      "question_inputs": [
+        "steak_cost_per_pound"
+      ],
+      "solution_line_template": "The steak cost ${steak_cost_per_pound} a pound and she bought {total_steak_pounds} pounds so that's {steak_cost_per_pound}*{total_steak_pounds} = $<<{steak_cost_per_pound}*{total_steak_pounds}={total_steak_cost}>>{total_steak_cost} for 4 steaks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_chicken_cost",
+      "question_inputs": [
+        "chicken_pounds",
+        "chicken_cost_per_pound"
+      ],
+      "solution_line_template": "She also needed {chicken_pounds} pounds of chicken breasts at ${chicken_cost_per_pound} a pound so that's {chicken_pounds}*{chicken_cost_per_pound} = $<<{chicken_pounds}*{chicken_cost_per_pound}={total_chicken_cost}>>{total_chicken_cost} for chicken."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_spent",
+      "question_inputs": [],
+      "solution_line_template": "The steaks cost ${total_steak_cost} and the chicken cost ${total_chicken_cost} for a total of {total_steak_cost}+{total_chicken_cost} = $<<{total_steak_cost}+{total_chicken_cost}={total_spent}>>{total_spent} spent at the butchers."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She ordered 4 1/2 pound steaks so that's 4*0.5 = <<4*0.5=8>>8 pounds of steak.",
+    "L2": "The steak cost $15 a pound and she bought 8 pounds so that's 15*8 = $<<15*8=120>>120 for 4 steaks.",
+    "L3": "She also needed 1.5 pounds of chicken breasts at $8 a pound so that's 1.5*8 = $<<1.5*8=12>>12 for chicken.",
+    "L4": "The steaks cost $120 and the chicken cost $12 for a total of 120+12 = $<<120+12=132>>132 spent at the butchers.",
+    "FA": "#### 132"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 8114300153381049248,
+  "model_name": "google_gemini-2.5-flash"
+}

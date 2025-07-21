@@ -1,0 +1,109 @@
+{
+  "index": 3869,
+  "original_solution_mapping": {
+    "FA": "#### 19",
+    "L1": "Tom ideally wants to sleep 8 hours a night for 7 days, 8 x 7 = <<8*7=56>>56 hours sleep total for the week.",
+    "L2": "Tom has actually only slept 5 hours each weeknight, 5 x 5 = <<5*5=25>>25 hours of sleep.",
+    "L3": "Tom has only slept 6 hours each night on the weekend, 6 x 2 = <<6*2=12>>12 hours of sleep.",
+    "L4": "Total, Tom has gotten 25 + 12 hours = <<25+12=37>>37 hours sleep.",
+    "L5": "The difference between how many hours Tom would like to sleep, 56, and how many hours he's actually slept, 37, is 56 - 37 = <<56-37=19>>19 hours of sleep that Tom is behind on."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3869.\n    Returns: the number of hours of sleep Tom is behind on from the last week.\n    \"\"\"\n    # L1\n    ideal_sleep_per_night = 8 # 8 hours of sleep each night\n    days_in_week = 7 # WK\n    ideal_total_sleep = ideal_sleep_per_night * days_in_week\n\n    # L2\n    actual_sleep_weeknight = 5 # 5 hours of sleep each weeknight\n    weeknights_per_week = 5 # WK\n    actual_sleep_weeknights_total = actual_sleep_weeknight * weeknights_per_week\n\n    # L3\n    actual_sleep_weekend_night = 6 # 6 hours each night on the weekend\n    weekend_nights_per_week = 2 # WK\n    actual_sleep_weekend_total = actual_sleep_weekend_night * weekend_nights_per_week\n\n    # L4\n    actual_total_sleep = actual_sleep_weeknights_total + actual_sleep_weekend_total\n\n    # L5\n    sleep_deficit = ideal_total_sleep - actual_total_sleep\n\n    # FA\n    answer = sleep_deficit\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "actual_sleep_weeknights_total",
+    "operand_to_replace": "actual_sleep_weeknight",
+    "replacement_variable": "ideal_sleep_per_night"
+  },
+  "correct_trace": {
+    "ideal_sleep_per_night": 8,
+    "days_in_week": 7,
+    "ideal_total_sleep": 56,
+    "actual_sleep_weeknight": 5,
+    "weeknights_per_week": 5,
+    "actual_sleep_weeknights_total": 25,
+    "actual_sleep_weekend_night": 6,
+    "weekend_nights_per_week": 2,
+    "actual_sleep_weekend_total": 12,
+    "actual_total_sleep": 37,
+    "sleep_deficit": 19,
+    "answer": 19
+  },
+  "flawed_trace": {
+    "ideal_sleep_per_night": 8,
+    "days_in_week": 7,
+    "ideal_total_sleep": 56,
+    "actual_sleep_weeknight": 5,
+    "weeknights_per_week": 5,
+    "actual_sleep_weeknights_total": 40,
+    "actual_sleep_weekend_night": 6,
+    "weekend_nights_per_week": 2,
+    "actual_sleep_weekend_total": 12,
+    "actual_total_sleep": 52,
+    "sleep_deficit": 4,
+    "answer": 4
+  },
+  "correct_value": 25,
+  "flawed_value": 40,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "days_in_week"
+      ],
+      "line_number": "L1",
+      "output_variable": "ideal_total_sleep",
+      "question_inputs": [
+        "ideal_sleep_per_night"
+      ],
+      "solution_line_template": "Tom ideally wants to sleep {ideal_sleep_per_night} hours a night for {days_in_week} days, {ideal_sleep_per_night} x {days_in_week} = <<{ideal_sleep_per_night}*{days_in_week}={ideal_total_sleep}>>{ideal_total_sleep} hours sleep total for the week."
+    },
+    {
+      "WK_inputs": [
+        "weeknights_per_week"
+      ],
+      "line_number": "L2",
+      "output_variable": "actual_sleep_weeknights_total",
+      "question_inputs": [
+        "actual_sleep_weeknight"
+      ],
+      "solution_line_template": "Tom has actually only slept {actual_sleep_weeknight} hours each weeknight, {actual_sleep_weeknight} x {weeknights_per_week} = <<{actual_sleep_weeknight}*{weeknights_per_week}={actual_sleep_weeknights_total}>>{actual_sleep_weeknights_total} hours of sleep."
+    },
+    {
+      "WK_inputs": [
+        "weekend_nights_per_week"
+      ],
+      "line_number": "L3",
+      "output_variable": "actual_sleep_weekend_total",
+      "question_inputs": [
+        "actual_sleep_weekend_night"
+      ],
+      "solution_line_template": "Tom has only slept {actual_sleep_weekend_night} hours each night on the weekend, {actual_sleep_weekend_night} x {weekend_nights_per_week} = <<{actual_sleep_weekend_night}*{weekend_nights_per_week}={actual_sleep_weekend_total}>>{actual_sleep_weekend_total} hours of sleep."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "actual_total_sleep",
+      "question_inputs": [],
+      "solution_line_template": "Total, Tom has gotten {actual_sleep_weeknights_total} + {actual_sleep_weekend_total} hours = <<{actual_sleep_weeknights_total}+{actual_sleep_weekend_total}={actual_total_sleep}>>{actual_total_sleep} hours sleep."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "sleep_deficit",
+      "question_inputs": [],
+      "solution_line_template": "The difference between how many hours Tom would like to sleep, {ideal_total_sleep}, and how many hours he's actually slept, {actual_total_sleep}, is {ideal_total_sleep} - {actual_total_sleep} = <<{ideal_total_sleep}-{actual_total_sleep}={sleep_deficit}>>{sleep_deficit} hours of sleep that Tom is behind on."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Tom ideally wants to sleep 8 hours a night for 7 days, 8 x 7 = <<8*7=56>>56 hours sleep total for the week.",
+    "L2": "Tom has actually only slept 8 hours each weeknight, 8 x 5 = <<8*5=40>>40 hours of sleep.",
+    "L3": "Tom has only slept 6 hours each night on the weekend, 6 x 2 = <<6*2=12>>12 hours of sleep.",
+    "L4": "Total, Tom has gotten 40 + 12 hours = <<40+12=52>>52 hours sleep.",
+    "L5": "The difference between how many hours Tom would like to sleep, 56, and how many hours he's actually slept, 52, is 56 - 52 = <<56-52=4>>4 hours of sleep that Tom is behind on.",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'ideal_sleep_per_night' (8) was used instead of 'actual_sleep_weeknight' (5).",
+  "repro_seed": -766135559902028677,
+  "model_name": "google_gemini-2.5-flash"
+}

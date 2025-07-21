@@ -1,0 +1,104 @@
+{
+  "index": 7046,
+  "original_solution_mapping": {
+    "FA": "#### 24",
+    "L1": "She uses 7 x 2 = <<7*2=14>>14 gallons of water to clean the two cars.",
+    "L2": "She uses 14 - 11 = <<14-11=3>>3 gallons of water to water the plants.",
+    "L3": "The total gallons of water that she uses to clean the cars and to water the plants is 14 + 3 = <<14+3=17>>17.",
+    "L4": "Jan has 65 - 17 = <<65-17=48>>48 gallons of water remaining after cleaning the cars and watering the plants.",
+    "L5": "Jan uses 48 / 2 = <<48/2=24>>24 gallons of water to wash her plates and clothes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7046.\n    Returns: the number of gallons of water Jan uses to wash her plates and clothes.\n    \"\"\"\n    # L1\n    gallons_per_car = 7 # uses 7 gallons of water each\n    num_cars = 2 # clean the two cars\n    water_for_cars = gallons_per_car * num_cars\n\n    # L2\n    less_gallons_for_plants = 11 # uses 11 fewer gallons than the two cars\n    water_for_plants = water_for_cars - less_gallons_for_plants\n\n    # L3\n    total_water_used_initial = water_for_cars + water_for_plants\n\n    # L4\n    initial_gallons = 65 # collected 65 gallons of water in a barrel\n    remaining_gallons_after_initial_use = initial_gallons - total_water_used_initial\n\n    # L5\n    divisor_for_plates_clothes = 2 # half of the remaining gallons\n    water_for_plates_clothes = remaining_gallons_after_initial_use / divisor_for_plates_clothes\n\n    # FA\n    answer = water_for_plates_clothes\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "water_for_plates_clothes",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x30b32d390>"
+  },
+  "correct_trace": {
+    "gallons_per_car": 7,
+    "num_cars": 2,
+    "water_for_cars": 14,
+    "less_gallons_for_plants": 11,
+    "water_for_plants": 3,
+    "total_water_used_initial": 17,
+    "initial_gallons": 65,
+    "remaining_gallons_after_initial_use": 48,
+    "divisor_for_plates_clothes": 2,
+    "water_for_plates_clothes": 24.0,
+    "answer": 24.0
+  },
+  "flawed_trace": {
+    "gallons_per_car": 7,
+    "num_cars": 2,
+    "water_for_cars": 14,
+    "less_gallons_for_plants": 11,
+    "water_for_plants": 3,
+    "total_water_used_initial": 17,
+    "initial_gallons": 65,
+    "remaining_gallons_after_initial_use": 48,
+    "divisor_for_plates_clothes": 2,
+    "water_for_plates_clothes": 96,
+    "answer": 96
+  },
+  "correct_value": 24.0,
+  "flawed_value": 96,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "water_for_cars",
+      "question_inputs": [
+        "gallons_per_car",
+        "num_cars"
+      ],
+      "solution_line_template": "She uses {gallons_per_car} x {num_cars} = <<{gallons_per_car}*{num_cars}={water_for_cars}>>{water_for_cars} gallons of water to clean the two cars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "water_for_plants",
+      "question_inputs": [
+        "less_gallons_for_plants"
+      ],
+      "solution_line_template": "She uses {water_for_cars} - {less_gallons_for_plants} = <<{water_for_cars}-{less_gallons_for_plants}={water_for_plants}>>{water_for_plants} gallons of water to water the plants."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_water_used_initial",
+      "question_inputs": [],
+      "solution_line_template": "The total gallons of water that she uses to clean the cars and to water the plants is {water_for_cars} + {water_for_plants} = <<{water_for_cars}+{water_for_plants}={total_water_used_initial}>>{total_water_used_initial}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "remaining_gallons_after_initial_use",
+      "question_inputs": [
+        "initial_gallons"
+      ],
+      "solution_line_template": "Jan has {initial_gallons} - {total_water_used_initial} = <<{initial_gallons}-{total_water_used_initial}={remaining_gallons_after_initial_use}>>{remaining_gallons_after_initial_use} gallons of water remaining after cleaning the cars and watering the plants."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "water_for_plates_clothes",
+      "question_inputs": [
+        "divisor_for_plates_clothes"
+      ],
+      "solution_line_template": "Jan uses {remaining_gallons_after_initial_use} / {divisor_for_plates_clothes} = <<{remaining_gallons_after_initial_use}/{divisor_for_plates_clothes}={water_for_plates_clothes}>>{water_for_plates_clothes} gallons of water to wash her plates and clothes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She uses 7 x 2 = <<7*2=14>>14 gallons of water to clean the two cars.",
+    "L2": "She uses 14 - 11 = <<14-11=3>>3 gallons of water to water the plants.",
+    "L3": "The total gallons of water that she uses to clean the cars and to water the plants is 14 + 3 = <<14+3=17>>17.",
+    "L4": "Jan has 65 - 17 = <<65-17=48>>48 gallons of water remaining after cleaning the cars and watering the plants.",
+    "L5": "Jan uses 48 / 2 = <<48/2=96>>96 gallons of water to wash her plates and clothes.",
+    "FA": "#### 96"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 6886066364553496085,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,82 @@
+{
+  "index": 6564,
+  "original_solution_mapping": {
+    "FA": "#### 120",
+    "L1": "65% of women are opposed to the idea because 100 - 35 = <<100-35=65>>65",
+    "L2": "There are 60 women in the poll because 39 / .65 = <<39/.65=60>>60",
+    "L3": "There were 120 people in her poll because 60 / .5 = <<60/.5=120>>120"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6564.\n    Returns: the total number of people polled.\n    \"\"\"\n    # L1\n    total_percent = 100 # WK\n    women_in_favor_percent = 35 # 35% of women are in favor\n    women_opposed_percent = total_percent - women_in_favor_percent\n\n    # L2\n    women_opposed_count = 39 # 39 women in her poll opposed this idea\n    women_opposed_decimal = 0.65 # from solution text: .65\n    total_women_polled = women_opposed_count / women_opposed_decimal\n\n    # L3\n    women_percentage_of_total = 0.5 # 50% women\n    total_people_polled = total_women_polled / women_percentage_of_total\n\n    # FA\n    answer = total_people_polled\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_women_polled",
+    "operand_to_replace": "women_opposed_decimal",
+    "replacement_variable": "women_opposed_count"
+  },
+  "correct_trace": {
+    "total_percent": 100,
+    "women_in_favor_percent": 35,
+    "women_opposed_percent": 65,
+    "women_opposed_count": 39,
+    "women_opposed_decimal": 0.65,
+    "total_women_polled": 60.0,
+    "women_percentage_of_total": 0.5,
+    "total_people_polled": 120.0,
+    "answer": 120.0
+  },
+  "flawed_trace": {
+    "total_percent": 100,
+    "women_in_favor_percent": 35,
+    "women_opposed_percent": 65,
+    "women_opposed_count": 39,
+    "women_opposed_decimal": 0.65,
+    "total_women_polled": 1.0,
+    "women_percentage_of_total": 0.5,
+    "total_people_polled": 2.0,
+    "answer": 2.0
+  },
+  "correct_value": 60.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_percent"
+      ],
+      "line_number": "L1",
+      "output_variable": "women_opposed_percent",
+      "question_inputs": [
+        "women_in_favor_percent"
+      ],
+      "solution_line_template": "65% of women are opposed to the idea because {total_percent} - {women_in_favor_percent} = <<{total_percent}-{women_in_favor_percent}={women_opposed_percent}>>{women_opposed_percent}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_women_polled",
+      "question_inputs": [
+        "women_opposed_count",
+        "women_opposed_decimal"
+      ],
+      "solution_line_template": "There are {total_women_polled} women in the poll because {women_opposed_count} / {women_opposed_decimal} = <<{women_opposed_count}/{women_opposed_decimal}={total_women_polled}>>{total_women_polled}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_people_polled",
+      "question_inputs": [
+        "women_percentage_of_total"
+      ],
+      "solution_line_template": "There were {total_people_polled} people in her poll because {total_women_polled} / {women_percentage_of_total} = <<{total_women_polled}/{women_percentage_of_total}={total_people_polled}>>{total_people_polled}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "65% of women are opposed to the idea because 100 - 35 = <<100-35=65>>65",
+    "L2": "There are 1 women in the poll because 39 / 39 = <<39/39=1>>1",
+    "L3": "There were 2 people in her poll because 1 / 0.5 = <<1/0.5=2>>2",
+    "FA": "#### 2"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'women_opposed_count' (39) was used instead of 'women_opposed_decimal' (0.65).",
+  "repro_seed": -8236769841739185704,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,91 @@
+{
+  "index": 6842,
+  "original_solution_mapping": {
+    "FA": "#### 250",
+    "L1": "500/ 2/5 = 200 seats are already taken.",
+    "L2": "500/ 1/10 = <<500/1/10=50>>50 seats are broken.",
+    "L3": "So 200 + 50 = <<200+50=250>>250 seats are either taken or broken.",
+    "L4": "Therefore, 500 - 250 = <<500-250=250>>250 seats are still available."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6842.\n    Returns: the number of seats still available in the auditorium.\n    \"\"\"\n    # L1\n    total_seats = 500 # auditorium that holds 500 people\n    taken_fraction_numerator = 2 # Two-fifths of the seats\n    taken_fraction_denominator = 5 # Two-fifths of the seats\n    seats_taken = total_seats * Fraction(taken_fraction_numerator, taken_fraction_denominator)\n\n    # L2\n    broken_fraction_numerator = 1 # 1/10 of the seats\n    broken_fraction_denominator = 10 # 1/10 of the seats\n    seats_broken = total_seats * Fraction(broken_fraction_numerator, broken_fraction_denominator)\n\n    # L3\n    taken_or_broken_seats = seats_taken + seats_broken\n\n    # L4\n    available_seats = total_seats - taken_or_broken_seats\n\n    # FA\n    answer = available_seats\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "taken_or_broken_seats",
+    "operand_to_replace": "seats_broken",
+    "replacement_variable": "broken_fraction_denominator"
+  },
+  "correct_trace": {
+    "total_seats": 500,
+    "taken_fraction_numerator": 2,
+    "taken_fraction_denominator": 5,
+    "seats_taken": "200",
+    "broken_fraction_numerator": 1,
+    "broken_fraction_denominator": 10,
+    "seats_broken": "50",
+    "taken_or_broken_seats": "250",
+    "available_seats": "250",
+    "answer": "250"
+  },
+  "flawed_trace": {
+    "total_seats": 500,
+    "taken_fraction_numerator": 2,
+    "taken_fraction_denominator": 5,
+    "seats_taken": "200",
+    "broken_fraction_numerator": 1,
+    "broken_fraction_denominator": 10,
+    "seats_broken": "50",
+    "taken_or_broken_seats": "210",
+    "available_seats": "290",
+    "answer": "290"
+  },
+  "correct_value": "250",
+  "flawed_value": "210",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "seats_taken",
+      "question_inputs": [
+        "total_seats",
+        "taken_fraction_numerator",
+        "taken_fraction_denominator"
+      ],
+      "solution_line_template": "{total_seats}/ {taken_fraction_numerator}/{taken_fraction_denominator} = {seats_taken} seats are already taken."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "seats_broken",
+      "question_inputs": [
+        "broken_fraction_numerator",
+        "broken_fraction_denominator"
+      ],
+      "solution_line_template": "{total_seats}/ {broken_fraction_numerator}/{broken_fraction_denominator} = <<{total_seats}/{broken_fraction_numerator}/{broken_fraction_denominator}={seats_broken}>>{seats_broken} seats are broken."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "taken_or_broken_seats",
+      "question_inputs": [],
+      "solution_line_template": "So {seats_taken} + {seats_broken} = <<{seats_taken}+{seats_broken}={taken_or_broken_seats}>>{taken_or_broken_seats} seats are either taken or broken."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "available_seats",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, {total_seats} - {taken_or_broken_seats} = <<{total_seats}-{taken_or_broken_seats}={available_seats}>>{available_seats} seats are still available."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "500/ 2/5 = 200 seats are already taken.",
+    "L2": "500/ 1/10 = <<500/1/10=50>>50 seats are broken.",
+    "L3": "So 200 + 10 = <<200+10=210>>210 seats are either taken or broken.",
+    "L4": "Therefore, 500 - 210 = <<500-210=290>>290 seats are still available.",
+    "FA": "#### 290"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'broken_fraction_denominator' (value: 10) was used instead of 'seats_broken' (value: 50).",
+  "repro_seed": 3469887511715691798,
+  "model_name": "google_gemini-2.5-flash"
+}

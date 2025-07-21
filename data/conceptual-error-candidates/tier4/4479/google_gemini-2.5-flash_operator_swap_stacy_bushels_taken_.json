@@ -1,0 +1,95 @@
+{
+  "index": 4479,
+  "original_solution_mapping": {
+    "FA": "#### 357",
+    "L1": "Stacy took 21 ears of corn, there are 14 ears to a bushel, so she took 21 ears / 14 ears/bushel = <<21/14=1.5>>1.5 bushels of corn.",
+    "L2": "In all, Bob gave away 8 bushels + 3 bushels + 12 bushels + 1.5 bushels = <<8+3+12+1.5=24.5>>24.5 bushels of corn.",
+    "L3": "This leaves him with 50 bushels - 24.5 bushels = <<50-24.5=25.5>>25.5 bushels of corn.",
+    "L4": "At 14 ears of corn per bushel, Bob has 25.5 bushels * 14 ears per bushel = <<25.5*14=357>>357 ears of corn."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4479.\n    Returns: the number of ears of corn Bob has left.\n    \"\"\"\n    # L1\n    stacy_ears_taken = 21 # 21 ears of corn\n    ears_per_bushel = 14 # 14 ears of corn\n    stacy_bushels_taken = stacy_ears_taken / ears_per_bushel\n\n    # L2\n    terry_bushels = 8 # 8 bushels\n    jerry_bushels = 3 # 3\n    linda_bushels = 12 # 12 bushels\n    total_bushels_given_away = terry_bushels + jerry_bushels + linda_bushels + stacy_bushels_taken\n\n    # L3\n    initial_bushels = 50 # 50 bushels\n    remaining_bushels = initial_bushels - total_bushels_given_away\n\n    # L4\n    remaining_ears = remaining_bushels * ears_per_bushel\n\n    # FA\n    answer = remaining_ears\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "stacy_bushels_taken",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x30cb9b6d0>"
+  },
+  "correct_trace": {
+    "stacy_ears_taken": 21,
+    "ears_per_bushel": 14,
+    "stacy_bushels_taken": 1.5,
+    "terry_bushels": 8,
+    "jerry_bushels": 3,
+    "linda_bushels": 12,
+    "total_bushels_given_away": 24.5,
+    "initial_bushels": 50,
+    "remaining_bushels": 25.5,
+    "remaining_ears": 357.0,
+    "answer": 357.0
+  },
+  "flawed_trace": {
+    "stacy_ears_taken": 21,
+    "ears_per_bushel": 14,
+    "stacy_bushels_taken": 7,
+    "terry_bushels": 8,
+    "jerry_bushels": 3,
+    "linda_bushels": 12,
+    "total_bushels_given_away": 30,
+    "initial_bushels": 50,
+    "remaining_bushels": 20,
+    "remaining_ears": 280,
+    "answer": 280
+  },
+  "correct_value": 1.5,
+  "flawed_value": 7,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "stacy_bushels_taken",
+      "question_inputs": [
+        "stacy_ears_taken",
+        "ears_per_bushel"
+      ],
+      "solution_line_template": "Stacy took {stacy_ears_taken} ears of corn, there are {ears_per_bushel} ears to a bushel, so she took {stacy_ears_taken} ears / {ears_per_bushel} ears/bushel = <<{stacy_ears_taken}/{ears_per_bushel}={stacy_bushels_taken}>>{stacy_bushels_taken} bushels of corn."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_bushels_given_away",
+      "question_inputs": [
+        "terry_bushels",
+        "jerry_bushels",
+        "linda_bushels"
+      ],
+      "solution_line_template": "In all, Bob gave away {terry_bushels} bushels + {jerry_bushels} bushels + {linda_bushels} bushels + {stacy_bushels_taken} bushels = <<{terry_bushels}+{jerry_bushels}+{linda_bushels}+{stacy_bushels_taken}={total_bushels_given_away}>>{total_bushels_given_away} bushels of corn."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_bushels",
+      "question_inputs": [
+        "initial_bushels"
+      ],
+      "solution_line_template": "This leaves him with {initial_bushels} bushels - {total_bushels_given_away} bushels = <<{initial_bushels}-{total_bushels_given_away}={remaining_bushels}>>{remaining_bushels} bushels of corn."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "remaining_ears",
+      "question_inputs": [],
+      "solution_line_template": "At {ears_per_bushel} ears of corn per bushel, Bob has {remaining_bushels} bushels * {ears_per_bushel} ears per bushel = <<{remaining_bushels}*{ears_per_bushel}={remaining_ears}>>{remaining_ears} ears of corn."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Stacy took 21 ears of corn, there are 14 ears to a bushel, so she took 21 ears / 14 ears/bushel = <<21/14=7>>7 bushels of corn.",
+    "L2": "In all, Bob gave away 8 bushels + 3 bushels + 12 bushels + 7 bushels = <<8+3+12+7=30>>30 bushels of corn.",
+    "L3": "This leaves him with 50 bushels - 30 bushels = <<50-30=20>>20 bushels of corn.",
+    "L4": "At 14 ears of corn per bushel, Bob has 20 bushels * 14 ears per bushel = <<20*14=280>>280 ears of corn.",
+    "FA": "#### 280"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 614947301341559723,
+  "model_name": "google_gemini-2.5-flash"
+}

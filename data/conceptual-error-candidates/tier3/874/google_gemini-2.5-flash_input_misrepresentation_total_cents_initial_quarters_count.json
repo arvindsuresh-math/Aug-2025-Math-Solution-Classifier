@@ -1,0 +1,79 @@
+{
+  "index": 874,
+  "original_solution_mapping": {
+    "FA": "#### 300",
+    "L1": "Winston has 350 cents because 14 x 25 = <<14*25=350>>350",
+    "L2": "He spends 50 cents because $1 / 2 = 50 cents",
+    "L3": "He has 300 cents left at the end."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 874.\n    Returns: the number of cents Winston has left.\n    \"\"\"\n    # L1\n    quarters_count = 14 # 14 quarters\n    cents_per_quarter = 25 # WK\n    total_cents_initial = quarters_count * cents_per_quarter\n\n    # L2\n    dollar_value_cents = 100 # WK\n    half_dollar_divisor = 2 # half a dollar\n    spent_cents = dollar_value_cents / half_dollar_divisor\n\n    # L3\n    remaining_cents = total_cents_initial - spent_cents\n\n    # FA\n    answer = remaining_cents\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cents_initial",
+    "operand_to_replace": "cents_per_quarter",
+    "replacement_variable": "quarters_count"
+  },
+  "correct_trace": {
+    "quarters_count": 14,
+    "cents_per_quarter": 25,
+    "total_cents_initial": 350,
+    "dollar_value_cents": 100,
+    "half_dollar_divisor": 2,
+    "spent_cents": 50.0,
+    "remaining_cents": 300.0,
+    "answer": 300.0
+  },
+  "flawed_trace": {
+    "quarters_count": 14,
+    "cents_per_quarter": 25,
+    "total_cents_initial": 196,
+    "dollar_value_cents": 100,
+    "half_dollar_divisor": 2,
+    "spent_cents": 50.0,
+    "remaining_cents": 146.0,
+    "answer": 146.0
+  },
+  "correct_value": 350,
+  "flawed_value": 196,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "cents_per_quarter"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_cents_initial",
+      "question_inputs": [
+        "quarters_count"
+      ],
+      "solution_line_template": "Winston has {total_cents_initial} cents because {quarters_count} x {cents_per_quarter} = <<{quarters_count}*{cents_per_quarter}={total_cents_initial}>>{total_cents_initial}"
+    },
+    {
+      "WK_inputs": [
+        "dollar_value_cents"
+      ],
+      "line_number": "L2",
+      "output_variable": "spent_cents",
+      "question_inputs": [
+        "half_dollar_divisor"
+      ],
+      "solution_line_template": "He spends {spent_cents} cents because ${dollar_value_cents} / {half_dollar_divisor} = {spent_cents} cents"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_cents",
+      "question_inputs": [],
+      "solution_line_template": "He has {remaining_cents} cents left at the end."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Winston has 196 cents because 14 x 14 = <<14*14=196>>196",
+    "L2": "He spends 50 cents because $100 / 2 = 50 cents",
+    "L3": "He has 146 cents left at the end.",
+    "FA": "#### 146"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'quarters_count' (14) was used instead of 'cents_per_quarter' (25).",
+  "repro_seed": -4945714558213064414,
+  "model_name": "google_gemini-2.5-flash"
+}

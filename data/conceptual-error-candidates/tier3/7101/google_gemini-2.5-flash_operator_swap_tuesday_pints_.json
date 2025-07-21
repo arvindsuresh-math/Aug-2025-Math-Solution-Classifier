@@ -1,0 +1,100 @@
+{
+  "index": 7101,
+  "original_solution_mapping": {
+    "FA": "#### 18",
+    "L1": "On Monday she bought 4*3=<<4*3=12>>12 pints",
+    "L2": "On Tuesday she bought 12/3=<<12/3=4>>4 pints",
+    "L3": "Before she returned any she had 4+12+4=<<4+12+4=20>>20 pints",
+    "L4": "She returned 4/2=<<4/2=2>>2 pints",
+    "L5": "After returning she had 20-2=<<20-2=18>>18 pints"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7101.\n    Returns: the total number of pints of ice cream Alice had on Wednesday.\n    \"\"\"\n    # L1\n    sunday_pints = 4 # On Sunday Alice bought 4 pints\n    monday_multiplier = 3 # three times that number of pints\n    monday_pints = sunday_pints * monday_multiplier\n\n    # L2\n    tuesday_divisor = 3 # one-third of the number of pints she bought the day before\n    tuesday_pints = monday_pints / tuesday_divisor\n\n    # L3\n    total_pints_before_return = sunday_pints + monday_pints + tuesday_pints\n\n    # L4\n    return_divisor = 2 # half of the pints she bought the day before\n    returned_pints = tuesday_pints / return_divisor\n\n    # L5\n    final_pints_wednesday = total_pints_before_return - returned_pints\n\n    # FA\n    answer = final_pints_wednesday\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "tuesday_pints",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x30b3d6dd0>"
+  },
+  "correct_trace": {
+    "sunday_pints": 4,
+    "monday_multiplier": 3,
+    "monday_pints": 12,
+    "tuesday_divisor": 3,
+    "tuesday_pints": 4.0,
+    "total_pints_before_return": 20.0,
+    "return_divisor": 2,
+    "returned_pints": 2.0,
+    "final_pints_wednesday": 18.0,
+    "answer": 18.0
+  },
+  "flawed_trace": {
+    "sunday_pints": 4,
+    "monday_multiplier": 3,
+    "monday_pints": 12,
+    "tuesday_divisor": 3,
+    "tuesday_pints": 36,
+    "total_pints_before_return": 52,
+    "return_divisor": 2,
+    "returned_pints": 18.0,
+    "final_pints_wednesday": 34.0,
+    "answer": 34.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 36,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "monday_pints",
+      "question_inputs": [
+        "sunday_pints",
+        "monday_multiplier"
+      ],
+      "solution_line_template": "On Monday she bought {sunday_pints}*{monday_multiplier}=<<{sunday_pints}*{monday_multiplier}={monday_pints}>>{monday_pints} pints"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "tuesday_pints",
+      "question_inputs": [
+        "tuesday_divisor"
+      ],
+      "solution_line_template": "On Tuesday she bought {monday_pints}/{tuesday_divisor}=<<{monday_pints}/{tuesday_divisor}={tuesday_pints}>>{tuesday_pints} pints"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_pints_before_return",
+      "question_inputs": [],
+      "solution_line_template": "Before she returned any she had {sunday_pints}+{monday_pints}+{tuesday_pints}=<<{sunday_pints}+{monday_pints}+{tuesday_pints}={total_pints_before_return}>>{total_pints_before_return} pints"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "returned_pints",
+      "question_inputs": [
+        "return_divisor"
+      ],
+      "solution_line_template": "She returned {tuesday_pints}/{return_divisor}=<<{tuesday_pints}/{return_divisor}={returned_pints}>>{returned_pints} pints"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "final_pints_wednesday",
+      "question_inputs": [],
+      "solution_line_template": "After returning she had {total_pints_before_return}-{returned_pints}=<<{total_pints_before_return}-{returned_pints}={final_pints_wednesday}>>{final_pints_wednesday} pints"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Monday she bought 4*3=<<4*3=12>>12 pints",
+    "L2": "On Tuesday she bought 12/3=<<12/3=36>>36 pints",
+    "L3": "Before she returned any she had 4+12+36=<<4+12+36=52>>52 pints",
+    "L4": "She returned 36/2=<<36/2=18>>18 pints",
+    "L5": "After returning she had 52-18=<<52-18=34>>34 pints",
+    "FA": "#### 34"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -2098682061886945484,
+  "model_name": "google_gemini-2.5-flash"
+}

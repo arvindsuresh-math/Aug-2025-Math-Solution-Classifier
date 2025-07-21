@@ -1,0 +1,63 @@
+{
+  "index": 2896,
+  "original_solution_mapping": {
+    "FA": "#### 1500",
+    "L1": "Each cut piece is 20/2=<<20/2=10>>10 feet long",
+    "L2": "So they each weigh 10*150=<<10*150=1500>>1500 pounds"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2896.\n    Returns: the weight of each cut piece of the log.\n    \"\"\"\n    # L1\n    log_length = 20 # a 20-foot log\n    cut_divisor = 2 # cuts it in half\n    piece_length = log_length / cut_divisor\n\n    # L2\n    weight_per_foot = 150 # each linear foot of the log weighs 150 pounds\n    piece_weight = piece_length * weight_per_foot\n\n    # FA\n    answer = piece_weight\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "piece_length",
+    "operand_to_replace": "cut_divisor",
+    "replacement_variable": "log_length"
+  },
+  "correct_trace": {
+    "log_length": 20,
+    "cut_divisor": 2,
+    "piece_length": 10.0,
+    "weight_per_foot": 150,
+    "piece_weight": 1500.0,
+    "answer": 1500.0
+  },
+  "flawed_trace": {
+    "log_length": 20,
+    "cut_divisor": 2,
+    "piece_length": 1.0,
+    "weight_per_foot": 150,
+    "piece_weight": 150.0,
+    "answer": 150.0
+  },
+  "correct_value": 10.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "piece_length",
+      "question_inputs": [
+        "log_length",
+        "cut_divisor"
+      ],
+      "solution_line_template": "Each cut piece is {log_length}/{cut_divisor}=<<{log_length}/{cut_divisor}={piece_length}>>{piece_length} feet long"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "piece_weight",
+      "question_inputs": [
+        "weight_per_foot"
+      ],
+      "solution_line_template": "So they each weigh {piece_length}*{weight_per_foot}=<<{piece_length}*{weight_per_foot}={piece_weight}>>{piece_weight} pounds"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each cut piece is 20/20=<<20/20=1>>1 feet long",
+    "L2": "So they each weigh 1*150=<<1*150=150>>150 pounds",
+    "FA": "#### 150"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'log_length' (20) was used instead of 'cut_divisor' (2).",
+  "repro_seed": 8102011110515143388,
+  "model_name": "google_gemini-2.5-flash"
+}

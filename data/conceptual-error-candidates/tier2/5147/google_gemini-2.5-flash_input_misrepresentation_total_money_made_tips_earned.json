@@ -1,0 +1,63 @@
+{
+  "index": 5147,
+  "original_solution_mapping": {
+    "FA": "#### 37",
+    "L1": "She served 20 people and they all tipped her $1.25 so she made 20*1.25 = $<<20*1.25=25.00>>25.00 in tips",
+    "L2": "She makes $12.00 an hour and she made $25.00 in tips so she made 12+25 = $<<12+25=37.00>>37.00 in one hour"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5147.\n    Returns: the total money Rachel made in that hour.\n    \"\"\"\n    # L1\n    num_people_served = 20 # serves 20 different people\n    tip_per_person = 1.25 # leave her a $1.25 tip\n    tips_earned = num_people_served * tip_per_person\n\n    # L2\n    hourly_wage = 12.00 # makes $12.00 as a waitress\n    total_money_made = hourly_wage + tips_earned\n\n    # FA\n    answer = total_money_made\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_money_made",
+    "operand_to_replace": "hourly_wage",
+    "replacement_variable": "tips_earned"
+  },
+  "correct_trace": {
+    "num_people_served": 20,
+    "tip_per_person": 1.25,
+    "tips_earned": 25.0,
+    "hourly_wage": 12.0,
+    "total_money_made": 37.0,
+    "answer": 37.0
+  },
+  "flawed_trace": {
+    "num_people_served": 20,
+    "tip_per_person": 1.25,
+    "tips_earned": 25.0,
+    "hourly_wage": 12.0,
+    "total_money_made": 50.0,
+    "answer": 50.0
+  },
+  "correct_value": 37.0,
+  "flawed_value": 50.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "tips_earned",
+      "question_inputs": [
+        "num_people_served",
+        "tip_per_person"
+      ],
+      "solution_line_template": "She served {num_people_served} people and they all tipped her ${tip_per_person} so she made {num_people_served}*{tip_per_person} = $<<{num_people_served}*{tip_per_person}={tips_earned}>>{tips_earned} in tips"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_money_made",
+      "question_inputs": [
+        "hourly_wage"
+      ],
+      "solution_line_template": "She makes ${hourly_wage} an hour and she made ${tips_earned} in tips so she made {hourly_wage}+{tips_earned} = $<<{hourly_wage}+{tips_earned}={total_money_made}>>{total_money_made} in one hour"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She served 20 people and they all tipped her $1.25 so she made 20*1.25 = $<<20*1.25=25>>25 in tips",
+    "L2": "She makes $25 an hour and she made $25 in tips so she made 25+25 = $<<25+25=50>>50 in one hour",
+    "FA": "#### 50"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'tips_earned' (25.0) was used instead of 'hourly_wage' (12.0).",
+  "repro_seed": -6872144470157884084,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,106 @@
+{
+  "index": 1487,
+  "original_solution_mapping": {
+    "FA": "#### 300",
+    "L1": "If 10 hens lay 80 eggs, then 1 hen lays 80 / 10 = <<80/10=8>>8 eggs in 10 days.",
+    "L2": "That means one hen is laying 8 / 2 = <<8/2=4>>4 eggs in 5 days.",
+    "L3": "So in 15 days, 1 hen will lay 3 times more eggs, so 4 * 3 = 12 eggs.",
+    "L4": "All hens in total will then lay 25 * 12 = <<25*12=300>>300 eggs in 15 days."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1487.\n    Returns: the total number of eggs all hens will lay in 15 days.\n    \"\"\"\n    # L1\n    initial_hens = 10 # 10 hens\n    initial_eggs = 80 # 80 eggs\n    days_L1 = 10 # in 10 days\n    eggs_per_hen_10_days = initial_eggs / initial_hens\n\n    # L2\n    divisor_L2 = 2 # WK\n    target_days_L2 = 5 # in 5 days\n    eggs_per_hen_5_days = eggs_per_hen_10_days / divisor_L2\n\n    # L3\n    target_days_L3 = 15 # in 15 days\n    multiplier_L3 = 3 # WK\n    eggs_per_hen_15_days = eggs_per_hen_5_days * multiplier_L3\n\n    # L4\n    new_hens = 15 # 15 more hens\n    total_hens = initial_hens + new_hens\n    total_eggs_15_days = total_hens * eggs_per_hen_15_days\n\n    # FA\n    answer = total_eggs_15_days\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "eggs_per_hen_15_days",
+    "operand_to_replace": "multiplier_L3",
+    "replacement_variable": "eggs_per_hen_10_days"
+  },
+  "correct_trace": {
+    "initial_hens": 10,
+    "initial_eggs": 80,
+    "days_L1": 10,
+    "eggs_per_hen_10_days": 8.0,
+    "divisor_L2": 2,
+    "target_days_L2": 5,
+    "eggs_per_hen_5_days": 4.0,
+    "target_days_L3": 15,
+    "multiplier_L3": 3,
+    "eggs_per_hen_15_days": 12.0,
+    "new_hens": 15,
+    "total_hens": 25,
+    "total_eggs_15_days": 300.0,
+    "answer": 300.0
+  },
+  "flawed_trace": {
+    "initial_hens": 10,
+    "initial_eggs": 80,
+    "days_L1": 10,
+    "eggs_per_hen_10_days": 8.0,
+    "divisor_L2": 2,
+    "target_days_L2": 5,
+    "eggs_per_hen_5_days": 4.0,
+    "target_days_L3": 15,
+    "multiplier_L3": 3,
+    "eggs_per_hen_15_days": 32.0,
+    "new_hens": 15,
+    "total_hens": 25,
+    "total_eggs_15_days": 800.0,
+    "answer": 800.0
+  },
+  "correct_value": 12.0,
+  "flawed_value": 32.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "eggs_per_hen_10_days",
+      "question_inputs": [
+        "initial_hens",
+        "initial_eggs",
+        "days_L1"
+      ],
+      "solution_line_template": "If {initial_hens} hens lay {initial_eggs} eggs, then 1 hen lays {initial_eggs} / {initial_hens} = <<{initial_eggs}/{initial_hens}={eggs_per_hen_10_days}>>{eggs_per_hen_10_days} eggs in {days_L1} days."
+    },
+    {
+      "WK_inputs": [
+        "divisor_L2"
+      ],
+      "line_number": "L2",
+      "output_variable": "eggs_per_hen_5_days",
+      "question_inputs": [
+        "target_days_L2"
+      ],
+      "solution_line_template": "That means one hen is laying {eggs_per_hen_10_days} / {divisor_L2} = <<{eggs_per_hen_10_days}/{divisor_L2}={eggs_per_hen_5_days}>>{eggs_per_hen_5_days} eggs in {target_days_L2} days."
+    },
+    {
+      "WK_inputs": [
+        "multiplier_L3"
+      ],
+      "line_number": "L3",
+      "output_variable": "eggs_per_hen_15_days",
+      "question_inputs": [
+        "target_days_L3"
+      ],
+      "solution_line_template": "So in {target_days_L3} days, 1 hen will lay {multiplier_L3} times more eggs, so {eggs_per_hen_5_days} * {multiplier_L3} = {eggs_per_hen_15_days} eggs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_eggs_15_days",
+      "question_inputs": [
+        "new_hens"
+      ],
+      "solution_line_template": "All hens in total will then lay {total_hens} * {eggs_per_hen_15_days} = <<{total_hens}*{eggs_per_hen_15_days}={total_eggs_15_days}>>{total_eggs_15_days} eggs in {target_days_L3} days."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If 10 hens lay 80 eggs, then 1 hen lays 80 / 10 = <<80/10=8>>8 eggs in 10 days.",
+    "L2": "That means one hen is laying 8 / 2 = <<8/2=4>>4 eggs in 5 days.",
+    "L3": "So in 15 days, 1 hen will lay 8 times more eggs, so 4 * 8 = 32 eggs.",
+    "L4": "All hens in total will then lay 25 * 32 = <<25*32=800>>800 eggs in 15 days.",
+    "FA": "#### 800"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'eggs_per_hen_10_days' (8.0) was used instead of 'multiplier_L3' (3).",
+  "repro_seed": -9222220432826884829,
+  "model_name": "google_gemini-2.5-flash"
+}

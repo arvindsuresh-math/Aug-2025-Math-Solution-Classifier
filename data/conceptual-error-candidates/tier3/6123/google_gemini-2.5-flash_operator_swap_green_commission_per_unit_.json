@@ -1,0 +1,111 @@
+{
+  "index": 6123,
+  "original_solution_mapping": {
+    "FA": "#### 5,000",
+    "L1": "For red tractors, 10% of the sales price is 10/100*$20,000 = $<<10/100*20000=2000>>2000.",
+    "L2": "By selling two red tractors, he earned 2*$2000 = $<<2*2000=4000>>4000.",
+    "L3": "Thus, of the $7000 salary he was paid this week, $7000-$4000 = $<<7000-4000=3000>>3000 is from sales of green tractors.",
+    "L4": "And since he sold three green tractors, the commission for the sale of a single green tractor is $3000/3=$<<3000/3=1000>>1000,",
+    "L5": "If $1000 is 20% of the full price, then the full price for a green tractor is (100/20)*$1000 = $5000."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6123.\n    Returns: the full price of a single green tractor.\n    \"\"\"\n    # L1\n    red_commission_rate = Fraction(10, 100) # 10% of the sales price\n    red_tractor_price = 20000 # The price of a single red tractor is $20,000\n    red_commission_per_unit = red_commission_rate * red_tractor_price\n\n    # L2\n    num_red_tractors_sold = 2 # sold 2 red tractors\n    earnings_from_red_tractors = num_red_tractors_sold * red_commission_per_unit\n\n    # L3\n    total_salary = 7000 # Tobias's salary was $7000\n    earnings_from_green_tractors = total_salary - earnings_from_red_tractors\n\n    # L4\n    num_green_tractors_sold = 3 # sold 3 green tractors\n    green_commission_per_unit = earnings_from_green_tractors / num_green_tractors_sold\n\n    # L5\n    green_commission_rate_inverse_numerator = 100 # (100/20)\n    green_commission_rate_inverse_denominator = 20 # (100/20)\n    full_price_green_tractor = (green_commission_rate_inverse_numerator / green_commission_rate_inverse_denominator) * green_commission_per_unit\n\n    # FA\n    answer = full_price_green_tractor\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "green_commission_per_unit",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x30b54df50>"
+  },
+  "correct_trace": {
+    "red_commission_rate": "1/10",
+    "red_tractor_price": 20000,
+    "red_commission_per_unit": "2000",
+    "num_red_tractors_sold": 2,
+    "earnings_from_red_tractors": "4000",
+    "total_salary": 7000,
+    "earnings_from_green_tractors": "3000",
+    "num_green_tractors_sold": 3,
+    "green_commission_per_unit": "1000",
+    "green_commission_rate_inverse_numerator": 100,
+    "green_commission_rate_inverse_denominator": 20,
+    "full_price_green_tractor": 5000.0,
+    "answer": 5000.0
+  },
+  "flawed_trace": {
+    "red_commission_rate": "1/10",
+    "red_tractor_price": 20000,
+    "red_commission_per_unit": "2000",
+    "num_red_tractors_sold": 2,
+    "earnings_from_red_tractors": "4000",
+    "total_salary": 7000,
+    "earnings_from_green_tractors": "3000",
+    "num_green_tractors_sold": 3,
+    "green_commission_per_unit": "9000",
+    "green_commission_rate_inverse_numerator": 100,
+    "green_commission_rate_inverse_denominator": 20,
+    "full_price_green_tractor": 45000.0,
+    "answer": 45000.0
+  },
+  "correct_value": "1000",
+  "flawed_value": "9000",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "red_commission_per_unit",
+      "question_inputs": [
+        "red_commission_rate",
+        "red_tractor_price"
+      ],
+      "solution_line_template": "For red tractors, {red_commission_rate}*${red_tractor_price} = $<<{red_commission_rate}*{red_tractor_price}={red_commission_per_unit}>>{red_commission_per_unit}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "earnings_from_red_tractors",
+      "question_inputs": [
+        "num_red_tractors_sold"
+      ],
+      "solution_line_template": "By selling {num_red_tractors_sold}*${red_commission_per_unit} = $<<{num_red_tractors_sold}*{red_commission_per_unit}={earnings_from_red_tractors}>>{earnings_from_red_tractors}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "earnings_from_green_tractors",
+      "question_inputs": [
+        "total_salary"
+      ],
+      "solution_line_template": "Thus, of the ${total_salary} salary he was paid this week, ${total_salary}-${earnings_from_red_tractors} = $<<{total_salary}-{earnings_from_red_tractors}={earnings_from_green_tractors}>>{earnings_from_green_tractors} is from sales of green tractors."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "green_commission_per_unit",
+      "question_inputs": [
+        "num_green_tractors_sold"
+      ],
+      "solution_line_template": "And since he sold {num_green_tractors_sold} green tractors, the commission for the sale of a single green tractor is ${earnings_from_green_tractors}/{num_green_tractors_sold}=${green_commission_per_unit}<<{earnings_from_green_tractors}/{num_green_tractors_sold}={green_commission_per_unit}>>{green_commission_per_unit},"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "full_price_green_tractor",
+      "question_inputs": [
+        "green_commission_rate_inverse_numerator",
+        "green_commission_rate_inverse_denominator"
+      ],
+      "solution_line_template": "If ${green_commission_per_unit} is 20% of the full price, then the full price for a green tractor is ({green_commission_rate_inverse_numerator}/{green_commission_rate_inverse_denominator})*${green_commission_per_unit} = ${full_price_green_tractor}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "For red tractors, 10/100*$20000 = $<<10/100*20000=2000>>2000.",
+    "L2": "By selling 2*$2000 = $<<2*2000=4000>>4000.",
+    "L3": "Thus, of the $7000 salary he was paid this week, $7000-$4000 = $<<7000-4000=3000>>3000 is from sales of green tractors.",
+    "L4": "And since he sold 3 green tractors, the commission for the sale of a single green tractor is $3000/3=$9000<<3000/3=9000>>9000,",
+    "L5": "If $9000 is 20% of the full price, then the full price for a green tractor is (100/20)*$9000 = $45000.",
+    "FA": "#### 45000"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -5144239157538968392,
+  "model_name": "google_gemini-2.5-flash"
+}

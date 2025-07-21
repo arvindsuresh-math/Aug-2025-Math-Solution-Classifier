@@ -1,0 +1,74 @@
+{
+  "index": 3480,
+  "original_solution_mapping": {
+    "FA": "#### 200",
+    "L1": "Chelsea baked 4 batches of cupcakes x 20 minutes each = <<4*20=80>>80 minutes of baking.",
+    "L2": "She iced 4 batches of cupcakes x 30 minutes each = <<4*30=120>>120 minutes.",
+    "L3": "It took Chelsea 80 + 120 = <<80+120=200>>200 minutes to make the cupcakes for the bake sale."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3480.\n    Returns: the total time it took Chelsea to make the cupcakes.\n    \"\"\"\n    # L1\n    num_batches = 4 # 4 batches of cupcakes\n    baking_time_per_batch = 20 # 20 minutes to bake\n    total_baking_time = num_batches * baking_time_per_batch\n\n    # L2\n    icing_time_per_batch = 30 # 30 minutes to ice per batch\n    total_icing_time = num_batches * icing_time_per_batch\n\n    # L3\n    total_time = total_baking_time + total_icing_time\n\n    # FA\n    answer = total_time\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_baking_time",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x1721ba290>"
+  },
+  "correct_trace": {
+    "num_batches": 4,
+    "baking_time_per_batch": 20,
+    "total_baking_time": 80,
+    "icing_time_per_batch": 30,
+    "total_icing_time": 120,
+    "total_time": 200,
+    "answer": 200
+  },
+  "flawed_trace": {
+    "num_batches": 4,
+    "baking_time_per_batch": 20,
+    "total_baking_time": 24,
+    "icing_time_per_batch": 30,
+    "total_icing_time": 120,
+    "total_time": 144,
+    "answer": 144
+  },
+  "correct_value": 80,
+  "flawed_value": 24,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_baking_time",
+      "question_inputs": [
+        "num_batches",
+        "baking_time_per_batch"
+      ],
+      "solution_line_template": "Chelsea baked {num_batches} batches of cupcakes x {baking_time_per_batch} minutes each = <<{num_batches}*{baking_time_per_batch}={total_baking_time}>>{total_baking_time} minutes of baking."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_icing_time",
+      "question_inputs": [
+        "icing_time_per_batch"
+      ],
+      "solution_line_template": "She iced {num_batches} batches of cupcakes x {icing_time_per_batch} minutes each = <<{num_batches}*{icing_time_per_batch}={total_icing_time}>>{total_icing_time} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_time",
+      "question_inputs": [],
+      "solution_line_template": "It took Chelsea {total_baking_time} + {total_icing_time} = <<{total_baking_time}+{total_icing_time}={total_time}>>{total_time} minutes to make the cupcakes for the bake sale."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Chelsea baked 4 batches of cupcakes x 20 minutes each = <<4*20=24>>24 minutes of baking.",
+    "L2": "She iced 4 batches of cupcakes x 30 minutes each = <<4*30=120>>120 minutes.",
+    "L3": "It took Chelsea 24 + 120 = <<24+120=144>>144 minutes to make the cupcakes for the bake sale.",
+    "FA": "#### 144"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 3830450096588558042,
+  "model_name": "google_gemini-2.5-flash"
+}

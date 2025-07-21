@@ -1,0 +1,84 @@
+{
+  "index": 847,
+  "original_solution_mapping": {
+    "FA": "#### 11",
+    "L1": "His total expenditure so far is $50+$35+$15 = $<<50+35+15=100>>100",
+    "L2": "To make a profit of 10%, he has to make a total of $100+($100*(10/100) = $<<100+(100*(10/100))=110>>110 from sales",
+    "L3": "To make $110 from the sales of 10 bags, each bag should cost $110/10 = $<<110/10=11>>11"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 847.\n    Returns: the selling price per bag to make a 10% profit.\n    \"\"\"\n    # L1\n    corn_seeds_cost = 50 # spent $50 on corn seeds\n    fertilizers_pesticides_cost = 35 # $35 on fertilizers and pesticides\n    labor_cost = 15 # $15 on labor\n    total_expenditure = corn_seeds_cost + fertilizers_pesticides_cost + labor_cost\n\n    # L2\n    profit_percentage_numerator = 10 # profit of 10%\n    profit_percentage_denominator = 100 # profit of 10%\n    target_sales_revenue = total_expenditure + (total_expenditure * (profit_percentage_numerator / profit_percentage_denominator))\n\n    # L3\n    num_bags = 10 # gather 10 bags of corn\n    price_per_bag = target_sales_revenue / num_bags\n\n    # FA\n    answer = price_per_bag\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "target_sales_revenue",
+    "operand_to_replace": "profit_percentage_numerator",
+    "replacement_variable": "profit_percentage_denominator"
+  },
+  "correct_trace": {
+    "corn_seeds_cost": 50,
+    "fertilizers_pesticides_cost": 35,
+    "labor_cost": 15,
+    "total_expenditure": 100,
+    "profit_percentage_numerator": 10,
+    "profit_percentage_denominator": 100,
+    "target_sales_revenue": 110.0,
+    "num_bags": 10,
+    "price_per_bag": 11.0,
+    "answer": 11.0
+  },
+  "flawed_trace": {
+    "corn_seeds_cost": 50,
+    "fertilizers_pesticides_cost": 35,
+    "labor_cost": 15,
+    "total_expenditure": 100,
+    "profit_percentage_numerator": 10,
+    "profit_percentage_denominator": 100,
+    "target_sales_revenue": 200.0,
+    "num_bags": 10,
+    "price_per_bag": 20.0,
+    "answer": 20.0
+  },
+  "correct_value": 110.0,
+  "flawed_value": 200.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_expenditure",
+      "question_inputs": [
+        "corn_seeds_cost",
+        "fertilizers_pesticides_cost",
+        "labor_cost"
+      ],
+      "solution_line_template": "His total expenditure so far is ${corn_seeds_cost}+${fertilizers_pesticides_cost}+${labor_cost} = $<<{corn_seeds_cost}+{fertilizers_pesticides_cost}+{labor_cost}={total_expenditure}>>{total_expenditure}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "target_sales_revenue",
+      "question_inputs": [
+        "profit_percentage_numerator",
+        "profit_percentage_denominator"
+      ],
+      "solution_line_template": "To make a profit of {profit_percentage_numerator}%, he has to make a total of ${total_expenditure}+(${total_expenditure}*({profit_percentage_numerator}/{profit_percentage_denominator})) = $<<{total_expenditure}+({total_expenditure}*({profit_percentage_numerator}/{profit_percentage_denominator}))={target_sales_revenue}>>{target_sales_revenue} from sales"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "price_per_bag",
+      "question_inputs": [
+        "num_bags"
+      ],
+      "solution_line_template": "To make ${target_sales_revenue} from the sales of {num_bags} bags, each bag should cost ${target_sales_revenue}/{num_bags} = $<<{target_sales_revenue}/{num_bags}={price_per_bag}>>{price_per_bag}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "His total expenditure so far is $50+$35+$15 = $<<50+35+15=100>>100",
+    "L2": "To make a profit of 100%, he has to make a total of $100+($100*(100/100)) = $<<100+(100*(100/100))=200>>200 from sales",
+    "L3": "To make $200 from the sales of 10 bags, each bag should cost $200/10 = $<<200/10=20>>20",
+    "FA": "#### 20"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'profit_percentage_denominator' (100) was used instead of 'profit_percentage_numerator' (10).",
+  "repro_seed": -4248033613952076426,
+  "model_name": "google_gemini-2.5-flash"
+}

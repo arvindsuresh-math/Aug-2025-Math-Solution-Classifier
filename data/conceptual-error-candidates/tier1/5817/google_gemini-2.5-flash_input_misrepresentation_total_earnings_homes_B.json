@@ -1,0 +1,90 @@
+{
+  "index": 5817,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "First, we need to determine which neighborhood is the better choice by comparing the number of boxes sold. A has 10 houses which will buy 2 boxes each, meaning A will give Jenny 10*2=<<10*2=20>>20 box sales",
+    "L2": "Neighborhood B has 5 homes which will each buy 5 boxes, meaning she will sell 5*5=<<5*5=25>>25 boxes by going to that neighborhood.",
+    "L3": "Since 25>20, this means Jenny should choose neighborhood B.",
+    "L4": "Since Jenny earns $2 per box sold, this means she will earn 25*2=<<25*2=50>>50 dollars by choosing neighborhood B."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5817.\n    Returns: the total earnings Jenny will make at the better choice of the two neighborhoods.\n    \"\"\"\n    # L1\n    homes_A = 10 # 10 homes\n    boxes_per_home_A = 2 # 2 boxes of cookies\n    boxes_sold_A = homes_A * boxes_per_home_A\n\n    # L2\n    homes_B = 5 # 5 homes\n    boxes_per_home_B = 5 # 5 boxes of cookies\n    boxes_sold_B = homes_B * boxes_per_home_B\n\n    # L4\n    cost_per_box = 2 # each box of cookies costs $2\n    total_earnings = boxes_sold_B * cost_per_box\n\n    # FA\n    answer = total_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_earnings",
+    "operand_to_replace": "cost_per_box",
+    "replacement_variable": "homes_B"
+  },
+  "correct_trace": {
+    "homes_A": 10,
+    "boxes_per_home_A": 2,
+    "boxes_sold_A": 20,
+    "homes_B": 5,
+    "boxes_per_home_B": 5,
+    "boxes_sold_B": 25,
+    "cost_per_box": 2,
+    "total_earnings": 50,
+    "answer": 50
+  },
+  "flawed_trace": {
+    "homes_A": 10,
+    "boxes_per_home_A": 2,
+    "boxes_sold_A": 20,
+    "homes_B": 5,
+    "boxes_per_home_B": 5,
+    "boxes_sold_B": 25,
+    "cost_per_box": 2,
+    "total_earnings": 125,
+    "answer": 125
+  },
+  "correct_value": 50,
+  "flawed_value": 125,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "boxes_sold_A",
+      "question_inputs": [
+        "homes_A",
+        "boxes_per_home_A"
+      ],
+      "solution_line_template": "First, we need to determine which neighborhood is the better choice by comparing the number of boxes sold. A has {homes_A} homes which each will buy {boxes_per_home_A} boxes, meaning A will give Jenny {homes_A}*{boxes_per_home_A}=<<{homes_A}*{boxes_per_home_A}={boxes_sold_A}>>{boxes_sold_A} box sales"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "boxes_sold_B",
+      "question_inputs": [
+        "homes_B",
+        "boxes_per_home_B"
+      ],
+      "solution_line_template": "Neighborhood B has {homes_B} homes which will each buy {boxes_per_home_B} boxes, meaning she will sell {homes_B}*{boxes_per_home_B}=<<{homes_B}*{boxes_per_home_B}={boxes_sold_B}>>{boxes_sold_B} boxes by going to that neighborhood."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "None",
+      "question_inputs": [],
+      "solution_line_template": "Since {boxes_sold_B}>{boxes_sold_A}, this means Jenny should choose neighborhood B."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_earnings",
+      "question_inputs": [
+        "cost_per_box"
+      ],
+      "solution_line_template": "Since Jenny earns ${cost_per_box} per box sold, this means she will earn {boxes_sold_B}*{cost_per_box}=<<{boxes_sold_B}*{cost_per_box}={total_earnings}>>{total_earnings} dollars by choosing neighborhood B."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First, we need to determine which neighborhood is the better choice by comparing the number of boxes sold. A has 10 homes which each will buy 2 boxes, meaning A will give Jenny 10*2=<<10*2=20>>20 box sales",
+    "L2": "Neighborhood B has 5 homes which will each buy 5 boxes, meaning she will sell 5*5=<<5*5=25>>25 boxes by going to that neighborhood.",
+    "L3": "Since 25>20, this means Jenny should choose neighborhood B.",
+    "L4": "Since Jenny earns $5 per box sold, this means she will earn 25*5=<<25*5=125>>125 dollars by choosing neighborhood B.",
+    "FA": "#### 125"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'homes_B' (5) was used instead of 'cost_per_box' (2).",
+  "repro_seed": 3249095474556489718,
+  "model_name": "google_gemini-2.5-flash"
+}

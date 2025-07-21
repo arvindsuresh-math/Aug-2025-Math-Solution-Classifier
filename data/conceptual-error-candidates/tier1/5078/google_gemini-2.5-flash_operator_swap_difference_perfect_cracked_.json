@@ -1,0 +1,89 @@
+{
+  "index": 5078,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "2 dozen eggs means 2 x 12 = <<2*12=24>>24 eggs",
+    "L2": "3 x 2 = <<3*2=6>>6 eggs cracked.",
+    "L3": "The remaining eggs still in perfect condition is 24 - 3 - 6 = <<24-3-6=15>>15",
+    "L4": "The difference between the perfect eggs and cracked eggs is 15 - 6 = <<15-6=9>>9 eggs."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5078.\n    Returns: the difference between the eggs that are still in perfect condition and those that are cracked.\n    \"\"\"\n    # L1\n    num_dozen_eggs = 2 # 2 dozen eggs\n    dozen = 12 # WK\n    total_initial_eggs = num_dozen_eggs * dozen\n\n    # L2\n    broken_eggs = 3 # 3 eggs broke\n    cracked_multiplier = 2 # twice as many cracked\n    cracked_eggs = broken_eggs * cracked_multiplier\n\n    # L3\n    perfect_eggs = total_initial_eggs - broken_eggs - cracked_eggs\n\n    # L4\n    difference_perfect_cracked = perfect_eggs - cracked_eggs\n\n    # FA\n    answer = difference_perfect_cracked\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "difference_perfect_cracked",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x16a375a90>"
+  },
+  "correct_trace": {
+    "num_dozen_eggs": 2,
+    "dozen": 12,
+    "total_initial_eggs": 24,
+    "broken_eggs": 3,
+    "cracked_multiplier": 2,
+    "cracked_eggs": 6,
+    "perfect_eggs": 15,
+    "difference_perfect_cracked": 9,
+    "answer": 9
+  },
+  "flawed_trace": {
+    "num_dozen_eggs": 2,
+    "dozen": 12,
+    "total_initial_eggs": 24,
+    "broken_eggs": 3,
+    "cracked_multiplier": 2,
+    "cracked_eggs": 6,
+    "perfect_eggs": 15,
+    "difference_perfect_cracked": 21,
+    "answer": 21
+  },
+  "correct_value": 9,
+  "flawed_value": 21,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "dozen"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_initial_eggs",
+      "question_inputs": [
+        "num_dozen_eggs"
+      ],
+      "solution_line_template": "{num_dozen_eggs} dozen eggs means {num_dozen_eggs} x {dozen} = <<{num_dozen_eggs}*{dozen}={total_initial_eggs}>>{total_initial_eggs} eggs"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cracked_eggs",
+      "question_inputs": [
+        "broken_eggs",
+        "cracked_multiplier"
+      ],
+      "solution_line_template": "{broken_eggs} x {cracked_multiplier} = <<{broken_eggs}*{cracked_multiplier}={cracked_eggs}>>{cracked_eggs} eggs cracked."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "perfect_eggs",
+      "question_inputs": [],
+      "solution_line_template": "The remaining eggs still in perfect condition is {total_initial_eggs} - {broken_eggs} - {cracked_eggs} = <<{total_initial_eggs}-{broken_eggs}-{cracked_eggs}={perfect_eggs}>>{perfect_eggs}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "difference_perfect_cracked",
+      "question_inputs": [],
+      "solution_line_template": "The difference between the perfect eggs and cracked eggs is {perfect_eggs} - {cracked_eggs} = <<{perfect_eggs}-{cracked_eggs}={difference_perfect_cracked}>>{difference_perfect_cracked} eggs."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "2 dozen eggs means 2 x 12 = <<2*12=24>>24 eggs",
+    "L2": "3 x 2 = <<3*2=6>>6 eggs cracked.",
+    "L3": "The remaining eggs still in perfect condition is 24 - 3 - 6 = <<24-3-6=15>>15",
+    "L4": "The difference between the perfect eggs and cracked eggs is 15 - 6 = <<15-6=21>>21 eggs.",
+    "FA": "#### 21"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -6747326640728260822,
+  "model_name": "google_gemini-2.5-flash"
+}

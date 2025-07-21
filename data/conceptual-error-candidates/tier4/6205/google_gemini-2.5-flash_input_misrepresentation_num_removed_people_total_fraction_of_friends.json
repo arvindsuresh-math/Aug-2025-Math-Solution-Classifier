@@ -1,0 +1,90 @@
+{
+  "index": 6205,
+  "original_solution_mapping": {
+    "FA": "#### 70",
+    "L1": "He contacted 1-.4=<<1-.4=.6>>.6 of his friends",
+    "L2": "So he contacted 100*.6=<<100*.6=60>>60 people",
+    "L3": "So he removes 60/2=<<60/2=30>>30 people",
+    "L4": "So he has 100-30=<<100-30=70>>70 friends left"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6205.\n    Returns: the number of friends Mark has left after removal.\n    \"\"\"\n    # L1\n    total_fraction_of_friends = 1 # WK\n    kept_percentage_decimal = 0.4 # He keeps 40% of his friends list\n    contacted_fraction = total_fraction_of_friends - kept_percentage_decimal\n\n    # L2\n    initial_friends_count = 100 # If he had 100 friends\n    num_contacted_people = initial_friends_count * contacted_fraction\n\n    # L3\n    non_respond_divisor = 2 # Of those only 50% respond (meaning 50% did not respond, which is 1/2)\n    num_removed_people = num_contacted_people / non_respond_divisor\n\n    # L4\n    friends_remaining = initial_friends_count - num_removed_people\n\n    # FA\n    answer = friends_remaining\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "num_removed_people",
+    "operand_to_replace": "non_respond_divisor",
+    "replacement_variable": "total_fraction_of_friends"
+  },
+  "correct_trace": {
+    "total_fraction_of_friends": 1,
+    "kept_percentage_decimal": 0.4,
+    "contacted_fraction": 0.6,
+    "initial_friends_count": 100,
+    "num_contacted_people": 60.0,
+    "non_respond_divisor": 2,
+    "num_removed_people": 30.0,
+    "friends_remaining": 70.0,
+    "answer": 70.0
+  },
+  "flawed_trace": {
+    "total_fraction_of_friends": 1,
+    "kept_percentage_decimal": 0.4,
+    "contacted_fraction": 0.6,
+    "initial_friends_count": 100,
+    "num_contacted_people": 60.0,
+    "non_respond_divisor": 2,
+    "num_removed_people": 60.0,
+    "friends_remaining": 40.0,
+    "answer": 40.0
+  },
+  "correct_value": 30.0,
+  "flawed_value": 60.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_fraction_of_friends"
+      ],
+      "line_number": "L1",
+      "output_variable": "contacted_fraction",
+      "question_inputs": [
+        "kept_percentage_decimal"
+      ],
+      "solution_line_template": "He contacted {total_fraction_of_friends}-{kept_percentage_decimal}=<<{total_fraction_of_friends}-{kept_percentage_decimal}={contacted_fraction}>>{contacted_fraction} of his friends"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_contacted_people",
+      "question_inputs": [
+        "initial_friends_count"
+      ],
+      "solution_line_template": "So he contacted {initial_friends_count}*{contacted_fraction}=<<{initial_friends_count}*{contacted_fraction}={num_contacted_people}>>{num_contacted_people} people"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_removed_people",
+      "question_inputs": [
+        "non_respond_divisor"
+      ],
+      "solution_line_template": "So he removes {num_contacted_people}/{non_respond_divisor}=<<{num_contacted_people}/{non_respond_divisor}={num_removed_people}>>{num_removed_people} people"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "friends_remaining",
+      "question_inputs": [],
+      "solution_line_template": "So he has {initial_friends_count}-{num_removed_people}=<<{initial_friends_count}-{num_removed_people}={friends_remaining}>>{friends_remaining} friends left"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He contacted 1-0.4=<<1-0.4=0.6>>0.6 of his friends",
+    "L2": "So he contacted 100*0.6=<<100*0.6=60>>60 people",
+    "L3": "So he removes 60/1=<<60/1=60>>60 people",
+    "L4": "So he has 100-60=<<100-60=40>>40 friends left",
+    "FA": "#### 40"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'total_fraction_of_friends' (1) was used instead of 'non_respond_divisor' (2).",
+  "repro_seed": 6778303037848137028,
+  "model_name": "google_gemini-2.5-flash"
+}

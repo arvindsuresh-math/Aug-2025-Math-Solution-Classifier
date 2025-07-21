@@ -1,0 +1,80 @@
+{
+  "index": 6501,
+  "original_solution_mapping": {
+    "FA": "#### 65",
+    "L1": "Amara donates 5+5*3=5+15=<<5+5*3=20>>20 pieces of clothing",
+    "L2": "After donating she is left with 100-20=<<100-20=80>>80 pieces",
+    "L3": "After throwing away some clothes, she is left with 80-15=<<80-15=65>>65 pieces"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6501.\n    Returns: the number of pieces of clothing Amara has remaining.\n    \"\"\"\n    # L1\n    donated_to_first_orphanage = 5 # donated 5 to one orphanage home\n    multiplier_for_second_orphanage = 3 # triple that to another orphanage home\n    donated_to_second_orphanage_value = donated_to_first_orphanage * multiplier_for_second_orphanage\n    total_donated = donated_to_first_orphanage + donated_to_second_orphanage_value\n\n    # L2\n    initial_clothing_pieces = 100 # Amara had 100 pieces of clothing\n    remaining_after_donating = initial_clothing_pieces - total_donated\n\n    # L3\n    thrown_away = 15 # throw away 15 of her old clothes\n    remaining_after_throwing_away = remaining_after_donating - thrown_away\n\n    # FA\n    answer = remaining_after_throwing_away\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "donated_to_second_orphanage_value",
+    "operand_to_replace": "multiplier_for_second_orphanage",
+    "replacement_variable": "donated_to_first_orphanage"
+  },
+  "correct_trace": {
+    "donated_to_first_orphanage": 5,
+    "multiplier_for_second_orphanage": 3,
+    "donated_to_second_orphanage_value": 15,
+    "total_donated": 20,
+    "initial_clothing_pieces": 100,
+    "remaining_after_donating": 80,
+    "thrown_away": 15,
+    "remaining_after_throwing_away": 65,
+    "answer": 65
+  },
+  "flawed_trace": {
+    "donated_to_first_orphanage": 5,
+    "multiplier_for_second_orphanage": 3,
+    "donated_to_second_orphanage_value": 25,
+    "total_donated": 30,
+    "initial_clothing_pieces": 100,
+    "remaining_after_donating": 70,
+    "thrown_away": 15,
+    "remaining_after_throwing_away": 55,
+    "answer": 55
+  },
+  "correct_value": 15,
+  "flawed_value": 25,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_donated",
+      "question_inputs": [
+        "donated_to_first_orphanage",
+        "multiplier_for_second_orphanage"
+      ],
+      "solution_line_template": "Amara donates {donated_to_first_orphanage}+{donated_to_first_orphanage}*{multiplier_for_second_orphanage}={donated_to_first_orphanage}+{donated_to_second_orphanage_value}=<<{donated_to_first_orphanage}+{donated_to_first_orphanage}*{multiplier_for_second_orphanage}={total_donated}>>{total_donated} pieces of clothing"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_after_donating",
+      "question_inputs": [
+        "initial_clothing_pieces"
+      ],
+      "solution_line_template": "After donating she is left with {initial_clothing_pieces}-{total_donated}=<<{initial_clothing_pieces}-{total_donated}={remaining_after_donating}>>{remaining_after_donating} pieces"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_after_throwing_away",
+      "question_inputs": [
+        "thrown_away"
+      ],
+      "solution_line_template": "After throwing away some clothes, she is left with {remaining_after_donating}-{thrown_away}=<<{remaining_after_donating}-{thrown_away}={remaining_after_throwing_away}>>{remaining_after_throwing_away} pieces"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Amara donates 5+5*3=5+25=<<5+5*3=30>>30 pieces of clothing",
+    "L2": "After donating she is left with 100-30=<<100-30=70>>70 pieces",
+    "L3": "After throwing away some clothes, she is left with 70-15=<<70-15=55>>55 pieces",
+    "FA": "#### 55"
+  },
+  "erroneous_line_number": null,
+  "explanation": "Input misrepresentation. The value for 'donated_to_first_orphanage' (5) was used instead of 'multiplier_for_second_orphanage' (3).",
+  "repro_seed": -2388457294376840751,
+  "model_name": "google_gemini-2.5-flash"
+}

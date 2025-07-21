@@ -1,0 +1,63 @@
+{
+  "index": 1175,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "The t-shirt costs $10 more than the socks, so it costs $5 + $10 = $15.",
+    "L2": "The jeans are twice the price of the shirt, so they cost 2 * $15 = $<<2*15=30>>30."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1175.\n    Returns: the amount Henry needs to pay for the pair of jeans.\n    \"\"\"\n    # L1\n    socks_cost = 5 # The socks cost $5\n    tshirt_more_than_socks = 10 # the t-shirt is $10 more expensive than the socks\n    tshirt_cost = socks_cost + tshirt_more_than_socks\n\n    # L2\n    multiplier_for_jeans = 2 # The jeans are twice the price of the t-shirt\n    jeans_cost = multiplier_for_jeans * tshirt_cost\n\n    # FA\n    answer = jeans_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "tshirt_cost",
+    "operand_to_replace": "socks_cost",
+    "replacement_variable": "tshirt_more_than_socks"
+  },
+  "correct_trace": {
+    "socks_cost": 5,
+    "tshirt_more_than_socks": 10,
+    "tshirt_cost": 15,
+    "multiplier_for_jeans": 2,
+    "jeans_cost": 30,
+    "answer": 30
+  },
+  "flawed_trace": {
+    "socks_cost": 5,
+    "tshirt_more_than_socks": 10,
+    "tshirt_cost": 20,
+    "multiplier_for_jeans": 2,
+    "jeans_cost": 40,
+    "answer": 40
+  },
+  "correct_value": 15,
+  "flawed_value": 20,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "socks_cost",
+        "tshirt_more_than_socks"
+      ],
+      "WK_inputs": [],
+      "output_variable": "tshirt_cost",
+      "solution_line_template": "The t-shirt costs ${tshirt_more_than_socks} more than the socks, so it costs ${socks_cost} + ${tshirt_more_than_socks} = ${tshirt_cost}."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "multiplier_for_jeans"
+      ],
+      "WK_inputs": [],
+      "output_variable": "jeans_cost",
+      "solution_line_template": "The jeans are twice the price of the shirt, so they cost {multiplier_for_jeans} * ${tshirt_cost} = $<<{multiplier_for_jeans}*{tshirt_cost}={jeans_cost}>>{jeans_cost}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The t-shirt costs $10 more than the socks, so it costs $10 + $10 = $20.",
+    "L2": "The jeans are twice the price of the shirt, so they cost 2 * $20 = $<<2*20=40>>40.",
+    "FA": "#### 40"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'tshirt_more_than_socks' (10) was used instead of 'socks_cost' (5).",
+  "repro_seed": -8240627569546515458,
+  "model_name": "google_gemini-2.5-flash"
+}

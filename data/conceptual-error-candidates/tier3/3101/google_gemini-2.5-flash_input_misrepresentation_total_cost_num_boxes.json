@@ -1,0 +1,63 @@
+{
+  "index": 3101,
+  "original_solution_mapping": {
+    "FA": "#### 240",
+    "L1": "They need to buy 180/30=<<180/30=6>>6 boxes",
+    "L2": "So the cost is 6*40=$<<6*40=240>>240"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3101.\n    Returns: the total cost of syrup per week.\n    \"\"\"\n    # L1\n    gallons_per_week = 180 # 180 gallons of soda a week\n    gallons_per_box = 30 # can make 30 gallons of soda\n    num_boxes = gallons_per_week / gallons_per_box\n\n    # L2\n    cost_per_box = 40 # each box costs $40\n    total_cost = num_boxes * cost_per_box\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cost",
+    "operand_to_replace": "cost_per_box",
+    "replacement_variable": "num_boxes"
+  },
+  "correct_trace": {
+    "gallons_per_week": 180,
+    "gallons_per_box": 30,
+    "num_boxes": 6.0,
+    "cost_per_box": 40,
+    "total_cost": 240.0,
+    "answer": 240.0
+  },
+  "flawed_trace": {
+    "gallons_per_week": 180,
+    "gallons_per_box": 30,
+    "num_boxes": 6.0,
+    "cost_per_box": 40,
+    "total_cost": 36.0,
+    "answer": 36.0
+  },
+  "correct_value": 240.0,
+  "flawed_value": 36.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "num_boxes",
+      "question_inputs": [
+        "gallons_per_week",
+        "gallons_per_box"
+      ],
+      "solution_line_template": "They need to buy {gallons_per_week}/{gallons_per_box}=<<{gallons_per_week}/{gallons_per_box}={num_boxes}>>{num_boxes} boxes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "cost_per_box"
+      ],
+      "solution_line_template": "So the cost is {num_boxes}*{cost_per_box}=$<<{num_boxes}*{cost_per_box}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "They need to buy 180/30=<<180/30=6>>6 boxes",
+    "L2": "So the cost is 6*6=$<<6*6=36>>36",
+    "FA": "#### 36"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_boxes' (6.0) was used instead of 'cost_per_box' (40).",
+  "repro_seed": -155860065382370398,
+  "model_name": "google_gemini-2.5-flash"
+}

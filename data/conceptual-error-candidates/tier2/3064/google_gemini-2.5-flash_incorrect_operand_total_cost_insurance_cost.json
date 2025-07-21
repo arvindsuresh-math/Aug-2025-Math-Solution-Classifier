@@ -1,0 +1,85 @@
+{
+  "index": 3064,
+  "original_solution_mapping": {
+    "FA": "#### 54",
+    "L1": "The insurance plan costs $30*0.2=$<<30*0.2=6>>6.",
+    "L2": "The pre-state tax total is $30+$6=$<<30+6=36>>36.",
+    "L3": "State tax will be $36*0.5=$<<36*0.5=18>>18.",
+    "L4": "Jon needs to pay $18+$36=$<<18+36=54>>54 for his new toaster."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3064.\n    Returns: the total cost Jon must pay for the toaster.\n    \"\"\"\n    # L1\n    toaster_msrp = 30 # toaster that costs $30 at MSRP\n    insurance_rate_decimal = 0.2 # 20% of the MSRP\n    insurance_cost = toaster_msrp * insurance_rate_decimal\n\n    # L2\n    pre_tax_total = toaster_msrp + insurance_cost\n\n    # L3\n    state_tax_rate_decimal = 0.5 # state tax rate of 50%\n    state_tax_amount = pre_tax_total * state_tax_rate_decimal\n\n    # L4\n    total_cost = state_tax_amount + pre_tax_total\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_cost",
+    "operand_to_replace": "pre_tax_total",
+    "replacement_variable": "insurance_cost"
+  },
+  "correct_trace": {
+    "toaster_msrp": 30,
+    "insurance_rate_decimal": 0.2,
+    "insurance_cost": 6.0,
+    "pre_tax_total": 36.0,
+    "state_tax_rate_decimal": 0.5,
+    "state_tax_amount": 18.0,
+    "total_cost": 54.0,
+    "answer": 54.0
+  },
+  "flawed_trace": {
+    "toaster_msrp": 30,
+    "insurance_rate_decimal": 0.2,
+    "insurance_cost": 6.0,
+    "pre_tax_total": 36.0,
+    "state_tax_rate_decimal": 0.5,
+    "state_tax_amount": 18.0,
+    "total_cost": 24.0,
+    "answer": 24.0
+  },
+  "correct_value": 54.0,
+  "flawed_value": 24.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "insurance_cost",
+      "question_inputs": [
+        "toaster_msrp",
+        "insurance_rate_decimal"
+      ],
+      "solution_line_template": "The insurance plan costs ${toaster_msrp}*{insurance_rate_decimal}=$<<{toaster_msrp}*{insurance_rate_decimal}={insurance_cost}>>{insurance_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "pre_tax_total",
+      "question_inputs": [],
+      "solution_line_template": "The pre-state tax total is ${toaster_msrp}+${insurance_cost}=$<<{toaster_msrp}+{insurance_cost}={pre_tax_total}>>{pre_tax_total}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "state_tax_amount",
+      "question_inputs": [
+        "state_tax_rate_decimal"
+      ],
+      "solution_line_template": "State tax will be ${pre_tax_total}*{state_tax_rate_decimal}=$<<{pre_tax_total}*{state_tax_rate_decimal}={state_tax_amount}>>{state_tax_amount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cost",
+      "question_inputs": [],
+      "solution_line_template": "Jon needs to pay ${state_tax_amount}+${pre_tax_total}=$<<{state_tax_amount}+{pre_tax_total}={total_cost}>>{total_cost} for his new toaster."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The insurance plan costs $30*0.2=$<<30*0.2=6>>6.",
+    "L2": "The pre-state tax total is $30+$6=$<<30+6=36>>36.",
+    "L3": "State tax will be $36*0.5=$<<36*0.5=18>>18.",
+    "L4": "Jon needs to pay $18+$6=$<<18+6=24>>24 for his new toaster.",
+    "FA": "#### 24"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'insurance_cost' (value: 6.0) was used instead of 'pre_tax_total' (value: 36.0).",
+  "repro_seed": -6871948209580203796,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,63 @@
+{
+  "index": 6997,
+  "original_solution_mapping": {
+    "FA": "#### 4800",
+    "L1": "Kim sold 1200*2 = <<1200*2=2400>>2400 boxes of cupcakes on Wednesday.",
+    "L2": "Kim sold 2400*2 = <<2400*2=4800>>4800 boxes of cupcakes on Tuesday."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6997.\n    Returns: the number of boxes Kim sold on Tuesday.\n    \"\"\"\n    # L1\n    thursday_boxes = 1200 # Kim sold 1200 boxes of cupcakes on Thursday\n    multiplier_wednesday = 2 # twice as many boxes on Wednesday as she did on Thursday\n    wednesday_boxes = thursday_boxes * multiplier_wednesday\n\n    # L2\n    multiplier_tuesday = 2 # twice as many boxes on Tuesday as she did on Wednesday\n    tuesday_boxes = wednesday_boxes * multiplier_tuesday\n\n    # FA\n    answer = tuesday_boxes\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "wednesday_boxes",
+    "operand_to_replace": "thursday_boxes",
+    "replacement_variable": "multiplier_wednesday"
+  },
+  "correct_trace": {
+    "thursday_boxes": 1200,
+    "multiplier_wednesday": 2,
+    "wednesday_boxes": 2400,
+    "multiplier_tuesday": 2,
+    "tuesday_boxes": 4800,
+    "answer": 4800
+  },
+  "flawed_trace": {
+    "thursday_boxes": 1200,
+    "multiplier_wednesday": 2,
+    "wednesday_boxes": 4,
+    "multiplier_tuesday": 2,
+    "tuesday_boxes": 8,
+    "answer": 8
+  },
+  "correct_value": 2400,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "wednesday_boxes",
+      "question_inputs": [
+        "thursday_boxes",
+        "multiplier_wednesday"
+      ],
+      "solution_line_template": "Kim sold {thursday_boxes}*{multiplier_wednesday} = <<{thursday_boxes}*{multiplier_wednesday}={wednesday_boxes}>>{wednesday_boxes} boxes of cupcakes on Wednesday."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "tuesday_boxes",
+      "question_inputs": [
+        "multiplier_tuesday"
+      ],
+      "solution_line_template": "Kim sold {wednesday_boxes}*{multiplier_tuesday} = <<{wednesday_boxes}*{multiplier_tuesday}={tuesday_boxes}>>{tuesday_boxes} boxes of cupcakes on Tuesday."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Kim sold 2*2 = <<2*2=4>>4 boxes of cupcakes on Wednesday.",
+    "L2": "Kim sold 4*2 = <<4*2=8>>8 boxes of cupcakes on Tuesday.",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'multiplier_wednesday' (2) was used instead of 'thursday_boxes' (1200).",
+  "repro_seed": 4072576751290025507,
+  "model_name": "google_gemini-2.5-flash"
+}

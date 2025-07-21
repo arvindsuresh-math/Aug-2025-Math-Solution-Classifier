@@ -1,0 +1,90 @@
+{
+  "index": 4165,
+  "original_solution_mapping": {
+    "FA": "#### 28",
+    "L1": "Paul doubles the amount that he ate on the second day, so eats 2 x 2 = <<2*2=4>>4 sandwiches.",
+    "L2": "For the third day, he doubles the number of sandwiches he ate on the second day, so eats 2 x 2 x 2 = <<2*2*2=8>>8 sandwiches.",
+    "L3": "To get the total amount of sandwiches he ate over three days it's necessary to add up the amount he ate each day: 2 + 4 + 8 = <<2+4+8=14>>14 sandwiches",
+    "L4": "Since he eats 14 sandwiches every 3 days, then in 6 days he would eat 14 x 2 = <<14*2=28>>28 sandwiches in total."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4165.\n    Returns: the total number of sandwiches Paul would eat if he studied 6 days in a row.\n    \"\"\"\n    # L1\n    sandwiches_day1 = 2 # eats 2 sandwiches the first day\n    multiplier_double = 2 # doubles that number of sandwiches\n    sandwiches_day2 = sandwiches_day1 * multiplier_double\n\n    # L2\n    sandwiches_day3 = sandwiches_day2 * multiplier_double\n\n    # L3\n    total_sandwiches_3_days = sandwiches_day1 + sandwiches_day2 + sandwiches_day3\n\n    # L4\n    total_study_days = 6 # studied 6 days in a row\n    days_per_cycle = 3 # every three days\n    num_cycles = total_study_days / days_per_cycle\n    total_sandwiches_6_days = total_sandwiches_3_days * num_cycles\n\n    # FA\n    answer = total_sandwiches_6_days\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "sandwiches_day3",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x16a78b150>"
+  },
+  "correct_trace": {
+    "sandwiches_day1": 2,
+    "multiplier_double": 2,
+    "sandwiches_day2": 4,
+    "sandwiches_day3": 8,
+    "total_sandwiches_3_days": 14,
+    "total_study_days": 6,
+    "days_per_cycle": 3,
+    "num_cycles": 2.0,
+    "total_sandwiches_6_days": 28.0,
+    "answer": 28.0
+  },
+  "flawed_trace": {
+    "sandwiches_day1": 2,
+    "multiplier_double": 2,
+    "sandwiches_day2": 4,
+    "sandwiches_day3": 2.0,
+    "total_sandwiches_3_days": 8.0,
+    "total_study_days": 6,
+    "days_per_cycle": 3,
+    "num_cycles": 2.0,
+    "total_sandwiches_6_days": 16.0,
+    "answer": 16.0
+  },
+  "correct_value": 8,
+  "flawed_value": 2.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "sandwiches_day2",
+      "question_inputs": [
+        "sandwiches_day1",
+        "multiplier_double"
+      ],
+      "solution_line_template": "Paul doubles the amount that he ate on the second day, so eats {sandwiches_day1} x {multiplier_double} = <<{sandwiches_day1}*{multiplier_double}={sandwiches_day2}>>{sandwiches_day2} sandwiches."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sandwiches_day3",
+      "question_inputs": [],
+      "solution_line_template": "For the third day, he doubles the number of sandwiches he ate on the second day, so eats {sandwiches_day1} x {multiplier_double} x {multiplier_double} = <<{sandwiches_day1}*{multiplier_double}*{multiplier_double}={sandwiches_day3}>>{sandwiches_day3} sandwiches."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_sandwiches_3_days",
+      "question_inputs": [],
+      "solution_line_template": "To get the total amount of sandwiches he ate over three days it's necessary to add up the amount he ate each day: {sandwiches_day1} + {sandwiches_day2} + {sandwiches_day3} = <<{sandwiches_day1}+{sandwiches_day2}+{sandwiches_day3}={total_sandwiches_3_days}>>{total_sandwiches_3_days} sandwiches"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_sandwiches_6_days",
+      "question_inputs": [
+        "total_study_days",
+        "days_per_cycle"
+      ],
+      "solution_line_template": "Since he eats {total_sandwiches_3_days} sandwiches every {days_per_cycle} days, then in {total_study_days} days he would eat {total_sandwiches_3_days} x {num_cycles} = <<{total_sandwiches_3_days}*{num_cycles}={total_sandwiches_6_days}>>{total_sandwiches_6_days} sandwiches in total."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Paul doubles the amount that he ate on the second day, so eats 2 x 2 = <<2*2=4>>4 sandwiches.",
+    "L2": "For the third day, he doubles the number of sandwiches he ate on the second day, so eats 2 x 2 x 2 = <<2*2*2=2>>2 sandwiches.",
+    "L3": "To get the total amount of sandwiches he ate over three days it's necessary to add up the amount he ate each day: 2 + 4 + 2 = <<2+4+2=8>>8 sandwiches",
+    "L4": "Since he eats 8 sandwiches every 3 days, then in 6 days he would eat 8 x 2 = <<8*2=16>>16 sandwiches in total.",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -7734063302008451648,
+  "model_name": "google_gemini-2.5-flash"
+}

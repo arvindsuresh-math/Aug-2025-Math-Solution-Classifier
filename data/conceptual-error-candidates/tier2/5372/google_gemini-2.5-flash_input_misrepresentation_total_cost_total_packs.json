@@ -1,0 +1,78 @@
+{
+  "index": 5372,
+  "original_solution_mapping": {
+    "FA": "#### 1000",
+    "L1": "If a box of tissue has 20 packs of tissues, ten boxes have 20 packs/box * 10 boxes = <<20*10=200>>200 packs",
+    "L2": "Since each pack has 100 tissues, Annalise bought 100 tissues/pack * 200 packs = <<100*200=20000>>20000 tissues.",
+    "L3": "Annalise bought 20000 tissues at five cents each, at a total cost of 20000 tissues * $0.05 = $<<20000*0.05=1000>>1000"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5372.\n    Returns: the total amount of money Annalise spent.\n    \"\"\"\n    # L1\n    packs_per_box = 20 # each box has 20 packs of tissues\n    num_boxes = 10 # buy 10 boxes\n    total_packs = packs_per_box * num_boxes\n\n    # L2\n    tissues_per_pack = 100 # each pack contain 100 tissues\n    total_tissues = tissues_per_pack * total_packs\n\n    # L3\n    cost_per_tissue = 0.05 # sold at five cents each\n    total_cost = total_tissues * cost_per_tissue\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cost",
+    "operand_to_replace": "cost_per_tissue",
+    "replacement_variable": "total_packs"
+  },
+  "correct_trace": {
+    "packs_per_box": 20,
+    "num_boxes": 10,
+    "total_packs": 200,
+    "tissues_per_pack": 100,
+    "total_tissues": 20000,
+    "cost_per_tissue": 0.05,
+    "total_cost": 1000.0,
+    "answer": 1000.0
+  },
+  "flawed_trace": {
+    "packs_per_box": 20,
+    "num_boxes": 10,
+    "total_packs": 200,
+    "tissues_per_pack": 100,
+    "total_tissues": 20000,
+    "cost_per_tissue": 0.05,
+    "total_cost": 4000000,
+    "answer": 4000000
+  },
+  "correct_value": 1000.0,
+  "flawed_value": 4000000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_packs",
+      "question_inputs": [
+        "packs_per_box",
+        "num_boxes"
+      ],
+      "solution_line_template": "If a box of tissue has {packs_per_box} packs of tissues, ten boxes have {packs_per_box} packs/box * {num_boxes} boxes = <<{packs_per_box}*{num_boxes}={total_packs}>>{total_packs} packs"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_tissues",
+      "question_inputs": [
+        "tissues_per_pack"
+      ],
+      "solution_line_template": "Since each pack has {tissues_per_pack} tissues, Annalise bought {tissues_per_pack} tissues/pack * {total_packs} packs = <<{tissues_per_pack}*{total_packs}={total_tissues}>>{total_tissues} tissues."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "cost_per_tissue"
+      ],
+      "solution_line_template": "Annalise bought {total_tissues} tissues at five cents each, at a total cost of {total_tissues} tissues * ${cost_per_tissue} = $<<{total_tissues}*{cost_per_tissue}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If a box of tissue has 20 packs of tissues, ten boxes have 20 packs/box * 10 boxes = <<20*10=200>>200 packs",
+    "L2": "Since each pack has 100 tissues, Annalise bought 100 tissues/pack * 200 packs = <<100*200=20000>>20000 tissues.",
+    "L3": "Annalise bought 20000 tissues at five cents each, at a total cost of 20000 tissues * $200 = $<<20000*200=4000000>>4000000",
+    "FA": "#### 4000000"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'total_packs' (200) was used instead of 'cost_per_tissue' (0.05).",
+  "repro_seed": -360168143022444638,
+  "model_name": "google_gemini-2.5-flash"
+}

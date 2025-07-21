@@ -1,0 +1,75 @@
+{
+  "index": 258,
+  "original_solution_mapping": {
+    "FA": "#### 200",
+    "L1": "Anne is 2 times as tall as her sister hence 2*(her sister's height) = 80cm",
+    "L2": "Her sister's height = 80cm/2 = <<80/2=40>>40cm",
+    "L3": "Bella is 3 times as tall as Anne hence Bella's height is 3*80 cm = <<3*80=240>>240 cm",
+    "L4": "The height difference between Bella and Anne's sister = 240-40 = <<240-40=200>>200cm"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 258.\n    Returns: the height difference between Bella and Anne's sister.\n    \"\"\"\n    # L2\n    Anne_height = 80 # Anne is 80cm tall\n    anne_sister_multiplier = 2 # 2 times as tall as her sister\n    sister_height = Anne_height / anne_sister_multiplier\n\n    # L3\n    bella_anne_multiplier = 3 # Bella is 3 times as tall as Anne\n    bella_height = bella_anne_multiplier * Anne_height\n\n    # L4\n    height_difference = bella_height - sister_height\n\n    # FA\n    answer = height_difference\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "bella_height",
+    "operand_to_replace": "Anne_height",
+    "replacement_variable": "sister_height"
+  },
+  "correct_trace": {
+    "Anne_height": 80,
+    "anne_sister_multiplier": 2,
+    "sister_height": 40.0,
+    "bella_anne_multiplier": 3,
+    "bella_height": 240,
+    "height_difference": 200.0,
+    "answer": 200.0
+  },
+  "flawed_trace": {
+    "Anne_height": 80,
+    "anne_sister_multiplier": 2,
+    "sister_height": 40.0,
+    "bella_anne_multiplier": 3,
+    "bella_height": 120.0,
+    "height_difference": 80.0,
+    "answer": 80.0
+  },
+  "correct_value": 240,
+  "flawed_value": 120.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sister_height",
+      "question_inputs": [
+        "Anne_height",
+        "anne_sister_multiplier"
+      ],
+      "solution_line_template": "Her sister's height = {Anne_height}/{anne_sister_multiplier} = <<{Anne_height}/{anne_sister_multiplier}={sister_height}>>{sister_height}cm"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "bella_height",
+      "question_inputs": [
+        "bella_anne_multiplier"
+      ],
+      "solution_line_template": "Bella is {bella_anne_multiplier} times as tall as Anne hence Bella's height is {bella_anne_multiplier}*{Anne_height} cm = <<{bella_anne_multiplier}*{Anne_height}={bella_height}>>{bella_height} cm"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "height_difference",
+      "question_inputs": [],
+      "solution_line_template": "The height difference between Bella and Anne's sister = {bella_height}-{sister_height} = <<{bella_height}-{sister_height}={height_difference}>>{height_difference}cm"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "Her sister's height = 80/2 = <<80/2=40>>40cm",
+    "L3": "Bella is 3 times as tall as Anne hence Bella's height is 3*40 cm = <<3*40=120>>120 cm",
+    "L4": "The height difference between Bella and Anne's sister = 120-40 = <<120-40=80>>80cm",
+    "FA": "#### 80"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'sister_height' (40.0) was used instead of 'Anne_height' (80).",
+  "repro_seed": -1088097448963789257,
+  "model_name": "google_gemini-2.5-flash"
+}

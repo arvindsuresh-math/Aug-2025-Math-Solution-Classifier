@@ -1,0 +1,63 @@
+{
+  "index": 260,
+  "original_solution_mapping": {
+    "FA": "#### 360",
+    "L1": "If the shadows lengthen by 5 feet per hour, this means that in 6 hours the shadows would have lengthened from zero to 5*6=<<5*6=30>>30 feet.",
+    "L2": "Since there are 12 inches in every foot, this means the building's shadow would be 30*12= <<30*12=360>>360 inches in length."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 260.\n    Returns: the length of the shadows from the building in inches.\n    \"\"\"\n    # L1\n    shadow_increase_per_hour = 5 # Every hour past noon shadows from a building stretch an extra 5 feet\n    hours_past_noon = 6 # 6 hours past noon\n    shadow_length_feet = shadow_increase_per_hour * hours_past_noon\n\n    # L2\n    inches_per_foot = 12 # WK\n    shadow_length_inches = shadow_length_feet * inches_per_foot\n\n    # FA\n    answer = shadow_length_inches\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "shadow_length_feet",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30ca04050>"
+  },
+  "correct_trace": {
+    "shadow_increase_per_hour": 5,
+    "hours_past_noon": 6,
+    "shadow_length_feet": 30,
+    "inches_per_foot": 12,
+    "shadow_length_inches": 360,
+    "answer": 360
+  },
+  "flawed_trace": {
+    "shadow_increase_per_hour": 5,
+    "hours_past_noon": 6,
+    "shadow_length_feet": 11,
+    "inches_per_foot": 12,
+    "shadow_length_inches": 132,
+    "answer": 132
+  },
+  "correct_value": 30,
+  "flawed_value": 11,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "shadow_increase_per_hour",
+        "hours_past_noon"
+      ],
+      "WK_inputs": [],
+      "output_variable": "shadow_length_feet",
+      "solution_line_template": "If the shadows lengthen by {shadow_increase_per_hour} feet per hour, this means that in {hours_past_noon} hours the shadows would have lengthened from zero to {shadow_increase_per_hour}*{hours_past_noon}=<<{shadow_increase_per_hour}*{hours_past_noon}={shadow_length_feet}>>{shadow_length_feet} feet."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [
+        "inches_per_foot"
+      ],
+      "output_variable": "shadow_length_inches",
+      "solution_line_template": "Since there are {inches_per_foot} inches in every foot, this means the building's shadow would be {shadow_length_feet}*{inches_per_foot}= <<{shadow_length_feet}*{inches_per_foot}={shadow_length_inches}>>{shadow_length_inches} inches in length."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the shadows lengthen by 5 feet per hour, this means that in 6 hours the shadows would have lengthened from zero to 5*6=<<5*6=11>>11 feet.",
+    "L2": "Since there are 12 inches in every foot, this means the building's shadow would be 11*12= <<11*12=132>>132 inches in length.",
+    "FA": "#### 132"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -827953822712169465,
+  "model_name": "google_gemini-2.5-flash"
+}

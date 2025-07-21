@@ -1,0 +1,64 @@
+{
+  "index": 5230,
+  "original_solution_mapping": {
+    "FA": "#### 99",
+    "L1": "In one year, Tara's account will yield an interest of 10/100*90 = <<10/100*90=9>>9 dollars",
+    "L2": "The total in her account will therefore be 90 + 9 = <<90+9=99>>99 dollars."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5230.\n    Returns: the total amount of money Tara will have after a year.\n    \"\"\"\n    # L1\n    interest_rate_numerator = 10 # 10% interest annually\n    interest_rate_denominator = 100 # 10% interest annually\n    initial_money = 90 # $90 for her birthday\n    interest_rate = Fraction(interest_rate_numerator, interest_rate_denominator)\n    interest_gained = interest_rate * initial_money\n\n    # L2\n    total_money = initial_money + interest_gained\n\n    # FA\n    answer = total_money\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_money",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x30d560e90>"
+  },
+  "correct_trace": {
+    "interest_rate_numerator": 10,
+    "interest_rate_denominator": 100,
+    "initial_money": 90,
+    "interest_rate": "1/10",
+    "interest_gained": "9",
+    "total_money": "99",
+    "answer": "99"
+  },
+  "flawed_trace": {
+    "interest_rate_numerator": 10,
+    "interest_rate_denominator": 100,
+    "initial_money": 90,
+    "interest_rate": "1/10",
+    "interest_gained": "9",
+    "total_money": "810",
+    "answer": "810"
+  },
+  "correct_value": "99",
+  "flawed_value": "810",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "interest_gained",
+      "question_inputs": [
+        "interest_rate_numerator",
+        "interest_rate_denominator",
+        "initial_money"
+      ],
+      "solution_line_template": "In one year, Tara's account will yield an interest of {interest_rate_numerator}/{interest_rate_denominator}*{initial_money} = <<{interest_rate_numerator}/{interest_rate_denominator}*{initial_money}={interest_gained}>>{interest_gained} dollars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_money",
+      "question_inputs": [],
+      "solution_line_template": "The total in her account will therefore be {initial_money} + {interest_gained} = <<{initial_money}+{interest_gained}={total_money}>>{total_money} dollars."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In one year, Tara's account will yield an interest of 10/100*90 = <<10/100*90=9>>9 dollars",
+    "L2": "The total in her account will therefore be 90 + 9 = <<90+9=810>>810 dollars.",
+    "FA": "#### 810"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 9090197450506311755,
+  "model_name": "google_gemini-2.5-flash"
+}

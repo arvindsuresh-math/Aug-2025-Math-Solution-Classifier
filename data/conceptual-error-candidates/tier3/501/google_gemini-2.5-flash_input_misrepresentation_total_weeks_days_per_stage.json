@@ -1,0 +1,63 @@
+{
+  "index": 501,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "He needs to do 15*3=<<15*3=45>>45 progressions",
+    "L2": "That will take 45/5=<<45/5=9>>9 weeks"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 501.\n    Returns: the number of weeks it will take John to get to floor push-ups.\n    \"\"\"\n    # L1\n    days_per_stage = 15 # once he gets to 15 reps\n    num_additional_stages = 3 # high elevation push-ups, low elevation push-ups, and floor push-ups\n    total_days_for_progressions = days_per_stage * num_additional_stages\n\n    # L2\n    days_per_week_training = 5 # trains 5 days a week\n    total_weeks = total_days_for_progressions / days_per_week_training\n\n    # FA\n    answer = total_weeks\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_weeks",
+    "operand_to_replace": "days_per_week_training",
+    "replacement_variable": "days_per_stage"
+  },
+  "correct_trace": {
+    "days_per_stage": 15,
+    "num_additional_stages": 3,
+    "total_days_for_progressions": 45,
+    "days_per_week_training": 5,
+    "total_weeks": 9.0,
+    "answer": 9.0
+  },
+  "flawed_trace": {
+    "days_per_stage": 15,
+    "num_additional_stages": 3,
+    "total_days_for_progressions": 45,
+    "days_per_week_training": 5,
+    "total_weeks": 3.0,
+    "answer": 3.0
+  },
+  "correct_value": 9.0,
+  "flawed_value": 3.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_days_for_progressions",
+      "question_inputs": [
+        "days_per_stage",
+        "num_additional_stages"
+      ],
+      "solution_line_template": "He needs to do {days_per_stage}*{num_additional_stages}=<<{days_per_stage}*{num_additional_stages}={total_days_for_progressions}>>{total_days_for_progressions} progressions"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_weeks",
+      "question_inputs": [
+        "days_per_week_training"
+      ],
+      "solution_line_template": "That will take {total_days_for_progressions}/{days_per_week_training}=<<{total_days_for_progressions}/{days_per_week_training}={total_weeks}>>{total_weeks} weeks"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He needs to do 15*3=<<15*3=45>>45 progressions",
+    "L2": "That will take 45/15=<<45/15=3>>3 weeks",
+    "FA": "#### 3"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'days_per_stage' (15) was used instead of 'days_per_week_training' (5).",
+  "repro_seed": -4157043601415270351,
+  "model_name": "google_gemini-2.5-flash"
+}

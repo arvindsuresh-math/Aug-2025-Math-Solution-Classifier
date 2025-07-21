@@ -1,0 +1,63 @@
+{
+  "index": 4733,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "The total number of episodes is 4 seasons x 15 episodes/season = <<4*15=60>>60 episodes",
+    "L2": "Joe has to watch per day 60 episodes / 10 days= <<60/10=6>>6 episodes/day"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4733.\n    Returns: the number of episodes Joe has to watch per day.\n    \"\"\"\n    # L1\n    num_seasons = 4 # 4 full seasons already aired\n    episodes_per_season = 15 # each season has 15 episodes\n    total_episodes = num_seasons * episodes_per_season\n\n    # L2\n    days_to_premiere = 10 # premiere in 10 days\n    episodes_per_day = total_episodes / days_to_premiere\n\n    # FA\n    answer = episodes_per_day\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "episodes_per_day",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x1720dd110>"
+  },
+  "correct_trace": {
+    "num_seasons": 4,
+    "episodes_per_season": 15,
+    "total_episodes": 60,
+    "days_to_premiere": 10,
+    "episodes_per_day": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "num_seasons": 4,
+    "episodes_per_season": 15,
+    "total_episodes": 60,
+    "days_to_premiere": 10,
+    "episodes_per_day": 600,
+    "answer": 600
+  },
+  "correct_value": 6.0,
+  "flawed_value": 600,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_episodes",
+      "question_inputs": [
+        "num_seasons",
+        "episodes_per_season"
+      ],
+      "solution_line_template": "The total number of episodes is {num_seasons} seasons x {episodes_per_season} episodes/season = <<{num_seasons}*{episodes_per_season}={total_episodes}>>{total_episodes} episodes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "episodes_per_day",
+      "question_inputs": [
+        "days_to_premiere"
+      ],
+      "solution_line_template": "Joe has to watch per day {total_episodes} episodes / {days_to_premiere} days= <<{total_episodes}/{days_to_premiere}={episodes_per_day}>>{episodes_per_day} episodes/day"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total number of episodes is 4 seasons x 15 episodes/season = <<4*15=60>>60 episodes",
+    "L2": "Joe has to watch per day 60 episodes / 10 days= <<60/10=600>>600 episodes/day",
+    "FA": "#### 600"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -515616007041211741,
+  "model_name": "google_gemini-2.5-flash"
+}

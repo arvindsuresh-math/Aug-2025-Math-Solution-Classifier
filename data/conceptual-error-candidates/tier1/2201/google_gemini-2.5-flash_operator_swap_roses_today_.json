@@ -1,0 +1,74 @@
+{
+  "index": 2201,
+  "original_solution_mapping": {
+    "FA": "#### 220",
+    "L1": "Yesterday, Uncle Welly was able to plant 50 + 20 = <<50+20=70>>70 roses.",
+    "L2": "Today, he planted 2 x 50 = <<2*50=100>>100 roses.",
+    "L3": "Therefore, Uncle Welly has 50 + 70 + 100 = <<50+70+100=220>>220 roses planted on his vacant lot."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2201.\n    Returns: the total number of roses Uncle Welly planted.\n    \"\"\"\n    # L1\n    roses_two_days_ago = 50 # planted 50 roses on his vacant lot\n    more_roses_yesterday = 20 # planted 20 more roses than the previous day\n    roses_yesterday = roses_two_days_ago + more_roses_yesterday\n\n    # L2\n    multiplier_today = 2 # planted twice the number of roses\n    roses_today = multiplier_today * roses_two_days_ago\n\n    # L3\n    total_roses = roses_two_days_ago + roses_yesterday + roses_today\n\n    # FA\n    answer = total_roses\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "roses_today",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30901cd10>"
+  },
+  "correct_trace": {
+    "roses_two_days_ago": 50,
+    "more_roses_yesterday": 20,
+    "roses_yesterday": 70,
+    "multiplier_today": 2,
+    "roses_today": 100,
+    "total_roses": 220,
+    "answer": 220
+  },
+  "flawed_trace": {
+    "roses_two_days_ago": 50,
+    "more_roses_yesterday": 20,
+    "roses_yesterday": 70,
+    "multiplier_today": 2,
+    "roses_today": 52,
+    "total_roses": 172,
+    "answer": 172
+  },
+  "correct_value": 100,
+  "flawed_value": 52,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "roses_two_days_ago",
+        "more_roses_yesterday"
+      ],
+      "WK_inputs": [],
+      "output_variable": "roses_yesterday",
+      "solution_line_template": "Yesterday, Uncle Welly was able to plant {roses_two_days_ago} + {more_roses_yesterday} = <<{roses_two_days_ago}+{more_roses_yesterday}={roses_yesterday}>>{roses_yesterday} roses."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "multiplier_today"
+      ],
+      "WK_inputs": [],
+      "output_variable": "roses_today",
+      "solution_line_template": "Today, he planted {multiplier_today} x {roses_two_days_ago} = <<{multiplier_today}*{roses_two_days_ago}={roses_today}>>{roses_today} roses."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_roses",
+      "solution_line_template": "Therefore, Uncle Welly has {roses_two_days_ago} + {roses_yesterday} + {roses_today} = <<{roses_two_days_ago}+{roses_yesterday}+{roses_today}={total_roses}>>{total_roses} roses planted on his vacant lot."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Yesterday, Uncle Welly was able to plant 50 + 20 = <<50+20=70>>70 roses.",
+    "L2": "Today, he planted 2 x 50 = <<2*50=52>>52 roses.",
+    "L3": "Therefore, Uncle Welly has 50 + 70 + 52 = <<50+70+52=172>>172 roses planted on his vacant lot.",
+    "FA": "#### 172"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -1347659907914403375,
+  "model_name": "google_gemini-2.5-flash"
+}

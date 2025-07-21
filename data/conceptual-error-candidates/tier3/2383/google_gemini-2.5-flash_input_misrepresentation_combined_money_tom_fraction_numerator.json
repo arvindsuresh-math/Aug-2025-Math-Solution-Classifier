@@ -1,0 +1,77 @@
+{
+  "index": 2383,
+  "original_solution_mapping": {
+    "FA": "#### 190",
+    "L1": "If Nataly has 3 times as much money as Raquel, she has 3 * $40 = $<<3*40=120>>120",
+    "L2": "Tom has 1/4 as much money as Nataly, so he has 1/4 * $120 = $<<1/4*120=30>>30",
+    "L3": "Combined, the three have $30 + $120 + $40 = $<<30+120+40=190>>190"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2383.\n    Returns: the total combined money of Tom, Raquel, and Nataly.\n    \"\"\"\n    # L1\n    nataly_multiplier = 3 # Nataly has three times as much money as Raquel\n    raquel_money = 40 # Raquel has $40\n    nataly_money = nataly_multiplier * raquel_money\n\n    # L2\n    tom_fraction_numerator = 1 # a quarter as much money\n    tom_fraction_denominator = 4 # a quarter as much money\n    tom_money = tom_fraction_numerator / tom_fraction_denominator * nataly_money\n\n    # L3\n    combined_money = tom_money + nataly_money + raquel_money\n\n    # FA\n    answer = combined_money\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "combined_money",
+    "operand_to_replace": "raquel_money",
+    "replacement_variable": "tom_fraction_numerator"
+  },
+  "correct_trace": {
+    "nataly_multiplier": 3,
+    "raquel_money": 40,
+    "nataly_money": 120,
+    "tom_fraction_numerator": 1,
+    "tom_fraction_denominator": 4,
+    "tom_money": 30.0,
+    "combined_money": 190.0,
+    "answer": 190.0
+  },
+  "flawed_trace": {
+    "nataly_multiplier": 3,
+    "raquel_money": 40,
+    "nataly_money": 120,
+    "tom_fraction_numerator": 1,
+    "tom_fraction_denominator": 4,
+    "tom_money": 30.0,
+    "combined_money": 151.0,
+    "answer": 151.0
+  },
+  "correct_value": 190.0,
+  "flawed_value": 151.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "nataly_money",
+      "question_inputs": [
+        "nataly_multiplier",
+        "raquel_money"
+      ],
+      "solution_line_template": "If Nataly has {nataly_multiplier} times as much money as Raquel, she has {nataly_multiplier} * ${raquel_money} = $<<{nataly_multiplier}*{raquel_money}={nataly_money}>>{nataly_money}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "tom_money",
+      "question_inputs": [
+        "tom_fraction_numerator",
+        "tom_fraction_denominator"
+      ],
+      "solution_line_template": "Tom has {tom_fraction_numerator}/{tom_fraction_denominator} as much money as Nataly, so he has {tom_fraction_numerator}/{tom_fraction_denominator} * ${nataly_money} = $<<{tom_fraction_numerator}/{tom_fraction_denominator}*{nataly_money}={tom_money}>>{tom_money}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "combined_money",
+      "question_inputs": [],
+      "solution_line_template": "Combined, the three have ${tom_money} + ${nataly_money} + ${raquel_money} = $<<{tom_money}+{nataly_money}+{raquel_money}={combined_money}>>{combined_money}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Nataly has 3 times as much money as Raquel, she has 3 * $40 = $<<3*40=120>>120",
+    "L2": "Tom has 1/4 as much money as Nataly, so he has 1/4 * $120 = $<<1/4*120=30>>30",
+    "L3": "Combined, the three have $30 + $120 + $1 = $<<30+120+1=151>>151",
+    "FA": "#### 151"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'tom_fraction_numerator' (1) was used instead of 'raquel_money' (40).",
+  "repro_seed": -3514536236645524084,
+  "model_name": "google_gemini-2.5-flash"
+}

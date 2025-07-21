@@ -1,0 +1,79 @@
+{
+  "index": 7311,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "There are 60 minutes in an hour, so the superhero will run 60 / 4 = <<60/4=15>>15 intervals of 10 miles in an hour.",
+    "L2": "Thus, the superhero can run 15 * 10 = <<15*10=150>>150 miles in an hour.",
+    "L3": "The superhero can run 150 - 100 = <<150-100=50>>50 miles farther than the supervillain can drive in an hour."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7311.\n    Returns: the number of miles farther the superhero can run than the supervillain can drive in an hour.\n    \"\"\"\n    # L1\n    minutes_per_hour = 60 # WK\n    superhero_time_per_interval = 4 # 4 minutes\n    intervals_in_hour = minutes_per_hour / superhero_time_per_interval\n\n    # L2\n    miles_per_interval = 10 # 10 miles\n    superhero_miles_per_hour = intervals_in_hour * miles_per_interval\n\n    # L3\n    supervillain_miles_per_hour = 100 # 100 miles per hour\n    miles_farther = superhero_miles_per_hour - supervillain_miles_per_hour\n\n    # FA\n    answer = miles_farther\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "miles_farther",
+    "operand_to_replace": "supervillain_miles_per_hour",
+    "replacement_variable": "intervals_in_hour"
+  },
+  "correct_trace": {
+    "minutes_per_hour": 60,
+    "superhero_time_per_interval": 4,
+    "intervals_in_hour": 15.0,
+    "miles_per_interval": 10,
+    "superhero_miles_per_hour": 150.0,
+    "supervillain_miles_per_hour": 100,
+    "miles_farther": 50.0,
+    "answer": 50.0
+  },
+  "flawed_trace": {
+    "minutes_per_hour": 60,
+    "superhero_time_per_interval": 4,
+    "intervals_in_hour": 15.0,
+    "miles_per_interval": 10,
+    "superhero_miles_per_hour": 150.0,
+    "supervillain_miles_per_hour": 100,
+    "miles_farther": 135.0,
+    "answer": 135.0
+  },
+  "correct_value": 50.0,
+  "flawed_value": 135.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "intervals_in_hour",
+      "question_inputs": [
+        "superhero_time_per_interval"
+      ],
+      "solution_line_template": "There are {minutes_per_hour} minutes in an hour, so the superhero will run {minutes_per_hour} / {superhero_time_per_interval} = <<{minutes_per_hour}/{superhero_time_per_interval}={intervals_in_hour}>>{intervals_in_hour} intervals of {miles_per_interval} miles in an hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "superhero_miles_per_hour",
+      "question_inputs": [
+        "miles_per_interval"
+      ],
+      "solution_line_template": "Thus, the superhero can run {intervals_in_hour} * {miles_per_interval} = <<{intervals_in_hour}*{miles_per_interval}={superhero_miles_per_hour}>>{superhero_miles_per_hour} miles in an hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "miles_farther",
+      "question_inputs": [
+        "supervillain_miles_per_hour"
+      ],
+      "solution_line_template": "The superhero can run {superhero_miles_per_hour} - {supervillain_miles_per_hour} = <<{superhero_miles_per_hour}-{supervillain_miles_per_hour}={miles_farther}>>{miles_farther} miles farther than the supervillain can drive in an hour."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 60 minutes in an hour, so the superhero will run 60 / 4 = <<60/4=15>>15 intervals of 10 miles in an hour.",
+    "L2": "Thus, the superhero can run 15 * 10 = <<15*10=150>>150 miles in an hour.",
+    "L3": "The superhero can run 150 - 15 = <<150-15=135>>135 miles farther than the supervillain can drive in an hour.",
+    "FA": "#### 135"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'intervals_in_hour' (15.0) was used instead of 'supervillain_miles_per_hour' (100).",
+  "repro_seed": 7894328892916079196,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 65,
+  "original_solution_mapping": {
+    "FA": "#### 558",
+    "L1": "33 * 16 = $<<33*16=528>>528",
+    "L2": "3 * 10 = $<<3*10=30>>30",
+    "L3": "528 + 30 = $<<528+30=558>>558",
+    "L4": "Lee earned $558 mowing lawns last week."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 65.\n    Returns: the total dollars Lee earned mowing lawns last week.\n    \"\"\"\n    # L1\n    charge_per_lawn = 33 # charges $33\n    lawns_mowed = 16 # mowed 16 lawns\n    earnings_from_mowing = charge_per_lawn * lawns_mowed\n\n    # L2\n    num_tipping_customers = 3 # three customers\n    tip_amount_per_customer = 10 # a $10 tip\n    earnings_from_tips = num_tipping_customers * tip_amount_per_customer\n\n    # L3\n    total_earnings = earnings_from_mowing + earnings_from_tips\n\n    # FA\n    answer = total_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "earnings_from_tips",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30c577b10>"
+  },
+  "correct_trace": {
+    "charge_per_lawn": 33,
+    "lawns_mowed": 16,
+    "earnings_from_mowing": 528,
+    "num_tipping_customers": 3,
+    "tip_amount_per_customer": 10,
+    "earnings_from_tips": 30,
+    "total_earnings": 558,
+    "answer": 558
+  },
+  "flawed_trace": {
+    "charge_per_lawn": 33,
+    "lawns_mowed": 16,
+    "earnings_from_mowing": 528,
+    "num_tipping_customers": 3,
+    "tip_amount_per_customer": 10,
+    "earnings_from_tips": 13,
+    "total_earnings": 541,
+    "answer": 541
+  },
+  "correct_value": 30,
+  "flawed_value": 13,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "charge_per_lawn",
+        "lawns_mowed"
+      ],
+      "WK_inputs": [],
+      "output_variable": "earnings_from_mowing",
+      "solution_line_template": "{charge_per_lawn} * {lawns_mowed} = $<<{charge_per_lawn}*{lawns_mowed}={earnings_from_mowing}>>{earnings_from_mowing}"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "num_tipping_customers",
+        "tip_amount_per_customer"
+      ],
+      "WK_inputs": [],
+      "output_variable": "earnings_from_tips",
+      "solution_line_template": "{num_tipping_customers} * {tip_amount_per_customer} = $<<{num_tipping_customers}*{tip_amount_per_customer}={earnings_from_tips}>>{earnings_from_tips}"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_earnings",
+      "solution_line_template": "{earnings_from_mowing} + {earnings_from_tips} = $<<{earnings_from_mowing}+{earnings_from_tips}={total_earnings}>>{total_earnings}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "33 * 16 = $<<33*16=528>>528",
+    "L2": "3 * 10 = $<<3*10=13>>13",
+    "L3": "528 + 13 = $<<528+13=541>>541",
+    "FA": "#### 541"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 8500142045651719672,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,67 @@
+{
+  "index": 5434,
+  "original_solution_mapping": {
+    "FA": "#### 274",
+    "L1": "Let x be the number of apples Kylie picked",
+    "L2": "Kayla picked 10+4x apples",
+    "L3": "340=x+(10+4x)",
+    "L4": "340=5x+10",
+    "L5": "330=5x",
+    "L6": "x=66 apples",
+    "L7": "Kayla picked 10+4(66)=274 apples"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5434.\n    Returns: the number of apples Kayla picked.\n    \"\"\"\n    # L6\n    total_apples = 340 # 340 apples total\n    kayla_additional = 10 # 10 more\n    kayla_multiplier = 4 # 4 times\n    # The solution implicitly solves the equation: total_apples = x + (kayla_additional + kayla_multiplier * x)\n    # Which simplifies to: total_apples = (1 + kayla_multiplier) * x + kayla_additional\n    # Rearranging: total_apples - kayla_additional = (1 + kayla_multiplier) * x\n    # Solving for x: x = (total_apples - kayla_additional) / (1 + kayla_multiplier)\n    kylie_apples = (total_apples - kayla_additional) / (1 + kayla_multiplier)\n\n    # L7\n    kayla_apples = kayla_additional + kayla_multiplier * kylie_apples\n\n    # FA\n    answer = kayla_apples\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "kayla_apples",
+    "operand_to_replace": "kayla_additional",
+    "replacement_variable": "kylie_apples"
+  },
+  "correct_trace": {
+    "total_apples": 340,
+    "kayla_additional": 10,
+    "kayla_multiplier": 4,
+    "kylie_apples": 66.0,
+    "kayla_apples": 274.0,
+    "answer": 274.0
+  },
+  "flawed_trace": {
+    "total_apples": 340,
+    "kayla_additional": 10,
+    "kayla_multiplier": 4,
+    "kylie_apples": 66.0,
+    "kayla_apples": 330.0,
+    "answer": 330.0
+  },
+  "correct_value": 274.0,
+  "flawed_value": 330.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "kylie_apples",
+      "question_inputs": [
+        "total_apples",
+        "kayla_additional",
+        "kayla_multiplier"
+      ],
+      "solution_line_template": "x={kylie_apples} apples"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "kayla_apples",
+      "question_inputs": [],
+      "solution_line_template": "Kayla picked {kayla_additional}+{kayla_multiplier}({kylie_apples})={kayla_apples} apples"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L6": "x=66 apples",
+    "L7": "Kayla picked 66+4(66)=330 apples",
+    "FA": "#### 330"
+  },
+  "erroneous_line_number": "L7",
+  "explanation": "Input misrepresentation. The value for 'kylie_apples' (66.0) was used instead of 'kayla_additional' (10).",
+  "repro_seed": 6724499009097609536,
+  "model_name": "google_gemini-2.5-flash"
+}

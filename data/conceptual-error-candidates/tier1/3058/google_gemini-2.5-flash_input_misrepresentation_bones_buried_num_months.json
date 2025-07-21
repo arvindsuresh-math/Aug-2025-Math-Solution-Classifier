@@ -1,0 +1,63 @@
+{
+  "index": 3058,
+  "original_solution_mapping": {
+    "FA": "#### 42",
+    "L1": "He gets 10 new bones, every month for 5 months so he has 10*5 = <<10*5=50>>50 dog bones",
+    "L2": "He has 8 bones available which means he has buried 50-8 = <<50-8=42>>42 bones"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3058.\n    Returns: the number of bones Barkley has buried.\n    \"\"\"\n    # L1\n    bones_per_month = 10 # 10 new dog bones\n    num_months = 5 # After 5 months\n    total_bones_received = bones_per_month * num_months\n\n    # L2\n    bones_available = 8 # has 8 bones available\n    bones_buried = total_bones_received - bones_available\n\n    # FA\n    answer = bones_buried\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "bones_buried",
+    "operand_to_replace": "bones_available",
+    "replacement_variable": "num_months"
+  },
+  "correct_trace": {
+    "bones_per_month": 10,
+    "num_months": 5,
+    "total_bones_received": 50,
+    "bones_available": 8,
+    "bones_buried": 42,
+    "answer": 42
+  },
+  "flawed_trace": {
+    "bones_per_month": 10,
+    "num_months": 5,
+    "total_bones_received": 50,
+    "bones_available": 8,
+    "bones_buried": 45,
+    "answer": 45
+  },
+  "correct_value": 42,
+  "flawed_value": 45,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_bones_received",
+      "question_inputs": [
+        "bones_per_month",
+        "num_months"
+      ],
+      "solution_line_template": "He gets {bones_per_month} new bones, every month for {num_months} months so he has {bones_per_month}*{num_months} = <<{bones_per_month}*{num_months}={total_bones_received}>>{total_bones_received} dog bones"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "bones_buried",
+      "question_inputs": [
+        "bones_available"
+      ],
+      "solution_line_template": "He has {bones_available} bones available which means he has buried {total_bones_received}-{bones_available} = <<{total_bones_received}-{bones_available}={bones_buried}>>{bones_buried} bones"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He gets 10 new bones, every month for 5 months so he has 10*5 = <<10*5=50>>50 dog bones",
+    "L2": "He has 5 bones available which means he has buried 50-5 = <<50-5=45>>45 bones",
+    "FA": "#### 45"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_months' (5) was used instead of 'bones_available' (8).",
+  "repro_seed": -2048750400048809456,
+  "model_name": "google_gemini-2.5-flash"
+}

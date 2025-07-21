@@ -1,0 +1,74 @@
+{
+  "index": 872,
+  "original_solution_mapping": {
+    "FA": "#### 170",
+    "L1": "The sell reduced the price of each pin by 20*.15=$<<20*.15=3>>3",
+    "L2": "So he paid 20-3=$<<20-3=17>>17 per pin",
+    "L3": "So the total cost was 17*10=$<<17*10=170>>170"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 872.\n    Returns: the total amount John spent on pins.\n    \"\"\"\n    # L1\n    original_price_per_pin = 20 # normally $20 each\n    discount_rate = 0.15 # 15% off\n    discount_amount_per_pin = original_price_per_pin * discount_rate\n\n    # L2\n    price_per_pin_after_discount = original_price_per_pin - discount_amount_per_pin\n\n    # L3\n    num_pins = 10 # buy 10 pins\n    total_cost = price_per_pin_after_discount * num_pins\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_cost",
+    "operand_to_replace": "price_per_pin_after_discount",
+    "replacement_variable": "discount_amount_per_pin"
+  },
+  "correct_trace": {
+    "original_price_per_pin": 20,
+    "discount_rate": 0.15,
+    "discount_amount_per_pin": 3.0,
+    "price_per_pin_after_discount": 17.0,
+    "num_pins": 10,
+    "total_cost": 170.0,
+    "answer": 170.0
+  },
+  "flawed_trace": {
+    "original_price_per_pin": 20,
+    "discount_rate": 0.15,
+    "discount_amount_per_pin": 3.0,
+    "price_per_pin_after_discount": 17.0,
+    "num_pins": 10,
+    "total_cost": 30.0,
+    "answer": 30.0
+  },
+  "correct_value": 170.0,
+  "flawed_value": 30.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "discount_amount_per_pin",
+      "question_inputs": [
+        "original_price_per_pin",
+        "discount_rate"
+      ],
+      "solution_line_template": "The sell reduced the price of each pin by {original_price_per_pin}*{discount_rate}=$<<{original_price_per_pin}*{discount_rate}={discount_amount_per_pin}>>{discount_amount_per_pin}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "price_per_pin_after_discount",
+      "question_inputs": [],
+      "solution_line_template": "So he paid {original_price_per_pin}-{discount_amount_per_pin}=$<<{original_price_per_pin}-{discount_amount_per_pin}={price_per_pin_after_discount}>>{price_per_pin_after_discount} per pin"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "num_pins"
+      ],
+      "solution_line_template": "So the total cost was {price_per_pin_after_discount}*{num_pins}=$<<{price_per_pin_after_discount}*{num_pins}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The sell reduced the price of each pin by 20*0.15=$<<20*0.15=3>>3",
+    "L2": "So he paid 20-3=$<<20-3=17>>17 per pin",
+    "L3": "So the total cost was 3*10=$<<3*10=30>>30",
+    "FA": "#### 30"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'discount_amount_per_pin' (value: 3.0) was used instead of 'price_per_pin_after_discount' (value: 17.0).",
+  "repro_seed": -4199473238283753320,
+  "model_name": "google_gemini-2.5-flash"
+}

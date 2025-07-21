@@ -1,0 +1,83 @@
+{
+  "index": 6580,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "The pool holds 5000 gallons of water because 50 x 100 = <<50*100=5000>>5000",
+    "L2": "Every gallon costs $.001 because $.01/10 = $<<.01/10=.001>>.001",
+    "L3": "It costs $5 to fill the pool because 5000 x $.001 = $<<5000*.001=5>>5"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6580.\n    Returns: the total cost in dollars to fill the pool.\n    \"\"\"\n    # L1\n    fill_time_hours = 50 # The pool normally takes 50 hours to fill\n    hose_flow_rate_gph = 100 # his hose runs at 100 gallons per hour\n    pool_capacity_gallons = fill_time_hours * hose_flow_rate_gph\n\n    # L2\n    cost_1_cent = 1 # 1 cent for 10 gallons\n    cents_per_dollar = 100 # WK\n    cost_1_cent_dollars = cost_1_cent / cents_per_dollar\n    gallons_for_cost = 10 # 10 gallons\n    cost_per_gallon_dollars = cost_1_cent_dollars / gallons_for_cost\n\n    # L3\n    total_cost_dollars = pool_capacity_gallons * cost_per_gallon_dollars\n\n    # FA\n    answer = total_cost_dollars\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "cost_1_cent_dollars",
+    "operand_to_replace": "cents_per_dollar",
+    "replacement_variable": "cost_1_cent"
+  },
+  "correct_trace": {
+    "fill_time_hours": 50,
+    "hose_flow_rate_gph": 100,
+    "pool_capacity_gallons": 5000,
+    "cost_1_cent": 1,
+    "cents_per_dollar": 100,
+    "cost_1_cent_dollars": 0.01,
+    "gallons_for_cost": 10,
+    "cost_per_gallon_dollars": 0.001,
+    "total_cost_dollars": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "fill_time_hours": 50,
+    "hose_flow_rate_gph": 100,
+    "pool_capacity_gallons": 5000,
+    "cost_1_cent": 1,
+    "cents_per_dollar": 100,
+    "cost_1_cent_dollars": 1.0,
+    "gallons_for_cost": 10,
+    "cost_per_gallon_dollars": 0.1,
+    "total_cost_dollars": 500.0,
+    "answer": 500.0
+  },
+  "correct_value": 0.01,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "pool_capacity_gallons",
+      "question_inputs": [
+        "fill_time_hours",
+        "hose_flow_rate_gph"
+      ],
+      "solution_line_template": "The pool holds {pool_capacity_gallons} gallons of water because {fill_time_hours} x {hose_flow_rate_gph} = <<{fill_time_hours}*{hose_flow_rate_gph}={pool_capacity_gallons}>>{pool_capacity_gallons}"
+    },
+    {
+      "WK_inputs": [
+        "cents_per_dollar"
+      ],
+      "line_number": "L2",
+      "output_variable": "cost_per_gallon_dollars",
+      "question_inputs": [
+        "cost_1_cent",
+        "gallons_for_cost"
+      ],
+      "solution_line_template": "Every gallon costs ${cost_per_gallon_dollars} because ${cost_1_cent_dollars}/{gallons_for_cost} = $<<{cost_1_cent_dollars}/{gallons_for_cost}={cost_per_gallon_dollars}>>{cost_per_gallon_dollars}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost_dollars",
+      "question_inputs": [],
+      "solution_line_template": "It costs ${total_cost_dollars} to fill the pool because {pool_capacity_gallons} x ${cost_per_gallon_dollars} = $<<{pool_capacity_gallons}*{cost_per_gallon_dollars}={total_cost_dollars}>>{total_cost_dollars}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The pool holds 5000 gallons of water because 50 x 100 = <<50*100=5000>>5000",
+    "L2": "Every gallon costs $0.1 because $1/10 = $<<1/10=0.1>>0.1",
+    "L3": "It costs $500 to fill the pool because 5000 x $0.1 = $<<5000*0.1=500>>500",
+    "FA": "#### 500"
+  },
+  "erroneous_line_number": null,
+  "explanation": "Input misrepresentation. The value for 'cost_1_cent' (1) was used instead of 'cents_per_dollar' (100).",
+  "repro_seed": 7261541184462620299,
+  "model_name": "google_gemini-2.5-flash"
+}

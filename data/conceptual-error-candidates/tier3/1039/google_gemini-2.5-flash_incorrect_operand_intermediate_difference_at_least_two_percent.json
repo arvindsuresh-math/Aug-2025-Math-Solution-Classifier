@@ -1,0 +1,80 @@
+{
+  "index": 1039,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "At least one person lives in 85/100 * 120 = <<85/100*120=102>>102 apartments.",
+    "L2": "At least two persons live in 60/100 * 120 = <<60/100*120=72>>72 apartments.",
+    "L3": "So in every of the 102 - 72 = <<30*1=30>>30 apartments, only one person is living."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1039.\n    Returns: the number of apartments with only one resident.\n    \"\"\"\n    # L1\n    at_least_one_percent = Fraction(85, 100) # 85% of them have at least 1 resident\n    total_apartments = 120 # 120 apartments\n    apartments_with_at_least_one = at_least_one_percent * total_apartments\n\n    # L2\n    at_least_two_percent = Fraction(60, 100) # 60% of the apartments have at least two residents\n    apartments_with_at_least_two = at_least_two_percent * total_apartments\n\n    # L3\n    intermediate_difference = apartments_with_at_least_one - apartments_with_at_least_two\n    one_multiplier = 1 # WK\n    apartments_with_only_one = intermediate_difference * one_multiplier\n\n    # FA\n    answer = apartments_with_only_one\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "intermediate_difference",
+    "operand_to_replace": "apartments_with_at_least_two",
+    "replacement_variable": "at_least_two_percent"
+  },
+  "correct_trace": {
+    "at_least_one_percent": "17/20",
+    "total_apartments": 120,
+    "apartments_with_at_least_one": "102",
+    "at_least_two_percent": "3/5",
+    "apartments_with_at_least_two": "72",
+    "intermediate_difference": "30",
+    "one_multiplier": 1,
+    "apartments_with_only_one": "30",
+    "answer": "30"
+  },
+  "flawed_trace": {
+    "at_least_one_percent": "17/20",
+    "total_apartments": 120,
+    "apartments_with_at_least_one": "102",
+    "at_least_two_percent": "3/5",
+    "apartments_with_at_least_two": "72",
+    "intermediate_difference": "507/5",
+    "one_multiplier": 1,
+    "apartments_with_only_one": "507/5",
+    "answer": "507/5"
+  },
+  "correct_value": "30",
+  "flawed_value": "507/5",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "apartments_with_at_least_one",
+      "question_inputs": [
+        "at_least_one_percent",
+        "total_apartments"
+      ],
+      "solution_line_template": "At least one person lives in {at_least_one_percent} * {total_apartments} = <<{at_least_one_percent}*{total_apartments}={apartments_with_at_least_one}>>{apartments_with_at_least_one} apartments."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "apartments_with_at_least_two",
+      "question_inputs": [
+        "at_least_two_percent"
+      ],
+      "solution_line_template": "At least two persons live in {at_least_two_percent} * {total_apartments} = <<{at_least_two_percent}*{total_apartments}={apartments_with_at_least_two}>>{apartments_with_at_least_two} apartments."
+    },
+    {
+      "WK_inputs": [
+        "one_multiplier"
+      ],
+      "line_number": "L3",
+      "output_variable": "apartments_with_only_one",
+      "question_inputs": [],
+      "solution_line_template": "So in every of the {apartments_with_at_least_one} - {apartments_with_at_least_two} = <<{intermediate_difference}*{one_multiplier}={apartments_with_only_one}>>{apartments_with_only_one} apartments, only one person is living."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "At least one person lives in 85/100 * 120 = <<85/100*120=102>>102 apartments.",
+    "L2": "At least two persons live in 60/100 * 120 = <<60/100*120=72>>72 apartments.",
+    "L3": "So in every of the 102 - 72 = <<507/5*1=507/5>>507/5 apartments, only one person is living.",
+    "FA": "#### 507/5"
+  },
+  "erroneous_line_number": null,
+  "explanation": "Incorrect operand. The variable 'at_least_two_percent' (value: 60/100) was used instead of 'apartments_with_at_least_two' (value: 72).",
+  "repro_seed": -6439397341915173161,
+  "model_name": "google_gemini-2.5-flash"
+}

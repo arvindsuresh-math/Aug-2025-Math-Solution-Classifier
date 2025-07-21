@@ -1,0 +1,85 @@
+{
+  "index": 2996,
+  "original_solution_mapping": {
+    "FA": "#### 4000",
+    "L1": "If she drives 400 miles today, the car will have consumed 4*400 = <<400*4=1600>>1600 gallons of gas.",
+    "L2": "Tomorrow, if she drives 200 more miles, the total distance will be 200+400 = <<200+400=600>>600 miles.",
+    "L3": "The fuel consumption by the car tomorrow is 4*600 = <<4*600=2400>>2400 gallons.",
+    "L4": "The car's total fuel consumption in the two days is 2400+1600 = <<2400+1600=4000>>4000 gallons."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2996.\n    Returns: the total gallons of gas the car will consume.\n    \"\"\"\n    # L1\n    gallons_per_mile = 4 # consumes 4 gallons of gas per mile\n    miles_today = 400 # drives 400 miles today\n    gallons_consumed_today = gallons_per_mile * miles_today\n\n    # L2\n    more_miles_tomorrow = 200 # 200 more miles tomorrow\n    miles_tomorrow = more_miles_tomorrow + miles_today\n\n    # L3\n    gallons_consumed_tomorrow = gallons_per_mile * miles_tomorrow\n\n    # L4\n    total_gallons_consumed = gallons_consumed_tomorrow + gallons_consumed_today\n\n    # FA\n    answer = total_gallons_consumed\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_gallons_consumed",
+    "operand_to_replace": "gallons_consumed_tomorrow",
+    "replacement_variable": "gallons_consumed_today"
+  },
+  "correct_trace": {
+    "gallons_per_mile": 4,
+    "miles_today": 400,
+    "gallons_consumed_today": 1600,
+    "more_miles_tomorrow": 200,
+    "miles_tomorrow": 600,
+    "gallons_consumed_tomorrow": 2400,
+    "total_gallons_consumed": 4000,
+    "answer": 4000
+  },
+  "flawed_trace": {
+    "gallons_per_mile": 4,
+    "miles_today": 400,
+    "gallons_consumed_today": 1600,
+    "more_miles_tomorrow": 200,
+    "miles_tomorrow": 600,
+    "gallons_consumed_tomorrow": 2400,
+    "total_gallons_consumed": 3200,
+    "answer": 3200
+  },
+  "correct_value": 4000,
+  "flawed_value": 3200,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "gallons_per_mile",
+        "miles_today"
+      ],
+      "WK_inputs": [],
+      "output_variable": "gallons_consumed_today",
+      "solution_line_template": "If she drives {miles_today} miles today, the car will have consumed {gallons_per_mile}*{miles_today} = <<{miles_today}*{gallons_per_mile}={gallons_consumed_today}>>{gallons_consumed_today} gallons of gas."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "more_miles_tomorrow"
+      ],
+      "WK_inputs": [],
+      "output_variable": "miles_tomorrow",
+      "solution_line_template": "Tomorrow, if she drives {more_miles_tomorrow} more miles, the total distance will be {more_miles_tomorrow}+{miles_today} = <<{more_miles_tomorrow}+{miles_today}={miles_tomorrow}>>{miles_tomorrow} miles."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "gallons_consumed_tomorrow",
+      "solution_line_template": "The fuel consumption by the car tomorrow is {gallons_per_mile}*{miles_tomorrow} = <<{gallons_per_mile}*{miles_tomorrow}={gallons_consumed_tomorrow}>>{gallons_consumed_tomorrow} gallons."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_gallons_consumed",
+      "solution_line_template": "The car's total fuel consumption in the two days is {gallons_consumed_tomorrow}+{gallons_consumed_today} = <<{gallons_consumed_tomorrow}+{gallons_consumed_today}={total_gallons_consumed}>>{total_gallons_consumed} gallons."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If she drives 400 miles today, the car will have consumed 4*400 = <<400*4=1600>>1600 gallons of gas.",
+    "L2": "Tomorrow, if she drives 200 more miles, the total distance will be 200+400 = <<200+400=600>>600 miles.",
+    "L3": "The fuel consumption by the car tomorrow is 4*600 = <<4*600=2400>>2400 gallons.",
+    "L4": "The car's total fuel consumption in the two days is 1600+1600 = <<1600+1600=3200>>3200 gallons.",
+    "FA": "#### 3200"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'gallons_consumed_today' (value: 1600) was used instead of 'gallons_consumed_tomorrow' (value: 2400).",
+  "repro_seed": 6620039796488938766,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,63 @@
+{
+  "index": 1110,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "The total number of ml needed is 30 kg x 5 ml/kg = <<30*5=150>>150 ml",
+    "L2": "Each dose has to be 150 ml / 3 doses = <<150/3=50>>50 ml/dose"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1110.\n    Returns: the amount of medicine in each part of the dose in ml.\n    \"\"\"\n    # L1\n    child_weight = 30 # child weighs 30 kilograms\n    medicine_per_kg = 5 # 5 ml of medicine\n    total_medicine_ml = child_weight * medicine_per_kg\n\n    # L2\n    num_parts = 3 # given in 3 equal parts\n    medicine_per_part_ml = total_medicine_ml / num_parts\n\n    # FA\n    answer = medicine_per_part_ml\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_medicine_ml",
+    "operand_to_replace": "medicine_per_kg",
+    "replacement_variable": "child_weight"
+  },
+  "correct_trace": {
+    "child_weight": 30,
+    "medicine_per_kg": 5,
+    "total_medicine_ml": 150,
+    "num_parts": 3,
+    "medicine_per_part_ml": 50.0,
+    "answer": 50.0
+  },
+  "flawed_trace": {
+    "child_weight": 30,
+    "medicine_per_kg": 5,
+    "total_medicine_ml": 900,
+    "num_parts": 3,
+    "medicine_per_part_ml": 300.0,
+    "answer": 300.0
+  },
+  "correct_value": 150,
+  "flawed_value": 900,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_medicine_ml",
+      "question_inputs": [
+        "child_weight",
+        "medicine_per_kg"
+      ],
+      "solution_line_template": "The total number of ml needed is {child_weight} kg x {medicine_per_kg} ml/kg = <<{child_weight}*{medicine_per_kg}={total_medicine_ml}>>{total_medicine_ml} ml"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "medicine_per_part_ml",
+      "question_inputs": [
+        "num_parts"
+      ],
+      "solution_line_template": "Each dose has to be {total_medicine_ml} ml / {num_parts} doses = <<{total_medicine_ml}/{num_parts}={medicine_per_part_ml}>>{medicine_per_part_ml} ml/dose"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total number of ml needed is 30 kg x 30 ml/kg = <<30*30=900>>900 ml",
+    "L2": "Each dose has to be 900 ml / 3 doses = <<900/3=300>>300 ml/dose",
+    "FA": "#### 300"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'child_weight' (30) was used instead of 'medicine_per_kg' (5).",
+  "repro_seed": -9138139519872618386,
+  "model_name": "google_gemini-2.5-flash"
+}

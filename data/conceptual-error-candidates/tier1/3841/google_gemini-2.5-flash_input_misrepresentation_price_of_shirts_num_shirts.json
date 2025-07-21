@@ -1,0 +1,92 @@
+{
+  "index": 3841,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "54*2=$<<54*2=108>>108 is the price of 2 pairs of pants.",
+    "L2": "4*33=$<<4*33=132>>132 is the price of 4 shirts.",
+    "L3": "108+132=$<<108+132=240>>240 is the total price.",
+    "L4": "So the cashier gave 250-240=$<<250-240=10>>10 change to Laura."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3841.\n    Returns: the amount of change Laura received.\n    \"\"\"\n    # L1\n    price_per_pant_pair = 54 # 2 pairs of pants for $54 each\n    num_pant_pairs = 2 # 2 pairs of pants\n    price_of_pants = price_per_pant_pair * num_pant_pairs\n\n    # L2\n    num_shirts = 4 # 4 shirts\n    price_per_shirt = 33 # 4 shirts for $33 each\n    price_of_shirts = num_shirts * price_per_shirt\n\n    # L3\n    total_price = price_of_pants + price_of_shirts\n\n    # L4\n    amount_given_to_cashier = 250 # gave $250 to the cashier\n    change = amount_given_to_cashier - total_price\n\n    # FA\n    answer = change\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "price_of_shirts",
+    "operand_to_replace": "price_per_shirt",
+    "replacement_variable": "num_shirts"
+  },
+  "correct_trace": {
+    "price_per_pant_pair": 54,
+    "num_pant_pairs": 2,
+    "price_of_pants": 108,
+    "num_shirts": 4,
+    "price_per_shirt": 33,
+    "price_of_shirts": 132,
+    "total_price": 240,
+    "amount_given_to_cashier": 250,
+    "change": 10,
+    "answer": 10
+  },
+  "flawed_trace": {
+    "price_per_pant_pair": 54,
+    "num_pant_pairs": 2,
+    "price_of_pants": 108,
+    "num_shirts": 4,
+    "price_per_shirt": 33,
+    "price_of_shirts": 16,
+    "total_price": 124,
+    "amount_given_to_cashier": 250,
+    "change": 126,
+    "answer": 126
+  },
+  "correct_value": 132,
+  "flawed_value": 16,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "price_of_pants",
+      "question_inputs": [
+        "price_per_pant_pair",
+        "num_pant_pairs"
+      ],
+      "solution_line_template": "{price_per_pant_pair}*{num_pant_pairs}=${price_of_pants}<<{price_per_pant_pair}*{num_pant_pairs}={price_of_pants}>>{price_of_pants} is the price of {num_pant_pairs} pairs of pants."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "price_of_shirts",
+      "question_inputs": [
+        "num_shirts",
+        "price_per_shirt"
+      ],
+      "solution_line_template": "{num_shirts}*{price_per_shirt}=${price_of_shirts}<<{num_shirts}*{price_per_shirt}={price_of_shirts}>>{price_of_shirts} is the price of {num_shirts} shirts."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_price",
+      "question_inputs": [],
+      "solution_line_template": "{price_of_pants}+{price_of_shirts}=${total_price}<<{price_of_pants}+{price_of_shirts}={total_price}>>{total_price} is the total price."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "change",
+      "question_inputs": [
+        "amount_given_to_cashier"
+      ],
+      "solution_line_template": "So the cashier gave {amount_given_to_cashier}-{total_price}=${change}<<{amount_given_to_cashier}-{total_price}={change}>>{change} change to Laura."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "54*2=$108<<54*2=108>>108 is the price of 2 pairs of pants.",
+    "L2": "4*4=$16<<4*4=16>>16 is the price of 4 shirts.",
+    "L3": "108+16=$124<<108+16=124>>124 is the total price.",
+    "L4": "So the cashier gave 250-124=$126<<250-124=126>>126 change to Laura.",
+    "FA": "#### 126"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_shirts' (4) was used instead of 'price_per_shirt' (33).",
+  "repro_seed": -3857614778934582543,
+  "model_name": "google_gemini-2.5-flash"
+}

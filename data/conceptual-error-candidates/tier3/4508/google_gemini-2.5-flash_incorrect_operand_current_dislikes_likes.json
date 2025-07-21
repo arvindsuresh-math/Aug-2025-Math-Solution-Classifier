@@ -1,0 +1,79 @@
+{
+  "index": 4508,
+  "original_solution_mapping": {
+    "FA": "#### 2600",
+    "L1": "half as many as 3000 is 3000/2=<<3000/2=1500>>1500 dislikes",
+    "L2": "100 more than 1500 is 1500+100=<<1500+100=1600>>1600 dislikes",
+    "L3": "1000 more dislikes is 1600+1000=2600 dislikes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4508.\n    Returns: the total number of dislikes the video has.\n    \"\"\"\n    # L1\n    likes = 3000 # 3000 likes\n    half_divisor = 2 # half as many\n    dislikes_from_half_likes = likes / half_divisor\n\n    # L2\n    initial_dislikes_offset = 100 # 100 more than half as many dislikes\n    current_dislikes = dislikes_from_half_likes + initial_dislikes_offset\n\n    # L3\n    additional_dislikes = 1000 # 1000 more dislikes\n    final_dislikes = current_dislikes + additional_dislikes\n\n    # FA\n    answer = final_dislikes\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "current_dislikes",
+    "operand_to_replace": "dislikes_from_half_likes",
+    "replacement_variable": "likes"
+  },
+  "correct_trace": {
+    "likes": 3000,
+    "half_divisor": 2,
+    "dislikes_from_half_likes": 1500.0,
+    "initial_dislikes_offset": 100,
+    "current_dislikes": 1600.0,
+    "additional_dislikes": 1000,
+    "final_dislikes": 2600.0,
+    "answer": 2600.0
+  },
+  "flawed_trace": {
+    "likes": 3000,
+    "half_divisor": 2,
+    "dislikes_from_half_likes": 1500.0,
+    "initial_dislikes_offset": 100,
+    "current_dislikes": 3100,
+    "additional_dislikes": 1000,
+    "final_dislikes": 4100,
+    "answer": 4100
+  },
+  "correct_value": 1600.0,
+  "flawed_value": 3100,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "half_divisor"
+      ],
+      "line_number": "L1",
+      "output_variable": "dislikes_from_half_likes",
+      "question_inputs": [
+        "likes"
+      ],
+      "solution_line_template": "half as many as {likes} is {likes}/{half_divisor}=<<{likes}/{half_divisor}={dislikes_from_half_likes}>>{dislikes_from_half_likes} dislikes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "current_dislikes",
+      "question_inputs": [
+        "initial_dislikes_offset"
+      ],
+      "solution_line_template": "{initial_dislikes_offset} more than {dislikes_from_half_likes} is {dislikes_from_half_likes}+{initial_dislikes_offset}=<<{dislikes_from_half_likes}+{initial_dislikes_offset}={current_dislikes}>>{current_dislikes} dislikes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_dislikes",
+      "question_inputs": [
+        "additional_dislikes"
+      ],
+      "solution_line_template": "{additional_dislikes} more dislikes is {current_dislikes}+{additional_dislikes}={final_dislikes} dislikes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "half as many as 3000 is 3000/2=<<3000/2=1500>>1500 dislikes",
+    "L2": "100 more than 3000 is 3000+100=<<3000+100=3100>>3100 dislikes",
+    "L3": "1000 more dislikes is 3100+1000=4100 dislikes",
+    "FA": "#### 4100"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'likes' (value: 3000) was used instead of 'dislikes_from_half_likes' (value: 1500.0).",
+  "repro_seed": 6594245320740297847,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,77 @@
+{
+  "index": 4255,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "Up, took 12/4=<<12/4=3>>3 hours.",
+    "L2": "Down, took 12/6=<<12/6=2>>2 hours.",
+    "L3": "Total time was 3+2=<<3+2=5>>5 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4255.\n    Returns: the total time the hike took in hours.\n    \"\"\"\n    # L1\n    distance_up = 12 # 12 miles to Mount Overlook\n    pace_up = 4 # 4 miles per hour\n    time_up = distance_up / pace_up\n\n    # L2\n    distance_down = 12 # returns\n    pace_down = 6 # 6 miles per hour\n    time_down = distance_down / pace_down\n\n    # L3\n    total_time = time_up + time_down\n\n    # FA\n    answer = total_time\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "time_up",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x30b8ff850>"
+  },
+  "correct_trace": {
+    "distance_up": 12,
+    "pace_up": 4,
+    "time_up": 3.0,
+    "distance_down": 12,
+    "pace_down": 6,
+    "time_down": 2.0,
+    "total_time": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "distance_up": 12,
+    "pace_up": 4,
+    "time_up": 48,
+    "distance_down": 12,
+    "pace_down": 6,
+    "time_down": 2.0,
+    "total_time": 50.0,
+    "answer": 50.0
+  },
+  "correct_value": 3.0,
+  "flawed_value": 48,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "time_up",
+      "question_inputs": [
+        "distance_up",
+        "pace_up"
+      ],
+      "solution_line_template": "Up, took {distance_up}/{pace_up}=<<{distance_up}/{pace_up}={time_up}>>{time_up} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "time_down",
+      "question_inputs": [
+        "distance_down",
+        "pace_down"
+      ],
+      "solution_line_template": "Down, took {distance_down}/{pace_down}=<<{distance_down}/{pace_down}={time_down}>>{time_down} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_time",
+      "question_inputs": [],
+      "solution_line_template": "Total time was {time_up}+{time_down}=<<{time_up}+{time_down}={total_time}>>{total_time} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Up, took 12/4=<<12/4=48>>48 hours.",
+    "L2": "Down, took 12/6=<<12/6=2>>2 hours.",
+    "L3": "Total time was 48+2=<<48+2=50>>50 hours.",
+    "FA": "#### 50"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -3953986032657211667,
+  "model_name": "google_gemini-2.5-flash"
+}

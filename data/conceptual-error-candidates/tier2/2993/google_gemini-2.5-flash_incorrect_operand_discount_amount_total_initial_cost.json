@@ -1,0 +1,89 @@
+{
+  "index": 2993,
+  "original_solution_mapping": {
+    "FA": "#### 1360",
+    "L1": "His order came out to 7*200=$<<7*200=1400>>1400",
+    "L2": "So there was 1400-1000=$<<1400-1000=400>>400 that qualified for the discount",
+    "L3": "So his discount saved 400*.1=$<<400*.1=40>>40",
+    "L4": "So his purchase came out to 1400-40=$<<1400-40=1360>>1360"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2993.\n    Returns: the final cost of John's order after the discount.\n    \"\"\"\n    # L1\n    num_items = 7 # 7 items\n    cost_per_item = 200 # each cost $200\n    total_initial_cost = num_items * cost_per_item\n\n    # L2\n    discount_threshold = 1000 # over $1000\n    discount_eligible_amount = total_initial_cost - discount_threshold\n\n    # L3\n    discount_rate_decimal = 0.1 # 10% discount\n    discount_amount = discount_eligible_amount * discount_rate_decimal\n\n    # L4\n    final_cost = total_initial_cost - discount_amount\n\n    # FA\n    answer = final_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "discount_amount",
+    "operand_to_replace": "discount_eligible_amount",
+    "replacement_variable": "total_initial_cost"
+  },
+  "correct_trace": {
+    "num_items": 7,
+    "cost_per_item": 200,
+    "total_initial_cost": 1400,
+    "discount_threshold": 1000,
+    "discount_eligible_amount": 400,
+    "discount_rate_decimal": 0.1,
+    "discount_amount": 40.0,
+    "final_cost": 1360.0,
+    "answer": 1360.0
+  },
+  "flawed_trace": {
+    "num_items": 7,
+    "cost_per_item": 200,
+    "total_initial_cost": 1400,
+    "discount_threshold": 1000,
+    "discount_eligible_amount": 400,
+    "discount_rate_decimal": 0.1,
+    "discount_amount": 140.0,
+    "final_cost": 1260.0,
+    "answer": 1260.0
+  },
+  "correct_value": 40.0,
+  "flawed_value": 140.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_initial_cost",
+      "question_inputs": [
+        "num_items",
+        "cost_per_item"
+      ],
+      "solution_line_template": "His order came out to {num_items}*{cost_per_item}=$<<{num_items}*{cost_per_item}={total_initial_cost}>>{total_initial_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "discount_eligible_amount",
+      "question_inputs": [
+        "discount_threshold"
+      ],
+      "solution_line_template": "So there was {total_initial_cost}-{discount_threshold}=$<<{total_initial_cost}-{discount_threshold}={discount_eligible_amount}>>{discount_eligible_amount} that qualified for the discount"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "discount_amount",
+      "question_inputs": [
+        "discount_rate_decimal"
+      ],
+      "solution_line_template": "So his discount saved {discount_eligible_amount}*{discount_rate_decimal}=$<<{discount_eligible_amount}*{discount_rate_decimal}={discount_amount}>>{discount_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_cost",
+      "question_inputs": [],
+      "solution_line_template": "So his purchase came out to {total_initial_cost}-{discount_amount}=$<<{total_initial_cost}-{discount_amount}={final_cost}>>{final_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "His order came out to 7*200=$<<7*200=1400>>1400",
+    "L2": "So there was 1400-1000=$<<1400-1000=400>>400 that qualified for the discount",
+    "L3": "So his discount saved 1400*0.1=$<<1400*0.1=140>>140",
+    "L4": "So his purchase came out to 1400-140=$<<1400-140=1260>>1260",
+    "FA": "#### 1260"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'total_initial_cost' (value: 1400) was used instead of 'discount_eligible_amount' (value: 400).",
+  "repro_seed": -411739575591938487,
+  "model_name": "google_gemini-2.5-flash"
+}

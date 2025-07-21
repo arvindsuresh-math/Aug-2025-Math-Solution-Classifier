@@ -1,0 +1,98 @@
+{
+  "index": 183,
+  "original_solution_mapping": {
+    "FA": "#### 349",
+    "L1": "There are 300+200+80 = <<300+200+80=580>>580 birds in total",
+    "L2": "Every day 20+8+5 = <<20+8+5=33>>33 birds are lost",
+    "L3": "After a week which is 7 days, 33*7 = <<33*7=231>>231 birds would be lost",
+    "L4": "There would be 580-231 = <<580-231=349>>349 birds left in the poultry"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 183.\n    Returns: the number of birds left in the poultry after a week.\n    \"\"\"\n    # L1\n    chickens_initial = 300 # 300 chickens\n    turkeys_initial = 200 # 200 turkeys\n    guinea_fowls_initial = 80 # 80 guinea fowls\n    total_initial_birds = chickens_initial + turkeys_initial + guinea_fowls_initial\n\n    # L2\n    chickens_lost_per_day = 20 # lost 20 chickens\n    turkeys_lost_per_day = 8 # lost 8 turkeys\n    guinea_fowls_lost_per_day = 5 # lost 5 guinea fowls\n    total_lost_per_day = chickens_lost_per_day + turkeys_lost_per_day + guinea_fowls_lost_per_day\n\n    # L3\n    days_in_week = 7 # WK\n    total_lost_after_week = total_lost_per_day * days_in_week\n\n    # L4\n    birds_left = total_initial_birds - total_lost_after_week\n\n    # FA\n    answer = birds_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_lost_after_week",
+    "operand_to_replace": "total_lost_per_day",
+    "replacement_variable": "guinea_fowls_initial"
+  },
+  "correct_trace": {
+    "chickens_initial": 300,
+    "turkeys_initial": 200,
+    "guinea_fowls_initial": 80,
+    "total_initial_birds": 580,
+    "chickens_lost_per_day": 20,
+    "turkeys_lost_per_day": 8,
+    "guinea_fowls_lost_per_day": 5,
+    "total_lost_per_day": 33,
+    "days_in_week": 7,
+    "total_lost_after_week": 231,
+    "birds_left": 349,
+    "answer": 349
+  },
+  "flawed_trace": {
+    "chickens_initial": 300,
+    "turkeys_initial": 200,
+    "guinea_fowls_initial": 80,
+    "total_initial_birds": 580,
+    "chickens_lost_per_day": 20,
+    "turkeys_lost_per_day": 8,
+    "guinea_fowls_lost_per_day": 5,
+    "total_lost_per_day": 33,
+    "days_in_week": 7,
+    "total_lost_after_week": 560,
+    "birds_left": 20,
+    "answer": 20
+  },
+  "correct_value": 231,
+  "flawed_value": 560,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "chickens_initial",
+        "turkeys_initial",
+        "guinea_fowls_initial"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_initial_birds",
+      "solution_line_template": "There are {chickens_initial}+{turkeys_initial}+{guinea_fowls_initial} = <<{chickens_initial}+{turkeys_initial}+{guinea_fowls_initial}={total_initial_birds}>>{total_initial_birds} birds in total"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "chickens_lost_per_day",
+        "turkeys_lost_per_day",
+        "guinea_fowls_lost_per_day"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_lost_per_day",
+      "solution_line_template": "Every day {chickens_lost_per_day}+{turkeys_lost_per_day}+{guinea_fowls_lost_per_day} = <<{chickens_lost_per_day}+{turkeys_lost_per_day}+{guinea_fowls_lost_per_day}={total_lost_per_day}>>{total_lost_per_day} birds are lost"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [
+        "days_in_week"
+      ],
+      "output_variable": "total_lost_after_week",
+      "solution_line_template": "After a week which is {days_in_week} days, {total_lost_per_day}*{days_in_week} = <<{total_lost_per_day}*{days_in_week}={total_lost_after_week}>>{total_lost_after_week} birds would be lost"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "birds_left",
+      "solution_line_template": "There would be {total_initial_birds}-{total_lost_after_week} = <<{total_initial_birds}-{total_lost_after_week}={birds_left}>>{birds_left} birds left in the poultry"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 300+200+80 = <<300+200+80=580>>580 birds in total",
+    "L2": "Every day 20+8+5 = <<20+8+5=33>>33 birds are lost",
+    "L3": "After a week which is 7 days, 80*7 = <<80*7=560>>560 birds would be lost",
+    "L4": "There would be 580-560 = <<580-560=20>>20 birds left in the poultry",
+    "FA": "#### 20"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'guinea_fowls_initial' (value: 80) was used instead of 'total_lost_per_day' (value: 33).",
+  "repro_seed": -6746406648754165492,
+  "model_name": "google_gemini-2.5-flash"
+}

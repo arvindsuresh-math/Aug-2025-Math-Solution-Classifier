@@ -1,0 +1,79 @@
+{
+  "index": 5778,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "Every week Carl needs to drive additional 6 hours, so in two weeks that would make 2 * 6 = <<2*6=12>>12 additional hours.",
+    "L2": "Two weeks of driving 2 hours every day, means 14 * 2 = <<14*2=28>>28 hours of driving.",
+    "L3": "So during two weeks, Carl will drive 28 + 12 = <<28+12=40>>40 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5778.\n    Returns: the total hours Carl will drive in two weeks.\n    \"\"\"\n    # L1\n    additional_hours_per_week = 6 # 6 more hours every week\n    num_weeks = 2 # two weeks\n    total_additional_hours = num_weeks * additional_hours_per_week\n\n    # L2\n    hours_per_day_initial = 2 # 2 hours every day\n    days_in_two_weeks = 14 # WK\n    regular_driving_hours = days_in_two_weeks * hours_per_day_initial\n\n    # L3\n    total_driving_hours = regular_driving_hours + total_additional_hours\n\n    # FA\n    answer = total_driving_hours\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_additional_hours",
+    "operand_to_replace": "num_weeks",
+    "replacement_variable": "additional_hours_per_week"
+  },
+  "correct_trace": {
+    "additional_hours_per_week": 6,
+    "num_weeks": 2,
+    "total_additional_hours": 12,
+    "hours_per_day_initial": 2,
+    "days_in_two_weeks": 14,
+    "regular_driving_hours": 28,
+    "total_driving_hours": 40,
+    "answer": 40
+  },
+  "flawed_trace": {
+    "additional_hours_per_week": 6,
+    "num_weeks": 2,
+    "total_additional_hours": 36,
+    "hours_per_day_initial": 2,
+    "days_in_two_weeks": 14,
+    "regular_driving_hours": 28,
+    "total_driving_hours": 64,
+    "answer": 64
+  },
+  "correct_value": 12,
+  "flawed_value": 36,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "num_weeks"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_additional_hours",
+      "question_inputs": [
+        "additional_hours_per_week"
+      ],
+      "solution_line_template": "Every week Carl needs to drive additional {additional_hours_per_week} hours, so in two weeks that would make {num_weeks} * {additional_hours_per_week} = <<{num_weeks}*{additional_hours_per_week}={total_additional_hours}>>{total_additional_hours} additional hours."
+    },
+    {
+      "WK_inputs": [
+        "days_in_two_weeks"
+      ],
+      "line_number": "L2",
+      "output_variable": "regular_driving_hours",
+      "question_inputs": [
+        "hours_per_day_initial"
+      ],
+      "solution_line_template": "Two weeks of driving {hours_per_day_initial} hours every day, means {days_in_two_weeks} * {hours_per_day_initial} = <<{days_in_two_weeks}*{hours_per_day_initial}={regular_driving_hours}>>{regular_driving_hours} hours of driving."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_driving_hours",
+      "question_inputs": [],
+      "solution_line_template": "So during two weeks, Carl will drive {regular_driving_hours} + {total_additional_hours} = <<{regular_driving_hours}+{total_additional_hours}={total_driving_hours}>>{total_driving_hours} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Every week Carl needs to drive additional 6 hours, so in two weeks that would make 6 * 6 = <<6*6=36>>36 additional hours.",
+    "L2": "Two weeks of driving 2 hours every day, means 14 * 2 = <<14*2=28>>28 hours of driving.",
+    "L3": "So during two weeks, Carl will drive 28 + 36 = <<28+36=64>>64 hours.",
+    "FA": "#### 64"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'additional_hours_per_week' (6) was used instead of 'num_weeks' (2).",
+  "repro_seed": -2855421653187024836,
+  "model_name": "google_gemini-2.5-flash"
+}

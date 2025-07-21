@@ -1,0 +1,78 @@
+{
+  "index": 6758,
+  "original_solution_mapping": {
+    "FA": "#### 14",
+    "L1": "His dining room is 4 walls and he has already removed 1 wall of wallpaper so that leaves 4-1 = <<4-1=3>>3 walls in the dining room",
+    "L2": "He has 3 walls left in the dining room and 4 in his living room for a total of 3+4 = <<3+4=7>>7 walls",
+    "L3": "It takes 2 hours to remove wallpaper from just 1 wall and he has 7 more to go so it will take him 2*7 = <<2*7=14>>14 hours"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6758.\n    Returns: the total hours needed to remove the remaining wallpaper.\n    \"\"\"\n    # L1\n    total_dining_room_walls = 4 # 4 walled dining room\n    walls_removed_dining_room = 1 # 1 wall\n    remaining_dining_room_walls = total_dining_room_walls - walls_removed_dining_room\n\n    # L2\n    total_living_room_walls = 4 # 4 walled living room\n    total_remaining_walls = remaining_dining_room_walls + total_living_room_walls\n\n    # L3\n    hours_per_wall = 2 # 2 hours removing wallpaper from just 1 wall\n    total_hours_needed = hours_per_wall * total_remaining_walls\n\n    # FA\n    answer = total_hours_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_hours_needed",
+    "operand_to_replace": "hours_per_wall",
+    "replacement_variable": "walls_removed_dining_room"
+  },
+  "correct_trace": {
+    "total_dining_room_walls": 4,
+    "walls_removed_dining_room": 1,
+    "remaining_dining_room_walls": 3,
+    "total_living_room_walls": 4,
+    "total_remaining_walls": 7,
+    "hours_per_wall": 2,
+    "total_hours_needed": 14,
+    "answer": 14
+  },
+  "flawed_trace": {
+    "total_dining_room_walls": 4,
+    "walls_removed_dining_room": 1,
+    "remaining_dining_room_walls": 3,
+    "total_living_room_walls": 4,
+    "total_remaining_walls": 7,
+    "hours_per_wall": 2,
+    "total_hours_needed": 7,
+    "answer": 7
+  },
+  "correct_value": 14,
+  "flawed_value": 7,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "remaining_dining_room_walls",
+      "question_inputs": [
+        "total_dining_room_walls",
+        "walls_removed_dining_room"
+      ],
+      "solution_line_template": "His dining room is {total_dining_room_walls} walls and he has already removed {walls_removed_dining_room} wall of wallpaper so that leaves {total_dining_room_walls}-{walls_removed_dining_room} = <<{total_dining_room_walls}-{walls_removed_dining_room}={remaining_dining_room_walls}>>{remaining_dining_room_walls} walls in the dining room"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_remaining_walls",
+      "question_inputs": [
+        "total_living_room_walls"
+      ],
+      "solution_line_template": "He has {remaining_dining_room_walls} walls left in the dining room and {total_living_room_walls} in his living room for a total of {remaining_dining_room_walls}+{total_living_room_walls} = <<{remaining_dining_room_walls}+{total_living_room_walls}={total_remaining_walls}>>{total_remaining_walls} walls"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_hours_needed",
+      "question_inputs": [
+        "hours_per_wall"
+      ],
+      "solution_line_template": "It takes {hours_per_wall} hours to remove wallpaper from just 1 wall and he has {total_remaining_walls} more to go so it will take him {hours_per_wall}*{total_remaining_walls} = <<{hours_per_wall}*{total_remaining_walls}={total_hours_needed}>>{total_hours_needed} hours"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "His dining room is 4 walls and he has already removed 1 wall of wallpaper so that leaves 4-1 = <<4-1=3>>3 walls in the dining room",
+    "L2": "He has 3 walls left in the dining room and 4 in his living room for a total of 3+4 = <<3+4=7>>7 walls",
+    "L3": "It takes 1 hours to remove wallpaper from just 1 wall and he has 7 more to go so it will take him 1*7 = <<1*7=7>>7 hours",
+    "FA": "#### 7"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'walls_removed_dining_room' (1) was used instead of 'hours_per_wall' (2).",
+  "repro_seed": 8962392383513760769,
+  "model_name": "google_gemini-2.5-flash"
+}

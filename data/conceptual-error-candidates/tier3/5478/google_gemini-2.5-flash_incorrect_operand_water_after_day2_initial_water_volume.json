@@ -1,0 +1,100 @@
+{
+  "index": 5478,
+  "original_solution_mapping": {
+    "FA": "#### 25",
+    "L1": "At the beginning of the rainy season, the tank is filled with 100 x 2/5 = <<100*2/5=40>>40 liters of water.",
+    "L2": "On the first day of the rainy season, the tank had 40 + 15 = <<40+15=55>>55 liters of water.",
+    "L3": "On the second day, 15 + 5 = <<15+5=20>>20 liters of water were collected.",
+    "L4": "So, the tank is filled with 55 + 20 = <<55+20=75>>75 liters of water on the second day.",
+    "L5": "Therefore, 100 - 75 = <<100-75=25>>25 liters of water were collected on the third day."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5478.\n    Returns: the number of liters of water collected on the third day.\n    \"\"\"\n    # L1\n    tank_capacity = 100 # A tank can hold 100 liters of water\n    initial_fill_fraction = Fraction(2, 5) # the tank is 2/5 filled with water\n    initial_water_volume = tank_capacity * initial_fill_fraction\n\n    # L2\n    first_day_collected = 15 # collected 15 liters of water\n    water_after_day1 = initial_water_volume + first_day_collected\n\n    # L3\n    additional_on_day2 = 5 # 5 liters more water was collected than on the first day\n    second_day_collected = first_day_collected + additional_on_day2\n\n    # L4\n    water_after_day2 = water_after_day1 + second_day_collected\n\n    # L5\n    third_day_collected = tank_capacity - water_after_day2\n\n    # FA\n    answer = third_day_collected\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "water_after_day2",
+    "operand_to_replace": "second_day_collected",
+    "replacement_variable": "initial_water_volume"
+  },
+  "correct_trace": {
+    "tank_capacity": 100,
+    "initial_fill_fraction": "2/5",
+    "initial_water_volume": "40",
+    "first_day_collected": 15,
+    "water_after_day1": "55",
+    "additional_on_day2": 5,
+    "second_day_collected": 20,
+    "water_after_day2": "75",
+    "third_day_collected": "25",
+    "answer": "25"
+  },
+  "flawed_trace": {
+    "tank_capacity": 100,
+    "initial_fill_fraction": "2/5",
+    "initial_water_volume": "40",
+    "first_day_collected": 15,
+    "water_after_day1": "55",
+    "additional_on_day2": 5,
+    "second_day_collected": 20,
+    "water_after_day2": "95",
+    "third_day_collected": "5",
+    "answer": "5"
+  },
+  "correct_value": "75",
+  "flawed_value": "95",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "initial_water_volume",
+      "question_inputs": [
+        "tank_capacity",
+        "initial_fill_fraction"
+      ],
+      "solution_line_template": "At the beginning of the rainy season, the tank is filled with {tank_capacity} x {initial_fill_fraction} = <<{tank_capacity}*{initial_fill_fraction}={initial_water_volume}>>{initial_water_volume} liters of water."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "water_after_day1",
+      "question_inputs": [
+        "first_day_collected"
+      ],
+      "solution_line_template": "On the first day of the rainy season, the tank had {initial_water_volume} + {first_day_collected} = <<{initial_water_volume}+{first_day_collected}={water_after_day1}>>{water_after_day1} liters of water."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "second_day_collected",
+      "question_inputs": [
+        "additional_on_day2"
+      ],
+      "solution_line_template": "On the second day, {first_day_collected} + {additional_on_day2} = <<{first_day_collected}+{additional_on_day2}={second_day_collected}>>{second_day_collected} liters of water were collected."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "water_after_day2",
+      "question_inputs": [],
+      "solution_line_template": "So, the tank is filled with {water_after_day1} + {second_day_collected} = <<{water_after_day1}+{second_day_collected}={water_after_day2}>>{water_after_day2} liters of water on the second day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "third_day_collected",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, {tank_capacity} - {water_after_day2} = <<{tank_capacity}-{water_after_day2}={third_day_collected}>>{third_day_collected} liters of water were collected on the third day."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "At the beginning of the rainy season, the tank is filled with 100 x 2/5 = <<100*2/5=40>>40 liters of water.",
+    "L2": "On the first day of the rainy season, the tank had 40 + 15 = <<40+15=55>>55 liters of water.",
+    "L3": "On the second day, 15 + 5 = <<15+5=20>>20 liters of water were collected.",
+    "L4": "So, the tank is filled with 55 + 40 = <<55+40=95>>95 liters of water on the second day.",
+    "L5": "Therefore, 100 - 95 = <<100-95=5>>5 liters of water were collected on the third day.",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'initial_water_volume' (value: 40) was used instead of 'second_day_collected' (value: 20).",
+  "repro_seed": -7628066846182382667,
+  "model_name": "google_gemini-2.5-flash"
+}

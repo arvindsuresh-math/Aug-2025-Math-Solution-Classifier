@@ -1,0 +1,78 @@
+{
+  "index": 142,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "After the first spray kills 50% of germs, there will be 100 - 50 = <<100-50=50>>50% left.",
+    "L2": "The second spray kills 25%, but 5% have already been killed by the 50% spray, so it kills 25 - 5 = <<25-5=20>>20%.",
+    "L3": "After the second spray kills 20% of the remaining germs, there will be 50 - 20 = <<50-20=30>>30% left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 142.\n    Returns: the percentage of germs left after using both sanitizer sprays.\n    \"\"\"\n    # L1\n    total_percentage = 100 # WK\n    first_spray_kill_percentage = 50 # 50% of germs\n    remaining_after_first_spray = total_percentage - first_spray_kill_percentage\n\n    # L2\n    second_spray_kill_percentage = 25 # 25% of germs\n    overlap_kill_percentage = 5 # 5% of the germs they kill are the same ones\n    effective_second_spray_kill_percentage = second_spray_kill_percentage - overlap_kill_percentage\n\n    # L3\n    final_percentage_left = remaining_after_first_spray - effective_second_spray_kill_percentage\n\n    # FA\n    answer = final_percentage_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "final_percentage_left",
+    "operand_to_replace": "remaining_after_first_spray",
+    "replacement_variable": "total_percentage"
+  },
+  "correct_trace": {
+    "total_percentage": 100,
+    "first_spray_kill_percentage": 50,
+    "remaining_after_first_spray": 50,
+    "second_spray_kill_percentage": 25,
+    "overlap_kill_percentage": 5,
+    "effective_second_spray_kill_percentage": 20,
+    "final_percentage_left": 30,
+    "answer": 30
+  },
+  "flawed_trace": {
+    "total_percentage": 100,
+    "first_spray_kill_percentage": 50,
+    "remaining_after_first_spray": 50,
+    "second_spray_kill_percentage": 25,
+    "overlap_kill_percentage": 5,
+    "effective_second_spray_kill_percentage": 20,
+    "final_percentage_left": 80,
+    "answer": 80
+  },
+  "correct_value": 30,
+  "flawed_value": 80,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "first_spray_kill_percentage"
+      ],
+      "WK_inputs": [
+        "total_percentage"
+      ],
+      "output_variable": "remaining_after_first_spray",
+      "solution_line_template": "After the first spray kills {first_spray_kill_percentage}% of germs, there will be {total_percentage} - {first_spray_kill_percentage} = <<{total_percentage}-{first_spray_kill_percentage}={remaining_after_first_spray}>>{remaining_after_first_spray}% left."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "second_spray_kill_percentage",
+        "overlap_kill_percentage"
+      ],
+      "WK_inputs": [],
+      "output_variable": "effective_second_spray_kill_percentage",
+      "solution_line_template": "The second spray kills {second_spray_kill_percentage}%, but {overlap_kill_percentage}% have already been killed by the 50% spray, so it kills {second_spray_kill_percentage} - {overlap_kill_percentage} = <<{second_spray_kill_percentage}-{overlap_kill_percentage}={effective_second_spray_kill_percentage}>>{effective_second_spray_kill_percentage}%."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "final_percentage_left",
+      "solution_line_template": "After the second spray kills {effective_second_spray_kill_percentage}% of the remaining germs, there will be {remaining_after_first_spray} - {effective_second_spray_kill_percentage} = <<{remaining_after_first_spray}-{effective_second_spray_kill_percentage}={final_percentage_left}>>{final_percentage_left}% left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After the first spray kills 50% of germs, there will be 100 - 50 = <<100-50=50>>50% left.",
+    "L2": "The second spray kills 25%, but 5% have already been killed by the 50% spray, so it kills 25 - 5 = <<25-5=20>>20%.",
+    "L3": "After the second spray kills 20% of the remaining germs, there will be 100 - 20 = <<100-20=80>>80% left.",
+    "FA": "#### 80"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'total_percentage' (value: 100) was used instead of 'remaining_after_first_spray' (value: 50).",
+  "repro_seed": 3789895792384451487,
+  "model_name": "google_gemini-2.5-flash"
+}

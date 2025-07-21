@@ -1,0 +1,126 @@
+{
+  "index": 617,
+  "original_solution_mapping": {
+    "FA": "#### 820",
+    "L1": "First figure out how many miles over the speed limit Mark was going: 75 mph - 30 mph = <<75-30=45>>45 mph",
+    "L2": "Now figure out how much the per-mile fine is: $2/mph * 45 mph = $<<2*45=90>>90",
+    "L3": "Now add that amount to the base fine: $90 + $50 = $<<90+50=140>>140",
+    "L4": "Now double that amount for being in a school zone: $140 * 2 = $<<140*2=280>>280",
+    "L5": "Now figure out how much Mark owes his lawyer: $80/hour * 3 hours = $<<80*3=240>>240",
+    "L6": "Now add the court costs, lawyer fees and fine: $240 + $300 + $280 = $<<240+300+280=820>>820"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 617.\n    Returns: the total amount Mark owes for the speeding ticket.\n    \"\"\"\n    # L1\n    actual_speed = 75 # He was going 75 miles per hour\n    speed_limit = 30 # in a 30 mile per hour zone\n    speed_over_limit = actual_speed - speed_limit\n\n    # L2\n    fine_per_mph = 2 # increased by $2 for every mile per hour\n    per_mile_fine_amount = fine_per_mph * speed_over_limit\n\n    # L3\n    base_fine = 50 # The base fine for speeding is $50\n    fine_before_doubling = per_mile_fine_amount + base_fine\n\n    # L4\n    doubling_factor = 2 # The fine is also doubled\n    fine_after_doubling = fine_before_doubling * doubling_factor\n\n    # L5\n    lawyer_hourly_rate = 80 # pay his lawyer $80/hour\n    lawyer_hours = 3 # for three hours of work\n    lawyer_fees = lawyer_hourly_rate * lawyer_hours\n\n    # L6\n    court_costs = 300 # pay $300 in court costs\n    total_owed = lawyer_fees + court_costs + fine_after_doubling\n\n    # FA\n    answer = total_owed\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "fine_before_doubling",
+    "operand_to_replace": "per_mile_fine_amount",
+    "replacement_variable": "base_fine"
+  },
+  "correct_trace": {
+    "actual_speed": 75,
+    "speed_limit": 30,
+    "speed_over_limit": 45,
+    "fine_per_mph": 2,
+    "per_mile_fine_amount": 90,
+    "base_fine": 50,
+    "fine_before_doubling": 140,
+    "doubling_factor": 2,
+    "fine_after_doubling": 280,
+    "lawyer_hourly_rate": 80,
+    "lawyer_hours": 3,
+    "lawyer_fees": 240,
+    "court_costs": 300,
+    "total_owed": 820,
+    "answer": 820
+  },
+  "flawed_trace": {
+    "actual_speed": 75,
+    "speed_limit": 30,
+    "speed_over_limit": 45,
+    "fine_per_mph": 2,
+    "per_mile_fine_amount": 90,
+    "base_fine": 50,
+    "fine_before_doubling": 100,
+    "doubling_factor": 2,
+    "fine_after_doubling": 200,
+    "lawyer_hourly_rate": 80,
+    "lawyer_hours": 3,
+    "lawyer_fees": 240,
+    "court_costs": 300,
+    "total_owed": 740,
+    "answer": 740
+  },
+  "correct_value": 140,
+  "flawed_value": 100,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "actual_speed",
+        "speed_limit"
+      ],
+      "WK_inputs": [],
+      "output_variable": "speed_over_limit",
+      "solution_line_template": "First figure out how many miles over the speed limit Mark was going: {actual_speed} mph - {speed_limit} mph = <<{actual_speed}-{speed_limit}={speed_over_limit}>>{speed_over_limit} mph"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "fine_per_mph"
+      ],
+      "WK_inputs": [],
+      "output_variable": "per_mile_fine_amount",
+      "solution_line_template": "Now figure out how much the per-mile fine is: ${fine_per_mph}/mph * {speed_over_limit} mph = $<<{fine_per_mph}*{speed_over_limit}={per_mile_fine_amount}>>{per_mile_fine_amount}"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "base_fine"
+      ],
+      "WK_inputs": [],
+      "output_variable": "fine_before_doubling",
+      "solution_line_template": "Now add that amount to the base fine: ${per_mile_fine_amount} + ${base_fine} = $<<{per_mile_fine_amount}+{base_fine}={fine_before_doubling}>>{fine_before_doubling}"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "doubling_factor"
+      ],
+      "WK_inputs": [],
+      "output_variable": "fine_after_doubling",
+      "solution_line_template": "Now double that amount for being in a school zone: ${fine_before_doubling} * {doubling_factor} = $<<{fine_before_doubling}*{doubling_factor}={fine_after_doubling}>>{fine_after_doubling}"
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [
+        "lawyer_hourly_rate",
+        "lawyer_hours"
+      ],
+      "WK_inputs": [],
+      "output_variable": "lawyer_fees",
+      "solution_line_template": "Now figure out how much Mark owes his lawyer: ${lawyer_hourly_rate}/hour * {lawyer_hours} hours = $<<{lawyer_hourly_rate}*{lawyer_hours}={lawyer_fees}>>{lawyer_fees}"
+    },
+    {
+      "line_number": "L6",
+      "question_inputs": [
+        "court_costs"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_owed",
+      "solution_line_template": "Now add the court costs, lawyer fees and fine: ${lawyer_fees} + ${court_costs} + ${fine_after_doubling} = $<<{lawyer_fees}+{court_costs}+{fine_after_doubling}={total_owed}>>{total_owed}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First figure out how many miles over the speed limit Mark was going: 75 mph - 30 mph = <<75-30=45>>45 mph",
+    "L2": "Now figure out how much the per-mile fine is: $2/mph * 45 mph = $<<2*45=90>>90",
+    "L3": "Now add that amount to the base fine: $50 + $50 = $<<50+50=100>>100",
+    "L4": "Now double that amount for being in a school zone: $100 * 2 = $<<100*2=200>>200",
+    "L5": "Now figure out how much Mark owes his lawyer: $80/hour * 3 hours = $<<80*3=240>>240",
+    "L6": "Now add the court costs, lawyer fees and fine: $240 + $300 + $200 = $<<240+300+200=740>>740",
+    "FA": "#### 740"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'base_fine' (value: 50) was used instead of 'per_mile_fine_amount' (value: 90).",
+  "repro_seed": 4355757301566493330,
+  "model_name": "google_gemini-2.5-flash"
+}

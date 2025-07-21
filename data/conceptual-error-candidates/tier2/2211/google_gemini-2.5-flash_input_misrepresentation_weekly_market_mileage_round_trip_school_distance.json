@@ -1,0 +1,101 @@
+{
+  "index": 2211,
+  "original_solution_mapping": {
+    "FA": "#### 44",
+    "L1": "Making the round trip to school means driving from the house to school and then back, for a total of 2.5+2.5 = <<2.5+2.5=5>>5 miles",
+    "L2": "He makes this trip twice in one day for a total of 2*5 = <<2*5=10>>10 miles",
+    "L3": "He does this 4 times in a week for a total of 4*10 = <<4*10=40>>40 miles.",
+    "L4": "The round trip (once a week) to the market is 2+2 = <<2+2=4>>4 miles.",
+    "L5": "His total mileage for a typical week = 40+4 = <<40+4=44>>44 miles"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2211.\n    Returns: the car's mileage for a typical week.\n    \"\"\"\n    # L1\n    school_trip_distance = 2.5 # trip from Philip's house to the children's school is 2.5 miles\n    round_trip_school_distance = school_trip_distance + school_trip_distance\n\n    # L2\n    school_trips_per_day = 2 # round trip to school two times\n    daily_school_mileage = school_trips_per_day * round_trip_school_distance\n\n    # L3\n    school_trip_days_per_week = 4 # every day for 4 days a week\n    weekly_school_mileage = school_trip_days_per_week * daily_school_mileage\n\n    # L4\n    market_trip_distance = 2 # trip to the market is 2 miles\n    weekly_market_mileage = market_trip_distance + market_trip_distance\n\n    # L5\n    total_weekly_mileage = weekly_school_mileage + weekly_market_mileage\n\n    # FA\n    answer = total_weekly_mileage\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "weekly_market_mileage",
+    "operand_to_replace": "market_trip_distance",
+    "replacement_variable": "round_trip_school_distance"
+  },
+  "correct_trace": {
+    "school_trip_distance": 2.5,
+    "round_trip_school_distance": 5.0,
+    "school_trips_per_day": 2,
+    "daily_school_mileage": 10.0,
+    "school_trip_days_per_week": 4,
+    "weekly_school_mileage": 40.0,
+    "market_trip_distance": 2,
+    "weekly_market_mileage": 4,
+    "total_weekly_mileage": 44.0,
+    "answer": 44.0
+  },
+  "flawed_trace": {
+    "school_trip_distance": 2.5,
+    "round_trip_school_distance": 5.0,
+    "school_trips_per_day": 2,
+    "daily_school_mileage": 10.0,
+    "school_trip_days_per_week": 4,
+    "weekly_school_mileage": 40.0,
+    "market_trip_distance": 2,
+    "weekly_market_mileage": 10.0,
+    "total_weekly_mileage": 50.0,
+    "answer": 50.0
+  },
+  "correct_value": 4,
+  "flawed_value": 10.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "round_trip_school_distance",
+      "question_inputs": [
+        "school_trip_distance"
+      ],
+      "solution_line_template": "Making the round trip to school means driving from the house to school and then back, for a total of {school_trip_distance}+{school_trip_distance} = <<{school_trip_distance}+{school_trip_distance}={round_trip_school_distance}>>{round_trip_school_distance} miles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "daily_school_mileage",
+      "question_inputs": [
+        "school_trips_per_day"
+      ],
+      "solution_line_template": "He makes this trip {school_trips_per_day}*{round_trip_school_distance} = <<{school_trips_per_day}*{round_trip_school_distance}={daily_school_mileage}>>{daily_school_mileage} miles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "weekly_school_mileage",
+      "question_inputs": [
+        "school_trip_days_per_week"
+      ],
+      "solution_line_template": "He does this {school_trip_days_per_week}*{daily_school_mileage} = <<{school_trip_days_per_week}*{daily_school_mileage}={weekly_school_mileage}>>{weekly_school_mileage} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "weekly_market_mileage",
+      "question_inputs": [
+        "market_trip_distance"
+      ],
+      "solution_line_template": "The round trip (once a week) to the market is {market_trip_distance}+{market_trip_distance} = <<{market_trip_distance}+{market_trip_distance}={weekly_market_mileage}>>{weekly_market_mileage} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_weekly_mileage",
+      "question_inputs": [],
+      "solution_line_template": "His total mileage for a typical week = {weekly_school_mileage}+{weekly_market_mileage} = <<{weekly_school_mileage}+{weekly_market_mileage}={total_weekly_mileage}>>{total_weekly_mileage} miles"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Making the round trip to school means driving from the house to school and then back, for a total of 2.5+2.5 = <<2.5+2.5=5>>5 miles",
+    "L2": "He makes this trip 2*5 = <<2*5=10>>10 miles",
+    "L3": "He does this 4*10 = <<4*10=40>>40 miles.",
+    "L4": "The round trip (once a week) to the market is 5+5 = <<5+5=10>>10 miles.",
+    "L5": "His total mileage for a typical week = 40+10 = <<40+10=50>>50 miles",
+    "FA": "#### 50"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'round_trip_school_distance' (5.0) was used instead of 'market_trip_distance' (2).",
+  "repro_seed": -6442047502775142953,
+  "model_name": "google_gemini-2.5-flash"
+}

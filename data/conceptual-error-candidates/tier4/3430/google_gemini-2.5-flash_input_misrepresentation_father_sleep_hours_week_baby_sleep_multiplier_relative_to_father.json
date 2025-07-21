@@ -1,0 +1,93 @@
+{
+  "index": 3430,
+  "original_solution_mapping": {
+    "FA": "#### 70",
+    "L1": "The baby sleeps 20 hours a day because 2.5 x 8 = <<2.5*8=20>>20",
+    "L2": "The baby sleeps 2 times as much as the father because 60 / 30 = <<60/30=2>>2",
+    "L3": "The father sleeps 10 hours a night because 20 / 2 = <<20/2=10>>10",
+    "L4": "The father sleeps for 70 hours a week because 7 x 10 = <<7*10=70>>70"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3430.\n    Returns: the number of hours her father sleeps in a week.\n    \"\"\"\n    # L1\n    samantha_sleep_hours_day = 8 # 8 hours a night\n    baby_sleep_multiplier = 2.5 # 2.5 times as much as Samantha does\n    baby_sleep_hours_day = baby_sleep_multiplier * samantha_sleep_hours_day\n\n    # L2\n    minutes_per_hour = 60 # WK\n    father_sleep_minutes_per_baby_hour = 30 # he sleeps 30 minutes\n    baby_sleep_multiplier_relative_to_father = minutes_per_hour / father_sleep_minutes_per_baby_hour\n\n    # L3\n    father_sleep_hours_day = baby_sleep_hours_day / baby_sleep_multiplier_relative_to_father\n\n    # L4\n    days_per_week = 7 # WK\n    father_sleep_hours_week = days_per_week * father_sleep_hours_day\n\n    # FA\n    answer = father_sleep_hours_week\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "father_sleep_hours_week",
+    "operand_to_replace": "days_per_week",
+    "replacement_variable": "baby_sleep_multiplier_relative_to_father"
+  },
+  "correct_trace": {
+    "samantha_sleep_hours_day": 8,
+    "baby_sleep_multiplier": 2.5,
+    "baby_sleep_hours_day": 20.0,
+    "minutes_per_hour": 60,
+    "father_sleep_minutes_per_baby_hour": 30,
+    "baby_sleep_multiplier_relative_to_father": 2.0,
+    "father_sleep_hours_day": 10.0,
+    "days_per_week": 7,
+    "father_sleep_hours_week": 70.0,
+    "answer": 70.0
+  },
+  "flawed_trace": {
+    "samantha_sleep_hours_day": 8,
+    "baby_sleep_multiplier": 2.5,
+    "baby_sleep_hours_day": 20.0,
+    "minutes_per_hour": 60,
+    "father_sleep_minutes_per_baby_hour": 30,
+    "baby_sleep_multiplier_relative_to_father": 2.0,
+    "father_sleep_hours_day": 10.0,
+    "days_per_week": 7,
+    "father_sleep_hours_week": 20.0,
+    "answer": 20.0
+  },
+  "correct_value": 70.0,
+  "flawed_value": 20.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "baby_sleep_hours_day",
+      "question_inputs": [
+        "baby_sleep_multiplier",
+        "samantha_sleep_hours_day"
+      ],
+      "solution_line_template": "The baby sleeps {baby_sleep_hours_day} hours a day because {baby_sleep_multiplier} x {samantha_sleep_hours_day} = <<{baby_sleep_multiplier}*{samantha_sleep_hours_day}={baby_sleep_hours_day}>>{baby_sleep_hours_day}"
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L2",
+      "output_variable": "baby_sleep_multiplier_relative_to_father",
+      "question_inputs": [
+        "father_sleep_minutes_per_baby_hour"
+      ],
+      "solution_line_template": "The baby sleeps {baby_sleep_multiplier_relative_to_father} times as much as the father because {minutes_per_hour} / {father_sleep_minutes_per_baby_hour} = <<{minutes_per_hour}/{father_sleep_minutes_per_baby_hour}={baby_sleep_multiplier_relative_to_father}>>{baby_sleep_multiplier_relative_to_father}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "father_sleep_hours_day",
+      "question_inputs": [],
+      "solution_line_template": "The father sleeps {father_sleep_hours_day} hours a night because {baby_sleep_hours_day} / {baby_sleep_multiplier_relative_to_father} = <<{baby_sleep_hours_day}/{baby_sleep_multiplier_relative_to_father}={father_sleep_hours_day}>>{father_sleep_hours_day}"
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L4",
+      "output_variable": "father_sleep_hours_week",
+      "question_inputs": [],
+      "solution_line_template": "The father sleeps for {father_sleep_hours_week} hours a week because {days_per_week} x {father_sleep_hours_day} = <<{days_per_week}*{father_sleep_hours_day}={father_sleep_hours_week}>>{father_sleep_hours_week}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The baby sleeps 20 hours a day because 2.5 x 8 = <<2.5*8=20>>20",
+    "L2": "The baby sleeps 2 times as much as the father because 60 / 30 = <<60/30=2>>2",
+    "L3": "The father sleeps 10 hours a night because 20 / 2 = <<20/2=10>>10",
+    "L4": "The father sleeps for 20 hours a week because 2 x 10 = <<2*10=20>>20",
+    "FA": "#### 20"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'baby_sleep_multiplier_relative_to_father' (2.0) was used instead of 'days_per_week' (7).",
+  "repro_seed": -2296300179566759955,
+  "model_name": "google_gemini-2.5-flash"
+}

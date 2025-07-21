@@ -1,0 +1,72 @@
+{
+  "index": 7084,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "Let S be the number of boxes sold on Saturday.",
+    "L2": "S+1.5S=150",
+    "L3": "2.5S=150",
+    "L4": "S=<<60=60>>60",
+    "L5": "Sally sold 60 boxes on Saturday."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7084.\n    Returns: the number of boxes Sally sold on Saturday.\n    \"\"\"\n    # L2\n    # The problem states \"50% more on Sunday than she sold on Saturday\".\n    # This means Sunday sales are 1.5 times Saturday sales (S + 0.5*S).\n    # The total sales are given as 150.\n    # So, the equation is S + 1.5S = 150.\n    sunday_increase_factor = 0.5 # 50% more\n    sunday_sales_multiplier = 1 + sunday_increase_factor\n    total_boxes_sold = 150 # total of 150 boxes on the two days\n\n    # L3\n    # Combine the coefficients for S: S + 1.5S simplifies to 2.5S.\n    combined_s_coefficient = 1 + sunday_sales_multiplier\n\n    # L4\n    # Solve for S: 2.5S = 150 => S = 150 / 2.5\n    saturday_sales = total_boxes_sold / combined_s_coefficient\n\n    # FA\n    answer = saturday_sales\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "saturday_sales",
+    "operand_to_replace": "total_boxes_sold",
+    "replacement_variable": "combined_s_coefficient"
+  },
+  "correct_trace": {
+    "sunday_increase_factor": 0.5,
+    "sunday_sales_multiplier": 1.5,
+    "total_boxes_sold": 150,
+    "combined_s_coefficient": 2.5,
+    "saturday_sales": 60.0,
+    "answer": 60.0
+  },
+  "flawed_trace": {
+    "sunday_increase_factor": 0.5,
+    "sunday_sales_multiplier": 1.5,
+    "total_boxes_sold": 150,
+    "combined_s_coefficient": 2.5,
+    "saturday_sales": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 60.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sunday_sales_multiplier",
+      "question_inputs": [
+        "sunday_increase_factor",
+        "total_boxes_sold"
+      ],
+      "solution_line_template": "S+{sunday_sales_multiplier}S={total_boxes_sold}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "combined_s_coefficient",
+      "question_inputs": [],
+      "solution_line_template": "{combined_s_coefficient}S={total_boxes_sold}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "saturday_sales",
+      "question_inputs": [],
+      "solution_line_template": "S=<<{saturday_sales}={saturday_sales}>>{saturday_sales}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "S+1.5S=150",
+    "L3": "2.5S=150",
+    "L4": "S=<<1=1>>1",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'combined_s_coefficient' (2.5) was used instead of 'total_boxes_sold' (150).",
+  "repro_seed": 3050966144442702333,
+  "model_name": "google_gemini-2.5-flash"
+}

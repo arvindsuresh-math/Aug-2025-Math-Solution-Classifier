@@ -1,0 +1,90 @@
+{
+  "index": 1422,
+  "original_solution_mapping": {
+    "FA": "#### 36",
+    "L1": "1 minute is 60 seconds, so 4 minutes is 4 * 60 = <<4*60=240>>240 seconds.",
+    "L2": "During this time there would be 240 / 20 = <<240/20=12>>12 big crashes.",
+    "L3": "And also 240 / 10 = <<240/10=24>>24 car collisions.",
+    "L4": "So in total during 4 minutes there would be 12 + 24 = <<12+24=36>>36 accidents."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1422.\n    Returns: the total number of accidents that will happen.\n    \"\"\"\n    # L1\n    seconds_per_minute = 60 # WK\n    duration_minutes = 4 # in 4 minutes\n    total_seconds = duration_minutes * seconds_per_minute\n\n    # L2\n    big_crash_interval = 20 # every 20 seconds there is a big crash\n    num_big_crashes = total_seconds / big_crash_interval\n\n    # L3\n    car_collision_interval = 10 # Every 10 seconds, there is a car collision\n    num_car_collisions = total_seconds / car_collision_interval\n\n    # L4\n    total_accidents = num_big_crashes + num_car_collisions\n\n    # FA\n    answer = total_accidents\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "num_car_collisions",
+    "operand_to_replace": "total_seconds",
+    "replacement_variable": "seconds_per_minute"
+  },
+  "correct_trace": {
+    "seconds_per_minute": 60,
+    "duration_minutes": 4,
+    "total_seconds": 240,
+    "big_crash_interval": 20,
+    "num_big_crashes": 12.0,
+    "car_collision_interval": 10,
+    "num_car_collisions": 24.0,
+    "total_accidents": 36.0,
+    "answer": 36.0
+  },
+  "flawed_trace": {
+    "seconds_per_minute": 60,
+    "duration_minutes": 4,
+    "total_seconds": 240,
+    "big_crash_interval": 20,
+    "num_big_crashes": 12.0,
+    "car_collision_interval": 10,
+    "num_car_collisions": 6.0,
+    "total_accidents": 18.0,
+    "answer": 18.0
+  },
+  "correct_value": 24.0,
+  "flawed_value": 6.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "seconds_per_minute"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_seconds",
+      "question_inputs": [
+        "duration_minutes"
+      ],
+      "solution_line_template": "1 minute is {seconds_per_minute} seconds, so {duration_minutes} minutes is {duration_minutes} * {seconds_per_minute} = <<{duration_minutes}*{seconds_per_minute}={total_seconds}>>{total_seconds} seconds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_big_crashes",
+      "question_inputs": [
+        "big_crash_interval"
+      ],
+      "solution_line_template": "During this time there would be {total_seconds} / {big_crash_interval} = <<{total_seconds}/{big_crash_interval}={num_big_crashes}>>{num_big_crashes} big crashes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_car_collisions",
+      "question_inputs": [
+        "car_collision_interval"
+      ],
+      "solution_line_template": "And also {total_seconds} / {car_collision_interval} = <<{total_seconds}/{car_collision_interval}={num_car_collisions}>>{num_car_collisions} car collisions."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_accidents",
+      "question_inputs": [],
+      "solution_line_template": "So in total during {duration_minutes} minutes there would be {num_big_crashes} + {num_car_collisions} = <<{num_big_crashes}+{num_car_collisions}={total_accidents}>>{total_accidents} accidents."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "1 minute is 60 seconds, so 4 minutes is 4 * 60 = <<4*60=240>>240 seconds.",
+    "L2": "During this time there would be 240 / 20 = <<240/20=12>>12 big crashes.",
+    "L3": "And also 60 / 10 = <<60/10=6>>6 car collisions.",
+    "L4": "So in total during 4 minutes there would be 12 + 6 = <<12+6=18>>18 accidents.",
+    "FA": "#### 18"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'seconds_per_minute' (value: 60) was used instead of 'total_seconds' (value: 240).",
+  "repro_seed": 262249595851407661,
+  "model_name": "google_gemini-2.5-flash"
+}

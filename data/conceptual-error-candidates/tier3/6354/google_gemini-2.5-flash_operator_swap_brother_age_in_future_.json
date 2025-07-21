@@ -1,0 +1,89 @@
+{
+  "index": 6354,
+  "original_solution_mapping": {
+    "FA": "#### 21",
+    "L1": "Nick's sister is 13 + 6 = <<13+6=19>>19 years old.",
+    "L2": "Their combined age is 19 + 13 = <<19+13=32>>32 years old.",
+    "L3": "Their brother is 32/2 = <<32/2=16>>16 years old.",
+    "L4": "In 5 years, their brother would be 16 + 5 = 21 years old."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6354.\n    Returns: the brother's age in 5 years.\n    \"\"\"\n    # L1\n    nick_age = 13 # Nick is 13 years old\n    sister_age_difference = 6 # His sister is 6 years older\n    sister_age = nick_age + sister_age_difference\n\n    # L2\n    combined_age = sister_age + nick_age\n\n    # L3\n    brother_age_divisor = 2 # half their combined age\n    brother_age = combined_age / brother_age_divisor\n\n    # L4\n    years_in_future = 5 # In 5 years\n    brother_age_in_future = brother_age + years_in_future\n\n    # FA\n    answer = brother_age_in_future\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "brother_age_in_future",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x30b5213d0>"
+  },
+  "correct_trace": {
+    "nick_age": 13,
+    "sister_age_difference": 6,
+    "sister_age": 19,
+    "combined_age": 32,
+    "brother_age_divisor": 2,
+    "brother_age": 16.0,
+    "years_in_future": 5,
+    "brother_age_in_future": 21.0,
+    "answer": 21.0
+  },
+  "flawed_trace": {
+    "nick_age": 13,
+    "sister_age_difference": 6,
+    "sister_age": 19,
+    "combined_age": 32,
+    "brother_age_divisor": 2,
+    "brother_age": 16.0,
+    "years_in_future": 5,
+    "brother_age_in_future": 11.0,
+    "answer": 11.0
+  },
+  "correct_value": 21.0,
+  "flawed_value": 11.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "sister_age",
+      "question_inputs": [
+        "nick_age",
+        "sister_age_difference"
+      ],
+      "solution_line_template": "Nick's sister is {nick_age} + {sister_age_difference} = <<{nick_age}+{sister_age_difference}={sister_age}>>{sister_age} years old."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "combined_age",
+      "question_inputs": [],
+      "solution_line_template": "Their combined age is {sister_age} + {nick_age} = <<{sister_age}+{nick_age}={combined_age}>>{combined_age} years old."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "brother_age",
+      "question_inputs": [
+        "brother_age_divisor"
+      ],
+      "solution_line_template": "Their brother is {combined_age}/{brother_age_divisor} = <<{combined_age}/{brother_age_divisor}={brother_age}>>{brother_age} years old."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "brother_age_in_future",
+      "question_inputs": [
+        "years_in_future"
+      ],
+      "solution_line_template": "In {years_in_future} years, their brother would be {brother_age} + {years_in_future} = {brother_age_in_future} years old."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Nick's sister is 13 + 6 = <<13+6=19>>19 years old.",
+    "L2": "Their combined age is 19 + 13 = <<19+13=32>>32 years old.",
+    "L3": "Their brother is 32/2 = <<32/2=16>>16 years old.",
+    "L4": "In 5 years, their brother would be 16 + 5 = 11 years old.",
+    "FA": "#### 11"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": 5178914075459286436,
+  "model_name": "google_gemini-2.5-flash"
+}

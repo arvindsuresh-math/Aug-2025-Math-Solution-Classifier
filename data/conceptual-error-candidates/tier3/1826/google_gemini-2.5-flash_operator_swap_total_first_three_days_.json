@@ -1,0 +1,100 @@
+{
+  "index": 1826,
+  "original_solution_mapping": {
+    "FA": "#### 39",
+    "L1": "On Monday Miriam does 5 push-ups + 7 push-ups on Tuesday = <<5+7=12>>12 push-ups on both days.",
+    "L2": "On Wednesday she does twice as many push-ups as she did on Tuesday, 7 x 2 = <<7*2=14>>14 push-ups on Wednesday.",
+    "L3": "Over the first 3 days, she did a total of 14 + 12 = <<14+12=26>>26 pushups",
+    "L4": "On Thursday Miriam did 1/2 the same number of total pushups she had already done that week, so she did 1/2 x 26 = <<1/2*26=13>>13 pushups on Thursday.",
+    "L5": "On Friday she does as many push-ups as the total of what she had done over the previous four days, so she did 5 + 7 + 14 + 13 = <<5+7+14+13=39>>39 push-ups on Friday."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1826.\n    Returns: the number of pushups Miriam does on Friday.\n    \"\"\"\n    # L1\n    monday_pushups = 5 # On Monday she does 5 push-ups\n    tuesday_pushups = 7 # On Tuesday she does 7 push-ups\n    monday_tuesday_total = monday_pushups + tuesday_pushups\n\n    # L2\n    wednesday_multiplier = 2 # twice as many push-ups\n    wednesday_pushups = tuesday_pushups * wednesday_multiplier\n\n    # L3\n    total_first_three_days = wednesday_pushups + monday_tuesday_total\n\n    # L4\n    thursday_fraction = 0.5 # half the number of total pushups\n    thursday_pushups = thursday_fraction * total_first_three_days\n\n    # L5\n    friday_pushups = monday_pushups + tuesday_pushups + wednesday_pushups + thursday_pushups\n\n    # FA\n    answer = friday_pushups\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_first_three_days",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x15fe1ca50>"
+  },
+  "correct_trace": {
+    "monday_pushups": 5,
+    "tuesday_pushups": 7,
+    "monday_tuesday_total": 12,
+    "wednesday_multiplier": 2,
+    "wednesday_pushups": 14,
+    "total_first_three_days": 26,
+    "thursday_fraction": 0.5,
+    "thursday_pushups": 13.0,
+    "friday_pushups": 39.0,
+    "answer": 39.0
+  },
+  "flawed_trace": {
+    "monday_pushups": 5,
+    "tuesday_pushups": 7,
+    "monday_tuesday_total": 12,
+    "wednesday_multiplier": 2,
+    "wednesday_pushups": 14,
+    "total_first_three_days": 2,
+    "thursday_fraction": 0.5,
+    "thursday_pushups": 1.0,
+    "friday_pushups": 27.0,
+    "answer": 27.0
+  },
+  "correct_value": 26,
+  "flawed_value": 2,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "monday_tuesday_total",
+      "question_inputs": [
+        "monday_pushups",
+        "tuesday_pushups"
+      ],
+      "solution_line_template": "On Monday Miriam does {monday_pushups} push-ups + {tuesday_pushups} push-ups on Tuesday = <<{monday_pushups}+{tuesday_pushups}={monday_tuesday_total}>>{monday_tuesday_total} push-ups on both days."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "wednesday_pushups",
+      "question_inputs": [
+        "wednesday_multiplier"
+      ],
+      "solution_line_template": "On Wednesday she does twice as many push-ups as she did on Tuesday, {tuesday_pushups} x {wednesday_multiplier} = <<{tuesday_pushups}*{wednesday_multiplier}={wednesday_pushups}>>{wednesday_pushups} push-ups on Wednesday."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_first_three_days",
+      "question_inputs": [],
+      "solution_line_template": "Over the first 3 days, she did a total of {wednesday_pushups} + {monday_tuesday_total} = <<{wednesday_pushups}+{monday_tuesday_total}={total_first_three_days}>>{total_first_three_days} pushups"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "thursday_pushups",
+      "question_inputs": [
+        "thursday_fraction"
+      ],
+      "solution_line_template": "On Thursday Miriam did {thursday_fraction} the same number of total pushups she had already done that week, so she did {thursday_fraction} x {total_first_three_days} = <<{thursday_fraction}*{total_first_three_days}={thursday_pushups}>>{thursday_pushups} pushups on Thursday."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "friday_pushups",
+      "question_inputs": [],
+      "solution_line_template": "On Friday she does as many push-ups as the total of what she had done over the previous four days, so she did {monday_pushups} + {tuesday_pushups} + {wednesday_pushups} + {thursday_pushups} = <<{monday_pushups}+{tuesday_pushups}+{wednesday_pushups}+{thursday_pushups}={friday_pushups}>>{friday_pushups} push-ups on Friday."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Monday Miriam does 5 push-ups + 7 push-ups on Tuesday = <<5+7=12>>12 push-ups on both days.",
+    "L2": "On Wednesday she does twice as many push-ups as she did on Tuesday, 7 x 2 = <<7*2=14>>14 push-ups on Wednesday.",
+    "L3": "Over the first 3 days, she did a total of 14 + 12 = <<14+12=2>>2 pushups",
+    "L4": "On Thursday Miriam did 0.5 the same number of total pushups she had already done that week, so she did 0.5 x 2 = <<0.5*2=1>>1 pushups on Thursday.",
+    "L5": "On Friday she does as many push-ups as the total of what she had done over the previous four days, so she did 5 + 7 + 14 + 1 = <<5+7+14+1=27>>27 push-ups on Friday.",
+    "FA": "#### 27"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": -4604296307725920504,
+  "model_name": "google_gemini-2.5-flash"
+}

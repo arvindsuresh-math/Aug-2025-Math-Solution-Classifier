@@ -1,0 +1,99 @@
+{
+  "index": 1546,
+  "original_solution_mapping": {
+    "FA": "#### 90",
+    "L1": "First, we must convert the driving time of 3 hours and 15 minutes to minutes. Since there are 60 minutes in an hour, driving takes a total of 3*60 + 15 = <<3*60+15=195>>195 minutes.",
+    "L2": "Next, the woman will be on the airplane for one-third of 195 minutes, or 195/3 = <<195/3=65>>65 minutes.",
+    "L3": "Therefore, in total, the airplane trip will take the woman 10 + 20 + 65 + 10 = <<10+20+65+10=105>>105 minutes.",
+    "L4": "Thus, the airplane trip is 195 - 105 = <<195-105=90>>90 minutes faster than driving herself to the interview."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1546.\n    Returns: the number of minutes faster it is to take the airplane.\n    \"\"\"\n    # L1\n    driving_hours = 3 # 3 hours\n    driving_minutes_extra = 15 # 15 minutes\n    minutes_per_hour = 60 # WK\n    total_driving_minutes = driving_hours * minutes_per_hour + driving_minutes_extra\n\n    # L2\n    airplane_fraction_denominator = 3 # one-third of the time\n    airplane_flight_time = total_driving_minutes / airplane_fraction_denominator\n\n    # L3\n    drive_to_airport_time = 10 # drive 10 minutes to the airport\n    wait_to_board_time = 20 # wait 20 minutes to board the plane\n    get_off_plane_time = 10 # additional 10 minutes to get off the airplane\n    total_airplane_trip_minutes = drive_to_airport_time + wait_to_board_time + airplane_flight_time + get_off_plane_time\n\n    # L4\n    minutes_faster = total_driving_minutes - total_airplane_trip_minutes\n\n    # FA\n    answer = minutes_faster\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_airplane_trip_minutes",
+    "operand_to_replace": "wait_to_board_time",
+    "replacement_variable": "drive_to_airport_time"
+  },
+  "correct_trace": {
+    "driving_hours": 3,
+    "driving_minutes_extra": 15,
+    "minutes_per_hour": 60,
+    "total_driving_minutes": 195,
+    "airplane_fraction_denominator": 3,
+    "airplane_flight_time": 65.0,
+    "drive_to_airport_time": 10,
+    "wait_to_board_time": 20,
+    "get_off_plane_time": 10,
+    "total_airplane_trip_minutes": 105.0,
+    "minutes_faster": 90.0,
+    "answer": 90.0
+  },
+  "flawed_trace": {
+    "driving_hours": 3,
+    "driving_minutes_extra": 15,
+    "minutes_per_hour": 60,
+    "total_driving_minutes": 195,
+    "airplane_fraction_denominator": 3,
+    "airplane_flight_time": 65.0,
+    "drive_to_airport_time": 10,
+    "wait_to_board_time": 20,
+    "get_off_plane_time": 10,
+    "total_airplane_trip_minutes": 95.0,
+    "minutes_faster": 100.0,
+    "answer": 100.0
+  },
+  "correct_value": 105.0,
+  "flawed_value": 95.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_driving_minutes",
+      "question_inputs": [
+        "driving_hours",
+        "driving_minutes_extra"
+      ],
+      "solution_line_template": "First, we must convert the driving time of {driving_hours} hours and {driving_minutes_extra} minutes to minutes. Since there are {minutes_per_hour} minutes in an hour, driving takes a total of {driving_hours}*{minutes_per_hour} + {driving_minutes_extra} = <<{driving_hours}*{minutes_per_hour}+{driving_minutes_extra}={total_driving_minutes}>>{total_driving_minutes} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "airplane_flight_time",
+      "question_inputs": [
+        "airplane_fraction_denominator"
+      ],
+      "solution_line_template": "Next, the woman will be on the airplane for one-third of {total_driving_minutes} minutes, or {total_driving_minutes}/{airplane_fraction_denominator} = <<{total_driving_minutes}/{airplane_fraction_denominator}={airplane_flight_time}>>{airplane_flight_time} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_airplane_trip_minutes",
+      "question_inputs": [
+        "drive_to_airport_time",
+        "wait_to_board_time",
+        "get_off_plane_time"
+      ],
+      "solution_line_template": "Therefore, in total, the airplane trip will take the woman {drive_to_airport_time} + {wait_to_board_time} + {airplane_flight_time} + {get_off_plane_time} = <<{drive_to_airport_time}+{wait_to_board_time}+{airplane_flight_time}+{get_off_plane_time}={total_airplane_trip_minutes}>>{total_airplane_trip_minutes} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "minutes_faster",
+      "question_inputs": [],
+      "solution_line_template": "Thus, the airplane trip is {total_driving_minutes} - {total_airplane_trip_minutes} = <<{total_driving_minutes}-{total_airplane_trip_minutes}={minutes_faster}>>{minutes_faster} minutes faster than driving herself to the interview."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First, we must convert the driving time of 3 hours and 15 minutes to minutes. Since there are 60 minutes in an hour, driving takes a total of 3*60 + 15 = <<3*60+15=195>>195 minutes.",
+    "L2": "Next, the woman will be on the airplane for one-third of 195 minutes, or 195/3 = <<195/3=65>>65 minutes.",
+    "L3": "Therefore, in total, the airplane trip will take the woman 10 + 10 + 65 + 10 = <<10+10+65+10=95>>95 minutes.",
+    "L4": "Thus, the airplane trip is 195 - 95 = <<195-95=100>>100 minutes faster than driving herself to the interview.",
+    "FA": "#### 100"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'drive_to_airport_time' (10) was used instead of 'wait_to_board_time' (20).",
+  "repro_seed": -8843313133200955682,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,86 @@
+{
+  "index": 2689,
+  "original_solution_mapping": {
+    "FA": "#### 52",
+    "L1": "Calculus: <<4=4>>4 years",
+    "L2": "Algebra: 4(2)=8 years",
+    "L3": "Statistics: 8(5)=<<8*5=40>>40 years",
+    "L4": "Total number of years taught: 4+8+40=<<4+8+40=52>>52 years"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2689.\n    Returns: the total number of years Devin has taught.\n    \"\"\"\n    # L1\n    calculus_years = 4 # taught Calculus for 4 years\n    calculus_years_taught = calculus_years\n\n    # L2\n    algebra_multiplier = 2 # twice as many years\n    algebra_years_taught = calculus_years_taught * algebra_multiplier\n\n    # L3\n    statistics_multiplier = 5 # 5 times as long as he taught Algebra\n    statistics_years_taught = algebra_years_taught * statistics_multiplier\n\n    # L4\n    total_years_taught = calculus_years_taught + algebra_years_taught + statistics_years_taught\n\n    # FA\n    answer = total_years_taught\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "algebra_years_taught",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x177c26790>"
+  },
+  "correct_trace": {
+    "calculus_years": 4,
+    "calculus_years_taught": 4,
+    "algebra_multiplier": 2,
+    "algebra_years_taught": 8,
+    "statistics_multiplier": 5,
+    "statistics_years_taught": 40,
+    "total_years_taught": 52,
+    "answer": 52
+  },
+  "flawed_trace": {
+    "calculus_years": 4,
+    "calculus_years_taught": 4,
+    "algebra_multiplier": 2,
+    "algebra_years_taught": 2.0,
+    "statistics_multiplier": 5,
+    "statistics_years_taught": 10.0,
+    "total_years_taught": 16.0,
+    "answer": 16.0
+  },
+  "correct_value": 8,
+  "flawed_value": 2.0,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "calculus_years"
+      ],
+      "WK_inputs": [],
+      "output_variable": "calculus_years_taught",
+      "solution_line_template": "Calculus: <<{calculus_years}={calculus_years_taught}>>{calculus_years_taught} years"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "algebra_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "algebra_years_taught",
+      "solution_line_template": "Algebra: {calculus_years_taught}({algebra_multiplier})={algebra_years_taught} years"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "statistics_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "statistics_years_taught",
+      "solution_line_template": "Statistics: {algebra_years_taught}({statistics_multiplier})=<<{algebra_years_taught}*{statistics_multiplier}={statistics_years_taught}>>{statistics_years_taught} years"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_years_taught",
+      "solution_line_template": "Total number of years taught: {calculus_years_taught}+{algebra_years_taught}+{statistics_years_taught}=<<{calculus_years_taught}+{algebra_years_taught}+{statistics_years_taught}={total_years_taught}>>{total_years_taught} years"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Calculus: <<4=4>>4 years",
+    "L2": "Algebra: 4(2)=2 years",
+    "L3": "Statistics: 2(5)=<<2*5=10>>10 years",
+    "L4": "Total number of years taught: 4+2+10=<<4+2+10=16>>16 years",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 4275036272227116168,
+  "model_name": "google_gemini-2.5-flash"
+}

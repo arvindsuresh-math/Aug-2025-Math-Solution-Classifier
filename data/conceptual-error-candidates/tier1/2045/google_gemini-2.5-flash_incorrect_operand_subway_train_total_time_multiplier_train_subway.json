@@ -1,0 +1,74 @@
+{
+  "index": 2045,
+  "original_solution_mapping": {
+    "FA": "#### 38",
+    "L1": "The train ride takes Andrew 2*10 = <<2*10=20>>20 hours.",
+    "L2": "Together, the subway ride and the train ride take Andrew 10+20 = <<10+20=30>>30 hours.",
+    "L3": "With an additional bike ride of 8 hours to reach the Bronx, Andrew takes 30+8 = <<30+8=38>>38 hours to travel from Manhattan to the Bronx."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2045.\n    Returns: the total time Andrew takes to reach the Bronx from Manhattan.\n    \"\"\"\n    # L1\n    subway_time = 10 # rides the subway for 10 hours\n    multiplier_train_subway = 2 # twice as much time as the subway ride\n    train_time = multiplier_train_subway * subway_time\n\n    # L2\n    subway_train_total_time = subway_time + train_time\n\n    # L3\n    bike_time = 8 # bikes the remaining distance for 8 hours\n    total_travel_time = subway_train_total_time + bike_time\n\n    # FA\n    answer = total_travel_time\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "subway_train_total_time",
+    "operand_to_replace": "train_time",
+    "replacement_variable": "multiplier_train_subway"
+  },
+  "correct_trace": {
+    "subway_time": 10,
+    "multiplier_train_subway": 2,
+    "train_time": 20,
+    "subway_train_total_time": 30,
+    "bike_time": 8,
+    "total_travel_time": 38,
+    "answer": 38
+  },
+  "flawed_trace": {
+    "subway_time": 10,
+    "multiplier_train_subway": 2,
+    "train_time": 20,
+    "subway_train_total_time": 12,
+    "bike_time": 8,
+    "total_travel_time": 20,
+    "answer": 20
+  },
+  "correct_value": 30,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "subway_time",
+        "multiplier_train_subway"
+      ],
+      "WK_inputs": [],
+      "output_variable": "train_time",
+      "solution_line_template": "The train ride takes Andrew {multiplier_train_subway}*{subway_time} = <<{multiplier_train_subway}*{subway_time}={train_time}>>{train_time} hours."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "subway_train_total_time",
+      "solution_line_template": "Together, the subway ride and the train ride take Andrew {subway_time}+{train_time} = <<{subway_time}+{train_time}={subway_train_total_time}>>{subway_train_total_time} hours."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "bike_time"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_travel_time",
+      "solution_line_template": "With an additional bike ride of {bike_time} hours to reach the Bronx, Andrew takes {subway_train_total_time}+{bike_time} = <<{subway_train_total_time}+{bike_time}={total_travel_time}>>{total_travel_time} hours to travel from Manhattan to the Bronx."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The train ride takes Andrew 2*10 = <<2*10=20>>20 hours.",
+    "L2": "Together, the subway ride and the train ride take Andrew 10+2 = <<10+2=12>>12 hours.",
+    "L3": "With an additional bike ride of 8 hours to reach the Bronx, Andrew takes 12+8 = <<12+8=20>>20 hours to travel from Manhattan to the Bronx.",
+    "FA": "#### 20"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'multiplier_train_subway' (value: 2) was used instead of 'train_time' (value: 20).",
+  "repro_seed": 2178183066944826216,
+  "model_name": "google_gemini-2.5-flash"
+}

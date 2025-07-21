@@ -1,0 +1,63 @@
+{
+  "index": 159,
+  "original_solution_mapping": {
+    "FA": "#### 27",
+    "L1": "Mario's $18 cut on Monday would have been 50% more expensive on Sunday or $18*50% = $<<18*50*.01=9>>9 more expensive",
+    "L2": "That means he would have paid $9 more on Sunday than what he paid ($18) on Monday or $9+$18 = $<<9+18=27>>27"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 159.\n    Returns: the price of a haircut on Sunday.\n    \"\"\"\n    # L1\n    monday_price = 18 # $18 for his last haircut on Monday\n    weekend_increase_percent = 50 # 50% more expensive\n    percent_factor = 0.01 # WK\n    increase_amount = monday_price * weekend_increase_percent * percent_factor\n\n    # L2\n    sunday_price = increase_amount + monday_price\n\n    # FA\n    answer = sunday_price\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "sunday_price",
+    "operand_to_replace": "monday_price",
+    "replacement_variable": "increase_amount"
+  },
+  "correct_trace": {
+    "monday_price": 18,
+    "weekend_increase_percent": 50,
+    "percent_factor": 0.01,
+    "increase_amount": 9.0,
+    "sunday_price": 27.0,
+    "answer": 27.0
+  },
+  "flawed_trace": {
+    "monday_price": 18,
+    "weekend_increase_percent": 50,
+    "percent_factor": 0.01,
+    "increase_amount": 9.0,
+    "sunday_price": 18.0,
+    "answer": 18.0
+  },
+  "correct_value": 27.0,
+  "flawed_value": 18.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "increase_amount",
+      "question_inputs": [
+        "monday_price",
+        "weekend_increase_percent"
+      ],
+      "solution_line_template": "Mario's ${monday_price} cut on Monday would have been {weekend_increase_percent}% more expensive on Sunday or ${monday_price}*{weekend_increase_percent}% = $<<{monday_price}*{weekend_increase_percent}*{percent_factor}={increase_amount}>>{increase_amount} more expensive"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sunday_price",
+      "question_inputs": [],
+      "solution_line_template": "That means he would have paid ${increase_amount} more on Sunday than what he paid (${monday_price}) on Monday or ${increase_amount}+${monday_price} = $<<{increase_amount}+{monday_price}={sunday_price}>>{sunday_price}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Mario's $18 cut on Monday would have been 50% more expensive on Sunday or $18*50% = $<<18*50*0.01=9>>9 more expensive",
+    "L2": "That means he would have paid $9 more on Sunday than what he paid ($9) on Monday or $9+$9 = $<<9+9=18>>18",
+    "FA": "#### 18"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'increase_amount' (9.0) was used instead of 'monday_price' (18).",
+  "repro_seed": -4975844508872838933,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,85 @@
+{
+  "index": 4608,
+  "original_solution_mapping": {
+    "FA": "#### 300",
+    "L1": "She made $2.5 from hitting drums because 10 - 7.5 = <<10-7.5=2.5>>2.5",
+    "L2": "She hit 200 drums to start making money",
+    "L3": "She hit 100 drums in order to make the $2.5 because 2.5/.025 = 100",
+    "L4": "She hit 300 drums in total because 100 + 200 = <<100+200=300>>300"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4608.\n    Returns: the total number of drums hit.\n    \"\"\"\n    # L1\n    entry_cost = 10 # It costs $10 to enter\n    money_lost = 7.5 # lost $7.5 for joining the contest\n    money_made_from_drums = entry_cost - money_lost\n\n    # L3\n    cents_per_drum = 2.5 # 2.5 cents for every drum hit\n    dollars_per_cent = 0.01 # WK\n    value_per_drum_dollar = cents_per_drum * dollars_per_cent\n    drums_for_money_made = money_made_from_drums / value_per_drum_dollar\n\n    # L4\n    threshold_drums = 200 # If she hits 200 drums, she can start to make money\n    total_drums_hit = drums_for_money_made + threshold_drums\n\n    # FA\n    answer = total_drums_hit\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "money_made_from_drums",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x168f489d0>"
+  },
+  "correct_trace": {
+    "entry_cost": 10,
+    "money_lost": 7.5,
+    "money_made_from_drums": 2.5,
+    "cents_per_drum": 2.5,
+    "dollars_per_cent": 0.01,
+    "value_per_drum_dollar": 0.025,
+    "drums_for_money_made": 100.0,
+    "threshold_drums": 200,
+    "total_drums_hit": 300.0,
+    "answer": 300.0
+  },
+  "flawed_trace": {
+    "entry_cost": 10,
+    "money_lost": 7.5,
+    "money_made_from_drums": 17.5,
+    "cents_per_drum": 2.5,
+    "dollars_per_cent": 0.01,
+    "value_per_drum_dollar": 0.025,
+    "drums_for_money_made": 700.0,
+    "threshold_drums": 200,
+    "total_drums_hit": 900.0,
+    "answer": 900.0
+  },
+  "correct_value": 2.5,
+  "flawed_value": 17.5,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_made_from_drums",
+      "question_inputs": [
+        "entry_cost",
+        "money_lost"
+      ],
+      "solution_line_template": "She made ${money_made_from_drums} from hitting drums because {entry_cost} - {money_lost} = <<{entry_cost}-{money_lost}={money_made_from_drums}>>{money_made_from_drums}"
+    },
+    {
+      "WK_inputs": [
+        "dollars_per_cent"
+      ],
+      "line_number": "L3",
+      "output_variable": "drums_for_money_made",
+      "question_inputs": [
+        "cents_per_drum"
+      ],
+      "solution_line_template": "She hit {drums_for_money_made} drums in order to make the ${money_made_from_drums} because {money_made_from_drums}/{value_per_drum_dollar} = {drums_for_money_made}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_drums_hit",
+      "question_inputs": [
+        "threshold_drums"
+      ],
+      "solution_line_template": "She hit {total_drums_hit} drums in total because {drums_for_money_made} + {threshold_drums} = <<{drums_for_money_made}+{threshold_drums}={total_drums_hit}>>{total_drums_hit}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She made $17.5 from hitting drums because 10 - 7.5 = <<10-7.5=17.5>>17.5",
+    "L3": "She hit 700 drums in order to make the $17.5 because 17.5/0.03 = 700",
+    "L4": "She hit 900 drums in total because 700 + 200 = <<700+200=900>>900",
+    "FA": "#### 900"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 2409195412779218410,
+  "model_name": "google_gemini-2.5-flash"
+}

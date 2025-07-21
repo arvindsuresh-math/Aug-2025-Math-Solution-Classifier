@@ -1,0 +1,78 @@
+{
+  "index": 3189,
+  "original_solution_mapping": {
+    "FA": "#### 1344",
+    "L1": "After two years, Gary has 4 * 8 = <<4*8=32>>32 chickens",
+    "L2": "Gary collects each day 32 chickens * 6 eggs per chicken = <<32*6=192>>192 eggs",
+    "L3": "In a week he collects 192 eggs per day * 7 days per week = <<192*7=1344>>1344 eggs"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3189.\n    Returns: the total number of eggs Gary collects per week.\n    \"\"\"\n    # L1\n    initial_chickens = 4 # Gary buys 4 chickens\n    multiplier_after_two_years = 8 # 8 times as many chickens\n    chickens_after_two_years = initial_chickens * multiplier_after_two_years\n\n    # L2\n    eggs_per_chicken_per_day = 6 # each chicken lays 6 eggs a day\n    eggs_per_day = chickens_after_two_years * eggs_per_chicken_per_day\n\n    # L3\n    days_per_week = 7 # WK\n    eggs_per_week = eggs_per_day * days_per_week\n\n    # FA\n    answer = eggs_per_week\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "eggs_per_day",
+    "operand_to_replace": "eggs_per_chicken_per_day",
+    "replacement_variable": "chickens_after_two_years"
+  },
+  "correct_trace": {
+    "initial_chickens": 4,
+    "multiplier_after_two_years": 8,
+    "chickens_after_two_years": 32,
+    "eggs_per_chicken_per_day": 6,
+    "eggs_per_day": 192,
+    "days_per_week": 7,
+    "eggs_per_week": 1344,
+    "answer": 1344
+  },
+  "flawed_trace": {
+    "initial_chickens": 4,
+    "multiplier_after_two_years": 8,
+    "chickens_after_two_years": 32,
+    "eggs_per_chicken_per_day": 6,
+    "eggs_per_day": 1024,
+    "days_per_week": 7,
+    "eggs_per_week": 7168,
+    "answer": 7168
+  },
+  "correct_value": 192,
+  "flawed_value": 1024,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "chickens_after_two_years",
+      "question_inputs": [
+        "initial_chickens",
+        "multiplier_after_two_years"
+      ],
+      "solution_line_template": "After two years, Gary has {initial_chickens} * {multiplier_after_two_years} = <<{initial_chickens}*{multiplier_after_two_years}={chickens_after_two_years}>>{chickens_after_two_years} chickens"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "eggs_per_day",
+      "question_inputs": [
+        "eggs_per_chicken_per_day"
+      ],
+      "solution_line_template": "Gary collects each day {chickens_after_two_years} chickens * {eggs_per_chicken_per_day} eggs per chicken = <<{chickens_after_two_years}*{eggs_per_chicken_per_day}={eggs_per_day}>>{eggs_per_day} eggs"
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L3",
+      "output_variable": "eggs_per_week",
+      "question_inputs": [],
+      "solution_line_template": "In a week he collects {eggs_per_day} eggs per day * {days_per_week} days per week = <<{eggs_per_day}*{days_per_week}={eggs_per_week}>>{eggs_per_week} eggs"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After two years, Gary has 4 * 8 = <<4*8=32>>32 chickens",
+    "L2": "Gary collects each day 32 chickens * 32 eggs per chicken = <<32*32=1024>>1024 eggs",
+    "L3": "In a week he collects 1024 eggs per day * 7 days per week = <<1024*7=7168>>7168 eggs",
+    "FA": "#### 7168"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'chickens_after_two_years' (32) was used instead of 'eggs_per_chicken_per_day' (6).",
+  "repro_seed": -1883962124728527705,
+  "model_name": "google_gemini-2.5-flash"
+}

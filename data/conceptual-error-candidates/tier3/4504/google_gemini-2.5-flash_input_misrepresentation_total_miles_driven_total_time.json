@@ -1,0 +1,124 @@
+{
+  "index": 4504,
+  "original_solution_mapping": {
+    "FA": "#### 88",
+    "L1": "In 5 hours the car can drive 8 * 5 = <<8*5=40>>40 miles.",
+    "L2": "One cycle of driving and pause takes 5 + 1 = <<5+1=6>>6 hours.",
+    "L3": "In 13 hours this cycle can fit 13 / 6 = 2 full cycles with a remainder of 1 hour",
+    "L4": "Two cycles will last for 2 * 6 = <<2*6=12>>12 hours.",
+    "L5": "During two full cycles, the car will drive 40 * 2 = <<40*2=80>>80 miles.",
+    "L6": "So there is 13 - 12 = <<13-12=1>>1 remaining hour when the car can drive.",
+    "L7": "That means during 13 hours the car will be able to drive 80 + 8 = 88 miles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4504.\n    Returns: the total miles the car can drive in 13 hours.\n    \"\"\"\n    # L1\n    miles_per_hour = 8 # 8 miles in one hour\n    initial_driving_hours = 5 # After 5 hours of constant driving\n    miles_in_initial_driving = miles_per_hour * initial_driving_hours\n\n    # L2\n    pause_duration = 1 # takes 1 hour\n    cycle_duration = initial_driving_hours + pause_duration\n\n    # L3\n    total_time = 13 # in 13 hours\n    num_full_cycles = total_time // cycle_duration\n    remaining_hours_after_cycles = total_time % cycle_duration\n\n    # L4\n    duration_of_full_cycles = num_full_cycles * cycle_duration\n\n    # L5\n    miles_driven_in_full_cycles = miles_in_initial_driving * num_full_cycles\n\n    # L6\n    remaining_driving_time_from_total = total_time - duration_of_full_cycles\n\n    # L7\n    total_miles_driven = miles_driven_in_full_cycles + miles_per_hour\n\n    # FA\n    answer = total_miles_driven\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_miles_driven",
+    "operand_to_replace": "miles_per_hour",
+    "replacement_variable": "total_time"
+  },
+  "correct_trace": {
+    "miles_per_hour": 8,
+    "initial_driving_hours": 5,
+    "miles_in_initial_driving": 40,
+    "pause_duration": 1,
+    "cycle_duration": 6,
+    "total_time": 13,
+    "num_full_cycles": 2,
+    "remaining_hours_after_cycles": 1,
+    "duration_of_full_cycles": 12,
+    "miles_driven_in_full_cycles": 80,
+    "remaining_driving_time_from_total": 1,
+    "total_miles_driven": 88,
+    "answer": 88
+  },
+  "flawed_trace": {
+    "miles_per_hour": 8,
+    "initial_driving_hours": 5,
+    "miles_in_initial_driving": 40,
+    "pause_duration": 1,
+    "cycle_duration": 6,
+    "total_time": 13,
+    "num_full_cycles": 2,
+    "remaining_hours_after_cycles": 1,
+    "duration_of_full_cycles": 12,
+    "miles_driven_in_full_cycles": 80,
+    "remaining_driving_time_from_total": 1,
+    "total_miles_driven": 93,
+    "answer": 93
+  },
+  "correct_value": 88,
+  "flawed_value": 93,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "miles_in_initial_driving",
+      "question_inputs": [
+        "miles_per_hour",
+        "initial_driving_hours"
+      ],
+      "solution_line_template": "In {initial_driving_hours} hours the car can drive {miles_per_hour} * {initial_driving_hours} = <<{miles_per_hour}*{initial_driving_hours}={miles_in_initial_driving}>>{miles_in_initial_driving} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cycle_duration",
+      "question_inputs": [
+        "pause_duration"
+      ],
+      "solution_line_template": "One cycle of driving and pause takes {initial_driving_hours} + {pause_duration} = <<{initial_driving_hours}+{pause_duration}={cycle_duration}>>{cycle_duration} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_full_cycles",
+      "question_inputs": [
+        "total_time"
+      ],
+      "solution_line_template": "In {total_time} hours this cycle can fit {total_time} / {cycle_duration} = {num_full_cycles} full cycles with a remainder of {remaining_hours_after_cycles} hour"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "duration_of_full_cycles",
+      "question_inputs": [],
+      "solution_line_template": "{num_full_cycles} cycles will last for {num_full_cycles} * {cycle_duration} = <<{num_full_cycles}*{cycle_duration}={duration_of_full_cycles}>>{duration_of_full_cycles} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "miles_driven_in_full_cycles",
+      "question_inputs": [],
+      "solution_line_template": "During {num_full_cycles} full cycles, the car will drive {miles_in_initial_driving} * {num_full_cycles} = <<{miles_in_initial_driving}*{num_full_cycles}={miles_driven_in_full_cycles}>>{miles_driven_in_full_cycles} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "remaining_driving_time_from_total",
+      "question_inputs": [],
+      "solution_line_template": "So there is {total_time} - {duration_of_full_cycles} = <<{total_time}-{duration_of_full_cycles}={remaining_driving_time_from_total}>>{remaining_driving_time_from_total} remaining hour when the car can drive."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "total_miles_driven",
+      "question_inputs": [],
+      "solution_line_template": "That means during {total_time} hours the car will be able to drive {miles_driven_in_full_cycles} + {miles_per_hour} = {total_miles_driven} miles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In 5 hours the car can drive 8 * 5 = <<8*5=40>>40 miles.",
+    "L2": "One cycle of driving and pause takes 5 + 1 = <<5+1=6>>6 hours.",
+    "L3": "In 13 hours this cycle can fit 13 / 6 = 2 full cycles with a remainder of 1 hour",
+    "L4": "2 cycles will last for 2 * 6 = <<2*6=12>>12 hours.",
+    "L5": "During 2 full cycles, the car will drive 40 * 2 = <<40*2=80>>80 miles.",
+    "L6": "So there is 13 - 12 = <<13-12=1>>1 remaining hour when the car can drive.",
+    "L7": "That means during 13 hours the car will be able to drive 80 + 13 = 93 miles.",
+    "FA": "#### 93"
+  },
+  "erroneous_line_number": "L7",
+  "explanation": "Input misrepresentation. The value for 'total_time' (13) was used instead of 'miles_per_hour' (8).",
+  "repro_seed": 4444870877850270936,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 3974,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "He reads 2*50=<<2*50=100>>100 pages a day",
+    "L2": "So he reads 7*100=<<7*100=700>>700 pages a week",
+    "L3": "So it takes 2800/700=<<2800/700=4>>4 weeks"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3974.\n    Returns: the number of weeks it will take John to read the bible.\n    \"\"\"\n    # L1\n    hours_per_day = 2 # 2 hours a day\n    pages_per_hour = 50 # 50 pages an hour\n    pages_per_day = hours_per_day * pages_per_hour\n\n    # L2\n    days_per_week = 7 # WK\n    pages_per_week = days_per_week * pages_per_day\n\n    # L3\n    total_pages = 2800 # 2800 pages long\n    weeks_to_read = total_pages / pages_per_week\n\n    # FA\n    answer = weeks_to_read\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "weeks_to_read",
+    "operand_to_replace": "pages_per_week",
+    "replacement_variable": "pages_per_hour"
+  },
+  "correct_trace": {
+    "hours_per_day": 2,
+    "pages_per_hour": 50,
+    "pages_per_day": 100,
+    "days_per_week": 7,
+    "pages_per_week": 700,
+    "total_pages": 2800,
+    "weeks_to_read": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "hours_per_day": 2,
+    "pages_per_hour": 50,
+    "pages_per_day": 100,
+    "days_per_week": 7,
+    "pages_per_week": 700,
+    "total_pages": 2800,
+    "weeks_to_read": 56.0,
+    "answer": 56.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 56.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "pages_per_day",
+      "question_inputs": [
+        "hours_per_day",
+        "pages_per_hour"
+      ],
+      "solution_line_template": "He reads {hours_per_day}*{pages_per_hour}=<<{hours_per_day}*{pages_per_hour}={pages_per_day}>>{pages_per_day} pages a day"
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L2",
+      "output_variable": "pages_per_week",
+      "question_inputs": [],
+      "solution_line_template": "So he reads {days_per_week}*{pages_per_day}=<<{days_per_week}*{pages_per_day}={pages_per_week}>>{pages_per_week} pages a week"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "weeks_to_read",
+      "question_inputs": [
+        "total_pages"
+      ],
+      "solution_line_template": "So it takes {total_pages}/{pages_per_week}=<<{total_pages}/{pages_per_week}={weeks_to_read}>>{weeks_to_read} weeks"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He reads 2*50=<<2*50=100>>100 pages a day",
+    "L2": "So he reads 7*100=<<7*100=700>>700 pages a week",
+    "L3": "So it takes 2800/50=<<2800/50=56>>56 weeks",
+    "FA": "#### 56"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'pages_per_hour' (value: 50) was used instead of 'pages_per_week' (value: 700).",
+  "repro_seed": 5767575434054451921,
+  "model_name": "google_gemini-2.5-flash"
+}

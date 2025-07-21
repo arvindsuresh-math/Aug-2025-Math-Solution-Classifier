@@ -1,0 +1,109 @@
+{
+  "index": 1477,
+  "original_solution_mapping": {
+    "FA": "#### 10800",
+    "L1": "The hunting season last 12/4=<<12/4=3>>3 months",
+    "L2": "So he goes hunting 3*6=<<3*6=18>>18 times a year",
+    "L3": "That means he gets 18*2=<<18*2=36>>36 deers per year",
+    "L4": "So he catches 36*600=<<36*600=21600>>21,600 pounds of deer a year",
+    "L5": "That means he keeps 21600/2=<<21600/2=10800>>10,800 pounds of deer a year"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1477.\n    Returns: the amount of deer Jack keeps in pounds per year.\n    \"\"\"\n    # L1\n    months_per_year = 12 # WK\n    hunting_season_quarter = 4 # 1 quarter of the year\n    hunting_season_months = months_per_year / hunting_season_quarter\n\n    # L2\n    hunting_frequency_per_month = 6 # Jack goes hunting 6 times a month\n    total_hunts_per_year = hunting_season_months * hunting_frequency_per_month\n\n    # L3\n    deers_per_hunt = 2 # catches 2 deers each time he goes hunting\n    total_deers_per_year = total_hunts_per_year * deers_per_hunt\n\n    # L4\n    deer_weight_per_deer = 600 # weigh 600 pounds each\n    total_pounds_caught_per_year = total_deers_per_year * deer_weight_per_deer\n\n    # L5\n    keep_fraction_denominator = 2 # keeps half the weight of deer\n    pounds_kept_per_year = total_pounds_caught_per_year / keep_fraction_denominator\n\n    # FA\n    answer = pounds_kept_per_year\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "pounds_kept_per_year",
+    "operand_to_replace": "keep_fraction_denominator",
+    "replacement_variable": "hunting_frequency_per_month"
+  },
+  "correct_trace": {
+    "months_per_year": 12,
+    "hunting_season_quarter": 4,
+    "hunting_season_months": 3.0,
+    "hunting_frequency_per_month": 6,
+    "total_hunts_per_year": 18.0,
+    "deers_per_hunt": 2,
+    "total_deers_per_year": 36.0,
+    "deer_weight_per_deer": 600,
+    "total_pounds_caught_per_year": 21600.0,
+    "keep_fraction_denominator": 2,
+    "pounds_kept_per_year": 10800.0,
+    "answer": 10800.0
+  },
+  "flawed_trace": {
+    "months_per_year": 12,
+    "hunting_season_quarter": 4,
+    "hunting_season_months": 3.0,
+    "hunting_frequency_per_month": 6,
+    "total_hunts_per_year": 18.0,
+    "deers_per_hunt": 2,
+    "total_deers_per_year": 36.0,
+    "deer_weight_per_deer": 600,
+    "total_pounds_caught_per_year": 21600.0,
+    "keep_fraction_denominator": 2,
+    "pounds_kept_per_year": 3600.0,
+    "answer": 3600.0
+  },
+  "correct_value": 10800.0,
+  "flawed_value": 3600.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L1",
+      "output_variable": "hunting_season_months",
+      "question_inputs": [
+        "hunting_season_quarter"
+      ],
+      "solution_line_template": "The hunting season last {months_per_year}/{hunting_season_quarter}=<<{months_per_year}/{hunting_season_quarter}={hunting_season_months}>>{hunting_season_months} months"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_hunts_per_year",
+      "question_inputs": [
+        "hunting_frequency_per_month"
+      ],
+      "solution_line_template": "So he goes hunting {hunting_season_months}*{hunting_frequency_per_month}=<<{hunting_season_months}*{hunting_frequency_per_month}={total_hunts_per_year}>>{total_hunts_per_year} times a year"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_deers_per_year",
+      "question_inputs": [
+        "deers_per_hunt"
+      ],
+      "solution_line_template": "That means he gets {total_hunts_per_year}*{deers_per_hunt}=<<{total_hunts_per_year}*{deers_per_hunt}={total_deers_per_year}>>{total_deers_per_year} deers per year"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_pounds_caught_per_year",
+      "question_inputs": [
+        "deer_weight_per_deer"
+      ],
+      "solution_line_template": "So he catches {total_deers_per_year}*{deer_weight_per_deer}=<<{total_deers_per_year}*{deer_weight_per_deer}={total_pounds_caught_per_year}>>{total_pounds_caught_per_year} pounds of deer a year"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "pounds_kept_per_year",
+      "question_inputs": [
+        "keep_fraction_denominator"
+      ],
+      "solution_line_template": "That means he keeps {total_pounds_caught_per_year}/{keep_fraction_denominator}=<<{total_pounds_caught_per_year}/{keep_fraction_denominator}={pounds_kept_per_year}>>{pounds_kept_per_year} pounds of deer a year"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The hunting season last 12/4=<<12/4=3>>3 months",
+    "L2": "So he goes hunting 3*6=<<3*6=18>>18 times a year",
+    "L3": "That means he gets 18*2=<<18*2=36>>36 deers per year",
+    "L4": "So he catches 36*600=<<36*600=21600>>21600 pounds of deer a year",
+    "L5": "That means he keeps 21600/6=<<21600/6=3600>>3600 pounds of deer a year",
+    "FA": "#### 3600"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Input misrepresentation. The value for 'hunting_frequency_per_month' (6) was used instead of 'keep_fraction_denominator' (2).",
+  "repro_seed": -8447370846540106431,
+  "model_name": "google_gemini-2.5-flash"
+}

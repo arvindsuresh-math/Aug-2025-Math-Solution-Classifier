@@ -1,0 +1,88 @@
+{
+  "index": 3582,
+  "original_solution_mapping": {
+    "FA": "#### 5400",
+    "L1": "The new camera cost 4000*.3=$<<4000*.3=1200>>1200 more than the old camera.",
+    "L2": "So the camera cost 4000+1200=$<<4000+1200=5200>>5200",
+    "L3": "The lens cost 400-200=$<<400-200=200>>200",
+    "L4": "So the total cost was 5200+200=$<<5200+200=5400>>5400"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3582.\n    Returns: the total cost paid for the camera and lens.\n    \"\"\"\n    # L1\n    old_camera_cost = 4000 # The old camera cost $4000\n    new_model_increase_percent = 0.3 # costs 30% more\n    camera_cost_increase = old_camera_cost * new_model_increase_percent\n\n    # L2\n    new_camera_cost = old_camera_cost + camera_cost_increase\n\n    # L3\n    lens_original_cost = 400 # $400 lens\n    lens_discount = 200 # $200 off\n    final_lens_cost = lens_original_cost - lens_discount\n\n    # L4\n    total_cost = new_camera_cost + final_lens_cost\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "final_lens_cost",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x169052910>"
+  },
+  "correct_trace": {
+    "old_camera_cost": 4000,
+    "new_model_increase_percent": 0.3,
+    "camera_cost_increase": 1200.0,
+    "new_camera_cost": 5200.0,
+    "lens_original_cost": 400,
+    "lens_discount": 200,
+    "final_lens_cost": 200,
+    "total_cost": 5400.0,
+    "answer": 5400.0
+  },
+  "flawed_trace": {
+    "old_camera_cost": 4000,
+    "new_model_increase_percent": 0.3,
+    "camera_cost_increase": 1200.0,
+    "new_camera_cost": 5200.0,
+    "lens_original_cost": 400,
+    "lens_discount": 200,
+    "final_lens_cost": 600,
+    "total_cost": 5800.0,
+    "answer": 5800.0
+  },
+  "correct_value": 200,
+  "flawed_value": 600,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "camera_cost_increase",
+      "question_inputs": [
+        "old_camera_cost",
+        "new_model_increase_percent"
+      ],
+      "solution_line_template": "The new camera cost {old_camera_cost}*{new_model_increase_percent}=$<<{old_camera_cost}*{new_model_increase_percent}={camera_cost_increase}>>{camera_cost_increase} more than the old camera."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "new_camera_cost",
+      "question_inputs": [],
+      "solution_line_template": "So the camera cost {old_camera_cost}+{camera_cost_increase}=$<<{old_camera_cost}+{camera_cost_increase}={new_camera_cost}>>{new_camera_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_lens_cost",
+      "question_inputs": [
+        "lens_original_cost",
+        "lens_discount"
+      ],
+      "solution_line_template": "The lens cost {lens_original_cost}-{lens_discount}=$<<{lens_original_cost}-{lens_discount}={final_lens_cost}>>{final_lens_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cost",
+      "question_inputs": [],
+      "solution_line_template": "So the total cost was {new_camera_cost}+{final_lens_cost}=$<<{new_camera_cost}+{final_lens_cost}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The new camera cost 4000*0.3=$<<4000*0.3=1200>>1200 more than the old camera.",
+    "L2": "So the camera cost 4000+1200=$<<4000+1200=5200>>5200",
+    "L3": "The lens cost 400-200=$<<400-200=600>>600",
+    "L4": "So the total cost was 5200+600=$<<5200+600=5800>>5800",
+    "FA": "#### 5800"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 8324749240597423633,
+  "model_name": "google_gemini-2.5-flash"
+}

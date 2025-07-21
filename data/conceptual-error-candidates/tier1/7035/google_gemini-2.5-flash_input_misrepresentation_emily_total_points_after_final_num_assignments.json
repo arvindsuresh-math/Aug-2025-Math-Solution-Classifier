@@ -1,0 +1,104 @@
+{
+  "index": 7035,
+  "original_solution_mapping": {
+    "FA": "#### 100",
+    "L1": "Ahmed has scored 819 total points in the class thus far because 9 x 91 = <<9*91=819>>819",
+    "L2": "Emily had scored 828 total points before the final assignments because 9 x 92 = <<9*92=828>>828",
+    "L3": "She scored 918 total points after the final assignment because 828 + 90 = <<828+90=918>>918",
+    "L4": "Ahmed needs to score a 99 to tie Emily for the semester because 918 - 819 = <<918-819=99>>99",
+    "L5": "Ahmed needs to score a 100 to beat Emily for the semester because 99 + 1 = <<99+1=100>>100"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7035.\n    Returns: the minimum grade Ahmed needs to get to beat Emily.\n    \"\"\"\n    # L1\n    num_assignments = 9 # 9 assignments\n    ahmed_current_grade = 91 # Ahmed has a 91 in the class\n    ahmed_current_total_points = num_assignments * ahmed_current_grade\n\n    # L2\n    emily_current_grade = 92 # Emily has a 92\n    emily_current_total_points = num_assignments * emily_current_grade\n\n    # L3\n    emily_final_assignment_grade = 90 # Emily got a 90 on the final assignment\n    emily_total_points_after_final = emily_current_total_points + emily_final_assignment_grade\n\n    # L4\n    ahmed_grade_to_tie = emily_total_points_after_final - ahmed_current_total_points\n\n    # L5\n    one_point_more = 1 # WK\n    ahmed_grade_to_beat = ahmed_grade_to_tie + one_point_more\n\n    # FA\n    answer = ahmed_grade_to_beat\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "emily_total_points_after_final",
+    "operand_to_replace": "emily_final_assignment_grade",
+    "replacement_variable": "num_assignments"
+  },
+  "correct_trace": {
+    "num_assignments": 9,
+    "ahmed_current_grade": 91,
+    "ahmed_current_total_points": 819,
+    "emily_current_grade": 92,
+    "emily_current_total_points": 828,
+    "emily_final_assignment_grade": 90,
+    "emily_total_points_after_final": 918,
+    "ahmed_grade_to_tie": 99,
+    "one_point_more": 1,
+    "ahmed_grade_to_beat": 100,
+    "answer": 100
+  },
+  "flawed_trace": {
+    "num_assignments": 9,
+    "ahmed_current_grade": 91,
+    "ahmed_current_total_points": 819,
+    "emily_current_grade": 92,
+    "emily_current_total_points": 828,
+    "emily_final_assignment_grade": 90,
+    "emily_total_points_after_final": 837,
+    "ahmed_grade_to_tie": 18,
+    "one_point_more": 1,
+    "ahmed_grade_to_beat": 19,
+    "answer": 19
+  },
+  "correct_value": 918,
+  "flawed_value": 837,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "ahmed_current_total_points",
+      "question_inputs": [
+        "num_assignments",
+        "ahmed_current_grade"
+      ],
+      "solution_line_template": "Ahmed has scored {ahmed_current_total_points} total points in the class thus far because {num_assignments} x {ahmed_current_grade} = <<{num_assignments}*{ahmed_current_grade}={ahmed_current_total_points}>>{ahmed_current_total_points}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "emily_current_total_points",
+      "question_inputs": [
+        "emily_current_grade"
+      ],
+      "solution_line_template": "Emily had scored {emily_current_total_points} total points before the final assignments because {num_assignments} x {emily_current_grade} = <<{num_assignments}*{emily_current_grade}={emily_current_total_points}>>{emily_current_total_points}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "emily_total_points_after_final",
+      "question_inputs": [
+        "emily_final_assignment_grade"
+      ],
+      "solution_line_template": "She scored {emily_total_points_after_final} total points after the final assignment because {emily_current_total_points} + {emily_final_assignment_grade} = <<{emily_current_total_points}+{emily_final_assignment_grade}={emily_total_points_after_final}>>{emily_total_points_after_final}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "ahmed_grade_to_tie",
+      "question_inputs": [],
+      "solution_line_template": "Ahmed needs to score a {ahmed_grade_to_tie} to tie Emily for the semester because {emily_total_points_after_final} - {ahmed_current_total_points} = <<{emily_total_points_after_final}-{ahmed_current_total_points}={ahmed_grade_to_tie}>>{ahmed_grade_to_tie}"
+    },
+    {
+      "WK_inputs": [
+        "one_point_more"
+      ],
+      "line_number": "L5",
+      "output_variable": "ahmed_grade_to_beat",
+      "question_inputs": [],
+      "solution_line_template": "Ahmed needs to score a {ahmed_grade_to_beat} to beat Emily for the semester because {ahmed_grade_to_tie} + {one_point_more} = <<{ahmed_grade_to_tie}+{one_point_more}={ahmed_grade_to_beat}>>{ahmed_grade_to_beat}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Ahmed has scored 819 total points in the class thus far because 9 x 91 = <<9*91=819>>819",
+    "L2": "Emily had scored 828 total points before the final assignments because 9 x 92 = <<9*92=828>>828",
+    "L3": "She scored 837 total points after the final assignment because 828 + 9 = <<828+9=837>>837",
+    "L4": "Ahmed needs to score a 18 to tie Emily for the semester because 837 - 819 = <<837-819=18>>18",
+    "L5": "Ahmed needs to score a 19 to beat Emily for the semester because 18 + 1 = <<18+1=19>>19",
+    "FA": "#### 19"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'num_assignments' (9) was used instead of 'emily_final_assignment_grade' (90).",
+  "repro_seed": 2656881610370782308,
+  "model_name": "google_gemini-2.5-flash"
+}

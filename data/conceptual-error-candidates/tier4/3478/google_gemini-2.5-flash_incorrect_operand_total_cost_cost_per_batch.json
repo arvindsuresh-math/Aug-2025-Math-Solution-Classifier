@@ -1,0 +1,77 @@
+{
+  "index": 3478,
+  "original_solution_mapping": {
+    "FA": "#### 18",
+    "L1": "They are making 24 S'mores because 8 x 3 = <<8*3=24>>24",
+    "L2": "Each S'more costs $.75 to make because 3 / 4 = <<3/4=.75>>.75",
+    "L3": "It will cost $18 to make them all because 24 x .75 = <<24*.75=18>>18"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3478.\n    Returns: the total cost to buy all the supplies for S'mores.\n    \"\"\"\n    # L1\n    num_friends = 8 # 8 of them in total\n    smores_per_person = 3 # each eat 3 S'mores\n    total_smores = num_friends * smores_per_person\n\n    # L2\n    cost_per_batch = 3 # It costs $3 in supplies\n    smores_per_batch = 4 # to make 4 S'mores\n    cost_per_smore = cost_per_batch / smores_per_batch\n\n    # L3\n    total_cost = total_smores * cost_per_smore\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_cost",
+    "operand_to_replace": "cost_per_smore",
+    "replacement_variable": "cost_per_batch"
+  },
+  "correct_trace": {
+    "num_friends": 8,
+    "smores_per_person": 3,
+    "total_smores": 24,
+    "cost_per_batch": 3,
+    "smores_per_batch": 4,
+    "cost_per_smore": 0.75,
+    "total_cost": 18.0,
+    "answer": 18.0
+  },
+  "flawed_trace": {
+    "num_friends": 8,
+    "smores_per_person": 3,
+    "total_smores": 24,
+    "cost_per_batch": 3,
+    "smores_per_batch": 4,
+    "cost_per_smore": 0.75,
+    "total_cost": 72,
+    "answer": 72
+  },
+  "correct_value": 18.0,
+  "flawed_value": 72,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_smores",
+      "question_inputs": [
+        "num_friends",
+        "smores_per_person"
+      ],
+      "solution_line_template": "They are making {total_smores} S'mores because {num_friends} x {smores_per_person} = <<{num_friends}*{smores_per_person}={total_smores}>>{total_smores}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cost_per_smore",
+      "question_inputs": [
+        "cost_per_batch",
+        "smores_per_batch"
+      ],
+      "solution_line_template": "Each S'more costs $.75 to make because {cost_per_batch} / {smores_per_batch} = <<{cost_per_batch}/{smores_per_batch}={cost_per_smore}>>{cost_per_smore}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost",
+      "question_inputs": [],
+      "solution_line_template": "It will cost $18 to make them all because {total_smores} x {cost_per_smore} = <<{total_smores}*{cost_per_smore}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "They are making 24 S'mores because 8 x 3 = <<8*3=24>>24",
+    "L2": "Each S'more costs $.75 to make because 3 / 4 = <<3/4=0.75>>0.75",
+    "L3": "It will cost $18 to make them all because 24 x 3 = <<24*3=72>>72",
+    "FA": "#### 72"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'cost_per_batch' (value: 3) was used instead of 'cost_per_smore' (value: 0.75).",
+  "repro_seed": 5213718528751813019,
+  "model_name": "google_gemini-2.5-flash"
+}

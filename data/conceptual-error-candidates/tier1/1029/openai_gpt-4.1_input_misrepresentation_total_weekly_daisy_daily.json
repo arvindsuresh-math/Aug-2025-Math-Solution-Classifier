@@ -1,0 +1,99 @@
+{
+  "index": 1029,
+  "original_solution_mapping": {
+    "FA": "#### 77",
+    "L1": "Bess produces 2 pails every day.",
+    "L2": "Brownie produces 3 times as much * 2 = <<3*2=6>>6 pails every day.",
+    "L3": "Daisy produces 2 + 1 more pail than Bess = <<2+1=3>>3 pails every day.",
+    "L4": "Bess, Brownie, and Daisy together produce 2 + 6 + 3 = <<2+6+3=11>>11 pails every day.",
+    "L5": "A week is 7 days, so Farmer Red gets 11 * 7 = <<11*7=77>>77 pails each week."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1029.\n    Returns: the total number of pails of milk Farmer Red gets from his three cows each week.\n    \"\"\"\n    # L1\n    bess_daily = 2 # Bess gives him two pails of milk every day\n\n    # L2\n    brownie_multiplier = 3 # Brownie produces three times that amount\n    brownie_daily = brownie_multiplier * bess_daily\n\n    # L3\n    daisy_more_than_bess = 1 # Daisy makes one pail more than Bess\n    daisy_daily = bess_daily + daisy_more_than_bess\n\n    # L4\n    total_daily = bess_daily + brownie_daily + daisy_daily\n\n    # L5\n    days_in_week = 7 # WK\n    total_weekly = total_daily * days_in_week\n\n    # FA\n    answer = total_weekly\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_weekly",
+    "operand_to_replace": "days_in_week",
+    "replacement_variable": "daisy_daily"
+  },
+  "correct_trace": {
+    "bess_daily": 2,
+    "brownie_multiplier": 3,
+    "brownie_daily": 6,
+    "daisy_more_than_bess": 1,
+    "daisy_daily": 3,
+    "total_daily": 11,
+    "days_in_week": 7,
+    "total_weekly": 77,
+    "answer": 77
+  },
+  "flawed_trace": {
+    "bess_daily": 2,
+    "brownie_multiplier": 3,
+    "brownie_daily": 6,
+    "daisy_more_than_bess": 1,
+    "daisy_daily": 3,
+    "total_daily": 11,
+    "days_in_week": 7,
+    "total_weekly": 33,
+    "answer": 33
+  },
+  "correct_value": 77,
+  "flawed_value": 33,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "bess_daily"
+      ],
+      "WK_inputs": [],
+      "output_variable": "bess_daily",
+      "solution_line_template": "Bess produces {bess_daily} pails every day."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "brownie_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "brownie_daily",
+      "solution_line_template": "Brownie produces {brownie_multiplier} times as much * {bess_daily} = <<{brownie_multiplier}*{bess_daily}={brownie_daily}>>{brownie_daily} pails every day."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "daisy_more_than_bess"
+      ],
+      "WK_inputs": [],
+      "output_variable": "daisy_daily",
+      "solution_line_template": "Daisy produces {bess_daily} + {daisy_more_than_bess} more pail than Bess = <<{bess_daily}+{daisy_more_than_bess}={daisy_daily}>>{daisy_daily} pails every day."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_daily",
+      "solution_line_template": "Bess, Brownie, and Daisy together produce {bess_daily} + {brownie_daily} + {daisy_daily} = <<{bess_daily}+{brownie_daily}+{daisy_daily}={total_daily}>>{total_daily} pails every day."
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": [
+        "days_in_week"
+      ],
+      "output_variable": "total_weekly",
+      "solution_line_template": "A week is {days_in_week} days, so Farmer Red gets {total_daily} * {days_in_week} = <<{total_daily}*{days_in_week}={total_weekly}>>{total_weekly} pails each week."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Bess produces 2 pails every day.",
+    "L2": "Brownie produces 3 times as much * 2 = <<3*2=6>>6 pails every day.",
+    "L3": "Daisy produces 2 + 1 more pail than Bess = <<2+1=3>>3 pails every day.",
+    "L4": "Bess, Brownie, and Daisy together produce 2 + 6 + 3 = <<2+6+3=11>>11 pails every day.",
+    "L5": "A week is 3 days, so Farmer Red gets 11 * 3 = <<11*3=33>>33 pails each week.",
+    "FA": "#### 33"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Input misrepresentation. The value for 'daisy_daily' (3) was used instead of 'days_in_week' (7).",
+  "repro_seed": -4480443581555393566,
+  "model_name": "openai_gpt-4.1"
+}

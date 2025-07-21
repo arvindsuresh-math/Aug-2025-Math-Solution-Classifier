@@ -1,0 +1,63 @@
+{
+  "index": 3979,
+  "original_solution_mapping": {
+    "FA": "#### 24",
+    "L1": "In a week, Mr. Alvarez uses $36/$3 = <<36/3=12>>12 gallons a week.",
+    "L2": "So in two weeks, he uses 12 x 2 = <<12*2=24>>24 gallons."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3979.\n    Returns: the total gallons of diesel fuel Mr. Alvarez uses in two weeks.\n    \"\"\"\n    # L1\n    weekly_spend = 36 # $36 on diesel fuel each week\n    cost_per_gallon = 3 # $3 per gallon\n    gallons_per_week = weekly_spend / cost_per_gallon\n\n    # L2\n    number_of_weeks = 2 # two weeks\n    total_gallons = gallons_per_week * number_of_weeks\n\n    # FA\n    answer = total_gallons\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_gallons",
+    "operand_to_replace": "number_of_weeks",
+    "replacement_variable": "weekly_spend"
+  },
+  "correct_trace": {
+    "weekly_spend": 36,
+    "cost_per_gallon": 3,
+    "gallons_per_week": 12.0,
+    "number_of_weeks": 2,
+    "total_gallons": 24.0,
+    "answer": 24.0
+  },
+  "flawed_trace": {
+    "weekly_spend": 36,
+    "cost_per_gallon": 3,
+    "gallons_per_week": 12.0,
+    "number_of_weeks": 2,
+    "total_gallons": 432.0,
+    "answer": 432.0
+  },
+  "correct_value": 24.0,
+  "flawed_value": 432.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "gallons_per_week",
+      "question_inputs": [
+        "weekly_spend",
+        "cost_per_gallon"
+      ],
+      "solution_line_template": "In a week, Mr. Alvarez uses ${weekly_spend}/${cost_per_gallon} = <<{weekly_spend}/{cost_per_gallon}={gallons_per_week}>>{gallons_per_week} gallons a week."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_gallons",
+      "question_inputs": [
+        "number_of_weeks"
+      ],
+      "solution_line_template": "So in two weeks, he uses {gallons_per_week} x {number_of_weeks} = <<{gallons_per_week}*{number_of_weeks}={total_gallons}>>{total_gallons} gallons."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In a week, Mr. Alvarez uses $36/$3 = <<36/3=12>>12 gallons a week.",
+    "L2": "So in two weeks, he uses 12 x 36 = <<12*36=432>>432 gallons.",
+    "FA": "#### 432"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'weekly_spend' (36) was used instead of 'number_of_weeks' (2).",
+  "repro_seed": -7357713355244321153,
+  "model_name": "google_gemini-2.5-flash"
+}

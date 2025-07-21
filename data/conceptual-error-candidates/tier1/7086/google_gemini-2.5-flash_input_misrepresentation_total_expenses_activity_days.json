@@ -1,0 +1,103 @@
+{
+  "index": 7086,
+  "original_solution_mapping": {
+    "FA": "#### 895",
+    "L1": "The booth made $50 x 3 = $<<50*3=150>>150 selling cotton candy each day.",
+    "L2": "In a day, the booth made a total of $150 + $50 = $<<150+50=200>>200.",
+    "L3": "In 5 days, they made a total of $200 x 5 = $<<200*5=1000>>1000.",
+    "L4": "The booth has to pay a total of $30 + $75 = $<<30+75=105>>105.",
+    "L5": "Thus, the booth earned $1000 - $105 = $<<1000-105=895>>895."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7086.\n    Returns: the total earnings of the booth after paying rent and ingredients.\n    \"\"\"\n    # L1\n    popcorn_daily_sales = 50 # $50 selling popcorn each day\n    cotton_candy_multiplier = 3 # three times as much selling cotton candy\n    cotton_candy_daily_sales = popcorn_daily_sales * cotton_candy_multiplier\n\n    # L2\n    total_daily_sales = cotton_candy_daily_sales + popcorn_daily_sales\n\n    # L3\n    activity_days = 5 # For a 5-day activity\n    total_sales_5_days = total_daily_sales * activity_days\n\n    # L4\n    rent_cost = 30 # $30 rent\n    ingredients_cost = 75 # $75 for the cost of the ingredients\n    total_expenses = rent_cost + ingredients_cost\n\n    # L5\n    net_earnings = total_sales_5_days - total_expenses\n\n    # FA\n    answer = net_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_expenses",
+    "operand_to_replace": "ingredients_cost",
+    "replacement_variable": "activity_days"
+  },
+  "correct_trace": {
+    "popcorn_daily_sales": 50,
+    "cotton_candy_multiplier": 3,
+    "cotton_candy_daily_sales": 150,
+    "total_daily_sales": 200,
+    "activity_days": 5,
+    "total_sales_5_days": 1000,
+    "rent_cost": 30,
+    "ingredients_cost": 75,
+    "total_expenses": 105,
+    "net_earnings": 895,
+    "answer": 895
+  },
+  "flawed_trace": {
+    "popcorn_daily_sales": 50,
+    "cotton_candy_multiplier": 3,
+    "cotton_candy_daily_sales": 150,
+    "total_daily_sales": 200,
+    "activity_days": 5,
+    "total_sales_5_days": 1000,
+    "rent_cost": 30,
+    "ingredients_cost": 75,
+    "total_expenses": 35,
+    "net_earnings": 965,
+    "answer": 965
+  },
+  "correct_value": 105,
+  "flawed_value": 35,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cotton_candy_daily_sales",
+      "question_inputs": [
+        "popcorn_daily_sales",
+        "cotton_candy_multiplier"
+      ],
+      "solution_line_template": "The booth made ${popcorn_daily_sales} x {cotton_candy_multiplier} = $<<{popcorn_daily_sales}*{cotton_candy_multiplier}={cotton_candy_daily_sales}>>{cotton_candy_daily_sales} selling cotton candy each day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_daily_sales",
+      "question_inputs": [],
+      "solution_line_template": "In a day, the booth made a total of ${cotton_candy_daily_sales} + ${popcorn_daily_sales} = $<<{cotton_candy_daily_sales}+{popcorn_daily_sales}={total_daily_sales}>>{total_daily_sales}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_sales_5_days",
+      "question_inputs": [
+        "activity_days"
+      ],
+      "solution_line_template": "In {activity_days} days, they made a total of ${total_daily_sales} x {activity_days} = $<<{total_daily_sales}*{activity_days}={total_sales_5_days}>>{total_sales_5_days}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_expenses",
+      "question_inputs": [
+        "rent_cost",
+        "ingredients_cost"
+      ],
+      "solution_line_template": "The booth has to pay a total of ${rent_cost} + ${ingredients_cost} = $<<{rent_cost}+{ingredients_cost}={total_expenses}>>{total_expenses}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "net_earnings",
+      "question_inputs": [],
+      "solution_line_template": "Thus, the booth earned ${total_sales_5_days} - ${total_expenses} = $<<{total_sales_5_days}-{total_expenses}={net_earnings}>>{net_earnings}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The booth made $50 x 3 = $<<50*3=150>>150 selling cotton candy each day.",
+    "L2": "In a day, the booth made a total of $150 + $50 = $<<150+50=200>>200.",
+    "L3": "In 5 days, they made a total of $200 x 5 = $<<200*5=1000>>1000.",
+    "L4": "The booth has to pay a total of $30 + $5 = $<<30+5=35>>35.",
+    "L5": "Thus, the booth earned $1000 - $35 = $<<1000-35=965>>965.",
+    "FA": "#### 965"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'activity_days' (5) was used instead of 'ingredients_cost' (75).",
+  "repro_seed": 6184726101741637796,
+  "model_name": "google_gemini-2.5-flash"
+}

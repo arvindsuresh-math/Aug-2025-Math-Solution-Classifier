@@ -1,0 +1,88 @@
+{
+  "index": 6603,
+  "original_solution_mapping": {
+    "FA": "#### 24",
+    "L1": "There a total of 8 x 12 = <<8*12=96>>96 seats on that plane.",
+    "L2": "Only 8 x 3/4 = <<8*3/4=6>>6 seats are allowed to be seated in each row.",
+    "L3": "So, only 6 x 12 = <<6*12=72>>72 seats are allowed to be seated on the plane.",
+    "L4": "Therefore, 96 - 72 = <<96-72=24>>24 seats will not be occupied."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6603.\n    Returns: the number of seats that will not be occupied on the plane.\n    \"\"\"\n    # L1\n    people_per_row = 8 # Eight people fit in a row\n    num_rows = 12 # 12 rows\n    total_seats = people_per_row * num_rows\n\n    # L2\n    allowed_fraction_numerator = 3 # 3/4 of the seats\n    allowed_fraction_denominator = 4 # 3/4 of the seats\n    allowed_seats_per_row = people_per_row * allowed_fraction_numerator / allowed_fraction_denominator\n\n    # L3\n    total_allowed_seats = allowed_seats_per_row * num_rows\n\n    # L4\n    unoccupied_seats = total_seats - total_allowed_seats\n\n    # FA\n    answer = unoccupied_seats\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "unoccupied_seats",
+    "operand_to_replace": "total_allowed_seats",
+    "replacement_variable": "num_rows"
+  },
+  "correct_trace": {
+    "people_per_row": 8,
+    "num_rows": 12,
+    "total_seats": 96,
+    "allowed_fraction_numerator": 3,
+    "allowed_fraction_denominator": 4,
+    "allowed_seats_per_row": 6.0,
+    "total_allowed_seats": 72.0,
+    "unoccupied_seats": 24.0,
+    "answer": 24.0
+  },
+  "flawed_trace": {
+    "people_per_row": 8,
+    "num_rows": 12,
+    "total_seats": 96,
+    "allowed_fraction_numerator": 3,
+    "allowed_fraction_denominator": 4,
+    "allowed_seats_per_row": 6.0,
+    "total_allowed_seats": 72.0,
+    "unoccupied_seats": 84,
+    "answer": 84
+  },
+  "correct_value": 24.0,
+  "flawed_value": 84,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_seats",
+      "question_inputs": [
+        "people_per_row",
+        "num_rows"
+      ],
+      "solution_line_template": "There a total of {people_per_row} x {num_rows} = <<{people_per_row}*{num_rows}={total_seats}>>{total_seats} seats on that plane."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "allowed_seats_per_row",
+      "question_inputs": [
+        "allowed_fraction_numerator",
+        "allowed_fraction_denominator"
+      ],
+      "solution_line_template": "Only {people_per_row} x {allowed_fraction_numerator}/{allowed_fraction_denominator} = <<{people_per_row}*{allowed_fraction_numerator}/{allowed_fraction_denominator}={allowed_seats_per_row}>>{allowed_seats_per_row} seats are allowed to be seated in each row."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_allowed_seats",
+      "question_inputs": [],
+      "solution_line_template": "So, only {allowed_seats_per_row} x {num_rows} = <<{allowed_seats_per_row}*{num_rows}={total_allowed_seats}>>{total_allowed_seats} seats are allowed to be seated on the plane."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "unoccupied_seats",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, {total_seats} - {total_allowed_seats} = <<{total_seats}-{total_allowed_seats}={unoccupied_seats}>>{unoccupied_seats} seats will not be occupied."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There a total of 8 x 12 = <<8*12=96>>96 seats on that plane.",
+    "L2": "Only 8 x 3/4 = <<8*3/4=6>>6 seats are allowed to be seated in each row.",
+    "L3": "So, only 6 x 12 = <<6*12=72>>72 seats are allowed to be seated on the plane.",
+    "L4": "Therefore, 96 - 12 = <<96-12=84>>84 seats will not be occupied.",
+    "FA": "#### 84"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'num_rows' (value: 12) was used instead of 'total_allowed_seats' (value: 72.0).",
+  "repro_seed": 2174539071848555114,
+  "model_name": "google_gemini-2.5-flash"
+}

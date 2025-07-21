@@ -1,0 +1,108 @@
+{
+  "index": 1799,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "The discount saved when buying from Guitar Center would be $1000 * 15% = $<<1000*15*.01=150>>150.",
+    "L2": "The total cost when buying from Guitar Center would be $1000 - $150 discount + $100 shipping = $950.",
+    "L3": "The discount when buying from Sweetwater would be $1000 * 10% = $<<1000*10*.01=100>>100.",
+    "L4": "The total cost when buying from Sweetwater would be $1000 - $100 discount + $0 shipping = $<<1000-100-0=900>>900.",
+    "L5": "Thus, Silvia would save $950 - $900 = $<<950-900=50>>50 when buying from Sweetwater."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1799.\n    Returns: the amount Silvia will save by buying from the cheaper store.\n    \"\"\"\n    # L1\n    suggested_retail_price = 1000 # suggested retail price of $1000\n    gc_discount_percent_num = 15 # 15% off\n    percent_factor = 0.01 # WK\n    gc_discount_amount = suggested_retail_price * gc_discount_percent_num * percent_factor\n\n    # L2\n    gc_shipping_fee = 100 # shipping fee of $100\n    gc_total_cost = suggested_retail_price - gc_discount_amount + gc_shipping_fee\n\n    # L3\n    sw_discount_percent_num = 10 # 10% off deal\n    sw_discount_amount = suggested_retail_price * sw_discount_percent_num * percent_factor\n\n    # L4\n    sw_shipping_fee = 0 # free shipping\n    sw_total_cost = suggested_retail_price - sw_discount_amount + sw_shipping_fee\n\n    # L5\n    amount_saved = gc_total_cost - sw_total_cost\n\n    # FA\n    answer = amount_saved\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "sw_total_cost",
+    "operand_to_replace": "sw_discount_amount",
+    "replacement_variable": "gc_total_cost"
+  },
+  "correct_trace": {
+    "suggested_retail_price": 1000,
+    "gc_discount_percent_num": 15,
+    "percent_factor": 0.01,
+    "gc_discount_amount": 150.0,
+    "gc_shipping_fee": 100,
+    "gc_total_cost": 950.0,
+    "sw_discount_percent_num": 10,
+    "sw_discount_amount": 100.0,
+    "sw_shipping_fee": 0,
+    "sw_total_cost": 900.0,
+    "amount_saved": 50.0,
+    "answer": 50.0
+  },
+  "flawed_trace": {
+    "suggested_retail_price": 1000,
+    "gc_discount_percent_num": 15,
+    "percent_factor": 0.01,
+    "gc_discount_amount": 150.0,
+    "gc_shipping_fee": 100,
+    "gc_total_cost": 950.0,
+    "sw_discount_percent_num": 10,
+    "sw_discount_amount": 100.0,
+    "sw_shipping_fee": 0,
+    "sw_total_cost": 50.0,
+    "amount_saved": 900.0,
+    "answer": 900.0
+  },
+  "correct_value": 900.0,
+  "flawed_value": 50.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "gc_discount_amount",
+      "question_inputs": [
+        "suggested_retail_price",
+        "gc_discount_percent_num"
+      ],
+      "solution_line_template": "The discount saved when buying from Guitar Center would be ${suggested_retail_price} * {gc_discount_percent_num}% = $<<{suggested_retail_price}*{gc_discount_percent_num}*{percent_factor}={gc_discount_amount}>>{gc_discount_amount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "gc_total_cost",
+      "question_inputs": [
+        "gc_shipping_fee"
+      ],
+      "solution_line_template": "The total cost when buying from Guitar Center would be ${suggested_retail_price} - ${gc_discount_amount} discount + ${gc_shipping_fee} shipping = ${gc_total_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "sw_discount_amount",
+      "question_inputs": [
+        "sw_discount_percent_num"
+      ],
+      "solution_line_template": "The discount when buying from Sweetwater would be ${suggested_retail_price} * {sw_discount_percent_num}% = $<<{suggested_retail_price}*{sw_discount_percent_num}*{percent_factor}={sw_discount_amount}>>{sw_discount_amount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "sw_total_cost",
+      "question_inputs": [
+        "sw_shipping_fee"
+      ],
+      "solution_line_template": "The total cost when buying from Sweetwater would be ${suggested_retail_price} - ${sw_discount_amount} discount + ${sw_shipping_fee} shipping = $<<{suggested_retail_price}-{sw_discount_amount}-{sw_shipping_fee}={sw_total_cost}>>{sw_total_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "amount_saved",
+      "question_inputs": [],
+      "solution_line_template": "Thus, Silvia would save ${gc_total_cost} - ${sw_total_cost} = $<<{gc_total_cost}-{sw_total_cost}={amount_saved}>>{amount_saved} when buying from Sweetwater."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The discount saved when buying from Guitar Center would be $1000 * 15% = $<<1000*15*0.01=150>>150.",
+    "L2": "The total cost when buying from Guitar Center would be $1000 - $150 discount + $100 shipping = $950.",
+    "L3": "The discount when buying from Sweetwater would be $1000 * 10% = $<<1000*10*0.01=100>>100.",
+    "L4": "The total cost when buying from Sweetwater would be $1000 - $950 discount + $0 shipping = $<<1000-950-0=50>>50.",
+    "L5": "Thus, Silvia would save $950 - $50 = $<<950-50=900>>900 when buying from Sweetwater.",
+    "FA": "#### 900"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'gc_total_cost' (value: 950.0) was used instead of 'sw_discount_amount' (value: 100.0).",
+  "repro_seed": -4091861543261560476,
+  "model_name": "google_gemini-2.5-flash"
+}

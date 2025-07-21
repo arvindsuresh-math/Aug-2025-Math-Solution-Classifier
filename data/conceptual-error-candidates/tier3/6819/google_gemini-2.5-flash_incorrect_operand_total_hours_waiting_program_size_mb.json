@@ -1,0 +1,78 @@
+{
+  "index": 6819,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "We have to know how many MB are 360GB, 360GB x 1,000MB/1GB = <<360000=360000>>360,000 MB",
+    "L2": "The total seconds downloading will be 360,000MB / 50MB/second = <<360000/50=7200>>7,200 seconds",
+    "L3": "So she has to wait 7,200 seconds / 3,600 seconds/1 hour = <<7200/3600=2>>2 hours"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6819.\n    Returns: the total number of hours Vicky has to wait.\n    \"\"\"\n    # L1\n    program_size_gb = 360 # The program\u2019s size is 360GB\n    mb_per_gb = 1000 # There are 1000 MB per GB\n    program_size_mb = program_size_gb * mb_per_gb\n\n    # L2\n    download_speed_mbps = 50 # 50 MB/second\n    total_seconds_downloading = program_size_mb / download_speed_mbps\n\n    # L3\n    seconds_per_hour = 3600 # WK\n    total_hours_waiting = total_seconds_downloading / seconds_per_hour\n\n    # FA\n    answer = total_hours_waiting\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_hours_waiting",
+    "operand_to_replace": "total_seconds_downloading",
+    "replacement_variable": "program_size_mb"
+  },
+  "correct_trace": {
+    "program_size_gb": 360,
+    "mb_per_gb": 1000,
+    "program_size_mb": 360000,
+    "download_speed_mbps": 50,
+    "total_seconds_downloading": 7200.0,
+    "seconds_per_hour": 3600,
+    "total_hours_waiting": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "program_size_gb": 360,
+    "mb_per_gb": 1000,
+    "program_size_mb": 360000,
+    "download_speed_mbps": 50,
+    "total_seconds_downloading": 7200.0,
+    "seconds_per_hour": 3600,
+    "total_hours_waiting": 100.0,
+    "answer": 100.0
+  },
+  "correct_value": 2.0,
+  "flawed_value": 100.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "program_size_mb",
+      "question_inputs": [
+        "program_size_gb",
+        "mb_per_gb"
+      ],
+      "solution_line_template": "We have to know how many MB are {program_size_gb}GB, {program_size_gb}GB x {mb_per_gb}MB/1GB = <<{program_size_mb}={program_size_mb}>>{program_size_mb} MB"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_seconds_downloading",
+      "question_inputs": [
+        "download_speed_mbps"
+      ],
+      "solution_line_template": "The total seconds downloading will be {program_size_mb}MB / {download_speed_mbps}MB/second = <<{program_size_mb}/{download_speed_mbps}={total_seconds_downloading}>>{total_seconds_downloading} seconds"
+    },
+    {
+      "WK_inputs": [
+        "seconds_per_hour"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_hours_waiting",
+      "question_inputs": [],
+      "solution_line_template": "So she has to wait {total_seconds_downloading} seconds / {seconds_per_hour} seconds/1 hour = <<{total_seconds_downloading}/{seconds_per_hour}={total_hours_waiting}>>{total_hours_waiting} hours"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "We have to know how many MB are 360GB, 360GB x 1000MB/1GB = <<360000=360000>>360000 MB",
+    "L2": "The total seconds downloading will be 360000MB / 50MB/second = <<360000/50=7200>>7200 seconds",
+    "L3": "So she has to wait 360000 seconds / 3600 seconds/1 hour = <<360000/3600=100>>100 hours",
+    "FA": "#### 100"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'program_size_mb' (value: 360000) was used instead of 'total_seconds_downloading' (value: 7200.0).",
+  "repro_seed": 3500636874969178677,
+  "model_name": "google_gemini-2.5-flash"
+}

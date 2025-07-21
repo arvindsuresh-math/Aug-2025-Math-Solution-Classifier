@@ -1,0 +1,114 @@
+{
+  "index": 7460,
+  "original_solution_mapping": {
+    "FA": "#### 1080",
+    "L1": "Ten seats amount to $30 x 10 = $<<30*10=300>>300.",
+    "L2": "So there is $300 x 10/100 = $<<300*10/100=30>>30 discount for each 10 seats purchased.",
+    "L3": "Thus, the total cost for every 10 seats is $300 - $30 = $<<300-30=270>>270.",
+    "L4": "The school is going to buy 5 x 8 = <<5*8=40>>40 seats.",
+    "L5": "This means that the school is going to buy 40/10 = <<40/10=4>>4 sets of 10 seats.",
+    "L6": "Therefore, the school will pay a total of $270 x 4 = $<<270*4=1080>>1080 for the new seats"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7460.\n    Returns: the total amount the school will pay for the new seats.\n    \"\"\"\n    # L1\n    seat_cost = 30 # each seat costs $30\n    seats_in_group = 10 # each group of 10 seats purchased\n    cost_per_group_no_discount = seat_cost * seats_in_group\n\n    # L2\n    discount_percentage = Fraction(10, 100) # 10% discount\n    discount_amount_per_group = cost_per_group_no_discount * discount_percentage\n\n    # L3\n    cost_per_group_with_discount = cost_per_group_no_discount - discount_amount_per_group\n\n    # L4\n    num_rows = 5 # 5 rows of seats\n    seats_per_row = 8 # Each row has 8 seats\n    total_seats_to_buy = num_rows * seats_per_row\n\n    # L5\n    num_groups_of_seats = total_seats_to_buy / seats_in_group\n\n    # L6\n    total_cost = cost_per_group_with_discount * num_groups_of_seats\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_seats_to_buy",
+    "operand_to_replace": "num_rows",
+    "replacement_variable": "seat_cost"
+  },
+  "correct_trace": {
+    "seat_cost": 30,
+    "seats_in_group": 10,
+    "cost_per_group_no_discount": 300,
+    "discount_percentage": "1/10",
+    "discount_amount_per_group": "30",
+    "cost_per_group_with_discount": "270",
+    "num_rows": 5,
+    "seats_per_row": 8,
+    "total_seats_to_buy": 40,
+    "num_groups_of_seats": 4.0,
+    "total_cost": 1080.0,
+    "answer": 1080.0
+  },
+  "flawed_trace": {
+    "seat_cost": 30,
+    "seats_in_group": 10,
+    "cost_per_group_no_discount": 300,
+    "discount_percentage": "1/10",
+    "discount_amount_per_group": "30",
+    "cost_per_group_with_discount": "270",
+    "num_rows": 5,
+    "seats_per_row": 8,
+    "total_seats_to_buy": 240,
+    "num_groups_of_seats": 24.0,
+    "total_cost": 6480.0,
+    "answer": 6480.0
+  },
+  "correct_value": 40,
+  "flawed_value": 240,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_per_group_no_discount",
+      "question_inputs": [
+        "seat_cost",
+        "seats_in_group"
+      ],
+      "solution_line_template": "Ten seats amount to ${seat_cost} x {seats_in_group} = $<<{seat_cost}*{seats_in_group}={cost_per_group_no_discount}>>{cost_per_group_no_discount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "discount_amount_per_group",
+      "question_inputs": [
+        "discount_percentage"
+      ],
+      "solution_line_template": "So there is ${cost_per_group_no_discount} x {discount_percentage} = $<<{cost_per_group_no_discount}*{discount_percentage}={discount_amount_per_group}>>{discount_amount_per_group} discount for each {seats_in_group} seats purchased."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cost_per_group_with_discount",
+      "question_inputs": [],
+      "solution_line_template": "Thus, the total cost for every {seats_in_group} seats is ${cost_per_group_no_discount} - ${discount_amount_per_group} = $<<{cost_per_group_no_discount}-{discount_amount_per_group}={cost_per_group_with_discount}>>{cost_per_group_with_discount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_seats_to_buy",
+      "question_inputs": [
+        "num_rows",
+        "seats_per_row"
+      ],
+      "solution_line_template": "The school is going to buy {num_rows} x {seats_per_row} = <<{num_rows}*{seats_per_row}={total_seats_to_buy}>>{total_seats_to_buy} seats."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "num_groups_of_seats",
+      "question_inputs": [],
+      "solution_line_template": "This means that the school is going to buy {total_seats_to_buy}/{seats_in_group} = <<{total_seats_to_buy}/{seats_in_group}={num_groups_of_seats}>>{num_groups_of_seats} sets of {seats_in_group} seats."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_cost",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, the school will pay a total of ${cost_per_group_with_discount} x {num_groups_of_seats} = $<<{cost_per_group_with_discount}*{num_groups_of_seats}={total_cost}>>{total_cost} for the new seats"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Ten seats amount to $30 x 10 = $<<30*10=300>>300.",
+    "L2": "So there is $300 x 10/100 = $<<300*10/100=30>>30 discount for each 10 seats purchased.",
+    "L3": "Thus, the total cost for every 10 seats is $300 - $30 = $<<300-30=270>>270.",
+    "L4": "The school is going to buy 30 x 8 = <<30*8=240>>240 seats.",
+    "L5": "This means that the school is going to buy 240/10 = <<240/10=24>>24 sets of 10 seats.",
+    "L6": "Therefore, the school will pay a total of $270 x 24 = $<<270*24=6480>>6480 for the new seats",
+    "FA": "#### 6480"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'seat_cost' (30) was used instead of 'num_rows' (5).",
+  "repro_seed": -702169561258348123,
+  "model_name": "google_gemini-2.5-flash"
+}

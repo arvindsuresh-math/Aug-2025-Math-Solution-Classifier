@@ -1,0 +1,69 @@
+{
+  "index": 6856,
+  "original_solution_mapping": {
+    "FA": "#### 270",
+    "L1": "3/4 of the students at River Falls High School play tennis, a total of 3/4*600=<<3/4*600=450>>450 students",
+    "L2": "Of those that play tennis, 60% of them also play hockey, meaning 60/100*450=<<60/100*450=270>>270 students play hockey and tennis."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6856.\n    Returns: the number of students who play both hockey and tennis.\n    \"\"\"\n    # L1\n    total_students = 600 # 600 students at River Falls High School\n    tennis_numerator = 3 # 3/4 of them play tennis\n    tennis_denominator = 4 # 3/4 of them play tennis\n    students_play_tennis = tennis_numerator / tennis_denominator * total_students\n\n    # L2\n    hockey_percentage_numerator = 60 # 60% of them also play hockey\n    hockey_percentage_denominator = 100 # 60% of them also play hockey\n    students_play_hockey_and_tennis = hockey_percentage_numerator / hockey_percentage_denominator * students_play_tennis\n\n    # FA\n    answer = students_play_hockey_and_tennis\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "students_play_hockey_and_tennis",
+    "operand_to_replace": "hockey_percentage_numerator",
+    "replacement_variable": "tennis_denominator"
+  },
+  "correct_trace": {
+    "total_students": 600,
+    "tennis_numerator": 3,
+    "tennis_denominator": 4,
+    "students_play_tennis": 450.0,
+    "hockey_percentage_numerator": 60,
+    "hockey_percentage_denominator": 100,
+    "students_play_hockey_and_tennis": 270.0,
+    "answer": 270.0
+  },
+  "flawed_trace": {
+    "total_students": 600,
+    "tennis_numerator": 3,
+    "tennis_denominator": 4,
+    "students_play_tennis": 450.0,
+    "hockey_percentage_numerator": 60,
+    "hockey_percentage_denominator": 100,
+    "students_play_hockey_and_tennis": 18.0,
+    "answer": 18.0
+  },
+  "correct_value": 270.0,
+  "flawed_value": 18.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "students_play_tennis",
+      "question_inputs": [
+        "total_students",
+        "tennis_numerator",
+        "tennis_denominator"
+      ],
+      "solution_line_template": "3/4 of the students at River Falls High School play tennis, a total of {tennis_numerator}/{tennis_denominator}*{total_students}=<<{tennis_numerator}/{tennis_denominator}*{total_students}={students_play_tennis}>>{students_play_tennis} students"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "students_play_hockey_and_tennis",
+      "question_inputs": [
+        "hockey_percentage_numerator",
+        "hockey_percentage_denominator"
+      ],
+      "solution_line_template": "Of those that play tennis, 60% of them also play hockey, meaning {hockey_percentage_numerator}/{hockey_percentage_denominator}*{students_play_tennis}=<<{hockey_percentage_numerator}/{hockey_percentage_denominator}*{students_play_tennis}={students_play_hockey_and_tennis}>>{students_play_hockey_and_tennis} students play hockey and tennis."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "3/4 of the students at River Falls High School play tennis, a total of 3/4*600=<<3/4*600=450>>450 students",
+    "L2": "Of those that play tennis, 60% of them also play hockey, meaning 4/100*450=<<4/100*450=18>>18 students play hockey and tennis.",
+    "FA": "#### 18"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'tennis_denominator' (4) was used instead of 'hockey_percentage_numerator' (60).",
+  "repro_seed": -1528743214253329320,
+  "model_name": "google_gemini-2.5-flash"
+}

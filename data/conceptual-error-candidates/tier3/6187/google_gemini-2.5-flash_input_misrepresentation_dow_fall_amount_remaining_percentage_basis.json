@@ -1,0 +1,63 @@
+{
+  "index": 6187,
+  "original_solution_mapping": {
+    "FA": "#### 8900",
+    "L1": "Today the Dow was down 8722 / 98*2 = <<8722/98*2=178>>178.",
+    "L2": "So it started at 8722 + 178 = <<8722+178=8900>>8900."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6187.\n    Returns: the Dow Jones Industrial Average before the markets opened.\n    \"\"\"\n    # L1\n    dow_end_of_day = 8722 # The Dow ended the day at 8,722\n    fall_percentage = 2 # fell 2%\n    remaining_percentage_basis = 98 # WK (100% - 2% fall)\n    dow_fall_amount = dow_end_of_day / remaining_percentage_basis * fall_percentage\n\n    # L2\n    dow_start_of_day = dow_end_of_day + dow_fall_amount\n\n    # FA\n    answer = dow_start_of_day\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "dow_fall_amount",
+    "operand_to_replace": "dow_end_of_day",
+    "replacement_variable": "remaining_percentage_basis"
+  },
+  "correct_trace": {
+    "dow_end_of_day": 8722,
+    "fall_percentage": 2,
+    "remaining_percentage_basis": 98,
+    "dow_fall_amount": 178.0,
+    "dow_start_of_day": 8900.0,
+    "answer": 8900.0
+  },
+  "flawed_trace": {
+    "dow_end_of_day": 8722,
+    "fall_percentage": 2,
+    "remaining_percentage_basis": 98,
+    "dow_fall_amount": 2.0,
+    "dow_start_of_day": 8724.0,
+    "answer": 8724.0
+  },
+  "correct_value": 178.0,
+  "flawed_value": 2.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "remaining_percentage_basis"
+      ],
+      "line_number": "L1",
+      "output_variable": "dow_fall_amount",
+      "question_inputs": [
+        "dow_end_of_day",
+        "fall_percentage"
+      ],
+      "solution_line_template": "Today the Dow was down {dow_end_of_day} / {remaining_percentage_basis}*{fall_percentage} = <<{dow_end_of_day}/{remaining_percentage_basis}*{fall_percentage}={dow_fall_amount}>>{dow_fall_amount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "dow_start_of_day",
+      "question_inputs": [],
+      "solution_line_template": "So it started at {dow_end_of_day} + {dow_fall_amount} = <<{dow_end_of_day}+{dow_fall_amount}={dow_start_of_day}>>{dow_start_of_day}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Today the Dow was down 98 / 98*2 = <<98/98*2=2>>2.",
+    "L2": "So it started at 8722 + 2 = <<8722+2=8724>>8724.",
+    "FA": "#### 8724"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'remaining_percentage_basis' (98) was used instead of 'dow_end_of_day' (8722).",
+  "repro_seed": 3349900905942442405,
+  "model_name": "google_gemini-2.5-flash"
+}

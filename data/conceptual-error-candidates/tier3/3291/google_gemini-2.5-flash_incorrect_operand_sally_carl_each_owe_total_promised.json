@@ -1,0 +1,88 @@
+{
+  "index": 3291,
+  "original_solution_mapping": {
+    "FA": "#### 35",
+    "L1": "In total, Rick is still owed 400 - 285 = $<<400-285=115>>115.",
+    "L2": "Derek owes half as much as Amy, so he owes $30 / 2 = $<<30/2=15>>15.",
+    "L3": "This means that Sally and Carl owe a combined total of $115 - $30 - $15 = $<<115-30-15=70>>70.",
+    "L4": "As they owe equal amounts, they therefore owe $70 / 2 = $<<70/2=35>>35 each."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3291.\n    Returns: the amount Sally and Carl each owe in dollars.\n    \"\"\"\n    # L1\n    total_promised = 400 # promised to contribute $400\n    total_received = 285 # actually received $285\n    total_owed = total_promised - total_received\n\n    # L2\n    amy_owes = 30 # Amy owes $30\n    half_divisor = 2 # half as much as Amy\n    derek_owes = amy_owes / half_divisor\n\n    # L3\n    sally_carl_combined_owed = total_owed - amy_owes - derek_owes\n\n    # L4\n    sally_carl_each_owe = sally_carl_combined_owed / half_divisor\n\n    # FA\n    answer = sally_carl_each_owe\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "sally_carl_each_owe",
+    "operand_to_replace": "sally_carl_combined_owed",
+    "replacement_variable": "total_promised"
+  },
+  "correct_trace": {
+    "total_promised": 400,
+    "total_received": 285,
+    "total_owed": 115,
+    "amy_owes": 30,
+    "half_divisor": 2,
+    "derek_owes": 15.0,
+    "sally_carl_combined_owed": 70.0,
+    "sally_carl_each_owe": 35.0,
+    "answer": 35.0
+  },
+  "flawed_trace": {
+    "total_promised": 400,
+    "total_received": 285,
+    "total_owed": 115,
+    "amy_owes": 30,
+    "half_divisor": 2,
+    "derek_owes": 15.0,
+    "sally_carl_combined_owed": 70.0,
+    "sally_carl_each_owe": 200.0,
+    "answer": 200.0
+  },
+  "correct_value": 35.0,
+  "flawed_value": 200.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_owed",
+      "question_inputs": [
+        "total_promised",
+        "total_received"
+      ],
+      "solution_line_template": "In total, Rick is still owed {total_promised} - {total_received} = $<<{total_promised}-{total_received}={total_owed}>>{total_owed}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "derek_owes",
+      "question_inputs": [
+        "amy_owes",
+        "half_divisor"
+      ],
+      "solution_line_template": "Derek owes half as much as Amy, so he owes ${amy_owes} / {half_divisor} = $<<{amy_owes}/{half_divisor}={derek_owes}>>{derek_owes}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "sally_carl_combined_owed",
+      "question_inputs": [],
+      "solution_line_template": "This means that Sally and Carl owe a combined total of ${total_owed} - ${amy_owes} - ${derek_owes} = $<<{total_owed}-{amy_owes}-{derek_owes}={sally_carl_combined_owed}>>{sally_carl_combined_owed}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "sally_carl_each_owe",
+      "question_inputs": [],
+      "solution_line_template": "As they owe equal amounts, they therefore owe ${sally_carl_combined_owed} / {half_divisor} = $<<{sally_carl_combined_owed}/{half_divisor}={sally_carl_each_owe}>>{sally_carl_each_owe} each."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In total, Rick is still owed 400 - 285 = $<<400-285=115>>115.",
+    "L2": "Derek owes half as much as Amy, so he owes $30 / 2 = $<<30/2=15>>15.",
+    "L3": "This means that Sally and Carl owe a combined total of $115 - $30 - $15 = $<<115-30-15=70>>70.",
+    "L4": "As they owe equal amounts, they therefore owe $400 / 2 = $<<400/2=200>>200 each.",
+    "FA": "#### 200"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'total_promised' (value: 400) was used instead of 'sally_carl_combined_owed' (value: 70.0).",
+  "repro_seed": 5759644100716913616,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,100 @@
+{
+  "index": 5167,
+  "original_solution_mapping": {
+    "FA": "#### 24500",
+    "L1": "In the first week, each day they pack 40*50 = <<40*50=2000>>2000 apples",
+    "L2": "The total number of apples packed in the boxes is 2000*7 = <<2000*7=14000>>14000 apples in the first week.",
+    "L3": "When 500 fewer apples were packed each day in the next week, the total became 2000-500 = <<2000-500=1500>>1500 apples per day.",
+    "L4": "The total number of apples packed in the boxes that week is 1500*7 = <<1500*7=10500>>10500 apples.",
+    "L5": "The total is 14000+10500 = <<14000+10500=24500>>24500 apples for the two weeks"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5167.\n    Returns: the total number of apples packed in the two weeks.\n    \"\"\"\n    # L1\n    apples_per_box = 40 # normally pack 40 apples in a box\n    full_boxes_per_day = 50 # producing 50 full boxes per day\n    apples_packed_per_day_week1 = apples_per_box * full_boxes_per_day\n\n    # L2\n    days_in_week = 7 # WK\n    total_apples_week1 = apples_packed_per_day_week1 * days_in_week\n\n    # L3\n    fewer_apples_per_day_week2 = 500 # packed 500 fewer apples per day\n    apples_packed_per_day_week2 = apples_packed_per_day_week1 - fewer_apples_per_day_week2\n\n    # L4\n    total_apples_week2 = apples_packed_per_day_week2 * days_in_week\n\n    # L5\n    total_apples_two_weeks = total_apples_week1 + total_apples_week2\n\n    # FA\n    answer = total_apples_two_weeks\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_apples_week2",
+    "operand_to_replace": "days_in_week",
+    "replacement_variable": "full_boxes_per_day"
+  },
+  "correct_trace": {
+    "apples_per_box": 40,
+    "full_boxes_per_day": 50,
+    "apples_packed_per_day_week1": 2000,
+    "days_in_week": 7,
+    "total_apples_week1": 14000,
+    "fewer_apples_per_day_week2": 500,
+    "apples_packed_per_day_week2": 1500,
+    "total_apples_week2": 10500,
+    "total_apples_two_weeks": 24500,
+    "answer": 24500
+  },
+  "flawed_trace": {
+    "apples_per_box": 40,
+    "full_boxes_per_day": 50,
+    "apples_packed_per_day_week1": 2000,
+    "days_in_week": 7,
+    "total_apples_week1": 14000,
+    "fewer_apples_per_day_week2": 500,
+    "apples_packed_per_day_week2": 1500,
+    "total_apples_week2": 75000,
+    "total_apples_two_weeks": 89000,
+    "answer": 89000
+  },
+  "correct_value": 10500,
+  "flawed_value": 75000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "apples_packed_per_day_week1",
+      "question_inputs": [
+        "apples_per_box",
+        "full_boxes_per_day"
+      ],
+      "solution_line_template": "In the first week, each day they pack {apples_per_box}*{full_boxes_per_day} = <<{apples_per_box}*{full_boxes_per_day}={apples_packed_per_day_week1}>>{apples_packed_per_day_week1} apples"
+    },
+    {
+      "WK_inputs": [
+        "days_in_week"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_apples_week1",
+      "question_inputs": [],
+      "solution_line_template": "The total number of apples packed in the boxes is {apples_packed_per_day_week1}*{days_in_week} = <<{apples_packed_per_day_week1}*{days_in_week}={total_apples_week1}>>{total_apples_week1} apples in the first week."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "apples_packed_per_day_week2",
+      "question_inputs": [
+        "fewer_apples_per_day_week2"
+      ],
+      "solution_line_template": "When {fewer_apples_per_day_week2} fewer apples were packed each day in the next week, the total became {apples_packed_per_day_week1}-{fewer_apples_per_day_week2} = <<{apples_packed_per_day_week1}-{fewer_apples_per_day_week2}={apples_packed_per_day_week2}>>{apples_packed_per_day_week2} apples per day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_apples_week2",
+      "question_inputs": [],
+      "solution_line_template": "The total number of apples packed in the boxes that week is {apples_packed_per_day_week2}*{days_in_week} = <<{apples_packed_per_day_week2}*{days_in_week}={total_apples_week2}>>{total_apples_week2} apples."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_apples_two_weeks",
+      "question_inputs": [],
+      "solution_line_template": "The total is {total_apples_week1}+{total_apples_week2} = <<{total_apples_week1}+{total_apples_week2}={total_apples_two_weeks}>>{total_apples_two_weeks} apples for the two weeks"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In the first week, each day they pack 40*50 = <<40*50=2000>>2000 apples",
+    "L2": "The total number of apples packed in the boxes is 2000*7 = <<2000*7=14000>>14000 apples in the first week.",
+    "L3": "When 500 fewer apples were packed each day in the next week, the total became 2000-500 = <<2000-500=1500>>1500 apples per day.",
+    "L4": "The total number of apples packed in the boxes that week is 1500*50 = <<1500*50=75000>>75000 apples.",
+    "L5": "The total is 14000+75000 = <<14000+75000=89000>>89000 apples for the two weeks",
+    "FA": "#### 89000"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'full_boxes_per_day' (50) was used instead of 'days_in_week' (7).",
+  "repro_seed": -8142962334271181354,
+  "model_name": "google_gemini-2.5-flash"
+}

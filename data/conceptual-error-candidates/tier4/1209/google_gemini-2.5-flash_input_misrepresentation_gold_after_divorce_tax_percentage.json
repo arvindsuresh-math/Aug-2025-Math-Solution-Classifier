@@ -1,0 +1,74 @@
+{
+  "index": 1209,
+  "original_solution_mapping": {
+    "FA": "#### 27",
+    "L1": "He loses 60*.1=<<60*.1=6>>6 bars to taxes",
+    "L2": "That means he has 60-6=<<60-6=54>>54 bars after taxes",
+    "L3": "So he has 54/2=<<54/2=27>>27 bars after the divorce"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1209.\n    Returns: the number of gold bars Jame has left.\n    \"\"\"\n    # L1\n    initial_gold_bars = 60 # Jame has 60 bars of gold\n    tax_percentage = 0.1 # uses 10% of them to pay for tax\n    gold_lost_to_taxes = initial_gold_bars * tax_percentage\n\n    # L2\n    gold_after_taxes = initial_gold_bars - gold_lost_to_taxes\n\n    # L3\n    divorce_divisor = 2 # loses half of what is left in divorce\n    gold_after_divorce = gold_after_taxes / divorce_divisor\n\n    # FA\n    answer = gold_after_divorce\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "gold_after_divorce",
+    "operand_to_replace": "divorce_divisor",
+    "replacement_variable": "tax_percentage"
+  },
+  "correct_trace": {
+    "initial_gold_bars": 60,
+    "tax_percentage": 0.1,
+    "gold_lost_to_taxes": 6.0,
+    "gold_after_taxes": 54.0,
+    "divorce_divisor": 2,
+    "gold_after_divorce": 27.0,
+    "answer": 27.0
+  },
+  "flawed_trace": {
+    "initial_gold_bars": 60,
+    "tax_percentage": 0.1,
+    "gold_lost_to_taxes": 6.0,
+    "gold_after_taxes": 54.0,
+    "divorce_divisor": 2,
+    "gold_after_divorce": 540.0,
+    "answer": 540.0
+  },
+  "correct_value": 27.0,
+  "flawed_value": 540.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "gold_lost_to_taxes",
+      "question_inputs": [
+        "initial_gold_bars",
+        "tax_percentage"
+      ],
+      "solution_line_template": "He loses {initial_gold_bars}*{tax_percentage}=<<{initial_gold_bars}*{tax_percentage}={gold_lost_to_taxes}>>{gold_lost_to_taxes} bars to taxes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "gold_after_taxes",
+      "question_inputs": [],
+      "solution_line_template": "That means he has {initial_gold_bars}-{gold_lost_to_taxes}=<<{initial_gold_bars}-{gold_lost_to_taxes}={gold_after_taxes}>>{gold_after_taxes} bars after taxes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "gold_after_divorce",
+      "question_inputs": [
+        "divorce_divisor"
+      ],
+      "solution_line_template": "So he has {gold_after_taxes}/{divorce_divisor}=<<{gold_after_taxes}/{divorce_divisor}={gold_after_divorce}>>{gold_after_divorce} bars after the divorce"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He loses 60*0.1=<<60*0.1=6>>6 bars to taxes",
+    "L2": "That means he has 60-6=<<60-6=54>>54 bars after taxes",
+    "L3": "So he has 54/0.1=<<54/0.1=540>>540 bars after the divorce",
+    "FA": "#### 540"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'tax_percentage' (0.1) was used instead of 'divorce_divisor' (2).",
+  "repro_seed": -3070956608567894975,
+  "model_name": "google_gemini-2.5-flash"
+}

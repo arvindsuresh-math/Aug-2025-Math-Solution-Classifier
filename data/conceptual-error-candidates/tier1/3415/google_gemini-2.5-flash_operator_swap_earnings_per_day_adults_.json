@@ -1,0 +1,104 @@
+{
+  "index": 3415,
+  "original_solution_mapping": {
+    "FA": "#### 588",
+    "L1": "Jose can earn $3 x 8 = $<<3*8=24>>24 per day for kids.",
+    "L2": "He charges $3 x 2 = $<<3*2=6>>6 per adult.",
+    "L3": "So, he can earn $6 x 10 = $<<6*10=60>>60 per day for adults.",
+    "L4": "Jose earns $60 + $24 = $<<60+24=84>>84 per day for kids and adults.",
+    "L5": "Therefore, he can earn $84 x 7 = $<<84*7=588>>588 per week."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3415.\n    Returns: the total money Jose will earn per week.\n    \"\"\"\n    # L1\n    charge_per_kid = 3 # charges $3 for kids\n    num_kids_per_day = 8 # 8 kids swim in his swimming pool per day\n    earnings_per_day_kids = charge_per_kid * num_kids_per_day\n\n    # L2\n    multiplier_adult_charge = 2 # twice that amount for adults\n    charge_per_adult = charge_per_kid * multiplier_adult_charge\n\n    # L3\n    num_adults_per_day = 10 # 10 adults swim in his swimming pool per day\n    earnings_per_day_adults = charge_per_adult * num_adults_per_day\n\n    # L4\n    total_earnings_per_day = earnings_per_day_adults + earnings_per_day_kids\n\n    # L5\n    days_per_week = 7 # WK\n    total_earnings_per_week = total_earnings_per_day * days_per_week\n\n    # FA\n    answer = total_earnings_per_week\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "earnings_per_day_adults",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x1720f6150>"
+  },
+  "correct_trace": {
+    "charge_per_kid": 3,
+    "num_kids_per_day": 8,
+    "earnings_per_day_kids": 24,
+    "multiplier_adult_charge": 2,
+    "charge_per_adult": 6,
+    "num_adults_per_day": 10,
+    "earnings_per_day_adults": 60,
+    "total_earnings_per_day": 84,
+    "days_per_week": 7,
+    "total_earnings_per_week": 588,
+    "answer": 588
+  },
+  "flawed_trace": {
+    "charge_per_kid": 3,
+    "num_kids_per_day": 8,
+    "earnings_per_day_kids": 24,
+    "multiplier_adult_charge": 2,
+    "charge_per_adult": 6,
+    "num_adults_per_day": 10,
+    "earnings_per_day_adults": 16,
+    "total_earnings_per_day": 40,
+    "days_per_week": 7,
+    "total_earnings_per_week": 280,
+    "answer": 280
+  },
+  "correct_value": 60,
+  "flawed_value": 16,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "earnings_per_day_kids",
+      "question_inputs": [
+        "charge_per_kid",
+        "num_kids_per_day"
+      ],
+      "solution_line_template": "Jose can earn ${charge_per_kid} x {num_kids_per_day} = $<<{charge_per_kid}*{num_kids_per_day}={earnings_per_day_kids}>>{earnings_per_day_kids} per day for kids."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "charge_per_adult",
+      "question_inputs": [
+        "multiplier_adult_charge"
+      ],
+      "solution_line_template": "He charges ${charge_per_kid} x {multiplier_adult_charge} = $<<{charge_per_kid}*{multiplier_adult_charge}={charge_per_adult}>>{charge_per_adult} per adult."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "earnings_per_day_adults",
+      "question_inputs": [
+        "num_adults_per_day"
+      ],
+      "solution_line_template": "So, he can earn ${charge_per_adult} x {num_adults_per_day} = $<<{charge_per_adult}*{num_adults_per_day}={earnings_per_day_adults}>>{earnings_per_day_adults} per day for adults."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_earnings_per_day",
+      "question_inputs": [],
+      "solution_line_template": "Jose earns ${earnings_per_day_adults} + ${earnings_per_day_kids} = $<<{earnings_per_day_adults}+{earnings_per_day_kids}={total_earnings_per_day}>>{total_earnings_per_day} per day for kids and adults."
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L5",
+      "output_variable": "total_earnings_per_week",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, he can earn ${total_earnings_per_day} x {days_per_week} = $<<{total_earnings_per_day}*{days_per_week}={total_earnings_per_week}>>{total_earnings_per_week} per week."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jose can earn $3 x 8 = $<<3*8=24>>24 per day for kids.",
+    "L2": "He charges $3 x 2 = $<<3*2=6>>6 per adult.",
+    "L3": "So, he can earn $6 x 10 = $<<6*10=16>>16 per day for adults.",
+    "L4": "Jose earns $16 + $24 = $<<16+24=40>>40 per day for kids and adults.",
+    "L5": "Therefore, he can earn $40 x 7 = $<<40*7=280>>280 per week.",
+    "FA": "#### 280"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -9068160103575398781,
+  "model_name": "google_gemini-2.5-flash"
+}

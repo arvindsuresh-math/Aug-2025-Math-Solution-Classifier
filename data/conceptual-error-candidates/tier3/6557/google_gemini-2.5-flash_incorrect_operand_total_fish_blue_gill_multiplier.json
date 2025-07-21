@@ -1,0 +1,84 @@
+{
+  "index": 6557,
+  "original_solution_mapping": {
+    "FA": "#### 104",
+    "L1": "Bass:32",
+    "L2": "Trout:32/4=8",
+    "L3": "Blue Gill:2(32)=<<64=64>>64",
+    "L4": "Total:32+8+64=<<32+8+64=104>>104 fish"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6557.\n    Returns: the total number of fish caught by the fisherman.\n    \"\"\"\n    # L1\n    bass_fish = 32 # 32 bass\n\n    # L2\n    trout_divisor = 4 # 1/4 as many trout as bass\n    trout_fish = bass_fish / trout_divisor\n\n    # L3\n    blue_gill_multiplier = 2 # double the number of blue gill as bass\n    blue_gill_fish = blue_gill_multiplier * bass_fish\n\n    # L4\n    total_fish = bass_fish + trout_fish + blue_gill_fish\n\n    # FA\n    answer = total_fish\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_fish",
+    "operand_to_replace": "blue_gill_fish",
+    "replacement_variable": "blue_gill_multiplier"
+  },
+  "correct_trace": {
+    "bass_fish": 32,
+    "trout_divisor": 4,
+    "trout_fish": 8.0,
+    "blue_gill_multiplier": 2,
+    "blue_gill_fish": 64,
+    "total_fish": 104.0,
+    "answer": 104.0
+  },
+  "flawed_trace": {
+    "bass_fish": 32,
+    "trout_divisor": 4,
+    "trout_fish": 8.0,
+    "blue_gill_multiplier": 2,
+    "blue_gill_fish": 64,
+    "total_fish": 42.0,
+    "answer": 42.0
+  },
+  "correct_value": 104.0,
+  "flawed_value": 42.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "bass_fish",
+      "question_inputs": [
+        "bass_fish"
+      ],
+      "solution_line_template": "Bass:{bass_fish}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "trout_fish",
+      "question_inputs": [
+        "trout_divisor"
+      ],
+      "solution_line_template": "Trout:{bass_fish}/{trout_divisor}={trout_fish}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "blue_gill_fish",
+      "question_inputs": [
+        "blue_gill_multiplier"
+      ],
+      "solution_line_template": "Blue Gill:{blue_gill_multiplier}({bass_fish})=<<{blue_gill_multiplier}*{bass_fish}={blue_gill_fish}>>{blue_gill_fish}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_fish",
+      "question_inputs": [],
+      "solution_line_template": "Total:{bass_fish}+{trout_fish}+{blue_gill_fish}=<<{bass_fish}+{trout_fish}+{blue_gill_fish}={total_fish}>>{total_fish} fish"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Bass:32",
+    "L2": "Trout:32/4=8",
+    "L3": "Blue Gill:2(32)=<<2*32=64>>64",
+    "L4": "Total:32+8+2=<<32+8+2=42>>42 fish",
+    "FA": "#### 42"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'blue_gill_multiplier' (value: 2) was used instead of 'blue_gill_fish' (value: 64).",
+  "repro_seed": -1710353379479391536,
+  "model_name": "google_gemini-2.5-flash"
+}

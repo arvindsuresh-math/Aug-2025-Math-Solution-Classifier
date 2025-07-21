@@ -1,0 +1,89 @@
+{
+  "index": 3053,
+  "original_solution_mapping": {
+    "FA": "#### 70",
+    "L1": "Carl saved in 6 weeks $25/week x 6 weeks = $<<25*6=150>>150",
+    "L2": "On the seventh week, he ended up having to pay in bills $150/3 = $<<150/3=50>>50",
+    "L3": "His savings were then $150 - $50 = $<<150-50=100>>100",
+    "L4": "His dad gave him $170 - $100 = $<<170-100=70>>70"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3053.\n    Returns: the amount of money Carl's dad gave him.\n    \"\"\"\n    # L1\n    weekly_savings = 25 # saved $25 each week\n    num_weeks_saved = 6 # for 6 weeks\n    total_savings_initial = weekly_savings * num_weeks_saved\n\n    # L2\n    fraction_paid_bills_denominator = 3 # a third of his saving\n    amount_paid_bills = total_savings_initial / fraction_paid_bills_denominator\n\n    # L3\n    savings_after_bills = total_savings_initial - amount_paid_bills\n\n    # L4\n    coat_cost = 170 # If the coat cost $170\n    money_from_dad = coat_cost - savings_after_bills\n\n    # FA\n    answer = money_from_dad\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "amount_paid_bills",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x15f668990>"
+  },
+  "correct_trace": {
+    "weekly_savings": 25,
+    "num_weeks_saved": 6,
+    "total_savings_initial": 150,
+    "fraction_paid_bills_denominator": 3,
+    "amount_paid_bills": 50.0,
+    "savings_after_bills": 100.0,
+    "coat_cost": 170,
+    "money_from_dad": 70.0,
+    "answer": 70.0
+  },
+  "flawed_trace": {
+    "weekly_savings": 25,
+    "num_weeks_saved": 6,
+    "total_savings_initial": 150,
+    "fraction_paid_bills_denominator": 3,
+    "amount_paid_bills": 147,
+    "savings_after_bills": 3,
+    "coat_cost": 170,
+    "money_from_dad": 167,
+    "answer": 167
+  },
+  "correct_value": 50.0,
+  "flawed_value": 147,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_savings_initial",
+      "question_inputs": [
+        "weekly_savings",
+        "num_weeks_saved"
+      ],
+      "solution_line_template": "Carl saved in {num_weeks_saved} weeks ${weekly_savings}/week x {num_weeks_saved} weeks = $<<{weekly_savings}*{num_weeks_saved}={total_savings_initial}>>{total_savings_initial}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "amount_paid_bills",
+      "question_inputs": [
+        "fraction_paid_bills_denominator"
+      ],
+      "solution_line_template": "On the seventh week, he ended up having to pay in bills ${total_savings_initial}/{fraction_paid_bills_denominator} = $<<{total_savings_initial}/{fraction_paid_bills_denominator}={amount_paid_bills}>>{amount_paid_bills}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "savings_after_bills",
+      "question_inputs": [],
+      "solution_line_template": "His savings were then ${total_savings_initial} - ${amount_paid_bills} = $<<{total_savings_initial}-{amount_paid_bills}={savings_after_bills}>>{savings_after_bills}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "money_from_dad",
+      "question_inputs": [
+        "coat_cost"
+      ],
+      "solution_line_template": "His dad gave him ${coat_cost} - ${savings_after_bills} = $<<{coat_cost}-{savings_after_bills}={money_from_dad}>>{money_from_dad}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Carl saved in 6 weeks $25/week x 6 weeks = $<<25*6=150>>150",
+    "L2": "On the seventh week, he ended up having to pay in bills $150/3 = $<<150/3=147>>147",
+    "L3": "His savings were then $150 - $147 = $<<150-147=3>>3",
+    "L4": "His dad gave him $170 - $3 = $<<170-3=167>>167",
+    "FA": "#### 167"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 514854128807009659,
+  "model_name": "google_gemini-2.5-flash"
+}

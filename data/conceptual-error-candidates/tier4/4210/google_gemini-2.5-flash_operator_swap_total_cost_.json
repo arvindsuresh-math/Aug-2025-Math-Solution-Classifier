@@ -1,0 +1,78 @@
+{
+  "index": 4210,
+  "original_solution_mapping": {
+    "FA": "#### 32",
+    "L1": "There are 24 people on the committee and she wants 2 sandwiches per person so that's 24*2 = <<24*2=48>>48 sandwiches",
+    "L2": "She can buy the croissants by the dozen and she needs 48 croissants so she needs 48/12 = <<48/12=4>>4 dozen croissants",
+    "L3": "A dozen croissants cost $8.00 and she needs 4 dozens so that will costs 8*4 = $<<8*4=32.00>>32.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4210.\n    Returns: the total cost of croissants.\n    \"\"\"\n    # L1\n    num_people = 24 # 24 people on the committee\n    sandwiches_per_person = 2 # 2 sandwiches per person\n    total_sandwiches = num_people * sandwiches_per_person\n\n    # L2\n    croissants_per_dozen = 12 # WK\n    dozens_needed = total_sandwiches / croissants_per_dozen\n\n    # L3\n    cost_per_dozen = 8.00 # $8.00\n    total_cost = cost_per_dozen * dozens_needed\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_cost",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x30cc9ef10>"
+  },
+  "correct_trace": {
+    "num_people": 24,
+    "sandwiches_per_person": 2,
+    "total_sandwiches": 48,
+    "croissants_per_dozen": 12,
+    "dozens_needed": 4.0,
+    "cost_per_dozen": 8.0,
+    "total_cost": 32.0,
+    "answer": 32.0
+  },
+  "flawed_trace": {
+    "num_people": 24,
+    "sandwiches_per_person": 2,
+    "total_sandwiches": 48,
+    "croissants_per_dozen": 12,
+    "dozens_needed": 4.0,
+    "cost_per_dozen": 8.0,
+    "total_cost": 2.0,
+    "answer": 2.0
+  },
+  "correct_value": 32.0,
+  "flawed_value": 2.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_sandwiches",
+      "question_inputs": [
+        "num_people",
+        "sandwiches_per_person"
+      ],
+      "solution_line_template": "There are {num_people} people on the committee and she wants {sandwiches_per_person} sandwiches per person so that's {num_people}*{sandwiches_per_person} = <<{num_people}*{sandwiches_per_person}={total_sandwiches}>>{total_sandwiches} sandwiches"
+    },
+    {
+      "WK_inputs": [
+        "croissants_per_dozen"
+      ],
+      "line_number": "L2",
+      "output_variable": "dozens_needed",
+      "question_inputs": [],
+      "solution_line_template": "She can buy the croissants by the dozen and she needs {total_sandwiches} croissants so she needs {total_sandwiches}/{croissants_per_dozen} = <<{total_sandwiches}/{croissants_per_dozen}={dozens_needed}>>{dozens_needed} dozen croissants"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "cost_per_dozen"
+      ],
+      "solution_line_template": "A dozen croissants cost ${cost_per_dozen} and she needs {dozens_needed} dozens so that will costs {cost_per_dozen}*{dozens_needed} = $<<{cost_per_dozen}*{dozens_needed}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 24 people on the committee and she wants 2 sandwiches per person so that's 24*2 = <<24*2=48>>48 sandwiches",
+    "L2": "She can buy the croissants by the dozen and she needs 48 croissants so she needs 48/12 = <<48/12=4>>4 dozen croissants",
+    "L3": "A dozen croissants cost $8 and she needs 4 dozens so that will costs 8*4 = $<<8*4=2>>2",
+    "FA": "#### 2"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -4635926119856920525,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,89 @@
+{
+  "index": 4360,
+  "original_solution_mapping": {
+    "FA": "#### 21",
+    "L1": "The price of the tea was twice the price of the cheese, so the cheese cost was 10 / 2 = $<<10/2=5>>5.",
+    "L2": "The price of the butter was 80/100 * 5 = $<<80/100*5=4>>4.",
+    "L3": "If the bread was 2 times cheaper than butter, that means it cost 4 / 2 = $<<4/2=2>>2.",
+    "L4": "That means Ursula paid for all her shopping 2 + 4 + 5 + 10 = $<<2+4+5+10=21>>21."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4360.\n    Returns: the total amount Ursula paid for her purchases.\n    \"\"\"\n    # L1\n    tea_cost = 10 # If the tea cost $10\n    cheese_multiplier = 2 # twice the price of a package of cheese\n    cheese_cost = tea_cost / cheese_multiplier\n\n    # L2\n    butter_percentage = Fraction(80, 100) # the price of the butter was 80% of the price of cheese\n    butter_cost = butter_percentage * cheese_cost\n\n    # L3\n    bread_divisor = 2 # The bread was 2 times cheaper than the butter\n    bread_cost = butter_cost / bread_divisor\n\n    # L4\n    total_cost = bread_cost + butter_cost + cheese_cost + tea_cost\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_cost",
+    "operand_to_replace": "butter_cost",
+    "replacement_variable": "bread_divisor"
+  },
+  "correct_trace": {
+    "tea_cost": 10,
+    "cheese_multiplier": 2,
+    "cheese_cost": 5.0,
+    "butter_percentage": "4/5",
+    "butter_cost": 4.0,
+    "bread_divisor": 2,
+    "bread_cost": 2.0,
+    "total_cost": 21.0,
+    "answer": 21.0
+  },
+  "flawed_trace": {
+    "tea_cost": 10,
+    "cheese_multiplier": 2,
+    "cheese_cost": 5.0,
+    "butter_percentage": "4/5",
+    "butter_cost": 4.0,
+    "bread_divisor": 2,
+    "bread_cost": 2.0,
+    "total_cost": 19.0,
+    "answer": 19.0
+  },
+  "correct_value": 21.0,
+  "flawed_value": 19.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cheese_cost",
+      "question_inputs": [
+        "tea_cost",
+        "cheese_multiplier"
+      ],
+      "solution_line_template": "The price of the tea was twice the price of the cheese, so the cheese cost was {tea_cost} / {cheese_multiplier} = $<<{tea_cost}/{cheese_multiplier}={cheese_cost}>>{cheese_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "butter_cost",
+      "question_inputs": [
+        "butter_percentage"
+      ],
+      "solution_line_template": "The price of the butter was {butter_percentage} * {cheese_cost} = $<<{butter_percentage}*{cheese_cost}={butter_cost}>>{butter_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "bread_cost",
+      "question_inputs": [
+        "bread_divisor"
+      ],
+      "solution_line_template": "If the bread was {bread_divisor} times cheaper than butter, that means it cost {butter_cost} / {bread_divisor} = $<<{butter_cost}/{bread_divisor}={bread_cost}>>{bread_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cost",
+      "question_inputs": [],
+      "solution_line_template": "That means Ursula paid for all her shopping {bread_cost} + {butter_cost} + {cheese_cost} + {tea_cost} = $<<{bread_cost}+{butter_cost}+{cheese_cost}+{tea_cost}={total_cost}>>{total_cost}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The price of the tea was twice the price of the cheese, so the cheese cost was 10 / 2 = $<<10/2=5>>5.",
+    "L2": "The price of the butter was 80/100 * 5 = $<<80/100*5=4>>4.",
+    "L3": "If the bread was 2 times cheaper than butter, that means it cost 4 / 2 = $<<4/2=2>>2.",
+    "L4": "That means Ursula paid for all her shopping 2 + 2 + 5 + 10 = $<<2+2+5+10=19>>19.",
+    "FA": "#### 19"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'bread_divisor' (value: 2) was used instead of 'butter_cost' (value: 4.0).",
+  "repro_seed": 4179650995564098882,
+  "model_name": "google_gemini-2.5-flash"
+}

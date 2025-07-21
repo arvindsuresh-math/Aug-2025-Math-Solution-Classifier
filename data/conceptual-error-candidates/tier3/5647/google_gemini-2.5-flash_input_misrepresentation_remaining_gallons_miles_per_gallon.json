@@ -1,0 +1,74 @@
+{
+  "index": 5647,
+  "original_solution_mapping": {
+    "FA": "#### 100",
+    "L1": "Divide the remaining miles of the trip by the miles per gallon her car gets. 220 miles / 20 miles/gallon = <<220/20=11>>11 gallons",
+    "L2": "Subtract the gallons used for the trip from the size of her gas tank. 16 gallons - 11 gallons = <<16-11=5>>5 gallons",
+    "L3": "Multiply the remaining number of gallons by the car's gas mileage. 5 gallons x 20 miles/gallon = <<5*20=100>>100 miles"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5647.\n    Returns: the number of additional miles Carol can drive after getting home.\n    \"\"\"\n    # L1\n    trip_miles = 220 # 220 miles away\n    miles_per_gallon = 20 # 20 miles to the gallon\n    gallons_for_trip = trip_miles / miles_per_gallon\n\n    # L2\n    tank_capacity = 16 # 16-gallon gas tank\n    remaining_gallons = tank_capacity - gallons_for_trip\n\n    # L3\n    extra_miles_after_home = remaining_gallons * miles_per_gallon\n\n    # FA\n    answer = extra_miles_after_home\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "remaining_gallons",
+    "operand_to_replace": "tank_capacity",
+    "replacement_variable": "miles_per_gallon"
+  },
+  "correct_trace": {
+    "trip_miles": 220,
+    "miles_per_gallon": 20,
+    "gallons_for_trip": 11.0,
+    "tank_capacity": 16,
+    "remaining_gallons": 5.0,
+    "extra_miles_after_home": 100.0,
+    "answer": 100.0
+  },
+  "flawed_trace": {
+    "trip_miles": 220,
+    "miles_per_gallon": 20,
+    "gallons_for_trip": 11.0,
+    "tank_capacity": 16,
+    "remaining_gallons": 9.0,
+    "extra_miles_after_home": 180.0,
+    "answer": 180.0
+  },
+  "correct_value": 5.0,
+  "flawed_value": 9.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "gallons_for_trip",
+      "question_inputs": [
+        "trip_miles",
+        "miles_per_gallon"
+      ],
+      "solution_line_template": "Divide the remaining miles of the trip by the miles per gallon her car gets. {trip_miles} miles / {miles_per_gallon} miles/gallon = <<{trip_miles}/{miles_per_gallon}={gallons_for_trip}>>{gallons_for_trip} gallons"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_gallons",
+      "question_inputs": [
+        "tank_capacity"
+      ],
+      "solution_line_template": "Subtract the gallons used for the trip from the size of her gas tank. {tank_capacity} gallons - {gallons_for_trip} gallons = <<{tank_capacity}-{gallons_for_trip}={remaining_gallons}>>{remaining_gallons} gallons"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "extra_miles_after_home",
+      "question_inputs": [],
+      "solution_line_template": "Multiply the remaining number of gallons by the car's gas mileage. {remaining_gallons} gallons x {miles_per_gallon} miles/gallon = <<{remaining_gallons}*{miles_per_gallon}={extra_miles_after_home}>>{extra_miles_after_home} miles"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Divide the remaining miles of the trip by the miles per gallon her car gets. 220 miles / 20 miles/gallon = <<220/20=11>>11 gallons",
+    "L2": "Subtract the gallons used for the trip from the size of her gas tank. 20 gallons - 11 gallons = <<20-11=9>>9 gallons",
+    "L3": "Multiply the remaining number of gallons by the car's gas mileage. 9 gallons x 20 miles/gallon = <<9*20=180>>180 miles",
+    "FA": "#### 180"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'miles_per_gallon' (20) was used instead of 'tank_capacity' (16).",
+  "repro_seed": 3408088520984262761,
+  "model_name": "google_gemini-2.5-flash"
+}

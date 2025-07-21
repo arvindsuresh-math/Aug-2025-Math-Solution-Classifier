@@ -1,0 +1,74 @@
+{
+  "index": 4578,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "Every two weeks, Grace will get 300*2=<<300*2=600>>600 dollars.",
+    "L2": "It will take Grace 1800/600=3 2-week intervals to get 1800 dollars.",
+    "L3": "It will take Grace 3*2=<<3*2=6>>6 weeks in total."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4578.\n    Returns: the total number of weeks it will take Grace to get the target amount of money.\n    \"\"\"\n    # L1\n    charge_per_week = 300 # charges 300 dollars\n    payment_interval_weeks = 2 # every 2 weeks\n    dollars_per_interval = charge_per_week * payment_interval_weeks\n\n    # L2\n    target_amount = 1800 # get 1800 dollars\n    num_intervals = target_amount / dollars_per_interval\n\n    # L3\n    total_weeks = num_intervals * payment_interval_weeks\n\n    # FA\n    answer = total_weeks\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_weeks",
+    "operand_to_replace": "payment_interval_weeks",
+    "replacement_variable": "target_amount"
+  },
+  "correct_trace": {
+    "charge_per_week": 300,
+    "payment_interval_weeks": 2,
+    "dollars_per_interval": 600,
+    "target_amount": 1800,
+    "num_intervals": 3.0,
+    "total_weeks": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "charge_per_week": 300,
+    "payment_interval_weeks": 2,
+    "dollars_per_interval": 600,
+    "target_amount": 1800,
+    "num_intervals": 3.0,
+    "total_weeks": 5400.0,
+    "answer": 5400.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 5400.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "dollars_per_interval",
+      "question_inputs": [
+        "charge_per_week",
+        "payment_interval_weeks"
+      ],
+      "solution_line_template": "Every two weeks, Grace will get {charge_per_week}*{payment_interval_weeks}=<<{charge_per_week}*{payment_interval_weeks}={dollars_per_interval}>>{dollars_per_interval} dollars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_intervals",
+      "question_inputs": [
+        "target_amount"
+      ],
+      "solution_line_template": "It will take Grace {target_amount}/{dollars_per_interval}={num_intervals} 2-week intervals to get {target_amount} dollars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_weeks",
+      "question_inputs": [],
+      "solution_line_template": "It will take Grace {num_intervals}*{payment_interval_weeks}=<<{num_intervals}*{payment_interval_weeks}={total_weeks}>>{total_weeks} weeks in total."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Every two weeks, Grace will get 300*2=<<300*2=600>>600 dollars.",
+    "L2": "It will take Grace 1800/600=3 2-week intervals to get 1800 dollars.",
+    "L3": "It will take Grace 3*1800=<<3*1800=5400>>5400 weeks in total.",
+    "FA": "#### 5400"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'target_amount' (1800) was used instead of 'payment_interval_weeks' (2).",
+  "repro_seed": 1558818119591836920,
+  "model_name": "google_gemini-2.5-flash"
+}

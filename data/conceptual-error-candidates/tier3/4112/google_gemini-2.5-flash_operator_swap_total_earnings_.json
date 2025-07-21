@@ -1,0 +1,63 @@
+{
+  "index": 4112,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "The pig grew to half the size of the average pig, so it will produce 20 / 2 = <<20/2=10>>10 pounds of bacon.",
+    "L2": "The rancher will make 10 * 6 = $<<10*6=60>>60 from the pig's bacon."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4112.\n    Returns: the total dollars the farmer will make from the pig's bacon.\n    \"\"\"\n    # L1\n    average_bacon_pounds = 20 # 20 pounds of bacon on average from a pig\n    size_divisor = 2 # half the size\n    runt_bacon_pounds = average_bacon_pounds / size_divisor\n\n    # L2\n    price_per_pound = 6 # sells each pound for $6\n    total_earnings = runt_bacon_pounds * price_per_pound\n\n    # FA\n    answer = total_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_earnings",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x15fb9e8d0>"
+  },
+  "correct_trace": {
+    "average_bacon_pounds": 20,
+    "size_divisor": 2,
+    "runt_bacon_pounds": 10.0,
+    "price_per_pound": 6,
+    "total_earnings": 60.0,
+    "answer": 60.0
+  },
+  "flawed_trace": {
+    "average_bacon_pounds": 20,
+    "size_divisor": 2,
+    "runt_bacon_pounds": 10.0,
+    "price_per_pound": 6,
+    "total_earnings": 16.0,
+    "answer": 16.0
+  },
+  "correct_value": 60.0,
+  "flawed_value": 16.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "runt_bacon_pounds",
+      "question_inputs": [
+        "average_bacon_pounds",
+        "size_divisor"
+      ],
+      "solution_line_template": "The pig grew to half the size of the average pig, so it will produce {average_bacon_pounds} / {size_divisor} = <<{average_bacon_pounds}/{size_divisor}={runt_bacon_pounds}>>{runt_bacon_pounds} pounds of bacon."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_earnings",
+      "question_inputs": [
+        "price_per_pound"
+      ],
+      "solution_line_template": "The rancher will make {runt_bacon_pounds} * {price_per_pound} = $<<{runt_bacon_pounds}*{price_per_pound}={total_earnings}>>{total_earnings} from the pig's bacon."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The pig grew to half the size of the average pig, so it will produce 20 / 2 = <<20/2=10>>10 pounds of bacon.",
+    "L2": "The rancher will make 10 * 6 = $<<10*6=16>>16 from the pig's bacon.",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 1690148076398908928,
+  "model_name": "google_gemini-2.5-flash"
+}

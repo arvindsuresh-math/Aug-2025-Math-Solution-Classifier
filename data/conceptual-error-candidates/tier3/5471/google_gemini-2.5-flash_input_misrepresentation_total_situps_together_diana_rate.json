@@ -1,0 +1,85 @@
+{
+  "index": 5471,
+  "original_solution_mapping": {
+    "FA": "#### 110",
+    "L1": "Since Diana did 40 situps at a rate of 4 situps/minute, she did situps for 40 / 4 = <<40/4=10>>10 minutes",
+    "L2": "Hani had to do 3 + 4 = <<3+4=7>>7 situps per minute if Diana did 4 situps per minute.",
+    "L3": "So over the 10 minutes Hani did 7*10 = <<7*10=70>>70 situps.",
+    "L4": "Together, the total number of situps they did is 70+40 = <<70+40=110>>110"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5471.\n    Returns: the total number of situps Hani and Diana did together.\n    \"\"\"\n    # L1\n    diana_total_situps = 40 # Diana then did 40 situps\n    diana_rate = 4 # at a rate of 4 situps per minute\n    diana_time_minutes = diana_total_situps / diana_rate\n\n    # L2\n    hani_extra_situps_per_minute = 3 # Hani said she would do 3 more situps per minute than Diana\n    hani_rate = hani_extra_situps_per_minute + diana_rate\n\n    # L3\n    hani_total_situps = hani_rate * diana_time_minutes\n\n    # L4\n    total_situps_together = hani_total_situps + diana_total_situps\n\n    # FA\n    answer = total_situps_together\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_situps_together",
+    "operand_to_replace": "diana_total_situps",
+    "replacement_variable": "diana_rate"
+  },
+  "correct_trace": {
+    "diana_total_situps": 40,
+    "diana_rate": 4,
+    "diana_time_minutes": 10.0,
+    "hani_extra_situps_per_minute": 3,
+    "hani_rate": 7,
+    "hani_total_situps": 70.0,
+    "total_situps_together": 110.0,
+    "answer": 110.0
+  },
+  "flawed_trace": {
+    "diana_total_situps": 40,
+    "diana_rate": 4,
+    "diana_time_minutes": 10.0,
+    "hani_extra_situps_per_minute": 3,
+    "hani_rate": 7,
+    "hani_total_situps": 70.0,
+    "total_situps_together": 74.0,
+    "answer": 74.0
+  },
+  "correct_value": 110.0,
+  "flawed_value": 74.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "diana_time_minutes",
+      "question_inputs": [
+        "diana_total_situps",
+        "diana_rate"
+      ],
+      "solution_line_template": "Since Diana did {diana_total_situps} situps at a rate of {diana_rate} situps/minute, she did situps for {diana_total_situps} / {diana_rate} = <<{diana_total_situps}/{diana_rate}={diana_time_minutes}>>{diana_time_minutes} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "hani_rate",
+      "question_inputs": [
+        "hani_extra_situps_per_minute"
+      ],
+      "solution_line_template": "Hani had to do {hani_extra_situps_per_minute} + {diana_rate} = <<{hani_extra_situps_per_minute}+{diana_rate}={hani_rate}>>{hani_rate} situps per minute if Diana did {diana_rate} situps per minute."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "hani_total_situps",
+      "question_inputs": [],
+      "solution_line_template": "So over the {diana_time_minutes} minutes Hani did {hani_rate}*{diana_time_minutes} = <<{hani_rate}*{diana_time_minutes}={hani_total_situps}>>{hani_total_situps} situps."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_situps_together",
+      "question_inputs": [],
+      "solution_line_template": "Together, the total number of situps they did is {hani_total_situps}+{diana_total_situps} = <<{hani_total_situps}+{diana_total_situps}={total_situps_together}>>{total_situps_together}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since Diana did 40 situps at a rate of 4 situps/minute, she did situps for 40 / 4 = <<40/4=10>>10 minutes",
+    "L2": "Hani had to do 3 + 4 = <<3+4=7>>7 situps per minute if Diana did 4 situps per minute.",
+    "L3": "So over the 10 minutes Hani did 7*10 = <<7*10=70>>70 situps.",
+    "L4": "Together, the total number of situps they did is 70+4 = <<70+4=74>>74",
+    "FA": "#### 74"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'diana_rate' (4) was used instead of 'diana_total_situps' (40).",
+  "repro_seed": 9073794606570653937,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,82 @@
+{
+  "index": 4841,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "40% of champions are men because 100 - 60 = <<100-60=40>>40",
+    "L2": "10 champions have been men because 25 x .4 = <<25*.4=10>>10",
+    "L3": "4 champions have been men with beards because 10 x .4 = <<10*.4=4>>4"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4841.\n    Returns: the number of men with beards who have been Scrabble champion.\n    \"\"\"\n    # L1\n    total_percentage = 100 # WK\n    women_champion_percentage = 60 # 60% of Scrabble champions have been women\n    men_champion_percentage = total_percentage - women_champion_percentage\n\n    # L2\n    total_champions_years = 25 # In the last 25 years\n    men_percent_as_decimal = 0.4 # derived from \"60% of Scrabble champions have been women and the rest have been men\"\n    num_men_champions = total_champions_years * men_percent_as_decimal\n\n    # L3\n    beard_percent_as_decimal = 0.4 # 40% had a beard\n    num_men_with_beards = num_men_champions * beard_percent_as_decimal\n\n    # FA\n    answer = num_men_with_beards\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "num_men_with_beards",
+    "operand_to_replace": "num_men_champions",
+    "replacement_variable": "women_champion_percentage"
+  },
+  "correct_trace": {
+    "total_percentage": 100,
+    "women_champion_percentage": 60,
+    "men_champion_percentage": 40,
+    "total_champions_years": 25,
+    "men_percent_as_decimal": 0.4,
+    "num_men_champions": 10.0,
+    "beard_percent_as_decimal": 0.4,
+    "num_men_with_beards": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "total_percentage": 100,
+    "women_champion_percentage": 60,
+    "men_champion_percentage": 40,
+    "total_champions_years": 25,
+    "men_percent_as_decimal": 0.4,
+    "num_men_champions": 10.0,
+    "beard_percent_as_decimal": 0.4,
+    "num_men_with_beards": 24.0,
+    "answer": 24.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 24.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_percentage"
+      ],
+      "line_number": "L1",
+      "output_variable": "men_champion_percentage",
+      "question_inputs": [
+        "women_champion_percentage"
+      ],
+      "solution_line_template": "40% of champions are men because {total_percentage} - {women_champion_percentage} = <<{total_percentage}-{women_champion_percentage}={men_champion_percentage}>>{men_champion_percentage}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_men_champions",
+      "question_inputs": [
+        "total_champions_years",
+        "men_percent_as_decimal"
+      ],
+      "solution_line_template": "10 champions have been men because {total_champions_years} x {men_percent_as_decimal} = <<{total_champions_years}*{men_percent_as_decimal}={num_men_champions}>>{num_men_champions}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_men_with_beards",
+      "question_inputs": [
+        "beard_percent_as_decimal"
+      ],
+      "solution_line_template": "4 champions have been men with beards because {num_men_champions} x {beard_percent_as_decimal} = <<{num_men_champions}*{beard_percent_as_decimal}={num_men_with_beards}>>{num_men_with_beards}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "40% of champions are men because 100 - 60 = <<100-60=40>>40",
+    "L2": "10 champions have been men because 25 x 0.4 = <<25*0.4=10>>10",
+    "L3": "4 champions have been men with beards because 60 x 0.4 = <<60*0.4=24>>24",
+    "FA": "#### 24"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'women_champion_percentage' (value: 60) was used instead of 'num_men_champions' (value: 10.0).",
+  "repro_seed": -7669193614481654239,
+  "model_name": "google_gemini-2.5-flash"
+}

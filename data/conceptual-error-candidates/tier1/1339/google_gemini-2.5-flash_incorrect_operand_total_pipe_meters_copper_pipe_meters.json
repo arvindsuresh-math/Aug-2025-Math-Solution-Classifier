@@ -1,0 +1,74 @@
+{
+  "index": 1339,
+  "original_solution_mapping": {
+    "FA": "#### 100",
+    "L1": "He bought 10 + 5 = <<10+5=15>>15 meters of plastic pipe.",
+    "L2": "The total meters of the copper and plastic pipe is 10 + 15 = <<10+15=25>>25.",
+    "L3": "The plumber spent $4 x 25 = $<<4*25=100>>100 on copper and plastic pipe."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1339.\n    Returns: the total amount spent on copper and plastic pipe.\n    \"\"\"\n    # L1\n    copper_pipe_meters = 10 # 10 meters of copper\n    plastic_pipe_more_than_copper = 5 # 5 more meters of plastic pipe\n    plastic_pipe_meters = copper_pipe_meters + plastic_pipe_more_than_copper\n\n    # L2\n    total_pipe_meters = copper_pipe_meters + plastic_pipe_meters\n\n    # L3\n    cost_per_meter = 4 # each meter cost $4\n    total_cost = cost_per_meter * total_pipe_meters\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_pipe_meters",
+    "operand_to_replace": "plastic_pipe_meters",
+    "replacement_variable": "copper_pipe_meters"
+  },
+  "correct_trace": {
+    "copper_pipe_meters": 10,
+    "plastic_pipe_more_than_copper": 5,
+    "plastic_pipe_meters": 15,
+    "total_pipe_meters": 25,
+    "cost_per_meter": 4,
+    "total_cost": 100,
+    "answer": 100
+  },
+  "flawed_trace": {
+    "copper_pipe_meters": 10,
+    "plastic_pipe_more_than_copper": 5,
+    "plastic_pipe_meters": 15,
+    "total_pipe_meters": 20,
+    "cost_per_meter": 4,
+    "total_cost": 80,
+    "answer": 80
+  },
+  "correct_value": 25,
+  "flawed_value": 20,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "copper_pipe_meters",
+        "plastic_pipe_more_than_copper"
+      ],
+      "WK_inputs": [],
+      "output_variable": "plastic_pipe_meters",
+      "solution_line_template": "He bought {copper_pipe_meters} + {plastic_pipe_more_than_copper} = <<{copper_pipe_meters}+{plastic_pipe_more_than_copper}={plastic_pipe_meters}>>{plastic_pipe_meters} meters of plastic pipe."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_pipe_meters",
+      "solution_line_template": "The total meters of the copper and plastic pipe is {copper_pipe_meters} + {plastic_pipe_meters} = <<{copper_pipe_meters}+{plastic_pipe_meters}={total_pipe_meters}>>{total_pipe_meters}."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "cost_per_meter"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_cost",
+      "solution_line_template": "The plumber spent ${cost_per_meter} x {total_pipe_meters} = $<<{cost_per_meter}*{total_pipe_meters}={total_cost}>>{total_cost} on copper and plastic pipe."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He bought 10 + 5 = <<10+5=15>>15 meters of plastic pipe.",
+    "L2": "The total meters of the copper and plastic pipe is 10 + 10 = <<10+10=20>>20.",
+    "L3": "The plumber spent $4 x 20 = $<<4*20=80>>80 on copper and plastic pipe.",
+    "FA": "#### 80"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'copper_pipe_meters' (value: 10) was used instead of 'plastic_pipe_meters' (value: 15).",
+  "repro_seed": -7907009850973395585,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,77 @@
+{
+  "index": 1043,
+  "original_solution_mapping": {
+    "FA": "#### 7200",
+    "L1": "The combined cost of everything was 2500+3500+2000=$<<2500+3500+2000=8000>>8000",
+    "L2": "So he gets an 8000*.1=$<<8000*.1=800>>800 discount",
+    "L3": "That means he pays 8000-800=$<<8000-800=7200>>7200"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1043.\n    Returns: the total amount James paid for the living room set.\n    \"\"\"\n    # L1\n    coach_cost = 2500 # The coach cost $2500\n    sectional_cost = 3500 # the sectional cost $3500\n    other_cost = 2000 # everything else has a combined cost of $2000\n    combined_cost = coach_cost + sectional_cost + other_cost\n\n    # L2\n    discount_rate = 0.1 # a 10% discount\n    discount_amount = combined_cost * discount_rate\n\n    # L3\n    final_payment = combined_cost - discount_amount\n\n    # FA\n    answer = final_payment\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "discount_amount",
+    "operand_to_replace": "combined_cost",
+    "replacement_variable": "other_cost"
+  },
+  "correct_trace": {
+    "coach_cost": 2500,
+    "sectional_cost": 3500,
+    "other_cost": 2000,
+    "combined_cost": 8000,
+    "discount_rate": 0.1,
+    "discount_amount": 800.0,
+    "final_payment": 7200.0,
+    "answer": 7200.0
+  },
+  "flawed_trace": {
+    "coach_cost": 2500,
+    "sectional_cost": 3500,
+    "other_cost": 2000,
+    "combined_cost": 8000,
+    "discount_rate": 0.1,
+    "discount_amount": 200.0,
+    "final_payment": 7800.0,
+    "answer": 7800.0
+  },
+  "correct_value": 800.0,
+  "flawed_value": 200.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "combined_cost",
+      "question_inputs": [
+        "coach_cost",
+        "sectional_cost",
+        "other_cost"
+      ],
+      "solution_line_template": "The combined cost of everything was {coach_cost}+{sectional_cost}+{other_cost}=$<<{coach_cost}+{sectional_cost}+{other_cost}={combined_cost}>>{combined_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "discount_amount",
+      "question_inputs": [
+        "discount_rate"
+      ],
+      "solution_line_template": "So he gets an {combined_cost}*{discount_rate}=$<<{combined_cost}*{discount_rate}={discount_amount}>>{discount_amount} discount"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_payment",
+      "question_inputs": [],
+      "solution_line_template": "That means he pays {combined_cost}-{discount_amount}=$<<{combined_cost}-{discount_amount}={final_payment}>>{final_payment}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The combined cost of everything was 2500+3500+2000=$<<2500+3500+2000=8000>>8000",
+    "L2": "So he gets an 2000*0.1=$<<2000*0.1=200>>200 discount",
+    "L3": "That means he pays 8000-200=$<<8000-200=7800>>7800",
+    "FA": "#### 7800"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'other_cost' (value: 2000) was used instead of 'combined_cost' (value: 8000).",
+  "repro_seed": 4235451381479698692,
+  "model_name": "google_gemini-2.5-flash"
+}

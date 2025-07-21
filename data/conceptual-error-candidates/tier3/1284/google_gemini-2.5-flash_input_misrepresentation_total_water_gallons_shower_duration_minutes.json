@@ -1,0 +1,94 @@
+{
+  "index": 1284,
+  "original_solution_mapping": {
+    "FA": "#### 280",
+    "L1": "There are 4*7=<<4*7=28>>28 days in those 4 weeks",
+    "L2": "That means he takes 28/2=<<28/2=14>>14 showers",
+    "L3": "So he takes a total of 14*10=<<14*10=140>>140 minutes of showers",
+    "L4": "So he uses 2*140=<<2*140=280>>280 gallons of water"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1284.\n    Returns: the total amount of water used in 4 weeks.\n    \"\"\"\n    # L1\n    num_weeks = 4 # for 4 weeks\n    days_per_week = 7 # WK\n    total_days = num_weeks * days_per_week\n\n    # L2\n    shower_frequency_divisor = 2 # every other day\n    num_showers = total_days / shower_frequency_divisor\n\n    # L3\n    shower_duration_minutes = 10 # 10-minute shower\n    total_shower_minutes = num_showers * shower_duration_minutes\n\n    # L4\n    water_per_minute = 2 # uses 2 gallons of water per minute\n    total_water_gallons = water_per_minute * total_shower_minutes\n\n    # FA\n    answer = total_water_gallons\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_water_gallons",
+    "operand_to_replace": "water_per_minute",
+    "replacement_variable": "shower_duration_minutes"
+  },
+  "correct_trace": {
+    "num_weeks": 4,
+    "days_per_week": 7,
+    "total_days": 28,
+    "shower_frequency_divisor": 2,
+    "num_showers": 14.0,
+    "shower_duration_minutes": 10,
+    "total_shower_minutes": 140.0,
+    "water_per_minute": 2,
+    "total_water_gallons": 280.0,
+    "answer": 280.0
+  },
+  "flawed_trace": {
+    "num_weeks": 4,
+    "days_per_week": 7,
+    "total_days": 28,
+    "shower_frequency_divisor": 2,
+    "num_showers": 14.0,
+    "shower_duration_minutes": 10,
+    "total_shower_minutes": 140.0,
+    "water_per_minute": 2,
+    "total_water_gallons": 1400.0,
+    "answer": 1400.0
+  },
+  "correct_value": 280.0,
+  "flawed_value": 1400.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_days",
+      "question_inputs": [
+        "num_weeks"
+      ],
+      "solution_line_template": "There are {num_weeks}*{days_per_week}=<<{num_weeks}*{days_per_week}={total_days}>>{total_days} days in those {num_weeks} weeks"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_showers",
+      "question_inputs": [
+        "shower_frequency_divisor"
+      ],
+      "solution_line_template": "That means he takes {total_days}/{shower_frequency_divisor}=<<{total_days}/{shower_frequency_divisor}={num_showers}>>{num_showers} showers"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_shower_minutes",
+      "question_inputs": [
+        "shower_duration_minutes"
+      ],
+      "solution_line_template": "So he takes a total of {num_showers}*{shower_duration_minutes}=<<{num_showers}*{shower_duration_minutes}={total_shower_minutes}>>{total_shower_minutes} minutes of showers"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_water_gallons",
+      "question_inputs": [
+        "water_per_minute"
+      ],
+      "solution_line_template": "So he uses {water_per_minute}*{total_shower_minutes}=<<{water_per_minute}*{total_shower_minutes}={total_water_gallons}>>{total_water_gallons} gallons of water"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 4*7=<<4*7=28>>28 days in those 4 weeks",
+    "L2": "That means he takes 28/2=<<28/2=14>>14 showers",
+    "L3": "So he takes a total of 14*10=<<14*10=140>>140 minutes of showers",
+    "L4": "So he uses 10*140=<<10*140=1400>>1400 gallons of water",
+    "FA": "#### 1400"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'shower_duration_minutes' (10) was used instead of 'water_per_minute' (2).",
+  "repro_seed": 8530558596828778526,
+  "model_name": "google_gemini-2.5-flash"
+}

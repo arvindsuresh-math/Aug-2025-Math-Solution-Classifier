@@ -1,0 +1,89 @@
+{
+  "index": 236,
+  "original_solution_mapping": {
+    "FA": "#### 825",
+    "L1": "Jake has 5000-2800 = $<<5000-2800=2200>>2200 left",
+    "L2": "Jake has 2200/2 = $<<2200/2=1100>>1100",
+    "L3": "Jake loses 1100/4 = $<<1100/4=275>>275",
+    "L4": "Jake has 1100-275 = $<<1100-275=825>>825 left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 236.\n    Returns: the amount of money Jake has left.\n    \"\"\"\n    # L1\n    initial_money = 5000 # Jake has $5000\n    motorcycle_cost = 2800 # spends $2800 on a new motorcycle\n    money_after_motorcycle = initial_money - motorcycle_cost\n\n    # L2\n    concert_ticket_divisor = 2 # spends half of what's left\n    money_after_concert = money_after_motorcycle / concert_ticket_divisor\n\n    # L3\n    loss_divisor = 4 # loses a fourth of what he has left\n    money_lost = money_after_concert / loss_divisor\n\n    # L4\n    money_left = money_after_concert - money_lost\n\n    # FA\n    answer = money_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "money_left",
+    "operand_to_replace": "money_after_concert",
+    "replacement_variable": "motorcycle_cost"
+  },
+  "correct_trace": {
+    "initial_money": 5000,
+    "motorcycle_cost": 2800,
+    "money_after_motorcycle": 2200,
+    "concert_ticket_divisor": 2,
+    "money_after_concert": 1100.0,
+    "loss_divisor": 4,
+    "money_lost": 275.0,
+    "money_left": 825.0,
+    "answer": 825.0
+  },
+  "flawed_trace": {
+    "initial_money": 5000,
+    "motorcycle_cost": 2800,
+    "money_after_motorcycle": 2200,
+    "concert_ticket_divisor": 2,
+    "money_after_concert": 1100.0,
+    "loss_divisor": 4,
+    "money_lost": 275.0,
+    "money_left": 2525.0,
+    "answer": 2525.0
+  },
+  "correct_value": 825.0,
+  "flawed_value": 2525.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_after_motorcycle",
+      "question_inputs": [
+        "initial_money",
+        "motorcycle_cost"
+      ],
+      "solution_line_template": "Jake has {initial_money}-{motorcycle_cost} = $<<{initial_money}-{motorcycle_cost}={money_after_motorcycle}>>{money_after_motorcycle} left"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_after_concert",
+      "question_inputs": [
+        "concert_ticket_divisor"
+      ],
+      "solution_line_template": "Jake has {money_after_motorcycle}/{concert_ticket_divisor} = $<<{money_after_motorcycle}/{concert_ticket_divisor}={money_after_concert}>>{money_after_concert}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "money_lost",
+      "question_inputs": [
+        "loss_divisor"
+      ],
+      "solution_line_template": "Jake loses {money_after_concert}/{loss_divisor} = $<<{money_after_concert}/{loss_divisor}={money_lost}>>{money_lost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "money_left",
+      "question_inputs": [],
+      "solution_line_template": "Jake has {money_after_concert}-{money_lost} = $<<{money_after_concert}-{money_lost}={money_left}>>{money_left} left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jake has 5000-2800 = $<<5000-2800=2200>>2200 left",
+    "L2": "Jake has 2200/2 = $<<2200/2=1100>>1100",
+    "L3": "Jake loses 1100/4 = $<<1100/4=275>>275",
+    "L4": "Jake has 2800-275 = $<<2800-275=2525>>2525 left.",
+    "FA": "#### 2525"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'motorcycle_cost' (value: 2800) was used instead of 'money_after_concert' (value: 1100.0).",
+  "repro_seed": -7565271982469115714,
+  "model_name": "google_gemini-2.5-flash"
+}

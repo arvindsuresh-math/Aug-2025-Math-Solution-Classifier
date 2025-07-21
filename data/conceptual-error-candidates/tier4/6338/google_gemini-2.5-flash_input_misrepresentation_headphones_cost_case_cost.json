@@ -1,0 +1,97 @@
+{
+  "index": 6338,
+  "original_solution_mapping": {
+    "FA": "#### 3700",
+    "L1": "First find the cost of the case: $1000 * 20% = $<<1000*20*.01=200>>200",
+    "L2": "Then find the cost of the headphones: $200 / 2 = $<<200/2=100>>100",
+    "L3": "Then find how much the phone contract will cost over a year: $200/month * 12 months/year = $<<200*12=2400>>2400",
+    "L4": "Finally, add the cost of the phone, accessories, and plan over the first year to find the total: $2400 + $100 + $200 + $1000 = $<<2400+100+200+1000=3700>>3700"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6338.\n    Returns: the total amount Lisa will spend on her phone in the first year.\n    \"\"\"\n    # L1\n    phone_cost = 1000 # $1000\n    case_percent_num = 20 # 20% of the cost of the phone\n    percent_factor = 0.01 # WK\n    case_cost = phone_cost * case_percent_num * percent_factor\n\n    # L2\n    headphones_divisor = 2 # half as much as the case\n    headphones_cost = case_cost / headphones_divisor\n\n    # L3\n    contract_cost_per_month = 200 # $200/month\n    months_per_year = 12 # WK\n    contract_cost_year = contract_cost_per_month * months_per_year\n\n    # L4\n    total_spend = contract_cost_year + headphones_cost + case_cost + phone_cost\n\n    # FA\n    answer = total_spend\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "headphones_cost",
+    "operand_to_replace": "headphones_divisor",
+    "replacement_variable": "case_cost"
+  },
+  "correct_trace": {
+    "phone_cost": 1000,
+    "case_percent_num": 20,
+    "percent_factor": 0.01,
+    "case_cost": 200.0,
+    "headphones_divisor": 2,
+    "headphones_cost": 100.0,
+    "contract_cost_per_month": 200,
+    "months_per_year": 12,
+    "contract_cost_year": 2400,
+    "total_spend": 3700.0,
+    "answer": 3700.0
+  },
+  "flawed_trace": {
+    "phone_cost": 1000,
+    "case_percent_num": 20,
+    "percent_factor": 0.01,
+    "case_cost": 200.0,
+    "headphones_divisor": 2,
+    "headphones_cost": 1.0,
+    "contract_cost_per_month": 200,
+    "months_per_year": 12,
+    "contract_cost_year": 2400,
+    "total_spend": 3601.0,
+    "answer": 3601.0
+  },
+  "correct_value": 100.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "case_cost",
+      "question_inputs": [
+        "phone_cost",
+        "case_percent_num"
+      ],
+      "solution_line_template": "First find the cost of the case: ${phone_cost} * {case_percent_num}% = $<<{phone_cost}*{case_percent_num}*{percent_factor}={case_cost}>>{case_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "headphones_cost",
+      "question_inputs": [
+        "headphones_divisor"
+      ],
+      "solution_line_template": "Then find the cost of the headphones: ${case_cost} / {headphones_divisor} = $<<{case_cost}/{headphones_divisor}={headphones_cost}>>{headphones_cost}"
+    },
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L3",
+      "output_variable": "contract_cost_year",
+      "question_inputs": [
+        "contract_cost_per_month"
+      ],
+      "solution_line_template": "Then find how much the phone contract will cost over a year: ${contract_cost_per_month}/month * {months_per_year} months/year = $<<{contract_cost_per_month}*{months_per_year}={contract_cost_year}>>{contract_cost_year}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_spend",
+      "question_inputs": [],
+      "solution_line_template": "Finally, add the cost of the phone, accessories, and plan over the first year to find the total: ${contract_cost_year} + ${headphones_cost} + ${case_cost} + ${phone_cost} = $<<{contract_cost_year}+{headphones_cost}+{case_cost}+{phone_cost}={total_spend}>>{total_spend}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the cost of the case: $1000 * 20% = $<<1000*20*0.01=200>>200",
+    "L2": "Then find the cost of the headphones: $200 / 200 = $<<200/200=1>>1",
+    "L3": "Then find how much the phone contract will cost over a year: $200/month * 12 months/year = $<<200*12=2400>>2400",
+    "L4": "Finally, add the cost of the phone, accessories, and plan over the first year to find the total: $2400 + $1 + $200 + $1000 = $<<2400+1+200+1000=3601>>3601",
+    "FA": "#### 3601"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'case_cost' (200.0) was used instead of 'headphones_divisor' (2).",
+  "repro_seed": 4983198519449188056,
+  "model_name": "google_gemini-2.5-flash"
+}

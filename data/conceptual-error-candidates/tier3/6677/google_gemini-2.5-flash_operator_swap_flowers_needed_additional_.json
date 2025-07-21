@@ -1,0 +1,105 @@
+{
+  "index": 6677,
+  "original_solution_mapping": {
+    "FA": "#### 210",
+    "L1": "If he gathers for 2 hours, the number of minutes gathering is 2 * 60 minutes per hour = <<2*60=120>>120 minutes of gathering flowers",
+    "L2": "Gathering for 120 minutes / 10 minutes per flower = <<120/10=12>>12 flowers gathered",
+    "L3": "If he gathers 12 flowers initially but lost 3, he has 12-3 = <<12-3=9>>9 flowers gathered and kept",
+    "L4": "Since he has 30 classmates total and has 9 flowers, he needs to gather 30-9=<<30-9=21>>21 more flowers",
+    "L5": "Assuming it takes 10 minutes per flower, it will take him 10 * 21 = <<10*21=210>>210 minutes to gather the remaining 21 flowers needed"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6677.\n    Returns: the number of additional minutes Justin needs to look for flowers.\n    \"\"\"\n    # L1\n    hours_gathering = 2 # 2 hours\n    minutes_per_hour = 60 # WK\n    minutes_gathering = hours_gathering * minutes_per_hour\n\n    # L2\n    minutes_per_flower = 10 # 10 minutes to find a flower\n    flowers_gathered_initial = minutes_gathering / minutes_per_flower\n\n    # L3\n    flowers_lost = 3 # lost 3 of the flowers\n    flowers_kept = flowers_gathered_initial - flowers_lost\n\n    # L4\n    total_classmates = 30 # 30 classmates\n    flowers_needed_additional = total_classmates - flowers_kept\n\n    # L5\n    minutes_needed_additional = minutes_per_flower * flowers_needed_additional\n\n    # FA\n    answer = minutes_needed_additional\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "flowers_needed_additional",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30d216f10>"
+  },
+  "correct_trace": {
+    "hours_gathering": 2,
+    "minutes_per_hour": 60,
+    "minutes_gathering": 120,
+    "minutes_per_flower": 10,
+    "flowers_gathered_initial": 12.0,
+    "flowers_lost": 3,
+    "flowers_kept": 9.0,
+    "total_classmates": 30,
+    "flowers_needed_additional": 21.0,
+    "minutes_needed_additional": 210.0,
+    "answer": 210.0
+  },
+  "flawed_trace": {
+    "hours_gathering": 2,
+    "minutes_per_hour": 60,
+    "minutes_gathering": 120,
+    "minutes_per_flower": 10,
+    "flowers_gathered_initial": 12.0,
+    "flowers_lost": 3,
+    "flowers_kept": 9.0,
+    "total_classmates": 30,
+    "flowers_needed_additional": 39.0,
+    "minutes_needed_additional": 390.0,
+    "answer": 390.0
+  },
+  "correct_value": 21.0,
+  "flawed_value": 39.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "minutes_gathering",
+      "question_inputs": [
+        "hours_gathering"
+      ],
+      "solution_line_template": "If he gathers for {hours_gathering} hours, the number of minutes gathering is {hours_gathering} * {minutes_per_hour} minutes per hour = <<{hours_gathering}*{minutes_per_hour}={minutes_gathering}>>{minutes_gathering} minutes of gathering flowers"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "flowers_gathered_initial",
+      "question_inputs": [
+        "minutes_per_flower"
+      ],
+      "solution_line_template": "Gathering for {minutes_gathering} minutes / {minutes_per_flower} minutes per flower = <<{minutes_gathering}/{minutes_per_flower}={flowers_gathered_initial}>>{flowers_gathered_initial} flowers gathered"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "flowers_kept",
+      "question_inputs": [
+        "flowers_lost"
+      ],
+      "solution_line_template": "If he gathers {flowers_gathered_initial} flowers initially but lost {flowers_lost}, he has {flowers_gathered_initial}-{flowers_lost} = <<{flowers_gathered_initial}-{flowers_lost}={flowers_kept}>>{flowers_kept} flowers gathered and kept"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "flowers_needed_additional",
+      "question_inputs": [
+        "total_classmates"
+      ],
+      "solution_line_template": "Since he has {total_classmates} classmates total and has {flowers_kept} flowers, he needs to gather {total_classmates}-{flowers_kept}=<<{total_classmates}-{flowers_kept}={flowers_needed_additional}>>{flowers_needed_additional} more flowers"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "minutes_needed_additional",
+      "question_inputs": [],
+      "solution_line_template": "Assuming it takes {minutes_per_flower} minutes per flower, it will take him {minutes_per_flower} * {flowers_needed_additional} = <<{minutes_per_flower}*{flowers_needed_additional}={minutes_needed_additional}>>{minutes_needed_additional} minutes to gather the remaining {flowers_needed_additional} flowers needed"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If he gathers for 2 hours, the number of minutes gathering is 2 * 60 minutes per hour = <<2*60=120>>120 minutes of gathering flowers",
+    "L2": "Gathering for 120 minutes / 10 minutes per flower = <<120/10=12>>12 flowers gathered",
+    "L3": "If he gathers 12 flowers initially but lost 3, he has 12-3 = <<12-3=9>>9 flowers gathered and kept",
+    "L4": "Since he has 30 classmates total and has 9 flowers, he needs to gather 30-9=<<30-9=39>>39 more flowers",
+    "L5": "Assuming it takes 10 minutes per flower, it will take him 10 * 39 = <<10*39=390>>390 minutes to gather the remaining 39 flowers needed",
+    "FA": "#### 390"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -8909596441598464007,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 2143,
+  "original_solution_mapping": {
+    "FA": "#### 24",
+    "L1": "The second competitor jumped one foot farther than the first competitor, for a distance of 22+1=<<22+1=23>>23 feet.",
+    "L2": "The third competitor jumped two feet shorter than the third competitor, for a distance of 23-2=<<23-2=21>>21 feet.",
+    "L3": "And the fourth competitor jumped 3 feet further than the third competitor, for a distance of 21+3=<<21+3=24>>24 feet."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2143.\n    Returns: the length, in feet, the fourth competitor jumped.\n    \"\"\"\n    # L1\n    first_competitor_jump = 22 # The first competitor jumped a distance of 22 feet.\n    second_competitor_farther = 1 # The second competitor jumped one foot farther than the first competitor.\n    second_competitor_jump = first_competitor_jump + second_competitor_farther\n\n    # L2\n    # Note: The question states \"The third competitor jumped two feet shorter than the third competitor.\" \n    # The solution interprets this as \"shorter than the second competitor\", which is formalized below.\n    third_competitor_shorter = 2 # two feet shorter than the third competitor (interpreted as second competitor)\n    third_competitor_jump = second_competitor_jump - third_competitor_shorter\n\n    # L3\n    fourth_competitor_further = 3 # 3 feet further than the third competitor\n    fourth_competitor_jump = third_competitor_jump + fourth_competitor_further\n\n    # FA\n    answer = fourth_competitor_jump\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "fourth_competitor_jump",
+    "operand_to_replace": "fourth_competitor_further",
+    "replacement_variable": "second_competitor_jump"
+  },
+  "correct_trace": {
+    "first_competitor_jump": 22,
+    "second_competitor_farther": 1,
+    "second_competitor_jump": 23,
+    "third_competitor_shorter": 2,
+    "third_competitor_jump": 21,
+    "fourth_competitor_further": 3,
+    "fourth_competitor_jump": 24,
+    "answer": 24
+  },
+  "flawed_trace": {
+    "first_competitor_jump": 22,
+    "second_competitor_farther": 1,
+    "second_competitor_jump": 23,
+    "third_competitor_shorter": 2,
+    "third_competitor_jump": 21,
+    "fourth_competitor_further": 3,
+    "fourth_competitor_jump": 44,
+    "answer": 44
+  },
+  "correct_value": 24,
+  "flawed_value": 44,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "first_competitor_jump",
+        "second_competitor_farther"
+      ],
+      "WK_inputs": [],
+      "output_variable": "second_competitor_jump",
+      "solution_line_template": "The second competitor jumped one foot farther than the first competitor, for a distance of {first_competitor_jump}+{second_competitor_farther}=<<{first_competitor_jump}+{second_competitor_farther}={second_competitor_jump}>>{second_competitor_jump} feet."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "third_competitor_shorter"
+      ],
+      "WK_inputs": [],
+      "output_variable": "third_competitor_jump",
+      "solution_line_template": "The third competitor jumped two feet shorter than the third competitor, for a distance of {second_competitor_jump}-{third_competitor_shorter}=<<{second_competitor_jump}-{third_competitor_shorter}={third_competitor_jump}>>{third_competitor_jump} feet."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "fourth_competitor_further"
+      ],
+      "WK_inputs": [],
+      "output_variable": "fourth_competitor_jump",
+      "solution_line_template": "And the fourth competitor jumped 3 feet further than the third competitor, for a distance of {third_competitor_jump}+{fourth_competitor_further}=<<{third_competitor_jump}+{fourth_competitor_further}={fourth_competitor_jump}>>{fourth_competitor_jump} feet."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The second competitor jumped one foot farther than the first competitor, for a distance of 22+1=<<22+1=23>>23 feet.",
+    "L2": "The third competitor jumped two feet shorter than the third competitor, for a distance of 23-2=<<23-2=21>>21 feet.",
+    "L3": "And the fourth competitor jumped 3 feet further than the third competitor, for a distance of 21+23=<<21+23=44>>44 feet.",
+    "FA": "#### 44"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'second_competitor_jump' (23) was used instead of 'fourth_competitor_further' (3).",
+  "repro_seed": 3463260924534792940,
+  "model_name": "google_gemini-2.5-flash"
+}

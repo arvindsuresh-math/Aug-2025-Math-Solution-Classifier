@@ -1,0 +1,89 @@
+{
+  "index": 6631,
+  "original_solution_mapping": {
+    "FA": "#### 1600000",
+    "L1": "They gave money to 1000*.2=<<1000*.2=200>>200 people",
+    "L2": "It cost 200*2000=$<<200*2000=400000>>400,000",
+    "L3": "There was a 5 to 1 return so the government collected 5*400000=$<<5*400000=2000000>>2,000,000",
+    "L4": "That means the profit was 2,000,000-400,000=$<<2000000-400000=1600000>>1,600,000"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6631.\n    Returns: the government's profit from this project.\n    \"\"\"\n    # L1\n    total_people = 1000 # 1000 people in it\n    bottom_percent_decimal = 0.2 # bottom 20% of people\n    num_people_receiving_stimulus = total_people * bottom_percent_decimal\n\n    # L2\n    stimulus_amount_per_person = 2000 # a $2000 stimulus\n    total_cost = num_people_receiving_stimulus * stimulus_amount_per_person\n\n    # L3\n    return_multiplier = 5 # returns 5 times as much money\n    total_revenue = return_multiplier * total_cost\n\n    # L4\n    government_profit = total_revenue - total_cost\n\n    # FA\n    answer = government_profit\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "government_profit",
+    "operand_to_replace": "total_cost",
+    "replacement_variable": "stimulus_amount_per_person"
+  },
+  "correct_trace": {
+    "total_people": 1000,
+    "bottom_percent_decimal": 0.2,
+    "num_people_receiving_stimulus": 200.0,
+    "stimulus_amount_per_person": 2000,
+    "total_cost": 400000.0,
+    "return_multiplier": 5,
+    "total_revenue": 2000000.0,
+    "government_profit": 1600000.0,
+    "answer": 1600000.0
+  },
+  "flawed_trace": {
+    "total_people": 1000,
+    "bottom_percent_decimal": 0.2,
+    "num_people_receiving_stimulus": 200.0,
+    "stimulus_amount_per_person": 2000,
+    "total_cost": 400000.0,
+    "return_multiplier": 5,
+    "total_revenue": 2000000.0,
+    "government_profit": 1998000.0,
+    "answer": 1998000.0
+  },
+  "correct_value": 1600000.0,
+  "flawed_value": 1998000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "num_people_receiving_stimulus",
+      "question_inputs": [
+        "total_people",
+        "bottom_percent_decimal"
+      ],
+      "solution_line_template": "They gave money to {total_people}*{bottom_percent_decimal}=<<{total_people}*{bottom_percent_decimal}={num_people_receiving_stimulus}>>{num_people_receiving_stimulus} people"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "stimulus_amount_per_person"
+      ],
+      "solution_line_template": "It cost {num_people_receiving_stimulus}*{stimulus_amount_per_person}=$<<{num_people_receiving_stimulus}*{stimulus_amount_per_person}={total_cost}>>{total_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_revenue",
+      "question_inputs": [
+        "return_multiplier"
+      ],
+      "solution_line_template": "There was a {return_multiplier} to 1 return so the government collected {return_multiplier}*{total_cost}=$<<{return_multiplier}*{total_cost}={total_revenue}>>{total_revenue}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "government_profit",
+      "question_inputs": [],
+      "solution_line_template": "That means the profit was {total_revenue}-{total_cost}=$<<{total_revenue}-{total_cost}={government_profit}>>{government_profit}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "They gave money to 1000*0.2=<<1000*0.2=200>>200 people",
+    "L2": "It cost 200*2000=$<<200*2000=400000>>400000",
+    "L3": "There was a 5 to 1 return so the government collected 5*400000=$<<5*400000=2000000>>2000000",
+    "L4": "That means the profit was 2000000-2000=$<<2000000-2000=1998000>>1998000",
+    "FA": "#### 1998000"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'stimulus_amount_per_person' (value: 2000) was used instead of 'total_cost' (value: 400000.0).",
+  "repro_seed": -927400457896389253,
+  "model_name": "google_gemini-2.5-flash"
+}

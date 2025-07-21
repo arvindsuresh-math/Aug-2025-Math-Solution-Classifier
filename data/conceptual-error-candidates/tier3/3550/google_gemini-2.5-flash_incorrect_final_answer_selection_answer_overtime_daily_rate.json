@@ -1,0 +1,109 @@
+{
+  "index": 3550,
+  "original_solution_mapping": {
+    "FA": "#### 208",
+    "L1": "Porter's weekly earning is $8x5 = $<<8*5=40>>40.",
+    "L2": "Porter's monthly earning is $40x4= $<<40*4=160>>160.",
+    "L3": "The extra amount he will earn when he works on his overtime is $8 x 50/100 = $<<8*50/100=4>>4.",
+    "L4": "So the amount he will earn on his overtime is $8 + $4 = $<<8+4=12>>12.",
+    "L5": "Since he will render overtime once every week, the total overtime pay he will earn in a month is $12 x 4 = $<<12*4=48>>48.",
+    "L6": "Therefore the total money he will earn in a week is $160+$48 = $<<160+48=208>>208."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3550.\n    Returns: the total money Porter will earn after a month.\n    \"\"\"\n    # L1\n    daily_rate = 8 # Porter earns $8 per day\n    work_days_per_week = 5 # works 5 times a week\n    weekly_earning = daily_rate * work_days_per_week\n\n    # L2\n    weeks_per_month = 4 # WK\n    monthly_earning_regular = weekly_earning * weeks_per_month\n\n    # L3\n    overtime_rate_percentage = Fraction(50, 100) # an extra fifty percent\n    extra_overtime_amount_per_day = daily_rate * overtime_rate_percentage\n\n    # L4\n    overtime_daily_rate = daily_rate + extra_overtime_amount_per_day\n\n    # L5\n    total_overtime_monthly_pay = overtime_daily_rate * weeks_per_month\n\n    # L6\n    total_monthly_earning = monthly_earning_regular + total_overtime_monthly_pay\n\n    # FA\n    answer = total_monthly_earning\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_monthly_earning",
+    "replacement_variable": "overtime_daily_rate"
+  },
+  "correct_trace": {
+    "daily_rate": 8,
+    "work_days_per_week": 5,
+    "weekly_earning": 40,
+    "weeks_per_month": 4,
+    "monthly_earning_regular": 160,
+    "overtime_rate_percentage": "1/2",
+    "extra_overtime_amount_per_day": "4",
+    "overtime_daily_rate": "12",
+    "total_overtime_monthly_pay": "48",
+    "total_monthly_earning": "208",
+    "answer": "208"
+  },
+  "flawed_trace": {
+    "daily_rate": 8,
+    "work_days_per_week": 5,
+    "weekly_earning": 40,
+    "weeks_per_month": 4,
+    "monthly_earning_regular": 160,
+    "overtime_rate_percentage": "1/2",
+    "extra_overtime_amount_per_day": "4",
+    "overtime_daily_rate": "12",
+    "total_overtime_monthly_pay": "48",
+    "total_monthly_earning": "208",
+    "answer": "12"
+  },
+  "correct_value": "208",
+  "flawed_value": "12",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "weekly_earning",
+      "question_inputs": [
+        "daily_rate",
+        "work_days_per_week"
+      ],
+      "solution_line_template": "Porter's weekly earning is ${daily_rate}x{work_days_per_week} = $<<{daily_rate}*{work_days_per_week}={weekly_earning}>>{weekly_earning}."
+    },
+    {
+      "WK_inputs": [
+        "weeks_per_month"
+      ],
+      "line_number": "L2",
+      "output_variable": "monthly_earning_regular",
+      "question_inputs": [],
+      "solution_line_template": "Porter's monthly earning is ${weekly_earning}x{weeks_per_month}= $<<{weekly_earning}*{weeks_per_month}={monthly_earning_regular}>>{monthly_earning_regular}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "extra_overtime_amount_per_day",
+      "question_inputs": [
+        "overtime_rate_percentage"
+      ],
+      "solution_line_template": "The extra amount he will earn when he works on his overtime is ${daily_rate} x {overtime_rate_percentage} = $<<{daily_rate}*{overtime_rate_percentage}={extra_overtime_amount_per_day}>>{extra_overtime_amount_per_day}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "overtime_daily_rate",
+      "question_inputs": [],
+      "solution_line_template": "So the amount he will earn on his overtime is ${daily_rate} + ${extra_overtime_amount_per_day} = $<<{daily_rate}+{extra_overtime_amount_per_day}={overtime_daily_rate}>>{overtime_daily_rate}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_overtime_monthly_pay",
+      "question_inputs": [],
+      "solution_line_template": "Since he will render overtime once every week, the total overtime pay he will earn in a month is ${overtime_daily_rate} x {weeks_per_month} = $<<{overtime_daily_rate}*{weeks_per_month}={total_overtime_monthly_pay}>>{total_overtime_monthly_pay}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_monthly_earning",
+      "question_inputs": [],
+      "solution_line_template": "Therefore the total money he will earn in a week is ${monthly_earning_regular}+${total_overtime_monthly_pay} = $<<{monthly_earning_regular}+{total_overtime_monthly_pay}={total_monthly_earning}>>{total_monthly_earning}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Porter's weekly earning is $8x5 = $<<8*5=40>>40.",
+    "L2": "Porter's monthly earning is $40x4= $<<40*4=160>>160.",
+    "L3": "The extra amount he will earn when he works on his overtime is $8 x 50/100 = $<<8*50/100=4>>4.",
+    "L4": "So the amount he will earn on his overtime is $8 + $4 = $<<8+4=12>>12.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'overtime_daily_rate' (value: 12) was reported instead of 'total_monthly_earning' (value: 208).",
+  "repro_seed": 8329680508130189241,
+  "model_name": "google_gemini-2.5-flash"
+}

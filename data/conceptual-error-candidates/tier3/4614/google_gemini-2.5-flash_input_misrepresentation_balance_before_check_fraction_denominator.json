@@ -1,0 +1,59 @@
+{
+  "index": 4614,
+  "original_solution_mapping": {
+    "FA": "#### 150",
+    "L1": "The $50 check is worth 1/4 of Yasmin's new balance, so her new balance is 50 * 4 = $<<50*4=200>>200.",
+    "L2": "Thus, Yasmin had 200 - 50 = $<<200-50=150>>150 in her account before she deposited the check."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4614.\n    Returns: the amount of dollars in the account before the check was deposited.\n    \"\"\"\n    # L1\n    check_value = 50 # $50 birthday check\n    fraction_denominator = 4 # a quarter of her new balance\n    new_balance = check_value * fraction_denominator\n\n    # L2\n    balance_before_check = new_balance - check_value\n\n    # FA\n    answer = balance_before_check\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "balance_before_check",
+    "operand_to_replace": "check_value",
+    "replacement_variable": "fraction_denominator"
+  },
+  "correct_trace": {
+    "check_value": 50,
+    "fraction_denominator": 4,
+    "new_balance": 200,
+    "balance_before_check": 150,
+    "answer": 150
+  },
+  "flawed_trace": {
+    "check_value": 50,
+    "fraction_denominator": 4,
+    "new_balance": 200,
+    "balance_before_check": 196,
+    "answer": 196
+  },
+  "correct_value": 150,
+  "flawed_value": 196,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "new_balance",
+      "question_inputs": [
+        "check_value",
+        "fraction_denominator"
+      ],
+      "solution_line_template": "The ${check_value} check is worth 1/{fraction_denominator} of Yasmin's new balance, so her new balance is {check_value} * {fraction_denominator} = $<<{check_value}*{fraction_denominator}={new_balance}>>{new_balance}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "balance_before_check",
+      "question_inputs": [],
+      "solution_line_template": "Thus, Yasmin had {new_balance} - {check_value} = $<<{new_balance}-{check_value}={balance_before_check}>>{balance_before_check} in her account before she deposited the check."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The $50 check is worth 1/4 of Yasmin's new balance, so her new balance is 50 * 4 = $<<50*4=200>>200.",
+    "L2": "Thus, Yasmin had 200 - 4 = $<<200-4=196>>196 in her account before she deposited the check.",
+    "FA": "#### 196"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'fraction_denominator' (4) was used instead of 'check_value' (50).",
+  "repro_seed": 494319668674619811,
+  "model_name": "google_gemini-2.5-flash"
+}

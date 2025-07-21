@@ -1,0 +1,102 @@
+{
+  "index": 6858,
+  "original_solution_mapping": {
+    "FA": "#### 78",
+    "L1": "There was a $1200 x 10/100 = $<<1200*10/100=120>>120 increase of the original price.",
+    "L2": "So, the perfume was priced for $1200 + $120 = $<<1200+120=1320>>1320.",
+    "L3": "Then, 15% of the new price is $1320 x 15/100 = $<<1320*15/100=198>>198.",
+    "L4": "So, the final price is now $1320 - $198 = $<<1320-198=1122>>1122.",
+    "L5": "Therefore, the final price is $1200 - $1122 = $<<1200-1122=78>>78 lower than the original price."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6858.\n    Returns: the amount by which the final price was lower than the original price.\n    \"\"\"\n    # L1\n    original_price = 1200 # A luxury perfume costs $1200\n    increase_percentage_numerator = 10 # increase its price by 10%\n    increase_percentage_denominator = 100 # increase its price by 10%\n    price_increase = original_price * increase_percentage_numerator / increase_percentage_denominator\n\n    # L2\n    price_after_increase = original_price + price_increase\n\n    # L3\n    decrease_percentage_numerator = 15 # lower the price by 15%\n    decrease_percentage_denominator = 100 # lower the price by 15%\n    price_decrease = price_after_increase * decrease_percentage_numerator / decrease_percentage_denominator\n\n    # L4\n    final_price = price_after_increase - price_decrease\n\n    # L5\n    price_difference = original_price - final_price\n\n    # FA\n    answer = price_difference\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "price_difference",
+    "operand_to_replace": "original_price",
+    "replacement_variable": "price_after_increase"
+  },
+  "correct_trace": {
+    "original_price": 1200,
+    "increase_percentage_numerator": 10,
+    "increase_percentage_denominator": 100,
+    "price_increase": 120.0,
+    "price_after_increase": 1320.0,
+    "decrease_percentage_numerator": 15,
+    "decrease_percentage_denominator": 100,
+    "price_decrease": 198.0,
+    "final_price": 1122.0,
+    "price_difference": 78.0,
+    "answer": 78.0
+  },
+  "flawed_trace": {
+    "original_price": 1200,
+    "increase_percentage_numerator": 10,
+    "increase_percentage_denominator": 100,
+    "price_increase": 120.0,
+    "price_after_increase": 1320.0,
+    "decrease_percentage_numerator": 15,
+    "decrease_percentage_denominator": 100,
+    "price_decrease": 198.0,
+    "final_price": 1122.0,
+    "price_difference": 198.0,
+    "answer": 198.0
+  },
+  "correct_value": 78.0,
+  "flawed_value": 198.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "price_increase",
+      "question_inputs": [
+        "original_price",
+        "increase_percentage_numerator",
+        "increase_percentage_denominator"
+      ],
+      "solution_line_template": "There was a ${original_price} x {increase_percentage_numerator}/{increase_percentage_denominator} = $<<{original_price}*{increase_percentage_numerator}/{increase_percentage_denominator}={price_increase}>>{price_increase} increase of the original price."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "price_after_increase",
+      "question_inputs": [],
+      "solution_line_template": "So, the perfume was priced for ${original_price} + ${price_increase} = $<<{original_price}+{price_increase}={price_after_increase}>>{price_after_increase}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "price_decrease",
+      "question_inputs": [
+        "decrease_percentage_numerator",
+        "decrease_percentage_denominator"
+      ],
+      "solution_line_template": "Then, {decrease_percentage_numerator}% of the new price is ${price_after_increase} x {decrease_percentage_numerator}/{decrease_percentage_denominator} = $<<{price_after_increase}*{decrease_percentage_numerator}/{decrease_percentage_denominator}={price_decrease}>>{price_decrease}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_price",
+      "question_inputs": [],
+      "solution_line_template": "So, the final price is now ${price_after_increase} - ${price_decrease} = $<<{price_after_increase}-{price_decrease}={final_price}>>{final_price}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "price_difference",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, the final price is ${original_price} - ${final_price} = $<<{original_price}-{final_price}={price_difference}>>{price_difference} lower than the original price."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There was a $1200 x 10/100 = $<<1200*10/100=120>>120 increase of the original price.",
+    "L2": "So, the perfume was priced for $1200 + $120 = $<<1200+120=1320>>1320.",
+    "L3": "Then, 15% of the new price is $1320 x 15/100 = $<<1320*15/100=198>>198.",
+    "L4": "So, the final price is now $1320 - $198 = $<<1320-198=1122>>1122.",
+    "L5": "Therefore, the final price is $1320 - $1122 = $<<1320-1122=198>>198 lower than the original price.",
+    "FA": "#### 198"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Input misrepresentation. The value for 'price_after_increase' (1320.0) was used instead of 'original_price' (1200).",
+  "repro_seed": -7447727350107402079,
+  "model_name": "google_gemini-2.5-flash"
+}

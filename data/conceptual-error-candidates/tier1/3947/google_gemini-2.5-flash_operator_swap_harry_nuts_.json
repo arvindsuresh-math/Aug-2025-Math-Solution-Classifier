@@ -1,0 +1,74 @@
+{
+  "index": 3947,
+  "original_solution_mapping": {
+    "FA": "#### 672",
+    "L1": "If Sue has 48 nuts, and Harry has twice as many nuts as Sue, Harry has 2*48 = 96 nuts",
+    "L2": "Bill has 6 times as many nuts as Harry, and since Harry has 96 nuts, Bill has 96*6 = <<6*96=576>>576 nuts",
+    "L3": "Combined, Bill and Harry have 576+96 = <<576+96=672>>672 nuts"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3947.\n    Returns: the combined number of nuts Bill and Harry have.\n    \"\"\"\n    # L1\n    sue_nuts = 48 # Sue has 48 nuts\n    harry_multiplier_sue = 2 # twice as many nuts as Sue\n    harry_nuts = harry_multiplier_sue * sue_nuts\n\n    # L2\n    bill_multiplier_harry = 6 # 6 times as many nuts as Harry\n    bill_nuts = harry_nuts * bill_multiplier_harry\n\n    # L3\n    combined_nuts = bill_nuts + harry_nuts\n\n    # FA\n    answer = combined_nuts\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "harry_nuts",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x16aa7c950>"
+  },
+  "correct_trace": {
+    "sue_nuts": 48,
+    "harry_multiplier_sue": 2,
+    "harry_nuts": 96,
+    "bill_multiplier_harry": 6,
+    "bill_nuts": 576,
+    "combined_nuts": 672,
+    "answer": 672
+  },
+  "flawed_trace": {
+    "sue_nuts": 48,
+    "harry_multiplier_sue": 2,
+    "harry_nuts": 50,
+    "bill_multiplier_harry": 6,
+    "bill_nuts": 300,
+    "combined_nuts": 350,
+    "answer": 350
+  },
+  "correct_value": 96,
+  "flawed_value": 50,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "harry_nuts",
+      "question_inputs": [
+        "sue_nuts",
+        "harry_multiplier_sue"
+      ],
+      "solution_line_template": "If Sue has {sue_nuts} nuts, and Harry has twice as many nuts as Sue, Harry has {harry_multiplier_sue}*{sue_nuts} = {harry_nuts} nuts"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "bill_nuts",
+      "question_inputs": [
+        "bill_multiplier_harry"
+      ],
+      "solution_line_template": "Bill has {bill_multiplier_harry} times as many nuts as Harry, and since Harry has {harry_nuts} nuts, Bill has {harry_nuts}*{bill_multiplier_harry} = <<{bill_multiplier_harry}*{harry_nuts}={bill_nuts}>>{bill_nuts} nuts"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "combined_nuts",
+      "question_inputs": [],
+      "solution_line_template": "Combined, Bill and Harry have {bill_nuts}+{harry_nuts} = <<{bill_nuts}+{harry_nuts}={combined_nuts}>>{combined_nuts} nuts"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Sue has 48 nuts, and Harry has twice as many nuts as Sue, Harry has 2*48 = 50 nuts",
+    "L2": "Bill has 6 times as many nuts as Harry, and since Harry has 50 nuts, Bill has 50*6 = <<6*50=300>>300 nuts",
+    "L3": "Combined, Bill and Harry have 300+50 = <<300+50=350>>350 nuts",
+    "FA": "#### 350"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 1306773744795544071,
+  "model_name": "google_gemini-2.5-flash"
+}

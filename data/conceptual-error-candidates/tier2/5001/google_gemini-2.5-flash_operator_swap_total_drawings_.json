@@ -1,0 +1,63 @@
+{
+  "index": 5001,
+  "original_solution_mapping": {
+    "FA": "#### 800",
+    "L1": "She drew 24 on Saturday and 16 on Sunday for a total of 24+16 = <<24+16=40>>40 drawings",
+    "L2": "She charges $20.00 per drawing and she drew 40 caricatures so she made $20*40 = $<<20*40=800>>800"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5001.\n    Returns: the total money Gretchen made.\n    \"\"\"\n    # L1\n    drawings_saturday = 24 # 24 on Saturday\n    drawings_sunday = 16 # 16 on Sunday\n    total_drawings = drawings_saturday + drawings_sunday\n\n    # L2\n    charge_per_drawing = 20.00 # $20.00 per drawing\n    total_money_made = charge_per_drawing * total_drawings\n\n    # FA\n    answer = total_money_made\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_drawings",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x168db0ad0>"
+  },
+  "correct_trace": {
+    "drawings_saturday": 24,
+    "drawings_sunday": 16,
+    "total_drawings": 40,
+    "charge_per_drawing": 20.0,
+    "total_money_made": 800.0,
+    "answer": 800.0
+  },
+  "flawed_trace": {
+    "drawings_saturday": 24,
+    "drawings_sunday": 16,
+    "total_drawings": 384,
+    "charge_per_drawing": 20.0,
+    "total_money_made": 7680.0,
+    "answer": 7680.0
+  },
+  "correct_value": 40,
+  "flawed_value": 384,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_drawings",
+      "question_inputs": [
+        "drawings_saturday",
+        "drawings_sunday"
+      ],
+      "solution_line_template": "She drew {drawings_saturday} on Saturday and {drawings_sunday} on Sunday for a total of {drawings_saturday}+{drawings_sunday} = <<{drawings_saturday}+{drawings_sunday}={total_drawings}>>{total_drawings} drawings"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_money_made",
+      "question_inputs": [
+        "charge_per_drawing"
+      ],
+      "solution_line_template": "She charges ${charge_per_drawing} per drawing and she drew {total_drawings} caricatures so she made ${charge_per_drawing}*{total_drawings} = $<<{charge_per_drawing}*{total_drawings}={total_money_made}>>{total_money_made}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She drew 24 on Saturday and 16 on Sunday for a total of 24+16 = <<24+16=384>>384 drawings",
+    "L2": "She charges $20 per drawing and she drew 384 caricatures so she made $20*384 = $<<20*384=7680>>7680",
+    "FA": "#### 7680"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 8593031866568724474,
+  "model_name": "google_gemini-2.5-flash"
+}

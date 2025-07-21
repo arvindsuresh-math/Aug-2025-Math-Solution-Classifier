@@ -1,0 +1,84 @@
+{
+  "index": 1506,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "Tina ate one twice a day for 5 days so 2*5 = <<1*2*5=10>>10",
+    "L2": "Her husband at 1 per day for 5 days so 1*5 = <<1*5=5>>5",
+    "L3": "She made 24, ate 10, her husband ate 5 and the guests ate 4 so 24-10-5-4 = <<24-10-5-4=5>>5 brownies left"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1506.\n    Returns: the number of brownies left after all are eaten and shared.\n    \"\"\"\n    # L1\n    tina_per_day = 2 # one with lunch and dinner every day\n    tina_days = 5 # for 5 days\n    tina_ate = tina_per_day * tina_days\n\n    # L2\n    husband_per_day = 1 # husband snagged one per day\n    husband_days = 5 # for 5 days\n    husband_ate = husband_per_day * husband_days\n\n    # L3\n    total_brownies = 24 # cut it into 24 pieces\n    guests_ate = 4 # shared 4 with dinner guests\n    brownies_left = total_brownies - tina_ate - husband_ate - guests_ate\n\n    # FA\n    answer = brownies_left\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "husband_ate",
+    "operand_to_replace": "husband_days",
+    "replacement_variable": "husband_per_day"
+  },
+  "correct_trace": {
+    "tina_per_day": 2,
+    "tina_days": 5,
+    "tina_ate": 10,
+    "husband_per_day": 1,
+    "husband_days": 5,
+    "husband_ate": 5,
+    "total_brownies": 24,
+    "guests_ate": 4,
+    "brownies_left": 5,
+    "answer": 5
+  },
+  "flawed_trace": {
+    "tina_per_day": 2,
+    "tina_days": 5,
+    "tina_ate": 10,
+    "husband_per_day": 1,
+    "husband_days": 5,
+    "husband_ate": 1,
+    "total_brownies": 24,
+    "guests_ate": 4,
+    "brownies_left": 9,
+    "answer": 9
+  },
+  "correct_value": 5,
+  "flawed_value": 1,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "tina_per_day",
+        "tina_days"
+      ],
+      "WK_inputs": [],
+      "output_variable": "tina_ate",
+      "solution_line_template": "Tina ate one twice a day for 5 days so {tina_per_day}*{tina_days} = <<1*2*5={tina_ate}>>{tina_ate}"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "husband_per_day",
+        "husband_days"
+      ],
+      "WK_inputs": [],
+      "output_variable": "husband_ate",
+      "solution_line_template": "Her husband at 1 per day for 5 days so {husband_per_day}*{husband_days} = <<1*5={husband_ate}>>{husband_ate}"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "total_brownies",
+        "guests_ate"
+      ],
+      "WK_inputs": [],
+      "output_variable": "brownies_left",
+      "solution_line_template": "She made {total_brownies}, ate {tina_ate}, her husband ate {husband_ate} and the guests ate {guests_ate} so {total_brownies}-{tina_ate}-{husband_ate}-{guests_ate} = <<{total_brownies}-{tina_ate}-{husband_ate}-{guests_ate}={brownies_left}>>{brownies_left} brownies left"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Tina ate one twice a day for 5 days so 2*5 = <<1*2*5=10>>10",
+    "L2": "Her husband at 1 per day for 5 days so 1*1 = <<1*5=1>>1",
+    "L3": "She made 24, ate 10, her husband ate 1 and the guests ate 4 so 24-10-1-4 = <<24-10-1-4=9>>9 brownies left",
+    "FA": "#### 9"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'husband_per_day' (1) was used instead of 'husband_days' (5).",
+  "repro_seed": -7555865602671875153,
+  "model_name": "openai_gpt-4.1"
+}

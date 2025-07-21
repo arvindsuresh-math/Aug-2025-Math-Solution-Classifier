@@ -1,0 +1,79 @@
+{
+  "index": 7136,
+  "original_solution_mapping": {
+    "FA": "#### 168",
+    "L1": "There are 48 cookies because 12 x 4 = <<12*4=48>>48",
+    "L2": "There are 24 cookies left because 48/2=<<24=24>>24",
+    "L3": "There are 168 chips left because 24 x 7 = <<24*7=168>>168"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7136.\n    Returns: the total number of chips left uneaten.\n    \"\"\"\n    # L1\n    dozen = 12 # WK\n    num_dozens = 4 # 4 dozen in total\n    total_cookies = dozen * num_dozens\n\n    # L2\n    eaten_divisor = 2 # half the cookies\n    remaining_cookies = total_cookies / eaten_divisor\n\n    # L3\n    chips_per_cookie = 7 # exactly 7 chips\n    remaining_chips = remaining_cookies * chips_per_cookie\n\n    # FA\n    answer = remaining_chips\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "remaining_chips",
+    "operand_to_replace": "chips_per_cookie",
+    "replacement_variable": "remaining_cookies"
+  },
+  "correct_trace": {
+    "dozen": 12,
+    "num_dozens": 4,
+    "total_cookies": 48,
+    "eaten_divisor": 2,
+    "remaining_cookies": 24.0,
+    "chips_per_cookie": 7,
+    "remaining_chips": 168.0,
+    "answer": 168.0
+  },
+  "flawed_trace": {
+    "dozen": 12,
+    "num_dozens": 4,
+    "total_cookies": 48,
+    "eaten_divisor": 2,
+    "remaining_cookies": 24.0,
+    "chips_per_cookie": 7,
+    "remaining_chips": 576.0,
+    "answer": 576.0
+  },
+  "correct_value": 168.0,
+  "flawed_value": 576.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "dozen"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_cookies",
+      "question_inputs": [
+        "num_dozens"
+      ],
+      "solution_line_template": "There are {total_cookies} cookies because {dozen} x {num_dozens} = <<{dozen}*{num_dozens}={total_cookies}>>{total_cookies}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_cookies",
+      "question_inputs": [
+        "eaten_divisor"
+      ],
+      "solution_line_template": "There are {remaining_cookies} cookies left because {total_cookies}/{eaten_divisor}=<<{total_cookies}/{eaten_divisor}={remaining_cookies}>>{remaining_cookies}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_chips",
+      "question_inputs": [
+        "chips_per_cookie"
+      ],
+      "solution_line_template": "There are {remaining_chips} chips left because {remaining_cookies} x {chips_per_cookie} = <<{remaining_cookies}*{chips_per_cookie}={remaining_chips}>>{remaining_chips}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 48 cookies because 12 x 4 = <<12*4=48>>48",
+    "L2": "There are 24 cookies left because 48/2=<<48/2=24>>24",
+    "L3": "There are 576 chips left because 24 x 24 = <<24*24=576>>576",
+    "FA": "#### 576"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'remaining_cookies' (24.0) was used instead of 'chips_per_cookie' (7).",
+  "repro_seed": -5880368120355436370,
+  "model_name": "google_gemini-2.5-flash"
+}

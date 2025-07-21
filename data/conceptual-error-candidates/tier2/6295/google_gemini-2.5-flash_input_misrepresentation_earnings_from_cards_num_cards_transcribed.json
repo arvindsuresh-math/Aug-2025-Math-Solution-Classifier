@@ -1,0 +1,80 @@
+{
+  "index": 6295,
+  "original_solution_mapping": {
+    "FA": "#### 160",
+    "L1": "For 200 cards he earns .70*200=<<.70*200=140>>140 dollars",
+    "L2": "Since he transcribes 200 cards his bonus is 10*2=20 dollars",
+    "L3": "In total he earns 140+20=<<140+20=160>>160 dollars"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6295.\n    Returns: the total amount earned including bonuses.\n    \"\"\"\n    # L1\n    recipe_card_cost_per_card = 0.70 # 70 cents for each recipe card\n    num_cards_transcribed = 200 # transcribes 200 cards\n    earnings_from_cards = recipe_card_cost_per_card * num_cards_transcribed\n\n    # L2\n    bonus_amount_per_unit = 10 # 10 dollar bonus\n    cards_per_bonus_unit = 100 # transcribes 100 cards\n    num_bonus_units = num_cards_transcribed / cards_per_bonus_unit\n    total_bonus = bonus_amount_per_unit * num_bonus_units\n\n    # L3\n    total_earnings = earnings_from_cards + total_bonus\n\n    # FA\n    answer = total_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "earnings_from_cards",
+    "operand_to_replace": "recipe_card_cost_per_card",
+    "replacement_variable": "num_cards_transcribed"
+  },
+  "correct_trace": {
+    "recipe_card_cost_per_card": 0.7,
+    "num_cards_transcribed": 200,
+    "earnings_from_cards": 140.0,
+    "bonus_amount_per_unit": 10,
+    "cards_per_bonus_unit": 100,
+    "num_bonus_units": 2.0,
+    "total_bonus": 20.0,
+    "total_earnings": 160.0,
+    "answer": 160.0
+  },
+  "flawed_trace": {
+    "recipe_card_cost_per_card": 0.7,
+    "num_cards_transcribed": 200,
+    "earnings_from_cards": 40000,
+    "bonus_amount_per_unit": 10,
+    "cards_per_bonus_unit": 100,
+    "num_bonus_units": 2.0,
+    "total_bonus": 20.0,
+    "total_earnings": 40020.0,
+    "answer": 40020.0
+  },
+  "correct_value": 140.0,
+  "flawed_value": 40000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "earnings_from_cards",
+      "question_inputs": [
+        "recipe_card_cost_per_card",
+        "num_cards_transcribed"
+      ],
+      "solution_line_template": "For {num_cards_transcribed} cards he earns {recipe_card_cost_per_card}*{num_cards_transcribed}=<<{recipe_card_cost_per_card}*{num_cards_transcribed}={earnings_from_cards}>>{earnings_from_cards} dollars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_bonus",
+      "question_inputs": [
+        "num_cards_transcribed",
+        "bonus_amount_per_unit",
+        "cards_per_bonus_unit"
+      ],
+      "solution_line_template": "Since he transcribes {num_cards_transcribed} cards his bonus is {bonus_amount_per_unit}*{num_bonus_units}={total_bonus} dollars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_earnings",
+      "question_inputs": [],
+      "solution_line_template": "In total he earns {earnings_from_cards}+{total_bonus}=<<{earnings_from_cards}+{total_bonus}={total_earnings}>>{total_earnings} dollars"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "For 200 cards he earns 200*200=<<200*200=40000>>40000 dollars",
+    "L2": "Since he transcribes 200 cards his bonus is 10*2=20 dollars",
+    "L3": "In total he earns 40000+20=<<40000+20=40020>>40020 dollars",
+    "FA": "#### 40020"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'num_cards_transcribed' (200) was used instead of 'recipe_card_cost_per_card' (0.7).",
+  "repro_seed": 6504507813033033848,
+  "model_name": "google_gemini-2.5-flash"
+}

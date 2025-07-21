@@ -1,0 +1,93 @@
+{
+  "index": 6363,
+  "original_solution_mapping": {
+    "FA": "#### 32",
+    "L1": "In inches, the height of the rim is 10*12 = <<10*12=120>>120 inches.",
+    "L2": "Thus, the height that the player needs to be able to reach is 120 + 6 = <<120+6=126>>126 inches.",
+    "L3": "Without jumping, the player can reach their height plus an additional 22 inches, or a total of 6*12 + 22 = <<6*12+22=94>>94 inches.",
+    "L4": "Therefore, the player needs to jump 126 - 94 = <<126-94=32>>32 inches to reach the height required to dunk a basketball."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6363.\n    Returns: the height the player must be able to jump to dunk a basketball.\n    \"\"\"\n    # L1\n    rim_height_feet = 10 # The rim of a standard basketball hoop is 10 feet above the ground\n    inches_per_foot = 12 # WK\n    rim_height_inches = rim_height_feet * inches_per_foot\n\n    # L2\n    inches_above_rim_needed = 6 # reach at least 6 inches above the rim\n    total_reach_needed = rim_height_inches + inches_above_rim_needed\n\n    # L3\n    player_height_feet = 6 # player is 6 feet tall\n    reach_above_head = 22 # can reach 22 inches above their head\n    player_standing_reach = player_height_feet * inches_per_foot + reach_above_head\n\n    # L4\n    jump_height_needed = total_reach_needed - player_standing_reach\n\n    # FA\n    answer = jump_height_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_reach_needed",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x169c248d0>"
+  },
+  "correct_trace": {
+    "rim_height_feet": 10,
+    "inches_per_foot": 12,
+    "rim_height_inches": 120,
+    "inches_above_rim_needed": 6,
+    "total_reach_needed": 126,
+    "player_height_feet": 6,
+    "reach_above_head": 22,
+    "player_standing_reach": 94,
+    "jump_height_needed": 32,
+    "answer": 32
+  },
+  "flawed_trace": {
+    "rim_height_feet": 10,
+    "inches_per_foot": 12,
+    "rim_height_inches": 120,
+    "inches_above_rim_needed": 6,
+    "total_reach_needed": 114,
+    "player_height_feet": 6,
+    "reach_above_head": 22,
+    "player_standing_reach": 94,
+    "jump_height_needed": 20,
+    "answer": 20
+  },
+  "correct_value": 126,
+  "flawed_value": 114,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "inches_per_foot"
+      ],
+      "line_number": "L1",
+      "output_variable": "rim_height_inches",
+      "question_inputs": [
+        "rim_height_feet"
+      ],
+      "solution_line_template": "In inches, the height of the rim is {rim_height_feet}*{inches_per_foot} = <<{rim_height_feet}*{inches_per_foot}={rim_height_inches}>>{rim_height_inches} inches."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_reach_needed",
+      "question_inputs": [
+        "inches_above_rim_needed"
+      ],
+      "solution_line_template": "Thus, the height that the player needs to be able to reach is {rim_height_inches} + {inches_above_rim_needed} = <<{rim_height_inches}+{inches_above_rim_needed}={total_reach_needed}>>{total_reach_needed} inches."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "player_standing_reach",
+      "question_inputs": [
+        "player_height_feet",
+        "reach_above_head"
+      ],
+      "solution_line_template": "Without jumping, the player can reach their height plus an additional {reach_above_head} inches, or a total of {player_height_feet}*{inches_per_foot} + {reach_above_head} = <<{player_height_feet}*{inches_per_foot}+{reach_above_head}={player_standing_reach}>>{player_standing_reach} inches."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "jump_height_needed",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, the player needs to jump {total_reach_needed} - {player_standing_reach} = <<{total_reach_needed}-{player_standing_reach}={jump_height_needed}>>{jump_height_needed} inches to reach the height required to dunk a basketball."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In inches, the height of the rim is 10*12 = <<10*12=120>>120 inches.",
+    "L2": "Thus, the height that the player needs to be able to reach is 120 + 6 = <<120+6=114>>114 inches.",
+    "L3": "Without jumping, the player can reach their height plus an additional 22 inches, or a total of 6*12 + 22 = <<6*12+22=94>>94 inches.",
+    "L4": "Therefore, the player needs to jump 114 - 94 = <<114-94=20>>20 inches to reach the height required to dunk a basketball.",
+    "FA": "#### 20"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": 2483773015321668063,
+  "model_name": "google_gemini-2.5-flash"
+}

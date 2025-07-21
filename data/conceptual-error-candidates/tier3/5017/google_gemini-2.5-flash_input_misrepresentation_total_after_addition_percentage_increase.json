@@ -1,0 +1,85 @@
+{
+  "index": 5017,
+  "original_solution_mapping": {
+    "FA": "#### 180",
+    "L1": "When Joe added 20% more data points to the dataset, the data points in the dataset increased by 20/100*200 = <<20/100*200=40>>40 data points.",
+    "L2": "The total number of data points increased to 200+40 = <<200+40=240>>240",
+    "L3": "If he reduced the data points by 1/4 of the total data points, the data points reduced by 1/4*240 =60",
+    "L4": "The total number of data points left in the dataset after Joe reduced the data points by 1/4 of the total data points is 240-60= <<240-60=180>>180"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5017.\n    Returns: the total number of data points the dataset contains.\n    \"\"\"\n    # L1\n    percentage_increase = Fraction(20, 100) # 20% more data points\n    initial_data_points = 200 # 200 data points\n    added_data_points = percentage_increase * initial_data_points\n\n    # L2\n    total_after_addition = initial_data_points + added_data_points\n\n    # L3\n    reduction_fraction = Fraction(1, 4) # 1/4 of the total data points\n    reduced_data_points = reduction_fraction * total_after_addition\n\n    # L4\n    final_data_points = total_after_addition - reduced_data_points\n\n    # FA\n    answer = final_data_points\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_after_addition",
+    "operand_to_replace": "initial_data_points",
+    "replacement_variable": "percentage_increase"
+  },
+  "correct_trace": {
+    "percentage_increase": "1/5",
+    "initial_data_points": 200,
+    "added_data_points": "40",
+    "total_after_addition": "240",
+    "reduction_fraction": "1/4",
+    "reduced_data_points": "60",
+    "final_data_points": "180",
+    "answer": "180"
+  },
+  "flawed_trace": {
+    "percentage_increase": "1/5",
+    "initial_data_points": 200,
+    "added_data_points": "40",
+    "total_after_addition": "201/5",
+    "reduction_fraction": "1/4",
+    "reduced_data_points": "201/20",
+    "final_data_points": "603/20",
+    "answer": "603/20"
+  },
+  "correct_value": "240",
+  "flawed_value": "201/5",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "added_data_points",
+      "question_inputs": [
+        "percentage_increase",
+        "initial_data_points"
+      ],
+      "solution_line_template": "When Joe added {percentage_increase} more data points to the dataset, the data points in the dataset increased by {percentage_increase}*{initial_data_points} = <<{percentage_increase}*{initial_data_points}={added_data_points}>>{added_data_points} data points."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_after_addition",
+      "question_inputs": [],
+      "solution_line_template": "The total number of data points increased to {initial_data_points}+{added_data_points} = <<{initial_data_points}+{added_data_points}={total_after_addition}>>{total_after_addition}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "reduced_data_points",
+      "question_inputs": [
+        "reduction_fraction"
+      ],
+      "solution_line_template": "If he reduced the data points by {reduction_fraction} of the total data points, the data points reduced by {reduction_fraction}*{total_after_addition} ={reduced_data_points}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_data_points",
+      "question_inputs": [],
+      "solution_line_template": "The total number of data points left in the dataset after Joe reduced the data points by {reduction_fraction} of the total data points is {total_after_addition}-{reduced_data_points}= <<{total_after_addition}-{reduced_data_points}={final_data_points}>>{final_data_points}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "When Joe added 20/100 more data points to the dataset, the data points in the dataset increased by 20/100*200 = <<20/100*200=40>>40 data points.",
+    "L2": "The total number of data points increased to 20/100+40 = <<20/100+40=201/5>>201/5",
+    "L3": "If he reduced the data points by 1/4 of the total data points, the data points reduced by 1/4*201/5 =201/20",
+    "L4": "The total number of data points left in the dataset after Joe reduced the data points by 1/4 of the total data points is 201/5-201/20= <<201/5-201/20=603/20>>603/20",
+    "FA": "#### 603/20"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'percentage_increase' (20/100) was used instead of 'initial_data_points' (200).",
+  "repro_seed": 9126895429717642685,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,116 @@
+{
+  "index": 2421,
+  "original_solution_mapping": {
+    "FA": "#### 70",
+    "L1": "He runs at .1 miles per minute because 6 / 60 = <<6/60=.1>>.1",
+    "L2": "While the album is playing he can run 4 miles because 40 x .1 = <<40*.1=4>>4",
+    "L3": "He has to run 2 miles without the album because 6 - 4 = <<6-4=2>>2",
+    "L4": "Without music he runs 1/15 miles per minute because 4 / 60 = 1/15",
+    "L5": "He will run the remaining 2 miles in 30 minutes because 2 / (1/15) = <<2/(1/15)=30>>30",
+    "L6": "It will take him 70 minutes in total because 40 + 30 =<<40+30=70>>70"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2421.\n    Returns: the total time to jog 6 miles.\n    \"\"\"\n    # L1\n    speed_music_mph = 6 # runs at 6 MPH when he's got music on\n    minutes_per_hour = 60 # WK\n    speed_music_mpm = speed_music_mph / minutes_per_hour\n\n    # L2\n    album_length_minutes = 40 # His album is 40 minutes long\n    distance_with_music = album_length_minutes * speed_music_mpm\n\n    # L3\n    total_distance_miles = 6 # jog 6 miles\n    remaining_distance = total_distance_miles - distance_with_music\n\n    # L4\n    speed_no_music_mph = 4 # 4 MPH when he doesn't\n    speed_no_music_mpm = Fraction(speed_no_music_mph, minutes_per_hour)\n\n    # L5\n    time_no_music = remaining_distance / speed_no_music_mpm\n\n    # L6\n    total_time_minutes = album_length_minutes + time_no_music\n\n    # FA\n    answer = total_time_minutes\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_time_minutes",
+    "operand_to_replace": "time_no_music",
+    "replacement_variable": "speed_music_mph"
+  },
+  "correct_trace": {
+    "speed_music_mph": 6,
+    "minutes_per_hour": 60,
+    "speed_music_mpm": 0.1,
+    "album_length_minutes": 40,
+    "distance_with_music": 4.0,
+    "total_distance_miles": 6,
+    "remaining_distance": 2.0,
+    "speed_no_music_mph": 4,
+    "speed_no_music_mpm": "1/15",
+    "time_no_music": 30.0,
+    "total_time_minutes": 70.0,
+    "answer": 70.0
+  },
+  "flawed_trace": {
+    "speed_music_mph": 6,
+    "minutes_per_hour": 60,
+    "speed_music_mpm": 0.1,
+    "album_length_minutes": 40,
+    "distance_with_music": 4.0,
+    "total_distance_miles": 6,
+    "remaining_distance": 2.0,
+    "speed_no_music_mph": 4,
+    "speed_no_music_mpm": "1/15",
+    "time_no_music": 30.0,
+    "total_time_minutes": 46,
+    "answer": 46
+  },
+  "correct_value": 70.0,
+  "flawed_value": 46,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "speed_music_mpm",
+      "question_inputs": [
+        "speed_music_mph"
+      ],
+      "solution_line_template": "He runs at {speed_music_mpm} miles per minute because {speed_music_mph} / {minutes_per_hour} = <<{speed_music_mph}/{minutes_per_hour}={speed_music_mpm}>>{speed_music_mpm}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "distance_with_music",
+      "question_inputs": [
+        "album_length_minutes"
+      ],
+      "solution_line_template": "While the album is playing he can run {distance_with_music} miles because {album_length_minutes} x {speed_music_mpm} = <<{album_length_minutes}*{speed_music_mpm}={distance_with_music}>>{distance_with_music}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_distance",
+      "question_inputs": [
+        "total_distance_miles"
+      ],
+      "solution_line_template": "He has to run {remaining_distance} miles without the album because {total_distance_miles} - {distance_with_music} = <<{total_distance_miles}-{distance_with_music}={remaining_distance}>>{remaining_distance}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "speed_no_music_mpm",
+      "question_inputs": [
+        "speed_no_music_mph"
+      ],
+      "solution_line_template": "Without music he runs {speed_no_music_mpm} miles per minute because {speed_no_music_mph} / {minutes_per_hour} = {speed_no_music_mpm}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "time_no_music",
+      "question_inputs": [],
+      "solution_line_template": "He will run the remaining {remaining_distance} miles in {time_no_music} minutes because {remaining_distance} / ({speed_no_music_mpm}) = <<{remaining_distance}/({speed_no_music_mpm})={time_no_music}>>{time_no_music}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_time_minutes",
+      "question_inputs": [],
+      "solution_line_template": "It will take him {total_time_minutes} minutes in total because {album_length_minutes} + {time_no_music} =<<{album_length_minutes}+{time_no_music}={total_time_minutes}>>{total_time_minutes}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He runs at 0.1 miles per minute because 6 / 60 = <<6/60=0.1>>0.1",
+    "L2": "While the album is playing he can run 4 miles because 40 x 0.1 = <<40*0.1=4>>4",
+    "L3": "He has to run 2 miles without the album because 6 - 4 = <<6-4=2>>2",
+    "L4": "Without music he runs 4/60 miles per minute because 4 / 60 = 4/60",
+    "L5": "He will run the remaining 2 miles in 30 minutes because 2 / (4/60) = <<2/(4/60)=30>>30",
+    "L6": "It will take him 46 minutes in total because 40 + 6 =<<40+6=46>>46",
+    "FA": "#### 46"
+  },
+  "erroneous_line_number": "L6",
+  "explanation": "Incorrect operand. The variable 'speed_music_mph' (value: 6) was used instead of 'time_no_music' (value: 30.0).",
+  "repro_seed": 4574911323472120468,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,119 @@
+{
+  "index": 4407,
+  "original_solution_mapping": {
+    "FA": "#### 6,600",
+    "L1": "In a day, the total number of new pins is 10*20= <<10*20=200>>200.",
+    "L2": "There will be 30*200 = <<30*200=6000>>6000 new pins after a month.",
+    "L3": "The total number with old pins present is 6000+1000 = <<6000+1000=7000>>7000 pins",
+    "L4": "If the owner deletes five pins every week, the total number of deleted pins in a week is 5*20 = <<5*20=100>>100 pins.",
+    "L5": "After a month, the number of deleted pins will be 100*4 = <<100*4=400>>400",
+    "L6": "The number of pins after the old pins are deleted is 7000-400 = <<7000-400=6600>>6600 pins"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4407.\n    Returns: the number of pins after Reese had been a member for a month.\n    \"\"\"\n    # L1\n    avg_pins_per_day_per_member = 10 # 10 pins per day\n    num_people_in_group = 20 # group has 20 people\n    total_new_pins_per_day = avg_pins_per_day_per_member * num_people_in_group\n\n    # L2\n    days_in_month = 30 # WK\n    total_new_pins_after_month = days_in_month * total_new_pins_per_day\n\n    # L3\n    initial_total_pins = 1000 # total number of pins is 1000\n    total_pins_before_deletion = total_new_pins_after_month + initial_total_pins\n\n    # L4\n    deleted_pins_per_week_per_person = 5 # 5 pins per week per person\n    total_deleted_pins_per_week = deleted_pins_per_week_per_person * num_people_in_group\n\n    # L5\n    weeks_in_month = 4 # WK\n    total_deleted_pins_after_month = total_deleted_pins_per_week * weeks_in_month\n\n    # L6\n    final_pins = total_pins_before_deletion - total_deleted_pins_after_month\n\n    # FA\n    answer = final_pins\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_new_pins_after_month",
+    "operand_to_replace": "total_new_pins_per_day",
+    "replacement_variable": "days_in_month"
+  },
+  "correct_trace": {
+    "avg_pins_per_day_per_member": 10,
+    "num_people_in_group": 20,
+    "total_new_pins_per_day": 200,
+    "days_in_month": 30,
+    "total_new_pins_after_month": 6000,
+    "initial_total_pins": 1000,
+    "total_pins_before_deletion": 7000,
+    "deleted_pins_per_week_per_person": 5,
+    "total_deleted_pins_per_week": 100,
+    "weeks_in_month": 4,
+    "total_deleted_pins_after_month": 400,
+    "final_pins": 6600,
+    "answer": 6600
+  },
+  "flawed_trace": {
+    "avg_pins_per_day_per_member": 10,
+    "num_people_in_group": 20,
+    "total_new_pins_per_day": 200,
+    "days_in_month": 30,
+    "total_new_pins_after_month": 900,
+    "initial_total_pins": 1000,
+    "total_pins_before_deletion": 1900,
+    "deleted_pins_per_week_per_person": 5,
+    "total_deleted_pins_per_week": 100,
+    "weeks_in_month": 4,
+    "total_deleted_pins_after_month": 400,
+    "final_pins": 1500,
+    "answer": 1500
+  },
+  "correct_value": 6000,
+  "flawed_value": 900,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_new_pins_per_day",
+      "question_inputs": [
+        "avg_pins_per_day_per_member",
+        "num_people_in_group"
+      ],
+      "solution_line_template": "In a day, the total number of new pins is {avg_pins_per_day_per_member}*{num_people_in_group}= <<{avg_pins_per_day_per_member}*{num_people_in_group}={total_new_pins_per_day}>>{total_new_pins_per_day}."
+    },
+    {
+      "WK_inputs": [
+        "days_in_month"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_new_pins_after_month",
+      "question_inputs": [],
+      "solution_line_template": "There will be {days_in_month}*{total_new_pins_per_day} = <<{days_in_month}*{total_new_pins_per_day}={total_new_pins_after_month}>>{total_new_pins_after_month} new pins after a month."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_pins_before_deletion",
+      "question_inputs": [
+        "initial_total_pins"
+      ],
+      "solution_line_template": "The total number with old pins present is {total_new_pins_after_month}+{initial_total_pins} = <<{total_new_pins_after_month}+{initial_total_pins}={total_pins_before_deletion}>>{total_pins_before_deletion} pins"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_deleted_pins_per_week",
+      "question_inputs": [
+        "deleted_pins_per_week_per_person"
+      ],
+      "solution_line_template": "If the owner deletes five pins every week, the total number of deleted pins in a week is {deleted_pins_per_week_per_person}*{num_people_in_group} = <<{deleted_pins_per_week_per_person}*{num_people_in_group}={total_deleted_pins_per_week}>>{total_deleted_pins_per_week} pins."
+    },
+    {
+      "WK_inputs": [
+        "weeks_in_month"
+      ],
+      "line_number": "L5",
+      "output_variable": "total_deleted_pins_after_month",
+      "question_inputs": [],
+      "solution_line_template": "After a month, the number of deleted pins will be {total_deleted_pins_per_week}*{weeks_in_month} = <<{total_deleted_pins_per_week}*{weeks_in_month}={total_deleted_pins_after_month}>>{total_deleted_pins_after_month}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "final_pins",
+      "question_inputs": [],
+      "solution_line_template": "The number of pins after the old pins are deleted is {total_pins_before_deletion}-{total_deleted_pins_after_month} = <<{total_pins_before_deletion}-{total_deleted_pins_after_month}={final_pins}>>{final_pins} pins"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In a day, the total number of new pins is 10*20= <<10*20=200>>200.",
+    "L2": "There will be 30*30 = <<30*30=900>>900 new pins after a month.",
+    "L3": "The total number with old pins present is 900+1000 = <<900+1000=1900>>1900 pins",
+    "L4": "If the owner deletes five pins every week, the total number of deleted pins in a week is 5*20 = <<5*20=100>>100 pins.",
+    "L5": "After a month, the number of deleted pins will be 100*4 = <<100*4=400>>400",
+    "L6": "The number of pins after the old pins are deleted is 1900-400 = <<1900-400=1500>>1500 pins",
+    "FA": "#### 1500"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'days_in_month' (value: 30) was used instead of 'total_new_pins_per_day' (value: 200).",
+  "repro_seed": -211345597653282520,
+  "model_name": "google_gemini-2.5-flash"
+}

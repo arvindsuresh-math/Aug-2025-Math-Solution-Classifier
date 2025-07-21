@@ -1,0 +1,89 @@
+{
+  "index": 5059,
+  "original_solution_mapping": {
+    "FA": "#### 800",
+    "L1": "He bought all the toys for 20*200=$<<20*200=4000>>4000",
+    "L2": "He sold 200*.8=<<200*.8=160>>160 toys",
+    "L3": "He made 160*30=$<<160*30=4800>>4800 from selling them",
+    "L4": "So he profits 4800-4000=$<<4800-4000=800>>800 profit"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5059.\n    Returns: how much more money he had compared to before he bought the toys.\n    \"\"\"\n    # L1\n    buy_price_per_toy = 20 # bought them for $20 each\n    total_toys = 200 # had 200 toys\n    total_purchase_cost = buy_price_per_toy * total_toys\n\n    # L2\n    toys_sold_percent = 0.8 # sell 80% of his toys\n    num_toys_sold = total_toys * toys_sold_percent\n\n    # L3\n    sell_price_per_toy = 30 # sells them for $30 each\n    total_sales_revenue = num_toys_sold * sell_price_per_toy\n\n    # L4\n    profit = total_sales_revenue - total_purchase_cost\n\n    # FA\n    answer = profit\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "profit",
+    "operand_to_replace": "total_purchase_cost",
+    "replacement_variable": "num_toys_sold"
+  },
+  "correct_trace": {
+    "buy_price_per_toy": 20,
+    "total_toys": 200,
+    "total_purchase_cost": 4000,
+    "toys_sold_percent": 0.8,
+    "num_toys_sold": 160.0,
+    "sell_price_per_toy": 30,
+    "total_sales_revenue": 4800.0,
+    "profit": 800.0,
+    "answer": 800.0
+  },
+  "flawed_trace": {
+    "buy_price_per_toy": 20,
+    "total_toys": 200,
+    "total_purchase_cost": 4000,
+    "toys_sold_percent": 0.8,
+    "num_toys_sold": 160.0,
+    "sell_price_per_toy": 30,
+    "total_sales_revenue": 4800.0,
+    "profit": 4640.0,
+    "answer": 4640.0
+  },
+  "correct_value": 800.0,
+  "flawed_value": 4640.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_purchase_cost",
+      "question_inputs": [
+        "buy_price_per_toy",
+        "total_toys"
+      ],
+      "solution_line_template": "He bought all the toys for {buy_price_per_toy}*{total_toys}=$<<{buy_price_per_toy}*{total_toys}={total_purchase_cost}>>{total_purchase_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_toys_sold",
+      "question_inputs": [
+        "toys_sold_percent"
+      ],
+      "solution_line_template": "He sold {total_toys}*{toys_sold_percent}=<<{total_toys}*{toys_sold_percent}={num_toys_sold}>>{num_toys_sold} toys"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_sales_revenue",
+      "question_inputs": [
+        "sell_price_per_toy"
+      ],
+      "solution_line_template": "He made {num_toys_sold}*{sell_price_per_toy}=$<<{num_toys_sold}*{sell_price_per_toy}={total_sales_revenue}>>{total_sales_revenue} from selling them"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "profit",
+      "question_inputs": [],
+      "solution_line_template": "So he profits {total_sales_revenue}-{total_purchase_cost}=$<<{total_sales_revenue}-{total_purchase_cost}={profit}>>{profit} profit"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He bought all the toys for 20*200=$<<20*200=4000>>4000",
+    "L2": "He sold 200*0.8=<<200*0.8=160>>160 toys",
+    "L3": "He made 160*30=$<<160*30=4800>>4800 from selling them",
+    "L4": "So he profits 4800-160=$<<4800-160=4640>>4640 profit",
+    "FA": "#### 4640"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'num_toys_sold' (value: 160.0) was used instead of 'total_purchase_cost' (value: 4000).",
+  "repro_seed": -3279123312815126964,
+  "model_name": "google_gemini-2.5-flash"
+}

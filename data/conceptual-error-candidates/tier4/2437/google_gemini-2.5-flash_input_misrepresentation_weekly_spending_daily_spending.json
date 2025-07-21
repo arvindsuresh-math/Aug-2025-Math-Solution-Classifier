@@ -1,0 +1,103 @@
+{
+  "index": 2437,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "She spend $56 because 7 x 8 = <<7*8=56>>56",
+    "L2": "She has $44 left in the bank because 100 - 56 = <<100-56=44>>44",
+    "L3": "She can get 8 five dollar bills because 44 / 5 = <<44/5=8.8>>8.8",
+    "L4": "This is equal to $40 because 8 x 5 = <<8*5=40>>40",
+    "L5": "She has $4 left in the account because 44 - 40 = <<44-40=4>>4"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2437.\n    Returns: the number of dollars remaining in the account.\n    \"\"\"\n    # L1\n    days_in_week = 7 # WK\n    daily_spending = 8 # she spends $8\n    weekly_spending = days_in_week * daily_spending\n\n    # L2\n    initial_balance = 100 # Emma's bank account has $100 in it\n    balance_after_spending = initial_balance - weekly_spending\n\n    # L3\n    bill_denomination = 5 # $5 bills\n    num_bills_float = balance_after_spending / bill_denomination\n    num_bills_to_take = int(num_bills_float) # as many $5 bills as her account can give her\n\n    # L4\n    amount_withdrawn = num_bills_to_take * bill_denomination\n\n    # L5\n    remaining_balance = balance_after_spending - amount_withdrawn\n\n    # FA\n    answer = remaining_balance\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "weekly_spending",
+    "operand_to_replace": "days_in_week",
+    "replacement_variable": "daily_spending"
+  },
+  "correct_trace": {
+    "days_in_week": 7,
+    "daily_spending": 8,
+    "weekly_spending": 56,
+    "initial_balance": 100,
+    "balance_after_spending": 44,
+    "bill_denomination": 5,
+    "num_bills_float": 8.8,
+    "num_bills_to_take": 8,
+    "amount_withdrawn": 40,
+    "remaining_balance": 4,
+    "answer": 4
+  },
+  "flawed_trace": {
+    "days_in_week": 7,
+    "daily_spending": 8,
+    "weekly_spending": 64,
+    "initial_balance": 100,
+    "balance_after_spending": 36,
+    "bill_denomination": 5,
+    "num_bills_float": 7.2,
+    "num_bills_to_take": 7,
+    "amount_withdrawn": 35,
+    "remaining_balance": 1,
+    "answer": 1
+  },
+  "correct_value": 56,
+  "flawed_value": 64,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "days_in_week"
+      ],
+      "line_number": "L1",
+      "output_variable": "weekly_spending",
+      "question_inputs": [
+        "daily_spending"
+      ],
+      "solution_line_template": "She spend $56 because {days_in_week} x {daily_spending} = <<{days_in_week}*{daily_spending}={weekly_spending}>>{weekly_spending}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "balance_after_spending",
+      "question_inputs": [
+        "initial_balance"
+      ],
+      "solution_line_template": "She has $44 left in the bank because {initial_balance} - {weekly_spending} = <<{initial_balance}-{weekly_spending}={balance_after_spending}>>{balance_after_spending}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_bills_float",
+      "question_inputs": [
+        "bill_denomination"
+      ],
+      "solution_line_template": "She can get 8 five dollar bills because {balance_after_spending} / {bill_denomination} = <<{balance_after_spending}/{bill_denomination}={num_bills_float}>>{num_bills_float}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "amount_withdrawn",
+      "question_inputs": [],
+      "solution_line_template": "This is equal to $40 because {num_bills_to_take} x {bill_denomination} = <<{num_bills_to_take}*{bill_denomination}={amount_withdrawn}>>{amount_withdrawn}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "remaining_balance",
+      "question_inputs": [],
+      "solution_line_template": "She has $4 left in the account because {balance_after_spending} - {amount_withdrawn} = <<{balance_after_spending}-{amount_withdrawn}={remaining_balance}>>{remaining_balance}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She spend $56 because 8 x 8 = <<8*8=64>>64",
+    "L2": "She has $44 left in the bank because 100 - 64 = <<100-64=36>>36",
+    "L3": "She can get 8 five dollar bills because 36 / 5 = <<36/5=7.2>>7.2",
+    "L4": "This is equal to $40 because 7 x 5 = <<7*5=35>>35",
+    "L5": "She has $4 left in the account because 36 - 35 = <<36-35=1>>1",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'daily_spending' (8) was used instead of 'days_in_week' (7).",
+  "repro_seed": -494220616974902576,
+  "model_name": "google_gemini-2.5-flash"
+}

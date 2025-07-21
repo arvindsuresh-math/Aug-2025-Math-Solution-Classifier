@@ -1,0 +1,140 @@
+{
+  "index": 2278,
+  "original_solution_mapping": {
+    "FA": "#### 1500",
+    "L1": "Johnny spends 6/3=2 hours walking the 6 dogs who have 60-minute walks.",
+    "L2": "He makes $20*6=$<<20*6=120>>120 for these walks.",
+    "L3": "Thus, he has 4-2=2 hours=120 minutes left to walk the other dogs.",
+    "L4": "He can walk 3*(120/30)=<<3*(120/30)=12>>12 dogs in this time.",
+    "L5": "Thus, he will make $15*12=$<<12*15=180>>180 on these walks.",
+    "L6": "In total per day, he makes $120+$180=$<<120+180=300>>300 per day.",
+    "L7": "Thus, during the week, he makes $300*5=$<<300*5=1500>>1500."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2278.\n    Returns: the total money Johnny makes in a week.\n    \"\"\"\n    # L1\n    num_60min_dogs = 6 # 6 dogs have 60-minute walks\n    dogs_per_walk = 3 # He can walk 3 dogs at once\n    hours_for_60min_walks = num_60min_dogs / dogs_per_walk\n\n    # L2\n    pay_per_60min_walk = 20 # $20 for a 60-minute walk\n    earnings_60min_walks = pay_per_60min_walk * num_60min_dogs\n\n    # L3\n    total_daily_work_hours = 4 # works for 4 hours per day\n    remaining_hours = total_daily_work_hours - hours_for_60min_walks\n    minutes_per_hour = 60 # WK\n    remaining_minutes = remaining_hours * minutes_per_hour\n\n    # L4\n    duration_30min_walk = 30 # 30-minute walk\n    num_dogs_30min_walks = dogs_per_walk * (remaining_minutes / duration_30min_walk)\n\n    # L5\n    pay_per_30min_walk = 15 # $15 for a 30-minute walk\n    earnings_30min_walks = pay_per_30min_walk * num_dogs_30min_walks\n\n    # L6\n    total_daily_earnings = earnings_60min_walks + earnings_30min_walks\n\n    # L7\n    work_days_per_week = 5 # works 5 days\n    total_weekly_earnings = total_daily_earnings * work_days_per_week\n\n    # FA\n    answer = total_weekly_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_daily_earnings",
+    "operand_to_replace": "earnings_30min_walks",
+    "replacement_variable": "dogs_per_walk"
+  },
+  "correct_trace": {
+    "num_60min_dogs": 6,
+    "dogs_per_walk": 3,
+    "hours_for_60min_walks": 2.0,
+    "pay_per_60min_walk": 20,
+    "earnings_60min_walks": 120,
+    "total_daily_work_hours": 4,
+    "remaining_hours": 2.0,
+    "minutes_per_hour": 60,
+    "remaining_minutes": 120.0,
+    "duration_30min_walk": 30,
+    "num_dogs_30min_walks": 12.0,
+    "pay_per_30min_walk": 15,
+    "earnings_30min_walks": 180.0,
+    "total_daily_earnings": 300.0,
+    "work_days_per_week": 5,
+    "total_weekly_earnings": 1500.0,
+    "answer": 1500.0
+  },
+  "flawed_trace": {
+    "num_60min_dogs": 6,
+    "dogs_per_walk": 3,
+    "hours_for_60min_walks": 2.0,
+    "pay_per_60min_walk": 20,
+    "earnings_60min_walks": 120,
+    "total_daily_work_hours": 4,
+    "remaining_hours": 2.0,
+    "minutes_per_hour": 60,
+    "remaining_minutes": 120.0,
+    "duration_30min_walk": 30,
+    "num_dogs_30min_walks": 12.0,
+    "pay_per_30min_walk": 15,
+    "earnings_30min_walks": 180.0,
+    "total_daily_earnings": 123,
+    "work_days_per_week": 5,
+    "total_weekly_earnings": 615,
+    "answer": 615
+  },
+  "correct_value": 300.0,
+  "flawed_value": 123,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "hours_for_60min_walks",
+      "question_inputs": [
+        "num_60min_dogs",
+        "dogs_per_walk"
+      ],
+      "solution_line_template": "Johnny spends {num_60min_dogs}/{dogs_per_walk}={hours_for_60min_walks} hours walking the {num_60min_dogs} dogs who have 60-minute walks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "earnings_60min_walks",
+      "question_inputs": [
+        "pay_per_60min_walk"
+      ],
+      "solution_line_template": "He makes ${pay_per_60min_walk}*{num_60min_dogs}=$<<{pay_per_60min_walk}*{num_60min_dogs}={earnings_60min_walks}>>{earnings_60min_walks} for these walks."
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L3",
+      "output_variable": "remaining_minutes",
+      "question_inputs": [
+        "total_daily_work_hours"
+      ],
+      "solution_line_template": "Thus, he has {total_daily_work_hours}-{hours_for_60min_walks}={remaining_hours} hours={remaining_minutes} minutes left to walk the other dogs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "num_dogs_30min_walks",
+      "question_inputs": [
+        "duration_30min_walk"
+      ],
+      "solution_line_template": "He can walk {dogs_per_walk}*({remaining_minutes}/{duration_30min_walk})=<<{dogs_per_walk}*({remaining_minutes}/{duration_30min_walk})={num_dogs_30min_walks}>>{num_dogs_30min_walks} dogs in this time."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "earnings_30min_walks",
+      "question_inputs": [
+        "pay_per_30min_walk"
+      ],
+      "solution_line_template": "Thus, he will make ${pay_per_30min_walk}*{num_dogs_30min_walks}=$<<{num_dogs_30min_walks}*{pay_per_30min_walk}={earnings_30min_walks}>>{earnings_30min_walks} on these walks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_daily_earnings",
+      "question_inputs": [],
+      "solution_line_template": "In total per day, he makes ${earnings_60min_walks}+${earnings_30min_walks}=$<<{earnings_60min_walks}+{earnings_30min_walks}={total_daily_earnings}>>{total_daily_earnings} per day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "total_weekly_earnings",
+      "question_inputs": [
+        "work_days_per_week"
+      ],
+      "solution_line_template": "Thus, during the week, he makes ${total_daily_earnings}*{work_days_per_week}=$<<{total_daily_earnings}*{work_days_per_week}={total_weekly_earnings}>>{total_weekly_earnings}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Johnny spends 6/3=2 hours walking the 6 dogs who have 60-minute walks.",
+    "L2": "He makes $20*6=$<<20*6=120>>120 for these walks.",
+    "L3": "Thus, he has 4-2=2 hours=120 minutes left to walk the other dogs.",
+    "L4": "He can walk 3*(120/30)=<<3*(120/30)=12>>12 dogs in this time.",
+    "L5": "Thus, he will make $15*12=$<<12*15=180>>180 on these walks.",
+    "L6": "In total per day, he makes $120+$3=$<<120+3=123>>123 per day.",
+    "L7": "Thus, during the week, he makes $123*5=$<<123*5=615>>615.",
+    "FA": "#### 615"
+  },
+  "erroneous_line_number": "L6",
+  "explanation": "Incorrect operand. The variable 'dogs_per_walk' (value: 3) was used instead of 'earnings_30min_walks' (value: 180.0).",
+  "repro_seed": 8957824168117178474,
+  "model_name": "google_gemini-2.5-flash"
+}

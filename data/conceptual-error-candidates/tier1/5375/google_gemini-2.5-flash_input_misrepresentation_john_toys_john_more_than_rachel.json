@@ -1,0 +1,63 @@
+{
+  "index": 5375,
+  "original_solution_mapping": {
+    "FA": "#### 21",
+    "L1": "John has 6 more toys than Rachel + 1 Rachel toy = <<6+1=7>>7 toys",
+    "L2": "Jason has 3 * 7 John toys = <<3*7=21>>21 toys"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5375.\n    Returns: the number of toys Jason has.\n    \"\"\"\n    # L1\n    john_more_than_rachel = 6 # 6 more toys than Rachel\n    rachel_toys = 1 # Rachel has 1 toy\n    john_toys = john_more_than_rachel + rachel_toys\n\n    # L2\n    jason_multiplier = 3 # three times as many toys as John\n    jason_toys = jason_multiplier * john_toys\n\n    # FA\n    answer = jason_toys\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "john_toys",
+    "operand_to_replace": "rachel_toys",
+    "replacement_variable": "john_more_than_rachel"
+  },
+  "correct_trace": {
+    "john_more_than_rachel": 6,
+    "rachel_toys": 1,
+    "john_toys": 7,
+    "jason_multiplier": 3,
+    "jason_toys": 21,
+    "answer": 21
+  },
+  "flawed_trace": {
+    "john_more_than_rachel": 6,
+    "rachel_toys": 1,
+    "john_toys": 12,
+    "jason_multiplier": 3,
+    "jason_toys": 36,
+    "answer": 36
+  },
+  "correct_value": 7,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "john_toys",
+      "question_inputs": [
+        "john_more_than_rachel",
+        "rachel_toys"
+      ],
+      "solution_line_template": "John has {john_more_than_rachel} more toys than Rachel + {rachel_toys} Rachel toy = <<{john_more_than_rachel}+{rachel_toys}={john_toys}>>{john_toys} toys"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "jason_toys",
+      "question_inputs": [
+        "jason_multiplier"
+      ],
+      "solution_line_template": "Jason has {jason_multiplier} * {john_toys} John toys = <<{jason_multiplier}*{john_toys}={jason_toys}>>{jason_toys} toys"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "John has 6 more toys than Rachel + 6 Rachel toy = <<6+6=12>>12 toys",
+    "L2": "Jason has 3 * 12 John toys = <<3*12=36>>36 toys",
+    "FA": "#### 36"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'john_more_than_rachel' (6) was used instead of 'rachel_toys' (1).",
+  "repro_seed": 3420577771974467349,
+  "model_name": "google_gemini-2.5-flash"
+}

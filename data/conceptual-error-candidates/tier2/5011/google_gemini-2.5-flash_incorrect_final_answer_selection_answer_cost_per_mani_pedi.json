@@ -1,0 +1,73 @@
+{
+  "index": 5011,
+  "original_solution_mapping": {
+    "FA": "#### 150",
+    "L1": "A mani/pedi is $40.00 and they are offering 25% off so that's 40*.25 = $<<40*.25=10.00>>10.00 discount",
+    "L2": "The mani/pedi is $40.00 and there is a $10.00 discount so each one is 40-10=$<<40-10=30.00>>30.00",
+    "L3": "Charlotte is treating herself and 4 other people for a total of 5 people at $30.00 each so it will cost 5*30 = $<<5*30=150.00>>150.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5011.\n    Returns: the total cost Charlotte will spend on mani/pedis.\n    \"\"\"\n    # L1\n    regular_rate = 40.00 # mani/pedis for $40.00\n    discount_rate_decimal = 0.25 # 25% off their regular rate\n    discount_amount = regular_rate * discount_rate_decimal\n\n    # L2\n    cost_per_mani_pedi = regular_rate - discount_amount\n\n    # L3\n    num_people = 5 # herself, her daughter and 3 granddaughters\n    total_cost = num_people * cost_per_mani_pedi\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_cost",
+    "replacement_variable": "cost_per_mani_pedi"
+  },
+  "correct_trace": {
+    "regular_rate": 40.0,
+    "discount_rate_decimal": 0.25,
+    "discount_amount": 10.0,
+    "cost_per_mani_pedi": 30.0,
+    "num_people": 5,
+    "total_cost": 150.0,
+    "answer": 150.0
+  },
+  "flawed_trace": {
+    "regular_rate": 40.0,
+    "discount_rate_decimal": 0.25,
+    "discount_amount": 10.0,
+    "cost_per_mani_pedi": 30.0,
+    "num_people": 5,
+    "total_cost": 150.0,
+    "answer": 30.0
+  },
+  "correct_value": 150.0,
+  "flawed_value": 30.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "discount_amount",
+      "question_inputs": [
+        "regular_rate",
+        "discount_rate_decimal"
+      ],
+      "solution_line_template": "A mani/pedi is ${regular_rate} and they are offering 25% off so that's {regular_rate}*{discount_rate_decimal} = $<<{regular_rate}*{discount_rate_decimal}={discount_amount}>>{discount_amount} discount"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cost_per_mani_pedi",
+      "question_inputs": [],
+      "solution_line_template": "The mani/pedi is ${regular_rate} and there is a ${discount_amount} discount so each one is {regular_rate}-{discount_amount}=$<<{regular_rate}-{discount_amount}={cost_per_mani_pedi}>>{cost_per_mani_pedi}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "num_people"
+      ],
+      "solution_line_template": "Charlotte is treating herself and 4 other people for a total of {num_people} people at ${cost_per_mani_pedi} each so it will cost {num_people}*{cost_per_mani_pedi} = $<<{num_people}*{cost_per_mani_pedi}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "A mani/pedi is $40 and they are offering 25% off so that's 40*0.25 = $<<40*0.25=10>>10 discount",
+    "L2": "The mani/pedi is $40 and there is a $10 discount so each one is 40-10=$<<40-10=30>>30",
+    "FA": "#### 30"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'cost_per_mani_pedi' (value: 30.0) was reported instead of 'total_cost' (value: 150.0).",
+  "repro_seed": -8445542902791288324,
+  "model_name": "google_gemini-2.5-flash"
+}

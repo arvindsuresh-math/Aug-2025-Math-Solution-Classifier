@@ -1,0 +1,101 @@
+{
+  "index": 1046,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "Susan had a bouquet of 3 dozen roses, which is 3*12=<<3*12=36>>36 flowers.",
+    "L2": "She gave half, 36/2=<<36/2=18>>18, to her daughter.",
+    "L3": "Then she placed her 36-18=<<36-18=18>>18 remaining flowers in a vase.",
+    "L4": "One-third of the 18 flowers in the vase wilted, resulting in 18/3=<<18/3=6>>6 wilted flowers.",
+    "L5": "After removing the wilted flowers, Susan had 18-6=<<18-6=12>>12 flowers remaining in the vase."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1046.\n    Returns: the number of flowers remaining in the vase.\n    \"\"\"\n    # L1\n    num_dozens = 3 # 3 dozen roses\n    roses_per_dozen = 12 # WK\n    total_initial_roses = num_dozens * roses_per_dozen\n\n    # L2\n    half_divisor = 2 # half to her daughter\n    roses_given_to_daughter = total_initial_roses / half_divisor\n\n    # L3\n    roses_in_vase_initial = total_initial_roses - roses_given_to_daughter\n\n    # L4\n    wilted_fraction_denominator = 3 # one-third of the flowers\n    wilted_flowers = roses_in_vase_initial / wilted_fraction_denominator\n\n    # L5\n    flowers_remaining_in_vase = roses_in_vase_initial - wilted_flowers\n\n    # FA\n    answer = flowers_remaining_in_vase\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "wilted_flowers",
+    "operand_to_replace": "roses_in_vase_initial",
+    "replacement_variable": "total_initial_roses"
+  },
+  "correct_trace": {
+    "num_dozens": 3,
+    "roses_per_dozen": 12,
+    "total_initial_roses": 36,
+    "half_divisor": 2,
+    "roses_given_to_daughter": 18.0,
+    "roses_in_vase_initial": 18.0,
+    "wilted_fraction_denominator": 3,
+    "wilted_flowers": 6.0,
+    "flowers_remaining_in_vase": 12.0,
+    "answer": 12.0
+  },
+  "flawed_trace": {
+    "num_dozens": 3,
+    "roses_per_dozen": 12,
+    "total_initial_roses": 36,
+    "half_divisor": 2,
+    "roses_given_to_daughter": 18.0,
+    "roses_in_vase_initial": 18.0,
+    "wilted_fraction_denominator": 3,
+    "wilted_flowers": 12.0,
+    "flowers_remaining_in_vase": 6.0,
+    "answer": 6.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 12.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "roses_per_dozen"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_initial_roses",
+      "question_inputs": [
+        "num_dozens"
+      ],
+      "solution_line_template": "Susan had a bouquet of {num_dozens} dozen roses, which is {num_dozens}*{roses_per_dozen}=<<{num_dozens}*{roses_per_dozen}={total_initial_roses}>>{total_initial_roses} flowers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "roses_given_to_daughter",
+      "question_inputs": [
+        "half_divisor"
+      ],
+      "solution_line_template": "She gave half, {total_initial_roses}/{half_divisor}=<<{total_initial_roses}/{half_divisor}={roses_given_to_daughter}>>{roses_given_to_daughter}, to her daughter."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "roses_in_vase_initial",
+      "question_inputs": [],
+      "solution_line_template": "Then she placed her {total_initial_roses}-{roses_given_to_daughter}=<<{total_initial_roses}-{roses_given_to_daughter}={roses_in_vase_initial}>>{roses_in_vase_initial} remaining flowers in a vase."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "wilted_flowers",
+      "question_inputs": [
+        "wilted_fraction_denominator"
+      ],
+      "solution_line_template": "One-third of the {roses_in_vase_initial} flowers in the vase wilted, resulting in {roses_in_vase_initial}/{wilted_fraction_denominator}=<<{roses_in_vase_initial}/{wilted_fraction_denominator}={wilted_flowers}>>{wilted_flowers} wilted flowers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "flowers_remaining_in_vase",
+      "question_inputs": [],
+      "solution_line_template": "After removing the wilted flowers, Susan had {roses_in_vase_initial}-{wilted_flowers}=<<{roses_in_vase_initial}-{wilted_flowers}={flowers_remaining_in_vase}>>{flowers_remaining_in_vase} flowers remaining in the vase."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Susan had a bouquet of 3 dozen roses, which is 3*12=<<3*12=36>>36 flowers.",
+    "L2": "She gave half, 36/2=<<36/2=18>>18, to her daughter.",
+    "L3": "Then she placed her 36-18=<<36-18=18>>18 remaining flowers in a vase.",
+    "L4": "One-third of the 36 flowers in the vase wilted, resulting in 36/3=<<36/3=12>>12 wilted flowers.",
+    "L5": "After removing the wilted flowers, Susan had 18-12=<<18-12=6>>6 flowers remaining in the vase.",
+    "FA": "#### 6"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'total_initial_roses' (value: 36) was used instead of 'roses_in_vase_initial' (value: 18.0).",
+  "repro_seed": 2114891614905202295,
+  "model_name": "google_gemini-2.5-flash"
+}

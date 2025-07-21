@@ -1,0 +1,78 @@
+{
+  "index": 5814,
+  "original_solution_mapping": {
+    "FA": "#### 16",
+    "L1": "Hillary needs to read for 1 hour which equals 60 minutes.",
+    "L2": "Hillary has read for a total of 16 minutes + 28 = <<16+28=44>>44 minutes so far.",
+    "L3": "Hillary will need to read for 60 minutes - 44 = <<60-44=16>>16 minutes on Sunday."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5814.\n    Returns: the number of minutes Hillary has to read on Sunday.\n    \"\"\"\n    # L1\n    assignment_hours = 1 # 1 hour of reading\n    minutes_per_hour = 60 # WK\n    total_assignment_minutes = assignment_hours * minutes_per_hour\n\n    # L2\n    read_friday = 16 # read for 16 minutes\n    read_saturday = 28 # read for 28 minutes\n    read_so_far = read_friday + read_saturday\n\n    # L3\n    remaining_minutes_sunday = total_assignment_minutes - read_so_far\n\n    # FA\n    answer = remaining_minutes_sunday\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "remaining_minutes_sunday",
+    "operand_to_replace": "read_so_far",
+    "replacement_variable": "read_friday"
+  },
+  "correct_trace": {
+    "assignment_hours": 1,
+    "minutes_per_hour": 60,
+    "total_assignment_minutes": 60,
+    "read_friday": 16,
+    "read_saturday": 28,
+    "read_so_far": 44,
+    "remaining_minutes_sunday": 16,
+    "answer": 16
+  },
+  "flawed_trace": {
+    "assignment_hours": 1,
+    "minutes_per_hour": 60,
+    "total_assignment_minutes": 60,
+    "read_friday": 16,
+    "read_saturday": 28,
+    "read_so_far": 44,
+    "remaining_minutes_sunday": 44,
+    "answer": 44
+  },
+  "correct_value": 16,
+  "flawed_value": 44,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_assignment_minutes",
+      "question_inputs": [
+        "assignment_hours"
+      ],
+      "solution_line_template": "Hillary needs to read for {assignment_hours} hour which equals {total_assignment_minutes} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "read_so_far",
+      "question_inputs": [
+        "read_friday",
+        "read_saturday"
+      ],
+      "solution_line_template": "Hillary has read for a total of {read_friday} minutes + {read_saturday} = <<{read_friday}+{read_saturday}={read_so_far}>>{read_so_far} minutes so far."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_minutes_sunday",
+      "question_inputs": [],
+      "solution_line_template": "Hillary will need to read for {total_assignment_minutes} minutes - {read_so_far} = <<{total_assignment_minutes}-{read_so_far}={remaining_minutes_sunday}>>{remaining_minutes_sunday} minutes on Sunday."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Hillary needs to read for 1 hour which equals 60 minutes.",
+    "L2": "Hillary has read for a total of 16 minutes + 28 = <<16+28=44>>44 minutes so far.",
+    "L3": "Hillary will need to read for 60 minutes - 16 = <<60-16=44>>44 minutes on Sunday.",
+    "FA": "#### 44"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'read_friday' (value: 16) was used instead of 'read_so_far' (value: 44).",
+  "repro_seed": 6959296876514163651,
+  "model_name": "google_gemini-2.5-flash"
+}

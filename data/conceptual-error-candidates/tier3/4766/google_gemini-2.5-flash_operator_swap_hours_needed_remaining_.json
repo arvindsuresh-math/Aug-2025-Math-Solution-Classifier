@@ -1,0 +1,74 @@
+{
+  "index": 4766,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "After 3 hours, the ants have removed 4 * 3 = <<4*3=12>>12 ounces of sugar.",
+    "L2": "There are 24 - 12 = <<24-12=12>>12 ounces of sugar left.",
+    "L3": "Thus, the ants need 12 / 4 = <<12/4=3>>3 more hours to harvest the remaining sugar."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4766.\n    Returns: the number of additional hours needed to harvest the remaining sugar.\n    \"\"\"\n    # L1\n    removal_rate_per_hour = 4 # Every hour, the ants remove 4 ounces of sugar\n    hours_passed = 3 # After three hours\n    sugar_removed_initial = removal_rate_per_hour * hours_passed\n\n    # L2\n    initial_sugar_amount = 24 # The bag of sugar held 24 ounces before it was dropped\n    sugar_remaining = initial_sugar_amount - sugar_removed_initial\n\n    # L3\n    hours_needed_remaining = sugar_remaining / removal_rate_per_hour\n\n    # FA\n    answer = hours_needed_remaining\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "hours_needed_remaining",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x1721037d0>"
+  },
+  "correct_trace": {
+    "removal_rate_per_hour": 4,
+    "hours_passed": 3,
+    "sugar_removed_initial": 12,
+    "initial_sugar_amount": 24,
+    "sugar_remaining": 12,
+    "hours_needed_remaining": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "removal_rate_per_hour": 4,
+    "hours_passed": 3,
+    "sugar_removed_initial": 12,
+    "initial_sugar_amount": 24,
+    "sugar_remaining": 12,
+    "hours_needed_remaining": 48,
+    "answer": 48
+  },
+  "correct_value": 3.0,
+  "flawed_value": 48,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "sugar_removed_initial",
+      "question_inputs": [
+        "removal_rate_per_hour",
+        "hours_passed"
+      ],
+      "solution_line_template": "After {hours_passed} hours, the ants have removed {removal_rate_per_hour} * {hours_passed} = <<{removal_rate_per_hour}*{hours_passed}={sugar_removed_initial}>>{sugar_removed_initial} ounces of sugar."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sugar_remaining",
+      "question_inputs": [
+        "initial_sugar_amount"
+      ],
+      "solution_line_template": "There are {initial_sugar_amount} - {sugar_removed_initial} = <<{initial_sugar_amount}-{sugar_removed_initial}={sugar_remaining}>>{sugar_remaining} ounces of sugar left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "hours_needed_remaining",
+      "question_inputs": [],
+      "solution_line_template": "Thus, the ants need {sugar_remaining} / {removal_rate_per_hour} = <<{sugar_remaining}/{removal_rate_per_hour}={hours_needed_remaining}>>{hours_needed_remaining} more hours to harvest the remaining sugar."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After 3 hours, the ants have removed 4 * 3 = <<4*3=12>>12 ounces of sugar.",
+    "L2": "There are 24 - 12 = <<24-12=12>>12 ounces of sugar left.",
+    "L3": "Thus, the ants need 12 / 4 = <<12/4=48>>48 more hours to harvest the remaining sugar.",
+    "FA": "#### 48"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -1055607057068089841,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,100 @@
+{
+  "index": 3553,
+  "original_solution_mapping": {
+    "FA": "#### 90",
+    "L1": "It takes the drain 4 hours to empty the pool, so it drains at a rate of 120 liters / 4 hours = <<120/4=30>>30 liters/hour.",
+    "L2": "After 3 hours, the drain will have removed 3 * 30 = <<3*30=90>>90 liters of water from the pool.",
+    "L3": "It takes the hose 6 hours to fill the pool, so it fills at a rate of 120 liters / 6 hours = <<120/6=20>>20 liters/hour.",
+    "L4": "After 3 hours, the hose will have added 3 * 20 = <<3*20=60>>60 liters of water to the pool.",
+    "L5": "After 3 hours, there will be 120 liters + 60 liters - 90 liters = <<120+60-90=90>>90 liters of water left in the pool."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3553.\n    Returns: the amount of water left in the pool.\n    \"\"\"\n    # L1\n    pool_capacity_liters = 120 # The pool holds 120 liters of water\n    drain_time_hours = 4 # drain can empty the pool in 4 hours\n    drain_rate_liters_per_hour = pool_capacity_liters / drain_time_hours\n\n    # L2\n    time_elapsed_hours = 3 # after 3 hours\n    water_drained_liters = time_elapsed_hours * drain_rate_liters_per_hour\n\n    # L3\n    hose_fill_time_hours = 6 # hose can fill the pool in 6 hours\n    hose_fill_rate_liters_per_hour = pool_capacity_liters / hose_fill_time_hours\n\n    # L4\n    water_added_liters = time_elapsed_hours * hose_fill_rate_liters_per_hour\n\n    # L5\n    water_left_liters = pool_capacity_liters + water_added_liters - water_drained_liters\n\n    # FA\n    answer = water_left_liters\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "hose_fill_rate_liters_per_hour",
+    "operand_to_replace": "pool_capacity_liters",
+    "replacement_variable": "drain_rate_liters_per_hour"
+  },
+  "correct_trace": {
+    "pool_capacity_liters": 120,
+    "drain_time_hours": 4,
+    "drain_rate_liters_per_hour": 30.0,
+    "time_elapsed_hours": 3,
+    "water_drained_liters": 90.0,
+    "hose_fill_time_hours": 6,
+    "hose_fill_rate_liters_per_hour": 20.0,
+    "water_added_liters": 60.0,
+    "water_left_liters": 90.0,
+    "answer": 90.0
+  },
+  "flawed_trace": {
+    "pool_capacity_liters": 120,
+    "drain_time_hours": 4,
+    "drain_rate_liters_per_hour": 30.0,
+    "time_elapsed_hours": 3,
+    "water_drained_liters": 90.0,
+    "hose_fill_time_hours": 6,
+    "hose_fill_rate_liters_per_hour": 5.0,
+    "water_added_liters": 15.0,
+    "water_left_liters": 45.0,
+    "answer": 45.0
+  },
+  "correct_value": 20.0,
+  "flawed_value": 5.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "drain_rate_liters_per_hour",
+      "question_inputs": [
+        "pool_capacity_liters",
+        "drain_time_hours"
+      ],
+      "solution_line_template": "It takes the drain {drain_time_hours} hours to empty the pool, so it drains at a rate of {pool_capacity_liters} liters / {drain_time_hours} hours = <<{pool_capacity_liters}/{drain_time_hours}={drain_rate_liters_per_hour}>>{drain_rate_liters_per_hour} liters/hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "water_drained_liters",
+      "question_inputs": [
+        "time_elapsed_hours"
+      ],
+      "solution_line_template": "After {time_elapsed_hours} hours, the drain will have removed {time_elapsed_hours} * {drain_rate_liters_per_hour} = <<{time_elapsed_hours}*{drain_rate_liters_per_hour}={water_drained_liters}>>{water_drained_liters} liters of water from the pool."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "hose_fill_rate_liters_per_hour",
+      "question_inputs": [
+        "hose_fill_time_hours"
+      ],
+      "solution_line_template": "It takes the hose {hose_fill_time_hours} hours to fill the pool, so it fills at a rate of {pool_capacity_liters} liters / {hose_fill_time_hours} hours = <<{pool_capacity_liters}/{hose_fill_time_hours}={hose_fill_rate_liters_per_hour}>>{hose_fill_rate_liters_per_hour} liters/hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "water_added_liters",
+      "question_inputs": [],
+      "solution_line_template": "After {time_elapsed_hours} hours, the hose will have added {time_elapsed_hours} * {hose_fill_rate_liters_per_hour} = <<{time_elapsed_hours}*{hose_fill_rate_liters_per_hour}={water_added_liters}>>{water_added_liters} liters of water to the pool."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "water_left_liters",
+      "question_inputs": [],
+      "solution_line_template": "After {time_elapsed_hours} hours, there will be {pool_capacity_liters} liters + {water_added_liters} liters - {water_drained_liters} liters = <<{pool_capacity_liters}+{water_added_liters}-{water_drained_liters}={water_left_liters}>>{water_left_liters} liters of water left in the pool."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "It takes the drain 4 hours to empty the pool, so it drains at a rate of 120 liters / 4 hours = <<120/4=30>>30 liters/hour.",
+    "L2": "After 3 hours, the drain will have removed 3 * 30 = <<3*30=90>>90 liters of water from the pool.",
+    "L3": "It takes the hose 6 hours to fill the pool, so it fills at a rate of 30 liters / 6 hours = <<30/6=5>>5 liters/hour.",
+    "L4": "After 3 hours, the hose will have added 3 * 5 = <<3*5=15>>15 liters of water to the pool.",
+    "L5": "After 3 hours, there will be 120 liters + 15 liters - 90 liters = <<120+15-90=45>>45 liters of water left in the pool.",
+    "FA": "#### 45"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'drain_rate_liters_per_hour' (30.0) was used instead of 'pool_capacity_liters' (120).",
+  "repro_seed": -7940427293670519400,
+  "model_name": "google_gemini-2.5-flash"
+}

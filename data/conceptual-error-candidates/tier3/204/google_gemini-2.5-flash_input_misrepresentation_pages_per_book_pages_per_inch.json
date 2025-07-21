@@ -1,0 +1,63 @@
+{
+  "index": 204,
+  "original_solution_mapping": {
+    "FA": "#### 160",
+    "L1": "There are 960 pages because 80 x 12 = <<80*12=960>>960",
+    "L2": "Each book is 160 pages because 960 / 6 = <<960/6=160>>160"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 204.\n    Returns: the average number of pages per book.\n    \"\"\"\n    # L1\n    pages_per_inch = 80 # 80 pages is one inch thick\n    stack_thickness_inches = 12 # 12 inches thick\n    total_pages = pages_per_inch * stack_thickness_inches\n\n    # L2\n    num_books = 6 # 6 books\n    pages_per_book = total_pages / num_books\n\n    # FA\n    answer = pages_per_book\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "pages_per_book",
+    "operand_to_replace": "num_books",
+    "replacement_variable": "pages_per_inch"
+  },
+  "correct_trace": {
+    "pages_per_inch": 80,
+    "stack_thickness_inches": 12,
+    "total_pages": 960,
+    "num_books": 6,
+    "pages_per_book": 160.0,
+    "answer": 160.0
+  },
+  "flawed_trace": {
+    "pages_per_inch": 80,
+    "stack_thickness_inches": 12,
+    "total_pages": 960,
+    "num_books": 6,
+    "pages_per_book": 12.0,
+    "answer": 12.0
+  },
+  "correct_value": 160.0,
+  "flawed_value": 12.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_pages",
+      "question_inputs": [
+        "pages_per_inch",
+        "stack_thickness_inches"
+      ],
+      "solution_line_template": "There are {total_pages} pages because {pages_per_inch} x {stack_thickness_inches} = <<{pages_per_inch}*{stack_thickness_inches}={total_pages}>>{total_pages}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "pages_per_book",
+      "question_inputs": [
+        "num_books"
+      ],
+      "solution_line_template": "Each book is {pages_per_book} pages because {total_pages} / {num_books} = <<{total_pages}/{num_books}={pages_per_book}>>{pages_per_book}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 960 pages because 80 x 12 = <<80*12=960>>960",
+    "L2": "Each book is 12 pages because 960 / 80 = <<960/80=12>>12",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'pages_per_inch' (80) was used instead of 'num_books' (6).",
+  "repro_seed": 7300864864561784275,
+  "model_name": "google_gemini-2.5-flash"
+}

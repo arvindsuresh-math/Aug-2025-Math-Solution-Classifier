@@ -1,0 +1,78 @@
+{
+  "index": 647,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "Quinton had 40 cupcakes - 18 = <<40-18=22>>22 cupcakes.",
+    "L2": "He then had 22 cupcakes - 16 students = <<22-16=6>>6 cupcakes.",
+    "L3": "Quinton then gave away 6 - 1 -1 -1 -1 = <<6-1-1-1-1=2>>2 cupcakes left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 647.\n    Returns: the number of cupcakes Quinton had left over.\n    \"\"\"\n    # L1\n    initial_cupcakes = 40 # Quinton brought 40 cupcakes to school\n    students_ms_delmont = 18 # 18 students in Ms. Delmont's class\n    after_ms_delmont_class = initial_cupcakes - students_ms_delmont\n\n    # L2\n    students_mrs_donnelly = 16 # 16 students in Mrs. Donnelly's class\n    after_mrs_donnelly_class = after_ms_delmont_class - students_mrs_donnelly\n\n    # L3\n    cupcake_to_adult = 1 # gave a cupcake to each of the adults (Ms. Delmont, Mrs. Donnelly, nurse, principal)\n    cupcakes_left = after_mrs_donnelly_class - cupcake_to_adult - cupcake_to_adult - cupcake_to_adult - cupcake_to_adult\n\n    # FA\n    answer = cupcakes_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "after_mrs_donnelly_class",
+    "operand_to_replace": "after_ms_delmont_class",
+    "replacement_variable": "initial_cupcakes"
+  },
+  "correct_trace": {
+    "initial_cupcakes": 40,
+    "students_ms_delmont": 18,
+    "after_ms_delmont_class": 22,
+    "students_mrs_donnelly": 16,
+    "after_mrs_donnelly_class": 6,
+    "cupcake_to_adult": 1,
+    "cupcakes_left": 2,
+    "answer": 2
+  },
+  "flawed_trace": {
+    "initial_cupcakes": 40,
+    "students_ms_delmont": 18,
+    "after_ms_delmont_class": 22,
+    "students_mrs_donnelly": 16,
+    "after_mrs_donnelly_class": 24,
+    "cupcake_to_adult": 1,
+    "cupcakes_left": 20,
+    "answer": 20
+  },
+  "correct_value": 6,
+  "flawed_value": 24,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "initial_cupcakes",
+        "students_ms_delmont"
+      ],
+      "WK_inputs": [],
+      "output_variable": "after_ms_delmont_class",
+      "solution_line_template": "Quinton had {initial_cupcakes} cupcakes - {students_ms_delmont} = <<{initial_cupcakes}-{students_ms_delmont}={after_ms_delmont_class}>>{after_ms_delmont_class} cupcakes."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "students_mrs_donnelly"
+      ],
+      "WK_inputs": [],
+      "output_variable": "after_mrs_donnelly_class",
+      "solution_line_template": "He then had {after_ms_delmont_class} cupcakes - {students_mrs_donnelly} students = <<{after_ms_delmont_class}-{students_mrs_donnelly}={after_mrs_donnelly_class}>>{after_mrs_donnelly_class} cupcakes."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "cupcake_to_adult"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cupcakes_left",
+      "solution_line_template": "Quinton then gave away {after_mrs_donnelly_class} - {cupcake_to_adult} - {cupcake_to_adult} - {cupcake_to_adult} - {cupcake_to_adult} = <<{after_mrs_donnelly_class}-{cupcake_to_adult}-{cupcake_to_adult}-{cupcake_to_adult}-{cupcake_to_adult}={cupcakes_left}>>{cupcakes_left} cupcakes left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Quinton had 40 cupcakes - 18 = <<40-18=22>>22 cupcakes.",
+    "L2": "He then had 40 cupcakes - 16 students = <<40-16=24>>24 cupcakes.",
+    "L3": "Quinton then gave away 24 - 1 - 1 - 1 - 1 = <<24-1-1-1-1=20>>20 cupcakes left.",
+    "FA": "#### 20"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'initial_cupcakes' (value: 40) was used instead of 'after_ms_delmont_class' (value: 22).",
+  "repro_seed": -2569200553392397222,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,104 @@
+{
+  "index": 4149,
+  "original_solution_mapping": {
+    "FA": "#### 299",
+    "L1": "The second level has 90 + 8 = <<90+8=98>>98 parking spaces.",
+    "L2": "The third level has 98 + 12 = <<98+12=110>>110 parking spaces.",
+    "L3": "The fourth level has 110 - 9 = <<110-9=101>>101 parking spaces.",
+    "L4": "So the parking garage can accommodate 90 + 98 + 110 + 101 = <<90+98+110+101=399>>399 cars.",
+    "L5": "Thus, the parking garage can still accommodate 399 - 100 = <<399-100=299>>299 cars."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4149.\n    Returns: the number of cars that can still be accommodated by the parking garage.\n    \"\"\"\n    # L1\n    first_level_spaces = 90 # 90 parking spaces\n    second_level_more_than_first = 8 # 8 more parking spaces than on the first level\n    second_level_spaces = first_level_spaces + second_level_more_than_first\n\n    # L2\n    third_level_more_than_second = 12 # 12 more available parking spaces on the third level than on the second level\n    third_level_spaces = second_level_spaces + third_level_more_than_second\n\n    # L3\n    fourth_level_fewer_than_third = 9 # 9 fewer parking spaces than the third level\n    fourth_level_spaces = third_level_spaces - fourth_level_fewer_than_third\n\n    # L4\n    total_capacity = first_level_spaces + second_level_spaces + third_level_spaces + fourth_level_spaces\n\n    # L5\n    cars_already_parked = 100 # 100 cars are already parked\n    remaining_capacity = total_capacity - cars_already_parked\n\n    # FA\n    answer = remaining_capacity\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_capacity",
+    "operand_to_replace": "first_level_spaces",
+    "replacement_variable": "second_level_spaces"
+  },
+  "correct_trace": {
+    "first_level_spaces": 90,
+    "second_level_more_than_first": 8,
+    "second_level_spaces": 98,
+    "third_level_more_than_second": 12,
+    "third_level_spaces": 110,
+    "fourth_level_fewer_than_third": 9,
+    "fourth_level_spaces": 101,
+    "total_capacity": 399,
+    "cars_already_parked": 100,
+    "remaining_capacity": 299,
+    "answer": 299
+  },
+  "flawed_trace": {
+    "first_level_spaces": 90,
+    "second_level_more_than_first": 8,
+    "second_level_spaces": 98,
+    "third_level_more_than_second": 12,
+    "third_level_spaces": 110,
+    "fourth_level_fewer_than_third": 9,
+    "fourth_level_spaces": 101,
+    "total_capacity": 407,
+    "cars_already_parked": 100,
+    "remaining_capacity": 307,
+    "answer": 307
+  },
+  "correct_value": 399,
+  "flawed_value": 407,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "second_level_spaces",
+      "question_inputs": [
+        "first_level_spaces",
+        "second_level_more_than_first"
+      ],
+      "solution_line_template": "The second level has {first_level_spaces} + {second_level_more_than_first} = <<{first_level_spaces}+{second_level_more_than_first}={second_level_spaces}>>{second_level_spaces} parking spaces."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "third_level_spaces",
+      "question_inputs": [
+        "third_level_more_than_second"
+      ],
+      "solution_line_template": "The third level has {second_level_spaces} + {third_level_more_than_second} = <<{second_level_spaces}+{third_level_more_than_second}={third_level_spaces}>>{third_level_spaces} parking spaces."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "fourth_level_spaces",
+      "question_inputs": [
+        "fourth_level_fewer_than_third"
+      ],
+      "solution_line_template": "The fourth level has {third_level_spaces} - {fourth_level_fewer_than_third} = <<{third_level_spaces}-{fourth_level_fewer_than_third}={fourth_level_spaces}>>{fourth_level_spaces} parking spaces."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_capacity",
+      "question_inputs": [],
+      "solution_line_template": "So the parking garage can accommodate {first_level_spaces} + {second_level_spaces} + {third_level_spaces} + {fourth_level_spaces} = <<{first_level_spaces}+{second_level_spaces}+{third_level_spaces}+{fourth_level_spaces}={total_capacity}>>{total_capacity} cars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "remaining_capacity",
+      "question_inputs": [
+        "cars_already_parked"
+      ],
+      "solution_line_template": "Thus, the parking garage can still accommodate {total_capacity} - {cars_already_parked} = <<{total_capacity}-{cars_already_parked}={remaining_capacity}>>{remaining_capacity} cars."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The second level has 90 + 8 = <<90+8=98>>98 parking spaces.",
+    "L2": "The third level has 98 + 12 = <<98+12=110>>110 parking spaces.",
+    "L3": "The fourth level has 110 - 9 = <<110-9=101>>101 parking spaces.",
+    "L4": "So the parking garage can accommodate 98 + 98 + 110 + 101 = <<98+98+110+101=407>>407 cars.",
+    "L5": "Thus, the parking garage can still accommodate 407 - 100 = <<407-100=307>>307 cars.",
+    "FA": "#### 307"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'second_level_spaces' (98) was used instead of 'first_level_spaces' (90).",
+  "repro_seed": -1151848023815782367,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,85 @@
+{
+  "index": 4817,
+  "original_solution_mapping": {
+    "FA": "#### 315",
+    "L1": "It cost 250*.4=$<<250*.4=100>>100 more than his old costume",
+    "L2": "So it cost 250+100=$<<250+100=350>>350",
+    "L3": "He left a 350*.1=$<<350*.1=35>>35 deposit",
+    "L4": "So he had to pay 350-35=$<<350-35=315>>315"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4817.\n    Returns: the amount Jeff paid when picking up the costume.\n    \"\"\"\n    # L1\n    last_year_cost = 250 # which cost $250\n    cost_increase_percent = 0.4 # 40% more expensive\n    cost_increase_amount = last_year_cost * cost_increase_percent\n\n    # L2\n    current_cost = last_year_cost + cost_increase_amount\n\n    # L3\n    deposit_percent = 0.1 # 10% deposit\n    deposit_amount = current_cost * deposit_percent\n\n    # L4\n    amount_paid_at_pickup = current_cost - deposit_amount\n\n    # FA\n    answer = amount_paid_at_pickup\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "amount_paid_at_pickup",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x168f2f550>"
+  },
+  "correct_trace": {
+    "last_year_cost": 250,
+    "cost_increase_percent": 0.4,
+    "cost_increase_amount": 100.0,
+    "current_cost": 350.0,
+    "deposit_percent": 0.1,
+    "deposit_amount": 35.0,
+    "amount_paid_at_pickup": 315.0,
+    "answer": 315.0
+  },
+  "flawed_trace": {
+    "last_year_cost": 250,
+    "cost_increase_percent": 0.4,
+    "cost_increase_amount": 100.0,
+    "current_cost": 350.0,
+    "deposit_percent": 0.1,
+    "deposit_amount": 35.0,
+    "amount_paid_at_pickup": 385.0,
+    "answer": 385.0
+  },
+  "correct_value": 315.0,
+  "flawed_value": 385.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_increase_amount",
+      "question_inputs": [
+        "last_year_cost",
+        "cost_increase_percent"
+      ],
+      "solution_line_template": "It cost {last_year_cost}*{cost_increase_percent}=$<<{last_year_cost}*{cost_increase_percent}={cost_increase_amount}>>{cost_increase_amount} more than his old costume"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "current_cost",
+      "question_inputs": [],
+      "solution_line_template": "So it cost {last_year_cost}+{cost_increase_amount}=$<<{last_year_cost}+{cost_increase_amount}={current_cost}>>{current_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "deposit_amount",
+      "question_inputs": [
+        "deposit_percent"
+      ],
+      "solution_line_template": "He left a {current_cost}*{deposit_percent}=$<<{current_cost}*{deposit_percent}={deposit_amount}>>{deposit_amount} deposit"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "amount_paid_at_pickup",
+      "question_inputs": [],
+      "solution_line_template": "So he had to pay {current_cost}-{deposit_amount}=$<<{current_cost}-{deposit_amount}={amount_paid_at_pickup}>>{amount_paid_at_pickup}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "It cost 250*0.4=$<<250*0.4=100>>100 more than his old costume",
+    "L2": "So it cost 250+100=$<<250+100=350>>350",
+    "L3": "He left a 350*0.1=$<<350*0.1=35>>35 deposit",
+    "L4": "So he had to pay 350-35=$<<350-35=385>>385",
+    "FA": "#### 385"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 5929482252113342155,
+  "model_name": "google_gemini-2.5-flash"
+}

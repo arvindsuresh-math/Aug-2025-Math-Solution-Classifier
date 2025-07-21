@@ -1,0 +1,107 @@
+{
+  "index": 3993,
+  "original_solution_mapping": {
+    "FA": "#### 3440",
+    "L1": "He is open 16*5=<<16*5=80>>80 hours a week",
+    "L2": "So he pays each of his employees 12.5*80=$<<12.5*80=1000>>1000 per week",
+    "L3": "Since there are two employees, he pays them in total 2 * $1000 = $<<2*1000=2000>>2000 per week.",
+    "L4": "The utilities cost 1200*.2=$<<1200*.2=240>>240",
+    "L5": "So his total cost per week is 1200+2000+240=$<<1200+2000+240=3440>>3440"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3993.\n    Returns: the total weekly expenses to run the store.\n    \"\"\"\n    # L1\n    hours_per_day = 16 # open 16 hours a day\n    days_per_week = 5 # 5 days a week\n    hours_open_per_week = hours_per_day * days_per_week\n\n    # L2\n    employee_hourly_wage = 12.5 # $12.50 an hour\n    employee_weekly_wage = employee_hourly_wage * hours_open_per_week\n\n    # L3\n    num_employees_per_shift = 2 # 2 employees per shift\n    total_employee_wages_per_week = num_employees_per_shift * employee_weekly_wage\n\n    # L4\n    weekly_rent = 1200 # rent of $1200 a week\n    utilities_rent_percentage = 0.2 # additional 20% of rent\n    utilities_cost = weekly_rent * utilities_rent_percentage\n\n    # L5\n    total_weekly_expenses = weekly_rent + total_employee_wages_per_week + utilities_cost\n\n    # FA\n    answer = total_weekly_expenses\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_weekly_expenses",
+    "operand_to_replace": "total_employee_wages_per_week",
+    "replacement_variable": "days_per_week"
+  },
+  "correct_trace": {
+    "hours_per_day": 16,
+    "days_per_week": 5,
+    "hours_open_per_week": 80,
+    "employee_hourly_wage": 12.5,
+    "employee_weekly_wage": 1000.0,
+    "num_employees_per_shift": 2,
+    "total_employee_wages_per_week": 2000.0,
+    "weekly_rent": 1200,
+    "utilities_rent_percentage": 0.2,
+    "utilities_cost": 240.0,
+    "total_weekly_expenses": 3440.0,
+    "answer": 3440.0
+  },
+  "flawed_trace": {
+    "hours_per_day": 16,
+    "days_per_week": 5,
+    "hours_open_per_week": 80,
+    "employee_hourly_wage": 12.5,
+    "employee_weekly_wage": 1000.0,
+    "num_employees_per_shift": 2,
+    "total_employee_wages_per_week": 2000.0,
+    "weekly_rent": 1200,
+    "utilities_rent_percentage": 0.2,
+    "utilities_cost": 240.0,
+    "total_weekly_expenses": 1445.0,
+    "answer": 1445.0
+  },
+  "correct_value": 3440.0,
+  "flawed_value": 1445.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "hours_open_per_week",
+      "question_inputs": [
+        "hours_per_day",
+        "days_per_week"
+      ],
+      "solution_line_template": "He is open {hours_per_day}*{days_per_week}=<<{hours_per_day}*{days_per_week}={hours_open_per_week}>>{hours_open_per_week} hours a week"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "employee_weekly_wage",
+      "question_inputs": [
+        "employee_hourly_wage"
+      ],
+      "solution_line_template": "So he pays each of his employees {employee_hourly_wage}*{hours_open_per_week}=$<<{employee_hourly_wage}*{hours_open_per_week}={employee_weekly_wage}>>{employee_weekly_wage} per week"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_employee_wages_per_week",
+      "question_inputs": [
+        "num_employees_per_shift"
+      ],
+      "solution_line_template": "Since there are {num_employees_per_shift} employees, he pays them in total {num_employees_per_shift} * ${employee_weekly_wage} = $<<{num_employees_per_shift}*{employee_weekly_wage}={total_employee_wages_per_week}>>{total_employee_wages_per_week} per week."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "utilities_cost",
+      "question_inputs": [
+        "weekly_rent",
+        "utilities_rent_percentage"
+      ],
+      "solution_line_template": "The utilities cost {weekly_rent}*{utilities_rent_percentage}=$<<{weekly_rent}*{utilities_rent_percentage}={utilities_cost}>>{utilities_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_weekly_expenses",
+      "question_inputs": [],
+      "solution_line_template": "So his total cost per week is {weekly_rent}+{total_employee_wages_per_week}+{utilities_cost}=$<<{weekly_rent}+{total_employee_wages_per_week}+{utilities_cost}={total_weekly_expenses}>>{total_weekly_expenses}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He is open 16*5=<<16*5=80>>80 hours a week",
+    "L2": "So he pays each of his employees 12.5*80=$<<12.5*80=1000>>1000 per week",
+    "L3": "Since there are 2 employees, he pays them in total 2 * $1000 = $<<2*1000=2000>>2000 per week.",
+    "L4": "The utilities cost 1200*0.2=$<<1200*0.2=240>>240",
+    "L5": "So his total cost per week is 1200+5+240=$<<1200+5+240=1445>>1445",
+    "FA": "#### 1445"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operand. The variable 'days_per_week' (value: 5) was used instead of 'total_employee_wages_per_week' (value: 2000.0).",
+  "repro_seed": 5005394212889813502,
+  "model_name": "google_gemini-2.5-flash"
+}

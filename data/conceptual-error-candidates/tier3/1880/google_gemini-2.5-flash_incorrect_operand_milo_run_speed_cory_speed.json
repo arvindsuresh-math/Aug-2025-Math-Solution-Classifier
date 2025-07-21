@@ -1,0 +1,78 @@
+{
+  "index": 1880,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "Since Cory drives his wheelchair at 12 miles per hour, then Milo rolls downhill on his skateboard at 12/2 = <<12/2=6>>6 miles per hour.",
+    "L2": "Therefore, Milo runs at 6/2 = <<6/2=3>>3 miles per hour.",
+    "L3": "If Milo runs for 2 hours at 3 miles per hour, then Milo will travel 2 * 3 = <<2*3=6>>6 miles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1880.\n    Returns: the total miles Milo can run.\n    \"\"\"\n    # L1\n    cory_speed = 12 # Cory always drives his wheelchair at 12 miles per hour\n    cory_milo_speed_ratio = 2 # Cory, can drive his wheelchair at twice the speed that Milo can roll downhill on his skateboard\n    milo_skateboard_speed = cory_speed / cory_milo_speed_ratio\n\n    # L2\n    milo_skateboard_run_ratio = 2 # Milo can roll downhill on his skateboard at twice the speed that he can run\n    milo_run_speed = milo_skateboard_speed / milo_skateboard_run_ratio\n\n    # L3\n    run_time = 2 # two hours\n    milo_run_distance = run_time * milo_run_speed\n\n    # FA\n    answer = milo_run_distance\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "milo_run_speed",
+    "operand_to_replace": "milo_skateboard_speed",
+    "replacement_variable": "cory_speed"
+  },
+  "correct_trace": {
+    "cory_speed": 12,
+    "cory_milo_speed_ratio": 2,
+    "milo_skateboard_speed": 6.0,
+    "milo_skateboard_run_ratio": 2,
+    "milo_run_speed": 3.0,
+    "run_time": 2,
+    "milo_run_distance": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "cory_speed": 12,
+    "cory_milo_speed_ratio": 2,
+    "milo_skateboard_speed": 6.0,
+    "milo_skateboard_run_ratio": 2,
+    "milo_run_speed": 6.0,
+    "run_time": 2,
+    "milo_run_distance": 12.0,
+    "answer": 12.0
+  },
+  "correct_value": 3.0,
+  "flawed_value": 6.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "milo_skateboard_speed",
+      "question_inputs": [
+        "cory_speed",
+        "cory_milo_speed_ratio"
+      ],
+      "solution_line_template": "Since Cory drives his wheelchair at {cory_speed} miles per hour, then Milo rolls downhill on his skateboard at {cory_speed}/{cory_milo_speed_ratio} = <<{cory_speed}/{cory_milo_speed_ratio}={milo_skateboard_speed}>>{milo_skateboard_speed} miles per hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "milo_run_speed",
+      "question_inputs": [
+        "milo_skateboard_run_ratio"
+      ],
+      "solution_line_template": "Therefore, Milo runs at {milo_skateboard_speed}/{milo_skateboard_run_ratio} = <<{milo_skateboard_speed}/{milo_skateboard_run_ratio}={milo_run_speed}>>{milo_run_speed} miles per hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "milo_run_distance",
+      "question_inputs": [
+        "run_time"
+      ],
+      "solution_line_template": "If Milo runs for {run_time} hours at {milo_run_speed} miles per hour, then Milo will travel {run_time} * {milo_run_speed} = <<{run_time}*{milo_run_speed}={milo_run_distance}>>{milo_run_distance} miles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since Cory drives his wheelchair at 12 miles per hour, then Milo rolls downhill on his skateboard at 12/2 = <<12/2=6>>6 miles per hour.",
+    "L2": "Therefore, Milo runs at 12/2 = <<12/2=6>>6 miles per hour.",
+    "L3": "If Milo runs for 2 hours at 6 miles per hour, then Milo will travel 2 * 6 = <<2*6=12>>12 miles.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'cory_speed' (value: 12) was used instead of 'milo_skateboard_speed' (value: 6.0).",
+  "repro_seed": 8787697441538373996,
+  "model_name": "google_gemini-2.5-flash"
+}

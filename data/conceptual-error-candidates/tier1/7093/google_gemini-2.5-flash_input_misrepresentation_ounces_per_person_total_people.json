@@ -1,0 +1,77 @@
+{
+  "index": 7093,
+  "original_solution_mapping": {
+    "FA": "#### 384",
+    "L1": "Including Carl, there will be 15 + 1 = <<15+1=16>>16 people at the party.",
+    "L2": "Carl would like each person to be able to have 2 cups x 12 ounces = <<2*12=24>>24 ounces of punch.",
+    "L3": "Carl needs to buy 16 x 24 = <<16*24=384>>384 ounces of punch."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7093.\n    Returns: the total ounces of punch Carl needs to buy for the party.\n    \"\"\"\n    # L1\n    guests = 15 # inviting 15 guests\n    carl_himself = 1 # including himself\n    total_people = guests + carl_himself\n\n    # L2\n    glasses_per_person = 2 # at least 2 glasses of punch\n    ounces_per_glass = 12 # Each glass holds 12 ounces of punch\n    ounces_per_person = glasses_per_person * ounces_per_glass\n\n    # L3\n    total_ounces_needed = total_people * ounces_per_person\n\n    # FA\n    answer = total_ounces_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "ounces_per_person",
+    "operand_to_replace": "ounces_per_glass",
+    "replacement_variable": "total_people"
+  },
+  "correct_trace": {
+    "guests": 15,
+    "carl_himself": 1,
+    "total_people": 16,
+    "glasses_per_person": 2,
+    "ounces_per_glass": 12,
+    "ounces_per_person": 24,
+    "total_ounces_needed": 384,
+    "answer": 384
+  },
+  "flawed_trace": {
+    "guests": 15,
+    "carl_himself": 1,
+    "total_people": 16,
+    "glasses_per_person": 2,
+    "ounces_per_glass": 12,
+    "ounces_per_person": 32,
+    "total_ounces_needed": 512,
+    "answer": 512
+  },
+  "correct_value": 24,
+  "flawed_value": 32,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_people",
+      "question_inputs": [
+        "guests",
+        "carl_himself"
+      ],
+      "solution_line_template": "Including Carl, there will be {guests} + {carl_himself} = <<{guests}+{carl_himself}={total_people}>>{total_people} people at the party."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "ounces_per_person",
+      "question_inputs": [
+        "glasses_per_person",
+        "ounces_per_glass"
+      ],
+      "solution_line_template": "Carl would like each person to be able to have {glasses_per_person} cups x {ounces_per_glass} ounces = <<{glasses_per_person}*{ounces_per_glass}={ounces_per_person}>>{ounces_per_person} ounces of punch."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_ounces_needed",
+      "question_inputs": [],
+      "solution_line_template": "Carl needs to buy {total_people} x {ounces_per_person} = <<{total_people}*{ounces_per_person}={total_ounces_needed}>>{total_ounces_needed} ounces of punch."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Including Carl, there will be 15 + 1 = <<15+1=16>>16 people at the party.",
+    "L2": "Carl would like each person to be able to have 2 cups x 16 ounces = <<2*16=32>>32 ounces of punch.",
+    "L3": "Carl needs to buy 16 x 32 = <<16*32=512>>512 ounces of punch.",
+    "FA": "#### 512"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_people' (16) was used instead of 'ounces_per_glass' (12).",
+  "repro_seed": 5905681250525232636,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,94 @@
+{
+  "index": 6502,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "Ivan has 50 x 10 = <<50*10=500>>500 cents from the 50 dimes in his one piggy bank.",
+    "L2": "So, he has a total of 100 + 500 = <<100+500=600>>600 cents in one of his piggy banks.",
+    "L3": "Since 100 cents is equal to 1 dollar, then Ivan has 600/100 = 6 dollars from one of his piggy banks.",
+    "L4": "Therefore, Ivan has a total of $6 x 2 piggy banks = $<<6*2=12>>12 from his two piggy banks."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6502.\n    Returns: the total amount of money Ivan has in dollars.\n    \"\"\"\n    # L1\n    num_dimes_per_bank = 50 # 50 dimes\n    cents_per_dime = 10 # WK\n    cents_from_dimes_per_bank = num_dimes_per_bank * cents_per_dime\n\n    # L2\n    num_pennies_per_bank = 100 # 100 pennies\n    total_cents_per_bank = num_pennies_per_bank + cents_from_dimes_per_bank\n\n    # L3\n    cents_per_dollar = 100 # WK\n    dollars_per_bank = total_cents_per_bank / cents_per_dollar\n\n    # L4\n    num_piggy_banks = 2 # two piggy banks\n    total_dollars = dollars_per_bank * num_piggy_banks\n\n    # FA\n    answer = total_dollars\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "dollars_per_bank",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x30d08dcd0>"
+  },
+  "correct_trace": {
+    "num_dimes_per_bank": 50,
+    "cents_per_dime": 10,
+    "cents_from_dimes_per_bank": 500,
+    "num_pennies_per_bank": 100,
+    "total_cents_per_bank": 600,
+    "cents_per_dollar": 100,
+    "dollars_per_bank": 6.0,
+    "num_piggy_banks": 2,
+    "total_dollars": 12.0,
+    "answer": 12.0
+  },
+  "flawed_trace": {
+    "num_dimes_per_bank": 50,
+    "cents_per_dime": 10,
+    "cents_from_dimes_per_bank": 500,
+    "num_pennies_per_bank": 100,
+    "total_cents_per_bank": 600,
+    "cents_per_dollar": 100,
+    "dollars_per_bank": 60000,
+    "num_piggy_banks": 2,
+    "total_dollars": 120000,
+    "answer": 120000
+  },
+  "correct_value": 6.0,
+  "flawed_value": 60000,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "cents_per_dime"
+      ],
+      "line_number": "L1",
+      "output_variable": "cents_from_dimes_per_bank",
+      "question_inputs": [
+        "num_dimes_per_bank"
+      ],
+      "solution_line_template": "Ivan has {num_dimes_per_bank} x {cents_per_dime} = <<{num_dimes_per_bank}*{cents_per_dime}={cents_from_dimes_per_bank}>>{cents_from_dimes_per_bank} cents from the {num_dimes_per_bank} dimes in his one piggy bank."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cents_per_bank",
+      "question_inputs": [
+        "num_pennies_per_bank"
+      ],
+      "solution_line_template": "So, he has a total of {num_pennies_per_bank} + {cents_from_dimes_per_bank} = <<{num_pennies_per_bank}+{cents_from_dimes_per_bank}={total_cents_per_bank}>>{total_cents_per_bank} cents in one of his piggy banks."
+    },
+    {
+      "WK_inputs": [
+        "cents_per_dollar"
+      ],
+      "line_number": "L3",
+      "output_variable": "dollars_per_bank",
+      "question_inputs": [],
+      "solution_line_template": "Since {cents_per_dollar} cents is equal to 1 dollar, then Ivan has {total_cents_per_bank}/{cents_per_dollar} = {dollars_per_bank} dollars from one of his piggy banks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_dollars",
+      "question_inputs": [
+        "num_piggy_banks"
+      ],
+      "solution_line_template": "Therefore, Ivan has a total of ${dollars_per_bank} x {num_piggy_banks} piggy banks = $<<{dollars_per_bank}*{num_piggy_banks}={total_dollars}>>{total_dollars} from his two piggy banks."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Ivan has 50 x 10 = <<50*10=500>>500 cents from the 50 dimes in his one piggy bank.",
+    "L2": "So, he has a total of 100 + 500 = <<100+500=600>>600 cents in one of his piggy banks.",
+    "L3": "Since 100 cents is equal to 1 dollar, then Ivan has 600/100 = 60000 dollars from one of his piggy banks.",
+    "L4": "Therefore, Ivan has a total of $60000 x 2 piggy banks = $<<60000*2=120000>>120000 from his two piggy banks.",
+    "FA": "#### 120000"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 289510192454923552,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,93 @@
+{
+  "index": 3608,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "The offices ordered a total of 3 offices * 10 sandwiches each = <<3*10=30>>30 sandwiches.",
+    "L2": "So the group of customers must have ordered 54 total sandwiches - 30 sandwiches for the offices = <<54-30=24>>24 sandwiches.",
+    "L3": "This is a total of 24 sandwiches / 4 sandwiches per customer = <<24/4=6>>6 customers who ordered a sandwich.",
+    "L4": "As only half the group ordered a bacon sandwich, the entire group must have consisted of 6 customers * 2 = <<6*2=12>>12 customers."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3608.\n    Returns: the total number of customers in the group that arrived.\n    \"\"\"\n    # L1\n    num_offices = 3 # 3 local offices\n    sandwiches_per_office = 10 # 10 bacon sandwiches\n    office_sandwiches = num_offices * sandwiches_per_office\n\n    # L2\n    total_sandwiches_made = 54 # a total of 54 bacon sandwiches\n    group_sandwiches = total_sandwiches_made - office_sandwiches\n\n    # L3\n    sandwiches_per_customer_in_group = 4 # 4 bacon sandwiches each\n    customers_who_ordered = group_sandwiches / sandwiches_per_customer_in_group\n\n    # L4\n    half_group_multiplier = 2 # half of the group\n    total_customers_in_group = customers_who_ordered * half_group_multiplier\n\n    # FA\n    answer = total_customers_in_group\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "customers_who_ordered",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x30ac4b9d0>"
+  },
+  "correct_trace": {
+    "num_offices": 3,
+    "sandwiches_per_office": 10,
+    "office_sandwiches": 30,
+    "total_sandwiches_made": 54,
+    "group_sandwiches": 24,
+    "sandwiches_per_customer_in_group": 4,
+    "customers_who_ordered": 6.0,
+    "half_group_multiplier": 2,
+    "total_customers_in_group": 12.0,
+    "answer": 12.0
+  },
+  "flawed_trace": {
+    "num_offices": 3,
+    "sandwiches_per_office": 10,
+    "office_sandwiches": 30,
+    "total_sandwiches_made": 54,
+    "group_sandwiches": 24,
+    "sandwiches_per_customer_in_group": 4,
+    "customers_who_ordered": 96,
+    "half_group_multiplier": 2,
+    "total_customers_in_group": 192,
+    "answer": 192
+  },
+  "correct_value": 6.0,
+  "flawed_value": 96,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "office_sandwiches",
+      "question_inputs": [
+        "num_offices",
+        "sandwiches_per_office"
+      ],
+      "solution_line_template": "The offices ordered a total of {num_offices} offices * {sandwiches_per_office} sandwiches each = <<{num_offices}*{sandwiches_per_office}={office_sandwiches}>>{office_sandwiches} sandwiches."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "group_sandwiches",
+      "question_inputs": [
+        "total_sandwiches_made"
+      ],
+      "solution_line_template": "So the group of customers must have ordered {total_sandwiches_made} total sandwiches - {office_sandwiches} sandwiches for the offices = <<{total_sandwiches_made}-{office_sandwiches}={group_sandwiches}>>{group_sandwiches} sandwiches."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "customers_who_ordered",
+      "question_inputs": [
+        "sandwiches_per_customer_in_group"
+      ],
+      "solution_line_template": "This is a total of {group_sandwiches} sandwiches / {sandwiches_per_customer_in_group} sandwiches per customer = <<{group_sandwiches}/{sandwiches_per_customer_in_group}={customers_who_ordered}>>{customers_who_ordered} customers who ordered a sandwich."
+    },
+    {
+      "WK_inputs": [
+        "half_group_multiplier"
+      ],
+      "line_number": "L4",
+      "output_variable": "total_customers_in_group",
+      "question_inputs": [],
+      "solution_line_template": "As only half the group ordered a bacon sandwich, the entire group must have consisted of {customers_who_ordered} customers * {half_group_multiplier} = <<{customers_who_ordered}*{half_group_multiplier}={total_customers_in_group}>>{total_customers_in_group} customers."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The offices ordered a total of 3 offices * 10 sandwiches each = <<3*10=30>>30 sandwiches.",
+    "L2": "So the group of customers must have ordered 54 total sandwiches - 30 sandwiches for the offices = <<54-30=24>>24 sandwiches.",
+    "L3": "This is a total of 24 sandwiches / 4 sandwiches per customer = <<24/4=96>>96 customers who ordered a sandwich.",
+    "L4": "As only half the group ordered a bacon sandwich, the entire group must have consisted of 96 customers * 2 = <<96*2=192>>192 customers.",
+    "FA": "#### 192"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -3635902399278026666,
+  "model_name": "google_gemini-2.5-flash"
+}

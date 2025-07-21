@@ -1,0 +1,78 @@
+{
+  "index": 822,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "Jean already bought 15 cupcakes x 4 packs = <<15*4=60>>60 cupcakes.",
+    "L2": "She needs 100 - 60 = <<100-60=40>>40 more cupcakes.",
+    "L3": "Thus, she needs to buy 40/10 = <<40/10=4>>4 packs of 10 cupcakes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 822.\n    Returns: the number of packs of 10 cupcakes Jean needs to buy.\n    \"\"\"\n    # L1\n    cupcakes_per_pack_15 = 15 # packages of 15\n    packs_of_15_bought = 4 # bought 4 packs of 15 cupcakes\n    cupcakes_from_15_packs = cupcakes_per_pack_15 * packs_of_15_bought\n\n    # L2\n    children_count = 100 # 100 children\n    cupcakes_needed_more = children_count - cupcakes_from_15_packs\n\n    # L3\n    cupcakes_per_pack_10 = 10 # packages of 10\n    packs_of_10_to_buy = cupcakes_needed_more / cupcakes_per_pack_10\n\n    # FA\n    answer = packs_of_10_to_buy\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "cupcakes_needed_more",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x1684d1610>"
+  },
+  "correct_trace": {
+    "cupcakes_per_pack_15": 15,
+    "packs_of_15_bought": 4,
+    "cupcakes_from_15_packs": 60,
+    "children_count": 100,
+    "cupcakes_needed_more": 40,
+    "cupcakes_per_pack_10": 10,
+    "packs_of_10_to_buy": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "cupcakes_per_pack_15": 15,
+    "packs_of_15_bought": 4,
+    "cupcakes_from_15_packs": 60,
+    "children_count": 100,
+    "cupcakes_needed_more": 160,
+    "cupcakes_per_pack_10": 10,
+    "packs_of_10_to_buy": 16.0,
+    "answer": 16.0
+  },
+  "correct_value": 40,
+  "flawed_value": 160,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cupcakes_from_15_packs",
+      "question_inputs": [
+        "cupcakes_per_pack_15",
+        "packs_of_15_bought"
+      ],
+      "solution_line_template": "Jean already bought {cupcakes_per_pack_15} cupcakes x {packs_of_15_bought} packs = <<{cupcakes_per_pack_15}*{packs_of_15_bought}={cupcakes_from_15_packs}>>{cupcakes_from_15_packs} cupcakes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cupcakes_needed_more",
+      "question_inputs": [
+        "children_count"
+      ],
+      "solution_line_template": "She needs {children_count} - {cupcakes_from_15_packs} = <<{children_count}-{cupcakes_from_15_packs}={cupcakes_needed_more}>>{cupcakes_needed_more} more cupcakes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "packs_of_10_to_buy",
+      "question_inputs": [
+        "cupcakes_per_pack_10"
+      ],
+      "solution_line_template": "Thus, she needs to buy {cupcakes_needed_more}/{cupcakes_per_pack_10} = <<{cupcakes_needed_more}/{cupcakes_per_pack_10}={packs_of_10_to_buy}>>{packs_of_10_to_buy} packs of 10 cupcakes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jean already bought 15 cupcakes x 4 packs = <<15*4=60>>60 cupcakes.",
+    "L2": "She needs 100 - 60 = <<100-60=160>>160 more cupcakes.",
+    "L3": "Thus, she needs to buy 160/10 = <<160/10=16>>16 packs of 10 cupcakes.",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -1012739829606755267,
+  "model_name": "google_gemini-2.5-flash"
+}

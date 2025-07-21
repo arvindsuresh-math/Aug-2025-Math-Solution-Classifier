@@ -1,0 +1,74 @@
+{
+  "index": 5664,
+  "original_solution_mapping": {
+    "FA": "#### 360",
+    "L1": "Miriam works 5 hours per day, so in 6 days, she works 5 * 6 = <<5*6=30>>30 hours.",
+    "L2": "Miriam can take care of 60 / 5 = <<60/5=12>>12 flowers per hour.",
+    "L3": "In 6 days of work, Miriam can take care of 30 * 12 = <<30*12=360>>360 flowers."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5664.\n    Returns: the total number of flowers Miriam can take care of in 6 days.\n    \"\"\"\n    # L1\n    hours_per_day = 5 # works 5 hours a day\n    work_days = 6 # in 6 days of work\n    total_hours_worked = hours_per_day * work_days\n\n    # L2\n    flowers_per_day = 60 # can take care of 60 different flowers in one day\n    flowers_per_hour = flowers_per_day / hours_per_day\n\n    # L3\n    total_flowers_cared_for = total_hours_worked * flowers_per_hour\n\n    # FA\n    answer = total_flowers_cared_for\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_hours_worked",
+    "operand_to_replace": "work_days",
+    "replacement_variable": "hours_per_day"
+  },
+  "correct_trace": {
+    "hours_per_day": 5,
+    "work_days": 6,
+    "total_hours_worked": 30,
+    "flowers_per_day": 60,
+    "flowers_per_hour": 12.0,
+    "total_flowers_cared_for": 360.0,
+    "answer": 360.0
+  },
+  "flawed_trace": {
+    "hours_per_day": 5,
+    "work_days": 6,
+    "total_hours_worked": 25,
+    "flowers_per_day": 60,
+    "flowers_per_hour": 12.0,
+    "total_flowers_cared_for": 300.0,
+    "answer": 300.0
+  },
+  "correct_value": 30,
+  "flawed_value": 25,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_hours_worked",
+      "question_inputs": [
+        "hours_per_day",
+        "work_days"
+      ],
+      "solution_line_template": "Miriam works {hours_per_day} hours per day, so in {work_days} days, she works {hours_per_day} * {work_days} = <<{hours_per_day}*{work_days}={total_hours_worked}>>{total_hours_worked} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "flowers_per_hour",
+      "question_inputs": [
+        "flowers_per_day"
+      ],
+      "solution_line_template": "Miriam can take care of {flowers_per_day} / {hours_per_day} = <<{flowers_per_day}/{hours_per_day}={flowers_per_hour}>>{flowers_per_hour} flowers per hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_flowers_cared_for",
+      "question_inputs": [],
+      "solution_line_template": "In {work_days} days of work, Miriam can take care of {total_hours_worked} * {flowers_per_hour} = <<{total_hours_worked}*{flowers_per_hour}={total_flowers_cared_for}>>{total_flowers_cared_for} flowers."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Miriam works 5 hours per day, so in 5 days, she works 5 * 5 = <<5*5=25>>25 hours.",
+    "L2": "Miriam can take care of 60 / 5 = <<60/5=12>>12 flowers per hour.",
+    "L3": "In 6 days of work, Miriam can take care of 25 * 12 = <<25*12=300>>300 flowers.",
+    "FA": "#### 300"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'hours_per_day' (5) was used instead of 'work_days' (6).",
+  "repro_seed": -6248324340426863390,
+  "model_name": "google_gemini-2.5-flash"
+}

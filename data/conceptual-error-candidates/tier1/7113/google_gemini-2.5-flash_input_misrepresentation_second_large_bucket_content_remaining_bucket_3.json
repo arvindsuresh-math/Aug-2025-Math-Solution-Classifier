@@ -1,0 +1,70 @@
+{
+  "index": 7113,
+  "original_solution_mapping": {
+    "FA": "#### 39",
+    "L1": "Darius poured the 13-ounce bucket into the first large bucket because 23 - 10 = 13",
+    "L2": "The remaining buckets are thus the 11, 12, and 16 ounce buckets.",
+    "L3": "The second large bucket contains 39 ounces because 11 + 12 + 16 = <<11+12+16=39>>39"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7113.\n    Returns: the total ounces in the second large bucket.\n    \"\"\"\n    # L1\n    total_in_bigger_bucket = 23 # The total in the bigger bucket is now 23 ounces.\n    ten_ounce_bucket_val = 10 # the ten-ounce bucket\n    identified_bucket_value = total_in_bigger_bucket - ten_ounce_bucket_val\n\n    # L3\n    remaining_bucket_1 = 11 # One contains 11 ounces\n    remaining_bucket_2 = 12 # one contains 12 ounces\n    remaining_bucket_3 = 16 # one contains 16 ounces\n    second_large_bucket_content = remaining_bucket_1 + remaining_bucket_2 + remaining_bucket_3\n\n    # FA\n    answer = second_large_bucket_content\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "second_large_bucket_content",
+    "operand_to_replace": "remaining_bucket_2",
+    "replacement_variable": "remaining_bucket_3"
+  },
+  "correct_trace": {
+    "total_in_bigger_bucket": 23,
+    "ten_ounce_bucket_val": 10,
+    "identified_bucket_value": 13,
+    "remaining_bucket_1": 11,
+    "remaining_bucket_2": 12,
+    "remaining_bucket_3": 16,
+    "second_large_bucket_content": 39,
+    "answer": 39
+  },
+  "flawed_trace": {
+    "total_in_bigger_bucket": 23,
+    "ten_ounce_bucket_val": 10,
+    "identified_bucket_value": 13,
+    "remaining_bucket_1": 11,
+    "remaining_bucket_2": 12,
+    "remaining_bucket_3": 16,
+    "second_large_bucket_content": 43,
+    "answer": 43
+  },
+  "correct_value": 39,
+  "flawed_value": 43,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "identified_bucket_value",
+      "question_inputs": [
+        "total_in_bigger_bucket",
+        "ten_ounce_bucket_val"
+      ],
+      "solution_line_template": "Darius poured the 13-ounce bucket into the first large bucket because {total_in_bigger_bucket} - {ten_ounce_bucket_val} = {identified_bucket_value}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "second_large_bucket_content",
+      "question_inputs": [
+        "remaining_bucket_1",
+        "remaining_bucket_2",
+        "remaining_bucket_3"
+      ],
+      "solution_line_template": "The second large bucket contains {second_large_bucket_content} ounces because {remaining_bucket_1} + {remaining_bucket_2} + {remaining_bucket_3} = <<{remaining_bucket_1}+{remaining_bucket_2}+{remaining_bucket_3}={second_large_bucket_content}>>{second_large_bucket_content}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Darius poured the 13-ounce bucket into the first large bucket because 23 - 10 = 13",
+    "L3": "The second large bucket contains 43 ounces because 11 + 16 + 16 = <<11+16+16=43>>43",
+    "FA": "#### 43"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'remaining_bucket_3' (16) was used instead of 'remaining_bucket_2' (12).",
+  "repro_seed": 8787786981224264302,
+  "model_name": "google_gemini-2.5-flash"
+}

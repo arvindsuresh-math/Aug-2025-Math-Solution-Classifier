@@ -1,0 +1,78 @@
+{
+  "index": 4337,
+  "original_solution_mapping": {
+    "FA": "#### 122",
+    "L1": "Carrie worked 2 hours x 4 days = <<2*4=8>>8 hours.",
+    "L2": "Carrie was paid $22 x 8 = $<<22*8=176>>176.",
+    "L3": "Her profit was $176 - $54 = $<<176-54=122>>122."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4337.\n    Returns: the profit Carrie earned on the cake.\n    \"\"\"\n    # L1\n    hours_per_day = 2 # 2 hours a day\n    num_days_worked = 4 # for 4 days\n    total_hours_worked = hours_per_day * num_days_worked\n\n    # L2\n    hourly_rate = 22 # $22 an hour\n    total_wages = hourly_rate * total_hours_worked\n\n    # L3\n    cost_of_supplies = 54 # cost for supplies to make the cake was $54\n    profit = total_wages - cost_of_supplies\n\n    # FA\n    answer = profit\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "profit",
+    "operand_to_replace": "cost_of_supplies",
+    "replacement_variable": "hours_per_day"
+  },
+  "correct_trace": {
+    "hours_per_day": 2,
+    "num_days_worked": 4,
+    "total_hours_worked": 8,
+    "hourly_rate": 22,
+    "total_wages": 176,
+    "cost_of_supplies": 54,
+    "profit": 122,
+    "answer": 122
+  },
+  "flawed_trace": {
+    "hours_per_day": 2,
+    "num_days_worked": 4,
+    "total_hours_worked": 8,
+    "hourly_rate": 22,
+    "total_wages": 176,
+    "cost_of_supplies": 54,
+    "profit": 174,
+    "answer": 174
+  },
+  "correct_value": 122,
+  "flawed_value": 174,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_hours_worked",
+      "question_inputs": [
+        "hours_per_day",
+        "num_days_worked"
+      ],
+      "solution_line_template": "Carrie worked {hours_per_day} hours x {num_days_worked} days = <<{hours_per_day}*{num_days_worked}={total_hours_worked}>>{total_hours_worked} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_wages",
+      "question_inputs": [
+        "hourly_rate"
+      ],
+      "solution_line_template": "Carrie was paid ${hourly_rate} x {total_hours_worked} = $<<{hourly_rate}*{total_hours_worked}={total_wages}>>{total_wages}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "profit",
+      "question_inputs": [
+        "cost_of_supplies"
+      ],
+      "solution_line_template": "Her profit was ${total_wages} - ${cost_of_supplies} = $<<{total_wages}-{cost_of_supplies}={profit}>>{profit}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Carrie worked 2 hours x 4 days = <<2*4=8>>8 hours.",
+    "L2": "Carrie was paid $22 x 8 = $<<22*8=176>>176.",
+    "L3": "Her profit was $176 - $2 = $<<176-2=174>>174.",
+    "FA": "#### 174"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'hours_per_day' (2) was used instead of 'cost_of_supplies' (54).",
+  "repro_seed": 6533405754287141839,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,107 @@
+{
+  "index": 883,
+  "original_solution_mapping": {
+    "FA": "#### 113",
+    "L1": "The builder purchased 7 boxes * 11 bolts = <<7*11=77>>77 bolts.",
+    "L2": "He used 77 bolts - 3 left over = <<77-3=74>>74 bolts for the project.",
+    "L3": "The builder purchased 3 boxes * 15 nuts = <<3*15=45>>45 nuts.",
+    "L4": "He used 45 nuts - 6 left over = <<45-6=39>>39 nuts for the project.",
+    "L5": "Total for the project he used 74 bolts + 39 nuts = <<74+39=113>>113 nuts and bolts."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 883.\n    Returns: the total number of bolts and nuts used for the project.\n    \"\"\"\n    # L1\n    num_boxes_bolts = 7 # 7 boxes of bolts\n    bolts_per_box = 11 # each box containing 11 bolts\n    total_bolts_purchased = num_boxes_bolts * bolts_per_box\n\n    # L2\n    bolts_left_over = 3 # 3 bolts ... left over\n    bolts_used_for_project = total_bolts_purchased - bolts_left_over\n\n    # L3\n    num_boxes_nuts = 3 # 3 boxes of nuts\n    nuts_per_box = 15 # each box containing 15 nuts\n    total_nuts_purchased = num_boxes_nuts * nuts_per_box\n\n    # L4\n    nuts_left_over = 6 # 6 nuts left over\n    nuts_used_for_project = total_nuts_purchased - nuts_left_over\n\n    # L5\n    total_used_for_project = bolts_used_for_project + nuts_used_for_project\n\n    # FA\n    answer = total_used_for_project\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_nuts_purchased",
+    "operand_to_replace": "nuts_per_box",
+    "replacement_variable": "total_bolts_purchased"
+  },
+  "correct_trace": {
+    "num_boxes_bolts": 7,
+    "bolts_per_box": 11,
+    "total_bolts_purchased": 77,
+    "bolts_left_over": 3,
+    "bolts_used_for_project": 74,
+    "num_boxes_nuts": 3,
+    "nuts_per_box": 15,
+    "total_nuts_purchased": 45,
+    "nuts_left_over": 6,
+    "nuts_used_for_project": 39,
+    "total_used_for_project": 113,
+    "answer": 113
+  },
+  "flawed_trace": {
+    "num_boxes_bolts": 7,
+    "bolts_per_box": 11,
+    "total_bolts_purchased": 77,
+    "bolts_left_over": 3,
+    "bolts_used_for_project": 74,
+    "num_boxes_nuts": 3,
+    "nuts_per_box": 15,
+    "total_nuts_purchased": 231,
+    "nuts_left_over": 6,
+    "nuts_used_for_project": 225,
+    "total_used_for_project": 299,
+    "answer": 299
+  },
+  "correct_value": 45,
+  "flawed_value": 231,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "num_boxes_bolts",
+        "bolts_per_box"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_bolts_purchased",
+      "solution_line_template": "The builder purchased {num_boxes_bolts} boxes * {bolts_per_box} bolts = <<{num_boxes_bolts}*{bolts_per_box}={total_bolts_purchased}>>{total_bolts_purchased} bolts."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "bolts_left_over"
+      ],
+      "WK_inputs": [],
+      "output_variable": "bolts_used_for_project",
+      "solution_line_template": "He used {total_bolts_purchased} bolts - {bolts_left_over} left over = <<{total_bolts_purchased}-{bolts_left_over}={bolts_used_for_project}>>{bolts_used_for_project} bolts for the project."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "num_boxes_nuts",
+        "nuts_per_box"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_nuts_purchased",
+      "solution_line_template": "The builder purchased {num_boxes_nuts} boxes * {nuts_per_box} nuts = <<{num_boxes_nuts}*{nuts_per_box}={total_nuts_purchased}>>{total_nuts_purchased} nuts."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "nuts_left_over"
+      ],
+      "WK_inputs": [],
+      "output_variable": "nuts_used_for_project",
+      "solution_line_template": "He used {total_nuts_purchased} nuts - {nuts_left_over} left over = <<{total_nuts_purchased}-{nuts_left_over}={nuts_used_for_project}>>{nuts_used_for_project} nuts for the project."
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_used_for_project",
+      "solution_line_template": "Total for the project he used {bolts_used_for_project} bolts + {nuts_used_for_project} nuts = <<{bolts_used_for_project}+{nuts_used_for_project}={total_used_for_project}>>{total_used_for_project} nuts and bolts."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The builder purchased 7 boxes * 11 bolts = <<7*11=77>>77 bolts.",
+    "L2": "He used 77 bolts - 3 left over = <<77-3=74>>74 bolts for the project.",
+    "L3": "The builder purchased 3 boxes * 77 nuts = <<3*77=231>>231 nuts.",
+    "L4": "He used 231 nuts - 6 left over = <<231-6=225>>225 nuts for the project.",
+    "L5": "Total for the project he used 74 bolts + 225 nuts = <<74+225=299>>299 nuts and bolts.",
+    "FA": "#### 299"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'total_bolts_purchased' (77) was used instead of 'nuts_per_box' (15).",
+  "repro_seed": -554238972383298801,
+  "model_name": "google_gemini-2.5-flash"
+}

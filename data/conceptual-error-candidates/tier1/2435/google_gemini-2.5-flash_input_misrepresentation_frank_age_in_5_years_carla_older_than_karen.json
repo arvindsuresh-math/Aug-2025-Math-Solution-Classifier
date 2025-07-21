@@ -1,0 +1,81 @@
+{
+  "index": 2435,
+  "original_solution_mapping": {
+    "FA": "#### 36",
+    "L1": "Carla is currently 2 + 2 = <<2+2=4>>4 years old",
+    "L2": "Ty is currently (2 * 4) + 4 = <<2*4+4=12>>12 years old",
+    "L3": "In 5 years, Frank will be 12 * 3 = <<12*3=36>>36 years old"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2435.\n    Returns: Frank's age in 5 years.\n    \"\"\"\n    # L1\n    karen_current_age = 2 # Karen is currently 2 years old\n    carla_older_than_karen = 2 # Carla is currently 2 years older than Karen\n    carla_current_age = karen_current_age + carla_older_than_karen\n\n    # L2\n    ty_multiplier = 2 # two times as old as Carla\n    ty_more_than_twice_carla = 4 # 4 years more than two times as old as Carla\n    ty_current_age = (ty_multiplier * carla_current_age) + ty_more_than_twice_carla\n\n    # L3\n    frank_multiplier = 3 # three times as old as Ty is now\n    frank_age_in_5_years = ty_current_age * frank_multiplier\n\n    # FA\n    answer = frank_age_in_5_years\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "frank_age_in_5_years",
+    "operand_to_replace": "frank_multiplier",
+    "replacement_variable": "carla_older_than_karen"
+  },
+  "correct_trace": {
+    "karen_current_age": 2,
+    "carla_older_than_karen": 2,
+    "carla_current_age": 4,
+    "ty_multiplier": 2,
+    "ty_more_than_twice_carla": 4,
+    "ty_current_age": 12,
+    "frank_multiplier": 3,
+    "frank_age_in_5_years": 36,
+    "answer": 36
+  },
+  "flawed_trace": {
+    "karen_current_age": 2,
+    "carla_older_than_karen": 2,
+    "carla_current_age": 4,
+    "ty_multiplier": 2,
+    "ty_more_than_twice_carla": 4,
+    "ty_current_age": 12,
+    "frank_multiplier": 3,
+    "frank_age_in_5_years": 24,
+    "answer": 24
+  },
+  "correct_value": 36,
+  "flawed_value": 24,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "karen_current_age",
+        "carla_older_than_karen"
+      ],
+      "WK_inputs": [],
+      "output_variable": "carla_current_age",
+      "solution_line_template": "Carla is currently {karen_current_age} + {carla_older_than_karen} = <<{karen_current_age}+{carla_older_than_karen}={carla_current_age}>>{carla_current_age} years old"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "ty_multiplier",
+        "ty_more_than_twice_carla"
+      ],
+      "WK_inputs": [],
+      "output_variable": "ty_current_age",
+      "solution_line_template": "Ty is currently ({ty_multiplier} * {carla_current_age}) + {ty_more_than_twice_carla} = <<{ty_multiplier}*{carla_current_age}+{ty_more_than_twice_carla}={ty_current_age}>>{ty_current_age} years old"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "frank_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "frank_age_in_5_years",
+      "solution_line_template": "In 5 years, Frank will be {ty_current_age} * {frank_multiplier} = <<{ty_current_age}*{frank_multiplier}={frank_age_in_5_years}>>{frank_age_in_5_years} years old"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Carla is currently 2 + 2 = <<2+2=4>>4 years old",
+    "L2": "Ty is currently (2 * 4) + 4 = <<2*4+4=12>>12 years old",
+    "L3": "In 5 years, Frank will be 12 * 2 = <<12*2=24>>24 years old",
+    "FA": "#### 24"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'carla_older_than_karen' (2) was used instead of 'frank_multiplier' (3).",
+  "repro_seed": -6234698583835927612,
+  "model_name": "google_gemini-2.5-flash"
+}

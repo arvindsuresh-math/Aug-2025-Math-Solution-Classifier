@@ -1,0 +1,89 @@
+{
+  "index": 388,
+  "original_solution_mapping": {
+    "FA": "#### 3600",
+    "L1": "He gets 3*$400=$<<3*400=1200>>1200 per month",
+    "L2": "So he gets 1200*12=$<<1200*12=14400>>14,400 per year",
+    "L3": "So he pays 12*900=$<<12*900=10800>>10800 a year",
+    "L4": "That means his profit is 14400-10800=$<<14400-10800=3600>>3600 per year"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 388.\n    Returns: the profit John makes in a year from subletting his apartment.\n    \"\"\"\n    # L1\n    num_subletters = 3 # sublets his apartment to 3 people\n    subletter_rent = 400 # each pay $400 per month\n    total_income_per_month = num_subletters * subletter_rent\n\n    # L2\n    months_per_year = 12 # WK\n    total_income_per_year = total_income_per_month * months_per_year\n\n    # L3\n    john_rent_per_month = 900 # rents the apartment for $900 a month\n    total_rent_per_year = months_per_year * john_rent_per_month\n\n    # L4\n    profit = total_income_per_year - total_rent_per_year\n\n    # FA\n    answer = profit\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_income_per_year",
+    "operand_to_replace": "months_per_year",
+    "replacement_variable": "total_income_per_month"
+  },
+  "correct_trace": {
+    "num_subletters": 3,
+    "subletter_rent": 400,
+    "total_income_per_month": 1200,
+    "months_per_year": 12,
+    "total_income_per_year": 14400,
+    "john_rent_per_month": 900,
+    "total_rent_per_year": 10800,
+    "profit": 3600,
+    "answer": 3600
+  },
+  "flawed_trace": {
+    "num_subletters": 3,
+    "subletter_rent": 400,
+    "total_income_per_month": 1200,
+    "months_per_year": 12,
+    "total_income_per_year": 1440000,
+    "john_rent_per_month": 900,
+    "total_rent_per_year": 10800,
+    "profit": 1429200,
+    "answer": 1429200
+  },
+  "correct_value": 14400,
+  "flawed_value": 1440000,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "num_subletters",
+        "subletter_rent"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_income_per_month",
+      "solution_line_template": "He gets {num_subletters}*${subletter_rent}=$<<{num_subletters}*{subletter_rent}={total_income_per_month}>>{total_income_per_month} per month"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "output_variable": "total_income_per_year",
+      "solution_line_template": "So he gets {total_income_per_month}*{months_per_year}=$<<{total_income_per_month}*{months_per_year}={total_income_per_year}>>{total_income_per_year} per year"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "john_rent_per_month"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_rent_per_year",
+      "solution_line_template": "So he pays {months_per_year}*{john_rent_per_month}=$<<{months_per_year}*{john_rent_per_month}={total_rent_per_year}>>{total_rent_per_year} a year"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "profit",
+      "solution_line_template": "That means his profit is {total_income_per_year}-{total_rent_per_year}=$<<{total_income_per_year}-{total_rent_per_year}={profit}>>{profit} per year"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He gets 3*$400=$<<3*400=1200>>1200 per month",
+    "L2": "So he gets 1200*1200=$<<1200*1200=1440000>>1440000 per year",
+    "L3": "So he pays 12*900=$<<12*900=10800>>10800 a year",
+    "L4": "That means his profit is 1440000-10800=$<<1440000-10800=1429200>>1429200 per year",
+    "FA": "#### 1429200"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_income_per_month' (1200) was used instead of 'months_per_year' (12).",
+  "repro_seed": 5829549067070980626,
+  "model_name": "openai_gpt-4.1"
+}

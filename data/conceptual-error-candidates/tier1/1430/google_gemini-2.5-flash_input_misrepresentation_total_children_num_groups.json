@@ -1,0 +1,77 @@
+{
+  "index": 1430,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "There are 3 groups * 25 people/group = <<3*25=75>>75 people in total.",
+    "L2": "There are 14 girls + 11 boys = <<14+11=25>>25 children in total.",
+    "L3": "There are 75 people - 25 children = <<75-25=50>>50 parents."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1430.\n    Returns: the number of parents at the park.\n    \"\"\"\n    # L1\n    num_groups = 3 # 3 equally sized playgroups\n    people_per_group = 25 # each group contains 25 people\n    total_people = num_groups * people_per_group\n\n    # L2\n    num_girls = 14 # 14 girls\n    num_boys = 11 # 11 boys\n    total_children = num_girls + num_boys\n\n    # L3\n    num_parents = total_people - total_children\n\n    # FA\n    answer = num_parents\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_children",
+    "operand_to_replace": "num_boys",
+    "replacement_variable": "num_groups"
+  },
+  "correct_trace": {
+    "num_groups": 3,
+    "people_per_group": 25,
+    "total_people": 75,
+    "num_girls": 14,
+    "num_boys": 11,
+    "total_children": 25,
+    "num_parents": 50,
+    "answer": 50
+  },
+  "flawed_trace": {
+    "num_groups": 3,
+    "people_per_group": 25,
+    "total_people": 75,
+    "num_girls": 14,
+    "num_boys": 11,
+    "total_children": 17,
+    "num_parents": 58,
+    "answer": 58
+  },
+  "correct_value": 25,
+  "flawed_value": 17,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "num_groups",
+        "people_per_group"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_people",
+      "solution_line_template": "There are {num_groups} groups * {people_per_group} people/group = <<{num_groups}*{people_per_group}={total_people}>>{total_people} people in total."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "num_girls",
+        "num_boys"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_children",
+      "solution_line_template": "There are {num_girls} girls + {num_boys} boys = <<{num_girls}+{num_boys}={total_children}>>{total_children} children in total."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "num_parents",
+      "solution_line_template": "There are {total_people} people - {total_children} children = <<{total_people}-{total_children}={num_parents}>>{num_parents} parents."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 3 groups * 25 people/group = <<3*25=75>>75 people in total.",
+    "L2": "There are 14 girls + 3 boys = <<14+3=17>>17 children in total.",
+    "L3": "There are 75 people - 17 children = <<75-17=58>>58 parents.",
+    "FA": "#### 58"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_groups' (3) was used instead of 'num_boys' (11).",
+  "repro_seed": -8005522676253470805,
+  "model_name": "google_gemini-2.5-flash"
+}

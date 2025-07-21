@@ -1,0 +1,74 @@
+{
+  "index": 2446,
+  "original_solution_mapping": {
+    "FA": "#### 270",
+    "L1": "Bob got 12*10=<<12*10=120>>120 skips",
+    "L2": "Jim got 15*10=<<15*10=150>>150 skips",
+    "L3": "So in total they got 120+150=<<120+150=270>>270 skips"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2446.\n    Returns: the total number of skips Bob and Jim got.\n    \"\"\"\n    # L1\n    bob_skips_per_rock = 12 # Bob can skip a rock 12 times\n    num_rocks_skipped = 10 # they each skipped 10 rocks\n    bob_total_skips = bob_skips_per_rock * num_rocks_skipped\n\n    # L2\n    jim_skips_per_rock = 15 # Jim can skip a rock 15 times\n    jim_total_skips = jim_skips_per_rock * num_rocks_skipped\n\n    # L3\n    total_skips = bob_total_skips + jim_total_skips\n\n    # FA\n    answer = total_skips\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "jim_total_skips",
+    "operand_to_replace": "jim_skips_per_rock",
+    "replacement_variable": "bob_skips_per_rock"
+  },
+  "correct_trace": {
+    "bob_skips_per_rock": 12,
+    "num_rocks_skipped": 10,
+    "bob_total_skips": 120,
+    "jim_skips_per_rock": 15,
+    "jim_total_skips": 150,
+    "total_skips": 270,
+    "answer": 270
+  },
+  "flawed_trace": {
+    "bob_skips_per_rock": 12,
+    "num_rocks_skipped": 10,
+    "bob_total_skips": 120,
+    "jim_skips_per_rock": 15,
+    "jim_total_skips": 120,
+    "total_skips": 240,
+    "answer": 240
+  },
+  "correct_value": 150,
+  "flawed_value": 120,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "bob_skips_per_rock",
+        "num_rocks_skipped"
+      ],
+      "WK_inputs": [],
+      "output_variable": "bob_total_skips",
+      "solution_line_template": "Bob got {bob_skips_per_rock}*{num_rocks_skipped}=<<{bob_skips_per_rock}*{num_rocks_skipped}={bob_total_skips}>>{bob_total_skips} skips"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "jim_skips_per_rock"
+      ],
+      "WK_inputs": [],
+      "output_variable": "jim_total_skips",
+      "solution_line_template": "Jim got {jim_skips_per_rock}*{num_rocks_skipped}=<<{jim_skips_per_rock}*{num_rocks_skipped}={jim_total_skips}>>{jim_total_skips} skips"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_skips",
+      "solution_line_template": "So in total they got {bob_total_skips}+{jim_total_skips}=<<{bob_total_skips}+{jim_total_skips}={total_skips}>>{total_skips} skips"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Bob got 12*10=<<12*10=120>>120 skips",
+    "L2": "Jim got 12*10=<<12*10=120>>120 skips",
+    "L3": "So in total they got 120+120=<<120+120=240>>240 skips",
+    "FA": "#### 240"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'bob_skips_per_rock' (12) was used instead of 'jim_skips_per_rock' (15).",
+  "repro_seed": 3335961544842880057,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,89 @@
+{
+  "index": 4630,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "6 models wearing 2 sets of bathing suits, or a total of 6 * 2 = <<6*2=12>>12 trips wearing bathing suits.",
+    "L2": "6 models wearing 3 sets of evening wear, or a total of 6 * 3 = <<6*3=18>>18 trips wearing evening wear clothes.",
+    "L3": "Altogether, there will be 12 + 18 = <<12+18=30>>30 trips up and down the runway.",
+    "L4": "At 2 minutes per trip, all of the trips will take 30 * 2 = <<30*2=60>>60 minutes to complete."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4630.\n    Returns: the total time in minutes to complete all runway trips.\n    \"\"\"\n    # L1\n    num_models = 6 # 6 models in the show\n    bathing_suit_sets_per_model = 2 # two sets of bathing suits\n    bathing_suit_trips = num_models * bathing_suit_sets_per_model\n\n    # L2\n    evening_wear_sets_per_model = 3 # three sets of evening wear clothing\n    evening_wear_trips = num_models * evening_wear_sets_per_model\n\n    # L3\n    total_trips = bathing_suit_trips + evening_wear_trips\n\n    # L4\n    minutes_per_trip = 2 # 2 minutes to walk out to the end of the runway and back\n    total_time_minutes = total_trips * minutes_per_trip\n\n    # FA\n    answer = total_time_minutes\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "bathing_suit_trips",
+    "operand_to_replace": "num_models",
+    "replacement_variable": "bathing_suit_sets_per_model"
+  },
+  "correct_trace": {
+    "num_models": 6,
+    "bathing_suit_sets_per_model": 2,
+    "bathing_suit_trips": 12,
+    "evening_wear_sets_per_model": 3,
+    "evening_wear_trips": 18,
+    "total_trips": 30,
+    "minutes_per_trip": 2,
+    "total_time_minutes": 60,
+    "answer": 60
+  },
+  "flawed_trace": {
+    "num_models": 6,
+    "bathing_suit_sets_per_model": 2,
+    "bathing_suit_trips": 4,
+    "evening_wear_sets_per_model": 3,
+    "evening_wear_trips": 18,
+    "total_trips": 22,
+    "minutes_per_trip": 2,
+    "total_time_minutes": 44,
+    "answer": 44
+  },
+  "correct_value": 12,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "bathing_suit_trips",
+      "question_inputs": [
+        "num_models",
+        "bathing_suit_sets_per_model"
+      ],
+      "solution_line_template": "{num_models} models wearing {bathing_suit_sets_per_model} sets of bathing suits, or a total of {num_models} * {bathing_suit_sets_per_model} = <<{num_models}*{bathing_suit_sets_per_model}={bathing_suit_trips}>>{bathing_suit_trips} trips wearing bathing suits."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "evening_wear_trips",
+      "question_inputs": [
+        "evening_wear_sets_per_model"
+      ],
+      "solution_line_template": "{num_models} models wearing {evening_wear_sets_per_model} sets of evening wear, or a total of {num_models} * {evening_wear_sets_per_model} = <<{num_models}*{evening_wear_sets_per_model}={evening_wear_trips}>>{evening_wear_trips} trips wearing evening wear clothes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_trips",
+      "question_inputs": [],
+      "solution_line_template": "Altogether, there will be {bathing_suit_trips} + {evening_wear_trips} = <<{bathing_suit_trips}+{evening_wear_trips}={total_trips}>>{total_trips} trips up and down the runway."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_time_minutes",
+      "question_inputs": [
+        "minutes_per_trip"
+      ],
+      "solution_line_template": "At {minutes_per_trip} minutes per trip, all of the trips will take {total_trips} * {minutes_per_trip} = <<{total_trips}*{minutes_per_trip}={total_time_minutes}>>{total_time_minutes} minutes to complete."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "2 models wearing 2 sets of bathing suits, or a total of 2 * 2 = <<2*2=4>>4 trips wearing bathing suits.",
+    "L2": "6 models wearing 3 sets of evening wear, or a total of 6 * 3 = <<6*3=18>>18 trips wearing evening wear clothes.",
+    "L3": "Altogether, there will be 4 + 18 = <<4+18=22>>22 trips up and down the runway.",
+    "L4": "At 2 minutes per trip, all of the trips will take 22 * 2 = <<22*2=44>>44 minutes to complete.",
+    "FA": "#### 44"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'bathing_suit_sets_per_model' (2) was used instead of 'num_models' (6).",
+  "repro_seed": -4382500444123878906,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,105 @@
+{
+  "index": 2943,
+  "original_solution_mapping": {
+    "FA": "#### 59",
+    "L1": "First double the initial temperature: 40 degrees * 2 = <<40*2=80>>80 degrees",
+    "L2": "Then reduce that amount by 30 to reflect the dad's change: 80 degrees - 30 degrees = <<80-30=50>>50 degrees",
+    "L3": "Then multiply that number by 30% to find how much Jerry's mother reduces the temperature: 50 degrees * .3 = <<50*.3=15>>15 degrees",
+    "L4": "Now subtract 15 degrees from 50 degrees to find the temperature after the mother's change: 50 degrees - 15 degrees = <<50-15=35>>35 degrees",
+    "L5": "Finally, add 24 degrees to find the final temperature: 35 degrees + 24 degrees = <<35+24=59>>59 degrees"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2943.\n    Returns: the final temperature after all changes.\n    \"\"\"\n    # L1\n    initial_temperature = 40 # thermostat set to 40 degrees\n    double_factor = 2 # WK\n    temp_after_double = initial_temperature * double_factor\n\n    # L2\n    dad_reduction_amount = 30 # reducing the temperature by 30 degrees\n    temp_after_dad_reduction = temp_after_double - dad_reduction_amount\n\n    # L3\n    mother_reduction_decimal = 0.3 # by 30%\n    mother_reduction_amount = temp_after_dad_reduction * mother_reduction_decimal\n\n    # L4\n    temp_after_mother_reduction = temp_after_dad_reduction - mother_reduction_amount\n\n    # L5\n    sister_increase_amount = 24 # increases it by 24 degrees\n    final_temperature = temp_after_mother_reduction + sister_increase_amount\n\n    # FA\n    answer = final_temperature\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "mother_reduction_amount",
+    "operand_to_replace": "temp_after_dad_reduction",
+    "replacement_variable": "dad_reduction_amount"
+  },
+  "correct_trace": {
+    "initial_temperature": 40,
+    "double_factor": 2,
+    "temp_after_double": 80,
+    "dad_reduction_amount": 30,
+    "temp_after_dad_reduction": 50,
+    "mother_reduction_decimal": 0.3,
+    "mother_reduction_amount": 15.0,
+    "temp_after_mother_reduction": 35.0,
+    "sister_increase_amount": 24,
+    "final_temperature": 59.0,
+    "answer": 59.0
+  },
+  "flawed_trace": {
+    "initial_temperature": 40,
+    "double_factor": 2,
+    "temp_after_double": 80,
+    "dad_reduction_amount": 30,
+    "temp_after_dad_reduction": 50,
+    "mother_reduction_decimal": 0.3,
+    "mother_reduction_amount": 9.0,
+    "temp_after_mother_reduction": 41.0,
+    "sister_increase_amount": 24,
+    "final_temperature": 65.0,
+    "answer": 65.0
+  },
+  "correct_value": 15.0,
+  "flawed_value": 9.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "double_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "temp_after_double",
+      "question_inputs": [
+        "initial_temperature"
+      ],
+      "solution_line_template": "First double the initial temperature: {initial_temperature} degrees * {double_factor} = <<{initial_temperature}*{double_factor}={temp_after_double}>>{temp_after_double} degrees"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "temp_after_dad_reduction",
+      "question_inputs": [
+        "dad_reduction_amount"
+      ],
+      "solution_line_template": "Then reduce that amount by {dad_reduction_amount} to reflect the dad's change: {temp_after_double} degrees - {dad_reduction_amount} degrees = <<{temp_after_double}-{dad_reduction_amount}={temp_after_dad_reduction}>>{temp_after_dad_reduction} degrees"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "mother_reduction_amount",
+      "question_inputs": [
+        "mother_reduction_decimal"
+      ],
+      "solution_line_template": "Then multiply that number by 30% to find how much Jerry's mother reduces the temperature: {temp_after_dad_reduction} degrees * {mother_reduction_decimal} = <<{temp_after_dad_reduction}*{mother_reduction_decimal}={mother_reduction_amount}>>{mother_reduction_amount} degrees"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "temp_after_mother_reduction",
+      "question_inputs": [],
+      "solution_line_template": "Now subtract {mother_reduction_amount} degrees from {temp_after_dad_reduction} degrees to find the temperature after the mother's change: {temp_after_dad_reduction} degrees - {mother_reduction_amount} degrees = <<{temp_after_dad_reduction}-{mother_reduction_amount}={temp_after_mother_reduction}>>{temp_after_mother_reduction} degrees"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "final_temperature",
+      "question_inputs": [
+        "sister_increase_amount"
+      ],
+      "solution_line_template": "Finally, add {sister_increase_amount} degrees to find the final temperature: {temp_after_mother_reduction} degrees + {sister_increase_amount} degrees = <<{temp_after_mother_reduction}+{sister_increase_amount}={final_temperature}>>{final_temperature} degrees"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First double the initial temperature: 40 degrees * 2 = <<40*2=80>>80 degrees",
+    "L2": "Then reduce that amount by 30 to reflect the dad's change: 80 degrees - 30 degrees = <<80-30=50>>50 degrees",
+    "L3": "Then multiply that number by 30% to find how much Jerry's mother reduces the temperature: 30 degrees * 0.3 = <<30*0.3=9>>9 degrees",
+    "L4": "Now subtract 9 degrees from 50 degrees to find the temperature after the mother's change: 50 degrees - 9 degrees = <<50-9=41>>41 degrees",
+    "L5": "Finally, add 24 degrees to find the final temperature: 41 degrees + 24 degrees = <<41+24=65>>65 degrees",
+    "FA": "#### 65"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'dad_reduction_amount' (value: 30) was used instead of 'temp_after_dad_reduction' (value: 50).",
+  "repro_seed": -4118363076008057086,
+  "model_name": "google_gemini-2.5-flash"
+}

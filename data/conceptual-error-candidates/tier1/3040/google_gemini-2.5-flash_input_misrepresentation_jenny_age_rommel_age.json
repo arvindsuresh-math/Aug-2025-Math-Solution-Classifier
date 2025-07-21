@@ -1,0 +1,74 @@
+{
+  "index": 3040,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "Rommel is 5 x 3 = <<5*3=15>>15 years old.",
+    "L2": "Jenny is 15 + 2 = <<15+2=17>>17 years old.",
+    "L3": "So, Tim is 17 - 5 = <<17-5=12>>12 years younger than Jenny."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3040.\n    Returns: how many years younger Tim is than Jenny.\n    \"\"\"\n    # L1\n    tim_age = 5 # Tim is 5 years old\n    rommel_multiplier = 3 # thrice as old as he is\n    rommel_age = tim_age * rommel_multiplier\n\n    # L2\n    jenny_age_diff_rommel = 2 # 2 years older than Rommel\n    jenny_age = rommel_age + jenny_age_diff_rommel\n\n    # L3\n    age_difference = jenny_age - tim_age\n\n    # FA\n    answer = age_difference\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "jenny_age",
+    "operand_to_replace": "jenny_age_diff_rommel",
+    "replacement_variable": "rommel_age"
+  },
+  "correct_trace": {
+    "tim_age": 5,
+    "rommel_multiplier": 3,
+    "rommel_age": 15,
+    "jenny_age_diff_rommel": 2,
+    "jenny_age": 17,
+    "age_difference": 12,
+    "answer": 12
+  },
+  "flawed_trace": {
+    "tim_age": 5,
+    "rommel_multiplier": 3,
+    "rommel_age": 15,
+    "jenny_age_diff_rommel": 2,
+    "jenny_age": 30,
+    "age_difference": 25,
+    "answer": 25
+  },
+  "correct_value": 17,
+  "flawed_value": 30,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "rommel_age",
+      "question_inputs": [
+        "tim_age",
+        "rommel_multiplier"
+      ],
+      "solution_line_template": "Rommel is {tim_age} x {rommel_multiplier} = <<{tim_age}*{rommel_multiplier}={rommel_age}>>{rommel_age} years old."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "jenny_age",
+      "question_inputs": [
+        "jenny_age_diff_rommel"
+      ],
+      "solution_line_template": "Jenny is {rommel_age} + {jenny_age_diff_rommel} = <<{rommel_age}+{jenny_age_diff_rommel}={jenny_age}>>{jenny_age} years old."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "age_difference",
+      "question_inputs": [],
+      "solution_line_template": "So, Tim is {jenny_age} - {tim_age} = <<{jenny_age}-{tim_age}={age_difference}>>{age_difference} years younger than Jenny."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Rommel is 5 x 3 = <<5*3=15>>15 years old.",
+    "L2": "Jenny is 15 + 15 = <<15+15=30>>30 years old.",
+    "L3": "So, Tim is 30 - 5 = <<30-5=25>>25 years younger than Jenny.",
+    "FA": "#### 25"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'rommel_age' (15) was used instead of 'jenny_age_diff_rommel' (2).",
+  "repro_seed": 6345332299156312051,
+  "model_name": "google_gemini-2.5-flash"
+}

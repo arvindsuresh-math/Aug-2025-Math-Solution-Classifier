@@ -1,0 +1,63 @@
+{
+  "index": 5872,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "To find how far Jim travels, we must first find out how far Jill did. To do this, we perform 15-5=<<15-5=10>>10 miles in total for Jill.",
+    "L2": "We then multiply 10*.20= 2 miles in total for Jim, since he only traveled 20% of the distance Jill did."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5872.\n    Returns: the total miles Jim travels.\n    \"\"\"\n    # L1\n    john_distance = 15 # John travels 15 miles on a bike ride\n    jill_less_distance = 5 # Jill travels 5 miles less\n    jill_distance = john_distance - jill_less_distance\n\n    # L2\n    jim_percentage_decimal = 0.20 # 20% as far as Jill\n    jim_distance = jill_distance * jim_percentage_decimal\n\n    # FA\n    answer = jim_distance\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "jim_distance",
+    "operand_to_replace": "jim_percentage_decimal",
+    "replacement_variable": "jill_less_distance"
+  },
+  "correct_trace": {
+    "john_distance": 15,
+    "jill_less_distance": 5,
+    "jill_distance": 10,
+    "jim_percentage_decimal": 0.2,
+    "jim_distance": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "john_distance": 15,
+    "jill_less_distance": 5,
+    "jill_distance": 10,
+    "jim_percentage_decimal": 0.2,
+    "jim_distance": 50,
+    "answer": 50
+  },
+  "correct_value": 2.0,
+  "flawed_value": 50,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "jill_distance",
+      "question_inputs": [
+        "john_distance",
+        "jill_less_distance"
+      ],
+      "solution_line_template": "To find how far Jim travels, we must first find out how far Jill did. To do this, we perform {john_distance}-{jill_less_distance}=<<{john_distance}-{jill_less_distance}={jill_distance}>>{jill_distance} miles in total for Jill."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "jim_distance",
+      "question_inputs": [
+        "jim_percentage_decimal"
+      ],
+      "solution_line_template": "We then multiply {jill_distance}*{jim_percentage_decimal}= {jim_distance} miles in total for Jim, since he only traveled 20% of the distance Jill did."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "To find how far Jim travels, we must first find out how far Jill did. To do this, we perform 15-5=<<15-5=10>>10 miles in total for Jill.",
+    "L2": "We then multiply 10*5= 50 miles in total for Jim, since he only traveled 20% of the distance Jill did.",
+    "FA": "#### 50"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'jill_less_distance' (5) was used instead of 'jim_percentage_decimal' (0.2).",
+  "repro_seed": 6837040443411327886,
+  "model_name": "google_gemini-2.5-flash"
+}

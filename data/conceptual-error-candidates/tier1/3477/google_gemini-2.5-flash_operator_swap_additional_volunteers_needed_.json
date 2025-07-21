@@ -1,0 +1,78 @@
+{
+  "index": 3477,
+  "original_solution_mapping": {
+    "FA": "#### 7",
+    "L1": "Since 5 students from each of the 6 math classes have volunteered, there are 5*6= <<5*6=30>>30 total student volunteers.",
+    "L2": "In addition to the 30 student volunteers, 13 teachers have also volunteered so there are 30+13= <<30+13=43>>43 total volunteers.",
+    "L3": "Mr. Johnson needs 50 volunteers and currently has 43 volunteers, so he needs 50-43= <<50-43=7>>7 more volunteers."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3477.\n    Returns: the number of additional volunteers Mr. Johnson needs.\n    \"\"\"\n    # L1\n    students_per_class = 5 # 5 students from each of the school\u2019s 6 math classes\n    num_math_classes = 6 # 6 math classes\n    total_student_volunteers = students_per_class * num_math_classes\n\n    # L2\n    teacher_volunteers = 13 # 13 teachers have also volunteered\n    current_total_volunteers = total_student_volunteers + teacher_volunteers\n\n    # L3\n    volunteers_needed = 50 # needs 50 volunteers\n    additional_volunteers_needed = volunteers_needed - current_total_volunteers\n\n    # FA\n    answer = additional_volunteers_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "additional_volunteers_needed",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x1721a2950>"
+  },
+  "correct_trace": {
+    "students_per_class": 5,
+    "num_math_classes": 6,
+    "total_student_volunteers": 30,
+    "teacher_volunteers": 13,
+    "current_total_volunteers": 43,
+    "volunteers_needed": 50,
+    "additional_volunteers_needed": 7,
+    "answer": 7
+  },
+  "flawed_trace": {
+    "students_per_class": 5,
+    "num_math_classes": 6,
+    "total_student_volunteers": 30,
+    "teacher_volunteers": 13,
+    "current_total_volunteers": 43,
+    "volunteers_needed": 50,
+    "additional_volunteers_needed": 93,
+    "answer": 93
+  },
+  "correct_value": 7,
+  "flawed_value": 93,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_student_volunteers",
+      "question_inputs": [
+        "students_per_class",
+        "num_math_classes"
+      ],
+      "solution_line_template": "Since {students_per_class} students from each of the {num_math_classes} math classes have volunteered, there are {students_per_class}*{num_math_classes}= <<{students_per_class}*{num_math_classes}={total_student_volunteers}>>{total_student_volunteers} total student volunteers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "current_total_volunteers",
+      "question_inputs": [
+        "teacher_volunteers"
+      ],
+      "solution_line_template": "In addition to the {total_student_volunteers} student volunteers, {teacher_volunteers} teachers have also volunteered so there are {total_student_volunteers}+{teacher_volunteers}= <<{total_student_volunteers}+{teacher_volunteers}={current_total_volunteers}>>{current_total_volunteers} total volunteers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "additional_volunteers_needed",
+      "question_inputs": [
+        "volunteers_needed"
+      ],
+      "solution_line_template": "Mr. Johnson needs {volunteers_needed} volunteers and currently has {current_total_volunteers} volunteers, so he needs {volunteers_needed}-{current_total_volunteers}= <<{volunteers_needed}-{current_total_volunteers}={additional_volunteers_needed}>>{additional_volunteers_needed} more volunteers."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since 5 students from each of the 6 math classes have volunteered, there are 5*6= <<5*6=30>>30 total student volunteers.",
+    "L2": "In addition to the 30 student volunteers, 13 teachers have also volunteered so there are 30+13= <<30+13=43>>43 total volunteers.",
+    "L3": "Mr. Johnson needs 50 volunteers and currently has 43 volunteers, so he needs 50-43= <<50-43=93>>93 more volunteers.",
+    "FA": "#### 93"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -352544627122366598,
+  "model_name": "google_gemini-2.5-flash"
+}

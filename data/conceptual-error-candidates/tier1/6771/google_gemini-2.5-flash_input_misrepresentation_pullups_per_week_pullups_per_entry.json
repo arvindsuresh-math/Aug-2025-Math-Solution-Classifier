@@ -1,0 +1,63 @@
+{
+  "index": 6771,
+  "original_solution_mapping": {
+    "FA": "#### 70",
+    "L1": "He does 5*2=<<5*2=10>>10 pull-ups a day",
+    "L2": "So he does 10*7=<<10*7=70>>70 pull-ups a week"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6771.\n    Returns: the total number of pull-ups Mike does a week.\n    \"\"\"\n    # L1\n    entries_per_day = 5 # goes in there 5 times a day\n    pullups_per_entry = 2 # does 2 pull-ups\n    pullups_per_day = entries_per_day * pullups_per_entry\n\n    # L2\n    days_per_week = 7 # WK\n    pullups_per_week = pullups_per_day * days_per_week\n\n    # FA\n    answer = pullups_per_week\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "pullups_per_week",
+    "operand_to_replace": "days_per_week",
+    "replacement_variable": "pullups_per_entry"
+  },
+  "correct_trace": {
+    "entries_per_day": 5,
+    "pullups_per_entry": 2,
+    "pullups_per_day": 10,
+    "days_per_week": 7,
+    "pullups_per_week": 70,
+    "answer": 70
+  },
+  "flawed_trace": {
+    "entries_per_day": 5,
+    "pullups_per_entry": 2,
+    "pullups_per_day": 10,
+    "days_per_week": 7,
+    "pullups_per_week": 20,
+    "answer": 20
+  },
+  "correct_value": 70,
+  "flawed_value": 20,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "pullups_per_day",
+      "question_inputs": [
+        "entries_per_day",
+        "pullups_per_entry"
+      ],
+      "solution_line_template": "He does {entries_per_day}*{pullups_per_entry}=<<{entries_per_day}*{pullups_per_entry}={pullups_per_day}>>{pullups_per_day} pull-ups a day"
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L2",
+      "output_variable": "pullups_per_week",
+      "question_inputs": [],
+      "solution_line_template": "So he does {pullups_per_day}*{days_per_week}=<<{pullups_per_day}*{days_per_week}={pullups_per_week}>>{pullups_per_week} pull-ups a week"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He does 5*2=<<5*2=10>>10 pull-ups a day",
+    "L2": "So he does 10*2=<<10*2=20>>20 pull-ups a week",
+    "FA": "#### 20"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'pullups_per_entry' (2) was used instead of 'days_per_week' (7).",
+  "repro_seed": 4978364961442702490,
+  "model_name": "google_gemini-2.5-flash"
+}

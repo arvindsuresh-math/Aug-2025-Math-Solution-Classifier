@@ -1,0 +1,67 @@
+{
+  "index": 3859,
+  "original_solution_mapping": {
+    "FA": "#### 90,000",
+    "L1": "In one day the shop is losing 5 thousand dollars, so during three days, the losses are 5 * 3 = $15,000.",
+    "L2": "Christmas holidays are once a year, so in 6 years the shop \"Surprise\" could have earned another $15,000 * 6 = $<<6*15000=90000>>90,000."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3859.\n    Returns: the total potential revenue lost by the shop over 6 years.\n    \"\"\"\n    # L1\n    loss_per_day_val = 5 # 5 thousand dollars\n    num_closed_days = 3 # closed for 3 days\n    thousand = 1000 # WK\n    total_loss_per_holiday = loss_per_day_val * num_closed_days * thousand\n\n    # L2\n    num_years = 6 # 6 years of activity\n    total_revenue_lost = total_loss_per_holiday * num_years\n\n    # FA\n    answer = total_revenue_lost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_revenue_lost",
+    "operand_to_replace": "total_loss_per_holiday",
+    "replacement_variable": "num_years"
+  },
+  "correct_trace": {
+    "loss_per_day_val": 5,
+    "num_closed_days": 3,
+    "thousand": 1000,
+    "total_loss_per_holiday": 15000,
+    "num_years": 6,
+    "total_revenue_lost": 90000,
+    "answer": 90000
+  },
+  "flawed_trace": {
+    "loss_per_day_val": 5,
+    "num_closed_days": 3,
+    "thousand": 1000,
+    "total_loss_per_holiday": 15000,
+    "num_years": 6,
+    "total_revenue_lost": 36,
+    "answer": 36
+  },
+  "correct_value": 90000,
+  "flawed_value": 36,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "thousand"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_loss_per_holiday",
+      "question_inputs": [
+        "loss_per_day_val",
+        "num_closed_days"
+      ],
+      "solution_line_template": "In one day the shop is losing {loss_per_day_val} thousand dollars, so during three days, the losses are {loss_per_day_val} * {num_closed_days} = ${total_loss_per_holiday}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_revenue_lost",
+      "question_inputs": [
+        "num_years"
+      ],
+      "solution_line_template": "Christmas holidays are once a year, so in {num_years} years the shop \"Surprise\" could have earned another ${total_loss_per_holiday} * {num_years} = $<<{num_years}*{total_loss_per_holiday}={total_revenue_lost}>>{total_revenue_lost}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In one day the shop is losing 5 thousand dollars, so during three days, the losses are 5 * 3 = $15000.",
+    "L2": "Christmas holidays are once a year, so in 6 years the shop \"Surprise\" could have earned another $6 * 6 = $<<6*6=36>>36.",
+    "FA": "#### 36"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'num_years' (value: 6) was used instead of 'total_loss_per_holiday' (value: 15000).",
+  "repro_seed": -8427990953861337056,
+  "model_name": "google_gemini-2.5-flash"
+}

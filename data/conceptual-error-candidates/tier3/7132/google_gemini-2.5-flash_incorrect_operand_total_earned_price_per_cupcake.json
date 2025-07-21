@@ -1,0 +1,78 @@
+{
+  "index": 7132,
+  "original_solution_mapping": {
+    "FA": "#### 96",
+    "L1": "Anna baked 4 x 20 = <<4*20=80>>80 cupcakes.",
+    "L2": "She sold 80 x 3/5 = <<80*3/5=48>>48 cupcakes.",
+    "L3": "Thus, she earned 48 x $2 = $<<48*2=96>>96 from it."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7132.\n    Returns: the total amount Anna earned.\n    \"\"\"\n    # L1\n    num_trays = 4 # four baking trays\n    cupcakes_per_tray = 20 # Each tray has 20 cupcakes\n    total_cupcakes_baked = num_trays * cupcakes_per_tray\n\n    # L2\n    fraction_sold = Fraction(3, 5) # 3/5 of the cupcakes were sold\n    cupcakes_sold = total_cupcakes_baked * fraction_sold\n\n    # L3\n    price_per_cupcake = 2 # each cupcake was then sold for $2\n    total_earned = cupcakes_sold * price_per_cupcake\n\n    # FA\n    answer = total_earned\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_earned",
+    "operand_to_replace": "cupcakes_sold",
+    "replacement_variable": "price_per_cupcake"
+  },
+  "correct_trace": {
+    "num_trays": 4,
+    "cupcakes_per_tray": 20,
+    "total_cupcakes_baked": 80,
+    "fraction_sold": "3/5",
+    "cupcakes_sold": "48",
+    "price_per_cupcake": 2,
+    "total_earned": "96",
+    "answer": "96"
+  },
+  "flawed_trace": {
+    "num_trays": 4,
+    "cupcakes_per_tray": 20,
+    "total_cupcakes_baked": 80,
+    "fraction_sold": "3/5",
+    "cupcakes_sold": "48",
+    "price_per_cupcake": 2,
+    "total_earned": 4,
+    "answer": 4
+  },
+  "correct_value": "96",
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_cupcakes_baked",
+      "question_inputs": [
+        "num_trays",
+        "cupcakes_per_tray"
+      ],
+      "solution_line_template": "Anna baked {num_trays} x {cupcakes_per_tray} = <<{num_trays}*{cupcakes_per_tray}={total_cupcakes_baked}>>{total_cupcakes_baked} cupcakes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cupcakes_sold",
+      "question_inputs": [
+        "fraction_sold"
+      ],
+      "solution_line_template": "She sold {total_cupcakes_baked} x {fraction_sold} = <<{total_cupcakes_baked}*{fraction_sold}={cupcakes_sold}>>{cupcakes_sold} cupcakes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_earned",
+      "question_inputs": [
+        "price_per_cupcake"
+      ],
+      "solution_line_template": "Thus, she earned {cupcakes_sold} x ${price_per_cupcake} = $<<{cupcakes_sold}*{price_per_cupcake}={total_earned}>>{total_earned} from it."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Anna baked 4 x 20 = <<4*20=80>>80 cupcakes.",
+    "L2": "She sold 80 x 3/5 = <<80*3/5=48>>48 cupcakes.",
+    "L3": "Thus, she earned 2 x $2 = $<<2*2=4>>4 from it.",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'price_per_cupcake' (value: 2) was used instead of 'cupcakes_sold' (value: 48).",
+  "repro_seed": 8486357075312681338,
+  "model_name": "google_gemini-2.5-flash"
+}

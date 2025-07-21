@@ -1,0 +1,79 @@
+{
+  "index": 3336,
+  "original_solution_mapping": {
+    "FA": "#### 57",
+    "L1": "Dimitri saw 2 x 6 = <<2*6=12>>12 wheels on the bicycles.",
+    "L2": "He saw 15 x 3 = <<15*3=45>>45 wheels on the tricycles.",
+    "L3": "He saw a total of 12 + 45 = <<12+45=57>>57 wheels."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3336.\n    Returns: the total number of wheels Dimitri saw at the park.\n    \"\"\"\n    # L1\n    bicycle_wheels_per_bike = 2 # WK\n    num_adults_riding_bicycles = 6 # 6 adults were riding bicycles\n    bicycle_wheels_total = bicycle_wheels_per_bike * num_adults_riding_bicycles\n\n    # L2\n    tricycle_wheels_per_trike = 3 # WK\n    num_children_riding_tricycles = 15 # 15 children were riding tricycles\n    tricycle_wheels_total = num_children_riding_tricycles * tricycle_wheels_per_trike\n\n    # L3\n    total_wheels = bicycle_wheels_total + tricycle_wheels_total\n\n    # FA\n    answer = total_wheels\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "tricycle_wheels_total",
+    "operand_to_replace": "tricycle_wheels_per_trike",
+    "replacement_variable": "num_adults_riding_bicycles"
+  },
+  "correct_trace": {
+    "bicycle_wheels_per_bike": 2,
+    "num_adults_riding_bicycles": 6,
+    "bicycle_wheels_total": 12,
+    "tricycle_wheels_per_trike": 3,
+    "num_children_riding_tricycles": 15,
+    "tricycle_wheels_total": 45,
+    "total_wheels": 57,
+    "answer": 57
+  },
+  "flawed_trace": {
+    "bicycle_wheels_per_bike": 2,
+    "num_adults_riding_bicycles": 6,
+    "bicycle_wheels_total": 12,
+    "tricycle_wheels_per_trike": 3,
+    "num_children_riding_tricycles": 15,
+    "tricycle_wheels_total": 90,
+    "total_wheels": 102,
+    "answer": 102
+  },
+  "correct_value": 45,
+  "flawed_value": 90,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "bicycle_wheels_per_bike"
+      ],
+      "line_number": "L1",
+      "output_variable": "bicycle_wheels_total",
+      "question_inputs": [
+        "num_adults_riding_bicycles"
+      ],
+      "solution_line_template": "Dimitri saw {bicycle_wheels_per_bike} x {num_adults_riding_bicycles} = <<{bicycle_wheels_per_bike}*{num_adults_riding_bicycles}={bicycle_wheels_total}>>{bicycle_wheels_total} wheels on the bicycles."
+    },
+    {
+      "WK_inputs": [
+        "tricycle_wheels_per_trike"
+      ],
+      "line_number": "L2",
+      "output_variable": "tricycle_wheels_total",
+      "question_inputs": [
+        "num_children_riding_tricycles"
+      ],
+      "solution_line_template": "He saw {num_children_riding_tricycles} x {tricycle_wheels_per_trike} = <<{num_children_riding_tricycles}*{tricycle_wheels_per_trike}={tricycle_wheels_total}>>{tricycle_wheels_total} wheels on the tricycles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_wheels",
+      "question_inputs": [],
+      "solution_line_template": "He saw a total of {bicycle_wheels_total} + {tricycle_wheels_total} = <<{bicycle_wheels_total}+{tricycle_wheels_total}={total_wheels}>>{total_wheels} wheels."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Dimitri saw 2 x 6 = <<2*6=12>>12 wheels on the bicycles.",
+    "L2": "He saw 15 x 6 = <<15*6=90>>90 wheels on the tricycles.",
+    "L3": "He saw a total of 12 + 90 = <<12+90=102>>102 wheels.",
+    "FA": "#### 102"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_adults_riding_bicycles' (6) was used instead of 'tricycle_wheels_per_trike' (3).",
+  "repro_seed": -2805632396584439553,
+  "model_name": "google_gemini-2.5-flash"
+}

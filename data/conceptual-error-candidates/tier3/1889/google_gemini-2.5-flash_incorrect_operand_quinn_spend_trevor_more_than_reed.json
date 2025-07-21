@@ -1,0 +1,89 @@
+{
+  "index": 1889,
+  "original_solution_mapping": {
+    "FA": "#### 680",
+    "L1": "If Trevor spends $20 more than Reed every year to buy toys, Reed spends $80-$20 =$60.",
+    "L2": "Since Reed uses $60 every year to buy toys, his friend Quinn uses 60/2 = $<<60/2=30>>30 every year to buy toys.",
+    "L3": "The total amount of money the three spend in a year together to buy toys is $30+$60+$80 = $<<30+60+80=170>>170.",
+    "L4": "The total amount of money the three will use to buy toys in 4 years is $170*4 = $<<170*4=680>>680."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1889.\n    Returns: the total money spent by the three friends over 4 years.\n    \"\"\"\n    # L1\n    trevor_spend = 80 # Trevor spends $80 every year\n    trevor_more_than_reed = 20 # Trevor always spends $20 more than his friend Reed\n    reed_spend = trevor_spend - trevor_more_than_reed\n\n    # L2\n    reed_times_quinn = 2 # Reed spends 2 times as much money as their friend Quinn\n    quinn_spend = reed_spend / reed_times_quinn\n\n    # L3\n    total_spend_per_year = quinn_spend + reed_spend + trevor_spend\n\n    # L4\n    number_of_years = 4 # in 4 years\n    total_spend_four_years = total_spend_per_year * number_of_years\n\n    # FA\n    answer = total_spend_four_years\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "quinn_spend",
+    "operand_to_replace": "reed_spend",
+    "replacement_variable": "trevor_more_than_reed"
+  },
+  "correct_trace": {
+    "trevor_spend": 80,
+    "trevor_more_than_reed": 20,
+    "reed_spend": 60,
+    "reed_times_quinn": 2,
+    "quinn_spend": 30.0,
+    "total_spend_per_year": 170.0,
+    "number_of_years": 4,
+    "total_spend_four_years": 680.0,
+    "answer": 680.0
+  },
+  "flawed_trace": {
+    "trevor_spend": 80,
+    "trevor_more_than_reed": 20,
+    "reed_spend": 60,
+    "reed_times_quinn": 2,
+    "quinn_spend": 10.0,
+    "total_spend_per_year": 150.0,
+    "number_of_years": 4,
+    "total_spend_four_years": 600.0,
+    "answer": 600.0
+  },
+  "correct_value": 30.0,
+  "flawed_value": 10.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "reed_spend",
+      "question_inputs": [
+        "trevor_spend",
+        "trevor_more_than_reed"
+      ],
+      "solution_line_template": "If Trevor spends ${trevor_more_than_reed} more than Reed every year to buy toys, Reed spends ${trevor_spend}-${trevor_more_than_reed} = ${reed_spend}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "quinn_spend",
+      "question_inputs": [
+        "reed_times_quinn"
+      ],
+      "solution_line_template": "Since Reed uses ${reed_spend} every year to buy toys, his friend Quinn uses {reed_spend}/{reed_times_quinn} = $<<{reed_spend}/{reed_times_quinn}={quinn_spend}>>{quinn_spend} every year to buy toys."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_spend_per_year",
+      "question_inputs": [],
+      "solution_line_template": "The total amount of money the three spend in a year together to buy toys is ${quinn_spend}+${reed_spend}+${trevor_spend} = $<<{quinn_spend}+{reed_spend}+{trevor_spend}={total_spend_per_year}>>{total_spend_per_year}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_spend_four_years",
+      "question_inputs": [
+        "number_of_years"
+      ],
+      "solution_line_template": "The total amount of money the three will use to buy toys in {number_of_years} years is ${total_spend_per_year}*{number_of_years} = $<<{total_spend_per_year}*{number_of_years}={total_spend_four_years}>>{total_spend_four_years}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Trevor spends $20 more than Reed every year to buy toys, Reed spends $80-$20 = $60.",
+    "L2": "Since Reed uses $20 every year to buy toys, his friend Quinn uses 20/2 = $<<20/2=10>>10 every year to buy toys.",
+    "L3": "The total amount of money the three spend in a year together to buy toys is $10+$60+$80 = $<<10+60+80=150>>150.",
+    "L4": "The total amount of money the three will use to buy toys in 4 years is $150*4 = $<<150*4=600>>600.",
+    "FA": "#### 600"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'trevor_more_than_reed' (value: 20) was used instead of 'reed_spend' (value: 60).",
+  "repro_seed": -418022090644310205,
+  "model_name": "google_gemini-2.5-flash"
+}

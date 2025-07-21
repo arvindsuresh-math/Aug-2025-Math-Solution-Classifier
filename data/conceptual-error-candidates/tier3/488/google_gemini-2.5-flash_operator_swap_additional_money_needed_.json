@@ -1,0 +1,96 @@
+{
+  "index": 488,
+  "original_solution_mapping": {
+    "FA": "#### 95",
+    "L1": "Two fifths of $500 is (2/5)*$500 = $<<(2/5)*500=200>>200",
+    "L2": "She needed $200 more than $500 which is $200+ $500 = $<<200+500=700>>700",
+    "L3": "15% of $700 is (15/100)*$700 = $<<(15/100)*700=105>>105",
+    "L4": "She was given a $105 discount so she has to pay $700-$105 = $595",
+    "L5": "She would still need $595-$500= $<<595-500=95>>95"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 488.\n    Returns: the amount of money Mrs. Smith still needs.\n    \"\"\"\n    # L1\n    initial_money = 500 # worth $500\n    fraction_more = Fraction(2, 5) # two-fifths more money\n    additional_money_needed = fraction_more * initial_money\n\n    # L2\n    total_cost_before_discount = additional_money_needed + initial_money\n\n    # L3\n    discount_percentage = Fraction(15, 100) # discount of 15%\n    discount_amount = discount_percentage * total_cost_before_discount\n\n    # L4\n    cost_after_discount = total_cost_before_discount - discount_amount\n\n    # L5\n    money_still_needed = cost_after_discount - initial_money\n\n    # FA\n    answer = money_still_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "additional_money_needed",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x1685ca090>"
+  },
+  "correct_trace": {
+    "initial_money": 500,
+    "fraction_more": "2/5",
+    "additional_money_needed": "200",
+    "total_cost_before_discount": "700",
+    "discount_percentage": "3/20",
+    "discount_amount": "105",
+    "cost_after_discount": "595",
+    "money_still_needed": "95",
+    "answer": "95"
+  },
+  "flawed_trace": {
+    "initial_money": 500,
+    "fraction_more": "2/5",
+    "additional_money_needed": "2502/5",
+    "total_cost_before_discount": "5002/5",
+    "discount_percentage": "3/20",
+    "discount_amount": "7503/50",
+    "cost_after_discount": "42517/50",
+    "money_still_needed": "17517/50",
+    "answer": "17517/50"
+  },
+  "correct_value": "200",
+  "flawed_value": "2502/5",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "additional_money_needed",
+      "question_inputs": [
+        "initial_money",
+        "fraction_more"
+      ],
+      "solution_line_template": "Two fifths of ${initial_money} is ({fraction_more})*${initial_money} = $<<({fraction_more})*{initial_money}={additional_money_needed}>>{additional_money_needed}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost_before_discount",
+      "question_inputs": [],
+      "solution_line_template": "She needed ${additional_money_needed} more than ${initial_money} which is ${additional_money_needed}+ ${initial_money} = $<<{additional_money_needed}+{initial_money}={total_cost_before_discount}>>{total_cost_before_discount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "discount_amount",
+      "question_inputs": [
+        "discount_percentage"
+      ],
+      "solution_line_template": "15% of ${total_cost_before_discount} is ({discount_percentage})*${total_cost_before_discount} = $<<({discount_percentage})*{total_cost_before_discount}={discount_amount}>>{discount_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "cost_after_discount",
+      "question_inputs": [],
+      "solution_line_template": "She was given a ${discount_amount} discount so she has to pay ${total_cost_before_discount}-${discount_amount} = ${cost_after_discount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "money_still_needed",
+      "question_inputs": [],
+      "solution_line_template": "She would still need ${cost_after_discount}-${initial_money}= $<<{cost_after_discount}-{initial_money}={money_still_needed}>>{money_still_needed}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Two fifths of $500 is (2/5)*$500 = $<<(2/5)*500=2502/5>>2502/5",
+    "L2": "She needed $2502/5 more than $500 which is $2502/5+ $500 = $<<2502/5+500=5002/5>>5002/5",
+    "L3": "15% of $5002/5 is (15/100)*$5002/5 = $<<(15/100)*5002/5=7503/50>>7503/50",
+    "L4": "She was given a $7503/50 discount so she has to pay $5002/5-$7503/50 = $42517/50",
+    "L5": "She would still need $42517/50-$500= $<<42517/50-500=17517/50>>17517/50",
+    "FA": "#### 17517/50"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 6434682062830142616,
+  "model_name": "google_gemini-2.5-flash"
+}

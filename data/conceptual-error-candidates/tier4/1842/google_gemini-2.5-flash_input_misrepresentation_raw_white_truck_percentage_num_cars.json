@@ -1,0 +1,106 @@
+{
+  "index": 1842,
+  "original_solution_mapping": {
+    "FA": "#### 17",
+    "L1": "First find the total number of vehicles Carmen counted: 50 trucks + 40 cars = <<50+40=90>>90 vehicles",
+    "L2": "Then find the number of trucks that were red: 50 trucks / 2 = <<50/2=25>>25 trucks",
+    "L3": "Then find the number of trucks that were black: 50 trucks * .2 = <<50*.2=10>>10 trucks",
+    "L4": "Then subtract the red and black trucks from the total number of trucks to find the number of white trucks: 50 trucks - 25 trucks - 10 trucks = <<50-25-10=15>>15 trucks",
+    "L5": "Then divide the number of white trucks by the number of vehicles and multiply by 100% to find the percentage of vehicles that are white trucks: 15 trucks / 90 vehicles * 100% = 16.66...%, which rounds up to 17%."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1842.\n    Returns: the percentage chance it's a white truck, rounded to the nearest integer.\n    \"\"\"\n    # L1\n    num_trucks = 50 # 50 trucks\n    num_cars = 40 # 40 cars\n    total_vehicles = num_trucks + num_cars\n\n    # L2\n    red_truck_divisor = 2 # Half the trucks are red\n    red_trucks = num_trucks / red_truck_divisor\n\n    # L3\n    black_truck_percentage = 0.2 # 20% are black\n    black_trucks = num_trucks * black_truck_percentage\n\n    # L4\n    white_trucks = num_trucks - red_trucks - black_trucks\n\n    # L5\n    percent_multiplier = 100 # WK\n    raw_white_truck_percentage = (white_trucks / total_vehicles) * percent_multiplier\n    white_truck_percentage = round(raw_white_truck_percentage)\n\n    # FA\n    answer = white_truck_percentage\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "raw_white_truck_percentage",
+    "operand_to_replace": "percent_multiplier",
+    "replacement_variable": "num_cars"
+  },
+  "correct_trace": {
+    "num_trucks": 50,
+    "num_cars": 40,
+    "total_vehicles": 90,
+    "red_truck_divisor": 2,
+    "red_trucks": 25.0,
+    "black_truck_percentage": 0.2,
+    "black_trucks": 10.0,
+    "white_trucks": 15.0,
+    "percent_multiplier": 100,
+    "raw_white_truck_percentage": 16.666666666666664,
+    "white_truck_percentage": 17,
+    "answer": 17
+  },
+  "flawed_trace": {
+    "num_trucks": 50,
+    "num_cars": 40,
+    "total_vehicles": 90,
+    "red_truck_divisor": 2,
+    "red_trucks": 25.0,
+    "black_truck_percentage": 0.2,
+    "black_trucks": 10.0,
+    "white_trucks": 15.0,
+    "percent_multiplier": 100,
+    "raw_white_truck_percentage": 6.666666666666666,
+    "white_truck_percentage": 7,
+    "answer": 7
+  },
+  "correct_value": 16.666666666666664,
+  "flawed_value": 6.666666666666666,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_vehicles",
+      "question_inputs": [
+        "num_trucks",
+        "num_cars"
+      ],
+      "solution_line_template": "First find the total number of vehicles Carmen counted: {num_trucks} trucks + {num_cars} cars = <<{num_trucks}+{num_cars}={total_vehicles}>>{total_vehicles} vehicles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "red_trucks",
+      "question_inputs": [
+        "red_truck_divisor"
+      ],
+      "solution_line_template": "Then find the number of trucks that were red: {num_trucks} trucks / {red_truck_divisor} = <<{num_trucks}/{red_truck_divisor}={red_trucks}>>{red_trucks} trucks"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "black_trucks",
+      "question_inputs": [
+        "black_truck_percentage"
+      ],
+      "solution_line_template": "Then find the number of trucks that were black: {num_trucks} trucks * {black_truck_percentage} = <<{num_trucks}*{black_truck_percentage}={black_trucks}>>{black_trucks} trucks"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "white_trucks",
+      "question_inputs": [],
+      "solution_line_template": "Then subtract the red and black trucks from the total number of trucks to find the number of white trucks: {num_trucks} trucks - {red_trucks} trucks - {black_trucks} trucks = <<{num_trucks}-{red_trucks}-{black_trucks}={white_trucks}>>{white_trucks} trucks"
+    },
+    {
+      "WK_inputs": [
+        "percent_multiplier"
+      ],
+      "line_number": "L5",
+      "output_variable": "white_truck_percentage",
+      "question_inputs": [],
+      "solution_line_template": "Then divide the number of white trucks by the number of vehicles and multiply by {percent_multiplier}% to find the percentage of vehicles that are white trucks: {white_trucks} trucks / {total_vehicles} vehicles * {percent_multiplier}% = 16.66...%, which rounds up to {white_truck_percentage}%."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total number of vehicles Carmen counted: 50 trucks + 40 cars = <<50+40=90>>90 vehicles",
+    "L2": "Then find the number of trucks that were red: 50 trucks / 2 = <<50/2=25>>25 trucks",
+    "L3": "Then find the number of trucks that were black: 50 trucks * 0.2 = <<50*0.2=10>>10 trucks",
+    "L4": "Then subtract the red and black trucks from the total number of trucks to find the number of white trucks: 50 trucks - 25 trucks - 10 trucks = <<50-25-10=15>>15 trucks",
+    "L5": "Then divide the number of white trucks by the number of vehicles and multiply by 100% to find the percentage of vehicles that are white trucks: 15 trucks / 90 vehicles * 100% = 16.66...%, which rounds up to 7%.",
+    "FA": "#### 7"
+  },
+  "erroneous_line_number": null,
+  "explanation": "Input misrepresentation. The value for 'num_cars' (40) was used instead of 'percent_multiplier' (100).",
+  "repro_seed": 7280802490847652090,
+  "model_name": "google_gemini-2.5-flash"
+}

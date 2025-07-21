@@ -1,0 +1,63 @@
+{
+  "index": 1796,
+  "original_solution_mapping": {
+    "FA": "#### 7",
+    "L1": "Dennis had 10/2=<<10/2=5>>5 rocks left after the fish ate them.",
+    "L2": "He made the fish spit two out, which left Dennis with 5+2=<<5+2=7>>7 rocks."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1796.\n    Returns: the number of Dennis's rocks left.\n    \"\"\"\n    # L1\n    initial_rocks = 10 # Dennis collected 10 rocks\n    eaten_divisor = 2 # his fish ate half of them\n    rocks_after_eating = initial_rocks / eaten_divisor\n\n    # L2\n    spit_out_rocks = 2 # fish spit two out\n    remaining_rocks = rocks_after_eating + spit_out_rocks\n\n    # FA\n    answer = remaining_rocks\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "rocks_after_eating",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x15fe95010>"
+  },
+  "correct_trace": {
+    "initial_rocks": 10,
+    "eaten_divisor": 2,
+    "rocks_after_eating": 5.0,
+    "spit_out_rocks": 2,
+    "remaining_rocks": 7.0,
+    "answer": 7.0
+  },
+  "flawed_trace": {
+    "initial_rocks": 10,
+    "eaten_divisor": 2,
+    "rocks_after_eating": 8,
+    "spit_out_rocks": 2,
+    "remaining_rocks": 10,
+    "answer": 10
+  },
+  "correct_value": 5.0,
+  "flawed_value": 8,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "rocks_after_eating",
+      "question_inputs": [
+        "initial_rocks",
+        "eaten_divisor"
+      ],
+      "solution_line_template": "Dennis had {initial_rocks}/{eaten_divisor}=<<{initial_rocks}/{eaten_divisor}={rocks_after_eating}>>{rocks_after_eating} rocks left after the fish ate them."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_rocks",
+      "question_inputs": [
+        "spit_out_rocks"
+      ],
+      "solution_line_template": "He made the fish spit {spit_out_rocks} out, which left Dennis with {rocks_after_eating}+{spit_out_rocks}=<<{rocks_after_eating}+{spit_out_rocks}={remaining_rocks}>>{remaining_rocks} rocks."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Dennis had 10/2=<<10/2=8>>8 rocks left after the fish ate them.",
+    "L2": "He made the fish spit 2 out, which left Dennis with 8+2=<<8+2=10>>10 rocks.",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 6286037693796454466,
+  "model_name": "google_gemini-2.5-flash"
+}

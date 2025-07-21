@@ -1,0 +1,104 @@
+{
+  "index": 2755,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "Bowen bought 2/5 * 40 pens = <<2/5*40=16>>16 more pencils than pens.",
+    "L2": "The total number of pencils that he bought is 40 pencils + 16 pencils = <<40+16=56>>56 pencils",
+    "L3": "If each pencil costs twenty-five cents, the total amount of money he spent on pencils is 56 pencils * $0.25/pencil = $<<56*0.25=14>>14",
+    "L4": "On pens, Bowen spent $0.15/pen * 40 pens = $<<0.15*40=6>>6",
+    "L5": "The total amount of money Bowen spent is $14 + $6 = $<<14+6=20>>20"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2755.\n    Returns: the total amount of money Bowen spends.\n    \"\"\"\n    # L1\n    pens_bought = 40 # 40 pens\n    more_pencils_fraction = Fraction(2, 5) # 2/5 times more pencils than pens\n    more_pencils = more_pencils_fraction * pens_bought\n\n    # L2\n    initial_pencils_base = 40 # 40 pencils\n    total_pencils = initial_pencils_base + more_pencils\n\n    # L3\n    pencil_cost_dollars = 0.25 # twenty-five cents\n    cost_pencils = total_pencils * pencil_cost_dollars\n\n    # L4\n    pen_cost_dollars = 0.15 # fifteen cents\n    cost_pens = pen_cost_dollars * pens_bought\n\n    # L5\n    total_money_spent = cost_pencils + cost_pens\n\n    # FA\n    answer = total_money_spent\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "cost_pencils",
+    "operand_to_replace": "total_pencils",
+    "replacement_variable": "more_pencils"
+  },
+  "correct_trace": {
+    "pens_bought": 40,
+    "more_pencils_fraction": "2/5",
+    "more_pencils": "16",
+    "initial_pencils_base": 40,
+    "total_pencils": "56",
+    "pencil_cost_dollars": 0.25,
+    "cost_pencils": 14.0,
+    "pen_cost_dollars": 0.15,
+    "cost_pens": 6.0,
+    "total_money_spent": 20.0,
+    "answer": 20.0
+  },
+  "flawed_trace": {
+    "pens_bought": 40,
+    "more_pencils_fraction": "2/5",
+    "more_pencils": "16",
+    "initial_pencils_base": 40,
+    "total_pencils": "56",
+    "pencil_cost_dollars": 0.25,
+    "cost_pencils": 4.0,
+    "pen_cost_dollars": 0.15,
+    "cost_pens": 6.0,
+    "total_money_spent": 10.0,
+    "answer": 10.0
+  },
+  "correct_value": 14.0,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "more_pencils",
+      "question_inputs": [
+        "more_pencils_fraction",
+        "pens_bought"
+      ],
+      "solution_line_template": "Bowen bought {more_pencils_fraction} * {pens_bought} pens = <<{more_pencils_fraction}*{pens_bought}={more_pencils}>>{more_pencils} more pencils than pens."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_pencils",
+      "question_inputs": [
+        "initial_pencils_base"
+      ],
+      "solution_line_template": "The total number of pencils that he bought is {initial_pencils_base} pencils + {more_pencils} pencils = <<{initial_pencils_base}+{more_pencils}={total_pencils}>>{total_pencils} pencils"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cost_pencils",
+      "question_inputs": [
+        "pencil_cost_dollars"
+      ],
+      "solution_line_template": "If each pencil costs twenty-five cents, the total amount of money he spent on pencils is {total_pencils} pencils * ${pencil_cost_dollars}/pencil = $<<{total_pencils}*{pencil_cost_dollars}={cost_pencils}>>{cost_pencils}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "cost_pens",
+      "question_inputs": [
+        "pen_cost_dollars"
+      ],
+      "solution_line_template": "On pens, Bowen spent ${pen_cost_dollars}/pen * {pens_bought} pens = $<<{pen_cost_dollars}*{pens_bought}={cost_pens}>>{cost_pens}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_money_spent",
+      "question_inputs": [],
+      "solution_line_template": "The total amount of money Bowen spent is ${cost_pencils} + ${cost_pens} = $<<{cost_pencils}+{cost_pens}={total_money_spent}>>{total_money_spent}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Bowen bought 2/5 * 40 pens = <<2/5*40=16>>16 more pencils than pens.",
+    "L2": "The total number of pencils that he bought is 40 pencils + 16 pencils = <<40+16=56>>56 pencils",
+    "L3": "If each pencil costs twenty-five cents, the total amount of money he spent on pencils is 16 pencils * $0.25/pencil = $<<16*0.25=4>>4",
+    "L4": "On pens, Bowen spent $0.15/pen * 40 pens = $<<0.15*40=6>>6",
+    "L5": "The total amount of money Bowen spent is $4 + $6 = $<<4+6=10>>10",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'more_pencils' (value: 16) was used instead of 'total_pencils' (value: 56).",
+  "repro_seed": -2821178328937444527,
+  "model_name": "google_gemini-2.5-flash"
+}

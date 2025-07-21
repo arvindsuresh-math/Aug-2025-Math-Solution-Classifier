@@ -1,0 +1,77 @@
+{
+  "index": 5182,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "Out of 3 wands purchased, Kate sold her friends 3 wands - 1 wand = <<3-1=2>>2 wands.",
+    "L2": "For 2 wands she charged $130, so for 1 wand she charged $130 / 2 wands = $<<130/2=65>>65/wand.",
+    "L3": "Since she charged $5 more for each wand than she paid, Kate paid $65 - $5 = $<<65-5=60>>60 for each wand."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5182.\n    Returns: the cost of each wand Kate paid.\n    \"\"\"\n    # L1\n    wands_purchased = 3 # buys 3 magic wands\n    wands_kept = 1 # one for herself\n    wands_sold = wands_purchased - wands_kept\n\n    # L2\n    total_collected = 130 # collected $130 after the sale\n    charge_per_wand = total_collected / wands_sold\n\n    # L3\n    markup_per_wand = 5 # for $5 more than she paid\n    cost_per_wand = charge_per_wand - markup_per_wand\n\n    # FA\n    answer = cost_per_wand\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "cost_per_wand",
+    "replacement_variable": "charge_per_wand"
+  },
+  "correct_trace": {
+    "wands_purchased": 3,
+    "wands_kept": 1,
+    "wands_sold": 2,
+    "total_collected": 130,
+    "charge_per_wand": 65.0,
+    "markup_per_wand": 5,
+    "cost_per_wand": 60.0,
+    "answer": 60.0
+  },
+  "flawed_trace": {
+    "wands_purchased": 3,
+    "wands_kept": 1,
+    "wands_sold": 2,
+    "total_collected": 130,
+    "charge_per_wand": 65.0,
+    "markup_per_wand": 5,
+    "cost_per_wand": 60.0,
+    "answer": 65.0
+  },
+  "correct_value": 60.0,
+  "flawed_value": 65.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "wands_sold",
+      "question_inputs": [
+        "wands_purchased",
+        "wands_kept"
+      ],
+      "solution_line_template": "Out of {wands_purchased} wands purchased, Kate sold her friends {wands_purchased} wands - {wands_kept} wand = <<{wands_purchased}-{wands_kept}={wands_sold}>>{wands_sold} wands."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "charge_per_wand",
+      "question_inputs": [
+        "total_collected"
+      ],
+      "solution_line_template": "For {wands_sold} wands she charged ${total_collected}, so for 1 wand she charged ${total_collected} / {wands_sold} wands = $<<{total_collected}/{wands_sold}={charge_per_wand}>>{charge_per_wand}/wand."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cost_per_wand",
+      "question_inputs": [
+        "markup_per_wand"
+      ],
+      "solution_line_template": "Since she charged ${markup_per_wand} more for each wand than she paid, Kate paid ${charge_per_wand} - ${markup_per_wand} = $<<{charge_per_wand}-{markup_per_wand}={cost_per_wand}>>{cost_per_wand} for each wand."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Out of 3 wands purchased, Kate sold her friends 3 wands - 1 wand = <<3-1=2>>2 wands.",
+    "L2": "For 2 wands she charged $130, so for 1 wand she charged $130 / 2 wands = $<<130/2=65>>65/wand.",
+    "FA": "#### 65"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'charge_per_wand' (value: 65.0) was reported instead of 'cost_per_wand' (value: 60.0).",
+  "repro_seed": 5882883139902541435,
+  "model_name": "google_gemini-2.5-flash"
+}

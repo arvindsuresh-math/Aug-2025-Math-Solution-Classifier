@@ -1,0 +1,137 @@
+{
+  "index": 9,
+  "original_solution_mapping": {
+    "FA": "#### 990",
+    "L1": "She works 8 hours a day for $18 per hour so she makes 8*18 = $<<8*18=144.00>>144.00 per 8-hour shift",
+    "L2": "She works 10 hours a day and anything over 8 hours is eligible for overtime, so she gets 10-8 = <<10-8=2>>2 hours of overtime",
+    "L3": "Overtime is calculated as time and a half so and she makes $18/hour so her overtime pay is 18*.5 = $<<18*.5=9.00>>9.00",
+    "L4": "Her overtime pay is 18+9 = $<<18+9=27.00>>27.00",
+    "L5": "Her base pay is $144.00 per 8-hour shift and she works 5 days and makes 5 * $144 = $<<144*5=720.00>>720.00",
+    "L6": "Her overtime pay is $27.00 per hour and she works 2 hours of overtime per day and makes 27*2 = $<<27*2=54.00>>54.00 in overtime pay",
+    "L7": "2 hours of overtime pay for 5 days means she makes 54*5 = $270.00",
+    "L8": "In 5 days her base pay is $720.00 and she makes $270.00 in overtime pay so she makes $720 + $270 = $<<720+270=990.00>>990.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 9.\n    Returns: the total money Tina makes.\n    \"\"\"\n    # L1\n    regular_hours_per_day = 8 # more than 8 hours per shift\n    hourly_wage = 18.00 # $18.00 an hour\n    regular_daily_pay = regular_hours_per_day * hourly_wage\n\n    # L2\n    total_hours_per_day = 10 # works 10 hours every day\n    overtime_hours_per_day = total_hours_per_day - regular_hours_per_day\n\n    # L3\n    overtime_factor = 0.5 # 1/2 your hourly wage\n    overtime_additional_pay_per_hour = hourly_wage * overtime_factor\n\n    # L4\n    overtime_hourly_wage = hourly_wage + overtime_additional_pay_per_hour\n\n    # L5\n    num_days_worked = 5 # for 5 days\n    total_regular_pay = regular_daily_pay * num_days_worked\n\n    # L6\n    daily_overtime_pay = overtime_hourly_wage * overtime_hours_per_day\n\n    # L7\n    total_overtime_pay = daily_overtime_pay * num_days_worked\n\n    # L8\n    total_money_made = total_regular_pay + total_overtime_pay\n\n    # FA\n    answer = total_money_made\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "daily_overtime_pay",
+    "operand_to_replace": "overtime_hourly_wage",
+    "replacement_variable": "regular_hours_per_day"
+  },
+  "correct_trace": {
+    "regular_hours_per_day": 8,
+    "hourly_wage": 18.0,
+    "regular_daily_pay": 144.0,
+    "total_hours_per_day": 10,
+    "overtime_hours_per_day": 2,
+    "overtime_factor": 0.5,
+    "overtime_additional_pay_per_hour": 9.0,
+    "overtime_hourly_wage": 27.0,
+    "num_days_worked": 5,
+    "total_regular_pay": 720.0,
+    "daily_overtime_pay": 54.0,
+    "total_overtime_pay": 270.0,
+    "total_money_made": 990.0,
+    "answer": 990.0
+  },
+  "flawed_trace": {
+    "regular_hours_per_day": 8,
+    "hourly_wage": 18.0,
+    "regular_daily_pay": 144.0,
+    "total_hours_per_day": 10,
+    "overtime_hours_per_day": 2,
+    "overtime_factor": 0.5,
+    "overtime_additional_pay_per_hour": 9.0,
+    "overtime_hourly_wage": 27.0,
+    "num_days_worked": 5,
+    "total_regular_pay": 720.0,
+    "daily_overtime_pay": 16,
+    "total_overtime_pay": 80,
+    "total_money_made": 800.0,
+    "answer": 800.0
+  },
+  "correct_value": 54.0,
+  "flawed_value": 16,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "regular_daily_pay",
+      "question_inputs": [
+        "regular_hours_per_day",
+        "hourly_wage"
+      ],
+      "solution_line_template": "She works {regular_hours_per_day} hours a day for ${hourly_wage} per hour so she makes {regular_hours_per_day}*{hourly_wage} = $<<{regular_hours_per_day}*{hourly_wage}={regular_daily_pay}>>{regular_daily_pay} per 8-hour shift"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "overtime_hours_per_day",
+      "question_inputs": [
+        "total_hours_per_day"
+      ],
+      "solution_line_template": "She works {total_hours_per_day} hours a day and anything over {regular_hours_per_day} hours is eligible for overtime, so she gets {total_hours_per_day}-{regular_hours_per_day} = <<{total_hours_per_day}-{regular_hours_per_day}={overtime_hours_per_day}>>{overtime_hours_per_day} hours of overtime"
+    },
+    {
+      "WK_inputs": [
+        "overtime_factor"
+      ],
+      "line_number": "L3",
+      "output_variable": "overtime_additional_pay_per_hour",
+      "question_inputs": [],
+      "solution_line_template": "Overtime is calculated as time and a half so and she makes ${hourly_wage}/hour so her overtime pay is {hourly_wage}*{overtime_factor} = $<<{hourly_wage}*{overtime_factor}={overtime_additional_pay_per_hour}>>{overtime_additional_pay_per_hour}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "overtime_hourly_wage",
+      "question_inputs": [],
+      "solution_line_template": "Her overtime pay is {hourly_wage}+{overtime_additional_pay_per_hour} = $<<{hourly_wage}+{overtime_additional_pay_per_hour}={overtime_hourly_wage}>>{overtime_hourly_wage}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_regular_pay",
+      "question_inputs": [
+        "num_days_worked"
+      ],
+      "solution_line_template": "Her base pay is ${regular_daily_pay} per 8-hour shift and she works {num_days_worked} days and makes {num_days_worked} * ${regular_daily_pay} = $<<{regular_daily_pay}*{num_days_worked}={total_regular_pay}>>{total_regular_pay}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "daily_overtime_pay",
+      "question_inputs": [],
+      "solution_line_template": "Her overtime pay is ${overtime_hourly_wage} per hour and she works {overtime_hours_per_day} hours of overtime per day and makes {overtime_hourly_wage}*{overtime_hours_per_day} = $<<{overtime_hourly_wage}*{overtime_hours_per_day}={daily_overtime_pay}>>{daily_overtime_pay} in overtime pay"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "total_overtime_pay",
+      "question_inputs": [],
+      "solution_line_template": "{overtime_hours_per_day} hours of overtime pay for {num_days_worked} days means she makes {daily_overtime_pay}*{num_days_worked} = ${total_overtime_pay}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L8",
+      "output_variable": "total_money_made",
+      "question_inputs": [],
+      "solution_line_template": "In {num_days_worked} days her base pay is ${total_regular_pay} and she makes ${total_overtime_pay} in overtime pay so she makes ${total_regular_pay} + ${total_overtime_pay} = $<<{total_regular_pay}+{total_overtime_pay}={total_money_made}>>{total_money_made}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She works 8 hours a day for $18 per hour so she makes 8*18 = $<<8*18=144>>144 per 8-hour shift",
+    "L2": "She works 10 hours a day and anything over 8 hours is eligible for overtime, so she gets 10-8 = <<10-8=2>>2 hours of overtime",
+    "L3": "Overtime is calculated as time and a half so and she makes $18/hour so her overtime pay is 18*0.5 = $<<18*0.5=9>>9",
+    "L4": "Her overtime pay is 18+9 = $<<18+9=27>>27",
+    "L5": "Her base pay is $144 per 8-hour shift and she works 5 days and makes 5 * $144 = $<<144*5=720>>720",
+    "L6": "Her overtime pay is $8 per hour and she works 2 hours of overtime per day and makes 8*2 = $<<8*2=16>>16 in overtime pay",
+    "L7": "2 hours of overtime pay for 5 days means she makes 16*5 = $80",
+    "L8": "In 5 days her base pay is $720 and she makes $80 in overtime pay so she makes $720 + $80 = $<<720+80=800>>800",
+    "FA": "#### 800"
+  },
+  "erroneous_line_number": "L6",
+  "explanation": "Incorrect operand. The variable 'regular_hours_per_day' (value: 8) was used instead of 'overtime_hourly_wage' (value: 27.0).",
+  "repro_seed": -1624472263824316336,
+  "model_name": "google_gemini-2.5-flash"
+}

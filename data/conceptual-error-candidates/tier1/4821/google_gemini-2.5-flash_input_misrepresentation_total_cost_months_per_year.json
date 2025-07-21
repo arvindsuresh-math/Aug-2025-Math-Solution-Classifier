@@ -1,0 +1,79 @@
+{
+  "index": 4821,
+  "original_solution_mapping": {
+    "FA": "#### 482",
+    "L1": "The membership costs $12 * 12 months = $<<12*12=144>>144 per year.",
+    "L2": "For three years, the monthly membership fee will be $144 * 3 = $<<144*3=432>>432.",
+    "L3": "The total amount paid for 3 years will be $432 + $50 = $<<432+50=482>>482."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4821.\n    Returns: the total amount Joanie will pay for the gym for the first 3 years.\n    \"\"\"\n    # L1\n    cost_per_month = 12 # $12 per month\n    months_per_year = 12 # WK\n    cost_per_year = cost_per_month * months_per_year\n\n    # L2\n    num_years = 3 # first 3 years\n    total_membership_fee = cost_per_year * num_years\n\n    # L3\n    down_payment = 50 # $50 down payment\n    total_cost = total_membership_fee + down_payment\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cost",
+    "operand_to_replace": "down_payment",
+    "replacement_variable": "months_per_year"
+  },
+  "correct_trace": {
+    "cost_per_month": 12,
+    "months_per_year": 12,
+    "cost_per_year": 144,
+    "num_years": 3,
+    "total_membership_fee": 432,
+    "down_payment": 50,
+    "total_cost": 482,
+    "answer": 482
+  },
+  "flawed_trace": {
+    "cost_per_month": 12,
+    "months_per_year": 12,
+    "cost_per_year": 144,
+    "num_years": 3,
+    "total_membership_fee": 432,
+    "down_payment": 50,
+    "total_cost": 444,
+    "answer": 444
+  },
+  "correct_value": 482,
+  "flawed_value": 444,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L1",
+      "output_variable": "cost_per_year",
+      "question_inputs": [
+        "cost_per_month"
+      ],
+      "solution_line_template": "The membership costs ${cost_per_month} * {months_per_year} months = $<<{cost_per_month}*{months_per_year}={cost_per_year}>>{cost_per_year} per year."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_membership_fee",
+      "question_inputs": [
+        "num_years"
+      ],
+      "solution_line_template": "For three years, the monthly membership fee will be ${cost_per_year} * {num_years} = $<<{cost_per_year}*{num_years}={total_membership_fee}>>{total_membership_fee}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "down_payment"
+      ],
+      "solution_line_template": "The total amount paid for 3 years will be ${total_membership_fee} + ${down_payment} = $<<{total_membership_fee}+{down_payment}={total_cost}>>{total_cost}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The membership costs $12 * 12 months = $<<12*12=144>>144 per year.",
+    "L2": "For three years, the monthly membership fee will be $144 * 3 = $<<144*3=432>>432.",
+    "L3": "The total amount paid for 3 years will be $432 + $12 = $<<432+12=444>>444.",
+    "FA": "#### 444"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'months_per_year' (12) was used instead of 'down_payment' (50).",
+  "repro_seed": 418778257778160124,
+  "model_name": "google_gemini-2.5-flash"
+}

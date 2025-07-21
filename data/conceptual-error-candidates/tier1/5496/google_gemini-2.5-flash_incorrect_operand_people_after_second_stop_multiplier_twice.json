@@ -1,0 +1,96 @@
+{
+  "index": 5496,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "Between the trolley driver and his first 10 customers, there are 1+10 = <<1+10=11>>11 people are currently on the trolley",
+    "L2": "On his first stop, 10 people go on and twice as many people got on at the second stop so 10*2 = <<10*2=20>>20 people got on at the second stop.",
+    "L3": "So at the second stop he had 11 people on board, 3 got off and 20 got on so he now has 11-3+20 = <<11-3+20=28>>28 people",
+    "L4": "At his third stop 18 people got off and 2 got on so in total there are 28-18 +2 = <<28-18+2=12>>12 people on the trolley"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5496.\n    Returns: the number of people currently on the trolley.\n    \"\"\"\n    # L1\n    initial_customers = 10 # 10 people on his 1st stop\n    trolley_driver = 1 # trolley driver\n    people_after_first_stop = trolley_driver + initial_customers\n\n    # L2\n    multiplier_twice = 2 # twice as many people\n    people_on_second_stop = initial_customers * multiplier_twice\n\n    # L3\n    people_off_second_stop = 3 # 3 people got off\n    people_after_second_stop = people_after_first_stop - people_off_second_stop + people_on_second_stop\n\n    # L4\n    people_off_third_stop = 18 # 18 people got off\n    people_on_third_stop = 2 # 2 got on\n    final_people_on_trolley = people_after_second_stop - people_off_third_stop + people_on_third_stop\n\n    # FA\n    answer = final_people_on_trolley\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "people_after_second_stop",
+    "operand_to_replace": "people_after_first_stop",
+    "replacement_variable": "multiplier_twice"
+  },
+  "correct_trace": {
+    "initial_customers": 10,
+    "trolley_driver": 1,
+    "people_after_first_stop": 11,
+    "multiplier_twice": 2,
+    "people_on_second_stop": 20,
+    "people_off_second_stop": 3,
+    "people_after_second_stop": 28,
+    "people_off_third_stop": 18,
+    "people_on_third_stop": 2,
+    "final_people_on_trolley": 12,
+    "answer": 12
+  },
+  "flawed_trace": {
+    "initial_customers": 10,
+    "trolley_driver": 1,
+    "people_after_first_stop": 11,
+    "multiplier_twice": 2,
+    "people_on_second_stop": 20,
+    "people_off_second_stop": 3,
+    "people_after_second_stop": 19,
+    "people_off_third_stop": 18,
+    "people_on_third_stop": 2,
+    "final_people_on_trolley": 3,
+    "answer": 3
+  },
+  "correct_value": 28,
+  "flawed_value": 19,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "people_after_first_stop",
+      "question_inputs": [
+        "initial_customers",
+        "trolley_driver"
+      ],
+      "solution_line_template": "Between the trolley driver and his first {initial_customers} customers, there are {trolley_driver}+{initial_customers} = <<{trolley_driver}+{initial_customers}={people_after_first_stop}>>{people_after_first_stop} people are currently on the trolley"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "people_on_second_stop",
+      "question_inputs": [
+        "multiplier_twice"
+      ],
+      "solution_line_template": "On his first stop, {initial_customers} people go on and twice as many people got on at the second stop so {initial_customers}*{multiplier_twice} = <<{initial_customers}*{multiplier_twice}={people_on_second_stop}>>{people_on_second_stop} people got on at the second stop."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "people_after_second_stop",
+      "question_inputs": [
+        "people_off_second_stop"
+      ],
+      "solution_line_template": "So at the second stop he had {people_after_first_stop} people on board, {people_off_second_stop} got off and {people_on_second_stop} got on so he now has {people_after_first_stop}-{people_off_second_stop}+{people_on_second_stop} = <<{people_after_first_stop}-{people_off_second_stop}+{people_on_second_stop}={people_after_second_stop}>>{people_after_second_stop} people"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_people_on_trolley",
+      "question_inputs": [
+        "people_off_third_stop",
+        "people_on_third_stop"
+      ],
+      "solution_line_template": "At his third stop {people_off_third_stop} people got off and {people_on_third_stop} got on so in total there are {people_after_second_stop}-{people_off_third_stop} +{people_on_third_stop} = <<{people_after_second_stop}-{people_off_third_stop}+{people_on_third_stop}={final_people_on_trolley}>>{final_people_on_trolley} people on the trolley"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Between the trolley driver and his first 10 customers, there are 1+10 = <<1+10=11>>11 people are currently on the trolley",
+    "L2": "On his first stop, 10 people go on and twice as many people got on at the second stop so 10*2 = <<10*2=20>>20 people got on at the second stop.",
+    "L3": "So at the second stop he had 2 people on board, 3 got off and 20 got on so he now has 2-3+20 = <<2-3+20=19>>19 people",
+    "L4": "At his third stop 18 people got off and 2 got on so in total there are 19-18 +2 = <<19-18+2=3>>3 people on the trolley",
+    "FA": "#### 3"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'multiplier_twice' (value: 2) was used instead of 'people_after_first_stop' (value: 11).",
+  "repro_seed": -3888706798782330741,
+  "model_name": "google_gemini-2.5-flash"
+}

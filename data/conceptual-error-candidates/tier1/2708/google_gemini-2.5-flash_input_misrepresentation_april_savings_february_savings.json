@@ -1,0 +1,81 @@
+{
+  "index": 2708,
+  "original_solution_mapping": {
+    "FA": "#### 160",
+    "L1": "Ofelia saves $10 x 2 = $<<10*2=20>>20 in February.",
+    "L2": "She will save $20x 2 = $<<20*2=40>>40 in March.",
+    "L3": "She will save $40 x 2 = $<<40*2=80>>80 in April.",
+    "L4": "Thus, she will save $80 x 2 = $<<80*2=160>>160 in May."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2708.\n    Returns: the amount Ofelia will save in May.\n    \"\"\"\n    # L1\n    initial_january_savings = 10 # In January, she saved $10\n    multiplier_twice = 2 # twice the amount\n    february_savings = initial_january_savings * multiplier_twice\n\n    # L2\n    march_savings = february_savings * multiplier_twice\n\n    # L3\n    april_savings = march_savings * multiplier_twice\n\n    # L4\n    may_savings = april_savings * multiplier_twice\n\n    # FA\n    answer = may_savings\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "april_savings",
+    "operand_to_replace": "multiplier_twice",
+    "replacement_variable": "february_savings"
+  },
+  "correct_trace": {
+    "initial_january_savings": 10,
+    "multiplier_twice": 2,
+    "february_savings": 20,
+    "march_savings": 40,
+    "april_savings": 80,
+    "may_savings": 160,
+    "answer": 160
+  },
+  "flawed_trace": {
+    "initial_january_savings": 10,
+    "multiplier_twice": 2,
+    "february_savings": 20,
+    "march_savings": 40,
+    "april_savings": 800,
+    "may_savings": 1600,
+    "answer": 1600
+  },
+  "correct_value": 80,
+  "flawed_value": 800,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "initial_january_savings",
+        "multiplier_twice"
+      ],
+      "WK_inputs": [],
+      "output_variable": "february_savings",
+      "solution_line_template": "Ofelia saves ${initial_january_savings} x {multiplier_twice} = $<<{initial_january_savings}*{multiplier_twice}={february_savings}>>{february_savings} in February."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "march_savings",
+      "solution_line_template": "She will save ${february_savings}x {multiplier_twice} = $<<{february_savings}*{multiplier_twice}={march_savings}>>{march_savings} in March."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "april_savings",
+      "solution_line_template": "She will save ${march_savings} x {multiplier_twice} = $<<{march_savings}*{multiplier_twice}={april_savings}>>{april_savings} in April."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "may_savings",
+      "solution_line_template": "Thus, she will save ${april_savings} x {multiplier_twice} = $<<{april_savings}*{multiplier_twice}={may_savings}>>{may_savings} in May."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Ofelia saves $10 x 2 = $<<10*2=20>>20 in February.",
+    "L2": "She will save $20x 2 = $<<20*2=40>>40 in March.",
+    "L3": "She will save $40 x 20 = $<<40*20=800>>800 in April.",
+    "L4": "Thus, she will save $800 x 2 = $<<800*2=1600>>1600 in May.",
+    "FA": "#### 1600"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'february_savings' (20) was used instead of 'multiplier_twice' (2).",
+  "repro_seed": -6714257509734943428,
+  "model_name": "google_gemini-2.5-flash"
+}

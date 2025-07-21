@@ -1,0 +1,89 @@
+{
+  "index": 6078,
+  "original_solution_mapping": {
+    "FA": "#### 315",
+    "L1": "On the second day he wrote twice the amount as the first day, which was 25 pages so 2*25 = <<2*25=50>>50 pages",
+    "L2": "On the third day he wrote twice the amount as he did on the second day, which was 50 pages so 2*50 = <<2*50=100>>100 pages",
+    "L3": "The first day he wrote 25, then 50, then 100 and 10 on the fourth day for a total of 25+50+100+10 = <<25+50+100+10=185>>185",
+    "L4": "He needs to write 500 pages and has written 185 which means he has 500-185 = <<500-185=315>>315 more pages to write"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6078.\n    Returns: the number of pages Cyrus still needs to write.\n    \"\"\"\n    # L1\n    first_day_pages = 25 # writes 25 pages\n    multiplier_twice = 2 # twice that amount\n    second_day_pages = multiplier_twice * first_day_pages\n\n    # L2\n    third_day_pages = multiplier_twice * second_day_pages\n\n    # L3\n    fourth_day_pages = 10 # only able to write 10 pages\n    total_pages_written = first_day_pages + second_day_pages + third_day_pages + fourth_day_pages\n\n    # L4\n    total_book_pages = 500 # write a 500 page book\n    pages_remaining = total_book_pages - total_pages_written\n\n    # FA\n    answer = pages_remaining\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_pages_written",
+    "operand_to_replace": "second_day_pages",
+    "replacement_variable": "multiplier_twice"
+  },
+  "correct_trace": {
+    "first_day_pages": 25,
+    "multiplier_twice": 2,
+    "second_day_pages": 50,
+    "third_day_pages": 100,
+    "fourth_day_pages": 10,
+    "total_pages_written": 185,
+    "total_book_pages": 500,
+    "pages_remaining": 315,
+    "answer": 315
+  },
+  "flawed_trace": {
+    "first_day_pages": 25,
+    "multiplier_twice": 2,
+    "second_day_pages": 50,
+    "third_day_pages": 100,
+    "fourth_day_pages": 10,
+    "total_pages_written": 137,
+    "total_book_pages": 500,
+    "pages_remaining": 363,
+    "answer": 363
+  },
+  "correct_value": 185,
+  "flawed_value": 137,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "second_day_pages",
+      "question_inputs": [
+        "first_day_pages",
+        "multiplier_twice"
+      ],
+      "solution_line_template": "On the second day he wrote twice the amount as the first day, which was {first_day_pages} pages so {multiplier_twice}*{first_day_pages} = <<{multiplier_twice}*{first_day_pages}={second_day_pages}>>{second_day_pages} pages"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "third_day_pages",
+      "question_inputs": [],
+      "solution_line_template": "On the third day he wrote twice the amount as he did on the second day, which was {second_day_pages} pages so {multiplier_twice}*{second_day_pages} = <<{multiplier_twice}*{second_day_pages}={third_day_pages}>>{third_day_pages} pages"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_pages_written",
+      "question_inputs": [
+        "fourth_day_pages"
+      ],
+      "solution_line_template": "The first day he wrote {first_day_pages}, then {second_day_pages}, then {third_day_pages} and {fourth_day_pages} on the fourth day for a total of {first_day_pages}+{second_day_pages}+{third_day_pages}+{fourth_day_pages} = <<{first_day_pages}+{second_day_pages}+{third_day_pages}+{fourth_day_pages}={total_pages_written}>>{total_pages_written}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "pages_remaining",
+      "question_inputs": [
+        "total_book_pages"
+      ],
+      "solution_line_template": "He needs to write {total_book_pages} pages and has written {total_pages_written} which means he has {total_book_pages}-{total_pages_written} = <<{total_book_pages}-{total_pages_written}={pages_remaining}>>{pages_remaining} more pages to write"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On the second day he wrote twice the amount as the first day, which was 25 pages so 2*25 = <<2*25=50>>50 pages",
+    "L2": "On the third day he wrote twice the amount as he did on the second day, which was 50 pages so 2*50 = <<2*50=100>>100 pages",
+    "L3": "The first day he wrote 25, then 2, then 100 and 10 on the fourth day for a total of 25+2+100+10 = <<25+2+100+10=137>>137",
+    "L4": "He needs to write 500 pages and has written 137 which means he has 500-137 = <<500-137=363>>363 more pages to write",
+    "FA": "#### 363"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'multiplier_twice' (value: 2) was used instead of 'second_day_pages' (value: 50).",
+  "repro_seed": -8246279398792861061,
+  "model_name": "google_gemini-2.5-flash"
+}

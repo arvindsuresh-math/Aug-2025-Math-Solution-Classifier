@@ -1,0 +1,63 @@
+{
+  "index": 6090,
+  "original_solution_mapping": {
+    "FA": "#### 10800",
+    "L1": "Each person is charged 18*2=$<<18*2=36>>36 per month",
+    "L2": "So they get 36*300=$<<36*300=10800>>10,800 per month"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6090.\n    Returns: the total amount the gym makes a month.\n    \"\"\"\n    # L1\n    charge_per_instance = 18 # $18 twice a month\n    times_charged_per_month = 2 # twice a month\n    charge_per_person_per_month = charge_per_instance * times_charged_per_month\n\n    # L2\n    num_members = 300 # 300 members\n    total_monthly_income = charge_per_person_per_month * num_members\n\n    # FA\n    answer = total_monthly_income\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_monthly_income",
+    "operand_to_replace": "num_members",
+    "replacement_variable": "charge_per_person_per_month"
+  },
+  "correct_trace": {
+    "charge_per_instance": 18,
+    "times_charged_per_month": 2,
+    "charge_per_person_per_month": 36,
+    "num_members": 300,
+    "total_monthly_income": 10800,
+    "answer": 10800
+  },
+  "flawed_trace": {
+    "charge_per_instance": 18,
+    "times_charged_per_month": 2,
+    "charge_per_person_per_month": 36,
+    "num_members": 300,
+    "total_monthly_income": 1296,
+    "answer": 1296
+  },
+  "correct_value": 10800,
+  "flawed_value": 1296,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "charge_per_person_per_month",
+      "question_inputs": [
+        "charge_per_instance",
+        "times_charged_per_month"
+      ],
+      "solution_line_template": "Each person is charged {charge_per_instance}*{times_charged_per_month}=$<<{charge_per_instance}*{times_charged_per_month}={charge_per_person_per_month}>>{charge_per_person_per_month} per month"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_monthly_income",
+      "question_inputs": [
+        "num_members"
+      ],
+      "solution_line_template": "So they get {charge_per_person_per_month}*{num_members}=$<<{charge_per_person_per_month}*{num_members}={total_monthly_income}>>{total_monthly_income} per month"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each person is charged 18*2=$<<18*2=36>>36 per month",
+    "L2": "So they get 36*36=$<<36*36=1296>>1296 per month",
+    "FA": "#### 1296"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'charge_per_person_per_month' (36) was used instead of 'num_members' (300).",
+  "repro_seed": -4684910647852795269,
+  "model_name": "google_gemini-2.5-flash"
+}

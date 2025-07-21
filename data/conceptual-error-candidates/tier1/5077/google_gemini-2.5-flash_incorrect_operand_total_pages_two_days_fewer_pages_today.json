@@ -1,0 +1,74 @@
+{
+  "index": 5077,
+  "original_solution_mapping": {
+    "FA": "#### 35",
+    "L1": "Lance read 35 - 5 = <<35-5=30>>30 pages today.",
+    "L2": "So he read a total of 35 + 30 = <<35+30=65>>65 pages in 2 days.",
+    "L3": "Thus, he should read 100 - 65 = <<100-65=35>>35 pages tomorrow."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5077.\n    Returns: the number of pages Lance should read tomorrow to finish the book.\n    \"\"\"\n    # L1\n    pages_yesterday = 35 # read 35 pages\n    fewer_pages_today = 5 # read 5 fewer pages than yesterday\n    pages_today = pages_yesterday - fewer_pages_today\n\n    # L2\n    total_pages_two_days = pages_yesterday + pages_today\n\n    # L3\n    total_book_pages = 100 # a 100 page book\n    pages_tomorrow = total_book_pages - total_pages_two_days\n\n    # FA\n    answer = pages_tomorrow\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_pages_two_days",
+    "operand_to_replace": "pages_today",
+    "replacement_variable": "fewer_pages_today"
+  },
+  "correct_trace": {
+    "pages_yesterday": 35,
+    "fewer_pages_today": 5,
+    "pages_today": 30,
+    "total_pages_two_days": 65,
+    "total_book_pages": 100,
+    "pages_tomorrow": 35,
+    "answer": 35
+  },
+  "flawed_trace": {
+    "pages_yesterday": 35,
+    "fewer_pages_today": 5,
+    "pages_today": 30,
+    "total_pages_two_days": 40,
+    "total_book_pages": 100,
+    "pages_tomorrow": 60,
+    "answer": 60
+  },
+  "correct_value": 65,
+  "flawed_value": 40,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "pages_today",
+      "question_inputs": [
+        "pages_yesterday",
+        "fewer_pages_today"
+      ],
+      "solution_line_template": "Lance read {pages_yesterday} - {fewer_pages_today} = <<{pages_yesterday}-{fewer_pages_today}={pages_today}>>{pages_today} pages today."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_pages_two_days",
+      "question_inputs": [],
+      "solution_line_template": "So he read a total of {pages_yesterday} + {pages_today} = <<{pages_yesterday}+{pages_today}={total_pages_two_days}>>{total_pages_two_days} pages in 2 days."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "pages_tomorrow",
+      "question_inputs": [
+        "total_book_pages"
+      ],
+      "solution_line_template": "Thus, he should read {total_book_pages} - {total_pages_two_days} = <<{total_book_pages}-{total_pages_two_days}={pages_tomorrow}>>{pages_tomorrow} pages tomorrow."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Lance read 35 - 5 = <<35-5=30>>30 pages today.",
+    "L2": "So he read a total of 35 + 5 = <<35+5=40>>40 pages in 2 days.",
+    "L3": "Thus, he should read 100 - 40 = <<100-40=60>>60 pages tomorrow.",
+    "FA": "#### 60"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'fewer_pages_today' (value: 5) was used instead of 'pages_today' (value: 30).",
+  "repro_seed": -6950832444100442188,
+  "model_name": "google_gemini-2.5-flash"
+}

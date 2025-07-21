@@ -1,0 +1,63 @@
+{
+  "index": 4619,
+  "original_solution_mapping": {
+    "FA": "#### 22",
+    "L1": "First find the total amount of money Bill made from the merchant: 8 ounces * $9/ounce = $<<8*9=72>>72",
+    "L2": "Then subtract the fine to find how much money he was left with: $72 - $50 = $<<72-50=22>>22"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4619.\n    Returns: the amount of money Bill is left with.\n    \"\"\"\n    # L1\n    ounces_sold_to_merchant = 8 # sells 8 ounces\n    price_per_ounce = 9 # earned $9 for every ounce\n    money_from_merchant = ounces_sold_to_merchant * price_per_ounce\n\n    # L2\n    fine_amount = 50 # fined $50\n    money_left = money_from_merchant - fine_amount\n\n    # FA\n    answer = money_left\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "money_left",
+    "operand_to_replace": "fine_amount",
+    "replacement_variable": "price_per_ounce"
+  },
+  "correct_trace": {
+    "ounces_sold_to_merchant": 8,
+    "price_per_ounce": 9,
+    "money_from_merchant": 72,
+    "fine_amount": 50,
+    "money_left": 22,
+    "answer": 22
+  },
+  "flawed_trace": {
+    "ounces_sold_to_merchant": 8,
+    "price_per_ounce": 9,
+    "money_from_merchant": 72,
+    "fine_amount": 50,
+    "money_left": 63,
+    "answer": 63
+  },
+  "correct_value": 22,
+  "flawed_value": 63,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_from_merchant",
+      "question_inputs": [
+        "ounces_sold_to_merchant",
+        "price_per_ounce"
+      ],
+      "solution_line_template": "First find the total amount of money Bill made from the merchant: {ounces_sold_to_merchant} ounces * ${price_per_ounce}/ounce = $<<{ounces_sold_to_merchant}*{price_per_ounce}={money_from_merchant}>>{money_from_merchant}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_left",
+      "question_inputs": [
+        "fine_amount"
+      ],
+      "solution_line_template": "Then subtract the fine to find how much money he was left with: ${money_from_merchant} - ${fine_amount} = $<<{money_from_merchant}-{fine_amount}={money_left}>>{money_left}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total amount of money Bill made from the merchant: 8 ounces * $9/ounce = $<<8*9=72>>72",
+    "L2": "Then subtract the fine to find how much money he was left with: $72 - $9 = $<<72-9=63>>63",
+    "FA": "#### 63"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'price_per_ounce' (9) was used instead of 'fine_amount' (50).",
+  "repro_seed": -305160455245769723,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,96 @@
+{
+  "index": 4587,
+  "original_solution_mapping": {
+    "FA": "#### 13",
+    "L1": "After five days, Chantel has 5 * 2 = <<5*2=10>>10 bracelets.",
+    "L2": "Then she has 10 - 3 = <<10-3=7>>7 bracelets.",
+    "L3": "After the next four days, she makes 4 * 3 = <<4*3=12>>12 bracelets.",
+    "L4": "In the end, Chantel has 7 + 12 - 6 = <<7+12-6=13>>13 bracelets."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4587.\n    Returns: the number of bracelets Chantel has in the end.\n    \"\"\"\n    # L1\n    first_period_days = 5 # For 5 days\n    bracelets_per_day_first_period = 2 # makes 2 friendship bracelets every day\n    bracelets_after_first_period = first_period_days * bracelets_per_day_first_period\n\n    # L2\n    given_away_first_time = 3 # gives away 3 bracelets\n    bracelets_after_first_giveaway = bracelets_after_first_period - given_away_first_time\n\n    # L3\n    second_period_days = 4 # for four days\n    bracelets_per_day_second_period = 3 # makes 3 friendship bracelets every day\n    bracelets_made_second_period = second_period_days * bracelets_per_day_second_period\n\n    # L4\n    given_away_second_time = 6 # gives away 6 bracelets\n    final_bracelets = bracelets_after_first_giveaway + bracelets_made_second_period - given_away_second_time\n\n    # FA\n    answer = final_bracelets\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "final_bracelets",
+    "operand_to_replace": "given_away_second_time",
+    "replacement_variable": "bracelets_after_first_giveaway"
+  },
+  "correct_trace": {
+    "first_period_days": 5,
+    "bracelets_per_day_first_period": 2,
+    "bracelets_after_first_period": 10,
+    "given_away_first_time": 3,
+    "bracelets_after_first_giveaway": 7,
+    "second_period_days": 4,
+    "bracelets_per_day_second_period": 3,
+    "bracelets_made_second_period": 12,
+    "given_away_second_time": 6,
+    "final_bracelets": 13,
+    "answer": 13
+  },
+  "flawed_trace": {
+    "first_period_days": 5,
+    "bracelets_per_day_first_period": 2,
+    "bracelets_after_first_period": 10,
+    "given_away_first_time": 3,
+    "bracelets_after_first_giveaway": 7,
+    "second_period_days": 4,
+    "bracelets_per_day_second_period": 3,
+    "bracelets_made_second_period": 12,
+    "given_away_second_time": 6,
+    "final_bracelets": 12,
+    "answer": 12
+  },
+  "correct_value": 13,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "bracelets_after_first_period",
+      "question_inputs": [
+        "first_period_days",
+        "bracelets_per_day_first_period"
+      ],
+      "solution_line_template": "After five days, Chantel has {first_period_days} * {bracelets_per_day_first_period} = <<{first_period_days}*{bracelets_per_day_first_period}={bracelets_after_first_period}>>{bracelets_after_first_period} bracelets."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "bracelets_after_first_giveaway",
+      "question_inputs": [
+        "given_away_first_time"
+      ],
+      "solution_line_template": "Then she has {bracelets_after_first_period} - {given_away_first_time} = <<{bracelets_after_first_period}-{given_away_first_time}={bracelets_after_first_giveaway}>>{bracelets_after_first_giveaway} bracelets."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "bracelets_made_second_period",
+      "question_inputs": [
+        "second_period_days",
+        "bracelets_per_day_second_period"
+      ],
+      "solution_line_template": "After the next four days, she makes {second_period_days} * {bracelets_per_day_second_period} = <<{second_period_days}*{bracelets_per_day_second_period}={bracelets_made_second_period}>>{bracelets_made_second_period} bracelets."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_bracelets",
+      "question_inputs": [
+        "given_away_second_time"
+      ],
+      "solution_line_template": "In the end, Chantel has {bracelets_after_first_giveaway} + {bracelets_made_second_period} - {given_away_second_time} = <<{bracelets_after_first_giveaway}+{bracelets_made_second_period}-{given_away_second_time}={final_bracelets}>>{final_bracelets} bracelets."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After five days, Chantel has 5 * 2 = <<5*2=10>>10 bracelets.",
+    "L2": "Then she has 10 - 3 = <<10-3=7>>7 bracelets.",
+    "L3": "After the next four days, she makes 4 * 3 = <<4*3=12>>12 bracelets.",
+    "L4": "In the end, Chantel has 7 + 12 - 7 = <<7+12-7=12>>12 bracelets.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'bracelets_after_first_giveaway' (7) was used instead of 'given_away_second_time' (6).",
+  "repro_seed": -1542688931448828321,
+  "model_name": "google_gemini-2.5-flash"
+}

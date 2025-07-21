@@ -1,0 +1,89 @@
+{
+  "index": 284,
+  "original_solution_mapping": {
+    "FA": "#### 768000",
+    "L1": "At the highest setting, it vibrates 1600*.6=<<1600*.6=960>>960 vibrations per second faster than the lowest setting",
+    "L2": "So it vibrates at 1600+960=<<1600+960=2560>>2560 vibrations per second",
+    "L3": "Matt uses it for 5 minutes so that is 5*60=<<5*60=300>>300 seconds",
+    "L4": "That means he experienced 2560*300=<<2560*300=768000>>768,000 vibrations"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 284.\n    Returns: the total number of vibrations experienced by Matt.\n    \"\"\"\n    # L1\n    lowest_setting_vibrations = 1600 # vibrates at 1600 vibrations per second\n    faster_percent_decimal = 0.6 # vibrates 60% faster\n    faster_vibrations = lowest_setting_vibrations * faster_percent_decimal\n\n    # L2\n    highest_setting_vibrations = lowest_setting_vibrations + faster_vibrations\n\n    # L3\n    usage_minutes = 5 # for 5 minutes\n    seconds_per_minute = 60 # WK\n    usage_seconds = usage_minutes * seconds_per_minute\n\n    # L4\n    total_vibrations = highest_setting_vibrations * usage_seconds\n\n    # FA\n    answer = total_vibrations\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "usage_seconds",
+    "operand_to_replace": "seconds_per_minute",
+    "replacement_variable": "faster_percent_decimal"
+  },
+  "correct_trace": {
+    "lowest_setting_vibrations": 1600,
+    "faster_percent_decimal": 0.6,
+    "faster_vibrations": 960.0,
+    "highest_setting_vibrations": 2560.0,
+    "usage_minutes": 5,
+    "seconds_per_minute": 60,
+    "usage_seconds": 300,
+    "total_vibrations": 768000.0,
+    "answer": 768000.0
+  },
+  "flawed_trace": {
+    "lowest_setting_vibrations": 1600,
+    "faster_percent_decimal": 0.6,
+    "faster_vibrations": 960.0,
+    "highest_setting_vibrations": 2560.0,
+    "usage_minutes": 5,
+    "seconds_per_minute": 60,
+    "usage_seconds": 3.0,
+    "total_vibrations": 7680.0,
+    "answer": 7680.0
+  },
+  "correct_value": 300,
+  "flawed_value": 3.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "faster_vibrations",
+      "question_inputs": [
+        "lowest_setting_vibrations",
+        "faster_percent_decimal"
+      ],
+      "solution_line_template": "At the highest setting, it vibrates {lowest_setting_vibrations}*{faster_percent_decimal}=<<{lowest_setting_vibrations}*{faster_percent_decimal}={faster_vibrations}>>{faster_vibrations} vibrations per second faster than the lowest setting"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "highest_setting_vibrations",
+      "question_inputs": [],
+      "solution_line_template": "So it vibrates at {lowest_setting_vibrations}+{faster_vibrations}=<<{lowest_setting_vibrations}+{faster_vibrations}={highest_setting_vibrations}>>{highest_setting_vibrations} vibrations per second"
+    },
+    {
+      "WK_inputs": [
+        "seconds_per_minute"
+      ],
+      "line_number": "L3",
+      "output_variable": "usage_seconds",
+      "question_inputs": [
+        "usage_minutes"
+      ],
+      "solution_line_template": "Matt uses it for {usage_minutes} minutes so that is {usage_minutes}*{seconds_per_minute}=<<{usage_minutes}*{seconds_per_minute}={usage_seconds}>>{usage_seconds} seconds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_vibrations",
+      "question_inputs": [],
+      "solution_line_template": "That means he experienced {highest_setting_vibrations}*{usage_seconds}=<<{highest_setting_vibrations}*{usage_seconds}={total_vibrations}>>{total_vibrations} vibrations"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "At the highest setting, it vibrates 1600*0.6=<<1600*0.6=960>>960 vibrations per second faster than the lowest setting",
+    "L2": "So it vibrates at 1600+960=<<1600+960=2560>>2560 vibrations per second",
+    "L3": "Matt uses it for 5 minutes so that is 5*0.6=<<5*0.6=3>>3 seconds",
+    "L4": "That means he experienced 2560*3=<<2560*3=7680>>7680 vibrations",
+    "FA": "#### 7680"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'faster_percent_decimal' (0.6) was used instead of 'seconds_per_minute' (60).",
+  "repro_seed": 8217010205476056549,
+  "model_name": "google_gemini-2.5-flash"
+}

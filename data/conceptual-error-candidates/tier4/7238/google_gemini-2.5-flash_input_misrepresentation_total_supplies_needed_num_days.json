@@ -1,0 +1,108 @@
+{
+  "index": 7238,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "He is going to hike 8*=40 hours",
+    "L2": "That means he will be hiking for 40*2.5=<<40*2.5=100>>100 miles",
+    "L3": "So he needs 100*.5=<<100*.5=50>>50 pounds of supplies",
+    "L4": "With the resupply he can get up to 1+.25=<<1+.25=1.25>>1.25 times his initial pack",
+    "L5": "That means his initial pack has to weigh 50/1.25=<<50/1.25=40>>40 pounds"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7238.\n    Returns: the weight of the first pack needed.\n    \"\"\"\n    # L1\n    hours_per_day = 8 # 8 hours a day\n    num_days = 5 # for 5 days\n    total_hiking_hours = hours_per_day * num_days\n\n    # L2\n    hiking_rate_mph = 2.5 # hike at a rate of 2.5 mph\n    total_miles = total_hiking_hours * hiking_rate_mph\n\n    # L3\n    supplies_per_mile = 0.5 # pack about .5 pounds of supplies for every mile\n    total_supplies_needed = total_miles * supplies_per_mile\n\n    # L4\n    base_pack_factor = 1 # WK\n    resupply_percentage = 0.25 # 25% as large as his first pack\n    total_pack_multiplier = base_pack_factor + resupply_percentage\n\n    # L5\n    initial_pack_weight = total_supplies_needed / total_pack_multiplier\n\n    # FA\n    answer = initial_pack_weight\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_supplies_needed",
+    "operand_to_replace": "supplies_per_mile",
+    "replacement_variable": "num_days"
+  },
+  "correct_trace": {
+    "hours_per_day": 8,
+    "num_days": 5,
+    "total_hiking_hours": 40,
+    "hiking_rate_mph": 2.5,
+    "total_miles": 100.0,
+    "supplies_per_mile": 0.5,
+    "total_supplies_needed": 50.0,
+    "base_pack_factor": 1,
+    "resupply_percentage": 0.25,
+    "total_pack_multiplier": 1.25,
+    "initial_pack_weight": 40.0,
+    "answer": 40.0
+  },
+  "flawed_trace": {
+    "hours_per_day": 8,
+    "num_days": 5,
+    "total_hiking_hours": 40,
+    "hiking_rate_mph": 2.5,
+    "total_miles": 100.0,
+    "supplies_per_mile": 0.5,
+    "total_supplies_needed": 500.0,
+    "base_pack_factor": 1,
+    "resupply_percentage": 0.25,
+    "total_pack_multiplier": 1.25,
+    "initial_pack_weight": 400.0,
+    "answer": 400.0
+  },
+  "correct_value": 50.0,
+  "flawed_value": 500.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_hiking_hours",
+      "question_inputs": [
+        "hours_per_day",
+        "num_days"
+      ],
+      "solution_line_template": "He is going to hike {hours_per_day}*{num_days}={total_hiking_hours} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_miles",
+      "question_inputs": [
+        "hiking_rate_mph"
+      ],
+      "solution_line_template": "That means he will be hiking for {total_hiking_hours}*{hiking_rate_mph}=<<{total_hiking_hours}*{hiking_rate_mph}={total_miles}>>{total_miles} miles"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_supplies_needed",
+      "question_inputs": [
+        "supplies_per_mile"
+      ],
+      "solution_line_template": "So he needs {total_miles}*{supplies_per_mile}=<<{total_miles}*{supplies_per_mile}={total_supplies_needed}>>{total_supplies_needed} pounds of supplies"
+    },
+    {
+      "WK_inputs": [
+        "base_pack_factor"
+      ],
+      "line_number": "L4",
+      "output_variable": "total_pack_multiplier",
+      "question_inputs": [
+        "resupply_percentage"
+      ],
+      "solution_line_template": "With the resupply he can get up to {base_pack_factor}+{resupply_percentage}=<<{base_pack_factor}+{resupply_percentage}={total_pack_multiplier}>>{total_pack_multiplier} times his initial pack"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "initial_pack_weight",
+      "question_inputs": [],
+      "solution_line_template": "That means his initial pack has to weigh {total_supplies_needed}/{total_pack_multiplier}=<<{total_supplies_needed}/{total_pack_multiplier}={initial_pack_weight}>>{initial_pack_weight} pounds"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He is going to hike 8*5=40 hours",
+    "L2": "That means he will be hiking for 40*2.5=<<40*2.5=100>>100 miles",
+    "L3": "So he needs 100*5=<<100*5=500>>500 pounds of supplies",
+    "L4": "With the resupply he can get up to 1+0.25=<<1+0.25=1.25>>1.25 times his initial pack",
+    "L5": "That means his initial pack has to weigh 500/1.25=<<500/1.25=400>>400 pounds",
+    "FA": "#### 400"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'num_days' (5) was used instead of 'supplies_per_mile' (0.5).",
+  "repro_seed": 4882969345483855722,
+  "model_name": "google_gemini-2.5-flash"
+}

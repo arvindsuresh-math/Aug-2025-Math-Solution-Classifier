@@ -1,0 +1,91 @@
+{
+  "index": 5805,
+  "original_solution_mapping": {
+    "FA": "#### 513",
+    "L1": "The town had 684 people then had a 25% growth spurt increasing the population by 684*.25 = 171 people",
+    "L2": "The town had 684 people then they added 171 people bringing the population to 684+171 = <<684+171=855>>855 people",
+    "L3": "There were 855 people and 40% moved away so it decreased by 855*.40 = 342",
+    "L4": "The population was 855 and 342 people moved away making the new population 855-342 = <<855-342=513>>513 people"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5805.\n    Returns: the current population of the town.\n    \"\"\"\n    # L1\n    initial_population = 684 # population of 684 people\n    growth_percent_decimal = 0.25 # increased by 25%\n    growth_percent_num = 25 # 25% growth spurt\n    population_increase = initial_population * growth_percent_decimal\n\n    # L2\n    population_after_growth = initial_population + population_increase\n\n    # L3\n    moved_away_percent_decimal = 0.40 # 40% of the population moved away\n    moved_away_percent_num = 40 # 40% moved away\n    population_decrease = population_after_growth * moved_away_percent_decimal\n\n    # L4\n    current_population = population_after_growth - population_decrease\n\n    # FA\n    answer = current_population\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "population_increase",
+    "operand_to_replace": "growth_percent_decimal",
+    "replacement_variable": "initial_population"
+  },
+  "correct_trace": {
+    "initial_population": 684,
+    "growth_percent_decimal": 0.25,
+    "growth_percent_num": 25,
+    "population_increase": 171.0,
+    "population_after_growth": 855.0,
+    "moved_away_percent_decimal": 0.4,
+    "moved_away_percent_num": 40,
+    "population_decrease": 342.0,
+    "current_population": 513.0,
+    "answer": 513.0
+  },
+  "flawed_trace": {
+    "initial_population": 684,
+    "growth_percent_decimal": 0.25,
+    "growth_percent_num": 25,
+    "population_increase": 467856,
+    "population_after_growth": 468540,
+    "moved_away_percent_decimal": 0.4,
+    "moved_away_percent_num": 40,
+    "population_decrease": 187416.0,
+    "current_population": 281124.0,
+    "answer": 281124.0
+  },
+  "correct_value": 171.0,
+  "flawed_value": 467856,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "population_increase",
+      "question_inputs": [
+        "initial_population",
+        "growth_percent_decimal",
+        "growth_percent_num"
+      ],
+      "solution_line_template": "The town had {initial_population} people then had a {growth_percent_num}% growth spurt increasing the population by {initial_population}*{growth_percent_decimal} = {population_increase} people"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "population_after_growth",
+      "question_inputs": [],
+      "solution_line_template": "The town had {initial_population} people then they added {population_increase} people bringing the population to {initial_population}+{population_increase} = <<{initial_population}+{population_increase}={population_after_growth}>>{population_after_growth} people"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "population_decrease",
+      "question_inputs": [
+        "moved_away_percent_decimal",
+        "moved_away_percent_num"
+      ],
+      "solution_line_template": "There were {population_after_growth} people and {moved_away_percent_num}% moved away so it decreased by {population_after_growth}*{moved_away_percent_decimal} = {population_decrease}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "current_population",
+      "question_inputs": [],
+      "solution_line_template": "The population was {population_after_growth} and {population_decrease} people moved away making the new population {population_after_growth}-{population_decrease} = <<{population_after_growth}-{population_decrease}={current_population}>>{current_population} people"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The town had 684 people then had a 25% growth spurt increasing the population by 684*684 = 467856 people",
+    "L2": "The town had 684 people then they added 467856 people bringing the population to 684+467856 = <<684+467856=468540>>468540 people",
+    "L3": "There were 468540 people and 40% moved away so it decreased by 468540*0.4 = 187416",
+    "L4": "The population was 468540 and 187416 people moved away making the new population 468540-187416 = <<468540-187416=281124>>281124 people",
+    "FA": "#### 281124"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'initial_population' (684) was used instead of 'growth_percent_decimal' (0.25).",
+  "repro_seed": 8205972183729576263,
+  "model_name": "google_gemini-2.5-flash"
+}

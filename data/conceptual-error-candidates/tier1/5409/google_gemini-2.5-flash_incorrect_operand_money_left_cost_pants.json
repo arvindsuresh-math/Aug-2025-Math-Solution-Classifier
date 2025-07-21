@@ -1,0 +1,78 @@
+{
+  "index": 5409,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "Bruce spent 5 * $5 on shirts = $<<5*5=25>>25.",
+    "L2": "Including the pants, Bruce spent $25 + $26 = $<<25+26=51>>51.",
+    "L3": "Since he began with $71, he has $71 - $51 spent = $<<71-51=20>>20 remaining."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5409.\n    Returns: the amount of money Bruce has left to buy more clothes.\n    \"\"\"\n    # L1\n    num_shirts = 5 # 5 shirts\n    cost_per_shirt = 5 # $5 each\n    cost_shirts = num_shirts * cost_per_shirt\n\n    # L2\n    cost_pants = 26 # a pair of pants that cost $26\n    total_spent = cost_shirts + cost_pants\n\n    # L3\n    initial_money = 71 # $71 to spend on clothes\n    money_left = initial_money - total_spent\n\n    # FA\n    answer = money_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "money_left",
+    "operand_to_replace": "total_spent",
+    "replacement_variable": "cost_pants"
+  },
+  "correct_trace": {
+    "num_shirts": 5,
+    "cost_per_shirt": 5,
+    "cost_shirts": 25,
+    "cost_pants": 26,
+    "total_spent": 51,
+    "initial_money": 71,
+    "money_left": 20,
+    "answer": 20
+  },
+  "flawed_trace": {
+    "num_shirts": 5,
+    "cost_per_shirt": 5,
+    "cost_shirts": 25,
+    "cost_pants": 26,
+    "total_spent": 51,
+    "initial_money": 71,
+    "money_left": 45,
+    "answer": 45
+  },
+  "correct_value": 20,
+  "flawed_value": 45,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_shirts",
+      "question_inputs": [
+        "num_shirts",
+        "cost_per_shirt"
+      ],
+      "solution_line_template": "Bruce spent {num_shirts} * ${cost_per_shirt} on shirts = $<<{num_shirts}*{cost_per_shirt}={cost_shirts}>>{cost_shirts}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_spent",
+      "question_inputs": [
+        "cost_pants"
+      ],
+      "solution_line_template": "Including the pants, Bruce spent ${cost_shirts} + ${cost_pants} = $<<{cost_shirts}+{cost_pants}={total_spent}>>{total_spent}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "money_left",
+      "question_inputs": [
+        "initial_money"
+      ],
+      "solution_line_template": "Since he began with ${initial_money}, he has ${initial_money} - ${total_spent} spent = $<<{initial_money}-{total_spent}={money_left}>>{money_left} remaining."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Bruce spent 5 * $5 on shirts = $<<5*5=25>>25.",
+    "L2": "Including the pants, Bruce spent $25 + $26 = $<<25+26=51>>51.",
+    "L3": "Since he began with $71, he has $71 - $26 spent = $<<71-26=45>>45 remaining.",
+    "FA": "#### 45"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'cost_pants' (value: 26) was used instead of 'total_spent' (value: 51).",
+  "repro_seed": -7475419093917961321,
+  "model_name": "google_gemini-2.5-flash"
+}

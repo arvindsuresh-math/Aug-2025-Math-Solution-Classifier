@@ -1,0 +1,74 @@
+{
+  "index": 5324,
+  "original_solution_mapping": {
+    "FA": "#### 125",
+    "L1": "If Parker got $50 with a ratio of 2, then the unit share is $50/2 = $<<50/2=25>>25",
+    "L2": "Using the sharing ratio, Richie gets 3 unit shares which total to 3*$25 = $<<3*25=75>>75",
+    "L3": "The money they shared was $50+$75 = $<<50+75=125>>125"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5324.\n    Returns: the total sum of money shared by Parker and Richie.\n    \"\"\"\n    # L1\n    parker_share = 50 # Parker got $50\n    parker_ratio = 2 # ratio 2:3\n    unit_share = parker_share / parker_ratio\n\n    # L2\n    richie_ratio = 3 # ratio 2:3\n    richie_share = richie_ratio * unit_share\n\n    # L3\n    total_shared_money = parker_share + richie_share\n\n    # FA\n    answer = total_shared_money\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "unit_share",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x177d2c790>"
+  },
+  "correct_trace": {
+    "parker_share": 50,
+    "parker_ratio": 2,
+    "unit_share": 25.0,
+    "richie_ratio": 3,
+    "richie_share": 75.0,
+    "total_shared_money": 125.0,
+    "answer": 125.0
+  },
+  "flawed_trace": {
+    "parker_share": 50,
+    "parker_ratio": 2,
+    "unit_share": 100,
+    "richie_ratio": 3,
+    "richie_share": 300,
+    "total_shared_money": 350,
+    "answer": 350
+  },
+  "correct_value": 25.0,
+  "flawed_value": 100,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "unit_share",
+      "question_inputs": [
+        "parker_share",
+        "parker_ratio"
+      ],
+      "solution_line_template": "If Parker got ${parker_share} with a ratio of {parker_ratio}, then the unit share is ${parker_share}/{parker_ratio} = $<<{parker_share}/{parker_ratio}={unit_share}>>{unit_share}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "richie_share",
+      "question_inputs": [
+        "richie_ratio"
+      ],
+      "solution_line_template": "Using the sharing ratio, Richie gets {richie_ratio} unit shares which total to {richie_ratio}*${unit_share} = $<<{richie_ratio}*{unit_share}={richie_share}>>{richie_share}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_shared_money",
+      "question_inputs": [],
+      "solution_line_template": "The money they shared was ${parker_share}+${richie_share} = $<<{parker_share}+{richie_share}={total_shared_money}>>{total_shared_money}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Parker got $50 with a ratio of 2, then the unit share is $50/2 = $<<50/2=100>>100",
+    "L2": "Using the sharing ratio, Richie gets 3 unit shares which total to 3*$100 = $<<3*100=300>>300",
+    "L3": "The money they shared was $50+$300 = $<<50+300=350>>350",
+    "FA": "#### 350"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -311606062421662692,
+  "model_name": "google_gemini-2.5-flash"
+}

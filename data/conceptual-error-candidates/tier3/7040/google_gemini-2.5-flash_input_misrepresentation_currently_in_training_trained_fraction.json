@@ -1,0 +1,85 @@
+{
+  "index": 7040,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "20 x 1/4 = <<20*1/4=5>>5 dolphins are fully trained.",
+    "L2": "So, 20 - 5 = <<20-5=15>>15 dolphins are not yet fully trained.",
+    "L3": "15 x 2/3 = <<15*2/3=10>>10 are currently in training.",
+    "L4": "Therefore, 15 - 10 = <<15-10=5>>5 dolphins will be trained next month."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7040.\n    Returns: the number of dolphins that will be trained next month.\n    \"\"\"\n    # L1\n    total_dolphins = 20 # There are 20 dolphins\n    trained_fraction = Fraction(1, 4) # One-fourth of the dolphins are fully trained\n    fully_trained_dolphins = total_dolphins * trained_fraction\n\n    # L2\n    remaining_dolphins = total_dolphins - fully_trained_dolphins\n\n    # L3\n    in_training_fraction = Fraction(2, 3) # Two-third of the remaining dolphins are currently in training\n    currently_in_training = remaining_dolphins * in_training_fraction\n\n    # L4\n    will_be_trained_next_month = remaining_dolphins - currently_in_training\n\n    # FA\n    answer = will_be_trained_next_month\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "currently_in_training",
+    "operand_to_replace": "in_training_fraction",
+    "replacement_variable": "trained_fraction"
+  },
+  "correct_trace": {
+    "total_dolphins": 20,
+    "trained_fraction": "1/4",
+    "fully_trained_dolphins": "5",
+    "remaining_dolphins": "15",
+    "in_training_fraction": "2/3",
+    "currently_in_training": "10",
+    "will_be_trained_next_month": "5",
+    "answer": "5"
+  },
+  "flawed_trace": {
+    "total_dolphins": 20,
+    "trained_fraction": "1/4",
+    "fully_trained_dolphins": "5",
+    "remaining_dolphins": "15",
+    "in_training_fraction": "2/3",
+    "currently_in_training": "15/4",
+    "will_be_trained_next_month": "45/4",
+    "answer": "45/4"
+  },
+  "correct_value": "10",
+  "flawed_value": "15/4",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "fully_trained_dolphins",
+      "question_inputs": [
+        "total_dolphins",
+        "trained_fraction"
+      ],
+      "solution_line_template": "{total_dolphins} x {trained_fraction} = <<{total_dolphins}*{trained_fraction}={fully_trained_dolphins}>>{fully_trained_dolphins} dolphins are fully trained."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_dolphins",
+      "question_inputs": [],
+      "solution_line_template": "So, {total_dolphins} - {fully_trained_dolphins} = <<{total_dolphins}-{fully_trained_dolphins}={remaining_dolphins}>>{remaining_dolphins} dolphins are not yet fully trained."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "currently_in_training",
+      "question_inputs": [
+        "in_training_fraction"
+      ],
+      "solution_line_template": "{remaining_dolphins} x {in_training_fraction} = <<{remaining_dolphins}*{in_training_fraction}={currently_in_training}>>{currently_in_training} are currently in training."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "will_be_trained_next_month",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, {remaining_dolphins} - {currently_in_training} = <<{remaining_dolphins}-{currently_in_training}={will_be_trained_next_month}>>{will_be_trained_next_month} dolphins will be trained next month."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "20 x 1/4 = <<20*1/4=5>>5 dolphins are fully trained.",
+    "L2": "So, 20 - 5 = <<20-5=15>>15 dolphins are not yet fully trained.",
+    "L3": "15 x 1/4 = <<15*1/4=15/4>>15/4 are currently in training.",
+    "L4": "Therefore, 15 - 15/4 = <<15-15/4=45/4>>45/4 dolphins will be trained next month.",
+    "FA": "#### 45/4"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'trained_fraction' (1/4) was used instead of 'in_training_fraction' (2/3).",
+  "repro_seed": 3633175815340807070,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,85 @@
+{
+  "index": 4776,
+  "original_solution_mapping": {
+    "FA": "#### 2800",
+    "L1": "If there are 600 people at the fair this year, the number going to the fair next year is 2*600 = <<2*600=1200>>1200.",
+    "L2": "The number of people at the fair this year and the ones going next year totals 1200+600 = <<1200+600=1800>>1800",
+    "L3": "The number of people who went to that fair last year was 200 less than those going next year, meaning there were 1200-200 = 1000 people at the fair last year.",
+    "L4": "In the three years, the number of people at the fair will be 1800 of this and next year + 1000 of last year = <<1800+1000=2800>>2800"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4776.\n    Returns: the total number of people at the fair in the three years.\n    \"\"\"\n    # L1\n    people_this_year = 600 # the number of people going to the fair this year is 600\n    multiplier_next_year = 2 # twice as many people going to the fair\n    people_next_year = multiplier_next_year * people_this_year\n\n    # L2\n    total_this_and_next_year = people_next_year + people_this_year\n\n    # L3\n    less_than_next_year_last_year = 200 # 200 less than those going next year\n    people_last_year = people_next_year - less_than_next_year_last_year\n\n    # L4\n    total_three_years = total_this_and_next_year + people_last_year\n\n    # FA\n    answer = total_three_years\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "people_next_year",
+    "operand_to_replace": "multiplier_next_year",
+    "replacement_variable": "people_this_year"
+  },
+  "correct_trace": {
+    "people_this_year": 600,
+    "multiplier_next_year": 2,
+    "people_next_year": 1200,
+    "total_this_and_next_year": 1800,
+    "less_than_next_year_last_year": 200,
+    "people_last_year": 1000,
+    "total_three_years": 2800,
+    "answer": 2800
+  },
+  "flawed_trace": {
+    "people_this_year": 600,
+    "multiplier_next_year": 2,
+    "people_next_year": 360000,
+    "total_this_and_next_year": 360600,
+    "less_than_next_year_last_year": 200,
+    "people_last_year": 359800,
+    "total_three_years": 720400,
+    "answer": 720400
+  },
+  "correct_value": 1200,
+  "flawed_value": 360000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "people_next_year",
+      "question_inputs": [
+        "people_this_year",
+        "multiplier_next_year"
+      ],
+      "solution_line_template": "If there are {people_this_year} people at the fair this year, the number going to the fair next year is {multiplier_next_year}*{people_this_year} = <<{multiplier_next_year}*{people_this_year}={people_next_year}>>{people_next_year}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_this_and_next_year",
+      "question_inputs": [],
+      "solution_line_template": "The number of people at the fair this year and the ones going next year totals {people_next_year}+{people_this_year} = <<{people_next_year}+{people_this_year}={total_this_and_next_year}>>{total_this_and_next_year}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "people_last_year",
+      "question_inputs": [
+        "less_than_next_year_last_year"
+      ],
+      "solution_line_template": "The number of people who went to that fair last year was {less_than_next_year_last_year} less than those going next year, meaning there were {people_next_year}-{less_than_next_year_last_year} = {people_last_year} people at the fair last year."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_three_years",
+      "question_inputs": [],
+      "solution_line_template": "In the three years, the number of people at the fair will be {total_this_and_next_year} of this and next year + {people_last_year} of last year = <<{total_this_and_next_year}+{people_last_year}={total_three_years}>>{total_three_years}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If there are 600 people at the fair this year, the number going to the fair next year is 600*600 = <<600*600=360000>>360000.",
+    "L2": "The number of people at the fair this year and the ones going next year totals 360000+600 = <<360000+600=360600>>360600",
+    "L3": "The number of people who went to that fair last year was 200 less than those going next year, meaning there were 360000-200 = 359800 people at the fair last year.",
+    "L4": "In the three years, the number of people at the fair will be 360600 of this and next year + 359800 of last year = <<360600+359800=720400>>720400",
+    "FA": "#### 720400"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'people_this_year' (600) was used instead of 'multiplier_next_year' (2).",
+  "repro_seed": -1443863572576714763,
+  "model_name": "google_gemini-2.5-flash"
+}

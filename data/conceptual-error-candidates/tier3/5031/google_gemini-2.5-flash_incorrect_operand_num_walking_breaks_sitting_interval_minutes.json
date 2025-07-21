@@ -1,0 +1,79 @@
+{
+  "index": 5031,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "First find the total number of minutes Gretchen spends sitting at her desk: 6 hours * 60 minutes/hour = <<6*60=360>>360 minutes",
+    "L2": "Then divide this amount by 90 minutes to find how many walking breaks Gretchen takes: 360 minutes / 90 minutes/break = <<360/90=4>>4 breaks",
+    "L3": "Then multiply the number of breaks by the length of each break to find how long Gretchen spends walking: 4 breaks * 10 minutes/break = <<4*10=40>>40 minutes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5031.\n    Returns: the total time Gretchen spends walking in minutes.\n    \"\"\"\n    # L1\n    sitting_hours = 6 # 6 hours working at her desk\n    minutes_per_hour = 60 # WK\n    total_sitting_minutes = sitting_hours * minutes_per_hour\n\n    # L2\n    sitting_interval_minutes = 90 # 90 minutes you spend sitting\n    num_walking_breaks = total_sitting_minutes / sitting_interval_minutes\n\n    # L3\n    walking_break_duration = 10 # 10 minutes walking\n    total_walking_minutes = num_walking_breaks * walking_break_duration\n\n    # FA\n    answer = total_walking_minutes\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "num_walking_breaks",
+    "operand_to_replace": "total_sitting_minutes",
+    "replacement_variable": "sitting_interval_minutes"
+  },
+  "correct_trace": {
+    "sitting_hours": 6,
+    "minutes_per_hour": 60,
+    "total_sitting_minutes": 360,
+    "sitting_interval_minutes": 90,
+    "num_walking_breaks": 4.0,
+    "walking_break_duration": 10,
+    "total_walking_minutes": 40.0,
+    "answer": 40.0
+  },
+  "flawed_trace": {
+    "sitting_hours": 6,
+    "minutes_per_hour": 60,
+    "total_sitting_minutes": 360,
+    "sitting_interval_minutes": 90,
+    "num_walking_breaks": 1.0,
+    "walking_break_duration": 10,
+    "total_walking_minutes": 10.0,
+    "answer": 10.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_sitting_minutes",
+      "question_inputs": [
+        "sitting_hours"
+      ],
+      "solution_line_template": "First find the total number of minutes Gretchen spends sitting at her desk: {sitting_hours} hours * {minutes_per_hour} minutes/hour = <<{sitting_hours}*{minutes_per_hour}={total_sitting_minutes}>>{total_sitting_minutes} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_walking_breaks",
+      "question_inputs": [
+        "sitting_interval_minutes"
+      ],
+      "solution_line_template": "Then divide this amount by {sitting_interval_minutes} minutes to find how many walking breaks Gretchen takes: {total_sitting_minutes} minutes / {sitting_interval_minutes} minutes/break = <<{total_sitting_minutes}/{sitting_interval_minutes}={num_walking_breaks}>>{num_walking_breaks} breaks"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_walking_minutes",
+      "question_inputs": [
+        "walking_break_duration"
+      ],
+      "solution_line_template": "Then multiply the number of breaks by the length of each break to find how long Gretchen spends walking: {num_walking_breaks} breaks * {walking_break_duration} minutes/break = <<{num_walking_breaks}*{walking_break_duration}={total_walking_minutes}>>{total_walking_minutes} minutes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total number of minutes Gretchen spends sitting at her desk: 6 hours * 60 minutes/hour = <<6*60=360>>360 minutes",
+    "L2": "Then divide this amount by 90 minutes to find how many walking breaks Gretchen takes: 90 minutes / 90 minutes/break = <<90/90=1>>1 breaks",
+    "L3": "Then multiply the number of breaks by the length of each break to find how long Gretchen spends walking: 1 breaks * 10 minutes/break = <<1*10=10>>10 minutes",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'sitting_interval_minutes' (value: 90) was used instead of 'total_sitting_minutes' (value: 360).",
+  "repro_seed": 4019136820771044520,
+  "model_name": "google_gemini-2.5-flash"
+}

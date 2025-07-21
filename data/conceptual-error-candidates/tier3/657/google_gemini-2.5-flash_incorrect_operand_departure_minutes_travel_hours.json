@@ -1,0 +1,112 @@
+{
+  "index": 657,
+  "original_solution_mapping": {
+    "FA": "#### 730",
+    "L1": "There are 60 minutes in an hour so 1 hour 20 minutes = (60+20) minutes = 80 minutes",
+    "L2": "He will spend a total of 80+10 = <<80+10=90>>90 minutes",
+    "L3": "90 minutes is = (60/60) hours and 30 minutes = 1 hour 30 minutes = 0130 in 24-hr time",
+    "L4": "He has to leave 0130 hours earlier than 0900 i.e. 0900-0130 = 0730 hours"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 657.\n    Returns: the time Pete should leave.\n    \"\"\"\n    # L1\n    minutes_per_hour = 60 # WK\n    train_duration_hours = 1 # 1hr 20-minute train\n    train_duration_minutes_part = 20 # 1hr 20-minute train\n    train_duration_total_minutes = (train_duration_hours * minutes_per_hour) + train_duration_minutes_part\n\n    # L2\n    walk_duration_minutes = 10 # 10-minute walk\n    total_travel_minutes = train_duration_total_minutes + walk_duration_minutes\n\n    # L3\n    travel_hours = total_travel_minutes // minutes_per_hour\n    travel_remaining_minutes = total_travel_minutes % minutes_per_hour\n\n    # L4\n    arrival_time_hours = 9 # 0900 hours\n    arrival_time_minutes = 0 # 0900 hours\n    \n    arrival_total_minutes = arrival_time_hours * minutes_per_hour + arrival_time_minutes\n    travel_duration_total_minutes_calc = travel_hours * minutes_per_hour + travel_remaining_minutes\n    departure_total_minutes = arrival_total_minutes - travel_duration_total_minutes_calc\n    \n    departure_hours = departure_total_minutes // minutes_per_hour\n    departure_minutes = departure_total_minutes % minutes_per_hour\n    \n    travel_duration_display = f\"{travel_hours:02d}{travel_remaining_minutes:02d}\"\n    arrival_time_display = f\"{arrival_time_hours:02d}{arrival_time_minutes:02d}\"\n    departure_time_display = f\"{departure_hours:02d}{departure_minutes:02d}\"\n\n    # FA\n    answer = departure_time_display\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "departure_minutes",
+    "operand_to_replace": "departure_total_minutes",
+    "replacement_variable": "travel_hours"
+  },
+  "correct_trace": {
+    "minutes_per_hour": 60,
+    "train_duration_hours": 1,
+    "train_duration_minutes_part": 20,
+    "train_duration_total_minutes": 80,
+    "walk_duration_minutes": 10,
+    "total_travel_minutes": 90,
+    "travel_hours": 1,
+    "travel_remaining_minutes": 30,
+    "arrival_time_hours": 9,
+    "arrival_time_minutes": 0,
+    "arrival_total_minutes": 540,
+    "travel_duration_total_minutes_calc": 90,
+    "departure_total_minutes": 450,
+    "departure_hours": 7,
+    "departure_minutes": 30,
+    "travel_duration_display": "0130",
+    "arrival_time_display": "0900",
+    "departure_time_display": "0730",
+    "answer": "0730"
+  },
+  "flawed_trace": {
+    "minutes_per_hour": 60,
+    "train_duration_hours": 1,
+    "train_duration_minutes_part": 20,
+    "train_duration_total_minutes": 80,
+    "walk_duration_minutes": 10,
+    "total_travel_minutes": 90,
+    "travel_hours": 1,
+    "travel_remaining_minutes": 30,
+    "arrival_time_hours": 9,
+    "arrival_time_minutes": 0,
+    "arrival_total_minutes": 540,
+    "travel_duration_total_minutes_calc": 90,
+    "departure_total_minutes": 450,
+    "departure_hours": 7,
+    "departure_minutes": 1,
+    "travel_duration_display": "0130",
+    "arrival_time_display": "0900",
+    "departure_time_display": "0701",
+    "answer": "0701"
+  },
+  "correct_value": 30,
+  "flawed_value": 1,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "train_duration_total_minutes",
+      "question_inputs": [
+        "train_duration_hours",
+        "train_duration_minutes_part"
+      ],
+      "solution_line_template": "There are {minutes_per_hour} minutes in an hour so {train_duration_hours} hour {train_duration_minutes_part} minutes = ({minutes_per_hour}+{train_duration_minutes_part}) minutes = {train_duration_total_minutes} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_travel_minutes",
+      "question_inputs": [
+        "walk_duration_minutes"
+      ],
+      "solution_line_template": "He will spend a total of {train_duration_total_minutes}+{walk_duration_minutes} = <<{train_duration_total_minutes}+{walk_duration_minutes}={total_travel_minutes}>>{total_travel_minutes} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "travel_hours",
+      "question_inputs": [],
+      "solution_line_template": "{total_travel_minutes} minutes is = ({minutes_per_hour}/{minutes_per_hour}) hours and {travel_remaining_minutes} minutes = {travel_hours} hour {travel_remaining_minutes} minutes = 0130 in 24-hr time"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "departure_time_display",
+      "question_inputs": [
+        "arrival_time_hours",
+        "arrival_time_minutes"
+      ],
+      "solution_line_template": "He has to leave {travel_duration_display} hours earlier than {arrival_time_display} i.e. {arrival_time_display}-{travel_duration_display} = {departure_time_display} hours"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 60 minutes in an hour so 1 hour 20 minutes = (60+20) minutes = 80 minutes",
+    "L2": "He will spend a total of 80+10 = <<80+10=90>>90 minutes",
+    "L3": "90 minutes is = (60/60) hours and 30 minutes = 1 hour 30 minutes = 0130 in 24-hr time",
+    "L4": "He has to leave 0130 hours earlier than 0900 i.e. 0900-0130 = 0701 hours",
+    "FA": "#### 0701"
+  },
+  "erroneous_line_number": null,
+  "explanation": "Incorrect operand. The variable 'travel_hours' (value: 1) was used instead of 'departure_total_minutes' (value: 450).",
+  "repro_seed": -5468256559256792677,
+  "model_name": "google_gemini-2.5-flash"
+}

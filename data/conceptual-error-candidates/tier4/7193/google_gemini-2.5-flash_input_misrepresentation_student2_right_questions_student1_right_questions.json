@@ -1,0 +1,108 @@
+{
+  "index": 7193,
+  "original_solution_mapping": {
+    "FA": "#### 39",
+    "L1": "One student got 37 questions right because 40 - 3 = <<40-3=37>>37",
+    "L2": "This student's proportion right is .925 because 37 / 40 = <<37/40=.925>>.925",
+    "L3": "This student got a 92.5% because .925 x 100 = <<.925*100=92.5>>92.5",
+    "L4": "The student got got a 95% got 38 right because 40 x .95 = <<40*.95=38>>38",
+    "L5": "Hannah must beat the student who got a 38 because 38 > 37",
+    "L6": "Hannah needs to get 39 questions right because 38 + 1 = <<38+1=39>>39"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7193.\n    Returns: the number of questions Hannah needs to get right.\n    \"\"\"\n    # L1\n    total_questions = 40 # 40\n    wrong_questions = 3 # 3 wrong out of 40\n    student1_right_questions = total_questions - wrong_questions\n\n    # L2\n    student1_proportion_right = student1_right_questions / total_questions\n\n    # L3\n    percent_multiplier = 100 # WK\n    student1_percentage = student1_proportion_right * percent_multiplier\n\n    # L4\n    student2_percentage_value = 95 # 95% on the exam\n    student2_percentage_decimal = 0.95 # 95% on the exam\n    student2_right_questions = total_questions * student2_percentage_decimal\n\n    # L6\n    score_to_beat_plus_one = 1 # 38 + 1\n    hannah_required_score = student2_right_questions + score_to_beat_plus_one\n\n    # FA\n    answer = hannah_required_score\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "student2_right_questions",
+    "operand_to_replace": "student2_percentage_decimal",
+    "replacement_variable": "student1_right_questions"
+  },
+  "correct_trace": {
+    "total_questions": 40,
+    "wrong_questions": 3,
+    "student1_right_questions": 37,
+    "student1_proportion_right": 0.925,
+    "percent_multiplier": 100,
+    "student1_percentage": 92.5,
+    "student2_percentage_value": 95,
+    "student2_percentage_decimal": 0.95,
+    "student2_right_questions": 38.0,
+    "score_to_beat_plus_one": 1,
+    "hannah_required_score": 39.0,
+    "answer": 39.0
+  },
+  "flawed_trace": {
+    "total_questions": 40,
+    "wrong_questions": 3,
+    "student1_right_questions": 37,
+    "student1_proportion_right": 0.925,
+    "percent_multiplier": 100,
+    "student1_percentage": 92.5,
+    "student2_percentage_value": 95,
+    "student2_percentage_decimal": 0.95,
+    "student2_right_questions": 1480,
+    "score_to_beat_plus_one": 1,
+    "hannah_required_score": 1481,
+    "answer": 1481
+  },
+  "correct_value": 38.0,
+  "flawed_value": 1480,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "student1_right_questions",
+      "question_inputs": [
+        "total_questions",
+        "wrong_questions"
+      ],
+      "solution_line_template": "One student got {student1_right_questions} questions right because {total_questions} - {wrong_questions} = <<{total_questions}-{wrong_questions}={student1_right_questions}>>{student1_right_questions}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "student1_proportion_right",
+      "question_inputs": [],
+      "solution_line_template": "This student's proportion right is {student1_proportion_right} because {student1_right_questions} / {total_questions} = <<{student1_right_questions}/{total_questions}={student1_proportion_right}>>{student1_proportion_right}"
+    },
+    {
+      "WK_inputs": [
+        "percent_multiplier"
+      ],
+      "line_number": "L3",
+      "output_variable": "student1_percentage",
+      "question_inputs": [],
+      "solution_line_template": "This student got a {student1_percentage}% because {student1_proportion_right} x {percent_multiplier} = <<{student1_proportion_right}*{percent_multiplier}={student1_percentage}>>{student1_percentage}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "student2_right_questions",
+      "question_inputs": [
+        "student2_percentage_value",
+        "student2_percentage_decimal"
+      ],
+      "solution_line_template": "The student got got a {student2_percentage_value}% got {student2_right_questions} right because {total_questions} x {student2_percentage_decimal} = <<{total_questions}*{student2_percentage_decimal}={student2_right_questions}>>{student2_right_questions}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "hannah_required_score",
+      "question_inputs": [
+        "score_to_beat_plus_one"
+      ],
+      "solution_line_template": "Hannah needs to get {hannah_required_score} questions right because {student2_right_questions} + {score_to_beat_plus_one} = <<{student2_right_questions}+{score_to_beat_plus_one}={hannah_required_score}>>{hannah_required_score}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "One student got 37 questions right because 40 - 3 = <<40-3=37>>37",
+    "L2": "This student's proportion right is 0.93 because 37 / 40 = <<37/40=0.93>>0.93",
+    "L3": "This student got a 92.5% because 0.93 x 100 = <<0.93*100=92.5>>92.5",
+    "L4": "The student got got a 95% got 1480 right because 40 x 37 = <<40*37=1480>>1480",
+    "L6": "Hannah needs to get 1481 questions right because 1480 + 1 = <<1480+1=1481>>1481",
+    "FA": "#### 1481"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'student1_right_questions' (37) was used instead of 'student2_percentage_decimal' (0.95).",
+  "repro_seed": -4302575501935649582,
+  "model_name": "google_gemini-2.5-flash"
+}

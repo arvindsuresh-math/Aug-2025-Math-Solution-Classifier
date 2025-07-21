@@ -1,0 +1,101 @@
+{
+  "index": 3473,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "Since a dozen is equal to 12, then 3 dozen eggs are equal to 12 x 3 = <<3*12=36>>36 eggs.",
+    "L2": "Tricia will use 36 x 1/4 = <<36*1/4=9>>9 eggs for making crepes.",
+    "L3": "So there are 36 - 9 = <<36-9=27>>27 eggs left.",
+    "L4": "27 x 2/3 = <<27*2/3=18>>18 eggs will be used for making cupcakes.",
+    "L5": "Thus, there are only 27 - 18 = <<27-18=9>>9 eggs left to make sunny-side-up eggs for breakfast."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3473.\n    Returns: the number of eggs left for breakfast.\n    \"\"\"\n    # L1\n    num_dozens = 3 # three dozen eggs\n    eggs_per_dozen = 12 # WK\n    total_eggs = eggs_per_dozen * num_dozens\n\n    # L2\n    crepe_fraction = Fraction(1, 4) # 1/4 of them\n    eggs_for_crepes = total_eggs * crepe_fraction\n\n    # L3\n    remaining_eggs_after_crepes = total_eggs - eggs_for_crepes\n\n    # L4\n    cupcake_fraction = Fraction(2, 3) # 2/3 of the remaining\n    eggs_for_cupcakes = remaining_eggs_after_crepes * cupcake_fraction\n\n    # L5\n    eggs_left_for_breakfast = remaining_eggs_after_crepes - eggs_for_cupcakes\n\n    # FA\n    answer = eggs_left_for_breakfast\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "eggs_for_cupcakes",
+    "operand_to_replace": "remaining_eggs_after_crepes",
+    "replacement_variable": "num_dozens"
+  },
+  "correct_trace": {
+    "num_dozens": 3,
+    "eggs_per_dozen": 12,
+    "total_eggs": 36,
+    "crepe_fraction": "1/4",
+    "eggs_for_crepes": "9",
+    "remaining_eggs_after_crepes": "27",
+    "cupcake_fraction": "2/3",
+    "eggs_for_cupcakes": "18",
+    "eggs_left_for_breakfast": "9",
+    "answer": "9"
+  },
+  "flawed_trace": {
+    "num_dozens": 3,
+    "eggs_per_dozen": 12,
+    "total_eggs": 36,
+    "crepe_fraction": "1/4",
+    "eggs_for_crepes": "9",
+    "remaining_eggs_after_crepes": "27",
+    "cupcake_fraction": "2/3",
+    "eggs_for_cupcakes": "2",
+    "eggs_left_for_breakfast": "25",
+    "answer": "25"
+  },
+  "correct_value": "18",
+  "flawed_value": "2",
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "eggs_per_dozen"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_eggs",
+      "question_inputs": [
+        "num_dozens"
+      ],
+      "solution_line_template": "Since a dozen is equal to {eggs_per_dozen}, then {num_dozens} dozen eggs are equal to {eggs_per_dozen} x {num_dozens} = <<{num_dozens}*{eggs_per_dozen}={total_eggs}>>{total_eggs} eggs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "eggs_for_crepes",
+      "question_inputs": [
+        "crepe_fraction"
+      ],
+      "solution_line_template": "Tricia will use {total_eggs} x {crepe_fraction} = <<{total_eggs}*{crepe_fraction}={eggs_for_crepes}>>{eggs_for_crepes} eggs for making crepes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_eggs_after_crepes",
+      "question_inputs": [],
+      "solution_line_template": "So there are {total_eggs} - {eggs_for_crepes} = <<{total_eggs}-{eggs_for_crepes}={remaining_eggs_after_crepes}>>{remaining_eggs_after_crepes} eggs left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "eggs_for_cupcakes",
+      "question_inputs": [
+        "cupcake_fraction"
+      ],
+      "solution_line_template": "{remaining_eggs_after_crepes} x {cupcake_fraction} = <<{remaining_eggs_after_crepes}*{cupcake_fraction}={eggs_for_cupcakes}>>{eggs_for_cupcakes} eggs will be used for making cupcakes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "eggs_left_for_breakfast",
+      "question_inputs": [],
+      "solution_line_template": "Thus, there are only {remaining_eggs_after_crepes} - {eggs_for_cupcakes} = <<{remaining_eggs_after_crepes}-{eggs_for_cupcakes}={eggs_left_for_breakfast}>>{eggs_left_for_breakfast} eggs left to make sunny-side-up eggs for breakfast."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since a dozen is equal to 12, then 3 dozen eggs are equal to 12 x 3 = <<3*12=36>>36 eggs.",
+    "L2": "Tricia will use 36 x 1/4 = <<36*1/4=9>>9 eggs for making crepes.",
+    "L3": "So there are 36 - 9 = <<36-9=27>>27 eggs left.",
+    "L4": "3 x 2/3 = <<3*2/3=2>>2 eggs will be used for making cupcakes.",
+    "L5": "Thus, there are only 27 - 2 = <<27-2=25>>25 eggs left to make sunny-side-up eggs for breakfast.",
+    "FA": "#### 25"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'num_dozens' (value: 3) was used instead of 'remaining_eggs_after_crepes' (value: 27).",
+  "repro_seed": -3241058339422395405,
+  "model_name": "google_gemini-2.5-flash"
+}

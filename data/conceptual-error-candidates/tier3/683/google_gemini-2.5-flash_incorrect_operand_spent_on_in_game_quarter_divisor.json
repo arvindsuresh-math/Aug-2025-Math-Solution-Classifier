@@ -1,0 +1,86 @@
+{
+  "index": 683,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "Julia spend $40 / 2 = $<<40/2=20>>20 on the game.",
+    "L2": "After buying the game, she has $40 - $20 = $<<40-20=20>>20 left.",
+    "L3": "She spent $20 / 4 = $<<20/4=5>>5 on in-game purchases.",
+    "L4": "She has $20 - $5 = $<<20-5=15>>15 left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 683.\n    Returns: the amount of money Julia has left.\n    \"\"\"\n    # L1\n    initial_money = 40 # Julia has $40\n    half_divisor = 2 # half of her money\n    spent_on_game = initial_money / half_divisor\n\n    # L2\n    money_after_game = initial_money - spent_on_game\n\n    # L3\n    quarter_divisor = 4 # a quarter of what she has left\n    spent_on_in_game = money_after_game / quarter_divisor\n\n    # L4\n    money_left = money_after_game - spent_on_in_game\n\n    # FA\n    answer = money_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "spent_on_in_game",
+    "operand_to_replace": "money_after_game",
+    "replacement_variable": "quarter_divisor"
+  },
+  "correct_trace": {
+    "initial_money": 40,
+    "half_divisor": 2,
+    "spent_on_game": 20.0,
+    "money_after_game": 20.0,
+    "quarter_divisor": 4,
+    "spent_on_in_game": 5.0,
+    "money_left": 15.0,
+    "answer": 15.0
+  },
+  "flawed_trace": {
+    "initial_money": 40,
+    "half_divisor": 2,
+    "spent_on_game": 20.0,
+    "money_after_game": 20.0,
+    "quarter_divisor": 4,
+    "spent_on_in_game": 1.0,
+    "money_left": 19.0,
+    "answer": 19.0
+  },
+  "correct_value": 5.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "half_divisor"
+      ],
+      "line_number": "L1",
+      "output_variable": "spent_on_game",
+      "question_inputs": [
+        "initial_money"
+      ],
+      "solution_line_template": "Julia spend ${initial_money} / {half_divisor} = $<<{initial_money}/{half_divisor}={spent_on_game}>>{spent_on_game} on the game."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_after_game",
+      "question_inputs": [],
+      "solution_line_template": "After buying the game, she has ${initial_money} - ${spent_on_game} = $<<{initial_money}-{spent_on_game}={money_after_game}>>{money_after_game} left."
+    },
+    {
+      "WK_inputs": [
+        "quarter_divisor"
+      ],
+      "line_number": "L3",
+      "output_variable": "spent_on_in_game",
+      "question_inputs": [],
+      "solution_line_template": "She spent ${money_after_game} / {quarter_divisor} = $<<{money_after_game}/{quarter_divisor}={spent_on_in_game}>>{spent_on_in_game} on in-game purchases."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "money_left",
+      "question_inputs": [],
+      "solution_line_template": "She has ${money_after_game} - ${spent_on_in_game} = $<<{money_after_game}-{spent_on_in_game}={money_left}>>{money_left} left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Julia spend $40 / 2 = $<<40/2=20>>20 on the game.",
+    "L2": "After buying the game, she has $40 - $20 = $<<40-20=20>>20 left.",
+    "L3": "She spent $4 / 4 = $<<4/4=1>>1 on in-game purchases.",
+    "L4": "She has $20 - $1 = $<<20-1=19>>19 left.",
+    "FA": "#### 19"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'quarter_divisor' (value: 4) was used instead of 'money_after_game' (value: 20.0).",
+  "repro_seed": 8832371594038912519,
+  "model_name": "google_gemini-2.5-flash"
+}

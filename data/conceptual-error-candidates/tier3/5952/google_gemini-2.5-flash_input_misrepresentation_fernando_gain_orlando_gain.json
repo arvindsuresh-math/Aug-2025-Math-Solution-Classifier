@@ -1,0 +1,105 @@
+{
+  "index": 5952,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "Twice what Orlando gained is 2*5=<<2*5=10>>10 pounds.",
+    "L2": "Jose gained two pounds more than twice what Orlando gained for a total of 2+10=<<2+10=12>>12 pounds..",
+    "L3": "Half of what Jose gained is 12/2=<<12/2=6>>6 pounds.",
+    "L4": "Fernando gained 3 pounds less than half of what Jose gained, for a total of 6-3=<<6-3=3>>3 pounds.",
+    "L5": "In total, the three family members gained 5+12+3=<<5+12+3=20>>20 pounds at the reunion."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5952.\n    Returns: the total weight gained by the three family members.\n    \"\"\"\n    # L1\n    orlando_gain = 5 # Orlando gained 5 pounds\n    twice_multiplier = 2 # twice what Orlando gained\n    twice_orlando_gain = twice_multiplier * orlando_gain\n\n    # L2\n    jose_additional_gain = 2 # two pounds more\n    jose_gain = jose_additional_gain + twice_orlando_gain\n\n    # L3\n    half_divisor = 2 # Half of what Jose gained\n    half_jose_gain = jose_gain / half_divisor\n\n    # L4\n    fernando_less_gain = 3 # 3 pounds less\n    fernando_gain = half_jose_gain - fernando_less_gain\n\n    # L5\n    total_gain = orlando_gain + jose_gain + fernando_gain\n\n    # FA\n    answer = total_gain\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "fernando_gain",
+    "operand_to_replace": "fernando_less_gain",
+    "replacement_variable": "orlando_gain"
+  },
+  "correct_trace": {
+    "orlando_gain": 5,
+    "twice_multiplier": 2,
+    "twice_orlando_gain": 10,
+    "jose_additional_gain": 2,
+    "jose_gain": 12,
+    "half_divisor": 2,
+    "half_jose_gain": 6.0,
+    "fernando_less_gain": 3,
+    "fernando_gain": 3.0,
+    "total_gain": 20.0,
+    "answer": 20.0
+  },
+  "flawed_trace": {
+    "orlando_gain": 5,
+    "twice_multiplier": 2,
+    "twice_orlando_gain": 10,
+    "jose_additional_gain": 2,
+    "jose_gain": 12,
+    "half_divisor": 2,
+    "half_jose_gain": 6.0,
+    "fernando_less_gain": 3,
+    "fernando_gain": 1.0,
+    "total_gain": 18.0,
+    "answer": 18.0
+  },
+  "correct_value": 3.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "twice_multiplier"
+      ],
+      "line_number": "L1",
+      "output_variable": "twice_orlando_gain",
+      "question_inputs": [
+        "orlando_gain"
+      ],
+      "solution_line_template": "Twice what Orlando gained is {twice_multiplier}*{orlando_gain}=<<{twice_multiplier}*{orlando_gain}={twice_orlando_gain}>>{twice_orlando_gain} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "jose_gain",
+      "question_inputs": [
+        "jose_additional_gain"
+      ],
+      "solution_line_template": "Jose gained {jose_additional_gain} pounds more than twice what Orlando gained for a total of {jose_additional_gain}+{twice_orlando_gain}=<<{jose_additional_gain}+{twice_orlando_gain}={jose_gain}>>{jose_gain} pounds.."
+    },
+    {
+      "WK_inputs": [
+        "half_divisor"
+      ],
+      "line_number": "L3",
+      "output_variable": "half_jose_gain",
+      "question_inputs": [],
+      "solution_line_template": "Half of what Jose gained is {jose_gain}/{half_divisor}=<<{jose_gain}/{half_divisor}={half_jose_gain}>>{half_jose_gain} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "fernando_gain",
+      "question_inputs": [
+        "fernando_less_gain"
+      ],
+      "solution_line_template": "Fernando gained {fernando_less_gain} pounds less than half of what Jose gained, for a total of {half_jose_gain}-{fernando_less_gain}=<<{half_jose_gain}-{fernando_less_gain}={fernando_gain}>>{fernando_gain} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_gain",
+      "question_inputs": [],
+      "solution_line_template": "In total, the three family members gained {orlando_gain}+{jose_gain}+{fernando_gain}=<<{orlando_gain}+{jose_gain}+{fernando_gain}={total_gain}>>{total_gain} pounds at the reunion."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Twice what Orlando gained is 2*5=<<2*5=10>>10 pounds.",
+    "L2": "Jose gained 2 pounds more than twice what Orlando gained for a total of 2+10=<<2+10=12>>12 pounds..",
+    "L3": "Half of what Jose gained is 12/2=<<12/2=6>>6 pounds.",
+    "L4": "Fernando gained 5 pounds less than half of what Jose gained, for a total of 6-5=<<6-5=1>>1 pounds.",
+    "L5": "In total, the three family members gained 5+12+1=<<5+12+1=18>>18 pounds at the reunion.",
+    "FA": "#### 18"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'orlando_gain' (5) was used instead of 'fernando_less_gain' (3).",
+  "repro_seed": -7394839796149420129,
+  "model_name": "google_gemini-2.5-flash"
+}

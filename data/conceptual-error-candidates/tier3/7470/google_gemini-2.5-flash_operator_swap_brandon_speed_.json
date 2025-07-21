@@ -1,0 +1,78 @@
+{
+  "index": 7470,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "Tony can skip at twice the speed that Bruce can, for a speed of 1*2=<<1*2=2>>2 miles per hour.",
+    "L2": "Brandon can skip at one-third the speed that Tony can, for a speed of 2*(1/3) = 2/3 miles per hour.",
+    "L3": "Colin can skip at six times the speed that Brandon can, for a speed of (2/3*6=4 miles per hour)."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7470.\n    Returns: the speed at which Colin can skip.\n    \"\"\"\n    # L1\n    bruce_speed = 1 # Bruce skips at 1 mile per hour\n    tony_multiplier = 2 # twice the speed\n    tony_speed = bruce_speed * tony_multiplier\n\n    # L2\n    brandon_fraction = Fraction(1, 3) # one-third the speed\n    brandon_speed = tony_speed * brandon_fraction\n\n    # L3\n    colin_multiplier = 6 # six times the speed\n    colin_speed = brandon_speed * colin_multiplier\n\n    # FA\n    answer = colin_speed\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "brandon_speed",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30cab4210>"
+  },
+  "correct_trace": {
+    "bruce_speed": 1,
+    "tony_multiplier": 2,
+    "tony_speed": 2,
+    "brandon_fraction": "1/3",
+    "brandon_speed": "2/3",
+    "colin_multiplier": 6,
+    "colin_speed": "4",
+    "answer": "4"
+  },
+  "flawed_trace": {
+    "bruce_speed": 1,
+    "tony_multiplier": 2,
+    "tony_speed": 2,
+    "brandon_fraction": "1/3",
+    "brandon_speed": "7/3",
+    "colin_multiplier": 6,
+    "colin_speed": "14",
+    "answer": "14"
+  },
+  "correct_value": "2/3",
+  "flawed_value": "7/3",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "tony_speed",
+      "question_inputs": [
+        "bruce_speed",
+        "tony_multiplier"
+      ],
+      "solution_line_template": "Tony can skip at twice the speed that Bruce can, for a speed of {bruce_speed}*{tony_multiplier}=<<{bruce_speed}*{tony_multiplier}={tony_speed}>>{tony_speed} miles per hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "brandon_speed",
+      "question_inputs": [
+        "brandon_fraction"
+      ],
+      "solution_line_template": "Brandon can skip at one-third the speed that Tony can, for a speed of {tony_speed}*({brandon_fraction}) = {brandon_speed} miles per hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "colin_speed",
+      "question_inputs": [
+        "colin_multiplier"
+      ],
+      "solution_line_template": "Colin can skip at {colin_multiplier} times the speed that Brandon can, for a speed of ({brandon_speed}*{colin_multiplier}={colin_speed} miles per hour)."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Tony can skip at twice the speed that Bruce can, for a speed of 1*2=<<1*2=2>>2 miles per hour.",
+    "L2": "Brandon can skip at one-third the speed that Tony can, for a speed of 2*(1/3) = 7/3 miles per hour.",
+    "L3": "Colin can skip at 6 times the speed that Brandon can, for a speed of (7/3*6=14 miles per hour).",
+    "FA": "#### 14"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 7008053003105754499,
+  "model_name": "google_gemini-2.5-flash"
+}

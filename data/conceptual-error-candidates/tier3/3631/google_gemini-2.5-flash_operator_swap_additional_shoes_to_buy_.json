@@ -1,0 +1,78 @@
+{
+  "index": 3631,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "To have five 3-piece sets, he needs to have a total of 5*3=<<5*3=15>>15 shoes,",
+    "L2": "If he already owns three shoes, then he needs to buy 15-3=<<15-3=12>>12 additional shoes.",
+    "L3": "Since each pair of shoes includes two shoes, he needs to buy a total of 12/2=<<12/2=6>>6 pairs of shoes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3631.\n    Returns: the number of pairs of shoes Codger needs to buy.\n    \"\"\"\n    # L1\n    num_sets_desired = 5 # 5 complete 3-piece sets of shoes\n    shoes_per_set = 3 # 3-piece set of shoes\n    total_shoes_needed = num_sets_desired * shoes_per_set\n\n    # L2\n    shoes_owned = 3 # owns the 3-piece set of shoes he is wearing\n    additional_shoes_to_buy = total_shoes_needed - shoes_owned\n\n    # L3\n    shoes_per_pair = 2 # stores only sell the shoes in pairs\n    pairs_to_buy = additional_shoes_to_buy / shoes_per_pair\n\n    # FA\n    answer = pairs_to_buy\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "additional_shoes_to_buy",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30b6e93d0>"
+  },
+  "correct_trace": {
+    "num_sets_desired": 5,
+    "shoes_per_set": 3,
+    "total_shoes_needed": 15,
+    "shoes_owned": 3,
+    "additional_shoes_to_buy": 12,
+    "shoes_per_pair": 2,
+    "pairs_to_buy": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "num_sets_desired": 5,
+    "shoes_per_set": 3,
+    "total_shoes_needed": 15,
+    "shoes_owned": 3,
+    "additional_shoes_to_buy": 18,
+    "shoes_per_pair": 2,
+    "pairs_to_buy": 9.0,
+    "answer": 9.0
+  },
+  "correct_value": 12,
+  "flawed_value": 18,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_shoes_needed",
+      "question_inputs": [
+        "num_sets_desired",
+        "shoes_per_set"
+      ],
+      "solution_line_template": "To have {num_sets_desired} 3-piece sets, he needs to have a total of {num_sets_desired}*{shoes_per_set}=<<{num_sets_desired}*{shoes_per_set}={total_shoes_needed}>>{total_shoes_needed} shoes,"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "additional_shoes_to_buy",
+      "question_inputs": [
+        "shoes_owned"
+      ],
+      "solution_line_template": "If he already owns {shoes_owned} shoes, then he needs to buy {total_shoes_needed}-{shoes_owned}=<<{total_shoes_needed}-{shoes_owned}={additional_shoes_to_buy}>>{additional_shoes_to_buy} additional shoes."
+    },
+    {
+      "WK_inputs": [
+        "shoes_per_pair"
+      ],
+      "line_number": "L3",
+      "output_variable": "pairs_to_buy",
+      "question_inputs": [],
+      "solution_line_template": "Since each pair of shoes includes {shoes_per_pair} shoes, he needs to buy a total of {additional_shoes_to_buy}/{shoes_per_pair}=<<{additional_shoes_to_buy}/{shoes_per_pair}={pairs_to_buy}>>{pairs_to_buy} pairs of shoes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "To have 5 3-piece sets, he needs to have a total of 5*3=<<5*3=15>>15 shoes,",
+    "L2": "If he already owns 3 shoes, then he needs to buy 15-3=<<15-3=18>>18 additional shoes.",
+    "L3": "Since each pair of shoes includes 2 shoes, he needs to buy a total of 18/2=<<18/2=9>>9 pairs of shoes.",
+    "FA": "#### 9"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 3916584140764802919,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,101 @@
+{
+  "index": 5650,
+  "original_solution_mapping": {
+    "FA": "#### 34",
+    "L1": "Dustin reads 1.25 pages a minute because 75 / 60 = <<75/60=1.25>>1.25",
+    "L2": "Dustin reads 50 pages in 40 minutes because 40 x 1.25 = <<40*1.25=50>>50",
+    "L3": "Sam reads .4 pages a minute because 24 / 60 = <<24/60=.4>>.4",
+    "L4": "Sam reads 16 pages in 40 minutes because 40 x .4 = <<40*.4=16>>16",
+    "L5": "Dustin reads 34 more pages than Sam because 50 - 16 = <<34=34>>34"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5650.\n    Returns: the difference in pages read by Dustin and Sam in 40 minutes.\n    \"\"\"\n    # L1\n    dustin_pages_per_hour = 75 # Dustin can read 75 pages in an hour\n    minutes_per_hour = 60 # WK\n    dustin_pages_per_minute = dustin_pages_per_hour / minutes_per_hour\n\n    # L2\n    reading_time_minutes = 40 # in 40 minutes\n    dustin_total_pages = reading_time_minutes * dustin_pages_per_minute\n\n    # L3\n    sam_pages_per_hour = 24 # Sam can read 24 pages in an hour\n    sam_pages_per_minute = sam_pages_per_hour / minutes_per_hour\n\n    # L4\n    sam_total_pages = reading_time_minutes * sam_pages_per_minute\n\n    # L5\n    page_difference = dustin_total_pages - sam_total_pages\n\n    # FA\n    answer = page_difference\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "page_difference",
+    "operand_to_replace": "sam_total_pages",
+    "replacement_variable": "reading_time_minutes"
+  },
+  "correct_trace": {
+    "dustin_pages_per_hour": 75,
+    "minutes_per_hour": 60,
+    "dustin_pages_per_minute": 1.25,
+    "reading_time_minutes": 40,
+    "dustin_total_pages": 50.0,
+    "sam_pages_per_hour": 24,
+    "sam_pages_per_minute": 0.4,
+    "sam_total_pages": 16.0,
+    "page_difference": 34.0,
+    "answer": 34.0
+  },
+  "flawed_trace": {
+    "dustin_pages_per_hour": 75,
+    "minutes_per_hour": 60,
+    "dustin_pages_per_minute": 1.25,
+    "reading_time_minutes": 40,
+    "dustin_total_pages": 50.0,
+    "sam_pages_per_hour": 24,
+    "sam_pages_per_minute": 0.4,
+    "sam_total_pages": 16.0,
+    "page_difference": 10.0,
+    "answer": 10.0
+  },
+  "correct_value": 34.0,
+  "flawed_value": 10.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "dustin_pages_per_minute",
+      "question_inputs": [
+        "dustin_pages_per_hour"
+      ],
+      "solution_line_template": "Dustin reads {dustin_pages_per_minute} pages a minute because {dustin_pages_per_hour} / {minutes_per_hour} = <<{dustin_pages_per_hour}/{minutes_per_hour}={dustin_pages_per_minute}>>{dustin_pages_per_minute}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "dustin_total_pages",
+      "question_inputs": [
+        "reading_time_minutes"
+      ],
+      "solution_line_template": "Dustin reads {dustin_total_pages} pages in {reading_time_minutes} minutes because {reading_time_minutes} x {dustin_pages_per_minute} = <<{reading_time_minutes}*{dustin_pages_per_minute}={dustin_total_pages}>>{dustin_total_pages}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "sam_pages_per_minute",
+      "question_inputs": [
+        "sam_pages_per_hour"
+      ],
+      "solution_line_template": "Sam reads {sam_pages_per_minute} pages a minute because {sam_pages_per_hour} / {minutes_per_hour} = <<{sam_pages_per_hour}/{minutes_per_hour}={sam_pages_per_minute}>>{sam_pages_per_minute}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "sam_total_pages",
+      "question_inputs": [],
+      "solution_line_template": "Sam reads {sam_total_pages} pages in {reading_time_minutes} minutes because {reading_time_minutes} x {sam_pages_per_minute} = <<{reading_time_minutes}*{sam_pages_per_minute}={sam_total_pages}>>{sam_total_pages}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "page_difference",
+      "question_inputs": [],
+      "solution_line_template": "Dustin reads {page_difference} more pages than Sam because {dustin_total_pages} - {sam_total_pages} = <<{dustin_total_pages}-{sam_total_pages}={page_difference}>>{page_difference}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Dustin reads 1.25 pages a minute because 75 / 60 = <<75/60=1.25>>1.25",
+    "L2": "Dustin reads 50 pages in 40 minutes because 40 x 1.25 = <<40*1.25=50>>50",
+    "L3": "Sam reads 0.4 pages a minute because 24 / 60 = <<24/60=0.4>>0.4",
+    "L4": "Sam reads 16 pages in 40 minutes because 40 x 0.4 = <<40*0.4=16>>16",
+    "L5": "Dustin reads 10 more pages than Sam because 50 - 40 = <<50-40=10>>10",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operand. The variable 'reading_time_minutes' (value: 40) was used instead of 'sam_total_pages' (value: 16.0).",
+  "repro_seed": -1844987688538774575,
+  "model_name": "google_gemini-2.5-flash"
+}

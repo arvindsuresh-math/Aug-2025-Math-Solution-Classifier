@@ -1,0 +1,105 @@
+{
+  "index": 3946,
+  "original_solution_mapping": {
+    "FA": "#### 36",
+    "L1": "Two dozen brownies is 2 * 12 = <<2*12=24>>24 brownies.",
+    "L2": "After Father ate his 8, there were 24 - 8 = <<24-8=16>>16 brownies remaining on the counter.",
+    "L3": "After Mooney ate her 4, there were 16 - 4 = <<16-4=12>>12 brownies remaining on the counter.",
+    "L4": "Mother made a second batch of two-dozen brownies, or 2 * 12 = <<2*12=24>>24 brownies.",
+    "L5": "After Mother added the second two-dozen, there were 12 + 24 = <<12+24=36>>36 brownies on the kitchen counter."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3946.\n    Returns: the number of brownies on the counter at the end.\n    \"\"\"\n    # L1\n    num_dozen_initial = 2 # 2 dozen brownies\n    dozen = 12 # WK\n    initial_brownies = num_dozen_initial * dozen\n\n    # L2\n    father_ate = 8 # ate 8 of them\n    after_father = initial_brownies - father_ate\n\n    # L3\n    mooney_ate = 4 # ate 4 of the brownies\n    after_mooney = after_father - mooney_ate\n\n    # L4\n    num_dozen_second_batch = 2 # another two dozen brownies\n    second_batch = num_dozen_second_batch * dozen\n\n    # L5\n    total_brownies = after_mooney + second_batch\n\n    # FA\n    answer = total_brownies\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_brownies",
+    "operand_to_replace": "after_mooney",
+    "replacement_variable": "after_father"
+  },
+  "correct_trace": {
+    "num_dozen_initial": 2,
+    "dozen": 12,
+    "initial_brownies": 24,
+    "father_ate": 8,
+    "after_father": 16,
+    "mooney_ate": 4,
+    "after_mooney": 12,
+    "num_dozen_second_batch": 2,
+    "second_batch": 24,
+    "total_brownies": 36,
+    "answer": 36
+  },
+  "flawed_trace": {
+    "num_dozen_initial": 2,
+    "dozen": 12,
+    "initial_brownies": 24,
+    "father_ate": 8,
+    "after_father": 16,
+    "mooney_ate": 4,
+    "after_mooney": 12,
+    "num_dozen_second_batch": 2,
+    "second_batch": 24,
+    "total_brownies": 40,
+    "answer": 40
+  },
+  "correct_value": 36,
+  "flawed_value": 40,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "dozen"
+      ],
+      "line_number": "L1",
+      "output_variable": "initial_brownies",
+      "question_inputs": [
+        "num_dozen_initial"
+      ],
+      "solution_line_template": "Two dozen brownies is {num_dozen_initial} * {dozen} = <<{num_dozen_initial}*{dozen}={initial_brownies}>>{initial_brownies} brownies."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "after_father",
+      "question_inputs": [
+        "father_ate"
+      ],
+      "solution_line_template": "After Father ate his {father_ate}, there were {initial_brownies} - {father_ate} = <<{initial_brownies}-{father_ate}={after_father}>>{after_father} brownies remaining on the counter."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "after_mooney",
+      "question_inputs": [
+        "mooney_ate"
+      ],
+      "solution_line_template": "After Mooney ate her {mooney_ate}, there were {after_father} - {mooney_ate} = <<{after_father}-{mooney_ate}={after_mooney}>>{after_mooney} brownies remaining on the counter."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "second_batch",
+      "question_inputs": [
+        "num_dozen_second_batch"
+      ],
+      "solution_line_template": "Mother made a second batch of two-dozen brownies, or {num_dozen_second_batch} * {dozen} = <<{num_dozen_second_batch}*{dozen}={second_batch}>>{second_batch} brownies."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_brownies",
+      "question_inputs": [],
+      "solution_line_template": "After Mother added the second two-dozen, there were {after_mooney} + {second_batch} = <<{after_mooney}+{second_batch}={total_brownies}>>{total_brownies} brownies on the kitchen counter."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Two dozen brownies is 2 * 12 = <<2*12=24>>24 brownies.",
+    "L2": "After Father ate his 8, there were 24 - 8 = <<24-8=16>>16 brownies remaining on the counter.",
+    "L3": "After Mooney ate her 4, there were 16 - 4 = <<16-4=12>>12 brownies remaining on the counter.",
+    "L4": "Mother made a second batch of two-dozen brownies, or 2 * 12 = <<2*12=24>>24 brownies.",
+    "L5": "After Mother added the second two-dozen, there were 16 + 24 = <<16+24=40>>40 brownies on the kitchen counter.",
+    "FA": "#### 40"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operand. The variable 'after_father' (value: 16) was used instead of 'after_mooney' (value: 12).",
+  "repro_seed": -8774900836848553794,
+  "model_name": "google_gemini-2.5-flash"
+}

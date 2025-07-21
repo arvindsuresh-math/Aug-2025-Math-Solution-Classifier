@@ -1,0 +1,92 @@
+{
+  "index": 4447,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "The multiple-choice questions will take her a total of 30 * 15 = <<30*15=450>>450 minutes.",
+    "L2": "The fill-in-the-blank questions will take her a total of 25 * 30 = <<25*30=750>>750 minutes.",
+    "L3": "The test will take her a total of 450 + 750 = <<450+750=1200>>1200 minutes to study for.",
+    "L4": "Therefore, Martiza will need to study a total of 1200 / 60 minutes = <<1200/60=20>>20 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4447.\n    Returns: the total number of hours Martiza needs to study.\n    \"\"\"\n    # L1\n    num_multiple_choice_questions = 30 # 30 are multiple-choice\n    time_per_mc_question = 15 # 15 minutes to learn each multiple-choice question\n    total_mc_minutes = num_multiple_choice_questions * time_per_mc_question\n\n    # L2\n    time_per_fib_question = 25 # 25 minutes each to learn the fill-in-the-blank questions\n    num_fib_questions = 30 # 30 are fill-in-the-blank\n    total_fib_minutes = time_per_fib_question * num_fib_questions\n\n    # L3\n    total_study_minutes = total_mc_minutes + total_fib_minutes\n\n    # L4\n    minutes_per_hour = 60 # WK\n    total_study_hours = total_study_minutes / minutes_per_hour\n\n    # FA\n    answer = total_study_hours\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_fib_minutes",
+    "operand_to_replace": "num_fib_questions",
+    "replacement_variable": "total_mc_minutes"
+  },
+  "correct_trace": {
+    "num_multiple_choice_questions": 30,
+    "time_per_mc_question": 15,
+    "total_mc_minutes": 450,
+    "time_per_fib_question": 25,
+    "num_fib_questions": 30,
+    "total_fib_minutes": 750,
+    "total_study_minutes": 1200,
+    "minutes_per_hour": 60,
+    "total_study_hours": 20.0,
+    "answer": 20.0
+  },
+  "flawed_trace": {
+    "num_multiple_choice_questions": 30,
+    "time_per_mc_question": 15,
+    "total_mc_minutes": 450,
+    "time_per_fib_question": 25,
+    "num_fib_questions": 30,
+    "total_fib_minutes": 11250,
+    "total_study_minutes": 11700,
+    "minutes_per_hour": 60,
+    "total_study_hours": 195.0,
+    "answer": 195.0
+  },
+  "correct_value": 750,
+  "flawed_value": 11250,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_mc_minutes",
+      "question_inputs": [
+        "num_multiple_choice_questions",
+        "time_per_mc_question"
+      ],
+      "solution_line_template": "The multiple-choice questions will take her a total of {num_multiple_choice_questions} * {time_per_mc_question} = <<{num_multiple_choice_questions}*{time_per_mc_question}={total_mc_minutes}>>{total_mc_minutes} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_fib_minutes",
+      "question_inputs": [
+        "time_per_fib_question",
+        "num_fib_questions"
+      ],
+      "solution_line_template": "The fill-in-the-blank questions will take her a total of {time_per_fib_question} * {num_fib_questions} = <<{time_per_fib_question}*{num_fib_questions}={total_fib_minutes}>>{total_fib_minutes} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_study_minutes",
+      "question_inputs": [],
+      "solution_line_template": "The test will take her a total of {total_mc_minutes} + {total_fib_minutes} = <<{total_mc_minutes}+{total_fib_minutes}={total_study_minutes}>>{total_study_minutes} minutes to study for."
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L4",
+      "output_variable": "total_study_hours",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, Martiza will need to study a total of {total_study_minutes} / {minutes_per_hour} minutes = <<{total_study_minutes}/{minutes_per_hour}={total_study_hours}>>{total_study_hours} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The multiple-choice questions will take her a total of 30 * 15 = <<30*15=450>>450 minutes.",
+    "L2": "The fill-in-the-blank questions will take her a total of 25 * 450 = <<25*450=11250>>11250 minutes.",
+    "L3": "The test will take her a total of 450 + 11250 = <<450+11250=11700>>11700 minutes to study for.",
+    "L4": "Therefore, Martiza will need to study a total of 11700 / 60 minutes = <<11700/60=195>>195 hours.",
+    "FA": "#### 195"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_mc_minutes' (450) was used instead of 'num_fib_questions' (30).",
+  "repro_seed": 5136922143096488375,
+  "model_name": "google_gemini-2.5-flash"
+}

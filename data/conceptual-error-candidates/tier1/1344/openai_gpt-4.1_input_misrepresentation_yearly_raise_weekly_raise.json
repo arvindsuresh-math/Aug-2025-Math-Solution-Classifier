@@ -1,0 +1,92 @@
+{
+  "index": 1344,
+  "original_solution_mapping": {
+    "FA": "#### 20800",
+    "L1": "He makes 20*40=$<<20*40=800>>800 per week",
+    "L2": "He used to make 16*25=$<<16*25=400>>400 per week",
+    "L3": "So his raise was 800-400=$<<800-400=400>>400 per week",
+    "L4": "So he makes 400*52=$<<400*52=20800>>20,800 per year more"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1344.\n    Returns: how much more money Jame makes per year in his new job than the old job.\n    \"\"\"\n    # L1\n    new_hourly = 20 # $20 per hour\n    new_hours_per_week = 40 # 40 hours a week\n    new_weekly = new_hourly * new_hours_per_week\n\n    # L2\n    old_hourly = 16 # $16 an hour\n    old_hours_per_week = 25 # 25 hours per week\n    old_weekly = old_hourly * old_hours_per_week\n\n    # L3\n    weekly_raise = new_weekly - old_weekly\n\n    # L4\n    weeks_per_year = 52 # 52 weeks a year\n    yearly_raise = weekly_raise * weeks_per_year\n\n    # FA\n    answer = yearly_raise\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "yearly_raise",
+    "operand_to_replace": "weeks_per_year",
+    "replacement_variable": "weekly_raise"
+  },
+  "correct_trace": {
+    "new_hourly": 20,
+    "new_hours_per_week": 40,
+    "new_weekly": 800,
+    "old_hourly": 16,
+    "old_hours_per_week": 25,
+    "old_weekly": 400,
+    "weekly_raise": 400,
+    "weeks_per_year": 52,
+    "yearly_raise": 20800,
+    "answer": 20800
+  },
+  "flawed_trace": {
+    "new_hourly": 20,
+    "new_hours_per_week": 40,
+    "new_weekly": 800,
+    "old_hourly": 16,
+    "old_hours_per_week": 25,
+    "old_weekly": 400,
+    "weekly_raise": 400,
+    "weeks_per_year": 52,
+    "yearly_raise": 160000,
+    "answer": 160000
+  },
+  "correct_value": 20800,
+  "flawed_value": 160000,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "new_hourly",
+        "new_hours_per_week"
+      ],
+      "WK_inputs": [],
+      "output_variable": "new_weekly",
+      "solution_line_template": "He makes {new_hourly}*{new_hours_per_week}=$<<{new_hourly}*{new_hours_per_week}={new_weekly}>>{new_weekly} per week"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "old_hourly",
+        "old_hours_per_week"
+      ],
+      "WK_inputs": [],
+      "output_variable": "old_weekly",
+      "solution_line_template": "He used to make {old_hourly}*{old_hours_per_week}=$<<{old_hourly}*{old_hours_per_week}={old_weekly}>>{old_weekly} per week"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "weekly_raise",
+      "solution_line_template": "So his raise was {new_weekly}-{old_weekly}=$<<{new_weekly}-{old_weekly}={weekly_raise}>>{weekly_raise} per week"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "weeks_per_year"
+      ],
+      "WK_inputs": [],
+      "output_variable": "yearly_raise",
+      "solution_line_template": "So he makes {weekly_raise}*{weeks_per_year}=$<<{weekly_raise}*{weeks_per_year}={yearly_raise}>>{yearly_raise} per year more"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He makes 20*40=$<<20*40=800>>800 per week",
+    "L2": "He used to make 16*25=$<<16*25=400>>400 per week",
+    "L3": "So his raise was 800-400=$<<800-400=400>>400 per week",
+    "L4": "So he makes 400*400=$<<400*400=160000>>160000 per year more",
+    "FA": "#### 160000"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'weekly_raise' (400) was used instead of 'weeks_per_year' (52).",
+  "repro_seed": 4086920552578322395,
+  "model_name": "openai_gpt-4.1"
+}

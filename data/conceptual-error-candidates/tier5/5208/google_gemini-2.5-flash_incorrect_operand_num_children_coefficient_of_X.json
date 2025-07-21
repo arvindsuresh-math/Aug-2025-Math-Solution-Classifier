@@ -1,0 +1,91 @@
+{
+  "index": 5208,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "Let X be the number of children in the group.",
+    "L2": "The number of adults in the group is X+<<+25=25>>25.",
+    "L3": "The group pays 8*X + 15*(X+25) = $720.",
+    "L4": "Multiplying through the parentheses, we get 8X + 15X + 375 = $720",
+    "L5": "Combining like terms, we get 23X + 375 = 720",
+    "L6": "Subtracting 375 from both sides, we get 23X = 720 - 375 = $345",
+    "L7": "Dividing both sides by 23, we get X = $345 / 23 = <<345/23=15>>15 children."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5208.\n    Returns: the number of children in the group.\n    \"\"\"\n    # L4\n    adult_ticket_price = 15 # The price of an adult ticket is $15\n    more_adults_than_children = 25 # 25 more adults than children\n    total_cost = 720 # A group of people pays $720 for admission tickets\n    adult_cost_constant_part = adult_ticket_price * more_adults_than_children\n\n    # L5\n    child_ticket_price = 8 # a child ticket is $8\n    coefficient_of_X = child_ticket_price + adult_ticket_price\n\n    # L6\n    rhs_after_subtraction = total_cost - adult_cost_constant_part\n\n    # L7\n    num_children = rhs_after_subtraction / coefficient_of_X\n\n    # FA\n    answer = num_children\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "num_children",
+    "operand_to_replace": "rhs_after_subtraction",
+    "replacement_variable": "coefficient_of_X"
+  },
+  "correct_trace": {
+    "adult_ticket_price": 15,
+    "more_adults_than_children": 25,
+    "total_cost": 720,
+    "adult_cost_constant_part": 375,
+    "child_ticket_price": 8,
+    "coefficient_of_X": 23,
+    "rhs_after_subtraction": 345,
+    "num_children": 15.0,
+    "answer": 15.0
+  },
+  "flawed_trace": {
+    "adult_ticket_price": 15,
+    "more_adults_than_children": 25,
+    "total_cost": 720,
+    "adult_cost_constant_part": 375,
+    "child_ticket_price": 8,
+    "coefficient_of_X": 23,
+    "rhs_after_subtraction": 345,
+    "num_children": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 15.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "adult_cost_constant_part",
+      "question_inputs": [
+        "adult_ticket_price",
+        "more_adults_than_children",
+        "total_cost"
+      ],
+      "solution_line_template": "Multiplying through the parentheses, we get 8X + 15X + {adult_cost_constant_part} = ${total_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "coefficient_of_X",
+      "question_inputs": [
+        "child_ticket_price"
+      ],
+      "solution_line_template": "Combining like terms, we get {coefficient_of_X}X + {adult_cost_constant_part} = {total_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "rhs_after_subtraction",
+      "question_inputs": [],
+      "solution_line_template": "Subtracting {adult_cost_constant_part} from both sides, we get {coefficient_of_X}X = {total_cost} - {adult_cost_constant_part} = ${rhs_after_subtraction}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "num_children",
+      "question_inputs": [],
+      "solution_line_template": "Dividing both sides by {coefficient_of_X}, we get X = ${rhs_after_subtraction} / {coefficient_of_X} = <<{rhs_after_subtraction}/{coefficient_of_X}={num_children}>>{num_children} children."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L4": "Multiplying through the parentheses, we get 8X + 15X + 375 = $720",
+    "L5": "Combining like terms, we get 23X + 375 = 720",
+    "L6": "Subtracting 375 from both sides, we get 23X = 720 - 375 = $345",
+    "L7": "Dividing both sides by 23, we get X = $23 / 23 = <<23/23=1>>1 children.",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L7",
+  "explanation": "Incorrect operand. The variable 'coefficient_of_X' (value: 23) was used instead of 'rhs_after_subtraction' (value: 345).",
+  "repro_seed": -4993049167744260747,
+  "model_name": "google_gemini-2.5-flash"
+}

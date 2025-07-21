@@ -1,0 +1,63 @@
+{
+  "index": 5943,
+  "original_solution_mapping": {
+    "FA": "#### 7",
+    "L1": "Of her 42 lollipops, half were cherry, so 42 lollipops / 2 = <<42/2=21>>21 were not cherry.",
+    "L2": "Of the 21 that were not cherry, 1/3 of them were grape, so 21 lollipops / 3 = <<21/3=7>>7 grape lollipops."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5943.\n    Returns: the number of grape lollipops.\n    \"\"\"\n    # L1\n    total_lollipops = 42 # 42 lollipops\n    half_divisor = 2 # Half of the lollipops\n    not_cherry_lollipops = total_lollipops / half_divisor\n\n    # L2\n    grape_divisor = 3 # 1/3 of them were grape\n    grape_lollipops = not_cherry_lollipops / grape_divisor\n\n    # FA\n    answer = grape_lollipops\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "not_cherry_lollipops",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x30d742b50>"
+  },
+  "correct_trace": {
+    "total_lollipops": 42,
+    "half_divisor": 2,
+    "not_cherry_lollipops": 21.0,
+    "grape_divisor": 3,
+    "grape_lollipops": 7.0,
+    "answer": 7.0
+  },
+  "flawed_trace": {
+    "total_lollipops": 42,
+    "half_divisor": 2,
+    "not_cherry_lollipops": 84,
+    "grape_divisor": 3,
+    "grape_lollipops": 28.0,
+    "answer": 28.0
+  },
+  "correct_value": 21.0,
+  "flawed_value": 84,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "not_cherry_lollipops",
+      "question_inputs": [
+        "total_lollipops",
+        "half_divisor"
+      ],
+      "solution_line_template": "Of her {total_lollipops} lollipops, half were cherry, so {total_lollipops} lollipops / {half_divisor} = <<{total_lollipops}/{half_divisor}={not_cherry_lollipops}>>{not_cherry_lollipops} were not cherry."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "grape_lollipops",
+      "question_inputs": [
+        "grape_divisor"
+      ],
+      "solution_line_template": "Of the {not_cherry_lollipops} that were not cherry, 1/3 of them were grape, so {not_cherry_lollipops} lollipops / {grape_divisor} = <<{not_cherry_lollipops}/{grape_divisor}={grape_lollipops}>>{grape_lollipops} grape lollipops."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Of her 42 lollipops, half were cherry, so 42 lollipops / 2 = <<42/2=84>>84 were not cherry.",
+    "L2": "Of the 84 that were not cherry, 1/3 of them were grape, so 84 lollipops / 3 = <<84/3=28>>28 grape lollipops.",
+    "FA": "#### 28"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 4018954591617451385,
+  "model_name": "google_gemini-2.5-flash"
+}

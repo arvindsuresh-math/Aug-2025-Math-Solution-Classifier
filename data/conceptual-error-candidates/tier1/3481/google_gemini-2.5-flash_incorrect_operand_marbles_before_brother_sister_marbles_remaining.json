@@ -1,0 +1,100 @@
+{
+  "index": 3481,
+  "original_solution_mapping": {
+    "FA": "#### 300",
+    "L1": "If Mariam remains with 30 marbles after giving her brother 60 marbles, she had 30+60 = <<30+60=90>>90 marbles.",
+    "L2": "Mariam's sister receives twice as many marbles as her brother, a total of 2*60 = <<2*60=120>>120 marbles.",
+    "L3": "The total number of marbles before giving any to her brother or sister is 120+90= <<120+90=210>>210",
+    "L4": "Savannah is to receive three times as many marbles as Mariam has to remain with, a total of 3*30 = <<3*30=90>>90 marbles.",
+    "L5": "Before giving out any marble, Mariam has 210+90 = <<210+90=300>>300 marbles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3481.\n    Returns: the number of marbles Miriam started with.\n    \"\"\"\n    # L1\n    marbles_remaining = 30 # currently has 30 marbles\n    given_to_brother = 60 # gave her brother 60 marbles\n    marbles_before_brother = marbles_remaining + given_to_brother\n\n    # L2\n    multiplier_sister = 2 # twice that amount\n    given_to_sister = multiplier_sister * given_to_brother\n\n    # L3\n    marbles_before_brother_sister = given_to_sister + marbles_before_brother\n\n    # L4\n    multiplier_savanna = 3 # three times the amount she currently has\n    given_to_savanna = multiplier_savanna * marbles_remaining\n\n    # L5\n    total_marbles_start = marbles_before_brother_sister + given_to_savanna\n\n    # FA\n    answer = total_marbles_start\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "marbles_before_brother_sister",
+    "operand_to_replace": "given_to_sister",
+    "replacement_variable": "marbles_remaining"
+  },
+  "correct_trace": {
+    "marbles_remaining": 30,
+    "given_to_brother": 60,
+    "marbles_before_brother": 90,
+    "multiplier_sister": 2,
+    "given_to_sister": 120,
+    "marbles_before_brother_sister": 210,
+    "multiplier_savanna": 3,
+    "given_to_savanna": 90,
+    "total_marbles_start": 300,
+    "answer": 300
+  },
+  "flawed_trace": {
+    "marbles_remaining": 30,
+    "given_to_brother": 60,
+    "marbles_before_brother": 90,
+    "multiplier_sister": 2,
+    "given_to_sister": 120,
+    "marbles_before_brother_sister": 120,
+    "multiplier_savanna": 3,
+    "given_to_savanna": 90,
+    "total_marbles_start": 210,
+    "answer": 210
+  },
+  "correct_value": 210,
+  "flawed_value": 120,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "marbles_before_brother",
+      "question_inputs": [
+        "marbles_remaining",
+        "given_to_brother"
+      ],
+      "solution_line_template": "If Mariam remains with {marbles_remaining} marbles after giving her brother {given_to_brother} marbles, she had {marbles_remaining}+{given_to_brother} = <<{marbles_remaining}+{given_to_brother}={marbles_before_brother}>>{marbles_before_brother} marbles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "given_to_sister",
+      "question_inputs": [
+        "multiplier_sister"
+      ],
+      "solution_line_template": "Mariam's sister receives twice as many marbles as her brother, a total of {multiplier_sister}*{given_to_brother} = <<{multiplier_sister}*{given_to_brother}={given_to_sister}>>{given_to_sister} marbles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "marbles_before_brother_sister",
+      "question_inputs": [],
+      "solution_line_template": "The total number of marbles before giving any to her brother or sister is {given_to_sister}+{marbles_before_brother}= <<{given_to_sister}+{marbles_before_brother}={marbles_before_brother_sister}>>{marbles_before_brother_sister}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "given_to_savanna",
+      "question_inputs": [
+        "multiplier_savanna"
+      ],
+      "solution_line_template": "Savannah is to receive three times as many marbles as Mariam has to remain with, a total of {multiplier_savanna}*{marbles_remaining} = <<{multiplier_savanna}*{marbles_remaining}={given_to_savanna}>>{given_to_savanna} marbles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_marbles_start",
+      "question_inputs": [],
+      "solution_line_template": "Before giving out any marble, Mariam has {marbles_before_brother_sister}+{given_to_savanna} = <<{marbles_before_brother_sister}+{given_to_savanna}={total_marbles_start}>>{total_marbles_start} marbles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Mariam remains with 30 marbles after giving her brother 60 marbles, she had 30+60 = <<30+60=90>>90 marbles.",
+    "L2": "Mariam's sister receives twice as many marbles as her brother, a total of 2*60 = <<2*60=120>>120 marbles.",
+    "L3": "The total number of marbles before giving any to her brother or sister is 30+90= <<30+90=120>>120",
+    "L4": "Savannah is to receive three times as many marbles as Mariam has to remain with, a total of 3*30 = <<3*30=90>>90 marbles.",
+    "L5": "Before giving out any marble, Mariam has 120+90 = <<120+90=210>>210 marbles.",
+    "FA": "#### 210"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'marbles_remaining' (value: 30) was used instead of 'given_to_sister' (value: 120).",
+  "repro_seed": 5491068329969423752,
+  "model_name": "google_gemini-2.5-flash"
+}

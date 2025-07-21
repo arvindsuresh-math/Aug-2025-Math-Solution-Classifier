@@ -1,0 +1,63 @@
+{
+  "index": 3816,
+  "original_solution_mapping": {
+    "FA": "#### 250",
+    "L1": "Goldie did pet-sitting for a total of 20 + 30 = <<20+30=50>>50 hours.",
+    "L2": "So, she earned a total of $5 x 50 = $<<5*50=250>>250."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3816.\n    Returns: the total amount Goldie earned in two weeks for pet-sitting.\n    \"\"\"\n    # L1\n    hours_last_week = 20 # worked for 20 hours\n    hours_this_week = 30 # worked for 30 hours\n    total_hours_worked = hours_last_week + hours_this_week\n\n    # L2\n    hourly_rate = 5 # $5 an hour\n    total_earnings = hourly_rate * total_hours_worked\n\n    # FA\n    answer = total_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_hours_worked",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x16abe8c50>"
+  },
+  "correct_trace": {
+    "hours_last_week": 20,
+    "hours_this_week": 30,
+    "total_hours_worked": 50,
+    "hourly_rate": 5,
+    "total_earnings": 250,
+    "answer": 250
+  },
+  "flawed_trace": {
+    "hours_last_week": 20,
+    "hours_this_week": 30,
+    "total_hours_worked": 600,
+    "hourly_rate": 5,
+    "total_earnings": 3000,
+    "answer": 3000
+  },
+  "correct_value": 50,
+  "flawed_value": 600,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_hours_worked",
+      "question_inputs": [
+        "hours_last_week",
+        "hours_this_week"
+      ],
+      "solution_line_template": "Goldie did pet-sitting for a total of {hours_last_week} + {hours_this_week} = <<{hours_last_week}+{hours_this_week}={total_hours_worked}>>{total_hours_worked} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_earnings",
+      "question_inputs": [
+        "hourly_rate"
+      ],
+      "solution_line_template": "So, she earned a total of ${hourly_rate} x {total_hours_worked} = $<<{hourly_rate}*{total_hours_worked}={total_earnings}>>{total_earnings}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Goldie did pet-sitting for a total of 20 + 30 = <<20+30=600>>600 hours.",
+    "L2": "So, she earned a total of $5 x 600 = $<<5*600=3000>>3000.",
+    "FA": "#### 3000"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": -5656999408426216813,
+  "model_name": "google_gemini-2.5-flash"
+}

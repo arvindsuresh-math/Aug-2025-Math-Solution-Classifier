@@ -1,0 +1,104 @@
+{
+  "index": 1936,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "7+1=<<7+1=8>>8 people threw money into the pot.",
+    "L2": "So the amount of money in the pot is 8*5=$<<8*5=40>>40.",
+    "L3": "First place gets 40*.8=$<<40*.8=32>>32",
+    "L4": "So there is 40-32=$<<40-32=8>>8 left in the pot after first place gets his cut",
+    "L5": "So third place gets 8/2=$<<8/2=4>>4"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1936.\n    Returns: the amount of money third place gets.\n    \"\"\"\n    # L1\n    friends_count = 7 # 7 friends\n    josh_count = 1 # Everyone including him\n    total_people = friends_count + josh_count\n\n    # L2\n    money_per_person = 5 # puts 5 dollars into a pot\n    total_pot_money = total_people * money_per_person\n\n    # L3\n    first_place_percent = 0.8 # 80% of the money\n    first_place_money = total_pot_money * first_place_percent\n\n    # L4\n    remaining_money = total_pot_money - first_place_money\n\n    # L5\n    split_places = 2 # Second and third place split the rest\n    third_place_money = remaining_money / split_places\n\n    # FA\n    answer = third_place_money\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "remaining_money",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30ab3b310>"
+  },
+  "correct_trace": {
+    "friends_count": 7,
+    "josh_count": 1,
+    "total_people": 8,
+    "money_per_person": 5,
+    "total_pot_money": 40,
+    "first_place_percent": 0.8,
+    "first_place_money": 32.0,
+    "remaining_money": 8.0,
+    "split_places": 2,
+    "third_place_money": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "friends_count": 7,
+    "josh_count": 1,
+    "total_people": 8,
+    "money_per_person": 5,
+    "total_pot_money": 40,
+    "first_place_percent": 0.8,
+    "first_place_money": 32.0,
+    "remaining_money": 72.0,
+    "split_places": 2,
+    "third_place_money": 36.0,
+    "answer": 36.0
+  },
+  "correct_value": 8.0,
+  "flawed_value": 72.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_people",
+      "question_inputs": [
+        "friends_count",
+        "josh_count"
+      ],
+      "solution_line_template": "{friends_count}+{josh_count}=<<{friends_count}+{josh_count}={total_people}>>{total_people} people threw money into the pot."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_pot_money",
+      "question_inputs": [
+        "money_per_person"
+      ],
+      "solution_line_template": "So the amount of money in the pot is {total_people}*{money_per_person}=${total_people}*{money_per_person}={total_pot_money}>>{total_pot_money}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "first_place_money",
+      "question_inputs": [
+        "first_place_percent"
+      ],
+      "solution_line_template": "First place gets {total_pot_money}*{first_place_percent}=${total_pot_money}*{first_place_percent}={first_place_money}>>{first_place_money}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "remaining_money",
+      "question_inputs": [],
+      "solution_line_template": "So there is {total_pot_money}-{first_place_money}=${total_pot_money}-{first_place_money}={remaining_money}>>{remaining_money} left in the pot after first place gets his cut"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "third_place_money",
+      "question_inputs": [
+        "split_places"
+      ],
+      "solution_line_template": "So third place gets {remaining_money}/{split_places}=${remaining_money}/{split_places}={third_place_money}>>{third_place_money}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "7+1=<<7+1=8>>8 people threw money into the pot.",
+    "L2": "So the amount of money in the pot is 8*5=$8*5=40>>40.",
+    "L3": "First place gets 40*0.8=$40*0.8=32>>32",
+    "L4": "So there is 40-32=$40-32=72>>72 left in the pot after first place gets his cut",
+    "L5": "So third place gets 72/2=$72/2=36>>36",
+    "FA": "#### 36"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -2733831675968601595,
+  "model_name": "google_gemini-2.5-flash"
+}

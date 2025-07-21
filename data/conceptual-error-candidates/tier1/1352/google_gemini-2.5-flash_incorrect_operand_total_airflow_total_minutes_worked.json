@@ -1,0 +1,79 @@
+{
+  "index": 1352,
+  "original_solution_mapping": {
+    "FA": "#### 42000",
+    "L1": "If the fan works for 10 minutes each day, in a week with 7 days, it will have worked for 10*7 = <<10*7=70>>70 minutes.",
+    "L2": "Since a minute has 60 seconds, the total time in seconds that the fan will have worked in one week is 70*60 = <<70*60=4200>>4200 seconds.",
+    "L3": "Since the fan can create an airflow of 10 liters per second, in 4200 seconds, it will create an airflow of 4200*10= <<4200*10=42000>>42000 liters."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1352.\n    Returns: the total amount of airflow created by the fan in one week.\n    \"\"\"\n    # L1\n    minutes_per_day = 10 # 10 minutes each day\n    days_per_week = 7 # WK\n    total_minutes_worked = minutes_per_day * days_per_week\n\n    # L2\n    seconds_per_minute = 60 # WK\n    total_seconds_worked = total_minutes_worked * seconds_per_minute\n\n    # L3\n    airflow_rate_lps = 10 # 10 liters per second\n    total_airflow = total_seconds_worked * airflow_rate_lps\n\n    # FA\n    answer = total_airflow\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_airflow",
+    "operand_to_replace": "total_seconds_worked",
+    "replacement_variable": "total_minutes_worked"
+  },
+  "correct_trace": {
+    "minutes_per_day": 10,
+    "days_per_week": 7,
+    "total_minutes_worked": 70,
+    "seconds_per_minute": 60,
+    "total_seconds_worked": 4200,
+    "airflow_rate_lps": 10,
+    "total_airflow": 42000,
+    "answer": 42000
+  },
+  "flawed_trace": {
+    "minutes_per_day": 10,
+    "days_per_week": 7,
+    "total_minutes_worked": 70,
+    "seconds_per_minute": 60,
+    "total_seconds_worked": 4200,
+    "airflow_rate_lps": 10,
+    "total_airflow": 700,
+    "answer": 700
+  },
+  "correct_value": 42000,
+  "flawed_value": 700,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "minutes_per_day"
+      ],
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "output_variable": "total_minutes_worked",
+      "solution_line_template": "If the fan works for {minutes_per_day} minutes each day, in a week with {days_per_week} days, it will have worked for {minutes_per_day}*{days_per_week} = <<{minutes_per_day}*{days_per_week}={total_minutes_worked}>>{total_minutes_worked} minutes."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [
+        "seconds_per_minute"
+      ],
+      "output_variable": "total_seconds_worked",
+      "solution_line_template": "Since a minute has {seconds_per_minute} seconds, the total time in seconds that the fan will have worked in one week is {total_minutes_worked}*{seconds_per_minute} = <<{total_minutes_worked}*{seconds_per_minute}={total_seconds_worked}>>{total_seconds_worked} seconds."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "airflow_rate_lps"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_airflow",
+      "solution_line_template": "Since the fan can create an airflow of {airflow_rate_lps} liters per second, in {total_seconds_worked} seconds, it will create an airflow of {total_seconds_worked}*{airflow_rate_lps}= <<{total_seconds_worked}*{airflow_rate_lps}={total_airflow}>>{total_airflow} liters."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the fan works for 10 minutes each day, in a week with 7 days, it will have worked for 10*7 = <<10*7=70>>70 minutes.",
+    "L2": "Since a minute has 60 seconds, the total time in seconds that the fan will have worked in one week is 70*60 = <<70*60=4200>>4200 seconds.",
+    "L3": "Since the fan can create an airflow of 10 liters per second, in 70 seconds, it will create an airflow of 70*10= <<70*10=700>>700 liters.",
+    "FA": "#### 700"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'total_minutes_worked' (value: 70) was used instead of 'total_seconds_worked' (value: 4200).",
+  "repro_seed": -6258080175683164011,
+  "model_name": "google_gemini-2.5-flash"
+}

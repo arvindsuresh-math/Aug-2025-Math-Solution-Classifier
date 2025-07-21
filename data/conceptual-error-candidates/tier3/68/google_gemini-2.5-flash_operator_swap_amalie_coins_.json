@@ -1,0 +1,92 @@
+{
+  "index": 68,
+  "original_solution_mapping": {
+    "FA": "#### 90",
+    "L1": "The total ratio of the coins they both have is 10+45 = <<10+45=55>>55",
+    "L2": "The fraction of the ratio representing the number of coins that Amalie has is 45/55, and since the total number of coins they both have is 440, Amalie has 45/55*440 = <<45/55*440=360>>360 coins.",
+    "L3": "When Amalie spends 3/4 of what she has, she parts with 3/4*360 = <<3/4*360=270>>270 coins.",
+    "L4": "She still has 360 coins - 270 coins = <<360-270=90>>90 coins"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 68.\n    Returns: the number of coins Amalie will remain with.\n    \"\"\"\n    # L1\n    elsa_ratio_part = 10 # The ratio of coins that Elsa has to that which Amalie has is 10:45\n    amalie_ratio_part = 45 # The ratio of coins that Elsa has to that which Amalie has is 10:45\n    total_ratio_parts = elsa_ratio_part + amalie_ratio_part\n\n    # L2\n    amalie_ratio_fraction = Fraction(amalie_ratio_part, total_ratio_parts) # The fraction of the ratio representing the number of coins that Amalie has is 45/55\n    total_coins = 440 # the total number of coins they have is 440\n    amalie_coins = amalie_ratio_fraction * total_coins\n\n    # L3\n    spent_fraction = Fraction(3, 4) # Amalie spends 3/4 of what she has\n    coins_spent = spent_fraction * amalie_coins\n\n    # L4\n    remaining_coins = amalie_coins - coins_spent\n\n    # FA\n    answer = remaining_coins\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "amalie_coins",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x16887ead0>"
+  },
+  "correct_trace": {
+    "elsa_ratio_part": 10,
+    "amalie_ratio_part": 45,
+    "total_ratio_parts": 55,
+    "amalie_ratio_fraction": "9/11",
+    "total_coins": 440,
+    "amalie_coins": "360",
+    "spent_fraction": "3/4",
+    "coins_spent": "270",
+    "remaining_coins": "90",
+    "answer": "90"
+  },
+  "flawed_trace": {
+    "elsa_ratio_part": 10,
+    "amalie_ratio_part": 45,
+    "total_ratio_parts": 55,
+    "amalie_ratio_fraction": "9/11",
+    "total_coins": 440,
+    "amalie_coins": "9/4840",
+    "spent_fraction": "3/4",
+    "coins_spent": "27/19360",
+    "remaining_coins": "9/19360",
+    "answer": "9/19360"
+  },
+  "correct_value": "360",
+  "flawed_value": "9/4840",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_ratio_parts",
+      "question_inputs": [
+        "elsa_ratio_part",
+        "amalie_ratio_part"
+      ],
+      "solution_line_template": "The total ratio of the coins they both have is {elsa_ratio_part}+{amalie_ratio_part} = <<{elsa_ratio_part}+{amalie_ratio_part}={total_ratio_parts}>>{total_ratio_parts}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "amalie_coins",
+      "question_inputs": [
+        "amalie_ratio_fraction",
+        "total_coins"
+      ],
+      "solution_line_template": "The fraction of the ratio representing the number of coins that Amalie has is {amalie_ratio_fraction}, and since the total number of coins they both have is {total_coins}, Amalie has {amalie_ratio_fraction}*{total_coins} = <<{amalie_ratio_fraction}*{total_coins}={amalie_coins}>>{amalie_coins} coins."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "coins_spent",
+      "question_inputs": [
+        "spent_fraction"
+      ],
+      "solution_line_template": "When Amalie spends {spent_fraction} of what she has, she parts with {spent_fraction}*{amalie_coins} = <<{spent_fraction}*{amalie_coins}={coins_spent}>>{coins_spent} coins."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "remaining_coins",
+      "question_inputs": [],
+      "solution_line_template": "She still has {amalie_coins} coins - {coins_spent} coins = <<{amalie_coins}-{coins_spent}={remaining_coins}>>{remaining_coins} coins"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total ratio of the coins they both have is 10+45 = <<10+45=55>>55",
+    "L2": "The fraction of the ratio representing the number of coins that Amalie has is 45/55, and since the total number of coins they both have is 440, Amalie has 45/55*440 = <<45/55*440=9/4840>>9/4840 coins.",
+    "L3": "When Amalie spends 3/4 of what she has, she parts with 3/4*9/4840 = <<3/4*9/4840=27/19360>>27/19360 coins.",
+    "L4": "She still has 9/4840 coins - 27/19360 coins = <<9/4840-27/19360=9/19360>>9/19360 coins",
+    "FA": "#### 9/19360"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -9099936237415725094,
+  "model_name": "google_gemini-2.5-flash"
+}
