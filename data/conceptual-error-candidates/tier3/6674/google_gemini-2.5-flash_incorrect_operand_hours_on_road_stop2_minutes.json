@@ -1,0 +1,95 @@
+{
+  "index": 6674,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "8:00 PM is equivalent to 20:00 hrs so he spent a total of 20-7 = <<20-7=13>>13 hours on the journey",
+    "L2": "He spent 25+10+25 = <<25+10+25=60>>60 minutes on stops",
+    "L3": "There are 60 minutes in an hour so he spent (60/60) = <<60/60=1>>1 hour on stops",
+    "L4": "Therefore, he spent 13-1 = <<13-1=12>>12 hours on the road."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6674.\n    Returns: the total number of hours William spent on the road.\n    \"\"\"\n    # L1\n    arrival_time_24hr = 20 # arrived at his hometown by 8:00 PM\n    departure_time_24hr = 7 # left Missouri by 7:00 AM\n    total_journey_hours = arrival_time_24hr - departure_time_24hr\n\n    # L2\n    stop1_minutes = 25 # 3 stops of 25\n    stop2_minutes = 10 # 10\n    stop3_minutes = 25 # and 25 minutes respectively\n    total_stop_minutes = stop1_minutes + stop2_minutes + stop3_minutes\n\n    # L3\n    minutes_per_hour = 60 # 60 minutes in an hour\n    total_stop_hours = total_stop_minutes / minutes_per_hour\n\n    # L4\n    hours_on_road = total_journey_hours - total_stop_hours\n\n    # FA\n    answer = hours_on_road\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "hours_on_road",
+    "operand_to_replace": "total_stop_hours",
+    "replacement_variable": "stop2_minutes"
+  },
+  "correct_trace": {
+    "arrival_time_24hr": 20,
+    "departure_time_24hr": 7,
+    "total_journey_hours": 13,
+    "stop1_minutes": 25,
+    "stop2_minutes": 10,
+    "stop3_minutes": 25,
+    "total_stop_minutes": 60,
+    "minutes_per_hour": 60,
+    "total_stop_hours": 1.0,
+    "hours_on_road": 12.0,
+    "answer": 12.0
+  },
+  "flawed_trace": {
+    "arrival_time_24hr": 20,
+    "departure_time_24hr": 7,
+    "total_journey_hours": 13,
+    "stop1_minutes": 25,
+    "stop2_minutes": 10,
+    "stop3_minutes": 25,
+    "total_stop_minutes": 60,
+    "minutes_per_hour": 60,
+    "total_stop_hours": 1.0,
+    "hours_on_road": 3,
+    "answer": 3
+  },
+  "correct_value": 12.0,
+  "flawed_value": 3,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_journey_hours",
+      "question_inputs": [
+        "arrival_time_24hr",
+        "departure_time_24hr"
+      ],
+      "solution_line_template": "8:00 PM is equivalent to {arrival_time_24hr}:00 hrs so he spent a total of {arrival_time_24hr}-{departure_time_24hr} = <<{arrival_time_24hr}-{departure_time_24hr}={total_journey_hours}>>{total_journey_hours} hours on the journey"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_stop_minutes",
+      "question_inputs": [
+        "stop1_minutes",
+        "stop2_minutes",
+        "stop3_minutes"
+      ],
+      "solution_line_template": "He spent {stop1_minutes}+{stop2_minutes}+{stop3_minutes} = <<{stop1_minutes}+{stop2_minutes}+{stop3_minutes}={total_stop_minutes}>>{total_stop_minutes} minutes on stops"
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_stop_hours",
+      "question_inputs": [],
+      "solution_line_template": "There are {minutes_per_hour} minutes in an hour so he spent ({total_stop_minutes}/{minutes_per_hour}) = <<{total_stop_minutes}/{minutes_per_hour}={total_stop_hours}>>{total_stop_hours} hour on stops"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "hours_on_road",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, he spent {total_journey_hours}-{total_stop_hours} = <<{total_journey_hours}-{total_stop_hours}={hours_on_road}>>{hours_on_road} hours on the road."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "8:00 PM is equivalent to 20:00 hrs so he spent a total of 20-7 = <<20-7=13>>13 hours on the journey",
+    "L2": "He spent 25+10+25 = <<25+10+25=60>>60 minutes on stops",
+    "L3": "There are 60 minutes in an hour so he spent (60/60) = <<60/60=1>>1 hour on stops",
+    "L4": "Therefore, he spent 13-10 = <<13-10=3>>3 hours on the road.",
+    "FA": "#### 3"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'stop2_minutes' (value: 10) was used instead of 'total_stop_hours' (value: 1.0).",
+  "repro_seed": 206409648919953352,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,89 @@
+{
+  "index": 3312,
+  "original_solution_mapping": {
+    "FA": "#### 285,000",
+    "L1": "He pays the minor characters 15000*4=$<<15000*4=60000>>60,000",
+    "L2": "The major characters each get 15000*3=$<<15000*3=45000>>45,000",
+    "L3": "So he pays the main characters 45,000*5=$<<45000*5=225000>>225,000",
+    "L4": "So in total he pays 225,000+60,000=$<<225000+60000=285000>>285,000"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3312.\n    Returns: the total amount paid per episode.\n    \"\"\"\n    # L1\n    minor_character_pay_per_episode = 15000 # minor characters $15,000 each episode\n    num_minor_characters = 4 # 4 minor characters\n    total_minor_character_pay = minor_character_pay_per_episode * num_minor_characters\n\n    # L2\n    major_character_pay_multiplier = 3 # three times as much\n    major_character_pay_per_character = minor_character_pay_per_episode * major_character_pay_multiplier\n\n    # L3\n    num_main_characters = 5 # 5 main characters\n    total_main_character_pay = major_character_pay_per_character * num_main_characters\n\n    # L4\n    total_pay_per_episode = total_main_character_pay + total_minor_character_pay\n\n    # FA\n    answer = total_pay_per_episode\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "major_character_pay_per_character",
+    "operand_to_replace": "major_character_pay_multiplier",
+    "replacement_variable": "total_minor_character_pay"
+  },
+  "correct_trace": {
+    "minor_character_pay_per_episode": 15000,
+    "num_minor_characters": 4,
+    "total_minor_character_pay": 60000,
+    "major_character_pay_multiplier": 3,
+    "major_character_pay_per_character": 45000,
+    "num_main_characters": 5,
+    "total_main_character_pay": 225000,
+    "total_pay_per_episode": 285000,
+    "answer": 285000
+  },
+  "flawed_trace": {
+    "minor_character_pay_per_episode": 15000,
+    "num_minor_characters": 4,
+    "total_minor_character_pay": 60000,
+    "major_character_pay_multiplier": 3,
+    "major_character_pay_per_character": 900000000,
+    "num_main_characters": 5,
+    "total_main_character_pay": 4500000000,
+    "total_pay_per_episode": 4500060000,
+    "answer": 4500060000
+  },
+  "correct_value": 45000,
+  "flawed_value": 900000000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_minor_character_pay",
+      "question_inputs": [
+        "minor_character_pay_per_episode",
+        "num_minor_characters"
+      ],
+      "solution_line_template": "He pays the minor characters {minor_character_pay_per_episode}*{num_minor_characters}=${total_minor_character_pay}<<{minor_character_pay_per_episode}*{num_minor_characters}={total_minor_character_pay}>>{total_minor_character_pay}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "major_character_pay_per_character",
+      "question_inputs": [
+        "major_character_pay_multiplier"
+      ],
+      "solution_line_template": "The major characters each get {minor_character_pay_per_episode}*{major_character_pay_multiplier}=${major_character_pay_per_character}<<{minor_character_pay_per_episode}*{major_character_pay_multiplier}={major_character_pay_per_character}>>{major_character_pay_per_character}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_main_character_pay",
+      "question_inputs": [
+        "num_main_characters"
+      ],
+      "solution_line_template": "So he pays the main characters {major_character_pay_per_character}*{num_main_characters}=${total_main_character_pay}<<{major_character_pay_per_character}*{num_main_characters}={total_main_character_pay}>>{total_main_character_pay}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_pay_per_episode",
+      "question_inputs": [],
+      "solution_line_template": "So in total he pays {total_main_character_pay}+{total_minor_character_pay}=${total_pay_per_episode}<<{total_main_character_pay}+{total_minor_character_pay}={total_pay_per_episode}>>{total_pay_per_episode}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He pays the minor characters 15000*4=$60000<<15000*4=60000>>60000",
+    "L2": "The major characters each get 15000*60000=$900000000<<15000*60000=900000000>>900000000",
+    "L3": "So he pays the main characters 900000000*5=$4500000000<<900000000*5=4500000000>>4500000000",
+    "L4": "So in total he pays 4500000000+60000=$4500060000<<4500000000+60000=4500060000>>4500060000",
+    "FA": "#### 4500060000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_minor_character_pay' (60000) was used instead of 'major_character_pay_multiplier' (3).",
+  "repro_seed": 5746998587917978014,
+  "model_name": "google_gemini-2.5-flash"
+}

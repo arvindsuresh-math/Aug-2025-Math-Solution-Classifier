@@ -1,0 +1,88 @@
+{
+  "index": 5716,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "If Joanie wants 3 cups, Mitchell wants 4 cups, Miles & Davis want 6 cups and Cliff wants 3 cups then they want 3+4+6+3 = <<3+4+6+3=16>>16 cups of popcorn",
+    "L2": "Every 2 tablespoons makes 4 cups and they want 16 cups so 16/4 = <<16/4=4>>4 groups of 2 tablespoons are needed.",
+    "L3": "Thus they need 4 * 2 = <<4*2=8>>8 tablespoons in total."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5716.\n    Returns: the total number of tablespoons of popcorn kernels needed.\n    \"\"\"\n    # L1\n    joanie_cups = 3 # Joanie wants 3 cups of popcorn\n    mitchell_cups = 4 # Mitchell wants 4 cups of popcorn\n    miles_davis_cups = 6 # Miles and Davis said they would split 6 cups of popcorn\n    cliff_cups = 3 # Cliff said he would only eat 3 cups\n    total_cups_desired = joanie_cups + mitchell_cups + miles_davis_cups + cliff_cups\n\n    # L2\n    kernels_per_batch = 2 # 2 tablespoons of popcorn kernels\n    cups_per_batch = 4 # will make 4 cups of popcorn\n    num_batches_needed = total_cups_desired / cups_per_batch\n\n    # L3\n    total_tablespoons_needed = num_batches_needed * kernels_per_batch\n\n    # FA\n    answer = total_tablespoons_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "incomplete_calculation",
+    "target_variable": "total_cups_desired",
+    "operand_to_remove": "mitchell_cups",
+    "original_operands": [
+      "cliff_cups",
+      "joanie_cups",
+      "miles_davis_cups",
+      "mitchell_cups"
+    ]
+  },
+  "correct_trace": {
+    "joanie_cups": 3,
+    "mitchell_cups": 4,
+    "miles_davis_cups": 6,
+    "cliff_cups": 3,
+    "total_cups_desired": 16,
+    "kernels_per_batch": 2,
+    "cups_per_batch": 4,
+    "num_batches_needed": 4.0,
+    "total_tablespoons_needed": 8.0,
+    "answer": 8.0
+  },
+  "flawed_trace": {
+    "joanie_cups": 3,
+    "mitchell_cups": 4,
+    "miles_davis_cups": 6,
+    "cliff_cups": 3,
+    "total_cups_desired": 12,
+    "kernels_per_batch": 2,
+    "cups_per_batch": 4,
+    "num_batches_needed": 3.0,
+    "total_tablespoons_needed": 6.0,
+    "answer": 6.0
+  },
+  "correct_value": 16,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_cups_desired",
+      "question_inputs": [
+        "joanie_cups",
+        "mitchell_cups",
+        "miles_davis_cups",
+        "cliff_cups"
+      ],
+      "solution_line_template": "If Joanie wants {joanie_cups} cups, Mitchell wants {mitchell_cups} cups, Miles & Davis want {miles_davis_cups} cups and Cliff wants {cliff_cups} cups then they want {joanie_cups}+{mitchell_cups}+{miles_davis_cups}+{cliff_cups} = <<{joanie_cups}+{mitchell_cups}+{miles_davis_cups}+{cliff_cups}={total_cups_desired}>>{total_cups_desired} cups of popcorn"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_batches_needed",
+      "question_inputs": [
+        "kernels_per_batch",
+        "cups_per_batch"
+      ],
+      "solution_line_template": "Every {kernels_per_batch} tablespoons makes {cups_per_batch} cups and they want {total_cups_desired} cups so {total_cups_desired}/{cups_per_batch} = <<{total_cups_desired}/{cups_per_batch}={num_batches_needed}>>{num_batches_needed} groups of {kernels_per_batch} tablespoons are needed."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_tablespoons_needed",
+      "question_inputs": [],
+      "solution_line_template": "Thus they need {num_batches_needed} * {kernels_per_batch} = <<{num_batches_needed}*{kernels_per_batch}={total_tablespoons_needed}>>{total_tablespoons_needed} tablespoons in total."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Joanie wants 3 cups, Mitchell wants 4 cups, Miles & Davis want 6 cups and Cliff wants 3 cups then they want 3+6+3 = <<3+6+3=12>>12 cups of popcorn",
+    "L2": "Every 2 tablespoons makes 4 cups and they want 12 cups so 12/4 = <<12/4=3>>3 groups of 2 tablespoons are needed.",
+    "L3": "Thus they need 3 * 2 = <<3*2=6>>6 tablespoons in total.",
+    "FA": "#### 6"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incomplete calculation. The term 'mitchell_cups' (value: 4) was omitted from the operation.",
+  "repro_seed": -3992092931465305608,
+  "model_name": "google_gemini-2.5-flash"
+}

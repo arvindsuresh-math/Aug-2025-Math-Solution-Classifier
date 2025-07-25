@@ -1,0 +1,80 @@
+{
+  "index": 3228,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "For breakfast Daisy spent $2 + $4 = $<<2+4=6>>6.",
+    "L2": "For lunch Daisy spent $3 + $5.25 + $0.75 = $<<3+5.25+0.75=9>>9.",
+    "L3": "Daisy spent $9 - $6 = $<<9-6=3>>3 more on lunch than on breakfast."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3228.\n    Returns: how much more money Daisy spent on lunch than on breakfast.\n    \"\"\"\n    # L1\n    muffin_cost = 2 # muffin for $2\n    coffee_cost = 4 # cup of coffee for $4\n    breakfast_total_cost = muffin_cost + coffee_cost\n\n    # L2\n    soup_cost = 3 # soup cost $3\n    salad_cost = 5.25 # salad cost $5.25\n    lemonade_cost = 0.75 # lemonade cost $0.75\n    lunch_total_cost = soup_cost + salad_cost + lemonade_cost\n\n    # L3\n    difference_in_cost = lunch_total_cost - breakfast_total_cost\n\n    # FA\n    answer = difference_in_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "breakfast_total_cost",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x30e6050d0>"
+  },
+  "correct_trace": {
+    "muffin_cost": 2,
+    "coffee_cost": 4,
+    "breakfast_total_cost": 6,
+    "soup_cost": 3,
+    "salad_cost": 5.25,
+    "lemonade_cost": 0.75,
+    "lunch_total_cost": 9.0,
+    "difference_in_cost": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "muffin_cost": 2,
+    "coffee_cost": 4,
+    "breakfast_total_cost": 8,
+    "soup_cost": 3,
+    "salad_cost": 5.25,
+    "lemonade_cost": 0.75,
+    "lunch_total_cost": 9.0,
+    "difference_in_cost": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 6,
+  "flawed_value": 8,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "breakfast_total_cost",
+      "question_inputs": [
+        "muffin_cost",
+        "coffee_cost"
+      ],
+      "solution_line_template": "For breakfast Daisy spent ${muffin_cost} + ${coffee_cost} = $<<{muffin_cost}+{coffee_cost}={breakfast_total_cost}>>{breakfast_total_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "lunch_total_cost",
+      "question_inputs": [
+        "soup_cost",
+        "salad_cost",
+        "lemonade_cost"
+      ],
+      "solution_line_template": "For lunch Daisy spent ${soup_cost} + ${salad_cost} + ${lemonade_cost} = $<<{soup_cost}+{salad_cost}+{lemonade_cost}={lunch_total_cost}>>{lunch_total_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "difference_in_cost",
+      "question_inputs": [],
+      "solution_line_template": "Daisy spent ${lunch_total_cost} - ${breakfast_total_cost} = $<<{lunch_total_cost}-{breakfast_total_cost}={difference_in_cost}>>{difference_in_cost} more on lunch than on breakfast."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "For breakfast Daisy spent $2 + $4 = $<<2+4=8>>8.",
+    "L2": "For lunch Daisy spent $3 + $5.25 + $0.75 = $<<3+5.25+0.75=9>>9.",
+    "L3": "Daisy spent $9 - $8 = $<<9-8=1>>1 more on lunch than on breakfast.",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 7247870697866973782,
+  "model_name": "google_gemini-2.5-flash"
+}

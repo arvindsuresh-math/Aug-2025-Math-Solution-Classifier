@@ -1,0 +1,118 @@
+{
+  "index": 4506,
+  "original_solution_mapping": {
+    "FA": "#### 216",
+    "L1": "First find the total time for the burglary charges: 18 months/charge * 2 charges = 36 months",
+    "L2": "Then find the total time for the arson charges: 3 counts * 36 months/count = <<3*36=108>>108 months",
+    "L3": "Then find the time per larceny charge: 18 months / 3 = <<18/3=6>>6 months",
+    "L4": "Then find the total number of larceny charges: 2 charges * 6 = <<2*6=12>>12 charges",
+    "L5": "Then find the total time for the larceny charges: 6 months/charge * 12 charges = 72 months",
+    "L6": "Then add up the time for all the charges to find the total jail time: 36 months + 72 months + 108 months = <<36+72+108=216>>216 months"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4506.\n    Returns: the total number of months Jean is facing in jail.\n    \"\"\"\n    # L1\n    burglary_sentence_months = 18 # each burglary charge is 18 months\n    burglary_charges = 2 # 2 burglary charges\n    total_burglary_time = burglary_sentence_months * burglary_charges\n\n    # L2\n    arson_counts = 3 # 3 counts of arson\n    arson_sentence_months = 36 # each arson count has a 36-month sentence\n    total_arson_time = arson_counts * arson_sentence_months\n\n    # L3\n    petty_larceny_sentence_divisor = 3 # 1/3rd as long as a burglary charge\n    larceny_sentence_months = burglary_sentence_months / petty_larceny_sentence_divisor\n\n    # L4\n    petty_larceny_multiplier = 6 # six times as many petty larceny as burglary charges\n    total_larceny_charges = burglary_charges * petty_larceny_multiplier\n\n    # L5\n    total_larceny_time = larceny_sentence_months * total_larceny_charges\n\n    # L6\n    total_jail_time = total_burglary_time + total_larceny_time + total_arson_time\n\n    # FA\n    answer = total_jail_time\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_larceny_charges",
+    "operand_to_replace": "burglary_charges",
+    "replacement_variable": "burglary_sentence_months"
+  },
+  "correct_trace": {
+    "burglary_sentence_months": 18,
+    "burglary_charges": 2,
+    "total_burglary_time": 36,
+    "arson_counts": 3,
+    "arson_sentence_months": 36,
+    "total_arson_time": 108,
+    "petty_larceny_sentence_divisor": 3,
+    "larceny_sentence_months": 6.0,
+    "petty_larceny_multiplier": 6,
+    "total_larceny_charges": 12,
+    "total_larceny_time": 72.0,
+    "total_jail_time": 216.0,
+    "answer": 216.0
+  },
+  "flawed_trace": {
+    "burglary_sentence_months": 18,
+    "burglary_charges": 2,
+    "total_burglary_time": 36,
+    "arson_counts": 3,
+    "arson_sentence_months": 36,
+    "total_arson_time": 108,
+    "petty_larceny_sentence_divisor": 3,
+    "larceny_sentence_months": 6.0,
+    "petty_larceny_multiplier": 6,
+    "total_larceny_charges": 108,
+    "total_larceny_time": 648.0,
+    "total_jail_time": 792.0,
+    "answer": 792.0
+  },
+  "correct_value": 12,
+  "flawed_value": 108,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_burglary_time",
+      "question_inputs": [
+        "burglary_sentence_months",
+        "burglary_charges"
+      ],
+      "solution_line_template": "First find the total time for the burglary charges: {burglary_sentence_months} months/charge * {burglary_charges} charges = {total_burglary_time} months"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_arson_time",
+      "question_inputs": [
+        "arson_counts",
+        "arson_sentence_months"
+      ],
+      "solution_line_template": "Then find the total time for the arson charges: {arson_counts} counts * {arson_sentence_months} months/count = <<{arson_counts}*{arson_sentence_months}={total_arson_time}>>{total_arson_time} months"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "larceny_sentence_months",
+      "question_inputs": [
+        "petty_larceny_sentence_divisor"
+      ],
+      "solution_line_template": "Then find the time per larceny charge: {burglary_sentence_months} months / {petty_larceny_sentence_divisor} = <<{burglary_sentence_months}/{petty_larceny_sentence_divisor}={larceny_sentence_months}>>{larceny_sentence_months} months"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_larceny_charges",
+      "question_inputs": [
+        "petty_larceny_multiplier"
+      ],
+      "solution_line_template": "Then find the total number of larceny charges: {burglary_charges} charges * {petty_larceny_multiplier} = <<{burglary_charges}*{petty_larceny_multiplier}={total_larceny_charges}>>{total_larceny_charges} charges"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_larceny_time",
+      "question_inputs": [],
+      "solution_line_template": "Then find the total time for the larceny charges: {larceny_sentence_months} months/charge * {total_larceny_charges} charges = {total_larceny_time} months"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_jail_time",
+      "question_inputs": [],
+      "solution_line_template": "Then add up the time for all the charges to find the total jail time: {total_burglary_time} months + {total_larceny_time} months + {total_arson_time} months = <<{total_burglary_time}+{total_larceny_time}+{total_arson_time}={total_jail_time}>>{total_jail_time} months"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total time for the burglary charges: 18 months/charge * 2 charges = 36 months",
+    "L2": "Then find the total time for the arson charges: 3 counts * 36 months/count = <<3*36=108>>108 months",
+    "L3": "Then find the time per larceny charge: 18 months / 3 = <<18/3=6>>6 months",
+    "L4": "Then find the total number of larceny charges: 18 charges * 6 = <<18*6=108>>108 charges",
+    "L5": "Then find the total time for the larceny charges: 6 months/charge * 108 charges = 648 months",
+    "L6": "Then add up the time for all the charges to find the total jail time: 36 months + 648 months + 108 months = <<36+648+108=792>>792 months",
+    "FA": "#### 792"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'burglary_sentence_months' (18) was used instead of 'burglary_charges' (2).",
+  "repro_seed": 6457774476352830054,
+  "model_name": "google_gemini-2.5-flash"
+}

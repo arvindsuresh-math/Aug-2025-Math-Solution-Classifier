@@ -1,0 +1,92 @@
+{
+  "index": 7341,
+  "original_solution_mapping": {
+    "FA": "#### 600",
+    "L1": "She has mowed 900 square feet because 3 x 20 x 15 = <<3*20*15=900>>900",
+    "L2": "She has earned $90 because 900 x .1 = <<900*.1=90>>90",
+    "L3": "She has to earn $60 more dollars because 150 - 90 = <<150-90=60>>60",
+    "L4": "She has to mow 600 more square feet of lawns because 60 / .1 = <<60/.1=600>>600"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7341.\n    Returns: the number of more square feet LaKeisha has to mow to earn enough for the book set.\n    \"\"\"\n    # L1\n    num_lawns_mowed = 3 # three 20 x 15 foot lawns\n    lawn_length = 20 # 20 x 15 foot lawns\n    lawn_width = 15 # 20 x 15 foot lawns\n    total_area_mowed = num_lawns_mowed * lawn_length * lawn_width\n\n    # L2\n    charge_per_sq_ft = 0.10 # charges $.10 for every square foot of lawn\n    money_earned = total_area_mowed * charge_per_sq_ft\n\n    # L3\n    book_set_cost = 150 # The book set costs $150\n    money_needed_more = book_set_cost - money_earned\n\n    # L4\n    sq_ft_to_mow_more = money_needed_more / charge_per_sq_ft\n\n    # FA\n    answer = sq_ft_to_mow_more\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_area_mowed",
+    "operand_to_replace": "lawn_width",
+    "replacement_variable": "lawn_length"
+  },
+  "correct_trace": {
+    "num_lawns_mowed": 3,
+    "lawn_length": 20,
+    "lawn_width": 15,
+    "total_area_mowed": 900,
+    "charge_per_sq_ft": 0.1,
+    "money_earned": 90.0,
+    "book_set_cost": 150,
+    "money_needed_more": 60.0,
+    "sq_ft_to_mow_more": 600.0,
+    "answer": 600.0
+  },
+  "flawed_trace": {
+    "num_lawns_mowed": 3,
+    "lawn_length": 20,
+    "lawn_width": 15,
+    "total_area_mowed": 1200,
+    "charge_per_sq_ft": 0.1,
+    "money_earned": 120.0,
+    "book_set_cost": 150,
+    "money_needed_more": 30.0,
+    "sq_ft_to_mow_more": 300.0,
+    "answer": 300.0
+  },
+  "correct_value": 900,
+  "flawed_value": 1200,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_area_mowed",
+      "question_inputs": [
+        "num_lawns_mowed",
+        "lawn_length",
+        "lawn_width"
+      ],
+      "solution_line_template": "She has mowed {total_area_mowed} square feet because {num_lawns_mowed} x {lawn_length} x {lawn_width} = <<{num_lawns_mowed}*{lawn_length}*{lawn_width}={total_area_mowed}>>{total_area_mowed}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_earned",
+      "question_inputs": [
+        "charge_per_sq_ft"
+      ],
+      "solution_line_template": "She has earned ${money_earned} because {total_area_mowed} x {charge_per_sq_ft} = <<{total_area_mowed}*{charge_per_sq_ft}={money_earned}>>{money_earned}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "money_needed_more",
+      "question_inputs": [
+        "book_set_cost"
+      ],
+      "solution_line_template": "She has to earn ${money_needed_more} more dollars because {book_set_cost} - {money_earned} = <<{book_set_cost}-{money_earned}={money_needed_more}>>{money_needed_more}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "sq_ft_to_mow_more",
+      "question_inputs": [],
+      "solution_line_template": "She has to mow {sq_ft_to_mow_more} more square feet of lawns because {money_needed_more} / {charge_per_sq_ft} = <<{money_needed_more}/{charge_per_sq_ft}={sq_ft_to_mow_more}>>{sq_ft_to_mow_more}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She has mowed 1200 square feet because 3 x 20 x 20 = <<3*20*20=1200>>1200",
+    "L2": "She has earned $120 because 1200 x 0.1 = <<1200*0.1=120>>120",
+    "L3": "She has to earn $30 more dollars because 150 - 120 = <<150-120=30>>30",
+    "L4": "She has to mow 300 more square feet of lawns because 30 / 0.1 = <<30/0.1=300>>300",
+    "FA": "#### 300"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'lawn_length' (20) was used instead of 'lawn_width' (15).",
+  "repro_seed": 697927279407840908,
+  "model_name": "google_gemini-2.5-flash"
+}

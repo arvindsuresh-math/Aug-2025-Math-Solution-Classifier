@@ -1,0 +1,80 @@
+{
+  "index": 3647,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "First subtract the coupon amount from the price of the food: $7.50 - $2.50 = $<<7.5-2.5=5.00>>5.00",
+    "L2": "Then subtract 20% from 100% to find out what percentage of the reduced price Carla pays: 100% - 20% = 80%",
+    "L3": "Now multiply the price after the coupon by the percentage Carla pays to find the final price: $5.00 * .8 = $<<5*.8=4.00>>4.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3647.\n    Returns: the total amount Carla pays for her order.\n    \"\"\"\n    # L1\n    initial_cost = 7.50 # Carla's order at Mcdonald's costs $7.50\n    coupon_amount = 2.50 # coupon for $2.50\n    cost_after_coupon = initial_cost - coupon_amount\n\n    # L2\n    total_percent = 100 # WK\n    senior_discount_percent = 20 # 20% discount\n    percentage_paid_value = total_percent - senior_discount_percent\n\n    # L3\n    percentage_paid_decimal = percentage_paid_value / 100\n    final_price = cost_after_coupon * percentage_paid_decimal\n\n    # FA\n    answer = final_price\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "final_price",
+    "operand_to_replace": "percentage_paid_decimal",
+    "replacement_variable": "cost_after_coupon"
+  },
+  "correct_trace": {
+    "initial_cost": 7.5,
+    "coupon_amount": 2.5,
+    "cost_after_coupon": 5.0,
+    "total_percent": 100,
+    "senior_discount_percent": 20,
+    "percentage_paid_value": 80,
+    "percentage_paid_decimal": 0.8,
+    "final_price": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "initial_cost": 7.5,
+    "coupon_amount": 2.5,
+    "cost_after_coupon": 5.0,
+    "total_percent": 100,
+    "senior_discount_percent": 20,
+    "percentage_paid_value": 80,
+    "percentage_paid_decimal": 0.8,
+    "final_price": 25.0,
+    "answer": 25.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 25.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_after_coupon",
+      "question_inputs": [
+        "initial_cost",
+        "coupon_amount"
+      ],
+      "solution_line_template": "First subtract the coupon amount from the price of the food: ${initial_cost} - ${coupon_amount} = $<<{initial_cost}-{coupon_amount}={cost_after_coupon}>>{cost_after_coupon}"
+    },
+    {
+      "WK_inputs": [
+        "total_percent"
+      ],
+      "line_number": "L2",
+      "output_variable": "percentage_paid_value",
+      "question_inputs": [
+        "senior_discount_percent"
+      ],
+      "solution_line_template": "Then subtract {senior_discount_percent}% from {total_percent}% to find out what percentage of the reduced price Carla pays: {total_percent}% - {senior_discount_percent}% = {percentage_paid_value}%"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_price",
+      "question_inputs": [],
+      "solution_line_template": "Now multiply the price after the coupon by the percentage Carla pays to find the final price: ${cost_after_coupon} * {percentage_paid_decimal} = $<<{cost_after_coupon}*{percentage_paid_decimal}={final_price}>>{final_price}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First subtract the coupon amount from the price of the food: $7.5 - $2.5 = $<<7.5-2.5=5>>5",
+    "L2": "Then subtract 20% from 100% to find out what percentage of the reduced price Carla pays: 100% - 20% = 80%",
+    "L3": "Now multiply the price after the coupon by the percentage Carla pays to find the final price: $5 * 5 = $<<5*5=25>>25",
+    "FA": "#### 25"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'cost_after_coupon' (value: 5.0) was used instead of 'percentage_paid_decimal' (value: 0.8).",
+  "repro_seed": -1058672437965250185,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,93 @@
+{
+  "index": 6703,
+  "original_solution_mapping": {
+    "FA": "#### 80",
+    "L1": "When 43 books were checked out on Wednesday, Suzy remained with 98 - 43 = <<98-43=55>>55 books",
+    "L2": "After 23 books were returned on Thursday, she ended with 55 + 23 = <<55+23=78>>78 books",
+    "L3": "However, 5 books were checked out on the same day meaning that 78 - 5 = <<73=73>>73 books were left.",
+    "L4": "After 7 books were returned on Friday, Suzy had 73 + 7 = <<73+7=80>>80 books"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6703.\n    Returns: the number of books Suzy had at the end.\n    \"\"\"\n    # L1\n    initial_books = 98 # 98 books ready for checkout\n    checked_out_wednesday = 43 # 43 books were checked out\n    books_after_wednesday_checkout = initial_books - checked_out_wednesday\n\n    # L2\n    returned_thursday = 23 # 23 books were returned\n    books_after_thursday_return = books_after_wednesday_checkout + returned_thursday\n\n    # L3\n    checked_out_thursday = 5 # 5 books were checked out\n    books_after_thursday_checkout = books_after_thursday_return - checked_out_thursday\n\n    # L4\n    returned_friday = 7 # 7 books were returned\n    final_books = books_after_thursday_checkout + returned_friday\n\n    # FA\n    answer = final_books\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "books_after_thursday_return",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x30a09c090>"
+  },
+  "correct_trace": {
+    "initial_books": 98,
+    "checked_out_wednesday": 43,
+    "books_after_wednesday_checkout": 55,
+    "returned_thursday": 23,
+    "books_after_thursday_return": 78,
+    "checked_out_thursday": 5,
+    "books_after_thursday_checkout": 73,
+    "returned_friday": 7,
+    "final_books": 80,
+    "answer": 80
+  },
+  "flawed_trace": {
+    "initial_books": 98,
+    "checked_out_wednesday": 43,
+    "books_after_wednesday_checkout": 55,
+    "returned_thursday": 23,
+    "books_after_thursday_return": 1265,
+    "checked_out_thursday": 5,
+    "books_after_thursday_checkout": 1260,
+    "returned_friday": 7,
+    "final_books": 1267,
+    "answer": 1267
+  },
+  "correct_value": 78,
+  "flawed_value": 1265,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "books_after_wednesday_checkout",
+      "question_inputs": [
+        "initial_books",
+        "checked_out_wednesday"
+      ],
+      "solution_line_template": "When {checked_out_wednesday} books were checked out on Wednesday, Suzy remained with {initial_books} - {checked_out_wednesday} = <<{initial_books}-{checked_out_wednesday}={books_after_wednesday_checkout}>>{books_after_wednesday_checkout} books"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "books_after_thursday_return",
+      "question_inputs": [
+        "returned_thursday"
+      ],
+      "solution_line_template": "After {returned_thursday} books were returned on Thursday, she ended with {books_after_wednesday_checkout} + {returned_thursday} = <<{books_after_wednesday_checkout}+{returned_thursday}={books_after_thursday_return}>>{books_after_thursday_return} books"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "books_after_thursday_checkout",
+      "question_inputs": [
+        "checked_out_thursday"
+      ],
+      "solution_line_template": "However, {checked_out_thursday} books were checked out on the same day meaning that {books_after_thursday_return} - {checked_out_thursday} = <<{books_after_thursday_checkout}={books_after_thursday_checkout}>>{books_after_thursday_checkout} books were left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_books",
+      "question_inputs": [
+        "returned_friday"
+      ],
+      "solution_line_template": "After {returned_friday} books were returned on Friday, Suzy had {books_after_thursday_checkout} + {returned_friday} = <<{books_after_thursday_checkout}+{returned_friday}={final_books}>>{final_books} books"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "When 43 books were checked out on Wednesday, Suzy remained with 98 - 43 = <<98-43=55>>55 books",
+    "L2": "After 23 books were returned on Thursday, she ended with 55 + 23 = <<55+23=1265>>1265 books",
+    "L3": "However, 5 books were checked out on the same day meaning that 1265 - 5 = <<1260=1260>>1260 books were left.",
+    "L4": "After 7 books were returned on Friday, Suzy had 1260 + 7 = <<1260+7=1267>>1267 books",
+    "FA": "#### 1267"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 289247408197655932,
+  "model_name": "google_gemini-2.5-flash"
+}

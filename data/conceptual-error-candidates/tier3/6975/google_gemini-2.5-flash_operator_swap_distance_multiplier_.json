@@ -1,0 +1,78 @@
+{
+  "index": 6975,
+  "original_solution_mapping": {
+    "FA": "#### 480",
+    "L1": "We have 12 km / 3 km = <<12/3=4>>4. So, the distance covered in 12 km is 4 times greater than 3 km. The time taken will also be 4 times greater.",
+    "L2": "So, 2 hours x 4 = <<2*4=8>>8 hours.",
+    "L3": "We convert the time to minutes: 8 hours * 60 minutes/hour = <<8*60=480>>480 minutes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6975.\n    Returns: the time in minutes to travel the target distance.\n    \"\"\"\n    # L1\n    target_distance = 12 # travel 12 km\n    initial_distance = 3 # To make 3 km\n    distance_multiplier = target_distance / initial_distance\n\n    # L2\n    initial_time_hours = 2 # walked for 2 hours\n    total_time_hours = initial_time_hours * distance_multiplier\n\n    # L3\n    minutes_per_hour = 60 # WK\n    total_time_minutes = total_time_hours * minutes_per_hour\n\n    # FA\n    answer = total_time_minutes\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "distance_multiplier",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x16ab0bc90>"
+  },
+  "correct_trace": {
+    "target_distance": 12,
+    "initial_distance": 3,
+    "distance_multiplier": 4.0,
+    "initial_time_hours": 2,
+    "total_time_hours": 8.0,
+    "minutes_per_hour": 60,
+    "total_time_minutes": 480.0,
+    "answer": 480.0
+  },
+  "flawed_trace": {
+    "target_distance": 12,
+    "initial_distance": 3,
+    "distance_multiplier": 9,
+    "initial_time_hours": 2,
+    "total_time_hours": 18,
+    "minutes_per_hour": 60,
+    "total_time_minutes": 1080,
+    "answer": 1080
+  },
+  "correct_value": 4.0,
+  "flawed_value": 9,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "distance_multiplier",
+      "question_inputs": [
+        "target_distance",
+        "initial_distance"
+      ],
+      "solution_line_template": "We have {target_distance} km / {initial_distance} km = <<{target_distance}/{initial_distance}={distance_multiplier}>>{distance_multiplier}. So, the distance covered in {target_distance} km is {distance_multiplier} times greater than {initial_distance} km. The time taken will also be {distance_multiplier} times greater."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_time_hours",
+      "question_inputs": [
+        "initial_time_hours"
+      ],
+      "solution_line_template": "So, {initial_time_hours} hours x {distance_multiplier} = <<{initial_time_hours}*{distance_multiplier}={total_time_hours}>>{total_time_hours} hours."
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_time_minutes",
+      "question_inputs": [],
+      "solution_line_template": "We convert the time to minutes: {total_time_hours} hours * {minutes_per_hour} minutes/hour = <<{total_time_hours}*{minutes_per_hour}={total_time_minutes}>>{total_time_minutes} minutes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "We have 12 km / 3 km = <<12/3=9>>9. So, the distance covered in 12 km is 9 times greater than 3 km. The time taken will also be 9 times greater.",
+    "L2": "So, 2 hours x 9 = <<2*9=18>>18 hours.",
+    "L3": "We convert the time to minutes: 18 hours * 60 minutes/hour = <<18*60=1080>>1080 minutes.",
+    "FA": "#### 1080"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 3480160389215425716,
+  "model_name": "google_gemini-2.5-flash"
+}

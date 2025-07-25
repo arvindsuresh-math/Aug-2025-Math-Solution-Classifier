@@ -1,0 +1,16 @@
+def solve(
+    history_books: int = 12,  # Nancy shelved 12 history books
+    romance_books: int = 8,   # 8 romance books
+    poetry_books: int = 4,    # 4 poetry books
+    western_novels: int = 5,  # 5 Western novels
+    biography_books: int = 6  # 6 biographies
+):
+    """Index: 97.
+    Returns: the total number of books on the cart when Nancy started shelving."""
+
+    #: L1
+    mystery_books = 21 # eval: 21 = 21
+
+    #: FA
+    answer = history_books + romance_books + poetry_books + mystery_books + western_novels + biography_books
+    return answer # eval: return 56

@@ -1,0 +1,63 @@
+{
+  "index": 1020,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "The difference in writing speed is 10 words/minute - 7 words/minute = <<10-7=3>>3 words/minute",
+    "L2": "Matt can write 3 words/minute x 5 minutes = <<3*5=15>>15 more words with his right hand."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1020.\n    Returns: the number of more words Matt would write with his right hand than with his left in 5 minutes.\n    \"\"\"\n    # L1\n    right_hand_wpm = 10 # 10 words a minute with his right hand\n    left_hand_wpm = 7 # 7 words a minute with his left hand\n    speed_difference = right_hand_wpm - left_hand_wpm\n\n    # L2\n    time_minutes = 5 # in 5 minutes\n    total_difference_words = speed_difference * time_minutes\n\n    # FA\n    answer = total_difference_words\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_difference_words",
+    "operand_to_replace": "time_minutes",
+    "replacement_variable": "left_hand_wpm"
+  },
+  "correct_trace": {
+    "right_hand_wpm": 10,
+    "left_hand_wpm": 7,
+    "speed_difference": 3,
+    "time_minutes": 5,
+    "total_difference_words": 15,
+    "answer": 15
+  },
+  "flawed_trace": {
+    "right_hand_wpm": 10,
+    "left_hand_wpm": 7,
+    "speed_difference": 3,
+    "time_minutes": 5,
+    "total_difference_words": 21,
+    "answer": 21
+  },
+  "correct_value": 15,
+  "flawed_value": 21,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "right_hand_wpm",
+        "left_hand_wpm"
+      ],
+      "WK_inputs": [],
+      "output_variable": "speed_difference",
+      "solution_line_template": "The difference in writing speed is {right_hand_wpm} words/minute - {left_hand_wpm} words/minute = <<{right_hand_wpm}-{left_hand_wpm}={speed_difference}>>{speed_difference} words/minute"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "time_minutes"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_difference_words",
+      "solution_line_template": "Matt can write {speed_difference} words/minute x {time_minutes} minutes = <<{speed_difference}*{time_minutes}={total_difference_words}>>{total_difference_words} more words with his right hand."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The difference in writing speed is 10 words/minute - 7 words/minute = <<10-7=3>>3 words/minute",
+    "L2": "Matt can write 3 words/minute x 7 minutes = <<3*7=21>>21 more words with his right hand.",
+    "FA": "#### 21"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'left_hand_wpm' (7) was used instead of 'time_minutes' (5).",
+  "repro_seed": -2673846877775115190,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,68 @@
+{
+  "index": 3821,
+  "original_solution_mapping": {
+    "FA": "#### 32",
+    "L1": "Let X be the amount Anna had originally. She spent X*1/4 and has X - X*1/4 = $24 left.",
+    "L2": "Combining like terms, we get X*3/4 = $24.",
+    "L3": "Dividing both sides by 3/4, we get X = $32."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3821.\n    Returns: the original amount of money Anna had.\n    \"\"\"\n    # L1\n    spent_fraction = 1/4 # Anna spent 1/4 of her money\n    money_left = 24 # now she has $24 left\n    # The line sets up the equation: original_money - original_money * spent_fraction = money_left\n\n    # L2\n    remaining_fraction = 1 - spent_fraction # Combining like terms (1 - 1/4 = 3/4)\n    # The line simplifies the equation to: original_money * remaining_fraction = money_left\n\n    # L3\n    original_money = money_left / remaining_fraction # Dividing both sides by remaining_fraction\n\n    # FA\n    answer = original_money\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "original_money",
+    "operand_to_replace": "remaining_fraction",
+    "replacement_variable": "money_left"
+  },
+  "correct_trace": {
+    "spent_fraction": 0.25,
+    "money_left": 24,
+    "remaining_fraction": 0.75,
+    "original_money": 32.0,
+    "answer": 32.0
+  },
+  "flawed_trace": {
+    "spent_fraction": 0.25,
+    "money_left": 24,
+    "remaining_fraction": 0.75,
+    "original_money": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 32.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_left",
+      "question_inputs": [
+        "spent_fraction",
+        "money_left"
+      ],
+      "solution_line_template": "Let X be the amount Anna had originally. She spent X*{spent_fraction} and has X - X*{spent_fraction} = ${money_left} left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_fraction",
+      "question_inputs": [],
+      "solution_line_template": "Combining like terms, we get X*{remaining_fraction} = ${money_left}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "original_money",
+      "question_inputs": [],
+      "solution_line_template": "Dividing both sides by {remaining_fraction}, we get X = ${original_money}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Let X be the amount Anna had originally. She spent X*0.25 and has X - X*0.25 = $24 left.",
+    "L2": "Combining like terms, we get X*0.75 = $24.",
+    "L3": "Dividing both sides by 24, we get X = $1.",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'money_left' (value: 24) was used instead of 'remaining_fraction' (value: 0.75).",
+  "repro_seed": -5764789103907163458,
+  "model_name": "google_gemini-2.5-flash"
+}

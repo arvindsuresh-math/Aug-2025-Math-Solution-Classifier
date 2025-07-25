@@ -1,0 +1,78 @@
+{
+  "index": 4613,
+  "original_solution_mapping": {
+    "FA": "#### 480",
+    "L1": "They save 30 students * $2/student/week = $<<30*2=60>>60/week",
+    "L2": "They saved for 2 months which is 2 months * 4 weeks/month = <<2*4=8>>8 weeks",
+    "L3": "So in 2 months, they will have $60/week * 8 weeks = $<<60*8=480>>480"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4613.\n    Returns: the total dollars saved for the trip.\n    \"\"\"\n    # L1\n    num_students = 30 # A class of 30 high school students\n    contribution_per_student_per_week = 2 # $2 every Friday\n    weekly_savings = num_students * contribution_per_student_per_week\n\n    # L2\n    num_months = 2 # in 2 months\n    weeks_per_month = 4 # WK\n    total_weeks = num_months * weeks_per_month\n\n    # L3\n    total_savings = weekly_savings * total_weeks\n\n    # FA\n    answer = total_savings\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_weeks",
+    "operand_to_replace": "weeks_per_month",
+    "replacement_variable": "num_students"
+  },
+  "correct_trace": {
+    "num_students": 30,
+    "contribution_per_student_per_week": 2,
+    "weekly_savings": 60,
+    "num_months": 2,
+    "weeks_per_month": 4,
+    "total_weeks": 8,
+    "total_savings": 480,
+    "answer": 480
+  },
+  "flawed_trace": {
+    "num_students": 30,
+    "contribution_per_student_per_week": 2,
+    "weekly_savings": 60,
+    "num_months": 2,
+    "weeks_per_month": 4,
+    "total_weeks": 60,
+    "total_savings": 3600,
+    "answer": 3600
+  },
+  "correct_value": 8,
+  "flawed_value": 60,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "weekly_savings",
+      "question_inputs": [
+        "num_students",
+        "contribution_per_student_per_week"
+      ],
+      "solution_line_template": "They save {num_students} students * ${contribution_per_student_per_week}/student/week = $<<{num_students}*{contribution_per_student_per_week}={weekly_savings}>>{weekly_savings}/week"
+    },
+    {
+      "WK_inputs": [
+        "weeks_per_month"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_weeks",
+      "question_inputs": [
+        "num_months"
+      ],
+      "solution_line_template": "They saved for {num_months} months which is {num_months} months * {weeks_per_month} weeks/month = <<{num_months}*{weeks_per_month}={total_weeks}>>{total_weeks} weeks"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_savings",
+      "question_inputs": [],
+      "solution_line_template": "So in {num_months} months, they will have ${weekly_savings}/week * {total_weeks} weeks = $<<{weekly_savings}*{total_weeks}={total_savings}>>{total_savings}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "They save 30 students * $2/student/week = $<<30*2=60>>60/week",
+    "L2": "They saved for 2 months which is 2 months * 30 weeks/month = <<2*30=60>>60 weeks",
+    "L3": "So in 2 months, they will have $60/week * 60 weeks = $<<60*60=3600>>3600",
+    "FA": "#### 3600"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_students' (30) was used instead of 'weeks_per_month' (4).",
+  "repro_seed": 1172384790919161638,
+  "model_name": "google_gemini-2.5-flash"
+}

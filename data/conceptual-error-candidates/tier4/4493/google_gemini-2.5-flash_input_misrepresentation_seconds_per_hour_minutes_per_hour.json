@@ -1,0 +1,81 @@
+{
+  "index": 4493,
+  "original_solution_mapping": {
+    "FA": "#### 90",
+    "L1": "First find the number of seconds in an hour: 1 hour * 60 minutes/hour * 60 seconds/minute = <<1*60*60=3600>>3600 seconds/hour.",
+    "L2": "Then divide the total number of seconds per hour by the number of seconds it takes Janet to read one post: 3600 seconds/hour / 10 seconds/post = <<3600/10=360>>360 posts/hour.",
+    "L3": "Then multiply the number of posts she checks per hour by her pay per post to find her hourly pay: $0.25/post * 360 posts/hour = $<<0.25*360=90>>90/hour."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4493.\n    Returns: the amount Janet earns per hour in dollars.\n    \"\"\"\n    # L1\n    hours_in_calculation = 1 # WK\n    minutes_per_hour = 60 # WK\n    seconds_per_minute = 60 # WK\n    seconds_per_hour = hours_in_calculation * minutes_per_hour * seconds_per_minute\n\n    # L2\n    seconds_per_post = 10 # 10 seconds to check a post\n    posts_per_hour = seconds_per_hour / seconds_per_post\n\n    # L3\n    pay_per_post_dollars = 0.25 # 25 cents per post\n    hourly_pay = pay_per_post_dollars * posts_per_hour\n\n    # FA\n    answer = hourly_pay\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "seconds_per_hour",
+    "operand_to_replace": "hours_in_calculation",
+    "replacement_variable": "minutes_per_hour"
+  },
+  "correct_trace": {
+    "hours_in_calculation": 1,
+    "minutes_per_hour": 60,
+    "seconds_per_minute": 60,
+    "seconds_per_hour": 3600,
+    "seconds_per_post": 10,
+    "posts_per_hour": 360.0,
+    "pay_per_post_dollars": 0.25,
+    "hourly_pay": 90.0,
+    "answer": 90.0
+  },
+  "flawed_trace": {
+    "hours_in_calculation": 1,
+    "minutes_per_hour": 60,
+    "seconds_per_minute": 60,
+    "seconds_per_hour": 216000,
+    "seconds_per_post": 10,
+    "posts_per_hour": 21600.0,
+    "pay_per_post_dollars": 0.25,
+    "hourly_pay": 5400.0,
+    "answer": 5400.0
+  },
+  "correct_value": 3600,
+  "flawed_value": 216000,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "hours_in_calculation",
+        "minutes_per_hour",
+        "seconds_per_minute"
+      ],
+      "line_number": "L1",
+      "output_variable": "seconds_per_hour",
+      "question_inputs": [],
+      "solution_line_template": "First find the number of seconds in an hour: {hours_in_calculation} hour * {minutes_per_hour} minutes/hour * {seconds_per_minute} seconds/minute = <<{hours_in_calculation}*{minutes_per_hour}*{seconds_per_minute}={seconds_per_hour}>>{seconds_per_hour} seconds/hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "posts_per_hour",
+      "question_inputs": [
+        "seconds_per_post"
+      ],
+      "solution_line_template": "Then divide the total number of seconds per hour by the number of seconds it takes Janet to read one post: {seconds_per_hour} seconds/hour / {seconds_per_post} seconds/post = <<{seconds_per_hour}/{seconds_per_post}={posts_per_hour}>>{posts_per_hour} posts/hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "hourly_pay",
+      "question_inputs": [
+        "pay_per_post_dollars"
+      ],
+      "solution_line_template": "Then multiply the number of posts she checks per hour by her pay per post to find her hourly pay: ${pay_per_post_dollars}/post * {posts_per_hour} posts/hour = $<<{pay_per_post_dollars}*{posts_per_hour}={hourly_pay}>>{hourly_pay}/hour."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the number of seconds in an hour: 60 hour * 60 minutes/hour * 60 seconds/minute = <<60*60*60=216000>>216000 seconds/hour.",
+    "L2": "Then divide the total number of seconds per hour by the number of seconds it takes Janet to read one post: 216000 seconds/hour / 10 seconds/post = <<216000/10=21600>>21600 posts/hour.",
+    "L3": "Then multiply the number of posts she checks per hour by her pay per post to find her hourly pay: $0.25/post * 21600 posts/hour = $<<0.25*21600=5400>>5400/hour.",
+    "FA": "#### 5400"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'minutes_per_hour' (60) was used instead of 'hours_in_calculation' (1).",
+  "repro_seed": 839043484641968146,
+  "model_name": "google_gemini-2.5-flash"
+}

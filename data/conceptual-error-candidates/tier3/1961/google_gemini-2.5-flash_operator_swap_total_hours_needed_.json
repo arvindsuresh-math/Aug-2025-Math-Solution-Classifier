@@ -1,0 +1,63 @@
+{
+  "index": 1961,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "It will take 4000 candies / 50 candies/hour = <<4000/50=80>>80 hours to make all the candy",
+    "L2": "It will take 80 hours / 10 hours/day = <<80/10=8>>8 days to complete the order"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1961.\n    Returns: the number of days to complete the order.\n    \"\"\"\n    # L1\n    total_candies_needed = 4000 # produce 4000 candies\n    production_rate_per_hour = 50 # produces 50 candies per hour\n    total_hours_needed = total_candies_needed / production_rate_per_hour\n\n    # L2\n    hours_per_day = 10 # works for 10 hours every day\n    total_days_needed = total_hours_needed / hours_per_day\n\n    # FA\n    answer = total_days_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_hours_needed",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x30db3c710>"
+  },
+  "correct_trace": {
+    "total_candies_needed": 4000,
+    "production_rate_per_hour": 50,
+    "total_hours_needed": 80.0,
+    "hours_per_day": 10,
+    "total_days_needed": 8.0,
+    "answer": 8.0
+  },
+  "flawed_trace": {
+    "total_candies_needed": 4000,
+    "production_rate_per_hour": 50,
+    "total_hours_needed": 200000,
+    "hours_per_day": 10,
+    "total_days_needed": 20000.0,
+    "answer": 20000.0
+  },
+  "correct_value": 80.0,
+  "flawed_value": 200000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_hours_needed",
+      "question_inputs": [
+        "total_candies_needed",
+        "production_rate_per_hour"
+      ],
+      "solution_line_template": "It will take {total_candies_needed} candies / {production_rate_per_hour} candies/hour = <<{total_candies_needed}/{production_rate_per_hour}={total_hours_needed}>>{total_hours_needed} hours to make all the candy"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_days_needed",
+      "question_inputs": [
+        "hours_per_day"
+      ],
+      "solution_line_template": "It will take {total_hours_needed} hours / {hours_per_day} hours/day = <<{total_hours_needed}/{hours_per_day}={total_days_needed}>>{total_days_needed} days to complete the order"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "It will take 4000 candies / 50 candies/hour = <<4000/50=200000>>200000 hours to make all the candy",
+    "L2": "It will take 200000 hours / 10 hours/day = <<200000/10=20000>>20000 days to complete the order",
+    "FA": "#### 20000"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 6733907165227149172,
+  "model_name": "google_gemini-2.5-flash"
+}

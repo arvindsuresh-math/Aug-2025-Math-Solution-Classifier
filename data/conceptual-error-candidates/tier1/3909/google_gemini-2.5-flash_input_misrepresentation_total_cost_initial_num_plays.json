@@ -1,0 +1,104 @@
+{
+  "index": 3909,
+  "original_solution_mapping": {
+    "FA": "#### 110",
+    "L1": "He used 5*2=<<5*2=10>>10 wigs per play",
+    "L2": "So in total, he used 10*3=<<10*3=30>>30 wigs",
+    "L3": "They cost 30*5=$<<30*5=150>>150",
+    "L4": "He gets back 10*4=$<<10*4=40>>40 from selling the wigs",
+    "L5": "So he spent 150-40=$<<150-40=110>>110"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3909.\n    Returns: the net amount of money John spent.\n    \"\"\"\n    # L1\n    acts_per_play = 5 # Each play has 5 Acts\n    wigs_per_act = 2 # He wears 2 wigs per act\n    wigs_per_play = acts_per_play * wigs_per_act\n\n    # L2\n    num_plays = 3 # John is performing in 3 plays\n    total_wigs_initial = wigs_per_play * num_plays\n\n    # L3\n    cost_per_wig = 5 # Each wig cost $5\n    total_cost_initial = total_wigs_initial * cost_per_wig\n\n    # L4\n    sale_price_per_wig = 4 # sells all of the wigs for that play for $4\n    money_back_from_sale = wigs_per_play * sale_price_per_wig\n\n    # L5\n    net_spent = total_cost_initial - money_back_from_sale\n\n    # FA\n    answer = net_spent\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cost_initial",
+    "operand_to_replace": "cost_per_wig",
+    "replacement_variable": "num_plays"
+  },
+  "correct_trace": {
+    "acts_per_play": 5,
+    "wigs_per_act": 2,
+    "wigs_per_play": 10,
+    "num_plays": 3,
+    "total_wigs_initial": 30,
+    "cost_per_wig": 5,
+    "total_cost_initial": 150,
+    "sale_price_per_wig": 4,
+    "money_back_from_sale": 40,
+    "net_spent": 110,
+    "answer": 110
+  },
+  "flawed_trace": {
+    "acts_per_play": 5,
+    "wigs_per_act": 2,
+    "wigs_per_play": 10,
+    "num_plays": 3,
+    "total_wigs_initial": 30,
+    "cost_per_wig": 5,
+    "total_cost_initial": 90,
+    "sale_price_per_wig": 4,
+    "money_back_from_sale": 40,
+    "net_spent": 50,
+    "answer": 50
+  },
+  "correct_value": 150,
+  "flawed_value": 90,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "wigs_per_play",
+      "question_inputs": [
+        "acts_per_play",
+        "wigs_per_act"
+      ],
+      "solution_line_template": "He used {acts_per_play}*{wigs_per_act}=<<{acts_per_play}*{wigs_per_act}={wigs_per_play}>>{wigs_per_play} wigs per play"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_wigs_initial",
+      "question_inputs": [
+        "num_plays"
+      ],
+      "solution_line_template": "So in total, he used {wigs_per_play}*{num_plays}=<<{wigs_per_play}*{num_plays}={total_wigs_initial}>>{total_wigs_initial} wigs"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost_initial",
+      "question_inputs": [
+        "cost_per_wig"
+      ],
+      "solution_line_template": "They cost {total_wigs_initial}*{cost_per_wig}=$<<{total_wigs_initial}*{cost_per_wig}={total_cost_initial}>>{total_cost_initial}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "money_back_from_sale",
+      "question_inputs": [
+        "sale_price_per_wig"
+      ],
+      "solution_line_template": "He gets back {wigs_per_play}*{sale_price_per_wig}=$<<{wigs_per_play}*{sale_price_per_wig}={money_back_from_sale}>>{money_back_from_sale} from selling the wigs"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "net_spent",
+      "question_inputs": [],
+      "solution_line_template": "So he spent {total_cost_initial}-{money_back_from_sale}=$<<{total_cost_initial}-{money_back_from_sale}={net_spent}>>{net_spent}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He used 5*2=<<5*2=10>>10 wigs per play",
+    "L2": "So in total, he used 10*3=<<10*3=30>>30 wigs",
+    "L3": "They cost 30*3=$<<30*3=90>>90",
+    "L4": "He gets back 10*4=$<<10*4=40>>40 from selling the wigs",
+    "L5": "So he spent 90-40=$<<90-40=50>>50",
+    "FA": "#### 50"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'num_plays' (3) was used instead of 'cost_per_wig' (5).",
+  "repro_seed": -1113364564558121125,
+  "model_name": "google_gemini-2.5-flash"
+}

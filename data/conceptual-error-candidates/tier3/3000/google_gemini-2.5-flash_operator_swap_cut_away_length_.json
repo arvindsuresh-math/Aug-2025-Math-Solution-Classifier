@@ -1,0 +1,59 @@
+{
+  "index": 3000,
+  "original_solution_mapping": {
+    "FA": "#### 14",
+    "L1": "The cut-away part of the pole is 30/100 * 20 = <<30/100*20=6>>6 meters long.",
+    "L2": "So the pole is left at the length of 20 - 6 = <<20-6=14>>14 meters."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3000.\n    Returns: the remaining length of the pole.\n    \"\"\"\n    # L1\n    shorter_percentage = Fraction(30, 100) # 30% shorter\n    original_length = 20 # 20 meters long\n    cut_away_length = shorter_percentage * original_length\n\n    # L2\n    remaining_length = original_length - cut_away_length\n\n    # FA\n    answer = remaining_length\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "cut_away_length",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x30d5a3c50>"
+  },
+  "correct_trace": {
+    "shorter_percentage": "3/10",
+    "original_length": 20,
+    "cut_away_length": "6",
+    "remaining_length": "14",
+    "answer": "14"
+  },
+  "flawed_trace": {
+    "shorter_percentage": "3/10",
+    "original_length": 20,
+    "cut_away_length": "3/200",
+    "remaining_length": "3997/200",
+    "answer": "3997/200"
+  },
+  "correct_value": "6",
+  "flawed_value": "3/200",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cut_away_length",
+      "question_inputs": [
+        "shorter_percentage",
+        "original_length"
+      ],
+      "solution_line_template": "The cut-away part of the pole is {shorter_percentage} * {original_length} = <<{shorter_percentage}*{original_length}={cut_away_length}>>{cut_away_length} meters long."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_length",
+      "question_inputs": [],
+      "solution_line_template": "So the pole is left at the length of {original_length} - {cut_away_length} = <<{original_length}-{cut_away_length}={remaining_length}>>{remaining_length} meters."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The cut-away part of the pole is 30/100 * 20 = <<30/100*20=3/200>>3/200 meters long.",
+    "L2": "So the pole is left at the length of 20 - 3/200 = <<20-3/200=3997/200>>3997/200 meters.",
+    "FA": "#### 3997/200"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 3895784013161686061,
+  "model_name": "google_gemini-2.5-flash"
+}

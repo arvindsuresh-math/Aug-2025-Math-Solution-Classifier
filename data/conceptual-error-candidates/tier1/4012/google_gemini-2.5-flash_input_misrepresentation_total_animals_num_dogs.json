@@ -1,0 +1,63 @@
+{
+  "index": 4012,
+  "original_solution_mapping": {
+    "FA": "#### 65",
+    "L1": "Michael has 5 animals because 2 + 3 = <<2+3=5>>5",
+    "L2": "Michael has to pay $65 because 5 x $13 = $<<5*13=65>>65"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4012.\n    Returns: the total amount Michael has to pay.\n    \"\"\"\n    # L1\n    num_cats = 2 # 2 cats\n    num_dogs = 3 # 3 dogs\n    total_animals = num_cats + num_dogs\n\n    # L2\n    cost_per_animal_per_night = 13 # $13 a night per animal\n    total_cost = total_animals * cost_per_animal_per_night\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_animals",
+    "operand_to_replace": "num_cats",
+    "replacement_variable": "num_dogs"
+  },
+  "correct_trace": {
+    "num_cats": 2,
+    "num_dogs": 3,
+    "total_animals": 5,
+    "cost_per_animal_per_night": 13,
+    "total_cost": 65,
+    "answer": 65
+  },
+  "flawed_trace": {
+    "num_cats": 2,
+    "num_dogs": 3,
+    "total_animals": 6,
+    "cost_per_animal_per_night": 13,
+    "total_cost": 78,
+    "answer": 78
+  },
+  "correct_value": 5,
+  "flawed_value": 6,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_animals",
+      "question_inputs": [
+        "num_cats",
+        "num_dogs"
+      ],
+      "solution_line_template": "Michael has {total_animals} animals because {num_cats} + {num_dogs} = <<{num_cats}+{num_dogs}={total_animals}>>{total_animals}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "cost_per_animal_per_night"
+      ],
+      "solution_line_template": "Michael has to pay ${total_cost} because {total_animals} x ${cost_per_animal_per_night} = $<<{total_animals}*{cost_per_animal_per_night}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Michael has 6 animals because 3 + 3 = <<3+3=6>>6",
+    "L2": "Michael has to pay $78 because 6 x $13 = $<<6*13=78>>78",
+    "FA": "#### 78"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'num_dogs' (3) was used instead of 'num_cats' (2).",
+  "repro_seed": -7290125221701044571,
+  "model_name": "google_gemini-2.5-flash"
+}

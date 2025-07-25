@@ -1,0 +1,85 @@
+{
+  "index": 3719,
+  "original_solution_mapping": {
+    "FA": "#### 45",
+    "L1": "Georgia's test started with 75 problems and then Georgia completed 10, 75 - 10 = <<75-10=65>>65 problems.",
+    "L2": "After 20 minutes she completes twice as many problems, 10 x 2 = <<10*2=20>>20.",
+    "L3": "With 40 minutes left she has completed 10 + 20 problems = <<10+20=30>>30 problems.",
+    "L4": "From the original 75 problems she has solved 30, 75 - 30 = <<75-30=45>>45 problems she has left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3719.\n    Returns: the number of problems Georgia has left to solve.\n    \"\"\"\n    # L1\n    total_problems = 75 # 75 problems on it\n    initial_completed = 10 # completed 10 problems\n    remaining_after_initial = total_problems - initial_completed\n\n    # L2\n    multiplier_twice = 2 # twice as many problems\n    completed_second_batch = initial_completed * multiplier_twice\n\n    # L3\n    total_completed = initial_completed + completed_second_batch\n\n    # L4\n    problems_left = total_problems - total_completed\n\n    # FA\n    answer = problems_left\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_completed",
+    "operand_to_replace": "initial_completed",
+    "replacement_variable": "multiplier_twice"
+  },
+  "correct_trace": {
+    "total_problems": 75,
+    "initial_completed": 10,
+    "remaining_after_initial": 65,
+    "multiplier_twice": 2,
+    "completed_second_batch": 20,
+    "total_completed": 30,
+    "problems_left": 45,
+    "answer": 45
+  },
+  "flawed_trace": {
+    "total_problems": 75,
+    "initial_completed": 10,
+    "remaining_after_initial": 65,
+    "multiplier_twice": 2,
+    "completed_second_batch": 20,
+    "total_completed": 22,
+    "problems_left": 53,
+    "answer": 53
+  },
+  "correct_value": 30,
+  "flawed_value": 22,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "remaining_after_initial",
+      "question_inputs": [
+        "total_problems",
+        "initial_completed"
+      ],
+      "solution_line_template": "Georgia's test started with {total_problems} problems and then Georgia completed {initial_completed}, {total_problems} - {initial_completed} = <<{total_problems}-{initial_completed}={remaining_after_initial}>>{remaining_after_initial} problems."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "completed_second_batch",
+      "question_inputs": [
+        "multiplier_twice"
+      ],
+      "solution_line_template": "After 20 minutes she completes twice as many problems, {initial_completed} x {multiplier_twice} = <<{initial_completed}*{multiplier_twice}={completed_second_batch}>>{completed_second_batch}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_completed",
+      "question_inputs": [],
+      "solution_line_template": "With 40 minutes left she has completed {initial_completed} + {completed_second_batch} problems = <<{initial_completed}+{completed_second_batch}={total_completed}>>{total_completed} problems."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "problems_left",
+      "question_inputs": [],
+      "solution_line_template": "From the original {total_problems} problems she has solved {total_completed}, {total_problems} - {total_completed} = <<{total_problems}-{total_completed}={problems_left}>>{problems_left} problems she has left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Georgia's test started with 75 problems and then Georgia completed 10, 75 - 10 = <<75-10=65>>65 problems.",
+    "L2": "After 20 minutes she completes twice as many problems, 10 x 2 = <<10*2=20>>20.",
+    "L3": "With 40 minutes left she has completed 2 + 20 problems = <<2+20=22>>22 problems.",
+    "L4": "From the original 75 problems she has solved 22, 75 - 22 = <<75-22=53>>53 problems she has left.",
+    "FA": "#### 53"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'multiplier_twice' (2) was used instead of 'initial_completed' (10).",
+  "repro_seed": 8490514124324292774,
+  "model_name": "google_gemini-2.5-flash"
+}

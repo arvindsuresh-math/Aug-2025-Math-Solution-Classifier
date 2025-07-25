@@ -1,0 +1,76 @@
+{
+  "index": 1661,
+  "original_solution_mapping": {
+    "FA": "#### 2000",
+    "L1": "They'll celebrate their 20th wedding anniversary in 2025 which means they got married in 2025-20 = <<2025-20=2005>>2005",
+    "L2": "They started dating 3 years before they got married in 2005 which means they started dating in 2005-3 = 2002",
+    "L3": "And they met 2 years before they started dating which means they met in 2002-2 = 2000"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1661.\n    Returns: the year Tim and Donna met.\n    \"\"\"\n    # L1\n    anniversary_year = 2025 # 2025\n    anniversary_duration = 20 # 20th wedding anniversary\n    marriage_year = anniversary_year - anniversary_duration\n\n    # L2\n    dating_before_marriage_years = 3 # 3 years before they got married\n    dating_start_year = marriage_year - dating_before_marriage_years\n\n    # L3\n    met_before_dating_years = 2 # 2 years before that\n    meeting_year = dating_start_year - met_before_dating_years\n\n    # FA\n    answer = meeting_year\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "meeting_year",
+    "replacement_variable": "marriage_year"
+  },
+  "correct_trace": {
+    "anniversary_year": 2025,
+    "anniversary_duration": 20,
+    "marriage_year": 2005,
+    "dating_before_marriage_years": 3,
+    "dating_start_year": 2002,
+    "met_before_dating_years": 2,
+    "meeting_year": 2000,
+    "answer": 2000
+  },
+  "flawed_trace": {
+    "anniversary_year": 2025,
+    "anniversary_duration": 20,
+    "marriage_year": 2005,
+    "dating_before_marriage_years": 3,
+    "dating_start_year": 2002,
+    "met_before_dating_years": 2,
+    "meeting_year": 2000,
+    "answer": 2005
+  },
+  "correct_value": 2000,
+  "flawed_value": 2005,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "anniversary_year",
+        "anniversary_duration"
+      ],
+      "WK_inputs": [],
+      "output_variable": "marriage_year",
+      "solution_line_template": "They'll celebrate their {anniversary_duration}th wedding anniversary in {anniversary_year} which means they got married in {anniversary_year}-{anniversary_duration} = <<{anniversary_year}-{anniversary_duration}={marriage_year}>>{marriage_year}"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "dating_before_marriage_years"
+      ],
+      "WK_inputs": [],
+      "output_variable": "dating_start_year",
+      "solution_line_template": "They started dating {dating_before_marriage_years} years before they got married in {marriage_year} which means they started dating in {marriage_year}-{dating_before_marriage_years} = {dating_start_year}"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "met_before_dating_years"
+      ],
+      "WK_inputs": [],
+      "output_variable": "meeting_year",
+      "solution_line_template": "And they met {met_before_dating_years} years before they started dating which means they met in {dating_start_year}-{met_before_dating_years} = {meeting_year}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "They'll celebrate their 20th wedding anniversary in 2025 which means they got married in 2025-20 = <<2025-20=2005>>2005",
+    "FA": "#### 2005"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'marriage_year' (value: 2005) was reported instead of 'meeting_year' (value: 2000).",
+  "repro_seed": 2450256849056614479,
+  "model_name": "google_gemini-2.5-flash"
+}

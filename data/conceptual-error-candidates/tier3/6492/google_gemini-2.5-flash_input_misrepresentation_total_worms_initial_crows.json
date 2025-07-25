@@ -1,0 +1,78 @@
+{
+  "index": 6492,
+  "original_solution_mapping": {
+    "FA": "#### 100",
+    "L1": "If 3 crows eat 30 worms in one hour, then each crow eats 30/3=<<30/3=10>>10 worms per hour.",
+    "L2": "5 crows will eat 5*10=<<5*10=50>>50 worms per hour.",
+    "L3": "Over two hours, 5 crows will eat 2*50=100 worms."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6492.\n    Returns: the total number of worms 5 crows will eat in 2 hours.\n    \"\"\"\n    # L1\n    initial_worms = 30 # 30 worms\n    initial_crows = 3 # 3 crows\n    worms_per_crow_per_hour = initial_worms / initial_crows\n\n    # L2\n    new_crows = 5 # 5 crows\n    worms_per_hour_for_new_crows = new_crows * worms_per_crow_per_hour\n\n    # L3\n    hours = 2 # 2 hours\n    total_worms = hours * worms_per_hour_for_new_crows\n\n    # FA\n    answer = total_worms\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_worms",
+    "operand_to_replace": "hours",
+    "replacement_variable": "initial_crows"
+  },
+  "correct_trace": {
+    "initial_worms": 30,
+    "initial_crows": 3,
+    "worms_per_crow_per_hour": 10.0,
+    "new_crows": 5,
+    "worms_per_hour_for_new_crows": 50.0,
+    "hours": 2,
+    "total_worms": 100.0,
+    "answer": 100.0
+  },
+  "flawed_trace": {
+    "initial_worms": 30,
+    "initial_crows": 3,
+    "worms_per_crow_per_hour": 10.0,
+    "new_crows": 5,
+    "worms_per_hour_for_new_crows": 50.0,
+    "hours": 2,
+    "total_worms": 150.0,
+    "answer": 150.0
+  },
+  "correct_value": 100.0,
+  "flawed_value": 150.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "worms_per_crow_per_hour",
+      "question_inputs": [
+        "initial_worms",
+        "initial_crows"
+      ],
+      "solution_line_template": "If {initial_crows} crows eat {initial_worms} worms in one hour, then each crow eats {initial_worms}/{initial_crows}=<<{initial_worms}/{initial_crows}={worms_per_crow_per_hour}>>{worms_per_crow_per_hour} worms per hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "worms_per_hour_for_new_crows",
+      "question_inputs": [
+        "new_crows"
+      ],
+      "solution_line_template": "{new_crows} crows will eat {new_crows}*{worms_per_crow_per_hour}=<<{new_crows}*{worms_per_crow_per_hour}={worms_per_hour_for_new_crows}>>{worms_per_hour_for_new_crows} worms per hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_worms",
+      "question_inputs": [
+        "hours"
+      ],
+      "solution_line_template": "Over {hours} hours, 5 crows will eat {hours}*{worms_per_hour_for_new_crows}={total_worms} worms."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If 3 crows eat 30 worms in one hour, then each crow eats 30/3=<<30/3=10>>10 worms per hour.",
+    "L2": "5 crows will eat 5*10=<<5*10=50>>50 worms per hour.",
+    "L3": "Over 3 hours, 5 crows will eat 3*50=150 worms.",
+    "FA": "#### 150"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'initial_crows' (3) was used instead of 'hours' (2).",
+  "repro_seed": 332987858497868045,
+  "model_name": "google_gemini-2.5-flash"
+}

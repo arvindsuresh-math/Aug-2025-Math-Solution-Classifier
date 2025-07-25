@@ -1,0 +1,78 @@
+{
+  "index": 4179,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "There were 12.6 - 4.6 = <<12.6-4.6=8>>8 gigabytes used after deleting some files.",
+    "L2": "Then, the used space went up to 8 + 2 = <<8+2=10>>10 gigabytes after storing other files.",
+    "L3": "Thus, the new 20 gigabytes external drive will have 20 - 10 = <<20-10=10>>10 gigabytes free."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4179.\n    Returns: the number of free gigabytes the new external drive will have.\n    \"\"\"\n    # L1\n    initial_used_gb = 12.6 # 12.6 gigabytes used\n    deleted_folder_gb = 4.6 # delete a folder of size 4.6 gigabytes\n    used_after_delete_gb = initial_used_gb - deleted_folder_gb\n\n    # L2\n    new_files_gb = 2 # new files of 2 gigabytes\n    final_used_gb = used_after_delete_gb + new_files_gb\n\n    # L3\n    new_drive_capacity_gb = 20 # new external drive of size 20 gigabytes\n    free_space_new_drive_gb = new_drive_capacity_gb - final_used_gb\n\n    # FA\n    answer = free_space_new_drive_gb\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "final_used_gb",
+    "operand_to_replace": "new_files_gb",
+    "replacement_variable": "used_after_delete_gb"
+  },
+  "correct_trace": {
+    "initial_used_gb": 12.6,
+    "deleted_folder_gb": 4.6,
+    "used_after_delete_gb": 8.0,
+    "new_files_gb": 2,
+    "final_used_gb": 10.0,
+    "new_drive_capacity_gb": 20,
+    "free_space_new_drive_gb": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "initial_used_gb": 12.6,
+    "deleted_folder_gb": 4.6,
+    "used_after_delete_gb": 8.0,
+    "new_files_gb": 2,
+    "final_used_gb": 16.0,
+    "new_drive_capacity_gb": 20,
+    "free_space_new_drive_gb": 4.0,
+    "answer": 4.0
+  },
+  "correct_value": 10.0,
+  "flawed_value": 16.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "used_after_delete_gb",
+      "question_inputs": [
+        "initial_used_gb",
+        "deleted_folder_gb"
+      ],
+      "solution_line_template": "There were {initial_used_gb} - {deleted_folder_gb} = <<{initial_used_gb}-{deleted_folder_gb}={used_after_delete_gb}>>{used_after_delete_gb} gigabytes used after deleting some files."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "final_used_gb",
+      "question_inputs": [
+        "new_files_gb"
+      ],
+      "solution_line_template": "Then, the used space went up to {used_after_delete_gb} + {new_files_gb} = <<{used_after_delete_gb}+{new_files_gb}={final_used_gb}>>{final_used_gb} gigabytes after storing other files."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "free_space_new_drive_gb",
+      "question_inputs": [
+        "new_drive_capacity_gb"
+      ],
+      "solution_line_template": "Thus, the new {new_drive_capacity_gb} gigabytes external drive will have {new_drive_capacity_gb} - {final_used_gb} = <<{new_drive_capacity_gb}-{final_used_gb}={free_space_new_drive_gb}>>{free_space_new_drive_gb} gigabytes free."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There were 12.6 - 4.6 = <<12.6-4.6=8>>8 gigabytes used after deleting some files.",
+    "L2": "Then, the used space went up to 8 + 8 = <<8+8=16>>16 gigabytes after storing other files.",
+    "L3": "Thus, the new 20 gigabytes external drive will have 20 - 16 = <<20-16=4>>4 gigabytes free.",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'used_after_delete_gb' (8.0) was used instead of 'new_files_gb' (2).",
+  "repro_seed": -5173606665107562631,
+  "model_name": "google_gemini-2.5-flash"
+}

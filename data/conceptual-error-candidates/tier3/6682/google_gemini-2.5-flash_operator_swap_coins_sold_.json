@@ -1,0 +1,63 @@
+{
+  "index": 6682,
+  "original_solution_mapping": {
+    "FA": "#### 80",
+    "L1": "Carl's gift added 35 gold coins to Beth's 125-coin set, resulting in 135+25=160 gold coins.",
+    "L2": "Beth chooses to sell half, or 160/2=<<160/2=80>>80 of her gold coins."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6682.\n    Returns: the number of coins Beth sold.\n    \"\"\"\n    # L1\n    initial_coins_in_solution = 135 # Value from solution line L1's calculation\n    gift_coins_in_solution = 25 # Value from solution line L1's calculation\n    total_coins_after_gift = initial_coins_in_solution + gift_coins_in_solution\n\n    # L2\n    sell_divisor = 2 # sell half of her coins\n    coins_sold = total_coins_after_gift / sell_divisor\n\n    # FA\n    answer = coins_sold\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "coins_sold",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x1720f5350>"
+  },
+  "correct_trace": {
+    "initial_coins_in_solution": 135,
+    "gift_coins_in_solution": 25,
+    "total_coins_after_gift": 160,
+    "sell_divisor": 2,
+    "coins_sold": 80.0,
+    "answer": 80.0
+  },
+  "flawed_trace": {
+    "initial_coins_in_solution": 135,
+    "gift_coins_in_solution": 25,
+    "total_coins_after_gift": 160,
+    "sell_divisor": 2,
+    "coins_sold": 158,
+    "answer": 158
+  },
+  "correct_value": 80.0,
+  "flawed_value": 158,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_coins_after_gift",
+      "question_inputs": [
+        "initial_coins_in_solution",
+        "gift_coins_in_solution"
+      ],
+      "solution_line_template": "Carl's gift added 35 gold coins to Beth's 125-coin set, resulting in {initial_coins_in_solution}+{gift_coins_in_solution}={total_coins_after_gift} gold coins."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "coins_sold",
+      "question_inputs": [
+        "sell_divisor"
+      ],
+      "solution_line_template": "Beth chooses to sell half, or {total_coins_after_gift}/{sell_divisor}=<<{total_coins_after_gift}/{sell_divisor}={coins_sold}>>{coins_sold} of her gold coins."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Carl's gift added 35 gold coins to Beth's 125-coin set, resulting in 135+25=160 gold coins.",
+    "L2": "Beth chooses to sell half, or 160/2=<<160/2=158>>158 of her gold coins.",
+    "FA": "#### 158"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": -8486688969615099405,
+  "model_name": "google_gemini-2.5-flash"
+}

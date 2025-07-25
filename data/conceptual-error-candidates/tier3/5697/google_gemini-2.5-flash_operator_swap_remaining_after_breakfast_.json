@@ -1,0 +1,74 @@
+{
+  "index": 5697,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "For breakfast, the family ate 12 / 3 = <<12/3=4>>4 slices of bread",
+    "L2": "After breakfast, the family has 12 - 4 = <<12-4=8>>8 slices of bread remaining.",
+    "L3": "After Neeley's lunch, there are 8 - 2 = <<8-2=6>>6 slices of bread remaining."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5697.\n    Returns: the number of slices of bread remaining.\n    \"\"\"\n    # L1\n    total_slices = 12 # sliced it into 12 pieces\n    breakfast_divisor = 3 # a third of the bread slices\n    eaten_for_breakfast = total_slices / breakfast_divisor\n\n    # L2\n    remaining_after_breakfast = total_slices - eaten_for_breakfast\n\n    # L3\n    lunch_slices = 2 # used 2 bread slices\n    remaining_after_lunch = remaining_after_breakfast - lunch_slices\n\n    # FA\n    answer = remaining_after_lunch\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "remaining_after_breakfast",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x177f01b10>"
+  },
+  "correct_trace": {
+    "total_slices": 12,
+    "breakfast_divisor": 3,
+    "eaten_for_breakfast": 4.0,
+    "remaining_after_breakfast": 8.0,
+    "lunch_slices": 2,
+    "remaining_after_lunch": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "total_slices": 12,
+    "breakfast_divisor": 3,
+    "eaten_for_breakfast": 4.0,
+    "remaining_after_breakfast": 16.0,
+    "lunch_slices": 2,
+    "remaining_after_lunch": 14.0,
+    "answer": 14.0
+  },
+  "correct_value": 8.0,
+  "flawed_value": 16.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "eaten_for_breakfast",
+      "question_inputs": [
+        "total_slices",
+        "breakfast_divisor"
+      ],
+      "solution_line_template": "For breakfast, the family ate {total_slices} / {breakfast_divisor} = <<{total_slices}/{breakfast_divisor}={eaten_for_breakfast}>>{eaten_for_breakfast} slices of bread"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_after_breakfast",
+      "question_inputs": [],
+      "solution_line_template": "After breakfast, the family has {total_slices} - {eaten_for_breakfast} = <<{total_slices}-{eaten_for_breakfast}={remaining_after_breakfast}>>{remaining_after_breakfast} slices of bread remaining."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_after_lunch",
+      "question_inputs": [
+        "lunch_slices"
+      ],
+      "solution_line_template": "After Neeley's lunch, there are {remaining_after_breakfast} - {lunch_slices} = <<{remaining_after_breakfast}-{lunch_slices}={remaining_after_lunch}>>{remaining_after_lunch} slices of bread remaining."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "For breakfast, the family ate 12 / 3 = <<12/3=4>>4 slices of bread",
+    "L2": "After breakfast, the family has 12 - 4 = <<12-4=16>>16 slices of bread remaining.",
+    "L3": "After Neeley's lunch, there are 16 - 2 = <<16-2=14>>14 slices of bread remaining.",
+    "FA": "#### 14"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 4830745945646571183,
+  "model_name": "google_gemini-2.5-flash"
+}

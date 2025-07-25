@@ -1,0 +1,63 @@
+{
+  "index": 1341,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "Sasha completes 15 questions/hour * 2 hours = <<15*2=30>>30 questions.",
+    "L2": "This means there are still 60 questions - 30 questions = <<60-30=30>>30 questions left to complete."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1341.\n    Returns: the number of questions Sasha still needs to complete.\n    \"\"\"\n    # L1\n    questions_per_hour = 15 # 15 questions an hour\n    hours_worked = 2 # works for 2 hours\n    questions_completed = questions_per_hour * hours_worked\n\n    # L2\n    total_questions = 60 # 60 questions to complete\n    questions_remaining = total_questions - questions_completed\n\n    # FA\n    answer = questions_remaining\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "questions_completed",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x16994ad90>"
+  },
+  "correct_trace": {
+    "questions_per_hour": 15,
+    "hours_worked": 2,
+    "questions_completed": 30,
+    "total_questions": 60,
+    "questions_remaining": 30,
+    "answer": 30
+  },
+  "flawed_trace": {
+    "questions_per_hour": 15,
+    "hours_worked": 2,
+    "questions_completed": 17,
+    "total_questions": 60,
+    "questions_remaining": 43,
+    "answer": 43
+  },
+  "correct_value": 30,
+  "flawed_value": 17,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "questions_per_hour",
+        "hours_worked"
+      ],
+      "WK_inputs": [],
+      "output_variable": "questions_completed",
+      "solution_line_template": "Sasha completes {questions_per_hour} questions/hour * {hours_worked} hours = <<{questions_per_hour}*{hours_worked}={questions_completed}>>{questions_completed} questions."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "total_questions"
+      ],
+      "WK_inputs": [],
+      "output_variable": "questions_remaining",
+      "solution_line_template": "This means there are still {total_questions} questions \u2013 {questions_completed} questions = <<{total_questions}-{questions_completed}={questions_remaining}>>{questions_remaining} questions left to complete."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Sasha completes 15 questions/hour * 2 hours = <<15*2=17>>17 questions.",
+    "L2": "This means there are still 60 questions \u2013 17 questions = <<60-17=43>>43 questions left to complete.",
+    "FA": "#### 43"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -3982717523013725164,
+  "model_name": "google_gemini-2.5-flash"
+}

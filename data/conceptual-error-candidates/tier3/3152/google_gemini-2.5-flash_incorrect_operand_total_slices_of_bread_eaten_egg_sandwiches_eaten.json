@@ -1,0 +1,92 @@
+{
+  "index": 3152,
+  "original_solution_mapping": {
+    "FA": "#### 26",
+    "L1": "The guests ate 28 / 4 = <<28/4=7>>7 cucumber sandwiches.",
+    "L2": "The guests ate 12 / 2 = <<12/2=6>>6 egg sandwiches.",
+    "L3": "They ate a total of 7 + 6 = <<7+6=13>>13 sandwiches.",
+    "L4": "They ate a total of 13 x 2 = <<13*2=26>>26 slices of bread."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3152.\n    Returns: the total number of slices of bread eaten by the guests.\n    \"\"\"\n    # L1\n    triangles_eaten = 28 # guests ate 28 triangles\n    triangles_per_cucumber_sandwich = 4 # Each cucumber sandwich was cut into 4 triangles\n    cucumber_sandwiches_eaten = triangles_eaten / triangles_per_cucumber_sandwich\n\n    # L2\n    rectangles_eaten = 12 # guests ate 12 rectangles\n    rectangles_per_egg_sandwich = 2 # Each egg sandwich was cut into 2 rectangles\n    egg_sandwiches_eaten = rectangles_eaten / rectangles_per_egg_sandwich\n\n    # L3\n    total_sandwiches_eaten = cucumber_sandwiches_eaten + egg_sandwiches_eaten\n\n    # L4\n    slices_per_sandwich = 2 # WK\n    total_slices_of_bread_eaten = total_sandwiches_eaten * slices_per_sandwich\n\n    # FA\n    answer = total_slices_of_bread_eaten\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_slices_of_bread_eaten",
+    "operand_to_replace": "total_sandwiches_eaten",
+    "replacement_variable": "egg_sandwiches_eaten"
+  },
+  "correct_trace": {
+    "triangles_eaten": 28,
+    "triangles_per_cucumber_sandwich": 4,
+    "cucumber_sandwiches_eaten": 7.0,
+    "rectangles_eaten": 12,
+    "rectangles_per_egg_sandwich": 2,
+    "egg_sandwiches_eaten": 6.0,
+    "total_sandwiches_eaten": 13.0,
+    "slices_per_sandwich": 2,
+    "total_slices_of_bread_eaten": 26.0,
+    "answer": 26.0
+  },
+  "flawed_trace": {
+    "triangles_eaten": 28,
+    "triangles_per_cucumber_sandwich": 4,
+    "cucumber_sandwiches_eaten": 7.0,
+    "rectangles_eaten": 12,
+    "rectangles_per_egg_sandwich": 2,
+    "egg_sandwiches_eaten": 6.0,
+    "total_sandwiches_eaten": 13.0,
+    "slices_per_sandwich": 2,
+    "total_slices_of_bread_eaten": 12.0,
+    "answer": 12.0
+  },
+  "correct_value": 26.0,
+  "flawed_value": 12.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cucumber_sandwiches_eaten",
+      "question_inputs": [
+        "triangles_eaten",
+        "triangles_per_cucumber_sandwich"
+      ],
+      "solution_line_template": "The guests ate {triangles_eaten} / {triangles_per_cucumber_sandwich} = <<{triangles_eaten}/{triangles_per_cucumber_sandwich}={cucumber_sandwiches_eaten}>>{cucumber_sandwiches_eaten} cucumber sandwiches."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "egg_sandwiches_eaten",
+      "question_inputs": [
+        "rectangles_eaten",
+        "rectangles_per_egg_sandwich"
+      ],
+      "solution_line_template": "The guests ate {rectangles_eaten} / {rectangles_per_egg_sandwich} = <<{rectangles_eaten}/{rectangles_per_egg_sandwich}={egg_sandwiches_eaten}>>{egg_sandwiches_eaten} egg sandwiches."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_sandwiches_eaten",
+      "question_inputs": [],
+      "solution_line_template": "They ate a total of {cucumber_sandwiches_eaten} + {egg_sandwiches_eaten} = <<{cucumber_sandwiches_eaten}+{egg_sandwiches_eaten}={total_sandwiches_eaten}>>{total_sandwiches_eaten} sandwiches."
+    },
+    {
+      "WK_inputs": [
+        "slices_per_sandwich"
+      ],
+      "line_number": "L4",
+      "output_variable": "total_slices_of_bread_eaten",
+      "question_inputs": [],
+      "solution_line_template": "They ate a total of {total_sandwiches_eaten} x {slices_per_sandwich} = <<{total_sandwiches_eaten}*{slices_per_sandwich}={total_slices_of_bread_eaten}>>{total_slices_of_bread_eaten} slices of bread."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The guests ate 28 / 4 = <<28/4=7>>7 cucumber sandwiches.",
+    "L2": "The guests ate 12 / 2 = <<12/2=6>>6 egg sandwiches.",
+    "L3": "They ate a total of 7 + 6 = <<7+6=13>>13 sandwiches.",
+    "L4": "They ate a total of 6 x 2 = <<6*2=12>>12 slices of bread.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'egg_sandwiches_eaten' (value: 6.0) was used instead of 'total_sandwiches_eaten' (value: 13.0).",
+  "repro_seed": 9078579507057298264,
+  "model_name": "google_gemini-2.5-flash"
+}

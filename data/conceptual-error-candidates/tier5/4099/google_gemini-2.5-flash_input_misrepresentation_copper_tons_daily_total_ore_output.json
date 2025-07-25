@@ -1,0 +1,83 @@
+{
+  "index": 4099,
+  "original_solution_mapping": {
+    "FA": "#### 360",
+    "L1": "Let R be the total ore output of the company.",
+    "L2": "Of Big Dig's output, 100 - 10 - 60 = <<100-10-60=30>>30% is nickel.",
+    "L3": "Since 720 is 60% of 100% of their output, 720 / R = 60 / 100.",
+    "L4": "Thus, Big Dig mines R = 100 * 720 / 60 = <<100*720/60=1200>>1200 tons of ore daily.",
+    "L5": "Therefore, Big Dig mines 1200 * 30 / 100 = <<1200*30/100=360>>360 tons of copper daily."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4099.\n    Returns: the number of tons of copper Big Dig Mining Company mines daily.\n    \"\"\"\n    # L2\n    total_percentage = 100 # WK\n    nickel_percentage_q = 10 # 10% of their output is nickel\n    iron_percentage_q = 60 # 60% is iron\n    copper_percentage = total_percentage - nickel_percentage_q - iron_percentage_q\n\n    # L4\n    tons_of_nickel_mined_daily = 720 # They mine 720 tons of nickel a day.\n    percentage_used_for_total_calc = 60 # 60% is iron (used by solution in calculation for total output)\n    total_ore_output = total_percentage * tons_of_nickel_mined_daily / percentage_used_for_total_calc\n\n    # L5\n    copper_tons_daily = total_ore_output * copper_percentage / total_percentage\n\n    # FA\n    answer = copper_tons_daily\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "copper_tons_daily",
+    "operand_to_replace": "total_percentage",
+    "replacement_variable": "total_ore_output"
+  },
+  "correct_trace": {
+    "total_percentage": 100,
+    "nickel_percentage_q": 10,
+    "iron_percentage_q": 60,
+    "copper_percentage": 30,
+    "tons_of_nickel_mined_daily": 720,
+    "percentage_used_for_total_calc": 60,
+    "total_ore_output": 1200.0,
+    "copper_tons_daily": 360.0,
+    "answer": 360.0
+  },
+  "flawed_trace": {
+    "total_percentage": 100,
+    "nickel_percentage_q": 10,
+    "iron_percentage_q": 60,
+    "copper_percentage": 30,
+    "tons_of_nickel_mined_daily": 720,
+    "percentage_used_for_total_calc": 60,
+    "total_ore_output": 1200.0,
+    "copper_tons_daily": 30.0,
+    "answer": 30.0
+  },
+  "correct_value": 360.0,
+  "flawed_value": 30.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_percentage"
+      ],
+      "line_number": "L2",
+      "output_variable": "copper_percentage",
+      "question_inputs": [
+        "nickel_percentage_q",
+        "iron_percentage_q"
+      ],
+      "solution_line_template": "Of Big Dig's output, {total_percentage} - {nickel_percentage_q} - {iron_percentage_q} = <<{total_percentage}-{nickel_percentage_q}-{iron_percentage_q}={copper_percentage}>>{copper_percentage}% is nickel."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_ore_output",
+      "question_inputs": [
+        "tons_of_nickel_mined_daily",
+        "percentage_used_for_total_calc"
+      ],
+      "solution_line_template": "Thus, Big Dig mines R = {total_percentage} * {tons_of_nickel_mined_daily} / {percentage_used_for_total_calc} = <<{total_percentage}*{tons_of_nickel_mined_daily}/{percentage_used_for_total_calc}={total_ore_output}>>{total_ore_output} tons of ore daily."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "copper_tons_daily",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, Big Dig mines {total_ore_output} * {copper_percentage} / {total_percentage} = <<{total_ore_output}*{copper_percentage}/{total_percentage}={copper_tons_daily}>>{copper_tons_daily} tons of copper daily."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "Of Big Dig's output, 100 - 10 - 60 = <<100-10-60=30>>30% is nickel.",
+    "L4": "Thus, Big Dig mines R = 100 * 720 / 60 = <<100*720/60=1200>>1200 tons of ore daily.",
+    "L5": "Therefore, Big Dig mines 1200 * 30 / 1200 = <<1200*30/1200=30>>30 tons of copper daily.",
+    "FA": "#### 30"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Input misrepresentation. The value for 'total_ore_output' (1200.0) was used instead of 'total_percentage' (100).",
+  "repro_seed": -8093947223278026634,
+  "model_name": "google_gemini-2.5-flash"
+}

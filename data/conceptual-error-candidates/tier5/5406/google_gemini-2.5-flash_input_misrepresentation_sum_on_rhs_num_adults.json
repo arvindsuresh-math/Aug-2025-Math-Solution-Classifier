@@ -1,0 +1,71 @@
+{
+  "index": 5406,
+  "original_solution_mapping": {
+    "FA": "#### 19",
+    "L1": "Let X be the cost of an adult ticket.",
+    "L2": "So the cost of a child ticket is X-6.",
+    "L3": "The total cost of the 5 tickets is X*2 + 3*(X-6) = 77.",
+    "L4": "X*2 + 3*X - 3*6 = 77.",
+    "L5": "5*X - 18 = 77.",
+    "L6": "5*X = 77 + 18 = 95",
+    "L7": "X = <<19=19>>19"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5406.\n    Returns: the cost of an adult ticket.\n    \"\"\"\n    # L1 - Let X be the cost of an adult ticket.\n    # L2 - So the cost of a child ticket is X-6.\n    cost_difference = 6 # cost of an adult ticket is $6 more than the cost of a child ticket\n\n    # L3 - The total cost of the 5 tickets is X*2 + 3*(X-6) = 77.\n    num_adults = 2 # Mr. and Mrs. Boyden\n    num_children = 3 # 3 children\n    total_given_cost = 77 # total cost of the 5 tickets is $77\n\n    # L4 - X*2 + 3*X - 3*6 = 77.\n    term_product_children_cost_diff = num_children * cost_difference\n\n    # L5 - 5*X - 18 = 77.\n    combined_x_coefficient = num_adults + num_children\n\n    # L6\n    sum_on_rhs = total_given_cost + term_product_children_cost_diff\n\n    # L7\n    adult_ticket_cost = sum_on_rhs / combined_x_coefficient\n\n    # FA\n    answer = adult_ticket_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "sum_on_rhs",
+    "operand_to_replace": "total_given_cost",
+    "replacement_variable": "num_adults"
+  },
+  "correct_trace": {
+    "cost_difference": 6,
+    "num_adults": 2,
+    "num_children": 3,
+    "total_given_cost": 77,
+    "term_product_children_cost_diff": 18,
+    "combined_x_coefficient": 5,
+    "sum_on_rhs": 95,
+    "adult_ticket_cost": 19.0,
+    "answer": 19.0
+  },
+  "flawed_trace": {
+    "cost_difference": 6,
+    "num_adults": 2,
+    "num_children": 3,
+    "total_given_cost": 77,
+    "term_product_children_cost_diff": 18,
+    "combined_x_coefficient": 5,
+    "sum_on_rhs": 20,
+    "adult_ticket_cost": 4.0,
+    "answer": 4.0
+  },
+  "correct_value": 95,
+  "flawed_value": 20,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "sum_on_rhs",
+      "question_inputs": [
+        "total_given_cost"
+      ],
+      "solution_line_template": "{combined_x_coefficient}*X = {total_given_cost} + {term_product_children_cost_diff} = {sum_on_rhs}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "adult_ticket_cost",
+      "question_inputs": [],
+      "solution_line_template": "X = <<{sum_on_rhs}/{combined_x_coefficient}={adult_ticket_cost}>>{adult_ticket_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L6": "5*X = 2 + 18 = 20",
+    "L7": "X = <<20/5=4>>4",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L6",
+  "explanation": "Input misrepresentation. The value for 'num_adults' (2) was used instead of 'total_given_cost' (77).",
+  "repro_seed": 2164655110502985301,
+  "model_name": "google_gemini-2.5-flash"
+}

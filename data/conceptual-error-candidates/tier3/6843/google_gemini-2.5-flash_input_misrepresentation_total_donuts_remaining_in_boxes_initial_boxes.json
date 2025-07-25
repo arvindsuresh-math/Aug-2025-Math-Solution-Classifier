@@ -1,0 +1,89 @@
+{
+  "index": 6843,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "Sophie has 4 - 1 = <<4-1=3>>3 boxes of donuts left.",
+    "L2": "The total number of pieces of donuts that she has is 3 x 12 = <<3*12=36>>36.",
+    "L3": "She gave 12 / 2 = <<12/2=6>>6 donuts to her sister.",
+    "L4": "Therefore Sophie was left with 36 - 6 = <<36-6=30>>30 donuts after giving her sister."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6843.\n    Returns: the number of donuts left for Sophie.\n    \"\"\"\n    # L1\n    initial_boxes = 4 # bought 4 boxes of donuts\n    boxes_given_to_mom = 1 # gave 1 box to her mom\n    boxes_left_after_mom = initial_boxes - boxes_given_to_mom\n\n    # L2\n    donuts_per_box = 12 # 12 donuts in each box\n    total_donuts_remaining_in_boxes = boxes_left_after_mom * donuts_per_box\n\n    # L3\n    half_divisor = 2 # half a dozen\n    donuts_given_to_sister = donuts_per_box / half_divisor\n\n    # L4\n    donuts_left_for_sophie = total_donuts_remaining_in_boxes - donuts_given_to_sister\n\n    # FA\n    answer = donuts_left_for_sophie\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_donuts_remaining_in_boxes",
+    "operand_to_replace": "donuts_per_box",
+    "replacement_variable": "initial_boxes"
+  },
+  "correct_trace": {
+    "initial_boxes": 4,
+    "boxes_given_to_mom": 1,
+    "boxes_left_after_mom": 3,
+    "donuts_per_box": 12,
+    "total_donuts_remaining_in_boxes": 36,
+    "half_divisor": 2,
+    "donuts_given_to_sister": 6.0,
+    "donuts_left_for_sophie": 30.0,
+    "answer": 30.0
+  },
+  "flawed_trace": {
+    "initial_boxes": 4,
+    "boxes_given_to_mom": 1,
+    "boxes_left_after_mom": 3,
+    "donuts_per_box": 12,
+    "total_donuts_remaining_in_boxes": 12,
+    "half_divisor": 2,
+    "donuts_given_to_sister": 6.0,
+    "donuts_left_for_sophie": 6.0,
+    "answer": 6.0
+  },
+  "correct_value": 36,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "boxes_left_after_mom",
+      "question_inputs": [
+        "initial_boxes",
+        "boxes_given_to_mom"
+      ],
+      "solution_line_template": "Sophie has {initial_boxes} - {boxes_given_to_mom} = <<{initial_boxes}-{boxes_given_to_mom}={boxes_left_after_mom}>>{boxes_left_after_mom} boxes of donuts left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_donuts_remaining_in_boxes",
+      "question_inputs": [
+        "donuts_per_box"
+      ],
+      "solution_line_template": "The total number of pieces of donuts that she has is {boxes_left_after_mom} x {donuts_per_box} = <<{boxes_left_after_mom}*{donuts_per_box}={total_donuts_remaining_in_boxes}>>{total_donuts_remaining_in_boxes}."
+    },
+    {
+      "WK_inputs": [
+        "half_divisor"
+      ],
+      "line_number": "L3",
+      "output_variable": "donuts_given_to_sister",
+      "question_inputs": [],
+      "solution_line_template": "She gave {donuts_per_box} / {half_divisor} = <<{donuts_per_box}/{half_divisor}={donuts_given_to_sister}>>{donuts_given_to_sister} donuts to her sister."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "donuts_left_for_sophie",
+      "question_inputs": [],
+      "solution_line_template": "Therefore Sophie was left with {total_donuts_remaining_in_boxes} - {donuts_given_to_sister} = <<{total_donuts_remaining_in_boxes}-{donuts_given_to_sister}={donuts_left_for_sophie}>>{donuts_left_for_sophie} donuts after giving her sister."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Sophie has 4 - 1 = <<4-1=3>>3 boxes of donuts left.",
+    "L2": "The total number of pieces of donuts that she has is 3 x 4 = <<3*4=12>>12.",
+    "L3": "She gave 12 / 2 = <<12/2=6>>6 donuts to her sister.",
+    "L4": "Therefore Sophie was left with 12 - 6 = <<12-6=6>>6 donuts after giving her sister.",
+    "FA": "#### 6"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'initial_boxes' (4) was used instead of 'donuts_per_box' (12).",
+  "repro_seed": 3685468212023878350,
+  "model_name": "google_gemini-2.5-flash"
+}

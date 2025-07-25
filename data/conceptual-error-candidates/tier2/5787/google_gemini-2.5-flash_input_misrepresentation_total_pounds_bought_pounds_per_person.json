@@ -1,0 +1,88 @@
+{
+  "index": 5787,
+  "original_solution_mapping": {
+    "FA": "#### 16",
+    "L1": "The price increase raised the price by 1.6*.25=$<<1.6*.25=.4>>.4",
+    "L2": "So each pound of apples cost 1.6+.4=$2",
+    "L3": "2*4=<<2*4=8>>8 pounds of apples are bought",
+    "L4": "So the apples cost 8*2=$<<8*2=16>>16"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5787.\n    Returns: the total cost to buy apples for the family.\n    \"\"\"\n    # L1\n    original_price_per_pound = 1.6 # $1.6 per pound\n    price_increase_percent = 0.25 # raised 25%\n    price_increase_amount = original_price_per_pound * price_increase_percent\n\n    # L2\n    new_price_per_pound = original_price_per_pound + price_increase_amount\n\n    # L3\n    pounds_per_person = 2 # 2 pounds of apples for each person\n    num_family_members = 4 # 4 member family\n    total_pounds_bought = pounds_per_person * num_family_members\n\n    # L4\n    total_cost = total_pounds_bought * new_price_per_pound\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_pounds_bought",
+    "operand_to_replace": "num_family_members",
+    "replacement_variable": "pounds_per_person"
+  },
+  "correct_trace": {
+    "original_price_per_pound": 1.6,
+    "price_increase_percent": 0.25,
+    "price_increase_amount": 0.4,
+    "new_price_per_pound": 2.0,
+    "pounds_per_person": 2,
+    "num_family_members": 4,
+    "total_pounds_bought": 8,
+    "total_cost": 16.0,
+    "answer": 16.0
+  },
+  "flawed_trace": {
+    "original_price_per_pound": 1.6,
+    "price_increase_percent": 0.25,
+    "price_increase_amount": 0.4,
+    "new_price_per_pound": 2.0,
+    "pounds_per_person": 2,
+    "num_family_members": 4,
+    "total_pounds_bought": 4,
+    "total_cost": 8.0,
+    "answer": 8.0
+  },
+  "correct_value": 8,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "price_increase_amount",
+      "question_inputs": [
+        "original_price_per_pound",
+        "price_increase_percent"
+      ],
+      "solution_line_template": "The price increase raised the price by {original_price_per_pound}*{price_increase_percent}=$<<{original_price_per_pound}*{price_increase_percent}={price_increase_amount}>>{price_increase_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "new_price_per_pound",
+      "question_inputs": [],
+      "solution_line_template": "So each pound of apples cost {original_price_per_pound}+{price_increase_amount}=${new_price_per_pound}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_pounds_bought",
+      "question_inputs": [
+        "pounds_per_person",
+        "num_family_members"
+      ],
+      "solution_line_template": "{pounds_per_person}*{num_family_members}=<<{pounds_per_person}*{num_family_members}={total_pounds_bought}>>{total_pounds_bought} pounds of apples are bought"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cost",
+      "question_inputs": [],
+      "solution_line_template": "So the apples cost {total_pounds_bought}*{new_price_per_pound}=$<<{total_pounds_bought}*{new_price_per_pound}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The price increase raised the price by 1.6*0.25=$<<1.6*0.25=0.4>>0.4",
+    "L2": "So each pound of apples cost 1.6+0.4=$2",
+    "L3": "2*2=<<2*2=4>>4 pounds of apples are bought",
+    "L4": "So the apples cost 4*2=$<<4*2=8>>8",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'pounds_per_person' (2) was used instead of 'num_family_members' (4).",
+  "repro_seed": -4192890879488023028,
+  "model_name": "google_gemini-2.5-flash"
+}

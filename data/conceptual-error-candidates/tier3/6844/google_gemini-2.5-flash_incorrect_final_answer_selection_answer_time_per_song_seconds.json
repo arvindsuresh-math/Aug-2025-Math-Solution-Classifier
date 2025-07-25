@@ -1,0 +1,93 @@
+{
+  "index": 6844,
+  "original_solution_mapping": {
+    "FA": "#### 7200",
+    "L1": "1 hour has 60 minutes, therefore 1/2 hour has 1/2*60 = <<1/2*60=30>>30 minutes",
+    "L2": "1 minute has 60 seconds, therefore 30 minutes has 30*60 = <<1800=1800>>1800 seconds",
+    "L3": "If Julia's internet speed is 20MBps and each song has a size of 5MB, then it would take 5/20=1/4 seconds to download one song",
+    "L4": "If it takes 1/4 seconds to download 1 song, then in 1800 seconds, Julia could download 1800/(1/4) = 1800 * 4 = 7200 songs"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6844.\n    Returns: the total number of songs Julia can download.\n    \"\"\"\n    # L1\n    minutes_per_hour = 60 # WK\n    half_hour_fraction = Fraction(1, 2) # WK\n    minutes_in_half_hour = half_hour_fraction * minutes_per_hour\n\n    # L2\n    seconds_per_minute = 60 # WK\n    total_seconds = minutes_in_half_hour * seconds_per_minute\n\n    # L3\n    song_size_mb = 5 # size per song is 5MB\n    internet_speed_mbps = 20 # internet speed is 20 MBps\n    time_per_song_seconds = Fraction(song_size_mb, internet_speed_mbps)\n\n    # L4\n    inverse_time_per_song = 1 / time_per_song_seconds\n    total_songs_downloaded = total_seconds * inverse_time_per_song\n\n    # FA\n    answer = total_songs_downloaded\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_songs_downloaded",
+    "replacement_variable": "time_per_song_seconds"
+  },
+  "correct_trace": {
+    "minutes_per_hour": 60,
+    "half_hour_fraction": "1/2",
+    "minutes_in_half_hour": "30",
+    "seconds_per_minute": 60,
+    "total_seconds": "1800",
+    "song_size_mb": 5,
+    "internet_speed_mbps": 20,
+    "time_per_song_seconds": "1/4",
+    "inverse_time_per_song": "4",
+    "total_songs_downloaded": "7200",
+    "answer": "7200"
+  },
+  "flawed_trace": {
+    "minutes_per_hour": 60,
+    "half_hour_fraction": "1/2",
+    "minutes_in_half_hour": "30",
+    "seconds_per_minute": 60,
+    "total_seconds": "1800",
+    "song_size_mb": 5,
+    "internet_speed_mbps": 20,
+    "time_per_song_seconds": "1/4",
+    "inverse_time_per_song": "4",
+    "total_songs_downloaded": "7200",
+    "answer": "1/4"
+  },
+  "correct_value": "7200",
+  "flawed_value": "1/4",
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour",
+        "half_hour_fraction"
+      ],
+      "line_number": "L1",
+      "output_variable": "minutes_in_half_hour",
+      "question_inputs": [],
+      "solution_line_template": "1 hour has {minutes_per_hour} minutes, therefore {half_hour_fraction} hour has {half_hour_fraction}*{minutes_per_hour} = <<{half_hour_fraction}*{minutes_per_hour}={minutes_in_half_hour}>>{minutes_in_half_hour} minutes"
+    },
+    {
+      "WK_inputs": [
+        "seconds_per_minute"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_seconds",
+      "question_inputs": [],
+      "solution_line_template": "1 minute has {seconds_per_minute} seconds, therefore {minutes_in_half_hour} minutes has {minutes_in_half_hour}*{seconds_per_minute} = <<{total_seconds}={total_seconds}>>{total_seconds} seconds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "time_per_song_seconds",
+      "question_inputs": [
+        "song_size_mb",
+        "internet_speed_mbps"
+      ],
+      "solution_line_template": "If Julia's internet speed is {internet_speed_mbps}MBps and each song has a size of {song_size_mb}MB, then it would take {song_size_mb}/{internet_speed_mbps}={time_per_song_seconds} seconds to download one song"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_songs_downloaded",
+      "question_inputs": [],
+      "solution_line_template": "If it takes {time_per_song_seconds} seconds to download 1 song, then in {total_seconds} seconds, Julia could download {total_seconds}/({time_per_song_seconds}) = {total_seconds} * {inverse_time_per_song} = {total_songs_downloaded} songs"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "1 hour has 60 minutes, therefore 1/2 hour has 1/2*60 = <<1/2*60=30>>30 minutes",
+    "L2": "1 minute has 60 seconds, therefore 30 minutes has 30*60 = <<1800=1800>>1800 seconds",
+    "L3": "If Julia's internet speed is 20MBps and each song has a size of 5MB, then it would take 5/20=5/20 seconds to download one song",
+    "FA": "#### 5/20"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'time_per_song_seconds' (value: 5/20) was reported instead of 'total_songs_downloaded' (value: 7200).",
+  "repro_seed": -4613111120166110072,
+  "model_name": "google_gemini-2.5-flash"
+}

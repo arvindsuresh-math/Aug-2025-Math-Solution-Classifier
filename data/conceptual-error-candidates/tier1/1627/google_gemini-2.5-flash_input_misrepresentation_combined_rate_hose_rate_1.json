@@ -1,0 +1,89 @@
+{
+  "index": 1627,
+  "original_solution_mapping": {
+    "FA": "#### 390",
+    "L1": "In the first 3 hours the pool gets 50 gallons/hour x 3 hours = <<50*3=150>>150 gallons",
+    "L2": "With the addition of the other hose, the pool was filling with a rate of 50 gallons/hour + 70 gallons/hour = <<50+70=120>>120 gallons/hour",
+    "L3": "In the next 2 hours with both hoses the pool gets 120 gallons/hour x 2 hours = <<120*2=240>>240 gallons",
+    "L4": "The pool's total capacity is 240 gallons + 150 gallons = <<240+150=390>>390 gallons"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1627.\n    Returns: the total capacity of Grace's pool.\n    \"\"\"\n    # L1\n    hose_rate_1 = 50 # sprays 50 gallons/hour\n    time_1 = 3 # waited for 3 hours\n    gallons_first_period = hose_rate_1 * time_1\n\n    # L2\n    hose_rate_2 = 70 # add another hose that sprays 70 gallons/hour\n    combined_rate = hose_rate_1 + hose_rate_2\n\n    # L3\n    time_2 = 2 # after 2 more hours\n    gallons_second_period = combined_rate * time_2\n\n    # L4\n    total_capacity = gallons_second_period + gallons_first_period\n\n    # FA\n    answer = total_capacity\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "combined_rate",
+    "operand_to_replace": "hose_rate_2",
+    "replacement_variable": "hose_rate_1"
+  },
+  "correct_trace": {
+    "hose_rate_1": 50,
+    "time_1": 3,
+    "gallons_first_period": 150,
+    "hose_rate_2": 70,
+    "combined_rate": 120,
+    "time_2": 2,
+    "gallons_second_period": 240,
+    "total_capacity": 390,
+    "answer": 390
+  },
+  "flawed_trace": {
+    "hose_rate_1": 50,
+    "time_1": 3,
+    "gallons_first_period": 150,
+    "hose_rate_2": 70,
+    "combined_rate": 100,
+    "time_2": 2,
+    "gallons_second_period": 200,
+    "total_capacity": 350,
+    "answer": 350
+  },
+  "correct_value": 120,
+  "flawed_value": 100,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "hose_rate_1",
+        "time_1"
+      ],
+      "WK_inputs": [],
+      "output_variable": "gallons_first_period",
+      "solution_line_template": "In the first {time_1} hours the pool gets {hose_rate_1} gallons/hour x {time_1} hours = <<{hose_rate_1}*{time_1}={gallons_first_period}>>{gallons_first_period} gallons"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "hose_rate_2"
+      ],
+      "WK_inputs": [],
+      "output_variable": "combined_rate",
+      "solution_line_template": "With the addition of the other hose, the pool was filling with a rate of {hose_rate_1} gallons/hour + {hose_rate_2} gallons/hour = <<{hose_rate_1}+{hose_rate_2}={combined_rate}>>{combined_rate} gallons/hour"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "time_2"
+      ],
+      "WK_inputs": [],
+      "output_variable": "gallons_second_period",
+      "solution_line_template": "In the next {time_2} hours with both hoses the pool gets {combined_rate} gallons/hour x {time_2} hours = <<{combined_rate}*{time_2}={gallons_second_period}>>{gallons_second_period} gallons"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_capacity",
+      "solution_line_template": "The pool's total capacity is {gallons_second_period} gallons + {gallons_first_period} gallons = <<{gallons_second_period}+{gallons_first_period}={total_capacity}>>{total_capacity} gallons"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In the first 3 hours the pool gets 50 gallons/hour x 3 hours = <<50*3=150>>150 gallons",
+    "L2": "With the addition of the other hose, the pool was filling with a rate of 50 gallons/hour + 50 gallons/hour = <<50+50=100>>100 gallons/hour",
+    "L3": "In the next 2 hours with both hoses the pool gets 100 gallons/hour x 2 hours = <<100*2=200>>200 gallons",
+    "L4": "The pool's total capacity is 200 gallons + 150 gallons = <<200+150=350>>350 gallons",
+    "FA": "#### 350"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'hose_rate_1' (50) was used instead of 'hose_rate_2' (70).",
+  "repro_seed": -5023794675845567028,
+  "model_name": "google_gemini-2.5-flash"
+}

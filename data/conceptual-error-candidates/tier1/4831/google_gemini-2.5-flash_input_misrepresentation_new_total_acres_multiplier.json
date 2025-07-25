@@ -1,0 +1,63 @@
+{
+  "index": 4831,
+  "original_solution_mapping": {
+    "FA": "#### 19",
+    "L1": "Joyce's new land is 10 times larger than her old 2-acre property, for a total of 2*10=<<10*2=20>>20 acres of land.",
+    "L2": "One acre is not suitable for farming, leaving her with 20-1=<<20-1=19>>19 acres of land suitable for farming."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4831.\n    Returns: the number of acres of land suitable for growing vegetables.\n    \"\"\"\n    # L1\n    previous_property_acres = 2 # previous property was 2 acres\n    multiplier = 10 # 10 times larger\n    new_total_acres = previous_property_acres * multiplier\n\n    # L2\n    pond_acres = 1 # a 1-acre pond\n    suitable_acres = new_total_acres - pond_acres\n\n    # FA\n    answer = suitable_acres\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "new_total_acres",
+    "operand_to_replace": "previous_property_acres",
+    "replacement_variable": "multiplier"
+  },
+  "correct_trace": {
+    "previous_property_acres": 2,
+    "multiplier": 10,
+    "new_total_acres": 20,
+    "pond_acres": 1,
+    "suitable_acres": 19,
+    "answer": 19
+  },
+  "flawed_trace": {
+    "previous_property_acres": 2,
+    "multiplier": 10,
+    "new_total_acres": 100,
+    "pond_acres": 1,
+    "suitable_acres": 99,
+    "answer": 99
+  },
+  "correct_value": 20,
+  "flawed_value": 100,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "new_total_acres",
+      "question_inputs": [
+        "previous_property_acres",
+        "multiplier"
+      ],
+      "solution_line_template": "Joyce's new land is {multiplier} times larger than her old {previous_property_acres}-acre property, for a total of {previous_property_acres}*{multiplier}=<<{multiplier}*{previous_property_acres}={new_total_acres}>>{new_total_acres} acres of land."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "suitable_acres",
+      "question_inputs": [
+        "pond_acres"
+      ],
+      "solution_line_template": "One acre is not suitable for farming, leaving her with {new_total_acres}-{pond_acres}=<<{new_total_acres}-{pond_acres}={suitable_acres}>>{suitable_acres} acres of land suitable for farming."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Joyce's new land is 10 times larger than her old 10-acre property, for a total of 10*10=<<10*10=100>>100 acres of land.",
+    "L2": "One acre is not suitable for farming, leaving her with 100-1=<<100-1=99>>99 acres of land suitable for farming.",
+    "FA": "#### 99"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'multiplier' (10) was used instead of 'previous_property_acres' (2).",
+  "repro_seed": 3301676495428987376,
+  "model_name": "google_gemini-2.5-flash"
+}

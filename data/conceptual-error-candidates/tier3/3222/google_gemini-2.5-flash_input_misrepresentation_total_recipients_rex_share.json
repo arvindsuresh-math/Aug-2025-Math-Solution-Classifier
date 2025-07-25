@@ -1,0 +1,95 @@
+{
+  "index": 3222,
+  "original_solution_mapping": {
+    "FA": "#### 150",
+    "L1": "Cindy has 400 x 2 = <<400*2=800>>800 cards.",
+    "L2": "Nicole and Cindy have 400 + 800 = <<400+800=1200>>1200 cards.",
+    "L3": "Rex has 1200/2 = <<1200/2=600>>600 cards.",
+    "L4": "Rex is left with 600/(3+1=4) = <<600/4=150>>150 cards"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3222.\n    Returns: the number of cards Rex has left.\n    \"\"\"\n    # L1\n    nicole_cards = 400 # Nicole collected 400 Pokemon cards\n    cindy_multiplier = 2 # twice as many\n    cindy_cards = nicole_cards * cindy_multiplier\n\n    # L2\n    nicole_cindy_combined_cards = nicole_cards + cindy_cards\n\n    # L3\n    rex_divisor = 2 # half of Nicole and Cindy's combined total\n    rex_initial_cards = nicole_cindy_combined_cards / rex_divisor\n\n    # L4\n    num_siblings = 3 # three younger siblings\n    rex_share = 1 # WK\n    total_recipients = num_siblings + rex_share\n    rex_remaining_cards = rex_initial_cards / total_recipients\n\n    # FA\n    answer = rex_remaining_cards\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_recipients",
+    "operand_to_replace": "num_siblings",
+    "replacement_variable": "rex_share"
+  },
+  "correct_trace": {
+    "nicole_cards": 400,
+    "cindy_multiplier": 2,
+    "cindy_cards": 800,
+    "nicole_cindy_combined_cards": 1200,
+    "rex_divisor": 2,
+    "rex_initial_cards": 600.0,
+    "num_siblings": 3,
+    "rex_share": 1,
+    "total_recipients": 4,
+    "rex_remaining_cards": 150.0,
+    "answer": 150.0
+  },
+  "flawed_trace": {
+    "nicole_cards": 400,
+    "cindy_multiplier": 2,
+    "cindy_cards": 800,
+    "nicole_cindy_combined_cards": 1200,
+    "rex_divisor": 2,
+    "rex_initial_cards": 600.0,
+    "num_siblings": 3,
+    "rex_share": 1,
+    "total_recipients": 2,
+    "rex_remaining_cards": 300.0,
+    "answer": 300.0
+  },
+  "correct_value": 4,
+  "flawed_value": 2,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cindy_cards",
+      "question_inputs": [
+        "nicole_cards",
+        "cindy_multiplier"
+      ],
+      "solution_line_template": "Cindy has {nicole_cards} x {cindy_multiplier} = <<{nicole_cards}*{cindy_multiplier}={cindy_cards}>>{cindy_cards} cards."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "nicole_cindy_combined_cards",
+      "question_inputs": [],
+      "solution_line_template": "Nicole and Cindy have {nicole_cards} + {cindy_cards} = <<{nicole_cards}+{cindy_cards}={nicole_cindy_combined_cards}>>{nicole_cindy_combined_cards} cards."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "rex_initial_cards",
+      "question_inputs": [
+        "rex_divisor"
+      ],
+      "solution_line_template": "Rex has {nicole_cindy_combined_cards}/{rex_divisor} = <<{nicole_cindy_combined_cards}/{rex_divisor}={rex_initial_cards}>>{rex_initial_cards} cards."
+    },
+    {
+      "WK_inputs": [
+        "rex_share"
+      ],
+      "line_number": "L4",
+      "output_variable": "rex_remaining_cards",
+      "question_inputs": [
+        "num_siblings"
+      ],
+      "solution_line_template": "Rex is left with {rex_initial_cards}/({num_siblings}+{rex_share}={total_recipients}) = <<{rex_initial_cards}/{total_recipients}={rex_remaining_cards}>>{rex_remaining_cards} cards"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Cindy has 400 x 2 = <<400*2=800>>800 cards.",
+    "L2": "Nicole and Cindy have 400 + 800 = <<400+800=1200>>1200 cards.",
+    "L3": "Rex has 1200/2 = <<1200/2=600>>600 cards.",
+    "L4": "Rex is left with 600/(3+1=2) = <<600/2=300>>300 cards",
+    "FA": "#### 300"
+  },
+  "erroneous_line_number": null,
+  "explanation": "Input misrepresentation. The value for 'rex_share' (1) was used instead of 'num_siblings' (3).",
+  "repro_seed": -2820325574201081101,
+  "model_name": "google_gemini-2.5-flash"
+}

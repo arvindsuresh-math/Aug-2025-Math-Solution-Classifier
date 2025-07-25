@@ -1,0 +1,59 @@
+{
+  "index": 1173,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "If Audrey was asleep for 10 hours last night and dreamed for 2/5 of the time, she dreamed for 2/5*10 = <<10*2/5=4>>4 hours.",
+    "L2": "The total time Audrey slept without dreaming is 10-4 = <<10-4=6>>6 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1173.\n    Returns: the amount of time Audrey was not dreaming.\n    \"\"\"\n    # L1\n    total_sleep_hours = 10 # asleep for 10 hours last night\n    dream_fraction = Fraction(2, 5) # dreamed for 2/5 of the time\n    dream_hours = dream_fraction * total_sleep_hours\n\n    # L2\n    non_dream_hours = total_sleep_hours - dream_hours\n\n    # FA\n    answer = non_dream_hours\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "non_dream_hours",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30b071bd0>"
+  },
+  "correct_trace": {
+    "total_sleep_hours": 10,
+    "dream_fraction": "2/5",
+    "dream_hours": "4",
+    "non_dream_hours": "6",
+    "answer": "6"
+  },
+  "flawed_trace": {
+    "total_sleep_hours": 10,
+    "dream_fraction": "2/5",
+    "dream_hours": "4",
+    "non_dream_hours": "14",
+    "answer": "14"
+  },
+  "correct_value": "6",
+  "flawed_value": "14",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "dream_hours",
+      "question_inputs": [
+        "total_sleep_hours",
+        "dream_fraction"
+      ],
+      "solution_line_template": "If Audrey was asleep for {total_sleep_hours} hours last night and dreamed for {dream_fraction} of the time, she dreamed for {dream_fraction}*{total_sleep_hours} = <<{total_sleep_hours}*{dream_fraction}={dream_hours}>>{dream_hours} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "non_dream_hours",
+      "question_inputs": [],
+      "solution_line_template": "The total time Audrey slept without dreaming is {total_sleep_hours}-{dream_hours} = <<{total_sleep_hours}-{dream_hours}={non_dream_hours}>>{non_dream_hours} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Audrey was asleep for 10 hours last night and dreamed for 2/5 of the time, she dreamed for 2/5*10 = <<10*2/5=4>>4 hours.",
+    "L2": "The total time Audrey slept without dreaming is 10-4 = <<10-4=14>>14 hours.",
+    "FA": "#### 14"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 4638522066128629059,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,88 @@
+{
+  "index": 6707,
+  "original_solution_mapping": {
+    "FA": "#### 150",
+    "L1": "Mary gives 1/4 * 400 = <<400*1/4=100>>100 sheep to her sister.",
+    "L2": "She now has 400 - 100 = <<400-100=300>>300 sheep remaining.",
+    "L3": "She then gives 1/2 * 300 = <<300/2=150>>150 sheep to her brother.",
+    "L4": "So 300 - 150 = <<300-150=150>>150 sheep remain."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6707.\n    Returns: the number of sheep remaining with Mary.\n    \"\"\"\n    # L1\n    total_sheep = 400 # Mary has 400 sheep\n    sister_fraction = Fraction(1, 4) # a quarter of her sheep\n    sheep_given_to_sister = total_sheep * sister_fraction\n\n    # L2\n    sheep_after_sister_gift = total_sheep - sheep_given_to_sister\n\n    # L3\n    brother_fraction = Fraction(1, 2) # half of the remaining sheep\n    brother_divisor = 2 # half of the remaining sheep\n    sheep_given_to_brother = sheep_after_sister_gift / brother_divisor\n\n    # L4\n    remaining_sheep = sheep_after_sister_gift - sheep_given_to_brother\n\n    # FA\n    answer = remaining_sheep\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "sheep_after_sister_gift",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x17207fa90>"
+  },
+  "correct_trace": {
+    "total_sheep": 400,
+    "sister_fraction": "1/4",
+    "sheep_given_to_sister": "100",
+    "sheep_after_sister_gift": "300",
+    "brother_fraction": "1/2",
+    "brother_divisor": 2,
+    "sheep_given_to_brother": "150",
+    "remaining_sheep": "150",
+    "answer": "150"
+  },
+  "flawed_trace": {
+    "total_sheep": 400,
+    "sister_fraction": "1/4",
+    "sheep_given_to_sister": "100",
+    "sheep_after_sister_gift": "4",
+    "brother_fraction": "1/2",
+    "brother_divisor": 2,
+    "sheep_given_to_brother": "2",
+    "remaining_sheep": "2",
+    "answer": "2"
+  },
+  "correct_value": "300",
+  "flawed_value": "4",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "sheep_given_to_sister",
+      "question_inputs": [
+        "total_sheep",
+        "sister_fraction"
+      ],
+      "solution_line_template": "Mary gives {sister_fraction} * {total_sheep} = <<{total_sheep}*{sister_fraction}={sheep_given_to_sister}>>{sheep_given_to_sister} sheep to her sister."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sheep_after_sister_gift",
+      "question_inputs": [],
+      "solution_line_template": "She now has {total_sheep} - {sheep_given_to_sister} = <<{total_sheep}-{sheep_given_to_sister}={sheep_after_sister_gift}>>{sheep_after_sister_gift} sheep remaining."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "sheep_given_to_brother",
+      "question_inputs": [
+        "brother_fraction",
+        "brother_divisor"
+      ],
+      "solution_line_template": "She then gives {brother_fraction} * {sheep_after_sister_gift} = <<{sheep_after_sister_gift}/{brother_divisor}={sheep_given_to_brother}>>{sheep_given_to_brother} sheep to her brother."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "remaining_sheep",
+      "question_inputs": [],
+      "solution_line_template": "So {sheep_after_sister_gift} - {sheep_given_to_brother} = <<{sheep_after_sister_gift}-{sheep_given_to_brother}={remaining_sheep}>>{remaining_sheep} sheep remain."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Mary gives 1/4 * 400 = <<400*1/4=100>>100 sheep to her sister.",
+    "L2": "She now has 400 - 100 = <<400-100=4>>4 sheep remaining.",
+    "L3": "She then gives 1/2 * 4 = <<4/2=2>>2 sheep to her brother.",
+    "L4": "So 4 - 2 = <<4-2=2>>2 sheep remain.",
+    "FA": "#### 2"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": 8984227841508940208,
+  "model_name": "google_gemini-2.5-flash"
+}

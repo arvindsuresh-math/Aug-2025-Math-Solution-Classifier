@@ -1,0 +1,94 @@
+{
+  "index": 6690,
+  "original_solution_mapping": {
+    "FA": "#### 25",
+    "L1": "The laboratory spent 2 / 3 * 150 = 300 / 3 = $<<2/3*150=100>>100 on test tubes.",
+    "L2": "They spent a further 100 / 2 = $<<100/2=50>>50 on safety gear.",
+    "L3": "In all, they spent 150 + 100 + 50 = $<<150+100+50=300>>300.",
+    "L4": "Thus, 325 - 300 = $<<325-300=25>>25 of the laboratory's budget remained."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6690.\n    Returns: the remaining budget.\n    \"\"\"\n    # L1\n    test_tube_fraction_numerator = 2 # two-thirds of that amount\n    test_tube_fraction_denominator = 3 # two-thirds of that amount\n    flask_cost = 150 # bought $150 worth of flasks\n    intermediate_product = test_tube_fraction_numerator * flask_cost\n    test_tube_cost = intermediate_product / test_tube_fraction_denominator\n\n    # L2\n    safety_gear_divisor = 2 # half of the test tube cost\n    safety_gear_cost = test_tube_cost / safety_gear_divisor\n\n    # L3\n    total_spent = flask_cost + test_tube_cost + safety_gear_cost\n\n    # L4\n    initial_budget = 325 # $325 budget\n    remaining_budget = initial_budget - total_spent\n\n    # FA\n    answer = remaining_budget\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_spent",
+    "operand_to_replace": "test_tube_cost",
+    "replacement_variable": "test_tube_fraction_denominator"
+  },
+  "correct_trace": {
+    "test_tube_fraction_numerator": 2,
+    "test_tube_fraction_denominator": 3,
+    "flask_cost": 150,
+    "intermediate_product": 300,
+    "test_tube_cost": 100.0,
+    "safety_gear_divisor": 2,
+    "safety_gear_cost": 50.0,
+    "total_spent": 300.0,
+    "initial_budget": 325,
+    "remaining_budget": 25.0,
+    "answer": 25.0
+  },
+  "flawed_trace": {
+    "test_tube_fraction_numerator": 2,
+    "test_tube_fraction_denominator": 3,
+    "flask_cost": 150,
+    "intermediate_product": 300,
+    "test_tube_cost": 100.0,
+    "safety_gear_divisor": 2,
+    "safety_gear_cost": 50.0,
+    "total_spent": 203.0,
+    "initial_budget": 325,
+    "remaining_budget": 122.0,
+    "answer": 122.0
+  },
+  "correct_value": 300.0,
+  "flawed_value": 203.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "test_tube_cost",
+      "question_inputs": [
+        "test_tube_fraction_numerator",
+        "test_tube_fraction_denominator",
+        "flask_cost"
+      ],
+      "solution_line_template": "The laboratory spent {test_tube_fraction_numerator} / {test_tube_fraction_denominator} * {flask_cost} = {intermediate_product} / {test_tube_fraction_denominator} = $<<{test_tube_fraction_numerator}/{test_tube_fraction_denominator}*{flask_cost}={test_tube_cost}>>{test_tube_cost} on test tubes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "safety_gear_cost",
+      "question_inputs": [
+        "safety_gear_divisor"
+      ],
+      "solution_line_template": "They spent a further {test_tube_cost} / {safety_gear_divisor} = $<<{test_tube_cost}/{safety_gear_divisor}={safety_gear_cost}>>{safety_gear_cost} on safety gear."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_spent",
+      "question_inputs": [],
+      "solution_line_template": "In all, they spent {flask_cost} + {test_tube_cost} + {safety_gear_cost} = $<<{flask_cost}+{test_tube_cost}+{safety_gear_cost}={total_spent}>>{total_spent}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "remaining_budget",
+      "question_inputs": [
+        "initial_budget"
+      ],
+      "solution_line_template": "Thus, {initial_budget} - {total_spent} = $<<{initial_budget}-{total_spent}={remaining_budget}>>{remaining_budget} of the laboratory's budget remained."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The laboratory spent 2 / 3 * 150 = 300 / 3 = $<<2/3*150=100>>100 on test tubes.",
+    "L2": "They spent a further 100 / 2 = $<<100/2=50>>50 on safety gear.",
+    "L3": "In all, they spent 150 + 3 + 50 = $<<150+3+50=203>>203.",
+    "L4": "Thus, 325 - 203 = $<<325-203=122>>122 of the laboratory's budget remained.",
+    "FA": "#### 122"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'test_tube_fraction_denominator' (value: 3) was used instead of 'test_tube_cost' (value: 100.0).",
+  "repro_seed": -5418817321879004716,
+  "model_name": "google_gemini-2.5-flash"
+}

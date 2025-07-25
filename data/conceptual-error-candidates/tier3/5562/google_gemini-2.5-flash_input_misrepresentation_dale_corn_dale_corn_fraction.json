@@ -1,0 +1,93 @@
+{
+  "index": 5562,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "Marcel bought 10 ears of corn and Dale bought 1/2 what Marcel did, 10 x 1/2 = 10/2 = <<10*1/2=5>>5 ears of corn that Dale bought.",
+    "L2": "Together, Marcel and Dale bought 10 + 5 = <<10+5=15>>15 ears of corn, or 15 vegetables.",
+    "L3": "They end up buying 27 vegetables total, and from those 27, 15 of them were corn.",
+    "L4": "The rest of the vegetables are potatoes, 27 vegetables - 15 ears of corn = <<27-15=12>>12 potatoes.",
+    "L5": "Dale bought 8 potatoes, so Marcel bought 12 - 8 = <<12-8=4>>4 potatoes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5562.\n    Returns: the number of potatoes Marcel bought.\n    \"\"\"\n    # L1\n    marcel_corn = 10 # Marcel buys 10 ears of corn\n    dale_corn_fraction = Fraction(1, 2) # half that amount\n    dale_corn_denominator = 2 # 1/2 what Marcel did\n    dale_corn = marcel_corn * dale_corn_fraction\n\n    # L2\n    total_corn = marcel_corn + dale_corn\n\n    # L4\n    total_vegetables = 27 # end up buying 27 vegetables\n    total_potatoes = total_vegetables - total_corn\n\n    # L5\n    dale_potatoes = 8 # Dale buys 8 potatoes\n    marcel_potatoes = total_potatoes - dale_potatoes\n\n    # FA\n    answer = marcel_potatoes\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "dale_corn",
+    "operand_to_replace": "marcel_corn",
+    "replacement_variable": "dale_corn_fraction"
+  },
+  "correct_trace": {
+    "marcel_corn": 10,
+    "dale_corn_fraction": "1/2",
+    "dale_corn_denominator": 2,
+    "dale_corn": "5",
+    "total_corn": "15",
+    "total_vegetables": 27,
+    "total_potatoes": "12",
+    "dale_potatoes": 8,
+    "marcel_potatoes": "4",
+    "answer": "4"
+  },
+  "flawed_trace": {
+    "marcel_corn": 10,
+    "dale_corn_fraction": "1/2",
+    "dale_corn_denominator": 2,
+    "dale_corn": "1/4",
+    "total_corn": "41/4",
+    "total_vegetables": 27,
+    "total_potatoes": "67/4",
+    "dale_potatoes": 8,
+    "marcel_potatoes": "35/4",
+    "answer": "35/4"
+  },
+  "correct_value": "5",
+  "flawed_value": "1/4",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "dale_corn",
+      "question_inputs": [
+        "marcel_corn",
+        "dale_corn_fraction",
+        "dale_corn_denominator"
+      ],
+      "solution_line_template": "Marcel bought {marcel_corn} ears of corn and Dale bought {dale_corn_fraction} what Marcel did, {marcel_corn} x {dale_corn_fraction} = {marcel_corn}/{dale_corn_denominator} = <<{marcel_corn}*{dale_corn_fraction}={dale_corn}>>{dale_corn} ears of corn that Dale bought."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_corn",
+      "question_inputs": [],
+      "solution_line_template": "Together, Marcel and Dale bought {marcel_corn} + {dale_corn} = <<{marcel_corn}+{dale_corn}={total_corn}>>{total_corn} ears of corn, or {total_corn} vegetables."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_potatoes",
+      "question_inputs": [
+        "total_vegetables"
+      ],
+      "solution_line_template": "The rest of the vegetables are potatoes, {total_vegetables} vegetables - {total_corn} ears of corn = <<{total_vegetables}-{total_corn}={total_potatoes}>>{total_potatoes} potatoes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "marcel_potatoes",
+      "question_inputs": [
+        "dale_potatoes"
+      ],
+      "solution_line_template": "Dale bought {dale_potatoes}, so Marcel bought {total_potatoes} - {dale_potatoes} = <<{total_potatoes}-{dale_potatoes}={marcel_potatoes}>>{marcel_potatoes} potatoes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Marcel bought 1/2 ears of corn and Dale bought 1/2 what Marcel did, 1/2 x 1/2 = 1/2/2 = <<1/2*1/2=1/4>>1/4 ears of corn that Dale bought.",
+    "L2": "Together, Marcel and Dale bought 10 + 1/4 = <<10+1/4=41/4>>41/4 ears of corn, or 41/4 vegetables.",
+    "L4": "The rest of the vegetables are potatoes, 27 vegetables - 41/4 ears of corn = <<27-41/4=67/4>>67/4 potatoes.",
+    "L5": "Dale bought 8, so Marcel bought 67/4 - 8 = <<67/4-8=35/4>>35/4 potatoes.",
+    "FA": "#### 35/4"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'dale_corn_fraction' (1/2) was used instead of 'marcel_corn' (10).",
+  "repro_seed": -2162987234000691629,
+  "model_name": "google_gemini-2.5-flash"
+}

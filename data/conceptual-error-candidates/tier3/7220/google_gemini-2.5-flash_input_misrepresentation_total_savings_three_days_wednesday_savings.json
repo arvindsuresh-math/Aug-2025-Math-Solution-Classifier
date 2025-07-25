@@ -1,0 +1,66 @@
+{
+  "index": 7220,
+  "original_solution_mapping": {
+    "FA": "#### 28",
+    "L1": "Donny saves a total of $15+$28+$13 = $<<15+28+13=56>>56 across all 3 days",
+    "L2": "He spends half of his total savings which is $56*(1/2) = $<<56*(1/2)=28>>28"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7220.\n    Returns: the amount of money Donny spent.\n    \"\"\"\n    # L1\n    monday_savings = 15 # $15 on Monday\n    tuesday_savings = 28 # $28 on Tuesday\n    wednesday_savings = 13 # $13 on Wednesday\n    total_savings_three_days = monday_savings + tuesday_savings + wednesday_savings\n\n    # L2\n    half_fraction = Fraction(1, 2) # half of his total savings\n    amount_spent = total_savings_three_days * half_fraction\n\n    # FA\n    answer = amount_spent\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_savings_three_days",
+    "operand_to_replace": "tuesday_savings",
+    "replacement_variable": "wednesday_savings"
+  },
+  "correct_trace": {
+    "monday_savings": 15,
+    "tuesday_savings": 28,
+    "wednesday_savings": 13,
+    "total_savings_three_days": 56,
+    "half_fraction": "1/2",
+    "amount_spent": "28",
+    "answer": "28"
+  },
+  "flawed_trace": {
+    "monday_savings": 15,
+    "tuesday_savings": 28,
+    "wednesday_savings": 13,
+    "total_savings_three_days": 41,
+    "half_fraction": "1/2",
+    "amount_spent": "41/2",
+    "answer": "41/2"
+  },
+  "correct_value": 56,
+  "flawed_value": 41,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_savings_three_days",
+      "question_inputs": [
+        "monday_savings",
+        "tuesday_savings",
+        "wednesday_savings"
+      ],
+      "solution_line_template": "Donny saves a total of ${monday_savings}+${tuesday_savings}+${wednesday_savings} = $<<{monday_savings}+{tuesday_savings}+{wednesday_savings}={total_savings_three_days}>>{total_savings_three_days} across all 3 days"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "amount_spent",
+      "question_inputs": [
+        "half_fraction"
+      ],
+      "solution_line_template": "He spends half of his total savings which is ${total_savings_three_days}*({half_fraction}) = $<<{total_savings_three_days}*({half_fraction})={amount_spent}>>{amount_spent}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Donny saves a total of $15+$13+$13 = $<<15+13+13=41>>41 across all 3 days",
+    "L2": "He spends half of his total savings which is $41*(1/2) = $<<41*(1/2)=41/2>>41/2",
+    "FA": "#### 41/2"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'wednesday_savings' (13) was used instead of 'tuesday_savings' (28).",
+  "repro_seed": -5809597919129639406,
+  "model_name": "google_gemini-2.5-flash"
+}

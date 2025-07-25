@@ -1,0 +1,80 @@
+{
+  "index": 5341,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "Mark is (5*12) + 3 = <<5*12+3=63>>63 inches tall.",
+    "L2": "Mike is (6*12) + 1 = <<6*12+1=73>>73 inches tall.",
+    "L3": "Hence, Mike is 73 - 63 = <<73-63=10>>10 inches taller."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5341.\n    Returns: how much taller Mike is than Mark in inches.\n    \"\"\"\n    # L1\n    mark_feet = 5 # 5 feet\n    mark_inches_extra = 3 # 3 inches tall\n    inches_per_foot = 12 # 1 foot is equal to 12 inches\n    mark_total_inches = (mark_feet * inches_per_foot) + mark_inches_extra\n\n    # L2\n    mike_feet = 6 # 6 feet\n    mike_inches_extra = 1 # 1 inch tall\n    mike_total_inches = (mike_feet * inches_per_foot) + mike_inches_extra\n\n    # L3\n    difference_in_height = mike_total_inches - mark_total_inches\n\n    # FA\n    answer = difference_in_height\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "mike_total_inches",
+    "operand_to_replace": "mike_inches_extra",
+    "replacement_variable": "inches_per_foot"
+  },
+  "correct_trace": {
+    "mark_feet": 5,
+    "mark_inches_extra": 3,
+    "inches_per_foot": 12,
+    "mark_total_inches": 63,
+    "mike_feet": 6,
+    "mike_inches_extra": 1,
+    "mike_total_inches": 73,
+    "difference_in_height": 10,
+    "answer": 10
+  },
+  "flawed_trace": {
+    "mark_feet": 5,
+    "mark_inches_extra": 3,
+    "inches_per_foot": 12,
+    "mark_total_inches": 63,
+    "mike_feet": 6,
+    "mike_inches_extra": 1,
+    "mike_total_inches": 84,
+    "difference_in_height": 21,
+    "answer": 21
+  },
+  "correct_value": 73,
+  "flawed_value": 84,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "mark_total_inches",
+      "question_inputs": [
+        "mark_feet",
+        "mark_inches_extra",
+        "inches_per_foot"
+      ],
+      "solution_line_template": "Mark is ({mark_feet}*{inches_per_foot}) + {mark_inches_extra} = <<{mark_feet}*{inches_per_foot}+{mark_inches_extra}={mark_total_inches}>>{mark_total_inches} inches tall."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "mike_total_inches",
+      "question_inputs": [
+        "mike_feet",
+        "mike_inches_extra"
+      ],
+      "solution_line_template": "Mike is ({mike_feet}*{inches_per_foot}) + {mike_inches_extra} = <<{mike_feet}*{inches_per_foot}+{mike_inches_extra}={mike_total_inches}>>{mike_total_inches} inches tall."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "difference_in_height",
+      "question_inputs": [],
+      "solution_line_template": "Hence, Mike is {mike_total_inches} - {mark_total_inches} = <<{mike_total_inches}-{mark_total_inches}={difference_in_height}>>{difference_in_height} inches taller."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Mark is (5*12) + 3 = <<5*12+3=63>>63 inches tall.",
+    "L2": "Mike is (6*12) + 12 = <<6*12+12=84>>84 inches tall.",
+    "L3": "Hence, Mike is 84 - 63 = <<84-63=21>>21 inches taller.",
+    "FA": "#### 21"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'inches_per_foot' (12) was used instead of 'mike_inches_extra' (1).",
+  "repro_seed": 1322987184269135140,
+  "model_name": "google_gemini-2.5-flash"
+}

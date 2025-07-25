@@ -1,0 +1,78 @@
+{
+  "index": 5615,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "Kevin begins the day with 15 phones and repairs 3 by the afternoon, so Kevin still has to repair 15 - 3 = <<15-3=12>>12 phones.",
+    "L2": "A client drops off 6 additional phones that require fixing, increasing the total to 12 + 6 = 18 phones.",
+    "L3": "If Kevin's coworker helps Kevin fix half of the phones, then each person needs to fix 18 / 2 = <<18/2=9>>9 phones."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5615.\n    Returns: the number of phones each person needs to repair.\n    \"\"\"\n    # L1\n    initial_phones = 15 # 15 phones that need to be repaired\n    repaired_phones = 3 # repaired 3 of the 15 phones\n    remaining_phones_after_repair = initial_phones - repaired_phones\n\n    # L2\n    dropped_off_phones = 6 # dropped off 6 more phones\n    total_phones_after_dropoff = remaining_phones_after_repair + dropped_off_phones\n\n    # L3\n    helper_divisor = 2 # fix half of the damaged phones\n    phones_per_person = total_phones_after_dropoff / helper_divisor\n\n    # FA\n    answer = phones_per_person\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_phones_after_dropoff",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x177d88bd0>"
+  },
+  "correct_trace": {
+    "initial_phones": 15,
+    "repaired_phones": 3,
+    "remaining_phones_after_repair": 12,
+    "dropped_off_phones": 6,
+    "total_phones_after_dropoff": 18,
+    "helper_divisor": 2,
+    "phones_per_person": 9.0,
+    "answer": 9.0
+  },
+  "flawed_trace": {
+    "initial_phones": 15,
+    "repaired_phones": 3,
+    "remaining_phones_after_repair": 12,
+    "dropped_off_phones": 6,
+    "total_phones_after_dropoff": 6,
+    "helper_divisor": 2,
+    "phones_per_person": 3.0,
+    "answer": 3.0
+  },
+  "correct_value": 18,
+  "flawed_value": 6,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "remaining_phones_after_repair",
+      "question_inputs": [
+        "initial_phones",
+        "repaired_phones"
+      ],
+      "solution_line_template": "Kevin begins the day with {initial_phones} phones and repairs {repaired_phones} by the afternoon, so Kevin still has to repair {initial_phones} - {repaired_phones} = <<{initial_phones}-{repaired_phones}={remaining_phones_after_repair}>>{remaining_phones_after_repair} phones."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_phones_after_dropoff",
+      "question_inputs": [
+        "dropped_off_phones"
+      ],
+      "solution_line_template": "A client drops off {dropped_off_phones} additional phones that require fixing, increasing the total to {remaining_phones_after_repair} + {dropped_off_phones} = <<{remaining_phones_after_repair}+{dropped_off_phones}={total_phones_after_dropoff}>>{total_phones_after_dropoff} phones."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "phones_per_person",
+      "question_inputs": [
+        "helper_divisor"
+      ],
+      "solution_line_template": "If Kevin's coworker helps Kevin fix half of the phones, then each person needs to fix {total_phones_after_dropoff} / {helper_divisor} = <<{total_phones_after_dropoff}/{helper_divisor}={phones_per_person}>>{phones_per_person} phones."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Kevin begins the day with 15 phones and repairs 3 by the afternoon, so Kevin still has to repair 15 - 3 = <<15-3=12>>12 phones.",
+    "L2": "A client drops off 6 additional phones that require fixing, increasing the total to 12 + 6 = <<12+6=6>>6 phones.",
+    "L3": "If Kevin's coworker helps Kevin fix half of the phones, then each person needs to fix 6 / 2 = <<6/2=3>>3 phones.",
+    "FA": "#### 3"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": -6528088666420749954,
+  "model_name": "google_gemini-2.5-flash"
+}

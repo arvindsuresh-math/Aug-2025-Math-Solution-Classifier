@@ -1,0 +1,81 @@
+{
+  "index": 7014,
+  "original_solution_mapping": {
+    "FA": "#### 39",
+    "L1": "As she gave 1 balloon out, 12 balloons floated away plus she gave away 9 more balloons so she is down 1+12+9 = <<1+12+9=22>>22 balloons",
+    "L2": "She started with 50 and gave/lost 22 balloons so she has 50-22 = <<50-22=28>>28 balloons",
+    "L3": "She also took her coworkers last 11 balloons so her new total is 28+11 = <<28+11=39>>39 balloons"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7014.\n    Returns: the number of balloons Claire has.\n    \"\"\"\n    # L1\n    given_one_balloon = 1 # 1 balloon to a little girl\n    floated_away = 12 # 12 balloons floated away\n    gave_away_more = 9 # gave 9 more away\n    total_lost_balloons = given_one_balloon + floated_away + gave_away_more\n\n    # L2\n    started_balloons = 50 # started with 50 balloons\n    remaining_after_loss = started_balloons - total_lost_balloons\n\n    # L3\n    coworker_balloons = 11 # last 11 from her coworker\n    final_balloons = remaining_after_loss + coworker_balloons\n\n    # FA\n    answer = final_balloons\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_lost_balloons",
+    "operand_to_replace": "gave_away_more",
+    "replacement_variable": "given_one_balloon"
+  },
+  "correct_trace": {
+    "given_one_balloon": 1,
+    "floated_away": 12,
+    "gave_away_more": 9,
+    "total_lost_balloons": 22,
+    "started_balloons": 50,
+    "remaining_after_loss": 28,
+    "coworker_balloons": 11,
+    "final_balloons": 39,
+    "answer": 39
+  },
+  "flawed_trace": {
+    "given_one_balloon": 1,
+    "floated_away": 12,
+    "gave_away_more": 9,
+    "total_lost_balloons": 14,
+    "started_balloons": 50,
+    "remaining_after_loss": 36,
+    "coworker_balloons": 11,
+    "final_balloons": 47,
+    "answer": 47
+  },
+  "correct_value": 22,
+  "flawed_value": 14,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_lost_balloons",
+      "question_inputs": [
+        "given_one_balloon",
+        "floated_away",
+        "gave_away_more"
+      ],
+      "solution_line_template": "As she gave {given_one_balloon} balloon out, {floated_away} balloons floated away plus she gave away {gave_away_more} more balloons so she is down {given_one_balloon}+{floated_away}+{gave_away_more} = <<{given_one_balloon}+{floated_away}+{gave_away_more}={total_lost_balloons}>>{total_lost_balloons} balloons"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_after_loss",
+      "question_inputs": [
+        "started_balloons"
+      ],
+      "solution_line_template": "She started with {started_balloons} and gave/lost {total_lost_balloons} balloons so she has {started_balloons}-{total_lost_balloons} = <<{started_balloons}-{total_lost_balloons}={remaining_after_loss}>>{remaining_after_loss} balloons"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_balloons",
+      "question_inputs": [
+        "coworker_balloons"
+      ],
+      "solution_line_template": "She also took her coworkers last {coworker_balloons} balloons so her new total is {remaining_after_loss}+{coworker_balloons} = <<{remaining_after_loss}+{coworker_balloons}={final_balloons}>>{final_balloons} balloons"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "As she gave 1 balloon out, 12 balloons floated away plus she gave away 1 more balloons so she is down 1+12+1 = <<1+12+1=14>>14 balloons",
+    "L2": "She started with 50 and gave/lost 14 balloons so she has 50-14 = <<50-14=36>>36 balloons",
+    "L3": "She also took her coworkers last 11 balloons so her new total is 36+11 = <<36+11=47>>47 balloons",
+    "FA": "#### 47"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'given_one_balloon' (1) was used instead of 'gave_away_more' (9).",
+  "repro_seed": 6066041545006329211,
+  "model_name": "google_gemini-2.5-flash"
+}

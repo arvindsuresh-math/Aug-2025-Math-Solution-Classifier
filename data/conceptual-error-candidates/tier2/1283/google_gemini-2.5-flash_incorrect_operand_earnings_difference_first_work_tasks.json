@@ -1,0 +1,77 @@
+{
+  "index": 1283,
+  "original_solution_mapping": {
+    "FA": "#### 90",
+    "L1": "Dan spent an hour doing 400 tasks * $.25 = $100.",
+    "L2": "Dan spent an hour doing 5 tasks * $2.00 each = $<<5*2=10.00>>10.00.",
+    "L3": "Dan made $100 - $10 = $<<100-10=90.00>>90.00 per hour more doing the higher paid work."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1283.\n    Returns: the difference in earnings between the two types of work.\n    \"\"\"\n    # L1\n    first_work_tasks = 400 # 400 work tasks\n    first_work_rate = 0.25 # $0.25 each\n    first_work_earnings = first_work_tasks * first_work_rate\n\n    # L2\n    second_work_tasks = 5 # 5 work tasks\n    second_work_rate = 2.00 # $2.00 each\n    second_work_earnings = second_work_tasks * second_work_rate\n\n    # L3\n    earnings_difference = first_work_earnings - second_work_earnings\n\n    # FA\n    answer = earnings_difference\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "earnings_difference",
+    "operand_to_replace": "first_work_earnings",
+    "replacement_variable": "first_work_tasks"
+  },
+  "correct_trace": {
+    "first_work_tasks": 400,
+    "first_work_rate": 0.25,
+    "first_work_earnings": 100.0,
+    "second_work_tasks": 5,
+    "second_work_rate": 2.0,
+    "second_work_earnings": 10.0,
+    "earnings_difference": 90.0,
+    "answer": 90.0
+  },
+  "flawed_trace": {
+    "first_work_tasks": 400,
+    "first_work_rate": 0.25,
+    "first_work_earnings": 100.0,
+    "second_work_tasks": 5,
+    "second_work_rate": 2.0,
+    "second_work_earnings": 10.0,
+    "earnings_difference": 390.0,
+    "answer": 390.0
+  },
+  "correct_value": 90.0,
+  "flawed_value": 390.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "first_work_earnings",
+      "question_inputs": [
+        "first_work_tasks",
+        "first_work_rate"
+      ],
+      "solution_line_template": "Dan spent an hour doing {first_work_tasks} tasks * ${first_work_rate} = ${first_work_earnings}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "second_work_earnings",
+      "question_inputs": [
+        "second_work_tasks",
+        "second_work_rate"
+      ],
+      "solution_line_template": "Dan spent an hour doing {second_work_tasks} tasks * ${second_work_rate} each = $<<{second_work_tasks}*{second_work_rate}={second_work_earnings}>>{second_work_earnings}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "earnings_difference",
+      "question_inputs": [],
+      "solution_line_template": "Dan made ${first_work_earnings} - ${second_work_earnings} = $<<{first_work_earnings}-{second_work_earnings}={earnings_difference}>>{earnings_difference} per hour more doing the higher paid work."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Dan spent an hour doing 400 tasks * $0.25 = $100.",
+    "L2": "Dan spent an hour doing 5 tasks * $2 each = $<<5*2=10>>10.",
+    "L3": "Dan made $400 - $10 = $<<400-10=390>>390 per hour more doing the higher paid work.",
+    "FA": "#### 390"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'first_work_tasks' (value: 400) was used instead of 'first_work_earnings' (value: 100.0).",
+  "repro_seed": 5248751720599565397,
+  "model_name": "google_gemini-2.5-flash"
+}

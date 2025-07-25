@@ -1,0 +1,59 @@
+{
+  "index": 316,
+  "original_solution_mapping": {
+    "FA": "#### 253",
+    "L1": "The price of the bicycle increased by $220 * 15/100 = $<<220*15/100=33>>33.",
+    "L2": "Adding the increment price, the new price is $220 + $33 = $<<220+33=253>>253."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 316.\n    Returns: the new selling price of the bicycle.\n    \"\"\"\n    # L1\n    original_price = 220 # $220 last year\n    increase_percentage = Fraction(15, 100) # increased by 15%\n    price_increase_amount = original_price * increase_percentage\n\n    # L2\n    new_price = original_price + price_increase_amount\n\n    # FA\n    answer = new_price\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "new_price",
+    "operand_to_replace": "original_price",
+    "replacement_variable": "price_increase_amount"
+  },
+  "correct_trace": {
+    "original_price": 220,
+    "increase_percentage": "3/20",
+    "price_increase_amount": "33",
+    "new_price": "253",
+    "answer": "253"
+  },
+  "flawed_trace": {
+    "original_price": 220,
+    "increase_percentage": "3/20",
+    "price_increase_amount": "33",
+    "new_price": "66",
+    "answer": "66"
+  },
+  "correct_value": "253",
+  "flawed_value": "66",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "price_increase_amount",
+      "question_inputs": [
+        "original_price",
+        "increase_percentage"
+      ],
+      "solution_line_template": "The price of the bicycle increased by ${original_price} * {increase_percentage} = ${price_increase_amount}<<{original_price}*{increase_percentage}={price_increase_amount}>>{price_increase_amount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "new_price",
+      "question_inputs": [],
+      "solution_line_template": "Adding the increment price, the new price is ${original_price} + ${price_increase_amount} = ${new_price}<<{original_price}+{price_increase_amount}={new_price}>>{new_price}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The price of the bicycle increased by $220 * 15/100 = $33<<220*15/100=33>>33.",
+    "L2": "Adding the increment price, the new price is $33 + $33 = $66<<33+33=66>>66.",
+    "FA": "#### 66"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'price_increase_amount' (33) was used instead of 'original_price' (220).",
+  "repro_seed": 2349771059614425414,
+  "model_name": "google_gemini-2.5-flash"
+}

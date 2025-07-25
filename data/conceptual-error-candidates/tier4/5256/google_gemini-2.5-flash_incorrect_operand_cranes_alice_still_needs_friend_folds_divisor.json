@@ -1,0 +1,85 @@
+{
+  "index": 5256,
+  "original_solution_mapping": {
+    "FA": "#### 400",
+    "L1": "Alice folds 1000 * 0.5 = <<1000*0.5=500>>500 paper cranes by herself.",
+    "L2": "This leaves 1000 - 500 = <<1000-500=500>>500 paper cranes left to fold.",
+    "L3": "A friend folds a fifth of the remaining amount, so they have folded 500 / 5 = <<500/5=100>>100 paper cranes for her.",
+    "L4": "This means there is a total of 1000 - 500 - 100 = <<1000-500-100=400>>400 paper cranes left for Alice to fold."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5256.\n    Returns: the number of paper cranes Alice still needs to fold.\n    \"\"\"\n    # L1\n    total_cranes = 1000 # Alice wants 1000 folded paper cranes\n    alice_folds_fraction = 0.5 # She folds half by herself\n    alice_folded = total_cranes * alice_folds_fraction\n\n    # L2\n    remaining_after_alice = total_cranes - alice_folded\n\n    # L3\n    friend_folds_divisor = 5 # a friend folds a fifth of the remaining paper cranes\n    friend_folded = remaining_after_alice / friend_folds_divisor\n\n    # L4\n    cranes_alice_still_needs = total_cranes - alice_folded - friend_folded\n\n    # FA\n    answer = cranes_alice_still_needs\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "cranes_alice_still_needs",
+    "operand_to_replace": "friend_folded",
+    "replacement_variable": "friend_folds_divisor"
+  },
+  "correct_trace": {
+    "total_cranes": 1000,
+    "alice_folds_fraction": 0.5,
+    "alice_folded": 500.0,
+    "remaining_after_alice": 500.0,
+    "friend_folds_divisor": 5,
+    "friend_folded": 100.0,
+    "cranes_alice_still_needs": 400.0,
+    "answer": 400.0
+  },
+  "flawed_trace": {
+    "total_cranes": 1000,
+    "alice_folds_fraction": 0.5,
+    "alice_folded": 500.0,
+    "remaining_after_alice": 500.0,
+    "friend_folds_divisor": 5,
+    "friend_folded": 100.0,
+    "cranes_alice_still_needs": 495.0,
+    "answer": 495.0
+  },
+  "correct_value": 400.0,
+  "flawed_value": 495.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "alice_folded",
+      "question_inputs": [
+        "total_cranes",
+        "alice_folds_fraction"
+      ],
+      "solution_line_template": "Alice folds {total_cranes} * {alice_folds_fraction} = <<{total_cranes}*{alice_folds_fraction}={alice_folded}>>{alice_folded} paper cranes by herself."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_after_alice",
+      "question_inputs": [],
+      "solution_line_template": "This leaves {total_cranes} - {alice_folded} = <<{total_cranes}-{alice_folded}={remaining_after_alice}>>{remaining_after_alice} paper cranes left to fold."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "friend_folded",
+      "question_inputs": [
+        "friend_folds_divisor"
+      ],
+      "solution_line_template": "A friend folds a fifth of the remaining amount, so they have folded {remaining_after_alice} / {friend_folds_divisor} = <<{remaining_after_alice}/{friend_folds_divisor}={friend_folded}>>{friend_folded} paper cranes for her."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "cranes_alice_still_needs",
+      "question_inputs": [],
+      "solution_line_template": "This means there is a total of {total_cranes} - {alice_folded} - {friend_folded} = <<{total_cranes}-{alice_folded}-{friend_folded}={cranes_alice_still_needs}>>{cranes_alice_still_needs} paper cranes left for Alice to fold."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Alice folds 1000 * 0.5 = <<1000*0.5=500>>500 paper cranes by herself.",
+    "L2": "This leaves 1000 - 500 = <<1000-500=500>>500 paper cranes left to fold.",
+    "L3": "A friend folds a fifth of the remaining amount, so they have folded 500 / 5 = <<500/5=100>>100 paper cranes for her.",
+    "L4": "This means there is a total of 1000 - 500 - 5 = <<1000-500-5=495>>495 paper cranes left for Alice to fold.",
+    "FA": "#### 495"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'friend_folds_divisor' (value: 5) was used instead of 'friend_folded' (value: 100.0).",
+  "repro_seed": -8545418026721640098,
+  "model_name": "google_gemini-2.5-flash"
+}

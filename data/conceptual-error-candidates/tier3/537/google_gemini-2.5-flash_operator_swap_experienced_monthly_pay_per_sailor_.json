@@ -1,0 +1,118 @@
+{
+  "index": 537,
+  "original_solution_mapping": {
+    "FA": "#### 34560",
+    "L1": "If the experienced sailors received 1/5 times more money than the inexperienced sailors, they were paid 1/5*10 = $<<1/5*10=2>>2 more.",
+    "L2": "The total hourly earnings for the experienced sailors each is $10+$2= $<<10+2=12>>12",
+    "L3": "In a 60-hour workweek, an experienced sailor is paid 60*$12 = $<<60*12=720>>720",
+    "L4": "In a month, an experienced sailor is paid 4*$720 = $<<4*720=2880>>2880",
+    "L5": "If there were five inexperienced sailors, the total number of experienced sailors was 17-5 = 12",
+    "L6": "If each experienced sailor was paid $2280 per month, the total combined monthly earnings for the experienced is 12*2880 = $<<12*2880=34560>>34560"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 537.\n    Returns: the total combined monthly earnings of the experienced sailors.\n    \"\"\"\n    # L1\n    more_fraction = Fraction(1, 5) # 1/5 times more\n    inexperienced_hourly_pay = 10 # $10 per hour\n    additional_pay_per_hour = more_fraction * inexperienced_hourly_pay\n\n    # L2\n    experienced_hourly_pay = inexperienced_hourly_pay + additional_pay_per_hour\n\n    # L3\n    workweek_hours = 60 # 60-hour workweek\n    experienced_weekly_pay = workweek_hours * experienced_hourly_pay\n\n    # L4\n    weeks_per_month = 4 # WK\n    experienced_monthly_pay_per_sailor = weeks_per_month * experienced_weekly_pay\n\n    # L5\n    total_sailors = 17 # 17 sailors\n    inexperienced_sailors = 5 # five inexperienced sailors\n    num_experienced_sailors = total_sailors - inexperienced_sailors\n\n    # L6\n    total_experienced_monthly_earnings = num_experienced_sailors * experienced_monthly_pay_per_sailor\n\n    # FA\n    answer = total_experienced_monthly_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "experienced_monthly_pay_per_sailor",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30cf62a90>"
+  },
+  "correct_trace": {
+    "more_fraction": "1/5",
+    "inexperienced_hourly_pay": 10,
+    "additional_pay_per_hour": "2",
+    "experienced_hourly_pay": "12",
+    "workweek_hours": 60,
+    "experienced_weekly_pay": "720",
+    "weeks_per_month": 4,
+    "experienced_monthly_pay_per_sailor": "2880",
+    "total_sailors": 17,
+    "inexperienced_sailors": 5,
+    "num_experienced_sailors": 12,
+    "total_experienced_monthly_earnings": "34560",
+    "answer": "34560"
+  },
+  "flawed_trace": {
+    "more_fraction": "1/5",
+    "inexperienced_hourly_pay": 10,
+    "additional_pay_per_hour": "2",
+    "experienced_hourly_pay": "12",
+    "workweek_hours": 60,
+    "experienced_weekly_pay": "720",
+    "weeks_per_month": 4,
+    "experienced_monthly_pay_per_sailor": "724",
+    "total_sailors": 17,
+    "inexperienced_sailors": 5,
+    "num_experienced_sailors": 12,
+    "total_experienced_monthly_earnings": "8688",
+    "answer": "8688"
+  },
+  "correct_value": "2880",
+  "flawed_value": "724",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "additional_pay_per_hour",
+      "question_inputs": [
+        "more_fraction",
+        "inexperienced_hourly_pay"
+      ],
+      "solution_line_template": "If the experienced sailors received 1/5 times more money than the inexperienced sailors, they were paid {more_fraction}*{inexperienced_hourly_pay} = $<<{more_fraction}*{inexperienced_hourly_pay}={additional_pay_per_hour}>>{additional_pay_per_hour} more."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "experienced_hourly_pay",
+      "question_inputs": [],
+      "solution_line_template": "The total hourly earnings for the experienced sailors each is ${inexperienced_hourly_pay}+${additional_pay_per_hour}= $<<{inexperienced_hourly_pay}+{additional_pay_per_hour}={experienced_hourly_pay}>>{experienced_hourly_pay}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "experienced_weekly_pay",
+      "question_inputs": [
+        "workweek_hours"
+      ],
+      "solution_line_template": "In a {workweek_hours}-hour workweek, an experienced sailor is paid {workweek_hours}*${experienced_hourly_pay} = $<<{workweek_hours}*{experienced_hourly_pay}={experienced_weekly_pay}>>{experienced_weekly_pay}"
+    },
+    {
+      "WK_inputs": [
+        "weeks_per_month"
+      ],
+      "line_number": "L4",
+      "output_variable": "experienced_monthly_pay_per_sailor",
+      "question_inputs": [],
+      "solution_line_template": "In a month, an experienced sailor is paid {weeks_per_month}*${experienced_weekly_pay} = $<<{weeks_per_month}*{experienced_weekly_pay}={experienced_monthly_pay_per_sailor}>>{experienced_monthly_pay_per_sailor}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "num_experienced_sailors",
+      "question_inputs": [
+        "total_sailors",
+        "inexperienced_sailors"
+      ],
+      "solution_line_template": "If there were {inexperienced_sailors} inexperienced sailors, the total number of experienced sailors was {total_sailors}-{inexperienced_sailors} = {num_experienced_sailors}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_experienced_monthly_earnings",
+      "question_inputs": [],
+      "solution_line_template": "If each experienced sailor was paid ${experienced_monthly_pay_per_sailor} per month, the total combined monthly earnings for the experienced is {num_experienced_sailors}*{experienced_monthly_pay_per_sailor} = $<<{num_experienced_sailors}*{experienced_monthly_pay_per_sailor}={total_experienced_monthly_earnings}>>{total_experienced_monthly_earnings}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the experienced sailors received 1/5 times more money than the inexperienced sailors, they were paid 1/5*10 = $<<1/5*10=2>>2 more.",
+    "L2": "The total hourly earnings for the experienced sailors each is $10+$2= $<<10+2=12>>12",
+    "L3": "In a 60-hour workweek, an experienced sailor is paid 60*$12 = $<<60*12=720>>720",
+    "L4": "In a month, an experienced sailor is paid 4*$720 = $<<4*720=724>>724",
+    "L5": "If there were 5 inexperienced sailors, the total number of experienced sailors was 17-5 = 12",
+    "L6": "If each experienced sailor was paid $724 per month, the total combined monthly earnings for the experienced is 12*724 = $<<12*724=8688>>8688",
+    "FA": "#### 8688"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -6251546363047932552,
+  "model_name": "google_gemini-2.5-flash"
+}

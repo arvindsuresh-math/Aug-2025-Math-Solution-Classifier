@@ -1,0 +1,123 @@
+{
+  "index": 107,
+  "original_solution_mapping": {
+    "FA": "#### 97",
+    "L1": "On Monday there are 20/100 * 25 = <<20/100*25=5>>5 cars passing the street less than on Tuesday.",
+    "L2": "So on Monday, there are 25 - 5 = <<25-5=20>>20 cars on Happy Street.",
+    "L3": "On Wednesday, there are 20 + 2 = <<20+2=22>>22 cars on this street.",
+    "L4": "On Thursday and Friday, there is a total of 10 * 2 = <<10*2=20>>20 cars passing.",
+    "L5": "On the weekend 5 * 2 = <<5*2=10>>10 cars are passing.",
+    "L6": "So from Monday through Sunday, there are 20 + 25 + 22 + 20 + 10 = <<20+25+22+20+10=97>>97 cars traveling down the street."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 107.\n    Returns: the total number of cars that travel down Happy Street from Monday through Sunday.\n    \"\"\"\n    # L1\n    monday_less_percentage = Fraction(20, 100) # 20% less than on Tuesday\n    tuesday_cars = 25 # Tuesday - 25\n    cars_less_on_monday = monday_less_percentage * tuesday_cars\n\n    # L2\n    monday_cars = tuesday_cars - cars_less_on_monday\n\n    # L3\n    wednesday_additional_cars = 2 # 2 more cars than on Monday\n    wednesday_cars = monday_cars + wednesday_additional_cars\n\n    # L4\n    cars_per_weekday_end = 10 # 10 cars each day\n    num_days_thursday_friday = 2 # WK\n    thursday_friday_cars = cars_per_weekday_end * num_days_thursday_friday\n\n    # L5\n    cars_per_weekend_day = 5 # traffic drops to 5 cars per day\n    num_weekend_days = 2 # WK\n    weekend_cars = cars_per_weekend_day * num_weekend_days\n\n    # L6\n    total_cars_week = monday_cars + tuesday_cars + wednesday_cars + thursday_friday_cars + weekend_cars\n\n    # FA\n    answer = total_cars_week\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_cars_week",
+    "operand_to_replace": "thursday_friday_cars",
+    "replacement_variable": "tuesday_cars"
+  },
+  "correct_trace": {
+    "monday_less_percentage": "1/5",
+    "tuesday_cars": 25,
+    "cars_less_on_monday": "5",
+    "monday_cars": "20",
+    "wednesday_additional_cars": 2,
+    "wednesday_cars": "22",
+    "cars_per_weekday_end": 10,
+    "num_days_thursday_friday": 2,
+    "thursday_friday_cars": 20,
+    "cars_per_weekend_day": 5,
+    "num_weekend_days": 2,
+    "weekend_cars": 10,
+    "total_cars_week": "97",
+    "answer": "97"
+  },
+  "flawed_trace": {
+    "monday_less_percentage": "1/5",
+    "tuesday_cars": 25,
+    "cars_less_on_monday": "5",
+    "monday_cars": "20",
+    "wednesday_additional_cars": 2,
+    "wednesday_cars": "22",
+    "cars_per_weekday_end": 10,
+    "num_days_thursday_friday": 2,
+    "thursday_friday_cars": 20,
+    "cars_per_weekend_day": 5,
+    "num_weekend_days": 2,
+    "weekend_cars": 10,
+    "total_cars_week": "102",
+    "answer": "102"
+  },
+  "correct_value": "97",
+  "flawed_value": "102",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cars_less_on_monday",
+      "question_inputs": [
+        "monday_less_percentage",
+        "tuesday_cars"
+      ],
+      "solution_line_template": "On Monday there are {monday_less_percentage} * {tuesday_cars} = <<{monday_less_percentage}*{tuesday_cars}={cars_less_on_monday}>>{cars_less_on_monday} cars passing the street less than on Tuesday."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "monday_cars",
+      "question_inputs": [],
+      "solution_line_template": "So on Monday, there are {tuesday_cars} - {cars_less_on_monday} = <<{tuesday_cars}-{cars_less_on_monday}={monday_cars}>>{monday_cars} cars on Happy Street."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "wednesday_cars",
+      "question_inputs": [
+        "wednesday_additional_cars"
+      ],
+      "solution_line_template": "On Wednesday, there are {monday_cars} + {wednesday_additional_cars} = <<{monday_cars}+{wednesday_additional_cars}={wednesday_cars}>>{wednesday_cars} cars on this street."
+    },
+    {
+      "WK_inputs": [
+        "num_days_thursday_friday"
+      ],
+      "line_number": "L4",
+      "output_variable": "thursday_friday_cars",
+      "question_inputs": [
+        "cars_per_weekday_end"
+      ],
+      "solution_line_template": "On Thursday and Friday, there is a total of {cars_per_weekday_end} * {num_days_thursday_friday} = <<{cars_per_weekday_end}*{num_days_thursday_friday}={thursday_friday_cars}>>{thursday_friday_cars} cars passing."
+    },
+    {
+      "WK_inputs": [
+        "num_weekend_days"
+      ],
+      "line_number": "L5",
+      "output_variable": "weekend_cars",
+      "question_inputs": [
+        "cars_per_weekend_day"
+      ],
+      "solution_line_template": "On the weekend {cars_per_weekend_day} * {num_weekend_days} = <<{cars_per_weekend_day}*{num_weekend_days}={weekend_cars}>>{weekend_cars} cars are passing."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_cars_week",
+      "question_inputs": [],
+      "solution_line_template": "So from Monday through Sunday, there are {monday_cars} + {tuesday_cars} + {wednesday_cars} + {thursday_friday_cars} + {weekend_cars} = <<{monday_cars}+{tuesday_cars}+{wednesday_cars}+{thursday_friday_cars}+{weekend_cars}={total_cars_week}>>{total_cars_week} cars traveling down the street."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Monday there are 20/100 * 25 = <<20/100*25=5>>5 cars passing the street less than on Tuesday.",
+    "L2": "So on Monday, there are 25 - 5 = <<25-5=20>>20 cars on Happy Street.",
+    "L3": "On Wednesday, there are 20 + 2 = <<20+2=22>>22 cars on this street.",
+    "L4": "On Thursday and Friday, there is a total of 10 * 2 = <<10*2=20>>20 cars passing.",
+    "L5": "On the weekend 5 * 2 = <<5*2=10>>10 cars are passing.",
+    "L6": "So from Monday through Sunday, there are 20 + 25 + 22 + 25 + 10 = <<20+25+22+25+10=102>>102 cars traveling down the street.",
+    "FA": "#### 102"
+  },
+  "erroneous_line_number": "L6",
+  "explanation": "Incorrect operand. The variable 'tuesday_cars' (value: 25) was used instead of 'thursday_friday_cars' (value: 20).",
+  "repro_seed": -8423418635934265506,
+  "model_name": "google_gemini-2.5-flash"
+}

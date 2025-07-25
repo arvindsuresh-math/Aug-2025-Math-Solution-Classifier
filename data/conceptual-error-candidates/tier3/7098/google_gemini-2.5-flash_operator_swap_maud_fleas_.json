@@ -1,0 +1,74 @@
+{
+  "index": 7098,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "Gertrude has 10 fleas and Olive has half that amount so Olive has 10/2 = <<10/2=5>>5 fleas",
+    "L2": "Maud has 5 times the amount of fleas as Olive who has 5 fleas so Maud has 5*5 = <<5*5=25>>25 fleas",
+    "L3": "Gertrude has 10 fleas, Maud has 25 fleas and Olive has 5 for a total of 10+25+5 = <<10+25+5=40>>40 fleas"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7098.\n    Returns: the total number of fleas on the chickens.\n    \"\"\"\n    # L1\n    gertrude_fleas = 10 # Gertrude the chicken has 10 fleas\n    half_divisor = 2 # half that amount\n    olive_fleas = gertrude_fleas / half_divisor\n\n    # L2\n    maud_multiplier = 5 # 5 times the amount of fleas as Olive\n    maud_fleas = maud_multiplier * olive_fleas\n\n    # L3\n    total_fleas = gertrude_fleas + maud_fleas + olive_fleas\n\n    # FA\n    answer = total_fleas\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "maud_fleas",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x16a9f0610>"
+  },
+  "correct_trace": {
+    "gertrude_fleas": 10,
+    "half_divisor": 2,
+    "olive_fleas": 5.0,
+    "maud_multiplier": 5,
+    "maud_fleas": 25.0,
+    "total_fleas": 40.0,
+    "answer": 40.0
+  },
+  "flawed_trace": {
+    "gertrude_fleas": 10,
+    "half_divisor": 2,
+    "olive_fleas": 5.0,
+    "maud_multiplier": 5,
+    "maud_fleas": 1.0,
+    "total_fleas": 16.0,
+    "answer": 16.0
+  },
+  "correct_value": 25.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "olive_fleas",
+      "question_inputs": [
+        "gertrude_fleas",
+        "half_divisor"
+      ],
+      "solution_line_template": "Gertrude has {gertrude_fleas} fleas and Olive has half that amount so Olive has {gertrude_fleas}/{half_divisor} = <<{gertrude_fleas}/{half_divisor}={olive_fleas}>>{olive_fleas} fleas"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "maud_fleas",
+      "question_inputs": [
+        "maud_multiplier"
+      ],
+      "solution_line_template": "Maud has {maud_multiplier} times the amount of fleas as Olive who has {olive_fleas} fleas so Maud has {maud_multiplier}*{olive_fleas} = <<{maud_multiplier}*{olive_fleas}={maud_fleas}>>{maud_fleas} fleas"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_fleas",
+      "question_inputs": [],
+      "solution_line_template": "Gertrude has {gertrude_fleas} fleas, Maud has {maud_fleas} fleas and Olive has {olive_fleas} for a total of {gertrude_fleas}+{maud_fleas}+{olive_fleas} = <<{gertrude_fleas}+{maud_fleas}+{olive_fleas}={total_fleas}>>{total_fleas} fleas"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Gertrude has 10 fleas and Olive has half that amount so Olive has 10/2 = <<10/2=5>>5 fleas",
+    "L2": "Maud has 5 times the amount of fleas as Olive who has 5 fleas so Maud has 5*5 = <<5*5=1>>1 fleas",
+    "L3": "Gertrude has 10 fleas, Maud has 1 fleas and Olive has 5 for a total of 10+1+5 = <<10+1+5=16>>16 fleas",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 897338976078929946,
+  "model_name": "google_gemini-2.5-flash"
+}

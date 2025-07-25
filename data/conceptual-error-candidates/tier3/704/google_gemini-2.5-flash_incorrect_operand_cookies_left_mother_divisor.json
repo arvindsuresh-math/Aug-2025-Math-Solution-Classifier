@@ -1,0 +1,100 @@
+{
+  "index": 704,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "Sabrina had 20 - 10 = <<20-10=10>>10 cookies left after giving 10 cookies to her brother.",
+    "L2": "Sabrina's mother gave her 10/2 = <<10/2=5>>5 cookies.",
+    "L3": "So, she had 10 + 5 = <<10+5=15>>15 cookies then.",
+    "L4": "She gave 15 x 2/3 = <<15*2/3=10>>10 cookies to her sister.",
+    "L5": "Therefore, she only has 15 - 10 = <<15-10=5>>5 cookies left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 704.\n    Returns: the number of cookies left with Sabrina.\n    \"\"\"\n    # L1\n    initial_cookies = 20 # Sabrina had 20 cookies at the start\n    given_to_brother = 10 # gave 10 cookies to her brother\n    cookies_after_brother = initial_cookies - given_to_brother\n\n    # L2\n    mother_divisor = 2 # half the number of cookies she gave her brother\n    received_from_mother = given_to_brother / mother_divisor\n\n    # L3\n    cookies_before_sister = cookies_after_brother + received_from_mother\n\n    # L4\n    sister_fraction = Fraction(2, 3) # two-thirds of her cookies\n    given_to_sister = cookies_before_sister * sister_fraction\n\n    # L5\n    cookies_left = cookies_before_sister - given_to_sister\n\n    # FA\n    answer = cookies_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "cookies_left",
+    "operand_to_replace": "given_to_sister",
+    "replacement_variable": "mother_divisor"
+  },
+  "correct_trace": {
+    "initial_cookies": 20,
+    "given_to_brother": 10,
+    "cookies_after_brother": 10,
+    "mother_divisor": 2,
+    "received_from_mother": 5.0,
+    "cookies_before_sister": 15.0,
+    "sister_fraction": "2/3",
+    "given_to_sister": 10.0,
+    "cookies_left": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "initial_cookies": 20,
+    "given_to_brother": 10,
+    "cookies_after_brother": 10,
+    "mother_divisor": 2,
+    "received_from_mother": 5.0,
+    "cookies_before_sister": 15.0,
+    "sister_fraction": "2/3",
+    "given_to_sister": 10.0,
+    "cookies_left": 13.0,
+    "answer": 13.0
+  },
+  "correct_value": 5.0,
+  "flawed_value": 13.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cookies_after_brother",
+      "question_inputs": [
+        "initial_cookies",
+        "given_to_brother"
+      ],
+      "solution_line_template": "Sabrina had {initial_cookies} - {given_to_brother} = <<{initial_cookies}-{given_to_brother}={cookies_after_brother}>>{cookies_after_brother} cookies left after giving {given_to_brother} cookies to her brother."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "received_from_mother",
+      "question_inputs": [
+        "mother_divisor"
+      ],
+      "solution_line_template": "Sabrina's mother gave her {given_to_brother}/{mother_divisor} = <<{given_to_brother}/{mother_divisor}={received_from_mother}>>{received_from_mother} cookies."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cookies_before_sister",
+      "question_inputs": [],
+      "solution_line_template": "So, she had {cookies_after_brother} + {received_from_mother} = <<{cookies_after_brother}+{received_from_mother}={cookies_before_sister}>>{cookies_before_sister} cookies then."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "given_to_sister",
+      "question_inputs": [
+        "sister_fraction"
+      ],
+      "solution_line_template": "She gave {cookies_before_sister} x {sister_fraction} = <<{cookies_before_sister}*{sister_fraction}={given_to_sister}>>{given_to_sister} cookies to her sister."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "cookies_left",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, she only has {cookies_before_sister} - {given_to_sister} = <<{cookies_before_sister}-{given_to_sister}={cookies_left}>>{cookies_left} cookies left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Sabrina had 20 - 10 = <<20-10=10>>10 cookies left after giving 10 cookies to her brother.",
+    "L2": "Sabrina's mother gave her 10/2 = <<10/2=5>>5 cookies.",
+    "L3": "So, she had 10 + 5 = <<10+5=15>>15 cookies then.",
+    "L4": "She gave 15 x 2/3 = <<15*2/3=10>>10 cookies to her sister.",
+    "L5": "Therefore, she only has 15 - 2 = <<15-2=13>>13 cookies left.",
+    "FA": "#### 13"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operand. The variable 'mother_divisor' (value: 2) was used instead of 'given_to_sister' (value: 10.0).",
+  "repro_seed": 4270159987187589634,
+  "model_name": "google_gemini-2.5-flash"
+}

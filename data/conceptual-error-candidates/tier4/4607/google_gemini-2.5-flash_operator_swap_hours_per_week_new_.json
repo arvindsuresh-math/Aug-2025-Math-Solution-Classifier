@@ -1,0 +1,89 @@
+{
+  "index": 4607,
+  "original_solution_mapping": {
+    "FA": "#### 660",
+    "L1": "He read 600/40=<<600/40=15>>15 hours per week",
+    "L2": "So now he reads 15-4=<<15-4=11>>11 hours per week",
+    "L3": "She now reads 40*1.5=<<40*1.5=60>>60 pages per hour",
+    "L4": "So she reads 11*60=<<11*60=660>>660 pages per week"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4607.\n    Returns: the number of pages Jim reads a week now.\n    \"\"\"\n    # L1\n    total_pages_per_week_initial = 600 # 600 pages per week\n    reading_rate_initial = 40 # 40 pages an hour\n    hours_per_week_initial = total_pages_per_week_initial / reading_rate_initial\n\n    # L2\n    hours_less_per_week = 4 # reads 4 hours less per week\n    hours_per_week_new = hours_per_week_initial - hours_less_per_week\n\n    # L3\n    speed_increase_factor = 1.5 # 150% of its former speed\n    reading_rate_new = reading_rate_initial * speed_increase_factor\n\n    # L4\n    pages_per_week_new = hours_per_week_new * reading_rate_new\n\n    # FA\n    answer = pages_per_week_new\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "hours_per_week_new",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x16a264890>"
+  },
+  "correct_trace": {
+    "total_pages_per_week_initial": 600,
+    "reading_rate_initial": 40,
+    "hours_per_week_initial": 15.0,
+    "hours_less_per_week": 4,
+    "hours_per_week_new": 11.0,
+    "speed_increase_factor": 1.5,
+    "reading_rate_new": 60.0,
+    "pages_per_week_new": 660.0,
+    "answer": 660.0
+  },
+  "flawed_trace": {
+    "total_pages_per_week_initial": 600,
+    "reading_rate_initial": 40,
+    "hours_per_week_initial": 15.0,
+    "hours_less_per_week": 4,
+    "hours_per_week_new": 19.0,
+    "speed_increase_factor": 1.5,
+    "reading_rate_new": 60.0,
+    "pages_per_week_new": 1140.0,
+    "answer": 1140.0
+  },
+  "correct_value": 11.0,
+  "flawed_value": 19.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "hours_per_week_initial",
+      "question_inputs": [
+        "total_pages_per_week_initial",
+        "reading_rate_initial"
+      ],
+      "solution_line_template": "He read {total_pages_per_week_initial}/{reading_rate_initial}=<<{total_pages_per_week_initial}/{reading_rate_initial}={hours_per_week_initial}>>{hours_per_week_initial} hours per week"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "hours_per_week_new",
+      "question_inputs": [
+        "hours_less_per_week"
+      ],
+      "solution_line_template": "So now he reads {hours_per_week_initial}-{hours_less_per_week}=<<{hours_per_week_initial}-{hours_less_per_week}={hours_per_week_new}>>{hours_per_week_new} hours per week"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "reading_rate_new",
+      "question_inputs": [
+        "speed_increase_factor"
+      ],
+      "solution_line_template": "She now reads {reading_rate_initial}*{speed_increase_factor}=<<{reading_rate_initial}*{speed_increase_factor}={reading_rate_new}>>{reading_rate_new} pages per hour"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "pages_per_week_new",
+      "question_inputs": [],
+      "solution_line_template": "So she reads {hours_per_week_new}*{reading_rate_new}=<<{hours_per_week_new}*{reading_rate_new}={pages_per_week_new}>>{pages_per_week_new} pages per week"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He read 600/40=<<600/40=15>>15 hours per week",
+    "L2": "So now he reads 15-4=<<15-4=19>>19 hours per week",
+    "L3": "She now reads 40*1.5=<<40*1.5=60>>60 pages per hour",
+    "L4": "So she reads 19*60=<<19*60=1140>>1140 pages per week",
+    "FA": "#### 1140"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 8655121741663009594,
+  "model_name": "google_gemini-2.5-flash"
+}

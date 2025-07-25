@@ -1,0 +1,74 @@
+{
+  "index": 3846,
+  "original_solution_mapping": {
+    "FA": "#### 150",
+    "L1": "She originally dropped 5000/25=<<5000/25=200>>200 kernels of popcorn.",
+    "L2": "The squirrel ate 200/4=<<200/4=50>>50 kernels of popcorn.",
+    "L3": "Therefore, 200-50=<<200-50=150>>150 kernels of popcorn remain on the ground."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3846.\n    Returns: the total number of popcorn kernels remaining on the ground.\n    \"\"\"\n    # L1\n    total_distance = 5000 # 5000 feet from her school\n    drop_interval = 25 # 1 kernel of popcorn per 25 feet\n    original_kernels_dropped = total_distance / drop_interval\n\n    # L2\n    squirrel_eats_denominator = 4 # one-quarter of the popcorn\n    kernels_eaten_by_squirrel = original_kernels_dropped / squirrel_eats_denominator\n\n    # L3\n    remaining_kernels = original_kernels_dropped - kernels_eaten_by_squirrel\n\n    # FA\n    answer = remaining_kernels\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "remaining_kernels",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x16a0eba90>"
+  },
+  "correct_trace": {
+    "total_distance": 5000,
+    "drop_interval": 25,
+    "original_kernels_dropped": 200.0,
+    "squirrel_eats_denominator": 4,
+    "kernels_eaten_by_squirrel": 50.0,
+    "remaining_kernels": 150.0,
+    "answer": 150.0
+  },
+  "flawed_trace": {
+    "total_distance": 5000,
+    "drop_interval": 25,
+    "original_kernels_dropped": 200.0,
+    "squirrel_eats_denominator": 4,
+    "kernels_eaten_by_squirrel": 50.0,
+    "remaining_kernels": 250.0,
+    "answer": 250.0
+  },
+  "correct_value": 150.0,
+  "flawed_value": 250.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "original_kernels_dropped",
+      "question_inputs": [
+        "total_distance",
+        "drop_interval"
+      ],
+      "solution_line_template": "She originally dropped {total_distance}/{drop_interval}=<<{total_distance}/{drop_interval}={original_kernels_dropped}>>{original_kernels_dropped} kernels of popcorn."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "kernels_eaten_by_squirrel",
+      "question_inputs": [
+        "squirrel_eats_denominator"
+      ],
+      "solution_line_template": "The squirrel ate {original_kernels_dropped}/{squirrel_eats_denominator}=<<{original_kernels_dropped}/{squirrel_eats_denominator}={kernels_eaten_by_squirrel}>>{kernels_eaten_by_squirrel} kernels of popcorn."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_kernels",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, {original_kernels_dropped}-{kernels_eaten_by_squirrel}=<<{original_kernels_dropped}-{kernels_eaten_by_squirrel}={remaining_kernels}>>{remaining_kernels} kernels of popcorn remain on the ground."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She originally dropped 5000/25=<<5000/25=200>>200 kernels of popcorn.",
+    "L2": "The squirrel ate 200/4=<<200/4=50>>50 kernels of popcorn.",
+    "L3": "Therefore, 200-50=<<200-50=250>>250 kernels of popcorn remain on the ground.",
+    "FA": "#### 250"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -3665438687333325475,
+  "model_name": "google_gemini-2.5-flash"
+}

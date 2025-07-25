@@ -1,0 +1,85 @@
+{
+  "index": 6461,
+  "original_solution_mapping": {
+    "FA": "#### 65",
+    "L1": "John's mother received 3/8 x $200 = $<<3/8*200=75>>75.",
+    "L2": "His father got 3/10 x $200 = $<<3/10*200=60>>60.",
+    "L3": "Thus, John gave a total of $75 + $60 = $<<75+60=135>>135.",
+    "L4": "Therefore, John had $200 - $135 = $<<200-135=65>>65 left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6461.\n    Returns: the amount of money John had left.\n    \"\"\"\n    # L1\n    mother_fraction = Fraction(3, 8) # 3/8 of his money\n    initial_money = 200 # John had $200\n    money_to_mother = mother_fraction * initial_money\n\n    # L2\n    father_fraction = Fraction(3, 10) # 3/10 to his father\n    money_to_father = father_fraction * initial_money\n\n    # L3\n    total_given_away = money_to_mother + money_to_father\n\n    # L4\n    money_left = initial_money - total_given_away\n\n    # FA\n    answer = money_left\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "money_to_mother",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x1779e5650>"
+  },
+  "correct_trace": {
+    "mother_fraction": "3/8",
+    "initial_money": 200,
+    "money_to_mother": "75",
+    "father_fraction": "3/10",
+    "money_to_father": "60",
+    "total_given_away": "135",
+    "money_left": "65",
+    "answer": "65"
+  },
+  "flawed_trace": {
+    "mother_fraction": "3/8",
+    "initial_money": 200,
+    "money_to_mother": "3/1600",
+    "father_fraction": "3/10",
+    "money_to_father": "60",
+    "total_given_away": "96003/1600",
+    "money_left": "223997/1600",
+    "answer": "223997/1600"
+  },
+  "correct_value": "75",
+  "flawed_value": "3/1600",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_to_mother",
+      "question_inputs": [
+        "mother_fraction",
+        "initial_money"
+      ],
+      "solution_line_template": "John's mother received {mother_fraction} x ${initial_money} = ${money_to_mother}<<{mother_fraction}*{initial_money}={money_to_mother}>>{money_to_mother}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_to_father",
+      "question_inputs": [
+        "father_fraction"
+      ],
+      "solution_line_template": "His father got {father_fraction} x ${initial_money} = ${money_to_father}<<{father_fraction}*{initial_money}={money_to_father}>>{money_to_father}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_given_away",
+      "question_inputs": [],
+      "solution_line_template": "Thus, John gave a total of ${money_to_mother} + ${money_to_father} = ${total_given_away}<<{money_to_mother}+{money_to_father}={total_given_away}>>{total_given_away}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "money_left",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, John had ${initial_money} - ${total_given_away} = ${money_left}<<{initial_money}-{total_given_away}={money_left}>>{money_left} left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "John's mother received 3/8 x $200 = $3/1600<<3/8*200=3/1600>>3/1600.",
+    "L2": "His father got 3/10 x $200 = $60<<3/10*200=60>>60.",
+    "L3": "Thus, John gave a total of $3/1600 + $60 = $96003/1600<<3/1600+60=96003/1600>>96003/1600.",
+    "L4": "Therefore, John had $200 - $96003/1600 = $223997/1600<<200-96003/1600=223997/1600>>223997/1600 left.",
+    "FA": "#### 223997/1600"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 4141550906051696085,
+  "model_name": "google_gemini-2.5-flash"
+}

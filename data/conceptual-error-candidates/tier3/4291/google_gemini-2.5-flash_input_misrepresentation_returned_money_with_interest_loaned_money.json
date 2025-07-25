@@ -1,0 +1,74 @@
+{
+  "index": 4291,
+  "original_solution_mapping": {
+    "FA": "#### 33",
+    "L1": "Initially, Lizzy had $30; she loaned out $15 so she has $30-$15 = $<<30-15=15>>15 left",
+    "L2": "Her friend is returning the $15 with 20% interest for a total of $15+($15*(20/100)) = $<<15+15*(20/100)=18>>18",
+    "L3": "Lizzy will now have $15+$18 = $<<15+18=33>>33"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4291.\n    Returns: the total amount of money Lizzy will have.\n    \"\"\"\n    # L1\n    initial_money = 30 # Lizzy had $30\n    loaned_money = 15 # loaned out $15\n    money_left_after_loan = initial_money - loaned_money\n\n    # L2\n    interest_rate = Fraction(20, 100) # interest of 20%\n    returned_money_with_interest = loaned_money + (loaned_money * interest_rate)\n\n    # L3\n    total_money_lizzy_has = money_left_after_loan + returned_money_with_interest\n\n    # FA\n    answer = total_money_lizzy_has\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "returned_money_with_interest",
+    "operand_to_replace": "interest_rate",
+    "replacement_variable": "loaned_money"
+  },
+  "correct_trace": {
+    "initial_money": 30,
+    "loaned_money": 15,
+    "money_left_after_loan": 15,
+    "interest_rate": "1/5",
+    "returned_money_with_interest": "18",
+    "total_money_lizzy_has": "33",
+    "answer": "33"
+  },
+  "flawed_trace": {
+    "initial_money": 30,
+    "loaned_money": 15,
+    "money_left_after_loan": 15,
+    "interest_rate": "1/5",
+    "returned_money_with_interest": 240,
+    "total_money_lizzy_has": 255,
+    "answer": 255
+  },
+  "correct_value": "18",
+  "flawed_value": 240,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_left_after_loan",
+      "question_inputs": [
+        "initial_money",
+        "loaned_money"
+      ],
+      "solution_line_template": "Initially, Lizzy had ${initial_money}; she loaned out ${loaned_money} so she has ${initial_money}-${loaned_money} = $<<{initial_money}-{loaned_money}={money_left_after_loan}>>{money_left_after_loan} left"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "returned_money_with_interest",
+      "question_inputs": [
+        "interest_rate"
+      ],
+      "solution_line_template": "Her friend is returning the ${loaned_money} with {interest_rate} interest for a total of ${loaned_money}+(${loaned_money}*({interest_rate})) = $<<{loaned_money}+{loaned_money}*({interest_rate})={returned_money_with_interest}>>{returned_money_with_interest}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_money_lizzy_has",
+      "question_inputs": [],
+      "solution_line_template": "Lizzy will now have ${money_left_after_loan}+${returned_money_with_interest} = $<<{money_left_after_loan}+{returned_money_with_interest}={total_money_lizzy_has}>>{total_money_lizzy_has}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Initially, Lizzy had $30; she loaned out $15 so she has $30-$15 = $<<30-15=15>>15 left",
+    "L2": "Her friend is returning the $15 with 15 interest for a total of $15+($15*(15)) = $<<15+15*(15)=240>>240",
+    "L3": "Lizzy will now have $15+$240 = $<<15+240=255>>255",
+    "FA": "#### 255"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'loaned_money' (15) was used instead of 'interest_rate' (20/100).",
+  "repro_seed": -1008481404132155310,
+  "model_name": "google_gemini-2.5-flash"
+}

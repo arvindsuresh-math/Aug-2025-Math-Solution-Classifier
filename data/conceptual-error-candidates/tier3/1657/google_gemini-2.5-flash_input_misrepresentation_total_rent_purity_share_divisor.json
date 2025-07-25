@@ -1,0 +1,74 @@
+{
+  "index": 1657,
+  "original_solution_mapping": {
+    "FA": "#### 5400",
+    "L1": "Purity will pay a third of Rose's share, which translates to 1800/3 = <<1800/3=600>>600 dollars.",
+    "L2": "Sheila has offered to pay 5 * 600 = <<5*600=3000>>3000 dollars",
+    "L3": "Combining everyone's share of the rent will give a total of 600 + 3000 + 1800 = <<600+3000+1800=5400>>5400 dollars"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1657.\n    Returns: the total house rent.\n    \"\"\"\n    # L1\n    rose_share = 1800 # Rose\u2019s share is $1,800\n    purity_share_divisor = 3 # thrice what Purity pays\n    purity_share = rose_share / purity_share_divisor\n\n    # L2\n    sheila_multiplier = 5 # five times Purity\u2019s share\n    sheila_share = sheila_multiplier * purity_share\n\n    # L3\n    total_rent = purity_share + sheila_share + rose_share\n\n    # FA\n    answer = total_rent\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_rent",
+    "operand_to_replace": "rose_share",
+    "replacement_variable": "purity_share_divisor"
+  },
+  "correct_trace": {
+    "rose_share": 1800,
+    "purity_share_divisor": 3,
+    "purity_share": 600.0,
+    "sheila_multiplier": 5,
+    "sheila_share": 3000.0,
+    "total_rent": 5400.0,
+    "answer": 5400.0
+  },
+  "flawed_trace": {
+    "rose_share": 1800,
+    "purity_share_divisor": 3,
+    "purity_share": 600.0,
+    "sheila_multiplier": 5,
+    "sheila_share": 3000.0,
+    "total_rent": 3603.0,
+    "answer": 3603.0
+  },
+  "correct_value": 5400.0,
+  "flawed_value": 3603.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "purity_share",
+      "question_inputs": [
+        "rose_share",
+        "purity_share_divisor"
+      ],
+      "solution_line_template": "Purity will pay a third of Rose's share, which translates to {rose_share}/{purity_share_divisor} = <<{rose_share}/{purity_share_divisor}={purity_share}>>{purity_share} dollars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sheila_share",
+      "question_inputs": [
+        "sheila_multiplier"
+      ],
+      "solution_line_template": "Sheila has offered to pay {sheila_multiplier} * {purity_share} = <<{sheila_multiplier}*{purity_share}={sheila_share}>>{sheila_share} dollars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_rent",
+      "question_inputs": [],
+      "solution_line_template": "Combining everyone's share of the rent will give a total of {purity_share} + {sheila_share} + {rose_share} = <<{purity_share}+{sheila_share}+{rose_share}={total_rent}>>{total_rent} dollars"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Purity will pay a third of Rose's share, which translates to 1800/3 = <<1800/3=600>>600 dollars.",
+    "L2": "Sheila has offered to pay 5 * 600 = <<5*600=3000>>3000 dollars",
+    "L3": "Combining everyone's share of the rent will give a total of 600 + 3000 + 3 = <<600+3000+3=3603>>3603 dollars",
+    "FA": "#### 3603"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'purity_share_divisor' (3) was used instead of 'rose_share' (1800).",
+  "repro_seed": -7828408792900144134,
+  "model_name": "google_gemini-2.5-flash"
+}

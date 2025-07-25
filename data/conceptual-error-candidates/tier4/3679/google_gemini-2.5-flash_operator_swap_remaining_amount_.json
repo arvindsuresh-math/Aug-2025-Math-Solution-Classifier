@@ -1,0 +1,63 @@
+{
+  "index": 3679,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "Macey needs to save $3 - $1.50 = $<<3-1.5=1.50>>1.50 more for the shirt.",
+    "L2": "So she needs $1.50/$0.50 = <<1.50/0.50=3>>3 more weeks to save for the remaining amount."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3679.\n    Returns: the number of weeks Macey needs to save.\n    \"\"\"\n    # L1\n    shirt_cost = 3.0 # shirt that costs $3\n    saved_already = 1.50 # save $1.50 already\n    remaining_amount = shirt_cost - saved_already\n\n    # L2\n    savings_per_week = 0.50 # saves $0.50 per week\n    weeks_needed = remaining_amount / savings_per_week\n\n    # FA\n    answer = weeks_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "remaining_amount",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x16a292210>"
+  },
+  "correct_trace": {
+    "shirt_cost": 3.0,
+    "saved_already": 1.5,
+    "remaining_amount": 1.5,
+    "savings_per_week": 0.5,
+    "weeks_needed": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "shirt_cost": 3.0,
+    "saved_already": 1.5,
+    "remaining_amount": 2.0,
+    "savings_per_week": 0.5,
+    "weeks_needed": 4.0,
+    "answer": 4.0
+  },
+  "correct_value": 1.5,
+  "flawed_value": 2.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "remaining_amount",
+      "question_inputs": [
+        "shirt_cost",
+        "saved_already"
+      ],
+      "solution_line_template": "Macey needs to save ${shirt_cost} - ${saved_already} = $<<{shirt_cost}-{saved_already}={remaining_amount}>>{remaining_amount} more for the shirt."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "weeks_needed",
+      "question_inputs": [
+        "savings_per_week"
+      ],
+      "solution_line_template": "So she needs ${remaining_amount}/${savings_per_week} = <<{remaining_amount}/{savings_per_week}={weeks_needed}>>{weeks_needed} more weeks to save for the remaining amount."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Macey needs to save $3 - $1.5 = $<<3-1.5=2>>2 more for the shirt.",
+    "L2": "So she needs $2/$0.5 = <<2/0.5=4>>4 more weeks to save for the remaining amount.",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": 8342684346013482033,
+  "model_name": "google_gemini-2.5-flash"
+}

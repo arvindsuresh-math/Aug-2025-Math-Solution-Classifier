@@ -1,0 +1,88 @@
+{
+  "index": 7174,
+  "original_solution_mapping": {
+    "FA": "#### 24",
+    "L1": "Lulu had 65-5 = <<65-5=60>>60 dollars left after eating ice cream.",
+    "L2": "Lulu had 60/2 = <<60/2=30>>30 dollars left.",
+    "L3": "Lulu deposited 30/5 = <<30/5=6>>6 dollars",
+    "L4": "Lulu was left with 30-6 = <<30-6=24>>24 in cash."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7174.\n    Returns: the amount of cash Lulu was left with.\n    \"\"\"\n    # L1\n    initial_money = 65 # Lulu has $65 in her piggy bank\n    ice_cream_cost = 5 # She spent $5 on ice cream\n    money_after_ice_cream = initial_money - ice_cream_cost\n\n    # L2\n    t_shirt_divisor = 2 # spent half of the remainder\n    money_after_tshirt = money_after_ice_cream / t_shirt_divisor\n\n    # L3\n    deposit_divisor = 5 # deposited a fifth of her remaining money\n    deposited_money = money_after_tshirt / deposit_divisor\n\n    # L4\n    cash_left = money_after_tshirt - deposited_money\n\n    # FA\n    answer = cash_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "cash_left",
+    "replacement_variable": "deposited_money"
+  },
+  "correct_trace": {
+    "initial_money": 65,
+    "ice_cream_cost": 5,
+    "money_after_ice_cream": 60,
+    "t_shirt_divisor": 2,
+    "money_after_tshirt": 30.0,
+    "deposit_divisor": 5,
+    "deposited_money": 6.0,
+    "cash_left": 24.0,
+    "answer": 24.0
+  },
+  "flawed_trace": {
+    "initial_money": 65,
+    "ice_cream_cost": 5,
+    "money_after_ice_cream": 60,
+    "t_shirt_divisor": 2,
+    "money_after_tshirt": 30.0,
+    "deposit_divisor": 5,
+    "deposited_money": 6.0,
+    "cash_left": 24.0,
+    "answer": 6.0
+  },
+  "correct_value": 24.0,
+  "flawed_value": 6.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_after_ice_cream",
+      "question_inputs": [
+        "initial_money",
+        "ice_cream_cost"
+      ],
+      "solution_line_template": "Lulu had {initial_money}-{ice_cream_cost} = <<{initial_money}-{ice_cream_cost}={money_after_ice_cream}>>{money_after_ice_cream} dollars left after eating ice cream."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_after_tshirt",
+      "question_inputs": [
+        "t_shirt_divisor"
+      ],
+      "solution_line_template": "Lulu had {money_after_ice_cream}/{t_shirt_divisor} = <<{money_after_ice_cream}/{t_shirt_divisor}={money_after_tshirt}>>{money_after_tshirt} dollars left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "deposited_money",
+      "question_inputs": [
+        "deposit_divisor"
+      ],
+      "solution_line_template": "Lulu deposited {money_after_tshirt}/{deposit_divisor} = <<{money_after_tshirt}/{deposit_divisor}={deposited_money}>>{deposited_money} dollars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "cash_left",
+      "question_inputs": [],
+      "solution_line_template": "Lulu was left with {money_after_tshirt}-{deposited_money} = <<{money_after_tshirt}-{deposited_money}={cash_left}>>{cash_left} in cash."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Lulu had 65-5 = <<65-5=60>>60 dollars left after eating ice cream.",
+    "L2": "Lulu had 60/2 = <<60/2=30>>30 dollars left.",
+    "L3": "Lulu deposited 30/5 = <<30/5=6>>6 dollars",
+    "FA": "#### 6"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'deposited_money' (value: 6.0) was reported instead of 'cash_left' (value: 24.0).",
+  "repro_seed": -6505003093944622366,
+  "model_name": "google_gemini-2.5-flash"
+}

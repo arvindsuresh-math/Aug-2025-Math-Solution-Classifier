@@ -1,0 +1,78 @@
+{
+  "index": 1357,
+  "original_solution_mapping": {
+    "FA": "#### 140",
+    "L1": "She got 80+40 = <<80+40=120>>120 cents from her mother and father",
+    "L2": "She spent 50 cents on candy leaving 120-50 = <<120-50=70>>70 cents",
+    "L3": "Her uncle gave her an additional 70 cents for a total of 70+70 = <<70+70=140>>140 cents"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1357.\n    Returns: the total number of cents Lizzy has now.\n    \"\"\"\n    # L1\n    mother_gave = 80 # gave her 80 cents\n    father_gave = 40 # gave her 40 cents\n    initial_total_from_parents = mother_gave + father_gave\n\n    # L2\n    spent_on_candy = 50 # spent 50 cents buying candy\n    after_spending = initial_total_from_parents - spent_on_candy\n\n    # L3\n    uncle_gave = 70 # Her uncle gave her another 70 cents\n    final_total = after_spending + uncle_gave\n\n    # FA\n    answer = final_total\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "initial_total_from_parents",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x30d273450>"
+  },
+  "correct_trace": {
+    "mother_gave": 80,
+    "father_gave": 40,
+    "initial_total_from_parents": 120,
+    "spent_on_candy": 50,
+    "after_spending": 70,
+    "uncle_gave": 70,
+    "final_total": 140,
+    "answer": 140
+  },
+  "flawed_trace": {
+    "mother_gave": 80,
+    "father_gave": 40,
+    "initial_total_from_parents": 3200,
+    "spent_on_candy": 50,
+    "after_spending": 3150,
+    "uncle_gave": 70,
+    "final_total": 3220,
+    "answer": 3220
+  },
+  "correct_value": 120,
+  "flawed_value": 3200,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "mother_gave",
+        "father_gave"
+      ],
+      "WK_inputs": [],
+      "output_variable": "initial_total_from_parents",
+      "solution_line_template": "She got {mother_gave}+{father_gave} = <<{mother_gave}+{father_gave}={initial_total_from_parents}>>{initial_total_from_parents} cents from her mother and father"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "spent_on_candy"
+      ],
+      "WK_inputs": [],
+      "output_variable": "after_spending",
+      "solution_line_template": "She spent {spent_on_candy} cents on candy leaving {initial_total_from_parents}-{spent_on_candy} = <<{initial_total_from_parents}-{spent_on_candy}={after_spending}>>{after_spending} cents"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "uncle_gave"
+      ],
+      "WK_inputs": [],
+      "output_variable": "final_total",
+      "solution_line_template": "Her uncle gave her an additional {uncle_gave} cents for a total of {after_spending}+{uncle_gave} = <<{after_spending}+{uncle_gave}={final_total}>>{final_total} cents"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She got 80+40 = <<80+40=3200>>3200 cents from her mother and father",
+    "L2": "She spent 50 cents on candy leaving 3200-50 = <<3200-50=3150>>3150 cents",
+    "L3": "Her uncle gave her an additional 70 cents for a total of 3150+70 = <<3150+70=3220>>3220 cents",
+    "FA": "#### 3220"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": -5763243778431345320,
+  "model_name": "google_gemini-2.5-flash"
+}

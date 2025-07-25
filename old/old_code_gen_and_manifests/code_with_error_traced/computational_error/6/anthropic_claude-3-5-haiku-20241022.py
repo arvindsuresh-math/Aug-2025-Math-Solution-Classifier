@@ -1,0 +1,19 @@
+def solve(
+    num_large_pizzas: int = 2,  # Albert buys 2 large pizzas
+    num_small_pizzas: int = 2,  # and 2 small pizzas
+    slices_large_pizza: int = 16,  # A large pizza has 16 slices
+    slices_small_pizza: int = 8  # a small pizza has 8 slices
+):
+    """Index: 6.
+    Returns: the total number of pizza slices Albert eats in one day.
+    """
+
+    #: L1
+    large_pizza_slices = 22 # eval: 22 = 22
+
+    #: L2
+    small_pizza_slices = num_small_pizzas * slices_small_pizza # eval: 16 = 2 * 8
+
+    #: FA
+    answer = large_pizza_slices + small_pizza_slices
+    return answer # eval: return 38

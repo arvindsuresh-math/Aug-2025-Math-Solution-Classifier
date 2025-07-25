@@ -1,0 +1,92 @@
+{
+  "index": 6002,
+  "original_solution_mapping": {
+    "FA": "#### 2000",
+    "L1": "If the rent is half what she spends on food and travel expenses, she spends 1200*2 = $<<1200*2=2400>>2400 on food and travel costs.",
+    "L2": "When her friend moved in and shared the rent costs with her, she started paying 1/2*1200 = $<<1200/2=600>>600 in rent costs.",
+    "L3": "Her total monthly expenses is now 600+2400 = $<<600+2400=3000>>3000.",
+    "L4": "When she deducts her monthly expenses from her salary, she has $5000-$3000 = $<<5000-3000=2000>>2000 remaining."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6002.\n    Returns: the amount of money remaining after expenses.\n    \"\"\"\n    # L1\n    rent = 1200 # Her rent was $1200\n    food_travel_multiplier = 2 # 1/2 of what she spent on food and travel expenses\n    food_travel_expenses = rent * food_travel_multiplier\n\n    # L2\n    rent_share_fraction = Fraction(1, 2) # 1/2*1200\n    rent_share_divisor = 2 # shared the rent\n    shared_rent_cost = rent_share_fraction * rent\n\n    # L3\n    total_monthly_expenses = shared_rent_cost + food_travel_expenses\n\n    # L4\n    salary = 5000 # her salary was $5000 per month\n    money_remaining = salary - total_monthly_expenses\n\n    # FA\n    answer = money_remaining\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "food_travel_expenses",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x177c0b650>"
+  },
+  "correct_trace": {
+    "rent": 1200,
+    "food_travel_multiplier": 2,
+    "food_travel_expenses": 2400,
+    "rent_share_fraction": "1/2",
+    "rent_share_divisor": 2,
+    "shared_rent_cost": "600",
+    "total_monthly_expenses": "3000",
+    "salary": 5000,
+    "money_remaining": "2000",
+    "answer": "2000"
+  },
+  "flawed_trace": {
+    "rent": 1200,
+    "food_travel_multiplier": 2,
+    "food_travel_expenses": 1202,
+    "rent_share_fraction": "1/2",
+    "rent_share_divisor": 2,
+    "shared_rent_cost": "600",
+    "total_monthly_expenses": "1802",
+    "salary": 5000,
+    "money_remaining": "3198",
+    "answer": "3198"
+  },
+  "correct_value": 2400,
+  "flawed_value": 1202,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "food_travel_expenses",
+      "question_inputs": [
+        "rent",
+        "food_travel_multiplier"
+      ],
+      "solution_line_template": "If the rent is half what she spends on food and travel expenses, she spends {rent}*{food_travel_multiplier} = $<<{rent}*{food_travel_multiplier}={food_travel_expenses}>>{food_travel_expenses} on food and travel costs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "shared_rent_cost",
+      "question_inputs": [
+        "rent_share_fraction",
+        "rent_share_divisor"
+      ],
+      "solution_line_template": "When her friend moved in and shared the rent costs with her, she started paying {rent_share_fraction}*{rent} = $<<{rent}/{rent_share_divisor}={shared_rent_cost}>>{shared_rent_cost} in rent costs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_monthly_expenses",
+      "question_inputs": [],
+      "solution_line_template": "Her total monthly expenses is now {shared_rent_cost}+{food_travel_expenses} = $<<{shared_rent_cost}+{food_travel_expenses}={total_monthly_expenses}>>{total_monthly_expenses}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "money_remaining",
+      "question_inputs": [
+        "salary"
+      ],
+      "solution_line_template": "When she deducts her monthly expenses from her salary, she has ${salary}-${total_monthly_expenses} = $<<{salary}-{total_monthly_expenses}={money_remaining}>>{money_remaining} remaining."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the rent is half what she spends on food and travel expenses, she spends 1200*2 = $<<1200*2=1202>>1202 on food and travel costs.",
+    "L2": "When her friend moved in and shared the rent costs with her, she started paying 1/2*1200 = $<<1200/2=600>>600 in rent costs.",
+    "L3": "Her total monthly expenses is now 600+1202 = $<<600+1202=1802>>1802.",
+    "L4": "When she deducts her monthly expenses from her salary, she has $5000-$1802 = $<<5000-1802=3198>>3198 remaining.",
+    "FA": "#### 3198"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -2969060653956846768,
+  "model_name": "google_gemini-2.5-flash"
+}

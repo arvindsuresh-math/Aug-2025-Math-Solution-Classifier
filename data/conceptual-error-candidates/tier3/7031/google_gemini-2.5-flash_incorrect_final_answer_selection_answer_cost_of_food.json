@@ -1,0 +1,84 @@
+{
+  "index": 7031,
+  "original_solution_mapping": {
+    "FA": "#### 300",
+    "L1": "600/3=<<600/3=200>>200$ for gas",
+    "L2": "After buying gas, Darwin has 600-200=<<600-200=400>>400$ left",
+    "L3": "400/4=<<400/4=100>>100$ on food",
+    "L4": "Darwin has 400-100=<<400-100=300>>300$ left"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7031.\n    Returns: the amount of money Darwin had left.\n    \"\"\"\n    # L1\n    total_money = 600 # Darwin has 600$\n    gas_fraction_denominator = 3 # spent 1/3 of it on gas\n    cost_of_gas = total_money / gas_fraction_denominator\n\n    # L2\n    money_after_gas = total_money - cost_of_gas\n\n    # L3\n    food_fraction_denominator = 4 # 1/4 of what was left on food\n    cost_of_food = money_after_gas / food_fraction_denominator\n\n    # L4\n    money_left = money_after_gas - cost_of_food\n\n    # FA\n    answer = money_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "money_left",
+    "replacement_variable": "cost_of_food"
+  },
+  "correct_trace": {
+    "total_money": 600,
+    "gas_fraction_denominator": 3,
+    "cost_of_gas": 200.0,
+    "money_after_gas": 400.0,
+    "food_fraction_denominator": 4,
+    "cost_of_food": 100.0,
+    "money_left": 300.0,
+    "answer": 300.0
+  },
+  "flawed_trace": {
+    "total_money": 600,
+    "gas_fraction_denominator": 3,
+    "cost_of_gas": 200.0,
+    "money_after_gas": 400.0,
+    "food_fraction_denominator": 4,
+    "cost_of_food": 100.0,
+    "money_left": 300.0,
+    "answer": 100.0
+  },
+  "correct_value": 300.0,
+  "flawed_value": 100.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_of_gas",
+      "question_inputs": [
+        "total_money",
+        "gas_fraction_denominator"
+      ],
+      "solution_line_template": "{total_money}/{gas_fraction_denominator}=<<{total_money}/{gas_fraction_denominator}={cost_of_gas}>>{cost_of_gas}$ for gas"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_after_gas",
+      "question_inputs": [],
+      "solution_line_template": "After buying gas, Darwin has {total_money}-{cost_of_gas}=<<{total_money}-{cost_of_gas}={money_after_gas}>>{money_after_gas}$ left"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cost_of_food",
+      "question_inputs": [
+        "food_fraction_denominator"
+      ],
+      "solution_line_template": "{money_after_gas}/{food_fraction_denominator}=<<{money_after_gas}/{food_fraction_denominator}={cost_of_food}>>{cost_of_food}$ on food"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "money_left",
+      "question_inputs": [],
+      "solution_line_template": "Darwin has {money_after_gas}-{cost_of_food}=<<{money_after_gas}-{cost_of_food}={money_left}>>{money_left}$ left"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "600/3=<<600/3=200>>200$ for gas",
+    "L2": "After buying gas, Darwin has 600-200=<<600-200=400>>400$ left",
+    "L3": "400/4=<<400/4=100>>100$ on food",
+    "FA": "#### 100"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'cost_of_food' (value: 100.0) was reported instead of 'money_left' (value: 300.0).",
+  "repro_seed": -9003875102862697274,
+  "model_name": "google_gemini-2.5-flash"
+}

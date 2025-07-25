@@ -1,0 +1,63 @@
+{
+  "index": 524,
+  "original_solution_mapping": {
+    "FA": "#### 234",
+    "L1": "At the end of Monday, there are 336 - 124 = <<336-124=212>>212 books left.",
+    "L2": "At the end of Tuesday, there are 212 + 22 = <<212+22=234>>234 books."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 524.\n    Returns: the number of books in the library now.\n    \"\"\"\n    # L1\n    initial_books = 336 # 336 books in a library\n    books_taken_out_monday = 124 # 124 books are taken out\n    books_after_monday = initial_books - books_taken_out_monday\n\n    # L2\n    books_brought_back_tuesday = 22 # 22 books are brought back\n    books_after_tuesday = books_after_monday + books_brought_back_tuesday\n\n    # FA\n    answer = books_after_tuesday\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "books_after_tuesday",
+    "operand_to_replace": "books_brought_back_tuesday",
+    "replacement_variable": "books_taken_out_monday"
+  },
+  "correct_trace": {
+    "initial_books": 336,
+    "books_taken_out_monday": 124,
+    "books_after_monday": 212,
+    "books_brought_back_tuesday": 22,
+    "books_after_tuesday": 234,
+    "answer": 234
+  },
+  "flawed_trace": {
+    "initial_books": 336,
+    "books_taken_out_monday": 124,
+    "books_after_monday": 212,
+    "books_brought_back_tuesday": 22,
+    "books_after_tuesday": 336,
+    "answer": 336
+  },
+  "correct_value": 234,
+  "flawed_value": 336,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "initial_books",
+        "books_taken_out_monday"
+      ],
+      "WK_inputs": [],
+      "output_variable": "books_after_monday",
+      "solution_line_template": "At the end of Monday, there are {initial_books} - {books_taken_out_monday} = <<{initial_books}-{books_taken_out_monday}={books_after_monday}>>{books_after_monday} books left."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "books_brought_back_tuesday"
+      ],
+      "WK_inputs": [],
+      "output_variable": "books_after_tuesday",
+      "solution_line_template": "At the end of Tuesday, there are {books_after_monday} + {books_brought_back_tuesday} = <<{books_after_monday}+{books_brought_back_tuesday}={books_after_tuesday}>>{books_after_tuesday} books."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "At the end of Monday, there are 336 - 124 = <<336-124=212>>212 books left.",
+    "L2": "At the end of Tuesday, there are 212 + 124 = <<212+124=336>>336 books.",
+    "FA": "#### 336"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'books_taken_out_monday' (124) was used instead of 'books_brought_back_tuesday' (22).",
+  "repro_seed": -2727388477304595558,
+  "model_name": "google_gemini-2.5-flash"
+}

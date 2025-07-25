@@ -1,0 +1,92 @@
+{
+  "index": 2980,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "Half of the 20 customers, which is 1/2*20=10 bought 20 bowls each, receiving 2 for every 10.",
+    "L2": "The total number of reward bowls each customer who bought 20 bowls received is 2+2=<<2+2=4>>4",
+    "L3": "If 10 customers bought 20 bowls, Howard gave away 4*10=<<4*10=40>>40 bowls as rewards.",
+    "L4": "The total number of reward bowls that remained is 70-40=<<70-40=30>>30"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2980.\n    Returns: the number of bowls remaining in the rewards collection.\n    \"\"\"\n    # L1\n    total_customers = 20 # 20 customers that day\n    half_numerator = 1 # Half of the 20 customers\n    half_denominator = 2 # Half of the 20 customers\n    customers_bought_20_bowls = (half_numerator / half_denominator) * total_customers\n\n    # L2\n    rewards_per_unit_bought = 2 # rewards two to his customers for every 10 they buy\n    rewards_per_customer_buying_20_bowls = rewards_per_unit_bought + rewards_per_unit_bought\n\n    # L3\n    total_rewards_given = rewards_per_customer_buying_20_bowls * customers_bought_20_bowls\n\n    # L4\n    initial_bowls_collection = 70 # collection of 70 wooden bowls\n    remaining_bowls = initial_bowls_collection - total_rewards_given\n\n    # FA\n    answer = remaining_bowls\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "customers_bought_20_bowls",
+    "operand_to_replace": "half_denominator",
+    "replacement_variable": "total_customers"
+  },
+  "correct_trace": {
+    "total_customers": 20,
+    "half_numerator": 1,
+    "half_denominator": 2,
+    "customers_bought_20_bowls": 10.0,
+    "rewards_per_unit_bought": 2,
+    "rewards_per_customer_buying_20_bowls": 4,
+    "total_rewards_given": 40.0,
+    "initial_bowls_collection": 70,
+    "remaining_bowls": 30.0,
+    "answer": 30.0
+  },
+  "flawed_trace": {
+    "total_customers": 20,
+    "half_numerator": 1,
+    "half_denominator": 2,
+    "customers_bought_20_bowls": 1.0,
+    "rewards_per_unit_bought": 2,
+    "rewards_per_customer_buying_20_bowls": 4,
+    "total_rewards_given": 4.0,
+    "initial_bowls_collection": 70,
+    "remaining_bowls": 66.0,
+    "answer": 66.0
+  },
+  "correct_value": 10.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "customers_bought_20_bowls",
+      "question_inputs": [
+        "total_customers",
+        "half_numerator",
+        "half_denominator"
+      ],
+      "solution_line_template": "Half of the {total_customers} customers, which is {half_numerator}/{half_denominator}*{total_customers}={customers_bought_20_bowls} bought 20 bowls each, receiving 2 for every 10."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "rewards_per_customer_buying_20_bowls",
+      "question_inputs": [
+        "rewards_per_unit_bought"
+      ],
+      "solution_line_template": "The total number of reward bowls each customer who bought 20 bowls received is {rewards_per_unit_bought}+{rewards_per_unit_bought}=<<{rewards_per_unit_bought}+{rewards_per_unit_bought}={rewards_per_customer_buying_20_bowls}>>{rewards_per_customer_buying_20_bowls}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_rewards_given",
+      "question_inputs": [],
+      "solution_line_template": "If {customers_bought_20_bowls} customers bought 20 bowls, Howard gave away {rewards_per_customer_buying_20_bowls}*{customers_bought_20_bowls}=<<{rewards_per_customer_buying_20_bowls}*{customers_bought_20_bowls}={total_rewards_given}>>{total_rewards_given} bowls as rewards."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "remaining_bowls",
+      "question_inputs": [
+        "initial_bowls_collection"
+      ],
+      "solution_line_template": "The total number of reward bowls that remained is {initial_bowls_collection}-{total_rewards_given}=<<{initial_bowls_collection}-{total_rewards_given}={remaining_bowls}>>{remaining_bowls}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Half of the 20 customers, which is 1/20*20=1 bought 20 bowls each, receiving 2 for every 10.",
+    "L2": "The total number of reward bowls each customer who bought 20 bowls received is 2+2=<<2+2=4>>4",
+    "L3": "If 1 customers bought 20 bowls, Howard gave away 4*1=<<4*1=4>>4 bowls as rewards.",
+    "L4": "The total number of reward bowls that remained is 70-4=<<70-4=66>>66",
+    "FA": "#### 66"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'total_customers' (20) was used instead of 'half_denominator' (2).",
+  "repro_seed": -8789451972196847949,
+  "model_name": "google_gemini-2.5-flash"
+}

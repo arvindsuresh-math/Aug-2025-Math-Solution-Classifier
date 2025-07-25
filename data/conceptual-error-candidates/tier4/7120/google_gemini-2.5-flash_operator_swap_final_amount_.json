@@ -1,0 +1,78 @@
+{
+  "index": 7120,
+  "original_solution_mapping": {
+    "FA": "#### 2400",
+    "L1": "The annual interest is 2000 * 8/100 = $<<2000*8/100=160>>160.",
+    "L2": "Interest for two and a half years is 160 * 2.5 = $<<160*2.5=400>>400.",
+    "L3": "So, Adam's father will have 2000 + 400 = $<<2000+400=2400>>2400 after 2 and a half years."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7120.\n    Returns: the total amount Adam's father will have.\n    \"\"\"\n    # L1\n    initial_deposit = 2000 # Adam's father deposited $2000\n    interest_rate_percent_num = 8 # 8% interest\n    percent_denominator = 100 # WK\n    annual_interest = initial_deposit * interest_rate_percent_num / percent_denominator\n\n    # L2\n    num_years = 2.5 # 2 and a half years\n    total_interest = annual_interest * num_years\n\n    # L3\n    final_amount = initial_deposit + total_interest\n\n    # FA\n    answer = final_amount\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "final_amount",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x15fbc9790>"
+  },
+  "correct_trace": {
+    "initial_deposit": 2000,
+    "interest_rate_percent_num": 8,
+    "percent_denominator": 100,
+    "annual_interest": 160.0,
+    "num_years": 2.5,
+    "total_interest": 400.0,
+    "final_amount": 2400.0,
+    "answer": 2400.0
+  },
+  "flawed_trace": {
+    "initial_deposit": 2000,
+    "interest_rate_percent_num": 8,
+    "percent_denominator": 100,
+    "annual_interest": 160.0,
+    "num_years": 2.5,
+    "total_interest": 400.0,
+    "final_amount": 1600.0,
+    "answer": 1600.0
+  },
+  "correct_value": 2400.0,
+  "flawed_value": 1600.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_denominator"
+      ],
+      "line_number": "L1",
+      "output_variable": "annual_interest",
+      "question_inputs": [
+        "initial_deposit",
+        "interest_rate_percent_num"
+      ],
+      "solution_line_template": "The annual interest is {initial_deposit} * {interest_rate_percent_num}/{percent_denominator} = $<<{initial_deposit}*{interest_rate_percent_num}/{percent_denominator}={annual_interest}>>{annual_interest}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_interest",
+      "question_inputs": [
+        "num_years"
+      ],
+      "solution_line_template": "Interest for two and a half years is {annual_interest} * {num_years} = $<<{annual_interest}*{num_years}={total_interest}>>{total_interest}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_amount",
+      "question_inputs": [],
+      "solution_line_template": "So, Adam's father will have {initial_deposit} + {total_interest} = $<<{initial_deposit}+{total_interest}={final_amount}>>{final_amount} after 2 and a half years."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The annual interest is 2000 * 8/100 = $<<2000*8/100=160>>160.",
+    "L2": "Interest for two and a half years is 160 * 2.5 = $<<160*2.5=400>>400.",
+    "L3": "So, Adam's father will have 2000 + 400 = $<<2000+400=1600>>1600 after 2 and a half years.",
+    "FA": "#### 1600"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": 3053599246085260284,
+  "model_name": "google_gemini-2.5-flash"
+}

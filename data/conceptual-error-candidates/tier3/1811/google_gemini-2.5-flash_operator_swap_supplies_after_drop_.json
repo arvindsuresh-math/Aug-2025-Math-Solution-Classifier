@@ -1,0 +1,93 @@
+{
+  "index": 1811,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "Kelly needs 8*3=<<8*3=24>>24 pieces of construction paper.",
+    "L2": "She buys glue which grows the supplies to 24+6=<<24+6=30>>30.",
+    "L3": "Unfortunately, she dropped 30/2=<<30/2=15>>15 supplies.",
+    "L4": "Rushing to the store, she buys more construction paper bringing her supplies back to 15+5=<<15+5=20>>20."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1811.\n    Returns: the number of supplies Kelly has left.\n    \"\"\"\n    # L1\n    num_students = 8 # She has 8 students\n    paper_per_student = 3 # they will need 3 pieces of construction paper each\n    initial_construction_paper = num_students * paper_per_student\n\n    # L2\n    num_glue_bottles = 6 # she needs to buy 6 bottles of glue\n    supplies_before_drop = initial_construction_paper + num_glue_bottles\n\n    # L3\n    drop_divisor = 2 # dropped half of them\n    supplies_after_drop = supplies_before_drop / drop_divisor\n\n    # L4\n    additional_paper = 5 # buy 5 more pieces of construction paper\n    final_supplies = supplies_after_drop + additional_paper\n\n    # FA\n    answer = final_supplies\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "supplies_after_drop",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x3091ed150>"
+  },
+  "correct_trace": {
+    "num_students": 8,
+    "paper_per_student": 3,
+    "initial_construction_paper": 24,
+    "num_glue_bottles": 6,
+    "supplies_before_drop": 30,
+    "drop_divisor": 2,
+    "supplies_after_drop": 15.0,
+    "additional_paper": 5,
+    "final_supplies": 20.0,
+    "answer": 20.0
+  },
+  "flawed_trace": {
+    "num_students": 8,
+    "paper_per_student": 3,
+    "initial_construction_paper": 24,
+    "num_glue_bottles": 6,
+    "supplies_before_drop": 30,
+    "drop_divisor": 2,
+    "supplies_after_drop": 28,
+    "additional_paper": 5,
+    "final_supplies": 33,
+    "answer": 33
+  },
+  "correct_value": 15.0,
+  "flawed_value": 28,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "initial_construction_paper",
+      "question_inputs": [
+        "num_students",
+        "paper_per_student"
+      ],
+      "solution_line_template": "Kelly needs {num_students}*{paper_per_student}=<<{num_students}*{paper_per_student}={initial_construction_paper}>>{initial_construction_paper} pieces of construction paper."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "supplies_before_drop",
+      "question_inputs": [
+        "num_glue_bottles"
+      ],
+      "solution_line_template": "She buys glue which grows the supplies to {initial_construction_paper}+{num_glue_bottles}=<<{initial_construction_paper}+{num_glue_bottles}={supplies_before_drop}>>{supplies_before_drop}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "supplies_after_drop",
+      "question_inputs": [
+        "drop_divisor"
+      ],
+      "solution_line_template": "Unfortunately, she dropped {supplies_before_drop}/{drop_divisor}=<<{supplies_before_drop}/{drop_divisor}={supplies_after_drop}>>{supplies_after_drop} supplies."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_supplies",
+      "question_inputs": [
+        "additional_paper"
+      ],
+      "solution_line_template": "Rushing to the store, she buys more construction paper bringing her supplies back to {supplies_after_drop}+{additional_paper}=<<{supplies_after_drop}+{additional_paper}={final_supplies}>>{final_supplies}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Kelly needs 8*3=<<8*3=24>>24 pieces of construction paper.",
+    "L2": "She buys glue which grows the supplies to 24+6=<<24+6=30>>30.",
+    "L3": "Unfortunately, she dropped 30/2=<<30/2=28>>28 supplies.",
+    "L4": "Rushing to the store, she buys more construction paper bringing her supplies back to 28+5=<<28+5=33>>33.",
+    "FA": "#### 33"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 9004393341363199919,
+  "model_name": "google_gemini-2.5-flash"
+}

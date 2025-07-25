@@ -1,0 +1,86 @@
+{
+  "index": 315,
+  "original_solution_mapping": {
+    "FA": "#### 90",
+    "L1": "After 30 days, there will be enough food left to sustain 300 people for 90 days - 30 days = 60 days.",
+    "L2": "After the 100 people leave, there will be 300-100 = <<300-100=200>>200 people left.",
+    "L3": "The 200 people will eat 200/300 = 2/3 as much food as the original group of people in the castle.",
+    "L4": "The 60 days' worth of food will last this smaller group for 60 days / (2/3) = <<60/(2/3)=90>>90 more days."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 315.\n    Returns: the number of additional days until all the food runs out.\n    \"\"\"\n    # L1\n    initial_people = 300 # 300 people\n    initial_days = 90 # 90 days\n    days_passed = 30 # After 30 days\n    remaining_days_for_initial_people = initial_days - days_passed\n\n    # L2\n    people_leaving = 100 # 100 people leave\n    remaining_people = initial_people - people_leaving\n\n    # L3\n    consumption_ratio = Fraction(remaining_people, initial_people)\n\n    # L4\n    days_food_will_last = remaining_days_for_initial_people / consumption_ratio\n\n    # FA\n    answer = days_food_will_last\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "days_food_will_last",
+    "replacement_variable": "remaining_people"
+  },
+  "correct_trace": {
+    "initial_people": 300,
+    "initial_days": 90,
+    "days_passed": 30,
+    "remaining_days_for_initial_people": 60,
+    "people_leaving": 100,
+    "remaining_people": 200,
+    "consumption_ratio": "2/3",
+    "days_food_will_last": "90",
+    "answer": "90"
+  },
+  "flawed_trace": {
+    "initial_people": 300,
+    "initial_days": 90,
+    "days_passed": 30,
+    "remaining_days_for_initial_people": 60,
+    "people_leaving": 100,
+    "remaining_people": 200,
+    "consumption_ratio": "2/3",
+    "days_food_will_last": "90",
+    "answer": 200
+  },
+  "correct_value": "90",
+  "flawed_value": 200,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "remaining_days_for_initial_people",
+      "question_inputs": [
+        "initial_people",
+        "initial_days",
+        "days_passed"
+      ],
+      "solution_line_template": "After {days_passed} days, there will be enough food left to sustain {initial_people} people for {initial_days} days - {days_passed} days = {remaining_days_for_initial_people} days."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_people",
+      "question_inputs": [
+        "people_leaving"
+      ],
+      "solution_line_template": "After the {people_leaving} people leave, there will be {initial_people}-{people_leaving} = <<{initial_people}-{people_leaving}={remaining_people}>>{remaining_people} people left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "consumption_ratio",
+      "question_inputs": [],
+      "solution_line_template": "The {remaining_people} people will eat {remaining_people}/{initial_people} = {consumption_ratio} as much food as the original group of people in the castle."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "days_food_will_last",
+      "question_inputs": [],
+      "solution_line_template": "The {remaining_days_for_initial_people} days' worth of food will last this smaller group for {remaining_days_for_initial_people} days / ({consumption_ratio}) = <<{remaining_days_for_initial_people}/({consumption_ratio})={days_food_will_last}>>{days_food_will_last} more days."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After 30 days, there will be enough food left to sustain 300 people for 90 days - 30 days = 60 days.",
+    "L2": "After the 100 people leave, there will be 300-100 = <<300-100=200>>200 people left.",
+    "FA": "#### 200"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'remaining_people' (value: 200) was reported instead of 'days_food_will_last' (value: 90).",
+  "repro_seed": 2509748103319284976,
+  "model_name": "google_gemini-2.5-flash"
+}

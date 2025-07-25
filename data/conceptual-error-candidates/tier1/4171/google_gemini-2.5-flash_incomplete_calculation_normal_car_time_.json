@@ -1,0 +1,100 @@
+{
+  "index": 4171,
+  "original_solution_mapping": {
+    "FA": "#### 96",
+    "L1": "William spends 4 + 7 + 4 + 9 = <<4+7+4+9=24>>24 minutes washing a normal car.",
+    "L2": "He washed 2 normal cars, so he spent 24 * 2 = <<24*2=48>>48 minutes on the normal cars.",
+    "L3": "He took twice as long as one car for the SUV, so he took 24 * 2 = <<24*2=48>>48 minutes on the SUV.",
+    "L4": "Thus, William spent 48 + 48 = <<48+48=96>>96 minutes washing all the vehicles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4171.\n    Returns: the total minutes William spent washing all the vehicles.\n    \"\"\"\n    # L1\n    window_wash_time = 4 # 4 minutes washing a car\u2019s windows\n    body_wash_time = 7 # 7 minutes washing the car body\n    tire_clean_time = 4 # 4 minutes cleaning the tires\n    wax_time = 9 # 9 minutes waxing the car\n    normal_car_time = window_wash_time + body_wash_time + tire_clean_time + wax_time\n\n    # L2\n    num_normal_cars = 2 # washed 2 normal cars\n    total_normal_cars_time = normal_car_time * num_normal_cars\n\n    # L3\n    multiplier_for_suv = 2 # took twice as long as a normal car\n    suv_time = normal_car_time * multiplier_for_suv\n\n    # L4\n    total_washing_time = total_normal_cars_time + suv_time\n\n    # FA\n    answer = total_washing_time\n    return answer\n",
+  "mutation_details": {
+    "type": "incomplete_calculation",
+    "target_variable": "normal_car_time",
+    "operand_to_remove": "tire_clean_time",
+    "original_operands": [
+      "body_wash_time",
+      "tire_clean_time",
+      "wax_time",
+      "window_wash_time"
+    ]
+  },
+  "correct_trace": {
+    "window_wash_time": 4,
+    "body_wash_time": 7,
+    "tire_clean_time": 4,
+    "wax_time": 9,
+    "normal_car_time": 24,
+    "num_normal_cars": 2,
+    "total_normal_cars_time": 48,
+    "multiplier_for_suv": 2,
+    "suv_time": 48,
+    "total_washing_time": 96,
+    "answer": 96
+  },
+  "flawed_trace": {
+    "window_wash_time": 4,
+    "body_wash_time": 7,
+    "tire_clean_time": 4,
+    "wax_time": 9,
+    "normal_car_time": 20,
+    "num_normal_cars": 2,
+    "total_normal_cars_time": 40,
+    "multiplier_for_suv": 2,
+    "suv_time": 40,
+    "total_washing_time": 80,
+    "answer": 80
+  },
+  "correct_value": 24,
+  "flawed_value": 20,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "normal_car_time",
+      "question_inputs": [
+        "window_wash_time",
+        "body_wash_time",
+        "tire_clean_time",
+        "wax_time"
+      ],
+      "solution_line_template": "William spends {window_wash_time} + {body_wash_time} + {tire_clean_time} + {wax_time} = <<{window_wash_time}+{body_wash_time}+{tire_clean_time}+{wax_time}={normal_car_time}>>{normal_car_time} minutes washing a normal car."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_normal_cars_time",
+      "question_inputs": [
+        "num_normal_cars"
+      ],
+      "solution_line_template": "He washed {num_normal_cars} normal cars, so he spent {normal_car_time} * {num_normal_cars} = <<{normal_car_time}*{num_normal_cars}={total_normal_cars_time}>>{total_normal_cars_time} minutes on the normal cars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "suv_time",
+      "question_inputs": [
+        "multiplier_for_suv"
+      ],
+      "solution_line_template": "He took twice as long as one car for the SUV, so he took {normal_car_time} * {multiplier_for_suv} = <<{normal_car_time}*{multiplier_for_suv}={suv_time}>>{suv_time} minutes on the SUV."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_washing_time",
+      "question_inputs": [],
+      "solution_line_template": "Thus, William spent {total_normal_cars_time} + {suv_time} = <<{total_normal_cars_time}+{suv_time}={total_washing_time}>>{total_washing_time} minutes washing all the vehicles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "William spends 4 + 7 + 9 = <<4+7+9=20>>20 minutes washing a normal car.",
+    "L2": "He washed 2 normal cars, so he spent 20 * 2 = <<20*2=40>>40 minutes on the normal cars.",
+    "L3": "He took twice as long as one car for the SUV, so he took 20 * 2 = <<20*2=40>>40 minutes on the SUV.",
+    "L4": "Thus, William spent 40 + 40 = <<40+40=80>>80 minutes washing all the vehicles.",
+    "FA": "#### 80"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incomplete calculation. The term 'tire_clean_time' (value: 4) was omitted from the operation.",
+  "repro_seed": 3400169852269494711,
+  "model_name": "google_gemini-2.5-flash"
+}

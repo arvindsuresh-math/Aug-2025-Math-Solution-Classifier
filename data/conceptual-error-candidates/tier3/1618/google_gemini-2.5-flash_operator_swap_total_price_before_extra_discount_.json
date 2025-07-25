@@ -1,0 +1,89 @@
+{
+  "index": 1618,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "The price of the cheaper pair after the discount was $40/2 = $<<40/2=20>>20",
+    "L2": "The total price of both pairs of shoes $20 + $60 = $<<20+60=80>>80",
+    "L3": "The final discount was $80/4 = $<<80/4=20>>20",
+    "L4": "The price he ends up paying was $80 - $20 = $<<80-20=60>>60"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1618.\n    Returns: the total amount of money James paid for the shoes.\n    \"\"\"\n    # L1\n    original_price_cheaper_pair = 40 # first pair of shoes for $40\n    half_off_divisor = 2 # half off the original price\n    discounted_cheaper_price = original_price_cheaper_pair / half_off_divisor\n\n    # L2\n    original_price_expensive_pair = 60 # second one for $60\n    total_price_before_extra_discount = discounted_cheaper_price + original_price_expensive_pair\n\n    # L3\n    extra_discount_divisor = 4 # a fourth off the total amount\n    final_discount_amount = total_price_before_extra_discount / extra_discount_divisor\n\n    # L4\n    final_price_paid = total_price_before_extra_discount - final_discount_amount\n\n    # FA\n    answer = final_price_paid\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_price_before_extra_discount",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x30d295910>"
+  },
+  "correct_trace": {
+    "original_price_cheaper_pair": 40,
+    "half_off_divisor": 2,
+    "discounted_cheaper_price": 20.0,
+    "original_price_expensive_pair": 60,
+    "total_price_before_extra_discount": 80.0,
+    "extra_discount_divisor": 4,
+    "final_discount_amount": 20.0,
+    "final_price_paid": 60.0,
+    "answer": 60.0
+  },
+  "flawed_trace": {
+    "original_price_cheaper_pair": 40,
+    "half_off_divisor": 2,
+    "discounted_cheaper_price": 20.0,
+    "original_price_expensive_pair": 60,
+    "total_price_before_extra_discount": 1200.0,
+    "extra_discount_divisor": 4,
+    "final_discount_amount": 300.0,
+    "final_price_paid": 900.0,
+    "answer": 900.0
+  },
+  "correct_value": 80.0,
+  "flawed_value": 1200.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "discounted_cheaper_price",
+      "question_inputs": [
+        "original_price_cheaper_pair",
+        "half_off_divisor"
+      ],
+      "solution_line_template": "The price of the cheaper pair after the discount was ${original_price_cheaper_pair}/{half_off_divisor} = $<<{original_price_cheaper_pair}/{half_off_divisor}={discounted_cheaper_price}>>{discounted_cheaper_price}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_price_before_extra_discount",
+      "question_inputs": [
+        "original_price_expensive_pair"
+      ],
+      "solution_line_template": "The total price of both pairs of shoes ${discounted_cheaper_price} + ${original_price_expensive_pair} = $<<{discounted_cheaper_price}+{original_price_expensive_pair}={total_price_before_extra_discount}>>{total_price_before_extra_discount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_discount_amount",
+      "question_inputs": [
+        "extra_discount_divisor"
+      ],
+      "solution_line_template": "The final discount was ${total_price_before_extra_discount}/{extra_discount_divisor} = $<<{total_price_before_extra_discount}/{extra_discount_divisor}={final_discount_amount}>>{final_discount_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_price_paid",
+      "question_inputs": [],
+      "solution_line_template": "The price he ends up paying was ${total_price_before_extra_discount} - ${final_discount_amount} = <<{total_price_before_extra_discount}-{final_discount_amount}={final_price_paid}>>{final_price_paid}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The price of the cheaper pair after the discount was $40/2 = $<<40/2=20>>20",
+    "L2": "The total price of both pairs of shoes $20 + $60 = $<<20+60=1200>>1200",
+    "L3": "The final discount was $1200/4 = $<<1200/4=300>>300",
+    "L4": "The price he ends up paying was $1200 - $300 = <<1200-300=900>>900",
+    "FA": "#### 900"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": -2998599567247374947,
+  "model_name": "google_gemini-2.5-flash"
+}

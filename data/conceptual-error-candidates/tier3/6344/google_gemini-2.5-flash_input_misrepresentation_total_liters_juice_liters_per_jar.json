@@ -1,0 +1,78 @@
+{
+  "index": 6344,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "The total liters of juice he has is 5 jars x 2 liters/jar = <<5*2=10>>10 liters of juice",
+    "L2": "Then he needs to convert this amount to milliliters: 10 liters x 1000 milliliters/liter = <<10000=10000>>10,000 milliliters",
+    "L3": "He can fill up to 10,000 ml / 250 ml/glass = <<10000/250=40>>40 glasses"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6344.\n    Returns: the total number of full glasses Daniel can give.\n    \"\"\"\n    # L1\n    num_jars = 5 # 5 jars of juice\n    liters_per_jar = 2 # 2 liters each\n    total_liters_juice = num_jars * liters_per_jar\n\n    # L2\n    milliliters_per_liter = 1000 # WK\n    total_milliliters_juice = total_liters_juice * milliliters_per_liter\n\n    # L3\n    ml_per_glass = 250 # 250 milliliters of juice\n    num_full_glasses = total_milliliters_juice / ml_per_glass\n\n    # FA\n    answer = num_full_glasses\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_liters_juice",
+    "operand_to_replace": "num_jars",
+    "replacement_variable": "liters_per_jar"
+  },
+  "correct_trace": {
+    "num_jars": 5,
+    "liters_per_jar": 2,
+    "total_liters_juice": 10,
+    "milliliters_per_liter": 1000,
+    "total_milliliters_juice": 10000,
+    "ml_per_glass": 250,
+    "num_full_glasses": 40.0,
+    "answer": 40.0
+  },
+  "flawed_trace": {
+    "num_jars": 5,
+    "liters_per_jar": 2,
+    "total_liters_juice": 4,
+    "milliliters_per_liter": 1000,
+    "total_milliliters_juice": 4000,
+    "ml_per_glass": 250,
+    "num_full_glasses": 16.0,
+    "answer": 16.0
+  },
+  "correct_value": 10,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_liters_juice",
+      "question_inputs": [
+        "num_jars",
+        "liters_per_jar"
+      ],
+      "solution_line_template": "The total liters of juice he has is {num_jars} jars x {liters_per_jar} liters/jar = <<{num_jars}*{liters_per_jar}={total_liters_juice}>>{total_liters_juice} liters of juice"
+    },
+    {
+      "WK_inputs": [
+        "milliliters_per_liter"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_milliliters_juice",
+      "question_inputs": [],
+      "solution_line_template": "Then he needs to convert this amount to milliliters: {total_liters_juice} liters x {milliliters_per_liter} milliliters/liter = <<{total_liters_juice}*{milliliters_per_liter}={total_milliliters_juice}>>{total_milliliters_juice} milliliters"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_full_glasses",
+      "question_inputs": [
+        "ml_per_glass"
+      ],
+      "solution_line_template": "He can fill up to {total_milliliters_juice} ml / {ml_per_glass} ml/glass = <<{total_milliliters_juice}/{ml_per_glass}={num_full_glasses}>>{num_full_glasses} glasses"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total liters of juice he has is 2 jars x 2 liters/jar = <<2*2=4>>4 liters of juice",
+    "L2": "Then he needs to convert this amount to milliliters: 4 liters x 1000 milliliters/liter = <<4*1000=4000>>4000 milliliters",
+    "L3": "He can fill up to 4000 ml / 250 ml/glass = <<4000/250=16>>16 glasses",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'liters_per_jar' (2) was used instead of 'num_jars' (5).",
+  "repro_seed": 8552750339602698245,
+  "model_name": "google_gemini-2.5-flash"
+}

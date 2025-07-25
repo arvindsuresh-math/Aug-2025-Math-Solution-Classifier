@@ -1,0 +1,91 @@
+{
+  "index": 3169,
+  "original_solution_mapping": {
+    "FA": "#### 300",
+    "L1": "He cuts his grass 4-2=<<4-2=2>>2 inches",
+    "L2": "So he gets it cut every 2/.5=<<2/.5=4>>4 months",
+    "L3": "That means he gets it cut 12/4=<<12/4=3>>3 times a year",
+    "L4": "So he pays 100*3=$<<100*3=300>>300 per year"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3169.\n    Returns: the total amount John pays per year for grass cutting.\n    \"\"\"\n    # L1\n    max_height = 4 # When it gets to 4 inches\n    cut_height = 2 # cuts it back down to 2 inches\n    growth_before_cut = max_height - cut_height\n\n    # L2\n    growth_per_month = 0.5 # It grows .5 inches per month\n    cut_frequency_months = growth_before_cut / growth_per_month\n\n    # L3\n    months_per_year = 12 # WK\n    cuts_per_year = months_per_year / cut_frequency_months\n\n    # L4\n    cost_per_cut = 100 # It cost $100 to get his grass cut\n    total_annual_cost = cost_per_cut * cuts_per_year\n\n    # FA\n    answer = total_annual_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_annual_cost",
+    "replacement_variable": "cut_frequency_months"
+  },
+  "correct_trace": {
+    "max_height": 4,
+    "cut_height": 2,
+    "growth_before_cut": 2,
+    "growth_per_month": 0.5,
+    "cut_frequency_months": 4.0,
+    "months_per_year": 12,
+    "cuts_per_year": 3.0,
+    "cost_per_cut": 100,
+    "total_annual_cost": 300.0,
+    "answer": 300.0
+  },
+  "flawed_trace": {
+    "max_height": 4,
+    "cut_height": 2,
+    "growth_before_cut": 2,
+    "growth_per_month": 0.5,
+    "cut_frequency_months": 4.0,
+    "months_per_year": 12,
+    "cuts_per_year": 3.0,
+    "cost_per_cut": 100,
+    "total_annual_cost": 300.0,
+    "answer": 4.0
+  },
+  "correct_value": 300.0,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "growth_before_cut",
+      "question_inputs": [
+        "max_height",
+        "cut_height"
+      ],
+      "solution_line_template": "He cuts his grass {max_height}-{cut_height}=<<{max_height}-{cut_height}={growth_before_cut}>>{growth_before_cut} inches"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cut_frequency_months",
+      "question_inputs": [
+        "growth_per_month"
+      ],
+      "solution_line_template": "So he gets it cut every {growth_before_cut}/{growth_per_month}=<<{growth_before_cut}/{growth_per_month}={cut_frequency_months}>>{cut_frequency_months} months"
+    },
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L3",
+      "output_variable": "cuts_per_year",
+      "question_inputs": [],
+      "solution_line_template": "That means he gets it cut {months_per_year}/{cut_frequency_months}=<<{months_per_year}/{cut_frequency_months}={cuts_per_year}>>{cuts_per_year} times a year"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_annual_cost",
+      "question_inputs": [
+        "cost_per_cut"
+      ],
+      "solution_line_template": "So he pays {cost_per_cut}*{cuts_per_year}=$<<{cost_per_cut}*{cuts_per_year}={total_annual_cost}>>{total_annual_cost} per year"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He cuts his grass 4-2=<<4-2=2>>2 inches",
+    "L2": "So he gets it cut every 2/0.5=<<2/0.5=4>>4 months",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'cut_frequency_months' (value: 4.0) was reported instead of 'total_annual_cost' (value: 300.0).",
+  "repro_seed": 3884386715148392754,
+  "model_name": "google_gemini-2.5-flash"
+}

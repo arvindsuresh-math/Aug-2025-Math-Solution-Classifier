@@ -1,0 +1,74 @@
+{
+  "index": 459,
+  "original_solution_mapping": {
+    "FA": "#### 10080",
+    "L1": "If the price of a lawnmower was $1800 a year ago, 2/5 less than the cost right now, then it now costs 2/5*1800 = $720 more to buy one lawnmower.",
+    "L2": "The total cost of buying one lawnmower right now is $1800+$720 = $<<1800+720=2520>>2520",
+    "L3": "To purchase 4 such lawnmowers, Mr. Lucian will have to pay $2520*4 = $<<2520*4=10080>>10080"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 459.\n    Returns: the total cost for Mr. Lucian to buy 4 lawnmowers.\n    \"\"\"\n    # L1\n    old_cost = 1800 # cost was $1800 a year ago\n    fraction_less = Fraction(2, 5) # 2/5 times less\n    additional_cost = fraction_less * old_cost\n\n    # L2\n    current_cost_per_lawnmower = old_cost + additional_cost\n\n    # L3\n    number_of_lawnmowers = 4 # buy 4 such lawnmowers\n    total_cost_for_multiple_lawnmowers = current_cost_per_lawnmower * number_of_lawnmowers\n\n    # FA\n    answer = total_cost_for_multiple_lawnmowers\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "current_cost_per_lawnmower",
+    "operand_to_replace": "old_cost",
+    "replacement_variable": "additional_cost"
+  },
+  "correct_trace": {
+    "old_cost": 1800,
+    "fraction_less": "2/5",
+    "additional_cost": "720",
+    "current_cost_per_lawnmower": "2520",
+    "number_of_lawnmowers": 4,
+    "total_cost_for_multiple_lawnmowers": "10080",
+    "answer": "10080"
+  },
+  "flawed_trace": {
+    "old_cost": 1800,
+    "fraction_less": "2/5",
+    "additional_cost": "720",
+    "current_cost_per_lawnmower": "1440",
+    "number_of_lawnmowers": 4,
+    "total_cost_for_multiple_lawnmowers": "5760",
+    "answer": "5760"
+  },
+  "correct_value": "2520",
+  "flawed_value": "1440",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "additional_cost",
+      "question_inputs": [
+        "old_cost",
+        "fraction_less"
+      ],
+      "solution_line_template": "If the price of a lawnmower was ${old_cost} a year ago, {fraction_less} less than the cost right now, then it now costs {fraction_less}*{old_cost} = <<{fraction_less}*{old_cost}={additional_cost}>>${additional_cost} more to buy one lawnmower."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "current_cost_per_lawnmower",
+      "question_inputs": [],
+      "solution_line_template": "The total cost of buying one lawnmower right now is ${old_cost}+${additional_cost} = $<<{old_cost}+{additional_cost}={current_cost_per_lawnmower}>>{current_cost_per_lawnmower}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost_for_multiple_lawnmowers",
+      "question_inputs": [
+        "number_of_lawnmowers"
+      ],
+      "solution_line_template": "To purchase {number_of_lawnmowers} such lawnmowers, Mr. Lucian will have to pay ${current_cost_per_lawnmower}*{number_of_lawnmowers} = $<<{current_cost_per_lawnmower}*{number_of_lawnmowers}={total_cost_for_multiple_lawnmowers}>>{total_cost_for_multiple_lawnmowers}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the price of a lawnmower was $1800 a year ago, 2/5 less than the cost right now, then it now costs 2/5*1800 = <<2/5*1800=720>>$720 more to buy one lawnmower.",
+    "L2": "The total cost of buying one lawnmower right now is $720+$720 = $<<720+720=1440>>1440",
+    "L3": "To purchase 4 such lawnmowers, Mr. Lucian will have to pay $1440*4 = $<<1440*4=5760>>5760",
+    "FA": "#### 5760"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'additional_cost' (720) was used instead of 'old_cost' (1800).",
+  "repro_seed": -3689152863926996842,
+  "model_name": "google_gemini-2.5-flash"
+}

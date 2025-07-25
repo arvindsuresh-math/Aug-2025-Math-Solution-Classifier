@@ -1,0 +1,77 @@
+{
+  "index": 2312,
+  "original_solution_mapping": {
+    "FA": "#### 3760",
+    "L1": "Lisa's mother gave her 3/5*$1200 = $<<3/5*1200=720>>720 for her birthday gift.",
+    "L2": "She also received 2*$720 = $<<2*720=1440>>1440 from her brother for the gift.",
+    "L3": "If she still had to find $400 to fully reach her birthday gift cost, it means her gift's total cost was $1200+$1440+$720+$400 = $<<1200+1440+720+400=3760>>3760"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2312.\n    Returns: the total price of the gift Lisa wanted to buy.\n    \"\"\"\n    # L1\n    saved_amount = 1200 # Lisa has saved $1200\n    mother_fraction = Fraction(3, 5) # her mother gave her 3/5 times of what she had saved\n    mother_contribution = mother_fraction * saved_amount\n\n    # L2\n    brother_multiplier = 2 # her brother gave her twice the amount her mother gave her\n    brother_contribution = brother_multiplier * mother_contribution\n\n    # L3\n    remaining_needed = 400 # she still had $400 less\n    gift_price = saved_amount + brother_contribution + mother_contribution + remaining_needed\n\n    # FA\n    answer = gift_price\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "gift_price",
+    "replacement_variable": "brother_contribution"
+  },
+  "correct_trace": {
+    "saved_amount": 1200,
+    "mother_fraction": "3/5",
+    "mother_contribution": "720",
+    "brother_multiplier": 2,
+    "brother_contribution": "1440",
+    "remaining_needed": 400,
+    "gift_price": "3760",
+    "answer": "3760"
+  },
+  "flawed_trace": {
+    "saved_amount": 1200,
+    "mother_fraction": "3/5",
+    "mother_contribution": "720",
+    "brother_multiplier": 2,
+    "brother_contribution": "1440",
+    "remaining_needed": 400,
+    "gift_price": "3760",
+    "answer": "1440"
+  },
+  "correct_value": "3760",
+  "flawed_value": "1440",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "mother_contribution",
+      "question_inputs": [
+        "saved_amount",
+        "mother_fraction"
+      ],
+      "solution_line_template": "Lisa's mother gave her {mother_fraction}*${saved_amount} = $<<{mother_fraction}*{saved_amount}={mother_contribution}>>{mother_contribution} for her birthday gift."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "brother_contribution",
+      "question_inputs": [
+        "brother_multiplier"
+      ],
+      "solution_line_template": "She also received {brother_multiplier}*${mother_contribution} = $<<{brother_multiplier}*{mother_contribution}={brother_contribution}>>{brother_contribution} from her brother for the gift."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "gift_price",
+      "question_inputs": [
+        "remaining_needed"
+      ],
+      "solution_line_template": "If she still had to find ${remaining_needed} to fully reach her birthday gift cost, it means her gift's total cost was ${saved_amount}+${brother_contribution}+${mother_contribution}+${remaining_needed} = $<<{saved_amount}+{brother_contribution}+{mother_contribution}+{remaining_needed}={gift_price}>>{gift_price}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Lisa's mother gave her 3/5*$1200 = $<<3/5*1200=720>>720 for her birthday gift.",
+    "L2": "She also received 2*$720 = $<<2*720=1440>>1440 from her brother for the gift.",
+    "FA": "#### 1440"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'brother_contribution' (value: 1440) was reported instead of 'gift_price' (value: 3760).",
+  "repro_seed": 8997765336942412973,
+  "model_name": "google_gemini-2.5-flash"
+}

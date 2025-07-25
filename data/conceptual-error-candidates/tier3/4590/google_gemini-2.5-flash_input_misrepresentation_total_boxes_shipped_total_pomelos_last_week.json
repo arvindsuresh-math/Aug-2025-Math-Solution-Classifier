@@ -1,0 +1,89 @@
+{
+  "index": 4590,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "There were 240/10 = <<240/10=24>>24 pomelos in a box.",
+    "L2": "This means that each box has 24/12 = <<24/12=2>>2 dozens of pomelos since 1 dozen is equal to 12.",
+    "L3": "The farmer shipped a total of 10 + 20 = <<10+20=30>>30 boxes.",
+    "L4": "Thus, the farmer shipped a total of 30 x 2 = <<30*2=60>>60 dozens of pomelos."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4590.\n    Returns: the total number of dozens of pomelos shipped by the farmer.\n    \"\"\"\n    # L1\n    total_pomelos_last_week = 240 # 240 pomelos in all\n    boxes_last_week = 10 # 10 boxes of pomelos\n    pomelos_per_box = total_pomelos_last_week / boxes_last_week\n\n    # L2\n    pomelos_per_dozen = 12 # WK\n    dozens_per_box = pomelos_per_box / pomelos_per_dozen\n\n    # L3\n    boxes_this_week = 20 # 20 boxes\n    total_boxes_shipped = boxes_last_week + boxes_this_week\n\n    # L4\n    total_dozens_shipped = total_boxes_shipped * dozens_per_box\n\n    # FA\n    answer = total_dozens_shipped\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_boxes_shipped",
+    "operand_to_replace": "boxes_this_week",
+    "replacement_variable": "total_pomelos_last_week"
+  },
+  "correct_trace": {
+    "total_pomelos_last_week": 240,
+    "boxes_last_week": 10,
+    "pomelos_per_box": 24.0,
+    "pomelos_per_dozen": 12,
+    "dozens_per_box": 2.0,
+    "boxes_this_week": 20,
+    "total_boxes_shipped": 30,
+    "total_dozens_shipped": 60.0,
+    "answer": 60.0
+  },
+  "flawed_trace": {
+    "total_pomelos_last_week": 240,
+    "boxes_last_week": 10,
+    "pomelos_per_box": 24.0,
+    "pomelos_per_dozen": 12,
+    "dozens_per_box": 2.0,
+    "boxes_this_week": 20,
+    "total_boxes_shipped": 250,
+    "total_dozens_shipped": 500.0,
+    "answer": 500.0
+  },
+  "correct_value": 30,
+  "flawed_value": 250,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "pomelos_per_box",
+      "question_inputs": [
+        "total_pomelos_last_week",
+        "boxes_last_week"
+      ],
+      "solution_line_template": "There were {total_pomelos_last_week}/{boxes_last_week} = <<{total_pomelos_last_week}/{boxes_last_week}={pomelos_per_box}>>{pomelos_per_box} pomelos in a box."
+    },
+    {
+      "WK_inputs": [
+        "pomelos_per_dozen"
+      ],
+      "line_number": "L2",
+      "output_variable": "dozens_per_box",
+      "question_inputs": [],
+      "solution_line_template": "This means that each box has {pomelos_per_box}/{pomelos_per_dozen} = <<{pomelos_per_box}/{pomelos_per_dozen}={dozens_per_box}>>{dozens_per_box} dozens of pomelos since 1 dozen is equal to 12."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_boxes_shipped",
+      "question_inputs": [
+        "boxes_this_week"
+      ],
+      "solution_line_template": "The farmer shipped a total of {boxes_last_week} + {boxes_this_week} = <<{boxes_last_week}+{boxes_this_week}={total_boxes_shipped}>>{total_boxes_shipped} boxes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_dozens_shipped",
+      "question_inputs": [],
+      "solution_line_template": "Thus, the farmer shipped a total of {total_boxes_shipped} x {dozens_per_box} = <<{total_boxes_shipped}*{dozens_per_box}={total_dozens_shipped}>>{total_dozens_shipped} dozens of pomelos."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There were 240/10 = <<240/10=24>>24 pomelos in a box.",
+    "L2": "This means that each box has 24/12 = <<24/12=2>>2 dozens of pomelos since 1 dozen is equal to 12.",
+    "L3": "The farmer shipped a total of 10 + 240 = <<10+240=250>>250 boxes.",
+    "L4": "Thus, the farmer shipped a total of 250 x 2 = <<250*2=500>>500 dozens of pomelos.",
+    "FA": "#### 500"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'total_pomelos_last_week' (240) was used instead of 'boxes_this_week' (20).",
+  "repro_seed": 3068957182432815428,
+  "model_name": "google_gemini-2.5-flash"
+}

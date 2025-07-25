@@ -1,0 +1,89 @@
+{
+  "index": 604,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "Santana has 1 + 1 + 2 = <<1+1+2=4>>4 brothers with birthdays in the second half of the year.",
+    "L2": "She has 7 brothers - 4 brothers = <<7-4=3>>3 brothers with birthdays in the first half of the year.",
+    "L3": "Altogether, she has to buy 4 + 7 = <<4+7=11>>11 presents in the second half of the year.",
+    "L4": "Therefore, she has to buy 11 - 3 = <<11-3=8>>8 more presents in the second half of the year."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 604.\n    Returns: the number of more presents Santana has to buy in the second half of the year than the first half of the year.\n    \"\"\"\n    # L1\n    brothers_bday_october = 1 # 1 of them has a birthday in October\n    brothers_bday_november = 1 # 1 has a birthday in November\n    brothers_bday_december = 2 # another 2 of them were born in December\n    brothers_bday_second_half = brothers_bday_october + brothers_bday_november + brothers_bday_december\n\n    # L2\n    total_brothers = 7 # Santana has 7 brothers\n    brothers_bday_first_half = total_brothers - brothers_bday_second_half\n\n    # L3\n    # The problem states that Santana buys a Christmas present for each of her brothers, and Christmas is in the second half of the year.\n    # So, the total number of presents in the second half includes birthday presents for brothers born in the second half\n    # and Christmas presents for all brothers.\n    presents_second_half = brothers_bday_second_half + total_brothers\n\n    # L4\n    # The number of presents in the first half of the year corresponds to the number of brothers with birthdays in the first half.\n    presents_first_half = brothers_bday_first_half\n    more_presents_second_half = presents_second_half - presents_first_half\n\n    # FA\n    answer = more_presents_second_half\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "more_presents_second_half",
+    "replacement_variable": "presents_second_half"
+  },
+  "correct_trace": {
+    "brothers_bday_october": 1,
+    "brothers_bday_november": 1,
+    "brothers_bday_december": 2,
+    "brothers_bday_second_half": 4,
+    "total_brothers": 7,
+    "brothers_bday_first_half": 3,
+    "presents_second_half": 11,
+    "presents_first_half": 3,
+    "more_presents_second_half": 8,
+    "answer": 8
+  },
+  "flawed_trace": {
+    "brothers_bday_october": 1,
+    "brothers_bday_november": 1,
+    "brothers_bday_december": 2,
+    "brothers_bday_second_half": 4,
+    "total_brothers": 7,
+    "brothers_bday_first_half": 3,
+    "presents_second_half": 11,
+    "presents_first_half": 3,
+    "more_presents_second_half": 8,
+    "answer": 11
+  },
+  "correct_value": 8,
+  "flawed_value": 11,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "brothers_bday_october",
+        "brothers_bday_november",
+        "brothers_bday_december"
+      ],
+      "WK_inputs": [],
+      "output_variable": "brothers_bday_second_half",
+      "solution_line_template": "Santana has {brothers_bday_october} + {brothers_bday_november} + {brothers_bday_december} = <<{brothers_bday_october}+{brothers_bday_november}+{brothers_bday_december}={brothers_bday_second_half}>>{brothers_bday_second_half} brothers with birthdays in the second half of the year."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "total_brothers"
+      ],
+      "WK_inputs": [],
+      "output_variable": "brothers_bday_first_half",
+      "solution_line_template": "She has {total_brothers} brothers - {brothers_bday_second_half} brothers = <<{total_brothers}-{brothers_bday_second_half}={brothers_bday_first_half}>>{brothers_bday_first_half} brothers with birthdays in the first half of the year."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "presents_second_half",
+      "solution_line_template": "Altogether, she has to buy {brothers_bday_second_half} + {total_brothers} = <<{brothers_bday_second_half}+{total_brothers}={presents_second_half}>>{presents_second_half} presents in the second half of the year."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "more_presents_second_half",
+      "solution_line_template": "Therefore, she has to buy {presents_second_half} - {brothers_bday_first_half} = <<{presents_second_half}-{brothers_bday_first_half}={more_presents_second_half}>>{more_presents_second_half} more presents in the second half of the year."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Santana has 1 + 1 + 2 = <<1+1+2=4>>4 brothers with birthdays in the second half of the year.",
+    "L2": "She has 7 brothers - 4 brothers = <<7-4=3>>3 brothers with birthdays in the first half of the year.",
+    "L3": "Altogether, she has to buy 4 + 7 = <<4+7=11>>11 presents in the second half of the year.",
+    "FA": "#### 11"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'presents_second_half' (value: 11) was reported instead of 'more_presents_second_half' (value: 8).",
+  "repro_seed": -3405648521981703862,
+  "model_name": "google_gemini-2.5-flash"
+}

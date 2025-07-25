@@ -1,0 +1,89 @@
+{
+  "index": 2930,
+  "original_solution_mapping": {
+    "FA": "#### 240",
+    "L1": "A group of 10 people is charged $12 + $6 = $18 each.",
+    "L2": "So, 10 people pay $18 x 10 = $<<18*10=180>>180.",
+    "L3": "A group of 5 people pays $12 x 5 = $<<12*5=60>>60 for the admission.",
+    "L4": "Thus, the aqua park earns a total of $180 + $60 = $<<180+60=240>>240."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2930.\n    Returns: the total earnings of the aqua park.\n    \"\"\"\n    # L1\n    admission_charge = 12 # $12 admission\n    tour_charge = 6 # $6 for a tour\n    cost_per_person_with_tour = admission_charge + tour_charge\n\n    # L2\n    group_size_with_tour = 10 # A group of 10 people\n    total_cost_group_with_tour = cost_per_person_with_tour * group_size_with_tour\n\n    # L3\n    group_size_admission_only = 5 # a group of 5 people\n    total_cost_group_admission_only = admission_charge * group_size_admission_only\n\n    # L4\n    total_earnings = total_cost_group_with_tour + total_cost_group_admission_only\n\n    # FA\n    answer = total_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "cost_per_person_with_tour",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x309c5e210>"
+  },
+  "correct_trace": {
+    "admission_charge": 12,
+    "tour_charge": 6,
+    "cost_per_person_with_tour": 18,
+    "group_size_with_tour": 10,
+    "total_cost_group_with_tour": 180,
+    "group_size_admission_only": 5,
+    "total_cost_group_admission_only": 60,
+    "total_earnings": 240,
+    "answer": 240
+  },
+  "flawed_trace": {
+    "admission_charge": 12,
+    "tour_charge": 6,
+    "cost_per_person_with_tour": 6,
+    "group_size_with_tour": 10,
+    "total_cost_group_with_tour": 60,
+    "group_size_admission_only": 5,
+    "total_cost_group_admission_only": 60,
+    "total_earnings": 120,
+    "answer": 120
+  },
+  "correct_value": 18,
+  "flawed_value": 6,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "admission_charge",
+        "tour_charge"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cost_per_person_with_tour",
+      "solution_line_template": "A group of 10 people is charged ${admission_charge} + ${tour_charge} = ${cost_per_person_with_tour} each."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "group_size_with_tour"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_cost_group_with_tour",
+      "solution_line_template": "So, {group_size_with_tour} people pay ${cost_per_person_with_tour} x {group_size_with_tour} = $<<{cost_per_person_with_tour}*{group_size_with_tour}={total_cost_group_with_tour}>>{total_cost_group_with_tour}."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "group_size_admission_only"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_cost_group_admission_only",
+      "solution_line_template": "A group of {group_size_admission_only} people pays ${admission_charge} x {group_size_admission_only} = $<<{admission_charge}*{group_size_admission_only}={total_cost_group_admission_only}>>{total_cost_group_admission_only} for the admission."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_earnings",
+      "solution_line_template": "Thus, the aqua park earns a total of ${total_cost_group_with_tour} + ${total_cost_group_admission_only} = $<<{total_cost_group_with_tour}+{total_cost_group_admission_only}={total_earnings}>>{total_earnings}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "A group of 10 people is charged $12 + $6 = $6 each.",
+    "L2": "So, 10 people pay $6 x 10 = $<<6*10=60>>60.",
+    "L3": "A group of 5 people pays $12 x 5 = $<<12*5=60>>60 for the admission.",
+    "L4": "Thus, the aqua park earns a total of $60 + $60 = $<<60+60=120>>120.",
+    "FA": "#### 120"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": 3569198807758648737,
+  "model_name": "google_gemini-2.5-flash"
+}

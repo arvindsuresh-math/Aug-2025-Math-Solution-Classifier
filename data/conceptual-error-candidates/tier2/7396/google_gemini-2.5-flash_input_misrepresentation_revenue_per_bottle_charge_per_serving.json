@@ -1,0 +1,63 @@
+{
+  "index": 7396,
+  "original_solution_mapping": {
+    "FA": "#### 98",
+    "L1": "There are 16 servings in 1 bottle and they charge $8.00 per serving so that's 16*8 = $<<16*8=128.00>>128.00",
+    "L2": "1 bottle yields $128.00 and they spent $30.00 for the bottle so they make 128-30 = $<<128-30=98.00>>98.00 on each bottle"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7396.\n    Returns: the money a restaurant makes on a bottle of spirits.\n    \"\"\"\n    # L1\n    servings_per_bottle = 16 # 16 servings per bottle\n    charge_per_serving = 8.00 # $8.00 for one serving\n    revenue_per_bottle = servings_per_bottle * charge_per_serving\n\n    # L2\n    cost_per_bottle = 30.00 # $30.00\n    profit_per_bottle = revenue_per_bottle - cost_per_bottle\n\n    # FA\n    answer = profit_per_bottle\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "revenue_per_bottle",
+    "operand_to_replace": "servings_per_bottle",
+    "replacement_variable": "charge_per_serving"
+  },
+  "correct_trace": {
+    "servings_per_bottle": 16,
+    "charge_per_serving": 8.0,
+    "revenue_per_bottle": 128.0,
+    "cost_per_bottle": 30.0,
+    "profit_per_bottle": 98.0,
+    "answer": 98.0
+  },
+  "flawed_trace": {
+    "servings_per_bottle": 16,
+    "charge_per_serving": 8.0,
+    "revenue_per_bottle": 64.0,
+    "cost_per_bottle": 30.0,
+    "profit_per_bottle": 34.0,
+    "answer": 34.0
+  },
+  "correct_value": 128.0,
+  "flawed_value": 64.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "revenue_per_bottle",
+      "question_inputs": [
+        "servings_per_bottle",
+        "charge_per_serving"
+      ],
+      "solution_line_template": "There are {servings_per_bottle} servings in 1 bottle and they charge ${charge_per_serving} per serving so that's {servings_per_bottle}*{charge_per_serving} = $<<{servings_per_bottle}*{charge_per_serving}={revenue_per_bottle}>>{revenue_per_bottle}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "profit_per_bottle",
+      "question_inputs": [
+        "cost_per_bottle"
+      ],
+      "solution_line_template": "1 bottle yields ${revenue_per_bottle} and they spent ${cost_per_bottle} for the bottle so they make {revenue_per_bottle}-{cost_per_bottle} = $<<{revenue_per_bottle}-{cost_per_bottle}={profit_per_bottle}>>{profit_per_bottle} on each bottle"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 8 servings in 1 bottle and they charge $8 per serving so that's 8*8 = $<<8*8=64>>64",
+    "L2": "1 bottle yields $64 and they spent $30 for the bottle so they make 64-30 = $<<64-30=34>>34 on each bottle",
+    "FA": "#### 34"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'charge_per_serving' (8.0) was used instead of 'servings_per_bottle' (16).",
+  "repro_seed": 1857607365213819874,
+  "model_name": "google_gemini-2.5-flash"
+}

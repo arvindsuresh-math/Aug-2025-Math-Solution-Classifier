@@ -1,0 +1,64 @@
+{
+  "index": 3701,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "He was sneezing for 2*60=<<2*60=120>>120 seconds",
+    "L2": "So he sneezed 120/3=<<120/3=40>>40 times"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3701.\n    Returns: the total number of sneezes.\n    \"\"\"\n    # L1\n    sneezing_duration_minutes = 2 # 2 minutes\n    seconds_per_minute = 60 # WK\n    total_sneezing_seconds = sneezing_duration_minutes * seconds_per_minute\n\n    # L2\n    sneeze_interval_seconds = 3 # once every 3 seconds\n    total_sneezes = total_sneezing_seconds / sneeze_interval_seconds\n\n    # FA\n    answer = total_sneezes\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_sneezes",
+    "operand_to_replace": "sneeze_interval_seconds",
+    "replacement_variable": "total_sneezing_seconds"
+  },
+  "correct_trace": {
+    "sneezing_duration_minutes": 2,
+    "seconds_per_minute": 60,
+    "total_sneezing_seconds": 120,
+    "sneeze_interval_seconds": 3,
+    "total_sneezes": 40.0,
+    "answer": 40.0
+  },
+  "flawed_trace": {
+    "sneezing_duration_minutes": 2,
+    "seconds_per_minute": 60,
+    "total_sneezing_seconds": 120,
+    "sneeze_interval_seconds": 3,
+    "total_sneezes": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 40.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "seconds_per_minute"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_sneezing_seconds",
+      "question_inputs": [
+        "sneezing_duration_minutes"
+      ],
+      "solution_line_template": "He was sneezing for {sneezing_duration_minutes}*{seconds_per_minute}=<<{sneezing_duration_minutes}*{seconds_per_minute}={total_sneezing_seconds}>>{total_sneezing_seconds} seconds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_sneezes",
+      "question_inputs": [
+        "sneeze_interval_seconds"
+      ],
+      "solution_line_template": "So he sneezed {total_sneezing_seconds}/{sneeze_interval_seconds}=<<{total_sneezing_seconds}/{sneeze_interval_seconds}={total_sneezes}>>{total_sneezes} times"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He was sneezing for 2*60=<<2*60=120>>120 seconds",
+    "L2": "So he sneezed 120/120=<<120/120=1>>1 times",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_sneezing_seconds' (120) was used instead of 'sneeze_interval_seconds' (3).",
+  "repro_seed": 7053780322098457179,
+  "model_name": "google_gemini-2.5-flash"
+}

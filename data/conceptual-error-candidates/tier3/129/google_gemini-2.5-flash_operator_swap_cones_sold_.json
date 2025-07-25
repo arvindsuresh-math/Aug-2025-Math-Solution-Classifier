@@ -1,0 +1,63 @@
+{
+  "index": 129,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "He sold 50 cones because 100 / 2 = <<100/2=50>>50",
+    "L2": "He gave away 10 cones because 50 / 5 = <<50/5=10>>10"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 129.\n    Returns: the number of free ice cream cones given away.\n    \"\"\"\n    # L1\n    total_sales = 100 # sold $100 worth of cones\n    cone_cost = 2 # Cones cost $2 each\n    cones_sold = total_sales / cone_cost\n\n    # L2\n    paid_cones_per_free_cone = 5 # every sixth customer gets a free ice cream cone (meaning 5 paid for 1 free)\n    free_cones_given_away = cones_sold / paid_cones_per_free_cone\n\n    # FA\n    answer = free_cones_given_away\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "cones_sold",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x30beed9d0>"
+  },
+  "correct_trace": {
+    "total_sales": 100,
+    "cone_cost": 2,
+    "cones_sold": 50.0,
+    "paid_cones_per_free_cone": 5,
+    "free_cones_given_away": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "total_sales": 100,
+    "cone_cost": 2,
+    "cones_sold": 200,
+    "paid_cones_per_free_cone": 5,
+    "free_cones_given_away": 40.0,
+    "answer": 40.0
+  },
+  "correct_value": 50.0,
+  "flawed_value": 200,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cones_sold",
+      "question_inputs": [
+        "total_sales",
+        "cone_cost"
+      ],
+      "solution_line_template": "He sold {cones_sold} cones because {total_sales} / {cone_cost} = <<{total_sales}/{cone_cost}={cones_sold}>>{cones_sold}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "free_cones_given_away",
+      "question_inputs": [
+        "paid_cones_per_free_cone"
+      ],
+      "solution_line_template": "He gave away {free_cones_given_away} cones because {cones_sold} / {paid_cones_per_free_cone} = <<{cones_sold}/{paid_cones_per_free_cone}={free_cones_given_away}>>{free_cones_given_away}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He sold 200 cones because 100 / 2 = <<100/2=200>>200",
+    "L2": "He gave away 40 cones because 200 / 5 = <<200/5=40>>40",
+    "FA": "#### 40"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 6238478793184902606,
+  "model_name": "google_gemini-2.5-flash"
+}

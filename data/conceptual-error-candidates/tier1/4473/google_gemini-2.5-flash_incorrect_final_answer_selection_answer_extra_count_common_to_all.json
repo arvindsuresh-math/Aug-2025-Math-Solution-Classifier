@@ -1,0 +1,107 @@
+{
+  "index": 4473,
+  "original_solution_mapping": {
+    "FA": "#### 47",
+    "L1": "Tony and Dean together read 23 + 12 = <<23+12=35>>35 books",
+    "L2": "3 of these books were duplicates so Tony and Dean together read 35 - 3 = <<35-3=32>>32 unique books",
+    "L3": "All three read 32 + 17 = <<32+17=49>>49 books",
+    "L4": "Because the books are being counted three times, the book is counted 3 - 1 = <<3-1=2>>2 extra times.",
+    "L5": "All together they have read 49 - 2 = <<49-2=47>>47 different books"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4473.\n    Returns: the total number of different books read by Tony, Dean, and Breanna.\n    \"\"\"\n    # L1\n    tony_books = 23 # Tony read 23 books\n    dean_books = 12 # Dean read 12 books\n    tony_dean_sum = tony_books + dean_books\n\n    # L2\n    tony_dean_duplicates = 3 # Tony and Dean read 3 of the same books\n    tony_dean_unique = tony_dean_sum - tony_dean_duplicates\n\n    # L3\n    breanna_books = 17 # Breanna read 17 books\n    all_three_sum = tony_dean_unique + breanna_books\n\n    # L4\n    num_readers_common_book = 3 # all three had read the same book\n    desired_count = 1 # WK\n    extra_count_common_to_all = num_readers_common_book - desired_count\n\n    # L5\n    total_unique_books = all_three_sum - extra_count_common_to_all\n\n    # FA\n    answer = total_unique_books\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_unique_books",
+    "replacement_variable": "extra_count_common_to_all"
+  },
+  "correct_trace": {
+    "tony_books": 23,
+    "dean_books": 12,
+    "tony_dean_sum": 35,
+    "tony_dean_duplicates": 3,
+    "tony_dean_unique": 32,
+    "breanna_books": 17,
+    "all_three_sum": 49,
+    "num_readers_common_book": 3,
+    "desired_count": 1,
+    "extra_count_common_to_all": 2,
+    "total_unique_books": 47,
+    "answer": 47
+  },
+  "flawed_trace": {
+    "tony_books": 23,
+    "dean_books": 12,
+    "tony_dean_sum": 35,
+    "tony_dean_duplicates": 3,
+    "tony_dean_unique": 32,
+    "breanna_books": 17,
+    "all_three_sum": 49,
+    "num_readers_common_book": 3,
+    "desired_count": 1,
+    "extra_count_common_to_all": 2,
+    "total_unique_books": 47,
+    "answer": 2
+  },
+  "correct_value": 47,
+  "flawed_value": 2,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "tony_dean_sum",
+      "question_inputs": [
+        "tony_books",
+        "dean_books"
+      ],
+      "solution_line_template": "Tony and Dean together read {tony_books} + {dean_books} = <<{tony_books}+{dean_books}={tony_dean_sum}>>{tony_dean_sum} books"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "tony_dean_unique",
+      "question_inputs": [
+        "tony_dean_duplicates"
+      ],
+      "solution_line_template": "{tony_dean_duplicates} of these books were duplicates so Tony and Dean together read {tony_dean_sum} - {tony_dean_duplicates} = <<{tony_dean_sum}-{tony_dean_duplicates}={tony_dean_unique}>>{tony_dean_unique} unique books"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "all_three_sum",
+      "question_inputs": [
+        "breanna_books"
+      ],
+      "solution_line_template": "All three read {tony_dean_unique} + {breanna_books} = <<{tony_dean_unique}+{breanna_books}={all_three_sum}>>{all_three_sum} books"
+    },
+    {
+      "WK_inputs": [
+        "desired_count"
+      ],
+      "line_number": "L4",
+      "output_variable": "extra_count_common_to_all",
+      "question_inputs": [
+        "num_readers_common_book"
+      ],
+      "solution_line_template": "Because the books are being counted three times, the book is counted {num_readers_common_book} - {desired_count} = <<{num_readers_common_book}-{desired_count}={extra_count_common_to_all}>>{extra_count_common_to_all} extra times."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_unique_books",
+      "question_inputs": [],
+      "solution_line_template": "All together they have read {all_three_sum} - {extra_count_common_to_all} = <<{all_three_sum}-{extra_count_common_to_all}={total_unique_books}>>{total_unique_books} different books"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Tony and Dean together read 23 + 12 = <<23+12=35>>35 books",
+    "L2": "3 of these books were duplicates so Tony and Dean together read 35 - 3 = <<35-3=32>>32 unique books",
+    "L3": "All three read 32 + 17 = <<32+17=49>>49 books",
+    "L4": "Because the books are being counted three times, the book is counted 3 - 1 = <<3-1=2>>2 extra times.",
+    "FA": "#### 2"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'extra_count_common_to_all' (value: 2) was reported instead of 'total_unique_books' (value: 47).",
+  "repro_seed": -118340995919058585,
+  "model_name": "google_gemini-2.5-flash"
+}

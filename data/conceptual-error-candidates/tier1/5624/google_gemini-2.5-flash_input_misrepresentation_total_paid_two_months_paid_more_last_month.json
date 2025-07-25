@@ -1,0 +1,74 @@
+{
+  "index": 5624,
+  "original_solution_mapping": {
+    "FA": "#### 23",
+    "L1": "Jerry paid $12 + $3 = $<<12+3=15>>15 last month.",
+    "L2": "He paid a total of $12 + $15 = $<<12+15=27>>27 for two months.",
+    "L3": "Therefore, Jerry still has to pay $50 - $27 = $<<50-27=23>>23."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5624.\n    Returns: the amount Jerry still has to pay.\n    \"\"\"\n    # L1\n    paid_two_months_ago = 12 # paid $12\n    paid_more_last_month = 3 # paid $3 more\n    paid_last_month = paid_two_months_ago + paid_more_last_month\n\n    # L2\n    total_paid_two_months = paid_two_months_ago + paid_last_month\n\n    # L3\n    total_debt = 50 # debt was $50 in all\n    remaining_debt = total_debt - total_paid_two_months\n\n    # FA\n    answer = remaining_debt\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_paid_two_months",
+    "operand_to_replace": "paid_two_months_ago",
+    "replacement_variable": "paid_more_last_month"
+  },
+  "correct_trace": {
+    "paid_two_months_ago": 12,
+    "paid_more_last_month": 3,
+    "paid_last_month": 15,
+    "total_paid_two_months": 27,
+    "total_debt": 50,
+    "remaining_debt": 23,
+    "answer": 23
+  },
+  "flawed_trace": {
+    "paid_two_months_ago": 12,
+    "paid_more_last_month": 3,
+    "paid_last_month": 15,
+    "total_paid_two_months": 18,
+    "total_debt": 50,
+    "remaining_debt": 32,
+    "answer": 32
+  },
+  "correct_value": 27,
+  "flawed_value": 18,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "paid_last_month",
+      "question_inputs": [
+        "paid_two_months_ago",
+        "paid_more_last_month"
+      ],
+      "solution_line_template": "Jerry paid ${paid_two_months_ago} + ${paid_more_last_month} = $<<{paid_two_months_ago}+{paid_more_last_month}={paid_last_month}>>{paid_last_month} last month."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_paid_two_months",
+      "question_inputs": [],
+      "solution_line_template": "He paid a total of ${paid_two_months_ago} + ${paid_last_month} = $<<{paid_two_months_ago}+{paid_last_month}={total_paid_two_months}>>{total_paid_two_months} for two months."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_debt",
+      "question_inputs": [
+        "total_debt"
+      ],
+      "solution_line_template": "Therefore, Jerry still has to pay ${total_debt} - ${total_paid_two_months} = $<<{total_debt}-{total_paid_two_months}={remaining_debt}>>{remaining_debt}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jerry paid $12 + $3 = $<<12+3=15>>15 last month.",
+    "L2": "He paid a total of $3 + $15 = $<<3+15=18>>18 for two months.",
+    "L3": "Therefore, Jerry still has to pay $50 - $18 = $<<50-18=32>>32.",
+    "FA": "#### 32"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'paid_more_last_month' (3) was used instead of 'paid_two_months_ago' (12).",
+  "repro_seed": 2161263017961528469,
+  "model_name": "google_gemini-2.5-flash"
+}

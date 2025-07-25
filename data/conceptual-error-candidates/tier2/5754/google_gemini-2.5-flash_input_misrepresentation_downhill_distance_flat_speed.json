@@ -1,0 +1,110 @@
+{
+  "index": 5754,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "Alex traveled at 20 miles per hour for 4.5 hours, so 20 * 4.5 = <<20*4.5=90>>90 miles on flat ground.",
+    "L2": "He traveled 12 miles per hour uphill for 2.5 hours, so 12 * 2.5 = <<12*2.5=30>>30 miles uphill.",
+    "L3": "He traveled downhill 24 miles per hour for 1.5 hours = 24 * 1.5 = <<24*1.5=36>>36 miles downhill.",
+    "L4": "Before his tire punctured, he traveled 90 + 30 + 36 = <<90+30+36=156>>156 miles.",
+    "L5": "So as the next town is 164 miles from where he began, Alex had to walk for 164 - 156 = <<164-156=8>>8 miles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5754.\n    Returns: how far Alex had to walk.\n    \"\"\"\n    # L1\n    flat_speed = 20 # average speed over flat ground of about 20 miles per hour\n    flat_duration = 4.5 # Four and a half hours later\n    flat_distance = flat_speed * flat_duration\n\n    # L2\n    uphill_speed = 12 # only manage 12 miles per hour\n    uphill_duration = 2.5 # Two and a half hours later\n    uphill_distance = uphill_speed * uphill_duration\n\n    # L3\n    downhill_speed = 24 # mostly coast at 24 miles per hour\n    downhill_duration = 1.5 # for one and a half hours\n    downhill_distance = downhill_speed * downhill_duration\n\n    # L4\n    total_biked_distance = flat_distance + uphill_distance + downhill_distance\n\n    # L5\n    total_trip_distance = 164 # 164 miles from where he started this morning\n    walk_distance = total_trip_distance - total_biked_distance\n\n    # FA\n    answer = walk_distance\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "downhill_distance",
+    "operand_to_replace": "downhill_speed",
+    "replacement_variable": "flat_speed"
+  },
+  "correct_trace": {
+    "flat_speed": 20,
+    "flat_duration": 4.5,
+    "flat_distance": 90.0,
+    "uphill_speed": 12,
+    "uphill_duration": 2.5,
+    "uphill_distance": 30.0,
+    "downhill_speed": 24,
+    "downhill_duration": 1.5,
+    "downhill_distance": 36.0,
+    "total_biked_distance": 156.0,
+    "total_trip_distance": 164,
+    "walk_distance": 8.0,
+    "answer": 8.0
+  },
+  "flawed_trace": {
+    "flat_speed": 20,
+    "flat_duration": 4.5,
+    "flat_distance": 90.0,
+    "uphill_speed": 12,
+    "uphill_duration": 2.5,
+    "uphill_distance": 30.0,
+    "downhill_speed": 24,
+    "downhill_duration": 1.5,
+    "downhill_distance": 30.0,
+    "total_biked_distance": 150.0,
+    "total_trip_distance": 164,
+    "walk_distance": 14.0,
+    "answer": 14.0
+  },
+  "correct_value": 36.0,
+  "flawed_value": 30.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "flat_distance",
+      "question_inputs": [
+        "flat_speed",
+        "flat_duration"
+      ],
+      "solution_line_template": "Alex traveled at {flat_speed} miles per hour for {flat_duration} hours, so {flat_speed} * {flat_duration} = <<{flat_speed}*{flat_duration}={flat_distance}>>{flat_distance} miles on flat ground."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "uphill_distance",
+      "question_inputs": [
+        "uphill_speed",
+        "uphill_duration"
+      ],
+      "solution_line_template": "He traveled {uphill_speed} miles per hour uphill for {uphill_duration} hours, so {uphill_speed} * {uphill_duration} = <<{uphill_speed}*{uphill_duration}={uphill_distance}>>{uphill_distance} miles uphill."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "downhill_distance",
+      "question_inputs": [
+        "downhill_speed",
+        "downhill_duration"
+      ],
+      "solution_line_template": "He traveled downhill {downhill_speed} miles per hour for {downhill_duration} hours = {downhill_speed} * {downhill_duration} = <<{downhill_speed}*{downhill_duration}={downhill_distance}>>{downhill_distance} miles downhill."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_biked_distance",
+      "question_inputs": [],
+      "solution_line_template": "Before his tire punctured, he traveled {flat_distance} + {uphill_distance} + {downhill_distance} = <<{flat_distance}+{uphill_distance}+{downhill_distance}={total_biked_distance}>>{total_biked_distance} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "walk_distance",
+      "question_inputs": [
+        "total_trip_distance"
+      ],
+      "solution_line_template": "So as the next town is {total_trip_distance} miles from where he began, Alex had to walk for {total_trip_distance} - {total_biked_distance} = <<{total_trip_distance}-{total_biked_distance}={walk_distance}>>{walk_distance} miles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Alex traveled at 20 miles per hour for 4.5 hours, so 20 * 4.5 = <<20*4.5=90>>90 miles on flat ground.",
+    "L2": "He traveled 12 miles per hour uphill for 2.5 hours, so 12 * 2.5 = <<12*2.5=30>>30 miles uphill.",
+    "L3": "He traveled downhill 20 miles per hour for 1.5 hours = 20 * 1.5 = <<20*1.5=30>>30 miles downhill.",
+    "L4": "Before his tire punctured, he traveled 90 + 30 + 30 = <<90+30+30=150>>150 miles.",
+    "L5": "So as the next town is 164 miles from where he began, Alex had to walk for 164 - 150 = <<164-150=14>>14 miles.",
+    "FA": "#### 14"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'flat_speed' (20) was used instead of 'downhill_speed' (24).",
+  "repro_seed": 3206756414489758704,
+  "model_name": "google_gemini-2.5-flash"
+}

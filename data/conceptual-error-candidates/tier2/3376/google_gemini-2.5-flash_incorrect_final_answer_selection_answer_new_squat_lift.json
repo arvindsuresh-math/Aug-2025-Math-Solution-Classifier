@@ -1,0 +1,90 @@
+{
+  "index": 3376,
+  "original_solution_mapping": {
+    "FA": "#### 1490",
+    "L1": "He lost 700*.3=<<700*.3=210>>210 pounds on squat",
+    "L2": "So his squat is now 700-210=<<700-210=490>>490 pounds",
+    "L3": "His deadlift is 800-200=<<800-200=600>>600 pounds",
+    "L4": "So his total is now 490+600+400=<<490+600+400=1490>>1490 pounds"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3376.\n    Returns: John's new total lift.\n    \"\"\"\n    # L1\n    initial_squat_lift = 700 # lift 700 for squat\n    squat_loss_percent = 0.3 # lost 30% of his lift\n    squat_loss_amount = initial_squat_lift * squat_loss_percent\n\n    # L2\n    new_squat_lift = initial_squat_lift - squat_loss_amount\n\n    # L3\n    initial_deadlift = 800 # 800 for deadlift\n    deadlift_loss_amount = 200 # lost 200 pounds on deadlift\n    new_deadlift = initial_deadlift - deadlift_loss_amount\n\n    # L4\n    initial_bench_lift = 400 # 400 for bench\n    total_new_lift = new_squat_lift + new_deadlift + initial_bench_lift\n\n    # FA\n    answer = total_new_lift\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_new_lift",
+    "replacement_variable": "new_squat_lift"
+  },
+  "correct_trace": {
+    "initial_squat_lift": 700,
+    "squat_loss_percent": 0.3,
+    "squat_loss_amount": 210.0,
+    "new_squat_lift": 490.0,
+    "initial_deadlift": 800,
+    "deadlift_loss_amount": 200,
+    "new_deadlift": 600,
+    "initial_bench_lift": 400,
+    "total_new_lift": 1490.0,
+    "answer": 1490.0
+  },
+  "flawed_trace": {
+    "initial_squat_lift": 700,
+    "squat_loss_percent": 0.3,
+    "squat_loss_amount": 210.0,
+    "new_squat_lift": 490.0,
+    "initial_deadlift": 800,
+    "deadlift_loss_amount": 200,
+    "new_deadlift": 600,
+    "initial_bench_lift": 400,
+    "total_new_lift": 1490.0,
+    "answer": 490.0
+  },
+  "correct_value": 1490.0,
+  "flawed_value": 490.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "squat_loss_amount",
+      "question_inputs": [
+        "initial_squat_lift",
+        "squat_loss_percent"
+      ],
+      "solution_line_template": "He lost {initial_squat_lift}*{squat_loss_percent}=<<{initial_squat_lift}*{squat_loss_percent}={squat_loss_amount}>>{squat_loss_amount} pounds on squat"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "new_squat_lift",
+      "question_inputs": [],
+      "solution_line_template": "So his squat is now {initial_squat_lift}-{squat_loss_amount}=<<{initial_squat_lift}-{squat_loss_amount}={new_squat_lift}>>{new_squat_lift} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "new_deadlift",
+      "question_inputs": [
+        "initial_deadlift",
+        "deadlift_loss_amount"
+      ],
+      "solution_line_template": "His deadlift is {initial_deadlift}-{deadlift_loss_amount}=<<{initial_deadlift}-{deadlift_loss_amount}={new_deadlift}>>{new_deadlift} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_new_lift",
+      "question_inputs": [
+        "initial_bench_lift"
+      ],
+      "solution_line_template": "So his total is now {new_squat_lift}+{new_deadlift}+{initial_bench_lift}=<<{new_squat_lift}+{new_deadlift}+{initial_bench_lift}={total_new_lift}>>{total_new_lift} pounds"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He lost 700*0.3=<<700*0.3=210>>210 pounds on squat",
+    "L2": "So his squat is now 700-210=<<700-210=490>>490 pounds",
+    "FA": "#### 490"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'new_squat_lift' (value: 490.0) was reported instead of 'total_new_lift' (value: 1490.0).",
+  "repro_seed": 2737492924005832041,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 3744,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "3 times the initial amount of 10 oz is 3*10=<<3*10=30>>30 oz",
+    "L2": "He has consumed 10+12=<<10+12=22>>22 oz of rum",
+    "L3": "He can still consume 30-22=<<30-22=8>>8 oz of rum"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3744.\n    Returns: the amount of rum Don can still have.\n    \"\"\"\n    # L1\n    initial_rum_given = 10 # 10oz of rum\n    max_multiplier = 3 # 3 times that amount\n    max_rum_allowed = max_multiplier * initial_rum_given\n\n    # L2\n    rum_earlier = 12 # 12oz of rum earlier that day\n    rum_consumed_total = initial_rum_given + rum_earlier\n\n    # L3\n    rum_can_still_have = max_rum_allowed - rum_consumed_total\n\n    # FA\n    answer = rum_can_still_have\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "rum_can_still_have",
+    "operand_to_replace": "rum_consumed_total",
+    "replacement_variable": "initial_rum_given"
+  },
+  "correct_trace": {
+    "initial_rum_given": 10,
+    "max_multiplier": 3,
+    "max_rum_allowed": 30,
+    "rum_earlier": 12,
+    "rum_consumed_total": 22,
+    "rum_can_still_have": 8,
+    "answer": 8
+  },
+  "flawed_trace": {
+    "initial_rum_given": 10,
+    "max_multiplier": 3,
+    "max_rum_allowed": 30,
+    "rum_earlier": 12,
+    "rum_consumed_total": 22,
+    "rum_can_still_have": 20,
+    "answer": 20
+  },
+  "correct_value": 8,
+  "flawed_value": 20,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "max_rum_allowed",
+      "question_inputs": [
+        "initial_rum_given",
+        "max_multiplier"
+      ],
+      "solution_line_template": "3 times the initial amount of {initial_rum_given} oz is {max_multiplier}*{initial_rum_given}=<<{max_multiplier}*{initial_rum_given}={max_rum_allowed}>>{max_rum_allowed} oz"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "rum_consumed_total",
+      "question_inputs": [
+        "rum_earlier"
+      ],
+      "solution_line_template": "He has consumed {initial_rum_given}+{rum_earlier}=<<{initial_rum_given}+{rum_earlier}={rum_consumed_total}>>{rum_consumed_total} oz of rum"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "rum_can_still_have",
+      "question_inputs": [],
+      "solution_line_template": "He can still consume {max_rum_allowed}-{rum_consumed_total}=<<{max_rum_allowed}-{rum_consumed_total}={rum_can_still_have}>>{rum_can_still_have} oz of rum"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "3 times the initial amount of 10 oz is 3*10=<<3*10=30>>30 oz",
+    "L2": "He has consumed 10+12=<<10+12=22>>22 oz of rum",
+    "L3": "He can still consume 30-10=<<30-10=20>>20 oz of rum",
+    "FA": "#### 20"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'initial_rum_given' (value: 10) was used instead of 'rum_consumed_total' (value: 22).",
+  "repro_seed": 5543884544837379548,
+  "model_name": "google_gemini-2.5-flash"
+}

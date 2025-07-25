@@ -1,0 +1,98 @@
+{
+  "index": 6488,
+  "original_solution_mapping": {
+    "FA": "#### 2000",
+    "L1": "Each box costs $80 + $165 = $<<80+165=245>>245",
+    "L2": "They spent $245/box x 400 boxes = $98,000 on 400 boxes.",
+    "L3": "They were given another $98,000 x 4 = $<<98000*4=392000>>392,000",
+    "L4": "They are able to pack another $392,000/$245/box = 1600 boxes",
+    "L5": "Altogether, they pack 1600 boxes + 400 boxes = <<1600+400=2000>>2000 boxes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6488.\n    Returns: the total number of boxes packed by the charity organization.\n    \"\"\"\n    # L1\n    food_cost_per_box = 80 # Each box contains $80 worth of food\n    supplies_cost_per_box = 165 # $165 worth of additional supplies\n    cost_per_box = food_cost_per_box + supplies_cost_per_box\n\n    # L2\n    initial_boxes = 400 # distribute 400 boxes of food\n    initial_spent_money = cost_per_box * initial_boxes\n\n    # L3\n    donor_multiplier = 4 # 4 times the amount of money\n    donor_money = initial_spent_money * donor_multiplier\n\n    # L4\n    additional_boxes = donor_money / cost_per_box\n\n    # L5\n    total_boxes = additional_boxes + initial_boxes\n\n    # FA\n    answer = total_boxes\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_boxes",
+    "replacement_variable": "donor_money"
+  },
+  "correct_trace": {
+    "food_cost_per_box": 80,
+    "supplies_cost_per_box": 165,
+    "cost_per_box": 245,
+    "initial_boxes": 400,
+    "initial_spent_money": 98000,
+    "donor_multiplier": 4,
+    "donor_money": 392000,
+    "additional_boxes": 1600.0,
+    "total_boxes": 2000.0,
+    "answer": 2000.0
+  },
+  "flawed_trace": {
+    "food_cost_per_box": 80,
+    "supplies_cost_per_box": 165,
+    "cost_per_box": 245,
+    "initial_boxes": 400,
+    "initial_spent_money": 98000,
+    "donor_multiplier": 4,
+    "donor_money": 392000,
+    "additional_boxes": 1600.0,
+    "total_boxes": 2000.0,
+    "answer": 392000
+  },
+  "correct_value": 2000.0,
+  "flawed_value": 392000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_per_box",
+      "question_inputs": [
+        "food_cost_per_box",
+        "supplies_cost_per_box"
+      ],
+      "solution_line_template": "Each box costs ${food_cost_per_box} + ${supplies_cost_per_box} = $<<{food_cost_per_box}+{supplies_cost_per_box}={cost_per_box}>>{cost_per_box}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "initial_spent_money",
+      "question_inputs": [
+        "initial_boxes"
+      ],
+      "solution_line_template": "They spent ${cost_per_box}/box x {initial_boxes} boxes = ${initial_spent_money} on {initial_boxes} boxes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "donor_money",
+      "question_inputs": [
+        "donor_multiplier"
+      ],
+      "solution_line_template": "They were given another ${initial_spent_money} x {donor_multiplier} = $<<{initial_spent_money}*{donor_multiplier}={donor_money}>>{donor_money}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "additional_boxes",
+      "question_inputs": [],
+      "solution_line_template": "They are able to pack another ${donor_money}/${cost_per_box}/box = {additional_boxes} boxes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_boxes",
+      "question_inputs": [],
+      "solution_line_template": "Altogether, they pack {additional_boxes} boxes + {initial_boxes} boxes = <<{additional_boxes}+{initial_boxes}={total_boxes}>>{total_boxes} boxes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each box costs $80 + $165 = $<<80+165=245>>245",
+    "L2": "They spent $245/box x 400 boxes = $98000 on 400 boxes.",
+    "L3": "They were given another $98000 x 4 = $<<98000*4=392000>>392000",
+    "FA": "#### 392000"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'donor_money' (value: 392000) was reported instead of 'total_boxes' (value: 2000.0).",
+  "repro_seed": 1979753064223048038,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,106 @@
+{
+  "index": 549,
+  "original_solution_mapping": {
+    "FA": "#### 300",
+    "L1": "The number of chairs that are disposed of after they're found to be damaged is 40/100*80 = <<40/100*80=32>>32.",
+    "L2": "The number of chairs in good condition in Kenzo's company is 80-32 = <<80-32=48>>48",
+    "L3": "The 48 chairs have 48*5 = <<48*5=240>>240 legs.",
+    "L4": "The round tables also have 20*3 = <<20*3=60>>60 legs.",
+    "L5": "In total, the furniture in Kenzo's company has 60+240 = <<60+240=300>>300 legs."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 549.\n    Returns: the total number of legs of furniture Kenzo has remaining.\n    \"\"\"\n    # L1\n    disposed_percentage_numerator = 40 # 40% of the chairs are damaged\n    disposed_percentage_denominator = 100 # 40% of the chairs are damaged\n    initial_chairs = 80 # 80 office chairs\n    disposed_chairs = disposed_percentage_numerator / disposed_percentage_denominator * initial_chairs\n\n    # L2\n    remaining_chairs = initial_chairs - disposed_chairs\n\n    # L3\n    legs_per_chair = 5 # five legs each\n    chair_legs = remaining_chairs * legs_per_chair\n\n    # L4\n    num_tables = 20 # 20 round tables\n    legs_per_table = 3 # three legs each\n    table_legs = num_tables * legs_per_table\n\n    # L5\n    total_legs = table_legs + chair_legs\n\n    # FA\n    answer = total_legs\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "chair_legs",
+    "operand_to_replace": "remaining_chairs",
+    "replacement_variable": "disposed_percentage_denominator"
+  },
+  "correct_trace": {
+    "disposed_percentage_numerator": 40,
+    "disposed_percentage_denominator": 100,
+    "initial_chairs": 80,
+    "disposed_chairs": 32.0,
+    "remaining_chairs": 48.0,
+    "legs_per_chair": 5,
+    "chair_legs": 240.0,
+    "num_tables": 20,
+    "legs_per_table": 3,
+    "table_legs": 60,
+    "total_legs": 300.0,
+    "answer": 300.0
+  },
+  "flawed_trace": {
+    "disposed_percentage_numerator": 40,
+    "disposed_percentage_denominator": 100,
+    "initial_chairs": 80,
+    "disposed_chairs": 32.0,
+    "remaining_chairs": 48.0,
+    "legs_per_chair": 5,
+    "chair_legs": 500,
+    "num_tables": 20,
+    "legs_per_table": 3,
+    "table_legs": 60,
+    "total_legs": 560,
+    "answer": 560
+  },
+  "correct_value": 240.0,
+  "flawed_value": 500,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "disposed_chairs",
+      "question_inputs": [
+        "disposed_percentage_numerator",
+        "disposed_percentage_denominator",
+        "initial_chairs"
+      ],
+      "solution_line_template": "The number of chairs that are disposed of after they're found to be damaged is {disposed_percentage_numerator}/{disposed_percentage_denominator}*{initial_chairs} = <<{disposed_percentage_numerator}/{disposed_percentage_denominator}*{initial_chairs}={disposed_chairs}>>{disposed_chairs}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_chairs",
+      "question_inputs": [],
+      "solution_line_template": "The number of chairs in good condition in Kenzo's company is {initial_chairs}-{disposed_chairs} = <<{initial_chairs}-{disposed_chairs}={remaining_chairs}>>{remaining_chairs}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "chair_legs",
+      "question_inputs": [
+        "legs_per_chair"
+      ],
+      "solution_line_template": "The {remaining_chairs} chairs have {remaining_chairs}*{legs_per_chair} = <<{remaining_chairs}*{legs_per_chair}={chair_legs}>>{chair_legs} legs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "table_legs",
+      "question_inputs": [
+        "num_tables",
+        "legs_per_table"
+      ],
+      "solution_line_template": "The round tables also have {num_tables}*{legs_per_table} = <<{num_tables}*{legs_per_table}={table_legs}>>{table_legs} legs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_legs",
+      "question_inputs": [],
+      "solution_line_template": "In total, the furniture in Kenzo's company has {table_legs}+{chair_legs} = <<{table_legs}+{chair_legs}={total_legs}>>{total_legs} legs."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The number of chairs that are disposed of after they're found to be damaged is 40/100*80 = <<40/100*80=32>>32.",
+    "L2": "The number of chairs in good condition in Kenzo's company is 80-32 = <<80-32=48>>48",
+    "L3": "The 100 chairs have 100*5 = <<100*5=500>>500 legs.",
+    "L4": "The round tables also have 20*3 = <<20*3=60>>60 legs.",
+    "L5": "In total, the furniture in Kenzo's company has 60+500 = <<60+500=560>>560 legs.",
+    "FA": "#### 560"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'disposed_percentage_denominator' (value: 100) was used instead of 'remaining_chairs' (value: 48.0).",
+  "repro_seed": 1826965995848781100,
+  "model_name": "google_gemini-2.5-flash"
+}

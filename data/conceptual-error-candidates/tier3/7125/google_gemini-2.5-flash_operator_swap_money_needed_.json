@@ -1,0 +1,114 @@
+{
+  "index": 7125,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "Pete's wallet contains 2 * 20 = <<2*20=40>>40 dollars",
+    "L2": "The money in Pete's pockets is 4 * 10 = <<4*10=40>>40 dollars",
+    "L3": "In total Pete has 40 + 40 = <<40+40=80>>80 dollars",
+    "L4": "He owes 90 dollars on the bike and therefore needs 90 - 80 = <<90-80=10>>10 more dollars",
+    "L5": "Since 50 cents is \u00bd dollar, then the number of bottles required to get 10 dollars is 10 / (1/2) = 10*2 = <<10/(1/2)=20>>20 bottles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7125.\n    Returns: the number of bottles Pete needs to return to the store.\n    \"\"\"\n    # L1\n    num_20_bills = 2 # two $20 bills\n    value_20_bill = 20 # $20 bills\n    wallet_money = num_20_bills * value_20_bill\n\n    # L2\n    num_10_bills = 4 # four $10 bills\n    value_10_bill = 10 # $10 bills\n    pocket_money = num_10_bills * value_10_bill\n\n    # L3\n    total_money_on_hand = wallet_money + pocket_money\n\n    # L4\n    bike_debt = 90 # last $90 he owes on a bike\n    money_needed = bike_debt - total_money_on_hand\n\n    # L5\n    cents_per_bottle = 50 # 50 cents for each bottle\n    bottle_value_fraction = Fraction(1, 2) # WK\n    reciprocal_factor = 2 # WK\n    bottles_needed = money_needed / bottle_value_fraction\n\n    # FA\n    answer = bottles_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "money_needed",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x15f730450>"
+  },
+  "correct_trace": {
+    "num_20_bills": 2,
+    "value_20_bill": 20,
+    "wallet_money": 40,
+    "num_10_bills": 4,
+    "value_10_bill": 10,
+    "pocket_money": 40,
+    "total_money_on_hand": 80,
+    "bike_debt": 90,
+    "money_needed": 10,
+    "cents_per_bottle": 50,
+    "bottle_value_fraction": "1/2",
+    "reciprocal_factor": 2,
+    "bottles_needed": "20",
+    "answer": "20"
+  },
+  "flawed_trace": {
+    "num_20_bills": 2,
+    "value_20_bill": 20,
+    "wallet_money": 40,
+    "num_10_bills": 4,
+    "value_10_bill": 10,
+    "pocket_money": 40,
+    "total_money_on_hand": 80,
+    "bike_debt": 90,
+    "money_needed": 170,
+    "cents_per_bottle": 50,
+    "bottle_value_fraction": "1/2",
+    "reciprocal_factor": 2,
+    "bottles_needed": "340",
+    "answer": "340"
+  },
+  "correct_value": 10,
+  "flawed_value": 170,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "wallet_money",
+      "question_inputs": [
+        "num_20_bills",
+        "value_20_bill"
+      ],
+      "solution_line_template": "Pete's wallet contains {num_20_bills} * {value_20_bill} = <<{num_20_bills}*{value_20_bill}={wallet_money}>>{wallet_money} dollars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "pocket_money",
+      "question_inputs": [
+        "num_10_bills",
+        "value_10_bill"
+      ],
+      "solution_line_template": "The money in Pete's pockets is {num_10_bills} * {value_10_bill} = <<{num_10_bills}*{value_10_bill}={pocket_money}>>{pocket_money} dollars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_money_on_hand",
+      "question_inputs": [],
+      "solution_line_template": "In total Pete has {wallet_money} + {pocket_money} = <<{wallet_money}+{pocket_money}={total_money_on_hand}>>{total_money_on_hand} dollars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "money_needed",
+      "question_inputs": [
+        "bike_debt"
+      ],
+      "solution_line_template": "He owes {bike_debt} dollars on the bike and therefore needs {bike_debt} - {total_money_on_hand} = <<{bike_debt}-{total_money_on_hand}={money_needed}>>{money_needed} more dollars"
+    },
+    {
+      "WK_inputs": [
+        "bottle_value_fraction",
+        "reciprocal_factor"
+      ],
+      "line_number": "L5",
+      "output_variable": "bottles_needed",
+      "question_inputs": [
+        "cents_per_bottle"
+      ],
+      "solution_line_template": "Since {cents_per_bottle} cents is {bottle_value_fraction} dollar, then the number of bottles required to get {money_needed} dollars is {money_needed} / ({bottle_value_fraction}) = {money_needed}*{reciprocal_factor} = <<{money_needed}/({bottle_value_fraction})={bottles_needed}>>{bottles_needed} bottles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Pete's wallet contains 2 * 20 = <<2*20=40>>40 dollars",
+    "L2": "The money in Pete's pockets is 4 * 10 = <<4*10=40>>40 dollars",
+    "L3": "In total Pete has 40 + 40 = <<40+40=80>>80 dollars",
+    "L4": "He owes 90 dollars on the bike and therefore needs 90 - 80 = <<90-80=170>>170 more dollars",
+    "L5": "Since 50 cents is 1/2 dollar, then the number of bottles required to get 170 dollars is 170 / (1/2) = 170*2 = <<170/(1/2)=340>>340 bottles.",
+    "FA": "#### 340"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -3211159842627319414,
+  "model_name": "google_gemini-2.5-flash"
+}

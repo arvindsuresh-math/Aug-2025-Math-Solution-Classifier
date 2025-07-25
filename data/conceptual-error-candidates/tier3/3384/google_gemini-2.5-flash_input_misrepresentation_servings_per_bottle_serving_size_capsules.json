@@ -1,0 +1,63 @@
+{
+  "index": 3384,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "If each serving size is 2 capsules, a 60-capsule bottle of vitamin D3 would contain 60/2=<<60/2=30>>30 servings.",
+    "L2": "Using 30-serving bottles, to last 180 days, it would take 180/30=<<180/30=6>>6 bottles of vitamin D3."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3384.\n    Returns: the number of bottles Barry needs to buy.\n    \"\"\"\n    # L1\n    capsules_per_bottle = 60 # bottles containing 60 capsules\n    serving_size_capsules = 2 # daily serving size of 2 capsules\n    servings_per_bottle = capsules_per_bottle / serving_size_capsules\n\n    # L2\n    total_days = 180 # for 180 days\n    bottles_needed = total_days / servings_per_bottle\n\n    # FA\n    answer = bottles_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "servings_per_bottle",
+    "operand_to_replace": "capsules_per_bottle",
+    "replacement_variable": "serving_size_capsules"
+  },
+  "correct_trace": {
+    "capsules_per_bottle": 60,
+    "serving_size_capsules": 2,
+    "servings_per_bottle": 30.0,
+    "total_days": 180,
+    "bottles_needed": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "capsules_per_bottle": 60,
+    "serving_size_capsules": 2,
+    "servings_per_bottle": 1.0,
+    "total_days": 180,
+    "bottles_needed": 180.0,
+    "answer": 180.0
+  },
+  "correct_value": 30.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "servings_per_bottle",
+      "question_inputs": [
+        "capsules_per_bottle",
+        "serving_size_capsules"
+      ],
+      "solution_line_template": "If each serving size is {serving_size_capsules} capsules, a {capsules_per_bottle}-capsule bottle of vitamin D3 would contain {capsules_per_bottle}/{serving_size_capsules}=<<{capsules_per_bottle}/{serving_size_capsules}={servings_per_bottle}>>{servings_per_bottle} servings."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "bottles_needed",
+      "question_inputs": [
+        "total_days"
+      ],
+      "solution_line_template": "Using {servings_per_bottle}-serving bottles, to last {total_days} days, it would take {total_days}/{servings_per_bottle}=<<{total_days}/{servings_per_bottle}={bottles_needed}>>{bottles_needed} bottles of vitamin D3."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If each serving size is 2 capsules, a 2-capsule bottle of vitamin D3 would contain 2/2=<<2/2=1>>1 servings.",
+    "L2": "Using 1-serving bottles, to last 180 days, it would take 180/1=<<180/1=180>>180 bottles of vitamin D3.",
+    "FA": "#### 180"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'serving_size_capsules' (2) was used instead of 'capsules_per_bottle' (60).",
+  "repro_seed": 1304666245162330487,
+  "model_name": "google_gemini-2.5-flash"
+}

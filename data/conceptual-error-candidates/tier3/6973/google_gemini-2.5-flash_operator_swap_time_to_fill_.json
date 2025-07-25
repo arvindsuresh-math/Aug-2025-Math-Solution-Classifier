@@ -1,0 +1,63 @@
+{
+  "index": 6973,
+  "original_solution_mapping": {
+    "FA": "#### 300",
+    "L1": "3/4 of the water tank is 3/4*4000 = <<3/4*4000=3000>>3000",
+    "L2": "If the pipe fills the tank with water at the rate of 10 gallons per hour, it will take 3000/10 = <<3000/10=300>>300 hours to fill the tank to 3/4 of its capacity"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6973.\n    Returns: the time in hours to fill the tank to 3/4 of its capacity.\n    \"\"\"\n    # L1\n    target_fraction = Fraction(3, 4) # 3/4 of its capacity\n    tank_capacity = 4000 # capacity of 4000 gallons\n    target_volume = target_fraction * tank_capacity\n\n    # L2\n    fill_rate = 10 # rate of 10 gallons per hour\n    time_to_fill = target_volume / fill_rate\n\n    # FA\n    answer = time_to_fill\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "time_to_fill",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x1720b8890>"
+  },
+  "correct_trace": {
+    "target_fraction": "3/4",
+    "tank_capacity": 4000,
+    "target_volume": "3000",
+    "fill_rate": 10,
+    "time_to_fill": "300",
+    "answer": "300"
+  },
+  "flawed_trace": {
+    "target_fraction": "3/4",
+    "tank_capacity": 4000,
+    "target_volume": "3000",
+    "fill_rate": 10,
+    "time_to_fill": "2990",
+    "answer": "2990"
+  },
+  "correct_value": "300",
+  "flawed_value": "2990",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "target_volume",
+      "question_inputs": [
+        "target_fraction",
+        "tank_capacity"
+      ],
+      "solution_line_template": "3/4 of the water tank is {target_fraction}*{tank_capacity} = <<{target_fraction}*{tank_capacity}={target_volume}>>{target_volume}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "time_to_fill",
+      "question_inputs": [
+        "fill_rate"
+      ],
+      "solution_line_template": "If the pipe fills the tank with water at the rate of {fill_rate} gallons per hour, it will take {target_volume}/{fill_rate} = <<{target_volume}/{fill_rate}={time_to_fill}>>{time_to_fill} hours to fill the tank to 3/4 of its capacity"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "3/4 of the water tank is 3/4*4000 = <<3/4*4000=3000>>3000",
+    "L2": "If the pipe fills the tank with water at the rate of 10 gallons per hour, it will take 3000/10 = <<3000/10=2990>>2990 hours to fill the tank to 3/4 of its capacity",
+    "FA": "#### 2990"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 8601599493297404788,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,100 @@
+{
+  "index": 1105,
+  "original_solution_mapping": {
+    "FA": "#### 170",
+    "L1": "Gina's mom received 1/4 x $400 = $<<1/4*400=100>>100.",
+    "L2": "She used 1/8 x $400 = $<<1/8*400=50>>50 to buy clothes.",
+    "L3": "She gave 1/5 x $400 = $<<1/5*400=80>>80 to a charity.",
+    "L4": "Thus, she spent a total of $100 + $50 + $80 = $<<100+50+80=230>>230.",
+    "L5": "Therefore, Gina kept $400 - $230 = $<<400-230=170>>170."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1105.\n    Returns: the amount of money Gina kept.\n    \"\"\"\n    # L1\n    initial_money = 400 # Gina had $400\n    mom_fraction = Fraction(1, 4) # gave 1/4 of her money to her mom\n    money_to_mom = mom_fraction * initial_money\n\n    # L2\n    clothes_fraction = Fraction(1, 8) # used 1/8 of her money to buy clothes\n    money_for_clothes = clothes_fraction * initial_money\n\n    # L3\n    charity_fraction = Fraction(1, 5) # gave 1/5 of her money to a charity\n    money_to_charity = charity_fraction * initial_money\n\n    # L4\n    total_spent = money_to_mom + money_for_clothes + money_to_charity\n\n    # L5\n    money_kept = initial_money - total_spent\n\n    # FA\n    answer = money_kept\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "money_to_mom",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x30b093150>"
+  },
+  "correct_trace": {
+    "initial_money": 400,
+    "mom_fraction": "1/4",
+    "money_to_mom": "100",
+    "clothes_fraction": "1/8",
+    "money_for_clothes": "50",
+    "charity_fraction": "1/5",
+    "money_to_charity": "80",
+    "total_spent": "230",
+    "money_kept": "170",
+    "answer": "170"
+  },
+  "flawed_trace": {
+    "initial_money": 400,
+    "mom_fraction": "1/4",
+    "money_to_mom": "1/1600",
+    "clothes_fraction": "1/8",
+    "money_for_clothes": "50",
+    "charity_fraction": "1/5",
+    "money_to_charity": "80",
+    "total_spent": "208001/1600",
+    "money_kept": "431999/1600",
+    "answer": "431999/1600"
+  },
+  "correct_value": "100",
+  "flawed_value": "1/1600",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_to_mom",
+      "question_inputs": [
+        "initial_money",
+        "mom_fraction"
+      ],
+      "solution_line_template": "Gina's mom received {mom_fraction} x ${initial_money} = $<<{mom_fraction}*{initial_money}={money_to_mom}>>{money_to_mom}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_for_clothes",
+      "question_inputs": [
+        "clothes_fraction"
+      ],
+      "solution_line_template": "She used {clothes_fraction} x ${initial_money} = $<<{clothes_fraction}*{initial_money}={money_for_clothes}>>{money_for_clothes} to buy clothes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "money_to_charity",
+      "question_inputs": [
+        "charity_fraction"
+      ],
+      "solution_line_template": "She gave {charity_fraction} x ${initial_money} = $<<{charity_fraction}*{initial_money}={money_to_charity}>>{money_to_charity} to a charity."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_spent",
+      "question_inputs": [],
+      "solution_line_template": "Thus, she spent a total of ${money_to_mom} + ${money_for_clothes} + ${money_to_charity} = $<<{money_to_mom}+{money_for_clothes}+{money_to_charity}={total_spent}>>{total_spent}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "money_kept",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, Gina kept ${initial_money} - ${total_spent} = $<<{initial_money}-{total_spent}={money_kept}>>{money_kept}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Gina's mom received 1/4 x $400 = $<<1/4*400=1/1600>>1/1600.",
+    "L2": "She used 1/8 x $400 = $<<1/8*400=50>>50 to buy clothes.",
+    "L3": "She gave 1/5 x $400 = $<<1/5*400=80>>80 to a charity.",
+    "L4": "Thus, she spent a total of $1/1600 + $50 + $80 = $<<1/1600+50+80=208001/1600>>208001/1600.",
+    "L5": "Therefore, Gina kept $400 - $208001/1600 = $<<400-208001/1600=431999/1600>>431999/1600.",
+    "FA": "#### 431999/1600"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -4820620271119879822,
+  "model_name": "google_gemini-2.5-flash"
+}

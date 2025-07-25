@@ -1,3 +1,137 @@
+"""
+# The `ErrorInjector` Pipeline: Algorithm Details
+
+This document outlines the algorithm for each of the four error injection strategies. The central design principle is a **hybrid AST/string-manipulation approach**. We use Python's Abstract Syntax Tree (`ast`) module for robustly and accurately *finding* a target for modification, but then perform the actual modification using string operations on the original source code.
+
+This hybrid approach gives us the best of both worlds:
+1.  **Robustness (from AST):** The AST understands the code's structure, so we can reliably find, for example, "the third binary operation" or "an assignment to the variable `x`" without brittle regular expressions.
+2.  **Format Preservation (from Strings):** By only changing the specific line of code in the original source string, we preserve all comments, indentation, and blank lines, which is critical for our project.
+
+---
+
+### 1. `incorrect_operation`
+
+**Goal:** To replace a mathematical operator (e.g., `+`) in an expression with a different, incorrect one (e.g., `*`).
+
+**Algorithm:**
+1.  **Parse & Map:** The source code is parsed into an AST. A `swap_map` dictionary is defined, mapping operators like `+` to a list of possible valid replacements, such as `*` or `-`.
+2.  **Find Candidates:** The AST is traversed to find all binary operation nodes (`ast.BinOp`) whose operator type exists as a key in our `swap_map`. All such nodes are collected into a list of candidates.
+3.  **Random Selection:**
+    *   One candidate operation node is randomly selected from the list.
+    *   A new replacement operator is randomly selected from the list of valid swaps for that specific operator (e.g., if `+` was chosen, the new operator could be `*` or `-`).
+4.  **Targeted String Replacement:**
+    *   The line number of the selected operation is retrieved from the AST node (`node.lineno`).
+    *   The corresponding line is located in the original source code.
+    *   A simple, one-time string `.replace()` is used to swap the original operator symbol (e.g., `+`) with the new one (e.g., `*`).
+
+**Key Safeguards & Rationale:**
+*   We deliberately **exclude division (`/`)** as a potential replacement for `+` or `*`. This is a critical safeguard to prevent two common sources of bad data:
+    1.  **`ZeroDivisionError`:** A swap could easily result in a division by zero, making the flawed code un-runnable.
+    2.  **Unintended Type Conversion:** Swapping an integer operation for division can silently convert the result to a `float` (e.g., `5+2` is `7`, but `5/2` is `2.5`), which introduces a second, uncontrolled error.
+
+---
+
+### 2. `computational_error`
+
+**Goal:** To replace the result of a calculation with a fixed, incorrect numerical value.
+
+**Algorithm:**
+1.  **Parse & Find Candidates:** The code is parsed into an AST. All assignment nodes (`ast.Assign`) are collected as candidates, **except for assignments to the final `answer` variable**.
+2.  **Simulate Execution:** For each candidate assignment, the script simulates the function's execution up to that point. It does this by:
+    *   Creating a dictionary (`env`) with the function's default arguments.
+    *   Executing each preceding line of code using `exec()` to populate `env` with the correct values of all intermediate variables.
+3.  **Evaluate & Perturb:**
+    *   The right-hand side of the candidate assignment is evaluated using `eval()` within the context of the simulated environment to get its correct `original_value`.
+    *   This value is then "perturbed" by adding a small, random integer (e.g., +1, -10) to get a `new_value`.
+4.  **Hybrid Replacement:**
+    *   A new, temporary `ast.Assign` node is created, assigning the `new_value` to the same target variable.
+    *   We use `ast.unparse()` on *only this new node* to generate a clean string of the flawed code line (e.g., `total_cost = 51.0`).
+    *   This new string replaces the original line in the source code, preserving indentation.
+
+**Key Safeguards & Rationale:**
+*   We **exclude the final `answer = ...` line** from the candidate pool. This prevents the injector from simply hard-coding a wrong final answer, which is not a true "computational error" and provides a low-quality, ambiguous training signal. The error must occur in the reasoning steps.
+*   The script uses `ast.copy_location()` to prevent a crash when un-parsing the newly created AST node, a bug we discovered during testing.
+
+---
+
+### 3. `incorrect_operand`
+
+**Goal:** To replace a variable in a calculation with a different, incorrect variable.
+
+**Algorithm:**
+1.  **Parse & Find Candidates:** The AST is traversed to find all variables (`ast.Name` nodes) that are used as operands inside a binary operation. These are collected as candidates.
+2.  **Dynamic Scope Calculation:** The candidates are shuffled, and the script iterates through them. For *each candidate*, it performs the following critical step:
+    *   It determines the set of all variables that are **in scope at that specific line**. This is done by a helper that collects all function arguments plus any variables assigned on *previous* lines.
+3.  **Select Replacement:** A replacement variable is randomly chosen from this correctly-scoped set, ensuring it is different from the original operand.
+4.  **Targeted String Replacement:** The line containing the original operand is modified using `re.sub()` with word boundaries (`\b... \b`). This is more robust than a simple `.replace()` as it prevents accidentally changing parts of longer variable names (e.g., changing `x` in `x_offset`).
+
+**Key Safeguards & Rationale:**
+*   The **dynamic scope calculation** is the most important safeguard. It guarantees that we never replace a variable with one that hasn't been defined yet, which would cause the program to crash with an `UnboundLocalError`. This was a critical bug that was fixed during testing.
+
+---
+
+### 4. `skipped_step`
+
+**Goal:** To delete an entire line of code (an assignment) and patch subsequent code to prevent it from crashing.
+
+**Algorithm:**
+1.  **Parse & Find Candidates:** The script collects all assignment statements as potential lines to delete, once again **excluding the final `answer = ...` assignment**.
+2.  **Select Line and Replacement:**
+    *   One candidate line is randomly chosen for deletion. The name of the variable it defined is stored (e.g., `deleted_var`).
+    *   A plausible `replacement_var` is chosen to substitute for `deleted_var` in the rest of the code. The function prefers to use one of the original function arguments for this, as they are always in scope and often represent root values in the problem.
+3.  **Patch and Delete:**
+    *   The script iterates through all *subsequent* lines of the source code and uses `re.sub()` to replace every occurrence of the `deleted_var` with the `replacement_var`.
+    *   Finally, the original candidate line is deleted from the source code.
+
+**Key Safeguards & Rationale:**
+*   As with the other injectors, excluding the `answer` assignment is critical to ensure the error is a genuine "skipped step" in reasoning, not a broken return statement.
+*   The patching of subsequent lines is essential to prevent the flawed code from raising a `NameError` when it tries to use the `deleted_var` that was never defined. This ensures all generated examples are runnable.
+"""
+
+
+# ---------------------------------------------------------------------- #
+#  Global constants & Configuration
+# ---------------------------------------------------------------------- #
+
+from pathlib import Path
+
+def find_project_root():
+    """Traverse upwards to find the project root, marked by the .git folder."""
+    current_path = Path.cwd()
+    while current_path != current_path.parent:
+        if (current_path / ".git").is_dir():
+            return current_path
+        current_path = current_path.parent
+    raise FileNotFoundError("Could not find project root. Is this a git repository?")
+
+
+PROJECT_ROOT = find_project_root()
+BASE_INPUT_DIR = PROJECT_ROOT / 'data' / 'code_gen_outputs_formatted'
+BASE_OUTPUT_DIR = PROJECT_ROOT / 'data' / 'code_with_error'
+
+#Make the output directory if it doesn't exist
+if not BASE_OUTPUT_DIR.exists():
+    BASE_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    print(f"Created output directory: {BASE_OUTPUT_DIR}")
+
+# Confirm the paths
+print(f"Project root found: {PROJECT_ROOT}")
+print(f"Base input directory set to: {BASE_INPUT_DIR}")
+print(f"Base output directory set to: {BASE_OUTPUT_DIR}")
+
+MODEL_DICT = {
+  "anthropic": ["claude-3-5-haiku-20241022"], 
+  "openai": ["gpt-4.1-mini"],
+  "google": ["gemini-2.0-flash-thinking-exp", 
+             "gemini-2.5-flash-lite-preview-06-17",
+             "gemini-2.5-flash"]
+}
+
+MODELS = [f"{provider}_{model}" for provider, sublist in MODEL_DICT.items() for model in sublist]
+print(f"Available models: {MODELS}")
+
+INDICES = list(range(100))
+
 import ast
 import random
 import re
@@ -314,3 +448,85 @@ class ErrorInjector:
                         if isinstance(target, ast.Name):
                             scope_vars.add(target.id)
         return scope_vars
+    
+
+# ==============================================================================
+# Function to test and debug error injection
+# ==============================================================================
+
+import traceback
+import hashlib
+
+def test_and_inject_error(
+    problem_index: int,
+    error_type: str,
+    base_input_dir: Path = BASE_INPUT_DIR,
+    base_output_dir: Path = BASE_OUTPUT_DIR,
+    save_output: bool = True,
+    master_seed: Optional[int] = 42  # Add master_seed parameter
+):
+    """
+    Loads formatted code files, injects a specified error with a deterministic seed,
+    prints the results, and saves the modified code.
+    """
+    results = {}
+    for model_name in MODELS:
+        input_file = base_input_dir / str(problem_index) / f"{model_name}.py"
+        
+        try:
+            source_code = input_file.read_text(encoding="utf-8")
+            print(f"--- Loaded Source File: {input_file} ---")
+        except FileNotFoundError:
+            print(f"❌ ERROR: Source file not found at {input_file}")
+            continue  # Use continue to proceed to the next model
+        except Exception as e:
+            print(f"❌ ERROR: Failed to read source file {input_file}")
+            traceback.print_exc()
+            continue
+
+        # --- SEED GENERATION BLOCK ---
+        file_seed = None
+        if master_seed is not None:
+            # Create a deterministic seed unique to this file and error type
+            seed_str = f"{master_seed}_{problem_index}_{model_name}_{error_type}"
+            # Use a hash to convert the unique string into a consistent integer seed
+            seed_hash = hashlib.sha256(seed_str.encode()).hexdigest()
+            file_seed = int(seed_hash, 16) % (2**32) # Ensure seed is within valid range
+
+        try:
+            injector = ErrorInjector()
+            # Pass the generated seed to the inject method
+            result = injector.inject(source_code, error_type, seed=file_seed)
+        except Exception as e:
+            print(f"❌ ERROR: The ErrorInjector failed for '{model_name}'.")
+            traceback.print_exc()
+            continue
+
+        if result is None:
+            print(f"\n--- ⚠️ Injection Failed for {model_name} ---")
+            continue
+
+        modified_code, metadata = result
+        
+        print(f"\n--- ✅ Injected '{error_type}' Error into {model_name} ---")
+        print("METADATA:", metadata)
+        # To aid debugging, print the seed that was used
+        if file_seed is not None:
+            print(f"SEED USED: {file_seed}")
+        print("\n--- MODIFIED CODE ---")
+        print(modified_code)
+
+        results[model_name] = (modified_code, metadata)
+
+        if save_output:
+            output_dir = base_output_dir / error_type / str(problem_index)
+            output_dir.mkdir(parents=True, exist_ok=True)
+            output_file = output_dir / f"{model_name}.py"
+            try:
+                output_file.write_text(modified_code, encoding="utf-8")
+                print(f"\n✓ Saved modified code to {output_file}")
+            except Exception as e:
+                print(f"❌ ERROR: Failed to write output file to {output_file}")
+                traceback.print_exc()
+
+    return results

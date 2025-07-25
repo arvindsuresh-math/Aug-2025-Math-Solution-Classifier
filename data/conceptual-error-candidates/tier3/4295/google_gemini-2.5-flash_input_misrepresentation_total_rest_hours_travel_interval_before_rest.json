@@ -1,0 +1,97 @@
+{
+  "index": 4295,
+  "original_solution_mapping": {
+    "FA": "#### 7",
+    "L1": "Without stopping to rest they will arrive in 300/50= <<300/50=6>>6 hours.",
+    "L2": "They need to stop to rest after every 2 hours except for the last 2 hour stretch of time, which is when they reach New York, so they rest (6/2)-1= 3-1 = <<6/2-1=2>>2 times.",
+    "L3": "The time they spend resting is 2*30= <<2*30=60>>60 minutes or 1 hour.",
+    "L4": "So they will arrive in 6+1= <<6+1=7>>7 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4295.\n    Returns: the total time it will take to reach New York.\n    \"\"\"\n    # L1\n    total_distance = 300 # Jessica's family is 300 km away\n    travel_speed = 50 # traveling at the rate of 50 km/h\n    travel_time_no_rest = total_distance / travel_speed\n\n    # L2\n    travel_interval_before_rest = 2 # every 2 hours\n    num_intervals = travel_time_no_rest / travel_interval_before_rest\n    number_of_rests = num_intervals - 1\n\n    # L3\n    rest_duration_minutes = 30 # rest for 30 minutes\n    total_rest_minutes = number_of_rests * rest_duration_minutes\n    minutes_per_hour = 60 # WK\n    total_rest_hours = total_rest_minutes / minutes_per_hour\n\n    # L4\n    total_travel_time = travel_time_no_rest + total_rest_hours\n\n    # FA\n    answer = total_travel_time\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_rest_hours",
+    "operand_to_replace": "minutes_per_hour",
+    "replacement_variable": "travel_interval_before_rest"
+  },
+  "correct_trace": {
+    "total_distance": 300,
+    "travel_speed": 50,
+    "travel_time_no_rest": 6.0,
+    "travel_interval_before_rest": 2,
+    "num_intervals": 3.0,
+    "number_of_rests": 2.0,
+    "rest_duration_minutes": 30,
+    "total_rest_minutes": 60.0,
+    "minutes_per_hour": 60,
+    "total_rest_hours": 1.0,
+    "total_travel_time": 7.0,
+    "answer": 7.0
+  },
+  "flawed_trace": {
+    "total_distance": 300,
+    "travel_speed": 50,
+    "travel_time_no_rest": 6.0,
+    "travel_interval_before_rest": 2,
+    "num_intervals": 3.0,
+    "number_of_rests": 2.0,
+    "rest_duration_minutes": 30,
+    "total_rest_minutes": 60.0,
+    "minutes_per_hour": 60,
+    "total_rest_hours": 30.0,
+    "total_travel_time": 36.0,
+    "answer": 36.0
+  },
+  "correct_value": 1.0,
+  "flawed_value": 30.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "travel_time_no_rest",
+      "question_inputs": [
+        "total_distance",
+        "travel_speed"
+      ],
+      "solution_line_template": "Without stopping to rest they will arrive in {total_distance}/{travel_speed}= <<{total_distance}/{travel_speed}={travel_time_no_rest}>>{travel_time_no_rest} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "number_of_rests",
+      "question_inputs": [
+        "travel_interval_before_rest"
+      ],
+      "solution_line_template": "They need to stop to rest after every {travel_interval_before_rest} hours except for the last {travel_interval_before_rest} hour stretch of time, which is when they reach New York, so they rest ({travel_time_no_rest}/{travel_interval_before_rest})-1= {num_intervals}-1 = <<{travel_time_no_rest}/{travel_interval_before_rest}-1={number_of_rests}>>{number_of_rests} times."
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_rest_minutes",
+      "question_inputs": [
+        "rest_duration_minutes"
+      ],
+      "solution_line_template": "The time they spend resting is {number_of_rests}*{rest_duration_minutes}= <<{number_of_rests}*{rest_duration_minutes}={total_rest_minutes}>>{total_rest_minutes} minutes or {total_rest_hours} hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_travel_time",
+      "question_inputs": [],
+      "solution_line_template": "So they will arrive in {travel_time_no_rest}+{total_rest_hours}= <<{travel_time_no_rest}+{total_rest_hours}={total_travel_time}>>{total_travel_time} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Without stopping to rest they will arrive in 300/50= <<300/50=6>>6 hours.",
+    "L2": "They need to stop to rest after every 2 hours except for the last 2 hour stretch of time, which is when they reach New York, so they rest (6/2)-1= 3-1 = <<6/2-1=2>>2 times.",
+    "L3": "The time they spend resting is 2*30= <<2*30=60>>60 minutes or 30 hour.",
+    "L4": "So they will arrive in 6+30= <<6+30=36>>36 hours.",
+    "FA": "#### 36"
+  },
+  "erroneous_line_number": null,
+  "explanation": "Input misrepresentation. The value for 'travel_interval_before_rest' (2) was used instead of 'minutes_per_hour' (60).",
+  "repro_seed": -2772690591215086600,
+  "model_name": "google_gemini-2.5-flash"
+}

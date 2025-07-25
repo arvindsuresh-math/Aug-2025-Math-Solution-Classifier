@@ -1,0 +1,100 @@
+{
+  "index": 7408,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "The storm dropped 5 inches then half that amount so 5/2 = <<5/2=2.5>>2.5 inches",
+    "L2": "The next hour the storm dropped 1/2 inch of rain for 1 hour so 1*.5 = <<1*.5=.5>>.5 inches",
+    "L3": "All total the storm dropped 5 inches + 2.5 inches + .5 inch for = <<5+2.5+.5=8>>8 inches",
+    "L4": "It rained for 2 hours total so 8/2 = <<8/2=4>>4 inches of rain per hour"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7408.\n    Returns: the average rainfall total for the duration of the storm.\n    \"\"\"\n    # L1\n    initial_rainfall = 5 # 5 inches of rain in the first thirty minutes\n    half_divisor = 2 # half that amount\n    second_period_rainfall = initial_rainfall / half_divisor\n\n    # L2\n    third_period_rainfall_per_hour = 0.5 # 1/2 inch of rain\n    third_period_duration_hours = 1 # for the next hour\n    third_period_rainfall = third_period_duration_hours * third_period_rainfall_per_hour\n\n    # L3\n    total_rainfall = initial_rainfall + second_period_rainfall + third_period_rainfall\n\n    # L4\n    first_duration_minutes = 30 # first thirty minutes\n    second_duration_minutes = 30 # In the next 30 minutes\n    minutes_per_hour = 60 # WK\n    total_duration_hours = (first_duration_minutes / minutes_per_hour) + (second_duration_minutes / minutes_per_hour) + third_period_duration_hours\n    average_rainfall = total_rainfall / total_duration_hours\n\n    # FA\n    answer = average_rainfall\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "average_rainfall",
+    "replacement_variable": "total_rainfall"
+  },
+  "correct_trace": {
+    "initial_rainfall": 5,
+    "half_divisor": 2,
+    "second_period_rainfall": 2.5,
+    "third_period_rainfall_per_hour": 0.5,
+    "third_period_duration_hours": 1,
+    "third_period_rainfall": 0.5,
+    "total_rainfall": 8.0,
+    "first_duration_minutes": 30,
+    "second_duration_minutes": 30,
+    "minutes_per_hour": 60,
+    "total_duration_hours": 2.0,
+    "average_rainfall": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "initial_rainfall": 5,
+    "half_divisor": 2,
+    "second_period_rainfall": 2.5,
+    "third_period_rainfall_per_hour": 0.5,
+    "third_period_duration_hours": 1,
+    "third_period_rainfall": 0.5,
+    "total_rainfall": 8.0,
+    "first_duration_minutes": 30,
+    "second_duration_minutes": 30,
+    "minutes_per_hour": 60,
+    "total_duration_hours": 2.0,
+    "average_rainfall": 4.0,
+    "answer": 8.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 8.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "second_period_rainfall",
+      "question_inputs": [
+        "initial_rainfall",
+        "half_divisor"
+      ],
+      "solution_line_template": "The storm dropped {initial_rainfall} inches then half that amount so {initial_rainfall}/{half_divisor} = <<{initial_rainfall}/{half_divisor}={second_period_rainfall}>>{second_period_rainfall} inches"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "third_period_rainfall",
+      "question_inputs": [
+        "third_period_rainfall_per_hour",
+        "third_period_duration_hours"
+      ],
+      "solution_line_template": "The next hour the storm dropped {third_period_rainfall_per_hour} inch of rain for {third_period_duration_hours} hour so {third_period_duration_hours}*{third_period_rainfall_per_hour} = <<{third_period_duration_hours}*{third_period_rainfall_per_hour}={third_period_rainfall}>>{third_period_rainfall} inches"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_rainfall",
+      "question_inputs": [],
+      "solution_line_template": "All total the storm dropped {initial_rainfall} inches + {second_period_rainfall} inches + {third_period_rainfall} inch for = <<{initial_rainfall}+{second_period_rainfall}+{third_period_rainfall}={total_rainfall}>>{total_rainfall} inches"
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L4",
+      "output_variable": "average_rainfall",
+      "question_inputs": [
+        "first_duration_minutes",
+        "second_duration_minutes"
+      ],
+      "solution_line_template": "It rained for {total_duration_hours} hours total so {total_rainfall}/{total_duration_hours} = <<{total_rainfall}/{total_duration_hours}={average_rainfall}>>{average_rainfall} inches of rain per hour"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The storm dropped 5 inches then half that amount so 5/2 = <<5/2=2.5>>2.5 inches",
+    "L2": "The next hour the storm dropped 0.5 inch of rain for 1 hour so 1*0.5 = <<1*0.5=0.5>>0.5 inches",
+    "L3": "All total the storm dropped 5 inches + 2.5 inches + 0.5 inch for = <<5+2.5+0.5=8>>8 inches",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'total_rainfall' (value: 8.0) was reported instead of 'average_rainfall' (value: 4.0).",
+  "repro_seed": 7680411182990031854,
+  "model_name": "google_gemini-2.5-flash"
+}

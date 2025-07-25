@@ -1,0 +1,72 @@
+{
+  "index": 492,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "Under 30: 40(.10)=4",
+    "L2": "30-50 years old:40(.60)=24",
+    "L3": "Over 50:40-4-24=12 Judges"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 492.\n    Returns: the number of judges over 50 years old.\n    \"\"\"\n    # L1\n    total_judges = 40 # 40 Judges\n    percent_under_30_decimal = 0.10 # 10 percent of Judges\n    judges_under_30 = total_judges * percent_under_30_decimal\n\n    # L2\n    percent_30_to_50_decimal = 0.60 # 60 percent of Judges\n    judges_30_to_50 = total_judges * percent_30_to_50_decimal\n\n    # L3\n    judges_over_50 = total_judges - judges_under_30 - judges_30_to_50\n\n    # FA\n    answer = judges_over_50\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "judges_over_50",
+    "replacement_variable": "judges_under_30"
+  },
+  "correct_trace": {
+    "total_judges": 40,
+    "percent_under_30_decimal": 0.1,
+    "judges_under_30": 4.0,
+    "percent_30_to_50_decimal": 0.6,
+    "judges_30_to_50": 24.0,
+    "judges_over_50": 12.0,
+    "answer": 12.0
+  },
+  "flawed_trace": {
+    "total_judges": 40,
+    "percent_under_30_decimal": 0.1,
+    "judges_under_30": 4.0,
+    "percent_30_to_50_decimal": 0.6,
+    "judges_30_to_50": 24.0,
+    "judges_over_50": 12.0,
+    "answer": 4.0
+  },
+  "correct_value": 12.0,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "judges_under_30",
+      "question_inputs": [
+        "total_judges",
+        "percent_under_30_decimal"
+      ],
+      "solution_line_template": "Under 30: {total_judges}({percent_under_30_decimal})=<<{total_judges}*{percent_under_30_decimal}={judges_under_30}>>{judges_under_30}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "judges_30_to_50",
+      "question_inputs": [
+        "percent_30_to_50_decimal"
+      ],
+      "solution_line_template": "30-50 years old:{total_judges}({percent_30_to_50_decimal})=<<{total_judges}*{percent_30_to_50_decimal}={judges_30_to_50}>>{judges_30_to_50}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "judges_over_50",
+      "question_inputs": [],
+      "solution_line_template": "Over 50:{total_judges}-{judges_under_30}-{judges_30_to_50}=<<{total_judges}-{judges_under_30}-{judges_30_to_50}={judges_over_50}>>{judges_over_50} Judges"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Under 30: 40(0.1)=<<40*0.1=4>>4",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'judges_under_30' (value: 4.0) was reported instead of 'judges_over_50' (value: 12.0).",
+  "repro_seed": 4064919894737046967,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,77 @@
+{
+  "index": 2910,
+  "original_solution_mapping": {
+    "FA": "#### 6240",
+    "L1": "At every passenger exchange there are 200 + 320 = <<200+320=520>>520 different people.",
+    "L2": "One hour is 60 minutes, so during one hour, a train comes 60 minutes/hour / 5 minutes/train = <<60/5=12>>12 times.",
+    "L3": "So during one hour, 12 trains * 520 passengers/train = <<12*520=6240>>6240 different passengers step on and off the train."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2910.\n    Returns: the total number of different passengers stepping on and off a train within an hour.\n    \"\"\"\n    # L1\n    passengers_leaving = 200 # leaving 200 passengers\n    passengers_taking = 320 # taking 320 others\n    total_passengers_per_exchange = passengers_leaving + passengers_taking\n\n    # L2\n    minutes_per_hour = 60 # WK\n    train_frequency_minutes = 5 # a train comes every 5 minutes\n    trains_per_hour = minutes_per_hour / train_frequency_minutes\n\n    # L3\n    total_different_passengers = trains_per_hour * total_passengers_per_exchange\n\n    # FA\n    answer = total_different_passengers\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_different_passengers",
+    "replacement_variable": "trains_per_hour"
+  },
+  "correct_trace": {
+    "passengers_leaving": 200,
+    "passengers_taking": 320,
+    "total_passengers_per_exchange": 520,
+    "minutes_per_hour": 60,
+    "train_frequency_minutes": 5,
+    "trains_per_hour": 12.0,
+    "total_different_passengers": 6240.0,
+    "answer": 6240.0
+  },
+  "flawed_trace": {
+    "passengers_leaving": 200,
+    "passengers_taking": 320,
+    "total_passengers_per_exchange": 520,
+    "minutes_per_hour": 60,
+    "train_frequency_minutes": 5,
+    "trains_per_hour": 12.0,
+    "total_different_passengers": 6240.0,
+    "answer": 12.0
+  },
+  "correct_value": 6240.0,
+  "flawed_value": 12.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_passengers_per_exchange",
+      "question_inputs": [
+        "passengers_leaving",
+        "passengers_taking"
+      ],
+      "solution_line_template": "At every passenger exchange there are {passengers_leaving} + {passengers_taking} = <<{passengers_leaving}+{passengers_taking}={total_passengers_per_exchange}>>{total_passengers_per_exchange} different people."
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L2",
+      "output_variable": "trains_per_hour",
+      "question_inputs": [
+        "train_frequency_minutes"
+      ],
+      "solution_line_template": "One hour is {minutes_per_hour} minutes, so during one hour, a train comes {minutes_per_hour} minutes/hour / {train_frequency_minutes} minutes/train = <<{minutes_per_hour}/{train_frequency_minutes}={trains_per_hour}>>{trains_per_hour} times."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_different_passengers",
+      "question_inputs": [],
+      "solution_line_template": "So during one hour, {trains_per_hour} trains * {total_passengers_per_exchange} passengers/train = <<{trains_per_hour}*{total_passengers_per_exchange}={total_different_passengers}>>{total_different_passengers} different passengers step on and off the train."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "At every passenger exchange there are 200 + 320 = <<200+320=520>>520 different people.",
+    "L2": "One hour is 60 minutes, so during one hour, a train comes 60 minutes/hour / 5 minutes/train = <<60/5=12>>12 times.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'trains_per_hour' (value: 12.0) was reported instead of 'total_different_passengers' (value: 6240.0).",
+  "repro_seed": -8052903514422303437,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 4322,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "Going 60 mph, the trip would take 1200-mile trip / 60 miles an hour = <<1200/60=20>>20 hours.",
+    "L2": "Going 50 mph, the trip would take 1200-mile trip / 50 miles an hour = <<1200/50=24>>24 hours.",
+    "L3": "Melinda's family would save 24 - 20 = <<24-20=4>>4 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4322.\n    Returns: the time saved on the trip.\n    \"\"\"\n    # L1\n    total_distance = 1200 # 1200-mile trip\n    speed_faster = 60 # 60 miles an hour\n    time_faster_speed = total_distance / speed_faster\n\n    # L2\n    speed_slower = 50 # 50 miles an hour\n    time_slower_speed = total_distance / speed_slower\n\n    # L3\n    time_saved = time_slower_speed - time_faster_speed\n\n    # FA\n    answer = time_saved\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "time_saved",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30b701210>"
+  },
+  "correct_trace": {
+    "total_distance": 1200,
+    "speed_faster": 60,
+    "time_faster_speed": 20.0,
+    "speed_slower": 50,
+    "time_slower_speed": 24.0,
+    "time_saved": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "total_distance": 1200,
+    "speed_faster": 60,
+    "time_faster_speed": 20.0,
+    "speed_slower": 50,
+    "time_slower_speed": 24.0,
+    "time_saved": 44.0,
+    "answer": 44.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 44.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "time_faster_speed",
+      "question_inputs": [
+        "total_distance",
+        "speed_faster"
+      ],
+      "solution_line_template": "Going {speed_faster} mph, the trip would take {total_distance}-mile trip / {speed_faster} miles an hour = <<{total_distance}/{speed_faster}={time_faster_speed}>>{time_faster_speed} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "time_slower_speed",
+      "question_inputs": [
+        "speed_slower"
+      ],
+      "solution_line_template": "Going {speed_slower} mph, the trip would take {total_distance}-mile trip / {speed_slower} miles an hour = <<{total_distance}/{speed_slower}={time_slower_speed}>>{time_slower_speed} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "time_saved",
+      "question_inputs": [],
+      "solution_line_template": "Melinda's family would save {time_slower_speed} - {time_faster_speed} = <<{time_slower_speed}-{time_faster_speed}={time_saved}>>{time_saved} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Going 60 mph, the trip would take 1200-mile trip / 60 miles an hour = <<1200/60=20>>20 hours.",
+    "L2": "Going 50 mph, the trip would take 1200-mile trip / 50 miles an hour = <<1200/50=24>>24 hours.",
+    "L3": "Melinda's family would save 24 - 20 = <<24-20=44>>44 hours.",
+    "FA": "#### 44"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -7753059270921080384,
+  "model_name": "google_gemini-2.5-flash"
+}

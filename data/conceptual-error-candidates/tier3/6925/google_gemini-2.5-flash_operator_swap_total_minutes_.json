@@ -1,0 +1,82 @@
+{
+  "index": 6925,
+  "original_solution_mapping": {
+    "FA": "#### 120",
+    "L1": "The total of minutes the treatment will take is 2 hours x 60 minutes/hour = <<2*60=120>>120 minutes",
+    "L2": "After 120 minutes has passed the total amount of drops that the patient will receive is 20 drops/minute x 120 minutes = <<20*120=2400>>2400 drops",
+    "L3": "Knowing the number of drops, we know that the patient has taken 2400 drops x 5 ml/100 drops = 120 ml"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6925.\n    Returns: the total milliliters of treatment the patient will receive.\n    \"\"\"\n    # L1\n    treatment_duration_hours = 2 # lasts 2 hours\n    minutes_per_hour = 60 # WK\n    total_minutes = treatment_duration_hours * minutes_per_hour\n\n    # L2\n    drops_per_minute = 20 # 20 drops per minute\n    total_drops = drops_per_minute * total_minutes\n\n    # L3\n    ml_per_100_drops = 5 # every 100 drops equal 5 ml\n    drops_for_ml_conversion = 100 # every 100 drops equal 5 ml\n    total_ml = total_drops * ml_per_100_drops / drops_for_ml_conversion\n\n    # FA\n    answer = total_ml\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_minutes",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x16a6b4690>"
+  },
+  "correct_trace": {
+    "treatment_duration_hours": 2,
+    "minutes_per_hour": 60,
+    "total_minutes": 120,
+    "drops_per_minute": 20,
+    "total_drops": 2400,
+    "ml_per_100_drops": 5,
+    "drops_for_ml_conversion": 100,
+    "total_ml": 120.0,
+    "answer": 120.0
+  },
+  "flawed_trace": {
+    "treatment_duration_hours": 2,
+    "minutes_per_hour": 60,
+    "total_minutes": 62,
+    "drops_per_minute": 20,
+    "total_drops": 1240,
+    "ml_per_100_drops": 5,
+    "drops_for_ml_conversion": 100,
+    "total_ml": 62.0,
+    "answer": 62.0
+  },
+  "correct_value": 120,
+  "flawed_value": 62,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_minutes",
+      "question_inputs": [
+        "treatment_duration_hours"
+      ],
+      "solution_line_template": "The total of minutes the treatment will take is {treatment_duration_hours} hours x {minutes_per_hour} minutes/hour = <<{treatment_duration_hours}*{minutes_per_hour}={total_minutes}>>{total_minutes} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_drops",
+      "question_inputs": [
+        "drops_per_minute"
+      ],
+      "solution_line_template": "After {total_minutes} minutes has passed the total amount of drops that the patient will receive is {drops_per_minute} drops/minute x {total_minutes} minutes = <<{drops_per_minute}*{total_minutes}={total_drops}>>{total_drops} drops"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_ml",
+      "question_inputs": [
+        "ml_per_100_drops",
+        "drops_for_ml_conversion"
+      ],
+      "solution_line_template": "Knowing the number of drops, we know that the patient has taken {total_drops} drops x {ml_per_100_drops} ml/{drops_for_ml_conversion} drops = {total_ml} ml"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total of minutes the treatment will take is 2 hours x 60 minutes/hour = <<2*60=62>>62 minutes",
+    "L2": "After 62 minutes has passed the total amount of drops that the patient will receive is 20 drops/minute x 62 minutes = <<20*62=1240>>1240 drops",
+    "L3": "Knowing the number of drops, we know that the patient has taken 1240 drops x 5 ml/100 drops = 62 ml",
+    "FA": "#### 62"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 85546473989100519,
+  "model_name": "google_gemini-2.5-flash"
+}

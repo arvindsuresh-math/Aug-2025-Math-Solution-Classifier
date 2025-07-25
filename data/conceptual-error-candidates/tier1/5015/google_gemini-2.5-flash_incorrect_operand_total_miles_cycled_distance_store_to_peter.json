@@ -1,0 +1,71 @@
+{
+  "index": 5015,
+  "original_solution_mapping": {
+    "FA": "#### 250",
+    "L1": "When Jack cycles from home to the store, it takes 2 * 50 = <<2*50=100>>100 miles.",
+    "L2": "He then cycles 50 miles to Peter.",
+    "L3": "When Peter and Jack cycle back to the store, they cover a total of 50 + 50 = <<50+50=100>>100 miles.",
+    "L4": "The total number of miles covered is 100+50+100 = <<100+50+100=250>>250 miles"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5015.\n    Returns: the total number of miles cycled today by Jack and Peter.\n    \"\"\"\n    # L1\n    distance_store_to_peter = 50 # 50 miles to his friend Peter\n    time_multiplier_home_to_store = 2 # twice as long to go from his home to the store\n    distance_home_to_store = time_multiplier_home_to_store * distance_store_to_peter\n\n    # L3\n    distance_back_to_store = distance_store_to_peter + distance_store_to_peter\n\n    # L4\n    total_miles_cycled = distance_home_to_store + distance_store_to_peter + distance_back_to_store\n\n    # FA\n    answer = total_miles_cycled\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_miles_cycled",
+    "operand_to_replace": "distance_home_to_store",
+    "replacement_variable": "distance_store_to_peter"
+  },
+  "correct_trace": {
+    "distance_store_to_peter": 50,
+    "time_multiplier_home_to_store": 2,
+    "distance_home_to_store": 100,
+    "distance_back_to_store": 100,
+    "total_miles_cycled": 250,
+    "answer": 250
+  },
+  "flawed_trace": {
+    "distance_store_to_peter": 50,
+    "time_multiplier_home_to_store": 2,
+    "distance_home_to_store": 100,
+    "distance_back_to_store": 100,
+    "total_miles_cycled": 200,
+    "answer": 200
+  },
+  "correct_value": 250,
+  "flawed_value": 200,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "distance_home_to_store",
+      "question_inputs": [
+        "distance_store_to_peter",
+        "time_multiplier_home_to_store"
+      ],
+      "solution_line_template": "When Jack cycles from home to the store, it takes {time_multiplier_home_to_store} * {distance_store_to_peter} = <<{time_multiplier_home_to_store}*{distance_store_to_peter}={distance_home_to_store}>>{distance_home_to_store} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "distance_back_to_store",
+      "question_inputs": [],
+      "solution_line_template": "When Peter and Jack cycle back to the store, they cover a total of {distance_store_to_peter} + {distance_store_to_peter} = <<{distance_store_to_peter}+{distance_store_to_peter}={distance_back_to_store}>>{distance_back_to_store} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_miles_cycled",
+      "question_inputs": [],
+      "solution_line_template": "The total number of miles covered is {distance_home_to_store}+{distance_store_to_peter}+{distance_back_to_store} = <<{distance_home_to_store}+{distance_store_to_peter}+{distance_back_to_store}={total_miles_cycled}>>{total_miles_cycled} miles"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "When Jack cycles from home to the store, it takes 2 * 50 = <<2*50=100>>100 miles.",
+    "L3": "When Peter and Jack cycle back to the store, they cover a total of 50 + 50 = <<50+50=100>>100 miles.",
+    "L4": "The total number of miles covered is 50+50+100 = <<50+50+100=200>>200 miles",
+    "FA": "#### 200"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'distance_store_to_peter' (value: 50) was used instead of 'distance_home_to_store' (value: 100).",
+  "repro_seed": -1702822522551837196,
+  "model_name": "google_gemini-2.5-flash"
+}

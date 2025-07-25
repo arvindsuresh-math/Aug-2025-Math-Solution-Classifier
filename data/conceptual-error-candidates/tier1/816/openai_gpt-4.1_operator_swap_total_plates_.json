@@ -1,0 +1,115 @@
+{
+  "index": 816,
+  "original_solution_mapping": {
+    "FA": "#### 38",
+    "L1": "So for 3 of the days, there are 1+1=2 people eating",
+    "L2": "So for those days they use 3*2=<<3*2=6>>6 plates",
+    "L3": "On 7-3=4 days the parents join them",
+    "L4": "On those days there are 2+2=<<2+2=4>>4 people eating",
+    "L5": "They use 4*2=<<4*2=8>>8 plates",
+    "L6": "So they use 8*4=<<8*4=32>>32 plates",
+    "L7": "That means they use a total of 32+6=<<32+6=38>>38 plates"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 816.\n    Returns: the total number of plates Matt needs to buy for a week.\n    \"\"\"\n    # L2\n    days_just_matt_and_son = 3 # Three days a week it is only him and his son eating\n    plates_per_person_normal = 1 # they use 1 plate each\n    num_people_normal = 2 # 1+1=2 people eating (Matt and his son)\n    plates_used_normal_days = days_just_matt_and_son * num_people_normal * plates_per_person_normal\n\n    # L3\n    days_in_week = 7 # WK\n    days_with_parents = days_in_week - days_just_matt_and_son\n\n    # L4\n    num_people_with_parents = num_people_normal + 2 # 2+2=4 people eating (Matt, son, parents)\n\n    # L5\n    plates_per_person_special = 2 # everyone uses 2 plates that day\n    plates_used_special_day = num_people_with_parents * plates_per_person_special\n\n    # L6\n    plates_used_special_days = plates_used_special_day * days_with_parents\n\n    # L7\n    total_plates = plates_used_special_days + plates_used_normal_days\n\n    # FA\n    answer = total_plates\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_plates",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x30ac90410>"
+  },
+  "correct_trace": {
+    "days_just_matt_and_son": 3,
+    "plates_per_person_normal": 1,
+    "num_people_normal": 2,
+    "plates_used_normal_days": 6,
+    "days_in_week": 7,
+    "days_with_parents": 4,
+    "num_people_with_parents": 4,
+    "plates_per_person_special": 2,
+    "plates_used_special_day": 8,
+    "plates_used_special_days": 32,
+    "total_plates": 38,
+    "answer": 38
+  },
+  "flawed_trace": {
+    "days_just_matt_and_son": 3,
+    "plates_per_person_normal": 1,
+    "num_people_normal": 2,
+    "plates_used_normal_days": 6,
+    "days_in_week": 7,
+    "days_with_parents": 4,
+    "num_people_with_parents": 4,
+    "plates_per_person_special": 2,
+    "plates_used_special_day": 8,
+    "plates_used_special_days": 32,
+    "total_plates": 192,
+    "answer": 192
+  },
+  "correct_value": 38,
+  "flawed_value": 192,
+  "logical_steps": [
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "days_just_matt_and_son",
+        "plates_per_person_normal",
+        "num_people_normal"
+      ],
+      "WK_inputs": [],
+      "output_variable": "plates_used_normal_days",
+      "solution_line_template": "So for those days they use {days_just_matt_and_son}*{num_people_normal}=<<{days_just_matt_and_son}*{num_people_normal}={plates_used_normal_days}>>{plates_used_normal_days} plates"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [
+        "days_in_week"
+      ],
+      "output_variable": "days_with_parents",
+      "solution_line_template": "On {days_in_week}-{days_just_matt_and_son}={days_with_parents} days the parents join them"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "num_people_with_parents",
+      "solution_line_template": "On those days there are {num_people_normal}+2=<<{num_people_normal}+2={num_people_with_parents}>>{num_people_with_parents} people eating"
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [
+        "plates_per_person_special"
+      ],
+      "WK_inputs": [],
+      "output_variable": "plates_used_special_day",
+      "solution_line_template": "They use {num_people_with_parents}*{plates_per_person_special}=<<{num_people_with_parents}*{plates_per_person_special}={plates_used_special_day}>>{plates_used_special_day} plates"
+    },
+    {
+      "line_number": "L6",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "plates_used_special_days",
+      "solution_line_template": "So they use {plates_used_special_day}*{days_with_parents}=<<{plates_used_special_day}*{days_with_parents}={plates_used_special_days}>>{plates_used_special_days} plates"
+    },
+    {
+      "line_number": "L7",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_plates",
+      "solution_line_template": "That means they use a total of {plates_used_special_days}+{plates_used_normal_days}=<<{plates_used_special_days}+{plates_used_normal_days}={total_plates}>>{total_plates} plates"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "So for those days they use 3*2=<<3*2=6>>6 plates",
+    "L3": "On 7-3=4 days the parents join them",
+    "L4": "On those days there are 2+2=<<2+2=4>>4 people eating",
+    "L5": "They use 4*2=<<4*2=8>>8 plates",
+    "L6": "So they use 8*4=<<8*4=32>>32 plates",
+    "L7": "That means they use a total of 32+6=<<32+6=192>>192 plates",
+    "FA": "#### 192"
+  },
+  "erroneous_line_number": "L7",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": -4034555146521579443,
+  "model_name": "openai_gpt-4.1"
+}

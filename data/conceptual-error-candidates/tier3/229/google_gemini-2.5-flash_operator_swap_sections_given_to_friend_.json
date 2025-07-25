@@ -1,0 +1,89 @@
+{
+  "index": 229,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "She gets 1000/25=<<1000/25=40>>40 sections",
+    "L2": "She gives away 40/4=<<40/4=10>>10 sections",
+    "L3": "So she keeps 40-10=<<40-10=30>>30 sections",
+    "L4": "She keeps 30/2=<<30/2=15>>15 sections on hand"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 229.\n    Returns: the number of cable sections Jan keeps on hand.\n    \"\"\"\n    # L1\n    total_cable_feet = 1000 # Jan buys 1000 feet of cable\n    section_length = 25 # 25-foot sections\n    total_sections = total_cable_feet / section_length\n\n    # L2\n    friend_share_denominator = 4 # 1/4 of that to a friend\n    sections_given_to_friend = total_sections / friend_share_denominator\n\n    # L3\n    sections_after_giving_to_friend = total_sections - sections_given_to_friend\n\n    # L4\n    storage_share_denominator = 2 # half of the rest in storage\n    sections_on_hand = sections_after_giving_to_friend / storage_share_denominator\n\n    # FA\n    answer = sections_on_hand\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "sections_given_to_friend",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x30cb13dd0>"
+  },
+  "correct_trace": {
+    "total_cable_feet": 1000,
+    "section_length": 25,
+    "total_sections": 40.0,
+    "friend_share_denominator": 4,
+    "sections_given_to_friend": 10.0,
+    "sections_after_giving_to_friend": 30.0,
+    "storage_share_denominator": 2,
+    "sections_on_hand": 15.0,
+    "answer": 15.0
+  },
+  "flawed_trace": {
+    "total_cable_feet": 1000,
+    "section_length": 25,
+    "total_sections": 40.0,
+    "friend_share_denominator": 4,
+    "sections_given_to_friend": 36.0,
+    "sections_after_giving_to_friend": 4.0,
+    "storage_share_denominator": 2,
+    "sections_on_hand": 2.0,
+    "answer": 2.0
+  },
+  "correct_value": 10.0,
+  "flawed_value": 36.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_sections",
+      "question_inputs": [
+        "total_cable_feet",
+        "section_length"
+      ],
+      "solution_line_template": "She gets {total_cable_feet}/{section_length}=<<{total_cable_feet}/{section_length}={total_sections}>>{total_sections} sections"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sections_given_to_friend",
+      "question_inputs": [
+        "friend_share_denominator"
+      ],
+      "solution_line_template": "She gives away {total_sections}/{friend_share_denominator}=<<{total_sections}/{friend_share_denominator}={sections_given_to_friend}>>{sections_given_to_friend} sections"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "sections_after_giving_to_friend",
+      "question_inputs": [],
+      "solution_line_template": "So she keeps {total_sections}-{sections_given_to_friend}=<<{total_sections}-{sections_given_to_friend}={sections_after_giving_to_friend}>>{sections_after_giving_to_friend} sections"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "sections_on_hand",
+      "question_inputs": [
+        "storage_share_denominator"
+      ],
+      "solution_line_template": "She keeps {sections_after_giving_to_friend}/{storage_share_denominator}=<<{sections_after_giving_to_friend}/{storage_share_denominator}={sections_on_hand}>>{sections_on_hand} sections on hand"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She gets 1000/25=<<1000/25=40>>40 sections",
+    "L2": "She gives away 40/4=<<40/4=36>>36 sections",
+    "L3": "So she keeps 40-36=<<40-36=4>>4 sections",
+    "L4": "She keeps 4/2=<<4/2=2>>2 sections on hand",
+    "FA": "#### 2"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 2424666437008079404,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,79 @@
+{
+  "index": 2562,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "Since 1 hour is 60 minutes, 20 minutes is 20/60=1/3 of an hour.",
+    "L2": "Eating 3 potatoes per 20 minutes is 3/(1/3)=<<3/(1/3)=9>>9 potatoes per hour.",
+    "L3": "At 9 potatoes per hour, it will take Jason 27/9=3 hours to eat all of the potatoes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2562.\n    Returns: the time it takes for Jason to eat all potatoes in hours.\n    \"\"\"\n    # L1\n    time_per_three_potatoes_minutes = 20 # three potatoes in 20 minutes\n    minutes_per_hour = 60 # 1 hour is 60 minutes\n    time_per_three_potatoes_hours = Fraction(time_per_three_potatoes_minutes, minutes_per_hour)\n\n    # L2\n    potatoes_per_interval = 3 # three potatoes\n    potatoes_per_hour = potatoes_per_interval / time_per_three_potatoes_hours\n\n    # L3\n    total_potatoes = 27 # all 27 potatoes\n    total_time_hours = total_potatoes / potatoes_per_hour\n\n    # FA\n    answer = total_time_hours\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "potatoes_per_hour",
+    "operand_to_replace": "time_per_three_potatoes_hours",
+    "replacement_variable": "potatoes_per_interval"
+  },
+  "correct_trace": {
+    "time_per_three_potatoes_minutes": 20,
+    "minutes_per_hour": 60,
+    "time_per_three_potatoes_hours": "1/3",
+    "potatoes_per_interval": 3,
+    "potatoes_per_hour": "9",
+    "total_potatoes": 27,
+    "total_time_hours": "3",
+    "answer": "3"
+  },
+  "flawed_trace": {
+    "time_per_three_potatoes_minutes": 20,
+    "minutes_per_hour": 60,
+    "time_per_three_potatoes_hours": "1/3",
+    "potatoes_per_interval": 3,
+    "potatoes_per_hour": 1.0,
+    "total_potatoes": 27,
+    "total_time_hours": 27.0,
+    "answer": 27.0
+  },
+  "correct_value": "9",
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "time_per_three_potatoes_hours",
+      "question_inputs": [
+        "time_per_three_potatoes_minutes"
+      ],
+      "solution_line_template": "Since 1 hour is {minutes_per_hour} minutes, {time_per_three_potatoes_minutes} minutes is {time_per_three_potatoes_minutes}/{minutes_per_hour}={time_per_three_potatoes_hours} of an hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "potatoes_per_hour",
+      "question_inputs": [
+        "potatoes_per_interval"
+      ],
+      "solution_line_template": "Eating {potatoes_per_interval} potatoes per 20 minutes is {potatoes_per_interval}/({time_per_three_potatoes_hours})=<<{potatoes_per_interval}/({time_per_three_potatoes_hours})={potatoes_per_hour}>>{potatoes_per_hour} potatoes per hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_time_hours",
+      "question_inputs": [
+        "total_potatoes"
+      ],
+      "solution_line_template": "At {potatoes_per_hour} potatoes per hour, it will take Jason {total_potatoes}/{potatoes_per_hour}={total_time_hours} hours to eat all of the potatoes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since 1 hour is 60 minutes, 20 minutes is 20/60=20/60 of an hour.",
+    "L2": "Eating 3 potatoes per 20 minutes is 3/(3)=<<3/(3)=1>>1 potatoes per hour.",
+    "L3": "At 1 potatoes per hour, it will take Jason 27/1=27 hours to eat all of the potatoes.",
+    "FA": "#### 27"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'potatoes_per_interval' (value: 3) was used instead of 'time_per_three_potatoes_hours' (value: 20/60).",
+  "repro_seed": 7630105093836158624,
+  "model_name": "google_gemini-2.5-flash"
+}

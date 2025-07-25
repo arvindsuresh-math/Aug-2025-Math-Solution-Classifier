@@ -1,0 +1,89 @@
+{
+  "index": 3958,
+  "original_solution_mapping": {
+    "FA": "#### 108",
+    "L1": "Mrs. Brown has a $125 x 10/100 = $<<125*10/100=12.5>>12.5 discount for her purchase.",
+    "L2": "So, the remaining amount she needs to pay is $125 - $12.5 =$<<125-12.5=112.5>>112.5.",
+    "L3": "But Mrs. Brown can still avail of the 5% discount, so she has an additional discount of $112.5 x 4/100 = $<<112.5*4/100=4.5>>4.5.",
+    "L4": "Therefore, Mrs. brown will only pay $112.5 - $4.5 = $<<112.5-4.5=108>>108."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3958.\n    Returns: the final price Mrs. Brown will pay for the shoes.\n    \"\"\"\n    # L1\n    original_price = 125 # a pair of shoes that costs $125\n    initial_discount_percent_num = 10 # 10% discount\n    percent_divisor = 100 # WK\n    initial_discount_amount = original_price * initial_discount_percent_num / percent_divisor\n\n    # L2\n    price_after_initial_discount = original_price - initial_discount_amount\n\n    # L3\n    additional_discount_percent_num = 4 # additional 4% off\n    additional_discount_amount = price_after_initial_discount * additional_discount_percent_num / percent_divisor\n\n    # L4\n    final_price = price_after_initial_discount - additional_discount_amount\n\n    # FA\n    answer = final_price\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "final_price",
+    "operand_to_replace": "additional_discount_amount",
+    "replacement_variable": "initial_discount_amount"
+  },
+  "correct_trace": {
+    "original_price": 125,
+    "initial_discount_percent_num": 10,
+    "percent_divisor": 100,
+    "initial_discount_amount": 12.5,
+    "price_after_initial_discount": 112.5,
+    "additional_discount_percent_num": 4,
+    "additional_discount_amount": 4.5,
+    "final_price": 108.0,
+    "answer": 108.0
+  },
+  "flawed_trace": {
+    "original_price": 125,
+    "initial_discount_percent_num": 10,
+    "percent_divisor": 100,
+    "initial_discount_amount": 12.5,
+    "price_after_initial_discount": 112.5,
+    "additional_discount_percent_num": 4,
+    "additional_discount_amount": 4.5,
+    "final_price": 100.0,
+    "answer": 100.0
+  },
+  "correct_value": 108.0,
+  "flawed_value": 100.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_divisor"
+      ],
+      "line_number": "L1",
+      "output_variable": "initial_discount_amount",
+      "question_inputs": [
+        "original_price",
+        "initial_discount_percent_num"
+      ],
+      "solution_line_template": "Mrs. Brown has a ${original_price} x {initial_discount_percent_num}/{percent_divisor} = $<<{original_price}*{initial_discount_percent_num}/{percent_divisor}={initial_discount_amount}>>{initial_discount_amount} discount for her purchase."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "price_after_initial_discount",
+      "question_inputs": [],
+      "solution_line_template": "So, the remaining amount she needs to pay is ${original_price} - ${initial_discount_amount} =$<<{original_price}-{initial_discount_amount}={price_after_initial_discount}>>{price_after_initial_discount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "additional_discount_amount",
+      "question_inputs": [
+        "additional_discount_percent_num"
+      ],
+      "solution_line_template": "But Mrs. Brown can still avail of the 5% discount, so she has an additional discount of ${price_after_initial_discount} x {additional_discount_percent_num}/{percent_divisor} = $<<{price_after_initial_discount}*{additional_discount_percent_num}/{percent_divisor}={additional_discount_amount}>>{additional_discount_amount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_price",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, Mrs. brown will only pay ${price_after_initial_discount} - ${additional_discount_amount} = $<<{price_after_initial_discount}-{additional_discount_amount}={final_price}>>{final_price}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Mrs. Brown has a $125 x 10/100 = $<<125*10/100=12.5>>12.5 discount for her purchase.",
+    "L2": "So, the remaining amount she needs to pay is $125 - $12.5 =$<<125-12.5=112.5>>112.5.",
+    "L3": "But Mrs. Brown can still avail of the 5% discount, so she has an additional discount of $112.5 x 4/100 = $<<112.5*4/100=4.5>>4.5.",
+    "L4": "Therefore, Mrs. brown will only pay $112.5 - $12.5 = $<<112.5-12.5=100>>100.",
+    "FA": "#### 100"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'initial_discount_amount' (value: 12.5) was used instead of 'additional_discount_amount' (value: 4.5).",
+  "repro_seed": 1130188492216648450,
+  "model_name": "google_gemini-2.5-flash"
+}

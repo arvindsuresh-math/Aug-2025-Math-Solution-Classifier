@@ -1,0 +1,74 @@
+{
+  "index": 779,
+  "original_solution_mapping": {
+    "FA": "#### 45",
+    "L1": "The clay pot costs $20 + $9 = $<<20+9=29>>29.",
+    "L2": "The bag of soil costs $9 - $2 = $<<9-2=7>>7.",
+    "L3": "The cost to plant the flowers is $9 + $29 + $7 = $<<9+29+7=45>>45."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 779.\n    Returns: the total cost to plant the flowers.\n    \"\"\"\n    # L1\n    pot_more_than_flower = 20 # $20 more than the flower\n    flowers_cost = 9 # The flowers cost $9\n    clay_pot_cost = pot_more_than_flower + flowers_cost\n\n    # L2\n    soil_less_than_flower = 2 # $2 less than the flower\n    soil_cost = flowers_cost - soil_less_than_flower\n\n    # L3\n    total_cost = flowers_cost + clay_pot_cost + soil_cost\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "soil_cost",
+    "operand_to_replace": "flowers_cost",
+    "replacement_variable": "pot_more_than_flower"
+  },
+  "correct_trace": {
+    "pot_more_than_flower": 20,
+    "flowers_cost": 9,
+    "clay_pot_cost": 29,
+    "soil_less_than_flower": 2,
+    "soil_cost": 7,
+    "total_cost": 45,
+    "answer": 45
+  },
+  "flawed_trace": {
+    "pot_more_than_flower": 20,
+    "flowers_cost": 9,
+    "clay_pot_cost": 29,
+    "soil_less_than_flower": 2,
+    "soil_cost": 18,
+    "total_cost": 56,
+    "answer": 56
+  },
+  "correct_value": 7,
+  "flawed_value": 18,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "pot_more_than_flower",
+        "flowers_cost"
+      ],
+      "WK_inputs": [],
+      "output_variable": "clay_pot_cost",
+      "solution_line_template": "The clay pot costs ${pot_more_than_flower} + ${flowers_cost} = $<<{pot_more_than_flower}+{flowers_cost}={clay_pot_cost}>>{clay_pot_cost}."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "soil_less_than_flower"
+      ],
+      "WK_inputs": [],
+      "output_variable": "soil_cost",
+      "solution_line_template": "The bag of soil costs ${flowers_cost} - ${soil_less_than_flower} = $<<{flowers_cost}-{soil_less_than_flower}={soil_cost}>>{soil_cost}."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_cost",
+      "solution_line_template": "The cost to plant the flowers is ${flowers_cost} + ${clay_pot_cost} + ${soil_cost} = $<<{flowers_cost}+{clay_pot_cost}+{soil_cost}={total_cost}>>{total_cost}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The clay pot costs $20 + $9 = $<<20+9=29>>29.",
+    "L2": "The bag of soil costs $20 - $2 = $<<20-2=18>>18.",
+    "L3": "The cost to plant the flowers is $9 + $29 + $18 = $<<9+29+18=56>>56.",
+    "FA": "#### 56"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'pot_more_than_flower' (20) was used instead of 'flowers_cost' (9).",
+  "repro_seed": -4427054559033057589,
+  "model_name": "google_gemini-2.5-flash"
+}

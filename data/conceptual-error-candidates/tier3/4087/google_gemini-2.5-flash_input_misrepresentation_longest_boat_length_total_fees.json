@@ -1,0 +1,89 @@
+{
+  "index": 4087,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "Mitch needs to keep 500 * 3 = <<500*3=1500>>1500 for docking fees.",
+    "L2": "Thus, he needs to keep 500 + 3 * 500 = $<<500+3*500=2000>>2000 for license, registration, and docking fees.",
+    "L3": "He has 20000 - 2000 = $<<20000-2000=18000>>18000 left to spend on a boat.",
+    "L4": "Therefore, the longest boat he can buy is 18000 / 1500 = <<18000/1500=12>>12 feet long."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4087.\n    Returns: the longest boat length Mitch can buy in feet.\n    \"\"\"\n    # L1\n    license_registration_fee = 500 # keep $500 for a license and registration\n    docking_fee_multiplier = 3 # three times that amount for docking fees\n    docking_fees = license_registration_fee * docking_fee_multiplier\n\n    # L2\n    total_fees = license_registration_fee + docking_fee_multiplier * license_registration_fee\n\n    # L3\n    initial_savings = 20000 # saved $20000\n    money_for_boat = initial_savings - total_fees\n\n    # L4\n    cost_per_foot = 1500 # $1500 per foot in length\n    longest_boat_length = money_for_boat / cost_per_foot\n\n    # FA\n    answer = longest_boat_length\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "longest_boat_length",
+    "operand_to_replace": "cost_per_foot",
+    "replacement_variable": "total_fees"
+  },
+  "correct_trace": {
+    "license_registration_fee": 500,
+    "docking_fee_multiplier": 3,
+    "docking_fees": 1500,
+    "total_fees": 2000,
+    "initial_savings": 20000,
+    "money_for_boat": 18000,
+    "cost_per_foot": 1500,
+    "longest_boat_length": 12.0,
+    "answer": 12.0
+  },
+  "flawed_trace": {
+    "license_registration_fee": 500,
+    "docking_fee_multiplier": 3,
+    "docking_fees": 1500,
+    "total_fees": 2000,
+    "initial_savings": 20000,
+    "money_for_boat": 18000,
+    "cost_per_foot": 1500,
+    "longest_boat_length": 9.0,
+    "answer": 9.0
+  },
+  "correct_value": 12.0,
+  "flawed_value": 9.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "docking_fees",
+      "question_inputs": [
+        "license_registration_fee",
+        "docking_fee_multiplier"
+      ],
+      "solution_line_template": "Mitch needs to keep {license_registration_fee} * {docking_fee_multiplier} = <<{license_registration_fee}*{docking_fee_multiplier}={docking_fees}>>{docking_fees} for docking fees."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_fees",
+      "question_inputs": [],
+      "solution_line_template": "Thus, he needs to keep {license_registration_fee} + {docking_fee_multiplier} * {license_registration_fee} = $<<{license_registration_fee}+{docking_fee_multiplier}*{license_registration_fee}={total_fees}>>{total_fees} for license, registration, and docking fees."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "money_for_boat",
+      "question_inputs": [
+        "initial_savings"
+      ],
+      "solution_line_template": "He has {initial_savings} - {total_fees} = $<<{initial_savings}-{total_fees}={money_for_boat}>>{money_for_boat} left to spend on a boat."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "longest_boat_length",
+      "question_inputs": [
+        "cost_per_foot"
+      ],
+      "solution_line_template": "Therefore, the longest boat he can buy is {money_for_boat} / {cost_per_foot} = <<{money_for_boat}/{cost_per_foot}={longest_boat_length}>>{longest_boat_length} feet long."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Mitch needs to keep 500 * 3 = <<500*3=1500>>1500 for docking fees.",
+    "L2": "Thus, he needs to keep 500 + 3 * 500 = $<<500+3*500=2000>>2000 for license, registration, and docking fees.",
+    "L3": "He has 20000 - 2000 = $<<20000-2000=18000>>18000 left to spend on a boat.",
+    "L4": "Therefore, the longest boat he can buy is 18000 / 2000 = <<18000/2000=9>>9 feet long.",
+    "FA": "#### 9"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'total_fees' (2000) was used instead of 'cost_per_foot' (1500).",
+  "repro_seed": -8438007361166219497,
+  "model_name": "google_gemini-2.5-flash"
+}

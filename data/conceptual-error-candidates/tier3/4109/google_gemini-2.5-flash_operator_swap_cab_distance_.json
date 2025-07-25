@@ -1,0 +1,74 @@
+{
+  "index": 4109,
+  "original_solution_mapping": {
+    "FA": "#### 500",
+    "L1": "Kristine traveled on the bus 300 km / 2 = <<300/2=150>>150 km.",
+    "L2": "With the cab, she had to drive 150 km / 3 = <<150/3=50>>50 km.",
+    "L3": "In total she had to cover 150 km + 50 km + 300 km = <<150+50+300=500>>500 km."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4109.\n    Returns: the total kilometers Kristine traveled.\n    \"\"\"\n    # L1\n    train_distance = 300 # driven a train for 300 km\n    bus_distance_divisor = 2 # half that distance\n    bus_distance = train_distance / bus_distance_divisor\n\n    # L2\n    cab_distance_divisor = 3 # three times fewer kilometers\n    cab_distance = bus_distance / cab_distance_divisor\n\n    # L3\n    total_distance = bus_distance + cab_distance + train_distance\n\n    # FA\n    answer = total_distance\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "cab_distance",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x15f63bf10>"
+  },
+  "correct_trace": {
+    "train_distance": 300,
+    "bus_distance_divisor": 2,
+    "bus_distance": 150.0,
+    "cab_distance_divisor": 3,
+    "cab_distance": 50.0,
+    "total_distance": 500.0,
+    "answer": 500.0
+  },
+  "flawed_trace": {
+    "train_distance": 300,
+    "bus_distance_divisor": 2,
+    "bus_distance": 150.0,
+    "cab_distance_divisor": 3,
+    "cab_distance": 450.0,
+    "total_distance": 900.0,
+    "answer": 900.0
+  },
+  "correct_value": 50.0,
+  "flawed_value": 450.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "bus_distance",
+      "question_inputs": [
+        "train_distance",
+        "bus_distance_divisor"
+      ],
+      "solution_line_template": "Kristine traveled on the bus {train_distance} km / {bus_distance_divisor} = <<{train_distance}/{bus_distance_divisor}={bus_distance}>>{bus_distance} km."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cab_distance",
+      "question_inputs": [
+        "cab_distance_divisor"
+      ],
+      "solution_line_template": "With the cab, she had to drive {bus_distance} km / {cab_distance_divisor} = <<{bus_distance}/{cab_distance_divisor}={cab_distance}>>{cab_distance} km."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_distance",
+      "question_inputs": [],
+      "solution_line_template": "In total she had to cover {bus_distance} km + {cab_distance} km + {train_distance} km = <<{bus_distance}+{cab_distance}+{train_distance}={total_distance}>>{total_distance} km."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Kristine traveled on the bus 300 km / 2 = <<300/2=150>>150 km.",
+    "L2": "With the cab, she had to drive 150 km / 3 = <<150/3=450>>450 km.",
+    "L3": "In total she had to cover 150 km + 450 km + 300 km = <<150+450+300=900>>900 km.",
+    "FA": "#### 900"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 832864177489338535,
+  "model_name": "google_gemini-2.5-flash"
+}

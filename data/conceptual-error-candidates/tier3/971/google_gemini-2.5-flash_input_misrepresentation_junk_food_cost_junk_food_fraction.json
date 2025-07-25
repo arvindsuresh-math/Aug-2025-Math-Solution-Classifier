@@ -1,0 +1,74 @@
+{
+  "index": 971,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "A third of $30 is $30*(1/3) = $<<30*(1/3)=10>>10",
+    "L2": "She spent $10 from $30 leaving $30-$10 = $20",
+    "L3": "She spent another $8 leaving $20-$8 = $<<20-8=12>>12 which she saved"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 971.\n    Returns: the amount Annabelle saved.\n    \"\"\"\n    # L1\n    weekly_allowance = 30 # Annabelle collected a weekly allowance of $30\n    junk_food_fraction = Fraction(1, 3) # spent a third of it\n    junk_food_cost = weekly_allowance * junk_food_fraction\n\n    # L2\n    money_after_junk_food = weekly_allowance - junk_food_cost\n\n    # L3\n    sweets_cost = 8 # spent another $8 on sweets\n    saved_amount = money_after_junk_food - sweets_cost\n\n    # FA\n    answer = saved_amount\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "junk_food_cost",
+    "operand_to_replace": "weekly_allowance",
+    "replacement_variable": "junk_food_fraction"
+  },
+  "correct_trace": {
+    "weekly_allowance": 30,
+    "junk_food_fraction": "1/3",
+    "junk_food_cost": "10",
+    "money_after_junk_food": "20",
+    "sweets_cost": 8,
+    "saved_amount": "12",
+    "answer": "12"
+  },
+  "flawed_trace": {
+    "weekly_allowance": 30,
+    "junk_food_fraction": "1/3",
+    "junk_food_cost": "1/9",
+    "money_after_junk_food": "269/9",
+    "sweets_cost": 8,
+    "saved_amount": "197/9",
+    "answer": "197/9"
+  },
+  "correct_value": "10",
+  "flawed_value": "1/9",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "junk_food_cost",
+      "question_inputs": [
+        "weekly_allowance",
+        "junk_food_fraction"
+      ],
+      "solution_line_template": "A third of ${weekly_allowance} is ${weekly_allowance}*({junk_food_fraction}) = $<<{weekly_allowance}*{junk_food_fraction}={junk_food_cost}>>{junk_food_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_after_junk_food",
+      "question_inputs": [],
+      "solution_line_template": "She spent ${junk_food_cost} from ${weekly_allowance} leaving ${weekly_allowance}-${junk_food_cost} = ${money_after_junk_food}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "saved_amount",
+      "question_inputs": [
+        "sweets_cost"
+      ],
+      "solution_line_template": "She spent another ${sweets_cost} leaving ${money_after_junk_food}-${sweets_cost} = $<<{money_after_junk_food}-{sweets_cost}={saved_amount}>>{saved_amount} which she saved"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "A third of $1/3 is $1/3*(1/3) = $<<1/3*1/3=1/9>>1/9",
+    "L2": "She spent $1/9 from $30 leaving $30-$1/9 = $269/9",
+    "L3": "She spent another $8 leaving $269/9-$8 = $<<269/9-8=197/9>>197/9 which she saved",
+    "FA": "#### 197/9"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'junk_food_fraction' (1/3) was used instead of 'weekly_allowance' (30).",
+  "repro_seed": -8892085164615488566,
+  "model_name": "google_gemini-2.5-flash"
+}

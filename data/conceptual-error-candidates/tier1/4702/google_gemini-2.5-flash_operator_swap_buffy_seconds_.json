@@ -1,0 +1,79 @@
+{
+  "index": 4702,
+  "original_solution_mapping": {
+    "FA": "#### 120",
+    "L1": "Kelly held her breath for 3 minutes, or 3*60=<<3*60=180>>180 seconds.",
+    "L2": "Brittany held her breath for 20 seconds less time than Kelly did, or 180-20=<<180-20=160>>160 seconds",
+    "L3": "And Buffy held her breath for 40 seconds less time than Brittany did, or for 160-40=<<160-40=120>>120 seconds."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4702.\n    Returns: how long, in seconds, Buffy held her breath underwater.\n    \"\"\"\n    # L1\n    kelly_minutes = 3 # Kelly held her breath underwater for 3 minutes\n    seconds_per_minute = 60 # WK\n    kelly_seconds = kelly_minutes * seconds_per_minute\n\n    # L2\n    brittany_less_than_kelly = 20 # 20 seconds less time than than Kelly did\n    brittany_seconds = kelly_seconds - brittany_less_than_kelly\n\n    # L3\n    buffy_less_than_brittany = 40 # 40 seconds less time than Brittany did\n    buffy_seconds = brittany_seconds - buffy_less_than_brittany\n\n    # FA\n    answer = buffy_seconds\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "buffy_seconds",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x309f79ad0>"
+  },
+  "correct_trace": {
+    "kelly_minutes": 3,
+    "seconds_per_minute": 60,
+    "kelly_seconds": 180,
+    "brittany_less_than_kelly": 20,
+    "brittany_seconds": 160,
+    "buffy_less_than_brittany": 40,
+    "buffy_seconds": 120,
+    "answer": 120
+  },
+  "flawed_trace": {
+    "kelly_minutes": 3,
+    "seconds_per_minute": 60,
+    "kelly_seconds": 180,
+    "brittany_less_than_kelly": 20,
+    "brittany_seconds": 160,
+    "buffy_less_than_brittany": 40,
+    "buffy_seconds": 4.0,
+    "answer": 4.0
+  },
+  "correct_value": 120,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "seconds_per_minute"
+      ],
+      "line_number": "L1",
+      "output_variable": "kelly_seconds",
+      "question_inputs": [
+        "kelly_minutes"
+      ],
+      "solution_line_template": "Kelly held her breath for {kelly_minutes} minutes, or {kelly_minutes}*{seconds_per_minute}=<<{kelly_minutes}*{seconds_per_minute}={kelly_seconds}>>{kelly_seconds} seconds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "brittany_seconds",
+      "question_inputs": [
+        "brittany_less_than_kelly"
+      ],
+      "solution_line_template": "Brittany held her breath for {brittany_less_than_kelly} seconds less time than Kelly did, or {kelly_seconds}-{brittany_less_than_kelly}=<<{kelly_seconds}-{brittany_less_than_kelly}={brittany_seconds}>>{brittany_seconds} seconds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "buffy_seconds",
+      "question_inputs": [
+        "buffy_less_than_brittany"
+      ],
+      "solution_line_template": "And Buffy held her breath for {buffy_less_than_brittany} seconds less time than Brittany did, or for {brittany_seconds}-{buffy_less_than_brittany}=<<{brittany_seconds}-{buffy_less_than_brittany}={buffy_seconds}>>{buffy_seconds} seconds."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Kelly held her breath for 3 minutes, or 3*60=<<3*60=180>>180 seconds.",
+    "L2": "Brittany held her breath for 20 seconds less time than Kelly did, or 180-20=<<180-20=160>>160 seconds",
+    "L3": "And Buffy held her breath for 40 seconds less time than Brittany did, or for 160-40=<<160-40=4>>4 seconds.",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": 6563024392455805986,
+  "model_name": "google_gemini-2.5-flash"
+}

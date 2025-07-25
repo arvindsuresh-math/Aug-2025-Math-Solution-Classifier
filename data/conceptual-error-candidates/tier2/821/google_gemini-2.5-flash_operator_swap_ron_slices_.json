@@ -1,0 +1,78 @@
+{
+  "index": 821,
+  "original_solution_mapping": {
+    "FA": "#### 24",
+    "L1": "Tammy can eat twice as many pickle slices as Sammy who eats 15 so Tammy can eat 15*2 = <<15*2=30>>30 pickle slices",
+    "L2": "Ron eats 20% fewer pickle slices than Tammy who eats 30 pickle slices so that's .20*30 = <<20*.01*30=6>>6 fewer slices than Tammy",
+    "L3": "Tammy eats 30 slices and Ron eats 6 less, then Ron eats 30-6 = <<30-6=24>>24 pickle slices"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 821.\n    Returns: the number of pickle slices Ron eats.\n    \"\"\"\n    # L1\n    sammy_slices = 15 # Sammy can eat 15 pickle slices\n    tammy_slices = sammy_slices * 2\n\n    # L2\n    ron_fewer_percent_decimal = 0.20 # 20% fewer pickle slices than Tammy\n    ron_fewer_percent_num = 20 # 20% fewer pickle slices than Tammy\n    percent_factor = 0.01 # WK\n    fewer_slices_for_ron = ron_fewer_percent_num * percent_factor * tammy_slices\n\n    # L3\n    ron_slices = tammy_slices - fewer_slices_for_ron\n\n    # FA\n    answer = ron_slices\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "ron_slices",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x30e2a0290>"
+  },
+  "correct_trace": {
+    "sammy_slices": 15,
+    "tammy_slices": 30,
+    "ron_fewer_percent_decimal": 0.2,
+    "ron_fewer_percent_num": 20,
+    "percent_factor": 0.01,
+    "fewer_slices_for_ron": 6.0,
+    "ron_slices": 24.0,
+    "answer": 24.0
+  },
+  "flawed_trace": {
+    "sammy_slices": 15,
+    "tammy_slices": 30,
+    "ron_fewer_percent_decimal": 0.2,
+    "ron_fewer_percent_num": 20,
+    "percent_factor": 0.01,
+    "fewer_slices_for_ron": 6.0,
+    "ron_slices": 5.0,
+    "answer": 5.0
+  },
+  "correct_value": 24.0,
+  "flawed_value": 5.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "tammy_slices",
+      "question_inputs": [
+        "sammy_slices"
+      ],
+      "solution_line_template": "Tammy can eat twice as many pickle slices as Sammy who eats {sammy_slices} so Tammy can eat {sammy_slices}*2 = <<{sammy_slices}*2={tammy_slices}>>{tammy_slices} pickle slices"
+    },
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L2",
+      "output_variable": "fewer_slices_for_ron",
+      "question_inputs": [
+        "ron_fewer_percent_decimal",
+        "ron_fewer_percent_num"
+      ],
+      "solution_line_template": "Ron eats {ron_fewer_percent_num}% fewer pickle slices than Tammy who eats {tammy_slices} pickle slices so that's {ron_fewer_percent_decimal}*{tammy_slices} = <<{ron_fewer_percent_num}*{percent_factor}*{tammy_slices}={fewer_slices_for_ron}>>{fewer_slices_for_ron} fewer slices than Tammy"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "ron_slices",
+      "question_inputs": [],
+      "solution_line_template": "Tammy eats {tammy_slices} slices and Ron eats {fewer_slices_for_ron} less, then Ron eats {tammy_slices}-{fewer_slices_for_ron} = <<{tammy_slices}-{fewer_slices_for_ron}={ron_slices}>>{ron_slices} pickle slices"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Tammy can eat twice as many pickle slices as Sammy who eats 15 so Tammy can eat 15*2 = <<15*2=30>>30 pickle slices",
+    "L2": "Ron eats 20% fewer pickle slices than Tammy who eats 30 pickle slices so that's 0.2*30 = <<20*0.01*30=6>>6 fewer slices than Tammy",
+    "L3": "Tammy eats 30 slices and Ron eats 6 less, then Ron eats 30-6 = <<30-6=5>>5 pickle slices",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": 999285213858388097,
+  "model_name": "google_gemini-2.5-flash"
+}

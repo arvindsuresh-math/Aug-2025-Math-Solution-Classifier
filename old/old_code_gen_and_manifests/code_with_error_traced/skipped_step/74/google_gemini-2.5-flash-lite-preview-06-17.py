@@ -1,0 +1,21 @@
+def solve(
+    total_weight_lost: int = 103, # Four people lost a total of 103 kilograms of weight.
+    person1_lost: int = 27, # The first person lost 27 kilograms.
+    person2_weight_difference: int = 7, # The second person lost 7 kilograms less than the first person.
+    num_people: int = 4 # Four people lost a total of 103 kilograms of weight.
+):
+    """Index: 74.
+    Returns: the amount of weight lost by each of the last two people.
+    """
+
+    #: L1
+    person2_lost = person1_lost - person2_weight_difference # eval: 20 = 27 - 7
+
+    #: L2
+
+    #: L3
+    weight_lost_per_person_last_two = person2_weight_difference / (num_people - 2) # eval: 3.5 = 7 / (4 - 2)
+
+    #: FA
+    answer = weight_lost_per_person_last_two
+    return answer # eval: return 3.5

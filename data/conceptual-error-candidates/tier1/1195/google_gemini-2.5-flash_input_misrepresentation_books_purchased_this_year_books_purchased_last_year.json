@@ -1,0 +1,74 @@
+{
+  "index": 1195,
+  "original_solution_mapping": {
+    "FA": "#### 300",
+    "L1": "Last year, there were a total of 100 + 50 = <<100+50=150>>150 books in the library.",
+    "L2": "The library purchased 50 x 3 = <<50*3=150>>150 books this year.",
+    "L3": "Therefore, the library now has a total of 150 + 150 = <<150+150=300>>300 books."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1195.\n    Returns: the total number of books in the library now.\n    \"\"\"\n    # L1\n    books_before_last_year = 100 # 100 books before it purchased new books last year\n    books_purchased_last_year = 50 # purchased 50 new books\n    total_books_after_last_year_purchase = books_before_last_year + books_purchased_last_year\n\n    # L2\n    multiplier_this_year = 3 # 3 times as many books\n    books_purchased_this_year = books_purchased_last_year * multiplier_this_year\n\n    # L3\n    total_books_now = total_books_after_last_year_purchase + books_purchased_this_year\n\n    # FA\n    answer = total_books_now\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "books_purchased_this_year",
+    "operand_to_replace": "multiplier_this_year",
+    "replacement_variable": "books_purchased_last_year"
+  },
+  "correct_trace": {
+    "books_before_last_year": 100,
+    "books_purchased_last_year": 50,
+    "total_books_after_last_year_purchase": 150,
+    "multiplier_this_year": 3,
+    "books_purchased_this_year": 150,
+    "total_books_now": 300,
+    "answer": 300
+  },
+  "flawed_trace": {
+    "books_before_last_year": 100,
+    "books_purchased_last_year": 50,
+    "total_books_after_last_year_purchase": 150,
+    "multiplier_this_year": 3,
+    "books_purchased_this_year": 2500,
+    "total_books_now": 2650,
+    "answer": 2650
+  },
+  "correct_value": 150,
+  "flawed_value": 2500,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "books_before_last_year",
+        "books_purchased_last_year"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_books_after_last_year_purchase",
+      "solution_line_template": "Last year, there were a total of {books_before_last_year} + {books_purchased_last_year} = <<{books_before_last_year}+{books_purchased_last_year}={total_books_after_last_year_purchase}>>{total_books_after_last_year_purchase} books in the library."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "multiplier_this_year"
+      ],
+      "WK_inputs": [],
+      "output_variable": "books_purchased_this_year",
+      "solution_line_template": "The library purchased {books_purchased_last_year} x {multiplier_this_year} = <<{books_purchased_last_year}*{multiplier_this_year}={books_purchased_this_year}>>{books_purchased_this_year} books this year."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_books_now",
+      "solution_line_template": "Therefore, the library now has a total of {total_books_after_last_year_purchase} + {books_purchased_this_year} = <<{total_books_after_last_year_purchase}+{books_purchased_this_year}={total_books_now}>>{total_books_now} books."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Last year, there were a total of 100 + 50 = <<100+50=150>>150 books in the library.",
+    "L2": "The library purchased 50 x 50 = <<50*50=2500>>2500 books this year.",
+    "L3": "Therefore, the library now has a total of 150 + 2500 = <<150+2500=2650>>2650 books.",
+    "FA": "#### 2650"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'books_purchased_last_year' (50) was used instead of 'multiplier_this_year' (3).",
+  "repro_seed": -161618745975309832,
+  "model_name": "google_gemini-2.5-flash"
+}

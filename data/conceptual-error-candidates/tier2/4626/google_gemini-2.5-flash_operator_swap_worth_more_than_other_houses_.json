@@ -1,0 +1,74 @@
+{
+  "index": 4626,
+  "original_solution_mapping": {
+    "FA": "#### 60,000",
+    "L1": "The house cost 320,000*1.5=$<<320000*1.5=480000>>480,000",
+    "L2": "So it is worth 480,000-320,000=$<<480000-320000=160000>>160,000 more than other houses",
+    "L3": "So the profit is 160,000-100,000=$<<160000-100000=60000>>60,000 more"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4626.\n    Returns: the additional profit made by spending extra money to build the house.\n    \"\"\"\n    # L1\n    other_house_sale_price = 320000 # which sell at $320,000 each\n    sale_price_multiplier = 1.5 # sells for 1.5 times as much\n    this_house_sale_price = other_house_sale_price * sale_price_multiplier\n\n    # L2\n    worth_more_than_other_houses = this_house_sale_price - other_house_sale_price\n\n    # L3\n    extra_construction_cost = 100000 # is 100,000 more than the construction cost\n    extra_profit = worth_more_than_other_houses - extra_construction_cost\n\n    # FA\n    answer = extra_profit\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "worth_more_than_other_houses",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30e7dc150>"
+  },
+  "correct_trace": {
+    "other_house_sale_price": 320000,
+    "sale_price_multiplier": 1.5,
+    "this_house_sale_price": 480000.0,
+    "worth_more_than_other_houses": 160000.0,
+    "extra_construction_cost": 100000,
+    "extra_profit": 60000.0,
+    "answer": 60000.0
+  },
+  "flawed_trace": {
+    "other_house_sale_price": 320000,
+    "sale_price_multiplier": 1.5,
+    "this_house_sale_price": 480000.0,
+    "worth_more_than_other_houses": 800000.0,
+    "extra_construction_cost": 100000,
+    "extra_profit": 700000.0,
+    "answer": 700000.0
+  },
+  "correct_value": 160000.0,
+  "flawed_value": 800000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "this_house_sale_price",
+      "question_inputs": [
+        "other_house_sale_price",
+        "sale_price_multiplier"
+      ],
+      "solution_line_template": "The house cost {other_house_sale_price}*{sale_price_multiplier}=$<<{other_house_sale_price}*{sale_price_multiplier}={this_house_sale_price}>>{this_house_sale_price}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "worth_more_than_other_houses",
+      "question_inputs": [],
+      "solution_line_template": "So it is worth {this_house_sale_price}-{other_house_sale_price}=$<<{this_house_sale_price}-{other_house_sale_price}={worth_more_than_other_houses}>>{worth_more_than_other_houses} more than other houses"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "extra_profit",
+      "question_inputs": [
+        "extra_construction_cost"
+      ],
+      "solution_line_template": "So the profit is {worth_more_than_other_houses}-{extra_construction_cost}=$<<{worth_more_than_other_houses}-{extra_construction_cost}={extra_profit}>>{extra_profit} more"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The house cost 320000*1.5=$<<320000*1.5=480000>>480000",
+    "L2": "So it is worth 480000-320000=$<<480000-320000=800000>>800000 more than other houses",
+    "L3": "So the profit is 800000-100000=$<<800000-100000=700000>>700000 more",
+    "FA": "#### 700000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -3347825322918442556,
+  "model_name": "google_gemini-2.5-flash"
+}

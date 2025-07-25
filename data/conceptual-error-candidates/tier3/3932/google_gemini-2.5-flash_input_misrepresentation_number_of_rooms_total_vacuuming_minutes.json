@@ -1,0 +1,64 @@
+{
+  "index": 3932,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "Susie spends 2*60 = <<2*60=120>>120 minutes vacuuming.",
+    "L2": "Since she can vacuum each room in 20 minutes, she has 120/20 = <<120/20=6>>6 rooms in her house."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3932.\n    Returns: the number of rooms in Susie's house.\n    \"\"\"\n    # L1\n    total_hours = 2 # 2 hours\n    minutes_per_hour = 60 # WK\n    total_vacuuming_minutes = total_hours * minutes_per_hour\n\n    # L2\n    time_per_room = 20 # 20 minutes\n    number_of_rooms = total_vacuuming_minutes / time_per_room\n\n    # FA\n    answer = number_of_rooms\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "number_of_rooms",
+    "operand_to_replace": "time_per_room",
+    "replacement_variable": "total_vacuuming_minutes"
+  },
+  "correct_trace": {
+    "total_hours": 2,
+    "minutes_per_hour": 60,
+    "total_vacuuming_minutes": 120,
+    "time_per_room": 20,
+    "number_of_rooms": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "total_hours": 2,
+    "minutes_per_hour": 60,
+    "total_vacuuming_minutes": 120,
+    "time_per_room": 20,
+    "number_of_rooms": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_vacuuming_minutes",
+      "question_inputs": [
+        "total_hours"
+      ],
+      "solution_line_template": "Susie spends {total_hours}*{minutes_per_hour} = <<{total_hours}*{minutes_per_hour}={total_vacuuming_minutes}>>{total_vacuuming_minutes} minutes vacuuming."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "number_of_rooms",
+      "question_inputs": [
+        "time_per_room"
+      ],
+      "solution_line_template": "Since she can vacuum each room in {time_per_room} minutes, she has {total_vacuuming_minutes}/{time_per_room} = <<{total_vacuuming_minutes}/{time_per_room}={number_of_rooms}>>{number_of_rooms} rooms in her house."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Susie spends 2*60 = <<2*60=120>>120 minutes vacuuming.",
+    "L2": "Since she can vacuum each room in 120 minutes, she has 120/120 = <<120/120=1>>1 rooms in her house.",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_vacuuming_minutes' (120) was used instead of 'time_per_room' (20).",
+  "repro_seed": -6559411236385149538,
+  "model_name": "google_gemini-2.5-flash"
+}

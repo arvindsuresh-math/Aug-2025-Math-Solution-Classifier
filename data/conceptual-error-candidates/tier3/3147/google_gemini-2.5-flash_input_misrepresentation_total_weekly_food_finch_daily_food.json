@@ -1,0 +1,134 @@
+{
+  "index": 3147,
+  "original_solution_mapping": {
+    "FA": "#### 266",
+    "L1": "His parakeets eat 6 grams a day, because three parakeets times two grams each equals 6 grams.",
+    "L2": "His parrots will eat 28 grams a day because two parrots times 14 grams equals <<2*14=28>>28 grams.",
+    "L3": "Each finch will eat 1 gram a day, because they eat half of what a parakeet does and 1/2 of 2 equals one.",
+    "L4": "His finches will eat 4 grams a day because four finches times 1 gram equals 4 grams.",
+    "L5": "His birds eat 38 grams a day because 6 plus 28 plus 4 equals <<6+28+4=38>>38",
+    "L6": "Each week has 7 days",
+    "L7": "Therefore, in a week he will need 266 grams because 7 times 38 equals <<7*38=266>>266."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3147.\n    Returns: the total grams of birdseed Peter needs to buy for a week.\n    \"\"\"\n    # L1\n    num_parakeets = 3 # 3 parakeets\n    parakeet_daily_food = 2 # each parakeet eats 2 grams a day\n    total_parakeet_daily_food = num_parakeets * parakeet_daily_food\n\n    # L2\n    num_parrots = 2 # 2 parrots\n    parrot_daily_food = 14 # His parrots eat 14 grams a day\n    total_parrot_daily_food = num_parrots * parrot_daily_food\n\n    # L3\n    finch_food_numerator = 1 # WK\n    finch_food_denominator = 2 # WK\n    finch_daily_food = (finch_food_numerator / finch_food_denominator) * parakeet_daily_food\n\n    # L4\n    num_finches = 4 # 4 finches\n    total_finch_daily_food = num_finches * finch_daily_food\n\n    # L5\n    total_daily_food = total_parakeet_daily_food + total_parrot_daily_food + total_finch_daily_food\n\n    # L6\n    days_per_week = 7 # WK\n\n    # L7\n    total_weekly_food = days_per_week * total_daily_food\n\n    # FA\n    answer = total_weekly_food\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_weekly_food",
+    "operand_to_replace": "days_per_week",
+    "replacement_variable": "finch_daily_food"
+  },
+  "correct_trace": {
+    "num_parakeets": 3,
+    "parakeet_daily_food": 2,
+    "total_parakeet_daily_food": 6,
+    "num_parrots": 2,
+    "parrot_daily_food": 14,
+    "total_parrot_daily_food": 28,
+    "finch_food_numerator": 1,
+    "finch_food_denominator": 2,
+    "finch_daily_food": 1.0,
+    "num_finches": 4,
+    "total_finch_daily_food": 4.0,
+    "total_daily_food": 38.0,
+    "days_per_week": 7,
+    "total_weekly_food": 266.0,
+    "answer": 266.0
+  },
+  "flawed_trace": {
+    "num_parakeets": 3,
+    "parakeet_daily_food": 2,
+    "total_parakeet_daily_food": 6,
+    "num_parrots": 2,
+    "parrot_daily_food": 14,
+    "total_parrot_daily_food": 28,
+    "finch_food_numerator": 1,
+    "finch_food_denominator": 2,
+    "finch_daily_food": 1.0,
+    "num_finches": 4,
+    "total_finch_daily_food": 4.0,
+    "total_daily_food": 38.0,
+    "days_per_week": 7,
+    "total_weekly_food": 38.0,
+    "answer": 38.0
+  },
+  "correct_value": 266.0,
+  "flawed_value": 38.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_parakeet_daily_food",
+      "question_inputs": [
+        "num_parakeets",
+        "parakeet_daily_food"
+      ],
+      "solution_line_template": "His parakeets eat {total_parakeet_daily_food} grams a day, because {num_parakeets} parakeets times {parakeet_daily_food} grams each equals {total_parakeet_daily_food} grams."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_parrot_daily_food",
+      "question_inputs": [
+        "num_parrots",
+        "parrot_daily_food"
+      ],
+      "solution_line_template": "His parrots will eat {total_parrot_daily_food} grams a day because {num_parrots} parrots times {parrot_daily_food} grams equals <<{num_parrots}*{parrot_daily_food}={total_parrot_daily_food}>>{total_parrot_daily_food} grams."
+    },
+    {
+      "WK_inputs": [
+        "finch_food_numerator",
+        "finch_food_denominator"
+      ],
+      "line_number": "L3",
+      "output_variable": "finch_daily_food",
+      "question_inputs": [],
+      "solution_line_template": "Each finch will eat {finch_daily_food} gram a day, because they eat half of what a parakeet does and {finch_food_numerator}/{finch_food_denominator} of {parakeet_daily_food} equals {finch_daily_food}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_finch_daily_food",
+      "question_inputs": [
+        "num_finches"
+      ],
+      "solution_line_template": "His finches will eat {total_finch_daily_food} grams a day because {num_finches} finches times {finch_daily_food} gram equals {total_finch_daily_food} grams."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_daily_food",
+      "question_inputs": [],
+      "solution_line_template": "His birds eat {total_daily_food} grams a day because {total_parakeet_daily_food} plus {total_parrot_daily_food} plus {total_finch_daily_food} equals <<{total_parakeet_daily_food}+{total_parrot_daily_food}+{total_finch_daily_food}={total_daily_food}>>{total_daily_food}"
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L6",
+      "output_variable": "days_per_week",
+      "question_inputs": [],
+      "solution_line_template": "Each week has {days_per_week} days"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "total_weekly_food",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, in a week he will need {total_weekly_food} grams because {days_per_week} times {total_daily_food} equals <<{days_per_week}*{total_daily_food}={total_weekly_food}>>{total_weekly_food}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "His parakeets eat 6 grams a day, because 3 parakeets times 2 grams each equals 6 grams.",
+    "L2": "His parrots will eat 28 grams a day because 2 parrots times 14 grams equals <<2*14=28>>28 grams.",
+    "L3": "Each finch will eat 1 gram a day, because they eat half of what a parakeet does and 1/2 of 2 equals 1.",
+    "L4": "His finches will eat 4 grams a day because 4 finches times 1 gram equals 4 grams.",
+    "L5": "His birds eat 38 grams a day because 6 plus 28 plus 4 equals <<6+28+4=38>>38",
+    "L6": "Each week has 7 days",
+    "L7": "Therefore, in a week he will need 38 grams because 1 times 38 equals <<1*38=38>>38.",
+    "FA": "#### 38"
+  },
+  "erroneous_line_number": "L7",
+  "explanation": "Input misrepresentation. The value for 'finch_daily_food' (1.0) was used instead of 'days_per_week' (7).",
+  "repro_seed": 9092055922276188666,
+  "model_name": "google_gemini-2.5-flash"
+}

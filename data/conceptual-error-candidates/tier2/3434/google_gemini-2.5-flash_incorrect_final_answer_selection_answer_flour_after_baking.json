@@ -1,0 +1,72 @@
+{
+  "index": 3434,
+  "original_solution_mapping": {
+    "FA": "#### 370",
+    "L1": "After baking cookies, Lucy had 500 - 240 = <<500-240=260>>260g of flour left.",
+    "L2": "She accidentally spilled half of this, which means she had 260 * 0.5 = <<260*0.5=130>>130g of flour left.",
+    "L3": "She therefore needs 500 - 130 = <<500-130=370>>370g of flour."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3434.\n    Returns: the amount of flour Lucy needs to buy.\n    \"\"\"\n    # L1\n    initial_flour_grams = 500 # a 500g bag of flour\n    used_flour_grams = 240 # used 240g\n    flour_after_baking = initial_flour_grams - used_flour_grams\n\n    # L2\n    spill_fraction = 0.5 # WK\n    flour_after_spill = flour_after_baking * spill_fraction\n\n    # L3\n    flour_to_buy = initial_flour_grams - flour_after_spill\n\n    # FA\n    answer = flour_to_buy\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "flour_to_buy",
+    "replacement_variable": "flour_after_baking"
+  },
+  "correct_trace": {
+    "initial_flour_grams": 500,
+    "used_flour_grams": 240,
+    "flour_after_baking": 260,
+    "spill_fraction": 0.5,
+    "flour_after_spill": 130.0,
+    "flour_to_buy": 370.0,
+    "answer": 370.0
+  },
+  "flawed_trace": {
+    "initial_flour_grams": 500,
+    "used_flour_grams": 240,
+    "flour_after_baking": 260,
+    "spill_fraction": 0.5,
+    "flour_after_spill": 130.0,
+    "flour_to_buy": 370.0,
+    "answer": 260
+  },
+  "correct_value": 370.0,
+  "flawed_value": 260,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "flour_after_baking",
+      "question_inputs": [
+        "initial_flour_grams",
+        "used_flour_grams"
+      ],
+      "solution_line_template": "After baking cookies, Lucy had {initial_flour_grams} - {used_flour_grams} = <<{initial_flour_grams}-{used_flour_grams}={flour_after_baking}>>{flour_after_baking}g of flour left."
+    },
+    {
+      "WK_inputs": [
+        "spill_fraction"
+      ],
+      "line_number": "L2",
+      "output_variable": "flour_after_spill",
+      "question_inputs": [],
+      "solution_line_template": "She accidentally spilled half of this, which means she had {flour_after_baking} * {spill_fraction} = <<{flour_after_baking}*{spill_fraction}={flour_after_spill}>>{flour_after_spill}g of flour left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "flour_to_buy",
+      "question_inputs": [],
+      "solution_line_template": "She therefore needs {initial_flour_grams} - {flour_after_spill} = <<{initial_flour_grams}-{flour_after_spill}={flour_to_buy}>>{flour_to_buy}g of flour."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After baking cookies, Lucy had 500 - 240 = <<500-240=260>>260g of flour left.",
+    "FA": "#### 260"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'flour_after_baking' (value: 260) was reported instead of 'flour_to_buy' (value: 370.0).",
+  "repro_seed": -7562317558749130406,
+  "model_name": "google_gemini-2.5-flash"
+}

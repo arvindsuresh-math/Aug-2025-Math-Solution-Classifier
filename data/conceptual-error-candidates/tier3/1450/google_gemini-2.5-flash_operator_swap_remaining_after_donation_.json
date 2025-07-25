@@ -1,0 +1,92 @@
+{
+  "index": 1450,
+  "original_solution_mapping": {
+    "FA": "#### 25",
+    "L1": "After losing some socks, Caroline has 40 - 4 = <<40-4=36>>36 pairs of socks",
+    "L2": "Caroline donates 36 * (2/3) = <<36*(2/3)=24>>24 pairs of socks to the thrift store",
+    "L3": "After donating some socks, Caroline has 36 - 24 = <<36-24=12>>12 pairs of socks remaining",
+    "L4": "After getting new socks, Caroline has 12 + 10 + 3 = <<12+10+3=25>>25 pairs of socks"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1450.\n    Returns: the total number of pairs of socks Caroline has.\n    \"\"\"\n    # L1\n    initial_pairs = 40 # Caroline has 40 pairs of socks\n    lost_pairs = 4 # loses 4 pairs of socks\n    remaining_after_loss = initial_pairs - lost_pairs\n\n    # L2\n    donated_fraction = Fraction(2, 3) # donates two-thirds\n    donated_pairs = remaining_after_loss * donated_fraction\n\n    # L3\n    remaining_after_donation = remaining_after_loss - donated_pairs\n\n    # L4\n    purchased_pairs = 10 # purchases 10 new pairs of socks\n    gifted_pairs = 3 # receives 3 new pairs of socks as a gift\n    total_final_pairs = remaining_after_donation + purchased_pairs + gifted_pairs\n\n    # FA\n    answer = total_final_pairs\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "remaining_after_donation",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30d2b3d10>"
+  },
+  "correct_trace": {
+    "initial_pairs": 40,
+    "lost_pairs": 4,
+    "remaining_after_loss": 36,
+    "donated_fraction": "2/3",
+    "donated_pairs": "24",
+    "remaining_after_donation": "12",
+    "purchased_pairs": 10,
+    "gifted_pairs": 3,
+    "total_final_pairs": "25",
+    "answer": "25"
+  },
+  "flawed_trace": {
+    "initial_pairs": 40,
+    "lost_pairs": 4,
+    "remaining_after_loss": 36,
+    "donated_fraction": "2/3",
+    "donated_pairs": "24",
+    "remaining_after_donation": "60",
+    "purchased_pairs": 10,
+    "gifted_pairs": 3,
+    "total_final_pairs": "73",
+    "answer": "73"
+  },
+  "correct_value": "12",
+  "flawed_value": "60",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "remaining_after_loss",
+      "question_inputs": [
+        "initial_pairs",
+        "lost_pairs"
+      ],
+      "solution_line_template": "After losing some socks, Caroline has {initial_pairs} - {lost_pairs} = <<{initial_pairs}-{lost_pairs}={remaining_after_loss}>>{remaining_after_loss} pairs of socks"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "donated_pairs",
+      "question_inputs": [
+        "donated_fraction"
+      ],
+      "solution_line_template": "Caroline donates {remaining_after_loss} * ({donated_fraction}) = <<{remaining_after_loss}*{donated_fraction}={donated_pairs}>>{donated_pairs} pairs of socks to the thrift store"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_after_donation",
+      "question_inputs": [],
+      "solution_line_template": "After donating some socks, Caroline has {remaining_after_loss} - {donated_pairs} = <<{remaining_after_loss}-{donated_pairs}={remaining_after_donation}>>{remaining_after_donation} pairs of socks remaining"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_final_pairs",
+      "question_inputs": [
+        "purchased_pairs",
+        "gifted_pairs"
+      ],
+      "solution_line_template": "After getting new socks, Caroline has {remaining_after_donation} + {purchased_pairs} + {gifted_pairs} = <<{remaining_after_donation}+{purchased_pairs}+{gifted_pairs}={total_final_pairs}>>{total_final_pairs} pairs of socks"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After losing some socks, Caroline has 40 - 4 = <<40-4=36>>36 pairs of socks",
+    "L2": "Caroline donates 36 * (2/3) = <<36*2/3=24>>24 pairs of socks to the thrift store",
+    "L3": "After donating some socks, Caroline has 36 - 24 = <<36-24=60>>60 pairs of socks remaining",
+    "L4": "After getting new socks, Caroline has 60 + 10 + 3 = <<60+10+3=73>>73 pairs of socks",
+    "FA": "#### 73"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -5552267888322236053,
+  "model_name": "google_gemini-2.5-flash"
+}

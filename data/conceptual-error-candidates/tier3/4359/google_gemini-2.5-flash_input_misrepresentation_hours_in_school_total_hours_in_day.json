@@ -1,0 +1,101 @@
+{
+  "index": 4359,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "Steve spends 24/3 = <<24/3=8>>8 hours sleeping.",
+    "L2": "He spends 24/6 = <<24/6=4>>4 hours in school.",
+    "L3": "He spends 24/12 = <<24/12=2>>2 hours making assignments.",
+    "L4": "He spends 8 + 4 + 2 = <<8+4+2=14>>14 hours either sleeping, going to school, or making assignments.",
+    "L5": "Hence, Steve spends 24 - 14 = <<24-14=10>>10 hours with his family."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4359.\n    Returns: the number of hours Steve spends with his family in a day.\n    \"\"\"\n    # L1\n    total_hours_in_day = 24 # WK\n    sleeping_fraction_denominator = 3 # 1/3 of the day sleeping\n    hours_sleeping = total_hours_in_day / sleeping_fraction_denominator\n\n    # L2\n    school_fraction_denominator = 6 # 1/6 of the day in school\n    hours_in_school = total_hours_in_day / school_fraction_denominator\n\n    # L3\n    assignments_fraction_denominator = 12 # 1/12 of the day making assignments\n    hours_making_assignments = total_hours_in_day / assignments_fraction_denominator\n\n    # L4\n    total_structured_hours = hours_sleeping + hours_in_school + hours_making_assignments\n\n    # L5\n    hours_with_family = total_hours_in_day - total_structured_hours\n\n    # FA\n    answer = hours_with_family\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "hours_in_school",
+    "operand_to_replace": "school_fraction_denominator",
+    "replacement_variable": "total_hours_in_day"
+  },
+  "correct_trace": {
+    "total_hours_in_day": 24,
+    "sleeping_fraction_denominator": 3,
+    "hours_sleeping": 8.0,
+    "school_fraction_denominator": 6,
+    "hours_in_school": 4.0,
+    "assignments_fraction_denominator": 12,
+    "hours_making_assignments": 2.0,
+    "total_structured_hours": 14.0,
+    "hours_with_family": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "total_hours_in_day": 24,
+    "sleeping_fraction_denominator": 3,
+    "hours_sleeping": 8.0,
+    "school_fraction_denominator": 6,
+    "hours_in_school": 1.0,
+    "assignments_fraction_denominator": 12,
+    "hours_making_assignments": 2.0,
+    "total_structured_hours": 11.0,
+    "hours_with_family": 13.0,
+    "answer": 13.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_hours_in_day"
+      ],
+      "line_number": "L1",
+      "output_variable": "hours_sleeping",
+      "question_inputs": [
+        "sleeping_fraction_denominator"
+      ],
+      "solution_line_template": "Steve spends {total_hours_in_day}/{sleeping_fraction_denominator} = <<{total_hours_in_day}/{sleeping_fraction_denominator}={hours_sleeping}>>{hours_sleeping} hours sleeping."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "hours_in_school",
+      "question_inputs": [
+        "school_fraction_denominator"
+      ],
+      "solution_line_template": "He spends {total_hours_in_day}/{school_fraction_denominator} = <<{total_hours_in_day}/{school_fraction_denominator}={hours_in_school}>>{hours_in_school} hours in school."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "hours_making_assignments",
+      "question_inputs": [
+        "assignments_fraction_denominator"
+      ],
+      "solution_line_template": "He spends {total_hours_in_day}/{assignments_fraction_denominator} = <<{total_hours_in_day}/{assignments_fraction_denominator}={hours_making_assignments}>>{hours_making_assignments} hours making assignments."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_structured_hours",
+      "question_inputs": [],
+      "solution_line_template": "He spends {hours_sleeping} + {hours_in_school} + {hours_making_assignments} = <<{hours_sleeping}+{hours_in_school}+{hours_making_assignments}={total_structured_hours}>>{total_structured_hours} hours either sleeping, going to school, or making assignments."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "hours_with_family",
+      "question_inputs": [],
+      "solution_line_template": "Hence, Steve spends {total_hours_in_day} - {total_structured_hours} = <<{total_hours_in_day}-{total_structured_hours}={hours_with_family}>>{hours_with_family} hours with his family."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Steve spends 24/3 = <<24/3=8>>8 hours sleeping.",
+    "L2": "He spends 24/24 = <<24/24=1>>1 hours in school.",
+    "L3": "He spends 24/12 = <<24/12=2>>2 hours making assignments.",
+    "L4": "He spends 8 + 1 + 2 = <<8+1+2=11>>11 hours either sleeping, going to school, or making assignments.",
+    "L5": "Hence, Steve spends 24 - 11 = <<24-11=13>>13 hours with his family.",
+    "FA": "#### 13"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_hours_in_day' (24) was used instead of 'school_fraction_denominator' (6).",
+  "repro_seed": -7804589720691624850,
+  "model_name": "google_gemini-2.5-flash"
+}

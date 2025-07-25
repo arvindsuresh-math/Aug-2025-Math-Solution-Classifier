@@ -1,0 +1,74 @@
+{
+  "index": 4604,
+  "original_solution_mapping": {
+    "FA": "#### 123",
+    "L1": "The number of girls was 2/5 times more than the boys, which is 2/5*50 = <<2/5*50=20>>20 more girls.",
+    "L2": "The total number of girls on the trip is 50+20 = <<50+20=70>>70",
+    "L3": "Together with the driver, the assistant driver, and the teacher, there were 70+50+3 = <<70+50+3=123>>123 people on the bus"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4604.\n    Returns: the total number of people on the bus.\n    \"\"\"\n    # L1\n    girls_more_fraction = Fraction(2, 5) # 2/5 times more girls\n    boys_count = 50 # total number of boys on the trip is 50\n    additional_girls = girls_more_fraction * boys_count\n\n    # L2\n    total_girls = boys_count + additional_girls\n\n    # L3\n    staff_count = 3 # a driver and an assistant, and the teacher also drives\n    total_people = total_girls + boys_count + staff_count\n\n    # FA\n    answer = total_people\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_people",
+    "operand_to_replace": "staff_count",
+    "replacement_variable": "total_girls"
+  },
+  "correct_trace": {
+    "girls_more_fraction": "2/5",
+    "boys_count": 50,
+    "additional_girls": "20",
+    "total_girls": "70",
+    "staff_count": 3,
+    "total_people": "123",
+    "answer": "123"
+  },
+  "flawed_trace": {
+    "girls_more_fraction": "2/5",
+    "boys_count": 50,
+    "additional_girls": "20",
+    "total_girls": "70",
+    "staff_count": 3,
+    "total_people": "190",
+    "answer": "190"
+  },
+  "correct_value": "123",
+  "flawed_value": "190",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "additional_girls",
+      "question_inputs": [
+        "girls_more_fraction",
+        "boys_count"
+      ],
+      "solution_line_template": "The number of girls was {girls_more_fraction} times more than the boys, which is {girls_more_fraction}*{boys_count} = <<{girls_more_fraction}*{boys_count}={additional_girls}>>{additional_girls} more girls."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_girls",
+      "question_inputs": [],
+      "solution_line_template": "The total number of girls on the trip is {boys_count}+{additional_girls} = <<{boys_count}+{additional_girls}={total_girls}>>{total_girls}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_people",
+      "question_inputs": [
+        "staff_count"
+      ],
+      "solution_line_template": "Together with the driver, the assistant driver, and the teacher, there were {total_girls}+{boys_count}+{staff_count} = <<{total_girls}+{boys_count}+{staff_count}={total_people}>>{total_people} people on the bus"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The number of girls was 2/5 times more than the boys, which is 2/5*50 = <<2/5*50=20>>20 more girls.",
+    "L2": "The total number of girls on the trip is 50+20 = <<50+20=70>>70",
+    "L3": "Together with the driver, the assistant driver, and the teacher, there were 70+50+70 = <<70+50+70=190>>190 people on the bus",
+    "FA": "#### 190"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'total_girls' (70) was used instead of 'staff_count' (3).",
+  "repro_seed": -7970030083577120709,
+  "model_name": "google_gemini-2.5-flash"
+}

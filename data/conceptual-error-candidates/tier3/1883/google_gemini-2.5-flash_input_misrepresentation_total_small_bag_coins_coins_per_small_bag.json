@@ -1,0 +1,89 @@
+{
+  "index": 1883,
+  "original_solution_mapping": {
+    "FA": "#### 25",
+    "L1": "The smaller bags each have 100/2=<<100/2=50>>50 gold coins each",
+    "L2": "So in total, they have 50*2=<<50*2=100>>100 coins",
+    "L3": "So he found 100+100=<<100+100=200>>200 coins",
+    "L4": "So he finds 200/8=<<200/8=25>>25 coins an hour"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1883.\n    Returns: the amount of gold found per hour.\n    \"\"\"\n    # L1\n    main_chest_coins = 100 # treasure chest with 100 gold coins\n    half_divisor = 2 # half as much gold\n    coins_per_small_bag = main_chest_coins / half_divisor\n\n    # L2\n    num_small_bags = 2 # 2 smaller bags\n    total_small_bag_coins = coins_per_small_bag * num_small_bags\n\n    # L3\n    total_gold_found = main_chest_coins + total_small_bag_coins\n\n    # L4\n    diving_hours = 8 # 8 hours scuba diving\n    gold_per_hour = total_gold_found / diving_hours\n\n    # FA\n    answer = gold_per_hour\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_small_bag_coins",
+    "operand_to_replace": "num_small_bags",
+    "replacement_variable": "coins_per_small_bag"
+  },
+  "correct_trace": {
+    "main_chest_coins": 100,
+    "half_divisor": 2,
+    "coins_per_small_bag": 50.0,
+    "num_small_bags": 2,
+    "total_small_bag_coins": 100.0,
+    "total_gold_found": 200.0,
+    "diving_hours": 8,
+    "gold_per_hour": 25.0,
+    "answer": 25.0
+  },
+  "flawed_trace": {
+    "main_chest_coins": 100,
+    "half_divisor": 2,
+    "coins_per_small_bag": 50.0,
+    "num_small_bags": 2,
+    "total_small_bag_coins": 2500.0,
+    "total_gold_found": 2600.0,
+    "diving_hours": 8,
+    "gold_per_hour": 325.0,
+    "answer": 325.0
+  },
+  "correct_value": 100.0,
+  "flawed_value": 2500.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "coins_per_small_bag",
+      "question_inputs": [
+        "main_chest_coins",
+        "half_divisor"
+      ],
+      "solution_line_template": "The smaller bags each have {main_chest_coins}/{half_divisor}=<<{main_chest_coins}/{half_divisor}={coins_per_small_bag}>>{coins_per_small_bag} gold coins each"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_small_bag_coins",
+      "question_inputs": [
+        "num_small_bags"
+      ],
+      "solution_line_template": "So in total, they have {coins_per_small_bag}*{num_small_bags}=<<{coins_per_small_bag}*{num_small_bags}={total_small_bag_coins}>>{total_small_bag_coins} coins"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_gold_found",
+      "question_inputs": [],
+      "solution_line_template": "So he found {main_chest_coins}+{total_small_bag_coins}=<<{main_chest_coins}+{total_small_bag_coins}={total_gold_found}>>{total_gold_found} coins"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "gold_per_hour",
+      "question_inputs": [
+        "diving_hours"
+      ],
+      "solution_line_template": "So he finds {total_gold_found}/{diving_hours}=<<{total_gold_found}/{diving_hours}={gold_per_hour}>>{gold_per_hour} coins an hour"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The smaller bags each have 100/2=<<100/2=50>>50 gold coins each",
+    "L2": "So in total, they have 50*50=<<50*50=2500>>2500 coins",
+    "L3": "So he found 100+2500=<<100+2500=2600>>2600 coins",
+    "L4": "So he finds 2600/8=<<2600/8=325>>325 coins an hour",
+    "FA": "#### 325"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'coins_per_small_bag' (50.0) was used instead of 'num_small_bags' (2).",
+  "repro_seed": 5723327635873016858,
+  "model_name": "google_gemini-2.5-flash"
+}

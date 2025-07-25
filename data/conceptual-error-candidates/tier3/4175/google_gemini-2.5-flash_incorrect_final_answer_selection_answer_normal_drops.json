@@ -1,0 +1,90 @@
+{
+  "index": 4175,
+  "original_solution_mapping": {
+    "FA": "#### 28",
+    "L1": "The vending machine has been used 30 times, so it has failed to drop a snack 30 / 6 = <<30/6=5>>5 times.",
+    "L2": "The vending machine has dropped 2 snacks 30 / 10 = <<30/10=3>>3 times.",
+    "L3": "It has operated normally and dropped 1 snack 30 - 5 - 3 = <<30-5-3=22>>22 times.",
+    "L4": "Thus, the vending machine has dropped 22 + 3 * 2 = 22 + 6 = <<22+3*2=28>>28 snacks in thirty uses."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4175.\n    Returns: the total number of snacks dropped by the vending machine.\n    \"\"\"\n    # L1\n    total_uses = 30 # If thirty people have used the vending machine once each\n    fail_frequency_denominator = 6 # one in six times\n    failed_drops = total_uses / fail_frequency_denominator\n\n    # L2\n    double_drop_frequency_denominator = 10 # One in ten times\n    double_drops = total_uses / double_drop_frequency_denominator\n\n    # L3\n    normal_drops = total_uses - failed_drops - double_drops\n\n    # L4\n    snacks_per_double_drop = 2 # accidentally drop two snacks\n    double_drops_times_two = double_drops * snacks_per_double_drop\n    total_snacks_dropped = normal_drops + double_drops_times_two\n\n    # FA\n    answer = total_snacks_dropped\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_snacks_dropped",
+    "replacement_variable": "normal_drops"
+  },
+  "correct_trace": {
+    "total_uses": 30,
+    "fail_frequency_denominator": 6,
+    "failed_drops": 5.0,
+    "double_drop_frequency_denominator": 10,
+    "double_drops": 3.0,
+    "normal_drops": 22.0,
+    "snacks_per_double_drop": 2,
+    "double_drops_times_two": 6.0,
+    "total_snacks_dropped": 28.0,
+    "answer": 28.0
+  },
+  "flawed_trace": {
+    "total_uses": 30,
+    "fail_frequency_denominator": 6,
+    "failed_drops": 5.0,
+    "double_drop_frequency_denominator": 10,
+    "double_drops": 3.0,
+    "normal_drops": 22.0,
+    "snacks_per_double_drop": 2,
+    "double_drops_times_two": 6.0,
+    "total_snacks_dropped": 28.0,
+    "answer": 22.0
+  },
+  "correct_value": 28.0,
+  "flawed_value": 22.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "failed_drops",
+      "question_inputs": [
+        "total_uses",
+        "fail_frequency_denominator"
+      ],
+      "solution_line_template": "The vending machine has been used {total_uses} times, so it has failed to drop a snack {total_uses} / {fail_frequency_denominator} = <<{total_uses}/{fail_frequency_denominator}={failed_drops}>>{failed_drops} times."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "double_drops",
+      "question_inputs": [
+        "double_drop_frequency_denominator"
+      ],
+      "solution_line_template": "The vending machine has dropped 2 snacks {total_uses} / {double_drop_frequency_denominator} = <<{total_uses}/{double_drop_frequency_denominator}={double_drops}>>{double_drops} times."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "normal_drops",
+      "question_inputs": [],
+      "solution_line_template": "It has operated normally and dropped 1 snack {total_uses} - {failed_drops} - {double_drops} = <<{total_uses}-{failed_drops}-{double_drops}={normal_drops}>>{normal_drops} times."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_snacks_dropped",
+      "question_inputs": [
+        "snacks_per_double_drop"
+      ],
+      "solution_line_template": "Thus, the vending machine has dropped {normal_drops} + {double_drops} * {snacks_per_double_drop} = {normal_drops} + {double_drops_times_two} = <<{normal_drops}+{double_drops}*{snacks_per_double_drop}={total_snacks_dropped}>>{total_snacks_dropped} snacks in thirty uses."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The vending machine has been used 30 times, so it has failed to drop a snack 30 / 6 = <<30/6=5>>5 times.",
+    "L2": "The vending machine has dropped 2 snacks 30 / 10 = <<30/10=3>>3 times.",
+    "L3": "It has operated normally and dropped 1 snack 30 - 5 - 3 = <<30-5-3=22>>22 times.",
+    "FA": "#### 22"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'normal_drops' (value: 22.0) was reported instead of 'total_snacks_dropped' (value: 28.0).",
+  "repro_seed": 2394352128058079683,
+  "model_name": "google_gemini-2.5-flash"
+}

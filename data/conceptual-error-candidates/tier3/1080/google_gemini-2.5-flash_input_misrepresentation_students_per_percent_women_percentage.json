@@ -1,0 +1,79 @@
+{
+  "index": 1080,
+  "original_solution_mapping": {
+    "FA": "#### 420",
+    "L1": "The percentage for women is 100% - 70% = 30%.",
+    "L2": "Since 180 represents 30%, then 180/30 = 6 students represent 1%.",
+    "L3": "Hence, 6 x 70 = <<6*70=420>>420 students are men."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1080.\n    Returns: the number of men in the engineering department.\n    \"\"\"\n    # L1\n    total_percentage = 100 # WK\n    men_percentage = 70 # 70% of the students are men\n    women_percentage = total_percentage - men_percentage\n\n    # L2\n    women_count = 180 # 180 are women\n    percentage_per_unit = 1 # WK\n    students_per_percent = women_count / women_percentage\n\n    # L3\n    men_count = students_per_percent * men_percentage\n\n    # FA\n    answer = men_count\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "students_per_percent",
+    "operand_to_replace": "women_count",
+    "replacement_variable": "women_percentage"
+  },
+  "correct_trace": {
+    "total_percentage": 100,
+    "men_percentage": 70,
+    "women_percentage": 30,
+    "women_count": 180,
+    "percentage_per_unit": 1,
+    "students_per_percent": 6.0,
+    "men_count": 420.0,
+    "answer": 420.0
+  },
+  "flawed_trace": {
+    "total_percentage": 100,
+    "men_percentage": 70,
+    "women_percentage": 30,
+    "women_count": 180,
+    "percentage_per_unit": 1,
+    "students_per_percent": 1.0,
+    "men_count": 70.0,
+    "answer": 70.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_percentage"
+      ],
+      "line_number": "L1",
+      "output_variable": "women_percentage",
+      "question_inputs": [
+        "men_percentage"
+      ],
+      "solution_line_template": "The percentage for women is {total_percentage}% - {men_percentage}% = {women_percentage}%."
+    },
+    {
+      "WK_inputs": [
+        "percentage_per_unit"
+      ],
+      "line_number": "L2",
+      "output_variable": "students_per_percent",
+      "question_inputs": [
+        "women_count"
+      ],
+      "solution_line_template": "Since {women_count} represents {women_percentage}%, then {women_count}/{women_percentage} = {students_per_percent} students represent {percentage_per_unit}%."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "men_count",
+      "question_inputs": [],
+      "solution_line_template": "Hence, {students_per_percent} x {men_percentage} = <<{students_per_percent}*{men_percentage}={men_count}>>{men_count} students are men."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The percentage for women is 100% - 70% = 30%.",
+    "L2": "Since 30 represents 30%, then 30/30 = 1 students represent 1%.",
+    "L3": "Hence, 1 x 70 = <<1*70=70>>70 students are men.",
+    "FA": "#### 70"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'women_percentage' (30) was used instead of 'women_count' (180).",
+  "repro_seed": -7201300605289844587,
+  "model_name": "google_gemini-2.5-flash"
+}

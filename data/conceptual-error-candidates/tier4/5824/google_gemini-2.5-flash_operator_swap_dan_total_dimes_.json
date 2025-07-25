@@ -1,0 +1,79 @@
+{
+  "index": 5824,
+  "original_solution_mapping": {
+    "FA": "#### 52",
+    "L1": "Dimes are worth $0.10 and Barry has $10.00 worth of dimes so he has 10/.10 = <<10/.10=100>>100 dimes",
+    "L2": "Dan has half the amount of dimes as Barry so Dan has 100/2 = <<100/2=50>>50 dimes",
+    "L3": "Dan finds 2 more dimes on his way home so he now has 50+2 = <<50+2=52>>52 dimes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5824.\n    Returns: the total number of dimes Dan has.\n    \"\"\"\n    # L1\n    barry_total_value = 10.00 # $10.00 worth of dimes\n    dime_value = 0.10 # WK\n    barry_num_dimes = barry_total_value / dime_value\n\n    # L2\n    dan_half_divisor = 2 # half that amount\n    dan_initial_dimes = barry_num_dimes / dan_half_divisor\n\n    # L3\n    dan_found_dimes = 2 # finds 2 more dimes\n    dan_total_dimes = dan_initial_dimes + dan_found_dimes\n\n    # FA\n    answer = dan_total_dimes\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "dan_total_dimes",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x16a538390>"
+  },
+  "correct_trace": {
+    "barry_total_value": 10.0,
+    "dime_value": 0.1,
+    "barry_num_dimes": 100.0,
+    "dan_half_divisor": 2,
+    "dan_initial_dimes": 50.0,
+    "dan_found_dimes": 2,
+    "dan_total_dimes": 52.0,
+    "answer": 52.0
+  },
+  "flawed_trace": {
+    "barry_total_value": 10.0,
+    "dime_value": 0.1,
+    "barry_num_dimes": 100.0,
+    "dan_half_divisor": 2,
+    "dan_initial_dimes": 50.0,
+    "dan_found_dimes": 2,
+    "dan_total_dimes": 100.0,
+    "answer": 100.0
+  },
+  "correct_value": 52.0,
+  "flawed_value": 100.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "dime_value"
+      ],
+      "line_number": "L1",
+      "output_variable": "barry_num_dimes",
+      "question_inputs": [
+        "barry_total_value"
+      ],
+      "solution_line_template": "Dimes are worth $0.10 and Barry has ${barry_total_value} worth of dimes so he has {barry_total_value}/{dime_value} = <<{barry_total_value}/{dime_value}={barry_num_dimes}>>{barry_num_dimes} dimes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "dan_initial_dimes",
+      "question_inputs": [
+        "dan_half_divisor"
+      ],
+      "solution_line_template": "Dan has half the amount of dimes as Barry so Dan has {barry_num_dimes}/{dan_half_divisor} = <<{barry_num_dimes}/{dan_half_divisor}={dan_initial_dimes}>>{dan_initial_dimes} dimes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "dan_total_dimes",
+      "question_inputs": [
+        "dan_found_dimes"
+      ],
+      "solution_line_template": "Dan finds {dan_found_dimes} more dimes on his way home so he now has {dan_initial_dimes}+{dan_found_dimes} = <<{dan_initial_dimes}+{dan_found_dimes}={dan_total_dimes}>>{dan_total_dimes} dimes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Dimes are worth $0.10 and Barry has $10 worth of dimes so he has 10/0.1 = <<10/0.1=100>>100 dimes",
+    "L2": "Dan has half the amount of dimes as Barry so Dan has 100/2 = <<100/2=50>>50 dimes",
+    "L3": "Dan finds 2 more dimes on his way home so he now has 50+2 = <<50+2=100>>100 dimes",
+    "FA": "#### 100"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 2175444435381590294,
+  "model_name": "google_gemini-2.5-flash"
+}

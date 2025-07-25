@@ -1,0 +1,89 @@
+{
+  "index": 7253,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "There are 2 * 4 red chairs = <<2*4=8>>8 yellow chairs.",
+    "L2": "There are 8 yellow chairs - 2 = <<8-2=6>>6 blue chairs.",
+    "L3": "Total in the morning there were 4 red + 8 yellow + 6 blue = <<4+8+6=18>>18 chairs.",
+    "L4": "After Lisa removed chairs there were 18 - 3 chairs = <<18-3=15>>15 chairs remaining."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7253.\n    Returns: the number of chairs left in Rodrigo's classroom.\n    \"\"\"\n    # L1\n    red_chairs = 4 # 4 red chairs\n    multiplier_yellow_red = 2 # 2 times as many yellow chairs as red chairs\n    yellow_chairs = multiplier_yellow_red * red_chairs\n\n    # L2\n    fewer_blue_than_yellow = 2 # 2 fewer blue chairs than yellow chairs\n    blue_chairs = yellow_chairs - fewer_blue_than_yellow\n\n    # L3\n    total_chairs_morning = red_chairs + yellow_chairs + blue_chairs\n\n    # L4\n    lisa_borrows = 3 # Lisa borrows 3 chairs\n    chairs_remaining = total_chairs_morning - lisa_borrows\n\n    # FA\n    answer = chairs_remaining\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "blue_chairs",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x30a179d90>"
+  },
+  "correct_trace": {
+    "red_chairs": 4,
+    "multiplier_yellow_red": 2,
+    "yellow_chairs": 8,
+    "fewer_blue_than_yellow": 2,
+    "blue_chairs": 6,
+    "total_chairs_morning": 18,
+    "lisa_borrows": 3,
+    "chairs_remaining": 15,
+    "answer": 15
+  },
+  "flawed_trace": {
+    "red_chairs": 4,
+    "multiplier_yellow_red": 2,
+    "yellow_chairs": 8,
+    "fewer_blue_than_yellow": 2,
+    "blue_chairs": 4.0,
+    "total_chairs_morning": 16.0,
+    "lisa_borrows": 3,
+    "chairs_remaining": 13.0,
+    "answer": 13.0
+  },
+  "correct_value": 6,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "yellow_chairs",
+      "question_inputs": [
+        "red_chairs",
+        "multiplier_yellow_red"
+      ],
+      "solution_line_template": "There are {multiplier_yellow_red} * {red_chairs} red chairs = <<{multiplier_yellow_red}*{red_chairs}={yellow_chairs}>>{yellow_chairs} yellow chairs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "blue_chairs",
+      "question_inputs": [
+        "fewer_blue_than_yellow"
+      ],
+      "solution_line_template": "There are {yellow_chairs} yellow chairs - {fewer_blue_than_yellow} = <<{yellow_chairs}-{fewer_blue_than_yellow}={blue_chairs}>>{blue_chairs} blue chairs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_chairs_morning",
+      "question_inputs": [],
+      "solution_line_template": "Total in the morning there were {red_chairs} red + {yellow_chairs} yellow + {blue_chairs} blue = <<{red_chairs}+{yellow_chairs}+{blue_chairs}={total_chairs_morning}>>{total_chairs_morning} chairs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "chairs_remaining",
+      "question_inputs": [
+        "lisa_borrows"
+      ],
+      "solution_line_template": "After Lisa removed chairs there were {total_chairs_morning} - {lisa_borrows} chairs = <<{total_chairs_morning}-{lisa_borrows}={chairs_remaining}>>{chairs_remaining} chairs remaining."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 2 * 4 red chairs = <<2*4=8>>8 yellow chairs.",
+    "L2": "There are 8 yellow chairs - 2 = <<8-2=4>>4 blue chairs.",
+    "L3": "Total in the morning there were 4 red + 8 yellow + 4 blue = <<4+8+4=16>>16 chairs.",
+    "L4": "After Lisa removed chairs there were 16 - 3 chairs = <<16-3=13>>13 chairs remaining.",
+    "FA": "#### 13"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": 1913177557956546354,
+  "model_name": "google_gemini-2.5-flash"
+}

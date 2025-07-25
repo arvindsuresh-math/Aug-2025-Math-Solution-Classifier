@@ -1,0 +1,64 @@
+{
+  "index": 3055,
+  "original_solution_mapping": {
+    "FA": "#### 64",
+    "L1": "First find what percent of the vinegar is still in the bottle after each year: 100% - 20% = 80%",
+    "L2": "Then multiply the amount of vinegar left after one year by the percentage left after each year to find how much is left after 2 years: 80% * 80% = 64%"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3055.\n    Returns: the percentage of vinegar left after 2 years.\n    \"\"\"\n    # L1\n    initial_percent = 100 # WK\n    evaporation_percent_per_year = 20 # 20% of the vinegar evaporates\n    percent_left_after_one_year = initial_percent - evaporation_percent_per_year\n\n    # L2\n    percent_divisor = 100 # WK\n    percent_left_after_two_years = (percent_left_after_one_year * percent_left_after_one_year) / percent_divisor\n\n    # FA\n    answer = percent_left_after_two_years\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "percent_left_after_one_year",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30aa5ac90>"
+  },
+  "correct_trace": {
+    "initial_percent": 100,
+    "evaporation_percent_per_year": 20,
+    "percent_left_after_one_year": 80,
+    "percent_divisor": 100,
+    "percent_left_after_two_years": 64.0,
+    "answer": 64.0
+  },
+  "flawed_trace": {
+    "initial_percent": 100,
+    "evaporation_percent_per_year": 20,
+    "percent_left_after_one_year": 120,
+    "percent_divisor": 100,
+    "percent_left_after_two_years": 144.0,
+    "answer": 144.0
+  },
+  "correct_value": 80,
+  "flawed_value": 120,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "initial_percent"
+      ],
+      "line_number": "L1",
+      "output_variable": "percent_left_after_one_year",
+      "question_inputs": [
+        "evaporation_percent_per_year"
+      ],
+      "solution_line_template": "First find what percent of the vinegar is still in the bottle after each year: {initial_percent}% - {evaporation_percent_per_year}% = <<{initial_percent}-{evaporation_percent_per_year}={percent_left_after_one_year}>>{percent_left_after_one_year}%"
+    },
+    {
+      "WK_inputs": [
+        "percent_divisor"
+      ],
+      "line_number": "L2",
+      "output_variable": "percent_left_after_two_years",
+      "question_inputs": [],
+      "solution_line_template": "Then multiply the amount of vinegar left after one year by the percentage left after each year to find how much is left after 2 years: {percent_left_after_one_year}% * {percent_left_after_one_year}% = <<{percent_left_after_one_year}*{percent_left_after_one_year}/{percent_divisor}={percent_left_after_two_years}>>{percent_left_after_two_years}%"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find what percent of the vinegar is still in the bottle after each year: 100% - 20% = <<100-20=120>>120%",
+    "L2": "Then multiply the amount of vinegar left after one year by the percentage left after each year to find how much is left after 2 years: 120% * 120% = <<120*120/100=144>>144%",
+    "FA": "#### 144"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 2436172944929728551,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,100 @@
+{
+  "index": 5531,
+  "original_solution_mapping": {
+    "FA": "#### 4625",
+    "L1": "First find the total cost of the hospital bed by multiplying the cost per day by the number of days: $900/day * 3 days = $<<900*3=2700>>2700",
+    "L2": "Then figure out how many minutes total the two specialists looked at Dakota: 15 minutes/specialist * 2 specialists = 30 minutes",
+    "L3": "Then divide the number of minutes by the number of minutes per hour and multiply it by the specialists' hourly rate to find their total charge: 30 minutes / 60 minutes/hour * $250/hour = $<<30/60*250=125>>125",
+    "L4": "Finally, add up the cost of the specialists, ambulance and bed to find Dakota's total bill: $2700 + $1800 + $125 = $<<2700+1800+125=4625>>4625"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5531.\n    Returns: the total amount of Dakota's medical bill.\n    \"\"\"\n    # L1\n    cost_per_day_bed = 900 # $900/day for her bed\n    days_in_hospital = 3 # 3 days in the hospital\n    cost_hospital_bed = cost_per_day_bed * days_in_hospital\n\n    # L2\n    minutes_per_specialist = 15 # 15 minutes each\n    num_specialists = 2 # two specialists\n    total_specialist_minutes = minutes_per_specialist * num_specialists\n\n    # L3\n    minutes_per_hour = 60 # WK\n    specialist_hourly_rate = 250 # $250/hour\n    cost_specialists = total_specialist_minutes / minutes_per_hour * specialist_hourly_rate\n\n    # L4\n    cost_ambulance_ride = 1800 # $1800 for the ambulance ride\n    total_bill = cost_hospital_bed + cost_ambulance_ride + cost_specialists\n\n    # FA\n    answer = total_bill\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "cost_hospital_bed",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x177d25d10>"
+  },
+  "correct_trace": {
+    "cost_per_day_bed": 900,
+    "days_in_hospital": 3,
+    "cost_hospital_bed": 2700,
+    "minutes_per_specialist": 15,
+    "num_specialists": 2,
+    "total_specialist_minutes": 30,
+    "minutes_per_hour": 60,
+    "specialist_hourly_rate": 250,
+    "cost_specialists": 125.0,
+    "cost_ambulance_ride": 1800,
+    "total_bill": 4625.0,
+    "answer": 4625.0
+  },
+  "flawed_trace": {
+    "cost_per_day_bed": 900,
+    "days_in_hospital": 3,
+    "cost_hospital_bed": 903,
+    "minutes_per_specialist": 15,
+    "num_specialists": 2,
+    "total_specialist_minutes": 30,
+    "minutes_per_hour": 60,
+    "specialist_hourly_rate": 250,
+    "cost_specialists": 125.0,
+    "cost_ambulance_ride": 1800,
+    "total_bill": 2828.0,
+    "answer": 2828.0
+  },
+  "correct_value": 2700,
+  "flawed_value": 903,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_hospital_bed",
+      "question_inputs": [
+        "cost_per_day_bed",
+        "days_in_hospital"
+      ],
+      "solution_line_template": "First find the total cost of the hospital bed by multiplying the cost per day by the number of days: ${cost_per_day_bed}/day * {days_in_hospital} days = $<<{cost_per_day_bed}*{days_in_hospital}={cost_hospital_bed}>>{cost_hospital_bed}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_specialist_minutes",
+      "question_inputs": [
+        "minutes_per_specialist",
+        "num_specialists"
+      ],
+      "solution_line_template": "Then figure out how many minutes total the two specialists looked at Dakota: {minutes_per_specialist} minutes/specialist * {num_specialists} specialists = {total_specialist_minutes} minutes"
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L3",
+      "output_variable": "cost_specialists",
+      "question_inputs": [
+        "specialist_hourly_rate"
+      ],
+      "solution_line_template": "Then divide the number of minutes by the number of minutes per hour and multiply it by the specialists' hourly rate to find their total charge: {total_specialist_minutes} minutes / {minutes_per_hour} minutes/hour * ${specialist_hourly_rate}/hour = $<<{total_specialist_minutes}/{minutes_per_hour}*{specialist_hourly_rate}={cost_specialists}>>{cost_specialists}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_bill",
+      "question_inputs": [
+        "cost_ambulance_ride"
+      ],
+      "solution_line_template": "Finally, add up the cost of the specialists, ambulance and bed to find Dakota's total bill: ${cost_hospital_bed} + ${cost_ambulance_ride} + ${cost_specialists} = $<<{cost_hospital_bed}+{cost_ambulance_ride}+{cost_specialists}={total_bill}>>{total_bill}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total cost of the hospital bed by multiplying the cost per day by the number of days: $900/day * 3 days = $<<900*3=903>>903",
+    "L2": "Then figure out how many minutes total the two specialists looked at Dakota: 15 minutes/specialist * 2 specialists = 30 minutes",
+    "L3": "Then divide the number of minutes by the number of minutes per hour and multiply it by the specialists' hourly rate to find their total charge: 30 minutes / 60 minutes/hour * $250/hour = $<<30/60*250=125>>125",
+    "L4": "Finally, add up the cost of the specialists, ambulance and bed to find Dakota's total bill: $903 + $1800 + $125 = $<<903+1800+125=2828>>2828",
+    "FA": "#### 2828"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -2682483862431139704,
+  "model_name": "google_gemini-2.5-flash"
+}

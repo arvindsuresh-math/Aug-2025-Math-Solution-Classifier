@@ -1,0 +1,93 @@
+{
+  "index": 5601,
+  "original_solution_mapping": {
+    "FA": "#### 24",
+    "L1": "The original price is x.",
+    "L2": "The discount is 100% - 25% remaining = 75% discount.",
+    "L3": "The discount is 75%, so the original price is x - .75x = .25x.",
+    "L4": "The sale price is $6, so $6 = .25x, which is the same as 6/.25 = x.",
+    "L5": "X = $<<24=24>>24."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5601.\n    Returns: the original price of the shirt.\n    \"\"\"\n    # L2\n    total_percent = 100 # WK\n    remaining_percent = 25 # This price is at 25% of the original price\n    discount_percent = total_percent - remaining_percent\n\n    # L3\n    full_price_factor = 1.0 # WK\n    discount_decimal = 0.75 # from solution text: .75x\n    sale_price_factor = full_price_factor - discount_decimal\n\n    # L4\n    sale_price = 6 # reduced to $6\n    original_price = sale_price / sale_price_factor\n\n    # FA\n    answer = original_price\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "original_price",
+    "operand_to_replace": "sale_price_factor",
+    "replacement_variable": "discount_decimal"
+  },
+  "correct_trace": {
+    "total_percent": 100,
+    "remaining_percent": 25,
+    "discount_percent": 75,
+    "full_price_factor": 1.0,
+    "discount_decimal": 0.75,
+    "sale_price_factor": 0.25,
+    "sale_price": 6,
+    "original_price": 24.0,
+    "answer": 24.0
+  },
+  "flawed_trace": {
+    "total_percent": 100,
+    "remaining_percent": 25,
+    "discount_percent": 75,
+    "full_price_factor": 1.0,
+    "discount_decimal": 0.75,
+    "sale_price_factor": 0.25,
+    "sale_price": 6,
+    "original_price": 8.0,
+    "answer": 8.0
+  },
+  "correct_value": 24.0,
+  "flawed_value": 8.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_percent"
+      ],
+      "line_number": "L2",
+      "output_variable": "discount_percent",
+      "question_inputs": [
+        "remaining_percent"
+      ],
+      "solution_line_template": "The discount is {total_percent}% - {remaining_percent}% remaining = {discount_percent}% discount."
+    },
+    {
+      "WK_inputs": [
+        "full_price_factor"
+      ],
+      "line_number": "L3",
+      "output_variable": "sale_price_factor",
+      "question_inputs": [
+        "discount_decimal"
+      ],
+      "solution_line_template": "The discount is {discount_percent}%, so the original price is x - {discount_decimal}x = {sale_price_factor}x."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "original_price",
+      "question_inputs": [
+        "sale_price"
+      ],
+      "solution_line_template": "The sale price is ${sale_price}, so ${sale_price} = {sale_price_factor}x, which is the same as {sale_price}/{sale_price_factor} = x."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "original_price",
+      "question_inputs": [],
+      "solution_line_template": "X = $<<{original_price}={original_price}>>{original_price}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "The discount is 100% - 25% remaining = 75% discount.",
+    "L3": "The discount is 75%, so the original price is x - 0.75x = 0.25x.",
+    "L4": "The sale price is $6, so $6 = 0.75x, which is the same as 6/0.75 = x.",
+    "L5": "X = $<<8=8>>8.",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'discount_decimal' (value: 0.75) was used instead of 'sale_price_factor' (value: 0.25).",
+  "repro_seed": -987952251599572456,
+  "model_name": "google_gemini-2.5-flash"
+}

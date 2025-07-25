@@ -1,0 +1,93 @@
+{
+  "index": 5908,
+  "original_solution_mapping": {
+    "FA": "#### 1",
+    "L1": "There were 4*5=<<4*5=20>>20 trees to clean",
+    "L2": "So it took 20*6=<<20*6=120>>120 minutes",
+    "L3": "That is 120/60=<<120/60=2>>2 hours",
+    "L4": "So he spent 2/2=<<2/2=1>>1 hour cleaning"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5908.\n    Returns: the total number of hours spent cleaning trees.\n    \"\"\"\n    # L1\n    trees_row = 4 # 4 trees by 5 trees\n    trees_col = 5 # 4 trees by 5 trees\n    total_trees = trees_row * trees_col\n\n    # L2\n    minutes_per_tree = 6 # 6 minutes to clean each tree\n    total_minutes_original = total_trees * minutes_per_tree\n\n    # L3\n    minutes_per_hour = 60 # WK\n    total_hours_original = total_minutes_original / minutes_per_hour\n\n    # L4\n    help_divisor = 2 # half as long\n    actual_hours_spent = total_hours_original / help_divisor\n\n    # FA\n    answer = actual_hours_spent\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_hours_original",
+    "operand_to_replace": "minutes_per_hour",
+    "replacement_variable": "minutes_per_tree"
+  },
+  "correct_trace": {
+    "trees_row": 4,
+    "trees_col": 5,
+    "total_trees": 20,
+    "minutes_per_tree": 6,
+    "total_minutes_original": 120,
+    "minutes_per_hour": 60,
+    "total_hours_original": 2.0,
+    "help_divisor": 2,
+    "actual_hours_spent": 1.0,
+    "answer": 1.0
+  },
+  "flawed_trace": {
+    "trees_row": 4,
+    "trees_col": 5,
+    "total_trees": 20,
+    "minutes_per_tree": 6,
+    "total_minutes_original": 120,
+    "minutes_per_hour": 60,
+    "total_hours_original": 20.0,
+    "help_divisor": 2,
+    "actual_hours_spent": 10.0,
+    "answer": 10.0
+  },
+  "correct_value": 2.0,
+  "flawed_value": 20.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_trees",
+      "question_inputs": [
+        "trees_row",
+        "trees_col"
+      ],
+      "solution_line_template": "There were {trees_row}*{trees_col}=<<{trees_row}*{trees_col}={total_trees}>>{total_trees} trees to clean"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_minutes_original",
+      "question_inputs": [
+        "minutes_per_tree"
+      ],
+      "solution_line_template": "So it took {total_trees}*{minutes_per_tree}=<<{total_trees}*{minutes_per_tree}={total_minutes_original}>>{total_minutes_original} minutes"
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_hours_original",
+      "question_inputs": [],
+      "solution_line_template": "That is {total_minutes_original}/{minutes_per_hour}=<<{total_minutes_original}/{minutes_per_hour}={total_hours_original}>>{total_hours_original} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "actual_hours_spent",
+      "question_inputs": [
+        "help_divisor"
+      ],
+      "solution_line_template": "So he spent {total_hours_original}/{help_divisor}=<<{total_hours_original}/{help_divisor}={actual_hours_spent}>>{actual_hours_spent} hour cleaning"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There were 4*5=<<4*5=20>>20 trees to clean",
+    "L2": "So it took 20*6=<<20*6=120>>120 minutes",
+    "L3": "That is 120/6=<<120/6=20>>20 hours",
+    "L4": "So he spent 20/2=<<20/2=10>>10 hour cleaning",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'minutes_per_tree' (6) was used instead of 'minutes_per_hour' (60).",
+  "repro_seed": -4733780510674042071,
+  "model_name": "google_gemini-2.5-flash"
+}

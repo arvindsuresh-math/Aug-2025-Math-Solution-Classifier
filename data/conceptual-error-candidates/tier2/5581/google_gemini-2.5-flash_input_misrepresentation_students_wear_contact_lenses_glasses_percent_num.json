@@ -1,0 +1,89 @@
+{
+  "index": 5581,
+  "original_solution_mapping": {
+    "FA": "#### 14",
+    "L1": "There are 40 x 25% = <<40*25*.01=10>>10 students who wear glasses.",
+    "L2": "There are 40 x 40% = <<40*40*.01=16>>16 students who wear contact lenses.",
+    "L3": "There are 10 + 16 = <<10+16=26>>26 students who wear vision assistance.",
+    "L4": "There are 40 - 26 = <<40-26=14>>14 students who do not wear any vision assistance wear."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5581.\n    Returns: the number of students who do not wear any vision assistance.\n    \"\"\"\n    # L1\n    total_students = 40 # 40 students\n    glasses_percent_num = 25 # 25% of them wear glasses\n    percent_factor = 0.01 # WK\n    students_wear_glasses = total_students * glasses_percent_num * percent_factor\n\n    # L2\n    contact_lenses_percent_num = 40 # 40% of them wear contact lenses\n    students_wear_contact_lenses = total_students * contact_lenses_percent_num * percent_factor\n\n    # L3\n    students_wear_vision_assistance = students_wear_glasses + students_wear_contact_lenses\n\n    # L4\n    students_no_vision_assistance = total_students - students_wear_vision_assistance\n\n    # FA\n    answer = students_no_vision_assistance\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "students_wear_contact_lenses",
+    "operand_to_replace": "contact_lenses_percent_num",
+    "replacement_variable": "glasses_percent_num"
+  },
+  "correct_trace": {
+    "total_students": 40,
+    "glasses_percent_num": 25,
+    "percent_factor": 0.01,
+    "students_wear_glasses": 10.0,
+    "contact_lenses_percent_num": 40,
+    "students_wear_contact_lenses": 16.0,
+    "students_wear_vision_assistance": 26.0,
+    "students_no_vision_assistance": 14.0,
+    "answer": 14.0
+  },
+  "flawed_trace": {
+    "total_students": 40,
+    "glasses_percent_num": 25,
+    "percent_factor": 0.01,
+    "students_wear_glasses": 10.0,
+    "contact_lenses_percent_num": 40,
+    "students_wear_contact_lenses": 10.0,
+    "students_wear_vision_assistance": 20.0,
+    "students_no_vision_assistance": 20.0,
+    "answer": 20.0
+  },
+  "correct_value": 16.0,
+  "flawed_value": 10.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "students_wear_glasses",
+      "question_inputs": [
+        "total_students",
+        "glasses_percent_num"
+      ],
+      "solution_line_template": "There are {total_students} x {glasses_percent_num}% = <<{total_students}*{glasses_percent_num}*{percent_factor}={students_wear_glasses}>>{students_wear_glasses} students who wear glasses."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "students_wear_contact_lenses",
+      "question_inputs": [
+        "contact_lenses_percent_num"
+      ],
+      "solution_line_template": "There are {total_students} x {contact_lenses_percent_num}% = <<{total_students}*{contact_lenses_percent_num}*{percent_factor}={students_wear_contact_lenses}>>{students_wear_contact_lenses} students who wear contact lenses."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "students_wear_vision_assistance",
+      "question_inputs": [],
+      "solution_line_template": "There are {students_wear_glasses} + {students_wear_contact_lenses} = <<{students_wear_glasses}+{students_wear_contact_lenses}={students_wear_vision_assistance}>>{students_wear_vision_assistance} students who wear vision assistance."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "students_no_vision_assistance",
+      "question_inputs": [],
+      "solution_line_template": "There are {total_students} - {students_wear_vision_assistance} = <<{total_students}-{students_wear_vision_assistance}={students_no_vision_assistance}>>{students_no_vision_assistance} students who do not wear any vision assistance wear."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 40 x 25% = <<40*25*0.01=10>>10 students who wear glasses.",
+    "L2": "There are 40 x 25% = <<40*25*0.01=10>>10 students who wear contact lenses.",
+    "L3": "There are 10 + 10 = <<10+10=20>>20 students who wear vision assistance.",
+    "L4": "There are 40 - 20 = <<40-20=20>>20 students who do not wear any vision assistance wear.",
+    "FA": "#### 20"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'glasses_percent_num' (25) was used instead of 'contact_lenses_percent_num' (40).",
+  "repro_seed": 1875556698767836352,
+  "model_name": "google_gemini-2.5-flash"
+}

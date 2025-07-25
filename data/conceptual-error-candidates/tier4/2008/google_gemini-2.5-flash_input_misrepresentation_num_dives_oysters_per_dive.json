@@ -1,0 +1,63 @@
+{
+  "index": 2008,
+  "original_solution_mapping": {
+    "FA": "#### 14",
+    "L1": "First find how many pearls Jamie collects per dive by multiplying the number of oysters by the chance each oyster has a pearl: .25 pearls/oyster * 16 oysters/dive = 4 pearls/dive",
+    "L2": "Then divide the number of pearls he wants by the number of pearls per dive to find the number of dives: 56 pearls / 4 pearls/dive = <<56/4=14>>14 pearls/dive"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2008.\n    Returns: the number of dives Jamie has to make.\n    \"\"\"\n    # L1\n    pearl_percentage_decimal = 0.25 # 25% of oysters have pearls in them\n    oysters_per_dive = 16 # collect 16 oysters during each dive\n    pearls_per_dive = pearl_percentage_decimal * oysters_per_dive\n\n    # L2\n    target_pearls = 56 # collect 56 pearls\n    num_dives = target_pearls / pearls_per_dive\n\n    # FA\n    answer = num_dives\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "num_dives",
+    "operand_to_replace": "target_pearls",
+    "replacement_variable": "oysters_per_dive"
+  },
+  "correct_trace": {
+    "pearl_percentage_decimal": 0.25,
+    "oysters_per_dive": 16,
+    "pearls_per_dive": 4.0,
+    "target_pearls": 56,
+    "num_dives": 14.0,
+    "answer": 14.0
+  },
+  "flawed_trace": {
+    "pearl_percentage_decimal": 0.25,
+    "oysters_per_dive": 16,
+    "pearls_per_dive": 4.0,
+    "target_pearls": 56,
+    "num_dives": 4.0,
+    "answer": 4.0
+  },
+  "correct_value": 14.0,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "pearls_per_dive",
+      "question_inputs": [
+        "pearl_percentage_decimal",
+        "oysters_per_dive"
+      ],
+      "solution_line_template": "First find how many pearls Jamie collects per dive by multiplying the number of oysters by the chance each oyster has a pearl: {pearl_percentage_decimal} pearls/oyster * {oysters_per_dive} oysters/dive = {pearls_per_dive} pearls/dive"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_dives",
+      "question_inputs": [
+        "target_pearls"
+      ],
+      "solution_line_template": "Then divide the number of pearls he wants by the number of pearls per dive to find the number of dives: {target_pearls} pearls / {pearls_per_dive} pearls/dive = <<{target_pearls}/{pearls_per_dive}={num_dives}>>{num_dives} pearls/dive"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how many pearls Jamie collects per dive by multiplying the number of oysters by the chance each oyster has a pearl: 0.25 pearls/oyster * 16 oysters/dive = 4 pearls/dive",
+    "L2": "Then divide the number of pearls he wants by the number of pearls per dive to find the number of dives: 16 pearls / 4 pearls/dive = <<16/4=4>>4 pearls/dive",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'oysters_per_dive' (16) was used instead of 'target_pearls' (56).",
+  "repro_seed": 3338918966535499470,
+  "model_name": "google_gemini-2.5-flash"
+}

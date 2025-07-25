@@ -1,0 +1,90 @@
+{
+  "index": 2750,
+  "original_solution_mapping": {
+    "FA": "#### 2600",
+    "L1": "From babysitting Julie, Zoe made 3 * 600 = <<3*600=1800>>1800 dollars, since she made $600 babysitting Zachary and she babysat Julie three times as often",
+    "L2": "Since she babysat Zachary 1/5 as often as she babysat Chloe, she made an additional 5 * 600 = <<5*600=3000>>3000 dollars from babysitting Chloe.",
+    "L3": "All together, the babysitting sessions made Zoe 600 + 1800 + 3000 = <<600+1800+3000=5400>>5400 dollars",
+    "L4": "Subtracting babysitting payments from the total gives 8000 - 5400 = <<8000-5400=2600>>2600 dollars",
+    "L5": "Zoe therefore made 2600 dollars cleaning pools."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2750.\n    Returns: the amount Zoe earned from pool cleaning.\n    \"\"\"\n    # L1\n    julie_multiplier = 3 # three times as often as she babysat Zachary\n    zachary_earnings = 600 # made $600 babysitting Zachary\n    julie_earnings = julie_multiplier * zachary_earnings\n\n    # L2\n    chloe_multiplier = 5 # 1/5 the number of times she babysat Chloe (implies Chloe's earnings are 5 times Zachary's)\n    chloe_earnings = chloe_multiplier * zachary_earnings\n\n    # L3\n    total_babysitting_earnings = zachary_earnings + julie_earnings + chloe_earnings\n\n    # L4\n    total_earnings = 8000 # total of $8,000\n    pool_cleaning_earnings = total_earnings - total_babysitting_earnings\n\n    # FA\n    answer = pool_cleaning_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "pool_cleaning_earnings",
+    "operand_to_replace": "total_babysitting_earnings",
+    "replacement_variable": "zachary_earnings"
+  },
+  "correct_trace": {
+    "julie_multiplier": 3,
+    "zachary_earnings": 600,
+    "julie_earnings": 1800,
+    "chloe_multiplier": 5,
+    "chloe_earnings": 3000,
+    "total_babysitting_earnings": 5400,
+    "total_earnings": 8000,
+    "pool_cleaning_earnings": 2600,
+    "answer": 2600
+  },
+  "flawed_trace": {
+    "julie_multiplier": 3,
+    "zachary_earnings": 600,
+    "julie_earnings": 1800,
+    "chloe_multiplier": 5,
+    "chloe_earnings": 3000,
+    "total_babysitting_earnings": 5400,
+    "total_earnings": 8000,
+    "pool_cleaning_earnings": 7400,
+    "answer": 7400
+  },
+  "correct_value": 2600,
+  "flawed_value": 7400,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "julie_earnings",
+      "question_inputs": [
+        "julie_multiplier",
+        "zachary_earnings"
+      ],
+      "solution_line_template": "From babysitting Julie, Zoe made {julie_multiplier} * {zachary_earnings} = <<{julie_multiplier}*{zachary_earnings}={julie_earnings}>>{julie_earnings} dollars, since she made ${zachary_earnings} babysitting Zachary and she babysat Julie three times as often"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "chloe_earnings",
+      "question_inputs": [
+        "chloe_multiplier"
+      ],
+      "solution_line_template": "Since she babysat Zachary 1/5 as often as she babysat Chloe, she made an additional {chloe_multiplier} * {zachary_earnings} = <<{chloe_multiplier}*{zachary_earnings}={chloe_earnings}>>{chloe_earnings} dollars from babysitting Chloe."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_babysitting_earnings",
+      "question_inputs": [],
+      "solution_line_template": "All together, the babysitting sessions made Zoe {zachary_earnings} + {julie_earnings} + {chloe_earnings} = <<{zachary_earnings}+{julie_earnings}+{chloe_earnings}={total_babysitting_earnings}>>{total_babysitting_earnings} dollars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "pool_cleaning_earnings",
+      "question_inputs": [
+        "total_earnings"
+      ],
+      "solution_line_template": "Subtracting babysitting payments from the total gives {total_earnings} - {total_babysitting_earnings} = <<{total_earnings}-{total_babysitting_earnings}={pool_cleaning_earnings}>>{pool_cleaning_earnings} dollars"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "From babysitting Julie, Zoe made 3 * 600 = <<3*600=1800>>1800 dollars, since she made $600 babysitting Zachary and she babysat Julie three times as often",
+    "L2": "Since she babysat Zachary 1/5 as often as she babysat Chloe, she made an additional 5 * 600 = <<5*600=3000>>3000 dollars from babysitting Chloe.",
+    "L3": "All together, the babysitting sessions made Zoe 600 + 1800 + 3000 = <<600+1800+3000=5400>>5400 dollars",
+    "L4": "Subtracting babysitting payments from the total gives 8000 - 600 = <<8000-600=7400>>7400 dollars",
+    "FA": "#### 7400"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'zachary_earnings' (value: 600) was used instead of 'total_babysitting_earnings' (value: 5400).",
+  "repro_seed": -1278199175805067705,
+  "model_name": "google_gemini-2.5-flash"
+}

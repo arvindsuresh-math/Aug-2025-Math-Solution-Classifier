@@ -1,0 +1,92 @@
+{
+  "index": 5807,
+  "original_solution_mapping": {
+    "FA": "#### 780",
+    "L1": "On the first day, they started off doing one round of 30 minutes.",
+    "L2": "The team did ten more rounds on day one which took 10*30 = <<10*30=300>>300 minutes.",
+    "L3": "The total time they took circumnavigating the land on the first day is 300+30 = <<300+30=330>>330 minutes.",
+    "L4": "On the second day, they did 15 rounds, which took 30 minutes each, giving 15*30 = <<15*30=450>>450 minutes.",
+    "L5": "The total number of rounds took 330+450 = <<330+450=780>>780 minutes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5807.\n    Returns: the total time, in minutes, the Polar Bears spent circling the island over that weekend.\n    \"\"\"\n    # L2\n    time_per_round = 30 # 30 minutes to fully navigate\n    additional_rounds_saturday = 10 # 10 more round that day\n    time_additional_rounds_saturday = additional_rounds_saturday * time_per_round\n\n    # L3\n    initial_rounds_saturday = 1 # rounding the island once\n    time_initial_round_saturday = initial_rounds_saturday * time_per_round\n    total_time_saturday = time_additional_rounds_saturday + time_initial_round_saturday\n\n    # L4\n    rounds_sunday = 15 # 15 rounds\n    total_time_sunday = rounds_sunday * time_per_round\n\n    # L5\n    total_time_weekend = total_time_saturday + total_time_sunday\n\n    # FA\n    answer = total_time_weekend\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "time_additional_rounds_saturday",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x309b9a4d0>"
+  },
+  "correct_trace": {
+    "time_per_round": 30,
+    "additional_rounds_saturday": 10,
+    "time_additional_rounds_saturday": 300,
+    "initial_rounds_saturday": 1,
+    "time_initial_round_saturday": 30,
+    "total_time_saturday": 330,
+    "rounds_sunday": 15,
+    "total_time_sunday": 450,
+    "total_time_weekend": 780,
+    "answer": 780
+  },
+  "flawed_trace": {
+    "time_per_round": 30,
+    "additional_rounds_saturday": 10,
+    "time_additional_rounds_saturday": 40,
+    "initial_rounds_saturday": 1,
+    "time_initial_round_saturday": 30,
+    "total_time_saturday": 70,
+    "rounds_sunday": 15,
+    "total_time_sunday": 450,
+    "total_time_weekend": 520,
+    "answer": 520
+  },
+  "correct_value": 300,
+  "flawed_value": 40,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "time_additional_rounds_saturday",
+      "question_inputs": [
+        "additional_rounds_saturday",
+        "time_per_round"
+      ],
+      "solution_line_template": "The team did {additional_rounds_saturday} more rounds on day one which took {additional_rounds_saturday}*{time_per_round} = <<{additional_rounds_saturday}*{time_per_round}={time_additional_rounds_saturday}>>{time_additional_rounds_saturday} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_time_saturday",
+      "question_inputs": [
+        "initial_rounds_saturday"
+      ],
+      "solution_line_template": "The total time they took circumnavigating the land on the first day is {time_additional_rounds_saturday}+{time_initial_round_saturday} = <<{time_additional_rounds_saturday}+{time_initial_round_saturday}={total_time_saturday}>>{total_time_saturday} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_time_sunday",
+      "question_inputs": [
+        "rounds_sunday"
+      ],
+      "solution_line_template": "On the second day, they did {rounds_sunday} rounds, which took {time_per_round} minutes each, giving {rounds_sunday}*{time_per_round} = <<{rounds_sunday}*{time_per_round}={total_time_sunday}>>{total_time_sunday} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_time_weekend",
+      "question_inputs": [],
+      "solution_line_template": "The total number of rounds took {total_time_saturday}+{total_time_sunday} = <<{total_time_saturday}+{total_time_sunday}={total_time_weekend}>>{total_time_weekend} minutes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "The team did 10 more rounds on day one which took 10*30 = <<10*30=40>>40 minutes.",
+    "L3": "The total time they took circumnavigating the land on the first day is 40+30 = <<40+30=70>>70 minutes.",
+    "L4": "On the second day, they did 15 rounds, which took 30 minutes each, giving 15*30 = <<15*30=450>>450 minutes.",
+    "L5": "The total number of rounds took 70+450 = <<70+450=520>>520 minutes.",
+    "FA": "#### 520"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -7851086981508387304,
+  "model_name": "google_gemini-2.5-flash"
+}

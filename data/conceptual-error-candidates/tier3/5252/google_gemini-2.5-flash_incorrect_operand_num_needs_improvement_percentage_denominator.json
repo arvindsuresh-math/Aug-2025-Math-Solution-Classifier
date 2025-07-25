@@ -1,0 +1,104 @@
+{
+  "index": 5252,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "The total percentage of those who rated Excellent or Very Satisfactory is 15% + 60% = 75%.",
+    "L2": "Seventy-five percent of the parents is 120 x 75/100 = <<120*75/100=90>>90.",
+    "L3": "Hence, 120 - 90 = <<120-90=30>>30 students rated either Satisfactory or Needs Improvement.",
+    "L4": "A total of 30 x 80/100 = <<30*80/100=24>>24 parents rated Satisfactory.",
+    "L5": "Therefore, 30 - 24 = <<30-24=6>>6 parents rated Needs Improvement."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5252.\n    Returns: the number of parents who rated Needs Improvement.\n    \"\"\"\n    # L1\n    excellent_percentage = 15 # Fifteen percent of the respondents rated Excellent\n    very_satisfactory_percentage = 60 # 60% rated Very Satisfactory\n    total_excellent_very_satisfactory_percentage = excellent_percentage + very_satisfactory_percentage\n\n    # L2\n    total_parents = 120 # 120 parents answered the survey\n    percentage_denominator = 100 # WK\n    num_excellent_very_satisfactory = total_parents * total_excellent_very_satisfactory_percentage / percentage_denominator\n\n    # L3\n    remaining_parents = total_parents - num_excellent_very_satisfactory\n\n    # L4\n    satisfactory_percentage = 80 # 80% of the remaining respondents rated Satisfactory\n    num_satisfactory = remaining_parents * satisfactory_percentage / percentage_denominator\n\n    # L5\n    num_needs_improvement = remaining_parents - num_satisfactory\n\n    # FA\n    answer = num_needs_improvement\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "num_needs_improvement",
+    "operand_to_replace": "remaining_parents",
+    "replacement_variable": "percentage_denominator"
+  },
+  "correct_trace": {
+    "excellent_percentage": 15,
+    "very_satisfactory_percentage": 60,
+    "total_excellent_very_satisfactory_percentage": 75,
+    "total_parents": 120,
+    "percentage_denominator": 100,
+    "num_excellent_very_satisfactory": 90.0,
+    "remaining_parents": 30.0,
+    "satisfactory_percentage": 80,
+    "num_satisfactory": 24.0,
+    "num_needs_improvement": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "excellent_percentage": 15,
+    "very_satisfactory_percentage": 60,
+    "total_excellent_very_satisfactory_percentage": 75,
+    "total_parents": 120,
+    "percentage_denominator": 100,
+    "num_excellent_very_satisfactory": 90.0,
+    "remaining_parents": 30.0,
+    "satisfactory_percentage": 80,
+    "num_satisfactory": 24.0,
+    "num_needs_improvement": 76.0,
+    "answer": 76.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 76.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_excellent_very_satisfactory_percentage",
+      "question_inputs": [
+        "excellent_percentage",
+        "very_satisfactory_percentage"
+      ],
+      "solution_line_template": "The total percentage of those who rated Excellent or Very Satisfactory is {excellent_percentage}% + {very_satisfactory_percentage}% = {total_excellent_very_satisfactory_percentage}%."
+    },
+    {
+      "WK_inputs": [
+        "percentage_denominator"
+      ],
+      "line_number": "L2",
+      "output_variable": "num_excellent_very_satisfactory",
+      "question_inputs": [
+        "total_parents"
+      ],
+      "solution_line_template": "Seventy-five percent of the parents is {total_parents} x {total_excellent_very_satisfactory_percentage}/{percentage_denominator} = <<{total_parents}*{total_excellent_very_satisfactory_percentage}/{percentage_denominator}={num_excellent_very_satisfactory}>>{num_excellent_very_satisfactory}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_parents",
+      "question_inputs": [],
+      "solution_line_template": "Hence, {total_parents} - {num_excellent_very_satisfactory} = <<{total_parents}-{num_excellent_very_satisfactory}={remaining_parents}>>{remaining_parents} students rated either Satisfactory or Needs Improvement."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "num_satisfactory",
+      "question_inputs": [
+        "satisfactory_percentage"
+      ],
+      "solution_line_template": "A total of {remaining_parents} x {satisfactory_percentage}/{percentage_denominator} = <<{remaining_parents}*{satisfactory_percentage}/{percentage_denominator}={num_satisfactory}>>{num_satisfactory} parents rated Satisfactory."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "num_needs_improvement",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, {remaining_parents} - {num_satisfactory} = <<{remaining_parents}-{num_satisfactory}={num_needs_improvement}>>{num_needs_improvement} parents rated Needs Improvement."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total percentage of those who rated Excellent or Very Satisfactory is 15% + 60% = 75%.",
+    "L2": "Seventy-five percent of the parents is 120 x 75/100 = <<120*75/100=90>>90.",
+    "L3": "Hence, 120 - 90 = <<120-90=30>>30 students rated either Satisfactory or Needs Improvement.",
+    "L4": "A total of 30 x 80/100 = <<30*80/100=24>>24 parents rated Satisfactory.",
+    "L5": "Therefore, 100 - 24 = <<100-24=76>>76 parents rated Needs Improvement.",
+    "FA": "#### 76"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operand. The variable 'percentage_denominator' (value: 100) was used instead of 'remaining_parents' (value: 30.0).",
+  "repro_seed": -7465254405296907384,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,69 @@
+{
+  "index": 6680,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "From all the computers, 100% - 40% - 20% = 40% got fixed right away.",
+    "L2": "So John was able to fix 40/100 * 20 = <<40/100*20=8>>8 computers."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6680.\n    Returns: the number of computers John was able to fix right away.\n    \"\"\"\n    # L1\n    total_percentage = 100 # WK\n    waiting_percentage = 40 # 40% of them needed to wait\n    unfixable_percentage = 20 # 20% of them were unfixable\n    fixed_right_away_percentage = total_percentage - waiting_percentage - unfixable_percentage\n\n    # L2\n    fixed_right_away_fraction = Fraction(fixed_right_away_percentage, 100)\n    total_computers = 20 # fix 20 computers\n    computers_fixed_right_away = fixed_right_away_fraction * total_computers\n\n    # FA\n    answer = computers_fixed_right_away\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "computers_fixed_right_away",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x16abc8090>"
+  },
+  "correct_trace": {
+    "total_percentage": 100,
+    "waiting_percentage": 40,
+    "unfixable_percentage": 20,
+    "fixed_right_away_percentage": 40,
+    "fixed_right_away_fraction": "2/5",
+    "total_computers": 20,
+    "computers_fixed_right_away": "8",
+    "answer": "8"
+  },
+  "flawed_trace": {
+    "total_percentage": 100,
+    "waiting_percentage": 40,
+    "unfixable_percentage": 20,
+    "fixed_right_away_percentage": 40,
+    "fixed_right_away_fraction": "2/5",
+    "total_computers": 20,
+    "computers_fixed_right_away": "102/5",
+    "answer": "102/5"
+  },
+  "correct_value": "8",
+  "flawed_value": "102/5",
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_percentage"
+      ],
+      "line_number": "L1",
+      "output_variable": "fixed_right_away_percentage",
+      "question_inputs": [
+        "waiting_percentage",
+        "unfixable_percentage"
+      ],
+      "solution_line_template": "From all the computers, {total_percentage}% - {waiting_percentage}% - {unfixable_percentage}% = {fixed_right_away_percentage}% got fixed right away."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "computers_fixed_right_away",
+      "question_inputs": [
+        "total_computers"
+      ],
+      "solution_line_template": "So John was able to fix {fixed_right_away_fraction} * {total_computers} = <<{fixed_right_away_fraction}*{total_computers}={computers_fixed_right_away}>>{computers_fixed_right_away} computers."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "From all the computers, 100% - 40% - 20% = 40% got fixed right away.",
+    "L2": "So John was able to fix 40/100 * 20 = <<40/100*20=102/5>>102/5 computers.",
+    "FA": "#### 102/5"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 1223638546715532346,
+  "model_name": "google_gemini-2.5-flash"
+}

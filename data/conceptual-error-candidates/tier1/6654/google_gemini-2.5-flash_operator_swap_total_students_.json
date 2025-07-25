@@ -1,0 +1,63 @@
+{
+  "index": 6654,
+  "original_solution_mapping": {
+    "FA": "#### 360",
+    "L1": "John has 6*30=<<6*30=180>>180 students",
+    "L2": "So he bought 180*2=<<180*2=360>>360 packs"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6654.\n    Returns: the total number of packs John bought according to the solution's interpretation.\n    \"\"\"\n    # L1\n    num_classes = 6 # 6 classes\n    students_per_class = 30 # 30 students in each class\n    total_students = num_classes * students_per_class\n\n    # L2\n    packs_per_student = 2 # 2 packs of index cards for all his students (interpreted as per student by the solution)\n    total_packs = total_students * packs_per_student\n\n    # FA\n    answer = total_packs\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_students",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30b28a610>"
+  },
+  "correct_trace": {
+    "num_classes": 6,
+    "students_per_class": 30,
+    "total_students": 180,
+    "packs_per_student": 2,
+    "total_packs": 360,
+    "answer": 360
+  },
+  "flawed_trace": {
+    "num_classes": 6,
+    "students_per_class": 30,
+    "total_students": 36,
+    "packs_per_student": 2,
+    "total_packs": 72,
+    "answer": 72
+  },
+  "correct_value": 180,
+  "flawed_value": 36,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_students",
+      "question_inputs": [
+        "num_classes",
+        "students_per_class"
+      ],
+      "solution_line_template": "John has {num_classes}*{students_per_class}=<<{num_classes}*{students_per_class}={total_students}>>{total_students} students"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_packs",
+      "question_inputs": [
+        "packs_per_student"
+      ],
+      "solution_line_template": "So he bought {total_students}*{packs_per_student}=<<{total_students}*{packs_per_student}={total_packs}>>{total_packs} packs"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "John has 6*30=<<6*30=36>>36 students",
+    "L2": "So he bought 36*2=<<36*2=72>>72 packs",
+    "FA": "#### 72"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 8359247660296245919,
+  "model_name": "google_gemini-2.5-flash"
+}

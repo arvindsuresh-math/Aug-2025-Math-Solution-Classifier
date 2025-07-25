@@ -1,0 +1,81 @@
+{
+  "index": 4202,
+  "original_solution_mapping": {
+    "FA": "#### 45",
+    "L1": "It takes 15 minutes to bake, 30 minutes for the white icing to harden and 30 minutes for the chocolate icing to harden so it takes 15+30+30 = <<15+30+30=75>>75 minutes",
+    "L2": "Every hour has 60 minutes and it takes her 2 hours so it takes 60*2 = <<60*2=120>>120 minutes to make the cookies",
+    "L3": "It takes 120 minutes to make the cookies from start to finish and she spends 75 minutes baking and hardening icing so it takes her 120-75=<<120-75=45>>45 minutes to make the batter and cool the cookies"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4202.\n    Returns: the time it takes to make the dough and cool the cookies.\n    \"\"\"\n    # L1\n    bake_time = 15 # bake the cookies for 15 minutes\n    white_icing_harden_time = 30 # allow the icing to harden for 30 minutes\n    chocolate_icing_harden_time = 30 # allowed to harden for an additional 30 minutes\n    total_fixed_time = bake_time + white_icing_harden_time + chocolate_icing_harden_time\n\n    # L2\n    minutes_per_hour = 60 # WK\n    total_hours = 2 # 2 hours to make the cookies from start to finish\n    total_time_in_minutes = minutes_per_hour * total_hours\n\n    # L3\n    dough_and_cool_time = total_time_in_minutes - total_fixed_time\n\n    # FA\n    answer = dough_and_cool_time\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_fixed_time",
+    "operand_to_replace": "chocolate_icing_harden_time",
+    "replacement_variable": "bake_time"
+  },
+  "correct_trace": {
+    "bake_time": 15,
+    "white_icing_harden_time": 30,
+    "chocolate_icing_harden_time": 30,
+    "total_fixed_time": 75,
+    "minutes_per_hour": 60,
+    "total_hours": 2,
+    "total_time_in_minutes": 120,
+    "dough_and_cool_time": 45,
+    "answer": 45
+  },
+  "flawed_trace": {
+    "bake_time": 15,
+    "white_icing_harden_time": 30,
+    "chocolate_icing_harden_time": 30,
+    "total_fixed_time": 60,
+    "minutes_per_hour": 60,
+    "total_hours": 2,
+    "total_time_in_minutes": 120,
+    "dough_and_cool_time": 60,
+    "answer": 60
+  },
+  "correct_value": 75,
+  "flawed_value": 60,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_fixed_time",
+      "question_inputs": [
+        "bake_time",
+        "white_icing_harden_time",
+        "chocolate_icing_harden_time"
+      ],
+      "solution_line_template": "It takes {bake_time} minutes to bake, {white_icing_harden_time} minutes for the white icing to harden and {chocolate_icing_harden_time} minutes for the chocolate icing to harden so it takes {bake_time}+{white_icing_harden_time}+{chocolate_icing_harden_time} = <<{bake_time}+{white_icing_harden_time}+{chocolate_icing_harden_time}={total_fixed_time}>>{total_fixed_time} minutes"
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_time_in_minutes",
+      "question_inputs": [
+        "total_hours"
+      ],
+      "solution_line_template": "Every hour has {minutes_per_hour} minutes and it takes her {total_hours} hours so it takes {minutes_per_hour}*{total_hours} = <<{minutes_per_hour}*{total_hours}={total_time_in_minutes}>>{total_time_in_minutes} minutes to make the cookies"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "dough_and_cool_time",
+      "question_inputs": [],
+      "solution_line_template": "It takes {total_time_in_minutes} minutes to make the cookies from start to finish and she spends {total_fixed_time} minutes baking and hardening icing so it takes her {total_time_in_minutes}-{total_fixed_time}=<<{total_time_in_minutes}-{total_fixed_time}={dough_and_cool_time}>>{dough_and_cool_time} minutes to make the batter and cool the cookies"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "It takes 15 minutes to bake, 30 minutes for the white icing to harden and 15 minutes for the chocolate icing to harden so it takes 15+30+15 = <<15+30+15=60>>60 minutes",
+    "L2": "Every hour has 60 minutes and it takes her 2 hours so it takes 60*2 = <<60*2=120>>120 minutes to make the cookies",
+    "L3": "It takes 120 minutes to make the cookies from start to finish and she spends 60 minutes baking and hardening icing so it takes her 120-60=<<120-60=60>>60 minutes to make the batter and cool the cookies",
+    "FA": "#### 60"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'bake_time' (15) was used instead of 'chocolate_icing_harden_time' (30).",
+  "repro_seed": 5137416685433071120,
+  "model_name": "google_gemini-2.5-flash"
+}

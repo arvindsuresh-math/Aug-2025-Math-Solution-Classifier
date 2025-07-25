@@ -1,0 +1,103 @@
+{
+  "index": 2743,
+  "original_solution_mapping": {
+    "FA": "#### 3000",
+    "L1": "They sold 2000*.9=<<2000*.9=1800>>1800 items",
+    "L2": "They offered a 50*.8=$<<50*.8=40>>40 discount",
+    "L3": "That means that each item sold for 50-40=$<<50-40=10>>10",
+    "L4": "So they made 1800*10=$<<1800*10=18000>>18,000",
+    "L5": "So they had 18,000-15,000=$<<18000-15000=3000>>3,000 leftover"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2743.\n    Returns: the amount of money left after the sale.\n    \"\"\"\n    # L1\n    total_items = 2000 # 2000 different items\n    items_sold_percent = 0.9 # sell 90% of the items\n    items_sold = total_items * items_sold_percent\n\n    # L2\n    retail_price = 50 # retail for $50\n    discount_rate = 0.8 # offering an 80% discount\n    discount_amount_per_item = retail_price * discount_rate\n\n    # L3\n    selling_price_per_item = retail_price - discount_amount_per_item\n\n    # L4\n    total_revenue = items_sold * selling_price_per_item\n\n    # L5\n    creditor_debt = 15000 # owed $15000 to their creditors\n    money_left = total_revenue - creditor_debt\n\n    # FA\n    answer = money_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_revenue",
+    "operand_to_replace": "selling_price_per_item",
+    "replacement_variable": "retail_price"
+  },
+  "correct_trace": {
+    "total_items": 2000,
+    "items_sold_percent": 0.9,
+    "items_sold": 1800.0,
+    "retail_price": 50,
+    "discount_rate": 0.8,
+    "discount_amount_per_item": 40.0,
+    "selling_price_per_item": 10.0,
+    "total_revenue": 18000.0,
+    "creditor_debt": 15000,
+    "money_left": 3000.0,
+    "answer": 3000.0
+  },
+  "flawed_trace": {
+    "total_items": 2000,
+    "items_sold_percent": 0.9,
+    "items_sold": 1800.0,
+    "retail_price": 50,
+    "discount_rate": 0.8,
+    "discount_amount_per_item": 40.0,
+    "selling_price_per_item": 10.0,
+    "total_revenue": 90000.0,
+    "creditor_debt": 15000,
+    "money_left": 75000.0,
+    "answer": 75000.0
+  },
+  "correct_value": 18000.0,
+  "flawed_value": 90000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "items_sold",
+      "question_inputs": [
+        "total_items",
+        "items_sold_percent"
+      ],
+      "solution_line_template": "They sold {total_items}*{items_sold_percent}=<<{total_items}*{items_sold_percent}={items_sold}>>{items_sold} items"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "discount_amount_per_item",
+      "question_inputs": [
+        "retail_price",
+        "discount_rate"
+      ],
+      "solution_line_template": "They offered a {retail_price}*{discount_rate}=$<<{retail_price}*{discount_rate}={discount_amount_per_item}>>{discount_amount_per_item} discount"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "selling_price_per_item",
+      "question_inputs": [],
+      "solution_line_template": "That means that each item sold for {retail_price}-{discount_amount_per_item}=$<<{retail_price}-{discount_amount_per_item}={selling_price_per_item}>>{selling_price_per_item}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_revenue",
+      "question_inputs": [],
+      "solution_line_template": "So they made {items_sold}*{selling_price_per_item}=$<<{items_sold}*{selling_price_per_item}={total_revenue}>>{total_revenue}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "money_left",
+      "question_inputs": [
+        "creditor_debt"
+      ],
+      "solution_line_template": "So they had {total_revenue}-{creditor_debt}=$<<{total_revenue}-{creditor_debt}={money_left}>>{money_left} leftover"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "They sold 2000*0.9=<<2000*0.9=1800>>1800 items",
+    "L2": "They offered a 50*0.8=$<<50*0.8=40>>40 discount",
+    "L3": "That means that each item sold for 50-40=$<<50-40=10>>10",
+    "L4": "So they made 1800*50=$<<1800*50=90000>>90000",
+    "L5": "So they had 90000-15000=$<<90000-15000=75000>>75000 leftover",
+    "FA": "#### 75000"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'retail_price' (value: 50) was used instead of 'selling_price_per_item' (value: 10.0).",
+  "repro_seed": 1116675178421308418,
+  "model_name": "google_gemini-2.5-flash"
+}

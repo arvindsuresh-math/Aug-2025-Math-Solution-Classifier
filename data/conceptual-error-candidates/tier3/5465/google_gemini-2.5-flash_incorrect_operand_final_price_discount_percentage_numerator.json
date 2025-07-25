@@ -1,0 +1,62 @@
+{
+  "index": 5465,
+  "original_solution_mapping": {
+    "FA": "#### 680",
+    "L1": "There was $800 x 15/100 = $<<800*15/100=120>>120.",
+    "L2": "Thus, Donald will pay $800 - $120 = $<<800-120=680>>680."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5465.\n    Returns: the final price Donald will pay for the laptop.\n    \"\"\"\n    # L1\n    original_price = 800 # laptop originally costs $800\n    discount_percentage_numerator = 15 # 15% reduction\n    discount_percentage_denominator = 100 # 15% reduction\n    discount_amount = original_price * Fraction(discount_percentage_numerator, discount_percentage_denominator)\n\n    # L2\n    final_price = original_price - discount_amount\n\n    # FA\n    answer = final_price\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "final_price",
+    "operand_to_replace": "discount_amount",
+    "replacement_variable": "discount_percentage_numerator"
+  },
+  "correct_trace": {
+    "original_price": 800,
+    "discount_percentage_numerator": 15,
+    "discount_percentage_denominator": 100,
+    "discount_amount": "120",
+    "final_price": "680",
+    "answer": "680"
+  },
+  "flawed_trace": {
+    "original_price": 800,
+    "discount_percentage_numerator": 15,
+    "discount_percentage_denominator": 100,
+    "discount_amount": "120",
+    "final_price": 785,
+    "answer": 785
+  },
+  "correct_value": "680",
+  "flawed_value": 785,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "discount_amount",
+      "question_inputs": [
+        "original_price",
+        "discount_percentage_numerator",
+        "discount_percentage_denominator"
+      ],
+      "solution_line_template": "There was ${original_price} x {discount_percentage_numerator}/{discount_percentage_denominator} = $<<{original_price}*{discount_percentage_numerator}/{discount_percentage_denominator}={discount_amount}>>{discount_amount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "final_price",
+      "question_inputs": [],
+      "solution_line_template": "Thus, Donald will pay ${original_price} - ${discount_amount} = $<<{original_price}-{discount_amount}={final_price}>>{final_price}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There was $800 x 15/100 = $<<800*15/100=120>>120.",
+    "L2": "Thus, Donald will pay $800 - $15 = $<<800-15=785>>785.",
+    "FA": "#### 785"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'discount_percentage_numerator' (value: 15) was used instead of 'discount_amount' (value: 120).",
+  "repro_seed": 7153890930877286291,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 2543,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "He drinks 20 ounces of water a day because 4 x 5 = <<4*5=20>>20",
+    "L2": "The drinks 140 ounces in a week because 7 x 20 = <<7*20=140>>140",
+    "L3": "He will fill it up 4 times because 140 / 35 = <<140/35=4>>4"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2543.\n    Returns: the number of times Matthew will fill his water bottle each week.\n    \"\"\"\n    # L1\n    glasses_per_day = 4 # Matthew drinks 4 glasses of water per day\n    ounces_per_glass = 5 # Each glass is 5 ounces\n    ounces_per_day = glasses_per_day * ounces_per_glass\n\n    # L2\n    days_per_week = 7 # WK\n    ounces_per_week = days_per_week * ounces_per_day\n\n    # L3\n    bottle_capacity = 35 # a 35 ounces water bottle\n    fills_per_week = ounces_per_week / bottle_capacity\n\n    # FA\n    answer = fills_per_week\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "fills_per_week",
+    "operand_to_replace": "bottle_capacity",
+    "replacement_variable": "days_per_week"
+  },
+  "correct_trace": {
+    "glasses_per_day": 4,
+    "ounces_per_glass": 5,
+    "ounces_per_day": 20,
+    "days_per_week": 7,
+    "ounces_per_week": 140,
+    "bottle_capacity": 35,
+    "fills_per_week": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "glasses_per_day": 4,
+    "ounces_per_glass": 5,
+    "ounces_per_day": 20,
+    "days_per_week": 7,
+    "ounces_per_week": 140,
+    "bottle_capacity": 35,
+    "fills_per_week": 20.0,
+    "answer": 20.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 20.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "ounces_per_day",
+      "question_inputs": [
+        "glasses_per_day",
+        "ounces_per_glass"
+      ],
+      "solution_line_template": "He drinks {ounces_per_day} ounces of water a day because {glasses_per_day} x {ounces_per_glass} = <<{glasses_per_day}*{ounces_per_glass}={ounces_per_day}>>{ounces_per_day}"
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L2",
+      "output_variable": "ounces_per_week",
+      "question_inputs": [],
+      "solution_line_template": "The drinks {ounces_per_week} ounces in a week because {days_per_week} x {ounces_per_day} = <<{days_per_week}*{ounces_per_day}={ounces_per_week}>>{ounces_per_week}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "fills_per_week",
+      "question_inputs": [
+        "bottle_capacity"
+      ],
+      "solution_line_template": "He will fill it up {fills_per_week} times because {ounces_per_week} / {bottle_capacity} = <<{ounces_per_week}/{bottle_capacity}={fills_per_week}>>{fills_per_week}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He drinks 20 ounces of water a day because 4 x 5 = <<4*5=20>>20",
+    "L2": "The drinks 140 ounces in a week because 7 x 20 = <<7*20=140>>140",
+    "L3": "He will fill it up 20 times because 140 / 7 = <<140/7=20>>20",
+    "FA": "#### 20"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'days_per_week' (7) was used instead of 'bottle_capacity' (35).",
+  "repro_seed": -3596492058042403697,
+  "model_name": "google_gemini-2.5-flash"
+}

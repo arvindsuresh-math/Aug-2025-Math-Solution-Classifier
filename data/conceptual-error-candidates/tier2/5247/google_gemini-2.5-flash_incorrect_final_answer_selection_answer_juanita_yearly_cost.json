@@ -1,0 +1,93 @@
+{
+  "index": 5247,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "Monday through Saturday Juanita buys the paper for $0.50 so that's 6*$0.50 = $<<6*0.5=3.00>>3.00",
+    "L2": "She spends $2.00 for Sunday and $3.00 for the other 6 days so she spends $2 + $3 = $<<2+3=5.00>>5.00 for the newspaper weekly",
+    "L3": "Over 52 weeks she spends 52*$5 = $<<52*5=260.00>>260.00",
+    "L4": "Juanita spends $260.00 on the newspaper for the year and Grants spends $200.00 a year so Juanita spends $260-$200 = $<<260-200=60.00>>60.00 more"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5247.\n    Returns: how much more money Juanita spends buying the newspaper yearly than Grant.\n    \"\"\"\n    # L1\n    daily_cost_weekday = 0.50 # Monday through Saturday, she spends $0.50\n    weekdays_per_week = 6 # WK\n    weekly_weekday_cost = weekdays_per_week * daily_cost_weekday\n\n    # L2\n    daily_cost_sunday = 2.00 # on Sunday she spends $2.00\n    weekly_total_cost = daily_cost_sunday + weekly_weekday_cost\n\n    # L3\n    weeks_per_year = 52 # WK\n    juanita_yearly_cost = weeks_per_year * weekly_total_cost\n\n    # L4\n    grant_yearly_cost = 200.00 # Grant spends $200.00 a year\n    difference_in_cost = juanita_yearly_cost - grant_yearly_cost\n\n    # FA\n    answer = difference_in_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "difference_in_cost",
+    "replacement_variable": "juanita_yearly_cost"
+  },
+  "correct_trace": {
+    "daily_cost_weekday": 0.5,
+    "weekdays_per_week": 6,
+    "weekly_weekday_cost": 3.0,
+    "daily_cost_sunday": 2.0,
+    "weekly_total_cost": 5.0,
+    "weeks_per_year": 52,
+    "juanita_yearly_cost": 260.0,
+    "grant_yearly_cost": 200.0,
+    "difference_in_cost": 60.0,
+    "answer": 60.0
+  },
+  "flawed_trace": {
+    "daily_cost_weekday": 0.5,
+    "weekdays_per_week": 6,
+    "weekly_weekday_cost": 3.0,
+    "daily_cost_sunday": 2.0,
+    "weekly_total_cost": 5.0,
+    "weeks_per_year": 52,
+    "juanita_yearly_cost": 260.0,
+    "grant_yearly_cost": 200.0,
+    "difference_in_cost": 60.0,
+    "answer": 260.0
+  },
+  "correct_value": 60.0,
+  "flawed_value": 260.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "weekdays_per_week"
+      ],
+      "line_number": "L1",
+      "output_variable": "weekly_weekday_cost",
+      "question_inputs": [
+        "daily_cost_weekday"
+      ],
+      "solution_line_template": "Monday through Saturday Juanita buys the paper for ${daily_cost_weekday} so that's {weekdays_per_week}*${daily_cost_weekday} = $<<{weekdays_per_week}*{daily_cost_weekday}={weekly_weekday_cost}>>{weekly_weekday_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "weekly_total_cost",
+      "question_inputs": [
+        "daily_cost_sunday"
+      ],
+      "solution_line_template": "She spends ${daily_cost_sunday} for Sunday and ${weekly_weekday_cost} for the other 6 days so she spends ${daily_cost_sunday} + ${weekly_weekday_cost} = $<<{daily_cost_sunday}+{weekly_weekday_cost}={weekly_total_cost}>>{weekly_total_cost} for the newspaper weekly"
+    },
+    {
+      "WK_inputs": [
+        "weeks_per_year"
+      ],
+      "line_number": "L3",
+      "output_variable": "juanita_yearly_cost",
+      "question_inputs": [],
+      "solution_line_template": "Over {weeks_per_year} weeks she spends {weeks_per_year}*${weekly_total_cost} = $<<{weeks_per_year}*{weekly_total_cost}={juanita_yearly_cost}>>{juanita_yearly_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "difference_in_cost",
+      "question_inputs": [
+        "grant_yearly_cost"
+      ],
+      "solution_line_template": "Juanita spends ${juanita_yearly_cost} on the newspaper for the year and Grants spends ${grant_yearly_cost} a year so Juanita spends ${juanita_yearly_cost}-${grant_yearly_cost} = $<<{juanita_yearly_cost}-{grant_yearly_cost}={difference_in_cost}>>{difference_in_cost} more"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Monday through Saturday Juanita buys the paper for $0.5 so that's 6*$0.5 = $<<6*0.5=3>>3",
+    "L2": "She spends $2 for Sunday and $3 for the other 6 days so she spends $2 + $3 = $<<2+3=5>>5 for the newspaper weekly",
+    "L3": "Over 52 weeks she spends 52*$5 = $<<52*5=260>>260",
+    "FA": "#### 260"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'juanita_yearly_cost' (value: 260.0) was reported instead of 'difference_in_cost' (value: 60.0).",
+  "repro_seed": 6352663972228330618,
+  "model_name": "google_gemini-2.5-flash"
+}

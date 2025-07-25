@@ -1,0 +1,66 @@
+{
+  "index": 3183,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "There are 400-120-200=<<400-120-200=80>>80 students in music.",
+    "L2": "Thus, students in music make up (80/400)*100=<<80/400*100=20>>20% of the students."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3183.\n    Returns: the percentage of students who take music.\n    \"\"\"\n    # L1\n    total_students = 400 # There are 400 students\n    dance_students = 120 # 120 students take dance as their elective\n    art_students = 200 # 200 students take art as their elective\n    music_students = total_students - dance_students - art_students\n\n    # L2\n    percentage_multiplier = 100 # WK\n    percentage_music_students = (music_students / total_students) * percentage_multiplier\n\n    # FA\n    answer = percentage_music_students\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "percentage_music_students",
+    "operand_to_replace": "percentage_multiplier",
+    "replacement_variable": "total_students"
+  },
+  "correct_trace": {
+    "total_students": 400,
+    "dance_students": 120,
+    "art_students": 200,
+    "music_students": 80,
+    "percentage_multiplier": 100,
+    "percentage_music_students": 20.0,
+    "answer": 20.0
+  },
+  "flawed_trace": {
+    "total_students": 400,
+    "dance_students": 120,
+    "art_students": 200,
+    "music_students": 80,
+    "percentage_multiplier": 100,
+    "percentage_music_students": 80.0,
+    "answer": 80.0
+  },
+  "correct_value": 20.0,
+  "flawed_value": 80.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "music_students",
+      "question_inputs": [
+        "total_students",
+        "dance_students",
+        "art_students"
+      ],
+      "solution_line_template": "There are {total_students}-{dance_students}-{art_students}=<<{total_students}-{dance_students}-{art_students}={music_students}>>{music_students} students in music."
+    },
+    {
+      "WK_inputs": [
+        "percentage_multiplier"
+      ],
+      "line_number": "L2",
+      "output_variable": "percentage_music_students",
+      "question_inputs": [],
+      "solution_line_template": "Thus, students in music make up ({music_students}/{total_students})*{percentage_multiplier}=<<{music_students}/{total_students}*{percentage_multiplier}={percentage_music_students}>>{percentage_music_students}% of the students."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 400-120-200=<<400-120-200=80>>80 students in music.",
+    "L2": "Thus, students in music make up (80/400)*400=<<80/400*400=80>>80% of the students.",
+    "FA": "#### 80"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_students' (400) was used instead of 'percentage_multiplier' (100).",
+  "repro_seed": 746762334677318911,
+  "model_name": "google_gemini-2.5-flash"
+}

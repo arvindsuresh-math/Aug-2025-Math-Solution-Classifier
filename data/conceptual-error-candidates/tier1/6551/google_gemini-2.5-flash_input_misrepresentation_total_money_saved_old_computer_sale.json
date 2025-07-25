@@ -1,0 +1,63 @@
+{
+  "index": 6551,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "Troy has $50 + $20 = $<<50+20=70>>70 from his savings and the sales of his old computer.",
+    "L2": "Therefore, he still needs $80 - $70 = $<<80-70=10>>10 more to buy the new computer."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6551.\n    Returns: the amount of money Troy still needs to buy the new computer.\n    \"\"\"\n    # L1\n    initial_savings = 50 # saved $50\n    old_computer_sale = 20 # sell his old computer for $20\n    total_money_saved = initial_savings + old_computer_sale\n\n    # L2\n    computer_cost = 80 # worth $80\n    money_needed = computer_cost - total_money_saved\n\n    # FA\n    answer = money_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_money_saved",
+    "operand_to_replace": "initial_savings",
+    "replacement_variable": "old_computer_sale"
+  },
+  "correct_trace": {
+    "initial_savings": 50,
+    "old_computer_sale": 20,
+    "total_money_saved": 70,
+    "computer_cost": 80,
+    "money_needed": 10,
+    "answer": 10
+  },
+  "flawed_trace": {
+    "initial_savings": 50,
+    "old_computer_sale": 20,
+    "total_money_saved": 40,
+    "computer_cost": 80,
+    "money_needed": 40,
+    "answer": 40
+  },
+  "correct_value": 70,
+  "flawed_value": 40,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_money_saved",
+      "question_inputs": [
+        "initial_savings",
+        "old_computer_sale"
+      ],
+      "solution_line_template": "Troy has ${initial_savings} + ${old_computer_sale} = $<<{initial_savings}+{old_computer_sale}={total_money_saved}>>{total_money_saved} from his savings and the sales of his old computer."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_needed",
+      "question_inputs": [
+        "computer_cost"
+      ],
+      "solution_line_template": "Therefore, he still needs ${computer_cost} - ${total_money_saved} = $<<{computer_cost}-{total_money_saved}={money_needed}>>{money_needed} more to buy the new computer."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Troy has $20 + $20 = $<<20+20=40>>40 from his savings and the sales of his old computer.",
+    "L2": "Therefore, he still needs $80 - $40 = $<<80-40=40>>40 more to buy the new computer.",
+    "FA": "#### 40"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'old_computer_sale' (20) was used instead of 'initial_savings' (50).",
+  "repro_seed": 546613391999962061,
+  "model_name": "google_gemini-2.5-flash"
+}

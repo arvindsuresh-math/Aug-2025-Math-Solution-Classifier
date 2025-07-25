@@ -1,0 +1,78 @@
+{
+  "index": 4600,
+  "original_solution_mapping": {
+    "FA": "#### 160",
+    "L1": "Nick has made 20 * $10 = $<<20*10=200>>200 from the chocolate oranges.",
+    "L2": "This means he needs to raise another $1000 - $200 = $<<1000-200=800>>800.",
+    "L3": "He needs to sell a total of $800 / $5 = <<800/5=160>>160 candy bars to reach his goal."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4600.\n    Returns: the number of candy bars Nick needs to sell.\n    \"\"\"\n    # L1\n    chocolate_oranges_sold = 20 # 20 chocolate oranges that he sold out\n    chocolate_orange_price = 10 # chocolate oranges for $10\n    money_from_oranges = chocolate_oranges_sold * chocolate_orange_price\n\n    # L2\n    goal_money = 1000 # raise $1000\n    money_needed_from_candy_bars = goal_money - money_from_oranges\n\n    # L3\n    candy_bar_price = 5 # candy bars for $5\n    candy_bars_to_sell = money_needed_from_candy_bars / candy_bar_price\n\n    # FA\n    answer = candy_bars_to_sell\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "money_from_oranges",
+    "operand_to_replace": "chocolate_oranges_sold",
+    "replacement_variable": "chocolate_orange_price"
+  },
+  "correct_trace": {
+    "chocolate_oranges_sold": 20,
+    "chocolate_orange_price": 10,
+    "money_from_oranges": 200,
+    "goal_money": 1000,
+    "money_needed_from_candy_bars": 800,
+    "candy_bar_price": 5,
+    "candy_bars_to_sell": 160.0,
+    "answer": 160.0
+  },
+  "flawed_trace": {
+    "chocolate_oranges_sold": 20,
+    "chocolate_orange_price": 10,
+    "money_from_oranges": 100,
+    "goal_money": 1000,
+    "money_needed_from_candy_bars": 900,
+    "candy_bar_price": 5,
+    "candy_bars_to_sell": 180.0,
+    "answer": 180.0
+  },
+  "correct_value": 200,
+  "flawed_value": 100,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_from_oranges",
+      "question_inputs": [
+        "chocolate_oranges_sold",
+        "chocolate_orange_price"
+      ],
+      "solution_line_template": "Nick has made {chocolate_oranges_sold} * ${chocolate_orange_price} = $<<{chocolate_oranges_sold}*{chocolate_orange_price}={money_from_oranges}>>{money_from_oranges} from the chocolate oranges."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_needed_from_candy_bars",
+      "question_inputs": [
+        "goal_money"
+      ],
+      "solution_line_template": "This means he needs to raise another ${goal_money} - ${money_from_oranges} = $<<{goal_money}-{money_from_oranges}={money_needed_from_candy_bars}>>{money_needed_from_candy_bars}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "candy_bars_to_sell",
+      "question_inputs": [
+        "candy_bar_price"
+      ],
+      "solution_line_template": "He needs to sell a total of ${money_needed_from_candy_bars} / ${candy_bar_price} = <<{money_needed_from_candy_bars}/{candy_bar_price}={candy_bars_to_sell}>>{candy_bars_to_sell} candy bars to reach his goal."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Nick has made 10 * $10 = $<<10*10=100>>100 from the chocolate oranges.",
+    "L2": "This means he needs to raise another $1000 - $100 = $<<1000-100=900>>900.",
+    "L3": "He needs to sell a total of $900 / $5 = <<900/5=180>>180 candy bars to reach his goal.",
+    "FA": "#### 180"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'chocolate_orange_price' (10) was used instead of 'chocolate_oranges_sold' (20).",
+  "repro_seed": -8347099878878664998,
+  "model_name": "google_gemini-2.5-flash"
+}

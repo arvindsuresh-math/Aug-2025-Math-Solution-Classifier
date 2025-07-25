@@ -1,0 +1,79 @@
+{
+  "index": 3082,
+  "original_solution_mapping": {
+    "FA": "#### 16",
+    "L1": "Mimi has 2 x 12 = <<2*12=24>>24 sea shells.",
+    "L2": "Kyle has 24 x 2 = <<24*2=48>>48 sea shells.",
+    "L3": "Leigh has 48 / 3 = <<48/3=16>>16 sea shells."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3082.\n    Returns: the number of seashells Leigh had.\n    \"\"\"\n    # L1\n    mimi_dozens = 2 # 2 dozen seashells\n    shells_per_dozen = 12 # WK\n    mimi_shells = mimi_dozens * shells_per_dozen\n\n    # L2\n    kyle_multiplier = 2 # twice as many shells as Mimi\n    kyle_shells = mimi_shells * kyle_multiplier\n\n    # L3\n    leigh_divisor = 3 # one-third of the shells\n    leigh_shells = kyle_shells / leigh_divisor\n\n    # FA\n    answer = leigh_shells\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "leigh_shells",
+    "operand_to_replace": "leigh_divisor",
+    "replacement_variable": "kyle_multiplier"
+  },
+  "correct_trace": {
+    "mimi_dozens": 2,
+    "shells_per_dozen": 12,
+    "mimi_shells": 24,
+    "kyle_multiplier": 2,
+    "kyle_shells": 48,
+    "leigh_divisor": 3,
+    "leigh_shells": 16.0,
+    "answer": 16.0
+  },
+  "flawed_trace": {
+    "mimi_dozens": 2,
+    "shells_per_dozen": 12,
+    "mimi_shells": 24,
+    "kyle_multiplier": 2,
+    "kyle_shells": 48,
+    "leigh_divisor": 3,
+    "leigh_shells": 24.0,
+    "answer": 24.0
+  },
+  "correct_value": 16.0,
+  "flawed_value": 24.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "shells_per_dozen"
+      ],
+      "line_number": "L1",
+      "output_variable": "mimi_shells",
+      "question_inputs": [
+        "mimi_dozens"
+      ],
+      "solution_line_template": "Mimi has {mimi_dozens} x {shells_per_dozen} = <<{mimi_dozens}*{shells_per_dozen}={mimi_shells}>>{mimi_shells} sea shells."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "kyle_shells",
+      "question_inputs": [
+        "kyle_multiplier"
+      ],
+      "solution_line_template": "Kyle has {mimi_shells} x {kyle_multiplier} = <<{mimi_shells}*{kyle_multiplier}={kyle_shells}>>{kyle_shells} sea shells."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "leigh_shells",
+      "question_inputs": [
+        "leigh_divisor"
+      ],
+      "solution_line_template": "Leigh has {kyle_shells} / {leigh_divisor} = <<{kyle_shells}/{leigh_divisor}={leigh_shells}>>{leigh_shells} sea shells."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Mimi has 2 x 12 = <<2*12=24>>24 sea shells.",
+    "L2": "Kyle has 24 x 2 = <<24*2=48>>48 sea shells.",
+    "L3": "Leigh has 48 / 2 = <<48/2=24>>24 sea shells.",
+    "FA": "#### 24"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'kyle_multiplier' (2) was used instead of 'leigh_divisor' (3).",
+  "repro_seed": 595409943161159720,
+  "model_name": "google_gemini-2.5-flash"
+}

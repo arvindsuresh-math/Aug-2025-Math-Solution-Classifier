@@ -1,0 +1,63 @@
+{
+  "index": 1123,
+  "original_solution_mapping": {
+    "FA": "#### 7",
+    "L1": "The total amount Evan has is $1 + $12 = $<<1+12=13>>13.",
+    "L2": "So Evan still needs $20 - $13 = $<<20-13=7>>7."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1123.\n    Returns: the amount of money Evan still needs to buy the watch.\n    \"\"\"\n    # L1\n    evan_initial_money = 1 # Evan who has $1\n    david_found_money = 12 # David found $12 on the street\n    evan_total_money = evan_initial_money + david_found_money\n\n    # L2\n    watch_cost = 20 # buy a watch worth $20\n    money_needed = watch_cost - evan_total_money\n\n    # FA\n    answer = money_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "evan_total_money",
+    "operand_to_replace": "david_found_money",
+    "replacement_variable": "evan_initial_money"
+  },
+  "correct_trace": {
+    "evan_initial_money": 1,
+    "david_found_money": 12,
+    "evan_total_money": 13,
+    "watch_cost": 20,
+    "money_needed": 7,
+    "answer": 7
+  },
+  "flawed_trace": {
+    "evan_initial_money": 1,
+    "david_found_money": 12,
+    "evan_total_money": 2,
+    "watch_cost": 20,
+    "money_needed": 18,
+    "answer": 18
+  },
+  "correct_value": 13,
+  "flawed_value": 2,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "evan_initial_money",
+        "david_found_money"
+      ],
+      "WK_inputs": [],
+      "output_variable": "evan_total_money",
+      "solution_line_template": "The total amount Evan has is ${evan_initial_money} + ${david_found_money} = $<<{evan_initial_money}+{david_found_money}={evan_total_money}>>{evan_total_money}."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "watch_cost"
+      ],
+      "WK_inputs": [],
+      "output_variable": "money_needed",
+      "solution_line_template": "So Evan still needs ${watch_cost} - ${evan_total_money} = $<<{watch_cost}-{evan_total_money}={money_needed}>>{money_needed}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total amount Evan has is $1 + $1 = $<<1+1=2>>2.",
+    "L2": "So Evan still needs $20 - $2 = $<<20-2=18>>18.",
+    "FA": "#### 18"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'evan_initial_money' (1) was used instead of 'david_found_money' (12).",
+  "repro_seed": -4293686658030090424,
+  "model_name": "google_gemini-2.5-flash"
+}

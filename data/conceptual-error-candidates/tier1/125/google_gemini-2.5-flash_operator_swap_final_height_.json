@@ -1,0 +1,63 @@
+{
+  "index": 125,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "After 10 years, growing at the rate of 3 inches every year, Haley will have grown by 3*10 = <<3*10=30>>30 inches.",
+    "L2": "If she is currently 20 inches tall, her height after 10 years will be 20+30 = <<20+30=50>>50 inches."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 125.\n    Returns: Haley's height after a specified number of years.\n    \"\"\"\n    # L1\n    growth_rate_per_year = 3 # 3 inches every year\n    num_years = 10 # after 10 years\n    total_growth = growth_rate_per_year * num_years\n\n    # L2\n    current_height = 20 # currently 20 inches tall\n    final_height = current_height + total_growth\n\n    # FA\n    answer = final_height\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "final_height",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x30c259950>"
+  },
+  "correct_trace": {
+    "growth_rate_per_year": 3,
+    "num_years": 10,
+    "total_growth": 30,
+    "current_height": 20,
+    "final_height": 50,
+    "answer": 50
+  },
+  "flawed_trace": {
+    "growth_rate_per_year": 3,
+    "num_years": 10,
+    "total_growth": 30,
+    "current_height": 20,
+    "final_height": 600,
+    "answer": 600
+  },
+  "correct_value": 50,
+  "flawed_value": 600,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "growth_rate_per_year",
+        "num_years"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_growth",
+      "solution_line_template": "After {num_years} years, growing at the rate of {growth_rate_per_year} inches every year, Haley will have grown by {growth_rate_per_year}*{num_years} = <<{growth_rate_per_year}*{num_years}={total_growth}>>{total_growth} inches."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "current_height"
+      ],
+      "WK_inputs": [],
+      "output_variable": "final_height",
+      "solution_line_template": "If she is currently {current_height} inches tall, her height after {num_years} years will be {current_height}+{total_growth} = <<{current_height}+{total_growth}={final_height}>>{final_height} inches."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After 10 years, growing at the rate of 3 inches every year, Haley will have grown by 3*10 = <<3*10=30>>30 inches.",
+    "L2": "If she is currently 20 inches tall, her height after 10 years will be 20+30 = <<20+30=600>>600 inches.",
+    "FA": "#### 600"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": -3429915809548688255,
+  "model_name": "google_gemini-2.5-flash"
+}

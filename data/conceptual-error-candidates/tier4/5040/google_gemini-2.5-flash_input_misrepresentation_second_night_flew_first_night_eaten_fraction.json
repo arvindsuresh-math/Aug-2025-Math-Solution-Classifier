@@ -1,0 +1,111 @@
+{
+  "index": 5040,
+  "original_solution_mapping": {
+    "FA": "#### 140",
+    "L1": "First night:320(1/4)=80",
+    "L2": "320-80=<<320-80=240>>240",
+    "L3": "Second night:240(1/6)=40",
+    "L4": "240-40=<<240-40=200>>200",
+    "L5": "Third night:200(.30)=60",
+    "L6": "200-60=<<200-60=140>>140 ducks remain"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5040.\n    Returns: the number of ducks remaining after the three nights.\n    \"\"\"\n    # L1\n    initial_ducks = 320 # 320 ducks in a pond\n    first_night_eaten_fraction = Fraction(1, 4) # 1/4 of them get eaten by a fox\n    first_night_eaten = initial_ducks * first_night_eaten_fraction\n\n    # L2\n    ducks_after_night1 = initial_ducks - first_night_eaten\n\n    # L3\n    second_night_flew_fraction = Fraction(1, 6) # 1/6 of the remaining ducks fly away\n    second_night_flew = ducks_after_night1 * second_night_flew_fraction\n\n    # L4\n    ducks_after_night2 = ducks_after_night1 - second_night_flew\n\n    # L5\n    third_night_stolen_percent = 0.30 # 30 percent are stolen\n    third_night_stolen = ducks_after_night2 * third_night_stolen_percent\n\n    # L6\n    ducks_after_night3 = ducks_after_night2 - third_night_stolen\n\n    # FA\n    answer = ducks_after_night3\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "second_night_flew",
+    "operand_to_replace": "second_night_flew_fraction",
+    "replacement_variable": "first_night_eaten_fraction"
+  },
+  "correct_trace": {
+    "initial_ducks": 320,
+    "first_night_eaten_fraction": "1/4",
+    "first_night_eaten": "80",
+    "ducks_after_night1": "240",
+    "second_night_flew_fraction": "1/6",
+    "second_night_flew": "40",
+    "ducks_after_night2": "200",
+    "third_night_stolen_percent": 0.3,
+    "third_night_stolen": 60.0,
+    "ducks_after_night3": 140.0,
+    "answer": 140.0
+  },
+  "flawed_trace": {
+    "initial_ducks": 320,
+    "first_night_eaten_fraction": "1/4",
+    "first_night_eaten": "80",
+    "ducks_after_night1": "240",
+    "second_night_flew_fraction": "1/6",
+    "second_night_flew": "60",
+    "ducks_after_night2": "180",
+    "third_night_stolen_percent": 0.3,
+    "third_night_stolen": 54.0,
+    "ducks_after_night3": 126.0,
+    "answer": 126.0
+  },
+  "correct_value": "40",
+  "flawed_value": "60",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "first_night_eaten",
+      "question_inputs": [
+        "initial_ducks",
+        "first_night_eaten_fraction"
+      ],
+      "solution_line_template": "First night:{initial_ducks}({first_night_eaten_fraction})={first_night_eaten}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "ducks_after_night1",
+      "question_inputs": [],
+      "solution_line_template": "{initial_ducks}-{first_night_eaten}=<<{initial_ducks}-{first_night_eaten}={ducks_after_night1}>>{ducks_after_night1}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "second_night_flew",
+      "question_inputs": [
+        "second_night_flew_fraction"
+      ],
+      "solution_line_template": "Second night:{ducks_after_night1}({second_night_flew_fraction})={second_night_flew}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "ducks_after_night2",
+      "question_inputs": [],
+      "solution_line_template": "{ducks_after_night1}-{second_night_flew}=<<{ducks_after_night1}-{second_night_flew}={ducks_after_night2}>>{ducks_after_night2}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "third_night_stolen",
+      "question_inputs": [
+        "third_night_stolen_percent"
+      ],
+      "solution_line_template": "Third night:{ducks_after_night2}({third_night_stolen_percent})={third_night_stolen}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "ducks_after_night3",
+      "question_inputs": [],
+      "solution_line_template": "{ducks_after_night2}-{third_night_stolen}=<<{ducks_after_night2}-{third_night_stolen}={ducks_after_night3}>>{ducks_after_night3} ducks remain"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First night:320(1/4)=80",
+    "L2": "320-80=<<320-80=240>>240",
+    "L3": "Second night:240(1/4)=60",
+    "L4": "240-60=<<240-60=180>>180",
+    "L5": "Third night:180(0.3)=54",
+    "L6": "180-54=<<180-54=126>>126 ducks remain",
+    "FA": "#### 126"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'first_night_eaten_fraction' (1/4) was used instead of 'second_night_flew_fraction' (1/6).",
+  "repro_seed": -7726745473754347193,
+  "model_name": "google_gemini-2.5-flash"
+}

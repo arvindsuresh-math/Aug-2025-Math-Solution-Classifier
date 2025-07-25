@@ -1,0 +1,85 @@
+{
+  "index": 1532,
+  "original_solution_mapping": {
+    "FA": "#### 84",
+    "L1": "The fixer used 30/100*400 = <<30/100*400=120>>120 nails to fix the kitchen.",
+    "L2": "The number of nails remaining in the container after he fixes the kitchen is 400-120 = <<400-120=280>>280",
+    "L3": "He also uses 70/100*280 = <<70/100*280=196>>196 of the nails remaining in the container to fix the fence.",
+    "L4": "The total number of nails which the fixer hasn't used is 280-196 = <<280-196=84>>84"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1532.\n    Returns: the number of nails remaining in the container.\n    \"\"\"\n    # L1\n    kitchen_percentage = Fraction(30, 100) # 30% of the nails\n    initial_nails = 400 # 400 nails in the container\n    nails_used_kitchen = kitchen_percentage * initial_nails\n\n    # L2\n    nails_remaining_after_kitchen = initial_nails - nails_used_kitchen\n\n    # L3\n    fence_percentage = Fraction(70, 100) # 70% of the remaining nails\n    nails_used_fence = fence_percentage * nails_remaining_after_kitchen\n\n    # L4\n    nails_remaining_total = nails_remaining_after_kitchen - nails_used_fence\n\n    # FA\n    answer = nails_remaining_total\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "nails_remaining_after_kitchen",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x30b617ad0>"
+  },
+  "correct_trace": {
+    "kitchen_percentage": "3/10",
+    "initial_nails": 400,
+    "nails_used_kitchen": "120",
+    "nails_remaining_after_kitchen": "280",
+    "fence_percentage": "7/10",
+    "nails_used_fence": "196",
+    "nails_remaining_total": "84",
+    "answer": "84"
+  },
+  "flawed_trace": {
+    "kitchen_percentage": "3/10",
+    "initial_nails": 400,
+    "nails_used_kitchen": "120",
+    "nails_remaining_after_kitchen": "10/3",
+    "fence_percentage": "7/10",
+    "nails_used_fence": "7/3",
+    "nails_remaining_total": "1",
+    "answer": "1"
+  },
+  "correct_value": "280",
+  "flawed_value": "10/3",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "nails_used_kitchen",
+      "question_inputs": [
+        "kitchen_percentage",
+        "initial_nails"
+      ],
+      "solution_line_template": "The fixer used {kitchen_percentage}*{initial_nails} = <<{kitchen_percentage}*{initial_nails}={nails_used_kitchen}>>{nails_used_kitchen} nails to fix the kitchen."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "nails_remaining_after_kitchen",
+      "question_inputs": [],
+      "solution_line_template": "The number of nails remaining in the container after he fixes the kitchen is {initial_nails}-{nails_used_kitchen} = <<{initial_nails}-{nails_used_kitchen}={nails_remaining_after_kitchen}>>{nails_remaining_after_kitchen}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "nails_used_fence",
+      "question_inputs": [
+        "fence_percentage"
+      ],
+      "solution_line_template": "He also uses {fence_percentage}*{nails_remaining_after_kitchen} = <<{fence_percentage}*{nails_remaining_after_kitchen}={nails_used_fence}>>{nails_used_fence} of the nails remaining in the container to fix the fence."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "nails_remaining_total",
+      "question_inputs": [],
+      "solution_line_template": "The total number of nails which the fixer hasn't used is {nails_remaining_after_kitchen}-{nails_used_fence} = <<{nails_remaining_after_kitchen}-{nails_used_fence}={nails_remaining_total}>>{nails_remaining_total}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The fixer used 30/100*400 = <<30/100*400=120>>120 nails to fix the kitchen.",
+    "L2": "The number of nails remaining in the container after he fixes the kitchen is 400-120 = <<400-120=10/3>>10/3",
+    "L3": "He also uses 70/100*10/3 = <<70/100*10/3=7/3>>7/3 of the nails remaining in the container to fix the fence.",
+    "L4": "The total number of nails which the fixer hasn't used is 10/3-7/3 = <<10/3-7/3=1>>1",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": 1859614698856550407,
+  "model_name": "google_gemini-2.5-flash"
+}

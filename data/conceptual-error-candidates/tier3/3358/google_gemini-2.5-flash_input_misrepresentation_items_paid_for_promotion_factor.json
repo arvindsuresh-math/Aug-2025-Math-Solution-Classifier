@@ -1,0 +1,63 @@
+{
+  "index": 3358,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "He got 10/2=<<10/2=5>>5 paid",
+    "L2": "That means he paid 5*3=$<<5*3=15>>15"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3358.\n    Returns: the total amount Bob pays.\n    \"\"\"\n    # L1\n    total_items = 10 # buys 10 of them\n    promotion_factor = 2 # buy one get one free\n    items_paid_for = total_items / promotion_factor\n\n    # L2\n    cost_per_item = 3 # They each cost $3\n    total_cost = items_paid_for * cost_per_item\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "items_paid_for",
+    "operand_to_replace": "total_items",
+    "replacement_variable": "promotion_factor"
+  },
+  "correct_trace": {
+    "total_items": 10,
+    "promotion_factor": 2,
+    "items_paid_for": 5.0,
+    "cost_per_item": 3,
+    "total_cost": 15.0,
+    "answer": 15.0
+  },
+  "flawed_trace": {
+    "total_items": 10,
+    "promotion_factor": 2,
+    "items_paid_for": 1.0,
+    "cost_per_item": 3,
+    "total_cost": 3.0,
+    "answer": 3.0
+  },
+  "correct_value": 5.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "items_paid_for",
+      "question_inputs": [
+        "total_items",
+        "promotion_factor"
+      ],
+      "solution_line_template": "He got {total_items}/{promotion_factor}=<<{total_items}/{promotion_factor}={items_paid_for}>>{items_paid_for} paid"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "cost_per_item"
+      ],
+      "solution_line_template": "That means he paid {items_paid_for}*{cost_per_item}=$<<{items_paid_for}*{cost_per_item}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He got 2/2=<<2/2=1>>1 paid",
+    "L2": "That means he paid 1*3=$<<1*3=3>>3",
+    "FA": "#### 3"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'promotion_factor' (2) was used instead of 'total_items' (10).",
+  "repro_seed": -3834720043149459238,
+  "model_name": "google_gemini-2.5-flash"
+}

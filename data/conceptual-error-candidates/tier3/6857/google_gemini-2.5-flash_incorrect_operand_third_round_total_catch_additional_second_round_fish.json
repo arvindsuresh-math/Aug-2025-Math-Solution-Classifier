@@ -1,0 +1,96 @@
+{
+  "index": 6857,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "He caught 12 more fish in the second round than he had caught earlier, a total of 12+8=<<12+8=20>>20 fish.",
+    "L2": "The total number of fish he caught in the two rounds is 20+8=<<20+8=28>>28",
+    "L3": "In the third round, Archer caught 60/100*20=<<60/100*20=12>>12 fish which were 60% more fish than the number he had caught in the second round.",
+    "L4": "This means he caught a total of 12+20 = <<12+20=32>>32 fish",
+    "L5": "Archer caught a total of 28+32=<<28+32=60>>60 fish on that day."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6857.\n    Returns: the total number of fish Archer caught that day.\n    \"\"\"\n    # L1\n    initial_catch = 8 # Archer caught eight fish\n    additional_second_round_fish = 12 # caught 12 more fish in the second round\n    second_round_catch = additional_second_round_fish + initial_catch\n\n    # L2\n    total_two_rounds_catch = second_round_catch + initial_catch\n\n    # L3\n    percentage_more_third_round = Fraction(60, 100) # 60% more fish\n    additional_third_round_fish = percentage_more_third_round * second_round_catch\n\n    # L4\n    third_round_total_catch = additional_third_round_fish + second_round_catch\n\n    # L5\n    total_fish_that_day = total_two_rounds_catch + third_round_total_catch\n\n    # FA\n    answer = total_fish_that_day\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "third_round_total_catch",
+    "operand_to_replace": "second_round_catch",
+    "replacement_variable": "additional_second_round_fish"
+  },
+  "correct_trace": {
+    "initial_catch": 8,
+    "additional_second_round_fish": 12,
+    "second_round_catch": 20,
+    "total_two_rounds_catch": 28,
+    "percentage_more_third_round": "3/5",
+    "additional_third_round_fish": "12",
+    "third_round_total_catch": "32",
+    "total_fish_that_day": "60",
+    "answer": "60"
+  },
+  "flawed_trace": {
+    "initial_catch": 8,
+    "additional_second_round_fish": 12,
+    "second_round_catch": 20,
+    "total_two_rounds_catch": 28,
+    "percentage_more_third_round": "3/5",
+    "additional_third_round_fish": "12",
+    "third_round_total_catch": "24",
+    "total_fish_that_day": "52",
+    "answer": "52"
+  },
+  "correct_value": "32",
+  "flawed_value": "24",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "second_round_catch",
+      "question_inputs": [
+        "initial_catch",
+        "additional_second_round_fish"
+      ],
+      "solution_line_template": "He caught {additional_second_round_fish} more fish in the second round than he had caught earlier, a total of {additional_second_round_fish}+{initial_catch}=<<{additional_second_round_fish}+{initial_catch}={second_round_catch}>>{second_round_catch} fish."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_two_rounds_catch",
+      "question_inputs": [],
+      "solution_line_template": "The total number of fish he caught in the two rounds is {second_round_catch}+{initial_catch}=<<{second_round_catch}+{initial_catch}={total_two_rounds_catch}>>{total_two_rounds_catch}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "additional_third_round_fish",
+      "question_inputs": [
+        "percentage_more_third_round"
+      ],
+      "solution_line_template": "In the third round, Archer caught {percentage_more_third_round}*{second_round_catch}=<<{percentage_more_third_round}*{second_round_catch}={additional_third_round_fish}>>{additional_third_round_fish} fish which were 60% more fish than the number he had caught in the second round."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "third_round_total_catch",
+      "question_inputs": [],
+      "solution_line_template": "This means he caught a total of {additional_third_round_fish}+{second_round_catch} = <<{additional_third_round_fish}+{second_round_catch}={third_round_total_catch}>>{third_round_total_catch} fish"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_fish_that_day",
+      "question_inputs": [],
+      "solution_line_template": "Archer caught a total of {total_two_rounds_catch}+{third_round_total_catch}=<<{total_two_rounds_catch}+{third_round_total_catch}={total_fish_that_day}>>{total_fish_that_day} fish on that day."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He caught 12 more fish in the second round than he had caught earlier, a total of 12+8=<<12+8=20>>20 fish.",
+    "L2": "The total number of fish he caught in the two rounds is 20+8=<<20+8=28>>28",
+    "L3": "In the third round, Archer caught 60/100*20=<<60/100*20=12>>12 fish which were 60% more fish than the number he had caught in the second round.",
+    "L4": "This means he caught a total of 12+12 = <<12+12=24>>24 fish",
+    "L5": "Archer caught a total of 28+24=<<28+24=52>>52 fish on that day.",
+    "FA": "#### 52"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'additional_second_round_fish' (value: 12) was used instead of 'second_round_catch' (value: 20).",
+  "repro_seed": -5383171750570021369,
+  "model_name": "google_gemini-2.5-flash"
+}

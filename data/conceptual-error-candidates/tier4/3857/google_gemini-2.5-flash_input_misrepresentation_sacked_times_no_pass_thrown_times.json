@@ -1,0 +1,63 @@
+{
+  "index": 3857,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "No pass thrown:80(.30)=24",
+    "L2": "Sacked:24/2=<<24/2=12>>12"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3857.\n    Returns: the number of times the quarterback is sacked for a loss.\n    \"\"\"\n    # L1\n    total_steps_back = 80 # 80 times in a game\n    no_pass_percent = 0.30 # 30 percent of the time he does not get a pass thrown\n    no_pass_thrown_times = total_steps_back * no_pass_percent\n\n    # L2\n    sacked_divisor = 2 # Half of the times that he does not throw the ball he is sacked\n    sacked_times = no_pass_thrown_times / sacked_divisor\n\n    # FA\n    answer = sacked_times\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "sacked_times",
+    "operand_to_replace": "sacked_divisor",
+    "replacement_variable": "no_pass_thrown_times"
+  },
+  "correct_trace": {
+    "total_steps_back": 80,
+    "no_pass_percent": 0.3,
+    "no_pass_thrown_times": 24.0,
+    "sacked_divisor": 2,
+    "sacked_times": 12.0,
+    "answer": 12.0
+  },
+  "flawed_trace": {
+    "total_steps_back": 80,
+    "no_pass_percent": 0.3,
+    "no_pass_thrown_times": 24.0,
+    "sacked_divisor": 2,
+    "sacked_times": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 12.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "no_pass_thrown_times",
+      "question_inputs": [
+        "total_steps_back",
+        "no_pass_percent"
+      ],
+      "solution_line_template": "No pass thrown:{total_steps_back}({no_pass_percent})={no_pass_thrown_times}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sacked_times",
+      "question_inputs": [
+        "sacked_divisor"
+      ],
+      "solution_line_template": "Sacked:{no_pass_thrown_times}/{sacked_divisor}=<<{no_pass_thrown_times}/{sacked_divisor}={sacked_times}>>{sacked_times}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "No pass thrown:80(0.3)=24",
+    "L2": "Sacked:24/24=<<24/24=1>>1",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'no_pass_thrown_times' (24.0) was used instead of 'sacked_divisor' (2).",
+  "repro_seed": 7208194245600490013,
+  "model_name": "google_gemini-2.5-flash"
+}

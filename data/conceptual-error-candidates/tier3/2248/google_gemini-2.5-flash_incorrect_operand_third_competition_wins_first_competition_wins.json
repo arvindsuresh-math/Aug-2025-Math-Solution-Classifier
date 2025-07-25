@@ -1,0 +1,72 @@
+{
+  "index": 2248,
+  "original_solution_mapping": {
+    "FA": "#### 130",
+    "L1": "If they won 40 games in the first competition, they won 5/8*40 = <<5/8*40=25>>25 games in their second season.",
+    "L2": "In the third competition, they won games equal to the sum of the games they won in the last two competitions, which is 25+40 = <<25+40=65>>65 games.",
+    "L3": "Since the total number of games they won in the first two competitions is 65, and they won 65 more in the third competition, they won a total of 65+65 = <<65+65=130>>130 in all competitions."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2248.\n    Returns: the total number of wins in the three competitions.\n    \"\"\"\n    # L1\n    first_competition_wins = 40 # won 40 games in their last competition\n    second_competition_multiplier = Fraction(5, 8) # won 5/8 times as many games\n    second_competition_wins = second_competition_multiplier * first_competition_wins\n\n    # L2\n    third_competition_wins = second_competition_wins + first_competition_wins\n\n    # L3\n    sum_first_two_competitions = first_competition_wins + second_competition_wins\n    total_wins = sum_first_two_competitions + third_competition_wins\n\n    # FA\n    answer = total_wins\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "third_competition_wins",
+    "operand_to_replace": "second_competition_wins",
+    "replacement_variable": "first_competition_wins"
+  },
+  "correct_trace": {
+    "first_competition_wins": 40,
+    "second_competition_multiplier": "5/8",
+    "second_competition_wins": "25",
+    "third_competition_wins": "65",
+    "sum_first_two_competitions": "65",
+    "total_wins": "130",
+    "answer": "130"
+  },
+  "flawed_trace": {
+    "first_competition_wins": 40,
+    "second_competition_multiplier": "5/8",
+    "second_competition_wins": "25",
+    "third_competition_wins": 80,
+    "sum_first_two_competitions": "65",
+    "total_wins": "145",
+    "answer": "145"
+  },
+  "correct_value": "65",
+  "flawed_value": 80,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "second_competition_wins",
+      "question_inputs": [
+        "first_competition_wins",
+        "second_competition_multiplier"
+      ],
+      "solution_line_template": "If they won {first_competition_wins} games in the first competition, they won {second_competition_multiplier}*{first_competition_wins} = <<{second_competition_multiplier}*{first_competition_wins}={second_competition_wins}>>{second_competition_wins} games in their second season."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "third_competition_wins",
+      "question_inputs": [],
+      "solution_line_template": "In the third competition, they won games equal to the sum of the games they won in the last two competitions, which is {second_competition_wins}+{first_competition_wins} = <<{second_competition_wins}+{first_competition_wins}={third_competition_wins}>>{third_competition_wins} games."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_wins",
+      "question_inputs": [],
+      "solution_line_template": "Since the total number of games they won in the first two competitions is {sum_first_two_competitions}, and they won {third_competition_wins} more in the third competition, they won a total of {sum_first_two_competitions}+{third_competition_wins} = <<{sum_first_two_competitions}+{third_competition_wins}={total_wins}>>{total_wins} in all competitions."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If they won 40 games in the first competition, they won 5/8*40 = <<5/8*40=25>>25 games in their second season.",
+    "L2": "In the third competition, they won games equal to the sum of the games they won in the last two competitions, which is 40+40 = <<40+40=80>>80 games.",
+    "L3": "Since the total number of games they won in the first two competitions is 65, and they won 80 more in the third competition, they won a total of 65+80 = <<65+80=145>>145 in all competitions.",
+    "FA": "#### 145"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'first_competition_wins' (value: 40) was used instead of 'second_competition_wins' (value: 25).",
+  "repro_seed": -1305449825467817712,
+  "model_name": "google_gemini-2.5-flash"
+}

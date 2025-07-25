@@ -1,0 +1,78 @@
+{
+  "index": 4003,
+  "original_solution_mapping": {
+    "FA": "#### 36",
+    "L1": "Joanna has $<<8=8>>8.",
+    "L2": "Joanna's brother has thrice as much as Joanna, so he has $8 * 3 = $<<8*3=24>>24.",
+    "L3": "Her sister has half as much as Joanna, then she has $8/2 = $<<8/2=4>>4.",
+    "L4": "Together they have $8 + $24 + $4 = $<<8+24+4=36>>36 altogether."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4003.\n    Returns: the total money the three of them have.\n    \"\"\"\n    joanna_money = 8 # Joanna has $8\n\n    # L2\n    brother_multiplier = 3 # her brother has thrice as much\n    brother_money = joanna_money * brother_multiplier\n\n    # L3\n    sister_divisor = 2 # her sister has only half as much\n    sister_money = joanna_money / sister_divisor\n\n    # L4\n    total_money = joanna_money + brother_money + sister_money\n\n    # FA\n    answer = total_money\n    return answer\n",
+  "mutation_details": {
+    "type": "incomplete_calculation",
+    "target_variable": "total_money",
+    "operand_to_remove": "sister_money",
+    "original_operands": [
+      "brother_money",
+      "joanna_money",
+      "sister_money"
+    ]
+  },
+  "correct_trace": {
+    "joanna_money": 8,
+    "brother_multiplier": 3,
+    "brother_money": 24,
+    "sister_divisor": 2,
+    "sister_money": 4.0,
+    "total_money": 36.0,
+    "answer": 36.0
+  },
+  "flawed_trace": {
+    "joanna_money": 8,
+    "brother_multiplier": 3,
+    "brother_money": 24,
+    "sister_divisor": 2,
+    "sister_money": 4.0,
+    "total_money": 32,
+    "answer": 32
+  },
+  "correct_value": 36.0,
+  "flawed_value": 32,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "brother_money",
+      "question_inputs": [
+        "brother_multiplier"
+      ],
+      "solution_line_template": "Joanna's brother has thrice as much as Joanna, so he has ${joanna_money} * {brother_multiplier} = $<<{joanna_money}*{brother_multiplier}={brother_money}>>{brother_money}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "sister_money",
+      "question_inputs": [
+        "sister_divisor"
+      ],
+      "solution_line_template": "Her sister has half as much as Joanna, then she has ${joanna_money}/{sister_divisor} = $<<{joanna_money}/{sister_divisor}={sister_money}>>{sister_money}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_money",
+      "question_inputs": [],
+      "solution_line_template": "Together they have ${joanna_money} + ${brother_money} + ${sister_money} = $<<{joanna_money}+{brother_money}+{sister_money}={total_money}>>{total_money} altogether."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "Joanna's brother has thrice as much as Joanna, so he has $8 * 3 = $<<8*3=24>>24.",
+    "L3": "Her sister has half as much as Joanna, then she has $8/2 = $<<8/2=4>>4.",
+    "L4": "Together they have $8 + $24 + $4 = $<<8+24=32>>32 altogether.",
+    "FA": "#### 32"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incomplete calculation. The term 'sister_money' (value: 4.0) was omitted from the operation.",
+  "repro_seed": -1653248088169919053,
+  "model_name": "google_gemini-2.5-flash"
+}

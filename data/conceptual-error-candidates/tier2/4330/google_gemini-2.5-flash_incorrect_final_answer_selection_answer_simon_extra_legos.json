@@ -1,0 +1,80 @@
+{
+  "index": 4330,
+  "original_solution_mapping": {
+    "FA": "#### 72",
+    "L1": "Bruce has 20 more legos than Kent who has 40 so Bruce has 20+40 = <<20+40=60>>60 legos",
+    "L2": "Simon has 20% more legos than Bruce who has 60 legos so that's .20*60 = <<20*.01*60=12>>12 more legos",
+    "L3": "20% more is 12 legos and Bruce has 60 so Simon has 12+60 = 72 legos"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4330.\n    Returns: the total number of legos Simon has.\n    \"\"\"\n    # L1\n    bruce_more_than_kent = 20 # 20 more than Kent\n    kent_legos = 40 # Kent has 40 legos\n    bruce_legos = bruce_more_than_kent + kent_legos\n\n    # L2\n    simon_percent_more = 0.20 # 20% more legos\n    simon_percent_more_num = 20 # 20% more legos\n    percent_factor = 0.01 # WK\n    simon_extra_legos = simon_percent_more_num * percent_factor * bruce_legos\n\n    # L3\n    simon_total_legos = simon_extra_legos + bruce_legos\n\n    # FA\n    answer = simon_total_legos\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "simon_total_legos",
+    "replacement_variable": "simon_extra_legos"
+  },
+  "correct_trace": {
+    "bruce_more_than_kent": 20,
+    "kent_legos": 40,
+    "bruce_legos": 60,
+    "simon_percent_more": 0.2,
+    "simon_percent_more_num": 20,
+    "percent_factor": 0.01,
+    "simon_extra_legos": 12.0,
+    "simon_total_legos": 72.0,
+    "answer": 72.0
+  },
+  "flawed_trace": {
+    "bruce_more_than_kent": 20,
+    "kent_legos": 40,
+    "bruce_legos": 60,
+    "simon_percent_more": 0.2,
+    "simon_percent_more_num": 20,
+    "percent_factor": 0.01,
+    "simon_extra_legos": 12.0,
+    "simon_total_legos": 72.0,
+    "answer": 12.0
+  },
+  "correct_value": 72.0,
+  "flawed_value": 12.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "bruce_legos",
+      "question_inputs": [
+        "bruce_more_than_kent",
+        "kent_legos"
+      ],
+      "solution_line_template": "Bruce has {bruce_more_than_kent} more legos than Kent who has {kent_legos} so Bruce has {bruce_more_than_kent}+{kent_legos} = <<{bruce_more_than_kent}+{kent_legos}={bruce_legos}>>{bruce_legos} legos"
+    },
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L2",
+      "output_variable": "simon_extra_legos",
+      "question_inputs": [
+        "simon_percent_more",
+        "simon_percent_more_num"
+      ],
+      "solution_line_template": "Simon has {simon_percent_more_num}% more legos than Bruce who has {bruce_legos} legos so that's {simon_percent_more}*{bruce_legos} = <<{simon_percent_more_num}*{percent_factor}*{bruce_legos}={simon_extra_legos}>>{simon_extra_legos} more legos"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "simon_total_legos",
+      "question_inputs": [],
+      "solution_line_template": "{simon_percent_more_num}% more is {simon_extra_legos} legos and Bruce has {bruce_legos} so Simon has {simon_extra_legos}+{bruce_legos} = {simon_total_legos} legos"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Bruce has 20 more legos than Kent who has 40 so Bruce has 20+40 = <<20+40=60>>60 legos",
+    "L2": "Simon has 20% more legos than Bruce who has 60 legos so that's 0.2*60 = <<20*0.01*60=12>>12 more legos",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'simon_extra_legos' (value: 12.0) was reported instead of 'simon_total_legos' (value: 72.0).",
+  "repro_seed": 780393635319994734,
+  "model_name": "google_gemini-2.5-flash"
+}

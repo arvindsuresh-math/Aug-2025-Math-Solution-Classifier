@@ -1,0 +1,108 @@
+{
+  "index": 4002,
+  "original_solution_mapping": {
+    "FA": "#### 112",
+    "L1": "He takes 1000/500=<<1000/500=2>>2 pills each time",
+    "L2": "He takes them 24/6=<<24/6=4>>4 times a day",
+    "L3": "So he takes 4*2=<<4*2=8>>8 pills per day",
+    "L4": "He takes pills for 2*7=<<2*7=14>>14 days",
+    "L5": "So he takes 8*14=<<8*14=112>>112 pills"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4002.\n    Returns: the total number of pills taken.\n    \"\"\"\n    # L1\n    dosage_mg = 1000 # 1000 mg\n    pill_strength_mg = 500 # each 500 mg\n    pills_per_dose = dosage_mg / pill_strength_mg\n\n    # L2\n    hours_per_day = 24 # WK\n    dose_interval_hours = 6 # every 6 hours\n    doses_per_day = hours_per_day / dose_interval_hours\n\n    # L3\n    pills_per_day = doses_per_day * pills_per_dose\n\n    # L4\n    num_weeks = 2 # 2 weeks\n    days_per_week = 7 # WK\n    total_days = num_weeks * days_per_week\n\n    # L5\n    total_pills = pills_per_day * total_days\n\n    # FA\n    answer = total_pills\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_days",
+    "operand_to_replace": "days_per_week",
+    "replacement_variable": "hours_per_day"
+  },
+  "correct_trace": {
+    "dosage_mg": 1000,
+    "pill_strength_mg": 500,
+    "pills_per_dose": 2.0,
+    "hours_per_day": 24,
+    "dose_interval_hours": 6,
+    "doses_per_day": 4.0,
+    "pills_per_day": 8.0,
+    "num_weeks": 2,
+    "days_per_week": 7,
+    "total_days": 14,
+    "total_pills": 112.0,
+    "answer": 112.0
+  },
+  "flawed_trace": {
+    "dosage_mg": 1000,
+    "pill_strength_mg": 500,
+    "pills_per_dose": 2.0,
+    "hours_per_day": 24,
+    "dose_interval_hours": 6,
+    "doses_per_day": 4.0,
+    "pills_per_day": 8.0,
+    "num_weeks": 2,
+    "days_per_week": 7,
+    "total_days": 48,
+    "total_pills": 384.0,
+    "answer": 384.0
+  },
+  "correct_value": 14,
+  "flawed_value": 48,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "pills_per_dose",
+      "question_inputs": [
+        "dosage_mg",
+        "pill_strength_mg"
+      ],
+      "solution_line_template": "He takes {dosage_mg}/{pill_strength_mg}=<<{dosage_mg}/{pill_strength_mg}={pills_per_dose}>>{pills_per_dose} pills each time"
+    },
+    {
+      "WK_inputs": [
+        "hours_per_day"
+      ],
+      "line_number": "L2",
+      "output_variable": "doses_per_day",
+      "question_inputs": [
+        "dose_interval_hours"
+      ],
+      "solution_line_template": "He takes them {hours_per_day}/{dose_interval_hours}=<<{hours_per_day}/{dose_interval_hours}={doses_per_day}>>{doses_per_day} times a day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "pills_per_day",
+      "question_inputs": [],
+      "solution_line_template": "So he takes {doses_per_day}*{pills_per_dose}=<<{doses_per_day}*{pills_per_dose}={pills_per_day}>>{pills_per_day} pills per day"
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L4",
+      "output_variable": "total_days",
+      "question_inputs": [
+        "num_weeks"
+      ],
+      "solution_line_template": "He takes pills for {num_weeks}*{days_per_week}=<<{num_weeks}*{days_per_week}={total_days}>>{total_days} days"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_pills",
+      "question_inputs": [],
+      "solution_line_template": "So he takes {pills_per_day}*{total_days}=<<{pills_per_day}*{total_days}={total_pills}>>{total_pills} pills"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He takes 1000/500=<<1000/500=2>>2 pills each time",
+    "L2": "He takes them 24/6=<<24/6=4>>4 times a day",
+    "L3": "So he takes 4*2=<<4*2=8>>8 pills per day",
+    "L4": "He takes pills for 2*24=<<2*24=48>>48 days",
+    "L5": "So he takes 8*48=<<8*48=384>>384 pills",
+    "FA": "#### 384"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'hours_per_day' (24) was used instead of 'days_per_week' (7).",
+  "repro_seed": 2873684519672094756,
+  "model_name": "google_gemini-2.5-flash"
+}

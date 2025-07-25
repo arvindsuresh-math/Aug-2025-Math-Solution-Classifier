@@ -1,0 +1,78 @@
+{
+  "index": 2418,
+  "original_solution_mapping": {
+    "FA": "#### 53",
+    "L1": "Five pounds of beef cost $3 x 5 = $<<3*5=15>>15.",
+    "L2": "So Lyra spent a total of $12 + $15 = $<<12+15=27>>27.",
+    "L3": "Therefore, $80 - $27 = $<<80-27=53>>53 is left on her weekly budget."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2418.\n    Returns: the amount of money left on Lyra's weekly budget.\n    \"\"\"\n    # L1\n    cost_per_pound_beef = 3 # $3 per pound\n    pounds_of_beef = 5 # 5 pounds of beef\n    cost_of_beef = cost_per_pound_beef * pounds_of_beef\n\n    # L2\n    cost_fried_chicken = 12 # 1 bucket of fried chicken that costs $12\n    total_spent = cost_fried_chicken + cost_of_beef\n\n    # L3\n    weekly_budget = 80 # $80 budget for a week\n    remaining_budget = weekly_budget - total_spent\n\n    # FA\n    answer = remaining_budget\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_spent",
+    "operand_to_replace": "cost_fried_chicken",
+    "replacement_variable": "cost_of_beef"
+  },
+  "correct_trace": {
+    "cost_per_pound_beef": 3,
+    "pounds_of_beef": 5,
+    "cost_of_beef": 15,
+    "cost_fried_chicken": 12,
+    "total_spent": 27,
+    "weekly_budget": 80,
+    "remaining_budget": 53,
+    "answer": 53
+  },
+  "flawed_trace": {
+    "cost_per_pound_beef": 3,
+    "pounds_of_beef": 5,
+    "cost_of_beef": 15,
+    "cost_fried_chicken": 12,
+    "total_spent": 30,
+    "weekly_budget": 80,
+    "remaining_budget": 50,
+    "answer": 50
+  },
+  "correct_value": 27,
+  "flawed_value": 30,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "cost_per_pound_beef",
+        "pounds_of_beef"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cost_of_beef",
+      "solution_line_template": "Five pounds of beef cost ${cost_per_pound_beef} x {pounds_of_beef} = $<<{cost_per_pound_beef}*{pounds_of_beef}={cost_of_beef}>>{cost_of_beef}."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "cost_fried_chicken"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_spent",
+      "solution_line_template": "So Lyra spent a total of ${cost_fried_chicken} + ${cost_of_beef} = $<<{cost_fried_chicken}+{cost_of_beef}={total_spent}>>{total_spent}."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "weekly_budget"
+      ],
+      "WK_inputs": [],
+      "output_variable": "remaining_budget",
+      "solution_line_template": "Therefore, ${weekly_budget} - ${total_spent} = $<<{weekly_budget}-{total_spent}={remaining_budget}>>{remaining_budget} is left on her weekly budget."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Five pounds of beef cost $3 x 5 = $<<3*5=15>>15.",
+    "L2": "So Lyra spent a total of $15 + $15 = $<<15+15=30>>30.",
+    "L3": "Therefore, $80 - $30 = $<<80-30=50>>50 is left on her weekly budget.",
+    "FA": "#### 50"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'cost_of_beef' (15) was used instead of 'cost_fried_chicken' (12).",
+  "repro_seed": -3111967939941344939,
+  "model_name": "google_gemini-2.5-flash"
+}

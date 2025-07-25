@@ -1,0 +1,97 @@
+{
+  "index": 343,
+  "original_solution_mapping": {
+    "FA": "#### 49",
+    "L1": "She uses 4 hours/day * 125 watts/hour=<<4*125=500>>500 watt hours/day",
+    "L2": "That means she uses 500 watt hours/day * 7 days/week = <<500*7=3500>>3500 watt hours/week",
+    "L3": "This is 3500 watt hours / 1000 watts/kw = <<3500/1000=3.5>>3.5 kw hours",
+    "L4": "So her TV cost 3.5 kw hours/week * $0.14/kw hour = $<<3.5*0.14=0.49>>0.49/week"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 343.\n    Returns: the cost in cents to run the TV for a week.\n    \"\"\"\n    # L1\n    hours_per_day = 4 # 4 hours a day\n    watts_per_hour = 125 # 125 watts of electricity per hour\n    watt_hours_per_day = hours_per_day * watts_per_hour\n\n    # L2\n    days_per_week = 7 # WK\n    watt_hours_per_week = watt_hours_per_day * days_per_week\n\n    # L3\n    watts_per_kw = 1000 # WK\n    kwh_per_week = watt_hours_per_week / watts_per_kw\n\n    # L4\n    cost_per_kwh_dollars = 0.14 # 14 cents per kw/h (used as $0.14 in solution)\n    cost_per_week_dollars = kwh_per_week * cost_per_kwh_dollars\n\n    # Convert to cents as requested by the question\n    cents_per_dollar = 100 # WK\n    cost_per_week_cents = cost_per_week_dollars * cents_per_dollar\n\n    # FA\n    answer = cost_per_week_cents\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "watt_hours_per_week",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x16a8c6990>"
+  },
+  "correct_trace": {
+    "hours_per_day": 4,
+    "watts_per_hour": 125,
+    "watt_hours_per_day": 500,
+    "days_per_week": 7,
+    "watt_hours_per_week": 3500,
+    "watts_per_kw": 1000,
+    "kwh_per_week": 3.5,
+    "cost_per_kwh_dollars": 0.14,
+    "cost_per_week_dollars": 0.49000000000000005,
+    "cents_per_dollar": 100,
+    "cost_per_week_cents": 49.00000000000001,
+    "answer": 49.00000000000001
+  },
+  "flawed_trace": {
+    "hours_per_day": 4,
+    "watts_per_hour": 125,
+    "watt_hours_per_day": 500,
+    "days_per_week": 7,
+    "watt_hours_per_week": 507,
+    "watts_per_kw": 1000,
+    "kwh_per_week": 0.507,
+    "cost_per_kwh_dollars": 0.14,
+    "cost_per_week_dollars": 0.07098,
+    "cents_per_dollar": 100,
+    "cost_per_week_cents": 7.098,
+    "answer": 7.098
+  },
+  "correct_value": 3500,
+  "flawed_value": 507,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "watt_hours_per_day",
+      "question_inputs": [
+        "hours_per_day",
+        "watts_per_hour"
+      ],
+      "solution_line_template": "She uses {hours_per_day} hours/day * {watts_per_hour} watts/hour=<<{hours_per_day}*{watts_per_hour}={watt_hours_per_day}>>{watt_hours_per_day} watt hours/day"
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L2",
+      "output_variable": "watt_hours_per_week",
+      "question_inputs": [],
+      "solution_line_template": "That means she uses {watt_hours_per_day} watt hours/day * {days_per_week} days/week = <<{watt_hours_per_day}*{days_per_week}={watt_hours_per_week}>>{watt_hours_per_week} watt hours/week"
+    },
+    {
+      "WK_inputs": [
+        "watts_per_kw"
+      ],
+      "line_number": "L3",
+      "output_variable": "kwh_per_week",
+      "question_inputs": [],
+      "solution_line_template": "This is {watt_hours_per_week} watt hours / {watts_per_kw} watts/kw = <<{watt_hours_per_week}/{watts_per_kw}={kwh_per_week}>>{kwh_per_week} kw hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "cost_per_week_dollars",
+      "question_inputs": [
+        "cost_per_kwh_dollars"
+      ],
+      "solution_line_template": "So her TV cost {kwh_per_week} kw hours/week * ${cost_per_kwh_dollars}/kw hour = $<<{kwh_per_week}*{cost_per_kwh_dollars}={cost_per_week_dollars}>>{cost_per_week_dollars}/week"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She uses 4 hours/day * 125 watts/hour=<<4*125=500>>500 watt hours/day",
+    "L2": "That means she uses 500 watt hours/day * 7 days/week = <<500*7=507>>507 watt hours/week",
+    "L3": "This is 507 watt hours / 1000 watts/kw = <<507/1000=0.51>>0.51 kw hours",
+    "L4": "So her TV cost 0.51 kw hours/week * $0.14/kw hour = $<<0.51*0.14=0.07>>0.07/week",
+    "FA": "#### 7.1"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 504044628768709865,
+  "model_name": "google_gemini-2.5-flash"
+}

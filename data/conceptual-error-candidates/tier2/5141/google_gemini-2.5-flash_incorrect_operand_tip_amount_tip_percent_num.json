@@ -1,0 +1,95 @@
+{
+  "index": 5141,
+  "original_solution_mapping": {
+    "FA": "#### 78",
+    "L1": "Each of their entrees cost $20.00 so they cost 2*20 = $40.00",
+    "L2": "The appetizer was $9.00, the main meal was $40.00 and the dessert was $11.00 for a total of $<<9+40+11=60>>60.00",
+    "L3": "The entire meal cost $60.00 and they left a 30% tip which came to 60*.30 = $18.00",
+    "L4": "The meal was $60.00 and the tip was $18.00 so the total bill came to 60+18 = $<<60+18=78.00>>78.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5141.\n    Returns: the entire price of the meal.\n    \"\"\"\n    # L1\n    num_people = 2 # Buffy and Oz\n    entree_cost = 20.00 # Each of their entrees was $20.00\n    total_entree_cost = num_people * entree_cost\n\n    # L2\n    appetizer_cost = 9.00 # an appetizer that cost $9.00\n    dessert_cost = 11.00 # a dessert that was $11.00\n    subtotal_cost = appetizer_cost + total_entree_cost + dessert_cost\n\n    # L3\n    tip_percent_num = 30 # 30% tip\n    tip_percent_decimal = 0.30 # from solution text: 60*.30\n    tip_amount = subtotal_cost * tip_percent_decimal\n\n    # L4\n    total_bill = subtotal_cost + tip_amount\n\n    # FA\n    answer = total_bill\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "tip_amount",
+    "operand_to_replace": "subtotal_cost",
+    "replacement_variable": "tip_percent_num"
+  },
+  "correct_trace": {
+    "num_people": 2,
+    "entree_cost": 20.0,
+    "total_entree_cost": 40.0,
+    "appetizer_cost": 9.0,
+    "dessert_cost": 11.0,
+    "subtotal_cost": 60.0,
+    "tip_percent_num": 30,
+    "tip_percent_decimal": 0.3,
+    "tip_amount": 18.0,
+    "total_bill": 78.0,
+    "answer": 78.0
+  },
+  "flawed_trace": {
+    "num_people": 2,
+    "entree_cost": 20.0,
+    "total_entree_cost": 40.0,
+    "appetizer_cost": 9.0,
+    "dessert_cost": 11.0,
+    "subtotal_cost": 60.0,
+    "tip_percent_num": 30,
+    "tip_percent_decimal": 0.3,
+    "tip_amount": 9.0,
+    "total_bill": 69.0,
+    "answer": 69.0
+  },
+  "correct_value": 18.0,
+  "flawed_value": 9.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_entree_cost",
+      "question_inputs": [
+        "num_people",
+        "entree_cost"
+      ],
+      "solution_line_template": "Each of their entrees cost ${entree_cost} so they cost {num_people}*{entree_cost} = ${total_entree_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "subtotal_cost",
+      "question_inputs": [
+        "appetizer_cost",
+        "dessert_cost"
+      ],
+      "solution_line_template": "The appetizer was ${appetizer_cost}, the main meal was ${total_entree_cost} and the dessert was ${dessert_cost} for a total of $<<{appetizer_cost}+{total_entree_cost}+{dessert_cost}={subtotal_cost}>>{subtotal_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "tip_amount",
+      "question_inputs": [
+        "tip_percent_num",
+        "tip_percent_decimal"
+      ],
+      "solution_line_template": "The entire meal cost ${subtotal_cost} and they left a {tip_percent_num}% tip which came to {subtotal_cost}*{tip_percent_decimal} = ${tip_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_bill",
+      "question_inputs": [],
+      "solution_line_template": "The meal was ${subtotal_cost} and the tip was ${tip_amount} so the total bill came to {subtotal_cost}+{tip_amount} = $<<{subtotal_cost}+{tip_amount}={total_bill}>>{total_bill}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each of their entrees cost $20 so they cost 2*20 = $40",
+    "L2": "The appetizer was $9, the main meal was $40 and the dessert was $11 for a total of $<<9+40+11=60>>60",
+    "L3": "The entire meal cost $30 and they left a 30% tip which came to 30*0.3 = $9",
+    "L4": "The meal was $60 and the tip was $9 so the total bill came to 60+9 = $<<60+9=69>>69",
+    "FA": "#### 69"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'tip_percent_num' (value: 30) was used instead of 'subtotal_cost' (value: 60.0).",
+  "repro_seed": -488377971760494399,
+  "model_name": "google_gemini-2.5-flash"
+}

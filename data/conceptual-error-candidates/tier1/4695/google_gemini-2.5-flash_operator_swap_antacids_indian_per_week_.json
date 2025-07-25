@@ -1,0 +1,113 @@
+{
+  "index": 4695,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "First find the total number of antacids Nancy takes after eating Indian food per week: 3 antacids/day * 3 days/week = <<3*3=9>>9 antacids/week",
+    "L2": "Then find the total number of antacids Nancy takes after eating Mexican food per week: 2 antacids/day * 2 days/week = <<2*2=4>>4 antacids/week",
+    "L3": "Then find the number of days she doesn't eat Indian food or Mexican food: 7 days/week - 3 days/week - 2 days/week = 2 days/week",
+    "L4": "Then find the total number of antacids Nancy takes per week: 9 antacids/week + 4 antacids/week + 2 antacids/week = <<9+4+2=15>>15 antacids/week",
+    "L5": "Then multiply her weekly antacid consumption by the number of weeks per month to find her monthly consumption: 15 antacids/week * 4 week/month = <<15*4=60>>60 antacids/month"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4695.\n    Returns: the total number of antacids Nancy takes per month.\n    \"\"\"\n    # L1\n    antacids_indian_per_day = 3 # 3 antacids per day when she eats Indian food\n    indian_days_per_week = 3 # Indian three times a week\n    antacids_indian_per_week = antacids_indian_per_day * indian_days_per_week\n\n    # L2\n    antacids_mexican_per_day = 2 # 2 antacids per day when she eats Mexican food\n    mexican_days_per_week = 2 # Mexican twice a week\n    antacids_mexican_per_week = antacids_mexican_per_day * mexican_days_per_week\n\n    # L3\n    days_in_week = 7 # WK\n    other_days_per_week = days_in_week - indian_days_per_week - mexican_days_per_week\n\n    # Implicit calculation for antacids on 'other' days, used in L4\n    antacids_other_per_day = 1 # 1 antacid per day otherwise\n    antacids_other_per_week = other_days_per_week * antacids_other_per_day\n\n    # L4\n    total_antacids_per_week = antacids_indian_per_week + antacids_mexican_per_week + antacids_other_per_week\n\n    # L5\n    weeks_per_month = 4 # WK\n    total_antacids_per_month = total_antacids_per_week * weeks_per_month\n\n    # FA\n    answer = total_antacids_per_month\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "antacids_indian_per_week",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30a285150>"
+  },
+  "correct_trace": {
+    "antacids_indian_per_day": 3,
+    "indian_days_per_week": 3,
+    "antacids_indian_per_week": 9,
+    "antacids_mexican_per_day": 2,
+    "mexican_days_per_week": 2,
+    "antacids_mexican_per_week": 4,
+    "days_in_week": 7,
+    "other_days_per_week": 2,
+    "antacids_other_per_day": 1,
+    "antacids_other_per_week": 2,
+    "total_antacids_per_week": 15,
+    "weeks_per_month": 4,
+    "total_antacids_per_month": 60,
+    "answer": 60
+  },
+  "flawed_trace": {
+    "antacids_indian_per_day": 3,
+    "indian_days_per_week": 3,
+    "antacids_indian_per_week": 6,
+    "antacids_mexican_per_day": 2,
+    "mexican_days_per_week": 2,
+    "antacids_mexican_per_week": 4,
+    "days_in_week": 7,
+    "other_days_per_week": 2,
+    "antacids_other_per_day": 1,
+    "antacids_other_per_week": 2,
+    "total_antacids_per_week": 12,
+    "weeks_per_month": 4,
+    "total_antacids_per_month": 48,
+    "answer": 48
+  },
+  "correct_value": 9,
+  "flawed_value": 6,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "antacids_indian_per_week",
+      "question_inputs": [
+        "antacids_indian_per_day",
+        "indian_days_per_week"
+      ],
+      "solution_line_template": "First find the total number of antacids Nancy takes after eating Indian food per week: {antacids_indian_per_day} antacids/day * {indian_days_per_week} days/week = <<{antacids_indian_per_day}*{indian_days_per_week}={antacids_indian_per_week}>>{antacids_indian_per_week} antacids/week"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "antacids_mexican_per_week",
+      "question_inputs": [
+        "antacids_mexican_per_day",
+        "mexican_days_per_week"
+      ],
+      "solution_line_template": "Then find the total number of antacids Nancy takes after eating Mexican food per week: {antacids_mexican_per_day} antacids/day * {mexican_days_per_week} days/week = <<{antacids_mexican_per_day}*{mexican_days_per_week}={antacids_mexican_per_week}>>{antacids_mexican_per_week} antacids/week"
+    },
+    {
+      "WK_inputs": [
+        "days_in_week"
+      ],
+      "line_number": "L3",
+      "output_variable": "other_days_per_week",
+      "question_inputs": [],
+      "solution_line_template": "Then find the number of days she doesn't eat Indian food or Mexican food: {days_in_week} days/week - {indian_days_per_week} days/week - {mexican_days_per_week} days/week = {other_days_per_week} days/week"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_antacids_per_week",
+      "question_inputs": [
+        "antacids_other_per_day"
+      ],
+      "solution_line_template": "Then find the total number of antacids Nancy takes per week: {antacids_indian_per_week} antacids/week + {antacids_mexican_per_week} antacids/week + {antacids_other_per_week} antacids/week = <<{antacids_indian_per_week}+{antacids_mexican_per_week}+{antacids_other_per_week}={total_antacids_per_week}>>{total_antacids_per_week} antacids/week"
+    },
+    {
+      "WK_inputs": [
+        "weeks_per_month"
+      ],
+      "line_number": "L5",
+      "output_variable": "total_antacids_per_month",
+      "question_inputs": [],
+      "solution_line_template": "Then multiply her weekly antacid consumption by the number of weeks per month to find her monthly consumption: {total_antacids_per_week} antacids/week * {weeks_per_month} week/month = <<{total_antacids_per_week}*{weeks_per_month}={total_antacids_per_month}>>{total_antacids_per_month} antacids/month"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total number of antacids Nancy takes after eating Indian food per week: 3 antacids/day * 3 days/week = <<3*3=6>>6 antacids/week",
+    "L2": "Then find the total number of antacids Nancy takes after eating Mexican food per week: 2 antacids/day * 2 days/week = <<2*2=4>>4 antacids/week",
+    "L3": "Then find the number of days she doesn't eat Indian food or Mexican food: 7 days/week - 3 days/week - 2 days/week = 2 days/week",
+    "L4": "Then find the total number of antacids Nancy takes per week: 6 antacids/week + 4 antacids/week + 2 antacids/week = <<6+4+2=12>>12 antacids/week",
+    "L5": "Then multiply her weekly antacid consumption by the number of weeks per month to find her monthly consumption: 12 antacids/week * 4 week/month = <<12*4=48>>48 antacids/month",
+    "FA": "#### 48"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 1766710772415922632,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,111 @@
+{
+  "index": 5218,
+  "original_solution_mapping": {
+    "FA": "#### 13600",
+    "L1": "If Brian caught 400 fish in one trip, he caught 2*400=<<400*2=800>>800 fish in two trips.",
+    "L2": "Since Brian catches 2/5 times less fish than Chris per trip, Chris catches 2/5*400=<<2/5*400=160>>160 more fish in one fishing trip.",
+    "L3": "Chris's total number of fish in one trip is 400+160 = <<400+160=560>>560 fish.",
+    "L4": "In 10 trips, Chris catches 560*10=<<560*10=5600>>5600 fish.",
+    "L5": "If in his two trips Brian catches 800 fish, and he goes fishing twice as often as Chris, if Chris goes fishing 10 times, Brian will catch 800*10=<<800*10=8000>>8000 fish.",
+    "L6": "The total number of fish they'll catch if Chris goes fishing ten times is 8000+5600=<<8000+5600=13600>>13600"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5218.\n    Returns: the total number of fish caught by Brian and Chris.\n    \"\"\"\n    # L1\n    brian_fish_per_trip = 400 # Brian caught 400 fish every time he went fishing\n    brian_trips_multiplier_for_calc = 2 # Brian goes fishing twice as often as Chris\n    brian_fish_in_two_trips = brian_fish_per_trip * brian_trips_multiplier_for_calc\n\n    # L2\n    fewer_fish_fraction = Fraction(2, 5) # 2/5 times fewer fish than Chris per trip\n    chris_additional_fish_per_trip = fewer_fish_fraction * brian_fish_per_trip\n\n    # L3\n    chris_fish_per_trip = brian_fish_per_trip + chris_additional_fish_per_trip\n\n    # L4\n    chris_total_trips = 10 # Chris went fishing 10 times\n    chris_total_fish = chris_fish_per_trip * chris_total_trips\n\n    # L5\n    brian_total_fish = brian_fish_in_two_trips * chris_total_trips\n\n    # L6\n    total_fish_caught = brian_total_fish + chris_total_fish\n\n    # FA\n    answer = total_fish_caught\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "brian_total_fish",
+    "operand_to_replace": "chris_total_trips",
+    "replacement_variable": "brian_fish_in_two_trips"
+  },
+  "correct_trace": {
+    "brian_fish_per_trip": 400,
+    "brian_trips_multiplier_for_calc": 2,
+    "brian_fish_in_two_trips": 800,
+    "fewer_fish_fraction": "2/5",
+    "chris_additional_fish_per_trip": "160",
+    "chris_fish_per_trip": "560",
+    "chris_total_trips": 10,
+    "chris_total_fish": "5600",
+    "brian_total_fish": 8000,
+    "total_fish_caught": "13600",
+    "answer": "13600"
+  },
+  "flawed_trace": {
+    "brian_fish_per_trip": 400,
+    "brian_trips_multiplier_for_calc": 2,
+    "brian_fish_in_two_trips": 800,
+    "fewer_fish_fraction": "2/5",
+    "chris_additional_fish_per_trip": "160",
+    "chris_fish_per_trip": "560",
+    "chris_total_trips": 10,
+    "chris_total_fish": "5600",
+    "brian_total_fish": 640000,
+    "total_fish_caught": "645600",
+    "answer": "645600"
+  },
+  "correct_value": 8000,
+  "flawed_value": 640000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "brian_fish_in_two_trips",
+      "question_inputs": [
+        "brian_fish_per_trip",
+        "brian_trips_multiplier_for_calc"
+      ],
+      "solution_line_template": "If Brian caught {brian_fish_per_trip} fish in one trip, he caught {brian_trips_multiplier_for_calc}*{brian_fish_per_trip}=<<{brian_fish_per_trip}*{brian_trips_multiplier_for_calc}={brian_fish_in_two_trips}>>{brian_fish_in_two_trips} fish in two trips."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "chris_additional_fish_per_trip",
+      "question_inputs": [
+        "fewer_fish_fraction"
+      ],
+      "solution_line_template": "Since Brian catches {fewer_fish_fraction} times less fish than Chris per trip, Chris catches {fewer_fish_fraction}*{brian_fish_per_trip}=<<{fewer_fish_fraction}*{brian_fish_per_trip}={chris_additional_fish_per_trip}>>{chris_additional_fish_per_trip} more fish in one fishing trip."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "chris_fish_per_trip",
+      "question_inputs": [],
+      "solution_line_template": "Chris's total number of fish in one trip is {brian_fish_per_trip}+{chris_additional_fish_per_trip} = <<{brian_fish_per_trip}+{chris_additional_fish_per_trip}={chris_fish_per_trip}>>{chris_fish_per_trip} fish."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "chris_total_fish",
+      "question_inputs": [
+        "chris_total_trips"
+      ],
+      "solution_line_template": "In {chris_total_trips} trips, Chris catches {chris_fish_per_trip}*{chris_total_trips}=<<{chris_fish_per_trip}*{chris_total_trips}={chris_total_fish}>>{chris_total_fish} fish."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "brian_total_fish",
+      "question_inputs": [],
+      "solution_line_template": "If in his two trips Brian catches {brian_fish_in_two_trips} fish, and he goes fishing twice as often as Chris, if Chris goes fishing {chris_total_trips} times, Brian will catch {brian_fish_in_two_trips}*{chris_total_trips}=<<{brian_fish_in_two_trips}*{chris_total_trips}={brian_total_fish}>>{brian_total_fish} fish."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_fish_caught",
+      "question_inputs": [],
+      "solution_line_template": "The total number of fish they'll catch if Chris goes fishing ten times is {brian_total_fish}+{chris_total_fish}=<<{brian_total_fish}+{chris_total_fish}={total_fish_caught}>>{total_fish_caught}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Brian caught 400 fish in one trip, he caught 2*400=<<400*2=800>>800 fish in two trips.",
+    "L2": "Since Brian catches 2/5 times less fish than Chris per trip, Chris catches 2/5*400=<<2/5*400=160>>160 more fish in one fishing trip.",
+    "L3": "Chris's total number of fish in one trip is 400+160 = <<400+160=560>>560 fish.",
+    "L4": "In 10 trips, Chris catches 560*10=<<560*10=5600>>5600 fish.",
+    "L5": "If in his two trips Brian catches 800 fish, and he goes fishing twice as often as Chris, if Chris goes fishing 800 times, Brian will catch 800*800=<<800*800=640000>>640000 fish.",
+    "L6": "The total number of fish they'll catch if Chris goes fishing ten times is 640000+5600=<<640000+5600=645600>>645600",
+    "FA": "#### 645600"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Input misrepresentation. The value for 'brian_fish_in_two_trips' (800) was used instead of 'chris_total_trips' (10).",
+  "repro_seed": 6292647768255736834,
+  "model_name": "google_gemini-2.5-flash"
+}

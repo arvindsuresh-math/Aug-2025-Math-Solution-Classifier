@@ -1,0 +1,77 @@
+{
+  "index": 1270,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "After paying the deposit, Danielle still has to pay a total of $280k purchase price - $40k deposit = $<<280-40=240>>240k via her mortgage.",
+    "L2": "As the mortgage is over 10 years, Danielle's payments need to total $240k mortgage balance / 10 years = $<<240/10=24>>24k per year.",
+    "L3": "So each month, Danielle has to pay $24k per year / 12 months in a year = $2k per month."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1270.\n    Returns: the amount Danielle pays each month in thousands of dollars.\n    \"\"\"\n    # L1\n    purchase_price = 280 # new house for $280k\n    deposit = 40 # paid a $40k deposit\n    mortgage_balance = purchase_price - deposit\n\n    # L2\n    mortgage_years = 10 # spread out over 10 years\n    annual_payment = mortgage_balance / mortgage_years\n\n    # L3\n    months_per_year = 12 # 12 months in a year\n    monthly_payment = annual_payment / months_per_year\n\n    # FA\n    answer = monthly_payment\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "monthly_payment",
+    "replacement_variable": "annual_payment"
+  },
+  "correct_trace": {
+    "purchase_price": 280,
+    "deposit": 40,
+    "mortgage_balance": 240,
+    "mortgage_years": 10,
+    "annual_payment": 24.0,
+    "months_per_year": 12,
+    "monthly_payment": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "purchase_price": 280,
+    "deposit": 40,
+    "mortgage_balance": 240,
+    "mortgage_years": 10,
+    "annual_payment": 24.0,
+    "months_per_year": 12,
+    "monthly_payment": 2.0,
+    "answer": 24.0
+  },
+  "correct_value": 2.0,
+  "flawed_value": 24.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "mortgage_balance",
+      "question_inputs": [
+        "purchase_price",
+        "deposit"
+      ],
+      "solution_line_template": "After paying the deposit, Danielle still has to pay a total of ${purchase_price}k purchase price - ${deposit}k deposit = $<<{purchase_price}-{deposit}={mortgage_balance}>>{mortgage_balance}k via her mortgage."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "annual_payment",
+      "question_inputs": [
+        "mortgage_years"
+      ],
+      "solution_line_template": "As the mortgage is over {mortgage_years} years, Danielle's payments need to total ${mortgage_balance}k mortgage balance / {mortgage_years} years = $<<{mortgage_balance}/{mortgage_years}={annual_payment}>>{annual_payment}k per year."
+    },
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L3",
+      "output_variable": "monthly_payment",
+      "question_inputs": [],
+      "solution_line_template": "So each month, Danielle has to pay ${annual_payment}k per year / {months_per_year} months in a year = ${monthly_payment}k per month."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After paying the deposit, Danielle still has to pay a total of $280k purchase price - $40k deposit = $<<280-40=240>>240k via her mortgage.",
+    "L2": "As the mortgage is over 10 years, Danielle's payments need to total $240k mortgage balance / 10 years = $<<240/10=24>>24k per year.",
+    "FA": "#### 24"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'annual_payment' (value: 24.0) was reported instead of 'monthly_payment' (value: 2.0).",
+  "repro_seed": -7800370773987932766,
+  "model_name": "google_gemini-2.5-flash"
+}

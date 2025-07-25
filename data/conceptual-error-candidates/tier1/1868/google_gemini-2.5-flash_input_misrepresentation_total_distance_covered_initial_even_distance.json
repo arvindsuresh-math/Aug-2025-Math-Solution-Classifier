@@ -1,0 +1,69 @@
+{
+  "index": 1868,
+  "original_solution_mapping": {
+    "FA": "#### 3,890",
+    "L1": "So far Alex and Max are running the race for 200 + 300 + 170 + 440 = <<200+300+170+440=1110>>1,110 feet.",
+    "L2": "If the road they're racing each other on is 5000 feet long, 5000 - 1,110 feet = <<5000-1110=3890>>3,890 feet left for Max to catch up to Alex."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1868.\n    Returns: the number of feet left for Max to catch up to Alex.\n    \"\"\"\n    # L1\n    initial_even_distance = 200 # 200 feet\n    alex_ahead_1 = 300 # Alex gets ahead of Max by 300 feet\n    max_ahead_1 = 170 # Max gets ahead of Alex by 170 feet\n    alex_ahead_2 = 440 # Alex gets ahead of Max by 440 feet\n    total_distance_covered = initial_even_distance + alex_ahead_1 + max_ahead_1 + alex_ahead_2\n\n    # L2\n    total_road_length = 5000 # road they're running on is 5000 feet long\n    remaining_distance = total_road_length - total_distance_covered\n\n    # FA\n    answer = remaining_distance\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_distance_covered",
+    "operand_to_replace": "alex_ahead_2",
+    "replacement_variable": "initial_even_distance"
+  },
+  "correct_trace": {
+    "initial_even_distance": 200,
+    "alex_ahead_1": 300,
+    "max_ahead_1": 170,
+    "alex_ahead_2": 440,
+    "total_distance_covered": 1110,
+    "total_road_length": 5000,
+    "remaining_distance": 3890,
+    "answer": 3890
+  },
+  "flawed_trace": {
+    "initial_even_distance": 200,
+    "alex_ahead_1": 300,
+    "max_ahead_1": 170,
+    "alex_ahead_2": 440,
+    "total_distance_covered": 870,
+    "total_road_length": 5000,
+    "remaining_distance": 4130,
+    "answer": 4130
+  },
+  "correct_value": 1110,
+  "flawed_value": 870,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "initial_even_distance",
+        "alex_ahead_1",
+        "max_ahead_1",
+        "alex_ahead_2"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_distance_covered",
+      "solution_line_template": "So far Alex and Max are running the race for {initial_even_distance} + {alex_ahead_1} + {max_ahead_1} + {alex_ahead_2} = <<{initial_even_distance}+{alex_ahead_1}+{max_ahead_1}+{alex_ahead_2}={total_distance_covered}>>{total_distance_covered} feet."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "total_road_length"
+      ],
+      "WK_inputs": [],
+      "output_variable": "remaining_distance",
+      "solution_line_template": "If the road they're racing each other on is {total_road_length} feet long, {total_road_length} - {total_distance_covered} feet = <<{total_road_length}-{total_distance_covered}={remaining_distance}>>{remaining_distance} feet left for Max to catch up to Alex."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "So far Alex and Max are running the race for 200 + 300 + 170 + 200 = <<200+300+170+200=870>>870 feet.",
+    "L2": "If the road they're racing each other on is 5000 feet long, 5000 - 870 feet = <<5000-870=4130>>4130 feet left for Max to catch up to Alex.",
+    "FA": "#### 4130"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'initial_even_distance' (200) was used instead of 'alex_ahead_2' (440).",
+  "repro_seed": -5752757104999893080,
+  "model_name": "google_gemini-2.5-flash"
+}

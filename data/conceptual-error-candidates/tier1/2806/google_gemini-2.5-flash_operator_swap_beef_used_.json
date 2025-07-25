@@ -1,0 +1,63 @@
+{
+  "index": 2806,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "He used 4-1=<<4-1=3>>3 pounds of beef",
+    "L2": "So he used 3*2=<<3*2=6>>6 pounds of vegetables"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2806.\n    Returns: the number of pounds of vegetables John used.\n    \"\"\"\n    # L1\n    initial_beef_pounds = 4 # 4 pounds of beef\n    beef_left_out = 1 # all but 1 pound\n    beef_used = initial_beef_pounds - beef_left_out\n\n    # L2\n    multiplier_for_vegetables = 2 # twice as many pounds of vegetables\n    vegetables_used = beef_used * multiplier_for_vegetables\n\n    # FA\n    answer = vegetables_used\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "beef_used",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x30ac04990>"
+  },
+  "correct_trace": {
+    "initial_beef_pounds": 4,
+    "beef_left_out": 1,
+    "beef_used": 3,
+    "multiplier_for_vegetables": 2,
+    "vegetables_used": 6,
+    "answer": 6
+  },
+  "flawed_trace": {
+    "initial_beef_pounds": 4,
+    "beef_left_out": 1,
+    "beef_used": 4.0,
+    "multiplier_for_vegetables": 2,
+    "vegetables_used": 8.0,
+    "answer": 8.0
+  },
+  "correct_value": 3,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "initial_beef_pounds",
+        "beef_left_out"
+      ],
+      "WK_inputs": [],
+      "output_variable": "beef_used",
+      "solution_line_template": "He used {initial_beef_pounds}-{beef_left_out}=<<{initial_beef_pounds}-{beef_left_out}={beef_used}>>{beef_used} pounds of beef"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "multiplier_for_vegetables"
+      ],
+      "WK_inputs": [],
+      "output_variable": "vegetables_used",
+      "solution_line_template": "So he used {beef_used}*{multiplier_for_vegetables}=<<{beef_used}*{multiplier_for_vegetables}={vegetables_used}>>{vegetables_used} pounds of vegetables"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He used 4-1=<<4-1=4>>4 pounds of beef",
+    "L2": "So he used 4*2=<<4*2=8>>8 pounds of vegetables",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": 928083833046817298,
+  "model_name": "google_gemini-2.5-flash"
+}

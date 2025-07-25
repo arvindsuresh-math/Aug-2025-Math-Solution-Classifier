@@ -1,0 +1,82 @@
+{
+  "index": 1870,
+  "original_solution_mapping": {
+    "FA": "#### 80",
+    "L1": "Since the angles in a triangle adds up to 180, and A is 40 degrees, B and C have a total of 180-60 = <<180-60=120>>120 degrees.",
+    "L2": "Since B is two times bigger than C, the total of the angles of B and C is equal to 2C+C = 120",
+    "L3": "3C=120",
+    "L4": "The angle of C is C=120/3",
+    "L5": "C is <<40=40>>40",
+    "L6": "Since B is two times as big as C, B is 2*40 = 80 degrees."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1870.\n    Returns: the angle of B.\n    \"\"\"\n    # L1\n    total_angle_sum = 180 # WK\n    angle_A = 60 # A is 60 degrees\n    sum_B_C = total_angle_sum - angle_A\n\n    # L4\n    # The solution implies B = 2C, so B + C = 2C + C = 3C. Thus, C = (B+C)/3.\n    divisor_for_C = 3 # WK\n    angle_C = sum_B_C / divisor_for_C\n\n    # L6\n    multiplier_B = 2 # B is two times as big as C\n    angle_B = multiplier_B * angle_C\n\n    # FA\n    answer = angle_B\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "angle_C",
+    "operand_to_replace": "divisor_for_C",
+    "replacement_variable": "sum_B_C"
+  },
+  "correct_trace": {
+    "total_angle_sum": 180,
+    "angle_A": 60,
+    "sum_B_C": 120,
+    "divisor_for_C": 3,
+    "angle_C": 40.0,
+    "multiplier_B": 2,
+    "angle_B": 80.0,
+    "answer": 80.0
+  },
+  "flawed_trace": {
+    "total_angle_sum": 180,
+    "angle_A": 60,
+    "sum_B_C": 120,
+    "divisor_for_C": 3,
+    "angle_C": 1.0,
+    "multiplier_B": 2,
+    "angle_B": 2.0,
+    "answer": 2.0
+  },
+  "correct_value": 40.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_angle_sum"
+      ],
+      "line_number": "L1",
+      "output_variable": "sum_B_C",
+      "question_inputs": [
+        "angle_A"
+      ],
+      "solution_line_template": "Since the angles in a triangle adds up to {total_angle_sum}, and A is 40 degrees, B and C have a total of {total_angle_sum}-{angle_A} = <<{total_angle_sum}-{angle_A}={sum_B_C}>>{sum_B_C} degrees."
+    },
+    {
+      "WK_inputs": [
+        "divisor_for_C"
+      ],
+      "line_number": "L4",
+      "output_variable": "angle_C",
+      "question_inputs": [],
+      "solution_line_template": "The angle of C is C={sum_B_C}/{divisor_for_C}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "angle_B",
+      "question_inputs": [
+        "multiplier_B"
+      ],
+      "solution_line_template": "Since B is two times as big as C, B is {multiplier_B}*{angle_C} = {angle_B} degrees."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since the angles in a triangle adds up to 180, and A is 40 degrees, B and C have a total of 180-60 = <<180-60=120>>120 degrees.",
+    "L4": "The angle of C is C=120/120",
+    "L6": "Since B is two times as big as C, B is 2*1 = 2 degrees.",
+    "FA": "#### 2"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'sum_B_C' (120) was used instead of 'divisor_for_C' (3).",
+  "repro_seed": 9010675890800730912,
+  "model_name": "google_gemini-2.5-flash"
+}

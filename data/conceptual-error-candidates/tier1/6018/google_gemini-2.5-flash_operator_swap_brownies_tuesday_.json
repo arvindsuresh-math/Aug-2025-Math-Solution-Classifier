@@ -1,0 +1,59 @@
+{
+  "index": 6018,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "On Tuesday, Katy ate 5 brownies * 2 = <<5*2=10>>10 brownies.",
+    "L2": "As she has eaten all of the brownies she made, she must have made 5 Monday brownies + 10 Tuesday brownies = <<5+10=15>>15 brownies."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6018.\n    Returns: the total number of brownies Katy made.\n    \"\"\"\n    # L1\n    brownies_monday = 5 # eats 5 on Monday\n    multiplier_tuesday = 2 # twice as many on Tuesday\n    brownies_tuesday = brownies_monday * multiplier_tuesday\n\n    # L2\n    total_brownies_made = brownies_monday + brownies_tuesday\n\n    # FA\n    answer = total_brownies_made\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "brownies_tuesday",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30aec3450>"
+  },
+  "correct_trace": {
+    "brownies_monday": 5,
+    "multiplier_tuesday": 2,
+    "brownies_tuesday": 10,
+    "total_brownies_made": 15,
+    "answer": 15
+  },
+  "flawed_trace": {
+    "brownies_monday": 5,
+    "multiplier_tuesday": 2,
+    "brownies_tuesday": 7,
+    "total_brownies_made": 12,
+    "answer": 12
+  },
+  "correct_value": 10,
+  "flawed_value": 7,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "brownies_tuesday",
+      "question_inputs": [
+        "brownies_monday",
+        "multiplier_tuesday"
+      ],
+      "solution_line_template": "On Tuesday, Katy ate {brownies_monday} brownies * {multiplier_tuesday} = <<{brownies_monday}*{multiplier_tuesday}={brownies_tuesday}>>{brownies_tuesday} brownies."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_brownies_made",
+      "question_inputs": [],
+      "solution_line_template": "As she has eaten all of the brownies she made, she must have made {brownies_monday} Monday brownies + {brownies_tuesday} Tuesday brownies = <<{brownies_monday}+{brownies_tuesday}={total_brownies_made}>>{total_brownies_made} brownies."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Tuesday, Katy ate 5 brownies * 2 = <<5*2=7>>7 brownies.",
+    "L2": "As she has eaten all of the brownies she made, she must have made 5 Monday brownies + 7 Tuesday brownies = <<5+7=12>>12 brownies.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -9023384964294251462,
+  "model_name": "google_gemini-2.5-flash"
+}

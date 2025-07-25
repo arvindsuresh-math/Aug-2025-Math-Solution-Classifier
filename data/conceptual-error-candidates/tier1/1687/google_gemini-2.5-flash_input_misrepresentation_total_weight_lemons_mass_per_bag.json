@@ -1,0 +1,63 @@
+{
+  "index": 1687,
+  "original_solution_mapping": {
+    "FA": "#### 100",
+    "L1": "The total weight of 100 bags of lemons is 100 x 8 = <<100*8=800>>800 kilograms.",
+    "L2": "So, 900 - 800 = <<900-800=100>>100 kilograms can still be loaded into the truck."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1687.\n    Returns: the number of additional kilograms that can be loaded into the truck.\n    \"\"\"\n    # L1\n    num_bags = 100 # 100 bags of lemons\n    mass_per_bag = 8 # 8 kilograms\n    total_weight_lemons = num_bags * mass_per_bag\n\n    # L2\n    max_load = 900 # 900 kilograms\n    remaining_capacity = max_load - total_weight_lemons\n\n    # FA\n    answer = remaining_capacity\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_weight_lemons",
+    "operand_to_replace": "num_bags",
+    "replacement_variable": "mass_per_bag"
+  },
+  "correct_trace": {
+    "num_bags": 100,
+    "mass_per_bag": 8,
+    "total_weight_lemons": 800,
+    "max_load": 900,
+    "remaining_capacity": 100,
+    "answer": 100
+  },
+  "flawed_trace": {
+    "num_bags": 100,
+    "mass_per_bag": 8,
+    "total_weight_lemons": 64,
+    "max_load": 900,
+    "remaining_capacity": 836,
+    "answer": 836
+  },
+  "correct_value": 800,
+  "flawed_value": 64,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "num_bags",
+        "mass_per_bag"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_weight_lemons",
+      "solution_line_template": "The total weight of {num_bags} bags of lemons is {num_bags} x {mass_per_bag} = <<{num_bags}*{mass_per_bag}={total_weight_lemons}>>{total_weight_lemons} kilograms."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "max_load"
+      ],
+      "WK_inputs": [],
+      "output_variable": "remaining_capacity",
+      "solution_line_template": "So, {max_load} - {total_weight_lemons} = <<{max_load}-{total_weight_lemons}={remaining_capacity}>>{remaining_capacity} kilograms can still be loaded into the truck."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total weight of 8 bags of lemons is 8 x 8 = <<8*8=64>>64 kilograms.",
+    "L2": "So, 900 - 64 = <<900-64=836>>836 kilograms can still be loaded into the truck.",
+    "FA": "#### 836"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'mass_per_bag' (8) was used instead of 'num_bags' (100).",
+  "repro_seed": 3841786084795457461,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,93 @@
+{
+  "index": 4883,
+  "original_solution_mapping": {
+    "FA": "#### 300",
+    "L1": "The doctor charged 300/2=$<<300/2=150>>150",
+    "L2": "So the total cost was 150+150+1200=$<<150+150+1200=1500>>1500",
+    "L3": "The insurance covered 1500*.8=$<<1500*.8=1200>>1200",
+    "L4": "So he paid 1500-1200=$<<1500-1200=300>>300"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4883.\n    Returns: the amount Tim paid after insurance coverage.\n    \"\"\"\n    # L1\n    doctor_hourly_rate = 300 # charges $300 per hour\n    half_hour_divisor = 2 # WK\n    doctor_charge_exam = doctor_hourly_rate / half_hour_divisor\n\n    # L2\n    seen_fee = 150 # $150 fee just for being seen\n    mri_cost = 1200 # MRI which costs $1200\n    total_cost_before_insurance = doctor_charge_exam + seen_fee + mri_cost\n\n    # L3\n    insurance_coverage_percent = 0.8 # Insurance covered 80%\n    insurance_covered_amount = total_cost_before_insurance * insurance_coverage_percent\n\n    # L4\n    amount_paid_by_tim = total_cost_before_insurance - insurance_covered_amount\n\n    # FA\n    answer = amount_paid_by_tim\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cost_before_insurance",
+    "operand_to_replace": "mri_cost",
+    "replacement_variable": "doctor_charge_exam"
+  },
+  "correct_trace": {
+    "doctor_hourly_rate": 300,
+    "half_hour_divisor": 2,
+    "doctor_charge_exam": 150.0,
+    "seen_fee": 150,
+    "mri_cost": 1200,
+    "total_cost_before_insurance": 1500.0,
+    "insurance_coverage_percent": 0.8,
+    "insurance_covered_amount": 1200.0,
+    "amount_paid_by_tim": 300.0,
+    "answer": 300.0
+  },
+  "flawed_trace": {
+    "doctor_hourly_rate": 300,
+    "half_hour_divisor": 2,
+    "doctor_charge_exam": 150.0,
+    "seen_fee": 150,
+    "mri_cost": 1200,
+    "total_cost_before_insurance": 450.0,
+    "insurance_coverage_percent": 0.8,
+    "insurance_covered_amount": 360.0,
+    "amount_paid_by_tim": 90.0,
+    "answer": 90.0
+  },
+  "correct_value": 1500.0,
+  "flawed_value": 450.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "half_hour_divisor"
+      ],
+      "line_number": "L1",
+      "output_variable": "doctor_charge_exam",
+      "question_inputs": [
+        "doctor_hourly_rate"
+      ],
+      "solution_line_template": "The doctor charged {doctor_hourly_rate}/{half_hour_divisor}=${doctor_hourly_rate}/{half_hour_divisor}={doctor_charge_exam}>>{doctor_charge_exam}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost_before_insurance",
+      "question_inputs": [
+        "seen_fee",
+        "mri_cost"
+      ],
+      "solution_line_template": "So the total cost was {doctor_charge_exam}+{seen_fee}+{mri_cost}=${doctor_charge_exam}+{seen_fee}+{mri_cost}={total_cost_before_insurance}>>{total_cost_before_insurance}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "insurance_covered_amount",
+      "question_inputs": [
+        "insurance_coverage_percent"
+      ],
+      "solution_line_template": "The insurance covered {total_cost_before_insurance}*{insurance_coverage_percent}=${total_cost_before_insurance}*{insurance_coverage_percent}={insurance_covered_amount}>>{insurance_covered_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "amount_paid_by_tim",
+      "question_inputs": [],
+      "solution_line_template": "So he paid {total_cost_before_insurance}-{insurance_covered_amount}=${total_cost_before_insurance}-{insurance_covered_amount}={amount_paid_by_tim}>>{amount_paid_by_tim}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The doctor charged 300/2=$300/2=150>>150",
+    "L2": "So the total cost was 150+150+150=$150+150+150=450>>450",
+    "L3": "The insurance covered 450*0.8=$450*0.8=360>>360",
+    "L4": "So he paid 450-360=$450-360=90>>90",
+    "FA": "#### 90"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'doctor_charge_exam' (150.0) was used instead of 'mri_cost' (1200).",
+  "repro_seed": 821042369160691980,
+  "model_name": "google_gemini-2.5-flash"
+}

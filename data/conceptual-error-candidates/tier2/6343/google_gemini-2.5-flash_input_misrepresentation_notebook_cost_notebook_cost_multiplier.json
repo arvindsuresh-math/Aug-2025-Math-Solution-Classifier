@@ -1,0 +1,63 @@
+{
+  "index": 6343,
+  "original_solution_mapping": {
+    "FA": "#### 18",
+    "L1": "A notebook costs $1.50 x 3 = $<<1.5*3=4.50>>4.50.",
+    "L2": "So Lyle will pay $4.50 x 4 = $<<4*4.5=18>>18 for the 4 notebooks."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6343.\n    Returns: the total amount Lyle will pay for 4 notebooks.\n    \"\"\"\n    # L1\n    pen_cost = 1.50 # a pen costs $1.50\n    notebook_cost_multiplier = 3 # three times as much\n    notebook_cost = pen_cost * notebook_cost_multiplier\n\n    # L2\n    num_notebooks = 4 # 4 notebooks\n    total_cost = notebook_cost * num_notebooks\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "notebook_cost",
+    "operand_to_replace": "pen_cost",
+    "replacement_variable": "notebook_cost_multiplier"
+  },
+  "correct_trace": {
+    "pen_cost": 1.5,
+    "notebook_cost_multiplier": 3,
+    "notebook_cost": 4.5,
+    "num_notebooks": 4,
+    "total_cost": 18.0,
+    "answer": 18.0
+  },
+  "flawed_trace": {
+    "pen_cost": 1.5,
+    "notebook_cost_multiplier": 3,
+    "notebook_cost": 9,
+    "num_notebooks": 4,
+    "total_cost": 36,
+    "answer": 36
+  },
+  "correct_value": 4.5,
+  "flawed_value": 9,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "notebook_cost",
+      "question_inputs": [
+        "pen_cost",
+        "notebook_cost_multiplier"
+      ],
+      "solution_line_template": "A notebook costs ${pen_cost} x {notebook_cost_multiplier} = $<<{pen_cost}*{notebook_cost_multiplier}={notebook_cost}>>{notebook_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "num_notebooks"
+      ],
+      "solution_line_template": "So Lyle will pay ${notebook_cost} x {num_notebooks} = $<<{num_notebooks}*{notebook_cost}={total_cost}>>{total_cost} for the {num_notebooks} notebooks."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "A notebook costs $3 x 3 = $<<3*3=9>>9.",
+    "L2": "So Lyle will pay $9 x 4 = $<<4*9=36>>36 for the 4 notebooks.",
+    "FA": "#### 36"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'notebook_cost_multiplier' (3) was used instead of 'pen_cost' (1.5).",
+  "repro_seed": -9098617060386487897,
+  "model_name": "google_gemini-2.5-flash"
+}

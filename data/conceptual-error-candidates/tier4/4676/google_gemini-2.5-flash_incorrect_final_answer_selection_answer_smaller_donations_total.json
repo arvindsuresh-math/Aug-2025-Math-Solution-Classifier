@@ -1,0 +1,113 @@
+{
+  "index": 4676,
+  "original_solution_mapping": {
+    "FA": "#### 3750000",
+    "L1": "He got 1200*500=$<<1200*500=600000>>600,000 from maxed donors",
+    "L2": "The smaller donors donated 1200/2=$<<1200/2=600>>600",
+    "L3": "He had 500*3=<<500*3=1500>>1500 of these donors",
+    "L4": "So they donated 1500*600=$<<1500*600=900000>>900,000",
+    "L5": "So large donations where worth 900,000+600,000=$<<900000+600000=1500000>>1,500,000",
+    "L6": "So he raised 1,500,000/.4=$<<1500000/.4=3750000>>3750000"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4676.\n    Returns: the total money Tim raised.\n    \"\"\"\n    # L1\n    max_donation = 1200 # maximum $1200 donation\n    num_max_donors = 500 # 500 people\n    max_donations_total = max_donation * num_max_donors\n\n    # L2\n    half_divisor = 2 # half this sum of money\n    smaller_donation_amount = max_donation / half_divisor\n\n    # L3\n    times_factor = 3 # three times as many people\n    num_smaller_donors = num_max_donors * times_factor\n\n    # L4\n    smaller_donations_total = num_smaller_donors * smaller_donation_amount\n\n    # L5\n    total_initial_donations = smaller_donations_total + max_donations_total\n\n    # L6\n    percentage_decimal = 0.4 # 40% of the total money\n    total_money_raised = total_initial_donations / percentage_decimal\n\n    # FA\n    answer = total_money_raised\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_money_raised",
+    "replacement_variable": "smaller_donations_total"
+  },
+  "correct_trace": {
+    "max_donation": 1200,
+    "num_max_donors": 500,
+    "max_donations_total": 600000,
+    "half_divisor": 2,
+    "smaller_donation_amount": 600.0,
+    "times_factor": 3,
+    "num_smaller_donors": 1500,
+    "smaller_donations_total": 900000.0,
+    "total_initial_donations": 1500000.0,
+    "percentage_decimal": 0.4,
+    "total_money_raised": 3750000.0,
+    "answer": 3750000.0
+  },
+  "flawed_trace": {
+    "max_donation": 1200,
+    "num_max_donors": 500,
+    "max_donations_total": 600000,
+    "half_divisor": 2,
+    "smaller_donation_amount": 600.0,
+    "times_factor": 3,
+    "num_smaller_donors": 1500,
+    "smaller_donations_total": 900000.0,
+    "total_initial_donations": 1500000.0,
+    "percentage_decimal": 0.4,
+    "total_money_raised": 3750000.0,
+    "answer": 900000.0
+  },
+  "correct_value": 3750000.0,
+  "flawed_value": 900000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "max_donations_total",
+      "question_inputs": [
+        "max_donation",
+        "num_max_donors"
+      ],
+      "solution_line_template": "He got {max_donation}*{num_max_donors}=$<<{max_donation}*{num_max_donors}={max_donations_total}>>{max_donations_total} from maxed donors"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "smaller_donation_amount",
+      "question_inputs": [
+        "half_divisor"
+      ],
+      "solution_line_template": "The smaller donors donated {max_donation}/{half_divisor}=$<<{max_donation}/{half_divisor}={smaller_donation_amount}>>{smaller_donation_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_smaller_donors",
+      "question_inputs": [
+        "times_factor"
+      ],
+      "solution_line_template": "He had {num_max_donors}*{times_factor}=<<{num_max_donors}*{times_factor}={num_smaller_donors}>>{num_smaller_donors} of these donors"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "smaller_donations_total",
+      "question_inputs": [],
+      "solution_line_template": "So they donated {num_smaller_donors}*{smaller_donation_amount}=$<<{num_smaller_donors}*{smaller_donation_amount}={smaller_donations_total}>>{smaller_donations_total}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_initial_donations",
+      "question_inputs": [],
+      "solution_line_template": "So large donations where worth {smaller_donations_total}+{max_donations_total}=$<<{smaller_donations_total}+{max_donations_total}={total_initial_donations}>>{total_initial_donations}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_money_raised",
+      "question_inputs": [
+        "percentage_decimal"
+      ],
+      "solution_line_template": "So he raised {total_initial_donations}/{percentage_decimal}=$<<{total_initial_donations}/{percentage_decimal}={total_money_raised}>>{total_money_raised}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He got 1200*500=$<<1200*500=600000>>600000 from maxed donors",
+    "L2": "The smaller donors donated 1200/2=$<<1200/2=600>>600",
+    "L3": "He had 500*3=<<500*3=1500>>1500 of these donors",
+    "L4": "So they donated 1500*600=$<<1500*600=900000>>900000",
+    "FA": "#### 900000"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'smaller_donations_total' (value: 900000.0) was reported instead of 'total_money_raised' (value: 3750000.0).",
+  "repro_seed": -7051432014054209699,
+  "model_name": "google_gemini-2.5-flash"
+}

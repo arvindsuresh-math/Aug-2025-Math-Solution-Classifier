@@ -1,0 +1,59 @@
+{
+  "index": 785,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "The number of customers who were served coffee in the restaurant is 3/5*25 = <<3/5*25=15>>15",
+    "L2": "If the total number of customers who came to the restaurant was 25, then 25-15 = <<25-15=10>>10 customers did not buy coffee"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 785.\n    Returns: the number of people who did not buy coffee.\n    \"\"\"\n    # L1\n    coffee_fraction = Fraction(3, 5) # 3/5 of that number came to buy coffee\n    total_people_served = 25 # 25 people food and drinks\n    people_who_bought_coffee = coffee_fraction * total_people_served\n\n    # L2\n    people_who_did_not_buy_coffee = total_people_served - people_who_bought_coffee\n\n    # FA\n    answer = people_who_did_not_buy_coffee\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "people_who_did_not_buy_coffee",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30b4a96d0>"
+  },
+  "correct_trace": {
+    "coffee_fraction": "3/5",
+    "total_people_served": 25,
+    "people_who_bought_coffee": "15",
+    "people_who_did_not_buy_coffee": "10",
+    "answer": "10"
+  },
+  "flawed_trace": {
+    "coffee_fraction": "3/5",
+    "total_people_served": 25,
+    "people_who_bought_coffee": "15",
+    "people_who_did_not_buy_coffee": "40",
+    "answer": "40"
+  },
+  "correct_value": "10",
+  "flawed_value": "40",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "people_who_bought_coffee",
+      "question_inputs": [
+        "coffee_fraction",
+        "total_people_served"
+      ],
+      "solution_line_template": "The number of customers who were served coffee in the restaurant is {coffee_fraction}*{total_people_served} = <<{coffee_fraction}*{total_people_served}={people_who_bought_coffee}>>{people_who_bought_coffee}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "people_who_did_not_buy_coffee",
+      "question_inputs": [],
+      "solution_line_template": "If the total number of customers who came to the restaurant was {total_people_served}, then {total_people_served}-{people_who_bought_coffee} = <<{total_people_served}-{people_who_bought_coffee}={people_who_did_not_buy_coffee}>>{people_who_did_not_buy_coffee} customers did not buy coffee"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The number of customers who were served coffee in the restaurant is 3/5*25 = <<3/5*25=15>>15",
+    "L2": "If the total number of customers who came to the restaurant was 25, then 25-15 = <<25-15=40>>40 customers did not buy coffee",
+    "FA": "#### 40"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 8392620482643733260,
+  "model_name": "google_gemini-2.5-flash"
+}

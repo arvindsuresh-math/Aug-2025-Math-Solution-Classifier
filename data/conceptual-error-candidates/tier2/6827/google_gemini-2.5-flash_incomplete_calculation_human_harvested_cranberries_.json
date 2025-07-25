@@ -1,0 +1,71 @@
+{
+  "index": 6827,
+  "original_solution_mapping": {
+    "FA": "#### 16000",
+    "L1": "First find the total number of cranberries harvested by humans: 60000 cranberries * 40% = <<60000*40*.01=24000>>24000",
+    "L2": "Then subtract the number of cranberries taken by the humans and elk to find the number remaining: 60000 cranberries - 24000 cranberries - 20000 cranberries = <<60000-24000-20000=16000>>16000 cranberries"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6827.\n    Returns: the number of cranberries left.\n    \"\"\"\n    # L1\n    total_cranberries = 60000 # 60000 cranberries in a bog\n    human_harvest_percent_num = 40 # 40% are harvested by humans\n    percent_factor = 0.01 # WK\n    human_harvested_cranberries = total_cranberries * human_harvest_percent_num * percent_factor\n\n    # L2\n    elk_eaten_cranberries = 20000 # 20000 are eaten by elk\n    remaining_cranberries = total_cranberries - human_harvested_cranberries - elk_eaten_cranberries\n\n    # FA\n    answer = remaining_cranberries\n    return answer\n",
+  "mutation_details": {
+    "type": "incomplete_calculation",
+    "target_variable": "human_harvested_cranberries",
+    "operand_to_remove": "human_harvest_percent_num",
+    "original_operands": [
+      "human_harvest_percent_num",
+      "percent_factor",
+      "total_cranberries"
+    ]
+  },
+  "correct_trace": {
+    "total_cranberries": 60000,
+    "human_harvest_percent_num": 40,
+    "percent_factor": 0.01,
+    "human_harvested_cranberries": 24000.0,
+    "elk_eaten_cranberries": 20000,
+    "remaining_cranberries": 16000.0,
+    "answer": 16000.0
+  },
+  "flawed_trace": {
+    "total_cranberries": 60000,
+    "human_harvest_percent_num": 40,
+    "percent_factor": 0.01,
+    "human_harvested_cranberries": 600.0,
+    "elk_eaten_cranberries": 20000,
+    "remaining_cranberries": 39400.0,
+    "answer": 39400.0
+  },
+  "correct_value": 24000.0,
+  "flawed_value": 600.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "human_harvested_cranberries",
+      "question_inputs": [
+        "total_cranberries",
+        "human_harvest_percent_num"
+      ],
+      "solution_line_template": "First find the total number of cranberries harvested by humans: {total_cranberries} cranberries * {human_harvest_percent_num}% = <<{total_cranberries}*{human_harvest_percent_num}*{percent_factor}={human_harvested_cranberries}>>{human_harvested_cranberries}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_cranberries",
+      "question_inputs": [
+        "elk_eaten_cranberries"
+      ],
+      "solution_line_template": "Then subtract the number of cranberries taken by the humans and elk to find the number remaining: {total_cranberries} cranberries - {human_harvested_cranberries} cranberries - {elk_eaten_cranberries} cranberries = <<{total_cranberries}-{human_harvested_cranberries}-{elk_eaten_cranberries}={remaining_cranberries}>>{remaining_cranberries} cranberries"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total number of cranberries harvested by humans: 60000 cranberries% = <<60000*0.01=600>>600",
+    "L2": "Then subtract the number of cranberries taken by the humans and elk to find the number remaining: 60000 cranberries - 600 cranberries - 20000 cranberries = <<60000-600-20000=39400>>39400 cranberries",
+    "FA": "#### 39400"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incomplete calculation. The term 'human_harvest_percent_num' (value: 40) was omitted from the operation.",
+  "repro_seed": 3878918824191926897,
+  "model_name": "google_gemini-2.5-flash"
+}

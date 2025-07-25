@@ -1,0 +1,262 @@
+--- Generated User Prompt Prefix (Few-Shot Section) ---
+
+You will be given a math problem and its corresponding step-by-step solution. Each step in the solution is numbered (e.g. "L1", "L2" and so on), and many of the steps include calculator annotations (e.g. "<<20*0.1=2>>"). Your goal is to convert this information into a structured JSON object according to the following schema and detailed instructions.
+
+# JSON Schema Definition
+
+Your output must adhere to the following JSON structure:
+
+```json
+{
+  "function_code": "A single string containing a complete, self-contained Python function that constitutes an end-to-end formalization of the solution.",
+  "logical_steps": [
+    {
+      "line_number": "The line number from the original solution (e.g., 'L1', 'L2').",
+      "new_inputs": "A (possibly empty) list of strings, where each string is the name of a variable being defined for the first time in this step.",
+      "output_variable": "The name of the variable being assigned as the result of the main computation in this step.",
+      "solution_line_template": "The complete original line from the solution, including the calculator annotation, with all computational numbers replaced by `{variable_name}` placeholders."
+    }
+  ]
+}
+```
+
+# Detailed Field Instructions
+
+## "function_code"
+
+This string must contain a Python function with the following characteristics:
+
+1. **Conditional Imports:** The function_code string should contain no imports, with one exception: if the function body uses the Fraction class (e.g., rate = Fraction(1, 10)), then the very first line of the function_code string MUST be from fractions import Fraction. If not, then the very first line MUST be the function definition (i.e. `def solve():`).
+
+2.  **Function Naming & Docstring:** The function must be named `solve`, and it should not have any args. It must begin with a docstring that has exactly two lines:
+    *   The first line must be: "Index: [Index]." using the index from the task header.
+    *   The second line must be a succinct, one-sentence description of what the function returns (e.g., "Returns: the total cost of wages and taxes.").
+
+3. **Line comments:** For each solution line that is used to compute the final answer, include a comment of the form `# L1`, `# L2` and so on, which references the line number. 
+    *   Such a comment must immediately be followed by a code block that precisely formalizes the corresponding solution line. 
+    *   If a solution line does not contain any computation relevant to the final answer, then omit it completely from the function code and do NOT add a corresponding line comment.
+
+4. **Code blocks:** Each code block must consist of the following:
+    *   First, define the `new_inputs`. These are the variables (if any) needed for the computation in the solution line, which have not already been defined, and whose values are stated in (or can be extracted from) the `question`. Each new input variable definition MUST be followed on the same line by a comment (`#`) that quotes or refers to the phrase in the `question` from which it is extracted.
+    *   Second, there should be EXACTLY ONE line of code which formalizes the computation in the solution line and assigns the resulting value to a new variable (this is the `output_variable`).
+
+5. **The Direct Substitution Rule:** This is the most important rule, which ensures that the `nl_template` is purely identical to the original solution line except that numerical values in computations have been replaced with variable placeholders: You MUST define variables in such a way that they can be DIRECTLY SUBSTITUTED into the solution text without changing any operators. For example:
+    *   If the solution line has a computation like `... / 5`, you MUST define a variable like `var = 5`.
+    *   If the solution line has a computation like `... * 1/5`, you MUST define a variable like `var = Fraction(1, 5)`. 
+    *   If the solution line has a computation like `... * 0.2`, you MUST define a variable like `var = 0.2`.
+
+6. **Final Answer:** The line that assigns the final result to the `answer` variable must be immediately preceded by a line containing only the comment `# FA`. The last line of the function must always return the `answer` variable.
+
+## "solution_line_template"
+
+These artifacts will serve as precise links between the solution line and the code line. 
+*   The template should be EXACTLY identical to the original solution line, with the ONLY CHANGES being that every numerical value used in a computation is replaced by its corresponding `{variable_name}` placeholder. This applies to the entire content of the solution line, including the inside and outside of the calculator annotations. 
+*   Note: The Direct Substitution Rule will ensure that for correctly defined variables, it will be possible to replace the numerical values with variable name placeholders while leaving all surrounding text, symbols, and operators unchanged. 
+*   Thus, in a correct `nl_template`, replacing each `{variable_name}` by its value should exactly recover the original solution line, including the original calculator annotation. 
+*   Note: If a number appears in different forms (e.g., as "10%" in the narrative and as ".1" in the calculation), only the form that appears in the direct calculation should be replaced with a placeholder.
+
+---
+
+### Examples
+
+**Input:**
+
+{
+  "index": 54,
+  "question": "Leah earned $28 working odd jobs around the neighborhood. She spent a seventh of it on a milkshake and put half of the rest in her savings account. She left the remaining money in her wallet. Her dog got ahold of her wallet and shredded all the money inside but $1. How many dollars did Leah lose?",
+  "solution_mapping": {
+    "L1": "Leah spent 28 / 7 = $<<28/7=4>>4 on a milkshake.",
+    "L2": "She had 28 - 4 = $<<28-4=24>>24 left.",
+    "L3": "She put half in her savings account and half in her wallet, so she had 24 / 2 = $<<24/2=12>>12 in her wallet.",
+    "L4": "Her dog shredded all the money in her wallet but $1, so Leah lost 12 - 1 = $<<12-1=11>>11."
+  }
+}
+
+
+**Output:**
+```json
+{
+  "function_code": "def solve():\n    \"\"\"Index: 54.\n    Returns: the amount of money Leah lost.\n    \"\"\"\n    # L1\n    initial_earnings = 28 # Leah earned $28\n    milkshake_denominator = 7 # spent a seventh of it\n    milkshake_cost = initial_earnings / milkshake_denominator\n\n    # L2\n    money_after_milkshake = initial_earnings - milkshake_cost\n\n    # L3\n    savings_denominator = 2 # put half of the rest\n    money_in_wallet = money_after_milkshake / savings_denominator\n\n    # L4\n    money_left_intact = 1 # shredded all the money inside but $1\n    money_lost = money_in_wallet - money_left_intact\n\n    # FA\n    answer = money_lost\n    return answer",
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "new_inputs": [
+        "initial_earnings",
+        "milkshake_denominator"
+      ],
+      "output_variable": "milkshake_cost",
+      "solution_line_template": "Leah spent {initial_earnings} / {milkshake_denominator} = $<<{initial_earnings}/{milkshake_denominator}={milkshake_cost}>>{milkshake_cost} on a milkshake."
+    },
+    {
+      "line_number": "L2",
+      "new_inputs": [],
+      "output_variable": "money_after_milkshake",
+      "solution_line_template": "She had {initial_earnings} - {milkshake_cost} = $<<{initial_earnings}-{milkshake_cost}={money_after_milkshake}>>{money_after_milkshake} left."
+    },
+    {
+      "line_number": "L3",
+      "new_inputs": [
+        "savings_denominator"
+      ],
+      "output_variable": "money_in_wallet",
+      "solution_line_template": "She put half in her savings account and half in her wallet, so she had {money_after_milkshake} / {savings_denominator} = $<<{money_after_milkshake}/{savings_denominator}={money_in_wallet}>>{money_in_wallet} in her wallet."
+    },
+    {
+      "line_number": "L4",
+      "new_inputs": [
+        "money_left_intact"
+      ],
+      "output_variable": "money_lost",
+      "solution_line_template": "Her dog shredded all the money in her wallet but ${money_left_intact}, so Leah lost {money_in_wallet} - {money_left_intact} = $<<{money_in_wallet}-{money_left_intact}={money_lost}>>{money_lost}."
+    }
+  ]
+}
+```
+
+---
+
+**Input:**
+
+{
+  "index": 72,
+  "question": "Nancy is filling an aquarium for her fish. She fills it halfway and goes to answer the door. While she's gone, her cat knocks the aquarium over and spills half the water in it. Then Nancy comes back and triples the amount of water in the aquarium. If the aquarium is 4 feet long, 6 feet wide, and 3 feet high, how many cubic feet of water are in the aquarium?",
+  "solution_mapping": {
+    "L1": "First calculate the volume of the aquarium by multiplying its length, width and height: 4 ft * 6 ft * 3 ft = <<4*6*3=72>>72 cubic ft",
+    "L2": "Then figure out what proportion of the aquarium is full after the cat knocks it over: 1/2 * 1/2 = 1/4",
+    "L3": "Then figure out what proportion of the aquarium is full after Nancy refills it: 3 * 1/4 = 3/4",
+    "L4": "Now multiply the proportion of the aquarium that's full by the aquarium's volume to find out how much water is in it: 72 cubic ft * 3/4 = <<72*3/4=54>>54 cubic ft"
+  }
+}
+
+
+**Output:**
+```json
+{
+  "function_code": "from fractions import Fraction\n\ndef solve():\n    \"\"\"Index: 72.\n    Returns: how many cubic feet of water are in the aquarium.\n    \"\"\"\n    # L1\n    length = 4 # 4 feet long\n    width = 6 # 6 feet wide\n    height = 3 # 3 feet high\n    total_volume = length * width * height\n\n    # L2\n    initial_fill_proportion = Fraction(1, 2) # fills it halfway\n    spilled_proportion = Fraction(1, 2) # spills half the water\n    proportion_after_spill = initial_fill_proportion * spilled_proportion\n\n    # L3\n    refill_multiplier = 3 # triples the amount of water\n    final_proportion = proportion_after_spill * refill_multiplier\n\n    # L4\n    water_volume = total_volume * final_proportion\n\n    # FA\n    answer = water_volume\n    return answer",
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "new_inputs": [
+        "length",
+        "width",
+        "height"
+      ],
+      "output_variable": "total_volume",
+      "solution_line_template": "First calculate the volume of the aquarium by multiplying its length, width and height: {length} ft * {width} ft * {height} ft = <<{length}*{width}*{height}={total_volume}>>{total_volume} cubic ft"
+    },
+    {
+      "line_number": "L2",
+      "new_inputs": [
+        "initial_fill_proportion",
+        "spilled_proportion"
+      ],
+      "output_variable": "proportion_after_spill",
+      "solution_line_template": "Then figure out what proportion of the aquarium is full after the cat knocks it over: {initial_fill_proportion} * {spilled_proportion} = {proportion_after_spill}"
+    },
+    {
+      "line_number": "L3",
+      "new_inputs": [
+        "refill_multiplier"
+      ],
+      "output_variable": "final_proportion",
+      "solution_line_template": "Then figure out what proportion of the aquarium is full after Nancy refills it: {refill_multiplier} * {proportion_after_spill} = {final_proportion}"
+    },
+    {
+      "line_number": "L4",
+      "new_inputs": [],
+      "output_variable": "water_volume",
+      "solution_line_template": "Now multiply the proportion of the aquarium that's full by the aquarium's volume to find out how much water is in it: {total_volume} cubic ft * {final_proportion} = <<{total_volume}*{final_proportion}={water_volume}>>{water_volume} cubic ft"
+    }
+  ]
+}
+```
+
+---
+
+**Input:**
+
+{
+  "index": 310,
+  "question": "Janet hires six employees. Four of them are warehouse workers who make $15/hour, and the other two are managers who make $20/hour. Janet has to pay 10% of her workers' salaries in FICA taxes. If everyone works 25 days a month and 8 hours a day, how much does Janet owe total for their wages and taxes for one month?",
+  "solution_mapping": {
+    "L1": "First figure out how many hours each worker works per month by multiplying the number of days they work by the number of hours a day they work: 25 days * 8 hours/day = <<25*8=200>>200 hours",
+    "L2": "Then calculate how much one warehouse worker makes per month by multiplying their hourly rate by the number of hours they work: 200 hours * $15/hour = $<<200*15=3000>>3000",
+    "L3": "Then multiply that number by 4 to find out how much all the warehouse workers make: $3000/worker * 4 workers = $<<3000*4=12000>>12,000",
+    "L4": "Now multiply the hours each manager works (also 200) by their hourly wage to find out how much one manager makes per month: 200 hours * $20/hour = $<<200*20=4000>>4,000",
+    "L5": "Now multiply one manager's wages by the number of managers (2) to find their total wage amount: $4,000/manager * 2 managers = $<<4000*2=8000>>8,000",
+    "L6": "Now add the wages for the managers and the workers to find the total cost of the wages: $8,000 + $12,000 = $<<8000+12000=20000>>20,000",
+    "L7": "Now multiply the total wage bill by 10% to find how much the FICA taxes are: $20,000 * .1 = $<<20000*.1=2000>>2,000",
+    "L8": "Now add the total wage bill to the total tax amount to find the grand total: $2,000 + $20,000 = $<<2000+20000=22000>>22,000"
+  }
+}
+
+
+**Output:**
+```json
+{
+  "function_code": "def solve():\n    \"\"\"Index: 310.\n    Returns: the total amount Janet owes for wages and taxes for one month.\n    \"\"\"\n    # L1\n    days_per_month = 25 # works 25 days a month\n    hours_per_day = 8 # and 8 hours a day\n    hours_per_worker_per_month = days_per_month * hours_per_day\n\n    # L2\n    warehouse_worker_wage = 15 # make $15/hour\n    wage_per_warehouse_worker = hours_per_worker_per_month * warehouse_worker_wage\n\n    # L3\n    num_warehouse_workers = 4 # Four of them are warehouse workers\n    total_warehouse_wages = wage_per_warehouse_worker * num_warehouse_workers\n\n    # L4\n    manager_wage = 20 # make $20/hour\n    wage_per_manager = hours_per_worker_per_month * manager_wage\n\n    # L5\n    num_managers = 2 # the other two are managers\n    total_manager_wages = wage_per_manager * num_managers\n\n    # L6\n    total_wages = total_manager_wages + total_warehouse_wages\n\n    # L7\n    fica_tax_rate = 0.1 # pay 10% of her workers' salaries in FICA taxes\n    fica_taxes = total_wages * fica_tax_rate\n\n    # L8\n    grand_total = total_wages + fica_taxes\n\n    # FA\n    answer = grand_total\n    return answer",
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "new_inputs": [
+        "days_per_month",
+        "hours_per_day"
+      ],
+      "output_variable": "hours_per_worker_per_month",
+      "solution_line_template": "First figure out how many hours each worker works per month by multiplying the number of days they work by the number of hours a day they work: {days_per_month} days * {hours_per_day} hours/day = <<{days_per_month}*{hours_per_day}={hours_per_worker_per_month}>>{hours_per_worker_per_month} hours"
+    },
+    {
+      "line_number": "L2",
+      "new_inputs": [
+        "warehouse_worker_wage"
+      ],
+      "output_variable": "wage_per_warehouse_worker",
+      "solution_line_template": "Then calculate how much one warehouse worker makes per month by multiplying their hourly rate by the number of hours they work: {hours_per_worker_per_month} hours * ${warehouse_worker_wage}/hour = $<<{hours_per_worker_per_month}*{warehouse_worker_wage}={wage_per_warehouse_worker}>>{wage_per_warehouse_worker}"
+    },
+    {
+      "line_number": "L3",
+      "new_inputs": [
+        "num_warehouse_workers"
+      ],
+      "output_variable": "total_warehouse_wages",
+      "solution_line_template": "Then multiply that number by {num_warehouse_workers} to find out how much all the warehouse workers make: ${wage_per_warehouse_worker}/worker * {num_warehouse_workers} workers = $<<{wage_per_warehouse_worker}*{num_warehouse_workers}={total_warehouse_wages}>>{total_warehouse_wages}"
+    },
+    {
+      "line_number": "L4",
+      "new_inputs": [
+        "manager_wage"
+      ],
+      "output_variable": "wage_per_manager",
+      "solution_line_template": "Now multiply the hours each manager works (also {hours_per_worker_per_month}) by their hourly wage to find out how much one manager makes per month: {hours_per_worker_per_month} hours * ${manager_wage}/hour = $<<{hours_per_worker_per_month}*{manager_wage}={wage_per_manager}>>{wage_per_manager}"
+    },
+    {
+      "line_number": "L5",
+      "new_inputs": [
+        "num_managers"
+      ],
+      "output_variable": "total_manager_wages",
+      "solution_line_template": "Now multiply one manager's wages by the number of managers (2) to find their total wage amount: ${wage_per_manager}/manager * {num_managers} managers = $<<{wage_per_manager}*{num_managers}={total_manager_wages}>>{total_manager_wages}"
+    },
+    {
+      "line_number": "L6",
+      "new_inputs": [],
+      "output_variable": "total_wages",
+      "solution_line_template": "Now add the wages for the managers and the workers to find the total cost of the wages: ${total_manager_wages} + ${total_warehouse_wages} = $<<{total_manager_wages}+{total_warehouse_wages}={total_wages}>>{total_wages}"
+    },
+    {
+      "line_number": "L7",
+      "new_inputs": [
+        "fica_tax_rate"
+      ],
+      "output_variable": "fica_taxes",
+      "solution_line_template": "Now multiply the total wage bill by 10% to find how much the FICA taxes are: ${total_wages} * {fica_tax_rate} = $<<{total_wages}*{fica_tax_rate}={fica_taxes}>>{fica_taxes}"
+    },
+    {
+      "line_number": "L8",
+      "new_inputs": [],
+      "output_variable": "grand_total",
+      "solution_line_template": "Now add the total wage bill to the total tax amount to find the grand total: ${fica_taxes} + ${total_wages} = $<<{fica_taxes}+{total_wages}={grand_total}>>{grand_total}"
+    }
+  ]
+}
+```

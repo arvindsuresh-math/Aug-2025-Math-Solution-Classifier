@@ -1,0 +1,63 @@
+{
+  "index": 4652,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "Jamie has had 24 ounces because 8 plus 16 equals <<8+16=24>>24.",
+    "L2": "She can drink 8 ounces because 32 - 24 equals <<32-24=8>>8."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4652.\n    Returns: the remaining ounces Jamie can drink before needing to use the bathroom.\n    \"\"\"\n    # L1\n    ounces_from_milk_cup = 8 # a cup of milk at lunch; A cup equals 8 ounces\n    ounces_from_grape_juice_pint = 16 # a pint of grape juice at recess; a pint equals 16 ounces\n    total_drank_initial = ounces_from_milk_cup + ounces_from_grape_juice_pint\n\n    # L2\n    max_liquid_before_bathroom = 32 # any more than 32 ounces of liquid\n    remaining_drinkable = max_liquid_before_bathroom - total_drank_initial\n\n    # FA\n    answer = remaining_drinkable\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "remaining_drinkable",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30a266310>"
+  },
+  "correct_trace": {
+    "ounces_from_milk_cup": 8,
+    "ounces_from_grape_juice_pint": 16,
+    "total_drank_initial": 24,
+    "max_liquid_before_bathroom": 32,
+    "remaining_drinkable": 8,
+    "answer": 8
+  },
+  "flawed_trace": {
+    "ounces_from_milk_cup": 8,
+    "ounces_from_grape_juice_pint": 16,
+    "total_drank_initial": 24,
+    "max_liquid_before_bathroom": 32,
+    "remaining_drinkable": 56,
+    "answer": 56
+  },
+  "correct_value": 8,
+  "flawed_value": 56,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_drank_initial",
+      "question_inputs": [
+        "ounces_from_milk_cup",
+        "ounces_from_grape_juice_pint"
+      ],
+      "solution_line_template": "Jamie has had {total_drank_initial} ounces because {ounces_from_milk_cup} plus {ounces_from_grape_juice_pint} equals <<{ounces_from_milk_cup}+{ounces_from_grape_juice_pint}={total_drank_initial}>>{total_drank_initial}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_drinkable",
+      "question_inputs": [
+        "max_liquid_before_bathroom"
+      ],
+      "solution_line_template": "She can drink {remaining_drinkable} ounces because {max_liquid_before_bathroom} - {total_drank_initial} equals <<{max_liquid_before_bathroom}-{total_drank_initial}={remaining_drinkable}>>{remaining_drinkable}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jamie has had 24 ounces because 8 plus 16 equals <<8+16=24>>24.",
+    "L2": "She can drink 56 ounces because 32 - 24 equals <<32-24=56>>56.",
+    "FA": "#### 56"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -6638483043402597789,
+  "model_name": "google_gemini-2.5-flash"
+}

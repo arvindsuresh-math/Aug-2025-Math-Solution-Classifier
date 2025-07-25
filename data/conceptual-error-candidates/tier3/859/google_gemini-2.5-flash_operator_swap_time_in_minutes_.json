@@ -1,0 +1,63 @@
+{
+  "index": 859,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "The factory creates 300 gummy bears a minute, which means it produces 300 / 50 = <<300/50=6>>6 packets of gummy bears per minute.",
+    "L2": "It would take 240 / 6 = <<240/6=40>>40 minutes to manufacture enough gummy bears to fill 240 packets."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 859.\n    Returns: the time in minutes to fill the target number of packets.\n    \"\"\"\n    # L1\n    gummy_bears_per_minute = 300 # manufactures 300 gummy bears a minute\n    gummy_bears_per_packet = 50 # Each packet of gummy bears has 50 gummy bears inside\n    packets_per_minute = gummy_bears_per_minute / gummy_bears_per_packet\n\n    # L2\n    target_packets = 240 # fill 240 packets\n    time_in_minutes = target_packets / packets_per_minute\n\n    # FA\n    answer = time_in_minutes\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "time_in_minutes",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x30afc07d0>"
+  },
+  "correct_trace": {
+    "gummy_bears_per_minute": 300,
+    "gummy_bears_per_packet": 50,
+    "packets_per_minute": 6.0,
+    "target_packets": 240,
+    "time_in_minutes": 40.0,
+    "answer": 40.0
+  },
+  "flawed_trace": {
+    "gummy_bears_per_minute": 300,
+    "gummy_bears_per_packet": 50,
+    "packets_per_minute": 6.0,
+    "target_packets": 240,
+    "time_in_minutes": 234.0,
+    "answer": 234.0
+  },
+  "correct_value": 40.0,
+  "flawed_value": 234.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "packets_per_minute",
+      "question_inputs": [
+        "gummy_bears_per_minute",
+        "gummy_bears_per_packet"
+      ],
+      "solution_line_template": "The factory creates {gummy_bears_per_minute} gummy bears a minute, which means it produces {gummy_bears_per_minute} / {gummy_bears_per_packet} = <<{gummy_bears_per_minute}/{gummy_bears_per_packet}={packets_per_minute}>>{packets_per_minute} packets of gummy bears per minute."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "time_in_minutes",
+      "question_inputs": [
+        "target_packets"
+      ],
+      "solution_line_template": "It would take {target_packets} / {packets_per_minute} = <<{target_packets}/{packets_per_minute}={time_in_minutes}>>{time_in_minutes} minutes to manufacture enough gummy bears to fill {target_packets} packets."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The factory creates 300 gummy bears a minute, which means it produces 300 / 50 = <<300/50=6>>6 packets of gummy bears per minute.",
+    "L2": "It would take 240 / 6 = <<240/6=234>>234 minutes to manufacture enough gummy bears to fill 240 packets.",
+    "FA": "#### 234"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 4200688945758636821,
+  "model_name": "google_gemini-2.5-flash"
+}

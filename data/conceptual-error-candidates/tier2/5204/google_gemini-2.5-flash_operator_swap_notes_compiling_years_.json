@@ -1,0 +1,63 @@
+{
+  "index": 5204,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "He spent 3*.5=<<3*.5=1.5>>1.5 years compiling notes.",
+    "L2": "So it took him 3+1.5+.5=<<3+1.5+.5=5>>5 years for everything"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5204.\n    Returns: the total time spent on exploring, notes, and book writing.\n    \"\"\"\n    # L1\n    exploration_years = 3 # spent 3 years of his life exploring the jungle\n    half_factor = 0.5 # half as much time\n    notes_compiling_years = exploration_years * half_factor\n\n    # L2\n    book_writing_years = 0.5 # It took .5 years to write his book\n    total_time_spent = exploration_years + notes_compiling_years + book_writing_years\n\n    # FA\n    answer = total_time_spent\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "notes_compiling_years",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30e8d05d0>"
+  },
+  "correct_trace": {
+    "exploration_years": 3,
+    "half_factor": 0.5,
+    "notes_compiling_years": 1.5,
+    "book_writing_years": 0.5,
+    "total_time_spent": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "exploration_years": 3,
+    "half_factor": 0.5,
+    "notes_compiling_years": 3.5,
+    "book_writing_years": 0.5,
+    "total_time_spent": 7.0,
+    "answer": 7.0
+  },
+  "correct_value": 1.5,
+  "flawed_value": 3.5,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "notes_compiling_years",
+      "question_inputs": [
+        "exploration_years",
+        "half_factor"
+      ],
+      "solution_line_template": "He spent {exploration_years}*{half_factor}=<<{exploration_years}*{half_factor}={notes_compiling_years}>>{notes_compiling_years} years compiling notes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_time_spent",
+      "question_inputs": [
+        "book_writing_years"
+      ],
+      "solution_line_template": "So it took him {exploration_years}+{notes_compiling_years}+{book_writing_years}=<<{exploration_years}+{notes_compiling_years}+{book_writing_years}={total_time_spent}>>{total_time_spent} years for everything"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He spent 3*0.5=<<3*0.5=3.5>>3.5 years compiling notes.",
+    "L2": "So it took him 3+3.5+0.5=<<3+3.5+0.5=7>>7 years for everything",
+    "FA": "#### 7"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -7602819602482333990,
+  "model_name": "google_gemini-2.5-flash"
+}

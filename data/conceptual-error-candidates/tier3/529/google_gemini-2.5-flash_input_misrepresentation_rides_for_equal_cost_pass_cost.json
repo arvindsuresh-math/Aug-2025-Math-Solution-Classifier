@@ -1,0 +1,64 @@
+{
+  "index": 529,
+  "original_solution_mapping": {
+    "FA": "#### 26",
+    "L1": "For the 30-day pass to be cheaper, then the average fare should be cheaper than the $2 one-way ticket.",
+    "L2": "If the 30-day pass costs $50, then I should take at least $50/$2=<<50/2=25>>25 rides to pay the same as a one-way ticket",
+    "L3": "However, given that we want the 30-day pass per ride to be strictly cheaper we should ride at least 25+1=26 times"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 529.\n    Returns: the minimum number of rides needed for the pass to be strictly cheaper.\n    \"\"\"\n    # L2\n    pass_cost = 50 # A 30-day pass costs $50\n    one_way_ticket_cost = 2 # A one-way ticket costs $2\n    rides_for_equal_cost = pass_cost / one_way_ticket_cost\n\n    # L3\n    additional_ride_for_strict_cheaper = 1 # WK\n    minimum_rides_for_strictly_cheaper = rides_for_equal_cost + additional_ride_for_strict_cheaper\n\n    # FA\n    answer = minimum_rides_for_strictly_cheaper\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "rides_for_equal_cost",
+    "operand_to_replace": "one_way_ticket_cost",
+    "replacement_variable": "pass_cost"
+  },
+  "correct_trace": {
+    "pass_cost": 50,
+    "one_way_ticket_cost": 2,
+    "rides_for_equal_cost": 25.0,
+    "additional_ride_for_strict_cheaper": 1,
+    "minimum_rides_for_strictly_cheaper": 26.0,
+    "answer": 26.0
+  },
+  "flawed_trace": {
+    "pass_cost": 50,
+    "one_way_ticket_cost": 2,
+    "rides_for_equal_cost": 1.0,
+    "additional_ride_for_strict_cheaper": 1,
+    "minimum_rides_for_strictly_cheaper": 2.0,
+    "answer": 2.0
+  },
+  "correct_value": 25.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "rides_for_equal_cost",
+      "question_inputs": [
+        "pass_cost",
+        "one_way_ticket_cost"
+      ],
+      "solution_line_template": "If the 30-day pass costs ${pass_cost}, then I should take at least ${pass_cost}/${one_way_ticket_cost}=<<{pass_cost}/{one_way_ticket_cost}={rides_for_equal_cost}>>{rides_for_equal_cost} rides to pay the same as a one-way ticket"
+    },
+    {
+      "WK_inputs": [
+        "additional_ride_for_strict_cheaper"
+      ],
+      "line_number": "L3",
+      "output_variable": "minimum_rides_for_strictly_cheaper",
+      "question_inputs": [],
+      "solution_line_template": "However, given that we want the 30-day pass per ride to be strictly cheaper we should ride at least {rides_for_equal_cost}+{additional_ride_for_strict_cheaper}={minimum_rides_for_strictly_cheaper} times"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "If the 30-day pass costs $50, then I should take at least $50/$50=<<50/50=1>>1 rides to pay the same as a one-way ticket",
+    "L3": "However, given that we want the 30-day pass per ride to be strictly cheaper we should ride at least 1+1=2 times",
+    "FA": "#### 2"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'pass_cost' (50) was used instead of 'one_way_ticket_cost' (2).",
+  "repro_seed": 278170884524896303,
+  "model_name": "google_gemini-2.5-flash"
+}

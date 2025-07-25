@@ -1,0 +1,79 @@
+{
+  "index": 6147,
+  "original_solution_mapping": {
+    "FA": "#### 28",
+    "L1": "6 dogs have 6 x 4 = <<6*4=24>>24 feet.",
+    "L2": "2 ducks have 2 x 2 = <<2*2=4>>4 feet",
+    "L3": "In total there are 24 + 4 = <<24+4=28>>28 feet in the garden"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6147.\n    Returns: the total number of feet in the garden.\n    \"\"\"\n    # L1\n    num_dogs = 6 # 6 dogs\n    feet_per_dog = 4 # WK\n    dog_feet = num_dogs * feet_per_dog\n\n    # L2\n    num_ducks = 2 # 2 ducks\n    feet_per_duck = 2 # WK\n    duck_feet = num_ducks * feet_per_duck\n\n    # L3\n    total_feet = dog_feet + duck_feet\n\n    # FA\n    answer = total_feet\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "duck_feet",
+    "operand_to_replace": "feet_per_duck",
+    "replacement_variable": "num_dogs"
+  },
+  "correct_trace": {
+    "num_dogs": 6,
+    "feet_per_dog": 4,
+    "dog_feet": 24,
+    "num_ducks": 2,
+    "feet_per_duck": 2,
+    "duck_feet": 4,
+    "total_feet": 28,
+    "answer": 28
+  },
+  "flawed_trace": {
+    "num_dogs": 6,
+    "feet_per_dog": 4,
+    "dog_feet": 24,
+    "num_ducks": 2,
+    "feet_per_duck": 2,
+    "duck_feet": 12,
+    "total_feet": 36,
+    "answer": 36
+  },
+  "correct_value": 4,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "feet_per_dog"
+      ],
+      "line_number": "L1",
+      "output_variable": "dog_feet",
+      "question_inputs": [
+        "num_dogs"
+      ],
+      "solution_line_template": "6 dogs have {num_dogs} x {feet_per_dog} = <<{num_dogs}*{feet_per_dog}={dog_feet}>>{dog_feet} feet."
+    },
+    {
+      "WK_inputs": [
+        "feet_per_duck"
+      ],
+      "line_number": "L2",
+      "output_variable": "duck_feet",
+      "question_inputs": [
+        "num_ducks"
+      ],
+      "solution_line_template": "2 ducks have {num_ducks} x {feet_per_duck} = <<{num_ducks}*{feet_per_duck}={duck_feet}>>{duck_feet} feet"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_feet",
+      "question_inputs": [],
+      "solution_line_template": "In total there are {dog_feet} + {duck_feet} = <<{dog_feet}+{duck_feet}={total_feet}>>{total_feet} feet in the garden"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "6 dogs have 6 x 4 = <<6*4=24>>24 feet.",
+    "L2": "2 ducks have 2 x 6 = <<2*6=12>>12 feet",
+    "L3": "In total there are 24 + 12 = <<24+12=36>>36 feet in the garden",
+    "FA": "#### 36"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_dogs' (6) was used instead of 'feet_per_duck' (2).",
+  "repro_seed": 5111711292498895264,
+  "model_name": "google_gemini-2.5-flash"
+}

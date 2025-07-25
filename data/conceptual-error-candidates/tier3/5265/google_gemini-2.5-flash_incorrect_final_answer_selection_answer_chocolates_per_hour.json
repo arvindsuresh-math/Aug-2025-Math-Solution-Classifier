@@ -1,0 +1,93 @@
+{
+  "index": 5265,
+  "original_solution_mapping": {
+    "FA": "#### 1152",
+    "L1": "There are 60 minutes in an hour and she packs chocolate in 5-minute increments. So that's 60/5 = <<60/5=12>>12 5 minute increments in 1 hour",
+    "L2": "12 chocolates make 1 dozen and she packages 2 dozen in 5 minutes so that's 12*2 = <<12*2=24>>24 chocolates in 5 minutes",
+    "L3": "12 5 minute increments are in an hour and she packages 24 chocolates in 5 minutes so she can package 12*24 = <<12*24=288>>288 individual chocolates in 1 hour",
+    "L4": "If she packages 288 individual chocolates in 1 hour then in 4 hours she can package 288*4 = <<288*4=1152>>1,152 individual chocolates"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5265.\n    Returns: the total number of individual chocolates Wendy can package in 4 hours.\n    \"\"\"\n    # L1\n    minutes_per_hour = 60 # WK\n    packing_increment_minutes = 5 # 5 minutes\n    increments_per_hour = minutes_per_hour / packing_increment_minutes\n\n    # L2\n    chocolates_per_dozen = 12 # WK\n    dozens_packaged_in_5_minutes = 2 # 2 dozen chocolates in 5 minutes\n    chocolates_per_5_minutes = chocolates_per_dozen * dozens_packaged_in_5_minutes\n\n    # L3\n    chocolates_per_hour = increments_per_hour * chocolates_per_5_minutes\n\n    # L4\n    total_hours = 4 # in 4 hours\n    total_chocolates_packaged = chocolates_per_hour * total_hours\n\n    # FA\n    answer = total_chocolates_packaged\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_chocolates_packaged",
+    "replacement_variable": "chocolates_per_hour"
+  },
+  "correct_trace": {
+    "minutes_per_hour": 60,
+    "packing_increment_minutes": 5,
+    "increments_per_hour": 12.0,
+    "chocolates_per_dozen": 12,
+    "dozens_packaged_in_5_minutes": 2,
+    "chocolates_per_5_minutes": 24,
+    "chocolates_per_hour": 288.0,
+    "total_hours": 4,
+    "total_chocolates_packaged": 1152.0,
+    "answer": 1152.0
+  },
+  "flawed_trace": {
+    "minutes_per_hour": 60,
+    "packing_increment_minutes": 5,
+    "increments_per_hour": 12.0,
+    "chocolates_per_dozen": 12,
+    "dozens_packaged_in_5_minutes": 2,
+    "chocolates_per_5_minutes": 24,
+    "chocolates_per_hour": 288.0,
+    "total_hours": 4,
+    "total_chocolates_packaged": 1152.0,
+    "answer": 288.0
+  },
+  "correct_value": 1152.0,
+  "flawed_value": 288.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "increments_per_hour",
+      "question_inputs": [
+        "packing_increment_minutes"
+      ],
+      "solution_line_template": "There are {minutes_per_hour} minutes in an hour and she packs chocolate in {packing_increment_minutes}-minute increments. So that's {minutes_per_hour}/{packing_increment_minutes} = <<{minutes_per_hour}/{packing_increment_minutes}={increments_per_hour}>>{increments_per_hour} 5 minute increments in 1 hour"
+    },
+    {
+      "WK_inputs": [
+        "chocolates_per_dozen"
+      ],
+      "line_number": "L2",
+      "output_variable": "chocolates_per_5_minutes",
+      "question_inputs": [
+        "dozens_packaged_in_5_minutes"
+      ],
+      "solution_line_template": "12 chocolates make 1 dozen and she packages {dozens_packaged_in_5_minutes} dozen in 5 minutes so that's {chocolates_per_dozen}*{dozens_packaged_in_5_minutes} = <<{chocolates_per_dozen}*{dozens_packaged_in_5_minutes}={chocolates_per_5_minutes}>>{chocolates_per_5_minutes} chocolates in 5 minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "chocolates_per_hour",
+      "question_inputs": [],
+      "solution_line_template": "{increments_per_hour} 5 minute increments are in an hour and she packages {chocolates_per_5_minutes} chocolates in 5 minutes so she can package {increments_per_hour}*{chocolates_per_5_minutes} = <<{increments_per_hour}*{chocolates_per_5_minutes}={chocolates_per_hour}>>{chocolates_per_hour} individual chocolates in 1 hour"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_chocolates_packaged",
+      "question_inputs": [
+        "total_hours"
+      ],
+      "solution_line_template": "If she packages {chocolates_per_hour} individual chocolates in 1 hour then in {total_hours} hours she can package {chocolates_per_hour}*{total_hours} = <<{chocolates_per_hour}*{total_hours}={total_chocolates_packaged}>>{total_chocolates_packaged} individual chocolates"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 60 minutes in an hour and she packs chocolate in 5-minute increments. So that's 60/5 = <<60/5=12>>12 5 minute increments in 1 hour",
+    "L2": "12 chocolates make 1 dozen and she packages 2 dozen in 5 minutes so that's 12*2 = <<12*2=24>>24 chocolates in 5 minutes",
+    "L3": "12 5 minute increments are in an hour and she packages 24 chocolates in 5 minutes so she can package 12*24 = <<12*24=288>>288 individual chocolates in 1 hour",
+    "FA": "#### 288"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'chocolates_per_hour' (value: 288.0) was reported instead of 'total_chocolates_packaged' (value: 1152.0).",
+  "repro_seed": -14736562018659254,
+  "model_name": "google_gemini-2.5-flash"
+}

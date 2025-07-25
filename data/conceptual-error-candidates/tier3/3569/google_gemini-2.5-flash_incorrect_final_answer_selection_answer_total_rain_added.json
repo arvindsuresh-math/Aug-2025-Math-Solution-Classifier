@@ -1,0 +1,106 @@
+{
+  "index": 3569,
+  "original_solution_mapping": {
+    "FA": "#### 1550",
+    "L1": "After the first evaporation, the water tank has 6000 liters - 2000 liters = <<6000-2000=4000>>4000 liters.",
+    "L2": "After the second extraction, the water tank has 4000 liters - 3500 liters= <<4000-3500=500>>500 liters",
+    "L3": "The tank is refilled with rain 30 minutes / 10 minutes = <<30/10=3>>3 times",
+    "L4": "The amount of water refilled with rain is 3 times * 350 liters per time = <<3*350=1050>>1050 liters.",
+    "L5": "With the additional rainwater, the water tank has 500 liters + 1050 liters = <<500+1050=1550>>1550 liters."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3569.\n    Returns: the total number of liters in the tank.\n    \"\"\"\n    # L1\n    initial_water_volume = 6000 # A tank contains 6000 liters of water\n    evaporated_volume = 2000 # 2000 liters evaporated\n    volume_after_evaporation = initial_water_volume - evaporated_volume\n\n    # L2\n    drained_volume = 3500 # 3500 liters were drained by Bob\n    volume_after_drain = volume_after_evaporation - drained_volume\n\n    # L3\n    rain_duration = 30 # it now rains for 30 minutes\n    rain_interval = 10 # every 10 minutes\n    refill_times = rain_duration / rain_interval\n\n    # L4\n    rain_amount_per_interval = 350 # 350 liters of rain are added to the tank\n    total_rain_added = refill_times * rain_amount_per_interval\n\n    # L5\n    final_volume = volume_after_drain + total_rain_added\n\n    # FA\n    answer = final_volume\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "final_volume",
+    "replacement_variable": "total_rain_added"
+  },
+  "correct_trace": {
+    "initial_water_volume": 6000,
+    "evaporated_volume": 2000,
+    "volume_after_evaporation": 4000,
+    "drained_volume": 3500,
+    "volume_after_drain": 500,
+    "rain_duration": 30,
+    "rain_interval": 10,
+    "refill_times": 3.0,
+    "rain_amount_per_interval": 350,
+    "total_rain_added": 1050.0,
+    "final_volume": 1550.0,
+    "answer": 1550.0
+  },
+  "flawed_trace": {
+    "initial_water_volume": 6000,
+    "evaporated_volume": 2000,
+    "volume_after_evaporation": 4000,
+    "drained_volume": 3500,
+    "volume_after_drain": 500,
+    "rain_duration": 30,
+    "rain_interval": 10,
+    "refill_times": 3.0,
+    "rain_amount_per_interval": 350,
+    "total_rain_added": 1050.0,
+    "final_volume": 1550.0,
+    "answer": 1050.0
+  },
+  "correct_value": 1550.0,
+  "flawed_value": 1050.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "volume_after_evaporation",
+      "question_inputs": [
+        "initial_water_volume",
+        "evaporated_volume"
+      ],
+      "solution_line_template": "After the first evaporation, the water tank has {initial_water_volume} liters - {evaporated_volume} liters = <<{initial_water_volume}-{evaporated_volume}={volume_after_evaporation}>>{volume_after_evaporation} liters."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "volume_after_drain",
+      "question_inputs": [
+        "drained_volume"
+      ],
+      "solution_line_template": "After the second extraction, the water tank has {volume_after_evaporation} liters - {drained_volume} liters= <<{volume_after_evaporation}-{drained_volume}={volume_after_drain}>>{volume_after_drain} liters"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "refill_times",
+      "question_inputs": [
+        "rain_duration",
+        "rain_interval"
+      ],
+      "solution_line_template": "The tank is refilled with rain {rain_duration} minutes / {rain_interval} minutes = <<{rain_duration}/{rain_interval}={refill_times}>>{refill_times} times"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_rain_added",
+      "question_inputs": [
+        "rain_amount_per_interval"
+      ],
+      "solution_line_template": "The amount of water refilled with rain is {refill_times} times * {rain_amount_per_interval} liters per time = <<{refill_times}*{rain_amount_per_interval}={total_rain_added}>>{total_rain_added} liters."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "final_volume",
+      "question_inputs": [],
+      "solution_line_template": "With the additional rainwater, the water tank has {volume_after_drain} liters + {total_rain_added} liters = <<{volume_after_drain}+{total_rain_added}={final_volume}>>{final_volume} liters."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After the first evaporation, the water tank has 6000 liters - 2000 liters = <<6000-2000=4000>>4000 liters.",
+    "L2": "After the second extraction, the water tank has 4000 liters - 3500 liters= <<4000-3500=500>>500 liters",
+    "L3": "The tank is refilled with rain 30 minutes / 10 minutes = <<30/10=3>>3 times",
+    "L4": "The amount of water refilled with rain is 3 times * 350 liters per time = <<3*350=1050>>1050 liters.",
+    "FA": "#### 1050"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'total_rain_added' (value: 1050.0) was reported instead of 'final_volume' (value: 1550.0).",
+  "repro_seed": -1816544195892595317,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,77 @@
+{
+  "index": 7057,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "There are 3 * 9 = <<3*9=27>>27 red flowers.",
+    "L2": "50/100 * 96 = <<50/100*96=48>>48 flowers are blue.",
+    "L3": "Knowing that, there are 96 - 48 - 27 - 9 = <<96-48-27-9=12>>12 yellow flowers in a school's garden."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7057.\n    Returns: the number of yellow flowers in the garden.\n    \"\"\"\n    # L1\n    red_multiplier = 3 # three times more red flowers\n    green_flowers = 9 # 9 green flowers\n    red_flowers = red_multiplier * green_flowers\n\n    # L2\n    blue_percentage = Fraction(50, 100) # Blue flowers make up to 50% of the total flower count\n    total_flowers = 96 # In total there are 96 flowers\n    blue_flowers = blue_percentage * total_flowers\n\n    # L3\n    yellow_flowers = total_flowers - blue_flowers - red_flowers - green_flowers\n\n    # FA\n    answer = yellow_flowers\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "red_flowers",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x16a9cd250>"
+  },
+  "correct_trace": {
+    "red_multiplier": 3,
+    "green_flowers": 9,
+    "red_flowers": 27,
+    "blue_percentage": "1/2",
+    "total_flowers": 96,
+    "blue_flowers": "48",
+    "yellow_flowers": "12",
+    "answer": "12"
+  },
+  "flawed_trace": {
+    "red_multiplier": 3,
+    "green_flowers": 9,
+    "red_flowers": 12,
+    "blue_percentage": "1/2",
+    "total_flowers": 96,
+    "blue_flowers": "48",
+    "yellow_flowers": "27",
+    "answer": "27"
+  },
+  "correct_value": 27,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "red_flowers",
+      "question_inputs": [
+        "red_multiplier",
+        "green_flowers"
+      ],
+      "solution_line_template": "There are {red_multiplier} * {green_flowers} = <<{red_multiplier}*{green_flowers}={red_flowers}>>{red_flowers} red flowers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "blue_flowers",
+      "question_inputs": [
+        "blue_percentage",
+        "total_flowers"
+      ],
+      "solution_line_template": "{blue_percentage} * {total_flowers} = <<{blue_percentage}*{total_flowers}={blue_flowers}>>{blue_flowers} flowers are blue."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "yellow_flowers",
+      "question_inputs": [],
+      "solution_line_template": "Knowing that, there are {total_flowers} - {blue_flowers} - {red_flowers} - {green_flowers} = <<{total_flowers}-{blue_flowers}-{red_flowers}-{green_flowers}={yellow_flowers}>>{yellow_flowers} yellow flowers in a school's garden."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 3 * 9 = <<3*9=12>>12 red flowers.",
+    "L2": "50/100 * 96 = <<50/100*96=48>>48 flowers are blue.",
+    "L3": "Knowing that, there are 96 - 48 - 12 - 9 = <<96-48-12-9=27>>27 yellow flowers in a school's garden.",
+    "FA": "#### 27"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 702737044958016277,
+  "model_name": "google_gemini-2.5-flash"
+}

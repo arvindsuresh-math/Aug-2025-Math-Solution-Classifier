@@ -1,0 +1,99 @@
+{
+  "index": 5730,
+  "original_solution_mapping": {
+    "FA": "#### 96",
+    "L1": "He has a balance of $50.00 and is charged 20% interest so that's 50*.20 = $<<50*.20=10.00>>10.00",
+    "L2": "He had a balance of $50.00 and now has a $10.00 interest fee making his balance 50+10 = $<<50+10=60.00>>60.00",
+    "L3": "His balance is $60.00 and he puts another $20.00 on his card for a total of 60+20 = $<<60+20=80.00>>80.00",
+    "L4": "He didn't make a payment that month and is hit with another 20% interest fee so that's 80*.20 = $<<80*.20=16.00>>16.00 in interest",
+    "L5": "His new balance is 80+16 = $<<80+16=96.00>>96.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5730.\n    Returns: the current balance on his credit card.\n    \"\"\"\n    # L1\n    initial_balance = 50.00 # $50.00 balance\n    interest_rate_percent = 20 # 20% interest fee\n    interest_rate_decimal = 0.20 # 20% interest fee\n    first_interest_fee = initial_balance * interest_rate_decimal\n\n    # L2\n    balance_after_first_interest = initial_balance + first_interest_fee\n\n    # L3\n    new_charge = 20.00 # puts $20.00 on his credit card\n    balance_after_new_charge = balance_after_first_interest + new_charge\n\n    # L4\n    second_interest_fee = balance_after_new_charge * interest_rate_decimal\n\n    # L5\n    final_balance = balance_after_new_charge + second_interest_fee\n\n    # FA\n    answer = final_balance\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "balance_after_new_charge",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x30dfdd190>"
+  },
+  "correct_trace": {
+    "initial_balance": 50.0,
+    "interest_rate_percent": 20,
+    "interest_rate_decimal": 0.2,
+    "first_interest_fee": 10.0,
+    "balance_after_first_interest": 60.0,
+    "new_charge": 20.0,
+    "balance_after_new_charge": 80.0,
+    "second_interest_fee": 16.0,
+    "final_balance": 96.0,
+    "answer": 96.0
+  },
+  "flawed_trace": {
+    "initial_balance": 50.0,
+    "interest_rate_percent": 20,
+    "interest_rate_decimal": 0.2,
+    "first_interest_fee": 10.0,
+    "balance_after_first_interest": 60.0,
+    "new_charge": 20.0,
+    "balance_after_new_charge": 1200.0,
+    "second_interest_fee": 240.0,
+    "final_balance": 1440.0,
+    "answer": 1440.0
+  },
+  "correct_value": 80.0,
+  "flawed_value": 1200.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "first_interest_fee",
+      "question_inputs": [
+        "initial_balance",
+        "interest_rate_percent",
+        "interest_rate_decimal"
+      ],
+      "solution_line_template": "He has a balance of ${initial_balance} and is charged {interest_rate_percent}% interest so that's {initial_balance}*{interest_rate_decimal} = $<<{initial_balance}*{interest_rate_decimal}={first_interest_fee}>>{first_interest_fee}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "balance_after_first_interest",
+      "question_inputs": [],
+      "solution_line_template": "He had a balance of ${initial_balance} and now has a ${first_interest_fee} interest fee making his balance {initial_balance}+{first_interest_fee} = $<<{initial_balance}+{first_interest_fee}={balance_after_first_interest}>>{balance_after_first_interest}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "balance_after_new_charge",
+      "question_inputs": [
+        "new_charge"
+      ],
+      "solution_line_template": "His balance is ${balance_after_first_interest} and he puts another ${new_charge} on his card for a total of {balance_after_first_interest}+{new_charge} = $<<{balance_after_first_interest}+{new_charge}={balance_after_new_charge}>>{balance_after_new_charge}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "second_interest_fee",
+      "question_inputs": [],
+      "solution_line_template": "He didn't make a payment that month and is hit with another {interest_rate_percent}% interest fee so that's {balance_after_new_charge}*{interest_rate_decimal} = $<<{balance_after_new_charge}*{interest_rate_decimal}={second_interest_fee}>>{second_interest_fee} in interest"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "final_balance",
+      "question_inputs": [],
+      "solution_line_template": "His new balance is {balance_after_new_charge}+{second_interest_fee} = $<<{balance_after_new_charge}+{second_interest_fee}={final_balance}>>{final_balance}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He has a balance of $50 and is charged 20% interest so that's 50*0.2 = $<<50*0.2=10>>10",
+    "L2": "He had a balance of $50 and now has a $10 interest fee making his balance 50+10 = $<<50+10=60>>60",
+    "L3": "His balance is $60 and he puts another $20 on his card for a total of 60+20 = $<<60+20=1200>>1200",
+    "L4": "He didn't make a payment that month and is hit with another 20% interest fee so that's 1200*0.2 = $<<1200*0.2=240>>240 in interest",
+    "L5": "His new balance is 1200+240 = $<<1200+240=1440>>1440",
+    "FA": "#### 1440"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 2571126157430296716,
+  "model_name": "google_gemini-2.5-flash"
+}

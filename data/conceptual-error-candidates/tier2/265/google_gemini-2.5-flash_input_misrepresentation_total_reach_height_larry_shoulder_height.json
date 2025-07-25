@@ -1,0 +1,81 @@
+{
+  "index": 265,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "Larry's shoulder height is 20% less than 5 feet, or 0.2*5 =<<20*.01*5=1>>1 foot less than 5 feet.",
+    "L2": "One foot less than 5 feet is 5-1=<<5-1=4>>4 feet.",
+    "L3": "If Barry stands on Larry's shoulders, they can reach 4+5=<<4+5=9>>9 feet."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 265.\n    Returns: the total height they can reach.\n    \"\"\"\n    # L1\n    larry_full_height = 5 # Larry is 5 feet tall\n    shoulder_height_reduction_percent = 20 # 20% less\n    shoulder_height_reduction_decimal = 0.2 # 0.2*5\n    percent_factor = 0.01 # WK\n    shoulder_height_reduction_amount = shoulder_height_reduction_decimal * larry_full_height\n\n    # L2\n    larry_shoulder_height = larry_full_height - shoulder_height_reduction_amount\n\n    # L3\n    barry_reach_height = 5 # Barry can reach apples that are 5 feet high\n    total_reach_height = larry_shoulder_height + barry_reach_height\n\n    # FA\n    answer = total_reach_height\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_reach_height",
+    "operand_to_replace": "barry_reach_height",
+    "replacement_variable": "larry_shoulder_height"
+  },
+  "correct_trace": {
+    "larry_full_height": 5,
+    "shoulder_height_reduction_percent": 20,
+    "shoulder_height_reduction_decimal": 0.2,
+    "percent_factor": 0.01,
+    "shoulder_height_reduction_amount": 1.0,
+    "larry_shoulder_height": 4.0,
+    "barry_reach_height": 5,
+    "total_reach_height": 9.0,
+    "answer": 9.0
+  },
+  "flawed_trace": {
+    "larry_full_height": 5,
+    "shoulder_height_reduction_percent": 20,
+    "shoulder_height_reduction_decimal": 0.2,
+    "percent_factor": 0.01,
+    "shoulder_height_reduction_amount": 1.0,
+    "larry_shoulder_height": 4.0,
+    "barry_reach_height": 5,
+    "total_reach_height": 8.0,
+    "answer": 8.0
+  },
+  "correct_value": 9.0,
+  "flawed_value": 8.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "shoulder_height_reduction_amount",
+      "question_inputs": [
+        "larry_full_height",
+        "shoulder_height_reduction_percent",
+        "shoulder_height_reduction_decimal"
+      ],
+      "solution_line_template": "Larry's shoulder height is {shoulder_height_reduction_percent}% less than {larry_full_height} feet, or {shoulder_height_reduction_decimal}*{larry_full_height} =<<{shoulder_height_reduction_percent}*{percent_factor}*{larry_full_height}={shoulder_height_reduction_amount}>>{shoulder_height_reduction_amount} foot less than {larry_full_height} feet."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "larry_shoulder_height",
+      "question_inputs": [],
+      "solution_line_template": "One foot less than {larry_full_height} feet is {larry_full_height}-{shoulder_height_reduction_amount}=<<{larry_full_height}-{shoulder_height_reduction_amount}={larry_shoulder_height}>>{larry_shoulder_height} feet."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_reach_height",
+      "question_inputs": [
+        "barry_reach_height"
+      ],
+      "solution_line_template": "If Barry stands on Larry's shoulders, they can reach {larry_shoulder_height}+{barry_reach_height}=<<{larry_shoulder_height}+{barry_reach_height}={total_reach_height}>>{total_reach_height} feet."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Larry's shoulder height is 20% less than 5 feet, or 0.2*5 =<<20*0.01*5=1>>1 foot less than 5 feet.",
+    "L2": "One foot less than 5 feet is 5-1=<<5-1=4>>4 feet.",
+    "L3": "If Barry stands on Larry's shoulders, they can reach 4+4=<<4+4=8>>8 feet.",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'larry_shoulder_height' (4.0) was used instead of 'barry_reach_height' (5).",
+  "repro_seed": 2586856869777357607,
+  "model_name": "google_gemini-2.5-flash"
+}

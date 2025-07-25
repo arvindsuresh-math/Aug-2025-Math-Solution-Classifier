@@ -1,0 +1,69 @@
+{
+  "index": 291,
+  "original_solution_mapping": {
+    "FA": "#### 27",
+    "L1": "Last week, she used 15 gallons * 0.2 = <<15*0.2=3>>3 gallons less fuel than she used this week.",
+    "L2": "This means that she used 15 gallons - 3 gallons = <<15-3=12>>12 gallons of fuel last week.",
+    "L3": "In total, Mary used 15 gallons + 12 gallons = <<15+12=27>>27 gallons of fuel."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 291.\n    Returns: the total fuel used for the two weeks.\n    \"\"\"\n    # L1\n    current_week_fuel_gallons = 15 # 15 gallons of fuel this week\n    less_percent_decimal = 0.2 # 20% less\n    fuel_less_last_week = current_week_fuel_gallons * less_percent_decimal\n\n    # L2\n    last_week_fuel_gallons = current_week_fuel_gallons - fuel_less_last_week\n\n    # L3\n    total_fuel_gallons = current_week_fuel_gallons + last_week_fuel_gallons\n\n    # FA\n    answer = total_fuel_gallons\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_fuel_gallons",
+    "replacement_variable": "last_week_fuel_gallons"
+  },
+  "correct_trace": {
+    "current_week_fuel_gallons": 15,
+    "less_percent_decimal": 0.2,
+    "fuel_less_last_week": 3.0,
+    "last_week_fuel_gallons": 12.0,
+    "total_fuel_gallons": 27.0,
+    "answer": 27.0
+  },
+  "flawed_trace": {
+    "current_week_fuel_gallons": 15,
+    "less_percent_decimal": 0.2,
+    "fuel_less_last_week": 3.0,
+    "last_week_fuel_gallons": 12.0,
+    "total_fuel_gallons": 27.0,
+    "answer": 12.0
+  },
+  "correct_value": 27.0,
+  "flawed_value": 12.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "fuel_less_last_week",
+      "question_inputs": [
+        "current_week_fuel_gallons",
+        "less_percent_decimal"
+      ],
+      "solution_line_template": "Last week, she used {current_week_fuel_gallons} gallons * {less_percent_decimal} = <<{current_week_fuel_gallons}*{less_percent_decimal}={fuel_less_last_week}>>{fuel_less_last_week} gallons less fuel than she used this week."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "last_week_fuel_gallons",
+      "question_inputs": [],
+      "solution_line_template": "This means that she used {current_week_fuel_gallons} gallons \b\u2013 {fuel_less_last_week} gallons = <<{current_week_fuel_gallons}-{fuel_less_last_week}={last_week_fuel_gallons}>>{last_week_fuel_gallons} gallons of fuel last week."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_fuel_gallons",
+      "question_inputs": [],
+      "solution_line_template": "In total, Mary used {current_week_fuel_gallons} gallons + {last_week_fuel_gallons} gallons = <<{current_week_fuel_gallons}+{last_week_fuel_gallons}={total_fuel_gallons}>>{total_fuel_gallons} gallons of fuel."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Last week, she used 15 gallons * 0.2 = <<15*0.2=3>>3 gallons less fuel than she used this week.",
+    "L2": "This means that she used 15 gallons \b\u2013 3 gallons = <<15-3=12>>12 gallons of fuel last week.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'last_week_fuel_gallons' (value: 12.0) was reported instead of 'total_fuel_gallons' (value: 27.0).",
+  "repro_seed": 3500149476848613701,
+  "model_name": "google_gemini-2.5-flash"
+}

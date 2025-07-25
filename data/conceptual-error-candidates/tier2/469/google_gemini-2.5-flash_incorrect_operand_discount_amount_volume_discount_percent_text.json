@@ -1,0 +1,93 @@
+{
+  "index": 469,
+  "original_solution_mapping": {
+    "FA": "#### 6400",
+    "L1": "First find the number of quarts the hot tub holds by multiplying the number of gallons it holds by 4: 40 gallons * 4 quarts/gallon = <<40*4=160>>160 quarts",
+    "L2": "Then multiply the number of quarts of champagne Jackson buy by the normal price per bottle to find the cost before the discount: 160 quarts * $50/quart = $<<160*50=8000>>8000",
+    "L3": "Then multiply that number by 20% to find the amount of the discount: $8000 * .2 = $<<8000*.2=1600>>1600",
+    "L4": "Finally, subtract the discount from the total cost to find the final amount Jackson pays: $8000 - $1600 = $<<8000-1600=6400>>6400"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 469.\n    Returns: the total amount Jackson spends on champagne.\n    \"\"\"\n    # L1\n    hot_tub_gallons = 40 # hot tub holds 40 gallons of liquid\n    quarts_per_gallon = 4 # WK\n    hot_tub_quarts = hot_tub_gallons * quarts_per_gallon\n\n    # L2\n    cost_per_bottle = 50 # each bottle of champagne costs $50\n    cost_before_discount = hot_tub_quarts * cost_per_bottle\n\n    # L3\n    volume_discount_percent_text = 20 # 20% volume discount\n    volume_discount_decimal = 0.2 # 20% volume discount\n    discount_amount = cost_before_discount * volume_discount_decimal\n\n    # L4\n    final_cost = cost_before_discount - discount_amount\n\n    # FA\n    answer = final_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "discount_amount",
+    "operand_to_replace": "cost_before_discount",
+    "replacement_variable": "volume_discount_percent_text"
+  },
+  "correct_trace": {
+    "hot_tub_gallons": 40,
+    "quarts_per_gallon": 4,
+    "hot_tub_quarts": 160,
+    "cost_per_bottle": 50,
+    "cost_before_discount": 8000,
+    "volume_discount_percent_text": 20,
+    "volume_discount_decimal": 0.2,
+    "discount_amount": 1600.0,
+    "final_cost": 6400.0,
+    "answer": 6400.0
+  },
+  "flawed_trace": {
+    "hot_tub_gallons": 40,
+    "quarts_per_gallon": 4,
+    "hot_tub_quarts": 160,
+    "cost_per_bottle": 50,
+    "cost_before_discount": 8000,
+    "volume_discount_percent_text": 20,
+    "volume_discount_decimal": 0.2,
+    "discount_amount": 4.0,
+    "final_cost": 7996.0,
+    "answer": 7996.0
+  },
+  "correct_value": 1600.0,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "quarts_per_gallon"
+      ],
+      "line_number": "L1",
+      "output_variable": "hot_tub_quarts",
+      "question_inputs": [
+        "hot_tub_gallons"
+      ],
+      "solution_line_template": "First find the number of quarts the hot tub holds by multiplying the number of gallons it holds by {quarts_per_gallon}: {hot_tub_gallons} gallons * {quarts_per_gallon} quarts/gallon = <<{hot_tub_gallons}*{quarts_per_gallon}={hot_tub_quarts}>>{hot_tub_quarts} quarts"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cost_before_discount",
+      "question_inputs": [
+        "cost_per_bottle"
+      ],
+      "solution_line_template": "Then multiply the number of quarts of champagne Jackson buy by the normal price per bottle to find the cost before the discount: {hot_tub_quarts} quarts * ${cost_per_bottle}/quart = $<<{hot_tub_quarts}*{cost_per_bottle}={cost_before_discount}>>{cost_before_discount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "discount_amount",
+      "question_inputs": [
+        "volume_discount_percent_text",
+        "volume_discount_decimal"
+      ],
+      "solution_line_template": "Then multiply that number by {volume_discount_percent_text}% to find the amount of the discount: ${cost_before_discount} * {volume_discount_decimal} = $<<{cost_before_discount}*{volume_discount_decimal}={discount_amount}>>{discount_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_cost",
+      "question_inputs": [],
+      "solution_line_template": "Finally, subtract the discount from the total cost to find the final amount Jackson pays: ${cost_before_discount} - ${discount_amount} = $<<{cost_before_discount}-{discount_amount}={final_cost}>>{final_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the number of quarts the hot tub holds by multiplying the number of gallons it holds by 4: 40 gallons * 4 quarts/gallon = <<40*4=160>>160 quarts",
+    "L2": "Then multiply the number of quarts of champagne Jackson buy by the normal price per bottle to find the cost before the discount: 160 quarts * $50/quart = $<<160*50=8000>>8000",
+    "L3": "Then multiply that number by 20% to find the amount of the discount: $20 * 0.2 = $<<20*0.2=4>>4",
+    "L4": "Finally, subtract the discount from the total cost to find the final amount Jackson pays: $8000 - $4 = $<<8000-4=7996>>7996",
+    "FA": "#### 7996"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'volume_discount_percent_text' (value: 20) was used instead of 'cost_before_discount' (value: 8000).",
+  "repro_seed": -1124031054558402947,
+  "model_name": "google_gemini-2.5-flash"
+}

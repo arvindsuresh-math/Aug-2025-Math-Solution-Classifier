@@ -1,0 +1,89 @@
+{
+  "index": 1463,
+  "original_solution_mapping": {
+    "FA": "#### 17",
+    "L1": "Ned has gone up 165 / 11 = <<165/11=15>>15 flights of stairs.",
+    "L2": "Thus, he has 20 - 15 = <<20-15=5>>5 flights of stairs left to run up.",
+    "L3": "He will spend 5 * 11 = <<5*11=55>>55 seconds running up the remaining stairs to the bomb.",
+    "L4": "Therefore, he will have 72 - 55 = <<72-55=17>>17 seconds to defuse the bomb."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1463.\n    Returns: the number of seconds Ned will have to diffuse the bomb.\n    \"\"\"\n    # L1\n    seconds_spent_running = 165 # Ned has spent 165 seconds running up the stairs\n    time_per_flight = 11 # Ned can run up one flight of stairs in eleven seconds\n    flights_climbed = seconds_spent_running / time_per_flight\n\n    # L2\n    total_flights = 20 # The building has twenty flights of stairs to the top floor\n    remaining_flights = total_flights - flights_climbed\n\n    # L3\n    time_for_remaining_flights = remaining_flights * time_per_flight\n\n    # L4\n    initial_bomb_timer = 72 # The time bomb has 72 seconds left on the timer\n    time_to_diffuse = initial_bomb_timer - time_for_remaining_flights\n\n    # FA\n    answer = time_to_diffuse\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "time_to_diffuse",
+    "operand_to_replace": "time_for_remaining_flights",
+    "replacement_variable": "remaining_flights"
+  },
+  "correct_trace": {
+    "seconds_spent_running": 165,
+    "time_per_flight": 11,
+    "flights_climbed": 15.0,
+    "total_flights": 20,
+    "remaining_flights": 5.0,
+    "time_for_remaining_flights": 55.0,
+    "initial_bomb_timer": 72,
+    "time_to_diffuse": 17.0,
+    "answer": 17.0
+  },
+  "flawed_trace": {
+    "seconds_spent_running": 165,
+    "time_per_flight": 11,
+    "flights_climbed": 15.0,
+    "total_flights": 20,
+    "remaining_flights": 5.0,
+    "time_for_remaining_flights": 55.0,
+    "initial_bomb_timer": 72,
+    "time_to_diffuse": 67.0,
+    "answer": 67.0
+  },
+  "correct_value": 17.0,
+  "flawed_value": 67.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "flights_climbed",
+      "question_inputs": [
+        "seconds_spent_running",
+        "time_per_flight"
+      ],
+      "solution_line_template": "Ned has gone up {seconds_spent_running} / {time_per_flight} = <<{seconds_spent_running}/{time_per_flight}={flights_climbed}>>{flights_climbed} flights of stairs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_flights",
+      "question_inputs": [
+        "total_flights"
+      ],
+      "solution_line_template": "Thus, he has {total_flights} - {flights_climbed} = <<{total_flights}-{flights_climbed}={remaining_flights}>>{remaining_flights} flights of stairs left to run up."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "time_for_remaining_flights",
+      "question_inputs": [],
+      "solution_line_template": "He will spend {remaining_flights} * {time_per_flight} = <<{remaining_flights}*{time_per_flight}={time_for_remaining_flights}>>{time_for_remaining_flights} seconds running up the remaining stairs to the bomb."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "time_to_diffuse",
+      "question_inputs": [
+        "initial_bomb_timer"
+      ],
+      "solution_line_template": "Therefore, he will have {initial_bomb_timer} - {time_for_remaining_flights} = <<{initial_bomb_timer}-{time_for_remaining_flights}={time_to_diffuse}>>{time_to_diffuse} seconds to defuse the bomb."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Ned has gone up 165 / 11 = <<165/11=15>>15 flights of stairs.",
+    "L2": "Thus, he has 20 - 15 = <<20-15=5>>5 flights of stairs left to run up.",
+    "L3": "He will spend 5 * 11 = <<5*11=55>>55 seconds running up the remaining stairs to the bomb.",
+    "L4": "Therefore, he will have 72 - 5 = <<72-5=67>>67 seconds to defuse the bomb.",
+    "FA": "#### 67"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'remaining_flights' (value: 5.0) was used instead of 'time_for_remaining_flights' (value: 55.0).",
+  "repro_seed": 4179288130745886842,
+  "model_name": "google_gemini-2.5-flash"
+}

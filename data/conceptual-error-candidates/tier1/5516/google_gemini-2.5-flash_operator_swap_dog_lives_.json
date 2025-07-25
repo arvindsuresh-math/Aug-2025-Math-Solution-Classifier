@@ -1,0 +1,63 @@
+{
+  "index": 5516,
+  "original_solution_mapping": {
+    "FA": "#### 13",
+    "L1": "Dog:9-3=<<9-3=6>>6 lives",
+    "L2": "Mouse:6+7=<<6+7=13>>13 lives"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5516.\n    Returns: the number of lives a mouse has.\n    \"\"\"\n    # L1\n    cat_lives = 9 # A cat has nine lives\n    dog_less_than_cat = 3 # 3 less lives than a cat\n    dog_lives = cat_lives - dog_less_than_cat\n\n    # L2\n    mouse_more_than_dog = 7 # 7 more lives than a dog\n    mouse_lives = dog_lives + mouse_more_than_dog\n\n    # FA\n    answer = mouse_lives\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "dog_lives",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x30a536f10>"
+  },
+  "correct_trace": {
+    "cat_lives": 9,
+    "dog_less_than_cat": 3,
+    "dog_lives": 6,
+    "mouse_more_than_dog": 7,
+    "mouse_lives": 13,
+    "answer": 13
+  },
+  "flawed_trace": {
+    "cat_lives": 9,
+    "dog_less_than_cat": 3,
+    "dog_lives": 3.0,
+    "mouse_more_than_dog": 7,
+    "mouse_lives": 10.0,
+    "answer": 10.0
+  },
+  "correct_value": 6,
+  "flawed_value": 3.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "dog_lives",
+      "question_inputs": [
+        "cat_lives",
+        "dog_less_than_cat"
+      ],
+      "solution_line_template": "Dog:{cat_lives}-{dog_less_than_cat}=<<{cat_lives}-{dog_less_than_cat}={dog_lives}>>{dog_lives} lives"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "mouse_lives",
+      "question_inputs": [
+        "mouse_more_than_dog"
+      ],
+      "solution_line_template": "Mouse:{dog_lives}+{mouse_more_than_dog}=<<{dog_lives}+{mouse_more_than_dog}={mouse_lives}>>{mouse_lives} lives"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Dog:9-3=<<9-3=3>>3 lives",
+    "L2": "Mouse:3+7=<<3+7=10>>10 lives",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": 6910422574258023517,
+  "model_name": "google_gemini-2.5-flash"
+}

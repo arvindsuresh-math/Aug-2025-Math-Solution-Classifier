@@ -1,0 +1,77 @@
+{
+  "index": 6017,
+  "original_solution_mapping": {
+    "FA": "#### 600000",
+    "L1": "Up a mountain, Stephen covered 3/4*40000 = <<3/4*40000=30000>>30000 feet.",
+    "L2": "Coming down, Stephen covered another 30000 feet, making the total distance covered in one round to be 30000+30000 = <<30000+30000=60000>>60000.",
+    "L3": "Since Stephen made 10 round trips up and down the mountain, he covered 10*60000 = <<10*60000=600000>>600000"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6017.\n    Returns: the total distance Stephen covered.\n    \"\"\"\n    # L1\n    fraction_numerator = 3 # 3/4 of the mountain's height\n    fraction_denominator = 4 # 3/4 of the mountain's height\n    mountain_height = 40000 # 40,000 foot tall mountain\n    distance_up_one_trip = Fraction(fraction_numerator, fraction_denominator) * mountain_height\n\n    # L2\n    distance_one_round_trip = distance_up_one_trip + distance_up_one_trip\n\n    # L3\n    num_round_trips = 10 # 10 round trips\n    total_distance_covered = num_round_trips * distance_one_round_trip\n\n    # FA\n    answer = total_distance_covered\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "distance_up_one_trip",
+    "operand_to_replace": "fraction_denominator",
+    "replacement_variable": "fraction_numerator"
+  },
+  "correct_trace": {
+    "fraction_numerator": 3,
+    "fraction_denominator": 4,
+    "mountain_height": 40000,
+    "distance_up_one_trip": "30000",
+    "distance_one_round_trip": "60000",
+    "num_round_trips": 10,
+    "total_distance_covered": "600000",
+    "answer": "600000"
+  },
+  "flawed_trace": {
+    "fraction_numerator": 3,
+    "fraction_denominator": 4,
+    "mountain_height": 40000,
+    "distance_up_one_trip": "40000",
+    "distance_one_round_trip": "80000",
+    "num_round_trips": 10,
+    "total_distance_covered": "800000",
+    "answer": "800000"
+  },
+  "correct_value": "30000",
+  "flawed_value": "40000",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "distance_up_one_trip",
+      "question_inputs": [
+        "fraction_numerator",
+        "fraction_denominator",
+        "mountain_height"
+      ],
+      "solution_line_template": "Up a mountain, Stephen covered {fraction_numerator}/{fraction_denominator}*{mountain_height} = <<{fraction_numerator}/{fraction_denominator}*{mountain_height}={distance_up_one_trip}>>{distance_up_one_trip} feet."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "distance_one_round_trip",
+      "question_inputs": [],
+      "solution_line_template": "Coming down, Stephen covered another {distance_up_one_trip} feet, making the total distance covered in one round to be {distance_up_one_trip}+{distance_up_one_trip} = <<{distance_up_one_trip}+{distance_up_one_trip}={distance_one_round_trip}>>{distance_one_round_trip}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_distance_covered",
+      "question_inputs": [
+        "num_round_trips"
+      ],
+      "solution_line_template": "Since Stephen made {num_round_trips} round trips up and down the mountain, he covered {num_round_trips}*{distance_one_round_trip} = <<{num_round_trips}*{distance_one_round_trip}={total_distance_covered}>>{total_distance_covered}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Up a mountain, Stephen covered 3/3*40000 = <<3/3*40000=40000>>40000 feet.",
+    "L2": "Coming down, Stephen covered another 40000 feet, making the total distance covered in one round to be 40000+40000 = <<40000+40000=80000>>80000.",
+    "L3": "Since Stephen made 10 round trips up and down the mountain, he covered 10*80000 = <<10*80000=800000>>800000",
+    "FA": "#### 800000"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'fraction_numerator' (3) was used instead of 'fraction_denominator' (4).",
+  "repro_seed": -7304176999512709228,
+  "model_name": "google_gemini-2.5-flash"
+}

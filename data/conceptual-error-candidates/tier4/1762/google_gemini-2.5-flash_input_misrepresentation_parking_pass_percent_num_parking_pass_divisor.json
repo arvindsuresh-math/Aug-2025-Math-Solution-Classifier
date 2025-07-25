@@ -1,0 +1,89 @@
+{
+  "index": 1762,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "First find how many cars have valid tickets: 75% * 300 cars = <<75*.01*300=225>>225 cars",
+    "L2": "Then find the percentage of cars with parking passes: 75% / 5 = 15%",
+    "L3": "Then multiply that number by the total number of cars to find the number with parking passes: 15% * 300 cars = <<15*.01*300=45>>45 cars",
+    "L4": "Then subtract all the cars with valid forms of parking to find the number parked illegally: 300 cars - 225 cars - 45 cars = <<300-225-45=30>>30 cars"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1762.\n    Returns: the number of people who tried to park without paying.\n    \"\"\"\n    # L1\n    total_cars = 300 # 300 cars in the parking lot\n    valid_tickets_percent_num = 75 # 75% of the cars have valid tickets\n    percent_factor = 0.01 # WK\n    cars_with_valid_tickets = valid_tickets_percent_num * percent_factor * total_cars\n\n    # L2\n    parking_pass_divisor = 5 # 1/5th that number have permanent parking passes\n    parking_pass_percent_num = valid_tickets_percent_num / parking_pass_divisor\n\n    # L3\n    cars_with_parking_passes = parking_pass_percent_num * percent_factor * total_cars\n\n    # L4\n    cars_parked_illegally = total_cars - cars_with_valid_tickets - cars_with_parking_passes\n\n    # FA\n    answer = cars_parked_illegally\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "parking_pass_percent_num",
+    "operand_to_replace": "valid_tickets_percent_num",
+    "replacement_variable": "parking_pass_divisor"
+  },
+  "correct_trace": {
+    "total_cars": 300,
+    "valid_tickets_percent_num": 75,
+    "percent_factor": 0.01,
+    "cars_with_valid_tickets": 225.0,
+    "parking_pass_divisor": 5,
+    "parking_pass_percent_num": 15.0,
+    "cars_with_parking_passes": 45.0,
+    "cars_parked_illegally": 30.0,
+    "answer": 30.0
+  },
+  "flawed_trace": {
+    "total_cars": 300,
+    "valid_tickets_percent_num": 75,
+    "percent_factor": 0.01,
+    "cars_with_valid_tickets": 225.0,
+    "parking_pass_divisor": 5,
+    "parking_pass_percent_num": 1.0,
+    "cars_with_parking_passes": 3.0,
+    "cars_parked_illegally": 72.0,
+    "answer": 72.0
+  },
+  "correct_value": 15.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "cars_with_valid_tickets",
+      "question_inputs": [
+        "valid_tickets_percent_num",
+        "total_cars"
+      ],
+      "solution_line_template": "First find how many cars have valid tickets: {valid_tickets_percent_num}% * {total_cars} cars = <<{valid_tickets_percent_num}*{percent_factor}*{total_cars}={cars_with_valid_tickets}>>{cars_with_valid_tickets} cars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "parking_pass_percent_num",
+      "question_inputs": [
+        "parking_pass_divisor"
+      ],
+      "solution_line_template": "Then find the percentage of cars with parking passes: {valid_tickets_percent_num}% / {parking_pass_divisor} = {parking_pass_percent_num}%"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cars_with_parking_passes",
+      "question_inputs": [],
+      "solution_line_template": "Then multiply that number by the total number of cars to find the number with parking passes: {parking_pass_percent_num}% * {total_cars} cars = <<{parking_pass_percent_num}*{percent_factor}*{total_cars}={cars_with_parking_passes}>>{cars_with_parking_passes} cars"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "cars_parked_illegally",
+      "question_inputs": [],
+      "solution_line_template": "Then subtract all the cars with valid forms of parking to find the number parked illegally: {total_cars} cars - {cars_with_valid_tickets} cars - {cars_with_parking_passes} cars = <<{total_cars}-{cars_with_valid_tickets}-{cars_with_parking_passes}={cars_parked_illegally}>>{cars_parked_illegally} cars"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how many cars have valid tickets: 75% * 300 cars = <<75*0.01*300=225>>225 cars",
+    "L2": "Then find the percentage of cars with parking passes: 5% / 5 = 1%",
+    "L3": "Then multiply that number by the total number of cars to find the number with parking passes: 1% * 300 cars = <<1*0.01*300=3>>3 cars",
+    "L4": "Then subtract all the cars with valid forms of parking to find the number parked illegally: 300 cars - 225 cars - 3 cars = <<300-225-3=72>>72 cars",
+    "FA": "#### 72"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'parking_pass_divisor' (5) was used instead of 'valid_tickets_percent_num' (75).",
+  "repro_seed": 1718243585950518213,
+  "model_name": "google_gemini-2.5-flash"
+}

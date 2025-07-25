@@ -1,0 +1,78 @@
+{
+  "index": 4847,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "Lucy needs to purchase 10 x 1.2 = <<10*1.2=12>>12 pounds of potato chips.",
+    "L2": "So, Lucy will pay 12 x 25 = <<12*25=300>>300 cents for it.",
+    "L3": "Since there are 100 cents in $1, thus, Lucy will pay 300/100 = <<300/100=3>>3 dollars."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4847.\n    Returns: the amount Lucy will pay in dollars.\n    \"\"\"\n    # L1\n    num_people = 10 # Ten people will be at the party\n    chips_per_person = 1.2 # each person to get 1.2 pounds\n    total_pounds = num_people * chips_per_person\n\n    # L2\n    cents_per_pound = 25 # 25 cents per pound\n    total_cents = total_pounds * cents_per_pound\n\n    # L3\n    cents_per_dollar = 100 # WK\n    total_dollars = total_cents / cents_per_dollar\n\n    # FA\n    answer = total_dollars\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_dollars",
+    "operand_to_replace": "cents_per_dollar",
+    "replacement_variable": "cents_per_pound"
+  },
+  "correct_trace": {
+    "num_people": 10,
+    "chips_per_person": 1.2,
+    "total_pounds": 12.0,
+    "cents_per_pound": 25,
+    "total_cents": 300.0,
+    "cents_per_dollar": 100,
+    "total_dollars": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "num_people": 10,
+    "chips_per_person": 1.2,
+    "total_pounds": 12.0,
+    "cents_per_pound": 25,
+    "total_cents": 300.0,
+    "cents_per_dollar": 100,
+    "total_dollars": 12.0,
+    "answer": 12.0
+  },
+  "correct_value": 3.0,
+  "flawed_value": 12.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_pounds",
+      "question_inputs": [
+        "num_people",
+        "chips_per_person"
+      ],
+      "solution_line_template": "Lucy needs to purchase {num_people} x {chips_per_person} = <<{num_people}*{chips_per_person}={total_pounds}>>{total_pounds} pounds of potato chips."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cents",
+      "question_inputs": [
+        "cents_per_pound"
+      ],
+      "solution_line_template": "So, Lucy will pay {total_pounds} x {cents_per_pound} = <<{total_pounds}*{cents_per_pound}={total_cents}>>{total_cents} cents for it."
+    },
+    {
+      "WK_inputs": [
+        "cents_per_dollar"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_dollars",
+      "question_inputs": [],
+      "solution_line_template": "Since there are 100 cents in $1, thus, Lucy will pay {total_cents}/{cents_per_dollar} = <<{total_cents}/{cents_per_dollar}={total_dollars}>>{total_dollars} dollars."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Lucy needs to purchase 10 x 1.2 = <<10*1.2=12>>12 pounds of potato chips.",
+    "L2": "So, Lucy will pay 12 x 25 = <<12*25=300>>300 cents for it.",
+    "L3": "Since there are 100 cents in $1, thus, Lucy will pay 300/25 = <<300/25=12>>12 dollars.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'cents_per_pound' (25) was used instead of 'cents_per_dollar' (100).",
+  "repro_seed": -6977163805635947494,
+  "model_name": "google_gemini-2.5-flash"
+}

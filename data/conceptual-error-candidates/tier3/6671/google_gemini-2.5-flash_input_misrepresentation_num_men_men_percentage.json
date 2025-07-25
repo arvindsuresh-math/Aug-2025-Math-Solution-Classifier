@@ -1,0 +1,85 @@
+{
+  "index": 6671,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "Out of 100 attendees, 100 x 50/100 = <<100*50/100=50>>50 are women.",
+    "L2": "While 100 x 35/100 = <<100*35/100=35>>35 are men.",
+    "L3": "So there were a total of 50 + 35 = <<50+35=85>>85 men and women who attended the party.",
+    "L4": "Thus, 100 - 85 = <<100-85=15>>15 children attended the party."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6671.\n    Returns: the number of children who attended the party.\n    \"\"\"\n    # L1\n    total_attendees = 100 # One hundred people attended a party\n    women_percentage = Fraction(50, 100) # Fifty percent of the attendees are women\n    num_women = total_attendees * women_percentage\n\n    # L2\n    men_percentage = Fraction(35, 100) # thirty-five percent of them are men\n    num_men = total_attendees * men_percentage\n\n    # L3\n    total_men_women = num_women + num_men\n\n    # L4\n    num_children = total_attendees - total_men_women\n\n    # FA\n    answer = num_children\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "num_men",
+    "operand_to_replace": "total_attendees",
+    "replacement_variable": "men_percentage"
+  },
+  "correct_trace": {
+    "total_attendees": 100,
+    "women_percentage": "1/2",
+    "num_women": "50",
+    "men_percentage": "7/20",
+    "num_men": "35",
+    "total_men_women": "85",
+    "num_children": "15",
+    "answer": "15"
+  },
+  "flawed_trace": {
+    "total_attendees": 100,
+    "women_percentage": "1/2",
+    "num_women": "50",
+    "men_percentage": "7/20",
+    "num_men": "49/400",
+    "total_men_women": "20049/400",
+    "num_children": "19951/400",
+    "answer": "19951/400"
+  },
+  "correct_value": "35",
+  "flawed_value": "49/400",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "num_women",
+      "question_inputs": [
+        "total_attendees",
+        "women_percentage"
+      ],
+      "solution_line_template": "Out of {total_attendees} attendees, {total_attendees} x {women_percentage} = <<{total_attendees}*{women_percentage}={num_women}>>{num_women} are women."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_men",
+      "question_inputs": [
+        "men_percentage"
+      ],
+      "solution_line_template": "While {total_attendees} x {men_percentage} = <<{total_attendees}*{men_percentage}={num_men}>>{num_men} are men."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_men_women",
+      "question_inputs": [],
+      "solution_line_template": "So there were a total of {num_women} + {num_men} = <<{num_women}+{num_men}={total_men_women}>>{total_men_women} men and women who attended the party."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "num_children",
+      "question_inputs": [],
+      "solution_line_template": "Thus, {total_attendees} - {total_men_women} = <<{total_attendees}-{total_men_women}={num_children}>>{num_children} children attended the party."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Out of 100 attendees, 100 x 50/100 = <<100*50/100=50>>50 are women.",
+    "L2": "While 35/100 x 35/100 = <<35/100*35/100=49/400>>49/400 are men.",
+    "L3": "So there were a total of 50 + 49/400 = <<50+49/400=20049/400>>20049/400 men and women who attended the party.",
+    "L4": "Thus, 100 - 20049/400 = <<100-20049/400=19951/400>>19951/400 children attended the party.",
+    "FA": "#### 19951/400"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'men_percentage' (35/100) was used instead of 'total_attendees' (100).",
+  "repro_seed": -8003676888729660258,
+  "model_name": "google_gemini-2.5-flash"
+}

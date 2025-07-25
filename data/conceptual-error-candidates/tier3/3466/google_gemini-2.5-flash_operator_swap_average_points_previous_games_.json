@@ -1,0 +1,93 @@
+{
+  "index": 3466,
+  "original_solution_mapping": {
+    "FA": "#### 11",
+    "L1": "They scored an average of 720/24=<<720/24=30>>30 points in their previous games",
+    "L2": "Half that many would be 30/2=<<30/2=15>>15 points",
+    "L3": "So in the finals, they scored 15-2=<<15-2=13>>13 points",
+    "L4": "Their opponent thus scored 13-2=<<13-2=11>>11 points"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3466.\n    Returns: the number of points the opponent scored.\n    \"\"\"\n    # L1\n    total_points_previous_games = 720 # scored a total of 720 points\n    num_previous_games = 24 # during their previous 24 games\n    average_points_previous_games = total_points_previous_games / num_previous_games\n\n    # L2\n    half_divisor = 2 # half as much\n    half_average_points = average_points_previous_games / half_divisor\n\n    # L3\n    points_less_than_half = 2 # 2 points less than half as much\n    uf_championship_score = half_average_points - points_less_than_half\n\n    # L4\n    opponent_lost_by = 2 # Their opponent only lost by 2 points\n    opponent_score = uf_championship_score - opponent_lost_by\n\n    # FA\n    answer = opponent_score\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "average_points_previous_games",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x172147710>"
+  },
+  "correct_trace": {
+    "total_points_previous_games": 720,
+    "num_previous_games": 24,
+    "average_points_previous_games": 30.0,
+    "half_divisor": 2,
+    "half_average_points": 15.0,
+    "points_less_than_half": 2,
+    "uf_championship_score": 13.0,
+    "opponent_lost_by": 2,
+    "opponent_score": 11.0,
+    "answer": 11.0
+  },
+  "flawed_trace": {
+    "total_points_previous_games": 720,
+    "num_previous_games": 24,
+    "average_points_previous_games": 696,
+    "half_divisor": 2,
+    "half_average_points": 348.0,
+    "points_less_than_half": 2,
+    "uf_championship_score": 346.0,
+    "opponent_lost_by": 2,
+    "opponent_score": 344.0,
+    "answer": 344.0
+  },
+  "correct_value": 30.0,
+  "flawed_value": 696,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "average_points_previous_games",
+      "question_inputs": [
+        "total_points_previous_games",
+        "num_previous_games"
+      ],
+      "solution_line_template": "They scored an average of {total_points_previous_games}/{num_previous_games}=<<{total_points_previous_games}/{num_previous_games}={average_points_previous_games}>>{average_points_previous_games} points in their previous games"
+    },
+    {
+      "WK_inputs": [
+        "half_divisor"
+      ],
+      "line_number": "L2",
+      "output_variable": "half_average_points",
+      "question_inputs": [],
+      "solution_line_template": "Half that many would be {average_points_previous_games}/{half_divisor}=<<{average_points_previous_games}/{half_divisor}={half_average_points}>>{half_average_points} points"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "uf_championship_score",
+      "question_inputs": [
+        "points_less_than_half"
+      ],
+      "solution_line_template": "So in the finals, they scored {half_average_points}-{points_less_than_half}=<<{half_average_points}-{points_less_than_half}={uf_championship_score}>>{uf_championship_score} points"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "opponent_score",
+      "question_inputs": [
+        "opponent_lost_by"
+      ],
+      "solution_line_template": "Their opponent thus scored {uf_championship_score}-{opponent_lost_by}=<<{uf_championship_score}-{opponent_lost_by}={opponent_score}>>{opponent_score} points"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "They scored an average of 720/24=<<720/24=696>>696 points in their previous games",
+    "L2": "Half that many would be 696/2=<<696/2=348>>348 points",
+    "L3": "So in the finals, they scored 348-2=<<348-2=346>>346 points",
+    "L4": "Their opponent thus scored 346-2=<<346-2=344>>344 points",
+    "FA": "#### 344"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 2498503661753321754,
+  "model_name": "google_gemini-2.5-flash"
+}

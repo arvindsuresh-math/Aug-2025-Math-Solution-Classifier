@@ -1,0 +1,74 @@
+{
+  "index": 5510,
+  "original_solution_mapping": {
+    "FA": "#### 105",
+    "L1": "Ryan has 25 + 20 = <<25+20=45>>45 stickers.",
+    "L2": "Ben has 45 - 10 = <<45-10=35>>35 stickers.",
+    "L3": "Therefore, there are a total of 25 + 45 + 35 = <<25+45+35=105>>105 stickers placed all together in a sticker book."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5510.\n    Returns: the total number of stickers placed altogether.\n    \"\"\"\n    # L1\n    karl_stickers = 25 # Karl has 25 stickers\n    ryan_more_than_karl = 20 # Ryan has 20 more stickers than Karl\n    ryan_stickers = karl_stickers + ryan_more_than_karl\n\n    # L2\n    ben_fewer_than_ryan = 10 # Ben has 10 fewer stickers than Ryan\n    ben_stickers = ryan_stickers - ben_fewer_than_ryan\n\n    # L3\n    total_stickers = karl_stickers + ryan_stickers + ben_stickers\n\n    # FA\n    answer = total_stickers\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "ben_stickers",
+    "operand_to_replace": "ben_fewer_than_ryan",
+    "replacement_variable": "ryan_more_than_karl"
+  },
+  "correct_trace": {
+    "karl_stickers": 25,
+    "ryan_more_than_karl": 20,
+    "ryan_stickers": 45,
+    "ben_fewer_than_ryan": 10,
+    "ben_stickers": 35,
+    "total_stickers": 105,
+    "answer": 105
+  },
+  "flawed_trace": {
+    "karl_stickers": 25,
+    "ryan_more_than_karl": 20,
+    "ryan_stickers": 45,
+    "ben_fewer_than_ryan": 10,
+    "ben_stickers": 25,
+    "total_stickers": 95,
+    "answer": 95
+  },
+  "correct_value": 35,
+  "flawed_value": 25,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "ryan_stickers",
+      "question_inputs": [
+        "karl_stickers",
+        "ryan_more_than_karl"
+      ],
+      "solution_line_template": "Ryan has {karl_stickers} + {ryan_more_than_karl} = <<{karl_stickers}+{ryan_more_than_karl}={ryan_stickers}>>{ryan_stickers} stickers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "ben_stickers",
+      "question_inputs": [
+        "ben_fewer_than_ryan"
+      ],
+      "solution_line_template": "Ben has {ryan_stickers} - {ben_fewer_than_ryan} = <<{ryan_stickers}-{ben_fewer_than_ryan}={ben_stickers}>>{ben_stickers} stickers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_stickers",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, there are a total of {karl_stickers} + {ryan_stickers} + {ben_stickers} = <<{karl_stickers}+{ryan_stickers}+{ben_stickers}={total_stickers}>>{total_stickers} stickers placed all together in a sticker book."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Ryan has 25 + 20 = <<25+20=45>>45 stickers.",
+    "L2": "Ben has 45 - 20 = <<45-20=25>>25 stickers.",
+    "L3": "Therefore, there are a total of 25 + 45 + 25 = <<25+45+25=95>>95 stickers placed all together in a sticker book.",
+    "FA": "#### 95"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'ryan_more_than_karl' (20) was used instead of 'ben_fewer_than_ryan' (10).",
+  "repro_seed": -3159265062077414718,
+  "model_name": "google_gemini-2.5-flash"
+}

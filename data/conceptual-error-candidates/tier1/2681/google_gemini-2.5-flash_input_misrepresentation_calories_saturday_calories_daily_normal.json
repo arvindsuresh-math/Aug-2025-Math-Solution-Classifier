@@ -1,0 +1,91 @@
+{
+  "index": 2681,
+  "original_solution_mapping": {
+    "FA": "#### 2500",
+    "L1": "He consumes 2500+1000=<<2500+1000=3500>>3500 calories on Saturday",
+    "L2": "He consumes 2500*6+3500=<<2500*6+3500=18500>>18500 calories in the week.",
+    "L3": "He burns 3000*7=<<3000*7=21000>>21000 calories in the week",
+    "L4": "His caloric deficit is 21000-18500=<<21000-18500=2500>>2500 calories per week"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2681.\n    Returns: Jonathan's weekly caloric deficit.\n    \"\"\"\n    # L1\n    calories_daily_normal = 2500 # Jonathan eats 2500 calories every day\n    extra_calories_saturday = 1000 # consumes an extra 1000 calories\n    calories_saturday = calories_daily_normal + extra_calories_saturday\n\n    # L2\n    days_in_week = 7 # WK\n    days_not_saturday = days_in_week - 1 # every day except for Saturday\n    total_calories_consumed_weekly = calories_daily_normal * days_not_saturday + calories_saturday\n\n    # L3\n    calories_burned_daily = 3000 # He burns 3000 calories every day\n    total_calories_burned_weekly = calories_burned_daily * days_in_week\n\n    # L4\n    caloric_deficit_weekly = total_calories_burned_weekly - total_calories_consumed_weekly\n\n    # FA\n    answer = caloric_deficit_weekly\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "calories_saturday",
+    "operand_to_replace": "extra_calories_saturday",
+    "replacement_variable": "calories_daily_normal"
+  },
+  "correct_trace": {
+    "calories_daily_normal": 2500,
+    "extra_calories_saturday": 1000,
+    "calories_saturday": 3500,
+    "days_in_week": 7,
+    "days_not_saturday": 6,
+    "total_calories_consumed_weekly": 18500,
+    "calories_burned_daily": 3000,
+    "total_calories_burned_weekly": 21000,
+    "caloric_deficit_weekly": 2500,
+    "answer": 2500
+  },
+  "flawed_trace": {
+    "calories_daily_normal": 2500,
+    "extra_calories_saturday": 1000,
+    "calories_saturday": 5000,
+    "days_in_week": 7,
+    "days_not_saturday": 6,
+    "total_calories_consumed_weekly": 20000,
+    "calories_burned_daily": 3000,
+    "total_calories_burned_weekly": 21000,
+    "caloric_deficit_weekly": 1000,
+    "answer": 1000
+  },
+  "correct_value": 3500,
+  "flawed_value": 5000,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "calories_daily_normal",
+        "extra_calories_saturday"
+      ],
+      "WK_inputs": [],
+      "output_variable": "calories_saturday",
+      "solution_line_template": "He consumes {calories_daily_normal}+{extra_calories_saturday}=<<{calories_daily_normal}+{extra_calories_saturday}={calories_saturday}>>{calories_saturday} calories on Saturday"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [
+        "days_in_week"
+      ],
+      "output_variable": "total_calories_consumed_weekly",
+      "solution_line_template": "He consumes {calories_daily_normal}*{days_not_saturday}+{calories_saturday}=<<{calories_daily_normal}*{days_not_saturday}+{calories_saturday}={total_calories_consumed_weekly}>>{total_calories_consumed_weekly} calories in the week."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "calories_burned_daily"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_calories_burned_weekly",
+      "solution_line_template": "He burns {calories_burned_daily}*{days_in_week}=<<{calories_burned_daily}*{days_in_week}={total_calories_burned_weekly}>>{total_calories_burned_weekly} calories in the week"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "caloric_deficit_weekly",
+      "solution_line_template": "His caloric deficit is {total_calories_burned_weekly}-{total_calories_consumed_weekly}=<<{total_calories_burned_weekly}-{total_calories_consumed_weekly}={caloric_deficit_weekly}>>{caloric_deficit_weekly} calories per week"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He consumes 2500+2500=<<2500+2500=5000>>5000 calories on Saturday",
+    "L2": "He consumes 2500*6+5000=<<2500*6+5000=20000>>20000 calories in the week.",
+    "L3": "He burns 3000*7=<<3000*7=21000>>21000 calories in the week",
+    "L4": "His caloric deficit is 21000-20000=<<21000-20000=1000>>1000 calories per week",
+    "FA": "#### 1000"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'calories_daily_normal' (2500) was used instead of 'extra_calories_saturday' (1000).",
+  "repro_seed": 8380034006254489475,
+  "model_name": "google_gemini-2.5-flash"
+}

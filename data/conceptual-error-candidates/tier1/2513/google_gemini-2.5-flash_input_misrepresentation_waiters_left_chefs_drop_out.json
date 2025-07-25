@@ -1,0 +1,77 @@
+{
+  "index": 2513,
+  "original_solution_mapping": {
+    "FA": "#### 23",
+    "L1": "There are 16 chefs - 6 chefs = <<16-6=10>>10 chefs left.",
+    "L2": "There are 16 waiters - 3 waiters = <<16-3=13>>13 waiters left.",
+    "L3": "In total there are 10 chefs + 13 waiters = <<10+13=23>>23 chefs and waiters left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2513.\n    Returns: the total number of chefs and waiters left.\n    \"\"\"\n    # L1\n    initial_chefs = 16 # 16 chefs\n    chefs_drop_out = 6 # 6 chefs drop out\n    chefs_left = initial_chefs - chefs_drop_out\n\n    # L2\n    initial_waiters = 16 # 16 waiters\n    waiters_drop_out = 3 # 3 waiters drop out\n    waiters_left = initial_waiters - waiters_drop_out\n\n    # L3\n    total_left = chefs_left + waiters_left\n\n    # FA\n    answer = total_left\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "waiters_left",
+    "operand_to_replace": "initial_waiters",
+    "replacement_variable": "chefs_drop_out"
+  },
+  "correct_trace": {
+    "initial_chefs": 16,
+    "chefs_drop_out": 6,
+    "chefs_left": 10,
+    "initial_waiters": 16,
+    "waiters_drop_out": 3,
+    "waiters_left": 13,
+    "total_left": 23,
+    "answer": 23
+  },
+  "flawed_trace": {
+    "initial_chefs": 16,
+    "chefs_drop_out": 6,
+    "chefs_left": 10,
+    "initial_waiters": 16,
+    "waiters_drop_out": 3,
+    "waiters_left": 3,
+    "total_left": 13,
+    "answer": 13
+  },
+  "correct_value": 13,
+  "flawed_value": 3,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "initial_chefs",
+        "chefs_drop_out"
+      ],
+      "WK_inputs": [],
+      "output_variable": "chefs_left",
+      "solution_line_template": "There are {initial_chefs} chefs - {chefs_drop_out} chefs = <<{initial_chefs}-{chefs_drop_out}={chefs_left}>>{chefs_left} chefs left."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "initial_waiters",
+        "waiters_drop_out"
+      ],
+      "WK_inputs": [],
+      "output_variable": "waiters_left",
+      "solution_line_template": "There are {initial_waiters} waiters - {waiters_drop_out} waiters = <<{initial_waiters}-{waiters_drop_out}={waiters_left}>>{waiters_left} waiters left."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_left",
+      "solution_line_template": "In total there are {chefs_left} chefs + {waiters_left} waiters = <<{chefs_left}+{waiters_left}={total_left}>>{total_left} chefs and waiters left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 16 chefs - 6 chefs = <<16-6=10>>10 chefs left.",
+    "L2": "There are 6 waiters - 3 waiters = <<6-3=3>>3 waiters left.",
+    "L3": "In total there are 10 chefs + 3 waiters = <<10+3=13>>13 chefs and waiters left.",
+    "FA": "#### 13"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'chefs_drop_out' (6) was used instead of 'initial_waiters' (16).",
+  "repro_seed": -3375374817894054230,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,93 @@
+{
+  "index": 299,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "Basil gets 1/2 in the morning and 1/2 at bedtime so she gets 1/2+1/2 = <<1/2+1/2=1>>1 whole cookie",
+    "L2": "Basil also gets 2 whole cookies during the day so all total she gets 2+1 =<<2+1=3>>3 whole cookies",
+    "L3": "She needs cookies for 30 days and eats 3 a day so she needs 30*3 = <<30*3=90>>90 cookies",
+    "L4": "Her cookies come 45 per box and she needs 90 cookies so she needs 90/45 = <<90/45=2>>2 boxes of cookies"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 299.\n    Returns: the number of boxes Basil needs.\n    \"\"\"\n    # L1\n    morning_fraction = Fraction(1, 2) # 1/2 of a dog cookie in the morning\n    bedtime_fraction = Fraction(1, 2) # and before bed\n    daily_fractional_cookies = morning_fraction + bedtime_fraction\n\n    # L2\n    daytime_whole_cookies = 2 # 2 whole cookies during the day\n    total_daily_cookies = daytime_whole_cookies + daily_fractional_cookies\n\n    # L3\n    number_of_days = 30 # last her for 30 days\n    total_cookies_needed = number_of_days * total_daily_cookies\n\n    # L4\n    cookies_per_box = 45 # 45 cookies per box\n    boxes_needed = total_cookies_needed / cookies_per_box\n\n    # FA\n    answer = boxes_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "boxes_needed",
+    "operand_to_replace": "total_cookies_needed",
+    "replacement_variable": "total_daily_cookies"
+  },
+  "correct_trace": {
+    "morning_fraction": "1/2",
+    "bedtime_fraction": "1/2",
+    "daily_fractional_cookies": "1",
+    "daytime_whole_cookies": 2,
+    "total_daily_cookies": "3",
+    "number_of_days": 30,
+    "total_cookies_needed": "90",
+    "cookies_per_box": 45,
+    "boxes_needed": "2",
+    "answer": "2"
+  },
+  "flawed_trace": {
+    "morning_fraction": "1/2",
+    "bedtime_fraction": "1/2",
+    "daily_fractional_cookies": "1",
+    "daytime_whole_cookies": 2,
+    "total_daily_cookies": "3",
+    "number_of_days": 30,
+    "total_cookies_needed": "90",
+    "cookies_per_box": 45,
+    "boxes_needed": "1/15",
+    "answer": "1/15"
+  },
+  "correct_value": "2",
+  "flawed_value": "1/15",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "daily_fractional_cookies",
+      "question_inputs": [
+        "morning_fraction",
+        "bedtime_fraction"
+      ],
+      "solution_line_template": "Basil gets {morning_fraction} in the morning and {bedtime_fraction} at bedtime so she gets {morning_fraction}+{bedtime_fraction} = <<{morning_fraction}+{bedtime_fraction}={daily_fractional_cookies}>>{daily_fractional_cookies} whole cookie"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_daily_cookies",
+      "question_inputs": [
+        "daytime_whole_cookies"
+      ],
+      "solution_line_template": "Basil also gets {daytime_whole_cookies} whole cookies during the day so all total she gets {daytime_whole_cookies}+{daily_fractional_cookies} =<<{daytime_whole_cookies}+{daily_fractional_cookies}={total_daily_cookies}>>{total_daily_cookies} whole cookies"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cookies_needed",
+      "question_inputs": [
+        "number_of_days"
+      ],
+      "solution_line_template": "She needs cookies for {number_of_days} days and eats {total_daily_cookies} a day so she needs {number_of_days}*{total_daily_cookies} = <<{number_of_days}*{total_daily_cookies}={total_cookies_needed}>>{total_cookies_needed} cookies"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "boxes_needed",
+      "question_inputs": [
+        "cookies_per_box"
+      ],
+      "solution_line_template": "Her cookies come {cookies_per_box} per box and she needs {total_cookies_needed} cookies so she needs {total_cookies_needed}/{cookies_per_box} = <<{total_cookies_needed}/{cookies_per_box}={boxes_needed}>>{boxes_needed} boxes of cookies"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Basil gets 1/2 in the morning and 1/2 at bedtime so she gets 1/2+1/2 = <<1/2+1/2=1>>1 whole cookie",
+    "L2": "Basil also gets 2 whole cookies during the day so all total she gets 2+1 =<<2+1=3>>3 whole cookies",
+    "L3": "She needs cookies for 30 days and eats 3 a day so she needs 30*3 = <<30*3=90>>90 cookies",
+    "L4": "Her cookies come 45 per box and she needs 3 cookies so she needs 3/45 = <<3/45=1/15>>1/15 boxes of cookies",
+    "FA": "#### 1/15"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'total_daily_cookies' (value: 3) was used instead of 'total_cookies_needed' (value: 90).",
+  "repro_seed": 3580225749475093228,
+  "model_name": "google_gemini-2.5-flash"
+}

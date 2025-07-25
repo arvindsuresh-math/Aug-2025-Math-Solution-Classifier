@@ -1,0 +1,63 @@
+{
+  "index": 6729,
+  "original_solution_mapping": {
+    "FA": "#### 108",
+    "L1": "In one minute the company produces 36 chocolate bars, which means they use 36 * 1.5 = <<36*1.5=54>>54 grams of sugar.",
+    "L2": "So in two minutes, the company uses 54 * 2 = <<54*2=108>>108 grams of sugar to produce chocolate bars."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6729.\n    Returns: the total grams of sugar the company will use.\n    \"\"\"\n    # L1\n    chocolate_bars_per_minute = 36 # produces 36 chocolate bars\n    sugar_per_bar = 1.5 # needs 1.5 grams of sugar\n    sugar_per_minute = chocolate_bars_per_minute * sugar_per_bar\n\n    # L2\n    minutes_to_calculate = 2 # in two minutes\n    total_sugar_used = sugar_per_minute * minutes_to_calculate\n\n    # FA\n    answer = total_sugar_used\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_sugar_used",
+    "operand_to_replace": "minutes_to_calculate",
+    "replacement_variable": "chocolate_bars_per_minute"
+  },
+  "correct_trace": {
+    "chocolate_bars_per_minute": 36,
+    "sugar_per_bar": 1.5,
+    "sugar_per_minute": 54.0,
+    "minutes_to_calculate": 2,
+    "total_sugar_used": 108.0,
+    "answer": 108.0
+  },
+  "flawed_trace": {
+    "chocolate_bars_per_minute": 36,
+    "sugar_per_bar": 1.5,
+    "sugar_per_minute": 54.0,
+    "minutes_to_calculate": 2,
+    "total_sugar_used": 1944.0,
+    "answer": 1944.0
+  },
+  "correct_value": 108.0,
+  "flawed_value": 1944.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "sugar_per_minute",
+      "question_inputs": [
+        "chocolate_bars_per_minute",
+        "sugar_per_bar"
+      ],
+      "solution_line_template": "In one minute the company produces {chocolate_bars_per_minute} chocolate bars, which means they use {chocolate_bars_per_minute} * {sugar_per_bar} = <<{chocolate_bars_per_minute}*{sugar_per_bar}={sugar_per_minute}>>{sugar_per_minute} grams of sugar."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_sugar_used",
+      "question_inputs": [
+        "minutes_to_calculate"
+      ],
+      "solution_line_template": "So in {minutes_to_calculate} minutes, the company uses {sugar_per_minute} * {minutes_to_calculate} = <<{sugar_per_minute}*{minutes_to_calculate}={total_sugar_used}>>{total_sugar_used} grams of sugar to produce chocolate bars."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In one minute the company produces 36 chocolate bars, which means they use 36 * 1.5 = <<36*1.5=54>>54 grams of sugar.",
+    "L2": "So in 36 minutes, the company uses 54 * 36 = <<54*36=1944>>1944 grams of sugar to produce chocolate bars.",
+    "FA": "#### 1944"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'chocolate_bars_per_minute' (36) was used instead of 'minutes_to_calculate' (2).",
+  "repro_seed": -7750332464100092209,
+  "model_name": "google_gemini-2.5-flash"
+}

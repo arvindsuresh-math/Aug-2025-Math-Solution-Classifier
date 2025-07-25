@@ -1,0 +1,63 @@
+{
+  "index": 1065,
+  "original_solution_mapping": {
+    "FA": "#### 120",
+    "L1": "Wraps add 600*.25=<<600*.25=150>>150 pounds to his lift",
+    "L2": "So they add 150-30=<<150-30=120>>120 pounds more than sleeves"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1065.\n    Returns: how much more pounds John gets out of wraps versus sleeves.\n    \"\"\"\n    # L1\n    raw_squat_weight = 600 # raw squat of 600 pounds\n    wraps_percentage_increase = 0.25 # Wraps add 25%\n    wraps_added_weight = raw_squat_weight * wraps_percentage_increase\n\n    # L2\n    sleeves_added_weight = 30 # Sleeves add 30 pounds\n    difference_wraps_sleeves = wraps_added_weight - sleeves_added_weight\n\n    # FA\n    answer = difference_wraps_sleeves\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "difference_wraps_sleeves",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30e280990>"
+  },
+  "correct_trace": {
+    "raw_squat_weight": 600,
+    "wraps_percentage_increase": 0.25,
+    "wraps_added_weight": 150.0,
+    "sleeves_added_weight": 30,
+    "difference_wraps_sleeves": 120.0,
+    "answer": 120.0
+  },
+  "flawed_trace": {
+    "raw_squat_weight": 600,
+    "wraps_percentage_increase": 0.25,
+    "wraps_added_weight": 150.0,
+    "sleeves_added_weight": 30,
+    "difference_wraps_sleeves": 180.0,
+    "answer": 180.0
+  },
+  "correct_value": 120.0,
+  "flawed_value": 180.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "wraps_added_weight",
+      "question_inputs": [
+        "raw_squat_weight",
+        "wraps_percentage_increase"
+      ],
+      "solution_line_template": "Wraps add {raw_squat_weight}*{wraps_percentage_increase}=<<{raw_squat_weight}*{wraps_percentage_increase}={wraps_added_weight}>>{wraps_added_weight} pounds to his lift"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "difference_wraps_sleeves",
+      "question_inputs": [
+        "sleeves_added_weight"
+      ],
+      "solution_line_template": "So they add {wraps_added_weight}-{sleeves_added_weight}=<<{wraps_added_weight}-{sleeves_added_weight}={difference_wraps_sleeves}>>{difference_wraps_sleeves} pounds more than sleeves"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Wraps add 600*0.25=<<600*0.25=150>>150 pounds to his lift",
+    "L2": "So they add 150-30=<<150-30=180>>180 pounds more than sleeves",
+    "FA": "#### 180"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -4018697088444639773,
+  "model_name": "google_gemini-2.5-flash"
+}

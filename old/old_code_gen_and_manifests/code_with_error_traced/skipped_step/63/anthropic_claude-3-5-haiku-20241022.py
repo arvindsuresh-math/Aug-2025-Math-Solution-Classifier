@@ -1,0 +1,20 @@
+def solve(
+        daily_goal: int = 30,  # Shawna's workout goal is 30 situps
+        monday_situps: int = 12,  # On Monday, Shawna was only able to do 12 situps
+        tuesday_situps: int = 19  # she was only able to do 19 situps on Tuesday
+):
+    """Index: 63.
+    Returns: the number of situps Shawna needs to do on Wednesday to meet her goal.
+    """
+
+    #: L1
+    monday_shortfall = daily_goal - monday_situps # eval: 18 = 30 - 12
+
+    #: L2
+
+    #: L3
+    wednesday_situps = daily_goal + monday_shortfall + tuesday_situps # eval: 67 = 30 + 18 + 19
+
+    #: FA
+    answer = wednesday_situps
+    return answer # eval: return 67

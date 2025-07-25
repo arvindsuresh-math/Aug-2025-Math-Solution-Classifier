@@ -1,0 +1,85 @@
+{
+  "index": 5892,
+  "original_solution_mapping": {
+    "FA": "#### 200",
+    "L1": "If the number of adult men involved in the cleaning process was 30% of the community members, there were 30/100*2000 = <<30/100*2000=600>>600 adult men at the event.",
+    "L2": "There were also twice as many adult women as adult men in the event, a total of 2*600 = <<2*600=1200>>1200 women.",
+    "L3": "The total number of adults in the event was 1200+600= <<1200+600=1800>>1800",
+    "L4": "If the rest of the people at the cleaning event were children, there were 2000-1800 = <<2000-1800=200>>200 children at the event."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5892.\n    Returns: the total number of children involved in the cleaning event.\n    \"\"\"\n    # L1\n    men_percentage = Fraction(30, 100) # 30% were adult men\n    total_community_members = 2000 # Out of 2000 community members\n    adult_men = men_percentage * total_community_members\n\n    # L2\n    women_multiplier = 2 # twice as many adult women\n    adult_women = women_multiplier * adult_men\n\n    # L3\n    total_adults = adult_women + adult_men\n\n    # L4\n    children = total_community_members - total_adults\n\n    # FA\n    answer = children\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "adult_women",
+    "operand_to_replace": "women_multiplier",
+    "replacement_variable": "men_percentage"
+  },
+  "correct_trace": {
+    "men_percentage": "3/10",
+    "total_community_members": 2000,
+    "adult_men": "600",
+    "women_multiplier": 2,
+    "adult_women": "1200",
+    "total_adults": "1800",
+    "children": "200",
+    "answer": "200"
+  },
+  "flawed_trace": {
+    "men_percentage": "3/10",
+    "total_community_members": 2000,
+    "adult_men": "600",
+    "women_multiplier": 2,
+    "adult_women": "180",
+    "total_adults": "780",
+    "children": "1220",
+    "answer": "1220"
+  },
+  "correct_value": "1200",
+  "flawed_value": "180",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "adult_men",
+      "question_inputs": [
+        "men_percentage",
+        "total_community_members"
+      ],
+      "solution_line_template": "If the number of adult men involved in the cleaning process was {men_percentage} of the community members, there were {men_percentage}*{total_community_members} = <<{men_percentage}*{total_community_members}={adult_men}>>{adult_men} adult men at the event."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "adult_women",
+      "question_inputs": [
+        "women_multiplier"
+      ],
+      "solution_line_template": "There were also twice as many adult women as adult men in the event, a total of {women_multiplier}*{adult_men} = <<{women_multiplier}*{adult_men}={adult_women}>>{adult_women} women."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_adults",
+      "question_inputs": [],
+      "solution_line_template": "The total number of adults in the event was {adult_women}+{adult_men}= <<{adult_women}+{adult_men}={total_adults}>>{total_adults}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "children",
+      "question_inputs": [],
+      "solution_line_template": "If the rest of the people at the cleaning event were children, there were {total_community_members}-{total_adults} = <<{total_community_members}-{total_adults}={children}>>{children} children at the event."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the number of adult men involved in the cleaning process was 30/100 of the community members, there were 30/100*2000 = <<30/100*2000=600>>600 adult men at the event.",
+    "L2": "There were also twice as many adult women as adult men in the event, a total of 30/100*600 = <<30/100*600=180>>180 women.",
+    "L3": "The total number of adults in the event was 180+600= <<180+600=780>>780",
+    "L4": "If the rest of the people at the cleaning event were children, there were 2000-780 = <<2000-780=1220>>1220 children at the event.",
+    "FA": "#### 1220"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'men_percentage' (30/100) was used instead of 'women_multiplier' (2).",
+  "repro_seed": 8326024039210119635,
+  "model_name": "google_gemini-2.5-flash"
+}

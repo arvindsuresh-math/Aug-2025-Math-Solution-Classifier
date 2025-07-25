@@ -1,0 +1,59 @@
+{
+  "index": 3502,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "Spike hunts 3 * 5 = <<3*5=15>>15 crickets in the afternoon and evening.",
+    "L2": "Hence, he hunts 5 + 15 = <<5+15=20>>20 crickets per day."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3502.\n    Returns: the total number of crickets Spike hunts per day.\n    \"\"\"\n    # L1\n    morning_crickets = 5 # 5 crickets every morning\n    afternoon_evening_multiplier = 3 # three times that\n    afternoon_evening_crickets = afternoon_evening_multiplier * morning_crickets\n\n    # L2\n    total_crickets_per_day = morning_crickets + afternoon_evening_crickets\n\n    # FA\n    answer = total_crickets_per_day\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "afternoon_evening_crickets",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30a9ab490>"
+  },
+  "correct_trace": {
+    "morning_crickets": 5,
+    "afternoon_evening_multiplier": 3,
+    "afternoon_evening_crickets": 15,
+    "total_crickets_per_day": 20,
+    "answer": 20
+  },
+  "flawed_trace": {
+    "morning_crickets": 5,
+    "afternoon_evening_multiplier": 3,
+    "afternoon_evening_crickets": 8,
+    "total_crickets_per_day": 13,
+    "answer": 13
+  },
+  "correct_value": 15,
+  "flawed_value": 8,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "afternoon_evening_crickets",
+      "question_inputs": [
+        "morning_crickets",
+        "afternoon_evening_multiplier"
+      ],
+      "solution_line_template": "Spike hunts {afternoon_evening_multiplier} * {morning_crickets} = <<{afternoon_evening_multiplier}*{morning_crickets}={afternoon_evening_crickets}>>{afternoon_evening_crickets} crickets in the afternoon and evening."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_crickets_per_day",
+      "question_inputs": [],
+      "solution_line_template": "Hence, he hunts {morning_crickets} + {afternoon_evening_crickets} = <<{morning_crickets}+{afternoon_evening_crickets}={total_crickets_per_day}>>{total_crickets_per_day} crickets per day."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Spike hunts 3 * 5 = <<3*5=8>>8 crickets in the afternoon and evening.",
+    "L2": "Hence, he hunts 5 + 8 = <<5+8=13>>13 crickets per day.",
+    "FA": "#### 13"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 2201084511501747743,
+  "model_name": "google_gemini-2.5-flash"
+}

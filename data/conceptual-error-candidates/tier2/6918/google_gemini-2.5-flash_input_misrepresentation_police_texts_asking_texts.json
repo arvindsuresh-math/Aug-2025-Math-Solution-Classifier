@@ -1,0 +1,89 @@
+{
+  "index": 6918,
+  "original_solution_mapping": {
+    "FA": "#### 33",
+    "L1": "First find how many texts Jennifer's boyfriend sent asking why she wasn't responding: 5 texts * 5 = <<5*5=25>>25 texts",
+    "L2": "Then add that number to the number of grocery shopping texts: 25 texts + 5 texts = <<25+5=30>>30 texts",
+    "L3": "Then multiply that number by 10% to find how many texts he sent about calling the police: 30 texts * 10% = <<30*10*.01=3>>3 texts",
+    "L4": "Then added how many texts of each kind he sent to find the total number of texts he sent: 3 texts + 30 texts = <<3+30=33>>33 texts"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6918.\n    Returns: the total number of texts sent by Jennifer's boyfriend.\n    \"\"\"\n    # L1\n    grocery_texts = 5 # 5 texts about the grocery shopping\n    times_more_factor = 5 # 5 times more texts\n    asking_texts = grocery_texts * times_more_factor\n\n    # L2\n    texts_before_police_threat = asking_texts + grocery_texts\n\n    # L3\n    police_texts_percentage = 10 # 10% of all the texts\n    percent_factor = 0.01 # WK\n    police_texts = texts_before_police_threat * police_texts_percentage * percent_factor\n\n    # L4\n    total_texts = police_texts + texts_before_police_threat\n\n    # FA\n    answer = total_texts\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "police_texts",
+    "operand_to_replace": "percent_factor",
+    "replacement_variable": "asking_texts"
+  },
+  "correct_trace": {
+    "grocery_texts": 5,
+    "times_more_factor": 5,
+    "asking_texts": 25,
+    "texts_before_police_threat": 30,
+    "police_texts_percentage": 10,
+    "percent_factor": 0.01,
+    "police_texts": 3.0,
+    "total_texts": 33.0,
+    "answer": 33.0
+  },
+  "flawed_trace": {
+    "grocery_texts": 5,
+    "times_more_factor": 5,
+    "asking_texts": 25,
+    "texts_before_police_threat": 30,
+    "police_texts_percentage": 10,
+    "percent_factor": 0.01,
+    "police_texts": 7500,
+    "total_texts": 7530,
+    "answer": 7530
+  },
+  "correct_value": 3.0,
+  "flawed_value": 7500,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "asking_texts",
+      "question_inputs": [
+        "grocery_texts",
+        "times_more_factor"
+      ],
+      "solution_line_template": "First find how many texts Jennifer's boyfriend sent asking why she wasn't responding: {grocery_texts} texts * {times_more_factor} = <<{grocery_texts}*{times_more_factor}={asking_texts}>>{asking_texts} texts"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "texts_before_police_threat",
+      "question_inputs": [],
+      "solution_line_template": "Then add that number to the number of grocery shopping texts: {asking_texts} texts + {grocery_texts} texts = <<{asking_texts}+{grocery_texts}={texts_before_police_threat}>>{texts_before_police_threat} texts"
+    },
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L3",
+      "output_variable": "police_texts",
+      "question_inputs": [
+        "police_texts_percentage"
+      ],
+      "solution_line_template": "Then multiply that number by {police_texts_percentage}% to find how many texts he sent about calling the police: {texts_before_police_threat} texts * {police_texts_percentage}% = <<{texts_before_police_threat}*{police_texts_percentage}*{percent_factor}={police_texts}>>{police_texts} texts"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_texts",
+      "question_inputs": [],
+      "solution_line_template": "Then added how many texts of each kind he sent to find the total number of texts he sent: {police_texts} texts + {texts_before_police_threat} texts = <<{police_texts}+{texts_before_police_threat}={total_texts}>>{total_texts} texts"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how many texts Jennifer's boyfriend sent asking why she wasn't responding: 5 texts * 5 = <<5*5=25>>25 texts",
+    "L2": "Then add that number to the number of grocery shopping texts: 25 texts + 5 texts = <<25+5=30>>30 texts",
+    "L3": "Then multiply that number by 10% to find how many texts he sent about calling the police: 30 texts * 10% = <<30*10*25=7500>>7500 texts",
+    "L4": "Then added how many texts of each kind he sent to find the total number of texts he sent: 7500 texts + 30 texts = <<7500+30=7530>>7530 texts",
+    "FA": "#### 7530"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'asking_texts' (25) was used instead of 'percent_factor' (0.01).",
+  "repro_seed": 613262380904971625,
+  "model_name": "google_gemini-2.5-flash"
+}

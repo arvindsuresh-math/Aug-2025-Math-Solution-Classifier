@@ -1,0 +1,85 @@
+{
+  "index": 5388,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "50 x 2/5 = <<50*2/5=20>>20 posters are small.",
+    "L2": "And 50/2 = <<50/2=25>>25 posters are medium.",
+    "L3": "So 20 + 25 = <<20+25=45>>45 posters are not large.",
+    "L4": "Therefore, 50 - 45 = <<50-45=5>>5 posters are large."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5388.\n    Returns: the number of large posters.\n    \"\"\"\n    # L1\n    total_posters = 50 # 50 posters\n    small_fraction = Fraction(2, 5) # Two-fifths of them are small posters\n    small_posters = total_posters * small_fraction\n\n    # L2\n    medium_divisor = 2 # half of them are medium posters\n    medium_posters = total_posters / medium_divisor\n\n    # L3\n    not_large_posters = small_posters + medium_posters\n\n    # L4\n    large_posters = total_posters - not_large_posters\n\n    # FA\n    answer = large_posters\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "medium_posters",
+    "operand_to_replace": "medium_divisor",
+    "replacement_variable": "total_posters"
+  },
+  "correct_trace": {
+    "total_posters": 50,
+    "small_fraction": "2/5",
+    "small_posters": "20",
+    "medium_divisor": 2,
+    "medium_posters": 25.0,
+    "not_large_posters": 45.0,
+    "large_posters": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "total_posters": 50,
+    "small_fraction": "2/5",
+    "small_posters": "20",
+    "medium_divisor": 2,
+    "medium_posters": 1.0,
+    "not_large_posters": 21.0,
+    "large_posters": 29.0,
+    "answer": 29.0
+  },
+  "correct_value": 25.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "small_posters",
+      "question_inputs": [
+        "total_posters",
+        "small_fraction"
+      ],
+      "solution_line_template": "{total_posters} x {small_fraction} = <<{total_posters}*{small_fraction}={small_posters}>>{small_posters} posters are small."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "medium_posters",
+      "question_inputs": [
+        "medium_divisor"
+      ],
+      "solution_line_template": "And {total_posters}/{medium_divisor} = <<{total_posters}/{medium_divisor}={medium_posters}>>{medium_posters} posters are medium."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "not_large_posters",
+      "question_inputs": [],
+      "solution_line_template": "So {small_posters} + {medium_posters} = <<{small_posters}+{medium_posters}={not_large_posters}>>{not_large_posters} posters are not large."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "large_posters",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, {total_posters} - {not_large_posters} = <<{total_posters}-{not_large_posters}={large_posters}>>{large_posters} posters are large."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "50 x 2/5 = <<50*2/5=20>>20 posters are small.",
+    "L2": "And 50/50 = <<50/50=1>>1 posters are medium.",
+    "L3": "So 20 + 1 = <<20+1=21>>21 posters are not large.",
+    "L4": "Therefore, 50 - 21 = <<50-21=29>>29 posters are large.",
+    "FA": "#### 29"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_posters' (50) was used instead of 'medium_divisor' (2).",
+  "repro_seed": 7950449746171939467,
+  "model_name": "google_gemini-2.5-flash"
+}

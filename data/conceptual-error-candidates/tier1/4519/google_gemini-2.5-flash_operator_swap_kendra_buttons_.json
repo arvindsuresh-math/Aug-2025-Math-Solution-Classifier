@@ -1,0 +1,66 @@
+{
+  "index": 4519,
+  "original_solution_mapping": {
+    "FA": "#### 64",
+    "L1": "Kendra made 2*6=<<2*6=12>>12.",
+    "L2": "Mari made 4+5*12=<<4+5*12=64>>64."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4519.\n    Returns: the number of buttons Mari made.\n    \"\"\"\n    # L1\n    sue_buttons = 6 # Sue made 6 buttons\n    multiplier_half = 2 # half as many as Kendra (implies Kendra made twice as many as Sue)\n    kendra_buttons = multiplier_half * sue_buttons\n\n    # L2\n    mari_more = 4 # 4 more than five times\n    mari_multiplier = 5 # five times as many\n    mari_buttons = mari_more + mari_multiplier * kendra_buttons\n\n    # FA\n    answer = mari_buttons\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "kendra_buttons",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30c3fb450>"
+  },
+  "correct_trace": {
+    "sue_buttons": 6,
+    "multiplier_half": 2,
+    "kendra_buttons": 12,
+    "mari_more": 4,
+    "mari_multiplier": 5,
+    "mari_buttons": 64,
+    "answer": 64
+  },
+  "flawed_trace": {
+    "sue_buttons": 6,
+    "multiplier_half": 2,
+    "kendra_buttons": 8,
+    "mari_more": 4,
+    "mari_multiplier": 5,
+    "mari_buttons": 44,
+    "answer": 44
+  },
+  "correct_value": 12,
+  "flawed_value": 8,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "kendra_buttons",
+      "question_inputs": [
+        "sue_buttons",
+        "multiplier_half"
+      ],
+      "solution_line_template": "Kendra made {multiplier_half}*{sue_buttons}=<<{multiplier_half}*{sue_buttons}={kendra_buttons}>>{kendra_buttons}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "mari_buttons",
+      "question_inputs": [
+        "mari_more",
+        "mari_multiplier"
+      ],
+      "solution_line_template": "Mari made {mari_more}+{mari_multiplier}*{kendra_buttons}=<<{mari_more}+{mari_multiplier}*{kendra_buttons}={mari_buttons}>>{mari_buttons}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Kendra made 2*6=<<2*6=8>>8.",
+    "L2": "Mari made 4+5*8=<<4+5*8=44>>44.",
+    "FA": "#### 44"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 414251149949235559,
+  "model_name": "google_gemini-2.5-flash"
+}

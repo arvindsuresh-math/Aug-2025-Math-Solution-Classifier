@@ -1,0 +1,85 @@
+{
+  "index": 6898,
+  "original_solution_mapping": {
+    "FA": "#### 325",
+    "L1": "The second cooler is 100*.5=<<100*.5=50>>50 liters bigger than the first",
+    "L2": "So it is 100+50=<<100+50=150>>150 liters",
+    "L3": "The third is 150/2=<<150/2=75>>75 liters",
+    "L4": "So the total water they can hold is 100+150+75=<<100+150+75=325>>325 liters"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6898.\n    Returns: the total water capacity of the coolers in liters.\n    \"\"\"\n    # L1\n    first_cooler_capacity = 100 # 100 liters\n    second_cooler_bigger_percent = 0.5 # 50% bigger\n    second_cooler_increase = first_cooler_capacity * second_cooler_bigger_percent\n\n    # L2\n    second_cooler_capacity = first_cooler_capacity + second_cooler_increase\n\n    # L3\n    third_cooler_size_factor = 2 # half the size of the second\n    third_cooler_capacity = second_cooler_capacity / third_cooler_size_factor\n\n    # L4\n    total_capacity = first_cooler_capacity + second_cooler_capacity + third_cooler_capacity\n\n    # FA\n    answer = total_capacity\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "third_cooler_capacity",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x168844e10>"
+  },
+  "correct_trace": {
+    "first_cooler_capacity": 100,
+    "second_cooler_bigger_percent": 0.5,
+    "second_cooler_increase": 50.0,
+    "second_cooler_capacity": 150.0,
+    "third_cooler_size_factor": 2,
+    "third_cooler_capacity": 75.0,
+    "total_capacity": 325.0,
+    "answer": 325.0
+  },
+  "flawed_trace": {
+    "first_cooler_capacity": 100,
+    "second_cooler_bigger_percent": 0.5,
+    "second_cooler_increase": 50.0,
+    "second_cooler_capacity": 150.0,
+    "third_cooler_size_factor": 2,
+    "third_cooler_capacity": 300.0,
+    "total_capacity": 550.0,
+    "answer": 550.0
+  },
+  "correct_value": 75.0,
+  "flawed_value": 300.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "second_cooler_increase",
+      "question_inputs": [
+        "first_cooler_capacity",
+        "second_cooler_bigger_percent"
+      ],
+      "solution_line_template": "The second cooler is {first_cooler_capacity}*{second_cooler_bigger_percent}=<<{first_cooler_capacity}*{second_cooler_bigger_percent}={second_cooler_increase}>>{second_cooler_increase} liters bigger than the first"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "second_cooler_capacity",
+      "question_inputs": [],
+      "solution_line_template": "So it is {first_cooler_capacity}+{second_cooler_increase}=<<{first_cooler_capacity}+{second_cooler_increase}={second_cooler_capacity}>>{second_cooler_capacity} liters"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "third_cooler_capacity",
+      "question_inputs": [
+        "third_cooler_size_factor"
+      ],
+      "solution_line_template": "The third is {second_cooler_capacity}/{third_cooler_size_factor}=<<{second_cooler_capacity}/{third_cooler_size_factor}={third_cooler_capacity}>>{third_cooler_capacity} liters"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_capacity",
+      "question_inputs": [],
+      "solution_line_template": "So the total water they can hold is {first_cooler_capacity}+{second_cooler_capacity}+{third_cooler_capacity}=<<{first_cooler_capacity}+{second_cooler_capacity}+{third_cooler_capacity}={total_capacity}>>{total_capacity} liters"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The second cooler is 100*0.5=<<100*0.5=50>>50 liters bigger than the first",
+    "L2": "So it is 100+50=<<100+50=150>>150 liters",
+    "L3": "The third is 150/2=<<150/2=300>>300 liters",
+    "L4": "So the total water they can hold is 100+150+300=<<100+150+300=550>>550 liters",
+    "FA": "#### 550"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 8657004253645912716,
+  "model_name": "google_gemini-2.5-flash"
+}

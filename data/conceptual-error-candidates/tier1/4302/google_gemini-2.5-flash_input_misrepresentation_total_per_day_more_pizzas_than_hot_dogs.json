@@ -1,0 +1,74 @@
+{
+  "index": 4302,
+  "original_solution_mapping": {
+    "FA": "#### 4800",
+    "L1": "If the restaurant makes 60 hot dogs and 40 more pizzas than hot dogs every day, it makes 60+40 = <<60+40=100>>100 pizzas.",
+    "L2": "The total number of pizzas and hot dogs it makes in a day is 100+60 = <<100+60=160>>160",
+    "L3": "In June, with thirty days, the restaurant will make 30*160 = <<30*160=4800>>4800 pizzas and hot dogs in total."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4302.\n    Returns: the total number of pizzas and hot dogs made in June.\n    \"\"\"\n    # L1\n    hot_dogs_per_day = 60 # 60 hot dogs every day\n    more_pizzas_than_hot_dogs = 40 # 40 more pizzas than hot dogs\n    pizzas_per_day = hot_dogs_per_day + more_pizzas_than_hot_dogs\n\n    # L2\n    total_per_day = pizzas_per_day + hot_dogs_per_day\n\n    # L3\n    days_in_june = 30 # WK\n    total_in_june = days_in_june * total_per_day\n\n    # FA\n    answer = total_in_june\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_per_day",
+    "operand_to_replace": "hot_dogs_per_day",
+    "replacement_variable": "more_pizzas_than_hot_dogs"
+  },
+  "correct_trace": {
+    "hot_dogs_per_day": 60,
+    "more_pizzas_than_hot_dogs": 40,
+    "pizzas_per_day": 100,
+    "total_per_day": 160,
+    "days_in_june": 30,
+    "total_in_june": 4800,
+    "answer": 4800
+  },
+  "flawed_trace": {
+    "hot_dogs_per_day": 60,
+    "more_pizzas_than_hot_dogs": 40,
+    "pizzas_per_day": 100,
+    "total_per_day": 140,
+    "days_in_june": 30,
+    "total_in_june": 4200,
+    "answer": 4200
+  },
+  "correct_value": 160,
+  "flawed_value": 140,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "pizzas_per_day",
+      "question_inputs": [
+        "hot_dogs_per_day",
+        "more_pizzas_than_hot_dogs"
+      ],
+      "solution_line_template": "If the restaurant makes {hot_dogs_per_day} hot dogs and {more_pizzas_than_hot_dogs} more pizzas than hot dogs every day, it makes {hot_dogs_per_day}+{more_pizzas_than_hot_dogs} = <<{hot_dogs_per_day}+{more_pizzas_than_hot_dogs}={pizzas_per_day}>>{pizzas_per_day} pizzas."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_per_day",
+      "question_inputs": [],
+      "solution_line_template": "The total number of pizzas and hot dogs it makes in a day is {pizzas_per_day}+{hot_dogs_per_day} = <<{pizzas_per_day}+{hot_dogs_per_day}={total_per_day}>>{total_per_day}"
+    },
+    {
+      "WK_inputs": [
+        "days_in_june"
+      ],
+      "line_number": "L3",
+      "output_variable": "total_in_june",
+      "question_inputs": [],
+      "solution_line_template": "In June, with thirty days, the restaurant will make {days_in_june}*{total_per_day} = <<{days_in_june}*{total_per_day}={total_in_june}>>{total_in_june} pizzas and hot dogs in total."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the restaurant makes 60 hot dogs and 40 more pizzas than hot dogs every day, it makes 60+40 = <<60+40=100>>100 pizzas.",
+    "L2": "The total number of pizzas and hot dogs it makes in a day is 100+40 = <<100+40=140>>140",
+    "L3": "In June, with thirty days, the restaurant will make 30*140 = <<30*140=4200>>4200 pizzas and hot dogs in total.",
+    "FA": "#### 4200"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'more_pizzas_than_hot_dogs' (40) was used instead of 'hot_dogs_per_day' (60).",
+  "repro_seed": -6911242910101604856,
+  "model_name": "google_gemini-2.5-flash"
+}

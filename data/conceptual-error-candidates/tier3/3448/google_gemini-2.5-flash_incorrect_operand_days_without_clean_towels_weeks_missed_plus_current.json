@@ -1,0 +1,90 @@
+{
+  "index": 3448,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "Barney uses 2 clean towels every day, so he uses 2 * 7 = <<2*7=14>>14 towels a week.",
+    "L2": "He missed one week of laundry, so he would need 2 * 14 = <<2*14=28>>28 towels for 2 weeks.",
+    "L3": "He owns 18 towels, so he has 28 - 18 = <<28-18=10>>10 less than he needs.",
+    "L4": "Thus, Barney will not have clean towels on 10 / 2 = <<10/2=5>>5 days."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3448.\n    Returns: the number of days Barney will not have clean towels.\n    \"\"\"\n    # L1\n    towels_per_day = 2 # uses two at a time that he changes to clean towels daily\n    days_per_week = 7 # WK\n    towels_per_week = towels_per_day * days_per_week\n\n    # L2\n    weeks_missed_plus_current = 2 # missed one week of laundry\n    towels_needed_for_two_weeks = weeks_missed_plus_current * towels_per_week\n\n    # L3\n    towels_owned = 18 # He owns eighteen towels\n    towels_short = towels_needed_for_two_weeks - towels_owned\n\n    # L4\n    days_without_clean_towels = towels_short / towels_per_day\n\n    # FA\n    answer = days_without_clean_towels\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "days_without_clean_towels",
+    "operand_to_replace": "towels_short",
+    "replacement_variable": "weeks_missed_plus_current"
+  },
+  "correct_trace": {
+    "towels_per_day": 2,
+    "days_per_week": 7,
+    "towels_per_week": 14,
+    "weeks_missed_plus_current": 2,
+    "towels_needed_for_two_weeks": 28,
+    "towels_owned": 18,
+    "towels_short": 10,
+    "days_without_clean_towels": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "towels_per_day": 2,
+    "days_per_week": 7,
+    "towels_per_week": 14,
+    "weeks_missed_plus_current": 2,
+    "towels_needed_for_two_weeks": 28,
+    "towels_owned": 18,
+    "towels_short": 10,
+    "days_without_clean_towels": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 5.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L1",
+      "output_variable": "towels_per_week",
+      "question_inputs": [
+        "towels_per_day"
+      ],
+      "solution_line_template": "Barney uses {towels_per_day} clean towels every day, so he uses {towels_per_day} * {days_per_week} = <<{towels_per_day}*{days_per_week}={towels_per_week}>>{towels_per_week} towels a week."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "towels_needed_for_two_weeks",
+      "question_inputs": [
+        "weeks_missed_plus_current"
+      ],
+      "solution_line_template": "He missed one week of laundry, so he would need {weeks_missed_plus_current} * {towels_per_week} = <<{weeks_missed_plus_current}*{towels_per_week}={towels_needed_for_two_weeks}>>{towels_needed_for_two_weeks} towels for {weeks_missed_plus_current} weeks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "towels_short",
+      "question_inputs": [
+        "towels_owned"
+      ],
+      "solution_line_template": "He owns {towels_owned} towels, so he has {towels_needed_for_two_weeks} - {towels_owned} = <<{towels_needed_for_two_weeks}-{towels_owned}={towels_short}>>{towels_short} less than he needs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "days_without_clean_towels",
+      "question_inputs": [],
+      "solution_line_template": "Thus, Barney will not have clean towels on {towels_short} / {towels_per_day} = <<{towels_short}/{towels_per_day}={days_without_clean_towels}>>{days_without_clean_towels} days."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Barney uses 2 clean towels every day, so he uses 2 * 7 = <<2*7=14>>14 towels a week.",
+    "L2": "He missed one week of laundry, so he would need 2 * 14 = <<2*14=28>>28 towels for 2 weeks.",
+    "L3": "He owns 18 towels, so he has 28 - 18 = <<28-18=10>>10 less than he needs.",
+    "L4": "Thus, Barney will not have clean towels on 2 / 2 = <<2/2=1>>1 days.",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'weeks_missed_plus_current' (value: 2) was used instead of 'towels_short' (value: 10).",
+  "repro_seed": 1423501602243570464,
+  "model_name": "google_gemini-2.5-flash"
+}

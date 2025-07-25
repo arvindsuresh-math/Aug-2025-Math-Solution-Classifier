@@ -1,0 +1,85 @@
+{
+  "index": 911,
+  "original_solution_mapping": {
+    "FA": "#### 46",
+    "L1": "If on the return journey to its home, the alligator took 2 more hours than it took to travel to the Nile Delta, Paul took 4+2=<<4+2=6>>6 hours to travel back to its home.",
+    "L2": "The total time Paul took to travel from its home to the Nile Delta and back is 6+4=<<6+4=10>>10",
+    "L3": "On his return journey, Paul traveled with six other alligators, and since each alligator traveled for six hours up the Nile to their home, they took a total of 6*6=<<6*6=36>>36 hours to do so.",
+    "L4": "Together with Paul, all the alligators took 10+36=<<10+36=46>>46 hours traveling between Nile Delta and up the Nile."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 911.\n    Returns: the combined time all the alligators walked.\n    \"\"\"\n    # L1\n    paul_initial_journey_hours = 4 # 4 hours to walk from his home at the River Nile to the Nile Delta\n    return_journey_extra_hours = 2 # 2 more hours than Paul took to walk to the Nile Delta\n    paul_return_journey_hours = paul_initial_journey_hours + return_journey_extra_hours\n\n    # L2\n    paul_total_journey_time = paul_return_journey_hours + paul_initial_journey_hours\n\n    # L3\n    num_other_alligators = 6 # six other alligators\n    other_alligators_total_time = num_other_alligators * paul_return_journey_hours\n\n    # L4\n    combined_alligator_time = paul_total_journey_time + other_alligators_total_time\n\n    # FA\n    answer = combined_alligator_time\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "combined_alligator_time",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x30a47ec50>"
+  },
+  "correct_trace": {
+    "paul_initial_journey_hours": 4,
+    "return_journey_extra_hours": 2,
+    "paul_return_journey_hours": 6,
+    "paul_total_journey_time": 10,
+    "num_other_alligators": 6,
+    "other_alligators_total_time": 36,
+    "combined_alligator_time": 46,
+    "answer": 46
+  },
+  "flawed_trace": {
+    "paul_initial_journey_hours": 4,
+    "return_journey_extra_hours": 2,
+    "paul_return_journey_hours": 6,
+    "paul_total_journey_time": 10,
+    "num_other_alligators": 6,
+    "other_alligators_total_time": 36,
+    "combined_alligator_time": 360,
+    "answer": 360
+  },
+  "correct_value": 46,
+  "flawed_value": 360,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "paul_initial_journey_hours",
+        "return_journey_extra_hours"
+      ],
+      "WK_inputs": [],
+      "output_variable": "paul_return_journey_hours",
+      "solution_line_template": "If on the return journey to its home, the alligator took {return_journey_extra_hours} more hours than it took to travel to the Nile Delta, Paul took {paul_initial_journey_hours}+{return_journey_extra_hours}=<<{paul_initial_journey_hours}+{return_journey_extra_hours}={paul_return_journey_hours}>>{paul_return_journey_hours} hours to travel back to its home."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "paul_total_journey_time",
+      "solution_line_template": "The total time Paul took to travel from its home to the Nile Delta and back is {paul_return_journey_hours}+{paul_initial_journey_hours}=<<{paul_return_journey_hours}+{paul_initial_journey_hours}={paul_total_journey_time}>>{paul_total_journey_time}"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "num_other_alligators"
+      ],
+      "WK_inputs": [],
+      "output_variable": "other_alligators_total_time",
+      "solution_line_template": "On his return journey, Paul traveled with six other alligators, and since each alligator traveled for {paul_return_journey_hours} hours up the Nile to their home, they took a total of {num_other_alligators}*{paul_return_journey_hours}=<<{num_other_alligators}*{paul_return_journey_hours}={other_alligators_total_time}>>{other_alligators_total_time} hours to do so."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "combined_alligator_time",
+      "solution_line_template": "Together with Paul, all the alligators took {paul_total_journey_time}+{other_alligators_total_time}=<<{paul_total_journey_time}+{other_alligators_total_time}={combined_alligator_time}>>{combined_alligator_time} hours traveling between Nile Delta and up the Nile."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If on the return journey to its home, the alligator took 2 more hours than it took to travel to the Nile Delta, Paul took 4+2=<<4+2=6>>6 hours to travel back to its home.",
+    "L2": "The total time Paul took to travel from its home to the Nile Delta and back is 6+4=<<6+4=10>>10",
+    "L3": "On his return journey, Paul traveled with six other alligators, and since each alligator traveled for 6 hours up the Nile to their home, they took a total of 6*6=<<6*6=36>>36 hours to do so.",
+    "L4": "Together with Paul, all the alligators took 10+36=<<10+36=360>>360 hours traveling between Nile Delta and up the Nile.",
+    "FA": "#### 360"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 3144731492528911375,
+  "model_name": "google_gemini-2.5-flash"
+}

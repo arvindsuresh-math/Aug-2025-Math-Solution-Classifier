@@ -1,0 +1,92 @@
+{
+  "index": 3876,
+  "original_solution_mapping": {
+    "FA": "#### 325",
+    "L1": "On Friday they sold 210 * 2 = <<210*2=420>>420kg.",
+    "L2": "On Sunday they sold 130 / 2 = <<130/2=65>>65kg.",
+    "L3": "They sold a total of 210 + 420 + 130 + 65 = <<210+420+130+65=825>>825kg of meat.",
+    "L4": "Meat Market sold an extra 825 - 500 = <<825-500=325>>325kg of meat beyond their original 500kg plans."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3876.\n    Returns: the amount of meat sold beyond original plans.\n    \"\"\"\n    # L1\n    thursday_sales = 210 # On Thursday the Meat Market sold 210kg of ground beef\n    friday_multiplier = 2 # On Friday they sold twice that amount\n    friday_sales = thursday_sales * friday_multiplier\n\n    # L2\n    saturday_sales = 130 # On Saturday they only sold 130kg\n    sunday_divisor = 2 # On Sunday they sold half of what they sold Saturday\n    sunday_sales = saturday_sales / sunday_divisor\n\n    # L3\n    total_sales = thursday_sales + friday_sales + saturday_sales + sunday_sales\n\n    # L4\n    planned_sales = 500 # If they originally planned to sell only 500kg\n    extra_sales = total_sales - planned_sales\n\n    # FA\n    answer = extra_sales\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_sales",
+    "operand_to_replace": "thursday_sales",
+    "replacement_variable": "friday_sales"
+  },
+  "correct_trace": {
+    "thursday_sales": 210,
+    "friday_multiplier": 2,
+    "friday_sales": 420,
+    "saturday_sales": 130,
+    "sunday_divisor": 2,
+    "sunday_sales": 65.0,
+    "total_sales": 825.0,
+    "planned_sales": 500,
+    "extra_sales": 325.0,
+    "answer": 325.0
+  },
+  "flawed_trace": {
+    "thursday_sales": 210,
+    "friday_multiplier": 2,
+    "friday_sales": 420,
+    "saturday_sales": 130,
+    "sunday_divisor": 2,
+    "sunday_sales": 65.0,
+    "total_sales": 1035.0,
+    "planned_sales": 500,
+    "extra_sales": 535.0,
+    "answer": 535.0
+  },
+  "correct_value": 825.0,
+  "flawed_value": 1035.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "friday_sales",
+      "question_inputs": [
+        "thursday_sales",
+        "friday_multiplier"
+      ],
+      "solution_line_template": "On Friday they sold {thursday_sales} * {friday_multiplier} = <<{thursday_sales}*{friday_multiplier}={friday_sales}>>{friday_sales}kg."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sunday_sales",
+      "question_inputs": [
+        "saturday_sales",
+        "sunday_divisor"
+      ],
+      "solution_line_template": "On Sunday they sold {saturday_sales} / {sunday_divisor} = <<{saturday_sales}/{sunday_divisor}={sunday_sales}>>{sunday_sales}kg."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_sales",
+      "question_inputs": [],
+      "solution_line_template": "They sold a total of {thursday_sales} + {friday_sales} + {saturday_sales} + {sunday_sales} = <<{thursday_sales}+{friday_sales}+{saturday_sales}+{sunday_sales}={total_sales}>>{total_sales}kg of meat."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "extra_sales",
+      "question_inputs": [
+        "planned_sales"
+      ],
+      "solution_line_template": "Meat Market sold an extra {total_sales} - {planned_sales} = <<{total_sales}-{planned_sales}={extra_sales}>>{extra_sales}kg of meat beyond their original {planned_sales}kg plans."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Friday they sold 210 * 2 = <<210*2=420>>420kg.",
+    "L2": "On Sunday they sold 130 / 2 = <<130/2=65>>65kg.",
+    "L3": "They sold a total of 420 + 420 + 130 + 65 = <<420+420+130+65=1035>>1035kg of meat.",
+    "L4": "Meat Market sold an extra 1035 - 500 = <<1035-500=535>>535kg of meat beyond their original 500kg plans.",
+    "FA": "#### 535"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'friday_sales' (420) was used instead of 'thursday_sales' (210).",
+  "repro_seed": 3704263548506777355,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 5571,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "Jacob ate 8 - 3 = <<8-3=5>>5 pies.",
+    "L2": "Noah ate 5 * 3 = <<5*3=15>>15 hotdogs.",
+    "L3": "The total weight of the hotdogs was 15 * 2 ounces = <<15*2=30>>30 ounces."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5571.\n    Returns: the total weight of the hotdogs that Mason ate.\n    \"\"\"\n    # L1\n    noah_burgers_eaten = 8 # If Noah ate 8 burgers\n    jacob_fewer_pies = 3 # Jacob eats three fewer pies than Noah eats burgers\n    jacob_pies_eaten = noah_burgers_eaten - jacob_fewer_pies\n\n    # L2\n    mason_times_pies = 3 # Mason eats 3 times as many hotdogs as the number of pies consumed by Jacob\n    mason_hotdogs_eaten = jacob_pies_eaten * mason_times_pies\n\n    # L3\n    hotdog_weight = 2 # A hot dog weighs 2 ounces\n    total_hotdog_weight = mason_hotdogs_eaten * hotdog_weight\n\n    # FA\n    answer = total_hotdog_weight\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_hotdog_weight",
+    "operand_to_replace": "hotdog_weight",
+    "replacement_variable": "mason_times_pies"
+  },
+  "correct_trace": {
+    "noah_burgers_eaten": 8,
+    "jacob_fewer_pies": 3,
+    "jacob_pies_eaten": 5,
+    "mason_times_pies": 3,
+    "mason_hotdogs_eaten": 15,
+    "hotdog_weight": 2,
+    "total_hotdog_weight": 30,
+    "answer": 30
+  },
+  "flawed_trace": {
+    "noah_burgers_eaten": 8,
+    "jacob_fewer_pies": 3,
+    "jacob_pies_eaten": 5,
+    "mason_times_pies": 3,
+    "mason_hotdogs_eaten": 15,
+    "hotdog_weight": 2,
+    "total_hotdog_weight": 45,
+    "answer": 45
+  },
+  "correct_value": 30,
+  "flawed_value": 45,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "jacob_pies_eaten",
+      "question_inputs": [
+        "noah_burgers_eaten",
+        "jacob_fewer_pies"
+      ],
+      "solution_line_template": "Jacob ate {noah_burgers_eaten} - {jacob_fewer_pies} = <<{noah_burgers_eaten}-{jacob_fewer_pies}={jacob_pies_eaten}>>{jacob_pies_eaten} pies."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "mason_hotdogs_eaten",
+      "question_inputs": [
+        "mason_times_pies"
+      ],
+      "solution_line_template": "Noah ate {jacob_pies_eaten} * {mason_times_pies} = <<{jacob_pies_eaten}*{mason_times_pies}={mason_hotdogs_eaten}>>{mason_hotdogs_eaten} hotdogs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_hotdog_weight",
+      "question_inputs": [
+        "hotdog_weight"
+      ],
+      "solution_line_template": "The total weight of the hotdogs was {mason_hotdogs_eaten} * {hotdog_weight} ounces = <<{mason_hotdogs_eaten}*{hotdog_weight}={total_hotdog_weight}>>{total_hotdog_weight} ounces."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jacob ate 8 - 3 = <<8-3=5>>5 pies.",
+    "L2": "Noah ate 5 * 3 = <<5*3=15>>15 hotdogs.",
+    "L3": "The total weight of the hotdogs was 15 * 3 ounces = <<15*3=45>>45 ounces.",
+    "FA": "#### 45"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'mason_times_pies' (3) was used instead of 'hotdog_weight' (2).",
+  "repro_seed": 2753853758207515306,
+  "model_name": "google_gemini-2.5-flash"
+}

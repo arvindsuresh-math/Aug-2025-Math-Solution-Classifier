@@ -1,0 +1,74 @@
+{
+  "index": 6649,
+  "original_solution_mapping": {
+    "FA": "#### 13375",
+    "L1": "Charlie's steps for 3 kilometers is 5350 x 2 = <<5350*2=10700>>10700 steps were made when he run twice the field.",
+    "L2": "Since he has run half of the field 5350 / 2 = <<5350/2=2675>>2675 steps were made when he runs half of the 3-kilometer field.",
+    "L3": "Therefore, Charlie was able to make 10700 + 2675 = <<10700+2675=13375>>13375 steps for the 2 and a half run around the field."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6649.\n    Returns: the total number of steps Charlie was able to make.\n    \"\"\"\n    # L1\n    steps_per_3km = 5350 # 5350 steps\n    full_runs = 2 # 2 1/2 times during a running session\n    steps_for_full_runs = steps_per_3km * full_runs\n\n    # L2\n    half_run_divisor = 2 # 2 1/2 times during a running session\n    steps_for_half_run = steps_per_3km / half_run_divisor\n\n    # L3\n    total_steps = steps_for_full_runs + steps_for_half_run\n\n    # FA\n    answer = total_steps\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "steps_for_half_run",
+    "operand_to_replace": "steps_per_3km",
+    "replacement_variable": "full_runs"
+  },
+  "correct_trace": {
+    "steps_per_3km": 5350,
+    "full_runs": 2,
+    "steps_for_full_runs": 10700,
+    "half_run_divisor": 2,
+    "steps_for_half_run": 2675.0,
+    "total_steps": 13375.0,
+    "answer": 13375.0
+  },
+  "flawed_trace": {
+    "steps_per_3km": 5350,
+    "full_runs": 2,
+    "steps_for_full_runs": 10700,
+    "half_run_divisor": 2,
+    "steps_for_half_run": 1.0,
+    "total_steps": 10701.0,
+    "answer": 10701.0
+  },
+  "correct_value": 2675.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "steps_for_full_runs",
+      "question_inputs": [
+        "steps_per_3km",
+        "full_runs"
+      ],
+      "solution_line_template": "Charlie's steps for 3 kilometers is {steps_per_3km} x {full_runs} = <<{steps_per_3km}*{full_runs}={steps_for_full_runs}>>{steps_for_full_runs} steps were made when he run twice the field."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "steps_for_half_run",
+      "question_inputs": [
+        "half_run_divisor"
+      ],
+      "solution_line_template": "Since he has run half of the field {steps_per_3km} / {half_run_divisor} = <<{steps_per_3km}/{half_run_divisor}={steps_for_half_run}>>{steps_for_half_run} steps were made when he runs half of the 3-kilometer field."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_steps",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, Charlie was able to make {steps_for_full_runs} + {steps_for_half_run} = <<{steps_for_full_runs}+{steps_for_half_run}={total_steps}>>{total_steps} steps for the 2 and a half run around the field."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Charlie's steps for 3 kilometers is 5350 x 2 = <<5350*2=10700>>10700 steps were made when he run twice the field.",
+    "L2": "Since he has run half of the field 2 / 2 = <<2/2=1>>1 steps were made when he runs half of the 3-kilometer field.",
+    "L3": "Therefore, Charlie was able to make 10700 + 1 = <<10700+1=10701>>10701 steps for the 2 and a half run around the field.",
+    "FA": "#### 10701"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'full_runs' (2) was used instead of 'steps_per_3km' (5350).",
+  "repro_seed": -6307585022637953693,
+  "model_name": "google_gemini-2.5-flash"
+}

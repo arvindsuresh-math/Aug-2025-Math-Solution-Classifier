@@ -1,0 +1,74 @@
+{
+  "index": 3968,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "Linda has 12 eggs left, 5 of which are brown, so 12 - 5 = <<12-5=7>>7 are white.",
+    "L2": "Linda originally had 3 times as many white eggs as brown eggs, or 3 * 5 = <<3*5=15>>15 white eggs.",
+    "L3": "So Linda broke 15 - 7 = <<15-7=8>>8 white eggs."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3968.\n    Returns: the number of eggs Linda broke.\n    \"\"\"\n    # L1\n    total_eggs_left = 12 # a dozen eggs left\n    brown_eggs_survived = 5 # all 5 of the brown eggs survived\n    white_eggs_left = total_eggs_left - brown_eggs_survived\n\n    # L2\n    white_eggs_multiplier = 3 # three times as many white eggs as brown eggs\n    original_white_eggs = white_eggs_multiplier * brown_eggs_survived\n\n    # L3\n    broken_white_eggs = original_white_eggs - white_eggs_left\n\n    # FA\n    answer = broken_white_eggs\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "original_white_eggs",
+    "operand_to_replace": "white_eggs_multiplier",
+    "replacement_variable": "total_eggs_left"
+  },
+  "correct_trace": {
+    "total_eggs_left": 12,
+    "brown_eggs_survived": 5,
+    "white_eggs_left": 7,
+    "white_eggs_multiplier": 3,
+    "original_white_eggs": 15,
+    "broken_white_eggs": 8,
+    "answer": 8
+  },
+  "flawed_trace": {
+    "total_eggs_left": 12,
+    "brown_eggs_survived": 5,
+    "white_eggs_left": 7,
+    "white_eggs_multiplier": 3,
+    "original_white_eggs": 60,
+    "broken_white_eggs": 53,
+    "answer": 53
+  },
+  "correct_value": 15,
+  "flawed_value": 60,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "white_eggs_left",
+      "question_inputs": [
+        "total_eggs_left",
+        "brown_eggs_survived"
+      ],
+      "solution_line_template": "Linda has {total_eggs_left} eggs left, {brown_eggs_survived} of which are brown, so {total_eggs_left} - {brown_eggs_survived} = <<{total_eggs_left}-{brown_eggs_survived}={white_eggs_left}>>{white_eggs_left} are white."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "original_white_eggs",
+      "question_inputs": [
+        "white_eggs_multiplier"
+      ],
+      "solution_line_template": "Linda originally had {white_eggs_multiplier} times as many white eggs as brown eggs, or {white_eggs_multiplier} * {brown_eggs_survived} = <<{white_eggs_multiplier}*{brown_eggs_survived}={original_white_eggs}>>{original_white_eggs} white eggs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "broken_white_eggs",
+      "question_inputs": [],
+      "solution_line_template": "So Linda broke {original_white_eggs} - {white_eggs_left} = <<{original_white_eggs}-{white_eggs_left}={broken_white_eggs}>>{broken_white_eggs} white eggs."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Linda has 12 eggs left, 5 of which are brown, so 12 - 5 = <<12-5=7>>7 are white.",
+    "L2": "Linda originally had 12 times as many white eggs as brown eggs, or 12 * 5 = <<12*5=60>>60 white eggs.",
+    "L3": "So Linda broke 60 - 7 = <<60-7=53>>53 white eggs.",
+    "FA": "#### 53"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_eggs_left' (12) was used instead of 'white_eggs_multiplier' (3).",
+  "repro_seed": -618719719086134736,
+  "model_name": "google_gemini-2.5-flash"
+}

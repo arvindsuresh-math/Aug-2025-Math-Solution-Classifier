@@ -1,0 +1,95 @@
+{
+  "index": 4084,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "One dozen of flowers is equal to 1 x 12 = <<1*12=12>>12 flowers.",
+    "L2": "There are 12 - 2 = <<12-2=10>>10 flowers that are not daisies.",
+    "L3": "So, 10 x 3/5 = 6 of the flowers are tulips.",
+    "L4": "Therefore, there are 10 - 6 = <<10-6=4>>4 sunflowers."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4084.\n    Returns: the number of sunflowers.\n    \"\"\"\n    # L1\n    dozen_quantity = 1 # one dozen flowers\n    flowers_per_dozen = 12 # WK\n    total_flowers = dozen_quantity * flowers_per_dozen\n\n    # L2\n    daisies = 2 # Two of the flowers are daisies\n    non_daisy_flowers = total_flowers - daisies\n\n    # L3\n    tulip_fraction_numerator = 3 # Three-fifths of the remaining flowers\n    tulip_fraction_denominator = 5 # Three-fifths of the remaining flowers\n    tulip_fraction = Fraction(tulip_fraction_numerator, tulip_fraction_denominator)\n    tulips = non_daisy_flowers * tulip_fraction\n\n    # L4\n    sunflowers = non_daisy_flowers - tulips\n\n    # FA\n    answer = sunflowers\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_flowers",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30b9f10d0>"
+  },
+  "correct_trace": {
+    "dozen_quantity": 1,
+    "flowers_per_dozen": 12,
+    "total_flowers": 12,
+    "daisies": 2,
+    "non_daisy_flowers": 10,
+    "tulip_fraction_numerator": 3,
+    "tulip_fraction_denominator": 5,
+    "tulip_fraction": "3/5",
+    "tulips": "6",
+    "sunflowers": "4",
+    "answer": "4"
+  },
+  "flawed_trace": {
+    "dozen_quantity": 1,
+    "flowers_per_dozen": 12,
+    "total_flowers": 13,
+    "daisies": 2,
+    "non_daisy_flowers": 11,
+    "tulip_fraction_numerator": 3,
+    "tulip_fraction_denominator": 5,
+    "tulip_fraction": "3/5",
+    "tulips": "33/5",
+    "sunflowers": "22/5",
+    "answer": "22/5"
+  },
+  "correct_value": 12,
+  "flawed_value": 13,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "flowers_per_dozen"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_flowers",
+      "question_inputs": [
+        "dozen_quantity"
+      ],
+      "solution_line_template": "One dozen of flowers is equal to {dozen_quantity} x {flowers_per_dozen} = <<{dozen_quantity}*{flowers_per_dozen}={total_flowers}>>{total_flowers} flowers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "non_daisy_flowers",
+      "question_inputs": [
+        "daisies"
+      ],
+      "solution_line_template": "There are {total_flowers} - {daisies} = <<{total_flowers}-{daisies}={non_daisy_flowers}>>{non_daisy_flowers} flowers that are not daisies."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "tulips",
+      "question_inputs": [
+        "tulip_fraction_numerator",
+        "tulip_fraction_denominator"
+      ],
+      "solution_line_template": "So, {non_daisy_flowers} x {tulip_fraction_numerator}/{tulip_fraction_denominator} = {tulips} of the flowers are tulips."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "sunflowers",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, there are {non_daisy_flowers} - {tulips} = <<{non_daisy_flowers}-{tulips}={sunflowers}>>{sunflowers} sunflowers."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "One dozen of flowers is equal to 1 x 12 = <<1*12=13>>13 flowers.",
+    "L2": "There are 13 - 2 = <<13-2=11>>11 flowers that are not daisies.",
+    "L3": "So, 11 x 3/5 = 33/5 of the flowers are tulips.",
+    "L4": "Therefore, there are 11 - 33/5 = <<11-33/5=22/5>>22/5 sunflowers.",
+    "FA": "#### 22/5"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 855111705894998537,
+  "model_name": "google_gemini-2.5-flash"
+}

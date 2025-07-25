@@ -1,0 +1,63 @@
+{
+  "index": 2822,
+  "original_solution_mapping": {
+    "FA": "#### 80",
+    "L1": "When Jennifer is 30 years old in ten years, her sister Jordana will be 3*30=90 years old.",
+    "L2": "She's currently 10 years younger, so she's 90 - 10 = 80 years old"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2822.\n    Returns: Jennifer's sister's current age.\n    \"\"\"\n    # L1\n    jennifer_age_in_future = 30 # Jennifer will be 30 years old\n    jordana_age_multiplier = 3 # three times as old Jennifer\n    jordana_age_in_future = jordana_age_multiplier * jennifer_age_in_future\n\n    # L2\n    years_from_now = 10 # in ten years\n    jordana_current_age = jordana_age_in_future - years_from_now\n\n    # FA\n    answer = jordana_current_age\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "jordana_current_age",
+    "operand_to_replace": "years_from_now",
+    "replacement_variable": "jordana_age_multiplier"
+  },
+  "correct_trace": {
+    "jennifer_age_in_future": 30,
+    "jordana_age_multiplier": 3,
+    "jordana_age_in_future": 90,
+    "years_from_now": 10,
+    "jordana_current_age": 80,
+    "answer": 80
+  },
+  "flawed_trace": {
+    "jennifer_age_in_future": 30,
+    "jordana_age_multiplier": 3,
+    "jordana_age_in_future": 90,
+    "years_from_now": 10,
+    "jordana_current_age": 87,
+    "answer": 87
+  },
+  "correct_value": 80,
+  "flawed_value": 87,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "jennifer_age_in_future",
+        "jordana_age_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "jordana_age_in_future",
+      "solution_line_template": "When Jennifer is {jennifer_age_in_future} years old in ten years, her sister Jordana will be {jordana_age_multiplier}*{jennifer_age_in_future}=<<{jordana_age_multiplier}*{jennifer_age_in_future}={jordana_age_in_future}>>{jordana_age_in_future} years old."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "years_from_now"
+      ],
+      "WK_inputs": [],
+      "output_variable": "jordana_current_age",
+      "solution_line_template": "She's currently {years_from_now} years younger, so she's {jordana_age_in_future} - {years_from_now} = <<{jordana_age_in_future}-{years_from_now}={jordana_current_age}>>{jordana_current_age} years old"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "When Jennifer is 30 years old in ten years, her sister Jordana will be 3*30=<<3*30=90>>90 years old.",
+    "L2": "She's currently 3 years younger, so she's 90 - 3 = <<90-3=87>>87 years old",
+    "FA": "#### 87"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'jordana_age_multiplier' (3) was used instead of 'years_from_now' (10).",
+  "repro_seed": 5576967391606827170,
+  "model_name": "google_gemini-2.5-flash"
+}

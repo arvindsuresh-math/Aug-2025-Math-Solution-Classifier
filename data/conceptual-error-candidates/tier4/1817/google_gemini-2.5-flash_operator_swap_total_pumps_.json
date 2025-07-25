@@ -1,0 +1,113 @@
+{
+  "index": 1817,
+  "original_solution_mapping": {
+    "FA": "#### 29",
+    "L1": "First, if the a full tire needs 500 cubic inches of air, then two empty tires need: 500 cubic inches/tire * 2 tires = <<500*2=1000>>1000 cubic inches.",
+    "L2": "Accordingly, the 40%-full tire needs 500 cubic inches * (100%-40%).",
+    "L3": "So, we find the 40%-full tire needs 500 cubic inches * (60%) = <<500*(60*.01)=300>>300 cubic inches.",
+    "L4": "And, the 70%-full tire needs 500 cubic inches * (100%-70%).",
+    "L5": "So, the 70%-full tire needs 500 cubic inches * (30%)= <<500*(30*.01)=150>>150 cubic inches.",
+    "L6": "Now add up the needs of all the tires to find the total number of cubic inches needed: 1000 cubic inches + 300 cubic inches + 150 cubic inches = <<1000+300+150=1450>>1450 cubic inches.",
+    "L7": "Finally, if the pumps each hold 50 cubic inches, the total number of pumps needed is 1550 cubic inches / 50 cubic inches/pump = 29 pumps."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1817.\n    Returns: the total number of pumps needed to fill all tires.\n    \"\"\"\n    # L1\n    tire_capacity = 500 # Each tire can hold 500 cubic inches of air\n    num_flat_tires = 2 # Two of the tires are completely flat and empty\n    air_needed_flat_tires = tire_capacity * num_flat_tires\n\n    # L3\n    # The solution implicitly calculates 100%-40% = 60%\n    percent_needed_40_num = 60 # WK\n    percent_factor = 0.01 # WK\n    air_needed_40_percent_tire = tire_capacity * (percent_needed_40_num * percent_factor)\n\n    # L5\n    # The solution implicitly calculates 100%-70% = 30%\n    percent_needed_70_num = 30 # WK\n    air_needed_70_percent_tire = tire_capacity * (percent_needed_70_num * percent_factor)\n\n    # L6\n    total_air_needed_calculated = air_needed_flat_tires + air_needed_40_percent_tire + air_needed_70_percent_tire\n\n    # L7\n    # Note: The solution uses 1550 here, which is inconsistent with the sum from L6 (1450).\n    # We must follow the solution's numbers for the template.\n    total_air_needed_for_pumps_calc = 1550 # WK\n    air_per_pump = 50 # injects 50 cubic inches of air with each pump\n    total_pumps = total_air_needed_for_pumps_calc / air_per_pump\n\n    # FA\n    answer = total_pumps\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_pumps",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x16911f9d0>"
+  },
+  "correct_trace": {
+    "tire_capacity": 500,
+    "num_flat_tires": 2,
+    "air_needed_flat_tires": 1000,
+    "percent_needed_40_num": 60,
+    "percent_factor": 0.01,
+    "air_needed_40_percent_tire": 300.0,
+    "percent_needed_70_num": 30,
+    "air_needed_70_percent_tire": 150.0,
+    "total_air_needed_calculated": 1450.0,
+    "total_air_needed_for_pumps_calc": 1550,
+    "air_per_pump": 50,
+    "total_pumps": 31.0,
+    "answer": 31.0
+  },
+  "flawed_trace": {
+    "tire_capacity": 500,
+    "num_flat_tires": 2,
+    "air_needed_flat_tires": 1000,
+    "percent_needed_40_num": 60,
+    "percent_factor": 0.01,
+    "air_needed_40_percent_tire": 300.0,
+    "percent_needed_70_num": 30,
+    "air_needed_70_percent_tire": 150.0,
+    "total_air_needed_calculated": 1450.0,
+    "total_air_needed_for_pumps_calc": 1550,
+    "air_per_pump": 50,
+    "total_pumps": 1500,
+    "answer": 1500
+  },
+  "correct_value": 31.0,
+  "flawed_value": 1500,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "air_needed_flat_tires",
+      "question_inputs": [
+        "tire_capacity",
+        "num_flat_tires"
+      ],
+      "solution_line_template": "First, if the a full tire needs {tire_capacity} cubic inches of air, then two empty tires need: {tire_capacity} cubic inches/tire * {num_flat_tires} tires = <<{tire_capacity}*{num_flat_tires}={air_needed_flat_tires}>>{air_needed_flat_tires} cubic inches."
+    },
+    {
+      "WK_inputs": [
+        "percent_needed_40_num",
+        "percent_factor"
+      ],
+      "line_number": "L3",
+      "output_variable": "air_needed_40_percent_tire",
+      "question_inputs": [],
+      "solution_line_template": "So, we find the 40%-full tire needs {tire_capacity} cubic inches * ({percent_needed_40_num}%) = <<{tire_capacity}*({percent_needed_40_num}*{percent_factor})={air_needed_40_percent_tire}>>{air_needed_40_percent_tire} cubic inches."
+    },
+    {
+      "WK_inputs": [
+        "percent_needed_70_num"
+      ],
+      "line_number": "L5",
+      "output_variable": "air_needed_70_percent_tire",
+      "question_inputs": [],
+      "solution_line_template": "So, the 70%-full tire needs {tire_capacity} cubic inches * ({percent_needed_70_num}%) = <<{tire_capacity}*({percent_needed_70_num}*{percent_factor})={air_needed_70_percent_tire}>>{air_needed_70_percent_tire} cubic inches."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_air_needed_calculated",
+      "question_inputs": [],
+      "solution_line_template": "Now add up the needs of all the tires to find the total number of cubic inches needed: {air_needed_flat_tires} cubic inches + {air_needed_40_percent_tire} cubic inches + {air_needed_70_percent_tire} cubic inches = <<{air_needed_flat_tires}+{air_needed_40_percent_tire}+{air_needed_70_percent_tire}={total_air_needed_calculated}>>{total_air_needed_calculated} cubic inches."
+    },
+    {
+      "WK_inputs": [
+        "total_air_needed_for_pumps_calc"
+      ],
+      "line_number": "L7",
+      "output_variable": "total_pumps",
+      "question_inputs": [
+        "air_per_pump"
+      ],
+      "solution_line_template": "Finally, if the pumps each hold {air_per_pump} cubic inches, the total number of pumps needed is {total_air_needed_for_pumps_calc} cubic inches / {air_per_pump} cubic inches/pump = {total_pumps} pumps."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First, if the a full tire needs 500 cubic inches of air, then two empty tires need: 500 cubic inches/tire * 2 tires = <<500*2=1000>>1000 cubic inches.",
+    "L3": "So, we find the 40%-full tire needs 500 cubic inches * (60%) = <<500*(60*0.01)=300>>300 cubic inches.",
+    "L5": "So, the 70%-full tire needs 500 cubic inches * (30%) = <<500*(30*0.01)=150>>150 cubic inches.",
+    "L6": "Now add up the needs of all the tires to find the total number of cubic inches needed: 1000 cubic inches + 300 cubic inches + 150 cubic inches = <<1000+300+150=1450>>1450 cubic inches.",
+    "L7": "Finally, if the pumps each hold 50 cubic inches, the total number of pumps needed is 1550 cubic inches / 50 cubic inches/pump = 1500 pumps.",
+    "FA": "#### 1500"
+  },
+  "erroneous_line_number": "L7",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": -3553527340672125818,
+  "model_name": "google_gemini-2.5-flash"
+}

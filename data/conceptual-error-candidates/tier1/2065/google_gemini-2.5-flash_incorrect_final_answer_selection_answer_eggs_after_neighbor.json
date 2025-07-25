@@ -1,0 +1,92 @@
+{
+  "index": 2065,
+  "original_solution_mapping": {
+    "FA": "#### 46",
+    "L1": "She has 3 hens that lay 3 eggs a day so they lay 3*3 = <<3*3=9>>9 eggs a day",
+    "L2": "The hens lay 9 eggs a day and she wasn't able to collect them for 7 days so that means there are 9*7 = <<9*7=63>>63 eggs",
+    "L3": "Her neighbor took 12 off the 63 eggs so that leaves 63-12 = <<63-12=51>>51 eggs",
+    "L4": "Myrtle dropped 5 of the remaining 51 eggs so she has 51-5 = <<51-5=46>>46 eggs"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2065.\n    Returns: the number of eggs Myrtle has after dropping some.\n    \"\"\"\n    # L1\n    num_hens = 3 # 3 hens\n    eggs_per_hen_per_day = 3 # lay 3 eggs a day\n    eggs_per_day = num_hens * eggs_per_hen_per_day\n\n    # L2\n    days_gone = 7 # gone for 7 days\n    total_eggs_uncollected = eggs_per_day * days_gone\n\n    # L3\n    neighbor_took = 12 # neighbor took 12 eggs\n    eggs_after_neighbor = total_eggs_uncollected - neighbor_took\n\n    # L4\n    myrtle_dropped = 5 # dropping 5 on the way\n    final_eggs = eggs_after_neighbor - myrtle_dropped\n\n    # FA\n    answer = final_eggs\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "final_eggs",
+    "replacement_variable": "eggs_after_neighbor"
+  },
+  "correct_trace": {
+    "num_hens": 3,
+    "eggs_per_hen_per_day": 3,
+    "eggs_per_day": 9,
+    "days_gone": 7,
+    "total_eggs_uncollected": 63,
+    "neighbor_took": 12,
+    "eggs_after_neighbor": 51,
+    "myrtle_dropped": 5,
+    "final_eggs": 46,
+    "answer": 46
+  },
+  "flawed_trace": {
+    "num_hens": 3,
+    "eggs_per_hen_per_day": 3,
+    "eggs_per_day": 9,
+    "days_gone": 7,
+    "total_eggs_uncollected": 63,
+    "neighbor_took": 12,
+    "eggs_after_neighbor": 51,
+    "myrtle_dropped": 5,
+    "final_eggs": 46,
+    "answer": 51
+  },
+  "correct_value": 46,
+  "flawed_value": 51,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "num_hens",
+        "eggs_per_hen_per_day"
+      ],
+      "WK_inputs": [],
+      "output_variable": "eggs_per_day",
+      "solution_line_template": "She has {num_hens} hens that lay {eggs_per_hen_per_day} eggs a day so they lay {num_hens}*{eggs_per_hen_per_day} = <<{num_hens}*{eggs_per_hen_per_day}={eggs_per_day}>>{eggs_per_day} eggs a day"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "days_gone"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_eggs_uncollected",
+      "solution_line_template": "The hens lay {eggs_per_day} eggs a day and she wasn't able to collect them for {days_gone} days so that means there are {eggs_per_day}*{days_gone} = <<{eggs_per_day}*{days_gone}={total_eggs_uncollected}>>{total_eggs_uncollected} eggs"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "neighbor_took"
+      ],
+      "WK_inputs": [],
+      "output_variable": "eggs_after_neighbor",
+      "solution_line_template": "Her neighbor took {neighbor_took} off the {total_eggs_uncollected} eggs so that leaves {total_eggs_uncollected}-{neighbor_took} = <<{total_eggs_uncollected}-{neighbor_took}={eggs_after_neighbor}>>{eggs_after_neighbor} eggs"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "myrtle_dropped"
+      ],
+      "WK_inputs": [],
+      "output_variable": "final_eggs",
+      "solution_line_template": "Myrtle dropped {myrtle_dropped} of the remaining {eggs_after_neighbor} eggs so she has {eggs_after_neighbor}-{myrtle_dropped} = <<{eggs_after_neighbor}-{myrtle_dropped}={final_eggs}>>{final_eggs} eggs"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She has 3 hens that lay 3 eggs a day so they lay 3*3 = <<3*3=9>>9 eggs a day",
+    "L2": "The hens lay 9 eggs a day and she wasn't able to collect them for 7 days so that means there are 9*7 = <<9*7=63>>63 eggs",
+    "L3": "Her neighbor took 12 off the 63 eggs so that leaves 63-12 = <<63-12=51>>51 eggs",
+    "FA": "#### 51"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'eggs_after_neighbor' (value: 51) was reported instead of 'final_eggs' (value: 46).",
+  "repro_seed": 1258183452731757884,
+  "model_name": "google_gemini-2.5-flash"
+}

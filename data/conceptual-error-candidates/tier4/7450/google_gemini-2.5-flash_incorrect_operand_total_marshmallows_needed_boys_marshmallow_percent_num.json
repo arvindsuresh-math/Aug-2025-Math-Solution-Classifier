@@ -1,0 +1,104 @@
+{
+  "index": 7450,
+  "original_solution_mapping": {
+    "FA": "#### 56",
+    "L1": "The girls make up one-third of the campers, so there are 96 /3 = <<96/3=32>>32 girls.",
+    "L2": "The boys make up two-thirds of the campers, so there are 32 + 32 = <<32+32=64>>64 boys.",
+    "L3": "There are 32 x 75% = <<32*75*.01=24>>24 girls who want to toast marshmallows.",
+    "L4": "There are 64 x 50% = <<64*50*.01=32>>32 boys who want to toast marshmallows.",
+    "L5": "They need 24 + 32 = <<24+32=56>>56 marshmallows."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7450.\n    Returns: the total number of marshmallows needed.\n    \"\"\"\n    # L1\n    total_campers = 96 # 96 campers\n    girls_fraction_denominator = 3 # one-third of the campers are girls\n    num_girls = total_campers / girls_fraction_denominator\n\n    # L2\n    num_boys = num_girls + num_girls\n\n    # L3\n    girls_marshmallow_percent_num = 75 # 75% of the girls want to toast marshmallows\n    percent_factor = 0.01 # WK\n    girls_marshmallow_toasters = num_girls * girls_marshmallow_percent_num * percent_factor\n\n    # L4\n    boys_marshmallow_percent_num = 50 # 50% of the boys want to toast marshmallows\n    boys_marshmallow_toasters = num_boys * boys_marshmallow_percent_num * percent_factor\n\n    # L5\n    total_marshmallows_needed = girls_marshmallow_toasters + boys_marshmallow_toasters\n\n    # FA\n    answer = total_marshmallows_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_marshmallows_needed",
+    "operand_to_replace": "girls_marshmallow_toasters",
+    "replacement_variable": "boys_marshmallow_percent_num"
+  },
+  "correct_trace": {
+    "total_campers": 96,
+    "girls_fraction_denominator": 3,
+    "num_girls": 32.0,
+    "num_boys": 64.0,
+    "girls_marshmallow_percent_num": 75,
+    "percent_factor": 0.01,
+    "girls_marshmallow_toasters": 24.0,
+    "boys_marshmallow_percent_num": 50,
+    "boys_marshmallow_toasters": 32.0,
+    "total_marshmallows_needed": 56.0,
+    "answer": 56.0
+  },
+  "flawed_trace": {
+    "total_campers": 96,
+    "girls_fraction_denominator": 3,
+    "num_girls": 32.0,
+    "num_boys": 64.0,
+    "girls_marshmallow_percent_num": 75,
+    "percent_factor": 0.01,
+    "girls_marshmallow_toasters": 24.0,
+    "boys_marshmallow_percent_num": 50,
+    "boys_marshmallow_toasters": 32.0,
+    "total_marshmallows_needed": 82.0,
+    "answer": 82.0
+  },
+  "correct_value": 56.0,
+  "flawed_value": 82.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "num_girls",
+      "question_inputs": [
+        "total_campers",
+        "girls_fraction_denominator"
+      ],
+      "solution_line_template": "The girls make up one-third of the campers, so there are {total_campers} /{girls_fraction_denominator} = <<{total_campers}/{girls_fraction_denominator}={num_girls}>>{num_girls} girls."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_boys",
+      "question_inputs": [],
+      "solution_line_template": "The boys make up two-thirds of the campers, so there are {num_girls} + {num_girls} = <<{num_girls}+{num_girls}={num_boys}>>{num_boys} boys."
+    },
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L3",
+      "output_variable": "girls_marshmallow_toasters",
+      "question_inputs": [
+        "girls_marshmallow_percent_num"
+      ],
+      "solution_line_template": "There are {num_girls} x {girls_marshmallow_percent_num}% = <<{num_girls}*{girls_marshmallow_percent_num}*{percent_factor}={girls_marshmallow_toasters}>>{girls_marshmallow_toasters} girls who want to toast marshmallows."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "boys_marshmallow_toasters",
+      "question_inputs": [
+        "boys_marshmallow_percent_num"
+      ],
+      "solution_line_template": "There are {num_boys} x {boys_marshmallow_percent_num}% = <<{num_boys}*{boys_marshmallow_percent_num}*{percent_factor}={boys_marshmallow_toasters}>>{boys_marshmallow_toasters} boys who want to toast marshmallows."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_marshmallows_needed",
+      "question_inputs": [],
+      "solution_line_template": "They need {girls_marshmallow_toasters} + {boys_marshmallow_toasters} = <<{girls_marshmallow_toasters}+{boys_marshmallow_toasters}={total_marshmallows_needed}>>{total_marshmallows_needed} marshmallows."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The girls make up one-third of the campers, so there are 96 /3 = <<96/3=32>>32 girls.",
+    "L2": "The boys make up two-thirds of the campers, so there are 32 + 32 = <<32+32=64>>64 boys.",
+    "L3": "There are 32 x 75% = <<32*75*0.01=24>>24 girls who want to toast marshmallows.",
+    "L4": "There are 64 x 50% = <<64*50*0.01=32>>32 boys who want to toast marshmallows.",
+    "L5": "They need 50 + 32 = <<50+32=82>>82 marshmallows.",
+    "FA": "#### 82"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operand. The variable 'boys_marshmallow_percent_num' (value: 50) was used instead of 'girls_marshmallow_toasters' (value: 24.0).",
+  "repro_seed": -685028671738828857,
+  "model_name": "google_gemini-2.5-flash"
+}

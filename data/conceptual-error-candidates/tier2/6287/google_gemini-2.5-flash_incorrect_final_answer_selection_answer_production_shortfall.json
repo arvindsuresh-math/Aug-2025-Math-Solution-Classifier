@@ -1,0 +1,101 @@
+{
+  "index": 6287,
+  "original_solution_mapping": {
+    "FA": "#### 175000",
+    "L1": "He sells each tire for 250*1.5=$<<250*1.5=375>>375",
+    "L2": "That means he makes a profit of 375-250=$<<375-250=125>>125 per tire",
+    "L3": "His production is 1200-1000=<<1200-1000=200>>200 short",
+    "L4": "So he loses out on 125*200=$<<125*200=25000>>25,000 a day",
+    "L5": "So he loses out on 25000*7=$<<25000*7=175000>>175,000 a week"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6287.\n    Returns: the total money lost out a week by not being able to produce all the tires.\n    \"\"\"\n    # L1\n    cost_to_produce_tire = 250 # It cost $250 to produce each tire\n    sales_multiplier = 1.5 # sell them for 1.5 times as much\n    selling_price_per_tire = cost_to_produce_tire * sales_multiplier\n\n    # L2\n    profit_per_tire = selling_price_per_tire - cost_to_produce_tire\n\n    # L3\n    potential_production_capacity = 1200 # sell 1200 tires a day\n    current_production = 1000 # produce 1000 tires a day\n    production_shortfall = potential_production_capacity - current_production\n\n    # L4\n    daily_loss = profit_per_tire * production_shortfall\n\n    # L5\n    days_per_week = 7 # WK\n    weekly_loss = daily_loss * days_per_week\n\n    # FA\n    answer = weekly_loss\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "weekly_loss",
+    "replacement_variable": "production_shortfall"
+  },
+  "correct_trace": {
+    "cost_to_produce_tire": 250,
+    "sales_multiplier": 1.5,
+    "selling_price_per_tire": 375.0,
+    "profit_per_tire": 125.0,
+    "potential_production_capacity": 1200,
+    "current_production": 1000,
+    "production_shortfall": 200,
+    "daily_loss": 25000.0,
+    "days_per_week": 7,
+    "weekly_loss": 175000.0,
+    "answer": 175000.0
+  },
+  "flawed_trace": {
+    "cost_to_produce_tire": 250,
+    "sales_multiplier": 1.5,
+    "selling_price_per_tire": 375.0,
+    "profit_per_tire": 125.0,
+    "potential_production_capacity": 1200,
+    "current_production": 1000,
+    "production_shortfall": 200,
+    "daily_loss": 25000.0,
+    "days_per_week": 7,
+    "weekly_loss": 175000.0,
+    "answer": 200
+  },
+  "correct_value": 175000.0,
+  "flawed_value": 200,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "selling_price_per_tire",
+      "question_inputs": [
+        "cost_to_produce_tire",
+        "sales_multiplier"
+      ],
+      "solution_line_template": "He sells each tire for {cost_to_produce_tire}*{sales_multiplier}=$<<{cost_to_produce_tire}*{sales_multiplier}={selling_price_per_tire}>>{selling_price_per_tire}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "profit_per_tire",
+      "question_inputs": [],
+      "solution_line_template": "That means he makes a profit of {selling_price_per_tire}-{cost_to_produce_tire}=$<<{selling_price_per_tire}-{cost_to_produce_tire}={profit_per_tire}>>{profit_per_tire} per tire"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "production_shortfall",
+      "question_inputs": [
+        "potential_production_capacity",
+        "current_production"
+      ],
+      "solution_line_template": "His production is {potential_production_capacity}-{current_production}=<<{potential_production_capacity}-{current_production}={production_shortfall}>>{production_shortfall} short"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "daily_loss",
+      "question_inputs": [],
+      "solution_line_template": "So he loses out on {profit_per_tire}*{production_shortfall}=$<<{profit_per_tire}*{production_shortfall}={daily_loss}>>{daily_loss} a day"
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L5",
+      "output_variable": "weekly_loss",
+      "question_inputs": [],
+      "solution_line_template": "So he loses out on {daily_loss}*{days_per_week}=$<<{daily_loss}*{days_per_week}={weekly_loss}>>{weekly_loss} a week"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He sells each tire for 250*1.5=$<<250*1.5=375>>375",
+    "L2": "That means he makes a profit of 375-250=$<<375-250=125>>125 per tire",
+    "L3": "His production is 1200-1000=<<1200-1000=200>>200 short",
+    "FA": "#### 200"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'production_shortfall' (value: 200) was reported instead of 'weekly_loss' (value: 175000.0).",
+  "repro_seed": 2844776116435870878,
+  "model_name": "google_gemini-2.5-flash"
+}

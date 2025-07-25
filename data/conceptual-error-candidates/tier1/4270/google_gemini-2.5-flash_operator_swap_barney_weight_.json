@@ -1,0 +1,74 @@
+{
+  "index": 4270,
+  "original_solution_mapping": {
+    "FA": "#### 9500",
+    "L1": "If each regular dinosaur weighs 800 pounds, five regular dinosaurs weigh 5*800=<<5*800=4000>>4000 pounds.",
+    "L2": "Since Barney the dinosaur weighs 1500 pounds more than five regular dinosaurs combined, he weighs 4000+1500=5500 pounds.",
+    "L3": "The combined weight of Barney and the five regular dinosaurs' weights is 5500+4000=<<5500+4000=9500>>9500 pounds."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4270.\n    Returns: the combined weight of Barney and the five regular dinosaurs.\n    \"\"\"\n    # L1\n    num_regular_dinosaurs = 5 # five regular dinosaurs\n    weight_each_regular_dinosaur = 800 # each regular dinosaur weighs 800 pounds\n    combined_weight_five_regular_dinosaurs = num_regular_dinosaurs * weight_each_regular_dinosaur\n\n    # L2\n    barney_extra_weight = 1500 # weighs 1500 pounds more\n    barney_weight = combined_weight_five_regular_dinosaurs + barney_extra_weight\n\n    # L3\n    total_combined_weight = barney_weight + combined_weight_five_regular_dinosaurs\n\n    # FA\n    answer = total_combined_weight\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "barney_weight",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x30b16dfd0>"
+  },
+  "correct_trace": {
+    "num_regular_dinosaurs": 5,
+    "weight_each_regular_dinosaur": 800,
+    "combined_weight_five_regular_dinosaurs": 4000,
+    "barney_extra_weight": 1500,
+    "barney_weight": 5500,
+    "total_combined_weight": 9500,
+    "answer": 9500
+  },
+  "flawed_trace": {
+    "num_regular_dinosaurs": 5,
+    "weight_each_regular_dinosaur": 800,
+    "combined_weight_five_regular_dinosaurs": 4000,
+    "barney_extra_weight": 1500,
+    "barney_weight": 2500,
+    "total_combined_weight": 6500,
+    "answer": 6500
+  },
+  "correct_value": 5500,
+  "flawed_value": 2500,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "combined_weight_five_regular_dinosaurs",
+      "question_inputs": [
+        "num_regular_dinosaurs",
+        "weight_each_regular_dinosaur"
+      ],
+      "solution_line_template": "If each regular dinosaur weighs {weight_each_regular_dinosaur} pounds, five regular dinosaurs weigh {num_regular_dinosaurs}*{weight_each_regular_dinosaur}=<<{num_regular_dinosaurs}*{weight_each_regular_dinosaur}={combined_weight_five_regular_dinosaurs}>>{combined_weight_five_regular_dinosaurs} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "barney_weight",
+      "question_inputs": [
+        "barney_extra_weight"
+      ],
+      "solution_line_template": "Since Barney the dinosaur weighs {barney_extra_weight} pounds more than five regular dinosaurs combined, he weighs {combined_weight_five_regular_dinosaurs}+{barney_extra_weight}={barney_weight} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_combined_weight",
+      "question_inputs": [],
+      "solution_line_template": "The combined weight of Barney and the five regular dinosaurs' weights is {barney_weight}+{combined_weight_five_regular_dinosaurs}=<<{barney_weight}+{combined_weight_five_regular_dinosaurs}={total_combined_weight}>>{total_combined_weight} pounds."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If each regular dinosaur weighs 800 pounds, five regular dinosaurs weigh 5*800=<<5*800=4000>>4000 pounds.",
+    "L2": "Since Barney the dinosaur weighs 1500 pounds more than five regular dinosaurs combined, he weighs 4000+1500=2500 pounds.",
+    "L3": "The combined weight of Barney and the five regular dinosaurs' weights is 2500+4000=<<2500+4000=6500>>6500 pounds.",
+    "FA": "#### 6500"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": 8526732004928799494,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,63 @@
+{
+  "index": 3561,
+  "original_solution_mapping": {
+    "FA": "#### 600",
+    "L1": "Their novel is half as long as their 300-page history book so it is 300/2 = <<300/2=150>>150 pages",
+    "L2": "Their science book has 4 times the amount of pages as their novel, which is 150 pages, so their science book has 4*150 = <<4*150=600>>600 pages"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3561.\n    Returns: the number of pages in the science book.\n    \"\"\"\n    # L1\n    history_book_pages = 300 # history book has 300 pages\n    half_divisor = 2 # half as many pages\n    novel_pages = history_book_pages / half_divisor\n\n    # L2\n    science_book_multiplier = 4 # 4 times the amount of pages\n    science_book_pages = science_book_multiplier * novel_pages\n\n    # FA\n    answer = science_book_pages\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "novel_pages",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x17218fe10>"
+  },
+  "correct_trace": {
+    "history_book_pages": 300,
+    "half_divisor": 2,
+    "novel_pages": 150.0,
+    "science_book_multiplier": 4,
+    "science_book_pages": 600.0,
+    "answer": 600.0
+  },
+  "flawed_trace": {
+    "history_book_pages": 300,
+    "half_divisor": 2,
+    "novel_pages": 298,
+    "science_book_multiplier": 4,
+    "science_book_pages": 1192,
+    "answer": 1192
+  },
+  "correct_value": 150.0,
+  "flawed_value": 298,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "novel_pages",
+      "question_inputs": [
+        "history_book_pages",
+        "half_divisor"
+      ],
+      "solution_line_template": "Their novel is half as long as their {history_book_pages}-page history book so it is {history_book_pages}/{half_divisor} = <<{history_book_pages}/{half_divisor}={novel_pages}>>{novel_pages} pages"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "science_book_pages",
+      "question_inputs": [
+        "science_book_multiplier"
+      ],
+      "solution_line_template": "Their science book has {science_book_multiplier} times the amount of pages as their novel, which is {novel_pages} pages, so their science book has {science_book_multiplier}*{novel_pages} = <<{science_book_multiplier}*{novel_pages}={science_book_pages}>>{science_book_pages} pages"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Their novel is half as long as their 300-page history book so it is 300/2 = <<300/2=298>>298 pages",
+    "L2": "Their science book has 4 times the amount of pages as their novel, which is 298 pages, so their science book has 4*298 = <<4*298=1192>>1192 pages",
+    "FA": "#### 1192"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 159765335547645229,
+  "model_name": "google_gemini-2.5-flash"
+}

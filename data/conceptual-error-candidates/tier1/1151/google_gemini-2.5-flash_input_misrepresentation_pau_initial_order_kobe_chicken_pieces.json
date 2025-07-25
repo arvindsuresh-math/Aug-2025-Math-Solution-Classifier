@@ -1,0 +1,63 @@
+{
+  "index": 1151,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "Pau ordered 5 x 2 = <<5*2=10>>10 fried chickens in total.",
+    "L2": "Therefore, Pau ate 10 x 2 = <<10*2=20>>20 pieces of fried chicken."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1151.\n    Returns: the total number of fried chicken pieces Pau will have eaten.\n    \"\"\"\n    # L1\n    kobe_chicken_pieces = 5 # Kobe ordered five pieces of fried chicken\n    pau_order_multiplier = 2 # Pau ordered twice as much fried chicken as Kobe did\n    pau_initial_order = kobe_chicken_pieces * pau_order_multiplier\n\n    # L2\n    additional_set_factor = 2 # order another set of fried chicken\n    pau_total_eaten = pau_initial_order * additional_set_factor\n\n    # FA\n    answer = pau_total_eaten\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "pau_initial_order",
+    "operand_to_replace": "pau_order_multiplier",
+    "replacement_variable": "kobe_chicken_pieces"
+  },
+  "correct_trace": {
+    "kobe_chicken_pieces": 5,
+    "pau_order_multiplier": 2,
+    "pau_initial_order": 10,
+    "additional_set_factor": 2,
+    "pau_total_eaten": 20,
+    "answer": 20
+  },
+  "flawed_trace": {
+    "kobe_chicken_pieces": 5,
+    "pau_order_multiplier": 2,
+    "pau_initial_order": 25,
+    "additional_set_factor": 2,
+    "pau_total_eaten": 50,
+    "answer": 50
+  },
+  "correct_value": 10,
+  "flawed_value": 25,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "kobe_chicken_pieces",
+        "pau_order_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "pau_initial_order",
+      "solution_line_template": "Pau ordered {kobe_chicken_pieces} x {pau_order_multiplier} = <<{kobe_chicken_pieces}*{pau_order_multiplier}={pau_initial_order}>>{pau_initial_order} fried chickens in total."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "additional_set_factor"
+      ],
+      "WK_inputs": [],
+      "output_variable": "pau_total_eaten",
+      "solution_line_template": "Therefore, Pau ate {pau_initial_order} x {additional_set_factor} = <<{pau_initial_order}*{additional_set_factor}={pau_total_eaten}>>{pau_total_eaten} pieces of fried chicken."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Pau ordered 5 x 5 = <<5*5=25>>25 fried chickens in total.",
+    "L2": "Therefore, Pau ate 25 x 2 = <<25*2=50>>50 pieces of fried chicken.",
+    "FA": "#### 50"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'kobe_chicken_pieces' (5) was used instead of 'pau_order_multiplier' (2).",
+  "repro_seed": 4937968165472630800,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,84 @@
+{
+  "index": 1240,
+  "original_solution_mapping": {
+    "FA": "#### 9,492",
+    "L1": "They have $126 for helium because 200 - 42 - 18 - 14 = <<200-42-18-14=126>>126.",
+    "L2": "They can buy 84 ounces of helium because 126 / 1.5 = <<126/1.5=84>>84",
+    "L3": "They can fly 9,492 feet up because 84 x 113 = <<84*113=9492>>9,492"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1240.\n    Returns: the total height in feet the balloon can fly.\n    \"\"\"\n    # L1\n    initial_money = 200 # $200\n    sheet_cost = 42 # $42\n    rope_cost = 18 # $18\n    burner_cost = 14 # $14\n    money_for_helium = initial_money - sheet_cost - rope_cost - burner_cost\n\n    # L2\n    helium_cost_per_ounce = 1.50 # $1.50 per ounce\n    ounces_of_helium = money_for_helium / helium_cost_per_ounce\n\n    # L3\n    feet_per_ounce = 113 # 113 feet higher\n    total_feet_flown = ounces_of_helium * feet_per_ounce\n\n    # FA\n    answer = total_feet_flown\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "money_for_helium",
+    "operand_to_replace": "sheet_cost",
+    "replacement_variable": "rope_cost"
+  },
+  "correct_trace": {
+    "initial_money": 200,
+    "sheet_cost": 42,
+    "rope_cost": 18,
+    "burner_cost": 14,
+    "money_for_helium": 126,
+    "helium_cost_per_ounce": 1.5,
+    "ounces_of_helium": 84.0,
+    "feet_per_ounce": 113,
+    "total_feet_flown": 9492.0,
+    "answer": 9492.0
+  },
+  "flawed_trace": {
+    "initial_money": 200,
+    "sheet_cost": 42,
+    "rope_cost": 18,
+    "burner_cost": 14,
+    "money_for_helium": 150,
+    "helium_cost_per_ounce": 1.5,
+    "ounces_of_helium": 100.0,
+    "feet_per_ounce": 113,
+    "total_feet_flown": 11300.0,
+    "answer": 11300.0
+  },
+  "correct_value": 126,
+  "flawed_value": 150,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_for_helium",
+      "question_inputs": [
+        "initial_money",
+        "sheet_cost",
+        "rope_cost",
+        "burner_cost"
+      ],
+      "solution_line_template": "They have ${money_for_helium} for helium because {initial_money} - {sheet_cost} - {rope_cost} - {burner_cost} = <<{initial_money}-{sheet_cost}-{rope_cost}-{burner_cost}={money_for_helium}>>{money_for_helium}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "ounces_of_helium",
+      "question_inputs": [
+        "helium_cost_per_ounce"
+      ],
+      "solution_line_template": "They can buy {ounces_of_helium} ounces of helium because {money_for_helium} / {helium_cost_per_ounce} = <<{money_for_helium}/{helium_cost_per_ounce}={ounces_of_helium}>>{ounces_of_helium}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_feet_flown",
+      "question_inputs": [
+        "feet_per_ounce"
+      ],
+      "solution_line_template": "They can fly {total_feet_flown} feet up because {ounces_of_helium} x {feet_per_ounce} = <<{ounces_of_helium}*{feet_per_ounce}={total_feet_flown}>>{total_feet_flown}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "They have $150 for helium because 200 - 18 - 18 - 14 = <<200-18-18-14=150>>150.",
+    "L2": "They can buy 100 ounces of helium because 150 / 1.5 = <<150/1.5=100>>100",
+    "L3": "They can fly 11300 feet up because 100 x 113 = <<100*113=11300>>11300",
+    "FA": "#### 11300"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'rope_cost' (18) was used instead of 'sheet_cost' (42).",
+  "repro_seed": 535279609755269444,
+  "model_name": "google_gemini-2.5-flash"
+}

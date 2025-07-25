@@ -1,0 +1,78 @@
+{
+  "index": 6196,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "In the large orders, Lisa used 3 large orders * 200g of packing peanuts per large order = <<3*200=600>>600g of packing peanuts.",
+    "L2": "The rest of the packing peanuts were used in small orders so there was a total of 800g packing peanuts - 600g of packing peanuts used in large orders = <<800-600=200>>200g of packing peanuts used in small orders.",
+    "L3": "So there must have been 200g of packing peanuts / 50g of packing peanuts per small order = <<200/50=4>>4 small orders."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6196.\n    Returns: the number of small orders Lisa has sent.\n    \"\"\"\n    # L1\n    num_large_orders = 3 # she knows she has sent 3 large orders\n    peanuts_per_large_order = 200 # Each large order needs 200g of packing peanuts\n    peanuts_used_large_orders = num_large_orders * peanuts_per_large_order\n\n    # L2\n    total_peanuts_used = 800 # If Lisa has used a total of 800g of packing peanuts\n    peanuts_used_small_orders = total_peanuts_used - peanuts_used_large_orders\n\n    # L3\n    peanuts_per_small_order = 50 # small orders need just 50g of packing peanuts\n    num_small_orders = peanuts_used_small_orders / peanuts_per_small_order\n\n    # FA\n    answer = num_small_orders\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "peanuts_used_small_orders",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x1722ce350>"
+  },
+  "correct_trace": {
+    "num_large_orders": 3,
+    "peanuts_per_large_order": 200,
+    "peanuts_used_large_orders": 600,
+    "total_peanuts_used": 800,
+    "peanuts_used_small_orders": 200,
+    "peanuts_per_small_order": 50,
+    "num_small_orders": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "num_large_orders": 3,
+    "peanuts_per_large_order": 200,
+    "peanuts_used_large_orders": 600,
+    "total_peanuts_used": 800,
+    "peanuts_used_small_orders": 1400,
+    "peanuts_per_small_order": 50,
+    "num_small_orders": 28.0,
+    "answer": 28.0
+  },
+  "correct_value": 200,
+  "flawed_value": 1400,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "peanuts_used_large_orders",
+      "question_inputs": [
+        "num_large_orders",
+        "peanuts_per_large_order"
+      ],
+      "solution_line_template": "In the large orders, Lisa used {num_large_orders} large orders * {peanuts_per_large_order}g of packing peanuts per large order = <<{num_large_orders}*{peanuts_per_large_order}={peanuts_used_large_orders}>>{peanuts_used_large_orders}g of packing peanuts."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "peanuts_used_small_orders",
+      "question_inputs": [
+        "total_peanuts_used"
+      ],
+      "solution_line_template": "The rest of the packing peanuts were used in small orders so there was a total of {total_peanuts_used}g packing peanuts - {peanuts_used_large_orders}g of packing peanuts used in large orders = <<{total_peanuts_used}-{peanuts_used_large_orders}={peanuts_used_small_orders}>>{peanuts_used_small_orders}g of packing peanuts used in small orders."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_small_orders",
+      "question_inputs": [
+        "peanuts_per_small_order"
+      ],
+      "solution_line_template": "So there must have been {peanuts_used_small_orders}g of packing peanuts / {peanuts_per_small_order}g of packing peanuts per small order = <<{peanuts_used_small_orders}/{peanuts_per_small_order}={num_small_orders}>>{num_small_orders} small orders."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In the large orders, Lisa used 3 large orders * 200g of packing peanuts per large order = <<3*200=600>>600g of packing peanuts.",
+    "L2": "The rest of the packing peanuts were used in small orders so there was a total of 800g packing peanuts - 600g of packing peanuts used in large orders = <<800-600=1400>>1400g of packing peanuts used in small orders.",
+    "L3": "So there must have been 1400g of packing peanuts / 50g of packing peanuts per small order = <<1400/50=28>>28 small orders.",
+    "FA": "#### 28"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 8989956380181622067,
+  "model_name": "google_gemini-2.5-flash"
+}

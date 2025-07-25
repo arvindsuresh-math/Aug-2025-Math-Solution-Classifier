@@ -1,0 +1,82 @@
+{
+  "index": 6116,
+  "original_solution_mapping": {
+    "FA": "#### 1920",
+    "L1": "First find the total number of pine cones: 8 trees * 200 pine cones/tree = <<8*200=1600>>1600 pine cones",
+    "L2": "Then multiply that number by 30% to find how many fall on Alan's roof: 1600 pine cones * 30% = <<1600*30*.01=480>>480 pine cones",
+    "L3": "Then multiply that number by the weight of each pine cone to find the total weight of the pine cones: 480 pine cones * 4 ounces/pine cone = <<480*4=1920>>1920 ounces"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6116.\n    Returns: the total weight of pine cones on Alan's roof in ounces.\n    \"\"\"\n    # L1\n    num_trees = 8 # 8 pine trees\n    pine_cones_per_tree = 200 # each tree drops 200 pine cones\n    total_pine_cones = num_trees * pine_cones_per_tree\n\n    # L2\n    percent_on_roof_num = 30 # 30% of the pine cones\n    percent_factor = 0.01 # WK\n    pine_cones_on_roof = total_pine_cones * percent_on_roof_num * percent_factor\n\n    # L3\n    weight_per_pine_cone = 4 # each pine cone weighs 4 ounces\n    total_weight_on_roof = pine_cones_on_roof * weight_per_pine_cone\n\n    # FA\n    answer = total_weight_on_roof\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "pine_cones_on_roof",
+    "operand_to_replace": "percent_on_roof_num",
+    "replacement_variable": "num_trees"
+  },
+  "correct_trace": {
+    "num_trees": 8,
+    "pine_cones_per_tree": 200,
+    "total_pine_cones": 1600,
+    "percent_on_roof_num": 30,
+    "percent_factor": 0.01,
+    "pine_cones_on_roof": 480.0,
+    "weight_per_pine_cone": 4,
+    "total_weight_on_roof": 1920.0,
+    "answer": 1920.0
+  },
+  "flawed_trace": {
+    "num_trees": 8,
+    "pine_cones_per_tree": 200,
+    "total_pine_cones": 1600,
+    "percent_on_roof_num": 30,
+    "percent_factor": 0.01,
+    "pine_cones_on_roof": 128.0,
+    "weight_per_pine_cone": 4,
+    "total_weight_on_roof": 512.0,
+    "answer": 512.0
+  },
+  "correct_value": 480.0,
+  "flawed_value": 128.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_pine_cones",
+      "question_inputs": [
+        "num_trees",
+        "pine_cones_per_tree"
+      ],
+      "solution_line_template": "First find the total number of pine cones: {num_trees} trees * {pine_cones_per_tree} pine cones/tree = <<{num_trees}*{pine_cones_per_tree}={total_pine_cones}>>{total_pine_cones} pine cones"
+    },
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L2",
+      "output_variable": "pine_cones_on_roof",
+      "question_inputs": [
+        "percent_on_roof_num"
+      ],
+      "solution_line_template": "Then multiply that number by {percent_on_roof_num}% to find how many fall on Alan's roof: {total_pine_cones} pine cones * {percent_on_roof_num}% = <<{total_pine_cones}*{percent_on_roof_num}*{percent_factor}={pine_cones_on_roof}>>{pine_cones_on_roof} pine cones"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_weight_on_roof",
+      "question_inputs": [
+        "weight_per_pine_cone"
+      ],
+      "solution_line_template": "Then multiply that number by the weight of each pine cone to find the total weight of the pine cones: {pine_cones_on_roof} pine cones * {weight_per_pine_cone} ounces/pine cone = <<{pine_cones_on_roof}*{weight_per_pine_cone}={total_weight_on_roof}>>{total_weight_on_roof} ounces"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total number of pine cones: 8 trees * 200 pine cones/tree = <<8*200=1600>>1600 pine cones",
+    "L2": "Then multiply that number by 8% to find how many fall on Alan's roof: 1600 pine cones * 8% = <<1600*8*0.01=128>>128 pine cones",
+    "L3": "Then multiply that number by the weight of each pine cone to find the total weight of the pine cones: 128 pine cones * 4 ounces/pine cone = <<128*4=512>>512 ounces",
+    "FA": "#### 512"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_trees' (8) was used instead of 'percent_on_roof_num' (30).",
+  "repro_seed": 7416156767305843926,
+  "model_name": "google_gemini-2.5-flash"
+}

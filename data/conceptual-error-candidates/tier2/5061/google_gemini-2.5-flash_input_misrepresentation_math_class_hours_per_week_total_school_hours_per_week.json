@@ -1,0 +1,63 @@
+{
+  "index": 5061,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "She is in school for 40 hours because 5 x 8 = <<5*8=40>>40",
+    "L2": "She is in math class for 10 hours a week because 40 x .25 = <<40*.25=10>>10"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5061.\n    Returns: the number of hours per week Ruth spends in math class.\n    \"\"\"\n    # L1\n    days_per_week = 5 # 5 days a week\n    hours_per_day = 8 # 8 hours a day\n    total_school_hours_per_week = days_per_week * hours_per_day\n\n    # L2\n    math_class_percentage_decimal = 0.25 # 25% of this time\n    math_class_hours_per_week = total_school_hours_per_week * math_class_percentage_decimal\n\n    # FA\n    answer = math_class_hours_per_week\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "math_class_hours_per_week",
+    "operand_to_replace": "math_class_percentage_decimal",
+    "replacement_variable": "total_school_hours_per_week"
+  },
+  "correct_trace": {
+    "days_per_week": 5,
+    "hours_per_day": 8,
+    "total_school_hours_per_week": 40,
+    "math_class_percentage_decimal": 0.25,
+    "math_class_hours_per_week": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "days_per_week": 5,
+    "hours_per_day": 8,
+    "total_school_hours_per_week": 40,
+    "math_class_percentage_decimal": 0.25,
+    "math_class_hours_per_week": 1600,
+    "answer": 1600
+  },
+  "correct_value": 10.0,
+  "flawed_value": 1600,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_school_hours_per_week",
+      "question_inputs": [
+        "days_per_week",
+        "hours_per_day"
+      ],
+      "solution_line_template": "She is in school for {total_school_hours_per_week} hours because {days_per_week} x {hours_per_day} = <<{days_per_week}*{hours_per_day}={total_school_hours_per_week}>>{total_school_hours_per_week}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "math_class_hours_per_week",
+      "question_inputs": [
+        "math_class_percentage_decimal"
+      ],
+      "solution_line_template": "She is in math class for {math_class_hours_per_week} hours a week because {total_school_hours_per_week} x {math_class_percentage_decimal} = <<{total_school_hours_per_week}*{math_class_percentage_decimal}={math_class_hours_per_week}>>{math_class_hours_per_week}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She is in school for 40 hours because 5 x 8 = <<5*8=40>>40",
+    "L2": "She is in math class for 1600 hours a week because 40 x 40 = <<40*40=1600>>1600",
+    "FA": "#### 1600"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_school_hours_per_week' (40) was used instead of 'math_class_percentage_decimal' (0.25).",
+  "repro_seed": -3818881922324893707,
+  "model_name": "google_gemini-2.5-flash"
+}

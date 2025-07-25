@@ -1,0 +1,63 @@
+{
+  "index": 38,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "She is making 72 ounces of water because 12 x 6 = <<12*6=72>>72",
+    "L2": "She needs 9 ounces of tea because 72 / 8 = <<72/8=9>>9"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 38.\n    Returns: the total ounces of tea Artemis needs.\n    \"\"\"\n    # L1\n    num_people = 12 # The party has 12 people\n    cup_size_per_person = 6 # each of them wants a 6-ounce cup of tea\n    total_water_ounces = num_people * cup_size_per_person\n\n    # L2\n    mom_cup_size = 8 # her mom drinks an 8-ounce cup of tea\n    tea_needed_ounces = total_water_ounces / mom_cup_size\n\n    # FA\n    answer = tea_needed_ounces\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_water_ounces",
+    "operand_to_replace": "cup_size_per_person",
+    "replacement_variable": "num_people"
+  },
+  "correct_trace": {
+    "num_people": 12,
+    "cup_size_per_person": 6,
+    "total_water_ounces": 72,
+    "mom_cup_size": 8,
+    "tea_needed_ounces": 9.0,
+    "answer": 9.0
+  },
+  "flawed_trace": {
+    "num_people": 12,
+    "cup_size_per_person": 6,
+    "total_water_ounces": 144,
+    "mom_cup_size": 8,
+    "tea_needed_ounces": 18.0,
+    "answer": 18.0
+  },
+  "correct_value": 72,
+  "flawed_value": 144,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_water_ounces",
+      "question_inputs": [
+        "num_people",
+        "cup_size_per_person"
+      ],
+      "solution_line_template": "She is making {total_water_ounces} ounces of water because {num_people} x {cup_size_per_person} = <<{num_people}*{cup_size_per_person}={total_water_ounces}>>{total_water_ounces}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "tea_needed_ounces",
+      "question_inputs": [
+        "mom_cup_size"
+      ],
+      "solution_line_template": "She needs {tea_needed_ounces} ounces of tea because {total_water_ounces} / {mom_cup_size} = <<{total_water_ounces}/{mom_cup_size}={tea_needed_ounces}>>{tea_needed_ounces}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She is making 144 ounces of water because 12 x 12 = <<12*12=144>>144",
+    "L2": "She needs 18 ounces of tea because 144 / 8 = <<144/8=18>>18",
+    "FA": "#### 18"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'num_people' (12) was used instead of 'cup_size_per_person' (6).",
+  "repro_seed": -5964758984876662054,
+  "model_name": "google_gemini-2.5-flash"
+}

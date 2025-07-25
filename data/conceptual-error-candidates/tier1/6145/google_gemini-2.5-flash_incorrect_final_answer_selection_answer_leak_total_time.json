@@ -1,0 +1,73 @@
+{
+  "index": 6145,
+  "original_solution_mapping": {
+    "FA": "#### 24",
+    "L1": "On a regular day it would take 3*12=<<3*12=36>>36 minutes",
+    "L2": "With the leak it will take 5*12=<<5*12=60>>60 minutes",
+    "L3": "It will take 60-36=<<60-36=24>>24 more minutes if the leak goes undetected"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6145.\n    Returns: the extra time it takes to fill 12 barrels with a leak.\n    \"\"\"\n    # L1\n    normal_fill_time_per_barrel = 3 # 3 minutes\n    num_barrels = 12 # 12 barrels of soda\n    normal_total_time = normal_fill_time_per_barrel * num_barrels\n\n    # L2\n    leak_fill_time_per_barrel = 5 # took 5 minutes to fill one barrel\n    leak_total_time = leak_fill_time_per_barrel * num_barrels\n\n    # L3\n    extra_time = leak_total_time - normal_total_time\n\n    # FA\n    answer = extra_time\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "extra_time",
+    "replacement_variable": "leak_total_time"
+  },
+  "correct_trace": {
+    "normal_fill_time_per_barrel": 3,
+    "num_barrels": 12,
+    "normal_total_time": 36,
+    "leak_fill_time_per_barrel": 5,
+    "leak_total_time": 60,
+    "extra_time": 24,
+    "answer": 24
+  },
+  "flawed_trace": {
+    "normal_fill_time_per_barrel": 3,
+    "num_barrels": 12,
+    "normal_total_time": 36,
+    "leak_fill_time_per_barrel": 5,
+    "leak_total_time": 60,
+    "extra_time": 24,
+    "answer": 60
+  },
+  "correct_value": 24,
+  "flawed_value": 60,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "normal_total_time",
+      "question_inputs": [
+        "normal_fill_time_per_barrel",
+        "num_barrels"
+      ],
+      "solution_line_template": "On a regular day it would take {normal_fill_time_per_barrel}*{num_barrels}=<<{normal_fill_time_per_barrel}*{num_barrels}={normal_total_time}>>{normal_total_time} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "leak_total_time",
+      "question_inputs": [
+        "leak_fill_time_per_barrel"
+      ],
+      "solution_line_template": "With the leak it will take {leak_fill_time_per_barrel}*{num_barrels}=<<{leak_fill_time_per_barrel}*{num_barrels}={leak_total_time}>>{leak_total_time} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "extra_time",
+      "question_inputs": [],
+      "solution_line_template": "It will take {leak_total_time}-{normal_total_time}=<<{leak_total_time}-{normal_total_time}={extra_time}>>{extra_time} more minutes if the leak goes undetected"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On a regular day it would take 3*12=<<3*12=36>>36 minutes",
+    "L2": "With the leak it will take 5*12=<<5*12=60>>60 minutes",
+    "FA": "#### 60"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'leak_total_time' (value: 60) was reported instead of 'extra_time' (value: 24).",
+  "repro_seed": 8939330542400604236,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 4193,
+  "original_solution_mapping": {
+    "FA": "#### 160",
+    "L1": "He spends 5 minutes ironing his shirt and 3 minutes ironing his pants so that's 5+3 = <<5+3=8>>8 minutes",
+    "L2": "He does this every day for 5 days so that's 5*8 = <<5*8=40>>40 minutes",
+    "L3": "After 4 weeks, Hayden has spent 4*40 = <<4*40=160>>160 minutes ironing his clothes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4193.\n    Returns: the total minutes Hayden spends ironing over 4 weeks.\n    \"\"\"\n    # L1\n    shirt_ironing_time = 5 # 5 minutes ironing his button-up shirt\n    pants_ironing_time = 3 # 3 minutes ironing his pants\n    daily_ironing_time = shirt_ironing_time + pants_ironing_time\n\n    # L2\n    days_per_week = 5 # 5 days a week\n    weekly_ironing_time = days_per_week * daily_ironing_time\n\n    # L3\n    num_weeks = 4 # over 4 weeks\n    total_ironing_time = num_weeks * weekly_ironing_time\n\n    # FA\n    answer = total_ironing_time\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "daily_ironing_time",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x30a72ca90>"
+  },
+  "correct_trace": {
+    "shirt_ironing_time": 5,
+    "pants_ironing_time": 3,
+    "daily_ironing_time": 8,
+    "days_per_week": 5,
+    "weekly_ironing_time": 40,
+    "num_weeks": 4,
+    "total_ironing_time": 160,
+    "answer": 160
+  },
+  "flawed_trace": {
+    "shirt_ironing_time": 5,
+    "pants_ironing_time": 3,
+    "daily_ironing_time": 2,
+    "days_per_week": 5,
+    "weekly_ironing_time": 10,
+    "num_weeks": 4,
+    "total_ironing_time": 40,
+    "answer": 40
+  },
+  "correct_value": 8,
+  "flawed_value": 2,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "daily_ironing_time",
+      "question_inputs": [
+        "shirt_ironing_time",
+        "pants_ironing_time"
+      ],
+      "solution_line_template": "He spends {shirt_ironing_time} minutes ironing his shirt and {pants_ironing_time} minutes ironing his pants so that's {shirt_ironing_time}+{pants_ironing_time} = <<{shirt_ironing_time}+{pants_ironing_time}={daily_ironing_time}>>{daily_ironing_time} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "weekly_ironing_time",
+      "question_inputs": [
+        "days_per_week"
+      ],
+      "solution_line_template": "He does this every day for {days_per_week} days so that's {days_per_week}*{daily_ironing_time} = <<{days_per_week}*{daily_ironing_time}={weekly_ironing_time}>>{weekly_ironing_time} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_ironing_time",
+      "question_inputs": [
+        "num_weeks"
+      ],
+      "solution_line_template": "After {num_weeks} weeks, Hayden has spent {num_weeks}*{weekly_ironing_time} = <<{num_weeks}*{weekly_ironing_time}={total_ironing_time}>>{total_ironing_time} minutes ironing his clothes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He spends 5 minutes ironing his shirt and 3 minutes ironing his pants so that's 5+3 = <<5+3=2>>2 minutes",
+    "L2": "He does this every day for 5 days so that's 5*2 = <<5*2=10>>10 minutes",
+    "L3": "After 4 weeks, Hayden has spent 4*10 = <<4*10=40>>40 minutes ironing his clothes",
+    "FA": "#### 40"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": 571206944110624313,
+  "model_name": "google_gemini-2.5-flash"
+}

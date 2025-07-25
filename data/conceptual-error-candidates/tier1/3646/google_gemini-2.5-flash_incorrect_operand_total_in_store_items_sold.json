@@ -1,0 +1,78 @@
+{
+  "index": 3646,
+  "original_solution_mapping": {
+    "FA": "#### 3,472",
+    "L1": "Barney's grocery store started with 0 items + 4458 they ordered = <<0+4458=4458>>4458 items total.",
+    "L2": "That day they sold 1561 items, so 4458 total - 1561 sold = <<4458-1561=2897>>2897 items.",
+    "L3": "If there are 575 items in the storeroom, then there are 575 + 2897 = <<575+2897=3472>>3472 items in the whole store."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3646.\n    Returns: the number of items left in the whole store.\n    \"\"\"\n    # L1\n    initial_items = 0 # sold out all of its items\n    items_ordered = 4458 # ordered 4458 items\n    total_after_order = initial_items + items_ordered\n\n    # L2\n    items_sold = 1561 # sold another 1561 items that day\n    remaining_after_sale = total_after_order - items_sold\n\n    # L3\n    items_in_storeroom = 575 # have 575 items in the storeroom\n    total_in_store = items_in_storeroom + remaining_after_sale\n\n    # FA\n    answer = total_in_store\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_in_store",
+    "operand_to_replace": "remaining_after_sale",
+    "replacement_variable": "items_sold"
+  },
+  "correct_trace": {
+    "initial_items": 0,
+    "items_ordered": 4458,
+    "total_after_order": 4458,
+    "items_sold": 1561,
+    "remaining_after_sale": 2897,
+    "items_in_storeroom": 575,
+    "total_in_store": 3472,
+    "answer": 3472
+  },
+  "flawed_trace": {
+    "initial_items": 0,
+    "items_ordered": 4458,
+    "total_after_order": 4458,
+    "items_sold": 1561,
+    "remaining_after_sale": 2897,
+    "items_in_storeroom": 575,
+    "total_in_store": 2136,
+    "answer": 2136
+  },
+  "correct_value": 3472,
+  "flawed_value": 2136,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_after_order",
+      "question_inputs": [
+        "initial_items",
+        "items_ordered"
+      ],
+      "solution_line_template": "Barney's grocery store started with {initial_items} items + {items_ordered} they ordered = <<{initial_items}+{items_ordered}={total_after_order}>>{total_after_order} items total."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_after_sale",
+      "question_inputs": [
+        "items_sold"
+      ],
+      "solution_line_template": "That day they sold {items_sold} items, so {total_after_order} total - {items_sold} sold = <<{total_after_order}-{items_sold}={remaining_after_sale}>>{remaining_after_sale} items."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_in_store",
+      "question_inputs": [
+        "items_in_storeroom"
+      ],
+      "solution_line_template": "If there are {items_in_storeroom} items in the storeroom, then there are {items_in_storeroom} + {remaining_after_sale} = <<{items_in_storeroom}+{remaining_after_sale}={total_in_store}>>{total_in_store} items in the whole store."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Barney's grocery store started with 0 items + 4458 they ordered = <<0+4458=4458>>4458 items total.",
+    "L2": "That day they sold 1561 items, so 4458 total - 1561 sold = <<4458-1561=2897>>2897 items.",
+    "L3": "If there are 575 items in the storeroom, then there are 575 + 1561 = <<575+1561=2136>>2136 items in the whole store.",
+    "FA": "#### 2136"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'items_sold' (value: 1561) was used instead of 'remaining_after_sale' (value: 2897).",
+  "repro_seed": -7077530805738957807,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,65 @@
+{
+  "index": 4117,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "Let X be the number of years before Fouad's age doubles Ahmed's age.",
+    "L2": "So (X+11)*2 = X+26.",
+    "L3": "So X*2 + 22 = X + 26.",
+    "L4": "So X = 26 - 22 = <<26-22=4>>4 years."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4117.\n    Returns: the number of years until Fouad's age is double Ahmed's age at that future time.\n    \"\"\"\n    # L3\n    ahmed_current_age = 11 # Ahmed is 11 years old\n    fouad_current_age = 26 # Fouad is 26 years old\n    multiplier_for_double = 2 # double # WK\n    ahmed_age_term_expanded = ahmed_current_age * multiplier_for_double\n\n    # L4\n    years_to_double = fouad_current_age - ahmed_age_term_expanded\n\n    # FA\n    answer = years_to_double\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "ahmed_age_term_expanded",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x1683a4dd0>"
+  },
+  "correct_trace": {
+    "ahmed_current_age": 11,
+    "fouad_current_age": 26,
+    "multiplier_for_double": 2,
+    "ahmed_age_term_expanded": 22,
+    "years_to_double": 4,
+    "answer": 4
+  },
+  "flawed_trace": {
+    "ahmed_current_age": 11,
+    "fouad_current_age": 26,
+    "multiplier_for_double": 2,
+    "ahmed_age_term_expanded": 13,
+    "years_to_double": 13,
+    "answer": 13
+  },
+  "correct_value": 22,
+  "flawed_value": 13,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "multiplier_for_double"
+      ],
+      "line_number": "L3",
+      "output_variable": "ahmed_age_term_expanded",
+      "question_inputs": [
+        "ahmed_current_age",
+        "fouad_current_age"
+      ],
+      "solution_line_template": "So X*{multiplier_for_double} + {ahmed_age_term_expanded} = X + {fouad_current_age}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "years_to_double",
+      "question_inputs": [],
+      "solution_line_template": "So X = {fouad_current_age} - {ahmed_age_term_expanded} = <<{fouad_current_age}-{ahmed_age_term_expanded}={years_to_double}>>{years_to_double} years."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L3": "So X*2 + 13 = X + 26.",
+    "L4": "So X = 26 - 13 = <<26-13=13>>13 years.",
+    "FA": "#### 13"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 7443982191418764443,
+  "model_name": "google_gemini-2.5-flash"
+}

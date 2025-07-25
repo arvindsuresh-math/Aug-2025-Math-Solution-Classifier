@@ -1,0 +1,78 @@
+{
+  "index": 3032,
+  "original_solution_mapping": {
+    "FA": "#### 700",
+    "L1": "Tedra harvests 1/2 * 400 kg = <<1/2*400=200>>200 kg of tomatoes on Thursday.",
+    "L2": "Tedra harvests 2000 kg - 400 kg - 200 kg = <<2000-400-200=1400>>1400 kg of tomatoes on Friday.",
+    "L3": "After giving away tomatoes to his friends, he is left with 1400 kg - 700 kg = <<1400-700=700>>700 kg of tomatoes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3032.\n    Returns: the remaining amount of tomatoes after giving some away.\n    \"\"\"\n    # L1\n    fraction_half = Fraction(1, 2) # half as much on Thursday\n    wednesday_harvest = 400 # harvests 400 kg on Wednesday\n    thursday_harvest = fraction_half * wednesday_harvest\n\n    # L2\n    total_harvest = 2000 # harvests a total of 2000 kg on Wednesday, Thursday, and Friday\n    friday_harvest = total_harvest - wednesday_harvest - thursday_harvest\n\n    # L3\n    given_away_tomatoes = 700 # gives away 700kg of them to his friends\n    remaining_tomatoes = friday_harvest - given_away_tomatoes\n\n    # FA\n    answer = remaining_tomatoes\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "friday_harvest",
+    "operand_to_replace": "wednesday_harvest",
+    "replacement_variable": "fraction_half"
+  },
+  "correct_trace": {
+    "fraction_half": "1/2",
+    "wednesday_harvest": 400,
+    "thursday_harvest": "200",
+    "total_harvest": 2000,
+    "friday_harvest": "1400",
+    "given_away_tomatoes": 700,
+    "remaining_tomatoes": "700",
+    "answer": "700"
+  },
+  "flawed_trace": {
+    "fraction_half": "1/2",
+    "wednesday_harvest": 400,
+    "thursday_harvest": "200",
+    "total_harvest": 2000,
+    "friday_harvest": "3599/2",
+    "given_away_tomatoes": 700,
+    "remaining_tomatoes": "2199/2",
+    "answer": "2199/2"
+  },
+  "correct_value": "1400",
+  "flawed_value": "3599/2",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "thursday_harvest",
+      "question_inputs": [
+        "fraction_half",
+        "wednesday_harvest"
+      ],
+      "solution_line_template": "Tedra harvests {fraction_half} * {wednesday_harvest} kg = <<{fraction_half}*{wednesday_harvest}={thursday_harvest}>>{thursday_harvest} kg of tomatoes on Thursday."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "friday_harvest",
+      "question_inputs": [
+        "total_harvest"
+      ],
+      "solution_line_template": "Tedra harvests {total_harvest} kg - {wednesday_harvest} kg - {thursday_harvest} kg = <<{total_harvest}-{wednesday_harvest}-{thursday_harvest}={friday_harvest}>>{friday_harvest} kg of tomatoes on Friday."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_tomatoes",
+      "question_inputs": [
+        "given_away_tomatoes"
+      ],
+      "solution_line_template": "After giving away tomatoes to his friends, he is left with {friday_harvest} kg - {given_away_tomatoes} kg = <<{friday_harvest}-{given_away_tomatoes}={remaining_tomatoes}>>{remaining_tomatoes} kg of tomatoes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Tedra harvests 1/2 * 400 kg = <<1/2*400=200>>200 kg of tomatoes on Thursday.",
+    "L2": "Tedra harvests 2000 kg - 1/2 kg - 200 kg = <<2000-1/2-200=3599/2>>3599/2 kg of tomatoes on Friday.",
+    "L3": "After giving away tomatoes to his friends, he is left with 3599/2 kg - 700 kg = <<3599/2-700=2199/2>>2199/2 kg of tomatoes.",
+    "FA": "#### 2199/2"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'fraction_half' (1/2) was used instead of 'wednesday_harvest' (400).",
+  "repro_seed": -4933397255120263280,
+  "model_name": "google_gemini-2.5-flash"
+}

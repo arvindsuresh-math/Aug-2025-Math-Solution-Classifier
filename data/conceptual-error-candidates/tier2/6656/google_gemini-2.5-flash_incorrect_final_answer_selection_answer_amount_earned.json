@@ -1,0 +1,86 @@
+{
+  "index": 6656,
+  "original_solution_mapping": {
+    "FA": "#### 110",
+    "L1": "He is $45 short because 100 x .45 = <<100*.45=45>>45",
+    "L2": "He earned $55 off goldfish because 100 - 45 = <<100-45=55>>55",
+    "L3": "He makes $.5 profit per goldfish because .75 - .25 = <<.75-.25=.5>>.5",
+    "L4": "He sold 110 goldfish that week because 55 / .5 = <<55/.5=110>>110"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6656.\n    Returns: the number of goldfish sold that week.\n    \"\"\"\n    # L1\n    tank_cost = 100 # new tank, which costs $100\n    short_percent_decimal = 0.45 # 45% short\n    amount_short = tank_cost * short_percent_decimal\n\n    # L2\n    amount_earned = tank_cost - amount_short\n\n    # L3\n    sell_price = 0.75 # sell it for $.75\n    buy_price = 0.25 # buy a goldfish for $.25\n    profit_per_goldfish = sell_price - buy_price\n\n    # L4\n    goldfish_sold = amount_earned / profit_per_goldfish\n\n    # FA\n    answer = goldfish_sold\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "goldfish_sold",
+    "replacement_variable": "amount_earned"
+  },
+  "correct_trace": {
+    "tank_cost": 100,
+    "short_percent_decimal": 0.45,
+    "amount_short": 45.0,
+    "amount_earned": 55.0,
+    "sell_price": 0.75,
+    "buy_price": 0.25,
+    "profit_per_goldfish": 0.5,
+    "goldfish_sold": 110.0,
+    "answer": 110.0
+  },
+  "flawed_trace": {
+    "tank_cost": 100,
+    "short_percent_decimal": 0.45,
+    "amount_short": 45.0,
+    "amount_earned": 55.0,
+    "sell_price": 0.75,
+    "buy_price": 0.25,
+    "profit_per_goldfish": 0.5,
+    "goldfish_sold": 110.0,
+    "answer": 55.0
+  },
+  "correct_value": 110.0,
+  "flawed_value": 55.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "amount_short",
+      "question_inputs": [
+        "tank_cost",
+        "short_percent_decimal"
+      ],
+      "solution_line_template": "He is ${amount_short} short because {tank_cost} x {short_percent_decimal} = <<{tank_cost}*{short_percent_decimal}={amount_short}>>{amount_short}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "amount_earned",
+      "question_inputs": [],
+      "solution_line_template": "He earned ${amount_earned} off goldfish because {tank_cost} - {amount_short} = <<{tank_cost}-{amount_short}={amount_earned}>>{amount_earned}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "profit_per_goldfish",
+      "question_inputs": [
+        "sell_price",
+        "buy_price"
+      ],
+      "solution_line_template": "He makes ${profit_per_goldfish} profit per goldfish because {sell_price} - {buy_price} = <<{sell_price}-{buy_price}={profit_per_goldfish}>>{profit_per_goldfish}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "goldfish_sold",
+      "question_inputs": [],
+      "solution_line_template": "He sold {goldfish_sold} goldfish that week because {amount_earned} / {profit_per_goldfish} = <<{amount_earned}/{profit_per_goldfish}={goldfish_sold}>>{goldfish_sold}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He is $45 short because 100 x 0.45 = <<100*0.45=45>>45",
+    "L2": "He earned $55 off goldfish because 100 - 45 = <<100-45=55>>55",
+    "FA": "#### 55"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'amount_earned' (value: 55.0) was reported instead of 'goldfish_sold' (value: 110.0).",
+  "repro_seed": -7599048831119141477,
+  "model_name": "google_gemini-2.5-flash"
+}

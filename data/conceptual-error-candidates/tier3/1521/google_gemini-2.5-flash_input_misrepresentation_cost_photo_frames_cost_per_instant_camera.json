@@ -1,0 +1,103 @@
+{
+  "index": 1521,
+  "original_solution_mapping": {
+    "FA": "#### 551",
+    "L1": "Two instant camera cost 2 x $110 = $<<2*110=220>>220.",
+    "L2": "Three digital photo frames cost 3 x $120 = $<<3*120=360>>360.",
+    "L3": "Thus, the total amount is $220 + $360 = $<<220+360=580>>580.",
+    "L4": "So, Selena gets a discount of 5/100 x 580 = $<<5/100*580=29>>29.",
+    "L5": "Therefore, Selena pays a total of $580 - $29 = $<<580-29=551>>551."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1521.\n    Returns: the total amount Selene pays.\n    \"\"\"\n    # L1\n    num_instant_cameras = 2 # two instant cameras\n    cost_per_instant_camera = 110 # at $110\n    cost_instant_cameras = num_instant_cameras * cost_per_instant_camera\n\n    # L2\n    num_photo_frames = 3 # three digital photo frames\n    cost_per_photo_frame = 120 # at $120 each\n    cost_photo_frames = num_photo_frames * cost_per_photo_frame\n\n    # L3\n    subtotal_cost = cost_instant_cameras + cost_photo_frames\n\n    # L4\n    discount_percentage = Fraction(5, 100) # 5% discount\n    discount_amount = discount_percentage * subtotal_cost\n\n    # L5\n    final_cost = subtotal_cost - discount_amount\n\n    # FA\n    answer = final_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "cost_photo_frames",
+    "operand_to_replace": "cost_per_photo_frame",
+    "replacement_variable": "cost_per_instant_camera"
+  },
+  "correct_trace": {
+    "num_instant_cameras": 2,
+    "cost_per_instant_camera": 110,
+    "cost_instant_cameras": 220,
+    "num_photo_frames": 3,
+    "cost_per_photo_frame": 120,
+    "cost_photo_frames": 360,
+    "subtotal_cost": 580,
+    "discount_percentage": "1/20",
+    "discount_amount": "29",
+    "final_cost": "551",
+    "answer": "551"
+  },
+  "flawed_trace": {
+    "num_instant_cameras": 2,
+    "cost_per_instant_camera": 110,
+    "cost_instant_cameras": 220,
+    "num_photo_frames": 3,
+    "cost_per_photo_frame": 120,
+    "cost_photo_frames": 330,
+    "subtotal_cost": 550,
+    "discount_percentage": "1/20",
+    "discount_amount": "55/2",
+    "final_cost": "1045/2",
+    "answer": "1045/2"
+  },
+  "correct_value": 360,
+  "flawed_value": 330,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_instant_cameras",
+      "question_inputs": [
+        "num_instant_cameras",
+        "cost_per_instant_camera"
+      ],
+      "solution_line_template": "Two instant camera cost {num_instant_cameras} x ${cost_per_instant_camera} = $<<{num_instant_cameras}*{cost_per_instant_camera}={cost_instant_cameras}>>{cost_instant_cameras}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cost_photo_frames",
+      "question_inputs": [
+        "num_photo_frames",
+        "cost_per_photo_frame"
+      ],
+      "solution_line_template": "Three digital photo frames cost {num_photo_frames} x ${cost_per_photo_frame} = $<<{num_photo_frames}*{cost_per_photo_frame}={cost_photo_frames}>>{cost_photo_frames}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "subtotal_cost",
+      "question_inputs": [],
+      "solution_line_template": "Thus, the total amount is ${cost_instant_cameras} + ${cost_photo_frames} = $<<{cost_instant_cameras}+{cost_photo_frames}={subtotal_cost}>>{subtotal_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "discount_amount",
+      "question_inputs": [
+        "discount_percentage"
+      ],
+      "solution_line_template": "So, Selena gets a discount of {discount_percentage} x {subtotal_cost} = $<<{discount_percentage}*{subtotal_cost}={discount_amount}>>{discount_amount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "final_cost",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, Selena pays a total of ${subtotal_cost} - ${discount_amount} = $<<{subtotal_cost}-{discount_amount}={final_cost}>>{final_cost}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Two instant camera cost 2 x $110 = $<<2*110=220>>220.",
+    "L2": "Three digital photo frames cost 3 x $110 = $<<3*110=330>>330.",
+    "L3": "Thus, the total amount is $220 + $330 = $<<220+330=550>>550.",
+    "L4": "So, Selena gets a discount of 5/100 x 550 = $<<5/100*550=55/2>>55/2.",
+    "L5": "Therefore, Selena pays a total of $550 - $55/2 = $<<550-55/2=1045/2>>1045/2.",
+    "FA": "#### 1045/2"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'cost_per_instant_camera' (110) was used instead of 'cost_per_photo_frame' (120).",
+  "repro_seed": 5846516208882704096,
+  "model_name": "google_gemini-2.5-flash"
+}

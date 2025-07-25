@@ -1,0 +1,70 @@
+{
+  "index": 1457,
+  "original_solution_mapping": {
+    "FA": "#### 44",
+    "L1": "There were 20 x 0.20 = <<20*0.20=4>>4 sacks of rice increase after the first harvest.",
+    "L2": "So the total sack of rice that you can get on the next harvest 20 + 4 = <<20+4=24>>24.",
+    "L3": "Therefore the total number of sacks of rice you will get on the first and second harvest is 20 + 24 = <<20+24=44>>44."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1457.\n    Returns: the total number of sacks of rice after the first and second harvest.\n    \"\"\"\n    # L1\n    initial_yield = 20 # 20 sacks of rice\n    yield_increase_percent = 0.20 # twenty percent\n    increase_first_harvest = initial_yield * yield_increase_percent\n\n    # L2\n    yield_second_harvest = initial_yield + increase_first_harvest\n\n    # L3\n    total_sacks = initial_yield + yield_second_harvest\n\n    # FA\n    answer = total_sacks\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "yield_second_harvest",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x30e42a090>"
+  },
+  "correct_trace": {
+    "initial_yield": 20,
+    "yield_increase_percent": 0.2,
+    "increase_first_harvest": 4.0,
+    "yield_second_harvest": 24.0,
+    "total_sacks": 44.0,
+    "answer": 44.0
+  },
+  "flawed_trace": {
+    "initial_yield": 20,
+    "yield_increase_percent": 0.2,
+    "increase_first_harvest": 4.0,
+    "yield_second_harvest": 16.0,
+    "total_sacks": 36.0,
+    "answer": 36.0
+  },
+  "correct_value": 24.0,
+  "flawed_value": 16.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "increase_first_harvest",
+      "question_inputs": [
+        "initial_yield",
+        "yield_increase_percent"
+      ],
+      "solution_line_template": "There were {initial_yield} x {yield_increase_percent} = <<{initial_yield}*{yield_increase_percent}={increase_first_harvest}>>{increase_first_harvest} sacks of rice increase after the first harvest."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "yield_second_harvest",
+      "question_inputs": [],
+      "solution_line_template": "So the total sack of rice that you can get on the next harvest {initial_yield} + {increase_first_harvest} = <<{initial_yield}+{increase_first_harvest}={yield_second_harvest}>>{yield_second_harvest}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_sacks",
+      "question_inputs": [],
+      "solution_line_template": "Therefore the total number of sacks of rice you will get on the first and second harvest is {initial_yield} + {yield_second_harvest} = <<{initial_yield}+{yield_second_harvest}={total_sacks}>>{total_sacks}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There were 20 x 0.2 = <<20*0.2=4>>4 sacks of rice increase after the first harvest.",
+    "L2": "So the total sack of rice that you can get on the next harvest 20 + 4 = <<20+4=16>>16.",
+    "L3": "Therefore the total number of sacks of rice you will get on the first and second harvest is 20 + 16 = <<20+16=36>>36.",
+    "FA": "#### 36"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": -8380081448570768729,
+  "model_name": "google_gemini-2.5-flash"
+}

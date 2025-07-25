@@ -1,0 +1,85 @@
+{
+  "index": 4034,
+  "original_solution_mapping": {
+    "FA": "#### 24",
+    "L1": "The number of students who scored 100% is 2/5*80 = <<2/5*80=32>>32",
+    "L2": "Out of the 80 students, 80-32 = <<80-32=48>>48 did not score 100%.",
+    "L3": "If 50% of the students who did not score 100% managed to score over 80%, then 50/100*48 =<<50/100*48=24>>24 students scored over 80%",
+    "L4": "The number of students who failed is 48-24 = <<48-24=24>>24"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4034.\n    Returns: the number of students who failed the exam.\n    \"\"\"\n    # L1\n    total_students = 80 # 80 students who took the biology exam\n    fraction_100_percent = Fraction(2, 5) # only 2/5 of them managed to score 100%\n    students_100_percent = fraction_100_percent * total_students\n\n    # L2\n    students_not_100_percent = total_students - students_100_percent\n\n    # L3\n    percentage_over_80 = Fraction(50, 100) # 50 percent of the remaining students\n    students_over_80_percent = percentage_over_80 * students_not_100_percent\n\n    # L4\n    failed_students = students_not_100_percent - students_over_80_percent\n\n    # FA\n    answer = failed_students\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "students_not_100_percent",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30de8d290>"
+  },
+  "correct_trace": {
+    "total_students": 80,
+    "fraction_100_percent": "2/5",
+    "students_100_percent": "32",
+    "students_not_100_percent": "48",
+    "percentage_over_80": "1/2",
+    "students_over_80_percent": "24",
+    "failed_students": "24",
+    "answer": "24"
+  },
+  "flawed_trace": {
+    "total_students": 80,
+    "fraction_100_percent": "2/5",
+    "students_100_percent": "32",
+    "students_not_100_percent": "112",
+    "percentage_over_80": "1/2",
+    "students_over_80_percent": "56",
+    "failed_students": "56",
+    "answer": "56"
+  },
+  "correct_value": "48",
+  "flawed_value": "112",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "students_100_percent",
+      "question_inputs": [
+        "total_students",
+        "fraction_100_percent"
+      ],
+      "solution_line_template": "The number of students who scored 100% is {fraction_100_percent}*{total_students} = <<{fraction_100_percent}*{total_students}={students_100_percent}>>{students_100_percent}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "students_not_100_percent",
+      "question_inputs": [],
+      "solution_line_template": "Out of the {total_students} students, {total_students}-{students_100_percent} = <<{total_students}-{students_100_percent}={students_not_100_percent}>>{students_not_100_percent} did not score 100%."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "students_over_80_percent",
+      "question_inputs": [
+        "percentage_over_80"
+      ],
+      "solution_line_template": "If {percentage_over_80} of the students who did not score 100% managed to score over 80%, then {percentage_over_80}*{students_not_100_percent} =<<{percentage_over_80}*{students_not_100_percent}={students_over_80_percent}>>{students_over_80_percent} students scored over 80%"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "failed_students",
+      "question_inputs": [],
+      "solution_line_template": "The number of students who failed is {students_not_100_percent}-{students_over_80_percent} = <<{students_not_100_percent}-{students_over_80_percent}={failed_students}>>{failed_students}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The number of students who scored 100% is 2/5*80 = <<2/5*80=32>>32",
+    "L2": "Out of the 80 students, 80-32 = <<80-32=112>>112 did not score 100%.",
+    "L3": "If 50/100 of the students who did not score 100% managed to score over 80%, then 50/100*112 =<<50/100*112=56>>56 students scored over 80%",
+    "L4": "The number of students who failed is 112-56 = <<112-56=56>>56",
+    "FA": "#### 56"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 3642925505954940898,
+  "model_name": "google_gemini-2.5-flash"
+}

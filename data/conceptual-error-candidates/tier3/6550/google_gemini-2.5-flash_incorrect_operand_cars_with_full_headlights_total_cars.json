@@ -1,0 +1,74 @@
+{
+  "index": 6550,
+  "original_solution_mapping": {
+    "FA": "#### 216",
+    "L1": "In the car dealership with 600 cars, 60% of the cars are hybrids, meaning there are 60/100*600 = <<60/100*600=360>>360 hybrid cars.",
+    "L2": "Out of the 360 hybrid cars, 40% contain only one headlight. a total of 40/100*360 = <<40/100*360=144>>144 cars.",
+    "L3": "The total number of hybrid cars with full headlights is 360-144=<<360-144=216>>216"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6550.\n    Returns: the number of hybrid cars with full headlights.\n    \"\"\"\n    # L1\n    total_cars = 600 # 600 cars\n    hybrid_percentage = Fraction(60, 100) # 60% of the cars are hybrids\n    hybrid_cars = hybrid_percentage * total_cars\n\n    # L2\n    one_headlight_percentage = Fraction(40, 100) # 40% of the hybrids contain only one headlight\n    cars_with_one_headlight = one_headlight_percentage * hybrid_cars\n\n    # L3\n    cars_with_full_headlights = hybrid_cars - cars_with_one_headlight\n\n    # FA\n    answer = cars_with_full_headlights\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "cars_with_full_headlights",
+    "operand_to_replace": "hybrid_cars",
+    "replacement_variable": "total_cars"
+  },
+  "correct_trace": {
+    "total_cars": 600,
+    "hybrid_percentage": "3/5",
+    "hybrid_cars": "360",
+    "one_headlight_percentage": "2/5",
+    "cars_with_one_headlight": "144",
+    "cars_with_full_headlights": "216",
+    "answer": "216"
+  },
+  "flawed_trace": {
+    "total_cars": 600,
+    "hybrid_percentage": "3/5",
+    "hybrid_cars": "360",
+    "one_headlight_percentage": "2/5",
+    "cars_with_one_headlight": "144",
+    "cars_with_full_headlights": "456",
+    "answer": "456"
+  },
+  "correct_value": "216",
+  "flawed_value": "456",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "hybrid_cars",
+      "question_inputs": [
+        "total_cars",
+        "hybrid_percentage"
+      ],
+      "solution_line_template": "In the car dealership with {total_cars} cars, {hybrid_percentage}*{total_cars} = <<{hybrid_percentage}*{total_cars}={hybrid_cars}>>{hybrid_cars} hybrid cars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cars_with_one_headlight",
+      "question_inputs": [
+        "one_headlight_percentage"
+      ],
+      "solution_line_template": "Out of the {hybrid_cars} hybrid cars, {one_headlight_percentage}*{hybrid_cars} = <<{one_headlight_percentage}*{hybrid_cars}={cars_with_one_headlight}>>{cars_with_one_headlight} cars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cars_with_full_headlights",
+      "question_inputs": [],
+      "solution_line_template": "The total number of hybrid cars with full headlights is {hybrid_cars}-{cars_with_one_headlight}=<<{hybrid_cars}-{cars_with_one_headlight}={cars_with_full_headlights}>>{cars_with_full_headlights}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In the car dealership with 600 cars, 60/100*600 = <<60/100*600=360>>360 hybrid cars.",
+    "L2": "Out of the 360 hybrid cars, 40/100*360 = <<40/100*360=144>>144 cars.",
+    "L3": "The total number of hybrid cars with full headlights is 600-144=<<600-144=456>>456",
+    "FA": "#### 456"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'total_cars' (value: 600) was used instead of 'hybrid_cars' (value: 360).",
+  "repro_seed": 4098530774411520531,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 1884,
+  "original_solution_mapping": {
+    "FA": "#### 280",
+    "L1": "The bag full of sand would weigh 250 * .8 = <<250*.8=200>>200 pounds",
+    "L2": "The filling material would make it 200 * .4 = <<200*.4=80>>80 pounds heavier",
+    "L3": "So it weighs 200 + 80 = <<200+80=280>>280 pounds"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1884.\n    Returns: the total weight of the bag.\n    \"\"\"\n    # L1\n    bag_capacity = 250 # 250 pound sandbag\n    fill_percentage = 0.8 # 80% full\n    sand_weight = bag_capacity * fill_percentage\n\n    # L2\n    heavier_percentage = 0.4 # 40% heavier\n    heavier_amount = sand_weight * heavier_percentage\n\n    # L3\n    total_weight = sand_weight + heavier_amount\n\n    # FA\n    answer = total_weight\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "heavier_amount",
+    "operand_to_replace": "heavier_percentage",
+    "replacement_variable": "bag_capacity"
+  },
+  "correct_trace": {
+    "bag_capacity": 250,
+    "fill_percentage": 0.8,
+    "sand_weight": 200.0,
+    "heavier_percentage": 0.4,
+    "heavier_amount": 80.0,
+    "total_weight": 280.0,
+    "answer": 280.0
+  },
+  "flawed_trace": {
+    "bag_capacity": 250,
+    "fill_percentage": 0.8,
+    "sand_weight": 200.0,
+    "heavier_percentage": 0.4,
+    "heavier_amount": 50000.0,
+    "total_weight": 50200.0,
+    "answer": 50200.0
+  },
+  "correct_value": 80.0,
+  "flawed_value": 50000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "sand_weight",
+      "question_inputs": [
+        "bag_capacity",
+        "fill_percentage"
+      ],
+      "solution_line_template": "The bag full of sand would weigh {bag_capacity} * {fill_percentage} = <<{bag_capacity}*{fill_percentage}={sand_weight}>>{sand_weight} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "heavier_amount",
+      "question_inputs": [
+        "heavier_percentage"
+      ],
+      "solution_line_template": "The filling material would make it {sand_weight} * {heavier_percentage} = <<{sand_weight}*{heavier_percentage}={heavier_amount}>>{heavier_amount} pounds heavier"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_weight",
+      "question_inputs": [],
+      "solution_line_template": "So it weighs {sand_weight} + {heavier_amount} = <<{sand_weight}+{heavier_amount}={total_weight}>>{total_weight} pounds"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The bag full of sand would weigh 250 * 0.8 = <<250*0.8=200>>200 pounds",
+    "L2": "The filling material would make it 200 * 250 = <<200*250=50000>>50000 pounds heavier",
+    "L3": "So it weighs 200 + 50000 = <<200+50000=50200>>50200 pounds",
+    "FA": "#### 50200"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'bag_capacity' (250) was used instead of 'heavier_percentage' (0.4).",
+  "repro_seed": -3663179249867577487,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,81 @@
+{
+  "index": 246,
+  "original_solution_mapping": {
+    "FA": "#### 52",
+    "L1": "The total ratio representing the number of children in the family is 5+7 = <<5+7=12>>12",
+    "L2": "From the total ratio of children in the family, 5/12 represent the number of boys, meaning that the number of boys in the family is 5/12*180 = <<5/12*180=75>>75",
+    "L3": "If the boys are given $3900 to share, each boy receives $3900/75 = $<<3900/75=52>>52"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 246.\n    Returns: the amount of money each boy receives.\n    \"\"\"\n    # L1\n    boys_ratio_part = 5 # The ratio of boys to girls in a family is 5:7\n    girls_ratio_part = 7 # The ratio of boys to girls in a family is 5:7\n    total_ratio_parts = boys_ratio_part + girls_ratio_part\n\n    # L2\n    boys_fraction = Fraction(5, 12) # 5/12 represent the number of boys\n    total_children = 180 # The total number of children in the family is 180\n    number_of_boys = boys_fraction * total_children\n\n    # L3\n    total_money_for_boys = 3900 # If the boys are given $3900 to share\n    money_per_boy = total_money_for_boys / number_of_boys\n\n    # FA\n    answer = money_per_boy\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "number_of_boys",
+    "operand_to_replace": "total_children",
+    "replacement_variable": "boys_ratio_part"
+  },
+  "correct_trace": {
+    "boys_ratio_part": 5,
+    "girls_ratio_part": 7,
+    "total_ratio_parts": 12,
+    "boys_fraction": "5/12",
+    "total_children": 180,
+    "number_of_boys": "75",
+    "total_money_for_boys": 3900,
+    "money_per_boy": "52",
+    "answer": "52"
+  },
+  "flawed_trace": {
+    "boys_ratio_part": 5,
+    "girls_ratio_part": 7,
+    "total_ratio_parts": 12,
+    "boys_fraction": "5/12",
+    "total_children": 180,
+    "number_of_boys": "25/12",
+    "total_money_for_boys": 3900,
+    "money_per_boy": "1872",
+    "answer": "1872"
+  },
+  "correct_value": "75",
+  "flawed_value": "25/12",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_ratio_parts",
+      "question_inputs": [
+        "boys_ratio_part",
+        "girls_ratio_part"
+      ],
+      "solution_line_template": "The total ratio representing the number of children in the family is {boys_ratio_part}+{girls_ratio_part} = <<{boys_ratio_part}+{girls_ratio_part}={total_ratio_parts}>>{total_ratio_parts}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "number_of_boys",
+      "question_inputs": [
+        "boys_fraction",
+        "total_children"
+      ],
+      "solution_line_template": "From the total ratio of children in the family, {boys_fraction} represent the number of boys, meaning that the number of boys in the family is {boys_fraction}*{total_children} = <<{boys_fraction}*{total_children}={number_of_boys}>>{number_of_boys}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "money_per_boy",
+      "question_inputs": [
+        "total_money_for_boys"
+      ],
+      "solution_line_template": "If the boys are given ${total_money_for_boys} to share, each boy receives ${total_money_for_boys}/{number_of_boys} = $<<{total_money_for_boys}/{number_of_boys}={money_per_boy}>>{money_per_boy}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total ratio representing the number of children in the family is 5+7 = <<5+7=12>>12",
+    "L2": "From the total ratio of children in the family, 5/12 represent the number of boys, meaning that the number of boys in the family is 5/12*5 = <<5/12*5=25/12>>25/12",
+    "L3": "If the boys are given $3900 to share, each boy receives $3900/25/12 = $<<3900/25/12=1872>>1872",
+    "FA": "#### 1872"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'boys_ratio_part' (5) was used instead of 'total_children' (180).",
+  "repro_seed": -3708061761848813840,
+  "model_name": "google_gemini-2.5-flash"
+}

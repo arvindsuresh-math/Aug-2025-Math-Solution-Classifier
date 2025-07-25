@@ -1,0 +1,107 @@
+{
+  "index": 3140,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "There are 1 + 2 + 2 = <<1+2+2=5>>5 rows that are not reserved for the students.",
+    "L2": "Hence, 10 - 5 = <<10-5=5>>5 rows are reserved for the students.",
+    "L3": "That is equal to 5 x 15 = <<5*15=75>>75 seats.",
+    "L4": "But only 75 x 4/5 = <<75*4/5=60>>60 seats are occupied by the students.",
+    "L5": "Therefore, 75 - 60 = <<75-60=15>>15 seats can be given to the parents."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3140.\n    Returns: the number of vacant seats from the students that can be given to the parents.\n    \"\"\"\n    # L1\n    rows_for_awardees = 1 # The first row is reserved for the awardees\n    rows_for_admin_teachers = 2 # the second and third rows are for the administrators and teachers\n    rows_for_parents = 2 # The last two rows are then reserved for the parents\n    non_student_rows = rows_for_awardees + rows_for_admin_teachers + rows_for_parents\n\n    # L2\n    total_rows = 10 # There are 10 rows\n    student_rows = total_rows - non_student_rows\n\n    # L3\n    chairs_per_row = 15 # 15 chairs set up\n    total_student_seats = student_rows * chairs_per_row\n\n    # L4\n    occupied_fraction = Fraction(4, 5) # 4/5 of the seats reserved for the students are occupied\n    occupied_student_seats = total_student_seats * occupied_fraction\n\n    # L5\n    vacant_student_seats = total_student_seats - occupied_student_seats\n\n    # FA\n    answer = vacant_student_seats\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "vacant_student_seats",
+    "operand_to_replace": "occupied_student_seats",
+    "replacement_variable": "student_rows"
+  },
+  "correct_trace": {
+    "rows_for_awardees": 1,
+    "rows_for_admin_teachers": 2,
+    "rows_for_parents": 2,
+    "non_student_rows": 5,
+    "total_rows": 10,
+    "student_rows": 5,
+    "chairs_per_row": 15,
+    "total_student_seats": 75,
+    "occupied_fraction": "4/5",
+    "occupied_student_seats": "60",
+    "vacant_student_seats": "15",
+    "answer": "15"
+  },
+  "flawed_trace": {
+    "rows_for_awardees": 1,
+    "rows_for_admin_teachers": 2,
+    "rows_for_parents": 2,
+    "non_student_rows": 5,
+    "total_rows": 10,
+    "student_rows": 5,
+    "chairs_per_row": 15,
+    "total_student_seats": 75,
+    "occupied_fraction": "4/5",
+    "occupied_student_seats": "60",
+    "vacant_student_seats": 70,
+    "answer": 70
+  },
+  "correct_value": "15",
+  "flawed_value": 70,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "non_student_rows",
+      "question_inputs": [
+        "rows_for_awardees",
+        "rows_for_admin_teachers",
+        "rows_for_parents"
+      ],
+      "solution_line_template": "There are {rows_for_awardees} + {rows_for_admin_teachers} + {rows_for_parents} = <<{rows_for_awardees}+{rows_for_admin_teachers}+{rows_for_parents}={non_student_rows}>>{non_student_rows} rows that are not reserved for the students."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "student_rows",
+      "question_inputs": [
+        "total_rows"
+      ],
+      "solution_line_template": "Hence, {total_rows} - {non_student_rows} = <<{total_rows}-{non_student_rows}={student_rows}>>{student_rows} rows are reserved for the students."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_student_seats",
+      "question_inputs": [
+        "chairs_per_row"
+      ],
+      "solution_line_template": "That is equal to {student_rows} x {chairs_per_row} = <<{student_rows}*{chairs_per_row}={total_student_seats}>>{total_student_seats} seats."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "occupied_student_seats",
+      "question_inputs": [
+        "occupied_fraction"
+      ],
+      "solution_line_template": "But only {total_student_seats} x {occupied_fraction} = <<{total_student_seats}*{occupied_fraction}={occupied_student_seats}>>{occupied_student_seats} seats are occupied by the students."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "vacant_student_seats",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, {total_student_seats} - {occupied_student_seats} = <<{total_student_seats}-{occupied_student_seats}={vacant_student_seats}>>{vacant_student_seats} seats can be given to the parents."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 1 + 2 + 2 = <<1+2+2=5>>5 rows that are not reserved for the students.",
+    "L2": "Hence, 10 - 5 = <<10-5=5>>5 rows are reserved for the students.",
+    "L3": "That is equal to 5 x 15 = <<5*15=75>>75 seats.",
+    "L4": "But only 75 x 4/5 = <<75*4/5=60>>60 seats are occupied by the students.",
+    "L5": "Therefore, 75 - 5 = <<75-5=70>>70 seats can be given to the parents.",
+    "FA": "#### 70"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operand. The variable 'student_rows' (value: 5) was used instead of 'occupied_student_seats' (value: 60).",
+  "repro_seed": 522322319777721492,
+  "model_name": "google_gemini-2.5-flash"
+}

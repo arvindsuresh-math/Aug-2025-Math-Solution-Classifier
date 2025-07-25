@@ -1,0 +1,98 @@
+{
+  "index": 1031,
+  "original_solution_mapping": {
+    "FA": "#### 480",
+    "L1": "There were 600 - 240 = <<600-240=360>>360 boys at the beginning of the game.",
+    "L2": "So, 360 x 1/4 = <<360*1/4=90>>90 boys left early.",
+    "L3": "And 240 x 1/8 = <<240*1/8=30>>30 girls left early.",
+    "L4": "A total of 90 + 30 = <<90+30=120>>120 people left early.",
+    "L5": "Therefore, 600 - 120 = <<600-120=480>>480 people remained to see the end of the game."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1031.\n    Returns: the number of people who remained to see the end of the game.\n    \"\"\"\n    # L1\n    total_people_start = 600 # There were 600 people in the stadium\n    initial_girls = 240 # 240 girls at the beginning of the game\n    initial_boys = total_people_start - initial_girls\n\n    # L2\n    boys_left_fraction = Fraction(1, 4) # one-fourth of the boys\n    boys_left_early = initial_boys * boys_left_fraction\n\n    # L3\n    girls_left_fraction = Fraction(1, 8) # one-eighth of the girls\n    girls_left_early = initial_girls * girls_left_fraction\n\n    # L4\n    total_people_left_early = boys_left_early + girls_left_early\n\n    # L5\n    people_remained = total_people_start - total_people_left_early\n\n    # FA\n    answer = people_remained\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "people_remained",
+    "replacement_variable": "girls_left_early"
+  },
+  "correct_trace": {
+    "total_people_start": 600,
+    "initial_girls": 240,
+    "initial_boys": 360,
+    "boys_left_fraction": "1/4",
+    "boys_left_early": "90",
+    "girls_left_fraction": "1/8",
+    "girls_left_early": "30",
+    "total_people_left_early": "120",
+    "people_remained": "480",
+    "answer": "480"
+  },
+  "flawed_trace": {
+    "total_people_start": 600,
+    "initial_girls": 240,
+    "initial_boys": 360,
+    "boys_left_fraction": "1/4",
+    "boys_left_early": "90",
+    "girls_left_fraction": "1/8",
+    "girls_left_early": "30",
+    "total_people_left_early": "120",
+    "people_remained": "480",
+    "answer": "30"
+  },
+  "correct_value": "480",
+  "flawed_value": "30",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "initial_boys",
+      "question_inputs": [
+        "total_people_start",
+        "initial_girls"
+      ],
+      "solution_line_template": "There were {total_people_start} - {initial_girls} = <<{total_people_start}-{initial_girls}={initial_boys}>>{initial_boys} boys at the beginning of the game."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "boys_left_early",
+      "question_inputs": [
+        "boys_left_fraction"
+      ],
+      "solution_line_template": "So, {initial_boys} x {boys_left_fraction} = <<{initial_boys}*{boys_left_fraction}={boys_left_early}>>{boys_left_early} boys left early."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "girls_left_early",
+      "question_inputs": [
+        "girls_left_fraction"
+      ],
+      "solution_line_template": "And {initial_girls} x {girls_left_fraction} = <<{initial_girls}*{girls_left_fraction}={girls_left_early}>>{girls_left_early} girls left early."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_people_left_early",
+      "question_inputs": [],
+      "solution_line_template": "A total of {boys_left_early} + {girls_left_early} = <<{boys_left_early}+{girls_left_early}={total_people_left_early}>>{total_people_left_early} people left early."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "people_remained",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, {total_people_start} - {total_people_left_early} = <<{total_people_start}-{total_people_left_early}={people_remained}>>{people_remained} people remained to see the end of the game."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There were 600 - 240 = <<600-240=360>>360 boys at the beginning of the game.",
+    "L2": "So, 360 x 1/4 = <<360*1/4=90>>90 boys left early.",
+    "L3": "And 240 x 1/8 = <<240*1/8=30>>30 girls left early.",
+    "FA": "#### 30"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'girls_left_early' (value: 30) was reported instead of 'people_remained' (value: 480).",
+  "repro_seed": 4065759700979683501,
+  "model_name": "google_gemini-2.5-flash"
+}

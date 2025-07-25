@@ -1,0 +1,85 @@
+{
+  "index": 3304,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "If there are four times as many apples as oranges in a certain fruit basket, with the number of apples being 15, there are 15*4=<<15*4=60>>60 oranges in the basket.",
+    "L2": "If Emiliano eats 2/3 of the oranges in the basket, he would have taken 2/3*60=<<2/3*60=40>>40 oranges from the basket.",
+    "L3": "With the number of apples in the basket being 15, if Emiliano eats 2/3 of them, 2/3*15=<<15*2/3=10>>10 apples would have been eaten by Emiliano.",
+    "L4": "The total number of fruits eaten by Emiliano will total 10+40=<<10+40=50>>50"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3304.\n    Returns: the total number of fruits Emiliano consumed.\n    \"\"\"\n    # L1\n    apples = 15 # 15 apples\n    apple_orange_ratio = 4 # four times as many apples as oranges\n    oranges = apples * apple_orange_ratio\n\n    # L2\n    eaten_fraction = Fraction(2, 3) # 2/3 of each fruit's quantity\n    eaten_oranges = eaten_fraction * oranges\n\n    # L3\n    eaten_apples = eaten_fraction * apples\n\n    # L4\n    total_fruits_eaten = eaten_apples + eaten_oranges\n\n    # FA\n    answer = total_fruits_eaten\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "eaten_apples",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x1720cbf10>"
+  },
+  "correct_trace": {
+    "apples": 15,
+    "apple_orange_ratio": 4,
+    "oranges": 60,
+    "eaten_fraction": "2/3",
+    "eaten_oranges": "40",
+    "eaten_apples": "10",
+    "total_fruits_eaten": "50",
+    "answer": "50"
+  },
+  "flawed_trace": {
+    "apples": 15,
+    "apple_orange_ratio": 4,
+    "oranges": 60,
+    "eaten_fraction": "2/3",
+    "eaten_oranges": "40",
+    "eaten_apples": "2/45",
+    "total_fruits_eaten": "1802/45",
+    "answer": "1802/45"
+  },
+  "correct_value": "10",
+  "flawed_value": "2/45",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "oranges",
+      "question_inputs": [
+        "apples",
+        "apple_orange_ratio"
+      ],
+      "solution_line_template": "If there are {apple_orange_ratio} times as many apples as oranges in a certain fruit basket, with the number of apples being {apples}, there are {apples}*{apple_orange_ratio}=<<{apples}*{apple_orange_ratio}={oranges}>>{oranges} oranges in the basket."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "eaten_oranges",
+      "question_inputs": [
+        "eaten_fraction"
+      ],
+      "solution_line_template": "If Emiliano eats {eaten_fraction} of the oranges in the basket, he would have taken {eaten_fraction}*{oranges}=<<{eaten_fraction}*{oranges}={eaten_oranges}>>{eaten_oranges} oranges from the basket."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "eaten_apples",
+      "question_inputs": [],
+      "solution_line_template": "With the number of apples in the basket being {apples}, if Emiliano eats {eaten_fraction} of them, {eaten_fraction}*{apples}=<<{apples}*{eaten_fraction}={eaten_apples}>>{eaten_apples} apples would have been eaten by Emiliano."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_fruits_eaten",
+      "question_inputs": [],
+      "solution_line_template": "The total number of fruits eaten by Emiliano will total {eaten_apples}+{eaten_oranges}=<<{eaten_apples}+{eaten_oranges}={total_fruits_eaten}>>{total_fruits_eaten}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If there are 4 times as many apples as oranges in a certain fruit basket, with the number of apples being 15, there are 15*4=<<15*4=60>>60 oranges in the basket.",
+    "L2": "If Emiliano eats 2/3 of the oranges in the basket, he would have taken 2/3*60=<<2/3*60=40>>40 oranges from the basket.",
+    "L3": "With the number of apples in the basket being 15, if Emiliano eats 2/3 of them, 2/3*15=<<15*2/3=2/45>>2/45 apples would have been eaten by Emiliano.",
+    "L4": "The total number of fruits eaten by Emiliano will total 2/45+40=<<2/45+40=1802/45>>1802/45",
+    "FA": "#### 1802/45"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 6731722168787961923,
+  "model_name": "google_gemini-2.5-flash"
+}

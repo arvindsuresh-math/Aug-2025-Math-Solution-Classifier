@@ -1,0 +1,78 @@
+{
+  "index": 7089,
+  "original_solution_mapping": {
+    "FA": "#### 832",
+    "L1": "On Monday Zach spent 620*0.5 = <<620*0.5=310>>310 dollars on miles.",
+    "L2": "On Thursday Zach spent 744*0.5 = <<744*0.5=372>>372 dollars on miles.",
+    "L3": "In total, Zach spent 150+310+372 = <<150+310+372=832>>832 dollars."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7089.\n    Returns: the total amount Zach spent on the car rental.\n    \"\"\"\n    # L1\n    miles_monday = 620 # 620 miles on Monday\n    cost_per_mile = 0.5 # 50 cents for each mile\n    cost_monday_miles = miles_monday * cost_per_mile\n\n    # L2\n    miles_thursday = 744 # another 744 miles on Thursday\n    cost_thursday_miles = miles_thursday * cost_per_mile\n\n    # L3\n    base_rental_cost = 150 # $150\n    total_cost = base_rental_cost + cost_monday_miles + cost_thursday_miles\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "cost_thursday_miles",
+    "operand_to_replace": "miles_thursday",
+    "replacement_variable": "miles_monday"
+  },
+  "correct_trace": {
+    "miles_monday": 620,
+    "cost_per_mile": 0.5,
+    "cost_monday_miles": 310.0,
+    "miles_thursday": 744,
+    "cost_thursday_miles": 372.0,
+    "base_rental_cost": 150,
+    "total_cost": 832.0,
+    "answer": 832.0
+  },
+  "flawed_trace": {
+    "miles_monday": 620,
+    "cost_per_mile": 0.5,
+    "cost_monday_miles": 310.0,
+    "miles_thursday": 744,
+    "cost_thursday_miles": 310.0,
+    "base_rental_cost": 150,
+    "total_cost": 770.0,
+    "answer": 770.0
+  },
+  "correct_value": 372.0,
+  "flawed_value": 310.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_monday_miles",
+      "question_inputs": [
+        "miles_monday",
+        "cost_per_mile"
+      ],
+      "solution_line_template": "On Monday Zach spent {miles_monday}*{cost_per_mile} = <<{miles_monday}*{cost_per_mile}={cost_monday_miles}>>{cost_monday_miles} dollars on miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cost_thursday_miles",
+      "question_inputs": [
+        "miles_thursday"
+      ],
+      "solution_line_template": "On Thursday Zach spent {miles_thursday}*{cost_per_mile} = <<{miles_thursday}*{cost_per_mile}={cost_thursday_miles}>>{cost_thursday_miles} dollars on miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "base_rental_cost"
+      ],
+      "solution_line_template": "In total, Zach spent {base_rental_cost}+{cost_monday_miles}+{cost_thursday_miles} = <<{base_rental_cost}+{cost_monday_miles}+{cost_thursday_miles}={total_cost}>>{total_cost} dollars."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Monday Zach spent 620*0.5 = <<620*0.5=310>>310 dollars on miles.",
+    "L2": "On Thursday Zach spent 620*0.5 = <<620*0.5=310>>310 dollars on miles.",
+    "L3": "In total, Zach spent 150+310+310 = <<150+310+310=770>>770 dollars.",
+    "FA": "#### 770"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'miles_monday' (620) was used instead of 'miles_thursday' (744).",
+  "repro_seed": 2672985747608736807,
+  "model_name": "google_gemini-2.5-flash"
+}

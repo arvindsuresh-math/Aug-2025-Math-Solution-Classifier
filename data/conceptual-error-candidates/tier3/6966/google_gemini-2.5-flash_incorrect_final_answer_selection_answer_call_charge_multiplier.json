@@ -1,0 +1,101 @@
+{
+  "index": 6966,
+  "original_solution_mapping": {
+    "FA": "#### 1",
+    "L1": "Darnell would pay 60 / 30 = <<60/30=2>>2 times the $1 texting charge per month.",
+    "L2": "He would pay 60 / 20 = <<60/20=3>>3 times the $3 call charge per month.",
+    "L3": "He would pay 2 * 1 + 3 * 3 = 2 + 9 = $<<2*1+3*3=11>>11 per month on the alternative plan.",
+    "L4": "Thus, Darnell would pay 12 - 11 = $<<12-11=1>>1 less on the alternative plan."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6966.\n    Returns: the amount of dollars Darnell would pay less on the alternative plan.\n    \"\"\"\n    # L1\n    texts_sent = 60 # Darnell sends 60 texts\n    texts_per_dollar = 30 # $1 per 30 texts\n    texting_charge_multiplier = texts_sent / texts_per_dollar\n\n    # L2\n    minutes_spent = 60 # spends 60 minutes on the phone\n    minutes_per_three_dollars = 20 # $3 per 20 minutes of calls\n    call_charge_multiplier = minutes_spent / minutes_per_three_dollars\n\n    # L3\n    cost_per_30_texts = 1 # $1 per 30 texts\n    cost_per_20_minutes = 3 # $3 per 20 minutes of calls\n    texting_cost_subtotal = texting_charge_multiplier * cost_per_30_texts\n    calling_cost_subtotal = call_charge_multiplier * cost_per_20_minutes\n    alternative_plan_cost = texting_cost_subtotal + calling_cost_subtotal\n\n    # L4\n    current_plan_cost = 12 # $12 for unlimited texting and calling\n    savings = current_plan_cost - alternative_plan_cost\n\n    # FA\n    answer = savings\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "savings",
+    "replacement_variable": "call_charge_multiplier"
+  },
+  "correct_trace": {
+    "texts_sent": 60,
+    "texts_per_dollar": 30,
+    "texting_charge_multiplier": 2.0,
+    "minutes_spent": 60,
+    "minutes_per_three_dollars": 20,
+    "call_charge_multiplier": 3.0,
+    "cost_per_30_texts": 1,
+    "cost_per_20_minutes": 3,
+    "texting_cost_subtotal": 2.0,
+    "calling_cost_subtotal": 9.0,
+    "alternative_plan_cost": 11.0,
+    "current_plan_cost": 12,
+    "savings": 1.0,
+    "answer": 1.0
+  },
+  "flawed_trace": {
+    "texts_sent": 60,
+    "texts_per_dollar": 30,
+    "texting_charge_multiplier": 2.0,
+    "minutes_spent": 60,
+    "minutes_per_three_dollars": 20,
+    "call_charge_multiplier": 3.0,
+    "cost_per_30_texts": 1,
+    "cost_per_20_minutes": 3,
+    "texting_cost_subtotal": 2.0,
+    "calling_cost_subtotal": 9.0,
+    "alternative_plan_cost": 11.0,
+    "current_plan_cost": 12,
+    "savings": 1.0,
+    "answer": 3.0
+  },
+  "correct_value": 1.0,
+  "flawed_value": 3.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "texting_charge_multiplier",
+      "question_inputs": [
+        "texts_sent",
+        "texts_per_dollar"
+      ],
+      "solution_line_template": "Darnell would pay {texts_sent} / {texts_per_dollar} = <<{texts_sent}/{texts_per_dollar}={texting_charge_multiplier}>>{texting_charge_multiplier} times the $1 texting charge per month."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "call_charge_multiplier",
+      "question_inputs": [
+        "minutes_spent",
+        "minutes_per_three_dollars"
+      ],
+      "solution_line_template": "He would pay {minutes_spent} / {minutes_per_three_dollars} = <<{minutes_spent}/{minutes_per_three_dollars}={call_charge_multiplier}>>{call_charge_multiplier} times the $3 call charge per month."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "alternative_plan_cost",
+      "question_inputs": [
+        "cost_per_30_texts",
+        "cost_per_20_minutes"
+      ],
+      "solution_line_template": "He would pay {texting_charge_multiplier} * {cost_per_30_texts} + {call_charge_multiplier} * {cost_per_20_minutes} = {texting_cost_subtotal} + {calling_cost_subtotal} = $<<{texting_charge_multiplier}*{cost_per_30_texts}+{call_charge_multiplier}*{cost_per_20_minutes}={alternative_plan_cost}>>{alternative_plan_cost} per month on the alternative plan."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "savings",
+      "question_inputs": [
+        "current_plan_cost"
+      ],
+      "solution_line_template": "Thus, Darnell would pay {current_plan_cost} - {alternative_plan_cost} = $<<{current_plan_cost}-{alternative_plan_cost}={savings}>>{savings} less on the alternative plan."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Darnell would pay 60 / 30 = <<60/30=2>>2 times the $1 texting charge per month.",
+    "L2": "He would pay 60 / 20 = <<60/20=3>>3 times the $3 call charge per month.",
+    "FA": "#### 3"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'call_charge_multiplier' (value: 3.0) was reported instead of 'savings' (value: 1.0).",
+  "repro_seed": 8174743767150970857,
+  "model_name": "google_gemini-2.5-flash"
+}
