@@ -533,3 +533,20 @@ The UI should have four main components:
 * **Conclusion:** "This proof-of-concept demonstrates the feasibility of building lightweight, specialized AI tools for complex, real-world verification tasks."
 
 This product-focused approach, centered on a polished and well-rehearsed demo, is the most effective way to impress an industry-focused audience and demonstrate the practical value of your rigorous backend work.
+
+
+
+To-do after July 25 meeting:
+
+- Finish up individual conceptual error validation tasks
+- Separate notebooks with SFT dataset assembly for:
+    * Level 1
+    * Level 2
+    * Level max (with correct/conceptual/computational)
+    * Level ultramax (with final_answer_verdict: correct/incorrect, and reasoning_verdict: correct/conceptual/computational/skipped_step)
+- Separate notebooks with SFT dataset assembly for:
+    * Level max-alternate (product-oriented version).
+- Levels 1 and 2
+- Level max
+- Level ultramax
+- Level max-alternate
