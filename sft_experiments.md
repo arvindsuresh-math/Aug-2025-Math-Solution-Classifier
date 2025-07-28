@@ -246,4 +246,47 @@ All combinations of:
 - Total compute time: ~11-17 hours across 5 researchers
 - Average per researcher: ~13-14 experiments (~2.5-3.5 hours)
 
-# Experiments for product-oriented project
+
+### sft experiment assignments
+
+4 experiments per person (or how much ever is possible)
+
+1. Ali: 
+- Classification: ternary
+- Dataset: 4N, 3N
+- Explanation: no_explain
+- ELN: no_eln
+- Format: nl
+- Model: qwen, phi4
+
+2. Mauro:
+- Classification: binary
+- Dataset: 4N, 3N
+- Explanation: no_explain
+- ELN: no_eln
+- Format: nl
+- Model: qwen, phi4
+
+3. Yewei:
+- Classification: ternary
+- Dataset: 4N, 3N
+- Explanation: no_explain
+- ELN: no_eln
+- Format: nl
+- Model: qwen, phi4
+
+4. Ling:
+- Classification: binary
+- Dataset: 4N, 3N
+- Explanation: no_explain
+- ELN: no_eln
+- Format: nl
+- Model: qwen, phi4
+
+5. Arvind: 
+- Classification: ternary
+- Dataset: 4N, 3N
+- Explanation: explain
+- ELN: no_eln
+- Format: nl
+- Model: qwen, phi4
