@@ -2,20 +2,29 @@
 
 There are two broad categories:
 
-1. Discriminative: The model is treated as a "feature extractor". That is, the labels (correct, flawed, etc.) are encoded as digits (0, 1 etc.), and a custom classifier head is attached to the model. This classifier head accepts the vector representation of the last token in the models response, and maps this to a probability distribution over the classes. Although this classifier head could be any traditional ML soft classifier, for simplicity we use only a linear (i.e. softmax regression) classifier. Thus, during fine-tuning, when the model weights as well as the classifier head's weights are updated, the model learns to extract features to look like vectors living in linearly separable clusters. Note that the loss function for this type of fine-tuning is cross-entropy using the numerically encoded classes (**not** the token-space).
+1. **Discriminative**: The model is treated as a "feature extractor". That is, the labels (correct, flawed, etc.) are encoded as digits (0, 1 etc.), and a custom classifier head is attached to the model. This classifier head accepts the vector representation of the last token in the model's response, and maps this to a probability distribution over the classes. Although this classifier head could be any traditional ML soft classifier, for simplicity we use only a linear (i.e. softmax regression) classifier. Thus, during fine-tuning, when the model weights as well as the classifier head's weights are updated, the model learns to extract features to look like vectors living in linearly separable clusters. Note that the loss function for this type of fine-tuning is cross-entropy using the numerically encoded classes (**not** the token-space).
 
-2. Generative: The model is treated as an auto-completer (i.e. chat assistant) and asked to respond to the prompt in a structured format (typically a json object). This version is simpler in that there is no need for a custom classifier head to be attached, but on the other hand, it is also more sophisticated because the loss function used is the usual "cross-entropy for the next token" loss function on the token-space. Since the models we are testing out (`phi-4-mini-instruct`, `qwen-3-4B`) are already very capable at mathematical reasoning, the main aims of the fine-tuning are to (a) refine the model's understanding of the distinction between conceptual and computational errors (as we are defining them), and (b) ensure the model learns to structure its output in the desired format. 
+2. **Generative**: The model is treated as an auto-completer (i.e. chat assistant) and asked to respond to the prompt in a structured format (typically a JSON object). This version is simpler in that there is no need for a custom classifier head to be attached, but on the other hand, it is also more sophisticated because the loss function used is the usual "cross-entropy for the next token" loss function on the token-space. Since the models we are testing out (`microsoft/Phi-4-mini-instruct`, `Qwen/Qwen3-4B`) are already very capable at mathematical reasoning, the main aims of the fine-tuning are to (a) refine the model's understanding of the distinction between conceptual and computational errors (as we are defining them), and (b) ensure the model learns to structure its output in the desired format.
 
 ## 1. Discriminative experiments
 
-### 1.1 Binary classification
+**Total experiments**: 4 (2 classification types × 2 models)
 
-#### 1.1.1 Sample description
+### 1.1 Experimental factors
+
+Each discriminative experiment is defined by the following choices:
+
+1. **Classification type**: "binary" or "ternary"
+2. **Model**: "Qwen/Qwen3-4B" or "microsoft/Phi-4-mini-instruct"
+
+### 1.2 Binary classification
+
+#### 1.2.1 Sample description
 
 - **Input**: Consists of a problem along with a solution (correct or flawed), and a minimal prompt directing the model to determine whether the solution is correct or flawed.
 - **Labels**: 0 (correct) and 1 (flawed)
 
-#### 1.1.2 Dataset description
+#### 1.2.2 Dataset description
 
 Let $A$ denote the subset of GSM8K problems for which there exists a sample with conceptual error (either manually generated, or programmatically generated and then validated by a human), and let $N = |A|$. Then, we choose a subset $B$ of GSM8K problems with these properties:
 
@@ -32,14 +41,14 @@ Then, the dataset will contain a total of $4N$ samples, with $2N$ distinct probl
 
 In this way, the dataset will be perfectly balanced between the two classes 0 and 1.
 
-### 1.2 Ternary classification
+### 1.3 Ternary classification
 
-#### 1.2.1 Sample description
+#### 1.3.1 Sample description
 
 - **Input**: Consists of a problem along with a solution (correct or flawed), and a minimal prompt directing the model to determine whether the solution is correct, or has a computational error, or has a conceptual error.
 - **Labels**: 0 (correct), 1 (conceptual error), and 2 (computational error)
 
-#### 1.2.2 Dataset description
+#### 1.3.2 Dataset description
 
 Let $A$ denote the subset of GSM8K problems for which there exists a sample with conceptual error (either manually generated, or programmatically generated and then validated by a human), and let $N = |A|$.
 
@@ -49,174 +58,192 @@ Then, the dataset will contain a total of $3N$ samples, with $3$ versions of eac
 2. $N$ original, correct samples (drawn from GSM8K).
 3. $N$ computational error samples (priority is given first to any manually-generated samples, and then, to the programmatically-generated samples).
 
-Note: A small portion of the problems in $A$ may not have an associated computational-error-sample, in which case they will be pruned out.
+Note: A small portion of the problems in $A$ may not have an associated computational-error sample, in which case they will be pruned out.
 
-In this way, the dataset will be prefectly balanced between the classes 0, 1, and 2.
+In this way, the dataset will be perfectly balanced between the classes 0, 1, and 2.
 
 ## 2. Generative experiments
 
-### 2.1 Binary classification
+**Total experiments**: 64 (2 classification types × 2 dataset strategies × 2 explanation choices × 2 ELN choices × 2 formatting choices × 2 models)
 
-#### 2.1.1 Sample description
+### 2.1 Experimental factors
 
-- **Input**: Consists of a problem along with a solution (correct or flawed), and a minimal prompt directing the model to determine whether the solution is correct or flawed.
-- **Labels**: "correct" and "flawed"
+Each generative experiment is defined by the following choices:
 
-#### 2.1.2 Dataset description
+1. **Classification type**: "binary" or "ternary"
+2. **Dataset assembly strategy**: "4N" or "3N"
+3. **Explanation field**: "include" or "exclude"
+4. **Erroneous line number**: "include" or "exclude"
+5. **Solution formatting**: "nl" (natural language) or "dict" (line-numbered dictionary)
+6. **Model**: "Qwen/Qwen3-4B" or "microsoft/Phi-4-mini-instruct"
 
-The dataset will be identical to the dataset in 1.1.2; the only changes will be in the formatting of the labels (switching from a discriminative setup to a generative setup).
+### 2.2 Dataset assembly strategies
 
-### 2.2 Ternary classification
+#### 2.2.1 4N strategy
+Uses the same dataset construction as discriminative binary classification (section 1.2.2): $4N$ samples across $2N$ distinct problems from sets $A$ and $B$.
 
-#### 2.2.1 Sample description
+#### 2.2.2 3N strategy
+Uses the same dataset construction as discriminative ternary classification (section 1.3.2): $3N$ samples across $N$ distinct problems from set $A$ only.
 
-- **Input**: Consists of a problem along with a solution (correct or flawed), and a minimal prompt directing the model to determine whether the solution is correct, has a conceptual error, or has a computational error.
-- **Labels**: "correct", "computational_error", and "conceptual_error"
+### 2.3 Input formatting
 
-#### 2.2.2 Dataset description
+#### 2.3.1 Natural language (nl)
+The solution is presented as continuous text, exactly as it appears in the original GSM8K dataset or generated error samples.
 
-The dataset will be identical to the dataset in 1.2.2; the only changes will be in the formatting of the labels (switching from a discriminative setup to a generative setup).
-
-### 2.3 Final answer + reasoning classification
-
-#### 2.3.1 Sample description
-
-- **Input**:  Consists of a problem along with a solution (correct or flawed), along with instructions for the model to do the following:
-  - Classify the final answer as "correct" or "incorrect"
-  - If the final answer is "correct", classify the solution as "complete" (if all relevant reasoning is included) or "missing_step" (if some intermediate (correct) value is used in the reaosning, but the value is never explicitly computed in the solution).
-  - If the final answer is "incorrect", classify the solution as "conceptual_error" or "computational_error"
-  - Provide the output in the JSON-structured format described below.
-- **Label**: Should follow this format:
-
-```text
-    ```json
-    {
-        "final_answer_verdict": "correct" | "incorrect"
-        "reasoning_verdict": "complete" or "missing_step" if final answer is correct | "computational_error" or "conceptual_error" if final answer is incorrect
-    }
-    ```
+#### 2.3.2 Dictionary (dict)
+The solution is formatted as a dictionary mapping line identifiers to solution lines:
+```json
+{
+    "L1": "First line of solution",
+    "L2": "Second line of solution", 
+    "FA": "Final answer line"
+}
 ```
 
-#### 2.3.2 Dataset description
+### 2.4 Output specifications
 
-Let $A$ denote the subset of GSM8K problems for which there exists a sample with conceptual error (either manually generated, or programmatically generated and then validated by a human), and let $N = |A|$. Then, we take four versions of each problem in $A$, corresponding to the four possible combinations of "final_answer_verdict" and "reasoning_verdict", resulting in a dataset with $4N$ samples. Thus, there will be $N$ samples of each of the following types:
+#### 2.4.1 Binary classification outputs
 
-- "correct" and "complete"
-- "correct" and "missing_step"
-- "incorrect" and "computational_error"
-- "incorrect" and "conceptual_error"
-
-Note: To create the samples with missing steps, we may restrict ourselves to samples with at least 3 solution lines, which would result in some of the problems in $A$ getting pruned out.
-
-### 2.4 Binary classification with erroneous line
-
-#### 2.4.1 Sample description
-
-- **Input**:  Consists of a problem along with a solution (correct or flawed) formatted as a dict mapping the line number ("L1", "L2" etc., with "FA" for the final answer) to the corresponding solution line. The input will also prompt the model to classify the solutions as "correct" or "flawed", identify the (first) line in which it detects an error, and provide its output in the JSON-structured format described below.
-- **Label**: Should follow this format:
-
-```text
-    ```json
-    {
-        "verdict": "correct" | "flawed",
-        "erroneous_line_number": "L1", "FA" etc. if "verdict" is "flawed" | "NA" if "verdict" is "correct"
-    }
-    ```
+**Verdict only:**
+```json
+{
+    "verdict": "correct" | "flawed"
+}
 ```
 
-#### 2.4.2 Dataset description
-
-Identical to 2.1.2, with the only change being that the assistant content (i.e. the "label") will be put into the desired JSON format and include the erroneous line number.
-
-Note: a small number of samples (for problems in $A$ or $B$) may be missing the erroneous line number (especially the manually generated samples). These problems will be pruned out.
-
-### 2.5 Ternary classification with erroneous line
-
-#### 2.5.1 Sample description
-
-- **Input**:  Consists of a problem along with a solution (correct or flawed) formatted as a dict mapping the line number ("L1", "L2" etc., with "FA" for the final answer) to the corresponding solution line. The input will also prompt the model to classify the solutions as "correct", "conceptual_error" or "computational_error", identify the (first) line in which it detects an error, and provide its output in the JSON-structured format described below.
-- **Label**: Should follow this format:
-
-```text
-    ```json
-    {
-        "verdict": "correct" | "conceptual_error" | "computational_error"
-        "erroneous_line_number": "L1", "FA" etc. if "verdict" is "flawed" | "NA" if "verdict" is "correct"
-    }
-    ```
+**Verdict + erroneous line number (dict format):**
+```json
+{
+    "verdict": "correct" | "flawed",
+    "erroneous_line_number": "L1" | "L2" | "FA" | null
+}
 ```
 
-#### 2.5.2 Dataset description
-
-Identical to 2.2.2, with the only change being that the assistant content (i.e. the "label") will be put into the desired JSON format and include the erroneous line number.
-
-Note: a small number of samples (for problems in $A$ or $B$) may be missing the erroneous line number (especially the manually generated samples). These problems will be pruned out.
-
-### 2.6 Final answer + reasoning classification with erroneous line
-
-#### 2.6.1 Sample description
-
-- **Input**:  Consists of a problem along with a solution (correct or flawed) formatted as a dict mapping the line number ("L1", "L2" etc., with "FA" for the final answer) to the corresponding solution line. The input will also instruct the model to do carry out the same classification as in 2.3.1, with an added instruction to also include the erroneous line number.
-- **Label**: Should follow this format:
-
-```text
-    ```json
-    {
-        "final_answer_verdict": "correct" | "incorrect"
-        "reasoning_verdict": "complete" or "missing_step" if final answer is correct | "computational_error" or "conceptual_error" if final answer is incorrect,
-        "erroneous_line_number": "L1", "FA" etc. if "final_answer_verdict" is "incorrect" | "NA" if "verdict" is "correct"
-    }
-    ```
+**Verdict + erroneous line number (nl format):**
+```json
+{
+    "verdict": "correct" | "flawed", 
+    "erroneous_line": "Full text of the erroneous line" | null
+}
 ```
 
-#### 2.6.2 Dataset description
-
-Identical to 2.3.2, with the only change being that the assistant content (i.e. the "label") will be put into the desired JSON format and include the erroneous line number.
-
-Note: a small number of samples (for problems in $A$ or $B$) may be missing the erroneous line number (especially the manually generated samples). These problems will be pruned out.
-
-### 2.7 Binary classification with ELN and explanation
-
-Identical to 2.4, with the only change being the following enhanced label format that also includes an "explanation" field:
-
-```text
-    ```json
-    {
-        "verdict": "correct" | "flawed",
-        "erroneous_line_number": "L1", "FA" etc. if "verdict" is "flawed" | "NA" if "verdict" is "correct",
-        "explanation": "{A single, short line explaining the error.}"
-    }
-    ```
+**Verdict + explanation:**
+```json
+{
+    "verdict": "correct" | "flawed",
+    "explanation": "Brief explanation of the error" | null
+}
 ```
 
-### 2.8 Ternary classification with ELN and explanation
-
-Identical to 2.5, with the only change being the following enhanced label format that also includes an "explanation" field:
-
-```text
-    ```json
-    {
-        "verdict": "correct" | "conceptual_error" | "computational_error"
-        "erroneous_line_number": "L1", "FA" etc. if verdict is not correct | null if verdict is correct
-        "explanation": "{short explanation of error}" if verdict is not correct | null if verdict is correct
-    }
-    ```
+**All fields combined (dict format):**
+```json
+{
+    "verdict": "correct" | "flawed",
+    "erroneous_line_number": "L1" | "L2" | "FA" | null,
+    "explanation": "Brief explanation of the error" | null
+}
 ```
 
-### 2.9 Final answer + reasoning classification with ELN and explanation
-
-Identical to 2.6, with the only change being the following enhanced label format that also includes an "explanation" field:
-
-```text
-    ```json
-    {
-        "final_answer_verdict": "correct" | "incorrect"
-        "reasoning_verdict": "complete" or "missing_step" if final answer is correct | "computational_error" or "conceptual_error" if final answer is incorrect,
-        "erroneous_line_number": "L1", "FA" etc. if final_answer_verdict is incorrect | null if verdict is correct,
-        "explanation": "{short explanation of error}" if reasoning verdict is not "complete" | null if reasoning verdict is "complete"
-    }
-    ```
+**All fields combined (nl format):**
+```json
+{
+    "verdict": "correct" | "flawed",
+    "erroneous_line": "Full text of the erroneous line" | null,
+    "explanation": "Brief explanation of the error" | null
+}
 ```
+
+#### 2.4.2 Ternary classification outputs
+
+**Verdict only:**
+```json
+{
+    "verdict": "correct" | "conceptual_error" | "computational_error"
+}
+```
+
+**Verdict + erroneous line number (dict format):**
+```json
+{
+    "verdict": "correct" | "conceptual_error" | "computational_error",
+    "erroneous_line_number": "L1" | "L2" | "FA" | null
+}
+```
+
+**Verdict + erroneous line number (nl format):**
+```json
+{
+    "verdict": "correct" | "conceptual_error" | "computational_error",
+    "erroneous_line": "Full text of the erroneous line" | null
+}
+```
+
+**Verdict + explanation:**
+```json
+{
+    "verdict": "correct" | "conceptual_error" | "computational_error",
+    "explanation": "Brief explanation of the error" | null
+}
+```
+
+**All fields combined (dict format):**
+```json
+{
+    "verdict": "correct" | "conceptual_error" | "computational_error",
+    "erroneous_line_number": "L1" | "L2" | "FA" | null,
+    "explanation": "Brief explanation of the error" | null
+}
+```
+
+**All fields combined (nl format):**
+```json
+{
+    "verdict": "correct" | "conceptual_error" | "computational_error",
+    "erroneous_line": "Full text of the erroneous line" | null,
+    "explanation": "Brief explanation of the error" | null
+}
+```
+
+### 2.5 Field specifications
+
+- **verdict**: Always required. For binary: "correct" or "flawed". For ternary: "correct", "conceptual_error", or "computational_error".
+- **erroneous_line_number**: Line identifier (e.g., "L1", "FA") when verdict indicates an error, `null` when verdict is "correct". Only used with dict formatting.
+- **erroneous_line**: Full text of the erroneous line when verdict indicates an error, `null` when verdict is "correct". Only used with nl formatting.
+- **explanation**: Brief explanation of the error when verdict indicates an error, `null` when verdict is "correct".
+
+### 2.6 Experiment naming convention
+
+```
+gen_{binary|ternary}_{4N|3N}_{explain|no_explain}_{eln|no_eln}_{dict|nl}_{qwen|phi4}
+```
+
+Examples:
+- `gen_binary_4N_explain_eln_dict_qwen`
+- `gen_ternary_3N_no_explain_no_eln_nl_phi4`
+
+## 3. Summary
+
+### 3.1 Discriminative experiments (4 total)
+- `disc_binary_qwen`
+- `disc_binary_phi4`
+- `disc_ternary_qwen`
+- `disc_ternary_phi4`
+
+### 3.2 Generative experiments (64 total)
+All combinations of:
+- Classification: binary, ternary
+- Dataset: 4N, 3N
+- Explanation: explain, no_explain
+- ELN: eln, no_eln
+- Format: dict, nl
+- Model: qwen, phi4
+
+### 3.3 Total experiments
+**68 experiments** (4 discriminative + 64 generative)
+
+### 3.4 Resource requirements
+- Estimated time per experiment: 10-15 minutes
+- Total compute time: ~11-17 hours across 5 researchers
+- Average per researcher: ~13-14 experiments (~2.5-3.5 hours)
 
 # Experiments for product-oriented project
-
