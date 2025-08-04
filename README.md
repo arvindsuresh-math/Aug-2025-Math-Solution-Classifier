@@ -550,3 +550,12 @@ To-do after July 25 meeting:
 - Level max
 - Level ultramax
 - Level max-alternate
+
+
+Next steps from meeting on Aug 4:
+
+1. Try the discriminative binary classification. (Ali)
+2. Try the discriminative ternary classification. (Ali)
+3. Try the erroneous line detection (discriminative). (Arvind)
+4. Start thinking about what's needed for an app. (Mauro)
+5. Generate baselines with middle-sized models (~14B) and SOTA models (maybe gpt 4.1 and gemini flash-2.5). (Arvind)

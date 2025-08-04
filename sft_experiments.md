@@ -259,6 +259,8 @@ All combinations of:
 - Format: nl
 - Model: qwen, phi4
 
+Done: 3N (left: 4N)
+
 2. Mauro:
 - Classification: binary
 - Dataset: 4N, 3N
@@ -266,6 +268,8 @@ All combinations of:
 - ELN: no_eln
 - Format: nl
 - Model: qwen, phi4
+
+Done: 3N (left: 4N)
 
 3. Yewei:
 - Classification: ternary
@@ -287,6 +291,8 @@ All combinations of:
 - Classification: ternary
 - Dataset: 4N, 3N
 - Explanation: explain
-- ELN: no_eln
+- ELN: eln
 - Format: nl
 - Model: qwen, phi4
+
+Done: all with phi4 (not touched qwen3)
