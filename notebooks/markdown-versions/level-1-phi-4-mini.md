@@ -20,72 +20,7 @@ print("Google Drive mounted successfully.")
 !pip install flash-attn==2.7.4.post1 \
   --extra-index-url https://download.pytorch.org/whl/cu124 \
   --no-build-isolation
-
-# 1.3 Unzip the dataset
-# Assumes the dataset ZIP file is located in your Google Drive's root directory.
-# Adjust the path if it is stored elsewhere.
-!unzip -q -o /content/drive/My\ Drive/level-1-binary.zip -d /content/
-print("Dataset unzipped to '/content/level-1-binary'.")
 ```
-
-    Mounted at /content/drive
-    Google Drive mounted successfully.
-    [2K   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m363.4/363.4 MB[0m [31m4.3 MB/s[0m eta [36m0:00:00[0m
-    [2K   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m13.8/13.8 MB[0m [31m109.5 MB/s[0m eta [36m0:00:00[0m
-    [2K   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m24.6/24.6 MB[0m [31m98.8 MB/s[0m eta [36m0:00:00[0m
-    [2K   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m883.7/883.7 kB[0m [31m58.8 MB/s[0m eta [36m0:00:00[0m
-    [2K   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m664.8/664.8 MB[0m [31m1.3 MB/s[0m eta [36m0:00:00[0m
-    [2K   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m211.5/211.5 MB[0m [31m9.8 MB/s[0m eta [36m0:00:00[0m
-    [2K   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m56.3/56.3 MB[0m [31m37.2 MB/s[0m eta [36m0:00:00[0m
-    [2K   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m127.9/127.9 MB[0m [31m16.6 MB/s[0m eta [36m0:00:00[0m
-    [2K   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m207.5/207.5 MB[0m [31m2.9 MB/s[0m eta [36m0:00:00[0m
-    [2K   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m21.1/21.1 MB[0m [31m30.3 MB/s[0m eta [36m0:00:00[0m
-    [2K   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m376.2/376.2 kB[0m [31m9.2 MB/s[0m eta [36m0:00:00[0m
-    [2K   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m494.8/494.8 kB[0m [31m28.3 MB/s[0m eta [36m0:00:00[0m
-    [2K   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m193.6/193.6 kB[0m [31m22.7 MB/s[0m eta [36m0:00:00[0m
-    [?25h[31mERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
-    gcsfs 2025.3.2 requires fsspec==2025.3.2, but you have fsspec 2025.3.0 which is incompatible.[0m[31m
-    [2K   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m367.1/367.1 kB[0m [31m7.8 MB/s[0m eta [36m0:00:00[0m
-    [2K   [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m72.9/72.9 MB[0m [31m29.8 MB/s[0m eta [36m0:00:00[0m
-    [?25hLooking in indexes: https://pypi.org/simple, https://download.pytorch.org/whl/cu124
-    Collecting flash-attn==2.7.4.post1
-      Downloading flash_attn-2.7.4.post1.tar.gz (6.0 MB)
-    [2K     [90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m6.0/6.0 MB[0m [31m56.4 MB/s[0m eta [36m0:00:00[0m
-    [?25h  Preparing metadata (setup.py) ... [?25l[?25hdone
-    Requirement already satisfied: torch in /usr/local/lib/python3.11/dist-packages (from flash-attn==2.7.4.post1) (2.6.0+cu124)
-    Requirement already satisfied: einops in /usr/local/lib/python3.11/dist-packages (from flash-attn==2.7.4.post1) (0.8.1)
-    Requirement already satisfied: filelock in /usr/local/lib/python3.11/dist-packages (from torch->flash-attn==2.7.4.post1) (3.18.0)
-    Requirement already satisfied: typing-extensions>=4.10.0 in /usr/local/lib/python3.11/dist-packages (from torch->flash-attn==2.7.4.post1) (4.14.1)
-    Requirement already satisfied: networkx in /usr/local/lib/python3.11/dist-packages (from torch->flash-attn==2.7.4.post1) (3.5)
-    Requirement already satisfied: jinja2 in /usr/local/lib/python3.11/dist-packages (from torch->flash-attn==2.7.4.post1) (3.1.6)
-    Requirement already satisfied: fsspec in /usr/local/lib/python3.11/dist-packages (from torch->flash-attn==2.7.4.post1) (2025.3.0)
-    Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.4.127 in /usr/local/lib/python3.11/dist-packages (from torch->flash-attn==2.7.4.post1) (12.4.127)
-    Requirement already satisfied: nvidia-cuda-runtime-cu12==12.4.127 in /usr/local/lib/python3.11/dist-packages (from torch->flash-attn==2.7.4.post1) (12.4.127)
-    Requirement already satisfied: nvidia-cuda-cupti-cu12==12.4.127 in /usr/local/lib/python3.11/dist-packages (from torch->flash-attn==2.7.4.post1) (12.4.127)
-    Requirement already satisfied: nvidia-cudnn-cu12==9.1.0.70 in /usr/local/lib/python3.11/dist-packages (from torch->flash-attn==2.7.4.post1) (9.1.0.70)
-    Requirement already satisfied: nvidia-cublas-cu12==12.4.5.8 in /usr/local/lib/python3.11/dist-packages (from torch->flash-attn==2.7.4.post1) (12.4.5.8)
-    Requirement already satisfied: nvidia-cufft-cu12==11.2.1.3 in /usr/local/lib/python3.11/dist-packages (from torch->flash-attn==2.7.4.post1) (11.2.1.3)
-    Requirement already satisfied: nvidia-curand-cu12==10.3.5.147 in /usr/local/lib/python3.11/dist-packages (from torch->flash-attn==2.7.4.post1) (10.3.5.147)
-    Requirement already satisfied: nvidia-cusolver-cu12==11.6.1.9 in /usr/local/lib/python3.11/dist-packages (from torch->flash-attn==2.7.4.post1) (11.6.1.9)
-    Requirement already satisfied: nvidia-cusparse-cu12==12.3.1.170 in /usr/local/lib/python3.11/dist-packages (from torch->flash-attn==2.7.4.post1) (12.3.1.170)
-    Requirement already satisfied: nvidia-cusparselt-cu12==0.6.2 in /usr/local/lib/python3.11/dist-packages (from torch->flash-attn==2.7.4.post1) (0.6.2)
-    Requirement already satisfied: nvidia-nccl-cu12==2.21.5 in /usr/local/lib/python3.11/dist-packages (from torch->flash-attn==2.7.4.post1) (2.21.5)
-    Requirement already satisfied: nvidia-nvtx-cu12==12.4.127 in /usr/local/lib/python3.11/dist-packages (from torch->flash-attn==2.7.4.post1) (12.4.127)
-    Requirement already satisfied: nvidia-nvjitlink-cu12==12.4.127 in /usr/local/lib/python3.11/dist-packages (from torch->flash-attn==2.7.4.post1) (12.4.127)
-    Requirement already satisfied: triton==3.2.0 in /usr/local/lib/python3.11/dist-packages (from torch->flash-attn==2.7.4.post1) (3.2.0)
-    Requirement already satisfied: sympy==1.13.1 in /usr/local/lib/python3.11/dist-packages (from torch->flash-attn==2.7.4.post1) (1.13.1)
-    Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.11/dist-packages (from sympy==1.13.1->torch->flash-attn==2.7.4.post1) (1.3.0)
-    Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.11/dist-packages (from jinja2->torch->flash-attn==2.7.4.post1) (3.0.2)
-    Building wheels for collected packages: flash-attn
-      Building wheel for flash-attn (setup.py) ... [?25l[?25hdone
-      Created wheel for flash-attn: filename=flash_attn-2.7.4.post1-cp311-cp311-linux_x86_64.whl size=187831595 sha256=58853b28a5a926cae14402bfd8d4d93a45ebf8f9e79533f37ab09d0d77a99c05
-      Stored in directory: /root/.cache/pip/wheels/3d/88/d8/284b89f56af7d5bf366b10d6b8e251ac8a7c7bf3f04203fb4f
-    Successfully built flash-attn
-    Installing collected packages: flash-attn
-    Successfully installed flash-attn-2.7.4.post1
-    Dataset unzipped to '/content/level-1-binary'.
-
-
 
 ```python
 # Cell 2: Project Configuration
@@ -103,7 +38,6 @@ class Config:
     # Number of labels for the classification task
     NUM_LABELS = 2
 ```
-
 
 ```python
 # Cell 3: Data Loading and Preprocessing
