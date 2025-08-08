@@ -61,9 +61,16 @@ def classify_solution(question: str, solution: str):
         return "Model not loaded", 0.0, ""
     
     try:
-        # Combine question and solution for input
-        text_input = f"Question: {question}\nSolution: {solution}"
-        
+    # Combine question and solution for input
+    	text_input = (
+        	"You are a math expert. Read the following question and solution, and decide "
+        	"if the solution is correct, conceptually flawed, or computationally flawed.\n"
+        	f"Question: {question}\nSolution: {solution}"
+    	)
+	
+	# TODO: use same prompt as used for training        
+
+
         # Tokenize input
         inputs = tokenizer(
             text_input,
