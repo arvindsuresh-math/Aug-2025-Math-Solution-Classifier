@@ -22,7 +22,7 @@ This component acts as the first-stage classifier, providing a holistic assessme
 * **Model:** We chose **`microsoft/Phi-4-mini-instruct`**, a capable 4-billion-parameter model.
 * **Architecture:** This component was framed as a binary sequence classification task (`correct` vs. `flawed`). We implemented a custom `GPTSequenceClassifier` class in PyTorch, which consists of:
     1. The `Phi-4` backbone, with LoRA adapters applied to all linear layers for fine-tuning.
-    2. A single `torch.nn.Linear` layer as the classification head, which takes the final hidden state for the last token in the input to the base model and projects it to the two output labels. 
+    2. A single `torch.nn.Linear` layer as the classification head, which takes the final hidden state for the last token in the input to the base model and projects it to the two output labels.
 * **Fine-Tuning Strategy:** The model was fine-tuned for 5 epochs. We included an early stopping callback that monitored validation accuracy, configured to save only the best-performing checkpoint. This prevented overfitting and ensured the final model generalized well.
 * **Training time:** ~1 hour on an NVIDIA A100 GPU (40GB VRAM) via Google Colab
 * **Performance:** The fine-tuned classifier achieved a final accuracy of **92.3%** on the held-out test set. (Note: since we attached a classifier head with randomly initialized weights, it did not make sense to try to establish a baseline evaluation before the fine-tuning, so we ommitted this.)
@@ -37,9 +37,9 @@ The goal of this stage is to train a model that can read a line of a mathematica
 
 * **Model:** We selected **`unsloth/gemma-3-1b-it-unsloth-bnb-4bit`**. A 1-billion-parameter model is sufficiently powerful for this focused transcription task while remaining lightweight and efficient for fine-tuning and inference.
 * **Fine-Tuning Strategy:** The model was fine-tuned using Parameter-Efficient Fine-Tuning (PEFT) with LoRA adapters, accelerated by the Unsloth library. The key objective was to teach the model a strict transcription task. The system prompt explicitly instructs the model to:
-    * Transcribe the equation exactly as it appears, preserving any mathematical errors.
-    * Isolate the equation from all surrounding text and symbols.
-    * Wrap the final output in `<eq>` and `</eq>` tags for easy parsing.
+  * Transcribe the equation exactly as it appears, preserving any mathematical errors.
+  * Isolate the equation from all surrounding text and symbols.
+  * Wrap the final output in `<eq>` and `</eq>` tags for easy parsing.
 * **Training time:** ~5 minutes on an NVIDIA A100 GPU (40GB VRAM) via Google Colab
 * **Performance:** The effectiveness of this fine-tuning was significant. The baseline (zero-shot) model achieved a "rigorous score" (a custom metric checking for mathematical and structural equivalence, more or less equivalent to accuracy) of **0.474**. After one epoch of fine-tuning, the model's score on the same test set increased to **0.948**.
 
