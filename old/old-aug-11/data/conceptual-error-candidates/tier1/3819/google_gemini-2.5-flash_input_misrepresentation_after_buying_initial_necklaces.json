@@ -1,0 +1,78 @@
+{
+  "index": 3819,
+  "original_solution_mapping": {
+    "FA": "#### 37",
+    "L1": "Becky started with 50 necklaces and then got rid of 3, 50 - 3 = <<50-3=47>>47 necklaces.",
+    "L2": "Becky buys 5 new necklaces that week, 47 + 5 = <<47+5=52>>52 necklaces.",
+    "L3": "She gives 17 of her necklaces as gifts to friends, 52 - 15 = <<37=37>>37 necklaces Becky owns now."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3819.\n    Returns: the number of necklaces Becky owns now.\n    \"\"\"\n    # L1\n    initial_necklaces = 50 # 50 necklaces in her jewelry collection\n    broken_necklaces = 3 # 3 of the necklaces have broken beads\n    after_broken = initial_necklaces - broken_necklaces\n\n    # L2\n    new_necklaces = 5 # buys 5 new necklaces\n    after_buying = after_broken + new_necklaces\n\n    # L3\n    given_away = 15 # give 15 of her old necklaces to her friends\n    final_necklaces = after_buying - given_away\n\n    # FA\n    answer = final_necklaces\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "after_buying",
+    "operand_to_replace": "new_necklaces",
+    "replacement_variable": "initial_necklaces"
+  },
+  "correct_trace": {
+    "initial_necklaces": 50,
+    "broken_necklaces": 3,
+    "after_broken": 47,
+    "new_necklaces": 5,
+    "after_buying": 52,
+    "given_away": 15,
+    "final_necklaces": 37,
+    "answer": 37
+  },
+  "flawed_trace": {
+    "initial_necklaces": 50,
+    "broken_necklaces": 3,
+    "after_broken": 47,
+    "new_necklaces": 5,
+    "after_buying": 97,
+    "given_away": 15,
+    "final_necklaces": 82,
+    "answer": 82
+  },
+  "correct_value": 52,
+  "flawed_value": 97,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "after_broken",
+      "question_inputs": [
+        "initial_necklaces",
+        "broken_necklaces"
+      ],
+      "solution_line_template": "Becky started with {initial_necklaces} necklaces and then got rid of {broken_necklaces}, {initial_necklaces} - {broken_necklaces} = <<{initial_necklaces}-{broken_necklaces}={after_broken}>>{after_broken} necklaces."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "after_buying",
+      "question_inputs": [
+        "new_necklaces"
+      ],
+      "solution_line_template": "Becky buys {new_necklaces} new necklaces that week, {after_broken} + {new_necklaces} = <<{after_broken}+{new_necklaces}={after_buying}>>{after_buying} necklaces."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_necklaces",
+      "question_inputs": [
+        "given_away"
+      ],
+      "solution_line_template": "She gives 17 of her necklaces as gifts to friends, {after_buying} - {given_away} = <<{final_necklaces}={final_necklaces}>>{final_necklaces} necklaces Becky owns now."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Becky started with 50 necklaces and then got rid of 3, 50 - 3 = <<50-3=47>>47 necklaces.",
+    "L2": "Becky buys 50 new necklaces that week, 47 + 50 = <<47+50=97>>97 necklaces.",
+    "L3": "She gives 17 of her necklaces as gifts to friends, 97 - 15 = <<82=82>>82 necklaces Becky owns now.",
+    "FA": "#### 82"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'initial_necklaces' (50) was used instead of 'new_necklaces' (5).",
+  "repro_seed": -1846690596933810850,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,66 @@
+{
+  "index": 6668,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "After driving to the store and doctor's office, Winston has 10 - 6 - 2 = <<10-6-2=2>>2 gallons of gas left in the tank",
+    "L2": "To refill the entire tank, Winston needs 12 - 2 = <<12-2=10>>10 gallons of gas"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6668.\n    Returns: the number of gallons of gas Winston needs to refill the entire tank.\n    \"\"\"\n    # L1\n    initial_gas = 10 # 10 gallons of gas\n    gas_to_store = 6 # uses 6 gallons of gas\n    gas_to_doctor = 2 # uses 2 gallons of gas\n    gas_left = initial_gas - gas_to_store - gas_to_doctor\n\n    # L2\n    tank_capacity = 12 # tank can hold up to 12 gallons of gas\n    gas_needed_to_refill = tank_capacity - gas_left\n\n    # FA\n    answer = gas_needed_to_refill\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "gas_left",
+    "operand_to_replace": "gas_to_store",
+    "replacement_variable": "gas_to_doctor"
+  },
+  "correct_trace": {
+    "initial_gas": 10,
+    "gas_to_store": 6,
+    "gas_to_doctor": 2,
+    "gas_left": 2,
+    "tank_capacity": 12,
+    "gas_needed_to_refill": 10,
+    "answer": 10
+  },
+  "flawed_trace": {
+    "initial_gas": 10,
+    "gas_to_store": 6,
+    "gas_to_doctor": 2,
+    "gas_left": 6,
+    "tank_capacity": 12,
+    "gas_needed_to_refill": 6,
+    "answer": 6
+  },
+  "correct_value": 2,
+  "flawed_value": 6,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "gas_left",
+      "question_inputs": [
+        "initial_gas",
+        "gas_to_store",
+        "gas_to_doctor"
+      ],
+      "solution_line_template": "After driving to the store and doctor's office, Winston has {initial_gas} - {gas_to_store} - {gas_to_doctor} = <<{initial_gas}-{gas_to_store}-{gas_to_doctor}={gas_left}>>{gas_left} gallons of gas left in the tank"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "gas_needed_to_refill",
+      "question_inputs": [
+        "tank_capacity"
+      ],
+      "solution_line_template": "To refill the entire tank, Winston needs {tank_capacity} - {gas_left} = <<{tank_capacity}-{gas_left}={gas_needed_to_refill}>>{gas_needed_to_refill} gallons of gas"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After driving to the store and doctor's office, Winston has 10 - 2 - 2 = <<10-2-2=6>>6 gallons of gas left in the tank",
+    "L2": "To refill the entire tank, Winston needs 12 - 6 = <<12-6=6>>6 gallons of gas",
+    "FA": "#### 6"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'gas_to_doctor' (2) was used instead of 'gas_to_store' (6).",
+  "repro_seed": -3197947360730509749,
+  "model_name": "google_gemini-2.5-flash"
+}

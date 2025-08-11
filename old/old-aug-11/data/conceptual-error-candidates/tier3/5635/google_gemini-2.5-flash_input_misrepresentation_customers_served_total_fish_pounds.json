@@ -1,0 +1,78 @@
+{
+  "index": 5635,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "He has 2,000 pounds of fish because 10 x 200 = <<10*200=2000>>2,000",
+    "L2": "He has enough for 80 customers because 2,000 / 25 = <<2000/25=80>>80",
+    "L3": "20 customers go home without any fish because 100 - 80 = <<100-80=20>>20"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5635.\n    Returns: the number of customers who will go home without any fish.\n    \"\"\"\n    # L1\n    num_tuna = 10 # 10 tuna\n    weight_per_tuna = 200 # each of which weighs 200 pounds\n    total_fish_pounds = num_tuna * weight_per_tuna\n\n    # L2\n    pounds_per_customer = 25 # Each customer wants 25 pounds of tuna\n    customers_served = total_fish_pounds / pounds_per_customer\n\n    # L3\n    total_customers = 100 # 100 customers waiting\n    customers_without_fish = total_customers - customers_served\n\n    # FA\n    answer = customers_without_fish\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "customers_served",
+    "operand_to_replace": "pounds_per_customer",
+    "replacement_variable": "total_fish_pounds"
+  },
+  "correct_trace": {
+    "num_tuna": 10,
+    "weight_per_tuna": 200,
+    "total_fish_pounds": 2000,
+    "pounds_per_customer": 25,
+    "customers_served": 80.0,
+    "total_customers": 100,
+    "customers_without_fish": 20.0,
+    "answer": 20.0
+  },
+  "flawed_trace": {
+    "num_tuna": 10,
+    "weight_per_tuna": 200,
+    "total_fish_pounds": 2000,
+    "pounds_per_customer": 25,
+    "customers_served": 1.0,
+    "total_customers": 100,
+    "customers_without_fish": 99.0,
+    "answer": 99.0
+  },
+  "correct_value": 80.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_fish_pounds",
+      "question_inputs": [
+        "num_tuna",
+        "weight_per_tuna"
+      ],
+      "solution_line_template": "He has {total_fish_pounds} pounds of fish because {num_tuna} x {weight_per_tuna} = <<{num_tuna}*{weight_per_tuna}={total_fish_pounds}>>{total_fish_pounds}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "customers_served",
+      "question_inputs": [
+        "pounds_per_customer"
+      ],
+      "solution_line_template": "He has enough for {customers_served} customers because {total_fish_pounds} / {pounds_per_customer} = <<{total_fish_pounds}/{pounds_per_customer}={customers_served}>>{customers_served}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "customers_without_fish",
+      "question_inputs": [
+        "total_customers"
+      ],
+      "solution_line_template": "{customers_without_fish} customers go home without any fish because {total_customers} - {customers_served} = <<{total_customers}-{customers_served}={customers_without_fish}>>{customers_without_fish}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He has 2000 pounds of fish because 10 x 200 = <<10*200=2000>>2000",
+    "L2": "He has enough for 1 customers because 2000 / 2000 = <<2000/2000=1>>1",
+    "L3": "99 customers go home without any fish because 100 - 1 = <<100-1=99>>99",
+    "FA": "#### 99"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_fish_pounds' (2000) was used instead of 'pounds_per_customer' (25).",
+  "repro_seed": -5205928177054669549,
+  "model_name": "google_gemini-2.5-flash"
+}

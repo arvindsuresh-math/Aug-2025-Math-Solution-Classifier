@@ -1,0 +1,78 @@
+{
+  "index": 4919,
+  "original_solution_mapping": {
+    "FA": "#### 124",
+    "L1": "Ked needs 14 / 2 = <<14/2=7>>7 eggs.",
+    "L2": "Mcdonald has to produce 10 + 14 + 7 = <<10+14+7=31>>31 eggs in a week.",
+    "L3": "Therefore, Mcdonald's farm has to produce 31 x 4 = <<31*4=124>>124 eggs in a month."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4919.\n    Returns: the total number of eggs Mcdonald's farm should produce in a month.\n    \"\"\"\n    # L1\n    eggs_needed_by_ben = 14 # Ben needs 14 eggs\n    half_divisor = 2 # half of the number of eggs needed by Ben\n    eggs_needed_by_ked = eggs_needed_by_ben / half_divisor\n\n    # L2\n    eggs_needed_by_saly = 10 # Saly needs 10 eggs\n    total_eggs_per_week = eggs_needed_by_saly + eggs_needed_by_ben + eggs_needed_by_ked\n\n    # L3\n    weeks_in_a_month = 4 # In a month which has 4 weeks\n    total_eggs_per_month = total_eggs_per_week * weeks_in_a_month\n\n    # FA\n    answer = total_eggs_per_month\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "eggs_needed_by_ked",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x177f9b490>"
+  },
+  "correct_trace": {
+    "eggs_needed_by_ben": 14,
+    "half_divisor": 2,
+    "eggs_needed_by_ked": 7.0,
+    "eggs_needed_by_saly": 10,
+    "total_eggs_per_week": 31.0,
+    "weeks_in_a_month": 4,
+    "total_eggs_per_month": 124.0,
+    "answer": 124.0
+  },
+  "flawed_trace": {
+    "eggs_needed_by_ben": 14,
+    "half_divisor": 2,
+    "eggs_needed_by_ked": 12,
+    "eggs_needed_by_saly": 10,
+    "total_eggs_per_week": 36,
+    "weeks_in_a_month": 4,
+    "total_eggs_per_month": 144,
+    "answer": 144
+  },
+  "correct_value": 7.0,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "eggs_needed_by_ked",
+      "question_inputs": [
+        "eggs_needed_by_ben",
+        "half_divisor"
+      ],
+      "solution_line_template": "Ked needs {eggs_needed_by_ben} / {half_divisor} = <<{eggs_needed_by_ben}/{half_divisor}={eggs_needed_by_ked}>>{eggs_needed_by_ked} eggs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_eggs_per_week",
+      "question_inputs": [
+        "eggs_needed_by_saly"
+      ],
+      "solution_line_template": "Mcdonald has to produce {eggs_needed_by_saly} + {eggs_needed_by_ben} + {eggs_needed_by_ked} = <<{eggs_needed_by_saly}+{eggs_needed_by_ben}+{eggs_needed_by_ked}={total_eggs_per_week}>>{total_eggs_per_week} eggs in a week."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_eggs_per_month",
+      "question_inputs": [
+        "weeks_in_a_month"
+      ],
+      "solution_line_template": "Therefore, Mcdonald's farm has to produce {total_eggs_per_week} x {weeks_in_a_month} = <<{total_eggs_per_week}*{weeks_in_a_month}={total_eggs_per_month}>>{total_eggs_per_month} eggs in a month."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Ked needs 14 / 2 = <<14/2=12>>12 eggs.",
+    "L2": "Mcdonald has to produce 10 + 14 + 12 = <<10+14+12=36>>36 eggs in a week.",
+    "L3": "Therefore, Mcdonald's farm has to produce 36 x 4 = <<36*4=144>>144 eggs in a month.",
+    "FA": "#### 144"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": -6716766913325364865,
+  "model_name": "google_gemini-2.5-flash"
+}

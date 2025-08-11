@@ -1,0 +1,78 @@
+{
+  "index": 1483,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "Mia spent a total of $30 per siblings * 3 siblings = $<<30*3=90>>90 on her siblings.",
+    "L2": "She therefore spent $150 total spending - $90 spending on her siblings = $<<150-90=60>>60 on her parents.",
+    "L3": "As each parent received an equal amount, each parent's gift cost $60 total spending on parents / 2 = $<<60/2=30>>30."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1483.\n    Returns: the amount of money Mia spent on each parent's gift.\n    \"\"\"\n    # L1\n    cost_per_sibling = 30 # spent $30 on each of her 3 siblings\n    num_siblings = 3 # 3 siblings\n    spent_on_siblings = cost_per_sibling * num_siblings\n\n    # L2\n    total_spending = 150 # spent a total of $150 on Christmas gifts\n    spent_on_parents = total_spending - spent_on_siblings\n\n    # L3\n    num_parents = 2 # each of her parents received gifts of equal value\n    cost_per_parent_gift = spent_on_parents / num_parents\n\n    # FA\n    answer = cost_per_parent_gift\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "cost_per_parent_gift",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x30d1fe5d0>"
+  },
+  "correct_trace": {
+    "cost_per_sibling": 30,
+    "num_siblings": 3,
+    "spent_on_siblings": 90,
+    "total_spending": 150,
+    "spent_on_parents": 60,
+    "num_parents": 2,
+    "cost_per_parent_gift": 30.0,
+    "answer": 30.0
+  },
+  "flawed_trace": {
+    "cost_per_sibling": 30,
+    "num_siblings": 3,
+    "spent_on_siblings": 90,
+    "total_spending": 150,
+    "spent_on_parents": 60,
+    "num_parents": 2,
+    "cost_per_parent_gift": 120,
+    "answer": 120
+  },
+  "correct_value": 30.0,
+  "flawed_value": 120,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "spent_on_siblings",
+      "question_inputs": [
+        "cost_per_sibling",
+        "num_siblings"
+      ],
+      "solution_line_template": "Mia spent a total of ${cost_per_sibling} per siblings * {num_siblings} siblings = $<<{cost_per_sibling}*{num_siblings}={spent_on_siblings}>>{spent_on_siblings} on her siblings."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "spent_on_parents",
+      "question_inputs": [
+        "total_spending"
+      ],
+      "solution_line_template": "She therefore spent ${total_spending} total spending - ${spent_on_siblings} spending on her siblings = $<<{total_spending}-{spent_on_siblings}={spent_on_parents}>>{spent_on_parents} on her parents."
+    },
+    {
+      "WK_inputs": [
+        "num_parents"
+      ],
+      "line_number": "L3",
+      "output_variable": "cost_per_parent_gift",
+      "question_inputs": [],
+      "solution_line_template": "As each parent received an equal amount, each parent's gift cost ${spent_on_parents} total spending on parents / {num_parents} = $<<{spent_on_parents}/{num_parents}={cost_per_parent_gift}>>{cost_per_parent_gift}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Mia spent a total of $30 per siblings * 3 siblings = $<<30*3=90>>90 on her siblings.",
+    "L2": "She therefore spent $150 total spending - $90 spending on her siblings = $<<150-90=60>>60 on her parents.",
+    "L3": "As each parent received an equal amount, each parent's gift cost $60 total spending on parents / 2 = $<<60/2=120>>120.",
+    "FA": "#### 120"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -1788473470454959622,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,135 @@
+{
+  "index": 198,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "On Monday and Wednesday, Rosie runs 6*1= <<6*1=6>>6 miles.",
+    "L2": "On Tuesday, Rosie runs 6*(30 minutes/60 minutes) = <<6*(30/60)=3>>3 miles.",
+    "L3": "On Thursday, Rosie runs 6*(20 minutes/60 minutes)=<<6*(20/60)=2>>2 miles.",
+    "L4": "So far this week Rosie has run 6+3+6+2=<<6+3+6+2=17>>17 miles.",
+    "L5": "To reach her goal, she must run 20-17=<<20-17=3>>3 miles on Friday.",
+    "L6": "Thus, she should run for 6/3=.5 hour which is 30 minutes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 198.\n    Returns: the number of minutes Rosie should run on Friday to reach her weekly goal.\n    \"\"\"\n    # L1\n    speed_mph = 6 # Rosie runs 6 miles per hour\n    mon_run_hours = 1 # 1 hour on Monday\n    wed_run_hours = 1 # 1 hour on Wednesday\n    mon_miles = speed_mph * mon_run_hours\n    wed_miles = speed_mph * wed_run_hours\n\n    # L2\n    tue_run_minutes = 30 # 30 minutes on Tuesday\n    minutes_per_hour = 60 # WK\n    tue_miles = speed_mph * (tue_run_minutes / minutes_per_hour)\n\n    # L3\n    thu_run_minutes = 20 # 20 minutes on Thursday\n    thu_miles = speed_mph * (thu_run_minutes / minutes_per_hour)\n\n    # L4\n    total_miles_so_far = mon_miles + tue_miles + wed_miles + thu_miles\n\n    # L5\n    weekly_goal = 20 # wants to run 20 miles for the week\n    miles_needed_friday = weekly_goal - total_miles_so_far\n\n    # L6\n    friday_run_hours = miles_needed_friday / speed_mph\n    friday_run_minutes = friday_run_hours * minutes_per_hour\n\n    # FA\n    answer = friday_run_minutes\n    return answer\n",
+  "mutation_details": {
+    "type": "incomplete_calculation",
+    "target_variable": "total_miles_so_far",
+    "operand_to_remove": "wed_miles",
+    "original_operands": [
+      "mon_miles",
+      "thu_miles",
+      "tue_miles",
+      "wed_miles"
+    ]
+  },
+  "correct_trace": {
+    "speed_mph": 6,
+    "mon_run_hours": 1,
+    "wed_run_hours": 1,
+    "mon_miles": 6,
+    "wed_miles": 6,
+    "tue_run_minutes": 30,
+    "minutes_per_hour": 60,
+    "tue_miles": 3.0,
+    "thu_run_minutes": 20,
+    "thu_miles": 2.0,
+    "total_miles_so_far": 17.0,
+    "weekly_goal": 20,
+    "miles_needed_friday": 3.0,
+    "friday_run_hours": 0.5,
+    "friday_run_minutes": 30.0,
+    "answer": 30.0
+  },
+  "flawed_trace": {
+    "speed_mph": 6,
+    "mon_run_hours": 1,
+    "wed_run_hours": 1,
+    "mon_miles": 6,
+    "wed_miles": 6,
+    "tue_run_minutes": 30,
+    "minutes_per_hour": 60,
+    "tue_miles": 3.0,
+    "thu_run_minutes": 20,
+    "thu_miles": 2.0,
+    "total_miles_so_far": 11.0,
+    "weekly_goal": 20,
+    "miles_needed_friday": 9.0,
+    "friday_run_hours": 1.5,
+    "friday_run_minutes": 90.0,
+    "answer": 90.0
+  },
+  "correct_value": 17.0,
+  "flawed_value": 11.0,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "speed_mph",
+        "mon_run_hours",
+        "wed_run_hours"
+      ],
+      "WK_inputs": [],
+      "output_variable": "mon_miles",
+      "solution_line_template": "On Monday and Wednesday, Rosie runs {speed_mph}*{mon_run_hours}= <<{speed_mph}*{mon_run_hours}={mon_miles}>>{mon_miles} miles."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "tue_run_minutes"
+      ],
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "output_variable": "tue_miles",
+      "solution_line_template": "On Tuesday, Rosie runs {speed_mph}*({tue_run_minutes} minutes/{minutes_per_hour} minutes) = <<{speed_mph}*({tue_run_minutes}/{minutes_per_hour})={tue_miles}>>{tue_miles} miles."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "thu_run_minutes"
+      ],
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "output_variable": "thu_miles",
+      "solution_line_template": "On Thursday, Rosie runs {speed_mph}*({thu_run_minutes} minutes/{minutes_per_hour} minutes)=<<{speed_mph}*({thu_run_minutes}/{minutes_per_hour})={thu_miles}>>{thu_miles} miles."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_miles_so_far",
+      "solution_line_template": "So far this week Rosie has run {mon_miles}+{tue_miles}+{wed_miles}+{thu_miles}=<<{mon_miles}+{tue_miles}+{wed_miles}+{thu_miles}={total_miles_so_far}>>{total_miles_so_far} miles."
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [
+        "weekly_goal"
+      ],
+      "WK_inputs": [],
+      "output_variable": "miles_needed_friday",
+      "solution_line_template": "To reach her goal, she must run {weekly_goal}-{total_miles_so_far}=<<{weekly_goal}-{total_miles_so_far}={miles_needed_friday}>>{miles_needed_friday} miles on Friday."
+    },
+    {
+      "line_number": "L6",
+      "question_inputs": [],
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "output_variable": "friday_run_minutes",
+      "solution_line_template": "Thus, she should run for {miles_needed_friday}/{speed_mph}=.5 hour which is {friday_run_minutes} minutes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Monday and Wednesday, Rosie runs 6*1= <<6*1=6>>6 miles.",
+    "L2": "On Tuesday, Rosie runs 6*(30 minutes/60 minutes) = <<6*(30/60)=3>>3 miles.",
+    "L3": "On Thursday, Rosie runs 6*(20 minutes/60 minutes)=<<6*(20/60)=2>>2 miles.",
+    "L4": "So far this week Rosie has run 6+3+2=<<6+3+2=11>>11 miles.",
+    "L5": "To reach her goal, she must run 20-11=<<20-11=9>>9 miles on Friday.",
+    "L6": "Thus, she should run for 9/6=.5 hour which is 90 minutes.",
+    "FA": "#### 90"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incomplete calculation. The term 'wed_miles' (value: 6) was omitted from the operation.",
+  "repro_seed": 3578353612891677918,
+  "model_name": "openai_gpt-4.1"
+}

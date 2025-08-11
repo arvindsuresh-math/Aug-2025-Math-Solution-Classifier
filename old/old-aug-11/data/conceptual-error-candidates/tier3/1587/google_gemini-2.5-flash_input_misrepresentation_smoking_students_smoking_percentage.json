@@ -1,0 +1,74 @@
+{
+  "index": 1587,
+  "original_solution_mapping": {
+    "FA": "#### 36",
+    "L1": "If the class has 300 students, there are 40/100*300 = <<40/100*300=120>>120 smoking students.",
+    "L2": "In a year, 70% of the smoking students are hospitalized from smoking-related complications, a total of 70/100*120 = <<70/100*120=84>>84 students.",
+    "L3": "The number of smoking students who've not been hospitalized from smoking-related complications is 120-84 = <<120-84=36>>36"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1587.\n    Returns: the total number of smoking students who have not been hospitalized.\n    \"\"\"\n    # L1\n    total_students = 300 # class of 300 students\n    smoking_percentage = Fraction(40, 100) # 40% of the class\n    smoking_students = smoking_percentage * total_students\n\n    # L2\n    hospitalized_percentage = Fraction(70, 100) # 70% of the smoking students are hospitalized\n    hospitalized_students = hospitalized_percentage * smoking_students\n\n    # L3\n    non_hospitalized_smoking_students = smoking_students - hospitalized_students\n\n    # FA\n    answer = non_hospitalized_smoking_students\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "smoking_students",
+    "operand_to_replace": "total_students",
+    "replacement_variable": "smoking_percentage"
+  },
+  "correct_trace": {
+    "total_students": 300,
+    "smoking_percentage": "2/5",
+    "smoking_students": "120",
+    "hospitalized_percentage": "7/10",
+    "hospitalized_students": "84",
+    "non_hospitalized_smoking_students": "36",
+    "answer": "36"
+  },
+  "flawed_trace": {
+    "total_students": 300,
+    "smoking_percentage": "2/5",
+    "smoking_students": "4/25",
+    "hospitalized_percentage": "7/10",
+    "hospitalized_students": "14/125",
+    "non_hospitalized_smoking_students": "6/125",
+    "answer": "6/125"
+  },
+  "correct_value": "120",
+  "flawed_value": "4/25",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "smoking_students",
+      "question_inputs": [
+        "total_students",
+        "smoking_percentage"
+      ],
+      "solution_line_template": "If the class has {total_students} students, there are {smoking_percentage}*{total_students} = <<{smoking_percentage}*{total_students}={smoking_students}>>{smoking_students} smoking students."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "hospitalized_students",
+      "question_inputs": [
+        "hospitalized_percentage"
+      ],
+      "solution_line_template": "In a year, {hospitalized_percentage} of the smoking students are hospitalized from smoking-related complications, a total of {hospitalized_percentage}*{smoking_students} = <<{hospitalized_percentage}*{smoking_students}={hospitalized_students}>>{hospitalized_students} students."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "non_hospitalized_smoking_students",
+      "question_inputs": [],
+      "solution_line_template": "The number of smoking students who've not been hospitalized from smoking-related complications is {smoking_students}-{hospitalized_students} = <<{smoking_students}-{hospitalized_students}={non_hospitalized_smoking_students}>>{non_hospitalized_smoking_students}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the class has 40/100 students, there are 40/100*40/100 = <<40/100*40/100=4/25>>4/25 smoking students.",
+    "L2": "In a year, 70/100 of the smoking students are hospitalized from smoking-related complications, a total of 70/100*4/25 = <<70/100*4/25=14/125>>14/125 students.",
+    "L3": "The number of smoking students who've not been hospitalized from smoking-related complications is 4/25-14/125 = <<4/25-14/125=6/125>>6/125",
+    "FA": "#### 6/125"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'smoking_percentage' (40/100) was used instead of 'total_students' (300).",
+  "repro_seed": -4526506757419874627,
+  "model_name": "google_gemini-2.5-flash"
+}

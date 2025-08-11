@@ -1,0 +1,109 @@
+{
+  "index": 3371,
+  "original_solution_mapping": {
+    "FA": "#### 13",
+    "L1": "Let P be the number of pages in the first chapter.",
+    "L2": "The second chapter has P + 3 pages.",
+    "L3": "The third chapter has P + 3 + 3 = P + <<+3+3=6>>6 pages.",
+    "L4": "The fourth chapter has P + 6 + 3 = P + <<+6+3=9>>9 pages.",
+    "L5": "The fifth chapter has P + 9 + 3 = P + <<+9+3=12>>12 pages.",
+    "L6": "The whole book has P + 3 + P + 6 + P + 9 + P + 12 = 5P + 30 = 95 pages.",
+    "L7": "Thus, without the 30 extra pages from additional chapters, 5P = 95 - 30 = 65 pages.",
+    "L8": "Therefore, the first chapter had P = 65 / 5 = <<65/5=13>>13 pages."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3371.\n    Returns: the number of pages in the first chapter.\n    \"\"\"\n    # L3\n    increment_per_chapter = 3 # Each chapter has three pages more than the previous one\n    sum_of_increments_chap3 = increment_per_chapter + increment_per_chapter\n\n    # L4\n    sum_of_increments_chap4 = sum_of_increments_chap3 + increment_per_chapter\n\n    # L5\n    sum_of_increments_chap5 = sum_of_increments_chap4 + increment_per_chapter\n\n    # L6\n    num_chapters = 5 # five-chapter book\n    total_pages_book = 95 # 95 pages\n    total_offset_sum = increment_per_chapter + sum_of_increments_chap3 + sum_of_increments_chap4 + sum_of_increments_chap5\n\n    # L7\n    pages_for_P_terms = total_pages_book - total_offset_sum\n\n    # L8\n    first_chapter_pages = pages_for_P_terms / num_chapters\n\n    # FA\n    answer = first_chapter_pages\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "pages_for_P_terms",
+    "operand_to_replace": "total_offset_sum",
+    "replacement_variable": "num_chapters"
+  },
+  "correct_trace": {
+    "increment_per_chapter": 3,
+    "sum_of_increments_chap3": 6,
+    "sum_of_increments_chap4": 9,
+    "sum_of_increments_chap5": 12,
+    "num_chapters": 5,
+    "total_pages_book": 95,
+    "total_offset_sum": 30,
+    "pages_for_P_terms": 65,
+    "first_chapter_pages": 13.0,
+    "answer": 13.0
+  },
+  "flawed_trace": {
+    "increment_per_chapter": 3,
+    "sum_of_increments_chap3": 6,
+    "sum_of_increments_chap4": 9,
+    "sum_of_increments_chap5": 12,
+    "num_chapters": 5,
+    "total_pages_book": 95,
+    "total_offset_sum": 30,
+    "pages_for_P_terms": 90,
+    "first_chapter_pages": 18.0,
+    "answer": 18.0
+  },
+  "correct_value": 65,
+  "flawed_value": 90,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "sum_of_increments_chap3",
+      "question_inputs": [
+        "increment_per_chapter"
+      ],
+      "solution_line_template": "The third chapter has P + {increment_per_chapter} + {increment_per_chapter} = P + <<+{increment_per_chapter}+{increment_per_chapter}={sum_of_increments_chap3}>>{sum_of_increments_chap3} pages."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "sum_of_increments_chap4",
+      "question_inputs": [],
+      "solution_line_template": "The fourth chapter has P + {sum_of_increments_chap3} + {increment_per_chapter} = P + <<+{sum_of_increments_chap3}+{increment_per_chapter}={sum_of_increments_chap4}>>{sum_of_increments_chap4} pages."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "sum_of_increments_chap5",
+      "question_inputs": [],
+      "solution_line_template": "The fifth chapter has P + {sum_of_increments_chap4} + {increment_per_chapter} = P + <<+{sum_of_increments_chap4}+{increment_per_chapter}={sum_of_increments_chap5}>>{sum_of_increments_chap5} pages."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_offset_sum",
+      "question_inputs": [
+        "num_chapters",
+        "total_pages_book"
+      ],
+      "solution_line_template": "The whole book has P + {increment_per_chapter} + P + {sum_of_increments_chap3} + P + {sum_of_increments_chap4} + P + {sum_of_increments_chap5} = {num_chapters}P + {total_offset_sum} = {total_pages_book} pages."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "pages_for_P_terms",
+      "question_inputs": [],
+      "solution_line_template": "Thus, without the {total_offset_sum} extra pages from additional chapters, {num_chapters}P = {total_pages_book} - {total_offset_sum} = {pages_for_P_terms} pages."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L8",
+      "output_variable": "first_chapter_pages",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, the first chapter had P = {pages_for_P_terms} / {num_chapters} = <<{pages_for_P_terms}/{num_chapters}={first_chapter_pages}>>{first_chapter_pages} pages."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L3": "The third chapter has P + 3 + 3 = P + <<+3+3=6>>6 pages.",
+    "L4": "The fourth chapter has P + 6 + 3 = P + <<+6+3=9>>9 pages.",
+    "L5": "The fifth chapter has P + 9 + 3 = P + <<+9+3=12>>12 pages.",
+    "L6": "The whole book has P + 3 + P + 6 + P + 9 + P + 12 = 5P + 30 = 95 pages.",
+    "L7": "Thus, without the 5 extra pages from additional chapters, 5P = 95 - 5 = 90 pages.",
+    "L8": "Therefore, the first chapter had P = 90 / 5 = <<90/5=18>>18 pages.",
+    "FA": "#### 18"
+  },
+  "erroneous_line_number": "L7",
+  "explanation": "Incorrect operand. The variable 'num_chapters' (value: 5) was used instead of 'total_offset_sum' (value: 30).",
+  "repro_seed": 429498790023185198,
+  "model_name": "google_gemini-2.5-flash"
+}

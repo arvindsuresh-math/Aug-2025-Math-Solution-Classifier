@@ -1,0 +1,63 @@
+{
+  "index": 6381,
+  "original_solution_mapping": {
+    "FA": "#### 14",
+    "L1": "If the standard poodle is 8 inches taller than the miniature poodle, then the miniature poodle is 28-8=<<28-8=20>>20 inches tall.",
+    "L2": "And if the miniature poodle is 8 inches taller than the toy poodle, that the toy poodle is 20-6=<<20-6=14>>14 inches tall."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6381.\n    Returns: the height of the toy poodle in inches.\n    \"\"\"\n    # L1\n    standard_poodle_height = 28 # standard poodle in 28 inches tall\n    standard_taller_than_miniature = 8 # standard poodle is 8 inches taller than the miniature poodle\n    miniature_poodle_height = standard_poodle_height - standard_taller_than_miniature\n\n    # L2\n    miniature_taller_than_toy = 6 # miniature poodle is 6 inches taller than the toy poodle\n    toy_poodle_height = miniature_poodle_height - miniature_taller_than_toy\n\n    # FA\n    answer = toy_poodle_height\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "miniature_poodle_height",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30bf49b50>"
+  },
+  "correct_trace": {
+    "standard_poodle_height": 28,
+    "standard_taller_than_miniature": 8,
+    "miniature_poodle_height": 20,
+    "miniature_taller_than_toy": 6,
+    "toy_poodle_height": 14,
+    "answer": 14
+  },
+  "flawed_trace": {
+    "standard_poodle_height": 28,
+    "standard_taller_than_miniature": 8,
+    "miniature_poodle_height": 36,
+    "miniature_taller_than_toy": 6,
+    "toy_poodle_height": 30,
+    "answer": 30
+  },
+  "correct_value": 20,
+  "flawed_value": 36,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "miniature_poodle_height",
+      "question_inputs": [
+        "standard_poodle_height",
+        "standard_taller_than_miniature"
+      ],
+      "solution_line_template": "If the standard poodle is {standard_taller_than_miniature} inches taller than the miniature poodle, then the miniature poodle is {standard_poodle_height}-{standard_taller_than_miniature}=<<{standard_poodle_height}-{standard_taller_than_miniature}={miniature_poodle_height}>>{miniature_poodle_height} inches tall."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "toy_poodle_height",
+      "question_inputs": [
+        "miniature_taller_than_toy"
+      ],
+      "solution_line_template": "And if the miniature poodle is 8 inches taller than the toy poodle, that the toy poodle is {miniature_poodle_height}-{miniature_taller_than_toy}=<<{miniature_poodle_height}-{miniature_taller_than_toy}={toy_poodle_height}>>{toy_poodle_height} inches tall."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the standard poodle is 8 inches taller than the miniature poodle, then the miniature poodle is 28-8=<<28-8=36>>36 inches tall.",
+    "L2": "And if the miniature poodle is 8 inches taller than the toy poodle, that the toy poodle is 36-6=<<36-6=30>>30 inches tall.",
+    "FA": "#### 30"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 7097951855035122543,
+  "model_name": "google_gemini-2.5-flash"
+}

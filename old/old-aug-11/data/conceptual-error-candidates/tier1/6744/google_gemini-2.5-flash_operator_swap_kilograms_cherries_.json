@@ -1,0 +1,63 @@
+{
+  "index": 6744,
+  "original_solution_mapping": {
+    "FA": "#### 250",
+    "L1": "If Genevieve had $1600 on her, and Clarice chipped in with $400, the total cost of the cherries was $1600+$400 = $<<1600+400=2000>>2000",
+    "L2": "If the cherries cost $8 per kilogram, Genevieve bought $2000/$8 = 250 kilograms of cherry"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6744.\n    Returns: the number of kilograms of cherries Genevieve bought.\n    \"\"\"\n    # L1\n    genevieve_had_money = 1600 # Genevieve had $1600 on her\n    clarice_chipped_in = 400 # Clarice chipped in\n    total_cost_cherries = genevieve_had_money + clarice_chipped_in\n\n    # L2\n    cost_per_kilogram = 8 # $8 per kilogram\n    kilograms_cherries = total_cost_cherries / cost_per_kilogram\n\n    # FA\n    answer = kilograms_cherries\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "kilograms_cherries",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x30b2b4f90>"
+  },
+  "correct_trace": {
+    "genevieve_had_money": 1600,
+    "clarice_chipped_in": 400,
+    "total_cost_cherries": 2000,
+    "cost_per_kilogram": 8,
+    "kilograms_cherries": 250.0,
+    "answer": 250.0
+  },
+  "flawed_trace": {
+    "genevieve_had_money": 1600,
+    "clarice_chipped_in": 400,
+    "total_cost_cherries": 2000,
+    "cost_per_kilogram": 8,
+    "kilograms_cherries": 16000,
+    "answer": 16000
+  },
+  "correct_value": 250.0,
+  "flawed_value": 16000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_cost_cherries",
+      "question_inputs": [
+        "genevieve_had_money",
+        "clarice_chipped_in"
+      ],
+      "solution_line_template": "If Genevieve had ${genevieve_had_money} on her, and Clarice chipped in with ${clarice_chipped_in}, the total cost of the cherries was ${genevieve_had_money}+${clarice_chipped_in} = $<<{genevieve_had_money}+{clarice_chipped_in}={total_cost_cherries}>>{total_cost_cherries}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "kilograms_cherries",
+      "question_inputs": [
+        "cost_per_kilogram"
+      ],
+      "solution_line_template": "If the cherries cost ${cost_per_kilogram} per kilogram, Genevieve bought ${total_cost_cherries}/${cost_per_kilogram} = {kilograms_cherries} kilograms of cherry"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Genevieve had $1600 on her, and Clarice chipped in with $400, the total cost of the cherries was $1600+$400 = $<<1600+400=2000>>2000",
+    "L2": "If the cherries cost $8 per kilogram, Genevieve bought $2000/$8 = 16000 kilograms of cherry",
+    "FA": "#### 16000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -8452899627831560727,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,100 @@
+{
+  "index": 3457,
+  "original_solution_mapping": {
+    "FA": "#### 1000",
+    "L1": "There will be 3500 gold coins / 5 chest= <<3500/5=700>>700 gold coins in every chest.",
+    "L2": "So, there will be 500 silver coins / 5 chests = <<500/5=100>>100 silver coins in each chest.",
+    "L3": "Then, the number of bronze coins is double the number of silver coins, so there are 2 * 500 = <<2*500=1000>>1000 bronze coins.",
+    "L4": "So there will be 1000 bronze coins / 5 chests = <<1000/5=200>>200 bronze coins in each chest.",
+    "L5": "Finally, the total number of coins in every chest will be 700 gold coins + 100 silver coins + 200 bronze coins = <<700+100+200=1000>>1000 coins."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3457.\n    Returns: the total number of coins in each chest.\n    \"\"\"\n    # L1\n    total_gold_coins = 3500 # He has 3500 gold coins\n    num_chests = 5 # across 5 chests\n    gold_coins_per_chest = total_gold_coins / num_chests\n\n    # L2\n    total_silver_coins = 500 # 500 silver coins\n    silver_coins_per_chest = total_silver_coins / num_chests\n\n    # L3\n    bronze_multiplier = 2 # twice as many bronze coins as silver\n    total_bronze_coins = bronze_multiplier * total_silver_coins\n\n    # L4\n    bronze_coins_per_chest = total_bronze_coins / num_chests\n\n    # L5\n    total_coins_per_chest = gold_coins_per_chest + silver_coins_per_chest + bronze_coins_per_chest\n\n    # FA\n    answer = total_coins_per_chest\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "bronze_coins_per_chest",
+    "operand_to_replace": "num_chests",
+    "replacement_variable": "total_bronze_coins"
+  },
+  "correct_trace": {
+    "total_gold_coins": 3500,
+    "num_chests": 5,
+    "gold_coins_per_chest": 700.0,
+    "total_silver_coins": 500,
+    "silver_coins_per_chest": 100.0,
+    "bronze_multiplier": 2,
+    "total_bronze_coins": 1000,
+    "bronze_coins_per_chest": 200.0,
+    "total_coins_per_chest": 1000.0,
+    "answer": 1000.0
+  },
+  "flawed_trace": {
+    "total_gold_coins": 3500,
+    "num_chests": 5,
+    "gold_coins_per_chest": 700.0,
+    "total_silver_coins": 500,
+    "silver_coins_per_chest": 100.0,
+    "bronze_multiplier": 2,
+    "total_bronze_coins": 1000,
+    "bronze_coins_per_chest": 1.0,
+    "total_coins_per_chest": 801.0,
+    "answer": 801.0
+  },
+  "correct_value": 200.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "gold_coins_per_chest",
+      "question_inputs": [
+        "total_gold_coins",
+        "num_chests"
+      ],
+      "solution_line_template": "There will be {total_gold_coins} gold coins / {num_chests} chest= <<{total_gold_coins}/{num_chests}={gold_coins_per_chest}>>{gold_coins_per_chest} gold coins in every chest."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "silver_coins_per_chest",
+      "question_inputs": [
+        "total_silver_coins"
+      ],
+      "solution_line_template": "So, there will be {total_silver_coins} silver coins / {num_chests} chests = <<{total_silver_coins}/{num_chests}={silver_coins_per_chest}>>{silver_coins_per_chest} silver coins in each chest."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_bronze_coins",
+      "question_inputs": [
+        "bronze_multiplier"
+      ],
+      "solution_line_template": "Then, the number of bronze coins is double the number of silver coins, so there are {bronze_multiplier} * {total_silver_coins} = <<{bronze_multiplier}*{total_silver_coins}={total_bronze_coins}>>{total_bronze_coins} bronze coins."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "bronze_coins_per_chest",
+      "question_inputs": [],
+      "solution_line_template": "So there will be {total_bronze_coins} bronze coins / {num_chests} chests = <<{total_bronze_coins}/{num_chests}={bronze_coins_per_chest}>>{bronze_coins_per_chest} bronze coins in each chest."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_coins_per_chest",
+      "question_inputs": [],
+      "solution_line_template": "Finally, the total number of coins in every chest will be {gold_coins_per_chest} gold coins + {silver_coins_per_chest} silver coins + {bronze_coins_per_chest} bronze coins = <<{gold_coins_per_chest}+{silver_coins_per_chest}+{bronze_coins_per_chest}={total_coins_per_chest}>>{total_coins_per_chest} coins."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There will be 3500 gold coins / 5 chest= <<3500/5=700>>700 gold coins in every chest.",
+    "L2": "So, there will be 500 silver coins / 5 chests = <<500/5=100>>100 silver coins in each chest.",
+    "L3": "Then, the number of bronze coins is double the number of silver coins, so there are 2 * 500 = <<2*500=1000>>1000 bronze coins.",
+    "L4": "So there will be 1000 bronze coins / 1000 chests = <<1000/1000=1>>1 bronze coins in each chest.",
+    "L5": "Finally, the total number of coins in every chest will be 700 gold coins + 100 silver coins + 1 bronze coins = <<700+100+1=801>>801 coins.",
+    "FA": "#### 801"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'total_bronze_coins' (1000) was used instead of 'num_chests' (5).",
+  "repro_seed": 2552396171731301015,
+  "model_name": "google_gemini-2.5-flash"
+}

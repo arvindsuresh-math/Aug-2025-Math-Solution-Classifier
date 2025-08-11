@@ -1,0 +1,63 @@
+{
+  "index": 2642,
+  "original_solution_mapping": {
+    "FA": "#### 11",
+    "L1": "George had $100 - $24 = $<<100-24=76>>76 left after buying a shirt.",
+    "L2": "Since he has $65 left after buying a pair of socks, then a pair of socks costs $76 - $65 = $<<76-65=11>>11."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2642.\n    Returns: the cost of a pair of socks.\n    \"\"\"\n    # L1\n    initial_money = 100 # George had $100\n    shirt_cost = 24 # bought a shirt for $24\n    money_after_shirt = initial_money - shirt_cost\n\n    # L2\n    money_left_after_socks = 65 # he had $65 left\n    socks_cost = money_after_shirt - money_left_after_socks\n\n    # FA\n    answer = socks_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "socks_cost",
+    "operand_to_replace": "money_left_after_socks",
+    "replacement_variable": "shirt_cost"
+  },
+  "correct_trace": {
+    "initial_money": 100,
+    "shirt_cost": 24,
+    "money_after_shirt": 76,
+    "money_left_after_socks": 65,
+    "socks_cost": 11,
+    "answer": 11
+  },
+  "flawed_trace": {
+    "initial_money": 100,
+    "shirt_cost": 24,
+    "money_after_shirt": 76,
+    "money_left_after_socks": 65,
+    "socks_cost": 52,
+    "answer": 52
+  },
+  "correct_value": 11,
+  "flawed_value": 52,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "initial_money",
+        "shirt_cost"
+      ],
+      "WK_inputs": [],
+      "output_variable": "money_after_shirt",
+      "solution_line_template": "George had ${initial_money} - ${shirt_cost} = $<<{initial_money}-{shirt_cost}={money_after_shirt}>>{money_after_shirt} left after buying a shirt."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "money_left_after_socks"
+      ],
+      "WK_inputs": [],
+      "output_variable": "socks_cost",
+      "solution_line_template": "Since he has ${money_left_after_socks} left after buying a pair of socks, then a pair of socks costs ${money_after_shirt} - ${money_left_after_socks} = $<<{money_after_shirt}-{money_left_after_socks}={socks_cost}>>{socks_cost}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "George had $100 - $24 = $<<100-24=76>>76 left after buying a shirt.",
+    "L2": "Since he has $24 left after buying a pair of socks, then a pair of socks costs $76 - $24 = $<<76-24=52>>52.",
+    "FA": "#### 52"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'shirt_cost' (24) was used instead of 'money_left_after_socks' (65).",
+  "repro_seed": 4435913942160529865,
+  "model_name": "google_gemini-2.5-flash"
+}

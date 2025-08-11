@@ -1,0 +1,79 @@
+{
+  "index": 5315,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "Let X be the distance Sam ran.",
+    "L2": "His walk through the store was twice the distance of his run, so his walk was 2X.",
+    "L3": "He biked for 12 miles and went 18 miles in all, so he walked and ran 18 - 12 = <<18-12=6>>6 miles.",
+    "L4": "Thus, his walk and run together were X + 2X = 3X = <<6=6>>6 miles.",
+    "L5": "Thus, he ran X = 6 / 3 = <<6/3=2>>2 miles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5315.\n    Returns: the distance of Sam's morning run.\n    \"\"\"\n    # L3\n    total_distance_all_day = 18 # 18 miles in all\n    bike_ride_distance = 12 # biked for 12 miles\n    walk_and_run_total = total_distance_all_day - bike_ride_distance\n\n    # L4\n    run_coefficient_val = 1 # From \"X\" in \"X + 2X\"\n    walk_multiplier_val = 2 # From \"2X\" in \"X + 2X\"\n    combined_coefficient = run_coefficient_val + walk_multiplier_val\n\n    # L5\n    run_distance = walk_and_run_total / combined_coefficient\n\n    # FA\n    answer = run_distance\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "walk_and_run_total",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x169bc7b90>"
+  },
+  "correct_trace": {
+    "total_distance_all_day": 18,
+    "bike_ride_distance": 12,
+    "walk_and_run_total": 6,
+    "run_coefficient_val": 1,
+    "walk_multiplier_val": 2,
+    "combined_coefficient": 3,
+    "run_distance": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "total_distance_all_day": 18,
+    "bike_ride_distance": 12,
+    "walk_and_run_total": 30,
+    "run_coefficient_val": 1,
+    "walk_multiplier_val": 2,
+    "combined_coefficient": 3,
+    "run_distance": 10.0,
+    "answer": 10.0
+  },
+  "correct_value": 6,
+  "flawed_value": 30,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "walk_and_run_total",
+      "question_inputs": [
+        "total_distance_all_day",
+        "bike_ride_distance"
+      ],
+      "solution_line_template": "He biked for {bike_ride_distance} miles and went {total_distance_all_day} miles in all, so he walked and ran {total_distance_all_day} - {bike_ride_distance} = <<{total_distance_all_day}-{bike_ride_distance}={walk_and_run_total}>>{walk_and_run_total} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "combined_coefficient",
+      "question_inputs": [
+        "run_coefficient_val",
+        "walk_multiplier_val"
+      ],
+      "solution_line_template": "Thus, his walk and run together were X + {walk_multiplier_val}X = {combined_coefficient}X = <<{walk_and_run_total}={walk_and_run_total}>>{walk_and_run_total} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "run_distance",
+      "question_inputs": [],
+      "solution_line_template": "Thus, he ran X = {walk_and_run_total} / {combined_coefficient} = <<{walk_and_run_total}/{combined_coefficient}={run_distance}>>{run_distance} miles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L3": "He biked for 12 miles and went 18 miles in all, so he walked and ran 18 - 12 = <<18-12=30>>30 miles.",
+    "L4": "Thus, his walk and run together were X + 2X = 3X = <<30=30>>30 miles.",
+    "L5": "Thus, he ran X = 30 / 3 = <<30/3=10>>10 miles.",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 8147316003791260827,
+  "model_name": "google_gemini-2.5-flash"
+}

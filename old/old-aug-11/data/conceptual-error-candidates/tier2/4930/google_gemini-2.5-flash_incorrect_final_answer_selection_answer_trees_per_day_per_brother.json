@@ -1,0 +1,105 @@
+{
+  "index": 4930,
+  "original_solution_mapping": {
+    "FA": "#### 196",
+    "L1": "He cuts down 2*20=<<2*20=40>>40 trees by himself",
+    "L2": "Each of his brothers cuts down 20*.2=<<20*.2=4>>4 fewer trees per day",
+    "L3": "So they each cut down 20-4=<<20-4=16>>16 trees",
+    "L4": "So for the next 3 days they cut down 20+16*2=<<20+16*2=52>>52 trees per day",
+    "L5": "So they cut down 40+52*3=<<40+52*3=196>>196 trees"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4930.\n    Returns: the total number of trees cut down.\n    \"\"\"\n    # L1\n    days_alone = 2 # In the first 2 days\n    trees_per_day_alone = 20 # 20 trees each day\n    trees_cut_alone = days_alone * trees_per_day_alone\n\n    # L2\n    original_trees_per_day = 20 # 20 trees each day\n    reduction_percent = 0.2 # 20% fewer trees\n    trees_fewer_per_brother = original_trees_per_day * reduction_percent\n\n    # L3\n    trees_per_day_per_brother = original_trees_per_day - trees_fewer_per_brother\n\n    # L4\n    num_brothers = 2 # his 2 brothers\n    trees_per_day_with_brothers = original_trees_per_day + trees_per_day_per_brother * num_brothers\n\n    # L5\n    days_with_brothers = 3 # For the next 3 days\n    total_trees_cut = trees_cut_alone + trees_per_day_with_brothers * days_with_brothers\n\n    # FA\n    answer = total_trees_cut\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_trees_cut",
+    "replacement_variable": "trees_per_day_per_brother"
+  },
+  "correct_trace": {
+    "days_alone": 2,
+    "trees_per_day_alone": 20,
+    "trees_cut_alone": 40,
+    "original_trees_per_day": 20,
+    "reduction_percent": 0.2,
+    "trees_fewer_per_brother": 4.0,
+    "trees_per_day_per_brother": 16.0,
+    "num_brothers": 2,
+    "trees_per_day_with_brothers": 52.0,
+    "days_with_brothers": 3,
+    "total_trees_cut": 196.0,
+    "answer": 196.0
+  },
+  "flawed_trace": {
+    "days_alone": 2,
+    "trees_per_day_alone": 20,
+    "trees_cut_alone": 40,
+    "original_trees_per_day": 20,
+    "reduction_percent": 0.2,
+    "trees_fewer_per_brother": 4.0,
+    "trees_per_day_per_brother": 16.0,
+    "num_brothers": 2,
+    "trees_per_day_with_brothers": 52.0,
+    "days_with_brothers": 3,
+    "total_trees_cut": 196.0,
+    "answer": 16.0
+  },
+  "correct_value": 196.0,
+  "flawed_value": 16.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "trees_cut_alone",
+      "question_inputs": [
+        "days_alone",
+        "trees_per_day_alone"
+      ],
+      "solution_line_template": "He cuts down {days_alone}*{trees_per_day_alone}=<<{days_alone}*{trees_per_day_alone}={trees_cut_alone}>>{trees_cut_alone} trees by himself"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "trees_fewer_per_brother",
+      "question_inputs": [
+        "original_trees_per_day",
+        "reduction_percent"
+      ],
+      "solution_line_template": "Each of his brothers cuts down {original_trees_per_day}*{reduction_percent}=<<{original_trees_per_day}*{reduction_percent}={trees_fewer_per_brother}>>{trees_fewer_per_brother} fewer trees per day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "trees_per_day_per_brother",
+      "question_inputs": [],
+      "solution_line_template": "So they each cut down {original_trees_per_day}-{trees_fewer_per_brother}=<<{original_trees_per_day}-{trees_fewer_per_brother}={trees_per_day_per_brother}>>{trees_per_day_per_brother} trees"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "trees_per_day_with_brothers",
+      "question_inputs": [
+        "num_brothers"
+      ],
+      "solution_line_template": "So for the next {days_with_brothers_text} days they cut down {original_trees_per_day}+{trees_per_day_per_brother}*{num_brothers}=<<{original_trees_per_day}+{trees_per_day_per_brother}*{num_brothers}={trees_per_day_with_brothers}>>{trees_per_day_with_brothers} trees per day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_trees_cut",
+      "question_inputs": [
+        "days_with_brothers"
+      ],
+      "solution_line_template": "So they cut down {trees_cut_alone}+{trees_per_day_with_brothers}*{days_with_brothers}=<<{trees_cut_alone}+{trees_per_day_with_brothers}*{days_with_brothers}={total_trees_cut}>>{total_trees_cut} trees"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He cuts down 2*20=<<2*20=40>>40 trees by himself",
+    "L2": "Each of his brothers cuts down 20*0.2=<<20*0.2=4>>4 fewer trees per day",
+    "L3": "So they each cut down 20-4=<<20-4=16>>16 trees",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'trees_per_day_per_brother' (value: 16.0) was reported instead of 'total_trees_cut' (value: 196.0).",
+  "repro_seed": 692864845102337073,
+  "model_name": "google_gemini-2.5-flash"
+}

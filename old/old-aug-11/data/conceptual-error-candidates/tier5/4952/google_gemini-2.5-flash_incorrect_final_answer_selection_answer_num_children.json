@@ -1,0 +1,81 @@
+{
+  "index": 4952,
+  "original_solution_mapping": {
+    "FA": "#### 1500",
+    "L1": "Let X be the number of adults attending the concert. The number of children attending the concert is 3*X.",
+    "L2": "The theater collected a total of 7*X + 3*(3*X) = $6,000.",
+    "L3": "Multiplying through the parentheses we get 7X + 9X = $6,000",
+    "L4": "Adding like terms we get 16X = $6,000",
+    "L5": "Dividing both sides by 16 we get X = 375, the number of adults attending the concert",
+    "L6": "The number of children attending the concert is triple this number: 375 adults * 3 children/adult = <<375*3=1125>>1125 children.",
+    "L7": "The number of people attending the concert is 375 + 1125 = <<375+1125=1500>>1500 people."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4952.\n    Returns: the total number of people who bought tickets.\n    \"\"\"\n    # L5\n    adult_ticket_cost = 7 # An adult ticket costs $7\n    child_ticket_cost = 3 # a child's ticket costs $3\n    adults_multiplier_for_children = 3 # Three times as many children as adults\n    total_collected_money = 6000 # collected a total of $6,000\n    coefficient_of_X = adult_ticket_cost + child_ticket_cost * adults_multiplier_for_children\n    num_adults = total_collected_money / coefficient_of_X\n\n    # L6\n    num_children = num_adults * adults_multiplier_for_children\n\n    # L7\n    total_people = num_adults + num_children\n\n    # FA\n    answer = total_people\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_people",
+    "replacement_variable": "num_children"
+  },
+  "correct_trace": {
+    "adult_ticket_cost": 7,
+    "child_ticket_cost": 3,
+    "adults_multiplier_for_children": 3,
+    "total_collected_money": 6000,
+    "coefficient_of_X": 16,
+    "num_adults": 375.0,
+    "num_children": 1125.0,
+    "total_people": 1500.0,
+    "answer": 1500.0
+  },
+  "flawed_trace": {
+    "adult_ticket_cost": 7,
+    "child_ticket_cost": 3,
+    "adults_multiplier_for_children": 3,
+    "total_collected_money": 6000,
+    "coefficient_of_X": 16,
+    "num_adults": 375.0,
+    "num_children": 1125.0,
+    "total_people": 1500.0,
+    "answer": 1125.0
+  },
+  "correct_value": 1500.0,
+  "flawed_value": 1125.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "num_adults",
+      "question_inputs": [
+        "adult_ticket_cost",
+        "child_ticket_cost",
+        "adults_multiplier_for_children",
+        "total_collected_money"
+      ],
+      "solution_line_template": "Dividing both sides by {coefficient_of_X} we get X = {num_adults}, the number of adults attending the concert"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "num_children",
+      "question_inputs": [],
+      "solution_line_template": "The number of children attending the concert is triple this number: {num_adults} adults * {adults_multiplier_for_children} children/adult = <<{num_adults}*{adults_multiplier_for_children}={num_children}>>{num_children} children."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "total_people",
+      "question_inputs": [],
+      "solution_line_template": "The number of people attending the concert is {num_adults} + {num_children} = <<{num_adults}+{num_children}={total_people}>>{total_people} people."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L5": "Dividing both sides by 16 we get X = 375, the number of adults attending the concert",
+    "L6": "The number of children attending the concert is triple this number: 375 adults * 3 children/adult = <<375*3=1125>>1125 children.",
+    "FA": "#### 1125"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'num_children' (value: 1125.0) was reported instead of 'total_people' (value: 1500.0).",
+  "repro_seed": 5680163840172432040,
+  "model_name": "google_gemini-2.5-flash"
+}

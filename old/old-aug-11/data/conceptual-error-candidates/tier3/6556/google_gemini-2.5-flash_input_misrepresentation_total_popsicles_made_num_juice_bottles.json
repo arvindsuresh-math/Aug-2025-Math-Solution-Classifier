@@ -1,0 +1,96 @@
+{
+  "index": 6556,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "She has $6 left after buying initial supplies because 10 - 3 -1 = <<10-3-1=6>>6.",
+    "L2": "She can buy 3 bottles of juice because 6 / 2 = <<6/2=3>>3.",
+    "L3": "She can make 60 popsicles because 20 x 3 = <<20*3=60>>60",
+    "L4": "She has 40 sticks left because 100 -6 60 = 40"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6556.\n    Returns: the number of popsicle sticks Danielle will be left with.\n    \"\"\"\n    # L1\n    initial_money = 10 # She has $10 for supplies\n    mold_cost = 3 # buys one set of molds for $3\n    stick_pack_cost = 1 # a pack of 100 popsicle sticks for $1\n    money_left_after_initial_supplies = initial_money - mold_cost - stick_pack_cost\n\n    # L2\n    juice_bottle_cost = 2 # costs $2\n    num_juice_bottles = money_left_after_initial_supplies / juice_bottle_cost\n\n    # L3\n    popsicles_per_bottle = 20 # makes 20 popsicles\n    total_popsicles_made = popsicles_per_bottle * num_juice_bottles\n\n    # L4\n    initial_sticks = 100 # a pack of 100 popsicle sticks\n    sticks_left = initial_sticks - total_popsicles_made\n\n    # FA\n    answer = sticks_left\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_popsicles_made",
+    "operand_to_replace": "popsicles_per_bottle",
+    "replacement_variable": "num_juice_bottles"
+  },
+  "correct_trace": {
+    "initial_money": 10,
+    "mold_cost": 3,
+    "stick_pack_cost": 1,
+    "money_left_after_initial_supplies": 6,
+    "juice_bottle_cost": 2,
+    "num_juice_bottles": 3.0,
+    "popsicles_per_bottle": 20,
+    "total_popsicles_made": 60.0,
+    "initial_sticks": 100,
+    "sticks_left": 40.0,
+    "answer": 40.0
+  },
+  "flawed_trace": {
+    "initial_money": 10,
+    "mold_cost": 3,
+    "stick_pack_cost": 1,
+    "money_left_after_initial_supplies": 6,
+    "juice_bottle_cost": 2,
+    "num_juice_bottles": 3.0,
+    "popsicles_per_bottle": 20,
+    "total_popsicles_made": 9.0,
+    "initial_sticks": 100,
+    "sticks_left": 91.0,
+    "answer": 91.0
+  },
+  "correct_value": 60.0,
+  "flawed_value": 9.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "money_left_after_initial_supplies",
+      "question_inputs": [
+        "initial_money",
+        "mold_cost",
+        "stick_pack_cost"
+      ],
+      "solution_line_template": "She has ${money_left_after_initial_supplies} left after buying initial supplies because {initial_money} - {mold_cost} -{stick_pack_cost} = <<{initial_money}-{mold_cost}-{stick_pack_cost}={money_left_after_initial_supplies}>>{money_left_after_initial_supplies}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_juice_bottles",
+      "question_inputs": [
+        "juice_bottle_cost"
+      ],
+      "solution_line_template": "She can buy {num_juice_bottles} bottles of juice because {money_left_after_initial_supplies} / {juice_bottle_cost} = <<{money_left_after_initial_supplies}/{juice_bottle_cost}={num_juice_bottles}>>{num_juice_bottles}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_popsicles_made",
+      "question_inputs": [
+        "popsicles_per_bottle"
+      ],
+      "solution_line_template": "She can make {total_popsicles_made} popsicles because {popsicles_per_bottle} x {num_juice_bottles} = <<{popsicles_per_bottle}*{num_juice_bottles}={total_popsicles_made}>>{total_popsicles_made}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "sticks_left",
+      "question_inputs": [
+        "initial_sticks"
+      ],
+      "solution_line_template": "She has {sticks_left} sticks left because {initial_sticks} -6 {total_popsicles_made} = {sticks_left}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She has $6 left after buying initial supplies because 10 - 3 -1 = <<10-3-1=6>>6.",
+    "L2": "She can buy 3 bottles of juice because 6 / 2 = <<6/2=3>>3.",
+    "L3": "She can make 9 popsicles because 3 x 3 = <<3*3=9>>9",
+    "L4": "She has 91 sticks left because 100 -6 9 = 91",
+    "FA": "#### 91"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'num_juice_bottles' (3.0) was used instead of 'popsicles_per_bottle' (20).",
+  "repro_seed": -9015373042723026128,
+  "model_name": "google_gemini-2.5-flash"
+}

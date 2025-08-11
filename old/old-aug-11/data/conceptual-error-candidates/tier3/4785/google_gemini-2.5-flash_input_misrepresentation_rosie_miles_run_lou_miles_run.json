@@ -1,0 +1,74 @@
+{
+  "index": 4785,
+  "original_solution_mapping": {
+    "FA": "#### 24",
+    "L1": "If Lou runs 3 miles during his workout on a track that is 1/4 miles long, then he circles the track 3/(1/4)=12 times.",
+    "L2": "If Rosie runs twice as fast as Lou, then over the same time period, she runs 3*2=<<3*2=6>>6 miles.",
+    "L3": "If Rosie runs 6 miles on the 1/4 mile track, then she circles the track 6/(1/4)=<<6/(1/4)=24>>24 times."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4785.\n    Returns: the number of times Rosie circles the track.\n    \"\"\"\n    # L1\n    lou_miles_run = 3 # running three miles\n    track_length = Fraction(1, 4) # one-quarter of a mile long\n    lou_circles = lou_miles_run / track_length\n\n    # L2\n    rosie_speed_multiplier = 2 # twice the speed of her husband\n    rosie_miles_run = lou_miles_run * rosie_speed_multiplier\n\n    # L3\n    rosie_circles = rosie_miles_run / track_length\n\n    # FA\n    answer = rosie_circles\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "rosie_miles_run",
+    "operand_to_replace": "rosie_speed_multiplier",
+    "replacement_variable": "lou_miles_run"
+  },
+  "correct_trace": {
+    "lou_miles_run": 3,
+    "track_length": "1/4",
+    "lou_circles": "12",
+    "rosie_speed_multiplier": 2,
+    "rosie_miles_run": 6,
+    "rosie_circles": "24",
+    "answer": "24"
+  },
+  "flawed_trace": {
+    "lou_miles_run": 3,
+    "track_length": "1/4",
+    "lou_circles": "12",
+    "rosie_speed_multiplier": 2,
+    "rosie_miles_run": 9,
+    "rosie_circles": "36",
+    "answer": "36"
+  },
+  "correct_value": 6,
+  "flawed_value": 9,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "lou_circles",
+      "question_inputs": [
+        "lou_miles_run",
+        "track_length"
+      ],
+      "solution_line_template": "If Lou runs {lou_miles_run} miles during his workout on a track that is {track_length} miles long, then he circles the track {lou_miles_run}/({track_length})={lou_circles} times."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "rosie_miles_run",
+      "question_inputs": [
+        "rosie_speed_multiplier"
+      ],
+      "solution_line_template": "If Rosie runs twice as fast as Lou, then over the same time period, she runs {lou_miles_run}*{rosie_speed_multiplier}=<<{lou_miles_run}*{rosie_speed_multiplier}={rosie_miles_run}>>{rosie_miles_run} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "rosie_circles",
+      "question_inputs": [],
+      "solution_line_template": "If Rosie runs {rosie_miles_run} miles on the {track_length} mile track, then she circles the track {rosie_miles_run}/({track_length})=<<{rosie_miles_run}/({track_length})={rosie_circles}>>{rosie_circles} times."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Lou runs 3 miles during his workout on a track that is 1/4 miles long, then he circles the track 3/(1/4)=12 times.",
+    "L2": "If Rosie runs twice as fast as Lou, then over the same time period, she runs 3*3=<<3*3=9>>9 miles.",
+    "L3": "If Rosie runs 9 miles on the 1/4 mile track, then she circles the track 9/(1/4)=<<9/(1/4)=36>>36 times.",
+    "FA": "#### 36"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'lou_miles_run' (3) was used instead of 'rosie_speed_multiplier' (2).",
+  "repro_seed": 5647579992917009084,
+  "model_name": "google_gemini-2.5-flash"
+}

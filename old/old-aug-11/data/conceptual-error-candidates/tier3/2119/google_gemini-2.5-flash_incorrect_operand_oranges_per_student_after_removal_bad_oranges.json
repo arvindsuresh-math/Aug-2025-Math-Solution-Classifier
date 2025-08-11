@@ -1,0 +1,85 @@
+{
+  "index": 2119,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "If the 12 students had shared the 108 oranges, each student would have gotten 108/12 = <<108/12=9>>9 oranges",
+    "L2": "But 36 were removed so there are 108-36 = <<108-36=72>>72 oranges left",
+    "L3": "So 12 shared 72 for each to get 72/12 = <<72/12=6>>6 oranges",
+    "L4": "This is 9-6 = <<9-6=3>>3 less than they would each get if they did not have to throw any orange away."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2119.\n    Returns: the number of oranges less each student will get.\n    \"\"\"\n    # L1\n    initial_total_oranges = 108 # 108 oranges\n    num_students = 12 # 12 students\n    oranges_per_student_initial = initial_total_oranges / num_students\n\n    # L2\n    bad_oranges = 36 # 36 of the oranges were bad\n    remaining_oranges = initial_total_oranges - bad_oranges\n\n    # L3\n    oranges_per_student_after_removal = remaining_oranges / num_students\n\n    # L4\n    oranges_less_per_student = oranges_per_student_initial - oranges_per_student_after_removal\n\n    # FA\n    answer = oranges_less_per_student\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "oranges_per_student_after_removal",
+    "operand_to_replace": "remaining_oranges",
+    "replacement_variable": "bad_oranges"
+  },
+  "correct_trace": {
+    "initial_total_oranges": 108,
+    "num_students": 12,
+    "oranges_per_student_initial": 9.0,
+    "bad_oranges": 36,
+    "remaining_oranges": 72,
+    "oranges_per_student_after_removal": 6.0,
+    "oranges_less_per_student": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "initial_total_oranges": 108,
+    "num_students": 12,
+    "oranges_per_student_initial": 9.0,
+    "bad_oranges": 36,
+    "remaining_oranges": 72,
+    "oranges_per_student_after_removal": 3.0,
+    "oranges_less_per_student": 6.0,
+    "answer": 6.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 3.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "oranges_per_student_initial",
+      "question_inputs": [
+        "initial_total_oranges",
+        "num_students"
+      ],
+      "solution_line_template": "If the {num_students} students had shared the {initial_total_oranges} oranges, each student would have gotten {initial_total_oranges}/{num_students} = <<{initial_total_oranges}/{num_students}={oranges_per_student_initial}>>{oranges_per_student_initial} oranges"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_oranges",
+      "question_inputs": [
+        "bad_oranges"
+      ],
+      "solution_line_template": "But {bad_oranges} were removed so there are {initial_total_oranges}-{bad_oranges} = <<{initial_total_oranges}-{bad_oranges}={remaining_oranges}>>{remaining_oranges} oranges left"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "oranges_per_student_after_removal",
+      "question_inputs": [],
+      "solution_line_template": "So {num_students} shared {remaining_oranges} for each to get {remaining_oranges}/{num_students} = <<{remaining_oranges}/{num_students}={oranges_per_student_after_removal}>>{oranges_per_student_after_removal} oranges"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "oranges_less_per_student",
+      "question_inputs": [],
+      "solution_line_template": "This is {oranges_per_student_initial}-{oranges_per_student_after_removal} = <<{oranges_per_student_initial}-{oranges_per_student_after_removal}={oranges_less_per_student}>>{oranges_less_per_student} less than they would each get if they did not have to throw any orange away."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the 12 students had shared the 108 oranges, each student would have gotten 108/12 = <<108/12=9>>9 oranges",
+    "L2": "But 36 were removed so there are 108-36 = <<108-36=72>>72 oranges left",
+    "L3": "So 12 shared 36 for each to get 36/12 = <<36/12=3>>3 oranges",
+    "L4": "This is 9-3 = <<9-3=6>>6 less than they would each get if they did not have to throw any orange away.",
+    "FA": "#### 6"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'bad_oranges' (value: 36) was used instead of 'remaining_oranges' (value: 72).",
+  "repro_seed": -1222075471691293505,
+  "model_name": "google_gemini-2.5-flash"
+}

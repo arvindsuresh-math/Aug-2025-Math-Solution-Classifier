@@ -1,0 +1,89 @@
+{
+  "index": 3671,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "In the first part of her trip, Diana will cover 2 hours * 3 mph = <<2*3=6>>6 miles.",
+    "L2": "In the second part of her trip, Diana will need to cover an additional 10 miles - 6 miles = <<10-6=4>>4 miles.",
+    "L3": "To cover 4 miles * 1 mph = will take Diana <<4*1=4>>4 hours.",
+    "L4": "Total biking time to get home for Diana will be 2 hours + 4 hours = <<2+4=6>>6 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3671.\n    Returns: the total time it will take Diana to get home.\n    \"\"\"\n    # L1\n    time_fast_speed = 2 # two hours\n    speed_fast = 3 # 3 mph\n    distance_fast = time_fast_speed * speed_fast\n\n    # L2\n    total_distance = 10 # 10 miles to get home\n    remaining_distance = total_distance - distance_fast\n\n    # L3\n    speed_slow = 1 # 1 mph\n    time_slow_speed = remaining_distance * speed_slow\n\n    # L4\n    total_time = time_fast_speed + time_slow_speed\n\n    # FA\n    answer = total_time\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "remaining_distance",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30997c090>"
+  },
+  "correct_trace": {
+    "time_fast_speed": 2,
+    "speed_fast": 3,
+    "distance_fast": 6,
+    "total_distance": 10,
+    "remaining_distance": 4,
+    "speed_slow": 1,
+    "time_slow_speed": 4,
+    "total_time": 6,
+    "answer": 6
+  },
+  "flawed_trace": {
+    "time_fast_speed": 2,
+    "speed_fast": 3,
+    "distance_fast": 6,
+    "total_distance": 10,
+    "remaining_distance": 16,
+    "speed_slow": 1,
+    "time_slow_speed": 16,
+    "total_time": 18,
+    "answer": 18
+  },
+  "correct_value": 4,
+  "flawed_value": 16,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "distance_fast",
+      "question_inputs": [
+        "time_fast_speed",
+        "speed_fast"
+      ],
+      "solution_line_template": "In the first part of her trip, Diana will cover {time_fast_speed} hours * {speed_fast} mph = <<{time_fast_speed}*{speed_fast}={distance_fast}>>{distance_fast} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_distance",
+      "question_inputs": [
+        "total_distance"
+      ],
+      "solution_line_template": "In the second part of her trip, Diana will need to cover an additional {total_distance} miles - {distance_fast} miles = <<{total_distance}-{distance_fast}={remaining_distance}>>{remaining_distance} miles."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "time_slow_speed",
+      "question_inputs": [
+        "speed_slow"
+      ],
+      "solution_line_template": "To cover {remaining_distance} miles * {speed_slow} mph = will take Diana <<{remaining_distance}*{speed_slow}={time_slow_speed}>>{time_slow_speed} hours."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_time",
+      "question_inputs": [],
+      "solution_line_template": "Total biking time to get home for Diana will be {time_fast_speed} hours + {time_slow_speed} hours = <<{time_fast_speed}+{time_slow_speed}={total_time}>>{total_time} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In the first part of her trip, Diana will cover 2 hours * 3 mph = <<2*3=6>>6 miles.",
+    "L2": "In the second part of her trip, Diana will need to cover an additional 10 miles - 6 miles = <<10-6=16>>16 miles.",
+    "L3": "To cover 16 miles * 1 mph = will take Diana <<16*1=16>>16 hours.",
+    "L4": "Total biking time to get home for Diana will be 2 hours + 16 hours = <<2+16=18>>18 hours.",
+    "FA": "#### 18"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 1882340206759953204,
+  "model_name": "google_gemini-2.5-flash"
+}

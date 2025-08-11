@@ -1,0 +1,63 @@
+{
+  "index": 419,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "Kenny ran for 10*2=<<10*2=20>>20 hours.",
+    "L2": "Kenny practiced the trumpet for 20*2=<<20*2=40>>40 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 419.\n    Returns: the number of hours Kenny practiced on the trumpet last week.\n    \"\"\"\n    # L1\n    basketball_hours = 10 # 10 hours of basketball last week\n    multiplier_running = 2 # twice as long as he played basketball\n    running_hours = basketball_hours * multiplier_running\n\n    # L2\n    multiplier_trumpet = 2 # twice as long as he ran\n    trumpet_hours = running_hours * multiplier_trumpet\n\n    # FA\n    answer = trumpet_hours\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "trumpet_hours",
+    "operand_to_replace": "multiplier_trumpet",
+    "replacement_variable": "running_hours"
+  },
+  "correct_trace": {
+    "basketball_hours": 10,
+    "multiplier_running": 2,
+    "running_hours": 20,
+    "multiplier_trumpet": 2,
+    "trumpet_hours": 40,
+    "answer": 40
+  },
+  "flawed_trace": {
+    "basketball_hours": 10,
+    "multiplier_running": 2,
+    "running_hours": 20,
+    "multiplier_trumpet": 2,
+    "trumpet_hours": 400,
+    "answer": 400
+  },
+  "correct_value": 40,
+  "flawed_value": 400,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "basketball_hours",
+        "multiplier_running"
+      ],
+      "WK_inputs": [],
+      "output_variable": "running_hours",
+      "solution_line_template": "Kenny ran for {basketball_hours}*{multiplier_running}=<<{basketball_hours}*{multiplier_running}={running_hours}>>{running_hours} hours."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "multiplier_trumpet"
+      ],
+      "WK_inputs": [],
+      "output_variable": "trumpet_hours",
+      "solution_line_template": "Kenny practiced the trumpet for {running_hours}*{multiplier_trumpet}=<<{running_hours}*{multiplier_trumpet}={trumpet_hours}>>{trumpet_hours} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Kenny ran for 10*2=<<10*2=20>>20 hours.",
+    "L2": "Kenny practiced the trumpet for 20*20=<<20*20=400>>400 hours.",
+    "FA": "#### 400"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'running_hours' (20) was used instead of 'multiplier_trumpet' (2).",
+  "repro_seed": 3690582878438152516,
+  "model_name": "google_gemini-2.5-flash"
+}

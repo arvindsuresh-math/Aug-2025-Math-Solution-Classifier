@@ -1,0 +1,88 @@
+{
+  "index": 340,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "He needs 10*6=<<10*6=60>>60 feet",
+    "L2": "He loses 20*.25=<<20*.25=5>>5 feet each time",
+    "L3": "So he gets 20-5=<<20-5=15>>15 feet from each piece",
+    "L4": "That means he needs 60/15=<<60/15=4>>4 pieces of rope"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 340.\n    Returns: the number of pieces of rope Tom needs to buy.\n    \"\"\"\n    # L1\n    feet_per_story = 10 # One story is 10 feet\n    num_stories = 6 # 6 stories\n    total_feet_needed = feet_per_story * num_stories\n\n    # L2\n    rope_length_initial = 20 # 20 feet long\n    loss_percentage = 0.25 # lose 25% when lashing them together\n    feet_lost_per_piece = rope_length_initial * loss_percentage\n\n    # L3\n    effective_rope_length_per_piece = rope_length_initial - feet_lost_per_piece\n\n    # L4\n    num_pieces_needed = total_feet_needed / effective_rope_length_per_piece\n\n    # FA\n    answer = num_pieces_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "feet_lost_per_piece",
+    "operand_to_replace": "rope_length_initial",
+    "replacement_variable": "total_feet_needed"
+  },
+  "correct_trace": {
+    "feet_per_story": 10,
+    "num_stories": 6,
+    "total_feet_needed": 60,
+    "rope_length_initial": 20,
+    "loss_percentage": 0.25,
+    "feet_lost_per_piece": 5.0,
+    "effective_rope_length_per_piece": 15.0,
+    "num_pieces_needed": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "feet_per_story": 10,
+    "num_stories": 6,
+    "total_feet_needed": 60,
+    "rope_length_initial": 20,
+    "loss_percentage": 0.25,
+    "feet_lost_per_piece": 15.0,
+    "effective_rope_length_per_piece": 5.0,
+    "num_pieces_needed": 12.0,
+    "answer": 12.0
+  },
+  "correct_value": 5.0,
+  "flawed_value": 15.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_feet_needed",
+      "question_inputs": [
+        "feet_per_story",
+        "num_stories"
+      ],
+      "solution_line_template": "He needs {feet_per_story}*{num_stories}=<<{feet_per_story}*{num_stories}={total_feet_needed}>>{total_feet_needed} feet"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "feet_lost_per_piece",
+      "question_inputs": [
+        "rope_length_initial",
+        "loss_percentage"
+      ],
+      "solution_line_template": "He loses {rope_length_initial}*{loss_percentage}=<<{rope_length_initial}*{loss_percentage}={feet_lost_per_piece}>>{feet_lost_per_piece} feet each time"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "effective_rope_length_per_piece",
+      "question_inputs": [],
+      "solution_line_template": "So he gets {rope_length_initial}-{feet_lost_per_piece}=<<{rope_length_initial}-{feet_lost_per_piece}={effective_rope_length_per_piece}>>{effective_rope_length_per_piece} feet from each piece"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "num_pieces_needed",
+      "question_inputs": [],
+      "solution_line_template": "That means he needs {total_feet_needed}/{effective_rope_length_per_piece}=<<{total_feet_needed}/{effective_rope_length_per_piece}={num_pieces_needed}>>{num_pieces_needed} pieces of rope"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He needs 10*6=<<10*6=60>>60 feet",
+    "L2": "He loses 60*0.25=<<60*0.25=15>>15 feet each time",
+    "L3": "So he gets 20-15=<<20-15=5>>5 feet from each piece",
+    "L4": "That means he needs 60/5=<<60/5=12>>12 pieces of rope",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_feet_needed' (60) was used instead of 'rope_length_initial' (20).",
+  "repro_seed": -5826032436568052945,
+  "model_name": "google_gemini-2.5-flash"
+}

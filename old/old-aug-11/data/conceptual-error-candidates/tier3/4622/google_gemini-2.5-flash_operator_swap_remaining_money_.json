@@ -1,0 +1,78 @@
+{
+  "index": 4622,
+  "original_solution_mapping": {
+    "FA": "#### 1",
+    "L1": "Annie spent 5 * $50 = $<<5*50=250>>250 on televisions.",
+    "L2": "She has $260 - $250 = $<<260-250=10>>10 left for the 10 figurines.",
+    "L3": "A single figurine costs $10/10=$1."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4622.\n    Returns: the cost of a single figurine in dollars.\n    \"\"\"\n    # L1\n    num_televisions = 5 # bought 5 televisions\n    cost_per_television = 50 # each cost $50\n    cost_televisions = num_televisions * cost_per_television\n\n    # L2\n    total_spent = 260 # spent $260 in total\n    remaining_money = total_spent - cost_televisions\n\n    # L3\n    num_figurines = 10 # purchased 10 figurines\n    cost_per_figurine = remaining_money / num_figurines\n\n    # FA\n    answer = cost_per_figurine\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "remaining_money",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x309ec7a10>"
+  },
+  "correct_trace": {
+    "num_televisions": 5,
+    "cost_per_television": 50,
+    "cost_televisions": 250,
+    "total_spent": 260,
+    "remaining_money": 10,
+    "num_figurines": 10,
+    "cost_per_figurine": 1.0,
+    "answer": 1.0
+  },
+  "flawed_trace": {
+    "num_televisions": 5,
+    "cost_per_television": 50,
+    "cost_televisions": 250,
+    "total_spent": 260,
+    "remaining_money": 510,
+    "num_figurines": 10,
+    "cost_per_figurine": 51.0,
+    "answer": 51.0
+  },
+  "correct_value": 10,
+  "flawed_value": 510,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_televisions",
+      "question_inputs": [
+        "num_televisions",
+        "cost_per_television"
+      ],
+      "solution_line_template": "Annie spent {num_televisions} * ${cost_per_television} = $<<{num_televisions}*{cost_per_television}={cost_televisions}>>{cost_televisions} on televisions."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_money",
+      "question_inputs": [
+        "total_spent"
+      ],
+      "solution_line_template": "She has ${total_spent} - ${cost_televisions} = $<<{total_spent}-{cost_televisions}={remaining_money}>>{remaining_money} left for the 10 figurines."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cost_per_figurine",
+      "question_inputs": [
+        "num_figurines"
+      ],
+      "solution_line_template": "A single figurine costs ${remaining_money}/{num_figurines}=${cost_per_figurine}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Annie spent 5 * $50 = $<<5*50=250>>250 on televisions.",
+    "L2": "She has $260 - $250 = $<<260-250=510>>510 left for the 10 figurines.",
+    "L3": "A single figurine costs $510/10=$51.",
+    "FA": "#### 51"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 1292122640095212262,
+  "model_name": "google_gemini-2.5-flash"
+}

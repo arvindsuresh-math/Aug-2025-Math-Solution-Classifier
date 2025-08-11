@@ -1,0 +1,89 @@
+{
+  "index": 5816,
+  "original_solution_mapping": {
+    "FA": "#### 840",
+    "L1": "If each movie ticket is sold at $30, the cost of buying eight movie tickets is 8*$30 = $<<8*30=240>>240",
+    "L2": "Since eight movie tickets cost 2 times as much as one football game ticket, the cost of buying one football game ticket is $240/2 = $<<240/2=120>>120",
+    "L3": "Buying five football game tickets will cost 5*$120 = $<<5*120=600>>600",
+    "L4": "The total cost of buying eight movie tickets and five football game tickets is $600+$240 = $840"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5816.\n    Returns: the total amount of money Chandler will pay.\n    \"\"\"\n    # L1\n    num_movie_tickets = 8 # eight movie tickets\n    movie_ticket_price = 30 # each movie ticket is sold at $30\n    cost_eight_movie_tickets = num_movie_tickets * movie_ticket_price\n\n    # L2\n    cost_multiplier = 2 # 2 times as much\n    cost_one_football_ticket = cost_eight_movie_tickets / cost_multiplier\n\n    # L3\n    num_football_tickets = 5 # five football game tickets\n    cost_five_football_tickets = num_football_tickets * cost_one_football_ticket\n\n    # L4\n    total_cost = cost_five_football_tickets + cost_eight_movie_tickets\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_cost",
+    "operand_to_replace": "cost_five_football_tickets",
+    "replacement_variable": "num_football_tickets"
+  },
+  "correct_trace": {
+    "num_movie_tickets": 8,
+    "movie_ticket_price": 30,
+    "cost_eight_movie_tickets": 240,
+    "cost_multiplier": 2,
+    "cost_one_football_ticket": 120.0,
+    "num_football_tickets": 5,
+    "cost_five_football_tickets": 600.0,
+    "total_cost": 840.0,
+    "answer": 840.0
+  },
+  "flawed_trace": {
+    "num_movie_tickets": 8,
+    "movie_ticket_price": 30,
+    "cost_eight_movie_tickets": 240,
+    "cost_multiplier": 2,
+    "cost_one_football_ticket": 120.0,
+    "num_football_tickets": 5,
+    "cost_five_football_tickets": 600.0,
+    "total_cost": 245,
+    "answer": 245
+  },
+  "correct_value": 840.0,
+  "flawed_value": 245,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_eight_movie_tickets",
+      "question_inputs": [
+        "num_movie_tickets",
+        "movie_ticket_price"
+      ],
+      "solution_line_template": "If each movie ticket is sold at ${movie_ticket_price}, the cost of buying eight movie tickets is {num_movie_tickets}*${movie_ticket_price} = ${cost_eight_movie_tickets}<<{num_movie_tickets}*{movie_ticket_price}={cost_eight_movie_tickets}>>{cost_eight_movie_tickets}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cost_one_football_ticket",
+      "question_inputs": [
+        "cost_multiplier"
+      ],
+      "solution_line_template": "Since eight movie tickets cost {cost_multiplier} times as much as one football game ticket, the cost of buying one football game ticket is ${cost_eight_movie_tickets}/{cost_multiplier} = ${cost_one_football_ticket}<<{cost_eight_movie_tickets}/{cost_multiplier}={cost_one_football_ticket}>>{cost_one_football_ticket}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cost_five_football_tickets",
+      "question_inputs": [
+        "num_football_tickets"
+      ],
+      "solution_line_template": "Buying {num_football_tickets} football game tickets will cost {num_football_tickets}*${cost_one_football_ticket} = ${cost_five_football_tickets}<<{num_football_tickets}*{cost_one_football_ticket}={cost_five_football_tickets}>>{cost_five_football_tickets}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cost",
+      "question_inputs": [],
+      "solution_line_template": "The total cost of buying eight movie tickets and five football game tickets is ${cost_five_football_tickets}+${cost_eight_movie_tickets} = ${total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If each movie ticket is sold at $30, the cost of buying eight movie tickets is 8*$30 = $240<<8*30=240>>240",
+    "L2": "Since eight movie tickets cost 2 times as much as one football game ticket, the cost of buying one football game ticket is $240/2 = $120<<240/2=120>>120",
+    "L3": "Buying 5 football game tickets will cost 5*$120 = $600<<5*120=600>>600",
+    "L4": "The total cost of buying eight movie tickets and five football game tickets is $5+$240 = $245",
+    "FA": "#### 245"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'num_football_tickets' (value: 5) was used instead of 'cost_five_football_tickets' (value: 600.0).",
+  "repro_seed": 4528559530577006180,
+  "model_name": "google_gemini-2.5-flash"
+}

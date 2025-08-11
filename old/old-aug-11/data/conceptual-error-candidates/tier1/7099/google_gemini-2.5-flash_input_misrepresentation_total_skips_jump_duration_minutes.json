@@ -1,0 +1,64 @@
+{
+  "index": 7099,
+  "original_solution_mapping": {
+    "FA": "#### 1800",
+    "L1": "He was skipping rope for 10*60=<<10*60=600>>600 seconds",
+    "L2": "So he got 600*3=<<600*3=1800>>1800 skips"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7099.\n    Returns: the total number of skips Matt got.\n    \"\"\"\n    # L1\n    jump_duration_minutes = 10 # 10 minutes\n    seconds_per_minute = 60 # WK\n    total_seconds = jump_duration_minutes * seconds_per_minute\n\n    # L2\n    skips_per_second = 3 # 3 times per second\n    total_skips = total_seconds * skips_per_second\n\n    # FA\n    answer = total_skips\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_skips",
+    "operand_to_replace": "skips_per_second",
+    "replacement_variable": "jump_duration_minutes"
+  },
+  "correct_trace": {
+    "jump_duration_minutes": 10,
+    "seconds_per_minute": 60,
+    "total_seconds": 600,
+    "skips_per_second": 3,
+    "total_skips": 1800,
+    "answer": 1800
+  },
+  "flawed_trace": {
+    "jump_duration_minutes": 10,
+    "seconds_per_minute": 60,
+    "total_seconds": 600,
+    "skips_per_second": 3,
+    "total_skips": 6000,
+    "answer": 6000
+  },
+  "correct_value": 1800,
+  "flawed_value": 6000,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "seconds_per_minute"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_seconds",
+      "question_inputs": [
+        "jump_duration_minutes"
+      ],
+      "solution_line_template": "He was skipping rope for {jump_duration_minutes}*{seconds_per_minute}=<<{jump_duration_minutes}*{seconds_per_minute}={total_seconds}>>{total_seconds} seconds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_skips",
+      "question_inputs": [
+        "skips_per_second"
+      ],
+      "solution_line_template": "So he got {total_seconds}*{skips_per_second}=<<{total_seconds}*{skips_per_second}={total_skips}>>{total_skips} skips"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He was skipping rope for 10*60=<<10*60=600>>600 seconds",
+    "L2": "So he got 600*10=<<600*10=6000>>6000 skips",
+    "FA": "#### 6000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'jump_duration_minutes' (10) was used instead of 'skips_per_second' (3).",
+  "repro_seed": 2753047394847436174,
+  "model_name": "google_gemini-2.5-flash"
+}

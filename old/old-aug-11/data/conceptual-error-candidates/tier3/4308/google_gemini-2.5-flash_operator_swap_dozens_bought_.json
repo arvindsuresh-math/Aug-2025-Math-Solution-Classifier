@@ -1,0 +1,63 @@
+{
+  "index": 4308,
+  "original_solution_mapping": {
+    "FA": "#### 36",
+    "L1": "He got 15/5=<<15/5=3>>3 dozen",
+    "L2": "So he bought 3*12=<<3*12=36>>36 rolls"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4308.\n    Returns: the total number of rolls John bought.\n    \"\"\"\n    # L1\n    total_spent = 15 # He spent 15 dollars\n    cost_per_dozen = 5 # sell them for 5 dollars for a dozen\n    dozens_bought = total_spent / cost_per_dozen\n\n    # L2\n    rolls_per_dozen = 12 # WK\n    total_rolls = dozens_bought * rolls_per_dozen\n\n    # FA\n    answer = total_rolls\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "dozens_bought",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x30b7b1750>"
+  },
+  "correct_trace": {
+    "total_spent": 15,
+    "cost_per_dozen": 5,
+    "dozens_bought": 3.0,
+    "rolls_per_dozen": 12,
+    "total_rolls": 36.0,
+    "answer": 36.0
+  },
+  "flawed_trace": {
+    "total_spent": 15,
+    "cost_per_dozen": 5,
+    "dozens_bought": 75,
+    "rolls_per_dozen": 12,
+    "total_rolls": 900,
+    "answer": 900
+  },
+  "correct_value": 3.0,
+  "flawed_value": 75,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "dozens_bought",
+      "question_inputs": [
+        "total_spent",
+        "cost_per_dozen"
+      ],
+      "solution_line_template": "He got {total_spent}/{cost_per_dozen}=<<{total_spent}/{cost_per_dozen}={dozens_bought}>>{dozens_bought} dozen"
+    },
+    {
+      "WK_inputs": [
+        "rolls_per_dozen"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_rolls",
+      "question_inputs": [],
+      "solution_line_template": "So he bought {dozens_bought}*{rolls_per_dozen}=<<{dozens_bought}*{rolls_per_dozen}={total_rolls}>>{total_rolls} rolls"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He got 15/5=<<15/5=75>>75 dozen",
+    "L2": "So he bought 75*12=<<75*12=900>>900 rolls",
+    "FA": "#### 900"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": -5005386617498289669,
+  "model_name": "google_gemini-2.5-flash"
+}

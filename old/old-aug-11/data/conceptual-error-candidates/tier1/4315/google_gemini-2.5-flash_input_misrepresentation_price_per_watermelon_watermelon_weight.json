@@ -1,0 +1,63 @@
+{
+  "index": 4315,
+  "original_solution_mapping": {
+    "FA": "#### 828",
+    "L1": "A single watermelon would sell for $2 x 23 = $<<2*23=46>>46",
+    "L2": "60 watermelons would sell for $46 x 18 = $<<46*18=828>>828"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4315.\n    Returns: the total money Farmer Kent would make from selling watermelons.\n    \"\"\"\n    # L1\n    price_per_pound = 2 # for $2 a pound\n    watermelon_weight = 23 # weighs 23 pounds\n    price_per_watermelon = price_per_pound * watermelon_weight\n\n    # L2\n    num_watermelons_sold = 18 # selling 18 watermelons\n    total_money = price_per_watermelon * num_watermelons_sold\n\n    # FA\n    answer = total_money\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "price_per_watermelon",
+    "operand_to_replace": "price_per_pound",
+    "replacement_variable": "watermelon_weight"
+  },
+  "correct_trace": {
+    "price_per_pound": 2,
+    "watermelon_weight": 23,
+    "price_per_watermelon": 46,
+    "num_watermelons_sold": 18,
+    "total_money": 828,
+    "answer": 828
+  },
+  "flawed_trace": {
+    "price_per_pound": 2,
+    "watermelon_weight": 23,
+    "price_per_watermelon": 529,
+    "num_watermelons_sold": 18,
+    "total_money": 9522,
+    "answer": 9522
+  },
+  "correct_value": 46,
+  "flawed_value": 529,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "price_per_watermelon",
+      "question_inputs": [
+        "price_per_pound",
+        "watermelon_weight"
+      ],
+      "solution_line_template": "A single watermelon would sell for ${price_per_pound} x {watermelon_weight} = $<<{price_per_pound}*{watermelon_weight}={price_per_watermelon}>>{price_per_watermelon}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_money",
+      "question_inputs": [
+        "num_watermelons_sold"
+      ],
+      "solution_line_template": "60 watermelons would sell for ${price_per_watermelon} x {num_watermelons_sold} = $<<{price_per_watermelon}*{num_watermelons_sold}={total_money}>>{total_money}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "A single watermelon would sell for $23 x 23 = $<<23*23=529>>529",
+    "L2": "60 watermelons would sell for $529 x 18 = $<<529*18=9522>>9522",
+    "FA": "#### 9522"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'watermelon_weight' (23) was used instead of 'price_per_pound' (2).",
+  "repro_seed": 8534919216688891385,
+  "model_name": "google_gemini-2.5-flash"
+}

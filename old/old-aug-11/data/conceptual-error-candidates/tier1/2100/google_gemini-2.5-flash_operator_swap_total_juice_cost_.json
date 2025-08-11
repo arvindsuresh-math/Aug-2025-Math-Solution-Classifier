@@ -1,0 +1,92 @@
+{
+  "index": 2100,
+  "original_solution_mapping": {
+    "FA": "#### 22",
+    "L1": "Two boxes of pizza amount to $12 x 2 = $<<12*2=24>>24.",
+    "L2": "Two packs of juice amount to $2 x 2 = $<<2*2=4>>4.",
+    "L3": "Victoria paid a total of $24 + $4 = $<<24+4=28>>28.",
+    "L4": "Hence, she should return the $50 - $28 = $<<50-28=22>>22 to her mother."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2100.\n    Returns: the amount of money Victoria should return to her mother.\n    \"\"\"\n    # L1\n    pizza_cost_per_box = 12 # costs $12 each\n    num_pizza_boxes = 2 # bought 2 boxes of pizza\n    total_pizza_cost = pizza_cost_per_box * num_pizza_boxes\n\n    # L2\n    juice_cost_per_pack = 2 # cost $2 each\n    num_juice_packs = 2 # bought 2 packs of juice drinks\n    total_juice_cost = juice_cost_per_pack * num_juice_packs\n\n    # L3\n    total_paid = total_pizza_cost + total_juice_cost\n\n    # L4\n    initial_money = 50 # given a $50 bill\n    money_to_return = initial_money - total_paid\n\n    # FA\n    answer = money_to_return\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_juice_cost",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x30be16b90>"
+  },
+  "correct_trace": {
+    "pizza_cost_per_box": 12,
+    "num_pizza_boxes": 2,
+    "total_pizza_cost": 24,
+    "juice_cost_per_pack": 2,
+    "num_juice_packs": 2,
+    "total_juice_cost": 4,
+    "total_paid": 28,
+    "initial_money": 50,
+    "money_to_return": 22,
+    "answer": 22
+  },
+  "flawed_trace": {
+    "pizza_cost_per_box": 12,
+    "num_pizza_boxes": 2,
+    "total_pizza_cost": 24,
+    "juice_cost_per_pack": 2,
+    "num_juice_packs": 2,
+    "total_juice_cost": 1.0,
+    "total_paid": 25.0,
+    "initial_money": 50,
+    "money_to_return": 25.0,
+    "answer": 25.0
+  },
+  "correct_value": 4,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "pizza_cost_per_box",
+        "num_pizza_boxes"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_pizza_cost",
+      "solution_line_template": "Two boxes of pizza amount to ${pizza_cost_per_box} x {num_pizza_boxes} = $<<{pizza_cost_per_box}*{num_pizza_boxes}={total_pizza_cost}>>{total_pizza_cost}."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "juice_cost_per_pack",
+        "num_juice_packs"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_juice_cost",
+      "solution_line_template": "Two packs of juice amount to ${juice_cost_per_pack} x {num_juice_packs} = $<<{juice_cost_per_pack}*{num_juice_packs}={total_juice_cost}>>{total_juice_cost}."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_paid",
+      "solution_line_template": "Victoria paid a total of ${total_pizza_cost} + ${total_juice_cost} = $<<{total_pizza_cost}+{total_juice_cost}={total_paid}>>{total_paid}."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "initial_money"
+      ],
+      "WK_inputs": [],
+      "output_variable": "money_to_return",
+      "solution_line_template": "Hence, she should return the ${initial_money} - ${total_paid} = $<<{initial_money}-{total_paid}={money_to_return}>>{money_to_return} to her mother."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Two boxes of pizza amount to $12 x 2 = $<<12*2=24>>24.",
+    "L2": "Two packs of juice amount to $2 x 2 = $<<2*2=1>>1.",
+    "L3": "Victoria paid a total of $24 + $1 = $<<24+1=25>>25.",
+    "L4": "Hence, she should return the $50 - $25 = $<<50-25=25>>25 to her mother.",
+    "FA": "#### 25"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 3708231088720942751,
+  "model_name": "google_gemini-2.5-flash"
+}

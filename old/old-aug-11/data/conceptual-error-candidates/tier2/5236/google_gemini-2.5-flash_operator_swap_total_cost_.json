@@ -1,0 +1,63 @@
+{
+  "index": 5236,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "He gives his dog 2*30=<<2*30=60>>60 treats for the month",
+    "L2": "So that means it cost 60*.1=$<<60*.1=6>>6"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5236.\n    Returns: the total cost of the dog treats.\n    \"\"\"\n    # L1\n    treats_per_day = 2 # 2 treats a day\n    days_in_month = 30 # month is 30 days long\n    total_treats = treats_per_day * days_in_month\n\n    # L2\n    cost_per_treat = 0.1 # $.1 each\n    total_cost = total_treats * cost_per_treat\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_cost",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x30e901210>"
+  },
+  "correct_trace": {
+    "treats_per_day": 2,
+    "days_in_month": 30,
+    "total_treats": 60,
+    "cost_per_treat": 0.1,
+    "total_cost": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "treats_per_day": 2,
+    "days_in_month": 30,
+    "total_treats": 60,
+    "cost_per_treat": 0.1,
+    "total_cost": 600.0,
+    "answer": 600.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 600.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_treats",
+      "question_inputs": [
+        "treats_per_day",
+        "days_in_month"
+      ],
+      "solution_line_template": "He gives his dog {treats_per_day}*{days_in_month}=<<{treats_per_day}*{days_in_month}={total_treats}>>{total_treats} treats for the month"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "cost_per_treat"
+      ],
+      "solution_line_template": "So that means it cost {total_treats}*{cost_per_treat}=$<<{total_treats}*{cost_per_treat}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He gives his dog 2*30=<<2*30=60>>60 treats for the month",
+    "L2": "So that means it cost 60*0.1=$<<60*0.1=600>>600",
+    "FA": "#### 600"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 7967244501686500388,
+  "model_name": "google_gemini-2.5-flash"
+}

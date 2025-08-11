@@ -1,0 +1,89 @@
+{
+  "index": 903,
+  "original_solution_mapping": {
+    "FA": "#### 119",
+    "L1": "Her friend will pay $5 x 7 = $<<5*7=35>>35 after 7 days.",
+    "L2": "Her brother will pay $8 x 7 = $<<8*7=56>>56 after 7 days.",
+    "L3": "Her cousin will pay $4 x 7 = $<<4*7=28>>28 after 7 days.",
+    "L4": "Therefore, she will be able to collect $35 + $56 + $28 = $<<35+56+28=119>>119 after 7 days."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 903.\n    Returns: the total amount of money Margaux will collect after 7 days.\n    \"\"\"\n    # L1\n    friend_daily_pay = 5 # $5 per day\n    num_days = 7 # 7 days\n    friend_total_pay = friend_daily_pay * num_days\n\n    # L2\n    brother_daily_pay = 8 # $8 per day\n    brother_total_pay = brother_daily_pay * num_days\n\n    # L3\n    cousin_daily_pay = 4 # $4 per day\n    cousin_total_pay = cousin_daily_pay * num_days\n\n    # L4\n    total_collected = friend_total_pay + brother_total_pay + cousin_total_pay\n\n    # FA\n    answer = total_collected\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "cousin_total_pay",
+    "operand_to_replace": "num_days",
+    "replacement_variable": "brother_daily_pay"
+  },
+  "correct_trace": {
+    "friend_daily_pay": 5,
+    "num_days": 7,
+    "friend_total_pay": 35,
+    "brother_daily_pay": 8,
+    "brother_total_pay": 56,
+    "cousin_daily_pay": 4,
+    "cousin_total_pay": 28,
+    "total_collected": 119,
+    "answer": 119
+  },
+  "flawed_trace": {
+    "friend_daily_pay": 5,
+    "num_days": 7,
+    "friend_total_pay": 35,
+    "brother_daily_pay": 8,
+    "brother_total_pay": 56,
+    "cousin_daily_pay": 4,
+    "cousin_total_pay": 32,
+    "total_collected": 123,
+    "answer": 123
+  },
+  "correct_value": 28,
+  "flawed_value": 32,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "friend_daily_pay",
+        "num_days"
+      ],
+      "WK_inputs": [],
+      "output_variable": "friend_total_pay",
+      "solution_line_template": "Her friend will pay ${friend_daily_pay} x {num_days} = $<<{friend_daily_pay}*{num_days}={friend_total_pay}>>{friend_total_pay} after {num_days} days."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "brother_daily_pay"
+      ],
+      "WK_inputs": [],
+      "output_variable": "brother_total_pay",
+      "solution_line_template": "Her brother will pay ${brother_daily_pay} x {num_days} = $<<{brother_daily_pay}*{num_days}={brother_total_pay}>>{brother_total_pay} after {num_days} days."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "cousin_daily_pay"
+      ],
+      "WK_inputs": [],
+      "output_variable": "cousin_total_pay",
+      "solution_line_template": "Her cousin will pay ${cousin_daily_pay} x {num_days} = $<<{cousin_daily_pay}*{num_days}={cousin_total_pay}>>{cousin_total_pay} after {num_days} days."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_collected",
+      "solution_line_template": "Therefore, she will be able to collect ${friend_total_pay} + ${brother_total_pay} + ${cousin_total_pay} = $<<{friend_total_pay}+{brother_total_pay}+{cousin_total_pay}={total_collected}>>{total_collected} after 7 days."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Her friend will pay $5 x 7 = $<<5*7=35>>35 after 7 days.",
+    "L2": "Her brother will pay $8 x 7 = $<<8*7=56>>56 after 7 days.",
+    "L3": "Her cousin will pay $4 x 8 = $<<4*8=32>>32 after 8 days.",
+    "L4": "Therefore, she will be able to collect $35 + $56 + $32 = $<<35+56+32=123>>123 after 7 days.",
+    "FA": "#### 123"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'brother_daily_pay' (8) was used instead of 'num_days' (7).",
+  "repro_seed": 5826254140696597628,
+  "model_name": "google_gemini-2.5-flash"
+}

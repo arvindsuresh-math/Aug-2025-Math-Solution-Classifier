@@ -1,0 +1,96 @@
+{
+  "index": 3287,
+  "original_solution_mapping": {
+    "FA": "#### 650",
+    "L1": "First find how much the electrician earns per day: $100/day * 2 = $<<100*2=200>>200/day",
+    "L2": "Then find how much the plumber earns per day: $100/day * 250% = $<<100*250*.01=250>>250/day",
+    "L3": "Then find how much both workers pay together: $100/day/worker * 2 workers = $<<100*2=200>>200/day",
+    "L4": "Then add the cost of each worker to find the total labor cost per day: $200/day + $250/day + $200/day = $<<200+250+200=650>>650/day"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3287.\n    Returns: the overall labor costs for one day.\n    \"\"\"\n    # L1\n    worker_daily_pay = 100 # construction workers each make $100/day\n    electrician_multiplier = 2 # the electrician makes double what a worker is paid\n    electrician_daily_pay = worker_daily_pay * electrician_multiplier\n\n    # L2\n    plumber_percentage_text = 250 # plumber makes 250% of a worker's salary\n    plumber_percentage_value_in_calc = 250 # from solution text: 100*250*.01\n    percent_factor = 0.01 # WK\n    plumber_daily_pay = worker_daily_pay * plumber_percentage_value_in_calc * percent_factor\n\n    # L3\n    num_construction_workers = 2 # two construction workers\n    construction_workers_total_pay = worker_daily_pay * num_construction_workers\n\n    # L4\n    total_labor_cost = electrician_daily_pay + plumber_daily_pay + construction_workers_total_pay\n\n    # FA\n    answer = total_labor_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "plumber_daily_pay",
+    "operand_to_replace": "plumber_percentage_value_in_calc",
+    "replacement_variable": "worker_daily_pay"
+  },
+  "correct_trace": {
+    "worker_daily_pay": 100,
+    "electrician_multiplier": 2,
+    "electrician_daily_pay": 200,
+    "plumber_percentage_text": 250,
+    "plumber_percentage_value_in_calc": 250,
+    "percent_factor": 0.01,
+    "plumber_daily_pay": 250.0,
+    "num_construction_workers": 2,
+    "construction_workers_total_pay": 200,
+    "total_labor_cost": 650.0,
+    "answer": 650.0
+  },
+  "flawed_trace": {
+    "worker_daily_pay": 100,
+    "electrician_multiplier": 2,
+    "electrician_daily_pay": 200,
+    "plumber_percentage_text": 250,
+    "plumber_percentage_value_in_calc": 250,
+    "percent_factor": 0.01,
+    "plumber_daily_pay": 100.0,
+    "num_construction_workers": 2,
+    "construction_workers_total_pay": 200,
+    "total_labor_cost": 500.0,
+    "answer": 500.0
+  },
+  "correct_value": 250.0,
+  "flawed_value": 100.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "electrician_daily_pay",
+      "question_inputs": [
+        "worker_daily_pay",
+        "electrician_multiplier"
+      ],
+      "solution_line_template": "First find how much the electrician earns per day: ${worker_daily_pay}/day * {electrician_multiplier} = $<<{worker_daily_pay}*{electrician_multiplier}={electrician_daily_pay}>>{electrician_daily_pay}/day"
+    },
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L2",
+      "output_variable": "plumber_daily_pay",
+      "question_inputs": [
+        "plumber_percentage_text",
+        "plumber_percentage_value_in_calc"
+      ],
+      "solution_line_template": "Then find how much the plumber earns per day: ${worker_daily_pay}/day * {plumber_percentage_text}% = $<<{worker_daily_pay}*{plumber_percentage_value_in_calc}*{percent_factor}={plumber_daily_pay}>>{plumber_daily_pay}/day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "construction_workers_total_pay",
+      "question_inputs": [
+        "num_construction_workers"
+      ],
+      "solution_line_template": "Then find how much both workers pay together: ${worker_daily_pay}/day/worker * {num_construction_workers} workers = $<<{worker_daily_pay}*{num_construction_workers}={construction_workers_total_pay}>>{construction_workers_total_pay}/day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_labor_cost",
+      "question_inputs": [],
+      "solution_line_template": "Then add the cost of each worker to find the total labor cost per day: ${electrician_daily_pay}/day + ${plumber_daily_pay}/day + ${construction_workers_total_pay}/day = $<<{electrician_daily_pay}+{plumber_daily_pay}+{construction_workers_total_pay}={total_labor_cost}>>{total_labor_cost}/day"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how much the electrician earns per day: $100/day * 2 = $<<100*2=200>>200/day",
+    "L2": "Then find how much the plumber earns per day: $100/day * 250% = $<<100*100*0.01=100>>100/day",
+    "L3": "Then find how much both workers pay together: $100/day/worker * 2 workers = $<<100*2=200>>200/day",
+    "L4": "Then add the cost of each worker to find the total labor cost per day: $200/day + $100/day + $200/day = $<<200+100+200=500>>500/day",
+    "FA": "#### 500"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'worker_daily_pay' (100) was used instead of 'plumber_percentage_value_in_calc' (250).",
+  "repro_seed": 5529063756604241158,
+  "model_name": "google_gemini-2.5-flash"
+}

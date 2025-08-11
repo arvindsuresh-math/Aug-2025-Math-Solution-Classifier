@@ -1,0 +1,104 @@
+{
+  "index": 145,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "He watched 2*20=<<2*20=40>>40 minutes of Jeopardy.",
+    "L2": "Wheel of Fortune is 2*20=<<2*20=40>>40 minutes each.",
+    "L3": "So he watched it for 40*2=<<40*2=80>>80 minutes.",
+    "L4": "So he watched 40+80=<<40+80=120>>120 minutes of TV.",
+    "L5": "That means he watched 120/60=<<120/60=2>>2 hours of TV."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 145.\n    Returns: the total number of hours James watched TV.\n    \"\"\"\n    # L1\n    jeopardy_episodes = 2 # 2 episodes of Jeopardy\n    jeopardy_duration_per_episode = 20 # Jeopardy is 20 minutes\n    total_jeopardy_minutes = jeopardy_episodes * jeopardy_duration_per_episode\n\n    # L2\n    wheel_of_fortune_multiplier = 2 # Wheel of Fortune is twice as long\n    wheel_of_fortune_duration_per_episode = wheel_of_fortune_multiplier * jeopardy_duration_per_episode\n\n    # L3\n    wheel_of_fortune_episodes = 2 # 2 episodes of Wheel of Fortune\n    total_wheel_of_fortune_minutes = wheel_of_fortune_duration_per_episode * wheel_of_fortune_episodes\n\n    # L4\n    total_minutes_watched = total_jeopardy_minutes + total_wheel_of_fortune_minutes\n\n    # L5\n    minutes_per_hour = 60 # WK\n    total_hours_watched = total_minutes_watched / minutes_per_hour\n\n    # FA\n    answer = total_hours_watched\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_hours_watched",
+    "operand_to_replace": "minutes_per_hour",
+    "replacement_variable": "jeopardy_episodes"
+  },
+  "correct_trace": {
+    "jeopardy_episodes": 2,
+    "jeopardy_duration_per_episode": 20,
+    "total_jeopardy_minutes": 40,
+    "wheel_of_fortune_multiplier": 2,
+    "wheel_of_fortune_duration_per_episode": 40,
+    "wheel_of_fortune_episodes": 2,
+    "total_wheel_of_fortune_minutes": 80,
+    "total_minutes_watched": 120,
+    "minutes_per_hour": 60,
+    "total_hours_watched": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "jeopardy_episodes": 2,
+    "jeopardy_duration_per_episode": 20,
+    "total_jeopardy_minutes": 40,
+    "wheel_of_fortune_multiplier": 2,
+    "wheel_of_fortune_duration_per_episode": 40,
+    "wheel_of_fortune_episodes": 2,
+    "total_wheel_of_fortune_minutes": 80,
+    "total_minutes_watched": 120,
+    "minutes_per_hour": 60,
+    "total_hours_watched": 60.0,
+    "answer": 60.0
+  },
+  "correct_value": 2.0,
+  "flawed_value": 60.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_jeopardy_minutes",
+      "question_inputs": [
+        "jeopardy_episodes",
+        "jeopardy_duration_per_episode"
+      ],
+      "solution_line_template": "He watched {jeopardy_episodes}*{jeopardy_duration_per_episode}=<<{jeopardy_episodes}*{jeopardy_duration_per_episode}={total_jeopardy_minutes}>>{total_jeopardy_minutes} minutes of Jeopardy."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "wheel_of_fortune_duration_per_episode",
+      "question_inputs": [
+        "wheel_of_fortune_multiplier"
+      ],
+      "solution_line_template": "Wheel of Fortune is {wheel_of_fortune_multiplier}*{jeopardy_duration_per_episode}=<<{wheel_of_fortune_multiplier}*{jeopardy_duration_per_episode}={wheel_of_fortune_duration_per_episode}>>{wheel_of_fortune_duration_per_episode} minutes each."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_wheel_of_fortune_minutes",
+      "question_inputs": [
+        "wheel_of_fortune_episodes"
+      ],
+      "solution_line_template": "So he watched it for {wheel_of_fortune_duration_per_episode}*{wheel_of_fortune_episodes}=<<{wheel_of_fortune_duration_per_episode}*{wheel_of_fortune_episodes}={total_wheel_of_fortune_minutes}>>{total_wheel_of_fortune_minutes} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_minutes_watched",
+      "question_inputs": [],
+      "solution_line_template": "So he watched {total_jeopardy_minutes}+{total_wheel_of_fortune_minutes}=<<{total_jeopardy_minutes}+{total_wheel_of_fortune_minutes}={total_minutes_watched}>>{total_minutes_watched} minutes of TV."
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L5",
+      "output_variable": "total_hours_watched",
+      "question_inputs": [],
+      "solution_line_template": "That means he watched {total_minutes_watched}/{minutes_per_hour}=<<{total_minutes_watched}/{minutes_per_hour}={total_hours_watched}>>{total_hours_watched} hours of TV."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He watched 2*20=<<2*20=40>>40 minutes of Jeopardy.",
+    "L2": "Wheel of Fortune is 2*20=<<2*20=40>>40 minutes each.",
+    "L3": "So he watched it for 40*2=<<40*2=80>>80 minutes.",
+    "L4": "So he watched 40+80=<<40+80=120>>120 minutes of TV.",
+    "L5": "That means he watched 120/2=<<120/2=60>>60 hours of TV.",
+    "FA": "#### 60"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Input misrepresentation. The value for 'jeopardy_episodes' (2) was used instead of 'minutes_per_hour' (60).",
+  "repro_seed": 7474754003493710363,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 1905,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "If Edward needs to use 1 bolt per every five feet of piping, then for a job requiring 40-feet of piping, he will use 40/5 = <<40/5=8>>8 tightening bolts.",
+    "L2": "If for every 1 bolt he uses two washers, then he will need 8 * 2 = <<8*2=16>>16 washers to complete the job.",
+    "L3": "if he buys a bag containing 20 washers, and removes 16, he will have 20 - 16 = <<20-16=4>>4 washers remaining in the bag."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1905.\n    Returns: the number of washers remaining in the bag.\n    \"\"\"\n    # L1\n    total_pipe_length = 40 # 40 feet of copper pipe\n    feet_per_bolt = 5 # every 5 feet of pipe\n    num_bolts = total_pipe_length / feet_per_bolt\n\n    # L2\n    washers_per_bolt = 2 # for every bolt, he uses two washers\n    washers_needed = num_bolts * washers_per_bolt\n\n    # L3\n    initial_washers_in_bag = 20 # a bag of 20 washers\n    washers_remaining = initial_washers_in_bag - washers_needed\n\n    # FA\n    answer = washers_remaining\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "washers_needed",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x3091a9790>"
+  },
+  "correct_trace": {
+    "total_pipe_length": 40,
+    "feet_per_bolt": 5,
+    "num_bolts": 8.0,
+    "washers_per_bolt": 2,
+    "washers_needed": 16.0,
+    "initial_washers_in_bag": 20,
+    "washers_remaining": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "total_pipe_length": 40,
+    "feet_per_bolt": 5,
+    "num_bolts": 8.0,
+    "washers_per_bolt": 2,
+    "washers_needed": 4.0,
+    "initial_washers_in_bag": 20,
+    "washers_remaining": 16.0,
+    "answer": 16.0
+  },
+  "correct_value": 16.0,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "num_bolts",
+      "question_inputs": [
+        "total_pipe_length",
+        "feet_per_bolt"
+      ],
+      "solution_line_template": "If Edward needs to use 1 bolt per every {feet_per_bolt} feet of piping, then for a job requiring {total_pipe_length}-feet of piping, he will use {total_pipe_length}/{feet_per_bolt} = <<{total_pipe_length}/{feet_per_bolt}={num_bolts}>>{num_bolts} tightening bolts."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "washers_needed",
+      "question_inputs": [
+        "washers_per_bolt"
+      ],
+      "solution_line_template": "If for every 1 bolt he uses {washers_per_bolt} washers, then he will need {num_bolts} * {washers_per_bolt} = <<{num_bolts}*{washers_per_bolt}={washers_needed}>>{washers_needed} washers to complete the job."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "washers_remaining",
+      "question_inputs": [
+        "initial_washers_in_bag"
+      ],
+      "solution_line_template": "if he buys a bag containing {initial_washers_in_bag} washers, and removes {washers_needed}, he will have {initial_washers_in_bag} - {washers_needed} = <<{initial_washers_in_bag}-{washers_needed}={washers_remaining}>>{washers_remaining} washers remaining in the bag."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Edward needs to use 1 bolt per every 5 feet of piping, then for a job requiring 40-feet of piping, he will use 40/5 = <<40/5=8>>8 tightening bolts.",
+    "L2": "If for every 1 bolt he uses 2 washers, then he will need 8 * 2 = <<8*2=4>>4 washers to complete the job.",
+    "L3": "if he buys a bag containing 20 washers, and removes 4, he will have 20 - 4 = <<20-4=16>>16 washers remaining in the bag.",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 5922614529653675498,
+  "model_name": "google_gemini-2.5-flash"
+}

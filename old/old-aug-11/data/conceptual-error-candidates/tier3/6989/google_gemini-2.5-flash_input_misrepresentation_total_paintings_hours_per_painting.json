@@ -1,0 +1,63 @@
+{
+  "index": 6989,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "She completes 30 hours/week / 3 hours/painting = <<30/3=10>>10 paintings/week",
+    "L2": "So in one month, she paints 10 paintings/week * 4 weeks/month = <<10*4=40>>40 paintings"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6989.\n    Returns: the total number of paintings the artist can make in four weeks.\n    \"\"\"\n    # L1\n    painting_hours_per_week = 30 # An artist spends 30 hours every week painting\n    hours_per_painting = 3 # it takes her 3 hours to complete a painting\n    paintings_per_week = painting_hours_per_week / hours_per_painting\n\n    # L2\n    weeks_in_period = 4 # in four weeks\n    total_paintings = paintings_per_week * weeks_in_period\n\n    # FA\n    answer = total_paintings\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_paintings",
+    "operand_to_replace": "weeks_in_period",
+    "replacement_variable": "hours_per_painting"
+  },
+  "correct_trace": {
+    "painting_hours_per_week": 30,
+    "hours_per_painting": 3,
+    "paintings_per_week": 10.0,
+    "weeks_in_period": 4,
+    "total_paintings": 40.0,
+    "answer": 40.0
+  },
+  "flawed_trace": {
+    "painting_hours_per_week": 30,
+    "hours_per_painting": 3,
+    "paintings_per_week": 10.0,
+    "weeks_in_period": 4,
+    "total_paintings": 30.0,
+    "answer": 30.0
+  },
+  "correct_value": 40.0,
+  "flawed_value": 30.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "paintings_per_week",
+      "question_inputs": [
+        "painting_hours_per_week",
+        "hours_per_painting"
+      ],
+      "solution_line_template": "She completes {painting_hours_per_week} hours/week / {hours_per_painting} hours/painting = <<{painting_hours_per_week}/{hours_per_painting}={paintings_per_week}>>{paintings_per_week} paintings/week"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_paintings",
+      "question_inputs": [
+        "weeks_in_period"
+      ],
+      "solution_line_template": "So in one month, she paints {paintings_per_week} paintings/week * {weeks_in_period} weeks/month = <<{paintings_per_week}*{weeks_in_period}={total_paintings}>>{total_paintings} paintings"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "She completes 30 hours/week / 3 hours/painting = <<30/3=10>>10 paintings/week",
+    "L2": "So in one month, she paints 10 paintings/week * 3 weeks/month = <<10*3=30>>30 paintings",
+    "FA": "#### 30"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'hours_per_painting' (3) was used instead of 'weeks_in_period' (4).",
+  "repro_seed": -6671110524716639192,
+  "model_name": "google_gemini-2.5-flash"
+}

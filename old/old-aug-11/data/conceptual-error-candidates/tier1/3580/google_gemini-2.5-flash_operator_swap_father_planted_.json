@@ -1,0 +1,74 @@
+{
+  "index": 3580,
+  "original_solution_mapping": {
+    "FA": "#### 600",
+    "L1": "On the second day, he planted 2 * 200 seedlings = <<2*200=400>>400 seedlings.",
+    "L2": "The total number of seedlings Remi planted on the two days is 400 seedlings + 200 seedlings = <<400+200=600>>600 seedlings.",
+    "L3": "If the total number of seedlings transferred from the nursery was 1200 after the second day, Remi's father planted 1200 seedlings - 600 seedlings = <<1200-600=600>>600 seedlings."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3580.\n    Returns: the number of seedlings Remi's father planted.\n    \"\"\"\n    # L1\n    multiplier_second_day = 2 # twice the number of seedlings\n    seedlings_first_day = 200 # planted 200 seedlings on the farm\n    seedlings_second_day = multiplier_second_day * seedlings_first_day\n\n    # L2\n    remi_total_two_days = seedlings_second_day + seedlings_first_day\n\n    # L3\n    total_transferred = 1200 # total number of seedlings transferred to the farm on these two days was 1200\n    father_planted = total_transferred - remi_total_two_days\n\n    # FA\n    answer = father_planted\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "father_planted",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x309909c10>"
+  },
+  "correct_trace": {
+    "multiplier_second_day": 2,
+    "seedlings_first_day": 200,
+    "seedlings_second_day": 400,
+    "remi_total_two_days": 600,
+    "total_transferred": 1200,
+    "father_planted": 600,
+    "answer": 600
+  },
+  "flawed_trace": {
+    "multiplier_second_day": 2,
+    "seedlings_first_day": 200,
+    "seedlings_second_day": 400,
+    "remi_total_two_days": 600,
+    "total_transferred": 1200,
+    "father_planted": 2.0,
+    "answer": 2.0
+  },
+  "correct_value": 600,
+  "flawed_value": 2.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "seedlings_second_day",
+      "question_inputs": [
+        "multiplier_second_day",
+        "seedlings_first_day"
+      ],
+      "solution_line_template": "On the second day, he planted {multiplier_second_day} * {seedlings_first_day} seedlings = <<{multiplier_second_day}*{seedlings_first_day}={seedlings_second_day}>>{seedlings_second_day} seedlings."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remi_total_two_days",
+      "question_inputs": [],
+      "solution_line_template": "The total number of seedlings Remi planted on the two days is {seedlings_second_day} seedlings + {seedlings_first_day} seedlings = <<{seedlings_second_day}+{seedlings_first_day}={remi_total_two_days}>>{remi_total_two_days} seedlings."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "father_planted",
+      "question_inputs": [
+        "total_transferred"
+      ],
+      "solution_line_template": "If the total number of seedlings transferred from the nursery was {total_transferred} after the second day, Remi's father planted {total_transferred} seedlings - {remi_total_two_days} seedlings = <<{total_transferred}-{remi_total_two_days}={father_planted}>>{father_planted} seedlings."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On the second day, he planted 2 * 200 seedlings = <<2*200=400>>400 seedlings.",
+    "L2": "The total number of seedlings Remi planted on the two days is 400 seedlings + 200 seedlings = <<400+200=600>>600 seedlings.",
+    "L3": "If the total number of seedlings transferred from the nursery was 1200 after the second day, Remi's father planted 1200 seedlings - 600 seedlings = <<1200-600=2>>2 seedlings.",
+    "FA": "#### 2"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": 5667230121337246665,
+  "model_name": "google_gemini-2.5-flash"
+}

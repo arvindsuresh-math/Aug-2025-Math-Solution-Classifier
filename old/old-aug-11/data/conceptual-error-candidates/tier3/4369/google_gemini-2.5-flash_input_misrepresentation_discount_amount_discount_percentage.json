@@ -1,0 +1,59 @@
+{
+  "index": 4369,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "The plant has $10 x 10/100 = $1 discount.",
+    "L2": "So, Rose paid $10 - $1 = $<<10-1=9>>9 for the plant."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4369.\n    Returns: the price Rose paid for the plant after discount.\n    \"\"\"\n    # L1\n    original_price = 10 # If the price is $10\n    discount_percentage = Fraction(10, 100) # 10% discount\n    discount_amount = original_price * discount_percentage\n\n    # L2\n    final_price = original_price - discount_amount\n\n    # FA\n    answer = final_price\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "discount_amount",
+    "operand_to_replace": "original_price",
+    "replacement_variable": "discount_percentage"
+  },
+  "correct_trace": {
+    "original_price": 10,
+    "discount_percentage": "1/10",
+    "discount_amount": "1",
+    "final_price": "9",
+    "answer": "9"
+  },
+  "flawed_trace": {
+    "original_price": 10,
+    "discount_percentage": "1/10",
+    "discount_amount": "1/100",
+    "final_price": "999/100",
+    "answer": "999/100"
+  },
+  "correct_value": "1",
+  "flawed_value": "1/100",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "discount_amount",
+      "question_inputs": [
+        "original_price",
+        "discount_percentage"
+      ],
+      "solution_line_template": "The plant has ${original_price} x {discount_percentage} = ${discount_amount} discount."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "final_price",
+      "question_inputs": [],
+      "solution_line_template": "So, Rose paid ${original_price} - ${discount_amount} = $<<{original_price}-{discount_amount}={final_price}>>{final_price} for the plant."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The plant has $10/100 x 10/100 = $1/100 discount.",
+    "L2": "So, Rose paid $10 - $1/100 = $<<10-1/100=999/100>>999/100 for the plant.",
+    "FA": "#### 999/100"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'discount_percentage' (10/100) was used instead of 'original_price' (10).",
+  "repro_seed": 4594640714959317343,
+  "model_name": "google_gemini-2.5-flash"
+}

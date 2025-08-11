@@ -1,0 +1,85 @@
+{
+  "index": 2851,
+  "original_solution_mapping": {
+    "FA": "#### 240",
+    "L1": "If Aaron is 15 years old, and his sister is 3 times as old as him, then the sister is 3*15 = <<15*3=45>>45 years old.",
+    "L2": "Together, Aaron and his sister have a total age of 45+15 = <<45+15=60>>60 years",
+    "L3": "Henry is four times as old as the sister, meaning he is 45*4 = <<45*4=180>>180 years old.",
+    "L4": "The three siblings together have a total age of 60+180 = <<60+180=240>>240 years"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2851.\n    Returns: the combined age of the siblings.\n    \"\"\"\n    # L1\n    aaron_age = 15 # Aaron, Henry's brother, is 15 years old\n    sister_age_multiplier = 3 # three times as old as Aaron\n    sister_age = sister_age_multiplier * aaron_age\n\n    # L2\n    aaron_sister_combined_age = sister_age + aaron_age\n\n    # L3\n    henry_age_multiplier = 4 # Henry is four times as old as his sister\n    henry_age = sister_age * henry_age_multiplier\n\n    # L4\n    total_siblings_age = aaron_sister_combined_age + henry_age\n\n    # FA\n    answer = total_siblings_age\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "aaron_sister_combined_age",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x309c03490>"
+  },
+  "correct_trace": {
+    "aaron_age": 15,
+    "sister_age_multiplier": 3,
+    "sister_age": 45,
+    "aaron_sister_combined_age": 60,
+    "henry_age_multiplier": 4,
+    "henry_age": 180,
+    "total_siblings_age": 240,
+    "answer": 240
+  },
+  "flawed_trace": {
+    "aaron_age": 15,
+    "sister_age_multiplier": 3,
+    "sister_age": 45,
+    "aaron_sister_combined_age": 675,
+    "henry_age_multiplier": 4,
+    "henry_age": 180,
+    "total_siblings_age": 855,
+    "answer": 855
+  },
+  "correct_value": 60,
+  "flawed_value": 675,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "aaron_age",
+        "sister_age_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "sister_age",
+      "solution_line_template": "If Aaron is {aaron_age} years old, and his sister is {sister_age_multiplier} times as old as him, then the sister is {sister_age_multiplier}*{aaron_age} = <<{aaron_age}*{sister_age_multiplier}={sister_age}>>{sister_age} years old."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "aaron_sister_combined_age",
+      "solution_line_template": "Together, Aaron and his sister have a total age of {sister_age}+{aaron_age} = <<{sister_age}+{aaron_age}={aaron_sister_combined_age}>>{aaron_sister_combined_age} years"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "henry_age_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "henry_age",
+      "solution_line_template": "Henry is {henry_age_multiplier} times as old as the sister, meaning he is {sister_age}*{henry_age_multiplier} = <<{sister_age}*{henry_age_multiplier}={henry_age}>>{henry_age} years old."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_siblings_age",
+      "solution_line_template": "The three siblings together have a total age of {aaron_sister_combined_age}+{henry_age} = <<{aaron_sister_combined_age}+{henry_age}={total_siblings_age}>>{total_siblings_age} years"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Aaron is 15 years old, and his sister is 3 times as old as him, then the sister is 3*15 = <<15*3=45>>45 years old.",
+    "L2": "Together, Aaron and his sister have a total age of 45+15 = <<45+15=675>>675 years",
+    "L3": "Henry is 4 times as old as the sister, meaning he is 45*4 = <<45*4=180>>180 years old.",
+    "L4": "The three siblings together have a total age of 675+180 = <<675+180=855>>855 years",
+    "FA": "#### 855"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 1795702360217447786,
+  "model_name": "google_gemini-2.5-flash"
+}

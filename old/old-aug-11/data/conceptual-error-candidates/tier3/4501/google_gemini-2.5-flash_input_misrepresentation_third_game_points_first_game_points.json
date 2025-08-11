@@ -1,0 +1,93 @@
+{
+  "index": 4501,
+  "original_solution_mapping": {
+    "FA": "#### 130",
+    "L1": "The points Roosevelt high school has for the second game are 30/2=<<30/2=15>>15 points.",
+    "L2": "The points Roosevelt high school has for the third game are 15*3=<<15*3=45>>45 points.",
+    "L3": "The total points Roosevelt high school has for the tournament are 30+15+45+50=<<30+15+45+50=140>>140 points.",
+    "L4": "The total points Greendale high school has for the tournament are 140-10=<<140-10=130>>130 points."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4501.\n    Returns: the total points Greendale high school has.\n    \"\"\"\n    # L1\n    first_game_points = 30 # scores 30 points in the first game\n    half_divisor = 2 # half as much in the second game\n    second_game_points = first_game_points / half_divisor\n\n    # L2\n    triple_multiplier = 3 # triple as much as the second game\n    third_game_points = second_game_points * triple_multiplier\n\n    # L3\n    bonus_points = 50 # receives 50 bonus points\n    roosevelt_total_points = first_game_points + second_game_points + third_game_points + bonus_points\n\n    # L4\n    greendale_less_points = 10 # 10 points less than Roosevelt high school\n    greendale_total_points = roosevelt_total_points - greendale_less_points\n\n    # FA\n    answer = greendale_total_points\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "third_game_points",
+    "operand_to_replace": "triple_multiplier",
+    "replacement_variable": "first_game_points"
+  },
+  "correct_trace": {
+    "first_game_points": 30,
+    "half_divisor": 2,
+    "second_game_points": 15.0,
+    "triple_multiplier": 3,
+    "third_game_points": 45.0,
+    "bonus_points": 50,
+    "roosevelt_total_points": 140.0,
+    "greendale_less_points": 10,
+    "greendale_total_points": 130.0,
+    "answer": 130.0
+  },
+  "flawed_trace": {
+    "first_game_points": 30,
+    "half_divisor": 2,
+    "second_game_points": 15.0,
+    "triple_multiplier": 3,
+    "third_game_points": 450.0,
+    "bonus_points": 50,
+    "roosevelt_total_points": 545.0,
+    "greendale_less_points": 10,
+    "greendale_total_points": 535.0,
+    "answer": 535.0
+  },
+  "correct_value": 45.0,
+  "flawed_value": 450.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "second_game_points",
+      "question_inputs": [
+        "first_game_points",
+        "half_divisor"
+      ],
+      "solution_line_template": "The points Roosevelt high school has for the second game are {first_game_points}/{half_divisor}=<<{first_game_points}/{half_divisor}={second_game_points}>>{second_game_points} points."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "third_game_points",
+      "question_inputs": [
+        "triple_multiplier"
+      ],
+      "solution_line_template": "The points Roosevelt high school has for the third game are {second_game_points}*{triple_multiplier}=<<{second_game_points}*{triple_multiplier}={third_game_points}>>{third_game_points} points."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "roosevelt_total_points",
+      "question_inputs": [
+        "bonus_points"
+      ],
+      "solution_line_template": "The total points Roosevelt high school has for the tournament are {first_game_points}+{second_game_points}+{third_game_points}+{bonus_points}=<<{first_game_points}+{second_game_points}+{third_game_points}+{bonus_points}={roosevelt_total_points}>>{roosevelt_total_points} points."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "greendale_total_points",
+      "question_inputs": [
+        "greendale_less_points"
+      ],
+      "solution_line_template": "The total points Greendale high school has for the tournament are {roosevelt_total_points}-{greendale_less_points}=<<{roosevelt_total_points}-{greendale_less_points}={greendale_total_points}>>{greendale_total_points} points."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The points Roosevelt high school has for the second game are 30/2=<<30/2=15>>15 points.",
+    "L2": "The points Roosevelt high school has for the third game are 15*30=<<15*30=450>>450 points.",
+    "L3": "The total points Roosevelt high school has for the tournament are 30+15+450+50=<<30+15+450+50=545>>545 points.",
+    "L4": "The total points Greendale high school has for the tournament are 545-10=<<545-10=535>>535 points.",
+    "FA": "#### 535"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'first_game_points' (30) was used instead of 'triple_multiplier' (3).",
+  "repro_seed": 3490543858240219498,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,92 @@
+{
+  "index": 1317,
+  "original_solution_mapping": {
+    "FA": "#### 240",
+    "L1": "If he finished the race, it would've taken 5 minutes because 2.5 x 2 = <<2.5*2=5>>5",
+    "L2": "Their total time would've been 8 minutes because 3 + 5 = <<3+5=8>>8",
+    "L3": "The average would've been 4 minutes because 8 / 2 = <<8/2=4>>4",
+    "L4": "The average time in seconds would've been 240 because 4 x 60 = <<4*60=240>>240"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1317.\n    Returns: the average time in seconds for the racers.\n    \"\"\"\n    # L1\n    diego_half_block_time = 2.5 # Diego runs around half the block in 2.5 minutes\n    full_block_multiplier = 2 # WK\n    diego_full_block_time = diego_half_block_time * full_block_multiplier\n\n    # L2\n    carlos_time = 3 # Carlos runs around the entire block in 3 minutes\n    total_time_minutes = carlos_time + diego_full_block_time\n\n    # L3\n    num_racers = 2 # Carlos and Diego are racing\n    average_time_minutes = total_time_minutes / num_racers\n\n    # L4\n    seconds_per_minute = 60 # WK\n    average_time_seconds = average_time_minutes * seconds_per_minute\n\n    # FA\n    answer = average_time_seconds\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "average_time_seconds",
+    "replacement_variable": "total_time_minutes"
+  },
+  "correct_trace": {
+    "diego_half_block_time": 2.5,
+    "full_block_multiplier": 2,
+    "diego_full_block_time": 5.0,
+    "carlos_time": 3,
+    "total_time_minutes": 8.0,
+    "num_racers": 2,
+    "average_time_minutes": 4.0,
+    "seconds_per_minute": 60,
+    "average_time_seconds": 240.0,
+    "answer": 240.0
+  },
+  "flawed_trace": {
+    "diego_half_block_time": 2.5,
+    "full_block_multiplier": 2,
+    "diego_full_block_time": 5.0,
+    "carlos_time": 3,
+    "total_time_minutes": 8.0,
+    "num_racers": 2,
+    "average_time_minutes": 4.0,
+    "seconds_per_minute": 60,
+    "average_time_seconds": 240.0,
+    "answer": 8.0
+  },
+  "correct_value": 240.0,
+  "flawed_value": 8.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "full_block_multiplier"
+      ],
+      "line_number": "L1",
+      "output_variable": "diego_full_block_time",
+      "question_inputs": [
+        "diego_half_block_time"
+      ],
+      "solution_line_template": "If he finished the race, it would've taken {diego_full_block_time} minutes because {diego_half_block_time} x {full_block_multiplier} = <<{diego_half_block_time}*{full_block_multiplier}={diego_full_block_time}>>{diego_full_block_time}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_time_minutes",
+      "question_inputs": [
+        "carlos_time"
+      ],
+      "solution_line_template": "Their total time would've been {total_time_minutes} minutes because {carlos_time} + {diego_full_block_time} = <<{carlos_time}+{diego_full_block_time}={total_time_minutes}>>{total_time_minutes}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "average_time_minutes",
+      "question_inputs": [
+        "num_racers"
+      ],
+      "solution_line_template": "The average would've been {average_time_minutes} minutes because {total_time_minutes} / {num_racers} = <<{total_time_minutes}/{num_racers}={average_time_minutes}>>{average_time_minutes}"
+    },
+    {
+      "WK_inputs": [
+        "seconds_per_minute"
+      ],
+      "line_number": "L4",
+      "output_variable": "average_time_seconds",
+      "question_inputs": [],
+      "solution_line_template": "The average time in seconds would've been {average_time_seconds} because {average_time_minutes} x {seconds_per_minute} = <<{average_time_minutes}*{seconds_per_minute}={average_time_seconds}>>{average_time_seconds}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If he finished the race, it would've taken 5 minutes because 2.5 x 2 = <<2.5*2=5>>5",
+    "L2": "Their total time would've been 8 minutes because 3 + 5 = <<3+5=8>>8",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'total_time_minutes' (value: 8.0) was reported instead of 'average_time_seconds' (value: 240.0).",
+  "repro_seed": -4137645847899033712,
+  "model_name": "google_gemini-2.5-flash"
+}

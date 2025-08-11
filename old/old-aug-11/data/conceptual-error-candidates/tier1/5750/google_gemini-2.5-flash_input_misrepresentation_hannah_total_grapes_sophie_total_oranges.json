@@ -1,0 +1,74 @@
+{
+  "index": 5750,
+  "original_solution_mapping": {
+    "FA": "#### 1800",
+    "L1": "If Sophie was given 20 oranges every day for thirty days, she had taken 20*30 = <<20*30=600>>600 oranges to school.",
+    "L2": "Similarly, in the thirty days, Hannah had taken 40*30 = <<40*30=1200>>1200 grapes to school.",
+    "L3": "In the thirty days, Hannah and Sophie took 1200+600 = <<1200+600=1800>>1800 fruits to school."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5750.\n    Returns: the total number of fruits that Sophie and Hannah had eaten in the 30 days.\n    \"\"\"\n    # L1\n    sophie_oranges_per_day = 20 # 20 oranges every day\n    num_days = 30 # for 30 days\n    sophie_total_oranges = sophie_oranges_per_day * num_days\n\n    # L2\n    hannah_grapes_per_day = 40 # 40 grapes every day\n    hannah_total_grapes = hannah_grapes_per_day * num_days\n\n    # L3\n    total_fruits = hannah_total_grapes + sophie_total_oranges\n\n    # FA\n    answer = total_fruits\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "hannah_total_grapes",
+    "operand_to_replace": "num_days",
+    "replacement_variable": "sophie_total_oranges"
+  },
+  "correct_trace": {
+    "sophie_oranges_per_day": 20,
+    "num_days": 30,
+    "sophie_total_oranges": 600,
+    "hannah_grapes_per_day": 40,
+    "hannah_total_grapes": 1200,
+    "total_fruits": 1800,
+    "answer": 1800
+  },
+  "flawed_trace": {
+    "sophie_oranges_per_day": 20,
+    "num_days": 30,
+    "sophie_total_oranges": 600,
+    "hannah_grapes_per_day": 40,
+    "hannah_total_grapes": 24000,
+    "total_fruits": 24600,
+    "answer": 24600
+  },
+  "correct_value": 1200,
+  "flawed_value": 24000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "sophie_total_oranges",
+      "question_inputs": [
+        "sophie_oranges_per_day",
+        "num_days"
+      ],
+      "solution_line_template": "If Sophie was given {sophie_oranges_per_day} oranges every day for thirty days, she had taken {sophie_oranges_per_day}*{num_days} = <<{sophie_oranges_per_day}*{num_days}={sophie_total_oranges}>>{sophie_total_oranges} oranges to school."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "hannah_total_grapes",
+      "question_inputs": [
+        "hannah_grapes_per_day"
+      ],
+      "solution_line_template": "Similarly, in the thirty days, Hannah had taken {hannah_grapes_per_day}*{num_days} = <<{hannah_grapes_per_day}*{num_days}={hannah_total_grapes}>>{hannah_total_grapes} grapes to school."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_fruits",
+      "question_inputs": [],
+      "solution_line_template": "In the thirty days, Hannah and Sophie took {hannah_total_grapes}+{sophie_total_oranges} = <<{hannah_total_grapes}+{sophie_total_oranges}={total_fruits}>>{total_fruits} fruits to school."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Sophie was given 20 oranges every day for thirty days, she had taken 20*30 = <<20*30=600>>600 oranges to school.",
+    "L2": "Similarly, in the thirty days, Hannah had taken 40*600 = <<40*600=24000>>24000 grapes to school.",
+    "L3": "In the thirty days, Hannah and Sophie took 24000+600 = <<24000+600=24600>>24600 fruits to school.",
+    "FA": "#### 24600"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'sophie_total_oranges' (600) was used instead of 'num_days' (30).",
+  "repro_seed": 3279207870745593027,
+  "model_name": "google_gemini-2.5-flash"
+}

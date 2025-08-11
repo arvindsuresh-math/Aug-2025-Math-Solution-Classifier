@@ -1,0 +1,74 @@
+{
+  "index": 122,
+  "original_solution_mapping": {
+    "FA": "#### 48",
+    "L1": "The total capacity of the 40 chairs was 40*2=<<40*2=80>>80 people.",
+    "L2": "If 2/5 of the chairs were unoccupied, 2/5*80=<<2/5*80=32>>32 people missed the board meeting since the number of members was the same as the chair's capacity.",
+    "L3": "The number of board members who attended the meeting was 80-32=<<80-32=48>>48"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 122.\n    Returns: the number of board members who attended the meeting.\n    \"\"\"\n    # L1\n    num_chairs = 40 # 40 chairs\n    capacity_per_chair = 2 # capacity of 2 people each\n    total_capacity = num_chairs * capacity_per_chair\n\n    # L2\n    unoccupied_fraction = Fraction(2, 5) # 2/5 of the chairs were not occupied\n    people_missed_meeting = unoccupied_fraction * total_capacity\n\n    # L3\n    attended_members = total_capacity - people_missed_meeting\n\n    # FA\n    answer = attended_members\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_capacity",
+    "operand_to_replace": "num_chairs",
+    "replacement_variable": "capacity_per_chair"
+  },
+  "correct_trace": {
+    "num_chairs": 40,
+    "capacity_per_chair": 2,
+    "total_capacity": 80,
+    "unoccupied_fraction": "2/5",
+    "people_missed_meeting": "32",
+    "attended_members": "48",
+    "answer": "48"
+  },
+  "flawed_trace": {
+    "num_chairs": 40,
+    "capacity_per_chair": 2,
+    "total_capacity": 4,
+    "unoccupied_fraction": "2/5",
+    "people_missed_meeting": "8/5",
+    "attended_members": "12/5",
+    "answer": "12/5"
+  },
+  "correct_value": 80,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_capacity",
+      "question_inputs": [
+        "num_chairs",
+        "capacity_per_chair"
+      ],
+      "solution_line_template": "The total capacity of the {num_chairs} chairs was {num_chairs}*{capacity_per_chair}=<<{num_chairs}*{capacity_per_chair}={total_capacity}>>{total_capacity} people."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "people_missed_meeting",
+      "question_inputs": [
+        "unoccupied_fraction"
+      ],
+      "solution_line_template": "If {unoccupied_fraction} of the chairs were unoccupied, {unoccupied_fraction}*{total_capacity}=<<{unoccupied_fraction}*{total_capacity}={people_missed_meeting}>>{people_missed_meeting} people missed the board meeting since the number of members was the same as the chair's capacity."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "attended_members",
+      "question_inputs": [],
+      "solution_line_template": "The number of board members who attended the meeting was {total_capacity}-{people_missed_meeting}=<<{total_capacity}-{people_missed_meeting}={attended_members}>>{attended_members}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total capacity of the 2 chairs was 2*2=<<2*2=4>>4 people.",
+    "L2": "If 2/5 of the chairs were unoccupied, 2/5*4=<<2/5*4=8/5>>8/5 people missed the board meeting since the number of members was the same as the chair's capacity.",
+    "L3": "The number of board members who attended the meeting was 4-8/5=<<4-8/5=12/5>>12/5",
+    "FA": "#### 12/5"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'capacity_per_chair' (2) was used instead of 'num_chairs' (40).",
+  "repro_seed": 7481349930562459009,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,63 @@
+{
+  "index": 2845,
+  "original_solution_mapping": {
+    "FA": "#### 750",
+    "L1": "First find the total number of liters a mosquito sucks in one feeding: 20 drops / 5000 drops/liter = <<20/5000=.004>>.004 L/feeding",
+    "L2": "Then divide the lethal amount of blood by the amount of blood one mosquito can drain: 3 L / .004 L/feeding = <<3/.004=750>>750 feedings"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2845.\n    Returns: the number of mosquitoes that would have to feed to kill someone.\n    \"\"\"\n    # L1\n    drops_per_feeding = 20 # 20 drops of blood every time it feeds\n    drops_per_liter = 5000 # 5000 drops per liter\n    liters_per_feeding = drops_per_feeding / drops_per_liter\n\n    # L2\n    lethal_blood_liters = 3 # 3 liters of blood to die\n    num_mosquitoes = lethal_blood_liters / liters_per_feeding\n\n    # FA\n    answer = num_mosquitoes\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "num_mosquitoes",
+    "operand_to_replace": "lethal_blood_liters",
+    "replacement_variable": "liters_per_feeding"
+  },
+  "correct_trace": {
+    "drops_per_feeding": 20,
+    "drops_per_liter": 5000,
+    "liters_per_feeding": 0.004,
+    "lethal_blood_liters": 3,
+    "num_mosquitoes": 750.0,
+    "answer": 750.0
+  },
+  "flawed_trace": {
+    "drops_per_feeding": 20,
+    "drops_per_liter": 5000,
+    "liters_per_feeding": 0.004,
+    "lethal_blood_liters": 3,
+    "num_mosquitoes": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 750.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "liters_per_feeding",
+      "question_inputs": [
+        "drops_per_feeding",
+        "drops_per_liter"
+      ],
+      "solution_line_template": "First find the total number of liters a mosquito sucks in one feeding: {drops_per_feeding} drops / {drops_per_liter} drops/liter = <<{drops_per_feeding}/{drops_per_liter}={liters_per_feeding}>>{liters_per_feeding} L/feeding"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_mosquitoes",
+      "question_inputs": [
+        "lethal_blood_liters"
+      ],
+      "solution_line_template": "Then divide the lethal amount of blood by the amount of blood one mosquito can drain: {lethal_blood_liters} L / {liters_per_feeding} L/feeding = <<{lethal_blood_liters}/{liters_per_feeding}={num_mosquitoes}>>{num_mosquitoes} feedings"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total number of liters a mosquito sucks in one feeding: 20 drops / 5000 drops/liter = <<20/5000=0.0>>0.0 L/feeding",
+    "L2": "Then divide the lethal amount of blood by the amount of blood one mosquito can drain: 0.0 L / 0.0 L/feeding = <<0.0/0.0=1>>1 feedings",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'liters_per_feeding' (0.004) was used instead of 'lethal_blood_liters' (3).",
+  "repro_seed": -5079120512982231503,
+  "model_name": "google_gemini-2.5-flash"
+}

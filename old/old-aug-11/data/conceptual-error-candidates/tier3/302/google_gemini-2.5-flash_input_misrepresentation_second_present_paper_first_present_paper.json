@@ -1,0 +1,70 @@
+{
+  "index": 302,
+  "original_solution_mapping": {
+    "FA": "#### 7",
+    "L1": "The second present needs 3 / 4 * 2 = 1 1/2 square feet of wrapping paper.",
+    "L2": "The third present needs 2 + 1 1/2 = 3 1/2 square feet of wrapping paper.",
+    "L3": "Therefore, Carrie needs 2 + 1 1/2 + 3 1/2 = 7 square feet of wrapping paper for all three presents."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 302.\n    Returns: the total square feet of wrapping paper Carrie needs.\n    \"\"\"\n    # L1\n    first_present_paper = 2 # One present needs two square feet of wrapping paper\n    second_present_fraction = Fraction(3, 4) # three-quarters of that amount\n    second_present_paper = second_present_fraction * first_present_paper\n\n    # L2\n    third_present_paper = first_present_paper + second_present_paper\n\n    # L3\n    total_paper = first_present_paper + second_present_paper + third_present_paper\n\n    # FA\n    answer = total_paper\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "second_present_paper",
+    "operand_to_replace": "second_present_fraction",
+    "replacement_variable": "first_present_paper"
+  },
+  "correct_trace": {
+    "first_present_paper": 2,
+    "second_present_fraction": "3/4",
+    "second_present_paper": "3/2",
+    "third_present_paper": "7/2",
+    "total_paper": "7",
+    "answer": "7"
+  },
+  "flawed_trace": {
+    "first_present_paper": 2,
+    "second_present_fraction": "3/4",
+    "second_present_paper": 4,
+    "third_present_paper": 6,
+    "total_paper": 12,
+    "answer": 12
+  },
+  "correct_value": "3/2",
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "second_present_paper",
+      "question_inputs": [
+        "first_present_paper",
+        "second_present_fraction"
+      ],
+      "solution_line_template": "The second present needs {second_present_fraction} * {first_present_paper} = <<{second_present_fraction}*{first_present_paper}={second_present_paper}>>{second_present_paper} square feet of wrapping paper."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "third_present_paper",
+      "question_inputs": [],
+      "solution_line_template": "The third present needs {first_present_paper} + {second_present_paper} = <<{first_present_paper}+{second_present_paper}={third_present_paper}>>{third_present_paper} square feet of wrapping paper."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_paper",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, Carrie needs {first_present_paper} + {second_present_paper} + {third_present_paper} = <<{first_present_paper}+{second_present_paper}+{third_present_paper}={total_paper}>>{total_paper} square feet of wrapping paper for all three presents."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The second present needs 2 * 2 = <<2*2=4>>4 square feet of wrapping paper.",
+    "L2": "The third present needs 2 + 4 = <<2+4=6>>6 square feet of wrapping paper.",
+    "L3": "Therefore, Carrie needs 2 + 4 + 6 = <<2+4+6=12>>12 square feet of wrapping paper for all three presents.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'first_present_paper' (2) was used instead of 'second_present_fraction' (3/4).",
+  "repro_seed": 6208403428673541275,
+  "model_name": "google_gemini-2.5-flash"
+}

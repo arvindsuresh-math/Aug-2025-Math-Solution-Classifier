@@ -1,0 +1,63 @@
+{
+  "index": 2618,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "Michelle kept 4 sandwiches * 2 = <<4*2=8>>8 sandwiches for herself.",
+    "L2": "This leaves 20 total sandwiches - 4 sandwiches for a coworker - 8 sandwiches for herself = <<20-4-8=8>>8 sandwiches for her other co-workers."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2618.\n    Returns: the number of sandwiches Michelle has left to give to her other co-workers.\n    \"\"\"\n    # L1\n    gives_to_one_coworker = 4 # gives 4 sandwiches to one of her co-workers\n    multiplier_for_self = 2 # keeps twice this amount for herself\n    kept_for_self = gives_to_one_coworker * multiplier_for_self\n\n    # L2\n    originally_made = 20 # had originally made 20 sandwiches\n    sandwiches_left = originally_made - gives_to_one_coworker - kept_for_self\n\n    # FA\n    answer = sandwiches_left\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "kept_for_self",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x309cc59d0>"
+  },
+  "correct_trace": {
+    "gives_to_one_coworker": 4,
+    "multiplier_for_self": 2,
+    "kept_for_self": 8,
+    "originally_made": 20,
+    "sandwiches_left": 8,
+    "answer": 8
+  },
+  "flawed_trace": {
+    "gives_to_one_coworker": 4,
+    "multiplier_for_self": 2,
+    "kept_for_self": 2.0,
+    "originally_made": 20,
+    "sandwiches_left": 14.0,
+    "answer": 14.0
+  },
+  "correct_value": 8,
+  "flawed_value": 2.0,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "gives_to_one_coworker",
+        "multiplier_for_self"
+      ],
+      "WK_inputs": [],
+      "output_variable": "kept_for_self",
+      "solution_line_template": "Michelle kept {gives_to_one_coworker} sandwiches * {multiplier_for_self} = <<{gives_to_one_coworker}*{multiplier_for_self}={kept_for_self}>>{kept_for_self} sandwiches for herself."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "originally_made"
+      ],
+      "WK_inputs": [],
+      "output_variable": "sandwiches_left",
+      "solution_line_template": "This leaves {originally_made} total sandwiches \u2013 {gives_to_one_coworker} sandwiches for a coworker \u2013 {kept_for_self} sandwiches for herself = <<{originally_made}-{gives_to_one_coworker}-{kept_for_self}={sandwiches_left}>>{sandwiches_left} sandwiches for her other co-workers."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Michelle kept 4 sandwiches * 2 = <<4*2=2>>2 sandwiches for herself.",
+    "L2": "This leaves 20 total sandwiches \u2013 4 sandwiches for a coworker \u2013 2 sandwiches for herself = <<20-4-2=14>>14 sandwiches for her other co-workers.",
+    "FA": "#### 14"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 295701025944150608,
+  "model_name": "google_gemini-2.5-flash"
+}

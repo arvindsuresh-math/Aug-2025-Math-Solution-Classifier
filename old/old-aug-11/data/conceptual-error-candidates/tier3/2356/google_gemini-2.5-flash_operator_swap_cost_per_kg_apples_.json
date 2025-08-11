@@ -1,0 +1,63 @@
+{
+  "index": 2356,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "The cost of the apples was $12 / 2 = $<<12/2=6>>6.",
+    "L2": "When the cost of 3 kg of apples was $6, then the cost of 1 kg of apples was $6 / 3 kg = $<<6/3=2>>2/kg."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2356.\n    Returns: the cost of 1 kg of apples.\n    \"\"\"\n    # L1\n    total_cost_oranges = 12 # The total cost of oranges was $12\n    cheaper_factor = 2 # The apples were two times cheaper than the oranges\n    cost_of_apples_total = total_cost_oranges / cheaper_factor\n\n    # L2\n    quantity_apples_kg = 3 # 3 kg of apples\n    cost_per_kg_apples = cost_of_apples_total / quantity_apples_kg\n\n    # FA\n    answer = cost_per_kg_apples\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "cost_per_kg_apples",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x30d7f4c10>"
+  },
+  "correct_trace": {
+    "total_cost_oranges": 12,
+    "cheaper_factor": 2,
+    "cost_of_apples_total": 6.0,
+    "quantity_apples_kg": 3,
+    "cost_per_kg_apples": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "total_cost_oranges": 12,
+    "cheaper_factor": 2,
+    "cost_of_apples_total": 6.0,
+    "quantity_apples_kg": 3,
+    "cost_per_kg_apples": 18.0,
+    "answer": 18.0
+  },
+  "correct_value": 2.0,
+  "flawed_value": 18.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_of_apples_total",
+      "question_inputs": [
+        "total_cost_oranges",
+        "cheaper_factor"
+      ],
+      "solution_line_template": "The cost of the apples was ${total_cost_oranges} / {cheaper_factor} = $<<{total_cost_oranges}/{cheaper_factor}={cost_of_apples_total}>>{cost_of_apples_total}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cost_per_kg_apples",
+      "question_inputs": [
+        "quantity_apples_kg"
+      ],
+      "solution_line_template": "When the cost of {quantity_apples_kg} kg of apples was ${cost_of_apples_total}, then the cost of 1 kg of apples was ${cost_of_apples_total} / {quantity_apples_kg} kg = $<<{cost_of_apples_total}/{quantity_apples_kg}={cost_per_kg_apples}>>{cost_per_kg_apples}/kg."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The cost of the apples was $12 / 2 = $<<12/2=6>>6.",
+    "L2": "When the cost of 3 kg of apples was $6, then the cost of 1 kg of apples was $6 / 3 kg = $<<6/3=18>>18/kg.",
+    "FA": "#### 18"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 7308314674613212742,
+  "model_name": "google_gemini-2.5-flash"
+}

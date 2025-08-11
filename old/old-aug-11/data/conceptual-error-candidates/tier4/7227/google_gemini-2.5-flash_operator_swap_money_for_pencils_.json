@@ -1,0 +1,78 @@
+{
+  "index": 7227,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "Elizabeth spends 6*2 = <<6*2=12>>12 dollars on pens.",
+    "L2": "Elizabeth has 20-12 = <<20-12=8>>8 dollars to spend on pencils.",
+    "L3": "Elizabeth can buy 8/1.6 = <<8/1.6=5>>5 pencils."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7227.\n    Returns: the number of pencils Elizabeth can buy.\n    \"\"\"\n    # L1\n    num_pens = 6 # 6 pens\n    cost_per_pen = 2 # 2 dollars\n    cost_of_pens = num_pens * cost_per_pen\n\n    # L2\n    initial_money = 20 # 20 dollars\n    money_for_pencils = initial_money - cost_of_pens\n\n    # L3\n    cost_per_pencil = 1.60 # $1.60\n    num_pencils = money_for_pencils / cost_per_pencil\n\n    # FA\n    answer = num_pencils\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "money_for_pencils",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x15f8e9790>"
+  },
+  "correct_trace": {
+    "num_pens": 6,
+    "cost_per_pen": 2,
+    "cost_of_pens": 12,
+    "initial_money": 20,
+    "money_for_pencils": 8,
+    "cost_per_pencil": 1.6,
+    "num_pencils": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "num_pens": 6,
+    "cost_per_pen": 2,
+    "cost_of_pens": 12,
+    "initial_money": 20,
+    "money_for_pencils": 32,
+    "cost_per_pencil": 1.6,
+    "num_pencils": 20.0,
+    "answer": 20.0
+  },
+  "correct_value": 8,
+  "flawed_value": 32,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_of_pens",
+      "question_inputs": [
+        "num_pens",
+        "cost_per_pen"
+      ],
+      "solution_line_template": "Elizabeth spends {num_pens}*{cost_per_pen} = <<{num_pens}*{cost_per_pen}={cost_of_pens}>>{cost_of_pens} dollars on pens."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "money_for_pencils",
+      "question_inputs": [
+        "initial_money"
+      ],
+      "solution_line_template": "Elizabeth has {initial_money}-{cost_of_pens} = <<{initial_money}-{cost_of_pens}={money_for_pencils}>>{money_for_pencils} dollars to spend on pencils."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_pencils",
+      "question_inputs": [
+        "cost_per_pencil"
+      ],
+      "solution_line_template": "Elizabeth can buy {money_for_pencils}/{cost_per_pencil} = <<{money_for_pencils}/{cost_per_pencil}={num_pencils}>>{num_pencils} pencils."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Elizabeth spends 6*2 = <<6*2=12>>12 dollars on pens.",
+    "L2": "Elizabeth has 20-12 = <<20-12=32>>32 dollars to spend on pencils.",
+    "L3": "Elizabeth can buy 32/1.6 = <<32/1.6=20>>20 pencils.",
+    "FA": "#### 20"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 5533936734320807572,
+  "model_name": "google_gemini-2.5-flash"
+}

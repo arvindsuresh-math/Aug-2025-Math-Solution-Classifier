@@ -1,0 +1,59 @@
+{
+  "index": 425,
+  "original_solution_mapping": {
+    "FA": "#### 125",
+    "L1": "If Calvin had scored 500 points and Paislee 3/4 times as many points as Calvin, Paislee had scored 3/4*500=375 points.",
+    "L2": "To have a chance of tying the game, Paislee had to score 500-375=<<500-375=125>>125 points"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 425.\n    Returns: the number of points Paislee needed to score to tie the game.\n    \"\"\"\n    # L1\n    calvin_score = 500 # Calvin had scored 500 points\n    paislee_fraction = Fraction(3, 4) # Paislee 3/4 times as many points as Calvin\n    paislee_score = paislee_fraction * calvin_score\n\n    # L2\n    points_needed_to_tie = calvin_score - paislee_score\n\n    # FA\n    answer = points_needed_to_tie\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "paislee_score",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x30cc2dd50>"
+  },
+  "correct_trace": {
+    "calvin_score": 500,
+    "paislee_fraction": "3/4",
+    "paislee_score": "375",
+    "points_needed_to_tie": "125",
+    "answer": "125"
+  },
+  "flawed_trace": {
+    "calvin_score": 500,
+    "paislee_fraction": "3/4",
+    "paislee_score": "3/2000",
+    "points_needed_to_tie": "999997/2000",
+    "answer": "999997/2000"
+  },
+  "correct_value": "375",
+  "flawed_value": "3/2000",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "paislee_score",
+      "question_inputs": [
+        "calvin_score",
+        "paislee_fraction"
+      ],
+      "solution_line_template": "If Calvin had scored {calvin_score} points and Paislee {paislee_fraction} times as many points as Calvin, Paislee had scored {paislee_fraction}*{calvin_score}={paislee_score} points."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "points_needed_to_tie",
+      "question_inputs": [],
+      "solution_line_template": "To have a chance of tying the game, Paislee had to score {calvin_score}-{paislee_score}=<<{calvin_score}-{paislee_score}={points_needed_to_tie}>>{points_needed_to_tie} points"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Calvin had scored 500 points and Paislee 3/4 times as many points as Calvin, Paislee had scored 3/4*500=3/2000 points.",
+    "L2": "To have a chance of tying the game, Paislee had to score 500-3/2000=<<500-3/2000=999997/2000>>999997/2000 points",
+    "FA": "#### 999997/2000"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 3881608273837764690,
+  "model_name": "google_gemini-2.5-flash"
+}

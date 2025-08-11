@@ -1,0 +1,74 @@
+{
+  "index": 7233,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "Martha has 6/2=<<6/2=3>>3 yellow butterflies.",
+    "L2": "Martha has 6+3=<<6+3=9>>9 blue and yellow butterflies.",
+    "L3": "Martha has 19-9=<<19-9=10>>10 black butterflies."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7233.\n    Returns: the number of black butterflies Martha has.\n    \"\"\"\n    # L1\n    blue_butterflies = 6 # If Martha has 6 blue butterflies\n    twice_as_many_divisor = 2 # twice as many blue butterflies as yellow butterflies\n    yellow_butterflies = blue_butterflies / twice_as_many_divisor\n\n    # L2\n    blue_and_yellow_butterflies = blue_butterflies + yellow_butterflies\n\n    # L3\n    total_butterflies = 19 # Martha has 19 butterflies in her collection\n    black_butterflies = total_butterflies - blue_and_yellow_butterflies\n\n    # FA\n    answer = black_butterflies\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "yellow_butterflies",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x17204d450>"
+  },
+  "correct_trace": {
+    "blue_butterflies": 6,
+    "twice_as_many_divisor": 2,
+    "yellow_butterflies": 3.0,
+    "blue_and_yellow_butterflies": 9.0,
+    "total_butterflies": 19,
+    "black_butterflies": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "blue_butterflies": 6,
+    "twice_as_many_divisor": 2,
+    "yellow_butterflies": 4,
+    "blue_and_yellow_butterflies": 10,
+    "total_butterflies": 19,
+    "black_butterflies": 9,
+    "answer": 9
+  },
+  "correct_value": 3.0,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "yellow_butterflies",
+      "question_inputs": [
+        "blue_butterflies",
+        "twice_as_many_divisor"
+      ],
+      "solution_line_template": "Martha has {blue_butterflies}/{twice_as_many_divisor}=<<{blue_butterflies}/{twice_as_many_divisor}={yellow_butterflies}>>{yellow_butterflies} yellow butterflies."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "blue_and_yellow_butterflies",
+      "question_inputs": [],
+      "solution_line_template": "Martha has {blue_butterflies}+{yellow_butterflies}=<<{blue_butterflies}+{yellow_butterflies}={blue_and_yellow_butterflies}>>{blue_and_yellow_butterflies} blue and yellow butterflies."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "black_butterflies",
+      "question_inputs": [
+        "total_butterflies"
+      ],
+      "solution_line_template": "Martha has {total_butterflies}-{blue_and_yellow_butterflies}=<<{total_butterflies}-{blue_and_yellow_butterflies}={black_butterflies}>>{black_butterflies} black butterflies."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Martha has 6/2=<<6/2=4>>4 yellow butterflies.",
+    "L2": "Martha has 6+4=<<6+4=10>>10 blue and yellow butterflies.",
+    "L3": "Martha has 19-10=<<19-10=9>>9 black butterflies.",
+    "FA": "#### 9"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 8967222062003334362,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,86 @@
+{
+  "index": 1839,
+  "original_solution_mapping": {
+    "FA": "#### 6600",
+    "L1": "The elephant weighs 3*2000=<<3*2000=6000>>6000 pounds",
+    "L2": "The donkey weighs 6000*.9=<<6000*.9=5400>>5400 pounds less",
+    "L3": "So the donkey weighs 6000-5400=<<6000-5400=600>>600 pounds",
+    "L4": "That means the combined weight is 600+6000=<<600+6000=6600>>6600 pounds"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1839.\n    Returns: the combined weight of the donkey and elephant in pounds.\n    \"\"\"\n    # L1\n    elephant_weight_tons = 3 # The elephant weighs 3 tons\n    pounds_per_ton = 2000 # a ton is 2000 pounds\n    elephant_weight_pounds = elephant_weight_tons * pounds_per_ton\n\n    # L2\n    less_percent_decimal = 0.9 # 90% less\n    donkey_weight_less_amount = elephant_weight_pounds * less_percent_decimal\n\n    # L3\n    donkey_weight_pounds = elephant_weight_pounds - donkey_weight_less_amount\n\n    # L4\n    combined_weight_pounds = donkey_weight_pounds + elephant_weight_pounds\n\n    # FA\n    answer = combined_weight_pounds\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "elephant_weight_pounds",
+    "operand_to_replace": "elephant_weight_tons",
+    "replacement_variable": "pounds_per_ton"
+  },
+  "correct_trace": {
+    "elephant_weight_tons": 3,
+    "pounds_per_ton": 2000,
+    "elephant_weight_pounds": 6000,
+    "less_percent_decimal": 0.9,
+    "donkey_weight_less_amount": 5400.0,
+    "donkey_weight_pounds": 600.0,
+    "combined_weight_pounds": 6600.0,
+    "answer": 6600.0
+  },
+  "flawed_trace": {
+    "elephant_weight_tons": 3,
+    "pounds_per_ton": 2000,
+    "elephant_weight_pounds": 4000000,
+    "less_percent_decimal": 0.9,
+    "donkey_weight_less_amount": 3600000.0,
+    "donkey_weight_pounds": 400000.0,
+    "combined_weight_pounds": 4400000.0,
+    "answer": 4400000.0
+  },
+  "correct_value": 6000,
+  "flawed_value": 4000000,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "pounds_per_ton"
+      ],
+      "line_number": "L1",
+      "output_variable": "elephant_weight_pounds",
+      "question_inputs": [
+        "elephant_weight_tons"
+      ],
+      "solution_line_template": "The elephant weighs {elephant_weight_tons}*{pounds_per_ton}=<<{elephant_weight_tons}*{pounds_per_ton}={elephant_weight_pounds}>>{elephant_weight_pounds} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "donkey_weight_less_amount",
+      "question_inputs": [
+        "less_percent_decimal"
+      ],
+      "solution_line_template": "The donkey weighs {elephant_weight_pounds}*{less_percent_decimal}=<<{elephant_weight_pounds}*{less_percent_decimal}={donkey_weight_less_amount}>>{donkey_weight_less_amount} pounds less"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "donkey_weight_pounds",
+      "question_inputs": [],
+      "solution_line_template": "So the donkey weighs {elephant_weight_pounds}-{donkey_weight_less_amount}=<<{elephant_weight_pounds}-{donkey_weight_less_amount}={donkey_weight_pounds}>>{donkey_weight_pounds} pounds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "combined_weight_pounds",
+      "question_inputs": [],
+      "solution_line_template": "That means the combined weight is {donkey_weight_pounds}+{elephant_weight_pounds}=<<{donkey_weight_pounds}+{elephant_weight_pounds}={combined_weight_pounds}>>{combined_weight_pounds} pounds"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The elephant weighs 2000*2000=<<2000*2000=4000000>>4000000 pounds",
+    "L2": "The donkey weighs 4000000*0.9=<<4000000*0.9=3600000>>3600000 pounds less",
+    "L3": "So the donkey weighs 4000000-3600000=<<4000000-3600000=400000>>400000 pounds",
+    "L4": "That means the combined weight is 400000+4000000=<<400000+4000000=4400000>>4400000 pounds",
+    "FA": "#### 4400000"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'pounds_per_ton' (2000) was used instead of 'elephant_weight_tons' (3).",
+  "repro_seed": -5610652204846840555,
+  "model_name": "google_gemini-2.5-flash"
+}

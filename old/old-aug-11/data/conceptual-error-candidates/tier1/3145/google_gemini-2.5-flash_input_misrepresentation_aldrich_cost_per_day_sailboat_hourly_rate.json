@@ -1,0 +1,89 @@
+{
+  "index": 3145,
+  "original_solution_mapping": {
+    "FA": "#### 120",
+    "L1": "Ken paid $60 x 3 = $<<60*3=180>>180 to rent a sailboat for 3 hours in a day",
+    "L2": "Aldrich paid $80 x 3 = $<<80*3=240>>240 to rent a ski boat in 3 hours in a day.",
+    "L3": "So Aldrich paid $240 - $180 = $<<240-180=60>>60 more to rent a ski boat than Ken to rent the sailboat each day.",
+    "L4": "Therefore, it cost Aldrich $60 x 2 = $<<60*2=120>>120 more to rent a ski boat than Ken to rent the sailboat in two days."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3145.\n    Returns: how much more it cost Aldrich to rent the ski boat than Ken to rent a sailboat over two days.\n    \"\"\"\n    # L1\n    sailboat_hourly_rate = 60 # $60 to rent a sailboat (interpreted as hourly by solution)\n    hours_rented_per_day = 3 # three hours a day\n    ken_cost_per_day = sailboat_hourly_rate * hours_rented_per_day\n\n    # L2\n    ski_boat_hourly_rate = 80 # $80 per hour to rent a ski boat\n    aldrich_cost_per_day = ski_boat_hourly_rate * hours_rented_per_day\n\n    # L3\n    daily_cost_difference = aldrich_cost_per_day - ken_cost_per_day\n\n    # L4\n    num_days = 2 # in two days\n    total_cost_difference = daily_cost_difference * num_days\n\n    # FA\n    answer = total_cost_difference\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "aldrich_cost_per_day",
+    "operand_to_replace": "hours_rented_per_day",
+    "replacement_variable": "sailboat_hourly_rate"
+  },
+  "correct_trace": {
+    "sailboat_hourly_rate": 60,
+    "hours_rented_per_day": 3,
+    "ken_cost_per_day": 180,
+    "ski_boat_hourly_rate": 80,
+    "aldrich_cost_per_day": 240,
+    "daily_cost_difference": 60,
+    "num_days": 2,
+    "total_cost_difference": 120,
+    "answer": 120
+  },
+  "flawed_trace": {
+    "sailboat_hourly_rate": 60,
+    "hours_rented_per_day": 3,
+    "ken_cost_per_day": 180,
+    "ski_boat_hourly_rate": 80,
+    "aldrich_cost_per_day": 4800,
+    "daily_cost_difference": 4620,
+    "num_days": 2,
+    "total_cost_difference": 9240,
+    "answer": 9240
+  },
+  "correct_value": 240,
+  "flawed_value": 4800,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "ken_cost_per_day",
+      "question_inputs": [
+        "sailboat_hourly_rate",
+        "hours_rented_per_day"
+      ],
+      "solution_line_template": "Ken paid ${sailboat_hourly_rate} x {hours_rented_per_day} = $<<{sailboat_hourly_rate}*{hours_rented_per_day}={ken_cost_per_day}>>{ken_cost_per_day} to rent a sailboat for {hours_rented_per_day} hours in a day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "aldrich_cost_per_day",
+      "question_inputs": [
+        "ski_boat_hourly_rate"
+      ],
+      "solution_line_template": "Aldrich paid ${ski_boat_hourly_rate} x {hours_rented_per_day} = $<<{ski_boat_hourly_rate}*{hours_rented_per_day}={aldrich_cost_per_day}>>{aldrich_cost_per_day} to rent a ski boat in {hours_rented_per_day} hours in a day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "daily_cost_difference",
+      "question_inputs": [],
+      "solution_line_template": "So Aldrich paid ${aldrich_cost_per_day} - ${ken_cost_per_day} = $<<{aldrich_cost_per_day}-{ken_cost_per_day}={daily_cost_difference}>>{daily_cost_difference} more to rent a ski boat than Ken to rent the sailboat each day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cost_difference",
+      "question_inputs": [
+        "num_days"
+      ],
+      "solution_line_template": "Therefore, it cost Aldrich ${daily_cost_difference} x {num_days} = $<<{daily_cost_difference}*{num_days}={total_cost_difference}>>{total_cost_difference} more to rent a ski boat than Ken to rent the sailboat in two days."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Ken paid $60 x 3 = $<<60*3=180>>180 to rent a sailboat for 3 hours in a day",
+    "L2": "Aldrich paid $80 x 60 = $<<80*60=4800>>4800 to rent a ski boat in 60 hours in a day.",
+    "L3": "So Aldrich paid $4800 - $180 = $<<4800-180=4620>>4620 more to rent a ski boat than Ken to rent the sailboat each day.",
+    "L4": "Therefore, it cost Aldrich $4620 x 2 = $<<4620*2=9240>>9240 more to rent a ski boat than Ken to rent the sailboat in two days.",
+    "FA": "#### 9240"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'sailboat_hourly_rate' (60) was used instead of 'hours_rented_per_day' (3).",
+  "repro_seed": 69772806049112464,
+  "model_name": "google_gemini-2.5-flash"
+}

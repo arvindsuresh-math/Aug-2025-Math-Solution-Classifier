@@ -1,0 +1,63 @@
+{
+  "index": 3281,
+  "original_solution_mapping": {
+    "FA": "#### 16",
+    "L1": "Every day, Jaylen's dog eats 1 x 2 = <<1*2=2>>2 cups of dog food.",
+    "L2": "The bag will feed her dog for 32 / 2 = <<32/2=16>>16 days."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3281.\n    Returns: the number of days the dog food will last.\n    \"\"\"\n    # L1\n    cups_per_meal = 1 # 1 cup of dog food\n    meals_per_day = 2 # in the morning and 1 cup ... in the evening\n    cups_per_day = cups_per_meal * meals_per_day\n\n    # L2\n    total_cups_in_bag = 32 # 32 cups of dog food\n    number_of_days = total_cups_in_bag / cups_per_day\n\n    # FA\n    answer = number_of_days\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "number_of_days",
+    "operand_to_replace": "total_cups_in_bag",
+    "replacement_variable": "meals_per_day"
+  },
+  "correct_trace": {
+    "cups_per_meal": 1,
+    "meals_per_day": 2,
+    "cups_per_day": 2,
+    "total_cups_in_bag": 32,
+    "number_of_days": 16.0,
+    "answer": 16.0
+  },
+  "flawed_trace": {
+    "cups_per_meal": 1,
+    "meals_per_day": 2,
+    "cups_per_day": 2,
+    "total_cups_in_bag": 32,
+    "number_of_days": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 16.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cups_per_day",
+      "question_inputs": [
+        "cups_per_meal",
+        "meals_per_day"
+      ],
+      "solution_line_template": "Every day, Jaylen's dog eats {cups_per_meal} x {meals_per_day} = <<{cups_per_meal}*{meals_per_day}={cups_per_day}>>{cups_per_day} cups of dog food."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "number_of_days",
+      "question_inputs": [
+        "total_cups_in_bag"
+      ],
+      "solution_line_template": "The bag will feed her dog for {total_cups_in_bag} / {cups_per_day} = <<{total_cups_in_bag}/{cups_per_day}={number_of_days}>>{number_of_days} days."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Every day, Jaylen's dog eats 1 x 2 = <<1*2=2>>2 cups of dog food.",
+    "L2": "The bag will feed her dog for 2 / 2 = <<2/2=1>>1 days.",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'meals_per_day' (2) was used instead of 'total_cups_in_bag' (32).",
+  "repro_seed": 2298925128898440226,
+  "model_name": "google_gemini-2.5-flash"
+}

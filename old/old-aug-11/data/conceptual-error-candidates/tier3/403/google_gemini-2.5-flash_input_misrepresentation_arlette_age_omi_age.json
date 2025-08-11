@@ -1,0 +1,92 @@
+{
+  "index": 403,
+  "original_solution_mapping": {
+    "FA": "#### 35",
+    "L1": "If Kimiko is 28, Omi is 2 * 28 years = <<28*2=56>>56 years old.",
+    "L2": "Arlette is 3/4 * 28 years = <<3/4*28=21>>21 years old.",
+    "L3": "If you add up their ages, it sums to 21 years + 56 years + 28 years = <<21+56+28=105>>105 years",
+    "L4": "The average age for the three is 105 years / 3 people = <<105/3=35>>35 years/person"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 403.\n    Returns: the average age of the three people.\n    \"\"\"\n    # L1\n    kimiko_age = 28 # Kimiko is 28 years old\n    omi_multiplier = 2 # Omi is twice as old as Kimiko\n    omi_age = omi_multiplier * kimiko_age\n\n    # L2\n    arlette_fraction_numerator = 3 # Arlette is 3/4 times as old as Kimiko\n    arlette_fraction_denominator = 4 # Arlette is 3/4 times as old as Kimiko\n    arlette_age = (arlette_fraction_numerator / arlette_fraction_denominator) * kimiko_age\n\n    # L3\n    total_age = arlette_age + omi_age + kimiko_age\n\n    # L4\n    number_of_people = 3 # average age of the three\n    average_age = total_age / number_of_people\n\n    # FA\n    answer = average_age\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "arlette_age",
+    "operand_to_replace": "kimiko_age",
+    "replacement_variable": "omi_age"
+  },
+  "correct_trace": {
+    "kimiko_age": 28,
+    "omi_multiplier": 2,
+    "omi_age": 56,
+    "arlette_fraction_numerator": 3,
+    "arlette_fraction_denominator": 4,
+    "arlette_age": 21.0,
+    "total_age": 105.0,
+    "number_of_people": 3,
+    "average_age": 35.0,
+    "answer": 35.0
+  },
+  "flawed_trace": {
+    "kimiko_age": 28,
+    "omi_multiplier": 2,
+    "omi_age": 56,
+    "arlette_fraction_numerator": 3,
+    "arlette_fraction_denominator": 4,
+    "arlette_age": 42.0,
+    "total_age": 126.0,
+    "number_of_people": 3,
+    "average_age": 42.0,
+    "answer": 42.0
+  },
+  "correct_value": 21.0,
+  "flawed_value": 42.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "omi_age",
+      "question_inputs": [
+        "kimiko_age",
+        "omi_multiplier"
+      ],
+      "solution_line_template": "If Kimiko is {kimiko_age}, Omi is {omi_multiplier} * {kimiko_age} years = <<{kimiko_age}*{omi_multiplier}={omi_age}>>{omi_age} years old."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "arlette_age",
+      "question_inputs": [
+        "arlette_fraction_numerator",
+        "arlette_fraction_denominator"
+      ],
+      "solution_line_template": "Arlette is {arlette_fraction_numerator}/{arlette_fraction_denominator} * {kimiko_age} years = <<{arlette_fraction_numerator}/{arlette_fraction_denominator}*{kimiko_age}={arlette_age}>>{arlette_age} years old."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_age",
+      "question_inputs": [],
+      "solution_line_template": "If you add up their ages, it sums to {arlette_age} years + {omi_age} years + {kimiko_age} years = <<{arlette_age}+{omi_age}+{kimiko_age}={total_age}>>{total_age} years"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "average_age",
+      "question_inputs": [
+        "number_of_people"
+      ],
+      "solution_line_template": "The average age for the three is {total_age} years / {number_of_people} people = <<{total_age}/{number_of_people}={average_age}>>{average_age} years/person"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Kimiko is 28, Omi is 2 * 28 years = <<28*2=56>>56 years old.",
+    "L2": "Arlette is 3/4 * 56 years = <<3/4*56=42>>42 years old.",
+    "L3": "If you add up their ages, it sums to 42 years + 56 years + 28 years = <<42+56+28=126>>126 years",
+    "L4": "The average age for the three is 126 years / 3 people = <<126/3=42>>42 years/person",
+    "FA": "#### 42"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'omi_age' (56) was used instead of 'kimiko_age' (28).",
+  "repro_seed": -6255166795975024092,
+  "model_name": "google_gemini-2.5-flash"
+}

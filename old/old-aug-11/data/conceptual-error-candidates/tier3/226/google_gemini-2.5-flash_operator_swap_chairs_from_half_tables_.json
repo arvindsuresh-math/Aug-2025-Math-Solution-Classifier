@@ -1,0 +1,118 @@
+{
+  "index": 226,
+  "original_solution_mapping": {
+    "FA": "#### 91",
+    "L1": "Half of 32 tables is 32*(1/2) = <<32*(1/2)=16>>16 tables",
+    "L2": "16 tables have 2 chairs each for a total of 16*2 = <<16*2=32>>32 chairs",
+    "L3": "5 tables have 3 chairs each for a total of 5*3 = <<5*3=15>>15 chairs",
+    "L4": "There are 32-(16+5) = <<32-(16+5)=11>>11 tables left",
+    "L5": "11 tables have 4 chairs each for a total of 11*4 = <<11*4=44>>44 chairs",
+    "L6": "The total number of chairs is 32+15+44 = <<32+15+44=91>>91 chairs"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 226.\n    Returns: the total number of chairs in the hall.\n    \"\"\"\n    # L1\n    total_tables = 32 # 32 tables in a hall\n    half_fraction = Fraction(1, 2) # Half the tables\n    tables_half = total_tables * half_fraction\n\n    # L2\n    chairs_per_half_table = 2 # have 2 chairs each\n    chairs_from_half_tables = tables_half * chairs_per_half_table\n\n    # L3\n    tables_with_3_chairs = 5 # 5 have 3 chairs each\n    chairs_per_3_chair_table = 3 # 3 chairs each\n    chairs_from_3_chair_tables = tables_with_3_chairs * chairs_per_3_chair_table\n\n    # L4\n    remaining_tables = total_tables - (tables_half + tables_with_3_chairs)\n\n    # L5\n    chairs_per_4_chair_table = 4 # the rest have 4 chairs each\n    chairs_from_remaining_tables = remaining_tables * chairs_per_4_chair_table\n\n    # L6\n    total_chairs = chairs_from_half_tables + chairs_from_3_chair_tables + chairs_from_remaining_tables\n\n    # FA\n    answer = total_chairs\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "chairs_from_half_tables",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30cb114d0>"
+  },
+  "correct_trace": {
+    "total_tables": 32,
+    "half_fraction": "1/2",
+    "tables_half": "16",
+    "chairs_per_half_table": 2,
+    "chairs_from_half_tables": "32",
+    "tables_with_3_chairs": 5,
+    "chairs_per_3_chair_table": 3,
+    "chairs_from_3_chair_tables": 15,
+    "remaining_tables": "11",
+    "chairs_per_4_chair_table": 4,
+    "chairs_from_remaining_tables": "44",
+    "total_chairs": "91",
+    "answer": "91"
+  },
+  "flawed_trace": {
+    "total_tables": 32,
+    "half_fraction": "1/2",
+    "tables_half": "16",
+    "chairs_per_half_table": 2,
+    "chairs_from_half_tables": "18",
+    "tables_with_3_chairs": 5,
+    "chairs_per_3_chair_table": 3,
+    "chairs_from_3_chair_tables": 15,
+    "remaining_tables": "11",
+    "chairs_per_4_chair_table": 4,
+    "chairs_from_remaining_tables": "44",
+    "total_chairs": "77",
+    "answer": "77"
+  },
+  "correct_value": "32",
+  "flawed_value": "18",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "tables_half",
+      "question_inputs": [
+        "total_tables",
+        "half_fraction"
+      ],
+      "solution_line_template": "Half of {total_tables} tables is {total_tables}*{half_fraction} = <<{total_tables}*{half_fraction}={tables_half}>>{tables_half} tables"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "chairs_from_half_tables",
+      "question_inputs": [
+        "chairs_per_half_table"
+      ],
+      "solution_line_template": "{tables_half} tables have {chairs_per_half_table} chairs each for a total of {tables_half}*{chairs_per_half_table} = <<{tables_half}*{chairs_per_half_table}={chairs_from_half_tables}>>{chairs_from_half_tables} chairs"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "chairs_from_3_chair_tables",
+      "question_inputs": [
+        "tables_with_3_chairs",
+        "chairs_per_3_chair_table"
+      ],
+      "solution_line_template": "{tables_with_3_chairs} tables have {chairs_per_3_chair_table} chairs each for a total of {tables_with_3_chairs}*{chairs_per_3_chair_table} = <<{tables_with_3_chairs}*{chairs_per_3_chair_table}={chairs_from_3_chair_tables}>>{chairs_from_3_chair_tables} chairs"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "remaining_tables",
+      "question_inputs": [],
+      "solution_line_template": "There are {total_tables}-({tables_half}+{tables_with_3_chairs}) = <<{total_tables}-({tables_half}+{tables_with_3_chairs})={remaining_tables}>>{remaining_tables} tables left"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "chairs_from_remaining_tables",
+      "question_inputs": [
+        "chairs_per_4_chair_table"
+      ],
+      "solution_line_template": "{remaining_tables} tables have {chairs_per_4_chair_table} chairs each for a total of {remaining_tables}*{chairs_per_4_chair_table} = <<{remaining_tables}*{chairs_per_4_chair_table}={chairs_from_remaining_tables}>>{chairs_from_remaining_tables} chairs"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_chairs",
+      "question_inputs": [],
+      "solution_line_template": "The total number of chairs is {chairs_from_half_tables}+{chairs_from_3_chair_tables}+{chairs_from_remaining_tables} = <<{chairs_from_half_tables}+{chairs_from_3_chair_tables}+{chairs_from_remaining_tables}={total_chairs}>>{total_chairs} chairs"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Half of 32 tables is 32*1/2 = <<32*1/2=16>>16 tables",
+    "L2": "16 tables have 2 chairs each for a total of 16*2 = <<16*2=18>>18 chairs",
+    "L3": "5 tables have 3 chairs each for a total of 5*3 = <<5*3=15>>15 chairs",
+    "L4": "There are 32-(16+5) = <<32-(16+5)=11>>11 tables left",
+    "L5": "11 tables have 4 chairs each for a total of 11*4 = <<11*4=44>>44 chairs",
+    "L6": "The total number of chairs is 18+15+44 = <<18+15+44=77>>77 chairs",
+    "FA": "#### 77"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 1179878622434984793,
+  "model_name": "google_gemini-2.5-flash"
+}

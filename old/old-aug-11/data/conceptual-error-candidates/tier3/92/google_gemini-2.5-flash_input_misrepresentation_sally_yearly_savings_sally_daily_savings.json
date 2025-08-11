@@ -1,0 +1,100 @@
+{
+  "index": 92,
+  "original_solution_mapping": {
+    "FA": "#### 1825",
+    "L1": "Saly saves 1/2 * $6/day = $<<1/2*6=3>>3/day.",
+    "L2": "Since each year have 365 days, the total amount of money Sally will save in a year is $3/day * 365 days/year = $<<3*365=1095>>1095/year",
+    "L3": "Bob saves 1/2 * $4/day = $<<1/2*4=2>>2/day.",
+    "L4": "The total amount of money Bob will have saved in a year is $2/day * 365 days/year = $<<2*365=730>>730/year",
+    "L5": "In total, Sally and Bob would have saved $730 + $1095 = $<<730+1095=1825>>1825"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 92.\n    Returns: the total money saved by Sally and Bob for their trip.\n    \"\"\"\n    # L1\n    saving_fraction = Fraction(1, 2) # save half of what they've earned\n    sally_daily_rate = 6 # Sally makes $6 per day\n    sally_daily_savings = saving_fraction * sally_daily_rate\n\n    # L2\n    days_per_year = 365 # Since each year have 365 days\n    sally_yearly_savings = sally_daily_savings * days_per_year\n\n    # L3\n    bob_daily_rate = 4 # Bob makes $4 per day\n    bob_daily_savings = saving_fraction * bob_daily_rate\n\n    # L4\n    bob_yearly_savings = bob_daily_savings * days_per_year\n\n    # L5\n    total_saved = bob_yearly_savings + sally_yearly_savings\n\n    # FA\n    answer = total_saved\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "sally_yearly_savings",
+    "operand_to_replace": "days_per_year",
+    "replacement_variable": "sally_daily_savings"
+  },
+  "correct_trace": {
+    "saving_fraction": "1/2",
+    "sally_daily_rate": 6,
+    "sally_daily_savings": "3",
+    "days_per_year": 365,
+    "sally_yearly_savings": "1095",
+    "bob_daily_rate": 4,
+    "bob_daily_savings": "2",
+    "bob_yearly_savings": "730",
+    "total_saved": "1825",
+    "answer": "1825"
+  },
+  "flawed_trace": {
+    "saving_fraction": "1/2",
+    "sally_daily_rate": 6,
+    "sally_daily_savings": "3",
+    "days_per_year": 365,
+    "sally_yearly_savings": "9",
+    "bob_daily_rate": 4,
+    "bob_daily_savings": "2",
+    "bob_yearly_savings": "730",
+    "total_saved": "739",
+    "answer": "739"
+  },
+  "correct_value": "1095",
+  "flawed_value": "9",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "sally_daily_savings",
+      "question_inputs": [
+        "saving_fraction",
+        "sally_daily_rate"
+      ],
+      "solution_line_template": "Saly saves {saving_fraction} * ${sally_daily_rate}/day = $<<{saving_fraction}*{sally_daily_rate}={sally_daily_savings}>>{sally_daily_savings}/day."
+    },
+    {
+      "WK_inputs": [
+        "days_per_year"
+      ],
+      "line_number": "L2",
+      "output_variable": "sally_yearly_savings",
+      "question_inputs": [],
+      "solution_line_template": "Since each year have {days_per_year} days, the total amount of money Sally will save in a year is ${sally_daily_savings}/day * {days_per_year} days/year = $<<{sally_daily_savings}*{days_per_year}={sally_yearly_savings}>>{sally_yearly_savings}/year"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "bob_daily_savings",
+      "question_inputs": [
+        "bob_daily_rate"
+      ],
+      "solution_line_template": "Bob saves {saving_fraction} * ${bob_daily_rate}/day = $<<{saving_fraction}*{bob_daily_rate}={bob_daily_savings}>>{bob_daily_savings}/day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "bob_yearly_savings",
+      "question_inputs": [],
+      "solution_line_template": "The total amount of money Bob will have saved in a year is ${bob_daily_savings}/day * {days_per_year} days/year = $<<{bob_daily_savings}*{days_per_year}={bob_yearly_savings}>>{bob_yearly_savings}/year"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_saved",
+      "question_inputs": [],
+      "solution_line_template": "In total, Sally and Bob would have saved ${bob_yearly_savings} + ${sally_yearly_savings} = $<<{bob_yearly_savings}+{sally_yearly_savings}={total_saved}>>{total_saved}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Saly saves 1/2 * $6/day = $<<1/2*6=3>>3/day.",
+    "L2": "Since each year have 3 days, the total amount of money Sally will save in a year is $3/day * 3 days/year = $<<3*3=9>>9/year",
+    "L3": "Bob saves 1/2 * $4/day = $<<1/2*4=2>>2/day.",
+    "L4": "The total amount of money Bob will have saved in a year is $2/day * 365 days/year = $<<2*365=730>>730/year",
+    "L5": "In total, Sally and Bob would have saved $730 + $9 = $<<730+9=739>>739",
+    "FA": "#### 739"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'sally_daily_savings' (3) was used instead of 'days_per_year' (365).",
+  "repro_seed": 7929201452805976867,
+  "model_name": "google_gemini-2.5-flash"
+}

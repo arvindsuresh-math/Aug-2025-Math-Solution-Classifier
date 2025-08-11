@@ -1,0 +1,92 @@
+{
+  "index": 5893,
+  "original_solution_mapping": {
+    "FA": "#### 570",
+    "L1": "Mary will inflate a total of 10 balloons/minute x 30 minutes = <<10*30=300>>300 balloons",
+    "L2": "Jess will inflate a total of 7 balloons/minute x 30 minutes = <<7*30=210>>210 balloons",
+    "L3": "Christina will inflate a total of 4 balloons/minute x 15 minutes = <<4*15=60>>60 balloons",
+    "L4": "Combining all balloons, they made 300 balloons + 210 balloons + 60 balloons = <<300+210+60=570>>570 balloons"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5893.\n    Returns: the total number of balloons inflated.\n    \"\"\"\n    # L1\n    mary_rate = 10 # Mary inflates 10 balloons per minute\n    total_time = 30 # they only have 30 minutes\n    mary_total_balloons = mary_rate * total_time\n\n    # L2\n    jess_rate = 7 # Jess inflates 7 balloons per minute\n    jess_total_balloons = jess_rate * total_time\n\n    # L3\n    christina_rate = 4 # inflating 4 balloons per minute\n    christina_late_time = 15 # Christina came 15 minutes late\n    christina_total_balloons = christina_rate * christina_late_time\n\n    # L4\n    total_balloons = mary_total_balloons + jess_total_balloons + christina_total_balloons\n\n    # FA\n    answer = total_balloons\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "jess_total_balloons",
+    "operand_to_replace": "jess_rate",
+    "replacement_variable": "mary_total_balloons"
+  },
+  "correct_trace": {
+    "mary_rate": 10,
+    "total_time": 30,
+    "mary_total_balloons": 300,
+    "jess_rate": 7,
+    "jess_total_balloons": 210,
+    "christina_rate": 4,
+    "christina_late_time": 15,
+    "christina_total_balloons": 60,
+    "total_balloons": 570,
+    "answer": 570
+  },
+  "flawed_trace": {
+    "mary_rate": 10,
+    "total_time": 30,
+    "mary_total_balloons": 300,
+    "jess_rate": 7,
+    "jess_total_balloons": 9000,
+    "christina_rate": 4,
+    "christina_late_time": 15,
+    "christina_total_balloons": 60,
+    "total_balloons": 9360,
+    "answer": 9360
+  },
+  "correct_value": 210,
+  "flawed_value": 9000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "mary_total_balloons",
+      "question_inputs": [
+        "mary_rate",
+        "total_time"
+      ],
+      "solution_line_template": "Mary will inflate a total of {mary_rate} balloons/minute x {total_time} minutes = <<{mary_rate}*{total_time}={mary_total_balloons}>>{mary_total_balloons} balloons"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "jess_total_balloons",
+      "question_inputs": [
+        "jess_rate"
+      ],
+      "solution_line_template": "Jess will inflate a total of {jess_rate} balloons/minute x {total_time} minutes = <<{jess_rate}*{total_time}={jess_total_balloons}>>{jess_total_balloons} balloons"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "christina_total_balloons",
+      "question_inputs": [
+        "christina_rate",
+        "christina_late_time"
+      ],
+      "solution_line_template": "Christina will inflate a total of {christina_rate} balloons/minute x {christina_late_time} minutes = <<{christina_rate}*{christina_late_time}={christina_total_balloons}>>{christina_total_balloons} balloons"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_balloons",
+      "question_inputs": [],
+      "solution_line_template": "Combining all balloons, they made {mary_total_balloons} balloons + {jess_total_balloons} balloons + {christina_total_balloons} balloons = <<{mary_total_balloons}+{jess_total_balloons}+{christina_total_balloons}={total_balloons}>>{total_balloons} balloons"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Mary will inflate a total of 10 balloons/minute x 30 minutes = <<10*30=300>>300 balloons",
+    "L2": "Jess will inflate a total of 300 balloons/minute x 30 minutes = <<300*30=9000>>9000 balloons",
+    "L3": "Christina will inflate a total of 4 balloons/minute x 15 minutes = <<4*15=60>>60 balloons",
+    "L4": "Combining all balloons, they made 300 balloons + 9000 balloons + 60 balloons = <<300+9000+60=9360>>9360 balloons",
+    "FA": "#### 9360"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'mary_total_balloons' (300) was used instead of 'jess_rate' (7).",
+  "repro_seed": -6286877233541876729,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 2800,
+  "original_solution_mapping": {
+    "FA": "#### 93",
+    "L1": "There are 20 + 11 = <<20+11=31>>31 students in second grade.",
+    "L2": "There are 31 x 2 = <<31*2=62>>62 students in third grade.",
+    "L3": "In total, there are 31 + 62 = <<31+62=93>>93 students."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2800.\n    Returns: the total number of students in grades 2 and 3.\n    \"\"\"\n    # L1\n    boys_second_grade = 20 # 20 boys\n    girls_second_grade = 11 # 11 girls\n    students_second_grade = boys_second_grade + girls_second_grade\n\n    # L2\n    multiplier_third_grade = 2 # twice that number\n    students_third_grade = students_second_grade * multiplier_third_grade\n\n    # L3\n    total_students = students_second_grade + students_third_grade\n\n    # FA\n    answer = total_students\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "students_third_grade",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30ace9b90>"
+  },
+  "correct_trace": {
+    "boys_second_grade": 20,
+    "girls_second_grade": 11,
+    "students_second_grade": 31,
+    "multiplier_third_grade": 2,
+    "students_third_grade": 62,
+    "total_students": 93,
+    "answer": 93
+  },
+  "flawed_trace": {
+    "boys_second_grade": 20,
+    "girls_second_grade": 11,
+    "students_second_grade": 31,
+    "multiplier_third_grade": 2,
+    "students_third_grade": 33,
+    "total_students": 64,
+    "answer": 64
+  },
+  "correct_value": 62,
+  "flawed_value": 33,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "boys_second_grade",
+        "girls_second_grade"
+      ],
+      "WK_inputs": [],
+      "output_variable": "students_second_grade",
+      "solution_line_template": "There are {boys_second_grade} + {girls_second_grade} = <<{boys_second_grade}+{girls_second_grade}={students_second_grade}>>{students_second_grade} students in second grade."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "multiplier_third_grade"
+      ],
+      "WK_inputs": [],
+      "output_variable": "students_third_grade",
+      "solution_line_template": "There are {students_second_grade} x {multiplier_third_grade} = <<{students_second_grade}*{multiplier_third_grade}={students_third_grade}>>{students_third_grade} students in third grade."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_students",
+      "solution_line_template": "In total, there are {students_second_grade} + {students_third_grade} = <<{students_second_grade}+{students_third_grade}={total_students}>>{total_students} students."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 20 + 11 = <<20+11=31>>31 students in second grade.",
+    "L2": "There are 31 x 2 = <<31*2=33>>33 students in third grade.",
+    "L3": "In total, there are 31 + 33 = <<31+33=64>>64 students.",
+    "FA": "#### 64"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -2959802662322334134,
+  "model_name": "google_gemini-2.5-flash"
+}

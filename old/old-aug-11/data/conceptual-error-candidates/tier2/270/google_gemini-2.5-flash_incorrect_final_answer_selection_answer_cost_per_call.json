@@ -1,0 +1,78 @@
+{
+  "index": 270,
+  "original_solution_mapping": {
+    "FA": "#### 600",
+    "L1": "An hour has 60 minutes.",
+    "L2": "If each call lasts an hour, the total amount of money charged is 60*.05 = $<<60*.05=3>>3 for 1 customer.",
+    "L3": "When she talks to 50 clients in a week, the total amount of money charged is 50*3 = $<<50*3=150>>150.",
+    "L4": "In a month of 4 weeks, the phone bill is 150*4 = $<<150*4=600>>600."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 270.\n    Returns: the total phone bill at the end of the month.\n    \"\"\"\n    # L2\n    minutes_per_hour = 60 # WK\n    cost_per_minute = 0.05 # five cents per minute\n    cost_per_call = minutes_per_hour * cost_per_minute\n\n    # L3\n    customers_per_week = 50 # 50 customers a week\n    weekly_bill = customers_per_week * cost_per_call\n\n    # L4\n    weeks_per_month = 4 # WK\n    monthly_bill = weekly_bill * weeks_per_month\n\n    # FA\n    answer = monthly_bill\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "monthly_bill",
+    "replacement_variable": "cost_per_call"
+  },
+  "correct_trace": {
+    "minutes_per_hour": 60,
+    "cost_per_minute": 0.05,
+    "cost_per_call": 3.0,
+    "customers_per_week": 50,
+    "weekly_bill": 150.0,
+    "weeks_per_month": 4,
+    "monthly_bill": 600.0,
+    "answer": 600.0
+  },
+  "flawed_trace": {
+    "minutes_per_hour": 60,
+    "cost_per_minute": 0.05,
+    "cost_per_call": 3.0,
+    "customers_per_week": 50,
+    "weekly_bill": 150.0,
+    "weeks_per_month": 4,
+    "monthly_bill": 600.0,
+    "answer": 3.0
+  },
+  "correct_value": 600.0,
+  "flawed_value": 3.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L2",
+      "output_variable": "cost_per_call",
+      "question_inputs": [
+        "cost_per_minute"
+      ],
+      "solution_line_template": "If each call lasts an hour, the total amount of money charged is {minutes_per_hour}*{cost_per_minute} = $<<{minutes_per_hour}*{cost_per_minute}={cost_per_call}>>{cost_per_call} for 1 customer."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "weekly_bill",
+      "question_inputs": [
+        "customers_per_week"
+      ],
+      "solution_line_template": "When she talks to {customers_per_week} clients in a week, the total amount of money charged is {customers_per_week}*{cost_per_call} = $<<{customers_per_week}*{cost_per_call}={weekly_bill}>>{weekly_bill}."
+    },
+    {
+      "WK_inputs": [
+        "weeks_per_month"
+      ],
+      "line_number": "L4",
+      "output_variable": "monthly_bill",
+      "question_inputs": [],
+      "solution_line_template": "In a month of {weeks_per_month} weeks, the phone bill is {weekly_bill}*{weeks_per_month} = $<<{weekly_bill}*{weeks_per_month}={monthly_bill}>>{monthly_bill}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "If each call lasts an hour, the total amount of money charged is 60*0.05 = $<<60*0.05=3>>3 for 1 customer.",
+    "FA": "#### 3"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'cost_per_call' (value: 3.0) was reported instead of 'monthly_bill' (value: 600.0).",
+  "repro_seed": 415307636695082668,
+  "model_name": "google_gemini-2.5-flash"
+}

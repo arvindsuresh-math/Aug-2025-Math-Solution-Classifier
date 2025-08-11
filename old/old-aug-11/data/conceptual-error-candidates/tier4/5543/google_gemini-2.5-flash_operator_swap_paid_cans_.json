@@ -1,0 +1,64 @@
+{
+  "index": 5543,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "He pays for 30/2=<<30/2=15>>15 cans",
+    "L2": "So he spends 15*.6=$<<15*.6=9>>9"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5543.\n    Returns: the total amount John pays.\n    \"\"\"\n    # L1\n    total_cans = 30 # 30 cans\n    buy_one_get_one_free_divisor = 2 # WK\n    paid_cans = total_cans / buy_one_get_one_free_divisor\n\n    # L2\n    normal_price_per_can = 0.60 # normal price of $0.60\n    total_cost = paid_cans * normal_price_per_can\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "paid_cans",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x169e6b5d0>"
+  },
+  "correct_trace": {
+    "total_cans": 30,
+    "buy_one_get_one_free_divisor": 2,
+    "paid_cans": 15.0,
+    "normal_price_per_can": 0.6,
+    "total_cost": 9.0,
+    "answer": 9.0
+  },
+  "flawed_trace": {
+    "total_cans": 30,
+    "buy_one_get_one_free_divisor": 2,
+    "paid_cans": 60,
+    "normal_price_per_can": 0.6,
+    "total_cost": 36.0,
+    "answer": 36.0
+  },
+  "correct_value": 15.0,
+  "flawed_value": 60,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "buy_one_get_one_free_divisor"
+      ],
+      "line_number": "L1",
+      "output_variable": "paid_cans",
+      "question_inputs": [
+        "total_cans"
+      ],
+      "solution_line_template": "He pays for {total_cans}/{buy_one_get_one_free_divisor}=<<{total_cans}/{buy_one_get_one_free_divisor}={paid_cans}>>{paid_cans} cans"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "normal_price_per_can"
+      ],
+      "solution_line_template": "So he spends {paid_cans}*{normal_price_per_can}=$<<{paid_cans}*{normal_price_per_can}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He pays for 30/2=<<30/2=60>>60 cans",
+    "L2": "So he spends 60*0.6=$<<60*0.6=36>>36",
+    "FA": "#### 36"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 7592549532120220389,
+  "model_name": "google_gemini-2.5-flash"
+}

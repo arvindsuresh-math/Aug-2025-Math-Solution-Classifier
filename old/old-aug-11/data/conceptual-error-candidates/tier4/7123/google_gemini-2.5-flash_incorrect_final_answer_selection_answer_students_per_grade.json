@@ -1,0 +1,91 @@
+{
+  "index": 7123,
+  "original_solution_mapping": {
+    "FA": "#### 32",
+    "L1": "First find how many students go to the new school: 1590 students * .4 = <<1590*.4=636>>636 students",
+    "L2": "Then divide that number by 3 to find how many students are at each grade level: 636 students / 3 grades = <<636/3=212>>212 students/grade",
+    "L3": "Then subtract the 20 students in the gifted class: 212 students - 20 students = <<212-20=192>>192 students",
+    "L4": "Then divide that number by 6 to find the number of students in each other class: 192 students / 6 classes = <<192/6=32>>32 students/class"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7123.\n    Returns: the number of students in each normal class at the new school.\n    \"\"\"\n    # L1\n    total_students = 1590 # 1590 students\n    transfer_percent = 0.4 # 40% of the students are going to move\n    students_to_new_school = total_students * transfer_percent\n\n    # L2\n    num_grade_levels = 3 # 3 grade levels\n    students_per_grade = students_to_new_school / num_grade_levels\n\n    # L3\n    advanced_class_size = 20 # one 20-person advanced class\n    students_after_advanced_class = students_per_grade - advanced_class_size\n\n    # L4\n    num_additional_classes = 6 # 6 additional classes\n    students_per_normal_class = students_after_advanced_class / num_additional_classes\n\n    # FA\n    answer = students_per_normal_class\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "students_per_normal_class",
+    "replacement_variable": "students_per_grade"
+  },
+  "correct_trace": {
+    "total_students": 1590,
+    "transfer_percent": 0.4,
+    "students_to_new_school": 636.0,
+    "num_grade_levels": 3,
+    "students_per_grade": 212.0,
+    "advanced_class_size": 20,
+    "students_after_advanced_class": 192.0,
+    "num_additional_classes": 6,
+    "students_per_normal_class": 32.0,
+    "answer": 32.0
+  },
+  "flawed_trace": {
+    "total_students": 1590,
+    "transfer_percent": 0.4,
+    "students_to_new_school": 636.0,
+    "num_grade_levels": 3,
+    "students_per_grade": 212.0,
+    "advanced_class_size": 20,
+    "students_after_advanced_class": 192.0,
+    "num_additional_classes": 6,
+    "students_per_normal_class": 32.0,
+    "answer": 212.0
+  },
+  "correct_value": 32.0,
+  "flawed_value": 212.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "students_to_new_school",
+      "question_inputs": [
+        "total_students",
+        "transfer_percent"
+      ],
+      "solution_line_template": "First find how many students go to the new school: {total_students} students * {transfer_percent} = <<{total_students}*{transfer_percent}={students_to_new_school}>>{students_to_new_school} students"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "students_per_grade",
+      "question_inputs": [
+        "num_grade_levels"
+      ],
+      "solution_line_template": "Then divide that number by {num_grade_levels} to find how many students are at each grade level: {students_to_new_school} students / {num_grade_levels} grades = <<{students_to_new_school}/{num_grade_levels}={students_per_grade}>>{students_per_grade} students/grade"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "students_after_advanced_class",
+      "question_inputs": [
+        "advanced_class_size"
+      ],
+      "solution_line_template": "Then subtract the {advanced_class_size} students in the gifted class: {students_per_grade} students - {advanced_class_size} students = <<{students_per_grade}-{advanced_class_size}={students_after_advanced_class}>>{students_after_advanced_class} students"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "students_per_normal_class",
+      "question_inputs": [
+        "num_additional_classes"
+      ],
+      "solution_line_template": "Then divide that number by {num_additional_classes} to find the number of students in each other class: {students_after_advanced_class} students / {num_additional_classes} classes = <<{students_after_advanced_class}/{num_additional_classes}={students_per_normal_class}>>{students_per_normal_class} students/class"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how many students go to the new school: 1590 students * 0.4 = <<1590*0.4=636>>636 students",
+    "L2": "Then divide that number by 3 to find how many students are at each grade level: 636 students / 3 grades = <<636/3=212>>212 students/grade",
+    "FA": "#### 212"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'students_per_grade' (value: 212.0) was reported instead of 'students_per_normal_class' (value: 32.0).",
+  "repro_seed": -4084495821256767741,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,78 @@
+{
+  "index": 2511,
+  "original_solution_mapping": {
+    "FA": "#### 56",
+    "L1": "First find the total sentence length for the arson: 6 years/count * 2 counts = 12 years",
+    "L2": "Then find the total sentence length for the explosives: 12 years * 2 = <<12*2=24>>24 years",
+    "L3": "Then add each sentence to find the total sentence length: 12 years + 24 years + 20 years = <<12+24+20=56>>56 years"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2511.\n    Returns: the total length of time James might spend in jail.\n    \"\"\"\n    # L1\n    arson_sentence_per_count = 6 # each carry a 6-year sentence\n    arson_counts = 2 # two count of arson\n    total_arson_sentence = arson_sentence_per_count * arson_counts\n\n    # L2\n    explosives_multiplier = 2 # twice as long as the total arson sentence\n    total_explosives_sentence = total_arson_sentence * explosives_multiplier\n\n    # L3\n    domestic_terrorism_sentence = 20 # 20 years\n    total_jail_time = total_arson_sentence + total_explosives_sentence + domestic_terrorism_sentence\n\n    # FA\n    answer = total_jail_time\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_explosives_sentence",
+    "operand_to_replace": "total_arson_sentence",
+    "replacement_variable": "explosives_multiplier"
+  },
+  "correct_trace": {
+    "arson_sentence_per_count": 6,
+    "arson_counts": 2,
+    "total_arson_sentence": 12,
+    "explosives_multiplier": 2,
+    "total_explosives_sentence": 24,
+    "domestic_terrorism_sentence": 20,
+    "total_jail_time": 56,
+    "answer": 56
+  },
+  "flawed_trace": {
+    "arson_sentence_per_count": 6,
+    "arson_counts": 2,
+    "total_arson_sentence": 12,
+    "explosives_multiplier": 2,
+    "total_explosives_sentence": 4,
+    "domestic_terrorism_sentence": 20,
+    "total_jail_time": 36,
+    "answer": 36
+  },
+  "correct_value": 24,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "arson_sentence_per_count",
+        "arson_counts"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_arson_sentence",
+      "solution_line_template": "First find the total sentence length for the arson: {arson_sentence_per_count} years/count * {arson_counts} counts = {total_arson_sentence} years"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "explosives_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_explosives_sentence",
+      "solution_line_template": "Then find the total sentence length for the explosives: {total_arson_sentence} years * {explosives_multiplier} = <<{total_arson_sentence}*{explosives_multiplier}={total_explosives_sentence}>>{total_explosives_sentence} years"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "domestic_terrorism_sentence"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_jail_time",
+      "solution_line_template": "Then add each sentence to find the total sentence length: {total_arson_sentence} years + {total_explosives_sentence} years + {domestic_terrorism_sentence} years = <<{total_arson_sentence}+{total_explosives_sentence}+{domestic_terrorism_sentence}={total_jail_time}>>{total_jail_time} years"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total sentence length for the arson: 6 years/count * 2 counts = 12 years",
+    "L2": "Then find the total sentence length for the explosives: 2 years * 2 = <<2*2=4>>4 years",
+    "L3": "Then add each sentence to find the total sentence length: 12 years + 4 years + 20 years = <<12+4+20=36>>36 years",
+    "FA": "#### 36"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'explosives_multiplier' (value: 2) was used instead of 'total_arson_sentence' (value: 12).",
+  "repro_seed": -2630580053051157177,
+  "model_name": "google_gemini-2.5-flash"
+}

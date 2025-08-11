@@ -1,0 +1,94 @@
+{
+  "index": 2809,
+  "original_solution_mapping": {
+    "FA": "#### 250000",
+    "L1": "First find how much the rail project will increase the house value by multiplying the initial value by 25%: $400,000 * .25 = $<<400000*.25=100000>>100,000",
+    "L2": "Then add that amount to the initial value to find the new value: $100,000 + $400,000 = $<<100000+400000=500000>>500,000",
+    "L3": "Then divide the maximum amount of property tax Jenny can afford to pay by the property tax rate to find the maximum value her house can have: $15,000 / .02 = $<<15000/.02=750000>>750,000",
+    "L4": "Now subtract the house's value after the rail project from the maximum value to find how much value the improvements can have: $750,000 - $500,000 = $<<750000-500000=250000>>250,000"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2809.\n    Returns: the maximum value of improvements Jenny can make to her house.\n    \"\"\"\n    # L1\n    initial_house_value = 400000 # house is currently worth $400,000\n    value_increase_percent_num = 25 # increase her house's value by 25%\n    value_increase_percent_decimal = 0.25 # from solution text: *.25\n    value_increase_amount = initial_house_value * value_increase_percent_decimal\n\n    # L2\n    new_house_value = value_increase_amount + initial_house_value\n\n    # L3\n    affordable_tax_limit = 15000 # afford to spend $15,000/year on property tax\n    property_tax_rate_percent = 2 # property tax rate is 2%\n    property_tax_rate_decimal = 0.02 # from solution text: /.02\n    max_house_value = affordable_tax_limit / property_tax_rate_decimal\n\n    # L4\n    improvements_value = max_house_value - new_house_value\n\n    # FA\n    answer = improvements_value\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "max_house_value",
+    "operand_to_replace": "affordable_tax_limit",
+    "replacement_variable": "initial_house_value"
+  },
+  "correct_trace": {
+    "initial_house_value": 400000,
+    "value_increase_percent_num": 25,
+    "value_increase_percent_decimal": 0.25,
+    "value_increase_amount": 100000.0,
+    "new_house_value": 500000.0,
+    "affordable_tax_limit": 15000,
+    "property_tax_rate_percent": 2,
+    "property_tax_rate_decimal": 0.02,
+    "max_house_value": 750000.0,
+    "improvements_value": 250000.0,
+    "answer": 250000.0
+  },
+  "flawed_trace": {
+    "initial_house_value": 400000,
+    "value_increase_percent_num": 25,
+    "value_increase_percent_decimal": 0.25,
+    "value_increase_amount": 100000.0,
+    "new_house_value": 500000.0,
+    "affordable_tax_limit": 15000,
+    "property_tax_rate_percent": 2,
+    "property_tax_rate_decimal": 0.02,
+    "max_house_value": 20000000.0,
+    "improvements_value": 19500000.0,
+    "answer": 19500000.0
+  },
+  "correct_value": 750000.0,
+  "flawed_value": 20000000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "value_increase_amount",
+      "question_inputs": [
+        "initial_house_value",
+        "value_increase_percent_num",
+        "value_increase_percent_decimal"
+      ],
+      "solution_line_template": "First find how much the rail project will increase the house value by multiplying the initial value by {value_increase_percent_num}%: ${initial_house_value} * {value_increase_percent_decimal} = $<<{initial_house_value}*{value_increase_percent_decimal}={value_increase_amount}>>{value_increase_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "new_house_value",
+      "question_inputs": [],
+      "solution_line_template": "Then add that amount to the initial value to find the new value: ${value_increase_amount} + ${initial_house_value} = $<<{value_increase_amount}+{initial_house_value}={new_house_value}>>{new_house_value}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "max_house_value",
+      "question_inputs": [
+        "affordable_tax_limit",
+        "property_tax_rate_percent",
+        "property_tax_rate_decimal"
+      ],
+      "solution_line_template": "Then divide the maximum amount of property tax Jenny can afford to pay by the property tax rate to find the maximum value her house can have: ${affordable_tax_limit} / {property_tax_rate_decimal} = $<<{affordable_tax_limit}/{property_tax_rate_decimal}={max_house_value}>>{max_house_value}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "improvements_value",
+      "question_inputs": [],
+      "solution_line_template": "Now subtract the house's value after the rail project from the maximum value to find how much value the improvements can have: ${max_house_value} - ${new_house_value} = $<<{max_house_value}-{new_house_value}={improvements_value}>>{improvements_value}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how much the rail project will increase the house value by multiplying the initial value by 25%: $400000 * 0.25 = $<<400000*0.25=100000>>100000",
+    "L2": "Then add that amount to the initial value to find the new value: $100000 + $400000 = $<<100000+400000=500000>>500000",
+    "L3": "Then divide the maximum amount of property tax Jenny can afford to pay by the property tax rate to find the maximum value her house can have: $400000 / 0.02 = $<<400000/0.02=20000000>>20000000",
+    "L4": "Now subtract the house's value after the rail project from the maximum value to find how much value the improvements can have: $20000000 - $500000 = $<<20000000-500000=19500000>>19500000",
+    "FA": "#### 19500000"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'initial_house_value' (400000) was used instead of 'affordable_tax_limit' (15000).",
+  "repro_seed": 4296489244133926931,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,89 @@
+{
+  "index": 2189,
+  "original_solution_mapping": {
+    "FA": "#### 525",
+    "L1": "He was carrying 150*1.5=<<150*1.5=225>>225 kg in each hand",
+    "L2": "So he had 225*2=<<225*2=450>>450 kg in his hands",
+    "L3": "The weight vest weighed 150*.5=<<150*.5=75>>75 kg",
+    "L4": "So he had a total of 450+75=<<450+75=525>>525 kg he was moving"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2189.\n    Returns: the total weight Tom was moving with.\n    \"\"\"\n    # L1\n    tom_weight = 150 # Tom weighs 150 kg\n    weight_multiplier_per_hand = 1.5 # 1.5 times his weight in each hand\n    weight_in_each_hand = tom_weight * weight_multiplier_per_hand\n\n    # L2\n    num_hands = 2 # WK\n    total_weight_in_hands = weight_in_each_hand * num_hands\n\n    # L3\n    vest_weight_multiplier = 0.5 # weighing half his weight\n    vest_weight = tom_weight * vest_weight_multiplier\n\n    # L4\n    total_weight_moved = total_weight_in_hands + vest_weight\n\n    # FA\n    answer = total_weight_moved\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_weight_moved",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x30e453590>"
+  },
+  "correct_trace": {
+    "tom_weight": 150,
+    "weight_multiplier_per_hand": 1.5,
+    "weight_in_each_hand": 225.0,
+    "num_hands": 2,
+    "total_weight_in_hands": 450.0,
+    "vest_weight_multiplier": 0.5,
+    "vest_weight": 75.0,
+    "total_weight_moved": 525.0,
+    "answer": 525.0
+  },
+  "flawed_trace": {
+    "tom_weight": 150,
+    "weight_multiplier_per_hand": 1.5,
+    "weight_in_each_hand": 225.0,
+    "num_hands": 2,
+    "total_weight_in_hands": 450.0,
+    "vest_weight_multiplier": 0.5,
+    "vest_weight": 75.0,
+    "total_weight_moved": 33750.0,
+    "answer": 33750.0
+  },
+  "correct_value": 525.0,
+  "flawed_value": 33750.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "weight_in_each_hand",
+      "question_inputs": [
+        "tom_weight",
+        "weight_multiplier_per_hand"
+      ],
+      "solution_line_template": "He was carrying {tom_weight}*{weight_multiplier_per_hand}=<<{tom_weight}*{weight_multiplier_per_hand}={weight_in_each_hand}>>{weight_in_each_hand} kg in each hand"
+    },
+    {
+      "WK_inputs": [
+        "num_hands"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_weight_in_hands",
+      "question_inputs": [],
+      "solution_line_template": "So he had {weight_in_each_hand}*{num_hands}=<<{weight_in_each_hand}*{num_hands}={total_weight_in_hands}>>{total_weight_in_hands} kg in his hands"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "vest_weight",
+      "question_inputs": [
+        "vest_weight_multiplier"
+      ],
+      "solution_line_template": "The weight vest weighed {tom_weight}*{vest_weight_multiplier}=<<{tom_weight}*{vest_weight_multiplier}={vest_weight}>>{vest_weight} kg"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_weight_moved",
+      "question_inputs": [],
+      "solution_line_template": "So he had a total of {total_weight_in_hands}+{vest_weight}=<<{total_weight_in_hands}+{vest_weight}={total_weight_moved}>>{total_weight_moved} kg he was moving"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He was carrying 150*1.5=<<150*1.5=225>>225 kg in each hand",
+    "L2": "So he had 225*2=<<225*2=450>>450 kg in his hands",
+    "L3": "The weight vest weighed 150*0.5=<<150*0.5=75>>75 kg",
+    "L4": "So he had a total of 450+75=<<450+75=33750>>33750 kg he was moving",
+    "FA": "#### 33750"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 1745720761810631511,
+  "model_name": "google_gemini-2.5-flash"
+}

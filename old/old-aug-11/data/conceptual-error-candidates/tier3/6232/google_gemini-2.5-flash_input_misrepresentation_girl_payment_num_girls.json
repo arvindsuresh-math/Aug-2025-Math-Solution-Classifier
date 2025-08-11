@@ -1,0 +1,100 @@
+{
+  "index": 6232,
+  "original_solution_mapping": {
+    "FA": "#### 2250",
+    "L1": "The total amount of money collected from the boy's payment is 40*$50 = $<<40*50=2000>>2000",
+    "L2": "There are four times as many boys at Lulu's party as girls, meaning there are 40/4 = <<40/4=10>>10 girls at the party.",
+    "L3": "since each boy paid twice the money that each girl paid to attend the party, each girl paid $50/2 = $<<50/2=25>>25",
+    "L4": "The total amount of money collected from the girl's payment is $25*10 = $<<25*10=250>>250",
+    "L5": "The total amount of money collected at the party is $250+$2000 = $<<250+2000=2250>>2250"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6232.\n    Returns: the total amount of money collected at the party.\n    \"\"\"\n    # L1\n    num_boys = 40 # 40 boys at the party\n    boy_payment = 50 # each boy paid $50\n    total_boy_payment = num_boys * boy_payment\n\n    # L2\n    boys_to_girls_ratio = 4 # four times as many boys\n    num_girls = num_boys / boys_to_girls_ratio\n\n    # L3\n    boy_girl_payment_ratio = 2 # twice the money\n    girl_payment = boy_payment / boy_girl_payment_ratio\n\n    # L4\n    total_girl_payment = girl_payment * num_girls\n\n    # L5\n    total_money_collected = total_girl_payment + total_boy_payment\n\n    # FA\n    answer = total_money_collected\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "girl_payment",
+    "operand_to_replace": "boy_payment",
+    "replacement_variable": "num_girls"
+  },
+  "correct_trace": {
+    "num_boys": 40,
+    "boy_payment": 50,
+    "total_boy_payment": 2000,
+    "boys_to_girls_ratio": 4,
+    "num_girls": 10.0,
+    "boy_girl_payment_ratio": 2,
+    "girl_payment": 25.0,
+    "total_girl_payment": 250.0,
+    "total_money_collected": 2250.0,
+    "answer": 2250.0
+  },
+  "flawed_trace": {
+    "num_boys": 40,
+    "boy_payment": 50,
+    "total_boy_payment": 2000,
+    "boys_to_girls_ratio": 4,
+    "num_girls": 10.0,
+    "boy_girl_payment_ratio": 2,
+    "girl_payment": 5.0,
+    "total_girl_payment": 50.0,
+    "total_money_collected": 2050.0,
+    "answer": 2050.0
+  },
+  "correct_value": 25.0,
+  "flawed_value": 5.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_boy_payment",
+      "question_inputs": [
+        "num_boys",
+        "boy_payment"
+      ],
+      "solution_line_template": "The total amount of money collected from the boy's payment is {num_boys}*${boy_payment} = $<<{num_boys}*{boy_payment}={total_boy_payment}>>{total_boy_payment}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_girls",
+      "question_inputs": [
+        "boys_to_girls_ratio"
+      ],
+      "solution_line_template": "There are four times as many boys at Lulu's party as girls, meaning there are {num_boys}/{boys_to_girls_ratio} = <<{num_boys}/{boys_to_girls_ratio}={num_girls}>>{num_girls} girls at the party."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "girl_payment",
+      "question_inputs": [
+        "boy_girl_payment_ratio"
+      ],
+      "solution_line_template": "since each boy paid twice the money that each girl paid to attend the party, each girl paid ${boy_payment}/{boy_girl_payment_ratio} = $<<{boy_payment}/{boy_girl_payment_ratio}={girl_payment}>>{girl_payment}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_girl_payment",
+      "question_inputs": [],
+      "solution_line_template": "The total amount of money collected from the girl's payment is ${girl_payment}*{num_girls} = $<<{girl_payment}*{num_girls}={total_girl_payment}>>{total_girl_payment}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_money_collected",
+      "question_inputs": [],
+      "solution_line_template": "The total amount of money collected at the party is ${total_girl_payment}+${total_boy_payment} = $<<{total_girl_payment}+{total_boy_payment}={total_money_collected}>>{total_money_collected}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total amount of money collected from the boy's payment is 40*$50 = $<<40*50=2000>>2000",
+    "L2": "There are four times as many boys at Lulu's party as girls, meaning there are 40/4 = <<40/4=10>>10 girls at the party.",
+    "L3": "since each boy paid twice the money that each girl paid to attend the party, each girl paid $10/2 = $<<10/2=5>>5",
+    "L4": "The total amount of money collected from the girl's payment is $5*10 = $<<5*10=50>>50",
+    "L5": "The total amount of money collected at the party is $50+$2000 = $<<50+2000=2050>>2050",
+    "FA": "#### 2050"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'num_girls' (10.0) was used instead of 'boy_payment' (50).",
+  "repro_seed": 6989523485735509538,
+  "model_name": "google_gemini-2.5-flash"
+}

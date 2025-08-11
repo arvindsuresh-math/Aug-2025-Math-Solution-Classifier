@@ -1,0 +1,63 @@
+{
+  "index": 1516,
+  "original_solution_mapping": {
+    "FA": "#### 800",
+    "L1": "The total ratio representing the revenue Lucille has is 4+11 = <<4+11=15>>15",
+    "L2": "The value from the ratio representing employee salary is 4/15, and this is 4/15*$3000 = $<<4/15*3000=800>>800 that Lucille has to pay her employees."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1516.\n    Returns: the total amount of money Lucille spends on employee salary.\n    \"\"\"\n    # L1\n    salary_ratio_part = 4 # ratio of 4:11\n    stock_ratio_part = 11 # ratio of 4:11\n    total_ratio_parts = salary_ratio_part + stock_ratio_part\n\n    # L2\n    revenue = 3000 # $3000 as her revenue\n    employee_salary = (salary_ratio_part / total_ratio_parts) * revenue\n\n    # FA\n    answer = employee_salary\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "employee_salary",
+    "operand_to_replace": "salary_ratio_part",
+    "replacement_variable": "stock_ratio_part"
+  },
+  "correct_trace": {
+    "salary_ratio_part": 4,
+    "stock_ratio_part": 11,
+    "total_ratio_parts": 15,
+    "revenue": 3000,
+    "employee_salary": 800.0,
+    "answer": 800.0
+  },
+  "flawed_trace": {
+    "salary_ratio_part": 4,
+    "stock_ratio_part": 11,
+    "total_ratio_parts": 15,
+    "revenue": 3000,
+    "employee_salary": 2200.0,
+    "answer": 2200.0
+  },
+  "correct_value": 800.0,
+  "flawed_value": 2200.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_ratio_parts",
+      "question_inputs": [
+        "salary_ratio_part",
+        "stock_ratio_part"
+      ],
+      "solution_line_template": "The total ratio representing the revenue Lucille has is {salary_ratio_part}+{stock_ratio_part} = <<{salary_ratio_part}+{stock_ratio_part}={total_ratio_parts}>>{total_ratio_parts}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "employee_salary",
+      "question_inputs": [
+        "revenue"
+      ],
+      "solution_line_template": "The value from the ratio representing employee salary is {salary_ratio_part}/{total_ratio_parts}, and this is {salary_ratio_part}/{total_ratio_parts}*${revenue} = $<<{salary_ratio_part}/{total_ratio_parts}*{revenue}={employee_salary}>>{employee_salary} that Lucille has to pay her employees."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total ratio representing the revenue Lucille has is 4+11 = <<4+11=15>>15",
+    "L2": "The value from the ratio representing employee salary is 11/15, and this is 11/15*$3000 = $<<11/15*3000=2200>>2200 that Lucille has to pay her employees.",
+    "FA": "#### 2200"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'stock_ratio_part' (11) was used instead of 'salary_ratio_part' (4).",
+  "repro_seed": 5167536927550552005,
+  "model_name": "google_gemini-2.5-flash"
+}

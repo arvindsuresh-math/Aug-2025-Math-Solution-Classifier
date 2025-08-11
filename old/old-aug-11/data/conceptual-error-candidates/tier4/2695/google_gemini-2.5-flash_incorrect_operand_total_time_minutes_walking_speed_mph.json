@@ -1,0 +1,92 @@
+{
+  "index": 2695,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "First find the total amount of time Marcus spends blow-drying his dog: 20 minutes / 2 = <<20/2=10>>10 minutes",
+    "L2": "Then find the time Marcus spends walking: 3 miles / 6 miles/hour = <<3/6=.5>>.5 hours",
+    "L3": "Then convert that time to minutes: .5 hours * 60 minutes/hour = <<.5*60=30>>30 minutes",
+    "L4": "Then add up the time Marcus spends washing, drying and walking to find the total time: 10 minutes + 20 minutes + 30 minutes = <<10+20+30=60>>60 minutes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2695.\n    Returns: the total time Marcus spends with his dog in minutes.\n    \"\"\"\n    # L1\n    bath_time_minutes = 20 # 20 minutes giving his dog a bath\n    blow_dry_divisor = 2 # half as long blow-drying her\n    blow_dry_time_minutes = bath_time_minutes / blow_dry_divisor\n\n    # L2\n    trail_distance_miles = 3 # 3-mile trail\n    walking_speed_mph = 6 # walks at 6 miles per hour\n    walk_time_hours = trail_distance_miles / walking_speed_mph\n\n    # L3\n    minutes_per_hour = 60 # WK\n    walk_time_minutes = walk_time_hours * minutes_per_hour\n\n    # L4\n    total_time_minutes = blow_dry_time_minutes + bath_time_minutes + walk_time_minutes\n\n    # FA\n    answer = total_time_minutes\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_time_minutes",
+    "operand_to_replace": "blow_dry_time_minutes",
+    "replacement_variable": "walking_speed_mph"
+  },
+  "correct_trace": {
+    "bath_time_minutes": 20,
+    "blow_dry_divisor": 2,
+    "blow_dry_time_minutes": 10.0,
+    "trail_distance_miles": 3,
+    "walking_speed_mph": 6,
+    "walk_time_hours": 0.5,
+    "minutes_per_hour": 60,
+    "walk_time_minutes": 30.0,
+    "total_time_minutes": 60.0,
+    "answer": 60.0
+  },
+  "flawed_trace": {
+    "bath_time_minutes": 20,
+    "blow_dry_divisor": 2,
+    "blow_dry_time_minutes": 10.0,
+    "trail_distance_miles": 3,
+    "walking_speed_mph": 6,
+    "walk_time_hours": 0.5,
+    "minutes_per_hour": 60,
+    "walk_time_minutes": 30.0,
+    "total_time_minutes": 56.0,
+    "answer": 56.0
+  },
+  "correct_value": 60.0,
+  "flawed_value": 56.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "blow_dry_time_minutes",
+      "question_inputs": [
+        "bath_time_minutes",
+        "blow_dry_divisor"
+      ],
+      "solution_line_template": "First find the total amount of time Marcus spends blow-drying his dog: {bath_time_minutes} minutes / {blow_dry_divisor} = <<{bath_time_minutes}/{blow_dry_divisor}={blow_dry_time_minutes}>>{blow_dry_time_minutes} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "walk_time_hours",
+      "question_inputs": [
+        "trail_distance_miles",
+        "walking_speed_mph"
+      ],
+      "solution_line_template": "Then find the time Marcus spends walking: {trail_distance_miles} miles / {walking_speed_mph} miles/hour = <<{trail_distance_miles}/{walking_speed_mph}={walk_time_hours}>>{walk_time_hours} hours"
+    },
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L3",
+      "output_variable": "walk_time_minutes",
+      "question_inputs": [],
+      "solution_line_template": "Then convert that time to minutes: {walk_time_hours} hours * {minutes_per_hour} minutes/hour = <<{walk_time_hours}*{minutes_per_hour}={walk_time_minutes}>>{walk_time_minutes} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_time_minutes",
+      "question_inputs": [],
+      "solution_line_template": "Then add up the time Marcus spends washing, drying and walking to find the total time: {blow_dry_time_minutes} minutes + {bath_time_minutes} minutes + {walk_time_minutes} minutes = <<{blow_dry_time_minutes}+{bath_time_minutes}+{walk_time_minutes}={total_time_minutes}>>{total_time_minutes} minutes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total amount of time Marcus spends blow-drying his dog: 20 minutes / 2 = <<20/2=10>>10 minutes",
+    "L2": "Then find the time Marcus spends walking: 3 miles / 6 miles/hour = <<3/6=0.5>>0.5 hours",
+    "L3": "Then convert that time to minutes: 0.5 hours * 60 minutes/hour = <<0.5*60=30>>30 minutes",
+    "L4": "Then add up the time Marcus spends washing, drying and walking to find the total time: 6 minutes + 20 minutes + 30 minutes = <<6+20+30=56>>56 minutes",
+    "FA": "#### 56"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'walking_speed_mph' (value: 6) was used instead of 'blow_dry_time_minutes' (value: 10.0).",
+  "repro_seed": 4251530983844989620,
+  "model_name": "google_gemini-2.5-flash"
+}

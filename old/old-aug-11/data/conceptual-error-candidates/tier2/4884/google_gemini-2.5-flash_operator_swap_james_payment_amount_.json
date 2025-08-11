@@ -1,0 +1,59 @@
+{
+  "index": 4884,
+  "original_solution_mapping": {
+    "FA": "#### 150",
+    "L1": "His friend agrees to pay 200*.25=$<<200*.25=50>>50",
+    "L2": "So he needs to pay 200-50=$<<200-50=150>>150"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4884.\n    Returns: the amount James has to pay for the puppy.\n    \"\"\"\n    # L1\n    adoption_fee = 200 # The adoption fee is $200\n    friend_pay_percent = 0.25 # friend agrees to pay 25% of that\n    friend_payment_amount = adoption_fee * friend_pay_percent\n\n    # L2\n    james_payment_amount = adoption_fee - friend_payment_amount\n\n    # FA\n    answer = james_payment_amount\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "james_payment_amount",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x30e94bd10>"
+  },
+  "correct_trace": {
+    "adoption_fee": 200,
+    "friend_pay_percent": 0.25,
+    "friend_payment_amount": 50.0,
+    "james_payment_amount": 150.0,
+    "answer": 150.0
+  },
+  "flawed_trace": {
+    "adoption_fee": 200,
+    "friend_pay_percent": 0.25,
+    "friend_payment_amount": 50.0,
+    "james_payment_amount": 4.0,
+    "answer": 4.0
+  },
+  "correct_value": 150.0,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "friend_payment_amount",
+      "question_inputs": [
+        "adoption_fee",
+        "friend_pay_percent"
+      ],
+      "solution_line_template": "His friend agrees to pay {adoption_fee}*{friend_pay_percent}=$<<{adoption_fee}*{friend_pay_percent}={friend_payment_amount}>>{friend_payment_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "james_payment_amount",
+      "question_inputs": [],
+      "solution_line_template": "So he needs to pay {adoption_fee}-{friend_payment_amount}=$<<{adoption_fee}-{friend_payment_amount}={james_payment_amount}>>{james_payment_amount}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "His friend agrees to pay 200*0.25=$<<200*0.25=50>>50",
+    "L2": "So he needs to pay 200-50=$<<200-50=4>>4",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": -1454146660194343187,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,85 @@
+{
+  "index": 3006,
+  "original_solution_mapping": {
+    "FA": "#### 25",
+    "L1": "The shop offers 100 flavors and she tried 1/4 of the flavors so she had 100*.25 = <<100*.25=25>>25 flavors 2 years ago",
+    "L2": "Last year she ate double the amount from the previous year so she had 25*2 = <<25*2=50>>50 flavors",
+    "L3": "2 years ago she ate 25 flavors and last year she had 50 flavors so she has had 25+50 = <<25+50=75>>75 flavors",
+    "L4": "The shop offers 100 flavors and she has had 75 flavors so she still needs to try 100-75 = <<100-75=25>>25 flavors"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3006.\n    Returns: the number of flavors Gretchen still needs to try.\n    \"\"\"\n    # L1\n    total_flavors = 100 # 100 different flavors\n    two_years_ago_fraction_decimal = 0.25 # 1/4 of the flavors\n    flavors_two_years_ago = total_flavors * two_years_ago_fraction_decimal\n\n    # L2\n    double_factor = 2 # double that amount\n    flavors_last_year = flavors_two_years_ago * double_factor\n\n    # L3\n    total_flavors_tried_so_far = flavors_two_years_ago + flavors_last_year\n\n    # L4\n    flavors_to_try_this_year = total_flavors - total_flavors_tried_so_far\n\n    # FA\n    answer = flavors_to_try_this_year\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "flavors_last_year",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x168ba9e90>"
+  },
+  "correct_trace": {
+    "total_flavors": 100,
+    "two_years_ago_fraction_decimal": 0.25,
+    "flavors_two_years_ago": 25.0,
+    "double_factor": 2,
+    "flavors_last_year": 50.0,
+    "total_flavors_tried_so_far": 75.0,
+    "flavors_to_try_this_year": 25.0,
+    "answer": 25.0
+  },
+  "flawed_trace": {
+    "total_flavors": 100,
+    "two_years_ago_fraction_decimal": 0.25,
+    "flavors_two_years_ago": 25.0,
+    "double_factor": 2,
+    "flavors_last_year": 27.0,
+    "total_flavors_tried_so_far": 52.0,
+    "flavors_to_try_this_year": 48.0,
+    "answer": 48.0
+  },
+  "correct_value": 50.0,
+  "flawed_value": 27.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "flavors_two_years_ago",
+      "question_inputs": [
+        "total_flavors",
+        "two_years_ago_fraction_decimal"
+      ],
+      "solution_line_template": "The shop offers {total_flavors} flavors and she tried 1/4 of the flavors so she had {total_flavors}*{two_years_ago_fraction_decimal} = <<{total_flavors}*{two_years_ago_fraction_decimal}={flavors_two_years_ago}>>{flavors_two_years_ago} flavors 2 years ago"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "flavors_last_year",
+      "question_inputs": [
+        "double_factor"
+      ],
+      "solution_line_template": "Last year she ate double the amount from the previous year so she had {flavors_two_years_ago}*{double_factor} = <<{flavors_two_years_ago}*{double_factor}={flavors_last_year}>>{flavors_last_year} flavors"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_flavors_tried_so_far",
+      "question_inputs": [],
+      "solution_line_template": "2 years ago she ate {flavors_two_years_ago} flavors and last year she had {flavors_last_year} flavors so she has had {flavors_two_years_ago}+{flavors_last_year} = <<{flavors_two_years_ago}+{flavors_last_year}={total_flavors_tried_so_far}>>{total_flavors_tried_so_far} flavors"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "flavors_to_try_this_year",
+      "question_inputs": [],
+      "solution_line_template": "The shop offers {total_flavors} flavors and she has had {total_flavors_tried_so_far} flavors so she still needs to try {total_flavors}-{total_flavors_tried_so_far} = <<{total_flavors}-{total_flavors_tried_so_far}={flavors_to_try_this_year}>>{flavors_to_try_this_year} flavors"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The shop offers 100 flavors and she tried 1/4 of the flavors so she had 100*0.25 = <<100*0.25=25>>25 flavors 2 years ago",
+    "L2": "Last year she ate double the amount from the previous year so she had 25*2 = <<25*2=27>>27 flavors",
+    "L3": "2 years ago she ate 25 flavors and last year she had 27 flavors so she has had 25+27 = <<25+27=52>>52 flavors",
+    "L4": "The shop offers 100 flavors and she has had 52 flavors so she still needs to try 100-52 = <<100-52=48>>48 flavors",
+    "FA": "#### 48"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 377841992615331703,
+  "model_name": "google_gemini-2.5-flash"
+}

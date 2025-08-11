@@ -1,0 +1,63 @@
+{
+  "index": 248,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "The subscription sends twice monthly issues, so there are 2 * 18 = <<2*18=36>>36 issues.",
+    "L2": "Thus, the promotional offer is 36 * 0.25 = $<<36*0.25=9>>9 cheaper than the normal subscription."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 248.\n    Returns: how many dollars cheaper the promotional subscription is than the normal one.\n    \"\"\"\n    # L1\n    issues_per_month = 2 # twice-a-month issue\n    subscription_months = 18 # 18-month magazine subscription\n    total_issues = issues_per_month * subscription_months\n\n    # L2\n    discount_per_issue = 0.25 # $0.25 off each\n    total_discount = total_issues * discount_per_issue\n\n    # FA\n    answer = total_discount\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_discount",
+    "operand_to_replace": "discount_per_issue",
+    "replacement_variable": "total_issues"
+  },
+  "correct_trace": {
+    "issues_per_month": 2,
+    "subscription_months": 18,
+    "total_issues": 36,
+    "discount_per_issue": 0.25,
+    "total_discount": 9.0,
+    "answer": 9.0
+  },
+  "flawed_trace": {
+    "issues_per_month": 2,
+    "subscription_months": 18,
+    "total_issues": 36,
+    "discount_per_issue": 0.25,
+    "total_discount": 1296,
+    "answer": 1296
+  },
+  "correct_value": 9.0,
+  "flawed_value": 1296,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_issues",
+      "question_inputs": [
+        "issues_per_month",
+        "subscription_months"
+      ],
+      "solution_line_template": "The subscription sends twice monthly issues, so there are {issues_per_month} * {subscription_months} = <<{issues_per_month}*{subscription_months}={total_issues}>>{total_issues} issues."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_discount",
+      "question_inputs": [
+        "discount_per_issue"
+      ],
+      "solution_line_template": "Thus, the promotional offer is {total_issues} * {discount_per_issue} = $<<{total_issues}*{discount_per_issue}={total_discount}>>{total_discount} cheaper than the normal subscription."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The subscription sends twice monthly issues, so there are 2 * 18 = <<2*18=36>>36 issues.",
+    "L2": "Thus, the promotional offer is 36 * 36 = $<<36*36=1296>>1296 cheaper than the normal subscription.",
+    "FA": "#### 1296"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_issues' (36) was used instead of 'discount_per_issue' (0.25).",
+  "repro_seed": 7989710148813476099,
+  "model_name": "google_gemini-2.5-flash"
+}

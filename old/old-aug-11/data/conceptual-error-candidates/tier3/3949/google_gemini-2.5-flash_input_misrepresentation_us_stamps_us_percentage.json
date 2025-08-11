@@ -1,0 +1,85 @@
+{
+  "index": 3949,
+  "original_solution_mapping": {
+    "FA": "#### 45",
+    "L1": "Nikka has 100 x 35/100 = <<100*35/100=35>>35 Chinese stamps.",
+    "L2": "She has 100 x 20/100 = <<100*20/100=20>>20 US stamps.",
+    "L3": "So, Nikka has 35 + 20 = <<35+20=55>>55 stamps that are not Japanese.",
+    "L4": "Thus, Nikka has 100 - 55 = <<100-55=45>>45 Japanese stamps."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3949.\n    Returns: the number of Japanese stamps Nikka has.\n    \"\"\"\n    # L1\n    total_stamps = 100 # 100 stamp collection\n    chinese_percentage = Fraction(35, 100) # Thirty-five percent of her stamps are Chinese\n    chinese_stamps = total_stamps * chinese_percentage\n\n    # L2\n    us_percentage = Fraction(20, 100) # 20% are US stamps\n    us_stamps = total_stamps * us_percentage\n\n    # L3\n    non_japanese_stamps = chinese_stamps + us_stamps\n\n    # L4\n    japanese_stamps = total_stamps - non_japanese_stamps\n\n    # FA\n    answer = japanese_stamps\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "us_stamps",
+    "operand_to_replace": "total_stamps",
+    "replacement_variable": "us_percentage"
+  },
+  "correct_trace": {
+    "total_stamps": 100,
+    "chinese_percentage": "7/20",
+    "chinese_stamps": "35",
+    "us_percentage": "1/5",
+    "us_stamps": "20",
+    "non_japanese_stamps": "55",
+    "japanese_stamps": "45",
+    "answer": "45"
+  },
+  "flawed_trace": {
+    "total_stamps": 100,
+    "chinese_percentage": "7/20",
+    "chinese_stamps": "35",
+    "us_percentage": "1/5",
+    "us_stamps": "1/25",
+    "non_japanese_stamps": "876/25",
+    "japanese_stamps": "1624/25",
+    "answer": "1624/25"
+  },
+  "correct_value": "20",
+  "flawed_value": "1/25",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "chinese_stamps",
+      "question_inputs": [
+        "total_stamps",
+        "chinese_percentage"
+      ],
+      "solution_line_template": "Nikka has {total_stamps} x {chinese_percentage} = <<{total_stamps}*{chinese_percentage}={chinese_stamps}>>{chinese_stamps} Chinese stamps."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "us_stamps",
+      "question_inputs": [
+        "us_percentage"
+      ],
+      "solution_line_template": "She has {total_stamps} x {us_percentage} = <<{total_stamps}*{us_percentage}={us_stamps}>>{us_stamps} US stamps."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "non_japanese_stamps",
+      "question_inputs": [],
+      "solution_line_template": "So, Nikka has {chinese_stamps} + {us_stamps} = <<{chinese_stamps}+{us_stamps}={non_japanese_stamps}>>{non_japanese_stamps} stamps that are not Japanese."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "japanese_stamps",
+      "question_inputs": [],
+      "solution_line_template": "Thus, Nikka has {total_stamps} - {non_japanese_stamps} = <<{total_stamps}-{non_japanese_stamps}={japanese_stamps}>>{japanese_stamps} Japanese stamps."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Nikka has 100 x 35/100 = <<100*35/100=35>>35 Chinese stamps.",
+    "L2": "She has 20/100 x 20/100 = <<20/100*20/100=1/25>>1/25 US stamps.",
+    "L3": "So, Nikka has 35 + 1/25 = <<35+1/25=876/25>>876/25 stamps that are not Japanese.",
+    "L4": "Thus, Nikka has 100 - 876/25 = <<100-876/25=1624/25>>1624/25 Japanese stamps.",
+    "FA": "#### 1624/25"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'us_percentage' (20/100) was used instead of 'total_stamps' (100).",
+  "repro_seed": -8740162655888139573,
+  "model_name": "google_gemini-2.5-flash"
+}

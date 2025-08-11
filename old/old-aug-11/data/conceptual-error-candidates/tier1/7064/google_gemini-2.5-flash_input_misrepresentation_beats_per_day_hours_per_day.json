@@ -1,0 +1,79 @@
+{
+  "index": 7064,
+  "original_solution_mapping": {
+    "FA": "#### 72000",
+    "L1": "He trains 2*60=<<2*60=120>>120 minutes a day",
+    "L2": "That means he played 200*120=<<200*120=24000>>24000 beats per day",
+    "L3": "So he played 24000*3=<<24000*3=72000>>72000 beats"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7064.\n    Returns: the total number of beats John plays.\n    \"\"\"\n    # L1\n    hours_per_day = 2 # 2 hours a day\n    minutes_per_hour = 60 # WK\n    minutes_per_day = hours_per_day * minutes_per_hour\n\n    # L2\n    beats_per_minute = 200 # 200 beats per minute\n    beats_per_day = beats_per_minute * minutes_per_day\n\n    # L3\n    num_days = 3 # 3 days\n    total_beats = beats_per_day * num_days\n\n    # FA\n    answer = total_beats\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "beats_per_day",
+    "operand_to_replace": "beats_per_minute",
+    "replacement_variable": "hours_per_day"
+  },
+  "correct_trace": {
+    "hours_per_day": 2,
+    "minutes_per_hour": 60,
+    "minutes_per_day": 120,
+    "beats_per_minute": 200,
+    "beats_per_day": 24000,
+    "num_days": 3,
+    "total_beats": 72000,
+    "answer": 72000
+  },
+  "flawed_trace": {
+    "hours_per_day": 2,
+    "minutes_per_hour": 60,
+    "minutes_per_day": 120,
+    "beats_per_minute": 200,
+    "beats_per_day": 240,
+    "num_days": 3,
+    "total_beats": 720,
+    "answer": 720
+  },
+  "correct_value": 24000,
+  "flawed_value": 240,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "minutes_per_day",
+      "question_inputs": [
+        "hours_per_day"
+      ],
+      "solution_line_template": "He trains {hours_per_day}*{minutes_per_hour}=<<{hours_per_day}*{minutes_per_hour}={minutes_per_day}>>{minutes_per_day} minutes a day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "beats_per_day",
+      "question_inputs": [
+        "beats_per_minute"
+      ],
+      "solution_line_template": "That means he played {beats_per_minute}*{minutes_per_day}=<<{beats_per_minute}*{minutes_per_day}={beats_per_day}>>{beats_per_day} beats per day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_beats",
+      "question_inputs": [
+        "num_days"
+      ],
+      "solution_line_template": "So he played {beats_per_day}*{num_days}=<<{beats_per_day}*{num_days}={total_beats}>>{total_beats} beats"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He trains 2*60=<<2*60=120>>120 minutes a day",
+    "L2": "That means he played 2*120=<<2*120=240>>240 beats per day",
+    "L3": "So he played 240*3=<<240*3=720>>720 beats",
+    "FA": "#### 720"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'hours_per_day' (2) was used instead of 'beats_per_minute' (200).",
+  "repro_seed": -1681940248359033850,
+  "model_name": "google_gemini-2.5-flash"
+}

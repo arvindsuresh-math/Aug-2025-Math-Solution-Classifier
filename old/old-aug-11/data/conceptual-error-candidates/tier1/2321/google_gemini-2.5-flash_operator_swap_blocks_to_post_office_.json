@@ -1,0 +1,63 @@
+{
+  "index": 2321,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "The number of blocks traveled on the way to the post office was 5 + 20 = <<5+20=25>>25.",
+    "L2": "Pete traveled 25 * 2 = <<25*2=50>>50 blocks in all."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2321.\n    Returns: the total number of blocks Pete traveled.\n    \"\"\"\n    # L1\n    blocks_to_garage = 5 # walked 5 blocks from his house to the bus garage\n    blocks_by_bus = 20 # rode the bus 20 blocks to the post office\n    blocks_to_post_office = blocks_to_garage + blocks_by_bus\n\n    # L2\n    round_trip_multiplier = 2 # came home the same way\n    total_blocks_traveled = blocks_to_post_office * round_trip_multiplier\n\n    # FA\n    answer = total_blocks_traveled\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "blocks_to_post_office",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x30c187c90>"
+  },
+  "correct_trace": {
+    "blocks_to_garage": 5,
+    "blocks_by_bus": 20,
+    "blocks_to_post_office": 25,
+    "round_trip_multiplier": 2,
+    "total_blocks_traveled": 50,
+    "answer": 50
+  },
+  "flawed_trace": {
+    "blocks_to_garage": 5,
+    "blocks_by_bus": 20,
+    "blocks_to_post_office": 100,
+    "round_trip_multiplier": 2,
+    "total_blocks_traveled": 200,
+    "answer": 200
+  },
+  "correct_value": 25,
+  "flawed_value": 100,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "blocks_to_garage",
+        "blocks_by_bus"
+      ],
+      "WK_inputs": [],
+      "output_variable": "blocks_to_post_office",
+      "solution_line_template": "The number of blocks traveled on the way to the post office was {blocks_to_garage} + {blocks_by_bus} = <<{blocks_to_garage}+{blocks_by_bus}={blocks_to_post_office}>>{blocks_to_post_office}."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "round_trip_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_blocks_traveled",
+      "solution_line_template": "Pete traveled {blocks_to_post_office} \u00d7 {round_trip_multiplier} = <<{blocks_to_post_office}*{round_trip_multiplier}={total_blocks_traveled}>>{total_blocks_traveled} blocks in all."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The number of blocks traveled on the way to the post office was 5 + 20 = <<5+20=100>>100.",
+    "L2": "Pete traveled 100 \u00d7 2 = <<100*2=200>>200 blocks in all.",
+    "FA": "#### 200"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 3641791966726145262,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,107 @@
+{
+  "index": 5513,
+  "original_solution_mapping": {
+    "FA": "#### 90",
+    "L1": "After a year, scheme A will yield 30% of his capital which is (30/100)*$300 = $<<30/100*300=90>>90",
+    "L2": "In addition to his capital, he will have $90+$300 = $<<90+300=390>>390 in scheme A",
+    "L3": "After a year, scheme B will yield 50% of his capital which is (50/100)*$200 = $<<50*.01*200=100>>100",
+    "L4": "In addition to his capital, he will have $100+$200 = $<<100+200=300>>300 in scheme B",
+    "L5": "After a year, he will have $390-$300 = $<<390-300=90>>90 in scheme A more than in scheme B"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5513.\n    Returns: the difference in money between scheme A and scheme B after a year.\n    \"\"\"\n    # L1\n    scheme_a_yield_percent_num = 30 # 30% of the capital\n    percent_divisor = 100 # WK\n    scheme_a_capital = 300 # invested $300 in scheme A\n    scheme_a_yield = (scheme_a_yield_percent_num / percent_divisor) * scheme_a_capital\n\n    # L2\n    total_scheme_a = scheme_a_yield + scheme_a_capital\n\n    # L3\n    scheme_b_yield_percent_num = 50 # 50% of the capital\n    percent_factor = 0.01 # WK\n    scheme_b_capital = 200 # invested $200 in B\n    scheme_b_yield = scheme_b_yield_percent_num * percent_factor * scheme_b_capital\n\n    # L4\n    total_scheme_b = scheme_b_yield + scheme_b_capital\n\n    # L5\n    difference_a_b = total_scheme_a - total_scheme_b\n\n    # FA\n    answer = difference_a_b\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_scheme_b",
+    "operand_to_replace": "scheme_b_yield",
+    "replacement_variable": "scheme_a_yield_percent_num"
+  },
+  "correct_trace": {
+    "scheme_a_yield_percent_num": 30,
+    "percent_divisor": 100,
+    "scheme_a_capital": 300,
+    "scheme_a_yield": 90.0,
+    "total_scheme_a": 390.0,
+    "scheme_b_yield_percent_num": 50,
+    "percent_factor": 0.01,
+    "scheme_b_capital": 200,
+    "scheme_b_yield": 100.0,
+    "total_scheme_b": 300.0,
+    "difference_a_b": 90.0,
+    "answer": 90.0
+  },
+  "flawed_trace": {
+    "scheme_a_yield_percent_num": 30,
+    "percent_divisor": 100,
+    "scheme_a_capital": 300,
+    "scheme_a_yield": 90.0,
+    "total_scheme_a": 390.0,
+    "scheme_b_yield_percent_num": 50,
+    "percent_factor": 0.01,
+    "scheme_b_capital": 200,
+    "scheme_b_yield": 100.0,
+    "total_scheme_b": 230,
+    "difference_a_b": 160.0,
+    "answer": 160.0
+  },
+  "correct_value": 300.0,
+  "flawed_value": 230,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_divisor"
+      ],
+      "line_number": "L1",
+      "output_variable": "scheme_a_yield",
+      "question_inputs": [
+        "scheme_a_yield_percent_num",
+        "scheme_a_capital"
+      ],
+      "solution_line_template": "After a year, scheme A will yield 30% of his capital which is ({scheme_a_yield_percent_num}/{percent_divisor})*${scheme_a_capital} = ${scheme_a_yield}<<{scheme_a_yield_percent_num}/{percent_divisor}*{scheme_a_capital}={scheme_a_yield}>>{scheme_a_yield}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_scheme_a",
+      "question_inputs": [],
+      "solution_line_template": "In addition to his capital, he will have ${scheme_a_yield}+${scheme_a_capital} = ${total_scheme_a}<<{scheme_a_yield}+{scheme_a_capital}={total_scheme_a}>>{total_scheme_a} in scheme A"
+    },
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L3",
+      "output_variable": "scheme_b_yield",
+      "question_inputs": [
+        "scheme_b_yield_percent_num",
+        "scheme_b_capital"
+      ],
+      "solution_line_template": "After a year, scheme B will yield 50% of his capital which is (50/100)*${scheme_b_capital} = ${scheme_b_yield}<<{scheme_b_yield_percent_num}*{percent_factor}*{scheme_b_capital}={scheme_b_yield}>>{scheme_b_yield}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_scheme_b",
+      "question_inputs": [],
+      "solution_line_template": "In addition to his capital, he will have ${scheme_b_yield}+${scheme_b_capital} = ${total_scheme_b}<<{scheme_b_yield}+{scheme_b_capital}={total_scheme_b}>>{total_scheme_b} in scheme B"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "difference_a_b",
+      "question_inputs": [],
+      "solution_line_template": "After a year, he will have ${total_scheme_a}-${total_scheme_b} = ${difference_a_b}<<{total_scheme_a}-{total_scheme_b}={difference_a_b}>>{difference_a_b} in scheme A more than in scheme B"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After a year, scheme A will yield 30% of his capital which is (30/100)*$300 = $90<<30/100*300=90>>90",
+    "L2": "In addition to his capital, he will have $90+$300 = $390<<90+300=390>>390 in scheme A",
+    "L3": "After a year, scheme B will yield 50% of his capital which is (50/100)*$200 = $100<<50*0.01*200=100>>100",
+    "L4": "In addition to his capital, he will have $30+$200 = $230<<30+200=230>>230 in scheme B",
+    "L5": "After a year, he will have $390-$230 = $160<<390-230=160>>160 in scheme A more than in scheme B",
+    "FA": "#### 160"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'scheme_a_yield_percent_num' (value: 30) was used instead of 'scheme_b_yield' (value: 100.0).",
+  "repro_seed": -7561869596840946135,
+  "model_name": "google_gemini-2.5-flash"
+}

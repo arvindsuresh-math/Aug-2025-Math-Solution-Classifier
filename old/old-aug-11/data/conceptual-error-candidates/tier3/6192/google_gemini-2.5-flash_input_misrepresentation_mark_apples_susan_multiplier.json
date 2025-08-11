@@ -1,0 +1,104 @@
+{
+  "index": 6192,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "Greg and Sarah will split their apples, so 18 apples / 2 = <<18/2=9>>9 apples per child.",
+    "L2": "Susan has 2 * 9 apples = <<2*9=18>>18 apples.",
+    "L3": "Mark has 18 apples - 5 apples = <<18-5=13>>13 apples.",
+    "L4": "Combined the children have 9 apples + 9 apples + 18 apples + 13 apples = <<9+9+18+13=49>>49 apples.",
+    "L5": "Mom will have 49 apples - 40 apples = <<49-40=9>>9 apples left over."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6192.\n    Returns: the number of apples Mom will have left over.\n    \"\"\"\n    # L1\n    total_apples_to_split = 18 # 18 apples\n    num_children_splitting = 2 # split evenly\n    apples_per_child = total_apples_to_split / num_children_splitting\n\n    # L2\n    susan_multiplier = 2 # twice as many apples as Greg\n    susan_apples = susan_multiplier * apples_per_child\n\n    # L3\n    mark_fewer_apples = 5 # 5 fewer apples than Susan\n    mark_apples = susan_apples - mark_fewer_apples\n\n    # L4\n    total_children_apples = apples_per_child + apples_per_child + susan_apples + mark_apples\n\n    # L5\n    mom_needs_apples = 40 # needs 40 apples\n    apples_left_over = total_children_apples - mom_needs_apples\n\n    # FA\n    answer = apples_left_over\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "mark_apples",
+    "operand_to_replace": "mark_fewer_apples",
+    "replacement_variable": "susan_multiplier"
+  },
+  "correct_trace": {
+    "total_apples_to_split": 18,
+    "num_children_splitting": 2,
+    "apples_per_child": 9.0,
+    "susan_multiplier": 2,
+    "susan_apples": 18.0,
+    "mark_fewer_apples": 5,
+    "mark_apples": 13.0,
+    "total_children_apples": 49.0,
+    "mom_needs_apples": 40,
+    "apples_left_over": 9.0,
+    "answer": 9.0
+  },
+  "flawed_trace": {
+    "total_apples_to_split": 18,
+    "num_children_splitting": 2,
+    "apples_per_child": 9.0,
+    "susan_multiplier": 2,
+    "susan_apples": 18.0,
+    "mark_fewer_apples": 5,
+    "mark_apples": 16.0,
+    "total_children_apples": 52.0,
+    "mom_needs_apples": 40,
+    "apples_left_over": 12.0,
+    "answer": 12.0
+  },
+  "correct_value": 13.0,
+  "flawed_value": 16.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "apples_per_child",
+      "question_inputs": [
+        "total_apples_to_split",
+        "num_children_splitting"
+      ],
+      "solution_line_template": "Greg and Sarah will split their apples, so {total_apples_to_split} apples / {num_children_splitting} = <<{total_apples_to_split}/{num_children_splitting}={apples_per_child}>>{apples_per_child} apples per child."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "susan_apples",
+      "question_inputs": [
+        "susan_multiplier"
+      ],
+      "solution_line_template": "Susan has {susan_multiplier} * {apples_per_child} apples = <<{susan_multiplier}*{apples_per_child}={susan_apples}>>{susan_apples} apples."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "mark_apples",
+      "question_inputs": [
+        "mark_fewer_apples"
+      ],
+      "solution_line_template": "Mark has {susan_apples} apples - {mark_fewer_apples} apples = <<{susan_apples}-{mark_fewer_apples}={mark_apples}>>{mark_apples} apples."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_children_apples",
+      "question_inputs": [],
+      "solution_line_template": "Combined the children have {apples_per_child} apples + {apples_per_child} apples + {susan_apples} apples + {mark_apples} apples = <<{apples_per_child}+{apples_per_child}+{susan_apples}+{mark_apples}={total_children_apples}>>{total_children_apples} apples."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "apples_left_over",
+      "question_inputs": [
+        "mom_needs_apples"
+      ],
+      "solution_line_template": "Mom will have {total_children_apples} apples - {mom_needs_apples} apples = <<{total_children_apples}-{mom_needs_apples}={apples_left_over}>>{apples_left_over} apples left over."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Greg and Sarah will split their apples, so 18 apples / 2 = <<18/2=9>>9 apples per child.",
+    "L2": "Susan has 2 * 9 apples = <<2*9=18>>18 apples.",
+    "L3": "Mark has 18 apples - 2 apples = <<18-2=16>>16 apples.",
+    "L4": "Combined the children have 9 apples + 9 apples + 18 apples + 16 apples = <<9+9+18+16=52>>52 apples.",
+    "L5": "Mom will have 52 apples - 40 apples = <<52-40=12>>12 apples left over.",
+    "FA": "#### 12"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'susan_multiplier' (2) was used instead of 'mark_fewer_apples' (5).",
+  "repro_seed": -7110993289608019504,
+  "model_name": "google_gemini-2.5-flash"
+}

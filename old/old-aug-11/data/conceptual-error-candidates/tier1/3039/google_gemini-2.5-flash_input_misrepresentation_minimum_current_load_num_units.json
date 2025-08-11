@@ -1,0 +1,63 @@
+{
+  "index": 3039,
+  "original_solution_mapping": {
+    "FA": "#### 240",
+    "L1": "Three units require a running current of 40A each for a total current load of 3*40A = <<3*40=120>>120A",
+    "L2": "They require twice 120A for starting which is 2*120A = <<2*120=240>>240A which is the minimum current load that the transformer must be able to carry"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3039.\n    Returns: the minimum current load the transformer must be able to carry.\n    \"\"\"\n    # L1\n    num_units = 3 # three units of machinery\n    running_current_per_unit = 40 # running current of 40A each\n    total_running_current = num_units * running_current_per_unit\n\n    # L2\n    starting_current_multiplier = 2 # at least twice their running current for starting\n    minimum_current_load = starting_current_multiplier * total_running_current\n\n    # FA\n    answer = minimum_current_load\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "minimum_current_load",
+    "operand_to_replace": "starting_current_multiplier",
+    "replacement_variable": "num_units"
+  },
+  "correct_trace": {
+    "num_units": 3,
+    "running_current_per_unit": 40,
+    "total_running_current": 120,
+    "starting_current_multiplier": 2,
+    "minimum_current_load": 240,
+    "answer": 240
+  },
+  "flawed_trace": {
+    "num_units": 3,
+    "running_current_per_unit": 40,
+    "total_running_current": 120,
+    "starting_current_multiplier": 2,
+    "minimum_current_load": 360,
+    "answer": 360
+  },
+  "correct_value": 240,
+  "flawed_value": 360,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_running_current",
+      "question_inputs": [
+        "num_units",
+        "running_current_per_unit"
+      ],
+      "solution_line_template": "Three units require a running current of {running_current_per_unit}A each for a total current load of {num_units}*{running_current_per_unit}A = <<{num_units}*{running_current_per_unit}={total_running_current}>>{total_running_current}A"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "minimum_current_load",
+      "question_inputs": [
+        "starting_current_multiplier"
+      ],
+      "solution_line_template": "They require twice {total_running_current}A for starting which is {starting_current_multiplier}*{total_running_current}A = <<{starting_current_multiplier}*{total_running_current}={minimum_current_load}>>{minimum_current_load}A which is the minimum current load that the transformer must be able to carry"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Three units require a running current of 40A each for a total current load of 3*40A = <<3*40=120>>120A",
+    "L2": "They require twice 120A for starting which is 3*120A = <<3*120=360>>360A which is the minimum current load that the transformer must be able to carry",
+    "FA": "#### 360"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_units' (3) was used instead of 'starting_current_multiplier' (2).",
+  "repro_seed": -59089644296690681,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,87 @@
+{
+  "index": 1414,
+  "original_solution_mapping": {
+    "FA": "#### 110",
+    "L1": "Her cash back app gave her 10% back on $150.00 so that's .10*150 = $<<10*.01*150=15.00>>15.00 cash back",
+    "L2": "She received $15.00 from the cashback app and has a $25.00 mail-in rebate for a total of 15+25 = $<<15+25=40.00>>40.00 discounts",
+    "L3": "She spent $150.00 for the medicine and has $40.00 worth of discounts so the medicine will cost 150-40 = $<<150-40=110.00>>110.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1414.\n    Returns: the final cost of the medicine after cash back and rebate offers.\n    \"\"\"\n    # L1\n    initial_cost = 150.00 # $150.00 online\n    cashback_percent_num = 10 # 10% cashback\n    cashback_percent_decimal = 0.10 # from solution text: .10*150\n    percent_factor = 0.01 # WK\n    cashback_amount = cashback_percent_num * percent_factor * initial_cost\n\n    # L2\n    mail_in_rebate = 25.00 # $25.00 mail-in rebate\n    cashback_amount_int = 15 # derived from cashback_amount for sum\n    mail_in_rebate_int = 25 # derived from mail_in_rebate for sum\n    total_discounts = cashback_amount_int + mail_in_rebate_int\n\n    # L3\n    initial_cost_int = 150 # derived from initial_cost for subtraction\n    total_discounts_int = 40 # derived from total_discounts for subtraction\n    final_cost = initial_cost_int - total_discounts_int\n\n    # FA\n    answer = final_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "final_cost",
+    "replacement_variable": "cashback_amount"
+  },
+  "correct_trace": {
+    "initial_cost": 150.0,
+    "cashback_percent_num": 10,
+    "cashback_percent_decimal": 0.1,
+    "percent_factor": 0.01,
+    "cashback_amount": 15.0,
+    "mail_in_rebate": 25.0,
+    "cashback_amount_int": 15,
+    "mail_in_rebate_int": 25,
+    "total_discounts": 40,
+    "initial_cost_int": 150,
+    "total_discounts_int": 40,
+    "final_cost": 110,
+    "answer": 110
+  },
+  "flawed_trace": {
+    "initial_cost": 150.0,
+    "cashback_percent_num": 10,
+    "cashback_percent_decimal": 0.1,
+    "percent_factor": 0.01,
+    "cashback_amount": 15.0,
+    "mail_in_rebate": 25.0,
+    "cashback_amount_int": 15,
+    "mail_in_rebate_int": 25,
+    "total_discounts": 40,
+    "initial_cost_int": 150,
+    "total_discounts_int": 40,
+    "final_cost": 110,
+    "answer": 15.0
+  },
+  "correct_value": 110,
+  "flawed_value": 15.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "cashback_amount",
+      "question_inputs": [
+        "initial_cost",
+        "cashback_percent_num",
+        "cashback_percent_decimal"
+      ],
+      "solution_line_template": "Her cash back app gave her {cashback_percent_num}% back on ${initial_cost} so that's {cashback_percent_decimal}*{initial_cost} = $<<{cashback_percent_num}*{percent_factor}*{initial_cost}={cashback_amount}>>{cashback_amount} cash back"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_discounts",
+      "question_inputs": [
+        "mail_in_rebate"
+      ],
+      "solution_line_template": "She received ${cashback_amount} from the cashback app and has a ${mail_in_rebate} mail-in rebate for a total of {cashback_amount_int}+{mail_in_rebate_int} = $<<{cashback_amount_int}+{mail_in_rebate_int}={total_discounts}>>{total_discounts} discounts"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "final_cost",
+      "question_inputs": [],
+      "solution_line_template": "She spent ${initial_cost} for the medicine and has ${total_discounts} worth of discounts so the medicine will cost {initial_cost_int}-{total_discounts_int} = $<<{initial_cost_int}-{total_discounts_int}={final_cost}>>{final_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Her cash back app gave her 10% back on $150 so that's 0.1*150 = $<<10*0.01*150=15>>15 cash back",
+    "FA": "#### 15"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'cashback_amount' (value: 15.0) was reported instead of 'final_cost' (value: 110).",
+  "repro_seed": 4896478888994652847,
+  "model_name": "google_gemini-2.5-flash"
+}

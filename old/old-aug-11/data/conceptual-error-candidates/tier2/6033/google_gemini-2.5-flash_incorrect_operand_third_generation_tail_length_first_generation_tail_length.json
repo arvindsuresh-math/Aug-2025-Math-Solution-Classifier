@@ -1,0 +1,85 @@
+{
+  "index": 6033,
+  "original_solution_mapping": {
+    "FA": "#### 25",
+    "L1": "First find how much longer the second generation's tails are: 25% * 16 cm = <<25*.01*16=4>>4 cm",
+    "L2": "Then add that length to the first generation's tail length to find the second generation's tail length: 4 cm + 16 cm = <<4+16=20>>20 cm",
+    "L3": "Then find how much longer the third generation's tails are: 25% * 20 cm = <<25*.01*20=5>>5 cm",
+    "L4": "Then add that length to the second generation's tail length to find the third generation's tail length: 5 cm + 20 cm = <<5+20=25>>25 cm"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6033.\n    Returns: the length of the third generation's tails.\n    \"\"\"\n    # L1\n    percentage_increase_num = 25 # 25% longer\n    first_generation_tail_length = 16 # tails 16 cm long\n    percent_factor = 0.01 # WK\n    increase_gen2 = percentage_increase_num * percent_factor * first_generation_tail_length\n\n    # L2\n    second_generation_tail_length = increase_gen2 + first_generation_tail_length\n\n    # L3\n    increase_gen3 = percentage_increase_num * percent_factor * second_generation_tail_length\n\n    # L4\n    third_generation_tail_length = increase_gen3 + second_generation_tail_length\n\n    # FA\n    answer = third_generation_tail_length\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "third_generation_tail_length",
+    "operand_to_replace": "increase_gen3",
+    "replacement_variable": "first_generation_tail_length"
+  },
+  "correct_trace": {
+    "percentage_increase_num": 25,
+    "first_generation_tail_length": 16,
+    "percent_factor": 0.01,
+    "increase_gen2": 4.0,
+    "second_generation_tail_length": 20.0,
+    "increase_gen3": 5.0,
+    "third_generation_tail_length": 25.0,
+    "answer": 25.0
+  },
+  "flawed_trace": {
+    "percentage_increase_num": 25,
+    "first_generation_tail_length": 16,
+    "percent_factor": 0.01,
+    "increase_gen2": 4.0,
+    "second_generation_tail_length": 20.0,
+    "increase_gen3": 5.0,
+    "third_generation_tail_length": 36.0,
+    "answer": 36.0
+  },
+  "correct_value": 25.0,
+  "flawed_value": 36.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "increase_gen2",
+      "question_inputs": [
+        "percentage_increase_num",
+        "first_generation_tail_length"
+      ],
+      "solution_line_template": "First find how much longer the second generation's tails are: {percentage_increase_num}% * {first_generation_tail_length} cm = <<{percentage_increase_num}*{percent_factor}*{first_generation_tail_length}={increase_gen2}>>{increase_gen2} cm"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "second_generation_tail_length",
+      "question_inputs": [],
+      "solution_line_template": "Then add that length to the first generation's tail length to find the second generation's tail length: {increase_gen2} cm + {first_generation_tail_length} cm = <<{increase_gen2}+{first_generation_tail_length}={second_generation_tail_length}>>{second_generation_tail_length} cm"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "increase_gen3",
+      "question_inputs": [],
+      "solution_line_template": "Then find how much longer the third generation's tails are: {percentage_increase_num}% * {second_generation_tail_length} cm = <<{percentage_increase_num}*{percent_factor}*{second_generation_tail_length}={increase_gen3}>>{increase_gen3} cm"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "third_generation_tail_length",
+      "question_inputs": [],
+      "solution_line_template": "Then add that length to the second generation's tail length to find the third generation's tail length: {increase_gen3} cm + {second_generation_tail_length} cm = <<{increase_gen3}+{second_generation_tail_length}={third_generation_tail_length}>>{third_generation_tail_length} cm"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how much longer the second generation's tails are: 25% * 16 cm = <<25*0.01*16=4>>4 cm",
+    "L2": "Then add that length to the first generation's tail length to find the second generation's tail length: 4 cm + 16 cm = <<4+16=20>>20 cm",
+    "L3": "Then find how much longer the third generation's tails are: 25% * 20 cm = <<25*0.01*20=5>>5 cm",
+    "L4": "Then add that length to the second generation's tail length to find the third generation's tail length: 16 cm + 20 cm = <<16+20=36>>36 cm",
+    "FA": "#### 36"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'first_generation_tail_length' (value: 16) was used instead of 'increase_gen3' (value: 5.0).",
+  "repro_seed": -9081156385875933287,
+  "model_name": "google_gemini-2.5-flash"
+}

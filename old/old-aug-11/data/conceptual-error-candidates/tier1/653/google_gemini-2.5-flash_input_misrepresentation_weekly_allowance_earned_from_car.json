@@ -1,0 +1,63 @@
+{
+  "index": 653,
+  "original_solution_mapping": {
+    "FA": "#### 16",
+    "L1": "Before washing the car Fred had $14 - $6 = $<<14-6=8>>8.",
+    "L2": "Fred spent half his allowance for the movies, so 2 * $8 = $<<2*8=16>>16 allowance."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 653.\n    Returns: Fred's weekly allowance.\n    \"\"\"\n    # L1\n    ended_with_dollars = 14 # ended with 14 dollars\n    earned_from_car = 6 # earned 6 dollars\n    before_washing_car = ended_with_dollars - earned_from_car\n\n    # L2\n    multiplier_for_half = 2 # half of his allowance (implied by 2*)\n    weekly_allowance = multiplier_for_half * before_washing_car\n\n    # FA\n    answer = weekly_allowance\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "weekly_allowance",
+    "operand_to_replace": "multiplier_for_half",
+    "replacement_variable": "earned_from_car"
+  },
+  "correct_trace": {
+    "ended_with_dollars": 14,
+    "earned_from_car": 6,
+    "before_washing_car": 8,
+    "multiplier_for_half": 2,
+    "weekly_allowance": 16,
+    "answer": 16
+  },
+  "flawed_trace": {
+    "ended_with_dollars": 14,
+    "earned_from_car": 6,
+    "before_washing_car": 8,
+    "multiplier_for_half": 2,
+    "weekly_allowance": 48,
+    "answer": 48
+  },
+  "correct_value": 16,
+  "flawed_value": 48,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "ended_with_dollars",
+        "earned_from_car"
+      ],
+      "WK_inputs": [],
+      "output_variable": "before_washing_car",
+      "solution_line_template": "Before washing the car Fred had ${ended_with_dollars} - ${earned_from_car} = $<<{ended_with_dollars}-{earned_from_car}={before_washing_car}>>{before_washing_car}."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "multiplier_for_half"
+      ],
+      "WK_inputs": [],
+      "output_variable": "weekly_allowance",
+      "solution_line_template": "Fred spent half his allowance for the movies, so {multiplier_for_half} * ${before_washing_car} = $<<{multiplier_for_half}*{before_washing_car}={weekly_allowance}>>{weekly_allowance} allowance."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Before washing the car Fred had $14 - $6 = $<<14-6=8>>8.",
+    "L2": "Fred spent half his allowance for the movies, so 6 * $8 = $<<6*8=48>>48 allowance.",
+    "FA": "#### 48"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'earned_from_car' (6) was used instead of 'multiplier_for_half' (2).",
+  "repro_seed": -1533886356418078040,
+  "model_name": "google_gemini-2.5-flash"
+}

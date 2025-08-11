@@ -1,0 +1,78 @@
+{
+  "index": 5994,
+  "original_solution_mapping": {
+    "FA": "#### 24",
+    "L1": "If Spaatz has 2 less than half the number of gemstones as does Frankie, then half as many as Frankie is 1+2=3 gemstones",
+    "L2": "If 3 is half the number of gemstones on Frankie's collar, then Frankie has 3*2=<<3*2=6>>6 gemstones.",
+    "L3": "If Binkie has 4 times as many gemstones as Frankie, then Binkie has 4*6=<<4*6=24>>24"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5994.\n    Returns: the number of gemstones Binkie has on his collar.\n    \"\"\"\n    # L1\n    spaatz_gemstones = 1 # Spaatz has 1 Gemstone on her collar\n    less_than_half_amount = 2 # two less than half as many gemstones\n    half_frankie_gemstones = spaatz_gemstones + less_than_half_amount\n\n    # L2\n    multiplier_for_full = 2 # WK\n    frankie_gemstones = half_frankie_gemstones * multiplier_for_full\n\n    # L3\n    binkie_multiplier = 4 # four times as many gemstones\n    binkie_gemstones = binkie_multiplier * frankie_gemstones\n\n    # FA\n    answer = binkie_gemstones\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "half_frankie_gemstones",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x30ae588d0>"
+  },
+  "correct_trace": {
+    "spaatz_gemstones": 1,
+    "less_than_half_amount": 2,
+    "half_frankie_gemstones": 3,
+    "multiplier_for_full": 2,
+    "frankie_gemstones": 6,
+    "binkie_multiplier": 4,
+    "binkie_gemstones": 24,
+    "answer": 24
+  },
+  "flawed_trace": {
+    "spaatz_gemstones": 1,
+    "less_than_half_amount": 2,
+    "half_frankie_gemstones": 2,
+    "multiplier_for_full": 2,
+    "frankie_gemstones": 4,
+    "binkie_multiplier": 4,
+    "binkie_gemstones": 16,
+    "answer": 16
+  },
+  "correct_value": 3,
+  "flawed_value": 2,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "half_frankie_gemstones",
+      "question_inputs": [
+        "spaatz_gemstones",
+        "less_than_half_amount"
+      ],
+      "solution_line_template": "If Spaatz has {less_than_half_amount} less than half the number of gemstones as does Frankie, then half as many as Frankie is {spaatz_gemstones}+{less_than_half_amount}={half_frankie_gemstones} gemstones"
+    },
+    {
+      "WK_inputs": [
+        "multiplier_for_full"
+      ],
+      "line_number": "L2",
+      "output_variable": "frankie_gemstones",
+      "question_inputs": [],
+      "solution_line_template": "If {half_frankie_gemstones} is half the number of gemstones on Frankie's collar, then Frankie has {half_frankie_gemstones}*{multiplier_for_full}=<<{half_frankie_gemstones}*{multiplier_for_full}={frankie_gemstones}>>{frankie_gemstones} gemstones."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "binkie_gemstones",
+      "question_inputs": [
+        "binkie_multiplier"
+      ],
+      "solution_line_template": "If Binkie has {binkie_multiplier} times as many gemstones as Frankie, then Binkie has {binkie_multiplier}*{frankie_gemstones}=<<{binkie_multiplier}*{frankie_gemstones}={binkie_gemstones}>>{binkie_gemstones}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If Spaatz has 2 less than half the number of gemstones as does Frankie, then half as many as Frankie is 1+2=2 gemstones",
+    "L2": "If 2 is half the number of gemstones on Frankie's collar, then Frankie has 2*2=<<2*2=4>>4 gemstones.",
+    "L3": "If Binkie has 4 times as many gemstones as Frankie, then Binkie has 4*4=<<4*4=16>>16",
+    "FA": "#### 16"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": -4368474682311180220,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,89 @@
+{
+  "index": 689,
+  "original_solution_mapping": {
+    "FA": "#### 18",
+    "L1": "The cost of the Lyft ride is $22 - $3 = $<<22-3=19>>19",
+    "L2": "The original cost of the taxi ride is $19 - $4 = $<<19-4=15>>15",
+    "L3": "Trevor tips the taxi driver $15 * 0.20 = $<<15*0.20=3>>3",
+    "L4": "The total cost of the ride downtown is $15 + $3 = $<<15+3=18>>18"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 689.\n    Returns: the total cost of the taxi ride downtown.\n    \"\"\"\n    # L1\n    uber_cost = 22 # The Uber ride costs $22\n    uber_lyft_difference = 3 # costs $3 more than a Lyft ride\n    lyft_cost = uber_cost - uber_lyft_difference\n\n    # L2\n    lyft_taxi_difference = 4 # costs $4 more than a taxi ride\n    taxi_original_cost = lyft_cost - lyft_taxi_difference\n\n    # L3\n    tip_percentage = 0.20 # tips the taxi driver 20% of the original cost\n    tip_amount = taxi_original_cost * tip_percentage\n\n    # L4\n    total_cost = taxi_original_cost + tip_amount\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_cost",
+    "operand_to_replace": "tip_amount",
+    "replacement_variable": "uber_cost"
+  },
+  "correct_trace": {
+    "uber_cost": 22,
+    "uber_lyft_difference": 3,
+    "lyft_cost": 19,
+    "lyft_taxi_difference": 4,
+    "taxi_original_cost": 15,
+    "tip_percentage": 0.2,
+    "tip_amount": 3.0,
+    "total_cost": 18.0,
+    "answer": 18.0
+  },
+  "flawed_trace": {
+    "uber_cost": 22,
+    "uber_lyft_difference": 3,
+    "lyft_cost": 19,
+    "lyft_taxi_difference": 4,
+    "taxi_original_cost": 15,
+    "tip_percentage": 0.2,
+    "tip_amount": 3.0,
+    "total_cost": 37,
+    "answer": 37
+  },
+  "correct_value": 18.0,
+  "flawed_value": 37,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "lyft_cost",
+      "question_inputs": [
+        "uber_cost",
+        "uber_lyft_difference"
+      ],
+      "solution_line_template": "The cost of the Lyft ride is ${uber_cost} - ${uber_lyft_difference} = $<<{uber_cost}-{uber_lyft_difference}={lyft_cost}>>{lyft_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "taxi_original_cost",
+      "question_inputs": [
+        "lyft_taxi_difference"
+      ],
+      "solution_line_template": "The original cost of the taxi ride is ${lyft_cost} - ${lyft_taxi_difference} = $<<{lyft_cost}-{lyft_taxi_difference}={taxi_original_cost}>>{taxi_original_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "tip_amount",
+      "question_inputs": [
+        "tip_percentage"
+      ],
+      "solution_line_template": "Trevor tips the taxi driver ${taxi_original_cost} * {tip_percentage} = $<<{taxi_original_cost}*{tip_percentage}={tip_amount}>>{tip_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cost",
+      "question_inputs": [],
+      "solution_line_template": "The total cost of the ride downtown is ${taxi_original_cost} + ${tip_amount} = $<<{taxi_original_cost}+{tip_amount}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The cost of the Lyft ride is $22 - $3 = $<<22-3=19>>19",
+    "L2": "The original cost of the taxi ride is $19 - $4 = $<<19-4=15>>15",
+    "L3": "Trevor tips the taxi driver $15 * 0.2 = $<<15*0.2=3>>3",
+    "L4": "The total cost of the ride downtown is $15 + $22 = $<<15+22=37>>37",
+    "FA": "#### 37"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'uber_cost' (value: 22) was used instead of 'tip_amount' (value: 3.0).",
+  "repro_seed": 5339683414683677827,
+  "model_name": "google_gemini-2.5-flash"
+}

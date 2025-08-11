@@ -1,0 +1,63 @@
+{
+  "index": 3877,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "Marissa used a total of 4.5 - 1 = <<4.5-1=3.5>>3.5 feet of ribbon to the boxes.",
+    "L2": "Thus, there were 3.5/0.7 = <<3.5/0.7=5>>5 boxes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3877.\n    Returns: the number of boxes Marissa tied.\n    \"\"\"\n    # L1\n    total_ribbon_initial = 4.5 # 4.5 feet of ribbon\n    ribbon_left = 1 # 1 foot of ribbon is left\n    ribbon_used_total = total_ribbon_initial - ribbon_left\n\n    # L2\n    ribbon_per_box = 0.7 # 0.7 feet of ribbon to tie each box\n    num_boxes = ribbon_used_total / ribbon_per_box\n\n    # FA\n    answer = num_boxes\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "num_boxes",
+    "operand_to_replace": "ribbon_per_box",
+    "replacement_variable": "ribbon_used_total"
+  },
+  "correct_trace": {
+    "total_ribbon_initial": 4.5,
+    "ribbon_left": 1,
+    "ribbon_used_total": 3.5,
+    "ribbon_per_box": 0.7,
+    "num_boxes": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "total_ribbon_initial": 4.5,
+    "ribbon_left": 1,
+    "ribbon_used_total": 3.5,
+    "ribbon_per_box": 0.7,
+    "num_boxes": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 5.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "ribbon_used_total",
+      "question_inputs": [
+        "total_ribbon_initial",
+        "ribbon_left"
+      ],
+      "solution_line_template": "Marissa used a total of {total_ribbon_initial} - {ribbon_left} = <<{total_ribbon_initial}-{ribbon_left}={ribbon_used_total}>>{ribbon_used_total} feet of ribbon to the boxes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_boxes",
+      "question_inputs": [
+        "ribbon_per_box"
+      ],
+      "solution_line_template": "Thus, there were {ribbon_used_total}/{ribbon_per_box} = <<{ribbon_used_total}/{ribbon_per_box}={num_boxes}>>{num_boxes} boxes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Marissa used a total of 4.5 - 1 = <<4.5-1=3.5>>3.5 feet of ribbon to the boxes.",
+    "L2": "Thus, there were 3.5/3.5 = <<3.5/3.5=1>>1 boxes.",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'ribbon_used_total' (3.5) was used instead of 'ribbon_per_box' (0.7).",
+  "repro_seed": 6617110506949169179,
+  "model_name": "google_gemini-2.5-flash"
+}

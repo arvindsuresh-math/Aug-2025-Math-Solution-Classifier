@@ -1,0 +1,104 @@
+{
+  "index": 4320,
+  "original_solution_mapping": {
+    "FA": "#### 192",
+    "L1": "The mural is 6*3=<<6*3=18>>18 sq meters",
+    "L2": "So the paint cost 18*4=$<<18*4=72>>72",
+    "L3": "The artist works for 18/1.5=<<18/1.5=12>>12 hours",
+    "L4": "He charges 12*10=$<<12*10=120>>120",
+    "L5": "So the total cost is 120+72=$<<120+72=192>>192"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4320.\n    Returns: the total cost of the mural.\n    \"\"\"\n    # L1\n    mural_length = 6 # 6m by 3m\n    mural_width = 3 # 6m by 3m\n    mural_area = mural_length * mural_width\n\n    # L2\n    paint_cost_per_sq_meter = 4 # $4 per square meter\n    total_paint_cost = mural_area * paint_cost_per_sq_meter\n\n    # L3\n    paint_rate_sq_meter_per_hour = 1.5 # 1.5 square meters per hour\n    hours_worked = mural_area / paint_rate_sq_meter_per_hour\n\n    # L4\n    artist_charge_per_hour = 10 # charges $10 per hour\n    artist_labor_cost = hours_worked * artist_charge_per_hour\n\n    # L5\n    total_mural_cost = artist_labor_cost + total_paint_cost\n\n    # FA\n    answer = total_mural_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "hours_worked",
+    "operand_to_replace": "mural_area",
+    "replacement_variable": "mural_width"
+  },
+  "correct_trace": {
+    "mural_length": 6,
+    "mural_width": 3,
+    "mural_area": 18,
+    "paint_cost_per_sq_meter": 4,
+    "total_paint_cost": 72,
+    "paint_rate_sq_meter_per_hour": 1.5,
+    "hours_worked": 12.0,
+    "artist_charge_per_hour": 10,
+    "artist_labor_cost": 120.0,
+    "total_mural_cost": 192.0,
+    "answer": 192.0
+  },
+  "flawed_trace": {
+    "mural_length": 6,
+    "mural_width": 3,
+    "mural_area": 18,
+    "paint_cost_per_sq_meter": 4,
+    "total_paint_cost": 72,
+    "paint_rate_sq_meter_per_hour": 1.5,
+    "hours_worked": 2.0,
+    "artist_charge_per_hour": 10,
+    "artist_labor_cost": 20.0,
+    "total_mural_cost": 92.0,
+    "answer": 92.0
+  },
+  "correct_value": 12.0,
+  "flawed_value": 2.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "mural_area",
+      "question_inputs": [
+        "mural_length",
+        "mural_width"
+      ],
+      "solution_line_template": "The mural is {mural_length}*{mural_width}=<<{mural_length}*{mural_width}={mural_area}>>{mural_area} sq meters"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_paint_cost",
+      "question_inputs": [
+        "paint_cost_per_sq_meter"
+      ],
+      "solution_line_template": "So the paint cost {mural_area}*{paint_cost_per_sq_meter}=$<<{mural_area}*{paint_cost_per_sq_meter}={total_paint_cost}>>{total_paint_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "hours_worked",
+      "question_inputs": [
+        "paint_rate_sq_meter_per_hour"
+      ],
+      "solution_line_template": "The artist works for {mural_area}/{paint_rate_sq_meter_per_hour}=<<{mural_area}/{paint_rate_sq_meter_per_hour}={hours_worked}>>{hours_worked} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "artist_labor_cost",
+      "question_inputs": [
+        "artist_charge_per_hour"
+      ],
+      "solution_line_template": "He charges {hours_worked}*{artist_charge_per_hour}=$<<{hours_worked}*{artist_charge_per_hour}={artist_labor_cost}>>{artist_labor_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_mural_cost",
+      "question_inputs": [],
+      "solution_line_template": "So the total cost is {artist_labor_cost}+{total_paint_cost}=$<<{artist_labor_cost}+{total_paint_cost}={total_mural_cost}>>{total_mural_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The mural is 6*3=<<6*3=18>>18 sq meters",
+    "L2": "So the paint cost 18*4=$<<18*4=72>>72",
+    "L3": "The artist works for 3/1.5=<<3/1.5=2>>2 hours",
+    "L4": "He charges 2*10=$<<2*10=20>>20",
+    "L5": "So the total cost is 20+72=$<<20+72=92>>92",
+    "FA": "#### 92"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'mural_width' (value: 3) was used instead of 'mural_area' (value: 18).",
+  "repro_seed": -6020384060595018614,
+  "model_name": "google_gemini-2.5-flash"
+}

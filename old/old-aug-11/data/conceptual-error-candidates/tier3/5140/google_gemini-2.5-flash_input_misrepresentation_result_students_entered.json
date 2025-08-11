@@ -1,0 +1,66 @@
+{
+  "index": 5140,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "At the intermediate stop, 58-28=<<58-28=30>>30 students entered the bus before it stopped at the intersection.",
+    "L2": "40% of the number of students who entered the bus at the intermediate stop is 40/100*30=<<40/100*30=12>>12"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5140.\n    Returns: 40% of the number of students who entered the bus.\n    \"\"\"\n    # L1\n    students_after_stop = 58 # there were 58 students on the bus\n    students_before_stop = 28 # There were 28 students inside a bus\n    students_entered = students_after_stop - students_before_stop\n\n    # L2\n    percentage_numerator = 40 # 40% of the number of students\n    percentage_denominator = 100 # 40% of the number of students\n    result = (percentage_numerator / percentage_denominator) * students_entered\n\n    # FA\n    answer = result\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "result",
+    "operand_to_replace": "percentage_denominator",
+    "replacement_variable": "students_entered"
+  },
+  "correct_trace": {
+    "students_after_stop": 58,
+    "students_before_stop": 28,
+    "students_entered": 30,
+    "percentage_numerator": 40,
+    "percentage_denominator": 100,
+    "result": 12.0,
+    "answer": 12.0
+  },
+  "flawed_trace": {
+    "students_after_stop": 58,
+    "students_before_stop": 28,
+    "students_entered": 30,
+    "percentage_numerator": 40,
+    "percentage_denominator": 100,
+    "result": 40.0,
+    "answer": 40.0
+  },
+  "correct_value": 12.0,
+  "flawed_value": 40.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "students_entered",
+      "question_inputs": [
+        "students_after_stop",
+        "students_before_stop"
+      ],
+      "solution_line_template": "At the intermediate stop, {students_after_stop}-{students_before_stop}=<<{students_after_stop}-{students_before_stop}={students_entered}>>{students_entered} students entered the bus before it stopped at the intersection."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "result",
+      "question_inputs": [
+        "percentage_numerator",
+        "percentage_denominator"
+      ],
+      "solution_line_template": "40% of the number of students who entered the bus at the intermediate stop is {percentage_numerator}/{percentage_denominator}*{students_entered}=<<{percentage_numerator}/{percentage_denominator}*{students_entered}={result}>>{result}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "At the intermediate stop, 58-28=<<58-28=30>>30 students entered the bus before it stopped at the intersection.",
+    "L2": "40% of the number of students who entered the bus at the intermediate stop is 40/30*30=<<40/30*30=40>>40",
+    "FA": "#### 40"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'students_entered' (30) was used instead of 'percentage_denominator' (100).",
+  "repro_seed": 3645387017956320491,
+  "model_name": "google_gemini-2.5-flash"
+}

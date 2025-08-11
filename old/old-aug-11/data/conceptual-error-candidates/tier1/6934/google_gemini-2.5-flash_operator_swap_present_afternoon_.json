@@ -1,0 +1,77 @@
+{
+  "index": 6934,
+  "original_solution_mapping": {
+    "FA": "#### 42",
+    "L1": "25-3=<<25-3=22>>22 students",
+    "L2": "24-4=<<24-4=20>>20 students",
+    "L3": "She had 22+20=<<22+20=42>>42 students"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6934.\n    Returns: the total number of students Mrs. McGillicuddy had over the two kindergarten sessions.\n    \"\"\"\n    # L1\n    registered_morning = 25 # 25 students registered for the morning session\n    absent_morning = 3 # 3 students were absent\n    present_morning = registered_morning - absent_morning\n\n    # L2\n    registered_afternoon = 24 # 24 students registered for the afternoon session\n    absent_afternoon = 4 # 4 students were absent\n    present_afternoon = registered_afternoon - absent_afternoon\n\n    # L3\n    total_students = present_morning + present_afternoon\n\n    # FA\n    answer = total_students\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "present_afternoon",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x15f4efcd0>"
+  },
+  "correct_trace": {
+    "registered_morning": 25,
+    "absent_morning": 3,
+    "present_morning": 22,
+    "registered_afternoon": 24,
+    "absent_afternoon": 4,
+    "present_afternoon": 20,
+    "total_students": 42,
+    "answer": 42
+  },
+  "flawed_trace": {
+    "registered_morning": 25,
+    "absent_morning": 3,
+    "present_morning": 22,
+    "registered_afternoon": 24,
+    "absent_afternoon": 4,
+    "present_afternoon": 6.0,
+    "total_students": 28.0,
+    "answer": 28.0
+  },
+  "correct_value": 20,
+  "flawed_value": 6.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "present_morning",
+      "question_inputs": [
+        "registered_morning",
+        "absent_morning"
+      ],
+      "solution_line_template": "{registered_morning}-{absent_morning}=<<{registered_morning}-{absent_morning}={present_morning}>>{present_morning} students"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "present_afternoon",
+      "question_inputs": [
+        "registered_afternoon",
+        "absent_afternoon"
+      ],
+      "solution_line_template": "{registered_afternoon}-{absent_afternoon}=<<{registered_afternoon}-{absent_afternoon}={present_afternoon}>>{present_afternoon} students"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_students",
+      "question_inputs": [],
+      "solution_line_template": "She had {present_morning}+{present_afternoon}=<<{present_morning}+{present_afternoon}={total_students}>>{total_students} students"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "25-3=<<25-3=22>>22 students",
+    "L2": "24-4=<<24-4=6>>6 students",
+    "L3": "She had 22+6=<<22+6=28>>28 students",
+    "FA": "#### 28"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": -2514379784341374183,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 4161,
+  "original_solution_mapping": {
+    "FA": "#### 8000",
+    "L1": "If there are 50 rows of flowers with 400 flowers per row, there are 50*400 = <<50*400=20000>>20000 flowers in the garden,",
+    "L2": "Mr. Wells cuts flowers from 60% of the flowers, which is 60/100*20000 = <<60/100*20000=12000>>12000 flowers.",
+    "L3": "The total number of flowers remaining in the garden is 20000-12000 = <<20000-12000=8000>>8000"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4161.\n    Returns: the number of flowers remaining in the garden.\n    \"\"\"\n    # L1\n    num_rows = 50 # 50 rows\n    flowers_per_row = 400 # 400 flowers\n    total_flowers_initial = num_rows * flowers_per_row\n\n    # L2\n    cut_percentage = Fraction(60, 100) # 60% of the flowers\n    flowers_cut = cut_percentage * total_flowers_initial\n\n    # L3\n    flowers_remaining = total_flowers_initial - flowers_cut\n\n    # FA\n    answer = flowers_remaining\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "flowers_cut",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x30b0e3290>"
+  },
+  "correct_trace": {
+    "num_rows": 50,
+    "flowers_per_row": 400,
+    "total_flowers_initial": 20000,
+    "cut_percentage": "3/5",
+    "flowers_cut": "12000",
+    "flowers_remaining": "8000",
+    "answer": "8000"
+  },
+  "flawed_trace": {
+    "num_rows": 50,
+    "flowers_per_row": 400,
+    "total_flowers_initial": 20000,
+    "cut_percentage": "3/5",
+    "flowers_cut": "3/100000",
+    "flowers_remaining": "1999999997/100000",
+    "answer": "1999999997/100000"
+  },
+  "correct_value": "12000",
+  "flawed_value": "3/100000",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_flowers_initial",
+      "question_inputs": [
+        "num_rows",
+        "flowers_per_row"
+      ],
+      "solution_line_template": "If there are {num_rows} rows of flowers with {flowers_per_row} flowers per row, there are {num_rows}*{flowers_per_row} = <<{num_rows}*{flowers_per_row}={total_flowers_initial}>>{total_flowers_initial} flowers in the garden,"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "flowers_cut",
+      "question_inputs": [
+        "cut_percentage"
+      ],
+      "solution_line_template": "Mr. Wells cuts flowers from {cut_percentage} of the flowers, which is {cut_percentage}*{total_flowers_initial} = <<{cut_percentage}*{total_flowers_initial}={flowers_cut}>>{flowers_cut} flowers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "flowers_remaining",
+      "question_inputs": [],
+      "solution_line_template": "The total number of flowers remaining in the garden is {total_flowers_initial}-{flowers_cut} = <<{total_flowers_initial}-{flowers_cut}={flowers_remaining}>>{flowers_remaining}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If there are 50 rows of flowers with 400 flowers per row, there are 50*400 = <<50*400=20000>>20000 flowers in the garden,",
+    "L2": "Mr. Wells cuts flowers from 60/100 of the flowers, which is 60/100*20000 = <<60/100*20000=3/100000>>3/100000 flowers.",
+    "L3": "The total number of flowers remaining in the garden is 20000-3/100000 = <<20000-3/100000=1999999997/100000>>1999999997/100000",
+    "FA": "#### 1999999997/100000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 7106496570272396999,
+  "model_name": "google_gemini-2.5-flash"
+}

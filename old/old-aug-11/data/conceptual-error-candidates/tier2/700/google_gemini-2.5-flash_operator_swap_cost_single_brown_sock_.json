@@ -1,0 +1,63 @@
+{
+  "index": 700,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "Two white socks cost 25 cents more than a single brown sock, meaning a brown sock is sold at $0.45-$0.25=$0.20",
+    "L2": "The cost of buying 15 brown socks is 15*$0.20=$<<15*0.20=3>>3"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 700.\n    Returns: the total cost for 15 brown socks.\n    \"\"\"\n    # L1\n    cost_two_white_socks = 0.45 # If two white socks cost 45 cents\n    price_difference = 0.25 # 25 cents more\n    cost_single_brown_sock = cost_two_white_socks - price_difference\n\n    # L2\n    num_brown_socks = 15 # 15 brown socks\n    total_cost_brown_socks = num_brown_socks * cost_single_brown_sock\n\n    # FA\n    answer = total_cost_brown_socks\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "cost_single_brown_sock",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x30e2574d0>"
+  },
+  "correct_trace": {
+    "cost_two_white_socks": 0.45,
+    "price_difference": 0.25,
+    "cost_single_brown_sock": 0.2,
+    "num_brown_socks": 15,
+    "total_cost_brown_socks": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "cost_two_white_socks": 0.45,
+    "price_difference": 0.25,
+    "cost_single_brown_sock": 1.8,
+    "num_brown_socks": 15,
+    "total_cost_brown_socks": 27.0,
+    "answer": 27.0
+  },
+  "correct_value": 0.2,
+  "flawed_value": 1.8,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cost_single_brown_sock",
+      "question_inputs": [
+        "cost_two_white_socks",
+        "price_difference"
+      ],
+      "solution_line_template": "Two white socks cost 25 cents more than a single brown sock, meaning a brown sock is sold at ${cost_two_white_socks}-${price_difference}=${cost_single_brown_sock}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost_brown_socks",
+      "question_inputs": [
+        "num_brown_socks"
+      ],
+      "solution_line_template": "The cost of buying {num_brown_socks} brown socks is {num_brown_socks}*${cost_single_brown_sock}=$<<{num_brown_socks}*{cost_single_brown_sock}={total_cost_brown_socks}>>{total_cost_brown_socks}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Two white socks cost 25 cents more than a single brown sock, meaning a brown sock is sold at $0.45-$0.25=$1.8",
+    "L2": "The cost of buying 15 brown socks is 15*$1.8=$<<15*1.8=27>>27",
+    "FA": "#### 27"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": -2723959179710692520,
+  "model_name": "google_gemini-2.5-flash"
+}

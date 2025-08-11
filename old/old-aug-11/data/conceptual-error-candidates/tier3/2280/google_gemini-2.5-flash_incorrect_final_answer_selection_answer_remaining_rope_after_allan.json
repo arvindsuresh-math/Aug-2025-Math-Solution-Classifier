@@ -1,0 +1,83 @@
+{
+  "index": 2280,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "Orlan gave Allan 20 x 1/4 = <<20*1/4=5>>5 meters of rope.",
+    "L2": "So he had 20 - 5 = <<20-5=15>>15 meters left.",
+    "L3": "Then he gave 15 x 2/3 = <<15*2/3=10>>10 meters of the rope to Jack.",
+    "L4": "Therefore, Orlan is left with 15 - 10 = <<15-10=5>>5 meters of rope."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2280.\n    Returns: the number of meters of rope left to Orlan.\n    \"\"\"\n    # L1\n    total_rope_length = 20 # 20-meter rope\n    allan_fraction = Fraction(1, 4) # one-fourth of his 20-meter rope\n    rope_given_to_allan = total_rope_length * allan_fraction\n\n    # L2\n    remaining_rope_after_allan = total_rope_length - rope_given_to_allan\n\n    # L3\n    jack_fraction = Fraction(2, 3) # two-thirds of the remaining\n    rope_given_to_jack = remaining_rope_after_allan * jack_fraction\n\n    # L4\n    final_remaining_rope = remaining_rope_after_allan - rope_given_to_jack\n\n    # FA\n    answer = final_remaining_rope\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "final_remaining_rope",
+    "replacement_variable": "remaining_rope_after_allan"
+  },
+  "correct_trace": {
+    "total_rope_length": 20,
+    "allan_fraction": "1/4",
+    "rope_given_to_allan": "5",
+    "remaining_rope_after_allan": "15",
+    "jack_fraction": "2/3",
+    "rope_given_to_jack": "10",
+    "final_remaining_rope": "5",
+    "answer": "5"
+  },
+  "flawed_trace": {
+    "total_rope_length": 20,
+    "allan_fraction": "1/4",
+    "rope_given_to_allan": "5",
+    "remaining_rope_after_allan": "15",
+    "jack_fraction": "2/3",
+    "rope_given_to_jack": "10",
+    "final_remaining_rope": "5",
+    "answer": "15"
+  },
+  "correct_value": "5",
+  "flawed_value": "15",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "rope_given_to_allan",
+      "question_inputs": [
+        "total_rope_length",
+        "allan_fraction"
+      ],
+      "solution_line_template": "Orlan gave Allan {total_rope_length} x {allan_fraction} = <<{total_rope_length}*{allan_fraction}={rope_given_to_allan}>>{rope_given_to_allan} meters of rope."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_rope_after_allan",
+      "question_inputs": [],
+      "solution_line_template": "So he had {total_rope_length} - {rope_given_to_allan} = <<{total_rope_length}-{rope_given_to_allan}={remaining_rope_after_allan}>>{remaining_rope_after_allan} meters left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "rope_given_to_jack",
+      "question_inputs": [
+        "jack_fraction"
+      ],
+      "solution_line_template": "Then he gave {remaining_rope_after_allan} x {jack_fraction} = <<{remaining_rope_after_allan}*{jack_fraction}={rope_given_to_jack}>>{rope_given_to_jack} meters of the rope to Jack."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_remaining_rope",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, Orlan is left with {remaining_rope_after_allan} - {rope_given_to_jack} = <<{remaining_rope_after_allan}-{rope_given_to_jack}={final_remaining_rope}>>{final_remaining_rope} meters of rope."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Orlan gave Allan 20 x 1/4 = <<20*1/4=5>>5 meters of rope.",
+    "L2": "So he had 20 - 5 = <<20-5=15>>15 meters left.",
+    "FA": "#### 15"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'remaining_rope_after_allan' (value: 15) was reported instead of 'final_remaining_rope' (value: 5).",
+  "repro_seed": -1473878252951978645,
+  "model_name": "google_gemini-2.5-flash"
+}

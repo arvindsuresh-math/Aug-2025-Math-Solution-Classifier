@@ -1,0 +1,63 @@
+{
+  "index": 575,
+  "original_solution_mapping": {
+    "FA": "#### 180",
+    "L1": "There were 3*120=<<3*120=360>>360 calories in the package",
+    "L2": "So he ate 360/2=<<360/2=180>>180 calories"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 575.\n    Returns: the number of calories John ate.\n    \"\"\"\n    # L1\n    servings_per_package = 3 # 3 servings\n    calories_per_serving = 120 # 120 calories each\n    total_calories_in_package = servings_per_package * calories_per_serving\n\n    # L2\n    portion_denominator = 2 # half the package\n    calories_eaten = total_calories_in_package / portion_denominator\n\n    # FA\n    answer = calories_eaten\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "calories_eaten",
+    "operand_to_replace": "portion_denominator",
+    "replacement_variable": "total_calories_in_package"
+  },
+  "correct_trace": {
+    "servings_per_package": 3,
+    "calories_per_serving": 120,
+    "total_calories_in_package": 360,
+    "portion_denominator": 2,
+    "calories_eaten": 180.0,
+    "answer": 180.0
+  },
+  "flawed_trace": {
+    "servings_per_package": 3,
+    "calories_per_serving": 120,
+    "total_calories_in_package": 360,
+    "portion_denominator": 2,
+    "calories_eaten": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 180.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_calories_in_package",
+      "question_inputs": [
+        "servings_per_package",
+        "calories_per_serving"
+      ],
+      "solution_line_template": "There were {servings_per_package}*{calories_per_serving}=<<{servings_per_package}*{calories_per_serving}={total_calories_in_package}>>{total_calories_in_package} calories in the package"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "calories_eaten",
+      "question_inputs": [
+        "portion_denominator"
+      ],
+      "solution_line_template": "So he ate {total_calories_in_package}/{portion_denominator}=<<{total_calories_in_package}/{portion_denominator}={calories_eaten}>>{calories_eaten} calories"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There were 3*120=<<3*120=360>>360 calories in the package",
+    "L2": "So he ate 360/360=<<360/360=1>>1 calories",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_calories_in_package' (360) was used instead of 'portion_denominator' (2).",
+  "repro_seed": 5360194400673393654,
+  "model_name": "google_gemini-2.5-flash"
+}

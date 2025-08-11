@@ -1,0 +1,79 @@
+{
+  "index": 692,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "In a week, Edric's salary is $576/4 = $<<576/4=144>>144.",
+    "L2": "In a day, Edric earns $144/6 = $<<144/6=24>>24.",
+    "L3": "Thus, his hourly rate is $24/8 = $<<24/8=3>>3."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 692.\n    Returns: Edric's hourly rate.\n    \"\"\"\n    # L1\n    monthly_salary = 576 # Edric's monthly salary is $576\n    weeks_per_month = 4 # WK\n    weekly_salary = monthly_salary / weeks_per_month\n\n    # L2\n    work_days_per_week = 6 # 6 days a week\n    daily_salary = weekly_salary / work_days_per_week\n\n    # L3\n    work_hours_per_day = 8 # 8 hours a day\n    hourly_rate = daily_salary / work_hours_per_day\n\n    # FA\n    answer = hourly_rate\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "weekly_salary",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x30ab93e10>"
+  },
+  "correct_trace": {
+    "monthly_salary": 576,
+    "weeks_per_month": 4,
+    "weekly_salary": 144.0,
+    "work_days_per_week": 6,
+    "daily_salary": 24.0,
+    "work_hours_per_day": 8,
+    "hourly_rate": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "monthly_salary": 576,
+    "weeks_per_month": 4,
+    "weekly_salary": 2304,
+    "work_days_per_week": 6,
+    "daily_salary": 384.0,
+    "work_hours_per_day": 8,
+    "hourly_rate": 48.0,
+    "answer": 48.0
+  },
+  "correct_value": 144.0,
+  "flawed_value": 2304,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "weeks_per_month"
+      ],
+      "line_number": "L1",
+      "output_variable": "weekly_salary",
+      "question_inputs": [
+        "monthly_salary"
+      ],
+      "solution_line_template": "In a week, Edric's salary is ${monthly_salary}/{weeks_per_month} = $<<{monthly_salary}/{weeks_per_month}={weekly_salary}>>{weekly_salary}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "daily_salary",
+      "question_inputs": [
+        "work_days_per_week"
+      ],
+      "solution_line_template": "In a day, Edric earns ${weekly_salary}/{work_days_per_week} = $<<{weekly_salary}/{work_days_per_week}={daily_salary}>>{daily_salary}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "hourly_rate",
+      "question_inputs": [
+        "work_hours_per_day"
+      ],
+      "solution_line_template": "Thus, his hourly rate is ${daily_salary}/{work_hours_per_day} = $<<{daily_salary}/{work_hours_per_day}={hourly_rate}>>{hourly_rate}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In a week, Edric's salary is $576/4 = $<<576/4=2304>>2304.",
+    "L2": "In a day, Edric earns $2304/6 = $<<2304/6=384>>384.",
+    "L3": "Thus, his hourly rate is $384/8 = $<<384/8=48>>48.",
+    "FA": "#### 48"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 7030978458433364348,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,86 @@
+{
+  "index": 4310,
+  "original_solution_mapping": {
+    "FA": "#### 156",
+    "L1": "Twice the number of students present in the science class yesterday is 70*2 = <<70*2=140>>140",
+    "L2": "Ten percent less than twice the number of students present in the class yesterday means there are 10/100*140 = <<10/100*140=14>>14 fewer students than twice the number present yesterday.",
+    "L3": "The number of students present in the science class today is 140-14 = <<140-14=126>>126",
+    "L4": "If the total number of registered students for the course who are absent today is 30, a full class of the science course has 126+30 = 156 students."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4310.\n    Returns: the number of students registered for the course.\n    \"\"\"\n    # L1\n    students_yesterday = 70 # 70 students in the class yesterday\n    twice_yesterday_students = students_yesterday * 2\n\n    # L2\n    percentage_less = Fraction(10, 100) # Ten percent less\n    fewer_students = percentage_less * twice_yesterday_students\n\n    # L3\n    students_today = twice_yesterday_students - fewer_students\n\n    # L4\n    absent_today = 30 # 30 students are absent today\n    total_registered_students = students_today + absent_today\n\n    # FA\n    answer = total_registered_students\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "students_today",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x30b7b1f10>"
+  },
+  "correct_trace": {
+    "students_yesterday": 70,
+    "twice_yesterday_students": 140,
+    "percentage_less": "1/10",
+    "fewer_students": "14",
+    "students_today": "126",
+    "absent_today": 30,
+    "total_registered_students": "156",
+    "answer": "156"
+  },
+  "flawed_trace": {
+    "students_yesterday": 70,
+    "twice_yesterday_students": 140,
+    "percentage_less": "1/10",
+    "fewer_students": "14",
+    "students_today": "10",
+    "absent_today": 30,
+    "total_registered_students": "40",
+    "answer": "40"
+  },
+  "correct_value": "126",
+  "flawed_value": "10",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "twice_yesterday_students",
+      "question_inputs": [
+        "students_yesterday"
+      ],
+      "solution_line_template": "Twice the number of students present in the science class yesterday is {students_yesterday}*2 = <<{students_yesterday}*2={twice_yesterday_students}>>{twice_yesterday_students}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "fewer_students",
+      "question_inputs": [
+        "percentage_less"
+      ],
+      "solution_line_template": "Ten percent less than twice the number of students present in the class yesterday means there are {percentage_less}*{twice_yesterday_students} = <<{percentage_less}*{twice_yesterday_students}={fewer_students}>>{fewer_students} fewer students than twice the number present yesterday."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "students_today",
+      "question_inputs": [],
+      "solution_line_template": "The number of students present in the science class today is {twice_yesterday_students}-{fewer_students} = <<{twice_yesterday_students}-{fewer_students}={students_today}>>{students_today}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_registered_students",
+      "question_inputs": [
+        "absent_today"
+      ],
+      "solution_line_template": "If the total number of registered students for the course who are absent today is {absent_today}, a full class of the science course has {students_today}+{absent_today} = {total_registered_students} students."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Twice the number of students present in the science class yesterday is 70*2 = <<70*2=140>>140",
+    "L2": "Ten percent less than twice the number of students present in the class yesterday means there are 10/100*140 = <<10/100*140=14>>14 fewer students than twice the number present yesterday.",
+    "L3": "The number of students present in the science class today is 140-14 = <<140-14=10>>10",
+    "L4": "If the total number of registered students for the course who are absent today is 30, a full class of the science course has 10+30 = 40 students.",
+    "FA": "#### 40"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": 428916074421411209,
+  "model_name": "google_gemini-2.5-flash"
+}

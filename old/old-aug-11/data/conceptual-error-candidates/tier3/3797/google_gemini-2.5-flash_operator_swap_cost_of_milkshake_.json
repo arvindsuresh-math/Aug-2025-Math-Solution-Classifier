@@ -1,0 +1,74 @@
+{
+  "index": 3797,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "Ivan spent a total of $10 - $3 = $<<10-3=7>>7 on cupcakes and a milkshake.",
+    "L2": "The cost of the cupcake is $10 x 1/5 = $<<10*1/5=2>>2.",
+    "L3": "So, $7 - $2 = $<<7-2=5>>5 was spent on the milkshake."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3797.\n    Returns: the cost of the milkshake.\n    \"\"\"\n    # L1\n    initial_money = 10 # Ivan had $10\n    money_left = 3 # had only $3 left\n    total_spent_on_cupcakes_and_milkshake = initial_money - money_left\n\n    # L2\n    cupcake_fraction = Fraction(1, 5) # spent 1/5 of it\n    cost_of_cupcake = initial_money * cupcake_fraction\n\n    # L3\n    cost_of_milkshake = total_spent_on_cupcakes_and_milkshake - cost_of_cupcake\n\n    # FA\n    answer = cost_of_milkshake\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "cost_of_milkshake",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x16985ff90>"
+  },
+  "correct_trace": {
+    "initial_money": 10,
+    "money_left": 3,
+    "total_spent_on_cupcakes_and_milkshake": 7,
+    "cupcake_fraction": "1/5",
+    "cost_of_cupcake": "2",
+    "cost_of_milkshake": "5",
+    "answer": "5"
+  },
+  "flawed_trace": {
+    "initial_money": 10,
+    "money_left": 3,
+    "total_spent_on_cupcakes_and_milkshake": 7,
+    "cupcake_fraction": "1/5",
+    "cost_of_cupcake": "2",
+    "cost_of_milkshake": "7/2",
+    "answer": "7/2"
+  },
+  "correct_value": "5",
+  "flawed_value": "7/2",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_spent_on_cupcakes_and_milkshake",
+      "question_inputs": [
+        "initial_money",
+        "money_left"
+      ],
+      "solution_line_template": "Ivan spent a total of ${initial_money} - ${money_left} = $<<{initial_money}-{money_left}={total_spent_on_cupcakes_and_milkshake}>>{total_spent_on_cupcakes_and_milkshake} on cupcakes and a milkshake."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cost_of_cupcake",
+      "question_inputs": [
+        "cupcake_fraction"
+      ],
+      "solution_line_template": "The cost of the cupcake is ${initial_money} x {cupcake_fraction} = $<<{initial_money}*{cupcake_fraction}={cost_of_cupcake}>>{cost_of_cupcake}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cost_of_milkshake",
+      "question_inputs": [],
+      "solution_line_template": "So, ${total_spent_on_cupcakes_and_milkshake} - ${cost_of_cupcake} = $<<{total_spent_on_cupcakes_and_milkshake}-{cost_of_cupcake}={cost_of_milkshake}>>{cost_of_milkshake} was spent on the milkshake."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Ivan spent a total of $10 - $3 = $<<10-3=7>>7 on cupcakes and a milkshake.",
+    "L2": "The cost of the cupcake is $10 x 1/5 = $<<10*1/5=2>>2.",
+    "L3": "So, $7 - $2 = $<<7-2=7/2>>7/2 was spent on the milkshake.",
+    "FA": "#### 7/2"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": -7332716959844554935,
+  "model_name": "google_gemini-2.5-flash"
+}

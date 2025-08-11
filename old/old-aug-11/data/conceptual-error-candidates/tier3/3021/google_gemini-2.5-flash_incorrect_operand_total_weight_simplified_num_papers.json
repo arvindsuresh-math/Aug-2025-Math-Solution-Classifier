@@ -1,0 +1,80 @@
+{
+  "index": 3021,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "Jessica's papers weigh 8 * 1/5 = 8/5 ounces.",
+    "L2": "The papers in the envelope weigh 8/5 + 2/5 = 10/5 = <<8/5+2/5=2>>2 ounces.",
+    "L3": "Thus, Jessica needs 2 * 1 = <<2*1=2>>2 stamps to mail her letter."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3021.\n    Returns: the number of stamps Jessica needed to mail her letter.\n    \"\"\"\n    # L1\n    num_papers = 8 # eight pieces of paper\n    paper_weight_per_piece = Fraction(1, 5) # weigh 1/5 of an ounce each\n    total_paper_weight = num_papers * paper_weight_per_piece\n\n    # L2\n    envelope_weight = Fraction(2, 5) # her envelope weighs 2/5 of an ounce\n    total_weight_fraction = total_paper_weight + envelope_weight\n    total_weight_simplified = int(total_weight_fraction)\n\n    # L3\n    stamps_per_ounce = 1 # one stamp per ounce\n    stamps_needed = total_weight_simplified * stamps_per_ounce\n\n    # FA\n    answer = stamps_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_weight_simplified",
+    "operand_to_replace": "total_weight_fraction",
+    "replacement_variable": "num_papers"
+  },
+  "correct_trace": {
+    "num_papers": 8,
+    "paper_weight_per_piece": "1/5",
+    "total_paper_weight": "8/5",
+    "envelope_weight": "2/5",
+    "total_weight_fraction": "2",
+    "total_weight_simplified": 2,
+    "stamps_per_ounce": 1,
+    "stamps_needed": 2,
+    "answer": 2
+  },
+  "flawed_trace": {
+    "num_papers": 8,
+    "paper_weight_per_piece": "1/5",
+    "total_paper_weight": "8/5",
+    "envelope_weight": "2/5",
+    "total_weight_fraction": "2",
+    "total_weight_simplified": 8,
+    "stamps_per_ounce": 1,
+    "stamps_needed": 8,
+    "answer": 8
+  },
+  "correct_value": 2,
+  "flawed_value": 8,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_paper_weight",
+      "question_inputs": [
+        "num_papers",
+        "paper_weight_per_piece"
+      ],
+      "solution_line_template": "Jessica's papers weigh {num_papers} * {paper_weight_per_piece} = {total_paper_weight} ounces."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_weight_simplified",
+      "question_inputs": [
+        "envelope_weight"
+      ],
+      "solution_line_template": "The papers in the envelope weigh {total_paper_weight} + {envelope_weight} = {total_weight_fraction} = <<{total_paper_weight}+{envelope_weight}={total_weight_simplified}>>{total_weight_simplified} ounces."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "stamps_needed",
+      "question_inputs": [
+        "stamps_per_ounce"
+      ],
+      "solution_line_template": "Thus, Jessica needs {total_weight_simplified} * {stamps_per_ounce} = <<{total_weight_simplified}*{stamps_per_ounce}={stamps_needed}>>{stamps_needed} stamps to mail her letter."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jessica's papers weigh 8 * 1/5 = 8/5 ounces.",
+    "L2": "The papers in the envelope weigh 8/5 + 2/5 = 8 = <<8/5+2/5=8>>8 ounces.",
+    "L3": "Thus, Jessica needs 8 * 1 = <<8*1=8>>8 stamps to mail her letter.",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'num_papers' (value: 8) was used instead of 'total_weight_fraction' (value: 2).",
+  "repro_seed": 1270142228031056803,
+  "model_name": "google_gemini-2.5-flash"
+}

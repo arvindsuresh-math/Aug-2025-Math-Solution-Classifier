@@ -1,0 +1,74 @@
+{
+  "index": 5865,
+  "original_solution_mapping": {
+    "FA": "#### 24",
+    "L1": "The number of apples in the orchard which were rotten is 40/100*200 = <<40/100*200=80>>80",
+    "L2": "Out of the 80 rotten apples, 70/100*80 = <<70/100*80=56>>56 were smelling.",
+    "L3": "The number of rotten apples in the orchard which were not smelling is 80-56 = <<80-56=24>>24"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5865.\n    Returns: the number of rotten apples that did not smell.\n    \"\"\"\n    # L1\n    rotten_percentage = Fraction(40, 100) # 40 percent were rotten\n    total_apples = 200 # 200 apples\n    rotten_apples = rotten_percentage * total_apples\n\n    # L2\n    smelling_percentage = Fraction(70, 100) # 70 percent of the rotten apples smelled\n    smelling_rotten_apples = smelling_percentage * rotten_apples\n\n    # L3\n    non_smelling_rotten_apples = rotten_apples - smelling_rotten_apples\n\n    # FA\n    answer = non_smelling_rotten_apples\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "non_smelling_rotten_apples",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x177c85090>"
+  },
+  "correct_trace": {
+    "rotten_percentage": "2/5",
+    "total_apples": 200,
+    "rotten_apples": "80",
+    "smelling_percentage": "7/10",
+    "smelling_rotten_apples": "56",
+    "non_smelling_rotten_apples": "24",
+    "answer": "24"
+  },
+  "flawed_trace": {
+    "rotten_percentage": "2/5",
+    "total_apples": 200,
+    "rotten_apples": "80",
+    "smelling_percentage": "7/10",
+    "smelling_rotten_apples": "56",
+    "non_smelling_rotten_apples": "10/7",
+    "answer": "10/7"
+  },
+  "correct_value": "24",
+  "flawed_value": "10/7",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "rotten_apples",
+      "question_inputs": [
+        "rotten_percentage",
+        "total_apples"
+      ],
+      "solution_line_template": "The number of apples in the orchard which were rotten is {rotten_percentage}*{total_apples} = <<{rotten_percentage}*{total_apples}={rotten_apples}>>{rotten_apples}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "smelling_rotten_apples",
+      "question_inputs": [
+        "smelling_percentage"
+      ],
+      "solution_line_template": "Out of the {rotten_apples} rotten apples, {smelling_percentage}*{rotten_apples} = <<{smelling_percentage}*{rotten_apples}={smelling_rotten_apples}>>{smelling_rotten_apples} were smelling."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "non_smelling_rotten_apples",
+      "question_inputs": [],
+      "solution_line_template": "The number of rotten apples in the orchard which were not smelling is {rotten_apples}-{smelling_rotten_apples} = <<{rotten_apples}-{smelling_rotten_apples}={non_smelling_rotten_apples}>>{non_smelling_rotten_apples}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The number of apples in the orchard which were rotten is 40/100*200 = <<40/100*200=80>>80",
+    "L2": "Out of the 80 rotten apples, 70/100*80 = <<70/100*80=56>>56 were smelling.",
+    "L3": "The number of rotten apples in the orchard which were not smelling is 80-56 = <<80-56=10/7>>10/7",
+    "FA": "#### 10/7"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": -4794214023946900342,
+  "model_name": "google_gemini-2.5-flash"
+}

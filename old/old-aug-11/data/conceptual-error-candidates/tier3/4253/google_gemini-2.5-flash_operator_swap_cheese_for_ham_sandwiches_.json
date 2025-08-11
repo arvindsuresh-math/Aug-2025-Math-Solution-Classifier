@@ -1,0 +1,78 @@
+{
+  "index": 4253,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "The number of cheese slices used to make the ham sandwiches is 10 * 2 = <<10*2=20>>20 cheese slices.",
+    "L2": "The number of cheese slices used to make the grilled cheese sandwiches is 50 - 20 = <<50-20=30>>30 cheese slices.",
+    "L3": "The number of grilled cheese sandwiches she makes is 30 / 3 = <<30/3=10>>10 grilled cheese sandwiches."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4253.\n    Returns: the number of grilled cheese sandwiches Joan makes.\n    \"\"\"\n    # L1\n    num_ham_sandwiches = 10 # If she makes 10 ham sandwiches\n    slices_per_ham_sandwich = 2 # One ham sandwich requires 2 slices of cheese\n    cheese_for_ham_sandwiches = num_ham_sandwiches * slices_per_ham_sandwich\n\n    # L2\n    total_cheese_slices = 50 # She uses a total of 50 slices of cheese\n    cheese_for_grilled_cheese = total_cheese_slices - cheese_for_ham_sandwiches\n\n    # L3\n    slices_per_grilled_cheese = 3 # one grilled cheese sandwich requires 3 slices of cheese\n    num_grilled_cheese_sandwiches = cheese_for_grilled_cheese / slices_per_grilled_cheese\n\n    # FA\n    answer = num_grilled_cheese_sandwiches\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "cheese_for_ham_sandwiches",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x30b430710>"
+  },
+  "correct_trace": {
+    "num_ham_sandwiches": 10,
+    "slices_per_ham_sandwich": 2,
+    "cheese_for_ham_sandwiches": 20,
+    "total_cheese_slices": 50,
+    "cheese_for_grilled_cheese": 30,
+    "slices_per_grilled_cheese": 3,
+    "num_grilled_cheese_sandwiches": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "num_ham_sandwiches": 10,
+    "slices_per_ham_sandwich": 2,
+    "cheese_for_ham_sandwiches": 5.0,
+    "total_cheese_slices": 50,
+    "cheese_for_grilled_cheese": 45.0,
+    "slices_per_grilled_cheese": 3,
+    "num_grilled_cheese_sandwiches": 15.0,
+    "answer": 15.0
+  },
+  "correct_value": 20,
+  "flawed_value": 5.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cheese_for_ham_sandwiches",
+      "question_inputs": [
+        "num_ham_sandwiches",
+        "slices_per_ham_sandwich"
+      ],
+      "solution_line_template": "The number of cheese slices used to make the ham sandwiches is {num_ham_sandwiches} * {slices_per_ham_sandwich} = <<{num_ham_sandwiches}*{slices_per_ham_sandwich}={cheese_for_ham_sandwiches}>>{cheese_for_ham_sandwiches} cheese slices."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cheese_for_grilled_cheese",
+      "question_inputs": [
+        "total_cheese_slices"
+      ],
+      "solution_line_template": "The number of cheese slices used to make the grilled cheese sandwiches is {total_cheese_slices} - {cheese_for_ham_sandwiches} = <<{total_cheese_slices}-{cheese_for_ham_sandwiches}={cheese_for_grilled_cheese}>>{cheese_for_grilled_cheese} cheese slices."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_grilled_cheese_sandwiches",
+      "question_inputs": [
+        "slices_per_grilled_cheese"
+      ],
+      "solution_line_template": "The number of grilled cheese sandwiches she makes is {cheese_for_grilled_cheese} / {slices_per_grilled_cheese} = <<{cheese_for_grilled_cheese}/{slices_per_grilled_cheese}={num_grilled_cheese_sandwiches}>>{num_grilled_cheese_sandwiches} grilled cheese sandwiches."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The number of cheese slices used to make the ham sandwiches is 10 * 2 = <<10*2=5>>5 cheese slices.",
+    "L2": "The number of cheese slices used to make the grilled cheese sandwiches is 50 - 5 = <<50-5=45>>45 cheese slices.",
+    "L3": "The number of grilled cheese sandwiches she makes is 45 / 3 = <<45/3=15>>15 grilled cheese sandwiches.",
+    "FA": "#### 15"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -4846423682387238066,
+  "model_name": "google_gemini-2.5-flash"
+}

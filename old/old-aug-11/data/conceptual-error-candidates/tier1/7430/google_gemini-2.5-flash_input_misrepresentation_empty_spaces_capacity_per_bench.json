@@ -1,0 +1,63 @@
+{
+  "index": 7430,
+  "original_solution_mapping": {
+    "FA": "#### 120",
+    "L1": "In the park, 50 benches with a capacity of four people each have a total capacity of 50*4 = <<50*4=200>>200 sitting spaces.",
+    "L2": "If 80 people are already using spaces, the number of empty spaces is 200-80 =120"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7430.\n    Returns: the number of available spaces on the benches.\n    \"\"\"\n    # L1\n    num_benches = 50 # 50 benches\n    capacity_per_bench = 4 # capacity of 4 people each\n    total_capacity = num_benches * capacity_per_bench\n\n    # L2\n    people_sitting = 80 # 80 people were sitting on the benches\n    empty_spaces = total_capacity - people_sitting\n\n    # FA\n    answer = empty_spaces\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "empty_spaces",
+    "operand_to_replace": "people_sitting",
+    "replacement_variable": "capacity_per_bench"
+  },
+  "correct_trace": {
+    "num_benches": 50,
+    "capacity_per_bench": 4,
+    "total_capacity": 200,
+    "people_sitting": 80,
+    "empty_spaces": 120,
+    "answer": 120
+  },
+  "flawed_trace": {
+    "num_benches": 50,
+    "capacity_per_bench": 4,
+    "total_capacity": 200,
+    "people_sitting": 80,
+    "empty_spaces": 196,
+    "answer": 196
+  },
+  "correct_value": 120,
+  "flawed_value": 196,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_capacity",
+      "question_inputs": [
+        "num_benches",
+        "capacity_per_bench"
+      ],
+      "solution_line_template": "In the park, {num_benches} benches with a capacity of {capacity_per_bench} people each have a total capacity of {num_benches}*{capacity_per_bench} = <<{num_benches}*{capacity_per_bench}={total_capacity}>>{total_capacity} sitting spaces."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "empty_spaces",
+      "question_inputs": [
+        "people_sitting"
+      ],
+      "solution_line_template": "If {people_sitting} people are already using spaces, the number of empty spaces is {total_capacity}-{people_sitting} ={empty_spaces}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In the park, 50 benches with a capacity of 4 people each have a total capacity of 50*4 = <<50*4=200>>200 sitting spaces.",
+    "L2": "If 4 people are already using spaces, the number of empty spaces is 200-4 =196",
+    "FA": "#### 196"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'capacity_per_bench' (4) was used instead of 'people_sitting' (80).",
+  "repro_seed": 2868822123858718491,
+  "model_name": "google_gemini-2.5-flash"
+}

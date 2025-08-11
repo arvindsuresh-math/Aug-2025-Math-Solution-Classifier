@@ -1,0 +1,104 @@
+{
+  "index": 7374,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "Grace sold and gave a total of 1 + 1 = <<1+1=2>>2 whole pumpkin pie.",
+    "L2": "Her family was left with 4 - 2 = <<4-2=2>>2 whole pumpkin pie.",
+    "L3": "There were a total of 2 x 6 = <<2*6=12>>12 pieces made from the 2 whole pumpkin pie.",
+    "L4": "Her family ate 12 x 2/3 = <<12*2/3=8>>8 pieces.",
+    "L5": "Therefore, 12 - 8 = <<12-8=4>>4 pieces of pumpkin pie were left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7374.\n    Returns: the number of pieces of pumpkin pie left.\n    \"\"\"\n    # L1\n    sold_pies = 1 # sold 1 whole pumpkin pie\n    gave_pies = 1 # gave 1 whole pumpkin pie to her friend\n    pies_sold_and_given = sold_pies + gave_pies\n\n    # L2\n    initial_pies = 4 # Grace baked 4 whole pumpkin pies\n    remaining_whole_pies = initial_pies - pies_sold_and_given\n\n    # L3\n    pieces_per_pie = 6 # each sliced into 6 pieces\n    total_pieces_made = remaining_whole_pies * pieces_per_pie\n\n    # L4\n    fraction_eaten = Fraction(2, 3) # ate 2/3 pieces\n    pieces_eaten = total_pieces_made * fraction_eaten\n\n    # L5\n    pieces_left = total_pieces_made - pieces_eaten\n\n    # FA\n    answer = pieces_left\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "pieces_left",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x168a0b510>"
+  },
+  "correct_trace": {
+    "sold_pies": 1,
+    "gave_pies": 1,
+    "pies_sold_and_given": 2,
+    "initial_pies": 4,
+    "remaining_whole_pies": 2,
+    "pieces_per_pie": 6,
+    "total_pieces_made": 12,
+    "fraction_eaten": "2/3",
+    "pieces_eaten": "8",
+    "pieces_left": "4",
+    "answer": "4"
+  },
+  "flawed_trace": {
+    "sold_pies": 1,
+    "gave_pies": 1,
+    "pies_sold_and_given": 2,
+    "initial_pies": 4,
+    "remaining_whole_pies": 2,
+    "pieces_per_pie": 6,
+    "total_pieces_made": 12,
+    "fraction_eaten": "2/3",
+    "pieces_eaten": "8",
+    "pieces_left": "20",
+    "answer": "20"
+  },
+  "correct_value": "4",
+  "flawed_value": "20",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "pies_sold_and_given",
+      "question_inputs": [
+        "sold_pies",
+        "gave_pies"
+      ],
+      "solution_line_template": "Grace sold and gave a total of {sold_pies} + {gave_pies} = <<{sold_pies}+{gave_pies}={pies_sold_and_given}>>{pies_sold_and_given} whole pumpkin pie."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_whole_pies",
+      "question_inputs": [
+        "initial_pies"
+      ],
+      "solution_line_template": "Her family was left with {initial_pies} - {pies_sold_and_given} = <<{initial_pies}-{pies_sold_and_given}={remaining_whole_pies}>>{remaining_whole_pies} whole pumpkin pie."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_pieces_made",
+      "question_inputs": [
+        "pieces_per_pie"
+      ],
+      "solution_line_template": "There were a total of {remaining_whole_pies} x {pieces_per_pie} = <<{remaining_whole_pies}*{pieces_per_pie}={total_pieces_made}>>{total_pieces_made} pieces made from the {remaining_whole_pies} whole pumpkin pie."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "pieces_eaten",
+      "question_inputs": [
+        "fraction_eaten"
+      ],
+      "solution_line_template": "Her family ate {total_pieces_made} x {fraction_eaten} = <<{total_pieces_made}*{fraction_eaten}={pieces_eaten}>>{pieces_eaten} pieces."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "pieces_left",
+      "question_inputs": [],
+      "solution_line_template": "Therefore, {total_pieces_made} - {pieces_eaten} = <<{total_pieces_made}-{pieces_eaten}={pieces_left}>>{pieces_left} pieces of pumpkin pie were left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Grace sold and gave a total of 1 + 1 = <<1+1=2>>2 whole pumpkin pie.",
+    "L2": "Her family was left with 4 - 2 = <<4-2=2>>2 whole pumpkin pie.",
+    "L3": "There were a total of 2 x 6 = <<2*6=12>>12 pieces made from the 2 whole pumpkin pie.",
+    "L4": "Her family ate 12 x 2/3 = <<12*2/3=8>>8 pieces.",
+    "L5": "Therefore, 12 - 8 = <<12-8=20>>20 pieces of pumpkin pie were left.",
+    "FA": "#### 20"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -1403921575141162719,
+  "model_name": "google_gemini-2.5-flash"
+}

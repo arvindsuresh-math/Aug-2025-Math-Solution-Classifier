@@ -1,0 +1,85 @@
+{
+  "index": 5468,
+  "original_solution_mapping": {
+    "FA": "#### 960",
+    "L1": "The total number of oranges in all the trees before Dulce picked any is 8 trees * 200 oranges/tree = <<8*200=1600>>1600 oranges.",
+    "L2": "If each orange tree has 200 oranges, and Dulce picks 2/5 of each tree's oranges, she picks 2/5 * 200 oranges = <<2/5*200=80>>80 oranges.",
+    "L3": "Since the total number of orange trees is eight, Dulce picked 8 trees * 80 oranges/tree = <<8*80=640>>640 oranges from all the trees.",
+    "L4": "After picking 640 oranges from the trees, the total number of oranges remaining became 1600 oranges - 640 oranges = 960 oranges."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5468.\n    Returns: the total number of fruits remaining in all the trees.\n    \"\"\"\n    # L1\n    num_trees = 8 # eight orange trees\n    fruits_per_tree = 200 # each tree has 200 fruits\n    total_initial_oranges = num_trees * fruits_per_tree\n\n    # L2\n    fraction_picked = Fraction(2, 5) # picks 2/5 of the oranges\n    oranges_picked_per_tree = fraction_picked * fruits_per_tree\n\n    # L3\n    total_oranges_picked = num_trees * oranges_picked_per_tree\n\n    # L4\n    remaining_oranges = total_initial_oranges - total_oranges_picked\n\n    # FA\n    answer = remaining_oranges\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "oranges_picked_per_tree",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x177e259d0>"
+  },
+  "correct_trace": {
+    "num_trees": 8,
+    "fruits_per_tree": 200,
+    "total_initial_oranges": 1600,
+    "fraction_picked": "2/5",
+    "oranges_picked_per_tree": "80",
+    "total_oranges_picked": "640",
+    "remaining_oranges": "960",
+    "answer": "960"
+  },
+  "flawed_trace": {
+    "num_trees": 8,
+    "fruits_per_tree": 200,
+    "total_initial_oranges": 1600,
+    "fraction_picked": "2/5",
+    "oranges_picked_per_tree": "1/500",
+    "total_oranges_picked": "2/125",
+    "remaining_oranges": "199998/125",
+    "answer": "199998/125"
+  },
+  "correct_value": "80",
+  "flawed_value": "1/500",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_initial_oranges",
+      "question_inputs": [
+        "num_trees",
+        "fruits_per_tree"
+      ],
+      "solution_line_template": "The total number of oranges in all the trees before Dulce picked any is {num_trees} trees * {fruits_per_tree} oranges/tree = <<{num_trees}*{fruits_per_tree}={total_initial_oranges}>>{total_initial_oranges} oranges."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "oranges_picked_per_tree",
+      "question_inputs": [
+        "fraction_picked"
+      ],
+      "solution_line_template": "If each orange tree has {fruits_per_tree} oranges, and Dulce picks {fraction_picked} of each tree's oranges, she picks {fraction_picked} * {fruits_per_tree} oranges = <<{fraction_picked}*{fruits_per_tree}={oranges_picked_per_tree}>>{oranges_picked_per_tree} oranges."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_oranges_picked",
+      "question_inputs": [],
+      "solution_line_template": "Since the total number of orange trees is eight, Dulce picked {num_trees} trees * {oranges_picked_per_tree} oranges/tree = <<{num_trees}*{oranges_picked_per_tree}={total_oranges_picked}>>{total_oranges_picked} oranges from all the trees."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "remaining_oranges",
+      "question_inputs": [],
+      "solution_line_template": "After picking {total_oranges_picked} oranges from the trees, the total number of oranges remaining became {total_initial_oranges} oranges - {total_oranges_picked} oranges = {remaining_oranges} oranges."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total number of oranges in all the trees before Dulce picked any is 8 trees * 200 oranges/tree = <<8*200=1600>>1600 oranges.",
+    "L2": "If each orange tree has 200 oranges, and Dulce picks 2/5 of each tree's oranges, she picks 2/5 * 200 oranges = <<2/5*200=1/500>>1/500 oranges.",
+    "L3": "Since the total number of orange trees is eight, Dulce picked 8 trees * 1/500 oranges/tree = <<8*1/500=2/125>>2/125 oranges from all the trees.",
+    "L4": "After picking 2/125 oranges from the trees, the total number of oranges remaining became 1600 oranges - 2/125 oranges = 199998/125 oranges.",
+    "FA": "#### 199998/125"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 3396115130607740208,
+  "model_name": "google_gemini-2.5-flash"
+}

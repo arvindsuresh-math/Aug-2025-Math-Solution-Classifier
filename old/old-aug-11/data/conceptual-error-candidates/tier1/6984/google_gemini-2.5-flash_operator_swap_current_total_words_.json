@@ -1,0 +1,115 @@
+{
+  "index": 6984,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "Janna wrote 400 + 150 = <<400+150=550>>550 words.",
+    "L2": "Together, they wrote 400 + 550 = <<400+550=950>>950 words.",
+    "L3": "They have 950 - 20 = <<950-20=930>>930 words left after omitting 20 words.",
+    "L4": "Then 20 x 2 = <<20*2=40>>40 words were added during the editing.",
+    "L5": "Overall, they have 930 + 40 = <<930+40=970>>970 words.",
+    "L6": "Thus, they should add 1000 - 970 = <<1000-970=30>>30 more words."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6984.\n    Returns: the number of words they should add to reach the research paper requirement.\n    \"\"\"\n    # L1\n    yvonne_words = 400 # Yvonne was able to write 400 words\n    janna_more_than_yvonne = 150 # Janna wrote 150 more words than Yvonne\n    janna_words = yvonne_words + janna_more_than_yvonne\n\n    # L2\n    total_words_initial = yvonne_words + janna_words\n\n    # L3\n    words_removed = 20 # removed 20 words\n    words_after_removal = total_words_initial - words_removed\n\n    # L4\n    multiplier_added_words = 2 # added twice as many words as they removed\n    words_added = words_removed * multiplier_added_words\n\n    # L5\n    current_total_words = words_after_removal + words_added\n\n    # L6\n    paper_requirement = 1000 # 1000-word pair research paper\n    words_to_add = paper_requirement - current_total_words\n\n    # FA\n    answer = words_to_add\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "current_total_words",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x15f4b0f50>"
+  },
+  "correct_trace": {
+    "yvonne_words": 400,
+    "janna_more_than_yvonne": 150,
+    "janna_words": 550,
+    "total_words_initial": 950,
+    "words_removed": 20,
+    "words_after_removal": 930,
+    "multiplier_added_words": 2,
+    "words_added": 40,
+    "current_total_words": 970,
+    "paper_requirement": 1000,
+    "words_to_add": 30,
+    "answer": 30
+  },
+  "flawed_trace": {
+    "yvonne_words": 400,
+    "janna_more_than_yvonne": 150,
+    "janna_words": 550,
+    "total_words_initial": 950,
+    "words_removed": 20,
+    "words_after_removal": 930,
+    "multiplier_added_words": 2,
+    "words_added": 40,
+    "current_total_words": 890,
+    "paper_requirement": 1000,
+    "words_to_add": 110,
+    "answer": 110
+  },
+  "correct_value": 970,
+  "flawed_value": 890,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "janna_words",
+      "question_inputs": [
+        "yvonne_words",
+        "janna_more_than_yvonne"
+      ],
+      "solution_line_template": "Janna wrote {yvonne_words} + {janna_more_than_yvonne} = <<{yvonne_words}+{janna_more_than_yvonne}={janna_words}>>{janna_words} words."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_words_initial",
+      "question_inputs": [],
+      "solution_line_template": "Together, they wrote {yvonne_words} + {janna_words} = <<{yvonne_words}+{janna_words}={total_words_initial}>>{total_words_initial} words."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "words_after_removal",
+      "question_inputs": [
+        "words_removed"
+      ],
+      "solution_line_template": "They have {total_words_initial} - {words_removed} = <<{total_words_initial}-{words_removed}={words_after_removal}>>{words_after_removal} words left after omitting {words_removed} words."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "words_added",
+      "question_inputs": [
+        "multiplier_added_words"
+      ],
+      "solution_line_template": "Then {words_removed} x {multiplier_added_words} = <<{words_removed}*{multiplier_added_words}={words_added}>>{words_added} words were added during the editing."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "current_total_words",
+      "question_inputs": [],
+      "solution_line_template": "Overall, they have {words_after_removal} + {words_added} = <<{words_after_removal}+{words_added}={current_total_words}>>{current_total_words} words."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "words_to_add",
+      "question_inputs": [
+        "paper_requirement"
+      ],
+      "solution_line_template": "Thus, they should add {paper_requirement} - {current_total_words} = <<{paper_requirement}-{current_total_words}={words_to_add}>>{words_to_add} more words."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Janna wrote 400 + 150 = <<400+150=550>>550 words.",
+    "L2": "Together, they wrote 400 + 550 = <<400+550=950>>950 words.",
+    "L3": "They have 950 - 20 = <<950-20=930>>930 words left after omitting 20 words.",
+    "L4": "Then 20 x 2 = <<20*2=40>>40 words were added during the editing.",
+    "L5": "Overall, they have 930 + 40 = <<930+40=890>>890 words.",
+    "L6": "Thus, they should add 1000 - 890 = <<1000-890=110>>110 more words.",
+    "FA": "#### 110"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": -3058027850514815268,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,92 @@
+{
+  "index": 5205,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "There are 26-10=<<26-10=16>>16 miles left for the rest of the race",
+    "L2": "He runs 10*.8=<<10*.8=8>>8 miles per hour",
+    "L3": "So it takes him 16/8=<<16/8=2>>2 hours",
+    "L4": "So in total it takes 1+2=<<1+2=3>>3 hours"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5205.\n    Returns: the total time the race takes in hours.\n    \"\"\"\n    # L1\n    total_marathon_miles = 26 # A marathon is 26 miles\n    initial_miles_run = 10 # first 10 miles\n    remaining_miles = total_marathon_miles - initial_miles_run\n\n    # L2\n    initial_pace_mph = 10 # first 10 miles in 1 hour\n    pace_reduction_factor = 0.8 # 80% that pace\n    reduced_pace_mph = initial_pace_mph * pace_reduction_factor\n\n    # L3\n    time_for_remaining_miles = remaining_miles / reduced_pace_mph\n\n    # L4\n    initial_time_hours = 1 # 1 hour\n    total_race_time = initial_time_hours + time_for_remaining_miles\n\n    # FA\n    answer = total_race_time\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "time_for_remaining_miles",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x16a399010>"
+  },
+  "correct_trace": {
+    "total_marathon_miles": 26,
+    "initial_miles_run": 10,
+    "remaining_miles": 16,
+    "initial_pace_mph": 10,
+    "pace_reduction_factor": 0.8,
+    "reduced_pace_mph": 8.0,
+    "time_for_remaining_miles": 2.0,
+    "initial_time_hours": 1,
+    "total_race_time": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "total_marathon_miles": 26,
+    "initial_miles_run": 10,
+    "remaining_miles": 16,
+    "initial_pace_mph": 10,
+    "pace_reduction_factor": 0.8,
+    "reduced_pace_mph": 8.0,
+    "time_for_remaining_miles": 128.0,
+    "initial_time_hours": 1,
+    "total_race_time": 129.0,
+    "answer": 129.0
+  },
+  "correct_value": 2.0,
+  "flawed_value": 128.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "remaining_miles",
+      "question_inputs": [
+        "total_marathon_miles",
+        "initial_miles_run"
+      ],
+      "solution_line_template": "There are {total_marathon_miles}-{initial_miles_run}=<<{total_marathon_miles}-{initial_miles_run}={remaining_miles}>>{remaining_miles} miles left for the rest of the race"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "reduced_pace_mph",
+      "question_inputs": [
+        "initial_pace_mph",
+        "pace_reduction_factor"
+      ],
+      "solution_line_template": "He runs {initial_pace_mph}*{pace_reduction_factor}=<<{initial_pace_mph}*{pace_reduction_factor}={reduced_pace_mph}>>{reduced_pace_mph} miles per hour"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "time_for_remaining_miles",
+      "question_inputs": [],
+      "solution_line_template": "So it takes him {remaining_miles}/{reduced_pace_mph}=<<{remaining_miles}/{reduced_pace_mph}={time_for_remaining_miles}>>{time_for_remaining_miles} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_race_time",
+      "question_inputs": [
+        "initial_time_hours"
+      ],
+      "solution_line_template": "So in total it takes {initial_time_hours}+{time_for_remaining_miles}=<<{initial_time_hours}+{time_for_remaining_miles}={total_race_time}>>{total_race_time} hours"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 26-10=<<26-10=16>>16 miles left for the rest of the race",
+    "L2": "He runs 10*0.8=<<10*0.8=8>>8 miles per hour",
+    "L3": "So it takes him 16/8=<<16/8=128>>128 hours",
+    "L4": "So in total it takes 1+128=<<1+128=129>>129 hours",
+    "FA": "#### 129"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 2696053249568684470,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,83 @@
+{
+  "index": 2585,
+  "original_solution_mapping": {
+    "FA": "#### 51",
+    "L1": "Cops that served a year pay $85 * 0.2 = $<<85*0.2=17>>17 less.",
+    "L2": "Cops that served a year pay $85 - $17 = $<<85-17=68>>68.",
+    "L3": "Cops that served at least 3 years get a $68 * 0.25 = $<<68*0.25=17>>17 discount.",
+    "L4": "Cops that served at least 3 years pay $68 - $17 = $<<68-17=51>>51 for shoes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2585.\n    Returns: the amount an officer who has served at least three years has to pay for shoes.\n    \"\"\"\n    # L1\n    full_price = 85 # full price of $85\n    first_discount_rate = 0.2 # 20% discount\n    first_discount_amount = full_price * first_discount_rate\n\n    # L2\n    price_after_first_discount = full_price - first_discount_amount\n\n    # L3\n    additional_discount_rate = 0.25 # additional 25% off\n    additional_discount_amount = price_after_first_discount * additional_discount_rate\n\n    # L4\n    final_price = price_after_first_discount - additional_discount_amount\n\n    # FA\n    answer = final_price\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "final_price",
+    "replacement_variable": "price_after_first_discount"
+  },
+  "correct_trace": {
+    "full_price": 85,
+    "first_discount_rate": 0.2,
+    "first_discount_amount": 17.0,
+    "price_after_first_discount": 68.0,
+    "additional_discount_rate": 0.25,
+    "additional_discount_amount": 17.0,
+    "final_price": 51.0,
+    "answer": 51.0
+  },
+  "flawed_trace": {
+    "full_price": 85,
+    "first_discount_rate": 0.2,
+    "first_discount_amount": 17.0,
+    "price_after_first_discount": 68.0,
+    "additional_discount_rate": 0.25,
+    "additional_discount_amount": 17.0,
+    "final_price": 51.0,
+    "answer": 68.0
+  },
+  "correct_value": 51.0,
+  "flawed_value": 68.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "first_discount_amount",
+      "question_inputs": [
+        "full_price",
+        "first_discount_rate"
+      ],
+      "solution_line_template": "Cops that served a year pay ${full_price} * {first_discount_rate} = $<<{full_price}*{first_discount_rate}={first_discount_amount}>>{first_discount_amount} less."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "price_after_first_discount",
+      "question_inputs": [],
+      "solution_line_template": "Cops that served a year pay ${full_price} - ${first_discount_amount} = $<<{full_price}-{first_discount_amount}={price_after_first_discount}>>{price_after_first_discount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "additional_discount_amount",
+      "question_inputs": [
+        "additional_discount_rate"
+      ],
+      "solution_line_template": "Cops that served at least 3 years get a ${price_after_first_discount} * {additional_discount_rate} = $<<{price_after_first_discount}*{additional_discount_rate}={additional_discount_amount}>>{additional_discount_amount} discount."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_price",
+      "question_inputs": [],
+      "solution_line_template": "Cops that served at least 3 years pay ${price_after_first_discount} - ${additional_discount_amount} = $<<{price_after_first_discount}-{additional_discount_amount}={final_price}>>{final_price} for shoes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Cops that served a year pay $85 * 0.2 = $<<85*0.2=17>>17 less.",
+    "L2": "Cops that served a year pay $85 - $17 = $<<85-17=68>>68.",
+    "FA": "#### 68"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'price_after_first_discount' (value: 68.0) was reported instead of 'final_price' (value: 51.0).",
+  "repro_seed": 7179957695096503147,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,63 @@
+{
+  "index": 4943,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "If 10 half-gallons of milk bake 40 cookies, then one half-gallon of milk bakes 40/10 = 4 cookies.",
+    "L2": "If one half-gallon of milk bakes 4 cookies. to bake 200 cookies, you'll need 200/4 = <<200/4=50>>50 half-gallons of milk"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4943.\n    Returns: the number of half-gallons of milk needed to bake the specified number of cookies.\n    \"\"\"\n    # L1\n    initial_cookies = 40 # bake 40 cookies\n    milk_for_initial_cookies = 10 # 10 half-gallons of milk\n    cookies_per_half_gallon = initial_cookies / milk_for_initial_cookies\n\n    # L2\n    target_cookies = 200 # bake 200 cookies\n    half_gallons_needed = target_cookies / cookies_per_half_gallon\n\n    # FA\n    answer = half_gallons_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "half_gallons_needed",
+    "operand_to_replace": "target_cookies",
+    "replacement_variable": "initial_cookies"
+  },
+  "correct_trace": {
+    "initial_cookies": 40,
+    "milk_for_initial_cookies": 10,
+    "cookies_per_half_gallon": 4.0,
+    "target_cookies": 200,
+    "half_gallons_needed": 50.0,
+    "answer": 50.0
+  },
+  "flawed_trace": {
+    "initial_cookies": 40,
+    "milk_for_initial_cookies": 10,
+    "cookies_per_half_gallon": 4.0,
+    "target_cookies": 200,
+    "half_gallons_needed": 10.0,
+    "answer": 10.0
+  },
+  "correct_value": 50.0,
+  "flawed_value": 10.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cookies_per_half_gallon",
+      "question_inputs": [
+        "milk_for_initial_cookies",
+        "initial_cookies"
+      ],
+      "solution_line_template": "If {milk_for_initial_cookies} half-gallons of milk bake {initial_cookies} cookies, then one half-gallon of milk bakes {initial_cookies}/{milk_for_initial_cookies} = {cookies_per_half_gallon} cookies."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "half_gallons_needed",
+      "question_inputs": [
+        "target_cookies"
+      ],
+      "solution_line_template": "If one half-gallon of milk bakes {cookies_per_half_gallon} cookies. to bake {target_cookies} cookies, you'll need {target_cookies}/{cookies_per_half_gallon} = <<{target_cookies}/{cookies_per_half_gallon}={half_gallons_needed}>>{half_gallons_needed} half-gallons of milk"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If 10 half-gallons of milk bake 40 cookies, then one half-gallon of milk bakes 40/10 = 4 cookies.",
+    "L2": "If one half-gallon of milk bakes 4 cookies. to bake 40 cookies, you'll need 40/4 = <<40/4=10>>10 half-gallons of milk",
+    "FA": "#### 10"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'initial_cookies' (40) was used instead of 'target_cookies' (200).",
+  "repro_seed": -2396303309982421289,
+  "model_name": "google_gemini-2.5-flash"
+}

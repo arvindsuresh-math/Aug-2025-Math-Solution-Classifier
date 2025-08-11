@@ -1,0 +1,77 @@
+{
+  "index": 6626,
+  "original_solution_mapping": {
+    "FA": "#### 150",
+    "L1": "He printed 600*2=<<600*2=1200>>1200 pages",
+    "L2": "Each sheet of paper was 4*2=<<4*2=8>>8 pages",
+    "L3": "So he used 1200/8=<<1200/8=150>>150 sheets of paper"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6626.\n    Returns: the total number of sheets of paper used.\n    \"\"\"\n    # L1\n    pages_per_book = 600 # each 600 pages long\n    num_books = 2 # 2 books\n    total_pages_printed = pages_per_book * num_books\n\n    # L2\n    pages_per_side = 4 # 4 pages per side\n    sides_per_sheet = 2 # double-sided\n    pages_per_sheet = pages_per_side * sides_per_sheet\n\n    # L3\n    sheets_of_paper_used = total_pages_printed / pages_per_sheet\n\n    # FA\n    answer = sheets_of_paper_used\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "pages_per_sheet",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x172165450>"
+  },
+  "correct_trace": {
+    "pages_per_book": 600,
+    "num_books": 2,
+    "total_pages_printed": 1200,
+    "pages_per_side": 4,
+    "sides_per_sheet": 2,
+    "pages_per_sheet": 8,
+    "sheets_of_paper_used": 150.0,
+    "answer": 150.0
+  },
+  "flawed_trace": {
+    "pages_per_book": 600,
+    "num_books": 2,
+    "total_pages_printed": 1200,
+    "pages_per_side": 4,
+    "sides_per_sheet": 2,
+    "pages_per_sheet": 6,
+    "sheets_of_paper_used": 200.0,
+    "answer": 200.0
+  },
+  "correct_value": 8,
+  "flawed_value": 6,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_pages_printed",
+      "question_inputs": [
+        "pages_per_book",
+        "num_books"
+      ],
+      "solution_line_template": "He printed {pages_per_book}*{num_books}=<<{pages_per_book}*{num_books}={total_pages_printed}>>{total_pages_printed} pages"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "pages_per_sheet",
+      "question_inputs": [
+        "pages_per_side",
+        "sides_per_sheet"
+      ],
+      "solution_line_template": "Each sheet of paper was {pages_per_side}*{sides_per_sheet}=<<{pages_per_side}*{sides_per_sheet}={pages_per_sheet}>>{pages_per_sheet} pages"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "sheets_of_paper_used",
+      "question_inputs": [],
+      "solution_line_template": "So he used {total_pages_printed}/{pages_per_sheet}=<<{total_pages_printed}/{pages_per_sheet}={sheets_of_paper_used}>>{sheets_of_paper_used} sheets of paper"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He printed 600*2=<<600*2=1200>>1200 pages",
+    "L2": "Each sheet of paper was 4*2=<<4*2=6>>6 pages",
+    "L3": "So he used 1200/6=<<1200/6=200>>200 sheets of paper",
+    "FA": "#### 200"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -931365866507208799,
+  "model_name": "google_gemini-2.5-flash"
+}

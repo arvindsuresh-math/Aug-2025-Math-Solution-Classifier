@@ -1,0 +1,105 @@
+{
+  "index": 483,
+  "original_solution_mapping": {
+    "FA": "#### 36",
+    "L1": "Andy weighed 156 + 36 = <<156+36=192>>192 pounds after growing taller.",
+    "L2": "An eighth of his weight is 1/8 x 192 = <<1/8*192=24>>24 pounds.",
+    "L3": "Over the next 3 months, Andy lost 24 x 3 = <<24*3=72>>72 pounds.",
+    "L4": "He now weighs 192 - 72 = <<192-72=120>>120 pounds.",
+    "L5": "Andy weighs 156 - 120 = <<156-120=36>>36 pounds less than at the beginning of the year."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 483.\n    Returns: how much less Andy weighs now than at the beginning of the year.\n    \"\"\"\n    # L1\n    initial_weight = 156 # Andy started out the year weighing 156 pounds\n    weight_gain = 36 # gained 36 pounds\n    weight_after_gain = initial_weight + weight_gain\n\n    # L2\n    fraction_lost_numerator = 1 # lost an eighth of his weight\n    fraction_lost_denominator = 8 # lost an eighth of his weight\n    weight_lost_fraction = Fraction(fraction_lost_numerator, fraction_lost_denominator)\n    weight_lost_per_month = weight_lost_fraction * weight_after_gain\n\n    # L3\n    months_exercising = 3 # Over the next 3 months\n    total_weight_lost = weight_lost_per_month * months_exercising\n\n    # L4\n    current_weight = weight_after_gain - total_weight_lost\n\n    # L5\n    weight_difference = initial_weight - current_weight\n\n    # FA\n    answer = weight_difference\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "weight_difference",
+    "operand_to_replace": "current_weight",
+    "replacement_variable": "weight_lost_per_month"
+  },
+  "correct_trace": {
+    "initial_weight": 156,
+    "weight_gain": 36,
+    "weight_after_gain": 192,
+    "fraction_lost_numerator": 1,
+    "fraction_lost_denominator": 8,
+    "weight_lost_fraction": "1/8",
+    "weight_lost_per_month": "24",
+    "months_exercising": 3,
+    "total_weight_lost": "72",
+    "current_weight": "120",
+    "weight_difference": "36",
+    "answer": "36"
+  },
+  "flawed_trace": {
+    "initial_weight": 156,
+    "weight_gain": 36,
+    "weight_after_gain": 192,
+    "fraction_lost_numerator": 1,
+    "fraction_lost_denominator": 8,
+    "weight_lost_fraction": "1/8",
+    "weight_lost_per_month": "24",
+    "months_exercising": 3,
+    "total_weight_lost": "72",
+    "current_weight": "120",
+    "weight_difference": "132",
+    "answer": "132"
+  },
+  "correct_value": "36",
+  "flawed_value": "132",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "weight_after_gain",
+      "question_inputs": [
+        "initial_weight",
+        "weight_gain"
+      ],
+      "solution_line_template": "Andy weighed {initial_weight} + {weight_gain} = <<{initial_weight}+{weight_gain}={weight_after_gain}>>{weight_after_gain} pounds after growing taller."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "weight_lost_per_month",
+      "question_inputs": [
+        "fraction_lost_numerator",
+        "fraction_lost_denominator"
+      ],
+      "solution_line_template": "An eighth of his weight is {fraction_lost_numerator}/{fraction_lost_denominator} x {weight_after_gain} = <<{fraction_lost_numerator}/{fraction_lost_denominator}*{weight_after_gain}={weight_lost_per_month}>>{weight_lost_per_month} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_weight_lost",
+      "question_inputs": [
+        "months_exercising"
+      ],
+      "solution_line_template": "Over the next {months_exercising} months, Andy lost {weight_lost_per_month} x {months_exercising} = <<{weight_lost_per_month}*{months_exercising}={total_weight_lost}>>{total_weight_lost} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "current_weight",
+      "question_inputs": [],
+      "solution_line_template": "He now weighs {weight_after_gain} - {total_weight_lost} = <<{weight_after_gain}-{total_weight_lost}={current_weight}>>{current_weight} pounds."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "weight_difference",
+      "question_inputs": [],
+      "solution_line_template": "Andy weighs {initial_weight} - {current_weight} = <<{initial_weight}-{current_weight}={weight_difference}>>{weight_difference} pounds less than at the beginning of the year."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Andy weighed 156 + 36 = <<156+36=192>>192 pounds after growing taller.",
+    "L2": "An eighth of his weight is 1/8 x 192 = <<1/8*192=24>>24 pounds.",
+    "L3": "Over the next 3 months, Andy lost 24 x 3 = <<24*3=72>>72 pounds.",
+    "L4": "He now weighs 192 - 72 = <<192-72=120>>120 pounds.",
+    "L5": "Andy weighs 156 - 24 = <<156-24=132>>132 pounds less than at the beginning of the year.",
+    "FA": "#### 132"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operand. The variable 'weight_lost_per_month' (value: 24) was used instead of 'current_weight' (value: 120).",
+  "repro_seed": 3204535349655527636,
+  "model_name": "google_gemini-2.5-flash"
+}

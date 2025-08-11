@@ -1,0 +1,59 @@
+{
+  "index": 1366,
+  "original_solution_mapping": {
+    "FA": "#### 55",
+    "L1": "In the afternoon, she baked 20 + 15 = <<20+15=35>>35 cupcakes more cupcakes.",
+    "L2": "Therefore, she baked a total of 20 + 35 = <<20+35=55>>55 cupcakes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1366.\n    Returns: the total number of cupcakes baked.\n    \"\"\"\n    # L1\n    morning_cupcakes = 20 # 20 cupcakes in the morning\n    afternoon_additional_cupcakes = 15 # fifteen more cupcakes in the afternoon\n    afternoon_cupcakes = morning_cupcakes + afternoon_additional_cupcakes\n\n    # L2\n    total_cupcakes = morning_cupcakes + afternoon_cupcakes\n\n    # FA\n    answer = total_cupcakes\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_cupcakes",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x30dc54450>"
+  },
+  "correct_trace": {
+    "morning_cupcakes": 20,
+    "afternoon_additional_cupcakes": 15,
+    "afternoon_cupcakes": 35,
+    "total_cupcakes": 55,
+    "answer": 55
+  },
+  "flawed_trace": {
+    "morning_cupcakes": 20,
+    "afternoon_additional_cupcakes": 15,
+    "afternoon_cupcakes": 35,
+    "total_cupcakes": 700,
+    "answer": 700
+  },
+  "correct_value": 55,
+  "flawed_value": 700,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "morning_cupcakes",
+        "afternoon_additional_cupcakes"
+      ],
+      "WK_inputs": [],
+      "output_variable": "afternoon_cupcakes",
+      "solution_line_template": "In the afternoon, she baked {morning_cupcakes} + {afternoon_additional_cupcakes} = <<{morning_cupcakes}+{afternoon_additional_cupcakes}={afternoon_cupcakes}>>{afternoon_cupcakes} cupcakes more cupcakes."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_cupcakes",
+      "solution_line_template": "Therefore, she baked a total of {morning_cupcakes} + {afternoon_cupcakes} = <<{morning_cupcakes}+{afternoon_cupcakes}={total_cupcakes}>>{total_cupcakes} cupcakes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In the afternoon, she baked 20 + 15 = <<20+15=35>>35 cupcakes more cupcakes.",
+    "L2": "Therefore, she baked a total of 20 + 35 = <<20+35=700>>700 cupcakes.",
+    "FA": "#### 700"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 3169857189167877012,
+  "model_name": "google_gemini-2.5-flash"
+}

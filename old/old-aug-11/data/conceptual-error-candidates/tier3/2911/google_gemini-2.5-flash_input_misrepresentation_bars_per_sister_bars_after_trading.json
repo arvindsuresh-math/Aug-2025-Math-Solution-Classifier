@@ -1,0 +1,78 @@
+{
+  "index": 2911,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "Greg kept 1 granola bar for each of the 7 days of the week, so there were 20 - 7 = <<20-7=13>>13 bars left.",
+    "L2": "He traded 3 to his friend Pete, so there were 13 - 3 = 10 bars left.",
+    "L3": "His 2 sisters split the rest evenly, so each got 10 / 2 = <<10/2=5>>5 granola bars."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2911.\n    Returns: the number of granola bars each sister received.\n    \"\"\"\n    # L1\n    total_bars = 20 # a 20-pack of granola bars\n    bars_kept_for_self = 7 # one for each day of the week\n    bars_after_keeping = total_bars - bars_kept_for_self\n\n    # L2\n    traded_to_pete = 3 # traded three of the remaining bars\n    bars_after_trading = bars_after_keeping - traded_to_pete\n\n    # L3\n    number_of_sisters = 2 # his two sisters\n    bars_per_sister = bars_after_trading / number_of_sisters\n\n    # FA\n    answer = bars_per_sister\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "bars_per_sister",
+    "operand_to_replace": "number_of_sisters",
+    "replacement_variable": "bars_after_trading"
+  },
+  "correct_trace": {
+    "total_bars": 20,
+    "bars_kept_for_self": 7,
+    "bars_after_keeping": 13,
+    "traded_to_pete": 3,
+    "bars_after_trading": 10,
+    "number_of_sisters": 2,
+    "bars_per_sister": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "total_bars": 20,
+    "bars_kept_for_self": 7,
+    "bars_after_keeping": 13,
+    "traded_to_pete": 3,
+    "bars_after_trading": 10,
+    "number_of_sisters": 2,
+    "bars_per_sister": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 5.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "bars_after_keeping",
+      "question_inputs": [
+        "total_bars",
+        "bars_kept_for_self"
+      ],
+      "solution_line_template": "Greg kept 1 granola bar for each of the 7 days of the week, so there were {total_bars} - {bars_kept_for_self} = <<{total_bars}-{bars_kept_for_self}={bars_after_keeping}>>{bars_after_keeping} bars left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "bars_after_trading",
+      "question_inputs": [
+        "traded_to_pete"
+      ],
+      "solution_line_template": "He traded {traded_to_pete} to his friend Pete, so there were {bars_after_keeping} - {traded_to_pete} = {bars_after_trading} bars left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "bars_per_sister",
+      "question_inputs": [
+        "number_of_sisters"
+      ],
+      "solution_line_template": "His {number_of_sisters} sisters split the rest evenly, so each got {bars_after_trading} / {number_of_sisters} = <<{bars_after_trading}/{number_of_sisters}={bars_per_sister}>>{bars_per_sister} granola bars."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Greg kept 1 granola bar for each of the 7 days of the week, so there were 20 - 7 = <<20-7=13>>13 bars left.",
+    "L2": "He traded 3 to his friend Pete, so there were 13 - 3 = 10 bars left.",
+    "L3": "His 10 sisters split the rest evenly, so each got 10 / 10 = <<10/10=1>>1 granola bars.",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'bars_after_trading' (10) was used instead of 'number_of_sisters' (2).",
+  "repro_seed": 4810242574975792142,
+  "model_name": "google_gemini-2.5-flash"
+}

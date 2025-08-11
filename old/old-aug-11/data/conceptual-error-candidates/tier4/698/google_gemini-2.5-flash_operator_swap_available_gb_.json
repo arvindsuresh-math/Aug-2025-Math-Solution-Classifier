@@ -1,0 +1,67 @@
+{
+  "index": 698,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "We calculate 50% of 16 GB:",
+    "L2": "50/100 * 16 GB = 0.5 * 16 GB = <<50/100*16=8>>8 GB",
+    "L3": "That leaves 16 GB - 8 GB = <<16-8=8>>8 GB available on this key."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 698.\n    Returns: the number of gigabytes still available on the USB drive.\n    \"\"\"\n    # L2\n    capacity_gb = 16 # 16 GB capacity USB drive\n    busy_percent_num = 50 # 50% is already busy\n    percent_divisor = 100 # WK\n    busy_percent_float = 0.5 # 50% is already busy\n    busy_gb = busy_percent_num / percent_divisor * capacity_gb\n\n    # L3\n    available_gb = capacity_gb - busy_gb\n\n    # FA\n    answer = available_gb\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "available_gb",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x17201ae10>"
+  },
+  "correct_trace": {
+    "capacity_gb": 16,
+    "busy_percent_num": 50,
+    "percent_divisor": 100,
+    "busy_percent_float": 0.5,
+    "busy_gb": 8.0,
+    "available_gb": 8.0,
+    "answer": 8.0
+  },
+  "flawed_trace": {
+    "capacity_gb": 16,
+    "busy_percent_num": 50,
+    "percent_divisor": 100,
+    "busy_percent_float": 0.5,
+    "busy_gb": 8.0,
+    "available_gb": 24.0,
+    "answer": 24.0
+  },
+  "correct_value": 8.0,
+  "flawed_value": 24.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_divisor"
+      ],
+      "line_number": "L2",
+      "output_variable": "busy_gb",
+      "question_inputs": [
+        "busy_percent_num",
+        "capacity_gb",
+        "busy_percent_float"
+      ],
+      "solution_line_template": "{busy_percent_num}/{percent_divisor} * {capacity_gb} GB = {busy_percent_float} * {capacity_gb} GB = <<{busy_percent_num}/{percent_divisor}*{capacity_gb}={busy_gb}>>{busy_gb} GB"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "available_gb",
+      "question_inputs": [],
+      "solution_line_template": "That leaves {capacity_gb} GB - {busy_gb} GB = <<{capacity_gb}-{busy_gb}={available_gb}>>{available_gb} GB available on this key."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L2": "50/100 * 16 GB = 0.5 * 16 GB = <<50/100*16=8>>8 GB",
+    "L3": "That leaves 16 GB - 8 GB = <<16-8=24>>24 GB available on this key.",
+    "FA": "#### 24"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -2557837661328801892,
+  "model_name": "google_gemini-2.5-flash"
+}

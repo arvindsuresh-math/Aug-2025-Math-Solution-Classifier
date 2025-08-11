@@ -1,0 +1,77 @@
+{
+  "index": 3394,
+  "original_solution_mapping": {
+    "FA": "#### 28",
+    "L1": "The total tons of sand donated to City A and City C is 16 1/2 + 24 1/2 = 41.",
+    "L2": "The total tons of sand donated to City A, City B, and City C is 41 + 26 = <<41+26=67>>67.",
+    "L3": "Therefore, City D received 95 - 67 = <<95-67=28>>28 tons of sand."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3394.\n    Returns: the tons of sand City D received.\n    \"\"\"\n    # L1\n    city_a_sand = 16.5 # City A received 16 1/2 tons of sand\n    city_c_sand = 24.5 # City C received 24 1/2 tons of sand\n    total_sand_ac = city_a_sand + city_c_sand\n\n    # L2\n    city_b_sand = 26 # City B received 26 tons of sand\n    total_sand_abc = total_sand_ac + city_b_sand\n\n    # L3\n    total_sand_all_cities = 95 # the total for all four cities was 95 tons\n    city_d_sand = total_sand_all_cities - total_sand_abc\n\n    # FA\n    answer = city_d_sand\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "city_d_sand",
+    "replacement_variable": "total_sand_abc"
+  },
+  "correct_trace": {
+    "city_a_sand": 16.5,
+    "city_c_sand": 24.5,
+    "total_sand_ac": 41.0,
+    "city_b_sand": 26,
+    "total_sand_abc": 67.0,
+    "total_sand_all_cities": 95,
+    "city_d_sand": 28.0,
+    "answer": 28.0
+  },
+  "flawed_trace": {
+    "city_a_sand": 16.5,
+    "city_c_sand": 24.5,
+    "total_sand_ac": 41.0,
+    "city_b_sand": 26,
+    "total_sand_abc": 67.0,
+    "total_sand_all_cities": 95,
+    "city_d_sand": 28.0,
+    "answer": 67.0
+  },
+  "correct_value": 28.0,
+  "flawed_value": 67.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_sand_ac",
+      "question_inputs": [
+        "city_a_sand",
+        "city_c_sand"
+      ],
+      "solution_line_template": "The total tons of sand donated to City A and City C is {city_a_sand} + {city_c_sand} = {total_sand_ac}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_sand_abc",
+      "question_inputs": [
+        "city_b_sand"
+      ],
+      "solution_line_template": "The total tons of sand donated to City A, City B, and City C is {total_sand_ac} + {city_b_sand} = <<{total_sand_ac}+{city_b_sand}={total_sand_abc}>>{total_sand_abc}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "city_d_sand",
+      "question_inputs": [
+        "total_sand_all_cities"
+      ],
+      "solution_line_template": "Therefore, City D received {total_sand_all_cities} - {total_sand_abc} = <<{total_sand_all_cities}-{total_sand_abc}={city_d_sand}>>{city_d_sand} tons of sand."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total tons of sand donated to City A and City C is 16.5 + 24.5 = 41.",
+    "L2": "The total tons of sand donated to City A, City B, and City C is 41 + 26 = <<41+26=67>>67.",
+    "FA": "#### 67"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'total_sand_abc' (value: 67.0) was reported instead of 'city_d_sand' (value: 28.0).",
+  "repro_seed": -6036499388200236755,
+  "model_name": "google_gemini-2.5-flash"
+}

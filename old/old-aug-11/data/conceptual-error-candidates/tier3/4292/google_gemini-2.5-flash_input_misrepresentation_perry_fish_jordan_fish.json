@@ -1,0 +1,86 @@
+{
+  "index": 4292,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "Since Perry caught double what Jordan caught, Perry caught 2 * 4 = <<2*4=8>>8 fish.",
+    "L2": "Altogether, they caught 8 + 4 = <<8+4=12>>12 fish.",
+    "L3": "On the way back to the shore, they lost 12 * 1/4 = <<12*1/4=3>>3 fish.",
+    "L4": "They have 12 - 3 = <<12-3=9>>9 fish remaining."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4292.\n    Returns: the number of fish remaining after loss.\n    \"\"\"\n    # L1\n    jordan_fish = 4 # Jordan caught 4 fish\n    double_factor = 2 # Perry caught double what Jordan caught\n    perry_fish = double_factor * jordan_fish\n\n    # L2\n    total_initial_catch = perry_fish + jordan_fish\n\n    # L3\n    lost_fraction = Fraction(1, 4) # lost one-fourth of their total catch\n    lost_fish = total_initial_catch * lost_fraction\n\n    # L4\n    remaining_fish = total_initial_catch - lost_fish\n\n    # FA\n    answer = remaining_fish\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "perry_fish",
+    "operand_to_replace": "double_factor",
+    "replacement_variable": "jordan_fish"
+  },
+  "correct_trace": {
+    "jordan_fish": 4,
+    "double_factor": 2,
+    "perry_fish": 8,
+    "total_initial_catch": 12,
+    "lost_fraction": "1/4",
+    "lost_fish": "3",
+    "remaining_fish": "9",
+    "answer": "9"
+  },
+  "flawed_trace": {
+    "jordan_fish": 4,
+    "double_factor": 2,
+    "perry_fish": 16,
+    "total_initial_catch": 20,
+    "lost_fraction": "1/4",
+    "lost_fish": "5",
+    "remaining_fish": "15",
+    "answer": "15"
+  },
+  "correct_value": 8,
+  "flawed_value": 16,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "double_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "perry_fish",
+      "question_inputs": [
+        "jordan_fish"
+      ],
+      "solution_line_template": "Since Perry caught double what Jordan caught, Perry caught {double_factor} * {jordan_fish} = <<{double_factor}*{jordan_fish}={perry_fish}>>{perry_fish} fish."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_initial_catch",
+      "question_inputs": [],
+      "solution_line_template": "Altogether, they caught {perry_fish} + {jordan_fish} = <<{perry_fish}+{jordan_fish}={total_initial_catch}>>{total_initial_catch} fish."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "lost_fish",
+      "question_inputs": [
+        "lost_fraction"
+      ],
+      "solution_line_template": "On the way back to the shore, they lost {total_initial_catch} * {lost_fraction} = <<{total_initial_catch}*{lost_fraction}={lost_fish}>>{lost_fish} fish."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "remaining_fish",
+      "question_inputs": [],
+      "solution_line_template": "They have {total_initial_catch} - {lost_fish} = <<{total_initial_catch}-{lost_fish}={remaining_fish}>>{remaining_fish} fish remaining."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since Perry caught double what Jordan caught, Perry caught 4 * 4 = <<4*4=16>>16 fish.",
+    "L2": "Altogether, they caught 16 + 4 = <<16+4=20>>20 fish.",
+    "L3": "On the way back to the shore, they lost 20 * 1/4 = <<20*1/4=5>>5 fish.",
+    "L4": "They have 20 - 5 = <<20-5=15>>15 fish remaining.",
+    "FA": "#### 15"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'jordan_fish' (4) was used instead of 'double_factor' (2).",
+  "repro_seed": 649296679253745827,
+  "model_name": "google_gemini-2.5-flash"
+}

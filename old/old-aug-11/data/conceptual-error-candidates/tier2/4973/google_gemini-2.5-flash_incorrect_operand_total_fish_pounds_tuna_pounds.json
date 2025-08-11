@@ -1,0 +1,85 @@
+{
+  "index": 4973,
+  "original_solution_mapping": {
+    "FA": "#### 1100",
+    "L1": "He caught 200*.55=100 pounds more salmon than trout",
+    "L2": "So he caught 200+100=<<200+100=300>>300 pounds of salmon",
+    "L3": "He caught 300*2=<<300*2=600>>600 pounds of tuna",
+    "L4": "So in total, he caught 600+300+200=<<600+300+200=1100>>1100 pounds of fish"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4973.\n    Returns: the total pounds of fish caught.\n    \"\"\"\n    # L1\n    trout_pounds = 200 # 200 pounds of trout\n    salmon_increase_factor = 0.55 # from solution calculation 200*.55\n    salmon_increase_pounds = trout_pounds * salmon_increase_factor\n\n    # L2\n    salmon_total_pounds = trout_pounds + salmon_increase_pounds\n\n    # L3\n    tuna_multiplier = 2 # twice as much Tuna\n    tuna_pounds = salmon_total_pounds * tuna_multiplier\n\n    # L4\n    total_fish_pounds = tuna_pounds + salmon_total_pounds + trout_pounds\n\n    # FA\n    answer = total_fish_pounds\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_fish_pounds",
+    "operand_to_replace": "salmon_total_pounds",
+    "replacement_variable": "tuna_pounds"
+  },
+  "correct_trace": {
+    "trout_pounds": 200,
+    "salmon_increase_factor": 0.55,
+    "salmon_increase_pounds": 110.00000000000001,
+    "salmon_total_pounds": 310.0,
+    "tuna_multiplier": 2,
+    "tuna_pounds": 620.0,
+    "total_fish_pounds": 1130.0,
+    "answer": 1130.0
+  },
+  "flawed_trace": {
+    "trout_pounds": 200,
+    "salmon_increase_factor": 0.55,
+    "salmon_increase_pounds": 110.00000000000001,
+    "salmon_total_pounds": 310.0,
+    "tuna_multiplier": 2,
+    "tuna_pounds": 620.0,
+    "total_fish_pounds": 1440.0,
+    "answer": 1440.0
+  },
+  "correct_value": 1130.0,
+  "flawed_value": 1440.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "salmon_increase_pounds",
+      "question_inputs": [
+        "trout_pounds",
+        "salmon_increase_factor"
+      ],
+      "solution_line_template": "He caught {trout_pounds}*{salmon_increase_factor}={salmon_increase_pounds} pounds more salmon than trout"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "salmon_total_pounds",
+      "question_inputs": [],
+      "solution_line_template": "So he caught {trout_pounds}+{salmon_increase_pounds}=<<{trout_pounds}+{salmon_increase_pounds}={salmon_total_pounds}>>{salmon_total_pounds} pounds of salmon"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "tuna_pounds",
+      "question_inputs": [
+        "tuna_multiplier"
+      ],
+      "solution_line_template": "He caught {salmon_total_pounds}*{tuna_multiplier}=<<{salmon_total_pounds}*{tuna_multiplier}={tuna_pounds}>>{tuna_pounds} pounds of tuna"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_fish_pounds",
+      "question_inputs": [],
+      "solution_line_template": "So in total, he caught {tuna_pounds}+{salmon_total_pounds}+{trout_pounds}=<<{tuna_pounds}+{salmon_total_pounds}+{trout_pounds}={total_fish_pounds}>>{total_fish_pounds} pounds of fish"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He caught 200*0.55=110.0 pounds more salmon than trout",
+    "L2": "So he caught 200+110.0=<<200+110.0=310>>310 pounds of salmon",
+    "L3": "He caught 310*2=<<310*2=620>>620 pounds of tuna",
+    "L4": "So in total, he caught 620+620+200=<<620+620+200=1440>>1440 pounds of fish",
+    "FA": "#### 1440"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'tuna_pounds' (value: 620.0) was used instead of 'salmon_total_pounds' (value: 310.0).",
+  "repro_seed": 5240140998350722343,
+  "model_name": "google_gemini-2.5-flash"
+}

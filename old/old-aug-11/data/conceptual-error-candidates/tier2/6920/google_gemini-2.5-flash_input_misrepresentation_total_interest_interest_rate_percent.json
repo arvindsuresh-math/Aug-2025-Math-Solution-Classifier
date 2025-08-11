@@ -1,0 +1,66 @@
+{
+  "index": 6920,
+  "original_solution_mapping": {
+    "FA": "#### 6384",
+    "L1": "The interest that this person will get equals $5600 * 7%/year * 2 years = $<<5600*7*.01*2=784>>784.",
+    "L2": "After two years the amount found at the bank is $5600 + $784 = $<<5600+784=6384>>6384."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6920.\n    Returns: the total amount of money in the bank after two years.\n    \"\"\"\n    # L1\n    principal_amount = 5600 # $5600 in a bank\n    interest_rate_percent = 7 # interest of 7%\n    num_years = 2 # for two years\n    percent_to_decimal_factor = 0.01 # WK\n    total_interest = principal_amount * interest_rate_percent * percent_to_decimal_factor * num_years\n\n    # L2\n    final_amount = principal_amount + total_interest\n\n    # FA\n    answer = final_amount\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_interest",
+    "operand_to_replace": "percent_to_decimal_factor",
+    "replacement_variable": "interest_rate_percent"
+  },
+  "correct_trace": {
+    "principal_amount": 5600,
+    "interest_rate_percent": 7,
+    "num_years": 2,
+    "percent_to_decimal_factor": 0.01,
+    "total_interest": 784.0,
+    "final_amount": 6384.0,
+    "answer": 6384.0
+  },
+  "flawed_trace": {
+    "principal_amount": 5600,
+    "interest_rate_percent": 7,
+    "num_years": 2,
+    "percent_to_decimal_factor": 0.01,
+    "total_interest": 548800,
+    "final_amount": 554400,
+    "answer": 554400
+  },
+  "correct_value": 784.0,
+  "flawed_value": 548800,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_to_decimal_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_interest",
+      "question_inputs": [
+        "principal_amount",
+        "interest_rate_percent",
+        "num_years"
+      ],
+      "solution_line_template": "The interest that this person will get equals ${principal_amount} * {interest_rate_percent}%/year * {num_years} years = $<<{principal_amount}*{interest_rate_percent}*{percent_to_decimal_factor}*{num_years}={total_interest}>>{total_interest}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "final_amount",
+      "question_inputs": [],
+      "solution_line_template": "After two years the amount found at the bank is ${principal_amount} + ${total_interest} = $<<{principal_amount}+{total_interest}={final_amount}>>{final_amount}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The interest that this person will get equals $5600 * 7%/year * 2 years = $<<5600*7*7*2=548800>>548800.",
+    "L2": "After two years the amount found at the bank is $5600 + $548800 = $<<5600+548800=554400>>554400.",
+    "FA": "#### 554400"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'interest_rate_percent' (7) was used instead of 'percent_to_decimal_factor' (0.01).",
+  "repro_seed": 116720666721022168,
+  "model_name": "google_gemini-2.5-flash"
+}

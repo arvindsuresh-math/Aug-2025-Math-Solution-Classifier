@@ -1,0 +1,63 @@
+{
+  "index": 3929,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "Patrick eats 1/2 of the 4 egg rolls that Alvin eats, 1/2 x 4 = <<1/2*4=2>>2 egg rolls.",
+    "L2": "Matthew eats 3x as many egg rolls as Patrick eats, 3 x 2 = <<3*2=6>>6 egg rolls that Matthew eats."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3929.\n    Returns: the number of egg rolls Matthew ate.\n    \"\"\"\n    # L1\n    alvin_eats = 4 # If Alvin ate 4 egg rolls\n    patrick_fraction = Fraction(1, 2) # Patrick eats half as many egg rolls\n    patrick_eats = patrick_fraction * alvin_eats\n\n    # L2\n    matthew_multiplier = 3 # Matthew eats three times as many egg rolls\n    matthew_eats = matthew_multiplier * patrick_eats\n\n    # FA\n    answer = matthew_eats\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "patrick_eats",
+    "operand_to_replace": "patrick_fraction",
+    "replacement_variable": "alvin_eats"
+  },
+  "correct_trace": {
+    "alvin_eats": 4,
+    "patrick_fraction": "1/2",
+    "patrick_eats": "2",
+    "matthew_multiplier": 3,
+    "matthew_eats": "6",
+    "answer": "6"
+  },
+  "flawed_trace": {
+    "alvin_eats": 4,
+    "patrick_fraction": "1/2",
+    "patrick_eats": 16,
+    "matthew_multiplier": 3,
+    "matthew_eats": 48,
+    "answer": 48
+  },
+  "correct_value": "2",
+  "flawed_value": 16,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "patrick_eats",
+      "question_inputs": [
+        "alvin_eats",
+        "patrick_fraction"
+      ],
+      "solution_line_template": "Patrick eats {patrick_fraction} of the {alvin_eats} egg rolls that Alvin eats, {patrick_fraction} x {alvin_eats} = <<{patrick_fraction}*{alvin_eats}={patrick_eats}>>{patrick_eats} egg rolls."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "matthew_eats",
+      "question_inputs": [
+        "matthew_multiplier"
+      ],
+      "solution_line_template": "Matthew eats {matthew_multiplier}x as many egg rolls as Patrick eats, {matthew_multiplier} x {patrick_eats} = <<{matthew_multiplier}*{patrick_eats}={matthew_eats}>>{matthew_eats} egg rolls that Matthew eats."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Patrick eats 4 of the 4 egg rolls that Alvin eats, 4 x 4 = <<4*4=16>>16 egg rolls.",
+    "L2": "Matthew eats 3x as many egg rolls as Patrick eats, 3 x 16 = <<3*16=48>>48 egg rolls that Matthew eats.",
+    "FA": "#### 48"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'alvin_eats' (4) was used instead of 'patrick_fraction' (1/2).",
+  "repro_seed": 509025920003574205,
+  "model_name": "google_gemini-2.5-flash"
+}

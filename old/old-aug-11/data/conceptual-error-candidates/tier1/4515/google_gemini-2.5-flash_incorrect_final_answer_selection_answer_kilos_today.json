@@ -1,0 +1,87 @@
+{
+  "index": 4515,
+  "original_solution_mapping": {
+    "FA": "#### 70",
+    "L1": "Yesterday, his shop washed 5 + 5 = <<5+5=10>>10 kilos of laundry.",
+    "L2": "Today, it washed 2 x 10 = <<2*10=20>>20 kilos of laundry.",
+    "L3": "Thus, Oliver's shop washed a total of 5 + 10 + 20 = <<5+10+20=35>>35 kilos of laundries for three days.",
+    "L4": "Therefore, his shop earned 35 x $2 = $<<35*2=70>>70 for three days."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4515.\n    Returns: the total earnings for three days.\n    \"\"\"\n    # L1\n    kilos_two_days_ago = 5 # 5 kilos of laundries\n    more_than_previous_day = 5 # five kilos of laundries more than the previous day\n    kilos_yesterday = kilos_two_days_ago + more_than_previous_day\n\n    # L2\n    multiplier_today = 2 # twice the number of kilos than yesterday\n    kilos_today = multiplier_today * kilos_yesterday\n\n    # L3\n    total_kilos_three_days = kilos_two_days_ago + kilos_yesterday + kilos_today\n\n    # L4\n    charge_per_kilo = 2 # $2 per kilo of laundry\n    total_earnings = total_kilos_three_days * charge_per_kilo\n\n    # FA\n    answer = total_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_earnings",
+    "replacement_variable": "kilos_today"
+  },
+  "correct_trace": {
+    "kilos_two_days_ago": 5,
+    "more_than_previous_day": 5,
+    "kilos_yesterday": 10,
+    "multiplier_today": 2,
+    "kilos_today": 20,
+    "total_kilos_three_days": 35,
+    "charge_per_kilo": 2,
+    "total_earnings": 70,
+    "answer": 70
+  },
+  "flawed_trace": {
+    "kilos_two_days_ago": 5,
+    "more_than_previous_day": 5,
+    "kilos_yesterday": 10,
+    "multiplier_today": 2,
+    "kilos_today": 20,
+    "total_kilos_three_days": 35,
+    "charge_per_kilo": 2,
+    "total_earnings": 70,
+    "answer": 20
+  },
+  "correct_value": 70,
+  "flawed_value": 20,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "kilos_yesterday",
+      "question_inputs": [
+        "kilos_two_days_ago",
+        "more_than_previous_day"
+      ],
+      "solution_line_template": "Yesterday, his shop washed {kilos_two_days_ago} + {more_than_previous_day} = <<{kilos_two_days_ago}+{more_than_previous_day}={kilos_yesterday}>>{kilos_yesterday} kilos of laundry."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "kilos_today",
+      "question_inputs": [
+        "multiplier_today"
+      ],
+      "solution_line_template": "Today, it washed {multiplier_today} x {kilos_yesterday} = <<{multiplier_today}*{kilos_yesterday}={kilos_today}>>{kilos_today} kilos of laundry."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_kilos_three_days",
+      "question_inputs": [],
+      "solution_line_template": "Thus, Oliver's shop washed a total of {kilos_two_days_ago} + {kilos_yesterday} + {kilos_today} = <<{kilos_two_days_ago}+{kilos_yesterday}+{kilos_today}={total_kilos_three_days}>>{total_kilos_three_days} kilos of laundries for three days."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_earnings",
+      "question_inputs": [
+        "charge_per_kilo"
+      ],
+      "solution_line_template": "Therefore, his shop earned {total_kilos_three_days} x ${charge_per_kilo} = $<<{total_kilos_three_days}*{charge_per_kilo}={total_earnings}>>{total_earnings} for three days."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Yesterday, his shop washed 5 + 5 = <<5+5=10>>10 kilos of laundry.",
+    "L2": "Today, it washed 2 x 10 = <<2*10=20>>20 kilos of laundry.",
+    "FA": "#### 20"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'kilos_today' (value: 20) was reported instead of 'total_earnings' (value: 70).",
+  "repro_seed": 1505786839547095769,
+  "model_name": "google_gemini-2.5-flash"
+}

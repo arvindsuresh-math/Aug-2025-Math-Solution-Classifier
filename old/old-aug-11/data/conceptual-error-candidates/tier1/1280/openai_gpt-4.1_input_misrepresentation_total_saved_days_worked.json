@@ -1,0 +1,63 @@
+{
+  "index": 1280,
+  "original_solution_mapping": {
+    "FA": "#### 240",
+    "L1": "Honey earned 20 x $80 = $<<20*80=1600>>1600 for 20 days of work.",
+    "L2": "Therefore, Honey saved $1600 - $1360 = $<<1600-1360=240>>240 in 20 days."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1280.\n    Returns: the amount Honey saved in 20 days.\n    \"\"\"\n    # L1\n    days_worked = 20 # 20 days of work\n    daily_earnings = 80 # earned $80 a day\n    total_earned = days_worked * daily_earnings\n\n    # L2\n    total_spent = 1360 # she spent $1360\n    total_saved = total_earned - total_spent\n\n    # FA\n    answer = total_saved\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_saved",
+    "operand_to_replace": "total_spent",
+    "replacement_variable": "days_worked"
+  },
+  "correct_trace": {
+    "days_worked": 20,
+    "daily_earnings": 80,
+    "total_earned": 1600,
+    "total_spent": 1360,
+    "total_saved": 240,
+    "answer": 240
+  },
+  "flawed_trace": {
+    "days_worked": 20,
+    "daily_earnings": 80,
+    "total_earned": 1600,
+    "total_spent": 1360,
+    "total_saved": 1580,
+    "answer": 1580
+  },
+  "correct_value": 240,
+  "flawed_value": 1580,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "days_worked",
+        "daily_earnings"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_earned",
+      "solution_line_template": "Honey earned {days_worked} x ${daily_earnings} = $<<{days_worked}*{daily_earnings}={total_earned}>>{total_earned} for 20 days of work."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "total_spent"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_saved",
+      "solution_line_template": "Therefore, Honey saved ${total_earned} - ${total_spent} = $<<{total_earned}-{total_spent}={total_saved}>>{total_saved} in 20 days."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Honey earned 20 x $80 = $<<20*80=1600>>1600 for 20 days of work.",
+    "L2": "Therefore, Honey saved $1600 - $20 = $<<1600-20=1580>>1580 in 20 days.",
+    "FA": "#### 1580"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'days_worked' (20) was used instead of 'total_spent' (1360).",
+  "repro_seed": -5832502278406502475,
+  "model_name": "openai_gpt-4.1"
+}

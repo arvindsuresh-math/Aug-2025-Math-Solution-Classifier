@@ -1,0 +1,141 @@
+{
+  "index": 3822,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "To calculate Alec's goal number of votes, we need to know that 60 students / 4 = <<60/4=15>>15 students is equal to one-quarter of the class students.",
+    "L2": "Alec's goal is therefore 15 students * 3 quarters = <<15*3=45>>45 votes.",
+    "L3": "Half of the class said they will vote for him, so there are already 60 students / 2 = <<60/2=30>>30 votes.",
+    "L4": "Another 5 students are thinking about voting for him which leaves a total so far of 30 + 5 = <<30+5=35>>35 votes.",
+    "L5": "This means there are 60 students - 35 voting for Alec = <<60-35=25>>25 students not voting for Alec.",
+    "L6": "A fifth of these decided to vote, so this is a further 25 students / 5 = <<25/5=5>>5 votes.",
+    "L7": "Alec is therefore receiving a total of 35 + 5 = <<35+5=40>>40 votes.",
+    "L8": "So he has missed his goal by 45 goal votes - 40 actual votes = <<45-40=5>>5 votes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3822.\n    Returns: the number of additional votes Alec needs to reach his goal.\n    \"\"\"\n    # L1\n    total_students = 60 # Alec's class has 60 students\n    goal_denominator = 4 # three-quarters of the class\n    one_quarter_of_class = total_students / goal_denominator\n\n    # L2\n    goal_numerator = 3 # three-quarters of the class\n    goal_votes = one_quarter_of_class * goal_numerator\n\n    # L3\n    initial_committed_denominator = 2 # Half of the class\n    initial_committed_votes = total_students / initial_committed_denominator\n\n    # L4\n    thinking_about_it = 5 # only 5 have said they are thinking about voting for him\n    votes_after_thinking = initial_committed_votes + thinking_about_it\n\n    # L5\n    students_not_voting_for_alec = total_students - votes_after_thinking\n\n    # L6\n    converted_denominator = 5 # a fifth of these students\n    newly_converted_votes = students_not_voting_for_alec / converted_denominator\n\n    # L7\n    total_actual_votes = votes_after_thinking + newly_converted_votes\n\n    # L8\n    votes_still_needed = goal_votes - total_actual_votes\n\n    # FA\n    answer = votes_still_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "goal_votes",
+    "operand_to_replace": "goal_numerator",
+    "replacement_variable": "total_students"
+  },
+  "correct_trace": {
+    "total_students": 60,
+    "goal_denominator": 4,
+    "one_quarter_of_class": 15.0,
+    "goal_numerator": 3,
+    "goal_votes": 45.0,
+    "initial_committed_denominator": 2,
+    "initial_committed_votes": 30.0,
+    "thinking_about_it": 5,
+    "votes_after_thinking": 35.0,
+    "students_not_voting_for_alec": 25.0,
+    "converted_denominator": 5,
+    "newly_converted_votes": 5.0,
+    "total_actual_votes": 40.0,
+    "votes_still_needed": 5.0,
+    "answer": 5.0
+  },
+  "flawed_trace": {
+    "total_students": 60,
+    "goal_denominator": 4,
+    "one_quarter_of_class": 15.0,
+    "goal_numerator": 3,
+    "goal_votes": 900.0,
+    "initial_committed_denominator": 2,
+    "initial_committed_votes": 30.0,
+    "thinking_about_it": 5,
+    "votes_after_thinking": 35.0,
+    "students_not_voting_for_alec": 25.0,
+    "converted_denominator": 5,
+    "newly_converted_votes": 5.0,
+    "total_actual_votes": 40.0,
+    "votes_still_needed": 860.0,
+    "answer": 860.0
+  },
+  "correct_value": 45.0,
+  "flawed_value": 900.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "one_quarter_of_class",
+      "question_inputs": [
+        "total_students",
+        "goal_denominator"
+      ],
+      "solution_line_template": "To calculate Alec's goal number of votes, we need to know that {total_students} students / {goal_denominator} = <<{total_students}/{goal_denominator}={one_quarter_of_class}>>{one_quarter_of_class} students is equal to one-quarter of the class students."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "goal_votes",
+      "question_inputs": [
+        "goal_numerator"
+      ],
+      "solution_line_template": "Alec's goal is therefore {one_quarter_of_class} students * {goal_numerator} quarters = <<{one_quarter_of_class}*{goal_numerator}={goal_votes}>>{goal_votes} votes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "initial_committed_votes",
+      "question_inputs": [
+        "initial_committed_denominator"
+      ],
+      "solution_line_template": "Half of the class said they will vote for him, so there are already {total_students} students / {initial_committed_denominator} = <<{total_students}/{initial_committed_denominator}={initial_committed_votes}>>{initial_committed_votes} votes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "votes_after_thinking",
+      "question_inputs": [
+        "thinking_about_it"
+      ],
+      "solution_line_template": "Another {thinking_about_it} students are thinking about voting for him which leaves a total so far of {initial_committed_votes} + {thinking_about_it} = <<{initial_committed_votes}+{thinking_about_it}={votes_after_thinking}>>{votes_after_thinking} votes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "students_not_voting_for_alec",
+      "question_inputs": [],
+      "solution_line_template": "This means there are {total_students} students - {votes_after_thinking} voting for Alec = <<{total_students}-{votes_after_thinking}={students_not_voting_for_alec}>>{students_not_voting_for_alec} students not voting for Alec."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "newly_converted_votes",
+      "question_inputs": [
+        "converted_denominator"
+      ],
+      "solution_line_template": "A fifth of these decided to vote, so this is a further {students_not_voting_for_alec} students / {converted_denominator} = <<{students_not_voting_for_alec}/{converted_denominator}={newly_converted_votes}>>{newly_converted_votes} votes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "total_actual_votes",
+      "question_inputs": [],
+      "solution_line_template": "Alec is therefore receiving a total of {votes_after_thinking} + {newly_converted_votes} = <<{votes_after_thinking}+{newly_converted_votes}={total_actual_votes}>>{total_actual_votes} votes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L8",
+      "output_variable": "votes_still_needed",
+      "question_inputs": [],
+      "solution_line_template": "So he has missed his goal by {goal_votes} goal votes - {total_actual_votes} actual votes = <<{goal_votes}-{total_actual_votes}={votes_still_needed}>>{votes_still_needed} votes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "To calculate Alec's goal number of votes, we need to know that 60 students / 4 = <<60/4=15>>15 students is equal to one-quarter of the class students.",
+    "L2": "Alec's goal is therefore 15 students * 60 quarters = <<15*60=900>>900 votes.",
+    "L3": "Half of the class said they will vote for him, so there are already 60 students / 2 = <<60/2=30>>30 votes.",
+    "L4": "Another 5 students are thinking about voting for him which leaves a total so far of 30 + 5 = <<30+5=35>>35 votes.",
+    "L5": "This means there are 60 students - 35 voting for Alec = <<60-35=25>>25 students not voting for Alec.",
+    "L6": "A fifth of these decided to vote, so this is a further 25 students / 5 = <<25/5=5>>5 votes.",
+    "L7": "Alec is therefore receiving a total of 35 + 5 = <<35+5=40>>40 votes.",
+    "L8": "So he has missed his goal by 900 goal votes - 40 actual votes = <<900-40=860>>860 votes.",
+    "FA": "#### 860"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_students' (60) was used instead of 'goal_numerator' (3).",
+  "repro_seed": -8726491531162627321,
+  "model_name": "google_gemini-2.5-flash"
+}

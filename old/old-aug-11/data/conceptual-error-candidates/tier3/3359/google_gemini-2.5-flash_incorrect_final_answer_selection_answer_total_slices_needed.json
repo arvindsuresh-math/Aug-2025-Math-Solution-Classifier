@@ -1,0 +1,76 @@
+{
+  "index": 3359,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "They need 36 slices because 3 x 12 = <<3*12=36>>36",
+    "L2": "After ordering the small, they need 28 slices because 36 -8 = <<28=28>>28",
+    "L3": "They need 2 large pizzas because 28 / 14 = <<28/14=2>>2"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3359.\n    Returns: the number of large pizzas needed.\n    \"\"\"\n    # L1\n    num_people = 3 # Ben has two brothers\n    slices_per_person = 12 # each eat 12 slices of pizza\n    total_slices_needed = num_people * slices_per_person\n\n    # L2\n    slices_in_small_pizza = 8 # small pizzas have 8\n    remaining_slices_needed = total_slices_needed - slices_in_small_pizza\n\n    # L3\n    slices_in_large_pizza = 14 # large pizzas have 14 slices\n    num_large_pizzas = remaining_slices_needed / slices_in_large_pizza\n\n    # FA\n    answer = num_large_pizzas\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "num_large_pizzas",
+    "replacement_variable": "total_slices_needed"
+  },
+  "correct_trace": {
+    "num_people": 3,
+    "slices_per_person": 12,
+    "total_slices_needed": 36,
+    "slices_in_small_pizza": 8,
+    "remaining_slices_needed": 28,
+    "slices_in_large_pizza": 14,
+    "num_large_pizzas": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "num_people": 3,
+    "slices_per_person": 12,
+    "total_slices_needed": 36,
+    "slices_in_small_pizza": 8,
+    "remaining_slices_needed": 28,
+    "slices_in_large_pizza": 14,
+    "num_large_pizzas": 2.0,
+    "answer": 36
+  },
+  "correct_value": 2.0,
+  "flawed_value": 36,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_slices_needed",
+      "question_inputs": [
+        "num_people",
+        "slices_per_person"
+      ],
+      "solution_line_template": "They need {total_slices_needed} slices because {num_people} x {slices_per_person} = <<{num_people}*{slices_per_person}={total_slices_needed}>>{total_slices_needed}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "remaining_slices_needed",
+      "question_inputs": [
+        "slices_in_small_pizza"
+      ],
+      "solution_line_template": "After ordering the small, they need {remaining_slices_needed} slices because {total_slices_needed} -{slices_in_small_pizza} = <<{remaining_slices_needed}={remaining_slices_needed}>>{remaining_slices_needed}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_large_pizzas",
+      "question_inputs": [
+        "slices_in_large_pizza"
+      ],
+      "solution_line_template": "They need {num_large_pizzas} large pizzas because {remaining_slices_needed} / {slices_in_large_pizza} = <<{remaining_slices_needed}/{slices_in_large_pizza}={num_large_pizzas}>>{num_large_pizzas}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "They need 36 slices because 3 x 12 = <<3*12=36>>36",
+    "FA": "#### 36"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'total_slices_needed' (value: 36) was reported instead of 'num_large_pizzas' (value: 2.0).",
+  "repro_seed": -1740513784454503115,
+  "model_name": "google_gemini-2.5-flash"
+}

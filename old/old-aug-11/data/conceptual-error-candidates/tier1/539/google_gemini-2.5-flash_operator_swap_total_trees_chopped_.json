@@ -1,0 +1,63 @@
+{
+  "index": 539,
+  "original_solution_mapping": {
+    "FA": "#### 1500",
+    "L1": "The company has chopped down a total of 200 + 300 = <<200+300=500>>500 trees throughout the year.",
+    "L2": "They plant 3 trees for every tree they chop so they need to plant 500 trees * 3 = <<500*3=1500>>1500 trees."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 539.\n    Returns: the number of additional trees the company needs to plant.\n    \"\"\"\n    # L1\n    trees_chopped_first_half = 200 # 200 trees in the first half of the year\n    trees_chopped_second_half = 300 # 300 more trees in the second half of the year\n    total_trees_chopped = trees_chopped_first_half + trees_chopped_second_half\n\n    # L2\n    plant_multiplier = 3 # plant three more\n    trees_to_plant = total_trees_chopped * plant_multiplier\n\n    # FA\n    answer = trees_to_plant\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_trees_chopped",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x30bf23b90>"
+  },
+  "correct_trace": {
+    "trees_chopped_first_half": 200,
+    "trees_chopped_second_half": 300,
+    "total_trees_chopped": 500,
+    "plant_multiplier": 3,
+    "trees_to_plant": 1500,
+    "answer": 1500
+  },
+  "flawed_trace": {
+    "trees_chopped_first_half": 200,
+    "trees_chopped_second_half": 300,
+    "total_trees_chopped": 60000,
+    "plant_multiplier": 3,
+    "trees_to_plant": 180000,
+    "answer": 180000
+  },
+  "correct_value": 500,
+  "flawed_value": 60000,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "trees_chopped_first_half",
+        "trees_chopped_second_half"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_trees_chopped",
+      "solution_line_template": "The company has chopped down a total of {trees_chopped_first_half} + {trees_chopped_second_half} = <<{trees_chopped_first_half}+{trees_chopped_second_half}={total_trees_chopped}>>{total_trees_chopped} trees throughout the year."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "plant_multiplier"
+      ],
+      "WK_inputs": [],
+      "output_variable": "trees_to_plant",
+      "solution_line_template": "They plant {plant_multiplier} trees for every tree they chop so they need to plant {total_trees_chopped} trees * {plant_multiplier} = <<{total_trees_chopped}*{plant_multiplier}={trees_to_plant}>>{trees_to_plant} trees."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The company has chopped down a total of 200 + 300 = <<200+300=60000>>60000 trees throughout the year.",
+    "L2": "They plant 3 trees for every tree they chop so they need to plant 60000 trees * 3 = <<60000*3=180000>>180000 trees.",
+    "FA": "#### 180000"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": -4941265378301987865,
+  "model_name": "google_gemini-2.5-flash"
+}

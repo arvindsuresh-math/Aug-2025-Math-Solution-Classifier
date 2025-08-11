@@ -1,0 +1,63 @@
+{
+  "index": 3428,
+  "original_solution_mapping": {
+    "FA": "#### 84",
+    "L1": "Jorge spent 24 tickets * $7 per ticket = $<<24*7=168>>168 total.",
+    "L2": "After applying the discount, Jorge spent $168 * 0.50 = $<<168*0.50=84>>84."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3428.\n    Returns: the total amount Jorge spent on tickets.\n    \"\"\"\n    # L1\n    num_tickets = 24 # 24 tickets\n    price_per_ticket = 7 # $7 each\n    total_cost_before_discount = num_tickets * price_per_ticket\n\n    # L2\n    discount_factor = 0.50 # discount of 50%\n    final_cost = total_cost_before_discount * discount_factor\n\n    # FA\n    answer = final_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "final_cost",
+    "operand_to_replace": "discount_factor",
+    "replacement_variable": "num_tickets"
+  },
+  "correct_trace": {
+    "num_tickets": 24,
+    "price_per_ticket": 7,
+    "total_cost_before_discount": 168,
+    "discount_factor": 0.5,
+    "final_cost": 84.0,
+    "answer": 84.0
+  },
+  "flawed_trace": {
+    "num_tickets": 24,
+    "price_per_ticket": 7,
+    "total_cost_before_discount": 168,
+    "discount_factor": 0.5,
+    "final_cost": 4032,
+    "answer": 4032
+  },
+  "correct_value": 84.0,
+  "flawed_value": 4032,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_cost_before_discount",
+      "question_inputs": [
+        "num_tickets",
+        "price_per_ticket"
+      ],
+      "solution_line_template": "Jorge spent {num_tickets} tickets * ${price_per_ticket} per ticket = $<<{num_tickets}*{price_per_ticket}={total_cost_before_discount}>>{total_cost_before_discount} total."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "final_cost",
+      "question_inputs": [
+        "discount_factor"
+      ],
+      "solution_line_template": "After applying the discount, Jorge spent ${total_cost_before_discount} * {discount_factor} = $<<{total_cost_before_discount}*{discount_factor}={final_cost}>>{final_cost}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jorge spent 24 tickets * $7 per ticket = $<<24*7=168>>168 total.",
+    "L2": "After applying the discount, Jorge spent $168 * 24 = $<<168*24=4032>>4032.",
+    "FA": "#### 4032"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'num_tickets' (24) was used instead of 'discount_factor' (0.5).",
+  "repro_seed": -6516696265145028330,
+  "model_name": "google_gemini-2.5-flash"
+}

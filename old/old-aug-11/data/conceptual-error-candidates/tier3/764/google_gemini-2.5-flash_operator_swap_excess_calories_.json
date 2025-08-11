@@ -1,0 +1,66 @@
+{
+  "index": 764,
+  "original_solution_mapping": {
+    "FA": "#### 5",
+    "L1": "A dietitian ate three-fourths of her lunch during her lunch break, containing 3/4*40=<<3/4*40=30>>30 calories.",
+    "L2": "If the recommended calorie intake by the FDA is 25, the dietitian ate 30-25=5 more calories than the recommended amount."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 764.\n    Returns: the number of calories over the recommended amount.\n    \"\"\"\n    # L1\n    lunch_fraction_numerator = 3 # three-fourths of her lunch\n    lunch_fraction_denominator = 4 # three-fourths of her lunch\n    total_lunch_calories = 40 # total amount of food she had prepared for lunch had 40 calories\n    calories_eaten = Fraction(lunch_fraction_numerator, lunch_fraction_denominator) * total_lunch_calories\n\n    # L2\n    recommended_calories = 25 # recommended calorie intake by the FDA is 25\n    excess_calories = calories_eaten - recommended_calories\n\n    # FA\n    answer = excess_calories\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "excess_calories",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x30b44b110>"
+  },
+  "correct_trace": {
+    "lunch_fraction_numerator": 3,
+    "lunch_fraction_denominator": 4,
+    "total_lunch_calories": 40,
+    "calories_eaten": "30",
+    "recommended_calories": 25,
+    "excess_calories": "5",
+    "answer": "5"
+  },
+  "flawed_trace": {
+    "lunch_fraction_numerator": 3,
+    "lunch_fraction_denominator": 4,
+    "total_lunch_calories": 40,
+    "calories_eaten": "30",
+    "recommended_calories": 25,
+    "excess_calories": "6/5",
+    "answer": "6/5"
+  },
+  "correct_value": "5",
+  "flawed_value": "6/5",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "calories_eaten",
+      "question_inputs": [
+        "lunch_fraction_numerator",
+        "lunch_fraction_denominator",
+        "total_lunch_calories"
+      ],
+      "solution_line_template": "A dietitian ate {lunch_fraction_numerator}/{lunch_fraction_denominator}*{total_lunch_calories}=<<{lunch_fraction_numerator}/{lunch_fraction_denominator}*{total_lunch_calories}={calories_eaten}>>{calories_eaten} calories."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "excess_calories",
+      "question_inputs": [
+        "recommended_calories"
+      ],
+      "solution_line_template": "If the recommended calorie intake by the FDA is {recommended_calories}, the dietitian ate {calories_eaten}-{recommended_calories}={excess_calories} more calories than the recommended amount."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "A dietitian ate 3/4*40=<<3/4*40=30>>30 calories.",
+    "L2": "If the recommended calorie intake by the FDA is 25, the dietitian ate 30-25=6/5 more calories than the recommended amount.",
+    "FA": "#### 6/5"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": 7690676307594615273,
+  "model_name": "google_gemini-2.5-flash"
+}

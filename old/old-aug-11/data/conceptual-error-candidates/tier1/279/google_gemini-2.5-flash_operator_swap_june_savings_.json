@@ -1,0 +1,88 @@
+{
+  "index": 279,
+  "original_solution_mapping": {
+    "FA": "#### 126",
+    "L1": "Robi will save $8 x 2 = $<<8*2=16>>16 in April.",
+    "L2": "He will save $16 x 2 = $<<16*2=32>>32 in May.",
+    "L3": "He will save $32 x 2 = $<<32*2=64>>64 in June.",
+    "L4": "Hence, his total savings after 6 months will be $2 + $4 + $8 + $16 + $32 + $64 = $<<2+4+8+16+32+64=126>>126."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 279.\n    Returns: Robi's total savings after 6 months.\n    \"\"\"\n    # L1\n    jan_savings = 2 # $2 in January\n    feb_savings = 4 # $4 in February\n    mar_savings = 8 # $8 in March\n    multiplier = 2 # WK\n    april_savings = mar_savings * multiplier\n\n    # L2\n    may_savings = april_savings * multiplier\n\n    # L3\n    june_savings = may_savings * multiplier\n\n    # L4\n    total_savings = jan_savings + feb_savings + mar_savings + april_savings + may_savings + june_savings\n\n    # FA\n    answer = total_savings\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "june_savings",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30c2e0a90>"
+  },
+  "correct_trace": {
+    "jan_savings": 2,
+    "feb_savings": 4,
+    "mar_savings": 8,
+    "multiplier": 2,
+    "april_savings": 16,
+    "may_savings": 32,
+    "june_savings": 64,
+    "total_savings": 126,
+    "answer": 126
+  },
+  "flawed_trace": {
+    "jan_savings": 2,
+    "feb_savings": 4,
+    "mar_savings": 8,
+    "multiplier": 2,
+    "april_savings": 16,
+    "may_savings": 32,
+    "june_savings": 34,
+    "total_savings": 96,
+    "answer": 96
+  },
+  "correct_value": 64,
+  "flawed_value": 34,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "jan_savings",
+        "feb_savings",
+        "mar_savings"
+      ],
+      "WK_inputs": [
+        "multiplier"
+      ],
+      "output_variable": "april_savings",
+      "solution_line_template": "Robi will save ${mar_savings} x {multiplier} = $<<{mar_savings}*{multiplier}={april_savings}>>{april_savings} in April."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "may_savings",
+      "solution_line_template": "He will save ${april_savings} x {multiplier} = $<<{april_savings}*{multiplier}={may_savings}>>{may_savings} in May."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "june_savings",
+      "solution_line_template": "He will save ${may_savings} x {multiplier} = $<<{may_savings}*{multiplier}={june_savings}>>{june_savings} in June."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_savings",
+      "solution_line_template": "Hence, his total savings after 6 months will be ${jan_savings} + ${feb_savings} + ${mar_savings} + ${april_savings} + ${may_savings} + ${june_savings} = $<<{jan_savings}+{feb_savings}+{mar_savings}+{april_savings}+{may_savings}+{june_savings}={total_savings}>>{total_savings}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Robi will save $8 x 2 = $<<8*2=16>>16 in April.",
+    "L2": "He will save $16 x 2 = $<<16*2=32>>32 in May.",
+    "L3": "He will save $32 x 2 = $<<32*2=34>>34 in June.",
+    "L4": "Hence, his total savings after 6 months will be $2 + $4 + $8 + $16 + $32 + $34 = $<<2+4+8+16+32+34=96>>96.",
+    "FA": "#### 96"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 7466206187656270627,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,120 @@
+{
+  "index": 2317,
+  "original_solution_mapping": {
+    "FA": "#### 144",
+    "L1": "The twins ordered a cheeseburger each so 2*13.50 = $<<2*13.50=27.00>>27.00 for both cheeseburgers",
+    "L2": "Everyone ordered a dessert so 4*6 = $<<4*6=24.00>>24.00 for dessert",
+    "L3": "When you add all the meals together they spent 25.50+35.00+27.00+8.50+24.00 = $<<25.50+35.00+27.00+8.50+24.00=120.00>>120.00",
+    "L4": "Zach's tip was 20% so .20*120.00 = $<<20*.01*120=24.00>>24.00",
+    "L5": "When you add up the meals $120.00 and Zach's tip of $24.00 then the total cost is 120.00 + 24.00 = $<<120+24.00=144.00>>144.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2317.\n    Returns: the final bill total.\n    \"\"\"\n    # L1\n    num_twins = 2 # twin boys\n    cheeseburger_cost_each = 13.50 # $13.50 each\n    total_cheeseburger_cost = num_twins * cheeseburger_cost_each\n\n    # L2\n    num_people = 4 # party for 4 people\n    dessert_cost_each = 6.00 # $6.00 each\n    total_dessert_cost = num_people * dessert_cost_each\n\n    # L3\n    mom_lobster_cost = 25.50 # lobster for $25.50\n    dad_steak_cost = 35.00 # steak for $35.00\n    appetizer_cost = 8.50 # appetizer that cost 8.50\n    subtotal_meals = mom_lobster_cost + dad_steak_cost + total_cheeseburger_cost + appetizer_cost + total_dessert_cost\n\n    # L4\n    tip_percent_num = 20 # 20% tip\n    tip_percent_decimal = 0.20 # from solution text: .20*120.00\n    percent_factor = 0.01 # WK\n    tip_amount = tip_percent_num * percent_factor * subtotal_meals\n\n    # L5\n    final_bill_total = subtotal_meals + tip_amount\n\n    # FA\n    answer = final_bill_total\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "tip_amount",
+    "operand_to_replace": "percent_factor",
+    "replacement_variable": "subtotal_meals"
+  },
+  "correct_trace": {
+    "num_twins": 2,
+    "cheeseburger_cost_each": 13.5,
+    "total_cheeseburger_cost": 27.0,
+    "num_people": 4,
+    "dessert_cost_each": 6.0,
+    "total_dessert_cost": 24.0,
+    "mom_lobster_cost": 25.5,
+    "dad_steak_cost": 35.0,
+    "appetizer_cost": 8.5,
+    "subtotal_meals": 120.0,
+    "tip_percent_num": 20,
+    "tip_percent_decimal": 0.2,
+    "percent_factor": 0.01,
+    "tip_amount": 24.0,
+    "final_bill_total": 144.0,
+    "answer": 144.0
+  },
+  "flawed_trace": {
+    "num_twins": 2,
+    "cheeseburger_cost_each": 13.5,
+    "total_cheeseburger_cost": 27.0,
+    "num_people": 4,
+    "dessert_cost_each": 6.0,
+    "total_dessert_cost": 24.0,
+    "mom_lobster_cost": 25.5,
+    "dad_steak_cost": 35.0,
+    "appetizer_cost": 8.5,
+    "subtotal_meals": 120.0,
+    "tip_percent_num": 20,
+    "tip_percent_decimal": 0.2,
+    "percent_factor": 0.01,
+    "tip_amount": 288000.0,
+    "final_bill_total": 288120.0,
+    "answer": 288120.0
+  },
+  "correct_value": 24.0,
+  "flawed_value": 288000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_cheeseburger_cost",
+      "question_inputs": [
+        "num_twins",
+        "cheeseburger_cost_each"
+      ],
+      "solution_line_template": "The twins ordered a cheeseburger each so {num_twins}*{cheeseburger_cost_each} = $<<{num_twins}*{cheeseburger_cost_each}={total_cheeseburger_cost}>>{total_cheeseburger_cost} for both cheeseburgers"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_dessert_cost",
+      "question_inputs": [
+        "num_people",
+        "dessert_cost_each"
+      ],
+      "solution_line_template": "Everyone ordered a dessert so {num_people}*{dessert_cost_each} = $<<{num_people}*{dessert_cost_each}={total_dessert_cost}>>{total_dessert_cost} for dessert"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "subtotal_meals",
+      "question_inputs": [
+        "mom_lobster_cost",
+        "dad_steak_cost",
+        "appetizer_cost"
+      ],
+      "solution_line_template": "When you add all the meals together they spent {mom_lobster_cost}+{dad_steak_cost}+{total_cheeseburger_cost}+{appetizer_cost}+{total_dessert_cost} = $<<{mom_lobster_cost}+{dad_steak_cost}+{total_cheeseburger_cost}+{appetizer_cost}+{total_dessert_cost}={subtotal_meals}>>{subtotal_meals}"
+    },
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L4",
+      "output_variable": "tip_amount",
+      "question_inputs": [
+        "tip_percent_num",
+        "tip_percent_decimal"
+      ],
+      "solution_line_template": "Zach's tip was {tip_percent_num}% so {tip_percent_decimal}*{subtotal_meals} = $<<{tip_percent_num}*{percent_factor}*{subtotal_meals}={tip_amount}>>{tip_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "final_bill_total",
+      "question_inputs": [],
+      "solution_line_template": "When you add up the meals ${subtotal_meals} and Zach's tip of ${tip_amount} then the total cost is {subtotal_meals} + {tip_amount} = $<<{subtotal_meals}+{tip_amount}={final_bill_total}>>{final_bill_total}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The twins ordered a cheeseburger each so 2*13.5 = $<<2*13.5=27>>27 for both cheeseburgers",
+    "L2": "Everyone ordered a dessert so 4*6 = $<<4*6=24>>24 for dessert",
+    "L3": "When you add all the meals together they spent 25.5+35+27+8.5+24 = $<<25.5+35+27+8.5+24=120>>120",
+    "L4": "Zach's tip was 20% so 0.2*120 = $<<20*120*120=288000>>288000",
+    "L5": "When you add up the meals $120 and Zach's tip of $288000 then the total cost is 120 + 288000 = $<<120+288000=288120>>288120",
+    "FA": "#### 288120"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'subtotal_meals' (120.0) was used instead of 'percent_factor' (0.01).",
+  "repro_seed": -210750866377664067,
+  "model_name": "google_gemini-2.5-flash"
+}

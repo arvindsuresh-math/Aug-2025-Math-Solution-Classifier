@@ -1,0 +1,89 @@
+{
+  "index": 5202,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "The students buy 2*5=<<2*5=10>>10 bags of chips.",
+    "L2": "10 bags of chips cost 10*0.5=<<10*0.5=5>>5 dollars.",
+    "L3": "5 candy bars cost 5*2=<<5*2=10>>10 dollars.",
+    "L4": "They will need 10+5=<<10+5=15>>15 dollars."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5202.\n    Returns: the total money needed by the students.\n    \"\"\"\n    # L1\n    bags_per_student = 2 # 2 bags of chips\n    num_students = 5 # 5 students\n    total_bags_of_chips = bags_per_student * num_students\n\n    # L2\n    cost_per_chip_bag = 0.5 # chips for $.50 each\n    total_chips_cost = total_bags_of_chips * cost_per_chip_bag\n\n    # L3\n    cost_per_candy_bar = 2 # candy bars for $2 each\n    total_candy_bars_cost = num_students * cost_per_candy_bar\n\n    # L4\n    total_money_needed = total_candy_bars_cost + total_chips_cost\n\n    # FA\n    answer = total_money_needed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_candy_bars_cost",
+    "operand_to_replace": "cost_per_candy_bar",
+    "replacement_variable": "num_students"
+  },
+  "correct_trace": {
+    "bags_per_student": 2,
+    "num_students": 5,
+    "total_bags_of_chips": 10,
+    "cost_per_chip_bag": 0.5,
+    "total_chips_cost": 5.0,
+    "cost_per_candy_bar": 2,
+    "total_candy_bars_cost": 10,
+    "total_money_needed": 15.0,
+    "answer": 15.0
+  },
+  "flawed_trace": {
+    "bags_per_student": 2,
+    "num_students": 5,
+    "total_bags_of_chips": 10,
+    "cost_per_chip_bag": 0.5,
+    "total_chips_cost": 5.0,
+    "cost_per_candy_bar": 2,
+    "total_candy_bars_cost": 25,
+    "total_money_needed": 30.0,
+    "answer": 30.0
+  },
+  "correct_value": 10,
+  "flawed_value": 25,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_bags_of_chips",
+      "question_inputs": [
+        "bags_per_student",
+        "num_students"
+      ],
+      "solution_line_template": "The students buy {bags_per_student}*{num_students}=<<{bags_per_student}*{num_students}={total_bags_of_chips}>>{total_bags_of_chips} bags of chips."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_chips_cost",
+      "question_inputs": [
+        "cost_per_chip_bag"
+      ],
+      "solution_line_template": "{total_bags_of_chips} bags of chips cost {total_bags_of_chips}*{cost_per_chip_bag}=<<{total_bags_of_chips}*{cost_per_chip_bag}={total_chips_cost}>>{total_chips_cost} dollars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_candy_bars_cost",
+      "question_inputs": [
+        "cost_per_candy_bar"
+      ],
+      "solution_line_template": "{num_students} candy bars cost {num_students}*{cost_per_candy_bar}=<<{num_students}*{cost_per_candy_bar}={total_candy_bars_cost}>>{total_candy_bars_cost} dollars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_money_needed",
+      "question_inputs": [],
+      "solution_line_template": "They will need {total_candy_bars_cost}+{total_chips_cost}=<<{total_candy_bars_cost}+{total_chips_cost}={total_money_needed}>>{total_money_needed} dollars."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The students buy 2*5=<<2*5=10>>10 bags of chips.",
+    "L2": "10 bags of chips cost 10*0.5=<<10*0.5=5>>5 dollars.",
+    "L3": "5 candy bars cost 5*5=<<5*5=25>>25 dollars.",
+    "L4": "They will need 25+5=<<25+5=30>>30 dollars.",
+    "FA": "#### 30"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'num_students' (5) was used instead of 'cost_per_candy_bar' (2).",
+  "repro_seed": 66680699555453938,
+  "model_name": "google_gemini-2.5-flash"
+}

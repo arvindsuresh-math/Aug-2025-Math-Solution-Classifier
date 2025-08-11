@@ -1,0 +1,100 @@
+{
+  "index": 3303,
+  "original_solution_mapping": {
+    "FA": "#### 196",
+    "L1": "If she bought a 500 pages book and wrote on 150 pages, the number of empty pages remaining is 500-150 = <<500-150=350>>350 pages.",
+    "L2": "She then wrote on 30% of the remaining empty pages on the second week, a total of 30/100*350 = <<30/100*350=105>>105 pages",
+    "L3": "The number of remaining empty pages is 350-105 = <<350-105=245>>245 pages.",
+    "L4": "When she spilled coffee on the remaining empty pages, the number of damaged pages was 20/100*245 = <<20/100*245=49>>49",
+    "L5": "The number of empty pages remaining that she could write on is 245-49 = <<245-49=196>>196 pages"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3303.\n    Returns: the total number of empty pages available for her to write on.\n    \"\"\"\n    # L1\n    total_pages = 500 # a 500 pages book\n    pages_written_week1 = 150 # wrote on 150 pages\n    empty_pages_after_week1 = total_pages - pages_written_week1\n\n    # L2\n    percentage_written_week2 = Fraction(30, 100) # 30% of the remaining pages\n    pages_written_week2 = percentage_written_week2 * empty_pages_after_week1\n\n    # L3\n    empty_pages_after_week2 = empty_pages_after_week1 - pages_written_week2\n\n    # L4\n    percentage_damaged = Fraction(20, 100) # damaged 20 percent of the empty pages\n    damaged_pages = percentage_damaged * empty_pages_after_week2\n\n    # L5\n    final_empty_pages = empty_pages_after_week2 - damaged_pages\n\n    # FA\n    answer = final_empty_pages\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "empty_pages_after_week2",
+    "operand_to_replace": "pages_written_week2",
+    "replacement_variable": "percentage_written_week2"
+  },
+  "correct_trace": {
+    "total_pages": 500,
+    "pages_written_week1": 150,
+    "empty_pages_after_week1": 350,
+    "percentage_written_week2": "3/10",
+    "pages_written_week2": "105",
+    "empty_pages_after_week2": "245",
+    "percentage_damaged": "1/5",
+    "damaged_pages": "49",
+    "final_empty_pages": "196",
+    "answer": "196"
+  },
+  "flawed_trace": {
+    "total_pages": 500,
+    "pages_written_week1": 150,
+    "empty_pages_after_week1": 350,
+    "percentage_written_week2": "3/10",
+    "pages_written_week2": "105",
+    "empty_pages_after_week2": "3497/10",
+    "percentage_damaged": "1/5",
+    "damaged_pages": "3497/50",
+    "final_empty_pages": "6994/25",
+    "answer": "6994/25"
+  },
+  "correct_value": "245",
+  "flawed_value": "3497/10",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "empty_pages_after_week1",
+      "question_inputs": [
+        "total_pages",
+        "pages_written_week1"
+      ],
+      "solution_line_template": "If she bought a {total_pages} pages book and wrote on {pages_written_week1} pages, the number of empty pages remaining is {total_pages}-{pages_written_week1} = <<{total_pages}-{pages_written_week1}={empty_pages_after_week1}>>{empty_pages_after_week1} pages."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "pages_written_week2",
+      "question_inputs": [
+        "percentage_written_week2"
+      ],
+      "solution_line_template": "She then wrote on {percentage_written_week2}*{empty_pages_after_week1} = <<{percentage_written_week2}*{empty_pages_after_week1}={pages_written_week2}>>{pages_written_week2} pages"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "empty_pages_after_week2",
+      "question_inputs": [],
+      "solution_line_template": "The number of remaining empty pages is {empty_pages_after_week1}-{pages_written_week2} = <<{empty_pages_after_week1}-{pages_written_week2}={empty_pages_after_week2}>>{empty_pages_after_week2} pages."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "damaged_pages",
+      "question_inputs": [
+        "percentage_damaged"
+      ],
+      "solution_line_template": "When she spilled coffee on the remaining empty pages, the number of damaged pages was {percentage_damaged}*{empty_pages_after_week2} = <<{percentage_damaged}*{empty_pages_after_week2}={damaged_pages}>>{damaged_pages}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "final_empty_pages",
+      "question_inputs": [],
+      "solution_line_template": "The number of empty pages remaining that she could write on is {empty_pages_after_week2}-{damaged_pages} = <<{empty_pages_after_week2}-{damaged_pages}={final_empty_pages}>>{final_empty_pages} pages"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If she bought a 500 pages book and wrote on 150 pages, the number of empty pages remaining is 500-150 = <<500-150=350>>350 pages.",
+    "L2": "She then wrote on 30/100*350 = <<30/100*350=105>>105 pages",
+    "L3": "The number of remaining empty pages is 350-30/100 = <<350-30/100=3497/10>>3497/10 pages.",
+    "L4": "When she spilled coffee on the remaining empty pages, the number of damaged pages was 20/100*3497/10 = <<20/100*3497/10=3497/50>>3497/50",
+    "L5": "The number of empty pages remaining that she could write on is 3497/10-3497/50 = <<3497/10-3497/50=6994/25>>6994/25 pages",
+    "FA": "#### 6994/25"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'percentage_written_week2' (value: 30/100) was used instead of 'pages_written_week2' (value: 105).",
+  "repro_seed": -3602698602571283393,
+  "model_name": "google_gemini-2.5-flash"
+}

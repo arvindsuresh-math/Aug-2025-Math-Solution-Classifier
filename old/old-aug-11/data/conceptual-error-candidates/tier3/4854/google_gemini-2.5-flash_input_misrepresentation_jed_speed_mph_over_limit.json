@@ -1,0 +1,63 @@
+{
+  "index": 4854,
+  "original_solution_mapping": {
+    "FA": "#### 66",
+    "L1": "First find how much Jed was above the speed limit: $256 fine / $16 for each mile per hour over = <<256/16=16>>16 miles per hour over.",
+    "L2": "Since the speed limit is 50 mph, this means Jed was driving 50 + 16 = <<50+16=66>>66 mph."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4854.\n    Returns: the speed Jed was traveling in miles per hour.\n    \"\"\"\n    # L1\n    total_fine = 256 # Jed was fined $256\n    fine_per_mph_over = 16 # $16 for each mile per hour\n    mph_over_limit = total_fine / fine_per_mph_over\n\n    # L2\n    posted_speed_limit = 50 # posted speed limit of 50 mph\n    jed_speed = posted_speed_limit + mph_over_limit\n\n    # FA\n    answer = jed_speed\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "jed_speed",
+    "operand_to_replace": "posted_speed_limit",
+    "replacement_variable": "mph_over_limit"
+  },
+  "correct_trace": {
+    "total_fine": 256,
+    "fine_per_mph_over": 16,
+    "mph_over_limit": 16.0,
+    "posted_speed_limit": 50,
+    "jed_speed": 66.0,
+    "answer": 66.0
+  },
+  "flawed_trace": {
+    "total_fine": 256,
+    "fine_per_mph_over": 16,
+    "mph_over_limit": 16.0,
+    "posted_speed_limit": 50,
+    "jed_speed": 32.0,
+    "answer": 32.0
+  },
+  "correct_value": 66.0,
+  "flawed_value": 32.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "mph_over_limit",
+      "question_inputs": [
+        "total_fine",
+        "fine_per_mph_over"
+      ],
+      "solution_line_template": "First find how much Jed was above the speed limit: ${total_fine} fine / ${fine_per_mph_over} for each mile per hour over = <<{total_fine}/{fine_per_mph_over}={mph_over_limit}>>{mph_over_limit} miles per hour over."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "jed_speed",
+      "question_inputs": [
+        "posted_speed_limit"
+      ],
+      "solution_line_template": "Since the speed limit is {posted_speed_limit} mph, this means Jed was driving {posted_speed_limit} + {mph_over_limit} = <<{posted_speed_limit}+{mph_over_limit}={jed_speed}>>{jed_speed} mph."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how much Jed was above the speed limit: $256 fine / $16 for each mile per hour over = <<256/16=16>>16 miles per hour over.",
+    "L2": "Since the speed limit is 16 mph, this means Jed was driving 16 + 16 = <<16+16=32>>32 mph.",
+    "FA": "#### 32"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'mph_over_limit' (16.0) was used instead of 'posted_speed_limit' (50).",
+  "repro_seed": -6711417568910343613,
+  "model_name": "google_gemini-2.5-flash"
+}

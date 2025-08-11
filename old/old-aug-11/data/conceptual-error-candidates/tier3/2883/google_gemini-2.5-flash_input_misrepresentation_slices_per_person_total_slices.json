@@ -1,0 +1,63 @@
+{
+  "index": 2883,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "There were 3 x 8 = <<3*8=24>>24 slices of pizza.",
+    "L2": "Since there were 6 persons, then each person ate 24/6 = <<24/6=4>>4 slices"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2883.\n    Returns: the number of slices each person ate.\n    \"\"\"\n    # L1\n    num_pizzas = 3 # ordered 3 pizzas\n    slices_per_pizza = 8 # Each pizza had 8 slices\n    total_slices = num_pizzas * slices_per_pizza\n\n    # L2\n    num_people = 6 # John with his five friends\n    slices_per_person = total_slices / num_people\n\n    # FA\n    answer = slices_per_person\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "slices_per_person",
+    "operand_to_replace": "num_people",
+    "replacement_variable": "total_slices"
+  },
+  "correct_trace": {
+    "num_pizzas": 3,
+    "slices_per_pizza": 8,
+    "total_slices": 24,
+    "num_people": 6,
+    "slices_per_person": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "num_pizzas": 3,
+    "slices_per_pizza": 8,
+    "total_slices": 24,
+    "num_people": 6,
+    "slices_per_person": 1.0,
+    "answer": 1.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_slices",
+      "question_inputs": [
+        "num_pizzas",
+        "slices_per_pizza"
+      ],
+      "solution_line_template": "There were {num_pizzas} x {slices_per_pizza} = <<{num_pizzas}*{slices_per_pizza}={total_slices}>>{total_slices} slices of pizza."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "slices_per_person",
+      "question_inputs": [
+        "num_people"
+      ],
+      "solution_line_template": "Since there were {num_people} persons, then each person ate {total_slices}/{num_people} = <<{total_slices}/{num_people}={slices_per_person}>>{slices_per_person} slices"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There were 3 x 8 = <<3*8=24>>24 slices of pizza.",
+    "L2": "Since there were 24 persons, then each person ate 24/24 = <<24/24=1>>1 slices",
+    "FA": "#### 1"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_slices' (24) was used instead of 'num_people' (6).",
+  "repro_seed": -9182853094347897611,
+  "model_name": "google_gemini-2.5-flash"
+}

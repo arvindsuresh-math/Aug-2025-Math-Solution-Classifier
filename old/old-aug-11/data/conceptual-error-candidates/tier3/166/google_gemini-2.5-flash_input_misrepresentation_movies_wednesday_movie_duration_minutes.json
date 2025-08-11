@@ -1,0 +1,93 @@
+{
+  "index": 166,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "4 hours and 30 minutes is the same as 4*60+30=<<4*60+30=270>>270 minutes.",
+    "L2": "At 90 minutes per movie, Grandpa could watch a total of 270/90=<<270/90=3>>3 entire movies in 4 hours and 30 minutes.",
+    "L3": "On Wednesday, he watched 2*3=<<2*3=6>>6 movies.",
+    "L4": "Thus, during these two days, he could have watched as many as 3+6=<<3+6=9>>9 movies."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 166.\n    Returns: the maximum number of full-length movies Grandpa could have watched during these two days.\n    \"\"\"\n    # L1\n    hours_tuesday = 4 # 4 hours and 30 minutes\n    minutes_tuesday = 30 # 4 hours and 30 minutes\n    minutes_per_hour = 60 # WK\n    total_minutes_tuesday = hours_tuesday * minutes_per_hour + minutes_tuesday\n\n    # L2\n    movie_duration_minutes = 90 # every movie lasts 90 minutes\n    movies_tuesday = total_minutes_tuesday / movie_duration_minutes\n\n    # L3\n    wednesday_multiplier = 2 # twice as many movies\n    movies_wednesday = wednesday_multiplier * movies_tuesday\n\n    # L4\n    total_movies = movies_tuesday + movies_wednesday\n\n    # FA\n    answer = total_movies\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "movies_wednesday",
+    "operand_to_replace": "wednesday_multiplier",
+    "replacement_variable": "movie_duration_minutes"
+  },
+  "correct_trace": {
+    "hours_tuesday": 4,
+    "minutes_tuesday": 30,
+    "minutes_per_hour": 60,
+    "total_minutes_tuesday": 270,
+    "movie_duration_minutes": 90,
+    "movies_tuesday": 3.0,
+    "wednesday_multiplier": 2,
+    "movies_wednesday": 6.0,
+    "total_movies": 9.0,
+    "answer": 9.0
+  },
+  "flawed_trace": {
+    "hours_tuesday": 4,
+    "minutes_tuesday": 30,
+    "minutes_per_hour": 60,
+    "total_minutes_tuesday": 270,
+    "movie_duration_minutes": 90,
+    "movies_tuesday": 3.0,
+    "wednesday_multiplier": 2,
+    "movies_wednesday": 270.0,
+    "total_movies": 273.0,
+    "answer": 273.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 270.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_minutes_tuesday",
+      "question_inputs": [
+        "hours_tuesday",
+        "minutes_tuesday"
+      ],
+      "solution_line_template": "4 hours and 30 minutes is the same as {hours_tuesday}*{minutes_per_hour}+{minutes_tuesday}=<<{hours_tuesday}*{minutes_per_hour}+{minutes_tuesday}={total_minutes_tuesday}>>{total_minutes_tuesday} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "movies_tuesday",
+      "question_inputs": [
+        "movie_duration_minutes"
+      ],
+      "solution_line_template": "At {movie_duration_minutes} minutes per movie, Grandpa could watch a total of {total_minutes_tuesday}/{movie_duration_minutes}=<<{total_minutes_tuesday}/{movie_duration_minutes}={movies_tuesday}>>{movies_tuesday} entire movies in 4 hours and 30 minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "movies_wednesday",
+      "question_inputs": [
+        "wednesday_multiplier"
+      ],
+      "solution_line_template": "On Wednesday, he watched {wednesday_multiplier}*{movies_tuesday}=<<{wednesday_multiplier}*{movies_tuesday}={movies_wednesday}>>{movies_wednesday} movies."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_movies",
+      "question_inputs": [],
+      "solution_line_template": "Thus, during these two days, he could have watched as many as {movies_tuesday}+{movies_wednesday}=<<{movies_tuesday}+{movies_wednesday}={total_movies}>>{total_movies} movies."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "4 hours and 30 minutes is the same as 4*60+30=<<4*60+30=270>>270 minutes.",
+    "L2": "At 90 minutes per movie, Grandpa could watch a total of 270/90=<<270/90=3>>3 entire movies in 4 hours and 30 minutes.",
+    "L3": "On Wednesday, he watched 90*3=<<90*3=270>>270 movies.",
+    "L4": "Thus, during these two days, he could have watched as many as 3+270=<<3+270=273>>273 movies.",
+    "FA": "#### 273"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'movie_duration_minutes' (90) was used instead of 'wednesday_multiplier' (2).",
+  "repro_seed": 2778026598753499874,
+  "model_name": "google_gemini-2.5-flash"
+}

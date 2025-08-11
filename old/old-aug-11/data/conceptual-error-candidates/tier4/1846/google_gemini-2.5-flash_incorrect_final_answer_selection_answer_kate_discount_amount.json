@@ -1,0 +1,101 @@
+{
+  "index": 1846,
+  "original_solution_mapping": {
+    "FA": "#### 53",
+    "L1": "5% of $30 is (5/100)*30 = $<<(5/100)*30=1.5>>1.5",
+    "L2": "The dollar amount of Bob's discount is $1.5 so he will pay $30-$1.5 = $28.5",
+    "L3": "2% of $25 is (2/100)*$25 = $<<2/100*25=0.5>>0.5",
+    "L4": "The dollar amount of Kate's discount is $0.5 so she will pay $25-$0.5 = $<<25-0.5=24.5>>24.5",
+    "L5": "Altogether they will pay $28.5+$24.5 = $<<28.5+24.5=53>>53"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1846.\n    Returns: the total amount Bob and Kate have to pay after discounts.\n    \"\"\"\n    # L1\n    bob_bill = 30 # $30 bill to Bob\n    bob_discount_percent_numerator = 5 # 5% for Bob\n    percent_denominator = 100 # WK\n    bob_discount_amount = Fraction(bob_discount_percent_numerator, percent_denominator) * bob_bill\n\n    # L2\n    bob_amount_to_pay = bob_bill - bob_discount_amount\n\n    # L3\n    kate_bill = 25 # $25 bill to Kate\n    kate_discount_percent_numerator = 2 # 2% for Kate\n    kate_discount_amount = Fraction(kate_discount_percent_numerator, percent_denominator) * kate_bill\n\n    # L4\n    kate_amount_to_pay = kate_bill - kate_discount_amount\n\n    # L5\n    total_amount_to_pay = bob_amount_to_pay + kate_amount_to_pay\n\n    # FA\n    answer = total_amount_to_pay\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_amount_to_pay",
+    "replacement_variable": "kate_discount_amount"
+  },
+  "correct_trace": {
+    "bob_bill": 30,
+    "bob_discount_percent_numerator": 5,
+    "percent_denominator": 100,
+    "bob_discount_amount": "3/2",
+    "bob_amount_to_pay": "57/2",
+    "kate_bill": 25,
+    "kate_discount_percent_numerator": 2,
+    "kate_discount_amount": "1/2",
+    "kate_amount_to_pay": "49/2",
+    "total_amount_to_pay": "53",
+    "answer": "53"
+  },
+  "flawed_trace": {
+    "bob_bill": 30,
+    "bob_discount_percent_numerator": 5,
+    "percent_denominator": 100,
+    "bob_discount_amount": "3/2",
+    "bob_amount_to_pay": "57/2",
+    "kate_bill": 25,
+    "kate_discount_percent_numerator": 2,
+    "kate_discount_amount": "1/2",
+    "kate_amount_to_pay": "49/2",
+    "total_amount_to_pay": "53",
+    "answer": "1/2"
+  },
+  "correct_value": "53",
+  "flawed_value": "1/2",
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_denominator"
+      ],
+      "line_number": "L1",
+      "output_variable": "bob_discount_amount",
+      "question_inputs": [
+        "bob_bill",
+        "bob_discount_percent_numerator"
+      ],
+      "solution_line_template": "5% of ${bob_bill} is ({bob_discount_percent_numerator}/{percent_denominator})*{bob_bill} = $<<({bob_discount_percent_numerator}/{percent_denominator})*{bob_bill}={bob_discount_amount}>>{bob_discount_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "bob_amount_to_pay",
+      "question_inputs": [],
+      "solution_line_template": "The dollar amount of Bob's discount is ${bob_discount_amount} so he will pay ${bob_bill}-${bob_discount_amount} = ${bob_amount_to_pay}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "kate_discount_amount",
+      "question_inputs": [
+        "kate_bill",
+        "kate_discount_percent_numerator"
+      ],
+      "solution_line_template": "2% of ${kate_bill} is ({kate_discount_percent_numerator}/{percent_denominator})*${kate_bill} = $<<{kate_discount_percent_numerator}/{percent_denominator}*{kate_bill}={kate_discount_amount}>>{kate_discount_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "kate_amount_to_pay",
+      "question_inputs": [],
+      "solution_line_template": "The dollar amount of Kate's discount is ${kate_discount_amount} so she will pay ${kate_bill}-${kate_discount_amount} = $<<{kate_bill}-{kate_discount_amount}={kate_amount_to_pay}>>{kate_amount_to_pay}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_amount_to_pay",
+      "question_inputs": [],
+      "solution_line_template": "Altogether they will pay ${bob_amount_to_pay}+${kate_amount_to_pay} = $<<{bob_amount_to_pay}+{kate_amount_to_pay}={total_amount_to_pay}>>{total_amount_to_pay}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "5% of $30 is (5/100)*30 = $<<(5/100)*30=3/2>>3/2",
+    "L2": "The dollar amount of Bob's discount is $3/2 so he will pay $30-$3/2 = $57/2",
+    "L3": "2% of $25 is (2/100)*$25 = $<<2/100*25=1/2>>1/2",
+    "FA": "#### 1/2"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'kate_discount_amount' (value: 1/2) was reported instead of 'total_amount_to_pay' (value: 53).",
+  "repro_seed": -398983507432616780,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,94 @@
+{
+  "index": 2530,
+  "original_solution_mapping": {
+    "FA": "#### 18",
+    "L1": "He family eats 36 donuts because 3 x 12 = <<3*12=36>>36",
+    "L2": "They need 72 ounces of coffee for these because 2 x 36 = <<2*36=72>>72",
+    "L3": "This is equal to six pots of coffee because 72 / 12 = <<72/12=6>>6",
+    "L4": "This will cost $18 to make because 6 x 3 = <<6*3=18>>18"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2530.\n    Returns: the total cost of coffee.\n    \"\"\"\n    # L1\n    num_dozens = 3 # 3 dozen donuts\n    donuts_per_dozen = 12 # WK\n    total_donuts = num_dozens * donuts_per_dozen\n\n    # L2\n    ounces_per_donut = 2 # for each donut they need 2 ounces of coffee\n    total_ounces_needed = ounces_per_donut * total_donuts\n\n    # L3\n    ounces_per_pot = 12 # Every pot of coffee she makes contains 12 ounces\n    num_pots = total_ounces_needed / ounces_per_pot\n\n    # L4\n    cost_per_pot = 3 # costs $3 to make\n    total_cost = num_pots * cost_per_pot\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cost",
+    "operand_to_replace": "cost_per_pot",
+    "replacement_variable": "ounces_per_pot"
+  },
+  "correct_trace": {
+    "num_dozens": 3,
+    "donuts_per_dozen": 12,
+    "total_donuts": 36,
+    "ounces_per_donut": 2,
+    "total_ounces_needed": 72,
+    "ounces_per_pot": 12,
+    "num_pots": 6.0,
+    "cost_per_pot": 3,
+    "total_cost": 18.0,
+    "answer": 18.0
+  },
+  "flawed_trace": {
+    "num_dozens": 3,
+    "donuts_per_dozen": 12,
+    "total_donuts": 36,
+    "ounces_per_donut": 2,
+    "total_ounces_needed": 72,
+    "ounces_per_pot": 12,
+    "num_pots": 6.0,
+    "cost_per_pot": 3,
+    "total_cost": 72.0,
+    "answer": 72.0
+  },
+  "correct_value": 18.0,
+  "flawed_value": 72.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "donuts_per_dozen"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_donuts",
+      "question_inputs": [
+        "num_dozens"
+      ],
+      "solution_line_template": "He family eats {total_donuts} donuts because {num_dozens} x {donuts_per_dozen} = <<{num_dozens}*{donuts_per_dozen}={total_donuts}>>{total_donuts}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_ounces_needed",
+      "question_inputs": [
+        "ounces_per_donut"
+      ],
+      "solution_line_template": "They need {total_ounces_needed} ounces of coffee for these because {ounces_per_donut} x {total_donuts} = <<{ounces_per_donut}*{total_donuts}={total_ounces_needed}>>{total_ounces_needed}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_pots",
+      "question_inputs": [
+        "ounces_per_pot"
+      ],
+      "solution_line_template": "This is equal to {num_pots} pots of coffee because {total_ounces_needed} / {ounces_per_pot} = <<{total_ounces_needed}/{ounces_per_pot}={num_pots}>>{num_pots}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "cost_per_pot"
+      ],
+      "solution_line_template": "This will cost ${total_cost} to make because {num_pots} x {cost_per_pot} = <<{num_pots}*{cost_per_pot}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He family eats 36 donuts because 3 x 12 = <<3*12=36>>36",
+    "L2": "They need 72 ounces of coffee for these because 2 x 36 = <<2*36=72>>72",
+    "L3": "This is equal to 6 pots of coffee because 72 / 12 = <<72/12=6>>6",
+    "L4": "This will cost $72 to make because 6 x 12 = <<6*12=72>>72",
+    "FA": "#### 72"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'ounces_per_pot' (12) was used instead of 'cost_per_pot' (3).",
+  "repro_seed": 2217128072454548327,
+  "model_name": "google_gemini-2.5-flash"
+}

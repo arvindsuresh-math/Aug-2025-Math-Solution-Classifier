@@ -1,0 +1,111 @@
+{
+  "index": 1957,
+  "original_solution_mapping": {
+    "FA": "#### 550",
+    "L1": "He sells 500*.8=<<500*.8=400>>400 newspapers",
+    "L2": "He sells them for 400*2=$<<400*2=800>>800",
+    "L3": "He gets a discount of 2*.75=$<<2*.75=1.5>>1.5 on the newspapers",
+    "L4": "So he buys them for 2-1.5=$<<2-1.5=.5>>.5",
+    "L5": "So he spent 500*.5=$<<500*.5=250>>250 buying them",
+    "L6": "That means he made a profit of 800-250=$<<800-250=550>>550"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1957.\n    Returns: the profit John makes.\n    \"\"\"\n    # L1\n    total_newspapers = 500 # John buys 500 newspapers\n    sell_percentage = 0.8 # sells 80% of them\n    newspapers_sold = total_newspapers * sell_percentage\n\n    # L2\n    sell_price_per_newspaper = 2 # Each newspaper sells for $2\n    total_revenue = newspapers_sold * sell_price_per_newspaper\n\n    # L3\n    buy_discount_percentage = 0.75 # 75% less than the price at which he sells them\n    discount_amount_per_newspaper = sell_price_per_newspaper * buy_discount_percentage\n\n    # L4\n    buy_price_per_newspaper = sell_price_per_newspaper - discount_amount_per_newspaper\n\n    # L5\n    total_cost = total_newspapers * buy_price_per_newspaper\n\n    # L6\n    profit = total_revenue - total_cost\n\n    # FA\n    answer = profit\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "newspapers_sold",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x30e4b41d0>"
+  },
+  "correct_trace": {
+    "total_newspapers": 500,
+    "sell_percentage": 0.8,
+    "newspapers_sold": 400.0,
+    "sell_price_per_newspaper": 2,
+    "total_revenue": 800.0,
+    "buy_discount_percentage": 0.75,
+    "discount_amount_per_newspaper": 1.5,
+    "buy_price_per_newspaper": 0.5,
+    "total_cost": 250.0,
+    "profit": 550.0,
+    "answer": 550.0
+  },
+  "flawed_trace": {
+    "total_newspapers": 500,
+    "sell_percentage": 0.8,
+    "newspapers_sold": 625.0,
+    "sell_price_per_newspaper": 2,
+    "total_revenue": 1250.0,
+    "buy_discount_percentage": 0.75,
+    "discount_amount_per_newspaper": 1.5,
+    "buy_price_per_newspaper": 0.5,
+    "total_cost": 250.0,
+    "profit": 1000.0,
+    "answer": 1000.0
+  },
+  "correct_value": 400.0,
+  "flawed_value": 625.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "newspapers_sold",
+      "question_inputs": [
+        "total_newspapers",
+        "sell_percentage"
+      ],
+      "solution_line_template": "He sells {total_newspapers}*{sell_percentage}=<<{total_newspapers}*{sell_percentage}={newspapers_sold}>>{newspapers_sold} newspapers"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_revenue",
+      "question_inputs": [
+        "sell_price_per_newspaper"
+      ],
+      "solution_line_template": "He sells them for {newspapers_sold}*{sell_price_per_newspaper}=$<<{newspapers_sold}*{sell_price_per_newspaper}={total_revenue}>>{total_revenue}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "discount_amount_per_newspaper",
+      "question_inputs": [
+        "buy_discount_percentage"
+      ],
+      "solution_line_template": "He gets a discount of {sell_price_per_newspaper}*{buy_discount_percentage}=$<<{sell_price_per_newspaper}*{buy_discount_percentage}={discount_amount_per_newspaper}>>{discount_amount_per_newspaper} on the newspapers"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "buy_price_per_newspaper",
+      "question_inputs": [],
+      "solution_line_template": "So he buys them for {sell_price_per_newspaper}-{discount_amount_per_newspaper}=$<<{sell_price_per_newspaper}-{discount_amount_per_newspaper}={buy_price_per_newspaper}>>{buy_price_per_newspaper}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_cost",
+      "question_inputs": [],
+      "solution_line_template": "So he spent {total_newspapers}*{buy_price_per_newspaper}=$<<{total_newspapers}*{buy_price_per_newspaper}={total_cost}>>{total_cost} buying them"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "profit",
+      "question_inputs": [],
+      "solution_line_template": "That means he made a profit of {total_revenue}-{total_cost}=$<<{total_revenue}-{total_cost}={profit}>>{profit}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He sells 500*0.8=<<500*0.8=625>>625 newspapers",
+    "L2": "He sells them for 625*2=$<<625*2=1250>>1250",
+    "L3": "He gets a discount of 2*0.75=$<<2*0.75=1.5>>1.5 on the newspapers",
+    "L4": "So he buys them for 2-1.5=$<<2-1.5=0.5>>0.5",
+    "L5": "So he spent 500*0.5=$<<500*0.5=250>>250 buying them",
+    "L6": "That means he made a profit of 1250-250=$<<1250-250=1000>>1000",
+    "FA": "#### 1000"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": -4844089410063238594,
+  "model_name": "google_gemini-2.5-flash"
+}

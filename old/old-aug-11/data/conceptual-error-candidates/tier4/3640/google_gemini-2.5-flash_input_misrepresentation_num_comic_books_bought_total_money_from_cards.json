@@ -1,0 +1,85 @@
+{
+  "index": 3640,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "Arthur makes $100 because .05 x 2000 = <<.05*2000=100>>100",
+    "L2": "Arthur can buy 16 comic books because 100 / 6= 16 and (2/3)",
+    "L3": "The comic books cost $96 because 16 x 6 = <<16*6=96>>96",
+    "L4": "He has $4 leftover because 100 - 96 = <<100-96=4>>4"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3640.\n    Returns: the amount of money Arthur has leftover.\n    \"\"\"\n    # L1\n    card_value_dollars = 0.05 # each card is worth 5 cents\n    num_cards = 2000 # all 2,000 cards\n    total_money_from_cards = card_value_dollars * num_cards\n\n    # L2\n    comic_book_cost = 6 # comic books cost $6 each\n    num_comic_books_bought = total_money_from_cards // comic_book_cost\n\n    # L3\n    cost_of_comic_books = num_comic_books_bought * comic_book_cost\n\n    # L4\n    money_leftover = total_money_from_cards - cost_of_comic_books\n\n    # FA\n    answer = money_leftover\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "num_comic_books_bought",
+    "operand_to_replace": "comic_book_cost",
+    "replacement_variable": "total_money_from_cards"
+  },
+  "correct_trace": {
+    "card_value_dollars": 0.05,
+    "num_cards": 2000,
+    "total_money_from_cards": 100.0,
+    "comic_book_cost": 6,
+    "num_comic_books_bought": 16.0,
+    "cost_of_comic_books": 96.0,
+    "money_leftover": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "card_value_dollars": 0.05,
+    "num_cards": 2000,
+    "total_money_from_cards": 100.0,
+    "comic_book_cost": 6,
+    "num_comic_books_bought": 1.0,
+    "cost_of_comic_books": 6.0,
+    "money_leftover": 94.0,
+    "answer": 94.0
+  },
+  "correct_value": 16.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_money_from_cards",
+      "question_inputs": [
+        "card_value_dollars",
+        "num_cards"
+      ],
+      "solution_line_template": "Arthur makes {total_money_from_cards} because {card_value_dollars} x {num_cards} = <<{card_value_dollars}*{num_cards}={total_money_from_cards}>>{total_money_from_cards}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_comic_books_bought",
+      "question_inputs": [
+        "comic_book_cost"
+      ],
+      "solution_line_template": "Arthur can buy {num_comic_books_bought} comic books because {total_money_from_cards} / {comic_book_cost}= {num_comic_books_bought} and (2/3)"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cost_of_comic_books",
+      "question_inputs": [],
+      "solution_line_template": "The comic books cost ${cost_of_comic_books} because {num_comic_books_bought} x {comic_book_cost} = <<{num_comic_books_bought}*{comic_book_cost}={cost_of_comic_books}>>{cost_of_comic_books}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "money_leftover",
+      "question_inputs": [],
+      "solution_line_template": "He has ${money_leftover} leftover because {total_money_from_cards} - {cost_of_comic_books} = <<{total_money_from_cards}-{cost_of_comic_books}={money_leftover}>>{money_leftover}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Arthur makes 100 because 0.05 x 2000 = <<0.05*2000=100>>100",
+    "L2": "Arthur can buy 1 comic books because 100 / 100= 1 and (2/3)",
+    "L3": "The comic books cost $6 because 1 x 6 = <<1*6=6>>6",
+    "L4": "He has $94 leftover because 100 - 6 = <<100-6=94>>94",
+    "FA": "#### 94"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'total_money_from_cards' (100.0) was used instead of 'comic_book_cost' (6).",
+  "repro_seed": -2438210568600372793,
+  "model_name": "google_gemini-2.5-flash"
+}

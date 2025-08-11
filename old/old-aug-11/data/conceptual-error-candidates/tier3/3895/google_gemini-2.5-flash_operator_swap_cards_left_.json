@@ -1,0 +1,89 @@
+{
+  "index": 3895,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "Joseph gave 16 x 3/8 = <<16*3/8=6>>6 cards to his brother.",
+    "L2": "He gave a total of 6 + 2 = <<6+2=8>>8 cards to his brother and friend.",
+    "L3": "Joseph has 16 - 8 = <<16-8=8>>8 cards left.",
+    "L4": "This is 8/16 x 100% = 50% of his cards."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3895.\n    Returns: the percentage of cards Joseph has left.\n    \"\"\"\n    # L1\n    initial_cards = 16 # Joseph had 16 baseball cards\n    fraction_given_to_brother = Fraction(3, 8) # 3/8 of the cards\n    cards_given_by_fraction = initial_cards * fraction_given_to_brother\n\n    # L2\n    additional_cards_given_to_brother = 2 # and 2 cards to his brother\n    total_cards_given = cards_given_by_fraction + additional_cards_given_to_brother\n\n    # L3\n    cards_left = initial_cards - total_cards_given\n\n    # L4\n    percentage_multiplier = 100 # WK\n    percentage_left = (cards_left / initial_cards) * percentage_multiplier\n\n    # FA\n    answer = percentage_left\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "cards_left",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x16a011690>"
+  },
+  "correct_trace": {
+    "initial_cards": 16,
+    "fraction_given_to_brother": "3/8",
+    "cards_given_by_fraction": "6",
+    "additional_cards_given_to_brother": 2,
+    "total_cards_given": "8",
+    "cards_left": "8",
+    "percentage_multiplier": 100,
+    "percentage_left": "50",
+    "answer": "50"
+  },
+  "flawed_trace": {
+    "initial_cards": 16,
+    "fraction_given_to_brother": "3/8",
+    "cards_given_by_fraction": "6",
+    "additional_cards_given_to_brother": 2,
+    "total_cards_given": "8",
+    "cards_left": "24",
+    "percentage_multiplier": 100,
+    "percentage_left": "150",
+    "answer": "150"
+  },
+  "correct_value": "8",
+  "flawed_value": "24",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cards_given_by_fraction",
+      "question_inputs": [
+        "initial_cards",
+        "fraction_given_to_brother"
+      ],
+      "solution_line_template": "Joseph gave {initial_cards} x {fraction_given_to_brother} = <<{initial_cards}*{fraction_given_to_brother}={cards_given_by_fraction}>>{cards_given_by_fraction} cards to his brother."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cards_given",
+      "question_inputs": [
+        "additional_cards_given_to_brother"
+      ],
+      "solution_line_template": "He gave a total of {cards_given_by_fraction} + {additional_cards_given_to_brother} = <<{cards_given_by_fraction}+{additional_cards_given_to_brother}={total_cards_given}>>{total_cards_given} cards to his brother and friend."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "cards_left",
+      "question_inputs": [],
+      "solution_line_template": "Joseph has {initial_cards} - {total_cards_given} = <<{initial_cards}-{total_cards_given}={cards_left}>>{cards_left} cards left."
+    },
+    {
+      "WK_inputs": [
+        "percentage_multiplier"
+      ],
+      "line_number": "L4",
+      "output_variable": "percentage_left",
+      "question_inputs": [],
+      "solution_line_template": "This is {cards_left}/{initial_cards} x {percentage_multiplier}% = {percentage_left}% of his cards."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Joseph gave 16 x 3/8 = <<16*3/8=6>>6 cards to his brother.",
+    "L2": "He gave a total of 6 + 2 = <<6+2=8>>8 cards to his brother and friend.",
+    "L3": "Joseph has 16 - 8 = <<16-8=24>>24 cards left.",
+    "L4": "This is 24/16 x 100% = 150% of his cards.",
+    "FA": "#### 150"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -3748713855073725013,
+  "model_name": "google_gemini-2.5-flash"
+}

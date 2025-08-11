@@ -1,0 +1,103 @@
+{
+  "index": 3141,
+  "original_solution_mapping": {
+    "FA": "#### 3275",
+    "L1": "Lunch is 500 * .25 = <<500*.25=125>>125 more calories than breakfast",
+    "L2": "That means it is 500 + 125 = <<500+125=625>>625 calories",
+    "L3": "So dinner is 625 * 2 = <<625*2=1250>>1250 calories",
+    "L4": "The shakes are 3 * 300 = <<3*300=900>>900 calories",
+    "L5": "So in total he eats 500 + 625 + 1250 + 900 = <<500+625+1250+900=3275>>3275 calories"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3141.\n    Returns: the total number of calories John gets in a day.\n    \"\"\"\n    # L1\n    breakfast_calories = 500 # Breakfast is 500 calories\n    lunch_increase_percent = 0.25 # 25% more calories\n    lunch_increase_amount = breakfast_calories * lunch_increase_percent\n\n    # L2\n    lunch_calories = breakfast_calories + lunch_increase_amount\n\n    # L3\n    dinner_multiplier = 2 # twice as many calories as lunch\n    dinner_calories = lunch_calories * dinner_multiplier\n\n    # L4\n    num_shakes = 3 # 3 shakes\n    calories_per_shake = 300 # each 300 calories\n    total_shake_calories = num_shakes * calories_per_shake\n\n    # L5\n    total_daily_calories = breakfast_calories + lunch_calories + dinner_calories + total_shake_calories\n\n    # FA\n    answer = total_daily_calories\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "lunch_calories",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x30e5f4390>"
+  },
+  "correct_trace": {
+    "breakfast_calories": 500,
+    "lunch_increase_percent": 0.25,
+    "lunch_increase_amount": 125.0,
+    "lunch_calories": 625.0,
+    "dinner_multiplier": 2,
+    "dinner_calories": 1250.0,
+    "num_shakes": 3,
+    "calories_per_shake": 300,
+    "total_shake_calories": 900,
+    "total_daily_calories": 3275.0,
+    "answer": 3275.0
+  },
+  "flawed_trace": {
+    "breakfast_calories": 500,
+    "lunch_increase_percent": 0.25,
+    "lunch_increase_amount": 125.0,
+    "lunch_calories": 375.0,
+    "dinner_multiplier": 2,
+    "dinner_calories": 750.0,
+    "num_shakes": 3,
+    "calories_per_shake": 300,
+    "total_shake_calories": 900,
+    "total_daily_calories": 2525.0,
+    "answer": 2525.0
+  },
+  "correct_value": 625.0,
+  "flawed_value": 375.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "lunch_increase_amount",
+      "question_inputs": [
+        "breakfast_calories",
+        "lunch_increase_percent"
+      ],
+      "solution_line_template": "Lunch is {breakfast_calories} * {lunch_increase_percent} = <<{breakfast_calories}*{lunch_increase_percent}={lunch_increase_amount}>>{lunch_increase_amount} more calories than breakfast"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "lunch_calories",
+      "question_inputs": [],
+      "solution_line_template": "That means it is {breakfast_calories} + {lunch_increase_amount} = <<{breakfast_calories}+{lunch_increase_amount}={lunch_calories}>>{lunch_calories} calories"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "dinner_calories",
+      "question_inputs": [
+        "dinner_multiplier"
+      ],
+      "solution_line_template": "So dinner is {lunch_calories} * {dinner_multiplier} = <<{lunch_calories}*{dinner_multiplier}={dinner_calories}>>{dinner_calories} calories"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_shake_calories",
+      "question_inputs": [
+        "num_shakes",
+        "calories_per_shake"
+      ],
+      "solution_line_template": "The shakes are {num_shakes} * {calories_per_shake} = <<{num_shakes}*{calories_per_shake}={total_shake_calories}>>{total_shake_calories} calories"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_daily_calories",
+      "question_inputs": [],
+      "solution_line_template": "So in total he eats {breakfast_calories} + {lunch_calories} + {dinner_calories} + {total_shake_calories} = <<{breakfast_calories}+{lunch_calories}+{dinner_calories}+{total_shake_calories}={total_daily_calories}>>{total_daily_calories} calories"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Lunch is 500 * 0.25 = <<500*0.25=125>>125 more calories than breakfast",
+    "L2": "That means it is 500 + 125 = <<500+125=375>>375 calories",
+    "L3": "So dinner is 375 * 2 = <<375*2=750>>750 calories",
+    "L4": "The shakes are 3 * 300 = <<3*300=900>>900 calories",
+    "L5": "So in total he eats 500 + 375 + 750 + 900 = <<500+375+750+900=2525>>2525 calories",
+    "FA": "#### 2525"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": 7427835618165386392,
+  "model_name": "google_gemini-2.5-flash"
+}

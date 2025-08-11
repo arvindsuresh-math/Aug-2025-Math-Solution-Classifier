@@ -1,0 +1,78 @@
+{
+  "index": 6531,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "After 3 hours, it will have 3 * 2 = <<3*2=6>>6 logs added to it.",
+    "L2": "After 3 hours, it will have burned 3 * 3 = <<3*3=9>>9 logs.",
+    "L3": "After 3 hours, the cookfire will have 6 + 6 - 9 = <<6+6-9=3>>3 logs left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6531.\n    Returns: the number of logs left after 3 hours.\n    \"\"\"\n    # L1\n    hours = 3 # after 3 hours\n    logs_added_per_hour = 2 # two more logs added to it at the end of every hour\n    total_logs_added = hours * logs_added_per_hour\n\n    # L2\n    logs_burned_per_hour = 3 # burns three logs every hour\n    total_logs_burned = logs_burned_per_hour * hours\n\n    # L3\n    initial_logs = 6 # built with six logs to start\n    logs_left = initial_logs + total_logs_added - total_logs_burned\n\n    # FA\n    answer = logs_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "logs_left",
+    "operand_to_replace": "total_logs_added",
+    "replacement_variable": "total_logs_burned"
+  },
+  "correct_trace": {
+    "hours": 3,
+    "logs_added_per_hour": 2,
+    "total_logs_added": 6,
+    "logs_burned_per_hour": 3,
+    "total_logs_burned": 9,
+    "initial_logs": 6,
+    "logs_left": 3,
+    "answer": 3
+  },
+  "flawed_trace": {
+    "hours": 3,
+    "logs_added_per_hour": 2,
+    "total_logs_added": 6,
+    "logs_burned_per_hour": 3,
+    "total_logs_burned": 9,
+    "initial_logs": 6,
+    "logs_left": 6,
+    "answer": 6
+  },
+  "correct_value": 3,
+  "flawed_value": 6,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_logs_added",
+      "question_inputs": [
+        "hours",
+        "logs_added_per_hour"
+      ],
+      "solution_line_template": "After {hours} hours, it will have {hours} * {logs_added_per_hour} = <<{hours}*{logs_added_per_hour}={total_logs_added}>>{total_logs_added} logs added to it."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_logs_burned",
+      "question_inputs": [
+        "logs_burned_per_hour"
+      ],
+      "solution_line_template": "After {hours} hours, it will have burned {logs_burned_per_hour} * {hours} = <<{logs_burned_per_hour}*{hours}={total_logs_burned}>>{total_logs_burned} logs."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "logs_left",
+      "question_inputs": [
+        "initial_logs"
+      ],
+      "solution_line_template": "After {hours} hours, the cookfire will have {initial_logs} + {total_logs_added} - {total_logs_burned} = <<{initial_logs}+{total_logs_added}-{total_logs_burned}={logs_left}>>{logs_left} logs left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After 3 hours, it will have 3 * 2 = <<3*2=6>>6 logs added to it.",
+    "L2": "After 3 hours, it will have burned 3 * 3 = <<3*3=9>>9 logs.",
+    "L3": "After 3 hours, the cookfire will have 6 + 9 - 9 = <<6+9-9=6>>6 logs left.",
+    "FA": "#### 6"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'total_logs_burned' (value: 9) was used instead of 'total_logs_added' (value: 6).",
+  "repro_seed": -2595181722908979507,
+  "model_name": "google_gemini-2.5-flash"
+}

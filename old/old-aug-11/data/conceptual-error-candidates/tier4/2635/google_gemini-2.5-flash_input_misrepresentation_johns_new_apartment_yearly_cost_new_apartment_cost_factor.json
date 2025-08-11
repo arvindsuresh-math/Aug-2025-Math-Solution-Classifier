@@ -1,0 +1,101 @@
+{
+  "index": 2635,
+  "original_solution_mapping": {
+    "FA": "#### 7680",
+    "L1": "His old apartment cost 1200*12=$<<1200*12=14400>>14,400 per year",
+    "L2": "His new apartment 1200*1.4=$<<1200*1.4=1680>>1680 per month",
+    "L3": "That means it cost 1680/3=$<<1680/3=560>>560 per month",
+    "L4": "So it cost 560*12=$<<560*12=6720>>6720",
+    "L5": "So he saves 14400-6720=$<<14400-6720=7680>>7680"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2635.\n    Returns: the amount John saves per year by splitting the apartment.\n    \"\"\"\n    # L1\n    old_apartment_monthly_cost = 1200 # $1200 per month\n    months_per_year = 12 # WK\n    old_apartment_yearly_cost = old_apartment_monthly_cost * months_per_year\n\n    # L2\n    new_apartment_cost_factor = 1.4 # 40% more expensive\n    new_apartment_monthly_total_cost = old_apartment_monthly_cost * new_apartment_cost_factor\n\n    # L3\n    num_people_splitting = 3 # John and his two brothers\n    johns_new_apartment_monthly_cost = new_apartment_monthly_total_cost / num_people_splitting\n\n    # L4\n    johns_new_apartment_yearly_cost = johns_new_apartment_monthly_cost * months_per_year\n\n    # L5\n    yearly_savings = old_apartment_yearly_cost - johns_new_apartment_yearly_cost\n\n    # FA\n    answer = yearly_savings\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "johns_new_apartment_yearly_cost",
+    "operand_to_replace": "months_per_year",
+    "replacement_variable": "new_apartment_cost_factor"
+  },
+  "correct_trace": {
+    "old_apartment_monthly_cost": 1200,
+    "months_per_year": 12,
+    "old_apartment_yearly_cost": 14400,
+    "new_apartment_cost_factor": 1.4,
+    "new_apartment_monthly_total_cost": 1680.0,
+    "num_people_splitting": 3,
+    "johns_new_apartment_monthly_cost": 560.0,
+    "johns_new_apartment_yearly_cost": 6720.0,
+    "yearly_savings": 7680.0,
+    "answer": 7680.0
+  },
+  "flawed_trace": {
+    "old_apartment_monthly_cost": 1200,
+    "months_per_year": 12,
+    "old_apartment_yearly_cost": 14400,
+    "new_apartment_cost_factor": 1.4,
+    "new_apartment_monthly_total_cost": 1680.0,
+    "num_people_splitting": 3,
+    "johns_new_apartment_monthly_cost": 560.0,
+    "johns_new_apartment_yearly_cost": 784.0,
+    "yearly_savings": 13616.0,
+    "answer": 13616.0
+  },
+  "correct_value": 6720.0,
+  "flawed_value": 784.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "months_per_year"
+      ],
+      "line_number": "L1",
+      "output_variable": "old_apartment_yearly_cost",
+      "question_inputs": [
+        "old_apartment_monthly_cost"
+      ],
+      "solution_line_template": "His old apartment cost {old_apartment_monthly_cost}*{months_per_year}=$<<{old_apartment_monthly_cost}*{months_per_year}={old_apartment_yearly_cost}>>{old_apartment_yearly_cost} per year"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "new_apartment_monthly_total_cost",
+      "question_inputs": [
+        "new_apartment_cost_factor"
+      ],
+      "solution_line_template": "His new apartment {old_apartment_monthly_cost}*{new_apartment_cost_factor}=$<<{old_apartment_monthly_cost}*{new_apartment_cost_factor}={new_apartment_monthly_total_cost}>>{new_apartment_monthly_total_cost} per month"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "johns_new_apartment_monthly_cost",
+      "question_inputs": [
+        "num_people_splitting"
+      ],
+      "solution_line_template": "That means it cost {new_apartment_monthly_total_cost}/{num_people_splitting}=$<<{new_apartment_monthly_total_cost}/{num_people_splitting}={johns_new_apartment_monthly_cost}>>{johns_new_apartment_monthly_cost} per month"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "johns_new_apartment_yearly_cost",
+      "question_inputs": [],
+      "solution_line_template": "So it cost {johns_new_apartment_monthly_cost}*{months_per_year}=$<<{johns_new_apartment_monthly_cost}*{months_per_year}={johns_new_apartment_yearly_cost}>>{johns_new_apartment_yearly_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "yearly_savings",
+      "question_inputs": [],
+      "solution_line_template": "So he saves {old_apartment_yearly_cost}-{johns_new_apartment_yearly_cost}=$<<{old_apartment_yearly_cost}-{johns_new_apartment_yearly_cost}={yearly_savings}>>{yearly_savings}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "His old apartment cost 1200*12=$<<1200*12=14400>>14400 per year",
+    "L2": "His new apartment 1200*1.4=$<<1200*1.4=1680>>1680 per month",
+    "L3": "That means it cost 1680/3=$<<1680/3=560>>560 per month",
+    "L4": "So it cost 560*1.4=$<<560*1.4=784>>784",
+    "L5": "So he saves 14400-784=$<<14400-784=13616>>13616",
+    "FA": "#### 13616"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'new_apartment_cost_factor' (1.4) was used instead of 'months_per_year' (12).",
+  "repro_seed": -4617664352948294591,
+  "model_name": "google_gemini-2.5-flash"
+}

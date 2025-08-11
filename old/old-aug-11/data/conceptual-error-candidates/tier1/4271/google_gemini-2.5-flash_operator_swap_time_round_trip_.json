@@ -1,0 +1,63 @@
+{
+  "index": 4271,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "If it takes 15 minutes for Dante to go to Hidden Lake and 7 minutes to walk back to the Park Office, he spends a total of 15+7=<<15+7=22>>22 minutes on the trip.",
+    "L2": "When Dante arrives at the Park Office, he will have been gone from the Park Office 32 minutes altogether, and since he passed by the Lake Park restaurant from The Park Office, his walk from Park Office to the Lake Park restaurant took 32-22=<<32-22=10>>10 minutes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4271.\n    Returns: the duration of the walk from the Park Office to the Lake Park restaurant.\n    \"\"\"\n    # L1\n    time_to_hidden_lake = 15 # 15 minutes for Dante to go to Hidden Lake\n    time_back_to_office = 7 # 7 minutes to walk back to the Park Office\n    time_round_trip = time_to_hidden_lake + time_back_to_office\n\n    # L2\n    total_time_gone = 32 # been gone from the Park Office 32 minutes altogether\n    time_to_restaurant = total_time_gone - time_round_trip\n\n    # FA\n    answer = time_to_restaurant\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "time_round_trip",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Sub object at 0x15f3d6450>"
+  },
+  "correct_trace": {
+    "time_to_hidden_lake": 15,
+    "time_back_to_office": 7,
+    "time_round_trip": 22,
+    "total_time_gone": 32,
+    "time_to_restaurant": 10,
+    "answer": 10
+  },
+  "flawed_trace": {
+    "time_to_hidden_lake": 15,
+    "time_back_to_office": 7,
+    "time_round_trip": 8,
+    "total_time_gone": 32,
+    "time_to_restaurant": 24,
+    "answer": 24
+  },
+  "correct_value": 22,
+  "flawed_value": 8,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "time_round_trip",
+      "question_inputs": [
+        "time_to_hidden_lake",
+        "time_back_to_office"
+      ],
+      "solution_line_template": "If it takes {time_to_hidden_lake} minutes for Dante to go to Hidden Lake and {time_back_to_office} minutes to walk back to the Park Office, he spends a total of {time_to_hidden_lake}+{time_back_to_office}=<<{time_to_hidden_lake}+{time_back_to_office}={time_round_trip}>>{time_round_trip} minutes on the trip."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "time_to_restaurant",
+      "question_inputs": [
+        "total_time_gone"
+      ],
+      "solution_line_template": "When Dante arrives at the Park Office, he will have been gone from the Park Office {total_time_gone} minutes altogether, and since he passed by the Lake Park restaurant from The Park Office, his walk from Park Office to the Lake Park restaurant took {total_time_gone}-{time_round_trip}=<<{total_time_gone}-{time_round_trip}={time_to_restaurant}>>{time_to_restaurant} minutes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If it takes 15 minutes for Dante to go to Hidden Lake and 7 minutes to walk back to the Park Office, he spends a total of 15+7=<<15+7=8>>8 minutes on the trip.",
+    "L2": "When Dante arrives at the Park Office, he will have been gone from the Park Office 32 minutes altogether, and since he passed by the Lake Park restaurant from The Park Office, his walk from Park Office to the Lake Park restaurant took 32-8=<<32-8=24>>24 minutes.",
+    "FA": "#### 24"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '-' instead.",
+  "repro_seed": 1478355067087473547,
+  "model_name": "google_gemini-2.5-flash"
+}

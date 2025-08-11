@@ -1,0 +1,107 @@
+{
+  "index": 7239,
+  "original_solution_mapping": {
+    "FA": "#### 155",
+    "L1": "He worked 4 hours on Saturday and 5 hours on Sunday for a total of 4+5 = <<4+5=9>>9 hours",
+    "L2": "His base pay is $10.00 an hour and he worked 9 hours for a total of 10*9 = $<<10*9=90.00>>90.00",
+    "L3": "He delivered groceries to 5 people on Saturday and 8 people on Sunday for a total of 5+8 = <<5+8=13>>13 deliveries",
+    "L4": "He makes $5.00 per delivery and he delivered to 13 people so he made 5*13 = $<<5*13=65.00>>65.00",
+    "L5": "His base pay is $90.00 and he made $65.00 in tips for a total of 90+65 = $<<90+65=155.00>>155.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7239.\n    Returns: the total amount Scout made over the weekend.\n    \"\"\"\n    # L1\n    saturday_hours = 4 # worked 4 hours on Saturday\n    sunday_hours = 5 # worked 5 hours on Sunday\n    total_hours_worked = saturday_hours + sunday_hours\n\n    # L2\n    hourly_base_pay = 10.00 # base pay is $10.00 an hour\n    total_base_pay = hourly_base_pay * total_hours_worked\n\n    # L3\n    saturday_customers = 5 # delivered groceries to 5 people on Saturday\n    sunday_customers = 8 # delivered groceries to 8 people on Sunday\n    total_deliveries = saturday_customers + sunday_customers\n\n    # L4\n    tip_per_customer = 5.00 # earns a $5.00 tip per customer\n    total_tips = tip_per_customer * total_deliveries\n\n    # L5\n    total_earnings = total_base_pay + total_tips\n\n    # FA\n    answer = total_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_deliveries",
+    "operand_to_replace": "saturday_customers",
+    "replacement_variable": "saturday_hours"
+  },
+  "correct_trace": {
+    "saturday_hours": 4,
+    "sunday_hours": 5,
+    "total_hours_worked": 9,
+    "hourly_base_pay": 10.0,
+    "total_base_pay": 90.0,
+    "saturday_customers": 5,
+    "sunday_customers": 8,
+    "total_deliveries": 13,
+    "tip_per_customer": 5.0,
+    "total_tips": 65.0,
+    "total_earnings": 155.0,
+    "answer": 155.0
+  },
+  "flawed_trace": {
+    "saturday_hours": 4,
+    "sunday_hours": 5,
+    "total_hours_worked": 9,
+    "hourly_base_pay": 10.0,
+    "total_base_pay": 90.0,
+    "saturday_customers": 5,
+    "sunday_customers": 8,
+    "total_deliveries": 12,
+    "tip_per_customer": 5.0,
+    "total_tips": 60.0,
+    "total_earnings": 150.0,
+    "answer": 150.0
+  },
+  "correct_value": 13,
+  "flawed_value": 12,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_hours_worked",
+      "question_inputs": [
+        "saturday_hours",
+        "sunday_hours"
+      ],
+      "solution_line_template": "He worked {saturday_hours} hours on Saturday and {sunday_hours} hours on Sunday for a total of {saturday_hours}+{sunday_hours} = <<{saturday_hours}+{sunday_hours}={total_hours_worked}>>{total_hours_worked} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_base_pay",
+      "question_inputs": [
+        "hourly_base_pay"
+      ],
+      "solution_line_template": "His base pay is ${hourly_base_pay} an hour and he worked {total_hours_worked} hours for a total of {hourly_base_pay}*{total_hours_worked} = $<<{hourly_base_pay}*{total_hours_worked}={total_base_pay}>>{total_base_pay}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_deliveries",
+      "question_inputs": [
+        "saturday_customers",
+        "sunday_customers"
+      ],
+      "solution_line_template": "He delivered groceries to {saturday_customers} people on Saturday and {sunday_customers} people on Sunday for a total of {saturday_customers}+{sunday_customers} = <<{saturday_customers}+{sunday_customers}={total_deliveries}>>{total_deliveries} deliveries"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_tips",
+      "question_inputs": [
+        "tip_per_customer"
+      ],
+      "solution_line_template": "He makes ${tip_per_customer} per delivery and he delivered to {total_deliveries} people so he made {tip_per_customer}*{total_deliveries} = $<<{tip_per_customer}*{total_deliveries}={total_tips}>>{total_tips}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_earnings",
+      "question_inputs": [],
+      "solution_line_template": "His base pay is ${total_base_pay} and he made ${total_tips} in tips for a total of {total_base_pay}+{total_tips} = $<<{total_base_pay}+{total_tips}={total_earnings}>>{total_earnings}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He worked 4 hours on Saturday and 5 hours on Sunday for a total of 4+5 = <<4+5=9>>9 hours",
+    "L2": "His base pay is $10 an hour and he worked 9 hours for a total of 10*9 = $<<10*9=90>>90",
+    "L3": "He delivered groceries to 4 people on Saturday and 8 people on Sunday for a total of 4+8 = <<4+8=12>>12 deliveries",
+    "L4": "He makes $5 per delivery and he delivered to 12 people so he made 5*12 = $<<5*12=60>>60",
+    "L5": "His base pay is $90 and he made $60 in tips for a total of 90+60 = $<<90+60=150>>150",
+    "FA": "#### 150"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'saturday_hours' (4) was used instead of 'saturday_customers' (5).",
+  "repro_seed": -8203926047037865914,
+  "model_name": "google_gemini-2.5-flash"
+}

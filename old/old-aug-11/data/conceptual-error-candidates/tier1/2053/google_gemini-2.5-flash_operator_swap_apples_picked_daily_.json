@@ -1,0 +1,63 @@
+{
+  "index": 2053,
+  "original_solution_mapping": {
+    "FA": "#### 350",
+    "L1": "During 30 days Adam picked 4 * 30 = <<4*30=120>>120 apples.",
+    "L2": "So in total with all the remaining apples, he picked 120 + 230 = <<120+230=350>>350 apples from his orchard."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2053.\n    Returns: the total number of apples Adam has collected from his orchard.\n    \"\"\"\n    # L1\n    apples_per_day = 4 # picks 4 apples\n    days = 30 # for 30 days\n    apples_picked_daily = apples_per_day * days\n\n    # L2\n    remaining_apples = 230 # which were 230\n    total_apples_collected = apples_picked_daily + remaining_apples\n\n    # FA\n    answer = total_apples_collected\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "apples_picked_daily",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30cd572d0>"
+  },
+  "correct_trace": {
+    "apples_per_day": 4,
+    "days": 30,
+    "apples_picked_daily": 120,
+    "remaining_apples": 230,
+    "total_apples_collected": 350,
+    "answer": 350
+  },
+  "flawed_trace": {
+    "apples_per_day": 4,
+    "days": 30,
+    "apples_picked_daily": 34,
+    "remaining_apples": 230,
+    "total_apples_collected": 264,
+    "answer": 264
+  },
+  "correct_value": 120,
+  "flawed_value": 34,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "apples_per_day",
+        "days"
+      ],
+      "WK_inputs": [],
+      "output_variable": "apples_picked_daily",
+      "solution_line_template": "During {days} days Adam picked {apples_per_day} * {days} = <<{apples_per_day}*{days}={apples_picked_daily}>>{apples_picked_daily} apples."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "remaining_apples"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_apples_collected",
+      "solution_line_template": "So in total with all the remaining apples, he picked {apples_picked_daily} + {remaining_apples} = <<{apples_picked_daily}+{remaining_apples}={total_apples_collected}>>{total_apples_collected} apples from his orchard."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "During 30 days Adam picked 4 * 30 = <<4*30=34>>34 apples.",
+    "L2": "So in total with all the remaining apples, he picked 34 + 230 = <<34+230=264>>264 apples from his orchard.",
+    "FA": "#### 264"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -5853878743788424206,
+  "model_name": "google_gemini-2.5-flash"
+}

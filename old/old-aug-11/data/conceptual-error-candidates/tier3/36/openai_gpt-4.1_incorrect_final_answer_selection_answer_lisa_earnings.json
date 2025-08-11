@@ -1,0 +1,72 @@
+{
+  "index": 36,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "Lisa earned $60 * 1/2 = $<<60*1/2=30>>30.",
+    "L2": "Tommy earned $30 * 1/2 = $<<30*1/2=15>>15.",
+    "L3": "Lisa earned $30 - $15 = $<<30-15=15>>15 more than Tommy."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 36.\n    Returns: the amount more money Lisa earned than Tommy.\n    \"\"\"\n    # L1\n    total_earnings = 60 # $60 from washing cars all week\n    lisa_fraction = 1/2 # half of the $60 was earned by Lisa\n    lisa_earnings = total_earnings * lisa_fraction\n\n    # L2\n    tommy_fraction = 1/2 # Tommy earned half of what Lisa earned\n    tommy_earnings = lisa_earnings * tommy_fraction\n\n    # L3\n    difference = lisa_earnings - tommy_earnings\n\n    # FA\n    answer = difference\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "difference",
+    "replacement_variable": "lisa_earnings"
+  },
+  "correct_trace": {
+    "total_earnings": 60,
+    "lisa_fraction": 0.5,
+    "lisa_earnings": 30.0,
+    "tommy_fraction": 0.5,
+    "tommy_earnings": 15.0,
+    "difference": 15.0,
+    "answer": 15.0
+  },
+  "flawed_trace": {
+    "total_earnings": 60,
+    "lisa_fraction": 0.5,
+    "lisa_earnings": 30.0,
+    "tommy_fraction": 0.5,
+    "tommy_earnings": 15.0,
+    "difference": 15.0,
+    "answer": 30.0
+  },
+  "correct_value": 15.0,
+  "flawed_value": 30.0,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "total_earnings",
+        "lisa_fraction"
+      ],
+      "WK_inputs": [],
+      "output_variable": "lisa_earnings",
+      "solution_line_template": "Lisa earned ${total_earnings} * {lisa_fraction} = $<<{total_earnings}*{lisa_fraction}={lisa_earnings}>>{lisa_earnings}."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "tommy_fraction"
+      ],
+      "WK_inputs": [],
+      "output_variable": "tommy_earnings",
+      "solution_line_template": "Tommy earned ${lisa_earnings} * {tommy_fraction} = $<<{lisa_earnings}*{tommy_fraction}={tommy_earnings}>>{tommy_earnings}."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "difference",
+      "solution_line_template": "Lisa earned ${lisa_earnings} - ${tommy_earnings} = $<<{lisa_earnings}-{tommy_earnings}={difference}>>{difference} more than Tommy."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Lisa earned $60 * 0.5 = $<<60*0.5=30>>30.",
+    "FA": "#### 30"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'lisa_earnings' (value: 30.0) was reported instead of 'difference' (value: 15.0).",
+  "repro_seed": -7829128574802578812,
+  "model_name": "openai_gpt-4.1"
+}

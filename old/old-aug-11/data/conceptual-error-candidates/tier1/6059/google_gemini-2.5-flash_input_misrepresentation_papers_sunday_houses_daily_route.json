@@ -1,0 +1,78 @@
+{
+  "index": 6059,
+  "original_solution_mapping": {
+    "FA": "#### 720",
+    "L1": "He delivers 6*100=<<6*100=600>>600 papers.",
+    "L2": "On Sunday, he delivers an additional 100-10+30=<<100-10+30=120>>120 papers.",
+    "L3": "He delivers a total of 600+120=<<600+120=720>>720 papers each week."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6059.\n    Returns: the total number of papers Kyle delivers each week.\n    \"\"\"\n    # L1\n    days_mon_to_sat = 6 # WK\n    houses_daily_route = 100 # 100 houses on his route\n    papers_mon_to_sat = days_mon_to_sat * houses_daily_route\n\n    # L2\n    sunday_customers_no_paper = 10 # 10 of his customers do not get the Sunday paper\n    sunday_only_customers = 30 # delivers 30 papers to other houses that get the newspaper only on Sunday\n    papers_sunday = houses_daily_route - sunday_customers_no_paper + sunday_only_customers\n\n    # L3\n    total_papers_per_week = papers_mon_to_sat + papers_sunday\n\n    # FA\n    answer = total_papers_per_week\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "papers_sunday",
+    "operand_to_replace": "sunday_customers_no_paper",
+    "replacement_variable": "houses_daily_route"
+  },
+  "correct_trace": {
+    "days_mon_to_sat": 6,
+    "houses_daily_route": 100,
+    "papers_mon_to_sat": 600,
+    "sunday_customers_no_paper": 10,
+    "sunday_only_customers": 30,
+    "papers_sunday": 120,
+    "total_papers_per_week": 720,
+    "answer": 720
+  },
+  "flawed_trace": {
+    "days_mon_to_sat": 6,
+    "houses_daily_route": 100,
+    "papers_mon_to_sat": 600,
+    "sunday_customers_no_paper": 10,
+    "sunday_only_customers": 30,
+    "papers_sunday": 30,
+    "total_papers_per_week": 630,
+    "answer": 630
+  },
+  "correct_value": 120,
+  "flawed_value": 30,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "days_mon_to_sat"
+      ],
+      "line_number": "L1",
+      "output_variable": "papers_mon_to_sat",
+      "question_inputs": [
+        "houses_daily_route"
+      ],
+      "solution_line_template": "He delivers {days_mon_to_sat}*{houses_daily_route}=<<{days_mon_to_sat}*{houses_daily_route}={papers_mon_to_sat}>>{papers_mon_to_sat} papers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "papers_sunday",
+      "question_inputs": [
+        "sunday_customers_no_paper",
+        "sunday_only_customers"
+      ],
+      "solution_line_template": "On Sunday, he delivers an additional {houses_daily_route}-{sunday_customers_no_paper}+{sunday_only_customers}=<<{houses_daily_route}-{sunday_customers_no_paper}+{sunday_only_customers}={papers_sunday}>>{papers_sunday} papers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_papers_per_week",
+      "question_inputs": [],
+      "solution_line_template": "He delivers a total of {papers_mon_to_sat}+{papers_sunday}=<<{papers_mon_to_sat}+{papers_sunday}={total_papers_per_week}>>{total_papers_per_week} papers each week."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He delivers 6*100=<<6*100=600>>600 papers.",
+    "L2": "On Sunday, he delivers an additional 100-100+30=<<100-100+30=30>>30 papers.",
+    "L3": "He delivers a total of 600+30=<<600+30=630>>630 papers each week.",
+    "FA": "#### 630"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'houses_daily_route' (100) was used instead of 'sunday_customers_no_paper' (10).",
+  "repro_seed": -5735918589645247593,
+  "model_name": "google_gemini-2.5-flash"
+}

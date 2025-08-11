@@ -1,0 +1,107 @@
+{
+  "index": 1293,
+  "original_solution_mapping": {
+    "FA": "#### 117",
+    "L1": "Jimmy's shorts cost 3 x $15 = $<<3*15=45>>45.",
+    "L2": "Irene's shirts cost 5 x $17 = $<<5*17=85>>85.",
+    "L3": "Total cost for the clothes is $45 + $85 = $<<45+85=130>>130.",
+    "L4": "10% discount on the clothes is $130 x 10% = $<<130*10*.01=13>>13.",
+    "L5": "They give the cashier $130 - $13 = $<<130-13=117>>117."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1293.\n    Returns: the total amount of money given to the cashier.\n    \"\"\"\n    # L1\n    num_shorts = 3 # 3 shorts\n    cost_per_short = 15 # $15 rack\n    jimmy_shorts_cost = num_shorts * cost_per_short\n\n    # L2\n    num_shirts = 5 # 5 shirts\n    cost_per_shirt = 17 # $17 rack\n    irene_shirts_cost = num_shirts * cost_per_shirt\n\n    # L3\n    total_initial_cost = jimmy_shorts_cost + irene_shirts_cost\n\n    # L4\n    discount_percent_num = 10 # 10% discount\n    percent_factor = 0.01 # WK\n    discount_amount = total_initial_cost * discount_percent_num * percent_factor\n\n    # L5\n    final_cost = total_initial_cost - discount_amount\n\n    # FA\n    answer = final_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "final_cost",
+    "operand_to_replace": "discount_amount",
+    "replacement_variable": "cost_per_shirt"
+  },
+  "correct_trace": {
+    "num_shorts": 3,
+    "cost_per_short": 15,
+    "jimmy_shorts_cost": 45,
+    "num_shirts": 5,
+    "cost_per_shirt": 17,
+    "irene_shirts_cost": 85,
+    "total_initial_cost": 130,
+    "discount_percent_num": 10,
+    "percent_factor": 0.01,
+    "discount_amount": 13.0,
+    "final_cost": 117.0,
+    "answer": 117.0
+  },
+  "flawed_trace": {
+    "num_shorts": 3,
+    "cost_per_short": 15,
+    "jimmy_shorts_cost": 45,
+    "num_shirts": 5,
+    "cost_per_shirt": 17,
+    "irene_shirts_cost": 85,
+    "total_initial_cost": 130,
+    "discount_percent_num": 10,
+    "percent_factor": 0.01,
+    "discount_amount": 13.0,
+    "final_cost": 113,
+    "answer": 113
+  },
+  "correct_value": 117.0,
+  "flawed_value": 113,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "jimmy_shorts_cost",
+      "question_inputs": [
+        "num_shorts",
+        "cost_per_short"
+      ],
+      "solution_line_template": "Jimmy\u2019s shorts cost {num_shorts} x ${cost_per_short} = $<<{num_shorts}*{cost_per_short}={jimmy_shorts_cost}>>{jimmy_shorts_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "irene_shirts_cost",
+      "question_inputs": [
+        "num_shirts",
+        "cost_per_shirt"
+      ],
+      "solution_line_template": "Irene\u2019s shirts cost {num_shirts} x ${cost_per_shirt} = $<<{num_shirts}*{cost_per_shirt}={irene_shirts_cost}>>{irene_shirts_cost}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_initial_cost",
+      "question_inputs": [],
+      "solution_line_template": "Total cost for the clothes is ${jimmy_shorts_cost} + ${irene_shirts_cost} = $<<{jimmy_shorts_cost}+{irene_shirts_cost}={total_initial_cost}>>{total_initial_cost}."
+    },
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L4",
+      "output_variable": "discount_amount",
+      "question_inputs": [
+        "discount_percent_num"
+      ],
+      "solution_line_template": "10% discount on the clothes is ${total_initial_cost} x {discount_percent_num}% = $<<{total_initial_cost}*{discount_percent_num}*{percent_factor}={discount_amount}>>{discount_amount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "final_cost",
+      "question_inputs": [],
+      "solution_line_template": "They give the cashier ${total_initial_cost} - ${discount_amount} = $<<{total_initial_cost}-{discount_amount}={final_cost}>>{final_cost}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jimmy\u2019s shorts cost 3 x $15 = $<<3*15=45>>45.",
+    "L2": "Irene\u2019s shirts cost 5 x $17 = $<<5*17=85>>85.",
+    "L3": "Total cost for the clothes is $45 + $85 = $<<45+85=130>>130.",
+    "L4": "10% discount on the clothes is $130 x 10% = $<<130*10*0.01=13>>13.",
+    "L5": "They give the cashier $130 - $17 = $<<130-17=113>>113.",
+    "FA": "#### 113"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operand. The variable 'cost_per_shirt' (value: 17) was used instead of 'discount_amount' (value: 13.0).",
+  "repro_seed": 5789234526271488544,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,63 @@
+{
+  "index": 6316,
+  "original_solution_mapping": {
+    "FA": "#### 15525",
+    "L1": "John will give 155250/1,000 = $<<155250/1000=155.25>>155.25 to each student.",
+    "L2": "For the hundred students, he will give: $155.25 * 100 = $<<155.25*100=15525>>15525"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6316.\n    Returns: the total amount received by the hundred students.\n    \"\"\"\n    # L1\n    total_winnings = 155250 # $155250 in the lottery\n    fraction_given_divisor = 1000 # one-thousandth\n    amount_per_student = total_winnings / fraction_given_divisor\n\n    # L2\n    num_students = 100 # top 100 students\n    total_amount_received = amount_per_student * num_students\n\n    # FA\n    answer = total_amount_received\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_amount_received",
+    "operand_to_replace": "amount_per_student",
+    "replacement_variable": "fraction_given_divisor"
+  },
+  "correct_trace": {
+    "total_winnings": 155250,
+    "fraction_given_divisor": 1000,
+    "amount_per_student": 155.25,
+    "num_students": 100,
+    "total_amount_received": 15525.0,
+    "answer": 15525.0
+  },
+  "flawed_trace": {
+    "total_winnings": 155250,
+    "fraction_given_divisor": 1000,
+    "amount_per_student": 155.25,
+    "num_students": 100,
+    "total_amount_received": 100000,
+    "answer": 100000
+  },
+  "correct_value": 15525.0,
+  "flawed_value": 100000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "amount_per_student",
+      "question_inputs": [
+        "total_winnings",
+        "fraction_given_divisor"
+      ],
+      "solution_line_template": "John will give {total_winnings}/{fraction_given_divisor} = $<<{total_winnings}/{fraction_given_divisor}={amount_per_student}>>{amount_per_student} to each student."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_amount_received",
+      "question_inputs": [
+        "num_students"
+      ],
+      "solution_line_template": "For the hundred students, he will give: ${amount_per_student} * {num_students} = $<<{amount_per_student}*{num_students}={total_amount_received}>>{total_amount_received}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "John will give 155250/1000 = $<<155250/1000=155.25>>155.25 to each student.",
+    "L2": "For the hundred students, he will give: $1000 * 100 = $<<1000*100=100000>>100000",
+    "FA": "#### 100000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'fraction_given_divisor' (value: 1000) was used instead of 'amount_per_student' (value: 155.25).",
+  "repro_seed": 7589976551058440646,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,63 @@
+{
+  "index": 6784,
+  "original_solution_mapping": {
+    "FA": "#### 40",
+    "L1": "Every bus has a capacity of: 120 * 1/6 = <<120*1/6=20>>20 people.",
+    "L2": "Combined, both the buses have a capacity of 20 * 2= <<20*2=40>>40 people."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6784.\n    Returns: the combined capacity of the two buses.\n    \"\"\"\n    # L1\n    train_capacity = 120 # capacity of 120 people\n    bus_capacity_fraction = Fraction(1, 6) # capacity of 1/6 as much as the train\n    single_bus_capacity = train_capacity * bus_capacity_fraction\n\n    # L2\n    number_of_buses = 2 # two buses\n    combined_bus_capacity = single_bus_capacity * number_of_buses\n\n    # FA\n    answer = combined_bus_capacity\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "single_bus_capacity",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x16ab80fd0>"
+  },
+  "correct_trace": {
+    "train_capacity": 120,
+    "bus_capacity_fraction": "1/6",
+    "single_bus_capacity": "20",
+    "number_of_buses": 2,
+    "combined_bus_capacity": "40",
+    "answer": "40"
+  },
+  "flawed_trace": {
+    "train_capacity": 120,
+    "bus_capacity_fraction": "1/6",
+    "single_bus_capacity": "720",
+    "number_of_buses": 2,
+    "combined_bus_capacity": "1440",
+    "answer": "1440"
+  },
+  "correct_value": "20",
+  "flawed_value": "720",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "single_bus_capacity",
+      "question_inputs": [
+        "train_capacity",
+        "bus_capacity_fraction"
+      ],
+      "solution_line_template": "Every bus has a capacity of: {train_capacity} * {bus_capacity_fraction} = <<{train_capacity}*{bus_capacity_fraction}={single_bus_capacity}>>{single_bus_capacity} people."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "combined_bus_capacity",
+      "question_inputs": [
+        "number_of_buses"
+      ],
+      "solution_line_template": "Combined, both the buses have a capacity of {single_bus_capacity} * {number_of_buses}= <<{single_bus_capacity}*{number_of_buses}={combined_bus_capacity}>>{combined_bus_capacity} people."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Every bus has a capacity of: 120 * 1/6 = <<120*1/6=720>>720 people.",
+    "L2": "Combined, both the buses have a capacity of 720 * 2= <<720*2=1440>>1440 people.",
+    "FA": "#### 1440"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 8832499501096589994,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,93 @@
+{
+  "index": 6400,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "The pens and pencils were $1.00 each so 2*1 = $<<2*1=2.00>>2.00",
+    "L2": "The back pack cost $15 and the pens/pencils cost $2.00 so 15+2 = $<<15+2=17.00>>17.00",
+    "L3": "His total spent was $32 and he has already spend $17 so 32-17 = $<<32-17=15.00>>15.00",
+    "L4": "That means he has $15 left to spend on 5 notebooks so the cost would be 15/5 = $<<15/5=3.00>>3.00 each"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6400.\n    Returns: the cost of each notebook.\n    \"\"\"\n    # L1\n    num_items_pens_pencils = 2 # WK\n    cost_per_item_pens_pencils = 1.00 # both the pens and pencils cost $1.00 each\n    cost_pens_pencils = num_items_pens_pencils * cost_per_item_pens_pencils\n\n    # L2\n    backpack_cost = 15 # backpack costs $15\n    cost_backpack_pens_pencils = backpack_cost + cost_pens_pencils\n\n    # L3\n    total_spent = 32 # Dan spent $32\n    remaining_spent = total_spent - cost_backpack_pens_pencils\n\n    # L4\n    num_notebooks = 5 # 5 multi-subject notebooks\n    cost_per_notebook = remaining_spent / num_notebooks\n\n    # FA\n    answer = cost_per_notebook\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "cost_per_notebook",
+    "replacement_variable": "remaining_spent"
+  },
+  "correct_trace": {
+    "num_items_pens_pencils": 2,
+    "cost_per_item_pens_pencils": 1.0,
+    "cost_pens_pencils": 2.0,
+    "backpack_cost": 15,
+    "cost_backpack_pens_pencils": 17.0,
+    "total_spent": 32,
+    "remaining_spent": 15.0,
+    "num_notebooks": 5,
+    "cost_per_notebook": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "num_items_pens_pencils": 2,
+    "cost_per_item_pens_pencils": 1.0,
+    "cost_pens_pencils": 2.0,
+    "backpack_cost": 15,
+    "cost_backpack_pens_pencils": 17.0,
+    "total_spent": 32,
+    "remaining_spent": 15.0,
+    "num_notebooks": 5,
+    "cost_per_notebook": 3.0,
+    "answer": 15.0
+  },
+  "correct_value": 3.0,
+  "flawed_value": 15.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "num_items_pens_pencils"
+      ],
+      "line_number": "L1",
+      "output_variable": "cost_pens_pencils",
+      "question_inputs": [
+        "cost_per_item_pens_pencils"
+      ],
+      "solution_line_template": "The pens and pencils were ${cost_per_item_pens_pencils} each so {num_items_pens_pencils}*{cost_per_item_pens_pencils} = $<<{num_items_pens_pencils}*{cost_per_item_pens_pencils}={cost_pens_pencils}>>{cost_pens_pencils}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cost_backpack_pens_pencils",
+      "question_inputs": [
+        "backpack_cost"
+      ],
+      "solution_line_template": "The back pack cost ${backpack_cost} and the pens/pencils cost ${cost_pens_pencils} so {backpack_cost}+{cost_pens_pencils} = $<<{backpack_cost}+{cost_pens_pencils}={cost_backpack_pens_pencils}>>{cost_backpack_pens_pencils}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "remaining_spent",
+      "question_inputs": [
+        "total_spent"
+      ],
+      "solution_line_template": "His total spent was ${total_spent} and he has already spend ${cost_backpack_pens_pencils} so {total_spent}-{cost_backpack_pens_pencils} = $<<{total_spent}-{cost_backpack_pens_pencils}={remaining_spent}>>{remaining_spent}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "cost_per_notebook",
+      "question_inputs": [
+        "num_notebooks"
+      ],
+      "solution_line_template": "That means he has ${remaining_spent} left to spend on {num_notebooks} notebooks so the cost would be {remaining_spent}/{num_notebooks} = $<<{remaining_spent}/{num_notebooks}={cost_per_notebook}>>{cost_per_notebook} each"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The pens and pencils were $1 each so 2*1 = $<<2*1=2>>2",
+    "L2": "The back pack cost $15 and the pens/pencils cost $2 so 15+2 = $<<15+2=17>>17",
+    "L3": "His total spent was $32 and he has already spend $17 so 32-17 = $<<32-17=15>>15",
+    "FA": "#### 15"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'remaining_spent' (value: 15.0) was reported instead of 'cost_per_notebook' (value: 3.0).",
+  "repro_seed": 1220356060805482299,
+  "model_name": "google_gemini-2.5-flash"
+}

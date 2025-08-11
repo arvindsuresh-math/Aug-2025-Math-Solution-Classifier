@@ -1,0 +1,100 @@
+{
+  "index": 4592,
+  "original_solution_mapping": {
+    "FA": "#### 126",
+    "L1": "If they spent two more weeks on their second research expedition than they spent on the first week, they spent 2+3 = <<2+3=5>>5 weeks on the island.",
+    "L2": "In the two expeditions, they stayed on the island for a total of 5+3 = <<5+3=8>>8 weeks.",
+    "L3": "On their third expedition, they spent twice as many weeks as they spent on the second week on the island, which is 2*5 = <<2*5=10>>10 weeks.",
+    "L4": "In all three expeditions, they stayed on the island for 10+8 = <<10+8=18>>18 weeks.",
+    "L5": "Since a week has seven days, they spent 18*7 = <<18*7=126>>126 days on the island."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4592.\n    Returns: the total number of days spent on the island on all trips.\n    \"\"\"\n    # L1\n    first_expedition_weeks = 3 # stayed for three weeks on the island\n    second_expedition_more_weeks = 2 # spent two weeks more on the second expedition\n    second_expedition_weeks = second_expedition_more_weeks + first_expedition_weeks\n\n    # L2\n    total_weeks_first_two_expeditions = second_expedition_weeks + first_expedition_weeks\n\n    # L3\n    multiplier_twice = 2 # twice as many weeks\n    third_expedition_weeks = multiplier_twice * second_expedition_weeks\n\n    # L4\n    total_weeks_all_expeditions = third_expedition_weeks + total_weeks_first_two_expeditions\n\n    # L5\n    days_in_week = 7 # WK\n    total_days_on_island = total_weeks_all_expeditions * days_in_week\n\n    # FA\n    answer = total_days_on_island\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_weeks_first_two_expeditions",
+    "operand_to_replace": "first_expedition_weeks",
+    "replacement_variable": "second_expedition_weeks"
+  },
+  "correct_trace": {
+    "first_expedition_weeks": 3,
+    "second_expedition_more_weeks": 2,
+    "second_expedition_weeks": 5,
+    "total_weeks_first_two_expeditions": 8,
+    "multiplier_twice": 2,
+    "third_expedition_weeks": 10,
+    "total_weeks_all_expeditions": 18,
+    "days_in_week": 7,
+    "total_days_on_island": 126,
+    "answer": 126
+  },
+  "flawed_trace": {
+    "first_expedition_weeks": 3,
+    "second_expedition_more_weeks": 2,
+    "second_expedition_weeks": 5,
+    "total_weeks_first_two_expeditions": 10,
+    "multiplier_twice": 2,
+    "third_expedition_weeks": 10,
+    "total_weeks_all_expeditions": 20,
+    "days_in_week": 7,
+    "total_days_on_island": 140,
+    "answer": 140
+  },
+  "correct_value": 8,
+  "flawed_value": 10,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "second_expedition_weeks",
+      "question_inputs": [
+        "first_expedition_weeks",
+        "second_expedition_more_weeks"
+      ],
+      "solution_line_template": "If they spent {second_expedition_more_weeks} more weeks on their second research expedition than they spent on the first week, they spent {second_expedition_more_weeks}+{first_expedition_weeks} = <<{second_expedition_more_weeks}+{first_expedition_weeks}={second_expedition_weeks}>>{second_expedition_weeks} weeks on the island."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_weeks_first_two_expeditions",
+      "question_inputs": [],
+      "solution_line_template": "In the two expeditions, they stayed on the island for a total of {second_expedition_weeks}+{first_expedition_weeks} = <<{second_expedition_weeks}+{first_expedition_weeks}={total_weeks_first_two_expeditions}>>{total_weeks_first_two_expeditions} weeks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "third_expedition_weeks",
+      "question_inputs": [
+        "multiplier_twice"
+      ],
+      "solution_line_template": "On their third expedition, they spent twice as many weeks as they spent on the second week on the island, which is {multiplier_twice}*{second_expedition_weeks} = <<{multiplier_twice}*{second_expedition_weeks}={third_expedition_weeks}>>{third_expedition_weeks} weeks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_weeks_all_expeditions",
+      "question_inputs": [],
+      "solution_line_template": "In all three expeditions, they stayed on the island for {third_expedition_weeks}+{total_weeks_first_two_expeditions} = <<{third_expedition_weeks}+{total_weeks_first_two_expeditions}={total_weeks_all_expeditions}>>{total_weeks_all_expeditions} weeks."
+    },
+    {
+      "WK_inputs": [
+        "days_in_week"
+      ],
+      "line_number": "L5",
+      "output_variable": "total_days_on_island",
+      "question_inputs": [],
+      "solution_line_template": "Since a week has seven days, they spent {total_weeks_all_expeditions}*{days_in_week} = <<{total_weeks_all_expeditions}*{days_in_week}={total_days_on_island}>>{total_days_on_island} days on the island."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If they spent 2 more weeks on their second research expedition than they spent on the first week, they spent 2+3 = <<2+3=5>>5 weeks on the island.",
+    "L2": "In the two expeditions, they stayed on the island for a total of 5+5 = <<5+5=10>>10 weeks.",
+    "L3": "On their third expedition, they spent twice as many weeks as they spent on the second week on the island, which is 2*5 = <<2*5=10>>10 weeks.",
+    "L4": "In all three expeditions, they stayed on the island for 10+10 = <<10+10=20>>20 weeks.",
+    "L5": "Since a week has seven days, they spent 20*7 = <<20*7=140>>140 days on the island.",
+    "FA": "#### 140"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'second_expedition_weeks' (5) was used instead of 'first_expedition_weeks' (3).",
+  "repro_seed": 6145094212999890285,
+  "model_name": "google_gemini-2.5-flash"
+}

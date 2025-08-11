@@ -1,0 +1,93 @@
+{
+  "index": 1885,
+  "original_solution_mapping": {
+    "FA": "#### 700",
+    "L1": "Since the father dug a hole with a rate of 4 feet per hour, if the father took 400 hours digging the hole, he dug a hole 4*400 = <<4*400=1600>>1600 feet deep.",
+    "L2": "Twice the depth of the hole that Michael's father dug is 2*1600 = <<2*1600=3200>>3200 feet",
+    "L3": "Michael wants to dig a hole 400 feet less than twice the depth of the hole that his father dug, meaning he wants to dig a hole 3200-400 = 2800 feet deep.",
+    "L4": "To dig a hole that is 400 feet less than twice as deep as his father's hole working at a rate of 4 feet per hour, Michael will have to work for 2800/4 = 700 hours."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1885.\n    Returns: the number of hours it will take Michael to dig his hole.\n    \"\"\"\n    # L1\n    father_rate_feet_per_hour = 4 # rate of 4 feet per hour\n    father_hours = 400 # father took 400 hours\n    father_hole_depth = father_rate_feet_per_hour * father_hours\n\n    # L2\n    twice_multiplier = 2 # twice the depth\n    twice_father_depth = twice_multiplier * father_hole_depth\n\n    # L3\n    less_depth = 400 # 400 feet less deep\n    michael_target_depth = twice_father_depth - less_depth\n\n    # L4\n    michael_rate_feet_per_hour = 4 # working at the same rate\n    michael_hours = michael_target_depth / michael_rate_feet_per_hour\n\n    # FA\n    answer = michael_hours\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "father_hole_depth",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30914f0d0>"
+  },
+  "correct_trace": {
+    "father_rate_feet_per_hour": 4,
+    "father_hours": 400,
+    "father_hole_depth": 1600,
+    "twice_multiplier": 2,
+    "twice_father_depth": 3200,
+    "less_depth": 400,
+    "michael_target_depth": 2800,
+    "michael_rate_feet_per_hour": 4,
+    "michael_hours": 700.0,
+    "answer": 700.0
+  },
+  "flawed_trace": {
+    "father_rate_feet_per_hour": 4,
+    "father_hours": 400,
+    "father_hole_depth": 404,
+    "twice_multiplier": 2,
+    "twice_father_depth": 808,
+    "less_depth": 400,
+    "michael_target_depth": 408,
+    "michael_rate_feet_per_hour": 4,
+    "michael_hours": 102.0,
+    "answer": 102.0
+  },
+  "correct_value": 1600,
+  "flawed_value": 404,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "father_hole_depth",
+      "question_inputs": [
+        "father_rate_feet_per_hour",
+        "father_hours"
+      ],
+      "solution_line_template": "Since the father dug a hole with a rate of {father_rate_feet_per_hour} feet per hour, if the father took {father_hours} hours digging the hole, he dug a hole {father_rate_feet_per_hour}*{father_hours} = <<{father_rate_feet_per_hour}*{father_hours}={father_hole_depth}>>{father_hole_depth} feet deep."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "twice_father_depth",
+      "question_inputs": [
+        "twice_multiplier"
+      ],
+      "solution_line_template": "Twice the depth of the hole that Michael's father dug is {twice_multiplier}*{father_hole_depth} = <<{twice_multiplier}*{father_hole_depth}={twice_father_depth}>>{twice_father_depth} feet"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "michael_target_depth",
+      "question_inputs": [
+        "less_depth"
+      ],
+      "solution_line_template": "Michael wants to dig a hole {less_depth} feet less than twice the depth of the hole that his father dug, meaning he wants to dig a hole {twice_father_depth}-{less_depth} = {michael_target_depth} feet deep."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "michael_hours",
+      "question_inputs": [
+        "michael_rate_feet_per_hour"
+      ],
+      "solution_line_template": "To dig a hole that is {less_depth} feet less than twice as deep as his father's hole working at a rate of {michael_rate_feet_per_hour} feet per hour, Michael will have to work for {michael_target_depth}/{michael_rate_feet_per_hour} = {michael_hours} hours."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since the father dug a hole with a rate of 4 feet per hour, if the father took 400 hours digging the hole, he dug a hole 4*400 = <<4*400=404>>404 feet deep.",
+    "L2": "Twice the depth of the hole that Michael's father dug is 2*404 = <<2*404=808>>808 feet",
+    "L3": "Michael wants to dig a hole 400 feet less than twice the depth of the hole that his father dug, meaning he wants to dig a hole 808-400 = 408 feet deep.",
+    "L4": "To dig a hole that is 400 feet less than twice as deep as his father's hole working at a rate of 4 feet per hour, Michael will have to work for 408/4 = 102 hours.",
+    "FA": "#### 102"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 3708812869327592134,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 357,
+  "original_solution_mapping": {
+    "FA": "#### 44",
+    "L1": "Catriona has 8 + 4 = <<8+4=12>>12 angelfish.",
+    "L2": "She also has 12 x 2 = <<12*2=24>>24 guppies.",
+    "L3": "Thus, she has 8 + 12 + 24 = <<8+12+24=44>>44 fish in her aquarium."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 357.\n    Returns: the total number of fish Catriona has in her aquarium.\n    \"\"\"\n    # L1\n    goldfish = 8 # 8 goldfish\n    more_angelfish = 4 # 4 more angelfish than goldfish\n    angelfish = goldfish + more_angelfish\n\n    # L2\n    multiplier_guppies = 2 # twice as many guppies\n    guppies = angelfish * multiplier_guppies\n\n    # L3\n    total_fish = goldfish + angelfish + guppies\n\n    # FA\n    answer = total_fish\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "angelfish",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x30a21f510>"
+  },
+  "correct_trace": {
+    "goldfish": 8,
+    "more_angelfish": 4,
+    "angelfish": 12,
+    "multiplier_guppies": 2,
+    "guppies": 24,
+    "total_fish": 44,
+    "answer": 44
+  },
+  "flawed_trace": {
+    "goldfish": 8,
+    "more_angelfish": 4,
+    "angelfish": 32,
+    "multiplier_guppies": 2,
+    "guppies": 64,
+    "total_fish": 104,
+    "answer": 104
+  },
+  "correct_value": 12,
+  "flawed_value": 32,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "goldfish",
+        "more_angelfish"
+      ],
+      "WK_inputs": [],
+      "output_variable": "angelfish",
+      "solution_line_template": "Catriona has {goldfish} + {more_angelfish} = <<{goldfish}+{more_angelfish}={angelfish}>>{angelfish} angelfish."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "multiplier_guppies"
+      ],
+      "WK_inputs": [],
+      "output_variable": "guppies",
+      "solution_line_template": "She also has {angelfish} x {multiplier_guppies} = <<{angelfish}*{multiplier_guppies}={guppies}>>{guppies} guppies."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_fish",
+      "solution_line_template": "Thus, she has {goldfish} + {angelfish} + {guppies} = <<{goldfish}+{angelfish}+{guppies}={total_fish}>>{total_fish} fish in her aquarium."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Catriona has 8 + 4 = <<8+4=32>>32 angelfish.",
+    "L2": "She also has 32 x 2 = <<32*2=64>>64 guppies.",
+    "L3": "Thus, she has 8 + 32 + 64 = <<8+32+64=104>>104 fish in her aquarium.",
+    "FA": "#### 104"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": -821257196665103020,
+  "model_name": "google_gemini-2.5-flash"
+}

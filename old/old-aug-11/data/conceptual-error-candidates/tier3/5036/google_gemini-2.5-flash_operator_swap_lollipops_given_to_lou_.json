@@ -1,0 +1,74 @@
+{
+  "index": 5036,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "Marlon gave Emily 42 x 2/3 = <<42*2/3=28>>28 lollipops.",
+    "L2": "So, he only had 42 - 28 = <<42-28=14>>14 lollipops left.",
+    "L3": "After keeping 4, Marlon gave 14 - 4 = <<14-4=10>>10 lollipops to Lou."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5036.\n    Returns: the number of lollipops Lou received.\n    \"\"\"\n    # L1\n    initial_lollipops = 42 # Marlon had 42 lollipops\n    fraction_given_to_emily = Fraction(2, 3) # gave her 2/3 of his lollipops\n    lollipops_given_to_emily = initial_lollipops * fraction_given_to_emily\n\n    # L2\n    lollipops_left_after_emily = initial_lollipops - lollipops_given_to_emily\n\n    # L3\n    lollipops_kept_by_marlon = 4 # Marlon kept 4 lollipops\n    lollipops_given_to_lou = lollipops_left_after_emily - lollipops_kept_by_marlon\n\n    # FA\n    answer = lollipops_given_to_lou\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "lollipops_given_to_lou",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Div object at 0x16ab573d0>"
+  },
+  "correct_trace": {
+    "initial_lollipops": 42,
+    "fraction_given_to_emily": "2/3",
+    "lollipops_given_to_emily": "28",
+    "lollipops_left_after_emily": "14",
+    "lollipops_kept_by_marlon": 4,
+    "lollipops_given_to_lou": "10",
+    "answer": "10"
+  },
+  "flawed_trace": {
+    "initial_lollipops": 42,
+    "fraction_given_to_emily": "2/3",
+    "lollipops_given_to_emily": "28",
+    "lollipops_left_after_emily": "14",
+    "lollipops_kept_by_marlon": 4,
+    "lollipops_given_to_lou": "7/2",
+    "answer": "7/2"
+  },
+  "correct_value": "10",
+  "flawed_value": "7/2",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "lollipops_given_to_emily",
+      "question_inputs": [
+        "initial_lollipops",
+        "fraction_given_to_emily"
+      ],
+      "solution_line_template": "Marlon gave Emily {initial_lollipops} x {fraction_given_to_emily} = <<{initial_lollipops}*{fraction_given_to_emily}={lollipops_given_to_emily}>>{lollipops_given_to_emily} lollipops."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "lollipops_left_after_emily",
+      "question_inputs": [],
+      "solution_line_template": "So, he only had {initial_lollipops} - {lollipops_given_to_emily} = <<{initial_lollipops}-{lollipops_given_to_emily}={lollipops_left_after_emily}>>{lollipops_left_after_emily} lollipops left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "lollipops_given_to_lou",
+      "question_inputs": [
+        "lollipops_kept_by_marlon"
+      ],
+      "solution_line_template": "After keeping {lollipops_kept_by_marlon}, Marlon gave {lollipops_left_after_emily} - {lollipops_kept_by_marlon} = <<{lollipops_left_after_emily}-{lollipops_kept_by_marlon}={lollipops_given_to_lou}>>{lollipops_given_to_lou} lollipops to Lou."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Marlon gave Emily 42 x 2/3 = <<42*2/3=28>>28 lollipops.",
+    "L2": "So, he only had 42 - 28 = <<42-28=14>>14 lollipops left.",
+    "L3": "After keeping 4, Marlon gave 14 - 4 = <<14-4=7/2>>7/2 lollipops to Lou.",
+    "FA": "#### 7/2"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '/' instead.",
+  "repro_seed": -1590269083355240142,
+  "model_name": "google_gemini-2.5-flash"
+}

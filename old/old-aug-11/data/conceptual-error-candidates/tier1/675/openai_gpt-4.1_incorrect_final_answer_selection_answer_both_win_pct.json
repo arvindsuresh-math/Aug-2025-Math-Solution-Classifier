@@ -1,0 +1,89 @@
+{
+  "index": 675,
+  "original_solution_mapping": {
+    "FA": "#### 20",
+    "L1": "First find the probability that Andy will lose the first lawsuit: 100% - 30% = 70%",
+    "L2": "Then multiply that probability by the probability he loses the second lawsuit: 70% * 50% = 35%",
+    "L3": "Then multiply the probabilities of Andy winning each lawsuit to find the probability he wins them both: 30% * 50% = 15%",
+    "L4": "Then subtract the probability Andy wins both lawsuits from the probability he loses both lawsuits to find the difference: 35% - 15% = 20%"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 675.\n    Returns: the percentage by which losing both lawsuits is more likely than winning both.\n    \"\"\"\n    # L1\n    win_first_pct = 30 # 30% chance of paying out $5,000,000 upon a win\n    total_pct = 100 # WK\n    lose_first_pct = total_pct - win_first_pct\n\n    # L2\n    lose_second_pct = 50 # 50% chance of paying out $1,000,000 if Andy loses\n    both_lose_pct = lose_first_pct * lose_second_pct // total_pct\n\n    # L3\n    win_second_pct = 50 # 50% chance of paying out $2,000,000 if he wins\n    both_win_pct = win_first_pct * win_second_pct // total_pct\n\n    # L4\n    difference_pct = both_lose_pct - both_win_pct\n\n    # FA\n    answer = difference_pct\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "difference_pct",
+    "replacement_variable": "both_win_pct"
+  },
+  "correct_trace": {
+    "win_first_pct": 30,
+    "total_pct": 100,
+    "lose_first_pct": 70,
+    "lose_second_pct": 50,
+    "both_lose_pct": 35,
+    "win_second_pct": 50,
+    "both_win_pct": 15,
+    "difference_pct": 20,
+    "answer": 20
+  },
+  "flawed_trace": {
+    "win_first_pct": 30,
+    "total_pct": 100,
+    "lose_first_pct": 70,
+    "lose_second_pct": 50,
+    "both_lose_pct": 35,
+    "win_second_pct": 50,
+    "both_win_pct": 15,
+    "difference_pct": 20,
+    "answer": 15
+  },
+  "correct_value": 20,
+  "flawed_value": 15,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "win_first_pct"
+      ],
+      "WK_inputs": [
+        "total_pct"
+      ],
+      "output_variable": "lose_first_pct",
+      "solution_line_template": "First find the probability that Andy will lose the first lawsuit: {total_pct}% - {win_first_pct}% = {lose_first_pct}%"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "lose_second_pct"
+      ],
+      "WK_inputs": [],
+      "output_variable": "both_lose_pct",
+      "solution_line_template": "Then multiply that probability by the probability he loses the second lawsuit: {lose_first_pct}% * {lose_second_pct}% = {both_lose_pct}%"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "win_second_pct"
+      ],
+      "WK_inputs": [],
+      "output_variable": "both_win_pct",
+      "solution_line_template": "Then multiply the probabilities of Andy winning each lawsuit to find the probability he wins them both: {win_first_pct}% * {win_second_pct}% = {both_win_pct}%"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "difference_pct",
+      "solution_line_template": "Then subtract the probability Andy wins both lawsuits from the probability he loses both lawsuits to find the difference: {both_lose_pct}% - {both_win_pct}% = {difference_pct}%"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the probability that Andy will lose the first lawsuit: 100% - 30% = 70%",
+    "L2": "Then multiply that probability by the probability he loses the second lawsuit: 70% * 50% = 35%",
+    "L3": "Then multiply the probabilities of Andy winning each lawsuit to find the probability he wins them both: 30% * 50% = 15%",
+    "FA": "#### 15"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'both_win_pct' (value: 15) was reported instead of 'difference_pct' (value: 20).",
+  "repro_seed": -7964733375395243846,
+  "model_name": "openai_gpt-4.1"
+}

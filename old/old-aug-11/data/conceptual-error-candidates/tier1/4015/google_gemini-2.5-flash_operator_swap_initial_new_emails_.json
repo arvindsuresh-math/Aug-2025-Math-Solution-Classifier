@@ -1,0 +1,63 @@
+{
+  "index": 4015,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "Jackson deleted all his old emails so now he only has the new ones left, which he first gets 15 + 5 of = <<15+5=20>>20 emails.",
+    "L2": "Then Jackson receives 10 more emails to add to the other 20 new ones, 10 + 20 = <<10+20=30>>30 new emails."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4015.\n    Returns: the total number of emails in Jackson's inbox now.\n    \"\"\"\n    # L1\n    first_received_emails = 15 # gets another 15 sent to him\n    second_received_emails = 5 # receives 5 more emails\n    initial_new_emails = first_received_emails + second_received_emails\n\n    # L2\n    final_received_emails = 10 # 10 more that were sent to him\n    total_new_emails = final_received_emails + initial_new_emails\n\n    # FA\n    answer = total_new_emails\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "initial_new_emails",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x3098bb050>"
+  },
+  "correct_trace": {
+    "first_received_emails": 15,
+    "second_received_emails": 5,
+    "initial_new_emails": 20,
+    "final_received_emails": 10,
+    "total_new_emails": 30,
+    "answer": 30
+  },
+  "flawed_trace": {
+    "first_received_emails": 15,
+    "second_received_emails": 5,
+    "initial_new_emails": 75,
+    "final_received_emails": 10,
+    "total_new_emails": 85,
+    "answer": 85
+  },
+  "correct_value": 20,
+  "flawed_value": 75,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "initial_new_emails",
+      "question_inputs": [
+        "first_received_emails",
+        "second_received_emails"
+      ],
+      "solution_line_template": "Jackson deleted all his old emails so now he only has the new ones left, which he first gets {first_received_emails} + {second_received_emails} of = <<{first_received_emails}+{second_received_emails}={initial_new_emails}>>{initial_new_emails} emails."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_new_emails",
+      "question_inputs": [
+        "final_received_emails"
+      ],
+      "solution_line_template": "Then Jackson receives {final_received_emails} more emails to add to the other {initial_new_emails} new ones, {final_received_emails} + {initial_new_emails} = <<{final_received_emails}+{initial_new_emails}={total_new_emails}>>{total_new_emails} new emails."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jackson deleted all his old emails so now he only has the new ones left, which he first gets 15 + 5 of = <<15+5=75>>75 emails.",
+    "L2": "Then Jackson receives 10 more emails to add to the other 75 new ones, 10 + 75 = <<10+75=85>>85 new emails.",
+    "FA": "#### 85"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 2346895753675972716,
+  "model_name": "google_gemini-2.5-flash"
+}

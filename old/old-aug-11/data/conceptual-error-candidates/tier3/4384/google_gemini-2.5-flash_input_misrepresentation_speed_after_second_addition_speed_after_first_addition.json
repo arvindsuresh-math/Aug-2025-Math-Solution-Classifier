@@ -1,0 +1,66 @@
+{
+  "index": 4384,
+  "original_solution_mapping": {
+    "FA": "#### 125",
+    "L1": "For every addition of 100 people added the speed is halved so for the first 100 people added its speed is 1/2 * 500 km/hr = <<500*1/2=250>>250 km/hr.",
+    "L2": "For another addition of 100 people its speed is also halved, 1/2 * 250 km/hr = <<250*1/2=125>>125 km/hr. So for the total of 200 additional people, its speed is 125 km/hr"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4384.\n    Returns: the speed of the spaceship in km/hr when there are 400 people on board.\n    \"\"\"\n    # L1\n    initial_speed = 500 # speed of the spaceship with 200 people on board is 500km per hour\n    additional_people_increment = 100 # For every 100 additional people\n    speed_reduction_factor = Fraction(1, 2) # speed is halved\n    speed_after_first_addition = speed_reduction_factor * initial_speed\n\n    # L2\n    total_additional_people = 200 # when there are 400 people on board\n    speed_after_second_addition = speed_reduction_factor * speed_after_first_addition\n\n    # FA\n    answer = speed_after_second_addition\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "speed_after_second_addition",
+    "operand_to_replace": "speed_reduction_factor",
+    "replacement_variable": "speed_after_first_addition"
+  },
+  "correct_trace": {
+    "initial_speed": 500,
+    "additional_people_increment": 100,
+    "speed_reduction_factor": "1/2",
+    "speed_after_first_addition": "250",
+    "total_additional_people": 200,
+    "speed_after_second_addition": "125",
+    "answer": "125"
+  },
+  "flawed_trace": {
+    "initial_speed": 500,
+    "additional_people_increment": 100,
+    "speed_reduction_factor": "1/2",
+    "speed_after_first_addition": "250",
+    "total_additional_people": 200,
+    "speed_after_second_addition": "62500",
+    "answer": "62500"
+  },
+  "correct_value": "125",
+  "flawed_value": "62500",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "speed_after_first_addition",
+      "question_inputs": [
+        "initial_speed",
+        "additional_people_increment",
+        "speed_reduction_factor"
+      ],
+      "solution_line_template": "For every addition of {additional_people_increment} people added the speed is halved so for the first {additional_people_increment} people added its speed is {speed_reduction_factor} * {initial_speed} km/hr = <<{initial_speed}*{speed_reduction_factor}={speed_after_first_addition}>>{speed_after_first_addition} km/hr."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "speed_after_second_addition",
+      "question_inputs": [
+        "total_additional_people"
+      ],
+      "solution_line_template": "For another addition of {additional_people_increment} people its speed is also halved, {speed_reduction_factor} * {speed_after_first_addition} km/hr = <<{speed_after_first_addition}*{speed_reduction_factor}={speed_after_second_addition}>>{speed_after_second_addition} km/hr. So for the total of {total_additional_people} additional people, its speed is {speed_after_second_addition} km/hr"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "For every addition of 100 people added the speed is halved so for the first 100 people added its speed is 1/2 * 500 km/hr = <<500*1/2=250>>250 km/hr.",
+    "L2": "For another addition of 100 people its speed is also halved, 250 * 250 km/hr = <<250*250=62500>>62500 km/hr. So for the total of 200 additional people, its speed is 62500 km/hr",
+    "FA": "#### 62500"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'speed_after_first_addition' (250) was used instead of 'speed_reduction_factor' (1/2).",
+  "repro_seed": 5121865061695366869,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,63 @@
+{
+  "index": 7143,
+  "original_solution_mapping": {
+    "FA": "#### 55",
+    "L1": "If each token is worth $4, then $20 worth of tokens is $20/$4 = <<20/4=5>>5 tokens",
+    "L2": "Angus has 5 tokens less than Elsa who has 60 so Angus has 60-5 = <<60-5=55>>55 tokens"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7143.\n    Returns: the number of tokens Angus has.\n    \"\"\"\n    # L1\n    worth_less_dollars = 20 # $20 worth of tokens less\n    token_value = 4 # each token is worth $4\n    worth_less_tokens = worth_less_dollars / token_value\n\n    # L2\n    elsa_tokens = 60 # Elsa has 60 tokens\n    angus_tokens = elsa_tokens - worth_less_tokens\n\n    # FA\n    answer = angus_tokens\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "worth_less_tokens",
+    "operand_to_replace": "worth_less_dollars",
+    "replacement_variable": "token_value"
+  },
+  "correct_trace": {
+    "worth_less_dollars": 20,
+    "token_value": 4,
+    "worth_less_tokens": 5.0,
+    "elsa_tokens": 60,
+    "angus_tokens": 55.0,
+    "answer": 55.0
+  },
+  "flawed_trace": {
+    "worth_less_dollars": 20,
+    "token_value": 4,
+    "worth_less_tokens": 1.0,
+    "elsa_tokens": 60,
+    "angus_tokens": 59.0,
+    "answer": 59.0
+  },
+  "correct_value": 5.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "worth_less_tokens",
+      "question_inputs": [
+        "worth_less_dollars",
+        "token_value"
+      ],
+      "solution_line_template": "If each token is worth ${token_value}, then ${worth_less_dollars} worth of tokens is ${worth_less_dollars}/${token_value} = <<{worth_less_dollars}/{token_value}={worth_less_tokens}>>{worth_less_tokens} tokens"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "angus_tokens",
+      "question_inputs": [
+        "elsa_tokens"
+      ],
+      "solution_line_template": "Angus has {worth_less_tokens} tokens less than Elsa who has {elsa_tokens} so Angus has {elsa_tokens}-{worth_less_tokens} = <<{elsa_tokens}-{worth_less_tokens}={angus_tokens}>>{angus_tokens} tokens"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If each token is worth $4, then $4 worth of tokens is $4/$4 = <<4/4=1>>1 tokens",
+    "L2": "Angus has 1 tokens less than Elsa who has 60 so Angus has 60-1 = <<60-1=59>>59 tokens",
+    "FA": "#### 59"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'token_value' (4) was used instead of 'worth_less_dollars' (20).",
+  "repro_seed": -5294219117788060011,
+  "model_name": "google_gemini-2.5-flash"
+}

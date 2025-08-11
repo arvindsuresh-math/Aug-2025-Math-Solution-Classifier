@@ -1,0 +1,92 @@
+{
+  "index": 137,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "There are 3 families of 4 meaning there are 3*4 =<<3*4=12>>12 people in the vacation rental",
+    "L2": "They all use 1 oversized beach towel a day so they use 1*12 = <<1*12=12>>12 towels a day",
+    "L3": "They use 12 towels a day for 7 days so in one week they use 12*7 = <<12*7=84>>84 beach towels",
+    "L4": "The washing machine can only hold 14 towels and they have 84 towels to wash which means there are 84/14 =<<84/14=6>>6 loads of laundry"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 137.\n    Returns: the total number of loads of laundry required.\n    \"\"\"\n    # L1\n    num_families = 3 # 3 families\n    people_per_family = 4 # 4 people\n    total_people = num_families * people_per_family\n\n    # L2\n    towels_per_person_per_day = 1 # 1 oversized beach towel a day\n    towels_per_day = towels_per_person_per_day * total_people\n\n    # L3\n    vacation_days = 7 # for 7 days\n    total_towels_used = towels_per_day * vacation_days\n\n    # L4\n    washer_capacity = 14 # can hold 14 oversized beach towels per load\n    num_loads = total_towels_used / washer_capacity\n\n    # FA\n    answer = num_loads\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "num_loads",
+    "replacement_variable": "total_towels_used"
+  },
+  "correct_trace": {
+    "num_families": 3,
+    "people_per_family": 4,
+    "total_people": 12,
+    "towels_per_person_per_day": 1,
+    "towels_per_day": 12,
+    "vacation_days": 7,
+    "total_towels_used": 84,
+    "washer_capacity": 14,
+    "num_loads": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "num_families": 3,
+    "people_per_family": 4,
+    "total_people": 12,
+    "towels_per_person_per_day": 1,
+    "towels_per_day": 12,
+    "vacation_days": 7,
+    "total_towels_used": 84,
+    "washer_capacity": 14,
+    "num_loads": 6.0,
+    "answer": 84
+  },
+  "correct_value": 6.0,
+  "flawed_value": 84,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_people",
+      "question_inputs": [
+        "num_families",
+        "people_per_family"
+      ],
+      "solution_line_template": "There are {num_families} families of {people_per_family} meaning there are {num_families}*{people_per_family} =<<{num_families}*{people_per_family}={total_people}>>{total_people} people in the vacation rental"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "towels_per_day",
+      "question_inputs": [
+        "towels_per_person_per_day"
+      ],
+      "solution_line_template": "They all use {towels_per_person_per_day} oversized beach towel a day so they use {towels_per_person_per_day}*{total_people} = <<{towels_per_person_per_day}*{total_people}={towels_per_day}>>{towels_per_day} towels a day"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_towels_used",
+      "question_inputs": [
+        "vacation_days"
+      ],
+      "solution_line_template": "They use {towels_per_day} towels a day for {vacation_days} days so in one week they use {towels_per_day}*{vacation_days} = <<{towels_per_day}*{vacation_days}={total_towels_used}>>{total_towels_used} beach towels"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "num_loads",
+      "question_inputs": [
+        "washer_capacity"
+      ],
+      "solution_line_template": "The washing machine can only hold {washer_capacity} towels and they have {total_towels_used} towels to wash which means there are {total_towels_used}/{washer_capacity} =<<{total_towels_used}/{washer_capacity}={num_loads}>>{num_loads} loads of laundry"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 3 families of 4 meaning there are 3*4 =<<3*4=12>>12 people in the vacation rental",
+    "L2": "They all use 1 oversized beach towel a day so they use 1*12 = <<1*12=12>>12 towels a day",
+    "L3": "They use 12 towels a day for 7 days so in one week they use 12*7 = <<12*7=84>>84 beach towels",
+    "FA": "#### 84"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'total_towels_used' (value: 84) was reported instead of 'num_loads' (value: 6.0).",
+  "repro_seed": -5270674816175769117,
+  "model_name": "google_gemini-2.5-flash"
+}

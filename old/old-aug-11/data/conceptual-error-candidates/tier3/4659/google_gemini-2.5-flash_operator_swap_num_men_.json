@@ -1,0 +1,85 @@
+{
+  "index": 4659,
+  "original_solution_mapping": {
+    "FA": "#### 14",
+    "L1": "There are 48 x 2/3 = <<48*2/3=32>>32 women on the bus.",
+    "L2": "So, 48 - 32 = <<48-32=16>>16 are men.",
+    "L3": "Out of the 16, 16 x 1/8 = <<16*1/8=2>>2 men are standing.",
+    "L4": "Hence, 16 - 2 = <<16-2=14>>14 men are seated."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4659.\n    Returns: the number of men seated on the bus.\n    \"\"\"\n    # L1\n    total_passengers = 48 # 48 passengers on the bus\n    women_fraction = Fraction(2, 3) # Two-thirds of the passengers are women\n    num_women = total_passengers * women_fraction\n\n    # L2\n    num_men = total_passengers - num_women\n\n    # L3\n    standing_men_fraction = Fraction(1, 8) # one-eighth of the men are standing\n    num_men_standing = num_men * standing_men_fraction\n\n    # L4\n    num_men_seated = num_men - num_men_standing\n\n    # FA\n    answer = num_men_seated\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "num_men",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30a8be550>"
+  },
+  "correct_trace": {
+    "total_passengers": 48,
+    "women_fraction": "2/3",
+    "num_women": "32",
+    "num_men": "16",
+    "standing_men_fraction": "1/8",
+    "num_men_standing": "2",
+    "num_men_seated": "14",
+    "answer": "14"
+  },
+  "flawed_trace": {
+    "total_passengers": 48,
+    "women_fraction": "2/3",
+    "num_women": "32",
+    "num_men": "80",
+    "standing_men_fraction": "1/8",
+    "num_men_standing": "10",
+    "num_men_seated": "70",
+    "answer": "70"
+  },
+  "correct_value": "16",
+  "flawed_value": "80",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "num_women",
+      "question_inputs": [
+        "total_passengers",
+        "women_fraction"
+      ],
+      "solution_line_template": "There are {total_passengers} x {women_fraction} = <<{total_passengers}*{women_fraction}={num_women}>>{num_women} women on the bus."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_men",
+      "question_inputs": [],
+      "solution_line_template": "So, {total_passengers} - {num_women} = <<{total_passengers}-{num_women}={num_men}>>{num_men} are men."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "num_men_standing",
+      "question_inputs": [
+        "standing_men_fraction"
+      ],
+      "solution_line_template": "Out of the {num_men}, {num_men} x {standing_men_fraction} = <<{num_men}*{standing_men_fraction}={num_men_standing}>>{num_men_standing} men are standing."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "num_men_seated",
+      "question_inputs": [],
+      "solution_line_template": "Hence, {num_men} - {num_men_standing} = <<{num_men}-{num_men_standing}={num_men_seated}>>{num_men_seated} men are seated."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 48 x 2/3 = <<48*2/3=32>>32 women on the bus.",
+    "L2": "So, 48 - 32 = <<48-32=80>>80 are men.",
+    "L3": "Out of the 80, 80 x 1/8 = <<80*1/8=10>>10 men are standing.",
+    "L4": "Hence, 80 - 10 = <<80-10=70>>70 men are seated.",
+    "FA": "#### 70"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 5671975909395119100,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,69 @@
+{
+  "index": 1041,
+  "original_solution_mapping": {
+    "FA": "#### 130",
+    "L1": "Since 80% of the people were adults, this means 100% - 80% = 20 % were children.",
+    "L2": "20% of the people vaccinated were children. The number of children is 20% of 650.",
+    "L3": "20% = 0.2, so 0.2 * 650 = <<0.2*650=130>>130 children were vaccinated."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1041.\n    Returns: the number of vaccinated children.\n    \"\"\"\n    # L1\n    adult_percent = 80 # 80% of the people were adults\n    total_percent = 100 # WK\n    children_percent = total_percent - adult_percent\n\n    # L3\n    children_percent_decimal = 0.2 # WK\n    total_vaccinated_people = 650 # 650 people\n    num_children_vaccinated = children_percent_decimal * total_vaccinated_people\n\n    # FA\n    answer = num_children_vaccinated\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "num_children_vaccinated",
+    "operand_to_replace": "children_percent_decimal",
+    "replacement_variable": "total_percent"
+  },
+  "correct_trace": {
+    "adult_percent": 80,
+    "total_percent": 100,
+    "children_percent": 20,
+    "children_percent_decimal": 0.2,
+    "total_vaccinated_people": 650,
+    "num_children_vaccinated": 130.0,
+    "answer": 130.0
+  },
+  "flawed_trace": {
+    "adult_percent": 80,
+    "total_percent": 100,
+    "children_percent": 20,
+    "children_percent_decimal": 0.2,
+    "total_vaccinated_people": 650,
+    "num_children_vaccinated": 65000,
+    "answer": 65000
+  },
+  "correct_value": 130.0,
+  "flawed_value": 65000,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "total_percent"
+      ],
+      "line_number": "L1",
+      "output_variable": "children_percent",
+      "question_inputs": [
+        "adult_percent"
+      ],
+      "solution_line_template": "Since {adult_percent}% of the people were adults, this means {total_percent}% - {adult_percent}% = {children_percent} % were children."
+    },
+    {
+      "WK_inputs": [
+        "children_percent_decimal"
+      ],
+      "line_number": "L3",
+      "output_variable": "num_children_vaccinated",
+      "question_inputs": [
+        "total_vaccinated_people"
+      ],
+      "solution_line_template": "{children_percent}% = {children_percent_decimal}, so {children_percent_decimal} * {total_vaccinated_people} = <<{children_percent_decimal}*{total_vaccinated_people}={num_children_vaccinated}>>{num_children_vaccinated} children were vaccinated."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Since 80% of the people were adults, this means 100% - 80% = 20 % were children.",
+    "L3": "20% = 100, so 100 * 650 = <<100*650=65000>>65000 children were vaccinated.",
+    "FA": "#### 65000"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'total_percent' (100) was used instead of 'children_percent_decimal' (0.2).",
+  "repro_seed": 8534197895236406391,
+  "model_name": "google_gemini-2.5-flash"
+}

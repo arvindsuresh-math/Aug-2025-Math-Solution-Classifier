@@ -1,0 +1,85 @@
+{
+  "index": 6546,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "There were 30*.2=<<30*.2=6>>6 people who didn't show up",
+    "L2": "So 30-6=<<30-6=24>>24 people showed up",
+    "L3": "Of the people who showed up, 24*.75=<<24*.75=18>>18 got steak",
+    "L4": "So 24-18=<<24-18=6>>6 got chicken"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6546.\n    Returns: the number of people who ordered chicken.\n    \"\"\"\n    # L1\n    total_invited_people = 30 # invites 30 people\n    no_show_percent_decimal = 0.2 # 20% didn't show up\n    no_show_people = total_invited_people * no_show_percent_decimal\n\n    # L2\n    people_showed_up = total_invited_people - no_show_people\n\n    # L3\n    steak_percent_decimal = 0.75 # 75% of the people who show up get steak\n    people_got_steak = people_showed_up * steak_percent_decimal\n\n    # L4\n    people_got_chicken = people_showed_up - people_got_steak\n\n    # FA\n    answer = people_got_chicken\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "people_got_chicken",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30cdea9d0>"
+  },
+  "correct_trace": {
+    "total_invited_people": 30,
+    "no_show_percent_decimal": 0.2,
+    "no_show_people": 6.0,
+    "people_showed_up": 24.0,
+    "steak_percent_decimal": 0.75,
+    "people_got_steak": 18.0,
+    "people_got_chicken": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "total_invited_people": 30,
+    "no_show_percent_decimal": 0.2,
+    "no_show_people": 6.0,
+    "people_showed_up": 24.0,
+    "steak_percent_decimal": 0.75,
+    "people_got_steak": 18.0,
+    "people_got_chicken": 42.0,
+    "answer": 42.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 42.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "no_show_people",
+      "question_inputs": [
+        "total_invited_people",
+        "no_show_percent_decimal"
+      ],
+      "solution_line_template": "There were {total_invited_people}*{no_show_percent_decimal}=<<{total_invited_people}*{no_show_percent_decimal}={no_show_people}>>{no_show_people} people who didn't show up"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "people_showed_up",
+      "question_inputs": [],
+      "solution_line_template": "So {total_invited_people}-{no_show_people}=<<{total_invited_people}-{no_show_people}={people_showed_up}>>{people_showed_up} people showed up"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "people_got_steak",
+      "question_inputs": [
+        "steak_percent_decimal"
+      ],
+      "solution_line_template": "Of the people who showed up, {people_showed_up}*{steak_percent_decimal}=<<{people_showed_up}*{steak_percent_decimal}={people_got_steak}>>{people_got_steak} got steak"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "people_got_chicken",
+      "question_inputs": [],
+      "solution_line_template": "So {people_showed_up}-{people_got_steak}=<<{people_showed_up}-{people_got_steak}={people_got_chicken}>>{people_got_chicken} got chicken"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There were 30*0.2=<<30*0.2=6>>6 people who didn't show up",
+    "L2": "So 30-6=<<30-6=24>>24 people showed up",
+    "L3": "Of the people who showed up, 24*0.75=<<24*0.75=18>>18 got steak",
+    "L4": "So 24-18=<<24-18=42>>42 got chicken",
+    "FA": "#### 42"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": 5188355173625475062,
+  "model_name": "google_gemini-2.5-flash"
+}

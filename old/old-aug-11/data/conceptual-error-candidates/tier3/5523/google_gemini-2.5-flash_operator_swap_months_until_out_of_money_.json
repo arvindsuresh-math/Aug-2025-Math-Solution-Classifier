@@ -1,0 +1,63 @@
+{
+  "index": 5523,
+  "original_solution_mapping": {
+    "FA": "#### 12",
+    "L1": "Joe can buy a game for $50 and sell it for $30, so he is losing $50 - $30 = $<<50-30=20>>20 each month when he buys and sells a game.",
+    "L2": "Joe starts out with $240 and he buys a game and sells a game he loses $20 per month, so it will take $240/$20 = <<240/20=12>>12 months until he is out of money."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5523.\n    Returns: the number of months Joe can buy and sell games before running out of money.\n    \"\"\"\n    # L1\n    cost_to_buy_game = 50 # spends $50 a month on video games\n    price_to_sell_game = 30 # sells his games for $30 each\n    monthly_loss = cost_to_buy_game - price_to_sell_game\n\n    # L2\n    initial_money = 240 # starts with $240\n    months_until_out_of_money = initial_money / monthly_loss\n\n    # FA\n    answer = months_until_out_of_money\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "months_until_out_of_money",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x1721ceb50>"
+  },
+  "correct_trace": {
+    "cost_to_buy_game": 50,
+    "price_to_sell_game": 30,
+    "monthly_loss": 20,
+    "initial_money": 240,
+    "months_until_out_of_money": 12.0,
+    "answer": 12.0
+  },
+  "flawed_trace": {
+    "cost_to_buy_game": 50,
+    "price_to_sell_game": 30,
+    "monthly_loss": 20,
+    "initial_money": 240,
+    "months_until_out_of_money": 4800,
+    "answer": 4800
+  },
+  "correct_value": 12.0,
+  "flawed_value": 4800,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "monthly_loss",
+      "question_inputs": [
+        "cost_to_buy_game",
+        "price_to_sell_game"
+      ],
+      "solution_line_template": "Joe can buy a game for ${cost_to_buy_game} and sell it for ${price_to_sell_game}, so he is losing ${cost_to_buy_game} - ${price_to_sell_game} = $<<{cost_to_buy_game}-{price_to_sell_game}={monthly_loss}>>{monthly_loss} each month when he buys and sells a game."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "months_until_out_of_money",
+      "question_inputs": [
+        "initial_money"
+      ],
+      "solution_line_template": "Joe starts out with ${initial_money} and he buys a game and sells a game he loses ${monthly_loss} per month, so it will take ${initial_money}/${monthly_loss} = <<{initial_money}/{monthly_loss}={months_until_out_of_money}>>{months_until_out_of_money} months until he is out of money."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Joe can buy a game for $50 and sell it for $30, so he is losing $50 - $30 = $<<50-30=20>>20 each month when he buys and sells a game.",
+    "L2": "Joe starts out with $240 and he buys a game and sells a game he loses $20 per month, so it will take $240/$20 = <<240/20=4800>>4800 months until he is out of money.",
+    "FA": "#### 4800"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 2895504019598408238,
+  "model_name": "google_gemini-2.5-flash"
+}

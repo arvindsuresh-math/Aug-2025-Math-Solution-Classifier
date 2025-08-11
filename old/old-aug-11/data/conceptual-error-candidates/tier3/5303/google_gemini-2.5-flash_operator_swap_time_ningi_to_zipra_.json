@@ -1,0 +1,59 @@
+{
+  "index": 5303,
+  "original_solution_mapping": {
+    "FA": "#### 108",
+    "L1": "If the car traveled from Ningi to Zipra in 80% of the time it traveled from Ngapara to Zipra, it took 80/100*60 = <<80/100*60=48>>48 hours to travel from Ningi to Zipra.",
+    "L2": "The total travel time that day is 48+60 = <<48+60=108>>108 hours"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5303.\n    Returns: the total time the car traveled that day.\n    \"\"\"\n    # L1\n    percentage_ningi_to_zipra = Fraction(80, 100) # 80% of the time\n    time_ngapara_to_zipra = 60 # 60 hours to travel from Ngapara to Zipra\n    time_ningi_to_zipra = percentage_ningi_to_zipra * time_ngapara_to_zipra\n\n    # L2\n    total_travel_time = time_ningi_to_zipra + time_ngapara_to_zipra\n\n    # FA\n    answer = total_travel_time\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "time_ningi_to_zipra",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x16a8813d0>"
+  },
+  "correct_trace": {
+    "percentage_ningi_to_zipra": "4/5",
+    "time_ngapara_to_zipra": 60,
+    "time_ningi_to_zipra": "48",
+    "total_travel_time": "108",
+    "answer": "108"
+  },
+  "flawed_trace": {
+    "percentage_ningi_to_zipra": "4/5",
+    "time_ngapara_to_zipra": 60,
+    "time_ningi_to_zipra": "304/5",
+    "total_travel_time": "604/5",
+    "answer": "604/5"
+  },
+  "correct_value": "48",
+  "flawed_value": "304/5",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "time_ningi_to_zipra",
+      "question_inputs": [
+        "percentage_ningi_to_zipra",
+        "time_ngapara_to_zipra"
+      ],
+      "solution_line_template": "If the car traveled from Ningi to Zipra in {percentage_ningi_to_zipra} of the time it traveled from Ngapara to Zipra, it took {percentage_ningi_to_zipra}*{time_ngapara_to_zipra} = <<{percentage_ningi_to_zipra}*{time_ngapara_to_zipra}={time_ningi_to_zipra}>>{time_ningi_to_zipra} hours to travel from Ningi to Zipra."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_travel_time",
+      "question_inputs": [],
+      "solution_line_template": "The total travel time that day is {time_ningi_to_zipra}+{time_ngapara_to_zipra} = <<{time_ningi_to_zipra}+{time_ngapara_to_zipra}={total_travel_time}>>{total_travel_time} hours"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If the car traveled from Ningi to Zipra in 80/100 of the time it traveled from Ngapara to Zipra, it took 80/100*60 = <<80/100*60=304/5>>304/5 hours to travel from Ningi to Zipra.",
+    "L2": "The total travel time that day is 304/5+60 = <<304/5+60=604/5>>604/5 hours",
+    "FA": "#### 604/5"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": 2295897290976193343,
+  "model_name": "google_gemini-2.5-flash"
+}

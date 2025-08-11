@@ -1,0 +1,63 @@
+{
+  "index": 2464,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "The 40-ounce container can hold 40/8 = <<40/8=5>>5 cups of water.",
+    "L2": "This means that 5*3 = <<5*3=15>>15 tablespoons of soap should be used, since each cup of water requires 3 tablespoons of soap."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2464.\n    Returns: the number of tablespoons of soap to add.\n    \"\"\"\n    # L1\n    container_capacity_oz = 40 # can hold 40 ounces of liquid\n    ounces_per_cup = 8 # 8 ounces in a cup of water\n    container_capacity_cups = container_capacity_oz / ounces_per_cup\n\n    # L2\n    soap_per_cup = 3 # 3 tablespoons of soap for every 1 cup of water\n    total_soap_tablespoons = container_capacity_cups * soap_per_cup\n\n    # FA\n    answer = total_soap_tablespoons\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_soap_tablespoons",
+    "operand_to_replace": "soap_per_cup",
+    "replacement_variable": "container_capacity_oz"
+  },
+  "correct_trace": {
+    "container_capacity_oz": 40,
+    "ounces_per_cup": 8,
+    "container_capacity_cups": 5.0,
+    "soap_per_cup": 3,
+    "total_soap_tablespoons": 15.0,
+    "answer": 15.0
+  },
+  "flawed_trace": {
+    "container_capacity_oz": 40,
+    "ounces_per_cup": 8,
+    "container_capacity_cups": 5.0,
+    "soap_per_cup": 3,
+    "total_soap_tablespoons": 200.0,
+    "answer": 200.0
+  },
+  "correct_value": 15.0,
+  "flawed_value": 200.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "container_capacity_cups",
+      "question_inputs": [
+        "container_capacity_oz",
+        "ounces_per_cup"
+      ],
+      "solution_line_template": "The {container_capacity_oz}-ounce container can hold {container_capacity_oz}/{ounces_per_cup} = <<{container_capacity_oz}/{ounces_per_cup}={container_capacity_cups}>>{container_capacity_cups} cups of water."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_soap_tablespoons",
+      "question_inputs": [
+        "soap_per_cup"
+      ],
+      "solution_line_template": "This means that {container_capacity_cups}*{soap_per_cup} = <<{container_capacity_cups}*{soap_per_cup}={total_soap_tablespoons}>>{total_soap_tablespoons} tablespoons of soap should be used, since each cup of water requires {soap_per_cup} tablespoons of soap."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The 40-ounce container can hold 40/8 = <<40/8=5>>5 cups of water.",
+    "L2": "This means that 5*40 = <<5*40=200>>200 tablespoons of soap should be used, since each cup of water requires 40 tablespoons of soap.",
+    "FA": "#### 200"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'container_capacity_oz' (40) was used instead of 'soap_per_cup' (3).",
+  "repro_seed": -3067754458123858352,
+  "model_name": "google_gemini-2.5-flash"
+}

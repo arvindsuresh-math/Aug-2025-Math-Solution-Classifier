@@ -1,0 +1,77 @@
+{
+  "index": 5337,
+  "original_solution_mapping": {
+    "FA": "#### 16",
+    "L1": "E = Evan's earnings",
+    "L2": "Markese's earnings = E - 5",
+    "L3": "E + E - 5 = 37",
+    "L4": "2E = 42",
+    "L5": "E = <<21=21>>21",
+    "L6": "Evan made $21 so Markese earned 21 - 5 = <<21-5=16>>16",
+    "L7": "Markese earned $<<16=16>>16."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5337.\n    Returns: the number of dollars Markese earned.\n    \"\"\"\n    # L5\n    total_earnings = 37 # Together they earned $37\n    markese_fewer_dollars = 5 # 5 fewer dollars than Evan\n    # The coefficient '2' comes from 'E + E' in the equation 'E + E - 5 = 37'\n    coefficient_of_E = 2 # Implicit from 'E + E' in the problem's setup\n    # The solution implicitly calculates 2E = 37 + 5 = 42, then E = 42 / 2\n    sum_for_2E = total_earnings + markese_fewer_dollars\n    evan_earnings = sum_for_2E / coefficient_of_E\n\n    # L6\n    markese_earnings = evan_earnings - markese_fewer_dollars\n\n    # L7\n    # FA\n    answer = markese_earnings\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "evan_earnings",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x30c7ee290>"
+  },
+  "correct_trace": {
+    "total_earnings": 37,
+    "markese_fewer_dollars": 5,
+    "coefficient_of_E": 2,
+    "sum_for_2E": 42,
+    "evan_earnings": 21.0,
+    "markese_earnings": 16.0,
+    "answer": 16.0
+  },
+  "flawed_trace": {
+    "total_earnings": 37,
+    "markese_fewer_dollars": 5,
+    "coefficient_of_E": 2,
+    "sum_for_2E": 42,
+    "evan_earnings": 40,
+    "markese_earnings": 35,
+    "answer": 35
+  },
+  "correct_value": 21.0,
+  "flawed_value": 40,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "evan_earnings",
+      "question_inputs": [
+        "total_earnings",
+        "markese_fewer_dollars",
+        "coefficient_of_E"
+      ],
+      "solution_line_template": "E = <<{evan_earnings}={evan_earnings}>>{evan_earnings}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "markese_earnings",
+      "question_inputs": [],
+      "solution_line_template": "Evan made ${evan_earnings} so Markese earned {evan_earnings} - {markese_fewer_dollars} = <<{evan_earnings}-{markese_fewer_dollars}={markese_earnings}>>{markese_earnings}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L7",
+      "output_variable": "markese_earnings",
+      "question_inputs": [],
+      "solution_line_template": "Markese earned $<<{markese_earnings}={markese_earnings}>>{markese_earnings}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L5": "E = <<40=40>>40",
+    "L6": "Evan made $40 so Markese earned 40 - 5 = <<40-5=35>>35",
+    "L7": "Markese earned $<<35=35>>35.",
+    "FA": "#### 35"
+  },
+  "erroneous_line_number": "L5",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 5375847070646105502,
+  "model_name": "google_gemini-2.5-flash"
+}

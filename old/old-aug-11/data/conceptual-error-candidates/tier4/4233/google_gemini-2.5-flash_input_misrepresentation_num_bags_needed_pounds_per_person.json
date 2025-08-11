@@ -1,0 +1,78 @@
+{
+  "index": 4233,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "He needs 1.5*40=<<1.5*40=60>>60 pounds of potatoes",
+    "L2": "So he needs to buy 60/20=<<60/20=3>>3 bags of potatoes",
+    "L3": "So it cost 3*5=$<<3*5=15>>15"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4233.\n    Returns: the total cost of potatoes.\n    \"\"\"\n    # L1\n    pounds_per_person = 1.5 # Each person eats 1.5 pounds of potatoes\n    num_people = 40 # makes potatoes for 40 people\n    total_pounds_needed = pounds_per_person * num_people\n\n    # L2\n    pounds_per_bag = 20 # A 20-pound bag of potatoes\n    num_bags_needed = total_pounds_needed / pounds_per_bag\n\n    # L3\n    cost_per_bag = 5 # bag of potatoes costs $5\n    total_cost = num_bags_needed * cost_per_bag\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "num_bags_needed",
+    "operand_to_replace": "pounds_per_bag",
+    "replacement_variable": "pounds_per_person"
+  },
+  "correct_trace": {
+    "pounds_per_person": 1.5,
+    "num_people": 40,
+    "total_pounds_needed": 60.0,
+    "pounds_per_bag": 20,
+    "num_bags_needed": 3.0,
+    "cost_per_bag": 5,
+    "total_cost": 15.0,
+    "answer": 15.0
+  },
+  "flawed_trace": {
+    "pounds_per_person": 1.5,
+    "num_people": 40,
+    "total_pounds_needed": 60.0,
+    "pounds_per_bag": 20,
+    "num_bags_needed": 40.0,
+    "cost_per_bag": 5,
+    "total_cost": 200.0,
+    "answer": 200.0
+  },
+  "correct_value": 3.0,
+  "flawed_value": 40.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_pounds_needed",
+      "question_inputs": [
+        "pounds_per_person",
+        "num_people"
+      ],
+      "solution_line_template": "He needs {pounds_per_person}*{num_people}=<<{pounds_per_person}*{num_people}={total_pounds_needed}>>{total_pounds_needed} pounds of potatoes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_bags_needed",
+      "question_inputs": [
+        "pounds_per_bag"
+      ],
+      "solution_line_template": "So he needs to buy {total_pounds_needed}/{pounds_per_bag}=<<{total_pounds_needed}/{pounds_per_bag}={num_bags_needed}>>{num_bags_needed} bags of potatoes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "cost_per_bag"
+      ],
+      "solution_line_template": "So it cost {num_bags_needed}*{cost_per_bag}=$<<{num_bags_needed}*{cost_per_bag}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He needs 1.5*40=<<1.5*40=60>>60 pounds of potatoes",
+    "L2": "So he needs to buy 60/1.5=<<60/1.5=40>>40 bags of potatoes",
+    "L3": "So it cost 40*5=$<<40*5=200>>200",
+    "FA": "#### 200"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'pounds_per_person' (1.5) was used instead of 'pounds_per_bag' (20).",
+  "repro_seed": -5578006717568596249,
+  "model_name": "google_gemini-2.5-flash"
+}

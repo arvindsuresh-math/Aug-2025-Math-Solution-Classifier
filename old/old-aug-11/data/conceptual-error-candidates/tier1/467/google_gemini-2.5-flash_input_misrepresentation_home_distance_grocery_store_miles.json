@@ -1,0 +1,80 @@
+{
+  "index": 467,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "After he walked 2 miles to the grocery store, he walked one less than two miles to the pet store, adding 2-1=1 mile to his journey.",
+    "L2": "To complete his journey, he walked one less than four miles to return home, adding 4-1=3 miles. to his journey.",
+    "L3": "In total, Hadley walked 2+1+3=<<2+1+3=6>>6 miles."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 467.\n    Returns: the total distance Hadley walked in his boots in miles.\n    \"\"\"\n    # L1\n    grocery_store_miles = 2 # 2 miles to the grocery store\n    pet_store_base = 2 # two miles to the pet store\n    pet_store_less = 1 # 1 less than two miles\n    pet_store_distance = pet_store_base - pet_store_less\n\n    # L2\n    home_base = 4 # four miles back home\n    home_less = 1 # one less than four miles\n    home_distance = home_base - home_less\n\n    # L3\n    total_miles_walked = grocery_store_miles + pet_store_distance + home_distance\n\n    # FA\n    answer = total_miles_walked\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "home_distance",
+    "operand_to_replace": "home_base",
+    "replacement_variable": "grocery_store_miles"
+  },
+  "correct_trace": {
+    "grocery_store_miles": 2,
+    "pet_store_base": 2,
+    "pet_store_less": 1,
+    "pet_store_distance": 1,
+    "home_base": 4,
+    "home_less": 1,
+    "home_distance": 3,
+    "total_miles_walked": 6,
+    "answer": 6
+  },
+  "flawed_trace": {
+    "grocery_store_miles": 2,
+    "pet_store_base": 2,
+    "pet_store_less": 1,
+    "pet_store_distance": 1,
+    "home_base": 4,
+    "home_less": 1,
+    "home_distance": 1,
+    "total_miles_walked": 4,
+    "answer": 4
+  },
+  "correct_value": 3,
+  "flawed_value": 1,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "grocery_store_miles",
+        "pet_store_base",
+        "pet_store_less"
+      ],
+      "WK_inputs": [],
+      "output_variable": "pet_store_distance",
+      "solution_line_template": "After he walked {grocery_store_miles} miles to the grocery store, he walked one less than two miles to the pet store, adding {pet_store_base}-{pet_store_less}={pet_store_distance} mile to his journey."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "home_base",
+        "home_less"
+      ],
+      "WK_inputs": [],
+      "output_variable": "home_distance",
+      "solution_line_template": "To complete his journey, he walked one less than four miles to return home, adding {home_base}-{home_less}={home_distance} miles. to his journey."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_miles_walked",
+      "solution_line_template": "In total, Hadley walked {grocery_store_miles}+{pet_store_distance}+{home_distance}=<<{grocery_store_miles}+{pet_store_distance}+{home_distance}={total_miles_walked}>>{total_miles_walked} miles."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After he walked 2 miles to the grocery store, he walked one less than two miles to the pet store, adding 2-1=1 mile to his journey.",
+    "L2": "To complete his journey, he walked one less than four miles to return home, adding 2-1=1 miles. to his journey.",
+    "L3": "In total, Hadley walked 2+1+1=<<2+1+1=4>>4 miles.",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'grocery_store_miles' (2) was used instead of 'home_base' (4).",
+  "repro_seed": 5566518040263007021,
+  "model_name": "google_gemini-2.5-flash"
+}

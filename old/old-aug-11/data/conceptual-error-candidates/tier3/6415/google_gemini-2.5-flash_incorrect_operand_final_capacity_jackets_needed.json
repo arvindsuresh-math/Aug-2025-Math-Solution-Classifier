@@ -1,0 +1,85 @@
+{
+  "index": 6415,
+  "original_solution_mapping": {
+    "FA": "#### 17",
+    "L1": "If everyone wore life jackets, only 21-7=<<21-7=14>>14 people could fit on the raft.",
+    "L2": "For every person less on the raft, 14/7=<<14/7=2>>2 life jackets could fit.",
+    "L3": "For 8 life jackets, 8/2=<<8/2=4>>4 less people could fit.",
+    "L4": "21-4=<<21-4=17>>17 people could fit on the raft."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6415.\n    Returns: the number of people who could fit on the raft.\n    \"\"\"\n    # L1\n    capacity_no_jackets = 21 # 21 people on a raft if no one wore life jackets\n    fewer_with_jackets = 7 # 7 fewer people who could fit on the raft if everyone wore life jackets\n    capacity_with_all_jackets = capacity_no_jackets - fewer_with_jackets\n\n    # L2\n    jackets_per_person_reduction = capacity_with_all_jackets / fewer_with_jackets\n\n    # L3\n    jackets_needed = 8 # If 8 people on the raft needed life jackets\n    reduction_for_specific_jackets = jackets_needed / jackets_per_person_reduction\n\n    # L4\n    final_capacity = capacity_no_jackets - reduction_for_specific_jackets\n\n    # FA\n    answer = final_capacity\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "final_capacity",
+    "operand_to_replace": "reduction_for_specific_jackets",
+    "replacement_variable": "jackets_needed"
+  },
+  "correct_trace": {
+    "capacity_no_jackets": 21,
+    "fewer_with_jackets": 7,
+    "capacity_with_all_jackets": 14,
+    "jackets_per_person_reduction": 2.0,
+    "jackets_needed": 8,
+    "reduction_for_specific_jackets": 4.0,
+    "final_capacity": 17.0,
+    "answer": 17.0
+  },
+  "flawed_trace": {
+    "capacity_no_jackets": 21,
+    "fewer_with_jackets": 7,
+    "capacity_with_all_jackets": 14,
+    "jackets_per_person_reduction": 2.0,
+    "jackets_needed": 8,
+    "reduction_for_specific_jackets": 4.0,
+    "final_capacity": 13,
+    "answer": 13
+  },
+  "correct_value": 17.0,
+  "flawed_value": 13,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "capacity_with_all_jackets",
+      "question_inputs": [
+        "capacity_no_jackets",
+        "fewer_with_jackets"
+      ],
+      "solution_line_template": "If everyone wore life jackets, only {capacity_no_jackets}-{fewer_with_jackets}=<<{capacity_no_jackets}-{fewer_with_jackets}={capacity_with_all_jackets}>>{capacity_with_all_jackets} people could fit on the raft."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "jackets_per_person_reduction",
+      "question_inputs": [],
+      "solution_line_template": "For every person less on the raft, {capacity_with_all_jackets}/{fewer_with_jackets}=<<{capacity_with_all_jackets}/{fewer_with_jackets}={jackets_per_person_reduction}>>{jackets_per_person_reduction} life jackets could fit."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "reduction_for_specific_jackets",
+      "question_inputs": [
+        "jackets_needed"
+      ],
+      "solution_line_template": "For {jackets_needed} life jackets, {jackets_needed}/{jackets_per_person_reduction}=<<{jackets_needed}/{jackets_per_person_reduction}={reduction_for_specific_jackets}>>{reduction_for_specific_jackets} less people could fit."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_capacity",
+      "question_inputs": [],
+      "solution_line_template": "{capacity_no_jackets}-{reduction_for_specific_jackets}=<<{capacity_no_jackets}-{reduction_for_specific_jackets}={final_capacity}>>{final_capacity} people could fit on the raft."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If everyone wore life jackets, only 21-7=<<21-7=14>>14 people could fit on the raft.",
+    "L2": "For every person less on the raft, 14/7=<<14/7=2>>2 life jackets could fit.",
+    "L3": "For 8 life jackets, 8/2=<<8/2=4>>4 less people could fit.",
+    "L4": "21-8=<<21-8=13>>13 people could fit on the raft.",
+    "FA": "#### 13"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'jackets_needed' (value: 8) was used instead of 'reduction_for_specific_jackets' (value: 4.0).",
+  "repro_seed": 923615520486087629,
+  "model_name": "google_gemini-2.5-flash"
+}

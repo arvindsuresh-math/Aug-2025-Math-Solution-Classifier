@@ -1,0 +1,100 @@
+{
+  "index": 470,
+  "original_solution_mapping": {
+    "FA": "#### 52",
+    "L1": "Gary earned overtime, so he worked at least 40 hours. for which he was paid 40 hours * $12/hour = $<<40*12=480>>480 at his normal wage.",
+    "L2": "This means that $696 - $480 = $<<696-480=216>>216 was earned at his overtime wage.",
+    "L3": "His overtime wage is 1.5 his normal wage, or $12 * 1.5 = $<<12*1.5=18>>18 per hour.",
+    "L4": "So Gary worked $216 / $18 per hour = <<216/18=12>>12 hours' worth of overtime.",
+    "L5": "So in total, Gary worked 40 hours + 12 hours = <<40+12=52>>52 hours that week."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 470.\n    Returns: the total number of hours Gary worked that week.\n    \"\"\"\n    # L1\n    normal_hours_threshold = 40 # every hour after 40\n    normal_wage_per_hour = 12 # Gary normally earns $12 per hour\n    normal_wage_earnings = normal_hours_threshold * normal_wage_per_hour\n\n    # L2\n    total_paycheck = 696 # His paycheck (before taxes are taken out) came out to $696\n    overtime_earnings = total_paycheck - normal_wage_earnings\n\n    # L3\n    overtime_multiplier = 1.5 # 1.5 times his normal wage\n    overtime_wage_per_hour = normal_wage_per_hour * overtime_multiplier\n\n    # L4\n    overtime_hours = overtime_earnings / overtime_wage_per_hour\n\n    # L5\n    total_hours_worked = normal_hours_threshold + overtime_hours\n\n    # FA\n    answer = total_hours_worked\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "overtime_hours",
+    "operand_to_replace": "overtime_wage_per_hour",
+    "replacement_variable": "overtime_earnings"
+  },
+  "correct_trace": {
+    "normal_hours_threshold": 40,
+    "normal_wage_per_hour": 12,
+    "normal_wage_earnings": 480,
+    "total_paycheck": 696,
+    "overtime_earnings": 216,
+    "overtime_multiplier": 1.5,
+    "overtime_wage_per_hour": 18.0,
+    "overtime_hours": 12.0,
+    "total_hours_worked": 52.0,
+    "answer": 52.0
+  },
+  "flawed_trace": {
+    "normal_hours_threshold": 40,
+    "normal_wage_per_hour": 12,
+    "normal_wage_earnings": 480,
+    "total_paycheck": 696,
+    "overtime_earnings": 216,
+    "overtime_multiplier": 1.5,
+    "overtime_wage_per_hour": 18.0,
+    "overtime_hours": 1.0,
+    "total_hours_worked": 41.0,
+    "answer": 41.0
+  },
+  "correct_value": 12.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "normal_wage_earnings",
+      "question_inputs": [
+        "normal_hours_threshold",
+        "normal_wage_per_hour"
+      ],
+      "solution_line_template": "Gary earned overtime, so he worked at least {normal_hours_threshold} hours. for which he was paid {normal_hours_threshold} hours * ${normal_wage_per_hour}/hour = $<<{normal_hours_threshold}*{normal_wage_per_hour}={normal_wage_earnings}>>{normal_wage_earnings} at his normal wage."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "overtime_earnings",
+      "question_inputs": [
+        "total_paycheck"
+      ],
+      "solution_line_template": "This means that ${total_paycheck} - ${normal_wage_earnings} = $<<{total_paycheck}-{normal_wage_earnings}={overtime_earnings}>>{overtime_earnings} was earned at his overtime wage."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "overtime_wage_per_hour",
+      "question_inputs": [
+        "overtime_multiplier"
+      ],
+      "solution_line_template": "His overtime wage is {overtime_multiplier} his normal wage, or ${normal_wage_per_hour} * {overtime_multiplier} = $<<{normal_wage_per_hour}*{overtime_multiplier}={overtime_wage_per_hour}>>{overtime_wage_per_hour} per hour."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "overtime_hours",
+      "question_inputs": [],
+      "solution_line_template": "So Gary worked ${overtime_earnings} / ${overtime_wage_per_hour} per hour = <<{overtime_earnings}/{overtime_wage_per_hour}={overtime_hours}>>{overtime_hours} hours' worth of overtime."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_hours_worked",
+      "question_inputs": [],
+      "solution_line_template": "So in total, Gary worked {normal_hours_threshold} hours + {overtime_hours} hours = <<{normal_hours_threshold}+{overtime_hours}={total_hours_worked}>>{total_hours_worked} hours that week."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Gary earned overtime, so he worked at least 40 hours. for which he was paid 40 hours * $12/hour = $<<40*12=480>>480 at his normal wage.",
+    "L2": "This means that $696 - $480 = $<<696-480=216>>216 was earned at his overtime wage.",
+    "L3": "His overtime wage is 1.5 his normal wage, or $12 * 1.5 = $<<12*1.5=18>>18 per hour.",
+    "L4": "So Gary worked $216 / $216 per hour = <<216/216=1>>1 hours' worth of overtime.",
+    "L5": "So in total, Gary worked 40 hours + 1 hours = <<40+1=41>>41 hours that week.",
+    "FA": "#### 41"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'overtime_earnings' (value: 216) was used instead of 'overtime_wage_per_hour' (value: 18.0).",
+  "repro_seed": -8883544755900271122,
+  "model_name": "google_gemini-2.5-flash"
+}

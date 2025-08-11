@@ -1,0 +1,93 @@
+{
+  "index": 1554,
+  "original_solution_mapping": {
+    "FA": "#### 350",
+    "L1": "Jerry has to walk to the sink/recycling bin 28 cans / 4 cans per trip = <<28/4=7>>7 trips",
+    "L2": "The round trip takes 10 seconds per way * 2 ways = <<10*2=20>>20 seconds",
+    "L3": "Counting the time he spent pouring out the cans and the time the round trip took, he spent 20 seconds per trip + 30 seconds per trip = <<20+30=50>>50 seconds per trip",
+    "L4": "With 7 round trips, he spent 50 seconds per trip * 7 trips = <<50*7=350>>350 seconds"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1554.\n    Returns: the total time it takes Jerry to throw all cans away.\n    \"\"\"\n    # L1\n    total_cans = 28 # 28 cans on Jerry's desk\n    cans_per_trip = 4 # carry four cans at once\n    number_of_trips = total_cans / cans_per_trip\n\n    # L2\n    time_per_way = 10 # ten seconds each way\n    ways_in_round_trip = 2 # WK\n    round_trip_time = time_per_way * ways_in_round_trip\n\n    # L3\n    drain_time_per_trip = 30 # 30 seconds to drain those 4 cans\n    total_time_per_trip = round_trip_time + drain_time_per_trip\n\n    # L4\n    total_time_spent = total_time_per_trip * number_of_trips\n\n    # FA\n    answer = total_time_spent\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_time_per_trip",
+    "operand_to_replace": "drain_time_per_trip",
+    "replacement_variable": "number_of_trips"
+  },
+  "correct_trace": {
+    "total_cans": 28,
+    "cans_per_trip": 4,
+    "number_of_trips": 7.0,
+    "time_per_way": 10,
+    "ways_in_round_trip": 2,
+    "round_trip_time": 20,
+    "drain_time_per_trip": 30,
+    "total_time_per_trip": 50,
+    "total_time_spent": 350.0,
+    "answer": 350.0
+  },
+  "flawed_trace": {
+    "total_cans": 28,
+    "cans_per_trip": 4,
+    "number_of_trips": 7.0,
+    "time_per_way": 10,
+    "ways_in_round_trip": 2,
+    "round_trip_time": 20,
+    "drain_time_per_trip": 30,
+    "total_time_per_trip": 27.0,
+    "total_time_spent": 189.0,
+    "answer": 189.0
+  },
+  "correct_value": 50,
+  "flawed_value": 27.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "number_of_trips",
+      "question_inputs": [
+        "total_cans",
+        "cans_per_trip"
+      ],
+      "solution_line_template": "Jerry has to walk to the sink/recycling bin {total_cans} cans / {cans_per_trip} cans per trip = <<{total_cans}/{cans_per_trip}={number_of_trips}>>{number_of_trips} trips"
+    },
+    {
+      "WK_inputs": [
+        "ways_in_round_trip"
+      ],
+      "line_number": "L2",
+      "output_variable": "round_trip_time",
+      "question_inputs": [
+        "time_per_way"
+      ],
+      "solution_line_template": "The round trip takes {time_per_way} seconds per way * {ways_in_round_trip} ways = <<{time_per_way}*{ways_in_round_trip}={round_trip_time}>>{round_trip_time} seconds"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_time_per_trip",
+      "question_inputs": [
+        "drain_time_per_trip"
+      ],
+      "solution_line_template": "Counting the time he spent pouring out the cans and the time the round trip took, he spent {round_trip_time} seconds per trip + {drain_time_per_trip} seconds per trip = <<{round_trip_time}+{drain_time_per_trip}={total_time_per_trip}>>{total_time_per_trip} seconds per trip"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_time_spent",
+      "question_inputs": [],
+      "solution_line_template": "With {number_of_trips} round trips, he spent {total_time_per_trip} seconds per trip * {number_of_trips} trips = <<{total_time_per_trip}*{number_of_trips}={total_time_spent}>>{total_time_spent} seconds"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Jerry has to walk to the sink/recycling bin 28 cans / 4 cans per trip = <<28/4=7>>7 trips",
+    "L2": "The round trip takes 10 seconds per way * 2 ways = <<10*2=20>>20 seconds",
+    "L3": "Counting the time he spent pouring out the cans and the time the round trip took, he spent 20 seconds per trip + 7 seconds per trip = <<20+7=27>>27 seconds per trip",
+    "L4": "With 7 round trips, he spent 27 seconds per trip * 7 trips = <<27*7=189>>189 seconds",
+    "FA": "#### 189"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'number_of_trips' (7.0) was used instead of 'drain_time_per_trip' (30).",
+  "repro_seed": 3332681313195017235,
+  "model_name": "google_gemini-2.5-flash"
+}

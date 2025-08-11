@@ -1,0 +1,93 @@
+{
+  "index": 2060,
+  "original_solution_mapping": {
+    "FA": "#### 2",
+    "L1": "The cow provides 16 cups of milk per day and the kids consume 75% so they drink 16*.75 = <<16*.75=12>>12 cups of milk",
+    "L2": "The cow provides 16 cups of milk and the kids drink 12 cups leaving 16-12 = <<16-12=4>>4 cups of milk",
+    "L3": "Daisy uses 50% of the remaining 4 cups of milk to cook with so she uses .50*4 = <<50*.01*4=2>>2 cups of milk",
+    "L4": "She had 4 cups of milk and used 2 cups to cook with so that leaves 4-2 = <<4-2=2>>2 cups of milk"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2060.\n    Returns: the amount of milk left over.\n    \"\"\"\n    # L1\n    total_milk_provided = 16 # 16 cups of milk per day\n    kids_consumption_percent_value = 75 # 75% of the milk\n    kids_consumption_decimal = 0.75 # 75% so they drink 16*.75\n    kids_consumed_milk = total_milk_provided * kids_consumption_decimal\n\n    # L2\n    milk_after_kids = total_milk_provided - kids_consumed_milk\n\n    # L3\n    cooking_percent_value = 50 # 50% of the remaining milk\n    cooking_percent_decimal = 0.50 # .50*4\n    percent_factor = 0.01 # WK\n    milk_used_for_cooking = cooking_percent_value * percent_factor * milk_after_kids\n\n    # L4\n    milk_left_over = milk_after_kids - milk_used_for_cooking\n\n    # FA\n    answer = milk_left_over\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "milk_left_over",
+    "replacement_variable": "milk_after_kids"
+  },
+  "correct_trace": {
+    "total_milk_provided": 16,
+    "kids_consumption_percent_value": 75,
+    "kids_consumption_decimal": 0.75,
+    "kids_consumed_milk": 12.0,
+    "milk_after_kids": 4.0,
+    "cooking_percent_value": 50,
+    "cooking_percent_decimal": 0.5,
+    "percent_factor": 0.01,
+    "milk_used_for_cooking": 2.0,
+    "milk_left_over": 2.0,
+    "answer": 2.0
+  },
+  "flawed_trace": {
+    "total_milk_provided": 16,
+    "kids_consumption_percent_value": 75,
+    "kids_consumption_decimal": 0.75,
+    "kids_consumed_milk": 12.0,
+    "milk_after_kids": 4.0,
+    "cooking_percent_value": 50,
+    "cooking_percent_decimal": 0.5,
+    "percent_factor": 0.01,
+    "milk_used_for_cooking": 2.0,
+    "milk_left_over": 2.0,
+    "answer": 4.0
+  },
+  "correct_value": 2.0,
+  "flawed_value": 4.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "kids_consumed_milk",
+      "question_inputs": [
+        "total_milk_provided",
+        "kids_consumption_percent_value",
+        "kids_consumption_decimal"
+      ],
+      "solution_line_template": "The cow provides {total_milk_provided} cups of milk per day and the kids consume {kids_consumption_percent_value}% so they drink {total_milk_provided}*{kids_consumption_decimal} = <<{total_milk_provided}*{kids_consumption_decimal}={kids_consumed_milk}>>{kids_consumed_milk} cups of milk"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "milk_after_kids",
+      "question_inputs": [],
+      "solution_line_template": "The cow provides {total_milk_provided} cups of milk and the kids drink {kids_consumed_milk} cups leaving {total_milk_provided}-{kids_consumed_milk} = <<{total_milk_provided}-{kids_consumed_milk}={milk_after_kids}>>{milk_after_kids} cups of milk"
+    },
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L3",
+      "output_variable": "milk_used_for_cooking",
+      "question_inputs": [
+        "cooking_percent_value",
+        "cooking_percent_decimal"
+      ],
+      "solution_line_template": "Daisy uses {cooking_percent_value}% of the remaining {milk_after_kids} cups of milk to cook with so she uses {cooking_percent_decimal}*{milk_after_kids} = <<{cooking_percent_value}*{percent_factor}*{milk_after_kids}={milk_used_for_cooking}>>{milk_used_for_cooking} cups of milk"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "milk_left_over",
+      "question_inputs": [],
+      "solution_line_template": "She had {milk_after_kids} cups of milk and used {milk_used_for_cooking} cups to cook with so that leaves {milk_after_kids}-{milk_used_for_cooking} = <<{milk_after_kids}-{milk_used_for_cooking}={milk_left_over}>>{milk_left_over} cups of milk"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The cow provides 16 cups of milk per day and the kids consume 75% so they drink 16*0.75 = <<16*0.75=12>>12 cups of milk",
+    "L2": "The cow provides 16 cups of milk and the kids drink 12 cups leaving 16-12 = <<16-12=4>>4 cups of milk",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'milk_after_kids' (value: 4.0) was reported instead of 'milk_left_over' (value: 2.0).",
+  "repro_seed": -8624835256777458512,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,64 @@
+{
+  "index": 5589,
+  "original_solution_mapping": {
+    "FA": "#### 11",
+    "L1": "Sarah saved 1/3 of her 9 cupcakes to give Michael, so she has 2/3 x 9 = <<2/3*9=6>>6 cupcakes left.",
+    "L2": "Michael saves 5 of his cookies for Sarah, which she adds to her 6 cupcakes. Sarah has 5 + 6 = <<5+6=11>>11 desserts."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5589.\n    Returns: the total number of desserts Sarah ends up with.\n    \"\"\"\n    # L1\n    total_cupcakes = 9 # her 9 cupcakes\n    fraction_left_sarah = Fraction(2, 3) # WK\n    cupcakes_left_sarah = fraction_left_sarah * total_cupcakes\n\n    # L2\n    cookies_from_michael = 5 # Michael saved 5 of his cookies\n    total_desserts_sarah = cookies_from_michael + cupcakes_left_sarah\n\n    # FA\n    answer = total_desserts_sarah\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "cupcakes_left_sarah",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x177f20c50>"
+  },
+  "correct_trace": {
+    "total_cupcakes": 9,
+    "fraction_left_sarah": "2/3",
+    "cupcakes_left_sarah": "6",
+    "cookies_from_michael": 5,
+    "total_desserts_sarah": "11",
+    "answer": "11"
+  },
+  "flawed_trace": {
+    "total_cupcakes": 9,
+    "fraction_left_sarah": "2/3",
+    "cupcakes_left_sarah": "29/3",
+    "cookies_from_michael": 5,
+    "total_desserts_sarah": "44/3",
+    "answer": "44/3"
+  },
+  "correct_value": "6",
+  "flawed_value": "29/3",
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "fraction_left_sarah"
+      ],
+      "line_number": "L1",
+      "output_variable": "cupcakes_left_sarah",
+      "question_inputs": [
+        "total_cupcakes"
+      ],
+      "solution_line_template": "Sarah saved 1/3 of her {total_cupcakes} cupcakes to give Michael, so she has {fraction_left_sarah} x {total_cupcakes} = <<{fraction_left_sarah}*{total_cupcakes}={cupcakes_left_sarah}>>{cupcakes_left_sarah} cupcakes left."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_desserts_sarah",
+      "question_inputs": [
+        "cookies_from_michael"
+      ],
+      "solution_line_template": "Michael saves {cookies_from_michael} of his cookies for Sarah, which she adds to her {cupcakes_left_sarah}. Sarah has {cookies_from_michael} + {cupcakes_left_sarah} = <<{cookies_from_michael}+{cupcakes_left_sarah}={total_desserts_sarah}>>{total_desserts_sarah} desserts."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Sarah saved 1/3 of her 9 cupcakes to give Michael, so she has 2/3 x 9 = <<2/3*9=29/3>>29/3 cupcakes left.",
+    "L2": "Michael saves 5 of his cookies for Sarah, which she adds to her 29/3. Sarah has 5 + 29/3 = <<5+29/3=44/3>>44/3 desserts.",
+    "FA": "#### 44/3"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -7817908030316107572,
+  "model_name": "google_gemini-2.5-flash"
+}

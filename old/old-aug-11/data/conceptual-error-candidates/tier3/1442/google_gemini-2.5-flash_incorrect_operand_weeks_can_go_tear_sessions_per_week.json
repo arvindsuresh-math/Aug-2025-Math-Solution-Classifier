@@ -1,0 +1,77 @@
+{
+  "index": 1442,
+  "original_solution_mapping": {
+    "FA": "#### 11",
+    "L1": "He tears 30*3=<<30*3=90>>90 cards a week",
+    "L2": "He bought 55*18=<<55*18=990>>990 cards",
+    "L3": "So he can tear for 990/90=<<990/90=11>>11 weeks"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1442.\n    Returns: the number of weeks Jame can tear cards.\n    \"\"\"\n    # L1\n    cards_per_tear_session = 30 # He can tear 30 cards at a time\n    tear_sessions_per_week = 3 # He tears cards 3 times a week\n    cards_torn_per_week = cards_per_tear_session * tear_sessions_per_week\n\n    # L2\n    cards_per_deck = 55 # A new deck of cards has 55 cards\n    num_decks = 18 # he buys 18 decks\n    total_cards_bought = cards_per_deck * num_decks\n\n    # L3\n    weeks_can_go = total_cards_bought / cards_torn_per_week\n\n    # FA\n    answer = weeks_can_go\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "weeks_can_go",
+    "operand_to_replace": "cards_torn_per_week",
+    "replacement_variable": "tear_sessions_per_week"
+  },
+  "correct_trace": {
+    "cards_per_tear_session": 30,
+    "tear_sessions_per_week": 3,
+    "cards_torn_per_week": 90,
+    "cards_per_deck": 55,
+    "num_decks": 18,
+    "total_cards_bought": 990,
+    "weeks_can_go": 11.0,
+    "answer": 11.0
+  },
+  "flawed_trace": {
+    "cards_per_tear_session": 30,
+    "tear_sessions_per_week": 3,
+    "cards_torn_per_week": 90,
+    "cards_per_deck": 55,
+    "num_decks": 18,
+    "total_cards_bought": 990,
+    "weeks_can_go": 330.0,
+    "answer": 330.0
+  },
+  "correct_value": 11.0,
+  "flawed_value": 330.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cards_torn_per_week",
+      "question_inputs": [
+        "cards_per_tear_session",
+        "tear_sessions_per_week"
+      ],
+      "solution_line_template": "He tears {cards_per_tear_session}*{tear_sessions_per_week}=<<{cards_per_tear_session}*{tear_sessions_per_week}={cards_torn_per_week}>>{cards_torn_per_week} cards a week"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cards_bought",
+      "question_inputs": [
+        "cards_per_deck",
+        "num_decks"
+      ],
+      "solution_line_template": "He bought {cards_per_deck}*{num_decks}=<<{cards_per_deck}*{num_decks}={total_cards_bought}>>{total_cards_bought} cards"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "weeks_can_go",
+      "question_inputs": [],
+      "solution_line_template": "So he can tear for {total_cards_bought}/{cards_torn_per_week}=<<{total_cards_bought}/{cards_torn_per_week}={weeks_can_go}>>{weeks_can_go} weeks"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He tears 30*3=<<30*3=90>>90 cards a week",
+    "L2": "He bought 55*18=<<55*18=990>>990 cards",
+    "L3": "So he can tear for 990/3=<<990/3=330>>330 weeks",
+    "FA": "#### 330"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'tear_sessions_per_week' (value: 3) was used instead of 'cards_torn_per_week' (value: 90).",
+  "repro_seed": 1786702884152745335,
+  "model_name": "google_gemini-2.5-flash"
+}

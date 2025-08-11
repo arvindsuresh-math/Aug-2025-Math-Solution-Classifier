@@ -1,0 +1,63 @@
+{
+  "index": 7222,
+  "original_solution_mapping": {
+    "FA": "#### 16",
+    "L1": "Black Copper Marans: 100(.20)=20",
+    "L2": "BCM Hens:20(.80)=16"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7222.\n    Returns: the number of BCM hens.\n    \"\"\"\n    # L1\n    total_chickens = 100 # 100 chickens\n    bcm_percentage_decimal = 0.20 # 20 percent are Black Copper Marans\n    num_bcm_chickens = total_chickens * bcm_percentage_decimal\n\n    # L2\n    bcm_hens_percentage_decimal = 0.80 # 80 percent of the Black Copper Marans are hens\n    num_bcm_hens = num_bcm_chickens * bcm_hens_percentage_decimal\n\n    # FA\n    answer = num_bcm_hens\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "num_bcm_chickens",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x30c6a3b10>"
+  },
+  "correct_trace": {
+    "total_chickens": 100,
+    "bcm_percentage_decimal": 0.2,
+    "num_bcm_chickens": 20.0,
+    "bcm_hens_percentage_decimal": 0.8,
+    "num_bcm_hens": 16.0,
+    "answer": 16.0
+  },
+  "flawed_trace": {
+    "total_chickens": 100,
+    "bcm_percentage_decimal": 0.2,
+    "num_bcm_chickens": 500.0,
+    "bcm_hens_percentage_decimal": 0.8,
+    "num_bcm_hens": 400.0,
+    "answer": 400.0
+  },
+  "correct_value": 20.0,
+  "flawed_value": 500.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "num_bcm_chickens",
+      "question_inputs": [
+        "total_chickens",
+        "bcm_percentage_decimal"
+      ],
+      "solution_line_template": "Black Copper Marans: {total_chickens}({bcm_percentage_decimal})={num_bcm_chickens}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_bcm_hens",
+      "question_inputs": [
+        "bcm_hens_percentage_decimal"
+      ],
+      "solution_line_template": "BCM Hens:{num_bcm_chickens}({bcm_hens_percentage_decimal})={num_bcm_hens}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Black Copper Marans: 100(0.2)=500",
+    "L2": "BCM Hens:500(0.8)=400",
+    "FA": "#### 400"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 5822797594944035953,
+  "model_name": "google_gemini-2.5-flash"
+}

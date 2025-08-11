@@ -1,0 +1,66 @@
+{
+  "index": 1700,
+  "original_solution_mapping": {
+    "FA": "#### 38000",
+    "L1": "The rate of the loan is 15%, which means Mike needs to give the bank an additional 20000 * 15/100 = $<<20000*15/100=3000>>3000.",
+    "L2": "So the car will cost him 35000 + 3000 = $<<35000+3000=38000>>38000."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1700.\n    Returns: the total money Mike needs to pay for the car.\n    \"\"\"\n    # L1\n    loan_amount = 20000 # take $20000 from the bank\n    loan_rate_numerator = 15 # rate of 15%\n    loan_rate_denominator = 100 # rate of 15%\n    additional_payment_to_bank = loan_amount * loan_rate_numerator / loan_rate_denominator\n\n    # L2\n    car_price = 35000 # red car for $35000\n    total_cost = car_price + additional_payment_to_bank\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_cost",
+    "operand_to_replace": "additional_payment_to_bank",
+    "replacement_variable": "car_price"
+  },
+  "correct_trace": {
+    "loan_amount": 20000,
+    "loan_rate_numerator": 15,
+    "loan_rate_denominator": 100,
+    "additional_payment_to_bank": 3000.0,
+    "car_price": 35000,
+    "total_cost": 38000.0,
+    "answer": 38000.0
+  },
+  "flawed_trace": {
+    "loan_amount": 20000,
+    "loan_rate_numerator": 15,
+    "loan_rate_denominator": 100,
+    "additional_payment_to_bank": 3000.0,
+    "car_price": 35000,
+    "total_cost": 70000,
+    "answer": 70000
+  },
+  "correct_value": 38000.0,
+  "flawed_value": 70000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "additional_payment_to_bank",
+      "question_inputs": [
+        "loan_amount",
+        "loan_rate_numerator",
+        "loan_rate_denominator"
+      ],
+      "solution_line_template": "The rate of the loan is 15%, which means Mike needs to give the bank an additional {loan_amount} * {loan_rate_numerator}/{loan_rate_denominator} = $<<{loan_amount}*{loan_rate_numerator}/{loan_rate_denominator}={additional_payment_to_bank}>>{additional_payment_to_bank}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "car_price"
+      ],
+      "solution_line_template": "So the car will cost him {car_price} + {additional_payment_to_bank} = $<<{car_price}+{additional_payment_to_bank}={total_cost}>>{total_cost}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The rate of the loan is 15%, which means Mike needs to give the bank an additional 20000 * 15/100 = $<<20000*15/100=3000>>3000.",
+    "L2": "So the car will cost him 35000 + 35000 = $<<35000+35000=70000>>70000.",
+    "FA": "#### 70000"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operand. The variable 'car_price' (value: 35000) was used instead of 'additional_payment_to_bank' (value: 3000.0).",
+  "repro_seed": -2246720287986378082,
+  "model_name": "google_gemini-2.5-flash"
+}

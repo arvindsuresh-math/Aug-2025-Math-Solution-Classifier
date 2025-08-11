@@ -1,0 +1,78 @@
+{
+  "index": 1507,
+  "original_solution_mapping": {
+    "FA": "#### 96",
+    "L1": "Sean has 40/2+4 = <<40/2+4=24>>24 dollars.",
+    "L2": "Rick has 24*3 = <<24*3=72>>72 dollars.",
+    "L3": "Sean and Rick have 24+72 = <<24+72=96>>96 dollars together."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1507.\n    Returns: the total amount of money Rick and Sean have.\n    \"\"\"\n    # L1\n    fritz_money = 40 # If Fritz has 40 dollars\n    half_divisor = 2 # half as much money\n    sean_extra_money = 4 # 4 dollars more\n    sean_money = fritz_money / half_divisor + sean_extra_money\n\n    # L2\n    rick_multiplier = 3 # Rick has 3 times as much money as Sean\n    rick_money = sean_money * rick_multiplier\n\n    # L3\n    total_money_sean_rick = sean_money + rick_money\n\n    # FA\n    answer = total_money_sean_rick\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "sean_money",
+    "operand_to_replace": "half_divisor",
+    "replacement_variable": "sean_extra_money"
+  },
+  "correct_trace": {
+    "fritz_money": 40,
+    "half_divisor": 2,
+    "sean_extra_money": 4,
+    "sean_money": 24.0,
+    "rick_multiplier": 3,
+    "rick_money": 72.0,
+    "total_money_sean_rick": 96.0,
+    "answer": 96.0
+  },
+  "flawed_trace": {
+    "fritz_money": 40,
+    "half_divisor": 2,
+    "sean_extra_money": 4,
+    "sean_money": 14.0,
+    "rick_multiplier": 3,
+    "rick_money": 42.0,
+    "total_money_sean_rick": 56.0,
+    "answer": 56.0
+  },
+  "correct_value": 24.0,
+  "flawed_value": 14.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "half_divisor"
+      ],
+      "line_number": "L1",
+      "output_variable": "sean_money",
+      "question_inputs": [
+        "fritz_money",
+        "sean_extra_money"
+      ],
+      "solution_line_template": "Sean has {fritz_money}/{half_divisor}+{sean_extra_money} = <<{fritz_money}/{half_divisor}+{sean_extra_money}={sean_money}>>{sean_money} dollars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "rick_money",
+      "question_inputs": [
+        "rick_multiplier"
+      ],
+      "solution_line_template": "Rick has {sean_money}*{rick_multiplier} = <<{sean_money}*{rick_multiplier}={rick_money}>>{rick_money} dollars."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_money_sean_rick",
+      "question_inputs": [],
+      "solution_line_template": "Sean and Rick have {sean_money}+{rick_money} = <<{sean_money}+{rick_money}={total_money_sean_rick}>>{total_money_sean_rick} dollars together."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Sean has 40/4+4 = <<40/4+4=14>>14 dollars.",
+    "L2": "Rick has 14*3 = <<14*3=42>>42 dollars.",
+    "L3": "Sean and Rick have 14+42 = <<14+42=56>>56 dollars together.",
+    "FA": "#### 56"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'sean_extra_money' (4) was used instead of 'half_divisor' (2).",
+  "repro_seed": -5377794407807443832,
+  "model_name": "google_gemini-2.5-flash"
+}

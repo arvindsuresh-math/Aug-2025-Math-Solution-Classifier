@@ -1,0 +1,79 @@
+{
+  "index": 123,
+  "original_solution_mapping": {
+    "FA": "#### 25",
+    "L1": "The bulk warehouse has 48 cans for $12.00 so that's 12/48 = $0.25 a can",
+    "L2": "The local grocery store has 12 cans for $6.00 so that's 6/12 = $0.50 a can",
+    "L3": "The grocery store offer is $0.50 a can and the warehouse is $0.25 a can so the grocery store is .50-.25 = $<<0.50-.25=0.25>>0.25 more expensive per can"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 123.\n    Returns: how much more expensive, per can, in cents, the grocery store deal is.\n    \"\"\"\n    # L1\n    warehouse_cans = 48 # 48 cans of sparkling water\n    warehouse_price_dollars = 12.00 # $12.00 a case\n    warehouse_cost_per_can_dollars = warehouse_price_dollars / warehouse_cans\n\n    # L2\n    grocery_cans = 12 # 12 cans\n    grocery_price_dollars = 6.00 # $6.00\n    grocery_cost_per_can_dollars = grocery_price_dollars / grocery_cans\n\n    # L3\n    difference_per_can_dollars = grocery_cost_per_can_dollars - warehouse_cost_per_can_dollars\n\n    # FA\n    cents_per_dollar = 100 # WK\n    answer = difference_per_can_dollars * cents_per_dollar\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "grocery_cost_per_can_dollars",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x16a41a810>"
+  },
+  "correct_trace": {
+    "warehouse_cans": 48,
+    "warehouse_price_dollars": 12.0,
+    "warehouse_cost_per_can_dollars": 0.25,
+    "grocery_cans": 12,
+    "grocery_price_dollars": 6.0,
+    "grocery_cost_per_can_dollars": 0.5,
+    "difference_per_can_dollars": 0.25,
+    "cents_per_dollar": 100,
+    "answer": 25.0
+  },
+  "flawed_trace": {
+    "warehouse_cans": 48,
+    "warehouse_price_dollars": 12.0,
+    "warehouse_cost_per_can_dollars": 0.25,
+    "grocery_cans": 12,
+    "grocery_price_dollars": 6.0,
+    "grocery_cost_per_can_dollars": 72.0,
+    "difference_per_can_dollars": 71.75,
+    "cents_per_dollar": 100,
+    "answer": 7175.0
+  },
+  "correct_value": 0.5,
+  "flawed_value": 72.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "warehouse_cost_per_can_dollars",
+      "question_inputs": [
+        "warehouse_cans",
+        "warehouse_price_dollars"
+      ],
+      "solution_line_template": "The bulk warehouse has {warehouse_cans} cans for ${warehouse_price_dollars} so that's {warehouse_price_dollars}/{warehouse_cans} = ${warehouse_cost_per_can_dollars} a can"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "grocery_cost_per_can_dollars",
+      "question_inputs": [
+        "grocery_cans",
+        "grocery_price_dollars"
+      ],
+      "solution_line_template": "The local grocery store has {grocery_cans} cans for ${grocery_price_dollars} so that's {grocery_price_dollars}/{grocery_cans} = ${grocery_cost_per_can_dollars} a can"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "difference_per_can_dollars",
+      "question_inputs": [],
+      "solution_line_template": "The grocery store offer is ${grocery_cost_per_can_dollars} a can and the warehouse is ${warehouse_cost_per_can_dollars} a can so the grocery store is {grocery_cost_per_can_dollars}-{warehouse_cost_per_can_dollars} = $<<{grocery_cost_per_can_dollars}-{warehouse_cost_per_can_dollars}={difference_per_can_dollars}>>{difference_per_can_dollars} more expensive per can"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The bulk warehouse has 48 cans for $12 so that's 12/48 = $0.25 a can",
+    "L2": "The local grocery store has 12 cans for $6 so that's 6/12 = $72 a can",
+    "L3": "The grocery store offer is $72 a can and the warehouse is $0.25 a can so the grocery store is 72-0.25 = $<<72-0.25=71.75>>71.75 more expensive per can",
+    "FA": "#### 7175"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 3701995172087273053,
+  "model_name": "google_gemini-2.5-flash"
+}

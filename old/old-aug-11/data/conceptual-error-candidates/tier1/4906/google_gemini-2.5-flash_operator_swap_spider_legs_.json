@@ -1,0 +1,79 @@
+{
+  "index": 4906,
+  "original_solution_mapping": {
+    "FA": "#### 136",
+    "L1": "The ants have 72 legs because 12 times 6 equals <<12*6=72>>72",
+    "L2": "The spiders have 64 legs because 8 times 8 equals <<8*8=64>>64.",
+    "L3": "There are a total of 136 legs because 72 plus 64 equals <<72+64=136>>136."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4906.\n    Returns: the total number of legs of the entire collection.\n    \"\"\"\n    # L1\n    num_ants = 12 # 12 ants\n    legs_per_ant = 6 # WK\n    ant_legs = num_ants * legs_per_ant\n\n    # L2\n    num_spiders = 8 # 8 spiders\n    legs_per_spider = 8 # WK\n    spider_legs = num_spiders * legs_per_spider\n\n    # L3\n    total_legs = ant_legs + spider_legs\n\n    # FA\n    answer = total_legs\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "spider_legs",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x309fb2110>"
+  },
+  "correct_trace": {
+    "num_ants": 12,
+    "legs_per_ant": 6,
+    "ant_legs": 72,
+    "num_spiders": 8,
+    "legs_per_spider": 8,
+    "spider_legs": 64,
+    "total_legs": 136,
+    "answer": 136
+  },
+  "flawed_trace": {
+    "num_ants": 12,
+    "legs_per_ant": 6,
+    "ant_legs": 72,
+    "num_spiders": 8,
+    "legs_per_spider": 8,
+    "spider_legs": 1.0,
+    "total_legs": 73.0,
+    "answer": 73.0
+  },
+  "correct_value": 64,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "legs_per_ant"
+      ],
+      "line_number": "L1",
+      "output_variable": "ant_legs",
+      "question_inputs": [
+        "num_ants"
+      ],
+      "solution_line_template": "The ants have {ant_legs} legs because {num_ants} times {legs_per_ant} equals <<{num_ants}*{legs_per_ant}={ant_legs}>>{ant_legs}"
+    },
+    {
+      "WK_inputs": [
+        "legs_per_spider"
+      ],
+      "line_number": "L2",
+      "output_variable": "spider_legs",
+      "question_inputs": [
+        "num_spiders"
+      ],
+      "solution_line_template": "The spiders have {spider_legs} legs because {num_spiders} times {legs_per_spider} equals <<{num_spiders}*{legs_per_spider}={spider_legs}>>{spider_legs}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_legs",
+      "question_inputs": [],
+      "solution_line_template": "There are a total of {total_legs} legs because {ant_legs} plus {spider_legs} equals <<{ant_legs}+{spider_legs}={total_legs}>>{total_legs}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The ants have 72 legs because 12 times 6 equals <<12*6=72>>72",
+    "L2": "The spiders have 1 legs because 8 times 8 equals <<8*8=1>>1.",
+    "L3": "There are a total of 73 legs because 72 plus 1 equals <<72+1=73>>73.",
+    "FA": "#### 73"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 722419532180551720,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,74 @@
+{
+  "index": 2517,
+  "original_solution_mapping": {
+    "FA": "#### 100,000",
+    "L1": "The 20% profit amounts to $80 000 x 20/100 = $16 000.",
+    "L2": "The 5% commission amounts to $80 000 x 5/100 = $4 000.",
+    "L3": "So the selling price is $80 000+ $16 000 + $4 000 = $100 000."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2517.\n    Returns: the selling price of the house.\n    \"\"\"\n    # L1\n    original_price = 80000 # Mrs. Choi purchased a house for $80000\n    profit_percentage = Fraction(20, 100) # sold it for a 20% profit\n    profit_amount = original_price * profit_percentage\n\n    # L2\n    commission_percentage = Fraction(5, 100) # got a 5% broker's commission from the original price\n    commission_amount = original_price * commission_percentage\n\n    # L3\n    selling_price = original_price + profit_amount + commission_amount\n\n    # FA\n    answer = selling_price\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "selling_price",
+    "operand_to_replace": "profit_amount",
+    "replacement_variable": "commission_percentage"
+  },
+  "correct_trace": {
+    "original_price": 80000,
+    "profit_percentage": "1/5",
+    "profit_amount": "16000",
+    "commission_percentage": "1/20",
+    "commission_amount": "4000",
+    "selling_price": "100000",
+    "answer": "100000"
+  },
+  "flawed_trace": {
+    "original_price": 80000,
+    "profit_percentage": "1/5",
+    "profit_amount": "16000",
+    "commission_percentage": "1/20",
+    "commission_amount": "4000",
+    "selling_price": "1680001/20",
+    "answer": "1680001/20"
+  },
+  "correct_value": "100000",
+  "flawed_value": "1680001/20",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "profit_amount",
+      "question_inputs": [
+        "original_price",
+        "profit_percentage"
+      ],
+      "solution_line_template": "The 20% profit amounts to ${original_price} x {profit_percentage} = <<{original_price}*{profit_percentage}={profit_amount}>>${profit_amount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "commission_amount",
+      "question_inputs": [
+        "commission_percentage"
+      ],
+      "solution_line_template": "The 5% commission amounts to ${original_price} x {commission_percentage} = <<{original_price}*{commission_percentage}={commission_amount}>>${commission_amount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "selling_price",
+      "question_inputs": [],
+      "solution_line_template": "So the selling price is ${original_price}+ ${profit_amount} + ${commission_amount} = ${selling_price}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The 20% profit amounts to $80000 x 20/100 = <<80000*20/100=16000>>$16000.",
+    "L2": "The 5% commission amounts to $80000 x 5/100 = <<80000*5/100=4000>>$4000.",
+    "L3": "So the selling price is $80000+ $5/100 + $4000 = $1680001/20.",
+    "FA": "#### 1680001/20"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'commission_percentage' (value: 5/100) was used instead of 'profit_amount' (value: 16000).",
+  "repro_seed": 5037289485579512321,
+  "model_name": "google_gemini-2.5-flash"
+}

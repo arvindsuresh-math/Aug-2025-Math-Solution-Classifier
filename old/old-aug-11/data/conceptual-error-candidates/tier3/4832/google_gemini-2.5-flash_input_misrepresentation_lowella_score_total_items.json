@@ -1,0 +1,89 @@
+{
+  "index": 4832,
+  "original_solution_mapping": {
+    "FA": "#### 84",
+    "L1": "Lowella got 100 x 35/100 = <<100*35/100=35>>35 correct answers.",
+    "L2": "Pamela got 35 x 20/100 = <<35*20/100=7>>7 more correct answers than Lowella.",
+    "L3": "So, Pamela got 35 + 7 = <<35+7=42>>42 correct answers.",
+    "L4": "Thus, Mandy got 42 x 2 = <<42*2=84>>84 correct answers."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4832.\n    Returns: Mandy's score.\n    \"\"\"\n    # L1\n    total_items = 100 # 100-item exam\n    lowella_percentage = Fraction(35, 100) # 35% of the questions correctly\n    lowella_score = total_items * lowella_percentage\n\n    # L2\n    pamela_additional_percentage = Fraction(20, 100) # 20% more correct answers\n    pamela_additional_score = lowella_score * pamela_additional_percentage\n\n    # L3\n    pamela_score = lowella_score + pamela_additional_score\n\n    # L4\n    mandy_multiplier = 2 # twice Pamela's score\n    mandy_score = pamela_score * mandy_multiplier\n\n    # FA\n    answer = mandy_score\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "lowella_score",
+    "operand_to_replace": "lowella_percentage",
+    "replacement_variable": "total_items"
+  },
+  "correct_trace": {
+    "total_items": 100,
+    "lowella_percentage": "7/20",
+    "lowella_score": "35",
+    "pamela_additional_percentage": "1/5",
+    "pamela_additional_score": "7",
+    "pamela_score": "42",
+    "mandy_multiplier": 2,
+    "mandy_score": "84",
+    "answer": "84"
+  },
+  "flawed_trace": {
+    "total_items": 100,
+    "lowella_percentage": "7/20",
+    "lowella_score": 10000,
+    "pamela_additional_percentage": "1/5",
+    "pamela_additional_score": "2000",
+    "pamela_score": "12000",
+    "mandy_multiplier": 2,
+    "mandy_score": "24000",
+    "answer": "24000"
+  },
+  "correct_value": "35",
+  "flawed_value": 10000,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "lowella_score",
+      "question_inputs": [
+        "total_items",
+        "lowella_percentage"
+      ],
+      "solution_line_template": "Lowella got {total_items} x {lowella_percentage} = <<{total_items}*{lowella_percentage}={lowella_score}>>{lowella_score} correct answers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "pamela_additional_score",
+      "question_inputs": [
+        "pamela_additional_percentage"
+      ],
+      "solution_line_template": "Pamela got {lowella_score} x {pamela_additional_percentage} = <<{lowella_score}*{pamela_additional_percentage}={pamela_additional_score}>>{pamela_additional_score} more correct answers than Lowella."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "pamela_score",
+      "question_inputs": [],
+      "solution_line_template": "So, Pamela got {lowella_score} + {pamela_additional_score} = <<{lowella_score}+{pamela_additional_score}={pamela_score}>>{pamela_score} correct answers."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "mandy_score",
+      "question_inputs": [
+        "mandy_multiplier"
+      ],
+      "solution_line_template": "Thus, Mandy got {pamela_score} x {mandy_multiplier} = <<{pamela_score}*{mandy_multiplier}={mandy_score}>>{mandy_score} correct answers."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Lowella got 100 x 100 = <<100*100=10000>>10000 correct answers.",
+    "L2": "Pamela got 10000 x 20/100 = <<10000*20/100=2000>>2000 more correct answers than Lowella.",
+    "L3": "So, Pamela got 10000 + 2000 = <<10000+2000=12000>>12000 correct answers.",
+    "L4": "Thus, Mandy got 12000 x 2 = <<12000*2=24000>>24000 correct answers.",
+    "FA": "#### 24000"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'total_items' (100) was used instead of 'lowella_percentage' (35/100).",
+  "repro_seed": -9169792465441506234,
+  "model_name": "google_gemini-2.5-flash"
+}

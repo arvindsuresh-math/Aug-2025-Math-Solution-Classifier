@@ -1,0 +1,74 @@
+{
+  "index": 4782,
+  "original_solution_mapping": {
+    "FA": "#### 58",
+    "L1": "After getting six games from Henry, Neil has 6+7=<<6+7=13>>13 games.",
+    "L2": "Now, Henry has 13*4=<<13*4=52>>52 games.",
+    "L3": "Henry had 52+6=<<52+6=58>>58 games at first."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4782.\n    Returns: the number of games Henry had at first.\n    \"\"\"\n    # L1\n    games_given_to_neil = 6 # gave six of them to Neil\n    neil_initial_games = 7 # Neil had 7 games at first\n    neil_games_after_henry_gives = games_given_to_neil + neil_initial_games\n\n    # L2\n    henry_multiplier = 4 # 4 times more games than Neil\n    henry_games_now = neil_games_after_henry_gives * henry_multiplier\n\n    # L3\n    henry_initial_games = henry_games_now + games_given_to_neil\n\n    # FA\n    answer = henry_initial_games\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "henry_games_now",
+    "operand_to_replace": "henry_multiplier",
+    "replacement_variable": "games_given_to_neil"
+  },
+  "correct_trace": {
+    "games_given_to_neil": 6,
+    "neil_initial_games": 7,
+    "neil_games_after_henry_gives": 13,
+    "henry_multiplier": 4,
+    "henry_games_now": 52,
+    "henry_initial_games": 58,
+    "answer": 58
+  },
+  "flawed_trace": {
+    "games_given_to_neil": 6,
+    "neil_initial_games": 7,
+    "neil_games_after_henry_gives": 13,
+    "henry_multiplier": 4,
+    "henry_games_now": 78,
+    "henry_initial_games": 84,
+    "answer": 84
+  },
+  "correct_value": 52,
+  "flawed_value": 78,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "neil_games_after_henry_gives",
+      "question_inputs": [
+        "games_given_to_neil",
+        "neil_initial_games"
+      ],
+      "solution_line_template": "After getting six games from Henry, Neil has {games_given_to_neil}+{neil_initial_games}=<<{games_given_to_neil}+{neil_initial_games}={neil_games_after_henry_gives}>>{neil_games_after_henry_gives} games."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "henry_games_now",
+      "question_inputs": [
+        "henry_multiplier"
+      ],
+      "solution_line_template": "Now, Henry has {neil_games_after_henry_gives}*{henry_multiplier}=<<{neil_games_after_henry_gives}*{henry_multiplier}={henry_games_now}>>{henry_games_now} games."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "henry_initial_games",
+      "question_inputs": [],
+      "solution_line_template": "Henry had {henry_games_now}+{games_given_to_neil}=<<{henry_games_now}+{games_given_to_neil}={henry_initial_games}>>{henry_initial_games} games at first."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After getting six games from Henry, Neil has 6+7=<<6+7=13>>13 games.",
+    "L2": "Now, Henry has 13*6=<<13*6=78>>78 games.",
+    "L3": "Henry had 78+6=<<78+6=84>>84 games at first.",
+    "FA": "#### 84"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'games_given_to_neil' (6) was used instead of 'henry_multiplier' (4).",
+  "repro_seed": -157205266480709088,
+  "model_name": "google_gemini-2.5-flash"
+}

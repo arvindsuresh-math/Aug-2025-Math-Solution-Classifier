@@ -1,0 +1,87 @@
+{
+  "index": 164,
+  "original_solution_mapping": {
+    "FA": "#### 32",
+    "L1": "On Tuesday Buddy has 30/2 = <<30/2=15>>15 baseball cards.",
+    "L2": "On Wednesday Buddy has 15+12 = <<15+12=27>>27 baseball cards.",
+    "L3": "On Thursday Buddy buys 15/3 = <<15/3=5>>5 baseball cards.",
+    "L4": "On Thursday Buddy has a total of 27+5 = <<27+5=32>>32 baseball cards."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 164.\n    Returns: the total number of baseball cards Buddy has on Thursday.\n    \"\"\"\n    # L1\n    initial_cards = 30 # On Monday Buddy has 30 baseball cards\n    lost_fraction_denominator = 2 # loses half of them\n    cards_on_tuesday = initial_cards / lost_fraction_denominator\n\n    # L2\n    bought_wednesday = 12 # On Wednesday Buddy buys 12 baseball cards\n    cards_on_wednesday = cards_on_tuesday + bought_wednesday\n\n    # L3\n    bought_thursday_divisor = 3 # a third of what he had on Tuesday\n    bought_thursday = cards_on_tuesday / bought_thursday_divisor\n\n    # L4\n    total_cards_on_thursday = cards_on_wednesday + bought_thursday\n\n    # FA\n    answer = total_cards_on_thursday\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_cards_on_thursday",
+    "replacement_variable": "cards_on_wednesday"
+  },
+  "correct_trace": {
+    "initial_cards": 30,
+    "lost_fraction_denominator": 2,
+    "cards_on_tuesday": 15.0,
+    "bought_wednesday": 12,
+    "cards_on_wednesday": 27.0,
+    "bought_thursday_divisor": 3,
+    "bought_thursday": 5.0,
+    "total_cards_on_thursday": 32.0,
+    "answer": 32.0
+  },
+  "flawed_trace": {
+    "initial_cards": 30,
+    "lost_fraction_denominator": 2,
+    "cards_on_tuesday": 15.0,
+    "bought_wednesday": 12,
+    "cards_on_wednesday": 27.0,
+    "bought_thursday_divisor": 3,
+    "bought_thursday": 5.0,
+    "total_cards_on_thursday": 32.0,
+    "answer": 27.0
+  },
+  "correct_value": 32.0,
+  "flawed_value": 27.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "cards_on_tuesday",
+      "question_inputs": [
+        "initial_cards",
+        "lost_fraction_denominator"
+      ],
+      "solution_line_template": "On Tuesday Buddy has {initial_cards}/{lost_fraction_denominator} = <<{initial_cards}/{lost_fraction_denominator}={cards_on_tuesday}>>{cards_on_tuesday} baseball cards."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cards_on_wednesday",
+      "question_inputs": [
+        "bought_wednesday"
+      ],
+      "solution_line_template": "On Wednesday Buddy has {cards_on_tuesday}+{bought_wednesday} = <<{cards_on_tuesday}+{bought_wednesday}={cards_on_wednesday}>>{cards_on_wednesday} baseball cards."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "bought_thursday",
+      "question_inputs": [
+        "bought_thursday_divisor"
+      ],
+      "solution_line_template": "On Thursday Buddy buys {cards_on_tuesday}/{bought_thursday_divisor} = <<{cards_on_tuesday}/{bought_thursday_divisor}={bought_thursday}>>{bought_thursday} baseball cards."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cards_on_thursday",
+      "question_inputs": [],
+      "solution_line_template": "On Thursday Buddy has a total of {cards_on_wednesday}+{bought_thursday} = <<{cards_on_wednesday}+{bought_thursday}={total_cards_on_thursday}>>{total_cards_on_thursday} baseball cards."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On Tuesday Buddy has 30/2 = <<30/2=15>>15 baseball cards.",
+    "L2": "On Wednesday Buddy has 15+12 = <<15+12=27>>27 baseball cards.",
+    "FA": "#### 27"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'cards_on_wednesday' (value: 27.0) was reported instead of 'total_cards_on_thursday' (value: 32.0).",
+  "repro_seed": -5840004533380086227,
+  "model_name": "google_gemini-2.5-flash"
+}

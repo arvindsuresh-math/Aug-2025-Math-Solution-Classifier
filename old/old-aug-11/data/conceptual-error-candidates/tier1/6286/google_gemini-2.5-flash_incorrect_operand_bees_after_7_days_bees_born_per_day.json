@@ -1,0 +1,93 @@
+{
+  "index": 6286,
+  "original_solution_mapping": {
+    "FA": "#### 27201",
+    "L1": "3000 new bees are born every day. In 7 days there will be 3000*7=<<3000*7=21000>>21000 new bees",
+    "L2": "If each day the queen loses 900 bees, in 7 days there will be 900*7=<<900*7=6300>>6300 fewer bees",
+    "L3": "If at the beginning the queen had 12500 bees, then at the end of 7 days she will have 12500+21000-6300=<<12500+21000-6300=27200>>27200 bees",
+    "L4": "The total number of bees in the hive including the queen is 27200+1 =<<27200+1=27201>>27201"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6286.\n    Returns: the total number of bees in the hive including the queen at the end of 7 days.\n    \"\"\"\n    # L1\n    bees_born_per_day = 3000 # 3000 bees hatch from the queen's eggs every day\n    num_days = 7 # at the end of 7 days\n    total_new_bees = bees_born_per_day * num_days\n\n    # L2\n    bees_lost_per_day = 900 # loses 900 bees every day\n    total_lost_bees = bees_lost_per_day * num_days\n\n    # L3\n    initial_bees = 12500 # at the beginning the queen had 12500 bees\n    bees_after_7_days = initial_bees + total_new_bees - total_lost_bees\n\n    # L4\n    queen_count = 1 # WK\n    final_total_bees = bees_after_7_days + queen_count\n\n    # FA\n    answer = final_total_bees\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "bees_after_7_days",
+    "operand_to_replace": "total_new_bees",
+    "replacement_variable": "bees_born_per_day"
+  },
+  "correct_trace": {
+    "bees_born_per_day": 3000,
+    "num_days": 7,
+    "total_new_bees": 21000,
+    "bees_lost_per_day": 900,
+    "total_lost_bees": 6300,
+    "initial_bees": 12500,
+    "bees_after_7_days": 27200,
+    "queen_count": 1,
+    "final_total_bees": 27201,
+    "answer": 27201
+  },
+  "flawed_trace": {
+    "bees_born_per_day": 3000,
+    "num_days": 7,
+    "total_new_bees": 21000,
+    "bees_lost_per_day": 900,
+    "total_lost_bees": 6300,
+    "initial_bees": 12500,
+    "bees_after_7_days": 9200,
+    "queen_count": 1,
+    "final_total_bees": 9201,
+    "answer": 9201
+  },
+  "correct_value": 27200,
+  "flawed_value": 9200,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_new_bees",
+      "question_inputs": [
+        "bees_born_per_day",
+        "num_days"
+      ],
+      "solution_line_template": "3000 new bees are born every day. In {num_days} days there will be {bees_born_per_day}*{num_days}=<<{bees_born_per_day}*{num_days}={total_new_bees}>>{total_new_bees} new bees"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_lost_bees",
+      "question_inputs": [
+        "bees_lost_per_day"
+      ],
+      "solution_line_template": "If each day the queen loses {bees_lost_per_day} bees, in {num_days} days there will be {bees_lost_per_day}*{num_days}=<<{bees_lost_per_day}*{num_days}={total_lost_bees}>>{total_lost_bees} fewer bees"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "bees_after_7_days",
+      "question_inputs": [
+        "initial_bees"
+      ],
+      "solution_line_template": "If at the beginning the queen had {initial_bees} bees, then at the end of {num_days} days she will have {initial_bees}+{total_new_bees}-{total_lost_bees}=<<{initial_bees}+{total_new_bees}-{total_lost_bees}={bees_after_7_days}>>{bees_after_7_days} bees"
+    },
+    {
+      "WK_inputs": [
+        "queen_count"
+      ],
+      "line_number": "L4",
+      "output_variable": "final_total_bees",
+      "question_inputs": [],
+      "solution_line_template": "The total number of bees in the hive including the queen is {bees_after_7_days}+{queen_count} =<<{bees_after_7_days}+{queen_count}={final_total_bees}>>{final_total_bees}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "3000 new bees are born every day. In 7 days there will be 3000*7=<<3000*7=21000>>21000 new bees",
+    "L2": "If each day the queen loses 900 bees, in 7 days there will be 900*7=<<900*7=6300>>6300 fewer bees",
+    "L3": "If at the beginning the queen had 12500 bees, then at the end of 7 days she will have 12500+3000-6300=<<12500+3000-6300=9200>>9200 bees",
+    "L4": "The total number of bees in the hive including the queen is 9200+1 =<<9200+1=9201>>9201",
+    "FA": "#### 9201"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'bees_born_per_day' (value: 3000) was used instead of 'total_new_bees' (value: 21000).",
+  "repro_seed": -6632245616969477051,
+  "model_name": "google_gemini-2.5-flash"
+}

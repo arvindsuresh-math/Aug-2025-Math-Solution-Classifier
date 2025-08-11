@@ -1,0 +1,63 @@
+{
+  "index": 5221,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "After putting 10 eggs in the fridge, the chef has 60 - 10 = <<60-10=50>>50 eggs left to make cakes.",
+    "L2": "Since it takes 5 eggs to make one cake, the chef can make 50 eggs / 5 eggs per cake = <<50/5=10>>10 cakes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5221.\n    Returns: the total number of cakes the chef made.\n    \"\"\"\n    # L1\n    total_eggs = 60 # The chef has 60 eggs\n    eggs_in_fridge = 10 # He puts 10 eggs in the fridge\n    eggs_for_cakes = total_eggs - eggs_in_fridge\n\n    # L2\n    eggs_per_cake = 5 # used 5 eggs to make one cake\n    num_cakes = eggs_for_cakes / eggs_per_cake\n\n    # FA\n    answer = num_cakes\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "eggs_for_cakes",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x177a4b5d0>"
+  },
+  "correct_trace": {
+    "total_eggs": 60,
+    "eggs_in_fridge": 10,
+    "eggs_for_cakes": 50,
+    "eggs_per_cake": 5,
+    "num_cakes": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "total_eggs": 60,
+    "eggs_in_fridge": 10,
+    "eggs_for_cakes": 70,
+    "eggs_per_cake": 5,
+    "num_cakes": 14.0,
+    "answer": 14.0
+  },
+  "correct_value": 50,
+  "flawed_value": 70,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "eggs_for_cakes",
+      "question_inputs": [
+        "total_eggs",
+        "eggs_in_fridge"
+      ],
+      "solution_line_template": "After putting {eggs_in_fridge} eggs in the fridge, the chef has {total_eggs} - {eggs_in_fridge} = <<{total_eggs}-{eggs_in_fridge}={eggs_for_cakes}>>{eggs_for_cakes} eggs left to make cakes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_cakes",
+      "question_inputs": [
+        "eggs_per_cake"
+      ],
+      "solution_line_template": "Since it takes {eggs_per_cake} eggs to make one cake, the chef can make {eggs_for_cakes} eggs / {eggs_per_cake} eggs per cake = <<{eggs_for_cakes}/{eggs_per_cake}={num_cakes}>>{num_cakes} cakes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "After putting 10 eggs in the fridge, the chef has 60 - 10 = <<60-10=70>>70 eggs left to make cakes.",
+    "L2": "Since it takes 5 eggs to make one cake, the chef can make 70 eggs / 5 eggs per cake = <<70/5=14>>14 cakes.",
+    "FA": "#### 14"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -2883230092400265855,
+  "model_name": "google_gemini-2.5-flash"
+}

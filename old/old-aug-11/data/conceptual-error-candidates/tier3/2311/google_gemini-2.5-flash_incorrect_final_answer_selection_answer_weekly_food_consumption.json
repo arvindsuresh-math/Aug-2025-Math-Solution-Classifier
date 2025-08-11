@@ -1,0 +1,92 @@
+{
+  "index": 2311,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "Each dog eats 1/2 x 2 = <<1/2*2=1>>1 pound of dog food each day.",
+    "L2": "So the three dogs eat a total of 1 x 3 = <<1*3=3>>3 pounds each day.",
+    "L3": "That is 3 x 7 = <<3*7=21>>21 pounds in a week.",
+    "L4": "Therefore, 30 - 21 = <<30-21=9>>9 pounds of food are left after a week."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2311.\n    Returns: the number of pounds of dog food left after a week.\n    \"\"\"\n    # L1\n    food_per_feeding = Fraction(1, 2) # 1/2 of a pound of dog food\n    feedings_per_day = 2 # twice a day\n    daily_food_per_dog = food_per_feeding * feedings_per_day\n\n    # L2\n    num_dogs = 3 # three dogs\n    total_daily_food = daily_food_per_dog * num_dogs\n\n    # L3\n    days_per_week = 7 # WK\n    weekly_food_consumption = total_daily_food * days_per_week\n\n    # L4\n    initial_food_bought = 30 # Melody bought 30 pounds of dog food\n    food_left = initial_food_bought - weekly_food_consumption\n\n    # FA\n    answer = food_left\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "food_left",
+    "replacement_variable": "weekly_food_consumption"
+  },
+  "correct_trace": {
+    "food_per_feeding": "1/2",
+    "feedings_per_day": 2,
+    "daily_food_per_dog": "1",
+    "num_dogs": 3,
+    "total_daily_food": "3",
+    "days_per_week": 7,
+    "weekly_food_consumption": "21",
+    "initial_food_bought": 30,
+    "food_left": "9",
+    "answer": "9"
+  },
+  "flawed_trace": {
+    "food_per_feeding": "1/2",
+    "feedings_per_day": 2,
+    "daily_food_per_dog": "1",
+    "num_dogs": 3,
+    "total_daily_food": "3",
+    "days_per_week": 7,
+    "weekly_food_consumption": "21",
+    "initial_food_bought": 30,
+    "food_left": "9",
+    "answer": "21"
+  },
+  "correct_value": "9",
+  "flawed_value": "21",
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "daily_food_per_dog",
+      "question_inputs": [
+        "food_per_feeding",
+        "feedings_per_day"
+      ],
+      "solution_line_template": "Each dog eats {food_per_feeding} x {feedings_per_day} = <<{food_per_feeding}*{feedings_per_day}={daily_food_per_dog}>>{daily_food_per_dog} pound of dog food each day."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_daily_food",
+      "question_inputs": [
+        "num_dogs"
+      ],
+      "solution_line_template": "So the {num_dogs} dogs eat a total of {daily_food_per_dog} x {num_dogs} = <<{daily_food_per_dog}*{num_dogs}={total_daily_food}>>{total_daily_food} pounds each day."
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L3",
+      "output_variable": "weekly_food_consumption",
+      "question_inputs": [],
+      "solution_line_template": "That is {total_daily_food} x {days_per_week} = <<{total_daily_food}*{days_per_week}={weekly_food_consumption}>>{weekly_food_consumption} pounds in a week."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "food_left",
+      "question_inputs": [
+        "initial_food_bought"
+      ],
+      "solution_line_template": "Therefore, {initial_food_bought} - {weekly_food_consumption} = <<{initial_food_bought}-{weekly_food_consumption}={food_left}>>{food_left} pounds of food are left after a week."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Each dog eats 1/2 x 2 = <<1/2*2=1>>1 pound of dog food each day.",
+    "L2": "So the 3 dogs eat a total of 1 x 3 = <<1*3=3>>3 pounds each day.",
+    "L3": "That is 3 x 7 = <<3*7=21>>21 pounds in a week.",
+    "FA": "#### 21"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'weekly_food_consumption' (value: 21) was reported instead of 'food_left' (value: 9).",
+  "repro_seed": 252699480674395246,
+  "model_name": "google_gemini-2.5-flash"
+}

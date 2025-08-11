@@ -1,0 +1,64 @@
+{
+  "index": 553,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "There are 5 school days in a week: 5 days/week x 2 containers of milk/day = 10 containers of milk every week",
+    "L2": "Finally the number of container for 3 weeks is 3 weeks x 10 containers/week = <<3*10=30>>30 containers"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 553.\n    Returns: the total number of containers of milk Emma buys.\n    \"\"\"\n    # L1\n    school_days_per_week = 5 # WK\n    containers_per_school_day = 2 # 2 containers of milk every school day\n    containers_per_week = school_days_per_week * containers_per_school_day\n\n    # L2\n    num_weeks = 3 # 3 weeks\n    total_containers = num_weeks * containers_per_week\n\n    # FA\n    answer = total_containers\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "containers_per_week",
+    "operand_to_replace": "containers_per_school_day",
+    "replacement_variable": "school_days_per_week"
+  },
+  "correct_trace": {
+    "school_days_per_week": 5,
+    "containers_per_school_day": 2,
+    "containers_per_week": 10,
+    "num_weeks": 3,
+    "total_containers": 30,
+    "answer": 30
+  },
+  "flawed_trace": {
+    "school_days_per_week": 5,
+    "containers_per_school_day": 2,
+    "containers_per_week": 25,
+    "num_weeks": 3,
+    "total_containers": 75,
+    "answer": 75
+  },
+  "correct_value": 10,
+  "flawed_value": 25,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "containers_per_school_day"
+      ],
+      "WK_inputs": [
+        "school_days_per_week"
+      ],
+      "output_variable": "containers_per_week",
+      "solution_line_template": "There are {school_days_per_week} school days in a week: {school_days_per_week} days/week x {containers_per_school_day} containers of milk/day = {containers_per_week} containers of milk every week"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "num_weeks"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_containers",
+      "solution_line_template": "Finally the number of container for {num_weeks} weeks is {num_weeks} weeks x {containers_per_week} containers/week = <<{num_weeks}*{containers_per_week}={total_containers}>>{total_containers} containers"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 5 school days in a week: 5 days/week x 5 containers of milk/day = 25 containers of milk every week",
+    "L2": "Finally the number of container for 3 weeks is 3 weeks x 25 containers/week = <<3*25=75>>75 containers",
+    "FA": "#### 75"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'school_days_per_week' (5) was used instead of 'containers_per_school_day' (2).",
+  "repro_seed": -9194608524018795738,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,63 @@
+{
+  "index": 507,
+  "original_solution_mapping": {
+    "FA": "#### 150",
+    "L1": "He pays for 20/2=<<20/2=10>>10 pounds of steaks",
+    "L2": "That cost 10*15=$<<10*15=150>>150"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 507.\n    Returns: the total amount James paid for the steaks.\n    \"\"\"\n    # L1\n    total_pounds = 20 # he buys 20 pounds\n    buy_one_get_one_free_divisor = 2 # buy one get one free\n    paid_pounds = total_pounds / buy_one_get_one_free_divisor\n\n    # L2\n    price_per_pound = 15 # $15 per pound\n    total_cost = paid_pounds * price_per_pound\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "paid_pounds",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Sub object at 0x30cf50890>"
+  },
+  "correct_trace": {
+    "total_pounds": 20,
+    "buy_one_get_one_free_divisor": 2,
+    "paid_pounds": 10.0,
+    "price_per_pound": 15,
+    "total_cost": 150.0,
+    "answer": 150.0
+  },
+  "flawed_trace": {
+    "total_pounds": 20,
+    "buy_one_get_one_free_divisor": 2,
+    "paid_pounds": 18,
+    "price_per_pound": 15,
+    "total_cost": 270,
+    "answer": 270
+  },
+  "correct_value": 10.0,
+  "flawed_value": 18,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "paid_pounds",
+      "question_inputs": [
+        "total_pounds",
+        "buy_one_get_one_free_divisor"
+      ],
+      "solution_line_template": "He pays for {total_pounds}/{buy_one_get_one_free_divisor}=<<{total_pounds}/{buy_one_get_one_free_divisor}={paid_pounds}>>{paid_pounds} pounds of steaks"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost",
+      "question_inputs": [
+        "price_per_pound"
+      ],
+      "solution_line_template": "That cost {paid_pounds}*{price_per_pound}=$<<{paid_pounds}*{price_per_pound}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He pays for 20/2=<<20/2=18>>18 pounds of steaks",
+    "L2": "That cost 18*15=$<<18*15=270>>270",
+    "FA": "#### 270"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '-' instead.",
+  "repro_seed": 2269716374815214428,
+  "model_name": "google_gemini-2.5-flash"
+}

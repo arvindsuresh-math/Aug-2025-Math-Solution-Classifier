@@ -1,0 +1,89 @@
+{
+  "index": 6536,
+  "original_solution_mapping": {
+    "FA": "#### 35",
+    "L1": "This week, 80 - 20 = <<80-20=60>>60 people watched the first game.",
+    "L2": "While 80 + 15 = <<80+15=95>>95 people watched the third game.",
+    "L3": "A total of 80 + 60 + 95 = <<80+60+95=235>>235 people watched the games this week.",
+    "L4": "Thus, 235 - 200 = <<235-200=35>>35 more people watched the games this week than last week."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6536.\n    Returns: how many more people watched the games this week than last week.\n    \"\"\"\n    # L1\n    second_game_watchers = 80 # eighty people watched the second game\n    fewer_first_game = 20 # 20 fewer people watched the first game than the second game\n    first_game_watchers = second_game_watchers - fewer_first_game\n\n    # L2\n    more_third_game = 15 # 15 more people watched the third than the second game\n    third_game_watchers = second_game_watchers + more_third_game\n\n    # L3\n    this_week_total = second_game_watchers + first_game_watchers + third_game_watchers\n\n    # L4\n    last_week_total = 200 # a total of 200 people who watched the games last week\n    difference_this_vs_last_week = this_week_total - last_week_total\n\n    # FA\n    answer = difference_this_vs_last_week\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "difference_this_vs_last_week",
+    "operand_to_replace": "last_week_total",
+    "replacement_variable": "fewer_first_game"
+  },
+  "correct_trace": {
+    "second_game_watchers": 80,
+    "fewer_first_game": 20,
+    "first_game_watchers": 60,
+    "more_third_game": 15,
+    "third_game_watchers": 95,
+    "this_week_total": 235,
+    "last_week_total": 200,
+    "difference_this_vs_last_week": 35,
+    "answer": 35
+  },
+  "flawed_trace": {
+    "second_game_watchers": 80,
+    "fewer_first_game": 20,
+    "first_game_watchers": 60,
+    "more_third_game": 15,
+    "third_game_watchers": 95,
+    "this_week_total": 235,
+    "last_week_total": 200,
+    "difference_this_vs_last_week": 215,
+    "answer": 215
+  },
+  "correct_value": 35,
+  "flawed_value": 215,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "first_game_watchers",
+      "question_inputs": [
+        "second_game_watchers",
+        "fewer_first_game"
+      ],
+      "solution_line_template": "This week, {second_game_watchers} - {fewer_first_game} = <<{second_game_watchers}-{fewer_first_game}={first_game_watchers}>>{first_game_watchers} people watched the first game."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "third_game_watchers",
+      "question_inputs": [
+        "more_third_game"
+      ],
+      "solution_line_template": "While {second_game_watchers} + {more_third_game} = <<{second_game_watchers}+{more_third_game}={third_game_watchers}>>{third_game_watchers} people watched the third game."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "this_week_total",
+      "question_inputs": [],
+      "solution_line_template": "A total of {second_game_watchers} + {first_game_watchers} + {third_game_watchers} = <<{second_game_watchers}+{first_game_watchers}+{third_game_watchers}={this_week_total}>>{this_week_total} people watched the games this week."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "difference_this_vs_last_week",
+      "question_inputs": [
+        "last_week_total"
+      ],
+      "solution_line_template": "Thus, {this_week_total} - {last_week_total} = <<{this_week_total}-{last_week_total}={difference_this_vs_last_week}>>{difference_this_vs_last_week} more people watched the games this week than last week."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "This week, 80 - 20 = <<80-20=60>>60 people watched the first game.",
+    "L2": "While 80 + 15 = <<80+15=95>>95 people watched the third game.",
+    "L3": "A total of 80 + 60 + 95 = <<80+60+95=235>>235 people watched the games this week.",
+    "L4": "Thus, 235 - 20 = <<235-20=215>>215 more people watched the games this week than last week.",
+    "FA": "#### 215"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Input misrepresentation. The value for 'fewer_first_game' (20) was used instead of 'last_week_total' (200).",
+  "repro_seed": 1110602452651685905,
+  "model_name": "google_gemini-2.5-flash"
+}

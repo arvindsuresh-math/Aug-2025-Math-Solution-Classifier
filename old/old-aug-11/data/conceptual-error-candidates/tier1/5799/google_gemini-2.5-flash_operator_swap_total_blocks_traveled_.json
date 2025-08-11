@@ -1,0 +1,59 @@
+{
+  "index": 5799,
+  "original_solution_mapping": {
+    "FA": "#### 22",
+    "L1": "On the way to the library, Trent went 4 blocks + 7 blocks = <<4+7=11>>11 blocks.",
+    "L2": "Trent came home the same way so he went 11 blocks + 11 blocks = <<11+11=22>>22 blocks."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5799.\n    Returns: the total number of blocks Trent traveled.\n    \"\"\"\n    # L1\n    blocks_to_bus_stop = 4 # walked 4 blocks from his house to the bus stop\n    blocks_bus_to_library = 7 # rode the bus 7 blocks to the library\n    blocks_to_library = blocks_to_bus_stop + blocks_bus_to_library\n\n    # L2\n    total_blocks_traveled = blocks_to_library + blocks_to_library\n\n    # FA\n    answer = total_blocks_traveled\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_blocks_traveled",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x30a3f5c50>"
+  },
+  "correct_trace": {
+    "blocks_to_bus_stop": 4,
+    "blocks_bus_to_library": 7,
+    "blocks_to_library": 11,
+    "total_blocks_traveled": 22,
+    "answer": 22
+  },
+  "flawed_trace": {
+    "blocks_to_bus_stop": 4,
+    "blocks_bus_to_library": 7,
+    "blocks_to_library": 11,
+    "total_blocks_traveled": 121,
+    "answer": 121
+  },
+  "correct_value": 22,
+  "flawed_value": 121,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "blocks_to_library",
+      "question_inputs": [
+        "blocks_to_bus_stop",
+        "blocks_bus_to_library"
+      ],
+      "solution_line_template": "On the way to the library, Trent went {blocks_to_bus_stop} blocks + {blocks_bus_to_library} blocks = <<{blocks_to_bus_stop}+{blocks_bus_to_library}={blocks_to_library}>>{blocks_to_library} blocks."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_blocks_traveled",
+      "question_inputs": [],
+      "solution_line_template": "Trent came home the same way so he went {blocks_to_library} blocks + {blocks_to_library} blocks = <<{blocks_to_library}+{blocks_to_library}={total_blocks_traveled}>>{total_blocks_traveled} blocks."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "On the way to the library, Trent went 4 blocks + 7 blocks = <<4+7=11>>11 blocks.",
+    "L2": "Trent came home the same way so he went 11 blocks + 11 blocks = <<11+11=121>>121 blocks.",
+    "FA": "#### 121"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 2023087595036999275,
+  "model_name": "google_gemini-2.5-flash"
+}

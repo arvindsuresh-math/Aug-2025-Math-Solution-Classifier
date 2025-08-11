@@ -1,0 +1,99 @@
+{
+  "index": 4173,
+  "original_solution_mapping": {
+    "FA": "#### 8",
+    "L1": "First find how much barbecue sauce Jack makes by adding the volume of each ingredient: 3 cups + 1 cup + 1 cup = <<3+1+1=5>>5 cups",
+    "L2": "Then multiply the number of pulled pork sandwiches by the amount of sauce per sandwich to find the total amount used: 1/6 cup/sandwich * 18 sandwiches = <<1/6*18=3>>3 cups",
+    "L3": "Then subtract this amount from the total amount of sauce Jack has to find how much he uses on the burgers: 5 cups - 3 cups = <<5-3=2>>2 cups",
+    "L4": "Then divide this amount by the amount of sauce used per burger to find the number of burgers he can make: 2 cups / 1/4 cup/burger = 8 burgers"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4173.\n    Returns: the number of burgers Jack can make.\n    \"\"\"\n    # L1\n    ketchup_cups = 3 # 3 cups of ketchup\n    vinegar_cups = 1 # 1 cup of vinegar\n    honey_cups = 1 # 1 cup of honey\n    total_sauce_cups = ketchup_cups + vinegar_cups + honey_cups\n\n    # L2\n    sauce_per_pulled_pork_fraction = Fraction(1, 6) # 1/6 cup\n    num_pulled_pork_sandwiches = 18 # 18 pulled pork sandwiches\n    sauce_for_pulled_pork = sauce_per_pulled_pork_fraction * num_pulled_pork_sandwiches\n\n    # L3\n    sauce_for_burgers = total_sauce_cups - sauce_for_pulled_pork\n\n    # L4\n    sauce_per_burger_fraction = Fraction(1, 4) # 1/4 cup of sauce\n    num_burgers = sauce_for_burgers / sauce_per_burger_fraction\n\n    # FA\n    answer = num_burgers\n    return answer\n",
+  "mutation_details": {
+    "type": "incomplete_calculation",
+    "target_variable": "total_sauce_cups",
+    "operand_to_remove": "vinegar_cups",
+    "original_operands": [
+      "honey_cups",
+      "ketchup_cups",
+      "vinegar_cups"
+    ]
+  },
+  "correct_trace": {
+    "ketchup_cups": 3,
+    "vinegar_cups": 1,
+    "honey_cups": 1,
+    "total_sauce_cups": 5,
+    "sauce_per_pulled_pork_fraction": "1/6",
+    "num_pulled_pork_sandwiches": 18,
+    "sauce_for_pulled_pork": "3",
+    "sauce_for_burgers": "2",
+    "sauce_per_burger_fraction": "1/4",
+    "num_burgers": "8",
+    "answer": "8"
+  },
+  "flawed_trace": {
+    "ketchup_cups": 3,
+    "vinegar_cups": 1,
+    "honey_cups": 1,
+    "total_sauce_cups": 4,
+    "sauce_per_pulled_pork_fraction": "1/6",
+    "num_pulled_pork_sandwiches": 18,
+    "sauce_for_pulled_pork": "3",
+    "sauce_for_burgers": "1",
+    "sauce_per_burger_fraction": "1/4",
+    "num_burgers": "4",
+    "answer": "4"
+  },
+  "correct_value": 5,
+  "flawed_value": 4,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_sauce_cups",
+      "question_inputs": [
+        "ketchup_cups",
+        "vinegar_cups",
+        "honey_cups"
+      ],
+      "solution_line_template": "First find how much barbecue sauce Jack makes by adding the volume of each ingredient: {ketchup_cups} cups + {vinegar_cups} cup + {honey_cups} cup = <<{ketchup_cups}+{vinegar_cups}+{honey_cups}={total_sauce_cups}>>{total_sauce_cups} cups"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sauce_for_pulled_pork",
+      "question_inputs": [
+        "sauce_per_pulled_pork_fraction",
+        "num_pulled_pork_sandwiches"
+      ],
+      "solution_line_template": "Then multiply the number of pulled pork sandwiches by the amount of sauce per sandwich to find the total amount used: {sauce_per_pulled_pork_fraction} cup/sandwich * {num_pulled_pork_sandwiches} sandwiches = <<{sauce_per_pulled_pork_fraction}*{num_pulled_pork_sandwiches}={sauce_for_pulled_pork}>>{sauce_for_pulled_pork} cups"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "sauce_for_burgers",
+      "question_inputs": [],
+      "solution_line_template": "Then subtract this amount from the total amount of sauce Jack has to find how much he uses on the burgers: {total_sauce_cups} cups - {sauce_for_pulled_pork} cups = <<{total_sauce_cups}-{sauce_for_pulled_pork}={sauce_for_burgers}>>{sauce_for_burgers} cups"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "num_burgers",
+      "question_inputs": [
+        "sauce_per_burger_fraction"
+      ],
+      "solution_line_template": "Then divide this amount by the amount of sauce used per burger to find the number of burgers he can make: {sauce_for_burgers} cups / {sauce_per_burger_fraction} cup/burger = {num_burgers} burgers"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how much barbecue sauce Jack makes by adding the volume of each ingredient: 3 cups cup + 1 cup = <<3+1=4>>4 cups",
+    "L2": "Then multiply the number of pulled pork sandwiches by the amount of sauce per sandwich to find the total amount used: 1/6 cup/sandwich * 18 sandwiches = <<1/6*18=3>>3 cups",
+    "L3": "Then subtract this amount from the total amount of sauce Jack has to find how much he uses on the burgers: 4 cups - 3 cups = <<4-3=1>>1 cups",
+    "L4": "Then divide this amount by the amount of sauce used per burger to find the number of burgers he can make: 1 cups / 1/4 cup/burger = 4 burgers",
+    "FA": "#### 4"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incomplete calculation. The term 'vinegar_cups' (value: 1) was omitted from the operation.",
+  "repro_seed": 2331322584449204149,
+  "model_name": "google_gemini-2.5-flash"
+}

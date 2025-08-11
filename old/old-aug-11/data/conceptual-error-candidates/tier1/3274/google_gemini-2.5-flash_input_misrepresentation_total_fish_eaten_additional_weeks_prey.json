@@ -1,0 +1,107 @@
+{
+  "index": 3274,
+  "original_solution_mapping": {
+    "FA": "#### 26",
+    "L1": "First find the total number of weeks the Bobbit worm preys on the fish: 2 weeks + 1 week = <<2+1=3>>3 weeks",
+    "L2": "Then multiply that number by the number of days per week: 3 weeks * 7 days/week = 21 days",
+    "L3": "Then multiply that number by the number of fish the worm eats per day to find how many fish it eats total: 21 days * 2 fish/day = <<21*2=42>>42 fish",
+    "L4": "Then add the number of fish James adds to the starting number of fish to find the ending number of fish: 60 fish + 8 fish = <<60+8=68>>68 fish",
+    "L5": "Then subtract the number of eaten fish to find the number of surviving fish: 68 fish - 42 fish = <<68-42=26>>26 fish"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3274.\n    Returns: the number of fish in the aquarium when James discovers the Bobbit worm.\n    \"\"\"\n    # L1\n    initial_weeks_prey = 2 # After two weeks\n    additional_weeks_prey = 1 # A week later\n    total_weeks_prey = initial_weeks_prey + additional_weeks_prey\n\n    # L2\n    days_per_week = 7 # WK\n    total_days_prey = total_weeks_prey * days_per_week\n\n    # L3\n    fish_eaten_per_day = 2 # eats 2 fish\n    total_fish_eaten = total_days_prey * fish_eaten_per_day\n\n    # L4\n    initial_fish = 60 # 60 fish to start with\n    fish_added = 8 # adds 8 more fish\n    fish_before_eating = initial_fish + fish_added\n\n    # L5\n    surviving_fish = fish_before_eating - total_fish_eaten\n\n    # FA\n    answer = surviving_fish\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_fish_eaten",
+    "operand_to_replace": "fish_eaten_per_day",
+    "replacement_variable": "additional_weeks_prey"
+  },
+  "correct_trace": {
+    "initial_weeks_prey": 2,
+    "additional_weeks_prey": 1,
+    "total_weeks_prey": 3,
+    "days_per_week": 7,
+    "total_days_prey": 21,
+    "fish_eaten_per_day": 2,
+    "total_fish_eaten": 42,
+    "initial_fish": 60,
+    "fish_added": 8,
+    "fish_before_eating": 68,
+    "surviving_fish": 26,
+    "answer": 26
+  },
+  "flawed_trace": {
+    "initial_weeks_prey": 2,
+    "additional_weeks_prey": 1,
+    "total_weeks_prey": 3,
+    "days_per_week": 7,
+    "total_days_prey": 21,
+    "fish_eaten_per_day": 2,
+    "total_fish_eaten": 21,
+    "initial_fish": 60,
+    "fish_added": 8,
+    "fish_before_eating": 68,
+    "surviving_fish": 47,
+    "answer": 47
+  },
+  "correct_value": 42,
+  "flawed_value": 21,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_weeks_prey",
+      "question_inputs": [
+        "initial_weeks_prey",
+        "additional_weeks_prey"
+      ],
+      "solution_line_template": "First find the total number of weeks the Bobbit worm preys on the fish: {initial_weeks_prey} weeks + {additional_weeks_prey} week = <<{initial_weeks_prey}+{additional_weeks_prey}={total_weeks_prey}>>{total_weeks_prey} weeks"
+    },
+    {
+      "WK_inputs": [
+        "days_per_week"
+      ],
+      "line_number": "L2",
+      "output_variable": "total_days_prey",
+      "question_inputs": [],
+      "solution_line_template": "Then multiply that number by the number of days per week: {total_weeks_prey} weeks * {days_per_week} days/week = {total_days_prey} days"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_fish_eaten",
+      "question_inputs": [
+        "fish_eaten_per_day"
+      ],
+      "solution_line_template": "Then multiply that number by the number of fish the worm eats per day to find how many fish it eats total: {total_days_prey} days * {fish_eaten_per_day} fish/day = <<{total_days_prey}*{fish_eaten_per_day}={total_fish_eaten}>>{total_fish_eaten} fish"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "fish_before_eating",
+      "question_inputs": [
+        "initial_fish",
+        "fish_added"
+      ],
+      "solution_line_template": "Then add the number of fish James adds to the starting number of fish to find the ending number of fish: {initial_fish} fish + {fish_added} fish = <<{initial_fish}+{fish_added}={fish_before_eating}>>{fish_before_eating} fish"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "surviving_fish",
+      "question_inputs": [],
+      "solution_line_template": "Then subtract the number of eaten fish to find the number of surviving fish: {fish_before_eating} fish - {total_fish_eaten} fish = <<{fish_before_eating}-{total_fish_eaten}={surviving_fish}>>{surviving_fish} fish"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find the total number of weeks the Bobbit worm preys on the fish: 2 weeks + 1 week = <<2+1=3>>3 weeks",
+    "L2": "Then multiply that number by the number of days per week: 3 weeks * 7 days/week = 21 days",
+    "L3": "Then multiply that number by the number of fish the worm eats per day to find how many fish it eats total: 21 days * 1 fish/day = <<21*1=21>>21 fish",
+    "L4": "Then add the number of fish James adds to the starting number of fish to find the ending number of fish: 60 fish + 8 fish = <<60+8=68>>68 fish",
+    "L5": "Then subtract the number of eaten fish to find the number of surviving fish: 68 fish - 21 fish = <<68-21=47>>47 fish",
+    "FA": "#### 47"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'additional_weeks_prey' (1) was used instead of 'fish_eaten_per_day' (2).",
+  "repro_seed": 1641499552824193972,
+  "model_name": "google_gemini-2.5-flash"
+}

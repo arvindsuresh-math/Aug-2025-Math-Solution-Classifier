@@ -1,0 +1,74 @@
+{
+  "index": 4732,
+  "original_solution_mapping": {
+    "FA": "#### 10",
+    "L1": "Traveling at 50 yards per minute, Biff can travel 500 yards in 500/50=<<500/50=10>>10 minutes.",
+    "L2": "In 10 minutes, traveling at 51 yards per minute, Kenneth can travel 10*51=<<10*51=510>>510 yards.",
+    "L3": "Thus, Kenneth will be 510-500=<<510-500=10>>10 yards past the finish line when Biff crosses the finish line."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4732.\n    Returns: the number of yards Kenneth will be past the finish line.\n    \"\"\"\n    # L1\n    race_distance = 500 # a 500-yard rowboat race\n    biff_speed = 50 # Biff rows at a speed of 50 yards per minute\n    time_biff_finishes = race_distance / biff_speed\n\n    # L2\n    kenneth_speed = 51 # Kenneth rows at a speed of 51 yards per minute\n    distance_kenneth_travels = time_biff_finishes * kenneth_speed\n\n    # L3\n    yards_past_finish_line = distance_kenneth_travels - race_distance\n\n    # FA\n    answer = yards_past_finish_line\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "distance_kenneth_travels",
+    "operand_to_replace": "kenneth_speed",
+    "replacement_variable": "race_distance"
+  },
+  "correct_trace": {
+    "race_distance": 500,
+    "biff_speed": 50,
+    "time_biff_finishes": 10.0,
+    "kenneth_speed": 51,
+    "distance_kenneth_travels": 510.0,
+    "yards_past_finish_line": 10.0,
+    "answer": 10.0
+  },
+  "flawed_trace": {
+    "race_distance": 500,
+    "biff_speed": 50,
+    "time_biff_finishes": 10.0,
+    "kenneth_speed": 51,
+    "distance_kenneth_travels": 5000.0,
+    "yards_past_finish_line": 4500.0,
+    "answer": 4500.0
+  },
+  "correct_value": 510.0,
+  "flawed_value": 5000.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "time_biff_finishes",
+      "question_inputs": [
+        "race_distance",
+        "biff_speed"
+      ],
+      "solution_line_template": "Traveling at {biff_speed} yards per minute, Biff can travel {race_distance} yards in {race_distance}/{biff_speed}=<<{race_distance}/{biff_speed}={time_biff_finishes}>>{time_biff_finishes} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "distance_kenneth_travels",
+      "question_inputs": [
+        "kenneth_speed"
+      ],
+      "solution_line_template": "In {time_biff_finishes} minutes, traveling at {kenneth_speed} yards per minute, Kenneth can travel {time_biff_finishes}*{kenneth_speed}=<<{time_biff_finishes}*{kenneth_speed}={distance_kenneth_travels}>>{distance_kenneth_travels} yards."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "yards_past_finish_line",
+      "question_inputs": [],
+      "solution_line_template": "Thus, Kenneth will be {distance_kenneth_travels}-{race_distance}=<<{distance_kenneth_travels}-{race_distance}={yards_past_finish_line}>>{yards_past_finish_line} yards past the finish line when Biff crosses the finish line."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Traveling at 50 yards per minute, Biff can travel 500 yards in 500/50=<<500/50=10>>10 minutes.",
+    "L2": "In 10 minutes, traveling at 500 yards per minute, Kenneth can travel 10*500=<<10*500=5000>>5000 yards.",
+    "L3": "Thus, Kenneth will be 5000-500=<<5000-500=4500>>4500 yards past the finish line when Biff crosses the finish line.",
+    "FA": "#### 4500"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'race_distance' (500) was used instead of 'kenneth_speed' (51).",
+  "repro_seed": -8531959743505915683,
+  "model_name": "google_gemini-2.5-flash"
+}

@@ -1,0 +1,79 @@
+{
+  "index": 2941,
+  "original_solution_mapping": {
+    "FA": "#### 2240",
+    "L1": "There are 7 days in a week, so if he doesn't go to work for 3 days, he goes 7-3 = <<7-3=4>>4 days every week",
+    "L2": "He travels 140km each day for a weekly total of 140*4 = <<140*4=560>>560km",
+    "L3": "In 4 weeks he will travel a total of 4*560 = <<4*560=2240>>2240km"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2941.\n    Returns: the total distance Francine drives to work for 4 weeks.\n    \"\"\"\n    # L1\n    days_in_week = 7 # WK\n    days_not_at_work_per_week = 3 # 3 days every week\n    days_at_work_per_week = days_in_week - days_not_at_work_per_week\n\n    # L2\n    distance_per_day = 140 # drives 140km to work each day\n    distance_per_week = distance_per_day * days_at_work_per_week\n\n    # L3\n    num_weeks = 4 # for 4 weeks\n    total_distance = num_weeks * distance_per_week\n\n    # FA\n    answer = total_distance\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "days_at_work_per_week",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x309cf5650>"
+  },
+  "correct_trace": {
+    "days_in_week": 7,
+    "days_not_at_work_per_week": 3,
+    "days_at_work_per_week": 4,
+    "distance_per_day": 140,
+    "distance_per_week": 560,
+    "num_weeks": 4,
+    "total_distance": 2240,
+    "answer": 2240
+  },
+  "flawed_trace": {
+    "days_in_week": 7,
+    "days_not_at_work_per_week": 3,
+    "days_at_work_per_week": 10,
+    "distance_per_day": 140,
+    "distance_per_week": 1400,
+    "num_weeks": 4,
+    "total_distance": 5600,
+    "answer": 5600
+  },
+  "correct_value": 4,
+  "flawed_value": 10,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "days_not_at_work_per_week"
+      ],
+      "WK_inputs": [
+        "days_in_week"
+      ],
+      "output_variable": "days_at_work_per_week",
+      "solution_line_template": "There are {days_in_week} days in a week, so if he doesn't go to work for {days_not_at_work_per_week} days, he goes {days_in_week}-{days_not_at_work_per_week} = <<{days_in_week}-{days_not_at_work_per_week}={days_at_work_per_week}>>{days_at_work_per_week} days every week"
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "distance_per_day"
+      ],
+      "WK_inputs": [],
+      "output_variable": "distance_per_week",
+      "solution_line_template": "He travels {distance_per_day}km each day for a weekly total of {distance_per_day}*{days_at_work_per_week} = <<{distance_per_day}*{days_at_work_per_week}={distance_per_week}>>{distance_per_week}km"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [
+        "num_weeks"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_distance",
+      "solution_line_template": "In {num_weeks} weeks he will travel a total of {num_weeks}*{distance_per_week} = <<{num_weeks}*{distance_per_week}={total_distance}>>{total_distance}km"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "There are 7 days in a week, so if he doesn't go to work for 3 days, he goes 7-3 = <<7-3=10>>10 days every week",
+    "L2": "He travels 140km each day for a weekly total of 140*10 = <<140*10=1400>>1400km",
+    "L3": "In 4 weeks he will travel a total of 4*1400 = <<4*1400=5600>>5600km",
+    "FA": "#### 5600"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -983478849975370966,
+  "model_name": "google_gemini-2.5-flash"
+}

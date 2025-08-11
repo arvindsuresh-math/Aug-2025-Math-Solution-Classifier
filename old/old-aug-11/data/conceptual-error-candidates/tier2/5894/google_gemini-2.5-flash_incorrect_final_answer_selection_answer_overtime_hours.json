@@ -1,0 +1,102 @@
+{
+  "index": 5894,
+  "original_solution_mapping": {
+    "FA": "#### 1290",
+    "L1": "His overtime pay per hour is 30*1.5=$<<30*1.5=45>>45 per hour",
+    "L2": "He works 6*2=<<6*2=12>>12 hours per day for the last two days.",
+    "L3": "He works 6+6+6+12+12=<<6+6+6+12+12=42>>42 hours",
+    "L4": "He gets 42-40=<<42-40=2>>2 hours of overtime.",
+    "L5": "He makes 40*30+2*45=$<<40*30+2*45=1290>>1290 for the week"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5894.\n    Returns: the total money the employee made.\n    \"\"\"\n    # L1\n    hourly_rate = 30 # 30 dollars an hour\n    overtime_multiplier = 1.5 # additional 50%\n    overtime_pay_per_hour = hourly_rate * overtime_multiplier\n\n    # L2\n    hours_first_3_days = 6 # 6 hours for the first 3 days\n    remaining_days_multiplier = 2 # twice as many hours per day\n    hours_per_day_remaining = hours_first_3_days * remaining_days_multiplier\n\n    # L3\n    total_hours_worked = hours_first_3_days + hours_first_3_days + hours_first_3_days + hours_per_day_remaining + hours_per_day_remaining\n\n    # L4\n    standard_workweek_hours = 40 # first 40 hours in the workweek\n    overtime_hours = total_hours_worked - standard_workweek_hours\n\n    # L5\n    total_money_made = standard_workweek_hours * hourly_rate + overtime_hours * overtime_pay_per_hour\n\n    # FA\n    answer = total_money_made\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "total_money_made",
+    "replacement_variable": "overtime_hours"
+  },
+  "correct_trace": {
+    "hourly_rate": 30,
+    "overtime_multiplier": 1.5,
+    "overtime_pay_per_hour": 45.0,
+    "hours_first_3_days": 6,
+    "remaining_days_multiplier": 2,
+    "hours_per_day_remaining": 12,
+    "total_hours_worked": 42,
+    "standard_workweek_hours": 40,
+    "overtime_hours": 2,
+    "total_money_made": 1290.0,
+    "answer": 1290.0
+  },
+  "flawed_trace": {
+    "hourly_rate": 30,
+    "overtime_multiplier": 1.5,
+    "overtime_pay_per_hour": 45.0,
+    "hours_first_3_days": 6,
+    "remaining_days_multiplier": 2,
+    "hours_per_day_remaining": 12,
+    "total_hours_worked": 42,
+    "standard_workweek_hours": 40,
+    "overtime_hours": 2,
+    "total_money_made": 1290.0,
+    "answer": 2
+  },
+  "correct_value": 1290.0,
+  "flawed_value": 2,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "overtime_pay_per_hour",
+      "question_inputs": [
+        "hourly_rate",
+        "overtime_multiplier"
+      ],
+      "solution_line_template": "His overtime pay per hour is {hourly_rate}*{overtime_multiplier}=$<<{hourly_rate}*{overtime_multiplier}={overtime_pay_per_hour}>>{overtime_pay_per_hour} per hour"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "hours_per_day_remaining",
+      "question_inputs": [
+        "hours_first_3_days",
+        "remaining_days_multiplier"
+      ],
+      "solution_line_template": "He works {hours_first_3_days}*{remaining_days_multiplier}=<<{hours_first_3_days}*{remaining_days_multiplier}={hours_per_day_remaining}>>{hours_per_day_remaining} hours per day for the last two days."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_hours_worked",
+      "question_inputs": [],
+      "solution_line_template": "He works {hours_first_3_days}+{hours_first_3_days}+{hours_first_3_days}+{hours_per_day_remaining}+{hours_per_day_remaining}=<<{hours_first_3_days}+{hours_first_3_days}+{hours_first_3_days}+{hours_per_day_remaining}+{hours_per_day_remaining}={total_hours_worked}>>{total_hours_worked} hours"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "overtime_hours",
+      "question_inputs": [
+        "standard_workweek_hours"
+      ],
+      "solution_line_template": "He gets {total_hours_worked}-{standard_workweek_hours}=<<{total_hours_worked}-{standard_workweek_hours}={overtime_hours}>>{overtime_hours} hours of overtime."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_money_made",
+      "question_inputs": [],
+      "solution_line_template": "He makes {standard_workweek_hours}*{hourly_rate}+{overtime_hours}*{overtime_pay_per_hour}=$<<{standard_workweek_hours}*{hourly_rate}+{overtime_hours}*{overtime_pay_per_hour}={total_money_made}>>{total_money_made} for the week"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "His overtime pay per hour is 30*1.5=$<<30*1.5=45>>45 per hour",
+    "L2": "He works 6*2=<<6*2=12>>12 hours per day for the last two days.",
+    "L3": "He works 6+6+6+12+12=<<6+6+6+12+12=42>>42 hours",
+    "L4": "He gets 42-40=<<42-40=2>>2 hours of overtime.",
+    "FA": "#### 2"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'overtime_hours' (value: 2) was reported instead of 'total_money_made' (value: 1290.0).",
+  "repro_seed": -4869152463908991624,
+  "model_name": "google_gemini-2.5-flash"
+}

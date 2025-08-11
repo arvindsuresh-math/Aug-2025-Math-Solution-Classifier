@@ -1,0 +1,98 @@
+{
+  "index": 5861,
+  "original_solution_mapping": {
+    "FA": "#### 45",
+    "L1": "They approved 20% off of the $20.00 item so .20*20 = $<<20*.01*20=4.00>>4.00",
+    "L2": "The item has a $4.00 discount which can be applied from his final total of $54.00 so 54-4 = $<<54-4=50.00>>50.00",
+    "L3": "Now he can use his 10% coupon on the $50.00 total so .10*50 = $<<10*.01*50=5.00>>5.00",
+    "L4": "The total was $50.00 but his $5.00 discount now makes it 50-5 = $<<50-5=45.00>>45.00"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5861.\n    Returns: the total cost of Ralph's items.\n    \"\"\"\n    # L1\n    discount_percent_decimal_L1 = 0.20 # 20% discount on an item\n    item_price = 20.00 # This item is $20.00 to start\n    discount_percent_num_L1 = 20 # 20% discount\n    percent_factor = 0.01 # WK\n    item_discount_amount = discount_percent_num_L1 * percent_factor * item_price\n\n    # L2\n    initial_cart_total = 54.00 # $54.00 worth of products in his cart\n    total_after_item_discount = initial_cart_total - item_discount_amount\n\n    # L3\n    coupon_percent_decimal = 0.10 # 10% coupon\n    coupon_percent_num = 10 # 10% coupon\n    coupon_discount_amount = coupon_percent_num * percent_factor * total_after_item_discount\n\n    # L4\n    final_cost = total_after_item_discount - coupon_discount_amount\n\n    # FA\n    answer = final_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "final_cost",
+    "replacement_variable": "coupon_discount_amount"
+  },
+  "correct_trace": {
+    "discount_percent_decimal_L1": 0.2,
+    "item_price": 20.0,
+    "discount_percent_num_L1": 20,
+    "percent_factor": 0.01,
+    "item_discount_amount": 4.0,
+    "initial_cart_total": 54.0,
+    "total_after_item_discount": 50.0,
+    "coupon_percent_decimal": 0.1,
+    "coupon_percent_num": 10,
+    "coupon_discount_amount": 5.0,
+    "final_cost": 45.0,
+    "answer": 45.0
+  },
+  "flawed_trace": {
+    "discount_percent_decimal_L1": 0.2,
+    "item_price": 20.0,
+    "discount_percent_num_L1": 20,
+    "percent_factor": 0.01,
+    "item_discount_amount": 4.0,
+    "initial_cart_total": 54.0,
+    "total_after_item_discount": 50.0,
+    "coupon_percent_decimal": 0.1,
+    "coupon_percent_num": 10,
+    "coupon_discount_amount": 5.0,
+    "final_cost": 45.0,
+    "answer": 5.0
+  },
+  "correct_value": 45.0,
+  "flawed_value": 5.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "item_discount_amount",
+      "question_inputs": [
+        "discount_percent_decimal_L1",
+        "item_price",
+        "discount_percent_num_L1"
+      ],
+      "solution_line_template": "They approved {discount_percent_num_L1}% off of the ${item_price} item so {discount_percent_decimal_L1}*{item_price} = $<<{discount_percent_num_L1}*{percent_factor}*{item_price}={item_discount_amount}>>{item_discount_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_after_item_discount",
+      "question_inputs": [
+        "initial_cart_total"
+      ],
+      "solution_line_template": "The item has a ${item_discount_amount} discount which can be applied from his final total of ${initial_cart_total} so {initial_cart_total}-{item_discount_amount} = $<<{initial_cart_total}-{item_discount_amount}={total_after_item_discount}>>{total_after_item_discount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "coupon_discount_amount",
+      "question_inputs": [
+        "coupon_percent_decimal",
+        "coupon_percent_num"
+      ],
+      "solution_line_template": "Now he can use his {coupon_percent_num}% coupon on the ${total_after_item_discount} total so {coupon_percent_decimal}*{total_after_item_discount} = $<<{coupon_percent_num}*{percent_factor}*{total_after_item_discount}={coupon_discount_amount}>>{coupon_discount_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "final_cost",
+      "question_inputs": [],
+      "solution_line_template": "The total was ${total_after_item_discount} but his ${coupon_discount_amount} discount now makes it {total_after_item_discount}-{coupon_discount_amount} = $<<{total_after_item_discount}-{coupon_discount_amount}={final_cost}>>{final_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "They approved 20% off of the $20 item so 0.2*20 = $<<20*0.01*20=4>>4",
+    "L2": "The item has a $4 discount which can be applied from his final total of $54 so 54-4 = $<<54-4=50>>50",
+    "L3": "Now he can use his 10% coupon on the $50 total so 0.1*50 = $<<10*0.01*50=5>>5",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'coupon_discount_amount' (value: 5.0) was reported instead of 'final_cost' (value: 45.0).",
+  "repro_seed": -2906318746451352997,
+  "model_name": "google_gemini-2.5-flash"
+}

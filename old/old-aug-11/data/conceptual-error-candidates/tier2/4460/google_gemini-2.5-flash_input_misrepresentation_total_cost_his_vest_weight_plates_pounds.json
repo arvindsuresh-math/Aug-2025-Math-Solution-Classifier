@@ -1,0 +1,92 @@
+{
+  "index": 4460,
+  "original_solution_mapping": {
+    "FA": "#### 110",
+    "L1": "The weight plates cost 200*1.2=$<<200*1.2=240>>240",
+    "L2": "So his vest cost 250+240=$<<250+240=490>>490",
+    "L3": "He could get the other vest for 700-100=$<<700-100=600>>600",
+    "L4": "So he saved 600-490=$<<600-490=110>>110"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4460.\n    Returns: the amount saved with his vest.\n    \"\"\"\n    # L1\n    weight_plates_pounds = 200 # 200 pounds of weight plates\n    cost_per_pound = 1.2 # $1.2 per pound\n    weight_plates_cost = weight_plates_pounds * cost_per_pound\n\n    # L2\n    vest_cost = 250 # weight vest for $250\n    total_cost_his_vest = vest_cost + weight_plates_cost\n\n    # L3\n    other_vest_full_cost = 700 # A 200-pound weight vest would cost $700\n    discount_other_vest = 100 # a $100 discount\n    other_vest_discounted_cost = other_vest_full_cost - discount_other_vest\n\n    # L4\n    amount_saved = other_vest_discounted_cost - total_cost_his_vest\n\n    # FA\n    answer = amount_saved\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_cost_his_vest",
+    "operand_to_replace": "vest_cost",
+    "replacement_variable": "weight_plates_pounds"
+  },
+  "correct_trace": {
+    "weight_plates_pounds": 200,
+    "cost_per_pound": 1.2,
+    "weight_plates_cost": 240.0,
+    "vest_cost": 250,
+    "total_cost_his_vest": 490.0,
+    "other_vest_full_cost": 700,
+    "discount_other_vest": 100,
+    "other_vest_discounted_cost": 600,
+    "amount_saved": 110.0,
+    "answer": 110.0
+  },
+  "flawed_trace": {
+    "weight_plates_pounds": 200,
+    "cost_per_pound": 1.2,
+    "weight_plates_cost": 240.0,
+    "vest_cost": 250,
+    "total_cost_his_vest": 440.0,
+    "other_vest_full_cost": 700,
+    "discount_other_vest": 100,
+    "other_vest_discounted_cost": 600,
+    "amount_saved": 160.0,
+    "answer": 160.0
+  },
+  "correct_value": 490.0,
+  "flawed_value": 440.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "weight_plates_cost",
+      "question_inputs": [
+        "weight_plates_pounds",
+        "cost_per_pound"
+      ],
+      "solution_line_template": "The weight plates cost {weight_plates_pounds}*{cost_per_pound}=$<<{weight_plates_pounds}*{cost_per_pound}={weight_plates_cost}>>{weight_plates_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost_his_vest",
+      "question_inputs": [
+        "vest_cost"
+      ],
+      "solution_line_template": "So his vest cost {vest_cost}+{weight_plates_cost}=$<<{vest_cost}+{weight_plates_cost}={total_cost_his_vest}>>{total_cost_his_vest}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "other_vest_discounted_cost",
+      "question_inputs": [
+        "other_vest_full_cost",
+        "discount_other_vest"
+      ],
+      "solution_line_template": "He could get the other vest for {other_vest_full_cost}-{discount_other_vest}=$<<{other_vest_full_cost}-{discount_other_vest}={other_vest_discounted_cost}>>{other_vest_discounted_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "amount_saved",
+      "question_inputs": [],
+      "solution_line_template": "So he saved {other_vest_discounted_cost}-{total_cost_his_vest}=$<<{other_vest_discounted_cost}-{total_cost_his_vest}={amount_saved}>>{amount_saved}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The weight plates cost 200*1.2=$<<200*1.2=240>>240",
+    "L2": "So his vest cost 200+240=$<<200+240=440>>440",
+    "L3": "He could get the other vest for 700-100=$<<700-100=600>>600",
+    "L4": "So he saved 600-440=$<<600-440=160>>160",
+    "FA": "#### 160"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'weight_plates_pounds' (200) was used instead of 'vest_cost' (250).",
+  "repro_seed": 7918831145258224128,
+  "model_name": "google_gemini-2.5-flash"
+}

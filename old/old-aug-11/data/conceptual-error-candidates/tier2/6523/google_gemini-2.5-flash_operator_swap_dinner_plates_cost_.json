@@ -1,0 +1,59 @@
+{
+  "index": 6523,
+  "original_solution_mapping": {
+    "FA": "#### 30",
+    "L1": "The dinner plates cost 20*.5=$<<20*.5=10>>10",
+    "L2": "So he paid 10+20=$<<10+20=30>>30"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6523.\n    Returns: the total amount John paid for dinner plates and silverware.\n    \"\"\"\n    # L1\n    silverware_cost = 20 # The silverware cost $20\n    dinner_plates_cost_percent = 0.5 # 50% as much as the silverware\n    dinner_plates_cost = silverware_cost * dinner_plates_cost_percent\n\n    # L2\n    total_cost = dinner_plates_cost + silverware_cost\n\n    # FA\n    answer = total_cost\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "dinner_plates_cost",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Div object at 0x30a86ddd0>"
+  },
+  "correct_trace": {
+    "silverware_cost": 20,
+    "dinner_plates_cost_percent": 0.5,
+    "dinner_plates_cost": 10.0,
+    "total_cost": 30.0,
+    "answer": 30.0
+  },
+  "flawed_trace": {
+    "silverware_cost": 20,
+    "dinner_plates_cost_percent": 0.5,
+    "dinner_plates_cost": 40.0,
+    "total_cost": 60.0,
+    "answer": 60.0
+  },
+  "correct_value": 10.0,
+  "flawed_value": 40.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "dinner_plates_cost",
+      "question_inputs": [
+        "silverware_cost",
+        "dinner_plates_cost_percent"
+      ],
+      "solution_line_template": "The dinner plates cost {silverware_cost}*{dinner_plates_cost_percent}=$<<{silverware_cost}*{dinner_plates_cost_percent}={dinner_plates_cost}>>{dinner_plates_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_cost",
+      "question_inputs": [],
+      "solution_line_template": "So he paid {dinner_plates_cost}+{silverware_cost}=$<<{dinner_plates_cost}+{silverware_cost}={total_cost}>>{total_cost}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The dinner plates cost 20*0.5=$<<20*0.5=40>>40",
+    "L2": "So he paid 40+20=$<<40+20=60>>60",
+    "FA": "#### 60"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '/' instead.",
+  "repro_seed": 8411314212715598909,
+  "model_name": "google_gemini-2.5-flash"
+}

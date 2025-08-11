@@ -1,0 +1,78 @@
+{
+  "index": 5927,
+  "original_solution_mapping": {
+    "FA": "#### 50",
+    "L1": "First find how many minutes Kim spends on each employee: 2 minutes/employee + 3 minutes/employee = <<2+3=5>>5 minutes/employee",
+    "L2": "Then multiply that time by the number of employees to find the total time spent on status and payroll updates: 5 minutes/employee * 9 employees = <<5*9=45>>45 minutes",
+    "L3": "Finally, add that time to the time spent making coffee to find the total time: 45 minutes + 5 minutes = <<45+5=50>>50 minutes"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5927.\n    Returns: the total time Kim's morning routine takes.\n    \"\"\"\n    # L1\n    minutes_status_update_per_employee = 2 # 2 minutes per employee getting a status update\n    minutes_payroll_update_per_employee = 3 # 3 minutes per employee updating payroll records\n    minutes_per_employee_total = minutes_status_update_per_employee + minutes_payroll_update_per_employee\n\n    # L2\n    num_employees = 9 # 9 employees\n    total_employee_update_time = minutes_per_employee_total * num_employees\n\n    # L3\n    minutes_making_coffee = 5 # 5 minutes making coffee\n    total_morning_routine_time = total_employee_update_time + minutes_making_coffee\n\n    # FA\n    answer = total_morning_routine_time\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_morning_routine_time",
+    "operand_to_replace": "total_employee_update_time",
+    "replacement_variable": "minutes_payroll_update_per_employee"
+  },
+  "correct_trace": {
+    "minutes_status_update_per_employee": 2,
+    "minutes_payroll_update_per_employee": 3,
+    "minutes_per_employee_total": 5,
+    "num_employees": 9,
+    "total_employee_update_time": 45,
+    "minutes_making_coffee": 5,
+    "total_morning_routine_time": 50,
+    "answer": 50
+  },
+  "flawed_trace": {
+    "minutes_status_update_per_employee": 2,
+    "minutes_payroll_update_per_employee": 3,
+    "minutes_per_employee_total": 5,
+    "num_employees": 9,
+    "total_employee_update_time": 45,
+    "minutes_making_coffee": 5,
+    "total_morning_routine_time": 8,
+    "answer": 8
+  },
+  "correct_value": 50,
+  "flawed_value": 8,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "minutes_per_employee_total",
+      "question_inputs": [
+        "minutes_status_update_per_employee",
+        "minutes_payroll_update_per_employee"
+      ],
+      "solution_line_template": "First find how many minutes Kim spends on each employee: {minutes_status_update_per_employee} minutes/employee + {minutes_payroll_update_per_employee} minutes/employee = <<{minutes_status_update_per_employee}+{minutes_payroll_update_per_employee}={minutes_per_employee_total}>>{minutes_per_employee_total} minutes/employee"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_employee_update_time",
+      "question_inputs": [
+        "num_employees"
+      ],
+      "solution_line_template": "Then multiply that time by the number of employees to find the total time spent on status and payroll updates: {minutes_per_employee_total} minutes/employee * {num_employees} employees = <<{minutes_per_employee_total}*{num_employees}={total_employee_update_time}>>{total_employee_update_time} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_morning_routine_time",
+      "question_inputs": [
+        "minutes_making_coffee"
+      ],
+      "solution_line_template": "Finally, add that time to the time spent making coffee to find the total time: {total_employee_update_time} minutes + {minutes_making_coffee} minutes = <<{total_employee_update_time}+{minutes_making_coffee}={total_morning_routine_time}>>{total_morning_routine_time} minutes"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First find how many minutes Kim spends on each employee: 2 minutes/employee + 3 minutes/employee = <<2+3=5>>5 minutes/employee",
+    "L2": "Then multiply that time by the number of employees to find the total time spent on status and payroll updates: 5 minutes/employee * 9 employees = <<5*9=45>>45 minutes",
+    "L3": "Finally, add that time to the time spent making coffee to find the total time: 3 minutes + 5 minutes = <<3+5=8>>8 minutes",
+    "FA": "#### 8"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'minutes_payroll_update_per_employee' (value: 3) was used instead of 'total_employee_update_time' (value: 45).",
+  "repro_seed": -7046225139187561194,
+  "model_name": "google_gemini-2.5-flash"
+}

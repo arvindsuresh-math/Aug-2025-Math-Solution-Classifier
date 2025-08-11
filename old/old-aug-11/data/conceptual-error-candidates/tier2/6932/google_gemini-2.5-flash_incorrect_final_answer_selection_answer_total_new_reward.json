@@ -1,0 +1,101 @@
+{
+  "index": 6932,
+  "original_solution_mapping": {
+    "FA": "#### 72",
+    "L1": "Diana's raise was 20% of her 30-minute video game time, or 0.20 x 30 minutes = <<20*.01*30=6>>6 minutes.",
+    "L2": "Diana is now making 30 minutes + 6-minute raise = <<30+6=36>>36 minutes for every hour she reads.",
+    "L3": "Diana read 12 hours x 36 minutes of video game time, so she received 432 minutes of video game time after her raise.",
+    "L4": "Before, if Diana read 12 hours x 30 minutes of video game time, she would have received 360 minutes.",
+    "L5": "The amount she received after her raise, 432 minutes - 360 minutes at her old rate = <<432-360=72>>72 more minutes after her raise."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 6932.\n    Returns: the number of additional minutes of video game time Diana will get as a result of her raise.\n    \"\"\"\n    # L1\n    initial_reward_per_hour = 30 # 30 minutes of video game time\n    raise_percent_text = 20 # raise her reward by 20%\n    raise_percent_decimal = 0.20 # from solution text: 0.20 x 30\n    percent_factor = 0.01 # WK\n    raise_amount_per_hour = raise_percent_text * percent_factor * initial_reward_per_hour\n\n    # L2\n    new_reward_per_hour = initial_reward_per_hour + raise_amount_per_hour\n\n    # L3\n    hours_read = 12 # read for 12 hours\n    total_new_reward = hours_read * new_reward_per_hour\n\n    # L4\n    total_old_reward = hours_read * initial_reward_per_hour\n\n    # L5\n    additional_minutes = total_new_reward - total_old_reward\n\n    # FA\n    answer = additional_minutes\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_final_answer_selection",
+    "target_variable": "answer",
+    "operand_to_replace": "additional_minutes",
+    "replacement_variable": "total_new_reward"
+  },
+  "correct_trace": {
+    "initial_reward_per_hour": 30,
+    "raise_percent_text": 20,
+    "raise_percent_decimal": 0.2,
+    "percent_factor": 0.01,
+    "raise_amount_per_hour": 6.0,
+    "new_reward_per_hour": 36.0,
+    "hours_read": 12,
+    "total_new_reward": 432.0,
+    "total_old_reward": 360,
+    "additional_minutes": 72.0,
+    "answer": 72.0
+  },
+  "flawed_trace": {
+    "initial_reward_per_hour": 30,
+    "raise_percent_text": 20,
+    "raise_percent_decimal": 0.2,
+    "percent_factor": 0.01,
+    "raise_amount_per_hour": 6.0,
+    "new_reward_per_hour": 36.0,
+    "hours_read": 12,
+    "total_new_reward": 432.0,
+    "total_old_reward": 360,
+    "additional_minutes": 72.0,
+    "answer": 432.0
+  },
+  "correct_value": 72.0,
+  "flawed_value": 432.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L1",
+      "output_variable": "raise_amount_per_hour",
+      "question_inputs": [
+        "initial_reward_per_hour",
+        "raise_percent_text",
+        "raise_percent_decimal"
+      ],
+      "solution_line_template": "Diana's raise was {raise_percent_text}% of her {initial_reward_per_hour}-minute video game time, or {raise_percent_decimal} x {initial_reward_per_hour} minutes = <<{raise_percent_text}*{percent_factor}*{initial_reward_per_hour}={raise_amount_per_hour}>>{raise_amount_per_hour} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "new_reward_per_hour",
+      "question_inputs": [],
+      "solution_line_template": "Diana is now making {initial_reward_per_hour} minutes + {raise_amount_per_hour}-minute raise = <<{initial_reward_per_hour}+{raise_amount_per_hour}={new_reward_per_hour}>>{new_reward_per_hour} minutes for every hour she reads."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_new_reward",
+      "question_inputs": [
+        "hours_read"
+      ],
+      "solution_line_template": "Diana read {hours_read} hours x {new_reward_per_hour} minutes of video game time, so she received {total_new_reward} minutes of video game time after her raise."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_old_reward",
+      "question_inputs": [],
+      "solution_line_template": "Before, if Diana read {hours_read} hours x {initial_reward_per_hour} minutes of video game time, she would have received {total_old_reward} minutes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "additional_minutes",
+      "question_inputs": [],
+      "solution_line_template": "The amount she received after her raise, {total_new_reward} minutes - {total_old_reward} minutes at her old rate = <<{total_new_reward}-{total_old_reward}={additional_minutes}>>{additional_minutes} more minutes after her raise."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Diana's raise was 20% of her 30-minute video game time, or 0.2 x 30 minutes = <<20*0.01*30=6>>6 minutes.",
+    "L2": "Diana is now making 30 minutes + 6-minute raise = <<30+6=36>>36 minutes for every hour she reads.",
+    "L3": "Diana read 12 hours x 36 minutes of video game time, so she received 432 minutes of video game time after her raise.",
+    "FA": "#### 432"
+  },
+  "erroneous_line_number": "FA",
+  "explanation": "Incorrect final answer. An intermediate value 'total_new_reward' (value: 432.0) was reported instead of 'additional_minutes' (value: 72.0).",
+  "repro_seed": 1221832223071200765,
+  "model_name": "google_gemini-2.5-flash"
+}

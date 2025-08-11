@@ -1,0 +1,64 @@
+{
+  "index": 1641,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "The movie last 2.5*60=<<2.5*60=150>>150 minutes",
+    "L2": "So he uses the bathroom 150/50=<<150/50=3>>3 times"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1641.\n    Returns: the number of times John uses the bathroom during the movie.\n    \"\"\"\n    # L1\n    movie_duration_hours = 2.5 # 2.5-hour movie\n    minutes_per_hour = 60 # WK\n    movie_duration_minutes = movie_duration_hours * minutes_per_hour\n\n    # L2\n    bathroom_frequency_minutes = 50 # every 50 minutes\n    num_bathroom_uses = movie_duration_minutes / bathroom_frequency_minutes\n\n    # FA\n    answer = num_bathroom_uses\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "num_bathroom_uses",
+    "original_op_type": "<class 'ast.Div'>",
+    "new_op": "<ast.Mult object at 0x16a920790>"
+  },
+  "correct_trace": {
+    "movie_duration_hours": 2.5,
+    "minutes_per_hour": 60,
+    "movie_duration_minutes": 150.0,
+    "bathroom_frequency_minutes": 50,
+    "num_bathroom_uses": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "movie_duration_hours": 2.5,
+    "minutes_per_hour": 60,
+    "movie_duration_minutes": 150.0,
+    "bathroom_frequency_minutes": 50,
+    "num_bathroom_uses": 7500.0,
+    "answer": 7500.0
+  },
+  "correct_value": 3.0,
+  "flawed_value": 7500.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "minutes_per_hour"
+      ],
+      "line_number": "L1",
+      "output_variable": "movie_duration_minutes",
+      "question_inputs": [
+        "movie_duration_hours"
+      ],
+      "solution_line_template": "The movie last {movie_duration_hours}*{minutes_per_hour}=<<{movie_duration_hours}*{minutes_per_hour}={movie_duration_minutes}>>{movie_duration_minutes} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "num_bathroom_uses",
+      "question_inputs": [
+        "bathroom_frequency_minutes"
+      ],
+      "solution_line_template": "So he uses the bathroom {movie_duration_minutes}/{bathroom_frequency_minutes}=<<{movie_duration_minutes}/{bathroom_frequency_minutes}={num_bathroom_uses}>>{num_bathroom_uses} times"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The movie last 2.5*60=<<2.5*60=150>>150 minutes",
+    "L2": "So he uses the bathroom 150/50=<<150/50=7500>>7500 times",
+    "FA": "#### 7500"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '/' but used '*' instead.",
+  "repro_seed": 5236655129925204378,
+  "model_name": "google_gemini-2.5-flash"
+}

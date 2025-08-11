@@ -1,0 +1,111 @@
+{
+  "index": 7447,
+  "original_solution_mapping": {
+    "FA": "#### 60",
+    "L1": "15/3=<<15/3=5>>5 cats were adopted out of 15",
+    "L2": "There were 15-5 = <<15-5=10>>10 cats left",
+    "L3": "5*2=<<5*2=10>>10 more cats were added.",
+    "L4": "This makes 10+10=<<10+10=20>>20 cats in the shelter.",
+    "L5": "20*2=<<20*2=40>>40 dogs came into the shelter.",
+    "L6": "There are now 20+40=<<20+40=60>>60 animals in the shelter."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 7447.\n    Returns: the total number of animals in the shelter.\n    \"\"\"\n    # L1\n    initial_cats = 15 # 15 cats in a shelter\n    adopted_divisor = 3 # One-third were adopted\n    adopted_cats = initial_cats / adopted_divisor\n\n    # L2\n    cats_left_after_adoption = initial_cats - adopted_cats\n\n    # L3\n    replacement_multiplier = 2 # twice the amount that were adopted\n    added_cats = adopted_cats * replacement_multiplier\n\n    # L4\n    total_cats = cats_left_after_adoption + added_cats\n\n    # L5\n    dogs_multiplier = 2 # twice as many dogs showed up as there are cats\n    total_dogs = total_cats * dogs_multiplier\n\n    # L6\n    total_animals = total_cats + total_dogs\n\n    # FA\n    answer = total_animals\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_cats",
+    "operand_to_replace": "added_cats",
+    "replacement_variable": "initial_cats"
+  },
+  "correct_trace": {
+    "initial_cats": 15,
+    "adopted_divisor": 3,
+    "adopted_cats": 5.0,
+    "cats_left_after_adoption": 10.0,
+    "replacement_multiplier": 2,
+    "added_cats": 10.0,
+    "total_cats": 20.0,
+    "dogs_multiplier": 2,
+    "total_dogs": 40.0,
+    "total_animals": 60.0,
+    "answer": 60.0
+  },
+  "flawed_trace": {
+    "initial_cats": 15,
+    "adopted_divisor": 3,
+    "adopted_cats": 5.0,
+    "cats_left_after_adoption": 10.0,
+    "replacement_multiplier": 2,
+    "added_cats": 10.0,
+    "total_cats": 25.0,
+    "dogs_multiplier": 2,
+    "total_dogs": 50.0,
+    "total_animals": 75.0,
+    "answer": 75.0
+  },
+  "correct_value": 20.0,
+  "flawed_value": 25.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "adopted_cats",
+      "question_inputs": [
+        "initial_cats",
+        "adopted_divisor"
+      ],
+      "solution_line_template": "{initial_cats}/{adopted_divisor}=<<{initial_cats}/{adopted_divisor}={adopted_cats}>>{adopted_cats} cats were adopted out of {initial_cats}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cats_left_after_adoption",
+      "question_inputs": [],
+      "solution_line_template": "There were {initial_cats}-{adopted_cats} = <<{initial_cats}-{adopted_cats}={cats_left_after_adoption}>>{cats_left_after_adoption} cats left"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "added_cats",
+      "question_inputs": [
+        "replacement_multiplier"
+      ],
+      "solution_line_template": "{adopted_cats}*{replacement_multiplier}=<<{adopted_cats}*{replacement_multiplier}={added_cats}>>{added_cats} more cats were added."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cats",
+      "question_inputs": [],
+      "solution_line_template": "This makes {cats_left_after_adoption}+{added_cats}=<<{cats_left_after_adoption}+{added_cats}={total_cats}>>{total_cats} cats in the shelter."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "total_dogs",
+      "question_inputs": [
+        "dogs_multiplier"
+      ],
+      "solution_line_template": "{total_cats}*{dogs_multiplier}=<<{total_cats}*{dogs_multiplier}={total_dogs}>>{total_dogs} dogs came into the shelter."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L6",
+      "output_variable": "total_animals",
+      "question_inputs": [],
+      "solution_line_template": "There are now {total_cats}+{total_dogs}=<<{total_cats}+{total_dogs}={total_animals}>>{total_animals} animals in the shelter."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "15/3=<<15/3=5>>5 cats were adopted out of 15",
+    "L2": "There were 15-5 = <<15-5=10>>10 cats left",
+    "L3": "5*2=<<5*2=10>>10 more cats were added.",
+    "L4": "This makes 10+15=<<10+15=25>>25 cats in the shelter.",
+    "L5": "25*2=<<25*2=50>>50 dogs came into the shelter.",
+    "L6": "There are now 25+50=<<25+50=75>>75 animals in the shelter.",
+    "FA": "#### 75"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'initial_cats' (value: 15) was used instead of 'added_cats' (value: 10.0).",
+  "repro_seed": 6420930719409449006,
+  "model_name": "google_gemini-2.5-flash"
+}

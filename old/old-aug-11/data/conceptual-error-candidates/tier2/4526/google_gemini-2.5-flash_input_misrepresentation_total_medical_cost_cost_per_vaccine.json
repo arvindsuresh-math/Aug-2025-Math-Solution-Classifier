@@ -1,0 +1,92 @@
+{
+  "index": 4526,
+  "original_solution_mapping": {
+    "FA": "#### 1340",
+    "L1": "The medical cost comes out to 45*10+250=$<<45*10+250=700>>700",
+    "L2": "Insurance covers 700*.8=$<<700*.8=560>>560",
+    "L3": "So he has to pay 700-560=$<<700-560=140>>140",
+    "L4": "Added to the cost of the trip he has to pay 1200+140=$<<1200+140=1340>>1340"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4526.\n    Returns: the total amount Tom will have to pay.\n    \"\"\"\n    # L1\n    cost_per_vaccine = 45 # each cost $45\n    num_vaccines = 10 # 10 different vaccines\n    doctors_visit_cost = 250 # doctor's visit costs $250\n    total_medical_cost = cost_per_vaccine * num_vaccines + doctors_visit_cost\n\n    # L2\n    insurance_coverage_percent = 0.8 # cover 80% of these medical bills\n    insurance_covered_amount = total_medical_cost * insurance_coverage_percent\n\n    # L3\n    out_of_pocket_medical_cost = total_medical_cost - insurance_covered_amount\n\n    # L4\n    trip_cost = 1200 # The trip itself cost $1200\n    total_cost_to_pay = trip_cost + out_of_pocket_medical_cost\n\n    # FA\n    answer = total_cost_to_pay\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "total_medical_cost",
+    "operand_to_replace": "doctors_visit_cost",
+    "replacement_variable": "cost_per_vaccine"
+  },
+  "correct_trace": {
+    "cost_per_vaccine": 45,
+    "num_vaccines": 10,
+    "doctors_visit_cost": 250,
+    "total_medical_cost": 700,
+    "insurance_coverage_percent": 0.8,
+    "insurance_covered_amount": 560.0,
+    "out_of_pocket_medical_cost": 140.0,
+    "trip_cost": 1200,
+    "total_cost_to_pay": 1340.0,
+    "answer": 1340.0
+  },
+  "flawed_trace": {
+    "cost_per_vaccine": 45,
+    "num_vaccines": 10,
+    "doctors_visit_cost": 250,
+    "total_medical_cost": 495,
+    "insurance_coverage_percent": 0.8,
+    "insurance_covered_amount": 396.0,
+    "out_of_pocket_medical_cost": 99.0,
+    "trip_cost": 1200,
+    "total_cost_to_pay": 1299.0,
+    "answer": 1299.0
+  },
+  "correct_value": 700,
+  "flawed_value": 495,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_medical_cost",
+      "question_inputs": [
+        "cost_per_vaccine",
+        "num_vaccines",
+        "doctors_visit_cost"
+      ],
+      "solution_line_template": "The medical cost comes out to {cost_per_vaccine}*{num_vaccines}+{doctors_visit_cost}=$<<{cost_per_vaccine}*{num_vaccines}+{doctors_visit_cost}={total_medical_cost}>>{total_medical_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "insurance_covered_amount",
+      "question_inputs": [
+        "insurance_coverage_percent"
+      ],
+      "solution_line_template": "Insurance covers {total_medical_cost}*{insurance_coverage_percent}=$<<{total_medical_cost}*{insurance_coverage_percent}={insurance_covered_amount}>>{insurance_covered_amount}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "out_of_pocket_medical_cost",
+      "question_inputs": [],
+      "solution_line_template": "So he has to pay {total_medical_cost}-{insurance_covered_amount}=$<<{total_medical_cost}-{insurance_covered_amount}={out_of_pocket_medical_cost}>>{out_of_pocket_medical_cost}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "total_cost_to_pay",
+      "question_inputs": [
+        "trip_cost"
+      ],
+      "solution_line_template": "Added to the cost of the trip he has to pay {trip_cost}+{out_of_pocket_medical_cost}=$<<{trip_cost}+{out_of_pocket_medical_cost}={total_cost_to_pay}>>{total_cost_to_pay}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The medical cost comes out to 45*10+45=$<<45*10+45=495>>495",
+    "L2": "Insurance covers 495*0.8=$<<495*0.8=396>>396",
+    "L3": "So he has to pay 495-396=$<<495-396=99>>99",
+    "L4": "Added to the cost of the trip he has to pay 1200+99=$<<1200+99=1299>>1299",
+    "FA": "#### 1299"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Input misrepresentation. The value for 'cost_per_vaccine' (45) was used instead of 'doctors_visit_cost' (250).",
+  "repro_seed": -2445489550523222662,
+  "model_name": "google_gemini-2.5-flash"
+}

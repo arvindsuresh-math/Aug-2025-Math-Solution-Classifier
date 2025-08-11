@@ -1,0 +1,74 @@
+{
+  "index": 2417,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "In 64 fluid ounces, there are 64/8=<<64/8=8>>8 eight-ounce servings.",
+    "L2": "Using 16-ounce servings, Simeon now drinks 64 ounces in 64/16=<<64/16=4>>4 servings.",
+    "L3": "Thus, Simeon now drinks his water in 8-4=<<8-4=4>>4 fewer servings per day."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2417.\n    Returns: the number of fewer servings Simeon drinks per day.\n    \"\"\"\n    # L1\n    total_ounces = 64 # 64 fluid ounces of filtered water\n    old_serving_size = 8 # 8-ounce-servings\n    old_servings = total_ounces / old_serving_size\n\n    # L2\n    new_serving_size = 16 # 16-ounce servings\n    new_servings = total_ounces / new_serving_size\n\n    # L3\n    fewer_servings = old_servings - new_servings\n\n    # FA\n    answer = fewer_servings\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "new_servings",
+    "operand_to_replace": "total_ounces",
+    "replacement_variable": "new_serving_size"
+  },
+  "correct_trace": {
+    "total_ounces": 64,
+    "old_serving_size": 8,
+    "old_servings": 8.0,
+    "new_serving_size": 16,
+    "new_servings": 4.0,
+    "fewer_servings": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "total_ounces": 64,
+    "old_serving_size": 8,
+    "old_servings": 8.0,
+    "new_serving_size": 16,
+    "new_servings": 1.0,
+    "fewer_servings": 7.0,
+    "answer": 7.0
+  },
+  "correct_value": 4.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "old_servings",
+      "question_inputs": [
+        "total_ounces",
+        "old_serving_size"
+      ],
+      "solution_line_template": "In {total_ounces} fluid ounces, there are {total_ounces}/{old_serving_size}=<<{total_ounces}/{old_serving_size}={old_servings}>>{old_servings} eight-ounce servings."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "new_servings",
+      "question_inputs": [
+        "new_serving_size"
+      ],
+      "solution_line_template": "Using {new_serving_size}-ounce servings, Simeon now drinks {total_ounces} ounces in {total_ounces}/{new_serving_size}=<<{total_ounces}/{new_serving_size}={new_servings}>>{new_servings} servings."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "fewer_servings",
+      "question_inputs": [],
+      "solution_line_template": "Thus, Simeon now drinks his water in {old_servings}-{new_servings}=<<{old_servings}-{new_servings}={fewer_servings}>>{fewer_servings} fewer servings per day."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "In 64 fluid ounces, there are 64/8=<<64/8=8>>8 eight-ounce servings.",
+    "L2": "Using 16-ounce servings, Simeon now drinks 16 ounces in 16/16=<<16/16=1>>1 servings.",
+    "L3": "Thus, Simeon now drinks his water in 8-1=<<8-1=7>>7 fewer servings per day.",
+    "FA": "#### 7"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'new_serving_size' (16) was used instead of 'total_ounces' (64).",
+  "repro_seed": 5518485127990209636,
+  "model_name": "google_gemini-2.5-flash"
+}

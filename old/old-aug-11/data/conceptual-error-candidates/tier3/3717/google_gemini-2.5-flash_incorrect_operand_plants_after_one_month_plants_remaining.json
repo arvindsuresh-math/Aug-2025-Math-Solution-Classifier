@@ -1,0 +1,85 @@
+{
+  "index": 3717,
+  "original_solution_mapping": {
+    "FA": "#### 3",
+    "L1": "First, add the 4 plants Mark gave away to the 20 he has left: 4 + 20 = <<4+20=24>>24",
+    "L2": "Then divide this number by 2 to find how many plants Mark had after two months: 24 / 2 = <<24/2=12>>12",
+    "L3": "Then divide that number by 2 to find how many plants Mark had after one month: 12 / 2 = <<6=6>>6",
+    "L4": "Finally, divide that number by 2 to find out how many plants Mark initially planted: 6 / 2 = <<6/2=3>>3"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3717.\n    Returns: the initial number of strawberry plants Mark planted.\n    \"\"\"\n    # L1\n    plants_given_away = 4 # After 3 months, Mark digs up 4 strawberry plants and gives them to his friend\n    plants_remaining = 20 # If he still has 20 strawberry plants\n    plants_before_giving_away = plants_given_away + plants_remaining\n\n    # L2\n    growth_factor_per_month = 2 # Every month, the number of strawberry plants doubles\n    plants_after_two_months = plants_before_giving_away / growth_factor_per_month\n\n    # L3\n    plants_after_one_month = plants_after_two_months / growth_factor_per_month\n\n    # L4\n    initial_plants = plants_after_one_month / growth_factor_per_month\n\n    # FA\n    answer = initial_plants\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "plants_after_one_month",
+    "operand_to_replace": "plants_after_two_months",
+    "replacement_variable": "plants_remaining"
+  },
+  "correct_trace": {
+    "plants_given_away": 4,
+    "plants_remaining": 20,
+    "plants_before_giving_away": 24,
+    "growth_factor_per_month": 2,
+    "plants_after_two_months": 12.0,
+    "plants_after_one_month": 6.0,
+    "initial_plants": 3.0,
+    "answer": 3.0
+  },
+  "flawed_trace": {
+    "plants_given_away": 4,
+    "plants_remaining": 20,
+    "plants_before_giving_away": 24,
+    "growth_factor_per_month": 2,
+    "plants_after_two_months": 12.0,
+    "plants_after_one_month": 10.0,
+    "initial_plants": 5.0,
+    "answer": 5.0
+  },
+  "correct_value": 6.0,
+  "flawed_value": 10.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "plants_before_giving_away",
+      "question_inputs": [
+        "plants_given_away",
+        "plants_remaining"
+      ],
+      "solution_line_template": "First, add the {plants_given_away} plants Mark gave away to the {plants_remaining} he has left: {plants_given_away} + {plants_remaining} = <<{plants_given_away}+{plants_remaining}={plants_before_giving_away}>>{plants_before_giving_away}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "plants_after_two_months",
+      "question_inputs": [
+        "growth_factor_per_month"
+      ],
+      "solution_line_template": "Then divide this number by {growth_factor_per_month} to find how many plants Mark had after two months: {plants_before_giving_away} / {growth_factor_per_month} = <<{plants_before_giving_away}/{growth_factor_per_month}={plants_after_two_months}>>{plants_after_two_months}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "plants_after_one_month",
+      "question_inputs": [],
+      "solution_line_template": "Then divide that number by {growth_factor_per_month} to find how many plants Mark had after one month: {plants_after_two_months} / {growth_factor_per_month} = <<{plants_after_one_month}={plants_after_one_month}>>{plants_after_one_month}"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "initial_plants",
+      "question_inputs": [],
+      "solution_line_template": "Finally, divide that number by {growth_factor_per_month} to find out how many plants Mark initially planted: {plants_after_one_month} / {growth_factor_per_month} = <<{plants_after_one_month}/{growth_factor_per_month}={initial_plants}>>{initial_plants}"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First, add the 4 plants Mark gave away to the 20 he has left: 4 + 20 = <<4+20=24>>24",
+    "L2": "Then divide this number by 2 to find how many plants Mark had after two months: 24 / 2 = <<24/2=12>>12",
+    "L3": "Then divide that number by 2 to find how many plants Mark had after one month: 20 / 2 = <<10=10>>10",
+    "L4": "Finally, divide that number by 2 to find out how many plants Mark initially planted: 10 / 2 = <<10/2=5>>5",
+    "FA": "#### 5"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'plants_remaining' (value: 20) was used instead of 'plants_after_two_months' (value: 12.0).",
+  "repro_seed": -1323223379094324021,
+  "model_name": "google_gemini-2.5-flash"
+}

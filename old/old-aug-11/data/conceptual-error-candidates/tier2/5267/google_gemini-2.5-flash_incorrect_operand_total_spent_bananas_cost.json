@@ -1,0 +1,74 @@
+{
+  "index": 5267,
+  "original_solution_mapping": {
+    "FA": "#### 6",
+    "L1": "First add up James' purchases that is $3 + $2 = $<<3+2=5>>5.",
+    "L2": "So, the amount of sales tax is $5 * .2 = $<<5*.2=1>>1.",
+    "L3": "Hence, James spent a total of $5 + $1 = $<<5+1=6>>6."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5267.\n    Returns: the total amount of money James spent.\n    \"\"\"\n    # L1\n    milk_cost = 3 # a gallon of milk for $3\n    bananas_cost = 2 # a bunch of bananas for $2\n    subtotal_purchases = milk_cost + bananas_cost\n\n    # L2\n    sales_tax_rate = 0.2 # paid 20% sales tax\n    sales_tax_amount = subtotal_purchases * sales_tax_rate\n\n    # L3\n    total_spent = subtotal_purchases + sales_tax_amount\n\n    # FA\n    answer = total_spent\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "total_spent",
+    "operand_to_replace": "sales_tax_amount",
+    "replacement_variable": "bananas_cost"
+  },
+  "correct_trace": {
+    "milk_cost": 3,
+    "bananas_cost": 2,
+    "subtotal_purchases": 5,
+    "sales_tax_rate": 0.2,
+    "sales_tax_amount": 1.0,
+    "total_spent": 6.0,
+    "answer": 6.0
+  },
+  "flawed_trace": {
+    "milk_cost": 3,
+    "bananas_cost": 2,
+    "subtotal_purchases": 5,
+    "sales_tax_rate": 0.2,
+    "sales_tax_amount": 1.0,
+    "total_spent": 7,
+    "answer": 7
+  },
+  "correct_value": 6.0,
+  "flawed_value": 7,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "subtotal_purchases",
+      "question_inputs": [
+        "milk_cost",
+        "bananas_cost"
+      ],
+      "solution_line_template": "First add up James' purchases that is ${milk_cost} + ${bananas_cost} = $<<{milk_cost}+{bananas_cost}={subtotal_purchases}>>{subtotal_purchases}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "sales_tax_amount",
+      "question_inputs": [
+        "sales_tax_rate"
+      ],
+      "solution_line_template": "So, the amount of sales tax is ${subtotal_purchases} * {sales_tax_rate} = $<<{subtotal_purchases}*{sales_tax_rate}={sales_tax_amount}>>{sales_tax_amount}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "total_spent",
+      "question_inputs": [],
+      "solution_line_template": "Hence, James spent a total of ${subtotal_purchases} + ${sales_tax_amount} = $<<{subtotal_purchases}+{sales_tax_amount}={total_spent}>>{total_spent}."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "First add up James' purchases that is $3 + $2 = $<<3+2=5>>5.",
+    "L2": "So, the amount of sales tax is $5 * 0.2 = $<<5*0.2=1>>1.",
+    "L3": "Hence, James spent a total of $5 + $2 = $<<5+2=7>>7.",
+    "FA": "#### 7"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Incorrect operand. The variable 'bananas_cost' (value: 2) was used instead of 'sales_tax_amount' (value: 1.0).",
+  "repro_seed": -7533181125012415491,
+  "model_name": "google_gemini-2.5-flash"
+}

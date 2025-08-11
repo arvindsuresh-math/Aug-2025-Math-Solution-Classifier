@@ -1,0 +1,69 @@
+{
+  "index": 97,
+  "original_solution_mapping": {
+    "FA": "#### 46",
+    "L1": "Half of the books on the bottom section of the cart are mystery books, which means they are the same as the number of Western novels and biographies put together. So there are 5 + 6 = <<5+6=11>>11 mystery novels.",
+    "L2": "Add them all together, and there are 12 history + 8 romance + 4 poetry + 11 mystery + 5 Western + 6 biographies = <<12+8+4+11+5+6=46>>46 books total"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 97.\n    Returns: the total number of books on the book cart when Nancy started.\n    \"\"\"\n    # L1\n    western_novels = 5 # 5 Western novels\n    biographies = 6 # 6 biographies\n    mystery_novels = western_novels + biographies\n\n    # L2\n    history_books = 12 # 12 history books\n    romance_books = 8 # 8 romance books\n    poetry_books = 4 # 4 poetry books\n    total_books = history_books + romance_books + poetry_books + mystery_novels + western_novels + biographies\n\n    # FA\n    answer = total_books\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "mystery_novels",
+    "original_op_type": "<class 'ast.Add'>",
+    "new_op": "<ast.Mult object at 0x30c0c5010>"
+  },
+  "correct_trace": {
+    "western_novels": 5,
+    "biographies": 6,
+    "mystery_novels": 11,
+    "history_books": 12,
+    "romance_books": 8,
+    "poetry_books": 4,
+    "total_books": 46,
+    "answer": 46
+  },
+  "flawed_trace": {
+    "western_novels": 5,
+    "biographies": 6,
+    "mystery_novels": 30,
+    "history_books": 12,
+    "romance_books": 8,
+    "poetry_books": 4,
+    "total_books": 65,
+    "answer": 65
+  },
+  "correct_value": 11,
+  "flawed_value": 30,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "western_novels",
+        "biographies"
+      ],
+      "WK_inputs": [],
+      "output_variable": "mystery_novels",
+      "solution_line_template": "Half of the books on the bottom section of the cart are mystery books, which means they are the same as the number of Western novels and biographies put together. So there are {western_novels} + {biographies} = <<{western_novels}+{biographies}={mystery_novels}>>{mystery_novels} mystery novels."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "history_books",
+        "romance_books",
+        "poetry_books"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_books",
+      "solution_line_template": "Add them all together, and there are {history_books} history + {romance_books} romance + {poetry_books} poetry + {mystery_novels} mystery + {western_novels} Western + {biographies} biographies = <<{history_books}+{romance_books}+{poetry_books}+{mystery_novels}+{western_novels}+{biographies}={total_books}>>{total_books} books total"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Half of the books on the bottom section of the cart are mystery books, which means they are the same as the number of Western novels and biographies put together. So there are 5 + 6 = <<5+6=30>>30 mystery novels.",
+    "L2": "Add them all together, and there are 12 history + 8 romance + 4 poetry + 30 mystery + 5 Western + 6 biographies = <<12+8+4+30+5+6=65>>65 books total",
+    "FA": "#### 65"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '+' but used '*' instead.",
+  "repro_seed": 2787262454195105516,
+  "model_name": "google_gemini-2.5-flash"
+}

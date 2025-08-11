@@ -1,0 +1,63 @@
+{
+  "index": 4137,
+  "original_solution_mapping": {
+    "FA": "#### 15",
+    "L1": "The total number of cakes baked is 12 + 4 = <<12+4=16>>16 cakes.",
+    "L2": "But since Diego ate 1 cake, there are 16 - 1 = <<16-1=15>>15 cakes left."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 4137.\n    Returns: the number of cakes left after some were eaten.\n    \"\"\"\n    # L1\n    diego_baked = 12 # Diego baked 12 cakes\n    donald_baked = 4 # Donald also baked 4 cakes\n    total_baked = diego_baked + donald_baked\n\n    # L2\n    cake_eaten = 1 # Donald ... ate 1 while waiting for the party to start\n    cakes_left = total_baked - cake_eaten\n\n    # FA\n    answer = cakes_left\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "cakes_left",
+    "original_op_type": "<class 'ast.Sub'>",
+    "new_op": "<ast.Add object at 0x30a7a3090>"
+  },
+  "correct_trace": {
+    "diego_baked": 12,
+    "donald_baked": 4,
+    "total_baked": 16,
+    "cake_eaten": 1,
+    "cakes_left": 15,
+    "answer": 15
+  },
+  "flawed_trace": {
+    "diego_baked": 12,
+    "donald_baked": 4,
+    "total_baked": 16,
+    "cake_eaten": 1,
+    "cakes_left": 17,
+    "answer": 17
+  },
+  "correct_value": 15,
+  "flawed_value": 17,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_baked",
+      "question_inputs": [
+        "diego_baked",
+        "donald_baked"
+      ],
+      "solution_line_template": "The total number of cakes baked is {diego_baked} + {donald_baked} = <<{diego_baked}+{donald_baked}={total_baked}>>{total_baked} cakes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "cakes_left",
+      "question_inputs": [
+        "cake_eaten"
+      ],
+      "solution_line_template": "But since Diego ate {cake_eaten} cake, there are {total_baked} - {cake_eaten} = <<{total_baked}-{cake_eaten}={cakes_left}>>{cakes_left} cakes left."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "The total number of cakes baked is 12 + 4 = <<12+4=16>>16 cakes.",
+    "L2": "But since Diego ate 1 cake, there are 16 - 1 = <<16-1=17>>17 cakes left.",
+    "FA": "#### 17"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Incorrect operation. The calculation should use '-' but used '+' instead.",
+  "repro_seed": -9095475019076452365,
+  "model_name": "google_gemini-2.5-flash"
+}

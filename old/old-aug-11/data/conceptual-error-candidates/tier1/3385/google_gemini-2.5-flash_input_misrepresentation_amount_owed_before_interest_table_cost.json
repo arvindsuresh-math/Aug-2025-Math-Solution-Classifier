@@ -1,0 +1,66 @@
+{
+  "index": 3385,
+  "original_solution_mapping": {
+    "FA": "#### 400",
+    "L1": "Daria spends $750 + $100 + $50 on furniture = $<<750+100+50=900>>900 total on furniture.",
+    "L2": "Of that $900 she spent, she can pay $500 now, so $900 - $500 = $<<900-500=400>>400 that Daria still owes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 3385.\n    Returns: the amount Daria still owes before interest.\n    \"\"\"\n    # L1\n    couch_cost = 750 # a couch for $750\n    table_cost = 100 # a table for $100\n    lamp_cost = 50 # a lamp for $50\n    total_furniture_cost = couch_cost + table_cost + lamp_cost\n\n    # L2\n    initial_payment = 500 # $500 saved ready to pay\n    amount_owed_before_interest = total_furniture_cost - initial_payment\n\n    # FA\n    answer = amount_owed_before_interest\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "amount_owed_before_interest",
+    "operand_to_replace": "initial_payment",
+    "replacement_variable": "table_cost"
+  },
+  "correct_trace": {
+    "couch_cost": 750,
+    "table_cost": 100,
+    "lamp_cost": 50,
+    "total_furniture_cost": 900,
+    "initial_payment": 500,
+    "amount_owed_before_interest": 400,
+    "answer": 400
+  },
+  "flawed_trace": {
+    "couch_cost": 750,
+    "table_cost": 100,
+    "lamp_cost": 50,
+    "total_furniture_cost": 900,
+    "initial_payment": 500,
+    "amount_owed_before_interest": 800,
+    "answer": 800
+  },
+  "correct_value": 400,
+  "flawed_value": 800,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_furniture_cost",
+      "question_inputs": [
+        "couch_cost",
+        "table_cost",
+        "lamp_cost"
+      ],
+      "solution_line_template": "Daria spends ${couch_cost} + ${table_cost} + ${lamp_cost} on furniture = $<<{couch_cost}+{table_cost}+{lamp_cost}={total_furniture_cost}>>{total_furniture_cost} total on furniture."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "amount_owed_before_interest",
+      "question_inputs": [
+        "initial_payment"
+      ],
+      "solution_line_template": "Of that ${total_furniture_cost} she spent, she can pay ${initial_payment} now, so ${total_furniture_cost} - ${initial_payment} = $<<{total_furniture_cost}-{initial_payment}={amount_owed_before_interest}>>{amount_owed_before_interest} that Daria still owes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Daria spends $750 + $100 + $50 on furniture = $<<750+100+50=900>>900 total on furniture.",
+    "L2": "Of that $900 she spent, she can pay $100 now, so $900 - $100 = $<<900-100=800>>800 that Daria still owes.",
+    "FA": "#### 800"
+  },
+  "erroneous_line_number": "L2",
+  "explanation": "Input misrepresentation. The value for 'table_cost' (100) was used instead of 'initial_payment' (500).",
+  "repro_seed": 4270303589548024184,
+  "model_name": "google_gemini-2.5-flash"
+}

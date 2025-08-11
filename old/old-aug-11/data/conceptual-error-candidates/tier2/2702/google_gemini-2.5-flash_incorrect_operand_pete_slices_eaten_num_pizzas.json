@@ -1,0 +1,110 @@
+{
+  "index": 2702,
+  "original_solution_mapping": {
+    "FA": "#### 9",
+    "L1": "He ordered 2 pizzas, each cut into 12 slices so that's 2*12 = <<2*12=24>>24 slices",
+    "L2": "Stephen ate 25% of the pizza so he ate .25*24 = <<25*.01*24=6>>6 slices",
+    "L3": "That leaves 24-6 = <<24-6=18>>18 slices",
+    "L4": "18 slices are left and Pete eats 50% of 18 slices so he eats 18*.50 = <<18*50*.01=9>>9 slices",
+    "L5": "If there were 18 slices and Pete ate 9 slices then there are 18-9 = <<18-9=9>>9 slices left over"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 2702.\n    Returns: the number of slices left over.\n    \"\"\"\n    # L1\n    num_pizzas = 2 # 2 large pizzas\n    slices_per_pizza = 12 # cut into 12 slices\n    total_slices = num_pizzas * slices_per_pizza\n\n    # L2\n    stephen_ate_percent_num = 25 # 25% of the pizza\n    stephen_ate_percent_decimal = 0.25 # 25% of the pizza\n    percent_factor = 0.01 # WK\n    stephen_slices_eaten = stephen_ate_percent_num * percent_factor * total_slices\n\n    # L3\n    slices_after_stephen = total_slices - stephen_slices_eaten\n\n    # L4\n    pete_ate_percent_num = 50 # 50% of the remaining pizza\n    pete_ate_percent_decimal = 0.50 # 50% of the remaining pizza\n    pete_slices_eaten = slices_after_stephen * pete_ate_percent_decimal\n\n    # L5\n    slices_left_over = slices_after_stephen - pete_slices_eaten\n\n    # FA\n    answer = slices_left_over\n    return answer\n",
+  "mutation_details": {
+    "type": "incorrect_operand",
+    "target_variable": "pete_slices_eaten",
+    "operand_to_replace": "slices_after_stephen",
+    "replacement_variable": "num_pizzas"
+  },
+  "correct_trace": {
+    "num_pizzas": 2,
+    "slices_per_pizza": 12,
+    "total_slices": 24,
+    "stephen_ate_percent_num": 25,
+    "stephen_ate_percent_decimal": 0.25,
+    "percent_factor": 0.01,
+    "stephen_slices_eaten": 6.0,
+    "slices_after_stephen": 18.0,
+    "pete_ate_percent_num": 50,
+    "pete_ate_percent_decimal": 0.5,
+    "pete_slices_eaten": 9.0,
+    "slices_left_over": 9.0,
+    "answer": 9.0
+  },
+  "flawed_trace": {
+    "num_pizzas": 2,
+    "slices_per_pizza": 12,
+    "total_slices": 24,
+    "stephen_ate_percent_num": 25,
+    "stephen_ate_percent_decimal": 0.25,
+    "percent_factor": 0.01,
+    "stephen_slices_eaten": 6.0,
+    "slices_after_stephen": 18.0,
+    "pete_ate_percent_num": 50,
+    "pete_ate_percent_decimal": 0.5,
+    "pete_slices_eaten": 1.0,
+    "slices_left_over": 17.0,
+    "answer": 17.0
+  },
+  "correct_value": 9.0,
+  "flawed_value": 1.0,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_slices",
+      "question_inputs": [
+        "num_pizzas",
+        "slices_per_pizza"
+      ],
+      "solution_line_template": "He ordered {num_pizzas} pizzas, each cut into {slices_per_pizza} slices so that\u2019s {num_pizzas}*{slices_per_pizza} = <<{num_pizzas}*{slices_per_pizza}={total_slices}>>{total_slices} slices"
+    },
+    {
+      "WK_inputs": [
+        "percent_factor"
+      ],
+      "line_number": "L2",
+      "output_variable": "stephen_slices_eaten",
+      "question_inputs": [
+        "stephen_ate_percent_num",
+        "stephen_ate_percent_decimal"
+      ],
+      "solution_line_template": "Stephen ate {stephen_ate_percent_num}% of the pizza so he ate {stephen_ate_percent_decimal}*{total_slices} = <<{stephen_ate_percent_num}*{percent_factor}*{total_slices}={stephen_slices_eaten}>>{stephen_slices_eaten} slices"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "slices_after_stephen",
+      "question_inputs": [],
+      "solution_line_template": "That leaves {total_slices}-{stephen_slices_eaten} = <<{total_slices}-{stephen_slices_eaten}={slices_after_stephen}>>{slices_after_stephen} slices"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "pete_slices_eaten",
+      "question_inputs": [
+        "pete_ate_percent_num",
+        "pete_ate_percent_decimal"
+      ],
+      "solution_line_template": "{slices_after_stephen} slices are left and Pete eats {pete_ate_percent_num}% of {slices_after_stephen} slices so he eats {slices_after_stephen}*{pete_ate_percent_decimal} = <<{slices_after_stephen}*{pete_ate_percent_num}*{percent_factor}={pete_slices_eaten}>>{pete_slices_eaten} slices"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L5",
+      "output_variable": "slices_left_over",
+      "question_inputs": [],
+      "solution_line_template": "If there were {slices_after_stephen} slices and Pete ate {pete_slices_eaten} slices then there are {slices_after_stephen}-{pete_slices_eaten} = <<{slices_after_stephen}-{pete_slices_eaten}={slices_left_over}>>{slices_left_over} slices left over"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "He ordered 2 pizzas, each cut into 12 slices so that\u2019s 2*12 = <<2*12=24>>24 slices",
+    "L2": "Stephen ate 25% of the pizza so he ate 0.25*24 = <<25*0.01*24=6>>6 slices",
+    "L3": "That leaves 24-6 = <<24-6=18>>18 slices",
+    "L4": "2 slices are left and Pete eats 50% of 2 slices so he eats 2*0.5 = <<2*50*0.01=1>>1 slices",
+    "L5": "If there were 18 slices and Pete ate 1 slices then there are 18-1 = <<18-1=17>>17 slices left over",
+    "FA": "#### 17"
+  },
+  "erroneous_line_number": "L4",
+  "explanation": "Incorrect operand. The variable 'num_pizzas' (value: 2) was used instead of 'slices_after_stephen' (value: 18.0).",
+  "repro_seed": 2499835427757530507,
+  "model_name": "google_gemini-2.5-flash"
+}

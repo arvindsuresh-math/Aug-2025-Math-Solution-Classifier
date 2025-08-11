@@ -1,0 +1,66 @@
+{
+  "index": 5309,
+  "original_solution_mapping": {
+    "FA": "#### 80",
+    "L1": "They get 2 15 minute breaks a day so that's 2*15 = <<2*15=30>>30 minutes",
+    "L2": "They get 30 minutes for lunch and 20 minutes for recess plus an additional 30 minutes of recess for a total of 30+20+30 = <<30+20+30=80>>80 minutes spent outside of class"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 5309.\n    Returns: the total time students spend outside of class.\n    \"\"\"\n    # L1\n    num_breaks_15_min = 2 # 2 15-minute recess breaks\n    duration_break_15_min = 15 # 15-minute recess breaks\n    total_15_min_breaks = num_breaks_15_min * duration_break_15_min\n\n    # L2\n    lunch_duration = 30 # a 30-minute lunch\n    recess_duration_20_min = 20 # another 20-minute recess break\n    total_time_outside_class = lunch_duration + recess_duration_20_min + total_15_min_breaks\n\n    # FA\n    answer = total_time_outside_class\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_15_min_breaks",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x30c423d10>"
+  },
+  "correct_trace": {
+    "num_breaks_15_min": 2,
+    "duration_break_15_min": 15,
+    "total_15_min_breaks": 30,
+    "lunch_duration": 30,
+    "recess_duration_20_min": 20,
+    "total_time_outside_class": 80,
+    "answer": 80
+  },
+  "flawed_trace": {
+    "num_breaks_15_min": 2,
+    "duration_break_15_min": 15,
+    "total_15_min_breaks": 17,
+    "lunch_duration": 30,
+    "recess_duration_20_min": 20,
+    "total_time_outside_class": 67,
+    "answer": 67
+  },
+  "correct_value": 30,
+  "flawed_value": 17,
+  "logical_steps": [
+    {
+      "WK_inputs": [],
+      "line_number": "L1",
+      "output_variable": "total_15_min_breaks",
+      "question_inputs": [
+        "num_breaks_15_min",
+        "duration_break_15_min"
+      ],
+      "solution_line_template": "They get {num_breaks_15_min} {duration_break_15_min} minute breaks a day so that's {num_breaks_15_min}*{duration_break_15_min} = <<{num_breaks_15_min}*{duration_break_15_min}={total_15_min_breaks}>>{total_15_min_breaks} minutes"
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_time_outside_class",
+      "question_inputs": [
+        "lunch_duration",
+        "recess_duration_20_min"
+      ],
+      "solution_line_template": "They get {lunch_duration} minutes for lunch and {recess_duration_20_min} minutes for recess plus an additional {total_15_min_breaks} minutes of recess for a total of {lunch_duration}+{recess_duration_20_min}+{total_15_min_breaks} = <<{lunch_duration}+{recess_duration_20_min}+{total_15_min_breaks}={total_time_outside_class}>>{total_time_outside_class} minutes spent outside of class"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "They get 2 15 minute breaks a day so that's 2*15 = <<2*15=17>>17 minutes",
+    "L2": "They get 30 minutes for lunch and 20 minutes for recess plus an additional 17 minutes of recess for a total of 30+20+17 = <<30+20+17=67>>67 minutes spent outside of class",
+    "FA": "#### 67"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -600617983643967288,
+  "model_name": "google_gemini-2.5-flash"
+}

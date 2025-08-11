@@ -1,0 +1,63 @@
+{
+  "index": 1491,
+  "original_solution_mapping": {
+    "FA": "#### 100",
+    "L1": "If each of the 20 customers bought 15 marbles, then they bought 20*15 = <<20*15=300>>300 marbles in total from Mr Julien's store.",
+    "L2": "The number of marbles remaining in the store is 400-300 = <<400-300=100>>100 marbles"
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1491.\n    Returns: the number of marbles remaining in the store.\n    \"\"\"\n    # L1\n    num_customers = 20 # Twenty customers came into the store\n    marbles_per_customer = 15 # each bought 15 marbles\n    total_marbles_bought = num_customers * marbles_per_customer\n\n    # L2\n    initial_marbles = 400 # 400 marbles remaining after the previous day's sales\n    marbles_remaining = initial_marbles - total_marbles_bought\n\n    # FA\n    answer = marbles_remaining\n    return answer\n",
+  "mutation_details": {
+    "type": "operator_swap",
+    "target_variable": "total_marbles_bought",
+    "original_op_type": "<class 'ast.Mult'>",
+    "new_op": "<ast.Add object at 0x1691daf90>"
+  },
+  "correct_trace": {
+    "num_customers": 20,
+    "marbles_per_customer": 15,
+    "total_marbles_bought": 300,
+    "initial_marbles": 400,
+    "marbles_remaining": 100,
+    "answer": 100
+  },
+  "flawed_trace": {
+    "num_customers": 20,
+    "marbles_per_customer": 15,
+    "total_marbles_bought": 35,
+    "initial_marbles": 400,
+    "marbles_remaining": 365,
+    "answer": 365
+  },
+  "correct_value": 300,
+  "flawed_value": 35,
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "num_customers",
+        "marbles_per_customer"
+      ],
+      "WK_inputs": [],
+      "output_variable": "total_marbles_bought",
+      "solution_line_template": "If each of the {num_customers} customers bought {marbles_per_customer} marbles, then they bought {num_customers}*{marbles_per_customer} = <<{num_customers}*{marbles_per_customer}={total_marbles_bought}>>{total_marbles_bought} marbles in total from Mr Julien's store."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [
+        "initial_marbles"
+      ],
+      "WK_inputs": [],
+      "output_variable": "marbles_remaining",
+      "solution_line_template": "The number of marbles remaining in the store is {initial_marbles}-{total_marbles_bought} = <<{initial_marbles}-{total_marbles_bought}={marbles_remaining}>>{marbles_remaining} marbles"
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "If each of the 20 customers bought 15 marbles, then they bought 20*15 = <<20*15=35>>35 marbles in total from Mr Julien's store.",
+    "L2": "The number of marbles remaining in the store is 400-35 = <<400-35=365>>365 marbles",
+    "FA": "#### 365"
+  },
+  "erroneous_line_number": "L1",
+  "explanation": "Incorrect operation. The calculation should use '*' but used '+' instead.",
+  "repro_seed": -4025850500158437749,
+  "model_name": "google_gemini-2.5-flash"
+}

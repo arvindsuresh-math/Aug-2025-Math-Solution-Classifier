@@ -1,0 +1,93 @@
+{
+  "index": 1502,
+  "original_solution_mapping": {
+    "FA": "#### 4",
+    "L1": "Dani brings 2.5 x 12 = <<2.5*12=30>>30 cupcakes.",
+    "L2": "She needs this many cupcakes to feed everyone in class 27 + 2 = <<27+2=29>>29.",
+    "L3": "With the 3 students calling in sick, there are this many people in class today 29 - 3 = <<29-3=26>>26.",
+    "L4": "There are this many cupcakes left after everyone gets one 30 - 26 = <<30-26=4>>4 cupcakes."
+  },
+  "original_function_code": "def solve():\n    \"\"\"Index: 1502.\n    Returns: the number of cupcakes left after everyone in the class gets one.\n    \"\"\"\n    # L1\n    two_and_half_dozen = 2.5 # two and half dozen cupcakes\n    cupcakes_per_dozen = 12 # WK\n    total_cupcakes_brought = two_and_half_dozen * cupcakes_per_dozen\n\n    # L2\n    num_students_initial = 27 # 27 students (including Dani)\n    num_teachers_and_aids = 2 # 1 teacher, and 1 teacher\u2019s aid\n    total_people_initial = num_students_initial + num_teachers_and_aids\n\n    # L3\n    students_sick = 3 # 3 students called in sick\n    people_present = total_people_initial - students_sick\n\n    # L4\n    cupcakes_left = total_cupcakes_brought - people_present\n\n    # FA\n    answer = cupcakes_left\n    return answer\n",
+  "mutation_details": {
+    "type": "input_misrepresentation",
+    "target_variable": "people_present",
+    "operand_to_replace": "students_sick",
+    "replacement_variable": "num_students_initial"
+  },
+  "correct_trace": {
+    "two_and_half_dozen": 2.5,
+    "cupcakes_per_dozen": 12,
+    "total_cupcakes_brought": 30.0,
+    "num_students_initial": 27,
+    "num_teachers_and_aids": 2,
+    "total_people_initial": 29,
+    "students_sick": 3,
+    "people_present": 26,
+    "cupcakes_left": 4.0,
+    "answer": 4.0
+  },
+  "flawed_trace": {
+    "two_and_half_dozen": 2.5,
+    "cupcakes_per_dozen": 12,
+    "total_cupcakes_brought": 30.0,
+    "num_students_initial": 27,
+    "num_teachers_and_aids": 2,
+    "total_people_initial": 29,
+    "students_sick": 3,
+    "people_present": 2,
+    "cupcakes_left": 28.0,
+    "answer": 28.0
+  },
+  "correct_value": 26,
+  "flawed_value": 2,
+  "logical_steps": [
+    {
+      "WK_inputs": [
+        "cupcakes_per_dozen"
+      ],
+      "line_number": "L1",
+      "output_variable": "total_cupcakes_brought",
+      "question_inputs": [
+        "two_and_half_dozen"
+      ],
+      "solution_line_template": "Dani brings {two_and_half_dozen} x {cupcakes_per_dozen} = <<{two_and_half_dozen}*{cupcakes_per_dozen}={total_cupcakes_brought}>>{total_cupcakes_brought} cupcakes."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L2",
+      "output_variable": "total_people_initial",
+      "question_inputs": [
+        "num_students_initial",
+        "num_teachers_and_aids"
+      ],
+      "solution_line_template": "She needs this many cupcakes to feed everyone in class {num_students_initial} + {num_teachers_and_aids} = <<{num_students_initial}+{num_teachers_and_aids}={total_people_initial}>>{total_people_initial}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L3",
+      "output_variable": "people_present",
+      "question_inputs": [
+        "students_sick"
+      ],
+      "solution_line_template": "With the {students_sick} students calling in sick, there are this many people in class today {total_people_initial} - {students_sick} = <<{total_people_initial}-{students_sick}={people_present}>>{people_present}."
+    },
+    {
+      "WK_inputs": [],
+      "line_number": "L4",
+      "output_variable": "cupcakes_left",
+      "question_inputs": [],
+      "solution_line_template": "There are this many cupcakes left after everyone gets one {total_cupcakes_brought} - {people_present} = <<{total_cupcakes_brought}-{people_present}={cupcakes_left}>>{cupcakes_left} cupcakes."
+    }
+  ],
+  "flawed_nl_reconstruction": {
+    "L1": "Dani brings 2.5 x 12 = <<2.5*12=30>>30 cupcakes.",
+    "L2": "She needs this many cupcakes to feed everyone in class 27 + 2 = <<27+2=29>>29.",
+    "L3": "With the 27 students calling in sick, there are this many people in class today 29 - 27 = <<29-27=2>>2.",
+    "L4": "There are this many cupcakes left after everyone gets one 30 - 2 = <<30-2=28>>28 cupcakes.",
+    "FA": "#### 28"
+  },
+  "erroneous_line_number": "L3",
+  "explanation": "Input misrepresentation. The value for 'num_students_initial' (27) was used instead of 'students_sick' (3).",
+  "repro_seed": 3796589192399605571,
+  "model_name": "google_gemini-2.5-flash"
+}
