@@ -1,0 +1,284 @@
+In the TASK below, you will be given a math problem and its corresponding step-by-step solution. Each step in the solution is numbered (e.g. "L1", "L2" and so on), and many of the steps include calculator annotations (e.g. "<<20*0.1=2>>"). Your goal is to convert this information into a structured JSON object according to the following detailed instructions.
+
+# Detailed Field Instructions
+
+## 1. "function_code"
+
+This string must contain a Python function with the following characteristics:
+
+*   **1.A. Handling Imports:** The `function_code` should have no imports **unless** your formalization requires the `Fraction` object.
+    *   If your code uses the `Fraction()` constructor, the very first line of the string MUST be `from fractions import Fraction`.
+    *   If your code does **not** use the `Fraction()` constructor (e.g., it only uses integers, floats, or standard division `/`), the function definition `def solve():` MUST be the very first line.
+*   **1.B. Function Naming & Docstring:** The function must be named `solve`, and it should not have any args. It must begin with a docstring that has exactly two lines:
+    *   **1.B.i.** The first line must be: "Index: [Index]." using the index from the task header.
+    *   **1.B.ii.** The second line must be a succinct, one-sentence description of what the function returns (e.g., "Returns: the total cost of wages and taxes.").
+*   **1.C. Line comments:** For each solution line that is used to compute the final answer, include a comment of the form `# L1`, `# L2` and so on, which references the line number.
+    *   **1.C.i.** Such a comment must immediately be followed by a code block that precisely formalizes the corresponding solution line. More details about code blocks are provided in 1.D below.
+    *   **1.C.ii.** If a solution line does not contain any computation relevant to the final answer, then omit it completely from the function code and do NOT add a corresponding line comment.
+*   **1.D. Code blocks:** Each code block constitutes a complete formalization of its corresponding solution line. It must consist of the following:
+    *   **1.D.i. Input Variables** First, define any NEW variables needed for the computation, i.e. that will be used for the first time in the solution. Each input variable MUST be followed by a comment (`#`) in the same line. These variables fall into two categories:
+        *   "question_inputs": These are variables whose values are stated in or can be extracted from the question text (only the question text, NOT the answer text). The comment for these variables should quote or refer to the phrase in the question text from which it is extracted.
+        *   "WK_inputs": These are variables drawn from common-sense "World Knowledge" (e.g. `minutes_per_hour = 60`, `dozen = 12`). The comment for these variables MUST simply say `# WK`.
+    *   **1.D.ii. Output Variables** Second, there should be EXACTLY ONE line of code which formalizes the computation in the solution line and assigns the resulting value to a new variable (this is the "output_variable" field).
+*   **1.E. The Direct Substitution Rule:** This is the MOST IMPORTANT RULE, which ensures that the "solution_line_template" is purely identical to the original solution line except that numerical values in computations have been replaced with variable placeholders: You MUST define variables in such a way that they can be DIRECTLY SUBSTITUTED into the solution line without changing any operators or surrounding text in the line.
+*   **1.F. Final Answer:** The line that assigns the final result to the `answer` variable must be immediately preceded by a line containing only the comment `# FA`. The last line of the function must always return the `answer` variable.
+
+## 2. "solution_line_template"
+
+*   **2.A.** The template should be EXACTLY identical to the original solution line, with the ONLY CHANGES being that every NUMERICAL value used in a computation is replaced by its corresponding `{variable_name}` placeholder. This applies to the entire content of the solution line, including the inside and outside of the calculator annotations.
+*   **2.B.** In particular, EVERY SINGLE numerical value appearing inside the calculator annotation (`<<..>>`) MUST be replaced with a `{variable_name}` placeholder.
+*   **2.C.** Note: some quantities may appear as words in the solution line (e.g. "twice as many"). Do NOT attempt to replace these with variable name placeholders.
+*   **2.D.** The Direct Substitution Rule will ensure that for correctly defined variables, it will be possible to replace the numerical values with variable name placeholders while leaving all surrounding text, symbols, and operators unchanged. Thus, in a correct "solution_line_template", the calculator annotation will not contain any numerical values, and moreover, replacing each `{variable_name}` by its value should exactly recover the original solution line, including the original calculator annotation.
+
+# Examples
+
+Given below are three examples that illustrate what a perfect formalization will look like. For each example, you are given the following:
+
+*   Input: consisting of an index, question, and solution mapping.
+*   Output: complete output, wrapped inside ```json .. ```
+
+In all examples, you will observe the following:
+
+*   **A rigid adherence to the Direct Substitution Rule (1.E)**. This is the most important principle. The `solution_line_template` must be an exact copy of the original solution line, with only computational numbers replaced by `{variable}` placeholders. Every other point follows from this rule.
+
+*   **It is important to distinguish between when the division sign "/" is used to represent a division *operation*, versus when it is used as a separator in a single *fractional quantity*.** The formalization depends entirely on how the value is used in the solution text.
+    *   **Division Operation:** In **Example 3**, the solution `60 / 4` represents the division of two numbers. This is formalized directly with the `/` operator: `one_quarter_of_class = total_students / goal_denominator`. This does **not** require an import.
+    *   **Fractional Quantity:** In **Example 1**, `80/100` represents a single fractional value (a percentage). This is formalized using a `Fraction` object: `purple_percentage = Fraction(80, 100)`. This **does** require the `from fractions import Fraction` import.
+
+*   **A single template can require BOTH formalizations.** The choice is made line-by-line. **Example 2** is a crucial case: it requires `Fraction` for L1 (`2/5`) and L3 (`1/3`), but standard division `/` for L6 (`34/2`). This demonstrates that the formalization must adapt to each specific line in the solution.
+
+*   **Decomposition is sometimes needed to follow the rules.** In **Example 3**, the concept "three-quarters" is broken down into `goal_numerator = 3` and `goal_denominator = 4`. This is necessary because the math in L2 (`15 * 3`) uses these numbers separately, and the variables must support direct substitution into that line.
+
+*   **Strict adherence to defining only NEW variables** in each step's `question_inputs` and `WK_inputs` lists. For instance, in **Example 3**, `total_students` is defined in L1 and then simply re-used in the computation for L3 without being listed as an input again.
+
+*   Comments for `question_inputs` must cite the question text only, **NEVER** the solution text.
+
+## Example 1
+
+### Input
+
+**Index:**
+5
+
+**Question:**
+In Mark's garden, there are 10 kinds of flowers. Ten of them are yellow. He has 80% more of those in purple, and only 25% as many green flowers as the sum of yellow and purple flowers. How many total flowers does Mark have in his garden?
+
+**Solution mapping:**
+{
+  "L1": "There are 80/100 * 10 = <<80/100*10=8>>8 more purple flowers than yellow flowers.",
+  "L2": "So in Mark's garden, there are 10 + 8 = <<10+8=18>>18 purple flowers.",
+  "L3": "Purple and yellow flowers sum up to 10 + 18 = <<10+18=28>>28 flowers.",
+  "L4": "That means in Mark's garden there are 25/100 * 28 = <<25/100*28=7>>7 green flowers.",
+  "L5": "So in total Mark has 28 + 7 = <<28+7=35>>35 plants in his garden."
+}
+
+### Output
+
+```json
+{
+  "function_code": "from fractions import Fraction\n\ndef solve():\n    \"\"\"Index: 5.\n    Returns: the total number of flowers Mark has in his garden.\n    \"\"\"\n    # L1\n    purple_percentage = Fraction(80, 100) # 80% more of those in purple\n    yellow_flowers = 10 # Ten of them are yellow\n    additional_purple_flowers = purple_percentage * yellow_flowers\n\n    # L2\n    purple_flowers = yellow_flowers + additional_purple_flowers\n\n    # L3\n    yellow_and_purple_flowers = yellow_flowers + purple_flowers\n\n    # L4\n    green_percentage = Fraction(25, 100) # only 25% as many green flowers\n    green_flowers = green_percentage * yellow_and_purple_flowers\n\n    # L5\n    total_flowers = yellow_and_purple_flowers + green_flowers\n\n    # FA\n    answer = total_flowers\n    return answer",
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": [
+        "purple_percentage",
+        "yellow_flowers"
+      ],
+      "WK_inputs": [],
+      "output_variable": "additional_purple_flowers",
+      "solution_line_template": "There are {purple_percentage} * {yellow_flowers} = <<{purple_percentage}*{yellow_flowers}={additional_purple_flowers}>>{additional_purple_flowers} more purple flowers than yellow flowers."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "purple_flowers",
+      "solution_line_template": "So in Mark's garden, there are {yellow_flowers} + {additional_purple_flowers} = <<{yellow_flowers}+{additional_purple_flowers}={purple_flowers}>>{purple_flowers} purple flowers."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "yellow_and_purple_flowers",
+      "solution_line_template": "Purple and yellow flowers sum up to {yellow_flowers} + {purple_flowers} = <<{yellow_flowers}+{purple_flowers}={yellow_and_purple_flowers}>>{yellow_and_purple_flowers} flowers."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [
+        "green_percentage"
+      ],
+      "WK_inputs": [],
+      "output_variable": "green_flowers",
+      "solution_line_template": "That means in Mark's garden there are {green_percentage} * {yellow_and_purple_flowers} = <<{green_percentage}*{yellow_and_purple_flowers}={green_flowers}>>{green_flowers} green flowers."
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_flowers",
+      "solution_line_template": "So in total Mark has {yellow_and_purple_flowers} + {green_flowers} = <<{yellow_and_purple_flowers}+{green_flowers}={total_flowers}>>{total_flowers} plants in his garden."
+    }
+  ]
+}
+```
+
+## Example 2
+
+### Input
+
+**Index:**
+2422
+
+**Question:**
+Hershel has 10 betta fish and 15 goldfish in a bowl. His friend Bexley brings him 2/5 times as many betta fish and 1/3 times as many goldfish. If Hershel gifts his sister 1/2 of the fish, calculate the total number of fish he has remaining in the bowl.
+
+**Solution mapping:**
+{
+  "L1": "Bexley gives Hershel 2/5*10 = <<2/5*10=4>>4 betta fish.",
+  "L2": "The total number of betta fish in the bowl is now 4+10 = <<4+10=14>>14",
+  "L3": "He also gives Hershel 1/3*15 = <<1/3*15=5>>5 goldfish",
+  "L4": "The total number of goldfish in the bowl is now 15+5 = <<15+5=20>>20",
+  "L5": "Counting the betta fish and goldfish, Hershel now has a total of 14 + 20 = <<14+20=34>>34 fish",
+  "L6": "When he gives his sister half of the fish, the remaining half is 34/2 = <<34/2=17>>17 fish"
+}
+
+### Output
+
+```json
+{
+  "function_code": "from fractions import Fraction\n\ndef solve():\n    \"\"\"Index: 2422.\n    Returns: the total number of fish Hershel has remaining.\n    \"\"\"\n    # L1\n    initial_betta = 10 # 10 betta fish\n    new_betta_fraction = Fraction(2, 5) # 2/5 times as many betta fish\n    new_betta_fish = new_betta_fraction * initial_betta\n\n    # L2\n    total_betta_fish = new_betta_fish + initial_betta\n\n    # L3\n    initial_goldfish = 15 # 15 goldfish\n    new_goldfish_fraction = Fraction(1, 3) # 1/3 times as many goldfish\n    new_goldfish = new_goldfish_fraction * initial_goldfish\n\n    # L4\n    total_goldfish = initial_goldfish + new_goldfish\n\n    # L5\n    total_fish = total_betta_fish + total_goldfish\n\n    # L6\n    gift_divisor = 2 # gifts his sister 1/2 of the fish\n    remaining_fish = total_fish / gift_divisor\n\n    # FA\n    answer = remaining_fish\n    return answer",
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": ["initial_betta", "new_betta_fraction"],
+      "WK_inputs": [],
+      "output_variable": "new_betta_fish",
+      "solution_line_template": "Bexley gives Hershel {new_betta_fraction}*{initial_betta} = <<{new_betta_fraction}*{initial_betta}={new_betta_fish}>>{new_betta_fish} betta fish."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_betta_fish",
+      "solution_line_template": "The total number of betta fish in the bowl is now {new_betta_fish}+{initial_betta} = <<{new_betta_fish}+{initial_betta}={total_betta_fish}>>{total_betta_fish}"
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": ["initial_goldfish", "new_goldfish_fraction"],
+      "WK_inputs": [],
+      "output_variable": "new_goldfish",
+      "solution_line_template": "He also gives Hershel {new_goldfish_fraction}*{initial_goldfish} = <<{new_goldfish_fraction}*{initial_goldfish}={new_goldfish}>>{new_goldfish} goldfish"
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_goldfish",
+      "solution_line_template": "The total number of goldfish in the bowl is now {initial_goldfish}+{new_goldfish} = <<{initial_goldfish}+{new_goldfish}={total_goldfish}>>{total_goldfish}"
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_fish",
+      "solution_line_template": "Counting the betta fish and goldfish, Hershel now has a total of {total_betta_fish} + {total_goldfish} = <<{total_betta_fish}+{total_goldfish}={total_fish}>>{total_fish} fish"
+    },
+    {
+      "line_number": "L6",
+      "question_inputs": ["gift_divisor"],
+      "WK_inputs": [],
+      "output_variable": "remaining_fish",
+      "solution_line_template": "When he gives his sister half of the fish, the remaining half is {total_fish}/{gift_divisor} = <<{total_fish}/{gift_divisor}={remaining_fish}>>{remaining_fish} fish"
+    }
+  ]
+}
+```
+
+## Example 3
+
+### Input
+
+**Index:**
+3822
+
+**Question:**
+Alec's class has 60 students. He wants to be elected as class president and needs to win three-quarters of the class to vote for him. Half of the class said they will vote for him and only 5 have said they are thinking about it. Of the remaining students who are not voting for him, a fifth of these students were convinced to vote for him after his speech. How many more votes does he need?
+
+**Solution mapping:**
+{
+  "L1": "To calculate Alec's goal number of votes, we need to know that 60 students / 4 = <<60/4=15>>15 students is equal to one-quarter of the class students.",
+  "L2": "Alec's goal is therefore 15 students * 3 quarters = <<15*3=45>>45 votes.",
+  "L3": "Half of the class said they will vote for him, so there are already 60 students / 2 = <<60/2=30>>30 votes.",
+  "L4": "Another 5 students are thinking about voting for him which leaves a total so far of 30 + 5 = <<30+5=35>>35 votes.",
+  "L5": "This means there are 60 students - 35 voting for Alec = <<60-35=25>>25 students not voting for Alec.",
+  "L6": "A fifth of these decided to vote, so this is a further 25 students / 5 = <<25/5=5>>5 votes.",
+  "L7": "Alec is therefore receiving a total of 35 + 5 = <<35+5=40>>40 votes.",
+  "L8": "So he has missed his goal by 45 goal votes - 40 actual votes = <<45-40=5>>5 votes."
+}
+
+### Output
+
+```json
+{
+  "function_code": "def solve():\n    \"\"\"Index: 3822.\n    Returns: the number of additional votes Alec needs.\n    \"\"\"\n    # L1\n    total_students = 60 # Alec's class has 60 students\n    goal_denominator = 4 # three-quarters of the class\n    one_quarter_of_class = total_students / goal_denominator\n\n    # L2\n    goal_numerator = 3 # three-quarters of the class\n    goal_votes = one_quarter_of_class * goal_numerator\n\n    # L3\n    initial_committed_denominator = 2 # Half of the class\n    initial_committed_votes = total_students / initial_committed_denominator\n\n    # L4\n    thinking_about_it = 5 # only 5 have said they are thinking\n    votes_after_thinking = initial_committed_votes + thinking_about_it\n\n    # L5\n    students_not_voting_for_alec = total_students - votes_after_thinking\n\n    # L6\n    converted_denominator = 5 # a fifth of these students\n    newly_converted_votes = students_not_voting_for_alec / converted_denominator\n\n    # L7\n    total_actual_votes = votes_after_thinking + newly_converted_votes\n\n    # L8\n    votes_still_needed = goal_votes - total_actual_votes\n\n    # FA\n    answer = votes_still_needed\n    return answer",
+  "logical_steps": [
+    {
+      "line_number": "L1",
+      "question_inputs": ["total_students", "goal_denominator"],
+      "WK_inputs": [],
+      "output_variable": "one_quarter_of_class",
+      "solution_line_template": "To calculate Alec's goal number of votes, we need to know that {total_students} students / {goal_denominator} = <<{total_students}/{goal_denominator}={one_quarter_of_class}>>{one_quarter_of_class} students is equal to one-quarter of the class students."
+    },
+    {
+      "line_number": "L2",
+      "question_inputs": ["goal_numerator"],
+      "WK_inputs": [],
+      "output_variable": "goal_votes",
+      "solution_line_template": "Alec's goal is therefore {one_quarter_of_class} students * {goal_numerator} quarters = <<{one_quarter_of_class}*{goal_numerator}={goal_votes}>>{goal_votes} votes."
+    },
+    {
+      "line_number": "L3",
+      "question_inputs": ["initial_committed_denominator"],
+      "WK_inputs": [],
+      "output_variable": "initial_committed_votes",
+      "solution_line_template": "Half of the class said they will vote for him, so there are already {total_students} students / {initial_committed_denominator} = <<{total_students}/{initial_committed_denominator}={initial_committed_votes}>>{initial_committed_votes} votes."
+    },
+    {
+      "line_number": "L4",
+      "question_inputs": ["thinking_about_it"],
+      "WK_inputs": [],
+      "output_variable": "votes_after_thinking",
+      "solution_line_template": "Another {thinking_about_it} students are thinking about voting for him which leaves a total so far of {initial_committed_votes} + {thinking_about_it} = <<{initial_committed_votes}+{thinking_about_it}={votes_after_thinking}>>{votes_after_thinking} votes."
+    },
+    {
+      "line_number": "L5",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "students_not_voting_for_alec",
+      "solution_line_template": "This means there are {total_students} students - {votes_after_thinking} voting for Alec = <<{total_students}-{votes_after_thinking}={students_not_voting_for_alec}>>{students_not_voting_for_alec} students not voting for Alec."
+    },
+    {
+      "line_number": "L6",
+      "question_inputs": ["converted_denominator"],
+      "WK_inputs": [],
+      "output_variable": "newly_converted_votes",
+      "solution_line_template": "A fifth of these decided to vote, so this is a further {students_not_voting_for_alec} students / {converted_denominator} = <<{students_not_voting_for_alec}/{converted_denominator}={newly_converted_votes}>>{newly_converted_votes} votes."
+    },
+    {
+      "line_number": "L7",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "total_actual_votes",
+      "solution_line_template": "Alec is therefore receiving a total of {votes_after_thinking} + {newly_converted_votes} = <<{votes_after_thinking}+{newly_converted_votes}={total_actual_votes}>>{total_actual_votes} votes."
+    },
+    {
+      "line_number": "L8",
+      "question_inputs": [],
+      "WK_inputs": [],
+      "output_variable": "votes_still_needed",
+      "solution_line_template": "So he has missed his goal by {goal_votes} goal votes - {total_actual_votes} actual votes = <<{goal_votes}-{total_actual_votes}={votes_still_needed}>>{votes_still_needed} votes."
+    }
+  ]
+}
+```
+

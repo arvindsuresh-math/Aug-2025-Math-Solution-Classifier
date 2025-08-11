@@ -1,0 +1,19 @@
+def solve():
+    """Index: 788.
+    Returns: how much more money Christopher has than Karen.
+    """
+    # L1
+    christopher_quarters = 64 # Christopher has 64 quarters
+    quarter_value = 0.25 # WK
+    christopher_money = christopher_quarters * quarter_value
+
+    # L2
+    karen_quarters = 32 # Karen has 32 quarters
+    karen_money = karen_quarters * quarter_value
+
+    # L3
+    money_difference = christopher_money - karen_money
+
+    # FA
+    answer = money_difference
+    return answer

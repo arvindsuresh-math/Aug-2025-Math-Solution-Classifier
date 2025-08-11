@@ -559,3 +559,30 @@ Next steps from meeting on Aug 4:
 3. Try the erroneous line detection (discriminative). (Arvind)
 4. Start thinking about what's needed for an app. (Mauro)
 5. Generate baselines with middle-sized models (~14B) and SOTA models (maybe gpt 4.1 and gemini flash-2.5). (Arvind)
+
+Final to-do list on Aug 10
+
+1. Planning the presentation:
+Tentative order (to be finalized)
+i. [0.75 minutes] Intro (what did we do, what is different from others, what is new, unique selling point)
+ii. [0.75 minutes] App demo
+iii. [1 minute] Data preparation pipeline
+iv. [0.75 minutes] Fine-tuning and model selection (design/hardware choices etc.)
+v. [1 minute] Model results (accuracy, some interesting samples)
+vi. [0.5 minutes] Limitations, improvements, next steps etc. (e.g. incorporating OCR to read hand-written solutions)
+
+2. Cleaning up the repo
+
+3. Re-factor code (definitely remove annoying LLM comments, convert into scripts)
+
+4. Add a single data pipeline notebook to illustrate the whole pipeline.
+
+5. Complete the app
+
+6. Update the project README (plan: finish all re-factoring, then feed entire codebase to ai studio, ask it to generate the readme)
+
+7. Add a document with literature review/comparison
+
+8. Executive summary of the project
+
+9. 
