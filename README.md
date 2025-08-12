@@ -1,6 +1,6 @@
 # Math Solution Classifier: A Locally-Runnable AI Grading Assistant
 
-[![Hugging Face Spaces](https://img.shields.io/badge/🤗%20Spaces-Math%20Solution%20Classifier-blue)](https://huggingface.co/spaces/arvindsuresh-math/math-solution-classifier)
+[![Hugging Face Spaces](https://img.shields.io/badge/🤗%20Spaces-Math%20Solution%20Classifier-blue)](https://huggingface.co/spaces/mcamargo00/math-solution-classifier)
 
 This project presents a proof-of-concept for a high-quality, automated math grading assistant that can run entirely on local, consumer-grade hardware. It is designed to classify a student's solution to a math word problem as **correct**, containing a **conceptual error**, or containing a **computational error**.
 
