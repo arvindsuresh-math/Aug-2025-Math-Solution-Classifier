@@ -1,4 +1,0 @@
-- [] update prompt given to the model (before the actual question/answer) to match prompt used in training
-- [] figure out how to merge lora adapter and classifier head with base model
-- [] add new examples
-- [] update interface so that one can select types of problems from the examples

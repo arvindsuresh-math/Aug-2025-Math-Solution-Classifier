@@ -1,8 +1,0 @@
-# Calculate the number of shells Ben collected
-ben_shells = 36 / 3
-
-# Calculate the number of shells Alan collected
-alan_shells = ben_shells * 4
-
-# Print the result
-print(f"Alan collected {alan_shells} shells.")
