@@ -41,11 +41,29 @@ This hybrid architecture allows each component to excel at its specific role, le
 
 ## Project Highlights & Detailed Breakdowns
 
-This project is the culmination of a multi-stage effort involving a novel data generation pipeline, state-of-the-art fine-tuning techniques, and rigorous, multi-faceted evaluation.
-
 ### 📊 **Performance & Results**
 
-Our fine-tuned pipeline proved to be not only more accurate but also significantly more robust and efficient than our `gemini-1.5-flash` baseline. The system excels as a **computational error specialist**, achieving **>92% recall** on this critical error class, a task where the baseline's performance was highly inconsistent. Furthermore, our pipeline is **3-4 times faster** than the API-based baseline.
+For a grading assistant, the most critical metric is its ability to reliably identify flawed work and avoid false negatives. A teacher needs to trust that the tool will not incorrectly label a flawed solution as "correct." In this regard, our fine-tuned pipeline demonstrates a decisive advantage in **recall**—the measure of how well a model can find all relevant instances in a dataset.
+
+While the baseline slightly outperforms our model on the Final Test Set in overall accuracy, our pipeline has a **superior and more consistent recall score for detecting all incorrect solutions** across both test sets.
+
+| Recall for Incorrect Solutions | Baseline | Fine-Tuned Model |
+| :--- | :--- | :--- |
+| **SFT Test Set** | 81.44% | 95.70% |
+| **Final Test Set** | 91.39% | 94.00% |
+
+This is the most important metric for a tool designed to help human graders. It shows that our pipeline is exceptionally reliable at its core task: flagging solutions that require a teacher's attention.
+
+The standout feature driving this high performance is our model's **mastery of detecting computational errors**, a direct result of our hybrid architecture. This is where the baseline's inconsistency becomes most apparent.
+
+| Recall for Computational Errors | Baseline | Fine-Tuned Model |
+| :--- | :--- | :--- |
+| **SFT Test Set** | 30.5% | 92.5% |
+| **Final Test Set** | 90.7% | 93.3% |
+
+As the tables show, our fine-tuned system is a specialist, consistently identifying over 92% of calculation mistakes. The baseline, in contrast, is unreliable; its ability to detect the same errors collapsed from 90.7% to a mere 30.5% on the more diverse SFT test set.
+
+**Implication for Educators:** A teacher using our tool can be confident that it will successfully flag nearly every paper with a computational or conceptual error, allowing them to focus their limited time on providing feedback where it is most needed. The baseline, while sometimes effective, is too unpredictable to be a trustworthy assistant.
 
 > **For a full breakdown of the performance metrics and comparative analysis, see: [`/results/RESULTS.md`](./results/RESULTS.md)**
 
@@ -65,6 +83,18 @@ We used state-of-the-art Parameter-Efficient Fine-Tuning (PEFT) techniques, spec
 
 > **For a technical deep-dive into the model architectures, the mathematics of LoRA, and the loss functions used, see: [`/notebooks/modelling/TECHNICAL-DETAILS.MD`](./notebooks/modelling/TECHNICAL-DETAILS.MD)**
 
+## Conclusion and Future Work
+
+The strong performance of our small-model pipeline validates our thesis:
+
+*It is possible to create a robust and performant grading assistant to lighten a middle school teacher's grading load **without** relying on expensive, cloud-based frontier models, or expensive hardware.*
+
+For future work, we hope to tacke the following:
+
+* Incorporate OCR to allow input of hand-written solutions.
+* Enlarge model size and diversity of fine-tuning data to improve generalization.
+* Move onto high school problems (and some day, college level problems).
+
 ## Repository Structure
 
 * **`/app/`**: Contains the `app.py` source code and supporting files for the Gradio demo.
@@ -72,4 +102,4 @@ We used state-of-the-art Parameter-Efficient Fine-Tuning (PEFT) techniques, spec
 * **`/data/`**: Contains all raw, intermediate, and final datasets.
 * **`/notebooks/`**: Contains all Jupyter notebooks organized by function (data creation, modelling, evaluation).
 * **`/results/`**: Contains the final prediction CSVs and performance plots from our analysis.
-* **`/baseline/`**: Contains the notebooks and results for the `gemini-1.5-flash` baseline experiment.
+* **`/baseline/`**: Contains the notebooks and results for the `gemini-2.5-flash` baseline experiment.

@@ -1,4 +1,4 @@
-# app.py - Gradio version (much simpler for HF Spaces)
+# app.py 
 import unsloth
 from unsloth import FastModel
 
@@ -55,7 +55,7 @@ class GPTSequenceClassifier(nn.Module):
         
         
 # ===================================================================
-# 3. HELPERS
+#HELPERS
 # ===================================================================
 
 # --- Helper Functions ---
@@ -109,7 +109,7 @@ def evaluate_equations(eq_dict: dict, sol_dict: dict):
                 correct_rhs_val = round(lhs_val, 4)
                 correct_rhs_str = f"{correct_rhs_val:.4f}".rstrip('0').rstrip('.')
 
-                # Return a more detailed dictionary for better explanations
+         
                 return {
                     "error": True,
                     "line_key": key,
@@ -235,7 +235,7 @@ logger.info("load_model(): %s", msg)
     
     
 # ===================================================================
-# 4. PIPELINE COMPONENTS
+# PIPELINE COMPONENTS
 # ===================================================================
 
 def run_conceptual_check(question: str, solution: str, model, tokenizer) -> dict:
@@ -255,7 +255,7 @@ def run_conceptual_check(question: str, solution: str, model, tokenizer) -> dict
     with torch.inference_mode():
         outputs = model(**inputs, use_cache=False)
 
-        # Explicitly cast logits to float32 for stable downstream processing
+     
         logits = outputs["logits"].to(torch.float32)
         probs = torch.softmax(logits, dim=-1).squeeze().tolist()
 
@@ -327,11 +327,11 @@ def analyze_solution(question: str, solution: str):
     """
     Main orchestrator that runs the full pipeline and generates the final explanation.
     """
-    # STAGE 1: Conceptual Check (Fast)
+    # STAGE 1: Conceptual Check 
     conceptual_result = run_conceptual_check(question, solution, classifier_model, classifier_tokenizer)
     confidence = conceptual_result['probabilities'][conceptual_result['prediction']]
 
-    # STAGE 2: Computational Check (Slower, Batched)
+    # STAGE 2: Computational Check 
     computational_result = run_computational_check(solution, gemma_model, gemma_tokenizer)
 
     # FINAL VERDICT LOGIC
@@ -372,13 +372,13 @@ def classify_solution_stream(question: str, solution: str):
 
     log = []
 
-    # basic input check
+    
     if not question.strip() or not solution.strip():
         log.append("⚠️ Provide a question and a solution.")
         yield "Please fill in both fields", "", render(log)
         return
 
-    # lazy-load if needed
+    
     if not models_ready():
         log.append("⏳ Loading models…")
         yield "⏳ Working…", "", render(log)
@@ -444,7 +444,7 @@ def classify_solution_stream(question: str, solution: str):
         yield "Runtime error", f"{type(e).__name__}: {e}", render(log)
 
 
-        # ---------------- UI: streaming, no progress bars ----------------
+        # ---------------- UI: streaming ----------------
 with gr.Blocks(title="Math Solution Classifier", theme=gr.themes.Soft()) as app:
     gr.Markdown("# 🧮 Math Solution Classifier")
     gr.Markdown(
@@ -665,7 +665,7 @@ class ExampleSelector:
         else:
             self.balance["wrong"] += 1
 
-# ===== CSV hookup (place near other imports / globals) =====
+# ===== CSV hookup =====
 from pathlib import Path
 import time
 
@@ -673,10 +673,10 @@ CSV_PATH = Path(__file__).resolve().parent / "final-test-with-wrong-answers.csv"
 POOL = load_examples_csv(str(CSV_PATH))
 
 def new_selector(seed: int | None = None):
-    # per-session selector; seed for reproducibility if you want
+    
     return ExampleSelector(POOL, seed=seed or int(time.time()) & 0xFFFF)
 
-# small helpers for UI
+
 def _truncate(s: str, n: int = 100) -> str:
     s = s or ""
     return s if len(s) <= n else s[: n - 1] + "…"
@@ -694,7 +694,6 @@ def _rows_to_table(rows: list[dict]) -> list[list[str]]:
     return table
 
 
-# ===== Gradio callbacks for examples =====
 def ui_surprise(selector, filter_label="any"):
     """Pick one example and push it straight to inputs; persist selector state."""
     if selector is None or not POOL:
@@ -706,7 +705,7 @@ def ui_surprise(selector, filter_label="any"):
 
 
 
-# ---------------- UI: add CSV-driven examples ----------------
+
 with gr.Blocks(title="Math Solution Classifier", theme=gr.themes.Soft()) as app:
     gr.Markdown("# 🧮 Math Solution Classifier")
     gr.Markdown(
@@ -715,7 +714,7 @@ with gr.Blocks(title="Math Solution Classifier", theme=gr.themes.Soft()) as app:
         " \n Press 'Surprise me' to randomly select a sample question/answer pair from our dataset."
     )
 
-    # Per-session state
+    
     selector_state = gr.State(new_selector())
 
     with gr.Row():
@@ -723,12 +722,12 @@ with gr.Blocks(title="Math Solution Classifier", theme=gr.themes.Soft()) as app:
         with gr.Column(scale=1):
             question_input = gr.Textbox(
                 label="Math Question",
-                placeholder="e.g., Solve for x: 2x + 5 = 13",
+                placeholder="e.g., What is 14 divided by 2?",
                 lines=3,
             )
             solution_input = gr.Textbox(
                 label="Proposed Solution",
-                placeholder="e.g., 2x + 5 = 13\n2x = 13 - 5\n2x = 8\nx = 4",
+                placeholder="e.g., 14/2 = 9",
                 lines=8,
             )
             expected_label_example = gr.Textbox(
@@ -746,7 +745,7 @@ with gr.Blocks(title="Math Solution Classifier", theme=gr.themes.Soft()) as app:
             explanation_output   = gr.Textbox(label="Explanation",   interactive=False, lines=6)
             status_output        = gr.Markdown(value="*(idle)*")  # live stage updates
 
-    # -------- Curated starter examples (static) --------
+    # -------- Curated starter examples --------
     gr.Examples(
         examples=[
                 ["John has three apples and Mary has seven, how many apples do they have together?",
@@ -776,7 +775,7 @@ with gr.Blocks(title="Math Solution Classifier", theme=gr.themes.Soft()) as app:
     
 
     # ---------- Wiring ----------
-    # Main classify (streaming)
+    # Main classify
     classify_btn.click(
         fn=classify_solution_stream,
         inputs=[question_input, solution_input],
@@ -785,16 +784,14 @@ with gr.Blocks(title="Math Solution Classifier", theme=gr.themes.Soft()) as app:
         concurrency_limit=1,
     )
 
-    # ---- and replace the Surprise button wiring with this ----
     surprise_btn.click(
         fn=ui_surprise,
-        inputs=[selector_state],                              # no filter_dd anymore
-        outputs=[selector_state, question_input, solution_input],  # persist selector state
+        inputs=[selector_state],                              
+        outputs=[selector_state, question_input, solution_input],  
         queue=True,
     )
 
 
-# Enable queue for streaming
 app.queue()
 
 if __name__ == "__main__":
