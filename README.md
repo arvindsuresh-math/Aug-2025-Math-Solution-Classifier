@@ -45,7 +45,7 @@ This project is the culmination of a multi-stage effort involving a novel data g
 
 ### 📊 **Performance & Results**
 
-Our fine-tuned pipeline proved to be not only more accurate but also significantly more robust and efficient than our `gemini-1.5-flash` baseline. The system excels as a **computational error specialist**, achieving **>92% recall** on this critical error class, a task where the baseline's performance was highly inconsistent. Furthermore, our pipeline is **3-4 times faster** than the API-based baseline.
+Our fine-tuned pipeline proved to be not only more accurate but also significantly more robust and efficient than our `gemini-2.5-flash` baseline. The system excels as a **computational error specialist**, achieving **>92% recall** on this critical error class, a task where the baseline's performance was highly inconsistent. Furthermore, our pipeline is **3-4 times faster** than the API-based baseline.
 
 > **For a full breakdown of the performance metrics and comparative analysis, see: [`/results/RESULTS.md`](./results/RESULTS.md)**
 
@@ -72,4 +72,4 @@ We used state-of-the-art Parameter-Efficient Fine-Tuning (PEFT) techniques, spec
 * **`/data/`**: Contains all raw, intermediate, and final datasets.
 * **`/notebooks/`**: Contains all Jupyter notebooks organized by function (data creation, modelling, evaluation).
 * **`/results/`**: Contains the final prediction CSVs and performance plots from our analysis.
-* **`/baseline/`**: Contains the notebooks and results for the `gemini-1.5-flash` baseline experiment.
+* **`/baseline/`**: Contains the notebooks and results for the `gemini-2.5-flash` baseline experiment.
