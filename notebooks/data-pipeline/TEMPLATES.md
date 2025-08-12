@@ -53,8 +53,8 @@ The process starts with a math problem and its correct, step-by-step solution.
 > Lucy plans to purchase potato chips for a party. Ten people will be at the party, including Lucy. The potato chips cost 25 cents per pound. How much will Lucy pay (in dollars) for the potato chips if she wants each person to get 1.2 pounds?
 
 **Original Solution:**
-> Lucy needs to purchase 10 x 1.2 = <<10*1.2=12>>12 pounds of potato chips.\
-> So, Lucy will pay 12 x 25 = <<12*25=300>>300 cents for it.\
+> Lucy needs to purchase 10 x 1.2 = <<10\*1.2=12>>12 pounds of potato chips.\
+> So, Lucy will pay 12 x 25 = <<12\*25=300>>300 cents for it.\
 > Since there are 100 cents in $1, thus, Lucy will pay 300/100 = <<300/100=3>>3 dollars.\
 > \#\#\#\# 3
 
@@ -135,6 +135,12 @@ This is a JSON array that connects the `function_code` back to the natural langu
   }
 ]
 ```
+
+**Template:**
+> Lucy needs to purchase `num_people` x `chips_per_person` = <<`num_people`\*`chips_per_person`=`total_pounds`>>`total_pounds` pounds of potato chips.\
+> So, Lucy will pay `total_pounds` x `cents_per_pound` = <<`total_pounds`\*`cents_per_pound`=`total_cents`>>`total_cents` cents for it.\
+> Since there are `cents_per_dollar` cents in $1, thus, Lucy will pay `total_cents`/`cents_per_dollar` = <<`total_cents`/`cents_per_dollar`=`total_dollars`>>`total_dollars` dollars.\
+> \#\#\#\# `total_dollars`
 
 ## How Templates Power the Pipeline
 
