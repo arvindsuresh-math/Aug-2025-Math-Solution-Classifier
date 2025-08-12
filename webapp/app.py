@@ -702,8 +702,21 @@ def ui_surprise(selector, filter_label="any"):
     if not r:
         return selector, gr.update(), gr.update()
     return selector, r["question"], r["solution"]
+    
+def _clear_all():
+    return (
+        "",           # question_input
+        "",           # solution_input
+        "",           # expected_label_example (hidden)
+        "",           # classification_output
+        "",           # explanation_output
+        "*(idle)*",   # status_output (Markdown)
+    )
 
-
+components_to_clear = [
+    question_input,
+    solution_input,
+]
 
 
 with gr.Blocks(title="Math Solution Classifier", theme=gr.themes.Soft()) as app:
@@ -736,8 +749,8 @@ with gr.Blocks(title="Math Solution Classifier", theme=gr.themes.Soft()) as app:
             )
             with gr.Row():
                 classify_btn = gr.Button("Classify Solution", variant="primary")
-                surprise_btn = gr.Button("Surprise me")   # <- new
-                clear_btn    = gr.Button("Clear")
+                surprise_btn = gr.Button("Surprise me")   
+                clear_btn    = clear_btn = gr.Button("Clear")
 
         # -------- Right: outputs --------
         with gr.Column(scale=1):
@@ -754,18 +767,18 @@ with gr.Blocks(title="Math Solution Classifier", theme=gr.themes.Soft()) as app:
         ["A rectangle's length is twice its width. If the width is 7 cm, what is the perimeter of the rectangle?",
         "The length of the rectangle is 2 * 7 = 14 cm.\n The perimeter is 14 + 7 = 21 cm.\n Final answer: 21",
         "Conceptually flawed"],
-        ["A tank holds 60 liters of fuel. A generator uses fuel at a rate of 5 liters per hour. After running for 9 hours, how many liters are still in the tank?",
-"The generator uses 5 L/h × 9 h = 45 L of fuel in 9 hours.\n Then, there remain 60 L + 45 L = 105 L in the tank.\n Final answer: 105 L",
-"Conceptually flawed"],
+        ["A baker is making a large cake with three layers. Each layer is a cylinder with a height of 8 cm. The bottom layer has a radius of 20 cm, the middle layer has a radius of 15 cm, and the top layer has a radius of 10 cm. The baker needs to cover the exposed top and side surfaces of the stacked cake with frosting. What is the total surface area to be frosted in square centimeters? Use pi = 3.14.",
+"The lateral area of the bottom layer is 2 * 3.14 * 20 * 8 = 1004.8.\n The lateral area of the middle layer is 2 * 3.14 * 15 * 8 = 753.6.\n The lateral area of the top layer is 2 * 3.14 * 10 * 8 = 502.4.\n The exposed top surface is the area of the smallest circle: 3.14 * (10*10) = 314.\n The total frosted area is 1004.8 + 753.6 + 502.4 + 314 = 2888.8 sq cm.\n FINAL ANSWER: 2888.8",
+"Computationally flawed"],
             ["What is 15% of 200?",
              "15% = 15/100 = 0.15\n0.15 × 200 = 30\n Final answer: 30",
              "Correct"],
              ["A circle has a radius of 5 cm. Using the approximation pi = 3.14, what is the circumference of the circle?",
              "The circumference of the circle is 3.14 * 5 = 15.7 cm.\n Final answer: 15.7",
              "Conceptually flawed"],
-             ["Emily is saving for a bicycle that costs $250. She saves $15 each week from her allowance. She also received $40 for her birthday to put towards the bike. How many weeks will it take her to save enough money?",
-             "The amount Emily still needs to save is $250 - $40 = $210.\n The number of weeks it will take her to save is 210 / 15 = 12.\n Final answer: 12",
-             "Computationally flawed"],
+             ["A library is building new shelves. Each shelf is 1.2 meters long. A standard book is 3 cm thick, and a large book is 5 cm thick. A shelf must hold 20 standard books and 10 large books. After filling a shelf with these books, how much space, in centimeters, is left on the shelf?",
+             "The shelf length in centimeters is 1.2 * 100 = 120 cm.\n The space taken by standard books is 20 * 3 = 60 cm.\n The space taken by large books is 10 * 5 = 50 cm.\n The total space taken is 60 + 50 = 110 cm.\n The remaining space is 120 + 110 = 230 cm.\n FINAL ANSWER: 230",
+             "Conceptually flawed"],
              ["A 24-meter rope is cut into 6 equal pieces. A climber uses 2 of those pieces. How many meters of rope are still unused?",
              "The length of each piece is 24 / 6 = 4 m.\n The climber uses 2 × 4 m = 8 m of rope.\n There are 24 m − 8 m = 16 m of rope still unused.\n Final answer: 16",
              "Correct"]
@@ -790,6 +803,18 @@ with gr.Blocks(title="Math Solution Classifier", theme=gr.themes.Soft()) as app:
         outputs=[selector_state, question_input, solution_input],  
         queue=True,
     )
+    clear_btn.click(
+    fn=_clear_all,
+    inputs=[],
+    outputs=[
+        question_input,
+        solution_input,
+        expected_label_example,
+        classification_output,
+        explanation_output,
+        status_output,
+    ],
+)
 
 
 app.queue()
