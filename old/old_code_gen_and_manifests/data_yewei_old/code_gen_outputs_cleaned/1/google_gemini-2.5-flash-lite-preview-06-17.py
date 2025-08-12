@@ -1,8 +1,0 @@
-# Calculate Weng's earnings per minute
-earnings_per_minute = 12 / 60
-
-# Calculate total earnings for 50 minutes
-total_earnings = earnings_per_minute * 50
-
-# Print the result
-print(f"Weng earned ${total_earnings}")
