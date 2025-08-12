@@ -16,9 +16,9 @@ Our **Math Solution Classifier** is a demonstration of our core thesis: it is po
 
 The application, built with Gradio and hosted on Hugging Face Spaces, provides a simple interface for educators to quickly verify student solutions.
 
-[![Math Solution Classifier App Screenshot](./assets/app-screenshot.png)](https://huggingface.co/spaces/arvindsuresh-math/math-solution-classifier)
+[![Math Solution Classifier App Screenshot](./assets/app-screenshot.png)](https://huggingface.co/spaces/mcamargo00/math-solution-classifier)
 
-### [➡️ Try the Live Demo on Hugging Face Spaces!](https://huggingface.co/spaces/arvindsuresh-math/math-solution-classifier)
+### [➡️ Try the Live Demo on Hugging Face Spaces!](https://huggingface.co/spaces/mcamargo00/math-solution-classifier)
 
 ## Why Small, Local Models? The Strategic Advantage
 
