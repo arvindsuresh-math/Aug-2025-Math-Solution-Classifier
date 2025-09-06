@@ -24,7 +24,10 @@ The application, built with Gradio and hosted on Hugging Face Spaces, provides a
 
 [![Math Solution Classifier App Screenshot](./assets/app-screenshot.png)](https://huggingface.co/spaces/mcamargo00/math-solution-classifier)
 
-### [➡️ App Demo on Hugging Face Spaces!](https://huggingface.co/spaces/mcamargo00/math-solution-classifier)
+### Demo
+The interactive demo was originally hosted on [Hugging Face Spaces](https://huggingface.co/spaces/mcamargo00/math-solution-classifier), but is no longer live due to hosting costs.  
+[Watch the demo video here.](https://drive.google.com/file/d/1frMJXTvddKYG8gzn4HmQEF75CKwLcURr/view?usp=drive_link)
+
 
 ## Why Small, Local Models? The Strategic Advantage
 
