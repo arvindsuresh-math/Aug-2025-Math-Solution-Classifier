@@ -1,8 +1,14 @@
-# Math Solution Classifier: A Locally-Runnable AI Grading Assistant
+# Math Solution Classifier: A Locally-Runnable AI Grading Assistant (Fine-tuning LLMs for Math Grading)
 
 [![Hugging Face Spaces](https://img.shields.io/badge/🤗%20Spaces-Math%20Solution%20Classifier-blue)](https://huggingface.co/spaces/mcamargo00/math-solution-classifier)
 
 This project presents a proof-of-concept for a high-quality, automated math grading assistant that can run entirely on local, consumer-grade hardware. It is designed to classify a student's solution to a math word problem as **correct**, containing a **conceptual error**, or containing a **computational error**.
+
+Our team members are Mauro Camargo (mcc326@cornell.edu), Ali Naseri Sadr (naserisa@bc.edu), Arvind Suresh (arvindsuresh@math.arizona.edu), Yewei Xu (xu464@wisc.edu), and Ling Zhou (ling.zhou@duke.edu). This project was done during the Erdős Institute's 2025 Boot Camp.
+
+Link to project video: [https://drive.google.com/file/d/1JbodnKoRUWbPY249GB33Lu0whW1_2LKX/view](https://drive.google.com/file/d/14eACHfBUpD2u_48-FyHTCHBdJt3jjmyg/view?usp=drive_link)
+
+Link to project presentation: [https://docs.google.com/presentation/d/1nM5lSnacehA5WepppeFtgiUC-IamrOd8LfG_LXbt1E8/edit#slide=id.p](https://docs.google.com/presentation/d/1BNy-2b8K0Ke1NXZzZYlmkuKf-uiZ6HOKPosRyjYyRVk/edit?usp=sharing)
 
 ## The Problem: The High Cost of Diligent Grading
 
@@ -18,7 +24,7 @@ The application, built with Gradio and hosted on Hugging Face Spaces, provides a
 
 [![Math Solution Classifier App Screenshot](./assets/app-screenshot.png)](https://huggingface.co/spaces/mcamargo00/math-solution-classifier)
 
-### [➡️ Try the Live Demo on Hugging Face Spaces!](https://huggingface.co/spaces/mcamargo00/math-solution-classifier)
+### [➡️ App Demo on Hugging Face Spaces!]([https://huggingface.co/spaces/mcamargo00/math-solution-classifier](https://drive.google.com/file/d/1frMJXTvddKYG8gzn4HmQEF75CKwLcURr/view?usp=sharing))
 
 ## Why Small, Local Models? The Strategic Advantage
 
